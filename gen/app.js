@@ -18,7 +18,7 @@ const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.fl
 // computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
 // index) + halo height (ey) + the tag flag stay hand-set here — they are capability priors, not cost.
 const COSTGRID=__COSTGRID__;
-const QUALGRID=__QUALGRID__;   // data-driven quality axis: {model:{effort:[z_mean, z_std, n]}}
+const QUALGRID=__QUALGRID__;   // data-driven quality axis: {model:{effort:[central, lo, hi]}} — robust median + MAD band
 const META={
   "fable-5":{intel:75.1,ey:2.2}, "opus-4.8":{intel:70.4,ey:1.4}, "sonnet-5":{intel:68.6,ey:2.6,tag:true},
   "opus-4.7":{intel:66.1,ey:2.2}, "sonnet-4.6":{intel:60.1,ey:1.6}, "haiku-4.5":{intel:40.9,ey:1.9},
@@ -36,7 +36,7 @@ function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=760,H=470,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;
-  // X = cost (rel, ±1σ from COSTGRID) · Y = quality (z-mean, ±1σ from QUALGRID). Haiku excluded here. Bounds DYNAMIC.
+  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
@@ -58,7 +58,7 @@ function drawB(){
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
-    mp.forEach(p=>{ const cx=(X(p.clo)+X(p.chi))/2, cy=(Y(p.qlo)+Y(p.qhi))/2, rx=(X(p.chi)-X(p.clo))/2, ry=Math.abs(Y(p.qlo)-Y(p.qhi))/2;   // ellipse = ±1σ cost × ±1σ quality (both couple-atomic ratios)
+    mp.forEach(p=>{ const cx=(X(p.clo)+X(p.chi))/2, cy=(Y(p.qlo)+Y(p.qhi))/2, rx=(X(p.chi)-X(p.clo))/2, ry=Math.abs(Y(p.qlo)-Y(p.qhi))/2;   // ellipse = robust MAD band (cost × quality), both couple-atomic ratios
       s.appendChild(el("ellipse",{cx,cy,rx:Math.max(rx,0.6),ry:Math.max(ry,0.6),fill:col,"fill-opacity":0.11,stroke:col,"stroke-opacity":0.4,"stroke-width":1})); });
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
     mp.forEach(p=>{ s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));
@@ -68,7 +68,7 @@ function drawB(){
   }
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = ±1σ (coût × qualité)</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = bande robuste MAD (coût × qualité)</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
@@ -77,7 +77,7 @@ function drawB(){
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
   const W=760,H=440,mL=52,mR=120,mT=18,mB=52, iw=W-mL-mR, ih=H-mT-mB;
-  // X = cost (central) · Y = quality (z-mean). All current nodes, Haiku incl. (its cost is under 'solo', quality under 'high').
+  // X = cost (central) · Y = quality (central). All current nodes, Haiku incl. (both cost and quality under 'solo' — no effort dial).
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   const add=(m,e,c,q)=>{ xmn=Math.min(xmn,c); xmx=Math.max(xmx,c); ymn=Math.min(ymn,q); ymx=Math.max(ymx,q); pts.push({m,e,c,q}); };
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};

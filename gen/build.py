@@ -33,8 +33,9 @@ def comparisons():
                 if MX[a["model"]] > MX[b["model"]]: a, b = b, a
                 ea, eb = eff(a["effort"]), eff(b["effort"])
                 if ea in ("nothink","priceblend") or eb in ("nothink","priceblend"): continue   # no-thinking runs + list-price blends set aside
-                if ea != eb: continue                          # matched effort only
-                e = ea if ea in EXP else "grey"
+                haiku = "haiku-4.5" in (a["model"], b["model"])   # haiku has no effort dial (solo) → compare vs its benchmark partner
+                if ea != eb and not haiku: continue            # matched effort only (except haiku, no dial)
+                e = (ea if ea in EXP else eb) if haiku else (ea if ea in EXP else "grey")
                 pair = f'{a["model"].replace("-"," ")}/{b["model"].replace("-"," ")}'
                 pr = PRICE_OUT[a["model"]] / PRICE_OUT[b["model"]]
                 ca, cb = num(a["cost_usd"]), num(b["cost_usd"])
@@ -164,75 +165,69 @@ def groups_data():
     return out
 
 def ratio_grid(field):
-    """Couple-atomic relative grid for a measured field (cost_usd or score). For each current (model,effort)
-    node, solve a value RELATIVE to opus-4.8@medium=1.0 from same-task ratios only (explicit efforts;
-    nothink/priceblend/default excluded). Edges = cross-model@same-effort OR same-model@diff-effort cost ratios,
-    median per edge; node values by log-space Jacobi relaxation (harmonic/least-squares over all paths — no
-    model×effort separability). CI = min/max of per-source single-hop estimates around each node. Haiku 4.5 has
-    only one explicit-effort thinking point (OfficeQA@high) → emitted as a single 'solo' node."""
-    from statistics import median
+    """Couple-atomic ROBUST grid for a measured field (cost_usd or score). Each (model,effort) node gets a value
+    RELATIVE to opus-4.8@medium=1.0, built ONLY from within-benchmark ratios (never a cross-benchmark value
+    comparison). Central value AND uncertainty band come from the SAME per-benchmark estimates:
+
+      1. Per benchmark, take log(value) of every current (model,effort) couple — explicit efforts + haiku@solo
+         (haiku has no effort dial); nothink/priceblend/default excluded. Benchmarks with <2 couples are dropped
+         (a lone couple is circular — it can only echo the anchor).
+      2. Normalise each benchmark to the anchor via a per-benchmark offset:
+           - anchor present  → offset = log(opus-4.8@medium)               (divide by the anchor directly)
+           - anchor absent   → BRIDGE offset = MEAN residual (log value − global g) over its shared couples;
+                               such bridged benchmarks are down-weighted ×0.5 (indirect anchoring).
+         The offset is a nuisance alignment term → MEAN (non-degenerate), not median.
+      3. Each benchmark then yields one normalised estimate per couple = exp(log value − offset), with
+         weight = (#independent sources) × (0.5 if bridged). The global g[couple] is the source-weighted MEDIAN
+         of those estimates (robust to task-complexity outliers); the anchor is pinned to 0 each pass. Iterate.
+      4. central = exp(g[couple]); band = central·exp(±MAD) with MAD = 1.4826 × weighted median-absolute-deviation
+         of the same estimates (robust σ-equivalent — a single outlier benchmark barely moves it). A node backed
+         by a single benchmark gets a degenerate [c,c,c] box. Haiku 4.5 → one 'solo' node (no effort ladder)."""
     import math, collections
-    CUR = set(MX)                       # 6 current models
-    EFFOK = {"low","medium","high","xhigh","max"}
+    CUR = set(MX)                                            # 6 current models
+    EFFOK = {"low","medium","high","xhigh","max","solo"}     # 'solo' = haiku 4.5 (no discrete effort)
+    ANCHOR = "opus-4.8@medium"
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
             if r["group"] and not r["group"].startswith("#")]
-    groups = {}
-    for r in rows: groups.setdefault(r["group"], []).append(r)
-    def items_of(rs):
-        out = []
-        for r in rs:
-            if r["model"] not in CUR: continue
-            e, c = eff(r["effort"]), num(r[field])
-            if e in EFFOK and c and c > 0: out.append((r["model"], e, c, r["source"]))
-        return out
-    edgevals = collections.defaultdict(list)
-    for g, rs in groups.items():
-        it = items_of(rs)
-        for i in range(len(it)):
-            for j in range(i+1, len(it)):
-                (m1,e1,c1,_),(m2,e2,c2,_) = it[i], it[j]
-                if not ((m1!=m2 and e1==e2) or (m1==m2 and e1!=e2)): continue   # couple-atomic only
-                n1,n2 = f"{m1}@{e1}", f"{m2}@{e2}"
-                key = tuple(sorted([n1,n2])); cost = {n1:c1,n2:c2}
-                edgevals[key].append(math.log(cost[key[0]]/cost[key[1]]))
-    edges = {k: median(v) for k,v in edgevals.items()}
-    nodes = set(n for k in edges for n in k)
-    ANCHOR = "opus-4.8@medium"
-    adj = collections.defaultdict(list)
-    for (a,b),lr in edges.items(): adj[a].append((b,lr)); adj[b].append((a,-lr))
-    logval = {n:0.0 for n in nodes}
-    for _ in range(4000):
-        nv = {}
-        for n in nodes:
-            nv[n] = 0.0 if n==ANCHOR else (sum(logval[k]+lr for k,lr in adj[n])/len(adj[n]) if adj[n] else logval[n])
-        logval = nv
-    rel = {n: math.exp(logval[n]) for n in nodes}
-    # CI: per-source single-hop estimates around solved neighbours
-    est = collections.defaultdict(list)
-    for n in nodes: est[n].append(rel[n])
-    for g, rs in groups.items():
-        it = items_of(rs)
-        for i in range(len(it)):
-            for j in range(i+1, len(it)):
-                (m1,e1,c1,_),(m2,e2,c2,_) = it[i], it[j]
-                if not ((m1!=m2 and e1==e2) or (m1==m2 and e1!=e2)): continue
-                n1,n2 = f"{m1}@{e1}", f"{m2}@{e2}"
-                if n1 in rel and n2 in rel:
-                    est[n1].append(rel[n2]*(c1/c2)); est[n2].append(rel[n1]*(c2/c1))
+    bench = collections.defaultdict(dict)                    # benchmark → couple → log(value)
+    srcs  = collections.defaultdict(lambda: collections.defaultdict(set))
+    for r in rows:
+        if r["model"] not in CUR: continue
+        e, c = eff(r["effort"]), num(r[field])
+        if e in EFFOK and c and c > 0:
+            n = f'{r["model"]}@{e}'; bench[r["group"]][n] = math.log(c); srcs[r["group"]][n].add(r["source"])
+    for b in [b for b in bench if len(bench[b]) < 2]: del bench[b]   # drop single-couple (circular) benchmarks
+    couples = set(c for cv in bench.values() for c in cv)
+    def bridged(b): return ANCHOR not in bench[b]
+    def wt(b, c):   return len(srcs[b][c]) * (0.5 if bridged(b) else 1.0)
+    def wmedian(pairs):                                      # weighted median of [(value, weight), ...]
+        pairs = sorted(pairs); W = sum(w for _, w in pairs)
+        if W == 0: return pairs[len(pairs)//2][0]
+        acc = 0.0
+        for v, w in pairs:
+            acc += w
+            if acc >= W/2: return v
+        return pairs[-1][0]
+    g = {c: 0.0 for c in couples}
+    for _ in range(800):                                     # alternate offsets (mean) / values (weighted median)
+        o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
+        ng = {c: wmedian([(cv[c]-o[b], wt(b,c)) for b, cv in bench.items() if c in cv]) for c in couples}
+        a = ng[ANCHOR]; g = {c: ng[c]-a for c in couples}    # pin anchor to 1.0 (log 0)
+    o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
     def cell(n):
-        if n not in rel: return None
-        xs = [x for x in est[n] if x > 0]; r = rel[n]
-        if len(xs) < 2: return [round(r,2), round(r,2), round(r,2)]   # single source → degenerate box
-        lm = sum(math.log(x) for x in xs)/len(xs)
-        sd = (sum((math.log(x)-lm)**2 for x in xs)/len(xs))**0.5     # std dev of the measured estimates (log-space)
-        return [round(r,2), round(r*math.exp(-sd),2), round(r*math.exp(sd),2)]   # central ±1σ box (geometric)
+        if n not in couples: return None
+        E = [(cv[n]-o[b], wt(b,n)) for b, cv in bench.items() if n in cv]
+        med = wmedian(E); c = math.exp(med)
+        if len(E) < 2: return [round(c,2), round(c,2), round(c,2)]          # single benchmark → degenerate box
+        mad = 1.4826 * wmedian([(abs(l-med), w) for l, w in E])            # robust σ-equivalent
+        return [round(c,2), round(c*math.exp(-mad),2), round(c*math.exp(mad),2)]
     ORD = {"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],
            "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
            "sonnet-4.6":["low","medium","high","max"]}
     out = {}
     for m, es in ORD.items():
         out[m] = {e: cell(f"{m}@{e}") for e in es if cell(f"{m}@{e}")}
-    hk = cell("haiku-4.5@high")          # Haiku's sole explicit-effort thinking point
+    hk = cell("haiku-4.5@solo")          # Haiku 4.5 = single node, no effort dial
     if hk: out["haiku-4.5"] = {"solo": hk}
     return out
 
