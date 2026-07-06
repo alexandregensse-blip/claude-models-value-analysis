@@ -292,7 +292,7 @@ E1 (MAJOR): cross-model $ ratio is NOT benchmark-stable.
   AA-Index @max ÷Sonnet4.6: Sonnet4.6 1.0 / Sonnet5 1.99 / Opus4.8 1.73.
   Sonnet4.6↔Sonnet5 nearly INVERT: OSWorld high Sonnet4.6 $0.50 > Sonnet5 $0.34; Index max Sonnet5 $2.29 > Sonnet4.6 $1.15.
   Cause: computer-use → weak Sonnet4.6 needs more turns (dear); agentic/reasoning → Sonnet5 ~2x verbose (dear). => no single stable cross-model ratio.
-  My T2 was WRONG: scaled Opus4.8 OSWorld curve by pure price factor = imported computer-use cross-model structure (least like autodev).
+  My T2 was WRONG: scaled Opus4.8 OSWorld curve by pure price factor = imported computer-use cross-model structure (least like coding-agentic).
 E2: effort slope is model-dependent (max÷high: Opus4.8 2.95, Sonnet5 2.00, Sonnet4.6 1.06). One averaged multiplier misestimates Fable/Sonnet4.6.
 E3: Fable under-set — AA says it's THE most costly; factor @max ≈ 2.0x Opus4.8 (not 1.3x verbosity).
 E4: digitization noise on adjacent points (Sonnet4.6 high $0.50 vs max $0.53). Low confidence there.
@@ -300,7 +300,7 @@ E5: Haiku k=0.22 is a FLOOR (weak model likely more turns on agentic); no xhigh/
 E6 (per user): the Anthropic OSWorld chart is ONE source, digitized, and shown at conditions favorable to Anthropic (max effort, avg 5 attempts) — must be cross-validated, not trusted as ground truth.
 
 ## 11. CORRECTED FUSED RATIO MATRIX
-Base = Opus 4.8 @ max = 1.00. Fused cell = [cross-model factor @max from AA-Index (agentic ≈ autodev)] × [model effort-slope ÷ its own max, from OSWorld].
+Base = Opus 4.8 @ max = 1.00. Fused cell = [cross-model factor @max from AA-Index (agentic ≈ coding-agentic)] × [model effort-slope ÷ its own max, from OSWorld].
 Cross-model @max ÷Opus4.8 (AA-Index): Opus4.8 1.00 | Sonnet5 1.15 | Sonnet4.6 0.58 | Fable5 ~2.0 | Opus4.7 ~1.10(est) | Haiku4.5 ~0.25(est).
 Effort slope ÷own-max (OSWorld): Opus4.8 [.215/.277/.338/.577/1] ; Sonnet5 [.309/.412/.500/.662/1] ; Sonnet4.6 [.566/.717/.943/—/1] ; Opus4.7&Fable←Opus4.8 slope ; Haiku←Sonnet4.6 slope (no xhigh/max).
 FUSED (Opus4.8@max=1.00):
@@ -310,7 +310,7 @@ FUSED (Opus4.8@max=1.00):
 | high | 0.34 | 0.58 | 0.55 | 0.37 | 0.68 | ~0.25 |
 | xhigh | 0.58 | 0.76 | — | 0.63 | 1.15 | — |
 | max | 1.00 | 1.15 | 0.58 | 1.10 | 2.00 | — |
-To $: × task-type anchor. Agentic/autodev anchor = AA-Index Opus4.8@max $1.99; computer-use anchor = $1.30.
+To $: × task-type anchor. Agentic/coding-agentic anchor = AA-Index Opus4.8@max $1.99; computer-use anchor = $1.30.
 CI band: cross-model factors ±30-40% (task-dependence); effort slope ±15% (digitization); starred models wider (±40-60%).
 
 ## 12. TODO — final deliverable = graph with curves + confidence intervals
@@ -523,8 +523,8 @@ Focus models = latest: Opus 4.7, Opus 4.8, Sonnet 5, Haiku 4.5, Fable 5 (down-we
 - 2606.00376 [Claude-4.5-Opus reasoning depth]: super-exp decay past d*~19-31 steps; tool-delegation +60pp over neural reasoning.
 - 2604.16529 [Claude-4.5-Opus test-time scaling]: SWE-Verified 70.9→77.6 (+6.7pp), Terminal-Bench 46.9→59.1 (+12.2pp) via parallel+sequential rollouts (monotonic, but that's rollout-count not effort).
 - non-Claude corroboration: 2604.10739 budget 500→16K INVERTED-U peak ~12K, NEGATIVE at 16K (overthinking); 2604.14853/2603.08877 diminishing returns; 2604.21764 better allocation BEATS the tradeoff (fewer tokens + higher acc).
-=> KEY for autodev (coding/agentic): effort→QUALITY curve is ~FLAT or INVERTED-U (overthinking) — +0.3-1.3pp for max vs low; effort→COST ~2x. EFFICIENT FRONTIER for coding = LOW-MEDIUM effort. High/max justified only on frontier-math/deep-reasoning, not code.
-This directly supports the autodev tuning thesis: reviewers/mechanical phases → low; only genuine deep-reasoning phases → high.
+=> KEY for coding-agentic (coding/agentic): effort→QUALITY curve is ~FLAT or INVERTED-U (overthinking) — +0.3-1.3pp for max vs low; effort→COST ~2x. EFFICIENT FRONTIER for coding = LOW-MEDIUM effort. High/max justified only on frontier-math/deep-reasoning, not code.
+This directly supports the coding-agentic tuning thesis: reviewers/mechanical phases → low; only genuine deep-reasoning phases → high.
 
 ### MERGED — Agent-12 recovered/non-arxiv (recent)
 - WildClawBench [2605.10912, OpenClaw]: Opus4.7 62.2%/$1.29/task vs Opus4.6 51.6%/$1.35/task (4.7 CHEAPER+BETTER; ~26 tool-calls; 5.46 vs 8.47min). Cross-gen efficiency confirmed AGAIN.
@@ -582,7 +582,7 @@ Fable5 ~2.0 (WorkBench 1.95, ctala 2.0, X-post 1.68, HN 2x) · Opus4.8 1.00 · O
 Intelligence axes (recent): AA-Index Fable60/Opus4.8-56/Opus4.7-54/Sonnet5-53/Sonnet4.6-47 ; Vals-Index Fable75.1/Opus4.8-70.4/Sonnet5-68.6/Opus4.7-66.1/Sonnet4.6-60.1/Haiku4.5-40.9.
 
 ### MERGED — Agent-15 recent blogs (thin; ecosystem mostly re-quoted)
-- arxiv 2606.15689 [CODE REVIEW, autodev-relevant!]: Haiku4.5 3.2x LOWER cost/review than Sonnet4.6, F1 0.365 vs 0.343 (+18% recall). "bigger isn't better" on review. Haiku4.5/Sonnet4.6 = 0.31 (matches cluster). => strong support for Haiku reviewers.
+- arxiv 2606.15689 [CODE REVIEW, coding-agentic-relevant!]: Haiku4.5 3.2x LOWER cost/review than Sonnet4.6, F1 0.365 vs 0.343 (+18% recall). "bigger isn't better" on review. Haiku4.5/Sonnet4.6 = 0.31 (matches cluster). => strong support for Haiku reviewers.
 - FullStack Labs [own IT bench, 5 runs]: Opus4.8 ~half tokens & -40% $ vs Opus4.7 (cross-gen eff); Sonnet5 <half $/correct-result (mid task); frontier: Sonnet5 -15% $ but Opus4.8 more token-eff (inversion).
 - every.to: Fable5 500k-1M tok/task, quality 91 vs Opus4.8 63 (codebase rewrite — Fable big win on hardest).
 - natesnewsletter [own judgment bench]: Opus4.8 81 > GPT5.5 71 > Opus4.7 54 > Sonnet4.6 52 (quality only).
@@ -611,4 +611,4 @@ Real measurement sources so far (~15): Anthropic OSWorld chart, Anthropic Opus4.
 - MEDIUM: per-effort $ SHAPE within a model (OSWorld only, 1 src) — plausible but unverified externally.
 - LOW: cross-model $ ratio (benchmark-unstable: 1.15-1.60-2.45 across sources) — must be a RANGE not a point; and derived cells for Haiku/Fable/Opus4.7 per effort.
 - => A graph now would need CI bands so wide (esp cross-model & xhigh/max) it'd be more honest as "direction + order-of-magnitude" than precise curves.
-- STRONGEST path to real confidence = self-measure via ccusage/cccost at each effort on representative autodev tasks (generates clean, autodev-relevant, low-variance-if-averaged cells). Public data alone caps confidence at MEDIUM.
+- STRONGEST path to real confidence = self-measure via ccusage/cccost at each effort on representative coding-agentic tasks (generates clean, coding-agentic-relevant, low-variance-if-averaged cells). Public data alone caps confidence at MEDIUM.
