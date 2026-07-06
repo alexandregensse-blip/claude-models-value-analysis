@@ -142,6 +142,8 @@ def groups_data():
       "scfdeepqa":("DeepSearchQA","sweep","Fable 5 card p270 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
       "scfhletools":("HLE (Fable)","sweep","Fable 5 card p267 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
       "scfdraco":("DRACO","sweep","Fable 5 card p271 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
+      "scoarc":("ARC-AGI-2","sweep","Opus 4.7 card p213 · balayage low→max, coût $ ✓"),
+      "scodeepqa":("DeepSearchQA","sweep","Opus 4.7 card p200 · Opus4.7 vs Sonnet4.6, balayage low→max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))

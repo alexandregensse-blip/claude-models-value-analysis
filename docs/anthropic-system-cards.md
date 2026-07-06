@@ -12,7 +12,7 @@ des valeurs brutes entre benchmarks — uniquement des **ratios au sein d'un mê
 | **Sonnet 5** | 2026-06-30 | 145 | https://www-cdn.anthropic.com/9e6a1044980d8c4ed85669faf9c2a8342e2e9f1e/Claude%20Sonnet%205%20System%20Card.pdf | — | ✅ **INTÉGRÉ** |
 | **Fable 5 & Mythos 5** | 2026-06-30 | 319 | https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf | ★★★ (sweeps Fable) | ✅ **INTÉGRÉ** |
 | **Opus 4.8** | 2026-05-28 | 246 | https://www-cdn.anthropic.com/0f0c97ad20d8005706296bd92aa1c27c6b2f4f61/Claude%20Opus%204.8%20System%20Card.pdf (alt hash: 0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf) | ★★★ (sweeps Opus 4.8/4.7 → comble opus-4.7@medium) | ✅ **INTÉGRÉ** |
-| **Opus 4.7** | 2026-04-16 | 232 | https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf | ★★ | ⏳ à faire |
+| **Opus 4.7** | 2026-04-16 | 232 | https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf | ★★ | ✅ **INTÉGRÉ** |
 | **Sonnet 4.6** | 2026-02-17 | ? | https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf | ★★ | ⏳ à faire |
 | **Opus 4.6** | 2026-02 | ? | https://www-cdn.anthropic.com/14e4fb01875d2a69f646fa5e574dea2b1c0ff7b5.pdf (alt: 0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf, 6a5fa276ac68b9aeb0c8b6af5fa36326e0e166dd.pdf) | ★ (legacy) | ⏳ |
 | **Mythos Preview** | 2026-04 | ? | page: anthropic.com/claude-mythos-preview-system-card | ☆ (config recherche) | ⏳ |
@@ -107,9 +107,20 @@ comme `fable-5` + `opus-4.8`, confound `digitized-logx-mythos` :
   (1.56→5.94) et qualité (1.18→1.33) monotones. Corroboration inchangée **vert 24 · jaune 1** ; cost-pts 142→166.
 - Table 8.1 p252 (scores @xhigh/max) et autres barres lues mais non ajoutées (score-only, gain marginal).
 
+## ✅ Opus 4.7 System Card — INTÉGRÉ (2026-07-06, source=`anthropic-syscard`, ref `anthropic-opus47-syscard-pNNN`)
+
+232 pages. Compare Opus 4.7 vs Opus 4.6 (legacy) + GPT/Gemini — **Sonnet 4.6 absent** des figures (sauf
+DeepSearchQA). Seul Opus 4.7 (+ Sonnet 4.6 sur une figure) est in-grid. **N.B. ce card est aussi `anthropic-syscard`
+→ ne peut PAS rendre `opus-4.7@medium` vert** (même source) ; il resserre σ. 2 groupes ajoutés :
+- **`scoarc`** (fig 8.11.A p213, ARC-AGI-2, coût $ direct) — Opus 4.7 low→max 61.9/66.0/68.0/75.8 (pas de xhigh).
+- **`scodeepqa`** (fig 8.8.3.B p200, DeepSearchQA TTC, tokens totaux→$ 5:1) — Opus 4.7 80.6/86.0/88.6/88.1/89.9 +
+  **Sonnet 4.6** 82.9/87.6/89.7/90.7 (seul vrai couple in-grid du card).
+- **SAUTÉ** : HLE p197 (fig 8.8.1.B) = Opus 4.7 SEUL, valeurs 43.0/48.4/53.2/55.4/54.7 = doublon EXACT de `schleeff`.
+- **Résultat** : ladders Opus 4.7 monotones, σ resserré ; corroboration inchangée **vert 24 · jaune 1** ; cost-pts 166→170.
+
 ## À FAIRE (ordre de priorité)
-1. **Opus 4.7 card** (→ 3ᵉ source indépendante pour `opus-4.7@medium` = dernier jaune → vert).
-2. **Sonnet 4.6 card**, **Haiku 4.5 card**.
+1. **Sonnet 4.6 card**, **Haiku 4.5 card** (les deux modèles déjà verts partout → complétude + σ + traçabilité).
+   `opus-4.7@medium` restera l'unique jaune tant qu'aucune source NON-Anthropic ne mesure opus-4.7@medium avec coût.
 Pour chacun : mêmes groupes (un par benchmark), source `anthropic-<model>-syscard`, effort explicite,
 coûts digitalisés `digitized-logx`, jamais de valeur brute inter-benchmark (ratios only).
 

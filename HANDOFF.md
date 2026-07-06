@@ -5,7 +5,7 @@
 > cards DONE. Opus 4.8 → 3 sweeps filling the Opus 4.7 ladder. Fable 5 → 5 sweeps
 > (`scfsweppro`/`scfcdiamond`/`scfdeepqa`/`scfhletools`/`scfdraco`); **Fable 5 = Mythos 5** (user-confirmed equal,
 > figures plot the "Mythos 5" line). Corroboration **vert 24 · jaune 1 · orange 0 · rouge 0**, only
-> `opus-4.7@medium` yellow. Opus 4.7, Sonnet 4.6, Haiku 4.5 cards pending.
+> `opus-4.7@medium` yellow. Opus 4.7 card DONE (ARC + DeepSearchQA). Sonnet 4.6, Haiku 4.5 cards pending.
 
 
 Status: data curated + verified, generator working, interactive report built (`cost-matrix.html`).
