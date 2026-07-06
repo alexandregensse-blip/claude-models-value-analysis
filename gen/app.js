@@ -9,6 +9,10 @@ const MODELS = {
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
+// round-value axis ticks (regular VALUES, not regular screen spacing)
+const logTicks=(vmin,vmax)=>{const o=[];for(let e=Math.floor(Math.log10(vmin));Math.pow(10,e)<=vmax*1.0001;e++)for(let b=1;b<=9;b++){const v=b*Math.pow(10,e);if(v>=vmin*0.999&&v<=vmax*1.001)o.push(v);}return o;};
+const tickLbl=v=>{const m=Math.round(v/Math.pow(10,Math.floor(Math.log10(v)+1e-9)));return m===1||m===2||m===5;};
+const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag,step=(n<1.5?1:n<3?2:n<7?5:10)*mag,o=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)o.push(Math.round(t*1e4)/1e4);return o;};
 
 // ---- COST is now DATA-DRIVEN: relative cost per (model,effort) [rel, ci_lo, ci_hi], anchored opus-4.8@medium,
 // computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
@@ -38,20 +42,18 @@ function drawB(){
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q-cfg.ey); ymx=Math.max(ymx,q+cfg.ey);
       allpts.push({m,e,c:d[0],lo:d[1],hi:d[2],q}); }); }
   const xlo=Math.log10(xmn)-0.05, xhi=Math.log10(xmx)+0.05;
-  const yBot=Math.floor(ymn)-0.5, yTop=Math.ceil(ymx)+0.5, C=yTop+0.7;   // small top margin => strong dilation of clustered high-intel models   // inverted-log Y: dilate the compressed high-intelligence top
+  const yBot=ymn, yTop=ymx, C=yTop+0.55, yp=10;   // small top margin => strong dilation of clustered high-intel models   // inverted-log Y: dilate the compressed high-intelligence top
   const Ln=v=>Math.log(C-v), lnB=Ln(yBot), lnT=Ln(yTop);
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=v=>mT+(1-(lnB-Ln(Math.max(yBot,Math.min(v,yTop))))/(lnB-lnT))*ih;
+  const Y=v=>{v=Math.max(yBot,Math.min(v,yTop));return mT+yp+(1-(lnB-Ln(v))/(lnB-lnT))*(ih-2*yp);};
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
   // ---- regular grid: NX evenly-spaced columns (log cost) · NY evenly-spaced rows (screen) ----
-  const NX=8, NY=6;
-  for(let i=0;i<=NX;i++){ const x=mL+iw*i/NX, val=Math.pow(10,xlo+(xhi-xlo)*i/NX);
+  logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
-    const tx=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});tx.textContent=fmtC(val)+"×";s.appendChild(tx);}
-  const invY=f=>C-Math.exp(lnB-(1-f)*(lnB-lnT));
-  for(let j=0;j<=NY;j++){ const y=mT+ih*j/NY, val=invY(j/NY);
+    if(tickLbl(val)){const tx=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});tx.textContent=fmtC(val)+"×";s.appendChild(tx);}});
+  linTicks(yBot,yTop,7).forEach(val=>{ const y=Y(val);
     s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
-    const ty=el("text",{x:mL-10,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});ty.textContent=Math.round(val);s.appendChild(ty);}
+    const ty=el("text",{x:mL-10,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});ty.textContent=Math.round(val);s.appendChild(ty);});
   let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Coût relatif  (Opus 4.8 @medium = 1,0 · échelle log)";s.appendChild(a);
   a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Intelligence (indice Vals · échelle log inversée)";s.appendChild(a);
   if(1>Math.pow(10,xlo)&&1<Math.pow(10,xhi)) s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
@@ -70,7 +72,7 @@ function drawB(){
         s.appendChild(el("path",{d,fill:"none",stroke:col,"stroke-width":2.4,"stroke-linejoin":"round"}));
         pts.forEach(p=>{ const r=el("circle",{cx:X(p.c),cy:Y(p.y),r:4.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.5});
           if(cfg.tag) r.setAttribute("stroke-dasharray","2 2"); s.appendChild(r);
-          const t=el("text",{x:X(p.c),y:Y(p.y)-9,fill:cvar('--muted'),"font-size":9,"text-anchor":"middle"});t.textContent=(p.e==="solo"?"effort unique":p.e);s.appendChild(t);});
+          const t=el("text",{x:X(p.c),y:Y(p.y)-9,fill:cvar('--muted'),"font-size":9,"text-anchor":"middle"});t.textContent=(p.e==="solo"?"":p.e);s.appendChild(t);});
         const last=pts[pts.length-1];
         const lb=el("text",{x:X(last.c)+11,y:Y(last.y)+4,fill:cvar('--ink'),"font-size":12.5,"font-weight":600});lb.textContent=MODELS[m].label;s.appendChild(lb);
       }
@@ -94,19 +96,17 @@ function drawPareto(){
       xmn=Math.min(xmn,d[0]); xmx=Math.max(xmx,d[0]); ymn=Math.min(ymn,q); ymx=Math.max(ymx,q);
       pts.push({m,e,c:d[0],q}); }); }
   const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06;
-  const yb=Math.floor(ymn)-1, yt=Math.ceil(ymx)+0.5, C=yt+0.7;
+  const yb=ymn, yt=ymx, C=yt+0.55, yp=12;
   const Ln=v=>Math.log(C-v), lnB=Ln(yb), lnT=Ln(yt);
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=v=>mT+(1-(lnB-Ln(Math.max(yb,Math.min(v,yt))))/(lnB-lnT))*ih;
+  const Y=v=>{v=Math.max(yb,Math.min(v,yt));return mT+yp+(1-(lnB-Ln(v))/(lnB-lnT))*(ih-2*yp);};
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
-  const NX=8, NY=6;
-  for(let i=0;i<=NX;i++){ const x=mL+iw*i/NX, val=Math.pow(10,xlo+(xhi-xlo)*i/NX);
+  logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
-    const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}
-  const invY=f=>C-Math.exp(lnB-(1-f)*(lnB-lnT));
-  for(let j=0;j<=NY;j++){ const y=mT+ih*j/NY, val=invY(j/NY);
+    if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
+  linTicks(yb,yt,7).forEach(val=>{ const y=Y(val);
     s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
-    const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=Math.round(val);s.appendChild(t);}
+    const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=Math.round(val);s.appendChild(t);});
   let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Coût relatif (Opus 4.8 @medium = 1,0 · log)";s.appendChild(a);
   a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Intelligence (indice Vals · log dilaté)";s.appendChild(a);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
@@ -115,8 +115,13 @@ function drawPareto(){
   s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
   pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
     s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
-  par.forEach(p=>{ const t=el("text",{x:X(p.c)+8,y:Y(p.q)+3.5,fill:cvar('--ink'),"font-size":9.5,"font-weight":600});
-    t.textContent=MODELS[p.m].label+(p.e==="solo"?"":" "+p.e); s.appendChild(t);});
+  const cap=e=>e==="solo"?"":e.charAt(0).toUpperCase()+e.slice(1);
+  const labs=par.map(p=>({p,px:X(p.c),py:Y(p.q),y:Y(p.q)})); labs.sort((a,b)=>a.y-b.y);
+  for(let i=1;i<labs.length;i++){ if(labs[i].y<labs[i-1].y+19) labs[i].y=labs[i-1].y+19; }   // push overlapping labels down
+  labs.forEach(L=>{ const p=L.p, lx=L.px+9;
+    if(Math.abs(L.y-L.py)>5) s.appendChild(el("line",{x1:L.px+4,y1:L.py,x2:lx-2,y2:L.y,stroke:cvar('--faint'),"stroke-width":0.8,"stroke-opacity":0.55}));
+    const t1=el("text",{x:lx,y:L.y-1,fill:cvar('--ink'),"font-size":10,"font-weight":600}); t1.textContent=MODELS[p.m].label; s.appendChild(t1);
+    const ce=cap(p.e); if(ce){ const t2=el("text",{x:lx,y:L.y+9,fill:cvar('--muted'),"font-size":9}); t2.textContent=ce; s.appendChild(t2); } });
   const lg=document.getElementById("legendP");
   if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominé</span>`
@@ -142,7 +147,7 @@ function drawMatrix(){
   for(const m of rows){ const md=MODELS[m], tr=document.createElement("tr");
     let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill">taille-tâche</span>':''}</td>`;
     if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = effort unique → one merged cell across the 5 effort columns
-      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>effort unique · IC ${c[1]}</small></div></td>`;
+      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>fusionné · ${c[1]}</small></div></td>`;
     } else {
       ["low","medium","high","xhigh","max"].forEach(e=>{ const c=M[m][e];
         row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>${c[1]}</small></div></td>`
@@ -225,7 +230,7 @@ function drawGraph(){
     if(measured.has(id)){ s.appendChild(el("circle",{cx:x,cy:y,r:5.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));}
     else { s.appendChild(el("circle",{cx:x,cy:y,r:4.8,fill:"none",stroke:cvar('--faint'),"stroke-width":1.3,"stroke-dasharray":"2 2"}));}
     ring(x,y,8.4,colFor(c)); bump(c);
-    if(e==="solo"){ const t=el("text",{x,y:y+21,fill:cvar('--faint'),"font-size":9,"text-anchor":"middle","font-style":"italic"}); t.textContent="effort unique"; s.appendChild(t); } });}
+    });}
   s.appendChild(el("circle",{cx:px("opus-4.8"),cy:py("medium"),r:11.5,fill:"none",stroke:cvar('--opus48'),"stroke-width":1.6,"stroke-dasharray":"1 2"}));
   document.getElementById("graphcap").innerHTML=`<b>5 modèles à effort discret × 5 efforts</b> + <b>Haiku&nbsp;4.5 en point unique</b> (pas de paramètre <code>effort</code> → toutes ses sources fusionnées en un nœud, voir §6&nbsp;; ligne « défaut » retirée&nbsp;; les runs @default alimentent les IC de la matrice §2). Anneau = <b>#sources indépendantes</b>&nbsp;: <b><span style="color:${COLR.g}">vert ≥3</span></b> · <b><span style="color:${COLR.y}">jaune 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">rouge 0</span></b> (bilan ${tally.g}/${tally.y}/${tally.o}/${tally.r}). Nœud <b>plein</b> = mesuré, <b>creux</b> = inféré. Épaisseur d'arête ∝ #sources.`;
   document.getElementById("legendG").innerHTML=

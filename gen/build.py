@@ -209,6 +209,21 @@ def cost_grid():
                 n1,n2 = f"{m1}@{e1}", f"{m2}@{e2}"
                 if n1 in rel and n2 in rel:
                     est[n1].append(rel[n2]*(c1/c2)); est[n2].append(rel[n1]*(c2/c1))
+    # Haiku 4.5 = single-effort node: it has ONE same-config measurement (OfficeQA, reasoning-high) so its raw
+    # interval is degenerate. Propagate its anchor's CI (Sonnet 4.6 @high, 8 sources) through the measured ratio
+    # so the merged node inherits a real interval instead of a single point.
+    hk = "haiku-4.5@high"
+    if hk in rel:
+        hk_est = [rel[hk]]
+        for g, rs in groups.items():
+            it = items_of(rs)
+            hrow = [x for x in it if x[0]=="haiku-4.5" and x[1]=="high"]
+            if not hrow: continue
+            cH = hrow[0][2]
+            for (m2,e2,c2,_) in it:
+                if m2=="haiku-4.5" or e2!="high" or f"{m2}@{e2}" not in est: continue
+                for ev in est[f"{m2}@{e2}"]: hk_est.append(ev*(cH/c2))
+        if len(hk_est) > 1: est[hk] = hk_est
     def quantile(xs, p):
         xs = sorted(xs); k = (len(xs)-1)*p; f = int(k)
         return xs[f] if f+1 >= len(xs) else xs[f] + (k-f)*(xs[f+1]-xs[f])
