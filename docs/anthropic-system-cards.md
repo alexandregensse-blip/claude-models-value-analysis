@@ -11,7 +11,7 @@ des valeurs brutes entre benchmarks — uniquement des **ratios au sein d'un mê
 |---|---|---|---|---|---|
 | **Sonnet 5** | 2026-06-30 | 145 | https://www-cdn.anthropic.com/9e6a1044980d8c4ed85669faf9c2a8342e2e9f1e/Claude%20Sonnet%205%20System%20Card.pdf | — | ✅ **INTÉGRÉ** |
 | **Fable 5 & Mythos 5** | 2026-06-30 | 319 | https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf | ★★★ (sweeps Fable) | ⏳ à faire |
-| **Opus 4.8** | 2026-05-28 | ? | https://www-cdn.anthropic.com/0f0c97ad20d8005706296bd92aa1c27c6b2f4f61/Claude%20Opus%204.8%20System%20Card.pdf (alt hash: 0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf) | ★★★ (sweeps Opus 4.8/4.7 → comble opus-4.7@medium) | ⏳ à faire |
+| **Opus 4.8** | 2026-05-28 | 246 | https://www-cdn.anthropic.com/0f0c97ad20d8005706296bd92aa1c27c6b2f4f61/Claude%20Opus%204.8%20System%20Card.pdf (alt hash: 0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf) | ★★★ (sweeps Opus 4.8/4.7 → comble opus-4.7@medium) | ✅ **INTÉGRÉ** |
 | **Opus 4.7** | 2026-04-16 | 232 | https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf | ★★ | ⏳ à faire |
 | **Sonnet 4.6** | 2026-02-17 | ? | https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf | ★★ | ⏳ à faire |
 | **Opus 4.6** | 2026-02 | ? | https://www-cdn.anthropic.com/14e4fb01875d2a69f646fa5e574dea2b1c0ff7b5.pdf (alt: 0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf, 6a5fa276ac68b9aeb0c8b6af5fa36326e0e166dd.pdf) | ★ (legacy) | ⏳ |
@@ -69,10 +69,26 @@ p124-132 multimodal (GDP.pdf, OSWorld, ChartMuseum, CharXiv, BenchCAD), p133 GDP
 p135/137 ?, p138-139 MMLU multilingue (GMMLU/INCLUDE/MILU). **Modèle « Mythos 5 »** apparaît (HLE :
 low59.8/med62.6/high63.4/xhigh64.2/max64.7) = config recherche de Fable, **hors grille courante** → ignorer.
 
+## ✅ Opus 4.8 System Card — INTÉGRÉ (2026-07-06, source=`anthropic-syscard`, ref `anthropic-opus48-syscard-pNNN`)
+
+246 pages. **3 figures effort×coût digitalisées** (balayage low→max, axe log), chacune en groupe DÉDIÉ
+(ratios 100 % intra-figure ; prix par tier Opus $0.06/Ktok, Sonnet $0.012/Ktok = ratio 5:1) :
+- **`scsweproeff`** (fig 8.2.A p196, SWE-Bench Pro, tokens de sortie) — Opus 4.8 & Opus 4.7 low→max.
+  Opus4.8 scores 63.6/66.0/67.4/69.7/69.3 ; Opus4.7 57.3/59.5/62.4/62.8/63.6. (Opus 4.6 legacy ignoré.)
+- **`schleeff`** (fig 8.10.1.B p203, HLE avec outils, tokens TOTAUX) — Opus4.7 43.0/48.4/53.2/55.4/54.7 ;
+  Opus4.8 50.2/55.2/55.7/57.6/57.9. (≈ identique au `schletools` du Sonnet5 card → confirme la même expérience.)
+- **`scosweff`** (fig 8.12.6.B p222, OSWorld, tokens de sortie) — Opus4.8 78.5/80.0/81.4/83.1/83.4 ;
+  **Opus4.7 73.8/75.7/79.8/80.2/82.8** (absent du groupe `osworld`/AA) ; Sonnet4.6 71.3/75.9/77.8/(max)78.4.
+- Table 8.1.A p194-195 (scores @max Opus4.8 vs Opus4.7) et barres p205/p223 (DeepSearchQA, OfficeQA/Pro,
+  Finance, MCP-Atlas) lues mais NON ajoutées (score-only @max, gain marginal vs les 3 sweeps).
+- **Résultat** : `opus-4.7@medium` orange→**jaune** (anthropic-syscard + cursorbench) ; ladders coût+qualité
+  Opus4.7 monotones sur 3 benchmarks. Corroboration globale **vert 24 · jaune 1 · orange 0 · rouge 0** (25 nœuds).
+  cost-pts 119→142. Le seul jaune (`opus-4.7@medium`) passera vert avec la card Opus 4.7 propre.
+
 ## À FAIRE (ordre de priorité)
-1. **Opus 4.8 card** → sweeps effort Opus 4.8 & Opus 4.7 (comble `opus-4.7@medium`, seul nœud orange restant).
-2. **Fable 5 & Mythos 5 card** → sweeps Fable 5 (rare ; on n'a que Willison+CursorBench).
-3. **Opus 4.7 card**, **Sonnet 4.6 card**, **Haiku 4.5 card**.
+1. **Fable 5 & Mythos 5 card** → sweeps Fable 5 (rare ; on n'a que Willison+CursorBench).
+2. **Opus 4.7 card** (→ 3ᵉ source indépendante pour `opus-4.7@medium` = dernier jaune → vert),
+   **Sonnet 4.6 card**, **Haiku 4.5 card**.
 Pour chacun : mêmes groupes (un par benchmark), source `anthropic-<model>-syscard`, effort explicite,
 coûts digitalisés `digitized-logx`, jamais de valeur brute inter-benchmark (ratios only).
 

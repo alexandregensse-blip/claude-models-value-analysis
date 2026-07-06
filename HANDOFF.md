@@ -1,7 +1,9 @@
 # HANDOFF — what's left to do
 
 > **Anthropic System Cards** (in progress): full list + processing method + integration state in
-> [`docs/anthropic-system-cards.md`](docs/anthropic-system-cards.md). Sonnet 5 card DONE; Opus 4.8,
+> [`docs/anthropic-system-cards.md`](docs/anthropic-system-cards.md). Sonnet 5 + **Opus 4.8** cards DONE
+> (Opus 4.8 added 3 effort sweeps `scsweproeff`/`schleeff`/`scosweff`, filled the Opus 4.7 ladder →
+> corroboration **vert 24 · jaune 1 · orange 0 · rouge 0**, only `opus-4.7@medium` yellow left).
 > Fable 5/Mythos 5, Opus 4.7, Sonnet 4.6, Haiku 4.5 cards pending (effort×cost sweeps in their figures).
 
 

@@ -134,6 +134,9 @@ def groups_data():
       "willison":("Willison SVG","sweep","llm CLI · balayage low→max, tâche triviale (SVG) ✓"),
       "futuresearch":("DeepResearch","sweep","Deep Research Bench · low/high ✓"),
       "cursorbench":("CursorBench","sweep","Cursor 3.1 · balayage low→max, effort apparié ✓ (éditeur=vendeur)"),
+      "scsweproeff":("SWE-Pro sweep","sweep","Opus 4.8 card p196 · balayage low→max, tokens de sortie ✓"),
+      "schleeff":("HLE sweep","sweep","Opus 4.8 card p203 · HLE outils, balayage low→max ✓"),
+      "scosweff":("OSWorld sweep","sweep","Opus 4.8 card p222 · balayage low→max, tokens de sortie ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
