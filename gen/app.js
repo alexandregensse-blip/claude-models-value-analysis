@@ -10,30 +10,23 @@ const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v)
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
 
-// per-effort: [rel_cost, ci_lo, ci_hi]
-const B = {
-  "fable-5":   {intel:75.1, ey:2.2, order:["low","medium","high","xhigh","max"],
-    e:{low:[1.37,1.00,1.75],medium:[1.95,1.70,2.10],high:[2.44,1.90,3.20],xhigh:[3.32,2.40,4.60],max:[4.49,3.00,6.30]}},
-  "opus-4.8":  {intel:70.4, ey:1.4, order:["low","medium","high","xhigh","max"],
-    e:{low:[0.70,0.60,0.80],medium:[1.00,1.00,1.00],high:[1.25,1.15,1.50],xhigh:[1.70,1.50,2.10],max:[2.30,1.70,3.20]}},
-  "sonnet-5":  {intel:68.6, ey:2.6, tag:true, order:["low","medium","high","xhigh","max"],
-    e:{low:[0.74,0.50,1.15],medium:[1.05,0.70,1.60],high:[1.31,0.85,2.00],xhigh:[1.79,1.15,2.70],max:[2.42,1.50,3.80]}},
-  "opus-4.7":  {intel:66.1, ey:2.2, order:["low","medium","high","xhigh","max"],
-    e:{low:[0.67,0.45,0.95],medium:[0.95,0.60,1.40],high:[1.19,0.75,1.70],xhigh:[1.62,1.10,2.30],max:[2.19,1.40,3.10]}},
-  "sonnet-4.6":{intel:60.1, ey:1.6, order:["low","medium","high","max"],
-    e:{low:[0.42,0.35,0.52],medium:[0.60,0.50,0.75],high:[0.75,0.58,0.98],max:[1.38,1.00,1.90]}},
-  "haiku-4.5": {intel:40.9, ey:1.9, order:["low","medium","high"],
-    e:{low:[0.13,0.08,0.19],medium:[0.19,0.11,0.22],high:[0.24,0.15,0.31]}},
+// ---- COST is now DATA-DRIVEN: relative cost per (model,effort) [rel, ci_lo, ci_hi], anchored opus-4.8@medium,
+// computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
+// index) + halo height (ey) + the tag flag stay hand-set here — they are capability priors, not cost.
+const COSTGRID=__COSTGRID__;
+const META={
+  "fable-5":{intel:75.1,ey:2.2}, "opus-4.8":{intel:70.4,ey:1.4}, "sonnet-5":{intel:68.6,ey:2.6,tag:true},
+  "opus-4.7":{intel:66.1,ey:2.2}, "sonnet-4.6":{intel:60.1,ey:1.6}, "haiku-4.5":{intel:40.9,ey:1.9},
 };
-// quality offset below the TOP available effort. Concave plateau SHAPE is corroborated by 8 effort-sweep
-// sources (OSWorld/swe-rebench/Braintrust/HAL/zenn/qiita + arXiv 2604.18934 & 2603.08640): they agree on
-// small gains + plateau on code/agentic (effort pays only on reasoning-math). What is NOT measured is the
-// per-MODEL magnitude (no full sweep on Haiku/Fable), so the shape is shared across models as a prior —
-// residual uncertainty shows in halo height, not in the qualitative shape.
+const B={};
+for(const m in META){ const cg=COSTGRID[m]||{};
+  B[m]={intel:META[m].intel, ey:META[m].ey, tag:META[m].tag, order:Object.keys(cg), e:cg}; }
+// quality offset below the TOP available effort (concave plateau SHAPE, corroborated by effort-sweep sources:
+// small gains + plateau on code/agentic). Shared across models as a prior; Haiku is single-effort → flat.
 const OFF5={low:-5.0,medium:-3.2,high:-1.6,xhigh:-0.6,max:0};      // 5-level models (top=max)
 const OFF4={low:-5.0,medium:-3.2,high:-1.6,max:0};                  // sonnet-4.6 (top=max, no xhigh)
-const OFF3={low:-3.4,medium:-1.6,high:0};                           // haiku (top=high)
-function offs(m){return m==="haiku-4.5"?OFF3:(m==="sonnet-4.6"?OFF4:OFF5);}
+const OFFH={solo:0};                                               // haiku 4.5: one operating point, no ladder
+function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
@@ -65,7 +58,7 @@ function drawB(){
         s.appendChild(el("path",{d,fill:"none",stroke:col,"stroke-width":2.4,"stroke-linejoin":"round"}));
         pts.forEach(p=>{ const r=el("circle",{cx:X(p.c),cy:Y(p.y),r:4.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.5});
           if(cfg.tag) r.setAttribute("stroke-dasharray","2 2"); s.appendChild(r);
-          const t=el("text",{x:X(p.c),y:Y(p.y)-9,fill:cvar('--muted'),"font-size":9,"text-anchor":"middle"});t.textContent=p.e;s.appendChild(t);});
+          const t=el("text",{x:X(p.c),y:Y(p.y)-9,fill:cvar('--muted'),"font-size":9,"text-anchor":"middle"});t.textContent=(p.e==="solo"?"effort unique":p.e);s.appendChild(t);});
         const last=pts[pts.length-1];
         const lb=el("text",{x:X(last.c)+11,y:Y(last.y)+4,fill:cvar('--ink'),"font-size":12.5,"font-weight":600});lb.textContent=MODELS[m].label;s.appendChild(lb);
       }
@@ -77,15 +70,12 @@ function drawB(){
     +`<span class="lg"><span class="sw" style="opacity:.22;background:var(--ink)"></span>halo = IC 2D (coût × qualité)</span>`;
 }
 
-// ---------- MATRIX (sorted by intelligence desc) ----------
-const M = {
-  "fable-5":   {intel:75.1,low:[1.37,"1,10–1,65"],medium:[1.95,"1,70–2,10"],high:[2.44,"2,00–3,00"],xhigh:[3.32,"2,60–4,30"],max:[4.49,"3,20–6,00"]},
-  "opus-4.8":  {intel:70.4,low:[0.70,"0,60–0,80"],medium:[1.00,"ancre"],high:[1.25,"1,15–1,50"],xhigh:[1.70,"1,50–2,10"],max:[2.30,"1,70–3,20"]},
-  "sonnet-5":  {intel:68.6,tag:true,low:[0.74,"0,50–1,15"],medium:[1.05,"0,70–1,60"],high:[1.31,"0,85–2,00"],xhigh:[1.79,"1,15–2,70"],max:[2.42,"1,50–3,80"]},
-  "opus-4.7":  {intel:66.1,low:[0.67,"0,45–0,95"],medium:[0.95,"0,60–1,40"],high:[1.19,"0,75–1,70"],xhigh:[1.62,"1,10–2,30"],max:[2.19,"1,40–3,10"]},
-  "sonnet-4.6":{intel:60.1,low:[0.42,"0,35–0,52"],medium:[0.60,"0,50–0,75"],high:[0.75,"0,60–0,95"],xhigh:null,max:[1.38,"1,00–1,90"]},
-  "haiku-4.5": {intel:40.9,low:[0.13,"0,08–0,18"],medium:[0.19,"0,11–0,22"],high:[0.24,"0,15–0,30"],xhigh:null,max:null},
-};
+// ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
+const fr=x=>x.toFixed(2).replace('.',',');
+const ciStr=(m,e,v)=> (m==="opus-4.8"&&e==="medium") ? "ancre" : (v[1]===v[2] ? "source unique" : `${fr(v[1])}–${fr(v[2])}`);
+const M={};
+for(const m in META){ const cg=COSTGRID[m]||{}; M[m]={intel:META[m].intel, tag:META[m].tag};
+  ["low","medium","high","xhigh","max","solo"].forEach(e=>{ M[m][e]= cg[e]? [cg[e][0], ciStr(m,e,cg[e])] : null; }); }
 function heat(v){
   const t=Math.max(0,Math.min(1,(Math.log10(v)-Math.log10(0.12))/(Math.log10(4.5)-Math.log10(0.12))));
   const dark=document.documentElement.getAttribute('data-theme')==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&document.documentElement.getAttribute('data-theme')!=='light');
@@ -97,9 +87,13 @@ function drawMatrix(){
   const rows=Object.keys(M).sort((a,b)=>M[b].intel-M[a].intel);
   for(const m of rows){ const md=MODELS[m], tr=document.createElement("tr");
     let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill">taille-tâche</span>':''}</td>`;
-    ["low","medium","high","xhigh","max"].forEach(e=>{ const c=M[m][e];
-      row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>${c[1]}</small></div></td>`
-             : `<td class="na">—</td>`; });
+    if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = effort unique → one merged cell across the 5 effort columns
+      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>effort unique · IC ${c[1]}</small></div></td>`;
+    } else {
+      ["low","medium","high","xhigh","max"].forEach(e=>{ const c=M[m][e];
+        row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>${c[1]}</small></div></td>`
+               : `<td class="na">—</td>`; });
+    }
     row+=`<td class="mdl num">${M[m].intel.toFixed(1).replace('.',',')}</td>`;
     tr.innerHTML=row; tb.appendChild(tr);
   }

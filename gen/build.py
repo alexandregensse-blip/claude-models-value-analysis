@@ -94,6 +94,80 @@ def consolidated(comps):
         if rows: out[pair] = rows
     return out
 
+def cost_grid():
+    """Data-driven §1/§2 relative-cost grid, COUPLE-ATOMIC (HANDOFF #1). For each current (model,effort) node,
+    solve a relative cost anchored to opus-4.8@medium=1.0 from MEASURED same-task ratios only (explicit efforts;
+    nothink/priceblend/default excluded). Edges = cross-model@same-effort OR same-model@diff-effort cost ratios,
+    median per edge; node values by log-space Jacobi relaxation (harmonic/least-squares over all paths — no
+    model×effort separability). CI = min/max of per-source single-hop estimates around each node. Haiku 4.5 has
+    only one explicit-effort thinking point (OfficeQA@high) → emitted as a single 'solo' node."""
+    from statistics import median
+    import math, collections
+    CUR = set(MX)                       # 6 current models
+    EFFOK = {"low","medium","high","xhigh","max"}
+    rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
+            if r["group"] and not r["group"].startswith("#")]
+    groups = {}
+    for r in rows: groups.setdefault(r["group"], []).append(r)
+    def items_of(rs):
+        out = []
+        for r in rs:
+            if r["model"] not in CUR: continue
+            e, c = eff(r["effort"]), num(r["cost_usd"])
+            if e in EFFOK and c and c > 0: out.append((r["model"], e, c, r["source"]))
+        return out
+    edgevals = collections.defaultdict(list)
+    for g, rs in groups.items():
+        it = items_of(rs)
+        for i in range(len(it)):
+            for j in range(i+1, len(it)):
+                (m1,e1,c1,_),(m2,e2,c2,_) = it[i], it[j]
+                if not ((m1!=m2 and e1==e2) or (m1==m2 and e1!=e2)): continue   # couple-atomic only
+                n1,n2 = f"{m1}@{e1}", f"{m2}@{e2}"
+                key = tuple(sorted([n1,n2])); cost = {n1:c1,n2:c2}
+                edgevals[key].append(math.log(cost[key[0]]/cost[key[1]]))
+    edges = {k: median(v) for k,v in edgevals.items()}
+    nodes = set(n for k in edges for n in k)
+    ANCHOR = "opus-4.8@medium"
+    adj = collections.defaultdict(list)
+    for (a,b),lr in edges.items(): adj[a].append((b,lr)); adj[b].append((a,-lr))
+    logval = {n:0.0 for n in nodes}
+    for _ in range(4000):
+        nv = {}
+        for n in nodes:
+            nv[n] = 0.0 if n==ANCHOR else (sum(logval[k]+lr for k,lr in adj[n])/len(adj[n]) if adj[n] else logval[n])
+        logval = nv
+    rel = {n: math.exp(logval[n]) for n in nodes}
+    # CI: per-source single-hop estimates around solved neighbours
+    est = collections.defaultdict(list)
+    for n in nodes: est[n].append(rel[n])
+    for g, rs in groups.items():
+        it = items_of(rs)
+        for i in range(len(it)):
+            for j in range(i+1, len(it)):
+                (m1,e1,c1,_),(m2,e2,c2,_) = it[i], it[j]
+                if not ((m1!=m2 and e1==e2) or (m1==m2 and e1!=e2)): continue
+                n1,n2 = f"{m1}@{e1}", f"{m2}@{e2}"
+                if n1 in rel and n2 in rel:
+                    est[n1].append(rel[n2]*(c1/c2)); est[n2].append(rel[n1]*(c2/c1))
+    def quantile(xs, p):
+        xs = sorted(xs); k = (len(xs)-1)*p; f = int(k)
+        return xs[f] if f+1 >= len(xs) else xs[f] + (k-f)*(xs[f+1]-xs[f])
+    def cell(n):
+        if n not in rel: return None
+        xs = est[n]
+        lo, hi = (min(xs), max(xs)) if len(xs) < 5 else (quantile(xs,0.1), quantile(xs,0.9))
+        return [round(rel[n],2), round(min(lo, rel[n]),2), round(max(hi, rel[n]),2)]   # P10–P90 (min/max if <5 pts), always bracketing the central estimate
+    ORD = {"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],
+           "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
+           "sonnet-4.6":["low","medium","high","max"]}
+    out = {}
+    for m, es in ORD.items():
+        out[m] = {e: cell(f"{m}@{e}") for e in es if cell(f"{m}@{e}")}
+    hk = cell("haiku-4.5@high")          # Haiku's sole explicit-effort thinking point
+    if hk: out["haiku-4.5"] = {"solo": hk}
+    return out
+
 def regime(kept):
     """No-think (and 'default') cost regime, COUPLE-ATOMIC. Cross-model cost ratios inside groups where BOTH
     models ran at an effort label in `kept` (e.g. {'nothink'}). Returns per-pair median ratio + source list,
@@ -162,6 +236,7 @@ def regime_rows_html(nt, df):
 def main():
     comps = comparisons()
     RD = build_RD(comps)
+    CG = cost_grid()
     NT = regime({"nothink"})
     DF = regime({"default"})
     CONS = consolidated(comps)
@@ -178,6 +253,7 @@ def main():
     app  = open(os.path.join(HERE,"app.js")).read()
     app  = app.replace("__RATIO_DATA__", json.dumps(RD, separators=(",",":")))
     app  = app.replace("__CONS_DATA__", json.dumps(CONS, separators=(",",":")))
+    app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     html = f"<style>\n{css}\n</style>\n{body}\n<script>\n{app}\n</script>\n"
     open(OUT,"w").write(html)

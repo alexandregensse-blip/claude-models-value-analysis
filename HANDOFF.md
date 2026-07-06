@@ -3,13 +3,9 @@
 Status: data curated + verified, generator working, interactive report built (`cost-matrix.html`).
 Every `@default` in the effort-assignment view has been resolved or set aside. Next passes, in priority order.
 
-## 1. Fix the normalized matrix separability (highest priority)
+## 1. Fix the normalized matrix separability — DONE (2026-07-06)
 
-`normalized.csv` still encodes the cross-model factor as a **constant across efforts** — e.g. Sonnet 4.6 = `0.60 × Opus 4.8` at *every* effort, so its per-effort ratios don't vary. This is the exact separability we decided to abandon.
-
-- Rebuild the §2 matrix from the **per-effort measured medians** (the same data the report's "consolidated squares" already compute in `gen/build.py::consolidated`), not from a `crossmodel_factor × effort_factor` product.
-- Each cell must be treated **couple-atomically**: `(model, effort)` is one indivisible node, placed by measured same-task ratio paths — never by multiplying a global model factor by a global effort factor.
-- After the fix, verify: the Opus 4.8 / Sonnet 4.6 ratio should differ across low/medium/high/max (measured shows ≈0.9 low–high, ≈2.5 max on computer-use, ≈1.7 agentic), not sit at a flat 1.667.
+§1 (`B`) and §2 (`M`) were **hardcoded** and drifted from the data after the CursorBench import. Now **data-driven**: `gen/build.py::cost_grid()` computes each `(model,effort)` relative cost anchored to `opus-4.8@medium=1.0` from measured same-task ratios only (explicit efforts; nothink/priceblend/default excluded), by log-space Jacobi relaxation over the couple-atomic edge graph (cross-model@same-effort + same-model@cross-effort). No `crossmodel_factor × effort_factor` product anywhere — verified the Opus 4.8 / Sonnet 4.6 ratio now varies by effort (≈1.3 low → ≈2.4 max). Injected as `__COSTGRID__`; `app.js` builds `B`/`M` from it (only `intel`/`ey`/`tag` capability priors stay hand-set). CI per cell = **P10–P90** of the per-source single-hop estimates (min/max if <5 pts). Haiku 4.5 = single merged `solo` cell (OfficeQA high point). `normalized.csv` is now a stale legacy artifact — regenerate or delete it (the live matrix no longer reads it).
 
 ## 2. Audit couple-atomic treatment end-to-end
 

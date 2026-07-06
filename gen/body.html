@@ -25,14 +25,14 @@
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
     <h2>2 · La matrice normalisée</h2>
-    <p class="sub">Coût relatif par modèle × effort (base Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1,00), <b>trié par intelligence décroissante</b>. Intensité = coût ; le second nombre est l'intervalle de confiance. Pour repasser en dollars, multiplier par un coût-tâche de référence (p.ex. agentique&nbsp;≈&nbsp;$1,99/tâche pour Opus&nbsp;4.8&nbsp;@max sur l'AA Index).</p>
+    <p class="sub">Coût relatif par modèle × effort (base Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1,00), <b>trié par intelligence décroissante</b>. Ces valeurs sont <b>calculées</b> (pas saisies à la main) à partir des ratios <b>mesurés</b> à tâche identique&nbsp;: chaque cellule est résolue couple-atomiquement le long du graphe de liaison (§3). Intensité = coût ; le second nombre est l'<b>IC = P10–P90</b> des estimations mono-source qui alimentent la cellule (large = sources en désaccord). Pour repasser en dollars, multiplier par un coût-tâche de référence (p.ex. agentique&nbsp;≈&nbsp;$1,99/tâche pour Opus&nbsp;4.8&nbsp;@max sur l'AA Index).</p>
     <div class="card pad chartbox">
       <table id="matrix-tbl">
         <thead><tr><th style="text-align:left">Modèle</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Intel.<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <p class="cap">« Intel.&nbsp;@max » = indice Vals (composite finance+coding), mesuré à effort <b>max</b> — d'où la question&nbsp;: la qualité varie peu selon l'effort sur le code, donc cet indice reste une bonne approximation à high/xhigh aussi. n/a&nbsp;: effort non exposé (Haiku&nbsp;4.5&nbsp;: ni xhigh ni max ; Sonnet&nbsp;4.6&nbsp;: pas de xhigh).</p>
+    <p class="cap">« Intel.&nbsp;@max » = indice Vals (composite finance+coding), mesuré à effort <b>max</b> — la qualité varie peu selon l'effort sur le code, donc cet indice reste une bonne approximation à high/xhigh aussi. <b>Haiku&nbsp;4.5</b> = une seule cellule fusionnée (<b>effort unique</b>&nbsp;: pas de paramètre effort discret, cf. §3/§6). n/a&nbsp;: effort non exposé (Sonnet&nbsp;4.6&nbsp;: pas de xhigh).</p>
   </section>
 
   <!-- ============ LINKING GRAPH ============ -->
@@ -104,15 +104,15 @@
       <div class="card pad">
         <h3>Ce qui est solide</h3>
         <ul class="tight">
-          <li><span class="conf c-high">HAUTE</span> Ancrages cross-modèle (÷Opus 4.8)&nbsp;: <b>Fable ~2,0×</b>, <b>Sonnet 4.6 ~0,6×</b>, <b>Haiku 4.5 ~0,19×</b> — 3+ méthodes indépendantes concordantes.</li>
-          <li><span class="conf c-med">MOYENNE</span> Pente d'effort sur le code&nbsp;: <b>low→max ≈ ×1,9–2,7</b> en coût.</li>
+          <li><span class="conf c-high">HAUTE</span> Ancrages cross-modèle @medium (÷Opus 4.8)&nbsp;: <b>Fable ~2,1×</b>, <b>Sonnet 4.6 ~0,7×</b>, <b>Haiku 4.5 ~0,19×</b> (régime no-think, §6) — plusieurs méthodes indépendantes concordantes.</li>
+          <li><span class="conf c-med">MOYENNE</span> Pente d'effort en coût low→max&nbsp;: <b>×1,9</b> (Sonnet 4.6) à <b>×4–5</b> (Opus 4.7 / Sonnet 5) — plus raide sur le harnais agentique (CursorBench) que sur computer-use (OSWorld).</li>
           <li><span class="conf c-med">MOYENNE</span> Plateau qualité + U inversé sur code/agentique (multi-papiers).</li>
         </ul>
       </div>
       <div class="card pad">
         <h3>Ce qui reste large</h3>
         <ul class="tight">
-          <li><span class="conf c-low">LARGE</span> <b>Sonnet 5</b>&nbsp;: coût 0,86× (petites tâches) → 1,6× (long agentique).</li>
+          <li><span class="conf c-low">LARGE</span> <b>Sonnet 5</b>&nbsp;: médiane mesurée <b>~0,7× Opus 4.8</b> (moins cher), mais queue verbeuse jusqu'à <b>~1,6×</b> sur long agentique (AA) — d'où l'IC large.</li>
           <li><span class="conf c-low">LARGE</span> Opus 4.7 vs 4.8&nbsp;: sources contradictoires (effort/harness) → 0,6–1,4×.</li>
           <li><span class="conf c-low">LARGE</span> Queues xhigh/max et modèles sans sweep d'effort mesuré.</li>
         </ul>
