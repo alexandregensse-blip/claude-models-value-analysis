@@ -27,7 +27,7 @@ des valeurs brutes entre benchmarks — uniquement des **ratios au sein d'un mê
 | Claude 2 | 2023-07 | ? | https://www-cdn.anthropic.com/bd2a28d2535bfb0494cc8e2a3bf135d2e7523226/Model-Card-Claude-2.pdf | ☆ | — |
 
 Modèles courants de la grille : Fable 5, Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6, Haiku 4.5.
-→ cards prioritaires restantes : **Fable5/Mythos5**, **Opus 4.8**, **Opus 4.7**, **Sonnet 4.6**, **Haiku 4.5**.
+→ **TOUTES traitées** (voir sections détaillées + synthèse en bas). Rien de prioritaire ne reste.
 
 ## Méthode de traitement d'un PDF (les données riches sont dans les FIGURES = images)
 
@@ -83,7 +83,8 @@ low59.8/med62.6/high63.4/xhigh64.2/max64.7) = config recherche de Fable, **hors 
   Finance, MCP-Atlas) lues mais NON ajoutées (score-only @max, gain marginal vs les 3 sweeps).
 - **Résultat** : `opus-4.7@medium` orange→**jaune** (anthropic-syscard + cursorbench) ; ladders coût+qualité
   Opus4.7 monotones sur 3 benchmarks. Corroboration globale **vert 24 · jaune 1 · orange 0 · rouge 0** (25 nœuds).
-  cost-pts 119→142. Le seul jaune (`opus-4.7@medium`) passera vert avec la card Opus 4.7 propre.
+  cost-pts 119→142. (MàJ : la card Opus 4.7 étant aussi `anthropic-syscard`, elle NE rend PAS medium vert —
+  il faudrait une source NON-Anthropic ; medium reste l'unique jaune.)
 
 ## ✅ Fable 5 & Mythos 5 System Card — INTÉGRÉ (2026-07-06, source=`anthropic-syscard`, ref `anthropic-fable5-syscard-pNNN`)
 
