@@ -18,7 +18,7 @@ const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.fl
 // computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
 // index) + halo height (ey) + the tag flag stay hand-set here — they are capability priors, not cost.
 const COSTGRID=__COSTGRID__;
-const QUALGRID=__QUALGRID__;   // data-driven quality axis: {model:{effort:[central, lo, hi]}} — robust median + MAD band
+const QUALGRID=__QUALGRID__;   // data-driven quality axis: {model:{effort:[central, lo, hi]}} — median + robust IQR (P25–P75) band
 const META={
   "fable-5":{intel:75.1,ey:2.2}, "opus-4.8":{intel:70.4,ey:1.4}, "sonnet-5":{intel:68.6,ey:2.6,tag:true},
   "opus-4.7":{intel:66.1,ey:2.2}, "sonnet-4.6":{intel:60.1,ey:1.6}, "haiku-4.5":{intel:40.9,ey:1.9},
@@ -36,7 +36,7 @@ function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=760,H=545,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // taller than wide → more vertical room for the compressed quality axis
-  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + MAD band). Haiku excluded here. Bounds DYNAMIC.
+  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + IQR P25–P75 band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
@@ -57,7 +57,7 @@ function drawB(){
   if(1>Math.pow(10,xlo)&&1<Math.pow(10,xhi)) s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
-  // PASS 1 — all MAD ellipses BEHIND the data (robust band = ±MAD cost × ±MAD quality). Faint by default (opacity DEF);
+  // PASS 1 — all IQR ellipses BEHIND the data (robust band = P25–P75 cost × P25–P75 quality, asymmetric). Faint by default (opacity DEF);
   // on hover, every ellipse that CONTAINS the cursor lights up (opacity HOV). Kept behind so highlights sit under the curves.
   const ells=[], DEF=0.15, HOV=0.78;
   for(const m in byM){ const col=cvar(MODELS[m].c);
@@ -79,7 +79,7 @@ function drawB(){
   s.onmouseleave=()=>ells.forEach(o=>o.el.setAttribute("opacity",DEF));
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = bande robuste MAD (coût × qualité) · <b>survol</b> pour révéler</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = IQR P25–P75 (coût × qualité), asymétrique · <b>survol</b> pour révéler</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
