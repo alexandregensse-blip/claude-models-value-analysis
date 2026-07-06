@@ -37,7 +37,7 @@ function drawB(){
   const W=760,H=470,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;
   // ---- dynamic bounds from the data: cost X (incl. CI), intelligence Y (incl. halo ±ey) ----
   const allpts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
-  for(const m in B){ const cfg=B[m], off=offs(m);
+  for(const m in B){ if(m==="haiku-4.5") continue; const cfg=B[m], off=offs(m);
     cfg.order.forEach(e=>{ const d=cfg.e[e]; if(!d)return; const q=cfg.intel+(off[e]||0);
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q-cfg.ey); ymx=Math.max(ymx,q+cfg.ey);
       allpts.push({m,e,c:d[0],lo:d[1],hi:d[2],q}); }); }
@@ -60,13 +60,12 @@ function drawB(){
 
   // draw ribbons first (behind), then curves+points
   const draw=(phase)=>{
-    for(const m in B){ const cfg=B[m], col=cvar(MODELS[m].c), off=offs(m);
+    for(const m in B){ if(m==="haiku-4.5") continue; const cfg=B[m], col=cvar(MODELS[m].c), off=offs(m);
       const pts=cfg.order.map(e=>{const d=cfg.e[e];return {e,c:d[0],lo:d[1],hi:d[2],y:cfg.intel+off[e]};});
       const ey=cfg.ey;
-      if(phase===0){ // 2D CI ribbon: top edge along ci_lo/(y+ey), bottom edge along ci_hi/(y-ey)
-        let d="M"+pts.map(p=>X(p.lo)+" "+Y(p.y+ey)).join(" L ");
-        d+=" L "+pts.slice().reverse().map(p=>X(p.hi)+" "+Y(p.y-ey)).join(" L ")+" Z";
-        s.appendChild(el("path",{d,fill:col,"fill-opacity":.13,stroke:col,"stroke-opacity":.22,"stroke-width":1}));
+      if(phase===0){ // per-point error box: X = cost ±1σ (measured spread) · Y = quality uncertainty ±ey
+        pts.forEach(p=>{ const x0=X(p.lo),x1=X(p.hi),yt=Y(p.y+ey),yb=Y(p.y-ey);
+          s.appendChild(el("rect",{x:Math.min(x0,x1),y:yt,width:Math.abs(x1-x0),height:yb-yt,fill:col,"fill-opacity":0.10,stroke:col,"stroke-opacity":0.38,"stroke-width":1,rx:2})); });
       } else { // central curve + effort points
         let d=pts.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.y)).join(" ");
         s.appendChild(el("path",{d,fill:"none",stroke:col,"stroke-width":2.4,"stroke-linejoin":"round"}));
@@ -80,8 +79,8 @@ function drawB(){
   };
   draw(0); draw(1);
   const lg=document.getElementById("legendB"); lg.innerHTML=
-    Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.22;background:var(--ink)"></span>halo = IC 2D (coût × qualité)</span>`;
+    Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
+    +`<span class="lg"><span class="sw" style="opacity:.30;background:transparent;border:1px solid var(--ink)"></span>rectangle = ±1σ coût × incertitude qualité</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----

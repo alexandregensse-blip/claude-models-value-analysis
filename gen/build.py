@@ -209,29 +209,13 @@ def cost_grid():
                 n1,n2 = f"{m1}@{e1}", f"{m2}@{e2}"
                 if n1 in rel and n2 in rel:
                     est[n1].append(rel[n2]*(c1/c2)); est[n2].append(rel[n1]*(c2/c1))
-    # Haiku 4.5 = single-effort node: it has ONE same-config measurement (OfficeQA, reasoning-high) so its raw
-    # interval is degenerate. Propagate its anchor's CI (Sonnet 4.6 @high, 8 sources) through the measured ratio
-    # so the merged node inherits a real interval instead of a single point.
-    hk = "haiku-4.5@high"
-    if hk in rel:
-        hk_est = [rel[hk]]
-        for g, rs in groups.items():
-            it = items_of(rs)
-            hrow = [x for x in it if x[0]=="haiku-4.5" and x[1]=="high"]
-            if not hrow: continue
-            cH = hrow[0][2]
-            for (m2,e2,c2,_) in it:
-                if m2=="haiku-4.5" or e2!="high" or f"{m2}@{e2}" not in est: continue
-                for ev in est[f"{m2}@{e2}"]: hk_est.append(ev*(cH/c2))
-        if len(hk_est) > 1: est[hk] = hk_est
-    def quantile(xs, p):
-        xs = sorted(xs); k = (len(xs)-1)*p; f = int(k)
-        return xs[f] if f+1 >= len(xs) else xs[f] + (k-f)*(xs[f+1]-xs[f])
     def cell(n):
         if n not in rel: return None
-        xs = est[n]
-        lo, hi = (min(xs), max(xs)) if len(xs) < 5 else (quantile(xs,0.1), quantile(xs,0.9))
-        return [round(rel[n],2), round(min(lo, rel[n]),2), round(max(hi, rel[n]),2)]   # P10–P90 (min/max if <5 pts), always bracketing the central estimate
+        xs = [x for x in est[n] if x > 0]; r = rel[n]
+        if len(xs) < 2: return [round(r,2), round(r,2), round(r,2)]   # single source → degenerate box
+        lm = sum(math.log(x) for x in xs)/len(xs)
+        sd = (sum((math.log(x)-lm)**2 for x in xs)/len(xs))**0.5     # std dev of the measured estimates (log-space)
+        return [round(r,2), round(r*math.exp(-sd),2), round(r*math.exp(sd),2)]   # central ±1σ box (geometric)
     ORD = {"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],
            "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
            "sonnet-4.6":["low","medium","high","max"]}
