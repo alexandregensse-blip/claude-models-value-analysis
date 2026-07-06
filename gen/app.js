@@ -35,14 +35,14 @@ function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=760,H=470,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;
+  const W=760,H=545,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // taller than wide → more vertical room for the compressed quality axis
   // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const xlo=Math.log10(xmn)-0.05, xhi=Math.log10(xmx)+0.05, yb=ymn-0.15, yt=ymx+0.15, yp=8;
+  const xlo=Math.log10(xmn)-0.05, xhi=Math.log10(xmx)+0.05, yb=ymn-0.04, yt=ymx+0.04, yp=8;   // tight vertical padding → spread the crowded quality band
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   const Y=v=>mT+yp+(1-(v-yb)/(yt-yb))*(ih-2*yp);
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
