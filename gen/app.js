@@ -126,6 +126,9 @@ const GROUPS = [
  {s:"ianlpaterson",g:"ianlpaterson",t:"xgen",h:"OpenRouter · reasoning OFF (« no special reasoning ») ✓",n:["sonnet-4.6@default","haiku-4.5@default","opus-4.6@default"]},
  {s:"arxiv 2603.08655",g:"OfficeQA",t:"xgen",h:"Claude Agent SDK · reasoning HIGH ✓",n:["sonnet-4.6@high","haiku-4.5@high","opus-4.6@high"]},
  {s:"anthropic-chart",g:"OSWorld",t:"sweep",h:"Anthropic/AA · balayage low→max ✓",n:["opus-4.8@medium","opus-4.8@low","opus-4.8@high","opus-4.8@xhigh","opus-4.8@max","sonnet-4.6@low","sonnet-4.6@medium","sonnet-4.6@high","sonnet-4.6@max","sonnet-5@low","sonnet-5@medium","sonnet-5@high","sonnet-5@xhigh","sonnet-5@max"]},
+ {s:"simonwillison",g:"Willison SVG",t:"sweep",h:"llm CLI · balayage low→max, tâche triviale (SVG) ✓",n:["fable-5@low","fable-5@medium","fable-5@high","fable-5@xhigh","fable-5@max"]},
+ {s:"futuresearch",g:"DeepResearch",t:"sweep",h:"Deep Research Bench · low/high ✓",n:["sonnet-4.6@low","sonnet-4.6@high"]},
+ {s:"cursorbench",g:"CursorBench",t:"sweep",h:"Cursor 3.1 · balayage low→max, effort apparié ✓ (éditeur=vendeur)",n:["fable-5@low","fable-5@medium","fable-5@high","fable-5@xhigh","fable-5@max","opus-4.8@low","opus-4.8@medium","opus-4.8@high","opus-4.8@xhigh","opus-4.8@max","opus-4.7@low","opus-4.7@medium","opus-4.7@high","opus-4.7@xhigh","opus-4.7@max","sonnet-5@low","sonnet-5@medium","sonnet-5@high","sonnet-5@xhigh","sonnet-5@max","sonnet-4.6@low","sonnet-4.6@medium","sonnet-4.6@high","sonnet-4.6@max"]},
  {s:"github ponytail",g:"ponytail",t:"xgen",h:"Claude Code headless · thinking NS ✓",n:["sonnet-4.6@default","haiku-4.5@default","opus-4.6@default"]},
  {s:"arxiv 2603.08640",g:"PostTrainB.",t:"sweep",h:"papier · medium/high ✓",n:["opus-4.5@medium","opus-4.5@high"]},
  {s:"qiita",g:"qiita",t:"sweep",h:"API brut · low/max ✓",n:["opus-4.7@low","opus-4.7@max"]},
@@ -149,7 +152,7 @@ const GMODEL = {
 };
 const GCOL={sweep:"#2E9C8E",xmodel:"#7C6BB2",xgen:"#B98A3E"};
 const GTLAB={sweep:"balayage d'effort (même modèle)",xmodel:"inter-modèles (même génération)",xgen:"pont inter-génération"};
-const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["low","medium","high"]};
+const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = modèle à EFFORT UNIQUE (pas de paramètre effort discret) → un seul nœud fusionnant toutes ses sources, placé hors des paliers ; coût aussi en §6 (régime no-think, ancre)
 const MX={"fable-5":0,"opus-4.8":1,"opus-4.7":2,"sonnet-5":3,"sonnet-4.6":4,"haiku-4.5":5,"opus-4.6":6.4,"sonnet-3.7":6.9,"opus-4.5":7.3,"sonnet-4.5":7.8,"opus-4.1":8.3};
 const EORD=["max","xhigh","high","medium","low"];   // corroboration graph: 5 explicit efforts, no default row
 const EORD2=["max","xhigh","high","medium","low","default"];   // line-cloud assignment view: adds the 'défaut' row
@@ -160,7 +163,7 @@ function buildEdges(){
     if(!o){o={a:k.split("|")[0],b:k.split("|")[1],w:0,ty:{}};pm.set(k,o);}
     const w=g.w||1; o.w+=w; o.ty[t]=(o.ty[t]||0)+w; };
   GROUPS.forEach(g=>{
-    const cn=g.n.filter(x=>{const[mm,ee]=x.split("@");return GMODEL[mm]&&GMODEL[mm].cur&&EORD.includes(ee);});  // current models, explicit-effort nodes only (legacy + @default excluded)
+    const cn=g.n.filter(x=>{const[mm,ee]=x.split("@");return GMODEL[mm]&&GMODEL[mm].cur&&MEFF[mm]&&MEFF[mm].includes(ee);});  // ladder nodes only: effort must be one of the model's own MEFF efforts (excludes @default/@nothink AND Haiku's non-ladder nodes — Haiku's sole effort is 'solo', never in GROUPS)
     if(g.t==="sweep"){
       const byM={}; cn.forEach(x=>{const[m,e]=x.split("@");(byM[m]=byM[m]||[]).push(e);});
       for(const m in byM){ const es=[...new Set(byM[m])].sort((a,b)=>EORD.indexOf(a)-EORD.indexOf(b));
@@ -183,10 +186,11 @@ function drawGraph(){
     s.appendChild(el("line",{x1:mLg-8,y1:y,x2:mLg+iwg,y2:y,stroke:cvar('--line'),"stroke-width":1}));
     const t=el("text",{x:mLg-14,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=e;s.appendChild(t);});
   // column labels — the 6 current models ONLY (legacy models fully removed from display)
-  for(const m in MX){ const g=GMODEL[m]; if(!g.cur) continue;
+  for(const m in MX){ const g=GMODEL[m]; if(!g.cur||!MEFF[m]) continue;   // Haiku (no MEFF) not shown on the effort ladder
     const t=el("text",{x:px(m),y:mTg-16,fill:cvar(g.c),"font-size":11.5,"font-weight":700,"text-anchor":"middle"});
     t.textContent=g.l;s.appendChild(t);}
   const srcCount={}; GROUPS.forEach(g=>{ const seen=new Set(); g.n.forEach(id=>{ if(!seen.has(id)){seen.add(id); srcCount[id]=(srcCount[id]||0)+1;} }); });
+  let hkc=0; GROUPS.forEach(g=>{ if(g.n.some(id=>id.startsWith("haiku-4.5@"))) hkc++; }); srcCount["haiku-4.5@solo"]=hkc;   // Haiku = single merged node: count every source that measured it in any config
   const COLR={g:"#2E9C5A",y:"#D9B23A",o:"#E08A2E",r:"#E0342A"};
   const colFor=c=>c>=3?COLR.g:c===2?COLR.y:c===1?COLR.o:COLR.r;
   const LINK=cvar('--muted');
@@ -199,15 +203,16 @@ function drawGraph(){
     if(o.w>=2){ const lx=0.25*x1+0.5*cx+0.25*x2, ly=0.25*y1+0.5*cy+0.25*y2;
       const lb=el("text",{x:lx,y:ly-1,fill:LINK,"font-size":9,"text-anchor":"middle","font-weight":700,"paint-order":"stroke","stroke":cvar('--panel'),"stroke-width":2.6,"stroke-linejoin":"round"});
       lb.textContent="×"+o.w;s.appendChild(lb);}});
-  const measured=new Set(); GROUPS.forEach(g=>g.n.forEach(x=>measured.add(x)));
+  const measured=new Set(); GROUPS.forEach(g=>g.n.forEach(x=>measured.add(x))); measured.add("haiku-4.5@solo");
   const ring=(x,y,r,c)=>s.appendChild(el("circle",{cx:x,cy:y,r,fill:"none",stroke:c,"stroke-width":2.2}));
   const tally={g:0,y:0,o:0,r:0}, bump=c=>{tally[c>=3?'g':c===2?'y':c===1?'o':'r']++;};
-  for(const m in MEFF){ MEFF[m].forEach(e=>{ const id=m+"@"+e, x=px(m),y=py(e),col=cvar(GMODEL[m].c), c=srcCount[id]||0;
+  for(const m in MEFF){ MEFF[m].forEach(e=>{ const id=m+"@"+e, x=px(m), y=(e==="solo"?mTg+ihg*0.52:py(e)), col=cvar(GMODEL[m].c), c=srcCount[id]||0;
     if(measured.has(id)){ s.appendChild(el("circle",{cx:x,cy:y,r:5.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));}
     else { s.appendChild(el("circle",{cx:x,cy:y,r:4.8,fill:"none",stroke:cvar('--faint'),"stroke-width":1.3,"stroke-dasharray":"2 2"}));}
-    ring(x,y,8.4,colFor(c)); bump(c); });}
+    ring(x,y,8.4,colFor(c)); bump(c);
+    if(e==="solo"){ const t=el("text",{x,y:y+21,fill:cvar('--faint'),"font-size":9,"text-anchor":"middle","font-style":"italic"}); t.textContent="effort unique"; s.appendChild(t); } });}
   s.appendChild(el("circle",{cx:px("opus-4.8"),cy:py("medium"),r:11.5,fill:"none",stroke:cvar('--opus48'),"stroke-width":1.6,"stroke-dasharray":"1 2"}));
-  document.getElementById("graphcap").innerHTML=`<b>6 modèles courants × 5 efforts explicites</b> (ligne « défaut » retirée&nbsp;; les runs @default alimentent les IC de la matrice §2). Anneau = <b>#sources indépendantes</b>&nbsp;: <b><span style="color:${COLR.g}">vert ≥3</span></b> · <b><span style="color:${COLR.y}">jaune 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">rouge 0</span></b> (bilan ${tally.g}/${tally.y}/${tally.o}/${tally.r}). Nœud <b>plein</b> = mesuré, <b>creux</b> = inféré. Épaisseur d'arête ∝ #sources.`;
+  document.getElementById("graphcap").innerHTML=`<b>5 modèles à effort discret × 5 efforts</b> + <b>Haiku&nbsp;4.5 en point unique</b> (pas de paramètre <code>effort</code> → toutes ses sources fusionnées en un nœud, voir §6&nbsp;; ligne « défaut » retirée&nbsp;; les runs @default alimentent les IC de la matrice §2). Anneau = <b>#sources indépendantes</b>&nbsp;: <b><span style="color:${COLR.g}">vert ≥3</span></b> · <b><span style="color:${COLR.y}">jaune 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">rouge 0</span></b> (bilan ${tally.g}/${tally.y}/${tally.o}/${tally.r}). Nœud <b>plein</b> = mesuré, <b>creux</b> = inféré. Épaisseur d'arête ∝ #sources.`;
   document.getElementById("legendG").innerHTML=
     `<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.g};border-radius:50%;background:transparent"></span>≥3 sources</span>`
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.y};border-radius:50%;background:transparent"></span>2</span>`
