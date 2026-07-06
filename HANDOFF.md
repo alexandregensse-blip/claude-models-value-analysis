@@ -1,5 +1,10 @@
 # HANDOFF — what's left to do
 
+> **Anthropic System Cards** (in progress): full list + processing method + integration state in
+> [`docs/anthropic-system-cards.md`](docs/anthropic-system-cards.md). Sonnet 5 card DONE; Opus 4.8,
+> Fable 5/Mythos 5, Opus 4.7, Sonnet 4.6, Haiku 4.5 cards pending (effort×cost sweeps in their figures).
+
+
 Status: data curated + verified, generator working, interactive report built (`cost-matrix.html`).
 Every `@default` in the effort-assignment view has been resolved or set aside. Next passes, in priority order.
 
