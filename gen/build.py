@@ -94,6 +94,35 @@ def consolidated(comps):
         if rows: out[pair] = rows
     return out
 
+def quality_grid():
+    """Data-driven quality axis: per-benchmark z-score of current-model EXPLICIT-effort scores, aggregated per
+    (model,effort). Returns {model:{effort:[z_mean, z_std, n]}}. z_mean = Y position, z_std = measured vertical
+    uncertainty (dispersion across benchmarks). The effort->quality trend is thus MEASURED, not a hand prior."""
+    from statistics import mean, pstdev
+    rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
+            if r["group"] and not r["group"].startswith("#")]
+    groups = {}
+    for r in rows: groups.setdefault(r["group"], []).append(r)
+    node_z = {}
+    for g, rs in groups.items():
+        ent = []
+        for r in rs:
+            if r["model"] not in MX: continue
+            e = eff(r["effort"])
+            if e not in EXP: continue
+            sc = num(r.get("score"))
+            if sc is None: continue
+            ent.append((r["model"], e, sc))
+        if len(ent) < 2: continue
+        vals = [x[2] for x in ent]; m = mean(vals); sd = pstdev(vals)
+        if sd == 0: continue
+        for (mm, ee, s) in ent:
+            node_z.setdefault((mm, ee), []).append((s-m)/sd)
+    out = {}
+    for (mm, ee), zs in node_z.items():
+        out.setdefault(mm, {})[ee] = [round(mean(zs),3), round(pstdev(zs),3), len(zs)]
+    return out
+
 def groups_data():
     """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
     derived from raw-data.csv (no more hand-maintained mirror that could drift, cf. the old skillsbench case).
@@ -295,6 +324,7 @@ def main():
     comps = comparisons()
     RD = build_RD(comps)
     CG = cost_grid()
+    QG = quality_grid()
     GD = groups_data()
     NT = regime({"nothink"})
     DF = regime({"default"})
@@ -313,6 +343,7 @@ def main():
     app  = app.replace("__RATIO_DATA__", json.dumps(RD, separators=(",",":")))
     app  = app.replace("__CONS_DATA__", json.dumps(CONS, separators=(",",":")))
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
+    app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     html = f"<style>\n{css}\n</style>\n{body}\n<script>\n{app}\n</script>\n"
