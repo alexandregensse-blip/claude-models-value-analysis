@@ -13,11 +13,11 @@ des valeurs brutes entre benchmarks — uniquement des **ratios au sein d'un mê
 | **Fable 5 & Mythos 5** | 2026-06-30 | 319 | https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf | ★★★ (sweeps Fable) | ✅ **INTÉGRÉ** |
 | **Opus 4.8** | 2026-05-28 | 246 | https://www-cdn.anthropic.com/0f0c97ad20d8005706296bd92aa1c27c6b2f4f61/Claude%20Opus%204.8%20System%20Card.pdf (alt hash: 0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf) | ★★★ (sweeps Opus 4.8/4.7 → comble opus-4.7@medium) | ✅ **INTÉGRÉ** |
 | **Opus 4.7** | 2026-04-16 | 232 | https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf | ★★ | ✅ **INTÉGRÉ** |
-| **Sonnet 4.6** | 2026-02-17 | ? | https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf | ★★ | ⏳ à faire |
+| **Sonnet 4.6** | 2026-02-17 | 134 | https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf | ★★ | ✅ **TRAITÉ** (rien à intégrer) |
 | **Opus 4.6** | 2026-02 | ? | https://www-cdn.anthropic.com/14e4fb01875d2a69f646fa5e574dea2b1c0ff7b5.pdf (alt: 0dd865075ad3132672ee0ab40b05a53f14cf5288.pdf, 6a5fa276ac68b9aeb0c8b6af5fa36326e0e166dd.pdf) | ★ (legacy) | ⏳ |
 | **Mythos Preview** | 2026-04 | ? | page: anthropic.com/claude-mythos-preview-system-card | ☆ (config recherche) | ⏳ |
 | Opus 4.5 | 2025-11 | ? | https://www-cdn.anthropic.com/bf10f64990cfda0ba858290be7b8cc6317685f47.pdf | ☆ legacy | — |
-| Haiku 4.5 | 2025-10 | ? | https://www-cdn.anthropic.com/7aad69bf12627d42234e01ee7c36305dc2f6a970.pdf | ★ (Haiku, mais pas d'effort discret) | ⏳ |
+| Haiku 4.5 | 2025-10 | 39 | https://www-cdn.anthropic.com/7aad69bf12627d42234e01ee7c36305dc2f6a970.pdf | ★ (Haiku, pas d'effort discret) | ✅ **TRAITÉ** (rien à intégrer) |
 | Sonnet 4.5 | 2025-09 | ? | https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd.pdf | ☆ legacy | — |
 | Opus 4.1 | 2025-08 | ? | https://www-cdn.anthropic.com/9fa30625273bafdf5af82c93719d7ca606485a16.pdf | ☆ legacy | — |
 | Sonnet 4 & Opus 4 | 2025-05 | ? | https://www-cdn.anthropic.com/07b2a3f9902ee19fe39a36ca638e5ae987bc64dd.pdf (alt 6be99a52..., 4263b940...) | ☆ legacy | — |
@@ -118,9 +118,21 @@ DeepSearchQA). Seul Opus 4.7 (+ Sonnet 4.6 sur une figure) est in-grid. **N.B. c
 - **SAUTÉ** : HLE p197 (fig 8.8.1.B) = Opus 4.7 SEUL, valeurs 43.0/48.4/53.2/55.4/54.7 = doublon EXACT de `schleeff`.
 - **Résultat** : ladders Opus 4.7 monotones, σ resserré ; corroboration inchangée **vert 24 · jaune 1** ; cost-pts 166→170.
 
-## À FAIRE (ordre de priorité)
-1. **Sonnet 4.6 card**, **Haiku 4.5 card** (les deux modèles déjà verts partout → complétude + σ + traçabilité).
-   `opus-4.7@medium` restera l'unique jaune tant qu'aucune source NON-Anthropic ne mesure opus-4.7@medium avec coût.
+## ✅ Sonnet 4.6 & Haiku 4.5 System Cards — TRAITÉS, RIEN À INTÉGRER (2026-07-06)
+
+Ces deux cards **précèdent** l'ère des figures test-time-compute (effort×coût) et ne comparent qu'à des
+modèles **legacy** hors grille → aucune arête couple-atomique in-grid possible. Vérifié :
+- **Sonnet 4.6** (2026-02, 134 p) : Table 2.1.A compare Sonnet 4.6 vs Opus 4.6/4.5, Sonnet 4.5, Gemini 3 Pro,
+  GPT-5.2 — **aucun partenaire in-grid**, pas de colonne coût, aucune figure de scaling par effort. `sonnet-4.6`
+  déjà vert sur tous ses efforts via osworld/schletools/cursorbench/scosweff/scodeepqa/futuresearch.
+- **Haiku 4.5** (2025-10, 39 p) : card sécurité ; compare vs Haiku 3.5, Sonnet 4.5, Opus 4.1 (legacy) ; Haiku n'a
+  pas de molette d'effort (nœud `solo`) ; pas de coût. `haiku-4.5@solo` déjà vert.
+
+## ✅ TOUTES les System Cards des modèles courants sont traitées
+Sonnet 5 · Opus 4.8 · Fable 5/Mythos 5 · Opus 4.7 (intégrées) + Sonnet 4.6 · Haiku 4.5 (rien à intégrer).
+État final : corroboration **vert 24 · jaune 1 · orange 0 · rouge 0** ; cost-pts 170. L'unique jaune
+(`opus-4.7@medium`) ne passera vert que via une source **NON-Anthropic** mesurant opus-4.7@medium avec coût
+(inexistante à ce jour — cf. HANDOFF). Cards legacy (Opus 4.6/4.5/4.1, Sonnet 4.5/4/3.7, Claude 3/2) = hors sujet.
 Pour chacun : mêmes groupes (un par benchmark), source `anthropic-<model>-syscard`, effort explicite,
 coûts digitalisés `digitized-logx`, jamais de valeur brute inter-benchmark (ratios only).
 
