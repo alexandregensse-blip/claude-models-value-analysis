@@ -38,7 +38,7 @@ function drawB(){
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q-cfg.ey); ymx=Math.max(ymx,q+cfg.ey);
       allpts.push({m,e,c:d[0],lo:d[1],hi:d[2],q}); }); }
   const xlo=Math.log10(xmn)-0.05, xhi=Math.log10(xmx)+0.05;
-  const yBot=Math.floor(ymn)-0.5, yTop=Math.ceil(ymx)+0.5, C=yTop+2;   // inverted-log Y: dilate the compressed high-intelligence top
+  const yBot=Math.floor(ymn)-0.5, yTop=Math.ceil(ymx)+0.5, C=yTop+0.7;   // small top margin => strong dilation of clustered high-intel models   // inverted-log Y: dilate the compressed high-intelligence top
   const Ln=v=>Math.log(C-v), lnB=Ln(yBot), lnT=Ln(yTop);
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   const Y=v=>mT+(1-(lnB-Ln(Math.max(yBot,Math.min(v,yTop))))/(lnB-lnT))*ih;
@@ -77,20 +77,53 @@ function drawB(){
     }
   };
   draw(0); draw(1);
-  // ---- Pareto frontier: couples non dominés (aucun autre point n'a coût ≤ ET intelligence ≥) ----
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);   // ε guards float ties (equal-quality → cheaper wins)
-  const par=allpts.filter(p=>!allpts.some(o=>dom(o,p))).sort((x,y)=>x.c-y.c);
-  const pd=par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" ");
-  s.appendChild(el("path",{d:pd,fill:"none",stroke:cvar('--ink'),"stroke-width":2,"stroke-dasharray":"6 3","stroke-opacity":.55}));
-  par.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:8.5,fill:"none",stroke:cvar('--ink'),"stroke-width":1.8,"stroke-opacity":.8})));
-  const pn=document.getElementById("pareto-note");
-  if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · ${Math.round(p.q)}</span>`).join(" &nbsp;→&nbsp; ");
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.22;background:var(--ink)"></span>halo = IC 2D (coût × qualité)</span>`
-    +`<span class="lg"><span class="sw" style="border-top:2px dashed var(--ink);background:transparent;height:0"></span>frontière de Pareto</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.22;background:var(--ink)"></span>halo = IC 2D (coût × qualité)</span>`;
 }
 
+// ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
+// Y uses the same inverted-log dilation as the landscape but STRONGER (small top margin) so the clustered
+// high-intelligence models separate visibly. Bounds + grid dynamic; central cost (no CI) for a clean scatter.
+function drawPareto(){
+  const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
+  const W=760,H=440,mL=52,mR=120,mT=18,mB=52, iw=W-mL-mR, ih=H-mT-mB;
+  const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
+  for(const m in B){ const cfg=B[m], off=offs(m);
+    cfg.order.forEach(e=>{ const d=cfg.e[e]; if(!d)return; const q=cfg.intel+(off[e]||0);
+      xmn=Math.min(xmn,d[0]); xmx=Math.max(xmx,d[0]); ymn=Math.min(ymn,q); ymx=Math.max(ymx,q);
+      pts.push({m,e,c:d[0],q}); }); }
+  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06;
+  const yb=Math.floor(ymn)-1, yt=Math.ceil(ymx)+0.5, C=yt+0.7;
+  const Ln=v=>Math.log(C-v), lnB=Ln(yb), lnT=Ln(yt);
+  const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
+  const Y=v=>mT+(1-(lnB-Ln(Math.max(yb,Math.min(v,yt))))/(lnB-lnT))*ih;
+  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
+  const NX=8, NY=6;
+  for(let i=0;i<=NX;i++){ const x=mL+iw*i/NX, val=Math.pow(10,xlo+(xhi-xlo)*i/NX);
+    s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
+    const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}
+  const invY=f=>C-Math.exp(lnB-(1-f)*(lnB-lnT));
+  for(let j=0;j<=NY;j++){ const y=mT+ih*j/NY, val=invY(j/NY);
+    s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
+    const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=Math.round(val);s.appendChild(t);}
+  let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Coût relatif (Opus 4.8 @medium = 1,0 · log)";s.appendChild(a);
+  a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Intelligence (indice Vals · log dilaté)";s.appendChild(a);
+  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
+  const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
+  const pset=new Set(par.map(p=>p.m+"@"+p.e));
+  s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
+  pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
+    s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
+  par.forEach(p=>{ const t=el("text",{x:X(p.c)+8,y:Y(p.q)+3.5,fill:cvar('--ink'),"font-size":9.5,"font-weight":600});
+    t.textContent=MODELS[p.m].label+(p.e==="solo"?"":" "+p.e); s.appendChild(t);});
+  const lg=document.getElementById("legendP");
+  if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
+    +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominé</span>`
+    +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>frontière de Pareto</span>`;
+  const pn=document.getElementById("pareto-note");
+  if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · ${Math.round(p.q)}</span>`).join(" &nbsp;→&nbsp; ");
+}
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2).replace('.',',');
 const ciStr=(m,e,v)=> (m==="opus-4.8"&&e==="medium") ? "ancre" : (v[1]===v[2] ? "source unique" : `${fr(v[1])}–${fr(v[2])}`);
@@ -331,14 +364,14 @@ function zoomable(svg){
 function fillMeta(){   // all source counts + the footer source list derive from the (generated) GROUPS — nothing hand-typed
   const curNode=x=>{const m=x.split("@")[0];return GMODEL[m]&&GMODEL[m].cur;};
   const curGroups=GROUPS.filter(g=>g.n.some(curNode));
-  const nSrc=new Set(GROUPS.map(g=>g.s)).size;
+  const nSrc=curGroups.length;   // count == what is actually listed (benchmarks touching current models)
   document.querySelectorAll(".nsrc").forEach(e=>e.textContent=nSrc);
   const et=document.getElementById("edge-title"); if(et) et.textContent=`Les ${curGroups.length} sources qui tissent les liens`;
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'fr')).map(g=>g.g).join(" · ");
 }
-function renderAll(){drawB();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
-  ['chartB','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });
+function renderAll(){drawB();drawPareto();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
+  ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });
   const rr=document.getElementById('chartR'); if(rr) enableRatioZoom(rr);}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
