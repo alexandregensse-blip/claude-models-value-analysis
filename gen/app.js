@@ -57,18 +57,29 @@ function drawB(){
   if(1>Math.pow(10,xlo)&&1<Math.pow(10,xhi)) s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
+  // PASS 1 — all MAD ellipses BEHIND the data (robust band = ±MAD cost × ±MAD quality). Faint by default (opacity DEF);
+  // on hover, every ellipse that CONTAINS the cursor lights up (opacity HOV). Kept behind so highlights sit under the curves.
+  const ells=[], DEF=0.15, HOV=0.78;
+  for(const m in byM){ const col=cvar(MODELS[m].c);
+    byM[m].forEach(p=>{ const cx=(X(p.clo)+X(p.chi))/2, cy=(Y(p.qlo)+Y(p.qhi))/2,
+        rx=Math.max((X(p.chi)-X(p.clo))/2,0.6), ry=Math.max(Math.abs(Y(p.qlo)-Y(p.qhi))/2,0.6);
+      const elp=el("ellipse",{cx,cy,rx,ry,fill:col,"fill-opacity":0.4,stroke:col,"stroke-opacity":0.85,"stroke-width":1,opacity:DEF});
+      s.appendChild(elp); ells.push({el:elp,cx,cy,rx,ry}); }); }
+  // PASS 2 — curves, points, effort + model labels (on top of the ellipses)
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
-    mp.forEach(p=>{ const cx=(X(p.clo)+X(p.chi))/2, cy=(Y(p.qlo)+Y(p.qhi))/2, rx=(X(p.chi)-X(p.clo))/2, ry=Math.abs(Y(p.qlo)-Y(p.qhi))/2;   // ellipse = robust MAD band (cost × quality), both couple-atomic ratios
-      s.appendChild(el("ellipse",{cx,cy,rx:Math.max(rx,0.6),ry:Math.max(ry,0.6),fill:col,"fill-opacity":0.11,stroke:col,"stroke-opacity":0.4,"stroke-width":1})); });
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
     mp.forEach(p=>{ s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));
       const t=el("text",{x:X(p.c),y:Y(p.q)-8,fill:cvar('--muted'),"font-size":8.5,"text-anchor":"middle"});t.textContent=p.e;s.appendChild(t);});
     const last=mp[mp.length-1];
     const lb=el("text",{x:X(last.c)+10,y:Y(last.q)+4,fill:cvar('--ink'),"font-size":12.5,"font-weight":600});lb.textContent=MODELS[m].label;s.appendChild(lb);
   }
+  // hover: reveal ellipses under the cursor (property assignment → no duplicate listeners on redraw)
+  s.onmousemove=ev=>{ const q=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
+    ells.forEach(o=>o.el.setAttribute("opacity", (((q.x-o.cx)/o.rx)**2+((q.y-o.cy)/o.ry)**2<=1)?HOV:DEF)); };
+  s.onmouseleave=()=>ells.forEach(o=>o.el.setAttribute("opacity",DEF));
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = bande robuste MAD (coût × qualité)</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = bande robuste MAD (coût × qualité) · <b>survol</b> pour révéler</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
