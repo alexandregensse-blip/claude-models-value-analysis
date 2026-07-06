@@ -1,0 +1,125 @@
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Analyse de données · agrégée de ~55 sources indépendantes</div>
+    <h1>Coût, effort et modèle&nbsp;: la matrice Claude</h1>
+    <p class="lede">Ce que coûte réellement chaque modèle Claude récent, à chaque niveau d'effort — reconstruit à partir de mesures publiques et ramené à un coût <em>relatif</em> par chaînage de comparaisons à tâche identique.</p>
+    <div class="meta">
+      <div><span class="k">Base de référence</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1,00</b></div>
+      <div><span class="k">Sources de mesure</span><br><b>~55 indépendantes</b></div>
+      <div><span class="k">Points same-task</span><br><b>90+</b></div>
+      <div><span class="k">Confiance globale</span><br><b>Moyenne&nbsp;→&nbsp;haute</b></div>
+    </div>
+  </header>
+
+  <!-- ============ CHART : consolidated curves ============ -->
+  <section id="frontier">
+    <h2>1 · Le paysage consolidé</h2>
+    <p class="sub">Une courbe par modèle, un point par niveau d'effort (low → max). L'axe X est le coût relatif mesuré ; l'axe Y l'intelligence. Le halo coloré autour de chaque courbe est l'<b>intervalle de confiance 2D</b> — sa largeur code l'incertitude sur le coût, sa hauteur celle sur la qualité.</p>
+    <div class="card pad">
+      <div class="legend" id="legendB"></div>
+      <div class="chartbox"><svg id="chartB" viewBox="0 0 760 470" role="img" aria-label="Intelligence vs coût relatif, une courbe par modèle, un point par effort"></svg></div>
+      <p class="cap"><b>Axe X (coût)</b> : fusionné depuis les ~55 sources — solide. <b>Axe Y (intelligence)</b> : l'indice n'existe qu'à effort <b>max</b> ; la <b>montée verticale</b> entre les points d'effort est calée sur les <b>8 sources qui balaient l'effort sur un même benchmark</b> (OSWorld, swe-rebench, Braintrust, HAL, zenn, qiita + 2 papiers arXiv) — elles se confirment&nbsp;: plateau sur code/agentique (gains ≤1&nbsp;pt), mais l'effort <b>paie</b> sur reasoning-math (13,8→17,8) et l'agentique dur. La <b>forme</b> est donc corroborée multi-sources ; ce qui reste incertain, c'est sa <b>magnitude par modèle</b> (aucune sweep complète sur Haiku ni Fable), d'où la hauteur du halo. Sonnet&nbsp;5 (liseré)&nbsp;: halo plus large, coût très dépendant de la taille de tâche.</p>
+    </div>
+  </section>
+
+  <!-- ============ MATRIX ============ -->
+  <section id="matrix">
+    <h2>2 · La matrice normalisée</h2>
+    <p class="sub">Coût relatif par modèle × effort (base Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1,00), <b>trié par intelligence décroissante</b>. Intensité = coût ; le second nombre est l'intervalle de confiance. Pour repasser en dollars, multiplier par un coût-tâche de référence (p.ex. agentique&nbsp;≈&nbsp;$1,99/tâche pour Opus&nbsp;4.8&nbsp;@max sur l'AA Index).</p>
+    <div class="card pad chartbox">
+      <table id="matrix-tbl">
+        <thead><tr><th style="text-align:left">Modèle</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Intel.<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="cap">« Intel.&nbsp;@max » = indice Vals (composite finance+coding), mesuré à effort <b>max</b> — d'où la question&nbsp;: la qualité varie peu selon l'effort sur le code, donc cet indice reste une bonne approximation à high/xhigh aussi. n/a&nbsp;: effort non exposé (Haiku&nbsp;4.5&nbsp;: ni xhigh ni max ; Sonnet&nbsp;4.6&nbsp;: pas de xhigh).</p>
+  </section>
+
+  <!-- ============ LINKING GRAPH ============ -->
+  <section id="graph">
+    <h2>3 · Le graphe de liaison — d'où vient chaque cellule</h2>
+    <p class="sub">Restreint aux <b>6 modèles courants</b> (Fable 5, Opus 4.8/4.7, Sonnet 5/4.6, Haiku 4.5) ; les modèles plus anciens n'apparaissent qu'en <b>arrière-plan estompé</b>, comme relais entre sources. Chaque <b>nœud</b> = un couple (modèle, effort) ; chaque <b>arête</b> = une source qui a mesuré ces couples <b>sur la même tâche</b>. Cellule <b>pleine</b> = mesurée ; <b>creuse</b> = inférée. Un <b><span style="color:#E0342A">cercle rouge</span></b> entoure tout nœud corroboré par <b>moins de 3 sources indépendantes</b>.</p>
+    <div class="card pad">
+      <div class="legend" id="legendG"></div>
+      <div class="chartbox"><svg id="chartG" viewBox="0 0 780 470" role="img" aria-label="Graphe de liaison des couples modèle-effort par source"></svg></div>
+      <p class="cap" id="graphcap"></p>
+    </div>
+    <div class="card pad" style="margin-top:14px">
+      <h3>Les 30 sources qui tissent les liens</h3>
+      <div class="chartbox"><table id="edge-tbl">
+        <thead><tr><th>Source</th><th>Config réelle (harness · effort)</th><th>Type</th><th>Couples reliés (même tâche)</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ============ RATIO-BY-PAIR ASSIGNMENT ============ -->
+  <section id="ratios">
+    <h2>4 · Assigner les défauts — ratios par couple</h2>
+    <p class="sub">Pour chaque couple de modèles A/B, chaque source qui les mesure <b>au même effort</b> donne un point = ratio A/B. <b>Couleur = niveau d'effort</b> (les clusters) ; <b>gris = run @default</b> (effort à assigner). Regarde près de quel cluster tombe chaque point gris et dis-moi son effort. Échelle log ; survole un point pour la source.</p>
+    <div class="card pad">
+      <div class="legend" id="legendR"></div>
+      <div class="chartbox"><svg id="chartR" role="img" aria-label="Ratios coût et tokens par couple de modèles"></svg></div>
+      <p class="cap">Chaque couple a <b>deux axes empilés</b> — <b>coût</b> (haut) et <b>tokens</b> (bas) — chacun à sa propre échelle log. Un <b>trait pointillé</b> relie le point coût et le point tokens quand ils viennent de la <b>même source</b>. Peu de sources publient des tokens → l'axe tokens est souvent vide. <b>Zoom §4</b> : Shift+molette sur un axe zoome son échelle (les axes/points se redessinent), glisser = déplacer, double-clic = réinitialiser.</p>
+    </div>
+  </section>
+
+  <!-- ============ CRITERIA ============ -->
+  <section id="criteria">
+    <h2>5 · Ce qui déplace tout — les critères, avec exemples</h2>
+    <p class="sub">La matrice donne un ordre de grandeur. Ces quatre facteurs, chacun mesuré, la modulent fortement. Chaque carte donne un exemple chiffré réel.</p>
+    <div class="grid">
+      <div class="card pad crit"><h3>Type de tâche</h3>
+        <p>L'effort et le choix du modèle ne pèsent pas pareil selon la nature du travail.</p>
+        <span class="ex"><b>Code review</b> — Haiku&nbsp;4.5 obtient un F1 de 0,365 <b>à 1/3 du coût</b> de Sonnet&nbsp;4.6 (0,343). « Bigger isn't better » <span class="faint">(arxiv 2606.15689)</span>.<br><b>Raisonnement</b> — Opus&nbsp;4.5 medium→high&nbsp;: <b>+29&nbsp;% de score</b> pour 2,8× tokens <span class="faint">(PostTrainBench)</span>. Là, l'effort paie.<br><b>Coding pur</b> — relever le budget d'effort&nbsp;: <b>+0,27&nbsp;pt</b> sur SWE-Bench Pro <span class="faint">(2606.17930)</span>. Plateau.</span></div>
+      <div class="card pad crit"><h3>Complexité</h3>
+        <p>Plus la tâche est dure, plus l'effort coûte — jusqu'au point où il nuit.</p>
+        <span class="ex"><b>192 runs stratifiés</b> <span class="faint">(whitekumalabo)</span>&nbsp;: tâche facile&nbsp;≈&nbsp;$0,023 quel que soit l'effort ; tâche dure (L3) low→max&nbsp;= <b>×1,9</b>.<br><b>U inversé</b> — Sonnet&nbsp;4.6 sur orchestration&nbsp;: low 0&nbsp;% / medium 16,7&nbsp;% / high 6,7&nbsp;% — <b>high dégrade</b> <span class="faint">(2606.08878)</span>.</span></div>
+      <div class="card pad crit"><h3>Génération</h3>
+        <p>Les Opus récents font plus avec moins ; Sonnet&nbsp;5 est l'exception verbeuse.</p>
+        <span class="ex"><b>Opus&nbsp;4.8 vs 4.7</b>, même migration DB&nbsp;: 4.8 utilise ~moitié des tokens, <b>−40&nbsp;% de coût</b> <span class="faint">(FullStack, 5 runs)</span>.<br><b>Sonnet&nbsp;5</b> génère <b>~2,5× les tokens</b> d'Opus&nbsp;4.8 sur l'AA Index → $2,29/tâche &gt; $1,99 malgré un tarif/token plus bas.</span></div>
+      <div class="card pad crit"><h3>Cache &amp; harness</h3>
+        <p>Deux facteurs invisibles qui peuvent dominer le coût et le score.</p>
+        <span class="ex"><b>Cache</b> — même changement de code, cache cassé sur Sonnet&nbsp;: <b>$10,30 vs $3,83</b> pour Opus <span class="faint">(GitHub copilot #1770)</span>. L'agentique tourne à 90–96&nbsp;% de cache-read.<br><b>Harness</b> — Opus&nbsp;4.8 sur Terminal-Bench&nbsp;: <b>84,6&nbsp;% (AA) vs 71,9&nbsp;% (Vals)</b>, même modèle. Confound n°1.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ CONFIDENCE + METHOD ============ -->
+  <section id="confidence">
+    <h2>6 · Confiance &amp; méthode de fusion</h2>
+    <div class="grid">
+      <div class="card pad">
+        <h3>Ce qui est solide</h3>
+        <ul class="tight">
+          <li><span class="conf c-high">HAUTE</span> Ancrages cross-modèle (÷Opus 4.8)&nbsp;: <b>Fable ~2,0×</b>, <b>Sonnet 4.6 ~0,6×</b>, <b>Haiku 4.5 ~0,19×</b> — 3+ méthodes indépendantes concordantes.</li>
+          <li><span class="conf c-med">MOYENNE</span> Pente d'effort sur le code&nbsp;: <b>low→max ≈ ×1,9–2,7</b> en coût.</li>
+          <li><span class="conf c-med">MOYENNE</span> Plateau qualité + U inversé sur code/agentique (multi-papiers).</li>
+        </ul>
+      </div>
+      <div class="card pad">
+        <h3>Ce qui reste large</h3>
+        <ul class="tight">
+          <li><span class="conf c-low">LARGE</span> <b>Sonnet 5</b>&nbsp;: coût 0,86× (petites tâches) → 1,6× (long agentique).</li>
+          <li><span class="conf c-low">LARGE</span> Opus 4.7 vs 4.8&nbsp;: sources contradictoires (effort/harness) → 0,6–1,4×.</li>
+          <li><span class="conf c-low">LARGE</span> Queues xhigh/max et modèles sans sweep d'effort mesuré.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card pad" style="margin-top:14px">
+      <h3>Comment le coût relatif est fusionné — le procédé</h3>
+      <ol class="steps">
+        <li><b>Ratios à tâche identique.</b> On ne compare jamais deux dollars bruts de sources différentes (tailles de tâche incomparables). On ne retient que les sources mesurant ≥2 modèles/efforts <b>sur la même tâche</b> : leur <b>rapport</b> annule la variance de tâche. Ex.&nbsp;: WorkBench donne Sonnet&nbsp;4.6/Opus&nbsp;4.8 = 0,58 sur ses tâches, quel que soit leur coût absolu.</li>
+        <li><b>Le couple (modèle, effort) est atomique.</b> Chaque nœud = un couple indivisible. On ne suppose <b>jamais</b> que « l'effort » ait le même effet d'un modèle à l'autre&nbsp;: passer Haiku à max n'est pas le même multiplicateur que passer Opus à max. Pas de décomposition modèle×effort — la séparabilité serait une hypothèse fausse.</li>
+        <li><b>Graphe de liaison.</b> Chaque arête = un ratio mesuré entre deux couples sur la même tâche (deux modèles au même effort, ou deux efforts du même modèle). On place un couple en <b>multipliant les ratios le long du chemin</b> qui le relie à la base <b>Opus 4.8 @medium</b>. Plusieurs chemins → sa valeur = la <b>médiane</b> des produits (robuste aux confounds cache/harness). Ex.&nbsp;: Fable/Opus 4.8 <b>à config appariée</b> vu à 1,95 (WorkBench), 2,0 (ctala), 1,68 (X-post) → 1,95.</li>
+        <li><b>« Default » ≠ un effort unique — vérifié source par source.</b> On a lu la config réelle de chaque source (colonne Config ✓). Résultat&nbsp;: le bucket « défaut » est hétérogène — certaines à <b>max</b> (CEO-Bench, EMB-Opus), <b>high</b> (SlopCode, OfficeQA), pensée <b>désactivée</b> (STAGE-Claw, ianlpaterson), d'autres non précisées. La doc Anthropic explique pourquoi&nbsp;: le défaut dépend du modèle (Sonnet&nbsp;5/Fable&nbsp;5 pensent toujours ; Opus&nbsp;4.x &amp; Sonnet&nbsp;4.6 sur opt-in ; Haiku &amp; ≤4.5 sans le paramètre). Ce qui autorise un ratio, c'est le fait <b>vérifié</b> que <b>chaque source applique la même config à tous ses modèles</b> — pas un effort supposé.</li>
+        <li><b>Couple non relié = signalé, jamais inventé.</b> Un couple sans arête mesurée (Haiku&nbsp;@max — effort non exposé ; ou une sweep d'effort jamais publiée pour ce modèle) n'est pas rempli par une règle d'effort générique. La forme d'effort d'un modèle ne sert <b>jamais</b> de gabarit pour un autre&nbsp;: soit n/a, soit estimé avec une bande explicitement large.</li>
+        <li><b>Confiance = concordance.</b> L'intervalle vient de la <b>dispersion</b> des chemins concurrents. 3+ sources serrées → bande étroite (Sonnet 4.6, Haiku&nbsp;@medium). Chemins qui divergent, ou couple inféré faute de mesure directe → bande large (Sonnet 5, queues d'effort). Là où rien ne confirme, la bande le dit.</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="foot">
+    <p><b>Sources principales</b> (mesures, non re-citations) — Artificial Analysis · HAL/Princeton · swe-rebench · Vals.ai · Braintrust · TrueFoundry · WorkBench (2606.13715) · CEO-Bench · TOBench · STAGE-Claw · SkillsBench · SlopCodeBench · code-review (2606.15689) · GitHub (ponytail, drona23, ctala, claude-code issues) · blogs hands-on (george liu, zenn/QCD, qiita, whitekumalabo, AIReiter, FullStack). Registre complet + 2 CSV (brut &amp; normalisé) conservés hors artefact.</p>
+    <p class="faint" style="margin-top:8px">Coûts relatifs à ±intervalle indiqué. Les mesures publiques plafonnent la confiance à « moyenne-haute » — une mesure interne sur un run autodev reste la validation finale prévue.</p>
+  </div>
+</div>
