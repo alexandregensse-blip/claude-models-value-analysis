@@ -39,9 +39,9 @@ function drawB(){
   // X = cost (rel, ±1σ from COSTGRID) · Y = quality (z-mean, ±1σ from QUALGRID). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue; const zc=q[0], zs=q[1];
-      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,zc-zs); ymx=Math.max(ymx,zc+zs);
-      pts.push({m,e,c:d[0],lo:d[1],hi:d[2],q:zc,qs:zs}); } }
+    for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
+      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
+      pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
   const xlo=Math.log10(xmn)-0.05, xhi=Math.log10(xmx)+0.05, yb=ymn-0.15, yt=ymx+0.15, yp=8;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   const Y=v=>mT+yp+(1-(v-yb)/(yt-yb))*(ih-2*yp);
@@ -53,13 +53,13 @@ function drawB(){
     s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
     const t=el("text",{x:mL-10,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(1).replace('.',',');s.appendChild(t);});
   let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Coût relatif  (Opus 4.8 @medium = 1,0 · échelle log)";s.appendChild(a);
-  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Qualité (z-score normalisé inter-benchmarks)";s.appendChild(a);
+  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Qualité relative  (Opus 4.8 @medium = 1,0)";s.appendChild(a);
   if(1>Math.pow(10,xlo)&&1<Math.pow(10,xhi)) s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
-    mp.forEach(p=>{ const cx=X(p.c),cy=Y(p.q);   // diamond = ±1σ cost (horizontal) × ±1σ quality (vertical)
-      s.appendChild(el("path",{d:`M${X(p.lo)} ${cy} L${cx} ${Y(p.q+p.qs)} L${X(p.hi)} ${cy} L${cx} ${Y(p.q-p.qs)} Z`,fill:col,"fill-opacity":0.12,stroke:col,"stroke-opacity":0.42,"stroke-width":1})); });
+    mp.forEach(p=>{ const cx=(X(p.clo)+X(p.chi))/2, cy=(Y(p.qlo)+Y(p.qhi))/2, rx=(X(p.chi)-X(p.clo))/2, ry=Math.abs(Y(p.qlo)-Y(p.qhi))/2;   // ellipse = ±1σ cost × ±1σ quality (both couple-atomic ratios)
+      s.appendChild(el("ellipse",{cx,cy,rx:Math.max(rx,0.6),ry:Math.max(ry,0.6),fill:col,"fill-opacity":0.11,stroke:col,"stroke-opacity":0.4,"stroke-width":1})); });
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
     mp.forEach(p=>{ s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));
       const t=el("text",{x:X(p.c),y:Y(p.q)-8,fill:cvar('--muted'),"font-size":8.5,"text-anchor":"middle"});t.textContent=p.e;s.appendChild(t);});
@@ -68,7 +68,7 @@ function drawB(){
   }
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.42;background:transparent;border:1px solid var(--ink);transform:rotate(45deg)"></span>losange = ±1σ (coût × qualité)</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = ±1σ (coût × qualité)</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
@@ -80,10 +80,8 @@ function drawPareto(){
   // X = cost (central) · Y = quality (z-mean). All current nodes, Haiku incl. (its cost is under 'solo', quality under 'high').
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   const add=(m,e,c,q)=>{ xmn=Math.min(xmn,c); xmx=Math.max(xmx,c); ymn=Math.min(ymn,q); ymx=Math.max(ymx,q); pts.push({m,e,c,q}); };
-  for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
+  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
     for(const e in cg){ const q=qg[e]; if(!q) continue; add(m,e,cg[e][0],q[0]); } }
-  if(COSTGRID["haiku-4.5"]&&COSTGRID["haiku-4.5"].solo&&QUALGRID["haiku-4.5"]&&QUALGRID["haiku-4.5"].high)
-    add("haiku-4.5","solo",COSTGRID["haiku-4.5"].solo[0],QUALGRID["haiku-4.5"].high[0]);
   const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yb=ymn-0.1, yt=ymx+0.1, yp=12;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   const Y=v=>mT+yp+(1-(v-yb)/(yt-yb))*(ih-2*yp);
@@ -95,7 +93,7 @@ function drawPareto(){
     s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
     const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(1).replace('.',',');s.appendChild(t);});
   let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Coût relatif (Opus 4.8 @medium = 1,0 · log)";s.appendChild(a);
-  a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Qualité (z-score inter-benchmarks)";s.appendChild(a);
+  a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Qualité relative (Opus 4.8 @medium = 1,0)";s.appendChild(a);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
@@ -114,7 +112,7 @@ function drawPareto(){
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominé</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>frontière de Pareto</span>`;
   const pn=document.getElementById("pareto-note");
-  if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · z=${p.q.toFixed(2)}</span>`).join(" &nbsp;→&nbsp; ");
+  if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · q=${p.q.toFixed(2)}</span>`).join(" &nbsp;→&nbsp; ");
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2).replace('.',',');

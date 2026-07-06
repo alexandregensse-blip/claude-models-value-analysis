@@ -94,35 +94,6 @@ def consolidated(comps):
         if rows: out[pair] = rows
     return out
 
-def quality_grid():
-    """Data-driven quality axis: per-benchmark z-score of current-model EXPLICIT-effort scores, aggregated per
-    (model,effort). Returns {model:{effort:[z_mean, z_std, n]}}. z_mean = Y position, z_std = measured vertical
-    uncertainty (dispersion across benchmarks). The effort->quality trend is thus MEASURED, not a hand prior."""
-    from statistics import mean, pstdev
-    rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
-            if r["group"] and not r["group"].startswith("#")]
-    groups = {}
-    for r in rows: groups.setdefault(r["group"], []).append(r)
-    node_z = {}
-    for g, rs in groups.items():
-        ent = []
-        for r in rs:
-            if r["model"] not in MX: continue
-            e = eff(r["effort"])
-            if e not in EXP: continue
-            sc = num(r.get("score"))
-            if sc is None: continue
-            ent.append((r["model"], e, sc))
-        if len(ent) < 2: continue
-        vals = [x[2] for x in ent]; m = mean(vals); sd = pstdev(vals)
-        if sd == 0: continue
-        for (mm, ee, s) in ent:
-            node_z.setdefault((mm, ee), []).append((s-m)/sd)
-    out = {}
-    for (mm, ee), zs in node_z.items():
-        out.setdefault(mm, {})[ee] = [round(mean(zs),3), round(pstdev(zs),3), len(zs)]
-    return out
-
 def groups_data():
     """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
     derived from raw-data.csv (no more hand-maintained mirror that could drift, cf. the old skillsbench case).
@@ -182,9 +153,9 @@ def groups_data():
         out.append({"s": rs[0]["source"], "g": lbl, "t": t, "h": h, "n": nodes})
     return out
 
-def cost_grid():
-    """Data-driven §1/§2 relative-cost grid, COUPLE-ATOMIC (HANDOFF #1). For each current (model,effort) node,
-    solve a relative cost anchored to opus-4.8@medium=1.0 from MEASURED same-task ratios only (explicit efforts;
+def ratio_grid(field):
+    """Couple-atomic relative grid for a measured field (cost_usd or score). For each current (model,effort)
+    node, solve a value RELATIVE to opus-4.8@medium=1.0 from same-task ratios only (explicit efforts;
     nothink/priceblend/default excluded). Edges = cross-model@same-effort OR same-model@diff-effort cost ratios,
     median per edge; node values by log-space Jacobi relaxation (harmonic/least-squares over all paths — no
     model×effort separability). CI = min/max of per-source single-hop estimates around each node. Haiku 4.5 has
@@ -201,7 +172,7 @@ def cost_grid():
         out = []
         for r in rs:
             if r["model"] not in CUR: continue
-            e, c = eff(r["effort"]), num(r["cost_usd"])
+            e, c = eff(r["effort"]), num(r[field])
             if e in EFFOK and c and c > 0: out.append((r["model"], e, c, r["source"]))
         return out
     edgevals = collections.defaultdict(list)
@@ -254,6 +225,9 @@ def cost_grid():
     hk = cell("haiku-4.5@high")          # Haiku's sole explicit-effort thinking point
     if hk: out["haiku-4.5"] = {"solo": hk}
     return out
+
+def cost_grid():    return ratio_grid("cost_usd")
+def quality_grid(): return ratio_grid("score")   # quality via same-task score RATIOS, consolidated like cost (no cross-benchmark value comparison)
 
 def regime(kept):
     """No-think (and 'default') cost regime, COUPLE-ATOMIC. Cross-model cost ratios inside groups where BOTH
