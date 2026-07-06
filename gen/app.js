@@ -31,18 +31,30 @@ function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=760,H=470,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;
-  const xlo=Math.log10(0.09), xhi=Math.log10(6.6);
-  const C=79, yBot=35, yTop=77.5;                       // inverted-log Y: dilate the compressed high-intelligence top
+  // ---- dynamic bounds from the data: cost X (incl. CI), intelligence Y (incl. halo ±ey) ----
+  const allpts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
+  for(const m in B){ const cfg=B[m], off=offs(m);
+    cfg.order.forEach(e=>{ const d=cfg.e[e]; if(!d)return; const q=cfg.intel+(off[e]||0);
+      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q-cfg.ey); ymx=Math.max(ymx,q+cfg.ey);
+      allpts.push({m,e,c:d[0],lo:d[1],hi:d[2],q}); }); }
+  const xlo=Math.log10(xmn)-0.05, xhi=Math.log10(xmx)+0.05;
+  const yBot=Math.floor(ymn)-0.5, yTop=Math.ceil(ymx)+0.5, C=yTop+2;   // inverted-log Y: dilate the compressed high-intelligence top
   const Ln=v=>Math.log(C-v), lnB=Ln(yBot), lnT=Ln(yTop);
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   const Y=v=>mT+(1-(lnB-Ln(Math.max(yBot,Math.min(v,yTop))))/(lnB-lnT))*ih;
-  [0.1,0.2,0.5,1.0,2.0,5.0].forEach(t=>{ s.appendChild(el("line",{x1:X(t),y1:mT,x2:X(t),y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
-    const tx=el("text",{x:X(t),y:mT+ih+20,fill:cvar('--faint'),"font-size":11,"text-anchor":"middle"});tx.textContent=t+"×";s.appendChild(tx);});
-  [40,55,63,68,72,75,77].forEach(v=>{ s.appendChild(el("line",{x1:mL,y1:Y(v),x2:mL+iw,y2:Y(v),stroke:cvar('--line'),"stroke-width":1}));
-    const ty=el("text",{x:mL-10,y:Y(v)+4,fill:cvar('--faint'),"font-size":11,"text-anchor":"end"});ty.textContent=v;s.appendChild(ty);});
+  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
+  // ---- regular grid: NX evenly-spaced columns (log cost) · NY evenly-spaced rows (screen) ----
+  const NX=8, NY=6;
+  for(let i=0;i<=NX;i++){ const x=mL+iw*i/NX, val=Math.pow(10,xlo+(xhi-xlo)*i/NX);
+    s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
+    const tx=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});tx.textContent=fmtC(val)+"×";s.appendChild(tx);}
+  const invY=f=>C-Math.exp(lnB-(1-f)*(lnB-lnT));
+  for(let j=0;j<=NY;j++){ const y=mT+ih*j/NY, val=invY(j/NY);
+    s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
+    const ty=el("text",{x:mL-10,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});ty.textContent=Math.round(val);s.appendChild(ty);}
   let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Coût relatif  (Opus 4.8 @medium = 1,0 · échelle log)";s.appendChild(a);
   a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Intelligence (indice Vals · échelle log inversée)";s.appendChild(a);
-  s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
+  if(1>Math.pow(10,xlo)&&1<Math.pow(10,xhi)) s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
 
   // draw ribbons first (behind), then curves+points
   const draw=(phase)=>{
@@ -65,9 +77,18 @@ function drawB(){
     }
   };
   draw(0); draw(1);
+  // ---- Pareto frontier: couples non dominés (aucun autre point n'a coût ≤ ET intelligence ≥) ----
+  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);   // ε guards float ties (equal-quality → cheaper wins)
+  const par=allpts.filter(p=>!allpts.some(o=>dom(o,p))).sort((x,y)=>x.c-y.c);
+  const pd=par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" ");
+  s.appendChild(el("path",{d:pd,fill:"none",stroke:cvar('--ink'),"stroke-width":2,"stroke-dasharray":"6 3","stroke-opacity":.55}));
+  par.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:8.5,fill:"none",stroke:cvar('--ink'),"stroke-width":1.8,"stroke-opacity":.8})));
+  const pn=document.getElementById("pareto-note");
+  if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · ${Math.round(p.q)}</span>`).join(" &nbsp;→&nbsp; ");
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.22;background:var(--ink)"></span>halo = IC 2D (coût × qualité)</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.22;background:var(--ink)"></span>halo = IC 2D (coût × qualité)</span>`
+    +`<span class="lg"><span class="sw" style="border-top:2px dashed var(--ink);background:transparent;height:0"></span>frontière de Pareto</span>`;
 }
 
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------

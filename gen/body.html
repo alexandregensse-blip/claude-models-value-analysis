@@ -18,7 +18,13 @@
     <div class="card pad">
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 760 470" role="img" aria-label="Intelligence vs coût relatif, une courbe par modèle, un point par effort"></svg></div>
-      <p class="cap"><b>Axe X (coût)</b> : fusionné depuis les ~55 sources — solide. <b>Axe Y (intelligence)</b> : l'indice n'existe qu'à effort <b>max</b> ; la <b>montée verticale</b> entre les points d'effort est calée sur les <b>8 sources qui balaient l'effort sur un même benchmark</b> (OSWorld, swe-rebench, Braintrust, HAL, zenn, qiita + 2 papiers arXiv) — elles se confirment&nbsp;: plateau sur code/agentique (gains ≤1&nbsp;pt), mais l'effort <b>paie</b> sur reasoning-math (13,8→17,8) et l'agentique dur. La <b>forme</b> est donc corroborée multi-sources ; ce qui reste incertain, c'est sa <b>magnitude par modèle</b> (aucune sweep complète sur Haiku ni Fable), d'où la hauteur du halo. Sonnet&nbsp;5 (liseré)&nbsp;: halo plus large, coût très dépendant de la taille de tâche.</p>
+      <p class="cap"><b>Axe X (coût)</b> : fusionné depuis les sources — solide. <b>Axe Y (intelligence)</b> : l'indice n'existe qu'à effort <b>max</b> ; la <b>montée verticale</b> entre les points d'effort est calée sur les sources qui balaient l'effort sur un même benchmark (OSWorld, swe-rebench, Braintrust, CursorBench, HAL, zenn, qiita + papiers arXiv) — elles se confirment&nbsp;: plateau sur code/agentique (gains ≤1&nbsp;pt), mais l'effort <b>paie</b> sur reasoning-math (13,8→17,8) et l'agentique dur. La <b>forme</b> est donc corroborée multi-sources ; ce qui reste incertain, c'est sa <b>magnitude par modèle</b>, d'où la hauteur du halo. Les <b>bornes des axes et le quadrillage sont recalculés dynamiquement</b> à partir des données. Sonnet&nbsp;5 (liseré)&nbsp;: halo plus large, coût très dépendant de la taille de tâche.</p>
+    </div>
+    <div class="card pad" style="margin-top:14px">
+      <h3>Frontière de Pareto — le meilleur rapport intelligence / coût</h3>
+      <p class="sub">Les couples <b>(modèle, effort) non dominés</b>&nbsp;: aucun autre couple n'offre <b>plus d'intelligence à coût égal ou inférieur</b>. La courbe pointillée noire du graphe ci-dessus les relie — tout point situé <b>en dessous-à-droite</b> paie davantage sans gagner en capacité. Ces optima sont recalculés depuis les mêmes données mesurées&nbsp;:</p>
+      <p id="pareto-note" class="paretoline"></p>
+      <p class="cap">Lecture&nbsp;: de gauche à droite, chaque saut sur la frontière est le prochain palier « intelligence en plus » qui vaut son surcoût. Ce qui n'y figure pas est dominé (un autre couple fait au moins aussi bien pour moins cher).</p>
     </div>
   </section>
 
