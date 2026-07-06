@@ -1,11 +1,11 @@
 <div class="wrap">
   <header>
-    <div class="eyebrow">Analyse de données · agrégée de ~55 sources indépendantes</div>
+    <div class="eyebrow">Analyse de données · agrégée de <span class="nsrc">…</span> sources de mesure indépendantes</div>
     <h1>Coût, effort et modèle&nbsp;: la matrice Claude</h1>
     <p class="lede">Ce que coûte réellement chaque modèle Claude récent, à chaque niveau d'effort — reconstruit à partir de mesures publiques et ramené à un coût <em>relatif</em> par chaînage de comparaisons à tâche identique.</p>
     <div class="meta">
       <div><span class="k">Base de référence</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1,00</b></div>
-      <div><span class="k">Sources de mesure</span><br><b>~55 indépendantes</b></div>
+      <div><span class="k">Sources de mesure</span><br><b><span class="nsrc">…</span> indépendantes</b></div>
       <div><span class="k">Points same-task</span><br><b>90+</b></div>
       <div><span class="k">Confiance globale</span><br><b>Moyenne&nbsp;→&nbsp;haute</b></div>
     </div>
@@ -51,7 +51,7 @@
       <p class="cap" id="graphcap"></p>
     </div>
     <div class="card pad" style="margin-top:14px">
-      <h3>Les 30 sources qui tissent les liens</h3>
+      <h3 id="edge-title">Les sources qui tissent les liens</h3>
       <div class="chartbox"><table id="edge-tbl">
         <thead><tr><th>Source</th><th>Config réelle (harness · effort)</th><th>Type</th><th>Couples reliés (même tâche)</th></tr></thead>
         <tbody></tbody>
@@ -132,13 +132,13 @@
         <li><b>Graphe de liaison.</b> Chaque arête = un ratio mesuré entre deux couples sur la même tâche (deux modèles au même effort, ou deux efforts du même modèle). On place un couple en <b>multipliant les ratios le long du chemin</b> qui le relie à la base <b>Opus 4.8 @medium</b>. Plusieurs chemins → sa valeur = la <b>médiane</b> des produits (robuste aux confounds cache/harness). Ex.&nbsp;: Fable/Opus 4.8 <b>à config appariée</b> vu à 1,95 (WorkBench), 2,0 (ctala), 1,68 (X-post) → 1,95.</li>
         <li><b>« Default » ≠ un effort unique — vérifié source par source.</b> On a lu la config réelle de chaque source (colonne Config ✓). Résultat&nbsp;: le bucket « défaut » est hétérogène — certaines à <b>max</b> (CEO-Bench, EMB-Opus), <b>high</b> (SlopCode, OfficeQA), pensée <b>désactivée</b> (STAGE-Claw, ianlpaterson), d'autres non précisées. La doc Anthropic explique pourquoi&nbsp;: le défaut dépend du modèle (Sonnet&nbsp;5/Fable&nbsp;5 pensent toujours ; Opus&nbsp;4.x &amp; Sonnet&nbsp;4.6 sur opt-in ; Haiku &amp; ≤4.5 sans le paramètre). Ce qui autorise un ratio, c'est le fait <b>vérifié</b> que <b>chaque source applique la même config à tous ses modèles</b> — pas un effort supposé.</li>
         <li><b>Couple non relié = signalé, jamais inventé.</b> Un couple sans arête mesurée (Haiku&nbsp;@max — effort non exposé ; ou une sweep d'effort jamais publiée pour ce modèle) n'est pas rempli par une règle d'effort générique. La forme d'effort d'un modèle ne sert <b>jamais</b> de gabarit pour un autre&nbsp;: soit n/a, soit estimé avec une bande explicitement large.</li>
-        <li><b>Confiance = concordance.</b> L'intervalle vient de la <b>dispersion</b> des chemins concurrents. 3+ sources serrées → bande étroite (Sonnet 4.6, Haiku&nbsp;@medium). Chemins qui divergent, ou couple inféré faute de mesure directe → bande large (Sonnet 5, queues d'effort). Là où rien ne confirme, la bande le dit.</li>
+        <li><b>Confiance = concordance.</b> L'intervalle vient de la <b>dispersion</b> des chemins concurrents. 3+ sources serrées → bande étroite (Sonnet 4.6 &amp; Opus 4.8 bas effort). Sources en désaccord → bande large (Fable&nbsp;max&nbsp;: Willison-SVG vs CursorBench ; Sonnet&nbsp;5, dépendant de la taille de tâche). Là où rien ne confirme, la bande le dit.</li>
       </ol>
     </div>
   </section>
 
   <div class="foot">
-    <p><b>Sources principales</b> (mesures, non re-citations) — Artificial Analysis · HAL/Princeton · swe-rebench · Vals.ai · Braintrust · TrueFoundry · WorkBench (2606.13715) · CEO-Bench · TOBench · STAGE-Claw · SkillsBench · SlopCodeBench · code-review (2606.15689) · GitHub (ponytail, drona23, ctala, claude-code issues) · blogs hands-on (george liu, zenn/QCD, qiita, whitekumalabo, AIReiter, FullStack). Registre complet + 2 CSV (brut &amp; normalisé) conservés hors artefact.</p>
+    <p><b>Sources de mesure</b> (<span class="nsrc">…</span> au total, non re-citations) — <span id="src-list">…</span>. Liste et compteurs <b>générés</b> depuis les données ; registre complet + CSV brut (<code>raw-data.csv</code>) conservés hors artefact.</p>
     <p class="faint" style="margin-top:8px">Coûts relatifs à ±intervalle indiqué. Les mesures publiques plafonnent la confiance à « moyenne-haute » — une mesure interne sur un workload représentatif reste la validation finale prévue.</p>
   </div>
 </div>

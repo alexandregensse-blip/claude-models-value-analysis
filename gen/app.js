@@ -120,44 +120,10 @@ function drawMatrix(){
   }
 }
 // ---------- LINKING GRAPH ----------
-// nodes = (model,effort) couples ; edges = a source that measured them on the SAME task. Extracted from raw-data.csv groups.
-// h = actual run config extracted per source (harness · effort). "défaut harness" = source didn't override
-// the harness's out-of-box config (Claude Code & agent frameworks enable thinking; a raw API call does not).
-const GROUPS = [
- {s:"artificialanalysis",g:"AA Index",t:"xmodel",h:"AA-Index · max ✓",n:["opus-4.8@max","fable-5@max","opus-4.7@max","sonnet-5@max"]},
- {s:"artificialanalysis",g:"AA /task",t:"xmodel",h:"AA-Index · max ✓",n:["opus-4.8@max","sonnet-4.6@max","sonnet-5@max"]},
- {s:"aireiter",g:"AIReiter",t:"xmodel",w:3,h:"Claude Code · high ✓",n:["opus-4.8@high","sonnet-5@high"]},
- {s:"arxiv 2604.18934",g:"AutomationB.",t:"xmodel",h:"harness+effort NON précisés ✓",n:["opus-4.7@default","haiku-4.5@default","sonnet-4.6@default"]},
- {s:"braintrust",g:"Braintrust",t:"sweep",h:"retrieval · budget T25/T50 ✓",n:["opus-4.8@medium","opus-4.8@high","sonnet-4.6@medium","sonnet-4.6@high"]},
- {s:"arxiv 2606.18543",g:"CEO-Bench",t:"xmodel",h:"terminal-agent · Opus/Sonnet=MAX, Haiku=thinking ✓",n:["opus-4.8@max","opus-4.7@max","sonnet-4.6@max","haiku-4.5@default"]},
- {s:"arxiv 2606.15689",g:"code-review",t:"xmodel",h:"VibeOps · temp 0.1, thinking NS ✓",n:["sonnet-4.6@default","haiku-4.5@default"]},
- {s:"codesota",g:"CodeSOTA",t:"xmodel",h:"prix list blended (pas un run) ✓",n:["opus-4.8@default","sonnet-4.6@default"]},
- {s:"github ctala",g:"ctala",t:"xmodel",h:"Claude Code CLI · reasoning non config, temp 0.7 ✓",n:["opus-4.8@default","fable-5@default","haiku-4.5@default"]},
- {s:"github drona23",g:"drona23",t:"xgen",h:"Claude Code CLI · thinking NS, identique ✓",n:["sonnet-4.6@default","haiku-4.5@default","opus-4.6@default"]},
- {s:"vals.ai",g:"EMB",t:"xmodel",h:"bash+execute · Opus4.8=MAX, Sonnet5 NS ✓",n:["opus-4.8@max","sonnet-5@default"]},
- {s:"ai.georgeliu",g:"george-liu",t:"sweep",h:"Claude Code · low/max ✓",n:["opus-4.7@low","opus-4.7@max"]},
- {s:"hal-princeton",g:"HAL sci",t:"xgen",h:"HAL · high ✓",n:["sonnet-3.7@high","sonnet-4.5@high"]},
- {s:"hal-princeton",g:"HAL swe-mini",t:"xgen",h:"HAL · high vs défaut ✓",n:["sonnet-4.5@default","opus-4.1@default","sonnet-4.5@high"]},
- {s:"ianlpaterson",g:"ianlpaterson",t:"xgen",h:"OpenRouter · reasoning OFF (« no special reasoning ») ✓",n:["sonnet-4.6@default","haiku-4.5@default","opus-4.6@default"]},
- {s:"arxiv 2603.08655",g:"OfficeQA",t:"xgen",h:"Claude Agent SDK · reasoning HIGH ✓",n:["sonnet-4.6@high","haiku-4.5@high","opus-4.6@high"]},
- {s:"anthropic-chart",g:"OSWorld",t:"sweep",h:"Anthropic/AA · balayage low→max ✓",n:["opus-4.8@medium","opus-4.8@low","opus-4.8@high","opus-4.8@xhigh","opus-4.8@max","sonnet-4.6@low","sonnet-4.6@medium","sonnet-4.6@high","sonnet-4.6@max","sonnet-5@low","sonnet-5@medium","sonnet-5@high","sonnet-5@xhigh","sonnet-5@max"]},
- {s:"simonwillison",g:"Willison SVG",t:"sweep",h:"llm CLI · balayage low→max, tâche triviale (SVG) ✓",n:["fable-5@low","fable-5@medium","fable-5@high","fable-5@xhigh","fable-5@max"]},
- {s:"futuresearch",g:"DeepResearch",t:"sweep",h:"Deep Research Bench · low/high ✓",n:["sonnet-4.6@low","sonnet-4.6@high"]},
- {s:"cursorbench",g:"CursorBench",t:"sweep",h:"Cursor 3.1 · balayage low→max, effort apparié ✓ (éditeur=vendeur)",n:["fable-5@low","fable-5@medium","fable-5@high","fable-5@xhigh","fable-5@max","opus-4.8@low","opus-4.8@medium","opus-4.8@high","opus-4.8@xhigh","opus-4.8@max","opus-4.7@low","opus-4.7@medium","opus-4.7@high","opus-4.7@xhigh","opus-4.7@max","sonnet-5@low","sonnet-5@medium","sonnet-5@high","sonnet-5@xhigh","sonnet-5@max","sonnet-4.6@low","sonnet-4.6@medium","sonnet-4.6@high","sonnet-4.6@max"]},
- {s:"github ponytail",g:"ponytail",t:"xgen",h:"Claude Code headless · thinking NS ✓",n:["sonnet-4.6@default","haiku-4.5@default","opus-4.6@default"]},
- {s:"arxiv 2603.08640",g:"PostTrainB.",t:"sweep",h:"papier · medium/high ✓",n:["opus-4.5@medium","opus-4.5@high"]},
- {s:"qiita",g:"qiita",t:"sweep",h:"API brut · low/max ✓",n:["opus-4.7@low","opus-4.7@max"]},
- {s:"arxiv 2602.12670",g:"SkillsBench",t:"xmodel",h:"Claude Code 2.1.19 · temp 0, thinking NS ✓",n:["opus-4.8@default","opus-4.7@default","sonnet-4.6@default"]},
- {s:"arxiv 2603.24755",g:"SlopCode",t:"xgen",h:"Claude Code · Reasoning HIGH ✓",n:["sonnet-4.6@high","opus-4.6@high"]},
- {s:"arxiv 2606.10394",g:"STAGE-Claw",t:"xmodel",h:"OpenClaw · reasoning DISABLED, temp 0 ✓",n:["opus-4.7@default","sonnet-4.6@default"]},
- {s:"swe-rebench",g:"swe-rebench",t:"xgen",h:"ReAct minimal · Opus4.8 xhigh/4.7 high, Sonnet défaut ✓",n:["opus-4.8@xhigh","opus-4.7@high","opus-4.6@high","sonnet-4.6@default"]},
- {s:"arxiv 2605.16909",g:"TOBench",t:"xgen",h:"ReAct · thinking NS ✓",n:["sonnet-4.6@default","haiku-4.5@default","opus-4.6@default"]},
- {s:"truefoundry",g:"TrueFoundry",t:"xmodel",h:"AI Gateway · single-turn sans outils, effort NS ✓",n:["opus-4.8@default","opus-4.7@default"]},
- {s:"whitekumalabo",g:"whitekumalabo",t:"sweep",h:"Claude Code · low/max ✓",n:["opus-4.6@low","opus-4.6@max"]},
- {s:"arxiv 2605.10912",g:"WildClaw",t:"xgen",h:"OpenRouter (4 harness) · thinking NS, identique ✓",n:["opus-4.7@default","opus-4.6@default"]},
- {s:"arxiv 2606.13715",g:"WorkBench",t:"xmodel",h:"ReAct natif · temp 0, like-for-like, thinking NS ✓",n:["opus-4.8@default","fable-5@default","haiku-4.5@default","sonnet-4.6@default"]},
- {s:"zenn QCD",g:"zenn QCD",t:"sweep",h:"API brut · low/xhigh ✓",n:["opus-4.8@low","opus-4.8@xhigh","sonnet-5@low","sonnet-5@xhigh"]},
-];
+// nodes = (model,effort) couples ; edges = a source that measured them on the SAME task.
+// DATA-DRIVEN: generated by build.py::groups_data() from raw-data.csv (nodes) + an editorial metadata sidecar
+// (label / type / verified config note). No more hand-maintained mirror that could silently drift from the CSV.
+const GROUPS = __GROUPS_DATA__;
 const GMODEL = {
  "fable-5":{l:"Fable 5",c:"--fable5",cur:1},"opus-4.8":{l:"Opus 4.8",c:"--opus48",cur:1},
  "opus-4.7":{l:"Opus 4.7",c:"--opus47",cur:1},"sonnet-5":{l:"Sonnet 5",c:"--sonnet5",cur:1},
@@ -204,8 +170,9 @@ function drawGraph(){
   for(const m in MX){ const g=GMODEL[m]; if(!g.cur||!MEFF[m]) continue;   // Haiku (no MEFF) not shown on the effort ladder
     const t=el("text",{x:px(m),y:mTg-16,fill:cvar(g.c),"font-size":11.5,"font-weight":700,"text-anchor":"middle"});
     t.textContent=g.l;s.appendChild(t);}
-  const srcCount={}; GROUPS.forEach(g=>{ const seen=new Set(); g.n.forEach(id=>{ if(!seen.has(id)){seen.add(id); srcCount[id]=(srcCount[id]||0)+1;} }); });
-  let hkc=0; GROUPS.forEach(g=>{ if(g.n.some(id=>id.startsWith("haiku-4.5@"))) hkc++; }); srcCount["haiku-4.5@solo"]=hkc;   // Haiku = single merged node: count every source that measured it in any config
+  const nodeSrc={}; GROUPS.forEach(g=>{ g.n.forEach(id=>{ (nodeSrc[id]=nodeSrc[id]||new Set()).add(g.s); }); });   // dedup by SOURCE: one source's sub-benchmarks count once
+  const srcCount={}; for(const id in nodeSrc) srcCount[id]=nodeSrc[id].size;
+  const hks=new Set(); GROUPS.forEach(g=>{ if(g.n.some(id=>id.startsWith("haiku-4.5@"))) g.n.forEach(id=>{if(id.startsWith("haiku-4.5@"))hks.add(g.s);}); }); srcCount["haiku-4.5@solo"]=hks.size;   // Haiku merged node = distinct sources measuring it in any config
   const COLR={g:"#2E9C5A",y:"#D9B23A",o:"#E08A2E",r:"#E0342A"};
   const colFor=c=>c>=3?COLR.g:c===2?COLR.y:c===1?COLR.o:COLR.r;
   const LINK=cvar('--muted');
@@ -361,7 +328,16 @@ function zoomable(svg){
   const up=()=>{ d=null; svg.style.cursor="grab"; };
   svg.addEventListener("pointerup",up); svg.addEventListener("pointercancel",up); svg.addEventListener("pointerleave",up);
 }
-function renderAll(){drawB();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');
+function fillMeta(){   // all source counts + the footer source list derive from the (generated) GROUPS — nothing hand-typed
+  const curNode=x=>{const m=x.split("@")[0];return GMODEL[m]&&GMODEL[m].cur;};
+  const curGroups=GROUPS.filter(g=>g.n.some(curNode));
+  const nSrc=new Set(GROUPS.map(g=>g.s)).size;
+  document.querySelectorAll(".nsrc").forEach(e=>e.textContent=nSrc);
+  const et=document.getElementById("edge-title"); if(et) et.textContent=`Les ${curGroups.length} sources qui tissent les liens`;
+  const sl=document.getElementById("src-list");
+  if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'fr')).map(g=>g.g).join(" · ");
+}
+function renderAll(){drawB();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
   ['chartB','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });
   const rr=document.getElementById('chartR'); if(rr) enableRatioZoom(rr);}
 renderAll();

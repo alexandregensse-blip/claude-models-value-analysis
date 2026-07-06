@@ -94,6 +94,65 @@ def consolidated(comps):
         if rows: out[pair] = rows
     return out
 
+def groups_data():
+    """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
+    derived from raw-data.csv (no more hand-maintained mirror that could drift, cf. the old skillsbench case).
+    Only the editorial metadata per group — display label, edge type (sweep/xmodel/xgen), verified config note —
+    lives in GMETA. Some sources publish several sub-benchmarks (AIReiter) → MERGE folds them into one node-set
+    so corroboration counts the source once."""
+    GMETA = {
+      "osworld":("OSWorld","sweep","Anthropic/AA · balayage low→max ✓"),
+      "aa-index":("AA Index","xmodel","AA-Index · max ✓"),
+      "aa-index-pertask":("AA /task","xmodel","AA-Index · max ✓"),
+      "swerebench":("swe-rebench","xgen","ReAct minimal · Opus4.8 xhigh/4.7 high, Sonnet défaut ✓"),
+      "workbench":("WorkBench","xmodel","ReAct natif · temp 0, like-for-like, thinking NS ✓"),
+      "braintrust":("Braintrust","sweep","retrieval · budget T25/T50 ✓"),
+      "stageclaw":("STAGE-Claw","xmodel","OpenClaw · reasoning DISABLED, temp 0 ✓"),
+      "tobench":("TOBench","xgen","ReAct · thinking NS ✓"),
+      "ceobench":("CEO-Bench","xmodel","terminal-agent · Opus/Sonnet=MAX, Haiku=thinking ✓"),
+      "automationbench":("AutomationB.","xmodel","harness+effort NON précisés ✓"),
+      "officeqa":("OfficeQA","xgen","Claude Agent SDK · reasoning HIGH ✓"),
+      "slopcode":("SlopCode","xgen","Claude Code · Reasoning HIGH ✓"),
+      "posttrain":("PostTrainB.","sweep","papier · medium/high ✓"),
+      "skillsbench":("SkillsBench","xmodel","Claude Code 2.1.19 · temp 0, thinking NS ✓"),
+      "aireiter":("AIReiter","xmodel","Claude Code · high ✓"),
+      "ctala":("ctala","xmodel","Claude Code CLI · reasoning non config, temp 0.7 ✓"),
+      "drona23":("drona23","xgen","Claude Code CLI · thinking NS, identique ✓"),
+      "ponytail":("ponytail","xgen","Claude Code headless · thinking NS ✓"),
+      "ianlpaterson":("ianlpaterson","xgen","OpenRouter · reasoning OFF ✓"),
+      "hal-swemini":("HAL swe-mini","xgen","HAL · high vs défaut ✓"),
+      "hal-science":("HAL sci","xgen","HAL · high ✓"),
+      "george-liu":("george-liu","sweep","Claude Code · low/max ✓"),
+      "zenn-qcd":("zenn QCD","sweep","API brut · low/xhigh ✓"),
+      "whitekumalabo":("whitekumalabo","sweep","Claude Code · low/max ✓"),
+      "qiita-nogataka":("qiita","sweep","API brut · low/max ✓"),
+      "codesota":("CodeSOTA","xmodel","prix list blended (pas un run) ✓"),
+      "coderev":("code-review","xmodel","VibeOps · temp 0.1, thinking NS ✓"),
+      "wildclaw":("WildClaw","xgen","OpenRouter (4 harness) · thinking NS ✓"),
+      "truefoundry":("TrueFoundry","xmodel","AI Gateway · single-turn sans outils, effort NS ✓"),
+      "emb":("EMB","xmodel","bash+execute · Opus4.8=MAX, Sonnet5 NS ✓"),
+      "willison":("Willison SVG","sweep","llm CLI · balayage low→max, tâche triviale (SVG) ✓"),
+      "futuresearch":("DeepResearch","sweep","Deep Research Bench · low/high ✓"),
+      "cursorbench":("CursorBench","sweep","Cursor 3.1 · balayage low→max, effort apparié ✓ (éditeur=vendeur)"),
+    }
+    MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
+    rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
+            if r["group"] and not r["group"].startswith("#")]
+    order, buckets = [], {}
+    for r in rows:
+        gk = MERGE.get(r["group"], r["group"])
+        if gk not in buckets: buckets[gk] = []; order.append(gk)
+        buckets[gk].append(r)
+    out = []
+    for gk in order:
+        rs = buckets[gk]; nodes, seen = [], set()
+        for r in rs:
+            nid = f'{r["model"]}@{eff(r["effort"])}'
+            if nid not in seen: seen.add(nid); nodes.append(nid)
+        lbl, t, h = GMETA.get(gk, (gk, "xmodel", "config ✓"))
+        out.append({"s": rs[0]["source"], "g": lbl, "t": t, "h": h, "n": nodes})
+    return out
+
 def cost_grid():
     """Data-driven §1/§2 relative-cost grid, COUPLE-ATOMIC (HANDOFF #1). For each current (model,effort) node,
     solve a relative cost anchored to opus-4.8@medium=1.0 from MEASURED same-task ratios only (explicit efforts;
@@ -237,6 +296,7 @@ def main():
     comps = comparisons()
     RD = build_RD(comps)
     CG = cost_grid()
+    GD = groups_data()
     NT = regime({"nothink"})
     DF = regime({"default"})
     CONS = consolidated(comps)
@@ -254,6 +314,7 @@ def main():
     app  = app.replace("__RATIO_DATA__", json.dumps(RD, separators=(",",":")))
     app  = app.replace("__CONS_DATA__", json.dumps(CONS, separators=(",",":")))
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
+    app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     html = f"<style>\n{css}\n</style>\n{body}\n<script>\n{app}\n</script>\n"
     open(OUT,"w").write(html)
