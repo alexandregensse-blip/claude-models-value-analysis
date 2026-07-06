@@ -63,9 +63,10 @@ function drawB(){
     for(const m in B){ if(m==="haiku-4.5") continue; const cfg=B[m], col=cvar(MODELS[m].c), off=offs(m);
       const pts=cfg.order.map(e=>{const d=cfg.e[e];return {e,c:d[0],lo:d[1],hi:d[2],y:cfg.intel+off[e]};});
       const ey=cfg.ey;
-      if(phase===0){ // per-point error box: X = cost ±1σ (measured spread) · Y = quality uncertainty ±ey
-        pts.forEach(p=>{ const x0=X(p.lo),x1=X(p.hi),yt=Y(p.y+ey),yb=Y(p.y-ey);
-          s.appendChild(el("rect",{x:Math.min(x0,x1),y:yt,width:Math.abs(x1-x0),height:yb-yt,fill:col,"fill-opacity":0.10,stroke:col,"stroke-opacity":0.38,"stroke-width":1,rx:2})); });
+      if(phase===0){ // horizontal error bar: X = cost ±1σ (MEASURED). No vertical bar: quality Y still lacks a measured σ (see report).
+        pts.forEach(p=>{ const y=Y(p.y), x0=X(p.lo), x1=X(p.hi);
+          s.appendChild(el("line",{x1:x0,y1:y,x2:x1,y2:y,stroke:col,"stroke-width":2,"stroke-opacity":0.4,"stroke-linecap":"round"}));
+          [x0,x1].forEach(xc=>s.appendChild(el("line",{x1:xc,y1:y-3,x2:xc,y2:y+3,stroke:col,"stroke-width":1.4,"stroke-opacity":0.4}))); });
       } else { // central curve + effort points
         let d=pts.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.y)).join(" ");
         s.appendChild(el("path",{d,fill:"none",stroke:col,"stroke-width":2.4,"stroke-linejoin":"round"}));
@@ -80,7 +81,7 @@ function drawB(){
   draw(0); draw(1);
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.30;background:transparent;border:1px solid var(--ink)"></span>rectangle = ±1σ coût × incertitude qualité</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:var(--ink);height:2px;border-radius:2px"></span>barre = ±1σ coût (mesuré)</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
