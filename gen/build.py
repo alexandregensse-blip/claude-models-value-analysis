@@ -137,6 +137,11 @@ def groups_data():
       "scsweproeff":("SWE-Pro sweep","sweep","Opus 4.8 card p196 · balayage low→max, tokens de sortie ✓"),
       "schleeff":("HLE sweep","sweep","Opus 4.8 card p203 · HLE outils, balayage low→max ✓"),
       "scosweff":("OSWorld sweep","sweep","Opus 4.8 card p222 · balayage low→max, tokens de sortie ✓"),
+      "scfsweppro":("SWE-Pro (Fable)","sweep","Fable 5 card p255 · Fable=Mythos 5, balayage low→xhigh, coût $ ✓"),
+      "scfcdiamond":("FrontierCode-D","sweep","Fable 5 card p257 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
+      "scfdeepqa":("DeepSearchQA","sweep","Fable 5 card p270 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
+      "scfhletools":("HLE (Fable)","sweep","Fable 5 card p267 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
+      "scfdraco":("DRACO","sweep","Fable 5 card p271 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))

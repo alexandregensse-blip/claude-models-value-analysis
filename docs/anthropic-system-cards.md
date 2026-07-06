@@ -10,7 +10,7 @@ des valeurs brutes entre benchmarks — uniquement des **ratios au sein d'un mê
 | Modèle | Date | Pages | PDF direct | Priorité | État |
 |---|---|---|---|---|---|
 | **Sonnet 5** | 2026-06-30 | 145 | https://www-cdn.anthropic.com/9e6a1044980d8c4ed85669faf9c2a8342e2e9f1e/Claude%20Sonnet%205%20System%20Card.pdf | — | ✅ **INTÉGRÉ** |
-| **Fable 5 & Mythos 5** | 2026-06-30 | 319 | https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf | ★★★ (sweeps Fable) | ⏳ à faire |
+| **Fable 5 & Mythos 5** | 2026-06-30 | 319 | https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c342ee809620.pdf | ★★★ (sweeps Fable) | ✅ **INTÉGRÉ** |
 | **Opus 4.8** | 2026-05-28 | 246 | https://www-cdn.anthropic.com/0f0c97ad20d8005706296bd92aa1c27c6b2f4f61/Claude%20Opus%204.8%20System%20Card.pdf (alt hash: 0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf) | ★★★ (sweeps Opus 4.8/4.7 → comble opus-4.7@medium) | ✅ **INTÉGRÉ** |
 | **Opus 4.7** | 2026-04-16 | 232 | https://www-cdn.anthropic.com/037f06850df7fbe871e206dad004c3db5fd50340/Claude%20Opus%204.7%20System%20Card.pdf | ★★ | ⏳ à faire |
 | **Sonnet 4.6** | 2026-02-17 | ? | https://www-cdn.anthropic.com/78073f739564e986ff3e28522761a7a0b4484f84.pdf | ★★ | ⏳ à faire |
@@ -85,10 +85,31 @@ low59.8/med62.6/high63.4/xhigh64.2/max64.7) = config recherche de Fable, **hors 
   Opus4.7 monotones sur 3 benchmarks. Corroboration globale **vert 24 · jaune 1 · orange 0 · rouge 0** (25 nœuds).
   cost-pts 119→142. Le seul jaune (`opus-4.7@medium`) passera vert avec la card Opus 4.7 propre.
 
+## ✅ Fable 5 & Mythos 5 System Card — INTÉGRÉ (2026-07-06, source=`anthropic-syscard`, ref `anthropic-fable5-syscard-pNNN`)
+
+319 pages. **DÉCISION CLÉ (confirmée par l'utilisateur) : « Fable 5 = Mythos 5 avec plus de sécurités » →
+on considère les deux ÉGAUX.** Les figures effort×coût du card tracent la ligne « Claude Mythos 5 » (= Fable 5
+déployé, à ~0.3 pt près dû au fallback sécurité vers Opus 4.8 sur ~21 % des essais Terminal-Bench). Preuves
+d'équivalence : la ligne Mythos 5 de **FrontierCode Main** (37.3/41.1/42.9/46.3/44.7) et de **CursorBench**
+(max 72.9 %) coïncide EXACTEMENT avec nos données `scfrontiercode`/`cursorbench` déjà étiquetées « Fable 5 ».
+« Claude Mythos Preview » (config recherche antérieure) reste HORS grille → ignoré.
+
+**Avantage : coûts lus DIRECTEMENT en $/tâche sur l'axe x** (pas de conversion tokens→prix). Opus 4.8 co-tracé
+sur chaque figure = ancre → Fable 5 placé directement. 5 groupes dédiés (couple-atomique intra-figure) ajoutés
+comme `fable-5` + `opus-4.8`, confound `digitized-logx-mythos` :
+- **`scfsweppro`** (fig 8.2.A p255, SWE-bench Pro) — Fable low→xhigh 75.0/78.2/79.6/80.4 ; Opus4.8 60.3/65.2/67.5/68.6.
+- **`scfcdiamond`** (fig 8.4.A p257, FrontierCode Diamond) — Fable 11.5/17.8/24.0/29.3/30.9 ; Opus4.8 8.2/**5.9**/8.7/13.4/11.4 (inversion med<low RÉELLE, digitalisée fidèlement).
+- **`scfdeepqa`** (fig 8.14.3.B p270, DeepSearchQA F1) — Fable 92.0/94.1/93.6/94.5/94.2 ; Opus4.8 88.6/90.1/91.0/92.1/93.1.
+- **`scfhletools`** (fig 8.14.1.B p267, HLE avec outils) — Fable 59.8/62.6/63.4/64.2/64.5 ; Opus4.8 50.2/55.2/55.7/57.6/57.9 (coûts $ = `schletools` ✓ confirme la digitalisation).
+- **`scfdraco`** (fig 8.14.4.A p271, DRACO) — Fable 76.7/80.6/82.8/84.9/86.4 ; Opus4.8 70.2/73.3/75.1/79.0/80.6.
+- **SAUTÉ** (doublons) : FrontierCode Main (= `scfrontiercode`), CursorBench (= `cursorbench`).
+- **Résultat** : tous les nœuds Fable 5 à 3–5 sources indépendantes (verts), σ resserré ; ladders coût
+  (1.56→5.94) et qualité (1.18→1.33) monotones. Corroboration inchangée **vert 24 · jaune 1** ; cost-pts 142→166.
+- Table 8.1 p252 (scores @xhigh/max) et autres barres lues mais non ajoutées (score-only, gain marginal).
+
 ## À FAIRE (ordre de priorité)
-1. **Fable 5 & Mythos 5 card** → sweeps Fable 5 (rare ; on n'a que Willison+CursorBench).
-2. **Opus 4.7 card** (→ 3ᵉ source indépendante pour `opus-4.7@medium` = dernier jaune → vert),
-   **Sonnet 4.6 card**, **Haiku 4.5 card**.
+1. **Opus 4.7 card** (→ 3ᵉ source indépendante pour `opus-4.7@medium` = dernier jaune → vert).
+2. **Sonnet 4.6 card**, **Haiku 4.5 card**.
 Pour chacun : mêmes groupes (un par benchmark), source `anthropic-<model>-syscard`, effort explicite,
 coûts digitalisés `digitized-logx`, jamais de valeur brute inter-benchmark (ratios only).
 
