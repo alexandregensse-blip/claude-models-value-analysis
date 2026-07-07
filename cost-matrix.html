@@ -453,10 +453,10 @@ function fillScoreTable(scored){
 // with the chart. TWCOL = one colour per tier window.
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", q:0.6, sig:0.6, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      q:0.8, sig:0.6, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        q:1.0, sig:0.6, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Frontier",            q:1.2, sig:0.6, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Triage &amp; volume", q:0.59, sig:0.85, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday build",      q:0.93, sig:0.70, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Professional",        q:1.01, sig:0.65, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Frontier",            q:1.20, sig:0.90, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
@@ -471,7 +471,8 @@ function tierPicks(){
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
-  const crown=front.slice().sort((a,b)=>b.hid-a.hid)[0];                                                    // top prominence overall
+  const inWin=front.filter(p=>p.q>=1.0&&p.q<=1.8);                                                          // crown window [1.0, 1.8]
+  const crown=(inWin.length?inWin:front).slice().sort((a,b)=>b.hid-a.hid)[0];                               // top hidden within the window
   return {picks,crown};
 }
 function drawTiers(){
@@ -479,17 +480,17 @@ function drawTiers(){
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
   const cardHTML=(head,q,name,col,w,bigVal,bigLab,ex,extra="")=>`<div class="card pad crit tier${extra}">
-      <div class="tier-head">${q!=null?`<span class="tier-q">Q* ${q.toFixed(1)}</span>`:`<span class="tier-q">${head}</span>`}<span class="tier-name">${name}</span></div>
+      <div class="tier-head">${q!=null?`<span class="tier-q">Q* ${q.toFixed(2)}</span>`:`<span class="tier-q">${head}</span>`}<span class="tier-name">${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
           <span class="tier-nums">Cost <b>${w.c.toFixed(2)}×</b> · Quality <b>${w.q.toFixed(2)}×</b></span>
         </div>
-        <div class="tier-yield">${bigVal}<small>${bigLab}</small></div>
+        <div class="tier-yield">${bigVal}${bigLab?`<small>${bigLab}</small>`:""}</div>
       </div>
       <span class="ex">${ex}</span>
     </div>`;
-  host.innerHTML=picks.map(t=>cardHTML(null,t.q,t.name,cvar(MODELS[t.win.m].c),t.win,`${(t.win.y*100).toFixed(0)}%`,"Yield",t.ex)).join("");
+  host.innerHTML=picks.map(t=>cardHTML(null,t.q,t.name,cvar(MODELS[t.win.m].c),t.win,`${t.win.hid>=0?'+':''}${t.win.hid.toFixed(2)}`,"",t.ex)).join("");
   const c=crown, col=cvar(MODELS[c.m].c), cr=document.getElementById("tier-crown");
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
