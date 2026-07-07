@@ -209,59 +209,54 @@ function fillScoreTable(scored){
       +`<td style="min-width:96px">${pill}</td>`
       +`<td style="text-align:left;color:${sc};font-size:12px">${p.score>=0?'above envelope':'below envelope'}</td>`;
     tb.appendChild(tr); }); }
-// ---- BEST-YIELD-BY-TASK-TIER + best-of-both-worlds crown (data-driven from COSTGRID × QUALGRID) ----
-// Four task-complexity tiers, defined by the QUALITY window a task demands (relative quality, anchor
-// Opus 4.8 @medium = 1.0). Per tier we pick, ON THE PARETO FRONTIER and within that quality band, the
-// couple with the best score/cost YIELD (q/c) — the cheapest way to clear the bar. The crown ranks
-// MODELS by a "best of both worlds" score V = q³/c (capability weighted 3× cost, in log terms): it
-// rewards being both capable and efficient, so neither the cheapest-but-weak nor the strongest-but-costly wins.
-const QFLOOR=1.0;   // crown complexity bar: only couples with quality ≥ this (relative to Opus 4.8 @medium) qualify — tuned for complex/production tasks
+// ---- HIDDEN-PROMINENCE tiers + crown (data-driven from COSTGRID × QUALGRID) ----
+// For each Pareto-frontier couple we compute a VALUE score S = signed distance to the frontier envelope (concave fit
+// in the dilated quality metric, exactly as in the value-score table). The HIDDEN score then measures LOCAL PROMINENCE
+// along the frontier: hid(n) = 2·Sₙ − S_prev − S_next (a discrete 2nd difference — how much a couple pokes above its two
+// immediate neighbours). Endpoints (no prev/next) get 0. Per complexity window we take the top hidden score; the crown
+// is the top hidden score overall. Windows are ADAPTIVE (wide for simple tasks, narrowing toward complex) and overlap.
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", lo:0,    hi:0.65, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      lo:0.65, hi:0.90, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        lo:0.90, hi:1.03, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Frontier",            lo:1.03, hi:99,   ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Triage &amp; volume", lo:0,    hi:0.90, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday build",      lo:0.85, hi:1.00, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Professional",        lo:0.97, hi:1.07, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Frontier",            lo:1.05, hi:99,   ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0],y:q[0]/cg[e][0]}); } }
+    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
-  const picks=TIERS.map(t=>{ const cand=front.filter(p=>p.q>=t.lo&&p.q<t.hi);
-    return cand.length?{...t,win:cand.reduce((a,b)=>b.y>a.y?b:a)}:{...t,win:null}; });
-  // Crown: V = q³/c, but only over couples that CLEAR the complexity bar q ≥ QFLOOR. Rationale (research-backed):
-  // benchmark score is a task-averaged proxy that dilutes the hard tail; satisfaction is threshold/reliability-driven,
-  // and the value of effort rises with difficulty. The floor isolates the tail where capability actually pays — so
-  // the winning EFFORT lifts off 'low' (which only wins on flat average quality). q₀=1.0 = "must match the flagship".
-  const crown=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; let best=null;
-    for(const e in cg){ const q=qg[e]; if(!q||q[0]<QFLOOR) continue; const V=Math.pow(q[0],3)/cg[e][0];
-      if(!best||V>best.V) best={m,e,c:cg[e][0],q:q[0],V}; } if(best) crown.push(best); }
-  crown.sort((a,b)=>b.V-a.V);
-  const extValue=rows.reduce((a,b)=>b.y>a.y?b:a);      // global pure-value extreme (max yield q/c)
-  const extCap=rows.reduce((a,b)=>b.q>a.q?b:a);        // global pure-capability extreme (max quality)
-  return {picks,crown,extValue,extCap};
+  const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
+  // Same envelope as the value-score table: concave quadratic T(q)=a+b·x+c·x² in the dilated metric; S = tanh(residual/RMS).
+  const fit=quadFit(front.map(p=>Math.log10(p.c)),front.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x;
+  const resAll=rows.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
+  front.forEach(p=>p.S=Math.tanh((symT(p.q)-fevT(Math.log10(p.c)))/rms));
+  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);   // local prominence, ends=0
+  const picks=TIERS.map(t=>{ const cand=front.filter(p=>p.q>=t.lo&&p.q<=t.hi);                  // inclusive → windows overlap
+    return cand.length?{...t,win:cand.reduce((a,b)=>b.hid>a.hid?b:a)}:{...t,win:null}; });
+  const crown=front.slice().sort((a,b)=>b.hid-a.hid)[0];                                        // top prominence overall
+  return {picks,crown};
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
-  const {picks,crown,extValue,extCap}=tierPicks();
+  const {picks,crown}=tierPicks();
   host.innerHTML=picks.map(t=>{ const w=t.win, col=w?cvar(MODELS[w.m].c):cvar('--muted');
     const pick=w?`<span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-        <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b> · yield <b>${w.y.toFixed(2)}</b></span>`:`<span class="faint">no couple in band</span>`;
+        <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b> · prominence <b>${w.hid>=0?'+':''}${w.hid.toFixed(2)}</b></span>`:`<span class="faint">no frontier couple in band</span>`;
     return `<div class="card pad crit tier">
       <div class="tier-band">quality ${t.lo===0?"≤ ":t.lo+"–"}${t.hi>=99?"and up":t.hi}</div>
       <h3>${t.name}</h3>
       <div class="tier-win">${pick}</div>
       <span class="ex">${t.ex}</span>
     </div>`; }).join("");
-  const c=crown[0], col=cvar(MODELS[c.m].c);
+  const c=crown, col=cvar(MODELS[c.m].c);
   const cr=document.getElementById("tier-crown");
   if(cr) cr.innerHTML=`
-    <div class="crown-badge">👑 Best of both worlds</div>
+    <div class="crown-badge">👑 Most prominent on the frontier</div>
     <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label} · ${capE(c.e)}</div>
-    <div class="crown-score">V = q³ ⁄ c = <b>${c.V.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×, over couples clearing q ≥ ${QFLOOR.toFixed(2)})</span></div>
-    <p class="crown-note">Ranks models by a capability-weighted value score <b>V = q³/c</b>, evaluated <b>only over couples that clear a complexity bar q ≥ ${QFLOOR.toFixed(2)}</b> (≈ must match the flagship). Two reasons, both backed by the benchmark-vs-satisfaction literature&nbsp;: a task-averaged score dilutes the <b>hard tail</b> where effort actually pays, and satisfaction is <b>threshold/reliability-driven</b>, not mean-driven — so the floor lifts the winning effort off "low" (which only wins on flat average quality). For reference, the pure extremes&nbsp;: max value (yield) → <b style="color:${cvar(MODELS[extValue.m].c)}">${MODELS[extValue.m].label} · ${capE(extValue.e)}</b> · max capability (quality) → <b style="color:${cvar(MODELS[extCap.m].c)}">${MODELS[extCap.m].label} · ${capE(extCap.e)}</b>. <b>${MODELS[c.m].label} · ${capE(c.e)}</b> wins the balance.</p>`;
+    <div class="crown-score">hidden prominence = <b>${c.hid>=0?'+':''}${c.hid.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×)</span></div>
+    <p class="crown-note">Crowned by the <b>hidden prominence</b> score — the couple that stands out most from its immediate neighbours on the frontier (a discrete 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>). A high value means the model is a clear step up from the cheaper option while the pricier option adds little — the genuine knee. It is the <b>top score in the Frontier window</b> as well as overall&nbsp;: the point where the frontier first breaks clearly above parity for a moderate premium.</p>`;
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2);
