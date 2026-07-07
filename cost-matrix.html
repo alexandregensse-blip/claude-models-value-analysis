@@ -83,18 +83,29 @@
 #score-tbl td{vertical-align:middle}
 .scorepill{display:inline-block;min-width:52px;text-align:center;font-size:12.5px;font-weight:700;padding:2px 10px;border-radius:20px;font-variant-numeric:tabular-nums}
 .frontbadge{display:inline-block;font-size:11px;font-weight:600;color:var(--opus48)}
-/* Pareto chained mini-blocks (frontier order) — same idea as the tier cards, small */
-.pareto-blocks{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px 4px;margin-top:12px}
-.pblock{display:inline-flex;flex-direction:column;justify-content:center;gap:1px;padding:5px 9px;border:1px solid var(--line2);border-left-width:3px;border-radius:8px;background:var(--panel);white-space:nowrap}
-.pblock b{font-size:12.5px;line-height:1.1}
-.pblock-e{font-size:10.5px;color:var(--muted);text-transform:capitalize}
-.pblock-n{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
-.pconn{display:flex;align-items:center;color:var(--faint);font-size:13px}
+/* Pareto chained mini-blocks (frontier order) — centred, filling the full width */
+.pareto-blocks{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px 6px;margin-top:20px}
+.pblock{flex:1 1 120px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2px;padding:8px 10px;border:1.5px solid var(--line2);border-radius:9px;background:var(--panel)}
+.pblock b{font-size:13px;line-height:1.15}
+.pblock-e{font-size:11px;color:var(--muted);text-transform:capitalize}
+.pblock-n{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
+.pconn{display:flex;align-items:center;color:var(--faint);font-size:14px}
+/* Tier tuner: window viz + q*/σ sliders */
+#tier-tuner{margin-bottom:16px}
+.tuner-svg{width:100%;height:auto;display:block}
+.tuner-ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:6px 20px;margin-top:8px}
+.tuner-row{display:flex;align-items:center;gap:8px;font-size:12px}
+.tuner-name{font-weight:700;min-width:110px;color:var(--tw)}
+.tuner-row label{display:inline-flex;align-items:center;gap:5px;color:var(--muted)}
+.tuner-row input[type=range]{width:84px;accent-color:var(--tw);cursor:pointer}
+.tuner-row b{font-variant-numeric:tabular-nums;color:var(--ink);min-width:32px}
+/* Tier cards + crown (shared layout) */
 .tier{display:flex;flex-direction:column}
-.tier-band{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:2px}
-.tier h3{margin-bottom:6px}
+.tier-head{text-align:center;margin-bottom:10px}
+.tier-q{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.tier-name{display:block;font-family:Georgia,serif;font-size:17px;font-weight:600;margin-top:1px}
 .tier-top{display:flex;align-items:center;gap:8px;margin:2px 0 10px;padding-bottom:10px;border-bottom:1px dashed var(--line2)}
-.tier-left{flex:1 1 50%;min-width:0}
+.tier-left{flex:1 1 50%;min-width:0;text-align:left}
 .tier-pick{display:block;font-weight:700;font-size:15px}
 .tier-pick .dot{width:10px;height:10px}
 .tier-nums{display:block;font-size:12px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
@@ -102,13 +113,7 @@
 .tier-yield{flex:1 1 50%;text-align:right;font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1;color:var(--opus48);font-variant-numeric:tabular-nums}
 .tier-yield small{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:3px}
 .tier .ex{margin-top:auto;border-top:none;padding-top:0}
-.crown{text-align:center;border:1px solid var(--opus48);background:color-mix(in srgb,var(--opus48) 6%,var(--panel));max-width:max(360px,calc((100% - 42px)/4*1.8));margin:14px auto 0}
-.crown-badge{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--opus48);font-weight:700}
-.crown-model{font-family:Georgia,serif;font-size:clamp(22px,3vw,30px);font-weight:600;margin:4px 0 2px}
-.crown-model .dot{width:13px;height:13px;margin-right:8px}
-.crown-score{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
-.crown-score b{color:var(--ink);font-size:16px}
-.crown-note{max-width:none;margin:10px 0 0;font-size:13px;color:var(--muted)}
+.crown{border:1px solid var(--opus48);background:color-mix(in srgb,var(--opus48) 6%,var(--panel));max-width:max(360px,calc((100% - 42px)/4*1.8));margin:14px auto 0}
 .zoomctl{position:absolute;top:10px;right:10px;display:flex;gap:3px;z-index:5;opacity:.7}
 .zoomctl:hover{opacity:1}
 .zoomctl button{width:22px;height:22px;padding:0;font-size:14px;line-height:1;cursor:pointer;
@@ -124,15 +129,14 @@
     <div class="meta">
       <div><span class="k">Baseline</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1.00</b></div>
       <div><span class="k">Measurement sources</span><br><b><span class="nsrc">…</span> independent</b></div>
-      <div><span class="k">Same-task points</span><br><b>90+</b></div>
-      <div><span class="k">Overall confidence</span><br><b>Medium&nbsp;→&nbsp;high</b></div>
+      <div><span class="k">Same-task points</span><br><b>179</b></div>
     </div>
   </header>
 
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
     <h2>1 · The consolidated landscape</h2>
-    <p class="sub">One curve per model, one point per effort level (low → max). <b>X axis = relative cost</b>, <b>Y axis = relative quality</b> — <b>both computed identically</b>&nbsp;: we never compare two raw benchmark scores across benchmarks (incompatible scales); within each benchmark we take the <b>ratio between couples</b>, normalise the benchmark to <b>Opus 4.8 @medium = 1.0</b> (÷ the anchor when present, else a ×0.5-weighted bridge) and consolidate by <b>source-weighted median</b>. The <b>oval</b> = a <b>robust, asymmetric</b> uncertainty band (per-side spread with <b>Huber ±1.5·MAD</b> clipping&nbsp;: an outlier benchmark widens its side but doesn't dominate&nbsp;; width = cost, height = quality). It is <b>centred on the median</b> (the dot is always inside), the quality axis is <b>dilated near parity (1.0)</b> to separate near-equal models, and every oval is <b>faint until you hover it</b>. <b>Haiku 4.5</b> is not plotted here (see §2 and the Pareto).</p>
+    <p class="sub">One curve per model, one point per effort (low → max). Both axes are <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b> and built the same way (see §4). The <b>oval</b> is a robust, asymmetric uncertainty band (<b>width = cost, height = quality</b>), <b>centred on the median</b> and <b>faint until you hover it</b>; the quality axis is <b>dilated near parity</b> to separate near-equal models. <b>Haiku 4.5</b> is not plotted here (see §2 and the Pareto).</p>
     <div class="card pad">
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
@@ -171,15 +175,16 @@
     <div class="card pad" style="margin-top:14px">
       <h3>Best value by task tier — what to actually run</h3>
       <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels</b> (q* = 0.6 / 0.8 / 1.0 / 1.2 on the relative-quality axis, anchor Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.0). For each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around the target complexity times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is that couple's yield (quality per unit cost, as a %). The crown below uses the <b>hidden prominence</b> instead (the sharpest knee on the frontier). All picks are <b>computed</b> from the data.</p>
+      <div id="tier-tuner"></div>
       <div class="grid" id="tier-cards"></div>
-      <div class="card pad crown" id="tier-crown"></div>
+      <div id="tier-crown"></div>
     </div>
   </section>
 
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
     <h2>2 · The normalized matrix</h2>
-    <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing intelligence</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree). To get back to dollars, multiply by a reference task cost (e.g. agentic&nbsp;≈&nbsp;$1.99/task for Opus&nbsp;4.8&nbsp;@max on the AA Index).</p>
+    <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing intelligence</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
     <div class="card pad chartbox">
       <table id="matrix-tbl">
         <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Intel.<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
@@ -417,7 +422,7 @@ function drawPareto(){
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
     +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Frontier fit — concave log · R² = ${R2.toFixed(2)}</span>`;
   const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
-  if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${fmtC(p.c)}× · q ${p.q.toFixed(2)}</span></span>`).join("");
+  if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${p.q.toFixed(2)}× · ${fmtC(p.c)}×</span></span>`).join("");
 }
 // ---- Value-score table : distance of each couple to the fitted Pareto-frontier envelope (from drawPareto) ----
 function fillScoreTable(scored){
@@ -437,12 +442,15 @@ function fillScoreTable(scored){
 // focuses on couples near the target complexity; yield (which falls with cost) tilts the choice toward value.
 // The CROWN uses the HIDDEN PROMINENCE: hid(n) = 2·Sₙ − S_prev − S_next along the frontier (S = signed distance to the
 // envelope, as in the value-score table; endpoints get 0). It marks the sharpest knee — the standout couple overall.
-const TSIGMA=0.13;   // Gaussian width around each target complexity (in relative-quality units)
+// q = target complexity, sig = Gaussian width — BOTH live-adjustable via the tuner (drawTierTuner); the proximity
+// is measured in the DILATED metric T(q) (same transform as the fit & the value score), so the windows are consistent
+// with the chart. TWCOL = one colour per tier window.
+const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", q:0.6, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      q:0.8, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        q:1.0, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Frontier",            q:1.2, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Triage &amp; volume", q:0.6, sig:0.6, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday build",      q:0.8, sig:0.6, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Professional",        q:1.0, sig:0.6, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Frontier",            q:1.2, sig:0.6, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
@@ -455,8 +463,8 @@ function tierPicks(){
   const resAll=rows.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   front.forEach(p=>p.S=Math.tanh((symT(p.q)-fevT(Math.log10(p.c)))/rms));
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
-  const K=(q,q0)=>Math.exp(-Math.pow((q-q0)/TSIGMA,2));
-  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q)*b.y > K(a.q,t.q)*a.y ? b : a)}));   // proximity-weighted yield
+  const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
+  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
   const crown=front.slice().sort((a,b)=>b.hid-a.hid)[0];                                                    // top prominence overall
   return {picks,crown};
 }
@@ -464,26 +472,48 @@ function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  host.innerHTML=picks.map(t=>{ const w=t.win, col=cvar(MODELS[w.m].c);
-    return `<div class="card pad crit tier">
-      <div class="tier-band">target complexity q* = ${t.q.toFixed(1)}</div>
-      <h3>${t.name}</h3>
+  const cardHTML=(head,q,name,col,w,bigVal,bigLab,ex,extra="")=>`<div class="card pad crit tier${extra}">
+      <div class="tier-head">${q!=null?`<span class="tier-q">Q* ${q.toFixed(1)}</span>`:`<span class="tier-q">${head}</span>`}<span class="tier-name">${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-          <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b></span>
+          <span class="tier-nums">Cost <b>${w.c.toFixed(2)}×</b> · Quality <b>${w.q.toFixed(2)}×</b></span>
         </div>
-        <div class="tier-yield">${(w.y*100).toFixed(0)}%<small>yield</small></div>
+        <div class="tier-yield">${bigVal}<small>${bigLab}</small></div>
       </div>
-      <span class="ex">${t.ex}</span>
-    </div>`; }).join("");
-  const c=crown, col=cvar(MODELS[c.m].c);
-  const cr=document.getElementById("tier-crown");
-  if(cr) cr.innerHTML=`
-    <div class="crown-badge">👑 Most prominent on the frontier</div>
-    <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label} · ${capE(c.e)}</div>
-    <div class="crown-score">hidden prominence = <b>${c.hid>=0?'+':''}${c.hid.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×)</span></div>
-    <p class="crown-note">Crowned by the <b>hidden prominence</b> score — the couple that stands out most from its immediate neighbours on the frontier (a discrete 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>). A high value means the model is a clear step up from the cheaper option while the pricier one adds little — the genuine knee.</p>`;
+      <span class="ex">${ex}</span>
+    </div>`;
+  host.innerHTML=picks.map(t=>cardHTML(null,t.q,t.name,cvar(MODELS[t.win.m].c),t.win,`${(t.win.y*100).toFixed(0)}%`,"Yield",t.ex)).join("");
+  const c=crown, cr=document.getElementById("tier-crown");
+  if(cr) cr.innerHTML=cardHTML("👑",null,"Best hidden value",cvar(MODELS[c.m].c),c,`${c.hid>=0?'+':''}${c.hid.toFixed(2)}`,"Hidden",
+    `The couple that stands out most from its immediate neighbours on the frontier — a 2nd difference of the value score S (<b>2·Sₙ − S_prev − S_next</b>). High = a clear step up from the cheaper option while the pricier one adds little: the genuine knee.`," crown");
+}
+// Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
+// plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.
+function drawTierTuner(){
+  const host=document.getElementById("tier-tuner"); if(!host) return;
+  const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; for(const e in cg){ const q=qg[e]; if(q) rows.push({m,e,c:cg[e][0],q:q[0]}); } }
+  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
+  const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
+  const qmn=0.55,qmx=1.28, W=1100,H=140,mL=8,mR=8,mT=8,mB=24, iw=W-mL-mR, ih=H-mT-mB, Tmn=symT(qmn),Tmx=symT(qmx);
+  const X=q=>mL+(symT(q)-Tmn)/(Tmx-Tmn)*iw;
+  let svg=`<svg viewBox="0 0 ${W} ${H}" class="tuner-svg" role="img" aria-label="Tier windows over the dilated quality axis">`;
+  [0.6,0.7,0.8,0.9,1.0,1.1,1.2].forEach(v=>{ const x=X(v); svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${v.toFixed(1)}</text>`; });
+  TIERS.forEach((t,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
+    for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=Math.exp(-Math.pow((symT(q)-symT(t.q))/t.sig,2)); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
+    d+=` L ${mL+iw} ${mT+ih} Z`;
+    svg+=`<path d="${d}" fill="${col}" fill-opacity="0.13" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
+       +`<line x1="${X(t.q)}" y1="${mT}" x2="${X(t.q)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
+  front.forEach(p=>svg+=`<circle cx="${X(p.q)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`);
+  svg+=`</svg>`;
+  let ctl='<div class="tuner-ctl">';
+  TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
+    +`<label>Q*<input type="range" min="0.55" max="1.28" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
+    +`<label>σ<input type="range" min="0.2" max="1.4" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
+  host.innerHTML=svg+ctl+'</div>';
+  host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
+    const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
+    document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2); drawTierTuner(); drawTiers(); }));
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2);
@@ -573,21 +603,18 @@ function drawGraph(){
     const x1=px(am),y1=py(ae),x2=px(bm),y2=py(be);
     const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1, amt=Math.min(34,0.22*len);
     const cx=(x1+x2)/2+(-dy/len)*amt, cy=(y1+y2)/2+(dx/len)*amt;
-    const w=Math.min(7,1.1+0.85*(o.w-1)), op=Math.min(.75,.36+.06*o.w);
-    s.appendChild(el("path",{d:`M${x1} ${y1} Q${cx} ${cy} ${x2} ${y2}`,fill:"none",stroke:LINK,"stroke-width":w,"stroke-opacity":op,"stroke-linecap":"round"}));
-    if(o.w>=2){ const lx=0.25*x1+0.5*cx+0.25*x2, ly=0.25*y1+0.5*cy+0.25*y2;
-      const lb=el("text",{x:lx,y:ly-1,fill:LINK,"font-size":9,"text-anchor":"middle","font-weight":700,"paint-order":"stroke","stroke":cvar('--panel'),"stroke-width":2.6,"stroke-linejoin":"round"});
-      lb.textContent="×"+o.w;s.appendChild(lb);}});
-  const measured=new Set(); GROUPS.forEach(g=>g.n.forEach(x=>measured.add(x))); measured.add("haiku-4.5@solo");
+    const w=Math.min(4,0.7+0.45*(o.w-1)), op=Math.min(.7,.34+.05*o.w);
+    s.appendChild(el("path",{d:`M${x1} ${y1} Q${cx} ${cy} ${x2} ${y2}`,fill:"none",stroke:LINK,"stroke-width":w,"stroke-opacity":op,"stroke-linecap":"round"})); });
+  const measured=new Set(); GROUPS.forEach(g=>g.n.forEach(x=>measured.add(x)));
   const ring=(x,y,r,c)=>s.appendChild(el("circle",{cx:x,cy:y,r,fill:"none",stroke:c,"stroke-width":2.2}));
   const tally={g:0,y:0,o:0,r:0}, bump=c=>{tally[c>=3?'g':c===2?'y':c===1?'o':'r']++;};
-  for(const m in MEFF){ MEFF[m].forEach(e=>{ const id=m+"@"+e, x=px(m), y=(e==="solo"?mTg+ihg*0.52:py(e)), col=cvar(GMODEL[m].c), c=srcCount[id]||0;
+  for(const m in MEFF){ if(m==="haiku-4.5") continue; MEFF[m].forEach(e=>{ const id=m+"@"+e, x=px(m), y=py(e), col=cvar(GMODEL[m].c), c=srcCount[id]||0;
     if(measured.has(id)){ s.appendChild(el("circle",{cx:x,cy:y,r:5.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));}
     else { s.appendChild(el("circle",{cx:x,cy:y,r:4.8,fill:"none",stroke:cvar('--faint'),"stroke-width":1.3,"stroke-dasharray":"2 2"}));}
     ring(x,y,8.4,colFor(c)); bump(c);
     });}
   s.appendChild(el("circle",{cx:px("opus-4.8"),cy:py("medium"),r:11.5,fill:"none",stroke:cvar('--opus48'),"stroke-width":1.6,"stroke-dasharray":"1 2"}));
-  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts</b> + <b>Haiku&nbsp;4.5 as a single point</b> (no <code>effort</code> parameter → all its sources merged into one node). Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
+  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts.</b> Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
   document.getElementById("legendG").innerHTML=
     `<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.g};border-radius:50%;background:transparent"></span>≥3 sources</span>`
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.y};border-radius:50%;background:transparent"></span>2</span>`
@@ -643,7 +670,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-function renderAll(){drawB();drawPareto();drawTiers();drawMatrix();drawGraph();drawEdgeTable();fillMeta();
+function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawGraph();drawEdgeTable();fillMeta();
   ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);

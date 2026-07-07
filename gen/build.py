@@ -345,6 +345,7 @@ def main():
     app  = app.replace("__META__", json.dumps(META, separators=(",",":")))
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
+    body = body.replace("__NSAMETASK__", str(len(RD["cost"])))   # same-task cost-ratio measurement points (dynamic)
     html = f"<style>\n{css}\n</style>\n{body}\n<script>\n{app}\n</script>\n"
     open(OUT,"w").write(html)
     print(f"built {OUT}  ({len(html)} bytes)  cost-pts={len(RD['cost'])} tok-pts={len(RD['tok'])}")
