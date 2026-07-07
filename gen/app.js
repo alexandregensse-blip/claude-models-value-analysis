@@ -82,24 +82,25 @@ function drawB(){
   labs.sort((a,b)=>a.py-b.py);
   const placed=[], coll=(x,y,w)=>placed.some(P=>Math.abs(P.x-x)<(P.w+w)/2-1 && Math.abs(P.y-y)<11);
   labs.forEach(L=>{ const y0=L.py-9; let y=y0;
-    for(let step=1; coll(L.px,y,L.w) && step<80; step++){ y=y0+(step%2?-1:1)*Math.ceil(step/2)*3.6; }
-    y=Math.min(Math.max(y,mT+8),mT+ih-4); placed.push({x:L.px,y,w:L.w});
-    if(Math.abs(y-y0)>6) s.appendChild(el("line",{x1:L.px,y1:L.py-4,x2:L.px,y2:y+3,stroke:L.col,"stroke-width":0.7,"stroke-opacity":0.45}));
+    while(coll(L.px,y,L.w) && y>mT+8) y-=3.4;                                    // float straight UP off the point until clear
+    if(coll(L.px,y,L.w)){ y=y0; while(coll(L.px,y,L.w) && y<mT+ih-4) y+=3.4; }   // top region full → drop below instead
+    placed.push({x:L.px,y,w:L.w});
+    if(Math.abs(y-y0)>7) s.appendChild(el("line",{x1:L.px,y1:L.py-4,x2:L.px,y2:y+3,stroke:L.col,"stroke-width":0.7,"stroke-opacity":0.4}));   // leader line to its point
     const t=el("text",{x:L.px,y,fill:L.col,"font-size":8.5,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); });
-  // point tooltip — definitive "which point is which": model · effort · cost · quality near the nearest point
+  // point tooltip — shows ONLY when the cursor sits right on a point (~7px); compact "Model · Effort — X× · Y×"
   const tip=el("g",{"pointer-events":"none",opacity:0});
-  const trect=el("rect",{rx:4,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
-  const ttxt=el("text",{"font-size":11,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
+  const trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
+  const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
   const capE=e=>e.charAt(0).toUpperCase()+e.slice(1);
-  // hover: reveal ovals under the cursor + tooltip on the nearest point (property assignment → no duplicate listeners on redraw)
+  // hover: reveal ovals under the cursor + tooltip only when ON a point (property assignment → no duplicate listeners on redraw)
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU;
       o.el.setAttribute("opacity", ((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
-    let best=null,bd=625; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });
+    let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });   // 49 = 7px² : right on the dot
     if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c));
-      ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+70),mL+iw-70)); ttxt.setAttribute("y",Y(best.q)-13);
-      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — ${best.c}× coût · ${best.q}× qualité`;
-      const bb=ttxt.getBBox(); trect.setAttribute("x",bb.x-6); trect.setAttribute("y",bb.y-3); trect.setAttribute("width",bb.width+12); trect.setAttribute("height",bb.height+6);
+      ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+52),mL+iw-52)); ttxt.setAttribute("y",Y(best.q)-11);
+      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — ${best.c}× · ${best.q}×`;
+      const bb=ttxt.getBBox(); trect.setAttribute("x",bb.x-4); trect.setAttribute("y",bb.y-2); trect.setAttribute("width",bb.width+8); trect.setAttribute("height",bb.height+4);
       tip.setAttribute("opacity",1); } else tip.setAttribute("opacity",0); };
   s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); };
   const lg=document.getElementById("legendB"); lg.innerHTML=
