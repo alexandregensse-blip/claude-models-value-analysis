@@ -244,8 +244,9 @@ function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  const cardHTML=(q,name,col,w,ex)=>`<div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Q* ${q.toFixed(2)} – ${name}</span></div>
+  // compact=true → header-mirror cards: no Q* value, no long example, reduced height
+  const cardHTML=(q,name,col,w,ex,compact)=>`<div class="card pad crit tier${compact?' tier-compact':''}">
+      <div class="tier-head"><span class="tier-name">${compact?'':`Q* ${q.toFixed(2)} – `}${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
@@ -253,18 +254,20 @@ function drawTiers(){
         </div>
         <div class="tier-yield">${Math.round(w.norm)}</div>
       </div>
-      <span class="ex">${ex}</span>
+      ${compact?'':`<span class="ex">${ex}</span>`}
     </div>`;
-  const cardsHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
-  host.innerHTML=cardsHTML;
-  const top=document.getElementById("tier-cards-top"); if(top) top.innerHTML=cardsHTML;   // mirror at the top of the page
-  const c=crown, col=cvar(MODELS[c.m].c), cr=document.getElementById("tier-crown");
-  if(cr) cr.innerHTML=`<div class="card pad crown">
+  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");
+  const top=document.getElementById("tier-cards-top");
+  if(top) top.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // compact mirror near the header
+  const c=crown, col=cvar(MODELS[c.m].c);
+  const crownHTML=note=>`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>
+      ${note?`<p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>`:''}
     </div>`;
+  const cr=document.getElementById("tier-crown"); if(cr) cr.innerHTML=crownHTML(true);
+  const crT=document.getElementById("tier-crown-top"); if(crT) crT.innerHTML=crownHTML(false);   // note-less copy above the header cards
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
 // plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.

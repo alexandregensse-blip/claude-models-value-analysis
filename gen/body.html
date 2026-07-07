@@ -1,34 +1,42 @@
 <div class="wrap">
-  <header>
-    <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span> independent measurement sources</div>
-    <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
-    <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
-    <div class="meta">
-      <div><span class="k">Baseline</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1.00</b></div>
-      <div><span class="k">Measurement sources</span><br><b><span class="nsrc">…</span> independent</b></div>
-      <div><span class="k">Same-task points</span><br><b>__NSAMETASK__</b></div>
+  <header class="hero">
+    <div class="hero-main">
+      <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span> independent measurement sources</div>
+      <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
+      <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
+    </div>
+    <div class="hero-side">
+      <a class="gh-btn" href="https://github.com/alexandregensse-blip/claude-models-value-analysis" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+      <div class="gh-name">Alexandre Gensse</div>
+      <div class="meta meta-side">
+        <div><span class="k">Baseline</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1.00</b></div>
+        <div><span class="k">Measurement sources</span><br><b><span class="nsrc">…</span> independent</b></div>
+      </div>
     </div>
   </header>
 
-  <!-- ============ AT-A-GLANCE : best value by tier (mirror of the block in §1) ============ -->
-  <section id="atglance" style="margin-top:clamp(28px,4vw,44px)">
-    <h2>Best value by task tier</h2>
-    <p class="sub">The bottom line up front — the best-value (model, effort) for four task-complexity levels. Method, chart and live tuning are in §1.</p>
+  <!-- ============ AT-A-GLANCE : best overall + best value by tier (mirror of §1) ============ -->
+  <section id="atglance" class="major">
+    <h2 class="blocktitle">Best value by task tier</h2>
+    <div id="tier-crown-top"></div>
     <div class="grid" id="tier-cards-top"></div>
   </section>
 
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
-    <h2>1 · The consolidated landscape</h2>
-    <p class="sub">One curve per model, one point per effort (low → max). Both axes are <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b> and built the same way (see §4). The <b>oval</b> is a robust, asymmetric uncertainty band (<b>width = cost, height = quality</b>), <b>centred on the median</b> and <b>faint until you hover it</b>; the quality axis is <b>dilated near parity</b> to separate near-equal models. <b>Haiku 4.5</b> is not plotted here (see §2 and the Pareto).</p>
+    <details class="fold-sec">
+    <summary>The consolidated landscape<span class="fold-hint">chart · Pareto · value score · tiers</span></summary>
+    <div class="fold-sec-body">
+    <p class="sub">One curve per model, one point per effort (low → max). Both axes are <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b> and built the same way (see the method). The <b>oval</b> is a robust, asymmetric uncertainty band (<b>width = cost, height = quality</b>), <b>centred on the median</b> and <b>faint until you hover it</b>; the quality axis is <b>dilated near parity</b> to separate near-equal models. <b>Haiku 4.5</b> is not plotted here (see the matrix and the Pareto).</p>
     <div class="card pad">
+      <h3 class="blocktitle">The cost–quality landscape</h3>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
       <p class="cap"><b>Both axes come from the same couple-atomic method</b>&nbsp;: same-task ratios → per-benchmark normalisation → weighted-median consolidation. The <b>effort→quality</b> rise is therefore <b>measured</b> (CursorBench, OSWorld, Braintrust, zenn… sweep effort), not assumed; cost ladders are monotone (the quality dip at max on Fable / Sonnet 4.6 is the real over-thinking inverted-U). <b>Bounds and gridlines recomputed dynamically.</b></p>
     </div>
-    <div class="card pad" style="margin-top:14px">
-      <h3>Pareto frontier — the best intelligence per cost</h3>
-      <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as §1, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
+    <div class="card pad block">
+      <h3 class="blocktitle">Pareto frontier — the best intelligence per cost</h3>
+      <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as the landscape above, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
       <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is the <b>frontier price envelope</b> — the cost the frontier charges for a given quality — the reference for the value score below.</p>
@@ -57,8 +65,8 @@
         </div>
       </div>
     </details>
-    <div class="card pad" style="margin-top:14px">
-      <h3>Best value by task tier — what to actually run</h3>
+    <div class="card pad block">
+      <h3 class="blocktitle">Best value by task tier — what to actually run</h3>
       <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b>; for each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
       <div class="grid" id="tier-cards"></div>
       <div id="tier-crown"></div>
@@ -67,11 +75,14 @@
         <div class="fold-body pad"><div id="tier-tuner"></div></div>
       </details>
     </div>
+    </div></details>
   </section>
 
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
-    <h2>2 · The normalized matrix</h2>
+    <details class="fold-sec">
+    <summary>The normalized matrix<span class="fold-hint">cost × model × effort table</span></summary>
+    <div class="fold-sec-body">
     <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
     <div class="card pad chartbox">
       <table id="matrix-tbl">
@@ -79,25 +90,31 @@
         <tbody></tbody>
       </table>
     </div>
-    <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as §1. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+    <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+    </div></details>
   </section>
 
   <!-- ============ SOURCES ============ -->
   <section id="graph">
-    <h2>3 · The measurement sources</h2>
-    <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b>. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
+    <details class="fold-sec">
+    <summary>The measurement sources<span class="fold-hint">every same-task source · linked couples</span></summary>
+    <div class="fold-sec-body">
+    <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b> — <b>__NSAMETASK__ same-task measurement points</b> in total. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
     <div class="card pad">
-      <h3 id="edge-title">The sources that weave the links</h3>
+      <h3 id="edge-title" class="blocktitle">The sources that weave the links</h3>
       <div class="chartbox"><table id="edge-tbl">
         <thead><tr><th>Source</th><th>Actual config (harness · effort)</th><th>Type</th><th>Linked couples (same task)</th></tr></thead>
         <tbody></tbody>
       </table></div>
     </div>
+    </div></details>
   </section>
 
   <!-- ============ METHOD ============ -->
   <section id="confidence">
-    <h2>4 · How the numbers are built — the method</h2>
+    <details class="fold-sec">
+    <summary>How the numbers are built — the method<span class="fold-hint">same-task ratios · robust consolidation</span></summary>
+    <div class="fold-sec-body">
     <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
     <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;4.8&nbsp;@medium</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
     <details class="fold">
@@ -113,6 +130,7 @@
         </ol>
       </div>
     </details>
+    </div></details>
   </section>
 
   <div class="foot">

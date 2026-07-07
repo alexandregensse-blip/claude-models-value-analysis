@@ -26,16 +26,17 @@
   body{margin:0;background:var(--paper);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:min(1720px,96vw);margin:0 auto;padding:clamp(20px,3.5vw,52px)}
+  .wrap{max-width:min(1280px,94vw);margin:0 auto;padding:clamp(20px,3.5vw,52px)}
   h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
   h1{font-size:clamp(30px,5vw,50px);line-height:1.05}
   h2{font-size:clamp(21px,3vw,27px);line-height:1.15;margin-bottom:.15em}
   h3{font-size:16px;font-weight:600}
   .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fable5);font-weight:600}
-  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:70ch;margin-top:.7em}
+  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:82ch;margin-top:.7em}
   .muted{color:var(--muted)} .faint{color:var(--faint)}
-  section{margin-top:clamp(40px,6vw,72px)}
-  .sub{color:var(--muted);max-width:74ch;margin:.35em 0 1.4em}
+  section{margin-top:clamp(52px,7vw,92px)}
+  section.major{margin-top:clamp(40px,5vw,64px)}
+  .sub{color:var(--muted);max-width:92ch;margin:.35em 0 1.4em}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
   .pad{padding:clamp(16px,2.5vw,26px)}
   .num{font-variant-numeric:tabular-nums}
@@ -48,7 +49,7 @@
   .chartbox{overflow-x:auto}
   svg{display:block;max-width:100%;height:auto;font-family:inherit}
   #chartB,#chartP{width:100%}   /* §1 landscape + Pareto fill the full body width */
-  .cap{font-size:12.5px;color:var(--muted);margin-top:10px;max-width:82ch}
+  .cap{font-size:12.5px;color:var(--muted);margin-top:10px;max-width:98ch}
   table{border-collapse:collapse;width:100%;font-size:13.5px}
   th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
   th{font-weight:600;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
@@ -129,9 +130,13 @@
   border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--ink);font-family:inherit}
 .zoomctl button:hover{background:var(--paper)}
 /* Foldable exploratory blocks — collapsed by default on the public page */
-details.fold{margin-top:14px}
+details.fold{margin-top:30px}
+.block{margin-top:30px}
+/* Uniform, relatively-large title for every major block */
+.blocktitle{font-family:Georgia,serif;font-weight:600;font-size:clamp(19px,2.3vw,23px);
+  line-height:1.15;letter-spacing:-.01em;margin:0 0 .5em}
 details.fold>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;
-  font-family:Georgia,serif;font-size:15px;font-weight:600;color:var(--ink);
+  font-family:Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);
   padding:13px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);
   box-shadow:var(--shadow);user-select:none;transition:border-color .15s}
 details.fold>summary::-webkit-details-marker{display:none}
@@ -144,3 +149,40 @@ details.fold>summary .fold-hint{margin-left:auto;font-family:-apple-system,sans-
 details.fold[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;box-shadow:none}
 details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-left-radius:0;border-top-right-radius:0}
 .fold-body{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+/* Section-level fold — the h2 itself becomes the collapsible header */
+details.fold-sec>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:11px;
+  font-family:Georgia,serif;font-weight:600;font-size:clamp(21px,3vw,27px);line-height:1.15;
+  letter-spacing:-.01em;color:var(--ink);padding:6px 0;user-select:none}
+details.fold-sec>summary::-webkit-details-marker{display:none}
+details.fold-sec>summary::before{content:"▸";font-family:inherit;color:var(--fable5);
+  font-size:.6em;transition:transform .15s;flex:none}
+details.fold-sec[open]>summary::before{transform:rotate(90deg)}
+details.fold-sec>summary:hover{color:var(--fable5)}
+details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,sans-serif;
+  font-size:12px;font-weight:500;color:var(--faint);letter-spacing:.02em}
+@media (max-width:640px){details.fold-sec>summary .fold-hint{display:none}}
+.fold-sec-body{margin-top:2px}
+/* Header: title/lede on the left, GitHub + author + baseline meta on the right */
+.hero{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:20px 44px}
+.hero-main{flex:1 1 460px;min-width:0}
+.hero-side{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:9px;text-align:right}
+.gh-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border:1px solid var(--line2);
+  border-radius:10px;background:var(--panel);color:var(--ink);font-size:13.5px;font-weight:600;
+  text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s}
+.gh-btn:hover{border-color:var(--fable5)}
+.gh-btn svg{width:17px;height:17px;fill:currentColor;flex:none}
+.gh-name{font-size:13.5px;font-weight:600;color:var(--muted)}
+.meta.meta-side{flex-direction:column;flex-wrap:nowrap;gap:12px;margin-top:6px;padding-top:14px;
+  border-top:1px solid var(--line);text-align:right}
+.meta.meta-side .k{font-size:11.5px}
+@media (max-width:560px){.hero-side{align-items:flex-start;text-align:left}
+  .meta.meta-side{text-align:left}}
+/* Compact tier cards mirrored near the header (no Q*, no example, shorter) */
+.tier-compact{min-height:0}
+.tier-compact .tier-head{margin-bottom:6px}
+.tier-compact .tier-top{margin:0;padding-bottom:0;border-bottom:none}
+.tier-compact .tier-name{font-size:15px}
+.tier-compact .tier-yield{font-size:clamp(22px,3vw,30px)}
+/* Best-overall copy above the header cards */
+#tier-crown-top{margin-bottom:22px}
+#tier-crown-top .crown{margin:0 auto}
