@@ -154,17 +154,17 @@ function drawPareto(){
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
-  // Fit the frontier ENVELOPE in the chart's DILATED quality metric as a CONCAVE quadratic: T(q) = a + b·x + c·x² (x=log10 cost).
-  // Concave (c<0) → on the chart (Y pixel affine in T) it renders as a LOG SHAPE: fast rise at low cost, flattening at high cost.
-  const fit=quadFit(par.map(p=>Math.log10(p.c)),par.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x, fev=x=>symTinv(fevT(x));
-  const tv=par.map(p=>symT(p.q)), tm=tv.reduce((a,b)=>a+b,0)/tv.length,                                 // envelope goodness-of-fit R² (dilated metric), rendered live
-    ssT=tv.reduce((a,v)=>a+(v-tm)*(v-tm),0), rssT=par.reduce((a,p)=>a+Math.pow(symT(p.q)-fevT(Math.log10(p.c)),2),0), R2=1-rssT/ssT;
+  // HORIZONTAL envelope: fit log10(cost) = g(T(quality)) — the frontier "price" for a given quality. Distance is measured
+  // in log-COST (how much cheaper/dearer than that price), so cost is weighted linearly (no deform where the curve flattens).
+  const hfit=quadFit(par.map(p=>symT(p.q)),par.map(p=>Math.log10(p.c))), gevT=t=>hfit[0]+hfit[1]*t+hfit[2]*t*t;
+  const xv=par.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² in log-cost, rendered live
+    ssX=xv.reduce((a,v)=>a+(v-xm)*(v-xm),0), rssX=par.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
   { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
-  { const cmn=Math.min(...par.map(p=>p.c)), cmx=Math.max(...par.map(p=>p.c)), lmn=Math.log10(cmn), lmx=Math.log10(cmx); let d="";
-    for(let i=0;i<=56;i++){ const lx=lmn+(lmx-lmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,lx))+" "+Y(fev(lx))+" "; }
+  { const qa=par.map(p=>p.q), qmn=Math.min(...qa), qmx=Math.max(...qa); let d="";                        // draw the envelope by sampling quality → cost
+    for(let i=0;i<=56;i++){ const q=qmn+(qmx-qmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,gevT(symT(q))))+" "+Y(q)+" "; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
-  // score = signed distance to the envelope IN THE DILATED METRIC, squashed: tanh(residual_T / RMS). +1 above · 0 on · −1 below.
-  const resAll=pts.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
+  // score = signed distance in log-cost: + = cheaper than the frontier price for this quality, − = dearer. Squashed by tanh.
+  const resAll=pts.map(p=>gevT(symT(p.q))-Math.log10(p.c)), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   const scored=pts.map((p,i)=>({...p,score:Math.tanh(resAll[i]/rms),front:pset.has(p.m+"@"+p.e)}));
   fillScoreTable(scored);
   const ells=drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP");   // ovals only on the frontier points
@@ -183,7 +183,7 @@ function drawPareto(){
   if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Frontier fit — concave log · R² = ${R2.toFixed(2)}</span>`;
+    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Frontier envelope (cost vs quality) · R² = ${R2.toFixed(2)}</span>`;
   const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
   if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${p.q.toFixed(2)}× · ${fmtC(p.c)}×</span></span>`).join("");
 }
@@ -221,10 +221,10 @@ function tierPicks(){
     for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0],y:q[0]/cg[e][0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  // envelope + value score S + hidden prominence (for the crown) — same envelope as the value-score table
-  const fit=quadFit(front.map(p=>Math.log10(p.c)),front.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x;
-  const resAll=rows.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
-  front.forEach(p=>p.S=Math.tanh((symT(p.q)-fevT(Math.log10(p.c)))/rms));
+  // horizontal envelope + value score S + hidden prominence (for the crown) — same envelope as the value-score table
+  const hfit=quadFit(front.map(p=>symT(p.q)),front.map(p=>Math.log10(p.c))), gevT=t=>hfit[0]+hfit[1]*t+hfit[2]*t*t;
+  const resAll=rows.map(p=>gevT(symT(p.q))-Math.log10(p.c)), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
+  front.forEach(p=>p.S=Math.tanh((gevT(symT(p.q))-Math.log10(p.c))/rms));
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
   const hidMin=Math.min(...front.map(p=>p.hid)), anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), den=((anc?anc.hid:0)-hidMin)||1;
   front.forEach(p=>p.norm=100*(p.hid-hidMin)/den);   // fused relative score: 0 = weakest frontier couple, 100 = anchor (Opus 4.8 @medium)
