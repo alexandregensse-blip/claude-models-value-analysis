@@ -10,6 +10,13 @@
     </div>
   </header>
 
+  <!-- ============ AT-A-GLANCE : best value by tier (mirror of the block in §1) ============ -->
+  <section id="atglance" style="margin-top:clamp(28px,4vw,44px)">
+    <h2>Best value by task tier</h2>
+    <p class="sub">The bottom line up front — the best-value (model, effort) for four task-complexity levels. Method, chart and live tuning are in §1.</p>
+    <div class="grid" id="tier-cards-top"></div>
+  </section>
+
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
     <h2>1 · The consolidated landscape</h2>
@@ -24,7 +31,7 @@
       <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as §1, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is the <b>frontier envelope</b> — a concave fit in the chart's dilated metric that renders as a <b>log shape</b> (fast rise at low cost, flattening at high cost), the reference for the value score below.</p>
+      <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is the <b>frontier price envelope</b> — the cost the frontier charges for a given quality — the reference for the value score below.</p>
       <div id="pareto-blocks" class="pareto-blocks"></div>
     </div>
     <div class="card pad" style="margin-top:14px">
@@ -58,26 +65,21 @@
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
     <h2>2 · The normalized matrix</h2>
-    <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing intelligence</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
+    <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
     <div class="card pad chartbox">
       <table id="matrix-tbl">
-        <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Intel.<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
+        <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Rel. quality<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <p class="cap">"Intel.&nbsp;@max" = Vals index (finance+coding composite), measured at <b>max</b> effort — quality varies little with effort on code, so this index is also a good approximation at high/xhigh. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+    <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as §1. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
   </section>
 
-  <!-- ============ LINKING GRAPH ============ -->
+  <!-- ============ SOURCES ============ -->
   <section id="graph">
-    <h2>3 · The linking graph — where each cell comes from</h2>
-    <p class="sub">Restricted to the <b>6 current models</b> (Fable 5, Opus 4.8/4.7, Sonnet 5/4.6, Haiku 4.5); older models appear only as a <b>faded background</b>, as relays between sources. Each <b>node</b> = a (model, effort) couple; each <b>edge</b> = a source that measured those couples <b>on the same task</b>. A <b>filled</b> cell = measured; <b>hollow</b> = inferred. A <b><span style="color:#E0342A">red circle</span></b> rings any node corroborated by <b>fewer than 3 independent sources</b>.</p>
+    <h2>3 · The measurement sources</h2>
+    <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b>. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
     <div class="card pad">
-      <div class="legend" id="legendG"></div>
-      <div class="chartbox"><svg id="chartG" viewBox="0 0 780 470" role="img" aria-label="Linking graph of model-effort couples by source"></svg></div>
-      <p class="cap" id="graphcap"></p>
-    </div>
-    <div class="card pad" style="margin-top:14px">
       <h3 id="edge-title">The sources that weave the links</h3>
       <div class="chartbox"><table id="edge-tbl">
         <thead><tr><th>Source</th><th>Actual config (harness · effort)</th><th>Type</th><th>Linked couples (same task)</th></tr></thead>

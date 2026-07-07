@@ -13,19 +13,16 @@ const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.se
 const logTicks=(vmin,vmax)=>{const o=[];for(let e=Math.floor(Math.log10(vmin));Math.pow(10,e)<=vmax*1.0001;e++)for(let b=1;b<=9;b++){const v=b*Math.pow(10,e);if(v>=vmin*0.999&&v<=vmax*1.001)o.push(v);}return o;};
 const tickLbl=v=>{const m=Math.round(v/Math.pow(10,Math.floor(Math.log10(v)+1e-9)));return m===1||m===2||m===5;};
 const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag,step=(n<1.5?1:n<3?2:n<7?5:10)*mag,o=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)o.push(Math.round(t*1e4)/1e4);return o;};
-// least-squares quadratic y = a + b·x + c·x² (Gaussian elimination on the 3×3 normal equations).
-// Used to fit the frontier envelope as a CONCAVE curve in the dilated metric → a clean log shape on the chart.
+// Solve a 3×3 linear system by Gaussian elimination — used for the weighted quadratic price-envelope fit.
 function solve3(A,b){ const M=A.map((r,i)=>[...r,b[i]]);
   for(let c=0;c<3;c++){ let piv=c; for(let r=c+1;r<3;r++) if(Math.abs(M[r][c])>Math.abs(M[piv][c])) piv=r; [M[c],M[piv]]=[M[piv],M[c]];
     for(let r=0;r<3;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<4;k++) M[r][k]-=f*M[c][k]; } }
   return [M[0][3]/M[0][0],M[1][3]/M[1][1],M[2][3]/M[2][2]]; }
 
-// ---- COST & QUALITY are DATA-DRIVEN: relative [central, ci_lo, ci_hi] per (model,effort), anchored opus-4.8@medium,
-// computed in build.py (cost_grid / ratio_grid) from measured same-task ratios. The only hand-set values are META below:
-// intel (external Vals capability index) + the size-sensitive tag — capability priors, not derivable from the cost data.
+// COST & QUALITY grids: relative [central, ci_lo, ci_hi] per (model, effort), anchored Opus 4.8 @medium = 1.0,
+// computed in build.py (cost_grid / ratio_grid) from measured same-task ratios.
 const COSTGRID=__COSTGRID__;
 const QUALGRID=__QUALGRID__;   // {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
-const META=__META__;           // {model:{intel, tag?}} — injected from build.py's editorial metadata sidecar (single source of truth)
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
 // Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
@@ -219,10 +216,10 @@ function fillScoreTable(scored){
 // with the chart. TWCOL = one colour per tier window.
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", q:0.59, sig:0.85, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      q:0.93, sig:0.70, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        q:1.01, sig:0.65, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Frontier",            q:1.20, sig:0.90, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Triage &amp; volume", q:0.75, sig:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday build",      q:0.95, sig:1.20, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Professional",        q:1.05, sig:1.20, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Cutting-Edge",        q:1.25, sig:1.20, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
@@ -235,12 +232,12 @@ function tierPicks(){
   const rms=Math.sqrt(rows.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/rows.length);
   front.forEach(p=>p.S=valueScoreOf(gevT,rms,p));
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
-  const hidMin=Math.min(...front.map(p=>p.hid)), anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), den=((anc?anc.hid:0)-hidMin)||1;
-  front.forEach(p=>p.norm=100*(p.hid-hidMin)/den);   // fused relative score: 0 = weakest frontier couple, 100 = anchor (Opus 4.8 @medium)
+  const hidMin=Math.min(...front.map(p=>p.hid)), anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), uA=Math.max((anc?anc.hid:0)-hidMin,1e-6);
+  front.forEach(p=>p.norm=100*Math.log1p(p.hid-hidMin)/Math.log1p(uA));   // LOG mapping: 0 = weakest frontier couple, 100 = anchor (Opus 4.8 @medium); compresses the top so it doesn't explode
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
-  const inWin=front.filter(p=>p.q>=1.0&&p.q<=1.8);                                                          // crown window [1.0, 1.8]
-  const crown=(inWin.length?inWin:front).slice().sort((a,b)=>b.hid-a.hid)[0];                               // top hidden within the window
+  const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
+  const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
   return {picks,crown};
 }
 function drawTiers(){
@@ -258,13 +255,15 @@ function drawTiers(){
       </div>
       <span class="ex">${ex}</span>
     </div>`;
-  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
+  const cardsHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
+  host.innerHTML=cardsHTML;
+  const top=document.getElementById("tier-cards-top"); if(top) top.innerHTML=cardsHTML;   // mirror at the top of the page
   const c=crown, col=cvar(MODELS[c.m].c), cr=document.getElementById("tier-crown");
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note">Top <b>relative score</b> within the quality window [1.0, 1.8] — the couple that stands out most from its neighbours on the frontier (a 2nd difference of the value score S). The score is normalised so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium).</p>
+      <p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
@@ -292,8 +291,8 @@ function drawTierTuner(){
   const host=document.getElementById("tier-tuner"); if(!host) return;
   let ctl='';
   TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
-    +`<label>Q*<input type="range" min="0.55" max="1.28" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
-    +`<label>σ<input type="range" min="0.2" max="1.4" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
+    +`<label><span class="lbl">Q*</span><input type="range" min="0.55" max="1.28" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
+    +`<label><span class="lbl">σ</span><input type="range" min="0.2" max="1.4" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
   host.innerHTML=`<div id="tier-windows"></div><div class="tuner-ctl">${ctl}</div>`;
   drawTierWindows();
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
@@ -301,11 +300,12 @@ function drawTierTuner(){
     document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2);
     drawTierWindows(); drawTiers(); }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
-// ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
+// ---------- MATRIX (sorted by relative quality desc) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
 const fr=x=>x.toFixed(2);
 const ciStr=(m,e,v)=> (m==="opus-4.8"&&e==="medium") ? "anchor" : (v[1]===v[2] ? "single source" : `${fr(v[1])}–${fr(v[2])}`);
+const relQ=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?qg[e][0]:0; };   // quality at the model's top effort
 const M={};
-for(const m in META){ const cg=COSTGRID[m]||{}; M[m]={intel:META[m].intel, tag:META[m].tag};
+for(const m in COSTGRID){ const cg=COSTGRID[m]||{}; M[m]={q:relQ(m), tag:MODELS[m].tag};
   ["low","medium","high","xhigh","max","solo"].forEach(e=>{ M[m][e]= cg[e]? [cg[e][0], ciStr(m,e,cg[e])] : null; }); }
 function heat(v){
   const t=Math.max(0,Math.min(1,(Math.log10(v)-Math.log10(0.12))/(Math.log10(4.5)-Math.log10(0.12))));
@@ -315,9 +315,9 @@ function heat(v){
 }
 function drawMatrix(){
   const tb=document.querySelector("#matrix-tbl tbody"); tb.innerHTML="";
-  const rows=Object.keys(M).sort((a,b)=>M[b].intel-M[a].intel);
+  const rows=Object.keys(M).sort((a,b)=>M[b].q-M[a].q);
   for(const m of rows){ const md=MODELS[m], tr=document.createElement("tr");
-    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill" title="Cost is strongly task-size dependent: Sonnet 5 is verbose (~2.5x the tokens of Opus 4.8), so its relative cost is ~0.7x on short tasks but up to ~1.6x on long agentic ones — hence the wide CI.">size-sensitive</span>':''}</td>`;
+    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span>':''}</td>`;
     if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
       row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>merged · ${c[1]}</small></div></td>`;
     } else {
@@ -325,14 +325,14 @@ function drawMatrix(){
         row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>${c[1]}</small></div></td>`
                : `<td class="na">—</td>`; });
     }
-    row+=`<td class="mdl num">${M[m].intel.toFixed(1)}</td>`;
+    row+=`<td class="mdl num">${M[m].q.toFixed(2)}×</td>`;
     tr.innerHTML=row; tb.appendChild(tr);
   }
 }
 // ---------- LINKING GRAPH ----------
 // nodes = (model,effort) couples ; edges = a source that measured them on the SAME task.
 // DATA-DRIVEN: generated by build.py::groups_data() from raw-data.csv (nodes) + an editorial metadata sidecar
-// (label / type / verified config note). No more hand-maintained mirror that could silently drift from the CSV.
+// (label / type / verified config note).
 const GROUPS = __GROUPS_DATA__;
 const GMODEL = {
  "fable-5":{l:"Fable 5",c:"--fable5",cur:1},"opus-4.8":{l:"Opus 4.8",c:"--opus48",cur:1},
@@ -342,81 +342,15 @@ const GMODEL = {
  "sonnet-4.5":{l:"Sonnet 4.5",leg:1},"opus-4.1":{l:"Opus 4.1",leg:1},
 };
 const GCOL={sweep:"#2E9C8E",xmodel:"#7C6BB2",xgen:"#B98A3E"};
-const GTLAB={sweep:"effort sweep (same model)",xmodel:"cross-model (same generation)",xgen:"cross-generation bridge"};
-const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = SINGLE-OPERATING-POINT model (no discrete effort parameter) → one node merging all its sources, placed off the effort gridlines
-const MX={"fable-5":0,"opus-4.8":1,"opus-4.7":2,"sonnet-5":3,"sonnet-4.6":4,"haiku-4.5":5,"opus-4.6":6.4,"sonnet-3.7":6.9,"opus-4.5":7.3,"sonnet-4.5":7.8,"opus-4.1":8.3};
-const EORD=["max","xhigh","high","medium","low"];   // corroboration graph: 5 explicit efforts, no default row
-function buildEdges(){
-  const pm=new Map();
-  const add=(A,B,g,ty)=>{ if(A===B)return; const t=ty||g.t;
-    const k=[A,B].sort().join("|"); let o=pm.get(k);
-    if(!o){o={a:k.split("|")[0],b:k.split("|")[1],w:0,ty:{}};pm.set(k,o);}
-    const w=g.w||1; o.w+=w; o.ty[t]=(o.ty[t]||0)+w; };
-  GROUPS.forEach(g=>{
-    const cn=g.n.filter(x=>{const[mm,ee]=x.split("@");return GMODEL[mm]&&GMODEL[mm].cur&&MEFF[mm]&&MEFF[mm].includes(ee);});  // ladder nodes only: effort must be one of the model's own MEFF efforts (excludes @default/@nothink AND Haiku's non-ladder nodes — Haiku's sole effort is 'solo', never in GROUPS)
-    if(g.t==="sweep"){
-      const byM={}; cn.forEach(x=>{const[m,e]=x.split("@");(byM[m]=byM[m]||[]).push(e);});
-      for(const m in byM){ const es=[...new Set(byM[m])].sort((a,b)=>EORD.indexOf(a)-EORD.indexOf(b));
-        for(let i=0;i<es.length-1;i++) add(m+"@"+es[i],m+"@"+es[i+1],g); }                 // within-model effort ladder (sweep)
-      const byE={}; cn.forEach(x=>{const e=x.split("@")[1];(byE[e]=byE[e]||[]).push(x);});
-      for(const e in byE){ const a=byE[e]; for(let i=0;i<a.length;i++)for(let j=i+1;j<a.length;j++) add(a[i],a[j],g,"xmodel"); }  // cross-model at matched effort (e.g. OSWorld Opus4.8/Sonnet5/Sonnet4.6)
-    } else { for(let i=0;i<cn.length;i++)for(let j=i+1;j<cn.length;j++) add(cn[i],cn[j],g); }
-  });
-  return [...pm.values()].map(o=>{ let bt="xmodel",bw=-1; for(const t in o.ty) if(o.ty[t]>bw){bw=o.ty[t];bt=t;} o.type=bt; return o; });
-}
-function drawGraph(){
-  const s=document.getElementById("chartG"); s.innerHTML="";
-  const W=780,H=460,mLg=80,mRg=32,mTg=36,mBg=20, iwg=W-mLg-mRg, ihg=H-mTg-mBg;
-  const EY={}; EORD.forEach((e,i)=>EY[e]=i);
-  const colGap=iwg/5, rowGap=ihg/4;
-  const px=m=>mLg+MX[m]*colGap, py=e=>mTg+EY[e]*rowGap;
-  const nd=x=>x.split("@");
-  // effort rows (5 explicit efforts, no default row)
-  EORD.forEach(e=>{ const y=py(e);
-    s.appendChild(el("line",{x1:mLg-8,y1:y,x2:mLg+iwg,y2:y,stroke:cvar('--line'),"stroke-width":1}));
-    const t=el("text",{x:mLg-14,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=e;s.appendChild(t);});
-  // column labels — the 6 current models ONLY (legacy models fully removed from display)
-  for(const m in MX){ const g=GMODEL[m]; if(!g.cur||!MEFF[m]) continue;   // Haiku (no MEFF) not shown on the effort ladder
-    const t=el("text",{x:px(m),y:mTg-16,fill:cvar(g.c),"font-size":11.5,"font-weight":700,"text-anchor":"middle"});
-    t.textContent=g.l;s.appendChild(t);}
-  const nodeSrc={}; GROUPS.forEach(g=>{ g.n.forEach(id=>{ (nodeSrc[id]=nodeSrc[id]||new Set()).add(g.s); }); });   // dedup by SOURCE: one source's sub-benchmarks count once
-  const srcCount={}; for(const id in nodeSrc) srcCount[id]=nodeSrc[id].size;
-  const hks=new Set(); GROUPS.forEach(g=>{ if(g.n.some(id=>id.startsWith("haiku-4.5@"))) g.n.forEach(id=>{if(id.startsWith("haiku-4.5@"))hks.add(g.s);}); }); srcCount["haiku-4.5@solo"]=hks.size;   // Haiku merged node = distinct sources measuring it in any config
-  const COLR={g:"#2E9C5A",y:"#D9B23A",o:"#E08A2E",r:"#E0342A"};
-  const colFor=c=>c>=3?COLR.g:c===2?COLR.y:c===1?COLR.o:COLR.r;
-  const LINK=cvar('--muted');
-  buildEdges().forEach(o=>{ const[am,ae]=nd(o.a),[bm,be]=nd(o.b);
-    const x1=px(am),y1=py(ae),x2=px(bm),y2=py(be);
-    const dx=x2-x1,dy=y2-y1,len=Math.hypot(dx,dy)||1, amt=Math.min(34,0.22*len);
-    const cx=(x1+x2)/2+(-dy/len)*amt, cy=(y1+y2)/2+(dx/len)*amt;
-    const w=Math.min(4,0.7+0.45*(o.w-1)), op=Math.min(.7,.34+.05*o.w);
-    s.appendChild(el("path",{d:`M${x1} ${y1} Q${cx} ${cy} ${x2} ${y2}`,fill:"none",stroke:LINK,"stroke-width":w,"stroke-opacity":op,"stroke-linecap":"round"})); });
-  const measured=new Set(); GROUPS.forEach(g=>g.n.forEach(x=>measured.add(x)));
-  const ring=(x,y,r,c)=>s.appendChild(el("circle",{cx:x,cy:y,r,fill:"none",stroke:c,"stroke-width":2.2}));
-  const tally={g:0,y:0,o:0,r:0}, bump=c=>{tally[c>=3?'g':c===2?'y':c===1?'o':'r']++;};
-  for(const m in MEFF){ if(m==="haiku-4.5") continue; MEFF[m].forEach(e=>{ const id=m+"@"+e, x=px(m), y=py(e), col=cvar(GMODEL[m].c), c=srcCount[id]||0;
-    if(measured.has(id)){ s.appendChild(el("circle",{cx:x,cy:y,r:5.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));}
-    else { s.appendChild(el("circle",{cx:x,cy:y,r:4.8,fill:"none",stroke:cvar('--faint'),"stroke-width":1.3,"stroke-dasharray":"2 2"}));}
-    ring(x,y,8.4,colFor(c)); bump(c);
-    });}
-  s.appendChild(el("circle",{cx:px("opus-4.8"),cy:py("medium"),r:11.5,fill:"none",stroke:cvar('--opus48'),"stroke-width":1.6,"stroke-dasharray":"1 2"}));
-  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts.</b> Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
-  document.getElementById("legendG").innerHTML=
-    `<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.g};border-radius:50%;background:transparent"></span>≥3 sources</span>`
-    +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.y};border-radius:50%;background:transparent"></span>2</span>`
-    +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.o};border-radius:50%;background:transparent"></span>1</span>`
-    +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.r};border-radius:50%;background:transparent"></span>0</span>`
-    +`<span class="lg"><span class="sw" style="background:${cvar('--muted')}"></span>measured link</span>`;
-}
 function drawEdgeTable(){
   const tb=document.querySelector("#edge-tbl tbody"); tb.innerHTML="";
   const short=x=>{const[m,e]=x.split("@");return (GMODEL[m]?GMODEL[m].l:m)+"·"+e;};
   const cur=x=>{const m=x.split("@")[0];return GMODEL[m]&&GMODEL[m].cur;};
-  GROUPS.slice().filter(g=>g.n.some(cur))   // drop legacy-only sources (HAL, PostTrain, whitekumalabo)
+  GROUPS.slice().filter(g=>g.n.some(cur))   // keep only sources that touch a current model
     .sort((a,b)=>a.t.localeCompare(b.t)||a.g.localeCompare(b.g)).forEach(g=>{
     const cn=g.n.filter(cur);
     const tr=document.createElement("tr");
-    tr.innerHTML=`<td><b>${g.g}</b><br><span class="faint" style="font-size:10px">${g.s}</span></td>`
+    tr.innerHTML=`<td><b>${g.u?`<a href="${g.u}" target="_blank" rel="noopener">${g.g}</a>`:g.g}</b><br><span class="faint" style="font-size:10px">${g.s}</span></td>`
       +`<td style="font-size:11px">${g.h||"—"}</td>`
       +`<td><span class="etag" style="background:${GCOL[g.t]}">${g.t}</span></td>`
       +`<td>${cn.map(short).join(" · ")}</td>`;
@@ -429,7 +363,7 @@ function zoomable(svg){
   const set=(x,y,w,h)=>svg.setAttribute("viewBox",`${x} ${y} ${w} ${h}`);
   if(!box.querySelector(".zoomctl")){
     const tb=document.createElement("div"); tb.className="zoomctl";
-    tb.innerHTML='<button data-z="in" title="Zoom +">+</button><button data-z="out" title="Zoom −">−</button><button data-z="reset" title="Reset">⟳</button>';
+    tb.innerHTML='<span class="zoomhint">⇧+scroll: zoom · drag: pan</span><button data-z="in" title="Zoom +">+</button><button data-z="out" title="Zoom −">−</button><button data-z="reset" title="Reset">⟳</button>';
     tb.addEventListener("click",e=>{ const z=e.target.getAttribute("data-z"); if(!z)return;
       if(z==="reset"){ svg.setAttribute("viewBox",svg.__base); return; }
       const [x,y,w,h]=vb(), f=z==="in"?0.8:1.25; set(x+(w-w*f)/2, y+(h-h*f)/2, w*f, h*f); });
@@ -456,8 +390,8 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawGraph();drawEdgeTable();fillMeta();
-  ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });}
+function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();
+  ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});

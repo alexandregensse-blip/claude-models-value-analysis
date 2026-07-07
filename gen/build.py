@@ -97,7 +97,7 @@ def consolidated(comps):
 
 def groups_data():
     """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
-    derived from raw-data.csv (no more hand-maintained mirror that could drift, cf. the old skillsbench case).
+    derived from raw-data.csv.
     Only the editorial metadata per group — display label, edge type (sweep/xmodel/xgen), verified config note —
     lives in GMETA. Some sources publish several sub-benchmarks (AIReiter) → MERGE folds them into one node-set
     so corroboration counts the source once."""
@@ -154,6 +154,16 @@ def groups_data():
         gk = MERGE.get(r["group"], r["group"])
         if gk not in buckets: buckets[gk] = []; order.append(gk)
         buckets[gk].append(r)
+    def pick_url(rs, src):
+        cands = [(r.get("ref") or "").strip() for r in rs]
+        cands = [c for c in cands if "." in c and " " not in c]        # keep domain-like refs
+        if cands:
+            cands.sort(key=lambda c: ("/" in c, len(c)), reverse=True)  # prefer one with a path
+            u = cands[0]
+            return u if u.startswith("http") else "https://" + u
+        if src.startswith("arxiv-"):                                    # fallback for arXiv sources
+            return "https://arxiv.org/abs/" + src[len("arxiv-"):]
+        return ""
     out = []
     for gk in order:
         rs = buckets[gk]; nodes, seen = [], set()
@@ -161,7 +171,7 @@ def groups_data():
             nid = f'{r["model"]}@{eff(r["effort"])}'
             if nid not in seen: seen.add(nid); nodes.append(nid)
         lbl, t, h = GMETA.get(gk, (gk, "xmodel", "config ✓"))
-        out.append({"s": rs[0]["source"], "g": lbl, "t": t, "h": h, "n": nodes})
+        out.append({"s": rs[0]["source"], "g": lbl, "t": t, "h": h, "n": nodes, "u": pick_url(rs, rs[0]["source"])})
     return out
 
 def ratio_grid(field):
@@ -324,17 +334,6 @@ def main():
             for p in RD[key]:
                 f.write(f"{p[4]}: {p[0]}  {p[1]}x  effort={p[2]}  src={p[3]}\n")
 
-    # Editorial capability metadata (single source of truth) — external Vals capability index + the size-sensitive
-    # flag. NOT derivable from the cost/quality ratios (it is an independent capability measurement), so it is the
-    # one hand-set input; kept here (not in app.js) so every number the report renders flows through this generator.
-    META = {
-        "fable-5":   {"intel": 75.1},
-        "opus-4.8":  {"intel": 70.4},
-        "sonnet-5":  {"intel": 68.6, "tag": True},
-        "opus-4.7":  {"intel": 66.1},
-        "sonnet-4.6":{"intel": 60.1},
-        "haiku-4.5": {"intel": 40.9},
-    }
     css  = open(os.path.join(HERE,"style.css")).read()
     body = open(os.path.join(HERE,"body.html")).read()
     app  = open(os.path.join(HERE,"app.js")).read()
@@ -342,7 +341,6 @@ def main():
     app  = app.replace("__CONS_DATA__", json.dumps(CONS, separators=(",",":")))
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
     app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
-    app  = app.replace("__META__", json.dumps(META, separators=(",",":")))
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     body = body.replace("__NSAMETASK__", str(len(RD["cost"])))   # same-task cost-ratio measurement points (dynamic)
