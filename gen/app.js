@@ -45,7 +45,7 @@ function drawB(){
   const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   // Y = NON-LINEAR (symlog around the anchor 1.0): dilates the crowded near-parity band, compresses the sparse tails → points distinguishable
-  const SQ=0.045, TQ=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=TQ(ymn)-0.12, tt=TQ(ymx)+0.12;   // smaller SQ = stronger dilation near parity (1.0)
+  const SQ=0.045, sl=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), TQ=v=>{const t=sl(v);return Math.sign(t)*Math.sqrt(Math.abs(t));}, tb=TQ(ymn)-0.06, tt=TQ(ymx)+0.06;   // symlog ∘ sqrt → extra dilation near parity (1.0)
   const Y=v=>mT+yp+(1-(TQ(v)-tb)/(tt-tb))*(ih-2*yp);
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
@@ -74,32 +74,40 @@ function drawB(){
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
     mp.forEach(p=>{ s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})); });
-    const last=mp[mp.length-1];
-    const lb=el("text",{x:X(last.c)+10,y:Y(last.q)+4,fill:cvar('--ink'),"font-size":12.5,"font-weight":600});lb.textContent=MODELS[m].label;s.appendChild(lb);
   }
-  // effort labels — FORCE-DIRECTED: (a) away from the local point barycentre; (d) repelled by every OTHER nearby point
-  // (incl. the prev/next point on its own line, so it stops overlapping the curve); (b) separated from overlapping labels,
-  // biased along the vector between their anchor points so the pair splits apart; (c) soft spring to its own point.
+  // model line segments — labels are repelled from them so they never sit on a curve (incl. the prev/next segment
+  // around a colliding label's point). segVec = vector from the closest point of segment AB to (px,py).
+  const segs=[];
+  for(const mm in byM){ const s2=byM[mm].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
+    for(let i=0;i<s2.length-1;i++) segs.push([X(s2[i].c),Y(s2[i].q),X(s2[i+1].c),Y(s2[i+1].q)]); }
+  const segVec=(px,py,ax,ay,bx,by)=>{ const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy; let t=L2?((px-ax)*dx+(py-ay)*dy)/L2:0; t=t<0?0:t>1?1:t; return [px-(ax+t*dx), py-(ay+t*dy)]; };
+  // ALL text labels (effort names + model names) placed together by ONE force-directed layout:
+  // (a) away from local point barycentre · (d) repelled by other points · (s) repelled by line segments ·
+  // (b) separated from overlapping labels, biased by the vector between their anchor points · (c) spring to own anchor.
   const ppix=pts.map(p=>({x:X(p.c),y:Y(p.q)}));
-  const labs=pts.map((p,i)=>({i,px:X(p.c),py:Y(p.q),lx:X(p.c),ly:Y(p.q)-9,t:p.e,col:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11}));
-  const R=48;
-  for(let it=0; it<160; it++){
+  const labs=[];
+  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.q),lx:X(p.c),ly:Y(p.q)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
+  for(const mm in byM){ const s2=byM[mm].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e)), last=s2[s2.length-1], w=MODELS[mm].label.length*7+6;
+    labs.push({ax:X(last.c),ay:Y(last.q),lx:X(last.c)+16+w/2,ly:Y(last.q)+4,t:MODELS[mm].label,col:cvar('--ink'),lead:cvar(MODELS[mm].c),w,h:15,fs:12.5,mdl:true}); }
+  const own=(Q,L)=>Q.x===L.ax&&Q.y===L.ay;
+  for(let it=0; it<300; it++){
     labs.forEach(L=>{ let fx=0,fy=0, bx=0,by=0,n=0;
-      ppix.forEach((Q,j)=>{ if(Math.hypot(Q.x-L.px,Q.y-L.py)<R){ bx+=Q.x; by+=Q.y; n++; }
-        if(j!==L.i){ const dx=L.lx-Q.x, dy=L.ly-Q.y, d=Math.hypot(dx,dy); if(d<34&&d>0){ fx+=dx/d*(34-d)/34*1.7; fy+=dy/d*(34-d)/34*1.7; } } });   // (d) repel from other points & their line
-      if(n>1){ bx/=n; by/=n; const dx=L.px-bx, dy=L.py-by, d=Math.hypot(dx,dy)||1; fx+=dx/d*0.9; fy+=dy/d*0.9; }   // (a) away from local barycentre
+      ppix.forEach(Q=>{ if(Math.hypot(Q.x-L.ax,Q.y-L.ay)<48){ bx+=Q.x; by+=Q.y; n++; }
+        if(!own(Q,L)){ const dx=L.lx-Q.x, dy=L.ly-Q.y, d=Math.hypot(dx,dy); if(d<32&&d>0){ fx+=dx/d*(32-d)/32*1.6; fy+=dy/d*(32-d)/32*1.6; } } });   // (d)
+      if(n>1){ bx/=n; by/=n; const dx=L.ax-bx, dy=L.ay-by, d=Math.hypot(dx,dy)||1; fx+=dx/d*0.7; fy+=dy/d*0.7; }                                     // (a)
+      segs.forEach(g=>{ const v=segVec(L.lx,L.ly,g[0],g[1],g[2],g[3]), d=Math.hypot(v[0],v[1]); if(d<19&&d>0){ fx+=v[0]/d*(19-d)/19*1.5; fy+=v[1]/d*(19-d)/19*1.5; } });   // (s)
       labs.forEach(P=>{ if(P===L) return;
-        if(Math.abs(P.lx-L.lx)<(P.w+L.w)/2 && Math.abs(P.ly-L.ly)<L.h){                                          // (b) separate overlapping labels…
-          let dx=L.px-P.px, dy=L.py-P.py; if(Math.hypot(dx,dy)<1){ dx=L.lx-P.lx||0.1; dy=L.ly-P.ly; }             // …biased by their anchor-point difference
+        if(Math.abs(P.lx-L.lx)<(P.w+L.w)/2 && Math.abs(P.ly-L.ly)<(P.h+L.h)/2){                                  // (b) separate overlapping labels…
+          let dx=L.ax-P.ax, dy=L.ay-P.ay; if(Math.hypot(dx,dy)<1){ dx=L.lx-P.lx||0.1; dy=L.ly-P.ly; }            // …biased by their anchor-point difference
           const d=Math.hypot(dx,dy)||1; fx+=dx/d*2.6; fy+=dy/d*2.6; } });
-      fx+=(L.px-L.lx)*0.03; fy+=(L.py-9-L.ly)*0.03;                                                               // (c) soft spring to own point
+      const tX=L.mdl?L.ax+16+L.w/2:L.ax, tY=L.mdl?L.ay+4:L.ay-9; fx+=(tX-L.lx)*0.03; fy+=(tY-L.ly)*0.03;          // (c) spring to own anchor
       L.nx=L.lx+Math.max(-3,Math.min(3,fx)); L.ny=L.ly+Math.max(-3,Math.min(3,fy)); });
-    labs.forEach(L=>{ L.lx=Math.min(Math.max(L.nx,mL+8),mL+iw-8); L.ly=Math.min(Math.max(L.ny,mT+8),mT+ih-4); });
+    labs.forEach(L=>{ L.lx=Math.min(Math.max(L.nx,mL+8),W-6-L.w/2); L.ly=Math.min(Math.max(L.ny,mT+8),mT+ih-4); });
   }
-  labs.forEach(L=>{ const cyL=L.ly-3, hw=L.w/2+1, hh=6;
-    if(Math.hypot(L.lx-L.px,cyL-L.py)>12){ const dx=L.px-L.lx, dy=L.py-cyL, sc=Math.min(hw/(Math.abs(dx)||1e9), hh/(Math.abs(dy)||1e9));   // attach leader to the label-box edge facing the point
-      s.appendChild(el("line",{x1:L.px,y1:L.py,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.col,"stroke-width":0.7,"stroke-opacity":0.4})); }
-    const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":8.5,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); });
+  labs.forEach(L=>{ const cyL=L.ly-(L.mdl?4:3), hw=L.w/2+1, hh=L.mdl?8:6;
+    if(Math.hypot(L.lx-L.ax,cyL-L.ay)>(L.mdl?18:12)){ const dx=L.ax-L.lx, dy=L.ay-cyL, sc=Math.min(hw/(Math.abs(dx)||1e9),hh/(Math.abs(dy)||1e9));   // leader to the label-box edge facing the point
+      s.appendChild(el("line",{x1:L.ax,y1:L.ay,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.lead,"stroke-width":L.mdl?0.9:0.7,"stroke-opacity":0.4})); }
+    const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":L.fs,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); });
   // point tooltip — shows ONLY when the cursor sits right on a point (~7px); compact "Model · Effort — X× · Y×"
   const tip=el("g",{"pointer-events":"none",opacity:0});
   const trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
