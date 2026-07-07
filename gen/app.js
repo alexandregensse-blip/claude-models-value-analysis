@@ -35,7 +35,7 @@ function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=760,H=545,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // taller than wide → more vertical room for the compressed quality axis
+  const W=1100,H=545,mL=58,mR=124,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // wide (fills body); extra width → cost axis + labels breathe
   // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -45,7 +45,7 @@ function drawB(){
   const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   // Y = NON-LINEAR (symlog around the anchor 1.0): dilates the crowded near-parity band, compresses the sparse tails → points distinguishable
-  const SQ=0.045, sl=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), TQ=v=>{const t=sl(v);return Math.sign(t)*Math.sqrt(Math.abs(t));}, tb=TQ(ymn)-0.06, tt=TQ(ymx)+0.06;   // symlog ∘ sqrt → extra dilation near parity (1.0)
+  const SQ=0.045, TQ=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=TQ(ymn)-0.12, tt=TQ(ymx)+0.12;   // symlog around 1.0: dilates the crowded near-parity band
   const Y=v=>mT+yp+(1-(TQ(v)-tb)/(tt-tb))*(ih-2*yp);
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
@@ -88,7 +88,7 @@ function drawB(){
   const labs=[];
   pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.q),lx:X(p.c),ly:Y(p.q)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
   for(const mm in byM){ const s2=byM[mm].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e)), last=s2[s2.length-1], w=MODELS[mm].label.length*7+6;
-    labs.push({ax:X(last.c),ay:Y(last.q),lx:X(last.c)+16+w/2,ly:Y(last.q)+4,t:MODELS[mm].label,col:cvar('--ink'),lead:cvar(MODELS[mm].c),w,h:15,fs:12.5,mdl:true}); }
+    labs.push({ax:X(last.c),ay:Y(last.q),lx:X(last.c)+16+w/2,ly:Y(last.q)+4,t:MODELS[mm].label,col:cvar(MODELS[mm].c),lead:cvar(MODELS[mm].c),w,h:15,fs:12.5,mdl:true}); }
   const own=(Q,L)=>Q.x===L.ax&&Q.y===L.ay;
   for(let it=0; it<300; it++){
     labs.forEach(L=>{ let fx=0,fy=0, bx=0,by=0,n=0;
