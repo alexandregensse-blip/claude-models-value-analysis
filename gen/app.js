@@ -33,6 +33,64 @@ const OFF4={low:-5.0,medium:-3.2,high:-1.6,max:0};                  // sonnet-4.
 const OFFH={solo:0};                                               // haiku 4.5: one operating point, no ladder
 function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 
+// ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
+// Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
+function symY(ymn,ymx,mT,ih,yp){ const SQ=0.045, T=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=T(ymn)-0.12, tt=T(ymx)+0.12;
+  return v=>mT+yp+(1-(T(v)-tb)/(tt-tb))*(ih-2*yp); }
+// Quality gridlines at round quality values (non-uniform spacing under symlog); the 1.0 anchor is dashed.
+function qGrid(s,Y,mL,iw,mT,ih){ [0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
+  s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?'--opus48':'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
+  const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2);s.appendChild(t); }); }
+// Asymmetric Huber uncertainty ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the median dot, clipped
+// to the plot, faint by default. Returns the array used by hoverTip() to reveal them.
+function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("clipPath",{id:cid});
+  cp.appendChild(el("rect",{x:mL,y:mT,width:iw,height:ih})); defs.appendChild(cp); s.appendChild(defs);
+  const gEll=el("g",{"clip-path":`url(#${cid})`}); s.appendChild(gEll); const ells=[], byM={};
+  pts.forEach(p=>(byM[p.m]=byM[p.m]||[]).push(p));
+  for(const m in byM){ const col=cvar(MODELS[m].c); byM[m].forEach(p=>{ if(p.clo==null) return; const cx=X(p.c), cy=Y(p.q),
+      rxR=Math.max(X(p.chi)-cx,0.6), rxL=Math.max(cx-X(p.clo),0.6), ryU=Math.max(cy-Y(p.qhi),0.6), ryD=Math.max(Y(p.qlo)-cy,0.6);
+    const d=`M ${cx} ${cy-ryU} A ${rxR} ${ryU} 0 0 1 ${cx+rxR} ${cy} A ${rxR} ${ryD} 0 0 1 ${cx} ${cy+ryD} A ${rxL} ${ryD} 0 0 1 ${cx-rxL} ${cy} A ${rxL} ${ryU} 0 0 1 ${cx} ${cy-ryU} Z`;
+    const elp=el("path",{d,fill:col,"fill-opacity":0.4,stroke:col,"stroke-opacity":0.85,"stroke-width":1,opacity:0.15});
+    gEll.appendChild(elp); ells.push({el:elp,cx,cy,rxR,rxL,ryU,ryD}); }); }
+  return ells; }
+// Hover: reveal ovals under the cursor + a compact tooltip when the cursor is right on a point.
+function hoverTip(s,ells,pts,X,Y,mL,iw){ const DEF=0.15,HOV=0.78;
+  const tip=el("g",{"pointer-events":"none",opacity:0}), trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
+  const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
+  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
+    ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU; o.el.setAttribute("opacity",((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
+    let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });
+    if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+52),mL+iw-52)); ttxt.setAttribute("y",Y(best.q)-11);
+      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — ${best.c}× · ${best.q}×`;
+      const bb=ttxt.getBBox(); trect.setAttribute("x",bb.x-4); trect.setAttribute("y",bb.y-2); trect.setAttribute("width",bb.width+8); trect.setAttribute("height",bb.height+4); tip.setAttribute("opacity",1); }
+    else tip.setAttribute("opacity",0); };
+  s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); }; }
+// Force-directed label layout: labels drift away from the local point barycentre, from other points, from line
+// segments (so they never sit on a curve) and from each other (bias = vector between anchor points); soft spring
+// to their own anchor. labs = [{ax,ay,lx,ly,t,col,lead,w,h,fs,mdl}]. Draws leader lines + text.
+function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
+  const segVec=(px,py,ax,ay,bx,by)=>{ const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy; let t=L2?((px-ax)*dx+(py-ay)*dy)/L2:0; t=t<0?0:t>1?1:t; return [px-(ax+t*dx),py-(ay+t*dy)]; };
+  const own=(Q,L)=>Q.x===L.ax&&Q.y===L.ay;
+  for(let it=0; it<300; it++){
+    labs.forEach(L=>{ let fx=0,fy=0, bx=0,by=0,n=0;
+      ppix.forEach(Q=>{ if(Math.hypot(Q.x-L.ax,Q.y-L.ay)<48){ bx+=Q.x; by+=Q.y; n++; }
+        if(!own(Q,L)){ const dx=L.lx-Q.x, dy=L.ly-Q.y, d=Math.hypot(dx,dy); if(d<32&&d>0){ fx+=dx/d*(32-d)/32*1.6; fy+=dy/d*(32-d)/32*1.6; } } });
+      if(n>1){ bx/=n; by/=n; const dx=L.ax-bx, dy=L.ay-by, d=Math.hypot(dx,dy)||1; fx+=dx/d*0.7; fy+=dy/d*0.7; }
+      segs.forEach(g=>{ const v=segVec(L.lx,L.ly,g[0],g[1],g[2],g[3]), d=Math.hypot(v[0],v[1]); if(d<19&&d>0){ fx+=v[0]/d*(19-d)/19*1.5; fy+=v[1]/d*(19-d)/19*1.5; } });
+      labs.forEach(P=>{ if(P===L) return;
+        if(Math.abs(P.lx-L.lx)<(P.w+L.w)/2 && Math.abs(P.ly-L.ly)<(P.h+L.h)/2){
+          let dx=L.ax-P.ax, dy=L.ay-P.ay; if(Math.hypot(dx,dy)<1){ dx=L.lx-P.lx||0.1; dy=L.ly-P.ly; }
+          const d=Math.hypot(dx,dy)||1; fx+=dx/d*2.6; fy+=dy/d*2.6; } });
+      const tX=L.mdl?L.ax+16+L.w/2:L.ax, tY=L.mdl?L.ay+4:L.ay-9; fx+=(tX-L.lx)*0.03; fy+=(tY-L.ly)*0.03;
+      L.nx=L.lx+Math.max(-3,Math.min(3,fx)); L.ny=L.ly+Math.max(-3,Math.min(3,fy)); });
+    labs.forEach(L=>{ L.lx=Math.min(Math.max(L.nx,mL+8),W-6-L.w/2); L.ly=Math.min(Math.max(L.ny,mT+8),mT+ih-4); });
+  }
+  labs.forEach(L=>{ const cyL=L.ly-(L.mdl?4:3), hw=L.w/2+1, hh=L.mdl?8:6;
+    if(Math.hypot(L.lx-L.ax,cyL-L.ay)>(L.mdl?18:12)){ const dx=L.ax-L.lx, dy=L.ay-cyL, sc=Math.min(hw/(Math.abs(dx)||1e9),hh/(Math.abs(dy)||1e9));
+      s.appendChild(el("line",{x1:L.ax,y1:L.ay,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.lead,"stroke-width":L.mdl?0.9:0.7,"stroke-opacity":0.4})); }
+    const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":L.fs,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); }); }
+
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=1100,H=545,mL=58,mR=124,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // wide (fills body); extra width → cost axis + labels breathe
@@ -44,131 +102,74 @@ function drawB(){
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
   const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  // Y = NON-LINEAR (symlog around the anchor 1.0): dilates the crowded near-parity band, compresses the sparse tails → points distinguishable
-  const SQ=0.045, TQ=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=TQ(ymn)-0.12, tt=TQ(ymx)+0.12;   // symlog around 1.0: dilates the crowded near-parity band
-  const Y=v=>mT+yp+(1-(TQ(v)-tb)/(tt-tb))*(ih-2*yp);
-  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
+  const Y=symY(ymn,ymx,mT,ih,yp);   // symlog quality axis (dilated near parity 1.0)
+  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
-  [0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
-    s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?'--opus48':'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
-    const t=el("text",{x:mL-10,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2).replace('.',',');s.appendChild(t);});
-  let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Coût relatif  (Opus 4.8 @medium = 1,0 · échelle log)";s.appendChild(a);
-  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Qualité relative  (Opus 4.8 @medium = 1,0 · échelle dilatée près de 1)";s.appendChild(a);
-  if(1>Math.pow(10,xlo)&&1<Math.pow(10,xhi)) s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
+  qGrid(s,Y,mL,iw,mT,ih);
+  let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Relative cost  (Opus 4.8 @medium = 1.0 · log scale)";s.appendChild(a);
+  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Relative quality  (Opus 4.8 @medium = 1.0 · dilated near parity)";s.appendChild(a);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
-  // PASS 1 — asymmetric Huber ovals BEHIND the data, centred on the median dot (per-side radii = ±band, so the dot is
-  // ALWAYS inside). Clipped to the plot rect (may overflow). Faint by default (DEF); on hover, every oval CONTAINING the cursor lights up (HOV).
-  const defs=el("defs"); const cp=el("clipPath",{id:"clipB"}); cp.appendChild(el("rect",{x:mL,y:mT,width:iw,height:ih})); defs.appendChild(cp); s.appendChild(defs);
-  const gEll=el("g",{"clip-path":"url(#clipB)"}); s.appendChild(gEll);
-  const ells=[], DEF=0.15, HOV=0.78;
-  for(const m in byM){ const col=cvar(MODELS[m].c);
-    byM[m].forEach(p=>{ const cx=X(p.c), cy=Y(p.q),
-        rxR=Math.max(X(p.chi)-cx,0.6), rxL=Math.max(cx-X(p.clo),0.6), ryU=Math.max(cy-Y(p.qhi),0.6), ryD=Math.max(Y(p.qlo)-cy,0.6);   // qhi = higher quality = smaller Y
-      const d=`M ${cx} ${cy-ryU} A ${rxR} ${ryU} 0 0 1 ${cx+rxR} ${cy} A ${rxR} ${ryD} 0 0 1 ${cx} ${cy+ryD} A ${rxL} ${ryD} 0 0 1 ${cx-rxL} ${cy} A ${rxL} ${ryU} 0 0 1 ${cx} ${cy-ryU} Z`;
-      const elp=el("path",{d,fill:col,"fill-opacity":0.4,stroke:col,"stroke-opacity":0.85,"stroke-width":1,opacity:DEF});
-      gEll.appendChild(elp); ells.push({el:elp,cx,cy,rxR,rxL,ryU,ryD}); }); }
-  // PASS 2 — curves, points, effort + model labels (on top of the ellipses)
-  for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
+  const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB");                     // faint asymmetric uncertainty ovals, behind
+  const segs=[];                                                          // curves + points on top, collect line segments for label repulsion
+  for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
-    mp.forEach(p=>{ s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})); });
-  }
-  // model line segments — labels are repelled from them so they never sit on a curve (incl. the prev/next segment
-  // around a colliding label's point). segVec = vector from the closest point of segment AB to (px,py).
-  const segs=[];
-  for(const mm in byM){ const s2=byM[mm].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
-    for(let i=0;i<s2.length-1;i++) segs.push([X(s2[i].c),Y(s2[i].q),X(s2[i+1].c),Y(s2[i+1].q)]); }
-  const segVec=(px,py,ax,ay,bx,by)=>{ const dx=bx-ax,dy=by-ay,L2=dx*dx+dy*dy; let t=L2?((px-ax)*dx+(py-ay)*dy)/L2:0; t=t<0?0:t>1?1:t; return [px-(ax+t*dx), py-(ay+t*dy)]; };
-  // ALL text labels (effort names + model names) placed together by ONE force-directed layout:
-  // (a) away from local point barycentre · (d) repelled by other points · (s) repelled by line segments ·
-  // (b) separated from overlapping labels, biased by the vector between their anchor points · (c) spring to own anchor.
-  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.q)}));
-  const labs=[];
+    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})));
+    for(let i=0;i<mp.length-1;i++) segs.push([X(mp[i].c),Y(mp[i].q),X(mp[i+1].c),Y(mp[i+1].q)]); }
+  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.q)})), labs=[];                  // effort labels + model-name labels, force-directed together
   pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.q),lx:X(p.c),ly:Y(p.q)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
-  for(const mm in byM){ const s2=byM[mm].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e)), last=s2[s2.length-1], w=MODELS[mm].label.length*7+6;
-    labs.push({ax:X(last.c),ay:Y(last.q),lx:X(last.c)+16+w/2,ly:Y(last.q)+4,t:MODELS[mm].label,col:cvar(MODELS[mm].c),lead:cvar(MODELS[mm].c),w,h:15,fs:12.5,mdl:true}); }
-  const own=(Q,L)=>Q.x===L.ax&&Q.y===L.ay;
-  for(let it=0; it<300; it++){
-    labs.forEach(L=>{ let fx=0,fy=0, bx=0,by=0,n=0;
-      ppix.forEach(Q=>{ if(Math.hypot(Q.x-L.ax,Q.y-L.ay)<48){ bx+=Q.x; by+=Q.y; n++; }
-        if(!own(Q,L)){ const dx=L.lx-Q.x, dy=L.ly-Q.y, d=Math.hypot(dx,dy); if(d<32&&d>0){ fx+=dx/d*(32-d)/32*1.6; fy+=dy/d*(32-d)/32*1.6; } } });   // (d)
-      if(n>1){ bx/=n; by/=n; const dx=L.ax-bx, dy=L.ay-by, d=Math.hypot(dx,dy)||1; fx+=dx/d*0.7; fy+=dy/d*0.7; }                                     // (a)
-      segs.forEach(g=>{ const v=segVec(L.lx,L.ly,g[0],g[1],g[2],g[3]), d=Math.hypot(v[0],v[1]); if(d<19&&d>0){ fx+=v[0]/d*(19-d)/19*1.5; fy+=v[1]/d*(19-d)/19*1.5; } });   // (s)
-      labs.forEach(P=>{ if(P===L) return;
-        if(Math.abs(P.lx-L.lx)<(P.w+L.w)/2 && Math.abs(P.ly-L.ly)<(P.h+L.h)/2){                                  // (b) separate overlapping labels…
-          let dx=L.ax-P.ax, dy=L.ay-P.ay; if(Math.hypot(dx,dy)<1){ dx=L.lx-P.lx||0.1; dy=L.ly-P.ly; }            // …biased by their anchor-point difference
-          const d=Math.hypot(dx,dy)||1; fx+=dx/d*2.6; fy+=dy/d*2.6; } });
-      const tX=L.mdl?L.ax+16+L.w/2:L.ax, tY=L.mdl?L.ay+4:L.ay-9; fx+=(tX-L.lx)*0.03; fy+=(tY-L.ly)*0.03;          // (c) spring to own anchor
-      L.nx=L.lx+Math.max(-3,Math.min(3,fx)); L.ny=L.ly+Math.max(-3,Math.min(3,fy)); });
-    labs.forEach(L=>{ L.lx=Math.min(Math.max(L.nx,mL+8),W-6-L.w/2); L.ly=Math.min(Math.max(L.ny,mT+8),mT+ih-4); });
-  }
-  labs.forEach(L=>{ const cyL=L.ly-(L.mdl?4:3), hw=L.w/2+1, hh=L.mdl?8:6;
-    if(Math.hypot(L.lx-L.ax,cyL-L.ay)>(L.mdl?18:12)){ const dx=L.ax-L.lx, dy=L.ay-cyL, sc=Math.min(hw/(Math.abs(dx)||1e9),hh/(Math.abs(dy)||1e9));   // leader to the label-box edge facing the point
-      s.appendChild(el("line",{x1:L.ax,y1:L.ay,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.lead,"stroke-width":L.mdl?0.9:0.7,"stroke-opacity":0.4})); }
-    const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":L.fs,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); });
-  // point tooltip — shows ONLY when the cursor sits right on a point (~7px); compact "Model · Effort — X× · Y×"
-  const tip=el("g",{"pointer-events":"none",opacity:0});
-  const trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
-  const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
-  const capE=e=>e.charAt(0).toUpperCase()+e.slice(1);
-  // hover: reveal ovals under the cursor + tooltip only when ON a point (property assignment → no duplicate listeners on redraw)
-  s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
-    ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU;
-      o.el.setAttribute("opacity", ((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
-    let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });   // 49 = 7px² : right on the dot
-    if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c));
-      ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+52),mL+iw-52)); ttxt.setAttribute("y",Y(best.q)-11);
-      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — ${best.c}× · ${best.q}×`;
-      const bb=ttxt.getBBox(); trect.setAttribute("x",bb.x-4); trect.setAttribute("y",bb.y-2); trect.setAttribute("width",bb.width+8); trect.setAttribute("height",bb.height+4);
-      tip.setAttribute("opacity",1); } else tip.setAttribute("opacity",0); };
-  s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); };
+  for(const m in byM){ const mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e)), last=mp[mp.length-1], w=MODELS[m].label.length*7+6;
+    labs.push({ax:X(last.c),ay:Y(last.q),lx:X(last.c)+16+w/2,ly:Y(last.q)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }
+  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
+  hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ovale = incertitude robuste (Huber ±1,5·MAD), asymétrique · <b>survole un point</b> pour son identité</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`;
 }
 
-// ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
-// Y uses the same inverted-log dilation as the landscape but STRONGER (small top margin) so the clustered
-// high-intelligence models separate visibly. Bounds + grid dynamic; central cost (no CI) for a clean scatter.
+// ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
+// Same shared machinery as the §1 landscape: symlog quality axis, faint Huber ovals (hover to reveal),
+// point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=760,H=440,mL=52,mR=120,mT=18,mB=52, iw=W-mL-mR, ih=H-mT-mB;
-  // X = cost (central) · Y = quality (central). All current nodes, Haiku incl. (both cost and quality under 'solo' — no effort dial).
+  const W=1100,H=470,mL=54,mR=124,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
+  // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
-  const add=(m,e,c,q)=>{ xmn=Math.min(xmn,c); xmx=Math.max(xmx,c); ymn=Math.min(ymn,q); ymx=Math.max(ymx,q); pts.push({m,e,c,q}); };
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; add(m,e,cg[e][0],q[0]); } }
-  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yb=ymn-0.1, yt=ymx+0.1, yp=12;
+    for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
+      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
+      pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
+  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=10;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=v=>mT+yp+(1-(v-yb)/(yt-yb))*(ih-2*yp);
-  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
+  const Y=symY(ymn,ymx,mT,ih,yp);
+  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
-  linTicks(yb,yt,7).forEach(val=>{ const y=Y(val);
-    s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
-    const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(1).replace('.',',');s.appendChild(t);});
-  let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Coût relatif (Opus 4.8 @medium = 1,0 · log)";s.appendChild(a);
-  a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Qualité relative (Opus 4.8 @medium = 1,0)";s.appendChild(a);
+  qGrid(s,Y,mL,iw,mT,ih);
+  let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Relative cost  (Opus 4.8 @medium = 1.0 · log scale)";s.appendChild(a);
+  a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Relative quality  (Opus 4.8 @medium = 1.0 · dilated near parity)";s.appendChild(a);
+  const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipP");
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
   s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
   pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
     s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
-  const cap=e=>e==="solo"?"":e.charAt(0).toUpperCase()+e.slice(1);
-  const labs=par.map(p=>({p,px:X(p.c),py:Y(p.q),y:Y(p.q)})); labs.sort((a,b)=>a.y-b.y);
-  for(let i=1;i<labs.length;i++){ if(labs[i].y<labs[i-1].y+19) labs[i].y=labs[i-1].y+19; }
-  labs.forEach(L=>{ const p=L.p, lx=L.px+9;
-    if(Math.abs(L.y-L.py)>5) s.appendChild(el("line",{x1:L.px+4,y1:L.py,x2:lx-2,y2:L.y,stroke:cvar('--faint'),"stroke-width":0.8,"stroke-opacity":0.55}));
-    const t1=el("text",{x:lx,y:L.y-1,fill:cvar('--ink'),"font-size":10,"font-weight":600}); t1.textContent=MODELS[p.m].label; s.appendChild(t1);
-    const ce=cap(p.e); if(ce){ const t2=el("text",{x:lx,y:L.y+9,fill:cvar('--muted'),"font-size":9}); t2.textContent=ce; s.appendChild(t2); } });
+  // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line
+  const cap=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.q)})), segs=[];
+  for(let i=0;i<par.length-1;i++) segs.push([X(par[i].c),Y(par[i].q),X(par[i+1].c),Y(par[i+1].q)]);
+  const labs=par.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+cap(p.e)}`, w=t.length*6+6;
+    return {ax:X(p.c),ay:Y(p.q),lx:X(p.c)+16+w/2,ly:Y(p.q),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:14,fs:11,mdl:true}; });
+  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
+  hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendP");
   if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominé</span>`
-    +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>frontière de Pareto</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
+    +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`;
   const pn=document.getElementById("pareto-note");
   if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · q=${p.q.toFixed(2)}</span>`).join(" &nbsp;→&nbsp; ");
 }
