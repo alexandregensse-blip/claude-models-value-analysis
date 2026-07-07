@@ -162,10 +162,10 @@ function drawPareto(){
     s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
   // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line
   const cap=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
-  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.q)})), segs=[];
+  const ppix=par.map(p=>({x:X(p.c),y:Y(p.q)})), segs=[];   // anti-collision considers ONLY frontier points (faded/dominated ignored)
   for(let i=0;i<par.length-1;i++) segs.push([X(par[i].c),Y(par[i].q),X(par[i+1].c),Y(par[i+1].q)]);
-  const labs=par.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+cap(p.e)}`, w=t.length*6+6;
-    return {ax:X(p.c),ay:Y(p.q),lx:X(p.c)+16+w/2,ly:Y(p.q),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:14,fs:11,mdl:true}; });
+  const labs=par.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+cap(p.e)}`, w=t.length*7.2+8;
+    return {ax:X(p.c),ay:Y(p.q),lx:X(p.c)+18+w/2,ly:Y(p.q),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:17,fs:13,mdl:true}; });
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendP");
@@ -174,6 +174,55 @@ function drawPareto(){
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`;
   const pn=document.getElementById("pareto-note");
   if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · q=${p.q.toFixed(2)}</span>`).join(" &nbsp;→&nbsp; ");
+}
+// ---- BEST-YIELD-BY-TASK-TIER + best-of-both-worlds crown (data-driven from COSTGRID × QUALGRID) ----
+// Four task-complexity tiers, defined by the QUALITY window a task demands (relative quality, anchor
+// Opus 4.8 @medium = 1.0). Per tier we pick, ON THE PARETO FRONTIER and within that quality band, the
+// couple with the best score/cost YIELD (q/c) — the cheapest way to clear the bar. The crown ranks
+// MODELS by a "best of both worlds" score V = q³/c (capability weighted 3× cost, in log terms): it
+// rewards being both capable and efficient, so neither the cheapest-but-weak nor the strongest-but-costly wins.
+const TIERS=[
+  {key:"triage",  name:"Triage &amp; volume", lo:0,    hi:0.65, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday build",      lo:0.65, hi:0.90, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Professional",        lo:0.90, hi:1.03, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Frontier",            lo:1.03, hi:99,   ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+];
+function tierPicks(){
+  const rows=[];
+  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
+    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0],y:q[0]/cg[e][0]}); } }
+  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
+  const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
+  const picks=TIERS.map(t=>{ const cand=front.filter(p=>p.q>=t.lo&&p.q<t.hi);
+    return cand.length?{...t,win:cand.reduce((a,b)=>b.y>a.y?b:a)}:{...t,win:null}; });
+  const crown=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; let best=null;   // each model's best op by V=q³/c
+    for(const e in cg){ const q=qg[e]; if(!q) continue; const V=Math.pow(q[0],3)/cg[e][0];
+      if(!best||V>best.V) best={m,e,c:cg[e][0],q:q[0],V}; } if(best) crown.push(best); }
+  crown.sort((a,b)=>b.V-a.V);
+  return {picks,crown};
+}
+function drawTiers(){
+  const host=document.getElementById("tier-cards"); if(!host) return;
+  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const {picks,crown}=tierPicks();
+  host.innerHTML=picks.map(t=>{ const w=t.win, col=w?cvar(MODELS[w.m].c):cvar('--muted');
+    const pick=w?`<span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
+        <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b> · yield <b>${w.y.toFixed(2)}</b></span>`:`<span class="faint">no couple in band</span>`;
+    return `<div class="card pad crit tier">
+      <div class="tier-band">quality ${t.lo===0?"≤ ":t.lo+"–"}${t.hi>=99?"and up":t.hi}</div>
+      <h3>${t.name}</h3>
+      <div class="tier-win">${pick}</div>
+      <span class="ex">${t.ex}</span>
+    </div>`; }).join("");
+  const c=crown[0], col=cvar(MODELS[c.m].c);
+  const runValue=crown.slice().sort((a,b)=>(b.q/b.c)-(a.q/a.c))[0];        // pure-value extreme (max yield)
+  const runCap=crown.slice().sort((a,b)=>b.q-a.q)[0];                      // pure-capability extreme (max quality)
+  const cr=document.getElementById("tier-crown");
+  if(cr) cr.innerHTML=`
+    <div class="crown-badge">👑 Best of both worlds</div>
+    <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label} · ${capE(c.e)}</div>
+    <div class="crown-score">V = q³ ⁄ c = <b>${c.V.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×)</span></div>
+    <p class="crown-note">Ranks models by a capability-weighted value score <b>V = q³/c</b> — capability counts three times cost in log terms, so the crown goes to the balance, not an extreme. For reference&nbsp;: pure value (max yield) → <b style="color:${cvar(MODELS[runValue.m].c)}">${MODELS[runValue.m].label} · ${capE(runValue.e)}</b> · pure capability (max quality) → <b style="color:${cvar(MODELS[runCap.m].c)}">${MODELS[runCap.m].label} · ${capE(runCap.e)}</b>. <b>${MODELS[c.m].label}</b> wins by pairing near-parity quality with sub-parity cost.</p>`;
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2);
@@ -421,7 +470,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-function renderAll(){drawB();drawPareto();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
+function renderAll(){drawB();drawPareto();drawTiers();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
   ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });
   const rr=document.getElementById('chartR'); if(rr) enableRatioZoom(rr);}
 renderAll();
