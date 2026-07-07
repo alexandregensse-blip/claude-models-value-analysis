@@ -40,7 +40,7 @@ function drawB(){
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
-      xmn=Math.min(xmn,d[0]); xmx=Math.max(xmx,d[0]); ymn=Math.min(ymn,q[0]); ymx=Math.max(ymx,q[0]);   // bounds from CENTRAL points only — the uncertainty ovals may overflow and clip cleanly
+      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);   // bounds include the uncertainty ovals (extents) so they stay fully inside
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
   const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
@@ -73,19 +73,38 @@ function drawB(){
   // PASS 2 — curves, points, effort + model labels (on top of the ellipses)
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
-    mp.forEach(p=>{ s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4}));
-      const t=el("text",{x:X(p.c),y:Y(p.q)-8,fill:cvar('--muted'),"font-size":8.5,"text-anchor":"middle"});t.textContent=p.e;s.appendChild(t);});
+    mp.forEach(p=>{ s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})); });
     const last=mp[mp.length-1];
     const lb=el("text",{x:X(last.c)+10,y:Y(last.q)+4,fill:cvar('--ink'),"font-size":12.5,"font-weight":600});lb.textContent=MODELS[m].label;s.appendChild(lb);
   }
-  // hover: reveal ellipses under the cursor (property assignment → no duplicate listeners on redraw)
+  // effort labels — GLOBAL anti-overlap: greedy spiral nudge off the natural spot, thin leader line back to the point when displaced
+  const labs=pts.map(p=>({px:X(p.c),py:Y(p.q),t:p.e,col:cvar(MODELS[p.m].c),w:p.e.length*5.4+4}));
+  labs.sort((a,b)=>a.py-b.py);
+  const placed=[], coll=(x,y,w)=>placed.some(P=>Math.abs(P.x-x)<(P.w+w)/2-1 && Math.abs(P.y-y)<11);
+  labs.forEach(L=>{ const y0=L.py-9; let y=y0;
+    for(let step=1; coll(L.px,y,L.w) && step<80; step++){ y=y0+(step%2?-1:1)*Math.ceil(step/2)*3.6; }
+    y=Math.min(Math.max(y,mT+8),mT+ih-4); placed.push({x:L.px,y,w:L.w});
+    if(Math.abs(y-y0)>6) s.appendChild(el("line",{x1:L.px,y1:L.py-4,x2:L.px,y2:y+3,stroke:L.col,"stroke-width":0.7,"stroke-opacity":0.45}));
+    const t=el("text",{x:L.px,y,fill:L.col,"font-size":8.5,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); });
+  // point tooltip — definitive "which point is which": model · effort · cost · quality near the nearest point
+  const tip=el("g",{"pointer-events":"none",opacity:0});
+  const trect=el("rect",{rx:4,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
+  const ttxt=el("text",{"font-size":11,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
+  const capE=e=>e.charAt(0).toUpperCase()+e.slice(1);
+  // hover: reveal ovals under the cursor + tooltip on the nearest point (property assignment → no duplicate listeners on redraw)
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU;
-      o.el.setAttribute("opacity", ((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); }); };
-  s.onmouseleave=()=>ells.forEach(o=>o.el.setAttribute("opacity",DEF));
+      o.el.setAttribute("opacity", ((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
+    let best=null,bd=625; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });
+    if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c));
+      ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+70),mL+iw-70)); ttxt.setAttribute("y",Y(best.q)-13);
+      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — ${best.c}× coût · ${best.q}× qualité`;
+      const bb=ttxt.getBBox(); trect.setAttribute("x",bb.x-6); trect.setAttribute("y",bb.y-3); trect.setAttribute("width",bb.width+12); trect.setAttribute("height",bb.height+6);
+      tip.setAttribute("opacity",1); } else tip.setAttribute("opacity",0); };
+  s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); };
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = incertitude robuste (Huber ±1,5·MAD, coût × qualité), asymétrique · <b>survol</b></span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ovale = incertitude robuste (Huber ±1,5·MAD), asymétrique · <b>survole un point</b> pour son identité</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
