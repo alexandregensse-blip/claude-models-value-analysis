@@ -163,6 +163,8 @@ def groups_data():
             return u if u.startswith("http") else "https://" + u
         if src.startswith("arxiv-"):                                    # fallback for arXiv sources
             return "https://arxiv.org/abs/" + src[len("arxiv-"):]
+        if "syscard" in src or any("syscard" in (r.get("ref") or "") for r in rs):
+            return "https://www.anthropic.com/transparency"             # Anthropic system cards live on the transparency hub
         return ""
     out = []
     for gk in order:
