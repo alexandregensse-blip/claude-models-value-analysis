@@ -33,7 +33,7 @@
   h2{font-size:clamp(21px,3vw,27px);line-height:1.15;margin-bottom:.15em}
   h3{font-size:16px;font-weight:600}
   .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fable5);font-weight:600}
-  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:64ch;margin-top:.7em}
+  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:none;margin-top:.7em}
   .muted{color:var(--muted)} .faint{color:var(--faint)}
   section{margin-top:clamp(40px,6vw,72px)}
   .sub{color:var(--muted);max-width:none;margin:.35em 0 1.4em}
@@ -57,13 +57,6 @@
   .cell{border-radius:7px;padding:7px 4px;font-variant-numeric:tabular-nums;font-weight:600}
   .cell small{display:block;font-weight:400;font-size:10.5px;opacity:.7;margin-top:1px}
   .na{color:var(--faint)}
-  .paretoline{font-size:14px;line-height:2;margin:6px 0}
-  .paretoline b{font-weight:700}
-  #nothink-tbl{min-width:480px;font-size:13px}
-  #nothink-tbl td:first-child{text-align:left;font-weight:600;white-space:nowrap}
-  #nothink-tbl tr.nt-head td,#nothink-tbl tr.df-head td{text-align:left;background:var(--paper);color:var(--muted);font-size:12px;padding-top:12px}
-  #nothink-tbl tr.df-head td{border-top:2px solid var(--line)}
-  #nothink-tbl tr.srcrow td{text-align:left;color:var(--faint);font-size:10.5px;padding-top:0;border-bottom:1px solid var(--line)}
   .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:baseline}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
   .crit h3{margin-bottom:6px} .crit p{margin:0;font-size:13.5px;color:var(--muted)}
@@ -90,23 +83,33 @@
 #score-tbl td{vertical-align:middle}
 .scorepill{display:inline-block;min-width:52px;text-align:center;font-size:12.5px;font-weight:700;padding:2px 10px;border-radius:20px;font-variant-numeric:tabular-nums}
 .frontbadge{display:inline-block;font-size:11px;font-weight:600;color:var(--opus48)}
+/* Pareto chained mini-blocks (frontier order) — same idea as the tier cards, small */
+.pareto-blocks{display:flex;flex-wrap:wrap;align-items:stretch;gap:6px 4px;margin-top:12px}
+.pblock{display:inline-flex;flex-direction:column;justify-content:center;gap:1px;padding:5px 9px;border:1px solid var(--line2);border-left-width:3px;border-radius:8px;background:var(--panel);white-space:nowrap}
+.pblock b{font-size:12.5px;line-height:1.1}
+.pblock-e{font-size:10.5px;color:var(--muted);text-transform:capitalize}
+.pblock-n{font-size:10.5px;color:var(--faint);font-variant-numeric:tabular-nums}
+.pconn{display:flex;align-items:center;color:var(--faint);font-size:13px}
 .tier{display:flex;flex-direction:column}
 .tier-band{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:2px}
-.tier .crit h3,.tier h3{margin-bottom:6px}
-.tier-win{margin:2px 0 8px}
+.tier h3{margin-bottom:6px}
+.tier-top{display:flex;align-items:center;gap:8px;margin:2px 0 10px;padding-bottom:10px;border-bottom:1px dashed var(--line2)}
+.tier-left{flex:1 1 50%;min-width:0}
 .tier-pick{display:block;font-weight:700;font-size:15px}
 .tier-pick .dot{width:10px;height:10px}
 .tier-nums{display:block;font-size:12px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
 .tier-nums b{color:var(--ink)}
-.tier .ex{margin-top:auto}
-.crown{text-align:center;border:1px solid var(--opus48);background:color-mix(in srgb,var(--opus48) 6%,var(--panel))}
+.tier-yield{flex:1 1 50%;text-align:right;font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1;color:var(--opus48);font-variant-numeric:tabular-nums}
+.tier-yield small{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+.tier .ex{margin-top:auto;border-top:none;padding-top:0}
+.crown{text-align:center;border:1px solid var(--opus48);background:color-mix(in srgb,var(--opus48) 6%,var(--panel));max-width:max(360px,calc((100% - 42px)/4*1.8));margin:14px auto 0}
 .crown-badge{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--opus48);font-weight:700}
 .crown-model{font-family:Georgia,serif;font-size:clamp(22px,3vw,30px);font-weight:600;margin:4px 0 2px}
 .crown-model .dot{width:13px;height:13px;margin-right:8px}
 .crown-score{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
 .crown-score b{color:var(--ink);font-size:16px}
-.crown-note{max-width:70ch;margin:10px auto 0;font-size:13px;color:var(--muted)}
-.zoomctl{position:absolute;top:-30px;right:0;display:flex;gap:3px;z-index:5;opacity:.7}
+.crown-note{max-width:none;margin:10px 0 0;font-size:13px;color:var(--muted)}
+.zoomctl{position:absolute;top:10px;right:10px;display:flex;gap:3px;z-index:5;opacity:.7}
 .zoomctl:hover{opacity:1}
 .zoomctl button{width:22px;height:22px;padding:0;font-size:14px;line-height:1;cursor:pointer;
   border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--ink);font-family:inherit}
@@ -129,7 +132,7 @@
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
     <h2>1 · The consolidated landscape</h2>
-    <p class="sub">One curve per model, one point per effort level (low → max). <b>X axis = relative cost</b>, <b>Y axis = relative quality</b> — <b>both computed identically</b>&nbsp;: we never compare two raw benchmark scores across benchmarks (incompatible scales); within each benchmark we take the <b>ratio between couples</b>, normalise the benchmark to <b>Opus 4.8 @medium = 1.0</b> (÷ the anchor when present, else a ×0.5-weighted bridge) and consolidate by <b>source-weighted median</b>. The <b>oval</b> = a <b>robust, asymmetric</b> uncertainty band (per-side spread with <b>Huber ±1.5·MAD</b> clipping&nbsp;: an outlier benchmark widens its side but doesn't dominate&nbsp;; width = cost, height = quality). It is <b>centred on the median</b> (the dot is always inside), the quality axis is <b>dilated near parity (1.0)</b> to separate near-equal models, and every oval is <b>faint until you hover it</b>. <b>Haiku 4.5</b> is not plotted here (see §2, §6 and the Pareto).</p>
+    <p class="sub">One curve per model, one point per effort level (low → max). <b>X axis = relative cost</b>, <b>Y axis = relative quality</b> — <b>both computed identically</b>&nbsp;: we never compare two raw benchmark scores across benchmarks (incompatible scales); within each benchmark we take the <b>ratio between couples</b>, normalise the benchmark to <b>Opus 4.8 @medium = 1.0</b> (÷ the anchor when present, else a ×0.5-weighted bridge) and consolidate by <b>source-weighted median</b>. The <b>oval</b> = a <b>robust, asymmetric</b> uncertainty band (per-side spread with <b>Huber ±1.5·MAD</b> clipping&nbsp;: an outlier benchmark widens its side but doesn't dominate&nbsp;; width = cost, height = quality). It is <b>centred on the median</b> (the dot is always inside), the quality axis is <b>dilated near parity (1.0)</b> to separate near-equal models, and every oval is <b>faint until you hover it</b>. <b>Haiku 4.5</b> is not plotted here (see §2 and the Pareto).</p>
     <div class="card pad">
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
@@ -140,23 +143,36 @@
       <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as §1, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p id="pareto-note" class="paretoline"></p>
       <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is the <b>frontier envelope</b> — a concave fit in the chart's dilated metric that renders as a <b>log shape</b> (fast rise at low cost, flattening at high cost), the reference for the value score below.</p>
+      <div id="pareto-blocks" class="pareto-blocks"></div>
     </div>
     <div class="card pad" style="margin-top:14px">
       <h3>Value score — distance to the frontier envelope</h3>
       <p class="sub">We fit the Pareto frontier in the chart's <b>dilated quality metric</b> as a <b>concave curve</b> (<b>T(q) = a + b·log₁₀c + c·log₁₀²c</b>, c&lt;0, where T is the near-parity dilation of the Y axis), so the envelope renders as a clean <b>log shape on the chart</b> — R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above. Each frontier couple's <b>score</b> = its <b>signed distance</b> to that curve <b>in the same dilated metric</b> (so it matches what you see), squashed by <b>tanh(residual ⁄ RMS)</b>&nbsp;: <b>above</b> → toward <b>+1</b>, <b>on</b> → <b>0</b>, <b>below</b> → toward <b>−1</b>. Only the <b>Pareto-frontier couples</b> are shown. Computed from the data.</p>
       <div class="chartbox"><table id="score-tbl">
-        <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value score</th><th style="text-align:left">vs envelope</th></tr></thead>
+        <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value score</th></tr></thead>
         <tbody></tbody>
       </table></div>
       <p class="cap">Score is <b>relative to the frontier envelope</b>: a frontier couple can still score negative if it falls under the smooth edge (e.g. Haiku&nbsp;4.5, the lone cheap point — nothing cheaper exists, but the edge extrapolated to its cost expects more quality). Green = above the edge, red = below; intensity = magnitude.</p>
     </div>
     <div class="card pad" style="margin-top:14px">
+      <h3>What moves everything — four factors behind the numbers</h3>
+      <p class="sub">The picks below are an order of magnitude. Four factors, each measured elsewhere, modulate them strongly — keep them in mind when reading the tiers.</p>
+      <div class="grid">
+        <div class="card pad crit"><h3>Task type</h3><p>Effort and model choice don't weigh the same depending on the nature of the work — review, reasoning and pure coding reward effort very differently.</p></div>
+        <div class="card pad crit"><h3>Complexity</h3><p>The harder the task, the more effort costs — up to the point where extra thinking starts to hurt (the inverted-U).</p></div>
+        <div class="card pad crit"><h3>Generation</h3><p>Recent Opus models do more with fewer tokens; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
+        <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
+      </div>
+    </div>
+    <!-- NOTE: the q* = 0.6/0.8/1.0/1.2 figures below MIRROR the TIERS targets in app.js — the one changeable value left
+         in this prose. If you retune the targets in app.js, update this sentence (or inject it). Everything else here
+         explains how the picks are built and read, not what the data currently says. -->
+    <div class="card pad" style="margin-top:14px">
       <h3>Best value by task tier — what to actually run</h3>
-      <p class="sub">Consolidating the frontier into a decision. We split tasks into <b>four complexity tiers</b>, each defined by the <b>quality window</b> it demands (relative quality, anchor Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.0; windows are <b>wide for simple tasks, narrowing toward complex</b>, and overlap). For each tier we pick, <b>on the Pareto frontier and within that band</b>, the couple with the highest <b>hidden prominence</b> — how much it pokes above its immediate neighbours on the frontier (2nd difference of the value score S). It rewards the <b>local knee</b>: a clear step up from the cheaper option while the pricier option adds little. All picks and figures below are <b>computed</b> from the same data.</p>
+      <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels</b> (q* = 0.6 / 0.8 / 1.0 / 1.2 on the relative-quality axis, anchor Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.0). For each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around the target complexity times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is that couple's yield (quality per unit cost, as a %). The crown below uses the <b>hidden prominence</b> instead (the sharpest knee on the frontier). All picks are <b>computed</b> from the data.</p>
       <div class="grid" id="tier-cards"></div>
-      <div class="card pad crown" id="tier-crown" style="margin-top:14px"></div>
+      <div class="card pad crown" id="tier-crown"></div>
     </div>
   </section>
 
@@ -170,7 +186,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <p class="cap">"Intel.&nbsp;@max" = Vals index (finance+coding composite), measured at <b>max</b> effort — quality varies little with effort on code, so this index is also a good approximation at high/xhigh. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3/§6). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+    <p class="cap">"Intel.&nbsp;@max" = Vals index (finance+coding composite), measured at <b>max</b> effort — quality varies little with effort on code, so this index is also a good approximation at high/xhigh. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
   </section>
 
   <!-- ============ LINKING GRAPH ============ -->
@@ -191,80 +207,18 @@
     </div>
   </section>
 
-  <!-- ============ RATIO-BY-PAIR ASSIGNMENT ============ -->
-  <section id="ratios">
-    <h2>4 · Assigning defaults — ratios per pair</h2>
-    <p class="sub">For each model pair A/B, every source that measures them <b>at the same effort</b> gives one point = ratio A/B. <b>Colour = effort level</b> (the clusters); <b>grey = @default run</b> (effort to assign). Look at which cluster each grey point falls near. Log scale; hover a point for its source.</p>
-    <div class="card pad">
-      <div class="legend" id="legendR"></div>
-      <div class="chartbox"><svg id="chartR" role="img" aria-label="Cost and token ratios per model pair"></svg></div>
-      <p class="cap">Each pair has <b>two stacked axes</b> — <b>cost</b> (top) and <b>tokens</b> (bottom) — each on its own log scale. A <b>dashed line</b> joins the cost point and the token point when they come from the <b>same source</b>. Few sources publish tokens → the token axis is often empty. <b>§4 zoom</b>: Shift+wheel over an axis zooms its scale (axes/points redraw), drag = pan, double-click = reset.</p>
-    </div>
-  </section>
-
-  <!-- ============ CRITERIA ============ -->
-  <section id="criteria">
-    <h2>5 · What moves everything — the criteria, with examples</h2>
-    <p class="sub">The matrix gives an order of magnitude. These four factors, each measured, modulate it strongly. Each card gives a real, quantified example.</p>
-    <div class="grid">
-      <div class="card pad crit"><h3>Task type</h3>
-        <p>Effort and model choice don't weigh the same depending on the nature of the work.</p>
-        <span class="ex"><b>Code review</b> — Haiku&nbsp;4.5 scores an F1 of 0.365 <b>at 1/3 the cost</b> of Sonnet&nbsp;4.6 (0.343). "Bigger isn't better" <span class="faint">(arxiv 2606.15689)</span>.<br><b>Reasoning</b> — Opus&nbsp;4.5 medium→high&nbsp;: <b>+29% score</b> for 2.8× tokens <span class="faint">(PostTrainBench)</span>. Here effort pays off.<br><b>Pure coding</b> — raising the effort budget&nbsp;: <b>+0.27&nbsp;pt</b> on SWE-Bench Pro <span class="faint">(2606.17930)</span>. Plateau.</span></div>
-      <div class="card pad crit"><h3>Complexity</h3>
-        <p>The harder the task, the more effort costs — up to the point where it hurts.</p>
-        <span class="ex"><b>192 stratified runs</b> <span class="faint">(whitekumalabo)</span>&nbsp;: easy task&nbsp;≈&nbsp;$0.023 regardless of effort; hard task (L3) low→max&nbsp;= <b>×1.9</b>.<br><b>Inverted U</b> — Sonnet&nbsp;4.6 on orchestration&nbsp;: low 0% / medium 16.7% / high 6.7% — <b>high degrades</b> <span class="faint">(2606.08878)</span>.</span></div>
-      <div class="card pad crit"><h3>Generation</h3>
-        <p>Recent Opus models do more with less; Sonnet&nbsp;5 is the verbose exception.</p>
-        <span class="ex"><b>Opus&nbsp;4.8 vs 4.7</b>, same DB migration&nbsp;: 4.8 uses ~half the tokens, <b>−40% cost</b> <span class="faint">(FullStack, 5 runs)</span>.<br><b>Sonnet&nbsp;5</b> generates <b>~2.5× the tokens</b> of Opus&nbsp;4.8 on the AA Index → $2.29/task &gt; $1.99 despite a lower per-token rate.</span></div>
-      <div class="card pad crit"><h3>Cache &amp; harness</h3>
-        <p>Two invisible factors that can dominate both cost and score.</p>
-        <span class="ex"><b>Cache</b> — same code change, cache broken on Sonnet&nbsp;: <b>$10.30 vs $3.83</b> for Opus <span class="faint">(GitHub copilot #1770)</span>. Agentic work runs at 90–96% cache-read.<br><b>Harness</b> — Opus&nbsp;4.8 on Terminal-Bench&nbsp;: <b>84.6% (AA) vs 71.9% (Vals)</b>, same model. Confound #1.</span></div>
-    </div>
-  </section>
-
-  <!-- ============ NO-THINK REGIME ============ -->
-  <section id="nothink">
-    <h2>6 · The no-thinking regime — the cheapest</h2>
-    <p class="sub">Some sources run <b>without extended thinking</b> (reasoning off / raw API). This is not a point on the low→max sweep&nbsp;: it is a <b>distinct cost regime</b>, the floor. We treat it <b>couple-atomically</b>, exactly like §2&nbsp;: each source that measures two models <b>in the same regime on the same task</b> gives a cost ratio; we take the median per pair. The <b>per-model cost index</b> (Haiku&nbsp;4.5&nbsp;=&nbsp;1×) is <b>chained</b> along the measured ratios — indicative, not a decomposition. <b>Fable&nbsp;5</b> and <b>Sonnet&nbsp;5</b> have no published no-think run → absent here. <b>Haiku&nbsp;4.5</b> lives almost entirely in this regime (it doesn't expose the discrete <code>effort</code> parameter).</p>
-    <div class="card pad">
-      <div class="chartbox"><table id="nothink-tbl">
-        <thead><tr><th>Pair A/B</th><th>median cost ratio</th><th>#src</th><th>range</th></tr></thead>
-        <tbody><tr class="nt-head"><td colspan="4"><b>No thinking (nothink)</b> — cost index (Haiku 4.5 = 1×, chained, indicative)&nbsp;: haiku 4.5&nbsp;1.0× · sonnet 4.6&nbsp;4.1× · opus 4.8&nbsp;5.35× · opus 4.7&nbsp;6.09×</td></tr><tr><td>opus 4.8/haiku 4.5</td><td>5.353×</td><td>1</td><td>5.353–5.353×</td></tr><tr class="srcrow"><td colspan="4">arxiv-2606.13715</td></tr><tr><td>sonnet 4.6/haiku 4.5</td><td>4.1×</td><td>4</td><td>3.088–6.185×</td></tr><tr class="srcrow"><td colspan="4">arxiv-2605.16909, arxiv-2606.13715, arxiv-2606.15689, ianlpaterson</td></tr><tr><td>opus 4.8/sonnet 4.6</td><td>1.733×</td><td>1</td><td>1.733–1.733×</td></tr><tr class="srcrow"><td colspan="4">arxiv-2606.13715</td></tr><tr><td>opus 4.7/sonnet 4.6</td><td>1.646×</td><td>1</td><td>1.646–1.646×</td></tr><tr class="srcrow"><td colspan="4">arxiv-2606.10394</td></tr><tr><td>opus 4.8/opus 4.7</td><td>0.879×</td><td>1</td><td>0.879–0.879×</td></tr><tr class="srcrow"><td colspan="4">truefoundry</td></tr><tr class="df-head"><td colspan="4"><b>Default harness — thinking unstated</b> — no cross-model matched-config pair among the current models (these sources mix efforts) → no couple-atomic ratio computable; the ‘default’ points stay out of regime.</td></tr></tbody>
-      </table></div>
-      <p class="cap">"nothink" = thinking <b>proven off</b> by the source. "default" = harness left at its factory config, thinking <b>unstated</b> — kept <b>separate</b> because the config is uncertain (do not merge with nothink). Range = min–max of the measured ratios (inter-source spread).</p>
-    </div>
-  </section>
-
-  <!-- ============ CONFIDENCE + METHOD ============ -->
+  <!-- ============ METHOD ============ -->
   <section id="confidence">
-    <h2>7 · Confidence &amp; merge method</h2>
-    <div class="grid">
-      <div class="card pad">
-        <h3>What is solid</h3>
-        <ul class="tight">
-          <li><span class="conf c-high">HIGH</span> Cross-model cost ordering @medium (÷Opus 4.8) — several independent methods agree (exact per-model values in the matrix §2 and the no-think regime §6).</li>
-          <li><span class="conf c-med">MEDIUM</span> Cost rises steeply from low→max effort — steeper on the agentic harness (CursorBench) than on computer-use (OSWorld).</li>
-          <li><span class="conf c-med">MEDIUM</span> Quality plateau + inverted-U on code/agentic (multi-paper).</li>
-        </ul>
-      </div>
-      <div class="card pad">
-        <h3>What stays wide</h3>
-        <ul class="tight">
-          <li><span class="conf c-low">WIDE</span> <b>Sonnet 5</b>&nbsp;: cheaper than Opus 4.8 on average, but a verbose tail on long agentic work (AA) — hence the wide CI.</li>
-          <li><span class="conf c-low">WIDE</span> Opus 4.7 vs 4.8&nbsp;: contradictory sources (effort/harness) — a wide, straddling CI.</li>
-          <li><span class="conf c-low">WIDE</span> xhigh/max tails and models with no measured effort sweep.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card pad" style="margin-top:14px">
-      <h3>How the relative cost is merged — the procedure</h3>
+    <h2>4 · How the numbers are built — the method</h2>
+    <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered. This section explains how that procedure works and how to read the uncertainty band; it does not restate the numbers (those live in the charts and the matrix).</p>
+    <div class="card pad">
       <ol class="steps">
-        <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources (task sizes are incomparable). We keep only sources measuring ≥2 models/efforts <b>on the same task</b>: their <b>ratio</b> cancels the task-size variance. E.g. WorkBench gives Sonnet&nbsp;4.6/Opus&nbsp;4.8 = 0.58 on its tasks, whatever their absolute cost.</li>
-        <li><b>The (model, effort) couple is atomic.</b> Each node = one indivisible couple. We <b>never</b> assume that "effort" has the same effect across models&nbsp;: taking Haiku to max is not the same multiplier as taking Opus to max. No model×effort decomposition — separability would be a false assumption.</li>
-        <li><b>Per-benchmark normalisation → weighted median.</b> Inside each benchmark, every couple is divided by the anchor <b>Opus 4.8 @medium</b> when present, else bridged via its shared couples (down-weighted ×0.5). Each benchmark thus yields one normalised estimate per couple; a couple's value is the <b>source-weighted median</b> of those estimates. Benchmarks with a single couple are dropped (they would only echo the anchor). No path products, no cross-benchmark value comparison — only within-benchmark ratios.</li>
-        <li><b>"Default" ≠ a single effort — verified source by source.</b> We read each source's actual config (the Config ✓ column). Result&nbsp;: the "default" bucket is heterogeneous — some at <b>max</b> (CEO-Bench, EMB-Opus), <b>high</b> (SlopCode, OfficeQA), thinking <b>off</b> (STAGE-Claw, ianlpaterson), others unstated. Anthropic's docs explain why&nbsp;: the default depends on the model (Sonnet&nbsp;5/Fable&nbsp;5 always think; Opus&nbsp;4.x &amp; Sonnet&nbsp;4.6 opt-in; Haiku &amp; ≤4.5 have no such parameter). What licenses a ratio is the <b>verified</b> fact that <b>each source applies the same config to all its models</b> — not an assumed effort.</li>
-        <li><b>Unlinked couple = flagged, never invented.</b> A couple with no measured edge (Haiku&nbsp;@max — effort not exposed; or an effort sweep never published for that model) is not filled by a generic effort rule. One model's effort shape is <b>never</b> used as a template for another&nbsp;: it is either n/a, or estimated with an explicitly wide band.</li>
-        <li><b>Confidence = agreement.</b> The band is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD)&nbsp;: robust to an outlier benchmark yet still widened by it, and asymmetric. 3+ tight sources → narrow band (Sonnet 4.6 &amp; Opus 4.8 low effort). Sources disagree → wide band (Fable&nbsp;max&nbsp;: Willison-SVG vs CursorBench; Sonnet&nbsp;5, task-size dependent). Where nothing confirms, the band says so.</li>
+        <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources — task sizes are incomparable. We keep only sources that measure ≥2 (model,&nbsp;effort) couples <b>on the same task</b>; their <b>ratio</b> cancels the task-size variance.</li>
+        <li><b>The (model, effort) couple is atomic.</b> Each node is one indivisible couple. We never assume "effort" has the same effect across models — no model×effort decomposition, because separability would be a false assumption.</li>
+        <li><b>Per-benchmark normalisation → weighted median.</b> Inside each benchmark every couple is divided by the anchor (Opus&nbsp;4.8&nbsp;@medium) when present, else bridged through its shared couples (down-weighted). Each benchmark yields one normalised estimate per couple; the couple's value is the <b>source-weighted median</b> across benchmarks. Single-couple benchmarks are dropped — they would only echo the anchor.</li>
+        <li><b>"Default" is verified, not assumed.</b> Each source's actual configuration is read from its harness rather than guessed; a ratio is used only when a source applies the <b>same configuration to all its models</b>.</li>
+        <li><b>Unlinked couples are flagged, never invented.</b> A couple with no measured edge is left n/a or given an <b>explicitly wide band</b> — one model's effort shape is never used as a template for another.</li>
+        <li><b>The band = agreement.</b> Uncertainty is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it, and asymmetric. Tight agreement → narrow band; disagreement → wide band.</li>
       </ol>
     </div>
   </section>
@@ -371,7 +325,7 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
 
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=1100,H=619,mL=58,mR=100,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra width → cost axis + labels breathe
+  const W=1100,H=619,mL=58,mR=64,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; trimmed right margin so the plot extends
   // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -412,7 +366,7 @@ function drawB(){
 // point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=1100,H=619,mL=54,mR=100,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
+  const W=1100,H=619,mL=54,mR=64,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
   // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -435,12 +389,12 @@ function drawPareto(){
   // Fit the frontier ENVELOPE in the chart's DILATED quality metric as a CONCAVE quadratic: T(q) = a + b·x + c·x² (x=log10 cost).
   // Concave (c<0) → on the chart (Y pixel affine in T) it renders as a LOG SHAPE: fast rise at low cost, flattening at high cost.
   const fit=quadFit(par.map(p=>Math.log10(p.c)),par.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x, fev=x=>symTinv(fevT(x));
-  { const tv=par.map(p=>symT(p.q)), tm=tv.reduce((a,b)=>a+b,0)/tv.length,                              // envelope goodness-of-fit R² (dilated metric), rendered live
-      ssT=tv.reduce((a,v)=>a+(v-tm)*(v-tm),0), rssT=par.reduce((a,p)=>a+Math.pow(symT(p.q)-fevT(Math.log10(p.c)),2),0),
-      r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=(1-rssT/ssT).toFixed(2); }
+  const tv=par.map(p=>symT(p.q)), tm=tv.reduce((a,b)=>a+b,0)/tv.length,                                 // envelope goodness-of-fit R² (dilated metric), rendered live
+    ssT=tv.reduce((a,v)=>a+(v-tm)*(v-tm),0), rssT=par.reduce((a,p)=>a+Math.pow(symT(p.q)-fevT(Math.log10(p.c)),2),0), R2=1-rssT/ssT;
+  { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
   { const cmn=Math.min(...par.map(p=>p.c)), cmx=Math.max(...par.map(p=>p.c)), lmn=Math.log10(cmn), lmx=Math.log10(cmx); let d="";
     for(let i=0;i<=56;i++){ const lx=lmn+(lmx-lmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,lx))+" "+Y(fev(lx))+" "; }
-    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.5})); }
+    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
   // score = signed distance to the envelope IN THE DILATED METRIC, squashed: tanh(residual_T / RMS). +1 above · 0 on · −1 below.
   const resAll=pts.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   const scored=pts.map((p,i)=>({...p,score:Math.tanh(resAll[i]/rms),front:pset.has(p.m+"@"+p.e)}));
@@ -461,9 +415,9 @@ function drawPareto(){
   if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>frontier fit (envelope)</span>`;
-  const pn=document.getElementById("pareto-note");
-  if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · q=${p.q.toFixed(2)}</span>`).join(" &nbsp;→&nbsp; ");
+    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Frontier fit — concave log · R² = ${R2.toFixed(2)}</span>`;
+  const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
+  if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${fmtC(p.c)}× · q ${p.q.toFixed(2)}</span></span>`).join("");
 }
 // ---- Value-score table : distance of each couple to the fitted Pareto-frontier envelope (from drawPareto) ----
 function fillScoreTable(scored){
@@ -475,48 +429,52 @@ function fillScoreTable(scored){
     const tr=document.createElement("tr");
     tr.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
       +`<td class="num">${p.c.toFixed(2)}×</td><td class="num">${p.q.toFixed(2)}×</td>`
-      +`<td style="min-width:96px">${pill}</td>`
-      +`<td style="text-align:left;color:${sc};font-size:12px">${p.score>=0?'above envelope':'below envelope'}</td>`;
+      +`<td style="min-width:96px">${pill}</td>`;
     tb.appendChild(tr); }); }
-// ---- HIDDEN-PROMINENCE tiers + crown (data-driven from COSTGRID × QUALGRID) ----
-// For each Pareto-frontier couple we compute a VALUE score S = signed distance to the frontier envelope (concave fit
-// in the dilated quality metric, exactly as in the value-score table). The HIDDEN score then measures LOCAL PROMINENCE
-// along the frontier: hid(n) = 2·Sₙ − S_prev − S_next (a discrete 2nd difference — how much a couple pokes above its two
-// immediate neighbours). Endpoints (no prev/next) get 0. Per complexity window we take the top hidden score; the crown
-// is the top hidden score overall. Windows are ADAPTIVE (wide for simple tasks, narrowing toward complex) and overlap.
+// ---- Central-complexity tiers + hidden-prominence crown (data-driven from COSTGRID × QUALGRID) ----
+// Each tier targets a CENTRAL complexity q* (relative quality). Among the Pareto-frontier couples we pick the one
+// maximising a proximity-weighted yield:  score(p) = exp(−((q−q*)/σ)²) · yield, with yield = quality/cost. The Gaussian
+// focuses on couples near the target complexity; yield (which falls with cost) tilts the choice toward value.
+// The CROWN uses the HIDDEN PROMINENCE: hid(n) = 2·Sₙ − S_prev − S_next along the frontier (S = signed distance to the
+// envelope, as in the value-score table; endpoints get 0). It marks the sharpest knee — the standout couple overall.
+const TSIGMA=0.13;   // Gaussian width around each target complexity (in relative-quality units)
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", lo:0,    hi:0.90, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      lo:0.85, hi:1.00, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        lo:0.97, hi:1.07, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Frontier",            lo:1.05, hi:99,   ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Triage &amp; volume", q:0.6, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday build",      q:0.8, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Professional",        q:1.0, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Frontier",            q:1.2, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0]}); } }
+    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0],y:q[0]/cg[e][0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  // Same envelope as the value-score table: concave quadratic T(q)=a+b·x+c·x² in the dilated metric; S = tanh(residual/RMS).
+  // envelope + value score S + hidden prominence (for the crown) — same envelope as the value-score table
   const fit=quadFit(front.map(p=>Math.log10(p.c)),front.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x;
   const resAll=rows.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   front.forEach(p=>p.S=Math.tanh((symT(p.q)-fevT(Math.log10(p.c)))/rms));
-  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);   // local prominence, ends=0
-  const picks=TIERS.map(t=>{ const cand=front.filter(p=>p.q>=t.lo&&p.q<=t.hi);                  // inclusive → windows overlap
-    return cand.length?{...t,win:cand.reduce((a,b)=>b.hid>a.hid?b:a)}:{...t,win:null}; });
-  const crown=front.slice().sort((a,b)=>b.hid-a.hid)[0];                                        // top prominence overall
+  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
+  const K=(q,q0)=>Math.exp(-Math.pow((q-q0)/TSIGMA,2));
+  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q)*b.y > K(a.q,t.q)*a.y ? b : a)}));   // proximity-weighted yield
+  const crown=front.slice().sort((a,b)=>b.hid-a.hid)[0];                                                    // top prominence overall
   return {picks,crown};
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  host.innerHTML=picks.map(t=>{ const w=t.win, col=w?cvar(MODELS[w.m].c):cvar('--muted');
-    const pick=w?`<span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-        <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b> · prominence <b>${w.hid>=0?'+':''}${w.hid.toFixed(2)}</b></span>`:`<span class="faint">no frontier couple in band</span>`;
+  host.innerHTML=picks.map(t=>{ const w=t.win, col=cvar(MODELS[w.m].c);
     return `<div class="card pad crit tier">
-      <div class="tier-band">quality ${t.lo===0?"≤ ":t.lo+"–"}${t.hi>=99?"and up":t.hi}</div>
+      <div class="tier-band">target complexity q* = ${t.q.toFixed(1)}</div>
       <h3>${t.name}</h3>
-      <div class="tier-win">${pick}</div>
+      <div class="tier-top">
+        <div class="tier-left">
+          <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
+          <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b></span>
+        </div>
+        <div class="tier-yield">${(w.y*100).toFixed(0)}%<small>yield</small></div>
+      </div>
       <span class="ex">${t.ex}</span>
     </div>`; }).join("");
   const c=crown, col=cvar(MODELS[c.m].c);
@@ -525,7 +483,7 @@ function drawTiers(){
     <div class="crown-badge">👑 Most prominent on the frontier</div>
     <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label} · ${capE(c.e)}</div>
     <div class="crown-score">hidden prominence = <b>${c.hid>=0?'+':''}${c.hid.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×)</span></div>
-    <p class="crown-note">Crowned by the <b>hidden prominence</b> score — the couple that stands out most from its immediate neighbours on the frontier (a discrete 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>). A high value means the model is a clear step up from the cheaper option while the pricier option adds little — the genuine knee. It is the <b>top score in the Frontier window</b> as well as overall&nbsp;: the point where the frontier first breaks clearly above parity for a moderate premium.</p>`;
+    <p class="crown-note">Crowned by the <b>hidden prominence</b> score — the couple that stands out most from its immediate neighbours on the frontier (a discrete 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>). A high value means the model is a clear step up from the cheaper option while the pricier one adds little — the genuine knee.</p>`;
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2);
@@ -569,10 +527,9 @@ const GMODEL = {
 };
 const GCOL={sweep:"#2E9C8E",xmodel:"#7C6BB2",xgen:"#B98A3E"};
 const GTLAB={sweep:"effort sweep (same model)",xmodel:"cross-model (same generation)",xgen:"cross-generation bridge"};
-const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = SINGLE-OPERATING-POINT model (no discrete effort parameter) → one node merging all its sources, placed off the effort gridlines; cost also in §6 (no-think regime, anchor)
+const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = SINGLE-OPERATING-POINT model (no discrete effort parameter) → one node merging all its sources, placed off the effort gridlines
 const MX={"fable-5":0,"opus-4.8":1,"opus-4.7":2,"sonnet-5":3,"sonnet-4.6":4,"haiku-4.5":5,"opus-4.6":6.4,"sonnet-3.7":6.9,"opus-4.5":7.3,"sonnet-4.5":7.8,"opus-4.1":8.3};
 const EORD=["max","xhigh","high","medium","low"];   // corroboration graph: 5 explicit efforts, no default row
-const EORD2=["max","xhigh","high","medium","low","default"];   // line-cloud assignment view: adds the 'default' row
 function buildEdges(){
   const pm=new Map();
   const add=(A,B,g,ty)=>{ if(A===B)return; const t=ty||g.t;
@@ -630,7 +587,7 @@ function drawGraph(){
     ring(x,y,8.4,colFor(c)); bump(c);
     });}
   s.appendChild(el("circle",{cx:px("opus-4.8"),cy:py("medium"),r:11.5,fill:"none",stroke:cvar('--opus48'),"stroke-width":1.6,"stroke-dasharray":"1 2"}));
-  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts</b> + <b>Haiku&nbsp;4.5 as a single point</b> (no <code>effort</code> parameter → all its sources merged into one node, see §6&nbsp;; "default" row removed&nbsp;; @default runs feed the §2 matrix CIs). Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
+  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts</b> + <b>Haiku&nbsp;4.5 as a single point</b> (no <code>effort</code> parameter → all its sources merged into one node). Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
   document.getElementById("legendG").innerHTML=
     `<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.g};border-radius:50%;background:transparent"></span>≥3 sources</span>`
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.y};border-radius:50%;background:transparent"></span>2</span>`
@@ -638,93 +595,6 @@ function drawGraph(){
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.r};border-radius:50%;background:transparent"></span>0</span>`
     +`<span class="lg"><span class="sw" style="background:${cvar('--muted')}"></span>measured link</span>`;
 }
-// ===== RATIO-BY-PAIR assignment charts (cost & tokens); colour = effort, grey = @default =====
-const RD={"cost":[["sonnet 5/sonnet 4.6",0.7,"low","anthropic-chart","C113",0],["opus 4.8/sonnet 4.6",0.933,"low","anthropic-chart","C68",0],["sonnet 5/sonnet 4.6",0.737,"medium","anthropic-chart","C114",0],["opus 4.8/sonnet 4.6",0.947,"medium","anthropic-chart","C69",0],["sonnet 5/sonnet 4.6",0.68,"high","anthropic-chart","C112",0],["opus 4.8/sonnet 4.6",0.88,"high","anthropic-chart","C67",0],["sonnet 5/sonnet 4.6",1.283,"max","anthropic-chart","C120",0],["opus 4.8/sonnet 4.6",2.453,"max","anthropic-chart","C79",0],["opus 4.8/sonnet 5",1.333,"low","anthropic-chart","C53",0],["opus 4.8/sonnet 5",1.286,"medium","anthropic-chart","C51",0],["opus 4.8/sonnet 5",1.294,"high","anthropic-chart","C52",0],["opus 4.8/sonnet 5",1.667,"xhigh","anthropic-chart","C57",0],["opus 4.8/sonnet 5",1.912,"max","anthropic-chart","C60",0],["opus 4.8/opus 4.7",1.004,"max","artificialanalysis","C93",0],["opus 4.8/sonnet 5",0.624,"max","artificialanalysis","C37",0],["fable 5/opus 4.8",1.45,"max","artificialanalysis","T2",1],["opus 4.7/sonnet 5",0.621,"max","artificialanalysis","C156",0],["fable 5/opus 4.7",1.74,"max","artificialanalysis","T1",1],["fable 5/sonnet 5",0.967,"max","artificialanalysis","T3",1],["opus 4.8/sonnet 5",0.869,"max","artificialanalysis","C41",0],["sonnet 5/sonnet 4.6",1.991,"max","artificialanalysis","C121",0],["opus 4.8/sonnet 4.6",1.73,"max","artificialanalysis","C77",0],["opus 4.8/sonnet 4.6",1.5,"medium","braintrust","C72",0],["opus 4.8/sonnet 4.6",1.625,"high","braintrust","C75",0],["opus 4.8/opus 4.7",1.658,"max","arxiv-2606.18543","C101",0],["opus 4.8/sonnet 4.6",2.576,"max","arxiv-2606.18543","C81",0],["opus 4.8/haiku 4.5",31.948,"max","arxiv-2606.18543","C175",0],["opus 4.7/sonnet 4.6",1.554,"max","arxiv-2606.18543","C128",0],["opus 4.7/haiku 4.5",19.269,"max","arxiv-2606.18543","C173",0],["sonnet 4.6/haiku 4.5",12.401,"max","arxiv-2606.18543","C171",0],["opus 4.7/sonnet 4.6",0.994,"max","arxiv-2604.18934","C126",0],["opus 4.7/haiku 4.5",10.0,"max","arxiv-2604.18934","C172",0],["sonnet 4.6/haiku 4.5",10.056,"max","arxiv-2604.18934","C170",0],["sonnet 4.6/haiku 4.5",2.271,"high","arxiv-2603.08655","C167",0],["opus 4.8/sonnet 4.6",1.647,"high","arxiv-2602.12670","C76",0],["opus 4.8/sonnet 5",1.161,"high","aireiter","C47",0],["opus 4.8/sonnet 5",1.167,"high","aireiter","C48",0],["opus 4.8/sonnet 5",1.008,"high","aireiter","C44",0],["fable 5/opus 4.8",2.0,"high","github-ctala","C10",0],["opus 4.8/haiku 4.5",5.0,"high","github-ctala","C174",0],["fable 5/haiku 4.5",10.0,"high","github-ctala","C176",0],["sonnet 4.6/haiku 4.5",2.75,"high","github-drona23","C168",0],["sonnet 4.6/haiku 4.5",4.567,"high","github-ponytail","C169",0],["opus 4.8/sonnet 5",1.431,"low","zenn-nnakapa","C55",0],["opus 4.8/sonnet 5",1.867,"xhigh","zenn-nnakapa","C59",0],["fable 5/opus 4.8",1.945,"low","cursorbench","C8",0],["fable 5/opus 4.7",3.048,"low","cursorbench","C166",0],["fable 5/sonnet 5",3.904,"low","cursorbench","C147",0],["fable 5/sonnet 4.6",3.016,"low","cursorbench","C149",0],["fable 5/opus 4.8",2.159,"medium","cursorbench","C15",0],["fable 5/opus 4.7",2.823,"medium","cursorbench","C165",0],["fable 5/sonnet 5",3.218,"medium","cursorbench","C146",0],["fable 5/sonnet 4.6",3.133,"medium","cursorbench","C150",0],["fable 5/opus 4.8",2.451,"high","cursorbench","C19",0],["fable 5/opus 4.7",2.158,"high","cursorbench","C164",0],["fable 5/sonnet 5",2.89,"high","cursorbench","C145",0],["fable 5/sonnet 4.6",3.533,"high","cursorbench","C152",0],["fable 5/opus 4.8",2.238,"xhigh","cursorbench","C16",0],["fable 5/opus 4.7",1.932,"xhigh","cursorbench","C163",0],["fable 5/sonnet 5",2.627,"xhigh","cursorbench","C143",0],["fable 5/opus 4.8",2.374,"max","cursorbench","C18",0],["fable 5/opus 4.7",1.635,"max","cursorbench","C162",0],["fable 5/sonnet 5",2.623,"max","cursorbench","C142",0],["fable 5/sonnet 4.6",5.832,"max","cursorbench","C154",0],["opus 4.8/opus 4.7",1.567,"low","cursorbench","C99",0],["opus 4.8/sonnet 5",2.007,"low","cursorbench","C61",0],["opus 4.8/sonnet 4.6",1.55,"low","cursorbench","C73",0],["opus 4.8/opus 4.7",1.307,"medium","cursorbench","C95",0],["opus 4.8/sonnet 5",1.49,"medium","cursorbench","C56",0],["opus 4.8/sonnet 4.6",1.451,"medium","cursorbench","C71",0],["opus 4.8/opus 4.7",0.88,"high","cursorbench","C90",0],["opus 4.8/sonnet 5",1.179,"high","cursorbench","C50",0],["opus 4.8/sonnet 4.6",1.441,"high","cursorbench","C70",0],["opus 4.8/opus 4.7",0.864,"xhigh","cursorbench","C89",0],["opus 4.8/sonnet 5",1.174,"xhigh","cursorbench","C49",0],["opus 4.8/opus 4.7",0.689,"max","cursorbench","C88",0],["opus 4.8/sonnet 5",1.105,"max","cursorbench","C46",0],["opus 4.8/sonnet 4.6",2.456,"max","cursorbench","C80",0],["opus 4.7/sonnet 5",1.281,"low","cursorbench","C158",0],["opus 4.7/sonnet 4.6",0.989,"low","cursorbench","C125",0],["opus 4.7/sonnet 5",1.14,"medium","cursorbench","C157",0],["opus 4.7/sonnet 4.6",1.11,"medium","cursorbench","C127",0],["opus 4.7/sonnet 5",1.34,"high","cursorbench","C159",0],["opus 4.7/sonnet 4.6",1.637,"high","cursorbench","C129",0],["opus 4.7/sonnet 5",1.359,"xhigh","cursorbench","C160",0],["opus 4.7/sonnet 5",1.604,"max","cursorbench","C161",0],["opus 4.7/sonnet 4.6",3.566,"max","cursorbench","C136",0],["sonnet 5/sonnet 4.6",0.772,"low","cursorbench","C115",0],["sonnet 5/sonnet 4.6",0.973,"medium","cursorbench","C116",0],["sonnet 5/sonnet 4.6",1.222,"high","cursorbench","C119",0],["sonnet 5/sonnet 4.6",2.223,"max","cursorbench","C123",0],["opus 4.8/sonnet 5",3.571,"low","anthropic-syscard","C62",0],["fable 5/sonnet 5",6.429,"low","anthropic-syscard","C148",0],["opus 4.8/sonnet 5",1.364,"medium","anthropic-syscard","C54",0],["fable 5/sonnet 5",2.864,"medium","anthropic-syscard","C144",0],["sonnet 5/sonnet 4.6",1.158,"medium","anthropic-syscard","C117",0],["opus 4.8/sonnet 5",0.822,"high","anthropic-syscard","C40",0],["fable 5/sonnet 5",1.844,"high","anthropic-syscard","C141",0],["sonnet 5/sonnet 4.6",2.143,"high","anthropic-syscard","C122",0],["opus 4.8/sonnet 5",0.959,"xhigh","anthropic-syscard","C43",0],["fable 5/sonnet 5",1.438,"xhigh","anthropic-syscard","C139",0],["opus 4.8/sonnet 5",0.95,"max","anthropic-syscard","C42",0],["fable 5/sonnet 5",1.6,"max","anthropic-syscard","C140",0],["sonnet 5/sonnet 4.6",4.545,"max","anthropic-syscard","C124",0],["fable 5/opus 4.8",1.8,"low","anthropic-syscard","C5",0],["fable 5/opus 4.8",2.1,"medium","anthropic-syscard","C12",0],["opus 4.8/sonnet 4.6",1.579,"medium","anthropic-syscard","C74",0],["fable 5/opus 4.8",2.243,"high","anthropic-syscard","C17",0],["opus 4.8/sonnet 4.6",1.762,"high","anthropic-syscard","C78",0],["fable 5/opus 4.8",1.5,"xhigh","anthropic-syscard","C2",0],["fable 5/opus 4.8",1.684,"max","anthropic-syscard","C3",0],["opus 4.8/sonnet 4.6",4.318,"max","anthropic-syscard","C85",0],["fable 5/sonnet 4.6",3.316,"medium","anthropic-syscard","C151",0],["fable 5/sonnet 4.6",3.952,"high","anthropic-syscard","C153",0],["fable 5/sonnet 4.6",7.273,"max","anthropic-syscard","C155",0],["opus 4.8/sonnet 5",1.737,"low","anthropic-syscard","C58",0],["sonnet 5/sonnet 4.6",0.38,"low","anthropic-syscard","C110",0],["opus 4.8/sonnet 5",1.04,"medium","anthropic-syscard","C45",0],["sonnet 5/sonnet 4.6",0.385,"medium","anthropic-syscard","C111",0],["opus 4.8/sonnet 5",0.689,"high","anthropic-syscard","C38",0],["sonnet 5/sonnet 4.6",0.375,"high","anthropic-syscard","C109",0],["opus 4.8/sonnet 5",0.733,"xhigh","anthropic-syscard","C39",0],["opus 4.8/sonnet 5",0.429,"max","anthropic-syscard","C36",0],["sonnet 5/sonnet 4.6",1.167,"max","anthropic-syscard","C118",0],["opus 4.8/sonnet 4.6",0.66,"low","anthropic-syscard","C66",0],["opus 4.8/sonnet 4.6",0.4,"medium","anthropic-syscard","C64",0],["opus 4.8/sonnet 4.6",0.258,"high","anthropic-syscard","C63",0],["opus 4.8/sonnet 4.6",0.5,"max","anthropic-syscard","C65",0],["opus 4.8/opus 4.7",1.655,"low","anthropic-syscard","C100",0],["opus 4.8/opus 4.7",1.714,"medium","anthropic-syscard","C102",0],["opus 4.8/opus 4.7",1.227,"high","anthropic-syscard","C94",0],["opus 4.8/opus 4.7",1.75,"xhigh","anthropic-syscard","C103",0],["opus 4.8/opus 4.7",2.071,"max","anthropic-syscard","C105",0],["opus 4.8/opus 4.7",2.167,"low","anthropic-syscard","C106",0],["opus 4.8/opus 4.7",1.385,"medium","anthropic-syscard","C97",0],["opus 4.8/opus 4.7",0.88,"high","anthropic-syscard","C91",0],["opus 4.8/opus 4.7",1.0,"xhigh","anthropic-syscard","C92",0],["opus 4.8/opus 4.7",0.646,"max","anthropic-syscard","C87",0],["opus 4.8/opus 4.7",1.308,"low","anthropic-syscard","C96",0],["opus 4.8/sonnet 4.6",3.4,"low","anthropic-syscard","C84",0],["opus 4.8/opus 4.7",1.857,"medium","anthropic-syscard","C104",0],["opus 4.8/sonnet 4.6",3.25,"medium","anthropic-syscard","C83",0],["opus 4.8/opus 4.7",1.455,"high","anthropic-syscard","C98",0],["opus 4.8/sonnet 4.6",2.909,"high","anthropic-syscard","C82",0],["opus 4.8/opus 4.7",2.207,"xhigh","anthropic-syscard","C107",0],["opus 4.8/opus 4.7",2.426,"max","anthropic-syscard","C108",0],["opus 4.8/sonnet 4.6",10.077,"max","anthropic-syscard","C86",0],["opus 4.7/sonnet 4.6",2.6,"low","anthropic-syscard","C135",0],["opus 4.7/sonnet 4.6",1.75,"medium","anthropic-syscard","C131",0],["opus 4.7/sonnet 4.6",2.0,"high","anthropic-syscard","C133",0],["opus 4.7/sonnet 4.6",4.154,"max","anthropic-syscard","C138",0],["fable 5/opus 4.8",3.75,"low","anthropic-syscard","C32",0],["fable 5/opus 4.8",2.6,"medium","anthropic-syscard","C20",0],["fable 5/opus 4.8",2.148,"high","anthropic-syscard","C14",0],["fable 5/opus 4.8",1.773,"xhigh","anthropic-syscard","C4",0],["fable 5/opus 4.8",2.077,"low","anthropic-syscard","C11",0],["fable 5/opus 4.8",1.973,"medium","anthropic-syscard","C9",0],["fable 5/opus 4.8",2.13,"high","anthropic-syscard","C13",0],["fable 5/opus 4.8",1.386,"xhigh","anthropic-syscard","C1",0],["fable 5/opus 4.8",1.845,"max","anthropic-syscard","C6",0],["fable 5/opus 4.8",3.481,"low","anthropic-syscard","C30",0],["fable 5/opus 4.8",3.161,"medium","anthropic-syscard","C27",0],["fable 5/opus 4.8",3.212,"high","anthropic-syscard","C29",0],["fable 5/opus 4.8",2.723,"xhigh","anthropic-syscard","C22",0],["fable 5/opus 4.8",3.167,"max","anthropic-syscard","C28",0],["fable 5/opus 4.8",2.939,"low","anthropic-syscard","C24",0],["fable 5/opus 4.8",2.83,"medium","anthropic-syscard","C23",0],["fable 5/opus 4.8",3.651,"high","anthropic-syscard","C31",0],["fable 5/opus 4.8",2.609,"xhigh","anthropic-syscard","C21",0],["fable 5/opus 4.8",3.0,"max","anthropic-syscard","C25",0],["fable 5/opus 4.8",1.875,"low","anthropic-syscard","C7",0],["fable 5/opus 4.8",3.154,"medium","anthropic-syscard","C26",0],["fable 5/opus 4.8",5.294,"high","anthropic-syscard","C35",0],["fable 5/opus 4.8",4.0,"xhigh","anthropic-syscard","C33",0],["fable 5/opus 4.8",5.116,"max","anthropic-syscard","C34",0],["opus 4.7/sonnet 4.6",2.455,"low","anthropic-syscard","C134",0],["opus 4.7/sonnet 4.6",1.754,"medium","anthropic-syscard","C132",0],["opus 4.7/sonnet 4.6",1.711,"high","anthropic-syscard","C130",0],["opus 4.7/sonnet 4.6",3.605,"max","anthropic-syscard","C137",0]],"tok":[["sonnet 5/sonnet 4.6",0.7,"low","anthropic-chart","C113",1],["opus 4.8/sonnet 4.6",0.56,"low","anthropic-chart","C68",1],["sonnet 5/sonnet 4.6",0.737,"medium","anthropic-chart","C114",1],["opus 4.8/sonnet 4.6",0.568,"medium","anthropic-chart","C69",1],["sonnet 5/sonnet 4.6",0.68,"high","anthropic-chart","C112",1],["opus 4.8/sonnet 4.6",0.528,"high","anthropic-chart","C67",1],["sonnet 5/sonnet 4.6",1.283,"max","anthropic-chart","C120",1],["opus 4.8/sonnet 4.6",1.472,"max","anthropic-chart","C79",1],["opus 4.8/sonnet 5",0.8,"low","anthropic-chart","C53",1],["opus 4.8/sonnet 5",0.772,"medium","anthropic-chart","C51",1],["opus 4.8/sonnet 5",0.776,"high","anthropic-chart","C52",1],["opus 4.8/sonnet 5",1.0,"xhigh","anthropic-chart","C57",1],["opus 4.8/sonnet 5",1.147,"max","anthropic-chart","C60",1],["opus 4.8/opus 4.7",1.2,"max","artificialanalysis","T5",0],["opus 4.8/sonnet 5",0.4,"max","artificialanalysis","T6",0],["fable 5/opus 4.8",0.725,"max","artificialanalysis","T2",0],["opus 4.7/sonnet 5",0.333,"max","artificialanalysis","T4",0],["fable 5/opus 4.7",0.87,"max","artificialanalysis","T1",0],["fable 5/sonnet 5",0.29,"max","artificialanalysis","T3",0],["opus 4.8/sonnet 5",0.521,"max","artificialanalysis","C41",1],["sonnet 5/sonnet 4.6",1.991,"max","artificialanalysis","C121",1],["opus 4.8/sonnet 4.6",1.038,"max","artificialanalysis","C77",1],["opus 4.8/sonnet 4.6",0.9,"medium","braintrust","C72",1],["opus 4.8/sonnet 4.6",0.975,"high","braintrust","C75",1],["opus 4.8/opus 4.7",1.658,"max","arxiv-2606.18543","C101",1],["opus 4.8/sonnet 4.6",1.546,"max","arxiv-2606.18543","C81",1],["opus 4.8/haiku 4.5",6.39,"max","arxiv-2606.18543","C175",1],["opus 4.7/sonnet 4.6",0.932,"max","arxiv-2606.18543","C128",1],["opus 4.7/haiku 4.5",3.854,"max","arxiv-2606.18543","C173",1],["sonnet 4.6/haiku 4.5",4.134,"max","arxiv-2606.18543","C171",1],["opus 4.7/sonnet 4.6",0.596,"max","arxiv-2604.18934","C126",1],["opus 4.7/haiku 4.5",2.0,"max","arxiv-2604.18934","C172",1],["sonnet 4.6/haiku 4.5",3.352,"max","arxiv-2604.18934","C170",1],["sonnet 4.6/haiku 4.5",0.757,"high","arxiv-2603.08655","C167",1],["opus 4.8/sonnet 4.6",0.988,"high","arxiv-2602.12670","C76",1],["opus 4.8/sonnet 5",0.697,"high","aireiter","C47",1],["opus 4.8/sonnet 5",0.7,"high","aireiter","C48",1],["opus 4.8/sonnet 5",0.605,"high","aireiter","C44",1],["fable 5/opus 4.8",1.0,"high","github-ctala","C10",1],["opus 4.8/haiku 4.5",1.0,"high","github-ctala","C174",1],["fable 5/haiku 4.5",1.0,"high","github-ctala","C176",1],["sonnet 4.6/haiku 4.5",0.819,"high","github-drona23","T7",0],["sonnet 4.6/haiku 4.5",1.522,"high","github-ponytail","C169",1],["opus 4.8/sonnet 5",0.859,"low","zenn-nnakapa","C55",1],["opus 4.8/sonnet 5",1.12,"xhigh","zenn-nnakapa","C59",1],["fable 5/opus 4.8",0.973,"low","cursorbench","C8",1],["fable 5/opus 4.7",1.524,"low","cursorbench","C166",1],["fable 5/sonnet 5",1.171,"low","cursorbench","C147",1],["fable 5/sonnet 4.6",0.905,"low","cursorbench","C149",1],["fable 5/opus 4.8",1.079,"medium","cursorbench","C15",1],["fable 5/opus 4.7",1.411,"medium","cursorbench","C165",1],["fable 5/sonnet 5",0.965,"medium","cursorbench","C146",1],["fable 5/sonnet 4.6",0.94,"medium","cursorbench","C150",1],["fable 5/opus 4.8",1.226,"high","cursorbench","C19",1],["fable 5/opus 4.7",1.079,"high","cursorbench","C164",1],["fable 5/sonnet 5",0.867,"high","cursorbench","C145",1],["fable 5/sonnet 4.6",1.06,"high","cursorbench","C152",1],["fable 5/opus 4.8",1.119,"xhigh","cursorbench","C16",1],["fable 5/opus 4.7",0.966,"xhigh","cursorbench","C163",1],["fable 5/sonnet 5",0.788,"xhigh","cursorbench","C143",1],["fable 5/opus 4.8",1.187,"max","cursorbench","C18",1],["fable 5/opus 4.7",0.818,"max","cursorbench","C162",1],["fable 5/sonnet 5",0.787,"max","cursorbench","C142",1],["fable 5/sonnet 4.6",1.75,"max","cursorbench","C154",1],["opus 4.8/opus 4.7",1.567,"low","cursorbench","C99",1],["opus 4.8/sonnet 5",1.204,"low","cursorbench","C61",1],["opus 4.8/sonnet 4.6",0.93,"low","cursorbench","C73",1],["opus 4.8/opus 4.7",1.307,"medium","cursorbench","C95",1],["opus 4.8/sonnet 5",0.894,"medium","cursorbench","C56",1],["opus 4.8/sonnet 4.6",0.871,"medium","cursorbench","C71",1],["opus 4.8/opus 4.7",0.88,"high","cursorbench","C90",1],["opus 4.8/sonnet 5",0.707,"high","cursorbench","C50",1],["opus 4.8/sonnet 4.6",0.865,"high","cursorbench","C70",1],["opus 4.8/opus 4.7",0.864,"xhigh","cursorbench","C89",1],["opus 4.8/sonnet 5",0.704,"xhigh","cursorbench","C49",1],["opus 4.8/opus 4.7",0.689,"max","cursorbench","C88",1],["opus 4.8/sonnet 5",0.663,"max","cursorbench","C46",1],["opus 4.8/sonnet 4.6",1.474,"max","cursorbench","C80",1],["opus 4.7/sonnet 5",0.769,"low","cursorbench","C158",1],["opus 4.7/sonnet 4.6",0.593,"low","cursorbench","C125",1],["opus 4.7/sonnet 5",0.684,"medium","cursorbench","C157",1],["opus 4.7/sonnet 4.6",0.666,"medium","cursorbench","C127",1],["opus 4.7/sonnet 5",0.804,"high","cursorbench","C159",1],["opus 4.7/sonnet 4.6",0.982,"high","cursorbench","C129",1],["opus 4.7/sonnet 5",0.815,"xhigh","cursorbench","C160",1],["opus 4.7/sonnet 5",0.962,"max","cursorbench","C161",1],["opus 4.7/sonnet 4.6",2.14,"max","cursorbench","C136",1],["sonnet 5/sonnet 4.6",0.772,"low","cursorbench","C115",1],["sonnet 5/sonnet 4.6",0.973,"medium","cursorbench","C116",1],["sonnet 5/sonnet 4.6",1.222,"high","cursorbench","C119",1],["sonnet 5/sonnet 4.6",2.223,"max","cursorbench","C123",1],["opus 4.8/sonnet 5",2.143,"low","anthropic-syscard","C62",1],["fable 5/sonnet 5",1.929,"low","anthropic-syscard","C148",1],["opus 4.8/sonnet 5",0.818,"medium","anthropic-syscard","C54",1],["fable 5/sonnet 5",0.859,"medium","anthropic-syscard","C144",1],["sonnet 5/sonnet 4.6",1.158,"medium","anthropic-syscard","C117",1],["opus 4.8/sonnet 5",0.493,"high","anthropic-syscard","C40",1],["fable 5/sonnet 5",0.553,"high","anthropic-syscard","C141",1],["sonnet 5/sonnet 4.6",2.143,"high","anthropic-syscard","C122",1],["opus 4.8/sonnet 5",0.575,"xhigh","anthropic-syscard","C43",1],["fable 5/sonnet 5",0.431,"xhigh","anthropic-syscard","C139",1],["opus 4.8/sonnet 5",0.57,"max","anthropic-syscard","C42",1],["fable 5/sonnet 5",0.48,"max","anthropic-syscard","C140",1],["sonnet 5/sonnet 4.6",4.545,"max","anthropic-syscard","C124",1],["fable 5/opus 4.8",0.9,"low","anthropic-syscard","C5",1],["fable 5/opus 4.8",1.05,"medium","anthropic-syscard","C12",1],["opus 4.8/sonnet 4.6",0.947,"medium","anthropic-syscard","C74",1],["fable 5/opus 4.8",1.121,"high","anthropic-syscard","C17",1],["opus 4.8/sonnet 4.6",1.057,"high","anthropic-syscard","C78",1],["fable 5/opus 4.8",0.75,"xhigh","anthropic-syscard","C2",1],["fable 5/opus 4.8",0.842,"max","anthropic-syscard","C3",1],["opus 4.8/sonnet 4.6",2.591,"max","anthropic-syscard","C85",1],["fable 5/sonnet 4.6",0.995,"medium","anthropic-syscard","C151",1],["fable 5/sonnet 4.6",1.186,"high","anthropic-syscard","C153",1],["fable 5/sonnet 4.6",2.182,"max","anthropic-syscard","C155",1],["opus 4.8/sonnet 5",1.042,"low","anthropic-syscard","C58",1],["sonnet 5/sonnet 4.6",0.38,"low","anthropic-syscard","C110",1],["opus 4.8/sonnet 5",0.624,"medium","anthropic-syscard","C45",1],["sonnet 5/sonnet 4.6",0.385,"medium","anthropic-syscard","C111",1],["opus 4.8/sonnet 5",0.413,"high","anthropic-syscard","C38",1],["sonnet 5/sonnet 4.6",0.375,"high","anthropic-syscard","C109",1],["opus 4.8/sonnet 5",0.44,"xhigh","anthropic-syscard","C39",1],["opus 4.8/sonnet 5",0.257,"max","anthropic-syscard","C36",1],["sonnet 5/sonnet 4.6",1.167,"max","anthropic-syscard","C118",1],["opus 4.8/sonnet 4.6",0.396,"low","anthropic-syscard","C66",1],["opus 4.8/sonnet 4.6",0.24,"medium","anthropic-syscard","C64",1],["opus 4.8/sonnet 4.6",0.155,"high","anthropic-syscard","C63",1],["opus 4.8/sonnet 4.6",0.3,"max","anthropic-syscard","C65",1],["opus 4.8/opus 4.7",1.655,"low","anthropic-syscard","C100",1],["opus 4.8/opus 4.7",1.714,"medium","anthropic-syscard","C102",1],["opus 4.8/opus 4.7",1.227,"high","anthropic-syscard","C94",1],["opus 4.8/opus 4.7",1.75,"xhigh","anthropic-syscard","C103",1],["opus 4.8/opus 4.7",2.071,"max","anthropic-syscard","C105",1],["opus 4.8/opus 4.7",2.167,"low","anthropic-syscard","C106",1],["opus 4.8/opus 4.7",1.385,"medium","anthropic-syscard","C97",1],["opus 4.8/opus 4.7",0.88,"high","anthropic-syscard","C91",1],["opus 4.8/opus 4.7",1.0,"xhigh","anthropic-syscard","C92",1],["opus 4.8/opus 4.7",0.646,"max","anthropic-syscard","C87",1],["opus 4.8/opus 4.7",1.308,"low","anthropic-syscard","C96",1],["opus 4.8/sonnet 4.6",2.04,"low","anthropic-syscard","C84",1],["opus 4.8/opus 4.7",1.857,"medium","anthropic-syscard","C104",1],["opus 4.8/sonnet 4.6",1.95,"medium","anthropic-syscard","C83",1],["opus 4.8/opus 4.7",1.455,"high","anthropic-syscard","C98",1],["opus 4.8/sonnet 4.6",1.745,"high","anthropic-syscard","C82",1],["opus 4.8/opus 4.7",2.207,"xhigh","anthropic-syscard","C107",1],["opus 4.8/opus 4.7",2.426,"max","anthropic-syscard","C108",1],["opus 4.8/sonnet 4.6",6.046,"max","anthropic-syscard","C86",1],["opus 4.7/sonnet 4.6",1.56,"low","anthropic-syscard","C135",1],["opus 4.7/sonnet 4.6",1.05,"medium","anthropic-syscard","C131",1],["opus 4.7/sonnet 4.6",1.2,"high","anthropic-syscard","C133",1],["opus 4.7/sonnet 4.6",2.492,"max","anthropic-syscard","C138",1],["fable 5/opus 4.8",1.875,"low","anthropic-syscard","C32",1],["fable 5/opus 4.8",1.3,"medium","anthropic-syscard","C20",1],["fable 5/opus 4.8",1.074,"high","anthropic-syscard","C14",1],["fable 5/opus 4.8",0.886,"xhigh","anthropic-syscard","C4",1],["fable 5/opus 4.8",1.038,"low","anthropic-syscard","C11",1],["fable 5/opus 4.8",0.987,"medium","anthropic-syscard","C9",1],["fable 5/opus 4.8",1.065,"high","anthropic-syscard","C13",1],["fable 5/opus 4.8",0.693,"xhigh","anthropic-syscard","C1",1],["fable 5/opus 4.8",0.922,"max","anthropic-syscard","C6",1],["fable 5/opus 4.8",1.74,"low","anthropic-syscard","C30",1],["fable 5/opus 4.8",1.581,"medium","anthropic-syscard","C27",1],["fable 5/opus 4.8",1.606,"high","anthropic-syscard","C29",1],["fable 5/opus 4.8",1.361,"xhigh","anthropic-syscard","C22",1],["fable 5/opus 4.8",1.583,"max","anthropic-syscard","C28",1],["fable 5/opus 4.8",1.47,"low","anthropic-syscard","C24",1],["fable 5/opus 4.8",1.415,"medium","anthropic-syscard","C23",1],["fable 5/opus 4.8",1.825,"high","anthropic-syscard","C31",1],["fable 5/opus 4.8",1.304,"xhigh","anthropic-syscard","C21",1],["fable 5/opus 4.8",1.5,"max","anthropic-syscard","C25",1],["fable 5/opus 4.8",0.938,"low","anthropic-syscard","C7",1],["fable 5/opus 4.8",1.577,"medium","anthropic-syscard","C26",1],["fable 5/opus 4.8",2.647,"high","anthropic-syscard","C35",1],["fable 5/opus 4.8",2.0,"xhigh","anthropic-syscard","C33",1],["fable 5/opus 4.8",2.558,"max","anthropic-syscard","C34",1],["opus 4.7/sonnet 4.6",1.473,"low","anthropic-syscard","C134",1],["opus 4.7/sonnet 4.6",1.052,"medium","anthropic-syscard","C132",1],["opus 4.7/sonnet 4.6",1.027,"high","anthropic-syscard","C130",1],["opus 4.7/sonnet 4.6",2.163,"max","anthropic-syscard","C137",1]]};
-const CONS={"fable 5/opus 4.8":[["low",2.077,null],["medium",2.6,null],["high",2.347,null],["xhigh",2.238,null],["max",2.687,0.725]],"fable 5/sonnet 5":[["low",5.167,null],["medium",3.041,null],["high",2.367,null],["xhigh",2.032,null],["max",2.112,0.29]],"opus 4.7/sonnet 4.6":[["low",2.455,null],["medium",1.75,null],["high",1.711,null],["max",3.566,null]],"sonnet 5/sonnet 4.6":[["low",0.7,null],["medium",0.855,null],["high",0.951,null],["max",1.991,null]],"opus 4.8/haiku 4.5":[["high",5.0,null],["max",31.948,null]],"opus 4.8/opus 4.7":[["low",1.611,null],["medium",1.55,null],["high",1.054,null],["xhigh",1.375,null],["max",1.331,1.2]],"fable 5/sonnet 4.6":[["low",3.016,null],["medium",3.224,null],["high",3.742,null],["max",6.553,null]],"fable 5/haiku 4.5":[["high",10.0,null]],"opus 4.7/haiku 4.5":[["max",14.634,null]],"opus 4.7/sonnet 5":[["low",1.281,null],["medium",1.14,null],["high",1.34,null],["xhigh",1.359,null],["max",1.113,0.333]],"sonnet 4.6/haiku 4.5":[["high",2.75,0.819],["max",11.229,null]],"opus 4.8/sonnet 4.6":[["low",1.242,null],["medium",1.476,null],["high",1.625,null],["max",2.456,null]],"fable 5/opus 4.7":[["low",3.048,null],["medium",2.823,null],["high",2.158,null],["xhigh",1.932,null],["max",1.635,0.87]],"opus 4.8/sonnet 5":[["low",1.737,null],["medium",1.325,null],["high",1.161,null],["xhigh",1.174,null],["max",0.909,0.4]]};
-const EC={low:"#5B8FF0",medium:"#2E9C5A",high:"#D9B23A",xhigh:"#E08A2E",max:"#E0342A",grey:"#9a9a9a"};
-const RVIEW={};   // per-axis semantic-zoom window: key `${pair}|${metric}` -> [loLog10, hiLog10]
-// One block per model pair: two stacked own-scale log axes (cost on top, tokens below),
-// points coloured by effort (grey=@default), IDs above; dashed connector when the same source has both.
-function drawRatios(svgId){
-  const s=document.getElementById(svgId); if(!s) return; s.innerHTML=""; s.__axes=[];
-  const cb={}, tb={};
-  RD.cost.forEach(p=>{(cb[p[0]]=cb[p[0]]||[]).push(p);});
-  RD.tok.forEach(p=>{(tb[p[0]]=tb[p[0]]||[]).push(p);});
-  const grey1=a=>a&&a.some(p=>p[5]===0&&p[2]==="grey");   // show axis only if it has a MEASURED @default to assign
-  const pairs=[...new Set([...Object.keys(cb),...Object.keys(tb)])]
-    .filter(p=>grey1(cb[p])||grey1(tb[p]))
-    .sort((a,b)=>((cb[b]||[]).length-(cb[a]||[]).length)||((tb[b]||[]).length-(tb[a]||[]).length)||a.localeCompare(b));
-  const W=780, mT=8, aX0=150, aX1=W-24, axGap=52, L=Math.log10;
-  const TC=[0.1,0.15,0.2,0.25,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.2,1.5,2,2.5,3,4,5,6,7,8,10,12,15,20,25,30,40,50];
-  // key `${pair}|${metric}` : RVIEW override (semantic zoom) → [loLog,hiLog], else data-derived
-  function axis(pts,yA,cons,key){
-    if(!grey1(pts)) return null;
-    let loL,hiL;
-    if(RVIEW[key]){ [loL,hiL]=RVIEW[key]; }
-    else { const vals=pts.map(p=>p[1]).concat(cons.map(c=>c[1]));
-      let lo=Math.min(...vals), hi=Math.max(...vals);
-      if(lo===hi){lo*=0.7;hi*=1.4;} else {const f=hi/lo; lo/=Math.pow(f,0.07); hi*=Math.pow(f,0.07);}
-      loL=L(lo); hiL=L(hi); }
-    s.__axes.push({key,yA,x0:aX0,x1:aX1,loL,hiL});         // hitbox for zoom/pan
-    const X=v=>aX0+(L(v)-loL)/(hiL-loL)*(aX1-aX0);
-    const inR=x=>x>=aX0-4&&x<=aX1+4;
-    s.appendChild(el("line",{x1:aX0,y1:yA,x2:aX1,y2:yA,stroke:cvar('--muted'),"stroke-width":1,"stroke-opacity":.5}));
-    let ticks=TC.filter(t=>L(t)>=loL&&L(t)<=hiL);
-    if(ticks.length>6){ const step=Math.ceil(ticks.length/6); ticks=ticks.filter((_,k)=>k%step===0); }
-    if(ticks.length<2) ticks=[+Math.pow(10,loL).toPrecision(2),+Math.pow(10,hiL).toPrecision(2)];
-    ticks.forEach(t=>{ s.appendChild(el("line",{x1:X(t),y1:yA-3,x2:X(t),y2:yA+3,stroke:cvar('--faint'),"stroke-width":1}));
-      const tx=el("text",{x:X(t),y:yA+14,fill:cvar('--faint'),"font-size":9,"text-anchor":"middle"});tx.textContent=t+"×";s.appendChild(tx);});
-    cons.forEach(c=>{ const x=X(c[1]); if(!inR(x))return;
-      const sq=el("rect",{x:x-6,y:yA-6,width:12,height:12,rx:1.5,fill:EC[c[0]],"fill-opacity":.32,stroke:EC[c[0]],"stroke-width":1.4});
-      const ti=document.createElementNS(NS,"title");ti.textContent=`measured median ${c[0]} = ${c[1]}×`;sq.appendChild(ti);s.appendChild(sq); });
-    const pos={};
-    pts.slice().sort((a,b)=>a[1]-b[1]).forEach(p=>{ const x=X(p[1]); if(!inR(x))return; const derived=p[5]===1, grey=p[2]==="grey";
-      const c=el("circle",{cx:x,cy:yA,r:4.4,fill:derived?"none":EC[p[2]],stroke:derived?EC[p[2]]:cvar('--panel'),"stroke-width":derived?1.6:1,"stroke-dasharray":derived?"2 1.5":"none"});
-      const ti=document.createElementNS(NS,"title");ti.textContent=`${p[4]}${derived?" (derived via price)":""} · ${p[0]} · ${p[1]}× · ${p[2]} · ${p[3]}`;c.appendChild(ti);s.appendChild(c);
-      if(grey){ const it=el("text",{x:x,y:yA-8,fill:cvar('--ink'),"font-size":7.5,"text-anchor":"middle","font-weight":700});it.textContent=p[4];s.appendChild(it); }
-      pos[p[4]]=x; });
-    return pos;
-  }
-  let y=mT;
-  pairs.forEach((pair,ri)=>{ const top=y;
-    const cons=CONS[pair]||[];
-    const consC=cons.filter(r=>r[1]!=null).map(r=>[r[0],r[1]]), consT=cons.filter(r=>r[2]!=null).map(r=>[r[0],r[2]]);
-    if(ri) s.appendChild(el("line",{x1:0,y1:top,x2:W,y2:top,stroke:cvar('--line'),"stroke-width":1,"stroke-opacity":.35}));
-    const lb=el("text",{x:8,y:top+18,fill:cvar('--ink'),"font-size":11,"font-weight":700});lb.textContent=pair;s.appendChild(lb);
-    let ay=top+36, yC=null,yT=null,cp=null,tp=null;
-    if(grey1(cb[pair])){ yC=ay; const t=el("text",{x:aX0-8,y:yC+3.5,fill:cvar('--faint'),"font-size":9,"text-anchor":"end"});t.textContent="cost";s.appendChild(t); cp=axis(cb[pair],yC,consC,pair+"|cost"); ay+=axGap; }
-    if(grey1(tb[pair])){ yT=ay; const t=el("text",{x:aX0-8,y:yT+3.5,fill:cvar('--faint'),"font-size":9,"text-anchor":"end"});t.textContent="tok";s.appendChild(t); tp=axis(tb[pair],yT,consT,pair+"|tok"); ay+=axGap; }
-    if(cp&&tp){ for(const k in cp){ if(k in tp){
-      s.appendChild(el("line",{x1:cp[k],y1:yC+7,x2:tp[k],y2:yT-7,stroke:cvar('--faint'),"stroke-width":1.2,"stroke-opacity":.7,"stroke-dasharray":"2 2"})); } } }
-    y=ay+8;
-  });
-  s.setAttribute("viewBox",`0 0 ${W} ${y+2}`);
-}
-// §4 semantic zoom, per axis: Shift+wheel zooms the ratio domain around the cursor, drag pans, dbl-click resets.
-function enableRatioZoom(svg){
-  if(svg.__rz) return; svg.__rz=true; svg.style.touchAction="none"; svg.style.userSelect="none"; svg.style.webkitUserSelect="none";
-  const pt=e=>{ const r=svg.getBoundingClientRect(), v=svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
-    return [v[0]+(e.clientX-r.left)/r.width*v[2], v[1]+(e.clientY-r.top)/r.height*v[3]]; };
-  const near=(cx,cy)=>{ let b=null,bd=24; (svg.__axes||[]).forEach(a=>{ const d=Math.abs(cy-a.yA);
-    if(d<bd && cx>=a.x0-48 && cx<=a.x1+8){bd=d;b=a;} }); return b; };
-  svg.addEventListener("wheel",e=>{ if(!e.shiftKey) return; e.preventDefault();
-    const [cx,cy]=pt(e), a=near(cx,cy); if(!a) return;
-    const fr=Math.max(0,Math.min(1,(cx-a.x0)/(a.x1-a.x0))), curL=a.loL+fr*(a.hiL-a.loL);
-    const span=(a.hiL-a.loL)*(e.deltaY<0?0.8:1.25);
-    RVIEW[a.key]=[curL-fr*span, curL+(1-fr)*span]; drawRatios(svg.id); },{passive:false});
-  let d=null;
-  svg.addEventListener("pointerdown",e=>{ const [cx,cy]=pt(e), a=near(cx,cy); if(!a) return; e.preventDefault(); d={a,x:cx}; svg.style.cursor="grabbing"; svg.setPointerCapture(e.pointerId); });
-  svg.addEventListener("pointermove",e=>{ if(!d) return; const [cx]=pt(e), a=d.a, span=a.hiL-a.loL;
-    const dL=-(cx-d.x)/(a.x1-a.x0)*span; RVIEW[a.key]=[a.loL+dL,a.hiL+dL]; drawRatios(svg.id); const na=(svg.__axes||[]).find(z=>z.key===a.key); if(na){d.a=na; d.x=cx;} });
-  const up=()=>{ d=null; svg.style.cursor=""; }; svg.addEventListener("pointerup",up); svg.addEventListener("pointercancel",up);
-  svg.addEventListener("dblclick",e=>{ const [cx,cy]=pt(e), a=near(cx,cy); if(a){ delete RVIEW[a.key]; drawRatios(svg.id); } });
-}
-function drawRatiosLegend(){ const L=document.getElementById("legendR"); if(!L) return;
-  L.innerHTML=["low","medium","high","xhigh","max","grey"].map(k=>`<span class="lg"><span class="sw" style="background:${EC[k]}"></span>${k==="grey"?"@default (to assign, with ID)":k}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="background:var(--muted);opacity:.35;border-radius:2px"></span>square = median of measurements / effort</span>`
-    +`<span class="lg"><span class="sw" style="border:1.6px dashed var(--muted);background:transparent;border-radius:50%"></span>hollow = derived via price/token</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.4px dashed var(--faint);background:transparent;height:0"></span>same source (cost↔tok)</span>`; }
-
 function drawEdgeTable(){
   const tb=document.querySelector("#edge-tbl tbody"); tb.innerHTML="";
   const short=x=>{const[m,e]=x.split("@");return (GMODEL[m]?GMODEL[m].l:m)+"·"+e;};
@@ -741,7 +611,7 @@ function drawEdgeTable(){
 }
 // ---- pan/zoom (viewBox-based, no external lib) : Ctrl/⌘+wheel zoom · drag pan · +/−/⟳ buttons ----
 function zoomable(svg){
-  const box=svg.parentNode; box.style.position="relative";
+  const box=svg.closest(".card")||svg.parentNode; box.style.position="relative";   // attach to the CARD (chartbox clips overflow → buttons vanished)
   const vb=()=>svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
   const set=(x,y,w,h)=>svg.setAttribute("viewBox",`${x} ${y} ${w} ${h}`);
   if(!box.querySelector(".zoomctl")){
@@ -773,9 +643,8 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-function renderAll(){drawB();drawPareto();drawTiers();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
-  ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });
-  const rr=document.getElementById('chartR'); if(rr) enableRatioZoom(rr);}
+function renderAll(){drawB();drawPareto();drawTiers();drawMatrix();drawGraph();drawEdgeTable();fillMeta();
+  ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});

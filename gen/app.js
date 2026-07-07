@@ -93,7 +93,7 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
 
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=1100,H=619,mL=58,mR=100,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra width → cost axis + labels breathe
+  const W=1100,H=619,mL=58,mR=64,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; trimmed right margin so the plot extends
   // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -134,7 +134,7 @@ function drawB(){
 // point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=1100,H=619,mL=54,mR=100,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
+  const W=1100,H=619,mL=54,mR=64,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
   // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -157,12 +157,12 @@ function drawPareto(){
   // Fit the frontier ENVELOPE in the chart's DILATED quality metric as a CONCAVE quadratic: T(q) = a + b·x + c·x² (x=log10 cost).
   // Concave (c<0) → on the chart (Y pixel affine in T) it renders as a LOG SHAPE: fast rise at low cost, flattening at high cost.
   const fit=quadFit(par.map(p=>Math.log10(p.c)),par.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x, fev=x=>symTinv(fevT(x));
-  { const tv=par.map(p=>symT(p.q)), tm=tv.reduce((a,b)=>a+b,0)/tv.length,                              // envelope goodness-of-fit R² (dilated metric), rendered live
-      ssT=tv.reduce((a,v)=>a+(v-tm)*(v-tm),0), rssT=par.reduce((a,p)=>a+Math.pow(symT(p.q)-fevT(Math.log10(p.c)),2),0),
-      r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=(1-rssT/ssT).toFixed(2); }
+  const tv=par.map(p=>symT(p.q)), tm=tv.reduce((a,b)=>a+b,0)/tv.length,                                 // envelope goodness-of-fit R² (dilated metric), rendered live
+    ssT=tv.reduce((a,v)=>a+(v-tm)*(v-tm),0), rssT=par.reduce((a,p)=>a+Math.pow(symT(p.q)-fevT(Math.log10(p.c)),2),0), R2=1-rssT/ssT;
+  { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
   { const cmn=Math.min(...par.map(p=>p.c)), cmx=Math.max(...par.map(p=>p.c)), lmn=Math.log10(cmn), lmx=Math.log10(cmx); let d="";
     for(let i=0;i<=56;i++){ const lx=lmn+(lmx-lmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,lx))+" "+Y(fev(lx))+" "; }
-    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.5})); }
+    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
   // score = signed distance to the envelope IN THE DILATED METRIC, squashed: tanh(residual_T / RMS). +1 above · 0 on · −1 below.
   const resAll=pts.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   const scored=pts.map((p,i)=>({...p,score:Math.tanh(resAll[i]/rms),front:pset.has(p.m+"@"+p.e)}));
@@ -183,9 +183,9 @@ function drawPareto(){
   if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>frontier fit (envelope)</span>`;
-  const pn=document.getElementById("pareto-note");
-  if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · q=${p.q.toFixed(2)}</span>`).join(" &nbsp;→&nbsp; ");
+    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Frontier fit — concave log · R² = ${R2.toFixed(2)}</span>`;
+  const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
+  if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${fmtC(p.c)}× · q ${p.q.toFixed(2)}</span></span>`).join("");
 }
 // ---- Value-score table : distance of each couple to the fitted Pareto-frontier envelope (from drawPareto) ----
 function fillScoreTable(scored){
@@ -197,48 +197,52 @@ function fillScoreTable(scored){
     const tr=document.createElement("tr");
     tr.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
       +`<td class="num">${p.c.toFixed(2)}×</td><td class="num">${p.q.toFixed(2)}×</td>`
-      +`<td style="min-width:96px">${pill}</td>`
-      +`<td style="text-align:left;color:${sc};font-size:12px">${p.score>=0?'above envelope':'below envelope'}</td>`;
+      +`<td style="min-width:96px">${pill}</td>`;
     tb.appendChild(tr); }); }
-// ---- HIDDEN-PROMINENCE tiers + crown (data-driven from COSTGRID × QUALGRID) ----
-// For each Pareto-frontier couple we compute a VALUE score S = signed distance to the frontier envelope (concave fit
-// in the dilated quality metric, exactly as in the value-score table). The HIDDEN score then measures LOCAL PROMINENCE
-// along the frontier: hid(n) = 2·Sₙ − S_prev − S_next (a discrete 2nd difference — how much a couple pokes above its two
-// immediate neighbours). Endpoints (no prev/next) get 0. Per complexity window we take the top hidden score; the crown
-// is the top hidden score overall. Windows are ADAPTIVE (wide for simple tasks, narrowing toward complex) and overlap.
+// ---- Central-complexity tiers + hidden-prominence crown (data-driven from COSTGRID × QUALGRID) ----
+// Each tier targets a CENTRAL complexity q* (relative quality). Among the Pareto-frontier couples we pick the one
+// maximising a proximity-weighted yield:  score(p) = exp(−((q−q*)/σ)²) · yield, with yield = quality/cost. The Gaussian
+// focuses on couples near the target complexity; yield (which falls with cost) tilts the choice toward value.
+// The CROWN uses the HIDDEN PROMINENCE: hid(n) = 2·Sₙ − S_prev − S_next along the frontier (S = signed distance to the
+// envelope, as in the value-score table; endpoints get 0). It marks the sharpest knee — the standout couple overall.
+const TSIGMA=0.13;   // Gaussian width around each target complexity (in relative-quality units)
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", lo:0,    hi:0.90, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      lo:0.85, hi:1.00, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        lo:0.97, hi:1.07, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Frontier",            lo:1.05, hi:99,   ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Triage &amp; volume", q:0.6, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday build",      q:0.8, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Professional",        q:1.0, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Frontier",            q:1.2, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0]}); } }
+    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0],y:q[0]/cg[e][0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  // Same envelope as the value-score table: concave quadratic T(q)=a+b·x+c·x² in the dilated metric; S = tanh(residual/RMS).
+  // envelope + value score S + hidden prominence (for the crown) — same envelope as the value-score table
   const fit=quadFit(front.map(p=>Math.log10(p.c)),front.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x;
   const resAll=rows.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   front.forEach(p=>p.S=Math.tanh((symT(p.q)-fevT(Math.log10(p.c)))/rms));
-  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);   // local prominence, ends=0
-  const picks=TIERS.map(t=>{ const cand=front.filter(p=>p.q>=t.lo&&p.q<=t.hi);                  // inclusive → windows overlap
-    return cand.length?{...t,win:cand.reduce((a,b)=>b.hid>a.hid?b:a)}:{...t,win:null}; });
-  const crown=front.slice().sort((a,b)=>b.hid-a.hid)[0];                                        // top prominence overall
+  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
+  const K=(q,q0)=>Math.exp(-Math.pow((q-q0)/TSIGMA,2));
+  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q)*b.y > K(a.q,t.q)*a.y ? b : a)}));   // proximity-weighted yield
+  const crown=front.slice().sort((a,b)=>b.hid-a.hid)[0];                                                    // top prominence overall
   return {picks,crown};
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  host.innerHTML=picks.map(t=>{ const w=t.win, col=w?cvar(MODELS[w.m].c):cvar('--muted');
-    const pick=w?`<span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-        <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b> · prominence <b>${w.hid>=0?'+':''}${w.hid.toFixed(2)}</b></span>`:`<span class="faint">no frontier couple in band</span>`;
+  host.innerHTML=picks.map(t=>{ const w=t.win, col=cvar(MODELS[w.m].c);
     return `<div class="card pad crit tier">
-      <div class="tier-band">quality ${t.lo===0?"≤ ":t.lo+"–"}${t.hi>=99?"and up":t.hi}</div>
+      <div class="tier-band">target complexity q* = ${t.q.toFixed(1)}</div>
       <h3>${t.name}</h3>
-      <div class="tier-win">${pick}</div>
+      <div class="tier-top">
+        <div class="tier-left">
+          <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
+          <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b></span>
+        </div>
+        <div class="tier-yield">${(w.y*100).toFixed(0)}%<small>yield</small></div>
+      </div>
       <span class="ex">${t.ex}</span>
     </div>`; }).join("");
   const c=crown, col=cvar(MODELS[c.m].c);
@@ -247,7 +251,7 @@ function drawTiers(){
     <div class="crown-badge">👑 Most prominent on the frontier</div>
     <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label} · ${capE(c.e)}</div>
     <div class="crown-score">hidden prominence = <b>${c.hid>=0?'+':''}${c.hid.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×)</span></div>
-    <p class="crown-note">Crowned by the <b>hidden prominence</b> score — the couple that stands out most from its immediate neighbours on the frontier (a discrete 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>). A high value means the model is a clear step up from the cheaper option while the pricier option adds little — the genuine knee. It is the <b>top score in the Frontier window</b> as well as overall&nbsp;: the point where the frontier first breaks clearly above parity for a moderate premium.</p>`;
+    <p class="crown-note">Crowned by the <b>hidden prominence</b> score — the couple that stands out most from its immediate neighbours on the frontier (a discrete 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>). A high value means the model is a clear step up from the cheaper option while the pricier one adds little — the genuine knee.</p>`;
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2);
@@ -291,10 +295,9 @@ const GMODEL = {
 };
 const GCOL={sweep:"#2E9C8E",xmodel:"#7C6BB2",xgen:"#B98A3E"};
 const GTLAB={sweep:"effort sweep (same model)",xmodel:"cross-model (same generation)",xgen:"cross-generation bridge"};
-const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = SINGLE-OPERATING-POINT model (no discrete effort parameter) → one node merging all its sources, placed off the effort gridlines; cost also in §6 (no-think regime, anchor)
+const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = SINGLE-OPERATING-POINT model (no discrete effort parameter) → one node merging all its sources, placed off the effort gridlines
 const MX={"fable-5":0,"opus-4.8":1,"opus-4.7":2,"sonnet-5":3,"sonnet-4.6":4,"haiku-4.5":5,"opus-4.6":6.4,"sonnet-3.7":6.9,"opus-4.5":7.3,"sonnet-4.5":7.8,"opus-4.1":8.3};
 const EORD=["max","xhigh","high","medium","low"];   // corroboration graph: 5 explicit efforts, no default row
-const EORD2=["max","xhigh","high","medium","low","default"];   // line-cloud assignment view: adds the 'default' row
 function buildEdges(){
   const pm=new Map();
   const add=(A,B,g,ty)=>{ if(A===B)return; const t=ty||g.t;
@@ -352,7 +355,7 @@ function drawGraph(){
     ring(x,y,8.4,colFor(c)); bump(c);
     });}
   s.appendChild(el("circle",{cx:px("opus-4.8"),cy:py("medium"),r:11.5,fill:"none",stroke:cvar('--opus48'),"stroke-width":1.6,"stroke-dasharray":"1 2"}));
-  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts</b> + <b>Haiku&nbsp;4.5 as a single point</b> (no <code>effort</code> parameter → all its sources merged into one node, see §6&nbsp;; "default" row removed&nbsp;; @default runs feed the §2 matrix CIs). Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
+  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts</b> + <b>Haiku&nbsp;4.5 as a single point</b> (no <code>effort</code> parameter → all its sources merged into one node). Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
   document.getElementById("legendG").innerHTML=
     `<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.g};border-radius:50%;background:transparent"></span>≥3 sources</span>`
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.y};border-radius:50%;background:transparent"></span>2</span>`
@@ -360,93 +363,6 @@ function drawGraph(){
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.r};border-radius:50%;background:transparent"></span>0</span>`
     +`<span class="lg"><span class="sw" style="background:${cvar('--muted')}"></span>measured link</span>`;
 }
-// ===== RATIO-BY-PAIR assignment charts (cost & tokens); colour = effort, grey = @default =====
-const RD=__RATIO_DATA__;
-const CONS=__CONS_DATA__;
-const EC={low:"#5B8FF0",medium:"#2E9C5A",high:"#D9B23A",xhigh:"#E08A2E",max:"#E0342A",grey:"#9a9a9a"};
-const RVIEW={};   // per-axis semantic-zoom window: key `${pair}|${metric}` -> [loLog10, hiLog10]
-// One block per model pair: two stacked own-scale log axes (cost on top, tokens below),
-// points coloured by effort (grey=@default), IDs above; dashed connector when the same source has both.
-function drawRatios(svgId){
-  const s=document.getElementById(svgId); if(!s) return; s.innerHTML=""; s.__axes=[];
-  const cb={}, tb={};
-  RD.cost.forEach(p=>{(cb[p[0]]=cb[p[0]]||[]).push(p);});
-  RD.tok.forEach(p=>{(tb[p[0]]=tb[p[0]]||[]).push(p);});
-  const grey1=a=>a&&a.some(p=>p[5]===0&&p[2]==="grey");   // show axis only if it has a MEASURED @default to assign
-  const pairs=[...new Set([...Object.keys(cb),...Object.keys(tb)])]
-    .filter(p=>grey1(cb[p])||grey1(tb[p]))
-    .sort((a,b)=>((cb[b]||[]).length-(cb[a]||[]).length)||((tb[b]||[]).length-(tb[a]||[]).length)||a.localeCompare(b));
-  const W=780, mT=8, aX0=150, aX1=W-24, axGap=52, L=Math.log10;
-  const TC=[0.1,0.15,0.2,0.25,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1,1.2,1.5,2,2.5,3,4,5,6,7,8,10,12,15,20,25,30,40,50];
-  // key `${pair}|${metric}` : RVIEW override (semantic zoom) → [loLog,hiLog], else data-derived
-  function axis(pts,yA,cons,key){
-    if(!grey1(pts)) return null;
-    let loL,hiL;
-    if(RVIEW[key]){ [loL,hiL]=RVIEW[key]; }
-    else { const vals=pts.map(p=>p[1]).concat(cons.map(c=>c[1]));
-      let lo=Math.min(...vals), hi=Math.max(...vals);
-      if(lo===hi){lo*=0.7;hi*=1.4;} else {const f=hi/lo; lo/=Math.pow(f,0.07); hi*=Math.pow(f,0.07);}
-      loL=L(lo); hiL=L(hi); }
-    s.__axes.push({key,yA,x0:aX0,x1:aX1,loL,hiL});         // hitbox for zoom/pan
-    const X=v=>aX0+(L(v)-loL)/(hiL-loL)*(aX1-aX0);
-    const inR=x=>x>=aX0-4&&x<=aX1+4;
-    s.appendChild(el("line",{x1:aX0,y1:yA,x2:aX1,y2:yA,stroke:cvar('--muted'),"stroke-width":1,"stroke-opacity":.5}));
-    let ticks=TC.filter(t=>L(t)>=loL&&L(t)<=hiL);
-    if(ticks.length>6){ const step=Math.ceil(ticks.length/6); ticks=ticks.filter((_,k)=>k%step===0); }
-    if(ticks.length<2) ticks=[+Math.pow(10,loL).toPrecision(2),+Math.pow(10,hiL).toPrecision(2)];
-    ticks.forEach(t=>{ s.appendChild(el("line",{x1:X(t),y1:yA-3,x2:X(t),y2:yA+3,stroke:cvar('--faint'),"stroke-width":1}));
-      const tx=el("text",{x:X(t),y:yA+14,fill:cvar('--faint'),"font-size":9,"text-anchor":"middle"});tx.textContent=t+"×";s.appendChild(tx);});
-    cons.forEach(c=>{ const x=X(c[1]); if(!inR(x))return;
-      const sq=el("rect",{x:x-6,y:yA-6,width:12,height:12,rx:1.5,fill:EC[c[0]],"fill-opacity":.32,stroke:EC[c[0]],"stroke-width":1.4});
-      const ti=document.createElementNS(NS,"title");ti.textContent=`measured median ${c[0]} = ${c[1]}×`;sq.appendChild(ti);s.appendChild(sq); });
-    const pos={};
-    pts.slice().sort((a,b)=>a[1]-b[1]).forEach(p=>{ const x=X(p[1]); if(!inR(x))return; const derived=p[5]===1, grey=p[2]==="grey";
-      const c=el("circle",{cx:x,cy:yA,r:4.4,fill:derived?"none":EC[p[2]],stroke:derived?EC[p[2]]:cvar('--panel'),"stroke-width":derived?1.6:1,"stroke-dasharray":derived?"2 1.5":"none"});
-      const ti=document.createElementNS(NS,"title");ti.textContent=`${p[4]}${derived?" (derived via price)":""} · ${p[0]} · ${p[1]}× · ${p[2]} · ${p[3]}`;c.appendChild(ti);s.appendChild(c);
-      if(grey){ const it=el("text",{x:x,y:yA-8,fill:cvar('--ink'),"font-size":7.5,"text-anchor":"middle","font-weight":700});it.textContent=p[4];s.appendChild(it); }
-      pos[p[4]]=x; });
-    return pos;
-  }
-  let y=mT;
-  pairs.forEach((pair,ri)=>{ const top=y;
-    const cons=CONS[pair]||[];
-    const consC=cons.filter(r=>r[1]!=null).map(r=>[r[0],r[1]]), consT=cons.filter(r=>r[2]!=null).map(r=>[r[0],r[2]]);
-    if(ri) s.appendChild(el("line",{x1:0,y1:top,x2:W,y2:top,stroke:cvar('--line'),"stroke-width":1,"stroke-opacity":.35}));
-    const lb=el("text",{x:8,y:top+18,fill:cvar('--ink'),"font-size":11,"font-weight":700});lb.textContent=pair;s.appendChild(lb);
-    let ay=top+36, yC=null,yT=null,cp=null,tp=null;
-    if(grey1(cb[pair])){ yC=ay; const t=el("text",{x:aX0-8,y:yC+3.5,fill:cvar('--faint'),"font-size":9,"text-anchor":"end"});t.textContent="cost";s.appendChild(t); cp=axis(cb[pair],yC,consC,pair+"|cost"); ay+=axGap; }
-    if(grey1(tb[pair])){ yT=ay; const t=el("text",{x:aX0-8,y:yT+3.5,fill:cvar('--faint'),"font-size":9,"text-anchor":"end"});t.textContent="tok";s.appendChild(t); tp=axis(tb[pair],yT,consT,pair+"|tok"); ay+=axGap; }
-    if(cp&&tp){ for(const k in cp){ if(k in tp){
-      s.appendChild(el("line",{x1:cp[k],y1:yC+7,x2:tp[k],y2:yT-7,stroke:cvar('--faint'),"stroke-width":1.2,"stroke-opacity":.7,"stroke-dasharray":"2 2"})); } } }
-    y=ay+8;
-  });
-  s.setAttribute("viewBox",`0 0 ${W} ${y+2}`);
-}
-// §4 semantic zoom, per axis: Shift+wheel zooms the ratio domain around the cursor, drag pans, dbl-click resets.
-function enableRatioZoom(svg){
-  if(svg.__rz) return; svg.__rz=true; svg.style.touchAction="none"; svg.style.userSelect="none"; svg.style.webkitUserSelect="none";
-  const pt=e=>{ const r=svg.getBoundingClientRect(), v=svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
-    return [v[0]+(e.clientX-r.left)/r.width*v[2], v[1]+(e.clientY-r.top)/r.height*v[3]]; };
-  const near=(cx,cy)=>{ let b=null,bd=24; (svg.__axes||[]).forEach(a=>{ const d=Math.abs(cy-a.yA);
-    if(d<bd && cx>=a.x0-48 && cx<=a.x1+8){bd=d;b=a;} }); return b; };
-  svg.addEventListener("wheel",e=>{ if(!e.shiftKey) return; e.preventDefault();
-    const [cx,cy]=pt(e), a=near(cx,cy); if(!a) return;
-    const fr=Math.max(0,Math.min(1,(cx-a.x0)/(a.x1-a.x0))), curL=a.loL+fr*(a.hiL-a.loL);
-    const span=(a.hiL-a.loL)*(e.deltaY<0?0.8:1.25);
-    RVIEW[a.key]=[curL-fr*span, curL+(1-fr)*span]; drawRatios(svg.id); },{passive:false});
-  let d=null;
-  svg.addEventListener("pointerdown",e=>{ const [cx,cy]=pt(e), a=near(cx,cy); if(!a) return; e.preventDefault(); d={a,x:cx}; svg.style.cursor="grabbing"; svg.setPointerCapture(e.pointerId); });
-  svg.addEventListener("pointermove",e=>{ if(!d) return; const [cx]=pt(e), a=d.a, span=a.hiL-a.loL;
-    const dL=-(cx-d.x)/(a.x1-a.x0)*span; RVIEW[a.key]=[a.loL+dL,a.hiL+dL]; drawRatios(svg.id); const na=(svg.__axes||[]).find(z=>z.key===a.key); if(na){d.a=na; d.x=cx;} });
-  const up=()=>{ d=null; svg.style.cursor=""; }; svg.addEventListener("pointerup",up); svg.addEventListener("pointercancel",up);
-  svg.addEventListener("dblclick",e=>{ const [cx,cy]=pt(e), a=near(cx,cy); if(a){ delete RVIEW[a.key]; drawRatios(svg.id); } });
-}
-function drawRatiosLegend(){ const L=document.getElementById("legendR"); if(!L) return;
-  L.innerHTML=["low","medium","high","xhigh","max","grey"].map(k=>`<span class="lg"><span class="sw" style="background:${EC[k]}"></span>${k==="grey"?"@default (to assign, with ID)":k}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="background:var(--muted);opacity:.35;border-radius:2px"></span>square = median of measurements / effort</span>`
-    +`<span class="lg"><span class="sw" style="border:1.6px dashed var(--muted);background:transparent;border-radius:50%"></span>hollow = derived via price/token</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.4px dashed var(--faint);background:transparent;height:0"></span>same source (cost↔tok)</span>`; }
-
 function drawEdgeTable(){
   const tb=document.querySelector("#edge-tbl tbody"); tb.innerHTML="";
   const short=x=>{const[m,e]=x.split("@");return (GMODEL[m]?GMODEL[m].l:m)+"·"+e;};
@@ -463,7 +379,7 @@ function drawEdgeTable(){
 }
 // ---- pan/zoom (viewBox-based, no external lib) : Ctrl/⌘+wheel zoom · drag pan · +/−/⟳ buttons ----
 function zoomable(svg){
-  const box=svg.parentNode; box.style.position="relative";
+  const box=svg.closest(".card")||svg.parentNode; box.style.position="relative";   // attach to the CARD (chartbox clips overflow → buttons vanished)
   const vb=()=>svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
   const set=(x,y,w,h)=>svg.setAttribute("viewBox",`${x} ${y} ${w} ${h}`);
   if(!box.querySelector(".zoomctl")){
@@ -495,9 +411,8 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-function renderAll(){drawB();drawPareto();drawTiers();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
-  ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });
-  const rr=document.getElementById('chartR'); if(rr) enableRatioZoom(rr);}
+function renderAll(){drawB();drawPareto();drawTiers();drawMatrix();drawGraph();drawEdgeTable();fillMeta();
+  ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});

@@ -14,7 +14,7 @@
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
     <h2>1 · The consolidated landscape</h2>
-    <p class="sub">One curve per model, one point per effort level (low → max). <b>X axis = relative cost</b>, <b>Y axis = relative quality</b> — <b>both computed identically</b>&nbsp;: we never compare two raw benchmark scores across benchmarks (incompatible scales); within each benchmark we take the <b>ratio between couples</b>, normalise the benchmark to <b>Opus 4.8 @medium = 1.0</b> (÷ the anchor when present, else a ×0.5-weighted bridge) and consolidate by <b>source-weighted median</b>. The <b>oval</b> = a <b>robust, asymmetric</b> uncertainty band (per-side spread with <b>Huber ±1.5·MAD</b> clipping&nbsp;: an outlier benchmark widens its side but doesn't dominate&nbsp;; width = cost, height = quality). It is <b>centred on the median</b> (the dot is always inside), the quality axis is <b>dilated near parity (1.0)</b> to separate near-equal models, and every oval is <b>faint until you hover it</b>. <b>Haiku 4.5</b> is not plotted here (see §2, §6 and the Pareto).</p>
+    <p class="sub">One curve per model, one point per effort level (low → max). <b>X axis = relative cost</b>, <b>Y axis = relative quality</b> — <b>both computed identically</b>&nbsp;: we never compare two raw benchmark scores across benchmarks (incompatible scales); within each benchmark we take the <b>ratio between couples</b>, normalise the benchmark to <b>Opus 4.8 @medium = 1.0</b> (÷ the anchor when present, else a ×0.5-weighted bridge) and consolidate by <b>source-weighted median</b>. The <b>oval</b> = a <b>robust, asymmetric</b> uncertainty band (per-side spread with <b>Huber ±1.5·MAD</b> clipping&nbsp;: an outlier benchmark widens its side but doesn't dominate&nbsp;; width = cost, height = quality). It is <b>centred on the median</b> (the dot is always inside), the quality axis is <b>dilated near parity (1.0)</b> to separate near-equal models, and every oval is <b>faint until you hover it</b>. <b>Haiku 4.5</b> is not plotted here (see §2 and the Pareto).</p>
     <div class="card pad">
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
@@ -25,23 +25,36 @@
       <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as §1, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p id="pareto-note" class="paretoline"></p>
       <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is the <b>frontier envelope</b> — a concave fit in the chart's dilated metric that renders as a <b>log shape</b> (fast rise at low cost, flattening at high cost), the reference for the value score below.</p>
+      <div id="pareto-blocks" class="pareto-blocks"></div>
     </div>
     <div class="card pad" style="margin-top:14px">
       <h3>Value score — distance to the frontier envelope</h3>
       <p class="sub">We fit the Pareto frontier in the chart's <b>dilated quality metric</b> as a <b>concave curve</b> (<b>T(q) = a + b·log₁₀c + c·log₁₀²c</b>, c&lt;0, where T is the near-parity dilation of the Y axis), so the envelope renders as a clean <b>log shape on the chart</b> — R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above. Each frontier couple's <b>score</b> = its <b>signed distance</b> to that curve <b>in the same dilated metric</b> (so it matches what you see), squashed by <b>tanh(residual ⁄ RMS)</b>&nbsp;: <b>above</b> → toward <b>+1</b>, <b>on</b> → <b>0</b>, <b>below</b> → toward <b>−1</b>. Only the <b>Pareto-frontier couples</b> are shown. Computed from the data.</p>
       <div class="chartbox"><table id="score-tbl">
-        <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value score</th><th style="text-align:left">vs envelope</th></tr></thead>
+        <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value score</th></tr></thead>
         <tbody></tbody>
       </table></div>
       <p class="cap">Score is <b>relative to the frontier envelope</b>: a frontier couple can still score negative if it falls under the smooth edge (e.g. Haiku&nbsp;4.5, the lone cheap point — nothing cheaper exists, but the edge extrapolated to its cost expects more quality). Green = above the edge, red = below; intensity = magnitude.</p>
     </div>
     <div class="card pad" style="margin-top:14px">
+      <h3>What moves everything — four factors behind the numbers</h3>
+      <p class="sub">The picks below are an order of magnitude. Four factors, each measured elsewhere, modulate them strongly — keep them in mind when reading the tiers.</p>
+      <div class="grid">
+        <div class="card pad crit"><h3>Task type</h3><p>Effort and model choice don't weigh the same depending on the nature of the work — review, reasoning and pure coding reward effort very differently.</p></div>
+        <div class="card pad crit"><h3>Complexity</h3><p>The harder the task, the more effort costs — up to the point where extra thinking starts to hurt (the inverted-U).</p></div>
+        <div class="card pad crit"><h3>Generation</h3><p>Recent Opus models do more with fewer tokens; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
+        <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
+      </div>
+    </div>
+    <!-- NOTE: the q* = 0.6/0.8/1.0/1.2 figures below MIRROR the TIERS targets in app.js — the one changeable value left
+         in this prose. If you retune the targets in app.js, update this sentence (or inject it). Everything else here
+         explains how the picks are built and read, not what the data currently says. -->
+    <div class="card pad" style="margin-top:14px">
       <h3>Best value by task tier — what to actually run</h3>
-      <p class="sub">Consolidating the frontier into a decision. We split tasks into <b>four complexity tiers</b>, each defined by the <b>quality window</b> it demands (relative quality, anchor Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.0; windows are <b>wide for simple tasks, narrowing toward complex</b>, and overlap). For each tier we pick, <b>on the Pareto frontier and within that band</b>, the couple with the highest <b>hidden prominence</b> — how much it pokes above its immediate neighbours on the frontier (2nd difference of the value score S). It rewards the <b>local knee</b>: a clear step up from the cheaper option while the pricier option adds little. All picks and figures below are <b>computed</b> from the same data.</p>
+      <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels</b> (q* = 0.6 / 0.8 / 1.0 / 1.2 on the relative-quality axis, anchor Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.0). For each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around the target complexity times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is that couple's yield (quality per unit cost, as a %). The crown below uses the <b>hidden prominence</b> instead (the sharpest knee on the frontier). All picks are <b>computed</b> from the data.</p>
       <div class="grid" id="tier-cards"></div>
-      <div class="card pad crown" id="tier-crown" style="margin-top:14px"></div>
+      <div class="card pad crown" id="tier-crown"></div>
     </div>
   </section>
 
@@ -55,7 +68,7 @@
         <tbody></tbody>
       </table>
     </div>
-    <p class="cap">"Intel.&nbsp;@max" = Vals index (finance+coding composite), measured at <b>max</b> effort — quality varies little with effort on code, so this index is also a good approximation at high/xhigh. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3/§6). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+    <p class="cap">"Intel.&nbsp;@max" = Vals index (finance+coding composite), measured at <b>max</b> effort — quality varies little with effort on code, so this index is also a good approximation at high/xhigh. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
   </section>
 
   <!-- ============ LINKING GRAPH ============ -->
@@ -76,80 +89,18 @@
     </div>
   </section>
 
-  <!-- ============ RATIO-BY-PAIR ASSIGNMENT ============ -->
-  <section id="ratios">
-    <h2>4 · Assigning defaults — ratios per pair</h2>
-    <p class="sub">For each model pair A/B, every source that measures them <b>at the same effort</b> gives one point = ratio A/B. <b>Colour = effort level</b> (the clusters); <b>grey = @default run</b> (effort to assign). Look at which cluster each grey point falls near. Log scale; hover a point for its source.</p>
-    <div class="card pad">
-      <div class="legend" id="legendR"></div>
-      <div class="chartbox"><svg id="chartR" role="img" aria-label="Cost and token ratios per model pair"></svg></div>
-      <p class="cap">Each pair has <b>two stacked axes</b> — <b>cost</b> (top) and <b>tokens</b> (bottom) — each on its own log scale. A <b>dashed line</b> joins the cost point and the token point when they come from the <b>same source</b>. Few sources publish tokens → the token axis is often empty. <b>§4 zoom</b>: Shift+wheel over an axis zooms its scale (axes/points redraw), drag = pan, double-click = reset.</p>
-    </div>
-  </section>
-
-  <!-- ============ CRITERIA ============ -->
-  <section id="criteria">
-    <h2>5 · What moves everything — the criteria, with examples</h2>
-    <p class="sub">The matrix gives an order of magnitude. These four factors, each measured, modulate it strongly. Each card gives a real, quantified example.</p>
-    <div class="grid">
-      <div class="card pad crit"><h3>Task type</h3>
-        <p>Effort and model choice don't weigh the same depending on the nature of the work.</p>
-        <span class="ex"><b>Code review</b> — Haiku&nbsp;4.5 scores an F1 of 0.365 <b>at 1/3 the cost</b> of Sonnet&nbsp;4.6 (0.343). "Bigger isn't better" <span class="faint">(arxiv 2606.15689)</span>.<br><b>Reasoning</b> — Opus&nbsp;4.5 medium→high&nbsp;: <b>+29% score</b> for 2.8× tokens <span class="faint">(PostTrainBench)</span>. Here effort pays off.<br><b>Pure coding</b> — raising the effort budget&nbsp;: <b>+0.27&nbsp;pt</b> on SWE-Bench Pro <span class="faint">(2606.17930)</span>. Plateau.</span></div>
-      <div class="card pad crit"><h3>Complexity</h3>
-        <p>The harder the task, the more effort costs — up to the point where it hurts.</p>
-        <span class="ex"><b>192 stratified runs</b> <span class="faint">(whitekumalabo)</span>&nbsp;: easy task&nbsp;≈&nbsp;$0.023 regardless of effort; hard task (L3) low→max&nbsp;= <b>×1.9</b>.<br><b>Inverted U</b> — Sonnet&nbsp;4.6 on orchestration&nbsp;: low 0% / medium 16.7% / high 6.7% — <b>high degrades</b> <span class="faint">(2606.08878)</span>.</span></div>
-      <div class="card pad crit"><h3>Generation</h3>
-        <p>Recent Opus models do more with less; Sonnet&nbsp;5 is the verbose exception.</p>
-        <span class="ex"><b>Opus&nbsp;4.8 vs 4.7</b>, same DB migration&nbsp;: 4.8 uses ~half the tokens, <b>−40% cost</b> <span class="faint">(FullStack, 5 runs)</span>.<br><b>Sonnet&nbsp;5</b> generates <b>~2.5× the tokens</b> of Opus&nbsp;4.8 on the AA Index → $2.29/task &gt; $1.99 despite a lower per-token rate.</span></div>
-      <div class="card pad crit"><h3>Cache &amp; harness</h3>
-        <p>Two invisible factors that can dominate both cost and score.</p>
-        <span class="ex"><b>Cache</b> — same code change, cache broken on Sonnet&nbsp;: <b>$10.30 vs $3.83</b> for Opus <span class="faint">(GitHub copilot #1770)</span>. Agentic work runs at 90–96% cache-read.<br><b>Harness</b> — Opus&nbsp;4.8 on Terminal-Bench&nbsp;: <b>84.6% (AA) vs 71.9% (Vals)</b>, same model. Confound #1.</span></div>
-    </div>
-  </section>
-
-  <!-- ============ NO-THINK REGIME ============ -->
-  <section id="nothink">
-    <h2>6 · The no-thinking regime — the cheapest</h2>
-    <p class="sub">Some sources run <b>without extended thinking</b> (reasoning off / raw API). This is not a point on the low→max sweep&nbsp;: it is a <b>distinct cost regime</b>, the floor. We treat it <b>couple-atomically</b>, exactly like §2&nbsp;: each source that measures two models <b>in the same regime on the same task</b> gives a cost ratio; we take the median per pair. The <b>per-model cost index</b> (Haiku&nbsp;4.5&nbsp;=&nbsp;1×) is <b>chained</b> along the measured ratios — indicative, not a decomposition. <b>Fable&nbsp;5</b> and <b>Sonnet&nbsp;5</b> have no published no-think run → absent here. <b>Haiku&nbsp;4.5</b> lives almost entirely in this regime (it doesn't expose the discrete <code>effort</code> parameter).</p>
-    <div class="card pad">
-      <div class="chartbox"><table id="nothink-tbl">
-        <thead><tr><th>Pair A/B</th><th>median cost ratio</th><th>#src</th><th>range</th></tr></thead>
-        <tbody>__NOTHINK_ROWS__</tbody>
-      </table></div>
-      <p class="cap">"nothink" = thinking <b>proven off</b> by the source. "default" = harness left at its factory config, thinking <b>unstated</b> — kept <b>separate</b> because the config is uncertain (do not merge with nothink). Range = min–max of the measured ratios (inter-source spread).</p>
-    </div>
-  </section>
-
-  <!-- ============ CONFIDENCE + METHOD ============ -->
+  <!-- ============ METHOD ============ -->
   <section id="confidence">
-    <h2>7 · Confidence &amp; merge method</h2>
-    <div class="grid">
-      <div class="card pad">
-        <h3>What is solid</h3>
-        <ul class="tight">
-          <li><span class="conf c-high">HIGH</span> Cross-model cost ordering @medium (÷Opus 4.8) — several independent methods agree (exact per-model values in the matrix §2 and the no-think regime §6).</li>
-          <li><span class="conf c-med">MEDIUM</span> Cost rises steeply from low→max effort — steeper on the agentic harness (CursorBench) than on computer-use (OSWorld).</li>
-          <li><span class="conf c-med">MEDIUM</span> Quality plateau + inverted-U on code/agentic (multi-paper).</li>
-        </ul>
-      </div>
-      <div class="card pad">
-        <h3>What stays wide</h3>
-        <ul class="tight">
-          <li><span class="conf c-low">WIDE</span> <b>Sonnet 5</b>&nbsp;: cheaper than Opus 4.8 on average, but a verbose tail on long agentic work (AA) — hence the wide CI.</li>
-          <li><span class="conf c-low">WIDE</span> Opus 4.7 vs 4.8&nbsp;: contradictory sources (effort/harness) — a wide, straddling CI.</li>
-          <li><span class="conf c-low">WIDE</span> xhigh/max tails and models with no measured effort sweep.</li>
-        </ul>
-      </div>
-    </div>
-    <div class="card pad" style="margin-top:14px">
-      <h3>How the relative cost is merged — the procedure</h3>
+    <h2>4 · How the numbers are built — the method</h2>
+    <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered. This section explains how that procedure works and how to read the uncertainty band; it does not restate the numbers (those live in the charts and the matrix).</p>
+    <div class="card pad">
       <ol class="steps">
-        <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources (task sizes are incomparable). We keep only sources measuring ≥2 models/efforts <b>on the same task</b>: their <b>ratio</b> cancels the task-size variance. E.g. WorkBench gives Sonnet&nbsp;4.6/Opus&nbsp;4.8 = 0.58 on its tasks, whatever their absolute cost.</li>
-        <li><b>The (model, effort) couple is atomic.</b> Each node = one indivisible couple. We <b>never</b> assume that "effort" has the same effect across models&nbsp;: taking Haiku to max is not the same multiplier as taking Opus to max. No model×effort decomposition — separability would be a false assumption.</li>
-        <li><b>Per-benchmark normalisation → weighted median.</b> Inside each benchmark, every couple is divided by the anchor <b>Opus 4.8 @medium</b> when present, else bridged via its shared couples (down-weighted ×0.5). Each benchmark thus yields one normalised estimate per couple; a couple's value is the <b>source-weighted median</b> of those estimates. Benchmarks with a single couple are dropped (they would only echo the anchor). No path products, no cross-benchmark value comparison — only within-benchmark ratios.</li>
-        <li><b>"Default" ≠ a single effort — verified source by source.</b> We read each source's actual config (the Config ✓ column). Result&nbsp;: the "default" bucket is heterogeneous — some at <b>max</b> (CEO-Bench, EMB-Opus), <b>high</b> (SlopCode, OfficeQA), thinking <b>off</b> (STAGE-Claw, ianlpaterson), others unstated. Anthropic's docs explain why&nbsp;: the default depends on the model (Sonnet&nbsp;5/Fable&nbsp;5 always think; Opus&nbsp;4.x &amp; Sonnet&nbsp;4.6 opt-in; Haiku &amp; ≤4.5 have no such parameter). What licenses a ratio is the <b>verified</b> fact that <b>each source applies the same config to all its models</b> — not an assumed effort.</li>
-        <li><b>Unlinked couple = flagged, never invented.</b> A couple with no measured edge (Haiku&nbsp;@max — effort not exposed; or an effort sweep never published for that model) is not filled by a generic effort rule. One model's effort shape is <b>never</b> used as a template for another&nbsp;: it is either n/a, or estimated with an explicitly wide band.</li>
-        <li><b>Confidence = agreement.</b> The band is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD)&nbsp;: robust to an outlier benchmark yet still widened by it, and asymmetric. 3+ tight sources → narrow band (Sonnet 4.6 &amp; Opus 4.8 low effort). Sources disagree → wide band (Fable&nbsp;max&nbsp;: Willison-SVG vs CursorBench; Sonnet&nbsp;5, task-size dependent). Where nothing confirms, the band says so.</li>
+        <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources — task sizes are incomparable. We keep only sources that measure ≥2 (model,&nbsp;effort) couples <b>on the same task</b>; their <b>ratio</b> cancels the task-size variance.</li>
+        <li><b>The (model, effort) couple is atomic.</b> Each node is one indivisible couple. We never assume "effort" has the same effect across models — no model×effort decomposition, because separability would be a false assumption.</li>
+        <li><b>Per-benchmark normalisation → weighted median.</b> Inside each benchmark every couple is divided by the anchor (Opus&nbsp;4.8&nbsp;@medium) when present, else bridged through its shared couples (down-weighted). Each benchmark yields one normalised estimate per couple; the couple's value is the <b>source-weighted median</b> across benchmarks. Single-couple benchmarks are dropped — they would only echo the anchor.</li>
+        <li><b>"Default" is verified, not assumed.</b> Each source's actual configuration is read from its harness rather than guessed; a ratio is used only when a source applies the <b>same configuration to all its models</b>.</li>
+        <li><b>Unlinked couples are flagged, never invented.</b> A couple with no measured edge is left n/a or given an <b>explicitly wide band</b> — one model's effort shape is never used as a template for another.</li>
+        <li><b>The band = agreement.</b> Uncertainty is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it, and asymmetric. Tight agreement → narrow band; disagreement → wide band.</li>
       </ol>
     </div>
   </section>
