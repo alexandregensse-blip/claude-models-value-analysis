@@ -32,10 +32,10 @@
   h2{font-size:clamp(21px,3vw,27px);line-height:1.15;margin-bottom:.15em}
   h3{font-size:16px;font-weight:600}
   .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fable5);font-weight:600}
-  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:none;margin-top:.7em}
+  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:70ch;margin-top:.7em}
   .muted{color:var(--muted)} .faint{color:var(--faint)}
   section{margin-top:clamp(40px,6vw,72px)}
-  .sub{color:var(--muted);max-width:none;margin:.35em 0 1.4em}
+  .sub{color:var(--muted);max-width:74ch;margin:.35em 0 1.4em}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
   .pad{padding:clamp(16px,2.5vw,26px)}
   .num{font-variant-numeric:tabular-nums}
@@ -48,7 +48,7 @@
   .chartbox{overflow-x:auto}
   svg{display:block;max-width:100%;height:auto;font-family:inherit}
   #chartB,#chartP{width:100%}   /* §1 landscape + Pareto fill the full body width */
-  .cap{font-size:12.5px;color:var(--muted);margin-top:10px;max-width:none}
+  .cap{font-size:12.5px;color:var(--muted);margin-top:10px;max-width:82ch}
   table{border-collapse:collapse;width:100%;font-size:13.5px}
   th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
   th{font-weight:600;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
@@ -128,3 +128,19 @@
 .zoomctl button{width:22px;height:22px;padding:0;font-size:14px;line-height:1;cursor:pointer;
   border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--ink);font-family:inherit}
 .zoomctl button:hover{background:var(--paper)}
+/* Foldable exploratory blocks — collapsed by default on the public page */
+details.fold{margin-top:14px}
+details.fold>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;
+  font-family:Georgia,serif;font-size:15px;font-weight:600;color:var(--ink);
+  padding:13px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);
+  box-shadow:var(--shadow);user-select:none;transition:border-color .15s}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"▸";font-family:inherit;color:var(--fable5);font-size:13px;
+  transition:transform .15s;flex:none}
+details.fold[open]>summary::before{transform:rotate(90deg)}
+details.fold>summary:hover{border-color:var(--line2)}
+details.fold>summary .fold-hint{margin-left:auto;font-family:-apple-system,sans-serif;
+  font-size:11.5px;font-weight:500;color:var(--faint);letter-spacing:.02em}
+details.fold[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;box-shadow:none}
+details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-left-radius:0;border-top-right-radius:0}
+.fold-body{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}

@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Artifact generator. Reads data + modular css/body/js, computes derived ratio data,
-assembles cost-matrix.html. Run: python3 gen/build.py  (from the scratchpad dir)."""
+assembles index.html. Run: python3 gen/build.py  (from the scratchpad dir)."""
 import csv, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
-OUT  = os.path.join(ROOT, "cost-matrix.html")
+OUT  = os.path.join(ROOT, "index.html")
 
 MX = {"fable-5":0,"opus-4.8":1,"opus-4.7":2,"sonnet-5":3,"sonnet-4.6":4,"haiku-4.5":5}
 EXP = {"low","medium","high","xhigh","max"}
