@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Artifact generator. Reads data + modular css/body/js, computes derived ratio data,
 assembles index.html. Run: python3 gen/build.py  (from the scratchpad dir)."""
-import csv, json, os, sys
+import csv, json, os, sys, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
@@ -346,6 +346,7 @@ def main():
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     body = body.replace("__NSAMETASK__", str(len(RD["cost"])))   # same-task cost-ratio measurement points (dynamic)
+    body = body.replace("__GENDATE__", datetime.date.today().strftime("%d %b %Y"))   # report generation date
     html = (
         "<!doctype html>\n"
         '<html lang="en">\n<head>\n'

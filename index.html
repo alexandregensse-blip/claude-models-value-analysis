@@ -34,12 +34,12 @@
   body{margin:0;background:var(--paper);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:min(1280px,94vw);margin:0 auto;padding:clamp(20px,3.5vw,52px)}
+  .wrap{max-width:min(1720px,96vw);margin:0 auto;padding:clamp(20px,3.5vw,52px)}
   h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
-  h1{font-size:clamp(30px,5vw,50px);line-height:1.05}
+  h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05}
   h2{font-size:clamp(21px,3vw,27px);line-height:1.15;margin-bottom:.15em}
   h3{font-size:16px;font-weight:600}
-  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fable5);font-weight:600}
+  .eyebrow{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--fable5);font-weight:600}
   .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:82ch;margin-top:.7em}
   .muted{color:var(--muted)} .faint{color:var(--faint)}
   section{margin-top:clamp(52px,7vw,92px)}
@@ -170,27 +170,24 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
   font-size:12px;font-weight:500;color:var(--faint);letter-spacing:.02em}
 @media (max-width:640px){details.fold-sec>summary .fold-hint{display:none}}
 .fold-sec-body{margin-top:2px}
-/* Header: title/lede on the left, GitHub + author + baseline meta on the right */
-.hero{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:20px 44px}
-.hero-main{flex:1 1 460px;min-width:0}
-.hero-side{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:9px;text-align:right}
+/* Header: GitHub + author pinned to the top-right corner; baseline/sources meta aligned with the lede */
+.hero{position:relative}
+.hero-corner{position:absolute;top:0;right:0;display:flex;flex-direction:column;align-items:flex-end;gap:7px;z-index:2}
 .gh-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border:1px solid var(--line2);
   border-radius:10px;background:var(--panel);color:var(--ink);font-size:13.5px;font-weight:600;
   text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s}
 .gh-btn:hover{border-color:var(--fable5)}
 .gh-btn svg{width:17px;height:17px;fill:currentColor;flex:none}
 .gh-name{font-size:13.5px;font-weight:600;color:var(--muted)}
-.meta.meta-side{flex-direction:column;flex-wrap:nowrap;gap:12px;margin-top:6px;padding-top:14px;
-  border-top:1px solid var(--line);text-align:right}
+.hero h1{margin-top:.12em;padding-right:150px}
+.hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;
+  gap:16px 44px;margin-top:clamp(22px,3vw,40px)}
+.hero-row .lede{flex:1 1 460px;margin-top:0}
+.meta.meta-side{flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:10px 28px;
+  margin-top:0;padding-top:0;border-top:none}
 .meta.meta-side .k{font-size:11.5px}
-@media (max-width:560px){.hero-side{align-items:flex-start;text-align:left}
-  .meta.meta-side{text-align:left}}
-/* Compact tier cards mirrored near the header (no Q*, no example, shorter) */
-.tier-compact{min-height:0}
-.tier-compact .tier-head{margin-bottom:6px}
-.tier-compact .tier-top{margin:0;padding-bottom:0;border-bottom:none}
-.tier-compact .tier-name{font-size:15px}
-.tier-compact .tier-yield{font-size:clamp(22px,3vw,30px)}
+@media (max-width:640px){.hero-corner{position:static;align-items:flex-start;margin-bottom:16px}
+  .hero h1{padding-right:0}}
 /* Best-overall copy above the header cards */
 #tier-crown-top{margin-bottom:22px}
 #tier-crown-top .crown{margin:0 auto}
@@ -200,36 +197,33 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
 <body>
 <div class="wrap">
   <header class="hero">
-    <div class="hero-main">
-      <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span> independent measurement sources</div>
-      <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
-      <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
-    </div>
-    <div class="hero-side">
+    <div class="hero-corner">
       <a class="gh-btn" href="https://github.com/alexandregensse-blip/claude-models-value-analysis" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
       <div class="gh-name">Alexandre Gensse</div>
+    </div>
+    <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span> independent measurement sources</div>
+    <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
+    <div class="hero-row">
+      <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
       <div class="meta meta-side">
         <div><span class="k">Baseline</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1.00</b></div>
         <div><span class="k">Measurement sources</span><br><b><span class="nsrc">…</span> independent</b></div>
+        <div><span class="k">Generated</span><br><b>07 Jul 2026</b></div>
       </div>
     </div>
   </header>
 
   <!-- ============ AT-A-GLANCE : best overall + best value by tier (mirror of §1) ============ -->
   <section id="atglance" class="major">
-    <h2 class="blocktitle">Best value by task tier</h2>
     <div id="tier-crown-top"></div>
     <div class="grid" id="tier-cards-top"></div>
   </section>
 
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
-    <details class="fold-sec">
-    <summary>The consolidated landscape<span class="fold-hint">chart · Pareto · value score · tiers</span></summary>
-    <div class="fold-sec-body">
+    <h2 class="blocktitle">The consolidated landscape</h2>
     <p class="sub">One curve per model, one point per effort (low → max). Both axes are <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b> and built the same way (see the method). The <b>oval</b> is a robust, asymmetric uncertainty band (<b>width = cost, height = quality</b>), <b>centred on the median</b> and <b>faint until you hover it</b>; the quality axis is <b>dilated near parity</b> to separate near-equal models. <b>Haiku 4.5</b> is not plotted here (see the matrix and the Pareto).</p>
     <div class="card pad">
-      <h3 class="blocktitle">The cost–quality landscape</h3>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
       <p class="cap"><b>Both axes come from the same couple-atomic method</b>&nbsp;: same-task ratios → per-benchmark normalisation → weighted-median consolidation. The <b>effort→quality</b> rise is therefore <b>measured</b> (CursorBench, OSWorld, Braintrust, zenn… sweep effort), not assumed; cost ladders are monotone (the quality dip at max on Fable / Sonnet 4.6 is the real over-thinking inverted-U). <b>Bounds and gridlines recomputed dynamically.</b></p>
@@ -243,7 +237,7 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
       <div id="pareto-blocks" class="pareto-blocks"></div>
     </div>
     <details class="fold">
-      <summary>Value score — distance to the frontier envelope<span class="fold-hint">how it's scored · click to open</span></summary>
+      <summary>Value score — distance to the frontier envelope</summary>
       <div class="card pad">
         <p class="sub">We fit the frontier as a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, the cost the efficient frontier "charges" for a given quality (R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above). Each frontier couple's <b>score</b> = its <b>signed distance in log-cost</b> to that curve&nbsp;: how much <b>cheaper (+)</b> or <b>dearer (−)</b> it is than the frontier price <b>for its quality</b>, squashed by <b>tanh(residual ⁄ RMS)</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. <b>Confidence intervals are baked in</b>&nbsp;: both the curve and every score weight the couple's centre (½) and its four CI extremities (⅛ each), so a <b>wide interval softens the score toward the trend</b>. Only the <b>Pareto-frontier couples</b> are shown.</p>
         <div class="chartbox"><table id="score-tbl">
@@ -254,7 +248,7 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
       </div>
     </details>
     <details class="fold">
-      <summary>What moves everything — four factors behind the numbers<span class="fold-hint">context · click to open</span></summary>
+      <summary>What moves everything — four factors behind the numbers</summary>
       <div class="fold-body pad">
         <p class="sub">The picks below are an order of magnitude. Four factors, each measured elsewhere, modulate them strongly — keep them in mind when reading the tiers.</p>
         <div class="grid">
@@ -271,17 +265,16 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
       <div class="grid" id="tier-cards"></div>
       <div id="tier-crown"></div>
       <details class="fold">
-        <summary>Tune the target complexity windows (q*, σ)<span class="fold-hint">interactive · click to open</span></summary>
+        <summary>Tune the target complexity windows (q*, σ)</summary>
         <div class="fold-body pad"><div id="tier-tuner"></div></div>
       </details>
     </div>
-    </div></details>
   </section>
 
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
     <details class="fold-sec">
-    <summary>The normalized matrix<span class="fold-hint">cost × model × effort table</span></summary>
+    <summary>The normalized matrix</summary>
     <div class="fold-sec-body">
     <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
     <div class="card pad chartbox">
@@ -297,7 +290,7 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
   <!-- ============ SOURCES ============ -->
   <section id="graph">
     <details class="fold-sec">
-    <summary>The measurement sources<span class="fold-hint">every same-task source · linked couples</span></summary>
+    <summary>The measurement sources</summary>
     <div class="fold-sec-body">
     <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b> — <b>179 same-task measurement points</b> in total. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
     <div class="card pad">
@@ -313,12 +306,12 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
   <!-- ============ METHOD ============ -->
   <section id="confidence">
     <details class="fold-sec">
-    <summary>How the numbers are built — the method<span class="fold-hint">same-task ratios · robust consolidation</span></summary>
+    <summary>How the numbers are built — the method</summary>
     <div class="fold-sec-body">
     <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
     <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;4.8&nbsp;@medium</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
     <details class="fold">
-      <summary>The full procedure — six steps<span class="fold-hint">click to open</span></summary>
+      <summary>The full procedure — six steps</summary>
       <div class="fold-body pad">
         <ol class="steps">
           <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources — task sizes are incomparable. We keep only sources that measure ≥2 (model,&nbsp;effort) couples <b>on the same task</b>; their <b>ratio</b> cancels the task-size variance.</li>
@@ -369,8 +362,21 @@ const QUALGRID={"fable-5":{"low":[1.13,1.05,1.31],"medium":[1.2,1.09,1.41],"high
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
 // Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
 const SQ=0.045, symT=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), symTinv=u=>1+Math.sign(u)*SQ*(Math.exp(Math.abs(u))-1);
-function symY(ymn,ymx,mT,ih,yp){ const tb=symT(ymn)-0.12, tt=symT(ymx)+0.12;
-  return v=>mT+yp+(1-(symT(v)-tb)/(tt-tb))*(ih-2*yp); }
+// Zoom/pan work in the axes' SCREEN-LINEAR coordinates: X is linear in log10(cost), Y in symT(quality).
+// A chart's "view" = [xlo,xhi (log-cost), tLo,tHi (symT-quality)]. Default = data bounds; a stored s.__view overrides it,
+// so zoom re-renders the chart (ticks + labels recompute at fixed size) instead of scaling the whole SVG.
+const defView=(xmn,xmx,ymn,ymx)=>[Math.log10(xmn)-0.06,Math.log10(xmx)+0.06,symT(ymn)-0.12,symT(ymx)+0.12];
+const viewAxes=(v,mL,iw,mT,ih,yp)=>({
+  X:val=>mL+(Math.log10(val)-v[0])/(v[1]-v[0])*iw,
+  Y:val=>mT+yp+(1-(symT(val)-v[2])/(v[3]-v[2]))*(ih-2*yp) });
+// Two-line axis title: big main label + small precision on the next line (a second tspan; under rotation it sits
+// alongside, toward the plot). rot = optional transform string.
+function axisTitle(s,x,y,main,sub,rot){
+  const t=el("text",{x,y,fill:cvar('--muted'),"text-anchor":"middle"}); if(rot) t.setAttribute("transform",rot);
+  const a=el("tspan",{x,"font-size":15,"font-weight":700}); a.textContent=main; t.appendChild(a);
+  const b=el("tspan",{x,dy:15,"font-size":10.5,fill:cvar('--faint'),"font-weight":400}); b.textContent=sub; t.appendChild(b);
+  s.appendChild(t);
+}
 // Quality gridlines at round quality values (non-uniform spacing under symlog); the 1.0 anchor is dashed.
 function qGrid(s,Y,mL,iw,mT,ih){ [0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
   s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?'--opus48':'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
@@ -448,16 +454,16 @@ function drawB(){
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);   // bounds include the uncertainty ovals (extents) so they stay fully inside
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
-  const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=symY(ymn,ymx,mT,ih,yp);   // symlog quality axis (dilated near parity 1.0)
+  const yp=8, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  s.__view=view; s.__geo={mL,iw,mT,ih,yp};
+  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];   // symlog quality axis (dilated near parity 1.0)
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Relative cost  (Opus 4.8 @medium = 1.0 · log scale)";s.appendChild(a);
-  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Relative quality  (Opus 4.8 @medium = 1.0 · dilated near parity)";s.appendChild(a);
+  axisTitle(s,mL+iw/2,H-26,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,15,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 15 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB");                     // faint asymmetric uncertainty ovals, behind
@@ -489,16 +495,16 @@ function drawPareto(){
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=10;
-  const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=symY(ymn,ymx,mT,ih,yp);
+  const yp=10, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  s.__view=view; s.__geo={mL,iw,mT,ih,yp};
+  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Relative cost  (Opus 4.8 @medium = 1.0 · log scale)";s.appendChild(a);
-  a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Relative quality  (Opus 4.8 @medium = 1.0 · dilated near parity)";s.appendChild(a);
+  axisTitle(s,mL+iw/2,H-24,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
@@ -508,9 +514,9 @@ function drawPareto(){
   const xv=par.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² (central points, log-cost)
     ssX=xv.reduce((a,v)=>a+(v-xm)*(v-xm),0), rssX=par.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
   { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
-  { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to plot rect)
-    for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt));
-      if(cost>=cLo&&cost<=cHi&&q>=ymn&&q<=ymx){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
+  { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to the visible plot rect)
+    for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
+      if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
   const rms=Math.sqrt(pts.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/pts.length);
   const scored=pts.map(p=>({...p,score:valueScoreOf(gevT,rms,p),front:pset.has(p.m+"@"+p.e)}));   // single fused score, IC baked in
@@ -586,9 +592,8 @@ function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  // compact=true → header-mirror cards: no Q* value, no long example, reduced height
-  const cardHTML=(q,name,col,w,ex,compact)=>`<div class="card pad crit tier${compact?' tier-compact':''}">
-      <div class="tier-head"><span class="tier-name">${compact?'':`Q* ${q.toFixed(2)} – `}${name}</span></div>
+  const cardHTML=(q,name,col,w,ex)=>`<div class="card pad crit tier">
+      <div class="tier-head"><span class="tier-name">Q* ${q.toFixed(2)} – ${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
@@ -596,11 +601,11 @@ function drawTiers(){
         </div>
         <div class="tier-yield">${Math.round(w.norm)}</div>
       </div>
-      ${compact?'':`<span class="ex">${ex}</span>`}
+      <span class="ex">${ex}</span>
     </div>`;
-  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");
-  const top=document.getElementById("tier-cards-top");
-  if(top) top.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // compact mirror near the header
+  const cardsHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
+  host.innerHTML=cardsHTML;
+  const top=document.getElementById("tier-cards-top"); if(top) top.innerHTML=cardsHTML;   // same full style, mirrored near the header
   const c=crown, col=cvar(MODELS[c.m].c);
   const crownHTML=note=>`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
@@ -701,28 +706,35 @@ function drawEdgeTable(){
       +`<td>${cn.map(short).join(" · ")}</td>`;
     tb.appendChild(tr);});
 }
-// ---- pan/zoom (viewBox-based, no external lib) : Ctrl/⌘+wheel zoom · drag pan · +/−/⟳ buttons ----
+// ---- pan/zoom in DATA space : Shift+wheel zoom · drag pan · +/−/⟳ buttons ----
+// Instead of scaling the viewBox (which drags the axes along), we mutate the chart's view [xlo,xhi,tLo,tHi] and
+// re-render, so ticks/labels recompute at fixed size for the zoomed window. Registry maps id → its draw function.
+const CHART_RENDER={chartB:drawB, chartP:drawPareto};
+const svgPt=(s,cx,cy)=>{ const P=new DOMPoint(cx,cy).matrixTransform(s.getScreenCTM().inverse()); return {x:P.x,y:P.y}; };
+const dataAt=(s,px,py)=>{ const g=s.__geo, v=s.__view;   // pixel → view coords (log-cost, symT-quality)
+  return [ v[0]+(px-g.mL)/g.iw*(v[1]-v[0]), v[2]+(1-(py-g.mT-g.yp)/(g.ih-2*g.yp))*(v[3]-v[2]) ]; };
+function zoomView(s,px,py,f){ const [ux,uy]=dataAt(s,px,py), v=s.__view.slice();
+  v[0]=ux-(ux-v[0])*f; v[1]=ux+(v[1]-ux)*f; v[2]=uy-(uy-v[2])*f; v[3]=uy+(v[3]-uy)*f; s.__view=v; }
 function zoomable(svg){
-  const box=svg.closest(".card")||svg.parentNode; box.style.position="relative";   // attach to the CARD (chartbox clips overflow → buttons vanished)
-  const vb=()=>svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
-  const set=(x,y,w,h)=>svg.setAttribute("viewBox",`${x} ${y} ${w} ${h}`);
+  const box=svg.closest(".card")||svg.parentNode; box.style.position="relative";   // buttons attach to the CARD (chartbox clips overflow)
+  let raf=false; const render=()=>{ if(raf) return; raf=true; requestAnimationFrame(()=>{ raf=false; CHART_RENDER[svg.id](); }); };
   if(!box.querySelector(".zoomctl")){
     const tb=document.createElement("div"); tb.className="zoomctl";
     tb.innerHTML='<span class="zoomhint">⇧+scroll: zoom · drag: pan</span><button data-z="in" title="Zoom +">+</button><button data-z="out" title="Zoom −">−</button><button data-z="reset" title="Reset">⟳</button>';
     tb.addEventListener("click",e=>{ const z=e.target.getAttribute("data-z"); if(!z)return;
-      if(z==="reset"){ svg.setAttribute("viewBox",svg.__base); return; }
-      const [x,y,w,h]=vb(), f=z==="in"?0.8:1.25; set(x+(w-w*f)/2, y+(h-h*f)/2, w*f, h*f); });
+      if(z==="reset"){ svg.__view=null; } else { const g=svg.__geo; zoomView(svg,g.mL+g.iw/2,g.mT+g.ih/2, z==="in"?0.8:1.25); }
+      render(); });
     box.appendChild(tb);
   }
   if(svg.__zoom) return; svg.__zoom=true; svg.style.cursor="grab"; svg.style.userSelect="none"; svg.style.webkitUserSelect="none";
   svg.addEventListener("wheel",e=>{ if(!e.shiftKey) return; e.preventDefault();   // Shift+wheel (Ctrl/⌘ = browser zoom, avoided)
-    const [x,y,w,h]=vb(), r=svg.getBoundingClientRect();
-    const mx=x+(e.clientX-r.left)/r.width*w, my=y+(e.clientY-r.top)/r.height*h, f=e.deltaY<0?0.9:1.11;
-    set(mx-(mx-x)*f, my-(my-y)*f, w*f, h*f); },{passive:false});
+    const p=svgPt(svg,e.clientX,e.clientY); zoomView(svg,p.x,p.y, e.deltaY<0?0.9:1.11); render(); },{passive:false});
   let d=null;
-  svg.addEventListener("pointerdown",e=>{ e.preventDefault(); d={x:e.clientX,y:e.clientY,vb:vb()}; svg.style.cursor="grabbing"; svg.setPointerCapture(e.pointerId); });
-  svg.addEventListener("pointermove",e=>{ if(!d)return; const [x,y,w,h]=d.vb, r=svg.getBoundingClientRect();
-    set(x-(e.clientX-d.x)/r.width*w, y-(e.clientY-d.y)/r.height*h, w, h); });
+  svg.addEventListener("pointerdown",e=>{ e.preventDefault(); d={x:e.clientX,y:e.clientY}; svg.style.cursor="grabbing"; svg.setPointerCapture(e.pointerId); });
+  svg.addEventListener("pointermove",e=>{ if(!d)return;
+    const p0=svgPt(svg,d.x,d.y), p1=svgPt(svg,e.clientX,e.clientY), a=dataAt(svg,p0.x,p0.y), b=dataAt(svg,p1.x,p1.y);
+    const v=svg.__view, dx=b[0]-a[0], dy=b[1]-a[1]; v[0]-=dx; v[1]-=dx; v[2]-=dy; v[3]-=dy;   // keep the grabbed point under the cursor
+    d={x:e.clientX,y:e.clientY}; render(); });
   const up=()=>{ d=null; svg.style.cursor="grab"; };
   svg.addEventListener("pointerup",up); svg.addEventListener("pointercancel",up); svg.addEventListener("pointerleave",up);
 }
@@ -736,7 +748,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
 function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();
-  ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });}
+  ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});

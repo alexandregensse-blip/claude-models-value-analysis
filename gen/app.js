@@ -27,8 +27,21 @@ const QUALGRID=__QUALGRID__;   // {model:{effort:[central, lo, hi]}} — median 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
 // Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
 const SQ=0.045, symT=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), symTinv=u=>1+Math.sign(u)*SQ*(Math.exp(Math.abs(u))-1);
-function symY(ymn,ymx,mT,ih,yp){ const tb=symT(ymn)-0.12, tt=symT(ymx)+0.12;
-  return v=>mT+yp+(1-(symT(v)-tb)/(tt-tb))*(ih-2*yp); }
+// Zoom/pan work in the axes' SCREEN-LINEAR coordinates: X is linear in log10(cost), Y in symT(quality).
+// A chart's "view" = [xlo,xhi (log-cost), tLo,tHi (symT-quality)]. Default = data bounds; a stored s.__view overrides it,
+// so zoom re-renders the chart (ticks + labels recompute at fixed size) instead of scaling the whole SVG.
+const defView=(xmn,xmx,ymn,ymx)=>[Math.log10(xmn)-0.06,Math.log10(xmx)+0.06,symT(ymn)-0.12,symT(ymx)+0.12];
+const viewAxes=(v,mL,iw,mT,ih,yp)=>({
+  X:val=>mL+(Math.log10(val)-v[0])/(v[1]-v[0])*iw,
+  Y:val=>mT+yp+(1-(symT(val)-v[2])/(v[3]-v[2]))*(ih-2*yp) });
+// Two-line axis title: big main label + small precision on the next line (a second tspan; under rotation it sits
+// alongside, toward the plot). rot = optional transform string.
+function axisTitle(s,x,y,main,sub,rot){
+  const t=el("text",{x,y,fill:cvar('--muted'),"text-anchor":"middle"}); if(rot) t.setAttribute("transform",rot);
+  const a=el("tspan",{x,"font-size":15,"font-weight":700}); a.textContent=main; t.appendChild(a);
+  const b=el("tspan",{x,dy:15,"font-size":10.5,fill:cvar('--faint'),"font-weight":400}); b.textContent=sub; t.appendChild(b);
+  s.appendChild(t);
+}
 // Quality gridlines at round quality values (non-uniform spacing under symlog); the 1.0 anchor is dashed.
 function qGrid(s,Y,mL,iw,mT,ih){ [0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
   s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?'--opus48':'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
@@ -106,16 +119,16 @@ function drawB(){
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);   // bounds include the uncertainty ovals (extents) so they stay fully inside
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
-  const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=symY(ymn,ymx,mT,ih,yp);   // symlog quality axis (dilated near parity 1.0)
+  const yp=8, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  s.__view=view; s.__geo={mL,iw,mT,ih,yp};
+  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];   // symlog quality axis (dilated near parity 1.0)
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Relative cost  (Opus 4.8 @medium = 1.0 · log scale)";s.appendChild(a);
-  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Relative quality  (Opus 4.8 @medium = 1.0 · dilated near parity)";s.appendChild(a);
+  axisTitle(s,mL+iw/2,H-26,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,15,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 15 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB");                     // faint asymmetric uncertainty ovals, behind
@@ -147,16 +160,16 @@ function drawPareto(){
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
       xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=10;
-  const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=symY(ymn,ymx,mT,ih,yp);
+  const yp=10, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  s.__view=view; s.__geo={mL,iw,mT,ih,yp};
+  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Relative cost  (Opus 4.8 @medium = 1.0 · log scale)";s.appendChild(a);
-  a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Relative quality  (Opus 4.8 @medium = 1.0 · dilated near parity)";s.appendChild(a);
+  axisTitle(s,mL+iw/2,H-24,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
@@ -166,9 +179,9 @@ function drawPareto(){
   const xv=par.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² (central points, log-cost)
     ssX=xv.reduce((a,v)=>a+(v-xm)*(v-xm),0), rssX=par.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
   { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
-  { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to plot rect)
-    for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt));
-      if(cost>=cLo&&cost<=cHi&&q>=ymn&&q<=ymx){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
+  { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to the visible plot rect)
+    for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
+      if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
   const rms=Math.sqrt(pts.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/pts.length);
   const scored=pts.map(p=>({...p,score:valueScoreOf(gevT,rms,p),front:pset.has(p.m+"@"+p.e)}));   // single fused score, IC baked in
@@ -244,9 +257,8 @@ function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  // compact=true → header-mirror cards: no Q* value, no long example, reduced height
-  const cardHTML=(q,name,col,w,ex,compact)=>`<div class="card pad crit tier${compact?' tier-compact':''}">
-      <div class="tier-head"><span class="tier-name">${compact?'':`Q* ${q.toFixed(2)} – `}${name}</span></div>
+  const cardHTML=(q,name,col,w,ex)=>`<div class="card pad crit tier">
+      <div class="tier-head"><span class="tier-name">Q* ${q.toFixed(2)} – ${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
@@ -254,11 +266,11 @@ function drawTiers(){
         </div>
         <div class="tier-yield">${Math.round(w.norm)}</div>
       </div>
-      ${compact?'':`<span class="ex">${ex}</span>`}
+      <span class="ex">${ex}</span>
     </div>`;
-  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");
-  const top=document.getElementById("tier-cards-top");
-  if(top) top.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // compact mirror near the header
+  const cardsHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
+  host.innerHTML=cardsHTML;
+  const top=document.getElementById("tier-cards-top"); if(top) top.innerHTML=cardsHTML;   // same full style, mirrored near the header
   const c=crown, col=cvar(MODELS[c.m].c);
   const crownHTML=note=>`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
@@ -359,28 +371,35 @@ function drawEdgeTable(){
       +`<td>${cn.map(short).join(" · ")}</td>`;
     tb.appendChild(tr);});
 }
-// ---- pan/zoom (viewBox-based, no external lib) : Ctrl/⌘+wheel zoom · drag pan · +/−/⟳ buttons ----
+// ---- pan/zoom in DATA space : Shift+wheel zoom · drag pan · +/−/⟳ buttons ----
+// Instead of scaling the viewBox (which drags the axes along), we mutate the chart's view [xlo,xhi,tLo,tHi] and
+// re-render, so ticks/labels recompute at fixed size for the zoomed window. Registry maps id → its draw function.
+const CHART_RENDER={chartB:drawB, chartP:drawPareto};
+const svgPt=(s,cx,cy)=>{ const P=new DOMPoint(cx,cy).matrixTransform(s.getScreenCTM().inverse()); return {x:P.x,y:P.y}; };
+const dataAt=(s,px,py)=>{ const g=s.__geo, v=s.__view;   // pixel → view coords (log-cost, symT-quality)
+  return [ v[0]+(px-g.mL)/g.iw*(v[1]-v[0]), v[2]+(1-(py-g.mT-g.yp)/(g.ih-2*g.yp))*(v[3]-v[2]) ]; };
+function zoomView(s,px,py,f){ const [ux,uy]=dataAt(s,px,py), v=s.__view.slice();
+  v[0]=ux-(ux-v[0])*f; v[1]=ux+(v[1]-ux)*f; v[2]=uy-(uy-v[2])*f; v[3]=uy+(v[3]-uy)*f; s.__view=v; }
 function zoomable(svg){
-  const box=svg.closest(".card")||svg.parentNode; box.style.position="relative";   // attach to the CARD (chartbox clips overflow → buttons vanished)
-  const vb=()=>svg.getAttribute("viewBox").split(/[ ,]+/).map(Number);
-  const set=(x,y,w,h)=>svg.setAttribute("viewBox",`${x} ${y} ${w} ${h}`);
+  const box=svg.closest(".card")||svg.parentNode; box.style.position="relative";   // buttons attach to the CARD (chartbox clips overflow)
+  let raf=false; const render=()=>{ if(raf) return; raf=true; requestAnimationFrame(()=>{ raf=false; CHART_RENDER[svg.id](); }); };
   if(!box.querySelector(".zoomctl")){
     const tb=document.createElement("div"); tb.className="zoomctl";
     tb.innerHTML='<span class="zoomhint">⇧+scroll: zoom · drag: pan</span><button data-z="in" title="Zoom +">+</button><button data-z="out" title="Zoom −">−</button><button data-z="reset" title="Reset">⟳</button>';
     tb.addEventListener("click",e=>{ const z=e.target.getAttribute("data-z"); if(!z)return;
-      if(z==="reset"){ svg.setAttribute("viewBox",svg.__base); return; }
-      const [x,y,w,h]=vb(), f=z==="in"?0.8:1.25; set(x+(w-w*f)/2, y+(h-h*f)/2, w*f, h*f); });
+      if(z==="reset"){ svg.__view=null; } else { const g=svg.__geo; zoomView(svg,g.mL+g.iw/2,g.mT+g.ih/2, z==="in"?0.8:1.25); }
+      render(); });
     box.appendChild(tb);
   }
   if(svg.__zoom) return; svg.__zoom=true; svg.style.cursor="grab"; svg.style.userSelect="none"; svg.style.webkitUserSelect="none";
   svg.addEventListener("wheel",e=>{ if(!e.shiftKey) return; e.preventDefault();   // Shift+wheel (Ctrl/⌘ = browser zoom, avoided)
-    const [x,y,w,h]=vb(), r=svg.getBoundingClientRect();
-    const mx=x+(e.clientX-r.left)/r.width*w, my=y+(e.clientY-r.top)/r.height*h, f=e.deltaY<0?0.9:1.11;
-    set(mx-(mx-x)*f, my-(my-y)*f, w*f, h*f); },{passive:false});
+    const p=svgPt(svg,e.clientX,e.clientY); zoomView(svg,p.x,p.y, e.deltaY<0?0.9:1.11); render(); },{passive:false});
   let d=null;
-  svg.addEventListener("pointerdown",e=>{ e.preventDefault(); d={x:e.clientX,y:e.clientY,vb:vb()}; svg.style.cursor="grabbing"; svg.setPointerCapture(e.pointerId); });
-  svg.addEventListener("pointermove",e=>{ if(!d)return; const [x,y,w,h]=d.vb, r=svg.getBoundingClientRect();
-    set(x-(e.clientX-d.x)/r.width*w, y-(e.clientY-d.y)/r.height*h, w, h); });
+  svg.addEventListener("pointerdown",e=>{ e.preventDefault(); d={x:e.clientX,y:e.clientY}; svg.style.cursor="grabbing"; svg.setPointerCapture(e.pointerId); });
+  svg.addEventListener("pointermove",e=>{ if(!d)return;
+    const p0=svgPt(svg,d.x,d.y), p1=svgPt(svg,e.clientX,e.clientY), a=dataAt(svg,p0.x,p0.y), b=dataAt(svg,p1.x,p1.y);
+    const v=svg.__view, dx=b[0]-a[0], dy=b[1]-a[1]; v[0]-=dx; v[1]-=dx; v[2]-=dy; v[3]-=dy;   // keep the grabbed point under the cursor
+    d={x:e.clientX,y:e.clientY}; render(); });
   const up=()=>{ d=null; svg.style.cursor="grab"; };
   svg.addEventListener("pointerup",up); svg.addEventListener("pointercancel",up); svg.addEventListener("pointerleave",up);
 }
@@ -394,7 +413,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
 function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();
-  ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });}
+  ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});

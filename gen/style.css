@@ -26,12 +26,12 @@
   body{margin:0;background:var(--paper);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:min(1280px,94vw);margin:0 auto;padding:clamp(20px,3.5vw,52px)}
+  .wrap{max-width:min(1720px,96vw);margin:0 auto;padding:clamp(20px,3.5vw,52px)}
   h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
-  h1{font-size:clamp(30px,5vw,50px);line-height:1.05}
+  h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05}
   h2{font-size:clamp(21px,3vw,27px);line-height:1.15;margin-bottom:.15em}
   h3{font-size:16px;font-weight:600}
-  .eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--fable5);font-weight:600}
+  .eyebrow{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--fable5);font-weight:600}
   .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:82ch;margin-top:.7em}
   .muted{color:var(--muted)} .faint{color:var(--faint)}
   section{margin-top:clamp(52px,7vw,92px)}
@@ -162,27 +162,24 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
   font-size:12px;font-weight:500;color:var(--faint);letter-spacing:.02em}
 @media (max-width:640px){details.fold-sec>summary .fold-hint{display:none}}
 .fold-sec-body{margin-top:2px}
-/* Header: title/lede on the left, GitHub + author + baseline meta on the right */
-.hero{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:20px 44px}
-.hero-main{flex:1 1 460px;min-width:0}
-.hero-side{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:9px;text-align:right}
+/* Header: GitHub + author pinned to the top-right corner; baseline/sources meta aligned with the lede */
+.hero{position:relative}
+.hero-corner{position:absolute;top:0;right:0;display:flex;flex-direction:column;align-items:flex-end;gap:7px;z-index:2}
 .gh-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border:1px solid var(--line2);
   border-radius:10px;background:var(--panel);color:var(--ink);font-size:13.5px;font-weight:600;
   text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s}
 .gh-btn:hover{border-color:var(--fable5)}
 .gh-btn svg{width:17px;height:17px;fill:currentColor;flex:none}
 .gh-name{font-size:13.5px;font-weight:600;color:var(--muted)}
-.meta.meta-side{flex-direction:column;flex-wrap:nowrap;gap:12px;margin-top:6px;padding-top:14px;
-  border-top:1px solid var(--line);text-align:right}
+.hero h1{margin-top:.12em;padding-right:150px}
+.hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;
+  gap:16px 44px;margin-top:clamp(22px,3vw,40px)}
+.hero-row .lede{flex:1 1 460px;margin-top:0}
+.meta.meta-side{flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:10px 28px;
+  margin-top:0;padding-top:0;border-top:none}
 .meta.meta-side .k{font-size:11.5px}
-@media (max-width:560px){.hero-side{align-items:flex-start;text-align:left}
-  .meta.meta-side{text-align:left}}
-/* Compact tier cards mirrored near the header (no Q*, no example, shorter) */
-.tier-compact{min-height:0}
-.tier-compact .tier-head{margin-bottom:6px}
-.tier-compact .tier-top{margin:0;padding-bottom:0;border-bottom:none}
-.tier-compact .tier-name{font-size:15px}
-.tier-compact .tier-yield{font-size:clamp(22px,3vw,30px)}
+@media (max-width:640px){.hero-corner{position:static;align-items:flex-start;margin-bottom:16px}
+  .hero h1{padding-right:0}}
 /* Best-overall copy above the header cards */
 #tier-crown-top{margin-bottom:22px}
 #tier-crown-top .crown{margin:0 auto}
