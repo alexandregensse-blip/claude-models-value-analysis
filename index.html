@@ -43,7 +43,7 @@
   .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:none;margin-top:.7em}
   .muted{color:var(--muted)} .faint{color:var(--faint)}
   section{margin-top:clamp(52px,7vw,92px)}
-  section.major{margin-top:clamp(60px,7vw,100px)}
+  section.major{margin-top:clamp(34px,4.2vw,60px)}
   .sub{color:var(--muted);max-width:none;margin:.35em 0 1.4em}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
   .pad{padding:clamp(16px,2.5vw,26px)}
@@ -172,7 +172,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 .gh-name{font-size:13.5px;font-weight:600;color:var(--muted)}
 .hero h1{margin-top:.12em;padding-right:150px}
 .hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;
-  gap:20px 56px;margin-top:clamp(24px,3.2vw,44px)}
+  gap:20px 56px;margin-top:clamp(32px,4.2vw,60px)}
 .hero-row .lede{flex:1 1 440px;margin-top:0}
 .meta.meta-side{flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:14px 48px;
   margin-top:2px;padding-top:0;border-top:none}
@@ -181,7 +181,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
   .hero h1{padding-right:0}}
 /* Best-overall above the header cards (tier-card layout, narrow, no dashed rule) */
 #tier-crown-top{max-width:30%;margin:0 auto 18px}
-#tier-crown-top .tier{border-color:var(--opus48)}
+#tier-crown-top .tier{border-color:var(--opus48);padding-left:clamp(22px,3vw,34px);padding-right:clamp(22px,3vw,34px)}
 #tier-crown-top .tier .tier-yield{color:var(--opus48);font-size:clamp(34px,4.2vw,48px)}
 #tier-crown-top .tier .tier-top{border-bottom:none;padding-bottom:0;margin-bottom:0}
 #tier-crown-top .tier-pick{font-size:clamp(22px,2.6vw,30px)}
@@ -226,13 +226,13 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
     <div class="card pad">
-      <h3 class="blocktitle">The consolidated landscape</h3>
+      <h3 class="blocktitle">Quality vs. Cost</h3>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
       <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. The faint <b>oval</b> (hover to reveal) is the robust asymmetric uncertainty — <b>width = cost, height = quality</b>. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
-      <h3 class="blocktitle">Pareto frontier — the best intelligence per cost</h3>
+      <h3 class="blocktitle">Pareto Frontier</h3>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
       <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The faint grey curve is the frontier <b>price envelope</b> — the reference for the value score below.</p>
@@ -266,7 +266,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
     <details class="fold">
-      <summary>The normalized matrix</summary>
+      <summary>Normalized Cost Matrix</summary>
       <div class="card pad">
         <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
         <div class="chartbox">
@@ -295,7 +295,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
   <!-- ============ SOURCES ============ -->
   <section id="graph">
     <details class="fold">
-      <summary>The measurement sources</summary>
+      <summary>Data Sources</summary>
       <div class="card pad">
         <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b> — <b>179 same-task measurement points</b> in total. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
         <div class="chartbox"><table id="edge-tbl">
@@ -313,9 +313,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="card pad">
         <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
         <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;4.8&nbsp;@medium</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
-        <details class="fold">
-          <summary>The full procedure — six steps</summary>
-          <div class="fold-body pad">
+        <h3 class="blocktitle" style="margin-top:1.3em">The full procedure — six steps</h3>
         <ol class="steps">
           <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources — task sizes are incomparable. We keep only sources that measure ≥2 (model,&nbsp;effort) couples <b>on the same task</b>; their <b>ratio</b> cancels the task-size variance.</li>
           <li><b>The (model, effort) couple is atomic.</b> Each node is one indivisible couple. We never assume "effort" has the same effect across models — no model×effort decomposition, because separability would be a false assumption.</li>
@@ -324,8 +322,6 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <li><b>Unlinked couples are flagged, never invented.</b> A couple with no measured edge is left n/a or given an <b>explicitly wide band</b> — one model's effort shape is never used as a template for another.</li>
           <li><b>The band = agreement.</b> Uncertainty is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it, and asymmetric. Tight agreement → narrow band; disagreement → wide band.</li>
         </ol>
-          </div>
-        </details>
       </div>
     </details>
   </section>
