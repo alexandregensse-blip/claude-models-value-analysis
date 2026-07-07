@@ -45,7 +45,7 @@ function drawB(){
   const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
   // Y = NON-LINEAR (symlog around the anchor 1.0): dilates the crowded near-parity band, compresses the sparse tails → points distinguishable
-  const SQ=0.07, TQ=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=TQ(ymn)-0.12, tt=TQ(ymx)+0.12;
+  const SQ=0.045, TQ=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=TQ(ymn)-0.12, tt=TQ(ymx)+0.12;   // smaller SQ = stronger dilation near parity (1.0)
   const Y=v=>mT+yp+(1-(TQ(v)-tb)/(tt-tb))*(ih-2*yp);
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
@@ -77,16 +77,26 @@ function drawB(){
     const last=mp[mp.length-1];
     const lb=el("text",{x:X(last.c)+10,y:Y(last.q)+4,fill:cvar('--ink'),"font-size":12.5,"font-weight":600});lb.textContent=MODELS[m].label;s.appendChild(lb);
   }
-  // effort labels — GLOBAL anti-overlap: greedy spiral nudge off the natural spot, thin leader line back to the point when displaced
-  const labs=pts.map(p=>({px:X(p.c),py:Y(p.q),t:p.e,col:cvar(MODELS[p.m].c),w:p.e.length*5.4+4}));
-  labs.sort((a,b)=>a.py-b.py);
-  const placed=[], coll=(x,y,w)=>placed.some(P=>Math.abs(P.x-x)<(P.w+w)/2-1 && Math.abs(P.y-y)<11);
-  labs.forEach(L=>{ const y0=L.py-9; let y=y0;
-    while(coll(L.px,y,L.w) && y>mT+8) y-=3.4;                                    // float straight UP off the point until clear
-    if(coll(L.px,y,L.w)){ y=y0; while(coll(L.px,y,L.w) && y<mT+ih-4) y+=3.4; }   // top region full → drop below instead
-    placed.push({x:L.px,y,w:L.w});
-    if(Math.abs(y-y0)>7) s.appendChild(el("line",{x1:L.px,y1:L.py-4,x2:L.px,y2:y+3,stroke:L.col,"stroke-width":0.7,"stroke-opacity":0.4}));   // leader line to its point
-    const t=el("text",{x:L.px,y,fill:L.col,"font-size":8.5,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); });
+  // effort labels — FORCE-DIRECTED placement: each label drifts (a) away from the barycentre of nearby points, and
+  // (b) apart from any label it overlaps, biased along the vector between the two ANCHOR POINTS so the pair separates
+  // consistently with where their points sit. (c) a soft spring keeps it near its own point. Leader line if displaced.
+  const labs=pts.map(p=>({px:X(p.c),py:Y(p.q),lx:X(p.c),ly:Y(p.q)-9,t:p.e,col:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11}));
+  const R=44;
+  for(let it=0; it<140; it++){
+    labs.forEach(L=>{ let fx=0,fy=0, bx=0,by=0,n=0;
+      labs.forEach(P=>{ if(Math.hypot(P.px-L.px,P.py-L.py)<R){ bx+=P.px; by+=P.py; n++; } });
+      if(n>1){ bx/=n; by/=n; const dx=L.px-bx, dy=L.py-by, d=Math.hypot(dx,dy)||1; fx+=dx/d*1.1; fy+=dy/d*1.1; }   // (a) away from local barycentre
+      labs.forEach(P=>{ if(P===L) return;
+        if(Math.abs(P.lx-L.lx)<(P.w+L.w)/2 && Math.abs(P.ly-L.ly)<L.h){                                          // (b) separate overlapping labels…
+          let dx=L.px-P.px, dy=L.py-P.py; if(Math.hypot(dx,dy)<1){ dx=L.lx-P.lx||0.1; dy=L.ly-P.ly; }             // …biased by their anchor-point difference
+          const d=Math.hypot(dx,dy)||1; fx+=dx/d*2.6; fy+=dy/d*2.6; } });
+      fx+=(L.px-L.lx)*0.03; fy+=(L.py-9-L.ly)*0.03;                                                               // (c) soft spring to own point
+      L.nx=L.lx+Math.max(-3,Math.min(3,fx)); L.ny=L.ly+Math.max(-3,Math.min(3,fy)); });
+    labs.forEach(L=>{ L.lx=Math.min(Math.max(L.nx,mL+8),mL+iw-8); L.ly=Math.min(Math.max(L.ny,mT+8),mT+ih-4); });
+  }
+  labs.forEach(L=>{
+    if(Math.hypot(L.lx-L.px,L.ly-(L.py-9))>9) s.appendChild(el("line",{x1:L.px,y1:L.py,x2:L.lx,y2:L.ly+3,stroke:L.col,"stroke-width":0.7,"stroke-opacity":0.4}));
+    const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":8.5,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); });
   // point tooltip — shows ONLY when the cursor sits right on a point (~7px); compact "Model · Effort — X× · Y×"
   const tip=el("g",{"pointer-events":"none",opacity:0});
   const trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
