@@ -112,7 +112,7 @@ function valueScoreOf(gevT,rms,p){ const s=(c,q)=>Math.tanh((gevT(symT(q))-Math.
   return 0.5*s(p.c,p.q)+0.125*(s(p.clo,p.q)+s(p.chi,p.q)+s(p.c,p.qlo)+s(p.c,p.qhi)); }
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=1100,H=619,mL=58,mR=64,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; trimmed right margin so the plot extends
+  const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
   // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -127,8 +127,8 @@ function drawB(){
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  axisTitle(s,mL+iw/2,H-26,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
-  axisTitle(s,15,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 15 ${mT+ih/2})`);
+  axisTitle(s,mL+iw/2,H-30,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB");                     // faint asymmetric uncertainty ovals, behind
@@ -153,7 +153,7 @@ function drawB(){
 // point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=1100,H=619,mL=54,mR=64,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
+  const W=1100,H=619,mL=54,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
   // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -168,7 +168,7 @@ function drawPareto(){
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  axisTitle(s,mL+iw/2,H-24,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,mL+iw/2,H-28,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
   axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
@@ -229,10 +229,10 @@ function fillScoreTable(scored){
 // with the chart. TWCOL = one colour per tier window.
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", q:0.75, sig:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      q:0.95, sig:1.20, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        q:1.05, sig:1.20, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Cutting-Edge",        q:1.25, sig:1.20, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Grunt work",             q:0.75, sig:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:1.20, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:1.20, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:1.20, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
@@ -257,8 +257,9 @@ function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  const cardHTML=(q,name,col,w,ex)=>`<div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Q* ${q.toFixed(2)} – ${name}</span></div>
+  // noQ → header-mirror cards & the top crown: drop the "Q* …" prefix, keep the full card layout
+  const cardHTML=(q,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
+      <div class="tier-head"><span class="tier-name">${noQ?'':`Q* ${q.toFixed(2)} – `}${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
@@ -266,20 +267,21 @@ function drawTiers(){
         </div>
         <div class="tier-yield">${Math.round(w.norm)}</div>
       </div>
-      <span class="ex">${ex}</span>
+      ${ex?`<span class="ex">${ex}</span>`:''}
     </div>`;
-  const cardsHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
-  host.innerHTML=cardsHTML;
-  const top=document.getElementById("tier-cards-top"); if(top) top.innerHTML=cardsHTML;   // same full style, mirrored near the header
+  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");        // detailed cards: keep Q*
+  const top=document.getElementById("tier-cards-top");
+  if(top) top.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // near-header cards: labels only, no Q*
   const c=crown, col=cvar(MODELS[c.m].c);
-  const crownHTML=note=>`<div class="card pad crown">
+  const crT=document.getElementById("tier-crown-top");   // best-overall above the header cards: SAME tier-card layout (title · model+cost/quality · big score)
+  if(crT) crT.innerHTML=cardHTML(0,"👑 Best overall",col,c,"",true);
+  const cr=document.getElementById("tier-crown");   // the detailed section keeps the explained crown
+  if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      ${note?`<p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>`:''}
+      <p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>
     </div>`;
-  const cr=document.getElementById("tier-crown"); if(cr) cr.innerHTML=crownHTML(true);
-  const crT=document.getElementById("tier-crown-top"); if(crT) crT.innerHTML=crownHTML(false);   // note-less copy above the header cards
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
 // plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.

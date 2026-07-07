@@ -24,19 +24,17 @@
 
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
-    <h2 class="blocktitle">The consolidated landscape</h2>
-    <p class="sub">One curve per model, one point per effort (low → max). Both axes are <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b> and built the same way (see the method). The <b>oval</b> is a robust, asymmetric uncertainty band (<b>width = cost, height = quality</b>), <b>centred on the median</b> and <b>faint until you hover it</b>; the quality axis is <b>dilated near parity</b> to separate near-equal models. <b>Haiku 4.5</b> is not plotted here (see the matrix and the Pareto).</p>
     <div class="card pad">
+      <h3 class="blocktitle">The consolidated landscape</h3>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
-      <p class="cap"><b>Both axes come from the same couple-atomic method</b>&nbsp;: same-task ratios → per-benchmark normalisation → weighted-median consolidation. The <b>effort→quality</b> rise is therefore <b>measured</b> (CursorBench, OSWorld, Braintrust, zenn… sweep effort), not assumed; cost ladders are monotone (the quality dip at max on Fable / Sonnet 4.6 is the real over-thinking inverted-U). <b>Bounds and gridlines recomputed dynamically.</b></p>
+      <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. The faint <b>oval</b> (hover to reveal) is the robust asymmetric uncertainty — <b>width = cost, height = quality</b>. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
       <h3 class="blocktitle">Pareto frontier — the best intelligence per cost</h3>
-      <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as the landscape above, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is the <b>frontier price envelope</b> — the cost the frontier charges for a given quality — the reference for the value score below.</p>
+      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The faint grey curve is the frontier <b>price envelope</b> — the reference for the value score below.</p>
       <div id="pareto-blocks" class="pareto-blocks"></div>
     </div>
     <details class="fold">
@@ -62,60 +60,61 @@
         </div>
       </div>
     </details>
-    <div class="card pad block">
-      <h3 class="blocktitle">Best value by task tier — what to actually run</h3>
-      <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b>; for each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
-      <div class="grid" id="tier-cards"></div>
-      <div id="tier-crown"></div>
-      <details class="fold">
-        <summary>Tune the target complexity windows (q*, σ)</summary>
-        <div class="fold-body pad"><div id="tier-tuner"></div></div>
-      </details>
-    </div>
+    <details class="fold">
+      <summary>Best value by task tier — what to actually run</summary>
+      <div class="card pad">
+        <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b>; for each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
+        <div class="grid" id="tier-cards"></div>
+        <div id="tier-crown"></div>
+        <details class="fold">
+          <summary>Tune the target complexity windows (q*, σ)</summary>
+          <div class="fold-body pad"><div id="tier-tuner"></div></div>
+        </details>
+      </div>
+    </details>
   </section>
 
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
-    <details class="fold-sec">
-    <summary>The normalized matrix</summary>
-    <div class="fold-sec-body">
-    <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
-    <div class="card pad chartbox">
-      <table id="matrix-tbl">
-        <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Rel. quality<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
-    </div></details>
+    <details class="fold">
+      <summary>The normalized matrix</summary>
+      <div class="card pad">
+        <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
+        <div class="chartbox">
+          <table id="matrix-tbl">
+            <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Rel. quality<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+      </div>
+    </details>
   </section>
 
   <!-- ============ SOURCES ============ -->
   <section id="graph">
-    <details class="fold-sec">
-    <summary>The measurement sources</summary>
-    <div class="fold-sec-body">
-    <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b> — <b>__NSAMETASK__ same-task measurement points</b> in total. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
-    <div class="card pad">
-      <h3 id="edge-title" class="blocktitle">The sources that weave the links</h3>
-      <div class="chartbox"><table id="edge-tbl">
-        <thead><tr><th>Source</th><th>Actual config (harness · effort)</th><th>Type</th><th>Linked couples (same task)</th></tr></thead>
-        <tbody></tbody>
-      </table></div>
-    </div>
-    </div></details>
+    <details class="fold">
+      <summary>The measurement sources</summary>
+      <div class="card pad">
+        <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b> — <b>__NSAMETASK__ same-task measurement points</b> in total. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
+        <div class="chartbox"><table id="edge-tbl">
+          <thead><tr><th>Source</th><th>Actual config (harness · effort)</th><th>Type</th><th>Linked couples (same task)</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </div>
+    </details>
   </section>
 
   <!-- ============ METHOD ============ -->
   <section id="confidence">
-    <details class="fold-sec">
-    <summary>How the numbers are built — the method</summary>
-    <div class="fold-sec-body">
-    <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
-    <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;4.8&nbsp;@medium</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
     <details class="fold">
-      <summary>The full procedure — six steps</summary>
-      <div class="fold-body pad">
+      <summary>How the numbers are built — the method</summary>
+      <div class="card pad">
+        <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
+        <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;4.8&nbsp;@medium</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
+        <details class="fold">
+          <summary>The full procedure — six steps</summary>
+          <div class="fold-body pad">
         <ol class="steps">
           <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources — task sizes are incomparable. We keep only sources that measure ≥2 (model,&nbsp;effort) couples <b>on the same task</b>; their <b>ratio</b> cancels the task-size variance.</li>
           <li><b>The (model, effort) couple is atomic.</b> Each node is one indivisible couple. We never assume "effort" has the same effect across models — no model×effort decomposition, because separability would be a false assumption.</li>
@@ -124,9 +123,10 @@
           <li><b>Unlinked couples are flagged, never invented.</b> A couple with no measured edge is left n/a or given an <b>explicitly wide band</b> — one model's effort shape is never used as a template for another.</li>
           <li><b>The band = agreement.</b> Uncertainty is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it, and asymmetric. Tight agreement → narrow band; disagreement → wide band.</li>
         </ol>
+          </div>
+        </details>
       </div>
     </details>
-    </div></details>
   </section>
 
   <div class="foot">

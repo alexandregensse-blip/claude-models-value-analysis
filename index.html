@@ -34,30 +34,30 @@
   body{margin:0;background:var(--paper);color:var(--ink);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:min(1720px,96vw);margin:0 auto;padding:clamp(20px,3.5vw,52px)}
+  .wrap{max-width:min(1720px,96vw);margin:0 auto;padding:clamp(30px,5.25vw,78px)}
   h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0}
   h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05}
   h2{font-size:clamp(21px,3vw,27px);line-height:1.15;margin-bottom:.15em}
   h3{font-size:16px;font-weight:600}
   .eyebrow{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--fable5);font-weight:600}
-  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:82ch;margin-top:.7em}
+  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:none;margin-top:.7em}
   .muted{color:var(--muted)} .faint{color:var(--faint)}
   section{margin-top:clamp(52px,7vw,92px)}
-  section.major{margin-top:clamp(40px,5vw,64px)}
-  .sub{color:var(--muted);max-width:92ch;margin:.35em 0 1.4em}
+  section.major{margin-top:clamp(60px,7vw,100px)}
+  .sub{color:var(--muted);max-width:none;margin:.35em 0 1.4em}
   .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
   .pad{padding:clamp(16px,2.5vw,26px)}
   .num{font-variant-numeric:tabular-nums}
   .meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
   .meta b{font-variant-numeric:tabular-nums}
   .meta .k{font-size:12.5px;color:var(--muted)}
-  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin:2px 0 6px;font-size:13px}
+  .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:4px 0 16px;font-size:13px}
   .lg{display:inline-flex;align-items:center;gap:7px}
   .sw{width:11px;height:11px;border-radius:3px;flex:none}
   .chartbox{overflow-x:auto}
   svg{display:block;max-width:100%;height:auto;font-family:inherit}
   #chartB,#chartP{width:100%}   /* §1 landscape + Pareto fill the full body width */
-  .cap{font-size:12.5px;color:var(--muted);margin-top:10px;max-width:98ch}
+  .cap{font-size:12.5px;color:var(--muted);margin-top:22px;max-width:none}
   table{border-collapse:collapse;width:100%;font-size:13.5px}
   th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
   th{font-weight:600;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
@@ -157,19 +157,6 @@ details.fold>summary .fold-hint{margin-left:auto;font-family:-apple-system,sans-
 details.fold[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;box-shadow:none}
 details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-left-radius:0;border-top-right-radius:0}
 .fold-body{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
-/* Section-level fold — the h2 itself becomes the collapsible header */
-details.fold-sec>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:11px;
-  font-family:Georgia,serif;font-weight:600;font-size:clamp(21px,3vw,27px);line-height:1.15;
-  letter-spacing:-.01em;color:var(--ink);padding:6px 0;user-select:none}
-details.fold-sec>summary::-webkit-details-marker{display:none}
-details.fold-sec>summary::before{content:"▸";font-family:inherit;color:var(--fable5);
-  font-size:.6em;transition:transform .15s;flex:none}
-details.fold-sec[open]>summary::before{transform:rotate(90deg)}
-details.fold-sec>summary:hover{color:var(--fable5)}
-details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,sans-serif;
-  font-size:12px;font-weight:500;color:var(--faint);letter-spacing:.02em}
-@media (max-width:640px){details.fold-sec>summary .fold-hint{display:none}}
-.fold-sec-body{margin-top:2px}
 /* Header: GitHub + author pinned to the top-right corner; baseline/sources meta aligned with the lede */
 .hero{position:relative}
 .hero-corner{position:absolute;top:0;right:0;display:flex;flex-direction:column;align-items:flex-end;gap:7px;z-index:2}
@@ -180,17 +167,18 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
 .gh-btn svg{width:17px;height:17px;fill:currentColor;flex:none}
 .gh-name{font-size:13.5px;font-weight:600;color:var(--muted)}
 .hero h1{margin-top:.12em;padding-right:150px}
-.hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;
-  gap:16px 44px;margin-top:clamp(22px,3vw,40px)}
-.hero-row .lede{flex:1 1 460px;margin-top:0}
-.meta.meta-side{flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:10px 28px;
-  margin-top:0;padding-top:0;border-top:none}
+.hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;
+  gap:20px 56px;margin-top:clamp(24px,3.2vw,44px)}
+.hero-row .lede{flex:1 1 440px;margin-top:0}
+.meta.meta-side{flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:14px 48px;
+  margin-top:2px;padding-top:0;border-top:none}
 .meta.meta-side .k{font-size:11.5px}
 @media (max-width:640px){.hero-corner{position:static;align-items:flex-start;margin-bottom:16px}
   .hero h1{padding-right:0}}
-/* Best-overall copy above the header cards */
-#tier-crown-top{margin-bottom:22px}
-#tier-crown-top .crown{margin:0 auto}
+/* Best-overall copy above the header cards (rendered as a full-width tier card) */
+#tier-crown-top{margin-bottom:18px}
+#tier-crown-top .tier{border-color:var(--opus48)}
+#tier-crown-top .tier .tier-yield{color:var(--opus48)}
 
 </style>
 </head>
@@ -221,19 +209,17 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
 
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
-    <h2 class="blocktitle">The consolidated landscape</h2>
-    <p class="sub">One curve per model, one point per effort (low → max). Both axes are <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b> and built the same way (see the method). The <b>oval</b> is a robust, asymmetric uncertainty band (<b>width = cost, height = quality</b>), <b>centred on the median</b> and <b>faint until you hover it</b>; the quality axis is <b>dilated near parity</b> to separate near-equal models. <b>Haiku 4.5</b> is not plotted here (see the matrix and the Pareto).</p>
     <div class="card pad">
+      <h3 class="blocktitle">The consolidated landscape</h3>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
-      <p class="cap"><b>Both axes come from the same couple-atomic method</b>&nbsp;: same-task ratios → per-benchmark normalisation → weighted-median consolidation. The <b>effort→quality</b> rise is therefore <b>measured</b> (CursorBench, OSWorld, Braintrust, zenn… sweep effort), not assumed; cost ladders are monotone (the quality dip at max on Fable / Sonnet 4.6 is the real over-thinking inverted-U). <b>Bounds and gridlines recomputed dynamically.</b></p>
+      <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. The faint <b>oval</b> (hover to reveal) is the robust asymmetric uncertainty — <b>width = cost, height = quality</b>. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
       <h3 class="blocktitle">Pareto frontier — the best intelligence per cost</h3>
-      <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as the landscape above, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is the <b>frontier price envelope</b> — the cost the frontier charges for a given quality — the reference for the value score below.</p>
+      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The faint grey curve is the frontier <b>price envelope</b> — the reference for the value score below.</p>
       <div id="pareto-blocks" class="pareto-blocks"></div>
     </div>
     <details class="fold">
@@ -259,60 +245,61 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
         </div>
       </div>
     </details>
-    <div class="card pad block">
-      <h3 class="blocktitle">Best value by task tier — what to actually run</h3>
-      <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b>; for each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
-      <div class="grid" id="tier-cards"></div>
-      <div id="tier-crown"></div>
-      <details class="fold">
-        <summary>Tune the target complexity windows (q*, σ)</summary>
-        <div class="fold-body pad"><div id="tier-tuner"></div></div>
-      </details>
-    </div>
+    <details class="fold">
+      <summary>Best value by task tier — what to actually run</summary>
+      <div class="card pad">
+        <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b>; for each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
+        <div class="grid" id="tier-cards"></div>
+        <div id="tier-crown"></div>
+        <details class="fold">
+          <summary>Tune the target complexity windows (q*, σ)</summary>
+          <div class="fold-body pad"><div id="tier-tuner"></div></div>
+        </details>
+      </div>
+    </details>
   </section>
 
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
-    <details class="fold-sec">
-    <summary>The normalized matrix</summary>
-    <div class="fold-sec-body">
-    <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
-    <div class="card pad chartbox">
-      <table id="matrix-tbl">
-        <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Rel. quality<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
-        <tbody></tbody>
-      </table>
-    </div>
-    <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
-    </div></details>
+    <details class="fold">
+      <summary>The normalized matrix</summary>
+      <div class="card pad">
+        <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
+        <div class="chartbox">
+          <table id="matrix-tbl">
+            <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Rel. quality<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+      </div>
+    </details>
   </section>
 
   <!-- ============ SOURCES ============ -->
   <section id="graph">
-    <details class="fold-sec">
-    <summary>The measurement sources</summary>
-    <div class="fold-sec-body">
-    <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b> — <b>179 same-task measurement points</b> in total. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
-    <div class="card pad">
-      <h3 id="edge-title" class="blocktitle">The sources that weave the links</h3>
-      <div class="chartbox"><table id="edge-tbl">
-        <thead><tr><th>Source</th><th>Actual config (harness · effort)</th><th>Type</th><th>Linked couples (same task)</th></tr></thead>
-        <tbody></tbody>
-      </table></div>
-    </div>
-    </div></details>
+    <details class="fold">
+      <summary>The measurement sources</summary>
+      <div class="card pad">
+        <p class="sub">Every ratio comes from a source that measured ≥2 (model, effort) couples <b>on the same task</b> — <b>179 same-task measurement points</b> in total. Each row below is one such source, with the <b>actual configuration</b> we verified (harness · effort), its <b>type</b>, and the <b>couples it links</b>.</p>
+        <div class="chartbox"><table id="edge-tbl">
+          <thead><tr><th>Source</th><th>Actual config (harness · effort)</th><th>Type</th><th>Linked couples (same task)</th></tr></thead>
+          <tbody></tbody>
+        </table></div>
+      </div>
+    </details>
   </section>
 
   <!-- ============ METHOD ============ -->
   <section id="confidence">
-    <details class="fold-sec">
-    <summary>How the numbers are built — the method</summary>
-    <div class="fold-sec-body">
-    <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
-    <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;4.8&nbsp;@medium</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
     <details class="fold">
-      <summary>The full procedure — six steps</summary>
-      <div class="fold-body pad">
+      <summary>How the numbers are built — the method</summary>
+      <div class="card pad">
+        <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
+        <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;4.8&nbsp;@medium</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
+        <details class="fold">
+          <summary>The full procedure — six steps</summary>
+          <div class="fold-body pad">
         <ol class="steps">
           <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources — task sizes are incomparable. We keep only sources that measure ≥2 (model,&nbsp;effort) couples <b>on the same task</b>; their <b>ratio</b> cancels the task-size variance.</li>
           <li><b>The (model, effort) couple is atomic.</b> Each node is one indivisible couple. We never assume "effort" has the same effect across models — no model×effort decomposition, because separability would be a false assumption.</li>
@@ -321,9 +308,10 @@ details.fold-sec>summary .fold-hint{margin-left:auto;font-family:-apple-system,s
           <li><b>Unlinked couples are flagged, never invented.</b> A couple with no measured edge is left n/a or given an <b>explicitly wide band</b> — one model's effort shape is never used as a template for another.</li>
           <li><b>The band = agreement.</b> Uncertainty is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it, and asymmetric. Tight agreement → narrow band; disagreement → wide band.</li>
         </ol>
+          </div>
+        </details>
       </div>
     </details>
-    </div></details>
   </section>
 
   <div class="foot">
@@ -447,7 +435,7 @@ function valueScoreOf(gevT,rms,p){ const s=(c,q)=>Math.tanh((gevT(symT(q))-Math.
   return 0.5*s(p.c,p.q)+0.125*(s(p.clo,p.q)+s(p.chi,p.q)+s(p.c,p.qlo)+s(p.c,p.qhi)); }
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=1100,H=619,mL=58,mR=64,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; trimmed right margin so the plot extends
+  const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
   // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -462,8 +450,8 @@ function drawB(){
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  axisTitle(s,mL+iw/2,H-26,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
-  axisTitle(s,15,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 15 ${mT+ih/2})`);
+  axisTitle(s,mL+iw/2,H-30,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB");                     // faint asymmetric uncertainty ovals, behind
@@ -488,7 +476,7 @@ function drawB(){
 // point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=1100,H=619,mL=54,mR=64,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
+  const W=1100,H=619,mL=54,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
   // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -503,7 +491,7 @@ function drawPareto(){
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  axisTitle(s,mL+iw/2,H-24,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
+  axisTitle(s,mL+iw/2,H-28,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
   axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
@@ -564,10 +552,10 @@ function fillScoreTable(scored){
 // with the chart. TWCOL = one colour per tier window.
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 const TIERS=[
-  {key:"triage",  name:"Triage &amp; volume", q:0.75, sig:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday build",      q:0.95, sig:1.20, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Professional",        q:1.05, sig:1.20, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Cutting-Edge",        q:1.25, sig:1.20, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Grunt work",             q:0.75, sig:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:1.20, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:1.20, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:1.20, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 function tierPicks(){
   const rows=[];
@@ -592,8 +580,9 @@ function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  const cardHTML=(q,name,col,w,ex)=>`<div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Q* ${q.toFixed(2)} – ${name}</span></div>
+  // noQ → header-mirror cards & the top crown: drop the "Q* …" prefix, keep the full card layout
+  const cardHTML=(q,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
+      <div class="tier-head"><span class="tier-name">${noQ?'':`Q* ${q.toFixed(2)} – `}${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
@@ -601,20 +590,21 @@ function drawTiers(){
         </div>
         <div class="tier-yield">${Math.round(w.norm)}</div>
       </div>
-      <span class="ex">${ex}</span>
+      ${ex?`<span class="ex">${ex}</span>`:''}
     </div>`;
-  const cardsHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
-  host.innerHTML=cardsHTML;
-  const top=document.getElementById("tier-cards-top"); if(top) top.innerHTML=cardsHTML;   // same full style, mirrored near the header
+  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");        // detailed cards: keep Q*
+  const top=document.getElementById("tier-cards-top");
+  if(top) top.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // near-header cards: labels only, no Q*
   const c=crown, col=cvar(MODELS[c.m].c);
-  const crownHTML=note=>`<div class="card pad crown">
+  const crT=document.getElementById("tier-crown-top");   // best-overall above the header cards: SAME tier-card layout (title · model+cost/quality · big score)
+  if(crT) crT.innerHTML=cardHTML(0,"👑 Best overall",col,c,"",true);
+  const cr=document.getElementById("tier-crown");   // the detailed section keeps the explained crown
+  if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      ${note?`<p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>`:''}
+      <p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>
     </div>`;
-  const cr=document.getElementById("tier-crown"); if(cr) cr.innerHTML=crownHTML(true);
-  const crT=document.getElementById("tier-crown-top"); if(crT) crT.innerHTML=crownHTML(false);   // note-less copy above the header cards
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
 // plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.
