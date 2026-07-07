@@ -13,14 +13,11 @@ const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.se
 const logTicks=(vmin,vmax)=>{const o=[];for(let e=Math.floor(Math.log10(vmin));Math.pow(10,e)<=vmax*1.0001;e++)for(let b=1;b<=9;b++){const v=b*Math.pow(10,e);if(v>=vmin*0.999&&v<=vmax*1.001)o.push(v);}return o;};
 const tickLbl=v=>{const m=Math.round(v/Math.pow(10,Math.floor(Math.log10(v)+1e-9)));return m===1||m===2||m===5;};
 const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag,step=(n<1.5?1:n<3?2:n<7?5:10)*mag,o=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)o.push(Math.round(t*1e4)/1e4);return o;};
-// least-squares quadratic q = a + b·x + d·x² (used to fit the Pareto-frontier envelope in log-cost)
-function solve3(A,b){ const M=A.map((r,i)=>[...r,b[i]]);
-  for(let c=0;c<3;c++){ let piv=c; for(let r=c+1;r<3;r++) if(Math.abs(M[r][c])>Math.abs(M[piv][c])) piv=r; [M[c],M[piv]]=[M[piv],M[c]];
-    for(let r=0;r<3;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<4;k++) M[r][k]-=f*M[c][k]; } }
-  return [M[0][3]/M[0][0],M[1][3]/M[1][1],M[2][3]/M[2][2]]; }
-function quadFit(xs,ys){ const S=[0,0,0,0,0],T=[0,0,0];
-  for(let i=0;i<xs.length;i++){ const x=xs[i],y=ys[i]; let xp=1; for(let k=0;k<5;k++){S[k]+=xp; xp*=x;} let xq=1; for(let k=0;k<3;k++){T[k]+=xq*y; xq*=x;} }
-  return solve3([[S[0],S[1],S[2]],[S[1],S[2],S[3]],[S[2],S[3],S[4]]],T); }
+// least-squares log fit q = A + B·log10(c) — monotone, diminishing-returns envelope for the Pareto frontier
+// (a power law overshoots the quality plateau; a quadratic turns back down at high cost — the log does neither).
+function logFit(xs,ys){ const n=xs.length, mx=xs.reduce((a,b)=>a+b,0)/n, my=ys.reduce((a,b)=>a+b,0)/n;
+  let sxy=0,sxx=0; for(let i=0;i<n;i++){ sxy+=(xs[i]-mx)*(ys[i]-my); sxx+=(xs[i]-mx)*(xs[i]-mx); }
+  const B=sxy/sxx; return [my-B*mx, B]; }
 
 // ---- COST is now DATA-DRIVEN: relative cost per (model,effort) [rel, ci_lo, ci_hi], anchored opus-4.8@medium,
 // computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
@@ -164,8 +161,8 @@ function drawPareto(){
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
-  // Fit a smooth quadratic ENVELOPE to the frontier (quality vs log-cost); draw it faint, BEHIND everything else.
-  const fit=quadFit(par.map(p=>Math.log10(p.c)),par.map(p=>p.q)), fev=x=>fit[0]+fit[1]*x+fit[2]*x*x;
+  // Fit a smooth logarithmic ENVELOPE to the frontier (quality vs log-cost); draw it faint, BEHIND everything else.
+  const fit=logFit(par.map(p=>Math.log10(p.c)),par.map(p=>p.q)), fev=x=>fit[0]+fit[1]*x;
   { const cmn=Math.min(...par.map(p=>p.c)), cmx=Math.max(...par.map(p=>p.c)), lmn=Math.log10(cmn), lmx=Math.log10(cmx); let d="";
     for(let i=0;i<=56;i++){ const lx=lmn+(lmx-lmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,lx))+" "+Y(fev(lx))+" "; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.5})); }
@@ -197,14 +194,14 @@ function drawPareto(){
 function fillScoreTable(scored){
   const tb=document.querySelector("#score-tbl tbody"); if(!tb) return; tb.innerHTML="";
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
-  scored.slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),
+  scored.filter(p=>p.front).slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),   // frontier couples only
     sc=p.score>=0?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.abs(p.score)*0.52)*100),
     pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:${sc}">${p.score>=0?'+':''}${p.score.toFixed(2)}</span>`;
     const tr=document.createElement("tr");
     tr.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
       +`<td class="num">${p.c.toFixed(2)}×</td><td class="num">${p.q.toFixed(2)}×</td>`
       +`<td style="min-width:96px">${pill}</td>`
-      +`<td>${p.front?'<span class="frontbadge">◆ frontier</span>':'<span class="faint">dominated</span>'}</td>`;
+      +`<td style="text-align:left;color:${sc};font-size:12px">${p.score>=0?'above envelope':'below envelope'}</td>`;
     tb.appendChild(tr); }); }
 // ---- BEST-YIELD-BY-TASK-TIER + best-of-both-worlds crown (data-driven from COSTGRID × QUALGRID) ----
 // Four task-complexity tiers, defined by the QUALITY window a task demands (relative quality, anchor
