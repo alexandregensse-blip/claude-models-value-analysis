@@ -17,14 +17,14 @@
     <p class="sub">One curve per model, one point per effort level (low → max). <b>X axis = relative cost</b>, <b>Y axis = relative quality</b> — <b>both computed identically</b>&nbsp;: we never compare two raw benchmark scores across benchmarks (incompatible scales); within each benchmark we take the <b>ratio between couples</b>, normalise the benchmark to <b>Opus 4.8 @medium = 1.0</b> (÷ the anchor when present, else a ×0.5-weighted bridge) and consolidate by <b>source-weighted median</b>. The <b>oval</b> = a <b>robust, asymmetric</b> uncertainty band (per-side spread with <b>Huber ±1.5·MAD</b> clipping&nbsp;: an outlier benchmark widens its side but doesn't dominate&nbsp;; width = cost, height = quality). It is <b>centred on the median</b> (the dot is always inside), the quality axis is <b>dilated near parity (1.0)</b> to separate near-equal models, and every oval is <b>faint until you hover it</b>. <b>Haiku 4.5</b> is not plotted here (see §2, §6 and the Pareto).</p>
     <div class="card pad">
       <div class="legend" id="legendB"></div>
-      <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 545" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
+      <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
       <p class="cap"><b>Both axes come from the same couple-atomic method</b>&nbsp;: same-task ratios → per-benchmark normalisation → weighted-median consolidation. The <b>effort→quality</b> rise is therefore <b>measured</b> (CursorBench, OSWorld, Braintrust, zenn… sweep effort), not assumed; cost ladders are monotone (the quality dip at max on Fable / Sonnet 4.6 is the real over-thinking inverted-U). <b>Bounds and gridlines recomputed dynamically.</b></p>
     </div>
     <div class="card pad" style="margin-top:14px">
       <h3>Pareto frontier — the best intelligence per cost</h3>
       <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as §1, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
-      <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 470" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
+      <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
       <p id="pareto-note" class="paretoline"></p>
       <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less).</p>
     </div>

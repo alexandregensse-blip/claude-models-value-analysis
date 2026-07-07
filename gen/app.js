@@ -74,8 +74,10 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
   const own=(Q,L)=>Q.x===L.ax&&Q.y===L.ay;
   for(let it=0; it<300; it++){
     labs.forEach(L=>{ let fx=0,fy=0, bx=0,by=0,n=0;
-      ppix.forEach(Q=>{ if(Math.hypot(Q.x-L.ax,Q.y-L.ay)<48){ bx+=Q.x; by+=Q.y; n++; }
-        if(!own(Q,L)){ const dx=L.lx-Q.x, dy=L.ly-Q.y, d=Math.hypot(dx,dy); if(d<32&&d>0){ fx+=dx/d*(32-d)/32*1.6; fy+=dy/d*(32-d)/32*1.6; } } });
+      ppix.forEach(Q=>{ if(Math.hypot(Q.x-L.ax,Q.y-L.ay)<72){ bx+=Q.x; by+=Q.y; n++; }                       // barycentre over a wider radius
+        if(!own(Q,L)){ const dx=L.lx-Q.x, dy=L.ly-Q.y, d=Math.hypot(dx,dy);
+          if(d>0&&d<32){ fx+=dx/d*(32-d)/32*1.6; fy+=dy/d*(32-d)/32*1.6; }                                    // strong close repulsion
+          else if(d>0&&d<170){ fx+=dx/d*(170-d)/170*0.35; fy+=dy/d*(170-d)/170*0.35; } } });                  // minor repulsion from ALL points
       if(n>1){ bx/=n; by/=n; const dx=L.ax-bx, dy=L.ay-by, d=Math.hypot(dx,dy)||1; fx+=dx/d*0.7; fy+=dy/d*0.7; }
       segs.forEach(g=>{ const v=segVec(L.lx,L.ly,g[0],g[1],g[2],g[3]), d=Math.hypot(v[0],v[1]); if(d<19&&d>0){ fx+=v[0]/d*(19-d)/19*1.5; fy+=v[1]/d*(19-d)/19*1.5; } });
       labs.forEach(P=>{ if(P===L) return;
@@ -93,7 +95,7 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
 
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=1100,H=545,mL=58,mR=124,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // wide (fills body); extra width → cost axis + labels breathe
+  const W=1100,H=619,mL=58,mR=100,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra width → cost axis + labels breathe
   // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -134,7 +136,7 @@ function drawB(){
 // point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=1100,H=470,mL=54,mR=124,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
+  const W=1100,H=619,mL=54,mR=100,mT=20,mB=52, iw=W-mL-mR, ih=H-mT-mB;
   // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -151,10 +153,10 @@ function drawPareto(){
   qGrid(s,Y,mL,iw,mT,ih);
   let a=el("text",{x:mL+iw/2,y:H-10,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle"});a.textContent="Relative cost  (Opus 4.8 @medium = 1.0 · log scale)";s.appendChild(a);
   a=el("text",{x:13,y:mT+ih/2,fill:cvar('--muted'),"font-size":12,"text-anchor":"middle",transform:`rotate(-90 13 ${mT+ih/2})`});a.textContent="Relative quality  (Opus 4.8 @medium = 1.0 · dilated near parity)";s.appendChild(a);
-  const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipP");
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
+  const ells=drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP");   // ovals only on the frontier points
   s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
   pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
     s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
@@ -189,7 +191,7 @@ function drawMatrix(){
   const tb=document.querySelector("#matrix-tbl tbody"); tb.innerHTML="";
   const rows=Object.keys(M).sort((a,b)=>M[b].intel-M[a].intel);
   for(const m of rows){ const md=MODELS[m], tr=document.createElement("tr");
-    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill">task-size</span>':''}</td>`;
+    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill" title="Cost is strongly task-size dependent: Sonnet 5 is verbose (~2.5x the tokens of Opus 4.8), so its relative cost is ~0.7x on short tasks but up to ~1.6x on long agentic ones — hence the wide CI.">size-sensitive</span>':''}</td>`;
     if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
       row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>merged · ${c[1]}</small></div></td>`;
     } else {
