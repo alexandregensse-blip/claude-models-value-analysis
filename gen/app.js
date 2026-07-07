@@ -13,11 +13,15 @@ const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.se
 const logTicks=(vmin,vmax)=>{const o=[];for(let e=Math.floor(Math.log10(vmin));Math.pow(10,e)<=vmax*1.0001;e++)for(let b=1;b<=9;b++){const v=b*Math.pow(10,e);if(v>=vmin*0.999&&v<=vmax*1.001)o.push(v);}return o;};
 const tickLbl=v=>{const m=Math.round(v/Math.pow(10,Math.floor(Math.log10(v)+1e-9)));return m===1||m===2||m===5;};
 const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag,step=(n<1.5?1:n<3?2:n<7?5:10)*mag,o=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)o.push(Math.round(t*1e4)/1e4);return o;};
-// least-squares log fit q = A + B·log10(c) — monotone, diminishing-returns envelope for the Pareto frontier
-// (a power law overshoots the quality plateau; a quadratic turns back down at high cost — the log does neither).
-function logFit(xs,ys){ const n=xs.length, mx=xs.reduce((a,b)=>a+b,0)/n, my=ys.reduce((a,b)=>a+b,0)/n;
-  let sxy=0,sxx=0; for(let i=0;i<n;i++){ sxy+=(xs[i]-mx)*(ys[i]-my); sxx+=(xs[i]-mx)*(xs[i]-mx); }
-  const B=sxy/sxx; return [my-B*mx, B]; }
+// least-squares quadratic y = a + b·x + c·x² (Gaussian elimination on the 3×3 normal equations).
+// Used to fit the frontier envelope as a CONCAVE curve in the dilated metric → a clean log shape on the chart.
+function solve3(A,b){ const M=A.map((r,i)=>[...r,b[i]]);
+  for(let c=0;c<3;c++){ let piv=c; for(let r=c+1;r<3;r++) if(Math.abs(M[r][c])>Math.abs(M[piv][c])) piv=r; [M[c],M[piv]]=[M[piv],M[c]];
+    for(let r=0;r<3;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<4;k++) M[r][k]-=f*M[c][k]; } }
+  return [M[0][3]/M[0][0],M[1][3]/M[1][1],M[2][3]/M[2][2]]; }
+function quadFit(xs,ys){ const S=[0,0,0,0,0],T=[0,0,0];
+  for(let i=0;i<xs.length;i++){ const x=xs[i],y=ys[i]; let xp=1; for(let k=0;k<5;k++){S[k]+=xp; xp*=x;} let xq=1; for(let k=0;k<3;k++){T[k]+=xq*y; xq*=x;} }
+  return solve3([[S[0],S[1],S[2]],[S[1],S[2],S[3]],[S[2],S[3],S[4]]],T); }
 
 // ---- COST is now DATA-DRIVEN: relative cost per (model,effort) [rel, ci_lo, ci_hi], anchored opus-4.8@medium,
 // computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
@@ -162,9 +166,9 @@ function drawPareto(){
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
-  // Fit the frontier ENVELOPE in the chart's DILATED quality metric: T(q) = A + B·log10(c). Since the Y pixel is affine
-  // in T, this renders as a STRAIGHT line on the chart (a clean log). Draw it faint, BEHIND everything else.
-  const fit=logFit(par.map(p=>Math.log10(p.c)),par.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x, fev=x=>symTinv(fevT(x));
+  // Fit the frontier ENVELOPE in the chart's DILATED quality metric as a CONCAVE quadratic: T(q) = a + b·x + c·x² (x=log10 cost).
+  // Concave (c<0) → on the chart (Y pixel affine in T) it renders as a LOG SHAPE: fast rise at low cost, flattening at high cost.
+  const fit=quadFit(par.map(p=>Math.log10(p.c)),par.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x, fev=x=>symTinv(fevT(x));
   { const cmn=Math.min(...par.map(p=>p.c)), cmx=Math.max(...par.map(p=>p.c)), lmn=Math.log10(cmn), lmx=Math.log10(cmx); let d="";
     for(let i=0;i<=56;i++){ const lx=lmn+(lmx-lmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,lx))+" "+Y(fev(lx))+" "; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.5})); }
