@@ -180,11 +180,12 @@ def ratio_grid(field):
       3. Each benchmark then yields one normalised estimate per couple = exp(log value − offset), with
          weight = (#independent sources) × (0.5 if bridged). The global g[couple] is the source-weighted MEDIAN
          of those estimates (robust to task-complexity outliers); the anchor is pinned to 0 each pass. Iterate.
-      4. central = exp(g[couple]) = weighted median; band = **weighted IQR** [P25, P75] of the same estimates —
-         robust AND asymmetric, so it captures skew (a symmetric ±MAD/±σ would not) while still ignoring a lone
-         outlier benchmark. Weighted quantiles use Hazen midpoint positions + linear interpolation; the dot is
-         clamped inside the box. A single-benchmark node gets a degenerate [c,c,c] box. Haiku 4.5 → one 'solo'
-         node (no effort ladder)."""
+      4. central = exp(g[couple]) = weighted median; band = **per-side Huber spread**, centred on the median:
+         deviations (log estimate − log median) are clipped to ±1.5·MAD, then the lower/upper band = median·exp(∓RMS
+         of the clipped negative/positive deviations). This is robust (a wild outlier is capped at 1.5·MAD) yet
+         still COUNTS outliers (they widen their side up to the cap — unlike IQR which discards them), and it is
+         ASYMMETRIC (captures skew). Centred on the median → the plotted dot is always inside the band. A
+         single-benchmark node gets a degenerate [c,c,c] box. Haiku 4.5 → one 'solo' node (no effort ladder)."""
     import math, collections
     CUR = set(MX)                                            # 6 current models
     EFFOK = {"low","medium","high","xhigh","max","solo"}     # 'solo' = haiku 4.5 (no discrete effort)
@@ -216,24 +217,18 @@ def ratio_grid(field):
         ng = {c: wmedian([(cv[c]-o[b], wt(b,c)) for b, cv in bench.items() if c in cv]) for c in couples}
         a = ng[ANCHOR]; g = {c: ng[c]-a for c in couples}    # pin anchor to 1.0 (log 0)
     o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
-    def wquant(P, q):                    # weighted quantile: Hazen midpoint positions + linear interpolation
-        P = sorted(P); W = sum(w for _, w in P)
-        if len(P) == 1 or W == 0: return P[0][0]
-        acc = 0.0; pts = []
-        for v, w in P: pts.append(((acc + w/2)/W, v)); acc += w
-        if q <= pts[0][0]:  return pts[0][1]
-        if q >= pts[-1][0]: return pts[-1][1]
-        for i in range(1, len(pts)):
-            (p0,v0),(p1,v1) = pts[i-1], pts[i]
-            if q <= p1: return v0 + (v1-v0)*(q-p0)/(p1-p0)
-        return pts[-1][1]
     def cell(n):
         if n not in couples: return None
         E = [(cv[n]-o[b], wt(b,n)) for b, cv in bench.items() if n in cv]
-        c = math.exp(wmedian(E))                                           # central = weighted median (unchanged)
+        med = wmedian(E); c = math.exp(med)                                # central = weighted median (unchanged)
         if len(E) < 2: return [round(c,2), round(c,2), round(c,2)]         # single benchmark → degenerate box
-        lo, hi = math.exp(wquant(E,0.25)), math.exp(wquant(E,0.75))        # robust ASYMMETRIC band = weighted IQR (P25–P75)
-        return [round(c,2), round(min(lo,c),2), round(max(hi,c),2)]        # clamp so the median dot stays inside the box
+        s   = 1.4826 * wmedian([(abs(l-med), w) for l, w in E]) or 1e-9    # robust scale (MAD)
+        cap = 1.5 * s                                                      # Huber: clip each deviation to ±1.5·MAD
+        neg = [(max(l-med,-cap), w) for l, w in E if l < med]             # per-side RMS of the CLIPPED deviations →
+        pos = [(min(l-med, cap), w) for l, w in E if l > med]             # asymmetric band that COUNTS outliers but caps them
+        lo  = c*math.exp(-(sum(w*d*d for d,w in neg)/sum(w for _,w in neg))**0.5) if neg else c
+        hi  = c*math.exp( (sum(w*d*d for d,w in pos)/sum(w for _,w in pos))**0.5) if pos else c
+        return [round(c,2), round(lo,2), round(hi,2)]                      # band centred on the median → dot always inside
     ORD = {"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],
            "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
            "sonnet-4.6":["low","medium","high","max"]}

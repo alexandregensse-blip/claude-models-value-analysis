@@ -3,8 +3,8 @@
 But : incorporer les données **coût + qualité par effort** des System Cards Anthropic dans `raw-data.csv`,
 puis `python3 gen/build.py`. Les grilles coût et qualité sont **couple-atomiques ROBUSTES** : ratios à tâche
 identique intra-benchmark → normalisation de chaque benchmark à l'ancre `opus-4.8@medium = 1.0` (÷ ancre, ou
-pont ×0,5 si absente) → **médiane pondérée** (poids = nb de sources) pour le centre, **IQR P25–P75** pour la bande
-(robuste, asymétrique). On ne compare **jamais** des valeurs brutes entre benchmarks — uniquement des **ratios au sein
+pont ×0,5 si absente) → **médiane pondérée** (poids = nb de sources) pour le centre, **Huber ±1,5·MAD par côté** pour la bande
+(robuste, asymétrique, centrée médiane). On ne compare **jamais** des valeurs brutes entre benchmarks — uniquement des **ratios au sein
 d'un même benchmark**. Benchmarks à couple unique exclus. Haiku 4.5 = nœud `solo` (pas de molette d'effort).
 
 ## Liste EXHAUSTIVE des System Cards (source : anthropic.com/system-cards, juillet 2026)
@@ -142,7 +142,7 @@ coûts digitalisés `digitized-logx`, jamais de valeur brute inter-benchmark (ra
 ## Rappels état projet (voir aussi HANDOFF.md)
 - 2 grilles data-driven via `gen/build.py::ratio_grid(field)` : `cost_grid()`=ratios de `cost_usd`,
   `quality_grid()`=ratios de `score`. Injectées `__COSTGRID__`/`__QUALGRID__` dans app.js.
-- §1 landscape : X=coût relatif, Y=qualité relative, **ellipse = IQR P25–P75** (asymétrique) par point. Haiku exclu du §1.
+- §1 landscape : X=coût relatif, Y=qualité relative (**axe symlog dilaté près de 1**), **ovale = Huber ±1,5·MAD** (asymétrique, centré médiane) par point. Haiku exclu du §1.
 - §3 GROUPS généré depuis le CSV (`groups_data()`). §6 régime no-think. Pareto dédié.
 - Corroboration (dernier état connu) : ~0 rouge ; `opus-4.7@medium` = orange (CursorBench seul).
 - Branche `task/improve`. Build : `python3 gen/build.py` → `cost-matrix.html`.

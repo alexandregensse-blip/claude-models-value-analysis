@@ -18,7 +18,7 @@ const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.fl
 // computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
 // index) + halo height (ey) + the tag flag stay hand-set here — they are capability priors, not cost.
 const COSTGRID=__COSTGRID__;
-const QUALGRID=__QUALGRID__;   // data-driven quality axis: {model:{effort:[central, lo, hi]}} — median + robust IQR (P25–P75) band
+const QUALGRID=__QUALGRID__;   // data-driven quality axis: {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
 const META={
   "fable-5":{intel:75.1,ey:2.2}, "opus-4.8":{intel:70.4,ey:1.4}, "sonnet-5":{intel:68.6,ey:2.6,tag:true},
   "opus-4.7":{intel:66.1,ey:2.2}, "sonnet-4.6":{intel:60.1,ey:1.6}, "haiku-4.5":{intel:40.9,ey:1.9},
@@ -36,35 +36,40 @@ function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=760,H=545,mL=58,mR=118,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // taller than wide → more vertical room for the compressed quality axis
-  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + IQR P25–P75 band). Haiku excluded here. Bounds DYNAMIC.
+  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
-      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
+      xmn=Math.min(xmn,d[0]); xmx=Math.max(xmx,d[0]); ymn=Math.min(ymn,q[0]); ymx=Math.max(ymx,q[0]);   // bounds from CENTRAL points only — the uncertainty ovals may overflow and clip cleanly
       pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const xlo=Math.log10(xmn)-0.05, xhi=Math.log10(xmx)+0.05, yb=ymn-0.04, yt=ymx+0.04, yp=8;   // tight vertical padding → spread the crowded quality band
+  const xlo=Math.log10(xmn)-0.06, xhi=Math.log10(xmx)+0.06, yp=8;
   const X=v=>mL+(Math.log10(v)-xlo)/(xhi-xlo)*iw;
-  const Y=v=>mT+yp+(1-(v-yb)/(yt-yb))*(ih-2*yp);
+  // Y = NON-LINEAR (symlog around the anchor 1.0): dilates the crowded near-parity band, compresses the sparse tails → points distinguishable
+  const SQ=0.07, TQ=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=TQ(ymn)-0.12, tt=TQ(ymx)+0.12;
+  const Y=v=>mT+yp+(1-(TQ(v)-tb)/(tt-tb))*(ih-2*yp);
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0)).replace('.',',');
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
-  linTicks(yb,yt,7).forEach(val=>{ const y=Y(val);
-    s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
-    const t=el("text",{x:mL-10,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(1).replace('.',',');s.appendChild(t);});
+  [0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
+    s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?'--opus48':'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
+    const t=el("text",{x:mL-10,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2).replace('.',',');s.appendChild(t);});
   let a=el("text",{x:mL+iw/2,y:H-12,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle"});a.textContent="Coût relatif  (Opus 4.8 @medium = 1,0 · échelle log)";s.appendChild(a);
-  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Qualité relative  (Opus 4.8 @medium = 1,0)";s.appendChild(a);
+  a=el("text",{x:16,y:mT+ih/2,fill:cvar('--muted'),"font-size":12.5,"text-anchor":"middle",transform:`rotate(-90 16 ${mT+ih/2})`});a.textContent="Qualité relative  (Opus 4.8 @medium = 1,0 · échelle dilatée près de 1)";s.appendChild(a);
   if(1>Math.pow(10,xlo)&&1<Math.pow(10,xhi)) s.appendChild(el("line",{x1:X(1),y1:mT,x2:X(1),y2:mT+ih,stroke:cvar('--opus48'),"stroke-width":1,"stroke-dasharray":"3 4","stroke-opacity":.5}));
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
-  // PASS 1 — all IQR ellipses BEHIND the data (robust band = P25–P75 cost × P25–P75 quality, asymmetric). Faint by default (opacity DEF);
-  // on hover, every ellipse that CONTAINS the cursor lights up (opacity HOV). Kept behind so highlights sit under the curves.
+  // PASS 1 — asymmetric Huber ovals BEHIND the data, centred on the median dot (per-side radii = ±band, so the dot is
+  // ALWAYS inside). Clipped to the plot rect (may overflow). Faint by default (DEF); on hover, every oval CONTAINING the cursor lights up (HOV).
+  const defs=el("defs"); const cp=el("clipPath",{id:"clipB"}); cp.appendChild(el("rect",{x:mL,y:mT,width:iw,height:ih})); defs.appendChild(cp); s.appendChild(defs);
+  const gEll=el("g",{"clip-path":"url(#clipB)"}); s.appendChild(gEll);
   const ells=[], DEF=0.15, HOV=0.78;
   for(const m in byM){ const col=cvar(MODELS[m].c);
-    byM[m].forEach(p=>{ const cx=(X(p.clo)+X(p.chi))/2, cy=(Y(p.qlo)+Y(p.qhi))/2,
-        rx=Math.max((X(p.chi)-X(p.clo))/2,0.6), ry=Math.max(Math.abs(Y(p.qlo)-Y(p.qhi))/2,0.6);
-      const elp=el("ellipse",{cx,cy,rx,ry,fill:col,"fill-opacity":0.4,stroke:col,"stroke-opacity":0.85,"stroke-width":1,opacity:DEF});
-      s.appendChild(elp); ells.push({el:elp,cx,cy,rx,ry}); }); }
+    byM[m].forEach(p=>{ const cx=X(p.c), cy=Y(p.q),
+        rxR=Math.max(X(p.chi)-cx,0.6), rxL=Math.max(cx-X(p.clo),0.6), ryU=Math.max(cy-Y(p.qhi),0.6), ryD=Math.max(Y(p.qlo)-cy,0.6);   // qhi = higher quality = smaller Y
+      const d=`M ${cx} ${cy-ryU} A ${rxR} ${ryU} 0 0 1 ${cx+rxR} ${cy} A ${rxR} ${ryD} 0 0 1 ${cx} ${cy+ryD} A ${rxL} ${ryD} 0 0 1 ${cx-rxL} ${cy} A ${rxL} ${ryU} 0 0 1 ${cx} ${cy-ryU} Z`;
+      const elp=el("path",{d,fill:col,"fill-opacity":0.4,stroke:col,"stroke-opacity":0.85,"stroke-width":1,opacity:DEF});
+      gEll.appendChild(elp); ells.push({el:elp,cx,cy,rxR,rxL,ryU,ryD}); }); }
   // PASS 2 — curves, points, effort + model labels (on top of the ellipses)
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
@@ -74,12 +79,13 @@ function drawB(){
     const lb=el("text",{x:X(last.c)+10,y:Y(last.q)+4,fill:cvar('--ink'),"font-size":12.5,"font-weight":600});lb.textContent=MODELS[m].label;s.appendChild(lb);
   }
   // hover: reveal ellipses under the cursor (property assignment → no duplicate listeners on redraw)
-  s.onmousemove=ev=>{ const q=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
-    ells.forEach(o=>o.el.setAttribute("opacity", (((q.x-o.cx)/o.rx)**2+((q.y-o.cy)/o.ry)**2<=1)?HOV:DEF)); };
+  s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
+    ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU;
+      o.el.setAttribute("opacity", ((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); }); };
   s.onmouseleave=()=>ells.forEach(o=>o.el.setAttribute("opacity",DEF));
   const lg=document.getElementById("legendB"); lg.innerHTML=
     Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = IQR P25–P75 (coût × qualité), asymétrique · <b>survol</b> pour révéler</span>`;
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>ellipse = incertitude robuste (Huber ±1,5·MAD, coût × qualité), asymétrique · <b>survol</b></span>`;
 }
 
 // ---- Dedicated Pareto chart: cost x intelligence scatter, dominated points faded, frontier joined ----
