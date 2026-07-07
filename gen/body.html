@@ -1,61 +1,61 @@
 <div class="wrap">
   <header>
-    <div class="eyebrow">Analyse de données · agrégée de <span class="nsrc">…</span> sources de mesure indépendantes</div>
-    <h1>Coût, effort et modèle&nbsp;: la matrice Claude</h1>
-    <p class="lede">Ce que coûte réellement chaque modèle Claude récent, à chaque niveau d'effort — reconstruit à partir de mesures publiques et ramené à un coût <em>relatif</em> par chaînage de comparaisons à tâche identique.</p>
+    <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span> independent measurement sources</div>
+    <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
+    <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
     <div class="meta">
-      <div><span class="k">Base de référence</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1,00</b></div>
-      <div><span class="k">Sources de mesure</span><br><b><span class="nsrc">…</span> indépendantes</b></div>
-      <div><span class="k">Points same-task</span><br><b>90+</b></div>
-      <div><span class="k">Confiance globale</span><br><b>Moyenne&nbsp;→&nbsp;haute</b></div>
+      <div><span class="k">Baseline</span><br><b>Opus&nbsp;4.8 · medium&nbsp;= 1.00</b></div>
+      <div><span class="k">Measurement sources</span><br><b><span class="nsrc">…</span> independent</b></div>
+      <div><span class="k">Same-task points</span><br><b>90+</b></div>
+      <div><span class="k">Overall confidence</span><br><b>Medium&nbsp;→&nbsp;high</b></div>
     </div>
   </header>
 
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
-    <h2>1 · Le paysage consolidé</h2>
-    <p class="sub">Une courbe par modèle, un point par niveau d'effort (low → max). <b>Axe X = coût relatif</b>, <b>axe Y = qualité relative</b> — les <b>deux calculés à l'identique</b>&nbsp;: on ne compare jamais deux scores bruts de benchmarks différents (échelles incompatibles), on prend le <b>ratio de score entre deux couples au sein d'un même benchmark</b>, on normalise chaque benchmark à <b>Opus 4.8 @medium = 1,0</b> (÷ l'ancre si présente, sinon pont ×0,5) et on consolide par <b>médiane pondérée</b> (poids = nombre de sources). L'<b>ellipse</b> = bande d'incertitude <b>robuste et asymétrique</b> (écart-type par côté avec plafonnement <b>Huber ±1,5·MAD</b>&nbsp;: un benchmark aberrant élargit son côté mais ne domine pas&nbsp;; largeur = coût, hauteur = qualité). Elle est <b>centrée sur la médiane</b> (le point est toujours dedans) et l'axe qualité est <b>dilaté près de 1</b> pour distinguer les modèles très proches. Ellipse <b>plate</b> = un seul benchmark. <b>Haiku 4.5</b> n'est pas tracé ici (voir §2, §6 et le Pareto).</p>
+    <h2>1 · The consolidated landscape</h2>
+    <p class="sub">One curve per model, one point per effort level (low → max). <b>X axis = relative cost</b>, <b>Y axis = relative quality</b> — <b>both computed identically</b>&nbsp;: we never compare two raw benchmark scores across benchmarks (incompatible scales); within each benchmark we take the <b>ratio between couples</b>, normalise the benchmark to <b>Opus 4.8 @medium = 1.0</b> (÷ the anchor when present, else a ×0.5-weighted bridge) and consolidate by <b>source-weighted median</b>. The <b>oval</b> = a <b>robust, asymmetric</b> uncertainty band (per-side spread with <b>Huber ±1.5·MAD</b> clipping&nbsp;: an outlier benchmark widens its side but doesn't dominate&nbsp;; width = cost, height = quality). It is <b>centred on the median</b> (the dot is always inside), the quality axis is <b>dilated near parity (1.0)</b> to separate near-equal models, and every oval is <b>faint until you hover it</b>. <b>Haiku 4.5</b> is not plotted here (see §2, §6 and the Pareto).</p>
     <div class="card pad">
       <div class="legend" id="legendB"></div>
-      <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 545" role="img" aria-label="Intelligence vs coût relatif, une courbe par modèle, un point par effort"></svg></div>
-      <p class="cap"><b>Les deux axes viennent de la même méthode couple-atomique</b> (comme le coût)&nbsp;: ratios de score à tâche identique → graphe de liaison → consolidation. La montée <b>effort→qualité</b> est donc <b>mesurée</b> (CursorBench, OSWorld, Braintrust, zenn… balaient l'effort), pas un a priori ; les courbes sont monotones. <b>Bornes et quadrillage recalculés dynamiquement.</b></p>
+      <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 545" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
+      <p class="cap"><b>Both axes come from the same couple-atomic method</b>&nbsp;: same-task ratios → per-benchmark normalisation → weighted-median consolidation. The <b>effort→quality</b> rise is therefore <b>measured</b> (CursorBench, OSWorld, Braintrust, zenn… sweep effort), not assumed; cost ladders are monotone (the quality dip at max on Fable / Sonnet 4.6 is the real over-thinking inverted-U). <b>Bounds and gridlines recomputed dynamically.</b></p>
     </div>
     <div class="card pad" style="margin-top:14px">
-      <h3>Frontière de Pareto — le meilleur rapport intelligence / coût</h3>
-      <p class="sub">Les couples <b>(modèle, effort) non dominés</b>&nbsp;: aucun autre couple n'offre <b>plus de qualité à coût égal ou inférieur</b>. Sur le graphe ci-dessous, les <b>points pleins reliés</b> forment la frontière ; les points <b>estompés</b> sont dominés (on paie plus sans gagner en capacité). L'axe Y est la <b>qualité relative</b> (mêmes ratios consolidés qu'au §1, ancre Opus 4.8 @medium = 1,0). Recalculé depuis les données mesurées&nbsp;:</p>
+      <h3>Pareto frontier — the best intelligence per cost</h3>
+      <p class="sub">The <b>non-dominated (model, effort) couples</b>&nbsp;: no other couple offers <b>more quality at equal or lower cost</b>. Below, the <b>solid joined points</b> form the frontier; <b>faded</b> points are dominated (you pay more without gaining capability). The Y axis is <b>relative quality</b> (same consolidated ratios as §1, anchor Opus 4.8 @medium = 1.0). Recomputed from the measured data&nbsp;:</p>
       <div class="legend" id="legendP"></div>
-      <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 470" role="img" aria-label="Frontière de Pareto : intelligence vs coût"></svg></div>
+      <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 470" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
       <p id="pareto-note" class="paretoline"></p>
-      <p class="cap">Lecture&nbsp;: de gauche à droite, chaque saut sur la frontière est le prochain palier « intelligence en plus » qui vaut son surcoût. Ce qui n'y figure pas est dominé (un autre couple fait au moins aussi bien pour moins cher).</p>
+      <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less).</p>
     </div>
   </section>
 
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
-    <h2>2 · La matrice normalisée</h2>
-    <p class="sub">Coût relatif par modèle × effort (base Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1,00), <b>trié par intelligence décroissante</b>. Ces valeurs sont <b>calculées</b> (pas saisies à la main) à partir des ratios <b>mesurés</b> à tâche identique&nbsp;: dans chaque benchmark on prend le ratio des couples, on normalise à Opus 4.8 @medium, puis chaque cellule = <b>médiane pondérée</b> des estimations par benchmark (poids = nombre de sources ; pont ×0,5). Intensité = coût ; le second nombre est l'<b>IC robuste</b> (Huber ±1,5·MAD par côté, asymétrique&nbsp;; large = benchmarks en désaccord). Pour repasser en dollars, multiplier par un coût-tâche de référence (p.ex. agentique&nbsp;≈&nbsp;$1,99/tâche pour Opus&nbsp;4.8&nbsp;@max sur l'AA Index).</p>
+    <h2>2 · The normalized matrix</h2>
+    <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.00), <b>sorted by decreasing intelligence</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus 4.8 @medium, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree). To get back to dollars, multiply by a reference task cost (e.g. agentic&nbsp;≈&nbsp;$1.99/task for Opus&nbsp;4.8&nbsp;@max on the AA Index).</p>
     <div class="card pad chartbox">
       <table id="matrix-tbl">
-        <thead><tr><th style="text-align:left">Modèle</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Intel.<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
+        <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Intel.<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <p class="cap">« Intel.&nbsp;@max » = indice Vals (composite finance+coding), mesuré à effort <b>max</b> — la qualité varie peu selon l'effort sur le code, donc cet indice reste une bonne approximation à high/xhigh aussi. <b>Haiku&nbsp;4.5</b> = une seule cellule fusionnée (<b>effort unique</b>&nbsp;: pas de paramètre effort discret, cf. §3/§6). n/a&nbsp;: effort non exposé (Sonnet&nbsp;4.6&nbsp;: pas de xhigh).</p>
+    <p class="cap">"Intel.&nbsp;@max" = Vals index (finance+coding composite), measured at <b>max</b> effort — quality varies little with effort on code, so this index is also a good approximation at high/xhigh. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see §3/§6). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
   </section>
 
   <!-- ============ LINKING GRAPH ============ -->
   <section id="graph">
-    <h2>3 · Le graphe de liaison — d'où vient chaque cellule</h2>
-    <p class="sub">Restreint aux <b>6 modèles courants</b> (Fable 5, Opus 4.8/4.7, Sonnet 5/4.6, Haiku 4.5) ; les modèles plus anciens n'apparaissent qu'en <b>arrière-plan estompé</b>, comme relais entre sources. Chaque <b>nœud</b> = un couple (modèle, effort) ; chaque <b>arête</b> = une source qui a mesuré ces couples <b>sur la même tâche</b>. Cellule <b>pleine</b> = mesurée ; <b>creuse</b> = inférée. Un <b><span style="color:#E0342A">cercle rouge</span></b> entoure tout nœud corroboré par <b>moins de 3 sources indépendantes</b>.</p>
+    <h2>3 · The linking graph — where each cell comes from</h2>
+    <p class="sub">Restricted to the <b>6 current models</b> (Fable 5, Opus 4.8/4.7, Sonnet 5/4.6, Haiku 4.5); older models appear only as a <b>faded background</b>, as relays between sources. Each <b>node</b> = a (model, effort) couple; each <b>edge</b> = a source that measured those couples <b>on the same task</b>. A <b>filled</b> cell = measured; <b>hollow</b> = inferred. A <b><span style="color:#E0342A">red circle</span></b> rings any node corroborated by <b>fewer than 3 independent sources</b>.</p>
     <div class="card pad">
       <div class="legend" id="legendG"></div>
-      <div class="chartbox"><svg id="chartG" viewBox="0 0 780 470" role="img" aria-label="Graphe de liaison des couples modèle-effort par source"></svg></div>
+      <div class="chartbox"><svg id="chartG" viewBox="0 0 780 470" role="img" aria-label="Linking graph of model-effort couples by source"></svg></div>
       <p class="cap" id="graphcap"></p>
     </div>
     <div class="card pad" style="margin-top:14px">
-      <h3 id="edge-title">Les sources qui tissent les liens</h3>
+      <h3 id="edge-title">The sources that weave the links</h3>
       <div class="chartbox"><table id="edge-tbl">
-        <thead><tr><th>Source</th><th>Config réelle (harness · effort)</th><th>Type</th><th>Couples reliés (même tâche)</th></tr></thead>
+        <thead><tr><th>Source</th><th>Actual config (harness · effort)</th><th>Type</th><th>Linked couples (same task)</th></tr></thead>
         <tbody></tbody>
       </table></div>
     </div>
@@ -63,84 +63,84 @@
 
   <!-- ============ RATIO-BY-PAIR ASSIGNMENT ============ -->
   <section id="ratios">
-    <h2>4 · Assigner les défauts — ratios par couple</h2>
-    <p class="sub">Pour chaque couple de modèles A/B, chaque source qui les mesure <b>au même effort</b> donne un point = ratio A/B. <b>Couleur = niveau d'effort</b> (les clusters) ; <b>gris = run @default</b> (effort à assigner). Regarde près de quel cluster tombe chaque point gris et dis-moi son effort. Échelle log ; survole un point pour la source.</p>
+    <h2>4 · Assigning defaults — ratios per pair</h2>
+    <p class="sub">For each model pair A/B, every source that measures them <b>at the same effort</b> gives one point = ratio A/B. <b>Colour = effort level</b> (the clusters); <b>grey = @default run</b> (effort to assign). Look at which cluster each grey point falls near. Log scale; hover a point for its source.</p>
     <div class="card pad">
       <div class="legend" id="legendR"></div>
-      <div class="chartbox"><svg id="chartR" role="img" aria-label="Ratios coût et tokens par couple de modèles"></svg></div>
-      <p class="cap">Chaque couple a <b>deux axes empilés</b> — <b>coût</b> (haut) et <b>tokens</b> (bas) — chacun à sa propre échelle log. Un <b>trait pointillé</b> relie le point coût et le point tokens quand ils viennent de la <b>même source</b>. Peu de sources publient des tokens → l'axe tokens est souvent vide. <b>Zoom §4</b> : Shift+molette sur un axe zoome son échelle (les axes/points se redessinent), glisser = déplacer, double-clic = réinitialiser.</p>
+      <div class="chartbox"><svg id="chartR" role="img" aria-label="Cost and token ratios per model pair"></svg></div>
+      <p class="cap">Each pair has <b>two stacked axes</b> — <b>cost</b> (top) and <b>tokens</b> (bottom) — each on its own log scale. A <b>dashed line</b> joins the cost point and the token point when they come from the <b>same source</b>. Few sources publish tokens → the token axis is often empty. <b>§4 zoom</b>: Shift+wheel over an axis zooms its scale (axes/points redraw), drag = pan, double-click = reset.</p>
     </div>
   </section>
 
   <!-- ============ CRITERIA ============ -->
   <section id="criteria">
-    <h2>5 · Ce qui déplace tout — les critères, avec exemples</h2>
-    <p class="sub">La matrice donne un ordre de grandeur. Ces quatre facteurs, chacun mesuré, la modulent fortement. Chaque carte donne un exemple chiffré réel.</p>
+    <h2>5 · What moves everything — the criteria, with examples</h2>
+    <p class="sub">The matrix gives an order of magnitude. These four factors, each measured, modulate it strongly. Each card gives a real, quantified example.</p>
     <div class="grid">
-      <div class="card pad crit"><h3>Type de tâche</h3>
-        <p>L'effort et le choix du modèle ne pèsent pas pareil selon la nature du travail.</p>
-        <span class="ex"><b>Code review</b> — Haiku&nbsp;4.5 obtient un F1 de 0,365 <b>à 1/3 du coût</b> de Sonnet&nbsp;4.6 (0,343). « Bigger isn't better » <span class="faint">(arxiv 2606.15689)</span>.<br><b>Raisonnement</b> — Opus&nbsp;4.5 medium→high&nbsp;: <b>+29&nbsp;% de score</b> pour 2,8× tokens <span class="faint">(PostTrainBench)</span>. Là, l'effort paie.<br><b>Coding pur</b> — relever le budget d'effort&nbsp;: <b>+0,27&nbsp;pt</b> sur SWE-Bench Pro <span class="faint">(2606.17930)</span>. Plateau.</span></div>
-      <div class="card pad crit"><h3>Complexité</h3>
-        <p>Plus la tâche est dure, plus l'effort coûte — jusqu'au point où il nuit.</p>
-        <span class="ex"><b>192 runs stratifiés</b> <span class="faint">(whitekumalabo)</span>&nbsp;: tâche facile&nbsp;≈&nbsp;$0,023 quel que soit l'effort ; tâche dure (L3) low→max&nbsp;= <b>×1,9</b>.<br><b>U inversé</b> — Sonnet&nbsp;4.6 sur orchestration&nbsp;: low 0&nbsp;% / medium 16,7&nbsp;% / high 6,7&nbsp;% — <b>high dégrade</b> <span class="faint">(2606.08878)</span>.</span></div>
-      <div class="card pad crit"><h3>Génération</h3>
-        <p>Les Opus récents font plus avec moins ; Sonnet&nbsp;5 est l'exception verbeuse.</p>
-        <span class="ex"><b>Opus&nbsp;4.8 vs 4.7</b>, même migration DB&nbsp;: 4.8 utilise ~moitié des tokens, <b>−40&nbsp;% de coût</b> <span class="faint">(FullStack, 5 runs)</span>.<br><b>Sonnet&nbsp;5</b> génère <b>~2,5× les tokens</b> d'Opus&nbsp;4.8 sur l'AA Index → $2,29/tâche &gt; $1,99 malgré un tarif/token plus bas.</span></div>
+      <div class="card pad crit"><h3>Task type</h3>
+        <p>Effort and model choice don't weigh the same depending on the nature of the work.</p>
+        <span class="ex"><b>Code review</b> — Haiku&nbsp;4.5 scores an F1 of 0.365 <b>at 1/3 the cost</b> of Sonnet&nbsp;4.6 (0.343). "Bigger isn't better" <span class="faint">(arxiv 2606.15689)</span>.<br><b>Reasoning</b> — Opus&nbsp;4.5 medium→high&nbsp;: <b>+29% score</b> for 2.8× tokens <span class="faint">(PostTrainBench)</span>. Here effort pays off.<br><b>Pure coding</b> — raising the effort budget&nbsp;: <b>+0.27&nbsp;pt</b> on SWE-Bench Pro <span class="faint">(2606.17930)</span>. Plateau.</span></div>
+      <div class="card pad crit"><h3>Complexity</h3>
+        <p>The harder the task, the more effort costs — up to the point where it hurts.</p>
+        <span class="ex"><b>192 stratified runs</b> <span class="faint">(whitekumalabo)</span>&nbsp;: easy task&nbsp;≈&nbsp;$0.023 regardless of effort; hard task (L3) low→max&nbsp;= <b>×1.9</b>.<br><b>Inverted U</b> — Sonnet&nbsp;4.6 on orchestration&nbsp;: low 0% / medium 16.7% / high 6.7% — <b>high degrades</b> <span class="faint">(2606.08878)</span>.</span></div>
+      <div class="card pad crit"><h3>Generation</h3>
+        <p>Recent Opus models do more with less; Sonnet&nbsp;5 is the verbose exception.</p>
+        <span class="ex"><b>Opus&nbsp;4.8 vs 4.7</b>, same DB migration&nbsp;: 4.8 uses ~half the tokens, <b>−40% cost</b> <span class="faint">(FullStack, 5 runs)</span>.<br><b>Sonnet&nbsp;5</b> generates <b>~2.5× the tokens</b> of Opus&nbsp;4.8 on the AA Index → $2.29/task &gt; $1.99 despite a lower per-token rate.</span></div>
       <div class="card pad crit"><h3>Cache &amp; harness</h3>
-        <p>Deux facteurs invisibles qui peuvent dominer le coût et le score.</p>
-        <span class="ex"><b>Cache</b> — même changement de code, cache cassé sur Sonnet&nbsp;: <b>$10,30 vs $3,83</b> pour Opus <span class="faint">(GitHub copilot #1770)</span>. L'agentique tourne à 90–96&nbsp;% de cache-read.<br><b>Harness</b> — Opus&nbsp;4.8 sur Terminal-Bench&nbsp;: <b>84,6&nbsp;% (AA) vs 71,9&nbsp;% (Vals)</b>, même modèle. Confound n°1.</span></div>
+        <p>Two invisible factors that can dominate both cost and score.</p>
+        <span class="ex"><b>Cache</b> — same code change, cache broken on Sonnet&nbsp;: <b>$10.30 vs $3.83</b> for Opus <span class="faint">(GitHub copilot #1770)</span>. Agentic work runs at 90–96% cache-read.<br><b>Harness</b> — Opus&nbsp;4.8 on Terminal-Bench&nbsp;: <b>84.6% (AA) vs 71.9% (Vals)</b>, same model. Confound #1.</span></div>
     </div>
   </section>
 
   <!-- ============ NO-THINK REGIME ============ -->
   <section id="nothink">
-    <h2>6 · Le régime sans thinking — le moins cher</h2>
-    <p class="sub">Certaines sources tournent <b>sans pensée étendue</b> (reasoning off / API brut). Ce n'est pas un point du balayage low→max&nbsp;: c'est un <b>régime de coût distinct</b>, le plancher. On le traite <b>couple-atomiquement</b>, exactement comme la §2&nbsp;: chaque source qui mesure deux modèles <b>au même régime sur la même tâche</b> donne un ratio de coût ; on médiane par couple. L'<b>indice coût par modèle</b> (Haiku&nbsp;4.5&nbsp;=&nbsp;1×) est <b>chaîné</b> le long des ratios mesurés — indicatif, pas une décomposition. <b>Fable&nbsp;5</b> et <b>Sonnet&nbsp;5</b> n'ont aucun run no-think publié → absents ici. <b>Haiku&nbsp;4.5</b> vit presque entièrement dans ce régime (il n'expose pas l'<code>effort</code> discret).</p>
+    <h2>6 · The no-thinking regime — the cheapest</h2>
+    <p class="sub">Some sources run <b>without extended thinking</b> (reasoning off / raw API). This is not a point on the low→max sweep&nbsp;: it is a <b>distinct cost regime</b>, the floor. We treat it <b>couple-atomically</b>, exactly like §2&nbsp;: each source that measures two models <b>in the same regime on the same task</b> gives a cost ratio; we take the median per pair. The <b>per-model cost index</b> (Haiku&nbsp;4.5&nbsp;=&nbsp;1×) is <b>chained</b> along the measured ratios — indicative, not a decomposition. <b>Fable&nbsp;5</b> and <b>Sonnet&nbsp;5</b> have no published no-think run → absent here. <b>Haiku&nbsp;4.5</b> lives almost entirely in this regime (it doesn't expose the discrete <code>effort</code> parameter).</p>
     <div class="card pad">
       <div class="chartbox"><table id="nothink-tbl">
-        <thead><tr><th>Couple A/B</th><th>ratio coût médian</th><th>#src</th><th>étendue</th></tr></thead>
+        <thead><tr><th>Pair A/B</th><th>median cost ratio</th><th>#src</th><th>range</th></tr></thead>
         <tbody>__NOTHINK_ROWS__</tbody>
       </table></div>
-      <p class="cap">« nothink » = pensée <b>prouvée désactivée</b> par la source. « défaut » = harnais laissé à sa config d'usine, thinking <b>non déclaré</b> — gardé <b>séparé</b> car config incertaine (à ne pas fusionner avec nothink). Étendue = min–max des ratios mesurés (dispersion inter-sources).</p>
+      <p class="cap">"nothink" = thinking <b>proven off</b> by the source. "default" = harness left at its factory config, thinking <b>unstated</b> — kept <b>separate</b> because the config is uncertain (do not merge with nothink). Range = min–max of the measured ratios (inter-source spread).</p>
     </div>
   </section>
 
   <!-- ============ CONFIDENCE + METHOD ============ -->
   <section id="confidence">
-    <h2>7 · Confiance &amp; méthode de fusion</h2>
+    <h2>7 · Confidence &amp; merge method</h2>
     <div class="grid">
       <div class="card pad">
-        <h3>Ce qui est solide</h3>
+        <h3>What is solid</h3>
         <ul class="tight">
-          <li><span class="conf c-high">HAUTE</span> Ancrages cross-modèle @medium (÷Opus 4.8)&nbsp;: <b>Fable ~2,1×</b>, <b>Sonnet 4.6 ~0,7×</b>, <b>Haiku 4.5 ~0,19×</b> (régime no-think, §6) — plusieurs méthodes indépendantes concordantes.</li>
-          <li><span class="conf c-med">MOYENNE</span> Pente d'effort en coût low→max&nbsp;: <b>×1,9</b> (Sonnet 4.6) à <b>×4–5</b> (Opus 4.7 / Sonnet 5) — plus raide sur le harnais agentique (CursorBench) que sur computer-use (OSWorld).</li>
-          <li><span class="conf c-med">MOYENNE</span> Plateau qualité + U inversé sur code/agentique (multi-papiers).</li>
+          <li><span class="conf c-high">HIGH</span> Cross-model anchors @medium (÷Opus 4.8)&nbsp;: <b>Fable ~2.1×</b>, <b>Sonnet 4.6 ~0.7×</b>, <b>Haiku 4.5 ~0.19×</b> (no-think regime, §6) — several independent methods agree.</li>
+          <li><span class="conf c-med">MEDIUM</span> Cost effort slope low→max&nbsp;: <b>×1.9</b> (Sonnet 4.6) to <b>×4–5</b> (Opus 4.7 / Sonnet 5) — steeper on the agentic harness (CursorBench) than on computer-use (OSWorld).</li>
+          <li><span class="conf c-med">MEDIUM</span> Quality plateau + inverted-U on code/agentic (multi-paper).</li>
         </ul>
       </div>
       <div class="card pad">
-        <h3>Ce qui reste large</h3>
+        <h3>What stays wide</h3>
         <ul class="tight">
-          <li><span class="conf c-low">LARGE</span> <b>Sonnet 5</b>&nbsp;: médiane mesurée <b>~0,7× Opus 4.8</b> (moins cher), mais queue verbeuse jusqu'à <b>~1,6×</b> sur long agentique (AA) — d'où l'IC large.</li>
-          <li><span class="conf c-low">LARGE</span> Opus 4.7 vs 4.8&nbsp;: sources contradictoires (effort/harness) → 0,6–1,4×.</li>
-          <li><span class="conf c-low">LARGE</span> Queues xhigh/max et modèles sans sweep d'effort mesuré.</li>
+          <li><span class="conf c-low">WIDE</span> <b>Sonnet 5</b>&nbsp;: measured median <b>~0.7× Opus 4.8</b> (cheaper), but a verbose tail up to <b>~1.6×</b> on long agentic work (AA) — hence the wide CI.</li>
+          <li><span class="conf c-low">WIDE</span> Opus 4.7 vs 4.8&nbsp;: contradictory sources (effort/harness) → 0.6–1.4×.</li>
+          <li><span class="conf c-low">WIDE</span> xhigh/max tails and models with no measured effort sweep.</li>
         </ul>
       </div>
     </div>
     <div class="card pad" style="margin-top:14px">
-      <h3>Comment le coût relatif est fusionné — le procédé</h3>
+      <h3>How the relative cost is merged — the procedure</h3>
       <ol class="steps">
-        <li><b>Ratios à tâche identique.</b> On ne compare jamais deux dollars bruts de sources différentes (tailles de tâche incomparables). On ne retient que les sources mesurant ≥2 modèles/efforts <b>sur la même tâche</b> : leur <b>rapport</b> annule la variance de tâche. Ex.&nbsp;: WorkBench donne Sonnet&nbsp;4.6/Opus&nbsp;4.8 = 0,58 sur ses tâches, quel que soit leur coût absolu.</li>
-        <li><b>Le couple (modèle, effort) est atomique.</b> Chaque nœud = un couple indivisible. On ne suppose <b>jamais</b> que « l'effort » ait le même effet d'un modèle à l'autre&nbsp;: passer Haiku à max n'est pas le même multiplicateur que passer Opus à max. Pas de décomposition modèle×effort — la séparabilité serait une hypothèse fausse.</li>
-        <li><b>Graphe de liaison.</b> Chaque arête = un ratio mesuré entre deux couples sur la même tâche (deux modèles au même effort, ou deux efforts du même modèle). On place un couple en <b>multipliant les ratios le long du chemin</b> qui le relie à la base <b>Opus 4.8 @medium</b>. Plusieurs chemins → sa valeur = la <b>médiane</b> des produits (robuste aux confounds cache/harness). Ex.&nbsp;: Fable/Opus 4.8 <b>à config appariée</b> vu à 1,95 (WorkBench), 2,0 (ctala), 1,68 (X-post) → 1,95.</li>
-        <li><b>« Default » ≠ un effort unique — vérifié source par source.</b> On a lu la config réelle de chaque source (colonne Config ✓). Résultat&nbsp;: le bucket « défaut » est hétérogène — certaines à <b>max</b> (CEO-Bench, EMB-Opus), <b>high</b> (SlopCode, OfficeQA), pensée <b>désactivée</b> (STAGE-Claw, ianlpaterson), d'autres non précisées. La doc Anthropic explique pourquoi&nbsp;: le défaut dépend du modèle (Sonnet&nbsp;5/Fable&nbsp;5 pensent toujours ; Opus&nbsp;4.x &amp; Sonnet&nbsp;4.6 sur opt-in ; Haiku &amp; ≤4.5 sans le paramètre). Ce qui autorise un ratio, c'est le fait <b>vérifié</b> que <b>chaque source applique la même config à tous ses modèles</b> — pas un effort supposé.</li>
-        <li><b>Couple non relié = signalé, jamais inventé.</b> Un couple sans arête mesurée (Haiku&nbsp;@max — effort non exposé ; ou une sweep d'effort jamais publiée pour ce modèle) n'est pas rempli par une règle d'effort générique. La forme d'effort d'un modèle ne sert <b>jamais</b> de gabarit pour un autre&nbsp;: soit n/a, soit estimé avec une bande explicitement large.</li>
-        <li><b>Confiance = concordance.</b> L'intervalle vient de la <b>dispersion</b> des chemins concurrents. 3+ sources serrées → bande étroite (Sonnet 4.6 &amp; Opus 4.8 bas effort). Sources en désaccord → bande large (Fable&nbsp;max&nbsp;: Willison-SVG vs CursorBench ; Sonnet&nbsp;5, dépendant de la taille de tâche). Là où rien ne confirme, la bande le dit.</li>
+        <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources (task sizes are incomparable). We keep only sources measuring ≥2 models/efforts <b>on the same task</b>: their <b>ratio</b> cancels the task-size variance. E.g. WorkBench gives Sonnet&nbsp;4.6/Opus&nbsp;4.8 = 0.58 on its tasks, whatever their absolute cost.</li>
+        <li><b>The (model, effort) couple is atomic.</b> Each node = one indivisible couple. We <b>never</b> assume that "effort" has the same effect across models&nbsp;: taking Haiku to max is not the same multiplier as taking Opus to max. No model×effort decomposition — separability would be a false assumption.</li>
+        <li><b>Per-benchmark normalisation → weighted median.</b> Inside each benchmark, every couple is divided by the anchor <b>Opus 4.8 @medium</b> when present, else bridged via its shared couples (down-weighted ×0.5). Each benchmark thus yields one normalised estimate per couple; a couple's value is the <b>source-weighted median</b> of those estimates. Benchmarks with a single couple are dropped (they would only echo the anchor). No path products, no cross-benchmark value comparison — only within-benchmark ratios.</li>
+        <li><b>"Default" ≠ a single effort — verified source by source.</b> We read each source's actual config (the Config ✓ column). Result&nbsp;: the "default" bucket is heterogeneous — some at <b>max</b> (CEO-Bench, EMB-Opus), <b>high</b> (SlopCode, OfficeQA), thinking <b>off</b> (STAGE-Claw, ianlpaterson), others unstated. Anthropic's docs explain why&nbsp;: the default depends on the model (Sonnet&nbsp;5/Fable&nbsp;5 always think; Opus&nbsp;4.x &amp; Sonnet&nbsp;4.6 opt-in; Haiku &amp; ≤4.5 have no such parameter). What licenses a ratio is the <b>verified</b> fact that <b>each source applies the same config to all its models</b> — not an assumed effort.</li>
+        <li><b>Unlinked couple = flagged, never invented.</b> A couple with no measured edge (Haiku&nbsp;@max — effort not exposed; or an effort sweep never published for that model) is not filled by a generic effort rule. One model's effort shape is <b>never</b> used as a template for another&nbsp;: it is either n/a, or estimated with an explicitly wide band.</li>
+        <li><b>Confidence = agreement.</b> The band is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD)&nbsp;: robust to an outlier benchmark yet still widened by it, and asymmetric. 3+ tight sources → narrow band (Sonnet 4.6 &amp; Opus 4.8 low effort). Sources disagree → wide band (Fable&nbsp;max&nbsp;: Willison-SVG vs CursorBench; Sonnet&nbsp;5, task-size dependent). Where nothing confirms, the band says so.</li>
       </ol>
     </div>
   </section>
 
   <div class="foot">
-    <p><b>Sources de mesure</b> (<span class="nsrc">…</span> au total, non re-citations) — <span id="src-list">…</span>. Liste et compteurs <b>générés</b> depuis les données ; registre complet + CSV brut (<code>raw-data.csv</code>) conservés hors artefact.</p>
-    <p class="faint" style="margin-top:8px">Coûts relatifs à ±intervalle indiqué. Les mesures publiques plafonnent la confiance à « moyenne-haute » — une mesure interne sur un workload représentatif reste la validation finale prévue.</p>
+    <p><b>Measurement sources</b> (<span class="nsrc">…</span> in total, no re-citations) — <span id="src-list">…</span>. List and counters <b>generated</b> from the data; full registry + raw CSV (<code>raw-data.csv</code>) kept outside the artifact.</p>
+    <p class="faint" style="margin-top:8px">Costs relative to the shown ±band. Public measurements cap confidence at "medium-high" — an internal measurement on a representative workload remains the planned final validation.</p>
   </div>
 </div>

@@ -174,8 +174,8 @@ function drawPareto(){
   if(pn) pn.innerHTML=par.map(p=>`<b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}${p.e==="solo"?"":" @"+p.e}</b> <span class="faint">${fmtC(p.c)}× · q=${p.q.toFixed(2)}</span>`).join(" &nbsp;→&nbsp; ");
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
-const fr=x=>x.toFixed(2).replace('.',',');
-const ciStr=(m,e,v)=> (m==="opus-4.8"&&e==="medium") ? "ancre" : (v[1]===v[2] ? "source unique" : `${fr(v[1])}–${fr(v[2])}`);
+const fr=x=>x.toFixed(2);
+const ciStr=(m,e,v)=> (m==="opus-4.8"&&e==="medium") ? "anchor" : (v[1]===v[2] ? "single source" : `${fr(v[1])}–${fr(v[2])}`);
 const M={};
 for(const m in META){ const cg=COSTGRID[m]||{}; M[m]={intel:META[m].intel, tag:META[m].tag};
   ["low","medium","high","xhigh","max","solo"].forEach(e=>{ M[m][e]= cg[e]? [cg[e][0], ciStr(m,e,cg[e])] : null; }); }
@@ -189,15 +189,15 @@ function drawMatrix(){
   const tb=document.querySelector("#matrix-tbl tbody"); tb.innerHTML="";
   const rows=Object.keys(M).sort((a,b)=>M[b].intel-M[a].intel);
   for(const m of rows){ const md=MODELS[m], tr=document.createElement("tr");
-    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill">taille-tâche</span>':''}</td>`;
-    if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = effort unique → one merged cell across the 5 effort columns
-      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>fusionné · ${c[1]}</small></div></td>`;
+    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill">task-size</span>':''}</td>`;
+    if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
+      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>merged · ${c[1]}</small></div></td>`;
     } else {
       ["low","medium","high","xhigh","max"].forEach(e=>{ const c=M[m][e];
-        row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2).replace('.',',')}<small>${c[1]}</small></div></td>`
+        row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>${c[1]}</small></div></td>`
                : `<td class="na">—</td>`; });
     }
-    row+=`<td class="mdl num">${M[m].intel.toFixed(1).replace('.',',')}</td>`;
+    row+=`<td class="mdl num">${M[m].intel.toFixed(1)}</td>`;
     tr.innerHTML=row; tb.appendChild(tr);
   }
 }
@@ -214,11 +214,11 @@ const GMODEL = {
  "sonnet-4.5":{l:"Sonnet 4.5",leg:1},"opus-4.1":{l:"Opus 4.1",leg:1},
 };
 const GCOL={sweep:"#2E9C8E",xmodel:"#7C6BB2",xgen:"#B98A3E"};
-const GTLAB={sweep:"balayage d'effort (même modèle)",xmodel:"inter-modèles (même génération)",xgen:"pont inter-génération"};
-const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = modèle à EFFORT UNIQUE (pas de paramètre effort discret) → un seul nœud fusionnant toutes ses sources, placé hors des paliers ; coût aussi en §6 (régime no-think, ancre)
+const GTLAB={sweep:"effort sweep (same model)",xmodel:"cross-model (same generation)",xgen:"cross-generation bridge"};
+const MEFF={"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],"sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],"sonnet-4.6":["low","medium","high","max"],"haiku-4.5":["solo"]};   // Haiku 4.5 = SINGLE-OPERATING-POINT model (no discrete effort parameter) → one node merging all its sources, placed off the effort gridlines; cost also in §6 (no-think regime, anchor)
 const MX={"fable-5":0,"opus-4.8":1,"opus-4.7":2,"sonnet-5":3,"sonnet-4.6":4,"haiku-4.5":5,"opus-4.6":6.4,"sonnet-3.7":6.9,"opus-4.5":7.3,"sonnet-4.5":7.8,"opus-4.1":8.3};
 const EORD=["max","xhigh","high","medium","low"];   // corroboration graph: 5 explicit efforts, no default row
-const EORD2=["max","xhigh","high","medium","low","default"];   // line-cloud assignment view: adds the 'défaut' row
+const EORD2=["max","xhigh","high","medium","low","default"];   // line-cloud assignment view: adds the 'default' row
 function buildEdges(){
   const pm=new Map();
   const add=(A,B,g,ty)=>{ if(A===B)return; const t=ty||g.t;
@@ -276,13 +276,13 @@ function drawGraph(){
     ring(x,y,8.4,colFor(c)); bump(c);
     });}
   s.appendChild(el("circle",{cx:px("opus-4.8"),cy:py("medium"),r:11.5,fill:"none",stroke:cvar('--opus48'),"stroke-width":1.6,"stroke-dasharray":"1 2"}));
-  document.getElementById("graphcap").innerHTML=`<b>5 modèles à effort discret × 5 efforts</b> + <b>Haiku&nbsp;4.5 en point unique</b> (pas de paramètre <code>effort</code> → toutes ses sources fusionnées en un nœud, voir §6&nbsp;; ligne « défaut » retirée&nbsp;; les runs @default alimentent les IC de la matrice §2). Anneau = <b>#sources indépendantes</b>&nbsp;: <b><span style="color:${COLR.g}">vert ≥3</span></b> · <b><span style="color:${COLR.y}">jaune 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">rouge 0</span></b> (bilan ${tally.g}/${tally.y}/${tally.o}/${tally.r}). Nœud <b>plein</b> = mesuré, <b>creux</b> = inféré. Épaisseur d'arête ∝ #sources.`;
+  document.getElementById("graphcap").innerHTML=`<b>5 discrete-effort models × 5 efforts</b> + <b>Haiku&nbsp;4.5 as a single point</b> (no <code>effort</code> parameter → all its sources merged into one node, see §6&nbsp;; "default" row removed&nbsp;; @default runs feed the §2 matrix CIs). Ring = <b>#independent sources</b>&nbsp;: <b><span style="color:${COLR.g}">green ≥3</span></b> · <b><span style="color:${COLR.y}">yellow 2</span></b> · <b><span style="color:${COLR.o}">orange 1</span></b> · <b><span style="color:${COLR.r}">red 0</span></b> (tally ${tally.g}/${tally.y}/${tally.o}/${tally.r}). <b>Filled</b> node = measured, <b>hollow</b> = inferred. Edge width ∝ #sources.`;
   document.getElementById("legendG").innerHTML=
     `<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.g};border-radius:50%;background:transparent"></span>≥3 sources</span>`
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.y};border-radius:50%;background:transparent"></span>2</span>`
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.o};border-radius:50%;background:transparent"></span>1</span>`
     +`<span class="lg"><span class="sw" style="border:2.4px solid ${COLR.r};border-radius:50%;background:transparent"></span>0</span>`
-    +`<span class="lg"><span class="sw" style="background:${cvar('--muted')}"></span>lien mesuré</span>`;
+    +`<span class="lg"><span class="sw" style="background:${cvar('--muted')}"></span>measured link</span>`;
 }
 // ===== RATIO-BY-PAIR assignment charts (cost & tokens); colour = effort, grey = @default =====
 const RD=__RATIO_DATA__;
@@ -322,11 +322,11 @@ function drawRatios(svgId){
       const tx=el("text",{x:X(t),y:yA+14,fill:cvar('--faint'),"font-size":9,"text-anchor":"middle"});tx.textContent=t+"×";s.appendChild(tx);});
     cons.forEach(c=>{ const x=X(c[1]); if(!inR(x))return;
       const sq=el("rect",{x:x-6,y:yA-6,width:12,height:12,rx:1.5,fill:EC[c[0]],"fill-opacity":.32,stroke:EC[c[0]],"stroke-width":1.4});
-      const ti=document.createElementNS(NS,"title");ti.textContent=`médiane mesurée ${c[0]} = ${c[1]}×`;sq.appendChild(ti);s.appendChild(sq); });
+      const ti=document.createElementNS(NS,"title");ti.textContent=`measured median ${c[0]} = ${c[1]}×`;sq.appendChild(ti);s.appendChild(sq); });
     const pos={};
     pts.slice().sort((a,b)=>a[1]-b[1]).forEach(p=>{ const x=X(p[1]); if(!inR(x))return; const derived=p[5]===1, grey=p[2]==="grey";
       const c=el("circle",{cx:x,cy:yA,r:4.4,fill:derived?"none":EC[p[2]],stroke:derived?EC[p[2]]:cvar('--panel'),"stroke-width":derived?1.6:1,"stroke-dasharray":derived?"2 1.5":"none"});
-      const ti=document.createElementNS(NS,"title");ti.textContent=`${p[4]}${derived?" (dérivé via prix)":""} · ${p[0]} · ${p[1]}× · ${p[2]} · ${p[3]}`;c.appendChild(ti);s.appendChild(c);
+      const ti=document.createElementNS(NS,"title");ti.textContent=`${p[4]}${derived?" (derived via price)":""} · ${p[0]} · ${p[1]}× · ${p[2]} · ${p[3]}`;c.appendChild(ti);s.appendChild(c);
       if(grey){ const it=el("text",{x:x,y:yA-8,fill:cvar('--ink'),"font-size":7.5,"text-anchor":"middle","font-weight":700});it.textContent=p[4];s.appendChild(it); }
       pos[p[4]]=x; });
     return pos;
@@ -338,7 +338,7 @@ function drawRatios(svgId){
     if(ri) s.appendChild(el("line",{x1:0,y1:top,x2:W,y2:top,stroke:cvar('--line'),"stroke-width":1,"stroke-opacity":.35}));
     const lb=el("text",{x:8,y:top+18,fill:cvar('--ink'),"font-size":11,"font-weight":700});lb.textContent=pair;s.appendChild(lb);
     let ay=top+36, yC=null,yT=null,cp=null,tp=null;
-    if(grey1(cb[pair])){ yC=ay; const t=el("text",{x:aX0-8,y:yC+3.5,fill:cvar('--faint'),"font-size":9,"text-anchor":"end"});t.textContent="coût";s.appendChild(t); cp=axis(cb[pair],yC,consC,pair+"|cost"); ay+=axGap; }
+    if(grey1(cb[pair])){ yC=ay; const t=el("text",{x:aX0-8,y:yC+3.5,fill:cvar('--faint'),"font-size":9,"text-anchor":"end"});t.textContent="cost";s.appendChild(t); cp=axis(cb[pair],yC,consC,pair+"|cost"); ay+=axGap; }
     if(grey1(tb[pair])){ yT=ay; const t=el("text",{x:aX0-8,y:yT+3.5,fill:cvar('--faint'),"font-size":9,"text-anchor":"end"});t.textContent="tok";s.appendChild(t); tp=axis(tb[pair],yT,consT,pair+"|tok"); ay+=axGap; }
     if(cp&&tp){ for(const k in cp){ if(k in tp){
       s.appendChild(el("line",{x1:cp[k],y1:yC+7,x2:tp[k],y2:yT-7,stroke:cvar('--faint'),"stroke-width":1.2,"stroke-opacity":.7,"stroke-dasharray":"2 2"})); } } }
@@ -366,10 +366,10 @@ function enableRatioZoom(svg){
   svg.addEventListener("dblclick",e=>{ const [cx,cy]=pt(e), a=near(cx,cy); if(a){ delete RVIEW[a.key]; drawRatios(svg.id); } });
 }
 function drawRatiosLegend(){ const L=document.getElementById("legendR"); if(!L) return;
-  L.innerHTML=["low","medium","high","xhigh","max","grey"].map(k=>`<span class="lg"><span class="sw" style="background:${EC[k]}"></span>${k==="grey"?"@default (à assigner, avec ID)":k}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="background:var(--muted);opacity:.35;border-radius:2px"></span>carré = médiane des mesures / effort</span>`
-    +`<span class="lg"><span class="sw" style="border:1.6px dashed var(--muted);background:transparent;border-radius:50%"></span>creux = dérivé via prix/token</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.4px dashed var(--faint);background:transparent;height:0"></span>même source (coût↔tok)</span>`; }
+  L.innerHTML=["low","medium","high","xhigh","max","grey"].map(k=>`<span class="lg"><span class="sw" style="background:${EC[k]}"></span>${k==="grey"?"@default (to assign, with ID)":k}</span>`).join("")
+    +`<span class="lg"><span class="sw" style="background:var(--muted);opacity:.35;border-radius:2px"></span>square = median of measurements / effort</span>`
+    +`<span class="lg"><span class="sw" style="border:1.6px dashed var(--muted);background:transparent;border-radius:50%"></span>hollow = derived via price/token</span>`
+    +`<span class="lg"><span class="sw" style="border-top:1.4px dashed var(--faint);background:transparent;height:0"></span>same source (cost↔tok)</span>`; }
 
 function drawEdgeTable(){
   const tb=document.querySelector("#edge-tbl tbody"); tb.innerHTML="";
@@ -392,7 +392,7 @@ function zoomable(svg){
   const set=(x,y,w,h)=>svg.setAttribute("viewBox",`${x} ${y} ${w} ${h}`);
   if(!box.querySelector(".zoomctl")){
     const tb=document.createElement("div"); tb.className="zoomctl";
-    tb.innerHTML='<button data-z="in" title="Zoom +">+</button><button data-z="out" title="Zoom −">−</button><button data-z="reset" title="Réinitialiser">⟳</button>';
+    tb.innerHTML='<button data-z="in" title="Zoom +">+</button><button data-z="out" title="Zoom −">−</button><button data-z="reset" title="Reset">⟳</button>';
     tb.addEventListener("click",e=>{ const z=e.target.getAttribute("data-z"); if(!z)return;
       if(z==="reset"){ svg.setAttribute("viewBox",svg.__base); return; }
       const [x,y,w,h]=vb(), f=z==="in"?0.8:1.25; set(x+(w-w*f)/2, y+(h-h*f)/2, w*f, h*f); });
@@ -415,9 +415,9 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const curGroups=GROUPS.filter(g=>g.n.some(curNode));
   const nSrc=curGroups.length;   // count == what is actually listed (benchmarks touching current models)
   document.querySelectorAll(".nsrc").forEach(e=>e.textContent=nSrc);
-  const et=document.getElementById("edge-title"); if(et) et.textContent=`Les ${curGroups.length} sources qui tissent les liens`;
+  const et=document.getElementById("edge-title"); if(et) et.textContent=`The ${curGroups.length} sources that weave the links`;
   const sl=document.getElementById("src-list");
-  if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'fr')).map(g=>g.g).join(" · ");
+  if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
 function renderAll(){drawB();drawPareto();drawMatrix();drawGraph();drawEdgeTable();drawRatiosLegend();drawRatios('chartR');fillMeta();
   ['chartB','chartP','chartG'].forEach(id=>{ const sv=document.getElementById(id); if(sv){ sv.__base=sv.getAttribute("viewBox"); zoomable(sv); } });

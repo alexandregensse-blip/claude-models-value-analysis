@@ -102,49 +102,49 @@ def groups_data():
     lives in GMETA. Some sources publish several sub-benchmarks (AIReiter) → MERGE folds them into one node-set
     so corroboration counts the source once."""
     GMETA = {
-      "osworld":("OSWorld","sweep","Anthropic/AA · balayage low→max ✓"),
+      "osworld":("OSWorld","sweep","Anthropic/AA · sweep low→max ✓"),
       "aa-index":("AA Index","xmodel","AA-Index · max ✓"),
       "aa-index-pertask":("AA /task","xmodel","AA-Index · max ✓"),
-      "swerebench":("swe-rebench","xgen","ReAct minimal · Opus4.8 xhigh/4.7 high, Sonnet défaut ✓"),
+      "swerebench":("swe-rebench","xgen","ReAct minimal · Opus4.8 xhigh/4.7 high, Sonnet default ✓"),
       "workbench":("WorkBench","xmodel","ReAct natif · temp 0, like-for-like, thinking NS ✓"),
       "braintrust":("Braintrust","sweep","retrieval · budget T25/T50 ✓"),
       "stageclaw":("STAGE-Claw","xmodel","OpenClaw · reasoning DISABLED, temp 0 ✓"),
       "tobench":("TOBench","xgen","ReAct · thinking NS ✓"),
       "ceobench":("CEO-Bench","xmodel","terminal-agent · Opus/Sonnet=MAX, Haiku=thinking ✓"),
-      "automationbench":("AutomationB.","xmodel","harness+effort NON précisés ✓"),
+      "automationbench":("AutomationB.","xmodel","harness+effort NOT stated ✓"),
       "officeqa":("OfficeQA","xgen","Claude Agent SDK · reasoning HIGH ✓"),
       "slopcode":("SlopCode","xgen","Claude Code · Reasoning HIGH ✓"),
       "posttrain":("PostTrainB.","sweep","papier · medium/high ✓"),
       "skillsbench":("SkillsBench","xmodel","Claude Code 2.1.19 · temp 0, thinking NS ✓"),
       "aireiter":("AIReiter","xmodel","Claude Code · high ✓"),
-      "ctala":("ctala","xmodel","Claude Code CLI · reasoning non config, temp 0.7 ✓"),
-      "drona23":("drona23","xgen","Claude Code CLI · thinking NS, identique ✓"),
+      "ctala":("ctala","xmodel","Claude Code CLI · reasoning not configured, temp 0.7 ✓"),
+      "drona23":("drona23","xgen","Claude Code CLI · thinking NS, identical ✓"),
       "ponytail":("ponytail","xgen","Claude Code headless · thinking NS ✓"),
       "ianlpaterson":("ianlpaterson","xgen","OpenRouter · reasoning OFF ✓"),
-      "hal-swemini":("HAL swe-mini","xgen","HAL · high vs défaut ✓"),
+      "hal-swemini":("HAL swe-mini","xgen","HAL · high vs default ✓"),
       "hal-science":("HAL sci","xgen","HAL · high ✓"),
       "george-liu":("george-liu","sweep","Claude Code · low/max ✓"),
-      "zenn-qcd":("zenn QCD","sweep","API brut · low/xhigh ✓"),
+      "zenn-qcd":("zenn QCD","sweep","raw API · low/xhigh ✓"),
       "whitekumalabo":("whitekumalabo","sweep","Claude Code · low/max ✓"),
-      "qiita-nogataka":("qiita","sweep","API brut · low/max ✓"),
-      "codesota":("CodeSOTA","xmodel","prix list blended (pas un run) ✓"),
+      "qiita-nogataka":("qiita","sweep","raw API · low/max ✓"),
+      "codesota":("CodeSOTA","xmodel","list-price blended (not a run) ✓"),
       "coderev":("code-review","xmodel","VibeOps · temp 0.1, thinking NS ✓"),
       "wildclaw":("WildClaw","xgen","OpenRouter (4 harness) · thinking NS ✓"),
-      "truefoundry":("TrueFoundry","xmodel","AI Gateway · single-turn sans outils, effort NS ✓"),
+      "truefoundry":("TrueFoundry","xmodel","AI Gateway · single-turn no tools, effort NS ✓"),
       "emb":("EMB","xmodel","bash+execute · Opus4.8=MAX, Sonnet5 NS ✓"),
-      "willison":("Willison SVG","sweep","llm CLI · balayage low→max, tâche triviale (SVG) ✓"),
+      "willison":("Willison SVG","sweep","llm CLI · sweep low→max, trivial task (SVG) ✓"),
       "futuresearch":("DeepResearch","sweep","Deep Research Bench · low/high ✓"),
-      "cursorbench":("CursorBench","sweep","Cursor 3.1 · balayage low→max, effort apparié ✓ (éditeur=vendeur)"),
-      "scsweproeff":("SWE-Pro sweep","sweep","Opus 4.8 card p196 · balayage low→max, tokens de sortie ✓"),
-      "schleeff":("HLE sweep","sweep","Opus 4.8 card p203 · HLE outils, balayage low→max ✓"),
-      "scosweff":("OSWorld sweep","sweep","Opus 4.8 card p222 · balayage low→max, tokens de sortie ✓"),
-      "scfsweppro":("SWE-Pro (Fable)","sweep","Fable 5 card p255 · Fable=Mythos 5, balayage low→xhigh, coût $ ✓"),
-      "scfcdiamond":("FrontierCode-D","sweep","Fable 5 card p257 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
-      "scfdeepqa":("DeepSearchQA","sweep","Fable 5 card p270 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
-      "scfhletools":("HLE (Fable)","sweep","Fable 5 card p267 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
-      "scfdraco":("DRACO","sweep","Fable 5 card p271 · Fable=Mythos 5, balayage low→max, coût $ ✓"),
-      "scoarc":("ARC-AGI-2","sweep","Opus 4.7 card p213 · balayage low→max, coût $ ✓"),
-      "scodeepqa":("DeepSearchQA","sweep","Opus 4.7 card p200 · Opus4.7 vs Sonnet4.6, balayage low→max ✓"),
+      "cursorbench":("CursorBench","sweep","Cursor 3.1 · sweep low→max, matched effort ✓ (vendor benchmark)"),
+      "scsweproeff":("SWE-Pro sweep","sweep","Opus 4.8 card p196 · sweep low→max, output tokens ✓"),
+      "schleeff":("HLE sweep","sweep","Opus 4.8 card p203 · HLE tools, sweep low→max ✓"),
+      "scosweff":("OSWorld sweep","sweep","Opus 4.8 card p222 · sweep low→max, output tokens ✓"),
+      "scfsweppro":("SWE-Pro (Fable)","sweep","Fable 5 card p255 · Fable=Mythos 5, sweep low→xhigh, $ cost ✓"),
+      "scfcdiamond":("FrontierCode-D","sweep","Fable 5 card p257 · Fable=Mythos 5, sweep low→max, $ cost ✓"),
+      "scfdeepqa":("DeepSearchQA","sweep","Fable 5 card p270 · Fable=Mythos 5, sweep low→max, $ cost ✓"),
+      "scfhletools":("HLE (Fable)","sweep","Fable 5 card p267 · Fable=Mythos 5, sweep low→max, $ cost ✓"),
+      "scfdraco":("DRACO","sweep","Fable 5 card p271 · Fable=Mythos 5, sweep low→max, $ cost ✓"),
+      "scoarc":("ARC-AGI-2","sweep","Opus 4.7 card p213 · sweep low→max, $ cost ✓"),
+      "scodeepqa":("DeepSearchQA","sweep","Opus 4.7 card p200 · Opus4.7 vs Sonnet4.6, sweep low→max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
@@ -298,14 +298,14 @@ def regime_rows_html(nt, df):
             return f'<tr class="{cls}"><td colspan="4"><b>{title}</b> — {empty_note}</td></tr>'
         idx = reg["index"]
         idxline = " · ".join(f'{m}&nbsp;{idx[m]}×' for m in sorted(idx, key=lambda m: idx[m]))
-        h = f'<tr class="{cls}"><td colspan="4"><b>{title}</b> — indice coût (Haiku 4.5 = 1×, chaîné, indicatif)&nbsp;: {idxline}</td></tr>'
+        h = f'<tr class="{cls}"><td colspan="4"><b>{title}</b> — cost index (Haiku 4.5 = 1×, chained, indicative)&nbsp;: {idxline}</td></tr>'
         for p in order:
             d = reg["pairs"][p]
             h += f'<tr><td>{p}</td>{cell(d)}</tr><tr class="srcrow"><td colspan="4">{", ".join(d["src"])}</td></tr>'
         return h
-    return (block("Sans thinking (nothink)", nt, "nt-head", "aucune paire mesurée") +
-            block("Harnais par défaut — thinking non déclaré", df, "df-head",
-                  "aucune paire inter-modèles à config appariée parmi les modèles courants (ces sources mélangent les efforts) → aucun ratio couple-atomique calculable ; les points « défaut » restent hors régime."))
+    return (block("No thinking (nothink)", nt, "nt-head", "no measured pair") +
+            block("Default harness — thinking unstated", df, "df-head",
+                  "no cross-model matched-config pair among the current models (these sources mix efforts) → no couple-atomic ratio computable; the \u2018default\u2019 points stay out of regime."))
 
 def main():
     comps = comparisons()
