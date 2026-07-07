@@ -282,6 +282,10 @@ function drawTiers(){
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
       <p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>
     </div>`;
+  // best-overall card is narrower than a header tier card → scale its height to keep the SAME aspect ratio
+  if(crT&&top){ const ref=top.querySelector(".tier"), cc=crT.querySelector(".tier");
+    if(ref&&cc){ cc.style.minHeight=""; const rb=ref.getBoundingClientRect(), cb=cc.getBoundingClientRect();
+      if(rb.width>0&&rb.height>0) cc.style.minHeight=(rb.height*cb.width/rb.width)+"px"; } }
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
 // plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.
@@ -419,3 +423,4 @@ function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+let __rz; addEventListener("resize",()=>{ clearTimeout(__rz); __rz=setTimeout(drawTiers,150); });   // re-match the best-overall height ratio when widths change
