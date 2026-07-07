@@ -26,7 +26,16 @@
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
       <p id="pareto-note" class="paretoline"></p>
-      <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less).</p>
+      <p class="cap">How to read&nbsp;: left to right, each step on the frontier is the next "more intelligence" tier that is worth its extra cost. Anything not on it is dominated (another couple does at least as well for less). The <b>faint grey curve</b> is a smooth quadratic <b>fit to the frontier</b> (quality vs log-cost) — the reference envelope for the value score below.</p>
+    </div>
+    <div class="card pad" style="margin-top:14px">
+      <h3>Value score — distance to the frontier envelope</h3>
+      <p class="sub">We fit a smooth curve to the Pareto frontier (quadratic in log-cost, R²&nbsp;≈&nbsp;0.96, drawn faint grey on the chart above) — the <b>expected quality for a given cost</b> along the efficient edge. Each couple's <b>score</b> = its <b>signed vertical distance</b> to that curve, squashed by <b>tanh(residual ⁄ RMS)</b>&nbsp;: <b>above</b> the curve scores toward <b>+1</b> (more quality than its cost buys on the edge), <b>on</b> the curve = <b>0</b>, <b>below</b> toward <b>−1</b>. Frontier couples sit near the curve; the sign tells you whether a point pokes above the smooth edge (a genuine knee) or falls below it. Computed from the data.</p>
+      <div class="chartbox"><table id="score-tbl">
+        <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value score</th><th style="text-align:left">position</th></tr></thead>
+        <tbody></tbody>
+      </table></div>
+      <p class="cap">Score is <b>relative to the frontier envelope</b>, not the frontier by dominance&nbsp;: a couple can be non-dominated yet score negative if it falls under the smooth edge (e.g. Haiku&nbsp;4.5, the lone cheap point — nothing cheaper exists, but the edge extrapolated to its cost expects more quality). Green = above the edge, red = below; intensity = magnitude.</p>
     </div>
     <div class="card pad" style="margin-top:14px">
       <h3>Best value by task tier — what to actually run</h3>
