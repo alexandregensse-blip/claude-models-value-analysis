@@ -226,6 +226,8 @@ function tierPicks(){
   const resAll=rows.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   front.forEach(p=>p.S=Math.tanh((symT(p.q)-fevT(Math.log10(p.c)))/rms));
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
+  const hidMin=Math.min(...front.map(p=>p.hid)), anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), den=((anc?anc.hid:0)-hidMin)||1;
+  front.forEach(p=>p.norm=100*(p.hid-hidMin)/den);   // fused relative score: 0 = weakest frontier couple, 100 = anchor (Opus 4.8 @medium)
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
   const inWin=front.filter(p=>p.q>=1.0&&p.q<=1.8);                                                          // crown window [1.0, 1.8]
@@ -236,24 +238,24 @@ function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  const cardHTML=(head,q,name,col,w,bigVal,bigLab,ex,extra="")=>`<div class="card pad crit tier${extra}">
-      <div class="tier-head">${q!=null?`<span class="tier-q">Q* ${q.toFixed(2)}</span>`:`<span class="tier-q">${head}</span>`}<span class="tier-name">${name}</span></div>
+  const cardHTML=(q,name,col,w,ex)=>`<div class="card pad crit tier">
+      <div class="tier-head"><span class="tier-name">Q* ${q.toFixed(2)} – ${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
           <span class="tier-nums">Cost <b>${w.c.toFixed(2)}×</b> · Quality <b>${w.q.toFixed(2)}×</b></span>
         </div>
-        <div class="tier-yield">${bigVal}${bigLab?`<small>${bigLab}</small>`:""}</div>
+        <div class="tier-yield">${Math.round(w.norm)}</div>
       </div>
       <span class="ex">${ex}</span>
     </div>`;
-  host.innerHTML=picks.map(t=>cardHTML(null,t.q,t.name,cvar(MODELS[t.win.m].c),t.win,`${t.win.hid>=0?'+':''}${t.win.hid.toFixed(2)}`,"",t.ex)).join("");
+  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex)).join("");
   const c=crown, col=cvar(MODELS[c.m].c), cr=document.getElementById("tier-crown");
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
-      <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Hidden <b>${c.hid>=0?'+':''}${c.hid.toFixed(2)}</b></div>
-      <p class="crown-note">Highest <b>Hidden</b> score — the couple that stands out most from its neighbours on the frontier (a 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>): a clear step up from the cheaper option while the pricier one adds little — the genuine knee.</p>
+      <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
+      <p class="crown-note">Top <b>relative score</b> within the quality window [1.0, 1.8] — the couple that stands out most from its neighbours on the frontier (a 2nd difference of the value score S). The score is normalised so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium).</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)

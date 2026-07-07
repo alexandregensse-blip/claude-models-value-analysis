@@ -46,12 +46,9 @@
         <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
       </div>
     </div>
-    <!-- NOTE: the q* = 0.6/0.8/1.0/1.2 figures below MIRROR the TIERS targets in app.js — the one changeable value left
-         in this prose. If you retune the targets in app.js, update this sentence (or inject it). Everything else here
-         explains how the picks are built and read, not what the data currently says. -->
     <div class="card pad" style="margin-top:14px">
       <h3>Best value by task tier — what to actually run</h3>
-      <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels</b> (q* = 0.6 / 0.8 / 1.0 / 1.2 on the relative-quality axis, anchor Opus&nbsp;4.8&nbsp;@medium&nbsp;=&nbsp;1.0). For each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around the target complexity times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is that couple's yield (quality per unit cost, as a %). The crown below uses the <b>hidden prominence</b> instead (the sharpest knee on the frontier). All picks are <b>computed</b> from the data.</p>
+      <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b> (adjustable with the sliders above, which also plot the windows over the dilated quality axis). For each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
       <div id="tier-tuner"></div>
       <div class="grid" id="tier-cards"></div>
       <div id="tier-crown"></div>
