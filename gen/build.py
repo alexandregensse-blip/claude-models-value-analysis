@@ -324,6 +324,17 @@ def main():
             for p in RD[key]:
                 f.write(f"{p[4]}: {p[0]}  {p[1]}x  effort={p[2]}  src={p[3]}\n")
 
+    # Editorial capability metadata (single source of truth) — external Vals capability index + the size-sensitive
+    # flag. NOT derivable from the cost/quality ratios (it is an independent capability measurement), so it is the
+    # one hand-set input; kept here (not in app.js) so every number the report renders flows through this generator.
+    META = {
+        "fable-5":   {"intel": 75.1},
+        "opus-4.8":  {"intel": 70.4},
+        "sonnet-5":  {"intel": 68.6, "tag": True},
+        "opus-4.7":  {"intel": 66.1},
+        "sonnet-4.6":{"intel": 60.1},
+        "haiku-4.5": {"intel": 40.9},
+    }
     css  = open(os.path.join(HERE,"style.css")).read()
     body = open(os.path.join(HERE,"body.html")).read()
     app  = open(os.path.join(HERE,"app.js")).read()
@@ -331,6 +342,7 @@ def main():
     app  = app.replace("__CONS_DATA__", json.dumps(CONS, separators=(",",":")))
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
     app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
+    app  = app.replace("__META__", json.dumps(META, separators=(",",":")))
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     html = f"<style>\n{css}\n</style>\n{body}\n<script>\n{app}\n</script>\n"

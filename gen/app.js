@@ -23,24 +23,12 @@ function quadFit(xs,ys){ const S=[0,0,0,0,0],T=[0,0,0];
   for(let i=0;i<xs.length;i++){ const x=xs[i],y=ys[i]; let xp=1; for(let k=0;k<5;k++){S[k]+=xp; xp*=x;} let xq=1; for(let k=0;k<3;k++){T[k]+=xq*y; xq*=x;} }
   return solve3([[S[0],S[1],S[2]],[S[1],S[2],S[3]],[S[2],S[3],S[4]]],T); }
 
-// ---- COST is now DATA-DRIVEN: relative cost per (model,effort) [rel, ci_lo, ci_hi], anchored opus-4.8@medium,
-// computed in build.py::cost_grid() from measured same-task ratios (couple-atomic). Only intel (Vals capability
-// index) + halo height (ey) + the tag flag stay hand-set here — they are capability priors, not cost.
+// ---- COST & QUALITY are DATA-DRIVEN: relative [central, ci_lo, ci_hi] per (model,effort), anchored opus-4.8@medium,
+// computed in build.py (cost_grid / ratio_grid) from measured same-task ratios. The only hand-set values are META below:
+// intel (external Vals capability index) + the size-sensitive tag — capability priors, not derivable from the cost data.
 const COSTGRID=__COSTGRID__;
-const QUALGRID=__QUALGRID__;   // data-driven quality axis: {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
-const META={
-  "fable-5":{intel:75.1,ey:2.2}, "opus-4.8":{intel:70.4,ey:1.4}, "sonnet-5":{intel:68.6,ey:2.6,tag:true},
-  "opus-4.7":{intel:66.1,ey:2.2}, "sonnet-4.6":{intel:60.1,ey:1.6}, "haiku-4.5":{intel:40.9,ey:1.9},
-};
-const B={};
-for(const m in META){ const cg=COSTGRID[m]||{};
-  B[m]={intel:META[m].intel, ey:META[m].ey, tag:META[m].tag, order:Object.keys(cg), e:cg}; }
-// quality offset below the TOP available effort (concave plateau SHAPE, corroborated by effort-sweep sources:
-// small gains + plateau on code/agentic). Shared across models as a prior; Haiku is single-effort → flat.
-const OFF5={low:-5.0,medium:-3.2,high:-1.6,xhigh:-0.6,max:0};      // 5-level models (top=max)
-const OFF4={low:-5.0,medium:-3.2,high:-1.6,max:0};                  // sonnet-4.6 (top=max, no xhigh)
-const OFFH={solo:0};                                               // haiku 4.5: one operating point, no ladder
-function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
+const QUALGRID=__QUALGRID__;   // {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
+const META=__META__;           // {model:{intel, tag?}} — injected from build.py's editorial metadata sidecar (single source of truth)
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
 // Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
@@ -169,6 +157,9 @@ function drawPareto(){
   // Fit the frontier ENVELOPE in the chart's DILATED quality metric as a CONCAVE quadratic: T(q) = a + b·x + c·x² (x=log10 cost).
   // Concave (c<0) → on the chart (Y pixel affine in T) it renders as a LOG SHAPE: fast rise at low cost, flattening at high cost.
   const fit=quadFit(par.map(p=>Math.log10(p.c)),par.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x+fit[2]*x*x, fev=x=>symTinv(fevT(x));
+  { const tv=par.map(p=>symT(p.q)), tm=tv.reduce((a,b)=>a+b,0)/tv.length,                              // envelope goodness-of-fit R² (dilated metric), rendered live
+      ssT=tv.reduce((a,v)=>a+(v-tm)*(v-tm),0), rssT=par.reduce((a,p)=>a+Math.pow(symT(p.q)-fevT(Math.log10(p.c)),2),0),
+      r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=(1-rssT/ssT).toFixed(2); }
   { const cmn=Math.min(...par.map(p=>p.c)), cmx=Math.max(...par.map(p=>p.c)), lmn=Math.log10(cmn), lmx=Math.log10(cmx); let d="";
     for(let i=0;i<=56;i++){ const lx=lmn+(lmx-lmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,lx))+" "+Y(fev(lx))+" "; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.5})); }
