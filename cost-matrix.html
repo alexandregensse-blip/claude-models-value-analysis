@@ -113,7 +113,13 @@
 .tier-yield{flex:1 1 50%;text-align:right;font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1;color:var(--opus48);font-variant-numeric:tabular-nums}
 .tier-yield small{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:3px}
 .tier .ex{margin-top:auto;border-top:none;padding-top:0}
-.crown{border:1px solid var(--opus48);background:color-mix(in srgb,var(--opus48) 6%,var(--panel));max-width:max(360px,calc((100% - 42px)/4*1.8));margin:14px auto 0}
+.crown{text-align:center;border:1px solid var(--opus48);background:color-mix(in srgb,var(--opus48) 6%,var(--panel));max-width:max(360px,calc((100% - 42px)/4*1.8));margin:14px auto 0}
+.crown .tier-q{color:var(--opus48)}
+.crown-model{font-family:Georgia,serif;font-size:clamp(24px,3.2vw,34px);font-weight:600;line-height:1.1;margin:4px 0 6px}
+.crown-model .dot{width:14px;height:14px;margin-right:9px}
+.crown-line{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.crown-line b{color:var(--ink)}
+.crown-note{max-width:70ch;margin:10px auto 0;font-size:12.5px;color:var(--muted)}
 .zoomctl{position:absolute;top:10px;right:10px;display:flex;gap:3px;z-index:5;opacity:.7}
 .zoomctl:hover{opacity:1}
 .zoomctl button{width:22px;height:22px;padding:0;font-size:14px;line-height:1;cursor:pointer;
@@ -484,14 +490,19 @@ function drawTiers(){
       <span class="ex">${ex}</span>
     </div>`;
   host.innerHTML=picks.map(t=>cardHTML(null,t.q,t.name,cvar(MODELS[t.win.m].c),t.win,`${(t.win.y*100).toFixed(0)}%`,"Yield",t.ex)).join("");
-  const c=crown, cr=document.getElementById("tier-crown");
-  if(cr) cr.innerHTML=cardHTML("👑",null,"Best hidden value",cvar(MODELS[c.m].c),c,`${c.hid>=0?'+':''}${c.hid.toFixed(2)}`,"Hidden",
-    `The couple that stands out most from its immediate neighbours on the frontier — a 2nd difference of the value score S (<b>2·Sₙ − S_prev − S_next</b>). High = a clear step up from the cheaper option while the pricier one adds little: the genuine knee.`," crown");
+  const c=crown, col=cvar(MODELS[c.m].c), cr=document.getElementById("tier-crown");
+  if(cr) cr.innerHTML=`<div class="card pad crown">
+      <div class="tier-q">👑 Best overall</div>
+      <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
+      <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Hidden <b>${c.hid>=0?'+':''}${c.hid.toFixed(2)}</b></div>
+      <p class="crown-note">Highest <b>Hidden</b> score — the couple that stands out most from its neighbours on the frontier (a 2nd difference of the value score S, <b>2·Sₙ − S_prev − S_next</b>): a clear step up from the cheaper option while the pricier one adds little — the genuine knee.</p>
+    </div>`;
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
 // plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.
-function drawTierTuner(){
-  const host=document.getElementById("tier-tuner"); if(!host) return;
+// Redraw ONLY the window SVG (called on every slider move) — leaves the slider DOM untouched so dragging keeps working.
+function drawTierWindows(){
+  const host=document.getElementById("tier-windows"); if(!host) return;
   const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; for(const e in cg){ const q=qg[e]; if(q) rows.push({m,e,c:cg[e][0],q:q[0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
@@ -505,15 +516,21 @@ function drawTierTuner(){
     svg+=`<path d="${d}" fill="${col}" fill-opacity="0.13" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
        +`<line x1="${X(t.q)}" y1="${mT}" x2="${X(t.q)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
   front.forEach(p=>svg+=`<circle cx="${X(p.q)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`);
-  svg+=`</svg>`;
-  let ctl='<div class="tuner-ctl">';
+  host.innerHTML=svg+`</svg>`;
+}
+// Build the tuner ONCE (window container + persistent sliders). Slider input updates state + redraws windows/cards only.
+function drawTierTuner(){
+  const host=document.getElementById("tier-tuner"); if(!host) return;
+  let ctl='';
   TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
     +`<label>Q*<input type="range" min="0.55" max="1.28" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
     +`<label>σ<input type="range" min="0.2" max="1.4" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
-  host.innerHTML=svg+ctl+'</div>';
+  host.innerHTML=`<div id="tier-windows"></div><div class="tuner-ctl">${ctl}</div>`;
+  drawTierWindows();
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
     const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
-    document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2); drawTierTuner(); drawTiers(); }));
+    document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2);
+    drawTierWindows(); drawTiers(); }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2);
