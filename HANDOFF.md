@@ -4,7 +4,7 @@
 > [`docs/anthropic-system-cards.md`](docs/anthropic-system-cards.md). Sonnet 5 + **Opus 4.8** + **Fable 5/Mythos 5**
 > cards DONE. Opus 4.8 → 3 sweeps filling the Opus 4.7 ladder. Fable 5 → 5 sweeps
 > (`scfsweppro`/`scfcdiamond`/`scfdeepqa`/`scfhletools`/`scfdraco`); **Fable 5 = Mythos 5** (user-confirmed equal,
-> figures plot the "Mythos 5" line). Corroboration **vert 24 · jaune 1 · orange 0 · rouge 0**, only
+> figures plot the "Mythos 5" line). Corroboration **green 24 · yellow 1 · orange 0 · red 0**, only
 > `opus-4.7@medium` yellow. Opus 4.7 DONE. Sonnet 4.6 + Haiku 4.5 processed (pre-scaling-figure era, legacy-only comparisons → nothing to integrate). **ALL current-model cards done.**
 
 
@@ -30,16 +30,16 @@ Make sure no code path re-introduces model×effort separability:
 ## 3. Corroborate the weakly-supported graph nodes  — PASS 1 DONE (2026-07-06)
 
 The linking graph (§3) rings each node by independent-source count: green ≥3, yellow 2, orange 1, red 0.
-After a 5-package web sweep (Sonnet agents) the corroboration is now **vert 9 · jaune 8 · orange 7 · rouge 1** (was 8/7/6/6). Sources added:
+After a 5-package web sweep (Sonnet agents) the corroboration is now **green 9 · yellow 8 · orange 7 · red 1** (was 8/7/6/6). Sources added:
 
 - **Fable 5** — `simonwillison.net` gives the FIRST full effort sweep (low→max, tokens_out+$ on a trivial pelican-SVG task). Fills the 3 red Fable cells (→orange) and lifts @high→green, @max→yellow. Confound tagged `trivial-svg-1run`; note the **non-monotone high<medium** token inversion (author flags it too).
 - **Sonnet 4.6 @low** — `futuresearch.ai/effort-scaling` (Deep Research Bench, low $0.27 / high $0.46, effort labelled) → @low now yellow, also strengthens @high (green, 8 src).
-- **Haiku 4.5 — STRUCTURAL: modelled as a single-effort model (one merged node).** Two independent GitHub issues confirm Haiku 4.5 does **not** expose the discrete `effort` param (only continuous `thinking.budget_tokens`; `effort` → HTTP 400 `invalid_reasoning_effort`). We have **no** budget-tokens granularity for Haiku either. Since it has no effort dial, it is drawn in §3 as ONE node (`haiku-4.5@solo`, `MEFF=["solo"]`) placed off the effort gridlines with an "effort unique" label, whose ring merges **all** sources that measured Haiku in any config (10 → green). It is NOT spread across low/medium/high, and no fake `@high` node. It has no effort-ladder edges (the edge filter requires the effort to be in the model's own `MEFF`); its cross-model relationships live in §4 (e.g. `sonnet-4.6/haiku-4.5`, OfficeQA matched reasoning-high ratio) and §6 (no-think regime, cheapest anchor = 1×).
+- **Haiku 4.5 — STRUCTURAL: modelled as a single-effort model (one merged node).** Two independent GitHub issues confirm Haiku 4.5 does **not** expose the discrete `effort` param (only continuous `thinking.budget_tokens`; `effort` → HTTP 400 `invalid_reasoning_effort`). We have **no** budget-tokens granularity for Haiku either. Since it has no effort dial, it is drawn in §3 as ONE node (`haiku-4.5@solo`, `MEFF=["solo"]`) placed off the effort gridlines with a "single operating point" label, whose ring merges **all** sources that measured Haiku in any config (10 → green). It is NOT spread across low/medium/high, and no fake `@high` node. It has no effort-ladder edges (the edge filter requires the effort to be in the model's own `MEFF`); its cross-model relationships live in §4 (e.g. `sonnet-4.6/haiku-4.5`, OfficeQA matched reasoning-high ratio) and §6 (no-think regime, cheapest anchor = 1×).
 - **Opus 4.7 @medium** — still RED (the last one). Only relative data found (apiyi.com ~1.3× tokens vs low; towardsai aggregate 2.7× low→max). DataCamp gives high/xhigh $/task but its `budget_tokens` method returns 400 on 4.7 → **methodology suspect, not integrated**. Needs an absolute $/task or tokens measurement at medium.
 - **@max/@high Opus·Sonnet disagreement (high σ)** — NOT arbitrated. No independent leaderboard (Terminal-Bench, Aider, Scale AI, Epoch, METR) has these 4 models with a cost/effort column yet (all trace back to Anthropic OSWorld + AA). Only anecdotal tweets (n=1–3) found, directionally siding with OSWorld (Opus ≫ Sonnet 5). Revisit in a few weeks.
 - **CursorBench (HN 48736605) — VERIFIED REAL, secondary.** The earlier "could-not-reconfirm" alert was a false alarm from HN HTML rate-limiting; via the Algolia API the comment exists (maxloh, id 48747133): Fable 5 Max 72.9% @ $18.02 vs Opus 4.7 Max 64.8% @ $11.02 (same bench, both Max → 1.64×). But it is a **forum comment citing CursorBench `[0]`** — get the primary CursorBench URL before adding it to `raw-data.csv`.
 
-### PASS 2 (2026-07-06) — CursorBench found; corroboration now **vert 18 · jaune 6 · orange 1 · rouge 0** (25 nodes, incl. Haiku merged `@solo`)
+### PASS 2 (2026-07-06) — CursorBench found; corroboration now **green 18 · yellow 6 · orange 1 · red 0** (25 nodes, incl. Haiku merged `@solo`)
 
 A second Sonnet sweep (5 packages) yielded ONE integrable source, but a decisive one:
 
