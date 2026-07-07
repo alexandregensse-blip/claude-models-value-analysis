@@ -29,7 +29,7 @@
     </div>
     <div class="card pad" style="margin-top:14px">
       <h3>Value score — distance to the frontier envelope</h3>
-      <p class="sub">We fit the frontier as a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, the cost the efficient frontier "charges" for a given quality (R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above). Each frontier couple's <b>score</b> = its <b>signed distance in log-cost</b> to that curve&nbsp;: how much <b>cheaper (+)</b> or <b>dearer (−)</b> it is than the frontier price <b>for its quality</b>, squashed by <b>tanh(residual ⁄ RMS)</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. Only the <b>Pareto-frontier couples</b> are shown.</p>
+      <p class="sub">We fit the frontier as a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, the cost the efficient frontier "charges" for a given quality (R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above). Each frontier couple's <b>score</b> = its <b>signed distance in log-cost</b> to that curve&nbsp;: how much <b>cheaper (+)</b> or <b>dearer (−)</b> it is than the frontier price <b>for its quality</b>, squashed by <b>tanh(residual ⁄ RMS)</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. <b>Confidence intervals are baked in</b>&nbsp;: both the curve and every score weight the couple's centre (½) and its four CI extremities (⅛ each), so a <b>wide interval softens the score toward the trend</b>. Only the <b>Pareto-frontier couples</b> are shown.</p>
       <div class="chartbox"><table id="score-tbl">
         <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value score</th></tr></thead>
         <tbody></tbody>

@@ -158,7 +158,7 @@
     </div>
     <div class="card pad" style="margin-top:14px">
       <h3>Value score — distance to the frontier envelope</h3>
-      <p class="sub">We fit the frontier as a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, the cost the efficient frontier "charges" for a given quality (R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above). Each frontier couple's <b>score</b> = its <b>signed distance in log-cost</b> to that curve&nbsp;: how much <b>cheaper (+)</b> or <b>dearer (−)</b> it is than the frontier price <b>for its quality</b>, squashed by <b>tanh(residual ⁄ RMS)</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. Only the <b>Pareto-frontier couples</b> are shown.</p>
+      <p class="sub">We fit the frontier as a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, the cost the efficient frontier "charges" for a given quality (R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above). Each frontier couple's <b>score</b> = its <b>signed distance in log-cost</b> to that curve&nbsp;: how much <b>cheaper (+)</b> or <b>dearer (−)</b> it is than the frontier price <b>for its quality</b>, squashed by <b>tanh(residual ⁄ RMS)</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. <b>Confidence intervals are baked in</b>&nbsp;: both the curve and every score weight the couple's centre (½) and its four CI extremities (⅛ each), so a <b>wide interval softens the score toward the trend</b>. Only the <b>Pareto-frontier couples</b> are shown.</p>
       <div class="chartbox"><table id="score-tbl">
         <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value score</th></tr></thead>
         <tbody></tbody>
@@ -259,9 +259,6 @@ function solve3(A,b){ const M=A.map((r,i)=>[...r,b[i]]);
   for(let c=0;c<3;c++){ let piv=c; for(let r=c+1;r<3;r++) if(Math.abs(M[r][c])>Math.abs(M[piv][c])) piv=r; [M[c],M[piv]]=[M[piv],M[c]];
     for(let r=0;r<3;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<4;k++) M[r][k]-=f*M[c][k]; } }
   return [M[0][3]/M[0][0],M[1][3]/M[1][1],M[2][3]/M[2][2]]; }
-function quadFit(xs,ys){ const S=[0,0,0,0,0],T=[0,0,0];
-  for(let i=0;i<xs.length;i++){ const x=xs[i],y=ys[i]; let xp=1; for(let k=0;k<5;k++){S[k]+=xp; xp*=x;} let xq=1; for(let k=0;k<3;k++){T[k]+=xq*y; xq*=x;} }
-  return solve3([[S[0],S[1],S[2]],[S[1],S[2],S[3]],[S[2],S[3],S[4]]],T); }
 
 // ---- COST & QUALITY are DATA-DRIVEN: relative [central, ci_lo, ci_hi] per (model,effort), anchored opus-4.8@medium,
 // computed in build.py (cost_grid / ratio_grid) from measured same-task ratios. The only hand-set values are META below:
@@ -331,6 +328,18 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
       s.appendChild(el("line",{x1:L.ax,y1:L.ay,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.lead,"stroke-width":L.mdl?0.9:0.7,"stroke-opacity":0.4})); }
     const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":L.fs,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); }); }
 
+// UNCERTAINTY-AWARE price envelope: each frontier couple contributes 5 weighted samples to the fit — its centre (w=0.5)
+// and the four IC extremities (cost lo/hi, quality lo/hi; w=0.125 each). A wide IC thus smears the point over its box
+// instead of pinning the curve to an over-precise centre.  Fit: log10(cost) = g(T(quality)).
+function fitPriceEnvelope(front){ const S=[0,0,0,0,0],U=[0,0,0];
+  const add=(Tq,lc,w)=>{ let xp=1; for(let k=0;k<5;k++){S[k]+=w*xp; xp*=Tq;} let xq=1; for(let k=0;k<3;k++){U[k]+=w*xq*lc; xq*=Tq;} };
+  front.forEach(p=>{ const Tq=symT(p.q), lc=Math.log10(p.c);
+    add(Tq,lc,0.5); add(Tq,Math.log10(p.clo),0.125); add(Tq,Math.log10(p.chi),0.125); add(symT(p.qlo),lc,0.125); add(symT(p.qhi),lc,0.125); });
+  const co=solve3([[S[0],S[1],S[2]],[S[1],S[2],S[3]],[S[2],S[3],S[4]]],U); return t=>co[0]+co[1]*t+co[2]*t*t; }
+// Single fused value score: propagate the IC through the (monotone) score by the SAME 5-point weighting, then average.
+// s(c,q) = tanh( (frontier-price-for-q − actual-log-cost) / rms ). One number, uncertainty baked in (wide IC → softened).
+function valueScoreOf(gevT,rms,p){ const s=(c,q)=>Math.tanh((gevT(symT(q))-Math.log10(c))/rms);
+  return 0.5*s(p.c,p.q)+0.125*(s(p.clo,p.q)+s(p.chi,p.q)+s(p.c,p.qlo)+s(p.c,p.qhi)); }
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=1100,H=619,mL=58,mR=64,mT=22,mB=56, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; trimmed right margin so the plot extends
@@ -394,18 +403,18 @@ function drawPareto(){
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
-  // HORIZONTAL envelope: fit log10(cost) = g(T(quality)) — the frontier "price" for a given quality. Distance is measured
-  // in log-COST (how much cheaper/dearer than that price), so cost is weighted linearly (no deform where the curve flattens).
-  const hfit=quadFit(par.map(p=>symT(p.q)),par.map(p=>Math.log10(p.c))), gevT=t=>hfit[0]+hfit[1]*t+hfit[2]*t*t;
-  const xv=par.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² in log-cost, rendered live
+  // HORIZONTAL price envelope log10(cost) = g(T(quality)), fit UNCERTAINTY-AWARE (5 weighted points per couple). Distance
+  // is measured in log-COST (cheaper/dearer than the frontier price for your quality) so cost is weighted linearly.
+  const gevT=fitPriceEnvelope(par);
+  const xv=par.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² (central points, log-cost)
     ssX=xv.reduce((a,v)=>a+(v-xm)*(v-xm),0), rssX=par.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
   { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
-  { const qa=par.map(p=>p.q), qmn=Math.min(...qa), qmx=Math.max(...qa); let d="";                        // draw the envelope by sampling quality → cost
-    for(let i=0;i<=56;i++){ const q=qmn+(qmx-qmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,gevT(symT(q))))+" "+Y(q)+" "; }
+  { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to plot rect)
+    for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt));
+      if(cost>=cLo&&cost<=cHi&&q>=ymn&&q<=ymx){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
-  // score = signed distance in log-cost: + = cheaper than the frontier price for this quality, − = dearer. Squashed by tanh.
-  const resAll=pts.map(p=>gevT(symT(p.q))-Math.log10(p.c)), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
-  const scored=pts.map((p,i)=>({...p,score:Math.tanh(resAll[i]/rms),front:pset.has(p.m+"@"+p.e)}));
+  const rms=Math.sqrt(pts.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/pts.length);
+  const scored=pts.map(p=>({...p,score:valueScoreOf(gevT,rms,p),front:pset.has(p.m+"@"+p.e)}));   // single fused score, IC baked in
   fillScoreTable(scored);
   const ells=drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP");   // ovals only on the frontier points
   s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
@@ -458,13 +467,13 @@ const TIERS=[
 function tierPicks(){
   const rows=[];
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],q:q[0],y:q[0]/cg[e][0]}); } }
+    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2],y:q[0]/cg[e][0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  // horizontal envelope + value score S + hidden prominence (for the crown) — same envelope as the value-score table
-  const hfit=quadFit(front.map(p=>symT(p.q)),front.map(p=>Math.log10(p.c))), gevT=t=>hfit[0]+hfit[1]*t+hfit[2]*t*t;
-  const resAll=rows.map(p=>gevT(symT(p.q))-Math.log10(p.c)), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
-  front.forEach(p=>p.S=Math.tanh((gevT(symT(p.q))-Math.log10(p.c))/rms));
+  // uncertainty-aware price envelope + fused value score S + hidden prominence (crown) — same machinery as the value-score table
+  const gevT=fitPriceEnvelope(front);
+  const rms=Math.sqrt(rows.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/rows.length);
+  front.forEach(p=>p.S=valueScoreOf(gevT,rms,p));
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
   const hidMin=Math.min(...front.map(p=>p.hid)), anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), den=((anc?anc.hid:0)-hidMin)||1;
   front.forEach(p=>p.norm=100*(p.hid-hidMin)/den);   // fused relative score: 0 = weakest frontier couple, 100 = anchor (Opus 4.8 @medium)
