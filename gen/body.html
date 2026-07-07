@@ -49,18 +49,6 @@
       </div>
     </details>
     <details class="fold">
-      <summary>What moves everything — four factors behind the numbers</summary>
-      <div class="fold-body pad">
-        <p class="sub">The picks below are an order of magnitude. Four factors, each measured elsewhere, modulate them strongly — keep them in mind when reading the tiers.</p>
-        <div class="grid">
-          <div class="card pad crit"><h3>Task type</h3><p>Effort and model choice don't weigh the same depending on the nature of the work — review, reasoning and pure coding reward effort very differently.</p></div>
-          <div class="card pad crit"><h3>Complexity</h3><p>The harder the task, the more effort costs — up to the point where extra thinking starts to hurt (the inverted-U).</p></div>
-          <div class="card pad crit"><h3>Generation</h3><p>Recent Opus models do more with fewer tokens; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
-          <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
-        </div>
-      </div>
-    </details>
-    <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
         <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b>; for each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
@@ -87,6 +75,18 @@
           </table>
         </div>
         <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>What moves everything — four factors behind the numbers</summary>
+      <div class="fold-body pad">
+        <p class="sub">The tier picks above are an order of magnitude. Four factors, each measured elsewhere, modulate them strongly — keep them in mind when reading the tiers and the matrix.</p>
+        <div class="grid">
+          <div class="card pad crit"><h3>Task type</h3><p>Effort and model choice don't weigh the same depending on the nature of the work — review, reasoning and pure coding reward effort very differently.</p></div>
+          <div class="card pad crit"><h3>Complexity</h3><p>The harder the task, the more effort costs — up to the point where extra thinking starts to hurt (the inverted-U).</p></div>
+          <div class="card pad crit"><h3>Generation</h3><p>Recent Opus models do more with fewer tokens; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
+          <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
+        </div>
       </div>
     </details>
   </section>

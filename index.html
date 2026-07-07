@@ -179,10 +179,10 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 .meta.meta-side .k{font-size:11.5px}
 @media (max-width:640px){.hero-corner{position:static;align-items:flex-start;margin-bottom:16px}
   .hero h1{padding-right:0}}
-/* Best-overall above the header cards (tier-card layout, narrow, no dashed rule; height matched in JS) */
+/* Best-overall above the header cards (tier-card layout, narrow, no dashed rule) */
 #tier-crown-top{max-width:30%;margin:0 auto 18px}
-#tier-crown-top .tier{border-color:var(--opus48);justify-content:center}
-#tier-crown-top .tier .tier-yield{color:var(--opus48)}
+#tier-crown-top .tier{border-color:var(--opus48)}
+#tier-crown-top .tier .tier-yield{color:var(--opus48);font-size:clamp(34px,4.2vw,48px)}
 #tier-crown-top .tier .tier-top{border-bottom:none;padding-bottom:0;margin-bottom:0}
 #tier-crown-top .tier-pick{font-size:clamp(22px,2.6vw,30px)}
 #tier-crown-top .tier-pick .dot{width:14px;height:14px}
@@ -191,6 +191,10 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 #tier-cards-top .tier-pick{font-size:18px}
 #tier-cards-top .tier-pick .dot{width:12px;height:12px}
 #tier-cards-top .tier-nums{font-size:14px}
+/* Give the model/cost/quality column the room it needs so cost/quality stays on one line */
+#tier-cards-top .tier-left,#tier-crown-top .tier-left{flex:1 1 auto}
+#tier-cards-top .tier-yield,#tier-crown-top .tier-yield{flex:0 0 auto}
+#tier-cards-top .tier-nums,#tier-crown-top .tier-nums{white-space:nowrap}
 
 </style>
 </head>
@@ -246,18 +250,6 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       </div>
     </details>
     <details class="fold">
-      <summary>What moves everything — four factors behind the numbers</summary>
-      <div class="fold-body pad">
-        <p class="sub">The picks below are an order of magnitude. Four factors, each measured elsewhere, modulate them strongly — keep them in mind when reading the tiers.</p>
-        <div class="grid">
-          <div class="card pad crit"><h3>Task type</h3><p>Effort and model choice don't weigh the same depending on the nature of the work — review, reasoning and pure coding reward effort very differently.</p></div>
-          <div class="card pad crit"><h3>Complexity</h3><p>The harder the task, the more effort costs — up to the point where extra thinking starts to hurt (the inverted-U).</p></div>
-          <div class="card pad crit"><h3>Generation</h3><p>Recent Opus models do more with fewer tokens; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
-          <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
-        </div>
-      </div>
-    </details>
-    <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
         <p class="sub">Consolidating the frontier into a decision. We set <b>four target complexity levels q*</b>; for each, we pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — a Gaussian around q* (in the <b>dilated metric</b>, so it matches the chart) times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. The <b>big figure</b> is a <b>fused relative score</b>&nbsp;: <b>0</b> = the weakest frontier couple, <b>100</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium). The crown takes the top score within the <b>[1.0, 1.8]</b> quality window.</p>
@@ -284,6 +276,18 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           </table>
         </div>
         <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;4.8&nbsp;@medium&nbsp;= 1.0), from the same consolidated ratios as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed (Sonnet&nbsp;4.6&nbsp;: no xhigh).</p>
+      </div>
+    </details>
+    <details class="fold">
+      <summary>What moves everything — four factors behind the numbers</summary>
+      <div class="fold-body pad">
+        <p class="sub">The tier picks above are an order of magnitude. Four factors, each measured elsewhere, modulate them strongly — keep them in mind when reading the tiers and the matrix.</p>
+        <div class="grid">
+          <div class="card pad crit"><h3>Task type</h3><p>Effort and model choice don't weigh the same depending on the nature of the work — review, reasoning and pure coding reward effort very differently.</p></div>
+          <div class="card pad crit"><h3>Complexity</h3><p>The harder the task, the more effort costs — up to the point where extra thinking starts to hurt (the inverted-U).</p></div>
+          <div class="card pad crit"><h3>Generation</h3><p>Recent Opus models do more with fewer tokens; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
+          <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
+        </div>
       </div>
     </details>
   </section>
@@ -617,10 +621,6 @@ function drawTiers(){
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
       <p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>
     </div>`;
-  // best-overall card is narrower than a header tier card → scale its height to keep the SAME aspect ratio
-  if(crT&&top){ const ref=top.querySelector(".tier"), cc=crT.querySelector(".tier");
-    if(ref&&cc){ cc.style.minHeight=""; const rb=ref.getBoundingClientRect(), cb=cc.getBoundingClientRect();
-      if(rb.width>0&&rb.height>0) cc.style.minHeight=(rb.height*cb.width/rb.width)+"px"; } }
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
 // plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.
@@ -758,7 +758,6 @@ function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
 new MutationObserver(renderAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-let __rz; addEventListener("resize",()=>{ clearTimeout(__rz); __rz=setTimeout(drawTiers,150); });   // re-match the best-overall height ratio when widths change
 
 </script>
 </body>
