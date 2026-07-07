@@ -181,6 +181,7 @@ function drawPareto(){
 // couple with the best score/cost YIELD (q/c) — the cheapest way to clear the bar. The crown ranks
 // MODELS by a "best of both worlds" score V = q³/c (capability weighted 3× cost, in log terms): it
 // rewards being both capable and efficient, so neither the cheapest-but-weak nor the strongest-but-costly wins.
+const QFLOOR=1.0;   // crown complexity bar: only couples with quality ≥ this (relative to Opus 4.8 @medium) qualify — tuned for complex/production tasks
 const TIERS=[
   {key:"triage",  name:"Triage &amp; volume", lo:0,    hi:0.65, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
   {key:"everyday",name:"Everyday build",      lo:0.65, hi:0.90, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
@@ -195,16 +196,22 @@ function tierPicks(){
   const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
   const picks=TIERS.map(t=>{ const cand=front.filter(p=>p.q>=t.lo&&p.q<t.hi);
     return cand.length?{...t,win:cand.reduce((a,b)=>b.y>a.y?b:a)}:{...t,win:null}; });
-  const crown=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; let best=null;   // each model's best op by V=q³/c
-    for(const e in cg){ const q=qg[e]; if(!q) continue; const V=Math.pow(q[0],3)/cg[e][0];
+  // Crown: V = q³/c, but only over couples that CLEAR the complexity bar q ≥ QFLOOR. Rationale (research-backed):
+  // benchmark score is a task-averaged proxy that dilutes the hard tail; satisfaction is threshold/reliability-driven,
+  // and the value of effort rises with difficulty. The floor isolates the tail where capability actually pays — so
+  // the winning EFFORT lifts off 'low' (which only wins on flat average quality). q₀=1.0 = "must match the flagship".
+  const crown=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; let best=null;
+    for(const e in cg){ const q=qg[e]; if(!q||q[0]<QFLOOR) continue; const V=Math.pow(q[0],3)/cg[e][0];
       if(!best||V>best.V) best={m,e,c:cg[e][0],q:q[0],V}; } if(best) crown.push(best); }
   crown.sort((a,b)=>b.V-a.V);
-  return {picks,crown};
+  const extValue=rows.reduce((a,b)=>b.y>a.y?b:a);      // global pure-value extreme (max yield q/c)
+  const extCap=rows.reduce((a,b)=>b.q>a.q?b:a);        // global pure-capability extreme (max quality)
+  return {picks,crown,extValue,extCap};
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
-  const {picks,crown}=tierPicks();
+  const {picks,crown,extValue,extCap}=tierPicks();
   host.innerHTML=picks.map(t=>{ const w=t.win, col=w?cvar(MODELS[w.m].c):cvar('--muted');
     const pick=w?`<span class="tier-pick" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
         <span class="tier-nums">cost <b>${w.c.toFixed(2)}×</b> · quality <b>${w.q.toFixed(2)}×</b> · yield <b>${w.y.toFixed(2)}</b></span>`:`<span class="faint">no couple in band</span>`;
@@ -215,14 +222,12 @@ function drawTiers(){
       <span class="ex">${t.ex}</span>
     </div>`; }).join("");
   const c=crown[0], col=cvar(MODELS[c.m].c);
-  const runValue=crown.slice().sort((a,b)=>(b.q/b.c)-(a.q/a.c))[0];        // pure-value extreme (max yield)
-  const runCap=crown.slice().sort((a,b)=>b.q-a.q)[0];                      // pure-capability extreme (max quality)
   const cr=document.getElementById("tier-crown");
   if(cr) cr.innerHTML=`
     <div class="crown-badge">👑 Best of both worlds</div>
     <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label} · ${capE(c.e)}</div>
-    <div class="crown-score">V = q³ ⁄ c = <b>${c.V.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×)</span></div>
-    <p class="crown-note">Ranks models by a capability-weighted value score <b>V = q³/c</b> — capability counts three times cost in log terms, so the crown goes to the balance, not an extreme. For reference&nbsp;: pure value (max yield) → <b style="color:${cvar(MODELS[runValue.m].c)}">${MODELS[runValue.m].label} · ${capE(runValue.e)}</b> · pure capability (max quality) → <b style="color:${cvar(MODELS[runCap.m].c)}">${MODELS[runCap.m].label} · ${capE(runCap.e)}</b>. <b>${MODELS[c.m].label}</b> wins by pairing near-parity quality with sub-parity cost.</p>`;
+    <div class="crown-score">V = q³ ⁄ c = <b>${c.V.toFixed(2)}</b> &nbsp;<span class="faint">(quality ${c.q.toFixed(2)}× at cost ${c.c.toFixed(2)}×, over couples clearing q ≥ ${QFLOOR.toFixed(2)})</span></div>
+    <p class="crown-note">Ranks models by a capability-weighted value score <b>V = q³/c</b>, evaluated <b>only over couples that clear a complexity bar q ≥ ${QFLOOR.toFixed(2)}</b> (≈ must match the flagship). Two reasons, both backed by the benchmark-vs-satisfaction literature&nbsp;: a task-averaged score dilutes the <b>hard tail</b> where effort actually pays, and satisfaction is <b>threshold/reliability-driven</b>, not mean-driven — so the floor lifts the winning effort off "low" (which only wins on flat average quality). For reference, the pure extremes&nbsp;: max value (yield) → <b style="color:${cvar(MODELS[extValue.m].c)}">${MODELS[extValue.m].label} · ${capE(extValue.e)}</b> · max capability (quality) → <b style="color:${cvar(MODELS[extCap.m].c)}">${MODELS[extCap.m].label} · ${capE(extCap.e)}</b>. <b>${MODELS[c.m].label} · ${capE(c.e)}</b> wins the balance.</p>`;
 }
 // ---------- MATRIX (sorted by intelligence desc) — cost cells DATA-DRIVEN from COSTGRID ----------
 const fr=x=>x.toFixed(2);
