@@ -84,12 +84,12 @@
 .scorepill{display:inline-block;min-width:52px;text-align:center;font-size:12.5px;font-weight:700;padding:2px 10px;border-radius:20px;font-variant-numeric:tabular-nums}
 .frontbadge{display:inline-block;font-size:11px;font-weight:600;color:var(--opus48)}
 /* Pareto chained mini-blocks (frontier order) — centred, filling the full width */
-.pareto-blocks{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px 6px;margin-top:20px}
-.pblock{flex:1 1 120px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2px;padding:8px 10px;border:1.5px solid var(--line2);border-radius:9px;background:var(--panel)}
-.pblock b{font-size:13px;line-height:1.15}
-.pblock-e{font-size:11px;color:var(--muted);text-transform:capitalize}
-.pblock-n{font-size:11px;color:var(--faint);font-variant-numeric:tabular-nums}
-.pconn{display:flex;align-items:center;color:var(--faint);font-size:14px}
+.pareto-blocks{display:flex;flex-wrap:nowrap;align-items:stretch;gap:5px 3px;margin-top:20px;overflow-x:auto}
+.pblock{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:1px;padding:7px 5px;border:1.5px solid var(--line2);border-radius:9px;background:var(--panel)}
+.pblock b{font-size:12px;line-height:1.15;white-space:nowrap}
+.pblock-e{font-size:10px;color:var(--muted);text-transform:capitalize}
+.pblock-n{font-size:10px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pconn{display:flex;align-items:center;color:var(--faint);font-size:12px;flex:none}
 /* Tier tuner: window viz + q*/σ sliders */
 #tier-tuner{margin-bottom:16px}
 .tuner-svg{width:100%;height:auto;display:block}
