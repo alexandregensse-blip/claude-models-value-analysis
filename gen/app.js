@@ -40,8 +40,9 @@ function offs(m){return m==="haiku-4.5"?OFFH:(m==="sonnet-4.6"?OFF4:OFF5);}
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
 // Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
-function symY(ymn,ymx,mT,ih,yp){ const SQ=0.045, T=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), tb=T(ymn)-0.12, tt=T(ymx)+0.12;
-  return v=>mT+yp+(1-(T(v)-tb)/(tt-tb))*(ih-2*yp); }
+const SQ=0.045, symT=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), symTinv=u=>1+Math.sign(u)*SQ*(Math.exp(Math.abs(u))-1);
+function symY(ymn,ymx,mT,ih,yp){ const tb=symT(ymn)-0.12, tt=symT(ymx)+0.12;
+  return v=>mT+yp+(1-(symT(v)-tb)/(tt-tb))*(ih-2*yp); }
 // Quality gridlines at round quality values (non-uniform spacing under symlog); the 1.0 anchor is dashed.
 function qGrid(s,Y,mL,iw,mT,ih){ [0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
   s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?'--opus48':'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
@@ -161,13 +162,14 @@ function drawPareto(){
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
-  // Fit a smooth logarithmic ENVELOPE to the frontier (quality vs log-cost); draw it faint, BEHIND everything else.
-  const fit=logFit(par.map(p=>Math.log10(p.c)),par.map(p=>p.q)), fev=x=>fit[0]+fit[1]*x;
+  // Fit the frontier ENVELOPE in the chart's DILATED quality metric: T(q) = A + B·log10(c). Since the Y pixel is affine
+  // in T, this renders as a STRAIGHT line on the chart (a clean log). Draw it faint, BEHIND everything else.
+  const fit=logFit(par.map(p=>Math.log10(p.c)),par.map(p=>symT(p.q))), fevT=x=>fit[0]+fit[1]*x, fev=x=>symTinv(fevT(x));
   { const cmn=Math.min(...par.map(p=>p.c)), cmx=Math.max(...par.map(p=>p.c)), lmn=Math.log10(cmn), lmx=Math.log10(cmx); let d="";
     for(let i=0;i<=56;i++){ const lx=lmn+(lmx-lmn)*i/56; d+=(i?"L":"M")+X(Math.pow(10,lx))+" "+Y(fev(lx))+" "; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.5})); }
-  // score = signed distance to the envelope, squashed: tanh(residual / RMS-over-all-points). +1 above · 0 on · −1 below.
-  const resAll=pts.map(p=>p.q-fev(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
+  // score = signed distance to the envelope IN THE DILATED METRIC, squashed: tanh(residual_T / RMS). +1 above · 0 on · −1 below.
+  const resAll=pts.map(p=>symT(p.q)-fevT(Math.log10(p.c))), rms=Math.sqrt(resAll.reduce((a,r)=>a+r*r,0)/resAll.length);
   const scored=pts.map((p,i)=>({...p,score:Math.tanh(resAll[i]/rms),front:pset.has(p.m+"@"+p.e)}));
   fillScoreTable(scored);
   const ells=drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP");   // ovals only on the frontier points
