@@ -346,8 +346,17 @@ def main():
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     body = body.replace("__NSAMETASK__", str(len(RD["cost"])))   # same-task cost-ratio measurement points (dynamic)
-    html = f"<style>\n{css}\n</style>\n{body}\n<script>\n{app}\n</script>\n"
-    open(OUT,"w").write(html)
+    html = (
+        "<!doctype html>\n"
+        '<html lang="en">\n<head>\n'
+        '<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
+        "<title>Cost, effort and model — the Claude matrix</title>\n"
+        '<meta name="description" content="What each recent Claude model actually costs, at every effort level, and whether paying for more effort is worth it — a normalized cost x model x effort matrix fused from independent public measurements.">\n'
+        f"<style>\n{css}\n</style>\n"
+        f"</head>\n<body>\n{body}\n<script>\n{app}\n</script>\n</body>\n</html>\n"
+    )
+    open(OUT,"w",encoding="utf-8").write(html)
     print(f"built {OUT}  ({len(html)} bytes)  cost-pts={len(RD['cost'])} tok-pts={len(RD['tok'])}")
     print(f"  no-think pairs={list(NT['pairs'])}  index={NT['index']}")
     print(f"  default  pairs={list(DF['pairs'])}  index={DF['index']}")
