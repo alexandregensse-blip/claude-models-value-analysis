@@ -141,10 +141,21 @@ function fitPriceEnvelope(front){
   // and IC extremities the value score evaluates, which can fall outside the frontier's own quality range.
   const gg=u=>co[0]+co[1]*u+co[2]*u*u;
   return t=>gg(Math.min(Math.max(t-T0,0),L)); }
-// Single fused value score: propagate the IC through the (monotone) score by the SAME 5-point weighting, then average.
-// s(c,q) = tanh( (frontier-price-for-q − actual-log-cost) / rms ). One number, uncertainty baked in (wide IC → softened).
-function valueScoreOf(gevT,rms,p){ const s=(c,q)=>Math.tanh((gevT(symT(q))-Math.log10(c))/rms);
-  return 0.5*s(p.c,p.q)+0.125*(s(p.clo,p.q)+s(p.chi,p.q)+s(p.c,p.qlo)+s(p.c,p.qhi)); }
+// Distance of a couple to the price envelope, in LOG-COST: r = log10(price the frontier charges for that quality)
+// − log10(what the couple actually costs). Positive = cheaper than the frontier price, i.e. good value. The interval
+// is propagated by the SAME 5-point weighting used to fit the envelope — the couple's centre (½) and its four CI
+// extremities (⅛ each) — so a wide interval carries the couple toward what the envelope charges across its whole box.
+// Averaging in LOG space is what makes the exponential below a clean ratio (it is a weighted geometric mean).
+function valueResidual(gevT,p){ const r=(c,q)=>gevT(symT(q))-Math.log10(c);
+  return 0.5*r(p.c,p.q)+0.125*(r(p.clo,p.q)+r(p.chi,p.q)+r(p.c,p.qlo)+r(p.c,p.qhi)); }
+// VALUE INDEX, anchored so Opus 4.8 @medium = 100. Being an exponentiated difference of log-distances it is a genuine
+// RATIO: 384 reads "3.8× the value-for-money of the anchor", 45 reads "0.45×" — every value above 100 means something,
+// which a linear stretch of a bounded score could not offer. Unbounded above by construction: that is the cost of an
+// interpretable multiple, and it is why the anchor can sit anywhere in the ranking without breaking the scale.
+// The previous tanh squash is deliberately gone — a ratio cannot be squashed without destroying the reading. A wide
+// interval therefore now SHIFTS the index (through the weighting above) rather than damping it toward neutral.
+const valueIndex=(r,rAnc)=>100*Math.pow(10,r-rAnc);
+const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m==="opus-4.8"&&p.e==="medium"); return a?valueResidual(gevT,a):0; };
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
@@ -218,8 +229,8 @@ function drawPareto(){
     for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
       if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
-  const rms=Math.sqrt(pts.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/pts.length);
-  const scored=pts.map(p=>({...p,score:valueScoreOf(gevT,rms,p),front:pset.has(p.m+"@"+p.e)}));   // single fused score, IC baked in
+  const rAnc=anchorResidual(gevT,pts);                                                            // 100 = Opus 4.8 @medium
+  const scored=pts.map(p=>({...p,score:valueIndex(valueResidual(gevT,p),rAnc),front:pset.has(p.m+"@"+p.e)}));
   fillScoreTable(scored);
   const ells=drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP");   // ovals only on the frontier points
   s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
@@ -246,8 +257,9 @@ function fillScoreTable(scored){
   const tb=document.querySelector("#score-tbl tbody"); if(!tb) return; tb.innerHTML="";
   const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
   scored.filter(p=>p.front).slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),   // frontier couples only
-    sc=p.score>=0?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.abs(p.score)*0.52)*100),
-    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:${sc}">${p.score>=0?'+':''}${p.score.toFixed(2)}</span>`;
+    // Intensity from the DECADE distance to the anchor, so 2× and 0.5× read equally strong; capped at one decade.
+    sc=p.score>=100?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(Math.log10(p.score/100)),1)*0.52)*100),
+    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:${sc}">${Math.round(p.score)}</span>`;
     const tr=document.createElement("tr");
     tr.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
       +`<td class="num">${p.c.toFixed(2)}×</td><td class="num">${p.q.toFixed(2)}×</td>`
@@ -300,22 +312,18 @@ function tierPicks(){
     for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2],y:q[0]/cg[e][0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  // uncertainty-aware price envelope + fused value score S + hidden prominence (crown) — same machinery as the value-score table
+  // uncertainty-aware price envelope + log-distance r + hidden prominence (crown) — same machinery as the value table
   const gevT=fitPriceEnvelope(front);
-  const rms=Math.sqrt(rows.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/rows.length);
-  rows.forEach(p=>p.S=valueScoreOf(gevT,rms,p));        // S is defined for EVERY couple — frontier and dominated alike
-  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);   // knee detector: CROWN SELECTION only
-  // DISPLAYED SCORE, normalised over the FULL set of couples: 0 = the weakest couple anywhere, 50 = the anchor
-  // (Opus 4.8 @medium), 100 = the strongest. Normalising on the full set — not on the frontier — is what makes the
-  // scale survive a release: a new model can push the anchor OFF the Pareto frontier (Opus 5 did exactly that), but
-  // it can never leave the full set, so the 50 mark always exists. It also means the number a tier card shows is the
-  // couple's own value, independent of who its frontier neighbours happen to be; prominence is a 2nd difference, so
-  // it is only defined along the frontier and it read 0 for the least knee-like couple however good that couple was.
-  // Piecewise-linear through the three reference points so each lands exactly on 0 / 50 / 100.
-  const Ss=rows.map(p=>p.S), Smin=Math.min(...Ss), Smax=Math.max(...Ss);
-  const anc=rows.find(p=>p.m==="opus-4.8"&&p.e==="medium"), Sa=anc?anc.S:(Smin+Smax)/2;
-  const lo=Math.max(Sa-Smin,1e-9), hi=Math.max(Smax-Sa,1e-9);
-  rows.forEach(p=>p.norm=p.S<=Sa ? 50*(p.S-Smin)/lo : 50+50*(p.S-Sa)/hi);
+  rows.forEach(p=>p.S=valueResidual(gevT,p));           // r is defined for EVERY couple — frontier and dominated alike
+  // Prominence stays a 2nd difference of r, i.e. computed in LOG space where these distances are additive, so it keeps
+  // meaning "this couple stands out from its two frontier neighbours". Crown SELECTION only.
+  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
+  // DISPLAYED SCORE = the value index, anchored so Opus 4.8 @medium = 100 (see valueIndex). The anchor is read from
+  // the FULL set of couples, not the frontier: a new model can push it OFF the Pareto frontier — Opus 5 does — but
+  // never out of the full set, so the reference always exists. And because the index is a ratio rather than a stretch
+  // between two extremes, the anchor sitting low in the ranking no longer distorts anything above it.
+  const rAnc=anchorResidual(gevT,rows);
+  rows.forEach(p=>p.norm=valueIndex(p.S,rAnc));
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
@@ -349,7 +357,7 @@ function drawTiers(){
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>score</b> shown is the couple's own <b>value score S</b> (its IC-weighted distance to the price envelope) on the scale used throughout the report&nbsp;: <b>0</b> = the weakest couple measured, <b>50</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium), <b>100</b> = the strongest. It is normalised over <b>every</b> couple, dominated ones included — so the 50 mark survives a release that pushes the anchor off the frontier.</p>
+      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price envelope, exponentiated against the anchor&nbsp;: <b>100 = Opus&nbsp;4.8&nbsp;@medium</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
