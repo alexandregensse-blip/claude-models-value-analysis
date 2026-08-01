@@ -169,8 +169,13 @@ function fitPriceEnvelope(pts){
 // is propagated by the SAME 5-point weighting used to fit the envelope — the couple's centre (½) and its four CI
 // extremities (⅛ each) — so a wide interval carries the couple toward what the envelope charges across its whole box.
 // Averaging in LOG space is what makes the exponential below a clean ratio (it is a weighted geometric mean).
-function valueResidual(gevT,p){ const r=(c,q)=>gevT(symT(q))-Math.log10(c);
-  return 0.5*r(p.c,p.q)+0.125*(r(p.clo,p.q)+r(p.chi,p.q)+r(p.c,p.qlo)+r(p.c,p.qhi)); }
+// Split into the two halves so a tier can weight cost differently from quality (see TIERS.gam):
+//   G = what the price curve grants for this couple's quality · C = what the couple actually costs. Both IC-weighted
+//   in log10, by the same centre-½ / four-extremities-⅛ scheme. The plain residual is exactly G − C.
+function valueParts(gevT,p){
+  return { G: 0.75*gevT(symT(p.q)) + 0.125*(gevT(symT(p.qlo))+gevT(symT(p.qhi))),
+           C: 0.75*Math.log10(p.c) + 0.125*(Math.log10(p.clo)+Math.log10(p.chi)) }; }
+function valueResidual(gevT,p){ const {G,C}=valueParts(gevT,p); return G-C; }
 // VALUE INDEX, anchored so Opus 4.8 @medium = 100. Being an exponentiated difference of log-distances it is a genuine
 // RATIO: 384 reads "3.8× the value-for-money of the anchor", 45 reads "0.45×" — every value above 100 means something,
 // which a linear stretch of a bounded score could not offer. Unbounded above by construction: that is the cost of an
@@ -302,10 +307,10 @@ function fillScoreTable(scored){
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 // q and sig below are PLACEHOLDERS — tierDefaults() overwrites both from the data on load (see there).
 const TIERS=[
-  {key:"triage",  name:"Grunt work",             q:0.75, sig:0.80, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:0.80, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:0.80, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:0.80, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Grunt work",             q:0.75, sig:0.80, gam:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:0.80, gam:1.05, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:0.80, gam:0.95, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:0.80, gam:0.80, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 // DATA-DERIVED tier windows. Model quality drifts upward release after release: the weakest couple slowly improves
 // and the best one sets a new ceiling, so hardcoded q* go stale — the shipped 1.25 for the top tier had drifted ABOVE
@@ -356,7 +361,14 @@ function tierPicks(){
   // while cost spans 14.4, so a linear q/c is driven almost entirely by cost and tilts every tier toward the cheapest
   // couple: it collapsed the top tier onto the same pick as the one below it (3 distinct picks instead of 4).
   // Using the index also makes the number a card SHOWS the criterion that chose it.
-  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.norm > K(a.q,t.q,t.sig)*a.norm ? b : a)}));
+  // PER-TIER COST SENSITIVITY. Cost does not weigh the same at every complexity: on throwaway work you want the
+  // cheapest thing that clears the bar, on research-grade work a few extra points of capability are worth paying for.
+  // Each tier therefore ranks on G − gam·C rather than G − C, i.e. on price-curve-credit ⁄ cost^gam. gam > 1 punishes
+  // cost more than proportionally, gam < 1 less. Only the SELECTION is tilted — the index a card displays stays the
+  // neutral gam = 1 one, so the four cards remain comparable with each other and with the anchor.
+  front.forEach(p=>p.P=valueParts(gevT,p));
+  const tscore=(p,t)=>K(p.q,t.q,t.sig)*Math.pow(10,p.P.G-t.gam*p.P.C);
+  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> tscore(b,t) > tscore(a,t) ? b : a)}));
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
   const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
   return {picks,crown};
