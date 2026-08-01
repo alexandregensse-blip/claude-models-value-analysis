@@ -278,15 +278,19 @@ function tierPicks(){
   // uncertainty-aware price envelope + fused value score S + hidden prominence (crown) — same machinery as the value-score table
   const gevT=fitPriceEnvelope(front);
   const rms=Math.sqrt(rows.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/rows.length);
-  front.forEach(p=>p.S=valueScoreOf(gevT,rms,p));
-  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
-  const hidMin=Math.min(...front.map(p=>p.hid)), hidMax=Math.max(...front.map(p=>p.hid));
-  // 100 = the anchor while it is still on the frontier. Once a newer model DOMINATES the anchor it drops off the
-  // frontier entirely and `find` returns undefined — the old code then silently used 0 as the reference, which is
-  // not a prominence at all: the top of the scale became meaningless and couples read past 100. Fall back to the
-  // strongest prominence, which always exists, so the scale stays "0 = weakest, 100 = standout" either way.
-  const anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), uA=Math.max((anc?anc.hid:hidMax)-hidMin,1e-6);
-  front.forEach(p=>p.norm=100*Math.log1p(p.hid-hidMin)/Math.log1p(uA));   // LOG mapping; compresses the top so it doesn't explode
+  rows.forEach(p=>p.S=valueScoreOf(gevT,rms,p));        // S is defined for EVERY couple — frontier and dominated alike
+  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);   // knee detector: CROWN SELECTION only
+  // DISPLAYED SCORE, normalised over the FULL set of couples: 0 = the weakest couple anywhere, 50 = the anchor
+  // (Opus 4.8 @medium), 100 = the strongest. Normalising on the full set — not on the frontier — is what makes the
+  // scale survive a release: a new model can push the anchor OFF the Pareto frontier (Opus 5 did exactly that), but
+  // it can never leave the full set, so the 50 mark always exists. It also means the number a tier card shows is the
+  // couple's own value, independent of who its frontier neighbours happen to be; prominence is a 2nd difference, so
+  // it is only defined along the frontier and it read 0 for the least knee-like couple however good that couple was.
+  // Piecewise-linear through the three reference points so each lands exactly on 0 / 50 / 100.
+  const Ss=rows.map(p=>p.S), Smin=Math.min(...Ss), Smax=Math.max(...Ss);
+  const anc=rows.find(p=>p.m==="opus-4.8"&&p.e==="medium"), Sa=anc?anc.S:(Smin+Smax)/2;
+  const lo=Math.max(Sa-Smin,1e-9), hi=Math.max(Smax-Sa,1e-9);
+  rows.forEach(p=>p.norm=p.S<=Sa ? 50*(p.S-Smin)/lo : 50+50*(p.S-Sa)/hi);
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
@@ -320,7 +324,7 @@ function drawTiers(){
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note">Highest <b>relative score</b> across the frontier (softly centred on parity). The score is each frontier couple's <b>local prominence</b> — a 2nd difference of the cost-value score S (itself the IC-weighted distance to the price envelope) — rescaled so <b>0</b> = the weakest frontier couple and <b>100</b> = the anchor (Opus 4.8 @medium). It rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee.</p>
+      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>score</b> shown is the couple's own <b>value score S</b> (its IC-weighted distance to the price envelope) on the scale used throughout the report&nbsp;: <b>0</b> = the weakest couple measured, <b>50</b> = the anchor (Opus&nbsp;4.8&nbsp;@medium), <b>100</b> = the strongest. It is normalised over <b>every</b> couple, dominated ones included — so the 50 mark survives a release that pushes the anchor off the frontier.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
