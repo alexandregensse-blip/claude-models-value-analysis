@@ -243,17 +243,17 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <h3 class="blocktitle">Pareto Frontier</h3>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The faint grey curve is the frontier <b>price envelope</b> — the reference for the value index below.</p>
+      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The faint grey curve is the <b>price curve</b> — what a given quality typically costs, fitted on <b>every</b> measured couple (frontier and dominated alike), and the reference for the value index below.</p>
       <div id="pareto-blocks" class="pareto-blocks"></div>
       <details class="fold">
-        <summary>Value score — distance to the frontier envelope</summary>
+        <summary>Value index — distance to the price curve</summary>
         <div class="fold-body pad">
-          <p class="sub">We fit the frontier as a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, the cost the efficient frontier "charges" for a given quality (R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above). Each couple's <b>distance in log-cost</b> to that curve says how much <b>cheaper</b> or <b>dearer</b> it is than the frontier price <b>for its quality</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. That distance becomes the <b>value index</b> by exponentiating it relative to the anchor&nbsp;: <b>100 = Opus&nbsp;4.8&nbsp;@medium</b>, and because it is a ratio rather than a stretched scale, <b>350 reads literally as 3.5× the anchor's value for money</b> and 45 as 0.45×. It is unbounded above — the price of an interpretable multiple. <b>Confidence intervals are baked in</b>&nbsp;: both the curve and every index weight the couple's centre (½) and its four CI extremities (⅛ each), averaged in log space, so a <b>wide interval carries the couple toward what the envelope charges across its whole box</b>. The curve is <b>monotone by construction</b> — the frontier price cannot fall as quality rises — and beyond the observed quality range it is <b>held flat rather than extrapolated</b>. Its shape carries a <b>growing curvature</b> term, because once a model dominates a long stretch the frontier degenerates into a cheap near-flat run at low quality plus a steep effort ladder at the top, separated by a wide hole&nbsp;: a plain parabola forced through that misses the low-quality couples by a factor 2.3, and an unconstrained one bends back on itself and flips the sign of every score around it. Only the <b>Pareto-frontier couples</b> are shown.</p>
+          <p class="sub">We fit a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, what a given quality typically costs across <b>all 30 measured couples</b>, not just the Pareto frontier (R²&nbsp;≈&nbsp;<span id="pareto-r2">…</span>, drawn faint grey above). Each couple's <b>distance in log-cost</b> to that curve says how much <b>cheaper</b> or <b>dearer</b> it is than the frontier price <b>for its quality</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. That distance becomes the <b>value index</b> by exponentiating it relative to the anchor&nbsp;: <b>100 = Opus&nbsp;4.8&nbsp;@medium</b>, and because it is a ratio rather than a stretched scale, <b>350 reads literally as 3.5× the anchor's value for money</b> and 45 as 0.45×. It is unbounded above — the price of an interpretable multiple. <b>Confidence intervals are baked in</b>&nbsp;: both the curve and every index weight the couple's centre (½) and its four CI extremities (⅛ each), averaged in log space, so a <b>wide interval carries the couple toward what the envelope charges across its whole box</b>. The curve is <b>monotone by construction</b> — the price of quality cannot fall as quality rises — which also makes it safe to let it <b>extrapolate freely</b> beyond the observed range: it can flatten or steepen, never fold back. Its shape carries a <b>growing curvature</b> term, because cost climbs gently across most of the quality range then steepens sharply near the ceiling — a plain parabola cannot follow that, and an unconstrained one bends back on itself and flips the sign of every index around it. Fitting on all couples rather than on the frontier matters for the same reason&nbsp;: the frontier is by definition the <b>cheapest</b> couple at each quality, and with one model dominating a long stretch it thins to seven points with <b>64% of the quality axis empty</b>. Only the <b>Pareto-frontier couples</b> are shown.</p>
           <div class="chartbox"><table id="score-tbl">
             <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value index<br><span style="font-weight:400;text-transform:none;letter-spacing:0">anchor = 100</span></th></tr></thead>
             <tbody></tbody>
           </table></div>
-          <p class="cap"><b>Green</b> = above 100, cheaper than the frontier price for its quality (better value than the anchor), <b>red</b> = below 100, dearer; intensity = distance to the anchor in decades, capped at one. A couple on the frontier can still be red if it sits above the smooth price curve (you pay a premium the trend doesn't justify).</p>
+          <p class="cap"><b>Green</b> = above 100, cheaper than the frontier price for its quality (better value than the anchor), <b>red</b> = below 100, dearer; intensity = distance to the anchor in decades, capped at one. A couple on the Pareto frontier can still be red&nbsp;: being non-dominated does not mean being good value for what it delivers.</p>
         </div>
       </details>
     </div>
@@ -448,22 +448,22 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
 // and the four IC extremities (cost lo/hi, quality lo/hi; w=0.125 each). A wide IC thus smears the point over its box
 // instead of pinning the curve to an over-precise centre.  Fit: log10(cost) = g(T(quality)).
 //
-// SHAPE: log10(cost) = a + b·u + c·(e^{k·u} − 1)/k, with u = T(q) − T(qmin) and b, c ≥ 0. Then g'(u) = b + c·e^{k·u}
-// ≥ 0 everywhere, so the curve is MONOTONE NON-DECREASING BY CONSTRUCTION — no endpoint conditions to verify. The
-// price the frontier charges cannot fall as quality rises; a decreasing stretch is a fitting artefact, not a shape,
-// and since every value index is a distance to this curve the artefact would propagate to all of them.
-// The exponential term is there because a PARABOLA CANNOT DESCRIBE THIS FRONTIER. Once one model dominates a long
-// stretch, the frontier degenerates into a cheap near-flat run at low quality plus a steep effort ladder at the top,
-// separated by a wide hole — curvature that GROWS along the axis. Forced through a parabola the fit missed the two
-// low-quality couples by a factor 2.3 and reached only R² 0.77; with the exponential term: 1.6 and R² 0.92 on the
-// same data. Note that a denser basis is NOT the answer — an unconstrained quartic only reaches 1.37 and wants to
-// be non-monotone; the problem is the shape, not the number of parameters.
-// k is profiled over a small grid by weighted SSE. As k → 0 the basis degenerates to the plain quadratic, so on a
-// well-spread frontier the fit picks a small k and reproduces the previous result exactly (verified on the
-// pre-Opus-5 grids: k = 0.25, identical max deviation and R²). This is a strict generalisation, not a replacement.
-function fitPriceEnvelope(front){
+// SHAPE: log10(cost) = a + b·u + c·(e^{k·u} − 1)/k, with u = T(q) − T(min) and b, c ≥ 0. Then g'(u) = b + c·e^{k·u}
+// ≥ 0 for EVERY u, positive or negative — monotone by construction, everywhere, extrapolation included. The price of
+// quality cannot fall as quality rises; a decreasing stretch is a fitting artefact, not a shape, and since every value
+// index is a distance to this curve the artefact would propagate to all of them.
+// Fitted on ALL measured couples, not only the Pareto frontier. The frontier is by definition the CHEAPEST couple at
+// each quality: a regression through it is neither the frontier itself nor a market rate, and with one model
+// dominating a long stretch it collapses to 7 points, 5 of them a single effort ladder, with 64% of the quality axis
+// empty. The dominated couples are real measurements of what that quality costs — they are what populates the gap.
+// So the curve reads as "what a given quality typically costs", and a couple's distance to it as how far it beats or
+// trails the going rate.
+// The exponential term matters because the cloud is not parabolic: cost climbs gently across most of the quality
+// range then steepens sharply near the ceiling — curvature that GROWS. k is profiled over a small grid by weighted
+// SSE; as k → 0 the basis degenerates to a plain quadratic, so this is a strict generalisation.
+function fitPriceEnvelope(pts){
   const samp=[];
-  front.forEach(p=>{ const Tq=symT(p.q), lc=Math.log10(p.c);
+  pts.forEach(p=>{ const Tq=symT(p.q), lc=Math.log10(p.c);
     samp.push([Tq,lc,0.5],[Tq,Math.log10(p.clo),0.125],[Tq,Math.log10(p.chi),0.125],
               [symT(p.qlo),lc,0.125],[symT(p.qhi),lc,0.125]); });
   const T0=Math.min(...samp.map(s=>s[0])), L=Math.max(...samp.map(s=>s[0]))-T0;
@@ -488,11 +488,10 @@ function fitPriceEnvelope(front){
   [0.1,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.5,3].forEach(k=>{ const r=fitK(k);
     if(r && (!best||r.e<best.e-1e-12)){ best=r; bk=k; } });
   const co=best?best.co:[0,0,0];
-  // Outside the fitted range the curve is held FLAT rather than extrapolated: below the cheapest frontier couple and
-  // above the best one there is no evidence about what the frontier charges, and extrapolating would either dip or
-  // blow up. It also keeps g defined for the dominated couples and CI extremities the value index evaluates, which
-  // can fall outside the frontier's own quality span.
-  return t=>{ const u=Math.min(Math.max(t-T0,0),L); return co[0]+co[1]*u+co[2]*(Math.exp(bk*u)-1)/bk; }; }
+  // NOT clamped: the curve extrapolates freely outside the sampled range. Safe here precisely because b, c ≥ 0 makes
+  // g' ≥ 0 for every u, positive or negative — extrapolation can never fold back on itself, only flatten out below
+  // the data (g → a − c/k + b·u) and steepen above it.
+  return t=>{ const u=t-T0; return co[0]+co[1]*u+co[2]*(Math.exp(bk*u)-1)/bk; }; }
 // Distance of a couple to the price envelope, in LOG-COST: r = log10(price the frontier charges for that quality)
 // − log10(what the couple actually costs). Positive = cheaper than the frontier price, i.e. good value. The interval
 // is propagated by the SAME 5-point weighting used to fit the envelope — the couple's centre (½) and its four CI
@@ -573,9 +572,9 @@ function drawPareto(){
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
   // HORIZONTAL price envelope log10(cost) = g(T(quality)), fit UNCERTAINTY-AWARE (5 weighted points per couple). Distance
   // is measured in log-COST (cheaper/dearer than the frontier price for your quality) so cost is weighted linearly.
-  const gevT=fitPriceEnvelope(par);
-  const xv=par.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² (central points, log-cost)
-    ssX=xv.reduce((a,v)=>a+(v-xm)*(v-xm),0), rssX=par.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
+  const gevT=fitPriceEnvelope(pts);                                                                      // ALL couples, not just the frontier
+  const xv=pts.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² (central points, log-cost)
+    ssX=xv.reduce((a,v)=>a+(v-xm)*(v-xm),0), rssX=pts.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
   { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
   { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to the visible plot rect)
     for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
@@ -600,7 +599,7 @@ function drawPareto(){
   if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Frontier envelope (cost vs quality) · R² = ${R2.toFixed(2)}</span>`;
+    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price curve — what a quality typically costs (all couples) · R² = ${R2.toFixed(2)}</span>`;
   const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
   if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${p.q.toFixed(2)}× · ${fmtC(p.c)}×</span></span>`).join("");
 }
@@ -665,7 +664,7 @@ function tierPicks(){
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   // uncertainty-aware price envelope + log-distance r + hidden prominence (crown) — same machinery as the value table
-  const gevT=fitPriceEnvelope(front);
+  const gevT=fitPriceEnvelope(rows);                     // ALL couples, not just the frontier
   rows.forEach(p=>p.S=valueResidual(gevT,p));           // r is defined for EVERY couple — frontier and dominated alike
   // Prominence stays a 2nd difference of r, i.e. computed in LOG space where these distances are additive, so it keeps
   // meaning "this couple stands out from its two frontier neighbours". Crown SELECTION only.
@@ -709,7 +708,7 @@ function drawTiers(){
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price envelope, exponentiated against the anchor&nbsp;: <b>100 = Opus&nbsp;4.8&nbsp;@medium</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
+      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price curve, exponentiated against the anchor&nbsp;: <b>100 = Opus&nbsp;4.8&nbsp;@medium</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
