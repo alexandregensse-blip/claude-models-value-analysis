@@ -263,12 +263,37 @@ function fillScoreTable(scored){
 // is measured in the DILATED metric T(q) (same transform as the fit & the value score), so the windows are consistent
 // with the chart. TWCOL = one colour per tier window.
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
+// q and sig below are PLACEHOLDERS — tierDefaults() overwrites both from the data on load (see there).
 const TIERS=[
-  {key:"triage",  name:"Grunt work",             q:0.75, sig:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:1.20, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:1.20, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:1.20, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Grunt work",             q:0.75, sig:0.80, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:0.80, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:0.80, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:0.80, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
+// DATA-DERIVED tier windows. Model quality drifts upward release after release: the weakest couple slowly improves
+// and the best one sets a new ceiling, so hardcoded q* go stale — the shipped 1.25 for the top tier had drifted ABOVE
+// the best couple actually available (1.19), leaving that tier aiming at a quality nothing reaches. Centres are spread
+// evenly across the FRONTIER's quality span in the dilated metric T (the one the Gaussian and the chart already use),
+// from the weakest selectable couple to the strongest — so the bottom tracks the floor as it rises, and the top always
+// sits exactly on the best model available rather than on a number fixed at some past release.
+// sigma follows the spacing on a single rule: adjacent windows cross at HALF weight exactly midway between their
+// centres — exp(−((gap/2)/sig)²) = ½ ⟹ sig = gap ⁄ (2·√ln2). The four windows partition the axis instead of
+// overlapping arbitrarily, and sigma rescales automatically when the span widens or narrows.
+// Sanity check: replaying the pre-Opus-5 grids through this rule returns q* = 0.59 / 0.93 / 1.02 / 1.23, reproducing
+// the 0.59 / 0.93 / 1.01 / 1.20 that had been hand-tuned for exactly that data.
+let TIERQ={qmn:0.55,qmx:1.30};
+function tierDefaults(){
+  const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
+    for(const e in cg){ const q=qg[e]; if(q) rows.push({c:cg[e][0],q:q[0]}); } }
+  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
+  const Ts=rows.filter(p=>!rows.some(o=>dom(o,p))).map(p=>symT(p.q));
+  if(!Ts.length) return;
+  const Tmin=Math.min(...Ts), Tmax=Math.max(...Ts), gap=(Tmax-Tmin)/Math.max(TIERS.length-1,1);
+  const sig=gap/(2*Math.sqrt(Math.LN2));
+  TIERS.forEach((t,i)=>{ t.q=symTinv(Tmin+i*gap); t.sig=sig; });
+  TIERQ={qmn:symTinv(Tmin), qmx:symTinv(Tmax), gap, sig};
+}
+tierDefaults();
 function tierPicks(){
   const rows=[];
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -335,10 +360,15 @@ function drawTierWindows(){
   const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; for(const e in cg){ const q=qg[e]; if(q) rows.push({m,e,c:cg[e][0],q:q[0]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
-  const qmn=0.55,qmx=1.28, W=1100,H=140,mL=8,mR=8,mT=8,mB=24, iw=W-mL-mR, ih=H-mT-mB, Tmn=symT(qmn),Tmx=symT(qmx);
+  // Axis spans the DATA range (from tierDefaults) plus half a tier-spacing of padding, so the end windows are not
+  // clipped; ticks are generated over whatever that range turns out to be rather than assuming a fixed 0.6–1.2.
+  const padT=0.5*(TIERQ.gap||1), Tmn=symT(TIERQ.qmn)-padT, Tmx=symT(TIERQ.qmx)+padT;
+  const qmn=symTinv(Tmn), qmx=symTinv(Tmx);
+  const W=1100,H=140,mL=8,mR=8,mT=8,mB=24, iw=W-mL-mR, ih=H-mT-mB;
   const X=q=>mL+(symT(q)-Tmn)/(Tmx-Tmn)*iw;
   let svg=`<svg viewBox="0 0 ${W} ${H}" class="tuner-svg" role="img" aria-label="Tier windows over the dilated quality axis">`;
-  [0.6,0.7,0.8,0.9,1.0,1.1,1.2].forEach(v=>{ const x=X(v); svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${v.toFixed(1)}</text>`; });
+  const ticks=[]; for(let v=Math.ceil(qmn*10)/10; v<=qmx+1e-9; v=Math.round((v+0.1)*10)/10) ticks.push(v);
+  ticks.forEach(v=>{ const x=X(v); svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${v.toFixed(1)}</text>`; });
   TIERS.forEach((t,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
     for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=Math.exp(-Math.pow((symT(q)-symT(t.q))/t.sig,2)); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
     d+=` L ${mL+iw} ${mT+ih} Z`;
@@ -350,10 +380,16 @@ function drawTierWindows(){
 // Build the tuner ONCE (window container + persistent sliders). Slider input updates state + redraws windows/cards only.
 function drawTierTuner(){
   const host=document.getElementById("tier-tuner"); if(!host) return;
+  // Slider travel follows the data too: Q* spans the padded quality range the windows are drawn over, and sigma runs
+  // from a quarter to triple its derived default — so the useful settings sit in the middle of the travel whatever
+  // the current spread of models is, instead of against a stop.
+  const padT=0.5*(TIERQ.gap||1), s0=TIERQ.sig||0.8;
+  const sQ={lo:symTinv(symT(TIERQ.qmn)-padT).toFixed(2), hi:symTinv(symT(TIERQ.qmx)+padT).toFixed(2)};
+  const sS={lo:(0.25*s0).toFixed(2), hi:(3*s0).toFixed(2)};
   let ctl='';
   TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
-    +`<label><span class="lbl">Q*</span><input type="range" min="0.55" max="1.28" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
-    +`<label><span class="lbl">σ</span><input type="range" min="0.2" max="1.4" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
+    +`<label><span class="lbl">Q*</span><input type="range" min="${sQ.lo}" max="${sQ.hi}" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
+    +`<label><span class="lbl">σ</span><input type="range" min="${sS.lo}" max="${sS.hi}" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
   host.innerHTML=`<div id="tier-windows"></div><div class="tuner-ctl">${ctl}</div>`;
   drawTierWindows();
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
