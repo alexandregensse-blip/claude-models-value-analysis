@@ -118,11 +118,26 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
 // The exponential term matters because the cloud is not parabolic: cost climbs gently across most of the quality
 // range then steepens sharply near the ceiling — curvature that GROWS. k is profiled over a small grid by weighted
 // SSE; as k → 0 the basis degenerates to a plain quadratic, so this is a strict generalisation.
+// INFLUENCE GRADED BY DISTANCE TO THE PARETO FRONTIER. Fitting every couple equally lets strictly-dominated models —
+// worse on both axes than something else — pull the curve; fitting the frontier alone throws away the measurements
+// that populate the middle. So each couple's weight is graded by how far it sits from the frontier, measured the same
+// way everything else in this report is, in log-cost:
+//     d = log10(cost) − log10(cheapest couple offering AT LEAST this quality)
+// d is exactly 0 on the frontier (the couple qualifies against itself), needs no interpolation, and grows with how
+// much you overpay for what you get. Weight = 1 − d/dmax: an efficient couple counts fully, the single worst one not
+// at all, everything in between on a straight line. dmax comes from the data, so the grading rescales by itself.
+function paretoWeights(pts){
+  const d=pts.map(p=>{ let best=Infinity;
+    pts.forEach(o=>{ if(o.q>=p.q-1e-9 && o.c<best) best=o.c; });
+    return Math.log10(p.c)-Math.log10(best); });
+  const dmax=Math.max(...d)||1;
+  return d.map(v=>1-v/dmax); }
 function fitPriceEnvelope(pts){
-  const samp=[];
-  pts.forEach(p=>{ const Tq=symT(p.q), lc=Math.log10(p.c);
-    samp.push([Tq,lc,0.5],[Tq,Math.log10(p.clo),0.125],[Tq,Math.log10(p.chi),0.125],
-              [symT(p.qlo),lc,0.125],[symT(p.qhi),lc,0.125]); });
+  const PW=paretoWeights(pts), samp=[];
+  pts.forEach((p,i)=>{ const Tq=symT(p.q), lc=Math.log10(p.c), w=PW[i];
+    if(w<=0) return;                                                   // the single worst couple carries no influence
+    samp.push([Tq,lc,0.5*w],[Tq,Math.log10(p.clo),0.125*w],[Tq,Math.log10(p.chi),0.125*w],
+              [symT(p.qlo),lc,0.125*w],[symT(p.qhi),lc,0.125*w]); });
   const T0=Math.min(...samp.map(s=>s[0])), L=Math.max(...samp.map(s=>s[0]))-T0;
   const fitK=k=>{
     const M=[[0,0,0],[0,0,0],[0,0,0]], V=[0,0,0];                    // weighted normal equations on {1, u, (e^{ku}−1)/k}
@@ -229,9 +244,11 @@ function drawPareto(){
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
   // HORIZONTAL price envelope log10(cost) = g(T(quality)), fit UNCERTAINTY-AWARE (5 weighted points per couple). Distance
   // is measured in log-COST (cheaper/dearer than the frontier price for your quality) so cost is weighted linearly.
-  const gevT=fitPriceEnvelope(pts);                                                                      // ALL couples, not just the frontier
-  const xv=pts.map(p=>Math.log10(p.c)), xm=xv.reduce((a,b)=>a+b,0)/xv.length,                            // envelope R² (central points, log-cost)
-    ssX=xv.reduce((a,v)=>a+(v-xm)*(v-xm),0), rssX=pts.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
+  const gevT=fitPriceEnvelope(pts);                                                                      // all couples, graded by Pareto distance
+  const PW=paretoWeights(pts), sw=PW.reduce((a,b)=>a+b,0);                                              // R² uses the SAME grading as the fit
+  const xm=pts.reduce((a,p,i)=>a+PW[i]*Math.log10(p.c),0)/sw,
+    ssX=pts.reduce((a,p,i)=>a+PW[i]*Math.pow(Math.log10(p.c)-xm,2),0),
+    rssX=pts.reduce((a,p,i)=>a+PW[i]*Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
   { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
   { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to the visible plot rect)
     for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
@@ -256,7 +273,7 @@ function drawPareto(){
   if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price curve — what a quality typically costs (all couples) · R² = ${R2.toFixed(2)}</span>`;
+    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price curve — what a quality typically costs, graded by Pareto distance · R² = ${R2.toFixed(2)}</span>`;
   const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
   if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b style="color:${cvar(MODELS[p.m].c)}">${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${p.q.toFixed(2)}× · ${fmtC(p.c)}×</span></span>`).join("");
 }
