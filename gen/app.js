@@ -280,8 +280,13 @@ function tierPicks(){
   const rms=Math.sqrt(rows.reduce((a,p)=>a+Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0)/rows.length);
   front.forEach(p=>p.S=valueScoreOf(gevT,rms,p));
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
-  const hidMin=Math.min(...front.map(p=>p.hid)), anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), uA=Math.max((anc?anc.hid:0)-hidMin,1e-6);
-  front.forEach(p=>p.norm=100*Math.log1p(p.hid-hidMin)/Math.log1p(uA));   // LOG mapping: 0 = weakest frontier couple, 100 = anchor (Opus 4.8 @medium); compresses the top so it doesn't explode
+  const hidMin=Math.min(...front.map(p=>p.hid)), hidMax=Math.max(...front.map(p=>p.hid));
+  // 100 = the anchor while it is still on the frontier. Once a newer model DOMINATES the anchor it drops off the
+  // frontier entirely and `find` returns undefined — the old code then silently used 0 as the reference, which is
+  // not a prominence at all: the top of the scale became meaningless and couples read past 100. Fall back to the
+  // strongest prominence, which always exists, so the scale stays "0 = weakest, 100 = standout" either way.
+  const anc=front.find(p=>p.m==="opus-4.8"&&p.e==="medium"), uA=Math.max((anc?anc.hid:hidMax)-hidMin,1e-6);
+  front.forEach(p=>p.norm=100*Math.log1p(p.hid-hidMin)/Math.log1p(uA));   // LOG mapping; compresses the top so it doesn't explode
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
