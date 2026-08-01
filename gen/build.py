@@ -154,6 +154,8 @@ def groups_data():
       "swerebench2":("swe-rebench 07/26","xmodel","ReAct minimal · Opus5/Fable5/Sonnet5 all at high ✓"),
       "cursorbench32":("CursorBench 3.2","sweep","Cursor 3.2 · matched effort, $ cost ✓ (vendor benchmark)"),
       "aabriefcase":("AA-Briefcase","sweep","AA agentic knowledge work · Opus 5 sweep low→max, Elo ✓"),
+      "sc5osworld":("OSWorld 2.0","sweep","Opus 5 card p174 · price vs perf, 4 models; effort inferred from cost order ✓"),
+      "sc5autobench":("AutomationB. 5","sweep","Opus 5 card p180 · Zapier, linear-$ chart; Fable=Mythos 5, effort inferred ✓"),
       "aa-index-pertask2":("AA /task v3","xmodel","AA-Index v3 · max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
