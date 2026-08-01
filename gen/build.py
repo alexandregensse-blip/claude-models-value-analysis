@@ -150,7 +150,6 @@ def groups_data():
       "sc5browse":("BrowseComp 10M","sweep","Opus 5 card p160 · 10M budget, sweep low→max; Fable=Mythos 5, $ cost ✓"),
       "sc5dsqa":("DeepSearchQA (O5)","sweep","Opus 5 card p161 · 980k budget, 4 models × sweep low→max, $ cost ✓"),
       "sc5draco":("DRACO (Opus 5)","sweep","Opus 5 card p162 · 980k budget, sweep low→max; Fable=Mythos 5, $ cost ✓"),
-      "sc5frontierbench":("FrontierBench","sweep","Opus 5 card p152 · mini-SWE-agent, output tokens RELATIVE to xhigh ✓"),
       "swerebench2":("swe-rebench 07/26","xmodel","ReAct minimal · Opus5/Fable5/Sonnet5 all at high ✓"),
       "cursorbench32":("CursorBench 3.2","sweep","Cursor 3.2 · matched effort, $ cost ✓ (vendor benchmark)"),
       "aabriefcase":("AA-Briefcase","sweep","AA agentic knowledge work · Opus 5 sweep low→max, Elo ✓"),
