@@ -47,7 +47,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | Tag | Date | Scope |
 |---|---|---|
 | `v2026.07.07` | 7 Jul 2026 | Fable 5, Opus 4.8/4.7, Sonnet 5/4.6, Haiku 4.5 — 268 measured rows |
-| `v2026.08.01` | 1 Aug 2026 | adds **Opus 5** (system card of 24 Jul 2026) — 418 measured rows |
+| `v2026.08.01` | 1 Aug 2026 | adds **Opus 5** (system card of 24 Jul 2026, plus Artificial Analysis, Vals AI, swe-rebench and CursorBench) — 428 measured rows |
 
 ## Rebuild
 
@@ -62,6 +62,6 @@ No dependencies beyond the Python 3 standard library. The client-side rendering 
 - **Task-type variance dominates** cross-model ratios; a single consolidated number hides a real spread, which is why every cell carries a CI.
 - **Per-effort granularity is thin** — most cells rest on a few independent sources.
 - **Public-data ceiling** — genuine independent measurements are scarce; confidence is capped at medium-high. An internal run on a representative workload remains the intended final validation.
-- **Opus 5 leans on the vendor.** Most of its coverage comes from Anthropic's own system card (seven same-task effort sweeps, digitized from the published charts); only swe-rebench, CursorBench and Artificial Analysis add outside measurements so far. Its cells will tighten as third-party runs accumulate.
+- **Opus 5 still leans on the vendor**, though less than at first: 35 of its 55 rows come from Anthropic's own system card (seven same-task effort sweeps, digitized from the published charts). Four independent sources now cover it — Artificial Analysis (a full low→max sweep of the Intelligence Index, with cost *and* output tokens), Vals AI (a five-tier sweep on Vibe Code Bench), swe-rebench and CursorBench 3.2 — which is what pulled its cost interval at low effort from [0.38, 0.97] down to [0.41, 0.54]. Expect further tightening as third-party runs accumulate.
 
 Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Prices reflect published rates at time of writing.

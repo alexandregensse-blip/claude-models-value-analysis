@@ -103,7 +103,7 @@ def groups_data():
     so corroboration counts the source once."""
     GMETA = {
       "osworld":("OSWorld","sweep","Anthropic/AA · sweep low→max ✓"),
-      "aa-index":("AA Index","xmodel","AA-Index · max ✓"),
+      "aa-index":("AA Index","sweep","AA-Index · cross-model at max + Opus 5 sweep low→max ✓"),
       "aa-index-pertask":("AA /task","xmodel","AA-Index · max ✓"),
       "swerebench":("swe-rebench","xgen","ReAct minimal · Opus4.8 xhigh/4.7 high, Sonnet default ✓"),
       "workbench":("WorkBench","xmodel","ReAct natif · temp 0, like-for-like, thinking NS ✓"),
@@ -156,6 +156,7 @@ def groups_data():
       "sc5osworld":("OSWorld 2.0","sweep","Opus 5 card p174 · price vs perf, 4 models; effort inferred from cost order ✓"),
       "sc5autobench":("AutomationB. 5","sweep","Opus 5 card p180 · Zapier, linear-$ chart; Fable=Mythos 5, effort inferred ✓"),
       "aa-index-pertask2":("AA /task v3","xmodel","AA-Index v3 · max ✓"),
+      "valsvibecode":("Vals VibeCode","sweep","Vals AI · Opus 5 sweep low→max (scores), $ cost at leaderboard setting ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
