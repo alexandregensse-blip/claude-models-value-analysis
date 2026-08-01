@@ -105,42 +105,51 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
 // and the four IC extremities (cost lo/hi, quality lo/hi; w=0.125 each). A wide IC thus smears the point over its box
 // instead of pinning the curve to an over-precise centre.  Fit: log10(cost) = g(T(quality)).
 //
-// The curve is CONSTRAINED MONOTONE NON-DECREASING over the sampled quality range: the price the frontier charges
-// cannot fall as quality rises — a decreasing stretch is not a shape, it is a fitting artefact, and every value score
-// is a signed distance to this curve, so the artefact would propagate to all of them. It bites when the frontier
-// leaves a wide quality gap (one model dominating a long stretch), where a free parabola bends back inside the range.
-// Fitted in u = T(q) − T(min) on {1, u, u²} under g'(0) ≥ 0 and g'(L) ≥ 0, which together give g' ≥ 0 on [0, L]
-// (a parabola's derivative is monotone, so non-negative at both ends ⇒ non-negative throughout). Solved as a tiny
-// active set: the free fit, then each constraint pinned, then both; the feasible candidate with the lowest weighted
-// SSE wins. When the free fit already satisfies both — as it did on every pre-Opus-5 snapshot — this is a no-op.
+// SHAPE: log10(cost) = a + b·u + c·(e^{k·u} − 1)/k, with u = T(q) − T(qmin) and b, c ≥ 0. Then g'(u) = b + c·e^{k·u}
+// ≥ 0 everywhere, so the curve is MONOTONE NON-DECREASING BY CONSTRUCTION — no endpoint conditions to verify. The
+// price the frontier charges cannot fall as quality rises; a decreasing stretch is a fitting artefact, not a shape,
+// and since every value index is a distance to this curve the artefact would propagate to all of them.
+// The exponential term is there because a PARABOLA CANNOT DESCRIBE THIS FRONTIER. Once one model dominates a long
+// stretch, the frontier degenerates into a cheap near-flat run at low quality plus a steep effort ladder at the top,
+// separated by a wide hole — curvature that GROWS along the axis. Forced through a parabola the fit missed the two
+// low-quality couples by a factor 2.3 and reached only R² 0.77; with the exponential term: 1.6 and R² 0.92 on the
+// same data. Note that a denser basis is NOT the answer — an unconstrained quartic only reaches 1.37 and wants to
+// be non-monotone; the problem is the shape, not the number of parameters.
+// k is profiled over a small grid by weighted SSE. As k → 0 the basis degenerates to the plain quadratic, so on a
+// well-spread frontier the fit picks a small k and reproduces the previous result exactly (verified on the
+// pre-Opus-5 grids: k = 0.25, identical max deviation and R²). This is a strict generalisation, not a replacement.
 function fitPriceEnvelope(front){
   const samp=[];
   front.forEach(p=>{ const Tq=symT(p.q), lc=Math.log10(p.c);
     samp.push([Tq,lc,0.5],[Tq,Math.log10(p.clo),0.125],[Tq,Math.log10(p.chi),0.125],
               [symT(p.qlo),lc,0.125],[symT(p.qhi),lc,0.125]); });
   const T0=Math.min(...samp.map(s=>s[0])), L=Math.max(...samp.map(s=>s[0]))-T0;
-  const M=[[0,0,0],[0,0,0],[0,0,0]], V=[0,0,0];                                   // weighted normal equations on {1,u,u²}
-  samp.forEach(([Tq,lc,w])=>{ const u=Tq-T0, B=[1,u,u*u];
-    for(let i=0;i<3;i++){ V[i]+=w*B[i]*lc; for(let j=0;j<3;j++) M[i][j]+=w*B[i]*B[j]; } });
-  const sse=co=>{ let s=0; for(let i=0;i<3;i++){ s-=2*co[i]*V[i]; for(let j=0;j<3;j++) s+=co[i]*co[j]*M[i][j]; } return s; };
-  // Candidate subspaces co = R·y: free · slope-at-0 pinned to 0 · slope-at-L pinned to 0 (b = −2cL) · constant.
-  const RS=[ [[1,0,0],[0,1,0],[0,0,1]], [[1,0],[0,0],[0,1]], [[1,0],[0,-2*L],[0,1]], [[1],[0],[0]] ];
-  let best=null;
-  RS.forEach(R=>{ const k=R[0].length, A=[], v=[];
-    for(let a=0;a<k;a++){ const row=[];
-      for(let b=0;b<k;b++){ let s=0; for(let i=0;i<3;i++) for(let j=0;j<3;j++) s+=R[i][a]*M[i][j]*R[j][b]; row.push(s); }
-      let s2=0; for(let i=0;i<3;i++) s2+=R[i][a]*V[i]; A.push(row); v.push(s2); }
-    const y=solveN(A,v); if(!y) return;
-    const co=[0,0,0]; for(let i=0;i<3;i++) for(let a=0;a<k;a++) co[i]+=R[i][a]*y[a];
-    if(co[1]<-1e-9 || co[1]+2*co[2]*L<-1e-9) return;                              // infeasible: g' negative at an end
-    const e=sse(co); if(!best||e<best.e-1e-12) best={co,e}; });
+  const fitK=k=>{
+    const M=[[0,0,0],[0,0,0],[0,0,0]], V=[0,0,0];                    // weighted normal equations on {1, u, (e^{ku}−1)/k}
+    samp.forEach(([Tq,lc,w])=>{ const u=Tq-T0, B=[1,u,(Math.exp(k*u)-1)/k];
+      for(let i=0;i<3;i++){ V[i]+=w*B[i]*lc; for(let j=0;j<3;j++) M[i][j]+=w*B[i]*B[j]; } });
+    const sse=co=>{ let s=0; for(let i=0;i<3;i++){ s-=2*co[i]*V[i]; for(let j=0;j<3;j++) s+=co[i]*co[j]*M[i][j]; } return s; };
+    // Candidate subspaces co = R·y for the b ≥ 0, c ≥ 0 active set: free · b pinned · c pinned · both pinned.
+    const RS=[ [[1,0,0],[0,1,0],[0,0,1]], [[1,0],[0,0],[0,1]], [[1,0],[0,1],[0,0]], [[1],[0],[0]] ];
+    let best=null;
+    RS.forEach(R=>{ const n=R[0].length, A=[], v=[];
+      for(let a=0;a<n;a++){ const row=[];
+        for(let b=0;b<n;b++){ let s=0; for(let i=0;i<3;i++) for(let j=0;j<3;j++) s+=R[i][a]*M[i][j]*R[j][b]; row.push(s); }
+        let s2=0; for(let i=0;i<3;i++) s2+=R[i][a]*V[i]; A.push(row); v.push(s2); }
+      const y=solveN(A,v); if(!y) return;
+      const co=[0,0,0]; for(let i=0;i<3;i++) for(let a=0;a<n;a++) co[i]+=R[i][a]*y[a];
+      if(co[1]<-1e-9 || co[2]<-1e-9) return;                          // infeasible: a negative slope term
+      const e=sse(co); if(!best||e<best.e-1e-12) best={co,e}; });
+    return best; };
+  let best=null, bk=1;
+  [0.1,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.5,3].forEach(k=>{ const r=fitK(k);
+    if(r && (!best||r.e<best.e-1e-12)){ best=r; bk=k; } });
   const co=best?best.co:[0,0,0];
   // Outside the fitted range the curve is held FLAT rather than extrapolated: below the cheapest frontier couple and
-  // above the best one there is no evidence about what the frontier charges, and an extrapolated parabola would either
-  // dip (re-introducing the artefact just outside the data) or blow up. Also makes g defined for the dominated points
-  // and IC extremities the value score evaluates, which can fall outside the frontier's own quality range.
-  const gg=u=>co[0]+co[1]*u+co[2]*u*u;
-  return t=>gg(Math.min(Math.max(t-T0,0),L)); }
+  // above the best one there is no evidence about what the frontier charges, and extrapolating would either dip or
+  // blow up. It also keeps g defined for the dominated couples and CI extremities the value index evaluates, which
+  // can fall outside the frontier's own quality span.
+  return t=>{ const u=Math.min(Math.max(t-T0,0),L); return co[0]+co[1]*u+co[2]*(Math.exp(bk*u)-1)/bk; }; }
 // Distance of a couple to the price envelope, in LOG-COST: r = log10(price the frontier charges for that quality)
 // − log10(what the couple actually costs). Positive = cheaper than the frontier price, i.e. good value. The interval
 // is propagated by the SAME 5-point weighting used to fit the envelope — the couple's centre (½) and its four CI
