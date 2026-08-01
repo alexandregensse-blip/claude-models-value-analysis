@@ -157,6 +157,9 @@ def groups_data():
       "sc5autobench":("AutomationB. 5","sweep","Opus 5 card p180 · Zapier, linear-$ chart; Fable=Mythos 5, effort inferred ✓"),
       "aa-index-pertask2":("AA /task v3","xmodel","AA-Index v3 · max ✓"),
       "valsvibecode":("Vals VibeCode","sweep","Vals AI · Opus 5 sweep low→max (scores), $ cost at leaderboard setting ✓"),
+      "valsindex":("Vals Index","xmodel","Vals AI · 24-bench composite, 6 models all at max; overlaps EMB+VibeCode ✓"),
+      "osworld2b":("OSWorld 2.0 batch","xmodel","arXiv 2606.29537 · 108 workflows, 500 steps, batched tool calls, max ✓"),
+      "osworld2s":("OSWorld 2.0 single","xmodel","arXiv 2606.29537 · 108 workflows, 500 steps, single tool call, max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
