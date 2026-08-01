@@ -260,7 +260,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
-        <p class="sub">Consolidating the frontier into a decision. <b>Four target complexity levels q*</b> are <b>derived from the data</b>, not fixed: they spread evenly across the frontier's own quality span in the <b>dilated metric</b>, so the bottom tier tracks the weakest couple available and the top tier sits <b>exactly on the best one</b> — as models improve, the windows move with them instead of aiming at a level fixed at some past release. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their centres. For each tier we then pick the Pareto-frontier couple maximising a <b>proximity-weighted yield</b> — that Gaussian times <b>quality ÷ cost</b> — so the choice sits near the required capability while tilting toward value. Sliders below override both. The <b>big figure</b> is the pick's <b>value index</b>, the same one used throughout the report&nbsp;: <b>100 = the anchor</b>, Opus&nbsp;4.8&nbsp;@medium, and the value reads as a multiple of it — 350 means <b>3.5× the anchor's value for money</b>. The anchor is read from <b>every</b> couple, dominated ones included, not just the frontier&nbsp;: a new model can push it <b>off</b> the frontier — Opus&nbsp;5 does — but never out of the full set, so the reference survives a release. The <b>crown</b> is chosen on a different criterion, <b>local prominence</b> along the frontier, and shows the same index.</p>
+        <p class="sub">Consolidating the frontier into a decision. <b>Four target complexity levels q*</b> are <b>derived from the data</b>, not fixed: they spread evenly across the frontier's own quality span in the <b>dilated metric</b>, so the bottom tier tracks the weakest couple available and the top tier sits <b>exactly on the best one</b> — as models improve, the windows move with them instead of aiming at a level fixed at some past release. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their centres. For each tier we then pick the Pareto-frontier couple maximising that Gaussian times its <b>value index</b> — so the choice sits near the required capability while tilting toward value, and the big figure on the card <b>is</b> the criterion that chose it. Cost enters through the index, i.e. in <b>log-cost</b> like everywhere else in this report&nbsp;: a raw quality ÷ cost ratio would be driven almost entirely by cost, which spans a factor 14 across the cloud against 2 for quality. Sliders below override both. The <b>big figure</b> is the pick's <b>value index</b>, the same one used throughout the report&nbsp;: <b>100 = the anchor</b>, Opus&nbsp;4.8&nbsp;@medium, and the value reads as a multiple of it — 350 means <b>3.5× the anchor's value for money</b>. The anchor is read from <b>every</b> couple, dominated ones included, not just the frontier&nbsp;: a new model can push it <b>off</b> the frontier — Opus&nbsp;5 does — but never out of the full set, so the reference survives a release. The <b>crown</b> is chosen on a different criterion, <b>local prominence</b> along the frontier, and shows the same index.</p>
         <div class="grid" id="tier-cards"></div>
         <div id="tier-crown"></div>
         <details class="fold">
@@ -677,7 +677,7 @@ tierDefaults();
 function tierPicks(){
   const rows=[];
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2],y:q[0]/cg[e][0]}); } }
+    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   // uncertainty-aware price envelope + log-distance r + hidden prominence (crown) — same machinery as the value table
@@ -693,7 +693,13 @@ function tierPicks(){
   const rAnc=anchorResidual(gevT,rows);
   rows.forEach(p=>p.norm=valueIndex(p.S,rAnc));
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
-  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
+  // Tier winner = the frontier couple maximising PROXIMITY × VALUE INDEX. It used to be proximity × (quality ÷ cost),
+  // the one raw ratio in the whole report: everything else — the price curve, the residual, the Pareto distance —
+  // works in log-cost. That mattered, it did not just offend symmetry. Across the cloud quality spans a factor 2.0
+  // while cost spans 14.4, so a linear q/c is driven almost entirely by cost and tilts every tier toward the cheapest
+  // couple: it collapsed the top tier onto the same pick as the one below it (3 distinct picks instead of 4).
+  // Using the index also makes the number a card SHOWS the criterion that chose it.
+  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.norm > K(a.q,t.q,t.sig)*a.norm ? b : a)}));
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
   const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
   return {picks,crown};

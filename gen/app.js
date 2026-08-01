@@ -334,7 +334,7 @@ tierDefaults();
 function tierPicks(){
   const rows=[];
   for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2],y:q[0]/cg[e][0]}); } }
+    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2]}); } }
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   // uncertainty-aware price envelope + log-distance r + hidden prominence (crown) — same machinery as the value table
@@ -350,7 +350,13 @@ function tierPicks(){
   const rAnc=anchorResidual(gevT,rows);
   rows.forEach(p=>p.norm=valueIndex(p.S,rAnc));
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
-  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.y > K(a.q,t.q,t.sig)*a.y ? b : a)}));   // proximity-weighted yield
+  // Tier winner = the frontier couple maximising PROXIMITY × VALUE INDEX. It used to be proximity × (quality ÷ cost),
+  // the one raw ratio in the whole report: everything else — the price curve, the residual, the Pareto distance —
+  // works in log-cost. That mattered, it did not just offend symmetry. Across the cloud quality spans a factor 2.0
+  // while cost spans 14.4, so a linear q/c is driven almost entirely by cost and tilts every tier toward the cheapest
+  // couple: it collapsed the top tier onto the same pick as the one below it (3 distinct picks instead of 4).
+  // Using the index also makes the number a card SHOWS the criterion that chose it.
+  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> K(b.q,t.q,t.sig)*b.norm > K(a.q,t.q,t.sig)*a.norm ? b : a)}));
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
   const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
   return {picks,crown};
