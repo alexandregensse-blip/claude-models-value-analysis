@@ -7,10 +7,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
 OUT  = os.path.join(ROOT, "index.html")
 
-MX = {"fable-5":0,"opus-4.8":1,"opus-4.7":2,"sonnet-5":3,"sonnet-4.6":4,"haiku-4.5":5}
+MX = {"fable-5":0,"opus-5":1,"opus-4.8":2,"opus-4.7":3,"sonnet-5":4,"sonnet-4.6":5,"haiku-4.5":6}
 EXP = {"low","medium","high","xhigh","max"}
 EMAP = {"T25":"medium","T50":"high"}    # braintrust thinking-budget tiers → nearest effort
-PRICE_OUT = {"fable-5":50,"opus-4.8":25,"opus-4.7":25,"sonnet-5":15,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
+PRICE_OUT = {"fable-5":50,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5":15,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
 
 def eff(e): return EMAP.get(e, e)
 def num(x):
@@ -145,6 +145,16 @@ def groups_data():
       "scfdraco":("DRACO","sweep","Fable 5 card p271 · Fable=Mythos 5, sweep low→max, $ cost ✓"),
       "scoarc":("ARC-AGI-2","sweep","Opus 4.7 card p213 · sweep low→max, $ cost ✓"),
       "scodeepqa":("DeepSearchQA","sweep","Opus 4.7 card p200 · Opus4.7 vs Sonnet4.6, sweep low→max ✓"),
+      "sc5deepswe":("DeepSWE v1.1","sweep","Opus 5 card p150 · 4 models × sweep low→max, $ cost ✓"),
+      "sc5hle":("HLE (Opus 5)","sweep","Opus 5 card p157 · HLE tools, 4 models × sweep low→max, $ cost ✓"),
+      "sc5browse":("BrowseComp 10M","sweep","Opus 5 card p160 · 10M budget, sweep low→max; Fable=Mythos 5, $ cost ✓"),
+      "sc5dsqa":("DeepSearchQA (O5)","sweep","Opus 5 card p161 · 980k budget, 4 models × sweep low→max, $ cost ✓"),
+      "sc5draco":("DRACO (Opus 5)","sweep","Opus 5 card p162 · 980k budget, sweep low→max; Fable=Mythos 5, $ cost ✓"),
+      "sc5frontierbench":("FrontierBench","sweep","Opus 5 card p152 · mini-SWE-agent, output tokens RELATIVE to xhigh ✓"),
+      "swerebench2":("swe-rebench 07/26","xmodel","ReAct minimal · Opus5/Fable5/Sonnet5 all at high ✓"),
+      "cursorbench32":("CursorBench 3.2","sweep","Cursor 3.2 · matched effort, $ cost ✓ (vendor benchmark)"),
+      "aabriefcase":("AA-Briefcase","sweep","AA agentic knowledge work · Opus 5 sweep low→max, Elo ✓"),
+      "aa-index-pertask2":("AA /task v3","xmodel","AA-Index v3 · max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
@@ -241,7 +251,8 @@ def ratio_grid(field):
         lo  = c*math.exp(-(sum(w*d*d for d,w in neg)/sum(w for _,w in neg))**0.5) if neg else c
         hi  = c*math.exp( (sum(w*d*d for d,w in pos)/sum(w for _,w in pos))**0.5) if pos else c
         return [round(c,2), round(lo,2), round(hi,2)]                      # band centred on the median → dot always inside
-    ORD = {"fable-5":["low","medium","high","xhigh","max"],"opus-4.8":["low","medium","high","xhigh","max"],
+    ORD = {"fable-5":["low","medium","high","xhigh","max"],"opus-5":["low","medium","high","xhigh","max"],
+           "opus-4.8":["low","medium","high","xhigh","max"],
            "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
            "sonnet-4.6":["low","medium","high","max"]}
     out = {}

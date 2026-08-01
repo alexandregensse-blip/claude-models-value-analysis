@@ -1,5 +1,6 @@
 const MODELS = {
   "fable-5":   {label:"Fable 5",   c:"--fable5"},
+  "opus-5":    {label:"Opus 5",    c:"--opus5"},
   "opus-4.8":  {label:"Opus 4.8",  c:"--opus48"},
   "sonnet-5":  {label:"Sonnet 5",  c:"--sonnet5", tag:true},
   "opus-4.7":  {label:"Opus 4.7",  c:"--opus47"},
@@ -352,7 +353,7 @@ function drawMatrix(){
 // (label / type / verified config note).
 const GROUPS = __GROUPS_DATA__;
 const GMODEL = {
- "fable-5":{l:"Fable 5",c:"--fable5",cur:1},"opus-4.8":{l:"Opus 4.8",c:"--opus48",cur:1},
+ "fable-5":{l:"Fable 5",c:"--fable5",cur:1},"opus-5":{l:"Opus 5",c:"--opus5",cur:1},"opus-4.8":{l:"Opus 4.8",c:"--opus48",cur:1},
  "opus-4.7":{l:"Opus 4.7",c:"--opus47",cur:1},"sonnet-5":{l:"Sonnet 5",c:"--sonnet5",cur:1},
  "sonnet-4.6":{l:"Sonnet 4.6",c:"--sonnet46",cur:1},"haiku-4.5":{l:"Haiku 4.5",c:"--haiku45",cur:1},
  "opus-4.6":{l:"Opus 4.6",leg:1},"sonnet-3.7":{l:"Sonnet 3.7",leg:1},"opus-4.5":{l:"Opus 4.5",leg:1},
