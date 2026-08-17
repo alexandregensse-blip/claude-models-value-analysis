@@ -49,6 +49,20 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.07.07` | 7 Jul 2026 | Fable 5, Opus 4.8/4.7, Sonnet 5/4.6, Haiku 4.5 — 268 measured rows |
 | `v2026.08.01` | 1 Aug 2026 | adds **Opus 5** (system card of 24 Jul 2026, plus Artificial Analysis, Vals AI, swe-rebench and CursorBench) — 428 measured rows |
 | `v2026.08.01b` | 1 Aug 2026 | third research pass — adds the **Vals Index** composite (6 of 7 models, same suite) and **OSWorld 2.0** (arXiv 2606.29537, real USD/task) — 439 measured rows |
+| `v2026.08.17` | 17 Aug 2026 | fourth research pass — 6 parallel source sweeps (leaderboards, papers, repos, forums, blogs, vendors). Adds **ARC Prize** (`costPerTask` per model × effort, served in JSON side-files), **Terminal-Bench 2.1** (explicit `reasoning_effort` + 88–96 % cache), independent **Opus 5 effort sweeps** in real dollars (latitude, Zenn), **stet.sh** (5 rungs on two models, cache-aware), and 40+ other sources — 687 measured rows, 71 sources, 131 comparison groups |
+
+### A correctness note from the fourth pass
+
+**Haiku 4.5 has no effort dial** — the API rejects `output_config.effort` on it (it predates the
+dial and uses `budget_tokens`). Sonnet 4.6 has no `xhigh` either; that level arrived with Opus 4.7.
+The ingest scripts now refuse any `(model, effort)` pair the API does not expose, which is what
+caught the one real data-integrity problem of the pass: two sources report an "effort sweep" on
+Haiku 4.5, which cannot be what it says it is. Their measurements are kept under `req-*` effort
+labels that cannot feed the effort grid, flagged `effort-flag-unsupported-on-haiku`.
+
+Haiku 4.5 therefore stays a single `solo` node in the grid, by design and not by omission. What
+ARC Prize contributes for it is a **thinking-budget** ladder (none / 1K / 8K / 16K / 32K), labelled
+`think-*` — a real and useful axis, but a different one from the effort dial.
 
 ## Rebuild
 
