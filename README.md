@@ -50,6 +50,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.08.01` | 1 Aug 2026 | adds **Opus 5** (system card of 24 Jul 2026, plus Artificial Analysis, Vals AI, swe-rebench and CursorBench) — 428 measured rows |
 | `v2026.08.01b` | 1 Aug 2026 | third research pass — adds the **Vals Index** composite (6 of 7 models, same suite) and **OSWorld 2.0** (arXiv 2606.29537, real USD/task) — 439 measured rows |
 | `v2026.08.17` | 17 Aug 2026 | fourth research pass — 6 parallel source sweeps (leaderboards, papers, repos, forums, blogs, vendors). Adds **ARC Prize** (`costPerTask` per model × effort, served in JSON side-files), **Terminal-Bench 2.1** (explicit `reasoning_effort` + 88–96 % cache), independent **Opus 5 effort sweeps** in real dollars (latitude, Zenn), **stet.sh** (5 rungs on two models, cache-aware), and 40+ other sources — 687 measured rows, 71 sources, 131 comparison groups |
+| `v2026.09.07d` | 7 Sep 2026 | **second research salvo** — four parallel sweeps (leaderboards, preprints, public code, practitioner write-ups) focused on Fable 5.1 / Fable 5 / Opus 5. Adds Terminal-Bench 4.0, ObviousBench, bug-hunt-bench, vlm-exam, harnesseval, vibe-openscad, nurb-benchmarks, Kingy AI, and three preprints (SWE Refactor Bench, QuoteBench, AI4AI-Bench) — 955 measured rows, 153 groups, 81 sources |
 | `v2026.09.07c` | 7 Sep 2026 | sixth pass — **Chartography** (Fable 5.1 card p186), a 4-model × 5-effort sweep in real dollars, digitized by separating the solid (with-tools) from the dashed (without-tools) curves; the Opus 4.8 series is joined from the Opus 5 card so the benchmark is anchored. The no-tools regime is kept out of the effort grid — 852 measured rows, 142 comparison groups |
 | `v2026.09.07b` | 7 Sep 2026 | fifth research pass — targeted at the widest intervals rather than at new models. Re-digitizes the two Sonnet 5 card sweeps the repo had only read approximately (**CursorBench**, **FrontierCode v1**), which also corrected Sonnet 4.6's high/max scores; adds **OSWorld by effort** from the Opus 4.7 card and two **Artificial Analysis** model-page rows — 803 measured rows, 71 sources, 140 comparison groups |
 | `v2026.09.07` | 7 Sep 2026 | adds **Fable 5.1** (released 1 Sep 2026). Six cost × effort sweeps digitized from its system card — FrontierCode 1.1 Extended, CursorBench 3.2.0, HLE with and without tools, DRACO, OSWorld 2.0 — each covering Fable 5.1, Fable 5 and Opus 5 at all five efforts, plus **Artificial Analysis** (a full low→max Intelligence-Index sweep) and the current **Vals Index** composite — 789 measured rows, 71 sources, 139 comparison groups |
@@ -62,6 +63,63 @@ on quality-per-dollar by a wide margin. Its price per token is unchanged from Fa
 tokens for the same work, plus a 75 % cut on cache reads. Where it does *not* win is the top of its own ladder:
 `xhigh` and `max` cost 4.08× and 5.71× for 1.23× and 1.25× quality, so the usual advice inverts — on Fable 5.1
 the cheap rungs are the interesting ones.
+
+### The second salvo: coverage bought, bands not tightened
+
+Four parallel sweeps — public leaderboards, preprints, public code, practitioner write-ups — restricted to
+Fable 5.1, Fable 5 and Opus 5. Twelve sources were admitted out of roughly forty examined.
+
+The richest vein was **public code**: benchmark harnesses whose result files are committed to the repo that
+produced them. ObviousBench (inspect-ai, 144 items × 3 epochs), bug-hunt-bench (105 planted bugs, blind
+judge), roboflow/vlm-exam (133 identical images), harnesseval (six PRs common to every cell), vibe-openscad
+and nurb-benchmarks all publish measured tokens or the CLI's own metered cost alongside an explicit
+`--effort` / `output_config.effort` setting. Add Terminal-Bench 4.0's Harbor index, Kingy AI's 30-case
+gateway run, and three preprints: **SWE Refactor Bench** (arXiv 2608.23564, 20 whole-repository migrations,
+measured API spend), **QuoteBench** (2608.13547, provider-reported output tokens across three models' full
+ladders, the anchor included) and **AI4AI-Bench** (2608.20318, measured exploration spend).
+
+**Where a harness's metric saturates, the score is left blank and only the cost is kept.** vibe-openscad
+scores 7/7 in every cell, nurb-benchmarks 1.0000, Kingy 30/30 with a stated 0.0-point difference. Entering a
+flat metric would tell the quality grid that every effort rung is identical — the same reason the Zenn 3/3
+sweep was excluded in the fourth pass. The datasets that genuinely separate quality by effort are
+ObviousBench (Fable 5.1 pass@3 0.861 → 0.993), bug-hunt-bench (29 → 33 → 43 fixes of 105), vlm-exam and
+harnesseval.
+
+**Result: coverage, not precision.** Fable 5.1 went from 39 rows / 4 sources / 9 benchmarks to **68 / 11 /
+18**, and the independent measurements pull its cost well below what the vendor sweeps alone implied —
+`xhigh` 4.08× → 2.52×, `max` 5.63× → 4.14×. The mean cost band nonetheless *widened*, 1.856× → 1.973×, with
+10 couples narrower and 18 wider. Sonnet 5 was the exception and tightened where it was worst
+(`max` 3.60 → 3.46, `xhigh` 2.74 → 2.40, `high` 2.11 → 1.99). For a model six days old this is the expected
+order of events: the spread is discovered first and narrowed later.
+
+**No academic paper reports cost or tokens for Fable 5.1.** Of 13,013 arXiv abstracts from 20 Jul – 8 Sep
+2026 and 1,135 full texts machine-scanned, exactly one mentions the model and it publishes no cost table.
+Every Fable 5.1 cost figure in existence today is vendor or leaderboard material.
+
+Two calibration facts worth recording, both from papers that were otherwise rejected. QuoteBench measured
+what the *unset* effort field actually does: **Opus 5's unset arm behaves like `medium`**, Opus 4.8's like
+`xhigh`. And arXiv 2608.16956 confirms against Anthropic's documentation that **Fable 5's omitted effort maps
+to `high`**. The repo holds a large number of `default` rows (thinking unstated) that sit outside the effort
+grid; these two facts are the beginning of a case for placing some of them, but that is a method change and
+has not been applied.
+
+Rejections worth recording, because they are the shape of the field: **Terminal-Bench 3.0** varies the
+harness per row (mini-SWE-agent for Opus 5, Claude Code for Fable 5), so it is not a matched-config ratio.
+**CodeRabbit** published a real Fable 5.1 low-vs-high sweep and disqualified it in one sentence — *"this
+evaluation did not record reliable input and output token totals"*. **Cognition's** FrontierCode teardown is
+the best-instrumented cost measurement found anywhere (every LLM call across 3,000 sessions parsed) and never
+states the effort setting. **BenchLM**, **llm-stats** and the entire Japanese blog corpus price from the rate
+card. **Aider's** leaderboard has no model newer than Opus 4. And the widely-cited Lance Martin thread turns
+out to be a pointer at CursorBench 3.2.0 with no numbers of its own.
+
+Two conflicts are recorded rather than resolved: Terminal-Bench 4.0's official board gives Fable 5.1 57.9 %
+and Fable 5 44.5 % where Anthropic's launch page says 55.8 % / 42.0 % (different runs); and ARC Prize
+publishes ARC-AGI-2 for Fable 5.1 at \$3.12/task on X but \$4.49/task on its own results page, at the same
+score. Neither is guessed at.
+
+Two sub-axes remain genuinely unswept: **Reddit** is unreachable from this environment, and **Cognition's
+FrontierCode** leaderboard and Devin blog — probably the single best cross-model cost source for these three
+models — returned JS-only pages and repeated HTTP 429s.
 
 ### Chartography, and a pass that widened the bands
 
