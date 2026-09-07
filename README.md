@@ -8,7 +8,7 @@ Open [`index.html`](index.html) in a browser — fully self-contained (no server
 
 **Live page:** the report is published with GitHub Pages. To enable it on a fork, go to *Settings → Pages → Source: Deploy from a branch → `main` / root*; the site is then served at `https://<user>.github.io/claude-models-value-analysis/` (the build writes `index.html` at the repo root, so it loads directly). Exploratory blocks (value score, window tuner, full method) are collapsed by default; click to expand.
 
-Models covered: **Opus 5, Fable 5, Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 4.8 @medium = 1.00** — deliberately unchanged across releases so the numbers stay comparable with earlier snapshots (see the git tags).
+Models covered: **Fable 5.1, Fable 5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 4.8 @medium = 1.00** — deliberately unchanged across releases so the numbers stay comparable with earlier snapshots (see the git tags).
 
 ---
 
@@ -50,6 +50,30 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.08.01` | 1 Aug 2026 | adds **Opus 5** (system card of 24 Jul 2026, plus Artificial Analysis, Vals AI, swe-rebench and CursorBench) — 428 measured rows |
 | `v2026.08.01b` | 1 Aug 2026 | third research pass — adds the **Vals Index** composite (6 of 7 models, same suite) and **OSWorld 2.0** (arXiv 2606.29537, real USD/task) — 439 measured rows |
 | `v2026.08.17` | 17 Aug 2026 | fourth research pass — 6 parallel source sweeps (leaderboards, papers, repos, forums, blogs, vendors). Adds **ARC Prize** (`costPerTask` per model × effort, served in JSON side-files), **Terminal-Bench 2.1** (explicit `reasoning_effort` + 88–96 % cache), independent **Opus 5 effort sweeps** in real dollars (latitude, Zenn), **stet.sh** (5 rungs on two models, cache-aware), and 40+ other sources — 687 measured rows, 71 sources, 131 comparison groups |
+| `v2026.09.07` | 7 Sep 2026 | adds **Fable 5.1** (released 1 Sep 2026). Six cost × effort sweeps digitized from its system card — FrontierCode 1.1 Extended, CursorBench 3.2.0, HLE with and without tools, DRACO, OSWorld 2.0 — each covering Fable 5.1, Fable 5 and Opus 5 at all five efforts, plus **Artificial Analysis** (a full low→max Intelligence-Index sweep) and the current **Vals Index** composite — 789 measured rows, 71 sources, 139 comparison groups |
+
+### Fable 5.1, in one line
+
+Fable 5.1 is the first release that moves the frontier **down and to the right at once**: it holds five of the ten
+Pareto-frontier couples, and its `low` rung (quality 1.11×, cost 1.07×) beats Fable 5 at `max` (1.18× for 5.33×)
+on quality-per-dollar by a wide margin. Its price per token is unchanged from Fable 5 — the whole gain is fewer
+tokens for the same work, plus a 75 % cut on cache reads. Where it does *not* win is the top of its own ladder:
+`xhigh` and `max` cost 4.08× and 5.71× for 1.23× and 1.25× quality, so the usual advice inverts — on Fable 5.1
+the cheap rungs are the interesting ones.
+
+### A note on double-counting, from this pass
+
+The CursorBench 3.2.0 figure in the Fable 5.1 system card is **the same measurement** as the `cursorbench32`
+rows already ingested from Cursor's own leaderboard: five couples matched to within 0.1 %. Admitting it as a
+new group would have counted one benchmark twice and doubled its weight in the source-weighted median. It was
+folded into the existing group instead, which is what the extra couples (Fable 5 at low/medium/high, Opus 5 at
+low/medium, and all five Fable 5.1 rungs) are doing there. The same check cleared HLE, DRACO and OSWorld: each
+system card re-runs them, and the numbers differ enough between cards to be genuinely independent runs.
+
+Artificial Analysis needed the mirror-image care. Its launch article and its per-model pages report the
+Intelligence Index on **different builds** — Fable 5.1 at max scores 66 for \$3.76/task in the article and 57 for
+\$10,816 per suite on the model page. Mixing them would have compared two different tasks, so they are two
+groups (`aa-index-pertask3`, `aa-index4`), never one.
 
 ### A correctness note from the fourth pass
 
@@ -77,7 +101,9 @@ No dependencies beyond the Python 3 standard library. The client-side rendering 
 - **Task-type variance dominates** cross-model ratios; a single consolidated number hides a real spread, which is why every cell carries a CI.
 - **Per-effort granularity is thin** — most cells rest on a few independent sources.
 - **Public-data ceiling** — genuine independent measurements are scarce; confidence is capped at medium-high. An internal run on a representative workload remains the intended final validation.
-- **Opus 5 still leans on the vendor**, though less than at first: 35 of its 56 rows come from Anthropic's own system card (seven same-task effort sweeps, digitized from the published charts). Seven independent groups now cover it — Artificial Analysis (a full low→max sweep of the Intelligence Index, with cost *and* output tokens; plus AA-Briefcase and the per-task index), Vals AI (a five-tier sweep on Vibe Code Bench, plus the Vals Index composite), swe-rebench and CursorBench 3.2 — which pulled its cost interval at low effort from [0.38, 0.97] to [0.42, 0.51]. Expect further tightening as third-party runs accumulate.
-- **The third-party field looks close to exhausted** for the Claude 5 generation. A systematic sweep on 1 Aug 2026 across preprints (arXiv/HAL/OpenReview), public leaderboards, community write-ups and agent-tooling vendors found only two admissible additions. Most candidates fail the same-task rule in one of three ways: scores published without cost (Epoch AI, Scale SEAL, ARC Prize, Harvey, most arXiv evaluations), cost quoted as list price rather than measured spend (llm-stats FrontierCode), or cost and quality reported on *different* tasks (Composio). Two further sources were deliberately excluded rather than admitted: ARC Prize, because the widely-quoted $0.70/$2.06 per task appears only in secondary summaries and not on the results page itself; and a Zenn effort sweep of Opus 5, because its quality saturated at 3/3 on a toy task and its cost covered output tokens only — admitting it would have flattened Opus 5's quality curve with a measurement taken in a complexity regime the model does not segment.
+- **Fable 5.1 leans on the vendor**, as every model does at launch: 25 of its 39 rows come from Anthropic's own system card (six same-task effort sweeps, digitized from the published charts). Three independent groups cover it — Artificial Analysis (a full low→max Intelligence-Index sweep with per-suite cost *and* output tokens, plus the launch article's per-task figures), the current Vals Index composite, and Cursor's own CursorBench 3.2.0. Four of the six digitized sweeps were **cross-checked against numbers printed in the card's own text or on the launch page** (FrontierCode 63.6 % at medium, CursorBench 73.4/70.5/70.0, HLE 65.0/63.8/63.6 and 60.9/57.8/56.6, OSWorld 77.9/72.9/75.4) and matched to within 0.05 points, which is the calibration check the method calls for.
+- **Opus 5 still leans on the vendor**, though less than at first: 60 of its 125 rows come from Anthropic's own system cards (seven same-task effort sweeps, digitized from the published charts). Seven independent groups now cover it — Artificial Analysis (a full low→max sweep of the Intelligence Index, with cost *and* output tokens; plus AA-Briefcase and the per-task index), Vals AI (a five-tier sweep on Vibe Code Bench, plus the Vals Index composite), swe-rebench and CursorBench 3.2 — which pulled its cost interval at low effort from [0.38, 0.97] to [0.42, 0.51]. Expect further tightening as third-party runs accumulate.
+- **The third-party field is thin for each model's first weeks.** Six days after Fable 5.1 shipped, only three independent groups had published cost *and* quality on the same task (Artificial Analysis, Vals AI, Cursor); the ARC Prize leaderboard, SWE-bench Pro and Terminal-Bench all had scores but no measured spend, and the launch write-ups reproduce Anthropic's or AA's figures rather than running their own. Expect Fable 5.1's intervals to tighten as third-party runs accumulate, as Opus 5's did.
+- **The third-party field looked close to exhausted** for the Claude 5 generation before this release. A systematic sweep on 1 Aug 2026 across preprints (arXiv/HAL/OpenReview), public leaderboards, community write-ups and agent-tooling vendors found only two admissible additions. Most candidates fail the same-task rule in one of three ways: scores published without cost (Epoch AI, Scale SEAL, ARC Prize, Harvey, most arXiv evaluations), cost quoted as list price rather than measured spend (llm-stats FrontierCode), or cost and quality reported on *different* tasks (Composio). Two further sources were deliberately excluded rather than admitted: ARC Prize, because the widely-quoted $0.70/$2.06 per task appears only in secondary summaries and not on the results page itself; and a Zenn effort sweep of Opus 5, because its quality saturated at 3/3 on a toy task and its cost covered output tokens only — admitting it would have flattened Opus 5's quality curve with a measurement taken in a complexity regime the model does not segment.
 
 Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Prices reflect published rates at time of writing.

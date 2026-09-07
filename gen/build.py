@@ -7,10 +7,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
 OUT  = os.path.join(ROOT, "index.html")
 
-MX = {"fable-5":0,"opus-5":1,"opus-4.8":2,"opus-4.7":3,"sonnet-5":4,"sonnet-4.6":5,"haiku-4.5":6}
+MX = {"fable-5.1":0,"fable-5":1,"opus-5":2,"opus-4.8":3,"opus-4.7":4,"sonnet-5":5,"sonnet-4.6":6,"haiku-4.5":7}
 EXP = {"low","medium","high","xhigh","max"}
 EMAP = {"T25":"medium","T50":"high"}    # braintrust thinking-budget tiers → nearest effort
-PRICE_OUT = {"fable-5":50,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5":15,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
+PRICE_OUT = {"fable-5.1":50,"fable-5":50,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5":15,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
 
 def eff(e): return EMAP.get(e, e)
 def num(x):
@@ -160,6 +160,14 @@ def groups_data():
       "valsindex":("Vals Index","xmodel","Vals AI · 24-bench composite, 6 models all at max; overlaps EMB+VibeCode ✓"),
       "osworld2b":("OSWorld 2.0 batch","xmodel","arXiv 2606.29537 · 108 workflows, 500 steps, batched tool calls, max ✓"),
       "osworld2s":("OSWorld 2.0 single","xmodel","arXiv 2606.29537 · 108 workflows, 500 steps, single tool call, max ✓"),
+      "scf51fcode":("FrontierCode-Ext","sweep","Fable 5.1 card p170 · FrontierCode v1.1 Extended, 3 models × sweep low→max, $ cost ✓"),
+      "scf51hlet":("HLE tools (F5.1)","sweep","Fable 5.1 card p177 · HLE with tools, 3 models × sweep low→max, $ cost, scores printed ✓"),
+      "scf51hlen":("HLE no-tools (F5.1)","sweep","Fable 5.1 card p178 · HLE without tools, 3 models × sweep low→max, $ cost, scores printed ✓"),
+      "scf51draco":("DRACO (F5.1)","sweep","Fable 5.1 card p179 · 980k budget, 3 models × sweep low→max, $ cost, scores printed ✓"),
+      "scf51osw":("OSWorld 2.0 (F5.1)","sweep","Fable 5.1 card p190 · partial-credit price/perf, 3 models; effort inferred from cost order ✓"),
+      "aa-index4":("AA Index v4","sweep","AA model pages · Fable 5.1 sweep low→max + Fable 5/Opus 5 at max, per-suite $ ✓"),
+      "aa-index-pertask3":("AA /task v4","xmodel","AA launch article · per-task $, Fable 5.1 xhigh/max vs Fable 5/Opus 5 max ✓"),
+      "valsindex2":("Vals Index 09/26","xmodel","Vals AI · current composite, 5 models all at max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
@@ -214,7 +222,7 @@ def ratio_grid(field):
          ASYMMETRIC (captures skew). Centred on the median → the plotted dot is always inside the band. A
          single-benchmark node gets a degenerate [c,c,c] box. Haiku 4.5 → one 'solo' node (no effort ladder)."""
     import math, collections
-    CUR = set(MX)                                            # 6 current models
+    CUR = set(MX)                                            # 8 current models
     EFFOK = {"low","medium","high","xhigh","max","solo"}     # 'solo' = haiku 4.5 (no discrete effort)
     ANCHOR = "opus-4.8@medium"
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
@@ -256,7 +264,8 @@ def ratio_grid(field):
         lo  = c*math.exp(-(sum(w*d*d for d,w in neg)/sum(w for _,w in neg))**0.5) if neg else c
         hi  = c*math.exp( (sum(w*d*d for d,w in pos)/sum(w for _,w in pos))**0.5) if pos else c
         return [round(c,2), round(lo,2), round(hi,2)]                      # band centred on the median → dot always inside
-    ORD = {"fable-5":["low","medium","high","xhigh","max"],"opus-5":["low","medium","high","xhigh","max"],
+    ORD = {"fable-5.1":["low","medium","high","xhigh","max"],"fable-5":["low","medium","high","xhigh","max"],
+           "opus-5":["low","medium","high","xhigh","max"],
            "opus-4.8":["low","medium","high","xhigh","max"],
            "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
            "sonnet-4.6":["low","medium","high","max"]}
@@ -362,6 +371,10 @@ def main():
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     body = body.replace("__NSAMETASK__", str(len(RD["cost"])))   # same-task cost-ratio measurement points (dynamic)
+    ncpl = sum(len(v) for v in CG.values())                      # (model, effort) couples carried by the grids
+    span = max(c[0] for v in CG.values() for c in v.values()) / min(c[0] for v in CG.values() for c in v.values())
+    body = body.replace("__NCOUPLES__", str(ncpl))
+    body = body.replace("__COSTSPAN__", str(round(span)))
     body = body.replace("__GENDATE__", datetime.date.today().strftime("%d %b %Y"))   # report generation date
     html = (
         "<!doctype html>\n"
