@@ -134,7 +134,7 @@ def groups_data():
       "emb":("EMB","xmodel","bash+execute · Opus4.8=MAX, Sonnet5 NS ✓"),
       "willison":("Willison SVG","sweep","llm CLI · sweep low→max, trivial task (SVG) ✓"),
       "futuresearch":("DeepResearch","sweep","Deep Research Bench · low/high ✓"),
-      "cursorbench":("CursorBench","sweep","Cursor 3.1 · sweep low→max, matched effort ✓ (vendor benchmark)"),
+      "cursorbench":("CursorBench","sweep","Sonnet 5 card p118 · 5 models × sweep low→max, $ cost, scores printed ✓"),
       "scsweproeff":("SWE-Pro sweep","sweep","Opus 4.8 card p196 · sweep low→max, output tokens ✓"),
       "schleeff":("HLE sweep","sweep","Opus 4.8 card p203 · HLE tools, sweep low→max ✓"),
       "scosweff":("OSWorld sweep","sweep","Opus 4.8 card p222 · sweep low→max, output tokens ✓"),
@@ -168,6 +168,8 @@ def groups_data():
       "aa-index4":("AA Index v4","sweep","AA model pages · Fable 5.1 sweep low→max + Fable 5/Opus 5 at max, per-suite $ ✓"),
       "aa-index-pertask3":("AA /task v4","xmodel","AA launch article · per-task $, Fable 5.1 xhigh/max vs Fable 5/Opus 5 max ✓"),
       "valsindex2":("Vals Index 09/26","xmodel","Vals AI · current composite, 5 models all at max ✓"),
+      "scfrontiercode":("FrontierCode v1","sweep","Sonnet 5 card p117 · 4 models × sweep low→max, $ cost, scores printed ✓"),
+      "scoosw47":("OSWorld eff. (4.7)","sweep","Opus 4.7 card p209 · pass@1 vs output tokens, 3 models × low→max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))

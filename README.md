@@ -50,6 +50,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.08.01` | 1 Aug 2026 | adds **Opus 5** (system card of 24 Jul 2026, plus Artificial Analysis, Vals AI, swe-rebench and CursorBench) — 428 measured rows |
 | `v2026.08.01b` | 1 Aug 2026 | third research pass — adds the **Vals Index** composite (6 of 7 models, same suite) and **OSWorld 2.0** (arXiv 2606.29537, real USD/task) — 439 measured rows |
 | `v2026.08.17` | 17 Aug 2026 | fourth research pass — 6 parallel source sweeps (leaderboards, papers, repos, forums, blogs, vendors). Adds **ARC Prize** (`costPerTask` per model × effort, served in JSON side-files), **Terminal-Bench 2.1** (explicit `reasoning_effort` + 88–96 % cache), independent **Opus 5 effort sweeps** in real dollars (latitude, Zenn), **stet.sh** (5 rungs on two models, cache-aware), and 40+ other sources — 687 measured rows, 71 sources, 131 comparison groups |
+| `v2026.09.07b` | 7 Sep 2026 | fifth research pass — targeted at the widest intervals rather than at new models. Re-digitizes the two Sonnet 5 card sweeps the repo had only read approximately (**CursorBench**, **FrontierCode v1**), which also corrected Sonnet 4.6's high/max scores; adds **OSWorld by effort** from the Opus 4.7 card and two **Artificial Analysis** model-page rows — 803 measured rows, 71 sources, 140 comparison groups |
 | `v2026.09.07` | 7 Sep 2026 | adds **Fable 5.1** (released 1 Sep 2026). Six cost × effort sweeps digitized from its system card — FrontierCode 1.1 Extended, CursorBench 3.2.0, HLE with and without tools, DRACO, OSWorld 2.0 — each covering Fable 5.1, Fable 5 and Opus 5 at all five efforts, plus **Artificial Analysis** (a full low→max Intelligence-Index sweep) and the current **Vals Index** composite — 789 measured rows, 71 sources, 139 comparison groups |
 
 ### Fable 5.1, in one line
@@ -60,6 +61,45 @@ on quality-per-dollar by a wide margin. Its price per token is unchanged from Fa
 tokens for the same work, plus a 75 % cut on cache reads. Where it does *not* win is the top of its own ladder:
 `xhigh` and `max` cost 4.08× and 5.71× for 1.23× and 1.25× quality, so the usual advice inverts — on Fable 5.1
 the cheap rungs are the interesting ones.
+
+### What the fifth pass changed, and what it did not
+
+This pass went after the *intervals* rather than after new models. The diagnostic first: of the 35 (model, effort)
+couples, the widest cost bands were Sonnet 4.6 `low` (4.05× between the band's ends), Sonnet 5 `max` (3.78×) and
+Sonnet 4.6 `medium` (2.06×) — the Sonnet family, plus every `low` rung. Haiku 4.5 was worse than any of them: it
+rests on **one** benchmark, so its band is degenerate rather than wide.
+
+The most useful find was not a new source but an old one read badly. The `cursorbench` and `scfrontiercode`
+groups are the two effort sweeps in the **Sonnet 5 system card** (p118 and p117), and they had been entered by
+eye: costs rounded to one decimal, and Sonnet 4.6's high/max scores recorded as 48.8/49.0 when the chart prints
+**48.2/47.5** — a curve that falls after `high`, entered as one that rises. Re-digitizing both (X-axis fit
+residual 0.2 px, scores taken from the printed labels) corrected 42 rows. Added on top: the Opus 4.7 card's
+OSWorld-by-effort figure (p209, output tokens × price, three models × four efforts) and two Artificial Analysis
+model-page rows (Opus 4.8 and Sonnet 5 at max) that complete `aa-index4`.
+
+The result is honest rather than flattering: the mean cost band narrowed only from 1.854× to 1.826×, with **15
+couples narrower and 13 wider**. The targets moved the right way — Sonnet 4.6 `low` 4.05×→3.40×, `medium`
+2.06×→1.73×, `max` 2.37×→2.09×, Sonnet 5 `max` 3.78×→3.60×, Opus 4.8 `max` 1.82×→1.73× — while several Fable 5
+bands widened. That widening is the point: the old rounded values understated the spread between benchmarks, so
+those bands were not narrow, they were wrong.
+
+Four candidate sources were examined and **rejected**, for reasons worth recording:
+
+- **BenchLM** quotes cost from published list prices and assumed token counts, not measured spend.
+- **HAL (Princeton)** and **swe-rebench** publish cost *and* score on the same task, but neither has ingested
+  any model newer than Sonnet 4.5 / Fable 5 — swe-rebench lists no Haiku 4.5 and no Fable 5.1 at all.
+- The **Opus 4.8 card's** DeepSearchQA (p206) and DRACO (p209) effort figures plot *total* tokens, not output
+  tokens. Turning that into a cost ratio assumes both models share an input/output mix, which is the same kind
+  of assumption that gets list-price sources excluded here — so they were left out.
+- The **Haiku 4.5 system card** contains no cost-versus-effort figure at all.
+
+### Why Haiku 4.5 is still a single point
+
+Haiku carries 44 rows with a cost, and exactly **one** of them reaches the grid. The others are labelled
+`default` (thinking unstated), `nothink`, or `think-*`, and the grid only admits the explicit effort rungs plus
+the `solo` node. Since Haiku has no effort dial, a `default` run *is* its only configuration — relabelling those
+rows `solo` would take Haiku from one benchmark to six and finally give it a real interval. That is a method
+change rather than new evidence, so it is left as an open question rather than applied quietly.
 
 ### A note on double-counting, from this pass
 
