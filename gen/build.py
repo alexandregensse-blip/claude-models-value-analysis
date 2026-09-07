@@ -169,6 +169,8 @@ def groups_data():
       "aa-index-pertask3":("AA /task v4","xmodel","AA launch article · per-task $, Fable 5.1 xhigh/max vs Fable 5/Opus 5 max ✓"),
       "valsindex2":("Vals Index 09/26","xmodel","Vals AI · current composite, 5 models all at max ✓"),
       "scfrontiercode":("FrontierCode v1","sweep","Sonnet 5 card p117 · 4 models × sweep low→max, $ cost, scores printed ✓"),
+      "chartogt":("Chartography +tools","sweep","Fable 5.1 card p186 · 5 models × sweep low→max, $ cost; Opus 4.8 series joined from Opus 5 card p171 ✓"),
+      "chartogn":("Chartography −tools","sweep","Fable 5.1 card p186 · tools disabled — separate regime, kept out of the effort grid ✓"),
       "scoosw47":("OSWorld eff. (4.7)","sweep","Opus 4.7 card p209 · pass@1 vs output tokens, 3 models × low→max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set

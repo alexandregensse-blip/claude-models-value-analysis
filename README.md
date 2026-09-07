@@ -50,6 +50,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.08.01` | 1 Aug 2026 | adds **Opus 5** (system card of 24 Jul 2026, plus Artificial Analysis, Vals AI, swe-rebench and CursorBench) — 428 measured rows |
 | `v2026.08.01b` | 1 Aug 2026 | third research pass — adds the **Vals Index** composite (6 of 7 models, same suite) and **OSWorld 2.0** (arXiv 2606.29537, real USD/task) — 439 measured rows |
 | `v2026.08.17` | 17 Aug 2026 | fourth research pass — 6 parallel source sweeps (leaderboards, papers, repos, forums, blogs, vendors). Adds **ARC Prize** (`costPerTask` per model × effort, served in JSON side-files), **Terminal-Bench 2.1** (explicit `reasoning_effort` + 88–96 % cache), independent **Opus 5 effort sweeps** in real dollars (latitude, Zenn), **stet.sh** (5 rungs on two models, cache-aware), and 40+ other sources — 687 measured rows, 71 sources, 131 comparison groups |
+| `v2026.09.07c` | 7 Sep 2026 | sixth pass — **Chartography** (Fable 5.1 card p186), a 4-model × 5-effort sweep in real dollars, digitized by separating the solid (with-tools) from the dashed (without-tools) curves; the Opus 4.8 series is joined from the Opus 5 card so the benchmark is anchored. The no-tools regime is kept out of the effort grid — 852 measured rows, 142 comparison groups |
 | `v2026.09.07b` | 7 Sep 2026 | fifth research pass — targeted at the widest intervals rather than at new models. Re-digitizes the two Sonnet 5 card sweeps the repo had only read approximately (**CursorBench**, **FrontierCode v1**), which also corrected Sonnet 4.6's high/max scores; adds **OSWorld by effort** from the Opus 4.7 card and two **Artificial Analysis** model-page rows — 803 measured rows, 71 sources, 140 comparison groups |
 | `v2026.09.07` | 7 Sep 2026 | adds **Fable 5.1** (released 1 Sep 2026). Six cost × effort sweeps digitized from its system card — FrontierCode 1.1 Extended, CursorBench 3.2.0, HLE with and without tools, DRACO, OSWorld 2.0 — each covering Fable 5.1, Fable 5 and Opus 5 at all five efforts, plus **Artificial Analysis** (a full low→max Intelligence-Index sweep) and the current **Vals Index** composite — 789 measured rows, 71 sources, 139 comparison groups |
 
@@ -61,6 +62,35 @@ on quality-per-dollar by a wide margin. Its price per token is unchanged from Fa
 tokens for the same work, plus a 75 % cut on cache reads. Where it does *not* win is the top of its own ladder:
 `xhigh` and `max` cost 4.08× and 5.71× for 1.23× and 1.25× quality, so the usual advice inverts — on Fable 5.1
 the cheap rungs are the interesting ones.
+
+### Chartography, and a pass that widened the bands
+
+The sixth pass added one benchmark: **Chartography** from the Fable 5.1 card (p186) — Fable 5.1, Fable 5,
+Opus 5 and Sonnet 5, five efforts each, cost per task in real dollars. The figure overlays two curves per
+model, solid for with-tools and dashed for without, in the same colour; they were separated by sampling the
+segment between every pair of markers and measuring what fraction of it carries the series colour (≈1.0 solid,
+≈0.7 dashed). The Opus 4.8 series was joined in from the **Opus 5** card's copy of the same figure (p171),
+which makes the benchmark *anchored* rather than bridged.
+
+That join was checked before it was made, and the check turned up something worth recording. Opus 5 appears in
+both cards' versions of this figure and matches to within 0.3 % on all five efforts — the same run, on the same
+cost scale, so joining is safe. **Sonnet 5, however, has identical scores in the two cards but costs in a
+constant 1.502× ratio** — exactly 15/10, the Sonnet 5 price change of 31 Aug 2026. The two cards price the same
+run off different rate cards. Sonnet 5 is therefore taken from p186 only, never mixed across the two.
+
+The **without-tools** curves are kept in the data but held out of the effort grid, labelled `nt-*`. Stripping
+the tools from a benchmark that needs them is a regime change, not an effort setting — the same reason
+`nothink` is already excluded. The numbers say so plainly: without tools the anchor costs almost nothing, so
+Fable 5.1 at max comes out at **27.6×** the anchor against 5.4× everywhere else.
+
+**This pass widened the intervals rather than narrowing them:** mean cost band 1.856× → 1.938×, 15 couples
+wider against 9 narrower, and Fable 5.1's centres moved a long way (`xhigh` 4.08 → 2.53, `max` 5.63 → 4.46).
+Chartography is a short multimodal task, and on it Fable 5.1 is far cheaper relative to the anchor than on the
+long agentic benchmarks that make up most of the set. With only nine benchmarks carrying Fable 5.1, one
+divergent-but-real measurement moves it. That is the honest reading: the band was narrow because the coverage
+was narrow, and this is what task-type variance looks like when you sample a new corner of it. The measurement
+was kept — dropping a verified vendor sweep because it widens a band would be choosing the data to fit the
+conclusion.
 
 ### What the fifth pass changed, and what it did not
 
