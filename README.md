@@ -93,13 +93,32 @@ Four candidate sources were examined and **rejected**, for reasons worth recordi
   of assumption that gets list-price sources excluded here — so they were left out.
 - The **Haiku 4.5 system card** contains no cost-versus-effort figure at all.
 
-### Why Haiku 4.5 is still a single point
+### Haiku 4.5 stops being a single point
 
-Haiku carries 44 rows with a cost, and exactly **one** of them reaches the grid. The others are labelled
-`default` (thinking unstated), `nothink`, or `think-*`, and the grid only admits the explicit effort rungs plus
-the `solo` node. Since Haiku has no effort dial, a `default` run *is* its only configuration — relabelling those
-rows `solo` would take Haiku from one benchmark to six and finally give it a real interval. That is a method
-change rather than new evidence, so it is left as an open question rather than applied quietly.
+Haiku carried 44 rows with a cost, and exactly **one** of them reached the grid. The rest were labelled
+`default` — thinking unstated — and the grid admits only the explicit effort rungs plus the `solo` node.
+
+But `default` is not a configuration choice on Haiku: the API rejects `output_config.effort` on it, so a
+`default` run **is** its only configuration, which is precisely what `solo` denotes. Those 22 rows are now
+labelled `solo` (`nothink` and the ARC Prize `think-*` budget ladder stay distinct, since those are genuinely
+different regimes). Haiku goes from one benchmark to six — `officeqa`, `ceobench`, `automationbench`, `ctala`,
+`drona23`, `ponytail` — and the correction is large:
+
+| | before (1 benchmark) | after (6 benchmarks) |
+|---|---|---|
+| relative cost | 0.50 (degenerate band) | **0.24** [0.17, 0.30] |
+| relative quality | 0.59 (degenerate band) | **0.58** [0.36, 0.80] |
+
+The single arXiv measurement had overstated Haiku's cost by a factor of two, and the degenerate band displayed
+that as certainty. Haiku now sits on the Pareto frontier and takes the grunt-work tier, which is where a cheap
+small model belongs and which the report could not show while one measurement stood in for six.
+
+**The caveat, stated rather than hidden:** in five of those six groups Haiku's partner runs at `high` or `max`,
+so the ratio compares Haiku-in-its-only-configuration against another model pushed hard. That is the Haiku
+exception `comparisons()` already applies on the ratio side, and it is why the quality band is so wide
+([0.36, 0.80]) — the six benchmarks genuinely disagree about Haiku. Read the cost figure as *what Haiku costs
+relative to models being run properly*, not as a matched-effort comparison, which is not available for a model
+with no effort dial.
 
 ### A note on double-counting, from this pass
 
