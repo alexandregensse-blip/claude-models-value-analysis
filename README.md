@@ -61,6 +61,65 @@ tokens for the same work, plus a 75 % cut on cache reads. Where it does *not* wi
 `xhigh` and `max` cost 4.08× and 5.71× for 1.23× and 1.25× quality, so the usual advice inverts — on Fable 5.1
 the cheap rungs are the interesting ones.
 
+### A pricing fact that affects rows across the repo
+
+Three independent repositories reconcile, to the cent, on the same finding: **Claude Code runs bill the
+one-hour cache-write bucket at 2× input** — \$20/MTok on Fable 5.1, \$10/MTok on Opus 5 — not the five-minute
+1.25× rate. `tsumegobench` reconciles four of five runs exactly on that basis; `harnesseval`'s committed
+`costUSD` values reconcile exactly at \$20/MTok and come out ~28 % low at \$12.50; and it is the documented
+mechanism behind `runebench`'s own admitted 12–15 % undercount on two Opus 5 cells. Any figure elsewhere that
+prices a Claude Code run at 1.25 × cache-write is low by roughly 10–15 %. Fable 5.1's cache **read** is
+confirmed at \$0.25/MTok in all three.
+
+This does not change what the repo stores — the numbers here are taken as each source publishes them — but it
+explains a slice of the spread between sources, and it is why `runebench`'s two mispriced Opus 5 cells were
+omitted rather than silently corrected: the `cacheWriteTokens` needed to fix them are never committed.
+
+### Third scan: the blocked sources, opened
+
+The four axes of the second salvo left five sources unread, each blocked by JavaScript-only rendering or
+repeated HTTP 429s. A targeted scan opened four of them, and two of those changed data already in the repo
+rather than only adding to it.
+
+**Cognition's FrontierCode leaderboard** publishes its data at
+`cognition.com/data/frontiercode-leaderboard/data.json`, reachable by reading the fetch URL out of the page's
+Next.js chunks. Two consequences. The Fable 5.1 card's figure 8.4.A **is** that board's Extended subset — the
+digitisation matched the primary to within 0.5 %, so those fifteen rows were replaced with exact values and
+re-attributed to Cognition instead of being counted twice. And FrontierCode has **no "\$ per completed task"
+metric at all**: its cost field is *"the mean USD spend per rollout"*, so every secondary source quoting
+\$2.68 / \$3.51 / \$5.84 under that name is quoting per-rollout Extended figures under a wrong label. The real
+trap is subset mixing — `main` (100 tasks) and `extended` (150) are separate groups here.
+
+**CursorBench 3.2** turned out to be the single most valuable source in the matrix: a complete 3 × 5 matrix —
+all three models at all five rungs — on one suite, with measured tokens and a stated method (*"published
+per-million-token pricing applied to the tokens it used on each task"*). It is now the backbone of the Fable 5.1
+effort curve in place of the system card. It also corrected the one value flagged as uncertain when it was
+digitised: `opus-5@low`, read off an occluded hollow marker at 2.285/63.70, is really 2.55/62.8.
+
+**ARC Prize's \$3.12 vs \$4.49 was never a conflict** — they are the `xhigh` and `max` rungs, both scoring
+90.0 % on ARC-AGI-2. Per-effort costs sit in the page payload, so Fable 5.1's five rungs now complete the
+`arcagi1` / `arcagi2` groups that already held Fable 5 and Opus 5.
+
+**Terminal-Bench 4.0**, read from its RSC payload, answers a question in the negative: no effort rungs have
+been added. Every Claude row is still `max`, while the schema carries the other rungs for other vendors — a
+real absence, not a limitation. It also corrected a mistake introduced here: the Snorkel mirror's
+2.7 B / 6.5 B / 3.8 B are *total* tokens; output is 63.1 M / 66.0 M / 58.6 M.
+
+**Artificial Analysis shipped three mutually incomparable index scales in seven days** — the 1 Sep launch
+article, v4.2 on the 4th, v4.3 on the 7th (Terminal-Bench 2.1 → 4.0, AutomationBench-AA added, run totals
+differ). Each is its own group, and the launch-article rows carry a note that their scores do not cross the
+rebaseline. Any figure citing Fable 5.1 at index 66 or \$3.76/task is stale.
+
+Reddit, unreachable in the previous salvo, was opened through an Anubis-challenged redlib mirror. It yielded
+one admissible row set out of fourteen candidates, and confirmed the dominant forum failure mode: spend
+reported with no quality result, or rate-card arithmetic presented as measurement. The most useful find was
+elsewhere — **Simon Willison's five-rung Fable 5.1 sweep**, whose shape is the point: `low`, `medium` and
+`high` all land at ~\$0.10–0.13 for ~2 k output tokens, then `xhigh` jumps 14× and `max` 25×. The effort ladder
+is not a ramp; it is a cliff between `high` and `xhigh`.
+
+**OpenHands Index** was reached through its REST API and rejected outright: no effort dimension in the schema,
+and a cache stale since 1 Sep that leaves two of the three target models absent.
+
 ### The second salvo: coverage bought, bands not tightened
 
 Four parallel sweeps — public leaderboards, preprints, public code, practitioner write-ups — restricted to
