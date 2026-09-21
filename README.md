@@ -52,7 +52,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.08.17` | 17 Aug 2026 | fourth research pass — 6 parallel source sweeps (leaderboards, papers, repos, forums, blogs, vendors). Adds **ARC Prize** (`costPerTask` per model × effort, served in JSON side-files), **Terminal-Bench 2.1** (explicit `reasoning_effort` + 88–96 % cache), independent **Opus 5 effort sweeps** in real dollars (latitude, Zenn), **stet.sh** (5 rungs on two models, cache-aware), and 40+ other sources — 687 measured rows, 71 sources, 131 comparison groups |
 | `v2026.09.08` | 8 Sep 2026 | adds **Fable 5.1** (released 1 Sep 2026) and a second research salvo. Six cost × effort sweeps digitized from the Fable 5.1 system card (FrontierCode 1.1 Extended, CursorBench 3.2.0, HLE with and without tools, DRACO, OSWorld 2.0), plus **Chartography** — a 4-model × 5-effort sweep read by separating the solid and dashed curves, anchored by joining the Opus 4.8 series from the Opus 5 card. Re-digitizes the two Sonnet 5 card sweeps the repo had only read approximately (**CursorBench**, **FrontierCode v1**), correcting 42 rows and Sonnet 4.6's high/max scores. **Haiku 4.5** gains a real interval: its `default` runs are its only configuration, so they are labelled `solo`, taking it from 1 benchmark to 6 and halving its measured cost. Twelve new third-party sources — Terminal-Bench 4.0, ObviousBench, bug-hunt-bench, vlm-exam, harnesseval, vibe-openscad, nurb-benchmarks, Kingy AI, Artificial Analysis, the current Vals Index, and three preprints (SWE Refactor Bench, QuoteBench, AI4AI-Bench) — 955 measured rows, 81 sources, 153 comparison groups |
 | `v2026.09.08b` | 8 Sep 2026 | third scan — targeted at the sources the previous salvo could not read. Opens **Cognition's FrontierCode** JSON (which turns out to be the source behind the Fable 5.1 card's figure 8.4.A, so those rows are replaced with exact primaries), **CursorBench 3.2** in full (a complete 3 × 5 matrix that becomes the backbone of the Fable 5.1 effort curve), **Zapier AutomationBench**, **ARC Prize** per-effort costs, **AA Intelligence Index v4.3**, **Firecrawl**'s 57-run study, Simon Willison's five-rung Fable 5.1 sweep, and eight further sources. Resolves the ARC \$3.12/\$4.49 conflict (they are `xhigh` and `max`) and records that Claude Code bills cache-write at 2 × input — 1050 measured rows, 90 sources, 168 comparison groups |
-| `v2026.09.21` | 21 Sep 2026 | sixth pass — five parallel source sweeps (leaderboards, preprints, public code, forums, vendors). The find is not a new source but an under-read one: **Cognition's FrontierCode JSON carries eight Claude models and the repo had ingested three**, so Opus 4.8, Sonnet 5, Opus 4.7 and Sonnet 4.6 join both v1.1 subsets and the v1 extended subset opens as its own group. The same JSON proves `scfrontiercode` — digitized off the Sonnet 5 card — *is* FrontierCode v1 main, and its Sonnet 4.6 costs were 8–11 % off; those rows are replaced with primaries. Adds **CursorBench 4.0** (a harder suite shipped 10 Sep) and the four missing **Terminal-Bench 4.0** effort rungs, both re-extracted from their own payloads. Mean cost band **2.016× → 1.811×**: Sonnet 4.6 `low` 3.36× → 1.19×, `medium` 1.83× → 1.08×, Opus 4.7 `xhigh` 1.53× → 1.16× — 1159 measured rows, 93 sources, 178 comparison groups |
+| `v2026.09.21` | 21 Sep 2026 | sixth pass — five parallel source sweeps (leaderboards, preprints, public code, forums, vendors). The find is not a new source but an under-read one: **Cognition's FrontierCode JSON carries eight Claude models and the repo had ingested three**, so Opus 4.8, Sonnet 5, Opus 4.7 and Sonnet 4.6 join both v1.1 subsets and the v1 extended subset opens as its own group. The same JSON proves `scfrontiercode` — digitized off the Sonnet 5 card — *is* FrontierCode v1 main, and its Sonnet 4.6 costs were 8–11 % off; those rows are replaced with primaries. Adds **CursorBench 4.0** (a harder suite shipped 10 Sep) and the four missing **Terminal-Bench 4.0** effort rungs, both re-extracted from their own payloads. Mean cost band **2.016× → 1.811×**: Sonnet 4.6 `low` 3.36× → 1.19×, `medium` 1.83× → 1.08×, Opus 4.7 `xhigh` 1.53× → 1.16× — 1162 measured rows, 94 sources, 179 comparison groups |
 
 ### Fable 5.1, in one line
 
@@ -114,6 +114,35 @@ harder suite shipped 10 Sep on which Fable 5.1 at `max` falls from 73.4 % to 51.
 are in the chart's `aria-label` attributes), and the four missing **Terminal-Bench 4.0** effort rungs, which
 also yielded exact figures for two rows the repo stored rounded to two significant figures. Fable 5.1 scores
 57.88 % at both `xhigh` and `max` there — 191 of 330 trials each, a real tie rather than a misread row.
+
+### The leads this pass left open, closed
+
+Every lead the sweeps flagged as "worth revisiting" was chased down rather than carried forward. Most died,
+and recording *why* is the point — a lead that is merely unresolved gets re-opened every pass.
+
+- **`uhyo/react-profession-bench`** was the most promising: an explicit rubric, a fixed judge, unsaturated
+  scores across thirteen specs. It has no cost data at all. Its tree holds 199 files and not one mentions
+  cost, tokens or usage, and the two most recent reports (Fable 5.1, Opus 5) never name a price. Not a
+  source to watch — a source with nothing to measure.
+- **arXiv 2602.22953** (General Agent Evaluation) reads its cost-efficiency appendix in real dollars, but the
+  only Claude model in it is **Opus 4.5**, outside this lineage, and "effort" appears in the paper only as
+  prose. **arXiv 2604.26954** turns out to evaluate OpenAI and Google models exclusively.
+- **`SammyTourani/road-to-52`** quotes per-task dollars, all carrying `measured_by_us: false` and sourced
+  from the ARC Prize leaderboard this repo already ingests. Secondary citation of an admitted source.
+- **Harvey's Legal Agent Benchmark** states no effort setting anywhere, so its rows could only ever be
+  `default`, and its two in-scope models (Opus 4.7, Sonnet 4.6) form a pair already covered. Digitizing its
+  Figure 3 — whose labels are outlined vector paths — would have bought nothing.
+- **Terminal-Bench 2.1 can no longer be verified.** Every leaderboard route on tbench.ai now serves the 4.0
+  dataset byte-for-byte, including `/terminal-bench/2.1`. The six `tb21` rows are from a board that is gone;
+  they are flagged as such rather than silently trusted or silently dropped.
+- **morphllm.com** answered 429 to every route and every client tried.
+
+One lead paid off. **frontierswe.com** publishes mean reward and mean cost per trial over 170 runs for Fable
+5.1, Opus 5 and Fable 5 on a 34-task ultra-long-horizon suite, and its v2 write-up states the setting the
+leaderboard page does not: *"We evaluate each model at its maximum reasoning effort."* That makes them `max`
+rungs rather than unlabelled runs, which is what lets them into the grid. Its cost basis is undocumented, so
+they carry the same flag the Terminal-Bench rows carry. The Kilo leaderboard payload also turned out to hold
+measured output-token counts for the seven Claude rows already ingested from it, which the repo had left empty.
 
 ### What this pass rejected, and why it matters
 
