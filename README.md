@@ -52,21 +52,19 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.08.17` | 17 Aug 2026 | fourth research pass — 6 parallel source sweeps (leaderboards, papers, repos, forums, blogs, vendors). Adds **ARC Prize** (`costPerTask` per model × effort, served in JSON side-files), **Terminal-Bench 2.1** (explicit `reasoning_effort` + 88–96 % cache), independent **Opus 5 effort sweeps** in real dollars (latitude, Zenn), **stet.sh** (5 rungs on two models, cache-aware), and 40+ other sources — 687 measured rows, 71 sources, 131 comparison groups |
 | `v2026.09.08` | 8 Sep 2026 | adds **Fable 5.1** (released 1 Sep 2026) and a second research salvo. Six cost × effort sweeps digitized from the Fable 5.1 system card (FrontierCode 1.1 Extended, CursorBench 3.2.0, HLE with and without tools, DRACO, OSWorld 2.0), plus **Chartography** — a 4-model × 5-effort sweep read by separating the solid and dashed curves, anchored by joining the Opus 4.8 series from the Opus 5 card. Re-digitizes the two Sonnet 5 card sweeps the repo had only read approximately (**CursorBench**, **FrontierCode v1**), correcting 42 rows and Sonnet 4.6's high/max scores. **Haiku 4.5** gains a real interval: its `default` runs are its only configuration, so they are labelled `solo`, taking it from 1 benchmark to 6 and halving its measured cost. Twelve new third-party sources — Terminal-Bench 4.0, ObviousBench, bug-hunt-bench, vlm-exam, harnesseval, vibe-openscad, nurb-benchmarks, Kingy AI, Artificial Analysis, the current Vals Index, and three preprints (SWE Refactor Bench, QuoteBench, AI4AI-Bench) — 955 measured rows, 81 sources, 153 comparison groups |
 | `v2026.09.08b` | 8 Sep 2026 | third scan — targeted at the sources the previous salvo could not read. Opens **Cognition's FrontierCode** JSON (which turns out to be the source behind the Fable 5.1 card's figure 8.4.A, so those rows are replaced with exact primaries), **CursorBench 3.2** in full (a complete 3 × 5 matrix that becomes the backbone of the Fable 5.1 effort curve), **Zapier AutomationBench**, **ARC Prize** per-effort costs, **AA Intelligence Index v4.3**, **Firecrawl**'s 57-run study, Simon Willison's five-rung Fable 5.1 sweep, and eight further sources. Resolves the ARC \$3.12/\$4.49 conflict (they are `xhigh` and `max`) and records that Claude Code bills cache-write at 2 × input — 1050 measured rows, 90 sources, 168 comparison groups |
-| `v2026.09.21` | 21 Sep 2026 | sixth pass — five parallel source sweeps (leaderboards, preprints, public code, forums, vendors). The find is not a new source but an under-read one: **Cognition's FrontierCode JSON carries eight Claude models and the repo had ingested three**, so Opus 4.8, Sonnet 5, Opus 4.7 and Sonnet 4.6 join both v1.1 subsets and the v1 extended subset opens as its own group. The same JSON proves `scfrontiercode` — digitized off the Sonnet 5 card — *is* FrontierCode v1 main, and its Sonnet 4.6 costs were 8–11 % off; those rows are replaced with primaries. Adds **CursorBench 4.0** (a harder suite shipped 10 Sep) and the four missing **Terminal-Bench 4.0** effort rungs, both re-extracted from their own payloads. Mean cost band **2.016× → 1.811×**: Sonnet 4.6 `low` 3.36× → 1.19×, `medium` 1.83× → 1.08×, Opus 4.7 `xhigh` 1.53× → 1.16× — 1162 measured rows, 94 sources, 179 comparison groups |
+| `v2026.09.21` | 21 Sep 2026 | sixth pass — five parallel source sweeps (leaderboards, preprints, public code, forums, vendors). The find is not a new source but an under-read one: **Cognition's FrontierCode JSON carries eight Claude models and the repo had ingested three**, so Opus 4.8, Sonnet 5, Opus 4.7 and Sonnet 4.6 join both v1.1 subsets and the v1 extended subset opens as its own group. The same JSON proves `scfrontiercode` — digitized off the Sonnet 5 card — *is* FrontierCode v1 main, and its Sonnet 4.6 costs were 8–11 % off; those rows are replaced with primaries. Adds **CursorBench 4.0** (a harder suite shipped 10 Sep) and the four missing **Terminal-Bench 4.0** effort rungs, both re-extracted from their own payloads. Mean cost band **2.016× → 1.811×**: Sonnet 4.6 `low` 3.36× → 1.19×, `medium` 1.83× → 1.08×, Opus 4.7 `xhigh` 1.53× → 1.16× — 1149 measured rows, 93 sources, 174 comparison groups |
 
 ### Fable 5.1, in one line
 
-Fable 5.1 is the first release that moves the frontier **down and to the right at once**: it holds four of the
-nine Pareto-frontier couples, and it owns the whole top of the curve — every couple above quality 1.07× is a
-Fable 5.1 rung. Its `medium` (quality 1.18×, cost 0.89×) beats Fable 5 at `max` (1.20× for 4.81×) on
-quality-per-dollar by a wide margin, and costs less than the Opus 4.8 anchor it is measured against. Its price
-per token is unchanged from Fable 5 — the whole gain is fewer tokens for the same work, plus a 75 % cut on
-cache reads.
+Fable 5.1 is the first release that moves the frontier **down and to the right at once**: it holds five of the
+eight Pareto-frontier couples — **all five of its rungs are on the frontier** — and it owns everything above
+quality 0.73×. Its `low` (quality 1.11×, cost 0.66×) beats Fable 5 at `max` (1.19× for 4.81×) on
+quality-per-dollar by a wide margin, and costs a third of the Opus 4.8 anchor it is measured against. Its
+price per token is unchanged from Fable 5 — the whole gain is fewer tokens for the same work, plus a 75 % cut
+on cache reads.
 
-The rung to skip is `low`. At 0.91× for 1.12× it is **dominated by its own `medium`**, which is both cheaper
-(0.89×) and better (1.18×) — an inversion that only became visible once Fable 5.1 had enough third-party
-coverage to move `low` off the vendor-heavy figure it used to rest on. Above `medium` the ladder still buys
-real quality, but slowly: `xhigh` and `max` cost 2.52× and 3.70× for 1.25× and 1.26×.
+Where it does *not* win is the top of its own ladder: `xhigh` and `max` cost 2.52× and 3.70× for 1.24× and
+1.26× quality, so the usual advice inverts — on Fable 5.1 the cheap rungs are the interesting ones.
 
 ### A pricing fact that affects rows across the repo
 
@@ -158,12 +156,26 @@ Three candidate blocks were dropped after checking them against their sources, a
 - **PinchBench** — neither the board nor its repo states whether its cost is metered spend or list price ×
   tokens. That is the same gap that keeps BenchLM and llm-stats out.
 
-Three genuinely new sources were admitted, all small: an AIME effort contrast (arXiv 2608.16956, whose
-`sonnet-5` high-vs-omitted pair is the first measurement here of what *omitting* the effort parameter costs),
-five per-task Claude Code sweeps from fyve.co.jp, and `vercel/eve`'s committed benchmark results. All three
-have saturated quality scores, so they enter as cost-only rows — the precedent set when a Zenn sweep was
-refused for scoring 3/3 on a toy task. The thin-third-party-field problem is unchanged: three weeks after
-Fable 5.1 shipped, the field is still mostly vendors and leaderboards.
+- **fyve.co.jp — admitted, then withdrawn.** Five per-task Claude Code sweeps, cost read from the tool's own
+  `modelUsage.costUSD`. Its checklist scores were saturated (7/7, 8/8, 3/3), so only the costs were taken.
+  That was not careful enough. The rows moved Fable 5.1 `low` from 0.66× to 0.91× and **inverted the effort
+  ladder**: `low` came out dearer than `medium`. The underlying data was never the problem — in all seventeen
+  benchmarks that measure both rungs, `medium` costs 1.20–1.54× what `low` costs, without exception. The
+  artifact is structural: fyve ran `low` and `high` but never `medium`, on three single-run toy tasks with no
+  anchor, so `low` and `medium` ended up consolidated over different benchmark sets and their medians stopped
+  being comparable. A saturated score and a task too small to segment effort are the same defect on both axes;
+  the cost side is no safer than the quality side. Withdrawn.
+
+Two genuinely new sources survive, both small: an AIME effort contrast (arXiv 2608.16956, whose `sonnet-5`
+high-vs-omitted pair is the first measurement here of what *omitting* the effort parameter costs), and
+`vercel/eve`'s committed benchmark results — plus frontierswe.com, below. The thin-third-party-field problem
+is unchanged: three weeks after Fable 5.1 shipped, the field is still mostly vendors and leaderboards.
+
+**`gen/build.py` now prints an effort-ladder check on every build.** Within a model, a higher rung costing
+less than a lower one is almost never a measurement — it means the two couples were consolidated over
+different benchmark sets. One documented exception is whitelisted: Sonnet 4.6's quality falls after `high`,
+which the Sonnet 5 card prints itself. Anything else is flagged loudly. This inversion reached a published
+commit and a pushed tag before a reader caught it by eye; the check is so that the next one cannot.
 
 ### Third scan: the blocked sources, opened
 

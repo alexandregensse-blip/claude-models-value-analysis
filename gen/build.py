@@ -374,6 +374,21 @@ def regime_rows_html(nt, df):
             block("Default harness — thinking unstated", df, "df-head",
                   "no cross-model matched-config pair among the current models (these sources mix efforts) → no couple-atomic ratio computable; the \u2018default\u2019 points stay out of regime."))
 
+def monotonicity_report(cg, qg):
+    """Effort is a ladder: within a model, a higher rung should not cost less than a lower one.
+    A violation is almost never a real measurement — it means the couples above and below are
+    consolidated over DIFFERENT benchmark sets, so their medians are not comparable. Printed at
+    build time so it cannot pass unnoticed (a real, documented exception exists on the quality
+    side: Sonnet 4.6 falls after `high`, which the Sonnet 5 card itself prints)."""
+    ORD = ["low", "medium", "high", "xhigh", "max"]
+    out = []
+    for grid, name in ((cg, "cost"), (qg, "quality")):
+        for m, es in grid.items():
+            seq = [(e, es[e][0]) for e in ORD if e in es]
+            for (a, va), (b, vb) in zip(seq, seq[1:]):
+                if vb < va: out.append(f"{name}: {m} {a}({va}) > {b}({vb})")
+    return out
+
 def main():
     comps = comparisons()
     RD = build_RD(comps)
@@ -418,6 +433,10 @@ def main():
     )
     open(OUT,"w",encoding="utf-8").write(html)
     print(f"built {OUT}  ({len(html)} bytes)  cost-pts={len(RD['cost'])} tok-pts={len(RD['tok'])}")
+    viol = monotonicity_report(CG, QG)
+    known = {"quality: sonnet-4.6 high(0.84) > max(0.82)"}      # printed by the Sonnet 5 card itself
+    for v in viol:
+        print(("  effort-ladder OK (documented): " if v in known else "  !! EFFORT LADDER INVERTED: ") + v)
     print(f"  no-think pairs={list(NT['pairs'])}  index={NT['index']}")
     print(f"  default  pairs={list(DF['pairs'])}  index={DF['index']}")
 
