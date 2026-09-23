@@ -56,6 +56,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.09.23` | 23 Sep 2026 | adds **Opus 5.5** (released 22 Sep 2026): six primaries (Cognition FrontierCode JSON, CursorBench 4.0, Zapier AutomationBench, Artificial Analysis v4.3 plus its GDPval-AA / AutomationBench-AA ladders, Vals Index and Terminal-Bench 2.1, FrontierSWE), **Sonar**'s Java leaderboard (measured tokens, new source) and ten system-card sweeps (HLE ± tools, ArXivMath ± tools, DRACO, WANDR, OSWorld 2.0, BenchCAD, Chartography). Zapier and AA were under-read: Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6 and Haiku 4.5 ladders added. **Method change**: each benchmark's weight for a model scales with the share of that model's effort ladder it sweeps (×0.5 one rung → ×1 full ladder). Opus 5.5 holds the whole Pareto frontier — 1390 measured rows, 94 sources, 183 comparison groups |
 | `v2026.09.23b` | 23 Sep 2026 | **re-anchored on Opus 5 @high** (measured directly by 60 of 114 benchmarks against 28 for Opus 4.8 @medium; the frontier now reads 0.87–1.13× in quality — not a pure rescale, see *Re-anchoring on Opus 5 @high*). Page: *Older models* (Opus 4.7, Sonnet 4.6) and *Tier bands* display switches, both off by default. Second Opus 5.5 source pass (four agents, every candidate re-checked at its primary): bug-hunt-bench, vlm-exam, ObviousBench, LiveBench, seven Vals AI benchmarks, a Qiita reasoning run — Opus 5.5 on 117 rows, 34 groups, 13 sources, still the whole frontier — 1444 measured rows, 95 sources, 190 comparison groups |
 | `v2026.09.23c` | 23 Sep 2026 | *Uncertainty ovals* become a display switch, off by default, on both charts (the axes still span the oval extents, so toggling does not rescale). Third Opus 5.5 source pass: eight more Vals AI benchmarks (Finance Agent v2, Legal Research, MedScribe, Tax Agent, Public Benefits, Vibe Code Bench 1-100, IOI, MysteryMechanism) — Opus 5.5 on 125 rows, 42 groups; its `max` rung is now dominated by its own `xhigh`. Early-access runs flagged, not removed, pending a rule — 1490 measured rows, 95 sources, 198 comparison groups |
+| `v2026.09.23d` | 23 Sep 2026 | **Method**: a source's n measurements of a couple weigh √n together (one publisher = one source: Anthropic's blog chart and system cards merged); early-access runs count for a third, and runebench's Opus 5.5 runs return. **Tiers**: half-bell windows (only a shortfall below the target is penalised; a small saturating bonus above), tier bands follow and are also on the Pareto chart. Header counts sources, benchmarks and measurements; `xHigh` capitalisation. Fourth pass (ten agents, post-release publications only): nothing admitted. Fifth pass: Playcode MacBook SVG, Senko Rašić's vibecode games, Vals RSI Index, bug-hunt-bench Opus 5.5 `low`. Opus 5.5 holds the frontier at every rung, with Haiku 4.5 — 93 sources, 196 benchmarks, 1479 measurements |
 
 ### Re-anchoring on Opus 5 @high
 
@@ -81,19 +82,19 @@ edges sit midway, in the chart's dilated metric, between adjacent tier centres, 
 
 ### Opus 5.5, in one line
 
-Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **is the whole Pareto frontier**: all five
-rungs are on it and nothing else is — Haiku 4.5 (0.11× for 0.64×) costs as much as Opus 5.5 `low` for far less
-quality. On the current scale (Opus 5 @high = 1.00) its `high` (quality 1.12×, cost 0.50×) beats Fable 5.1 at `max`
-(1.09× for 2.47×) for a fifth of the cost, its default `medium` (1.06× for 0.32×) beats Opus 5's default `high` for a
-third of its cost, and `max` is its best rung (1.17×) at 1.34×.
+Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **holds the Pareto frontier** with all five
+rungs; the only other point on it is Haiku 4.5 (0.12× for 0.64×), cheaper than Opus 5.5 `low` by a tenth but far below
+it in quality. On the current scale (Opus 5 @high = 1.00) its `high` (quality 1.12×, cost 0.51×) beats Fable 5.1 at
+`max` (1.09× for 2.58×) for a fifth of the cost, its default `medium` (1.06× for 0.32×) beats Opus 5's default `high`
+for a third of its cost, and `max` is its best rung (1.17×) at 1.34×.
 
 | Opus 5.5 (Opus 5 @high = 1.00) | low | medium | high | xhigh | max |
 |---|---|---|---|---|---|
-| relative cost | 0.11 | 0.32 | 0.50 | 0.78 | 1.34 |
-| relative quality | 0.95 | 1.06 | 1.12 | 1.15 | 1.17 |
+| relative cost | 0.13 | 0.32 | 0.51 | 0.78 | 1.34 |
+| relative quality | 0.98 | 1.06 | 1.12 | 1.15 | 1.17 |
 
 These values follow the √n per-source weighting (see *Diminishing returns per source*, below). Opus 5.5 now rests
-on **127 measurements in 43 benchmarks from 14 sources**.
+on **134 measurements in 48 benchmarks from 16 sources**.
 
 **Where the numbers come from.** 95 rows across 22 groups, one day after launch. Independent primaries
 already carry it: **Cognition's FrontierCode** JSON (both v1.1 subsets — the card's figures 8.4.A/B are read
@@ -207,7 +208,7 @@ is penalised as before, while one at or above it clears the bar and earns a smal
 tier's q\* to the next one's. Tier bands are now also available on the Pareto chart.
 
 **Page header.** It said "95 independent measurement sources" while counting benchmarks; it now reads
-**91 sources · 191 benchmarks · 1447 measurements** (current models). The `xhigh` rung is capitalised `xHigh`.
+**93 sources · 196 benchmarks · 1479 measurements** (current models, after the fifth pass). The `xhigh` rung is capitalised `xHigh`.
 
 **Fourth pass (ten Haiku agents), restricted to publications at least 30 minutes after the announcement
 (22 Sep 2026, 16:31 UTC): nothing admitted.** Leaderboards, code and agentic boards, GitHub, Hugging Face, arXiv,
@@ -215,6 +216,21 @@ and Chinese, Japanese/Korean, European and English-language sites were searched.
 (Sonar, VLM Exam, ObviousBench, BugHuntBench, Qiita Takuya, Vals), re-cited Anthropic or Artificial Analysis figures
 (Vellum, Kingy AI, Habr, pragma-code, GeekNews, note.com posts), had saturated scores (llm-challenges 100/100,
 FeatherBench 28/28), or measured cost without a per-effort split (CodeRabbit, explainx, dev.to).
+
+**Fifth pass (four Sonnet agents, then a wider second round on lesser-known sites): two new sources, one new
+benchmark, one new rung — 32 measurements.** Admitted after reading each raw page or file: **Playcode**'s one-shot
+MacBook SVG benchmark (19 measurements: high/xhigh/max for seven grid models, provider-billed cost, quality ordinal so
+cost only; Opus 5.5 `max` left out — it spent its whole 128K output ceiling and returned nothing, a censored cost —
+and Sonnet 4.6 `xhigh`, which the API rejected); **Senko Rašić**'s vibecode games (6 measurements: flight sim, voxel
+and RTS, Opus 5.5 vs Opus 5 at `xhigh`, Claude-Code-reported cost, cost only); **Vals AI's RSI Index** (6
+measurements, six Claude models at `max`, cost = sum of the five campaign costs, which reproduces the board's own
+profile totals; the board is dated 21 Sep, so the Opus 5.5 row counts as early access); and **bug-hunt-bench**'s new
+Opus 5.5 `low` rung (mean of 3, same method as its four other rungs). Rejected: Vercel's next-evals-oss (four models
+at 30/31, and older models measured on 23 of the 31 tasks), nuxt-evals (no effort), retort exp-74 (saturated, as
+before), Qiita Takuya's coding set (100 %), aipricing.guru (49/49), llm-stats and OpenRouter (no per-effort split), an
+HN review comparison with no effort stated, and a round of re-cited launch figures across Japanese, Chinese, Korean
+and European sites. Effect on Opus 5.5: `low` 0.11 → 0.13 in cost and 0.95 → 0.98 in quality (bug-hunt's new rung),
+which brings Haiku 4.5 back onto the frontier.
 
 **Rejected, one day in:** CodeRabbit (a token delta against a baseline, no cost, no per-rung tokens), Kingy AI and
 most launch write-ups (they re-cite Anthropic, AA or Cursor), Simon Willison's pelican (only the failed `max` run —
