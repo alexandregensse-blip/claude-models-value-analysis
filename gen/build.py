@@ -198,6 +198,13 @@ def groups_data():
       "tb40":("Terminal-Bench 4.0","xmodel","tbench.ai primary payload · 66 tasks × 330 trials, Claude Code, all at max; cost basis undocumented ✓"),
       "chartogt":("Chartography +tools","sweep","Fable 5.1 card p186 · 5 models × sweep low→max, $ cost; Opus 4.8 series joined from Opus 5 card p171 ✓"),
       "chartogn":("Chartography −tools","sweep","Fable 5.1 card p186 · tools disabled — separate regime, kept out of the effort grid ✓"),
+      "valstb4":("Vals TB 4.0","xmodel","Vals AI · Terminal-Bench 4.0, all Claude at max, measured cost/test ✓"),
+      "valsmedcode":("Vals MedCode","xmodel","Vals AI · ICD-10-CM coding, 2,755 records, all at max ✓"),
+      "valssage":("Vals SAGE","xmodel","Vals AI · grading student math work against a rubric, all at max ✓"),
+      "valsbiomyst":("Vals BioMystery","xmodel","Vals AI · BioMysteryBench (Terminus), Opus 5.5 vs Opus 5 at max ✓"),
+      "valstbsci":("Vals TB-Science","xmodel","Vals AI · Terminal-Bench-Science, all at max ✓"),
+      "valssre":("Vals SRE-Bench","xmodel","Vals AI · binary reverse engineering (despite the name), all at max ✓"),
+      "qiita-takuya-reason":("Qiita reasoning","sweep","Qiita (Takuya) · 19 reasoning questions × 3 runs, Claude Code without tools, measured tokens × list price ✓"),
       "sonarjava":("Sonar Java","sweep","Sonar leaderboard JSON · 4,444 Java tasks, single-shot, measured tokens × list price; Opus 5.5 medium/high ✓"),
       "sc55hlet":("HLE tools (O5.5)","sweep","Opus 5.5 card p185 · HLE with tools, 3 models × sweep low→max, $ cost, scores printed ✓"),
       "sc55amnt":("ArXivMath no-tools","sweep","Opus 5.5 card p182 · ArXivMath Aug 2026, 57 problems, 3 models × low→max, $ cost, scores printed ✓"),
@@ -455,9 +462,12 @@ def main():
     open(OUT,"w",encoding="utf-8").write(html)
     print(f"built {OUT}  ({len(html)} bytes)  cost-pts={len(RD['cost'])} tok-pts={len(RD['tok'])}")
     viol = monotonicity_report(CG, QG)
-    known = {"quality: sonnet-4.6 high(0.84) > max(0.82)"}      # printed by the Sonnet 5 card itself
+    known = {("quality", "sonnet-4.6", "high", "max")}         # printed by the Sonnet 5 card itself — keyed on the rungs, not
+    import re                                                   # the values, which move with the anchor and the data
+    def key(v):
+        m = re.match(r"(\w+): (\S+) (\w+)\([\d.]+\) > (\w+)\(", v); return m.groups() if m else None
     for v in viol:
-        print(("  effort-ladder OK (documented): " if v in known else "  !! EFFORT LADDER INVERTED: ") + v)
+        print(("  effort-ladder OK (documented): " if key(v) in known else "  !! EFFORT LADDER INVERTED: ") + v)
     print(f"  no-think pairs={list(NT['pairs'])}  index={NT['index']}")
     print(f"  default  pairs={list(DF['pairs'])}  index={DF['index']}")
 

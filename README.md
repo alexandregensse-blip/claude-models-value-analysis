@@ -81,15 +81,15 @@ edges sit midway, in the chart's dilated metric, between adjacent tier centres, 
 
 Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **is the whole Pareto frontier**: all five
 of its rungs are on it, and nothing else is. On the current scale (Opus 5 @high = 1.00) its `xhigh` rung (quality
-1.10×, cost 0.64×) beats Fable 5.1 at `max` (1.08× for 2.58×) for a quarter of the cost, its `high` comes within 1 %
-of it for a ninth, and its `low` (0.87× for 0.07×) undercuts Haiku 4.5 (0.10×) on cost while scoring far above it
-(0.44×). Its default `medium` sits at Opus 5's own default quality (1.01×) for 22 % of the cost. The price cut is
-20 %; the rest of the gain is fewer tokens for the same work.
+1.10×, cost 0.64×) beats Fable 5.1 at `max` (1.08× for 2.47×) for a quarter of the cost, its `high` comes within 1 %
+of it for a sixth, and its `low` (0.91× for 0.07×) undercuts Haiku 4.5 (0.10×) on cost while scoring far above it
+(0.44×). Its default `medium` sits at Opus 5's own default quality (1.01×) for a quarter of the cost. The price cut
+is 20 %; the rest of the gain is fewer tokens for the same work.
 
 | Opus 5.5 (Opus 5 @high = 1.00) | low | medium | high | xhigh | max |
 |---|---|---|---|---|---|
-| relative cost | 0.07 | 0.22 | 0.29 | 0.64 | 1.33 |
-| relative quality | 0.87 | 1.01 | 1.07 | 1.10 | 1.13 |
+| relative cost | 0.07 | 0.24 | 0.41 | 0.64 | 1.49 |
+| relative quality | 0.91 | 1.01 | 1.07 | 1.10 | 1.13 |
 
 **Where the numbers come from.** 95 rows across 22 groups, one day after launch. Independent primaries
 already carry it: **Cognition's FrontierCode** JSON (both v1.1 subsets — the card's figures 8.4.A/B are read
@@ -124,6 +124,32 @@ is re-anchored whenever a model joins (Opus 5 `max` 1735 → 1708), so that grou
 snapshot — which matches the Opus 5.5 card's table (1846 / 1735 / 1708) — rather than mixed. One conflict is recorded, not resolved: Zapier's board now shows Opus 5 `max` at
 **\$3.05**, while the Opus 5.5 card plots the same release at \$1.27 — a jump no neighbouring rung supports.
 The \$1.27 row is kept and annotated.
+
+**Second pass, same day (four Sonnet agents: leaderboards, preprints, public code, forums — foreign-language sites
+included, since they had more hours since launch).** Opus 5.5 now rests on **117 rows in 34 groups from 13 sources**.
+Admitted after re-checking each primary: four public benchmark repos that added Opus 5.5 within hours —
+**bug-hunt-bench** (four rungs, three replicates each; tokens and cost re-derived from the per-arm metrics to the
+cent), **vlm-exam** (low/high), **ObviousBench** (full ladder; the agent had shifted the scores one rung, caught
+against the `strict_pass3_accuracy` column the existing rows use) and **LiveBench** (max/xhigh, cost only as
+before); six **Vals AI** benchmarks read from their payloads with `compute_effort: max` on every Claude entry —
+Terminal-Bench 4.0 (Opus 5.5 had 30 of 198 attempts served by the fallback model, flagged), Vibe Code Bench
+(now eight models), MedCode, SAGE, BioMysteryBench, Terminal-Bench-Science and SRE-Bench (which is binary reverse
+engineering, not site reliability); and a **Qiita** write-up by Takuya that ran Opus 5.5 at medium and high beside
+Opus 5 and Fable 5.1 on 19 reasoning questions × 3 runs in Claude Code, costs re-derived from recorded tokens. Its
+per-question cost covers all 19 questions while the article's headline accuracy covers only the 9 hard ones, so
+the combined accuracy (57 runs) is used to keep cost and score on the same task.
+
+Rejected in that pass, beyond the general run of launch re-writes: **runebench** (its "opus55" runs are dated
+18 Sep, four days before release — an early-access checkpoint, not verifiably the shipped model), **retort** exp-74
+and Qiita's coding set (quality saturated at 100 %: a task that cannot separate the rungs is dropped on both axes,
+the rule the fyve withdrawal set), **Classmethod** (one run per rung, no score, a non-monotone cost ladder),
+**CodeRabbit** and an HN comment (no cost, or no quality), **Zenn** "ultracode" (a 16-agent swarm against a solo
+agent), Vals **programbench** (every model at the floor) and **Code-Migration** (two inconsistent data blocks in
+one payload). No preprint yet measures more than one effort rung of any recent Claude model, and the Chinese,
+Japanese, Korean and European leaderboards publish no per-effort cost. Mean cost band now 2.155×.
+
+The effort-ladder check's whitelist matched the documented Sonnet 4.6 `high` > `max` dip by its printed *values*,
+so the re-anchoring silently un-whitelisted it; it now matches on model and rungs.
 
 **Rejected, one day in:** CodeRabbit (a token delta against a baseline, no cost, no per-rung tokens), Kingy AI and
 most launch write-ups (they re-cite Anthropic, AA or Cursor), Simon Willison's pelican (only the failed `max` run —
