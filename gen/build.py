@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 """Artifact generator. Reads data + modular css/body/js, computes derived ratio data,
 assembles index.html. Run: python3 gen/build.py  (from the scratchpad dir)."""
-import csv, json, os, re, subprocess, sys, datetime
+import csv, html as htmlmod, json, os, re, subprocess, sys, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
 OUT  = os.path.join(ROOT, "index.html")
+
+# Publication: every absolute URL derives from SITE_URL (canonical root, trailing slash).
+SITE_URL    = "https://claude-models.agensse.com/"
+REPO_URL    = "https://github.com/alexandregensse-blip/claude-models-value-analysis"
+TITLE       = "Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared"
+DESCRIPTION = ("What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives "
+               "the best quality for the price. Open data, CC BY 4.0.")
 
 MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5":6,"sonnet-4.6":7,"haiku-4.5":8}
 EXP = {"low","medium","high","xhigh","max"}
@@ -440,6 +447,54 @@ def monotonicity_report(cg, qg):
                 if vb < va: out.append(f"{name}: {m} {a}({va}) > {b}({vb})")
     return out
 
+def content_date():
+    """Date of the last committed change to the data or the generator; today while they have uncommitted changes.
+    Feeds the visible "Updated" date, JSON-LD dateModified and the sitemap lastmod, so none moves on a no-op rebuild."""
+    paths = ["raw-data.csv", "gen"]
+    git = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True, check=True).stdout.strip()
+    try:
+        if not git("status", "--porcelain", "--", *paths):
+            return datetime.date.fromisoformat(git("log", "-1", "--format=%cs", "--", *paths))
+    except (OSError, subprocess.CalledProcessError, ValueError):
+        pass
+    return datetime.date.today()
+
+def head_tags(date, anchor_label, counts):
+    """Title, description, canonical, icon, Open Graph, Twitter card and the JSON-LD Dataset. Every value is on the page."""
+    a = lambda v: htmlmod.escape(v, quote=True)
+    dataset = {
+        "@context": "https://schema.org", "@type": "Dataset",
+        "name": TITLE,
+        "description": ("What each recent Claude model actually costs, at every effort level — reconstructed from public "
+                        "measurements and reduced to a relative cost by chaining same-task comparisons. Aggregated from "
+                        f"{counts}; costs and qualities are relative to {anchor_label} = 1.00."),
+        "url": SITE_URL, "sameAs": REPO_URL,
+        "creator": {"@type": "Person", "name": "Alexandre Gensse", "url": "https://github.com/alexandregensse-blip"},
+        "dateModified": date.isoformat(),
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "isAccessibleForFree": True,
+        "keywords": ["Claude", "Claude models", "LLM cost", "effort level", "Fable", "Opus", "Sonnet", "Haiku",
+                     "benchmark", "Pareto frontier"],
+        "variableMeasured": [f"Relative cost per task ({anchor_label} = 1.00)", f"Relative quality ({anchor_label} = 1.00)"],
+        "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": SITE_URL + "raw-data.csv"}],
+    }
+    ld = json.dumps(dataset, ensure_ascii=False, indent=1).replace("</", "<\\/")
+    return (
+        f"<title>{a(TITLE)}</title>\n"
+        f'<meta name="description" content="{a(DESCRIPTION)}">\n'
+        f'<link rel="canonical" href="{SITE_URL}">\n'
+        '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
+        '<meta property="og:type" content="website">\n'
+        f'<meta property="og:url" content="{SITE_URL}">\n'
+        f'<meta property="og:title" content="{a(TITLE)}">\n'
+        f'<meta property="og:description" content="{a(DESCRIPTION)}">\n'
+        f'<meta property="og:image" content="{SITE_URL}og-image.png">\n'
+        '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
+        '<meta property="og:image:alt" content="Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared — claude-models.agensse.com">\n'
+        '<meta name="twitter:card" content="summary_large_image">\n'
+        f'<script type="application/ld+json">\n{ld}\n</script>\n'
+    )
+
 def prerender(app, css):
     """Runs app.js at build time (gen/prerender.js, Node, fake DOM) and returns the HTML it writes into the text
     blocks, so crawlers that do not run JavaScript read the conclusions. The browser redraws them on load."""
@@ -501,15 +556,16 @@ def main():
     span = max(c[0] for v in CG.values() for c in v.values()) / min(c[0] for v in CG.values() for c in v.values())
     body = body.replace("__NCOUPLES__", str(ncpl))
     body = body.replace("__COSTSPAN__", str(round(span)))
-    body = body.replace("__GENDATE__", datetime.date.today().strftime("%d %b %Y"))   # report generation date
-    body = inject(body, prerender(app, css))
+    date = content_date()
+    body = body.replace("__GENDATE__", date.strftime("%d %b %Y"))   # last change to the data or the generator
+    pre  = prerender(app, css)
+    body = inject(body, pre)
     html = (
         "<!doctype html>\n"
         '<html lang="en">\n<head>\n'
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-        "<title>Cost, effort and model — the Claude matrix</title>\n"
-        '<meta name="description" content="What each recent Claude model actually costs, at every effort level, and whether paying for more effort is worth it — a normalized cost x model x effort matrix fused from independent public measurements.">\n'
+        + head_tags(date, f"{alabel} @{ae}", pre.get(".nsrc", "")) +
         f"<style>\n{css}\n</style>\n"
         f"</head>\n<body>\n{body}\n<script>\n{app}\n</script>\n</body>\n</html>\n"
     )
