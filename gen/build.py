@@ -10,6 +10,7 @@ OUT  = os.path.join(ROOT, "index.html")
 MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5":6,"sonnet-4.6":7,"haiku-4.5":8}
 EXP = {"low","medium","high","xhigh","max"}
 EMAP = {"T25":"medium","T50":"high"}    # braintrust thinking-budget tiers → nearest effort
+GRID_ANCHOR = "opus-5@high"                 # (model@effort) pinned to 1.0 on both grids
 PRICE_OUT = {"fable-5.1":50,"fable-5":50,"opus-5.5":20,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5":15,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
 
 def eff(e): return EMAP.get(e, e)
@@ -240,14 +241,14 @@ def groups_data():
 
 def ratio_grid(field):
     """Couple-atomic ROBUST grid for a measured field (cost_usd or score). Each (model,effort) node gets a value
-    RELATIVE to opus-4.8@medium=1.0, built ONLY from within-benchmark ratios (never a cross-benchmark value
+    RELATIVE to GRID_ANCHOR (opus-5@high)=1.0, built ONLY from within-benchmark ratios (never a cross-benchmark value
     comparison). Central value AND uncertainty band come from the SAME per-benchmark estimates:
 
       1. Per benchmark, take log(value) of every current (model,effort) couple — explicit efforts + haiku@solo
          (haiku has no effort dial); nothink/priceblend/default excluded. Benchmarks with <2 couples are dropped
          (a lone couple is circular — it can only echo the anchor).
       2. Normalise each benchmark to the anchor via a per-benchmark offset:
-           - anchor present  → offset = log(opus-4.8@medium)               (divide by the anchor directly)
+           - anchor present  → offset = log(anchor)               (divide by the anchor directly)
            - anchor absent   → BRIDGE offset = MEAN residual (log value − global g) over its shared couples;
                                such bridged benchmarks are down-weighted ×0.5 (indirect anchoring).
          The offset is a nuisance alignment term → MEAN (non-degenerate), not median.
@@ -264,7 +265,7 @@ def ratio_grid(field):
     import math, collections
     CUR = set(MX)                                            # 9 current models
     EFFOK = {"low","medium","high","xhigh","max","solo"}     # 'solo' = haiku 4.5 (no discrete effort)
-    ANCHOR = "opus-4.8@medium"
+    ANCHOR = GRID_ANCHOR
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
             if r["group"] and not r["group"].startswith("#")]
     bench = collections.defaultdict(dict)                    # benchmark → couple → log(value)

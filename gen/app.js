@@ -9,6 +9,8 @@ const MODELS = {
   "sonnet-4.6":{label:"Sonnet 4.6",c:"--sonnet46"},
   "haiku-4.5": {label:"Haiku 4.5", c:"--haiku45"},
 };
+const ANCHOR={m:"opus-5",e:"high",label:"Opus 5 @high"};      // the couple pinned to 1.0 (and to 100 on the value index)
+const LEGACY=["opus-4.7","sonnet-4.6"];                         // older models: hidden unless the reader turns them on
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -24,10 +26,21 @@ function solveN(A,b){ const n=b.length, M=A.map((r,i)=>[...r,b[i]]);
     for(let r=0;r<n;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<=n;k++) M[r][k]-=f*M[c][k]; } }
   return M.map((r,i)=>r[n]/M[i][i]); }
 
-// COST & QUALITY grids: relative [central, ci_lo, ci_hi] per (model, effort), anchored Opus 4.8 @medium = 1.0,
+// COST & QUALITY grids: relative [central, ci_lo, ci_hi] per (model, effort), anchored ANCHOR = 1.0,
 // computed in build.py (cost_grid / ratio_grid) from measured same-task ratios.
 const COSTGRID=__COSTGRID__;
 const QUALGRID=__QUALGRID__;   // {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
+
+// Older-model toggle: the grids keep a full copy; hiding a model removes it from every view and every fit
+// (frontier, price curve, tiers, matrix), exactly as if it had not been measured.
+const GRID_ALL={cost:{...COSTGRID},qual:{...QUALGRID}};
+let showLegacy=false; try{ showLegacy=localStorage.getItem("showLegacy")==="1"; }catch(e){}
+function applyLegacy(){ LEGACY.forEach(m=>{ if(showLegacy){ if(GRID_ALL.cost[m]) COSTGRID[m]=GRID_ALL.cost[m]; if(GRID_ALL.qual[m]) QUALGRID[m]=GRID_ALL.qual[m]; }
+  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }
+const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));
+const legacyChip=()=>`<button type="button" class="lg-toggle" aria-pressed="${showLegacy}" onclick="toggleLegacy()">${showLegacy?"Hide":"Show"} older models <span class="lg-sub">Opus 4.7 · Sonnet 4.6</span></button>`;
+function toggleLegacy(){ showLegacy=!showLegacy; try{ localStorage.setItem("showLegacy",showLegacy?"1":"0"); }catch(e){} applyLegacy(); renderAll(); }
+applyLegacy();
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
 // Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
@@ -48,8 +61,8 @@ function axisTitle(s,x,y,main,sub,rot){
   s.appendChild(t);
 }
 // Quality gridlines at round quality values (non-uniform spacing under symlog); the 1.0 anchor is dashed.
-function qGrid(s,Y,mL,iw,mT,ih){ [0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
-  s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?'--opus48':'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
+function qGrid(s,Y,mL,iw,mT,ih){ [0.4,0.5,0.6,0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
+  s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?MODELS[ANCHOR.m].c:'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
   const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2);s.appendChild(t); }); }
 // Asymmetric Huber uncertainty ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the median dot, clipped
 // to the plot, faint by default. Returns the array used by hoverTip() to reveal them.
@@ -178,14 +191,14 @@ function valueParts(gevT,p){
   return { G: 0.75*gevT(symT(p.q)) + 0.125*(gevT(symT(p.qlo))+gevT(symT(p.qhi))),
            C: 0.75*Math.log10(p.c) + 0.125*(Math.log10(p.clo)+Math.log10(p.chi)) }; }
 function valueResidual(gevT,p){ const {G,C}=valueParts(gevT,p); return G-C; }
-// VALUE INDEX, anchored so Opus 4.8 @medium = 100. Being an exponentiated difference of log-distances it is a genuine
+// VALUE INDEX, anchored so ANCHOR = 100. Being an exponentiated difference of log-distances it is a genuine
 // RATIO: 384 reads "3.8× the value-for-money of the anchor", 45 reads "0.45×" — every value above 100 means something,
 // which a linear stretch of a bounded score could not offer. Unbounded above by construction: that is the cost of an
 // interpretable multiple, and it is why the anchor can sit anywhere in the ranking without breaking the scale.
 // The previous tanh squash is deliberately gone — a ratio cannot be squashed without destroying the reading. A wide
 // interval therefore now SHIFTS the index (through the weighting above) rather than damping it toward neutral.
 const valueIndex=(r,rAnc)=>100*Math.pow(10,r-rAnc);
-const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m==="opus-4.8"&&p.e==="medium"); return a?valueResidual(gevT,a):0; };
+const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANCHOR.e); return a?valueResidual(gevT,a):0; };
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
@@ -203,8 +216,8 @@ function drawB(){
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  axisTitle(s,mL+iw/2,H-30,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
-  axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
+  axisTitle(s,mL+iw/2,H-30,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
+  axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB");                     // faint asymmetric uncertainty ovals, behind
@@ -220,8 +233,8 @@ function drawB(){
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
-    Object.keys(MODELS).filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`;
+    visibleModels().filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`+legacyChip();
 }
 
 // ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
@@ -244,8 +257,8 @@ function drawPareto(){
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
-  axisTitle(s,mL+iw/2,H-28,"Relative cost","Opus 4.8 @medium = 1.0 · log scale");
-  axisTitle(s,13,mT+ih/2,"Relative quality","Opus 4.8 @medium = 1.0 · dilated near parity",`rotate(-90 13 ${mT+ih/2})`);
+  axisTitle(s,mL+iw/2,H-28,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
+  axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
   const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
   const pset=new Set(par.map(p=>p.m+"@"+p.e));
@@ -261,7 +274,7 @@ function drawPareto(){
     for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
       if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
-  const rAnc=anchorResidual(gevT,pts);                                                            // 100 = Opus 4.8 @medium
+  const rAnc=anchorResidual(gevT,pts);                                                            // 100 = ANCHOR
   const scored=pts.map(p=>({...p,score:valueIndex(valueResidual(gevT,p),rAnc),front:pset.has(p.m+"@"+p.e)}));
   fillScoreTable(scored);
   const ells=drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP");   // ovals only on the frontier points
@@ -277,8 +290,8 @@ function drawPareto(){
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendP");
-  if(lg) lg.innerHTML=Object.keys(MODELS).map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
+  if(lg) lg.innerHTML=visibleModels().map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
+    +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`+legacyChip()
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
     +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price curve — what a quality typically costs, graded by Pareto distance · R² = ${R2.toFixed(2)}</span>`;
   const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
@@ -350,7 +363,7 @@ function tierPicks(){
   // Prominence stays a 2nd difference of r, i.e. computed in LOG space where these distances are additive, so it keeps
   // meaning "this couple stands out from its two frontier neighbours". Crown SELECTION only.
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
-  // DISPLAYED SCORE = the value index, anchored so Opus 4.8 @medium = 100 (see valueIndex). The anchor is read from
+  // DISPLAYED SCORE = the value index, anchored so ANCHOR = 100 (see valueIndex). The anchor is read from
   // the FULL set of couples, not the frontier: a new model can push it OFF the Pareto frontier — Opus 5 does — but
   // never out of the full set, so the reference always exists. And because the index is a ratio rather than a stretch
   // between two extremes, the anchor sitting low in the ranking no longer distorts anything above it.
@@ -452,7 +465,7 @@ function drawTierTuner(){
 }
 // ---------- MATRIX (sorted by relative quality desc) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
 const fr=x=>x.toFixed(2);
-const ciStr=(m,e,v)=> (m==="opus-4.8"&&e==="medium") ? "anchor" : (v[1]===v[2] ? "single source" : `${fr(v[1])}–${fr(v[2])}`);
+const ciStr=(m,e,v)=> (m===ANCHOR.m&&e===ANCHOR.e) ? "anchor" : (v[1]===v[2] ? "single source" : `${fr(v[1])}–${fr(v[2])}`);
 const relQ=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?qg[e][0]:0; };   // quality at the model's top effort
 const M={};
 for(const m in COSTGRID){ const cg=COSTGRID[m]||{}; M[m]={q:relQ(m), tag:MODELS[m].tag};
