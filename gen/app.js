@@ -609,12 +609,9 @@ function zoomable(svg){
 function fillMeta(){   // all source counts + the footer source list derive from the (generated) GROUPS — nothing hand-typed
   const curNode=x=>{const m=x.split("@")[0];return GMODEL[m]&&GMODEL[m].cur;};
   const curGroups=GROUPS.filter(g=>g.n.some(curNode));
-  const pub=s=>s=="anthropic-chart"?"anthropic-syscard":s;          // same publisher → one source (mirrors PUBLISHER in build.py)
-  const nSrc=new Set(curGroups.map(g=>pub(g.s))).size;                 // independent sources (one lab / leaderboard = one)
-  const nMeas=curGroups.reduce((a,g)=>a+g.n.filter(curNode).length,0);   // measured (model, effort) points
-  const cnt=`${nSrc} sources · ${curGroups.length} benchmarks · ${nMeas} measurements`;
-  document.querySelectorAll(".nsrc").forEach(e=>e.textContent=cnt);
-  const et=document.getElementById("edge-title"); if(et) et.textContent=`The ${curGroups.length} benchmarks (${nSrc} sources, ${nMeas} measurements) that weave the links`;
+  const nSrc=curGroups.length;   // count == what is actually listed (benchmarks touching current models)
+  document.querySelectorAll(".nsrc").forEach(e=>e.textContent=nSrc);
+  const et=document.getElementById("edge-title"); if(et) et.textContent=`The ${curGroups.length} sources that weave the links`;
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
