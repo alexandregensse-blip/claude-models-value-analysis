@@ -13,6 +13,7 @@ REPO_URL    = "https://github.com/alexandregensse-blip/claude-models-value-analy
 TITLE       = "Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared"
 DESCRIPTION = ("What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives "
                "the best quality for the price. Open data, CC BY 4.0.")
+INDEXNOW_KEY = "b3573dbc1da690e66e9ef05b081b7abe"   # public by design: served as /<key>.txt, proves ownership to IndexNow (Bing…)
 
 MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5":6,"sonnet-4.6":7,"haiku-4.5":8}
 EXP = {"low","medium","high","xhigh","max"}
@@ -495,6 +496,41 @@ def head_tags(date, anchor_label, counts):
         f'<script type="application/ld+json">\n{ld}\n</script>\n'
     )
 
+def write_root_files(date, pre, anchor_label):
+    """robots.txt, sitemap.xml, llms.txt and the IndexNow key file, next to index.html. llms.txt reuses the
+    pre-rendered answer, so it states the same conclusions as the page."""
+    plain = lambda h: re.sub(r"\s+(?=:)", "", re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", "", h)))).strip()
+    files = {
+        "robots.txt": f"# All robots allowed, AI robots included.\nUser-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n",
+        "sitemap.xml": ('<?xml version="1.0" encoding="UTF-8"?>\n'
+                        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+                        f"  <url><loc>{SITE_URL}</loc><lastmod>{date.isoformat()}</lastmod></url>\n</urlset>\n"),
+        "llms.txt": f"""# {TITLE}
+
+> {DESCRIPTION}
+
+{plain(pre.get("answer", ""))}
+
+Costs and qualities are relative to {anchor_label} = 1.00. They are computed only from ratios measured on the same task, normalised per benchmark and combined by weighted median, from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
+
+## Report
+
+- [{TITLE}]({SITE_URL}): quality vs cost per model and effort level, Pareto frontier, best pick per task tier, normalized cost matrix, method and sources.
+
+## Data
+
+- [raw-data.csv]({SITE_URL}raw-data.csv): every measured row (source, model, effort, task, harness, cost, tokens, score, reference), CC BY 4.0.
+
+## Optional
+
+- [Source repository]({REPO_URL}): generator, method notes, version history.
+""",
+        f"{INDEXNOW_KEY}.txt": INDEXNOW_KEY,
+    }
+    for name, text in files.items():
+        with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
+            f.write(text)
+
 def prerender(app, css):
     """Runs app.js at build time (gen/prerender.js, Node, fake DOM) and returns the HTML it writes into the text
     blocks, so crawlers that do not run JavaScript read the conclusions. The browser redraws them on load."""
@@ -570,6 +606,7 @@ def main():
         f"</head>\n<body>\n{body}\n<script>\n{app}\n</script>\n</body>\n</html>\n"
     )
     open(OUT,"w",encoding="utf-8").write(html)
+    write_root_files(date, pre, f"{alabel} @{ae}")
     print(f"built {OUT}  ({len(html)} bytes)  cost-pts={len(RD['cost'])} tok-pts={len(RD['tok'])}")
     viol = monotonicity_report(CG, QG)
     known = {("quality", "sonnet-4.6", "high", "max")}         # printed by the Sonnet 5 card itself — keyed on the rungs, not
