@@ -197,6 +197,7 @@ def groups_data():
       "tb40":("Terminal-Bench 4.0","xmodel","tbench.ai primary payload · 66 tasks × 330 trials, Claude Code, all at max; cost basis undocumented ✓"),
       "chartogt":("Chartography +tools","sweep","Fable 5.1 card p186 · 5 models × sweep low→max, $ cost; Opus 4.8 series joined from Opus 5 card p171 ✓"),
       "chartogn":("Chartography −tools","sweep","Fable 5.1 card p186 · tools disabled — separate regime, kept out of the effort grid ✓"),
+      "sonarjava":("Sonar Java","sweep","Sonar leaderboard JSON · 4,444 Java tasks, single-shot, measured tokens × list price; Opus 5.5 medium/high ✓"),
       "sc55hlet":("HLE tools (O5.5)","sweep","Opus 5.5 card p185 · HLE with tools, 3 models × sweep low→max, $ cost, scores printed ✓"),
       "sc55amnt":("ArXivMath no-tools","sweep","Opus 5.5 card p182 · ArXivMath Aug 2026, 57 problems, 3 models × low→max, $ cost, scores printed ✓"),
       "sc55amt":("ArXivMath tools","sweep","Opus 5.5 card p183 · ArXivMath Aug 2026 with code sandbox, 3 models × low→max, scores printed ✓"),
