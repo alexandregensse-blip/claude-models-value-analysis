@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Artifact generator. Reads data + modular css/body/js, computes derived ratio data,
 assembles index.html. Run: python3 gen/build.py  (from the scratchpad dir)."""
-import csv, json, os, sys, datetime
+import csv, json, os, re, subprocess, sys, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
@@ -440,6 +440,31 @@ def monotonicity_report(cg, qg):
                 if vb < va: out.append(f"{name}: {m} {a}({va}) > {b}({vb})")
     return out
 
+def prerender(app, css):
+    """Runs app.js at build time (gen/prerender.js, Node, fake DOM) and returns the HTML it writes into the text
+    blocks, so crawlers that do not run JavaScript read the conclusions. The browser redraws them on load."""
+    try:
+        r = subprocess.run(["node", os.path.join(HERE, "prerender.js")], input=json.dumps({"app": app, "css": css}),
+                           capture_output=True, text=True, check=True)
+    except (OSError, subprocess.CalledProcessError) as e:
+        sys.exit(f"!! PRE-RENDER FAILED (Node is required to build): {getattr(e, 'stderr', '') or e}")
+    return json.loads(r.stdout)
+
+def inject(body, pre):
+    """Writes the pre-rendered blocks into their empty placeholders in body.html."""
+    for key, html in pre.items():
+        put = lambda m: m.group(1) + html + m.group(m.lastindex)
+        if key == ".nsrc":
+            pat = r'(<span class="nsrc">)…(</span>)'
+        elif key.endswith(" tbody"):
+            pat = rf'(<table id="{key[1:-6]}">.*?<tbody>)(</tbody>)'
+        else:
+            pat = rf'(<(\w+)[^>]*\bid="{key}"[^>]*>)…?(</\2>)'
+        body, n = re.subn(pat, put, body, flags=re.S)
+        if not n:
+            sys.exit(f"!! PRE-RENDER: no empty placeholder for {key!r} in body.html")
+    return body
+
 def main():
     comps = comparisons()
     RD = build_RD(comps)
@@ -477,6 +502,7 @@ def main():
     body = body.replace("__NCOUPLES__", str(ncpl))
     body = body.replace("__COSTSPAN__", str(round(span)))
     body = body.replace("__GENDATE__", datetime.date.today().strftime("%d %b %Y"))   # report generation date
+    body = inject(body, prerender(app, css))
     html = (
         "<!doctype html>\n"
         '<html lang="en">\n<head>\n'
