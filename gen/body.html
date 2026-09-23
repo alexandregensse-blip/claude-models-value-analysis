@@ -26,12 +26,14 @@
   <section id="frontier">
     <div class="card pad">
       <h3 class="blocktitle">Quality vs. Cost</h3>
+      <div class="chart-controls" id="ctrlB"></div>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
-      <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to __ANCHOR__&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. The faint <b>oval</b> (hover to reveal) is the robust asymmetric uncertainty — <b>width = cost, height = quality</b>. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
+      <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to __ANCHOR__&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. <b>Tier bands</b> (off by default) shade the four usage tiers of the tier picker below&nbsp;: each band is the quality range where that tier's window outweighs its neighbours. The faint <b>oval</b> (hover to reveal) is the robust asymmetric uncertainty — <b>width = cost, height = quality</b>. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
       <h3 class="blocktitle">Pareto Frontier</h3>
+      <div class="chart-controls" id="ctrlP"></div>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
       <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The faint grey curve is the <b>price curve</b> — what a given quality typically costs, fitted on <b>every</b> measured couple but with each one's influence <b>graded by its distance to the frontier</b>, and the reference for the value index below.</p>

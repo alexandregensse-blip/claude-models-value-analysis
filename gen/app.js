@@ -38,8 +38,20 @@ let showLegacy=false; try{ showLegacy=localStorage.getItem("showLegacy")==="1"; 
 function applyLegacy(){ LEGACY.forEach(m=>{ if(showLegacy){ if(GRID_ALL.cost[m]) COSTGRID[m]=GRID_ALL.cost[m]; if(GRID_ALL.qual[m]) QUALGRID[m]=GRID_ALL.qual[m]; }
   else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }
 const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));
-const legacyChip=()=>`<button type="button" class="lg-toggle" aria-pressed="${showLegacy}" onclick="toggleLegacy()">${showLegacy?"Hide":"Show"} older models <span class="lg-sub">Opus 4.7 · Sonnet 4.6</span></button>`;
-function toggleLegacy(){ showLegacy=!showLegacy; try{ localStorage.setItem("showLegacy",showLegacy?"1":"0"); }catch(e){} applyLegacy(); tierDefaults(); renderAll(); }
+let showBands=false; try{ showBands=localStorage.getItem("showTierBands")==="1"; }catch(e){}
+// On/off switch (role=switch): a track + knob and an explicit ON/OFF word, so the state reads without colour.
+const tgl=(id,on,label,hint,fn)=>`<button type="button" role="switch" class="tgl" id="${id}" aria-checked="${on}" onclick="${fn}()">`
+  +`<span class="tgl-track" aria-hidden="true"><span class="tgl-knob"></span></span><span class="tgl-state">${on?"ON":"OFF"}</span>`
+  +`<span class="tgl-label">${label}</span>${hint?`<span class="tgl-hint">${hint}</span>`:""}</button>`;
+function renderControls(){
+  const legacy=id=>tgl(id,showLegacy,"Older models","Opus 4.7 · Sonnet 4.6","toggleLegacy");
+  const b=document.getElementById("ctrlB"), p=document.getElementById("ctrlP");
+  if(b) b.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-b")+tgl("tgl-bands",showBands,"Tier bands","","toggleBands");
+  if(p) p.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-p");
+}
+function toggleBands(){ showBands=!showBands; try{ localStorage.setItem("showTierBands",showBands?"1":"0"); }catch(e){} renderControls(); drawB();
+  const sv=document.getElementById("chartB"); if(sv) zoomable(sv); document.getElementById("tgl-bands")?.focus(); }
+function toggleLegacy(){ const fid=document.activeElement?.id; showLegacy=!showLegacy; try{ localStorage.setItem("showLegacy",showLegacy?"1":"0"); }catch(e){} applyLegacy(); tierDefaults(); renderAll(); if(fid) document.getElementById(fid)?.focus(); }
 applyLegacy();
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
@@ -199,6 +211,21 @@ function valueResidual(gevT,p){ const {G,C}=valueParts(gevT,p); return G-C; }
 // interval therefore now SHIFTS the index (through the weighting above) rather than damping it toward neutral.
 const valueIndex=(r,rAnc)=>100*Math.pow(10,r-rAnc);
 const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANCHOR.e); return a?valueResidual(gevT,a):0; };
+// Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
+// metric T the windows live in) between adjacent tier centres q* — where one Gaussian window starts to outweigh the next —
+// and the outer bands extend half a gap beyond the first and last centres. They follow the sliders (TIERS is live).
+function drawTierBands(s,Y,mL,iw,mT,ih){
+  const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
+  for(let i=1;i<n;i++) e.push((Tc[i-1]+Tc[i])/2); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2);
+  const g=el("g",{"pointer-events":"none"});
+  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
+    if(yB-yA<1) return;
+    g.appendChild(el("rect",{x:mL,y:yA,width:iw,height:yB-yA,fill:TWCOL[i],"fill-opacity":0.10}));
+    if(i<n-1) g.appendChild(el("line",{x1:mL,y1:yA,x2:mL+iw,y2:yA,stroke:TWCOL[i],"stroke-opacity":0.35,"stroke-width":1,"stroke-dasharray":"2 5"}));
+    if(yB-yA>=16){ const tx=el("text",{x:mL+iw-10,y:yB-7,fill:TWCOL[i],"fill-opacity":0.95,"font-size":11.5,"font-weight":700,"text-anchor":"end","letter-spacing":"0.04em"});
+      tx.textContent=t.name; g.appendChild(tx); } });
+  s.appendChild(g);
+}
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
@@ -215,6 +242,7 @@ function drawB(){
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
+  if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier shading, behind everything
   qGrid(s,Y,mL,iw,mT,ih);
   axisTitle(s,mL+iw/2,H-30,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
   axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
@@ -234,7 +262,7 @@ function drawB(){
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
     visibleModels().filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`+legacyChip();
+    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`;
 }
 
 // ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
@@ -291,7 +319,7 @@ function drawPareto(){
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendP");
   if(lg) lg.innerHTML=visibleModels().map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`+legacyChip()
+    +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
     +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price curve — what a quality typically costs, graded by Pareto distance · R² = ${R2.toFixed(2)}</span>`;
   const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
@@ -461,7 +489,7 @@ function drawTierTuner(){
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
     const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
     document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2);
-    drawTierWindows(); drawTiers(); }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
+    drawTierWindows(); drawTiers(); if(showBands&&k==='q') drawB(); }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
 // ---------- MATRIX (sorted by relative quality desc) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
 const fr=x=>x.toFixed(2);
@@ -561,7 +589,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-function renderAll(){drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();
+function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
