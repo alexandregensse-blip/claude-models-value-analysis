@@ -229,7 +229,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="gh-name">Alexandre Gensse</div>
     </div>
     <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">93 sources · 196 benchmarks · 1479 measurements</span></div>
-    <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
+    <h1>Claude cost vs quality&nbsp;: Fable, Opus, Sonnet, Haiku compared</h1>
     <div class="hero-row">
       <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
       <div class="meta meta-side">
@@ -239,6 +239,9 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       </div>
     </div>
   </header>
+
+  <main>
+  <p class="sub answer" id="answer"><b>Best value overall&nbsp;: Opus 5.5 at low effort</b> — 0.98× the quality of Opus 5 @high for 0.13× its cost. Best pick by task tier&nbsp;: grunt work → Opus 5.5 at low effort · everyday tasks → Opus 5.5 at low effort · advanced reasoning → Opus 5.5 at medium effort · cutting-edge thinking → Opus 5.5 at high effort. Highest measured quality&nbsp;: Opus 5.5 at max effort (1.17× for 1.34× the cost).</p>
 
   <!-- ============ AT-A-GLANCE : best overall + best value by tier (mirror of §1) ============ -->
   <section id="atglance" class="major">
@@ -299,14 +302,14 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
     <div class="card pad">
-      <h3 class="blocktitle">Quality vs. Cost</h3>
+      <h2 class="blocktitle">Quality vs. cost of every Claude model, at each effort level</h2>
       <div class="chart-controls" id="ctrlB"></div>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
       <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to Opus&nbsp;5&nbsp;@high&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. <b>Tier bands</b> (off by default) shade the four usage tiers of the tier picker below&nbsp;: each band runs from that tier's target q* up to the next tier's — the qualities that clear its bar but not the next one. <b>Uncertainty ovals</b> (off by default) show each point's robust asymmetric uncertainty — <b>width = cost, height = quality</b>; hover to bring the one under the cursor forward. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
-      <h3 class="blocktitle">Pareto Frontier</h3>
+      <h2 class="blocktitle">Best Claude model for the price — the Pareto frontier</h2>
       <div class="chart-controls" id="ctrlP"></div>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
@@ -386,7 +389,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
     <details class="fold">
-      <summary>Normalized Cost Matrix</summary>
+      <summary>Normalized cost matrix — Claude effort levels compared</summary>
       <div class="card pad">
         <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;5&nbsp;@high&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus&nbsp;5&nbsp;@high, then each cell = the <b>weighted median</b> of the per-benchmark estimates (a source with n measurements weighs √n in total, shared among them; bridge ×0.5; ×0.5→1 by how much of the model's effort ladder the benchmark sweeps; ×⅓ for an early-access run). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
         <div class="chartbox">
@@ -445,6 +448,8 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       </div>
     </details>
   </section>
+
+  </main>
 
   <div class="foot">
     <p><b>Alexandre Gensse</b> · <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis" target="_blank" rel="noopener">github.com/alexandregensse-blip</a></p>
@@ -1082,7 +1087,19 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();
+// Answer-first sentence under the title: the crown, the tier picks and the top-quality couple in words. Pre-rendered
+// at build time (gen/prerender.js), so it is the first thing a crawler reads.
+function fillAnswer(){
+  const host=document.getElementById("answer"); if(!host) return;
+  const {picks,crown}=tierPicks();
+  const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
+  let top=null; for(const m in COSTGRID){ const qg=QUALGRID[m]||{};
+    for(const e in COSTGRID[m]){ const q=qg[e]; if(q&&(!top||q[0]>top.q)) top={m,e,c:COSTGRID[m][e][0],q:q[0]}; } }
+  host.innerHTML=`<b>Best value overall&nbsp;: ${nm(crown)}</b> — ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost. `
+    +`Best pick by task tier&nbsp;: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join(" · ")}. `
+    +(top?`Highest measured quality&nbsp;: ${nm(top)} (${top.q.toFixed(2)}× for ${top.c.toFixed(2)}× the cost).`:"");
+}
+function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);

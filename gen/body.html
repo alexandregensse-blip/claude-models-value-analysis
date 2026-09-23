@@ -5,7 +5,7 @@
       <div class="gh-name">Alexandre Gensse</div>
     </div>
     <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span></div>
-    <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
+    <h1>Claude cost vs quality&nbsp;: Fable, Opus, Sonnet, Haiku compared</h1>
     <div class="hero-row">
       <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
       <div class="meta meta-side">
@@ -16,6 +16,9 @@
     </div>
   </header>
 
+  <main>
+  <p class="sub answer" id="answer"></p>
+
   <!-- ============ AT-A-GLANCE : best overall + best value by tier (mirror of §1) ============ -->
   <section id="atglance" class="major">
     <div id="tier-crown-top"></div>
@@ -25,14 +28,14 @@
   <!-- ============ CHART : consolidated curves ============ -->
   <section id="frontier">
     <div class="card pad">
-      <h3 class="blocktitle">Quality vs. Cost</h3>
+      <h2 class="blocktitle">Quality vs. cost of every Claude model, at each effort level</h2>
       <div class="chart-controls" id="ctrlB"></div>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
       <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to __ANCHOR__&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. <b>Tier bands</b> (off by default) shade the four usage tiers of the tier picker below&nbsp;: each band runs from that tier's target q* up to the next tier's — the qualities that clear its bar but not the next one. <b>Uncertainty ovals</b> (off by default) show each point's robust asymmetric uncertainty — <b>width = cost, height = quality</b>; hover to bring the one under the cursor forward. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
-      <h3 class="blocktitle">Pareto Frontier</h3>
+      <h2 class="blocktitle">Best Claude model for the price — the Pareto frontier</h2>
       <div class="chart-controls" id="ctrlP"></div>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
@@ -67,7 +70,7 @@
   <!-- ============ MATRIX ============ -->
   <section id="matrix">
     <details class="fold">
-      <summary>Normalized Cost Matrix</summary>
+      <summary>Normalized cost matrix — Claude effort levels compared</summary>
       <div class="card pad">
         <p class="sub">Relative cost per model × effort (baseline __ANCHOR__&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to __ANCHOR__, then each cell = the <b>weighted median</b> of the per-benchmark estimates (a source with n measurements weighs √n in total, shared among them; bridge ×0.5; ×0.5→1 by how much of the model's effort ladder the benchmark sweeps; ×⅓ for an early-access run). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
         <div class="chartbox">
@@ -126,6 +129,8 @@
       </div>
     </details>
   </section>
+
+  </main>
 
   <div class="foot">
     <p><b>Alexandre Gensse</b> · <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis" target="_blank" rel="noopener">github.com/alexandregensse-blip</a></p>
