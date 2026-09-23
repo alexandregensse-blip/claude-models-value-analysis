@@ -247,6 +247,7 @@ def groups_data():
         buckets[gk].append(r)
     def pick_url(rs, src):
         cands = [(r.get("ref") or "").strip() for r in rs]
+        cands = ["arxiv.org/abs/" + c[len("arxiv-"):] if c.startswith("arxiv-") else c for c in cands]   # source id, not a domain
         cands = [c for c in cands if "." in c and " " not in c]        # keep domain-like refs
         if cands:
             cands.sort(key=lambda c: ("/" in c, len(c)), reverse=True)  # prefer one with a path
