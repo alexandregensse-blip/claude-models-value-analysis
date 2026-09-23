@@ -48,14 +48,16 @@ function renderControls(){
   const legacy=id=>tgl(id,showLegacy,"Older models","Opus 4.7 · Sonnet 4.6","toggleLegacy");
   const b=document.getElementById("ctrlB"), p=document.getElementById("ctrlP");
   const ovals=id=>tgl(id,showOvals,"Uncertainty ovals","","toggleOvals");
-  if(b) b.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-b")+ovals("tgl-ovals-b")+tgl("tgl-bands",showBands,"Tier bands","","toggleBands");
-  if(p) p.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-p")+ovals("tgl-ovals-p");
+  const bands=id=>tgl(id,showBands,"Tier bands","","toggleBands");
+  if(b) b.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-b")+ovals("tgl-ovals-b")+bands("tgl-bands-b");
+  if(p) p.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-p")+ovals("tgl-ovals-p")+bands("tgl-bands-p");
 }
 function toggleOvals(){ const fid=document.activeElement?.id; showOvals=!showOvals; try{ localStorage.setItem("showOvals",showOvals?"1":"0"); }catch(e){}
   renderControls(); drawB(); drawPareto(); ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });
   if(fid) document.getElementById(fid)?.focus(); }
-function toggleBands(){ showBands=!showBands; try{ localStorage.setItem("showTierBands",showBands?"1":"0"); }catch(e){} renderControls(); drawB();
-  const sv=document.getElementById("chartB"); if(sv) zoomable(sv); document.getElementById("tgl-bands")?.focus(); }
+function toggleBands(){ const fid=document.activeElement?.id; showBands=!showBands; try{ localStorage.setItem("showTierBands",showBands?"1":"0"); }catch(e){}
+  renderControls(); drawB(); drawPareto(); ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });
+  if(fid) document.getElementById(fid)?.focus(); }
 function toggleLegacy(){ const fid=document.activeElement?.id; showLegacy=!showLegacy; try{ localStorage.setItem("showLegacy",showLegacy?"1":"0"); }catch(e){} applyLegacy(); tierDefaults(); renderAll(); if(fid) document.getElementById(fid)?.focus(); }
 applyLegacy();
 
@@ -307,10 +309,12 @@ function drawPareto(){
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
   const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
+  if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier fills, under the grid
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
   qGrid(s,Y,mL,iw,mT,ih);
+  if(showBands) drawTierBandLabels(s,Y,mL,iw,mT,ih);                     // tier names over the grid
   axisTitle(s,mL+iw/2,H-28,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
   axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
   const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
@@ -515,7 +519,7 @@ function drawTierTuner(){
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
     const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
     document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2);
-    drawTierWindows(); drawTiers(); if(showBands&&k==='q') drawB(); }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
+    drawTierWindows(); drawTiers(); if(showBands&&k==='q'){ drawB(); drawPareto(); } }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
 // ---------- MATRIX (sorted by relative quality desc) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
 const fr=x=>x.toFixed(2);
