@@ -7,10 +7,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
 OUT  = os.path.join(ROOT, "index.html")
 
-MX = {"fable-5.1":0,"fable-5":1,"opus-5":2,"opus-4.8":3,"opus-4.7":4,"sonnet-5":5,"sonnet-4.6":6,"haiku-4.5":7}
+MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5":6,"sonnet-4.6":7,"haiku-4.5":8}
 EXP = {"low","medium","high","xhigh","max"}
 EMAP = {"T25":"medium","T50":"high"}    # braintrust thinking-budget tiers → nearest effort
-PRICE_OUT = {"fable-5.1":50,"fable-5":50,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5":15,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
+PRICE_OUT = {"fable-5.1":50,"fable-5":50,"opus-5.5":20,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5":15,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
 
 def eff(e): return EMAP.get(e, e)
 def num(x):
@@ -197,6 +197,14 @@ def groups_data():
       "tb40":("Terminal-Bench 4.0","xmodel","tbench.ai primary payload · 66 tasks × 330 trials, Claude Code, all at max; cost basis undocumented ✓"),
       "chartogt":("Chartography +tools","sweep","Fable 5.1 card p186 · 5 models × sweep low→max, $ cost; Opus 4.8 series joined from Opus 5 card p171 ✓"),
       "chartogn":("Chartography −tools","sweep","Fable 5.1 card p186 · tools disabled — separate regime, kept out of the effort grid ✓"),
+      "sc55hlet":("HLE tools (O5.5)","sweep","Opus 5.5 card p185 · HLE with tools, 3 models × sweep low→max, $ cost, scores printed ✓"),
+      "sc55amnt":("ArXivMath no-tools","sweep","Opus 5.5 card p182 · ArXivMath Aug 2026, 57 problems, 3 models × low→max, $ cost, scores printed ✓"),
+      "sc55amt":("ArXivMath tools","sweep","Opus 5.5 card p183 · ArXivMath Aug 2026 with code sandbox, 3 models × low→max, scores printed ✓"),
+      "sc55draco":("DRACO (O5.5)","sweep","Opus 5.5 card p187 · 980k budget, 3 models × low→max, $ cost, scores printed; a new run, not the F5.1-card one ✓"),
+      "sc55wandr":("WANDR","sweep","Opus 5.5 card p188 · Perplexity wide-search, offline index, 980k budget, 3 models × low→max, scores printed ✓"),
+      "sc55osw":("OSWorld 2.0 (O5.5)","sweep","Opus 5.5 card p207 · partial credit, 3 models × 5 efforts; effort inferred from cost order ✓"),
+      "sc55bcad":("BenchCAD V2C","sweep","Opus 5.5 card p205 · Vision2Code with tools, voxel IoU, 4 models × 5 efforts; effort inferred from cost order ✓"),
+      "sc55chartq":("Chartography regraded","sweep","Opus 5.5 card p202 · same transcripts as chartogt, re-graded scores — quality only, costs stay in chartogt ✓"),
       "scoosw47":("OSWorld eff. (4.7)","sweep","Opus 4.7 card p209 · pass@1 vs output tokens, 3 models × low→max ✓"),
     }
     MERGE = {"aireiter2":"aireiter", "aireiter3":"aireiter"}   # sub-benchmarks of one source → one node-set
@@ -243,7 +251,8 @@ def ratio_grid(field):
                                such bridged benchmarks are down-weighted ×0.5 (indirect anchoring).
          The offset is a nuisance alignment term → MEAN (non-degenerate), not median.
       3. Each benchmark then yields one normalised estimate per couple = exp(log value − offset), with
-         weight = (#independent sources) × (0.5 if bridged). The global g[couple] is the source-weighted MEDIAN
+         weight = (#independent sources) × (0.5 if bridged) × ladder coverage, where ladder coverage runs
+         linearly from 0.5 (the benchmark measures one rung of that model) to 1.0 (it sweeps the model's full ladder). The global g[couple] is the source-weighted MEDIAN
          of those estimates (robust to task-complexity outliers); the anchor is pinned to 0 each pass. Iterate.
       4. central = exp(g[couple]) = weighted median; band = **per-side Huber spread**, centred on the median:
          deviations (log estimate − log median) are clipped to ±1.5·MAD, then the lower/upper band = median·exp(∓RMS
@@ -252,7 +261,7 @@ def ratio_grid(field):
          ASYMMETRIC (captures skew). Centred on the median → the plotted dot is always inside the band. A
          single-benchmark node gets a degenerate [c,c,c] box. Haiku 4.5 → one 'solo' node (no effort ladder)."""
     import math, collections
-    CUR = set(MX)                                            # 8 current models
+    CUR = set(MX)                                            # 9 current models
     EFFOK = {"low","medium","high","xhigh","max","solo"}     # 'solo' = haiku 4.5 (no discrete effort)
     ANCHOR = "opus-4.8@medium"
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
@@ -267,7 +276,12 @@ def ratio_grid(field):
     for b in [b for b in bench if len(bench[b]) < 2]: del bench[b]   # drop single-couple (circular) benchmarks
     couples = set(c for cv in bench.values() for c in cv)
     def bridged(b): return ANCHOR not in bench[b]
-    def wt(b, c):   return len(srcs[b][c]) * (0.5 if bridged(b) else 1.0)
+    NRUNG = {"sonnet-4.6":4, "haiku-4.5":1}                  # rungs each model exposes (default: 5, low→max)
+    def ladder(b, c):                                        # share of the model's effort ladder this benchmark sweeps:
+        m = c.split("@")[0]; n = NRUNG.get(m, 5)             # 0.5 for a single rung → 1.0 for the full ladder
+        k = sum(1 for x in bench[b] if x.split("@")[0] == m)
+        return 1.0 if n == 1 else 0.5 + 0.5*(k-1)/(n-1)
+    def wt(b, c):   return len(srcs[b][c]) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
     def wmedian(pairs):                                      # weighted median of [(value, weight), ...]
         pairs = sorted(pairs); W = sum(w for _, w in pairs)
         if W == 0: return pairs[len(pairs)//2][0]
@@ -295,7 +309,7 @@ def ratio_grid(field):
         hi  = c*math.exp( (sum(w*d*d for d,w in pos)/sum(w for _,w in pos))**0.5) if pos else c
         return [round(c,2), round(lo,2), round(hi,2)]                      # band centred on the median → dot always inside
     ORD = {"fable-5.1":["low","medium","high","xhigh","max"],"fable-5":["low","medium","high","xhigh","max"],
-           "opus-5":["low","medium","high","xhigh","max"],
+           "opus-5.5":["low","medium","high","xhigh","max"],"opus-5":["low","medium","high","xhigh","max"],
            "opus-4.8":["low","medium","high","xhigh","max"],
            "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
            "sonnet-4.6":["low","medium","high","max"]}

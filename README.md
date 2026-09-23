@@ -8,7 +8,7 @@ Open [`index.html`](index.html) in a browser — fully self-contained (no server
 
 **Live page:** the report is published with GitHub Pages. To enable it on a fork, go to *Settings → Pages → Source: Deploy from a branch → `main` / root*; the site is then served at `https://<user>.github.io/claude-models-value-analysis/` (the build writes `index.html` at the repo root, so it loads directly). Exploratory blocks (value score, window tuner, full method) are collapsed by default; click to expand.
 
-Models covered: **Fable 5.1, Fable 5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 4.8 @medium = 1.00** — deliberately unchanged across releases so the numbers stay comparable with earlier snapshots (see the git tags).
+Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 4.8 @medium = 1.00** — deliberately unchanged across releases so the numbers stay comparable with earlier snapshots (see the git tags).
 
 ---
 
@@ -53,6 +53,60 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.09.08` | 8 Sep 2026 | adds **Fable 5.1** (released 1 Sep 2026) and a second research salvo. Six cost × effort sweeps digitized from the Fable 5.1 system card (FrontierCode 1.1 Extended, CursorBench 3.2.0, HLE with and without tools, DRACO, OSWorld 2.0), plus **Chartography** — a 4-model × 5-effort sweep read by separating the solid and dashed curves, anchored by joining the Opus 4.8 series from the Opus 5 card. Re-digitizes the two Sonnet 5 card sweeps the repo had only read approximately (**CursorBench**, **FrontierCode v1**), correcting 42 rows and Sonnet 4.6's high/max scores. **Haiku 4.5** gains a real interval: its `default` runs are its only configuration, so they are labelled `solo`, taking it from 1 benchmark to 6 and halving its measured cost. Twelve new third-party sources — Terminal-Bench 4.0, ObviousBench, bug-hunt-bench, vlm-exam, harnesseval, vibe-openscad, nurb-benchmarks, Kingy AI, Artificial Analysis, the current Vals Index, and three preprints (SWE Refactor Bench, QuoteBench, AI4AI-Bench) — 955 measured rows, 81 sources, 153 comparison groups |
 | `v2026.09.08b` | 8 Sep 2026 | third scan — targeted at the sources the previous salvo could not read. Opens **Cognition's FrontierCode** JSON (which turns out to be the source behind the Fable 5.1 card's figure 8.4.A, so those rows are replaced with exact primaries), **CursorBench 3.2** in full (a complete 3 × 5 matrix that becomes the backbone of the Fable 5.1 effort curve), **Zapier AutomationBench**, **ARC Prize** per-effort costs, **AA Intelligence Index v4.3**, **Firecrawl**'s 57-run study, Simon Willison's five-rung Fable 5.1 sweep, and eight further sources. Resolves the ARC \$3.12/\$4.49 conflict (they are `xhigh` and `max`) and records that Claude Code bills cache-write at 2 × input — 1050 measured rows, 90 sources, 168 comparison groups |
 | `v2026.09.21` | 21 Sep 2026 | sixth pass — five parallel source sweeps (leaderboards, preprints, public code, forums, vendors). The find is not a new source but an under-read one: **Cognition's FrontierCode JSON carries eight Claude models and the repo had ingested three**, so Opus 4.8, Sonnet 5, Opus 4.7 and Sonnet 4.6 join both v1.1 subsets and the v1 extended subset opens as its own group. The same JSON proves `scfrontiercode` — digitized off the Sonnet 5 card — *is* FrontierCode v1 main, and its Sonnet 4.6 costs were 8–11 % off; those rows are replaced with primaries. Adds **CursorBench 4.0** (a harder suite shipped 10 Sep) and the four missing **Terminal-Bench 4.0** effort rungs, both re-extracted from their own payloads. Mean cost band **2.016× → 1.811×**: Sonnet 4.6 `low` 3.36× → 1.19×, `medium` 1.83× → 1.08×, Opus 4.7 `xhigh` 1.53× → 1.16× — 1149 measured rows, 93 sources, 174 comparison groups |
+
+### Opus 5.5, in one line
+
+Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **is the whole Pareto frontier**: all five
+of its rungs are on it, and nothing else is. Its `high` rung (quality 1.33×, cost 0.31×) beats Fable 5.1 at `max`
+(1.31× for 3.50×) for under a tenth of the cost, and its `low` (1.10× for 0.10×) undercuts Haiku 4.5 on cost while
+scoring well above it. The price cut is 20 %; the rest of the gain is fewer tokens for the same work.
+
+| Opus 5.5 | low | medium | high | xhigh | max |
+|---|---|---|---|---|---|
+| relative cost | 0.10 | 0.22 | 0.31 | 0.72 | 1.73 |
+| relative quality | 1.10 | 1.27 | 1.33 | 1.44 | 1.46 |
+
+**Where the numbers come from.** 81 rows across 17 groups, one day after launch. Six independent primaries
+already carry it: **Cognition's FrontierCode** JSON (both v1.1 subsets — the card's figures 8.4.A/B are read
+straight from it, and its medium/max scores match the card's text to 0.05 pt), **Cursor's CursorBench 4.0**
+table (Cursor now publishes Opus 5.5's cost itself), **Zapier AutomationBench 1.0.6**, **Artificial
+Analysis** (full low→max ladder on the v4.3 index, same build as the rows already held — every existing cost
+matches to the cent), and the **Vals Index**. The remaining 55 rows are ten effort sweeps digitized from the
+system card, all but three with scores printed on the chart and cross-checked to ≤ 0.07 pt by the y-axis fit:
+HLE with and without tools, **ArXivMath** with and without tools, DRACO, **WANDR**, OSWorld 2.0, **BenchCAD**
+and Chartography. Two markers hidden under another series were recovered from their visible fragment and flagged.
+
+**Three join decisions.** HLE-without-tools in this card is the *same run* as the Fable 5.1 card's (identical
+costs and scores for Opus 5 and Fable 5.1), so Opus 5.5 joins `scf51hlen` rather than opening a second group.
+HLE-with-tools, DRACO and OSWorld differ from their Fable 5.1-card namesakes and are new runs. Chartography is
+the awkward one: the costs match the Fable 5.1 card to < 0.5 % — the same transcripts — but the scores were
+**re-graded** (Fable 5.1 no-tools `low` 33.8 → 36.6). Opus 5.5's costs therefore go into `chartogt`/`chartogn`,
+where they meet the rest of that run's costs, and the re-graded scores form a quality-only group
+(`sc55chartq`); nothing is counted twice and no two gradings are mixed.
+
+**Two under-read sources, again.** Zapier's page bundle carries **every** Claude model's effort ladder, and the
+repo had taken three; Opus 4.8 (the anchor model), Opus 4.7, Sonnet 5, Sonnet 4.6 and Haiku 4.5 join
+`zapierab` — except Haiku 4.5's *score*, 0.46 % (3 of 657 tasks): a metric at its floor cannot segment models any
+more than a saturated one can, so it is left blank and the cost kept, the rule already applied to saturated
+harnesses (it would otherwise have dragged Haiku's quality from 0.52× to 0.16×). Artificial Analysis likewise carried Sonnet 5's full ladder plus Opus 4.8 and Sonnet 4.6 at max
+on the same v4.3 build. One conflict is recorded, not resolved: Zapier's board now shows Opus 5 `max` at
+**\$3.05**, while the Opus 5.5 card plots the same release at \$1.27 — a jump no neighbouring rung supports.
+The \$1.27 row is kept and annotated.
+
+**A method change: weight by ladder coverage.** Without it, Opus 5.5's quality came out *higher* at `xhigh`
+(1.43) than at `max` (1.39), although `max` wins in 13 of the 14 benchmarks that measure both. The cause was
+structural: the Vals Index measures `max` only, so it entered one cell's median and not its neighbour's. Each
+benchmark's weight for a model is now multiplied by how much of that model's effort ladder it sweeps —
+**×0.5 for a single rung, rising linearly to ×1 for the full ladder**. A sweep carries within-model
+information that a one-rung leaderboard entry does not. The factor was set on that principle, not tuned
+against the symptom: on the old data it moves the mean cost band by 0.2 % (1.828× → 1.831×). One residual
+inversion is left as the data give it — **Opus 5 quality `xhigh` 1.27 vs `max` 1.26**, within noise, with
+`max` ahead in 25 of the 37 benchmarks measuring both.
+
+**The bands widened, and that is the expected direction.** Mean cost band 1.831× → 2.024× (1.950× leaving
+Opus 5.5 out), 25 couples wider against 7 narrower. Opus 5.5 is wide at the bottom of its ladder — its `low` band
+spans 3.8× (0.05–0.19): the benchmarks disagree most about how cheap its cheapest rung is — and the new Zapier and AA ladders widen
+Sonnet 5 and Haiku 4.5, whose cost cells had rested on fewer, more agreeable sources.
 
 ### Fable 5.1, in one line
 
