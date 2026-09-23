@@ -84,13 +84,13 @@ edges sit midway, in the chart's dilated metric, between adjacent tier centres, 
 Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **is the whole Pareto frontier** below its
 top rung: `low`, `medium`, `high` and `xhigh` are on it and nothing else is, while `max` is dominated by its own
 `xhigh` (same quality, 1.13×, for less than half the cost). On the current scale (Opus 5 @high = 1.00) its `xhigh`
-(quality 1.13×, cost 0.64×) beats Fable 5.1 at `max` (1.09× for 2.58×) for a quarter of the cost, its `high` comes
+(quality 1.13×, cost 0.67×) beats Fable 5.1 at `max` (1.09× for 2.58×) for a quarter of the cost, its `high` comes
 within 2 % of it for a sixth, and its `low` (0.91× for 0.07×) undercuts Haiku 4.5 (0.10×) on cost while scoring far
 above it (0.44×). Its default `medium` sits at Opus 5's own default quality (1.01×) for a quarter of the cost.
 
 | Opus 5.5 (Opus 5 @high = 1.00) | low | medium | high | xhigh | max |
 |---|---|---|---|---|---|
-| relative cost | 0.07 | 0.24 | 0.41 | 0.64 | 1.49 |
+| relative cost | 0.07 | 0.24 | 0.39 | 0.67 | 1.49 |
 | relative quality | 0.91 | 1.01 | 1.07 | 1.13 | 1.13 |
 
 **Where the numbers come from.** 95 rows across 22 groups, one day after launch. Independent primaries
