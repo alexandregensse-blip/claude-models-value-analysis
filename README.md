@@ -25,7 +25,7 @@ You cannot compare raw dollars across sources (task sizes differ), so:
 
 1. **Same-task ratios only.** Keep sources that measured ≥2 `(model, effort)` couples *on the same task*; their ratio cancels task-size variance.
 2. **The `(model, effort)` couple is atomic** — no `model × effort` separability is assumed.
-3. **Per-benchmark normalisation → source-weighted median.** Within each benchmark, divide by the anchor (Opus 5 @high) or bridge through shared couples; weight each benchmark by source count, ×0.5 if bridged, and ×0.5→1 by how much of the model's effort ladder it sweeps; each cell is the weighted median across benchmarks.
+3. **Per-benchmark normalisation → source-weighted median.** Within each benchmark, divide by the anchor (Opus 5 @high) or bridge through shared couples; weight each benchmark by source count, ×0.5 if bridged, ×0.5→1 by how much of the model's effort ladder it sweeps, and ×⅓ for a run dated before the model's release (early access); each cell is the weighted median across benchmarks.
 4. **Robust CI** — a per-side Huber spread (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it.
 
 Value scores add a second layer, all computed client-side from the grids: a price-envelope fit (`log₁₀ cost = g(quality)`), a signed cost-distance score, its local prominence along the frontier, and the tier picks — all **uncertainty-aware** (each couple enters as its centre plus its four CI extremities).
@@ -163,7 +163,7 @@ Cognition's v1.1 main subset (the same run as `fcodemain`, only a different scor
 resumed sessions, inconsistent token fields), Vals ProofBench (saturated) and a round of forum posts with no
 measurement. Mean cost band 2.164×.
 
-**Two open questions, flagged rather than decided.** *Early-access runs:* this morning's rule "an Opus 5.5 run
+**Two open questions, flagged rather than decided** (the first since settled, below). *Early-access runs:* this morning's rule "an Opus 5.5 run
 dated before 22 Sep is early access, reject" is not tenable as written — LiveBench's two rows say so explicitly
 (runs of 19 Sep, "held back while the model was in EAP") and Sonar's `high` run is timestamped 21 Sep, but every
 launch-day number (the system card, Cursor, Cognition, Zapier, Artificial Analysis, Vals, FrontierSWE) necessarily
@@ -171,6 +171,14 @@ comes from pre-release evaluation too. The three explicitly dated rows carry an 
 rejected on that ground alone, stays out until the rule is settled. *Source concentration:* Vals AI now supplies
 15 of the groups that measure Opus 5.5 at `max`. Each is a single-rung, bridged benchmark (weight ×0.25 under the
 ladder and bridge factors), but together they are the largest block behind that cell.
+
+**Early-access rule, settled.** A run that its source dates before the model's public release carries an
+`EAP-run` flag and counts for **a third** of a source in the weighted median (`EAPW = 1/3` in `ratio_grid`),
+rather than being rejected. Launch-day numbers that carry no explicit pre-release date (system card, vendor
+leaderboards) are not flagged. That lets **runebench** back in: Opus 5.5 at `medium` (API default, set in its run
+script) and `xhigh`, both run on 18 Sep (per `jobName`), with cost and tokens summed from `tokenUsage` over the
+16 skills and matching the repo's own totals. Five rows are now flagged (LiveBench ×2, Sonar `high`, runebench ×2).
+Effect on Opus 5.5: cost `high` 0.41 → 0.39, `xhigh` 0.64 → 0.67; quality unchanged.
 
 **Rejected, one day in:** CodeRabbit (a token delta against a baseline, no cost, no per-rung tokens), Kingy AI and
 most launch write-ups (they re-cite Anthropic, AA or Cursor), Simon Willison's pelican (only the failed `max` run —

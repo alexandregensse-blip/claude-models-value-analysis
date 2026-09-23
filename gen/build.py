@@ -285,11 +285,13 @@ def ratio_grid(field):
             if r["group"] and not r["group"].startswith("#")]
     bench = collections.defaultdict(dict)                    # benchmark → couple → log(value)
     srcs  = collections.defaultdict(lambda: collections.defaultdict(set))
+    eap   = collections.defaultdict(lambda: collections.defaultdict(set))   # sources whose run was early access
     for r in rows:
         if r["model"] not in CUR: continue
         e, c = eff(r["effort"]), num(r[field])
         if e in EFFOK and c and c > 0:
             n = f'{r["model"]}@{e}'; bench[r["group"]][n] = math.log(c); srcs[r["group"]][n].add(r["source"])
+            if "EAP-run" in r["confound"]: eap[r["group"]][n].add(r["source"])
     for b in [b for b in bench if len(bench[b]) < 2]: del bench[b]   # drop single-couple (circular) benchmarks
     couples = set(c for cv in bench.values() for c in cv)
     def bridged(b): return ANCHOR not in bench[b]
@@ -298,7 +300,8 @@ def ratio_grid(field):
         m = c.split("@")[0]; n = NRUNG.get(m, 5)             # 0.5 for a single rung → 1.0 for the full ladder
         k = sum(1 for x in bench[b] if x.split("@")[0] == m)
         return 1.0 if n == 1 else 0.5 + 0.5*(k-1)/(n-1)
-    def wt(b, c):   return len(srcs[b][c]) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
+    EAPW = 1/3                                               # an early-access (pre-release) run counts for a third
+    def wt(b, c):   return (len(srcs[b][c]) - (1-EAPW)*len(eap[b][c])) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
     def wmedian(pairs):                                      # weighted median of [(value, weight), ...]
         pairs = sorted(pairs); W = sum(w for _, w in pairs)
         if W == 0: return pairs[len(pairs)//2][0]
