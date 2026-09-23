@@ -574,16 +574,23 @@ const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANC
 // Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
 // metric T the windows live in) between adjacent tier centres q* — where one Gaussian window starts to outweigh the next —
 // and the outer bands extend half a gap beyond the first and last centres. They follow the sliders (TIERS is live).
-function drawTierBands(s,Y,mL,iw,mT,ih){
-  const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
-  for(let i=1;i<n;i++) e.push((Tc[i-1]+Tc[i])/2); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2);
-  const g=el("g",{"pointer-events":"none"});
+function tierBandEdges(){ const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
+  for(let i=1;i<n;i++) e.push((Tc[i-1]+Tc[i])/2); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }
+function drawTierBands(s,Y,mL,iw,mT,ih){                                  // translucent fills, drawn UNDER the grid
+  const e=tierBandEdges(), n=TIERS.length, g=el("g",{"pointer-events":"none"});
   TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
     if(yB-yA<1) return;
     g.appendChild(el("rect",{x:mL,y:yA,width:iw,height:yB-yA,fill:TWCOL[i],"fill-opacity":0.10}));
-    if(i<n-1) g.appendChild(el("line",{x1:mL,y1:yA,x2:mL+iw,y2:yA,stroke:TWCOL[i],"stroke-opacity":0.35,"stroke-width":1,"stroke-dasharray":"2 5"}));
-    if(yB-yA>=16){ const tx=el("text",{x:mL+iw-10,y:yB-7,fill:TWCOL[i],"fill-opacity":0.95,"font-size":11.5,"font-weight":700,"text-anchor":"end","letter-spacing":"0.04em"});
-      tx.textContent=t.name; g.appendChild(tx); } });
+    if(i<n-1) g.appendChild(el("line",{x1:mL,y1:yA,x2:mL+iw,y2:yA,stroke:TWCOL[i],"stroke-opacity":0.35,"stroke-width":1,"stroke-dasharray":"2 5"})); });
+  s.appendChild(g);
+}
+function drawTierBandLabels(s,Y,mL,iw,mT,ih){                             // names: left, opaque, ABOVE the grid (paper halo)
+  const e=tierBandEdges(), g=el("g",{"pointer-events":"none"});
+  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
+    if(yB-yA<16) return;
+    const tx=el("text",{x:mL+10,y:yB-7,fill:TWCOL[i],"font-size":11.5,"font-weight":700,"text-anchor":"start","letter-spacing":"0.04em",
+      stroke:cvar('--panel'),"stroke-width":3,"stroke-linejoin":"round","paint-order":"stroke"});
+    tx.textContent=t.name; g.appendChild(tx); });
   s.appendChild(g);
 }
 function drawB(){
@@ -599,11 +606,12 @@ function drawB(){
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
   const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];   // symlog quality axis (dilated near parity 1.0)
   const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
+  if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier fills, under the grid
   logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
     s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
     if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
-  if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier shading, behind everything
   qGrid(s,Y,mL,iw,mT,ih);
+  if(showBands) drawTierBandLabels(s,Y,mL,iw,mT,ih);                     // tier names over the grid
   axisTitle(s,mL+iw/2,H-30,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
   axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
