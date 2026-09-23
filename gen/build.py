@@ -268,9 +268,12 @@ def ratio_grid(field):
                                such bridged benchmarks are down-weighted ×0.5 (indirect anchoring).
          The offset is a nuisance alignment term → MEAN (non-degenerate), not median.
       3. Each benchmark then yields one normalised estimate per couple = exp(log value − offset), with
-         weight = (#independent sources) × (0.5 if bridged) × ladder coverage, where ladder coverage runs
-         linearly from 0.5 (the benchmark measures one rung of that model) to 1.0 (it sweeps the model's full ladder). The global g[couple] is the source-weighted MEDIAN
-         of those estimates (robust to task-complexity outliers); the anchor is pinned to 0 each pass. Iterate.
+         weight = (0.5 if bridged) × ladder coverage × (1/3 if the run is early access), where ladder coverage runs
+         linearly from 0.5 (the benchmark measures one rung of that model) to 1.0 (it sweeps the model's full ladder).
+         DIMINISHING RETURNS PER SOURCE: a source (= publisher) with n measurements of a couple weighs √n in total,
+         shared among them, so a lab publishing 16 benchmarks with one harness counts 4, not 16. Every measurement
+         keeps its own vote. The global g[couple] is the weighted MEDIAN of those estimates (robust to
+         task-complexity outliers); the anchor is pinned to 0 each pass. Iterate.
       4. central = exp(g[couple]) = weighted median; band = **per-side Huber spread**, centred on the median:
          deviations (log estimate − log median) are clipped to ±1.5·MAD, then the lower/upper band = median·exp(∓RMS
          of the clipped negative/positive deviations). This is robust (a wild outlier is capped at 1.5·MAD) yet
@@ -286,8 +289,10 @@ def ratio_grid(field):
     bench = collections.defaultdict(dict)                    # benchmark → couple → log(value)
     srcs  = collections.defaultdict(lambda: collections.defaultdict(set))
     eap   = collections.defaultdict(lambda: collections.defaultdict(set))   # sources whose run was early access
+    PUBLISHER = {"anthropic-chart": "anthropic-syscard"}    # one publisher = one source (Anthropic's own evals)
     for r in rows:
         if r["model"] not in CUR: continue
+        r["source"] = PUBLISHER.get(r["source"], r["source"])
         e, c = eff(r["effort"]), num(r[field])
         if e in EFFOK and c and c > 0:
             n = f'{r["model"]}@{e}'; bench[r["group"]][n] = math.log(c); srcs[r["group"]][n].add(r["source"])
@@ -301,7 +306,14 @@ def ratio_grid(field):
         k = sum(1 for x in bench[b] if x.split("@")[0] == m)
         return 1.0 if n == 1 else 0.5 + 0.5*(k-1)/(n-1)
     EAPW = 1/3                                               # an early-access (pre-release) run counts for a third
-    def wt(b, c):   return (len(srcs[b][c]) - (1-EAPW)*len(eap[b][c])) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
+    def wt(b, c, s): return (EAPW if s in eap[b][c] else 1.0) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
+    def cap(n):     return math.sqrt(n)                      # DIMINISHING RETURNS: a source's n measurements of a couple
+    def votes(c, o):                                         # weigh √n in total (1 → 1, 4 → 2, 10 → 3.2, 36 → 6),
+        per = collections.defaultdict(list)                  # shared among them; each keeps its own vote in the median
+        for b, cv in bench.items():
+            if c in cv:
+                for s in srcs[b][c]: per[s].append((cv[c]-o[b], wt(b, c, s)))
+        return [(x, w*cap(len(v))/len(v)) for v in per.values() for x, w in v]
     def wmedian(pairs):                                      # weighted median of [(value, weight), ...]
         pairs = sorted(pairs); W = sum(w for _, w in pairs)
         if W == 0: return pairs[len(pairs)//2][0]
@@ -313,12 +325,12 @@ def ratio_grid(field):
     g = {c: 0.0 for c in couples}
     for _ in range(800):                                     # alternate offsets (mean) / values (weighted median)
         o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
-        ng = {c: wmedian([(cv[c]-o[b], wt(b,c)) for b, cv in bench.items() if c in cv]) for c in couples}
+        ng = {c: wmedian(votes(c, o)) for c in couples}
         a = ng[ANCHOR]; g = {c: ng[c]-a for c in couples}    # pin anchor to 1.0 (log 0)
     o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
     def cell(n):
         if n not in couples: return None
-        E = [(cv[n]-o[b], wt(b,n)) for b, cv in bench.items() if n in cv]
+        E = votes(n, o)
         med = wmedian(E); c = math.exp(med)                                # central = weighted median (unchanged)
         if len(E) < 2: return [round(c,2), round(c,2), round(c,2)]         # single benchmark → degenerate box
         s   = 1.4826 * wmedian([(abs(l-med), w) for l, w in E]) or 1e-9    # robust scale (MAD)

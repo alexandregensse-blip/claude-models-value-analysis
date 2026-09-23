@@ -228,13 +228,13 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <a class="gh-btn" href="https://github.com/alexandregensse-blip/claude-models-value-analysis" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
       <div class="gh-name">Alexandre Gensse</div>
     </div>
-    <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span> independent measurement sources</div>
+    <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span></div>
     <h1>Cost, effort and model&nbsp;: the Claude matrix</h1>
     <div class="hero-row">
       <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
       <div class="meta meta-side">
         <div><span class="k">Baseline</span><br><b>Opus&nbsp;5 · high&nbsp;= 1.00</b></div>
-        <div><span class="k">Measurement sources</span><br><b><span class="nsrc">…</span> independent</b></div>
+        <div><span class="k">Measurements</span><br><b><span class="nsrc">…</span></b></div>
         <div><span class="k">Generated</span><br><b>23 Sep 2026</b></div>
       </div>
     </div>
@@ -253,7 +253,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="chart-controls" id="ctrlB"></div>
       <div class="legend" id="legendB"></div>
       <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
-      <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to Opus&nbsp;5&nbsp;@high&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. <b>Tier bands</b> (off by default) shade the four usage tiers of the tier picker below&nbsp;: each band is the quality range where that tier's window outweighs its neighbours. <b>Uncertainty ovals</b> (off by default) show each point's robust asymmetric uncertainty — <b>width = cost, height = quality</b>; hover to bring the one under the cursor forward. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
+      <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to Opus&nbsp;5&nbsp;@high&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. <b>Tier bands</b> (off by default) shade the four usage tiers of the tier picker below&nbsp;: each band runs from that tier's target q* up to the next tier's — the qualities that clear its bar but not the next one. <b>Uncertainty ovals</b> (off by default) show each point's robust asymmetric uncertainty — <b>width = cost, height = quality</b>; hover to bring the one under the cursor forward. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
       <h3 class="blocktitle">Pareto Frontier</h3>
@@ -277,7 +277,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
-        <p class="sub">Consolidating the frontier into a decision. <b>Four target complexity levels q*</b> are <b>derived from the data</b>, not fixed: they spread evenly across the frontier's own quality span in the <b>dilated metric</b>, so the bottom tier tracks the weakest couple available and the top tier sits <b>exactly on the best one</b> — as models improve, the windows move with them instead of aiming at a level fixed at some past release. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their centres. For each tier we then pick the Pareto-frontier couple maximising that Gaussian times its <b>value index</b>, with cost raised to a <b>per-tier exponent γ</b> — <b>1.20 · 1.05 · 0.95 · 0.80</b> from throwaway work up to research-grade. Cost does not weigh the same at every complexity&nbsp;: on grunt work you want the cheapest thing that clears the bar, on a hard task a few extra points of capability are worth paying for. γ&nbsp;&gt;&nbsp;1 punishes cost more than proportionally, γ&nbsp;&lt;&nbsp;1 less. Only the <b>selection</b> is tilted&nbsp;: the index shown on a card stays the neutral γ&nbsp;=&nbsp;1 one, so the four cards remain comparable with each other and with the anchor. Cost enters through the index, i.e. in <b>log-cost</b> like everywhere else in this report&nbsp;: a raw quality ÷ cost ratio would be driven almost entirely by cost, which spans a factor 42 across the cloud against 2 for quality. Sliders below override both. The <b>big figure</b> is the pick's <b>value index</b>, the same one used throughout the report&nbsp;: <b>100 = the anchor</b>, Opus&nbsp;5&nbsp;@high, and the value reads as a multiple of it — 350 means <b>3.5× the anchor's value for money</b>. The anchor is read from <b>every</b> couple, dominated ones included, not just the frontier&nbsp;: a new model can push it <b>off</b> the frontier — Opus&nbsp;5.5, which holds the whole frontier, does — but never out of the full set, so the reference survives a release. The <b>crown</b> is chosen on a different criterion, <b>local prominence</b> along the frontier, and shows the same index.</p>
+        <p class="sub">Consolidating the frontier into a decision. <b>Four target complexity levels q*</b> are <b>derived from the data</b>, not fixed: they spread evenly across the frontier's own quality span in the <b>dilated metric</b>, so the bottom tier tracks the weakest couple available and the top tier sits <b>exactly on the best one</b> — as models improve, the windows move with them instead of aiming at a level fixed at some past release. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their centres, below the target. Each window is a <b>half bell</b>&nbsp;: below its target a couple is penalised by the Gaussian, at or above it the couple clears the bar and earns a small bonus that saturates fast (at most +20&nbsp;%), so being better never hurts. For each tier we then pick the Pareto-frontier couple maximising that window times its <b>value index</b>, with cost raised to a <b>per-tier exponent γ</b> — <b>1.20 · 1.05 · 0.95 · 0.80</b> from throwaway work up to research-grade. Cost does not weigh the same at every complexity&nbsp;: on grunt work you want the cheapest thing that clears the bar, on a hard task a few extra points of capability are worth paying for. γ&nbsp;&gt;&nbsp;1 punishes cost more than proportionally, γ&nbsp;&lt;&nbsp;1 less. Only the <b>selection</b> is tilted&nbsp;: the index shown on a card stays the neutral γ&nbsp;=&nbsp;1 one, so the four cards remain comparable with each other and with the anchor. Cost enters through the index, i.e. in <b>log-cost</b> like everywhere else in this report&nbsp;: a raw quality ÷ cost ratio would be driven almost entirely by cost, which spans a factor 28 across the cloud against 2 for quality. Sliders below override both. The <b>big figure</b> is the pick's <b>value index</b>, the same one used throughout the report&nbsp;: <b>100 = the anchor</b>, Opus&nbsp;5&nbsp;@high, and the value reads as a multiple of it — 350 means <b>3.5× the anchor's value for money</b>. The anchor is read from <b>every</b> couple, dominated ones included, not just the frontier&nbsp;: a new model can push it <b>off</b> the frontier — Opus&nbsp;5.5, which holds the whole frontier, does — but never out of the full set, so the reference survives a release. The <b>crown</b> is chosen on a different criterion, <b>local prominence</b> along the frontier, and shows the same index.</p>
         <div class="grid" id="tier-cards"></div>
         <div id="tier-crown"></div>
         <details class="fold">
@@ -293,7 +293,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Normalized Cost Matrix</summary>
       <div class="card pad">
-        <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;5&nbsp;@high&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus&nbsp;5&nbsp;@high, then each cell = the <b>source-weighted median</b> of the per-benchmark estimates (weight = number of sources; bridge ×0.5; ×0.5→1 by how much of the model's effort ladder the benchmark sweeps; ×⅓ for an early-access run). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
+        <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;5&nbsp;@high&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. These values are <b>computed</b> (not hand-entered) from the <b>measured</b> same-task ratios&nbsp;: within each benchmark we take the couple ratios, normalise to Opus&nbsp;5&nbsp;@high, then each cell = the <b>weighted median</b> of the per-benchmark estimates (a source with n measurements weighs √n in total, shared among them; bridge ×0.5; ×0.5→1 by how much of the model's effort ladder the benchmark sweeps; ×⅓ for an early-access run). Intensity = cost; the second figure is the <b>robust CI</b> (per-side Huber ±1.5·MAD, asymmetric&nbsp;; wide = benchmarks disagree).</p>
         <div class="chartbox">
           <table id="matrix-tbl">
             <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Rel. quality<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
@@ -310,7 +310,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
         <div class="grid grid4">
           <div class="card pad crit"><h3>Task type</h3><p>Effort and model choice don't weigh the same depending on the nature of the work — review, reasoning and pure coding reward effort very differently.</p></div>
           <div class="card pad crit"><h3>Complexity</h3><p>The harder the task, the more effort costs — up to the point where extra thinking starts to hurt (the inverted-U).</p></div>
-          <div class="card pad crit"><h3>Generation</h3><p>Each release buys the same quality for less — <b>Opus&nbsp;5.5</b> beats Fable&nbsp;5.1's <em>max</em> quality at its own <em>xhigh</em> effort for a quarter of the cost, <b>Fable&nbsp;5.1</b> beats Fable&nbsp;5's <em>max</em> quality at its own <em>low</em> effort for a fifth of the cost, and <b>Opus&nbsp;5</b> reaches Fable-5-class quality for roughly half the cost per task; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
+          <div class="card pad crit"><h3>Generation</h3><p>Each release buys the same quality for less — <b>Opus&nbsp;5.5</b> beats Fable&nbsp;5.1's <em>max</em> quality at its own <em>high</em> effort for a fifth of the cost, <b>Fable&nbsp;5.1</b> beats Fable&nbsp;5's <em>max</em> quality at its own <em>high</em> effort for about a third of the cost, and <b>Opus&nbsp;5</b> reaches Fable-5-class quality for roughly half the cost per task; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.</p></div>
           <div class="card pad crit"><h3>Cache &amp; harness</h3><p>Two invisible factors — cache-read rate and the surrounding agent harness — that can dominate both cost and score.</p></div>
         </div>
       </div>
@@ -337,12 +337,12 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <summary>How the numbers are built — the method</summary>
       <div class="card pad">
         <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered.</p>
-        <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;5&nbsp;@high</b>, then consolidated into a <b>source-weighted median</b> across benchmarks. The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
+        <p class="sub"><b>In short&nbsp;:</b> we never compare two raw dollar figures across sources — task sizes are incomparable — only <b>ratios measured on the same task</b>, which cancel that variance. Each <b>(model, effort) couple is atomic</b> (no model×effort separability assumed), normalised against the anchor <b>Opus&nbsp;5&nbsp;@high</b>, then consolidated into a <b>weighted median</b> across benchmarks, with <b>diminishing returns per source</b> (a publisher's n measurements weigh √n together). The uncertainty band is the <b>robust (Huber) spread</b> between those benchmarks&nbsp;: tight = agreement, wide = they disagree.</p>
         <h3 class="blocktitle" style="margin-top:1.3em">The full procedure — six steps</h3>
         <ol class="steps">
           <li><b>Same-task ratios only.</b> We never compare two raw dollar figures from different sources — task sizes are incomparable. We keep only sources that measure ≥2 (model,&nbsp;effort) couples <b>on the same task</b>; their <b>ratio</b> cancels the task-size variance.</li>
           <li><b>The (model, effort) couple is atomic.</b> Each node is one indivisible couple. We never assume "effort" has the same effect across models — no model×effort decomposition, because separability would be a false assumption.</li>
-          <li><b>Per-benchmark normalisation → weighted median.</b> Inside each benchmark every couple is divided by the anchor (Opus&nbsp;5&nbsp;@high) when present, else bridged through its shared couples (down-weighted). Each benchmark yields one normalised estimate per couple; the couple's value is the <b>source-weighted median</b> across benchmarks. A benchmark also weighs more for a model the more of that model's <b>effort ladder</b> it sweeps — ×0.5 if it measures a single rung, rising linearly to ×1 for the full ladder&nbsp;: a sweep carries within-model information a one-rung leaderboard entry does not, and without this a benchmark present at one rung only can drag that cell below its neighbour. A run the source dates before the model's public release (early access, possibly not the shipped checkpoint) counts for <b>a third</b> of a source. Single-couple benchmarks are dropped — they would only echo the anchor.</li>
+          <li><b>Per-benchmark normalisation → weighted median.</b> Inside each benchmark every couple is divided by the anchor (Opus&nbsp;5&nbsp;@high) when present, else bridged through its shared couples (down-weighted). Each benchmark yields one normalised estimate per couple; the couple's value is the <b>weighted median</b> across benchmarks. <b>Diminishing returns per source</b>&nbsp;: a source (one publisher — Anthropic's system cards and launch-blog charts are one source) that measures a couple n times weighs <b>√n</b> in total, shared equally among its measurements — one measurement weighs 1, four weigh 2, sixteen weigh 4 — so a lab publishing many benchmarks with one harness cannot outvote everyone else, while each of its measurements still votes. A benchmark also weighs more for a model the more of that model's <b>effort ladder</b> it sweeps — ×0.5 if it measures a single rung, rising linearly to ×1 for the full ladder&nbsp;: a sweep carries within-model information a one-rung leaderboard entry does not, and without this a benchmark present at one rung only can drag that cell below its neighbour. A run the source dates before the model's public release (early access, possibly not the shipped checkpoint) counts for <b>a third</b>. Single-couple benchmarks are dropped — they would only echo the anchor.</li>
           <li><b>"Default" is verified, not assumed.</b> Each source's actual configuration is read from its harness rather than guessed; a ratio is used only when a source applies the <b>same configuration to all its models</b>.</li>
           <li><b>Unlinked couples are flagged, never invented.</b> A couple with no measured edge is left n/a or given an <b>explicitly wide band</b> — one model's effort shape is never used as a template for another.</li>
           <li><b>The band = agreement.</b> Uncertainty is a <b>per-side Huber spread</b> (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it, and asymmetric. Tight agreement → narrow band; disagreement → wide band.</li>
@@ -388,8 +388,8 @@ function solveN(A,b){ const n=b.length, M=A.map((r,i)=>[...r,b[i]]);
 
 // COST & QUALITY grids: relative [central, ci_lo, ci_hi] per (model, effort), anchored ANCHOR = 1.0,
 // computed in build.py (cost_grid / ratio_grid) from measured same-task ratios.
-const COSTGRID={"fable-5.1":{"low":[0.54,0.39,0.76],"medium":[0.78,0.62,0.89],"high":[1.1,0.82,1.43],"xhigh":[1.78,1.25,2.42],"max":[2.58,1.83,3.57]},"fable-5":{"low":[0.78,0.52,1.13],"medium":[1.16,0.79,1.48],"high":[1.48,1.16,1.9],"xhigh":[2.07,1.64,2.54],"max":[2.91,2.23,3.8]},"opus-5.5":{"low":[0.07,0.03,0.22],"medium":[0.24,0.12,0.47],"high":[0.39,0.19,0.58],"xhigh":[0.67,0.43,0.94],"max":[1.49,0.99,2.16]},"opus-5":{"low":[0.4,0.21,0.65],"medium":[0.6,0.52,0.8],"high":[1.0,1.0,1.0],"xhigh":[1.37,1.2,1.6],"max":[1.66,1.31,2.19]},"opus-4.8":{"low":[0.43,0.29,0.69],"medium":[0.58,0.45,0.85],"high":[0.66,0.53,0.92],"xhigh":[1.1,0.85,1.59],"max":[1.58,1.14,2.38]},"sonnet-5":{"low":[0.24,0.11,0.38],"medium":[0.4,0.2,0.61],"high":[0.54,0.36,0.85],"xhigh":[0.76,0.56,1.35],"max":[1.55,0.87,2.54]},"opus-4.7":{"low":[0.4,0.32,0.53],"medium":[0.5,0.44,0.63],"high":[0.8,0.67,1.07],"xhigh":[1.05,0.91,1.19],"max":[1.48,1.19,1.92]},"sonnet-4.6":{"low":[0.28,0.23,0.35],"medium":[0.37,0.3,0.5],"high":[0.53,0.39,0.87],"max":[0.65,0.45,1.02]},"haiku-4.5":{"solo":[0.12,0.07,0.15]}};
-const QUALGRID={"fable-5.1":{"low":[0.96,0.88,1.01],"medium":[1.0,0.95,1.04],"high":[1.02,0.97,1.06],"xhigh":[1.05,1.01,1.11],"max":[1.09,1.03,1.15]},"fable-5":{"low":[0.91,0.84,0.97],"medium":[0.96,0.91,1.01],"high":[0.99,0.95,1.03],"xhigh":[1.0,0.96,1.04],"max":[1.01,0.97,1.05]},"opus-5.5":{"low":[0.91,0.77,1.01],"medium":[1.01,0.92,1.13],"high":[1.07,1.0,1.16],"xhigh":[1.13,1.04,1.23],"max":[1.13,1.04,1.3]},"opus-5":{"low":[0.88,0.77,0.97],"medium":[0.97,0.92,1.01],"high":[1.0,1.0,1.0],"xhigh":[1.02,0.99,1.06],"max":[1.02,1.0,1.06]},"opus-4.8":{"low":[0.76,0.67,0.84],"medium":[0.82,0.75,0.9],"high":[0.85,0.78,0.93],"xhigh":[0.91,0.83,0.96],"max":[0.92,0.85,0.97]},"sonnet-5":{"low":[0.55,0.37,0.72],"medium":[0.67,0.54,0.8],"high":[0.81,0.69,0.9],"xhigh":[0.81,0.65,0.92],"max":[0.86,0.75,0.93]},"opus-4.7":{"low":[0.66,0.59,0.73],"medium":[0.72,0.65,0.77],"high":[0.77,0.72,0.83],"xhigh":[0.78,0.7,0.84],"max":[0.82,0.76,0.9]},"sonnet-4.6":{"low":[0.52,0.34,0.64],"medium":[0.63,0.51,0.69],"high":[0.68,0.6,0.74],"max":[0.68,0.59,0.76]},"haiku-4.5":{"solo":[0.68,0.49,0.79]}};   // {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
+const COSTGRID={"fable-5.1":{"low":[0.62,0.44,0.86],"medium":[0.78,0.61,0.93],"high":[1.1,0.8,1.56],"xhigh":[1.78,1.23,2.57],"max":[2.47,1.76,3.54]},"fable-5":{"low":[0.81,0.58,1.13],"medium":[1.17,0.79,1.47],"high":[1.42,1.12,1.83],"xhigh":[1.85,1.62,2.27],"max":[3.07,2.24,4.09]},"opus-5.5":{"low":[0.11,0.04,0.35],"medium":[0.32,0.14,0.56],"high":[0.5,0.31,0.64],"xhigh":[0.78,0.55,0.96],"max":[1.34,0.97,1.82]},"opus-5":{"low":[0.54,0.34,0.73],"medium":[0.71,0.56,0.9],"high":[1.0,1.0,1.0],"xhigh":[1.35,1.16,1.62],"max":[1.58,1.27,2.17]},"opus-4.8":{"low":[0.51,0.35,0.89],"medium":[0.65,0.48,1.14],"high":[0.75,0.55,1.2],"xhigh":[1.24,0.92,1.97],"max":[1.68,1.22,2.77]},"sonnet-5":{"low":[0.25,0.11,0.4],"medium":[0.4,0.24,0.56],"high":[0.53,0.37,0.75],"xhigh":[0.68,0.54,1.15],"max":[1.43,0.72,2.38]},"opus-4.7":{"low":[0.48,0.33,0.93],"medium":[0.55,0.47,0.86],"high":[0.9,0.74,1.29],"xhigh":[1.11,0.96,1.26],"max":[1.5,1.24,2.02]},"sonnet-4.6":{"low":[0.31,0.23,0.49],"medium":[0.4,0.32,0.63],"high":[0.53,0.41,0.88],"max":[0.69,0.48,1.07]},"haiku-4.5":{"solo":[0.11,0.07,0.15]}};
+const QUALGRID={"fable-5.1":{"low":[0.96,0.88,1.02],"medium":[1.0,0.93,1.06],"high":[1.02,0.97,1.08],"xhigh":[1.05,1.0,1.11],"max":[1.09,1.02,1.16]},"fable-5":{"low":[0.89,0.81,0.97],"medium":[0.95,0.86,1.02],"high":[1.0,0.95,1.04],"xhigh":[1.0,0.94,1.05],"max":[1.01,0.97,1.06]},"opus-5.5":{"low":[0.95,0.83,1.06],"medium":[1.06,0.94,1.23],"high":[1.12,1.02,1.25],"xhigh":[1.15,1.05,1.31],"max":[1.17,1.06,1.34]},"opus-5":{"low":[0.91,0.79,1.0],"medium":[0.97,0.91,1.04],"high":[1.0,1.0,1.0],"xhigh":[1.03,0.98,1.08],"max":[1.02,0.99,1.07]},"opus-4.8":{"low":[0.73,0.63,0.84],"medium":[0.8,0.7,0.89],"high":[0.84,0.77,0.92],"xhigh":[0.84,0.76,0.94],"max":[0.91,0.82,0.97]},"sonnet-5":{"low":[0.53,0.3,0.71],"medium":[0.63,0.45,0.77],"high":[0.79,0.64,0.9],"xhigh":[0.72,0.5,0.89],"max":[0.79,0.6,0.92]},"opus-4.7":{"low":[0.64,0.54,0.73],"medium":[0.69,0.6,0.79],"high":[0.76,0.71,0.8],"xhigh":[0.76,0.68,0.83],"max":[0.82,0.75,0.9]},"sonnet-4.6":{"low":[0.52,0.35,0.6],"medium":[0.57,0.42,0.65],"high":[0.64,0.56,0.71],"max":[0.66,0.57,0.74]},"haiku-4.5":{"solo":[0.64,0.44,0.77]}};   // {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
 
 // Older-model toggle: the grids keep a full copy; hiding a model removes it from every view and every fit
 // (frontier, price curve, tiers, matrix), exactly as if it had not been measured.
@@ -459,7 +459,7 @@ function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("cli
 function hoverTip(s,ells,pts,X,Y,mL,iw){ const DEF=0.15,HOV=0.78;
   const tip=el("g",{"pointer-events":"none",opacity:0}), trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
   const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
-  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU; o.el.setAttribute("opacity",((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
     let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });
@@ -581,8 +581,8 @@ const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANC
 // Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
 // metric T the windows live in) between adjacent tier centres q* — where one Gaussian window starts to outweigh the next —
 // and the outer bands extend half a gap beyond the first and last centres. They follow the sliders (TIERS is live).
-function tierBandEdges(){ const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
-  for(let i=1;i<n;i++) e.push((Tc[i-1]+Tc[i])/2); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }
+function tierBandEdges(){ const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];   // half-bell windows: a tier
+  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }                    // owns [its q*, next q*)
 function drawTierBands(s,Y,mL,iw,mT,ih){                                  // translucent fills, drawn UNDER the grid
   const e=tierBandEdges(), n=TIERS.length, g=el("g",{"pointer-events":"none"});
   TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
@@ -700,7 +700,7 @@ function drawPareto(){
   pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
     s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
   // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line
-  const cap=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const cap=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   const ppix=par.map(p=>({x:X(p.c),y:Y(p.q)})), segs=[];   // anti-collision considers ONLY frontier points (faded/dominated ignored)
   for(let i=0;i<par.length-1;i++) segs.push([X(par[i].c),Y(par[i].q),X(par[i+1].c),Y(par[i+1].q)]);
   const labs=par.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+cap(p.e)}`, w=t.length*7.2+8;
@@ -718,7 +718,7 @@ function drawPareto(){
 // ---- Value-score table : distance of each couple to the fitted Pareto-frontier envelope (from drawPareto) ----
 function fillScoreTable(scored){
   const tb=document.querySelector("#score-tbl tbody"); if(!tb) return; tb.innerHTML="";
-  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   scored.filter(p=>p.front).slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),   // frontier couples only
     // Intensity from the DECADE distance to the anchor, so 2× and 0.5× read equally strong; capped at one decade.
     sc=p.score>=100?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(Math.log10(p.score/100)),1)*0.52)*100),
@@ -737,6 +737,12 @@ function fillScoreTable(scored){
 // q = target complexity, sig = Gaussian width — BOTH live-adjustable via the tuner (drawTierTuner); the proximity
 // is measured in the DILATED metric T(q) (same transform as the fit & the value score), so the windows are consistent
 // with the chart. TWCOL = one colour per tier window.
+// HALF-BELL window: below its target a couple is penalised by the Gaussian as before; at or above it the couple clears
+// the bar and earns a small bonus that saturates fast — 1 + BONUS·(1 − e^(−Δ/τ)), Δ = how far above q* in the dilated
+// metric, τ = σ/2 — so being better never hurts, and helps only a little. Capped at 1 + BONUS.
+const TIER_BONUS=0.20;
+function tierWeight(q,t){ const d=(symT(q)-symT(t.q))/t.sig;
+  return d<0 ? Math.exp(-d*d) : 1+TIER_BONUS*(1-Math.exp(-2*d)); }
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 // q and sig below are PLACEHOLDERS — tierDefaults() overwrites both from the data on load (see there).
 const TIERS=[
@@ -800,7 +806,7 @@ function tierPicks(){
   // cost more than proportionally, gam < 1 less. Only the SELECTION is tilted — the index a card displays stays the
   // neutral gam = 1 one, so the four cards remain comparable with each other and with the anchor.
   front.forEach(p=>p.P=valueParts(gevT,p));
-  const tscore=(p,t)=>K(p.q,t.q,t.sig)*Math.pow(10,p.P.G-t.gam*p.P.C);
+  const tscore=(p,t)=>tierWeight(p.q,t)*Math.pow(10,p.P.G-t.gam*p.P.C);
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> tscore(b,t) > tscore(a,t) ? b : a)}));
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
   const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
@@ -808,7 +814,7 @@ function tierPicks(){
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
-  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
   // noQ → header-mirror cards & the top crown: drop the "Q* …" prefix, keep the full card layout
   const cardHTML=(q,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
@@ -854,7 +860,7 @@ function drawTierWindows(){
   const ticks=[]; for(let v=Math.ceil(qmn*10)/10; v<=qmx+1e-9; v=Math.round((v+0.1)*10)/10) ticks.push(v);
   ticks.forEach(v=>{ const x=X(v); svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${v.toFixed(1)}</text>`; });
   TIERS.forEach((t,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
-    for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=Math.exp(-Math.pow((symT(q)-symT(t.q))/t.sig,2)); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
+    for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=tierWeight(q,t)/(1+TIER_BONUS); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
     d+=` L ${mL+iw} ${mT+ih} Z`;
     svg+=`<path d="${d}" fill="${col}" fill-opacity="0.13" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
        +`<line x1="${X(t.q)}" y1="${mT}" x2="${X(t.q)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
@@ -973,9 +979,11 @@ function zoomable(svg){
 function fillMeta(){   // all source counts + the footer source list derive from the (generated) GROUPS — nothing hand-typed
   const curNode=x=>{const m=x.split("@")[0];return GMODEL[m]&&GMODEL[m].cur;};
   const curGroups=GROUPS.filter(g=>g.n.some(curNode));
-  const nSrc=curGroups.length;   // count == what is actually listed (benchmarks touching current models)
-  document.querySelectorAll(".nsrc").forEach(e=>e.textContent=nSrc);
-  const et=document.getElementById("edge-title"); if(et) et.textContent=`The ${curGroups.length} sources that weave the links`;
+  const pub=s=>s==="anthropic-chart"?"anthropic-syscard":s;        // one publisher = one source (mirrors PUBLISHER in build.py)
+  const nSrc=new Set(curGroups.map(g=>pub(g.s))).size;              // independent sources
+  const nMeas=curGroups.reduce((a,g)=>a+g.n.filter(curNode).length,0);   // measured (model, effort) points
+  document.querySelectorAll(".nsrc").forEach(e=>e.textContent=`${nSrc} sources · ${curGroups.length} benchmarks · ${nMeas} measurements`);
+  const et=document.getElementById("edge-title"); if(et) et.textContent=`The ${curGroups.length} benchmarks (${nSrc} sources, ${nMeas} measurements) that weave the links`;
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }

@@ -99,7 +99,7 @@ function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("cli
 function hoverTip(s,ells,pts,X,Y,mL,iw){ const DEF=0.15,HOV=0.78;
   const tip=el("g",{"pointer-events":"none",opacity:0}), trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
   const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
-  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU; o.el.setAttribute("opacity",((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
     let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });
@@ -221,8 +221,8 @@ const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANC
 // Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
 // metric T the windows live in) between adjacent tier centres q* — where one Gaussian window starts to outweigh the next —
 // and the outer bands extend half a gap beyond the first and last centres. They follow the sliders (TIERS is live).
-function tierBandEdges(){ const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
-  for(let i=1;i<n;i++) e.push((Tc[i-1]+Tc[i])/2); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }
+function tierBandEdges(){ const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];   // half-bell windows: a tier
+  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }                    // owns [its q*, next q*)
 function drawTierBands(s,Y,mL,iw,mT,ih){                                  // translucent fills, drawn UNDER the grid
   const e=tierBandEdges(), n=TIERS.length, g=el("g",{"pointer-events":"none"});
   TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
@@ -340,7 +340,7 @@ function drawPareto(){
   pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
     s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
   // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line
-  const cap=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const cap=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   const ppix=par.map(p=>({x:X(p.c),y:Y(p.q)})), segs=[];   // anti-collision considers ONLY frontier points (faded/dominated ignored)
   for(let i=0;i<par.length-1;i++) segs.push([X(par[i].c),Y(par[i].q),X(par[i+1].c),Y(par[i+1].q)]);
   const labs=par.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+cap(p.e)}`, w=t.length*7.2+8;
@@ -358,7 +358,7 @@ function drawPareto(){
 // ---- Value-score table : distance of each couple to the fitted Pareto-frontier envelope (from drawPareto) ----
 function fillScoreTable(scored){
   const tb=document.querySelector("#score-tbl tbody"); if(!tb) return; tb.innerHTML="";
-  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   scored.filter(p=>p.front).slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),   // frontier couples only
     // Intensity from the DECADE distance to the anchor, so 2× and 0.5× read equally strong; capped at one decade.
     sc=p.score>=100?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(Math.log10(p.score/100)),1)*0.52)*100),
@@ -377,6 +377,12 @@ function fillScoreTable(scored){
 // q = target complexity, sig = Gaussian width — BOTH live-adjustable via the tuner (drawTierTuner); the proximity
 // is measured in the DILATED metric T(q) (same transform as the fit & the value score), so the windows are consistent
 // with the chart. TWCOL = one colour per tier window.
+// HALF-BELL window: below its target a couple is penalised by the Gaussian as before; at or above it the couple clears
+// the bar and earns a small bonus that saturates fast — 1 + BONUS·(1 − e^(−Δ/τ)), Δ = how far above q* in the dilated
+// metric, τ = σ/2 — so being better never hurts, and helps only a little. Capped at 1 + BONUS.
+const TIER_BONUS=0.20;
+function tierWeight(q,t){ const d=(symT(q)-symT(t.q))/t.sig;
+  return d<0 ? Math.exp(-d*d) : 1+TIER_BONUS*(1-Math.exp(-2*d)); }
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
 // q and sig below are PLACEHOLDERS — tierDefaults() overwrites both from the data on load (see there).
 const TIERS=[
@@ -440,7 +446,7 @@ function tierPicks(){
   // cost more than proportionally, gam < 1 less. Only the SELECTION is tilted — the index a card displays stays the
   // neutral gam = 1 one, so the four cards remain comparable with each other and with the anchor.
   front.forEach(p=>p.P=valueParts(gevT,p));
-  const tscore=(p,t)=>K(p.q,t.q,t.sig)*Math.pow(10,p.P.G-t.gam*p.P.C);
+  const tscore=(p,t)=>tierWeight(p.q,t)*Math.pow(10,p.P.G-t.gam*p.P.C);
   const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> tscore(b,t) > tscore(a,t) ? b : a)}));
   const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
   const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
@@ -448,7 +454,7 @@ function tierPicks(){
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
-  const capE=e=>e==="solo"?"solo":e.charAt(0).toUpperCase()+e.slice(1);
+  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
   // noQ → header-mirror cards & the top crown: drop the "Q* …" prefix, keep the full card layout
   const cardHTML=(q,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
@@ -494,7 +500,7 @@ function drawTierWindows(){
   const ticks=[]; for(let v=Math.ceil(qmn*10)/10; v<=qmx+1e-9; v=Math.round((v+0.1)*10)/10) ticks.push(v);
   ticks.forEach(v=>{ const x=X(v); svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${v.toFixed(1)}</text>`; });
   TIERS.forEach((t,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
-    for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=Math.exp(-Math.pow((symT(q)-symT(t.q))/t.sig,2)); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
+    for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=tierWeight(q,t)/(1+TIER_BONUS); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
     d+=` L ${mL+iw} ${mT+ih} Z`;
     svg+=`<path d="${d}" fill="${col}" fill-opacity="0.13" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
        +`<line x1="${X(t.q)}" y1="${mT}" x2="${X(t.q)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
@@ -613,9 +619,11 @@ function zoomable(svg){
 function fillMeta(){   // all source counts + the footer source list derive from the (generated) GROUPS — nothing hand-typed
   const curNode=x=>{const m=x.split("@")[0];return GMODEL[m]&&GMODEL[m].cur;};
   const curGroups=GROUPS.filter(g=>g.n.some(curNode));
-  const nSrc=curGroups.length;   // count == what is actually listed (benchmarks touching current models)
-  document.querySelectorAll(".nsrc").forEach(e=>e.textContent=nSrc);
-  const et=document.getElementById("edge-title"); if(et) et.textContent=`The ${curGroups.length} sources that weave the links`;
+  const pub=s=>s==="anthropic-chart"?"anthropic-syscard":s;        // one publisher = one source (mirrors PUBLISHER in build.py)
+  const nSrc=new Set(curGroups.map(g=>pub(g.s))).size;              // independent sources
+  const nMeas=curGroups.reduce((a,g)=>a+g.n.filter(curNode).length,0);   // measured (model, effort) points
+  document.querySelectorAll(".nsrc").forEach(e=>e.textContent=`${nSrc} sources · ${curGroups.length} benchmarks · ${nMeas} measurements`);
+  const et=document.getElementById("edge-title"); if(et) et.textContent=`The ${curGroups.length} benchmarks (${nSrc} sources, ${nMeas} measurements) that weave the links`;
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
