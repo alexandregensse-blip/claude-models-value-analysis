@@ -9,7 +9,7 @@ const MODELS = {
   "sonnet-4.6":{label:"Sonnet 4.6",c:"--sonnet46"},
   "haiku-4.5": {label:"Haiku 4.5", c:"--haiku45"},
 };
-const ANCHOR={m:"opus-5",e:"high",label:"Opus 5 @high"};      // the couple pinned to 1.0 (and to 100 on the value index)
+const ANCHOR=__ANCHOR_JS__;      // the couple pinned to 1.0 (and to 100 on the value index)
 const LEGACY=["opus-4.7","sonnet-4.6"];                         // older models: hidden unless the reader turns them on
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
@@ -39,7 +39,7 @@ function applyLegacy(){ LEGACY.forEach(m=>{ if(showLegacy){ if(GRID_ALL.cost[m])
   else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }
 const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));
 const legacyChip=()=>`<button type="button" class="lg-toggle" aria-pressed="${showLegacy}" onclick="toggleLegacy()">${showLegacy?"Hide":"Show"} older models <span class="lg-sub">Opus 4.7 · Sonnet 4.6</span></button>`;
-function toggleLegacy(){ showLegacy=!showLegacy; try{ localStorage.setItem("showLegacy",showLegacy?"1":"0"); }catch(e){} applyLegacy(); renderAll(); }
+function toggleLegacy(){ showLegacy=!showLegacy; try{ localStorage.setItem("showLegacy",showLegacy?"1":"0"); }catch(e){} applyLegacy(); tierDefaults(); renderAll(); }
 applyLegacy();
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
@@ -415,7 +415,7 @@ function drawTiers(){
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model" style="color:${col}"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price curve, exponentiated against the anchor&nbsp;: <b>100 = Opus&nbsp;4.8&nbsp;@medium</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
+      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price curve, exponentiated against the anchor&nbsp;: <b>100 = ${ANCHOR.label.replace(/ /g,"&nbsp;")}</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)

@@ -429,6 +429,11 @@ def main():
     app  = app.replace("__CONS_DATA__", json.dumps(CONS, separators=(",",":")))
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
     app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
+    am, ae = GRID_ANCHOR.split("@")
+    alabel = {"opus-5.5":"Opus 5.5","opus-5":"Opus 5","opus-4.8":"Opus 4.8","fable-5.1":"Fable 5.1","fable-5":"Fable 5","sonnet-5":"Sonnet 5"}[am]
+    app  = app.replace("__ANCHOR_JS__", json.dumps({"m": am, "e": ae, "label": f"{alabel} @{ae}"}))
+    body = body.replace("__ANCHOR_HDR__", f"{alabel.replace(' ','&nbsp;')} · {ae}")
+    body = body.replace("__ANCHOR__", f"{alabel.replace(' ','&nbsp;')}&nbsp;@{ae}")
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
     body = body.replace("__NSAMETASK__", str(len(RD["cost"])))   # same-task cost-ratio measurement points (dynamic)
