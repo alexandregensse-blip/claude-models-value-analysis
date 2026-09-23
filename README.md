@@ -8,13 +8,13 @@ Open [`index.html`](index.html) in a browser — fully self-contained (no server
 
 **Live page:** the report is published with GitHub Pages. To enable it on a fork, go to *Settings → Pages → Source: Deploy from a branch → `main` / root*; the site is then served at `https://<user>.github.io/claude-models-value-analysis/` (the build writes `index.html` at the repo root, so it loads directly). Exploratory blocks (value score, window tuner, full method) are collapsed by default; click to expand.
 
-Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 4.8 @medium = 1.00** — deliberately unchanged across releases so the numbers stay comparable with earlier snapshots (see the git tags).
+Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 5 @high = 1.00** since 23 Sep 2026 (it was Opus 4.8 @medium up to tag `v2026.09.23` — see *Re-anchoring on Opus 5 @high* below; the git tags reproduce each earlier scale). Opus 4.7 and Sonnet 4.6 stay in the data but are hidden on the page by default (an *Older models* switch brings them back).
 
 ---
 
 ## What the report shows
 
-1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 4.8 @medium = 1.0). Robust uncertainty ovals. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
+1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart. Robust uncertainty ovals. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
 2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell a source-weighted median with a robust CI.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
 4. **Method** — how the numbers and the uncertainty band are built.
@@ -25,7 +25,7 @@ You cannot compare raw dollars across sources (task sizes differ), so:
 
 1. **Same-task ratios only.** Keep sources that measured ≥2 `(model, effort)` couples *on the same task*; their ratio cancels task-size variance.
 2. **The `(model, effort)` couple is atomic** — no `model × effort` separability is assumed.
-3. **Per-benchmark normalisation → source-weighted median.** Within each benchmark, divide by the anchor (Opus 4.8 @medium) or bridge through shared couples; each cell is the weighted median across benchmarks.
+3. **Per-benchmark normalisation → source-weighted median.** Within each benchmark, divide by the anchor (Opus 5 @high) or bridge through shared couples; weight each benchmark by source count, ×0.5 if bridged, and ×0.5→1 by how much of the model's effort ladder it sweeps; each cell is the weighted median across benchmarks.
 4. **Robust CI** — a per-side Huber spread (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it.
 
 Value scores add a second layer, all computed client-side from the grids: a price-envelope fit (`log₁₀ cost = g(quality)`), a signed cost-distance score, its local prominence along the frontier, and the tier picks — all **uncertainty-aware** (each couple enters as its centre plus its four CI extremities).
@@ -55,17 +55,41 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.09.21` | 21 Sep 2026 | sixth pass — five parallel source sweeps (leaderboards, preprints, public code, forums, vendors). The find is not a new source but an under-read one: **Cognition's FrontierCode JSON carries eight Claude models and the repo had ingested three**, so Opus 4.8, Sonnet 5, Opus 4.7 and Sonnet 4.6 join both v1.1 subsets and the v1 extended subset opens as its own group. The same JSON proves `scfrontiercode` — digitized off the Sonnet 5 card — *is* FrontierCode v1 main, and its Sonnet 4.6 costs were 8–11 % off; those rows are replaced with primaries. Adds **CursorBench 4.0** (a harder suite shipped 10 Sep) and the four missing **Terminal-Bench 4.0** effort rungs, both re-extracted from their own payloads. Mean cost band **2.016× → 1.811×**: Sonnet 4.6 `low` 3.36× → 1.19×, `medium` 1.83× → 1.08×, Opus 4.7 `xhigh` 1.53× → 1.16× — 1149 measured rows, 93 sources, 174 comparison groups |
 | `v2026.09.23` | 23 Sep 2026 | adds **Opus 5.5** (released 22 Sep 2026): six primaries (Cognition FrontierCode JSON, CursorBench 4.0, Zapier AutomationBench, Artificial Analysis v4.3 plus its GDPval-AA / AutomationBench-AA ladders, Vals Index and Terminal-Bench 2.1, FrontierSWE), **Sonar**'s Java leaderboard (measured tokens, new source) and ten system-card sweeps (HLE ± tools, ArXivMath ± tools, DRACO, WANDR, OSWorld 2.0, BenchCAD, Chartography). Zapier and AA were under-read: Opus 4.8, Opus 4.7, Sonnet 5, Sonnet 4.6 and Haiku 4.5 ladders added. **Method change**: each benchmark's weight for a model scales with the share of that model's effort ladder it sweeps (×0.5 one rung → ×1 full ladder). Opus 5.5 holds the whole Pareto frontier — 1390 measured rows, 94 sources, 183 comparison groups |
 
+### Re-anchoring on Opus 5 @high
+
+The scale had been pinned to **Opus 4.8 @medium** since the first snapshot, deliberately, so numbers stayed
+comparable across releases. Three releases later that couple had become a poor reference: it sat low on the
+quality axis (the whole frontier read 1.1–1.5×) and only **28 of 114** benchmarks measure it, so three quarters of
+them were normalised through bridges, at half weight. **Opus 5 @high** is measured directly by **60 of 114** — the
+best-linked couple in the dataset once Opus 4.7 and Sonnet 4.6 are set aside — and it is Opus 5's default effort,
+the baseline Anthropic's own "40 % cheaper" claim for Opus 5.5 is stated against. The frontier now reads
+0.87–1.13× in quality.
+
+This is **not a pure rescale**. Which benchmarks are anchored directly, and which are bridged, changes with the
+anchor, so the weights change and a few relations move: Opus 4.8 @medium now costs 0.57× Opus 5 @high, where the old
+grid had the inverse at 1.55× (0.65×). The residual Opus 5 `xhigh` > `max` quality inversion disappears (both
+1.02×) — a side effect, not a goal. The mean cost band is 2.103×. Every anchor mention on the page is generated
+from one setting (`GRID_ANCHOR` in `gen/build.py`), so a future move is one line. Sections of this README written
+before this change quote the old scale.
+
+The page also gained two display switches, both off by default: **Older models** (Opus 4.7, Sonnet 4.6 — hidden
+from every view and fit, exactly as if unmeasured; neither touches the frontier today) and **Tier bands** on the
+Quality-vs-Cost chart (each band is the quality range where one usage tier's window outweighs its neighbours;
+edges sit midway, in the chart's dilated metric, between adjacent tier centres, and follow the tier sliders).
+
 ### Opus 5.5, in one line
 
 Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **is the whole Pareto frontier**: all five
-of its rungs are on it, and nothing else is. Its `high` rung (quality 1.33×, cost 0.44×) matches Fable 5.1 at `max`
-(1.33× for 3.50×) for an eighth of the cost, and its `low` (1.10× for 0.11×) undercuts Haiku 4.5 on cost while
-scoring well above it. The price cut is 20 %; the rest of the gain is fewer tokens for the same work.
+of its rungs are on it, and nothing else is. On the current scale (Opus 5 @high = 1.00) its `xhigh` rung (quality
+1.10×, cost 0.64×) beats Fable 5.1 at `max` (1.08× for 2.58×) for a quarter of the cost, its `high` comes within 1 %
+of it for a ninth, and its `low` (0.87× for 0.07×) undercuts Haiku 4.5 (0.10×) on cost while scoring far above it
+(0.44×). Its default `medium` sits at Opus 5's own default quality (1.01×) for 22 % of the cost. The price cut is
+20 %; the rest of the gain is fewer tokens for the same work.
 
-| Opus 5.5 | low | medium | high | xhigh | max |
+| Opus 5.5 (Opus 5 @high = 1.00) | low | medium | high | xhigh | max |
 |---|---|---|---|---|---|
-| relative cost | 0.11 | 0.31 | 0.44 | 0.80 | 1.73 |
-| relative quality | 1.10 | 1.28 | 1.33 | 1.45 | 1.47 |
+| relative cost | 0.07 | 0.22 | 0.29 | 0.64 | 1.33 |
+| relative quality | 0.87 | 1.01 | 1.07 | 1.10 | 1.13 |
 
 **Where the numbers come from.** 95 rows across 22 groups, one day after launch. Independent primaries
 already carry it: **Cognition's FrontierCode** JSON (both v1.1 subsets — the card's figures 8.4.A/B are read
@@ -90,7 +114,7 @@ where they meet the rest of that run's costs, and the re-graded scores form a qu
 (`sc55chartq`); nothing is counted twice and no two gradings are mixed.
 
 **Under-read sources, again.** Zapier's page bundle carries **every** Claude model's effort ladder, and the
-repo had taken three; Opus 4.8 (the anchor model), Opus 4.7, Sonnet 5, Sonnet 4.6 and Haiku 4.5 join
+repo had taken three; Opus 4.8 (then the anchor model), Opus 4.7, Sonnet 5, Sonnet 4.6 and Haiku 4.5 join
 `zapierab` — except Haiku 4.5's *score*, 0.46 % (3 of 657 tasks): a metric at its floor cannot segment models any
 more than a saturated one can, so it is left blank and the cost kept, the rule already applied to saturated
 harnesses (it would otherwise have dragged Haiku's quality from 0.52× to 0.16×). Artificial Analysis likewise carried Sonnet 5's full ladder plus Opus 4.8 and Sonnet 4.6 at max
@@ -117,7 +141,7 @@ inversion is left as the data give it — **Opus 5 quality `xhigh` 1.27 vs `max`
 `max` ahead in 25 of the 37 benchmarks measuring both.
 
 **The bands widened, and that is the expected direction.** Mean cost band 1.831× → 2.071× (1.964× leaving
-Opus 5.5 out). Opus 5.5 is wide at the bottom of its ladder — its `low` band
+Opus 5.5 out; both on the old Opus 4.8 @medium scale). Opus 5.5 is wide at the bottom of its ladder — its `low` band
 spans 4.6× (0.05–0.23): the benchmarks disagree most about how cheap its cheapest rung is — and the new Zapier and AA ladders widen
 Sonnet 5 and Haiku 4.5, whose cost cells had rested on fewer, more agreeable sources.
 
