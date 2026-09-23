@@ -15,7 +15,7 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 ## What the report shows
 
 1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart. Robust uncertainty ovals. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
-2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell a source-weighted median with a robust CI.
+2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell a weighted median across sources (one vote per source) with a robust CI.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
 4. **Method** — how the numbers and the uncertainty band are built.
 
@@ -25,7 +25,7 @@ You cannot compare raw dollars across sources (task sizes differ), so:
 
 1. **Same-task ratios only.** Keep sources that measured ≥2 `(model, effort)` couples *on the same task*; their ratio cancels task-size variance.
 2. **The `(model, effort)` couple is atomic** — no `model × effort` separability is assumed.
-3. **Per-benchmark normalisation → source-weighted median.** Within each benchmark, divide by the anchor (Opus 5 @high) or bridge through shared couples; weight each benchmark by source count, ×0.5 if bridged, ×0.5→1 by how much of the model's effort ladder it sweeps, and ×⅓ for a run dated before the model's release (early access); each cell is the weighted median across benchmarks.
+3. **Per-benchmark normalisation → merge per source → weighted median across sources.** Within each benchmark, divide by the anchor (Opus 5 @high) or bridge through shared couples; weight each benchmark ×0.5 if bridged, ×0.5→1 by how much of the model's effort ladder it sweeps, and ×⅓ for a run dated before the model's release (early access). Each source's benchmarks are then merged into one estimate per couple (their weighted median, weighted by their mean weight), so a source votes once however many benchmarks it publishes; each cell is the weighted median across sources.
 4. **Robust CI** — a per-side Huber spread (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it.
 
 Value scores add a second layer, all computed client-side from the grids: a price-envelope fit (`log₁₀ cost = g(quality)`), a signed cost-distance score, its local prominence along the frontier, and the tier picks — all **uncertainty-aware** (each couple enters as its centre plus its four CI extremities).
@@ -81,17 +81,19 @@ edges sit midway, in the chart's dilated metric, between adjacent tier centres, 
 
 ### Opus 5.5, in one line
 
-Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **is the whole Pareto frontier** below its
-top rung: `low`, `medium`, `high` and `xhigh` are on it and nothing else is, while `max` is dominated by its own
-`xhigh` (same quality, 1.13×, for less than half the cost). On the current scale (Opus 5 @high = 1.00) its `xhigh`
-(quality 1.13×, cost 0.67×) beats Fable 5.1 at `max` (1.09× for 2.58×) for a quarter of the cost, its `high` comes
-within 2 % of it for a sixth, and its `low` (0.91× for 0.07×) undercuts Haiku 4.5 (0.10×) on cost while scoring far
-above it (0.44×). Its default `medium` sits at Opus 5's own default quality (1.01×) for a quarter of the cost.
+Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **holds the Pareto frontier**: all five
+rungs are on it, and the only other point left is Haiku 4.5 (0.11× for 0.56×), cheaper than Opus 5.5 `low` by a quarter
+but far below it in quality. On the current scale (Opus 5 @high = 1.00) its `high` (quality 1.12×, cost 0.51×) beats
+Fable 5.1 at `max` (1.06× for 2.44×) for a fifth of the cost, its default `medium` (1.06× for 0.40×) beats Opus 5's
+default `high` for 40 % of its cost, and `max` is its best rung (1.21×) at 1.49×.
 
 | Opus 5.5 (Opus 5 @high = 1.00) | low | medium | high | xhigh | max |
 |---|---|---|---|---|---|
-| relative cost | 0.07 | 0.24 | 0.39 | 0.67 | 1.49 |
-| relative quality | 0.91 | 1.01 | 1.07 | 1.13 | 1.13 |
+| relative cost | 0.15 | 0.40 | 0.51 | 0.78 | 1.49 |
+| relative quality | 0.98 | 1.06 | 1.12 | 1.17 | 1.21 |
+
+These values follow the per-source merge (see *Sources vote, not benchmarks*, below); under the earlier
+per-benchmark vote they were 0.07 / 0.24 / 0.39 / 0.67 / 1.49 in cost and 0.91 / 1.01 / 1.07 / 1.13 / 1.13 in quality.
 
 **Where the numbers come from.** 95 rows across 22 groups, one day after launch. Independent primaries
 already carry it: **Cognition's FrontierCode** JSON (both v1.1 subsets — the card's figures 8.4.A/B are read
@@ -163,7 +165,7 @@ Cognition's v1.1 main subset (the same run as `fcodemain`, only a different scor
 resumed sessions, inconsistent token fields), Vals ProofBench (saturated) and a round of forum posts with no
 measurement. Mean cost band 2.164×.
 
-**Two open questions, flagged rather than decided** (the first since settled, below). *Early-access runs:* this morning's rule "an Opus 5.5 run
+**Two open questions, flagged rather than decided** (both since settled, below). *Early-access runs:* this morning's rule "an Opus 5.5 run
 dated before 22 Sep is early access, reject" is not tenable as written — LiveBench's two rows say so explicitly
 (runs of 19 Sep, "held back while the model was in EAP") and Sonar's `high` run is timestamped 21 Sep, but every
 launch-day number (the system card, Cursor, Cognition, Zapier, Artificial Analysis, Vals, FrontierSWE) necessarily
@@ -179,6 +181,25 @@ leaderboards) are not flagged. That lets **runebench** back in: Opus 5.5 at `med
 script) and `xhigh`, both run on 18 Sep (per `jobName`), with cost and tokens summed from `tokenUsage` over the
 16 skills and matching the repo's own totals. Five rows are now flagged (LiveBench ×2, Sonar `high`, runebench ×2).
 Effect on Opus 5.5: cost `high` 0.41 → 0.39, `xhigh` 0.64 → 0.67; quality unchanged.
+
+**Sources vote, not benchmarks (method change).** Until now each benchmark voted in the weighted median, its
+weight counting the sources that measure it. A source publishing many benchmarks with one harness thus voted many
+times: behind Opus 5.5, the Anthropic system card held 9 of the 18–22 benchmarks at every rung from `low` to `xhigh`,
+and Vals AI 15 of the 35 at `max`. Each source's benchmarks are now **merged first** into one estimate per couple
+(their weighted median, with the ladder, bridge and early-access factors), and that merged estimate enters the
+cross-source median with the **mean** weight of its benchmarks — one vote per source, which settles the source-concentration question above. The uncertainty band is now the
+spread between sources. For Opus 5.5 that means 7–11 source votes per rung (from 18–22 measurements) and 10 at `max`
+(from 35 measurements), instead of one vote per measurement. "Source" means publisher: Anthropic's launch-blog chart
+(`anthropic-chart`, one OSWorld sweep) and its system cards (`anthropic-syscard`) are one source, Anthropic's own evals.
+
+Effect: Opus 5.5 costs more at the low rungs (the system card, which showed it cheapest there, now weighs one vote)
+and scores higher everywhere; its `max` is no longer dominated. Haiku 4.5 returns to the frontier. Fewer votes per
+cell also exposes five effort-ladder inversions the per-benchmark vote had averaged away — Opus 4.8 cost `medium` >
+`high` (0.89 > 0.81); quality Opus 5 `xhigh` > `max` (1.03 > 1.02), Sonnet 5 `high` > `xhigh` > `max`
+(0.78 > 0.71 > 0.59), Opus 4.7 `high` > `xhigh` (0.71 > 0.70). They are
+reported by the build and left as measured: the method is set on principle, not tuned until they disappear.
+The page header now counts sources, benchmarks and measurements separately (it used to call benchmarks "sources"):
+91 sources · 191 benchmarks · 1447 measurements on the current models.
 
 **Rejected, one day in:** CodeRabbit (a token delta against a baseline, no cost, no per-rung tokens), Kingy AI and
 most launch write-ups (they re-cite Anthropic, AA or Cursor), Simon Willison's pelican (only the failed `max` run —
