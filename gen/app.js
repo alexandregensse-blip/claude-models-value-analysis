@@ -224,11 +224,23 @@ function drawTierBands(s,Y,mL,iw,mT,ih){                                  // tra
     if(i<n-1) g.appendChild(el("line",{x1:mL,y1:yA,x2:mL+iw,y2:yA,stroke:TWCOL[i],"stroke-opacity":0.35,"stroke-width":1,"stroke-dasharray":"2 5"})); });
   s.appendChild(g);
 }
+// Same hue, equal PERCEIVED lightness (OKLab L): the four tier colours differ in lightness (0.48–0.68), which made two
+// labels look heavier than the others. Labels are re-lit to one L per theme; chroma shrinks if the result leaves sRGB.
+function atLightness(hex,L){
+  const toLin=c=>{c/=255;return c<=0.04045?c/12.92:((c+0.055)/1.055)**2.4}, toS=c=>{c=Math.max(0,Math.min(1,c));return Math.round(255*(c<=0.0031308?12.92*c:1.055*c**(1/2.4)-0.055))};
+  const [R,G,B]=[1,3,5].map(i=>toLin(parseInt(hex.slice(i,i+2),16)));
+  const l=Math.cbrt(0.4122214708*R+0.5363137081*G+0.0514459929*B), m=Math.cbrt(0.2119034982*R+0.6806995451*G+0.1073969566*B), q=Math.cbrt(0.0883024619*R+0.2817188376*G+0.6299787005*B);
+  const a=1.9779984951*l-2.4285922050*m+0.4505937099*q, b=0.0259040371*l+0.7827717662*m-0.8086757660*q;
+  for(let k=1;k>=0;k-=0.05){ const A=a*k, Bb=b*k, l2=(L+0.3963377774*A+0.2158037573*Bb)**3, m2=(L-0.1055613458*A-0.0638541728*Bb)**3, s2=(L-0.0894841775*A-1.2914855480*Bb)**3;
+    const rgb=[4.0767416621*l2-3.3077115913*m2+0.2309699292*s2, -1.2684380046*l2+2.6097574011*m2-0.3413193965*s2, -0.0041960863*l2-0.7034186147*m2+1.7076147010*s2];
+    if(rgb.every(c=>c>=-1e-4&&c<=1+1e-4)) return "#"+rgb.map(c=>toS(c).toString(16).padStart(2,"0")).join(""); }
+  return hex; }
+const isDark=()=>{ const h=cvar('--paper'); return /^#/.test(h) && parseInt(h.slice(1,3),16)<100; };
 function drawTierBandLabels(s,Y,mL,iw,mT,ih){                             // names: left, opaque, ABOVE the grid (paper halo)
   const e=tierBandEdges(), g=el("g",{"pointer-events":"none"});
   TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
     if(yB-yA<16) return;
-    const tx=el("text",{x:mL+10,y:yB-7,fill:TWCOL[i],"font-size":11.5,"font-weight":700,"text-anchor":"start","letter-spacing":"0.04em",
+    const tx=el("text",{x:mL+10,y:yB-7,fill:atLightness(TWCOL[i],isDark()?0.80:0.50),"font-size":11.5,"font-weight":700,"text-anchor":"start","letter-spacing":"0.04em",
       stroke:cvar('--panel'),"stroke-width":3,"stroke-linejoin":"round","paint-order":"stroke"});
     tx.textContent=t.name; g.appendChild(tx); });
   s.appendChild(g);
