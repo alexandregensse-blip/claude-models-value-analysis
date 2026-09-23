@@ -57,21 +57,25 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 ### Opus 5.5, in one line
 
 Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **is the whole Pareto frontier**: all five
-of its rungs are on it, and nothing else is. Its `high` rung (quality 1.33×, cost 0.31×) beats Fable 5.1 at `max`
-(1.31× for 3.50×) for under a tenth of the cost, and its `low` (1.10× for 0.10×) undercuts Haiku 4.5 on cost while
+of its rungs are on it, and nothing else is. Its `high` rung (quality 1.33×, cost 0.44×) matches Fable 5.1 at `max`
+(1.33× for 3.50×) for an eighth of the cost, and its `low` (1.10× for 0.11×) undercuts Haiku 4.5 on cost while
 scoring well above it. The price cut is 20 %; the rest of the gain is fewer tokens for the same work.
 
 | Opus 5.5 | low | medium | high | xhigh | max |
 |---|---|---|---|---|---|
-| relative cost | 0.10 | 0.22 | 0.31 | 0.72 | 1.73 |
-| relative quality | 1.10 | 1.27 | 1.33 | 1.44 | 1.46 |
+| relative cost | 0.11 | 0.31 | 0.44 | 0.80 | 1.73 |
+| relative quality | 1.10 | 1.28 | 1.33 | 1.45 | 1.47 |
 
-**Where the numbers come from.** 81 rows across 17 groups, one day after launch. Six independent primaries
+**Where the numbers come from.** 95 rows across 22 groups, one day after launch. Independent primaries
 already carry it: **Cognition's FrontierCode** JSON (both v1.1 subsets — the card's figures 8.4.A/B are read
 straight from it, and its medium/max scores match the card's text to 0.05 pt), **Cursor's CursorBench 4.0**
 table (Cursor now publishes Opus 5.5's cost itself), **Zapier AutomationBench 1.0.6**, **Artificial
 Analysis** (full low→max ladder on the v4.3 index, same build as the rows already held — every existing cost
-matches to the cent), and the **Vals Index**. The remaining 55 rows are ten effort sweeps digitized from the
+matches to the cent) — plus its per-evaluation GDPval-AA and AutomationBench-AA ladders —, the **Vals Index**
+and Vals' **Terminal-Bench 2.1** (at `high`), **FrontierSWE** (62.33 for \$98.87 a run at `max`), and
+**Sonar**'s Java leaderboard, whose metrics JSON carries measured tokens and pass rate on 4,444 tasks for Opus 5.5
+at `medium` and `high` beside Opus 5 and Opus 4.8 at `high` (costed at list price, no cache: single-shot
+generation). The remaining 55 rows are ten effort sweeps digitized from the
 system card, all but three with scores printed on the chart and cross-checked to ≤ 0.07 pt by the y-axis fit:
 HLE with and without tools, **ArXivMath** with and without tools, DRACO, **WANDR**, OSWorld 2.0, **BenchCAD**
 and Chartography. Two markers hidden under another series were recovered from their visible fragment and flagged.
@@ -84,14 +88,22 @@ the awkward one: the costs match the Fable 5.1 card to < 0.5 % — the same tran
 where they meet the rest of that run's costs, and the re-graded scores form a quality-only group
 (`sc55chartq`); nothing is counted twice and no two gradings are mixed.
 
-**Two under-read sources, again.** Zapier's page bundle carries **every** Claude model's effort ladder, and the
+**Under-read sources, again.** Zapier's page bundle carries **every** Claude model's effort ladder, and the
 repo had taken three; Opus 4.8 (the anchor model), Opus 4.7, Sonnet 5, Sonnet 4.6 and Haiku 4.5 join
 `zapierab` — except Haiku 4.5's *score*, 0.46 % (3 of 657 tasks): a metric at its floor cannot segment models any
 more than a saturated one can, so it is left blank and the cost kept, the rule already applied to saturated
 harnesses (it would otherwise have dragged Haiku's quality from 0.52× to 0.16×). Artificial Analysis likewise carried Sonnet 5's full ladder plus Opus 4.8 and Sonnet 4.6 at max
-on the same v4.3 build. One conflict is recorded, not resolved: Zapier's board now shows Opus 5 `max` at
+on the same v4.3 build, and its per-evaluation data (cost = `weightedCostPerTask` ÷ the eval's weight, which
+reproduces every stored cost to the cent) fills GDPval-AA and AutomationBench-AA from 9 rows to 46. GDPval's Elo
+is re-anchored whenever a model joins (Opus 5 `max` 1735 → 1708), so that group is re-read whole from one
+snapshot — which matches the Opus 5.5 card's table (1846 / 1735 / 1708) — rather than mixed. One conflict is recorded, not resolved: Zapier's board now shows Opus 5 `max` at
 **\$3.05**, while the Opus 5.5 card plots the same release at \$1.27 — a jump no neighbouring rung supports.
 The \$1.27 row is kept and annotated.
+
+**Rejected, one day in:** CodeRabbit (a token delta against a baseline, no cost, no per-rung tokens), Kingy AI and
+most launch write-ups (they re-cite Anthropic, AA or Cursor), Simon Willison's pelican (only the failed `max` run —
+128 k tokens, \$2.56, no answer — carries numbers), Kilo (effort undocumented). ARC Prize, Terminal-Bench 4.0,
+Epoch AI and OpenRouter have no Opus 5.5 cost yet.
 
 **A method change: weight by ladder coverage.** Without it, Opus 5.5's quality came out *higher* at `xhigh`
 (1.43) than at `max` (1.39), although `max` wins in 13 of the 14 benchmarks that measure both. The cause was
@@ -103,9 +115,9 @@ against the symptom: on the old data it moves the mean cost band by 0.2 % (1.828
 inversion is left as the data give it — **Opus 5 quality `xhigh` 1.27 vs `max` 1.26**, within noise, with
 `max` ahead in 25 of the 37 benchmarks measuring both.
 
-**The bands widened, and that is the expected direction.** Mean cost band 1.831× → 2.024× (1.950× leaving
-Opus 5.5 out), 25 couples wider against 7 narrower. Opus 5.5 is wide at the bottom of its ladder — its `low` band
-spans 3.8× (0.05–0.19): the benchmarks disagree most about how cheap its cheapest rung is — and the new Zapier and AA ladders widen
+**The bands widened, and that is the expected direction.** Mean cost band 1.831× → 2.071× (1.964× leaving
+Opus 5.5 out). Opus 5.5 is wide at the bottom of its ladder — its `low` band
+spans 4.6× (0.05–0.23): the benchmarks disagree most about how cheap its cheapest rung is — and the new Zapier and AA ladders widen
 Sonnet 5 and Haiku 4.5, whose cost cells had rested on fewer, more agreeable sources.
 
 ### Fable 5.1, in one line
@@ -466,3 +478,4 @@ No dependencies beyond the Python 3 standard library. The client-side rendering 
 - **The third-party field looked close to exhausted** for the Claude 5 generation before this release. A systematic sweep on 1 Aug 2026 across preprints (arXiv/HAL/OpenReview), public leaderboards, community write-ups and agent-tooling vendors found only two admissible additions. Most candidates fail the same-task rule in one of three ways: scores published without cost (Epoch AI, Scale SEAL, ARC Prize, Harvey, most arXiv evaluations), cost quoted as list price rather than measured spend (llm-stats FrontierCode), or cost and quality reported on *different* tasks (Composio). Two further sources were deliberately excluded rather than admitted: ARC Prize, because the widely-quoted $0.70/$2.06 per task appears only in secondary summaries and not on the results page itself; and a Zenn effort sweep of Opus 5, because its quality saturated at 3/3 on a toy task and its cost covered output tokens only — admitting it would have flattened Opus 5's quality curve with a measurement taken in a complexity regime the model does not segment.
 
 Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Prices reflect published rates at time of writing.
+
