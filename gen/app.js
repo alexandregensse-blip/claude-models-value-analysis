@@ -39,6 +39,7 @@ function applyLegacy(){ LEGACY.forEach(m=>{ if(showLegacy){ if(GRID_ALL.cost[m])
   else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }
 const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));
 let showBands=false; try{ showBands=localStorage.getItem("showTierBands")==="1"; }catch(e){}
+let showOvals=false; try{ showOvals=localStorage.getItem("showOvals")==="1"; }catch(e){}
 // On/off switch (role=switch): a track + knob and an explicit ON/OFF word, so the state reads without colour.
 const tgl=(id,on,label,hint,fn)=>`<button type="button" role="switch" class="tgl" id="${id}" aria-checked="${on}" onclick="${fn}()">`
   +`<span class="tgl-track" aria-hidden="true"><span class="tgl-knob"></span></span><span class="tgl-state">${on?"ON":"OFF"}</span>`
@@ -46,9 +47,13 @@ const tgl=(id,on,label,hint,fn)=>`<button type="button" role="switch" class="tgl
 function renderControls(){
   const legacy=id=>tgl(id,showLegacy,"Older models","Opus 4.7 · Sonnet 4.6","toggleLegacy");
   const b=document.getElementById("ctrlB"), p=document.getElementById("ctrlP");
-  if(b) b.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-b")+tgl("tgl-bands",showBands,"Tier bands","","toggleBands");
-  if(p) p.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-p");
+  const ovals=id=>tgl(id,showOvals,"Uncertainty ovals","","toggleOvals");
+  if(b) b.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-b")+ovals("tgl-ovals-b")+tgl("tgl-bands",showBands,"Tier bands","","toggleBands");
+  if(p) p.innerHTML=`<span class="cc-k">Display</span>`+legacy("tgl-legacy-p")+ovals("tgl-ovals-p");
 }
+function toggleOvals(){ const fid=document.activeElement?.id; showOvals=!showOvals; try{ localStorage.setItem("showOvals",showOvals?"1":"0"); }catch(e){}
+  renderControls(); drawB(); drawPareto(); ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });
+  if(fid) document.getElementById(fid)?.focus(); }
 function toggleBands(){ showBands=!showBands; try{ localStorage.setItem("showTierBands",showBands?"1":"0"); }catch(e){} renderControls(); drawB();
   const sv=document.getElementById("chartB"); if(sv) zoomable(sv); document.getElementById("tgl-bands")?.focus(); }
 function toggleLegacy(){ const fid=document.activeElement?.id; showLegacy=!showLegacy; try{ localStorage.setItem("showLegacy",showLegacy?"1":"0"); }catch(e){} applyLegacy(); tierDefaults(); renderAll(); if(fid) document.getElementById(fid)?.focus(); }
@@ -268,7 +273,7 @@ function drawB(){
   axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
-  const ells=drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB");                     // faint asymmetric uncertainty ovals, behind
+  const ells=showOvals?drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB"):[];      // optional asymmetric uncertainty ovals, behind
   const segs=[];                                                          // curves + points on top, collect line segments for label repulsion
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
@@ -282,7 +287,8 @@ function drawB(){
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
     visibleModels().filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`;
+    +(showOvals?`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`
+               :`<span class="lg"><b>hover a point</b> for its identity</span>`);
 }
 
 // ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
@@ -325,7 +331,7 @@ function drawPareto(){
   const rAnc=anchorResidual(gevT,pts);                                                            // 100 = ANCHOR
   const scored=pts.map(p=>({...p,score:valueIndex(valueResidual(gevT,p),rAnc),front:pset.has(p.m+"@"+p.e)}));
   fillScoreTable(scored);
-  const ells=drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP");   // ovals only on the frontier points
+  const ells=showOvals?drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP"):[];   // optional; ovals only on the frontier points
   s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
   pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
     s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
