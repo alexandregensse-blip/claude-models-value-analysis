@@ -301,7 +301,14 @@ def ratio_grid(field):
         k = sum(1 for x in bench[b] if x.split("@")[0] == m)
         return 1.0 if n == 1 else 0.5 + 0.5*(k-1)/(n-1)
     EAPW = 1/3                                               # an early-access (pre-release) run counts for a third
-    def wt(b, c):   return (len(srcs[b][c]) - (1-EAPW)*len(eap[b][c])) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
+    def wt(b, c, s): return (EAPW if s in eap[b][c] else 1.0) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
+    def cap(n):     return min(2.0, 1 + math.log10(n))      # DIMINISHING RETURNS: a source's n measurements of a couple
+    def votes(c, o):                                         # weigh 1+log10(n) in total (1 → 1, 10 → 2, capped at 2),
+        per = collections.defaultdict(list)                  # shared among them; each keeps its own vote in the median
+        for b, cv in bench.items():
+            if c in cv:
+                for s in srcs[b][c]: per[s].append((cv[c]-o[b], wt(b, c, s)))
+        return [(x, w*cap(len(v))/len(v)) for v in per.values() for x, w in v]
     def wmedian(pairs):                                      # weighted median of [(value, weight), ...]
         pairs = sorted(pairs); W = sum(w for _, w in pairs)
         if W == 0: return pairs[len(pairs)//2][0]
@@ -313,12 +320,12 @@ def ratio_grid(field):
     g = {c: 0.0 for c in couples}
     for _ in range(800):                                     # alternate offsets (mean) / values (weighted median)
         o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
-        ng = {c: wmedian([(cv[c]-o[b], wt(b,c)) for b, cv in bench.items() if c in cv]) for c in couples}
+        ng = {c: wmedian(votes(c, o)) for c in couples}
         a = ng[ANCHOR]; g = {c: ng[c]-a for c in couples}    # pin anchor to 1.0 (log 0)
     o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
     def cell(n):
         if n not in couples: return None
-        E = [(cv[n]-o[b], wt(b,n)) for b, cv in bench.items() if n in cv]
+        E = votes(n, o)
         med = wmedian(E); c = math.exp(med)                                # central = weighted median (unchanged)
         if len(E) < 2: return [round(c,2), round(c,2), round(c,2)]         # single benchmark → degenerate box
         s   = 1.4826 * wmedian([(abs(l-med), w) for l, w in E]) or 1e-9    # robust scale (MAD)
