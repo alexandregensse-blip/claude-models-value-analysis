@@ -627,17 +627,25 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-// Answer-first sentence under the title: the crown, the tier picks and the top-quality couple in words. Pre-rendered
-// at build time (gen/prerender.js), so it is the first thing a crawler reads.
-function fillAnswer(){
-  const host=document.getElementById("answer"); if(!host) return;
+// Answer first: the headline pick in one sentence in the header (visible), and the full statement — crown, pick per
+// tier, top-quality couple — as plain text for llms.txt. Both pre-rendered at build time (gen/prerender.js).
+function answerData(){
   const {picks,crown}=tierPicks();
-  const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
   let top=null; for(const m in COSTGRID){ const qg=QUALGRID[m]||{};
     for(const e in COSTGRID[m]){ const q=qg[e]; if(q&&(!top||q[0]>top.q)) top={m,e,c:COSTGRID[m][e][0],q:q[0]}; } }
-  host.innerHTML=`<b>Best value overall&nbsp;: ${nm(crown)}</b> — ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost. `
-    +`Best pick by task tier&nbsp;: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join(" · ")}. `
-    +(top?`Highest measured quality&nbsp;: ${nm(top)} (${top.q.toFixed(2)}× for ${top.c.toFixed(2)}× the cost).`:"");
+  const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
+  return {picks,crown,top,nm};
+}
+function fillAnswer(){
+  const host=document.getElementById("answer"); if(!host) return;
+  const {crown,nm}=answerData();
+  host.innerHTML=`The best value today is <b>${nm(crown)}</b> — ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost.`;
+}
+function answerFull(){
+  const {picks,crown,top,nm}=answerData();
+  return `Best value overall: ${nm(crown)}, ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost. `
+    +`Best pick by task tier: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join("; ")}. `
+    +(top?`Highest measured quality: ${nm(top)} (${top.q.toFixed(2)}× for ${top.c.toFixed(2)}× the cost).`:"");
 }
 function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}

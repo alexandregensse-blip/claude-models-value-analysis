@@ -242,6 +242,9 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 .hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;
   gap:20px 76px;margin-top:clamp(32px,4.2vw,60px)}
 .hero-row .lede{flex:1 1 440px;margin-top:5px}
+.hero-row .lede-col{flex:1 1 440px}
+.lede.answer{margin-top:.6em}
+.h1-line{display:block}
 .meta.meta-side{flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:14px 48px;
   margin-top:2px;padding-top:0;border-top:none}
 .meta.meta-side .k{font-size:11.5px}
@@ -282,9 +285,12 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="gh-name">Alexandre Gensse</div>
     </div>
     <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">93 sources · 196 benchmarks · 1479 measurements</span></div>
-    <h1>Claude cost vs quality&nbsp;: Fable, Opus, Sonnet, Haiku compared</h1>
+    <h1>Claude cost vs quality <span class="h1-line">Fable, Opus, Sonnet, Haiku compared</span></h1>
     <div class="hero-row">
-      <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
+      <div class="lede-col">
+        <p class="lede">What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a <em>relative</em> cost by chaining same-task comparisons.</p>
+        <p class="lede answer" id="answer">The best value today is <b>Opus 5.5 at low effort</b> — 0.98× the quality of Opus 5 @high for 0.13× its cost.</p>
+      </div>
       <div class="meta meta-side">
         <div><span class="k">Baseline</span><br><b>Opus&nbsp;5 · high&nbsp;= 1.00</b></div>
         <div><span class="k">Measurements</span><br><b><span class="nsrc">93 sources · 196 benchmarks · 1479 measurements</span></b></div>
@@ -294,7 +300,6 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
   </header>
 
   <main>
-  <p class="sub answer" id="answer"><b>Best value overall&nbsp;: Opus 5.5 at low effort</b> — 0.98× the quality of Opus 5 @high for 0.13× its cost. Best pick by task tier&nbsp;: grunt work → Opus 5.5 at low effort · everyday tasks → Opus 5.5 at low effort · advanced reasoning → Opus 5.5 at medium effort · cutting-edge thinking → Opus 5.5 at high effort. Highest measured quality&nbsp;: Opus 5.5 at max effort (1.17× for 1.34× the cost).</p>
 
   <!-- ============ AT-A-GLANCE : best overall + best value by tier (mirror of §1) ============ -->
   <section id="atglance" class="major">
@@ -1141,17 +1146,25 @@ function fillMeta(){   // all source counts + the footer source list derive from
   const sl=document.getElementById("src-list");
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
-// Answer-first sentence under the title: the crown, the tier picks and the top-quality couple in words. Pre-rendered
-// at build time (gen/prerender.js), so it is the first thing a crawler reads.
-function fillAnswer(){
-  const host=document.getElementById("answer"); if(!host) return;
+// Answer first: the headline pick in one sentence in the header (visible), and the full statement — crown, pick per
+// tier, top-quality couple — as plain text for llms.txt. Both pre-rendered at build time (gen/prerender.js).
+function answerData(){
   const {picks,crown}=tierPicks();
-  const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
   let top=null; for(const m in COSTGRID){ const qg=QUALGRID[m]||{};
     for(const e in COSTGRID[m]){ const q=qg[e]; if(q&&(!top||q[0]>top.q)) top={m,e,c:COSTGRID[m][e][0],q:q[0]}; } }
-  host.innerHTML=`<b>Best value overall&nbsp;: ${nm(crown)}</b> — ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost. `
-    +`Best pick by task tier&nbsp;: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join(" · ")}. `
-    +(top?`Highest measured quality&nbsp;: ${nm(top)} (${top.q.toFixed(2)}× for ${top.c.toFixed(2)}× the cost).`:"");
+  const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
+  return {picks,crown,top,nm};
+}
+function fillAnswer(){
+  const host=document.getElementById("answer"); if(!host) return;
+  const {crown,nm}=answerData();
+  host.innerHTML=`The best value today is <b>${nm(crown)}</b> — ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost.`;
+}
+function answerFull(){
+  const {picks,crown,top,nm}=answerData();
+  return `Best value overall: ${nm(crown)}, ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost. `
+    +`Best pick by task tier: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join("; ")}. `
+    +(top?`Highest measured quality: ${nm(top)} (${top.q.toFixed(2)}× for ${top.c.toFixed(2)}× the cost).`:"");
 }
 function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}

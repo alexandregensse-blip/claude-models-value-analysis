@@ -501,7 +501,7 @@ def head_tags(date, anchor_label, counts):
 
 def write_root_files(date, pre, anchor_label):
     """robots.txt, sitemap.xml, llms.txt and the IndexNow key file, next to index.html. llms.txt reuses the
-    pre-rendered answer, so it states the same conclusions as the page."""
+    full answer computed by app.js (answerFull), so it states the same conclusions as the page."""
     plain = lambda h: re.sub(r"\s+(?=:)", "", re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", "", h)))).strip()
     files = {
         "robots.txt": f"# All robots allowed, AI robots included.\nUser-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n",
@@ -512,7 +512,7 @@ def write_root_files(date, pre, anchor_label):
 
 > {DESCRIPTION}
 
-{plain(pre.get("answer", ""))}
+{pre.get("answer-full", "")}
 
 Costs and qualities are relative to {anchor_label} = 1.00. They are computed only from ratios measured on the same task, normalised per benchmark and combined by weighted median, from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
 
@@ -547,6 +547,8 @@ def prerender(app, css):
 def inject(body, pre):
     """Writes the pre-rendered blocks into their empty placeholders in body.html."""
     for key, html in pre.items():
+        if key == "answer-full":                     # text for llms.txt, not a block of the page
+            continue
         put = lambda m: m.group(1) + html + m.group(m.lastindex)
         if key == ".nsrc":
             pat = r'(<span class="nsrc">)…(</span>)'

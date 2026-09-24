@@ -73,6 +73,7 @@ function main(input) {
   vm.runInContext(app, ctx, { filename: "app.js" });
   const out = {};
   for (const key of WANTED) if (byKey.has(key)) out[key] = byKey.get(key).innerHTML;
+  if (typeof ctx.answerFull === "function") out["answer-full"] = ctx.answerFull();   // plain text, for llms.txt only
   process.stdout.write(JSON.stringify(out));
 }
 
