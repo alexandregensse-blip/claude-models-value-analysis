@@ -11,6 +11,7 @@ OUT  = os.path.join(ROOT, "index.html")
 SITE_URL    = "https://claude-models.agensse.com/"
 REPO_URL    = "https://github.com/alexandregensse-blip/claude-models-value-analysis"
 TITLE       = "Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared"
+SITE_NAME   = "Claude cost vs quality"   # site name suggested to Google (JSON-LD WebSite) instead of the bare domain
 DESCRIPTION = ("What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives "
                "the best quality for the price. Open data, CC BY 4.0.")
 BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster Tools ownership (msvalidate.01); keep it
@@ -481,7 +482,8 @@ def head_tags(date, anchor_label, counts):
         "variableMeasured": [f"Relative cost per task ({anchor_label} = 1.00)", f"Relative quality ({anchor_label} = 1.00)"],
         "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": SITE_URL + "raw-data.csv"}],
     }
-    ld = json.dumps(dataset, ensure_ascii=False, indent=1).replace("</", "<\\/")
+    website = {"@context": "https://schema.org", "@type": "WebSite", "name": SITE_NAME, "url": SITE_URL}
+    ld = json.dumps([website, dataset], ensure_ascii=False, indent=1).replace("</", "<\\/")
     return (
         f"<title>{a(TITLE)}</title>\n"
         f'<meta name="description" content="{a(DESCRIPTION)}">\n'
