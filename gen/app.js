@@ -362,7 +362,7 @@ function fillScoreTable(scored){
   scored.filter(p=>p.front).slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),   // frontier couples only
     // Intensity from the DECADE distance to the anchor, so 2× and 0.5× read equally strong; capped at one decade.
     sc=p.score>=100?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(Math.log10(p.score/100)),1)*0.52)*100),
-    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:${sc}">${Math.round(p.score)}</span>`;
+    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${Math.round(p.score)}</span>`;
     const tr=document.createElement("tr");
     tr.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
       +`<td class="num">${p.c.toFixed(2)}×</td><td class="num">${p.q.toFixed(2)}×</td>`
