@@ -460,7 +460,9 @@ def content_date(fingerprint):
     The build fingerprints that content; while it matches the one recorded in gen/content-date.json the recorded
     date stands, otherwise today's date is recorded with the new fingerprint (commit the file with the change).
     So code, styles, icons or head tags alone never move the visible "Updated" date, JSON-LD dateModified or the
-    sitemap lastmod, and a rebuild of an unchanged page changes nothing."""
+    sitemap lastmod, and a rebuild of an unchanged page changes nothing. Limits: text that app.js draws only at run
+    time (tooltips, interactive labels) and attribute text (alt, aria-label) are not fingerprinted; a content change
+    reverted after a build keeps the build day unless gen/content-date.json is restored with it."""
     try:
         with open(DATE_FILE, encoding="utf-8") as f:
             rec = json.load(f)
