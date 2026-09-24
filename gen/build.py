@@ -13,6 +13,7 @@ REPO_URL    = "https://github.com/alexandregensse-blip/claude-models-value-analy
 TITLE       = "Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared"
 DESCRIPTION = ("What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives "
                "the best quality for the price. Open data, CC BY 4.0.")
+BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster Tools ownership (msvalidate.01); keep it
 INDEXNOW_KEY = "b3573dbc1da690e66e9ef05b081b7abe"   # public by design: served as /<key>.txt, proves ownership to IndexNow (Bing…)
 
 MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5":6,"sonnet-4.6":7,"haiku-4.5":8}
@@ -494,6 +495,7 @@ def head_tags(date, anchor_label, counts):
         '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
         '<meta property="og:image:alt" content="Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared — claude-models.agensse.com">\n'
         '<meta name="twitter:card" content="summary_large_image">\n'
+        f'<meta name="msvalidate.01" content="{BING_SITE_VERIFICATION}">\n'
         f'<script type="application/ld+json">\n{ld}\n</script>\n'
     )
 
