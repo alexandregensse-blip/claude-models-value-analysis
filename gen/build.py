@@ -14,6 +14,8 @@ TITLE       = "Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared"
 SITE_NAME   = "Claude cost vs quality"   # site name suggested to Google (JSON-LD WebSite) instead of the bare domain
 DESCRIPTION = ("What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives "
                "the best quality for the price. Open data, CC BY 4.0.")
+SITE_HOST   = SITE_URL.split("://", 1)[1].rstrip("/")   # shown in the share image and its alt text
+# Both belong to this site: a fork sets them to "" (no tag, no key file) or to its own values.
 BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster Tools ownership (msvalidate.01); keep it
 INDEXNOW_KEY = "b3573dbc1da690e66e9ef05b081b7abe"   # public by design: served as /<key>.txt, proves ownership to IndexNow (Bing…)
 
@@ -514,9 +516,9 @@ def head_tags(date, anchor_label, counts):
         f'<meta property="og:description" content="{a(DESCRIPTION)}">\n'
         f'<meta property="og:image" content="{SITE_URL}og-image.png">\n'
         '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'
-        '<meta property="og:image:alt" content="Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared — claude-models.agensse.com">\n'
+        f'<meta property="og:image:alt" content="{a(TITLE)} — {a(SITE_HOST)}">\n'
         '<meta name="twitter:card" content="summary_large_image">\n'
-        f'<meta name="msvalidate.01" content="{BING_SITE_VERIFICATION}">\n'
+        + (f'<meta name="msvalidate.01" content="{a(BING_SITE_VERIFICATION)}">\n' if BING_SITE_VERIFICATION else "") +
         f'<script type="application/ld+json">\n{ld}\n</script>\n'
     )
 
@@ -549,8 +551,9 @@ Costs and qualities are relative to {anchor_label} = 1.00. They are computed onl
 
 - [Source repository]({REPO_URL}): generator, method notes, version history.
 """,
-        f"{INDEXNOW_KEY}.txt": INDEXNOW_KEY,
     }
+    if INDEXNOW_KEY:
+        files[f"{INDEXNOW_KEY}.txt"] = INDEXNOW_KEY
     for name, text in files.items():
         with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
             f.write(text)
