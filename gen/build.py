@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Artifact generator. Reads data + modular css/body/js, computes derived ratio data,
 assembles index.html. Run: python3 gen/build.py  (from the scratchpad dir)."""
-import csv, html as htmlmod, json, os, re, subprocess, sys, datetime
+import csv, hashlib, html as htmlmod, json, os, re, subprocess, sys, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)            # scratchpad
@@ -451,17 +451,35 @@ def monotonicity_report(cg, qg):
                 if vb < va: out.append(f"{name}: {m} {a}({va}) > {b}({vb})")
     return out
 
-def content_date():
-    """Date of the last committed change to the data or the generator; today while they have uncommitted changes.
-    Feeds the visible "Updated" date, JSON-LD dateModified and the sitemap lastmod, so none moves on a no-op rebuild."""
-    paths = ["raw-data.csv", "gen"]
-    git = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True, check=True).stdout.strip()
+DATE_FILE = os.path.join(HERE, "content-date.json")   # {fingerprint, date} of the last content change (committed)
+
+def content_date(fingerprint):
+    """Date of the last change to what the reader gets: the page text, the figures and the data the charts draw.
+    The build fingerprints that content; while it matches the one recorded in gen/content-date.json the recorded
+    date stands, otherwise today's date is recorded with the new fingerprint (commit the file with the change).
+    So code, styles, icons or head tags alone never move the visible "Updated" date, JSON-LD dateModified or the
+    sitemap lastmod, and a rebuild of an unchanged page changes nothing."""
     try:
-        if not git("status", "--porcelain", "--", *paths):
-            return datetime.date.fromisoformat(git("log", "-1", "--format=%cs", "--", *paths))
-    except (OSError, subprocess.CalledProcessError, ValueError):
+        with open(DATE_FILE, encoding="utf-8") as f:
+            rec = json.load(f)
+        if rec.get("fingerprint") == fingerprint:
+            return datetime.date.fromisoformat(rec["date"])
+    except (OSError, ValueError, KeyError, TypeError):
         pass
-    return datetime.date.today()
+    date = datetime.date.today()
+    with open(DATE_FILE, "w", encoding="utf-8") as f:
+        json.dump({"fingerprint": fingerprint, "date": date.isoformat()}, f, indent=1)
+        f.write("\n")
+    return date
+
+def content_fingerprint(body, pre, data):
+    """sha256 of the content only: title, description, the visible text of the body (pre-rendered blocks
+    included, date placeholder not yet filled), the full answer used by llms.txt, and the data behind the charts."""
+    text = re.sub(r"<(script|style)\b.*?</\1>", " ", body, flags=re.S | re.I)
+    text = re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", " ", text))).strip()
+    blob = json.dumps([TITLE, SITE_NAME, DESCRIPTION, text, pre.get("answer-full", ""), data],
+                      ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
 def head_tags(date, anchor_label, counts):
     """Title, description, canonical, icon, Open Graph, Twitter card and the JSON-LD Dataset. Every value is on the page."""
@@ -600,10 +618,10 @@ def main():
     span = max(c[0] for v in CG.values() for c in v.values()) / min(c[0] for v in CG.values() for c in v.values())
     body = body.replace("__NCOUPLES__", str(ncpl))
     body = body.replace("__COSTSPAN__", str(round(span)))
-    date = content_date()
-    body = body.replace("__GENDATE__", date.strftime("%d %b %Y"))   # last change to the data or the generator
     pre  = prerender(app, css)
     body = inject(body, pre)
+    date = content_date(content_fingerprint(body, pre, [RD, CONS, CG, QG, GD, GRID_ANCHOR]))
+    body = body.replace("__GENDATE__", date.strftime("%d %b %Y"))   # last change to the content (text, figures, data)
     html = (
         "<!doctype html>\n"
         '<html lang="en">\n<head>\n'
