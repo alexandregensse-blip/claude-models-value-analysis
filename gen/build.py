@@ -489,6 +489,7 @@ def head_tags(date, anchor_label, counts):
         f'<meta name="description" content="{a(DESCRIPTION)}">\n'
         f'<link rel="canonical" href="{SITE_URL}">\n'
         '<link rel="icon" href="favicon.svg" type="image/svg+xml">\n'
+        '<link rel="icon" href="favicon.png" type="image/png" sizes="96x96">\n'   # Google Search ignores SVG icons
         '<meta property="og:type" content="website">\n'
         f'<meta property="og:url" content="{SITE_URL}">\n'
         f'<meta property="og:title" content="{a(TITLE)}">\n'
