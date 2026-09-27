@@ -184,6 +184,28 @@ def groups_data():
       "retort74":("retort exp-74 py","sweep","Claude Code · rest-api-crud in Python, Opus 5.5 × low→max, n=3; requirement coverage 1.0 everywhere → cost only ✓"),
       "retort74go":("retort exp-74 go","sweep","Claude Code · rest-api-crud in Go, Opus 5.5 × low→max, n=3; requirement coverage 1.0 everywhere → cost only ✓"),
       "vulcanbench-ciiv4":("VulcanBench CII v4","sweep","Claude Code 2.1.280 · 23 legacy binary-parity tasks, Opus 5.5 × low→max, CLI-reported cost; refusal fallback on (0→48 % of replies by Opus 4.8) ✓"),
+      "docswebpro":("SWE-bench Pro subset (Anthropic docs)","sweep","Anthropic-internal 478-problem subset, customer-billed cost ✓"),
+      "docsdrb2":("DeepResearch Bench II (Anthropic docs)","sweep","50-task subset, 33-task basis, customer-billed ✓"),
+      "docscode370":("Internal coding, 370 repo tasks (Anthropic docs)","sweep","plain API agent, customer-billed per attempt ✓"),
+      "docswidesearch":("WideSearch (Anthropic docs)","sweep","Fable 5 low/medium/default, 3 runs ✓"),
+      "docsdeepwide":("DeepWideSearch (Anthropic docs)","sweep","Fable 5, 220 questions, 3 runs ✓"),
+      "docsbrowsecomp":("BrowseComp 500-cut (Anthropic docs)","sweep","Fable 5, 1-3 runs per setting ✓"),
+      "docsgdpval":("GDPval (Anthropic docs)","sweep","Fable 5, 1 run, cost incl. grading ✓"),
+      "docscorpus":("Corpus defect sweep (Anthropic docs)","sweep","21.6M-token corpus, F1, per episode ✓"),
+      "tb30json":("TB 3.0 (claude.dev payload)","sweep","claude.dev 'Spending your effort' embedded data · 74 tasks×5, Opus 5 / Fable 5 / Fable 5.1 labelled rungs, median tokens, no USD ✓"),
+      "tb30chart":("TB 3.0 (claude.dev chart)","sweep","claude.dev 'Spending your effort' SVG · 70 tasks, Opus 5.5 / Fable 5.1 / Opus 5 / Fable 5 × low→max, median tokens, no USD; Opus 5.5 run 3 wk later, 128k cap ✓"),
+      "osworld2o5":("OSWorld 2.0 board (Opus 5)","sweep","osworld-v2.xlang.ai official JSON · v2.1 full 108 tasks, batched, 500 steps, Opus 5 low→max, output tokens/task, no cost ✓"),
+      "osworld2o5a":("OSWorld 2.0 board v08.08 (Opus 5)","sweep","osworld-v2.xlang.ai official JSON · release v2026.08.08, 7-run avg, Opus 5 low→max, score only ✓"),
+      "osworld2s150":("OSWorld 2.0 single 150 steps","xmodel","osworld-v2.xlang.ai official JSON · 108 tasks, 150-step budget, Opus 4.7 max, Sonnet 4.6 medium/max ✓"),
+      "osworld2s300":("OSWorld 2.0 single 300 steps","xmodel","osworld-v2.xlang.ai official JSON · 108 tasks, 300-step budget, Opus 4.7 max, Sonnet 4.6 medium/max ✓"),
+      "sealpro2":("SWE-Bench Pro V2 (Scale)","xmodel","Scale Labs board via Wayback 23 Sep 2026 · full set, Claude Code, one effort per model, score only, saturated ✓"),
+      "sealpro2h":("SWE-Bench Pro V2 HARD (Scale)","xmodel","Scale Labs board via Wayback 23 Sep 2026 · HARD subset, Claude Code, score only ✓"),
+      "surfevolver":("Surface Evolver bench","xmodel","yhenon/surface-evolver-llm-eval aggregates.json · 16 runs/model, OpenRouter recorded cost, Opus 4.8 none/high, Sonnet 5 medium, Fable 5 high ✓"),
+      "cbcostopt":("Cookbook cost optimization","sweep","Anthropic cookbook cost_optimization.ipynb · 10-claim agent ×2 trials, Opus 5 & Sonnet 5 low→high, Haiku 4.5; list-price cost from usage ✓"),
+      "llmconfbench":("LLMConfBench","xmodel","arXiv 2609.20666 · conformer energy ranking, 27 molecules × 3 prompts via OpenRouter, Opus 5 and Sonnet 5 at high; cost summed from the repo's per-call logs ✓"),
+      "vectorise-effort":("Vectorise doc-search effort test (Vidali gist)","sweep","33 multilingual MCP questions, output tokens only, 24 Sep 2026 ✓"),
+      "vectorise-graded":("Vectorise doc-search, judge-graded (Vidali gist)","xmodel","citation recall by cross-model judge, 22 Sep 2026 evening run ✓"),
+      "lighthouse-svg":("Lighthouse SVG one-shot (Reddit)","xmodel","one prompt, Copilot AIU, Opus capped at stop, subjective rank ✓"),
       "arcagi2":("ARC-AGI-2","sweep","ARC Prize evaluations.json · semi-private, costPerTask per model × effort; Opus 5.5 & Fable 5.1 full ladders ✓"),
       "arcagi1":("ARC-AGI-1","sweep","ARC Prize evaluations.json · semi-private, costPerTask per model × effort; scores ≥97.5 % flagged gen5-saturated ✓"),
       "aatb40":("AA TB 4.0","sweep","AA model payload · Terminal-Bench 4.0 (AA harness), 4 models × ladder + 3 at max; floor scores blank ✓"),
@@ -363,7 +385,8 @@ def ratio_grid(field):
     bench = collections.defaultdict(dict)                    # benchmark → couple → log(value)
     srcs  = collections.defaultdict(lambda: collections.defaultdict(set))
     eap   = collections.defaultdict(lambda: collections.defaultdict(set))   # sources whose run was early access
-    PUBLISHER = {"anthropic-chart": "anthropic-syscard"}    # one publisher = one source (Anthropic's own evals)
+    PUBLISHER = {"anthropic-chart": "anthropic-syscard", "anthropic-docs": "anthropic-syscard",   # one publisher = one source
+                 "anthropic-cookbook": "anthropic-syscard", "claude-dev-blog": "anthropic-syscard"}  # (Anthropic's own evals)
     for r in rows:
         if r["model"] not in CUR: continue
         r["source"] = PUBLISHER.get(r["source"], r["source"])

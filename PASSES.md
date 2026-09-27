@@ -5,6 +5,39 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*). Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Ninth pass: a second salvo, mostly verification
+
+Eight agents (Opus, low effort), 27 Sep 2026: four re-checked held rows against their primaries, four searched
+where the eighth pass could not reach. **109 → 118 sources, 250 → 272 benchmarks, 1956 → 2084 measurements.**
+
+- **Anthropic's own pages.** The docs page *Optimizing for cost and intelligence* carries dated internal effort
+  sweeps: SWE-bench Pro (478-problem subset, Opus 5.5 low→xhigh), DeepResearch Bench II, a 370-task coding set,
+  four Fable 5 research benchmarks and a corpus-defect sweep (38 rows). The claude.dev post *Spending your effort*
+  gives Terminal-Bench 3.0 pass rates against median tokens per attempt, from the page's embedded data (74 tasks)
+  and from its effort-curve SVG (70 tasks, with Opus 5.5); unlabelled rungs placed by order are flagged, and Opus 5's
+  second "max" run (raw `max`, 52.2 %) is left out in favour of the author's effort-120 run. The cookbook's
+  cost-optimization notebook adds Opus 5 and Sonnet 5 × low/medium/high (mostly saturated). All three count as one
+  publisher with the system cards (`PUBLISHER` in `gen/build.py`), so √n still treats Anthropic as one source.
+- **Boards.** The OSWorld 2.0 board's `estimatedCostUsd` is the 108-task suite total — divided by 108 it reproduces
+  the held arXiv rows exactly; its Opus 5 ladders (two releases, output tokens) and two step-budget groups join.
+  Scale's SWE-Bench Pro V2 (read from the Wayback Machine; the live page is a bot wall), Surface-Evolver-Bench,
+  LLMConfBench (arXiv 2609.20666), a Vectorise MCP effort test and a Copilot SVG run from Reddit.
+- **Corrections.** OpenRouter's τ²-bench and GPQA boards are rolling means, so all 13 held rows had drifted; they
+  are replaced by the 27 Sep snapshot, and Fable 5.1, Opus 5.5 and Sonnet 4.6 join. harnesseval's author re-judged
+  the report after 7 Sep: the seven held rows give way to the six current cells (its Opus 5 `xhigh` is gone). Also:
+  swe-rebench cache shares filled in, Kilo Bench identified as Terminal-Bench 2.0 under Kilo, renchris scores 7
+  briefs (not 9), PetriBench's Haiku 4.5 run, renchris's Fable 5.1 `max`, PlayCode's Opus 5.5 `max`.
+- **Verified unchanged:** every Opus 5.5-card number printed in the text against its held row (ArXivMath,
+  FrontierCode, Chartography, OSWorld), all arXiv groups checked for newer versions (none adds Opus 5.5 or Fable
+  5.1), swe-rebench, Kilo, PlayCode. No Sonnet 5 row beyond the eighth pass's five groups needed re-pricing.
+- **Not reached:** LiveBench (JS shell), stet.sh, Snowflake, Databricks, Quesma, Kingy, CursorBench 3.x, the older AA
+  groups; Reddit beyond one search (login wall), X, note.com, Qiita, Chinese and Korean sites; GitLab, Kaggle.
+
+Opus 5.5 now rests on 233 measurements in 71 benchmarks from 27 sources (quality / cost vs Opus 5 @high): `low`
+0.91 / 0.17, `medium` 1.05 / 0.32, `high` 1.07 / 0.44, `xhigh` 1.13 / 0.80, `max` 1.13 / 1.49. `xhigh` is again its
+highest-quality rung, and `low` the best value overall. The ladder check flags Sonnet 5 (`high` 0.78 > `xhigh` 0.77 >
+`max` 0.76) and Opus 4.7 (`high` 0.77 > `xhigh` 0.76).
+
 ## Re-anchoring on Opus 5 @high
 
 The scale had been pinned to **Opus 4.8 @medium** since the first snapshot, deliberately, so numbers stayed
