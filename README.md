@@ -87,6 +87,56 @@ from every view and fit, exactly as if unmeasured; neither touches the frontier 
 Quality-vs-Cost chart (each band is the quality range where one usage tier's window outweighs its neighbours;
 edges sit midway, in the chart's dilated metric, between adjacent tier centres, and follow the tier sliders).
 
+### Eighth pass: the open network, and a price that never rose
+
+Four parallel sweeps again (leaderboards and vendor boards, preprints, practitioners, public code), 27 Sep 2026,
+this time with an open network. Everything found was taken, with its caveats written into `confound` rather than
+used as a reason to leave it out: **93 → 109 sources, 199 → 250 benchmarks, 1494 → 1956 measurements**.
+
+- **Leaderboards.** ARC Prize's `evaluations.json` carries Opus 5.5's full ladder (ARC-AGI-2: 70.1 / 87.5 / 93.3 /
+  92.5 / 91.7 % for \$0.24 → \$1.85; ARC-AGI-1 scores ≥ 97.5 % flagged `gen5-saturated`, as the held Opus 5 and
+  Fable 5 rows already were). **Artificial Analysis was under-read a third time**: each model payload holds score and
+  cost per task for all ten index components, and the repo had two; the other seven (Terminal-Bench 4.0, SciCode,
+  HLE, GDP-PDF, CritPt, AA-LCR, Omniscience) join as full ladders for Opus 5.5, Opus 5, Fable 5.1 and Sonnet 5, and
+  AA-Briefcase is re-read whole (its Elo was re-anchored). AA's new Coding Agent Index (Claude Code harness, max
+  only) adds three couples. **DeepSWE**'s live JSON (Datacurve) is the primary behind the Opus 5 card's figure, so it
+  replaces the 20 digitized `sc5deepswe` rows; its Opus 5 series is a later run. Vals AI: CyberBench, SkillsBench, a
+  whole re-read of EMB (8 Claude entries, not 2), two missed entries, and ten benchmarks never ingested (LiveCodeBench,
+  MMMU, CorpFin, LegalBench, MortgageTax, TaxEval, Multimodal Index, SWE-bench, GPQA and MMLU-Pro, the last two cost
+  only). Zapier re-published Opus 5.5's ladder with its fallback made explicit (+1 to +2.5 pt, +8 to +13 % cost):
+  the new values replace the old. Sonar adds Opus 4.7 `high`. The Opus 5.5 launch page embeds its Terminal-Bench 4.0
+  chart as data: three full ladders (`an55tb40`), production safeguards on.
+- **Preprints** (eleven): PetriBench, a SWE-bench effort campaign (arXiv 2608.01347), FrontierFinance, OSWorld-Pro,
+  τ^τ-Bench, ProgramDistill-300, GameLogicBench, RuBench, Kimi Code Bench 2.0, FuzzingBrain-Bench and BVB (its
+  LiteLLM effort mapping and \$3-per-scene cap are flagged). None yet measures Opus 5.5 or Fable 5.1 with cost.
+- **Practitioners.** nnakapa's QCD labs on Zenn (three PostgreSQL tasks, ten runs each, CLI-reconciled cost, a
+  hidden-test gate): eight ladders across Opus 5, Fable 5.1, Sonnet 5, Opus 4.8, Opus 4.7 and Fable 5, two of them in
+  GitHub Copilot CLI. The held `zenn-qcd` rows (lab #27) had the *medium* rung's scores on the *low* rung's costs
+  and missed half the ladder; replaced. Simon Willison's pelican gist has Opus 5.5 `low`→`xhigh` token counts.
+- **Public code.** MERC (six models × five rungs, n = 2, scores saturated → cost only), renchris's code-review corpus
+  (Opus 5.5 low→max with Opus 5 @high in the same session; Fable 5.1 low→xhigh), kaybenleroll's plan review,
+  VulcanBench's Fable 5.1 and Opus 5 ladders (fallback share flagged), RampNet's Fable legs, CalorieBench (effort
+  `high` sent without thinking, so filed under `nothink`), and `retort49`'s Opus 4.8 and Opus 4.7 ladders, which sat in
+  the same database. Corrections: `retort49`'s `tokens_out` held *total* tokens (blanked), RampNet's Sonnet 5 `low` F1
+  follows the author's 18 Aug correction (45.6 → 46.3), bug-hunt-bench's Opus 5.5 rows carry the author's own
+  not-comparable note, and the seventh pass's refs are pinned to commits.
+
+**Sonnet 5's price.** The \$2/\$10 launch price was announced as introductory until 31 Aug, then \$3/\$15. On 10 Aug
+2026 Anthropic made \$2/\$10 permanent. Some producers had already switched to \$3/\$15: both September system cards
+(the Fable 5.1 card's Chartography and, read off the figure, the Opus 5.5 card's, whose Sonnet 5 points sit on the
+same costs), MERC's runner and the PetriBench token pricing. Those Sonnet 5 costs are re-priced ×2/3 and flagged
+(`chartogt`, `chartogn`, `sc55bcad`, `merc-core10`, `petribench`), and `PRICE_OUT` in `gen/build.py` is corrected.
+Artificial Analysis, LiteLLM, vercel/eve and every source that states its rate use \$2/\$10.
+
+**What moved.** Opus 5.5 went from 134 measurements in 48 benchmarks to 218 in 67. Its quality falls at both ends
+(`low` 0.98 → 0.91, `max` 1.17 → 1.13) and its cost at `high` drops (0.51 → 0.44), so `high` becomes the best value
+overall (1.07× for 0.44×) and `max` barely improves on `xhigh`. No single block does it at the ends: removing any
+one of the leaderboard, preprint, practitioner, code or launch-page blocks leaves `low` and `max` within 0.01 (the
+public-code block alone accounts for `medium`'s 1.06 → 1.02 in that test, before AA's components); the new independent
+Opus 5.5 ladders (ARC-AGI-2, Terminal-Bench 4.0, AA's components, renchris) often peak at `high` or `xhigh`. The
+effort-ladder check now flags Sonnet 5 `high` 0.78 > `xhigh` 0.74 and Opus 4.7 `high` 0.77 > `xhigh` 0.76; Opus 5's
+`xhigh` > `max` inversion is gone.
+
 ### Seventh pass: a closed network, and two public repos
 
 Four parallel sweeps (leaderboards, preprints, public code, practitioners), 27 Sep 2026. **This environment's
@@ -103,10 +153,13 @@ The public-code axis re-cloned the known repositories and admitted two, both Opu
 
 - **retort experiment 74** (`retort74`, `retort74go`): one REST-CRUD task in Python and in Go, n = 3 per rung,
   cost from the CLI's own total. Requirement coverage is 1.0 in all 36 runs, so cost only, as for `retort49`.
+  This reverses the second and fifth passes, which dropped exp-74 on both axes under the fyve rule; it is kept
+  as its own group (CLI 2.1.280, against 2.1.197 for `retort49`).
   The ladder is a cliff, not a ramp: Python `high` → `xhigh` is 3.9×, `xhigh` → `max` another 3.4×.
 - **VulcanBench CII v4** (`vulcanbench-ciiv4`): 23 legacy binary-parity tasks in Claude Code 2.1.280. The rows
   the sweep proposed were wrong in an instructive way: it averaged the harness's `api_equivalent_cost_usd`,
-  which **omits the replies served by the refusal fallback** — and the fallback was on. The author's own table
+  which prices the token counts at the *requested* model's rates without the cache-write premium (so it differs
+  even at `low`, where no fallback fired: \$2.01 against \$1.70) — and the fallback was on. The author's own table
   prices each run from Claude Code's reported total, which includes them; that table is what was taken
   (\$1.70 → \$8.75 per task, monotone). The confound stays on every row: the share of replies written by
   Opus 4.8 climbs with effort, 0 % at `low` to 48 % at `max`, so the upper rungs are a blend. The same card's
@@ -118,18 +171,18 @@ Opus 5.5 `max` cost moves 1.34× → 1.42×; mean cost band 2.303× → 2.23×. 
 ### Opus 5.5, in one line
 
 Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **holds the Pareto frontier** with all five
-rungs; the only other point on it is Haiku 4.5 (0.12× for 0.64×), cheaper than Opus 5.5 `low` by a tenth but far below
-it in quality. On the current scale (Opus 5 @high = 1.00) its `high` (quality 1.12×, cost 0.51×) beats Fable 5.1 at
-`max` (1.09× for 2.58×) for a fifth of the cost, its default `medium` (1.06× for 0.32×) beats Opus 5's default `high`
-for a third of its cost, and `max` is its best rung (1.17×) at 1.34×.
+rungs; the only other point on it is Haiku 4.5 (0.11× for 0.64×), cheaper than Opus 5.5 `low` but far below it in
+quality. On the current scale (Opus 5 @high = 1.00) its `high` (quality 1.07×, cost 0.44×) beats Fable 5.1 at `max`
+(1.09× for 2.70×) within 0.02 in quality for a sixth of the cost, its default `medium` (1.04× for 0.32×) beats Opus 5's
+default `high` for a third of its cost, and `max` (1.13× at 1.49×) now adds almost nothing over `xhigh` (1.12× at 0.78×).
 
 | Opus 5.5 (Opus 5 @high = 1.00) | low | medium | high | xhigh | max |
 |---|---|---|---|---|---|
-| relative cost | 0.13 | 0.32 | 0.51 | 0.78 | 1.34 |
-| relative quality | 0.98 | 1.06 | 1.12 | 1.15 | 1.17 |
+| relative cost | 0.17 | 0.32 | 0.44 | 0.78 | 1.49 |
+| relative quality | 0.91 | 1.04 | 1.07 | 1.12 | 1.13 |
 
-These values follow the √n per-source weighting (see *Diminishing returns per source*, below). Opus 5.5 now rests
-on **134 measurements in 48 benchmarks from 16 sources**.
+These values follow the √n per-source weighting (see *Diminishing returns per source*, below). After the eighth pass
+Opus 5.5 rests on **218 measurements in 67 benchmarks from 24 sources**.
 
 **Where the numbers come from.** 95 rows across 22 groups, one day after launch. Independent primaries
 already carry it: **Cognition's FrontierCode** JSON (both v1.1 subsets — the card's figures 8.4.A/B are read
@@ -524,8 +577,10 @@ which makes the benchmark *anchored* rather than bridged.
 That join was checked before it was made, and the check turned up something worth recording. Opus 5 appears in
 both cards' versions of this figure and matches to within 0.3 % on all five efforts — the same run, on the same
 cost scale, so joining is safe. **Sonnet 5, however, has identical scores in the two cards but costs in a
-constant 1.502× ratio** — exactly 15/10, the Sonnet 5 price change of 31 Aug 2026. The two cards price the same
-run off different rate cards. Sonnet 5 is therefore taken from p186 only, never mixed across the two.
+constant 1.502× ratio** — exactly 15/10. The Fable 5.1 card (1 Sep) priced Sonnet 5 at the \$3/\$15 rate that had
+been scheduled for 1 Sep; the Opus 5 card priced it at \$2/\$10. That increase never happened: Anthropic made the
+\$2/\$10 price permanent on 10 Aug 2026 (pricing page, footnote 3: the increase "will not occur"). Sonnet 5 is taken
+from p186 and **re-priced ×2/3** (eighth pass), which puts it back on the Opus 5 card's scale, never mixed across the two.
 
 The **without-tools** curves are kept in the data but held out of the effort grid, labelled `nt-*`. Stripping
 the tools from a benchmark that needs them is a regime change, not an effort setting — the same reason
