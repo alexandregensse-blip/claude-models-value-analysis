@@ -87,6 +87,34 @@ from every view and fit, exactly as if unmeasured; neither touches the frontier 
 Quality-vs-Cost chart (each band is the quality range where one usage tier's window outweighs its neighbours;
 edges sit midway, in the chart's dilated metric, between adjacent tier centres, and follow the tier sliders).
 
+### Seventh pass: a closed network, and two public repos
+
+Four parallel sweeps (leaderboards, preprints, public code, practitioners), 27 Sep 2026. **This environment's
+network policy denied almost every host the pass needed** — arxiv.org, huggingface.co, cognition.com, cursor.com,
+vals.ai, artificialanalysis.ai, arcprize.org, tbench.ai, reddit, HN, Medium, dev.to — leaving GitHub and
+anthropic.com. Three of the four axes could only read search-engine snippets, which fails the read-the-primary
+rule, so they admitted nothing. Leads parked for an open-network re-run: ARC Prize's Opus 5.5 `high` rows
+(ARC-AGI-1 98.5 % / \$0.16, ARC-AGI-2 93.3 % / \$0.41 per snippets), Artificial Analysis's new *Coding Agent
+Index* (Claude Code harness), two synthorai posts on dev.to claiming measured Opus 5.5 vs Opus 5 runs,
+arXiv 2608.02358 (ScrambleToolBench, a Sonnet 5 effort sweep), and vercel/eve, whose CI now targets Opus 5.5
+but whose results file does not yet. No Claude model has shipped since Opus 5.5.
+
+The public-code axis re-cloned the known repositories and admitted two, both Opus 5.5 full ladders:
+
+- **retort experiment 74** (`retort74`, `retort74go`): one REST-CRUD task in Python and in Go, n = 3 per rung,
+  cost from the CLI's own total. Requirement coverage is 1.0 in all 36 runs, so cost only, as for `retort49`.
+  The ladder is a cliff, not a ramp: Python `high` → `xhigh` is 3.9×, `xhigh` → `max` another 3.4×.
+- **VulcanBench CII v4** (`vulcanbench-ciiv4`): 23 legacy binary-parity tasks in Claude Code 2.1.280. The rows
+  the sweep proposed were wrong in an instructive way: it averaged the harness's `api_equivalent_cost_usd`,
+  which **omits the replies served by the refusal fallback** — and the fallback was on. The author's own table
+  prices each run from Claude Code's reported total, which includes them; that table is what was taken
+  (\$1.70 → \$8.75 per task, monotone). The confound stays on every row: the share of replies written by
+  Opus 4.8 climbs with effort, 0 % at `low` to 48 % at `max`, so the upper rungs are a blend. The same card's
+  Fable 5.1 ladder was left out — it is judged under an older protocol (v3.4 against v3.15) and priced from a
+  different ledger, so it is not a matched-config comparison.
+
+Opus 5.5 `max` cost moves 1.34× → 1.42×; mean cost band 2.303× → 2.23×. Nothing else moves by more than 0.02.
+
 ### Opus 5.5, in one line
 
 Opus 5.5 (released 22 Sep 2026, \$4/\$20 per MTok, cache reads \$0.20) **holds the Pareto frontier** with all five
