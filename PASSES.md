@@ -34,7 +34,7 @@ domains), 27 Sep 2026. **138 → 160 sources, 379 → 432 benchmarks, 2772 → 2
 
 Opus 5.5 rests on 318 measurements in 117 benchmarks from 40 sources and still holds the frontier with Haiku 4.5:
 `low` 0.98 / 0.17, `medium` 1.06 / 0.32, `high` 1.07 / 0.46, `xhigh` 1.12 / 0.75, `max` 1.13 / 1.51 (quality / cost vs
-Opus 5 @high). Nothing else moves by more than 0.03. The ladder check still flags Sonnet 5 `xhigh` 0.87 > `max` 0.79
+Opus 5 @high). Elsewhere no quality moves by more than 0.03 (Haiku 4.5 0.52 → 0.55); the largest cost move is Fable 5.1 `max`, 2.58 → 2.52. The ladder check still flags Sonnet 5 `xhigh` 0.87 > `max` 0.79
 and Opus 4.7 `high` 0.82 > `xhigh` 0.80.
 
 ## Tenth pass: a third salvo, and the held rows re-read line by line
