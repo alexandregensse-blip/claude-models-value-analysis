@@ -5,6 +5,38 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*). Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Eleventh pass: twelve Sonnet agents, narrow axes and broad sweeps
+
+Eight agents on narrow axes (parked leads, Hugging Face, arXiv cs.SE, arXiv cs.AI/CL/LG, Japan, China and Korea,
+Western blogs, new public boards) and four broad sweeps (search queries, citation chasing, older models, task
+domains), 27 Sep 2026. **138 → 160 sources, 379 → 432 benchmarks, 2772 → 2894 measurements.**
+
+- **Boards.** SWE-bench's official Verified board (its own `#leaderboard-data` JSON, mini-SWE-agent runs with
+  `instance_cost`), LMArena's agent leaderboard (median \$/task), MCPMark's legacy board, aipricing.guru's live
+  cost-per-task JSON (six Claude models on 49 tasks, a rolling daily board — an earlier pass had read only its blog),
+  marginlab's Claude Code tracker (daily pass rate across six Opus generations, score only), FeatherBench (seven
+  Claude models; an earlier pass had rejected it on one saturated cell) and Brood War Bench (a 171-game StarCraft
+  round robin; model versions inferred from the date, Sonnet's cost is the page's token estimate).
+- **Papers.** VEX-Bench, EffiBench IIV, an API-vs-interface reasoning-budget study (its "low/medium/high" are
+  `budget_tokens` 1024/4096/16384, filed `think-1k/4k/16k`), a requirements-quality generational sweep,
+  CliffCompaction (its baselines cite other primaries, flagged), MobileCybench (Claude Code, Opus 4.8 vs Opus 5;
+  refusals and early access flagged), Scoring Both Directions, a Japanese stroke-order eval, Adobe's Designer-RSI
+  (eight benchmarks), FinSheet-Bench and a semantic-layer SQL study.
+- **Practitioners and repos.** WhiteKUMALabo's Opus 4.6 effort × difficulty study (the two held rows gain their
+  scores) and its Fable 5 vs Opus 4.8 comparison, Qiita suwa_nobu's cache-state cost sweep, NTT Data's compaction
+  token counts, Claude Code Camp, jev-effort (Opus 5.5 `high` vs `max`), Simbian's cyber-defense benchmark, Box's
+  per-industry Opus 5 → 5.5 accuracy, Vals' web-search board (one couple per search backend), the Terminal-Bench 2.0
+  submission corpus on Hugging Face (one couple per scaffold) and retort's exp-75 (Opus 5.5 on thirteen languages
+  against Opus 5).
+- **Found empty:** Chinese and Korean sites (restatements of vendor numbers, or blocked), translation, tutoring and
+  multilingual beyond maths. The session's WebSearch quota (200, shared by all agents) ran out mid-pass; the agents
+  continued through direct APIs and fetches, and the cap is now raised for future sessions.
+
+Opus 5.5 rests on 318 measurements in 117 benchmarks from 40 sources and still holds the frontier with Haiku 4.5:
+`low` 0.98 / 0.17, `medium` 1.06 / 0.32, `high` 1.07 / 0.46, `xhigh` 1.12 / 0.75, `max` 1.13 / 1.51 (quality / cost vs
+Opus 5 @high). Nothing else moves by more than 0.03. The ladder check still flags Sonnet 5 `xhigh` 0.87 > `max` 0.79
+and Opus 4.7 `high` 0.82 > `xhigh` 0.80.
+
 ## Tenth pass: a third salvo, and the held rows re-read line by line
 
 Eight agents (Opus, low effort) closed the gaps the ninth pass left, then three Sonnet agents turned each report's
