@@ -5,6 +5,46 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*). Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Tenth pass: a third salvo, and the held rows re-read line by line
+
+Eight agents (Opus, low effort) closed the gaps the ninth pass left, then three Sonnet agents turned each report's
+corrections into explicit operations (delete, replace, fill) that were applied and checked for duplicate keys.
+**118 → 138 sources, 272 → 379 benchmarks, 2084 → 2772 measurements.**
+
+- **Held rows re-derived.** Every github-* group was recomputed from the committed data, every pre-eighth-pass arXiv
+  paper re-read, every Vals board re-read from its payload, and the remaining leaderboards (LiveBench's CSVs,
+  stet.sh, Databricks, Braintrust, Quesma, Kingy, CursorBench 3.2 via the Wayback Machine) checked. Errors fixed:
+  `posttrain`'s two "Opus 4.5" rows were another vendor's model (replaced by the paper's Claude Code results);
+  `skillsbench` ran in OpenHands at the highest effort and averaged two conditions into one cost (split in two, `max`);
+  `slopcode` and `ceobench` held v1 values that v2 superseded; `tuabench` costs are published in its
+  leaderboard JSON; several `tokens_out` columns held totals (tycho-arc3, tobench, stageclaw, predev); coderev priced
+  Haiku 4.5 at the Haiku 3.5 rate; ponytail's "Opus" is Opus 4.8 with thinking off; mcptox's Opus 5 and Sonnet 5 ran
+  with adaptive thinking (`default`, not `nothink`); vibe-openscad's "bare" runs send no effort (`default`); ctala is a
+  rolling board at provider defaults (replaced); Databricks' Opus 4.8 is `high` and its Sonnet 5 cost was at \$3/\$15
+  (re-priced). **Braintrust's T25/T50 are context sizes (25K/50K tokens), not thinking budgets**: the group is split
+  by context size at `default`, and the `EMAP` alias in `gen/build.py` is gone. Refs pinned to commits throughout
+  (tilth to the commit before its author withdrew the table on 19 Sep, flagged).
+- **Rows the held sources already had.** retort (Opus 5 ladders from exp-55, Sonnet 5 vs 4.6 vs Opus 4.8, Opus 4.7 vs
+  4.8, Fable 5.1), vibe-openscad, ObviousBench and vlm-exam ladders, retroboard's other cells, runebench and bug-hunt
+  rungs, Vals boards never ingested (Code Migration, HLAB, ProgramBench, ProofBench, Time Horizon, CUA-bench,
+  Terminal-Bench 2.0, Public Benefits v1, AIME, CaseLaw, MedQA, Claude Code harness variants), and LiveBench rows.
+- **New sources.** The Rails team's *Agents on Rails* (two stages, public raw runs), Endor Labs' Agent Security
+  League, Snorkel's Terminal-Bench+, CodeRabbit's review evals, George Liu's 10-prompt Claude Code suite (Opus 5 vs
+  Opus 5.5 at five rungs), Synthorai and CyberQ (Opus 5.5 ladders, list-price estimates), Qiita's coding set, and ten
+  repositories: claude-effort-bench, low-or-bust, the Dealwatch orchestration benchmark, claude-code-eco,
+  effortmining, wook3024's bench, forge-benchmark, an Opus 5.5 effort comparison, effort-pick, and the weather-card
+  benchmark (147 token rows across Claude Code and three Cursor harnesses). Haiku 4.5 runs sent a nominal effort are
+  filed `req-<rung>`; runs with a second configuration of the same couple get their own group.
+- **Not reached:** Reddit and X (every route blocked), GitLab and Kaggle search (auth), aipricing.guru and
+  Brood War Bench (not opened). Unverified and flagged: `vulcanbench3` (values not found in the repo), aa-index4 (no
+  archived snapshot matches), the old 24-benchmark Vals Index.
+
+**What moved.** Opus 5.5 rests on 295 measurements in 96 benchmarks from 36 sources, and still holds the whole
+frontier with Haiku 4.5 (quality / cost vs Opus 5 @high): `low` 0.98 / 0.17, `medium` 1.06 / 0.32, `high` 1.07 /
+0.45, `xhigh` 1.12 / 0.75, `max` 1.13 / 1.51. The older models move most: Haiku 4.5 0.64 → 0.52 in quality, Sonnet 5
+up by 0.04–0.10 per rung, Opus 4.8 up by 0.05. The ladder check flags Sonnet 5 `xhigh` 0.87 > `max` 0.79 and Opus
+4.7 `high` 0.82 > `xhigh` 0.80.
+
 ## Ninth pass: a second salvo, mostly verification
 
 Eight agents (Opus, low effort), 27 Sep 2026: four re-checked held rows against their primaries, four searched
