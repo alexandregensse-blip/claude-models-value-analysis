@@ -359,7 +359,13 @@ def _inits(axis, chains):
         inits = json.load(open(INITS.format(axis=axis)))["inits"]
     except (OSError, ValueError, KeyError):
         return None
-    return inits[:chains] if len(inits) >= chains else None
+    if len(inits) < chains:
+        return None
+    for d in inits:                                                  # CSV draws are rounded (6 significant digits):
+        if "theta" in d:                                             # re-centre θ, which must sum to zero exactly
+            m = sum(d["theta"]) / len(d["theta"])
+            d["theta"] = [t - m for t in d["theta"]]
+    return inits[:chains]
 
 
 def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_inits=True):
@@ -385,10 +391,13 @@ def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_ini
         data=data, chains=st["chains"], parallel_chains=min(st["chains"], os.cpu_count() or 1), iter_warmup=warm,
         iter_sampling=st["samples"], seed=seed, adapt_delta=st["adapt_delta"], max_treedepth=st["max_treedepth"],
         inits=ini, show_progress=False, output_dir=output_dir)
-    try:
-        mcmc = run(inits, st["warmup"]) if inits else run(None, st["warmup_cold"])
-    except (RuntimeError, ValueError):                               # stale warm start (dimensions changed)
-        mcmc = run(None, st["warmup_cold"])
+    if inits:                                                        # a stale warm start (the data's dimensions
+        try:                                                         # changed) fails at once: test it on 1 iteration
+            model.sample(data=data, chains=1, iter_warmup=1, iter_sampling=1, inits=inits[0], seed=seed,
+                         show_progress=False)
+        except (RuntimeError, ValueError):
+            inits = None
+    mcmc = run(inits, st["warmup"]) if inits else run(None, st["warmup_cold"])
     if save_inits:
         _save_inits(mcmc, axis)
     return _from_cmdstan(mcmc, st["max_treedepth"]), maps
