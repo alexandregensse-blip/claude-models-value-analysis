@@ -28,8 +28,8 @@ already followed, and an audit of every Sonnet 5 cost for a leftover \$3/\$15 pr
   Willison's ordinal SVGs. `rtk-base`'s Sonnet 5 costs are Claude Code's `total_cost_usd`, and the paper's own
   calibration (sec. 6.1) shows they sit at the \$3/\$15 "standard" rate (the \$2/\$10 "introductory" rate leaves
   +33 % unexplained): re-priced ×2/3 under the eighth-pass rule.
-- **Price audit.** 101 groups with a Sonnet 5 cost and no stated price basis: no other \$3/\$15 leftover (54 checked
-  at \$2/\$10 by code, JSON or exact arithmetic, 27 real billing, 11 unknown). One agent read two July papers as
+- **Price audit.** 99 groups with a Sonnet 5 cost and no stated price basis: no other \$3/\$15 leftover (54 confirmed
+  at \$2/\$10 by code, JSON or exact arithmetic, 27 real billing, 11 without enough evidence either way). One agent read two July papers as
   proof that Sonnet 5 was actually billed \$3/\$15 until mid-July; checked at the source, neither shows it (one
   calibrates against Claude Code's own table, the other never prints the rate), so the eighth pass's reading
   stands: \$2/\$10 was the launch price, the rise to \$3/\$15 scheduled for 1 Sep was cancelled on 10 Aug. Only
