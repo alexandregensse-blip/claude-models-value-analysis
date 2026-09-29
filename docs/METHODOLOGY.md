@@ -208,7 +208,9 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
 - **Samplers.** Quality: nutpie (Seyboldt et al.), whose adaptation of the mass matrix needs about four times fewer
   steps here, 4 chains × (1,000 warm-up + 16,000 draws), target acceptance 0.85. Cost: CmdStan, 4 chains × (500
   warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the previous fit (1,000
-  warm-up iterations when there is none). Both run in about a quarter of an hour on four cores.
+  warm-up iterations when there is none). A chain left in another region restarts its axis on CmdStan from the
+  previous fit's draws; too few effective draws continue the same chains, adding draws rather than starting again,
+  within a budget of 10 minutes per axis; an axis whose data and model are unchanged is not refitted.
 - **Where it runs.** The fit runs on the maintainer's machine (`model/fit.py`) and only its results are published
   (`model/fit-cache.json`, with a fingerprint of the data, the model and its settings); building the page does not need
   Stan. The fitting environment is pinned in `model/requirements-fit.txt`.

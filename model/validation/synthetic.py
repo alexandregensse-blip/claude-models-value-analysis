@@ -70,8 +70,7 @@ for scn in ("ratio", "irt", "mix"):
     base = {f"{m}@{e}": math.log(v[0]) for m, es in QG.items() for e, v in es.items() if f"{m}@{e}" in L}
     bd, bw, _ = scores(sorted(base), base)
     G, _, _ = lqm.load(path, list(MODEL_ORDER))
-    mcmc, maps = lqm.fit(G, "quality", seed=1, save_inits=False, settings=dict(
-        engine="cmdstan", chains=4, warmup=WARM, warmup_cold=WARM, samples=SAMP, adapt_delta=0.9, max_treedepth=10))
+    mcmc, maps = lqm.fit(G, "quality", seed=1, save_inits=False, settings=dict(warmup=WARM, samples=SAMP))
     T = mcmc.var("theta")
     cs = [c for c in maps["couples"] if c in L]; idx = [maps["ci"][c] for c in cs]; T = T[:, idx]
     est = {c: float(np.median(T[:, k])) for k, c in enumerate(cs)}

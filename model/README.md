@@ -19,8 +19,14 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 ```
 
 Quality: nutpie, 4 chains × (1,000 + 20,000). Cost: CmdStan, 4 chains × (500 + 4,500), started from the last draws of
-the previous fit (`.stan/inits-cost.json`; 1,000 warm-up iterations without it). About a quarter of an hour in all on
-four cores. The model is compiled with `stanc --O1` and `STAN_NO_RANGE_CHECKS`.
+the previous fit (`.stan/inits-cost.json`; 1,000 warm-up iterations without it). The model is compiled with
+`stanc --O1` and `STAN_NO_RANGE_CHECKS`.
+
+Each axis is checked against the validity criteria as soon as it is sampled, within a budget of 10 minutes per axis:
+a chain left in another region (R̂ > 1.05) restarts the axis on CmdStan from the previous fit's last draws; too few
+effective draws continue the same chains (last state, adapted step size and metric, no new warm-up) until the
+criteria hold or the budget is spent. An axis whose prepared data and model code are unchanged since the cached,
+converged fit is kept as it is (`--all` refits both).
 
 ## The contract with the site: `fit-cache.json`
 

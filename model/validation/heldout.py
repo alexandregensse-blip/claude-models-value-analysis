@@ -37,9 +37,8 @@ for f in range(5):
             s = sum(RB.num(x["score"]) for x in rs) / len(rs)
             if s > 0: level[g].append(math.log(s) - math.log(Q[c]))
     G, _, _ = lqm.load(path, MODELS)
-    # CmdStan from a cold start: nutpie's random starts left a chain stuck far away on a fold's data
-    mcmc, maps = lqm.fit(G, "quality", seed=f, save_inits=False, settings=dict(
-        engine="cmdstan", chains=4, warmup=WARM, warmup_cold=WARM, samples=SAMP, adapt_delta=0.9, max_treedepth=10))
+    # the production sampler: nutpie, restarted on CmdStan from the production fit's last draws if a chain is stuck
+    mcmc, maps = lqm.fit(G, "quality", seed=f, save_inits=False, settings=dict(warmup=WARM, samples=SAMP))
     todo = [(g, c) for (g, c) in sorted(hold) if g in G and c in maps["ci"] and c in Q and level[g]]
     preds = lqm.predict(mcmc, maps, G, [dict(group=g, couple=c, publisher=lqm.PUBLISHER_OF.get(cells[(g, c)][0]["source"],
                         cells[(g, c)][0]["source"]), task=cells[(g, c)][0]["task_type"]) for g, c in todo], thin=2, seed=f)
