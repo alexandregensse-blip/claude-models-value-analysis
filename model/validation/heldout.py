@@ -10,7 +10,7 @@ import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
 import lqm, ratio_baseline as RB
 from catalog import MODEL_ORDER
-WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["1000", "2000"][len(sys.argv[1:3]):]))
+WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["1000", "1000"][len(sys.argv[1:3]):]))
 DATA = os.path.join(lqm.ROOT, "raw-data.csv"); MODELS = list(MODEL_ORDER)
 rows = list(csv.DictReader(open(DATA))); hdr = list(rows[0].keys())
 G0, _, _ = lqm.load(DATA, MODELS)
@@ -37,7 +37,9 @@ for f in range(5):
             s = sum(RB.num(x["score"]) for x in rs) / len(rs)
             if s > 0: level[g].append(math.log(s) - math.log(Q[c]))
     G, _, _ = lqm.load(path, MODELS)
-    mcmc, maps = lqm.fit(G, "quality", seed=f, settings=dict(chains=4, warmup=WARM, samples=SAMP), save_inits=False)
+    # CmdStan from a cold start: nutpie's random starts left a chain stuck far away on a fold's data
+    mcmc, maps = lqm.fit(G, "quality", seed=f, save_inits=False, settings=dict(
+        engine="cmdstan", chains=4, warmup=WARM, warmup_cold=WARM, samples=SAMP, adapt_delta=0.9, max_treedepth=10))
     todo = [(g, c) for (g, c) in sorted(hold) if g in G and c in maps["ci"] and c in Q and level[g]]
     preds = lqm.predict(mcmc, maps, G, [dict(group=g, couple=c, publisher=lqm.PUBLISHER_OF.get(cells[(g, c)][0]["source"],
                         cells[(g, c)][0]["source"]), task=cells[(g, c)][0]["task_type"]) for g, c in todo], thin=2, seed=f)

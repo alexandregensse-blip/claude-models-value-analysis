@@ -331,17 +331,14 @@ def _from_nutpie(trace):
                                   leapfrog_mean=round(float(ss["n_steps"].values.mean()), 1)))
 
 
-def _save_inits(mcmc, axis):
-    """Last draw of each chain, for the next fit of this axis (a warm start: same model, slightly different data)."""
+def _save_inits(post, axis):
+    """Last draw of each chain, for the next fit of this axis (a warm start: same model, slightly different data).
+    Saved after every production fit, whatever the engine, so that a later fit can start CmdStan in the right region
+    (random starts can leave a chain far away: seen on the cost axis, and on the quality axis of a held-out fold)."""
     import json, numpy as np
-    params = [v for v in mcmc.metadata.stan_vars if v in _param_names()]
-    inits = []
-    for c in range(mcmc.chains):
-        d = {}
-        for v in params:
-            x = mcmc.stan_variable(v).reshape(mcmc.chains, -1, *mcmc.stan_variable(v).shape[1:])[c, -1]
-            d[v] = np.asarray(x).tolist()
-        inits.append(d)
+    params = [v for v in post.arrays if v in _param_names()]
+    chains = next(iter(post.arrays.values())).shape[0]
+    inits = [{v: np.asarray(post.arrays[v][c, -1]).tolist() for v in params} for c in range(chains)]
     json.dump(dict(inits=inits), open(INITS.format(axis=axis), "w"))
 
 
@@ -383,7 +380,10 @@ def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_ini
         trace = nutpie.sample(cm, draws=st["samples"], tune=st["warmup"], chains=st["chains"],
                               cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,
                               target_accept=st["target_accept"])
-        return _from_nutpie(trace), maps
+        post = _from_nutpie(trace)
+        if save_inits:
+            _save_inits(post, axis)
+        return post, maps
     cs = cmdstan()
     model = cs.CmdStanModel(stan_file=STAN_FILE, stanc_options={"O1": True}, cpp_options={"STAN_NO_RANGE_CHECKS": True})
     inits = _inits(axis, st["chains"])
@@ -398,9 +398,10 @@ def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_ini
         except (RuntimeError, ValueError):
             inits = None
     mcmc = run(inits, st["warmup"]) if inits else run(None, st["warmup_cold"])
+    post = _from_cmdstan(mcmc, st["max_treedepth"])
     if save_inits:
-        _save_inits(mcmc, axis)
-    return _from_cmdstan(mcmc, st["max_treedepth"]), maps
+        _save_inits(post, axis)
+    return post, maps
 
 
 # ---------------------------------------------------------------- reading the posterior
