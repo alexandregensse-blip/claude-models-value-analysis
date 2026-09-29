@@ -362,8 +362,8 @@ def _from_cmdstan(mcmc, max_depth=10):
         x = mcmc.stan_variable(name)                                 # (chains·draws, *shape), chain-major
         arrays[name] = x.reshape(mcmc.chains, -1, *x.shape[1:])
     sm = mcmc.method_variables()
-    adapted = dict(step_size=[float(x) for x in mcmc.step_size], inv_metric=np.asarray(mcmc.metric).tolist()) \
-        if mcmc.metric is not None else None
+    adapted = dict(step_size=[float(x) for x in mcmc.step_size], inv_metric=np.asarray(mcmc.inv_metric).tolist()) \
+        if mcmc.inv_metric is not None else None
     return Posterior(arrays, dict(
         divergences=int(np.sum(sm["divergent__"])), max_treedepth_hits=int(np.sum(sm["treedepth__"] >= max_depth)),
         leapfrog_mean=round(float(np.mean(sm["n_leapfrog__"])), 1)), adapted)
@@ -486,8 +486,8 @@ def _sample(data, axis, st, seed, output_dir=None, inits=None, adapted=None, dra
                   max_treedepth=st.get("max_treedepth", 10), show_progress=False, output_dir=output_dir)
     if adapted is not None:                                          # continuation: no warm-up, adaptation frozen
         mcmc = model.sample(**common, inits=inits, iter_warmup=0, iter_sampling=draws, adapt_engaged=False,
-                            step_size=adapted["step_size"],
-                            metric=[{"inv_metric": m} for m in adapted["inv_metric"]])
+                            step_size=adapted["step_size"], metric="diag_e",
+                            inv_metric=[np.asarray(m) for m in adapted["inv_metric"]])
         return _from_cmdstan(mcmc, st.get("max_treedepth", 10))
     if inits is None and axis in ("cost", "quality"):
         inits = _inits(axis, st["chains"])
