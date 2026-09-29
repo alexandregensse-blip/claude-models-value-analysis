@@ -8,11 +8,16 @@ adds it to the row's variance, docs/METHODOLOGY.md §4). Three origins:
              the data file / √12 (a uniform error). Where a page prints fewer digits than the data file holds, the
              file's digits came from a finer source (a JSON behind the page, a detailed table) or from a computation:
              the file's own last digit is the one that counts (checked source by source, precision/origins.json).
-  digitised  a value read off a chart (precision/charts.json): the axis' units per pixel, recomputed by least squares
-             from the chart's tick coordinates, times the reading error in pixels of that chart, estimated from an
-             independent re-reading of its points (RMS difference / √2, never below the pixel's own 1/√12; the median of
-             the charts when a chart has fewer than 3 re-read points); on a log axis the error is relative. A point
-             re-read further than one marker diameter away is a misreading, not precision: it is reported, not used.
+  digitised  a value read off a chart (precision/charts.json), two errors in quadrature:
+             - reading: the axis' units per pixel, recomputed by least squares from the chart's tick coordinates, times
+               the reading error in pixels of that chart, estimated from an independent re-reading of its points (RMS
+               difference / √2, never below the pixel's own 1/√12; the median of the charts when a chart has fewer
+               than 3 re-read points). A point re-read further than one marker diameter away is a misreading, not
+               precision: it is reported, not used;
+             - the chart's own error against the number it draws (re-plotting, roundings along the publisher's
+               pipeline): a fraction of the axis span, estimated on the same runs printed on two charts (identical
+               printed scores prove the run; their two digitised costs differ by more than both readings).
+             On a log axis the error is relative.
   computed   a cost the collector computed from published token counts: the counts' rounding propagated (the largest
              relative rounding of the counts, conservative), added to the rounding of the result.
 
@@ -55,6 +60,7 @@ def num(x):
 def precision(rows):
     charts = json.load(open(os.path.join(HERE, "precision", "charts.json")))
     origins = json.load(open(os.path.join(HERE, "precision", "origins.json")))["groups"]
+    frac = charts["chart_to_data"]["fraction_of_axis_span"]
     read = {}                                                        # (row key, column) → δ from a chart
     for c in charts["charts"]:
         for k in c["rows"]:
@@ -79,7 +85,7 @@ def precision(rows):
                 var += (v * rel) ** 2
                 stats["from_tokens"] += 1
             for c in read.get((k, col), [])[:1]:
-                u = c["per_px"] * c["reading_px"]
+                u = math.hypot(c["per_px"] * c["reading_px"], frac * c["span"])   # reading, then the chart's own error
                 if c["via"] == "tokens_out" and num(r.get("tokens_out")):
                     var += (v * u / num(r["tokens_out"])) ** 2       # cost = tokens read on the chart × price
                 elif c["scale"] == "log":

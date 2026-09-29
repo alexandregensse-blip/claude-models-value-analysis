@@ -112,9 +112,15 @@ def load(path, models, field="score"):
     1. Composites: a couple measured on a component of a composite (catalog.COMPOSITES) leaves the composite out.
     2. Homogeneity: a group is split by publisher, harness (without version), scale (bounded scores: bound) and, on
        the cost axis, cost unit — only rows measured under one configuration are compared.
-    3. Republished numbers count once: two groups of one family that share at least two identical values away from
-       the metric's bounds are one experiment printed twice; their identical rows are kept once, in the larger group.
-       A single coincidence, or equality at a bound (two runs both at 100 %), is not a republication."""
+    3. Republished numbers count once: a model's series (its efforts) that two groups share, identical on at least two
+       values away from the metric's bounds, is one experiment printed twice (a chart reprinted, or a series reused in
+       another chart next to new ones); its identical rows are kept once, in the larger group. Identical
+       means within what separates two copies of one number: both reading precisions (2·√(δ₁² + δ₂²): two readings
+       of one chart point, or of two charts drawing it) plus one unit of the last digit of each (a rounding made the
+       wrong way somewhere along the publisher's pipeline). Scores are compared within a family (one benchmark);
+       costs within a publisher, across its families, since one run scored two ways has one cost. The series must
+       agree on every value the two groups share but one at most (one number miscopied): a few coincidences among
+       many shared values, or equality at a bound (two runs both at 100 %), are not a republication."""
     report = collections.Counter()
     raw = collections.defaultdict(list)
     for r in csv.DictReader(open(path)):
@@ -131,6 +137,7 @@ def load(path, models, field="score"):
             couple=f'{r["model"]}@{r["effort"]}', model=r["model"], publisher=PUBLISHER_OF.get(r["source"], r["source"]),
             task=r["task_type"] or "", raw=val, metric=metric, kind="log" if field == "cost_usd" else kind(metric),
             ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]), prec=reading_sd(r, field),
+            step=10.0 ** -(len(r[field].strip().split(".")[1]) if "." in r[field] else 0),
             unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "")))
 
     # --- 1. composites
@@ -158,29 +165,29 @@ def load(path, models, field="score"):
 
     # --- 3. republications
     def same(x1, x2):
-        n = bound(x1["metric"]) if field != "cost_usd" else None
-        tol = 5e-4 * n if n else 5e-4 * max(abs(x1["raw"]), abs(x2["raw"]))
-        return abs(x1["raw"] - x2["raw"]) <= tol
+        return abs(x1["raw"] - x2["raw"]) <= 2 * math.hypot(x1["prec"], x2["prec"]) + x1["step"] + x2["step"]
 
     def at_bound(x):
         n = bound(x["metric"]) if field != "cost_usd" else None
         return n is not None and (x["raw"] >= 0.9995 * n or x["raw"] <= 0.0005 * n)
 
     size = {g: len({x["couple"] for x in rows}) for g, rows in by_group.items()}
-    slots = collections.defaultdict(list)                               # (family, couple) → [(group, row)]
+    slots = collections.defaultdict(list)                               # (family or publisher, couple) → [(group, row)]
     for g in sorted(by_group, key=lambda g: (-size[g], g)):
         for x in by_group[g]:
-            slots[(family[g] or g, x["couple"])].append((g, x))
-    matches = collections.Counter()
+            slots[(x["publisher"] if field == "cost_usd" else family[g] or g, x["couple"])].append((g, x))
+    matches, shared = collections.Counter(), collections.Counter()   # per (group, group, model): one model's series
     for entries in slots.values():
         for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
-            if g1 != g2 and same(x1, x2) and not at_bound(x1):
-                matches[(g1, g2)] += 1
-    republished = {pair for pair, n in matches.items() if n >= 2}
+            if g1 != g2 and not at_bound(x1):
+                shared[(g1, g2, x1["model"])] += 1
+                matches[(g1, g2, x1["model"])] += same(x1, x2)
+    series = {k for k, n in matches.items() if n >= 2 and n >= shared[k] - 1}
+    republished = sorted((*k, matches[k], shared[k]) for k in series)   # (group, group, model, identical, shared)
     dropped = set()
     for entries in slots.values():
         for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
-            if (g1, g2) in republished and same(x1, x2) and id(x1) not in dropped:
+            if (g1, g2, x1["model"]) in series and same(x1, x2) and id(x1) not in dropped:
                 dropped.add(id(x2))
 
     # --- groups
@@ -313,9 +320,9 @@ INITS = os.path.join(STAN_DIR, "inits-{axis}.json")                  # last draw
 # divergence), which needs 4× fewer leapfrog steps here; cost = CmdStan NUTS started from the previous fit's last
 # draws (nutpie cannot be given starting points, and random starts can leave a cost chain in a remote region).
 SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=20000, target_accept=0.85,
-                           budget=900, extend=5000),
+                           budget=600, extend=5000),
            "cost": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
-                        max_treedepth=10, budget=900, extend=1500)}
+                        max_treedepth=10, budget=600, extend=1500)}
 RESTART_RHAT = 1.05                  # above this, a chain is in another region: continuing it would not help
 
 
