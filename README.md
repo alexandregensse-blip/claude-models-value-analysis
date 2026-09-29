@@ -16,7 +16,7 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 
 ## What the report shows
 
-1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional band ovals (what one new benchmark would report). A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
+1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
 2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell with its band.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
 4. **Method** — how the numbers and the bands are built; the full methodology is in [`METHODOLOGY.md`](METHODOLOGY.md).
@@ -26,18 +26,20 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 Scores from different benchmarks do not share a scale, and raw dollars from different tasks are not comparable, so
 the report fuses the measurements with a **latent-quality model** (`gen/lqm.py`). In short:
 
-1. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness.
+1. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness,
+   one scale; a group that mixes them is split. An index is left out for a couple whose index components are in the data.
 2. **Each metric on its natural scale.** Logit for a bounded score, log for money, points and cost, as is for an Elo
    or an unknown composite — read from the metric's label, never from the benchmark's identity.
 3. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
    matter); every `(model, effort)` couple has one latent quality and one latent cost, atomic — no model × effort
    separability is assumed. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
-   or one kind of task from tilting the result. Student-t noise; an early-access run counts for a third.
+   or one kind of task from tilting the result. Student-t noise with estimated tails; early-access runs down-weighted
+   by an estimated factor. No couple is a reference inside the fit. Fitted in Stan.
 4. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
    publisher's weight saturates at its own systematic effect. Republished numbers count once.
-5. **Output**: quality = mean predicted score over the benchmark panel relative to the reference couple (Opus 5 @high),
-   cost = cost on a task of typical size relative to it; band = what one new benchmark would report (16–84 %). A
-   couple measured by a single publisher is not shown.
+5. **Output**: quality = expected score averaged over the benchmark panel relative to the reference couple (Opus 5
+   @high), cost = cost on a task of typical size relative to it — the reference is a divisor, nothing more; each couple
+   carries its own 16–84 % interval. A couple measured by a single publisher is not shown.
 
 The full procedure — collection rules, scales, model, weighting, estimation, price curve, value index, tiers and
 crown — is in [`METHODOLOGY.md`](METHODOLOGY.md); the checks are reproducible with the scripts in `gen/validation/`.
@@ -48,9 +50,10 @@ crown — is in [`METHODOLOGY.md`](METHODOLOGY.md); the checks are reproducible 
 |---|---|
 | `index.html` | The built interactive report (self-contained; open in a browser). |
 | `gen/build.py` | **Generator** — reads the data, computes the grids, and assembles `index.html`. Run: `python3 gen/build.py`. |
-| `gen/lqm.py` | The fusion model (latent quality and cost per couple), pure standard library. |
+| `gen/lqm.py`, `gen/lqm.stan` | The fusion model (latent quality and cost per couple): data preparation in Python, the model in Stan. |
+| `gen/fit.py` | Runs the fit on both axes and writes `gen/fit-cache.json` (needs the Stan environment, see "Refit"). |
 | `gen/catalog.py` | Benchmark families and publisher outlets used by the fusion. |
-| `gen/fit-cache.json` | The fitted grids and diagnostics, keyed by a fingerprint of the data, the model and its settings: the build refits (about 6 minutes) only when one of them changes. Commit it with the rebuilt page. |
+| `gen/fit-cache.json` | The fit's results (per couple: log centre, quasi-standard error, publishers, new-source interval) and its diagnostics, keyed by a fingerprint of the data, the model and its settings. The build reads it and refuses one that is stale or did not converge. Commit it with the rebuilt page. |
 | `gen/validation/` | Scripts that reproduce the method's checks (held-out prediction, known-truth recovery, sampler calibration, band coverage, reference invariance, sensitivity). |
 | `METHODOLOGY.md` | The full methodology, from collection to the tier picks. |
 | `gen/{style.css, body.html, app.js}` | Source modules the generator bundles (CSS, HTML body, client-side SVG rendering + interactions). |
@@ -93,11 +96,22 @@ python3 gen/build.py     # → writes index.html
 
 No dependencies beyond the Python 3 standard library and Node.js (any recent version, no npm package), which the build uses to pre-render the page's text. The client-side rendering is vanilla JS/SVG (no external libraries), which keeps the file trivially portable.
 
+### Refit
+
+Needed only when the data, `gen/lqm.py`, `gen/lqm.stan` or `gen/catalog.py` change (the build says so). It needs a
+C++17 compiler and `make`, then:
+
+```bash
+uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r gen/requirements-fit.txt
+.stan/venv/bin/python -c "import cmdstanpy; cmdstanpy.install_cmdstan(dir='.stan', version='2.40.0')"
+.stan/venv/bin/python gen/fit.py      # → gen/fit-cache.json, then python3 gen/build.py
+```
+
 ## Limitations
 
-- **One number per couple hides the task type.** The fusion keeps a couple tested mostly on one kind of task from inheriting that task's advantage, but the ranking can still differ on a single task type; the band shows how much one new benchmark can disagree.
-- **Few independent sources per couple.** Most couples rest on a handful of publishers; a couple measured by few, disagreeing publishers keeps a wide band, and one measured by a single publisher is not shown.
-- **A new model starts on its vendor's numbers.** In its first weeks a model is measured mostly by its vendor and a few leaderboards; its band narrows as third-party runs arrive.
+- **One number per couple hides the task type.** The fusion keeps a couple tested mostly on one kind of task from inheriting that task's advantage, but the ranking can still differ on a single task type; the new-source interval shows how much one new source can disagree.
+- **Few independent sources per couple.** Most couples rest on a handful of publishers; a couple measured by few, disagreeing publishers keeps a wide interval, and one measured by a single publisher is not shown.
+- **A new model starts on its vendor's numbers.** In its first weeks a model is measured mostly by its vendor and a few leaderboards; its interval narrows as third-party runs arrive.
 - **Which couples a source measures is not random.** The fusion absorbs the level and the type of the tasks each source chose, not a selection on another axis.
 - **Public-data ceiling.** Independent measurements of cost *and* quality on the same task are scarce; an internal run on a representative workload remains the intended final validation.
 
