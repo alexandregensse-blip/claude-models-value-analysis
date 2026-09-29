@@ -1,16 +1,23 @@
-"""Fit one axis and save the posterior summary, for the other scripts of this folder.
+"""Fit one axis and save the reference-free summary, for compare.py.
 
-Usage: python3 fit.py quality|cost REFERENCE_COUPLE SEED OUT.pkl [DATA.csv] [CHAINS] [SWEEPS] [BURN]
-Example: python3 fit.py quality opus-5@high 11 q.pkl"""
-import os, pickle, sys, time
+Usage: .stan/venv/bin/python gen/validation/fit.py quality|cost SEED OUT.pkl [DATA.csv] [DROP_PUBLISHER]
+DROP_PUBLISHER removes every row of one publisher before the fit (sensitivity)."""
+import csv, os, pickle, sys, tempfile, time
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
 import build as B, lqm
-axis, ref, seed, out = sys.argv[1], sys.argv[2], int(sys.argv[3]), sys.argv[4]
-data = sys.argv[5] if len(sys.argv) > 5 else os.path.join(B.ROOT, "raw-data.csv")
-chains, sweeps, burn = (int(x) for x in (sys.argv[6:9] + ["4", "6000", "2000"][len(sys.argv[6:9]):]))
+axis, seed, out = sys.argv[1], int(sys.argv[2]), sys.argv[3]
+data = sys.argv[4] if len(sys.argv) > 4 and sys.argv[4] != "-" else os.path.join(B.ROOT, "raw-data.csv")
+if len(sys.argv) > 5:                                              # sensitivity: without one publisher
+    rows = list(csv.DictReader(open(data)))
+    tmp = os.path.join(tempfile.mkdtemp(), "raw-data.csv")
+    with open(tmp, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=list(rows[0])); w.writeheader()
+        w.writerows(r for r in rows if lqm.PUBLISHER_OF.get(r["source"], r["source"]) != sys.argv[5])
+    data = tmp
 groups, report, republished = lqm.load(data, list(B.MX), field="cost_usd" if axis == "cost" else "score")
 t = time.time()
-F = lqm.fit_chains(groups, ref, axis=axis, chains=chains, sweeps=sweeps, burn=burn, seed=seed)
-S = lqm.summarise(F)
-pickle.dump(dict(S=S, report=dict(report), republished=republished, F=F), open(out, "wb"))
-print(f"{axis}: {time.time() - t:.0f}s, R-hat max {max(v['rhat'] for v in S.values() if v['rhat'] == v['rhat']):.3f}")
+mcmc, maps = lqm.fit(groups, axis, chains=B.FIT["chains"], warmup=B.FIT["warmup"], samples=B.FIT["samples"],
+                     seed=seed, adapt_delta=B.FIT["adapt_delta"])
+S, diag = lqm.summarise(mcmc, maps, groups)
+pickle.dump(dict(axis=axis, S=S, diag=diag, report=dict(report)), open(out, "wb"))
+print(f"{axis}: {time.time() - t:.0f}s, R-hat max {diag['rhat_max']}, converged {lqm.converged(diag)}")

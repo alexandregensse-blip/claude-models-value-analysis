@@ -518,7 +518,7 @@ function drawTierTuner(){
 }
 // ---------- MATRIX (sorted by relative quality desc) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
 const fr=x=>x.toFixed(2);
-const ciStr=(m,e,v)=> (m===ANCHOR.m&&e===ANCHOR.e) ? "anchor" : (v[1]===v[2] ? "single source" : `${fr(v[1])}–${fr(v[2])}`);
+const ciStr=(m,e,v)=> `${fr(v[1])}–${fr(v[2])}`;   // every couple, the anchor included, carries its own 16–84 % interval
 const relQ=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?qg[e][0]:0; };   // quality at the model's top effort
 const M={};
 for(const m in COSTGRID){ const cg=COSTGRID[m]||{}; M[m]={q:relQ(m), tag:MODELS[m].tag};

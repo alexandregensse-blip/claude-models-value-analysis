@@ -120,7 +120,9 @@ def load(path, models, field="score"):
     for g, rows in raw.items():
         parts = collections.defaultdict(list)
         for x in rows:
-            scale = x["unit"] if field == "cost_usd" else (x["kind"], bound(x["metric"]))
+            # scale: a bounded score by its bound (a percentage and a pass rate are one scale), any other by its label
+            scale = x["unit"] if field == "cost_usd" else (
+                (x["kind"], bound(x["metric"])) if x["kind"] == "logit" else (x["kind"], x["metric"]))
             parts[(x["publisher"], x["harness"], scale)].append(x)
         for i, (_, xs) in enumerate(sorted(parts.items(), key=lambda kv: -len(kv[1]))):
             name = g if i == 0 else f"{g}~{i + 1}"
@@ -326,9 +328,11 @@ def quasi_variances(L, lo=0.16, hi=0.84):
         Jm[np.arange(len(I)), I] = q[I] / s
         Jm[np.arange(len(I)), J] = q[J] / s
         step = np.linalg.lstsq(Jm, -res, rcond=None)[0]
-        lq += step
+        lq += np.clip(step, -1, 1)                                   # damped: a step never multiplies q by more than e
         if np.max(np.abs(step)) < 1e-10:
             break
+    else:
+        raise RuntimeError("quasi-variances did not converge")
     q = np.exp(lq)
     rel = np.abs(np.sqrt((q[I] + q[J]) / V) - 1)
     return q, float(rel.max()), float(np.median(rel))
@@ -363,7 +367,6 @@ def diagnostics(mcmc, qv_max=None, qv_med=None):
     col = {c.lower(): c for c in s.columns}
     rh, eb, et = s[col["r_hat"]], s[col.get("ess_bulk", "ESS_bulk")], s[col.get("ess_tail", "ESS_tail")]
     lvl = s[[i.startswith("level[") for i in s.index]]
-    d = mcmc.diagnose() or ""
     div = int(sum(mcmc.divergences)) if mcmc.divergences is not None else None
     tree = int(sum(mcmc.max_treedepths)) if mcmc.max_treedepths is not None else None
     return dict(rhat_max=round(float(rh.max()), 4), ess_bulk_min=int(eb.min()), ess_tail_min=int(et.min()),
