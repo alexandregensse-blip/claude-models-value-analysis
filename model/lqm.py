@@ -2,7 +2,7 @@
 
 For every measured row r (group b, couple c of model m, publisher s, task type t):
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b²)
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
 
   f        per metric (METRIC RULES): empirical logit of a bounded score, log of an unbounded positive quantity,
            identity for an interval or unknown scale; log on the cost axis.
@@ -10,8 +10,11 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            no couple is a reference; the page divides by its reference couple afterwards (a display choice).
   o_b      group offset, flat. a_b group gain: quality log(a_b/σ_b) ~ N(0, s_g²) (discrimination, pooled; its zero
            mean sets the unit of θ); cost log a_b ~ N(0, s_g²) (elasticity around 1).
-  σ_b      group noise, never below the metric's resolution, pooled: log σ_b ~ N(μ_σ, s_σ²) truncated at the floor,
-           on the group's standardised scale (invariant to an affine change of the metric), μ_σ flat.
+  σ_b      group noise, pooled: log σ_b ~ N(μ_σ, s_σ²) on the group's standardised scale (invariant to an affine change
+           of the metric), μ_σ flat.
+  d_r      reading precision of the value (READING PRECISION): the standard deviation of the error made in reading it
+           — rounding of a printed number, resolution of a chart that was digitised, propagated through a computation —
+           carried to the model's scale; known, added to the row's variance.
   h_r      shape of the sampling noise of an empirical logit, 1/(2√(q(1−q))) at the observed proportion q; 1 else.
   κ_r      variance multiplier of an early-access run, log κ ~ N(0, 1); 1 for other runs.
   u, w, v  publisher × couple (sd τ_c, τ_c ~ N⁺(0, s_τ)), publisher × model (sd ψ), couple × task type (sd ω)
@@ -76,6 +79,28 @@ def harness_base(h):
     return re.sub(r"[-_ ]?v?\d+(\.\d+){1,3}(-r\d+)?", "", (h or "").strip())
 
 
+# ---------------------------------------------------------------- reading precision
+PREC_FIELD = {"score": "score_prec", "cost_usd": "cost_prec"}
+
+
+def rounding_sd(text):
+    """Standard deviation of the rounding error of a number as written: one unit of its last decimal / √12 (an
+    integer: a unit). Used when the data file gives no precision for a value."""
+    t = (text or "").strip().lower().split("e")[0]
+    dec = len(t.split(".")[1]) if "." in t else 0
+    return 10.0 ** -dec / math.sqrt(12)
+
+
+def reading_sd(r, field):
+    """Reading precision δ of a value, in its own unit: the data file's column (score_prec, cost_prec) when filled,
+    else the rounding of the value as written in the file."""
+    try:
+        d = float(r.get(PREC_FIELD[field]) or "nan")
+    except ValueError:
+        d = float("nan")
+    return d if d == d and d >= 0 else rounding_sd(r[field])
+
+
 # ---------------------------------------------------------------- data
 EFFORTS = {"low", "medium", "high", "xhigh", "max", "solo"}           # 'solo': a model without an effort setting
 NO_TASK_EFFECT = {"mixed", ""}
@@ -105,7 +130,7 @@ def load(path, models, field="score"):
         raw[r["group"]].append(dict(
             couple=f'{r["model"]}@{r["effort"]}', model=r["model"], publisher=PUBLISHER_OF.get(r["source"], r["source"]),
             task=r["task_type"] or "", raw=val, metric=metric, kind="log" if field == "cost_usd" else kind(metric),
-            ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]),
+            ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]), prec=reading_sd(r, field),
             unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "")))
 
     # --- 1. composites
@@ -189,20 +214,22 @@ def load(path, models, field="score"):
                 q = empirical_q(x["raw"] / bound(x["metric"]), n_steps)
                 x["y"] = math.log(q / (1 - q))
                 x["h"] = 0.5 / math.sqrt(q * (1 - q))
+                x["dy"] = x["prec"] / bound(x["metric"]) * n_steps / (n_steps + 1) / (q * (1 - q))   # delta method
             elif k == "log":
                 x["y"] = math.log(v)
+                x["dy"] = x["prec"] / abs(v)
             else:
                 x["y"] = v
+                x["dy"] = x["prec"]
         ys = [x["y"] for x in rows]
         mu = sum(ys) / len(ys)
         sd = (sum((y - mu) ** 2 for y in ys) / len(ys)) ** 0.5 if field != "cost_usd" else 1.0
         sd = sd or 1.0                                                  # a tie away from the bounds: equal couples
-        steps = sorted({round(abs(p - q), 9) for p in ys for q in ys if p != q})
         for x in rows:
             x["z"] = (x["y"] - mu) / sd                                 # numerical prescale; the model is affine-invariant
+            x["d"] = x["dy"] / sd                                       # reading precision on the same scale
         groups[g] = dict(rows=rows, mu=mu, sd=sd, kind=k, metric=rows[0]["metric"], family=family[g],
-                         publisher=rows[0]["publisher"], task=rows[0]["task"], n_steps=n_steps,
-                         floor=max((steps[0] if steps else 0.0) / sd / math.sqrt(12), 1e-3))  # noise floor: resolution
+                         publisher=rows[0]["publisher"], task=rows[0]["task"], n_steps=n_steps)
     return groups, report, sorted(republished)
 
 
@@ -253,14 +280,15 @@ def stan_data(groups, axis):
     data = dict(
         N=len(entries), G=len(names), C=len(couples), cost=int(axis == "cost"),
         grp=[b + 1 for b, _ in entries], cpl=[ci[x["couple"]] + 1 for _, x in entries],
-        z=[x["z"] for _, x in entries], h=[x["h"] for _, x in entries], ea=[x["ea"] for _, x in entries],
+        z=[x["z"] for _, x in entries], h=[x["h"] for _, x in entries], d=[x["d"] for _, x in entries],
+        ea=[x["ea"] for _, x in entries],
         L1=len(levels["pub_couple"]), L2=len(levels["pub_model"]), L3=len(levels["couple_task"]),
         k1=[lvl("pub_couple", x["publisher"], x["couple"], x["task"]) for _, x in entries],
         k2=[lvl("pub_model", x["publisher"], x["couple"], x["task"]) for _, x in entries],
         k3=[lvl("couple_task", x["publisher"], x["couple"], x["task"]) for _, x in entries],
         own1=[ci[c] + 1 for _, c in levels["pub_couple"]],
         **centring(levels),
-        noise_floor=[groups[g]["floor"] for g in names], mu=[groups[g]["mu"] for g in names],
+        mu=[groups[g]["mu"] for g in names],
         sd=[groups[g]["sd"] for g in names],
         P=len(P), pg=[b + 1 for b, _ in P], pw=[w for _, w in P],
         r1=[[lvl("pub_couple", groups[names[b]]["publisher"], c, groups[names[b]]["task"]) for c in couples] for b, _ in P],
@@ -284,9 +312,11 @@ INITS = os.path.join(STAN_DIR, "inits-{axis}.json")                  # last draw
 # Sampler per axis (validated in /work/.geom/JOURNAL.md): quality = nutpie (diagonal mass matrix adapted by Fisher
 # divergence), which needs 4× fewer leapfrog steps here; cost = CmdStan NUTS started from the previous fit's last
 # draws (nutpie cannot be given starting points, and random starts can leave a cost chain in a remote region).
-SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=20000, target_accept=0.85),
+SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=20000, target_accept=0.85,
+                           budget=900, extend=5000),
            "cost": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
-                        max_treedepth=10)}
+                        max_treedepth=10, budget=900, extend=1500)}
+RESTART_RHAT = 1.05                  # above this, a chain is in another region: continuing it would not help
 
 
 def cmdstan():
@@ -300,15 +330,29 @@ def cmdstan():
 
 
 class Posterior:
-    """Draws of every variable (chains merged, draws × shape), with the per-chain layout kept for diagnostics."""
+    """Draws of every variable (chains merged, draws × shape), with the per-chain layout kept for diagnostics, and the
+    sampler's adapted state of each chain (step size, inverse metric), from which the chains can be continued."""
 
-    def __init__(self, arrays, stats):
+    def __init__(self, arrays, stats, adapted=None):
         self.arrays = arrays                                         # name → array (chains, draws, *shape)
         self.stats = stats                                           # divergences, max_treedepth_hits, step sizes…
+        self.adapted = adapted                                       # dict(step_size=[C], inv_metric=[C][dim]) or None
 
     def var(self, name):
         a = self.arrays[name]
         return a.reshape(a.shape[0] * a.shape[1], *a.shape[2:])
+
+    def extend(self, more):
+        """The same chains, continued by `more` (same number of chains, draws appended)."""
+        import numpy as np
+        n0, n1 = (next(iter(p.arrays.values())).shape[1] for p in (self, more))
+        arrays = {v: np.concatenate([self.arrays[v], more.arrays[v]], axis=1) for v in self.arrays if v in more.arrays}
+        stats = dict(self.stats)
+        for k in ("divergences", "max_treedepth_hits"):
+            stats[k] = None if self.stats.get(k) is None and more.stats.get(k) is None else \
+                (self.stats.get(k) or 0) + (more.stats.get(k) or 0)
+        stats["leapfrog_mean"] = round((self.stats["leapfrog_mean"] * n0 + more.stats["leapfrog_mean"] * n1) / (n0 + n1), 1)
+        return Posterior(arrays, stats, more.adapted or self.adapted)
 
 
 def _from_cmdstan(mcmc, max_depth=10):
@@ -318,28 +362,43 @@ def _from_cmdstan(mcmc, max_depth=10):
         x = mcmc.stan_variable(name)                                 # (chains·draws, *shape), chain-major
         arrays[name] = x.reshape(mcmc.chains, -1, *x.shape[1:])
     sm = mcmc.method_variables()
+    adapted = dict(step_size=[float(x) for x in mcmc.step_size], inv_metric=np.asarray(mcmc.metric).tolist()) \
+        if mcmc.metric is not None else None
     return Posterior(arrays, dict(
         divergences=int(np.sum(sm["divergent__"])), max_treedepth_hits=int(np.sum(sm["treedepth__"] >= max_depth)),
-        leapfrog_mean=round(float(np.mean(sm["n_leapfrog__"])), 1)))
+        leapfrog_mean=round(float(np.mean(sm["n_leapfrog__"])), 1)), adapted)
 
 
 def _from_nutpie(trace):
     import numpy as np
     post, ss = trace["posterior"], trace["sample_stats"]
     arrays = {v: np.asarray(post[v].values) for v in post.data_vars}
+    adapted = dict(step_size=[float(x) for x in ss["step_size"].values[:, -1]],
+                   inv_metric=np.asarray(ss["mass_matrix_inv"].values[:, -1]).tolist()) \
+        if "mass_matrix_inv" in ss else None
     return Posterior(arrays, dict(divergences=int(ss["diverging"].values.sum()), max_treedepth_hits=None,
-                                  leapfrog_mean=round(float(ss["n_steps"].values.mean()), 1)))
+                                  leapfrog_mean=round(float(ss["n_steps"].values.mean()), 1)), adapted)
+
+
+def _last_draws(post):
+    """Last draw of each chain, parameters only: where each chain stands."""
+    import numpy as np
+    params = [v for v in post.arrays if v in _param_names()]
+    chains = next(iter(post.arrays.values())).shape[0]
+    out = [{v: np.asarray(post.arrays[v][c, -1]).tolist() for v in params} for c in range(chains)]
+    for d in out:                                                    # θ must sum to zero to machine precision
+        if "theta" in d:
+            m = sum(d["theta"]) / len(d["theta"])
+            d["theta"] = [t - m for t in d["theta"]]
+    return out
 
 
 def _save_inits(post, axis):
     """Last draw of each chain, for the next fit of this axis (a warm start: same model, slightly different data).
     Saved after every production fit, whatever the engine, so that a later fit can start CmdStan in the right region
     (random starts can leave a chain far away: seen on the cost axis, and on the quality axis of a held-out fold)."""
-    import json, numpy as np
-    params = [v for v in post.arrays if v in _param_names()]
-    chains = next(iter(post.arrays.values())).shape[0]
-    inits = [{v: np.asarray(post.arrays[v][c, -1]).tolist() for v in params} for c in range(chains)]
-    json.dump(dict(inits=inits), open(INITS.format(axis=axis), "w"))
+    import json
+    json.dump(dict(inits=_last_draws(post)), open(INITS.format(axis=axis), "w"))
 
 
 def _param_names():
@@ -365,43 +424,82 @@ def _inits(axis, chains):
     return inits[:chains]
 
 
-def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_inits=True):
+def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_inits=True, log=None):
     """Sample the posterior of one axis with its validated sampler (SAMPLER). Returns (Posterior, maps). The production
-    fit keeps its last draws as the next warm start (save_inits); checks and experiments must not overwrite them."""
-    import numpy as np
+    fit keeps its last draws as the next warm start (save_inits); checks and experiments must not overwrite them.
+
+    The run is checked against the validity criteria (CONVERGED) and, within the axis' time budget:
+      * a chain left in a remote region (R̂ > RESTART_RHAT) restarts the axis on CmdStan from the previous fit's last
+        draws (the only engine that takes starting points per chain);
+      * otherwise too few effective draws continue the SAME chains (last state, adapted step size and metric, no new
+        warm-up) by slices until the criteria hold or the budget is spent — draws are added, never thrown away."""
+    import time
+    say = log or (lambda *a: None)
+    t0 = time.time()
     st = dict(SAMPLER[axis], **(settings or {}))
     data, maps = stan_data(groups, axis)
-    if st["engine"] == "nutpie":
+    post = _sample(data, axis, st, seed, output_dir)
+    diag, _ = diagnostics(post)
+    say(f"{axis}: {st['engine']} {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
+        f"{diag['ess_tail_min']}, divergences {diag['divergences']}")
+    if diag["rhat_max"] > RESTART_RHAT and st["engine"] == "nutpie":
+        st = dict(SAMPLER["cost"], **{k: st[k] for k in ("chains",)}, engine="cmdstan")
+        post = _sample(data, axis, st, seed + 1, output_dir, inits=_inits(axis, st["chains"]))
+        diag, _ = diagnostics(post)
+        say(f"{axis}: restarted on CmdStan {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
+            f"{diag['ess_tail_min']}")
+    per_draw = (time.time() - t0) / max(1, next(iter(post.arrays.values())).shape[1])    # seconds per draw per chain
+    k = 0
+    while not converged(diag) and diag["divergences"] == 0 and diag["rhat_max"] <= RESTART_RHAT \
+            and post.adapted is not None:
+        n = min(st["extend"], int((st["budget"] - (time.time() - t0)) / per_draw * 0.8))
+        if n < st["extend"] // 4:
+            break
+        k += 1
+        post = post.extend(_sample(data, axis, dict(st, engine="cmdstan"), seed + 10 + k, output_dir,
+                                   inits=_last_draws(post), adapted=post.adapted, draws=n))
+        diag, _ = diagnostics(post)
+        say(f"{axis}: continued +{n} draws/chain {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, "
+            f"ESS {diag['ess_bulk_min']}/{diag['ess_tail_min']}")
+    post.stats.update(extensions=k, engine=st["engine"])
+    if save_inits:
+        _save_inits(post, axis)
+    return post, maps
+
+
+def _sample(data, axis, st, seed, output_dir=None, inits=None, adapted=None, draws=None):
+    """One sampling run. adapted = the chains' step sizes and inverse metrics: continue them without warm-up."""
+    import numpy as np
+    if st["engine"] == "nutpie" and adapted is None:
         import nutpie
         os.environ.setdefault("BRIDGESTAN", os.path.join(STAN_DIR, "bridgestan-2.9.0"))
         cm = nutpie.compile_stan_model(filename=STAN_FILE, extra_stanc_args=["--O1"],
                                        extra_compile_args=["STAN_NO_RANGE_CHECKS=true"]).with_data(
             **{k: (np.asarray(v) if isinstance(v, list) else v) for k, v in data.items()})
-        trace = nutpie.sample(cm, draws=st["samples"], tune=st["warmup"], chains=st["chains"],
+        trace = nutpie.sample(cm, draws=draws or st["samples"], tune=st["warmup"], chains=st["chains"],
                               cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,
-                              target_accept=st["target_accept"])
-        post = _from_nutpie(trace)
-        if save_inits:
-            _save_inits(post, axis)
-        return post, maps
+                              target_accept=st["target_accept"], store_mass_matrix=True)
+        return _from_nutpie(trace)
     cs = cmdstan()
     model = cs.CmdStanModel(stan_file=STAN_FILE, stanc_options={"O1": True}, cpp_options={"STAN_NO_RANGE_CHECKS": True})
-    inits = _inits(axis, st["chains"])
-    run = lambda ini, warm: model.sample(
-        data=data, chains=st["chains"], parallel_chains=min(st["chains"], os.cpu_count() or 1), iter_warmup=warm,
-        iter_sampling=st["samples"], seed=seed, adapt_delta=st["adapt_delta"], max_treedepth=st["max_treedepth"],
-        inits=ini, show_progress=False, output_dir=output_dir)
+    common = dict(data=data, chains=st["chains"], parallel_chains=min(st["chains"], os.cpu_count() or 1), seed=seed,
+                  max_treedepth=st.get("max_treedepth", 10), show_progress=False, output_dir=output_dir)
+    if adapted is not None:                                          # continuation: no warm-up, adaptation frozen
+        mcmc = model.sample(**common, inits=inits, iter_warmup=0, iter_sampling=draws, adapt_engaged=False,
+                            step_size=adapted["step_size"],
+                            metric=[{"inv_metric": m} for m in adapted["inv_metric"]])
+        return _from_cmdstan(mcmc, st.get("max_treedepth", 10))
+    if inits is None and axis in ("cost", "quality"):
+        inits = _inits(axis, st["chains"])
     if inits:                                                        # a stale warm start (the data's dimensions
         try:                                                         # changed) fails at once: test it on 1 iteration
             model.sample(data=data, chains=1, iter_warmup=1, iter_sampling=1, inits=inits[0], seed=seed,
                          show_progress=False)
         except (RuntimeError, ValueError):
             inits = None
-    mcmc = run(inits, st["warmup"]) if inits else run(None, st["warmup_cold"])
-    post = _from_cmdstan(mcmc, st["max_treedepth"])
-    if save_inits:
-        _save_inits(post, axis)
-    return post, maps
+    mcmc = model.sample(**common, inits=inits or None, iter_warmup=st["warmup"] if inits else st["warmup_cold"],
+                        iter_sampling=draws or st["samples"], adapt_delta=st["adapt_delta"])
+    return _from_cmdstan(mcmc, st.get("max_treedepth", 10))
 
 
 # ---------------------------------------------------------------- reading the posterior
@@ -551,7 +649,7 @@ def converged(diag):
 
 def predict(post, maps, groups, rows, thin=4, seed=0):
     """Posterior predictive of rows the fit did not see, in groups it did. Each row: dict(group, couple, publisher,
-    task, h=1). Returns per row (mean of the expected value f⁻¹ scale, list of predictive draws of f(y)) where known
+    task, h=1, d=reading precision on the group's scale). Returns per row (mean of the expected value f⁻¹ scale, list of predictive draws of f(y)) where known
     effects are used and unknown ones drawn from their distribution; the noise is Student-t_ν(σ_b·h)."""
     import numpy as np
     rng = np.random.default_rng(seed)
@@ -584,6 +682,6 @@ def predict(post, maps, groups, rows, thin=4, seed=0):
             k = li["couple_task"].get((x["couple"], x["task"]))
             lat += Vt[:, k] if k is not None else rng.normal(0, 1, D) * V["omega"]
         m = V["o"][:, b] + V["a"][:, b] * lat
-        noise = V["sigma"][:, b] * x.get("h", 1.0) * rng.standard_t(V["nu"])
+        noise = np.sqrt((V["sigma"][:, b] * x.get("h", 1.0)) ** 2 + x.get("d", 0.0) ** 2) * rng.standard_t(V["nu"])
         out.append((G["mu"] + G["sd"] * m, G["mu"] + G["sd"] * (m + noise)))
     return out

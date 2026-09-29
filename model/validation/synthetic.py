@@ -41,7 +41,9 @@ def make(scn, seed):
         elif lk[0] == "elo":  v = lk[1] + lk[2] * x + rng.gauss(0, 10); met = "elo"
         elif lk[0] == "pow":  v = min(100, lk[1] * math.exp(lk[2] * x) * math.exp(rng.gauss(0, .03))); met = "score%"
         else:                 v = min(max(100 * (1 - math.exp(-lk[1] * math.exp(x))) + rng.gauss(0, 1), 0), 100); met = "score%"
-        rr = dict(r); rr["score"] = f"{v:.4f}"; rr["score_metric"] = met; out.append(rr)
+        rr = dict(r); rr["score"] = f"{v:.4f}"; rr["score_metric"] = met
+        if "score_prec" in rr: rr["score_prec"] = ""              # the synthetic score's own rounding (4 decimals)
+        out.append(rr)
     d = os.path.join(HERE, "synthetic_tmp", f"{scn}_{seed}"); os.makedirs(d, exist_ok=True)
     with open(os.path.join(d, "raw-data.csv"), "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=hdr); w.writeheader(); [w.writerow(r) for r in out]

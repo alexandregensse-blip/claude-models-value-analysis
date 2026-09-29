@@ -14,11 +14,27 @@ It lives at the root because it is published with the page (`/raw-data.csv`). On
 | `task_type`, `complexity` | coding, agentic-tool, computer-use, reasoning-math, writing, or mixed for composites |
 | `harness` | the agent or tool that ran the model (versions of one harness count as one configuration) |
 | `unit`, `cost_usd`, `tokens_in`, `tokens_out`, `cached_pct` | the cost and its unit (per task, per run…) |
+| `cost_prec`, `score_prec` | the reading precision of the cost and of the score: the standard deviation of the error made in reading the value off its source, in the value's unit (below) |
 | `score`, `score_metric` | the score and its metric; the metric's label sets its scale (docs/METHODOLOGY.md §4) |
 | `confound` | every doubt, as free-text flags (digitised, effort inferred, early access `EAP-run`, re-priced…) |
 | `ref` | where the number comes from (URL, page, file) |
 
 The admission rules are in docs/METHODOLOGY.md §2.
+
+## Reading precision: `precision.py`, `precision/`
+
+Every value carries the precision with which it was read (`cost_prec`, `score_prec`), which the model adds to the
+row's variance. `precision.py` computes it: the rounding of a printed number (one unit of its last published digit
+/ √12), the resolution of a chart that was digitised, the rounding of published token counts a cost was computed from.
+Its inputs, checked source by source with quoted evidence (September 2026):
+
+| File | Content |
+|---|---|
+| `precision/charts.json` | every digitised chart axis: units per pixel (recomputed from the tick coordinates), reading error in pixels (from an independent re-reading of its points), the rows read on it |
+| `precision/origins.json` | per group: whether each value is printed, from a primary data file or computed, and the step of its last published digit |
+
+A new row brings its precision: run `python3 data/precision.py` after adding rows (a printed value needs nothing
+more; a digitised chart needs its entry in `precision/charts.json`).
 
 ## The catalogue: `catalog/`
 

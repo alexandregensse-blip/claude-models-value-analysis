@@ -1,34 +1,20 @@
 // Latent quality (or log cost) of (model, effort) couples, fused from heterogeneous benchmarks. Method: METHODOLOGY.md §5;
 // data preparation: lqm.py. For every row r (group b, couple c of model m, publisher s, task type t):
 //
-//   f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,   ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b²)
+//   f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,   ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
 //
 // θ sums to zero: no couple is a reference; the page divides by its reference couple afterwards. h_r is the noise
 // shape of an empirical logit, 1/(2√(q(1−q))) at the observed proportion (1 on other scales); κ_r the estimated
-// variance multiplier of an early-access run. `level` (generated quantities) is the read-out published by the page;
-// what one new source would report (`level_new`) is computed from the draws in lqm.py.
+// variance multiplier of an early-access run; d_r the known reading precision of the value (rounding of a printed
+// number, resolution of a digitised chart, propagated through a computation). `level` (generated quantities) is the
+// read-out published by the page; what one new source would report (`level_new`) is computed from the draws in lqm.py.
 //
 // Writing (the model is unchanged by any of it; see model/validation and the fit diagnostics):
 //  * log σ_b centred in every group and log a_b centred in groups of ≥ 20 rows (non-centred elsewhere): the
 //    parameterisation under which NUTS mixes on both axes;
-//  * the truncated prior of log σ_b through the log Mills ratio, which stays finite far in the tail (the direct
-//    form reached lp = +inf when s_σ collapsed during warm-up and trapped the chain);
-//  * effects centred within their set and mapped to rows by sparse products, the early-access multiplier and the
-//    truncation as vector expressions, so that stanc --O1 keeps every vector in struct-of-arrays form (−36 % per
-//    gradient; compile with --O1 and STAN_NO_RANGE_CHECKS, as lqm.fit does).
-functions {
-  real log_mills(real b) {
-    if (b < 25) return std_normal_lccdf(b) + 0.5 * square(b);
-    real ib2 = inv_square(b);
-    return -log(b) - 0.5 * log(2 * pi()) + log1p(-ib2 + 3 * square(ib2) - 15 * ib2 * square(ib2));
-  }
-  real sum_log_mills(vector b) {
-    if (max(b) < 25) return std_normal_lccdf(b) + 0.5 * dot_self(b);
-    real s = 0;
-    for (i in 1:rows(b)) s += log_mills(b[i]);
-    return s;
-  }
-}
+//  * effects centred within their set and mapped to rows by sparse products, the row scales as vector expressions,
+//    so that stanc --O1 keeps every vector in struct-of-arrays form (−36 % per gradient; compile with --O1 and
+//    STAN_NO_RANGE_CHECKS, as lqm.fit does).
 data {
   int<lower=1> N;                                  // rows
   int<lower=1> G;                                  // groups
@@ -38,6 +24,7 @@ data {
   array[N] int<lower=1, upper=C> cpl;
   vector[N] z;                                     // f(y), prescaled per group: z = (f(y) − mu_b) / sd_b
   vector<lower=0>[N] h;                            // noise shape of the row (1 unless the group is a logit)
+  vector<lower=0>[N] d;                            // reading precision of the value, on the scale of z
   array[N] int<lower=0, upper=1> ea;               // early-access run
   int<lower=0> L1;                                 // publisher × couple levels
   int<lower=0> L2;                                 // publisher × model levels
@@ -54,7 +41,6 @@ data {
   array[L2] int<lower=1, upper=max(S2, 1)> set2;
   int<lower=0> S3;
   array[L3] int<lower=1, upper=max(S3, 1)> set3;
-  vector<lower=0>[G] noise_floor;                  // σ_b never below the metric's resolution
   vector[G] mu;
   vector<lower=0>[G] sd;
   // panel read-out (quality axis): expected score of every couple on every panel group, as that group's publisher
@@ -72,7 +58,7 @@ data {
   vector[K] ghw;
 }
 transformed data {
-  vector[G] log_floor = log(noise_floor);
+  vector[N] d2 = square(d);
   int has_ea = max(ea);
   vector[N] hea = h .* to_vector(ea);              // h on early-access rows, 0 elsewhere
   array[G] int n_rows = rep_array(0, G);
@@ -160,10 +146,9 @@ parameters {
   array[has_ea] real log_kappa;
   real mu_sig;
   real<lower=0> s_sig;
-  vector<lower=0>[G] ls_ex;
+  vector[G] log_sigma;
 }
 transformed parameters {
-  vector[G] log_sigma = log_floor + ls_ex;
   vector[G] sigma = exp(log_sigma);
   vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (s_g * lg_raw + qual * log_sigma));   // qual = 1 − cost (0·x = 0 exactly)
   vector[C] tau = s_tau * tau_raw;
@@ -181,7 +166,7 @@ model {
                   + csr_matrix_times_vector(N, L2, wB2, vB2, uB2, e2 - m2[set2])
                   + csr_matrix_times_vector(N, L3, wB3, vB3, uB3, e3 - m3[set3]);
     real km1 = has_ea ? exp(0.5 * log_kappa[1]) - 1 : 0;   // variance multiplier of early access, minus 1
-    vector[N] scale = sigma[grp] .* (h + hea * km1);
+    vector[N] scale = sqrt(square(sigma[grp] .* (h + hea * km1)) + d2);
     z ~ student_t(nu, o[grp] + a[grp] .* x, scale);
   }
   theta ~ normal(0, theta_scale);
@@ -198,11 +183,7 @@ model {
   nu ~ gamma(2, 0.1);
   if (has_ea) log_kappa[1] ~ normal(0, 1);
   s_sig ~ student_t(3, 0, 2.5);
-  {
-    vector[G] bnd = (log_floor - mu_sig) / s_sig;
-    vector[G] e = ls_ex / s_sig;
-    target += -dot_product(e, bnd + 0.5 * e) - sum_log_mills(bnd) - G * log(s_sig);
-  }
+  log_sigma ~ normal(mu_sig, s_sig);
 }
 generated quantities {
   // same read-outs as recommended.stan; the panel read-out is evaluated for all (panel group, couple) pairs at once,
