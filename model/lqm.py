@@ -112,9 +112,10 @@ def load(path, models, field="score"):
     1. Composites: a couple measured on a component of a composite (catalog.COMPOSITES) leaves the composite out.
     2. Homogeneity: a group is split by publisher, harness (without version), scale (bounded scores: bound) and, on
        the cost axis, cost unit — only rows measured under one configuration are compared.
-    3. Republished numbers count once: a model's series (its efforts) that two groups share, identical on at least two
-       values away from the metric's bounds, is one experiment printed twice (a chart reprinted, or a series reused in
-       another chart next to new ones); its identical rows are kept once, in the larger group. Identical
+    3. Republished numbers count once: what two groups share — all their common values, or one model's series (its
+       efforts) — identical on at least two values away from the metric's bounds, is one experiment printed twice (a
+       table reprinted, or a series reused in another chart next to new ones); its identical rows are kept once, in the
+       larger group. Identical
        means within what separates two copies of one number: both reading precisions (2·√(δ₁² + δ₂²): two readings
        of one chart point, or of two charts drawing it) plus one unit of the last digit of each (a rounding made the
        wrong way somewhere along the publisher's pipeline). Scores are compared within a family (one benchmark);
@@ -176,18 +177,19 @@ def load(path, models, field="score"):
     for g in sorted(by_group, key=lambda g: (-size[g], g)):
         for x in by_group[g]:
             slots[(x["publisher"] if field == "cost_usd" else family[g] or g, x["couple"])].append((g, x))
-    matches, shared = collections.Counter(), collections.Counter()   # per (group, group, model): one model's series
+    matches, shared = collections.Counter(), collections.Counter()   # per group pair, and per model's series in it
     for entries in slots.values():
         for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
             if g1 != g2 and not at_bound(x1):
-                shared[(g1, g2, x1["model"])] += 1
-                matches[(g1, g2, x1["model"])] += same(x1, x2)
+                for k in ((g1, g2, ""), (g1, g2, x1["model"])):
+                    shared[k] += 1
+                    matches[k] += same(x1, x2)
     series = {k for k, n in matches.items() if n >= 2 and n >= shared[k] - 1}
-    republished = sorted((*k, matches[k], shared[k]) for k in series)   # (group, group, model, identical, shared)
+    republished = sorted((*k, matches[k], shared[k]) for k in series)   # (group, group, model or "" = all, identical, shared)
     dropped = set()
     for entries in slots.values():
         for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
-            if (g1, g2, x1["model"]) in series and same(x1, x2) and id(x1) not in dropped:
+            if ((g1, g2, "") in series or (g1, g2, x1["model"]) in series) and same(x1, x2) and id(x1) not in dropped:
                 dropped.add(id(x2))
 
     # --- groups
