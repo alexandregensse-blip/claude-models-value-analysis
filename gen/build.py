@@ -19,11 +19,11 @@ SITE_HOST   = SITE_URL.split("://", 1)[1].rstrip("/")   # shown in the share ima
 BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster Tools ownership (msvalidate.01); keep it
 INDEXNOW_KEY = "b3573dbc1da690e66e9ef05b081b7abe"   # public by design: served as /<key>.txt, proves ownership to IndexNow (Bing…)
 
-MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5":6,"sonnet-4.6":7,"haiku-4.5":8}
+MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5.5":6,"sonnet-5":7,"sonnet-4.6":8,"haiku-4.5":9}
 EXP = {"low","medium","high","xhigh","max"}
 EMAP = {}                               # effort aliases (braintrust T25/T50 turned out to be context sizes, not effort)
 GRID_ANCHOR = "opus-5@high"                 # (model@effort) pinned to 1.0 on both grids
-PRICE_OUT = {"fable-5.1":50,"fable-5":50,"opus-5.5":20,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5":10,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
+PRICE_OUT = {"fable-5.1":50,"fable-5":50,"opus-5.5":20,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5.5":10,"sonnet-5":10,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
 
 def eff(e): return EMAP.get(e, e)
 def num(x):
@@ -172,7 +172,7 @@ def groups_data():
       "valsindex":("Vals Index","xmodel","Vals AI · 24-bench composite, 6 models all at max; overlaps EMB+VibeCode ✓"),
       "osworld2b":("OSWorld 2.0 batch","xmodel","arXiv 2606.29537 · 108 workflows, 500 steps, batched tool calls, max ✓"),
       "osworld2s":("OSWorld 2.0 single","xmodel","arXiv 2606.29537 · 108 workflows, 500 steps, single tool call, max ✓"),
-      "scf51fcode":("FrontierCode-Ext","sweep","Cognition leaderboard JSON · v1.1 Extended (150 tasks), 3 models × low→max, measured USD/rollout ✓"),
+      "scf51fcode":("FrontierCode-Ext","sweep","Cognition leaderboard JSON · v1.1 Extended (150 tasks), Claude models × low→max incl. Sonnet 5.5, measured USD/rollout ✓"),
       "scf51hlet":("HLE tools (F5.1)","sweep","Fable 5.1 card p177 · HLE with tools, 3 models × sweep low→max, $ cost, scores printed ✓"),
       "scf51hlen":("HLE no-tools (F5.1)","sweep","Fable 5.1 card p178 · HLE without tools, 3 models × sweep low→max, $ cost, scores printed ✓"),
       "scf51draco":("DRACO (F5.1)","sweep","Fable 5.1 card p179 · 980k budget, 3 models × sweep low→max, $ cost, scores printed ✓"),
@@ -434,11 +434,12 @@ def groups_data():
       "firecrawl":("Firecrawl 57-run","xmodel","claude -p in sandbox-exec · 3 models at matched high, measured usage; 7/7 all → cost only ✓"),
       "alebench":("ALE-Bench","xmodel","Epoch archive · 3 models at matched high, measured token splits ✓"),
       "weirdml":("WeirdML","sweep","Epoch archive · 3 models × high/max, cost per run ✓"),
-      "livebench":("LiveBench","xmodel","3 models at max, measured tokens × rates; published weighting not reproducible → cost only ✓"),
+      "livebench":("LiveBench","xmodel","new-livebench CSVs · 2026-06-25 release, 13 Claude configs (max/xhigh/high/medium), measured tokens × rates, global = mean of 7 category means ✓"),
+      "cursorbench40":("CursorBench 4.0","sweep","cursor.com payload · v4.0 long-horizon suite, Opus 5/5.5, Fable 5.1, Sonnet 5/5.5 × low→max, measured tokens × list incl. cache ✓"),
       "willison51":("Willison SVG 5.1","sweep","llm CLI · one fixed SVG prompt, Fable 5.1 low→max, measured tokens; trivial task ✓"),
       "worldbuild":("WorldBuild Bench","xmodel","own harness · 3 game briefs, Fable 5 vs Opus 5 both at high, real API ledger ✓"),
       "stet25":("Stet 25-PR","xmodel","Claude Code · 25 replayed PRs, Opus 5 vs Opus 4.8 both at medium, relative cost ✓"),
-      "fcodemain":("FrontierCode main","sweep","Cognition leaderboard JSON · v1.1 main (100 tasks), 3 models × low→max, measured USD/rollout ✓"),
+      "fcodemain":("FrontierCode main","sweep","Cognition leaderboard JSON · v1.1 main (100 tasks), Claude models × low→max incl. Sonnet 5.5, measured USD/rollout ✓"),
       "zapierab":("Zapier AutomationB.","sweep","AutomationBench 1.0.6 · 657 held-out tasks, strict pass/fail, measured tokens × list ✓"),
       "aagdpval":("AA GDPval v2","sweep","AA evaluation page · 220 tasks, Elo; cost derived from AA's published token counts ✓"),
       "aaautob":("AA AutomationB.","xmodel","AA evaluation page · 657 tasks partial-credit, 3 models at max ✓"),
@@ -607,6 +608,7 @@ def ratio_grid(field):
     ORD = {"fable-5.1":["low","medium","high","xhigh","max"],"fable-5":["low","medium","high","xhigh","max"],
            "opus-5.5":["low","medium","high","xhigh","max"],"opus-5":["low","medium","high","xhigh","max"],
            "opus-4.8":["low","medium","high","xhigh","max"],
+           "sonnet-5.5":["low","medium","high","xhigh","max"],
            "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
            "sonnet-4.6":["low","medium","high","max"]}
     out = {}
@@ -858,7 +860,7 @@ def main():
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
     app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
     am, ae = GRID_ANCHOR.split("@")
-    alabel = {"opus-5.5":"Opus 5.5","opus-5":"Opus 5","opus-4.8":"Opus 4.8","fable-5.1":"Fable 5.1","fable-5":"Fable 5","sonnet-5":"Sonnet 5"}[am]
+    alabel = {"opus-5.5":"Opus 5.5","opus-5":"Opus 5","opus-4.8":"Opus 4.8","fable-5.1":"Fable 5.1","fable-5":"Fable 5","sonnet-5.5":"Sonnet 5.5","sonnet-5":"Sonnet 5"}[am]
     app  = app.replace("__ANCHOR_JS__", json.dumps({"m": am, "e": ae, "label": f"{alabel} @{ae}"}))
     body = body.replace("__ANCHOR_HDR__", f"{alabel.replace(' ','&nbsp;')} · {ae}")
     body = body.replace("__ANCHOR__", f"{alabel.replace(' ','&nbsp;')}&nbsp;@{ae}")
