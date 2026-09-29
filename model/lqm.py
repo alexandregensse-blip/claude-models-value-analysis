@@ -428,9 +428,14 @@ def _from_nutpie(trace):
     import numpy as np
     post, ss = trace["posterior"], trace["sample_stats"]
     arrays = {v: np.asarray(post[v].values) for v in post.data_vars}
-    adapted = dict(step_size=[float(x) for x in ss["step_size"].values[:, -1]],
-                   inv_metric=np.asarray(ss["mass_matrix_inv"].values[:, -1]).tolist()) \
-        if "mass_matrix_inv" in ss else None
+    adapted = None
+    if "warmup_sample_stats" in trace.children and "mass_matrix_inv" in trace["warmup_sample_stats"]:
+        # nutpie records the mass matrix while it adapts (NaN once it is frozen): the last finite one is the final
+        w = np.asarray(trace["warmup_sample_stats"]["mass_matrix_inv"].values)
+        fin = [np.isfinite(w[c]).all(axis=1).nonzero()[0] for c in range(w.shape[0])]
+        if all(len(f) for f in fin):
+            adapted = dict(step_size=[float(x) for x in ss["step_size"].values[:, -1]],
+                           inv_metric=[w[c, f[-1]].tolist() for c, f in enumerate(fin)])
     return Posterior(arrays, dict(divergences=int(ss["diverging"].values.sum()), max_treedepth_hits=None,
                                   leapfrog_mean=round(float(ss["n_steps"].values.mean()), 1)), adapted)
 
