@@ -4,10 +4,10 @@
 δ is the standard deviation of the error made in READING a value off its source, in the value's own unit (the model
 adds it to the row's variance, docs/METHODOLOGY.md §4). Three origins:
 
-  printed    a number copied from a text or a table: its rounding, one unit of its last published digit / √12 (a
-             uniform error). The step is the coarser of the data file's own last digit and the source's printed one
-             (precision/origins.json, checked source by source); a primary data file (JSON, CSV) is taken at the
-             data file's precision.
+  printed    a number copied from a text, a table or a data file: its rounding, one unit of the last digit written in
+             the data file / √12 (a uniform error). Where a page prints fewer digits than the data file holds, the
+             file's digits came from a finer source (a JSON behind the page, a detailed table) or from a computation:
+             the file's own last digit is the one that counts (checked source by source, precision/origins.json).
   digitised  a value read off a chart (precision/charts.json): the axis' units per pixel, recomputed by least squares
              from the chart's tick coordinates, times the reading error in pixels of that chart, estimated from an
              independent re-reading of its points (RMS difference / √2, never below the pixel's own 1/√12; the median of
@@ -70,10 +70,9 @@ def precision(rows):
                 continue
             step = last_digit(r[col])
             src = o.get("score" if col == "score" else "cost", {})
-            if src.get("origin") in ("printed", "computed-by-source") and src.get("step") and src["step"] > step:
-                step = src["step"]
-                stats["printed_coarser"] += 1
-            var = (step / S12) ** 2
+            if src.get("step") and src["step"] > step:
+                stats["printed_coarser"] += 1                          # reported only: the data file's digits come
+            var = (step / S12) ** 2                                     # from a finer source or a computation
             if col == "cost_usd" and src.get("from_tokens"):
                 rel = max((count_step(r[t]) / S12 / num(r[t]) for t in ("tokens_in", "tokens_out") if num(r.get(t))),
                           default=0.0)

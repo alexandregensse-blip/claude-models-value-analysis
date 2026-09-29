@@ -486,7 +486,7 @@ def _sample(data, axis, st, seed, output_dir=None, inits=None, adapted=None, dra
                   max_treedepth=st.get("max_treedepth", 10), show_progress=False, output_dir=output_dir)
     if adapted is not None:                                          # continuation: no warm-up, adaptation frozen
         mcmc = model.sample(**common, inits=inits, iter_warmup=0, iter_sampling=draws, adapt_engaged=False,
-                            step_size=adapted["step_size"], metric="diag_e",
+                            step_size=adapted["step_size"],
                             inv_metric=[np.asarray(m) for m in adapted["inv_metric"]])
         return _from_cmdstan(mcmc, st.get("max_treedepth", 10))
     if inits is None and axis in ("cost", "quality"):
