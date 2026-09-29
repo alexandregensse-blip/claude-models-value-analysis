@@ -1,15 +1,4 @@
-const MODELS = {
-  "fable-5.1": {label:"Fable 5.1", c:"--fable51"},
-  "fable-5":   {label:"Fable 5",   c:"--fable5"},
-  "opus-5.5":  {label:"Opus 5.5",  c:"--opus55"},
-  "opus-5":    {label:"Opus 5",    c:"--opus5"},
-  "opus-4.8":  {label:"Opus 4.8",  c:"--opus48"},
-  "sonnet-5.5":{label:"Sonnet 5.5",c:"--sonnet55"},
-  "sonnet-5":  {label:"Sonnet 5",  c:"--sonnet5", tag:true},
-  "opus-4.7":  {label:"Opus 4.7",  c:"--opus47"},
-  "sonnet-4.6":{label:"Sonnet 4.6",c:"--sonnet46"},
-  "haiku-4.5": {label:"Haiku 4.5", c:"--haiku45"},
-};
+const MODELS = __MODELS__;   // data/catalog/models.json: label, colour variable, task-size flag, in legend order
 const ANCHOR=__ANCHOR_JS__;      // the couple pinned to 1.0 (and to 100 on the value index)
 const LEGACY=["opus-4.7","sonnet-4.6"];                         // older models: hidden unless the reader turns them on
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -28,7 +17,7 @@ function solveN(A,b){ const n=b.length, M=A.map((r,i)=>[...r,b[i]]);
   return M.map((r,i)=>r[n]/M[i][i]); }
 
 // COST & QUALITY grids: relative [centre, lo, hi] per (model, effort), ANCHOR = 1.0, from the latent-quality model
-// (gen/lqm.py): centre = posterior median; lo–hi = the couple's own 16–84 % interval (quasi-standard error), so that any
+// (model/lqm.py): centre = posterior median; lo–hi = the couple's own 16–84 % interval (quasi-standard error), so that any
 // two couples compare through their two intervals — the anchor is a divisor and shares nothing with the others.
 const COSTGRID=__COSTGRID__;
 const QUALGRID=__QUALGRID__;   // {model:{effort:[centre, lo, hi]}}
@@ -617,7 +606,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
   if(sl) sl.textContent=curGroups.slice().sort((a,b)=>a.g.localeCompare(b.g,'en')).map(g=>g.g).join(" · ");
 }
 // Answer first: the headline pick in one sentence in the header (visible), and the full statement — crown, pick per
-// tier, top-quality couple — as plain text for llms.txt. Both pre-rendered at build time (gen/prerender.js).
+// tier, top-quality couple — as plain text for llms.txt. Both pre-rendered at build time (site/prerender.js).
 function answerData(){
   const {picks,crown}=tierPicks();
   let top=null; for(const m in COSTGRID){ const qg=QUALGRID[m]||{};

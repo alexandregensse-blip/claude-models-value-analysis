@@ -24,11 +24,12 @@ Estimation: Hamiltonian Monte Carlo (NUTS) on lqm.stan — nutpie on the quality
 from the previous fit on the cost axis (SAMPLER). The read-out `level` is computed in Stan for every draw; `summarise`
 turns it into a centre and a per-couple interval (quasi-variances).
 """
-import collections, csv, itertools, math, os, re
-
-from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
+import collections, csv, itertools, math, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+sys.path.insert(0, os.path.join(ROOT, "data"))
+from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
 STAN_FILE = os.path.join(HERE, "lqm.stan")
 
 # ---------------------------------------------------------------- metric rules
@@ -353,7 +354,7 @@ def _param_names():
 
 def _inits(axis, chains):
     """Warm-start inits if the previous fit's parameters still fit the current data's dimensions, else None."""
-    import json, numpy as np
+    import json
     try:
         inits = json.load(open(INITS.format(axis=axis)))["inits"]
     except (OSError, ValueError, KeyError):
@@ -490,7 +491,6 @@ def summarise(post, maps, groups, data, lo=0.16, hi=0.84, min_publishers=2, seed
     for g in groups.values():
         for x in g["rows"]:
             pubs[x["couple"]].add(x["publisher"])
-    import numpy as np
     Ln = level_new({k: post.var(k) for k in ("theta", "o", "a", "tau", "psi", "omega")}, data,
                    np.random.default_rng(seed))
     diag, mcse_level = diagnostics(post)

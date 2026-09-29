@@ -8,7 +8,7 @@
 // variance multiplier of an early-access run. `level` (generated quantities) is the read-out published by the page;
 // what one new source would report (`level_new`) is computed from the draws in lqm.py.
 //
-// Writing (the model is unchanged by any of it; see gen/validation and the fit diagnostics):
+// Writing (the model is unchanged by any of it; see model/validation and the fit diagnostics):
 //  * log σ_b centred in every group and log a_b centred in groups of ≥ 20 rows (non-centred elsewhere): the
 //    parameterisation under which NUTS mixes on both axes;
 //  * the truncated prior of log σ_b through the log Mills ratio, which stays finite far in the tail (the direct

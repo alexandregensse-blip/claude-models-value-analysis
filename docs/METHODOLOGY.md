@@ -166,7 +166,7 @@ runs are estimated.
 
 ### Estimation
 
-The model is written in Stan (`gen/lqm.stan`); the data preparation of §2–§4 is in `gen/lqm.py`. It is sampled with
+The model is written in Stan (`model/lqm.stan`); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
 the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; Betancourt 2017).
 
 - **Writing.** How a model is written changes how fast the sampler explores it, not what it estimates. Each group's
@@ -180,9 +180,9 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   steps here, 4 chains × (1,000 warm-up + 16,000 draws), target acceptance 0.85. Cost: CmdStan, 4 chains × (500
   warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the previous fit (1,000
   warm-up iterations when there is none). Both run in about a quarter of an hour on four cores.
-- **Where it runs.** The fit runs on the maintainer's machine (`gen/fit.py`) and only its results are published
-  (`gen/fit-cache.json`, with a fingerprint of the data, the model and its settings); building the page does not need
-  Stan. The fitting environment is pinned in `gen/requirements-fit.txt`.
+- **Where it runs.** The fit runs on the maintainer's machine (`model/fit.py`) and only its results are published
+  (`model/fit-cache.json`, with a fingerprint of the data, the model and its settings); building the page does not need
+  Stan. The fitting environment is pinned in `model/requirements-fit.txt`.
 
 A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01, the bulk
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
@@ -253,7 +253,7 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 
 ### Checks
 
-Scripts in `gen/validation/` reproduce each check. ⟨Figures of the final fit: to be filled in.⟩
+Scripts in `model/validation/` reproduce each check. ⟨Figures of the final fit: to be filled in.⟩
 
 - **Held-out prediction** (`heldout.py`). One fifth of the percentage scores removed, the model refitted, the
   removed scores predicted, five times; compared with a score-ratio baseline (per-benchmark ratios to the reference,

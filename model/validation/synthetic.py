@@ -7,15 +7,16 @@ The model is refitted and its θ compared with the truth after the best affine m
   qv coverage = same with the quasi-standard errors ±√(q_i + q_j) the page draws (target 68 %).
 The score-ratio consolidation is scored the same way (distortion, wrong pairs).
 
-Usage: .stan/venv/bin/python gen/validation/synthetic.py [WARMUP] [SAMPLES]"""
+Usage: .stan/venv/bin/python model/validation/synthetic.py [WARMUP] [SAMPLES]"""
 import csv, itertools, json, math, os, random, sys
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
-import build as B, lqm, ratio_baseline as RB
+import lqm, ratio_baseline as RB
+from catalog import MODEL_ORDER
 WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["1000", "2000"][len(sys.argv[1:3]):]))
 L = json.load(open(os.path.join(HERE, "synthetic_truth.json")))["truth"]
-rows = list(csv.DictReader(open(os.path.join(B.ROOT, "raw-data.csv")))); hdr = list(rows[0].keys())
-data = [r for r in rows if r["group"] and not r["group"].startswith("#") and r["model"] in B.MX
+rows = list(csv.DictReader(open(os.path.join(lqm.ROOT, "raw-data.csv")))); hdr = list(rows[0].keys())
+data = [r for r in rows if r["group"] and not r["group"].startswith("#") and r["model"] in MODEL_ORDER
         and r["effort"] in lqm.EFFORTS and RB.num(r["score"]) is not None]
 sig = lambda x: 1 / (1 + math.exp(-x))
 
@@ -63,10 +64,10 @@ def scores(cs, est):
 
 for scn in ("ratio", "irt", "mix"):
     path = make(scn, 1)
-    QG = RB.ratio_grid("score", path, list(B.MX), "opus-5@high")
+    QG = RB.ratio_grid("score", path, list(MODEL_ORDER), "opus-5@high")
     base = {f"{m}@{e}": math.log(v[0]) for m, es in QG.items() for e, v in es.items() if f"{m}@{e}" in L}
     bd, bw, _ = scores(sorted(base), base)
-    G, _, _ = lqm.load(path, list(B.MX))
+    G, _, _ = lqm.load(path, list(MODEL_ORDER))
     mcmc, maps = lqm.fit(G, "quality", seed=1, settings=dict(chains=4, warmup=WARM, samples=SAMP), save_inits=False)
     T = mcmc.var("theta")
     cs = [c for c in maps["couples"] if c in L]; idx = [maps["ci"][c] for c in cs]; T = T[:, idx]

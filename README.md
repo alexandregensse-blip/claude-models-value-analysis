@@ -8,7 +8,7 @@ Open [`index.html`](index.html) in a browser — fully self-contained (no server
 
 **Live page:** <https://claude-models.agensse.com/>. It is served from `main`: the server checks `main` every 5 minutes and copies a whitelist of files: `index.html`, `raw-data.csv`, `robots.txt`, `sitemap.xml`, `llms.txt`, `favicon.svg`, `favicon.png`, `og-image.png` and the IndexNow key file (`b3573dbc1da690e66e9ef05b081b7abe.txt`). Nothing is built on the server, so `index.html` must be committed built, and a new file served at the root must be added to that whitelist. Exploratory blocks (value score, window tuner, full method) are collapsed by default; click to expand.
 
-**Publishing a fork:** in `gen/build.py`, set `SITE_URL` to the fork's address (every absolute URL, the sitemap, `robots.txt`, `llms.txt` and the domain shown in the share image derive from it) and `REPO_URL` to its repository; set `BING_SITE_VERIFICATION` and `INDEXNOW_KEY` to `""` (they prove this site's ownership to Bing and IndexNow; an empty value leaves out the tag and the key file) or to your own values. Delete `b3573dbc1da690e66e9ef05b081b7abe.txt`, run `python3 gen/build.py`, and redraw the share image with the new domain (`gen/og_image.py`, needs Pillow: `uv run --no-project --with pillow python gen/og_image.py`). The author credit and the GitHub links in `gen/body.html` point to this repository (attribution, CC BY 4.0). Then e.g. GitHub Pages: *Settings → Pages → Source: Deploy from a branch → `main` / root*.
+**Publishing a fork:** in `site/config.py`, set `SITE_URL` to the fork's address (every absolute URL, the sitemap, `robots.txt`, `llms.txt` and the domain shown in the share image derive from it) and `REPO_URL` to its repository; set `BING_SITE_VERIFICATION` and `INDEXNOW_KEY` to `""` (they prove this site's ownership to Bing and IndexNow; an empty value leaves out the tag and the key file) or to your own values. Delete `b3573dbc1da690e66e9ef05b081b7abe.txt`, run `python3 site/build.py`, and redraw the share image with the new domain (`site/assets/og_image.py`, needs Pillow: `uv run --no-project --with pillow python site/assets/og_image.py`). The author credit and the GitHub links in `gen/body.html` point to this repository (attribution, CC BY 4.0). Then e.g. GitHub Pages: *Settings → Pages → Source: Deploy from a branch → `main` / root*.
 
 Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5.5, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 5 @high = 1.00** since 23 Sep 2026 (it was Opus 4.8 @medium up to tag `v2026.09.23` — see *Re-anchoring on Opus 5 @high* in `PASSES.md`; the git tags reproduce each earlier scale). Opus 4.7 and Sonnet 4.6 stay in the data but are hidden on the page by default (an *Older models* switch brings them back).
 
@@ -19,12 +19,12 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
 2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell with its interval.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
-4. **Method** — how the numbers and their intervals are built; the full methodology is in [`METHODOLOGY.md`](METHODOLOGY.md).
+4. **Method** — how the numbers and their intervals are built; the full methodology is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
 ## How the numbers are built
 
 Scores from different benchmarks do not share a scale, and raw dollars from different tasks are not comparable, so
-the report fuses the measurements with a **latent-quality model** (`gen/lqm.py`). In short:
+the report fuses the measurements with a **latent-quality model** (`model/lqm.py`). In short:
 
 1. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness,
    one scale; a group that mixes them is split. An index is left out for a couple whose index components are in the data.
@@ -42,28 +42,22 @@ the report fuses the measurements with a **latent-quality model** (`gen/lqm.py`)
    carries its own 16–84 % interval. A couple measured by a single publisher is not shown.
 
 The full procedure — collection rules, scales, model, weighting, estimation, price curve, value index, tiers and
-crown — is in [`METHODOLOGY.md`](METHODOLOGY.md); the checks are reproducible with the scripts in `gen/validation/`.
+crown — is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md); the checks are reproducible with the scripts in `model/validation/`.
 
-## Files
+## Repository
 
-| Path | What |
-|---|---|
-| `index.html` | The built interactive report (self-contained; open in a browser). |
-| `gen/build.py` | **Generator** — reads the data, computes the grids, and assembles `index.html`. Run: `python3 gen/build.py`. |
-| `gen/lqm.py`, `gen/lqm.stan` | The fusion model (latent quality and cost per couple): data preparation in Python, the model in Stan. |
-| `gen/fit.py` | Runs the fit on both axes and writes `gen/fit-cache.json` (needs the Stan environment, see "Refit"). |
-| `gen/catalog.py` | Benchmark families and publisher outlets used by the fusion. |
-| `gen/fit-cache.json` | The fit's results (per couple: log centre, quasi-standard error, publishers, new-source interval) and its diagnostics, keyed by a fingerprint of the data, the model and its settings. The build reads it and refuses one that is stale or did not converge. Commit it with the rebuilt page. |
-| `gen/validation/` | Scripts that reproduce the method's checks (held-out prediction with interval coverage, known-truth recovery with interval coverage, sensitivity). |
-| `METHODOLOGY.md` | The full methodology, from collection to the tier picks. |
-| `gen/{style.css, body.html, app.js}` | Source modules the generator bundles (CSS, HTML body, client-side SVG rendering + interactions). |
-| `gen/prerender.js` | Runs `app.js` at build time in Node (fake DOM) so the conclusions, tables and counts are in the served HTML for crawlers that do not run JavaScript. |
-| `PASSES.md` | Research log: every source pass and method change, with what it admitted, corrected and moved. |
-| `raw-data.csv` | The measured rows (source, model, effort, task, harness, cost, tokens, score, confound, ref) — the single source of truth. |
-| `gen/content-date.json` | Fingerprint and date of the last change to the page's content (text, figures, data), written by the build: the "Updated" date, JSON-LD `dateModified` and the sitemap `lastmod` move only when the content changes, not on a code, style or icon change. Commit it with the rebuilt page. |
-| `robots.txt`, `sitemap.xml`, `llms.txt`, `b3573dbc1da690e66e9ef05b081b7abe.txt` | Root files for search engines and AI assistants, written by the build from the same data as the page (the last one is the public IndexNow key). |
-| `favicon.svg`, `favicon.png`, `og-image.png` | Icon (SVG for browsers, 96 × 96 PNG for Google Search, redrawn by `gen/favicon_png.py` when the SVG changes) and share image; `gen/og_image.py` redraws the latter (rerun on a title change). |
-| `LICENSE`, `LICENSE-DATA` | MIT for the code, CC BY 4.0 for the data and the report text. |
+Four parts, each with its own scope; they talk only through the files named in the last column.
+
+| Part | Scope | Contents | Hands over |
+|---|---|---|---|
+| **data** — collection | what was measured and how to read it | `raw-data.csv` (at the root, because it is served), `data/catalog/` (models, benchmark families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it) — see [`data/README.md`](data/README.md) | the data file and the catalogue |
+| **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm.stan` (the model), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
+| **site** — presentation | from the fit's results to the page | `site/build.py` and its modules (`config`, `grids`, `sources`, `seo`, `render`), `site/{app.js, body.html, style.css, prerender.js}`, `site/assets/` (favicon, share image) — see [`site/README.md`](site/README.md) | the served files at the root |
+| **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
+
+Served files, generated at the root by the site: `index.html`, `robots.txt`, `sitemap.xml`, `llms.txt`,
+`favicon.svg`, `favicon.png`, `og-image.png`, the IndexNow key file, and the data file `raw-data.csv`. Licences:
+`LICENSE` (MIT, code), `LICENSE-DATA` (CC BY 4.0, data and report text).
 
 ## Versions
 
@@ -83,29 +77,29 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.09.23c` | 23 Sep 2026 | *Uncertainty ovals* become a display switch, off by default, on both charts (the axes still span the oval extents, so toggling does not rescale). Third Opus 5.5 source pass: eight more Vals AI benchmarks (Finance Agent v2, Legal Research, MedScribe, Tax Agent, Public Benefits, Vibe Code Bench 1-100, IOI, MysteryMechanism) — Opus 5.5 on 125 rows, 42 groups; its `max` rung is now dominated by its own `xhigh`. Early-access runs flagged, not removed, pending a rule — 1490 measured rows, 95 sources, 198 comparison groups |
 | `v2026.09.23d` | 23 Sep 2026 | **Method**: a source's n measurements of a couple weigh √n together (one publisher = one source: Anthropic's blog chart and system cards merged); early-access runs count for a third, and runebench's Opus 5.5 runs return. **Tiers**: half-bell windows (only a shortfall below the target is penalised; a small saturating bonus above), tier bands follow and are also on the Pareto chart. Header counts sources, benchmarks and measurements; `xHigh` capitalisation. Fourth pass (ten agents, post-release publications only): nothing admitted. Fifth pass: Playcode MacBook SVG, Senko Rašić's vibecode games, Vals RSI Index, bug-hunt-bench Opus 5.5 `low`. Opus 5.5 holds the frontier at every rung, with Haiku 4.5 — 93 sources, 196 benchmarks, 1479 measurements |
 | `v2026.09.27` | 27 Sep 2026 | seventh to eleventh source passes (four agent salvos plus a closed-network pass; details in `PASSES.md`). Adds ARC Prize's Opus 5.5 ladder, seven more Artificial Analysis index components, DeepSWE's primary JSON, the Anthropic docs and claude.dev effort sweeps, SWE-bench's official board, LMArena's agent board and some sixty other sources; every held github, arXiv and Vals row re-derived from its primary, with errors corrected (posttrain, skillsbench, slopcode, ceobench, token totals, effort labels). **Sonnet 5 re-priced at \$2/\$10** wherever a source had used \$3/\$15 (the increase never happened). Braintrust's T25/T50 turn out to be context sizes, not effort. Research log moved to `PASSES.md`. Opus 5.5 holds the frontier with Haiku 4.5; `low` is the best value — 160 sources, 432 benchmarks, 2894 measurements |
-| `v2026.09.29` | 29 Sep 2026 | adds **Sonnet 5.5** (twelfth and thirteenth passes, in `PASSES.md`). **Method**: both grids now come from a latent-quality model (`gen/lqm.py`, described in `METHODOLOGY.md`) that estimates each benchmark's own zero, gain and noise instead of averaging score ratios; publisher × couple, publisher × model and couple × task-type effects; weights follow from the data; republished numbers count once; quality is the mean predicted score over the benchmark panel; the band is what one new benchmark would report; a couple needs two publishers to be shown. Validation scripts in `gen/validation/`. Opus 5.5 `xhigh` is the best value overall, Sonnet 5.5 holds the lower tiers — 172 sources, 491 benchmarks, 3435 measurements |
+| `v2026.09.29` | 29 Sep 2026 | adds **Sonnet 5.5** (twelfth and thirteenth passes, in `PASSES.md`). **Method**: both grids now come from a latent-quality model (`model/lqm.py`, described in `METHODOLOGY.md`) that estimates each benchmark's own zero, gain and noise instead of averaging score ratios; publisher × couple, publisher × model and couple × task-type effects; weights follow from the data; republished numbers count once; quality is the mean predicted score over the benchmark panel; the band is what one new benchmark would report; a couple needs two publishers to be shown. Validation scripts in `model/validation/`. Opus 5.5 `xhigh` is the best value overall, Sonnet 5.5 holds the lower tiers — 172 sources, 491 benchmarks, 3435 measurements |
 
 The notes behind each version — every source pass, what it admitted, rejected or corrected, and each method
-change — are in [`PASSES.md`](PASSES.md).
+change — are in [`docs/PASSES.md`](docs/PASSES.md).
 
 ## Rebuild
 
 ```bash
-python3 gen/build.py     # → writes index.html
+python3 site/build.py     # → writes index.html
 ```
 
 No dependencies beyond the Python 3 standard library and Node.js (any recent version, no npm package), which the build uses to pre-render the page's text. The client-side rendering is vanilla JS/SVG (no external libraries), which keeps the file trivially portable.
 
 ### Refit
 
-Needed only when the data, `gen/lqm.py`, `gen/lqm.stan` or `gen/catalog.py` change (the build says so). It needs a
+Needed only when the data, `model/lqm.py`, `model/lqm.stan` or `data/catalog/` change (the build says so). It needs a
 C++17 compiler and `make`, then:
 
 ```bash
-uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r gen/requirements-fit.txt
+uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r model/requirements-fit.txt
 .stan/venv/bin/python -c "import cmdstanpy; cmdstanpy.install_cmdstan(dir='.stan', version='2.40.0')"
 .stan/venv/bin/python -c "import bridgestan.download as d; d.get_bridgestan_src()" && mv ~/.bridgestan/bridgestan-2.9.0 .stan/
-.stan/venv/bin/python gen/fit.py      # → gen/fit-cache.json, then python3 gen/build.py
+.stan/venv/bin/python model/fit.py      # → model/fit-cache.json, then python3 site/build.py
 ```
 
 The quality axis is sampled with nutpie, the cost axis with CmdStan started from the previous fit's last draws
@@ -123,6 +117,6 @@ Data are public third-party benchmarks; this repo is an independent analysis, no
 
 ## Licence and citation
 
-The code (`gen/`) is under the [MIT licence](LICENSE); the data (`raw-data.csv`), the derived grids and the report text are under [CC BY 4.0](LICENSE-DATA): reuse them freely, with attribution. The third-party measurements keep their publishers' own terms; each row cites its source.
+The code (`data/catalog.py`, `model/`, `site/`) is under the [MIT licence](LICENSE); the data (`raw-data.csv`), the derived grids and the report text are under [CC BY 4.0](LICENSE-DATA): reuse them freely, with attribution. The third-party measurements keep their publishers' own terms; each row cites its source.
 
 Cite as: Alexandre Gensse, *Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared*, <https://claude-models.agensse.com/>, with the version tag or the date shown on the page.

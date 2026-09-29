@@ -1,12 +1,13 @@
 """Fit one axis and save the reference-free summary, for compare.py.
 
-Usage: .stan/venv/bin/python gen/validation/fit.py quality|cost SEED OUT.pkl [DATA.csv] [DROP_PUBLISHER]
+Usage: .stan/venv/bin/python model/validation/fit.py quality|cost SEED OUT.pkl [DATA.csv] [DROP_PUBLISHER]
 DROP_PUBLISHER removes every row of one publisher before the fit (sensitivity)."""
 import csv, os, pickle, sys, tempfile, time
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
-import build as B, lqm
+import lqm
+from catalog import MODEL_ORDER
 axis, seed, out = sys.argv[1], int(sys.argv[2]), sys.argv[3]
-data = sys.argv[4] if len(sys.argv) > 4 and sys.argv[4] != "-" else os.path.join(B.ROOT, "raw-data.csv")
+data = sys.argv[4] if len(sys.argv) > 4 and sys.argv[4] != "-" else os.path.join(lqm.ROOT, "raw-data.csv")
 if len(sys.argv) > 5:                                              # sensitivity: without one publisher
     rows = list(csv.DictReader(open(data)))
     tmp = os.path.join(tempfile.mkdtemp(), "raw-data.csv")
@@ -14,7 +15,7 @@ if len(sys.argv) > 5:                                              # sensitivity
         w = csv.DictWriter(fh, fieldnames=list(rows[0])); w.writeheader()
         w.writerows(r for r in rows if lqm.PUBLISHER_OF.get(r["source"], r["source"]) != sys.argv[5])
     data = tmp
-groups, report, republished = lqm.load(data, list(B.MX), field="cost_usd" if axis == "cost" else "score")
+groups, report, republished = lqm.load(data, list(MODEL_ORDER), field="cost_usd" if axis == "cost" else "score")
 t = time.time()
 post, maps = lqm.fit(groups, axis, seed=seed, save_inits=False)
 S, diag = lqm.summarise(post, maps, groups, lqm.stan_data(groups, axis)[0], seed=seed)

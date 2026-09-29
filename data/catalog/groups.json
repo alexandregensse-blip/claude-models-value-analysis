@@ -1,0 +1,2173 @@
+{
+ "display": {
+  "osworld": {
+   "label": "OSWorld",
+   "type": "sweep",
+   "config": "Anthropic/AA · sweep low→max ✓"
+  },
+  "aa-index": {
+   "label": "AA Index",
+   "type": "sweep",
+   "config": "AA-Index · cross-model at max + Opus 5 sweep low→max ✓"
+  },
+  "aa-index-pertask": {
+   "label": "AA /task",
+   "type": "xmodel",
+   "config": "AA-Index · max ✓"
+  },
+  "swerebench": {
+   "label": "swe-rebench",
+   "type": "xgen",
+   "config": "ReAct minimal · Opus4.8 xhigh/4.7 high, Sonnet default ✓"
+  },
+  "workbench": {
+   "label": "WorkBench",
+   "type": "xmodel",
+   "config": "ReAct natif · temp 0, like-for-like, thinking NS ✓"
+  },
+  "braintrust": {
+   "label": "Braintrust",
+   "type": "sweep",
+   "config": "retrieval · budget T25/T50 ✓"
+  },
+  "stageclaw": {
+   "label": "STAGE-Claw",
+   "type": "xmodel",
+   "config": "OpenClaw · reasoning DISABLED, temp 0 ✓"
+  },
+  "tobench": {
+   "label": "TOBench",
+   "type": "xgen",
+   "config": "ReAct · thinking NS ✓"
+  },
+  "ceobench": {
+   "label": "CEO-Bench",
+   "type": "xmodel",
+   "config": "terminal-agent · Opus/Sonnet=MAX, Haiku=thinking ✓"
+  },
+  "automationbench": {
+   "label": "AutomationB.",
+   "type": "xmodel",
+   "config": "harness+effort NOT stated ✓"
+  },
+  "officeqa": {
+   "label": "OfficeQA",
+   "type": "xgen",
+   "config": "Claude Agent SDK · reasoning HIGH ✓"
+  },
+  "slopcode": {
+   "label": "SlopCode",
+   "type": "xgen",
+   "config": "Claude Code · Reasoning HIGH ✓"
+  },
+  "posttrain": {
+   "label": "PostTrainB.",
+   "type": "sweep",
+   "config": "papier · medium/high ✓"
+  },
+  "skillsbench": {
+   "label": "SkillsBench",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.19 · temp 0, thinking NS ✓"
+  },
+  "aireiter": {
+   "label": "AIReiter",
+   "type": "xmodel",
+   "config": "Claude Code · high ✓"
+  },
+  "ctala": {
+   "label": "ctala",
+   "type": "xmodel",
+   "config": "Claude Code CLI · reasoning not configured, temp 0.7 ✓"
+  },
+  "drona23": {
+   "label": "drona23",
+   "type": "xgen",
+   "config": "Claude Code CLI · thinking NS, identical ✓"
+  },
+  "ponytail": {
+   "label": "ponytail",
+   "type": "xgen",
+   "config": "Claude Code headless · thinking NS ✓"
+  },
+  "ianlpaterson": {
+   "label": "ianlpaterson",
+   "type": "xgen",
+   "config": "OpenRouter · reasoning OFF ✓"
+  },
+  "hal-swemini": {
+   "label": "HAL swe-mini",
+   "type": "xgen",
+   "config": "HAL · high vs default ✓"
+  },
+  "hal-science": {
+   "label": "HAL sci",
+   "type": "xgen",
+   "config": "HAL · high ✓"
+  },
+  "george-liu": {
+   "label": "george-liu",
+   "type": "sweep",
+   "config": "Claude Code · low/max ✓"
+  },
+  "zenn-qcd": {
+   "label": "zenn QCD #27",
+   "type": "sweep",
+   "config": "Claude Code 2.1.197 · 3 DB tasks × 10 runs, Opus 4.8 & Sonnet 5 × low→xhigh, CLI-reconciled cost ✓"
+  },
+  "whitekumalabo": {
+   "label": "whitekumalabo",
+   "type": "sweep",
+   "config": "Claude Code · low/max ✓"
+  },
+  "qiita-nogataka": {
+   "label": "qiita",
+   "type": "sweep",
+   "config": "raw API · low/max ✓"
+  },
+  "codesota": {
+   "label": "CodeSOTA",
+   "type": "xmodel",
+   "config": "list-price blended (not a run) ✓"
+  },
+  "coderev": {
+   "label": "code-review",
+   "type": "xmodel",
+   "config": "VibeOps · temp 0.1, thinking NS ✓"
+  },
+  "wildclaw": {
+   "label": "WildClaw",
+   "type": "xgen",
+   "config": "OpenRouter (4 harness) · thinking NS ✓"
+  },
+  "truefoundry": {
+   "label": "TrueFoundry",
+   "type": "xmodel",
+   "config": "AI Gateway · single-turn no tools, effort NS ✓"
+  },
+  "emb": {
+   "label": "EMB",
+   "type": "xmodel",
+   "config": "Vals AI · bash+execute, 10 Claude models at max (payload compute_effort) — snapshot 27 Sep, re-priced ✓"
+  },
+  "willison": {
+   "label": "Willison SVG",
+   "type": "sweep",
+   "config": "llm CLI · sweep low→max, trivial task (SVG) ✓"
+  },
+  "futuresearch": {
+   "label": "DeepResearch",
+   "type": "sweep",
+   "config": "Deep Research Bench · low/high ✓"
+  },
+  "cursorbench": {
+   "label": "CursorBench",
+   "type": "sweep",
+   "config": "Sonnet 5 card p118 · 5 models × sweep low→max, $ cost, scores printed ✓"
+  },
+  "scsweproeff": {
+   "label": "SWE-Pro sweep",
+   "type": "sweep",
+   "config": "Opus 4.8 card p196 · sweep low→max, output tokens ✓"
+  },
+  "schleeff": {
+   "label": "HLE sweep",
+   "type": "sweep",
+   "config": "Opus 4.8 card p203 · HLE tools, sweep low→max ✓"
+  },
+  "scosweff": {
+   "label": "OSWorld sweep",
+   "type": "sweep",
+   "config": "Opus 4.8 card p222 · sweep low→max, output tokens ✓"
+  },
+  "scfsweppro": {
+   "label": "SWE-Pro (Fable)",
+   "type": "sweep",
+   "config": "Fable 5 card p255 · Fable=Mythos 5, sweep low→xhigh, $ cost ✓"
+  },
+  "scfcdiamond": {
+   "label": "FrontierCode-D",
+   "type": "sweep",
+   "config": "Fable 5 card p257 · Fable=Mythos 5, sweep low→max, $ cost ✓"
+  },
+  "scfdeepqa": {
+   "label": "DeepSearchQA",
+   "type": "sweep",
+   "config": "Fable 5 card p270 · Fable=Mythos 5, sweep low→max, $ cost ✓"
+  },
+  "scfhletools": {
+   "label": "HLE (Fable)",
+   "type": "sweep",
+   "config": "Fable 5 card p267 · Fable=Mythos 5, sweep low→max, $ cost ✓"
+  },
+  "scfdraco": {
+   "label": "DRACO",
+   "type": "sweep",
+   "config": "Fable 5 card p271 · Fable=Mythos 5, sweep low→max, $ cost ✓"
+  },
+  "scoarc": {
+   "label": "ARC-AGI-2",
+   "type": "sweep",
+   "config": "Opus 4.7 card p213 · sweep low→max, $ cost ✓"
+  },
+  "scodeepqa": {
+   "label": "DeepSearchQA",
+   "type": "sweep",
+   "config": "Opus 4.7 card p200 · Opus4.7 vs Sonnet4.6, sweep low→max ✓"
+  },
+  "sc5hle": {
+   "label": "HLE (Opus 5)",
+   "type": "sweep",
+   "config": "Opus 5 card p157 · HLE tools, 4 models × sweep low→max, $ cost ✓"
+  },
+  "sc5browse": {
+   "label": "BrowseComp 10M",
+   "type": "sweep",
+   "config": "Opus 5 card p160 · 10M budget, sweep low→max; Fable=Mythos 5, $ cost ✓"
+  },
+  "sc5dsqa": {
+   "label": "DeepSearchQA (O5)",
+   "type": "sweep",
+   "config": "Opus 5 card p161 · 980k budget, 4 models × sweep low→max, $ cost ✓"
+  },
+  "sc5draco": {
+   "label": "DRACO (Opus 5)",
+   "type": "sweep",
+   "config": "Opus 5 card p162 · 980k budget, sweep low→max; Fable=Mythos 5, $ cost ✓"
+  },
+  "swerebench2": {
+   "label": "swe-rebench 07/26",
+   "type": "xmodel",
+   "config": "ReAct minimal · Opus5/Fable5/Sonnet5 all at high ✓"
+  },
+  "cursorbench32": {
+   "label": "CursorBench 3.2",
+   "type": "sweep",
+   "config": "Cursor 3.2 · matched effort, $ cost ✓ (vendor benchmark)"
+  },
+  "aabriefcase": {
+   "label": "AA-Briefcase",
+   "type": "sweep",
+   "config": "AA model payload 27 Sep · agentic knowledge work, Elo; 4 models × full ladder + 3 at max; costPerTask per eval ✓"
+  },
+  "sc5osworld": {
+   "label": "OSWorld 2.0",
+   "type": "sweep",
+   "config": "Opus 5 card p174 · price vs perf, 4 models; effort inferred from cost order ✓"
+  },
+  "sc5autobench": {
+   "label": "AutomationB. 5",
+   "type": "sweep",
+   "config": "Opus 5 card p180 · Zapier, linear-$ chart; Fable=Mythos 5, effort inferred ✓"
+  },
+  "aa-index-pertask2": {
+   "label": "AA /task v3",
+   "type": "xmodel",
+   "config": "AA-Index v3 · max ✓"
+  },
+  "valsvibecode": {
+   "label": "Vals VibeCode",
+   "type": "sweep",
+   "config": "Vals AI · Opus 5 sweep low→max (scores), $ cost at leaderboard setting; board entries — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsindex": {
+   "label": "Vals Index",
+   "type": "xmodel",
+   "config": "Vals AI · 24-bench composite v1.2 (archived), 7 entries, Opus 4.7 high; overlaps EMB+VibeCode — snapshot 27 Sep, re-priced (archive re-read 29 Sep) ✓"
+  },
+  "osworld2b": {
+   "label": "OSWorld 2.0 batch",
+   "type": "xmodel",
+   "config": "arXiv 2606.29537 · 108 workflows, 500 steps, batched tool calls, max ✓"
+  },
+  "osworld2s": {
+   "label": "OSWorld 2.0 single",
+   "type": "xmodel",
+   "config": "arXiv 2606.29537 · 108 workflows, 500 steps, single tool call, max ✓"
+  },
+  "scf51fcode": {
+   "label": "FrontierCode-Ext",
+   "type": "sweep",
+   "config": "Cognition leaderboard JSON · v1.1 Extended (150 tasks), Claude models × low→max incl. Sonnet 5.5, measured USD/rollout ✓"
+  },
+  "scf51hlet": {
+   "label": "HLE tools (F5.1)",
+   "type": "sweep",
+   "config": "Fable 5.1 card p177 · HLE with tools, 3 models × sweep low→max, $ cost, scores printed ✓"
+  },
+  "scf51hlen": {
+   "label": "HLE no-tools (F5.1)",
+   "type": "sweep",
+   "config": "Fable 5.1 card p178 · HLE without tools, 3 models × sweep low→max, $ cost, scores printed ✓"
+  },
+  "scf51draco": {
+   "label": "DRACO (F5.1)",
+   "type": "sweep",
+   "config": "Fable 5.1 card p179 · 980k budget, 3 models × sweep low→max, $ cost, scores printed ✓"
+  },
+  "scf51osw": {
+   "label": "OSWorld 2.0 (F5.1)",
+   "type": "sweep",
+   "config": "Fable 5.1 card p190 · partial-credit price/perf, 3 models; effort inferred from cost order ✓"
+  },
+  "aa-index4": {
+   "label": "AA Index v4",
+   "type": "sweep",
+   "config": "AA model pages · Fable 5.1 sweep low→max + Fable 5/Opus 5 at max, per-suite $ ✓"
+  },
+  "aa-index-pertask3": {
+   "label": "AA /task v4",
+   "type": "xmodel",
+   "config": "AA launch article · per-task $, Fable 5.1 xhigh/max vs Fable 5/Opus 5 max ✓"
+  },
+  "valsindex2": {
+   "label": "Vals Index 09/26",
+   "type": "xmodel",
+   "config": "Vals AI · current composite v2, 10 Claude entries (Sonnet 5.5 incl.), max (Opus 4.7 high) — snapshot 27 Sep, re-priced ✓"
+  },
+  "scfrontiercode": {
+   "label": "FrontierCode v1",
+   "type": "sweep",
+   "config": "Sonnet 5 card p117 · 4 models × sweep low→max, $ cost, scores printed ✓"
+  },
+  "retort74": {
+   "label": "retort exp-74 py",
+   "type": "sweep",
+   "config": "Claude Code · rest-api-crud in Python, Opus 5.5 × low→max, n=3; requirement coverage 1.0 everywhere → cost only ✓"
+  },
+  "retort74go": {
+   "label": "retort exp-74 go",
+   "type": "sweep",
+   "config": "Claude Code · rest-api-crud in Go, Opus 5.5 × low→max, n=3; requirement coverage 1.0 everywhere → cost only ✓"
+  },
+  "vulcanbench-ciiv4": {
+   "label": "VulcanBench CII v4",
+   "type": "sweep",
+   "config": "Claude Code 2.1.280 · 23 legacy binary-parity tasks, Opus 5.5 × low→max, CLI-reported cost; refusal fallback on (0→48 % of replies by Opus 4.8) ✓"
+  },
+  "ccc12task": {
+   "label": "Claude Code Camp 12-task",
+   "type": "xmodel",
+   "config": "beehiiv newsletter · Claude Code, default effort, 12 tasks×3 reps, cost+tokens only ✓"
+  },
+  "simbcdb": {
+   "label": "Simbian Cyber Defense Benchmark",
+   "type": "xmodel",
+   "config": "median-cost-per-investigation ✓"
+  },
+  "finsheet": {
+   "label": "FinSheet-Bench",
+   "type": "xmodel",
+   "config": "thinking-toggle-not-dial ✓"
+  },
+  "semlayerraw": {
+   "label": "Semantic Layers for Data Analytics (schema-only)",
+   "type": "xmodel",
+   "config": "paired-protocol ✓"
+  },
+  "semlayerdoc": {
+   "label": "Semantic Layers for Data Analytics (+semantic doc)",
+   "type": "xmodel",
+   "config": "paired-protocol ✓"
+  },
+  "tb2hf-0error": {
+   "label": "TB2.1 HF · 0error",
+   "type": "xgen",
+   "config": "harborframework HF dataset · 0error-Ledger scaffold, opus-4.7 default, n≈230-241/446 ✓"
+  },
+  "tb2hf-wozcode": {
+   "label": "TB2.1 HF · WOZCODE",
+   "type": "xgen",
+   "config": "harborframework HF dataset · WOZCODE scaffold, opus-4.7 default, n≈443-445/446 ✓"
+  },
+  "tb2hf-vix": {
+   "label": "TB2.1 HF · vix",
+   "type": "xgen",
+   "config": "harborframework HF dataset · vix scaffold, opus-4.7 default, n≈388-440/446, tokens_out only ✓"
+  },
+  "tb2hf-simplai": {
+   "label": "TB2.1 HF · Simplai",
+   "type": "xgen",
+   "config": "harborframework HF dataset · Simplai-Agent scaffold, sonnet-4.6 default, n≈360-428/446 ✓"
+  },
+  "tb2hf-polaris": {
+   "label": "TB2.1 HF · Polaris",
+   "type": "xgen",
+   "config": "harborframework HF dataset · Polaris scaffold, opus-4.7 default (multi-model agent, sampled trials 100% opus-4.7), real $ cost, n≈268-444/446 ✓"
+  },
+  "wkl-l1": {
+   "label": "WhiteKUMALabo effort×L1",
+   "type": "sweep",
+   "config": "Claude Code 2.1.76 · bug-fix tasks, Opus 4.6 low/medium/high/max ✓"
+  },
+  "wkl-l2": {
+   "label": "WhiteKUMALabo effort×L2",
+   "type": "sweep",
+   "config": "Claude Code 2.1.76 · refactor tasks, Opus 4.6 low/medium/high/max ✓"
+  },
+  "wkl-l4": {
+   "label": "WhiteKUMALabo effort×L4",
+   "type": "sweep",
+   "config": "Claude Code 2.1.76 · system-design tasks, Opus 4.6 low/medium/high/max ✓"
+  },
+  "wkl-f5o48-t1": {
+   "label": "WhiteKUMALabo F5/O4.8 T1",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.170 · bugfix, effort high, n=3 median, saturated pass ✓"
+  },
+  "wkl-f5o48-t2": {
+   "label": "WhiteKUMALabo F5/O4.8 T2",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.170 · intro-text, blind 15pt judge ✓"
+  },
+  "wkl-f5o48-t3": {
+   "label": "WhiteKUMALabo F5/O4.8 T3",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.170 · task decomposition, blind 15pt judge ✓"
+  },
+  "wkl-f5o48-t4": {
+   "label": "WhiteKUMALabo F5/O4.8 T4",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.170 · 1-sentence summary, cost/speed only ✓"
+  },
+  "qiita-suwanobu-a1": {
+   "label": "Qiita suwa_nobu cache-write",
+   "type": "xmodel",
+   "config": "Opus 5 vs Opus 5.5 · same task, cold-cache round, CLI-metered cost ✓"
+  },
+  "qiita-suwanobu-a2": {
+   "label": "Qiita suwa_nobu cache-read",
+   "type": "xmodel",
+   "config": "Opus 5 vs Opus 5.5 · same task, warm-cache rounds 2-3, CLI-metered cost ✓"
+  },
+  "nttdata-compaction": {
+   "label": "Zenn nttdata_tech compaction",
+   "type": "sweep",
+   "config": "bedrock-runtime · Opus 5.5 auto-compaction summary tokens by effort, n=1, low/default/max(8192) ✓; max@2048 dropped, censored ✓"
+  },
+  "featherbench": {
+   "label": "FeatherBench",
+   "type": "xgen",
+   "config": "OpenRouter(Anthropic) · 28-task multi-domain suite (coding/data/realworld/security/tool-use), effort=high (Haiku=solo), mean cost/tokens per task-run, consolidated results/summary.json; only Opus 5.5 rung saturated ✓"
+  },
+  "jeveffort": {
+   "label": "jev-effort",
+   "type": "sweep",
+   "config": "Claude Code 2.1.280 · Opus 5.5 baseline arm, high vs max fixed effort, 6 coding tasks x2 runs ✓"
+  },
+  "lmarenaagent": {
+   "label": "LMArena Agent",
+   "type": "xmodel",
+   "config": "Agent Mode real sessions (Code/Chat/Work) · cost=median $/task (14d window), score=Net Improvement composite signal, effort read from model-variant label; live board, read 27 Sep 2026 ✓"
+  },
+  "mcpmark": {
+   "label": "MCPMark",
+   "type": "sweep",
+   "config": "eval-sys/mcpmark legacy board · 5 MCP servers (FS/GitHub/Notion/Playwright/Postgres), Sonnet 4 low/default/high + Opus 4.1/Sonnet 4.5/Opus 4.5, Cost-per-run; low>high cost inversion kept as measured ✓"
+  },
+  "swebenchverified": {
+   "label": "SWE-bench Verified",
+   "type": "xgen",
+   "config": "swebench.com official board · mini-SWE-agent (v0.0.0->v2.0.0) submissions, instance_cost=mean $/instance, resolved%; 3 rows unverified-pending on site ✓"
+  },
+  "vexbench": {
+   "label": "VEX-Bench",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.150 · high, Opus 4.6 vs Sonnet 4.6, cost+tokens per case ✓"
+  },
+  "effihallu": {
+   "label": "EffiBench IIV",
+   "type": "xmodel",
+   "config": "direct API · n=5/model, IIV-penalty abstention on optimal code ✓"
+  },
+  "ifgap-bbq": {
+   "label": "BBQ effort (interface-gap)",
+   "type": "sweep",
+   "config": "direct API · budget_tokens low/med/high, Sonnet4.6 & Haiku4.5 ✓"
+  },
+  "ifgap-hella": {
+   "label": "HellaSwag effort (interface-gap)",
+   "type": "sweep",
+   "config": "direct API · budget_tokens low/med/high, Sonnet4.6 & Haiku4.5 ✓"
+  },
+  "cliffcompact-tb2": {
+   "label": "CliffCompaction TB2.0",
+   "type": "xgen",
+   "config": "Terminus-2 · k=1 proprietary baselines, Opus 4.6 & 4.7 ✓"
+  },
+  "cliffcompact-swebv": {
+   "label": "CliffCompaction SWE-bV",
+   "type": "xgen",
+   "config": "mini-swe-agent · k=1 baselines, Opus 4.5(high)/4.6, Sonnet 3.7 ✓"
+  },
+  "aipricingguru": {
+   "label": "AI Pricing Guru Labs",
+   "type": "xmodel",
+   "config": "OpenRouter cost-per-task-v2 · 49-task suite, 6 Claude models, effort unstated ✓"
+  },
+  "marginlabswe": {
+   "label": "Marginlab SWE-Bench-Pro",
+   "type": "xgen",
+   "config": "Claude Code CLI · daily rolling tracker, 6 Opus generations by release window, score-only ✓"
+  },
+  "boxconsumer": {
+   "label": "Box · consumer products",
+   "type": "xgen",
+   "config": "Box AI blog · Opus 5 vs 5.5, one representative task, score-only ✓"
+  },
+  "boxfinserv": {
+   "label": "Box · financial services",
+   "type": "xgen",
+   "config": "Box AI blog · Opus 5 vs 5.5, one representative task, score-only ✓"
+  },
+  "boxtech": {
+   "label": "Box · technology",
+   "type": "xgen",
+   "config": "Box AI blog · Opus 5 vs 5.5, one representative task, score-only ✓"
+  },
+  "valswsfinance": {
+   "label": "Vals Web Search (finance)",
+   "type": "sweep",
+   "config": "vals.ai payload · Fable 5, Native vs Exa search backend, compute_effort=max ✓"
+  },
+  "valswslegal": {
+   "label": "Vals Web Search (legal)",
+   "type": "sweep",
+   "config": "vals.ai payload · Fable 5, Native vs Exa search backend, compute_effort=max ✓"
+  },
+  "mobilecybench": {
+   "label": "MobileCybench token/cost accounting",
+   "type": "xgen",
+   "config": "Claude Code 100-run aggregate · Opus4.8/Opus5 default, tokens+cost ✓"
+  },
+  "mrsgen": {
+   "label": "MRS-to-text (Hajdik split)",
+   "type": "xmodel",
+   "config": "3-exemplar prompt · Sonnet4.5/Opus5 default, BLEU, score-only ✓"
+  },
+  "mrsparse": {
+   "label": "text-to-MRS (Hajdik split)",
+   "type": "xmodel",
+   "config": "3-exemplar prompt · Sonnet4.5/Opus5 default, EDM-F1, score-only ✓"
+  },
+  "strokeeval": {
+   "label": "Japanese Stroke LLM Eval",
+   "type": "xmodel",
+   "config": "multi-turn Japanese conversation · Fable5/Opus4.7 default, score-only ✓"
+  },
+  "rsigeneval2": {
+   "label": "Designer-RSI · GenEval2",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, success% ✓"
+  },
+  "rsidpgbench": {
+   "label": "Designer-RSI · DPG-Bench",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, success% ✓"
+  },
+  "rsioneigen": {
+   "label": "Designer-RSI · OneIG-EN",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, success% ✓"
+  },
+  "rsioneigzh": {
+   "label": "Designer-RSI · OneIG-ZH",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, success% ✓"
+  },
+  "rsiopencole": {
+   "label": "Designer-RSI · OpenCOLE",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, completion% ✓"
+  },
+  "rsigraphicbench": {
+   "label": "Designer-RSI · GraphicBench",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, completion% ✓"
+  },
+  "rsicreatidesign": {
+   "label": "Designer-RSI · CreatiDesign",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, completion% ✓"
+  },
+  "rsibanner400": {
+   "label": "Designer-RSI · BannerRequest400",
+   "type": "xmodel",
+   "config": "no-skill baseline · Sonnet4/Opus4.6 low, completion% ✓"
+  },
+  "broodwar": {
+   "label": "Brood War Bench",
+   "type": "xmodel",
+   "config": "Claude Code CLI · round-robin StarCraft:Brood War tournament, 171 games, default effort only ✓"
+  },
+  "retort4675brc": {
+   "label": "retort exp-46/75 brazil C",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in C, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brclj": {
+   "label": "retort exp-46/75 brazil Clojure",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in Clojure, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brcpp": {
+   "label": "retort exp-46/75 brazil C++",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in C++, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brcs": {
+   "label": "retort exp-46/75 brazil C#",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in C#, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brerl": {
+   "label": "retort exp-46/75 brazil Erlang",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in Erlang, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brjava": {
+   "label": "retort exp-46/75 brazil Java",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in Java, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brobjc": {
+   "label": "retort exp-46/75 brazil Obj-C",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in Objective-C, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brrust": {
+   "label": "retort exp-46/75 brazil Rust",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in Rust, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brswift": {
+   "label": "retort exp-46/75 brazil Swift",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in Swift, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brelixir": {
+   "label": "retort exp-46/75 brazil Elixir",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in Elixir, Opus 5 default vs Opus 5.5 low, n=1 ✓"
+  },
+  "retort4675brts": {
+   "label": "retort exp-46/75 brazil TypeScript",
+   "type": "xgen",
+   "config": "Claude Code · brazil-soccer-mcp in TypeScript, Opus 5 default (cost untraced) vs Opus 5.5 low, both saturated ✓"
+  },
+  "retort4675rtclj": {
+   "label": "retort exp-46/75 bookshop Clojure",
+   "type": "xgen",
+   "config": "Claude Code · bookshop/rest-api-crud in Clojure, Opus 5 default (n=1) vs Opus 5.5 low (n=3) ✓"
+  },
+  "retort4675rtrust": {
+   "label": "retort exp-46/75 bookshop Rust",
+   "type": "xgen",
+   "config": "Claude Code · bookshop/rest-api-crud in Rust, Opus 5 default (n=1) vs Opus 5.5 low (n=3) ✓"
+  },
+  "retort4675rtelixir": {
+   "label": "retort exp-46/75 bookshop Elixir",
+   "type": "xgen",
+   "config": "Claude Code · bookshop/rest-api-crud in Elixir, Opus 5 default (cost untraced) vs Opus 5.5 low, both saturated ✓"
+  },
+  "valscodemig": {
+   "label": "Vals Code Migration",
+   "type": "xmodel",
+   "config": "Vals AI · Code Migration, 10 Claude entries, compute_effort max (Haiku thinking null) — snapshot 27 Sep, re-priced ✓"
+  },
+  "valshlab": {
+   "label": "Vals HLAB",
+   "type": "xmodel",
+   "config": "Vals AI · Harvey's Legal Agent Benchmark, all at max, several at floor — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsprogram": {
+   "label": "Vals ProgramBench",
+   "type": "xmodel",
+   "config": "Vals AI · ProgramBench, max, mostly floor scores, 3 entries without cost — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsproof": {
+   "label": "Vals ProofBench",
+   "type": "xmodel",
+   "config": "Vals AI · ProofBench v1.1, all at max (Opus 5 now max in payload), 4 saturated — snapshot 28 Sep, re-priced ✓"
+  },
+  "valsthi": {
+   "label": "Vals Time Horizon KSP",
+   "type": "xmodel",
+   "config": "Vals AI · Time Horizon Index: KSP, 3 Claude at max, board 2026-09-14 ✓"
+  },
+  "valscua": {
+   "label": "Vals CUA-bench",
+   "type": "xmodel",
+   "config": "Vals AI · CUA-bench via Claude Code, Opus 5.5, Opus 5 and Fable 5.1 at max — snapshot 27 Sep, re-priced (board 22 Sep) ✓"
+  },
+  "valstb20": {
+   "label": "Vals Terminal-Bench 2.0",
+   "type": "xmodel",
+   "config": "Vals AI · Terminal-Bench 2.0 (older board, 2026-06-04), stated compute_effort ✓"
+  },
+  "valsbenefits1": {
+   "label": "Vals Public Benefits v1",
+   "type": "xmodel",
+   "config": "Vals AI · Public Benefits Bench v1 (board 2026-06-09), max + Haiku default ✓"
+  },
+  "valsaime": {
+   "label": "Vals AIME",
+   "type": "xmodel",
+   "config": "Vals AI · AIME, compute_effort null (effort unverified), board 2026-04-16 ✓"
+  },
+  "valscaselaw": {
+   "label": "Vals CaseLaw v2",
+   "type": "xmodel",
+   "config": "Vals AI · CaseLaw v2, compute_effort null (effort unverified), board 2026-05-04 ✓"
+  },
+  "valsmedqa": {
+   "label": "Vals MedQA",
+   "type": "xmodel",
+   "config": "Vals AI · MedQA, Sonnet 4.6 vs Haiku 4.5 thinking, effort null, board 2026-04-16 ✓"
+  },
+  "valsswecc": {
+   "label": "Vals SWE-bench Claude Code",
+   "type": "xmodel",
+   "config": "Vals AI · SWE-bench, Opus 4.8 in Claude Code harness (single row, pairs with valsswebench) ✓"
+  },
+  "valsvibecc": {
+   "label": "Vals VibeCode Claude Code",
+   "type": "xmodel",
+   "config": "Vals AI · Vibe Code Bench, Opus 4.8 and Sonnet 4.6 in Claude Code harness ✓"
+  },
+  "yebench": {
+   "label": "claude-effort-bench",
+   "type": "sweep",
+   "config": "Claude Code 2.1.206 · 3 multi-file tasks × 5 reps, Opus 5 & Sonnet 5 × medium→xhigh, CLI cost (Sonnet ×2/3), deterministic verifiers; ~30 % silent no-op runs scored 0 ✓"
+  },
+  "lob9": {
+   "label": "Low or Bust",
+   "type": "sweep",
+   "config": "Claude Code -p · 9 one-shot coding/reasoning/writing tasks, Fable 5 & Opus 4.8 × low→xhigh, 1 trial, CLI cost incl. harness cache writes ✓"
+  },
+  "lobhard": {
+   "label": "Low or Bust hard",
+   "type": "sweep",
+   "config": "Claude Code -p · 8 trap tasks, Fable 5 × low→xhigh, 1 trial ✓"
+  },
+  "lobdeleg": {
+   "label": "Low or Bust 2 monolith",
+   "type": "sweep",
+   "config": "Claude Code agentic · 2 ten-step packages × 3 trials, Fable 5 low/medium/high, hidden tests saturated → tokens only ✓"
+  },
+  "lobdelegw": {
+   "label": "Low or Bust 2 workers",
+   "type": "sweep",
+   "config": "Claude Code · fresh low/high worker per step, Fable 5, saturated → tokens only ✓"
+  },
+  "dwdefect": {
+   "label": "Dealwatch defect review",
+   "type": "xmodel",
+   "config": "Claude Code orchestrator · 5 re-seeded bugs, Fable 5.1 vs Opus 5.5 @high, 1 run, list-price cost ✓"
+  },
+  "dwfeature": {
+   "label": "Dealwatch small feature",
+   "type": "xmodel",
+   "config": "same repo · 6-req feature, hidden tests saturated → cost only ✓"
+  },
+  "ecoreview": {
+   "label": "claude-eco review baseline",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.233 · one code-review task n=5, 5 models at CC default effort, grader re-run on raw answers (3 issues), CLI cost (Sonnet ×2/3) ✓"
+  },
+  "effmine": {
+   "label": "effortmining pilot",
+   "type": "sweep",
+   "config": "Claude Code 2.1.201 · 12 short tasks × 3 reps, Opus 4.8 × low→max, median output tokens, pass rate (saturated ≥high) ✓"
+  },
+  "wookccb": {
+   "label": "wook3024 CC bench",
+   "type": "sweep",
+   "config": "Claude Code · 3 tasks × 2 runs, Sonnet 4.6 & Opus 4.6 × medium/high (+ fixed-thinking Opus), CLI cost ✓"
+  },
+  "forgep1": {
+   "label": "forge Phase 1",
+   "type": "sweep",
+   "config": "Claude Code · 3 tasks, Sonnet 4.6 medium/high/max, correct/partial only ✓"
+  },
+  "forgep2": {
+   "label": "forge Phase 2",
+   "type": "xmodel",
+   "config": "Claude Code + Repomix · 3 tasks, Haiku/Sonnet 4.6/Opus 4.6 × medium/max, saturated → tokens only ✓"
+  },
+  "bartyaoe": {
+   "label": "Opus 5.5 AoE2 build",
+   "type": "sweep",
+   "config": "Claude Code 2.1.281 · one long game-build prompt, Opus 5.5 × low→max, 1 run, CLI cost, no score → cost only ✓"
+  },
+  "effpick": {
+   "label": "effort-pick sweep",
+   "type": "sweep",
+   "config": "API · 4 short writing tasks, Claude Opus (5, unverified) × low→xhigh, output tokens only ✓"
+  },
+  "wcbcc": {
+   "label": "Weather-card CC",
+   "type": "sweep",
+   "config": "Claude Code · one-shot HTML weather card, 2×2 slots, Fable 5.1/5, Opus 5.5/5/4.8, Sonnet 5, Haiku × low→max, output tokens only ✓"
+  },
+  "wcbcur": {
+   "label": "Weather-card Cursor",
+   "type": "sweep",
+   "config": "Cursor CLI · same task, Claude models × effort (non-thinking ids), tokens only ✓"
+  },
+  "wcbcurxl": {
+   "label": "Weather-card Cursor-xl",
+   "type": "sweep",
+   "config": "Cursor CLI xl · same task, tokens only ✓"
+  },
+  "wcbcurth": {
+   "label": "Weather-card Cursor thinking",
+   "type": "sweep",
+   "config": "Cursor CLI · -thinking model ids × effort, tokens only ✓"
+  },
+  "wcbcurxlth": {
+   "label": "Weather-card Cursor-xl thinking",
+   "type": "sweep",
+   "config": "Cursor CLI xl · -thinking ids × effort, tokens only ✓"
+  },
+  "latitude-easy": {
+   "label": "latitude easy tier",
+   "type": "xmodel",
+   "config": "ai-sdk · 12 single-file bug tasks ×3, 3 Claude models at default effort, list price ✓"
+  },
+  "vlmexam-ocr": {
+   "label": "vlm-exam OCR",
+   "type": "xmodel",
+   "config": "roboflow/vlm-exam · 37 samples, similarity; Fable 5.1 & Opus 5.5 low/high ×3 runs, others low ×1 ✓"
+  },
+  "vlmexam-extraction": {
+   "label": "vlm-exam extraction",
+   "type": "xmodel",
+   "config": "roboflow/vlm-exam · 97 samples, LLM-judge accuracy; same models as OCR ✓"
+  },
+  "vlmexam-counting": {
+   "label": "vlm-exam counting",
+   "type": "xmodel",
+   "config": "roboflow/vlm-exam · 74 samples, LLM-judge accuracy ✓"
+  },
+  "vlmexam-identification": {
+   "label": "vlm-exam identification",
+   "type": "xmodel",
+   "config": "roboflow/vlm-exam · 32 samples, near ceiling ✓"
+  },
+  "vlmexam-detection": {
+   "label": "vlm-exam detection",
+   "type": "xmodel",
+   "config": "roboflow/vlm-exam · 250 images, mAP@50 ✓"
+  },
+  "retroboard-pw": {
+   "label": "Retro board +Playwright",
+   "type": "sweep",
+   "config": "Claude Code 2.1.132 · retro-board build with Playwright MCP; Opus 4.7 high/xhigh, Opus 4.6, Sonnet 4.6; /cost medians ✓"
+  },
+  "retroboard-design": {
+   "label": "Retro board design prompt",
+   "type": "sweep",
+   "config": "Claude Code 2.1.132 · full Antigravity design prompt; Opus 4.7 high/xhigh, Opus 4.6, Sonnet 4.6 high/max ✓"
+  },
+  "retroboard-abridged": {
+   "label": "Retro board abridged prompt",
+   "type": "sweep",
+   "config": "Claude Code 2.1.132 · abridged design prompt; Opus 4.7 high/xhigh, Opus 4.6 ✓"
+  },
+  "retort55py": {
+   "label": "retort exp-55 py",
+   "type": "sweep",
+   "config": "Claude Code · rest-api-crud Python, Opus 5 low→max, n=2 (max n=2); coverage 1.0 → cost only ✓"
+  },
+  "retort55go": {
+   "label": "retort exp-55 go",
+   "type": "sweep",
+   "config": "Claude Code · rest-api-crud Go, Opus 5 low→max, n=2 (max n=1); coverage 1.0 → cost only ✓"
+  },
+  "retort55brpy": {
+   "label": "retort exp-55 brazil py",
+   "type": "sweep",
+   "config": "Claude Code · brazil-soccer-mcp Python, Opus 5 low→max, n=1 ✓"
+  },
+  "retort55brgo": {
+   "label": "retort exp-55 brazil go",
+   "type": "sweep",
+   "config": "Claude Code · brazil-soccer-mcp Go, Opus 5 low/high/xhigh/max (medium has no cost), n=1 ✓"
+  },
+  "retort15tdd": {
+   "label": "retort exp-15 rest TDD",
+   "type": "xmodel",
+   "config": "Claude Code · rest-api-crud TDD prompt, Sonnet 5 vs Sonnet 4.6, 5 languages n=1 ✓"
+  },
+  "retort15bdd": {
+   "label": "retort exp-15 rest BDD",
+   "type": "xmodel",
+   "config": "Claude Code · rest-api-crud BDD prompt, Sonnet 5 vs Opus 4.8, 4 languages n=1 ✓"
+  },
+  "retort15brtdd": {
+   "label": "retort exp-15 brazil TDD",
+   "type": "xmodel",
+   "config": "Claude Code · brazil-soccer-mcp TDD, Sonnet 5 vs Sonnet 4.6, 3 languages ✓"
+  },
+  "retort15brbdd": {
+   "label": "retort exp-15 brazil BDD",
+   "type": "xmodel",
+   "config": "Claude Code · brazil-soccer-mcp BDD, Sonnet 5 vs Opus 4.8, 2 languages ✓"
+  },
+  "retort6": {
+   "label": "retort exp-6",
+   "type": "xmodel",
+   "config": "Claude Code · rest-api-crud, Opus 4.7 vs 4.8 default, 6 languages ×3 ✓"
+  },
+  "retort6beads": {
+   "label": "retort exp-6 beads",
+   "type": "xmodel",
+   "config": "Claude Code + beads · rest-api-crud, Opus 4.7 vs 4.8, 6 languages ×3 ✓"
+  },
+  "retort8": {
+   "label": "retort exp-8",
+   "type": "xmodel",
+   "config": "Claude Code · rest-api-crud Elixir/Erlang, Opus 4.7 vs 4.8 ×3 ✓"
+  },
+  "retort5br": {
+   "label": "retort exp-5 brazil",
+   "type": "xmodel",
+   "config": "Claude Code · brazil-soccer-mcp, Opus 4.7 vs 4.8, 6 languages ✓"
+  },
+  "retort65": {
+   "label": "retort exp-65",
+   "type": "sweep",
+   "config": "Claude Code · rest-api-crud, Fable 5.1 low vs default, 4 languages ×3, prompt balanced ✓"
+  },
+  "retort4648": {
+   "label": "retort exp-46/48 bookshop",
+   "type": "xmodel",
+   "config": "Claude Code · bookshop task, Opus 5 vs Fable 5 default, 8 matched languages n=1 ✓"
+  },
+  "vulcanbench3-o5": {
+   "label": "VulcanBench v3 Opus 5",
+   "type": "sweep",
+   "config": "VulcanBench harness · 23 tasks ×1, Opus 5 low/medium/high, report No.10 (26 Jul) ✓"
+  },
+  "tilth-mcp": {
+   "label": "tilth MCP arm",
+   "type": "xmodel",
+   "config": "tilth README @cff4dda · MCP arm, 3 models; author retracted 19 Sep (harness defects) ✓"
+  },
+  "ponytail-pony": {
+   "label": "ponytail skill arm",
+   "type": "xmodel",
+   "config": "promptfoo · 5 tasks ×30, ponytail skill, 3 Claude models ✓"
+  },
+  "ponytail-caveman": {
+   "label": "ponytail caveman arm",
+   "type": "xmodel",
+   "config": "promptfoo · 5 tasks ×30, caveman skill, cost only ✓"
+  },
+  "ctala-cc": {
+   "label": "ctala Claude Code route",
+   "type": "xmodel",
+   "config": "ctala models.json · Claude Code subscription route, 7 models, unranked (exam incomplete), list-price per assumed call ✓"
+  },
+  "melvynx-xh3": {
+   "label": "Melvynx xhigh trio",
+   "type": "xmodel",
+   "config": "Claude Code · 3 apps, Fable 5 vs Sonnet 5 xhigh, same batch, verified runs, cost only ✓"
+  },
+  "melvynx-med2": {
+   "label": "Melvynx medium duo",
+   "type": "xmodel",
+   "config": "Claude Code · 2 apps, Fable 5 vs Sonnet 5 medium, cost only ✓"
+  },
+  "lcb-compression": {
+   "label": "LLM cost bench compression",
+   "type": "xmodel",
+   "config": "raw API · 80 prompts, prompt-compression lever, Haiku 4.5 vs Sonnet 4.6 ✓"
+  },
+  "lcb-outputcap": {
+   "label": "LLM cost bench output cap",
+   "type": "xmodel",
+   "config": "raw API · 80 prompts, output-cap lever ✓"
+  },
+  "aiarena-london": {
+   "label": "ai-arena london",
+   "type": "sweep",
+   "config": "Claude Code · london-island, Fable 5 high vs max, tokens only ✓"
+  },
+  "aiarena-savannah": {
+   "label": "ai-arena savannah",
+   "type": "xmodel",
+   "config": "Claude Code · savannah-ecosystem, Fable 5 vs Sonnet 5 max, tokens only ✓"
+  },
+  "aiarena-tokyo": {
+   "label": "ai-arena tokyo",
+   "type": "xmodel",
+   "config": "Claude Code · tokyo-island, Fable 5 vs Sonnet 5 max, tokens only; Sonnet metrics identical to savannah ✓"
+  },
+  "bullshitbench-v1": {
+   "label": "BullshitBench v1",
+   "type": "xmodel",
+   "config": "CC issue 83510 · v1 n=55 detect-strict + median output tokens, 7 couples ✓"
+  },
+  "vibeoscad-png1": {
+   "label": "vibe-openscad iter-png-1",
+   "type": "xmodel",
+   "config": "vibe-openscad · 7 tasks, 1 PNG-feedback round, 5 Claude models ✓"
+  },
+  "vibeoscad-png2": {
+   "label": "vibe-openscad iter-png-2",
+   "type": "xmodel",
+   "config": "vibe-openscad · 7 tasks, 2 PNG rounds ✓"
+  },
+  "vibeoscad-png3": {
+   "label": "vibe-openscad iter-png-3",
+   "type": "xmodel",
+   "config": "vibe-openscad · 7 tasks, 3 PNG rounds ✓"
+  },
+  "vibeoscad-pdf": {
+   "label": "vibe-openscad PDF page",
+   "type": "xmodel",
+   "config": "vibe-openscad · 2 tier-4 datasheet tasks, 8 Claude models default ✓"
+  },
+  "sp-pr2258": {
+   "label": "superpowers PR2258",
+   "type": "xmodel",
+   "config": "superpowers-evals campaign 5 · Opus 5 vs Opus 4.8 xhigh, interrupted, base+head pooled ✓"
+  },
+  "fablemode-inj": {
+   "label": "fable-mode injected",
+   "type": "xmodel",
+   "config": "fable-mode RESULTS · 6 tasks with fable-mode prompt, Opus 4.8 vs Haiku 4.5, tokens only ✓"
+  },
+  "gliu-o5o55": {
+   "label": "George Liu · Opus 5 vs 5.5",
+   "type": "sweep",
+   "config": "Claude Code 10-prompt suite · low→max · IFEval /9 ✓"
+  },
+  "gliu-s5s46": {
+   "label": "George Liu · Sonnet 5 vs 4.6",
+   "type": "xgen",
+   "config": "Claude Code 10-prompt suite · medium/high baselines ✓"
+  },
+  "gliu-o48f5": {
+   "label": "George Liu · Opus 4.8 vs Fable 5",
+   "type": "xgen",
+   "config": "Claude Code 10-prompt suite · medium/high baselines ✓"
+  },
+  "skillsbench-noskill": {
+   "label": "SkillsBench (no skills)",
+   "type": "xmodel",
+   "config": "arXiv 2602.12670v4 T2+T15 · same runs' no-Skills condition ✓"
+  },
+  "coderev-syn25": {
+   "label": "code-review (synthetic, n=25)",
+   "type": "xmodel",
+   "config": "arXiv 2606.15689 T4 · VibeOps prompt, score only ✓"
+  },
+  "coderev-syn100": {
+   "label": "code-review (synthetic, n=100)",
+   "type": "xmodel",
+   "config": "arXiv 2606.15689 T4 · VibeOps prompt, score only ✓"
+  },
+  "codrouter-id": {
+   "label": "CodeRouterBench (in-dist.)",
+   "type": "xmodel",
+   "config": "arXiv 2606.22902 T9 · single-turn, 9 dimensions, score only ✓"
+  },
+  "sakana-rhi46": {
+   "label": "RHI (Sonnet 4.6)",
+   "type": "sweep",
+   "config": "arXiv 2607.15524 Fig. 5b · 30 ML tasks, cost normalized to sonnet-4.6-high ✓"
+  },
+  "vlnr2r-msa": {
+   "label": "R2R-CE (mini-swe-agent)",
+   "type": "xmodel",
+   "config": "arXiv 2607.26148 Fig. 3 · minimal interface, vendor-default effort, score only ✓"
+  },
+  "lsp-t2s-lsp": {
+   "label": "LSP vs grep (LSP arm)",
+   "type": "xmodel",
+   "config": "arXiv 2608.13568 §6.2 · 6 SWE-bench-Lite localization tasks, tokens-to-success ✓"
+  },
+  "databricks-pi": {
+   "label": "Databricks · Pi harness",
+   "type": "sweep",
+   "config": "Opus 4.8 high/xhigh/max ✓"
+  },
+  "databricks": {
+   "label": "Databricks · Claude Code",
+   "type": "sweep",
+   "config": "Opus 4.8 high/xhigh/max + Sonnet 5/4.6, Haiku 4.5 ✓"
+  },
+  "synthorai-single": {
+   "label": "Synthorai single-shot arithmetic (13 tasks ×3)",
+   "type": "sweep",
+   "config": "Opus 5.5 and Opus 5 full ladders + default, API list-price cost; accuracy ≥97 % everywhere ✓"
+  },
+  "synthorai-loop": {
+   "label": "Synthorai multi-hop tool loop (4 Qs ×12)",
+   "type": "sweep",
+   "config": "Opus 5.5 default/low/max vs Opus 5 default ✓"
+  },
+  "cyberq-debug": {
+   "label": "CyberQ code-debug prompt",
+   "type": "sweep",
+   "config": "Opus 5.5 ladder + Opus 5 default/medium, single runs, list-price est. ✓"
+  },
+  "cyberq-secshort": {
+   "label": "CyberQ security short answer",
+   "type": "sweep",
+   "config": "Opus 5.5 ladder + Opus 5, no score ✓"
+  },
+  "cyberq-extract": {
+   "label": "CyberQ structured extraction",
+   "type": "sweep",
+   "config": "Opus 5.5 ladder + Opus 5, no score ✓"
+  },
+  "qiita-takuya-code": {
+   "label": "Qiita Takuya coding set (5 tasks ×3)",
+   "type": "xmodel",
+   "config": "Opus 5.5 high/medium, Opus 5, Fable 5.1; hidden tests 100 % (saturated) ✓"
+  },
+  "rails-s1": {
+   "label": "Agents on Rails · atomic",
+   "type": "xmodel",
+   "config": "rubyonrails.org/ai + rails/ai-evals runs · 21 Writebook tasks ×3, miniswen, list-price cost/run ✓"
+  },
+  "rails-s2": {
+   "label": "Agents on Rails · features",
+   "type": "sweep",
+   "config": "rubyonrails.org/ai + rails/ai-evals runs · 20 tickets ×3, miniswen; Opus 5 & Fable 5.1 high→max, Opus 5.5 default ✓"
+  },
+  "endor-asl": {
+   "label": "Agent Security League",
+   "type": "xmodel",
+   "config": "Endor Labs post 24 Sep · 200 tasks, Claude Code, total run cost/200, effort unstated ✓"
+  },
+  "snorkel-tbplus": {
+   "label": "Snorkel Terminal-Bench+",
+   "type": "xmodel",
+   "config": "Snorkel blog 23 Sep · 24 tasks pass@1, score only, effort unstated ✓"
+  },
+  "crabbit-o55oss": {
+   "label": "CodeRabbit OSS-Aug",
+   "type": "sweep",
+   "config": "CodeRabbit blog 22 Sep · 80 patterns, Opus 5.5 Standard vs Max, recall, score only ✓"
+  },
+  "crabbit-o55sig": {
+   "label": "CodeRabbit Signal",
+   "type": "xmodel",
+   "config": "CodeRabbit blogs 22 & 28 Sep · 13 hard patterns, frozen cassette · Opus 5.5 Standard/Max score only; Sonnet 5.5 thinking on/off and Sonnet 5 with measured cost ✓"
+  },
+  "atomic-expense": {
+   "label": "Atomic Agent expense-lib",
+   "type": "xmodel",
+   "config": "Atomic Agent 0.6.5 via OpenRouter · 5 bugs + 2 features, 32 hidden tests, n=3, provider default effort, billed cost; saturated ✓"
+  },
+  "dende-sla": {
+   "label": "dende SLA-deadline fn",
+   "type": "sweep",
+   "config": "Claude Code 2.1.284 -p, no tools · Sonnet 5.5 low→max + Opus 5.5 medium/high, 15 tests, n=1–2, CLI list-price cost; saturated ✓"
+  },
+  "riku-bugfix": {
+   "label": "riku bug-fix (5 planted)",
+   "type": "xgen",
+   "config": "Claude Code 2.1.284, no tools · Sonnet 5 vs 5.5, n=3 medians, relative cost only ✓"
+  },
+  "riku-table": {
+   "label": "riku table task",
+   "type": "xgen",
+   "config": "Claude Code 2.1.284, no tools · Sonnet 5 vs 5.5, n=3 medians, relative cost only; saturated ✓"
+  },
+  "riku-slides": {
+   "label": "riku slides task",
+   "type": "xgen",
+   "config": "Claude Code 2.1.284, no tools · Sonnet 5 vs 5.5, n=3 medians, relative cost only; saturated ✓"
+  },
+  "killswitch": {
+   "label": "KillSwitch-Bench",
+   "type": "xmodel",
+   "config": "Claude Code, esoteric adversarial language · 5 tasks × 2 attempts, $5 cap, default effort, cost = tokens × list ✓"
+  },
+  "occam-base": {
+   "label": "Occam bench, no plugin",
+   "type": "sweep",
+   "config": "Claude Code headless · 18 procedural tasks, hidden verifier · Sonnet 5.5 & Opus 5.5 at max/medium + Haiku 4.5 ✓"
+  },
+  "occam-rules": {
+   "label": "Occam bench, Occam plugin",
+   "type": "sweep",
+   "config": "same 18 tasks, Occam rules loaded · Sonnet 5.5 & Opus 5.5 at max/medium + Haiku 4.5 ✓"
+  },
+  "occam-ponytail": {
+   "label": "Occam bench, Ponytail 4.10",
+   "type": "sweep",
+   "config": "same 18 tasks, Ponytail plugin · Sonnet 5.5 & Opus 5.5 at max/medium + Haiku 4.5 ✓"
+  },
+  "occam-base-s1": {
+   "label": "Occam bench seed 1",
+   "type": "xgen",
+   "config": "9 tasks (seed 1), no plugin; Sonnet 5 max from the calibration run ✓"
+  },
+  "kjl-waterslide": {
+   "label": "KJL waterslide game",
+   "type": "xmodel",
+   "config": "Claude Code xhigh · one-shot game build, Sonnet 5.5 vs Opus 5.5, cost only ✓"
+  },
+  "parafr-flightsim": {
+   "label": "Para-FR flight sim",
+   "type": "xmodel",
+   "config": "Claude Code medium · one prompt, ≈$5 each, Sonnet 5.5 vs Opus 5.5, cost only (approx) ✓"
+  },
+  "merkus3": {
+   "label": "MrMerkus 3-task tests",
+   "type": "xgen",
+   "config": "3 tasks, 70 hidden checks · harness differs (Claude Code vs Antigravity), saturated, score only ✓"
+  },
+  "crabbit-s55oss": {
+   "label": "CodeRabbit OSS-Aug (Sonnet 5.5)",
+   "type": "xmodel",
+   "config": "CodeRabbit blog 28 Sep · 44 PRs, Sonnet 5.5 vs Sonnet 5, cost only (judge pending) ✓"
+  },
+  "boxs55-all": {
+   "label": "Box AI eval (Sonnet 5.5)",
+   "type": "xmodel",
+   "config": "Box blog 28 Sep · internal enterprise eval, Sonnet 5.5 vs 5, score only ✓"
+  },
+  "boxs55-finserv": {
+   "label": "Box AI eval · finance",
+   "type": "xmodel",
+   "config": "Box blog 28 Sep · financial services subset, Sonnet 5.5 vs 5, score only ✓"
+  },
+  "boxs55-legal": {
+   "label": "Box AI eval · legal",
+   "type": "xmodel",
+   "config": "Box blog 28 Sep · legal subset, Sonnet 5.5 vs 5, score only ✓"
+  },
+  "boxs55-lifesci": {
+   "label": "Box AI eval · life sciences",
+   "type": "xmodel",
+   "config": "Box blog 28 Sep · life sciences subset, Sonnet 5.5 vs 5, score only ✓"
+  },
+  "boxs55-public": {
+   "label": "Box AI eval · public sector",
+   "type": "xmodel",
+   "config": "Box blog 28 Sep · public sector subset, Sonnet 5.5 vs 5, score only ✓"
+  },
+  "suwanobu-12m": {
+   "label": "Qiita suwa_nobu 12 models",
+   "type": "xgen",
+   "config": "Claude Code 2.1.283 · trivial read/count/write task, cold cache, median of 3, CLI cost, CLI default effort ✓"
+  },
+  "crabbit-f51": {
+   "label": "CodeRabbit review (Fable 5.1)",
+   "type": "xmodel",
+   "config": "CodeRabbit blog 1 Sep · 45 tasks/105 issues, Fable 5.1 low/high + Fable 5, Opus 5, score only ✓"
+  },
+  "deloitte-cr": {
+   "label": "Deloitte code review",
+   "type": "xmodel",
+   "config": "Opus 5.5 launch page partner quote · bugs caught, score only, n unstated ✓"
+  },
+  "hebbia-cite": {
+   "label": "Hebbia citation recall",
+   "type": "xmodel",
+   "config": "Opus 5.5 launch page partner quote · rubric coverage, score only ✓"
+  },
+  "classmethod-o55": {
+   "label": "Classmethod Bedrock prime fn",
+   "type": "sweep",
+   "config": "DevelopersIO 23 Sep · Opus 5.5 low/medium/high, 1 run, output tokens only ✓"
+  },
+  "docswebpro": {
+   "label": "SWE-bench Pro subset (Anthropic docs)",
+   "type": "sweep",
+   "config": "Anthropic-internal 478-problem subset, customer-billed cost ✓"
+  },
+  "docsdrb2": {
+   "label": "DeepResearch Bench II (Anthropic docs)",
+   "type": "sweep",
+   "config": "50-task subset, 33-task basis, customer-billed ✓"
+  },
+  "docscode370": {
+   "label": "Internal coding, 370 repo tasks (Anthropic docs)",
+   "type": "sweep",
+   "config": "plain API agent, customer-billed per attempt ✓"
+  },
+  "docswidesearch": {
+   "label": "WideSearch (Anthropic docs)",
+   "type": "sweep",
+   "config": "Fable 5 low/medium/default, 3 runs ✓"
+  },
+  "docsdeepwide": {
+   "label": "DeepWideSearch (Anthropic docs)",
+   "type": "sweep",
+   "config": "Fable 5, 220 questions, 3 runs ✓"
+  },
+  "docsbrowsecomp": {
+   "label": "BrowseComp 500-cut (Anthropic docs)",
+   "type": "sweep",
+   "config": "Fable 5, 1-3 runs per setting ✓"
+  },
+  "docsgdpval": {
+   "label": "GDPval (Anthropic docs)",
+   "type": "sweep",
+   "config": "Fable 5, 1 run, cost incl. grading ✓"
+  },
+  "docscorpus": {
+   "label": "Corpus defect sweep (Anthropic docs)",
+   "type": "sweep",
+   "config": "21.6M-token corpus, F1, per episode ✓"
+  },
+  "tb30json": {
+   "label": "TB 3.0 (claude.dev payload)",
+   "type": "sweep",
+   "config": "claude.dev 'Spending your effort' embedded data · 74 tasks×5, Opus 5 / Fable 5 / Fable 5.1 labelled rungs, median tokens, no USD ✓"
+  },
+  "tb30chart": {
+   "label": "TB 3.0 (claude.dev chart)",
+   "type": "sweep",
+   "config": "claude.dev 'Spending your effort' SVG · 70 tasks, Opus 5.5 / Fable 5.1 / Opus 5 / Fable 5 × low→max, median tokens, no USD; Opus 5.5 run 3 wk later, 128k cap ✓"
+  },
+  "osworld2o5": {
+   "label": "OSWorld 2.0 board (Opus 5)",
+   "type": "sweep",
+   "config": "osworld-v2.xlang.ai official JSON · v2.1 full 108 tasks, batched, 500 steps, Opus 5 low→max, output tokens/task, no cost ✓"
+  },
+  "osworld2o5a": {
+   "label": "OSWorld 2.0 board v08.08 (Opus 5)",
+   "type": "sweep",
+   "config": "osworld-v2.xlang.ai official JSON · release v2026.08.08, 7-run avg, Opus 5 low→max, score only ✓"
+  },
+  "osworld2s150": {
+   "label": "OSWorld 2.0 single 150 steps",
+   "type": "xmodel",
+   "config": "osworld-v2.xlang.ai official JSON · 108 tasks, 150-step budget, Opus 4.7 max, Sonnet 4.6 medium/max ✓"
+  },
+  "osworld2s300": {
+   "label": "OSWorld 2.0 single 300 steps",
+   "type": "xmodel",
+   "config": "osworld-v2.xlang.ai official JSON · 108 tasks, 300-step budget, Opus 4.7 max, Sonnet 4.6 medium/max ✓"
+  },
+  "sealpro2": {
+   "label": "SWE-Bench Pro V2 (Scale)",
+   "type": "xmodel",
+   "config": "Scale Labs board via Wayback 23 Sep 2026 · full set, Claude Code, one effort per model, score only, saturated ✓"
+  },
+  "sealpro2h": {
+   "label": "SWE-Bench Pro V2 HARD (Scale)",
+   "type": "xmodel",
+   "config": "Scale Labs board via Wayback 23 Sep 2026 · HARD subset, Claude Code, score only ✓"
+  },
+  "surfevolver": {
+   "label": "Surface Evolver bench",
+   "type": "xmodel",
+   "config": "yhenon/surface-evolver-llm-eval aggregates.json · 16 runs/model, OpenRouter recorded cost, Opus 4.8 none/high, Sonnet 5 medium, Fable 5 high ✓"
+  },
+  "cbcostopt": {
+   "label": "Cookbook cost optimization",
+   "type": "sweep",
+   "config": "Anthropic cookbook cost_optimization.ipynb · 10-claim agent ×2 trials, Opus 5 & Sonnet 5 low→high, Haiku 4.5; list-price cost from usage ✓"
+  },
+  "llmconfbench": {
+   "label": "LLMConfBench",
+   "type": "xmodel",
+   "config": "arXiv 2609.20666 · conformer energy ranking, 27 molecules × 3 prompts via OpenRouter, Opus 5 and Sonnet 5 at high; cost summed from the repo's per-call logs ✓"
+  },
+  "vectorise-effort": {
+   "label": "Vectorise doc-search effort test (Vidali gist)",
+   "type": "sweep",
+   "config": "33 multilingual MCP questions, output tokens only, 24 Sep 2026 ✓"
+  },
+  "vectorise-graded": {
+   "label": "Vectorise doc-search, judge-graded (Vidali gist)",
+   "type": "xmodel",
+   "config": "citation recall by cross-model judge, 22 Sep 2026 evening run ✓"
+  },
+  "lighthouse-svg": {
+   "label": "Lighthouse SVG one-shot (Reddit)",
+   "type": "xmodel",
+   "config": "one prompt, Copilot AIU, Opus capped at stop, subjective rank ✓"
+  },
+  "arcagi2": {
+   "label": "ARC-AGI-2",
+   "type": "sweep",
+   "config": "ARC Prize evaluations.json · semi-private, costPerTask per model × effort; Opus 5.5 & Fable 5.1 full ladders ✓"
+  },
+  "arcagi1": {
+   "label": "ARC-AGI-1",
+   "type": "sweep",
+   "config": "ARC Prize evaluations.json · semi-private, costPerTask per model × effort; scores ≥97.5 % flagged gen5-saturated ✓"
+  },
+  "aatb40": {
+   "label": "AA TB 4.0",
+   "type": "sweep",
+   "config": "AA model payload · Terminal-Bench 4.0 (AA harness), 4 models × ladder + 3 at max; floor scores blank ✓"
+  },
+  "aascicode": {
+   "label": "AA SciCode",
+   "type": "sweep",
+   "config": "AA model payload · SciCode, 4 models × ladder + 3 at max ✓"
+  },
+  "aahle": {
+   "label": "AA HLE",
+   "type": "sweep",
+   "config": "AA model payload · HLE no tools, 4 models × ladder + 3 at max ✓"
+  },
+  "aagdppdf": {
+   "label": "AA GDP-PDF",
+   "type": "sweep",
+   "config": "AA model payload · GDP-PDF all-pass, 4 models × ladder + 3 at max; noisy ✓"
+  },
+  "aacritpt": {
+   "label": "AA CritPt",
+   "type": "sweep",
+   "config": "AA model payload · CritPt physics, 4 models × ladder + 3 at max; floor scores blank ✓"
+  },
+  "aalcr": {
+   "label": "AA-LCR",
+   "type": "sweep",
+   "config": "AA model payload · long-context reasoning, input-dominated cost ✓"
+  },
+  "aaomni": {
+   "label": "AA Omniscience",
+   "type": "sweep",
+   "config": "AA model payload · Omniscience accuracy (not the penalised index) ✓"
+  },
+  "aacai": {
+   "label": "AA Coding Agent Index",
+   "type": "xmodel",
+   "config": "AA · Claude Code harness, DeepSWE+TB4.0+SWE-Atlas, 3 Claude models at max, measured $ incl. cache; fallback 3–9 % ✓"
+  },
+  "deepswe": {
+   "label": "DeepSWE v1.1",
+   "type": "sweep",
+   "config": "Datacurve live JSON · 113 tasks × 4 runs, mini-swe-agent, 4 models × full ladder + Sonnet 4.6 high, mean $/attempt ✓"
+  },
+  "valscyber": {
+   "label": "Vals CyberBench",
+   "type": "xmodel",
+   "config": "Vals AI · OSS-Fuzz PoC+patch, mini-swe-agent, 5 Claude models at max — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsskills": {
+   "label": "Vals SkillsBench",
+   "type": "xmodel",
+   "config": "Vals AI · SkillsBench with skills, OpenHands, 5 Claude models at max — snapshot 27 Sep, re-priced ✓"
+  },
+  "petribench": {
+   "label": "PetriBench",
+   "type": "sweep",
+   "config": "arXiv 2609.19883 · 4,800 Petri-net questions, raw API adaptive thinking + output_config.effort, Opus 5 M/H/XH + Sonnet 5 M/H, measured tokens × list ✓"
+  },
+  "sweeffort": {
+   "label": "SWE-Effort 25",
+   "type": "sweep",
+   "config": "arXiv 2608.01347 App. N · 25 hard SWE-bench Verified, Claude Code 2.1.220, Opus 5 & Sonnet 5 × low/high/xhigh, billed cost ✓"
+  },
+  "ffinance": {
+   "label": "FrontierFinance",
+   "type": "sweep",
+   "config": "arXiv 2608.11683 Fig. 9 · Finance Agent v2 harness, Opus 4.8 low→xhigh, API cost/query (vector-read) ✓"
+  },
+  "osworldpro": {
+   "label": "OSWorld-Pro",
+   "type": "xmodel",
+   "config": "arXiv 2609.24890 · OSWorld harness, 250 turns, 4 Claude models all at max, tokens × OpenRouter list incl. cache ✓"
+  },
+  "tautau": {
+   "label": "τ^τ-Bench",
+   "type": "xmodel",
+   "config": "arXiv 2609.04611 · 53 agent-construction tasks in Claude Code, Opus 5 vs Sonnet 5 both at max, build spend at list ✓"
+  },
+  "progdistill": {
+   "label": "ProgramDistill-300",
+   "type": "xmodel",
+   "config": "arXiv 2609.18805 · 300 web-app repair tasks, R2E-Gym harness, Opus 5 vs Sonnet 5 at high, tokens × LiteLLM list ✓"
+  },
+  "gamelogic": {
+   "label": "GameLogicBench",
+   "type": "xmodel",
+   "config": "arXiv 2609.21562 · 72 Godot game-logic tasks in Claude Code, effort=high, Opus 5 vs Sonnet 5, tokens × vendor list ✓"
+  },
+  "rubench": {
+   "label": "RuBench 1.0",
+   "type": "xmodel",
+   "config": "arXiv 2607.06411 · 25 Russian repo tasks × 3 runs, Claude Code 2.1.201, all at xhigh, CLI-reported cost ✓"
+  },
+  "kimicode2": {
+   "label": "Kimi Code Bench 2.0",
+   "type": "xmodel",
+   "config": "arXiv 2607.24653 Fig. 13a · Moonshot in-house suite via Claude Code, Opus 4.8 vs Fable 5 at max, measured cost (vector-read) ✓"
+  },
+  "fuzzbrain": {
+   "label": "FuzzingBrain-Bench",
+   "type": "xgen",
+   "config": "arXiv 2608.25158 · 77 fuzzing challenges, raw API no thinking param, 3 models, tokens × list (cache-aware) ✓"
+  },
+  "bvb": {
+   "label": "BVB",
+   "type": "xmodel",
+   "config": "arXiv 2609.15478 · Mini-BVB via LiteLLM, $3/scene cap, 5 Claude models at high (+ omitted-effort runs), LiteLLM list cost ✓"
+  },
+  "nnakapa-o5f51": {
+   "label": "nnakapa QCD #37",
+   "type": "sweep",
+   "config": "Claude Code 2.1.258 · 3 DB tasks × 10 runs, Opus 5 & Fable 5.1 × low→xhigh, CLI-reconciled cost, hidden-test gate ✓"
+  },
+  "nnakapa-o5s5": {
+   "label": "nnakapa QCD #34",
+   "type": "sweep",
+   "config": "Claude Code 2.1.226 · 3 DB tasks × 10 runs, Sonnet 5 & Opus 5 × low→xhigh, CLI-reconciled cost ($2/$10 Sonnet), hidden-test gate ✓"
+  },
+  "nnakapa-o5o48f5": {
+   "label": "nnakapa QCD #29",
+   "type": "sweep",
+   "config": "Claude Code 2.1.220 · 3 DB tasks × 10 runs, Opus 5, Opus 4.8 & Fable 5 × low→xhigh, CLI-reconciled cost, hidden-test gate ✓"
+  },
+  "nnakapa-s5cc": {
+   "label": "nnakapa QCD #35 CC",
+   "type": "sweep",
+   "config": "Claude Code 2.1.229 (1M ctx) · 3 DB tasks × 10 runs, Sonnet 5 × low→xhigh, CLI-reconciled cost ($2/$10) ✓"
+  },
+  "willison55": {
+   "label": "Willison SVG 5.5",
+   "type": "sweep",
+   "config": "llm CLI · one fixed SVG prompt, Opus 5.5 and Sonnet 5.5 low→xhigh, measured tokens; max hit the 128k cap on both (omitted); trivial task ✓"
+  },
+  "nnakapa-s5cop": {
+   "label": "nnakapa #35 Copilot",
+   "type": "sweep",
+   "config": "GitHub Copilot CLI 1.0.79 · same 3 DB tasks × 10 runs, Sonnet 5 × low→xhigh, billed cost ✓"
+  },
+  "nnakapa-s5cop2": {
+   "label": "nnakapa #36 Copilot",
+   "type": "sweep",
+   "config": "GitHub Copilot CLI 1.0.80 · same 3 DB tasks × 10 runs, Sonnet 5 × low→xhigh, billed cost ✓"
+  },
+  "nnakapa-o47o48": {
+   "label": "nnakapa QCD #20",
+   "type": "sweep",
+   "config": "Claude Code 2.1.157 · 3 DB tasks × 10 runs, Opus 4.7 & Opus 4.8 × low→xhigh ✓"
+  },
+  "nnakapa-f5o48": {
+   "label": "nnakapa QCD #24",
+   "type": "sweep",
+   "config": "Claude Code 2.1.170 · 3 DB tasks × 10 runs, Fable 5 & Opus 4.8 × low→xhigh ✓"
+  },
+  "merc-core10": {
+   "label": "MERC core-10",
+   "type": "sweep",
+   "config": "Claude Code -p, no tools · 10 graded tasks, 6 models × low→max, n=2; usage × list (5m cache-write); scores 94–98/98 → cost only ✓"
+  },
+  "renchris-o55": {
+   "label": "renchris review o55",
+   "type": "sweep",
+   "config": "claude -p no tools, CC 2.1.280 · 9 code briefs / 36 anchored defects, Opus 5.5 low→max + Opus 5 @high, 3 blind judges; CLI list cost ✓"
+  },
+  "renchris-f51": {
+   "label": "renchris review f51",
+   "type": "sweep",
+   "config": "claude -p no tools, CC 2.1.260 (64K cap) · same 9-brief corpus, Fable 5.1 low→xhigh (max incomplete), 3 blind judges ✓"
+  },
+  "kayben-review": {
+   "label": "kayben plan review",
+   "type": "sweep",
+   "config": "claude -p no tools, CC 2.1.282 · 13 seeded defects, Opus 5.5 & Sonnet 5 × medium/high/xhigh, n=10, effort verified in transcripts ✓"
+  },
+  "kayben-review-f51": {
+   "label": "kayben plan review f51",
+   "type": "sweep",
+   "config": "same doc, cap10 prompt · Fable 5.1 low→max, n=5 ✓"
+  },
+  "vulcanbench-ciiv4-f51": {
+   "label": "VulcanBench F-v4 f51",
+   "type": "sweep",
+   "config": "Claude Code 2.1.259–261 · same 23 tasks, Fable 5.1 × low→max, v3.4 judge, per-model list ledger; fallback 7–40 % ✓"
+  },
+  "vulcanbench-ciiv4-o5": {
+   "label": "VulcanBench F-v4 o5",
+   "type": "sweep",
+   "config": "Claude Code 2.1.257 · same 23 tasks, Opus 5 × low/med/high/max, CLI list cost, functional pass only ✓"
+  },
+  "rampnet-fable": {
+   "label": "RampNet Fable",
+   "type": "xmodel",
+   "config": "same rig/prompt, effort=low, Anthropic 1P path · Fable 5 vs 5.1 ✓"
+  },
+  "caloriebench": {
+   "label": "CalorieBench",
+   "type": "xmodel",
+   "config": "Anthropic API · 200 food photos, effort=high sent without thinking → nothink regime, within-20 % score ✓"
+  },
+  "an55tb40": {
+   "label": "TB 4.0 (Anthropic launch charts)",
+   "type": "sweep",
+   "config": "Anthropic launch page chart CSVs (Opus 5.5 and Sonnet 5.5 pages) · 5 models × low→max; production safeguards on (fallbacks); Sonnet 5 anomalously low, flagged ✓"
+  },
+  "ffinance-x": {
+   "label": "FrontierFinance T4",
+   "type": "xmodel",
+   "config": "arXiv 2608.11683 Table 4 · effort omitted, Fable 5 vs Opus 4.8 ✓"
+  },
+  "valslcb": {
+   "label": "Vals LiveCodeBench",
+   "type": "xmodel",
+   "config": "Vals AI · LiveCodeBench, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valsmmmu": {
+   "label": "Vals MMMU",
+   "type": "xmodel",
+   "config": "Vals AI · MMMU, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valscorpfin": {
+   "label": "Vals CorpFin v2",
+   "type": "xmodel",
+   "config": "Vals AI · CorpFin v2, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valslegalbench": {
+   "label": "Vals LegalBench",
+   "type": "xmodel",
+   "config": "Vals AI · LegalBench, Claude models at their stated compute_effort, measured cost/test — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsmortgage": {
+   "label": "Vals MortgageTax",
+   "type": "xmodel",
+   "config": "Vals AI · MortgageTax, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valstaxeval": {
+   "label": "Vals TaxEval v2",
+   "type": "xmodel",
+   "config": "Vals AI · TaxEval v2, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valsmmindex": {
+   "label": "Vals Multimodal Index",
+   "type": "xmodel",
+   "config": "Vals AI · Multimodal Index, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valsswebench": {
+   "label": "Vals SWE-bench",
+   "type": "xmodel",
+   "config": "Vals AI · SWE-bench, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valsgpqa": {
+   "label": "Vals GPQA",
+   "type": "xmodel",
+   "config": "Vals AI · GPQA, Claude models at their stated compute_effort, measured cost/test, near-ceiling → cost only ✓"
+  },
+  "valsmmlupro": {
+   "label": "Vals MMLU-Pro",
+   "type": "xmodel",
+   "config": "Vals AI · MMLU-Pro, Claude models at their stated compute_effort, measured cost/test, near-ceiling → cost only ✓"
+  },
+  "retort49": {
+   "label": "retort exp-49",
+   "type": "sweep",
+   "config": "Claude Code · one task, 2 models × low→max, n=3; repo states its own quality saturation → cost only ✓"
+  },
+  "runebench": {
+   "label": "RuneBench",
+   "type": "xmodel",
+   "config": "Harbor+Modal · 16 skills, 30-min budget, XP metric; mispriced Opus 5 cells omitted ✓"
+  },
+  "melvynx": {
+   "label": "Melvynx bench",
+   "type": "sweep",
+   "config": "Claude Code · 7 valid tasks, Opus 5 high vs max, manual rubric ✓"
+  },
+  "aa-index43": {
+   "label": "AA Index v4.3",
+   "type": "sweep",
+   "config": "AA · index v4.3 of 7 Sep (TB 4.0 + AutomationBench-AA), Fable 5.1 and Opus 5 × full ladder ✓"
+  },
+  "firecrawl": {
+   "label": "Firecrawl 57-run",
+   "type": "xmodel",
+   "config": "claude -p in sandbox-exec · 3 models at matched high, measured usage; 7/7 all → cost only ✓"
+  },
+  "alebench": {
+   "label": "ALE-Bench",
+   "type": "xmodel",
+   "config": "Epoch archive · 3 models at matched high, measured token splits ✓"
+  },
+  "weirdml": {
+   "label": "WeirdML",
+   "type": "sweep",
+   "config": "Epoch archive · 3 models × high/max, cost per run ✓"
+  },
+  "livebench": {
+   "label": "LiveBench",
+   "type": "xmodel",
+   "config": "new-livebench CSVs · 2026-06-25 release, 13 Claude configs (max/xhigh/high/medium), measured tokens × rates, global = mean of 7 category means ✓"
+  },
+  "cursorbench40": {
+   "label": "CursorBench 4.0",
+   "type": "sweep",
+   "config": "cursor.com payload · v4.0 long-horizon suite, Opus 5/5.5, Fable 5.1, Sonnet 5/5.5 × low→max, measured tokens × list incl. cache ✓"
+  },
+  "willison51": {
+   "label": "Willison SVG 5.1",
+   "type": "sweep",
+   "config": "llm CLI · one fixed SVG prompt, Fable 5.1 low→max, measured tokens; trivial task ✓"
+  },
+  "worldbuild": {
+   "label": "WorldBuild Bench",
+   "type": "xmodel",
+   "config": "own harness · 3 game briefs, Fable 5 vs Opus 5 both at high, real API ledger ✓"
+  },
+  "stet25": {
+   "label": "Stet 25-PR",
+   "type": "xmodel",
+   "config": "Claude Code · 25 replayed PRs, Opus 5 vs Opus 4.8 both at medium, relative cost ✓"
+  },
+  "fcodemain": {
+   "label": "FrontierCode main",
+   "type": "sweep",
+   "config": "Cognition leaderboard JSON · v1.1 main (100 tasks), Claude models × low→max incl. Sonnet 5.5, measured USD/rollout ✓"
+  },
+  "zapierab": {
+   "label": "Zapier AutomationB.",
+   "type": "sweep",
+   "config": "AutomationBench 1.0.6 · 657 held-out tasks, strict pass/fail, measured tokens × list ✓"
+  },
+  "aagdpval": {
+   "label": "AA GDPval v2",
+   "type": "sweep",
+   "config": "AA evaluation page · 220 tasks, Elo; cost derived from AA's published token counts ✓"
+  },
+  "aaautob": {
+   "label": "AA AutomationB.",
+   "type": "xmodel",
+   "config": "AA evaluation page · 657 tasks partial-credit, 3 models at max ✓"
+  },
+  "swerefactor": {
+   "label": "SWE Refactor",
+   "type": "sweep",
+   "config": "arXiv 2608.23564 · 20 whole-repo migrations, Claude Code, measured API spend, 2 models × ladder ✓"
+  },
+  "quotebench": {
+   "label": "QuoteBench",
+   "type": "sweep",
+   "config": "arXiv 2608.13547 · 56 frozen tasks, provider-reported output tokens, 3 models × ladder ✓"
+  },
+  "ai4ai": {
+   "label": "AI4AI-Bench",
+   "type": "sweep",
+   "config": "arXiv 2608.20318 · 10 ML-research repos, measured exploration spend, 2 models × ladder ✓"
+  },
+  "obvbench": {
+   "label": "ObviousBench 0.2",
+   "type": "sweep",
+   "config": "inspect-ai · 144 items ×3 epochs, 3 models × full ladder, measured tokens ✓"
+  },
+  "bughunt": {
+   "label": "bug-hunt-bench",
+   "type": "sweep",
+   "config": "Claude Code 2.1.251 · 105 planted bugs, blind judge, 3 models × ladder ✓"
+  },
+  "vlmexam": {
+   "label": "vlm-exam",
+   "type": "sweep",
+   "config": "roboflow · identical 133-image set, 3 models × low/high, measured tokens ✓"
+  },
+  "harnesseval": {
+   "label": "harnesseval",
+   "type": "sweep",
+   "config": "Claude Code · 6 PRs common to every cell, CLI-metered cost ✓"
+  },
+  "vibeoscad": {
+   "label": "vibe-openscad",
+   "type": "sweep",
+   "config": "output_config.effort explicit · 3 models × ladder; quality saturates → cost only ✓"
+  },
+  "nurbbench": {
+   "label": "nurb-benchmarks",
+   "type": "sweep",
+   "config": "Claude Code · 6 CAD tasks, 2 models × full ladder; quality saturates → cost only ✓"
+  },
+  "kingy30": {
+   "label": "Kingy 30-case",
+   "type": "xmodel",
+   "config": "Vercel AI Gateway pinned to Anthropic · 30 identical cases, measured ledger; quality saturated → cost only ✓"
+  },
+  "tb40": {
+   "label": "Terminal-Bench 4.0",
+   "type": "xmodel",
+   "config": "tbench.ai primary payload · 66 tasks × 330 trials, Claude Code, all at max; cost basis undocumented ✓"
+  },
+  "chartogt": {
+   "label": "Chartography +tools",
+   "type": "sweep",
+   "config": "Fable 5.1 card p186 · 5 models × sweep low→max, $ cost; Opus 4.8 series joined from Opus 5 card p171 ✓"
+  },
+  "chartogn": {
+   "label": "Chartography −tools",
+   "type": "sweep",
+   "config": "Fable 5.1 card p186 · tools disabled — separate regime, kept out of the effort grid ✓"
+  },
+  "valsfab2": {
+   "label": "Vals Finance Agent v2",
+   "type": "xmodel",
+   "config": "Vals AI · Finance Agent v2, Claude models at their stated compute_effort, measured cost/test — snapshot 27 Sep, re-priced ✓"
+  },
+  "valslegal": {
+   "label": "Vals Legal Research",
+   "type": "xmodel",
+   "config": "Vals AI · Legal Research, Claude models at their stated compute_effort, measured cost/test — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsmedscribe": {
+   "label": "Vals MedScribe",
+   "type": "xmodel",
+   "config": "Vals AI · MedScribe, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valstax": {
+   "label": "Vals Tax Agent",
+   "type": "xmodel",
+   "config": "Vals AI · Tax Agent, 10 Claude entries at their stated compute_effort — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsbenefits": {
+   "label": "Vals Public Benefits v1.1",
+   "type": "xmodel",
+   "config": "Vals AI · Public Benefits v1.1, Claude models at their stated compute_effort, measured cost/test — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsvcb100": {
+   "label": "Vals Vibe Code Bench 1-100",
+   "type": "xmodel",
+   "config": "Vals AI · Vibe Code Bench 1-100, Claude models at their stated compute_effort, measured cost/test ✓"
+  },
+  "valsioi": {
+   "label": "Vals IOI",
+   "type": "xmodel",
+   "config": "Vals AI · IOI, Claude models at their stated compute_effort, measured cost/test — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsmystery": {
+   "label": "Vals MysteryMechanism",
+   "type": "xmodel",
+   "config": "Vals AI · MysteryMechanism, Claude models at their stated compute_effort, measured cost/test — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsrsi": {
+   "label": "Vals RSI Index",
+   "type": "xmodel",
+   "config": "Vals AI · RSI Index v1.1 (autonomous LLM R&D, 4 campaigns), Claude models at max, cost per suite = sum of 4 — snapshot 27 Sep, re-priced (board 25 Sep) ✓"
+  },
+  "senkoflysim": {
+   "label": "Senko Flysim",
+   "type": "xmodel",
+   "config": "Senko Rašić · one-shot flight-sim game in Claude Code, xhigh, CLI-reported cost (rounded $, quality not scored) ✓"
+  },
+  "senkovoxel": {
+   "label": "Senko Voxel",
+   "type": "xmodel",
+   "config": "Senko Rašić · one-shot Minecraft-like game in Claude Code, xhigh, CLI-reported cost (rounded $, quality not scored) ✓"
+  },
+  "senkorts": {
+   "label": "Senko RTS",
+   "type": "xmodel",
+   "config": "Senko Rašić · one-shot RTS game in Claude Code, xhigh, CLI-reported cost (rounded $, quality not scored) ✓"
+  },
+  "playcodesvg": {
+   "label": "Playcode MacBook SVG",
+   "type": "sweep",
+   "config": "Playcode · one-shot MacBook SVG, high/xhigh/max per model, provider-billed cost (quality ordinal, not scored) ✓"
+  },
+  "valstb21": {
+   "label": "Vals TB 2.1",
+   "type": "xmodel",
+   "config": "Vals AI · Terminal-Bench 2.1, Claude models at their stated compute_effort (Sonnet 5.5, Opus 5.5 high) — snapshot 27 Sep, re-priced ✓"
+  },
+  "valstb4": {
+   "label": "Vals TB 4.0",
+   "type": "xmodel",
+   "config": "Vals AI · Terminal-Bench 4.0, all Claude at max, measured cost/test — snapshot 27 Sep, re-priced ✓"
+  },
+  "valsmedcode": {
+   "label": "Vals MedCode",
+   "type": "xmodel",
+   "config": "Vals AI · ICD-10-CM coding, 2,755 records, all at max ✓"
+  },
+  "valssage": {
+   "label": "Vals SAGE",
+   "type": "xmodel",
+   "config": "Vals AI · grading student math work against a rubric, all at max ✓"
+  },
+  "valsbiomyst": {
+   "label": "Vals BioMystery",
+   "type": "xmodel",
+   "config": "Vals AI · BioMysteryBench (Terminus), Sonnet 5.5, Opus 5.5 and Opus 5 at max — snapshot 27 Sep, re-priced ✓"
+  },
+  "valstbsci": {
+   "label": "Vals TB-Science",
+   "type": "xmodel",
+   "config": "Vals AI · Terminal-Bench-Science, all at max — snapshot 27 Sep, re-priced ✓"
+  },
+  "valssre": {
+   "label": "Vals SRE-Bench",
+   "type": "xmodel",
+   "config": "Vals AI · binary reverse engineering (despite the name), all at max — snapshot 27 Sep, re-priced ✓"
+  },
+  "qiita-takuya-reason": {
+   "label": "Qiita reasoning",
+   "type": "sweep",
+   "config": "Qiita (Takuya) · 19 reasoning questions × 3 runs, Claude Code without tools, measured tokens × list price ✓"
+  },
+  "sonarjava": {
+   "label": "Sonar Java",
+   "type": "sweep",
+   "config": "Sonar leaderboard JSON · 4,444 Java tasks, single-shot, measured tokens × list price; Opus 5.5 medium/high ✓"
+  },
+  "sc55hlet": {
+   "label": "HLE tools (O5.5)",
+   "type": "sweep",
+   "config": "Opus 5.5 card p185 · HLE with tools, 3 models × sweep low→max, $ cost, scores printed ✓"
+  },
+  "sc55amnt": {
+   "label": "ArXivMath no-tools",
+   "type": "sweep",
+   "config": "Opus 5.5 card p182 · ArXivMath Aug 2026, 57 problems, 3 models × low→max, $ cost, scores printed ✓"
+  },
+  "sc55amt": {
+   "label": "ArXivMath tools",
+   "type": "sweep",
+   "config": "Opus 5.5 card p183 · ArXivMath Aug 2026 with code sandbox, 3 models × low→max, scores printed ✓"
+  },
+  "sc55draco": {
+   "label": "DRACO (O5.5)",
+   "type": "sweep",
+   "config": "Opus 5.5 card p187 · 980k budget, 3 models × low→max, $ cost, scores printed; a new run, not the F5.1-card one ✓"
+  },
+  "sc55wandr": {
+   "label": "WANDR",
+   "type": "sweep",
+   "config": "Opus 5.5 card p188 · Perplexity wide-search, offline index, 980k budget, 3 models × low→max, scores printed ✓"
+  },
+  "scs55hlen": {
+   "label": "HLE no-tools (S55)",
+   "type": "sweep",
+   "config": "Sonnet 5.5 card p120 · 980k budget, 3 models × low→max, $ cost (perfect caching), scores printed ✓"
+  },
+  "scs55osws": {
+   "label": "OSWorld 2.1 strict",
+   "type": "sweep",
+   "config": "Sonnet 5.5 card p132 · strict pass, Opus 5.5 × 5 (effort from cost order) + Sonnets at max; other Sonnet points held ✓"
+  },
+  "scs55bcadn": {
+   "label": "BenchCAD V2C −tools",
+   "type": "sweep",
+   "config": "Sonnet 5.5 card p129 · tools disabled, 4 models × 5, separate regime kept out of the effort grid ✓"
+  },
+  "scs55chartqn": {
+   "label": "Chartography −tools regraded",
+   "type": "sweep",
+   "config": "Sonnet 5.5 card p127 · re-graded no-tools scores, quality only, costs in chartogn ✓"
+  },
+  "scs55swemulti": {
+   "label": "SWE-bench Multilingual (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card table 8.1.A · 3 models at max, score-only ✓"
+  },
+  "scs55swemm": {
+   "label": "SWE-bench Multimodal (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card table 8.1.A · 3 models at max, score-only ✓"
+  },
+  "scs55tbsci": {
+   "label": "TB-Science 0.1 (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p114 · Claude Code --bare, 5 models at max, score-only ✓"
+  },
+  "scs55progb": {
+   "label": "ProgramBench 166 (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p118 · mini-swe-agent, 3 models, score-only ✓"
+  },
+  "scs55offqa": {
+   "label": "OfficeQA (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p132 · 3 models at max, score-only ✓"
+  },
+  "scs55offqapro": {
+   "label": "OfficeQA Pro (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p132 · 133 q, 3 models at max, score-only ✓"
+  },
+  "scs55toolath": {
+   "label": "Toolathlon-Verified",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card table 8.14.5.A · 7 Claude models at max, Pass@1, score-only ✓"
+  },
+  "scs55gmmlu": {
+   "label": "GMMLU (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p140 · 4 models at max, 1 trial, score-only ✓"
+  },
+  "scs55milu": {
+   "label": "MILU (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p140 · 4 models at max, score-only ✓"
+  },
+  "scs55physb": {
+   "label": "PhysicianBench",
+   "type": "sweep",
+   "config": "Sonnet 5.5 card p138 · Sonnet 5.5 low→max labelled + 4 models at max, score-only (time axis) ✓"
+  },
+  "scs55hbpro": {
+   "label": "HealthBench Pro (adj.)",
+   "type": "sweep",
+   "config": "Sonnet 5.5 card p138 · length-adjusted, Sonnet 5.5 low→max + 3 at max, score-only ✓"
+  },
+  "scs55hb": {
+   "label": "HealthBench (adj.)",
+   "type": "sweep",
+   "config": "Sonnet 5.5 card p138 · length-adjusted, Sonnet 5.5 low→max + 2 at max (digitized), score-only ✓"
+  },
+  "cdhillclimb": {
+   "label": "claude.dev hillclimb",
+   "type": "xmodel",
+   "config": "claude.dev hillclimb post · 30 support tickets, audited prompt, Opus 5.5 vs Sonnet 5 at low, cost per ticket ✓"
+  },
+  "scs55biomyhs": {
+   "label": "BioMystery hard-sub (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55biomyhd": {
+   "label": "BioMystery hard-dist (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55spatial": {
+   "label": "Spatial transcriptomics (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55scell": {
+   "label": "Single-cell (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55morph": {
+   "label": "Morphology (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55medchem": {
+   "label": "MedChem (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55protseq": {
+   "label": "Protein sequence (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55protlib": {
+   "label": "Protein library (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55binder": {
+   "label": "Binder design (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55bioimg": {
+   "label": "Bio-imaging (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55prottrb": {
+   "label": "Protein trouble-shoot (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scs55protund": {
+   "label": "Protein understanding (S55)",
+   "type": "xmodel",
+   "config": "Sonnet 5.5 card p142 · 4 models at max, bio safeguards off, score-only ✓"
+  },
+  "scswebenchpro": {
+   "label": "SWE-bench Pro (cards)",
+   "type": "xmodel",
+   "config": "Sonnet 5 card and Sonnet 5.5 card table 8.1.A · 5 Claude models at max, score only ✓"
+  },
+  "aaharvey": {
+   "label": "AA Harvey LAB",
+   "type": "sweep",
+   "config": "AA model payload · Harvey's Legal Agent Bench (AA's own run, separate from Vals's HLAB), score-only, 8 models × ladder + 4 at max ✓"
+  },
+  "aatbsci": {
+   "label": "AA Terminal-Bench-Science",
+   "type": "sweep",
+   "config": "AA model payload · Terminal-Bench-Science 0.1 (AA harness, separate from Vals's board), score-only, 4 models × ladder + 2 at max ✓"
+  },
+  "aamlcr": {
+   "label": "AA MLCR",
+   "type": "sweep",
+   "config": "AA model payload · MLCR-AA, score-only; Sonnet 5.5 max-only, Opus 5 full ladder, 5 others at max ✓"
+  },
+  "nnrlog-webtool": {
+   "label": "nantokanaru_log web-tool task",
+   "type": "xmodel",
+   "config": "note.com 29 Sep · Claude Code high, n=2, fresh context each run, cost = API-price conversion ✓"
+  },
+  "nnrlog-game": {
+   "label": "nantokanaru_log browser game",
+   "type": "xmodel",
+   "config": "note.com 29 Sep · same setup, n=2, no browser-test tool ✓"
+  },
+  "nnrlog-total": {
+   "label": "nantokanaru_log 7-task total",
+   "type": "xmodel",
+   "config": "note.com 29 Sep · same setup, 7 tasks × 2 runs aggregated, cost only ✓"
+  },
+  "tankai-wareki": {
+   "label": "tank_ai wareki converter",
+   "type": "sweep",
+   "config": "note.com 29 Sep · Claude Code subagents at fixed model × effort, n=1, 38 auto-graded tests, score only ✓"
+  },
+  "ramen-bench": {
+   "label": "Ramen Bench",
+   "type": "sweep",
+   "config": "not-stbenjam/ramen-bench · one-shot creative-coding HTML, Sonnet 5.5, Opus 5.5, Opus 5, Fable 5.1 × low→max, Claude Code run.json, cost only ✓"
+  },
+  "minebench-voxel": {
+   "label": "MineBench voxel arena",
+   "type": "xmodel",
+   "config": "minebench.ai live API · voxel builds, 15 prompts, Elo arena read 29 Sep, measured cost for 8 of 12 Claude models ✓"
+  },
+  "frontierswe": {
+   "label": "FrontierSWE v2",
+   "type": "xmodel",
+   "config": "Proximal frontierswe.com + Sonnet 5.5 card · 34 ultra-long tasks, max effort, proximus harness, mean reward@5; cost basis undocumented ✓"
+  },
+  "cfgk3s55": {
+   "label": "CFG k3s DevOps",
+   "type": "sweep",
+   "config": "computingforgeeks Sonnet 5.5 review · 3 tasks × 3 runs, raw API single file; score = k3s deploy + HTTP 200 pass rate of the K8s task, cost summed over the 3 tasks ✓"
+  },
+  "sc55osw": {
+   "label": "OSWorld 2.1 (O5.5)",
+   "type": "sweep",
+   "config": "Opus 5.5 card p207 + Sonnet 5.5 card p131 · v2.1 files of 10 Sep, partial credit, 3 models × 5 efforts (effort from cost order) + Sonnets at max ✓"
+  },
+  "sc55bcad": {
+   "label": "BenchCAD V2C",
+   "type": "sweep",
+   "config": "Opus 5.5 card p205 · Vision2Code with tools, voxel IoU, 4 models × 5 efforts; effort inferred from cost order ✓"
+  },
+  "sc55chartq": {
+   "label": "Chartography regraded",
+   "type": "sweep",
+   "config": "Opus 5.5 card p202 · same transcripts as chartogt, re-graded scores — quality only, costs stay in chartogt ✓"
+  },
+  "scoosw47": {
+   "label": "OSWorld eff. (4.7)",
+   "type": "sweep",
+   "config": "Opus 4.7 card p209 · pass@1 vs output tokens, 3 models × low→max ✓"
+  }
+ },
+ "merge": {
+  "aireiter2": "aireiter",
+  "aireiter3": "aireiter"
+ }
+}

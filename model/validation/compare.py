@@ -1,5 +1,5 @@
 """Two fits of the same axis (fit.py): Kendall τ between their centres, median and largest move, published couples.
-Usage: python3 gen/validation/compare.py reference.pkl variant.pkl"""
+Usage: python3 model/validation/compare.py reference.pkl variant.pkl"""
 import itertools, math, pickle, sys
 A, B = (pickle.load(open(p, "rb")) for p in sys.argv[1:3])
 cs = [c for c in A["S"] if c in B["S"] and A["S"][c]["published"] and B["S"][c]["published"]]

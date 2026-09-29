@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Share image (Open Graph, 1200 × 630) → og-image.png at the repo root. Static on purpose: title, subtitle, domain
 and the favicon's frontier motif — no figure that would go stale between builds. Rerun only when the title changes:
-    uv run --no-project --with pillow python gen/og_image.py"""
+    uv run --no-project --with pillow python site/assets/og_image.py"""
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from build import SITE_HOST                                # the domain printed on the image follows SITE_URL
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from config import SITE_HOST                                # the domain printed on the image follows SITE_URL
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # repository root
 W, H = 1200, 630
 PAPER, INK, MUTED = "#F4EFE6", "#2B2723", "#7C7568"
 DOTS = ["#3F8A78", "#D9694B", "#1C7FB8", "#7B3FBF"]      # model colours of the page, no ranking implied

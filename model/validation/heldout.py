@@ -4,18 +4,19 @@ score (known publisher, publisher × model and task-type effects used, unknown o
 16–84 % posterior predictive interval (noise included), whose coverage should be near 68 %. Baseline: the score-ratio
 consolidation (ratio_baseline.py) times the group's mean ratio level.
 
-Usage: .stan/venv/bin/python gen/validation/heldout.py [WARMUP] [SAMPLES]"""
+Usage: .stan/venv/bin/python model/validation/heldout.py [WARMUP] [SAMPLES]"""
 import collections, csv, math, os, random, sys
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
-import build as B, lqm, ratio_baseline as RB
+import lqm, ratio_baseline as RB
+from catalog import MODEL_ORDER
 WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["1000", "2000"][len(sys.argv[1:3]):]))
-DATA = os.path.join(B.ROOT, "raw-data.csv"); MODELS = list(B.MX)
+DATA = os.path.join(lqm.ROOT, "raw-data.csv"); MODELS = list(MODEL_ORDER)
 rows = list(csv.DictReader(open(DATA))); hdr = list(rows[0].keys())
 G0, _, _ = lqm.load(DATA, MODELS)
 eligible = {g for g, G in G0.items() if "~" not in g and not any(h.startswith(g + "~") for h in G0)
             and G["kind"] == "logit" and len({x["couple"] for x in G["rows"]}) >= 4}
-data = [r for r in rows if r["group"] in eligible and r["model"] in B.MX and r["effort"] in lqm.EFFORTS
+data = [r for r in rows if r["group"] in eligible and r["model"] in MODEL_ORDER and r["effort"] in lqm.EFFORTS
         and RB.num(r["score"]) is not None and r["score_metric"].endswith("%")]
 cells = collections.defaultdict(list)
 for r in data: cells[(r["group"], f'{r["model"]}@{r["effort"]}')].append(r)

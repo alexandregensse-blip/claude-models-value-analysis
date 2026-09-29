@@ -2,13 +2,13 @@
 """favicon.png (96 × 96) at the repo root: the same drawing as favicon.svg, for Google Search, which
 does not show SVG favicons. Standard library only (no Pillow): the shapes of favicon.svg are drawn
 by supersampling and written as an RGBA PNG. Rerun only when favicon.svg changes:
-    python3 gen/favicon_png.py"""
+    python3 site/assets/favicon_png.py"""
 import math
 import os
 import struct
 import zlib
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))   # repository root
 SIZE, VIEW, SS = 96, 64, 4                    # output pixels, favicon.svg viewBox, samples per axis
 
 
