@@ -101,6 +101,18 @@ def reading_sd(r, field):
     return d if d == d and d >= 0 else rounding_sd(r[field])
 
 
+def _other_value(r, field):
+    """The row's value on the other axis, to confirm a republication: (value, precision, last-digit unit, scale)."""
+    try:
+        v = float(r[field])
+    except (TypeError, ValueError):
+        return None
+    t = r[field].strip()
+    return (v, reading_sd(r, field), 10.0 ** -(len(t.split(".")[1]) if "." in t else 0),
+            "usd/" + UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "") if field == "cost_usd"
+            else r["score_metric"])                                  # a cost compares only in one unit
+
+
 # ---------------------------------------------------------------- data
 EFFORTS = {"low", "medium", "high", "xhigh", "max", "solo"}           # 'solo': a model without an effort setting
 NO_TASK_EFFECT = {"mixed", ""}
@@ -118,8 +130,11 @@ def load(path, models, field="score"):
        larger group. Identical
        means within what separates two copies of one number: both reading precisions (2·√(δ₁² + δ₂²): two readings
        of one chart point, or of two charts drawing it) plus one unit of the last digit of each (a rounding made the
-       wrong way somewhere along the publisher's pipeline). Scores are compared within a family (one benchmark);
-       costs within a publisher, across its families, since one run scored two ways has one cost. The series must
+       wrong way somewhere along the publisher's pipeline). Two rows are one measurement only if both their values agree, the
+       score and the cost, wherever both rows carry them on one scale; a run scored two ways (two metrics) shares its
+       cost only. Confirmed on both axes, the two groups must agree on every value they share but one (a miscopy), and
+       on two at least; on one axis alone (the other absent or on another metric), on every value, three at least. Groups are compared within a benchmark family, and within a publisher across its families (the same
+       runs reprinted under another grouping). The series must
        agree on every value the two groups share but one at most (one number miscopied): a few coincidences among
        many shared values, or equality at a bound (two runs both at 100 %), are not a republication."""
     report = collections.Counter()
@@ -139,6 +154,7 @@ def load(path, models, field="score"):
             task=r["task_type"] or "", raw=val, metric=metric, kind="log" if field == "cost_usd" else kind(metric),
             ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]), prec=reading_sd(r, field),
             step=10.0 ** -(len(r[field].strip().split(".")[1]) if "." in r[field] else 0),
+            other=_other_value(r, "score" if field == "cost_usd" else "cost_usd"),
             unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "")))
 
     # --- 1. composites
@@ -165,32 +181,51 @@ def load(path, models, field="score"):
         report["group split by configuration"] += len(parts) - 1 if parts else 0
 
     # --- 3. republications
+    def close(v1, d1, s1, v2, d2, s2):
+        return abs(v1 - v2) <= 2 * math.hypot(d1, d2) + s1 + s2
+
     def same(x1, x2):
-        return abs(x1["raw"] - x2["raw"]) <= 2 * math.hypot(x1["prec"], x2["prec"]) + x1["step"] + x2["step"]
+        """One measurement printed twice: 0 = no; 2 = the value agrees and so does the other axis, both rows carrying
+        it on one scale; 1 = the value agrees, the other axis cannot tell (absent, or one run scored on two metrics,
+        which shares its cost but not its score)."""
+        if not close(x1["raw"], x1["prec"], x1["step"], x2["raw"], x2["prec"], x2["step"]):
+            return 0
+        o1, o2 = x1["other"], x2["other"]
+        if o1 is None or o2 is None or o1[3] != o2[3]:
+            return 1
+        return 2 if close(o1[0], o1[1], o1[2], o2[0], o2[1], o2[2]) else 0
 
     def at_bound(x):
         n = bound(x["metric"]) if field != "cost_usd" else None
         return n is not None and (x["raw"] >= 0.9995 * n or x["raw"] <= 0.0005 * n)
 
     size = {g: len({x["couple"] for x in rows}) for g, rows in by_group.items()}
-    slots = collections.defaultdict(list)                               # (family or publisher, couple) → [(group, row)]
-    for g in sorted(by_group, key=lambda g: (-size[g], g)):
+    order = sorted(by_group, key=lambda g: (-size[g], g))
+    slots = collections.defaultdict(list)          # (benchmark family, couple) and (publisher, couple) → [(group, row)]
+    for g in order:
         for x in by_group[g]:
-            slots[(x["publisher"] if field == "cost_usd" else family[g] or g, x["couple"])].append((g, x))
-    matches, shared = collections.Counter(), collections.Counter()   # per group pair, and per model's series in it
+            slots[("family", family[g] or g, x["couple"])].append((g, x))
+            slots[("publisher", x["publisher"], x["couple"])].append((g, x))
+    pairs = {}                                                          # the same two rows, met through either key
     for entries in slots.values():
         for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
             if g1 != g2 and not at_bound(x1):
-                for k in ((g1, g2, ""), (g1, g2, x1["model"])):
-                    shared[k] += 1
-                    matches[k] += same(x1, x2)
-    series = {k for k, n in matches.items() if n >= 2 and n >= shared[k] - 1}
+                pairs[(id(x1), id(x2))] = (g1, g2, x1, x2)
+    matches, shared, single = collections.Counter(), collections.Counter(), collections.Counter()
+    for g1, g2, x1, x2 in pairs.values():                            # per group pair, and per model's series in it
+        v = same(x1, x2)
+        for k in ((g1, g2, ""), (g1, g2, x1["model"])):
+            shared[k] += 1
+            matches[k] += v > 0
+            single[k] += v == 1
+    # confirmed on both axes: all shared values but one (a miscopy) and at least two; on one axis only: all, at least 3
+    series = {k for k, n in matches.items()
+              if ((n >= 3 and n == shared[k]) if single[k] else (n >= 2 and n >= shared[k] - 1))}
     republished = sorted((*k, matches[k], shared[k]) for k in series)   # (group, group, model or "" = all, identical, shared)
     dropped = set()
-    for entries in slots.values():
-        for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
-            if ((g1, g2, "") in series or (g1, g2, x1["model"]) in series) and same(x1, x2) and id(x1) not in dropped:
-                dropped.add(id(x2))
+    for g1, g2, x1, x2 in pairs.values():
+        if ((g1, g2, "") in series or (g1, g2, x1["model"]) in series) and same(x1, x2) and id(x1) not in dropped:
+            dropped.add(id(x2))
 
     # --- groups
     groups = {}
