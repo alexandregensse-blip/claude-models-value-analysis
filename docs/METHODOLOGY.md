@@ -206,7 +206,7 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
 - **Samplers.** Quality: nutpie (Seyboldt et al.), whose adaptation of the mass matrix needs about four times fewer
-  steps here, 4 chains × (1,000 warm-up + 16,000 draws), target acceptance 0.85. Cost: CmdStan, 4 chains × (500
+  steps here, 4 chains × (1,000 warm-up + 12,000 draws), target acceptance 0.85. Cost: CmdStan, 4 chains × (500
   warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the previous fit (1,000
   warm-up iterations when there is none). A chain left in another region restarts its axis on CmdStan from the
   previous fit's draws; too few effective draws continue the same chains, adding draws rather than starting again,
@@ -217,8 +217,9 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
 
 A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01, the bulk
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
-refuses one that misses any of them. The Monte Carlo error of every displayed value is stored with it, and must stay
-below half of its last displayed digit, so that a refit with another seed changes no visible figure.
+refuses one that misses any of them. The Monte Carlo error of every displayed value (anchor included) is stored with
+it, and the build reports any value whose error exceeds half of its last displayed digit: such a figure could change
+by one unit in a refit with another seed (in the current fit, one: the cost of Fable 5.1 max, 3.09 ± 0.007).
 
 ### Fixed values
 

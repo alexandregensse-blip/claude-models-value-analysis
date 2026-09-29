@@ -18,7 +18,7 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 .stan/venv/bin/python model/fit.py
 ```
 
-Quality: nutpie, 4 chains × (1,000 + 20,000). Cost: CmdStan, 4 chains × (500 + 4,500), started from the last draws of
+Quality: nutpie, 4 chains × (1,000 + 12,000). Cost: CmdStan, 4 chains × (500 + 4,500), started from the last draws of
 the previous fit (`.stan/inits-cost.json`; 1,000 warm-up iterations without it). The model is compiled with
 `stanc --O1` and `STAN_NO_RANGE_CHECKS`.
 

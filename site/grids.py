@@ -46,7 +46,8 @@ def fused_grids():
                 if v and v[2] >= 2:                                 # published: measured by two publishers or more
                     c, h = v[0] - ref, v[1]
                     row[e] = [round(math.exp(c), 3), round(math.exp(c - h), 3), round(math.exp(c + h), 3)]
-                    err[f"{m}@{e}"] = math.exp(c) * v[4]            # Monte Carlo error of the displayed value
+                    err[f"{m}@{e}"] = 0.0 if f"{m}@{e}" == GRID_ANCHOR else \
+                        math.exp(c) * math.hypot(v[4], S[GRID_ANCHOR][4])   # Monte Carlo error of the displayed ratio
             if row: grid[m] = row
         grids[axis], mcse[axis] = grid, err
     return grids["cost"], grids["quality"], cache["diagnostics"], mcse

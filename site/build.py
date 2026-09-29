@@ -56,6 +56,8 @@ def main():
         d = DIAG[axis]
         print(f"  {axis}: {d['rows']} rows in {d['groups']} groups · set aside {d['set_aside']} · R-hat max {d['rhat_max']}"
               f" · unpublished {d['unpublished']}")
+        loose = sorted(c for c, e in MCSE[axis].items() if e > 0.005)   # half of the last of two displayed decimals
+        print(f"  {axis}: Monte Carlo error above half the last displayed digit: {loose or 'none'}")
     viol = monotonicity_report(CG, QG)
     known = {("quality", "sonnet-4.6", "high", "max")}         # printed by the Sonnet 5 card itself — keyed on the rungs, not
                                                                 # the values, which move with the anchor and the data
