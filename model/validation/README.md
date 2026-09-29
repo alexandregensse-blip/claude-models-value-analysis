@@ -1,7 +1,7 @@
 # Validation
 
 Scripts that reproduce the checks reported in `METHODOLOGY.md`. Run them from the repository root with the Stan
-environment (`.stan/venv/bin/python`, see the README); each run stays under 20 minutes on two cores.
+environment (`.stan/venv/bin/python`, see the README); each check runs in under 20 minutes on four cores, except `heldout.py` (five quality fits, about 35 minutes).
 
 | Script | Check | Command |
 |---|---|---|

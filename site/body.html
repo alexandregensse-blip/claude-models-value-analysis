@@ -133,7 +133,7 @@
         <ul class="steps">
           <li><b>Set by hand, never tuned to the data:</b> weakly informative priors (half-Student-t(3,&nbsp;0,&nbsp;2.5) on every spread, Gamma(2,&nbsp;0.1) on the noise tails); a logit kept half a step inside 0 and 100&nbsp;%; a printed value's precision at its rounding (last digit&nbsp;/&nbsp;√12); an effect seen in a single measurement left out; a couple shown only when two publishers measured it; a reprint recognised by values that agree within their precisions, on two values at least and on all they share but one.</li>
           <li><b>Uncertainty.</b> Every interval is 16–84&nbsp;% (one standard deviation): the couple's own uncertainty, whatever the reference.</li>
-          <li><b>Published only when the fit is sound:</b> R̂&nbsp;≤&nbsp;1.01 and at least 400 effective draws on every parameter, no divergent transition. The Monte Carlo error of each value is checked against its last displayed digit; in this fit every figure is stable to that digit but one, the cost of Fable&nbsp;5.1 at max, which could move by one unit (3.09&nbsp;±&nbsp;0.007).</li>
+          <li><b>Published only when the fit is sound:</b> R̂&nbsp;≤&nbsp;1.01 and at least 400 effective draws on every parameter, no divergent transition. The Monte Carlo error of each value is checked against its last displayed digit; in this fit every figure is stable to that digit but one, the cost of Fable&nbsp;5.1 at max, which could move by one unit (3.09&nbsp;±&nbsp;0.006).</li>
           <li><b>Display choices:</b> the quality axis is dilated near parity; the price curve, the value index and the four tiers use constants listed with their reasons in <a href="__REPO__/blob/main/docs/METHODOLOGY.md">METHODOLOGY.md</a>.</li>
         </ul>
         <h3 class="blocktitle" style="margin-top:1.3em">Techniques and software</h3>
@@ -143,7 +143,7 @@
           <li><b>Intervals</b> as quasi-standard errors (<a href="https://doi.org/10.1093/biomet/91.1.65">Firth &amp; de Menezes 2004</a>), so that any two couples compare through their own intervals.</li>
           <li><b>Scales</b>: the empirical logit of bounded scores, with the binomial shape of its noise.</li>
         </ul>
-        <p class="sub"><b>Checks.</b> ⟨Figures of the final fit: to be filled in.⟩ Details and scripts: <a href="__REPO__/blob/main/docs/METHODOLOGY.md">METHODOLOGY.md</a>.</p>
+        <p class="sub"><b>Checks.</b> Scores held out of the fit and predicted: median error 1.96 points, against 4.78 for averaging score ratios; the 16–84&nbsp;% predictive interval covers 66&nbsp;% of them. On synthetic data with known qualities, pairs of couples in the wrong order: 0.1–0.8&nbsp;% (0.4–2.2&nbsp;% for score ratios). Without the largest publisher, the model vendor itself, costs move by 2.4&nbsp;% and qualities by 0.9&nbsp;% at the median. Details and scripts: <a href="__REPO__/blob/main/docs/METHODOLOGY.md">METHODOLOGY.md</a>.</p>
       </div>
     </details>
   </section>

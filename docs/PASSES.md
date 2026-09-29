@@ -5,6 +5,86 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Method change: reading precision, and one execution counted once
+
+**Why.** The model had a noise floor per group (the smallest observed score difference / √12) and knew nothing of
+how precisely each value had been read. Two consequences showed on the cost axis. Curves digitised off the system
+cards, which line up almost perfectly, passed for the most precise sources in the data file, when a digitised value is
+by construction the least precise; and the same run printed in two documents, or scored with two metrics, counted as
+two sources that agreed to 0.1 % — the fit read that as near-noiseless groups, weighted them heavily and sampled them
+slowly (R̂ 1.028 after 13 minutes without the floor).
+
+**What.**
+- *Reading precision per value* (`cost_prec`, `score_prec` in the data file, computed by `data/precision.py`): the
+  rounding of a printed number; for a digitised value, the chart's resolution times its reading error in pixels plus
+  the chart's own error against the number it draws, 0.48 % of the axis span, estimated on the runs printed on two
+  charts (identical scores prove the run; their costs differ by 1.6 % RMS). About 2 % on a digitised cost, against
+  0.2–0.5 % from a re-reading of one image. The model adds it to each row's variance; the noise floor goes.
+- *Evidence, source by source.* 14 Sonnet agents re-measured the 55 digitised charts (tick coordinates, least-squares
+  calibration recomputed and checked, re-read points, annotated images), 33 more checked where every non-digitised
+  value comes from (printed, primary data file, computed) with verbatim quotes; summaries in `data/precision/`.
+- *One execution counts once.* Two rows are the same execution when their values agree within both reading
+  precisions plus one unit of the last digit each (a rounding made the wrong way along the publisher's pipeline);
+  score and cost must both agree where both are comparable; one run scored with two metrics is one execution,
+  recognised by its cost; groups are compared within a benchmark family and within a publisher. Found: HLE with and
+  without tools reprinted across the Opus 5, Fable 5, Fable 5.1, Sonnet 5 and Sonnet 5.5 cards, OSWorld 2.1 scored
+  twice (partial credit and strict pass) in the Sonnet 5.5 card, DeepSearchQA, AutomationBench (Zapier and the Opus 5
+  card), ARC-AGI-2 (ARC Prize and the Opus 4.7 card), the AA index on two pages, OSWorld charted twice — 48 cost rows
+  and 68 score rows kept once (2 and 46 before).
+- *Costs that were not costs.* Four effort sweeps of the Opus 4.7 and 4.8 cards (`schleeff`, `scsweproeff`,
+  `scosweff`, `scodeepqa`) read tokens on a token axis and converted them at one flat price per tier: a flat price
+  ignores the input/output mix, which changes with the effort (HLE Opus 4.8 low→max: ×3.9 reconstructed against ×4.7
+  measured in dollars on the other cards). The 43 costs leave the cost axis, flagged with their former value; the
+  scores stay.
+- *Refit.* Each axis is checked as soon as it is sampled: a stuck nutpie chain restarts the axis on CmdStan from the
+  last fit's draws, too few effective draws continue the same chains within a 10-minute budget, and an unchanged axis
+  is not refitted. Quality draws 4 × 12,000 (ESS 584 against the 400 required).
+
+**Result.** Cost 416 s, R̂ 1.0036, ESS 2,345; quality 557 s, R̂ 1.0024, ESS 584; 16 minutes in all (the cost
+axis no longer saturates the tree depth). Crown unchanged, Opus 5.5 xHigh (1.08× the quality of Opus 5 @high for
+0.75× its cost, 0.79× before); tiers Sonnet 5.5 high / Sonnet 5.5 high / Opus 5.5 high / Opus 5.5 xHigh (Sonnet 5.5
+low / high / high, Opus 5.5 high in v2026.09.29). Quality moves by −4 % (Opus 5.5) to +9 % (Haiku 4.5), cost by −12 %
+(Sonnet 5.5 max) to +34 % (Haiku 4.5); Opus 4.7 max costs 18 % more without the reconstructed sweeps.
+
+**Reported, not corrected** (to check at their source): the agents flagged 27 differences between the data file and a source, and ten more on the charts
+— digitised points off by more than a marker (Opus 4.8 low on the Fable 5 card's SWE-bench Pro and
+FrontierCode Diamond, Sonnet 5 low on Chartography, Opus 4.7 medium on ARC-AGI-2), boards updated since collection
+(Vals Corporate Finance, Terminal-Bench 2.1), a HAL score (Opus 4.1: 61.0 against 68.0 %), roundings the wrong way.
+
+**Checks.** Held out (1,708 scores): median error 1.96 points against 4.78 for score ratios, coverage 66 % (target
+68 %). Known truth: distortion 0.071–0.091, pairs in the wrong order 0.1–0.8 %, coverage 62–77 %. Without the model
+vendor: cost τ 0.988 (median move 2.4 %, largest 14.6 %, Sonnet 5.5 medium), quality τ 0.960 (0.9 %, 3.5 %). The
+held-out check took 35 minutes (five full quality fits), beyond the 20-minute salvo; the others stayed within it.
+
+## Method change: the model in Stan, without a reference couple
+
+**Why.** The latent-quality model of v2026.09.29 ran on a hand-written Gibbs sampler and missed the convergence
+standard (R̂ 1.062 on costs, 1.017 on qualities). Its intervals were measured against the reference couple, fixed
+at 0: every couple carried the reference's uncertainty, the reference had none and its sibling rungs looked narrow.
+The ovals drew what one new benchmark would report (noise counted twice) rather than the couple's own uncertainty,
+and the value index and the price curve were smeared by the ends of those bands (⅛ each), pulling values toward
+parity.
+
+**What.**
+- *Stan* (`model/lqm.stan`), sampled by nutpie (quality) and CmdStan (cost), published only with R̂ ≤ 1.01, bulk
+  and tail ESS ≥ 400 and no divergence on every parameter; `model/fit-cache.json` carries the fingerprint of its
+  inputs and the site refuses a stale or unconverged cache.
+- *No reference couple in the fit*: θ sums to zero, the page divides afterwards. Intervals are the couple's own
+  (quasi-variances, Firth & de Menezes 2004); the new-source band is still computed and stored. Price curve and value
+  index use centres only.
+- *Review of the model* (two independent reviewers): groups split by publisher, harness, scale and cost unit;
+  composites matched to their documented components (Artificial Analysis v4.3, Vals Index formula, and others);
+  the binomial shape of an empirical logit's noise; half-Student-t priors; publisher and task-type effects centred
+  within their sets, effects seen in one row left out; the quality read-out integrates unknown effects
+  (Gauss–Hermite); Student-t tails and the early-access multiplier estimated.
+- *Writing* for the sampler, which leaves the model unchanged (checked on the log density and its gradient): noise
+  centred in every group, gain centred from 20 rows, sparse products, `stanc --O1` with `STAN_NO_RANGE_CHECKS`
+  (−36 % per gradient).
+- *Repository* reorganised into `data/`, `model/`, `site/` and `docs/`, each with its own README.
+
+**Result** (fit of 29 September, before the reading-precision change above): costs 491 s, R̂ 1.0074; qualities
+380 s, R̂ 1.0032. Crown unchanged (Opus 5.5 xHigh).
+
 ## Method change: a latent-quality fusion model
 
 **Why.** Relative quality was the weighted median of per-benchmark score ratios to the anchor, which assumes every

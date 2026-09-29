@@ -219,7 +219,7 @@ A fit is published only if, on every parameter and read-out, the rank-normalised
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
 refuses one that misses any of them. The Monte Carlo error of every displayed value (anchor included) is stored with
 it, and the build reports any value whose error exceeds half of its last displayed digit: such a figure could change
-by one unit in a refit with another seed (in the current fit, one: the cost of Fable 5.1 max, 3.09 ± 0.007).
+by one unit in a refit with another seed (in the current fit, one: the cost of Fable 5.1 max, 3.09 ± 0.006).
 
 ### Fixed values
 
@@ -285,17 +285,29 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 
 ### Checks
 
-Scripts in `model/validation/` reproduce each check. ⟨Figures of the final fit: to be filled in.⟩
+Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 September 2026:
 
 - **Held-out prediction** (`heldout.py`). One fifth of the percentage scores removed, the model refitted, the
   removed scores predicted, five times; compared with a score-ratio baseline (per-benchmark ratios to the reference,
   weighted median across benchmarks); share of removed scores inside their 16–84 % predictive interval (target 68 %).
+  On 1,708 removed scores: median error 1.96 points (mean 3.81, 90th percentile 8.82) against 4.78 (7.29, 17.40) for
+  the baseline; the interval covers 66 %.
 - **Known truth** (`synthetic.py`). Synthetic scores on the real design with known qualities, under benchmarks
   proportional to quality (where score ratios are exact by construction), logistic, and a mix of logistic, Elo,
   power and saturating shapes: distortion of the recovered scale, share of couple pairs in the wrong order, and share
   of pairs whose true difference lies in the 16–84 % posterior interval and in the quasi-standard-error interval
-  (target 68 % for both).
-- **Sensitivity** (`compare.py`). Removing the largest publisher: how far the values move.
+  (target 68 % for both). Distortion 0.091 / 0.084 / 0.071 (proportional / logistic / mixed benchmarks; the ratio
+  baseline 0.089 / 0.336 / 0.206), pairs in the wrong order 0.2 / 0.8 / 0.1 % (baseline 0.4 / 2.2 / 0.8 %), coverage
+  62 / 77 / 77 % for both intervals: calibrated on average, a little narrow when scores are exactly proportional and a
+  little wide otherwise. These checks use shorter fits (4 × 1,000 draws; the mixed case ended at R̂ 1.017 with 5
+  divergent transitions, within what a check tolerates, not a published fit).
+- **Sensitivity** (`compare.py`). Removing the largest publisher, the model vendor itself (system cards, blog
+  charts, documentation): cost Kendall τ 0.988, median move 2.4 %, largest 14.6 % (Sonnet 5.5 medium); quality
+  τ 0.960, median 0.9 %, largest 3.5 % (Opus 4.7 max).
+- **Intervals.** The quasi-standard errors reproduce the 16–84 % spread of the difference between two couples within
+  3.4 % at the median (both axes); for the worst pairs, neighbouring rungs of one model, √(q_i + q_j) reaches 2.2
+  times that spread on costs and 2.0 times on qualities: their difference is known more precisely than two separate
+  intervals suggest.
 - **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported. The
   report is printed, not corrected: an inversion inside the interval is left as the data give it.
 
