@@ -263,6 +263,8 @@ def stan_data(groups, axis):
         r2=[[lvl("pub_model", groups[names[b]]["publisher"], c, groups[names[b]]["task"]) for c in couples] for b, _ in P],
         r3=[[lvl("couple_task", groups[names[b]]["publisher"], c, groups[names[b]]["task"]) for c in couples] for b, _ in P],
         has_v=[int(groups[names[b]]["task"] not in NO_TASK_EFFECT) for b, _ in P],
+        ptype=[1 + next(i for i, (b2, _) in enumerate(P) if groups[names[b2]]["task"] == groups[names[b]]["task"])
+               for b, _ in P],
         K=GH_NODES, ghx=list(xg * math.sqrt(2)), ghw=list(wg / math.sqrt(math.pi)))
     if not P:                                                       # Stan wants a P × C array even when P = 0
         data.update(r1=np.zeros((0, len(couples)), int), r2=np.zeros((0, len(couples)), int),
@@ -334,7 +336,8 @@ def quasi_variances(L, lo=0.16, hi=0.84):
 
 def summarise(mcmc, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
     """Per couple, on the log scale: centre = posterior median of `level`; half = quasi-standard error (the
-    half-width of a 16–84 % interval that makes any two couples comparable); published = measured by at least
+    half-width of a 16–84 % interval that makes any two couples comparable); new_source = 16–84 % interval of what one
+    new source would report for the couple (`level_new`); published = measured by at least
     `min_publishers` publishers. Ratios to a reference couple are exp(centre − centre_ref), each couple keeping its
     own interval. Also returns the convergence diagnostics."""
     import numpy as np
@@ -344,8 +347,10 @@ def summarise(mcmc, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
     for g in groups.values():
         for x in g["rows"]:
             pubs[x["couple"]].add(x["publisher"])
-    out = {c: dict(centre=float(np.median(L[:, i])), half=float(math.sqrt(q[i])), publishers=len(pubs[c]),
-                   published=len(pubs[c]) >= min_publishers)
+    Ln = mcmc.stan_variable("level_new")
+    out = {c: dict(centre=float(np.median(L[:, i])), half=float(math.sqrt(q[i])),
+                   new_source=[float(np.quantile(Ln[:, i], lo)), float(np.quantile(Ln[:, i], hi))],
+                   publishers=len(pubs[c]), published=len(pubs[c]) >= min_publishers)
            for c, i in maps["ci"].items()}
     return out, diagnostics(mcmc, qv_max, qv_med)
 
@@ -364,18 +369,23 @@ def diagnostics(mcmc, qv_max=None, qv_med=None):
     return dict(rhat_max=round(float(rh.max()), 4), ess_bulk_min=int(eb.min()), ess_tail_min=int(et.min()),
                 rhat_max_level=round(float(lvl[col["r_hat"]].max()), 4),
                 ess_bulk_min_level=int(lvl[col.get("ess_bulk", "ESS_bulk")].min()),
+                mcse_max_level=round(float(lvl[col["mcse"]].max()), 5),
                 divergences=div, max_treedepth_hits=tree, draws=int(mcmc.draws().shape[0] * mcmc.chains),
                 worst_rhat=list(rh.sort_values(ascending=False).index[:5]),
                 qv_error_max=None if qv_max is None else round(qv_max, 4),
                 qv_error_median=None if qv_med is None else round(qv_med, 4))
 
 
-CONVERGED = dict(rhat=1.01, ess=400)
+# R̂ ≤ 1.01 and bulk/tail ESS ≥ 400 on every parameter (Vehtari et al. 2021); no divergence; Monte Carlo error of
+# every read-out below half the display rounding (values are shown to about 0.5 %: 0.0025 on the log scale), so that
+# a refit with another seed changes no visible figure.
+CONVERGED = dict(rhat=1.01, ess=400, mcse=0.0025)
 
 
 def converged(diag):
     return (diag["rhat_max"] <= CONVERGED["rhat"] and diag["ess_bulk_min"] >= CONVERGED["ess"]
-            and diag["ess_tail_min"] >= CONVERGED["ess"] and diag["divergences"] == 0)
+            and diag["ess_tail_min"] >= CONVERGED["ess"] and diag["divergences"] == 0
+            and diag["mcse_max_level"] <= CONVERGED["mcse"])
 
 
 def predict(mcmc, maps, groups, rows, thin=4, seed=0):

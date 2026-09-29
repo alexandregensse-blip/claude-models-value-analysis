@@ -56,6 +56,7 @@ data {
   array[P, C] int<lower=0, upper=L2> r2;           // known publisher × model level, 0 = unknown
   array[P, C] int<lower=0, upper=L3> r3;           // known couple × task-type level, 0 = unknown
   array[P] int<lower=0, upper=1> has_v;            // 0 for a composite (task type 'mixed'): no task-type effect
+  array[P] int<lower=1, upper=max(P, 1)> ptype;    // index of the panel group's task type (first panel group of it)
   int<lower=1> K;                                  // Gauss–Hermite nodes
   vector[K] ghx;
   vector[K] ghw;
@@ -78,7 +79,6 @@ parameters {
   vector[G] o;                                     // group offset, flat prior
   vector[G] lg_raw;                                // non-centred log gain (quality: log a/σ; cost: log a)
   real<lower=0> s_g;
-  vector<lower=log_floor>[G] log_sigma;
   vector[L1] z1;                                   // non-centred effects
   vector[L2] z2;
   vector[L3] z3;
@@ -90,8 +90,10 @@ parameters {
   array[has_ea] real log_kappa;
   real mu_sig;
   real<lower=0> s_sig;
+  vector<lower=(log_floor - mu_sig) / s_sig>[G] ls_raw;   // non-centred noise: log σ_b = μ_σ + s_σ · η_b ≥ log floor
 }
 transformed parameters {
+  vector[G] log_sigma = mu_sig + s_sig * ls_raw;
   vector[G] sigma = exp(log_sigma);
   vector[G] a = cost ? exp(s_g * lg_raw) : exp(s_g * lg_raw + log_sigma);
   vector[C] tau = s_tau * tau_raw;
@@ -124,15 +126,20 @@ model {
   // noise pooled across groups on their standardised scale (invariant to any affine change of a metric):
   // log σ_b ~ N(μ_σ, s_σ²) truncated at the floor; μ_σ flat
   s_sig ~ student_t(3, 0, 2.5);
-  log_sigma ~ normal(mu_sig, s_sig);
-  target += -normal_lccdf(log_floor | mu_sig, s_sig);
+  ls_raw ~ std_normal();
+  target += -normal_lccdf((log_floor - mu_sig) / s_sig | 0, 1);
 }
 generated quantities {
   // read-out on the log scale, per couple. Quality: log of the expected score averaged over the panel.
   // Cost: θ (log cost on a task of typical elasticity; effects have mean 0 on the log scale).
   vector[C] level;
+  // what one NEW source would report for the couple on the same read-out: fresh publisher × couple, publisher ×
+  // model and (per task type) couple × task-type effects drawn from their laws; no reference couple involved
+  vector[C] level_new;
   if (cost) {
     level = theta;
+    for (c in 1:C)
+      level_new[c] = theta[c] + normal_rng(0, tau[c]) + normal_rng(0, psi) + normal_rng(0, omega);
   } else {
     vector[L1 + 1] u = append_row(centre_within(z1 .* tau[own1], set1, S1), 0);
     vector[L2 + 1] w = append_row(centre_within(z2 * psi, set2, S2), 0);
@@ -155,6 +162,20 @@ generated quantities {
         s += pw[p] * e;
       }
       level[c] = log(s / W);
+    }
+    {
+      vector[P] vt;
+      for (c in 1:C) {
+        real un = normal_rng(0, tau[c]);
+        real wn = normal_rng(0, psi);
+        real s = 0;
+        for (p in 1:P) vt[p] = has_v[p] ? normal_rng(0, omega) : 0;
+        for (p in 1:P) {
+          int b = pg[p];
+          s += pw[p] * inv_logit(mu[b] + sd[b] * (o[b] + a[b] * (theta[c] + un + wn + vt[ptype[p]])));
+        }
+        level_new[c] = log(s / W);
+      }
     }
   }
 }
