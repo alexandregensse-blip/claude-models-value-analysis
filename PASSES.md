@@ -5,6 +5,48 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*). Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Thirteenth pass: Sonnet 5.5, second salvo
+
+Eleven Sonnet agents on narrow axes, 29 Sep 2026, a few hours after the twelfth pass: re-checks of the boards that
+did not carry Sonnet 5.5 yet, what the first salvo left aside at AA, Vals and in the system card, new GitHub and
+Hugging Face repos, English forums, Japanese/Chinese/Korean sites, tool vendors' blogs, a second look at the repos
+already followed, and an audit of every Sonnet 5 cost for a leftover \$3/\$15 price (Vals had one).
+**168 → 172 sources, 481 → 491 benchmarks, 3338 → 3435 measurements.** Sonnet 5.5 now rests on 280 measurements in
+122 benchmarks from 28 sources.
+
+- **Admitted.** AA payload fields outside the index, score only (Harvey LAB, Terminal-Bench-Science, MLCR, with the
+  ladders AA has). The Sonnet 5.5 card's AutomationBench sweep (fig. 8.14.6.A, digitized, its Sonnet 5 and Opus 5.5
+  points within 0.3 % of `zapierab`; costs are Anthropic's, computed from Zapier's token counts), FrontierSWE's score
+  printed in the card (the board's cache is stale), computingforgeeks' k3s DevOps suite (Sonnet 5.5 `low`→`max`,
+  Sonnet 5, Opus 5.5; the snippet the first salvo had seen was wrong). ramen-bench (four models × five rungs, cost
+  only, Claude Code's own cost with the known 2.1.283 caveat), MineBench's voxel arena (Elo, measured cost for eight
+  of twelve Claude models), note.com nantokanaru_log (Sonnet 5.5 vs Opus 5.5, `high`) and tank_ai's era converter.
+- **Held.** tank_ai's two blind-rank tasks (rank of 6, no cost) are kept as inactive `#` rows: a rank is ordinal, and
+  the grid reads a score as higher-is-better.
+- **Corrected.** `lighthouse-svg` stored a subjective rank (1 = best) as its score, so the grid read Opus 5.5's
+  last place as twice Fable 5.1's second: the rank moves to `confound` and the score is left blank, as for
+  Willison's ordinal SVGs. `rtk-base`'s Sonnet 5 costs are Claude Code's `total_cost_usd`, and the paper's own
+  calibration (sec. 6.1) shows they sit at the \$3/\$15 "standard" rate (the \$2/\$10 "introductory" rate leaves
+  +33 % unexplained): re-priced ×2/3 under the eighth-pass rule.
+- **Price audit.** 101 groups with a Sonnet 5 cost and no stated price basis: no other \$3/\$15 leftover (54 checked
+  at \$2/\$10 by code, JSON or exact arithmetic, 27 real billing, 11 unknown). One agent read two July papers as
+  proof that Sonnet 5 was actually billed \$3/\$15 until mid-July; checked at the source, neither shows it (one
+  calibrates against Claude Code's own table, the other never prints the rate), so the eighth pass's reading
+  stands: \$2/\$10 was the launch price, the rise to \$3/\$15 scheduled for 1 Sep was cancelled on 10 Aug. Only
+  `rtk-base`, whose figures are explicitly at \$3/\$15, changes. The six new Sonnet 5 runs of the Sonnet 5.5 card
+  have no stated price basis and are left as they are.
+- **Found empty.** Nineteen boards re-read (ARC Prize, LMArena, Epoch, Kilo, OpenRouter, aipricing.guru, marginlab,
+  Vals RSI, SEAL, LiveCodeBench, SimpleBench, Aider, Zapier, Terminal-Bench, SWE-bench and Pro, swe-rebench, DeepSWE,
+  OSWorld, Sonar): none had added Sonnet 5.5 yet. Thirty-five tool vendors: availability notes or Anthropic's
+  figures only (the same partner-kit sentence recurs at GitHub, Snowflake and Lovable). HN has restatements only;
+  Reddit is blocked from this host and the X mirrors are down since 15 Sep. The repos already followed have not
+  re-run; bug-hunt's Sonnet 5.5 replicates, ObviousBench's PR #39 and merc-bench's PR #5 are still pending.
+
+Sonnet 5.5 (quality / cost vs Opus 5 @high): `low` 0.75 / 0.08, `medium` 0.86 / 0.08, `high` 0.98 / 0.19, `xhigh`
+1.09 / 0.43, `max` 1.04 / 1.45. The frontier is Sonnet 5.5 `medium`, Opus 5.5 `low`, `medium`, Sonnet 5.5 `xhigh`, Opus
+5.5 `xhigh`, `max`; the page's best value overall is now Sonnet 5.5 `xhigh`. Elsewhere Fable 5.1 `xhigh` cost
+2.02 → 1.78.
+
 ## Twelfth pass: Sonnet 5.5
 
 Sonnet 5.5 went GA on 28 Sep 2026 at the Sonnet 5 rate (\$2 / \$10 per MTok, cache read \$0.20, write \$2.50 for

@@ -542,6 +542,8 @@ def groups_data():
       "tankai-wareki":("tank_ai wareki converter","sweep","note.com 29 Sep · Claude Code subagents at fixed model × effort, n=1, 38 auto-graded tests, score only ✓"),
       "ramen-bench":("Ramen Bench","sweep","not-stbenjam/ramen-bench · one-shot creative-coding HTML, Sonnet 5.5, Opus 5.5, Opus 5, Fable 5.1 × low→max, Claude Code run.json, cost only ✓"),
       "minebench-voxel":("MineBench voxel arena","xmodel","minebench.ai live API · voxel builds, 15 prompts, Elo arena read 29 Sep, measured cost for 8 of 12 Claude models ✓"),
+      "frontierswe":("FrontierSWE v2","xmodel","Proximal frontierswe.com + Sonnet 5.5 card · 34 ultra-long tasks, max effort, proximus harness, mean reward@5; cost basis undocumented ✓"),
+      "cfgk3s55":("CFG k3s DevOps","sweep","computingforgeeks Sonnet 5.5 review · 3 tasks × 3 runs, raw API single file; score = k3s deploy + HTTP 200 pass rate of the K8s task, cost summed over the 3 tasks ✓"),
       "sc55osw":("OSWorld 2.1 (O5.5)","sweep","Opus 5.5 card p207 + Sonnet 5.5 card p131 · v2.1 files of 10 Sep, partial credit, 3 models × 5 efforts (effort from cost order) + Sonnets at max ✓"),
       "sc55bcad":("BenchCAD V2C","sweep","Opus 5.5 card p205 · Vision2Code with tools, voxel IoU, 4 models × 5 efforts; effort inferred from cost order ✓"),
       "sc55chartq":("Chartography regraded","sweep","Opus 5.5 card p202 · same transcripts as chartogt, re-graded scores — quality only, costs stay in chartogt ✓"),
