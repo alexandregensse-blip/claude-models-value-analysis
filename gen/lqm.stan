@@ -82,18 +82,19 @@ parameters {
   vector[L1] z1;                                   // non-centred effects
   vector[L2] z2;
   vector[L3] z3;
-  vector<lower=0>[C] tau;
+  vector<lower=0>[C] tau_raw;                      // τ_c = s_τ · τ̃_c (non-centred)
   real<lower=0> s_tau;
   real<lower=0> psi;
   real<lower=0> omega;
   real<lower=1> nu;
   array[has_ea] real log_kappa;
-  array[cost] real mu_sig;
-  array[cost] real<lower=0> s_sig;
+  real mu_sig;
+  real<lower=0> s_sig;
 }
 transformed parameters {
   vector[G] sigma = exp(log_sigma);
   vector[G] a = cost ? exp(s_g * lg_raw) : exp(s_g * lg_raw + log_sigma);
+  vector[C] tau = s_tau * tau_raw;
 }
 model {
   vector[L1 + 1] u = append_row(centre_within(z1 .* tau[own1], set1, S1), 0);
@@ -114,18 +115,17 @@ model {
   // weakly informative half-Student-t(3, 0, 2.5) priors on every standard deviation (Gelman 2006; the brms default,
   // Bürkner 2017); unit 1 = one typical benchmark noise on the θ scale (quality), a factor e (cost, log gains)
   s_g ~ student_t(3, 0, 2.5);
-  tau ~ normal(0, s_tau);
+  tau_raw ~ std_normal();
   s_tau ~ student_t(3, 0, 2.5);
   psi ~ student_t(3, 0, 2.5);
   omega ~ student_t(3, 0, 2.5);
   nu ~ gamma(2, 0.1);                              // Juárez & Steel (2010)
   if (has_ea) log_kappa[1] ~ normal(0, 1);         // centred on no inflation
-  if (cost) {                                      // log σ_b ~ N(μ_σ, s_σ²) truncated at the floor; μ_σ flat
-    s_sig[1] ~ student_t(3, 0, 2.5);
-    log_sigma ~ normal(mu_sig[1], s_sig[1]);
-    target += -normal_lccdf(log_floor | mu_sig[1], s_sig[1]);
-  }
-  // quality: Jeffreys 1/σ above the floor = flat on log σ (nothing to add)
+  // noise pooled across groups on their standardised scale (invariant to any affine change of a metric):
+  // log σ_b ~ N(μ_σ, s_σ²) truncated at the floor; μ_σ flat
+  s_sig ~ student_t(3, 0, 2.5);
+  log_sigma ~ normal(mu_sig, s_sig);
+  target += -normal_lccdf(log_floor | mu_sig, s_sig);
 }
 generated quantities {
   // read-out on the log scale, per couple. Quality: log of the expected score averaged over the panel.

@@ -69,14 +69,25 @@ FAMILY_OF = {g: f for f, gs in FAMILIES.items() for g in gs}
 PUBLISHER_OF = {"anthropic-syscard": "anthropic", "anthropic-chart": "anthropic", "anthropic-docs": "anthropic",
                 "anthropic-cookbook": "anthropic", "claude-dev-blog": "anthropic"}
 
-# Composite scores (an index, an average or a total over several benchmarks) and what they aggregate: a list of
-# component groups, or "publisher" = every other group of the same publisher (its index is built from its own
-# benchmarks). A composite and its components are the same measurements counted twice: for a couple measured on at
-# least one component, the composite row is left out (lqm.load). A couple measured only on the composite keeps it.
+# Composite scores (an index, an average or a total over several benchmarks) and the component groups they aggregate,
+# as their publisher documents them. A composite and its components are the same measurements counted twice: for a
+# couple measured on at least one component, the composite row is left out (lqm.load). A couple measured only on the
+# composite keeps it; a composite none of whose components is in the data is kept whole.
 COMPOSITES = {
-    "aa-index": "publisher", "aa-index-pertask": "publisher", "aa-index-pertask2": "publisher",
-    "aa-index-pertask3": "publisher", "aa-index4": "publisher", "aa-index43": "publisher",
-    "valsindex": "publisher", "valsindex2": "publisher", "valsmmindex": "publisher",
+    # artificialanalysis.ai/methodology/intelligence-benchmarking and the v4.3 article: v3 and v4 aggregate
+    # benchmarks absent from the data (MMLU-Pro, LiveCodeBench, IFBench, τ²/τ³-Bench, Terminal-Bench Hard/2.1…)
+    "aa-index": [], "aa-index-pertask": [], "aa-index-pertask2": [], "aa-index-pertask3": [], "aa-index4": [],
+    "aa-index43": ["aabriefcase", "aagdpval", "aaautob", "aatb40", "aascicode", "aaomni", "aagdppdf", "aalcr",
+                   "aahle", "aacritpt"],
+    "aacai": ["aatb40"],                                   # AA Coding Agent Index: DeepSWE, Terminal-Bench 4.0, SWE-Atlas
+    # vals.ai/benchmarks/vals_index_v1_2 (archived), vals_index (v2), vals_multimodal_index — formulas published there
+    "valsindex": ["valscorpfin", "valsfab2", "valsswebench", "valstb21", "valsvibecode"],
+    "valsindex2": ["valsfab2", "emb", "valstb21", "valsvibecode", "valscodemig", "valslegal", "valshlab"],
+    "valsmmindex": ["valscorpfin", "valsfab2", "valsmortgage", "valsswebench", "valstb21", "valsvibecode", "valssage"],
     "boxs55-all": ["boxs55-finserv", "boxs55-legal", "boxs55-lifesci", "boxs55-public"],
-    "nnrlog-total": "publisher",
+    "nnrlog-total": ["nnrlog-game", "nnrlog-webtool"],      # 2 of its 7 tasks (listed in the confound field) are in the data
 }
+
+# Cost units a publisher labels two ways for one quantity: vals.ai has a single "Cost" column (vals.ai/methodology),
+# written "per test" or "per task" depending on the benchmark's wording.
+UNIT_ALIASES = {"vals.ai": {"per-test": "per-task"}}

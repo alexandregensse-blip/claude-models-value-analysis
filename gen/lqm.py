@@ -10,7 +10,8 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            no couple is a reference; the page divides by its reference couple afterwards (a display choice).
   o_b      group offset, flat. a_b group gain: quality log(a_b/σ_b) ~ N(0, s_g²) (discrimination, pooled; its zero
            mean sets the unit of θ); cost log a_b ~ N(0, s_g²) (elasticity around 1).
-  σ_b      group noise, never below the metric's resolution. Quality: Jeffreys 1/σ. Cost: log σ_b ~ N(μ_σ, s_σ²).
+  σ_b      group noise, never below the metric's resolution, pooled: log σ_b ~ N(μ_σ, s_σ²) truncated at the floor,
+           on the group's standardised scale (invariant to an affine change of the metric), μ_σ flat.
   h_r      shape of the sampling noise of an empirical logit, 1/(2√(q(1−q))) at the observed proportion q; 1 else.
   κ_r      variance multiplier of an early-access run, log κ ~ N(0, 1); 1 for other runs.
   u, w, v  publisher × couple (sd τ_c, τ_c ~ N⁺(0, s_τ)), publisher × model (sd ψ), couple × task type (sd ω)
@@ -24,7 +25,7 @@ in Stan for every draw; `summarise` turns it into a centre and a per-couple inte
 """
 import collections, csv, itertools, math, os, re
 
-from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF
+from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STAN_FILE = os.path.join(HERE, "lqm.stan")
@@ -102,16 +103,14 @@ def load(path, models, field="score"):
         raw[r["group"]].append(dict(
             couple=f'{r["model"]}@{r["effort"]}', model=r["model"], publisher=PUBLISHER_OF.get(r["source"], r["source"]),
             task=r["task_type"] or "", raw=val, metric=metric, kind="log" if field == "cost_usd" else kind(metric),
-            ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]), unit=r["unit"] or ""))
+            ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]),
+            unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "")))
 
     # --- 1. composites
     for g, spec in COMPOSITES.items():
         if g not in raw:
             continue
-        pubs = {x["publisher"] for x in raw[g]}
-        parts = spec if spec != "publisher" else [h for h in raw if h not in COMPOSITES
-                                                  and {x["publisher"] for x in raw[h]} & pubs]
-        measured = {x["couple"] for h in parts for x in raw.get(h, [])}
+        measured = {x["couple"] for h in spec for x in raw.get(h, [])}
         kept = [x for x in raw[g] if x["couple"] not in measured]
         report["composite row, component measured"] += len(raw[g]) - len(kept)
         raw[g] = kept
