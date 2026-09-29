@@ -14,8 +14,10 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
   h_r      shape of the sampling noise of an empirical logit, 1/(2√(q(1−q))) at the observed proportion q; 1 else.
   κ_r      variance multiplier of an early-access run, log κ ~ N(0, 1); 1 for other runs.
   u, w, v  publisher × couple (sd τ_c, τ_c ~ N⁺(0, s_τ)), publisher × model (sd ψ), couple × task type (sd ω)
-           effects; composites (task type 'mixed') carry no task-type effect.
-  Priors:  θ ~ N(0, 10²); s_g, s_τ, ψ, ω, s_σ ~ N⁺(0, 1); ν ~ Gamma(2, 0.1).
+           effects; composites (task type 'mixed') carry no task-type effect. A level carried by a single row is left
+           out (indistinguishable from that row's noise). u and w are centred within their publisher, v within its
+           task type: their mean is confounded with the free offsets of that publisher's (type's) groups.
+  Priors:  θ ~ N(0, 10²); s_g, s_τ, ψ, ω, s_σ ~ half-Student-t(3, 0, 2.5); ν ~ Gamma(2, 0.1).
 
 Estimation: Hamiltonian Monte Carlo (Stan, NUTS) on lqm.stan, run through CmdStanPy. The read-out `level` is computed
 in Stan for every draw; `summarise` turns it into a centre and a per-couple interval (quasi-variances).
@@ -213,6 +215,16 @@ def panel(groups, names):
             for b, g in enumerate(names) if groups[g]["kind"] == "logit"]
 
 
+def centring(levels):
+    """Centring sets of the effects: publisher for u and w, task type for v (see lqm.stan)."""
+    out = {}
+    for n, e, pos in ((1, "pub_couple", 0), (2, "pub_model", 0), (3, "couple_task", 1)):
+        keys = sorted({k[pos] for k in levels[e]})
+        idx = {k: i + 1 for i, k in enumerate(keys)}
+        out[f"S{n}"], out[f"set{n}"] = len(keys), [idx[k[pos]] for k in levels[e]]
+    return out
+
+
 def stan_data(groups, axis):
     """The model's data block, plus the index maps needed to read its output."""
     import numpy as np
@@ -224,7 +236,9 @@ def stan_data(groups, axis):
     key = {"pub_couple": lambda s, c, t: (s, c),
            "pub_model": lambda s, c, t: (s, model_of[c]),
            "couple_task": lambda s, c, t: None if t in NO_TASK_EFFECT else (c, t)}
-    levels = {e: sorted({key[e](x["publisher"], x["couple"], x["task"]) for _, x in entries} - {None}) for e in EFFECTS}
+    # an effect level carried by a single row cannot be told apart from that row's noise: it is left out
+    count = {e: collections.Counter(key[e](x["publisher"], x["couple"], x["task"]) for _, x in entries) for e in EFFECTS}
+    levels = {e: sorted(k for k, n in count[e].items() if k is not None and n >= 2) for e in EFFECTS}
     li = {e: {k: i + 1 for i, k in enumerate(levels[e])} for e in EFFECTS}     # 1-based; 0 = none
 
     def lvl(e, s, c, t):
@@ -242,6 +256,7 @@ def stan_data(groups, axis):
         k2=[lvl("pub_model", x["publisher"], x["couple"], x["task"]) for _, x in entries],
         k3=[lvl("couple_task", x["publisher"], x["couple"], x["task"]) for _, x in entries],
         own1=[ci[c] + 1 for _, c in levels["pub_couple"]],
+        **centring(levels),
         noise_floor=[groups[g]["floor"] for g in names], mu=[groups[g]["mu"] for g in names],
         sd=[groups[g]["sd"] for g in names],
         P=len(P), pg=[b + 1 for b, _ in P], pw=[w for _, w in P],
@@ -362,3 +377,43 @@ CONVERGED = dict(rhat=1.01, ess=400)
 def converged(diag):
     return (diag["rhat_max"] <= CONVERGED["rhat"] and diag["ess_bulk_min"] >= CONVERGED["ess"]
             and diag["ess_tail_min"] >= CONVERGED["ess"] and diag["divergences"] == 0)
+
+
+def predict(mcmc, maps, groups, rows, thin=4, seed=0):
+    """Posterior predictive of rows the fit did not see, in groups it did. Each row: dict(group, couple, publisher,
+    task, h=1). Returns per row (mean of the expected value f⁻¹ scale, list of predictive draws of f(y)) where known
+    effects are used and unknown ones drawn from their distribution; the noise is Student-t_ν(σ_b·h)."""
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    V = {k: mcmc.stan_variable(k)[::thin] for k in ("theta", "o", "a", "sigma", "z1", "z2", "z3", "tau", "psi", "omega", "nu")}
+    D = len(V["o"])
+    names, ci, levels = maps["names"], maps["ci"], maps["levels"]
+    bi = {g: i for i, g in enumerate(names)}
+    li = {e: {k: i for i, k in enumerate(levels[e])} for e in EFFECTS}
+    own1 = np.array([ci[c] for _, c in levels["pub_couple"]], dtype=int)
+    cs = centring(levels)
+
+    def centred(E, sets):
+        sets = np.asarray(sets)
+        for k in np.unique(sets):
+            E[:, sets == k] -= E[:, sets == k].mean(axis=1, keepdims=True)
+        return E
+    U = centred(V["z1"] * V["tau"][:, own1], cs["set1"]) if len(own1) else np.zeros((D, 0))
+    W = centred(V["z2"] * V["psi"][:, None], cs["set2"])
+    Vt = centred(V["z3"] * V["omega"][:, None], cs["set3"])
+    out = []
+    for x in rows:
+        b, c = bi[x["group"]], ci[x["couple"]]
+        G = groups[x["group"]]
+        lat = V["theta"][:, c].copy()
+        k = li["pub_couple"].get((x["publisher"], x["couple"]))
+        lat += U[:, k] if k is not None else rng.normal(0, 1, D) * V["tau"][:, c]
+        k = li["pub_model"].get((x["publisher"], x["couple"].split("@")[0]))
+        lat += W[:, k] if k is not None else rng.normal(0, 1, D) * V["psi"]
+        if x["task"] not in NO_TASK_EFFECT:
+            k = li["couple_task"].get((x["couple"], x["task"]))
+            lat += Vt[:, k] if k is not None else rng.normal(0, 1, D) * V["omega"]
+        m = V["o"][:, b] + V["a"][:, b] * lat
+        noise = V["sigma"][:, b] * x.get("h", 1.0) * rng.standard_t(V["nu"])
+        out.append((G["mu"] + G["sd"] * m, G["mu"] + G["sd"] * (m + noise)))
+    return out

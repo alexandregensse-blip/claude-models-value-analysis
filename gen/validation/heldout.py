@@ -1,29 +1,33 @@
-"""Held-out prediction. Scores in % from groups of ≥ 4 couples are split in five folds; each fold is removed, the
-model refitted without it, and the removed scores predicted (posterior mean of the predicted score, with the
-publisher, publisher × model and task-type effects when the fit knows them). Baseline: the ratio method — a couple's
-consolidated score ratio to the anchor (weighted median over benchmarks) times the group's mean ratio level.
+"""Held-out prediction. Percentage scores of groups with ≥ 4 couples are split in five folds; each fold is removed from
+the data file, the model refitted without it, and the removed scores predicted: the posterior mean of the expected
+score (known publisher, publisher × model and task-type effects used, unknown ones drawn from their law) and the
+16–84 % posterior predictive interval (noise included), whose coverage should be near 68 %. Baseline: the score-ratio
+consolidation (ratio_baseline.py) times the group's mean ratio level.
 
-Usage: python3 heldout.py DATA.csv GEN_DIR   (GEN_DIR = the folder holding build.py and lqm.py)"""
+Usage: .stan/venv/bin/python gen/validation/heldout.py [WARMUP] [SAMPLES]"""
 import collections, csv, math, os, random, sys
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, "..")); sys.path.insert(0, sys.argv[2])
+import numpy as np
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
 import build as B, lqm, ratio_baseline as RB
-DATA = sys.argv[1]; MODELS = list(B.MX)
+WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["500", "500"][len(sys.argv[1:3]):]))
+DATA = os.path.join(B.ROOT, "raw-data.csv"); MODELS = list(B.MX)
 rows = list(csv.DictReader(open(DATA))); hdr = list(rows[0].keys())
-data = [r for r in rows if r["group"] and not r["group"].startswith("#") and r["model"] in B.MX and r["effort"] in lqm.EFFORTS
-        and RB.num(r["score"]) is not None]
+G0, _, _ = lqm.load(DATA, MODELS)
+eligible = {g for g, G in G0.items() if "~" not in g and not any(h.startswith(g + "~") for h in G0)
+            and G["kind"] == "logit" and len({x["couple"] for x in G["rows"]}) >= 4}
+data = [r for r in rows if r["group"] in eligible and r["model"] in B.MX and r["effort"] in lqm.EFFORTS
+        and RB.num(r["score"]) is not None and r["score_metric"].endswith("%")]
 cells = collections.defaultdict(list)
 for r in data: cells[(r["group"], f'{r["model"]}@{r["effort"]}')].append(r)
-per_group = collections.Counter(g for g, _ in cells)
-keys = sorted(k for k in cells if per_group[k[0]] >= 4 and cells[k][0]["score_metric"].endswith("%"))
-random.Random(5).shuffle(keys)
-err = collections.defaultdict(list)
+keys = sorted(cells); random.Random(5).shuffle(keys)
+err, cover = collections.defaultdict(list), []
 for f in range(5):
-    hold = set(keys[f::5]); keep = lambda r: (r["group"], f'{r["model"]}@{r["effort"]}') not in hold
+    hold = set(keys[f::5])
     tmp = os.path.join(HERE, "heldout_tmp"); os.makedirs(tmp, exist_ok=True); path = os.path.join(tmp, "raw-data.csv")
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=hdr); w.writeheader()
         for r in rows:
-            if not (r["group"] and not r["group"].startswith("#")) or keep(r): w.writerow(r)
+            if (r["group"], f'{r["model"]}@{r["effort"]}') not in hold: w.writerow(r)
     QG = RB.ratio_grid("score", path, MODELS, "opus-5@high")
     Q = {f"{m}@{e}": v[0] for m, es in QG.items() for e, v in es.items()}
     level = collections.defaultdict(list)
@@ -32,22 +36,22 @@ for f in range(5):
             s = sum(RB.num(x["score"]) for x in rs) / len(rs)
             if s > 0: level[g].append(math.log(s) - math.log(Q[c]))
     G, _, _ = lqm.load(path, MODELS)
-    F = lqm.fit(G, "opus-5@high", sweeps=1200, burn=400, seed=f)
-    idx = {e: {k: i for i, k in enumerate(F["levels"][e])} for e in lqm.EFFECTS}; bi = {g: i for i, g in enumerate(F["names"])}
-    for (g, c) in hold:
+    mcmc, maps = lqm.fit(G, "quality", chains=2, warmup=WARM, samples=SAMP, seed=f, adapt_delta=0.95)
+    todo = [(g, c) for (g, c) in sorted(hold) if g in G and c in maps["ci"] and c in Q and level[g]]
+    preds = lqm.predict(mcmc, maps, G, [dict(group=g, couple=c, publisher=lqm.PUBLISHER_OF.get(cells[(g, c)][0]["source"],
+                        cells[(g, c)][0]["source"]), task=cells[(g, c)][0]["task_type"]) for g, c in todo], thin=2, seed=f)
+    for (g, c), (mean_f, pred_f) in zip(todo, preds):
         obs = sum(RB.num(x["score"]) for x in cells[(g, c)]) / len(cells[(g, c)])
-        if not (c in Q and level[g] and g in G and c in F["ci"]): continue
-        base = math.exp(sum(level[g]) / len(level[g])) * Q[c]
-        b = bi[g]; GG = G[g]; x0 = cells[(g, c)][0]; pub = lqm.PUBLISHER_OF.get(x0["source"], x0["source"])
-        ks = {"pub_couple": (pub, c), "pub_model": (pub, x0["model"]), "couple_task": (c, x0["task_type"])}
-        preds = []
-        for d in F["draws"][::2]:
-            x = d["th"][F["ci"][c]] + sum(d["ef"][e][idx[e][k]] for e, k in ks.items() if k in idx[e])
-            q = lqm._score(GG, d["o"][b], d["a"][b], x)
-            n = GG["n_steps"]; p = (q * (n + 1) - 0.5) / n
-            preds.append(100 * min(max(p, 0.0), 1.0))
-        err["ratio method"].append(abs(base - obs)); err["fused model"].append(abs(sum(preds) / len(preds) - obs))
+        n = G[g]["n_steps"]; bnd = lqm.bound(cells[(g, c)][0]["score_metric"])
+        to_pct = lambda y: 100 * np.clip(((1 / (1 + np.exp(-y))) * (n + 1) - 0.5) / n, 0, 1)
+        err["ratio method"].append(abs(math.exp(sum(level[g]) / len(level[g])) * Q[c] - obs))
+        err["fused model"].append(abs(float(np.mean(to_pct(mean_f))) - obs))
+        # predictive interval: noise shape h at the predicted proportion (the observation is not used)
+        q = 1 / (1 + np.exp(-mean_f)); h = 0.5 / np.sqrt(q * (1 - q))
+        y = mean_f + (pred_f - mean_f) * h
+        lo, hi = np.quantile(to_pct(y), [0.16, 0.84]); cover.append(lo <= 100 * obs / bnd <= hi)
     print("fold", f, flush=True)
 q = lambda xs, p: sorted(xs)[int(p * (len(xs) - 1))]
 for k, e in err.items():
     print(f"{k:13s} n={len(e)} median {q(e, .5):.2f} pt · mean {sum(e) / len(e):.2f} pt · 90th percentile {q(e, .9):.2f} pt")
+print(f"16–84 % predictive interval covers {100 * sum(cover) / len(cover):.0f} % of {len(cover)} held-out scores (target 68 %)")

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Site generator. Reads raw-data.csv, fuses it into relative cost and quality grids (gen/lqm.py), bundles the
 CSS, HTML body and client script, and writes index.html and the root files. Run: python3 gen/build.py"""
-import csv, hashlib, html as htmlmod, json, os, re, subprocess, sys, datetime
+import csv, hashlib, html as htmlmod, json, math, os, re, subprocess, sys, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -24,49 +24,49 @@ GRID_ANCHOR = "opus-5@high"                 # reference couple: shown as 1.0 on 
 
 
 # ---------------------------------------------------------------- fusion (gen/lqm.py; method in METHODOLOGY.md)
-FIT = dict(chains=4, sweeps=6000, burn=2000, thin=2, seed=11)      # 4 independent chains, run in parallel
-FIT_CACHE = os.path.join(HERE, "fit-cache.json")                  # refitted only when data, model or settings change
+# The fit runs apart from the build, in the Stan environment: .stan/venv/bin/python gen/fit.py writes fit-cache.json
+# (per couple, reference-free: log centre, quasi-standard error, publishers). The build divides by GRID_ANCHOR.
+FIT = dict(chains=4, warmup=1000, samples=1000, seed=11, adapt_delta=0.95)
+FIT_CACHE = os.path.join(HERE, "fit-cache.json")
 EFFORT_ORDER = ["low", "medium", "high", "xhigh", "max", "solo"]
 
 def fit_fingerprint():
     h = hashlib.sha256()
-    for path in (os.path.join(ROOT, "raw-data.csv"), os.path.join(HERE, "lqm.py"), os.path.join(HERE, "catalog.py")):
+    for path in (os.path.join(ROOT, "raw-data.csv"), os.path.join(HERE, "lqm.py"), os.path.join(HERE, "lqm.stan"),
+                 os.path.join(HERE, "catalog.py")):
         h.update(open(path, "rb").read())
-    h.update(json.dumps([list(MX), GRID_ANCHOR, FIT], sort_keys=True).encode())
+    h.update(json.dumps([list(MX), FIT], sort_keys=True).encode())
     return h.hexdigest()
 
 def fused_grids():
-    """Relative cost and quality grids {model: {effort: [value, band low, band high]}} from the latent-quality model,
-    both relative to GRID_ANCHOR, published couples only; plus fit diagnostics."""
-    fp = fit_fingerprint()
+    """Relative cost and quality grids {model: {effort: [value, low, high]}}, published couples only, relative to
+    GRID_ANCHOR: value = exp(centre − centre_anchor), low/high = value·exp(∓ quasi-standard error of the couple).
+    Refuses to build from a fit that no longer matches the data or the model, or that did not converge."""
     try:
         cache = json.load(open(FIT_CACHE))
-        if cache.get("fingerprint") == fp:
-            return cache["cost"], cache["quality"], cache["diagnostics"]
     except (OSError, ValueError):
-        pass
-    import lqm
-    grids, diag = {}, {}
-    for axis, field in (("cost", "cost_usd"), ("quality", "score")):
-        groups, report, republished = lqm.load(os.path.join(ROOT, "raw-data.csv"), list(MX), field=field)
-        F = lqm.fit_chains(groups, GRID_ANCHOR, axis=axis, chains=FIT["chains"], sweeps=FIT["sweeps"],
-                           burn=FIT["burn"], thin=FIT["thin"], seed=FIT["seed"])
-        S = lqm.summarise(F)
+        cache = {}
+    if cache.get("fingerprint") != fit_fingerprint():
+        sys.exit("!! gen/fit-cache.json does not match the data, the model or its settings: "
+                 "run .stan/venv/bin/python gen/fit.py")
+    for axis in ("cost", "quality"):
+        if not cache["diagnostics"][axis]["converged"]:
+            sys.exit(f"!! the {axis} fit did not converge: {cache['diagnostics'][axis]}")
+    grids = {}
+    for axis in ("cost", "quality"):
+        S = cache[axis]
+        ref = S[GRID_ANCHOR][0]
         grid = {}
         for m in MX:
-            row = {e: [round(S[f"{m}@{e}"]["value"], 3), round(S[f"{m}@{e}"]["band"][0], 3), round(S[f"{m}@{e}"]["band"][1], 3)]
-                   for e in EFFORT_ORDER if f"{m}@{e}" in S and S[f"{m}@{e}"]["published"]}
+            row = {}
+            for e in EFFORT_ORDER:
+                v = S.get(f"{m}@{e}")
+                if v and v[2] >= 2:                                 # published: measured by two publishers or more
+                    c, h = v[0] - ref, v[1]
+                    row[e] = [round(math.exp(c), 3), round(math.exp(c - h), 3), round(math.exp(c + h), 3)]
             if row: grid[m] = row
         grids[axis] = grid
-        rh = [v["rhat"] for v in S.values() if v["rhat"] == v["rhat"]]
-        diag[axis] = dict(groups=len(groups), rows=sum(len(g["rows"]) for g in groups.values()), set_aside=dict(report),
-                          republished=[list(p) for p in republished],
-                          unpublished=sorted(c for c, v in S.items() if not v["published"]),
-                          rhat_max=round(max(rh), 3) if rh else None,
-                          credible={c: [round(x, 3) for x in v["credible"]] for c, v in sorted(S.items())})
-    json.dump(dict(fingerprint=fp, cost=grids["cost"], quality=grids["quality"], diagnostics=diag),
-              open(FIT_CACHE, "w"), indent=1, sort_keys=True)
-    return grids["cost"], grids["quality"], diag
+    return grids["cost"], grids["quality"], cache["diagnostics"]
 
 def model_label(m):
     """'opus-5.5' → 'Opus 5.5'."""
@@ -548,7 +548,7 @@ def groups_data():
 
 def monotonicity_report(cg, qg):
     """Effort is a ladder: within a model, a higher rung should neither cost nor score less than the one below.
-    An inversion is reported at build time, never corrected: inside the band it is left as the data give it
+    An inversion is reported at build time, never corrected: inside the interval it is left as the data give it
     (a documented exception: Sonnet 4.6 falls after `high`, which the Sonnet 5 card itself prints)."""
     ORD = ["low", "medium", "high", "xhigh", "max"]
     out = []

@@ -27,8 +27,9 @@ function solveN(A,b){ const n=b.length, M=A.map((r,i)=>[...r,b[i]]);
     for(let r=0;r<n;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<=n;k++) M[r][k]-=f*M[c][k]; } }
   return M.map((r,i)=>r[n]/M[i][i]); }
 
-// COST & QUALITY grids: relative [centre, band_lo, band_hi] per (model, effort), ANCHOR = 1.0, computed in build.py by
-// the latent-quality model (gen/lqm.py): centre = posterior median, band = what one new benchmark would report (16–84 %).
+// COST & QUALITY grids: relative [centre, lo, hi] per (model, effort), ANCHOR = 1.0, from the latent-quality model
+// (gen/lqm.py): centre = posterior median; lo–hi = the couple's own 16–84 % interval (quasi-standard error), so that any
+// two couples compare through their two intervals — the anchor is a divisor and shares nothing with the others.
 const COSTGRID=__COSTGRID__;
 const QUALGRID=__QUALGRID__;   // {model:{effort:[centre, lo, hi]}}
 
@@ -84,7 +85,7 @@ function axisTitle(s,x,y,main,sub,rot){
 function qGrid(s,Y,mL,iw,mT,ih){ [0.4,0.5,0.6,0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
   s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?MODELS[ANCHOR.m].c:'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
   const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2);s.appendChild(t); }); }
-// Asymmetric band ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the point, clipped
+// Asymmetric interval ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the point, clipped
 // to the plot, faint by default. Returns the array used by hoverTip() to reveal them.
 function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("clipPath",{id:cid});
   cp.appendChild(el("rect",{x:mL,y:mT,width:iw,height:ih})); defs.appendChild(cp); s.appendChild(defs);
@@ -136,9 +137,9 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
       s.appendChild(el("line",{x1:L.ax,y1:L.ay,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.lead,"stroke-width":L.mdl?0.9:0.7,"stroke-opacity":0.4})); }
     const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":L.fs,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); }); }
 
-// UNCERTAINTY-AWARE price envelope: each frontier couple contributes 5 weighted samples to the fit — its centre (w=0.5)
-// and the four IC extremities (cost lo/hi, quality lo/hi; w=0.125 each). A wide IC thus smears the point over its box
-// instead of pinning the curve to an over-precise centre.  Fit: log10(cost) = g(T(quality)).
+// Price envelope: every couple contributes its centre (posterior median), weighted by its distance to the frontier.
+// Intervals do not enter: smearing a point over its interval through the non-linear T and g shifts it toward parity,
+// which is a bias, not an uncertainty.  Fit: log10(cost) = g(T(quality)).
 //
 // SHAPE: log10(cost) = a + b·u + c·(e^{k·u} − 1)/k, with u = T(q) − T(min) and b, c ≥ 0. Then g'(u) = b + c·e^{k·u}
 // ≥ 0 for EVERY u, positive or negative — monotone by construction, everywhere, extrapolation included. The price of
@@ -171,8 +172,7 @@ function fitPriceEnvelope(pts){
   const PW=paretoWeights(pts), samp=[];
   pts.forEach((p,i)=>{ const Tq=symT(p.q), lc=Math.log10(p.c), w=PW[i];
     if(w<=0) return;                                                   // the single worst couple carries no influence
-    samp.push([Tq,lc,0.5*w],[Tq,Math.log10(p.clo),0.125*w],[Tq,Math.log10(p.chi),0.125*w],
-              [symT(p.qlo),lc,0.125*w],[symT(p.qhi),lc,0.125*w]); });
+    samp.push([Tq,lc,w]); });
   const T0=Math.min(...samp.map(s=>s[0])), L=Math.max(...samp.map(s=>s[0]))-T0;
   const fitK=k=>{
     const M=[[0,0,0],[0,0,0],[0,0,0]], V=[0,0,0];                    // weighted normal equations on {1, u, (e^{ku}−1)/k}
@@ -200,23 +200,17 @@ function fitPriceEnvelope(pts){
   // the data (g → a − c/k + b·u) and steepen above it.
   return t=>{ const u=t-T0; return co[0]+co[1]*u+co[2]*(Math.exp(bk*u)-1)/bk; }; }
 // Distance of a couple to the price envelope, in LOG-COST: r = log10(price the frontier charges for that quality)
-// − log10(what the couple actually costs). Positive = cheaper than the frontier price, i.e. good value. The interval
-// is propagated by the SAME 5-point weighting used to fit the envelope — the couple's centre (½) and its four band
-// extremities (⅛ each) — so a wide interval carries the couple toward what the envelope charges across its whole box.
-// Averaging in LOG space is what makes the exponential below a clean ratio (it is a weighted geometric mean).
-// Split into the two halves so a tier can weight cost differently from quality (see TIERS.gam):
-//   G = what the price curve grants for this couple's quality · C = what the couple actually costs. Both IC-weighted
-//   in log10, by the same centre-½ / four-extremities-⅛ scheme. The plain residual is exactly G − C.
+// − log10(what the couple actually costs). Positive = cheaper than the going price, i.e. good value. Computed on the
+// centres, like the envelope. Split into the two halves so a tier can weight cost differently from quality (see
+// TIERS.gam): G = what the price curve grants for this couple's quality · C = what the couple actually costs, both in
+// log10. The plain residual is exactly G − C.
 function valueParts(gevT,p){
-  return { G: 0.75*gevT(symT(p.q)) + 0.125*(gevT(symT(p.qlo))+gevT(symT(p.qhi))),
-           C: 0.75*Math.log10(p.c) + 0.125*(Math.log10(p.clo)+Math.log10(p.chi)) }; }
+  return { G: gevT(symT(p.q)), C: Math.log10(p.c) }; }
 function valueResidual(gevT,p){ const {G,C}=valueParts(gevT,p); return G-C; }
 // VALUE INDEX, anchored so ANCHOR = 100. Being an exponentiated difference of log-distances it is a genuine
 // RATIO: 384 reads "3.8× the value-for-money of the anchor", 45 reads "0.45×" — every value above 100 means something,
 // which a linear stretch of a bounded score could not offer. Unbounded above by construction: that is the cost of an
 // interpretable multiple, and it is why the anchor can sit anywhere in the ranking without breaking the scale.
-// A ratio cannot be squashed without destroying the reading, so a wide band SHIFTS the index (through the weighting
-// above) rather than damping it toward neutral.
 const valueIndex=(r,rAnc)=>100*Math.pow(10,r-rAnc);
 const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANCHOR.e); return a?valueResidual(gevT,a):0; };
 // Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
@@ -290,12 +284,12 @@ function drawB(){
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
     visibleModels().filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +(showOvals?`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = band (what one new benchmark would report), asymmetric · <b>hover a point</b> for its identity</span>`
+    +(showOvals?`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = the couple's 16–84 % interval · <b>hover a point</b> for its identity</span>`
                :`<span class="lg"><b>hover a point</b> for its identity</span>`);
 }
 
 // ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
-// Same shared machinery as the §1 landscape: symlog quality axis, faint band ovals (hover to reveal),
+// Same shared machinery as the §1 landscape: symlog quality axis, faint interval ovals (hover to reveal),
 // point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";

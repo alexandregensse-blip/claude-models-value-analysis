@@ -6,6 +6,19 @@
 // θ sums to zero: no couple is a reference, the reference couple of the page is a divisor applied afterwards.
 // h_r is the shape of the sampling noise of an empirical logit, 1/(2·√(q(1−q))) at the observed proportion q (1 on
 // other scales); κ_r the variance multiplier of an early-access run, estimated.
+functions {
+  vector centre_within(vector e, array[] int set, int S) {   // e minus the mean of its set
+    vector[S] tot = rep_vector(0, S);
+    vector[S] n = rep_vector(0, S);
+    for (i in 1:num_elements(e)) {
+      tot[set[i]] += e[i];
+      n[set[i]] += 1;
+    }
+    vector[num_elements(e)] out;
+    for (i in 1:num_elements(e)) out[i] = e[i] - tot[set[i]] / n[set[i]];
+    return out;
+  }
+}
 data {
   int<lower=1> N;                                  // rows
   int<lower=1> G;                                  // groups
@@ -23,6 +36,14 @@ data {
   array[N] int<lower=0, upper=L2> k2;
   array[N] int<lower=0, upper=L3> k3;
   array[L1] int<lower=1, upper=C> own1;            // couple of each publisher × couple level (τ is per couple)
+  // centring sets: an effect's mean over its publisher (u, w) or its task type (v) is confounded with the offsets
+  // of that publisher's (type's) groups, which are free; the likelihood sees the effects centred within their set
+  int<lower=0> S1;
+  array[L1] int<lower=1, upper=max(S1, 1)> set1;
+  int<lower=0> S2;
+  array[L2] int<lower=1, upper=max(S2, 1)> set2;
+  int<lower=0> S3;
+  array[L3] int<lower=1, upper=max(S3, 1)> set3;
   vector<lower=0>[G] noise_floor;                  // σ_b never below the metric's resolution
   vector[G] mu;
   vector<lower=0>[G] sd;
@@ -75,9 +96,9 @@ transformed parameters {
   vector[G] a = cost ? exp(s_g * lg_raw) : exp(s_g * lg_raw + log_sigma);
 }
 model {
-  vector[L1 + 1] u = append_row(z1 .* tau[own1], 0);
-  vector[L2 + 1] w = append_row(z2 * psi, 0);
-  vector[L3 + 1] v = append_row(z3 * omega, 0);
+  vector[L1 + 1] u = append_row(centre_within(z1 .* tau[own1], set1, S1), 0);
+  vector[L2 + 1] w = append_row(centre_within(z2 * psi, set2, S2), 0);
+  vector[L3 + 1] v = append_row(centre_within(z3 * omega, set3, S3), 0);
   vector[N] x = theta[cpl] + u[j1] + w[j2] + v[j3];
   vector[N] scale = sigma[grp] .* h;
   if (has_ea)
@@ -90,17 +111,17 @@ model {
   z1 ~ std_normal();
   z2 ~ std_normal();
   z3 ~ std_normal();
-  // weakly informative half-normal priors on every standard deviation (Gelman 2006): unit 1 = one typical
-  // benchmark noise on the θ scale (quality), a factor e (cost, log gains)
-  s_g ~ normal(0, 1);
+  // weakly informative half-Student-t(3, 0, 2.5) priors on every standard deviation (Gelman 2006; the brms default,
+  // Bürkner 2017); unit 1 = one typical benchmark noise on the θ scale (quality), a factor e (cost, log gains)
+  s_g ~ student_t(3, 0, 2.5);
   tau ~ normal(0, s_tau);
-  s_tau ~ normal(0, 1);
-  psi ~ normal(0, 1);
-  omega ~ normal(0, 1);
+  s_tau ~ student_t(3, 0, 2.5);
+  psi ~ student_t(3, 0, 2.5);
+  omega ~ student_t(3, 0, 2.5);
   nu ~ gamma(2, 0.1);                              // Juárez & Steel (2010)
   if (has_ea) log_kappa[1] ~ normal(0, 1);         // centred on no inflation
   if (cost) {                                      // log σ_b ~ N(μ_σ, s_σ²) truncated at the floor; μ_σ flat
-    s_sig[1] ~ normal(0, 1);
+    s_sig[1] ~ student_t(3, 0, 2.5);
     log_sigma ~ normal(mu_sig[1], s_sig[1]);
     target += -normal_lccdf(log_floor | mu_sig[1], s_sig[1]);
   }
@@ -113,9 +134,9 @@ generated quantities {
   if (cost) {
     level = theta;
   } else {
-    vector[L1 + 1] u = append_row(z1 .* tau[own1], 0);
-    vector[L2 + 1] w = append_row(z2 * psi, 0);
-    vector[L3 + 1] v = append_row(z3 * omega, 0);
+    vector[L1 + 1] u = append_row(centre_within(z1 .* tau[own1], set1, S1), 0);
+    vector[L2 + 1] w = append_row(centre_within(z2 * psi, set2, S2), 0);
+    vector[L3 + 1] v = append_row(centre_within(z3 * omega, set3, S3), 0);
     real W = sum(pw);
     for (c in 1:C) {
       real s = 0;
