@@ -28,7 +28,8 @@ the examples in parentheses only illustrate it.
 
 One line per measurement: the group, the source, the model, the effort, the task type and complexity, the harness,
 the cost unit (per task, per attempt, per run), the cost in dollars, the input and output tokens, the score and its
-metric, the cache-read share, a free-text **confound** field, and the reference (URL, page, file).
+metric, the cache-read share, a free-text **confound** field, the reference (URL, page, file), and the **reading
+precision** of the cost and of the score (§4).
 
 ### Admission
 
@@ -42,8 +43,11 @@ metric, the cache-read share, a free-text **confound** field, and the reference 
   secondary quotation of a number already recorded is not a new measurement.
 - **Measured spend over list price.** The cost is what the run actually spent, including cache reads and writes,
   when the source reports it; a cost estimated from token counts at list prices is flagged. A source that priced
-  tokens at wrong rates is re-priced and the correction flagged.
-- **Charts are digitised and checked** against any number the same document prints in its text, and flagged.
+  tokens at wrong rates is re-priced and the correction flagged. Tokens read on a chart and converted at one flat
+  price are not a cost: a flat price ignores the mix of input and output tokens, which changes with the effort, and
+  so bends the effort ladder; such a cost is left out and the score kept.
+- **Charts are digitised and checked** against any number the same document prints in its text, and flagged; the
+  resolution of every digitised chart is measured (§4).
 - **Early access.** A run its source dates before the model's public release is flagged (§5: its noise is inflated
   by an estimated factor).
 - **Uninformative scores.** A score stuck at the floor or the ceiling of its metric for one couple while the others
@@ -64,11 +68,18 @@ metric, the cache-read share, a free-text **confound** field, and the reference 
   ten benchmarks of the Artificial Analysis Intelligence Index v4.3, or the published formula of the Vals Index). For
   a couple measured on at least one component, the composite row is left out; a couple measured only on the
   composite keeps it, and a composite none of whose components is in the data is kept whole.
-- **Republished numbers count once.** Two groups of one family that share at least two identical values away from
-  the metric's bounds (within 0.05 % of the scale, or of the value for unbounded metrics) are the same experiment
-  printed twice — a system card reprinting the previous card's reference column is the typical case. Their identical
-  rows are kept once, in the larger group. A single coincidence, or two runs that both reach 100 %, is not a
-  republication. Detection is scoped to families.
+- **One execution counts once.** A run printed twice — a system card reprinting the previous card's series, the
+  same run drawn on two charts, a leaderboard copying a vendor's table — is one measurement. Two rows are the same
+  execution when their values agree within what separates two copies of one number: both reading precisions (§4),
+  2·√(δ₁² + δ₂²), plus one unit of the last digit of each (a rounding made the wrong way somewhere along the
+  publisher's pipeline). Where both rows carry a score and a cost, both must agree; one run scored with two metrics
+  (partial credit and strict pass on the same trajectories) is still one execution, recognised by its cost, and a
+  score written under two labels of one scale is one metric if the values agree. Two groups are compared when they
+  run one benchmark family, or come from one publisher (the same runs regrouped). They share an execution when they
+  agree on what they share — all their common values, or one model's series — on two values at least and on all but
+  one (a miscopy); when only one axis can tell, on all of them and three at least. The execution's rows are kept
+  once, on both axes, in the larger group. A few coincidences among many shared values, or two runs that both reach
+  100 %, are not a republication.
 - **Groups without information.** A group with a single couple says nothing about a difference, nor does a group
   whose couples all sit at the same bound (every couple at 100 %). Both stay in the data and the counts, not in the
   fit. A tie away from the bounds (two couples at 79.3 %) is information — the couples are equal — and is kept.
@@ -88,6 +99,23 @@ the benchmark's identity:
 | a label contradicted by its values (scores beyond the stated bound, like a "score out of 10" reaching 100) | treated as an unknown scale, and reported by the build |
 | cost | log |
 
+**Reading precision.** Every value carries the standard deviation δ of the error made in reading it off its source,
+in its own unit, added to the row's variance (§5):
+- a printed number: its rounding, one unit of the last digit written in the data file / √12 (a uniform error). A
+  source that prints fewer digits than the data file holds (a page rounding a table, a chart label) is not where the
+  finer digits came from: the data file's own last digit counts;
+- a value read off a chart, two errors in quadrature: the reading, the axis' units per pixel (recomputed by least
+  squares from the chart's tick coordinates) times the chart's reading error in pixels (from an independent re-reading
+  of its points: the RMS difference / √2, never below the pixel's own 1/√12, the median of the charts for a chart
+  with fewer than three re-read points); and the chart's own error against the number it draws — re-plotting,
+  roundings along the publisher's pipeline — estimated on the runs printed on two charts (identical printed scores
+  prove the run): 0.48 % of the axis span. On a log axis both are relative (about 2 % on a digitised cost);
+- a cost the collector computed from published token counts: the counts' rounding propagated (the largest relative
+  rounding of the counts, conservative), added to the rounding of the result.
+Converted to the model's scale by the derivative of the transformation (the logit's at the observed proportion, the
+log's 1/value). The evidence — per chart the calibration and the re-read points, per source whether each value is
+printed, from a data file or computed — is in `data/precision/`, checked source by source.
+
 A bounded score compresses near its floor and ceiling; the logit removes that. The number of scoring steps n is one
 over the group's finest observed score difference (7 for a benchmark of 7 tasks), and at most 100: a score of 0 or
 100 % lands half a step inside the bounds instead of at infinity. On the logit scale the sampling noise of a
@@ -101,15 +129,16 @@ bound weighs what it is worth.
 
 For every row *r* (group *b*, couple *c* of model *m*, publisher *s*, task type *t*), with *f* the transformation of §4:
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b²)
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
 
 | Term | Meaning | Prior |
 |---|---|---|
 | θ_c | the couple's latent quality (quality axis) or log cost (cost axis) | N(0, 10²), summing to zero over the couples |
 | o_b | the group's offset: the metric's zero, the task's difficulty, the harness level | flat |
 | a_b | the group's gain: metric units per unit of θ | below |
-| σ_b | the group's noise, never below the metric's resolution | log σ_b ~ N(μ_σ, s_σ²), truncated at the resolution, pooled |
+| σ_b | the group's noise: how far its measurements scatter beyond their reading error | log σ_b ~ N(μ_σ, s_σ²), pooled |
 | h_r | the noise shape of a bounded score (§4); 1 on other scales | fixed by the data |
+| d_r | the value's reading precision (§4), on the model's scale | known |
 | u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²), τ_c ~ N⁺(0, s_τ²) pooled over couples |
 | w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels | N(0, ψ²) |
 | v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω²) |
@@ -135,7 +164,8 @@ uncertainty of any other couple.
 
 **Noise.** The noise is pooled across groups on each group's standardised scale (its scores centred and divided by
 their spread), which an affine change of the metric leaves unchanged. A group of two couples borrows its noise level
-from the others instead of letting it run to infinity.
+from the others instead of letting it run to infinity. Each value adds its own reading error: a group whose points
+line up perfectly is still no more precise than it was read, and no floor on σ_b is needed.
 
 **Effects that the data can tell apart.** An effect carried by a single row cannot be told from that row's noise
 and is left out; its variance stays in the noise. The mean of a publisher's effects is indistinguishable from the
@@ -171,8 +201,7 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
 
 - **Writing.** How a model is written changes how fast the sampler explores it, not what it estimates. Each group's
   noise log σ_b is written in centred form, and its gain log a_b in centred form when the group has at least 20
-  rows, non-centred otherwise (Papaspiliopoulos, Roberts & Sköld 2007; Betancourt & Girolami 2015). The truncated
-  prior of the noise goes through the logarithm of the Mills ratio, which stays finite far in the tail. Effects are
+  rows, non-centred otherwise (Papaspiliopoulos, Roberts & Sköld 2007; Betancourt & Girolami 2015). Effects are
   centred and mapped to rows by sparse matrix products, so that Stan's optimiser (`stanc --O1`) keeps every vector in
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
@@ -195,9 +224,9 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 
 | Where | Value | Why |
 |---|---|---|
-| §3 republication | ≥ 2 identical values within 0.05 % of the scale | one coincidence is not a reprint |
+| §3 republication | identical within 2·√(δ₁² + δ₂²) + one last digit each; on ≥ 2 values and all shared but one (≥ 3 and all when one axis alone can tell) | two copies of one number differ by their reading errors and a rounding; a few coincidences are not a reprint |
 | §4 logit | ½ step added, at most 100 scoring steps | a 0 or 100 % score lands half a step inside the bounds |
-| §4 noise floor | smallest score step / √12 | the variance of a rounding error |
+| §4 reading precision | printed: last digit / √12; chart: reading error in pixels ≥ 1/√12 | the standard deviation of a uniform rounding error; the chart's own error is estimated, not set |
 | §5 priors | θ ~ N(0, 10²); every standard deviation ~ half-Student-t(3, 0, 2.5); ν ~ Gamma(2, 0.1); log κ ~ N(0, 1) | weakly informative (Gelman 2006; Bürkner 2017; Juárez & Steel 2010) |
 | §5 effects | a level carried by one row is left out | it cannot be told from that row's noise |
 | §5 panel read-out | 9 Gauss–Hermite nodes | exact to far below the Monte Carlo error |
@@ -358,7 +387,8 @@ moves only when its content (text, figures, data) changes.
   they do not measure, because every couple is read on the same panel.
 - A couple measured by few, disagreeing publishers keeps a wide interval, and its centre can move by several percent
   when one publisher is added or removed.
-- Republished numbers are detected within a family; a reprint filed under an unrelated group would count twice.
+- Republished numbers are detected within a benchmark family and within a publisher; a reprint by another publisher
+  under an unrelated group, or one that changed every value beyond a rounding, would count twice.
   Composites are matched to their components from their publisher's documentation; an undocumented composite would
   count its components twice.
 - Costs are what each source measured at the prices of its day; a price change a source did not report is not
