@@ -278,6 +278,8 @@ def stan_data(groups, axis):
 # ---------------------------------------------------------------- fit
 STAN_DIR = os.path.join(os.path.dirname(HERE), ".stan")               # CmdStan, BridgeStan, venv (not in git)
 INITS = os.path.join(STAN_DIR, "inits-{axis}.json")                  # last draw of each chain of the previous fit
+# Compilation: stanc --O1 with STAN_NO_RANGE_CHECKS (lqm.stan is written so that --O1 keeps every vector in the fast
+# struct-of-arrays form: −36 % per gradient; --O1 on a loop-by-element program can be 30× slower instead).
 # Sampler per axis (validated in /work/.geom/JOURNAL.md): quality = nutpie (diagonal mass matrix adapted by Fisher
 # divergence), which needs 4× fewer leapfrog steps here; cost = CmdStan NUTS started from the previous fit's last
 # draws (nutpie cannot be given starting points, and random starts can leave a cost chain in a remote region).
@@ -368,14 +370,15 @@ def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_ini
     if st["engine"] == "nutpie":
         import nutpie
         os.environ.setdefault("BRIDGESTAN", os.path.join(STAN_DIR, "bridgestan-2.9.0"))
-        cm = nutpie.compile_stan_model(filename=STAN_FILE).with_data(
+        cm = nutpie.compile_stan_model(filename=STAN_FILE, extra_stanc_args=["--O1"],
+                                       extra_compile_args=["STAN_NO_RANGE_CHECKS=true"]).with_data(
             **{k: (np.asarray(v) if isinstance(v, list) else v) for k, v in data.items()})
         trace = nutpie.sample(cm, draws=st["samples"], tune=st["warmup"], chains=st["chains"],
                               cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,
                               target_accept=st["target_accept"])
         return _from_nutpie(trace), maps
     cs = cmdstan()
-    model = cs.CmdStanModel(stan_file=STAN_FILE)
+    model = cs.CmdStanModel(stan_file=STAN_FILE, stanc_options={"O1": True}, cpp_options={"STAN_NO_RANGE_CHECKS": True})
     inits = _inits(axis, st["chains"])
     run = lambda ini, warm: model.sample(
         data=data, chains=st["chains"], parallel_chains=min(st["chains"], os.cpu_count() or 1), iter_warmup=warm,
@@ -396,6 +399,49 @@ def quantile(xs, p):
     k = (len(xs) - 1) * p
     f = int(k)
     return xs[f] if f + 1 >= len(xs) else xs[f] + (xs[f + 1] - xs[f]) * (k - f)
+
+
+def _expit(x):
+    import numpy as np
+    out = np.empty_like(x)
+    neg = x < 0
+    e = np.exp(x[neg]); out[neg] = e / (1 + e)
+    out[~neg] = 1 / (1 + np.exp(-x[~neg]))
+    return out
+
+
+def level_new(draws, data, rng, chunk=500):
+    """What one NEW source would report for each couple, per posterior draw (draws × couples, log scale): fresh
+    publisher × couple (sd τ_c), publisher × model (sd ψ) and, per task type of the panel, couple × task-type (sd ω)
+    effects, read on the same panel as `level` (quality) or added to θ (cost). Computed here rather than in Stan, where
+    it was the costliest generated quantity; checked against the former Stan version (same deterministic part to
+    1e-15 for given deviates, same quantiles within Monte Carlo error)."""
+    import numpy as np
+    theta, tau = np.asarray(draws["theta"]), np.asarray(draws["tau"])
+    psi, om = np.asarray(draws["psi"]), np.asarray(draws["omega"])
+    D, C = theta.shape
+    if data["cost"]:
+        return (theta + rng.normal(size=(D, C)) * tau + rng.normal(size=(D, C)) * psi[:, None]
+                + rng.normal(size=(D, C)) * om[:, None])
+    pg = np.asarray(data["pg"], int) - 1
+    pw = np.asarray(data["pw"], float)
+    mu, sd = np.asarray(data["mu"])[pg], np.asarray(data["sd"])[pg]
+    hv = np.asarray(data["has_v"], int).astype(bool)
+    ptype = np.asarray(data["ptype"], int) - 1
+    reps = np.unique(ptype)                                          # one fresh task-type effect per task type
+    P = len(pw)
+    out = np.empty((D, C))
+    for d0 in range(0, D, chunk):
+        sl = slice(d0, min(D, d0 + chunk))
+        d = theta[sl].shape[0]
+        zv = np.zeros((d, C, P))
+        zv[:, :, reps] = rng.normal(size=(d, C, len(reps)))
+        zu, zw = rng.normal(size=(d, C)), rng.normal(size=(d, C))
+        vt = np.where(hv, zv * om[sl][:, None, None], 0.0)[:, :, ptype]            # (d, C, P)
+        o, a = np.asarray(draws["o"])[sl][:, pg], np.asarray(draws["a"])[sl][:, pg]
+        lat = (theta[sl] + zu * tau[sl] + zw * psi[sl][:, None])[:, :, None] + vt
+        out[sl] = np.log(_expit(mu + sd * (o[:, None, :] + a[:, None, :] * lat)) @ pw / pw.sum())
+    return out
 
 
 def quasi_variances(L, lo=0.16, hi=0.84):
@@ -431,7 +477,7 @@ def quasi_variances(L, lo=0.16, hi=0.84):
     return q, float(rel.max()), float(np.median(rel))
 
 
-def summarise(post, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
+def summarise(post, maps, groups, data, lo=0.16, hi=0.84, min_publishers=2, seed=0):
     """Per couple, on the log scale: centre = posterior median of `level`; half = quasi-standard error (the
     half-width of a 16–84 % interval that makes any two couples comparable); new_source = 16–84 % interval of what one
     new source would report for the couple (`level_new`); mcse = Monte Carlo error of the centre; published =
@@ -444,7 +490,9 @@ def summarise(post, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
     for g in groups.values():
         for x in g["rows"]:
             pubs[x["couple"]].add(x["publisher"])
-    Ln = post.var("level_new")
+    import numpy as np
+    Ln = level_new({k: post.var(k) for k in ("theta", "o", "a", "tau", "psi", "omega")}, data,
+                   np.random.default_rng(seed))
     diag, mcse_level = diagnostics(post)
     out = {c: dict(centre=float(np.median(L[:, i])), half=float(math.sqrt(q[i])),
                    new_source=[float(np.quantile(Ln[:, i], lo)), float(np.quantile(Ln[:, i], hi))],
@@ -456,11 +504,11 @@ def summarise(post, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
 
 def diagnostics(post):
     """Rank-normalised split R̂, bulk and tail ESS (Vehtari et al. 2021, as computed by ArviZ) over every scalar of
-    every variable except the random `level_new`; Monte Carlo error of each `level`; sampler statistics."""
+    every variable; Monte Carlo error of each `level`; sampler statistics."""
     import numpy as np, arviz as az
     worst, rh_max, eb_min, et_min = [], 1.0, float("inf"), float("inf")
     for name, a in post.arrays.items():
-        if name == "level_new" or a.size == 0:
+        if a.size == 0:
             continue
         x = a.reshape(a.shape[0], a.shape[1], -1)
         keep = [k for k in range(x.shape[2]) if np.ptp(x[:, :, k]) > 0]

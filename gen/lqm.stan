@@ -3,26 +3,30 @@
 //
 //   f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,   ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b²)
 //
-// θ sums to zero: no couple is a reference, the reference couple of the page is a divisor applied afterwards.
-// h_r is the shape of the sampling noise of an empirical logit, 1/(2·√(q(1−q))) at the observed proportion q (1 on
-// other scales); κ_r the variance multiplier of an early-access run, estimated.
+// θ sums to zero: no couple is a reference; the page divides by its reference couple afterwards. h_r is the noise
+// shape of an empirical logit, 1/(2√(q(1−q))) at the observed proportion (1 on other scales); κ_r the estimated
+// variance multiplier of an early-access run. `level` (generated quantities) is the read-out published by the page;
+// what one new source would report (`level_new`) is computed from the draws in lqm.py.
+//
+// Writing (the model is unchanged by any of it; see gen/validation and the fit diagnostics):
+//  * log σ_b centred in every group and log a_b centred in groups of ≥ 20 rows (non-centred elsewhere): the
+//    parameterisation under which NUTS mixes on both axes;
+//  * the truncated prior of log σ_b through the log Mills ratio, which stays finite far in the tail (the direct
+//    form reached lp = +inf when s_σ collapsed during warm-up and trapped the chain);
+//  * effects centred within their set and mapped to rows by sparse products, the early-access multiplier and the
+//    truncation as vector expressions, so that stanc --O1 keeps every vector in struct-of-arrays form (−36 % per
+//    gradient; compile with --O1 and STAN_NO_RANGE_CHECKS, as lqm.fit does).
 functions {
-  // log of the Mills ratio of the standard normal, log(Phi_c(b)) + b^2/2, stable for any b
   real log_mills(real b) {
     if (b < 25) return std_normal_lccdf(b) + 0.5 * square(b);
     real ib2 = inv_square(b);
     return -log(b) - 0.5 * log(2 * pi()) + log1p(-ib2 + 3 * square(ib2) - 15 * ib2 * square(ib2));
   }
-  vector centre_within(vector e, array[] int set, int S) {   // e minus the mean of its set
-    vector[S] tot = rep_vector(0, S);
-    vector[S] n = rep_vector(0, S);
-    for (i in 1:num_elements(e)) {
-      tot[set[i]] += e[i];
-      n[set[i]] += 1;
-    }
-    vector[num_elements(e)] out;
-    for (i in 1:num_elements(e)) out[i] = e[i] - tot[set[i]] / n[set[i]];
-    return out;
+  real sum_log_mills(vector b) {
+    if (max(b) < 25) return std_normal_lccdf(b) + 0.5 * dot_self(b);
+    real s = 0;
+    for (i in 1:rows(b)) s += log_mills(b[i]);
+    return s;
   }
 }
 data {
@@ -70,50 +74,85 @@ data {
 transformed data {
   vector[G] log_floor = log(noise_floor);
   int has_ea = max(ea);
-  // Parameterisation (the model is unchanged), both axes: noise log σ_b centred in every group (in non-centred form
-  // μ_σ, s_σ move every σ_b — and on the quality axis, through a_b = exp(s_g·lg_b + log σ_b), every gain, which the
-  // data pin); gain log a_b centred in data-rich groups (≥ 20 rows), non-centred elsewhere.
+  vector[N] hea = h .* to_vector(ea);              // h on early-access rows, 0 elsewhere
   array[G] int n_rows = rep_array(0, G);
   for (r in 1:N) n_rows[grp[r]] += 1;
   array[G] int cg;
-  array[G] int cs;
-  for (b in 1:G) {
-    cg[b] = n_rows[b] >= 20;
-    cs[b] = 1;
-  }
+  for (b in 1:G) cg[b] = n_rows[b] >= 20;
   vector[G] cgv = to_vector(cg);
-  vector[G] csv = to_vector(cs);
   int nCG = sum(cg);
-  int nCS = sum(cs);
   array[nCG] int iCG;
   array[G - nCG] int iNG;
-  array[nCS] int iCS;
-  array[G - nCS] int iNS;
   {
     int p = 1; int q = 1;
     for (b in 1:G) if (cg[b]) { iCG[p] = b; p += 1; } else { iNG[q] = b; q += 1; }
-    p = 1; q = 1;
-    for (b in 1:G) if (cs[b]) { iCS[p] = b; p += 1; } else { iNS[q] = b; q += 1; }
   }
-  array[N] int j1;
-  array[N] int j2;
-  array[N] int j3;
-  for (r in 1:N) {                                 // index L + 1 = a padded zero: the row carries no such effect
-    j1[r] = k1[r] == 0 ? L1 + 1 : k1[r];
-    j2[r] = k2[r] == 0 ? L2 + 1 : k2[r];
-    j3[r] = k3[r] == 0 ? L3 + 1 : k3[r];
+  // sparse maps, compressed-row form (Stan's 1-based csr convention). Bk: N × Lk, a single 1 in each row carrying
+  // the effect (rows without it are empty: exact zero). Ak: Sk × Lk, a 1 for each member of the set (set sums).
+  int nz1 = 0; int nz2 = 0; int nz3 = 0;
+  for (r in 1:N) { nz1 += k1[r] > 0; nz2 += k2[r] > 0; nz3 += k3[r] > 0; }
+  vector[nz1] wB1 = rep_vector(1, nz1);
+  vector[nz2] wB2 = rep_vector(1, nz2);
+  vector[nz3] wB3 = rep_vector(1, nz3);
+  array[nz1] int vB1; array[nz2] int vB2; array[nz3] int vB3;
+  array[N + 1] int uB1; array[N + 1] int uB2; array[N + 1] int uB3;
+  {
+    int p1 = 1; int p2 = 1; int p3 = 1;
+    for (r in 1:N) {
+      uB1[r] = p1; uB2[r] = p2; uB3[r] = p3;
+      if (k1[r] > 0) { vB1[p1] = k1[r]; p1 += 1; }
+      if (k2[r] > 0) { vB2[p2] = k2[r]; p2 += 1; }
+      if (k3[r] > 0) { vB3[p3] = k3[r]; p3 += 1; }
+    }
+    uB1[N + 1] = p1; uB2[N + 1] = p2; uB3[N + 1] = p3;
   }
-  real theta_scale = 10 / sqrt(1 - 1.0 / C);       // marginal sd 10 for every component of a sum-to-zero vector
+  vector[L1] wA1 = rep_vector(1, L1);
+  vector[L2] wA2 = rep_vector(1, L2);
+  vector[L3] wA3 = rep_vector(1, L3);
+  array[L1] int vA1; array[L2] int vA2; array[L3] int vA3;
+  array[S1 + 1] int uA1; array[S2 + 1] int uA2; array[S3 + 1] int uA3;
+  vector[S1] n1 = rep_vector(0, S1);
+  vector[S2] n2 = rep_vector(0, S2);
+  vector[S3] n3 = rep_vector(0, S3);
+  {
+    int p = 1;
+    for (s in 1:S1) { uA1[s] = p; for (i in 1:L1) if (set1[i] == s) { vA1[p] = i; p += 1; n1[s] += 1; } }
+    uA1[S1 + 1] = p;
+    p = 1;
+    for (s in 1:S2) { uA2[s] = p; for (i in 1:L2) if (set2[i] == s) { vA2[p] = i; p += 1; n2[s] += 1; } }
+    uA2[S2 + 1] = p;
+    p = 1;
+    for (s in 1:S3) { uA3[s] = p; for (i in 1:L3) if (set3[i] == s) { vA3[p] = i; p += 1; n3[s] += 1; } }
+    uA3[S3 + 1] = p;
+  }
+  // panel read-out maps, pair (p, c) at position (c − 1)·P + p; index L + 1 = the padded zero (unknown effect)
+  int PC = P * C;
+  array[PC] int cPC; array[PC] int gPC;
+  array[PC] int j1PC; array[PC] int j2PC; array[PC] int j3PC;
+  vector[PC] q1PC; vector[PC] q2PC; vector[PC] q3PC;           // 1 = effect unknown for this pair: integrated over
+  vector[PC] muPC; vector[PC] sdPC;
+  for (c in 1:C) for (p in 1:P) {
+    int i = (c - 1) * P + p;
+    cPC[i] = c; gPC[i] = pg[p]; muPC[i] = mu[pg[p]]; sdPC[i] = sd[pg[p]];
+    j1PC[i] = r1[p, c] > 0 ? r1[p, c] : L1 + 1;  q1PC[i] = r1[p, c] == 0;
+    j2PC[i] = r2[p, c] > 0 ? r2[p, c] : L2 + 1;  q2PC[i] = r2[p, c] == 0;
+    j3PC[i] = has_v[p] && r3[p, c] > 0 ? r3[p, c] : L3 + 1;  q3PC[i] = has_v[p] && r3[p, c] == 0;
+  }
+  vector[P] muP = mu[pg];
+  vector[P] sdP = sd[pg];
+  real theta_scale = 10 / sqrt(1 - 1.0 / C);
+  real W = sum(pw);
+  real qual = 1 - cost;
 }
 parameters {
   sum_to_zero_vector[C] theta;
-  vector[G] o;                                     // group offset, flat prior
-  vector[G] lg_raw;                                // cg=0: non-centred log gain; cg=1: log a_b itself
+  vector[G] o;
+  vector[G] lg_raw;
   real<lower=0> s_g;
-  vector[L1] z1;                                   // non-centred effects
+  vector[L1] z1;
   vector[L2] z2;
   vector[L3] z3;
-  vector<lower=0>[C] tau_raw;                      // τ_c = s_τ · τ̃_c (non-centred)
+  vector<lower=0>[C] tau_raw;
   real<lower=0> s_tau;
   real<lower=0> psi;
   real<lower=0> omega;
@@ -121,99 +160,72 @@ parameters {
   array[has_ea] real log_kappa;
   real mu_sig;
   real<lower=0> s_sig;
-  vector<lower=0>[G] ls_ex;                        // excess over the floor bound: cs=0: η_b − b_b (non-centred); cs=1: log σ_b − log floor_b
+  vector<lower=0>[G] ls_ex;
 }
 transformed parameters {
-  vector[G] log_sigma = log_floor + (csv + (1 - csv) * s_sig) .* ls_ex;
+  vector[G] log_sigma = log_floor + ls_ex;
   vector[G] sigma = exp(log_sigma);
-  vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (cost ? s_g * lg_raw : s_g * lg_raw + log_sigma));
+  vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (s_g * lg_raw + qual * log_sigma));   // qual = 1 − cost (0·x = 0 exactly)
   vector[C] tau = s_tau * tau_raw;
 }
 model {
-  vector[L1 + 1] u = append_row(centre_within(z1 .* tau[own1], set1, S1), 0);
-  vector[L2 + 1] w = append_row(centre_within(z2 * psi, set2, S2), 0);
-  vector[L3 + 1] v = append_row(centre_within(z3 * omega, set3, S3), 0);
-  vector[N] x = theta[cpl] + u[j1] + w[j2] + v[j3];
-  vector[N] scale = sigma[grp] .* h;
-  if (has_ea)
-    for (r in 1:N)
-      if (ea[r]) scale[r] *= exp(0.5 * log_kappa[1]);
-  z ~ student_t(nu, o[grp] + a[grp] .* x, scale);
-
+  {
+    vector[L1] e1 = z1 .* tau[own1];
+    vector[L2] e2 = z2 * psi;
+    vector[L3] e3 = z3 * omega;
+    vector[S1] m1 = csr_matrix_times_vector(S1, L1, wA1, vA1, uA1, e1) ./ n1;
+    vector[S2] m2 = csr_matrix_times_vector(S2, L2, wA2, vA2, uA2, e2) ./ n2;
+    vector[S3] m3 = csr_matrix_times_vector(S3, L3, wA3, vA3, uA3, e3) ./ n3;
+    vector[N] x = theta[cpl]
+                  + csr_matrix_times_vector(N, L1, wB1, vB1, uB1, e1 - m1[set1])
+                  + csr_matrix_times_vector(N, L2, wB2, vB2, uB2, e2 - m2[set2])
+                  + csr_matrix_times_vector(N, L3, wB3, vB3, uB3, e3 - m3[set3]);
+    real km1 = has_ea ? exp(0.5 * log_kappa[1]) - 1 : 0;   // variance multiplier of early access, minus 1
+    vector[N] scale = sigma[grp] .* (h + hea * km1);
+    z ~ student_t(nu, o[grp] + a[grp] .* x, scale);
+  }
   theta ~ normal(0, theta_scale);
   lg_raw[iNG] ~ std_normal();
   if (cost) lg_raw[iCG] ~ normal(0, s_g); else lg_raw[iCG] ~ normal(log_sigma[iCG], s_g);
   z1 ~ std_normal();
   z2 ~ std_normal();
   z3 ~ std_normal();
-  // weakly informative half-Student-t(3, 0, 2.5) priors on every standard deviation (Gelman 2006; the brms default,
-  // Bürkner 2017); unit 1 = one typical benchmark noise on the θ scale (quality), a factor e (cost, log gains)
   s_g ~ student_t(3, 0, 2.5);
   tau_raw ~ std_normal();
   s_tau ~ student_t(3, 0, 2.5);
   psi ~ student_t(3, 0, 2.5);
   omega ~ student_t(3, 0, 2.5);
-  nu ~ gamma(2, 0.1);                              // Juárez & Steel (2010)
-  if (has_ea) log_kappa[1] ~ normal(0, 1);         // centred on no inflation
-  // noise pooled across groups on their standardised scale (invariant to any affine change of a metric):
-  // log σ_b ~ N(μ_σ, s_σ²) truncated at the floor; μ_σ flat
+  nu ~ gamma(2, 0.1);
+  if (has_ea) log_kappa[1] ~ normal(0, 1);
   s_sig ~ student_t(3, 0, 2.5);
   {
-    // truncated N(μ_σ, s_σ²) on log σ_b, b_b = (log floor_b − μ_σ)/s_σ, written without cancelling infinities:
-    // log φ(b + e) − log Φc(b) = −e (b + e/2) − log M(b)   (constant −½ log 2π dropped)
     vector[G] bnd = (log_floor - mu_sig) / s_sig;
-    vector[G] e = csv .* ls_ex / s_sig + (1 - csv) .* ls_ex;
-    for (b in 1:G) target += -e[b] * (bnd[b] + 0.5 * e[b]) - log_mills(bnd[b]);
-    target += -nCS * log(s_sig);                   // centred groups: density of log σ_b = (1/s_σ) × density of η_b
+    vector[G] e = ls_ex / s_sig;
+    target += -dot_product(e, bnd + 0.5 * e) - sum_log_mills(bnd) - G * log(s_sig);
   }
 }
 generated quantities {
-  // read-out on the log scale, per couple. Quality: log of the expected score averaged over the panel.
-  // Cost: θ (log cost on a task of typical elasticity; effects have mean 0 on the log scale).
+  // same read-outs as recommended.stan; the panel read-out is evaluated for all (panel group, couple) pairs at once,
+  // one Gauss–Hermite node at a time (vectorised inv_logit), summing the nodes in the same order as before
   vector[C] level;
-  // what one NEW source would report for the couple on the same read-out: fresh publisher × couple, publisher ×
-  // model and (per task type) couple × task-type effects drawn from their laws; no reference couple involved
-  vector[C] level_new;
   if (cost) {
     level = theta;
-    for (c in 1:C)
-      level_new[c] = theta[c] + normal_rng(0, tau[c]) + normal_rng(0, psi) + normal_rng(0, omega);
   } else {
-    vector[L1 + 1] u = append_row(centre_within(z1 .* tau[own1], set1, S1), 0);
-    vector[L2 + 1] w = append_row(centre_within(z2 * psi, set2, S2), 0);
-    vector[L3 + 1] v = append_row(centre_within(z3 * omega, set3, S3), 0);
-    real W = sum(pw);
-    for (c in 1:C) {
-      real s = 0;
-      for (p in 1:P) {
-        int b = pg[p];
-        real x = theta[c];
-        real V = 0;
-        if (r1[p, c] > 0) x += u[r1[p, c]]; else V += square(tau[c]);
-        if (r2[p, c] > 0) x += w[r2[p, c]]; else V += square(psi);
-        if (has_v[p]) {
-          if (r3[p, c] > 0) x += v[r3[p, c]]; else V += square(omega);
-        }
-        real e = 0;
-        for (k in 1:K)
-          e += ghw[k] * inv_logit(mu[b] + sd[b] * (o[b] + a[b] * (x + sqrt(V) * ghx[k])));
-        s += pw[p] * e;
-      }
-      level[c] = log(s / W);
-    }
-    {
-      vector[P] vt;
-      for (c in 1:C) {
-        real un = normal_rng(0, tau[c]);
-        real wn = normal_rng(0, psi);
-        real s = 0;
-        for (p in 1:P) vt[p] = has_v[p] ? normal_rng(0, omega) : 0;
-        for (p in 1:P) {
-          int b = pg[p];
-          s += pw[p] * inv_logit(mu[b] + sd[b] * (o[b] + a[b] * (theta[c] + un + wn + vt[ptype[p]])));
-        }
-        level_new[c] = log(s / W);
-      }
-    }
+    vector[L1] e1 = z1 .* tau[own1];
+    vector[L2] e2 = z2 * psi;
+    vector[L3] e3 = z3 * omega;
+    vector[S1] m1 = csr_matrix_times_vector(S1, L1, wA1, vA1, uA1, e1) ./ n1;
+    vector[S2] m2 = csr_matrix_times_vector(S2, L2, wA2, vA2, uA2, e2) ./ n2;
+    vector[S3] m3 = csr_matrix_times_vector(S3, L3, wA3, vA3, uA3, e3) ./ n3;
+    vector[L1 + 1] u = append_row(e1 - m1[set1], 0);
+    vector[L2 + 1] w = append_row(e2 - m2[set2], 0);
+    vector[L3 + 1] v = append_row(e3 - m3[set3], 0);
+    vector[PC] x = theta[cPC] + u[j1PC] + w[j2PC] + v[j3PC];
+    vector[PC] sV = sqrt(q1PC .* square(tau[cPC]) + q2PC * square(psi) + q3PC * square(omega));
+    vector[PC] oPC = o[gPC];
+    vector[PC] aPC = a[gPC];
+    vector[PC] e = rep_vector(0, PC);
+    for (k in 1:K) e += ghw[k] * inv_logit(muPC + sdPC .* (oPC + aPC .* (x + sV * ghx[k])));
+    level = log((to_matrix(e, P, C)' * pw) / W);
   }
 }
