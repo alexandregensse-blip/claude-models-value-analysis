@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Artifact generator. Reads data + modular css/body/js, computes derived ratio data,
-assembles index.html. Run: python3 gen/build.py  (from the scratchpad dir)."""
+"""Site generator. Reads raw-data.csv, fuses it into relative cost and quality grids (gen/lqm.py), bundles the
+CSS, HTML body and client script, and writes index.html and the root files. Run: python3 gen/build.py"""
 import csv, hashlib, html as htmlmod, json, os, re, subprocess, sys, datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.dirname(HERE)            # scratchpad
+ROOT = os.path.dirname(HERE)
 OUT  = os.path.join(ROOT, "index.html")
 
 # Publication: every absolute URL derives from SITE_URL (canonical root, trailing slash).
@@ -20,93 +20,58 @@ BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster T
 INDEXNOW_KEY = "b3573dbc1da690e66e9ef05b081b7abe"   # public by design: served as /<key>.txt, proves ownership to IndexNow (Bing…)
 
 MX = {"fable-5.1":0,"fable-5":1,"opus-5.5":2,"opus-5":3,"opus-4.8":4,"opus-4.7":5,"sonnet-5.5":6,"sonnet-5":7,"sonnet-4.6":8,"haiku-4.5":9}
-EXP = {"low","medium","high","xhigh","max"}
-EMAP = {}                               # effort aliases (braintrust T25/T50 turned out to be context sizes, not effort)
-GRID_ANCHOR = "opus-5@high"                 # (model@effort) pinned to 1.0 on both grids
-PRICE_OUT = {"fable-5.1":50,"fable-5":50,"opus-5.5":20,"opus-5":25,"opus-4.8":25,"opus-4.7":25,"sonnet-5.5":10,"sonnet-5":10,"sonnet-4.6":15,"haiku-4.5":5}  # output $/Mtok
+GRID_ANCHOR = "opus-5@high"                 # reference couple: shown as 1.0 on both axes (a display choice)
 
-def eff(e): return EMAP.get(e, e)
-def num(x):
-    try: return float(x)
-    except: return None
 
-def comparisons():
-    """One entry per matched-effort model-pair comparison in a source: cost and/or token ratio + price ratio."""
-    rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
-            if r["group"] and not r["group"].startswith("#")]
-    groups = {}
-    for r in rows: groups.setdefault(r["group"], []).append(r)
-    comps = []
-    for g, rs in groups.items():
-        cur = [r for r in rs if r["model"] in MX]
-        for i in range(len(cur)):
-            for j in range(i+1, len(cur)):
-                a, b = cur[i], cur[j]
-                if a["model"] == b["model"]: continue          # different models only
-                if MX[a["model"]] > MX[b["model"]]: a, b = b, a
-                ea, eb = eff(a["effort"]), eff(b["effort"])
-                if ea in ("nothink","priceblend") or eb in ("nothink","priceblend"): continue   # no-thinking runs + list-price blends set aside
-                haiku = "haiku-4.5" in (a["model"], b["model"])   # haiku has no effort dial (solo) → compare vs its benchmark partner
-                if ea != eb and not haiku: continue            # matched effort only (except haiku, no dial)
-                e = (ea if ea in EXP else eb) if haiku else (ea if ea in EXP else "grey")
-                pair = f'{a["model"].replace("-"," ")}/{b["model"].replace("-"," ")}'
-                pr = PRICE_OUT[a["model"]] / PRICE_OUT[b["model"]]
-                ca, cb = num(a["cost_usd"]), num(b["cost_usd"])
-                ta, tb = num(a["tokens_out"]), num(b["tokens_out"])
-                comps.append({
-                    "pair": pair, "e": e, "src": a["source"], "pr": pr,
-                    "cost": round(ca/cb,3) if (ca and cb and cb>0) else None,
-                    "tok":  round(ta/tb,3) if (ta and tb and tb>0) else None,
-                })
-    return comps
+# ---------------------------------------------------------------- fusion (gen/lqm.py; method in METHODOLOGY.md)
+FIT = dict(chains=4, sweeps=6000, burn=2000, thin=2, seed=11)      # 4 independent chains, run in parallel
+FIT_CACHE = os.path.join(HERE, "fit-cache.json")                  # refitted only when data, model or settings change
+EFFORT_ORDER = ["low", "medium", "high", "xhigh", "max", "solo"]
 
-def build_RD(comps):
-    """Measured points get C#/T# ids; a single-metric comparison is REPRODUCED on the other axis
-    via the price ratio (derived=1, keeps the origin id). cost=tok*pr ; tok=cost/pr."""
-    cm = [c for c in comps if c["cost"] is not None]
-    tm = [c for c in comps if c["tok"]  is not None]
-    def idmap(ms, key, prefix):
-        byp = {}
-        for c in ms: byp.setdefault(c["pair"], []).append(c)
-        pairs = sorted(byp, key=lambda k: (-len(byp[k]), k))
-        out, n = {}, 0
-        for pair in pairs:
-            for c in sorted(byp[pair], key=lambda z: z[key]):
-                n += 1; out[id(c)] = f"{prefix}{n}"
-        return out
-    cid, tid = idmap(cm,"cost","C"), idmap(tm,"tok","T")
-    cost, tok = [], []
-    for c in comps:
-        if c["cost"] is not None:
-            i = cid[id(c)]; cost.append([c["pair"], c["cost"], c["e"], c["src"], i, 0])
-            if c["tok"] is None:
-                tok.append([c["pair"], round(c["cost"]/c["pr"],3), c["e"], c["src"], i, 1])
-        if c["tok"] is not None:
-            i = tid[id(c)]; tok.append([c["pair"], c["tok"], c["e"], c["src"], i, 0])
-            if c["cost"] is None:
-                cost.append([c["pair"], round(c["tok"]*c["pr"],3), c["e"], c["src"], i, 1])
-    return {"cost": cost, "tok": tok}
+def fit_fingerprint():
+    h = hashlib.sha256()
+    for path in (os.path.join(ROOT, "raw-data.csv"), os.path.join(HERE, "lqm.py"), os.path.join(HERE, "catalog.py")):
+        h.update(open(path, "rb").read())
+    h.update(json.dumps([list(MX), GRID_ANCHOR, FIT], sort_keys=True).encode())
+    return h.hexdigest()
 
-def consolidated(comps):
-    """Data-driven consolidated square per (pair, effort) = MEDIAN of measured (non-grey) points at that effort.
-    Rows: [effort, costMedian|None, tokMedian|None]. Reflects the real clusters (varies by effort), unlike the
-    old separable matrix ratio which was constant across efforts."""
-    from statistics import median
-    costs, toks = {}, {}
-    for c in comps:
-        if c["e"] == "grey": continue
-        if c["cost"] is not None: costs.setdefault((c["pair"], c["e"]), []).append(c["cost"])
-        if c["tok"]  is not None: toks.setdefault((c["pair"], c["e"]), []).append(c["tok"])
-    pairs = {k[0] for k in costs} | {k[0] for k in toks}
-    out = {}
-    for pair in pairs:
-        rows = []
-        for e in ["low","medium","high","xhigh","max"]:
-            cv, tv = costs.get((pair,e)), toks.get((pair,e))
-            if cv or tv:
-                rows.append([e, round(median(cv),3) if cv else None, round(median(tv),3) if tv else None])
-        if rows: out[pair] = rows
-    return out
+def fused_grids():
+    """Relative cost and quality grids {model: {effort: [value, band low, band high]}} from the latent-quality model,
+    both relative to GRID_ANCHOR, published couples only; plus fit diagnostics."""
+    fp = fit_fingerprint()
+    try:
+        cache = json.load(open(FIT_CACHE))
+        if cache.get("fingerprint") == fp:
+            return cache["cost"], cache["quality"], cache["diagnostics"]
+    except (OSError, ValueError):
+        pass
+    import lqm
+    grids, diag = {}, {}
+    for axis, field in (("cost", "cost_usd"), ("quality", "score")):
+        groups, report, republished = lqm.load(os.path.join(ROOT, "raw-data.csv"), list(MX), field=field)
+        F = lqm.fit_chains(groups, GRID_ANCHOR, axis=axis, chains=FIT["chains"], sweeps=FIT["sweeps"],
+                           burn=FIT["burn"], thin=FIT["thin"], seed=FIT["seed"])
+        S = lqm.summarise(F)
+        grid = {}
+        for m in MX:
+            row = {e: [round(S[f"{m}@{e}"]["value"], 3), round(S[f"{m}@{e}"]["band"][0], 3), round(S[f"{m}@{e}"]["band"][1], 3)]
+                   for e in EFFORT_ORDER if f"{m}@{e}" in S and S[f"{m}@{e}"]["published"]}
+            if row: grid[m] = row
+        grids[axis] = grid
+        rh = [v["rhat"] for v in S.values() if v["rhat"] == v["rhat"]]
+        diag[axis] = dict(groups=len(groups), rows=sum(len(g["rows"]) for g in groups.values()), set_aside=dict(report),
+                          republished=[list(p) for p in republished],
+                          unpublished=sorted(c for c, v in S.items() if not v["published"]),
+                          rhat_max=round(max(rh), 3) if rh else None,
+                          credible={c: [round(x, 3) for x in v["credible"]] for c, v in sorted(S.items())})
+    json.dump(dict(fingerprint=fp, cost=grids["cost"], quality=grids["quality"], diagnostics=diag),
+              open(FIT_CACHE, "w"), indent=1, sort_keys=True)
+    return grids["cost"], grids["quality"], diag
+
+def model_label(m):
+    """'opus-5.5' → 'Opus 5.5'."""
+    name, _, version = m.partition("-")
+    return f"{name.capitalize()} {version}".strip()
 
 def groups_data():
     """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
@@ -574,186 +539,17 @@ def groups_data():
     for gk in order:
         rs = buckets[gk]; nodes, seen = [], set()
         for r in rs:
-            nid = f'{r["model"]}@{eff(r["effort"])}'
+            nid = f'{r["model"]}@{r["effort"]}'
             if nid not in seen: seen.add(nid); nodes.append(nid)
         lbl, t, h = GMETA.get(gk, (gk, "xmodel", "config ✓"))
         out.append({"s": rs[0]["source"], "g": lbl, "t": t, "h": h, "n": nodes, "u": pick_url(rs, rs[0]["source"])})
     return out
 
-def ratio_grid(field):
-    """Couple-atomic ROBUST grid for a measured field (cost_usd or score). Each (model,effort) node gets a value
-    RELATIVE to GRID_ANCHOR (opus-5@high)=1.0, built ONLY from within-benchmark ratios (never a cross-benchmark value
-    comparison). Central value AND uncertainty band come from the SAME per-benchmark estimates:
-
-      1. Per benchmark, take log(value) of every current (model,effort) couple — explicit efforts + haiku@solo
-         (haiku has no effort dial); nothink/priceblend/default excluded. Benchmarks with <2 couples are dropped
-         (a lone couple is circular — it can only echo the anchor).
-      2. Normalise each benchmark to the anchor via a per-benchmark offset:
-           - anchor present  → offset = log(anchor)               (divide by the anchor directly)
-           - anchor absent   → BRIDGE offset = MEAN residual (log value − global g) over its shared couples;
-                               such bridged benchmarks are down-weighted ×0.5 (indirect anchoring).
-         The offset is a nuisance alignment term → MEAN (non-degenerate), not median.
-      3. Each benchmark then yields one normalised estimate per couple = exp(log value − offset), with
-         weight = (0.5 if bridged) × ladder coverage × (1/3 if the run is early access), where ladder coverage runs
-         linearly from 0.5 (the benchmark measures one rung of that model) to 1.0 (it sweeps the model's full ladder).
-         DIMINISHING RETURNS PER SOURCE: a source (= publisher) with n measurements of a couple weighs √n in total,
-         shared among them, so a lab publishing 16 benchmarks with one harness counts 4, not 16. Every measurement
-         keeps its own vote. The global g[couple] is the weighted MEDIAN of those estimates (robust to
-         task-complexity outliers); the anchor is pinned to 0 each pass. Iterate.
-      4. central = exp(g[couple]) = weighted median; band = **per-side Huber spread**, centred on the median:
-         deviations (log estimate − log median) are clipped to ±1.5·MAD, then the lower/upper band = median·exp(∓RMS
-         of the clipped negative/positive deviations). This is robust (a wild outlier is capped at 1.5·MAD) yet
-         still COUNTS outliers (they widen their side up to the cap — unlike IQR which discards them), and it is
-         ASYMMETRIC (captures skew). Centred on the median → the plotted dot is always inside the band. A
-         single-benchmark node gets a degenerate [c,c,c] box. Haiku 4.5 → one 'solo' node (no effort ladder)."""
-    import math, collections
-    CUR = set(MX)                                            # 9 current models
-    EFFOK = {"low","medium","high","xhigh","max","solo"}     # 'solo' = haiku 4.5 (no discrete effort)
-    ANCHOR = GRID_ANCHOR
-    rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
-            if r["group"] and not r["group"].startswith("#")]
-    bench = collections.defaultdict(dict)                    # benchmark → couple → log(value)
-    srcs  = collections.defaultdict(lambda: collections.defaultdict(set))
-    eap   = collections.defaultdict(lambda: collections.defaultdict(set))   # sources whose run was early access
-    PUBLISHER = {"anthropic-chart": "anthropic-syscard", "anthropic-docs": "anthropic-syscard",   # one publisher = one source
-                 "anthropic-cookbook": "anthropic-syscard", "claude-dev-blog": "anthropic-syscard"}  # (Anthropic's own evals)
-    for r in rows:
-        if r["model"] not in CUR: continue
-        r["source"] = PUBLISHER.get(r["source"], r["source"])
-        e, c = eff(r["effort"]), num(r[field])
-        if e in EFFOK and c and c > 0:
-            n = f'{r["model"]}@{e}'; bench[r["group"]][n] = math.log(c); srcs[r["group"]][n].add(r["source"])
-            if "EAP-run" in r["confound"]: eap[r["group"]][n].add(r["source"])
-    for b in [b for b in bench if len(bench[b]) < 2]: del bench[b]   # drop single-couple (circular) benchmarks
-    couples = set(c for cv in bench.values() for c in cv)
-    def bridged(b): return ANCHOR not in bench[b]
-    NRUNG = {"sonnet-4.6":4, "haiku-4.5":1}                  # rungs each model exposes (default: 5, low→max)
-    def ladder(b, c):                                        # share of the model's effort ladder this benchmark sweeps:
-        m = c.split("@")[0]; n = NRUNG.get(m, 5)             # 0.5 for a single rung → 1.0 for the full ladder
-        k = sum(1 for x in bench[b] if x.split("@")[0] == m)
-        return 1.0 if n == 1 else 0.5 + 0.5*(k-1)/(n-1)
-    EAPW = 1/3                                               # an early-access (pre-release) run counts for a third
-    def wt(b, c, s): return (EAPW if s in eap[b][c] else 1.0) * (0.5 if bridged(b) else 1.0) * ladder(b, c)
-    def cap(n):     return math.sqrt(n)                      # DIMINISHING RETURNS: a source's n measurements of a couple
-    def votes(c, o):                                         # weigh √n in total (1 → 1, 4 → 2, 10 → 3.2, 36 → 6),
-        per = collections.defaultdict(list)                  # shared among them; each keeps its own vote in the median
-        for b, cv in bench.items():
-            if c in cv:
-                for s in srcs[b][c]: per[s].append((cv[c]-o[b], wt(b, c, s)))
-        return [(x, w*cap(len(v))/len(v)) for v in per.values() for x, w in v]
-    def wmedian(pairs):                                      # weighted median of [(value, weight), ...]
-        pairs = sorted(pairs); W = sum(w for _, w in pairs)
-        if W == 0: return pairs[len(pairs)//2][0]
-        acc = 0.0
-        for v, w in pairs:
-            acc += w
-            if acc >= W/2: return v
-        return pairs[-1][0]
-    g = {c: 0.0 for c in couples}
-    for _ in range(800):                                     # alternate offsets (mean) / values (weighted median)
-        o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
-        ng = {c: wmedian(votes(c, o)) for c in couples}
-        a = ng[ANCHOR]; g = {c: ng[c]-a for c in couples}    # pin anchor to 1.0 (log 0)
-    o = {b: (cv[ANCHOR] if not bridged(b) else sum(cv[c]-g[c] for c in cv)/len(cv)) for b, cv in bench.items()}
-    def cell(n):
-        if n not in couples: return None
-        E = votes(n, o)
-        med = wmedian(E); c = math.exp(med)                                # central = weighted median (unchanged)
-        if len(E) < 2: return [round(c,2), round(c,2), round(c,2)]         # single benchmark → degenerate box
-        s   = 1.4826 * wmedian([(abs(l-med), w) for l, w in E]) or 1e-9    # robust scale (MAD)
-        cap = 1.5 * s                                                      # Huber: clip each deviation to ±1.5·MAD
-        neg = [(max(l-med,-cap), w) for l, w in E if l < med]             # per-side RMS of the CLIPPED deviations →
-        pos = [(min(l-med, cap), w) for l, w in E if l > med]             # asymmetric band that COUNTS outliers but caps them
-        lo  = c*math.exp(-(sum(w*d*d for d,w in neg)/sum(w for _,w in neg))**0.5) if neg else c
-        hi  = c*math.exp( (sum(w*d*d for d,w in pos)/sum(w for _,w in pos))**0.5) if pos else c
-        return [round(c,2), round(lo,2), round(hi,2)]                      # band centred on the median → dot always inside
-    ORD = {"fable-5.1":["low","medium","high","xhigh","max"],"fable-5":["low","medium","high","xhigh","max"],
-           "opus-5.5":["low","medium","high","xhigh","max"],"opus-5":["low","medium","high","xhigh","max"],
-           "opus-4.8":["low","medium","high","xhigh","max"],
-           "sonnet-5.5":["low","medium","high","xhigh","max"],
-           "sonnet-5":["low","medium","high","xhigh","max"],"opus-4.7":["low","medium","high","xhigh","max"],
-           "sonnet-4.6":["low","medium","high","max"]}
-    out = {}
-    for m, es in ORD.items():
-        out[m] = {e: cell(f"{m}@{e}") for e in es if cell(f"{m}@{e}")}
-    hk = cell("haiku-4.5@solo")          # Haiku 4.5 = single node, no effort dial
-    if hk: out["haiku-4.5"] = {"solo": hk}
-    return out
-
-def cost_grid():    return ratio_grid("cost_usd")
-def quality_grid(): return ratio_grid("score")   # quality via same-task score RATIOS, consolidated like cost (no cross-benchmark value comparison)
-
-def regime(kept):
-    """No-think (and 'default') cost regime, COUPLE-ATOMIC. Cross-model cost ratios inside groups where BOTH
-    models ran at an effort label in `kept` (e.g. {'nothink'}). Returns per-pair median ratio + source list,
-    plus a per-model cost index anchored to the cheapest anchor via BFS over measured pair medians (log-space,
-    shortest path — NOT a global model factor). Fable/Sonnet-5 have no such rows → absent, shown as N/A."""
-    from statistics import median
-    import math
-    rows = [r for r in csv.DictReader(open(os.path.join(ROOT,"raw-data.csv")))
-            if r["group"] and not r["group"].startswith("#")]
-    groups = {}
-    for r in rows: groups.setdefault(r["group"], []).append(r)
-    pair_costs, pair_srcs = {}, {}
-    for g, rs in groups.items():
-        cur = [r for r in rs if r["model"] in MX]
-        for i in range(len(cur)):
-            for j in range(i+1, len(cur)):
-                a, b = cur[i], cur[j]
-                if a["model"] == b["model"]: continue
-                if MX[a["model"]] > MX[b["model"]]: a, b = b, a
-                ea, eb = eff(a["effort"]), eff(b["effort"])
-                if ea not in kept or eb not in kept or ea != eb: continue
-                ca, cb = num(a["cost_usd"]), num(b["cost_usd"])
-                if not (ca and cb and cb > 0): continue
-                pair = f'{a["model"].replace("-"," ")}/{b["model"].replace("-"," ")}'
-                pair_costs.setdefault(pair, []).append(round(ca/cb, 3))
-                pair_srcs.setdefault(pair, set()).add(a["source"])
-    pairs = {}
-    for p, v in pair_costs.items():
-        pairs[p] = {"med": round(median(v), 3), "n": len(pair_srcs[p]),
-                    "lo": round(min(v), 3), "hi": round(max(v), 3), "src": sorted(pair_srcs[p])}
-    # per-model index anchored to haiku-4.5=1.0 via BFS over log(median) edges (shortest path)
-    ANCHOR = "haiku 4.5"
-    adj = {}
-    for p, d in pairs.items():
-        # ratio d = cost_x / cost_y  →  logcost_y = logcost_x - log(d) ; logcost_x = logcost_y + log(d)
-        x, y = p.split("/"); lr = math.log(d["med"])
-        adj.setdefault(x, []).append((y, -lr)); adj.setdefault(y, []).append((x, lr))
-    idx, frontier = {ANCHOR: 0.0}, [ANCHOR]
-    while frontier:
-        nxt = []
-        for u in frontier:
-            for v, lr in adj.get(u, []):
-                if v not in idx: idx[v] = idx[u] + lr; nxt.append(v)
-        frontier = nxt
-    index = {m: round(math.exp(idx[m]), 2) for m in idx}
-    return {"pairs": pairs, "index": index, "anchor": ANCHOR}
-
-def regime_rows_html(nt, df):
-    """Build the §6 table body: per-pair no-think medians, then the 'default' bucket kept visually separate."""
-    def cell(d): return f'<td>{d["med"]}×</td><td>{d["n"]}</td><td>{d["lo"]}–{d["hi"]}×</td>'
-    def block(title, reg, cls, empty_note):
-        order = sorted(reg["pairs"], key=lambda p: -reg["pairs"][p]["med"])
-        if not order:
-            return f'<tr class="{cls}"><td colspan="4"><b>{title}</b> — {empty_note}</td></tr>'
-        idx = reg["index"]
-        idxline = " · ".join(f'{m}&nbsp;{idx[m]}×' for m in sorted(idx, key=lambda m: idx[m]))
-        h = f'<tr class="{cls}"><td colspan="4"><b>{title}</b> — cost index (Haiku 4.5 = 1×, chained, indicative)&nbsp;: {idxline}</td></tr>'
-        for p in order:
-            d = reg["pairs"][p]
-            h += f'<tr><td>{p}</td>{cell(d)}</tr><tr class="srcrow"><td colspan="4">{", ".join(d["src"])}</td></tr>'
-        return h
-    return (block("No thinking (nothink)", nt, "nt-head", "no measured pair") +
-            block("Default harness — thinking unstated", df, "df-head",
-                  "no cross-model matched-config pair among the current models (these sources mix efforts) → no couple-atomic ratio computable; the \u2018default\u2019 points stay out of regime."))
 
 def monotonicity_report(cg, qg):
-    """Effort is a ladder: within a model, a higher rung should not cost less than a lower one.
-    A violation is almost never a real measurement — it means the couples above and below are
-    consolidated over DIFFERENT benchmark sets, so their medians are not comparable. Printed at
-    build time so it cannot pass unnoticed (a real, documented exception exists on the quality
-    side: Sonnet 4.6 falls after `high`, which the Sonnet 5 card itself prints)."""
+    """Effort is a ladder: within a model, a higher rung should neither cost nor score less than the one below.
+    An inversion is reported at build time, never corrected: inside the band it is left as the data give it
+    (a documented exception: Sonnet 4.6 falls after `high`, which the Sonnet 5 card itself prints)."""
     ORD = ["low", "medium", "high", "xhigh", "max"]
     out = []
     for grid, name in ((cg, "cost"), (qg, "quality")):
@@ -849,7 +645,7 @@ def write_root_files(date, pre, anchor_label):
 
 {pre.get("answer-full", "")}
 
-Costs and qualities are relative to {anchor_label} = 1.00. They are computed only from ratios measured on the same task, normalised per benchmark and combined by weighted median, from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
+Costs and qualities are relative to {anchor_label} = 1.00. They are fused from measurements taken on the same task by a latent-quality model that estimates each benchmark's own scale (method: METHODOLOGY.md in the source repository), from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
 
 ## Report
 
@@ -898,44 +694,29 @@ def inject(body, pre):
     return body
 
 def main():
-    comps = comparisons()
-    RD = build_RD(comps)
-    CG = cost_grid()
-    QG = quality_grid()
+    CG, QG, DIAG = fused_grids()
     GD = groups_data()
-    NT = regime({"nothink"})
-    DF = regime({"default"})
-    CONS = consolidated(comps)
-    # id map for reference
-    with open(os.path.join(ROOT,"ratio-ids.md"),"w") as f:
-        f.write("# Ratio-point ID map (generated by build.py)\n")
-        for label,key in [("COST","cost"),("TOKENS","tok")]:
-            f.write(f"\n## {label}\n")
-            for p in RD[key]:
-                f.write(f"{p[4]}: {p[0]}  {p[1]}x  effort={p[2]}  src={p[3]}\n")
 
     css  = open(os.path.join(HERE,"style.css")).read()
     body = open(os.path.join(HERE,"body.html")).read()
     app  = open(os.path.join(HERE,"app.js")).read()
-    app  = app.replace("__RATIO_DATA__", json.dumps(RD, separators=(",",":")))
-    app  = app.replace("__CONS_DATA__", json.dumps(CONS, separators=(",",":")))
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
     app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
     am, ae = GRID_ANCHOR.split("@")
-    alabel = {"opus-5.5":"Opus 5.5","opus-5":"Opus 5","opus-4.8":"Opus 4.8","fable-5.1":"Fable 5.1","fable-5":"Fable 5","sonnet-5.5":"Sonnet 5.5","sonnet-5":"Sonnet 5"}[am]
+    alabel = model_label(am)
     app  = app.replace("__ANCHOR_JS__", json.dumps({"m": am, "e": ae, "label": f"{alabel} @{ae}"}))
     body = body.replace("__ANCHOR_HDR__", f"{alabel.replace(' ','&nbsp;')} · {ae}")
     body = body.replace("__ANCHOR__", f"{alabel.replace(' ','&nbsp;')}&nbsp;@{ae}")
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
-    body = body.replace("__NOTHINK_ROWS__", regime_rows_html(NT, DF))
-    body = body.replace("__NSAMETASK__", str(len(RD["cost"])))   # same-task cost-ratio measurement points (dynamic)
+    body = body.replace("__REPO__", REPO_URL)
+    body = body.replace("__NCOSTROWS__", str(DIAG["cost"]["rows"])).replace("__NSCOREROWS__", str(DIAG["quality"]["rows"]))
     ncpl = sum(len(v) for v in CG.values())                      # (model, effort) couples carried by the grids
     span = max(c[0] for v in CG.values() for c in v.values()) / min(c[0] for v in CG.values() for c in v.values())
     body = body.replace("__NCOUPLES__", str(ncpl))
     body = body.replace("__COSTSPAN__", str(round(span)))
     pre  = prerender(app, css)
     body = inject(body, pre)
-    date = content_date(content_fingerprint(body, pre, [RD, CONS, CG, QG, GD, GRID_ANCHOR]))
+    date = content_date(content_fingerprint(body, pre, [CG, QG, GD, GRID_ANCHOR]))
     body = body.replace("__GENDATE__", date.strftime("%d %b %Y"))   # last change to the content (text, figures, data)
     html = (
         "<!doctype html>\n"
@@ -948,7 +729,11 @@ def main():
     )
     open(OUT,"w",encoding="utf-8").write(html)
     write_root_files(date, pre, f"{alabel} @{ae}")
-    print(f"built {OUT}  ({len(html)} bytes)  cost-pts={len(RD['cost'])} tok-pts={len(RD['tok'])}")
+    print(f"built {OUT}  ({len(html)} bytes)")
+    for axis in ("cost", "quality"):
+        d = DIAG[axis]
+        print(f"  {axis}: {d['rows']} rows in {d['groups']} groups · set aside {d['set_aside']} · R-hat max {d['rhat_max']}"
+              f" · unpublished {d['unpublished']}")
     viol = monotonicity_report(CG, QG)
     known = {("quality", "sonnet-4.6", "high", "max")}         # printed by the Sonnet 5 card itself — keyed on the rungs, not
     import re                                                   # the values, which move with the anchor and the data
@@ -956,8 +741,6 @@ def main():
         m = re.match(r"(\w+): (\S+) (\w+)\([\d.]+\) > (\w+)\(", v); return m.groups() if m else None
     for v in viol:
         print(("  effort-ladder OK (documented): " if key(v) in known else "  !! EFFORT LADDER INVERTED: ") + v)
-    print(f"  no-think pairs={list(NT['pairs'])}  index={NT['index']}")
-    print(f"  default  pairs={list(DF['pairs'])}  index={DF['index']}")
 
 if __name__ == "__main__":
     main()

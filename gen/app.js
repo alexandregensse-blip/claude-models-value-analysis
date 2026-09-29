@@ -27,10 +27,10 @@ function solveN(A,b){ const n=b.length, M=A.map((r,i)=>[...r,b[i]]);
     for(let r=0;r<n;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<=n;k++) M[r][k]-=f*M[c][k]; } }
   return M.map((r,i)=>r[n]/M[i][i]); }
 
-// COST & QUALITY grids: relative [central, ci_lo, ci_hi] per (model, effort), anchored ANCHOR = 1.0,
-// computed in build.py (cost_grid / ratio_grid) from measured same-task ratios.
+// COST & QUALITY grids: relative [centre, band_lo, band_hi] per (model, effort), ANCHOR = 1.0, computed in build.py by
+// the latent-quality model (gen/lqm.py): centre = posterior median, band = what one new benchmark would report (16–84 %).
 const COSTGRID=__COSTGRID__;
-const QUALGRID=__QUALGRID__;   // {model:{effort:[central, lo, hi]}} — median + robust Huber ±1.5·MAD band (asymmetric, centred on median)
+const QUALGRID=__QUALGRID__;   // {model:{effort:[centre, lo, hi]}}
 
 // Older-model toggle: the grids keep a full copy; hiding a model removes it from every view and every fit
 // (frontier, price curve, tiers, matrix), exactly as if it had not been measured.
@@ -84,7 +84,7 @@ function axisTitle(s,x,y,main,sub,rot){
 function qGrid(s,Y,mL,iw,mT,ih){ [0.4,0.5,0.6,0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
   s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?MODELS[ANCHOR.m].c:'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
   const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2);s.appendChild(t); }); }
-// Asymmetric Huber uncertainty ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the median dot, clipped
+// Asymmetric band ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the point, clipped
 // to the plot, faint by default. Returns the array used by hoverTip() to reveal them.
 function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("clipPath",{id:cid});
   cp.appendChild(el("rect",{x:mL,y:mT,width:iw,height:ih})); defs.appendChild(cp); s.appendChild(defs);
@@ -201,7 +201,7 @@ function fitPriceEnvelope(pts){
   return t=>{ const u=t-T0; return co[0]+co[1]*u+co[2]*(Math.exp(bk*u)-1)/bk; }; }
 // Distance of a couple to the price envelope, in LOG-COST: r = log10(price the frontier charges for that quality)
 // − log10(what the couple actually costs). Positive = cheaper than the frontier price, i.e. good value. The interval
-// is propagated by the SAME 5-point weighting used to fit the envelope — the couple's centre (½) and its four CI
+// is propagated by the SAME 5-point weighting used to fit the envelope — the couple's centre (½) and its four band
 // extremities (⅛ each) — so a wide interval carries the couple toward what the envelope charges across its whole box.
 // Averaging in LOG space is what makes the exponential below a clean ratio (it is a weighted geometric mean).
 // Split into the two halves so a tier can weight cost differently from quality (see TIERS.gam):
@@ -215,8 +215,8 @@ function valueResidual(gevT,p){ const {G,C}=valueParts(gevT,p); return G-C; }
 // RATIO: 384 reads "3.8× the value-for-money of the anchor", 45 reads "0.45×" — every value above 100 means something,
 // which a linear stretch of a bounded score could not offer. Unbounded above by construction: that is the cost of an
 // interpretable multiple, and it is why the anchor can sit anywhere in the ranking without breaking the scale.
-// The previous tanh squash is deliberately gone — a ratio cannot be squashed without destroying the reading. A wide
-// interval therefore now SHIFTS the index (through the weighting above) rather than damping it toward neutral.
+// A ratio cannot be squashed without destroying the reading, so a wide band SHIFTS the index (through the weighting
+// above) rather than damping it toward neutral.
 const valueIndex=(r,rAnc)=>100*Math.pow(10,r-rAnc);
 const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANCHOR.e); return a?valueResidual(gevT,a):0; };
 // Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
@@ -256,7 +256,7 @@ function drawTierBandLabels(s,Y,mL,iw,mT,ih){                             // nam
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
   const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
-  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID (median + Huber ±1.5·MAD band). Haiku excluded here. Bounds DYNAMIC.
+  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID. Haiku excluded here. Bounds DYNAMIC.
   const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
   for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
     for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
@@ -290,12 +290,12 @@ function drawB(){
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
     visibleModels().filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
-    +(showOvals?`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = robust uncertainty (Huber ±1.5·MAD), asymmetric · <b>hover a point</b> for its identity</span>`
+    +(showOvals?`<span class="lg"><span class="sw" style="opacity:.5;background:transparent;border:1px solid var(--ink);border-radius:50%"></span>oval = band (what one new benchmark would report), asymmetric · <b>hover a point</b> for its identity</span>`
                :`<span class="lg"><b>hover a point</b> for its identity</span>`);
 }
 
 // ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
-// Same shared machinery as the §1 landscape: symlog quality axis, faint Huber ovals (hover to reveal),
+// Same shared machinery as the §1 landscape: symlog quality axis, faint band ovals (hover to reveal),
 // point tooltip, force-directed frontier labels. Full body width.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
@@ -371,8 +371,8 @@ function fillScoreTable(scored){
     tb.appendChild(tr); }); }
 // ---- Central-complexity tiers + hidden-prominence crown (data-driven from COSTGRID × QUALGRID) ----
 // Each tier targets a CENTRAL complexity q* (relative quality). Among the Pareto-frontier couples we pick the one
-// maximising a proximity-weighted yield:  score(p) = exp(−((q−q*)/σ)²) · yield, with yield = quality/cost. The Gaussian
-// focuses on couples near the target complexity; yield (which falls with cost) tilts the choice toward value.
+// maximising window(q) × 10^(G − γ·C): the half-bell window below focuses on couples near the target complexity, the
+// tilted value index (see PER-TIER COST SENSITIVITY) favours value.
 // The CROWN uses the HIDDEN PROMINENCE: hid(n) = 2·Sₙ − S_prev − S_next along the frontier (S = signed distance to the
 // envelope, as in the value-score table; endpoints get 0). It marks the sharpest knee — the standout couple overall.
 // q = target complexity, sig = Gaussian width — BOTH live-adjustable via the tuner (drawTierTuner); the proximity
@@ -393,16 +393,13 @@ const TIERS=[
   {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:0.80, gam:0.80, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
 // DATA-DERIVED tier windows. Model quality drifts upward release after release: the weakest couple slowly improves
-// and the best one sets a new ceiling, so hardcoded q* go stale — the shipped 1.25 for the top tier had drifted ABOVE
-// the best couple actually available (1.19), leaving that tier aiming at a quality nothing reaches. Centres are spread
+// and the best one sets a new ceiling, so fixed q* would go stale and could aim at a quality nothing reaches. Centres are spread
 // evenly across the FRONTIER's quality span in the dilated metric T (the one the Gaussian and the chart already use),
 // from the weakest selectable couple to the strongest — so the bottom tracks the floor as it rises, and the top always
 // sits exactly on the best model available rather than on a number fixed at some past release.
 // sigma follows the spacing on a single rule: adjacent windows cross at HALF weight exactly midway between their
 // centres — exp(−((gap/2)/sig)²) = ½ ⟹ sig = gap ⁄ (2·√ln2). The four windows partition the axis instead of
 // overlapping arbitrarily, and sigma rescales automatically when the span widens or narrows.
-// Sanity check: replaying the pre-Opus-5 grids through this rule returns q* = 0.59 / 0.93 / 1.02 / 1.23, reproducing
-// the 0.59 / 0.93 / 1.01 / 1.20 that had been hand-tuned for exactly that data.
 let TIERQ={qmn:0.55,qmx:1.30};
 function tierDefaults(){
   const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
@@ -429,18 +426,15 @@ function tierPicks(){
   // meaning "this couple stands out from its two frontier neighbours". Crown SELECTION only.
   front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
   // DISPLAYED SCORE = the value index, anchored so ANCHOR = 100 (see valueIndex). The anchor is read from
-  // the FULL set of couples, not the frontier: a new model can push it OFF the Pareto frontier — Opus 5 does — but
+  // the FULL set of couples, not the frontier: a new model can push it OFF the Pareto frontier but
   // never out of the full set, so the reference always exists. And because the index is a ratio rather than a stretch
   // between two extremes, the anchor sitting low in the ranking no longer distorts anything above it.
   const rAnc=anchorResidual(gevT,rows);
   rows.forEach(p=>p.norm=valueIndex(p.S,rAnc));
   const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
-  // Tier winner = the frontier couple maximising PROXIMITY × VALUE INDEX. It used to be proximity × (quality ÷ cost),
-  // the one raw ratio in the whole report: everything else — the price curve, the residual, the Pareto distance —
-  // works in log-cost. That mattered, it did not just offend symmetry. Across the cloud quality spans a factor 2.0
-  // while cost spans 14.4, so a linear q/c is driven almost entirely by cost and tilts every tier toward the cheapest
-  // couple: it collapsed the top tier onto the same pick as the one below it (3 distinct picks instead of 4).
-  // Using the index also makes the number a card SHOWS the criterion that chose it.
+  // Tier winner = the frontier couple maximising PROXIMITY × VALUE INDEX, in log-cost like the price curve, the residual
+  // and the Pareto distance: quality spans a factor of about 2 across the cloud against more than 10 for cost, so a
+  // linear quality ÷ cost would be driven almost entirely by cost. The number a card shows is the criterion that chose it.
   // PER-TIER COST SENSITIVITY. Cost does not weigh the same at every complexity: on throwaway work you want the
   // cheapest thing that clears the bar, on research-grade work a few extra points of capability are worth paying for.
   // Each tier therefore ranks on G − gam·C rather than G − C, i.e. on price-curve-credit ⁄ cost^gam. gam > 1 punishes

@@ -2,8 +2,82 @@
 
 Notes from each source pass and method change: what was searched, what was admitted or corrected,
 and what moved. The measured rows themselves are in `raw-data.csv`; the method is summarised in the README
-(*How the numbers are built*). Section headings are kept as written at the time, so figures inside an older
+(*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
+
+## Method change: a latent-quality fusion model
+
+**Why.** Relative quality was the weighted median of per-benchmark score ratios to the anchor, which assumes every
+benchmark is proportional to quality with the same gain. It is not: fitting one free slope per benchmark under that
+assumption gave slopes from 0.05 to 4 (10th–90th percentile), about 3 on hard benchmarks (mean score under 30 %) and
+0.5 on saturated ones (70 % and above). The median of ratios therefore mixed rulers graduated differently, pulled
+couples tested mostly on hard benchmarks away from the anchor, and widened the bands.
+
+**What.** Both grids now come from one model (`gen/lqm.py`, full description in `METHODOLOGY.md`): every metric on
+its natural scale (empirical logit for a bounded score, log for money, points and cost, as is for an Elo or an
+unknown composite); every group with its own offset, gain and noise; one latent value per couple; publisher × couple,
+publisher × model and couple × task-type effects; Student-t noise; early-access runs at a third of the weight;
+Gibbs sampling, four chains in parallel, cached by a fingerprint of the data. Quality is shown as the mean predicted
+score over the benchmark panel relative to the reference couple, cost as the cost on a task of typical size; the
+band is what one new benchmark would report. The reference couple is a display choice.
+
+**What goes.** Score ratios and their weighted median, the √n rule per publisher, the ×0.5 weight of bridged
+benchmarks, the 0.5→1 ladder-coverage weight and the Huber band: the model's own information weighting replaces all
+of them. Also removed: `ratio-ids.md` and the no-think / default regime tables, which the page no longer showed.
+
+**Tried and set aside.**
+- Showing quality as exp(κ·θ), κ the slope at the anchor: the unit depended on the anchor (×3.4 with Haiku 4.5 as
+  anchor), so relative values changed with the reference.
+- Showing quality as the median, over benchmarks, of predicted score ratios: it extrapolated weak couples to the floor
+  of hard benchmarks they never sat.
+- Pooling the gains of groups that run the same benchmark. The gains of one benchmark do agree (about ±20 %, against
+  more than an order of magnitude across benchmarks), but multiplying two priors on one gain broke the sampler's
+  calibration, and pooling gains in metric units breaks the model's affine invariance. Its effect on the grids was
+  0.4 % (median), 2.9 % at most. Families remain, to detect republished numbers and to count a benchmark once in the
+  display panel.
+
+**Found in the data.**
+- `scfrontiercode` mixes the Sonnet 5 card's digitised `score%` with Cognition's `weighted-rubric`: the rubric score
+  is a 0–100 percentage and is now read as one. A group whose metrics differ in nature now stops the build.
+- `nnrlog-game` (`playable-of-2`, values written as percentages) and `forgep2` (`score/10`, values reaching 100):
+  labels contradicted by their values; such groups are read as unknown scales, and the build reports them.
+- 46 score rows were counted twice: the same experiment reprinted in two documents, mostly Anthropic system cards
+  repeating an earlier card's reference column (HLE with tools, DeepSearchQA, OSWorld). They now count once.
+  Two cost rows likewise.
+- Sonnet 4.6 `xhigh` is measured by one publisher, through an unverified effort mapping; a couple now needs two
+  publishers to be shown.
+
+**Review.** An agent with no context reviewed the method, the code and the data. The sampler was correct; the
+display, the band (51 % of observed ratios inside it, 12 % far from the anchor) and the single-publisher couple were
+not; the cost gain fixed at 1 was contradicted by the data (per-benchmark slopes 0.6–1.7); the logit clip produced
+residuals of −17σ on a 7-task benchmark. All were changed as described above; the band now covers 82 % (quality)
+and 80 % (cost) of the observed ratios.
+
+**What moved, same data** (Sonnet 5.5 included). Quality, then cost, relative to Opus 5 @high:
+
+| Couple | Quality before | Quality after | Cost before | Cost after |
+|---|---|---|---|---|
+| Sonnet 5.5 `low` | 0.75 | 0.81 | 0.08 | 0.11 |
+| Sonnet 5.5 `high` | 0.98 | 1.00 | 0.19 | 0.22 |
+| Sonnet 5.5 `max` | 1.04 | 1.08 | 1.45 | 1.80 |
+| Opus 5.5 `low` | 0.98 | 0.95 | 0.17 | 0.23 |
+| Opus 5.5 `high` | 1.07 | 1.09 | 0.45 | 0.48 |
+| Opus 5.5 `max` | 1.13 | 1.13 | 1.51 | 2.12 |
+| Fable 5.1 `max` | 1.07 | 1.07 | 2.47 | 2.97 |
+| Sonnet 5 `max` | 0.79 | 0.89 | 1.10 | 1.08 |
+| Sonnet 4.6 `low` | 0.52 | 0.60 | 0.24 | 0.35 |
+| Haiku 4.5 | 0.57 | 0.52 | 0.13 | 0.11 |
+
+Sonnet 5 `max` no longer falls below its `xhigh`, and Opus 4.7 `xhigh` no longer below its `high`. One ladder
+inversion appears on cost, Sonnet 4.6 `high` 0.70 > `max` 0.69, inside the band. The picks: best overall Sonnet 5.5
+`xhigh` → Opus 5.5 `xhigh`; grunt work Sonnet 5.5 `medium` → `low`; everyday Opus 5.5 `low` → Sonnet 5.5 `high`;
+advanced reasoning Opus 5.5 `medium` → Sonnet 5.5 `high`; cutting-edge Sonnet 5.5 `xhigh` → Opus 5.5 `high`.
+
+**Checks** (scripts in `gen/validation/`): held-out prediction error 1.9 points (median) against 4.7 for the ratio
+baseline; scale distortion on synthetic data with known truth equal to the baseline's where ratios are exact and
+about half otherwise; uniform calibration ranks on both axes, with a deliberately wrong prior rejected; changing the
+reference couple moves values within Monte Carlo error; removing the largest publisher moves quality by 1.9 % at
+most and some costs by up to 13 %.
 
 ## Thirteenth pass: Sonnet 5.5, second salvo
 

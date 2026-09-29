@@ -16,21 +16,31 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 
 ## What the report shows
 
-1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Robust uncertainty ovals. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
-2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell a weighted median (diminishing returns per source) with a robust CI.
+1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional band ovals (what one new benchmark would report). A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
+2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell with its band.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
-4. **Method** — how the numbers and the uncertainty band are built.
+4. **Method** — how the numbers and the bands are built; the full methodology is in [`METHODOLOGY.md`](METHODOLOGY.md).
 
 ## How the numbers are built
 
-You cannot compare raw dollars across sources (task sizes differ), so:
+Scores from different benchmarks do not share a scale, and raw dollars from different tasks are not comparable, so
+the report fuses the measurements with a **latent-quality model** (`gen/lqm.py`). In short:
 
-1. **Same-task ratios only.** Keep sources that measured ≥2 `(model, effort)` couples *on the same task*; their ratio cancels task-size variance.
-2. **The `(model, effort)` couple is atomic** — no `model × effort` separability is assumed.
-3. **Per-benchmark normalisation → weighted median, diminishing returns per source.** Within each benchmark, divide by the anchor (Opus 5 @high) or bridge through shared couples; weight each measurement ×0.5 if bridged, ×0.5→1 by how much of the model's effort ladder it sweeps, and ×⅓ for a run dated before the model's release (early access). A source (one publisher) with n measurements of a couple weighs **√n** in total, shared among them; each cell is the weighted median across all measurements.
-4. **Robust CI** — a per-side Huber spread (deviations clipped to ±1.5·MAD): robust to an outlier benchmark yet still widened by it.
+1. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness.
+2. **Each metric on its natural scale.** Logit for a bounded score, log for money, points and cost, as is for an Elo
+   or an unknown composite — read from the metric's label, never from the benchmark's identity.
+3. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
+   matter); every `(model, effort)` couple has one latent quality and one latent cost, atomic — no model × effort
+   separability is assumed. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
+   or one kind of task from tilting the result. Student-t noise; an early-access run counts for a third.
+4. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
+   publisher's weight saturates at its own systematic effect. Republished numbers count once.
+5. **Output**: quality = mean predicted score over the benchmark panel relative to the reference couple (Opus 5 @high),
+   cost = cost on a task of typical size relative to it; band = what one new benchmark would report (16–84 %). A
+   couple measured by a single publisher is not shown.
 
-Value scores add a second layer, all computed client-side from the grids: a price-envelope fit (`log₁₀ cost = g(quality)`), a signed cost-distance score, its local prominence along the frontier, and the tier picks — all **uncertainty-aware** (each couple enters as its centre plus its four CI extremities).
+The full procedure — collection rules, scales, model, weighting, estimation, price curve, value index, tiers and
+crown — is in [`METHODOLOGY.md`](METHODOLOGY.md); the checks are reproducible with the scripts in `gen/validation/`.
 
 ## Files
 
@@ -38,11 +48,15 @@ Value scores add a second layer, all computed client-side from the grids: a pric
 |---|---|
 | `index.html` | The built interactive report (self-contained; open in a browser). |
 | `gen/build.py` | **Generator** — reads the data, computes the grids, and assembles `index.html`. Run: `python3 gen/build.py`. |
+| `gen/lqm.py` | The fusion model (latent quality and cost per couple), pure standard library. |
+| `gen/catalog.py` | Benchmark families and publisher outlets used by the fusion. |
+| `gen/fit-cache.json` | The fitted grids and diagnostics, keyed by a fingerprint of the data, the model and its settings: the build refits (about 6 minutes) only when one of them changes. Commit it with the rebuilt page. |
+| `gen/validation/` | Scripts that reproduce the method's checks (held-out prediction, known-truth recovery, sampler calibration, band coverage, reference invariance, sensitivity). |
+| `METHODOLOGY.md` | The full methodology, from collection to the tier picks. |
 | `gen/{style.css, body.html, app.js}` | Source modules the generator bundles (CSS, HTML body, client-side SVG rendering + interactions). |
 | `gen/prerender.js` | Runs `app.js` at build time in Node (fake DOM) so the conclusions, tables and counts are in the served HTML for crawlers that do not run JavaScript. |
 | `PASSES.md` | Research log: every source pass and method change, with what it admitted, corrected and moved. |
 | `raw-data.csv` | The measured rows (source, model, effort, task, harness, cost, tokens, score, confound, ref) — the single source of truth. |
-| `ratio-ids.md` | Stable IDs for the same-task ratio points (regenerated by the build). |
 | `gen/content-date.json` | Fingerprint and date of the last change to the page's content (text, figures, data), written by the build: the "Updated" date, JSON-LD `dateModified` and the sitemap `lastmod` move only when the content changes, not on a code, style or icon change. Commit it with the rebuilt page. |
 | `robots.txt`, `sitemap.xml`, `llms.txt`, `b3573dbc1da690e66e9ef05b081b7abe.txt` | Root files for search engines and AI assistants, written by the build from the same data as the page (the last one is the public IndexNow key). |
 | `favicon.svg`, `favicon.png`, `og-image.png` | Icon (SVG for browsers, 96 × 96 PNG for Google Search, redrawn by `gen/favicon_png.py` when the SVG changes) and share image; `gen/og_image.py` redraws the latter (rerun on a title change). |
@@ -66,6 +80,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.09.23c` | 23 Sep 2026 | *Uncertainty ovals* become a display switch, off by default, on both charts (the axes still span the oval extents, so toggling does not rescale). Third Opus 5.5 source pass: eight more Vals AI benchmarks (Finance Agent v2, Legal Research, MedScribe, Tax Agent, Public Benefits, Vibe Code Bench 1-100, IOI, MysteryMechanism) — Opus 5.5 on 125 rows, 42 groups; its `max` rung is now dominated by its own `xhigh`. Early-access runs flagged, not removed, pending a rule — 1490 measured rows, 95 sources, 198 comparison groups |
 | `v2026.09.23d` | 23 Sep 2026 | **Method**: a source's n measurements of a couple weigh √n together (one publisher = one source: Anthropic's blog chart and system cards merged); early-access runs count for a third, and runebench's Opus 5.5 runs return. **Tiers**: half-bell windows (only a shortfall below the target is penalised; a small saturating bonus above), tier bands follow and are also on the Pareto chart. Header counts sources, benchmarks and measurements; `xHigh` capitalisation. Fourth pass (ten agents, post-release publications only): nothing admitted. Fifth pass: Playcode MacBook SVG, Senko Rašić's vibecode games, Vals RSI Index, bug-hunt-bench Opus 5.5 `low`. Opus 5.5 holds the frontier at every rung, with Haiku 4.5 — 93 sources, 196 benchmarks, 1479 measurements |
 | `v2026.09.27` | 27 Sep 2026 | seventh to eleventh source passes (four agent salvos plus a closed-network pass; details in `PASSES.md`). Adds ARC Prize's Opus 5.5 ladder, seven more Artificial Analysis index components, DeepSWE's primary JSON, the Anthropic docs and claude.dev effort sweeps, SWE-bench's official board, LMArena's agent board and some sixty other sources; every held github, arXiv and Vals row re-derived from its primary, with errors corrected (posttrain, skillsbench, slopcode, ceobench, token totals, effort labels). **Sonnet 5 re-priced at \$2/\$10** wherever a source had used \$3/\$15 (the increase never happened). Braintrust's T25/T50 turn out to be context sizes, not effort. Research log moved to `PASSES.md`. Opus 5.5 holds the frontier with Haiku 4.5; `low` is the best value — 160 sources, 432 benchmarks, 2894 measurements |
+| `v2026.09.29` | 29 Sep 2026 | adds **Sonnet 5.5** (twelfth and thirteenth passes, in `PASSES.md`). **Method**: both grids now come from a latent-quality model (`gen/lqm.py`, described in `METHODOLOGY.md`) that estimates each benchmark's own zero, gain and noise instead of averaging score ratios; publisher × couple, publisher × model and couple × task-type effects; weights follow from the data; republished numbers count once; quality is the mean predicted score over the benchmark panel; the band is what one new benchmark would report; a couple needs two publishers to be shown. Validation scripts in `gen/validation/`. Opus 5.5 `xhigh` is the best value overall, Sonnet 5.5 holds the lower tiers — 172 sources, 491 benchmarks, 3435 measurements |
 
 The notes behind each version — every source pass, what it admitted, rejected or corrected, and each method
 change — are in [`PASSES.md`](PASSES.md).
@@ -80,13 +95,11 @@ No dependencies beyond the Python 3 standard library and Node.js (any recent ver
 
 ## Limitations
 
-- **Task-type variance dominates** cross-model ratios; a single consolidated number hides a real spread, which is why every cell carries a CI.
-- **Per-effort granularity is thin** — most cells rest on a few independent sources.
-- **Public-data ceiling** — genuine independent measurements are scarce; confidence is capped at medium-high. An internal run on a representative workload remains the intended final validation.
-- **Fable 5.1 no longer leans on the vendor**, three weeks after launch. It went from 39 rows to **125**, and Anthropic's own system card is now 30 of them — under a quarter, against 25 of 39 at launch. Twenty-one other sources carry it, the substantial ones being Cognition's FrontierCode (both subsets, both board versions), Cursor's CursorBench 3.2 *and* 4.0, Artificial Analysis, Terminal-Bench 4.0 and ARC Prize. Six of the digitized card sweeps were **cross-checked against numbers printed in the card's own text or on the launch page** (FrontierCode 63.6 % at medium, CursorBench 73.4/70.5/70.0, HLE 65.0/63.8/63.6 and 60.9/57.8/56.6, OSWorld 77.9/72.9/75.4) and matched to within 0.05 points, which is the calibration check the method calls for. What has *not* improved is the independent-community side: the write-ups measuring cost and quality on one task are still nearly all vendors and leaderboards.
-- **Opus 5 still leans on the vendor**, though less than at first: 60 of its 125 rows come from Anthropic's own system cards (seven same-task effort sweeps, digitized from the published charts). Seven independent groups now cover it — Artificial Analysis (a full low→max sweep of the Intelligence Index, with cost *and* output tokens; plus AA-Briefcase and the per-task index), Vals AI (a five-tier sweep on Vibe Code Bench, plus the Vals Index composite), swe-rebench and CursorBench 3.2 — which pulled its cost interval at low effort from [0.38, 0.97] to [0.42, 0.51]. Expect further tightening as third-party runs accumulate.
-- **The third-party field is thin for each model's first weeks.** Six days after Fable 5.1 shipped, only three independent groups had published cost *and* quality on the same task (Artificial Analysis, Vals AI, Cursor); the ARC Prize leaderboard, SWE-bench Pro and Terminal-Bench all had scores but no measured spend, and the launch write-ups reproduce Anthropic's or AA's figures rather than running their own. Expect Fable 5.1's intervals to tighten as third-party runs accumulate, as Opus 5's did.
-- **The third-party field looked close to exhausted** for the Claude 5 generation before this release. A systematic sweep on 1 Aug 2026 across preprints (arXiv/HAL/OpenReview), public leaderboards, community write-ups and agent-tooling vendors found only two admissible additions. Most candidates fail the same-task rule in one of three ways: scores published without cost (Epoch AI, Scale SEAL, ARC Prize, Harvey, most arXiv evaluations), cost quoted as list price rather than measured spend (llm-stats FrontierCode), or cost and quality reported on *different* tasks (Composio). Two further sources were deliberately excluded rather than admitted: ARC Prize, because the widely-quoted $0.70/$2.06 per task appears only in secondary summaries and not on the results page itself; and a Zenn effort sweep of Opus 5, because its quality saturated at 3/3 on a toy task and its cost covered output tokens only — admitting it would have flattened Opus 5's quality curve with a measurement taken in a complexity regime the model does not segment.
+- **One number per couple hides the task type.** The fusion keeps a couple tested mostly on one kind of task from inheriting that task's advantage, but the ranking can still differ on a single task type; the band shows how much one new benchmark can disagree.
+- **Few independent sources per couple.** Most couples rest on a handful of publishers; a couple measured by few, disagreeing publishers keeps a wide band, and one measured by a single publisher is not shown.
+- **A new model starts on its vendor's numbers.** In its first weeks a model is measured mostly by its vendor and a few leaderboards; its band narrows as third-party runs arrive.
+- **Which couples a source measures is not random.** The fusion absorbs the level and the type of the tasks each source chose, not a selection on another axis.
+- **Public-data ceiling.** Independent measurements of cost *and* quality on the same task are scarce; an internal run on a representative workload remains the intended final validation.
 
 Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Prices reflect published rates at time of writing.
 
