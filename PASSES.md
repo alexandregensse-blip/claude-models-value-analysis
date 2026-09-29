@@ -5,6 +5,69 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*). Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Twelfth pass: Sonnet 5.5
+
+Sonnet 5.5 went GA on 28 Sep 2026 at the Sonnet 5 rate (\$2 / \$10 per MTok, cache read \$0.20, write \$2.50 for
+5 min or \$4 for 1 h), with the five rungs `low`→`max` (`high` by default on the API, `medium` in Claude Code). Thinking
+cannot be disabled: the lowest setting is `between_tools`, filed `nothink`. Five agents (Opus) searched it on
+29 Sep: Anthropic's own material, AA/Vals/ARC-type boards, coding and agent boards, the repos and practitioners the
+repo already follows, and the open web. **160 → 168 sources, 432 → 481 benchmarks, 2894 → 3338 measurements.**
+Sonnet 5.5 rests on 247 measurements in 110 benchmarks from 23 sources.
+
+- **Anthropic.** The launch page carries its four cost × effort charts as CSV in its payload: Terminal-Bench 4.0 joins
+  `an55tb40` (the Opus 5.5 series is the same run; Sonnet 5 scores only 3–10 % there, unexplained, flagged). The
+  FrontierCode, CursorBench and AA-Briefcase charts restate third-party primaries and are not ingested twice. The
+  system card (148 pages) gives eight cost × effort sweeps, digitized and checked against the Opus 5.5 points already
+  in the repo (≤ 0.3 % on cost): Sonnet 5.5 and Sonnet 5 join `sc55hlet`, `sc55draco`, `sc55wandr`, `sc55bcad`,
+  `sc55osw`, `chartogt`/`chartogn`/`sc55chartq`; new groups for HLE without tools, OSWorld strict, BenchCAD and
+  Chartography without tools. Score-only tables at `max`: SWE-bench Pro, Multilingual and Multimodal, TB-Science,
+  ProgramBench, OfficeQA (and Pro), Toolathlon, GMMLU, MILU, twelve life-science evals and three health benchmarks
+  (PhysicianBench and HealthBench with Sonnet 5.5's labelled ladder). OSWorld's seven unlabelled Sonnet 5.5 points
+  are kept as inactive `#` rows (only `max` carries a printed score). The card's OSWorld is v2.1 (files of 10 Sep, same
+  configuration as the Opus 5.5 card), so `sc55osw` is relabelled. claude.dev's hillclimbing post adds an Opus 5.5 vs
+  Sonnet 5 pair at `low` (`cdhillclimb`).
+- **Boards.** Artificial Analysis v4.3 (payload re-read: 252 of 253 repo rows identical) adds the whole ladder to the
+  index and its ten components; the GDPval-AA and AA-Briefcase runs were on a pre-release deployment with a
+  structured-output bug (launch note 3, card note 21) and are flagged early access. AA's Coding Agent Index has Sonnet
+  5.5 `max` first (68.4 %, \$14.19), from an EAP endpoint, flagged. Cognition's FrontierCode JSON (both v1.1 subsets,
+  five rungs; Opus 4.6 gap-filled), CursorBench 4.0 (five rungs) and LiveBench (`xhigh`, and `max` held during EAP
+  per PR #59; Opus 4.6 and 4.5 gap-filled). Nothing yet on ARC Prize, LMArena, Zapier, Terminal-Bench, DeepSWE,
+  swe-rebench, SWE-bench, OSWorld's board, FrontierSWE, Sonar, marginlab or aipricing.guru.
+- **Vals re-read.** Twenty-one Vals boards carry Sonnet 5.5 (all at `max` but TB 2.1 at `high`; refusals fall back to
+  Sonnet 5 server-side, counts in `confound`). Re-reading them showed that on 27 Sep Vals re-priced its costs while
+  every score stayed put: **Sonnet 5 × 2/3 everywhere** (Vals had used \$3/\$15) and Opus 5.5 up by 2–63 %, not
+  uniformly. So 24 Vals groups are rewritten from the 27–28 Sep snapshot under their existing keys (old values kept in
+  `prev-cost=`/`prev-score=`), rather than added beside the old ones, which would have counted each score twice.
+  Along the way: RSI Index moved to v1.1 (four campaigns), CUA-bench's Fable 5.1 cost fell from \$595.9 to \$323.8,
+  the archived Vals Index v1.2 has Opus 4.7 at `high` (not `max`) and Opus 4.8 at \$7.52, ProofBench now states `max`
+  for Opus 5, and missing Claude models are added (Tax Agent 4 → 10 rows). The other 26 Vals groups match.
+- **Repos and practitioners already followed.** vlm-exam (six tasks, `low` and `high`), bug-hunt-bench (`xhigh`, `max`:
+  57/105, above Opus 5.5 `max`, at 2.6× its cost), runebench (via OpenRouter, flagged), ObviousBench (six settings, from
+  the head of the unmerged PR #39), Simon Willison's pelican (`low`→`xhigh`; `max` hit the 128k cap without an SVG and
+  is omitted, as it was for Opus 5.5), Senko Rašić's three games (`xhigh`). Claude Code before 2.1.284 billed Sonnet
+  5.5 on the Opus 5.5 table (about 1.2× too high): CLI-reported costs from 28 Sep are flagged.
+- **New sources.** Occam bench (18 procedural tasks, three plugin arms, Sonnet 5.5 and Opus 5.5 at `medium`/`max`,
+  plus Haiku 4.5 and a Sonnet 5 calibration run), KillSwitch-Bench, two note.com studies (dende2023's SLA function
+  `low`→`max`; riku_techlab's relative costs against Sonnet 5), Atomic Agent, a waterslide game and a flight simulator
+  (cost only), MrMerkus (saturated), Box's enterprise eval by industry (score only), CodeRabbit (Sonnet 5.5 thinking
+  on/off and Sonnet 5 join the Signal group, same frozen 13 cases as the Opus 5.5 post; a 44-PR set, cost only) and
+  Qiita suwa_nobu's twelve-model run (no Sonnet 5.5, taken to record it).
+- **Corrections.** AA index Opus 5 `low` 40 → 39 (payload 39.35). Sonar gains six Claude models (score only but Sonnet
+  5); its Opus 4.7 row held suite totals for tokens and another harness label. ObviousBench's Opus 4.6 `xhigh` row is
+  removed: Inspect sent `high` (the author's audit, PR #39). bug-hunt's Opus 5.5 rows priced cache writes at the 1 h rate
+  (\$8), not 5 min × 1.25 (flag fixed, costs unchanged).
+- **Found empty or restated:** kingy.ai, cyberq, Vellum, orcarouter and some twenty launch articles restate
+  Anthropic's, AA's or Vals' figures; arXiv has nothing yet. merc-bench's unmerged PR #5 would re-price its cache
+  writes at 2×: `merc-core10` to redo once merged.
+
+Sonnet 5.5 (quality / cost vs Opus 5 @high): `low` 0.74 / 0.08, `medium` 0.85 / 0.10, `high` 0.98 / 0.19, `xhigh`
+1.09 / 0.44, `max` 1.04 / 1.54. It takes the bottom of the Pareto frontier from Haiku 4.5 (0.57 / 0.13, now dominated
+by Sonnet 5.5 `low`) and its `xhigh` edges out Opus 5.5 `high` (1.07 / 0.45); the frontier is now Sonnet 5.5 `low`,
+`medium`, Opus 5.5 `low`, `medium`, Sonnet 5.5 `xhigh`, Opus 5.5 `xhigh`, `max`. Its `max` rung falls below `xhigh`,
+as FrontierCode, LiveBench and the card's own notes show (the ladder check flags it, left as measured). Elsewhere
+Opus 5.5 `medium` 1.06 → 1.04, Sonnet 4.6 `high` 0.68 → 0.72, and Sonnet 5 `max` cost 1.29 → 1.10 (the Vals
+re-pricing).
+
 ## Eleventh pass: twelve Sonnet agents, narrow axes and broad sweeps
 
 Eight agents on narrow axes (parked leads, Hugging Face, arXiv cs.SE, arXiv cs.AI/CL/LG, Japan, China and Korea,
