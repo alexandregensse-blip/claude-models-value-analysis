@@ -104,8 +104,12 @@ C++17 compiler and `make`, then:
 ```bash
 uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r gen/requirements-fit.txt
 .stan/venv/bin/python -c "import cmdstanpy; cmdstanpy.install_cmdstan(dir='.stan', version='2.40.0')"
+.stan/venv/bin/python -c "import bridgestan.download as d; d.get_bridgestan_src()" && mv ~/.bridgestan/bridgestan-2.9.0 .stan/
 .stan/venv/bin/python gen/fit.py      # → gen/fit-cache.json, then python3 gen/build.py
 ```
+
+The quality axis is sampled with nutpie, the cost axis with CmdStan started from the previous fit's last draws
+(`.stan/inits-cost.json`, written by each fit); about a quarter of an hour per axis on four cores.
 
 ## Limitations
 

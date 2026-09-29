@@ -166,15 +166,68 @@ runs are estimated.
 
 ### Estimation
 
-Hamiltonian Monte Carlo with the No-U-Turn sampler, in Stan (`gen/lqm.stan`, CmdStan run through CmdStanPy);
-the data preparation of §2–§4 is in `gen/lqm.py`. ⟨Parametrisation and settings: to be written once fixed.⟩ The fit
-runs on the maintainer's machine (`gen/fit.py`) and only its results are published (`gen/fit-cache.json`, with a
-fingerprint of the data, the model and its settings); building the page does not need Stan.
+The model is written in Stan (`gen/lqm.stan`); the data preparation of §2–§4 is in `gen/lqm.py`. It is sampled with
+the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; Betancourt 2017).
 
-A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01 and the bulk
-and tail effective sample sizes at least 400 (Vehtari et al. 2021), no transition diverged, and the Monte Carlo error
-of every displayed value is below half its display rounding (0.0025 on the log scale), so that a refit with another
-seed changes no visible figure. The build refuses a fit that misses one of them.
+- **Writing.** How a model is written changes how fast the sampler explores it, not what it estimates. Each group's
+  noise log σ_b is written in centred form, and its gain log a_b in centred form when the group has at least 20
+  rows, non-centred otherwise (Papaspiliopoulos, Roberts & Sköld 2007; Betancourt & Girolami 2015). The truncated
+  prior of the noise goes through the logarithm of the Mills ratio, which stays finite far in the tail. Effects are
+  centred and mapped to rows by sparse matrix products, so that Stan's optimiser (`stanc --O1`) keeps every vector in
+  its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
+  leave the log density and its gradient unchanged.
+- **Samplers.** Quality: nutpie (Seyboldt et al.), whose adaptation of the mass matrix needs about four times fewer
+  steps here, 4 chains × (1,000 warm-up + 16,000 draws), target acceptance 0.85. Cost: CmdStan, 4 chains × (500
+  warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the previous fit (1,000
+  warm-up iterations when there is none). Both run in about a quarter of an hour on four cores.
+- **Where it runs.** The fit runs on the maintainer's machine (`gen/fit.py`) and only its results are published
+  (`gen/fit-cache.json`, with a fingerprint of the data, the model and its settings); building the page does not need
+  Stan. The fitting environment is pinned in `gen/requirements-fit.txt`.
+
+A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01, the bulk
+and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
+refuses one that misses any of them. The Monte Carlo error of every displayed value is stored with it, and must stay
+below half of its last displayed digit, so that a refit with another seed changes no visible figure.
+
+### Fixed values
+
+Every constant the procedure sets by hand, in one place. None is tuned to the data.
+
+| Where | Value | Why |
+|---|---|---|
+| §3 republication | ≥ 2 identical values within 0.05 % of the scale | one coincidence is not a reprint |
+| §4 logit | ½ step added, at most 100 scoring steps | a 0 or 100 % score lands half a step inside the bounds |
+| §4 noise floor | smallest score step / √12 | the variance of a rounding error |
+| §5 priors | θ ~ N(0, 10²); every standard deviation ~ half-Student-t(3, 0, 2.5); ν ~ Gamma(2, 0.1); log κ ~ N(0, 1) | weakly informative (Gelman 2006; Bürkner 2017; Juárez & Steel 2010) |
+| §5 effects | a level carried by one row is left out | it cannot be told from that row's noise |
+| §5 panel read-out | 9 Gauss–Hermite nodes | exact to far below the Monte Carlo error |
+| §5 publication | measured by ≥ 2 publishers | one publisher's figures cannot be cross-checked |
+| §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
+| §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
+| §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
+| §7 quality axis | symmetric log around parity, constant 0.045 | display only |
+| §9 price curve | k on the grid {0.1 … 3}; weight 1 − d/d_max | see §9 |
+| §11 tiers | 4 tiers; cost exponents 1.20, 1.05, 0.95, 0.80; bonus above target capped at +20 % | see §11 |
+| §12 crown | Gaussian weight of width 10 around parity | nearly flat, see §12 |
+
+### Software and references
+
+- Stan 2.40 (CmdStan) and CmdStanPy 1.3 — Stan Development Team, *Stan Modeling Language*, <https://mc-stan.org>.
+- nutpie 0.16, through BridgeStan 2.9 — <https://github.com/pymc-devs/nutpie>, <https://github.com/roualdes/bridgestan>.
+- ArviZ 1.3 for R̂, ESS and Monte Carlo errors — <https://www.arviz.org>.
+- NumPy for the read-outs computed outside Stan and the quasi-variances.
+- Vehtari, Gelman, Simpson, Carpenter & Bürkner (2021), *Rank-normalization, folding, and localization: an improved
+  R̂ for assessing convergence of MCMC*, Bayesian Analysis 16(2).
+- Hoffman & Gelman (2014), *The No-U-Turn Sampler*, JMLR 15; Betancourt (2017), *A Conceptual Introduction to
+  Hamiltonian Monte Carlo*, arXiv:1701.02434.
+- Papaspiliopoulos, Roberts & Sköld (2007), *A general framework for the parametrization of hierarchical models*,
+  Statistical Science 22(1); Betancourt & Girolami (2015), *Hamiltonian Monte Carlo for Hierarchical Models*.
+- Firth & de Menezes (2004), *Quasi-variances*, Biometrika 91(1).
+- Gelman (2006), *Prior distributions for variance parameters in hierarchical models*, Bayesian Analysis 1(3);
+  Bürkner (2017), *brms: An R package for Bayesian multilevel models using Stan*, JSS 80(1); Juárez & Steel (2010),
+  *Model-based clustering of non-Gaussian panel data based on skew-t distributions*, JBES 28(1) (the Gamma(2, 0.1)
+  prior on ν).
+- Gelman et al. (2020), *Bayesian Workflow*, arXiv:2011.01808 (the model was built and checked stage by stage).
 
 ### Output
 
@@ -200,7 +253,7 @@ seed changes no visible figure. The build refuses a fit that misses one of them.
 
 ### Checks
 
-Scripts in `gen/validation/` reproduce each check. ⟨Figures to be measured on the final fit.⟩
+Scripts in `gen/validation/` reproduce each check. ⟨Figures of the final fit: to be filled in.⟩
 
 - **Held-out prediction** (`heldout.py`). One fifth of the percentage scores removed, the model refitted, the
   removed scores predicted, five times; compared with a score-ratio baseline (per-benchmark ratios to the reference,
