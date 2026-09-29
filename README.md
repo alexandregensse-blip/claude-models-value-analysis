@@ -17,9 +17,9 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 ## What the report shows
 
 1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
-2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell with its band.
+2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell with its interval.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
-4. **Method** — how the numbers and the bands are built; the full methodology is in [`METHODOLOGY.md`](METHODOLOGY.md).
+4. **Method** — how the numbers and their intervals are built; the full methodology is in [`METHODOLOGY.md`](METHODOLOGY.md).
 
 ## How the numbers are built
 
@@ -54,7 +54,7 @@ crown — is in [`METHODOLOGY.md`](METHODOLOGY.md); the checks are reproducible 
 | `gen/fit.py` | Runs the fit on both axes and writes `gen/fit-cache.json` (needs the Stan environment, see "Refit"). |
 | `gen/catalog.py` | Benchmark families and publisher outlets used by the fusion. |
 | `gen/fit-cache.json` | The fit's results (per couple: log centre, quasi-standard error, publishers, new-source interval) and its diagnostics, keyed by a fingerprint of the data, the model and its settings. The build reads it and refuses one that is stale or did not converge. Commit it with the rebuilt page. |
-| `gen/validation/` | Scripts that reproduce the method's checks (held-out prediction, known-truth recovery, sampler calibration, band coverage, reference invariance, sensitivity). |
+| `gen/validation/` | Scripts that reproduce the method's checks (held-out prediction with interval coverage, known-truth recovery with interval coverage, sensitivity). |
 | `METHODOLOGY.md` | The full methodology, from collection to the tier picks. |
 | `gen/{style.css, body.html, app.js}` | Source modules the generator bundles (CSS, HTML body, client-side SVG rendering + interactions). |
 | `gen/prerender.js` | Runs `app.js` at build time in Node (fake DOM) so the conclusions, tables and counts are in the served HTML for crawlers that do not run JavaScript. |
