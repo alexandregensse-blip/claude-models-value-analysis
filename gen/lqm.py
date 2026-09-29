@@ -20,8 +20,9 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            task type: their mean is confounded with the free offsets of that publisher's (type's) groups.
   Priors:  θ ~ N(0, 10²); s_g, s_τ, ψ, ω, s_σ ~ half-Student-t(3, 0, 2.5); ν ~ Gamma(2, 0.1).
 
-Estimation: Hamiltonian Monte Carlo (Stan, NUTS) on lqm.stan, run through CmdStanPy. The read-out `level` is computed
-in Stan for every draw; `summarise` turns it into a centre and a per-couple interval (quasi-variances).
+Estimation: Hamiltonian Monte Carlo (NUTS) on lqm.stan — nutpie on the quality axis, CmdStan (CmdStanPy) warm-started
+from the previous fit on the cost axis (SAMPLER). The read-out `level` is computed in Stan for every draw; `summarise`
+turns it into a centre and a per-couple interval (quasi-variances).
 """
 import collections, csv, itertools, math, os, re
 
@@ -275,26 +276,118 @@ def stan_data(groups, axis):
 
 
 # ---------------------------------------------------------------- fit
+STAN_DIR = os.path.join(os.path.dirname(HERE), ".stan")               # CmdStan, BridgeStan, venv (not in git)
+INITS = os.path.join(STAN_DIR, "inits-{axis}.json")                  # last draw of each chain of the previous fit
+# Sampler per axis (validated in /work/.geom/JOURNAL.md): quality = nutpie (diagonal mass matrix adapted by Fisher
+# divergence), which needs 4× fewer leapfrog steps here; cost = CmdStan NUTS started from the previous fit's last
+# draws (nutpie cannot be given starting points, and random starts can leave a cost chain in a remote region).
+SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=16000, target_accept=0.85),
+           "cost": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
+                        max_treedepth=10)}
+
+
 def cmdstan():
     import cmdstanpy
     path = os.environ.get("CMDSTAN") or next(
-        (os.path.join(d, x) for d in [os.path.join(os.path.dirname(HERE), ".stan")] if os.path.isdir(d)
-         for x in sorted(os.listdir(d), reverse=True) if x.startswith("cmdstan-")), None)
+        (os.path.join(STAN_DIR, x) for x in sorted(os.listdir(STAN_DIR), reverse=True) if x.startswith("cmdstan-")), None) \
+        if os.path.isdir(STAN_DIR) else None
     if path:
         cmdstanpy.set_cmdstan_path(path)
     return cmdstanpy
 
 
-def fit(groups, axis="quality", chains=4, warmup=1000, samples=1000, seed=7, parallel=None, adapt_delta=0.9,
-        max_treedepth=10, output_dir=None):
-    """Sample the posterior. Returns the CmdStanMCMC object and the index maps."""
-    cs = cmdstan()
+class Posterior:
+    """Draws of every variable (chains merged, draws × shape), with the per-chain layout kept for diagnostics."""
+
+    def __init__(self, arrays, stats):
+        self.arrays = arrays                                         # name → array (chains, draws, *shape)
+        self.stats = stats                                           # divergences, max_treedepth_hits, step sizes…
+
+    def var(self, name):
+        a = self.arrays[name]
+        return a.reshape(a.shape[0] * a.shape[1], *a.shape[2:])
+
+
+def _from_cmdstan(mcmc, max_depth=10):
+    import numpy as np
+    arrays = {}
+    for name in mcmc.metadata.stan_vars:
+        x = mcmc.stan_variable(name)                                 # (chains·draws, *shape), chain-major
+        arrays[name] = x.reshape(mcmc.chains, -1, *x.shape[1:])
+    sm = mcmc.method_variables()
+    return Posterior(arrays, dict(
+        divergences=int(np.sum(sm["divergent__"])), max_treedepth_hits=int(np.sum(sm["treedepth__"] >= max_depth)),
+        leapfrog_mean=round(float(np.mean(sm["n_leapfrog__"])), 1)))
+
+
+def _from_nutpie(trace):
+    import numpy as np
+    post, ss = trace["posterior"], trace["sample_stats"]
+    arrays = {v: np.asarray(post[v].values) for v in post.data_vars}
+    return Posterior(arrays, dict(divergences=int(ss["diverging"].values.sum()), max_treedepth_hits=None,
+                                  leapfrog_mean=round(float(ss["n_steps"].values.mean()), 1)))
+
+
+def _save_inits(mcmc, axis):
+    """Last draw of each chain, for the next fit of this axis (a warm start: same model, slightly different data)."""
+    import json, numpy as np
+    params = [v for v in mcmc.metadata.stan_vars if v in _param_names()]
+    inits = []
+    for c in range(mcmc.chains):
+        d = {}
+        for v in params:
+            x = mcmc.stan_variable(v).reshape(mcmc.chains, -1, *mcmc.stan_variable(v).shape[1:])[c, -1]
+            d[v] = np.asarray(x).tolist()
+        inits.append(d)
+    json.dump(dict(inits=inits), open(INITS.format(axis=axis), "w"))
+
+
+def _param_names():
+    """Names declared in the parameters block of lqm.stan."""
+    txt = open(STAN_FILE).read()
+    block = txt[txt.index("\nparameters {"):txt.index("\ntransformed parameters {")]
+    return {m.group(1) for m in re.finditer(r"\s(\w+);", block)}
+
+
+def _inits(axis, chains):
+    """Warm-start inits if the previous fit's parameters still fit the current data's dimensions, else None."""
+    import json, numpy as np
+    try:
+        inits = json.load(open(INITS.format(axis=axis)))["inits"]
+    except (OSError, ValueError, KeyError):
+        return None
+    return inits[:chains] if len(inits) >= chains else None
+
+
+def fit(groups, axis="quality", seed=7, settings=None, output_dir=None, save_inits=True):
+    """Sample the posterior of one axis with its validated sampler (SAMPLER). Returns (Posterior, maps). The production
+    fit keeps its last draws as the next warm start (save_inits); checks and experiments must not overwrite them."""
+    import numpy as np
+    st = dict(SAMPLER[axis], **(settings or {}))
     data, maps = stan_data(groups, axis)
+    if st["engine"] == "nutpie":
+        import nutpie
+        os.environ.setdefault("BRIDGESTAN", os.path.join(STAN_DIR, "bridgestan-2.9.0"))
+        cm = nutpie.compile_stan_model(filename=STAN_FILE).with_data(
+            **{k: (np.asarray(v) if isinstance(v, list) else v) for k, v in data.items()})
+        trace = nutpie.sample(cm, draws=st["samples"], tune=st["warmup"], chains=st["chains"],
+                              cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,
+                              target_accept=st["target_accept"])
+        return _from_nutpie(trace), maps
+    cs = cmdstan()
     model = cs.CmdStanModel(stan_file=STAN_FILE)
-    mcmc = model.sample(data=data, chains=chains, parallel_chains=parallel or min(chains, os.cpu_count() or 1),
-                        iter_warmup=warmup, iter_sampling=samples, seed=seed, adapt_delta=adapt_delta,
-                        max_treedepth=max_treedepth, show_progress=False, output_dir=output_dir)
-    return mcmc, maps
+    inits = _inits(axis, st["chains"])
+    run = lambda ini, warm: model.sample(
+        data=data, chains=st["chains"], parallel_chains=min(st["chains"], os.cpu_count() or 1), iter_warmup=warm,
+        iter_sampling=st["samples"], seed=seed, adapt_delta=st["adapt_delta"], max_treedepth=st["max_treedepth"],
+        inits=ini, show_progress=False, output_dir=output_dir)
+    try:
+        mcmc = run(inits, st["warmup"]) if inits else run(None, st["warmup_cold"])
+    except (RuntimeError, ValueError):                               # stale warm start (dimensions changed)
+        mcmc = run(None, st["warmup_cold"])
+    if save_inits:
+        _save_inits(mcmc, axis)
+    return _from_cmdstan(mcmc, st["max_treedepth"]), maps
 
 
 # ---------------------------------------------------------------- reading the posterior
@@ -338,66 +431,73 @@ def quasi_variances(L, lo=0.16, hi=0.84):
     return q, float(rel.max()), float(np.median(rel))
 
 
-def summarise(mcmc, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
+def summarise(post, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
     """Per couple, on the log scale: centre = posterior median of `level`; half = quasi-standard error (the
     half-width of a 16–84 % interval that makes any two couples comparable); new_source = 16–84 % interval of what one
-    new source would report for the couple (`level_new`); published = measured by at least
-    `min_publishers` publishers. Ratios to a reference couple are exp(centre − centre_ref), each couple keeping its
-    own interval. Also returns the convergence diagnostics."""
+    new source would report for the couple (`level_new`); mcse = Monte Carlo error of the centre; published =
+    measured by at least `min_publishers` publishers. Ratios to a reference couple are exp(centre − centre_ref), each
+    couple keeping its own interval. Also returns the convergence diagnostics."""
     import numpy as np
-    L = mcmc.stan_variable("level")                                  # draws × couples
+    L = post.var("level")                                            # draws × couples
     q, qv_max, qv_med = quasi_variances(L, lo, hi)
     pubs = collections.defaultdict(set)
     for g in groups.values():
         for x in g["rows"]:
             pubs[x["couple"]].add(x["publisher"])
-    Ln = mcmc.stan_variable("level_new")
+    Ln = post.var("level_new")
+    diag, mcse_level = diagnostics(post)
     out = {c: dict(centre=float(np.median(L[:, i])), half=float(math.sqrt(q[i])),
                    new_source=[float(np.quantile(Ln[:, i], lo)), float(np.quantile(Ln[:, i], hi))],
-                   publishers=len(pubs[c]), published=len(pubs[c]) >= min_publishers)
+                   mcse=float(mcse_level[i]), publishers=len(pubs[c]), published=len(pubs[c]) >= min_publishers)
            for c, i in maps["ci"].items()}
-    return out, diagnostics(mcmc, qv_max, qv_med)
+    diag.update(qv_error_max=round(qv_max, 4), qv_error_median=round(qv_med, 4))
+    return out, diag
 
 
-def diagnostics(mcmc, qv_max=None, qv_med=None):
-    """Rank-normalised split R̂ and bulk/tail ESS over every parameter and read-out (Vehtari et al. 2021), from
-    CmdStan's stansummary; divergent transitions and saturated trees."""
-    s = mcmc.summary()
-    s = s[[not i.startswith("lp__") for i in s.index]]
-    col = {c.lower(): c for c in s.columns}
-    rh, eb, et = s[col["r_hat"]], s[col.get("ess_bulk", "ESS_bulk")], s[col.get("ess_tail", "ESS_tail")]
-    lvl = s[[i.startswith("level[") for i in s.index]]
-    div = int(sum(mcmc.divergences)) if mcmc.divergences is not None else None
-    tree = int(sum(mcmc.max_treedepths)) if mcmc.max_treedepths is not None else None
-    return dict(rhat_max=round(float(rh.max()), 4), ess_bulk_min=int(eb.min()), ess_tail_min=int(et.min()),
-                rhat_max_level=round(float(lvl[col["r_hat"]].max()), 4),
-                ess_bulk_min_level=int(lvl[col.get("ess_bulk", "ESS_bulk")].min()),
-                mcse_max_level=round(float(lvl[col["mcse"]].max()), 5),
-                divergences=div, max_treedepth_hits=tree, draws=int(mcmc.draws().shape[0] * mcmc.chains),
-                worst_rhat=list(rh.sort_values(ascending=False).index[:5]),
-                qv_error_max=None if qv_max is None else round(qv_max, 4),
-                qv_error_median=None if qv_med is None else round(qv_med, 4))
+def diagnostics(post):
+    """Rank-normalised split R̂, bulk and tail ESS (Vehtari et al. 2021, as computed by ArviZ) over every scalar of
+    every variable except the random `level_new`; Monte Carlo error of each `level`; sampler statistics."""
+    import numpy as np, arviz as az
+    worst, rh_max, eb_min, et_min = [], 1.0, float("inf"), float("inf")
+    for name, a in post.arrays.items():
+        if name == "level_new" or a.size == 0:
+            continue
+        x = a.reshape(a.shape[0], a.shape[1], -1)
+        keep = [k for k in range(x.shape[2]) if np.ptp(x[:, :, k]) > 0]
+        if not keep:
+            continue
+        dt = az.from_dict({"posterior": {"x": x[:, :, keep]}})
+        rh = np.atleast_1d(az.rhat(dt)["x"].values); eb = np.atleast_1d(az.ess(dt, method="bulk")["x"].values)
+        et = np.atleast_1d(az.ess(dt, method="tail")["x"].values)
+        rh_max, eb_min, et_min = max(rh_max, float(rh.max())), min(eb_min, float(eb.min())), min(et_min, float(et.min()))
+        worst += [(float(r), f"{name}[{keep[k] + 1}]") for k, r in enumerate(rh)]
+        if name == "level":
+            mcse_level = np.atleast_1d(az.mcse(dt, method="median")["x"].values)
+            level = dict(rhat_max_level=round(float(rh.max()), 4), ess_bulk_min_level=int(eb.min()),
+                         mcse_max_level=round(float(mcse_level.max()), 5))
+    worst = [n for _, n in sorted(worst, reverse=True)[:5]]
+    return dict(rhat_max=round(rh_max, 4), ess_bulk_min=int(eb_min), ess_tail_min=int(et_min), **level,
+                worst_rhat=worst, draws=int(post.var("level").shape[0]), **post.stats), mcse_level
 
 
-# R̂ ≤ 1.01 and bulk/tail ESS ≥ 400 on every parameter (Vehtari et al. 2021); no divergence; Monte Carlo error of
-# every read-out below half the display rounding (values are shown to about 0.5 %: 0.0025 on the log scale), so that
-# a refit with another seed changes no visible figure.
-CONVERGED = dict(rhat=1.01, ess=400, mcse=0.0025)
+# Validity: R̂ ≤ 1.01 and bulk/tail ESS ≥ 400 on every parameter (Vehtari et al. 2021), no divergence. The stability of
+# the displayed figures (Monte Carlo error of each value below half its last displayed digit) depends on the display
+# precision and is checked by the build, value by value.
+CONVERGED = dict(rhat=1.01, ess=400)
 
 
 def converged(diag):
     return (diag["rhat_max"] <= CONVERGED["rhat"] and diag["ess_bulk_min"] >= CONVERGED["ess"]
-            and diag["ess_tail_min"] >= CONVERGED["ess"] and diag["divergences"] == 0
-            and diag["mcse_max_level"] <= CONVERGED["mcse"])
+            and diag["ess_tail_min"] >= CONVERGED["ess"] and diag["divergences"] == 0)
 
 
-def predict(mcmc, maps, groups, rows, thin=4, seed=0):
+def predict(post, maps, groups, rows, thin=4, seed=0):
     """Posterior predictive of rows the fit did not see, in groups it did. Each row: dict(group, couple, publisher,
     task, h=1). Returns per row (mean of the expected value f⁻¹ scale, list of predictive draws of f(y)) where known
     effects are used and unknown ones drawn from their distribution; the noise is Student-t_ν(σ_b·h)."""
     import numpy as np
     rng = np.random.default_rng(seed)
-    V = {k: mcmc.stan_variable(k)[::thin] for k in ("theta", "o", "a", "sigma", "z1", "z2", "z3", "tau", "psi", "omega", "nu")}
+    V = {k: post.var(k)[::thin] for k in ("theta", "o", "a", "sigma", "z1", "z2", "z3", "tau", "psi", "omega", "nu")}
     D = len(V["o"])
     names, ci, levels = maps["names"], maps["ci"], maps["levels"]
     bi = {g: i for i, g in enumerate(names)}

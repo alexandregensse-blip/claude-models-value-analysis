@@ -7,6 +7,12 @@
 // h_r is the shape of the sampling noise of an empirical logit, 1/(2·√(q(1−q))) at the observed proportion q (1 on
 // other scales); κ_r the variance multiplier of an early-access run, estimated.
 functions {
+  // log of the Mills ratio of the standard normal, log(Phi_c(b)) + b^2/2, stable for any b
+  real log_mills(real b) {
+    if (b < 25) return std_normal_lccdf(b) + 0.5 * square(b);
+    real ib2 = inv_square(b);
+    return -log(b) - 0.5 * log(2 * pi()) + log1p(-ib2 + 3 * square(ib2) - 15 * ib2 * square(ib2));
+  }
   vector centre_within(vector e, array[] int set, int S) {   // e minus the mean of its set
     vector[S] tot = rep_vector(0, S);
     vector[S] n = rep_vector(0, S);
@@ -64,6 +70,31 @@ data {
 transformed data {
   vector[G] log_floor = log(noise_floor);
   int has_ea = max(ea);
+  // Parameterisation (the model is unchanged), both axes: noise log σ_b centred in every group (in non-centred form
+  // μ_σ, s_σ move every σ_b — and on the quality axis, through a_b = exp(s_g·lg_b + log σ_b), every gain, which the
+  // data pin); gain log a_b centred in data-rich groups (≥ 20 rows), non-centred elsewhere.
+  array[G] int n_rows = rep_array(0, G);
+  for (r in 1:N) n_rows[grp[r]] += 1;
+  array[G] int cg;
+  array[G] int cs;
+  for (b in 1:G) {
+    cg[b] = n_rows[b] >= 20;
+    cs[b] = 1;
+  }
+  vector[G] cgv = to_vector(cg);
+  vector[G] csv = to_vector(cs);
+  int nCG = sum(cg);
+  int nCS = sum(cs);
+  array[nCG] int iCG;
+  array[G - nCG] int iNG;
+  array[nCS] int iCS;
+  array[G - nCS] int iNS;
+  {
+    int p = 1; int q = 1;
+    for (b in 1:G) if (cg[b]) { iCG[p] = b; p += 1; } else { iNG[q] = b; q += 1; }
+    p = 1; q = 1;
+    for (b in 1:G) if (cs[b]) { iCS[p] = b; p += 1; } else { iNS[q] = b; q += 1; }
+  }
   array[N] int j1;
   array[N] int j2;
   array[N] int j3;
@@ -77,7 +108,7 @@ transformed data {
 parameters {
   sum_to_zero_vector[C] theta;
   vector[G] o;                                     // group offset, flat prior
-  vector[G] lg_raw;                                // non-centred log gain (quality: log a/σ; cost: log a)
+  vector[G] lg_raw;                                // cg=0: non-centred log gain; cg=1: log a_b itself
   real<lower=0> s_g;
   vector[L1] z1;                                   // non-centred effects
   vector[L2] z2;
@@ -90,12 +121,12 @@ parameters {
   array[has_ea] real log_kappa;
   real mu_sig;
   real<lower=0> s_sig;
-  vector<lower=(log_floor - mu_sig) / s_sig>[G] ls_raw;   // non-centred noise: log σ_b = μ_σ + s_σ · η_b ≥ log floor
+  vector<lower=0>[G] ls_ex;                        // excess over the floor bound: cs=0: η_b − b_b (non-centred); cs=1: log σ_b − log floor_b
 }
 transformed parameters {
-  vector[G] log_sigma = mu_sig + s_sig * ls_raw;
+  vector[G] log_sigma = log_floor + (csv + (1 - csv) * s_sig) .* ls_ex;
   vector[G] sigma = exp(log_sigma);
-  vector[G] a = cost ? exp(s_g * lg_raw) : exp(s_g * lg_raw + log_sigma);
+  vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (cost ? s_g * lg_raw : s_g * lg_raw + log_sigma));
   vector[C] tau = s_tau * tau_raw;
 }
 model {
@@ -110,7 +141,8 @@ model {
   z ~ student_t(nu, o[grp] + a[grp] .* x, scale);
 
   theta ~ normal(0, theta_scale);
-  lg_raw ~ std_normal();
+  lg_raw[iNG] ~ std_normal();
+  if (cost) lg_raw[iCG] ~ normal(0, s_g); else lg_raw[iCG] ~ normal(log_sigma[iCG], s_g);
   z1 ~ std_normal();
   z2 ~ std_normal();
   z3 ~ std_normal();
@@ -126,8 +158,14 @@ model {
   // noise pooled across groups on their standardised scale (invariant to any affine change of a metric):
   // log σ_b ~ N(μ_σ, s_σ²) truncated at the floor; μ_σ flat
   s_sig ~ student_t(3, 0, 2.5);
-  ls_raw ~ std_normal();
-  target += -normal_lccdf((log_floor - mu_sig) / s_sig | 0, 1);
+  {
+    // truncated N(μ_σ, s_σ²) on log σ_b, b_b = (log floor_b − μ_σ)/s_σ, written without cancelling infinities:
+    // log φ(b + e) − log Φc(b) = −e (b + e/2) − log M(b)   (constant −½ log 2π dropped)
+    vector[G] bnd = (log_floor - mu_sig) / s_sig;
+    vector[G] e = csv .* ls_ex / s_sig + (1 - csv) .* ls_ex;
+    for (b in 1:G) target += -e[b] * (bnd[b] + 0.5 * e[b]) - log_mills(bnd[b]);
+    target += -nCS * log(s_sig);                   // centred groups: density of log σ_b = (1/s_σ) × density of η_b
+  }
 }
 generated quantities {
   // read-out on the log scale, per couple. Quality: log of the expected score averaged over the panel.

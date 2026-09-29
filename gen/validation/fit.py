@@ -16,8 +16,7 @@ if len(sys.argv) > 5:                                              # sensitivity
     data = tmp
 groups, report, republished = lqm.load(data, list(B.MX), field="cost_usd" if axis == "cost" else "score")
 t = time.time()
-mcmc, maps = lqm.fit(groups, axis, chains=B.FIT["chains"], warmup=B.FIT["warmup"], samples=B.FIT["samples"],
-                     seed=seed, adapt_delta=B.FIT["adapt_delta"])
-S, diag = lqm.summarise(mcmc, maps, groups)
+post, maps = lqm.fit(groups, axis, seed=seed, save_inits=False)
+S, diag = lqm.summarise(post, maps, groups)
 pickle.dump(dict(axis=axis, S=S, diag=diag, report=dict(report)), open(out, "wb"))
 print(f"{axis}: {time.time() - t:.0f}s, R-hat max {diag['rhat_max']}, converged {lqm.converged(diag)}")

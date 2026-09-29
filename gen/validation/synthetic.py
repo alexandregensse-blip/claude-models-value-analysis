@@ -12,7 +12,7 @@ import csv, itertools, json, math, os, random, sys
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
 import build as B, lqm, ratio_baseline as RB
-WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["400", "400"][len(sys.argv[1:3]):]))
+WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["1000", "2000"][len(sys.argv[1:3]):]))
 L = json.load(open(os.path.join(HERE, "synthetic_truth.json")))["truth"]
 rows = list(csv.DictReader(open(os.path.join(B.ROOT, "raw-data.csv")))); hdr = list(rows[0].keys())
 data = [r for r in rows if r["group"] and not r["group"].startswith("#") and r["model"] in B.MX
@@ -67,8 +67,8 @@ for scn in ("ratio", "irt", "mix"):
     base = {f"{m}@{e}": math.log(v[0]) for m, es in QG.items() for e, v in es.items() if f"{m}@{e}" in L}
     bd, bw, _ = scores(sorted(base), base)
     G, _, _ = lqm.load(path, list(B.MX))
-    mcmc, maps = lqm.fit(G, "quality", chains=2, warmup=WARM, samples=SAMP, seed=1, adapt_delta=0.95)
-    T = mcmc.stan_variable("theta")
+    mcmc, maps = lqm.fit(G, "quality", seed=1, settings=dict(chains=4, warmup=WARM, samples=SAMP), save_inits=False)
+    T = mcmc.var("theta")
     cs = [c for c in maps["couples"] if c in L]; idx = [maps["ci"][c] for c in cs]; T = T[:, idx]
     est = {c: float(np.median(T[:, k])) for k, c in enumerate(cs)}
     d, w, lam = scores(cs, est)
@@ -78,7 +78,7 @@ for scn in ("ratio", "irt", "mix"):
         true = lam * (L[cs[i]] - L[cs[j]]); D = T[:, i] - T[:, j]
         lo, hi = np.quantile(D, [0.16, 0.84]); cov += lo <= true <= hi
         qcov += abs(np.median(D) - true) <= math.sqrt(qv[i] + qv[j]); n += 1
-    diag = lqm.diagnostics(mcmc)
+    diag, _ = lqm.diagnostics(mcmc)
     print(f"{scn:6s} fused: distortion {d:.3f} · wrong pairs {100 * w:.1f} % · coverage {100 * cov / n:.0f} % · "
           f"qv coverage {100 * qcov / n:.0f} % · R̂ max {diag['rhat_max']} · divergences {diag['divergences']}"
           f"  |  ratio: distortion {bd:.3f} · wrong pairs {100 * bw:.1f} %", flush=True)

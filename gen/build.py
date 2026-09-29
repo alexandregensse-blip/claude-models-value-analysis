@@ -26,7 +26,7 @@ GRID_ANCHOR = "opus-5@high"                 # reference couple: shown as 1.0 on 
 # ---------------------------------------------------------------- fusion (gen/lqm.py; method in METHODOLOGY.md)
 # The fit runs apart from the build, in the Stan environment: .stan/venv/bin/python gen/fit.py writes fit-cache.json
 # (per couple, reference-free: log centre, quasi-standard error, publishers). The build divides by GRID_ANCHOR.
-FIT = dict(chains=4, warmup=1000, samples=1000, seed=11, adapt_delta=0.95)
+FIT = dict(seed=11)                          # the sampler of each axis is lqm.SAMPLER (part of lqm.py, so of the fingerprint)
 FIT_CACHE = os.path.join(HERE, "fit-cache.json")
 EFFORT_ORDER = ["low", "medium", "high", "xhigh", "max", "solo"]
 
