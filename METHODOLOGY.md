@@ -44,7 +44,8 @@ metric, the cache-read share, a free-text **confound** field, and the reference 
   when the source reports it; a cost estimated from token counts at list prices is flagged. A source that priced
   tokens at wrong rates is re-priced and the correction flagged.
 - **Charts are digitised and checked** against any number the same document prints in its text, and flagged.
-- **Early access.** A run its source dates before the model's public release is flagged (§5: a third of the weight).
+- **Early access.** A run its source dates before the model's public release is flagged (§5: its noise is inflated
+  by an estimated factor).
 - **Uninformative scores.** A score stuck at the floor or the ceiling of its metric for one couple while the others
   are not (3 successes out of 657 tasks) says little and depends on how the bound is handled; such a score is left
   blank and the cost kept.
@@ -54,6 +55,15 @@ metric, the cache-read share, a free-text **confound** field, and the reference 
 
 ## 3. From rows to groups
 
+- **One configuration per group.** A group is split when its rows differ by publisher, by harness (versions of one
+  harness count as one), by scale (a score out of 25 and a score out of 36 are two scales) or, for costs, by cost
+  unit. Each part is compared only with itself. Two labels a publisher uses for one quantity are one unit (vals.ai
+  writes its single cost column "per test" or "per task"); the aliases are kept in a table.
+- **Composites count once.** An index, an average or a total over several benchmarks repeats the measurements of
+  its components. The components of each composite are listed from its publisher's documentation (for instance the
+  ten benchmarks of the Artificial Analysis Intelligence Index v4.3, or the published formula of the Vals Index). For
+  a couple measured on at least one component, the composite row is left out; a couple measured only on the
+  composite keeps it, and a composite none of whose components is in the data is kept whole.
 - **Republished numbers count once.** Two groups of one family that share at least two identical values away from
   the metric's bounds (within 0.05 % of the scale, or of the value for unbounded metrics) are the same experiment
   printed twice — a system card reprinting the previous card's reference column is the typical case. Their identical
@@ -71,7 +81,7 @@ the benchmark's identity:
 
 | Metric | Transformation |
 |---|---|
-| bounded score: a percentage, a score out of *N* (or "*k* of *N*"), an F1, a 0–4 grade, a composite published on 0–100 | empirical logit of the proportion: logit((p·n + ½)/(n + 1)), n the group's number of scoring steps |
+| bounded score: a percentage, a score out of *N* (or "*k* of *N*"), an F1, a 0–4 grade, a composite published on 0–100 | empirical logit of the proportion: logit(q), q = (p·n + ½)/(n + 1), n the group's number of scoring steps |
 | positive unbounded quantity with a true zero (money earned, points) | log |
 | interval or unknown scale (an Elo rating, a correlation, a composite without a stated range) | none |
 | lower is better (a rank) | sign flipped first |
@@ -80,7 +90,10 @@ the benchmark's identity:
 
 A bounded score compresses near its floor and ceiling; the logit removes that. The number of scoring steps n is one
 over the group's finest observed score difference (7 for a benchmark of 7 tasks), and at most 100: a score of 0 or
-100 % lands half a step inside the bounds instead of at infinity.
+100 % lands half a step inside the bounds instead of at infinity. On the logit scale the sampling noise of a
+proportion is not constant: its variance is proportional to 1/(q(1 − q)), about four times larger at 7 % or 93 % than
+at 50 %. Each bounded row carries that shape, h = 1/(2√(q(1 − q))) at its observed q (1 at 50 %), so a score near a
+bound weighs what it is worth.
 
 ## 5. Fusion: one quality and one cost per couple
 
@@ -88,116 +101,122 @@ over the group's finest observed score difference (7 for a benchmark of 7 tasks)
 
 For every row *r* (group *b*, couple *c* of model *m*, publisher *s*, task type *t*), with *f* the transformation of §4:
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,      ε_r ~ Student-t₄(0, m_r · σ_b²)
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b²)
 
 | Term | Meaning | Prior |
 |---|---|---|
-| θ_c | the couple's latent quality (quality axis) or log cost (cost axis) | N(0, 10²); one couple fixed at 0 to set the origin |
+| θ_c | the couple's latent quality (quality axis) or log cost (cost axis) | N(0, 10²), summing to zero over the couples |
 | o_b | the group's offset: the metric's zero, the task's difficulty, the harness level | flat |
 | a_b | the group's gain: metric units per unit of θ | below |
-| σ_b | the group's noise, never below the metric's resolution | quality: 1/σ; cost: log σ_b ~ N(μ_σ, s_σ²), pooled |
-| u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²); τ_c² ~ IG(2, β), β ~ Exp(mean 0.05), pooled over couples |
-| w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels | N(0, ψ²), ψ² ~ IG(1, 0.01) |
-| v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω²), ω² ~ IG(1, 0.01) |
-| m_r | 3 for an early-access run, else 1 | fixed |
+| σ_b | the group's noise, never below the metric's resolution | log σ_b ~ N(μ_σ, s_σ²), truncated at the resolution, pooled |
+| h_r | the noise shape of a bounded score (§4); 1 on other scales | fixed by the data |
+| u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²), τ_c ~ N⁺(0, s_τ²) pooled over couples |
+| w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels | N(0, ψ²) |
+| v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω²) |
+| κ_r | the variance multiplier of an early-access run (1 for other runs) | log κ ~ N(0, 1), estimated |
+| ν | the Student-t's degrees of freedom: how heavy the tails of the noise are | Gamma(2, 0.1), estimated |
+
+Every standard deviation (s_g below, s_τ, ψ, ω, s_σ) has a weakly informative half-Student-t(3, 0, 2.5) prior; μ_σ is
+flat.
+
+**No reference couple in the fit.** The θ sum to zero: the origin is the average couple, not a chosen one. The page
+divides by a reference couple afterwards; that is a display choice, which changes neither the fit nor the
+uncertainty of any other couple.
 
 **Gains.**
-- Quality: the discrimination d_b = a_b/σ_b is pooled across groups, log d_b ~ N(0, s_d²). A gain estimated from
+- Quality: the discrimination a_b/σ_b is pooled across groups, log(a_b/σ_b) ~ N(0, s_g²). A gain estimated from
   three points cannot run away, and the zero mean sets the unit of θ.
-- Cost: log a_b ~ N(0, s_a²). A task's size multiplies every couple's cost, but the cost of extra effort also grows
+- Cost: log a_b ~ N(0, s_g²). A task's size multiplies every couple's cost, but the cost of extra effort also grows
   with the task's difficulty, so a benchmark's cost ratios can be stretched or compressed. θ is the log cost on a
   task of typical elasticity.
 - Groups of one benchmark family keep their own gains. Their gains agree to about ±20 % on the current data,
   against a spread of more than an order of magnitude across benchmarks, so a benchmark run by several sources is on
   one scale; pooling those gains in a way that keeps the model's affine invariance is not implemented.
-- Hyper-priors: s_d², s_a², s_σ² ~ IG(1, 0.25); μ_σ flat.
+
+**Noise.** The noise is pooled across groups on each group's standardised scale (its scores centred and divided by
+their spread), which an affine change of the metric leaves unchanged. A group of two couples borrows its noise level
+from the others instead of letting it run to infinity.
+
+**Effects that the data can tell apart.** An effect carried by a single row cannot be told from that row's noise
+and is left out; its variance stays in the noise. The mean of a publisher's effects is indistinguishable from the
+offsets of that publisher's groups, which are free, and likewise the mean of a task type's effects: the effects are
+centred within their publisher (u, w) or their task type (v).
 
 **Affine invariance.** Rescaling or shifting a group's scores leaves the result unchanged: o_b, a_b and σ_b absorb
-it. This is why a score can be used without knowing which benchmark produced it.
+it, and the pooled priors act on scale-free quantities (the discrimination, the standardised noise). This is why a
+score can be used without knowing which benchmark produced it.
 
 ### Weighting
 
 No weight is chosen per source or per benchmark; each contribution follows from the model. The fixed constants are
-the Student-t's 4 degrees of freedom, the ×3 variance of early-access runs, the 100-step limit of §4 and the
-hyper-prior constants above.
+the 100-step limit of §4 and the prior constants above; the tails of the noise and the down-weighting of early-access
+runs are estimated.
 
 - **Couples per group.** A group of *k* couples spends two degrees of freedom on its own offset and gain. The
-  information it brings on the spacing of couples has trace d_b²·(k − 2): three couples is where a group starts to
+  information it brings on the spacing of couples grows with d_b²·(k − 2): three couples is where a group starts to
   inform differences. A group of two couples brings their order, and a magnitude borrowed from the typical gain.
-- **Discrimination.** The factor d_b² makes a saturated or noisy benchmark weigh little.
+- **Discrimination.** The factor d_b² makes a saturated or noisy benchmark weigh little; within a group, a score near
+  a bound weighs less through h_r.
 - **Publishers.** However many groups a publisher contributes, its weight on a couple stays below what its own
   systematic effects allow (τ_c² per couple, ψ² shared across a model's effort levels): a diminishing return that
   follows from the correlation between one publisher's measurements.
 - **Task types.** θ is a random-effects mean over the task types the couple was measured on: a couple measured on
   several types does not inherit one type's advantage; a couple measured on a single type keeps it, shrunk.
-- **Early access.** Three times the noise variance, a third of the weight.
+- **Early access.** Its variance multiplier κ is estimated from how far early-access runs sit from the rest.
 
 ### Estimation
 
-Gibbs sampling in pure Python. The offset o_b is integrated out for the slice-sampling updates of log a_b and log σ_b;
-θ, the effects and o are normal conjugates; the Student-t is a latent scale mixture; the hyper-parameters have
-conjugate updates. Several directions are invisible or nearly invisible to the likelihood, and plain coordinate
-updates cross them slowly; the sampler moves along them exactly: a global rescaling of θ and the effects against the
-gains; for each effect, the couples it belongs to against the effect; the level of every other couple against the
-group offsets; and, for the couple fixed at 0, its own effects and the other effort levels of its model against the
-rest. The remaining invisible directions — a publisher's effects against the offsets of its groups, a task type's
-effects against the offsets of the groups of that type — are held by their priors. Four independent chains of 6,000
-sweeps (2,000 discarded, one draw in two kept) run in parallel; the Gelman–Rubin R̂ across chains is reported for
-every couple. The fitted grids are cached with a fingerprint of the data, the model and its settings, so the page is
-refitted only when one of them changes.
+Hamiltonian Monte Carlo with the No-U-Turn sampler, in Stan (`gen/lqm.stan`, CmdStan run through CmdStanPy);
+the data preparation of §2–§4 is in `gen/lqm.py`. ⟨Parametrisation and settings: to be written once fixed.⟩ The fit
+runs on the maintainer's machine (`gen/fit.py`) and only its results are published (`gen/fit-cache.json`, with a
+fingerprint of the data, the model and its settings); building the page does not need Stan.
+
+A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01 and the bulk
+and tail effective sample sizes at least 400 (Vehtari et al. 2021), no transition diverged, and the Monte Carlo error
+of every displayed value is below half its display rounding (0.0025 on the log scale), so that a refit with another
+seed changes no visible figure. The build refuses a fit that misses one of them.
 
 ### Output
 
-- **Relative quality** — the couple's mean predicted score over the benchmark panel divided by the reference
-  couple's. The panel is every group with a bounded score, each benchmark family counting once; a predicted score is
-  the group's fitted curve at the couple's θ. It reads: *if every couple sat every benchmark of this report, this
-  couple's average score would be this multiple of the reference couple's.* It is computed exactly for every
-  posterior draw, so changing the reference couple divides every value by a constant.
+- **Relative quality** — the couple's expected score averaged over the benchmark panel, divided by the reference
+  couple's. The panel is every group with a bounded score, each benchmark family counting once. The expected score
+  on a panel group is the group's fitted curve at the couple's θ plus its effects there: the publisher and task-type
+  effects the data contain for this couple, and, for those they do not, the average over their distribution
+  (Gauss–Hermite quadrature). It reads: *if every couple sat every benchmark of this report as its publisher ran it,
+  this couple's average score would be this multiple of the reference couple's.*
 - **Relative cost** — exp(θ_c − θ_reference): the cost ratio on a task of typical elasticity.
-- **Centre** — the posterior median.
-- **Band** (16–84 %) — the ratio couple ÷ reference couple that **one new benchmark** would report: a benchmark
-  drawn from the panel (quality) or from the cost groups (cost) with its own gain, level and noise, a new publisher and
-  a new task type, drawn for both couples (a publisher's model effect is shared when both are the same model). It
-  answers "what would an independent new measurement say". The credible interval of the centre, much narrower, is
-  kept in the output.
+- **Centre** — the posterior median of the couple's read-out, divided by the reference couple's: changing the
+  reference divides every value by the same constant.
+- **Interval** (16–84 %) — the couple's own uncertainty, as a quasi-standard error (Firth & de Menezes 2004): one
+  half-width per couple, fitted so that for any two couples √(q_i + q_j) reproduces the 16–84 % spread of their
+  difference across the posterior draws. Two couples compare through their two intervals, whichever the reference;
+  the reference couple has its own interval like any other. The approximation error is reported (§ Checks); it errs
+  on the wide side for neighbouring rungs of one model, whose difference is known more precisely than two separate
+  intervals suggest.
+- **New-source interval** (16–84 %) — what one new source would report for the couple on the same read-out: a new
+  publisher and task-type effect drawn from their laws. It measures how much sources disagree about the couple.
 - **Publication** — a couple is shown only when at least two publishers measured it. The others stay in the fit and
   in the data file.
 
 ### Checks
 
-Scripts in `validation/` reproduce each check.
+Scripts in `gen/validation/` reproduce each check. ⟨Figures to be measured on the final fit.⟩
 
 - **Held-out prediction** (`heldout.py`). One fifth of the percentage scores removed, the model refitted, the
-  removed scores predicted, five times (1,795 scores): median error 1.9 points against 4.7 for a score-ratio
-  baseline (per-benchmark ratios to the reference, weighted median across benchmarks), 90th percentile 8.6 against
-  16.9.
+  removed scores predicted, five times; compared with a score-ratio baseline (per-benchmark ratios to the reference,
+  weighted median across benchmarks); share of removed scores inside their 16–84 % predictive interval (target 68 %).
 - **Known truth** (`synthetic.py`). Synthetic scores on the real design with known qualities, under benchmarks
-  proportional to quality (where score ratios are exact by construction), logistic, and a mix of logistic, linear,
-  power and saturating shapes. The distortion of the recovered scale (RMS error after the best change of unit,
-  relative to the spread of the truth) is the same as the ratio baseline's where ratios are exact (0.059 against
-  0.054) and about half of it otherwise (logistic 0.13 against 0.30, mixed 0.08 against 0.15); both put fewer than
-  2 % of couple pairs in the wrong order.
-- **Sampler** (`sbc.py`). Simulation-based calibration on both axes, on a design with two-couple groups, publishers
-  measuring several effort levels of one model, task types including composites, and Student-t noise: the ranks of
-  the true values are uniform (quality χ² = 11.6, cost χ² = 10.1, 240 ranks each, 5 % critical value 16.9), and a
-  fit with a deliberately wrong prior is rejected (χ² = 354). A fit that ignores the publisher × model effect is not
-  detected by this test: that effect moves θ too little for the ranks to show it.
-- **Reference couple** (`anchor_invariance.py`). Fitting with another couple fixed at 0 and dividing back moves the
-  values by 0.6 % (median) and 2.3 % at most, the size of the Monte Carlo error of those runs.
-- **Band** (`band_coverage.py`). Share of the ratios actually observed in the data (couple ÷ reference couple, same
-  group) inside the 16–84 % band: 82 % for quality (81 % for couples far from the reference), 80 % for cost. The band
-  is slightly conservative.
-- **Sensitivity** (`compare.py`). Removing the largest publisher (a quarter to a third of all rows): quality moves by
-  0.7 % (median) and 1.9 % at most, Kendall τ = 0.98; cost moves by 5.5 % (median) and 13 % at most (the costs of the
-  largest models rest heavily on that publisher's system cards), Kendall τ = 0.97.
-- **Monte Carlo error.** Two independent runs of two short chains (2,500 sweeps) differ by 0.2 % (median) and 1.7 %
-  at most on quality, 1.1 % and 3.6 % on cost; the published fit uses four chains of 6,000 sweeps.
+  proportional to quality (where score ratios are exact by construction), logistic, and a mix of logistic, Elo,
+  power and saturating shapes: distortion of the recovered scale, share of couple pairs in the wrong order, and share
+  of pairs whose true difference lies in the 16–84 % posterior interval and in the quasi-standard-error interval
+  (target 68 % for both).
+- **Sensitivity** (`compare.py`). Removing the largest publisher: how far the values move.
 - **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported. The
-  report is printed, not corrected: an inversion inside the band is left as the data give it.
+  report is printed, not corrected: an inversion inside the interval is left as the data give it.
 
 ## 6. The matrix
 
-One row per model, one column per effort, the cell = relative cost with its band. Rows are ordered by the model's
+One row per model, one column per effort, the cell = relative cost with its interval. Rows are ordered by the model's
 relative quality at its highest published effort. A model without effort levels fills a single merged cell; an
 unpublished couple is shown as n/a.
 
@@ -206,7 +225,7 @@ unpublished couple is shown as n/a.
 - **Cost axis**: log₁₀ of the relative cost.
 - **Quality axis**: a symmetric log around parity, T(Q) = sign(Q − 1)·ln(1 + |Q − 1| / 0.045). It dilates the
   crowded band near the reference and compresses the sparse tails; every distance in quality below is measured in T.
-- One curve per model through its effort ladder. Optional ovals draw each couple's band (cost × quality, asymmetric).
+- One curve per model through its effort ladder. Optional ovals draw each couple's 16–84 % interval (cost × quality).
 
 ## 8. Pareto frontier
 
@@ -230,15 +249,15 @@ What a given quality typically costs, fitted on **every** shown couple, dominate
   quality), 0 on the frontier. Each couple weighs 1 − d/d_max: a frontier couple fully, the farthest couple not at
   all, linearly in between. Equal weights would let strictly dominated couples steer the curve; the frontier alone
   would discard the measurements that populate the middle.
-- **Uncertainty.** Each couple enters as five samples: its centre (½) and its four band extremities — cost low, cost
-  high, quality low, quality high (⅛ each).
+- **Centres only.** Each couple enters at its centre. Smearing a point over its interval through the non-linear T
+  and g would shift it toward parity: a bias, not an uncertainty.
 
 ## 10. Value index
 
 The distance of a couple to the price curve, in log-cost:
 
-    G = ¾·g(T(Q)) + ⅛·g(T(Q_low)) + ⅛·g(T(Q_high))      what the curve charges for this quality
-    C = ¾·log₁₀(cost) + ⅛·log₁₀(cost_low) + ⅛·log₁₀(cost_high)      what the couple costs
+    G = g(T(Q))                                           what the curve charges for this quality
+    C = log₁₀(cost)                                       what the couple costs
     r = G − C                                             positive = cheaper than the going rate
     value index = 100 · 10^(r − r_reference)
 
@@ -284,9 +303,13 @@ moves only when its content (text, figures, data) changes.
   the task-type effect their type; a selection on another axis would not be corrected.
 - The panel of §5 is the benchmarks of this report: adding benchmarks can move relative quality even for couples
   they do not measure, because every couple is read on the same panel.
-- A couple measured by few, disagreeing publishers keeps a wide band, and its centre can move by several percent
+- A couple measured by few, disagreeing publishers keeps a wide interval, and its centre can move by several percent
   when one publisher is added or removed.
 - Republished numbers are detected within a family; a reprint filed under an unrelated group would count twice.
+  Composites are matched to their components from their publisher's documentation; an undocumented composite would
+  count its components twice.
+- Costs are what each source measured at the prices of its day; a price change a source did not report is not
+  corrected, and the data file has no measurement date to apply one systematically.
 - The cost of the largest models rests heavily on their vendor's system cards; removing that publisher moves some
   costs by more than 10 %.
-- Differences smaller than the band — two neighbouring rungs, a crown between two close couples — are ties.
+- Differences smaller than the intervals — two neighbouring rungs, a crown between two close couples — are ties.
