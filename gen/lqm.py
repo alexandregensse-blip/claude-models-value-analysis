@@ -2,30 +2,30 @@
 
 For every measured row r (group b, couple c of model m, publisher s, task type t):
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r,      ε_r ~ Student-t₄(0, m_r · σ_b²)
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b²)
 
   f        per metric (METRIC RULES): empirical logit of a bounded score, log of an unbounded positive quantity,
            identity for an interval or unknown scale; log on the cost axis.
-  o_b      group offset, flat prior.
-  a_b      group gain. Quality: log(a_b/σ_b) ~ N(0, s_d²) (discrimination, pooled; its zero mean sets the unit
-           of θ). Cost: log a_b ~ N(0, s_a²) (elasticity, pooled around 1: θ is the log cost on a typical task).
-  σ_b      group noise. Quality: Jeffreys 1/σ above the metric's resolution. Cost: log σ_b ~ N(μ_σ, s_σ²), pooled.
-  θ_c      latent quality (quality axis) or log cost (cost axis) of the couple; θ ~ N(0, 10²), anchor fixed at 0.
-  u_{s,c}  publisher × couple effect ~ N(0, τ_c²), τ_c² ~ IG(2, β), β ~ Exp(mean 0.05) pooled over couples.
-  w_{s,m}  publisher × model effect, shared by the model's effort levels, ~ N(0, ψ²), ψ² ~ IG(1, 0.01).
-  v_{c,t}  couple × task-type effect ~ N(0, ω²), ω² ~ IG(1, 0.01); composite indices (task type 'mixed') carry none.
-  m_r      3 for an early-access (pre-release) run, else 1.
-  Hyper-priors: s_d², s_a², s_σ² ~ IG(1, 0.25); μ_σ flat.
+  θ_c      latent quality (quality axis) or log cost (cost axis) of the couple. θ sums to zero over the couples:
+           no couple is a reference; the page divides by its reference couple afterwards (a display choice).
+  o_b      group offset, flat. a_b group gain: quality log(a_b/σ_b) ~ N(0, s_g²) (discrimination, pooled; its zero
+           mean sets the unit of θ); cost log a_b ~ N(0, s_g²) (elasticity around 1).
+  σ_b      group noise, never below the metric's resolution. Quality: Jeffreys 1/σ. Cost: log σ_b ~ N(μ_σ, s_σ²).
+  h_r      shape of the sampling noise of an empirical logit, 1/(2√(q(1−q))) at the observed proportion q; 1 else.
+  κ_r      variance multiplier of an early-access run, log κ ~ N(0, 1); 1 for other runs.
+  u, w, v  publisher × couple (sd τ_c, τ_c ~ N⁺(0, s_τ)), publisher × model (sd ψ), couple × task type (sd ω)
+           effects; composites (task type 'mixed') carry no task-type effect.
+  Priors:  θ ~ N(0, 10²); s_g, s_τ, ψ, ω, s_σ ~ N⁺(0, 1); ν ~ Gamma(2, 0.1).
 
-Estimation: Gibbs sampling. o_b is integrated out for the slice-sampling updates of log a_b and log σ_b; θ and the
-effects are normal conjugates; the Student-t is a latent scale mixture; hyper-parameters have conjugate updates.
-Exact moves along directions the likelihood cannot see keep the chain mixing: a global rescaling (θ and effects × λ,
-gains ÷ λ), and for every effect family a shift of the couples that own an effect against it (the anchor's owner:
-the anchor level against everything else). Independent chains run in parallel processes. Pure standard library.
+Estimation: Hamiltonian Monte Carlo (Stan, NUTS) on lqm.stan, run through CmdStanPy. The read-out `level` is computed
+in Stan for every draw; `summarise` turns it into a centre and a per-couple interval (quasi-variances).
 """
-import collections, csv, itertools, math, random, re
+import collections, csv, itertools, math, os, re
 
-from catalog import FAMILY_OF, PUBLISHER_OF
+from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+STAN_FILE = os.path.join(HERE, "lqm.stan")
 
 # ---------------------------------------------------------------- metric rules
 LOG_METRICS = {"best-run-cash$", "xp-x1e5"}                        # positive, unbounded, ratio scale
@@ -61,42 +61,72 @@ def scoring_steps(proportions):
     return min(1.0 / step, MAX_STEPS) if step > 0 else MAX_STEPS
 
 
-def empirical_logit(p, n):
-    """logit((p·n + ½) / (n + 1)): a proportion at 0 or 1 lands half a scoring step inside the bounds."""
-    q = (p * n + 0.5) / (n + 1)
-    return math.log(q / (1 - q))
+def empirical_q(p, n):
+    """(p·n + ½) / (n + 1): a proportion at 0 or 1 lands half a scoring step inside the bounds."""
+    return (p * n + 0.5) / (n + 1)
+
+
+def harness_base(h):
+    """A harness without its version numbers: patch releases of one harness are one configuration."""
+    return re.sub(r"[-_ ]?v?\d+(\.\d+){1,3}(-r\d+)?", "", (h or "").strip())
 
 
 # ---------------------------------------------------------------- data
 EFFORTS = {"low", "medium", "high", "xhigh", "max", "solo"}           # 'solo': a model without an effort setting
 NO_TASK_EFFECT = {"mixed", ""}
-EARLY_ACCESS_VARIANCE = 3.0
 
 
 def load(path, models, field="score"):
     """Rows of the data file → groups ready for fit(). field = 'score' (quality) or 'cost_usd' (cost).
 
-    Republished numbers count once: two groups of one family that share at least two identical values away from the
-    metric's bounds are one experiment printed twice, and their identical rows are kept once, in the larger group.
-    A single coincidence, or equality at a bound (two runs both at 100 %), is not a republication."""
+    1. Composites: a couple measured on a component of a composite (catalog.COMPOSITES) leaves the composite out.
+    2. Homogeneity: a group is split by publisher, harness (without version), scale (bounded scores: bound) and, on
+       the cost axis, cost unit — only rows measured under one configuration are compared.
+    3. Republished numbers count once: two groups of one family that share at least two identical values away from
+       the metric's bounds are one experiment printed twice; their identical rows are kept once, in the larger group.
+       A single coincidence, or equality at a bound (two runs both at 100 %), is not a republication."""
     report = collections.Counter()
-    by_group = collections.defaultdict(list)
+    raw = collections.defaultdict(list)
     for r in csv.DictReader(open(path)):
         if not r["group"] or r["group"].startswith("#") or r["model"] not in models or r["effort"] not in EFFORTS:
             continue
         try:
-            raw = float(r[field])
+            val = float(r[field])
         except (TypeError, ValueError):
             continue
         metric = "usd" if field == "cost_usd" else r["score_metric"]
-        if field == "cost_usd" and raw <= 0:
+        if field == "cost_usd" and val <= 0:
             continue
-        by_group[r["group"]].append(dict(
+        raw[r["group"]].append(dict(
             couple=f'{r["model"]}@{r["effort"]}', model=r["model"], publisher=PUBLISHER_OF.get(r["source"], r["source"]),
-            task=r["task_type"], raw=raw, metric=metric, kind="log" if field == "cost_usd" else kind(metric),
-            m=EARLY_ACCESS_VARIANCE if "EAP-run" in r["confound"] else 1.0))
+            task=r["task_type"] or "", raw=val, metric=metric, kind="log" if field == "cost_usd" else kind(metric),
+            ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]), unit=r["unit"] or ""))
 
-    # --- republications
+    # --- 1. composites
+    for g, spec in COMPOSITES.items():
+        if g not in raw:
+            continue
+        pubs = {x["publisher"] for x in raw[g]}
+        parts = spec if spec != "publisher" else [h for h in raw if h not in COMPOSITES
+                                                  and {x["publisher"] for x in raw[h]} & pubs]
+        measured = {x["couple"] for h in parts for x in raw.get(h, [])}
+        kept = [x for x in raw[g] if x["couple"] not in measured]
+        report["composite row, component measured"] += len(raw[g]) - len(kept)
+        raw[g] = kept
+
+    # --- 2. homogeneity
+    by_group, family = {}, {}
+    for g, rows in raw.items():
+        parts = collections.defaultdict(list)
+        for x in rows:
+            scale = x["unit"] if field == "cost_usd" else (x["kind"], bound(x["metric"]))
+            parts[(x["publisher"], x["harness"], scale)].append(x)
+        for i, (_, xs) in enumerate(sorted(parts.items(), key=lambda kv: -len(kv[1]))):
+            name = g if i == 0 else f"{g}~{i + 1}"
+            by_group[name], family[name] = xs, FAMILY_OF.get(g)
+        report["group split by configuration"] += len(parts) - 1 if parts else 0
+
+    # --- 3. republications
     def same(x1, x2):
         n = bound(x1["metric"]) if field != "cost_usd" else None
         tol = 5e-4 * n if n else 5e-4 * max(abs(x1["raw"]), abs(x2["raw"]))
@@ -110,7 +140,7 @@ def load(path, models, field="score"):
     slots = collections.defaultdict(list)                               # (family, couple) → [(group, row)]
     for g in sorted(by_group, key=lambda g: (-size[g], g)):
         for x in by_group[g]:
-            slots[(FAMILY_OF.get(g, g), x["couple"])].append((g, x))
+            slots[(family[g] or g, x["couple"])].append((g, x))
     matches = collections.Counter()
     for entries in slots.values():
         for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
@@ -147,10 +177,13 @@ def load(path, models, field="score"):
         n_steps = None
         for x in rows:
             v = -x["raw"] if x["metric"] in LOWER_IS_BETTER else x["raw"]
+            x["h"] = 1.0
             if k == "logit":
                 if n_steps is None:
                     n_steps = scoring_steps([y["raw"] / bound(y["metric"]) for y in rows])
-                x["y"] = empirical_logit(x["raw"] / bound(x["metric"]), n_steps)
+                q = empirical_q(x["raw"] / bound(x["metric"]), n_steps)
+                x["y"] = math.log(q / (1 - q))
+                x["h"] = 0.5 / math.sqrt(q * (1 - q))
             elif k == "log":
                 x["y"] = math.log(v)
             else:
@@ -162,306 +195,88 @@ def load(path, models, field="score"):
         steps = sorted({round(abs(p - q), 9) for p in ys for q in ys if p != q})
         for x in rows:
             x["z"] = (x["y"] - mu) / sd                                 # numerical prescale; the model is affine-invariant
-        groups[g] = dict(rows=rows, mu=mu, sd=sd, kind=k, metric=rows[0]["metric"], family=FAMILY_OF.get(g),
-                         n_steps=n_steps,
+        groups[g] = dict(rows=rows, mu=mu, sd=sd, kind=k, metric=rows[0]["metric"], family=family[g],
+                         publisher=rows[0]["publisher"], task=rows[0]["task"], n_steps=n_steps,
                          floor=max((steps[0] if steps else 0.0) / sd / math.sqrt(12), 1e-3))  # noise floor: resolution
     return groups, report, sorted(republished)
 
 
-# ---------------------------------------------------------------- sampler
-def slice_sample(logf, x0, rng, w=1.0, m=20):
-    """Univariate slice sampler with stepping out and shrinkage (Neal 2003)."""
-    y = logf(x0) - rng.expovariate(1.0)
-    lo = x0 - w * rng.random()
-    hi = lo + w
-    j = int(m * rng.random())
-    k = m - 1 - j
-    while j > 0 and logf(lo) > y:
-        lo -= w
-        j -= 1
-    while k > 0 and logf(hi) > y:
-        hi += w
-        k -= 1
-    while True:
-        x1 = lo + (hi - lo) * rng.random()
-        if logf(x1) > y:
-            return x1
-        if x1 < x0:
-            lo = x1
-        else:
-            hi = x1
-
-
-NU = 4.0                                            # Student-t degrees of freedom
-THETA_VAR = 100.0                                   # θ ~ N(0, 10²)
+# ---------------------------------------------------------------- Stan data
 EFFECTS = ("pub_couple", "pub_model", "couple_task")
+GH_NODES = 9                                                        # Gauss–Hermite nodes of the panel read-out
 
 
-def _structure(groups, anchor):
+def panel(groups, names):
+    """Benchmarks a quality is read on: every group with a bounded score, each family counting once."""
+    count = collections.Counter(groups[g]["family"] for g in names if groups[g]["kind"] == "logit")
+    return [(b, 1.0 / count[groups[g]["family"]] if groups[g]["family"] else 1.0)
+            for b, g in enumerate(names) if groups[g]["kind"] == "logit"]
+
+
+def stan_data(groups, axis):
+    """The model's data block, plus the index maps needed to read its output."""
+    import numpy as np
     names = sorted(groups)
     entries = [(b, x) for b, g in enumerate(names) for x in groups[g]["rows"]]
     couples = sorted({x["couple"] for _, x in entries})
     ci = {c: i for i, c in enumerate(couples)}
-    model_of = [c.split("@")[0] for c in couples]
-    keys = {"pub_couple": lambda x: (x["publisher"], x["couple"]),
-            "pub_model": lambda x: (x["publisher"], x["model"]),
-            "couple_task": lambda x: None if x["task"] in NO_TASK_EFFECT else (x["couple"], x["task"])}
-    levels = {e: sorted({keys[e](x) for _, x in entries if keys[e](x) is not None}) for e in EFFECTS}
-    li = {e: {k: i for i, k in enumerate(levels[e])} for e in EFFECTS}
-    # owner of a level = the couples it shifts together: one couple, or all couples of one model
-    owner = {"pub_couple": lambda k: (k[1],), "pub_model": lambda k: tuple(c for c in couples if c.split("@")[0] == k[1]),
-             "couple_task": lambda k: (k[0],)}
-    owners = {}
-    for e in EFFECTS:
-        grp = collections.defaultdict(list)
-        for i, k in enumerate(levels[e]):
-            grp[owner[e](k)].append(i)
-        owners[e] = [(tuple(ci[c] for c in own), idx) for own, idx in grp.items()]
-    rows = []
-    for b, x in entries:
-        eff = [li[e].get(keys[e](x), -1) if keys[e](x) is not None else -1 for e in EFFECTS]
-        # [group, couple, z, m, λ, effect indices…, precision on θ scale, (z − o)/a]
-        rows.append([b, ci[x["couple"]], x["z"], x["m"], 1.0, eff, 0.0, 0.0])
-    return names, couples, ci, model_of, levels, owners, rows
+    model_of = {c: c.split("@")[0] for c in couples}
+    key = {"pub_couple": lambda s, c, t: (s, c),
+           "pub_model": lambda s, c, t: (s, model_of[c]),
+           "couple_task": lambda s, c, t: None if t in NO_TASK_EFFECT else (c, t)}
+    levels = {e: sorted({key[e](x["publisher"], x["couple"], x["task"]) for _, x in entries} - {None}) for e in EFFECTS}
+    li = {e: {k: i + 1 for i, k in enumerate(levels[e])} for e in EFFECTS}     # 1-based; 0 = none
+
+    def lvl(e, s, c, t):
+        k = key[e](s, c, t)
+        return li[e].get(k, 0) if k is not None else 0
+
+    P = panel(groups, names) if axis == "quality" else []
+    xg, wg = np.polynomial.hermite.hermgauss(GH_NODES)
+    data = dict(
+        N=len(entries), G=len(names), C=len(couples), cost=int(axis == "cost"),
+        grp=[b + 1 for b, _ in entries], cpl=[ci[x["couple"]] + 1 for _, x in entries],
+        z=[x["z"] for _, x in entries], h=[x["h"] for _, x in entries], ea=[x["ea"] for _, x in entries],
+        L1=len(levels["pub_couple"]), L2=len(levels["pub_model"]), L3=len(levels["couple_task"]),
+        k1=[lvl("pub_couple", x["publisher"], x["couple"], x["task"]) for _, x in entries],
+        k2=[lvl("pub_model", x["publisher"], x["couple"], x["task"]) for _, x in entries],
+        k3=[lvl("couple_task", x["publisher"], x["couple"], x["task"]) for _, x in entries],
+        own1=[ci[c] + 1 for _, c in levels["pub_couple"]],
+        noise_floor=[groups[g]["floor"] for g in names], mu=[groups[g]["mu"] for g in names],
+        sd=[groups[g]["sd"] for g in names],
+        P=len(P), pg=[b + 1 for b, _ in P], pw=[w for _, w in P],
+        r1=[[lvl("pub_couple", groups[names[b]]["publisher"], c, groups[names[b]]["task"]) for c in couples] for b, _ in P],
+        r2=[[lvl("pub_model", groups[names[b]]["publisher"], c, groups[names[b]]["task"]) for c in couples] for b, _ in P],
+        r3=[[lvl("couple_task", groups[names[b]]["publisher"], c, groups[names[b]]["task"]) for c in couples] for b, _ in P],
+        has_v=[int(groups[names[b]]["task"] not in NO_TASK_EFFECT) for b, _ in P],
+        K=GH_NODES, ghx=list(xg * math.sqrt(2)), ghw=list(wg / math.sqrt(math.pi)))
+    if not P:                                                       # Stan wants a P × C array even when P = 0
+        data.update(r1=np.zeros((0, len(couples)), int), r2=np.zeros((0, len(couples)), int),
+                    r3=np.zeros((0, len(couples)), int))
+    return data, dict(names=names, couples=couples, ci=ci, levels=levels)
 
 
-def fit(groups, anchor, axis="quality", sweeps=5000, burn=1500, thin=2, seed=7, fixed=None):
-    """One Gibbs chain. axis = 'quality' or 'cost'. `fixed` pins hyper-parameters (keys 'sd2', 'sa2',
-    'tau2', 'psi2', 'om2', 'm_sig', 's2_sig'); it exists only for simulation-based calibration."""
-    fixed = fixed or {}
-    cost = axis == "cost"
-    rng = random.Random(seed)
-    names, couples, ci, model_of, levels, owners, rows = _structure(groups, anchor)
-    nG, nC = len(names), len(couples)
-    nL = {e: len(levels[e]) for e in EFFECTS}
-    iA = ci[anchor]
-    by_group, by_couple = collections.defaultdict(list), collections.defaultdict(list)
-    by_level = {e: collections.defaultdict(list) for e in EFFECTS}
-    for r in rows:
-        by_group[r[0]].append(r)
-        by_couple[r[1]].append(r)
-        for j, e in enumerate(EFFECTS):
-            if r[5][j] >= 0:
-                by_level[e][r[5][j]].append(r)
-    level_couple = [ci[k[1]] for k in levels["pub_couple"]]            # τ² is per couple
-    floor = [groups[g]["floor"] for g in names]
-
-    th = [0.0] * nC
-    ef = {e: [0.0] * nL[e] for e in EFFECTS}
-    o, sg, a = [0.0] * nG, [0.5] * nG, [0.5 if not cost else 1.0] * nG
-    sd2, sa2 = fixed.get("sd2", 1.0), fixed.get("sa2", 0.16)
-    tau2 = [fixed.get("tau2", 0.05)] * nC
-    beta = 0.05
-    psi2, om2 = fixed.get("psi2", 0.05), fixed.get("om2", 0.05)
-    m_sig, s2_sig = fixed.get("m_sig", math.log(0.1)), fixed.get("s2_sig", 1.0)
-
-    def var(e, k):
-        return tau2[level_couple[k]] if e == "pub_couple" else (psi2 if e == "pub_model" else om2)
-
-    def X(r):
-        x = th[r[1]]
-        for j, e in enumerate(EFFECTS):
-            if r[5][j] >= 0:
-                x += ef[e][r[5][j]]
-        return x
-
-    def gain_prior(b, l):                                             # −log prior density of log a_b
-        return (0.5 * l * l / sa2) if cost else (0.5 * (l - math.log(sg[b])) ** 2 / sd2)
-
-    draws = []
-    for it in range(sweeps):
-        # ---- group gain, noise, offset (o integrated out for a and σ; moments scale as 1/σ²)
-        for b in range(nG):
-            R = by_group[b]
-            xs = [X(r) for r in R]
-            ws = [r[4] / r[3] for r in R]
-            W1 = sum(ws)
-            mx = sum(w * x for w, x in zip(ws, xs)) / W1
-            my = sum(w * r[2] for w, r in zip(ws, R)) / W1
-            Pxx = Pxy = Pyy = 0.0
-            for w, r, x in zip(ws, R, xs):
-                dx, dy = x - mx, r[2] - my
-                Pxx += w * dx * dx; Pxy += w * dx * dy; Pyy += w * dy * dy
-            s2 = sg[b] ** 2
-
-            def log_post_gain(l):
-                A = math.exp(l)
-                return -0.5 * (Pyy - 2 * A * Pxy + A * A * Pxx) / s2 - gain_prior(b, l)
-            a[b] = math.exp(slice_sample(log_post_gain, math.log(a[b]), rng))
-            A = a[b]
-            rss1 = Pyy - 2 * A * Pxy + A * A * Pxx
-
-            def log_post_noise(l):
-                if l < math.log(floor[b]):
-                    return -1e300
-                if cost:
-                    prior = 0.5 * (l - m_sig) ** 2 / s2_sig
-                else:
-                    prior = 0.5 * (math.log(A) - l) ** 2 / sd2
-                return -len(R) * l - 0.5 * rss1 * math.exp(-2 * l) - 0.5 * (math.log(W1) - 2 * l) - prior
-            sg[b] = math.exp(slice_sample(log_post_noise, math.log(max(sg[b], floor[b] * 1.0001)), rng))
-            o[b] = rng.gauss(my - A * mx, sg[b] / math.sqrt(W1))
-
-        # ---- θ and effects: normal conjugates on the θ scale
-        for r in rows:
-            b = r[0]
-            r[6] = r[4] / (r[3] * sg[b] * sg[b]) * a[b] * a[b]
-            r[7] = (r[2] - o[b]) / a[b]
-        for c in range(nC):
-            if c == iA:
-                continue
-            P, N = 1.0 / THETA_VAR, 0.0
-            for r in by_couple[c]:
-                P += r[6]; N += r[6] * (r[7] - X(r) + th[c])
-            th[c] = rng.gauss(N / P, P ** -0.5)
-        for j, e in enumerate(EFFECTS):
-            vec = ef[e]
-            for k in range(nL[e]):
-                P, N = 1.0 / var(e, k), 0.0
-                for r in by_level[e][k]:
-                    P += r[6]; N += r[6] * (r[7] - X(r) + vec[k])
-                vec[k] = rng.gauss(N / P, P ** -0.5)
-
-        # ---- Student-t scale mixture
-        for r in rows:
-            b = r[0]
-            e_ = r[2] - o[b] - a[b] * X(r)
-            r[4] = rng.gammavariate((NU + 1) / 2, 2.0 / (NU + e_ * e_ / (r[3] * sg[b] ** 2)))
-
-        # ---- hyper-parameters
-        if cost:
-            ls = [math.log(x) for x in sg]
-            if "m_sig" not in fixed:
-                m_sig = rng.gauss(sum(ls) / nG, (s2_sig / nG) ** 0.5)
-            if "s2_sig" not in fixed:
-                s2_sig = 1.0 / rng.gammavariate(1.0 + nG / 2, 1.0 / (0.25 + sum((x - m_sig) ** 2 for x in ls) / 2))
-            if "sa2" not in fixed:
-                sa2 = 1.0 / rng.gammavariate(1.0 + nG / 2, 1.0 / (0.25 + sum(math.log(x) ** 2 for x in a) / 2))
-        elif "sd2" not in fixed:
-            ss = sum(math.log(a[b] / sg[b]) ** 2 for b in range(nG))
-            sd2 = 1.0 / rng.gammavariate(1.0 + nG / 2, 1.0 / (0.25 + ss / 2))
-        if "tau2" not in fixed:
-            per = collections.defaultdict(list)
-            for k, x in enumerate(ef["pub_couple"]):
-                per[level_couple[k]].append(x)
-            for c in range(nC):
-                us = per[c]
-                tau2[c] = 1.0 / rng.gammavariate(2.0 + len(us) / 2, 1.0 / (beta + sum(x * x for x in us) / 2))
-            beta = rng.gammavariate(1.0 + 2.0 * nC, 1.0 / (1.0 / 0.05 + sum(1.0 / t for t in tau2)))
-        if "psi2" not in fixed and nL["pub_model"]:
-            psi2 = 1.0 / rng.gammavariate(1.0 + nL["pub_model"] / 2, 1.0 / (0.01 + sum(x * x for x in ef["pub_model"]) / 2))
-        if "om2" not in fixed and nL["couple_task"]:
-            om2 = 1.0 / rng.gammavariate(1.0 + nL["couple_task"] / 2, 1.0 / (0.01 + sum(x * x for x in ef["couple_task"]) / 2))
-
-        # ---- exact moves along directions the likelihood cannot see
-        def log_post_scale(l):                                        # θ, effects × λ; gains ÷ λ; α − log λ
-            lam2 = math.exp(2 * l)
-            val = (nC - 1 + sum(nL.values())) * l                      # Jacobian of the rescaling
-            val -= 0.5 * lam2 * sum(t * t for t in th) / THETA_VAR
-            for e in EFFECTS:
-                val -= 0.5 * lam2 * sum(x * x / var(e, k) for k, x in enumerate(ef[e]))
-            if cost:
-                val -= 0.5 * sum((math.log(x) - l) ** 2 for x in a) / sa2
-            else:
-                val -= 0.5 * sum((math.log(a[b] / sg[b]) - l) ** 2 for b in range(nG)) / sd2
-            return val
-        lam = math.exp(slice_sample(log_post_scale, 0.0, rng, w=0.3))
-        th = [t * lam for t in th]
-        for e in EFFECTS:
-            ef[e] = [x * lam for x in ef[e]]
-        a = [x / lam for x in a]
-        # Owners against their effects. For an owner set S of couples and its levels K in effect family e:
-        #   anchor ∉ S: θ_c + δ (c ∈ S), effect_k − δ (k ∈ K)
-        #   anchor ∈ S: effect_k + δ (k ∈ K), θ_c + δ (c ∉ S), o_b − a_b·δ; then θ_c + δ (c ∈ S, c ≠ anchor),
-        #               effect_k − δ, the anchor's rows that carry the effect entering the likelihood
-        # δ | rest is normal: the effects' prior, θ's prior, and the rows of S that do not carry an effect of K.
-        for j, e in enumerate(EFFECTS):
-            vec = ef[e]
-            for S, K in owners[e]:
-                Kset = set(K)
-                with_anchor = iA in S
-                P = sum(1.0 / var(e, k) for k in K)
-                N = sum(vec[k] / var(e, k) for k in K) * (-1.0 if with_anchor else 1.0)
-                if with_anchor:
-                    others = [c for c in range(nC) if c not in S]
-                    P += len(others) / THETA_VAR
-                    N -= sum(th[c] for c in others) / THETA_VAR
-                else:
-                    P += len(S) / THETA_VAR
-                    N -= sum(th[c] for c in S) / THETA_VAR
-                for c in S:
-                    for r in by_couple[c]:
-                        if r[5][j] not in Kset:
-                            y = (r[2] - o[r[0]]) / a[r[0]] - X(r)
-                            w = r[4] / (r[3] * sg[r[0]] ** 2) * a[r[0]] ** 2
-                            P += w; N += w * (-y if with_anchor else y)
-                d = rng.gauss(N / P, P ** -0.5)
-                if with_anchor:
-                    for k in K:
-                        vec[k] += d
-                    Sset = set(S)
-                    th = [t if c in Sset else t + d for c, t in enumerate(th)]
-                    o = [o[b] - a[b] * d for b in range(nG)]
-                    # the reference couple's siblings in S against the effect: θ_c + δ (c ∈ S, c ≠ reference),
-                    # effect_k − δ; the reference couple's own rows that carry the effect see −δ
-                    rest = [c for c in S if c != iA]
-                    if rest:
-                        P = sum(1.0 / var(e, k) for k in K) + len(rest) / THETA_VAR
-                        N = sum(vec[k] / var(e, k) for k in K) - sum(th[c] for c in rest) / THETA_VAR
-                        for c in rest:
-                            for r in by_couple[c]:
-                                if r[5][j] not in Kset:
-                                    y = (r[2] - o[r[0]]) / a[r[0]] - X(r)
-                                    w = r[4] / (r[3] * sg[r[0]] ** 2) * a[r[0]] ** 2
-                                    P += w; N += w * y
-                        for r in by_couple[iA]:
-                            if r[5][j] in Kset:
-                                y = (r[2] - o[r[0]]) / a[r[0]] - X(r)
-                                w = r[4] / (r[3] * sg[r[0]] ** 2) * a[r[0]] ** 2
-                                P += w; N -= w * y
-                        d = rng.gauss(N / P, P ** -0.5)
-                        for c in rest:
-                            th[c] += d
-                        for k in K:
-                            vec[k] -= d
-                else:
-                    for c in S:
-                        th[c] += d
-                    for k in K:
-                        vec[k] -= d
-        # the level of every other couple against every offset: θ_{c≠A} + δ, o_b − a_b·δ. Only the reference
-        # couple's rows see it (their residual moves by +δ); δ | rest is normal.
-        P = (nC - 1) / THETA_VAR
-        N = -sum(t for c, t in enumerate(th) if c != iA) / THETA_VAR
-        for r in by_couple[iA]:
-            y = (r[2] - o[r[0]]) / a[r[0]] - X(r)
-            w = r[4] / (r[3] * sg[r[0]] ** 2) * a[r[0]] ** 2
-            P += w; N -= w * y
-        d = rng.gauss(N / P, P ** -0.5)
-        th = [t if c == iA else t + d for c, t in enumerate(th)]
-        o = [o[b] - a[b] * d for b in range(nG)]
-        if it >= burn and (it - burn) % thin == 0:
-            draws.append(dict(th=th[:], a=a[:], sg=sg[:], o=o[:], ef={e: ef[e][:] for e in EFFECTS},
-                              tau2=tau2[:], psi2=psi2, om2=om2, sd2=sd2, sa2=sa2))
-    return dict(axis=axis, couples=couples, ci=ci, model_of=model_of, names=names, levels=levels,
-                groups=groups, anchor=anchor, draws=draws, chains=[len(draws)])
+# ---------------------------------------------------------------- fit
+def cmdstan():
+    import cmdstanpy
+    path = os.environ.get("CMDSTAN") or next(
+        (os.path.join(d, x) for d in [os.path.join(os.path.dirname(HERE), ".stan")] if os.path.isdir(d)
+         for x in sorted(os.listdir(d), reverse=True) if x.startswith("cmdstan-")), None)
+    if path:
+        cmdstanpy.set_cmdstan_path(path)
+    return cmdstanpy
 
 
-def _chain(args):
-    return fit(*args[0], **args[1])["draws"]
-
-
-def fit_chains(groups, anchor, axis="quality", chains=4, sweeps=5000, burn=1500, thin=2, seed=7, processes=None):
-    """Independent chains (seeds seed … seed + chains − 1) in parallel processes; draws pooled, chains kept apart
-    for the convergence diagnostic."""
-    import multiprocessing as mp
-    jobs = [((groups, anchor), dict(axis=axis, sweeps=sweeps, burn=burn, thin=thin, seed=seed + i)) for i in range(chains)]
-    with mp.get_context("fork").Pool(processes or min(chains, mp.cpu_count())) as pool:
-        parts = pool.map(_chain, jobs)
-    F = fit(groups, anchor, axis=axis, sweeps=0)
-    F["draws"] = [d for p in parts for d in p]
-    F["chains"] = [len(p) for p in parts]
-    return F
+def fit(groups, axis="quality", chains=4, warmup=1000, samples=1000, seed=7, parallel=None, adapt_delta=0.9,
+        max_treedepth=10, output_dir=None):
+    """Sample the posterior. Returns the CmdStanMCMC object and the index maps."""
+    cs = cmdstan()
+    data, maps = stan_data(groups, axis)
+    model = cs.CmdStanModel(stan_file=STAN_FILE)
+    mcmc = model.sample(data=data, chains=chains, parallel_chains=parallel or min(chains, os.cpu_count() or 1),
+                        iter_warmup=warmup, iter_sampling=samples, seed=seed, adapt_delta=adapt_delta,
+                        max_treedepth=max_treedepth, show_progress=False, output_dir=output_dir)
+    return mcmc, maps
 
 
 # ---------------------------------------------------------------- reading the posterior
@@ -472,111 +287,78 @@ def quantile(xs, p):
     return xs[f] if f + 1 >= len(xs) else xs[f] + (xs[f + 1] - xs[f]) * (k - f)
 
 
-def rhat(F, index):
-    """Split-free Gelman–Rubin R̂ of θ[index] across chains."""
-    chunks, i = [], 0
-    for n in F["chains"]:
-        chunks.append([d["th"][index] for d in F["draws"][i:i + n]])
-        i += n
-    if len(chunks) < 2:
-        return float("nan")
-    m, n = len(chunks), min(len(c) for c in chunks)
-    means = [sum(c[:n]) / n for c in chunks]
-    grand = sum(means) / m
-    B = n * sum((x - grand) ** 2 for x in means) / (m - 1)
-    Wv = sum(sum((x - mu) ** 2 for x in c[:n]) / (n - 1) for c, mu in zip(chunks, means)) / m
-    return math.sqrt(((n - 1) / n * Wv + B / n) / Wv) if Wv > 0 else float("nan")
+def quasi_variances(L, lo=0.16, hi=0.84):
+    """Quasi-variances (Firth & de Menezes 2004) of the columns of L (draws × couples), fitted on robust spreads.
+
+    For every pair (i, j), V_ij = ((q_hi − q_lo)/2)² of L_i − L_j across draws: the squared half-width of the
+    16–84 % interval of the difference (a variance for a normal law, robust to heavy tails). q ≥ 0 minimises
+    Σ (log(q_i + q_j) − log V_ij)², so that q_i + q_j reproduces V_ij for every pair. Returns (q, worst relative
+    error of √(q_i + q_j) against √V_ij, median relative error)."""
+    import numpy as np
+    L = np.asarray(L)
+    C = L.shape[1]
+    I, J = np.triu_indices(C, 1)
+    D = L[:, I] - L[:, J]
+    V = ((np.quantile(D, hi, axis=0) - np.quantile(D, lo, axis=0)) / 2) ** 2
+    V = np.maximum(V, 1e-12)
+    lq = np.log(np.maximum(np.array([np.median(V[(I == c) | (J == c)]) / 2 for c in range(C)]), 1e-12))
+    for _ in range(500):                                             # Gauss–Newton on log q
+        q = np.exp(lq)
+        s = q[I] + q[J]
+        res = np.log(s) - np.log(V)
+        Jm = np.zeros((len(I), C))
+        Jm[np.arange(len(I)), I] = q[I] / s
+        Jm[np.arange(len(I)), J] = q[J] / s
+        step = np.linalg.lstsq(Jm, -res, rcond=None)[0]
+        lq += step
+        if np.max(np.abs(step)) < 1e-10:
+            break
+    q = np.exp(lq)
+    rel = np.abs(np.sqrt((q[I] + q[J]) / V) - 1)
+    return q, float(rel.max()), float(np.median(rel))
 
 
-def panel(F):
-    """Benchmarks a quality is read on: every group with a bounded score, each family counting once."""
-    out = []
-    count = collections.Counter(F["groups"][g]["family"] for g in F["names"] if F["groups"][g]["kind"] == "logit")
-    for b, g in enumerate(F["names"]):
-        G = F["groups"][g]
-        if G["kind"] == "logit":
-            out.append((b, 1.0 / count[G["family"]] if G["family"] else 1.0))
-    return out
-
-
-def _sigmoid(z):
-    return 1.0 / (1.0 + math.exp(-max(min(z, 50.0), -50.0)))
-
-
-def _score(G, o_b, a_b, x, eps=0.0):
-    """Predicted proportion of group G for a couple at latent position x (θ plus effects), with residual eps."""
-    return _sigmoid(G["mu"] + G["sd"] * (o_b + a_b * x + eps))
-
-
-def _t4(rng):
-    return rng.gauss(0, 1) / math.sqrt(rng.gammavariate(2.0, 0.5))
-
-
-def summarise(F, lo=0.16, hi=0.84, every=4, seed=3, min_publishers=2):
-    """Per couple, relative to the anchor.
-
-    Quality: value = mean predicted score over the benchmark panel ÷ the anchor's (a ratio of expected scores, exact
-    for every draw). Cost: value = exp(θ), the cost ratio on a task of typical elasticity.
-    credible = 16–84 % credible interval of that value.
-    band     = 16–84 % predictive interval of the ratio one NEW benchmark would report: a benchmark drawn from the
-               panel (quality) or from the cost groups (cost) with its gain, level and noise; a new publisher (u, w);
-               a new task type (v); each drawn for the couple and for the anchor, the model-level publisher effect
-               shared when both are the same model.
-    published = measured by at least `min_publishers` publishers."""
-    rng = random.Random(seed)
-    D = F["draws"][::every]
-    iA = F["ci"][F["anchor"]]
-    cost = F["axis"] == "cost"
-    names, groups = F["names"], F["groups"]
-    P = panel(F) if not cost else [(b, 1.0 / (collections.Counter(groups[g]["family"] for g in names)[groups[g]["family"]]
-                                              if groups[g]["family"] else 1.0)) for b, g in enumerate(names)]
-    Wtot = sum(w for _, w in P)
-    cum = list(itertools.accumulate(w for _, w in P))
+def summarise(mcmc, maps, groups, lo=0.16, hi=0.84, min_publishers=2):
+    """Per couple, on the log scale: centre = posterior median of `level`; half = quasi-standard error (the
+    half-width of a 16–84 % interval that makes any two couples comparable); published = measured by at least
+    `min_publishers` publishers. Ratios to a reference couple are exp(centre − centre_ref), each couple keeping its
+    own interval. Also returns the convergence diagnostics."""
+    import numpy as np
+    L = mcmc.stan_variable("level")                                  # draws × couples
+    q, qv_max, qv_med = quasi_variances(L, lo, hi)
     pubs = collections.defaultdict(set)
-    for g in names:
-        for x in groups[g]["rows"]:
+    for g in groups.values():
+        for x in g["rows"]:
             pubs[x["couple"]].add(x["publisher"])
-    model_of = F["model_of"]
+    out = {c: dict(centre=float(np.median(L[:, i])), half=float(math.sqrt(q[i])), publishers=len(pubs[c]),
+                   published=len(pubs[c]) >= min_publishers)
+           for c, i in maps["ci"].items()}
+    return out, diagnostics(mcmc, qv_max, qv_med)
 
-    def draw_group():
-        u = rng.random() * Wtot
-        lo_, hi_ = 0, len(cum) - 1
-        while lo_ < hi_:
-            mid = (lo_ + hi_) // 2
-            if cum[mid] < u:
-                lo_ = mid + 1
-            else:
-                hi_ = mid
-        return P[lo_][0]
 
-    out = {}
-    for c, i in F["ci"].items():
-        centre, pred = [], []
-        for d in D:
-            if cost:
-                centre.append(d["th"][i])
-            else:
-                num = sum(w * _score(groups[names[b]], d["o"][b], d["a"][b], d["th"][i]) for b, w in P)
-                den = sum(w * _score(groups[names[b]], d["o"][b], d["a"][b], 0.0) for b, w in P)
-                centre.append(math.log(num / den))
-            # one new benchmark
-            b = draw_group()
-            G = groups[names[b]]
-            same_model = model_of[i] == model_of[iA]
-            w_c = rng.gauss(0, d["psi2"] ** 0.5)
-            w_a = w_c if same_model else rng.gauss(0, d["psi2"] ** 0.5)
-            x_c = d["th"][i] + rng.gauss(0, d["tau2"][i] ** 0.5) + w_c + rng.gauss(0, d["om2"] ** 0.5)
-            x_a = 0.0 + rng.gauss(0, d["tau2"][iA] ** 0.5) + w_a + rng.gauss(0, d["om2"] ** 0.5)
-            if i == iA:
-                pred.append(0.0)
-                continue
-            e_c, e_a = d["sg"][b] * _t4(rng), d["sg"][b] * _t4(rng)
-            if cost:
-                pred.append(d["a"][b] * (x_c - x_a) + e_c - e_a)
-            else:
-                pred.append(math.log(_score(G, d["o"][b], d["a"][b], x_c, e_c) / _score(G, d["o"][b], d["a"][b], x_a, e_a)))
-        out[c] = dict(value=math.exp(quantile(centre, 0.5)),
-                      credible=(math.exp(quantile(centre, lo)), math.exp(quantile(centre, hi))),
-                      band=(math.exp(quantile(pred, lo)), math.exp(quantile(pred, hi))),
-                      publishers=len(pubs[c]), published=len(pubs[c]) >= min_publishers, rhat=rhat(F, i))
-    return out
+def diagnostics(mcmc, qv_max=None, qv_med=None):
+    """Rank-normalised split R̂ and bulk/tail ESS over every parameter and read-out (Vehtari et al. 2021), from
+    CmdStan's stansummary; divergent transitions and saturated trees."""
+    s = mcmc.summary()
+    s = s[[not i.startswith("lp__") for i in s.index]]
+    col = {c.lower(): c for c in s.columns}
+    rh, eb, et = s[col["r_hat"]], s[col.get("ess_bulk", "ESS_bulk")], s[col.get("ess_tail", "ESS_tail")]
+    lvl = s[[i.startswith("level[") for i in s.index]]
+    d = mcmc.diagnose() or ""
+    div = int(sum(mcmc.divergences)) if mcmc.divergences is not None else None
+    tree = int(sum(mcmc.max_treedepths)) if mcmc.max_treedepths is not None else None
+    return dict(rhat_max=round(float(rh.max()), 4), ess_bulk_min=int(eb.min()), ess_tail_min=int(et.min()),
+                rhat_max_level=round(float(lvl[col["r_hat"]].max()), 4),
+                ess_bulk_min_level=int(lvl[col.get("ess_bulk", "ESS_bulk")].min()),
+                divergences=div, max_treedepth_hits=tree, draws=int(mcmc.draws().shape[0] * mcmc.chains),
+                worst_rhat=list(rh.sort_values(ascending=False).index[:5]),
+                qv_error_max=None if qv_max is None else round(qv_max, 4),
+                qv_error_median=None if qv_med is None else round(qv_med, 4))
+
+
+CONVERGED = dict(rhat=1.01, ess=400)
+
+
+def converged(diag):
+    return (diag["rhat_max"] <= CONVERGED["rhat"] and diag["ess_bulk_min"] >= CONVERGED["ess"]
+            and diag["ess_tail_min"] >= CONVERGED["ess"] and diag["divergences"] == 0)

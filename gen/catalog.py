@@ -68,3 +68,15 @@ FAMILY_OF = {g: f for f, gs in FAMILIES.items() for g in gs}
 # Outlets of one organisation that publish its own measurements: one publisher.
 PUBLISHER_OF = {"anthropic-syscard": "anthropic", "anthropic-chart": "anthropic", "anthropic-docs": "anthropic",
                 "anthropic-cookbook": "anthropic", "claude-dev-blog": "anthropic"}
+
+# Composite scores (an index, an average or a total over several benchmarks) and what they aggregate: a list of
+# component groups, or "publisher" = every other group of the same publisher (its index is built from its own
+# benchmarks). A composite and its components are the same measurements counted twice: for a couple measured on at
+# least one component, the composite row is left out (lqm.load). A couple measured only on the composite keeps it.
+COMPOSITES = {
+    "aa-index": "publisher", "aa-index-pertask": "publisher", "aa-index-pertask2": "publisher",
+    "aa-index-pertask3": "publisher", "aa-index4": "publisher", "aa-index43": "publisher",
+    "valsindex": "publisher", "valsindex2": "publisher", "valsmmindex": "publisher",
+    "boxs55-all": ["boxs55-finserv", "boxs55-legal", "boxs55-lifesci", "boxs55-public"],
+    "nnrlog-total": "publisher",
+}
