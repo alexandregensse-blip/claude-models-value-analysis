@@ -91,7 +91,7 @@ def write_root_files(date, pre, anchor_label):
 
 {pre.get("answer-full", "")}
 
-Costs and qualities are relative to {anchor_label} = 1.00. They are fused from measurements taken on the same task by a latent-quality model that estimates each benchmark's own scale (method: METHODOLOGY.md in the source repository), from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
+Costs and qualities are relative to {anchor_label} = 1.00. They are fused from measurements taken on the same task by a latent-quality model that estimates each benchmark's own scale (method: docs/METHODOLOGY.md in the source repository), from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
 
 ## Report
 
