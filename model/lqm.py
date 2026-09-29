@@ -130,9 +130,9 @@ def load(path, models, field="score"):
        larger group. Identical
        means within what separates two copies of one number: both reading precisions (2·√(δ₁² + δ₂²): two readings
        of one chart point, or of two charts drawing it) plus one unit of the last digit of each (a rounding made the
-       wrong way somewhere along the publisher's pipeline). Two rows are one measurement only if both their values agree, the
-       score and the cost, wherever both rows carry them on one scale; a run scored two ways (two metrics) shares its
-       cost only. Confirmed on both axes, the two groups must agree on every value they share but one (a miscopy), and
+       wrong way somewhere along the publisher's pipeline). Two rows are one execution only if both their values agree, the
+       score and the cost, wherever both rows carry them on one scale. One run scored with two metrics is one
+       execution, whose quality is measured once: its cost identifies it, and its rows are kept once on both axes. Confirmed on both axes, the two groups must agree on every value they share but one (a miscopy), and
        on two at least; on one axis alone (the other absent or on another metric), on every value, three at least. Groups are compared within a benchmark family, and within a publisher across its families (the same
        runs reprinted under another grouping). The series must
        agree on every value the two groups share but one at most (one number miscopied): a few coincidences among
@@ -184,16 +184,27 @@ def load(path, models, field="score"):
     def close(v1, d1, s1, v2, d2, s2):
         return abs(v1 - v2) <= 2 * math.hypot(d1, d2) + s1 + s2
 
+    def scale(metric):                                                  # a percentage and a pass rate are one scale
+        return ("bounded", bound(metric)) if bound(metric) else metric
+
     def same(x1, x2):
-        """One measurement printed twice: 0 = no; 2 = the value agrees and so does the other axis, both rows carrying
-        it on one scale; 1 = the value agrees, the other axis cannot tell (absent, or one run scored on two metrics,
-        which shares its cost but not its score)."""
-        if not close(x1["raw"], x1["prec"], x1["step"], x2["raw"], x2["prec"], x2["step"]):
-            return 0
+        """One execution printed twice: 0 = no; 2 = both axes agree, each on one scale; 1 = one axis agrees and the
+        other cannot tell (absent, or on another scale). One run scored with two metrics is one execution: its two
+        scores do not compare, its cost is one. Two scores on one scale under two labels are one metric if they agree
+        (a label written two ways), two metrics if they do not."""
+        def agree(v1, v2, metric1, metric2, cost):
+            if cost and metric1 != metric2 or not cost and scale(metric1) != scale(metric2):
+                return None                                             # not on one scale: cannot tell
+            if close(*v1, *v2):
+                return True
+            return False if cost or metric1 == metric2 else None
+        a = agree((x1["raw"], x1["prec"], x1["step"]), (x2["raw"], x2["prec"], x2["step"]),
+                  *((x1["unit"], x2["unit"]) if field == "cost_usd" else (x1["metric"], x2["metric"])), field == "cost_usd")
         o1, o2 = x1["other"], x2["other"]
-        if o1 is None or o2 is None or o1[3] != o2[3]:
-            return 1
-        return 2 if close(o1[0], o1[1], o1[2], o2[0], o2[1], o2[2]) else 0
+        b = None if o1 is None or o2 is None else agree(o1[:3], o2[:3], o1[3], o2[3], field != "cost_usd")
+        if a is False or b is False:
+            return 0
+        return 2 if a and b else 1 if a or b else 0
 
     def at_bound(x):
         n = bound(x["metric"]) if field != "cost_usd" else None
