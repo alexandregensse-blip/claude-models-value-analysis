@@ -230,13 +230,13 @@ def build(CG, QG, PANEL):
         """The same quality for less, said first when a cheaper setting of one model matches the other's best."""
         for f in d["facts"]:
             if f["kind"] == "match" and f["ratio"] < 1 and f["m"]["m"] != f["best"]["m"]:
-                return (f'<p class="duel-same"><b style="color:var({MODELS[f["m"]["m"]]["colour"]})">{esc(L(f["m"]["m"]))} at {CAP[f["m"]["e"]] or "its only setting"}</b> '
-                        f'gives the same quality as <b style="color:var({MODELS[f["best"]["m"]]["colour"]})">{esc(L(f["best"]["m"]))} at {CAP[f["best"]["e"]] or "its only setting"}</b> '
+                return (f'<p class="duel-same"><b style="color:color-mix(in srgb,var({MODELS[f["m"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["m"]["m"]))} at {CAP[f["m"]["e"]] or "its only setting"}</b> '
+                        f'gives the same quality as <b style="color:color-mix(in srgb,var({MODELS[f["best"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["best"]["m"]))} at {CAP[f["best"]["e"]] or "its only setting"}</b> '
                         f'for <b>{fmt_ratio(1 / f["ratio"])} less</b> per task.</p>')
         return ""
 
-    legend = lambda d: (f'<h3 class="duel-legend"><span style="color:var({MODELS[d["a"]]["colour"]})"><i class="ln" style="background:var({MODELS[d["a"]]["colour"]})"></i>{esc(d["A"])}</span>'
-                        f'<span class="vs">vs</span><span style="color:var({MODELS[d["b"]]["colour"]})"><i class="ln" style="background:var({MODELS[d["b"]]["colour"]})"></i>{esc(d["B"])}</span></h3>')
+    legend = lambda d: (f'<h3 class="duel-legend"><span style="color:color-mix(in srgb,var({MODELS[d["a"]]["colour"]}) 78%,var(--ink))"><i class="ln" style="background:var({MODELS[d["a"]]["colour"]})"></i>{esc(d["A"])}</span>'
+                        f'<span class="vs">vs</span><span style="color:color-mix(in srgb,var({MODELS[d["b"]]["colour"]}) 78%,var(--ink))"><i class="ln" style="background:var({MODELS[d["b"]]["colour"]})"></i>{esc(d["B"])}</span></h3>')
     lines_html = lambda d: ('<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
                             + "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"]))
 
@@ -374,11 +374,11 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .chip-group .cc-k{margin:0}
 .chip-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .chip{font:inherit;font-size:17px;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line2);
-  border-radius:14px;padding:16px 22px;min-width:132px;display:inline-flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;opacity:.5;
+  border-radius:14px;padding:16px 22px;min-width:132px;display:inline-flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;color:var(--muted);border-color:var(--line);
   transition:opacity .15s,border-color .15s,background .15s,box-shadow .15s}
 .chip .dot{width:11px;height:11px}
-.chip:hover{opacity:.8}
-.chip[aria-pressed="true"]{opacity:1;border-color:var(--c);background:color-mix(in srgb,var(--c) 11%,var(--panel));
+.chip:hover{color:var(--ink);border-color:var(--line2)}
+.chip[aria-pressed="true"]{color:var(--ink);border-color:var(--c);background:color-mix(in srgb,var(--c) 11%,var(--panel));
   box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 16%,transparent)}
 .chip:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 @media (max-width:520px){.chip{min-width:0;flex:1 1 40%;padding:16px 14px}}
