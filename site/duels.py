@@ -357,6 +357,7 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .cmp-right .cmp-tbl .chartbox{flex:1}
 .cmp-right .duel-tbl{height:100%}
 @media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
+.eyebrow a{color:inherit;text-decoration:none}.eyebrow a:hover{text-decoration:underline}
 .duel-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin:0 0 12px;
   font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.1}
 .duel-legend .ln{display:inline-block;width:26px;height:4px;border-radius:2px;vertical-align:middle;margin-right:10px}
