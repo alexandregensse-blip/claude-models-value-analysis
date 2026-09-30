@@ -63,6 +63,8 @@ function fitTrend(rows){ let a=0, l=0;
 // trend gives for its cost, shown in points of expected score.
 const valueOf=(tr,p)=>tr.at(p.t)-p.x;
 const vWord=r=>`${fmtX(Math.exp(Math.abs(r)))} ${r>=0?"cheaper":"dearer"}`;
+// VALUE INDEX: 100·e^r — 100 is the trend, 500 five times cheaper than the trend at that quality, 50 twice as dear.
+const vIndex=r=>Math.round(100*Math.exp(r));
 const qGain=(tr,p)=>tr.l>0?100*(p.s-score(p.t-valueOf(tr,p)/tr.l)):0;   // points of expected score above the trend
 
 // Older-model toggle: the grids keep a full copy; hiding a model removes it from every view and every fit
@@ -304,7 +306,7 @@ function fillScoreTable(rows,tr){
   rows.map(p=>({...p,r:valueOf(tr,p)})).sort((a,b)=>b.r-a.r).forEach(p=>{ const col=cvar(MODELS[p.m].c),
     // Intensity from the distance to the trend in decades, so 2× cheaper and 2× dearer read equally strong; capped at one decade.
     sc=p.r>=0?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(p.r)/Math.LN10,1)*0.52)*100),
-    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${vWord(p.r)}</span>`;
+    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${vIndex(p.r)}</span>`;
     const row=document.createElement("tr");
     row.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}${p.front?"":" <span class=\"faint\">(within reach)</span>"}</td>`
       +`<td class="num">${fmtC(p.c)}×</td><td class="num">${pct(p.s)}</td>`
@@ -365,7 +367,7 @@ function drawTiers(){
           <span class="tier-pick"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
           <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b> · Score <b>${pct(w.s)}</b></span>
         </div>
-        <div class="tier-yield">${fmtX(Math.exp(Math.abs(w.r)))}<small>${w.r>=0?"cheaper":"dearer"} than the trend</small></div>
+        <div class="tier-yield">${vIndex(w.r)}</div>
       </div>
       ${ex?`<span class="ex">${ex}</span>`:''}
     </div>`;
@@ -379,8 +381,8 @@ function drawTiers(){
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
-      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · <b>${vWord(c.r)}</b> than the trend</div>
-      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. The trend is fitted on <b>every</b> couple shown, so it is the going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
+      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows over the θ axis (labelled in expected score) plus the couples within
