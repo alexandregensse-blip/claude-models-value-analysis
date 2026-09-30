@@ -6,9 +6,7 @@
 // θ sums to zero: no couple is a reference; the page divides by its reference couple afterwards. h_r is the noise
 // shape of an empirical logit, 1/(2√(q(1−q))) at the observed proportion (1 on other scales); κ_r the estimated
 // variance multiplier of an early-access run; d_r the known reading precision of the value (rounding of a printed
-// number, resolution of a digitised chart, propagated through a computation). A bounded score at 0 % or 100 % is
-// censored: the row says only that the score is at most (at least) the value half a scoring step inside the bound.
-// `level` (generated quantities) is the
+// number, resolution of a digitised chart, propagated through a computation). `level` (generated quantities) is the
 // read-out published by the page; what one new source would report (`level_new`) is computed from the draws in lqm.py.
 //
 // Writing (the model is unchanged by any of it; see model/validation and the fit diagnostics):
@@ -32,7 +30,6 @@ data {
   vector[N] z;                                     // f(y), prescaled per group: z = (f(y) − mu_b) / sd_b
   vector<lower=0>[N] h;                            // noise shape of the row (1 unless the group is a logit)
   vector<lower=0>[N] d;                            // reading precision of the value, on the scale of z
-  array[N] int<lower=-1, upper=1> cens;            // +1: score at its upper bound, read as "at least z"; −1: "at most z"
   array[N] int<lower=0, upper=1> ea;               // early-access run
   int<lower=0> L1;                                 // publisher × couple levels
   int<lower=0> L2;                                 // publisher × model levels
@@ -66,12 +63,6 @@ data {
   vector[K] ghw;
 }
 transformed data {
-  int nU = 0; int nL = 0;
-  for (r in 1:N) { nU += cens[r] == 1; nL += cens[r] == -1; }
-  array[N - nU - nL] int iO; array[nU] int iU; array[nL] int iL;
-  { int o_ = 1; int u_ = 1; int l_ = 1;
-    for (r in 1:N) { if (cens[r] == 1) { iU[u_] = r; u_ += 1; } else if (cens[r] == -1) { iL[l_] = r; l_ += 1; }
-                     else { iO[o_] = r; o_ += 1; } } }
   vector[N] d2 = square(d);
   int has_ea = max(ea);
   vector[N] hea = h .* to_vector(ea);              // h on early-access rows, 0 elsewhere
@@ -182,10 +173,7 @@ model {
                   + csr_matrix_times_vector(N, L3, wB3, vB3, uB3, e3 - m3[set3]);
     real km1 = has_ea ? exp(0.5 * log_kappa[1]) - 1 : 0;   // variance multiplier of early access, minus 1
     vector[N] scale = sqrt(square(sigma[grp] .* (h + hea * km1)) + d2);
-    vector[N] m = o[grp] + a[grp] .* x;
-    z[iO] ~ student_t(nu, m[iO], scale[iO]);
-    if (nU) target += student_t_lccdf(z[iU] | nu, m[iU], scale[iU]);   // censored at the upper bound: P(score ≥ z)
-    if (nL) target += student_t_lcdf(z[iL] | nu, m[iL], scale[iL]);    // censored at the lower bound: P(score ≤ z)
+    z ~ student_t(nu, o[grp] + a[grp] .* x, scale);
   }
   theta ~ normal(0, theta_scale);
   lg_raw[iNG] ~ std_normal();
