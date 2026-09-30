@@ -5,6 +5,115 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the fourteenth and fifteenth passes: a trapped chain, pre-fit checks
+
+**What happened.** With the new sources the quality axis stopped converging: nutpie ran 35 minutes for R̂ 2.83, the
+CmdStan restart 8 more for R̂ 1.016. A three-minute fit (4 × 500 + 500) reproduced it. Two chains out of four sat in a
+region where the spread of the groups' gains (s_g) reached 4–6, a few groups became near-perfect discriminators and
+Haiku 4.5 went to θ −28; their log density was −905 and −3385 against −510 for the two others: not another
+explanation of the data but a trap. nutpie starts every chain at random in (−2, 2) on the unconstrained scale and
+ignores given starting points (checked in its source: `init_mean` is not passed to Stan models), so s_g started
+anywhere in 0.14–7.4; the new data made the funnel of large s_g easier to fall into. Not the cause, tested in short
+fits: dropping the new Haiku rows, a τ shared by all couples, a narrower prior on s_g.
+
+**What changed.**
+- *Writing of the model:* s_g is sampled on its log scale with its origin at a plausible value (log s_g = −0.5, unit
+  0.5): same prior, same density; random starts now fall around s_g 0.2–1.6. Short fit R̂ 2.8 → 1.10.
+- *Pre-fit checks* (`model/precheck.py`, run by `model/fit.py`): a score beyond its label's bound stops the run
+  (two found and rewritten on their labels' scale: `nnrlog-game` 100/50 → 2/1 of 2, `forgep2` 100 → 10 of 10); the
+  same runs under two metrics are reported (same cost within 1 % on 3 shared couples or more, republications
+  already recognised aside; one report, `ctala`/`ctala-cc`, whose costs are list-price assumptions, not duplicates);
+  a fraction above 1 is reported (KernelBench); a 3-minute smoke fit must reach R̂ ≤ 1.5 before the full fit.
+- *Tried and withdrawn:* reading a score at 0 % or 100 % as censored ("at least the value half a step inside the
+  bound"). It kept every couple's order, moved the top couples' θ by 0.1–0.35 (intervals ±0.4–0.8) and the scores by
+  0.2–0.5 point, and made the quality axis 2.5 times slower (27 min against 9).
+
+**Fit of 30 Sep 2026** (smoke 1.14; cost 472 s, R̂ 1.002, ESS 3158; quality 624 s, R̂ 1.009, ESS 410; no
+divergence). Picks before → after the two salvos:
+
+| | before | after |
+|---|---|---|
+| Crown | Sonnet 5.5 high, 4.3× cheaper than the trend | Sonnet 5.5 medium, 5.0× |
+| Grunt work | Sonnet 5.5 high | Sonnet 5.5 medium |
+| Everyday tasks | Sonnet 5.5 high | Sonnet 5.5 high |
+| Advanced reasoning | Opus 5.5 medium | Sonnet 5.5 high |
+| Cutting-Edge thinking | Opus 5.5 high | Opus 5.5 high |
+
+Sonnet 5.5 xHigh joins the frontier and Sonnet 5.5 max comes within reach; Haiku 4.5 and Opus 5.5 low leave it.
+
+## Fifteenth pass: Opus 5.5 and Sonnet 5.5, fourth salvo
+
+Five Sonnet agents with a 12-minute budget each (leaderboards, GitHub and Hugging Face, English, Japanese, other
+languages), 30 Sep 2026; each stopped after two or three minutes and was resumed once with an absolute end time.
+Every number was re-read at its source; the agents' "new" Vals boards were already in, and their draft Epoch list
+was redone from the archive itself.
+**172 → 185 sources, 491 → 548 benchmarks, 3435 → 3758 measurements over the two salvos** (fourteenth and
+fifteenth passes together, counted as the page counts them). Opus 5.5 rests on 484 measurements in 229 benchmarks from
+74 sources (432, 184, 60 before), Sonnet 5.5 on 335 in 164 from 41 (280, 122, 29).
+
+- **Admitted.**
+  - *Epoch AI's own evaluations* (benchmarking-hub archive, read 30 Sep): fifteen benchmarks with effort in the
+    model-version suffix — FrontierMath (tiers 1–3 and 4, v2 and v1), GPQA Diamond, OTIS mock AIME, EBR-Bench,
+    furniture assembly, MirrorCode, mystery game puzzles, chess puzzles, SimpleQA Verified, SWE-bench Verified,
+    MATH level 5, Erdős problems. Score only. Suffix `_none` is `nothink`; a thinking budget (`_16K`, `_32K`) or no
+    suffix stays out of the fit. The archive's `_external` files re-publish other boards and are not taken.
+  - *Vals Index*: recomputed on 29 Sep with the older models dropped; the six current models move to `valsindex3`
+    at the new values, the four older ones stay in `valsindex2` as the 27 Sep version.
+  - *BullshitBench v2*: the group was a quote of the board in a claude-code issue; it is now the primary leaderboard
+    (petergpt/bullshit-benchmark, 28 Claude couples, Opus 5.5 and Sonnet 5.5 at `low` and `max`), whose values have
+    since been re-graded.
+  - *Dyad app-builder* (three apps, six Claude models at Dyad's default `medium`, composite score and cost),
+    *ibragim.dev* personal coding evals (Pi and Claude Code harnesses, efforts on the board, 10 tasks × 3 runs),
+    *uhyo*'s React proficiency (13 specs × 3, judge pinned to Sonnet 4.6), *KernelBench* CUDA problems (fraction of
+    hardware peak, which can exceed 1: read as is), *LMArena Text* (Elo), *Akita* v4 (Rails app with planted
+    sabotages; effort not stated, so out of the fit).
+- **Not admitted.** Usage-log analyses (ai_arai_ally, hacklog_stealth's re-pricing), a before/after where model,
+  effort and app version changed at once (tenpachi), noxaudit (finding counts, effort not stated), Driftproof (Claude
+  Code's default effort), single-model posts, and restatements of the launch figures in every language searched.
+- **Found empty.** Aider, SimpleBench, Toolathlon, tau-bench, GDPval, BrowseComp, HLE, Vending-Bench, SWE-Lancer,
+  BFCL, LiveCodeBench Pro, OpenCompass and SuperCLUE (rendered in the browser only), Hugging Face.
+
+## Fourteenth pass: Sonnet 5.5, third salvo
+
+Five Sonnet agents on narrow axes, 30 Sep 2026 (two leaderboard lists, GitHub and Hugging Face, the English web,
+the non-English web), each resumed once when it stopped after two or three minutes. Every number below was re-read
+at its source before entering the data file; several agent drafts were corrected (tables read from the articles'
+images, efforts taken from the configuration, groups split by task).
+Counts and effect: see the fifteenth pass, fitted together.
+
+- **Admitted.**
+  - *bug-hunt-bench*: Sonnet 5.5 is now a mean of three runs on all five rungs, like Opus 5.5 (tokens averaged
+    from the repo's per-run metrics, which reproduce Opus 5.5's 346,678 exactly); the single `max` and `xhigh` runs of
+    the twelfth pass were the first of those three and are replaced, not added.
+  - *LMArena WebDev* (Code arena, Overall): a new score-only group, Elo with no cost; effort read from the arena's
+    model key (`claude-sonnet-5-5-high`, `claude-opus-5-max-webdev`…), flagged unconfirmed. Five couples enter the
+    fit; the thinking/non-thinking keys of older models are kept as `default`/`nothink`.
+  - *Zapier AutomationBench*: the board now lists Sonnet 5.5 `xhigh` and `max` (36.83 %, \$0.48; 44.75 %, \$1.14);
+    they replace the system-card digitisation of the same runs (36.9 / 44.7); `low`–`high` stay digitised.
+  - *kamui/code-review-bench*: two groups where Sonnet 5.5 and Opus 5.5 ran the same skill snapshot on the same
+    12 PRs × 3 trials at `high` (/ce-code-review, /thermo-nuclear review): recall and cohort cost. The built-in
+    `/code-review` arms are not comparable (Sonnet 5 ran another built-in prompt; the Opus 5.5 baseline covered 10
+    PRs, its gap runs have no cost).
+  - *AI for Mortals* (Pat Simmons): five Claude Code `/goal` builds at `high` for Sonnet 5.5, Sonnet 5, Opus 5.5 and
+    Fable 5.1, cost and tokens per build; no numeric score.
+  - *note.com renkon40*: eight personal tasks, Sonnet 5.5 (`high`/`xhigh`/`max`) against Opus 5.5, blind AI judges,
+    costs at list price — both tables read from the article's images; Opus 5.5's 3-minute slides (an earlier chat
+    work) and its homepage with a skill (the others ran without) are kept as inactive rows.
+  - *note.com claudecode_lab*: an invoice check, Sonnet 5.5 and Opus 5.5 × `low`/`medium`/`high`/`max`, 7/7
+    everywhere (saturated, cost kept).
+  - *qiita yama3133*: five tasks across five models; Sonnet 5.5 and Opus 5.5 at `medium`, the others at their
+    Claude Code default (`default`, which is `high` for Sonnet 5 and Opus 5 in 2.1.284).
+  - *qiita dahatake*: a spreadsheet engine and a SQL engine (two prompts) in GitHub Copilot CLI at `medium`, three
+    runs each, hidden tests; cost in Copilot credits.
+- **Already in.** ObviousBench PR #39 (Sonnet 5.5 entered from the PR's earlier head on 29 Sep; unchanged at
+  `bb435cb`, still unmerged); the six Vals boards and the AA effort pages an agent reported as new.
+- **Not admitted.** Driftproof report 013 (every arm at Claude Code's default effort, scores as ranges); an
+  avenoxai repo of creative builds without a score; a Chinese case study quoted without its author.
+- **Found empty.** ARC Prize, Epoch, LiveCodeBench, Kilo, OpenRouter, SimpleBench, Aider, Terminal-Bench (2.1, 4.0),
+  SWE-bench, swe-rebench, DeepSWE, OSWorld, Sonar (which has added Opus 5.5, not Sonnet 5.5 yet), Hugging Face;
+  SEAL, aipricing.guru and marginlab unreachable; restatements of the launch figures in English, Japanese, Chinese
+  and Korean.
+
 ## Method change: the display without a reference couple, decided on the latent scale
 
 **Why.** The page divided every value by a reference couple (Opus 5 @high = 1.00), and several display choices leaked

@@ -12,6 +12,11 @@
 // Writing (the model is unchanged by any of it; see model/validation and the fit diagnostics):
 //  * log σ_b centred in every group and log a_b centred in groups of ≥ 20 rows (non-centred elsewhere): the
 //    parameterisation under which NUTS mixes on both axes;
+//  * s_g (the spread of the groups' gains) sampled on its log scale with its origin at a plausible value
+//    (log s_g = −0.5 ± 0.5 per unit): same prior, same density. nutpie starts every chain at random in (−2, 2) on
+//    the unconstrained scale and ignores given starting points; on the plain log scale that put s_g anywhere in
+//    0.14–7.4, and a chain started high stayed trapped in a low-density funnel of huge gains (log density −900 to
+//    −3400 against −510), after the sources of 30 Sep 2026;
 //  * effects centred within their set and mapped to rows by sparse products, the row scales as vector expressions,
 //    so that stanc --O1 keeps every vector in struct-of-arrays form (−36 % per gradient; compile with --O1 and
 //    STAN_NO_RANGE_CHECKS, as lqm.fit does).
@@ -134,7 +139,7 @@ parameters {
   sum_to_zero_vector[C] theta;
   vector[G] o;
   vector[G] lg_raw;
-  real<lower=0> s_g;
+  real<offset=-0.5, multiplier=0.5> log_s_g;           // s_g on its log scale (see the header)
   vector[L1] z1;
   vector[L2] z2;
   vector[L3] z3;
@@ -149,6 +154,7 @@ parameters {
   vector[G] log_sigma;
 }
 transformed parameters {
+  real<lower=0> s_g = exp(log_s_g);
   vector[G] sigma = exp(log_sigma);
   vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (s_g * lg_raw + qual * log_sigma));   // qual = 1 − cost (0·x = 0 exactly)
   vector[C] tau = s_tau * tau_raw;
@@ -176,6 +182,7 @@ model {
   z2 ~ std_normal();
   z3 ~ std_normal();
   s_g ~ student_t(3, 0, 2.5);
+  target += log_s_g;                                   // Jacobian of s_g = exp(log_s_g)
   tau_raw ~ std_normal();
   s_tau ~ student_t(3, 0, 2.5);
   psi ~ student_t(3, 0, 2.5);

@@ -323,7 +323,7 @@
   "valsindex2": {
    "label": "Vals Index 09/26",
    "type": "xmodel",
-   "config": "Vals AI · current composite v2, 10 Claude entries (Sonnet 5.5 incl.), max (Opus 4.7 high) — snapshot 27 Sep, re-priced ✓"
+   "config": "Vals AI · composite v2 snapshot of 27 Sep: the four older entries (Opus 4.8, Opus 4.7 high, Sonnet 4.6, Haiku 4.5) that the 29 Sep recomputation dropped; the current models are in valsindex3 ✓"
   },
   "scfrontiercode": {
    "label": "FrontierCode v1",
@@ -459,6 +459,16 @@
    "label": "LMArena Agent",
    "type": "xmodel",
    "config": "Agent Mode real sessions (Code/Chat/Work) · cost=median $/task (14d window), score=Net Improvement composite signal, effort read from model-variant label; live board, read 27 Sep 2026 ✓"
+  },
+  "lmarenawebdev": {
+   "label": "LMArena WebDev",
+   "type": "xmodel",
+   "config": "Code arena, WebDev board (Overall) · blind pairwise votes, Elo rating, no cost; effort read from the arena's model key (e.g. claude-sonnet-5-5-high); live board, read 30 Sep 2026 ✓"
+  },
+  "lmarenatext": {
+   "label": "LMArena Text",
+   "type": "xmodel",
+   "config": "Text arena (Overall) · blind pairwise votes, Elo rating, no cost; effort read from the arena's model key (e.g. claude-opus-5.5-high-vertex); live board, read 30 Sep 2026 ✓"
   },
   "mcpmark": {
    "label": "MCPMark",
@@ -2164,6 +2174,286 @@
    "label": "OSWorld eff. (4.7)",
    "type": "sweep",
    "config": "Opus 4.7 card p209 · pass@1 vs output tokens, 3 models × low→max ✓"
+  },
+  "renkon-video": {
+   "label": "renkon40 · short video",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, short video (60 s from a 25-min YouTube talk); Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-slides3": {
+   "label": "renkon40 · 3-minute talk slides",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, 3-minute talk slides; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-dash": {
+   "label": "renkon40 · dashboard from an AI-secretary log",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, dashboard from an AI-secretary log; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-email": {
+   "label": "renkon40 · 50-mail triage",
+   "type": "xmodel",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, 50-mail triage (49 scored); Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-note": {
+   "label": "renkon40 · Note article from an experiment log",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, Note article from an experiment log; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-slides12": {
+   "label": "renkon40 · 12 editable PowerPoint slides in a given style",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, 12 editable PowerPoint slides in a given style; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-home": {
+   "label": "renkon40 · YouTube-channel homepage",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, YouTube-channel homepage (no skill); Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-syco": {
+   "label": "renkon40 · sycophancy test, 20 questions",
+   "type": "xmodel",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, sycophancy test, 20 questions; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "aim-launchvideo": {
+   "label": "AI for Mortals · launch video",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, one build per model, no numeric score (cost, tokens, time only), 29 Sep ✓"
+  },
+  "aim-backrooms": {
+   "label": "AI for Mortals · Backrooms game",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, Blender + web game, one build per model, cost only, 29 Sep ✓"
+  },
+  "aim-webclone": {
+   "label": "AI for Mortals · website clone",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, prompt as file, one build per model, cost only, 29 Sep ✓"
+  },
+  "aim-demoscene": {
+   "label": "AI for Mortals · demoscene",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, code-only demo, one build per model, cost only, earlier round ✓"
+  },
+  "aim-rpg": {
+   "label": "AI for Mortals · RPG",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, Diablo-style RPG, one build per model (no Sonnet 5), cost only, earlier round ✓"
+  },
+  "crb-ce": {
+   "label": "code-review-bench · /ce-code-review",
+   "type": "xmodel",
+   "config": "kamui/code-review-bench 23716f7 · 12 OSS PRs × 3 trials, same skill snapshot, Claude Code 2.1.284 high, recall and cohort cost ✓"
+  },
+  "crb-thermo": {
+   "label": "code-review-bench · /thermo review",
+   "type": "xmodel",
+   "config": "kamui/code-review-bench 23716f7 · 12 OSS PRs × 3 trials, same skill snapshot, Claude Code 2.1.284 high, recall and cohort cost ✓"
+  },
+  "cclab-invoice": {
+   "label": "claudecode_lab · invoice check",
+   "type": "sweep",
+   "config": "note.com 29 Sep · Claude Code 2.1.284 -p, Sonnet 5.5 and Opus 5.5 × low/medium/high/max, 7/7 everywhere (saturated), cost from Claude Code ✓"
+  },
+  "yama-famous": {
+   "label": "yama3133 · 8 closed-answer problems × 3",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, 8 closed-answer problems × 3; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-bugfix": {
+   "label": "yama3133 · agentic bug fix",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, agentic bug fix, 5 planted bugs, 21 tests; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-longctx": {
+   "label": "yama3133 · 400k-character log",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, 400k-character log, needle arithmetic; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-random-high": {
+   "label": "yama3133 · random arithmetic at high effort",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, random arithmetic at high effort, cost only; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-jpwriting": {
+   "label": "yama3133 · Japanese 300–400-character writing constraint",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, Japanese 300–400-character writing constraint; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "dah-sheet": {
+   "label": "dahatake · spreadsheet engine",
+   "type": "xmodel",
+   "config": "qiita 30 Sep · GitHub Copilot CLI, --reasoning-effort medium, spreadsheet engine, n=3, hidden tests, cost in Copilot credits ✓"
+  },
+  "dah-sql-c1": {
+   "label": "dahatake · SQL engine, prompt C1",
+   "type": "xmodel",
+   "config": "qiita 30 Sep · GitHub Copilot CLI, --reasoning-effort medium, SQL engine, prompt C1, n=3, hidden tests, cost in Copilot credits ✓"
+  },
+  "dah-sql-c1s": {
+   "label": "dahatake · SQL engine, prompt C1S",
+   "type": "xmodel",
+   "config": "qiita 30 Sep · GitHub Copilot CLI, --reasoning-effort medium, SQL engine, prompt C1S, n=3, hidden tests, cost in Copilot credits ✓"
+  },
+  "dyad-relaycrm": {
+   "label": "Dyad app-builder · Relay CRM",
+   "type": "xmodel",
+   "config": "dyad-sh/dyad ba27f52 · local-agent mode, Relay CRM (3 milestones), medium effort, n=1, composite of Playwright CUJs, security probes and an LLM judge; list-price cost ✓"
+  },
+  "dyad-deskhero": {
+   "label": "Dyad app-builder · Deskhero",
+   "type": "xmodel",
+   "config": "dyad-sh/dyad ba27f52 · local-agent mode, Deskhero (3 milestones), medium effort, n=1, composite of Playwright CUJs, security probes and an LLM judge; list-price cost ✓"
+  },
+  "dyad-portalis": {
+   "label": "Dyad app-builder · Portalis",
+   "type": "xmodel",
+   "config": "dyad-sh/dyad ba27f52 · local-agent mode, Portalis (3 milestones), medium effort, n=1, composite of Playwright CUJs, security probes and an LLM judge; list-price cost ✓"
+  },
+  "ibragim-pi": {
+   "label": "ibragim.dev · Pi",
+   "type": "sweep",
+   "config": "Personal coding evals core10 v1.3 · 10 tasks × 3 runs, Harbor 0.21.0, Pi 0.85.1, effort per row, pass@1 and $/task; board of 28 Sep ✓"
+  },
+  "ibragim-cc": {
+   "label": "ibragim.dev · Claude",
+   "type": "sweep",
+   "config": "Personal coding evals core10 v1.3 · 10 tasks × 3 runs, Harbor 0.21.0, Claude Code 2.1.281, effort per row, pass@1 and $/task; board of 28 Sep ✓"
+  },
+  "uhyo-react": {
+   "label": "uhyo React proficiency",
+   "type": "sweep",
+   "config": "zenn.dev uhyo, round 17 (25 Sep) · 13 React specs × 3 samples, judge pinned to Sonnet 4.6, effort pinned; score only ✓"
+  },
+  "akita-v4": {
+   "label": "Akita LLM Benchmark v4",
+   "type": "xmodel",
+   "config": "akitaonrails.com 23 Sep · 7-sprint Rails app with 14 planted security sabotages, Claude Code, effort not stated (tool default: out of the fit), n=1 ✓"
+  },
+  "bullshitbench": {
+   "label": "BullshitBench v2",
+   "type": "sweep",
+   "config": "petergpt/bullshit-benchmark c1d4ab6 · 100 nonsense prompts, share of clear push-backs (green), effort from the board's reasoning column; primary leaderboard ✓"
+  },
+  "kernelbench-cc-01": {
+   "label": "KernelBench CUDA 01 (Claude Code)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 01, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "kernelbench-cc-02": {
+   "label": "KernelBench CUDA 02 (Claude Code)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 02, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "kernelbench-cc-03": {
+   "label": "KernelBench CUDA 03 (Claude Code)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 03, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "kernelbench-cc-04": {
+   "label": "KernelBench CUDA 04 (Claude Code)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 04, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "kernelbench-or-01": {
+   "label": "KernelBench CUDA 01 (OpenRouter)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 01, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "kernelbench-or-02": {
+   "label": "KernelBench CUDA 02 (OpenRouter)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 02, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "kernelbench-or-03": {
+   "label": "KernelBench CUDA 03 (OpenRouter)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 03, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "kernelbench-or-04": {
+   "label": "KernelBench CUDA 04 (OpenRouter)",
+   "type": "xmodel",
+   "config": "Infatoshi/kernelbench.com 817ff9c · CUDA kernel optimisation problem 04, RTX PRO 6000, fraction of hardware peak, effort from the board's label, n=1, no cost ✓"
+  },
+  "epoch-chess-puzzles": {
+   "label": "Epoch · chess puzzles",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (chess_puzzles), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-ebr-bench": {
+   "label": "Epoch · ebr bench",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (ebr_bench), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-frontiermath": {
+   "label": "Epoch · frontiermath",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (frontiermath), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-frontiermath-erdos": {
+   "label": "Epoch · frontiermath erdos",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (frontiermath_erdos), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-frontiermath-tier-4": {
+   "label": "Epoch · frontiermath tier 4",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (frontiermath_tier_4), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-frontiermath-tier-4-v2": {
+   "label": "Epoch · frontiermath tier 4 v2",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (frontiermath_tier_4_v2), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-frontiermath-tiers-1-3-v2": {
+   "label": "Epoch · frontiermath tiers 1 3 v2",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (frontiermath_tiers_1_3_v2), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-furniture-assembly": {
+   "label": "Epoch · furniture assembly",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (furniture_assembly), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-gpqa-diamond": {
+   "label": "Epoch · gpqa diamond",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (gpqa_diamond), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-math-level-5": {
+   "label": "Epoch · math level 5",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (math_level_5), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-mirrorcode": {
+   "label": "Epoch · mirrorcode",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (mirrorcode), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-mystery-game-puzzles": {
+   "label": "Epoch · mystery game puzzles",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (mystery_game_puzzles), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-otis-mock-aime-2024-2025": {
+   "label": "Epoch · otis mock aime 2024 2025",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (otis_mock_aime_2024_2025), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-simpleqa-verified": {
+   "label": "Epoch · simpleqa verified",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (simpleqa_verified), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "epoch-swe-bench-verified": {
+   "label": "Epoch · swe bench verified",
+   "type": "xmodel",
+   "config": "Epoch AI's own evaluation (swe_bench_verified), benchmarking hub archive read 30 Sep 2026; effort from the model-version suffix, mean score ✓"
+  },
+  "valsindex3": {
+   "label": "Vals Index (29 Sep)",
+   "type": "xmodel",
+   "config": "vals.ai Vals Index as recomputed on 29 Sep 2026 (older models dropped), max effort, accuracy and cost per test ✓"
   }
  },
  "merge": {
