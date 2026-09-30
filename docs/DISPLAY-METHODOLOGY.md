@@ -42,7 +42,7 @@ slightly from the curve at its θ; the page uses the curve, so that a couple's l
 - Quality: an expected score in %, one decimal (`65.8 %`); chart gridlines every 5 points (every 10 when they fall
   closer than 16 px apart on screen; in the compressed low end, a line closer than 16 px to the previous one is
   skipped).
-- Value against the trend: `3.5× cheaper` / `1.6× dearer`, one decimal below 10.
+- Value index: an integer, 100 = the price trend (`500`, `85`).
 
 ## 4. Older models
 
@@ -56,6 +56,9 @@ One row per model, one column per effort; each cell is the cost multiple with it
 (log cost, from the cheapest to the dearest couple). Rows are ordered by the expected score of the model at its highest
 published effort. A model without effort levels (Haiku 4.5, *solo*) fills a single merged cell; an unpublished couple
 is shown as a dash.
+
+A second matrix gives every couple's **value index** (§ 9) with its 16–84 % range (r ± √(h_x² + λ²·h_θ²)), same rows.
+Its colours follow the data: green above 100, red below, each side scaled to the most extreme index shown (log scale).
 
 ## 6. The charts
 
@@ -103,9 +106,10 @@ The distance of a couple to the trend, on the cost axis:
 
     r = (a + λ·θ) − ln cost          positive = cheaper than the going rate
 
-shown as e^r times **cheaper** (or e^−r times **dearer**) than the trend at its quality. Since the trend is a straight
+shown as the **value index** 100·e^r: 100 is the trend, 500 five times cheaper than the trend at its quality, 50
+twice as dear (the header's sentence says it in words: "5.0× cheaper than the price trend"). Since the trend is a straight
 line, the same gap read on the quality axis is r ⁄ λ: the couple's θ above what the trend gives for its cost, shown in
-points of expected score. No reference couple: 1× is the trend itself.
+points of expected score. No reference couple: 100 is the trend itself.
 
 ## 10. Tiers: best value by task complexity
 
@@ -130,15 +134,16 @@ and a window width σ.
   at every price. A power of the cost such as C^0.88 is not used: that exponent is the curvature of the value of gains
   and losses in prospect theory (Tversky & Kahneman 1992), measured on lotteries, not on prices.
 - **Pick**: the candidate with the highest score. Two tiers may pick the same couple. A card shows the pick's value
-  against the trend (§ 9).
+  against the trend as its value index (§ 9).
 - **Sliders**: each tier's θ* and σ can be moved. θ* travels over the targets' range padded by half a gap on each
   side; σ from a quarter to three times its default.
 
 ## 11. The crown
 
 The best overall pick is the couple within reach that sits **furthest below the price trend** (largest r, § 9): the
-most quality for its cost against the going rate. Its card shows both readings of the same gap — e^r times cheaper
-than the trend at its quality, and r ⁄ λ above the trend at its cost, in points of expected score. It does not depend
+most quality for its cost against the going rate. Its card shows its value index, and its note both readings of the
+same gap — e^r times cheaper than the trend at its quality, and r ⁄ λ above the trend at its cost, in points of
+expected score. It does not depend
 on its neighbours on the frontier.
 
 ## 12. Text read without the charts

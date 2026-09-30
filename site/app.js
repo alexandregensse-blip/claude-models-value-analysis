@@ -63,6 +63,8 @@ function fitTrend(rows){ let a=0, l=0;
 // trend gives for its cost, shown in points of expected score.
 const valueOf=(tr,p)=>tr.at(p.t)-p.x;
 const vWord=r=>`${fmtX(Math.exp(Math.abs(r)))} ${r>=0?"cheaper":"dearer"}`;
+// VALUE INDEX: 100·e^r — 100 is the trend, 500 five times cheaper than the trend at that quality, 50 twice as dear.
+const vIndex=r=>Math.round(100*Math.exp(r));
 const qGain=(tr,p)=>tr.l>0?100*(p.s-score(p.t-valueOf(tr,p)/tr.l)):0;   // points of expected score above the trend
 
 // Older-model toggle: the grids keep a full copy; hiding a model removes it from every view and every fit
@@ -304,7 +306,7 @@ function fillScoreTable(rows,tr){
   rows.map(p=>({...p,r:valueOf(tr,p)})).sort((a,b)=>b.r-a.r).forEach(p=>{ const col=cvar(MODELS[p.m].c),
     // Intensity from the distance to the trend in decades, so 2× cheaper and 2× dearer read equally strong; capped at one decade.
     sc=p.r>=0?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(p.r)/Math.LN10,1)*0.52)*100),
-    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${vWord(p.r)}</span>`;
+    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${vIndex(p.r)}</span>`;
     const row=document.createElement("tr");
     row.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}${p.front?"":" <span class=\"faint\">(within reach)</span>"}</td>`
       +`<td class="num">${fmtC(p.c)}×</td><td class="num">${pct(p.s)}</td>`
@@ -365,7 +367,7 @@ function drawTiers(){
           <span class="tier-pick"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
           <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b> · Score <b>${pct(w.s)}</b></span>
         </div>
-        <div class="tier-yield">${fmtX(Math.exp(Math.abs(w.r)))}<small>${w.r>=0?"cheaper":"dearer"} than the trend</small></div>
+        <div class="tier-yield">${vIndex(w.r)}</div>
       </div>
       ${ex?`<span class="ex">${ex}</span>`:''}
     </div>`;
@@ -379,8 +381,8 @@ function drawTiers(){
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
-      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · <b>${vWord(c.r)}</b> than the trend</div>
-      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. The trend is fitted on <b>every</b> couple shown, so it is the going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
+      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows over the θ axis (labelled in expected score) plus the couples within
@@ -444,6 +446,25 @@ function drawMatrix(){
     tr.innerHTML=row; tb.appendChild(tr);
   }
 }
+// ---------- VALUE-INDEX MATRIX: every couple shown, model × effort, against the price trend ----------
+// Each cell is the couple's value index 100·e^r (100 = the trend) with its 16–84 % range: r's spread is the couple's
+// two quasi-standard errors across the trend line, √(hx² + λ²·ht²). Rows in the same order as the cost matrix.
+function drawValueMatrix(){
+  const tb=document.querySelector("#value-tbl tbody"); if(!tb) return; tb.innerHTML="";
+  const rows=couples(), tr=fitTrend(rows), by={};
+  rows.forEach(p=>{ (by[p.m]=by[p.m]||{})[p.e]=p; });
+  const topS=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?score(qg[e][0]):0; };
+  // Colour range from the data: the most favourable couple shown is the deepest green, the least favourable the deepest
+  // red, each side scaled on its own (log scale), 100 neutral.
+  const rs=rows.map(p=>valueOf(tr,p)), rHi=Math.max(...rs,1e-9), rLo=Math.min(...rs,-1e-9);
+  const cell=p=>{ const r=valueOf(tr,p), sd=Math.hypot(p.hx,tr.l*p.ht), al=Math.round((0.08+(r>=0?r/rHi:r/rLo)*0.50)*100),
+      sc=r>=0?cvar('--good'):cvar('--crit');
+    return `<div class="cell num" style="background:color-mix(in srgb, ${sc} ${al}%, transparent)">${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small></div>`; };
+  for(const m of Object.keys(by).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], row=document.createElement("tr");
+    let h=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}</td>`;
+    if(by[m].solo) h+=`<td colspan="5">${cell(by[m].solo)}</td>`;
+    else ["low","medium","high","xhigh","max"].forEach(e=>{ h+= by[m][e]? `<td>${cell(by[m][e])}</td>` : `<td class="na">—</td>`; });
+    row.innerHTML=h; tb.appendChild(row); } }
 // ---------- LINKING GRAPH ----------
 // nodes = (model,effort) couples ; edges = a source that measured them on the SAME task.
 // DATA-DRIVEN: generated by build.py::groups_data() from raw-data.csv (nodes) + an editorial metadata sidecar
@@ -534,7 +555,7 @@ function answerFull(){
     +`Best pick by task tier: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join("; ")}. `
     +`Highest measured quality: ${nm(top)} (expected score ${pct(top.s)}, cost ${fmtC(top.c)}× the cheapest couple).`;
 }
-function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();fillAnswer();
+function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawValueMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
