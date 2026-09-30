@@ -5,6 +5,36 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Fifteenth pass: Opus 5.5 and Sonnet 5.5, fourth salvo
+
+Five Sonnet agents with a 12-minute budget each (leaderboards, GitHub and Hugging Face, English, Japanese, other
+languages), 30 Sep 2026; each stopped after two or three minutes and was resumed once with an absolute end time.
+Every number was re-read at its source; the agents' "new" Vals boards were already in, and their draft Epoch list
+was redone from the archive itself.
+**__COUNTS15__**
+
+- **Admitted.**
+  - *Epoch AI's own evaluations* (benchmarking-hub archive, read 30 Sep): fifteen benchmarks with effort in the
+    model-version suffix — FrontierMath (tiers 1–3 and 4, v2 and v1), GPQA Diamond, OTIS mock AIME, EBR-Bench,
+    furniture assembly, MirrorCode, mystery game puzzles, chess puzzles, SimpleQA Verified, SWE-bench Verified,
+    MATH level 5, Erdős problems. Score only. Suffix `_none` is `nothink`; a thinking budget (`_16K`, `_32K`) or no
+    suffix stays out of the fit. The archive's `_external` files re-publish other boards and are not taken.
+  - *Vals Index*: recomputed on 29 Sep with the older models dropped; the six current models move to `valsindex3`
+    at the new values, the four older ones stay in `valsindex2` as the 27 Sep version.
+  - *BullshitBench v2*: the group was a quote of the board in a claude-code issue; it is now the primary leaderboard
+    (petergpt/bullshit-benchmark, 28 Claude couples, Opus 5.5 and Sonnet 5.5 at `low` and `max`), whose values have
+    since been re-graded.
+  - *Dyad app-builder* (three apps, six Claude models at Dyad's default `medium`, composite score and cost),
+    *ibragim.dev* personal coding evals (Pi and Claude Code harnesses, efforts on the board, 10 tasks × 3 runs),
+    *uhyo*'s React proficiency (13 specs × 3, judge pinned to Sonnet 4.6), *KernelBench* CUDA problems (fraction of
+    hardware peak, which can exceed 1: read as is), *LMArena Text* (Elo), *Akita* v4 (Rails app with planted
+    sabotages; effort not stated, so out of the fit).
+- **Not admitted.** Usage-log analyses (ai_arai_ally, hacklog_stealth's re-pricing), a before/after where model,
+  effort and app version changed at once (tenpachi), noxaudit (finding counts, effort not stated), Driftproof (Claude
+  Code's default effort), single-model posts, and restatements of the launch figures in every language searched.
+- **Found empty.** Aider, SimpleBench, Toolathlon, tau-bench, GDPval, BrowseComp, HLE, Vending-Bench, SWE-Lancer,
+  BFCL, LiveCodeBench Pro, OpenCompass and SuperCLUE (rendered in the browser only), Hugging Face.
+
 ## Fourteenth pass: Sonnet 5.5, third salvo
 
 Five Sonnet agents on narrow axes, 30 Sep 2026 (two leaderboard lists, GitHub and Hugging Face, the English web,
