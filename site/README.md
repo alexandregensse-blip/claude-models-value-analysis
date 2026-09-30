@@ -3,7 +3,7 @@
 **Scope:** from the fit's results to the published page. A change of display touches only this part.
 
 Reads `model/fit-cache.json` (never the model's code), `raw-data.csv` and the catalogue; writes the served files at
-the repository root (`index.html`, `robots.txt`, `sitemap.xml`, `llms.txt`, the IndexNow key file).
+the repository root (`index.html`, `claude-models-head-to-head.html`, `robots.txt`, `sitemap.xml`, `llms.txt`, the IndexNow key file).
 
 | File | Role |
 |---|---|
@@ -12,6 +12,7 @@ the repository root (`index.html`, `robots.txt`, `sitemap.xml`, `llms.txt`, the 
 | `grids.py` | reads the fit's cache, checks its fingerprint and convergence, divides by the reference couple |
 | `sources.py` | the sources table from the data file and `data/catalog/groups.json` |
 | `seo.py` | head tags and JSON-LD, root files, the date of the last content change (`content-date.json`) |
+| `duels.py` | the head-to-head page: a comparator for any two models shown, and the current pairs written out (rules: `docs/DISPLAY-METHODOLOGY.md` § 15) |
 | `render.py`, `prerender.js` | runs `app.js` at build time in Node so the served HTML carries the figures |
 | `app.js`, `body.html`, `style.css` | the page: charts, tables, tiers, interactions (vanilla JS/SVG) |
 | `assets/` | `favicon_png.py`, `og_image.py`: redraw the icon and the share image |

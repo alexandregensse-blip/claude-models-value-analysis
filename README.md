@@ -6,7 +6,7 @@ A normalized **cost × model × effort** matrix for the current Claude family, f
 
 Open [`index.html`](index.html) in a browser — fully self-contained (no server, no external assets), light/dark aware, with zoomable charts and live tier tuning.
 
-**Live page:** <https://claude-models.agensse.com/>. It is served from `main`: the server checks `main` every 5 minutes and copies a whitelist of files: `index.html`, `raw-data.csv`, `robots.txt`, `sitemap.xml`, `llms.txt`, `favicon.svg`, `favicon.png`, `og-image.png` and the IndexNow key file (`b3573dbc1da690e66e9ef05b081b7abe.txt`). Nothing is built on the server, so `index.html` must be committed built, and a new file served at the root must be added to that whitelist. Exploratory blocks (value score, window tuner, full method) are collapsed by default; click to expand.
+**Live page:** <https://claude-models.agensse.com/>. It is served from `main`: the server checks `main` every 5 minutes and copies a whitelist of files: `index.html`, `claude-models-head-to-head.html`, `raw-data.csv`, `robots.txt`, `sitemap.xml`, `llms.txt`, `favicon.svg`, `favicon.png`, `og-image.png` and the IndexNow key file (`b3573dbc1da690e66e9ef05b081b7abe.txt`). Nothing is built on the server, so `index.html` must be committed built, and a new file served at the root must be added to that whitelist. Exploratory blocks (value score, window tuner, full method) are collapsed by default; click to expand.
 
 **Publishing a fork:** in `site/config.py`, set `SITE_URL` to the fork's address (every absolute URL, the sitemap, `robots.txt`, `llms.txt` and the domain shown in the share image derive from it) and `REPO_URL` to its repository; set `BING_SITE_VERIFICATION` and `INDEXNOW_KEY` to `""` (they prove this site's ownership to Bing and IndexNow; an empty value leaves out the tag and the key file) or to your own values. Delete `b3573dbc1da690e66e9ef05b081b7abe.txt`, run `python3 site/build.py`, and redraw the share image with the new domain (`site/assets/og_image.py`, needs Pillow: `uv run --no-project --with pillow python site/assets/og_image.py`). The author credit and the GitHub links in `gen/body.html` point to this repository (attribution, CC BY 4.0). Then e.g. GitHub Pages: *Settings → Pages → Source: Deploy from a branch → `main` / root*.
 
@@ -57,7 +57,7 @@ Four parts, each with its own scope; they talk only through the files named in t
 | **site** — presentation | from the fit's results to the page | `site/build.py` and its modules (`config`, `grids`, `sources`, `seo`, `render`), `site/{app.js, body.html, style.css, prerender.js}`, `site/assets/` (favicon, share image) — see [`site/README.md`](site/README.md) | the served files at the root |
 | **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
 
-Served files, generated at the root by the site: `index.html`, `robots.txt`, `sitemap.xml`, `llms.txt`,
+Served files, generated at the root by the site: `index.html`, `claude-models-head-to-head.html` (every pair of models compared, effort by effort), `robots.txt`, `sitemap.xml`, `llms.txt`,
 `favicon.svg`, `favicon.png`, `og-image.png`, the IndexNow key file, and the data file `raw-data.csv`. Licences:
 `LICENSE` (MIT, code), `LICENSE-DATA` (CC BY 4.0, data and report text).
 
