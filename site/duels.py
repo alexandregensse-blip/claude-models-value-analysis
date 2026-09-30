@@ -260,7 +260,7 @@ def build(CG, QG, PANEL):
     <div class="chips" role="group" aria-label="Models to compare">{chips}</div>
   </div>
   <div id="cmp-out" aria-live="polite">{view(picker[first])}</div>
-  <p class="cap cmp-empty" id="cmp-empty" hidden>Select a second model to compare.</p>
+  <p class="cap cmp-empty" id="cmp-empty" hidden>Select two models to compare.</p>
   {templates}
   <script>
   (function(){{
