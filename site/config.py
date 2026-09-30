@@ -8,7 +8,7 @@ OUT  = os.path.join(ROOT, "index.html")   # the served files are generated at th
 # Publication: every absolute URL derives from SITE_URL (canonical root, trailing slash).
 SITE_URL    = "https://claude-models.agensse.com/"
 REPO_URL    = "https://github.com/alexandregensse-blip/claude-models-value-analysis"
-TITLE       = "Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared"
+TITLE       = "Claude models compared: cost vs quality at every effort level"
 SITE_NAME   = "Claude cost vs quality"   # site name suggested to Google (JSON-LD WebSite) instead of the bare domain
 DESCRIPTION = ("What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives "
                "the best quality for the price. Open data, CC BY 4.0.")

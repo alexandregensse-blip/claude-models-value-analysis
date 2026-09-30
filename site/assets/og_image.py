@@ -18,10 +18,10 @@ img = Image.new("RGB", (W, H), PAPER)
 d = ImageDraw.Draw(img)
 font = lambda size: ImageFont.load_default(size=size)
 
-d.text((72, 70), "Claude cost vs quality", font=font(76), fill=INK)
-d.text((72, 168), "Fable, Opus, Sonnet, Haiku compared", font=font(46), fill=INK)
-d.text((72, 246), "Relative cost and quality of every model,", font=font(32), fill=MUTED)
-d.text((72, 290), "at every effort level, open data", font=font(32), fill=MUTED)
+d.text((72, 70), "Claude models compared", font=font(76), fill=INK)
+d.text((72, 168), "Cost vs quality at every effort level", font=font(46), fill=INK)
+d.text((72, 246), "Fable, Opus, Sonnet, Haiku: relative cost", font=font(32), fill=MUTED)
+d.text((72, 290), "and quality of every model, open data", font=font(32), fill=MUTED)
 d.text((72, 540), SITE_HOST, font=font(34), fill=INK)
 
 # Frontier motif, bottom right: a rising curve, dots unlabelled (the ranking lives in the data, not in the image).
