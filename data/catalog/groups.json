@@ -460,6 +460,11 @@
    "type": "xmodel",
    "config": "Agent Mode real sessions (Code/Chat/Work) · cost=median $/task (14d window), score=Net Improvement composite signal, effort read from model-variant label; live board, read 27 Sep 2026 ✓"
   },
+  "lmarenawebdev": {
+   "label": "LMArena WebDev",
+   "type": "xmodel",
+   "config": "Code arena, WebDev board (Overall) · blind pairwise votes, Elo rating, no cost; effort read from the arena's model key (e.g. claude-sonnet-5-5-high); live board, read 30 Sep 2026 ✓"
+  },
   "mcpmark": {
    "label": "MCPMark",
    "type": "sweep",
@@ -2164,6 +2169,126 @@
    "label": "OSWorld eff. (4.7)",
    "type": "sweep",
    "config": "Opus 4.7 card p209 · pass@1 vs output tokens, 3 models × low→max ✓"
+  },
+  "renkon-video": {
+   "label": "renkon40 · short video",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, short video (60 s from a 25-min YouTube talk); Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-slides3": {
+   "label": "renkon40 · 3-minute talk slides",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, 3-minute talk slides; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-dash": {
+   "label": "renkon40 · dashboard from an AI-secretary log",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, dashboard from an AI-secretary log; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-email": {
+   "label": "renkon40 · 50-mail triage",
+   "type": "xmodel",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, 50-mail triage (49 scored); Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-note": {
+   "label": "renkon40 · Note article from an experiment log",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, Note article from an experiment log; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-slides12": {
+   "label": "renkon40 · 12 editable PowerPoint slides in a given style",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, 12 editable PowerPoint slides in a given style; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-home": {
+   "label": "renkon40 · YouTube-channel homepage",
+   "type": "sweep",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, YouTube-channel homepage (no skill); Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "renkon-syco": {
+   "label": "renkon40 · sycophancy test, 20 questions",
+   "type": "xmodel",
+   "config": "note.com 30 Sep · Claude Code 2.1.284, sycophancy test, 20 questions; Sonnet 5.5 vs Opus 5.5, n=1 per setting, blind AI judges (own model excluded), cost = API list-price conversion ✓"
+  },
+  "aim-launchvideo": {
+   "label": "AI for Mortals · launch video",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, one build per model, no numeric score (cost, tokens, time only), 29 Sep ✓"
+  },
+  "aim-backrooms": {
+   "label": "AI for Mortals · Backrooms game",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, Blender + web game, one build per model, cost only, 29 Sep ✓"
+  },
+  "aim-webclone": {
+   "label": "AI for Mortals · website clone",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, prompt as file, one build per model, cost only, 29 Sep ✓"
+  },
+  "aim-demoscene": {
+   "label": "AI for Mortals · demoscene",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, code-only demo, one build per model, cost only, earlier round ✓"
+  },
+  "aim-rpg": {
+   "label": "AI for Mortals · RPG",
+   "type": "xmodel",
+   "config": "Claude Code /goal, high effort, Diablo-style RPG, one build per model (no Sonnet 5), cost only, earlier round ✓"
+  },
+  "crb-ce": {
+   "label": "code-review-bench · /ce-code-review",
+   "type": "xmodel",
+   "config": "kamui/code-review-bench 23716f7 · 12 OSS PRs × 3 trials, same skill snapshot, Claude Code 2.1.284 high, recall and cohort cost ✓"
+  },
+  "crb-thermo": {
+   "label": "code-review-bench · /thermo review",
+   "type": "xmodel",
+   "config": "kamui/code-review-bench 23716f7 · 12 OSS PRs × 3 trials, same skill snapshot, Claude Code 2.1.284 high, recall and cohort cost ✓"
+  },
+  "cclab-invoice": {
+   "label": "claudecode_lab · invoice check",
+   "type": "sweep",
+   "config": "note.com 29 Sep · Claude Code 2.1.284 -p, Sonnet 5.5 and Opus 5.5 × low/medium/high/max, 7/7 everywhere (saturated), cost from Claude Code ✓"
+  },
+  "yama-famous": {
+   "label": "yama3133 · 8 closed-answer problems × 3",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, 8 closed-answer problems × 3; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-bugfix": {
+   "label": "yama3133 · agentic bug fix",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, agentic bug fix, 5 planted bugs, 21 tests; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-longctx": {
+   "label": "yama3133 · 400k-character log",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, 400k-character log, needle arithmetic; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-random-high": {
+   "label": "yama3133 · random arithmetic at high effort",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, random arithmetic at high effort, cost only; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "yama-jpwriting": {
+   "label": "yama3133 · Japanese 300–400-character writing constraint",
+   "type": "xmodel",
+   "config": "qiita 29 Sep · Claude Code -p minimal setup, Japanese 300–400-character writing constraint; Sonnet 5.5 and Opus 5.5 at medium (the others at their Claude Code default), list-price cost from Claude Code ✓"
+  },
+  "dah-sheet": {
+   "label": "dahatake · spreadsheet engine",
+   "type": "xmodel",
+   "config": "qiita 30 Sep · GitHub Copilot CLI, --reasoning-effort medium, spreadsheet engine, n=3, hidden tests, cost in Copilot credits ✓"
+  },
+  "dah-sql-c1": {
+   "label": "dahatake · SQL engine, prompt C1",
+   "type": "xmodel",
+   "config": "qiita 30 Sep · GitHub Copilot CLI, --reasoning-effort medium, SQL engine, prompt C1, n=3, hidden tests, cost in Copilot credits ✓"
+  },
+  "dah-sql-c1s": {
+   "label": "dahatake · SQL engine, prompt C1S",
+   "type": "xmodel",
+   "config": "qiita 30 Sep · GitHub Copilot CLI, --reasoning-effort medium, SQL engine, prompt C1S, n=3, hidden tests, cost in Copilot credits ✓"
   }
  },
  "merge": {
