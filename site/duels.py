@@ -360,6 +360,7 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .cmp-right .cmp-tbl .chartbox{flex:1}
 .cmp-right .duel-tbl{height:100%}
 @media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
+.hero-row .lede-col{flex:0 1 46rem}   /* the main page's lede width: its meta block is wider than ours */
 .eyebrow a{color:inherit;text-decoration:none}.eyebrow a:hover{text-decoration:underline}
 .duel-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin:0 0 12px;
   font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.1}
