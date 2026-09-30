@@ -18,7 +18,7 @@ def prerender(app, css):
 def inject(body, pre):
     """Writes the pre-rendered blocks into their empty placeholders in body.html."""
     for key, html in pre.items():
-        if key in ("answer-full", "duel-data"):      # data for llms.txt and the head-to-head page, not a block of the page
+        if key == "answer-full":                     # text for llms.txt, not a block of the page
             continue
         put = lambda m: m.group(1) + html + m.group(m.lastindex)
         if key == ".nsrc":

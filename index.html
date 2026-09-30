@@ -899,17 +899,6 @@ function tierPicks(){
   const crown=reach.reduce((a,b)=> b.r > a.r ? b : a);
   return {picks,crown,tr};
 }
-// HEAD-TO-HEAD (site/duels.py, read at build time through prerender.js): for each model shown, its best-scoring
-// couple and its best-value couple (furthest below the price trend of the main page), each with the highest usage
-// tier whose target it reaches (the targets of tierDefaults()).
-function duelData(){
-  const all=couples(), tr=fitTrend(all), out={};
-  const tierOf=p=>{ let k=null; TIERS.forEach(T=>{ if(p.t>=T.t) k=T.name; }); return k; };
-  const pick=p=>({e:p.e,c:p.c,s:p.s,r:valueOf(tr,p),tier:tierOf(p)});
-  [...new Set(all.map(p=>p.m))].forEach(m=>{ const rows=all.filter(p=>p.m===m);
-    out[m]={top:pick(rows.reduce((a,b)=>b.t>a.t?b:a)), value:pick(rows.reduce((a,b)=>valueOf(tr,b)>valueOf(tr,a)?b:a))}; });
-  return out;
-}
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const {picks,crown}=tierPicks();

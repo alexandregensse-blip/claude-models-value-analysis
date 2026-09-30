@@ -42,8 +42,7 @@ def fmt_ratio(r):
     return f"{r:.1f}×" if r < 10 else f"{r:.0f}×"
 
 
-def build(CG, QG, PANEL, PICKS):
-    """PICKS: {model: {top, value}}, each model's best score and best value on the main page (app.js duelData)."""
+def build(CG, QG, PANEL):
     """Returns (html of the page body, plain summary lines for llms.txt)."""
     x0 = min(v[0] for m, es in CG.items() if m not in LEGACY for v in es.values())   # the cheapest couple shown: 1.0×
     def couple(m, e):
@@ -118,7 +117,7 @@ def build(CG, QG, PANEL, PICKS):
         note = [f"{L(m)}'s cost is size-sensitive: a verbose model, its cost swings widely between short and long "
                 f"agentic tasks, hence its wide interval." for m in (a, b) if MODELS[m].get("flag_task_size")]
         head = min(heads, key=lambda h: h["ratio"]) if heads else None
-        return dict(a=a, b=b, A=A, B=B, sid=slug(a, b), rows=rows, lines=lines, facts=facts, note=note, head=head, picks=[PICKS.get(a), PICKS.get(b)],
+        return dict(a=a, b=b, A=A, B=B, sid=slug(a, b), rows=rows, lines=lines, facts=facts, note=note, head=head,
                                ca=[couple(a, e) for e in rungs(a)], cb=[couple(b, e) for e in rungs(b)])
 
     duels_data = [pair(a, b) for a, b in pairs() if rungs(a) and rungs(b)]
@@ -213,26 +212,6 @@ def build(CG, QG, PANEL, PICKS):
                         f'for <b>{fmt_ratio(1 / f["ratio"])} less</b> per task.</p>')
         return ""
 
-    def tiles(d):
-        """Each model on its own: its best score and its best value on the main page, and the tasks each suits."""
-        def eff(x):
-            return "its only setting" if x["e"] == "solo" else CAP[x["e"]]
-        def suits(x):
-            return (f' — enough for <span class="pill">{esc(x["tier"])}</span>' if x["tier"] else " — below every usage tier's target")
-        out = []
-        for m, pk in zip((d["a"], d["b"]), d["picks"]):
-            if not pk:
-                continue
-            top, val = pk["top"], pk["value"]
-            vw = f'{fmt_ratio(math.exp(abs(val["r"])))} {"cheaper" if val["r"] >= 0 else "dearer"} than the price trend'
-            out.append(
-                f'<div class="card pad model-card"><div class="mc-name" style="color:var({MODELS[m]["colour"]})">{dot(m)}{esc(L(m))}</div>'
-                f'<p><span class="tier-q">Best score</span>at <b>{eff(top)}</b>: <b>{100 * top["s"]:.1f}&nbsp;%</b>, cost {fmt_cost(top["c"])}{suits(top)}</p>'
-                + ("" if val["e"] == top["e"] else
-                   f'<p><span class="tier-q">Best value</span>at <b>{eff(val)}</b>: {100 * val["s"]:.1f}&nbsp;%, cost {fmt_cost(val["c"])}, {vw}{suits(val)}</p>')
-                + "</div>")
-        return f'<div class="duel-models">{"".join(out)}</div>'
-
     legend = lambda d: (f'<h3 class="duel-legend"><span style="color:var({MODELS[d["a"]]["colour"]})"><i class="ln" style="background:var({MODELS[d["a"]]["colour"]})"></i>{esc(d["A"])}</span>'
                         f'<span class="vs">vs</span><span style="color:var({MODELS[d["b"]]["colour"]})"><i class="ln" style="background:var({MODELS[d["b"]]["colour"]})"></i>{esc(d["B"])}</span></h3>')
     lines_html = lambda d: ('<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
@@ -245,7 +224,7 @@ def build(CG, QG, PANEL, PICKS):
                 f'<div class="cmp-left">{legend(d)}<div class="chartbox">{chart(d, compact=True)}</div></div>'
                 f'<div class="cmp-right">{same(d)}<div class="cmp-tbl"><h4 class="tbl-title">By effort level '
                 f'<span>cost per task × the cheapest couple · expected score on the benchmark panel</span></h4>{table(d, fold=False)}</div></div>'
-                f'</div>{tiles(d)}{notes(d)}</div>')
+                f'</div>{notes(d)}</div>')
 
     def block(d):
         return f'<section id="{d["sid"]}" class="block">{view(d)}</section>'
@@ -382,12 +361,6 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
   font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.1}
 .duel-legend .ln{display:inline-block;width:26px;height:4px;border-radius:2px;vertical-align:middle;margin-right:10px}
 .duel-legend .vs{font-size:.6em;color:var(--faint);font-variant:normal}
-.duel-models{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}
-@media (max-width:720px){.duel-models{grid-template-columns:1fr}}
-.model-card{box-shadow:none;background:var(--paper)}
-.model-card .mc-name{font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:19px;margin-bottom:6px}
-.model-card p{margin:.45em 0 0;font-size:14.5px;color:var(--muted)}.model-card p b{color:var(--ink)}
-.model-card .tier-q{display:block;margin-bottom:1px}
 .duel-same{margin:4px 0 20px;font-size:clamp(16px,1.7vw,18px);line-height:1.45;color:var(--muted)}.duel-same b{color:var(--ink)}
 .cmp-tbl .tbl-title{margin-top:0}
 .tbl-title{margin:26px 0 10px;font-size:15px;font-weight:600;font-family:Georgia,serif;font-variant:small-caps}

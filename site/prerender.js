@@ -78,7 +78,6 @@ function main(input) {
     out[key] = html;
   }
   if (typeof ctx.answerFull === "function") out["answer-full"] = ctx.answerFull();   // plain text, for llms.txt only
-  if (typeof ctx.duelData === "function") out["duel-data"] = ctx.duelData();          // tier picks per pair, for site/duels.py
   process.stdout.write(JSON.stringify(out));
 }
 

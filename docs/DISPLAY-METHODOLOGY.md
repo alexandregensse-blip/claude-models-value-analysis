@@ -179,8 +179,5 @@ score of § 2.
 - **Match**: for the best-scoring couple of one model, the cheapest couple of the other that it does not out-score
   at 0.84 (it reaches the same quality within the uncertainty, or more). None: the other model's best is given.
   A match near the threshold can flip with a refit.
-- **Each model on its own**: its best-scoring couple and its best-value couple (furthest below the price trend of
-  § 8, § 9), each with the highest usage tier of § 10 whose target it reaches. Computed by `app.js`
-  (`duelData`, run at build time by the pre-render), so the page uses the main page's trend and targets.
 - Ratios read as on the main page: "3.5× cheaper", "1.6× dearer". A model flagged size-sensitive (§ 5) keeps its
   note.
