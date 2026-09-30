@@ -5,6 +5,49 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Fourteenth pass: Sonnet 5.5, third salvo
+
+Five Sonnet agents on narrow axes, 30 Sep 2026 (two leaderboard lists, GitHub and Hugging Face, the English web,
+the non-English web), each resumed once when it stopped after two or three minutes. Every number below was re-read
+at its source before entering the data file; several agent drafts were corrected (tables read from the articles'
+images, efforts taken from the configuration, groups split by task).
+**__COUNTS__**
+
+- **Admitted.**
+  - *bug-hunt-bench*: Sonnet 5.5 is now a mean of three runs on all five rungs, like Opus 5.5 (tokens averaged
+    from the repo's per-run metrics, which reproduce Opus 5.5's 346,678 exactly); the single `max` and `xhigh` runs of
+    the twelfth pass were the first of those three and are replaced, not added.
+  - *LMArena WebDev* (Code arena, Overall): a new score-only group, Elo with no cost; effort read from the arena's
+    model key (`claude-sonnet-5-5-high`, `claude-opus-5-max-webdev`…), flagged unconfirmed. Five couples enter the
+    fit; the thinking/non-thinking keys of older models are kept as `default`/`nothink`.
+  - *Zapier AutomationBench*: the board now lists Sonnet 5.5 `xhigh` and `max` (36.83 %, \$0.48; 44.75 %, \$1.14);
+    they replace the system-card digitisation of the same runs (36.9 / 44.7); `low`–`high` stay digitised.
+  - *kamui/code-review-bench*: two groups where Sonnet 5.5 and Opus 5.5 ran the same skill snapshot on the same
+    12 PRs × 3 trials at `high` (/ce-code-review, /thermo-nuclear review): recall and cohort cost. The built-in
+    `/code-review` arms are not comparable (Sonnet 5 ran another built-in prompt; the Opus 5.5 baseline covered 10
+    PRs, its gap runs have no cost).
+  - *AI for Mortals* (Pat Simmons): five Claude Code `/goal` builds at `high` for Sonnet 5.5, Sonnet 5, Opus 5.5 and
+    Fable 5.1, cost and tokens per build; no numeric score.
+  - *note.com renkon40*: eight personal tasks, Sonnet 5.5 (`high`/`xhigh`/`max`) against Opus 5.5, blind AI judges,
+    costs at list price — both tables read from the article's images; Opus 5.5's 3-minute slides (an earlier chat
+    work) and its homepage with a skill (the others ran without) are kept as inactive rows.
+  - *note.com claudecode_lab*: an invoice check, Sonnet 5.5 and Opus 5.5 × `low`/`medium`/`high`/`max`, 7/7
+    everywhere (saturated, cost kept).
+  - *qiita yama3133*: five tasks across five models; Sonnet 5.5 and Opus 5.5 at `medium`, the others at their
+    Claude Code default (`default`, which is `high` for Sonnet 5 and Opus 5 in 2.1.284).
+  - *qiita dahatake*: a spreadsheet engine and a SQL engine (two prompts) in GitHub Copilot CLI at `medium`, three
+    runs each, hidden tests; cost in Copilot credits.
+- **Already in.** ObviousBench PR #39 (Sonnet 5.5 entered from the PR's earlier head on 29 Sep; unchanged at
+  `bb435cb`, still unmerged); the six Vals boards and the AA effort pages an agent reported as new.
+- **Not admitted.** Driftproof report 013 (every arm at Claude Code's default effort, scores as ranges); an
+  avenoxai repo of creative builds without a score; a Chinese case study quoted without its author.
+- **Found empty.** ARC Prize, Epoch, LiveCodeBench, Kilo, OpenRouter, SimpleBench, Aider, Terminal-Bench (2.1, 4.0),
+  SWE-bench, swe-rebench, DeepSWE, OSWorld, Sonar (which has added Opus 5.5, not Sonnet 5.5 yet), Hugging Face;
+  SEAL, aipricing.guru and marginlab unreachable; restatements of the launch figures in English, Japanese, Chinese
+  and Korean.
+
+__IMPACT__
+
 ## Method change: the display without a reference couple, decided on the latent scale
 
 **Why.** The page divided every value by a reference couple (Opus 5 @high = 1.00), and several display choices leaked
