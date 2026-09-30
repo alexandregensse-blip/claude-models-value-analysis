@@ -230,13 +230,13 @@ def build(CG, QG, PANEL):
         """The same quality for less, said first when a cheaper setting of one model matches the other's best."""
         for f in d["facts"]:
             if f["kind"] == "match" and f["ratio"] < 1 and f["m"]["m"] != f["best"]["m"]:
-                return (f'<p class="duel-same"><b style="color:var({MODELS[f["m"]["m"]]["colour"]})">{esc(L(f["m"]["m"]))} at {CAP[f["m"]["e"]] or "its only setting"}</b> '
-                        f'gives the same quality as <b style="color:var({MODELS[f["best"]["m"]]["colour"]})">{esc(L(f["best"]["m"]))} at {CAP[f["best"]["e"]] or "its only setting"}</b> '
+                return (f'<p class="duel-same"><b style="color:color-mix(in srgb,var({MODELS[f["m"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["m"]["m"]))} at {CAP[f["m"]["e"]] or "its only setting"}</b> '
+                        f'gives the same quality as <b style="color:color-mix(in srgb,var({MODELS[f["best"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["best"]["m"]))} at {CAP[f["best"]["e"]] or "its only setting"}</b> '
                         f'for <b>{fmt_ratio(1 / f["ratio"])} less</b> per task.</p>')
         return ""
 
-    legend = lambda d: (f'<h3 class="duel-legend"><span style="color:var({MODELS[d["a"]]["colour"]})"><i class="ln" style="background:var({MODELS[d["a"]]["colour"]})"></i>{esc(d["A"])}</span>'
-                        f'<span class="vs">vs</span><span style="color:var({MODELS[d["b"]]["colour"]})"><i class="ln" style="background:var({MODELS[d["b"]]["colour"]})"></i>{esc(d["B"])}</span></h3>')
+    legend = lambda d: (f'<h3 class="duel-legend"><span style="color:color-mix(in srgb,var({MODELS[d["a"]]["colour"]}) 78%,var(--ink))"><i class="ln" style="background:var({MODELS[d["a"]]["colour"]})"></i>{esc(d["A"])}</span>'
+                        f'<span class="vs">vs</span><span style="color:color-mix(in srgb,var({MODELS[d["b"]]["colour"]}) 78%,var(--ink))"><i class="ln" style="background:var({MODELS[d["b"]]["colour"]})"></i>{esc(d["B"])}</span></h3>')
     lines_html = lambda d: ('<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
                             + "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"]))
 
@@ -397,9 +397,6 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .duel-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin:0 0 12px;
   font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.1}
 .cmp-left .duel-legend{justify-content:center;padding:0 15.3% 0 11.7%}   /* centred on the plot area of the compact chart (margins 84 and 110 of 720) */
-.duel-legend>span,.duel-same b{filter:brightness(.88)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .duel-legend>span,:root:not([data-theme="light"]) .duel-same b{filter:none}}
-:root[data-theme="dark"] .duel-legend>span,:root[data-theme="dark"] .duel-same b{filter:none}
 .duel-legend .ln{display:inline-block;width:26px;height:4px;border-radius:2px;vertical-align:middle;margin-right:10px}
 .duel-legend .vs{font-size:.6em;color:var(--faint);font-variant:normal}
 .duel-same{margin:4px 0 36px;font-size:clamp(16px,1.7vw,18px);line-height:1.45;color:var(--muted)}.duel-same b{color:var(--ink)}
