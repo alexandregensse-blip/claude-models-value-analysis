@@ -9,6 +9,7 @@ from grids import fused_grids, monotonicity_report
 from render import inject, prerender
 from seo import content_date, content_fingerprint, head_tags, write_root_files
 from sources import groups_data
+import duels
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import DISPLAY_ORDER, MODELS
 
@@ -34,7 +35,8 @@ def main():
     body = body.replace("__COSTSPAN__", str(round(span)))
     pre  = prerender(app, css)
     body = inject(body, pre)
-    date = content_date(content_fingerprint(body, pre, [CG, QG, PANEL, GD]))
+    duel_body, duel_summary = duels.build(CG, QG, PANEL)
+    date = content_date(content_fingerprint(body, pre, [CG, QG, PANEL, GD, duel_body]))
     body = body.replace("__GENDATE__", date.strftime("%d %b %Y"))   # last change to the content (text, figures, data)
     html = (
         "<!doctype html>\n"
@@ -46,7 +48,8 @@ def main():
         f"</head>\n<body>\n{body}\n<script>\n{app}\n</script>\n</body>\n</html>\n"
     )
     open(OUT,"w",encoding="utf-8").write(html)
-    write_root_files(date, pre)
+    write_root_files(date, pre, duel_summary)
+    print(f"built {duels.FILE}  ({duels.write(duel_body, css, date)} bytes)")
     print(f"built {OUT}  ({len(html)} bytes)")
     for axis in ("cost", "quality"):
         d = DIAG[axis]

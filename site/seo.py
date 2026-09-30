@@ -2,6 +2,8 @@
 IndexNow key), and the date of the last change to the page's content."""
 import datetime, hashlib, html as htmlmod, json, os, re
 
+import duels
+
 from config import HERE, ROOT, SITE_URL, REPO_URL, TITLE, SITE_NAME, DESCRIPTION, SITE_HOST, BING_SITE_VERIFICATION, INDEXNOW_KEY
 
 
@@ -76,7 +78,7 @@ def head_tags(date, counts):
         f'<script type="application/ld+json">\n{ld}\n</script>\n'
     )
 
-def write_root_files(date, pre):
+def write_root_files(date, pre, duel_summary=()):
     """robots.txt, sitemap.xml, llms.txt and the IndexNow key file, next to index.html. llms.txt reuses the
     full answer computed by app.js (answerFull), so it states the same conclusions as the page."""
     plain = lambda h: re.sub(r"\s+(?=:)", "", re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", "", h)))).strip()
@@ -84,7 +86,8 @@ def write_root_files(date, pre):
         "robots.txt": f"# All robots allowed, AI robots included.\nUser-agent: *\nAllow: /\n\nSitemap: {SITE_URL}sitemap.xml\n",
         "sitemap.xml": ('<?xml version="1.0" encoding="UTF-8"?>\n'
                         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-                        f"  <url><loc>{SITE_URL}</loc><lastmod>{date.isoformat()}</lastmod></url>\n</urlset>\n"),
+                        f"  <url><loc>{SITE_URL}</loc><lastmod>{date.isoformat()}</lastmod></url>\n"
+                        f"  <url><loc>{duels.URL}</loc><lastmod>{date.isoformat()}</lastmod></url>\n</urlset>\n"),
         "llms.txt": f"""# {TITLE}
 
 > {DESCRIPTION}
@@ -96,6 +99,11 @@ Costs are multiples of the cheapest couple's; quality is the expected score on t
 ## Report
 
 - [{TITLE}]({SITE_URL}): quality vs cost per model and effort level, Pareto frontier, best pick per task tier, normalized cost matrix, method and sources.
+- [{duels.TITLE}]({duels.URL}): every pair of Claude models compared effort by effort, and the cheapest effort of each that matches the other.
+
+## Head-to-head
+
+{chr(10).join("- " + s for s in duel_summary)}
 
 ## Data
 

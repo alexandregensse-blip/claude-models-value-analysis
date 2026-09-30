@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fable vs Opus vs Sonnet vs Haiku: Claude models head-to-head</title>
+<meta name="description" content="Every pair of Claude models compared effort by effort: how much more one costs than the other, how much quality it buys, and the cheapest effort of each that matches the other. Open data, CC BY 4.0.">
+<link rel="canonical" href="https://claude-models.agensse.com/claude-models-head-to-head.html">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png" sizes="96x96">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://claude-models.agensse.com/claude-models-head-to-head.html">
+<meta property="og:title" content="Fable vs Opus vs Sonnet vs Haiku: Claude models head-to-head">
+<meta property="og:description" content="Every pair of Claude models compared effort by effort: how much more one costs than the other, how much quality it buys, and the cheapest effort of each that matches the other. Open data, CC BY 4.0.">
+<meta property="og:image" content="https://claude-models.agensse.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Claude models compared: cost vs quality at every effort level">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Fable vs Opus vs Sonnet vs Haiku: Claude models head-to-head",
+  "description": "Every pair of Claude models compared effort by effort: how much more one costs than the other, how much quality it buys, and the cheapest effort of each that matches the other. Open data, CC BY 4.0.",
+  "url": "https://claude-models.agensse.com/claude-models-head-to-head.html",
+  "isPartOf": {
+   "@type": "WebSite",
+   "name": "Claude cost vs quality",
+   "url": "https://claude-models.agensse.com/"
+  },
+  "author": {
+   "@type": "Person",
+   "name": "Alexandre Gensse",
+   "url": "https://github.com/alexandregensse-blip"
+  },
+  "dateModified": "2026-09-30",
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Claude cost vs quality",
+    "item": "https://claude-models.agensse.com/"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Head-to-head",
+    "item": "https://claude-models.agensse.com/claude-models-head-to-head.html"
+   }
+  ]
+ }
+]
+</script>
+<style>
+:root{
+    --paper:#F4EFE6; --panel:#FBF9F3; --ink:#2B2723; --muted:#645F54; --faint:#726A5D; --yield:#AE7823;
+    --line:#E0D8CA; --line2:#CFC5B4;
+    --fable51:#7B3FBF; --opus55:#1C7FB8; --opus5:#4A5A9C; --opus48:#D2912A; --opus47:#E6BE72; --sonnet55:#C2385A; --sonnet5:#D9694B; --sonnet46:#A79E8E; --fable5:#7C4A6A; --haiku45:#3F8A78;
+    --good:#3F8A78; --warn:#C98A2E; --crit:#C0563B;
+    --shadow:0 1px 2px rgba(40,34,26,.05),0 6px 20px rgba(40,34,26,.06);
+  }
+  @media (prefers-color-scheme:dark){:root{
+    --paper:#1E1B17; --panel:#27231E; --ink:#EFE9DD; --muted:#A79E8F; --faint:#948B7D; --yield:#E4A63C;
+    --line:#39332B; --line2:#4A4237;
+    --fable51:#A882E8; --opus55:#5BB4EA; --opus5:#8093E0; --opus48:#E4A63C; --opus47:#EFCD86; --sonnet55:#EE7392; --sonnet5:#E87C5E; --sonnet46:#B7AE9D; --fable5:#B06A93; --haiku45:#55A992;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 26px rgba(0,0,0,.35);
+  }}
+  :root[data-theme="dark"]{
+    --paper:#1E1B17; --panel:#27231E; --ink:#EFE9DD; --muted:#A79E8F; --faint:#948B7D; --yield:#E4A63C;
+    --line:#39332B; --line2:#4A4237;
+    --fable51:#A882E8; --opus55:#5BB4EA; --opus5:#8093E0; --opus48:#E4A63C; --opus47:#EFCD86; --sonnet55:#EE7392; --sonnet5:#E87C5E; --sonnet46:#B7AE9D; --fable5:#B06A93; --haiku45:#55A992;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 26px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --paper:#F4EFE6; --panel:#FBF9F3; --ink:#2B2723; --muted:#645F54; --faint:#726A5D; --yield:#AE7823;
+    --line:#E0D8CA; --line2:#CFC5B4;
+    --fable51:#7B3FBF; --opus55:#1C7FB8; --opus5:#4A5A9C; --opus48:#D2912A; --opus47:#E6BE72; --sonnet55:#C2385A; --sonnet5:#D9694B; --sonnet46:#A79E8E; --fable5:#7C4A6A; --haiku45:#3F8A78;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:min(1720px,96vw);margin:0 auto;padding:clamp(30px,5.25vw,78px)}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;font-weight:600;letter-spacing:-.01em;text-wrap:balance;margin:0;font-variant:small-caps}
+  h1{font-size:clamp(34px,5.4vw,58px);line-height:1.05}
+  h2{font-size:clamp(21px,3vw,27px);line-height:1.15;margin-bottom:.15em}
+  h3{font-size:16px;font-weight:600}
+  .eyebrow{font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--fable5);font-weight:600}
+  .lede{font-size:clamp(16px,2vw,18px);color:var(--muted);max-width:none;margin-top:.7em}
+  .muted{color:var(--muted)} .faint{color:var(--faint)}
+  section{margin-top:clamp(52px,7vw,92px)}
+  section.major{margin-top:clamp(34px,4.2vw,60px)}
+  .sub{color:var(--muted);max-width:none;margin:.35em 0 1.4em}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+  .pad{padding:clamp(16px,2.5vw,26px)}
+  .num{font-variant-numeric:tabular-nums}
+  .meta{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+  .meta b{font-variant-numeric:tabular-nums}
+  .meta .k{font-size:12.5px;color:var(--muted)}
+  .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:4px 0 16px;font-size:13px}
+  .lg{display:inline-flex;align-items:center;gap:7px}
+  .chart-controls{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 12px;margin:2px 0 14px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+  .cc-k{margin-right:auto;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .tgl{font:inherit;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--line2);border-radius:10px;padding:6px 12px 6px 7px;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+  .tgl:hover{border-color:var(--muted)}
+  .tgl:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
+  .tgl-track{position:relative;flex:none;width:36px;height:20px;border-radius:999px;background:var(--line2);transition:background .15s}
+  .tgl-knob{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.28);transition:left .15s}
+  .tgl[aria-checked="true"] .tgl-track{background:var(--good)}
+  .tgl[aria-checked="true"] .tgl-knob{left:18px}
+  .tgl-state{min-width:25px;font-size:10.5px;font-weight:800;letter-spacing:.06em;color:var(--faint)}
+  .tgl[aria-checked="true"] .tgl-state{color:var(--good)}
+  .tgl-label{font-weight:600}
+  .tgl-hint{font-size:11.5px;color:var(--faint)}
+  @media (prefers-reduced-motion:reduce){.tgl-track,.tgl-knob{transition:none}}
+  @media (max-width:520px){.cc-k{flex-basis:100%}.chart-controls{justify-content:flex-start}}
+  .sw{width:11px;height:11px;border-radius:3px;flex:none}
+  .chartbox{overflow-x:auto}
+  svg{display:block;max-width:100%;height:auto;font-family:inherit}
+  #chartB,#chartP{width:100%}   /* §1 landscape + Pareto fill the full body width */
+  .cap{font-size:12.5px;color:var(--muted);margin-top:22px;max-width:none}
+  table{border-collapse:collapse;width:100%;font-size:13.5px}
+  th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-weight:600;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  td.mdl{text-align:left;font-weight:600;white-space:nowrap}
+  .cell{border-radius:7px;padding:7px 4px;font-variant-numeric:tabular-nums;font-weight:600}
+  .cell small{display:block;font-weight:400;font-size:10.5px;opacity:.7;margin-top:1px}
+  .na{color:var(--faint)}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:baseline}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+  .crit h3{margin-bottom:6px} .crit p{margin:0;font-size:13.5px;color:var(--muted)}
+  .crit .ex{display:block;margin-top:8px;padding-top:8px;border-top:1px dashed var(--line2);font-size:12.5px;color:var(--ink)}
+  .crit .ex b{color:var(--fable5)}
+  .conf{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:20px;vertical-align:middle}
+  .c-high{background:color-mix(in srgb,var(--good) 20%,transparent);color:var(--good)}
+  .c-med{background:color-mix(in srgb,var(--warn) 22%,transparent);color:var(--warn)}
+  .c-low{background:color-mix(in srgb,var(--crit) 20%,transparent);color:var(--crit)}
+  ul.tight{margin:.4em 0 0;padding-left:1.1em} ul.tight li{margin:.28em 0;font-size:14px;color:var(--muted)}
+  ul.tight li b{color:var(--ink)}
+  ol.steps{margin:.4em 0 0;padding-left:1.3em} ol.steps li{margin:.5em 0;font-size:13.5px;color:var(--muted)}
+  ol.steps li b{color:var(--ink)}
+  #edge-tbl{width:100%;border-collapse:collapse;font-size:12px;min-width:520px}
+  #edge-tbl th{font-size:10px;text-transform:uppercase;letter-spacing:.04em;color:var(--faint);padding:5px 9px;border-bottom:1px solid var(--line);text-align:center;font-weight:600}
+  #edge-tbl td{padding:5px 9px;border-bottom:1px solid var(--line);color:var(--muted);vertical-align:top}
+  #edge-tbl th:last-child,#edge-tbl td:last-child{width:60%;max-width:60%}
+  #edge-tbl td b{color:var(--ink)}
+  #edge-tbl tr:last-child td{border-bottom:none}
+  .etag{display:inline-block;padding:1px 7px;border-radius:20px;font-size:10px;font-weight:600;color:#fff;white-space:nowrap}
+  .foot{margin-top:60px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+  a{color:var(--fable5)}
+  .pill{display:inline-block;font-size:11px;padding:1px 8px;border:1px solid var(--line2);border-radius:20px;color:var(--muted);white-space:nowrap;font-weight:500}
+#score-tbl{min-width:520px}
+#score-tbl td{vertical-align:middle}
+.scorepill{display:inline-block;min-width:52px;text-align:center;font-size:12.5px;font-weight:700;padding:2px 10px;border-radius:20px;font-variant-numeric:tabular-nums}
+.frontbadge{display:inline-block;font-size:11px;font-weight:600;color:var(--opus48)}
+/* Pareto chained mini-blocks (frontier order) — centred, filling the full width */
+.pareto-blocks{display:flex;flex-wrap:nowrap;align-items:stretch;gap:5px 3px;margin-top:20px;overflow-x:auto}
+.pblock{flex:1 1 0;min-width:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:1px;padding:7px 5px;border:1.5px solid var(--line2);border-radius:9px;background:var(--panel)}
+.pblock b{font-size:12px;line-height:1.15;white-space:nowrap}
+.pblock-e{font-size:10px;color:var(--muted);text-transform:capitalize}
+.pblock-n{font-size:10px;color:var(--faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pconn{display:flex;align-items:center;color:var(--faint);font-size:12px;flex:none}
+/* Tier tuner: window viz + q*/σ sliders */
+#tier-tuner{margin-bottom:8px}
+#tier-cards{margin-top:34px}
+.tuner-svg{width:100%;height:auto;display:block}
+.tuner-ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px 26px;margin-top:14px}
+.tuner-row{display:flex;flex-direction:column;gap:6px;font-size:12px}
+.tuner-name{font-weight:700;color:var(--tw)}
+.tuner-row label{display:flex;align-items:center;gap:8px;color:var(--muted)}
+.tuner-row label .lbl{min-width:16px;font-weight:600}
+.tuner-row input[type=range]{flex:1;min-width:0;accent-color:var(--tw);cursor:pointer}
+.tuner-row b{font-variant-numeric:tabular-nums;color:var(--ink);min-width:34px;text-align:right}
+/* Tier cards + crown (shared layout) */
+.tier{display:flex;flex-direction:column}
+.tier-head{text-align:center;margin-bottom:10px}
+.tier-q{display:block;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.tier-name{display:block;font-family:Georgia,serif;font-size:17px;font-weight:600;margin-top:1px}
+.tier-top{display:flex;align-items:center;gap:8px;margin:2px 0 10px;padding-bottom:10px;border-bottom:1px dashed var(--line2)}
+.tier-left{flex:1 1 50%;min-width:0;text-align:left}
+.tier-pick{display:block;font-weight:700;font-size:15px}
+.tier-pick .dot{width:10px;height:10px}
+.tier-nums{display:block;font-size:12px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums}
+.tier-nums b{color:var(--ink)}
+.tier-yield{flex:1 1 50%;text-align:right;font-weight:800;font-size:clamp(26px,3.4vw,38px);line-height:1;color:var(--yield);font-variant-numeric:tabular-nums}
+.tier-yield small{display:block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);margin-top:3px}
+.tier .ex{margin-top:auto;border-top:none;padding-top:0}
+.crown{text-align:center;border:1px solid var(--opus48);background:color-mix(in srgb,var(--opus48) 6%,var(--panel));max-width:max(360px,calc((100% - 42px)/4*1.8));margin:14px auto 0}
+.crown .tier-q{color:var(--opus48)}
+.crown-model{font-family:Georgia,serif;font-size:clamp(24px,3.2vw,34px);font-weight:600;line-height:1.1;margin:4px 0 6px}
+.crown-model .dot{width:14px;height:14px;margin-right:9px}
+.crown-line{font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.crown-line b{color:var(--ink)}
+.crown-note{max-width:70ch;margin:10px auto 0;font-size:12.5px;color:var(--muted)}
+.zoomctl{position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:3px;z-index:5}
+.zoomhint{font-size:10px;color:var(--faint);margin-right:7px;white-space:nowrap}
+.zoomctl button{opacity:.7}.zoomctl:hover button{opacity:1}
+.zoomctl button{width:22px;height:22px;padding:0;font-size:14px;line-height:1;cursor:pointer;
+  border:1px solid var(--line);border-radius:5px;background:var(--panel);color:var(--ink);font-family:inherit}
+.zoomctl button:hover{background:var(--paper)}
+/* Foldable exploratory blocks — collapsed by default on the public page */
+details.fold{margin-top:30px}
+.block{margin-top:30px}
+/* Matrix / sources / method are single folds too → space them like the §1 folds (uniform 30px), not the big section gap */
+#matrix,#graph,#confidence{margin-top:30px}
+/* Uniform, relatively-large title for every major block */
+.blocktitle{font-family:Georgia,serif;font-weight:600;font-size:clamp(19px,2.3vw,23px);
+  line-height:1.15;letter-spacing:-.01em;margin:0 0 .5em}
+details.fold>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:9px;
+  font-family:Georgia,serif;font-size:17px;font-weight:600;color:var(--ink);
+  padding:13px 18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);
+  box-shadow:var(--shadow);user-select:none;transition:border-color .15s}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"▸";font-family:inherit;color:var(--fable5);font-size:13px;
+  transition:transform .15s;flex:none}
+details.fold[open]>summary::before{transform:rotate(90deg)}
+details.fold>summary:hover{border-color:var(--line2)}
+details.fold>summary .fold-hint{margin-left:auto;font-family:-apple-system,sans-serif;
+  font-size:11.5px;font-weight:500;color:var(--faint);letter-spacing:.02em}
+details.fold[open]>summary{border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom:none;box-shadow:none}
+details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-left-radius:0;border-top-right-radius:0}
+.fold-body{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+/* All titles: keep real capitals, render lowercase as small caps */
+.blocktitle,details.fold>summary,.tier-name,.crown-model{font-variant:small-caps}
+/* Header: GitHub + author pinned to the top-right corner; baseline/sources meta aligned with the lede */
+.hero{position:relative}
+.hero-corner{position:absolute;top:0;right:0;display:flex;flex-direction:column;align-items:flex-end;gap:7px;z-index:2}
+.gh-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 15px;border:1px solid var(--line2);
+  border-radius:10px;background:var(--panel);color:var(--ink);font-size:13.5px;font-weight:600;
+  text-decoration:none;box-shadow:var(--shadow);transition:border-color .15s}
+.gh-btn:hover{border-color:var(--fable5)}
+.gh-btn svg{width:17px;height:17px;fill:currentColor;flex:none}
+.gh-name{font-size:13.5px;font-weight:600;color:var(--muted)}
+.hero h1{margin-top:.12em;padding-right:150px}
+.hero-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;
+  gap:20px 76px;margin-top:clamp(32px,4.2vw,60px)}
+.hero-row .lede{flex:1 1 440px;margin-top:5px}
+.hero-row .lede-col{flex:1 1 440px}
+.lede.answer{margin-top:.6em}
+.h1-line{display:block}
+.meta.meta-side{flex:0 0 auto;flex-direction:row;flex-wrap:wrap;gap:14px 48px;
+  margin-top:2px;padding-top:0;border-top:none}
+.meta.meta-side .k{font-size:11.5px}
+@media (max-width:640px){.hero-corner{position:static;align-items:flex-start;margin-bottom:16px}
+  .hero h1{padding-right:0}}
+/* Best-overall above the header cards (tier-card layout, narrow, no dashed rule) */
+#tier-crown-top{max-width:30%;margin:0 auto 32px}
+/* never narrower than a normal tier card: match the card width once the row drops to 2-up, then 1-up */
+@media (max-width:1080px){#tier-crown-top{max-width:calc(50% - 7px)}}
+@media (max-width:520px){#tier-crown-top{max-width:100%}}
+#tier-crown-top .tier{border-color:var(--opus48);padding-left:clamp(22px,3vw,34px);padding-right:clamp(22px,3vw,34px);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--opus48) 16%,transparent),0 4px 30px color-mix(in srgb,var(--opus48) 24%,transparent)}
+#tier-crown-top .tier .tier-yield{color:var(--yield);font-size:clamp(34px,4.2vw,48px)}
+#tier-crown-top .tier .tier-top{border-bottom:none;padding-bottom:0;margin-bottom:0}
+#tier-crown-top .tier-pick{font-size:clamp(22px,2.6vw,30px)}
+#tier-crown-top .tier-pick .dot{width:14px;height:14px}
+#tier-crown-top .tier-nums{font-size:clamp(15px,1.7vw,19px)}
+/* Four-up card rows (tier cards + what-moves factors): go 4 → 2 (two rows of two) → 1, never an awkward 3-across */
+#tier-cards-top,#tier-cards,.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1080px){#tier-cards-top,#tier-cards,.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){#tier-cards-top,#tier-cards,.grid4{grid-template-columns:1fr}}
+/* Header-proximity tier cards: bigger model/effort label + cost/quality */
+#tier-cards-top .tier-pick{font-size:18px}
+#tier-cards-top .tier-pick .dot{width:12px;height:12px}
+#tier-cards-top .tier-nums{font-size:14px}
+/* Give the model/cost/quality column the room it needs so cost/quality stays on one line */
+#tier-cards-top .tier-left,#tier-crown-top .tier-left{flex:1 1 auto}
+#tier-cards-top .tier-yield,#tier-crown-top .tier-yield{flex:0 0 auto}
+#tier-cards-top .tier-nums,#tier-crown-top .tier-nums{white-space:nowrap}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Data analysis · <a href="https://claude-models.agensse.com/">Claude cost vs quality</a></div>
+    <h1>Claude models head-to-head <span class="h1-line">Fable vs Opus vs Sonnet vs Haiku, effort by effort</span></h1>
+    <p class="lede">Each pair of Claude models compared on the same scales as the <a href="https://claude-models.agensse.com/">main comparison</a>: cost as a multiple of the cheapest (model, effort) couple, quality as the expected score on the benchmark panel. For every pair: the gap at each shared effort level, and the cheapest effort of each model that matches the other's best.</p>
+  </header>
+  <main>
+  <nav class="card pad" aria-label="Pairs"><ul class="tight"><li><a href="#fable-5-1-vs-opus-5-5">Fable 5.1 vs Opus 5.5</a></li><li><a href="#fable-5-1-vs-sonnet-5-5">Fable 5.1 vs Sonnet 5.5</a></li><li><a href="#fable-5-1-vs-haiku-4-5">Fable 5.1 vs Haiku 4.5</a></li><li><a href="#opus-5-5-vs-sonnet-5-5">Opus 5.5 vs Sonnet 5.5</a></li><li><a href="#opus-5-5-vs-haiku-4-5">Opus 5.5 vs Haiku 4.5</a></li><li><a href="#sonnet-5-5-vs-haiku-4-5">Sonnet 5.5 vs Haiku 4.5</a></li><li><a href="#fable-5-1-vs-fable-5">Fable 5.1 vs Fable 5</a></li><li><a href="#opus-5-5-vs-opus-5">Opus 5.5 vs Opus 5</a></li><li><a href="#sonnet-5-5-vs-sonnet-5">Sonnet 5.5 vs Sonnet 5</a></li></ul></nav>
+  <section id="fable-5-1-vs-opus-5-5"><div class="card pad"><h2>Fable 5.1 vs Opus 5.5</h2><p>At the same effort (low, medium, high, xHigh, max), Fable 5.1 costs 1.5× to 3.3× what Opus 5.5 costs and scores between 3.8 points lower and 1.0 point higher on the benchmark panel.</p><p>To match Fable 5.1 at max (71.8 %, cost 27×), the cheapest Opus 5.5 setting is medium (71.1 %, cost 3.4×): 8.0× less per task.</p><p>No Fable 5.1 setting reaches Opus 5.5 at max (74.6 %): Fable 5.1&#x27;s best is max at 71.8 %.</p><div class="chartbox"><table><thead><tr><th>Effort</th><th>Fable 5.1 cost</th><th>Opus 5.5 cost</th><th>Fable 5.1 score</th><th>Opus 5.5 score</th><th>Cost</th><th>Quality</th></tr></thead><tbody><tr><td>low</td><td class="num">7.0×</td><td class="num">2.1×</td><td class="num">65.3&nbsp;%</td><td class="num">64.3&nbsp;%</td><td>Opus 5.5 cheaper</td><td>level within the uncertainty</td></tr><tr><td>medium</td><td class="num">8.4×</td><td class="num">3.4×</td><td class="num">67.7&nbsp;%</td><td class="num">71.1&nbsp;%</td><td>Opus 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>high</td><td class="num">10×</td><td class="num">4.1×</td><td class="num">68.7&nbsp;%</td><td class="num">72.5&nbsp;%</td><td>Opus 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>xHigh</td><td class="num">18×</td><td class="num">6.5×</td><td class="num">70.4&nbsp;%</td><td class="num">74.0&nbsp;%</td><td>Opus 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>max</td><td class="num">27×</td><td class="num">18×</td><td class="num">71.8&nbsp;%</td><td class="num">74.6&nbsp;%</td><td>Opus 5.5 cheaper</td><td>Opus 5.5 higher</td></tr></tbody></table></div></div></section><section id="fable-5-1-vs-sonnet-5-5"><div class="card pad"><h2>Fable 5.1 vs Sonnet 5.5</h2><p>At the same effort (low, medium, high, xHigh, max), Fable 5.1 costs 2.0× to 7.7× what Sonnet 5.5 costs and scores between 0.7 points higher and 12.3 points higher on the benchmark panel.</p><p>To match Fable 5.1 at max (71.8 %, cost 27×), the cheapest Sonnet 5.5 setting is xHigh (69.7 %, cost 4.1×): 6.6× less per task.</p><p>To match Sonnet 5.5 at max (70.5 %, cost 14×), the cheapest Fable 5.1 setting is high (68.7 %, cost 10×): 1.4× less per task.</p><div class="chartbox"><table><thead><tr><th>Effort</th><th>Fable 5.1 cost</th><th>Sonnet 5.5 cost</th><th>Fable 5.1 score</th><th>Sonnet 5.5 score</th><th>Cost</th><th>Quality</th></tr></thead><tbody><tr><td>low</td><td class="num">7.0×</td><td class="num">1.0×</td><td class="num">65.3&nbsp;%</td><td class="num">53.0&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Fable 5.1 higher</td></tr><tr><td>medium</td><td class="num">8.4×</td><td class="num">1.1×</td><td class="num">67.7&nbsp;%</td><td class="num">57.2&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Fable 5.1 higher</td></tr><tr><td>high</td><td class="num">10×</td><td class="num">1.8×</td><td class="num">68.7&nbsp;%</td><td class="num">65.3&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Fable 5.1 higher</td></tr><tr><td>xHigh</td><td class="num">18×</td><td class="num">4.1×</td><td class="num">70.4&nbsp;%</td><td class="num">69.7&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>level within the uncertainty</td></tr><tr><td>max</td><td class="num">27×</td><td class="num">14×</td><td class="num">71.8&nbsp;%</td><td class="num">70.5&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>level within the uncertainty</td></tr></tbody></table></div></div></section><section id="fable-5-1-vs-haiku-4-5"><div class="card pad"><h2>Fable 5.1 vs Haiku 4.5</h2><p>Haiku 4.5 is measured at a single setting, with no effort levels, so the two are compared through their cheapest matches.</p><p>No Haiku 4.5 setting reaches Fable 5.1 at max (71.8 %): Haiku 4.5&#x27;s best is its only setting at 38.3 %.</p><p>To match Haiku 4.5 (38.3 %, cost 1.2×), the cheapest Fable 5.1 setting is low (65.3 %, cost 7.0×): 5.7× more per task.</p></div></section><section id="opus-5-5-vs-sonnet-5-5"><div class="card pad"><h2>Opus 5.5 vs Sonnet 5.5</h2><p>At the same effort (low, medium, high, xHigh, max), Opus 5.5 costs 1.3× to 3.1× what Sonnet 5.5 costs and scores between 4.0 points higher and 13.8 points higher on the benchmark panel.</p><p>No Sonnet 5.5 setting reaches Opus 5.5 at max (74.6 %): Sonnet 5.5&#x27;s best is max at 70.5 %.</p><p>To match Sonnet 5.5 at max (70.5 %, cost 14×), the cheapest Opus 5.5 setting is medium (71.1 %, cost 3.4×): 4.1× less per task.</p><div class="chartbox"><table><thead><tr><th>Effort</th><th>Opus 5.5 cost</th><th>Sonnet 5.5 cost</th><th>Opus 5.5 score</th><th>Sonnet 5.5 score</th><th>Cost</th><th>Quality</th></tr></thead><tbody><tr><td>low</td><td class="num">2.1×</td><td class="num">1.0×</td><td class="num">64.3&nbsp;%</td><td class="num">53.0&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>medium</td><td class="num">3.4×</td><td class="num">1.1×</td><td class="num">71.1&nbsp;%</td><td class="num">57.2&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>high</td><td class="num">4.1×</td><td class="num">1.8×</td><td class="num">72.5&nbsp;%</td><td class="num">65.3&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>xHigh</td><td class="num">6.5×</td><td class="num">4.1×</td><td class="num">74.0&nbsp;%</td><td class="num">69.7&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>max</td><td class="num">18×</td><td class="num">14×</td><td class="num">74.6&nbsp;%</td><td class="num">70.5&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Opus 5.5 higher</td></tr></tbody></table></div></div></section><section id="opus-5-5-vs-haiku-4-5"><div class="card pad"><h2>Opus 5.5 vs Haiku 4.5</h2><p>Haiku 4.5 is measured at a single setting, with no effort levels, so the two are compared through their cheapest matches.</p><p>No Haiku 4.5 setting reaches Opus 5.5 at max (74.6 %): Haiku 4.5&#x27;s best is its only setting at 38.3 %.</p><p>To match Haiku 4.5 (38.3 %, cost 1.2×), the cheapest Opus 5.5 setting is low (64.3 %, cost 2.1×): 1.7× more per task.</p></div></section><section id="sonnet-5-5-vs-haiku-4-5"><div class="card pad"><h2>Sonnet 5.5 vs Haiku 4.5</h2><p>Haiku 4.5 is measured at a single setting, with no effort levels, so the two are compared through their cheapest matches.</p><p>No Haiku 4.5 setting reaches Sonnet 5.5 at max (70.5 %): Haiku 4.5&#x27;s best is its only setting at 38.3 %.</p><p>To match Haiku 4.5 (38.3 %, cost 1.2×), the cheapest Sonnet 5.5 setting is low (53.0 %, cost 1.0×): 1.2× less per task.</p></div></section><section id="fable-5-1-vs-fable-5"><div class="card pad"><h2>Fable 5.1 vs Fable 5</h2><p>At the same effort (low, medium, high, xHigh, max), Fable 5.1 costs 0.9× to 1.1× what Fable 5 costs and scores between 2.2 points higher and 4.6 points higher on the benchmark panel.</p><p>No Fable 5 setting reaches Fable 5.1 at max (71.8 %): Fable 5&#x27;s best is max at 69.0 %.</p><p>To match Fable 5 at max (69.0 %, cost 24×), the cheapest Fable 5.1 setting is medium (67.7 %, cost 8.4×): 2.8× less per task.</p><div class="chartbox"><table><thead><tr><th>Effort</th><th>Fable 5.1 cost</th><th>Fable 5 cost</th><th>Fable 5.1 score</th><th>Fable 5 score</th><th>Cost</th><th>Quality</th></tr></thead><tbody><tr><td>low</td><td class="num">7.0×</td><td class="num">7.4×</td><td class="num">65.3&nbsp;%</td><td class="num">60.7&nbsp;%</td><td>level within the uncertainty</td><td>Fable 5.1 higher</td></tr><tr><td>medium</td><td class="num">8.4×</td><td class="num">9.5×</td><td class="num">67.7&nbsp;%</td><td class="num">64.6&nbsp;%</td><td>Fable 5.1 cheaper</td><td>Fable 5.1 higher</td></tr><tr><td>high</td><td class="num">10×</td><td class="num">11×</td><td class="num">68.7&nbsp;%</td><td class="num">66.5&nbsp;%</td><td>level within the uncertainty</td><td>Fable 5.1 higher</td></tr><tr><td>xHigh</td><td class="num">18×</td><td class="num">16×</td><td class="num">70.4&nbsp;%</td><td class="num">67.8&nbsp;%</td><td>level within the uncertainty</td><td>Fable 5.1 higher</td></tr><tr><td>max</td><td class="num">27×</td><td class="num">24×</td><td class="num">71.8&nbsp;%</td><td class="num">69.0&nbsp;%</td><td>level within the uncertainty</td><td>Fable 5.1 higher</td></tr></tbody></table></div></div></section><section id="opus-5-5-vs-opus-5"><div class="card pad"><h2>Opus 5.5 vs Opus 5</h2><p>At the same effort (low, medium, high, xHigh, max), Opus 5.5 costs 0.5× to 1.3× what Opus 5 costs and scores between 1.0 point higher and 4.8 points higher on the benchmark panel.</p><p>No Opus 5 setting reaches Opus 5.5 at max (74.6 %): Opus 5&#x27;s best is max at 69.9 %.</p><p>To match Opus 5 at max (69.9 %, cost 14×), the cheapest Opus 5.5 setting is medium (71.1 %, cost 3.4×): 4.0× less per task.</p><div class="chartbox"><table><thead><tr><th>Effort</th><th>Opus 5.5 cost</th><th>Opus 5 cost</th><th>Opus 5.5 score</th><th>Opus 5 score</th><th>Cost</th><th>Quality</th></tr></thead><tbody><tr><td>low</td><td class="num">2.1×</td><td class="num">4.5×</td><td class="num">64.3&nbsp;%</td><td class="num">63.3&nbsp;%</td><td>Opus 5.5 cheaper</td><td>level within the uncertainty</td></tr><tr><td>medium</td><td class="num">3.4×</td><td class="num">5.8×</td><td class="num">71.1&nbsp;%</td><td class="num">66.7&nbsp;%</td><td>Opus 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>high</td><td class="num">4.1×</td><td class="num">8.7×</td><td class="num">72.5&nbsp;%</td><td class="num">67.9&nbsp;%</td><td>Opus 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>xHigh</td><td class="num">6.5×</td><td class="num">11×</td><td class="num">74.0&nbsp;%</td><td class="num">69.2&nbsp;%</td><td>Opus 5.5 cheaper</td><td>Opus 5.5 higher</td></tr><tr><td>max</td><td class="num">18×</td><td class="num">14×</td><td class="num">74.6&nbsp;%</td><td class="num">69.9&nbsp;%</td><td>Opus 5 cheaper</td><td>Opus 5.5 higher</td></tr></tbody></table></div></div></section><section id="sonnet-5-5-vs-sonnet-5"><div class="card pad"><h2>Sonnet 5.5 vs Sonnet 5</h2><p>At the same effort (low, medium, high, xHigh, max), Sonnet 5.5 costs 0.5× to 1.4× what Sonnet 5 costs and scores between 5.9 points higher and 11.4 points higher on the benchmark panel.</p><p>No Sonnet 5 setting reaches Sonnet 5.5 at max (70.5 %): Sonnet 5&#x27;s best is max at 60.2 %.</p><p>To match Sonnet 5 at max (60.2 %, cost 9.8×), the cheapest Sonnet 5.5 setting is high (65.3 %, cost 1.8×): 5.6× less per task.</p><div class="chartbox"><table><thead><tr><th>Effort</th><th>Sonnet 5.5 cost</th><th>Sonnet 5 cost</th><th>Sonnet 5.5 score</th><th>Sonnet 5 score</th><th>Cost</th><th>Quality</th></tr></thead><tbody><tr><td>low</td><td class="num">1.0×</td><td class="num">1.7×</td><td class="num">53.0&nbsp;%</td><td class="num">45.8&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Sonnet 5.5 higher</td></tr><tr><td>medium</td><td class="num">1.1×</td><td class="num">2.4×</td><td class="num">57.2&nbsp;%</td><td class="num">51.4&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Sonnet 5.5 higher</td></tr><tr><td>high</td><td class="num">1.8×</td><td class="num">3.3×</td><td class="num">65.3&nbsp;%</td><td class="num">56.2&nbsp;%</td><td>Sonnet 5.5 cheaper</td><td>Sonnet 5.5 higher</td></tr><tr><td>xHigh</td><td class="num">4.1×</td><td class="num">4.6×</td><td class="num">69.7&nbsp;%</td><td class="num">58.3&nbsp;%</td><td>level within the uncertainty</td><td>Sonnet 5.5 higher</td></tr><tr><td>max</td><td class="num">14×</td><td class="num">9.8×</td><td class="num">70.5&nbsp;%</td><td class="num">60.2&nbsp;%</td><td>Sonnet 5 cheaper</td><td>Sonnet 5.5 higher</td></tr></tbody></table></div></div></section>
+  <section id="how"><div class="card pad"><h2>How to read these comparisons</h2>
+    <p>The values are the ones the <a href="https://claude-models.agensse.com/">main page</a> shows, fitted from public measurements taken on the same tasks. One model is <b>cheaper</b> or <b>higher</b> than the other at an effort level when the fitted difference puts it ahead with 84&nbsp;% probability, the level of the intervals shown everywhere on the site; otherwise the two are <b>level within the uncertainty</b>. A <b>match</b> is the cheapest setting of the other model that the first does not out-score at that level. Costs count the whole task (tokens at list price, as each source measured them), not the price per token.</p>
+  </div></section>
+  </main>
+  <div class="foot">
+    <p><b>Alexandre Gensse</b> · <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis" target="_blank" rel="noopener">github.com/alexandregensse-blip</a> · <a href="https://claude-models.agensse.com/">Claude models compared: cost vs quality at every effort level</a></p>
+    <p class="faint" style="margin-top:8px">All figures are <b>indicative and for informational purposes only</b> — derived from public third-party measurements, not an official benchmark, and not affiliated with or endorsed by Anthropic. Verify before relying on any value.</p>
+    <p class="faint" style="margin-top:8px">Data and text under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a> · <a href="raw-data.csv">download the data (CSV)</a></p>
+  </div>
+</div>
+</body>
+</html>
