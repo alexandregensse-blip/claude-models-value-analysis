@@ -14,8 +14,8 @@ from catalog import MODELS
 FILE  = "claude-models-head-to-head.html"
 URL   = SITE_URL + FILE
 TITLE = "Fable vs Opus vs Sonnet vs Haiku: Claude models head-to-head"
-DESCRIPTION = ("Every pair of Claude models compared effort by effort: how much more one costs than the other, how much "
-               "quality it buys, and the cheapest effort of each that matches the other. Open data, CC BY 4.0.")
+DESCRIPTION = ("Every pair of Claude models compared effort by effort: the cost gap, the quality gap, and the cheapest "
+               "effort of each that matches the other. Open data.")
 CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-4.5"]           # the latest model of each family
 SUCCESSION = [("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
 REACH = 0.84
