@@ -189,14 +189,16 @@ def build(CG, QG, PANEL):
             cells = "".join(f'<td><div class="cell" style="background:color-mix(in srgb,var({col}) 13%,transparent)">'
                             f'{fmt_cost(r[key]["c"])}<small>{r[key]["s"]:.1f}&nbsp;%</small></div></td>' for r in d["rows"])
             return f'<tr><td class="mdl">{dot(m)}{esc(L(m))}</td>{cells}</tr>'
-        pill = lambda who, what: (f'<span class="conf c-high">{esc(who)} {what}</span>' if who else '<span class="conf c-med">level</span>')
+        pill = lambda who, what: (f'<span class="conf c-high">{esc(who)}{(" " + what) if what else ""}</span>' if who else '<span class="conf c-med">level</span>')
         verdict = lambda key, what: "".join(f"<td>{pill(r[key], what)}</td>" for r in d["rows"])
-        inner = (f'<div class="chartbox"><table class="duel-tbl"><thead><tr><th style="text-align:left">Model</th>{th}</tr></thead><tbody>'
+        inner = (f'<div class="chartbox"><table class="duel-tbl">'
+                 f'<caption>Effort level: how long the model reasons before it answers, from low to max</caption>'
+                 f'<thead><tr><th style="text-align:left">Effort level →</th>{th}</tr></thead><tbody>'
                  f'{row(d["a"], "p")}{row(d["b"], "q")}'
-                 f'<tr><td class="mdl muted">Cost</td>{verdict("cost", "cheaper")}</tr>'
-                 f'<tr><td class="mdl muted">Quality</td>{verdict("qual", "higher")}</tr></tbody></table></div>'
-                 f'<p class="cap">Each cell: cost as a multiple of the cheapest couple, and the expected score on the benchmark panel. '
-                 f'<b>Cheaper</b> or <b>higher</b> when the fitted difference puts it ahead with at least 84&nbsp;% probability; <b>level</b> otherwise.</p>')
+                 f'<tr><td class="mdl muted">Cheaper</td>{verdict("cost", "")}</tr>'
+                 f'<tr><td class="mdl muted">Scores higher</td>{verdict("qual", "")}</tr></tbody></table></div>'
+                 f'<p class="cap">Each model cell: <b>cost per task</b>, as a multiple of the cheapest couple, and below it the <b>expected score</b> on the benchmark panel. '
+                 f'The last two rows say which model is cheaper, or scores higher, at that effort level: it is ahead with at least 84&nbsp;% probability; <b>level</b> otherwise.</p>')
         if not fold:
             return inner
         return (f'<details class="fold"><summary>Effort by effort — {esc(d["A"])} vs {esc(d["B"])}</summary>'
@@ -226,23 +228,27 @@ def build(CG, QG, PANEL):
     order = json.dumps(shown)
     compare = f"""<section id="compare" class="major"><div class="card pad cmp-ctl">
     <h2 class="blocktitle">Compare two Claude models</h2>
-    <p class="sub cmp-hint">Pick two models; the last two you click are compared.</p>
     <div class="chips" role="group" aria-label="Models to compare">{chips}</div>
   </div>
   <div id="cmp-out" aria-live="polite">{view(picker[first])}</div>
+  <p class="cap cmp-empty" id="cmp-empty" hidden>Select a second model to compare.</p>
   {templates}
   <script>
   (function(){{
     var ORDER={order}, sel=[ORDER[0],ORDER[1]], out=document.getElementById("cmp-out"),
-        chips=[].slice.call(document.querySelectorAll(".chip"));
+        empty=document.getElementById("cmp-empty"), chips=[].slice.call(document.querySelectorAll(".chip"));
     function show(){{
       chips.forEach(function(c){{ c.setAttribute("aria-pressed", sel.indexOf(c.dataset.m)>=0 ? "true" : "false"); }});
+      out.innerHTML=""; empty.hidden = sel.length===2; if(sel.length<2) return;
       var k = ORDER.indexOf(sel[0])<ORDER.indexOf(sel[1]) ? sel[0]+"|"+sel[1] : sel[1]+"|"+sel[0],
           t = document.querySelector('template[data-pair="'+k+'"]');
-      if(t){{ out.innerHTML=""; out.appendChild(t.content.cloneNode(true)); }}
+      if(t) out.appendChild(t.content.cloneNode(true));
     }}
     chips.forEach(function(c){{ c.addEventListener("click",function(){{
-      var m=c.dataset.m; if(sel.indexOf(m)>=0) return; sel=[sel[1],m]; show(); }}); }});
+      var m=c.dataset.m, i=sel.indexOf(m);
+      if(i>=0) sel.splice(i,1);                       // click a lit model: turn it off
+      else {{ sel.push(m); if(sel.length>2) sel.shift(); }}   // a third one replaces the oldest
+      show(); }}); }});
   }})();
   </script>
 </section>"""
@@ -318,16 +324,21 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .tier-yield.dearer{color:var(--muted)}
 .duel-lines{margin-top:18px}
 .duel-tbl td.mdl{min-width:120px}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
-.chip{font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line2);
-  border-radius:12px;padding:13px 20px;display:inline-flex;align-items:center;gap:2px;cursor:pointer;opacity:.5;
+.cmp-ctl{width:fit-content;max-width:100%;margin:0 auto;text-align:center;padding:clamp(20px,3vw,32px) clamp(20px,3.4vw,40px)}
+.cmp-ctl .blocktitle{margin-bottom:.8em}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.chip{font:inherit;font-size:17px;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line2);
+  border-radius:14px;padding:18px 28px;min-width:150px;display:inline-flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;opacity:.5;
   transition:opacity .15s,border-color .15s,background .15s,box-shadow .15s}
+.chip .dot{width:11px;height:11px}
 .chip:hover{opacity:.8}
 .chip[aria-pressed="true"]{opacity:1;border-color:var(--c);background:color-mix(in srgb,var(--c) 11%,var(--panel));
   box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 16%,transparent)}
 .chip:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
+@media (max-width:520px){.chip{min-width:0;flex:1 1 40%;padding:16px 14px}}
+.cmp-empty{text-align:center;margin-top:18px}
+.duel-tbl caption{caption-side:top;text-align:left;font-size:12.5px;color:var(--muted);padding:0 0 8px}
 @media (prefers-reduced-motion:reduce){.chip{transition:none}}
-.cmp-hint{margin:.2em 0 1em}
 #cmp-out{margin-top:14px}
 .cmp-grid{display:grid;grid-template-columns:1fr;gap:18px 28px;align-items:center}
 @media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}}
