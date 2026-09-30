@@ -367,7 +367,7 @@ INITS = os.path.join(STAN_DIR, "inits-{axis}.json")                  # last draw
 # Sampler per axis (validated in /work/.geom/JOURNAL.md): quality = nutpie (diagonal mass matrix adapted by Fisher
 # divergence), which needs 4× fewer leapfrog steps here; cost = CmdStan NUTS started from the previous fit's last
 # draws (nutpie cannot be given starting points, and random starts can leave a cost chain in a remote region).
-SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=12000, target_accept=0.85,
+SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=12000, target_accept=0.9,
                            budget=600, extend=5000),
            "cost": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
                         max_treedepth=10, budget=600, extend=1500)}

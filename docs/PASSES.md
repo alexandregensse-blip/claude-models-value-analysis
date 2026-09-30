@@ -5,6 +5,16 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the sixteenth and seventeenth passes
+
+The first fit converged on the cost axis (R̂ 1.002, no divergence) but not on quality: R̂ 1.005 with 4 divergences and a
+bulk ESS of 388 (criterion 400); the extension loop stops on any divergence. The quality sampler's target acceptance
+went from 0.85 to 0.9 (a smaller step; the model is unchanged) and the refit converged: quality R̂ 1.005, ESS 462/725,
+no divergence, 685 s; cost R̂ 1.002, 449 s. **The picks do not move**: crown and grunt work Sonnet 5.5 medium (5.0×
+cheaper than the price trend), everyday tasks and advanced reasoning Sonnet 5.5 high, cutting-edge thinking Opus 5.5
+high. Expected scores shift by about one point (Sonnet 5.5 medium 60.9 → 59.6 %, Opus 5.5 max 75.7 → 75.0 %, Haiku 4.5
+37.2 → 38.9 %); Sonnet 5.5 max no longer reaches Opus 5.5 max within the uncertainty (73.4 against 75.0 %).
+
 ## Seventeenth pass: the boards drawn in the browser, and four new axes
 
 Nine Sonnet agents with 12 minutes each, 30 Sep 2026. Four took the 43 JavaScript leaderboards of the sixteenth pass's

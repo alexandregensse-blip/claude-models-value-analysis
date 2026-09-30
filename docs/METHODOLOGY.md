@@ -204,7 +204,7 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
 - **Samplers.** Quality: nutpie (Seyboldt et al.), whose adaptation of the mass matrix needs about four times fewer
-  steps here, 4 chains × (1,000 warm-up + 12,000 draws), target acceptance 0.85. Cost: CmdStan, 4 chains × (500
+  steps here, 4 chains × (1,000 warm-up + 12,000 draws), target acceptance 0.9 (0.85 until 30 Sep 2026, when it left 4 divergences). Cost: CmdStan, 4 chains × (500
   warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the previous fit (1,000
   warm-up iterations when there is none). A chain left in another region restarts its axis on CmdStan from the
   previous fit's draws; too few effective draws continue the same chains, adding draws rather than starting again,
