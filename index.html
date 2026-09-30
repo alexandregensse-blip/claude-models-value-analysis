@@ -899,6 +899,18 @@ function tierPicks(){
   const crown=reach.reduce((a,b)=> b.r > a.r ? b : a);
   return {picks,crown,tr};
 }
+// HEAD-TO-HEAD (site/duels.py, read at build time through prerender.js): for every pair of models shown, the tier
+// picks of tierPicks() restricted to the couples of those two models: their own frontier and couples within reach,
+// the price trend of the main page (every couple shown), the same window × e^(λθ) ⁄ cost score.
+function duelData(){
+  const all=couples(), tr=fitTrend(all), ms=[...new Set(all.map(p=>p.m))], out={};
+  for(let i=0;i<ms.length;i++) for(let j=i+1;j<ms.length;j++){
+    const rows=all.filter(p=>p.m===ms[i]||p.m===ms[j]), {reach}=frontier(rows);
+    const tscore=(p,T)=>logWindow(p.t,T)+tr.l*p.t-p.x;
+    out[[ms[i],ms[j]].sort().join("|")]=TIERS.map(T=>{ const w=reach.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a);
+      return {key:T.key,name:T.name,m:w.m,e:w.e,c:w.c,s:w.s,r:valueOf(tr,w)}; }); }
+  return out;
+}
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
   const {picks,crown}=tierPicks();

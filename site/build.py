@@ -35,7 +35,7 @@ def main():
     body = body.replace("__COSTSPAN__", str(round(span)))
     pre  = prerender(app, css)
     body = inject(body, pre)
-    duel_body, duel_summary = duels.build(CG, QG, PANEL)
+    duel_body, duel_summary = duels.build(CG, QG, PANEL, pre.get("duel-data", {}))
     date = content_date(content_fingerprint(body, pre, [CG, QG, PANEL, GD, duel_body, duels.TITLE, duels.DESCRIPTION]))
     body = body.replace("__GENDATE__", date.strftime("%d %b %Y"))   # last change to the content (text, figures, data)
     html = (
