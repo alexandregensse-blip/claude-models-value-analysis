@@ -10,14 +10,14 @@ Open [`index.html`](index.html) in a browser — fully self-contained (no server
 
 **Publishing a fork:** in `site/config.py`, set `SITE_URL` to the fork's address (every absolute URL, the sitemap, `robots.txt`, `llms.txt` and the domain shown in the share image derive from it) and `REPO_URL` to its repository; set `BING_SITE_VERIFICATION` and `INDEXNOW_KEY` to `""` (they prove this site's ownership to Bing and IndexNow; an empty value leaves out the tag and the key file) or to your own values. Delete `b3573dbc1da690e66e9ef05b081b7abe.txt`, run `python3 site/build.py`, and redraw the share image with the new domain (`site/assets/og_image.py`, needs Pillow: `uv run --no-project --with pillow python site/assets/og_image.py`). The author credit and the GitHub links in `gen/body.html` point to this repository (attribution, CC BY 4.0). Then e.g. GitHub Pages: *Settings → Pages → Source: Deploy from a branch → `main` / root*.
 
-Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5.5, Sonnet 5, Sonnet 4.6, Haiku 4.5**. Base of the relative scale: **Opus 5 @high = 1.00** since 23 Sep 2026 (it was Opus 4.8 @medium up to tag `v2026.09.23` — see *Re-anchoring on Opus 5 @high* in `PASSES.md`; the git tags reproduce each earlier scale). Opus 4.7 and Sonnet 4.6 stay in the data but are hidden on the page by default (an *Older models* switch brings them back).
+Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5.5, Sonnet 5, Sonnet 4.6, Haiku 4.5**. No reference couple since 30 Sep 2026: cost is a multiple of the cheapest couple, quality the expected score on the benchmark panel (the page was relative to Opus 5 @high up to tag `v2026.09.29b`, to Opus 4.8 @medium up to `v2026.09.23`; the git tags reproduce each earlier scale). Opus 4.7 and Sonnet 4.6 stay in the data but are hidden on the page by default (an *Older models* switch brings them back).
 
 ---
 
 ## What the report shows
 
-1. **Consolidated landscape** — one curve per model, one point per effort, on relative cost × relative quality (both anchored at Opus 5 @high = 1.0). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price envelope** (the cost the frontier charges for a given quality), and scores every frontier couple by its signed distance to that envelope (cheaper = good value). A **tier picker** (with live q\*/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick.
-2. **Normalized matrix** — relative cost per model × effort, sorted by relative quality, each cell with its interval.
+1. **Consolidated landscape** — one curve per model, one point per effort, cost (a multiple of the cheapest couple) × quality (the latent scale, labelled in expected panel score). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples and those **within reach** of them (not beaten at 84 %), fits a **price trend** over every couple (what a given quality typically costs), and says how many times cheaper or dearer than the trend each couple is. A **tier picker** (with live target/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick (the couple furthest below the trend).
+2. **Normalized matrix** — cost per model × effort as a multiple of the cheapest couple, sorted by expected score, each cell with its interval.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
 4. **Method** — how the numbers and their intervals are built; the full methodology is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
@@ -39,11 +39,11 @@ the report fuses the measurements with a **latent-quality model** (`model/lqm.py
 4. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
    publisher's weight saturates at its own systematic effect. One execution counts once: a run reprinted, drawn on
    two charts or scored with two metrics is recognised by its values (score and cost agreeing within their precisions).
-5. **Output**: quality = expected score averaged over the benchmark panel relative to the reference couple (Opus 5
-   @high), cost = cost on a task of typical size relative to it — the reference is a divisor, nothing more; each couple
+5. **Output**: quality = the latent quality θ, shown as the expected score averaged over the benchmark panel; cost =
+   cost on a task of typical size, shown as a multiple of the cheapest couple. No couple is a reference; each couple
    carries its own 16–84 % interval. A couple measured by a single publisher is not shown.
 
-The full procedure — collection rules, scales, model, weighting, estimation, price curve, value index, tiers and
+The full procedure — collection rules, scales, model, weighting, estimation, price trend, value, tiers and
 crown — is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) (the fit) and [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md) (what the page does with it); the checks are reproducible with the scripts in `model/validation/`.
 
 ## Repository

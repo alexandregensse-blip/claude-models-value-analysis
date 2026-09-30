@@ -5,6 +5,45 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Method change: the display without a reference couple, decided on the latent scale
+
+**Why.** The page divided every value by a reference couple (Opus 5 @high = 1.00), and several display choices leaked
+into the picks: the quality axis was a symmetric log around that couple's quality (constant 0.045), and the price
+curve, the tier targets and windows and the crown measured quality on it; the price curve was pulled toward the
+frontier by weights 1 − d/d_max that depended on the farthest couple; the tiers added a bonus of up to +20 % that
+saturated within one window width and acted as a step, and tilted cost by hand-set exponents γ = 1.20 … 0.80; the crown
+was a knee along the frontier, which moves when a neighbouring rung is added.
+
+**What** (`docs/DISPLAY-METHODOLOGY.md`).
+- *No reference couple.* Cost is a multiple of the cheapest couple shown; quality is the latent quality θ, labelled
+  with the expected panel score it predicts (the fit now publishes θ per couple and the panel curve θ → score).
+- *Every decision on the latent scale* (log cost, θ); the display scale only draws: linear in θ, compressed three times
+  below the weakest tier target (the models short of today's level grouped at the bottom).
+- *Frontier with the intervals.* A couple is within reach of the frontier unless another beats it on both axes with
+  probability 0.84 or more; the couples within reach are the candidates of every pick.
+- *Price trend* over every couple, the trend of the models: ln cost = a + λ·θ, effective-variance weights.
+- *Tiers.* Targets between (1 − e)·min + e·max and (1 − e)·max + e·min of the frontier's θ, e = 0.05; score = window ×
+  e^(λθ) ⁄ cost: a smooth reward for quality above the target, no bonus constant, no γ; cost weighed in ratios, as
+  people perceive prices (Weber–Fechner; a power 0.88 of cost, from prospect theory's lotteries, was considered and not
+  used).
+- *Crown*: the couple within reach furthest below the trend.
+- *Precision.* Cost multiples to two significant digits: their Monte Carlo error is about 0.3 % (the cheapest couple's
+  included), and two decimals on 18× would be noise.
+
+**Before → after** (fit of 30 September 2026, same data; the refit publishing θ: cost 446 s, R̂ 1.0019; quality 527 s,
+R̂ 1.0024; no divergence).
+
+| | before (v2026.09.29b) | after |
+|---|---|---|
+| Crown | Opus 5.5 xHigh (knee) | Sonnet 5.5 high, 4.3× cheaper than the trend |
+| Grunt work | Sonnet 5.5 high | Sonnet 5.5 high |
+| Everyday tasks | Sonnet 5.5 high | Sonnet 5.5 high |
+| Advanced reasoning | Opus 5.5 high | Opus 5.5 medium |
+| Cutting-Edge thinking | Opus 5.5 xHigh | Opus 5.5 high |
+
+Price trend λ = 0.108 (one unit of θ costs 11 % more), weighted R² 0.41. Within reach but off the frontier by centres:
+Opus 5.5 low, Sonnet 5.5 xHigh, Haiku 4.5.
+
 ## Method change: reading precision, and one execution counted once
 
 **Why.** The model had a noise floor per group (the smallest observed score difference / √12) and knew nothing of

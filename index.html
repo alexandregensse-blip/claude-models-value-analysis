@@ -30,7 +30,7 @@
   "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "Claude cost vs quality: Fable, Opus, Sonnet, Haiku compared",
-  "description": "What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a relative cost by chaining same-task comparisons. Aggregated from 172 sources · 491 benchmarks · 3435 measurements; costs and qualities are relative to Opus 5 @high = 1.00.",
+  "description": "What each recent Claude model actually costs, at every effort level — reconstructed from public measurements and reduced to a relative cost by chaining same-task comparisons. Aggregated from 172 sources · 491 benchmarks · 3435 measurements; cost as a multiple of the cheapest couple, quality as the expected score on the benchmark panel.",
   "url": "https://claude-models.agensse.com/",
   "sameAs": "https://github.com/alexandregensse-blip/claude-models-value-analysis",
   "creator": {
@@ -54,8 +54,8 @@
    "Pareto frontier"
   ],
   "variableMeasured": [
-   "Relative cost per task (Opus 5 @high = 1.00)",
-   "Relative quality (Opus 5 @high = 1.00)"
+   "Cost per task, as a multiple of the cheapest couple",
+   "Expected score on the benchmark panel (%)"
   ],
   "distribution": [
    {
@@ -297,11 +297,11 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <h1>Claude cost vs quality <span class="h1-line">Fable, Opus, Sonnet, Haiku compared</span></h1>
     <div class="hero-row">
       <div class="lede-col">
-        <p class="lede">What each recent Claude model actually costs, at every effort level — fused from public benchmark measurements into a <em>relative</em> cost and quality for every (model, effort) pair.</p>
-        <p class="lede answer" id="answer">The best value today is <b>Opus 5.5 at xHigh effort</b> — 1.08× the quality of Opus 5 @high for 0.75× its cost.</p>
+        <p class="lede">What each recent Claude model actually costs, at every effort level, and the quality it delivers — fused from public benchmark measurements for every (model, effort) pair.</p>
+        <p class="lede answer" id="answer">The best value today is <b>Sonnet 5.5 at high effort</b> — 4.3× cheaper than the price trend for its quality (expected score 65.3 % on the benchmark panel).</p>
       </div>
       <div class="meta meta-side">
-        <div><span class="k">Baseline</span><br><b>Opus&nbsp;5 · high&nbsp;= 1.00</b></div>
+        <div><span class="k">Scales</span><br><b>cost × the cheapest couple · expected score on the panel</b></div>
         <div><span class="k">Measurements</span><br><b><span class="nsrc">172 sources · 491 benchmarks · 3435 measurements</span></b></div>
         <div><span class="k">Updated</span><br><b>30 Sep 2026</b></div>
       </div>
@@ -316,10 +316,10 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-head"><span class="tier-name">👑 Best overall</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</span>
-          <span class="tier-nums">Cost <b>0.75×</b> · Quality <b>1.08×</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
+          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>65.3 %</b></span>
         </div>
-        <div class="tier-yield">241</div>
+        <div class="tier-yield">4.3×<small>cheaper than the trend</small></div>
       </div>
       
     </div></div>
@@ -328,9 +328,9 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
-          <span class="tier-nums">Cost <b>0.20×</b> · Quality <b>0.97×</b></span>
+          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>65.3 %</b></span>
         </div>
-        <div class="tier-yield">366</div>
+        <div class="tier-yield">4.3×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate.</span>
     </div><div class="card pad crit tier">
@@ -338,29 +338,29 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
-          <span class="tier-nums">Cost <b>0.20×</b> · Quality <b>0.97×</b></span>
+          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>65.3 %</b></span>
         </div>
-        <div class="tier-yield">366</div>
+        <div class="tier-yield">4.3×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Advanced reasoning</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
-          <span class="tier-nums">Cost <b>0.47×</b> · Quality <b>1.05×</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</span>
+          <span class="tier-nums">Cost <b>3.4×</b> · Score <b>71.1 %</b></span>
         </div>
-        <div class="tier-yield">330</div>
+        <div class="tier-yield">3.4×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Cutting-Edge thinking</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</span>
-          <span class="tier-nums">Cost <b>0.75×</b> · Quality <b>1.08×</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
+          <span class="tier-nums">Cost <b>4.1×</b> · Score <b>72.5 %</b></span>
         </div>
-        <div class="tier-yield">241</div>
+        <div class="tier-yield">3.2×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium.</span>
     </div></div>
@@ -372,81 +372,81 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <h2 class="blocktitle">Quality vs. cost of every Claude model, at each effort level</h2>
       <div class="chart-controls" id="ctrlB"></div>
       <div class="legend" id="legendB"></div>
-      <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Relative quality vs relative cost, one curve per model, one point per effort"></svg></div>
-      <p class="cap">One curve per model, one point per effort (low → max), both axes <b>relative to Opus&nbsp;5&nbsp;@high&nbsp;= 1.0</b>; quality is <b>dilated near parity</b>. <b>Tier bands</b> (off by default) shade the four usage tiers of the tier picker below&nbsp;: each band runs from that tier's target q* up to the next tier's — the qualities that clear its bar but not the next one. <b>Uncertainty ovals</b> (off by default) show each point's band — what one new, independent benchmark would report — <b>width = cost, height = quality</b>; hover to bring the one under the cursor forward. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
+      <div class="chartbox"><svg id="chartB" viewBox="0 0 1100 619" role="img" aria-label="Quality vs cost, one curve per model, one point per effort"></svg></div>
+      <p class="cap">One curve per model, one point per effort (low → max). <b>Cost</b> is a multiple of the cheapest couple shown; <b>quality</b> is placed on the model's latent scale and labelled with the score it predicts on the benchmark panel. Below the weakest tier target the quality axis is <b>compressed</b>, so the models short of today's level sit together at the bottom. <b>Tier bands</b> (off by default) shade the four usage tiers of the tier picker below&nbsp;: each band runs from that tier's target up to the next tier's — the qualities that clear its bar but not the next one. <b>Uncertainty ovals</b> (off by default) show each couple's 16–84&nbsp;% interval, <b>width = cost, height = quality</b>; hover to bring the one under the cursor forward. <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.</p>
     </div>
     <div class="card pad block">
       <h2 class="blocktitle">Best Claude model for the price — the Pareto frontier</h2>
       <div class="chart-controls" id="ctrlP"></div>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The faint grey curve is the <b>price curve</b> — what a given quality typically costs, fitted on <b>every</b> measured couple but with each one's influence <b>graded by its distance to the frontier</b>, and the reference for the value index below. <b>Tier bands</b> (off by default) shade the same four usage tiers as on the landscape above.</p>
-      <div id="pareto-blocks" class="pareto-blocks"><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Low</span><span class="pblock-n">0.79× · 0.12×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">0.85× · 0.13×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">High</span><span class="pblock-n">0.97× · 0.20×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">1.03× · 0.39×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">1.03× · 0.47×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">High</span><span class="pblock-n">1.05× · 0.47×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">1.08× · 0.75×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Max</span><span class="pblock-n">1.09× · 2.1×</span></span></div>
+      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>dashed</b> = <b>within reach</b> of it (no couple beats it on both axes with 84&nbsp;% probability, the level of the intervals), <b>faded</b> = dominated. The couples within reach are the candidates of every pick below. The faint grey line is the <b>price trend</b> — what a given quality typically costs, fitted on <b>every</b> couple shown. <b>Tier bands</b> (off by default) shade the same four usage tiers as on the landscape above.</p>
+      <div id="pareto-blocks" class="pareto-blocks"><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Low</span><span class="pblock-n">53.0 % · 1.0×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">57.2 % · 1.1×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#3F8A78;border-style:dashed"><b>Haiku 4.5</b><span class="pblock-e">solo</span><span class="pblock-n">38.3 % · 1.2×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">High</span><span class="pblock-n">65.3 % · 1.8×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8;border-style:dashed"><b>Opus 5.5</b><span class="pblock-e">Low</span><span class="pblock-n">64.3 % · 2.1×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">71.1 % · 3.4×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A;border-style:dashed"><b>Sonnet 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">69.7 % · 4.1×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">High</span><span class="pblock-n">72.5 % · 4.1×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">74.0 % · 6.5×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Max</span><span class="pblock-n">74.6 % · 18×</span></span></div>
       <details class="fold">
-        <summary>Value index — distance to the price curve</summary>
+        <summary>Value — distance to the price trend</summary>
         <div class="fold-body pad">
-          <p class="sub">We fit a <b>price curve</b> — <b>log₁₀(cost) = g(quality)</b>, what a given quality typically costs across <b>all 45 measured couples</b> — not just the Pareto frontier, but each one weighted by <b>1 − d/d<sub>max</sub></b>, where <b>d</b> is how many decades dearer it is than the cheapest couple reaching at least its quality. A couple <b>on</b> the frontier counts fully, the single worst one not at all, everything in between on a straight line. Fitting all couples flat would let strictly-dominated models steer the curve; fitting the frontier alone would discard the measurements that populate the middle (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.48</span>, drawn faint grey above). Each couple's <b>distance in log-cost</b> to that curve says how much <b>cheaper</b> or <b>dearer</b> it is than the frontier price <b>for its quality</b>. Measuring in cost (not quality) keeps the weighting linear where the curve flattens. That distance becomes the <b>value index</b> by exponentiating it relative to the anchor&nbsp;: <b>100 = Opus&nbsp;5&nbsp;@high</b>, and because it is a ratio rather than a stretched scale, <b>350 reads literally as 3.5× the anchor's value for money</b> and 45 as 0.45×. It is unbounded above — the price of an interpretable multiple. <b>Centres only</b>&nbsp;: the curve and every index use each couple's central value; smearing a point over its interval through these non-linear scales would pull it toward parity, a bias rather than an uncertainty. The curve is <b>monotone by construction</b> — the price of quality cannot fall as quality rises — which also makes it safe to let it <b>extrapolate freely</b> beyond the observed range: it can flatten or steepen, never fold back. Its shape carries a <b>growing curvature</b> term, because cost climbs gently across most of the quality range then steepens sharply near the ceiling — a plain parabola cannot follow that, and an unconstrained one bends back on itself and flips the sign of every index around it. This grading is also what gives the curve its bend&nbsp;: fitted flat over every couple it comes out almost straight, because the dilated axes already linearise most of the cloud&nbsp;; weighted toward the frontier it follows the sharp rise near the quality ceiling, where efficient couples actually sit. Only the <b>Pareto-frontier couples</b> are shown.</p>
+          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality typically costs across <b>all 45 couples</b> shown, not just the frontier: it is the going rate of the models (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.41</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the couples <b>within reach of the frontier</b> are listed.</p>
           <div class="chartbox"><table id="score-tbl">
-            <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>quality</th><th>value index<br><span style="font-weight:400;text-transform:none;letter-spacing:0">anchor = 100</span></th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</td><td class="num">0.20×</td><td class="num">0.97×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 43%, transparent); color:var(--ink)">366</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</td><td class="num">0.13×</td><td class="num">0.85×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 42%, transparent); color:var(--ink)">352</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</td><td class="num">0.39×</td><td class="num">1.03×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 42%, transparent); color:var(--ink)">342</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Low</td><td class="num">0.12×</td><td class="num">0.79×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 41%, transparent); color:var(--ink)">332</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</td><td class="num">0.47×</td><td class="num">1.05×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 41%, transparent); color:var(--ink)">330</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · xHigh</td><td class="num">0.47×</td><td class="num">1.03×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 39%, transparent); color:var(--ink)">297</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</td><td class="num">0.75×</td><td class="num">1.08×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 34%, transparent); color:var(--ink)">241</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Max</td><td class="num">2.10×</td><td class="num">1.09×</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 16%, transparent); color:var(--ink)">92</span></td></tr></tbody>
+            <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>expected score</th><th>vs the trend</th></tr></thead>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</td><td class="num">1.8×</td><td class="num">65.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 47%, transparent); color:var(--ink)">4.3× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</td><td class="num">1.1×</td><td class="num">57.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 45%, transparent); color:var(--ink)">4.0× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</td><td class="num">3.4×</td><td class="num">71.1 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 42%, transparent); color:var(--ink)">3.4× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Low <span class="faint">(within reach)</span></td><td class="num">2.1×</td><td class="num">64.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 41%, transparent); color:var(--ink)">3.3× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Low</td><td class="num">1.0×</td><td class="num">53.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 41%, transparent); color:var(--ink)">3.3× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</td><td class="num">4.1×</td><td class="num">72.5 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 40%, transparent); color:var(--ink)">3.2× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · xHigh <span class="faint">(within reach)</span></td><td class="num">4.1×</td><td class="num">69.7 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 35%, transparent); color:var(--ink)">2.6× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</td><td class="num">6.5×</td><td class="num">74.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 32%, transparent); color:var(--ink)">2.3× cheaper</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#3F8A78"></span>Haiku 4.5 · solo <span class="faint">(within reach)</span></td><td class="num">1.2×</td><td class="num">38.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 17%, transparent); color:var(--ink)">1.1× dearer</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Max</td><td class="num">18×</td><td class="num">74.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 18%, transparent); color:var(--ink)">1.2× dearer</span></td></tr></tbody>
           </table></div>
-          <p class="cap"><b>Green</b> = above 100, cheaper than the frontier price for its quality (better value than the anchor), <b>red</b> = below 100, dearer; intensity = distance to the anchor in decades, capped at one. A couple on the Pareto frontier can still be red&nbsp;: being non-dominated does not mean being good value for what it delivers.</p>
+          <p class="cap"><b>Green</b> = cheaper than the trend for its quality, <b>red</b> = dearer; intensity = distance to the trend in decades, capped at one. A couple on the Pareto frontier can still be red&nbsp;: being non-dominated does not mean being good value for what it delivers.</p>
         </div>
       </details>
     </div>
     <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
-        <p class="sub">Consolidating the frontier into a decision. <b>Four target complexity levels q*</b> are <b>derived from the data</b>, not fixed: they spread evenly across the frontier's own quality span in the <b>dilated metric</b>, so the bottom tier tracks the weakest couple available and the top tier sits <b>exactly on the best one</b> — as models improve, the windows move with them instead of aiming at a level fixed at some past release. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their centres, below the target. Each window is a <b>half bell</b>&nbsp;: below its target a couple is penalised by the Gaussian, at or above it the couple clears the bar and earns a small bonus that saturates fast (at most +20&nbsp;%), so being better never hurts. For each tier we then pick the Pareto-frontier couple maximising that window times its <b>value index</b>, with cost raised to a <b>per-tier exponent γ</b> — <b>1.20 · 1.05 · 0.95 · 0.80</b> from throwaway work up to research-grade. Cost does not weigh the same at every complexity&nbsp;: on grunt work you want the cheapest thing that clears the bar, on a hard task a few extra points of capability are worth paying for. γ&nbsp;&gt;&nbsp;1 punishes cost more than proportionally, γ&nbsp;&lt;&nbsp;1 less. Only the <b>selection</b> is tilted&nbsp;: the index shown on a card stays the neutral γ&nbsp;=&nbsp;1 one, so the four cards remain comparable with each other and with the anchor. Cost enters through the index, i.e. in <b>log-cost</b> like everywhere else in this report&nbsp;: a raw quality ÷ cost ratio would be driven almost entirely by cost, which spans a factor 27 across the cloud against 2 for quality. Sliders below override both. The <b>big figure</b> is the pick's <b>value index</b>, the same one used throughout the report&nbsp;: <b>100 = the anchor</b>, Opus&nbsp;5&nbsp;@high, and the value reads as a multiple of it — 350 means <b>3.5× the anchor's value for money</b>. The anchor is read from <b>every</b> couple, dominated ones included, not just the frontier&nbsp;: a new model can push it <b>off</b> the frontier — Opus&nbsp;5.5, which holds every frontier point but Haiku&nbsp;4.5's, does — but never out of the full set, so the reference survives a release. The <b>crown</b> is chosen on a different criterion, <b>local prominence</b> along the frontier, and shows the same index.</p>
+        <p class="sub">Consolidating the frontier into a decision. <b>Four target qualities</b> are <b>derived from the data</b>, not fixed: they spread evenly between the frontier's weakest and strongest couples, each end drawn 5&nbsp;% of the span inward, so that the bottom tier follows the weakest couple available and the top tier the best — as models improve, the targets move with them. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their targets. For each tier we pick, among the couples within reach of the frontier, the one that maximises <b>window × e<sup>λθ</sup>&nbsp;⁄&nbsp;cost</b>, λ the slope of the price trend. Below its target a couple is penalised by a Gaussian window&nbsp;; at or above it the window is 1, and e<sup>λθ</sup>&nbsp;⁄&nbsp;cost rewards <b>smoothly</b> a couple that brings more quality than the trend charges for its extra cost — no bonus constant to set. Cost counts in <b>ratios</b>, as people perceive prices&nbsp;: twice as dear weighs the same at every price. The <b>big figure</b> is how many times cheaper than the trend the pick is for its quality. The <b>crown</b> is the couple within reach that sits furthest below the trend. Sliders below override the targets and widths.</p>
         <div class="grid" id="tier-cards"><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Q* 0.79 – Grunt work</span></div>
+      <div class="tier-head"><span class="tier-name">Target 54.2 % – Grunt work</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
-          <span class="tier-nums">Cost <b>0.20×</b> · Quality <b>0.97×</b></span>
+          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>65.3 %</b></span>
         </div>
-        <div class="tier-yield">366</div>
+        <div class="tier-yield">4.3×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate.</span>
     </div><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Q* 0.95 – Everyday tasks</span></div>
+      <div class="tier-head"><span class="tier-name">Target 61.1 % – Everyday tasks</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
-          <span class="tier-nums">Cost <b>0.20×</b> · Quality <b>0.97×</b></span>
+          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>65.3 %</b></span>
         </div>
-        <div class="tier-yield">366</div>
+        <div class="tier-yield">4.3×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Q* 1.01 – Advanced reasoning</span></div>
+      <div class="tier-head"><span class="tier-name">Target 67.7 % – Advanced reasoning</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
-          <span class="tier-nums">Cost <b>0.47×</b> · Quality <b>1.05×</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</span>
+          <span class="tier-nums">Cost <b>3.4×</b> · Score <b>71.1 %</b></span>
         </div>
-        <div class="tier-yield">330</div>
+        <div class="tier-yield">3.4×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality.</span>
     </div><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Q* 1.09 – Cutting-Edge thinking</span></div>
+      <div class="tier-head"><span class="tier-name">Target 73.7 % – Cutting-Edge thinking</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</span>
-          <span class="tier-nums">Cost <b>0.75×</b> · Quality <b>1.08×</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
+          <span class="tier-nums">Cost <b>4.1×</b> · Score <b>72.5 %</b></span>
         </div>
-        <div class="tier-yield">241</div>
+        <div class="tier-yield">3.2×<small>cheaper than the trend</small></div>
       </div>
       <span class="ex">Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium.</span>
     </div></div>
         <div id="tier-crown"><div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
-      <div class="crown-model"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</div>
-      <div class="crown-line">Cost <b>0.75×</b> · Quality <b>1.08×</b> · Score <b>241</b></div>
-      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price curve, exponentiated against the anchor&nbsp;: <b>100 = Opus&nbsp;5&nbsp;@high</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
+      <div class="crown-model"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</div>
+      <div class="crown-line">Cost <b>1.8×</b> · Score <b>65.3 %</b> · <b>4.3× cheaper</b> than the trend</div>
+      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>4.3× less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>21.1 points</b> of expected score above what the trend gives for its cost. The trend is fitted on <b>every</b> couple shown, so it is the going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div></div>
         <details class="fold">
-          <summary>Tune the target complexity windows (q*, σ)</summary>
+          <summary>Tune the target windows (target, σ)</summary>
           <div class="fold-body pad"><div id="tier-tuner"></div></div>
         </details>
       </div>
@@ -458,14 +458,14 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Normalized cost matrix — Claude effort levels compared</summary>
       <div class="card pad">
-        <p class="sub">Relative cost per model × effort (baseline Opus&nbsp;5&nbsp;@high&nbsp;=&nbsp;1.00), <b>sorted by decreasing relative quality</b>. Every cell is <b>computed</b> from the measurements by the fusion model described in the method below: a cost ratio on a task of typical size, with its <b>band</b> — the range one new, independent benchmark would report (16–84&nbsp;%). Intensity = cost.</p>
+        <p class="sub">Cost per model × effort as a <b>multiple of the cheapest couple</b>, <b>sorted by decreasing expected score</b>. Every cell is <b>computed</b> from the measurements by the fusion model described in the method below: a cost on a task of typical size, with the couple's own 16–84&nbsp;% interval. Intensity = cost.</p>
         <div class="chartbox">
           <table id="matrix-tbl">
-            <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Rel. quality<br><span style="font-weight:400;text-transform:none;letter-spacing:0">@max</span></th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 15%, transparent)">0.24<small>0.22–0.27</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 20%, transparent)">0.39<small>0.36–0.42</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 22%, transparent)">0.47<small>0.43–0.51</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 27%, transparent)">0.75<small>0.69–0.82</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">2.10<small>1.89–2.33</small></div></td><td class="mdl num">1.09×</td></tr><tr><td class="mdl"><span class="dot" style="background:#7B3FBF"></span>Fable 5.1</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 28%, transparent)">0.80<small>0.73–0.87</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 30%, transparent)">0.96<small>0.89–1.05</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 32%, transparent)">1.15<small>1.06–1.25</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 38%, transparent)">2.03<small>1.87–2.21</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 43%, transparent)">3.09<small>2.82–3.39</small></div></td><td class="mdl num">1.05×</td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 7%, transparent)">0.12<small>0.10–0.13</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 8%, transparent)">0.13<small>0.11–0.15</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 13%, transparent)">0.20<small>0.17–0.23</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 22%, transparent)">0.47<small>0.41–0.53</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">1.58<small>1.36–1.84</small></div></td><td class="mdl num">1.05×</td></tr><tr><td class="mdl"><span class="dot" style="background:#4A5A9C"></span>Opus 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 23%, transparent)">0.52<small>0.47–0.57</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 26%, transparent)">0.67<small>0.62–0.72</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 30%, transparent)">1.00<small>0.93–1.07</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">1.30<small>1.20–1.40</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">1.56<small>1.46–1.67</small></div></td><td class="mdl num">1.02×</td></tr><tr><td class="mdl"><span class="dot" style="background:#7C4A6A"></span>Fable 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 29%, transparent)">0.85<small>0.78–0.92</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 31%, transparent)">1.09<small>1.01–1.18</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">1.24<small>1.14–1.35</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 37%, transparent)">1.82<small>1.68–1.97</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 42%, transparent)">2.75<small>2.53–2.99</small></div></td><td class="mdl num">1.01×</td></tr><tr><td class="mdl"><span class="dot" style="background:#D2912A"></span>Opus 4.8</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 22%, transparent)">0.46<small>0.41–0.50</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">0.58<small>0.53–0.64</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 26%, transparent)">0.65<small>0.60–0.70</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 30%, transparent)">0.98<small>0.90–1.08</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 34%, transparent)">1.42<small>1.30–1.55</small></div></td><td class="mdl num">0.93×</td></tr><tr><td class="mdl"><span class="dot" style="background:#D9694B"></span>Sonnet 5 <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 12%, transparent)">0.19<small>0.17–0.21</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 16%, transparent)">0.27<small>0.25–0.29</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 20%, transparent)">0.37<small>0.34–0.41</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 23%, transparent)">0.53<small>0.49–0.58</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 32%, transparent)">1.12<small>1.03–1.22</small></div></td><td class="mdl num">0.89×</td></tr><tr><td class="mdl"><span class="dot" style="background:#3F8A78"></span>Haiku 4.5</td><td colspan="5"><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 9%, transparent)">0.14<small>merged · 0.12–0.16</small></div></td><td class="mdl num">0.56×</td></tr></tbody>
+            <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Expected score<br><span style="font-weight:400;text-transform:none;letter-spacing:0">top effort</span></th></tr></thead>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 16%, transparent)">2.1<small>1.9–2.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 22%, transparent)">3.4<small>3.1–3.7</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">4.1<small>3.8–4.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 30%, transparent)">6.5<small>6.0–7.1</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 42%, transparent)">18<small>16–20</small></div></td><td class="mdl num">74.6 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#7B3FBF"></span>Fable 5.1</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 31%, transparent)">7.0<small>6.4–7.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.4<small>7.8–9.2</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">10<small>9.3–11</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 42%, transparent)">18<small>16–19</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 47%, transparent)">27<small>25–30</small></div></td><td class="mdl num">71.8 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 7%, transparent)">1.0<small>0.85–1.2</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 8%, transparent)">1.1<small>0.94–1.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 14%, transparent)">1.8<small>1.5–2.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">4.1<small>3.6–4.7</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">14<small>12–16</small></div></td><td class="mdl num">70.5 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#4A5A9C"></span>Opus 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 25%, transparent)">4.5<small>4.1–4.9</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 28%, transparent)">5.8<small>5.4–6.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.7<small>8.1–9.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 36%, transparent)">11<small>11–12</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">14<small>13–15</small></div></td><td class="mdl num">69.9 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#7C4A6A"></span>Fable 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 31%, transparent)">7.4<small>6.8–8.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 34%, transparent)">9.5<small>8.8–10</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 36%, transparent)">11<small>10.0–12</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 40%, transparent)">16<small>15–17</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 46%, transparent)">24<small>22–26</small></div></td><td class="mdl num">69.0 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#D2912A"></span>Opus 4.8</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">4.0<small>3.6–4.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 27%, transparent)">5.1<small>4.6–5.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 28%, transparent)">5.6<small>5.2–6.1</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.6<small>7.8–9.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 38%, transparent)">12<small>11–14</small></div></td><td class="mdl num">63.3 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#D9694B"></span>Sonnet 5 <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 13%, transparent)">1.7<small>1.5–1.9</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 17%, transparent)">2.4<small>2.2–2.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 21%, transparent)">3.3<small>3.0–3.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 26%, transparent)">4.6<small>4.2–5.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">9.8<small>9.0–11</small></div></td><td class="mdl num">60.2 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#3F8A78"></span>Haiku 4.5</td><td colspan="5"><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 9%, transparent)">1.2<small>merged · 1.1–1.4</small></div></td><td class="mdl num">38.3 %</td></tr></tbody>
           </table>
         </div>
-        <p class="cap">"Rel. quality&nbsp;@max" = <b>relative quality at top effort</b> (Opus&nbsp;5&nbsp;@high&nbsp;= 1.0), from the same fit as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed, or measured by a single publisher (a couple is shown only once two publishers measured it).</p>
+        <p class="cap">"Expected score&nbsp;· top effort" = the score the model at its top effort is expected to reach on the benchmark panel, from the same fit as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed, or measured by a single publisher (a couple is shown only once two publishers measured it).</p>
       </div>
     </details>
     <details class="fold">
@@ -510,15 +510,15 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <li><b>One model for all groups.</b> Every group gets its own offset, gain and noise, so the unit and zero of a metric never matter. A couple's latent value is shared by all groups; on top of it, a publisher's systematic effect on a couple and on a model (shared by the model's effort levels) and a couple's deviation on a task type are estimated, so a publisher with many benchmarks, or a couple tested mostly on one kind of task, cannot tilt the result. Robust (Student-t) noise whose tails are estimated; early-access runs are down-weighted by an estimated factor. <b>No couple serves as a reference in the fit</b>: the latent values sum to zero. Fitted in <a href="https://mc-stan.org">Stan</a>, published only if the standard convergence checks pass.</li>
           <li><b>Weights follow from the data.</b> A group of k couples informs the spacing of couples in proportion to its discrimination² × (k − 2); a saturated or noisy benchmark weighs little; a publisher's weight saturates at its own systematic effect. No weight is set per source.</li>
           <li><b>Nothing counts twice.</b> One execution printed twice — a system card reprinting an earlier card's series, the same run drawn on two charts, one run scored with two metrics — is detected and counted once: its score and its cost must both agree, within their reading precisions and a rounding made the wrong way. An index is left out for a couple whose index components are already in the data.</li>
-          <li><b>Relative values and intervals.</b> Quality = a couple's expected score averaged over the benchmark panel, divided by Opus&nbsp;5&nbsp;@high's; cost = its cost on a task of typical size, divided by Opus&nbsp;5&nbsp;@high's. The reference couple is a display choice: changing it divides every value by a constant. Each couple carries its own 16–84&nbsp;% interval, so two couples compare through their two intervals, whatever the reference. A couple measured by a single publisher is not shown.</li>
-          <li><b>From the grids to the picks.</b> The Pareto frontier keeps the couples nothing beats on both cost and quality. A monotone price curve — what a given quality typically costs, fitted on every couple with weight 1 − d/d<sub>max</sub> by distance d to the frontier — gives each couple a value index, 100&nbsp;= Opus&nbsp;5&nbsp;@high. The four tiers spread their target qualities evenly across the frontier, score frontier couples with a half-bell window around each target times the value index (cost weighted more on routine work, less on research-grade work), and the crown goes to the couple that stands out most from its frontier neighbours.</li>
+          <li><b>Values and intervals.</b> Quality = a couple's latent quality θ, shown as the score it predicts averaged over the benchmark panel; cost = its cost on a task of typical size, shown as a multiple of the cheapest couple. <b>No couple serves as a reference</b>, in the fit or on the page. Each couple carries its own 16–84&nbsp;% interval, so two couples compare through their two intervals. A couple measured by a single publisher is not shown.</li>
+          <li><b>From the fit to the picks.</b> Every decision is taken on the latent scale (log cost, θ). The Pareto frontier keeps the couples nothing beats on both axes; a couple beaten with less than 84&nbsp;% probability stays within reach, and a candidate. A price trend — what a given quality typically costs, fitted on every couple — says how many times cheaper or dearer each couple is than the going rate. The four tiers spread their targets across the frontier and pick, around each target, the couple that brings the most quality for its cost against the trend; the crown goes to the couple furthest below the trend.</li>
         </ol>
         <h3 class="blocktitle" style="margin-top:1.3em">Key values</h3>
         <ul class="steps">
           <li><b>Set by hand, never tuned to the data:</b> weakly informative priors (half-Student-t(3,&nbsp;0,&nbsp;2.5) on every spread, Gamma(2,&nbsp;0.1) on the noise tails); a logit kept half a step inside 0 and 100&nbsp;%; a printed value's precision at its rounding (last digit&nbsp;/&nbsp;√12); an effect seen in a single measurement left out; a couple shown only when two publishers measured it; a reprint recognised by values that agree within their precisions, on two values at least and on all they share but one.</li>
-          <li><b>Uncertainty.</b> Every interval is 16–84&nbsp;% (one standard deviation): the couple's own uncertainty, whatever the reference.</li>
-          <li><b>Published only when the fit is sound:</b> R̂&nbsp;≤&nbsp;1.01 and at least 400 effective draws on every parameter, no divergent transition. The Monte Carlo error of each value is checked against its last displayed digit; in this fit every figure is stable to that digit but one, the cost of Fable&nbsp;5.1 at max, which could move by one unit (3.09&nbsp;±&nbsp;0.006).</li>
-          <li><b>Display choices:</b> the quality axis is dilated near parity; the price curve, the value index and the four tiers use constants listed with their reasons in <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis/blob/main/docs/DISPLAY-METHODOLOGY.md">DISPLAY-METHODOLOGY.md</a>.</li>
+          <li><b>Uncertainty.</b> Every interval is 16–84&nbsp;% (one standard deviation): the couple's own uncertainty.</li>
+          <li><b>Published only when the fit is sound:</b> R̂&nbsp;≤&nbsp;1.01 and at least 400 effective draws on every parameter, no divergent transition. The Monte Carlo error of each value is checked against its last displayed digit; in this fit every figure is stable to that digit.</li>
+          <li><b>Display choices:</b> the quality axis is compressed below the weakest tier target; the frontier, the price trend and the four tiers use constants listed with their reasons in <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis/blob/main/docs/DISPLAY-METHODOLOGY.md">DISPLAY-METHODOLOGY.md</a>.</li>
         </ul>
         <h3 class="blocktitle" style="margin-top:1.3em">Techniques and software</h3>
         <ul class="steps">
@@ -543,7 +543,6 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 
 <script>
 const MODELS = {"fable-5.1":{"label":"Fable 5.1","c":"--fable51"},"fable-5":{"label":"Fable 5","c":"--fable5"},"opus-5.5":{"label":"Opus 5.5","c":"--opus55"},"opus-5":{"label":"Opus 5","c":"--opus5"},"opus-4.8":{"label":"Opus 4.8","c":"--opus48"},"sonnet-5.5":{"label":"Sonnet 5.5","c":"--sonnet55"},"sonnet-5":{"label":"Sonnet 5","c":"--sonnet5","tag":true},"opus-4.7":{"label":"Opus 4.7","c":"--opus47"},"sonnet-4.6":{"label":"Sonnet 4.6","c":"--sonnet46"},"haiku-4.5":{"label":"Haiku 4.5","c":"--haiku45"}};   // data/catalog/models.json: label, colour variable, task-size flag, in legend order
-const ANCHOR={"m": "opus-5", "e": "high", "label": "Opus 5 @high"};      // the couple pinned to 1.0 (and to 100 on the value index)
 const LEGACY=["opus-4.7","sonnet-4.6"];                         // older models: hidden unless the reader turns them on
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
@@ -552,19 +551,63 @@ const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.se
 const logTicks=(vmin,vmax)=>{const o=[];for(let e=Math.floor(Math.log10(vmin));Math.pow(10,e)<=vmax*1.0001;e++)for(let b=1;b<=9;b++){const v=b*Math.pow(10,e);if(v>=vmin*0.999&&v<=vmax*1.001)o.push(v);}return o;};
 const tickLbl=v=>{const m=Math.round(v/Math.pow(10,Math.floor(Math.log10(v)+1e-9)));return m===1||m===2||m===5;};
 const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag,step=(n<1.5?1:n<3?2:n<7?5:10)*mag,o=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)o.push(Math.round(t*1e4)/1e4);return o;};
-// Solve a small n×n linear system by Gaussian elimination (n ≤ 3) — used for the price-envelope fit.
-// Returns null on a singular system so the caller can fall back to a lower-order fit.
-function solveN(A,b){ const n=b.length, M=A.map((r,i)=>[...r,b[i]]);
-  for(let c=0;c<n;c++){ let piv=c; for(let r=c+1;r<n;r++) if(Math.abs(M[r][c])>Math.abs(M[piv][c])) piv=r; [M[c],M[piv]]=[M[piv],M[c]];
-    if(Math.abs(M[c][c])<1e-12) return null;
-    for(let r=0;r<n;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<=n;k++) M[r][k]-=f*M[c][k]; } }
-  return M.map((r,i)=>r[n]/M[i][i]); }
+// Normal CDF (Abramowitz & Stegun 7.1.26, error below 1.5e-7): the probability that one couple beats another.
+const Phi=z=>{ const x=Math.abs(z)/Math.SQRT2, k=1/(1+0.3275911*x),
+  e=1-((((1.061405429*k-1.453152027)*k+1.421413741)*k-0.284496736)*k+0.254829592)*k*Math.exp(-x*x); return z>=0?(1+e)/2:(1-e)/2; };
 
-// COST & QUALITY grids: relative [centre, lo, hi] per (model, effort), ANCHOR = 1.0, from the latent-quality model
-// (model/lqm.py): centre = posterior median; lo–hi = the couple's own 16–84 % interval (quasi-standard error), so that any
-// two couples compare through their two intervals — the anchor is a divisor and shares nothing with the others.
-const COSTGRID={"fable-5.1":{"low":[0.8,0.733,0.872],"medium":[0.964,0.886,1.05],"high":[1.154,1.063,1.252],"xhigh":[2.032,1.87,2.208],"max":[3.091,2.818,3.39]},"fable-5":{"low":[0.847,0.779,0.921],"medium":[1.089,1.009,1.175],"high":[1.24,1.142,1.347],"xhigh":[1.816,1.678,1.966],"max":[2.747,2.526,2.988]},"opus-5.5":{"low":[0.243,0.218,0.272],"medium":[0.389,0.356,0.425],"high":[0.471,0.433,0.512],"xhigh":[0.751,0.687,0.819],"max":[2.099,1.891,2.33]},"opus-5":{"low":[0.517,0.473,0.566],"medium":[0.667,0.619,0.72],"high":[1.0,0.93,1.075],"xhigh":[1.297,1.204,1.399],"max":[1.558,1.455,1.67]},"opus-4.8":{"low":[0.455,0.415,0.498],"medium":[0.583,0.532,0.639],"high":[0.647,0.596,0.702],"xhigh":[0.981,0.895,1.076],"max":[1.422,1.304,1.551]},"opus-4.7":{"low":[0.472,0.422,0.529],"medium":[0.631,0.569,0.7],"high":[0.821,0.739,0.913],"xhigh":[1.075,0.962,1.201],"max":[1.416,1.304,1.538]},"sonnet-5.5":{"low":[0.115,0.098,0.134],"medium":[0.126,0.108,0.148],"high":[0.201,0.175,0.231],"xhigh":[0.468,0.413,0.531],"max":[1.579,1.357,1.837]},"sonnet-5":{"low":[0.19,0.169,0.213],"medium":[0.269,0.247,0.294],"high":[0.373,0.344,0.405],"xhigh":[0.529,0.486,0.576],"max":[1.123,1.03,1.224]},"sonnet-4.6":{"low":[0.355,0.31,0.406],"medium":[0.562,0.505,0.626],"high":[0.762,0.688,0.845],"max":[0.793,0.71,0.885]},"haiku-4.5":{"solo":[0.141,0.121,0.164]}};
-const QUALGRID={"fable-5.1":{"low":[0.957,0.949,0.966],"medium":[0.995,0.988,1.003],"high":[1.012,1.005,1.018],"xhigh":[1.039,1.031,1.046],"max":[1.053,1.048,1.058]},"fable-5":{"low":[0.884,0.874,0.895],"medium":[0.946,0.937,0.954],"high":[0.973,0.965,0.98],"xhigh":[0.993,0.985,1.001],"max":[1.006,1.001,1.012]},"opus-5.5":{"low":[0.926,0.913,0.938],"medium":[1.029,1.021,1.037],"high":[1.051,1.043,1.059],"xhigh":[1.076,1.069,1.083],"max":[1.087,1.081,1.092]},"opus-5":{"low":[0.92,0.911,0.928],"medium":[0.975,0.968,0.982],"high":[1.0,0.994,1.006],"xhigh":[1.015,1.01,1.021],"max":[1.024,1.02,1.028]},"opus-4.8":{"low":[0.79,0.779,0.8],"medium":[0.85,0.84,0.859],"high":[0.875,0.866,0.883],"xhigh":[0.912,0.904,0.921],"max":[0.926,0.919,0.933]},"opus-4.7":{"low":[0.701,0.684,0.718],"medium":[0.744,0.728,0.76],"high":[0.812,0.8,0.825],"xhigh":[0.839,0.825,0.853],"max":[0.854,0.844,0.865]},"sonnet-5.5":{"low":[0.791,0.771,0.811],"medium":[0.851,0.832,0.87],"high":[0.967,0.951,0.983],"xhigh":[1.035,1.021,1.05],"max":[1.051,1.04,1.063]},"sonnet-5":{"low":[0.68,0.667,0.692],"medium":[0.762,0.752,0.772],"high":[0.832,0.823,0.84],"xhigh":[0.863,0.854,0.872],"max":[0.891,0.884,0.899]},"sonnet-4.6":{"low":[0.625,0.603,0.648],"medium":[0.707,0.689,0.726],"high":[0.767,0.75,0.785],"max":[0.76,0.745,0.775]},"haiku-4.5":{"solo":[0.563,0.537,0.591]}};   // {model:{effort:[centre, lo, hi]}}
+// The fitted values, reference-free (model/fit-cache.json through site/grids.py), published couples only:
+//   COSTGRID {model:{effort:[ln cost, quasi-standard error]}}: cost on a task of typical size;
+//   QUALGRID {model:{effort:[θ, quasi-standard error]}}: θ the latent quality, on the model's logit scale.
+// The quasi-standard error is the half-width of the couple's own 16–84 % interval: two couples compare through their two
+// intervals. No couple is a reference: the page counts cost from the cheapest couple shown and reads θ as an expected
+// panel score (PANEL). Every decision (frontier, trend, tiers, crown) is taken on ln cost and θ.
+const COSTGRID={"fable-5.1":{"low":[0.138,0.0872],"medium":[0.3251,0.0845],"high":[0.5011,0.0819],"xhigh":[1.0671,0.0833],"max":[1.4919,0.0945]},"fable-5":{"low":[0.1898,0.0825],"medium":[0.4423,0.0743],"high":[0.5731,0.0806],"xhigh":[0.955,0.079],"max":[1.37,0.0838]},"opus-5.5":{"low":[-1.0586,0.1099],"medium":[-0.5892,0.0885],"high":[-0.3962,0.0869],"xhigh":[0.0678,0.0899],"max":[1.1,0.1058]},"opus-5":{"low":[-0.3006,0.0891],"medium":[-0.0463,0.0773],"high":[0.3594,0.0741],"xhigh":[0.6196,0.076],"max":[0.8025,0.0697]},"opus-4.8":{"low":[-0.4336,0.0905],"medium":[-0.1843,0.093],"high":[-0.0795,0.0818],"xhigh":[0.338,0.0936],"max":[0.7087,0.0867]},"opus-4.7":{"low":[-0.3917,0.112],"medium":[-0.0998,0.1032],"high":[0.1614,0.1078],"xhigh":[0.4325,0.1144],"max":[0.7062,0.0828]},"sonnet-5.5":{"low":[-1.8088,0.1583],"medium":[-1.7113,0.1572],"high":[-1.2466,0.1418],"xhigh":[-0.3988,0.127],"max":[0.8157,0.1509]},"sonnet-5":{"low":[-1.3009,0.1129],"medium":[-0.9517,0.0864],"high":[-0.628,0.0809],"xhigh":[-0.2791,0.0838],"max":[0.4736,0.0867]},"sonnet-4.6":{"low":[-0.6756,0.1332],"medium":[-0.2152,0.1061],"high":[0.0866,0.1059],"max":[0.1289,0.1112]},"haiku-4.5":{"solo":[-1.6034,0.151]}};
+const QUALGRID={"fable-5.1":{"low":[2.686,0.7105],"medium":[4.3041,0.6714],"high":[4.9344,0.6258],"xhigh":[6.159,0.7596],"max":[7.1944,0.7129]},"fable-5":{"low":[-0.2577,0.7145],"medium":[2.2367,0.6174],"high":[3.4556,0.5899],"xhigh":[4.3214,0.652],"max":[5.1874,0.6779]},"opus-5.5":{"low":[2.0211,0.9051],"medium":[6.6362,0.8005],"high":[7.6763,0.8722],"xhigh":[8.8393,0.8864],"max":[9.3392,0.8977]},"opus-5":{"low":[1.3966,0.6765],"medium":[3.6329,0.65],"high":[4.4095,0.5041],"xhigh":[5.3049,0.5608],"max":[5.7897,0.5302]},"opus-4.8":{"low":[-4.4064,0.7497],"medium":[-1.8086,0.6469],"high":[-0.7731,0.5769],"xhigh":[0.7394,0.6103],"max":[1.3503,0.6438]},"opus-4.7":{"low":[-8.0839,1.0853],"medium":[-6.1558,1.0002],"high":[-3.2581,0.8145],"xhigh":[-1.8471,0.8538],"max":[-1.1819,0.7689]},"sonnet-5.5":{"low":[-5.0924,1.4457],"medium":[-2.4372,1.3711],"high":[2.6949,1.3729],"xhigh":[5.6864,1.3574],"max":[6.256,1.5089]},"sonnet-5":{"low":[-9.7684,1.0555],"medium":[-6.1384,0.8299],"high":[-3.0793,0.6876],"xhigh":[-1.7581,0.6842],"max":[-0.6065,0.7265]},"sonnet-4.6":{"low":[-12.8188,1.6189],"medium":[-9.2711,1.2728],"high":[-6.6073,1.1556],"max":[-6.9744,1.0767]},"haiku-4.5":{"solo":[-15.4017,2.0788]}};
+// PANEL = [[θ, expected score]]: the expected score, averaged over the benchmark panel, of a couple of latent quality θ
+// (posterior median, no couple-specific effect). It only LABELS θ; read linearly in logit between its nodes.
+const PANEL=[[-31.4373,0.24555],[-30.0723,0.25388],[-28.7073,0.2627],[-27.3423,0.27204],[-25.9773,0.282],[-24.6123,0.29254],[-23.2473,0.30377],[-21.8823,0.31567],[-20.5173,0.32833],[-19.1523,0.34178],[-17.7873,0.35604],[-16.4223,0.37115],[-15.0572,0.38715],[-13.6922,0.40403],[-12.3272,0.42191],[-10.9622,0.44073],[-9.5972,0.46052],[-8.2322,0.48113],[-6.8672,0.50222],[-5.5022,0.52359],[-4.1372,0.54522],[-2.7722,0.56702],[-1.4072,0.58895],[-0.0422,0.61081],[1.3228,0.63231],[2.6878,0.65328],[4.0528,0.67369],[5.4178,0.6935],[6.7829,0.71258],[8.1479,0.73076],[9.5129,0.74784],[10.8779,0.76379],[12.2429,0.77858],[13.6079,0.7923],[14.9729,0.805],[16.3379,0.81674],[17.7029,0.82759],[19.0679,0.83763],[20.4329,0.84691],[21.7979,0.85546],[23.1629,0.86339]];
+const lgt=s=>Math.log(s/(1-s)), expit=x=>1/(1+Math.exp(-x));
+function score(t){ let i=1; while(i<PANEL.length-1&&PANEL[i][0]<t) i++;
+  const [t0,s0]=PANEL[i-1], [t1,s1]=PANEL[i]; return expit(lgt(s0)+(lgt(s1)-lgt(s0))*(t-t0)/(t1-t0)); }
+function scoreInv(s){ let lo=PANEL[0][0]-100, hi=PANEL[PANEL.length-1][0]+100;   // the score rises with θ
+  for(let k=0;k<60;k++){ const m=(lo+hi)/2; if(score(m)<s) lo=m; else hi=m; } return (lo+hi)/2; }
+const pct=s=>(100*s).toFixed(1)+" %";
+const fmtX=v=>(v<10?v.toFixed(1):v.toFixed(0))+"×";
+// Every shown couple: x = ln cost, t = θ (hx, ht their quasi-standard errors); c = cost as a multiple of the cheapest
+// couple shown, [clo, chi] its interval; [tlo, thi] the interval of θ; s = the expected panel score of θ.
+function couples(){ const rows=[];
+  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
+    for(const e in cg){ const q=qg[e]; if(q) rows.push({m,e,x:cg[e][0],hx:cg[e][1],t:q[0],ht:q[1]}); } }
+  const x0=Math.min(...rows.map(p=>p.x));
+  rows.forEach(p=>{ p.c=Math.exp(p.x-x0); p.clo=p.c*Math.exp(-p.hx); p.chi=p.c*Math.exp(p.hx); p.tlo=p.t-p.ht; p.thi=p.t+p.ht; p.s=score(p.t); });
+  return rows; }
+// PARETO FRONTIER. By centres, a couple is dominated when another costs no more and scores no less (strictly better on
+// one). With the intervals, a couple is WITHIN REACH of the frontier unless another couple beats it on both axes with
+// probability REACH or more: P(θ higher) × P(cost lower), each a normal law on the difference of the two centres with
+// the two quasi-standard errors (the two axes are fitted separately). REACH = 0.84, the level of the intervals shown
+// everywhere: a couple beaten by a hair stays a candidate. The frontier by centres is always within reach.
+const REACH=0.84;
+function frontier(rows){ const E=1e-9, dom=(o,p)=>o.x<=p.x+E&&o.t>=p.t-E&&(o.x<p.x-E||o.t>p.t+E);
+  const pDom=(o,p)=>Phi((o.t-p.t)/Math.hypot(o.ht,p.ht))*Phi((p.x-o.x)/Math.hypot(o.hx,p.hx));
+  rows.forEach(p=>{ p.front=!rows.some(o=>dom(o,p)); p.reach=!rows.some(o=>o!==p&&pDom(o,p)>=REACH); });
+  return {front:rows.filter(p=>p.front).sort((a,b)=>a.x-b.x), reach:rows.filter(p=>p.reach).sort((a,b)=>a.x-b.x)}; }
+// PRICE TREND: what a given quality typically costs, fitted on EVERY shown couple (the trend of the models, not the
+// frontier): ln cost = a + λ·θ, least squares weighted by each couple's uncertainty across the line, 1/(hx² + λ²·ht²)
+// (both axes are uncertain: effective variance), iterated to its fixed point. λ is the market's price of quality: one
+// more unit of θ costs e^λ times more. Kept ≥ 0: quality never gets cheaper as it rises.
+function fitTrend(rows){ let a=0, l=0;
+  for(let it=0; it<100; it++){ let S=0,St=0,Sx=0,Stt=0,Stx=0;
+    rows.forEach(p=>{ const w=1/(p.hx*p.hx+l*l*p.ht*p.ht); S+=w; St+=w*p.t; Sx+=w*p.x; Stt+=w*p.t*p.t; Stx+=w*p.t*p.x; });
+    const l2=Math.max(0,(S*Stx-St*Sx)/(S*Stt-St*St)); a=(Sx-l2*St)/S; const done=Math.abs(l2-l)<1e-12; l=l2; if(done) break; }
+  const w=rows.map(p=>1/(p.hx*p.hx+l*l*p.ht*p.ht)), sw=w.reduce((u,v)=>u+v,0), xm=rows.reduce((u,p,i)=>u+w[i]*p.x,0)/sw;
+  const R2=1-rows.reduce((u,p,i)=>u+w[i]*(p.x-a-l*p.t)**2,0)/rows.reduce((u,p,i)=>u+w[i]*(p.x-xm)**2,0);
+  return {a,l,R2,at:t=>a+l*t}; }
+// VALUE: how much cheaper a couple is than the trend charges for its quality, r = trend(θ) − ln cost, shown as e^r
+// times cheaper (or e^−r times dearer). The same gap read on the quality axis is r/λ: the couple's θ above what the
+// trend gives for its cost, shown in points of expected score.
+const valueOf=(tr,p)=>tr.at(p.t)-p.x;
+const vWord=r=>`${fmtX(Math.exp(Math.abs(r)))} ${r>=0?"cheaper":"dearer"}`;
+const qGain=(tr,p)=>tr.l>0?100*(p.s-score(p.t-valueOf(tr,p)/tr.l)):0;   // points of expected score above the trend
 
 // Older-model toggle: the grids keep a full copy; hiding a model removes it from every view and every fit
 // (frontier, price curve, tiers, matrix), exactly as if it had not been measured.
@@ -597,15 +640,18 @@ function toggleLegacy(){ const fid=document.activeElement?.id; showLegacy=!showL
 applyLegacy();
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
-// Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
-const SQ=0.045, symT=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), symTinv=u=>1+Math.sign(u)*SQ*(Math.exp(Math.abs(u))-1);
-// Zoom/pan work in the axes' SCREEN-LINEAR coordinates: X is linear in log10(cost), Y in symT(quality).
-// A chart's "view" = [xlo,xhi (log-cost), tLo,tHi (symT-quality)]. Default = data bounds; a stored s.__view overrides it,
+// Quality axis: θ itself (the scale every decision uses), labelled in expected panel score. Below the weakest tier target
+// (couples short of today's level) θ is compressed LOW_SQUEEZE times, so older and weaker models sit together at the
+// bottom instead of stretching the axis; above it the scale is left as it is.
+const LOW_SQUEEZE=3;
+const yOf=t=>{ const t0=TIERQ.lo; return t>=t0?t:t0+(t-t0)/LOW_SQUEEZE; };
+// Zoom/pan work in the axes' SCREEN-LINEAR coordinates: X is linear in log10(cost), Y in yOf(θ).
+// A chart's "view" = [xlo,xhi (log-cost), ylo,yhi (yOf θ)]. Default = data bounds; a stored s.__view overrides it,
 // so zoom re-renders the chart (ticks + labels recompute at fixed size) instead of scaling the whole SVG.
-const defView=(xmn,xmx,ymn,ymx)=>[Math.log10(xmn)-0.06,Math.log10(xmx)+0.06,symT(ymn)-0.12,symT(ymx)+0.12];
+const defView=(xmn,xmx,tmn,tmx)=>{ const a=yOf(tmn), b=yOf(tmx), p=0.03*(b-a); return [Math.log10(xmn)-0.06,Math.log10(xmx)+0.06,a-p,b+p]; };
 const viewAxes=(v,mL,iw,mT,ih,yp)=>({
   X:val=>mL+(Math.log10(val)-v[0])/(v[1]-v[0])*iw,
-  Y:val=>mT+yp+(1-(symT(val)-v[2])/(v[3]-v[2]))*(ih-2*yp) });
+  Y:t=>mT+yp+(1-(yOf(t)-v[2])/(v[3]-v[2]))*(ih-2*yp) });
 // Two-line axis title: big main label + small precision on the next line (a second tspan; under rotation it sits
 // alongside, toward the plot). rot = optional transform string.
 function axisTitle(s,x,y,main,sub,rot){
@@ -614,18 +660,22 @@ function axisTitle(s,x,y,main,sub,rot){
   const b=el("tspan",{x,dy:15,"font-size":10.5,fill:cvar('--faint'),"font-weight":400}); b.textContent=sub; t.appendChild(b);
   s.appendChild(t);
 }
-// Quality gridlines at round quality values (non-uniform spacing under symlog); the 1.0 anchor is dashed.
-function qGrid(s,Y,mL,iw,mT,ih){ [0.4,0.5,0.6,0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
-  s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?MODELS[ANCHOR.m].c:'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
-  const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2);s.appendChild(t); }); }
+// Quality gridlines at round expected scores: every 5 points, or 10 when they fall too close.
+function qGrid(s,Y,mL,iw,mT,ih){
+  const at=st=>{ const o=[]; for(let k=1;k*st<0.9999;k++){ const v=Math.round(k*st*1000)/1000, y=Y(scoreInv(v)); if(y>=mT-0.5&&y<=mT+ih+0.5) o.push([v,y]); } return o; };
+  let st=0.05, g=at(st); const gaps=g.slice(1).map((u,i)=>Math.abs(u[1]-g[i][1])).sort((a,b)=>a-b), med=gaps.length?gaps[gaps.length>>1]:99;
+  if(med<16){ st=0.10; g=at(st); }
+  let last=-1e9; g=g.filter(([v,y])=>Math.abs(y-last)>=16?(last=y,true):false);   // the compressed low end: skip lines closer than 16 px
+  g.forEach(([v,y])=>{ s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
+    const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"}); t.textContent=Math.round(100*v)+"%"; s.appendChild(t); }); }
 // Asymmetric interval ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the point, clipped
 // to the plot, faint by default. Returns the array used by hoverTip() to reveal them.
 function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("clipPath",{id:cid});
   cp.appendChild(el("rect",{x:mL,y:mT,width:iw,height:ih})); defs.appendChild(cp); s.appendChild(defs);
   const gEll=el("g",{"clip-path":`url(#${cid})`}); s.appendChild(gEll); const ells=[], byM={};
   pts.forEach(p=>(byM[p.m]=byM[p.m]||[]).push(p));
-  for(const m in byM){ const col=cvar(MODELS[m].c); byM[m].forEach(p=>{ if(p.clo==null) return; const cx=X(p.c), cy=Y(p.q),
-      rxR=Math.max(X(p.chi)-cx,0.6), rxL=Math.max(cx-X(p.clo),0.6), ryU=Math.max(cy-Y(p.qhi),0.6), ryD=Math.max(Y(p.qlo)-cy,0.6);
+  for(const m in byM){ const col=cvar(MODELS[m].c); byM[m].forEach(p=>{ if(p.clo==null) return; const cx=X(p.c), cy=Y(p.t),
+      rxR=Math.max(X(p.chi)-cx,0.6), rxL=Math.max(cx-X(p.clo),0.6), ryU=Math.max(cy-Y(p.thi),0.6), ryD=Math.max(Y(p.tlo)-cy,0.6);
     const d=`M ${cx} ${cy-ryU} A ${rxR} ${ryU} 0 0 1 ${cx+rxR} ${cy} A ${rxR} ${ryD} 0 0 1 ${cx} ${cy+ryD} A ${rxL} ${ryD} 0 0 1 ${cx-rxL} ${cy} A ${rxL} ${ryU} 0 0 1 ${cx} ${cy-ryU} Z`;
     const elp=el("path",{d,fill:col,"fill-opacity":0.4,stroke:col,"stroke-opacity":0.85,"stroke-width":1,opacity:0.15});
     gEll.appendChild(elp); ells.push({el:elp,cx,cy,rxR,rxL,ryU,ryD}); }); }
@@ -637,9 +687,9 @@ function hoverTip(s,ells,pts,X,Y,mL,iw){ const DEF=0.15,HOV=0.78;
   const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU; o.el.setAttribute("opacity",((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
-    let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });
-    if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+52),mL+iw-52)); ttxt.setAttribute("y",Y(best.q)-11);
-      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — ${best.c}× · ${best.q}×`;
+    let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.t))**2; if(d2<bd){bd=d2;best=p;} });
+    if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+52),mL+iw-52)); ttxt.setAttribute("y",Y(best.t)-11);
+      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
       const bb=ttxt.getBBox(); trect.setAttribute("x",bb.x-4); trect.setAttribute("y",bb.y-2); trect.setAttribute("width",bb.width+8); trect.setAttribute("height",bb.height+4); tip.setAttribute("opacity",1); }
     else tip.setAttribute("opacity",0); };
   s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); }; }
@@ -670,90 +720,14 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
       s.appendChild(el("line",{x1:L.ax,y1:L.ay,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.lead,"stroke-width":L.mdl?0.9:0.7,"stroke-opacity":0.4})); }
     const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":L.fs,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); }); }
 
-// Price envelope: every couple contributes its centre (posterior median), weighted by its distance to the frontier.
-// Intervals do not enter: smearing a point over its interval through the non-linear T and g shifts it toward parity,
-// which is a bias, not an uncertainty.  Fit: log10(cost) = g(T(quality)).
-//
-// SHAPE: log10(cost) = a + b·u + c·(e^{k·u} − 1)/k, with u = T(q) − T(min) and b, c ≥ 0. Then g'(u) = b + c·e^{k·u}
-// ≥ 0 for EVERY u, positive or negative — monotone by construction, everywhere, extrapolation included. The price of
-// quality cannot fall as quality rises; a decreasing stretch is a fitting artefact, not a shape, and since every value
-// index is a distance to this curve the artefact would propagate to all of them.
-// Fitted on ALL measured couples, not only the Pareto frontier. The frontier is by definition the CHEAPEST couple at
-// each quality: a regression through it is neither the frontier itself nor a market rate, and with one model
-// dominating a long stretch it collapses to 7 points, 5 of them a single effort ladder, with 64% of the quality axis
-// empty. The dominated couples are real measurements of what that quality costs — they are what populates the gap.
-// So the curve reads as "what a given quality typically costs", and a couple's distance to it as how far it beats or
-// trails the going rate.
-// The exponential term matters because the cloud is not parabolic: cost climbs gently across most of the quality
-// range then steepens sharply near the ceiling — curvature that GROWS. k is profiled over a small grid by weighted
-// SSE; as k → 0 the basis degenerates to a plain quadratic, so this is a strict generalisation.
-// INFLUENCE GRADED BY DISTANCE TO THE PARETO FRONTIER. Fitting every couple equally lets strictly-dominated models —
-// worse on both axes than something else — pull the curve; fitting the frontier alone throws away the measurements
-// that populate the middle. So each couple's weight is graded by how far it sits from the frontier, measured the same
-// way everything else in this report is, in log-cost:
-//     d = log10(cost) − log10(cheapest couple offering AT LEAST this quality)
-// d is exactly 0 on the frontier (the couple qualifies against itself), needs no interpolation, and grows with how
-// much you overpay for what you get. Weight = 1 − d/dmax: an efficient couple counts fully, the single worst one not
-// at all, everything in between on a straight line. dmax comes from the data, so the grading rescales by itself.
-function paretoWeights(pts){
-  const d=pts.map(p=>{ let best=Infinity;
-    pts.forEach(o=>{ if(o.q>=p.q-1e-9 && o.c<best) best=o.c; });
-    return Math.log10(p.c)-Math.log10(best); });
-  const dmax=Math.max(...d)||1;
-  return d.map(v=>1-v/dmax); }
-function fitPriceEnvelope(pts){
-  const PW=paretoWeights(pts), samp=[];
-  pts.forEach((p,i)=>{ const Tq=symT(p.q), lc=Math.log10(p.c), w=PW[i];
-    if(w<=0) return;                                                   // the single worst couple carries no influence
-    samp.push([Tq,lc,w]); });
-  const T0=Math.min(...samp.map(s=>s[0])), L=Math.max(...samp.map(s=>s[0]))-T0;
-  const fitK=k=>{
-    const M=[[0,0,0],[0,0,0],[0,0,0]], V=[0,0,0];                    // weighted normal equations on {1, u, (e^{ku}−1)/k}
-    samp.forEach(([Tq,lc,w])=>{ const u=Tq-T0, B=[1,u,(Math.exp(k*u)-1)/k];
-      for(let i=0;i<3;i++){ V[i]+=w*B[i]*lc; for(let j=0;j<3;j++) M[i][j]+=w*B[i]*B[j]; } });
-    const sse=co=>{ let s=0; for(let i=0;i<3;i++){ s-=2*co[i]*V[i]; for(let j=0;j<3;j++) s+=co[i]*co[j]*M[i][j]; } return s; };
-    // Candidate subspaces co = R·y for the b ≥ 0, c ≥ 0 active set: free · b pinned · c pinned · both pinned.
-    const RS=[ [[1,0,0],[0,1,0],[0,0,1]], [[1,0],[0,0],[0,1]], [[1,0],[0,1],[0,0]], [[1],[0],[0]] ];
-    let best=null;
-    RS.forEach(R=>{ const n=R[0].length, A=[], v=[];
-      for(let a=0;a<n;a++){ const row=[];
-        for(let b=0;b<n;b++){ let s=0; for(let i=0;i<3;i++) for(let j=0;j<3;j++) s+=R[i][a]*M[i][j]*R[j][b]; row.push(s); }
-        let s2=0; for(let i=0;i<3;i++) s2+=R[i][a]*V[i]; A.push(row); v.push(s2); }
-      const y=solveN(A,v); if(!y) return;
-      const co=[0,0,0]; for(let i=0;i<3;i++) for(let a=0;a<n;a++) co[i]+=R[i][a]*y[a];
-      if(co[1]<-1e-9 || co[2]<-1e-9) return;                          // infeasible: a negative slope term
-      const e=sse(co); if(!best||e<best.e-1e-12) best={co,e}; });
-    return best; };
-  let best=null, bk=1;
-  [0.1,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.5,3].forEach(k=>{ const r=fitK(k);
-    if(r && (!best||r.e<best.e-1e-12)){ best=r; bk=k; } });
-  const co=best?best.co:[0,0,0];
-  // NOT clamped: the curve extrapolates freely outside the sampled range. Safe here precisely because b, c ≥ 0 makes
-  // g' ≥ 0 for every u, positive or negative — extrapolation can never fold back on itself, only flatten out below
-  // the data (g → a − c/k + b·u) and steepen above it.
-  return t=>{ const u=t-T0; return co[0]+co[1]*u+co[2]*(Math.exp(bk*u)-1)/bk; }; }
-// Distance of a couple to the price envelope, in LOG-COST: r = log10(price the frontier charges for that quality)
-// − log10(what the couple actually costs). Positive = cheaper than the going price, i.e. good value. Computed on the
-// centres, like the envelope. Split into the two halves so a tier can weight cost differently from quality (see
-// TIERS.gam): G = what the price curve grants for this couple's quality · C = what the couple actually costs, both in
-// log10. The plain residual is exactly G − C.
-function valueParts(gevT,p){
-  return { G: gevT(symT(p.q)), C: Math.log10(p.c) }; }
-function valueResidual(gevT,p){ const {G,C}=valueParts(gevT,p); return G-C; }
-// VALUE INDEX, anchored so ANCHOR = 100. Being an exponentiated difference of log-distances it is a genuine
-// RATIO: 384 reads "3.8× the value-for-money of the anchor", 45 reads "0.45×" — every value above 100 means something,
-// which a linear stretch of a bounded score could not offer. Unbounded above by construction: that is the cost of an
-// interpretable multiple, and it is why the anchor can sit anywhere in the ranking without breaking the scale.
-const valueIndex=(r,rAnc)=>100*Math.pow(10,r-rAnc);
-const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANCHOR.e); return a?valueResidual(gevT,a):0; };
-// Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
-// metric T the windows live in) between adjacent tier centres q* — where one Gaussian window starts to outweigh the next —
-// and the outer bands extend half a gap beyond the first and last centres. They follow the sliders (TIERS is live).
-function tierBandEdges(){ const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];   // half-bell windows: a tier
-  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }                    // owns [its q*, next q*)
+// Tier bands: the four usage tiers of the picker as translucent horizontal bands. A tier owns [its target θ*, the next
+// target): the qualities that clear its bar but not the next one's; the outer bands extend half a gap beyond the first
+// and last targets. They follow the sliders (TIERS is live).
+function tierBandEdges(){ const Tc=TIERS.map(t=>t.t), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
+  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }
 function drawTierBands(s,Y,mL,iw,mT,ih){                                  // translucent fills, drawn UNDER the grid
   const e=tierBandEdges(), n=TIERS.length, g=el("g",{"pointer-events":"none"});
-  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
+  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(e[i+1]))), yB=Math.max(mT,Math.min(mT+ih,Y(e[i])));
     if(yB-yA<1) return;
     g.appendChild(el("rect",{x:mL,y:yA,width:iw,height:yB-yA,fill:TWCOL[i],"fill-opacity":0.10}));
     if(i<n-1) g.appendChild(el("line",{x1:mL,y1:yA,x2:mL+iw,y2:yA,stroke:TWCOL[i],"stroke-opacity":0.35,"stroke-width":1,"stroke-dasharray":"2 5"})); });
@@ -773,46 +747,47 @@ function atLightness(hex,L){
 const isDark=()=>{ const h=cvar('--paper'); return /^#/.test(h) && parseInt(h.slice(1,3),16)<100; };
 function drawTierBandLabels(s,Y,mL,iw,mT,ih){                             // names: left, opaque, ABOVE the grid (paper halo)
   const e=tierBandEdges(), g=el("g",{"pointer-events":"none"});
-  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
+  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(e[i+1]))), yB=Math.max(mT,Math.min(mT+ih,Y(e[i])));
     if(yB-yA<16) return;
     const tx=el("text",{x:mL+10,y:yB-7,fill:atLightness(TWCOL[i],isDark()?0.80:0.50),"font-size":11.5,"font-weight":700,"text-anchor":"start","letter-spacing":"0.04em",
       stroke:cvar('--panel'),"stroke-width":3,"stroke-linejoin":"round","paint-order":"stroke"});
     tx.textContent=t.name; g.appendChild(tx); });
   s.appendChild(g);
 }
+// Cost multiples: two significant digits (one decimal below 10, none above), as fine as the Monte Carlo error allows
+// (about 0.3 % relative, the cheapest couple's included) and well inside the intervals (about ±10 %).
+const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
+function costTicks(s,X,xlo,xhi,mT,ih,dy){ logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
+  s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
+  if(tickLbl(val)){const t=el("text",{x,y:mT+ih+dy,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}}); }
+const AXIS_C=["Cost","multiple of the cheapest couple · log scale"], AXIS_Q=["Quality","expected score on the benchmark panel · latent scale"];
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
-  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID. Haiku excluded here. Bounds DYNAMIC.
-  const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
-  for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
-      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);   // bounds include the uncertainty ovals (extents) so they stay fully inside
-      pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const yp=8, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  const W=1100,H=619,mL=66,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
+  // X = cost multiple, Y = θ, each with its interval. Haiku excluded here. Bounds include the ovals so they stay inside.
+  const pts=couples().filter(p=>p.m!=="haiku-4.5");
+  const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)), tmn=Math.min(...pts.map(p=>p.tlo)), tmx=Math.max(...pts.map(p=>p.thi));
+  const yp=8, view=s.__view||defView(xmn,xmx,tmn,tmx);   // stored view (zoom/pan) overrides the data bounds
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
-  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];   // symlog quality axis (dilated near parity 1.0)
-  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
+  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];
   if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier fills, under the grid
-  logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
-    s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
-    if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
+  costTicks(s,X,xlo,xhi,mT,ih,20);
   qGrid(s,Y,mL,iw,mT,ih);
   if(showBands) drawTierBandLabels(s,Y,mL,iw,mT,ih);                     // tier names over the grid
-  axisTitle(s,mL+iw/2,H-30,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
-  axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
+  axisTitle(s,mL+iw/2,H-30,...AXIS_C);
+  axisTitle(s,13,mT+ih/2,...AXIS_Q,`rotate(-90 13 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=showOvals?drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB"):[];      // optional asymmetric uncertainty ovals, behind
   const segs=[];                                                          // curves + points on top, collect line segments for label repulsion
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
-    s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
-    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})));
-    for(let i=0;i<mp.length-1;i++) segs.push([X(mp[i].c),Y(mp[i].q),X(mp[i+1].c),Y(mp[i+1].q)]); }
-  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.q)})), labs=[];                  // effort labels + model-name labels, force-directed together
-  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.q),lx:X(p.c),ly:Y(p.q)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
+    s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.t)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
+    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})));
+    for(let i=0;i<mp.length-1;i++) segs.push([X(mp[i].c),Y(mp[i].t),X(mp[i+1].c),Y(mp[i+1].t)]); }
+  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.t)})), labs=[];                  // effort labels + model-name labels, force-directed together
+  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.t),lx:X(p.c),ly:Y(p.t)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
   for(const m in byM){ const mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e)), last=mp[mp.length-1], w=MODELS[m].label.length*7+6;
-    labs.push({ax:X(last.c),ay:Y(last.q),lx:X(last.c)+16+w/2,ly:Y(last.q)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }
+    labs.push({ax:X(last.c),ay:Y(last.t),lx:X(last.c)+16+w/2,ly:Y(last.t)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
@@ -821,260 +796,195 @@ function drawB(){
                :`<span class="lg"><b>hover a point</b> for its identity</span>`);
 }
 
-// ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
-// Same shared machinery as the §1 landscape: symlog quality axis, faint interval ovals (hover to reveal),
-// point tooltip, force-directed frontier labels. Full body width.
+// ---- Dedicated Pareto chart: cost × quality scatter, the frontier joined, the couples within reach marked ----
+// Same shared machinery as the §1 landscape: θ axis, faint interval ovals (hover to reveal), point tooltip,
+// force-directed labels. Full body width.
+const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=1100,H=619,mL=54,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
-  // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
-  const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
-  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
-      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
-      pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const yp=10, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  const W=1100,H=619,mL=66,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
+  const pts=couples(), {front,reach}=frontier(pts), tr=fitTrend(pts);    // all current couples incl. Haiku (solo)
+  const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)), tmn=Math.min(...pts.map(p=>p.tlo)), tmx=Math.max(...pts.map(p=>p.thi));
+  const yp=10, view=s.__view||defView(xmn,xmx,tmn,tmx);   // stored view (zoom/pan) overrides the data bounds
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
   const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];
-  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier fills, under the grid
-  logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
-    s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
-    if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
+  costTicks(s,X,xlo,xhi,mT,ih,18);
   qGrid(s,Y,mL,iw,mT,ih);
   if(showBands) drawTierBandLabels(s,Y,mL,iw,mT,ih);                     // tier names over the grid
-  axisTitle(s,mL+iw/2,H-28,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
-  axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  const pset=new Set(par.map(p=>p.m+"@"+p.e));
-  // HORIZONTAL price envelope log10(cost) = g(T(quality)), fit UNCERTAINTY-AWARE (5 weighted points per couple). Distance
-  // is measured in log-COST (cheaper/dearer than the frontier price for your quality) so cost is weighted linearly.
-  const gevT=fitPriceEnvelope(pts);                                                                      // all couples, graded by Pareto distance
-  const PW=paretoWeights(pts), sw=PW.reduce((a,b)=>a+b,0);                                              // R² uses the SAME grading as the fit
-  const xm=pts.reduce((a,p,i)=>a+PW[i]*Math.log10(p.c),0)/sw,
-    ssX=pts.reduce((a,p,i)=>a+PW[i]*Math.pow(Math.log10(p.c)-xm,2),0),
-    rssX=pts.reduce((a,p,i)=>a+PW[i]*Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
-  { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
-  { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to the visible plot rect)
-    for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
-      if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
-    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
-  const rAnc=anchorResidual(gevT,pts);                                                            // 100 = ANCHOR
-  const scored=pts.map(p=>({...p,score:valueIndex(valueResidual(gevT,p),rAnc),front:pset.has(p.m+"@"+p.e)}));
-  fillScoreTable(scored);
-  const ells=showOvals?drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP"):[];   // optional; ovals only on the frontier points
-  s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
-  pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
-    s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
-  // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line
-  const cap=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
-  const ppix=par.map(p=>({x:X(p.c),y:Y(p.q)})), segs=[];   // anti-collision considers ONLY frontier points (faded/dominated ignored)
-  for(let i=0;i<par.length-1;i++) segs.push([X(par[i].c),Y(par[i].q),X(par[i+1].c),Y(par[i+1].q)]);
-  const labs=par.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+cap(p.e)}`, w=t.length*7.2+8;
-    return {ax:X(p.c),ay:Y(p.q),lx:X(p.c)+18+w/2,ly:Y(p.q),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:17,fs:13,mdl:true}; });
+  axisTitle(s,mL+iw/2,H-28,...AXIS_C);
+  axisTitle(s,13,mT+ih/2,...AXIS_Q,`rotate(-90 13 ${mT+ih/2})`);
+  { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=tr.R2.toFixed(2); }
+  { const x0=Math.min(...pts.map(p=>p.x)), cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi); let d="", on=false;   // the trend, edge to edge
+    for(let k=0;k<=200;k++){ const t=tmn-20+(tmx-tmn+40)*k/200, cost=Math.exp(tr.at(t)-x0), yy=Y(t);
+      if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+yy+" "; on=true; } else on=false; }
+    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }
+  fillScoreTable(reach,tr);
+  const ells=showOvals?drawOvals(s,reach,X,Y,mL,iw,mT,ih,"clipP"):[];   // optional; ovals only on the couples within reach
+  s.appendChild(el("path",{d:front.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.t)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
+  pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);
+    s.appendChild(el("circle",p.front?{cx:X(p.c),cy:Y(p.t),r:5.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.3}
+      :p.reach?{cx:X(p.c),cy:Y(p.t),r:5.2,fill:col,"fill-opacity":.35,stroke:col,"stroke-width":1.6,"stroke-dasharray":"2 1.6"}
+      :{cx:X(p.c),cy:Y(p.t),r:3.4,fill:col,"fill-opacity":.25})); });
+  // labels (model · effort) on the couples within reach, force-directed to dodge overlaps and the frontier line
+  const ppix=reach.map(p=>({x:X(p.c),y:Y(p.t)})), segs=[];
+  for(let i=0;i<front.length-1;i++) segs.push([X(front[i].c),Y(front[i].t),X(front[i+1].c),Y(front[i+1].t)]);
+  const labs=reach.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`, w=t.length*7.2+8;
+    return {ax:X(p.c),ay:Y(p.t),lx:X(p.c)+18+w/2,ly:Y(p.t),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:17,fs:13,mdl:true}; });
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendP");
   if(lg) lg.innerHTML=visibleModels().map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
+    +`<span class="lg"><span class="sw" style="border:1.5px dashed var(--ink);background:transparent;border-radius:50%"></span>within reach of the frontier (not beaten at 84 %)</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price curve — what a quality typically costs, graded by Pareto distance · R² = ${R2.toFixed(2)}</span>`;
-  const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
-  if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b>${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${p.q.toFixed(2)}× · ${fmtC(p.c)}×</span></span>`).join("");
+    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price trend — what a quality typically costs, over every couple · R² = ${tr.R2.toFixed(2)}</span>`;
+  const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (cost order), same style as the tier cards but small
+  if(pb) pb.innerHTML=reach.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}${p.front?'':';border-style:dashed'}"><b>${MODELS[p.m].label}</b><span class="pblock-e">${capE(p.e)}</span><span class="pblock-n">${pct(p.s)} · ${fmtC(p.c)}×</span></span>`).join("");
 }
-// ---- Value-score table : distance of each couple to the fitted Pareto-frontier envelope (from drawPareto) ----
-function fillScoreTable(scored){
+// ---- Value table: each couple within reach against the price trend ----
+function fillScoreTable(rows,tr){
   const tb=document.querySelector("#score-tbl tbody"); if(!tb) return; tb.innerHTML="";
-  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
-  scored.filter(p=>p.front).slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),   // frontier couples only
-    // Intensity from the DECADE distance to the anchor, so 2× and 0.5× read equally strong; capped at one decade.
-    sc=p.score>=100?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(Math.log10(p.score/100)),1)*0.52)*100),
-    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${Math.round(p.score)}</span>`;
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
-      +`<td class="num">${p.c.toFixed(2)}×</td><td class="num">${p.q.toFixed(2)}×</td>`
+  rows.map(p=>({...p,r:valueOf(tr,p)})).sort((a,b)=>b.r-a.r).forEach(p=>{ const col=cvar(MODELS[p.m].c),
+    // Intensity from the distance to the trend in decades, so 2× cheaper and 2× dearer read equally strong; capped at one decade.
+    sc=p.r>=0?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(p.r)/Math.LN10,1)*0.52)*100),
+    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${vWord(p.r)}</span>`;
+    const row=document.createElement("tr");
+    row.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}${p.front?"":" <span class=\"faint\">(within reach)</span>"}</td>`
+      +`<td class="num">${fmtC(p.c)}×</td><td class="num">${pct(p.s)}</td>`
       +`<td style="min-width:96px">${pill}</td>`;
-    tb.appendChild(tr); }); }
-// ---- Central-complexity tiers + hidden-prominence crown (data-driven from COSTGRID × QUALGRID) ----
-// Each tier targets a CENTRAL complexity q* (relative quality). Among the Pareto-frontier couples we pick the one
-// maximising window(q) × 10^(G − γ·C): the half-bell window below focuses on couples near the target complexity, the
-// tilted value index (see PER-TIER COST SENSITIVITY) favours value.
-// The CROWN uses the HIDDEN PROMINENCE: hid(n) = 2·Sₙ − S_prev − S_next along the frontier (S = signed distance to the
-// envelope, as in the value-score table; endpoints get 0). It marks the sharpest knee — the standout couple overall.
-// q = target complexity, sig = Gaussian width — BOTH live-adjustable via the tuner (drawTierTuner); the proximity
-// is measured in the DILATED metric T(q) (same transform as the fit & the value score), so the windows are consistent
-// with the chart. TWCOL = one colour per tier window.
-// HALF-BELL window: below its target a couple is penalised by the Gaussian as before; at or above it the couple clears
-// the bar and earns a small bonus that saturates fast — 1 + BONUS·(1 − e^(−Δ/τ)), Δ = how far above q* in the dilated
-// metric, τ = σ/2 — so being better never hurts, and helps only a little. Capped at 1 + BONUS.
-const TIER_BONUS=0.20;
-function tierWeight(q,t){ const d=(symT(q)-symT(t.q))/t.sig;
-  return d<0 ? Math.exp(-d*d) : 1+TIER_BONUS*(1-Math.exp(-2*d)); }
+    tb.appendChild(row); }); }
+// ---- Tiers: the best value by task complexity; the crown ----
+// Four tiers, each with a TARGET quality θ*. Among the couples within reach of the frontier, each tier picks the one
+// that maximises
+//     window(θ) × e^(λ·θ) ⁄ cost
+// λ the slope of the price trend. e^(λθ) ⁄ cost is the couple's value against the trend (the same all along the trend
+// line): above its target, a couple wins by bringing more quality than the trend charges for its extra cost, a smooth
+// reward with no constant to set. Below the target the Gaussian window e^(−δ²), δ = (θ − θ*) ⁄ σ, penalises the
+// shortfall; at or above it the window is 1. Cost is weighed in ratios (log cost), as people perceive prices
+// (Weber–Fechner): twice as dear weighs the same at every price.
+function logWindow(t,T){ const d=(t-T.t)/T.sig; return d<0?-d*d:0; }
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
-// q and sig below are PLACEHOLDERS — tierDefaults() overwrites both from the data on load (see there).
+// t (θ*) and sig below are PLACEHOLDERS: tierDefaults() sets both from the data on load.
 const TIERS=[
-  {key:"triage",  name:"Grunt work",             q:0.75, sig:0.80, gam:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:0.80, gam:1.05, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:0.80, gam:0.95, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:0.80, gam:0.80, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Grunt work",             t:0, sig:1, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday tasks",         t:0, sig:1, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Advanced reasoning",     t:0, sig:1, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Cutting-Edge thinking",  t:0, sig:1, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
-// DATA-DERIVED tier windows. Model quality drifts upward release after release: the weakest couple slowly improves
-// and the best one sets a new ceiling, so fixed q* would go stale and could aim at a quality nothing reaches. Centres are spread
-// evenly across the FRONTIER's quality span in the dilated metric T (the one the Gaussian and the chart already use),
-// from the weakest selectable couple to the strongest — so the bottom tracks the floor as it rises, and the top always
-// sits exactly on the best model available rather than on a number fixed at some past release.
-// sigma follows the spacing on a single rule: adjacent windows cross at HALF weight exactly midway between their
-// centres — exp(−((gap/2)/sig)²) = ½ ⟹ sig = gap ⁄ (2·√ln2). The four windows partition the axis instead of
-// overlapping arbitrarily, and sigma rescales automatically when the span widens or narrows.
-let TIERQ={qmn:0.55,qmx:1.30};
+// DATA-DERIVED targets. Models improve release after release, so fixed targets would go stale. The four θ* spread
+// evenly from (1 − e)·min + e·max to (1 − e)·max + e·min of the frontier's quality (frontier by centres), e = TIER_E:
+// the bottom tier follows the weakest frontier couple as it rises, the top one the best, each drawn 5 % of the span
+// inward so that no target sits on a single couple. They depend on the couples only through these two bounds.
+// σ follows the spacing: adjacent windows cross at half weight midway between their targets, σ = gap ⁄ (2·√ln 2).
+const TIER_E=0.05;
+let TIERQ={lo:0,hi:1,gap:1,sig:1};
 function tierDefaults(){
-  const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(q) rows.push({c:cg[e][0],q:q[0]}); } }
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const Ts=rows.filter(p=>!rows.some(o=>dom(o,p))).map(p=>symT(p.q));
-  if(!Ts.length) return;
-  const Tmin=Math.min(...Ts), Tmax=Math.max(...Ts), gap=(Tmax-Tmin)/Math.max(TIERS.length-1,1);
-  const sig=gap/(2*Math.sqrt(Math.LN2));
-  TIERS.forEach((t,i)=>{ t.q=symTinv(Tmin+i*gap); t.sig=sig; });
-  TIERQ={qmn:symTinv(Tmin), qmx:symTinv(Tmax), gap, sig};
+  const {front}=frontier(couples()); if(!front.length) return;
+  const a=Math.min(...front.map(p=>p.t)), b=Math.max(...front.map(p=>p.t)), lo=(1-TIER_E)*a+TIER_E*b, hi=(1-TIER_E)*b+TIER_E*a;
+  const gap=(hi-lo)/Math.max(TIERS.length-1,1), sig=gap/(2*Math.sqrt(Math.LN2));
+  TIERS.forEach((T,i)=>{ T.t=lo+i*gap; T.sig=sig; });
+  TIERQ={lo,hi,gap,sig};
 }
 tierDefaults();
 function tierPicks(){
-  const rows=[];
-  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  // uncertainty-aware price envelope + log-distance r + hidden prominence (crown) — same machinery as the value table
-  const gevT=fitPriceEnvelope(rows);                     // ALL couples, not just the frontier
-  rows.forEach(p=>p.S=valueResidual(gevT,p));           // r is defined for EVERY couple — frontier and dominated alike
-  // Prominence stays a 2nd difference of r, i.e. computed in LOG space where these distances are additive, so it keeps
-  // meaning "this couple stands out from its two frontier neighbours". Crown SELECTION only.
-  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
-  // DISPLAYED SCORE = the value index, anchored so ANCHOR = 100 (see valueIndex). The anchor is read from
-  // the FULL set of couples, not the frontier: a new model can push it OFF the Pareto frontier but
-  // never out of the full set, so the reference always exists. And because the index is a ratio rather than a stretch
-  // between two extremes, the anchor sitting low in the ranking no longer distorts anything above it.
-  const rAnc=anchorResidual(gevT,rows);
-  rows.forEach(p=>p.norm=valueIndex(p.S,rAnc));
-  const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
-  // Tier winner = the frontier couple maximising PROXIMITY × VALUE INDEX, in log-cost like the price curve, the residual
-  // and the Pareto distance: quality spans a factor of about 2 across the cloud against more than 10 for cost, so a
-  // linear quality ÷ cost would be driven almost entirely by cost. The number a card shows is the criterion that chose it.
-  // PER-TIER COST SENSITIVITY. Cost does not weigh the same at every complexity: on throwaway work you want the
-  // cheapest thing that clears the bar, on research-grade work a few extra points of capability are worth paying for.
-  // Each tier therefore ranks on G − gam·C rather than G − C, i.e. on price-curve-credit ⁄ cost^gam. gam > 1 punishes
-  // cost more than proportionally, gam < 1 less. Only the SELECTION is tilted — the index a card displays stays the
-  // neutral gam = 1 one, so the four cards remain comparable with each other and with the anchor.
-  front.forEach(p=>p.P=valueParts(gevT,p));
-  const tscore=(p,t)=>tierWeight(p.q,t)*Math.pow(10,p.P.G-t.gam*p.P.C);
-  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> tscore(b,t) > tscore(a,t) ? b : a)}));
-  const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
-  const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
-  return {picks,crown};
+  const rows=couples(), {reach}=frontier(rows), tr=fitTrend(rows);
+  reach.forEach(p=>{ p.r=valueOf(tr,p); p.qg=qGain(tr,p); });
+  const tscore=(p,T)=>logWindow(p.t,T)+tr.l*p.t-p.x;                                   // ln(window × e^(λθ) ⁄ cost)
+  const picks=TIERS.map(T=>({...T, win:reach.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a)}));
+  // CROWN: the couple within reach furthest below the price trend: the most quality for its cost against the going
+  // rate. Read on the cost axis, e^r times cheaper than the trend at its quality; on the quality axis, r ⁄ λ above what
+  // the trend gives for its cost: the same gap, since the trend is a straight line.
+  const crown=reach.reduce((a,b)=> b.r > a.r ? b : a);
+  return {picks,crown,tr};
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
-  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  // noQ → header-mirror cards & the top crown: drop the "Q* …" prefix, keep the full card layout
-  const cardHTML=(q,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">${noQ?'':`Q* ${q.toFixed(2)} – `}${name}</span></div>
+  // noQ → header-mirror cards & the top crown: drop the target prefix, keep the full card layout
+  const cardHTML=(T,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
+      <div class="tier-head"><span class="tier-name">${noQ?'':`Target ${pct(score(T.t))} – `}${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-          <span class="tier-nums">Cost <b>${w.c.toFixed(2)}×</b> · Quality <b>${w.q.toFixed(2)}×</b></span>
+          <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b> · Score <b>${pct(w.s)}</b></span>
         </div>
-        <div class="tier-yield">${Math.round(w.norm)}</div>
+        <div class="tier-yield">${fmtX(Math.exp(Math.abs(w.r)))}<small>${w.r>=0?"cheaper":"dearer"} than the trend</small></div>
       </div>
       ${ex?`<span class="ex">${ex}</span>`:''}
     </div>`;
-  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");        // detailed cards: keep Q*
+  host.innerHTML=picks.map(t=>cardHTML(t,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");        // detailed cards: keep the target
   const top=document.getElementById("tier-cards-top");
-  if(top) top.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // near-header cards: labels only, no Q*
+  if(top) top.innerHTML=picks.map(t=>cardHTML(t,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // near-header cards: labels only
   const c=crown, col=cvar(MODELS[c.m].c);
-  const crT=document.getElementById("tier-crown-top");   // best-overall above the header cards: SAME tier-card layout (title · model+cost/quality · big score)
-  if(crT) crT.innerHTML=cardHTML(0,"👑 Best overall",col,c,"",true);
+  const crT=document.getElementById("tier-crown-top");   // best overall above the header cards: SAME tier-card layout
+  if(crT) crT.innerHTML=cardHTML(null,"👑 Best overall",col,c,"",true);
   const cr=document.getElementById("tier-crown");   // the detailed section keeps the explained crown
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
-      <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price curve, exponentiated against the anchor&nbsp;: <b>100 = ${ANCHOR.label.replace(/ /g,"&nbsp;")}</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
+      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · <b>${vWord(c.r)}</b> than the trend</div>
+      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. The trend is fitted on <b>every</b> couple shown, so it is the going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
-// Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
-// plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.
+// Interactive tuner: draws the four tier windows over the θ axis (labelled in expected score) plus the couples within
+// reach as ticks, and a θ*/σ slider pair per tier that live-updates TIERS and re-renders.
 // Redraw ONLY the window SVG (called on every slider move) — leaves the slider DOM untouched so dragging keeps working.
 function drawTierWindows(){
   const host=document.getElementById("tier-windows"); if(!host) return;
-  const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; for(const e in cg){ const q=qg[e]; if(q) rows.push({m,e,c:cg[e][0],q:q[0]}); } }
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
-  // Axis spans the DATA range (from tierDefaults) plus half a tier-spacing of padding, so the end windows are not
-  // clipped; ticks are generated over whatever that range turns out to be rather than assuming a fixed 0.6–1.2.
-  const padT=0.5*(TIERQ.gap||1), Tmn=symT(TIERQ.qmn)-padT, Tmx=symT(TIERQ.qmx)+padT;
-  const qmn=symTinv(Tmn), qmx=symTinv(Tmx);
+  const {reach}=frontier(couples());
+  // Axis spans the targets' range (from tierDefaults) plus half a gap of padding, so the end windows are not clipped.
+  const padT=0.5*TIERQ.gap, Tmn=TIERQ.lo-padT, Tmx=TIERQ.hi+padT;
   const W=1100,H=140,mL=8,mR=8,mT=8,mB=24, iw=W-mL-mR, ih=H-mT-mB;
-  const X=q=>mL+(symT(q)-Tmn)/(Tmx-Tmn)*iw;
-  let svg=`<svg viewBox="0 0 ${W} ${H}" class="tuner-svg" role="img" aria-label="Tier windows over the dilated quality axis">`;
-  const ticks=[]; for(let v=Math.ceil(qmn*10)/10; v<=qmx+1e-9; v=Math.round((v+0.1)*10)/10) ticks.push(v);
-  ticks.forEach(v=>{ const x=X(v); svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${v.toFixed(1)}</text>`; });
-  TIERS.forEach((t,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
-    for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=tierWeight(q,t)/(1+TIER_BONUS); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
+  const X=t=>mL+(t-Tmn)/(Tmx-Tmn)*iw;
+  let svg=`<svg viewBox="0 0 ${W} ${H}" class="tuner-svg" role="img" aria-label="Tier windows over the quality axis">`;
+  for(let v=0.05; v<0.999; v+=0.05){ const t=scoreInv(Math.round(v*100)/100); if(t<Tmn||t>Tmx) continue; const x=X(t);
+    svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${Math.round(v*100)}%</text>`; }
+  TIERS.forEach((T,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
+    for(let k=0;k<=140;k++){ const t=Tmn+(Tmx-Tmn)*k/140, g=Math.exp(logWindow(t,T)); d+=` L ${X(t).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
     d+=` L ${mL+iw} ${mT+ih} Z`;
-    svg+=`<path d="${d}" fill="${col}" fill-opacity="0.13" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
-       +`<line x1="${X(t.q)}" y1="${mT}" x2="${X(t.q)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
-  front.forEach(p=>svg+=`<circle cx="${X(p.q)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`);
+    svg+=`<path d="${d}" fill="${col}" fill-opacity="0.06" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
+       +`<line x1="${X(T.t)}" y1="${mT}" x2="${X(T.t)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
+  reach.forEach(p=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`; });
   host.innerHTML=svg+`</svg>`;
 }
 // Build the tuner ONCE (window container + persistent sliders). Slider input updates state + redraws windows/cards only.
 function drawTierTuner(){
   const host=document.getElementById("tier-tuner"); if(!host) return;
-  // Slider travel follows the data too: Q* spans the padded quality range the windows are drawn over, and sigma runs
-  // from a quarter to triple its derived default — so the useful settings sit in the middle of the travel whatever
-  // the current spread of models is, instead of against a stop.
-  const padT=0.5*(TIERQ.gap||1), s0=TIERQ.sig||0.8;
-  const sQ={lo:symTinv(symT(TIERQ.qmn)-padT).toFixed(2), hi:symTinv(symT(TIERQ.qmx)+padT).toFixed(2)};
-  const sS={lo:(0.25*s0).toFixed(2), hi:(3*s0).toFixed(2)};
+  // Slider travel follows the data: θ* spans the padded range the windows are drawn over, σ runs from a quarter to
+  // triple its default, so the useful settings sit mid-travel whatever the current spread of models is.
+  const padT=0.5*TIERQ.gap, s0=TIERQ.sig;
+  const sQ={lo:(TIERQ.lo-padT).toFixed(2), hi:(TIERQ.hi+padT).toFixed(2)}, sS={lo:(0.25*s0).toFixed(2), hi:(3*s0).toFixed(2)};
   let ctl='';
   TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
-    +`<label><span class="lbl">Q*</span><input type="range" min="${sQ.lo}" max="${sQ.hi}" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
+    +`<label><span class="lbl">Target</span><input type="range" min="${sQ.lo}" max="${sQ.hi}" step="0.05" value="${t.t}" data-i="${i}" data-k="t"><b id="tv-q-${i}">${pct(score(t.t))}</b></label>`
     +`<label><span class="lbl">σ</span><input type="range" min="${sS.lo}" max="${sS.hi}" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
   host.innerHTML=`<div id="tier-windows"></div><div class="tuner-ctl">${ctl}</div>`;
   drawTierWindows();
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
     const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
-    document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2);
-    drawTierWindows(); drawTiers(); if(showBands&&k==='q'){ drawB(); drawPareto(); } }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
+    document.getElementById((k==='t'?'tv-q-':'tv-s-')+i).textContent=k==='t'?pct(score(v)):v.toFixed(2);
+    drawTierWindows(); drawTiers(); if(showBands&&k==='t'){ drawB(); drawPareto(); } }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
-// ---------- MATRIX (sorted by relative quality desc) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
-const fr=x=>x.toFixed(2);
-const ciStr=(m,e,v)=> `${fr(v[1])}–${fr(v[2])}`;   // every couple, the anchor included, carries its own 16–84 % interval
-const relQ=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?qg[e][0]:0; };   // quality at the model's top effort
-const M={};
-for(const m in COSTGRID){ const cg=COSTGRID[m]||{}; M[m]={q:relQ(m), tag:MODELS[m].tag};
-  ["low","medium","high","xhigh","max","solo"].forEach(e=>{ M[m][e]= cg[e]? [cg[e][0], ciStr(m,e,cg[e])] : null; }); }
-function heat(v){
-  const t=Math.max(0,Math.min(1,(Math.log10(v)-Math.log10(0.12))/(Math.log10(4.5)-Math.log10(0.12))));
-  const dark=document.documentElement.getAttribute('data-theme')==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&document.documentElement.getAttribute('data-theme')!=='light');
-  const al=dark?(0.10+t*0.42):(0.07+t*0.40);
-  return `background:color-mix(in srgb, var(--opus48) ${Math.round(al*100)}%, transparent)`;
-}
+// ---------- MATRIX (sorted by expected score at top effort) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
 function drawMatrix(){
   const tb=document.querySelector("#matrix-tbl tbody"); tb.innerHTML="";
-  const rows=Object.keys(M).sort((a,b)=>M[b].q-M[a].q);
-  for(const m of rows){ const md=MODELS[m], tr=document.createElement("tr");
-    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span>':''}</td>`;
-    if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
-      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>merged · ${c[1]}</small></div></td>`;
+  const xs=Object.values(COSTGRID).flatMap(es=>Object.values(es).map(v=>v[0])), x0=Math.min(...xs), cmax=Math.exp(Math.max(...xs)-x0);
+  const cell=v=>{ const c=Math.exp(v[0]-x0); return [c, `${fmtC(c*Math.exp(-v[1]))}–${fmtC(c*Math.exp(v[1]))}`]; };
+  const topS=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?score(qg[e][0]):0; };
+  const dark=document.documentElement.getAttribute('data-theme')==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&document.documentElement.getAttribute('data-theme')!=='light');
+  const heat=c=>{ const t=cmax>1?Math.log(c)/Math.log(cmax):0, al=dark?(0.10+t*0.42):(0.07+t*0.40);
+    return `background:color-mix(in srgb, var(--opus48) ${Math.round(al*100)}%, transparent)`; };
+  for(const m of Object.keys(COSTGRID).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], cg=COSTGRID[m], tr=document.createElement("tr");
+    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${md.tag?' <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span>':''}</td>`;
+    if(cg.solo){ const c=cell(cg.solo);   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
+      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>merged · ${c[1]}</small></div></td>`;
     } else {
-      ["low","medium","high","xhigh","max"].forEach(e=>{ const c=M[m][e];
-        row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>${c[1]}</small></div></td>`
+      ["low","medium","high","xhigh","max"].forEach(e=>{ const c=cg[e]?cell(cg[e]):null;
+        row+= c? `<td><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>${c[1]}</small></div></td>`
                : `<td class="na">—</td>`; });
     }
-    row+=`<td class="mdl num">${M[m].q.toFixed(2)}×</td>`;
+    row+=`<td class="mdl num">${pct(topS(m))}</td>`;
     tr.innerHTML=row; tb.appendChild(tr);
   }
 }
@@ -1111,7 +1021,7 @@ function drawEdgeTable(){
 // re-render, so ticks/labels recompute at fixed size for the zoomed window. Registry maps id → its draw function.
 const CHART_RENDER={chartB:drawB, chartP:drawPareto};
 const svgPt=(s,cx,cy)=>{ const P=new DOMPoint(cx,cy).matrixTransform(s.getScreenCTM().inverse()); return {x:P.x,y:P.y}; };
-const dataAt=(s,px,py)=>{ const g=s.__geo, v=s.__view;   // pixel → view coords (log-cost, symT-quality)
+const dataAt=(s,px,py)=>{ const g=s.__geo, v=s.__view;   // pixel → view coords (log-cost, yOf θ)
   return [ v[0]+(px-g.mL)/g.iw*(v[1]-v[0]), v[2]+(1-(py-g.mT-g.yp)/(g.ih-2*g.yp))*(v[3]-v[2]) ]; };
 function zoomView(s,px,py,f){ const [ux,uy]=dataAt(s,px,py), v=s.__view.slice();
   v[0]=ux-(ux-v[0])*f; v[1]=ux+(v[1]-ux)*f; v[2]=uy-(uy-v[2])*f; v[3]=uy+(v[3]-uy)*f; s.__view=v; }
@@ -1153,21 +1063,20 @@ function fillMeta(){   // all source counts + the footer source list derive from
 // tier, top-quality couple — as plain text for llms.txt. Both pre-rendered at build time (site/prerender.js).
 function answerData(){
   const {picks,crown}=tierPicks();
-  let top=null; for(const m in COSTGRID){ const qg=QUALGRID[m]||{};
-    for(const e in COSTGRID[m]){ const q=qg[e]; if(q&&(!top||q[0]>top.q)) top={m,e,c:COSTGRID[m][e][0],q:q[0]}; } }
+  const top=couples().reduce((a,b)=>b.t>a.t?b:a);
   const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
   return {picks,crown,top,nm};
 }
 function fillAnswer(){
   const host=document.getElementById("answer"); if(!host) return;
   const {crown,nm}=answerData();
-  host.innerHTML=`The best value today is <b>${nm(crown)}</b> — ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost.`;
+  host.innerHTML=`The best value today is <b>${nm(crown)}</b> — ${vWord(crown.r)} than the price trend for its quality (expected score ${pct(crown.s)} on the benchmark panel).`;
 }
 function answerFull(){
   const {picks,crown,top,nm}=answerData();
-  return `Best value overall: ${nm(crown)}, ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost. `
+  return `Best value overall: ${nm(crown)}, ${vWord(crown.r)} than the price trend for its quality (expected score ${pct(crown.s)} on the benchmark panel, cost ${fmtC(crown.c)}× the cheapest couple). `
     +`Best pick by task tier: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join("; ")}. `
-    +(top?`Highest measured quality: ${nm(top)} (${top.q.toFixed(2)}× for ${top.c.toFixed(2)}× the cost).`:"");
+    +`Highest measured quality: ${nm(top)} (expected score ${pct(top.s)}, cost ${fmtC(top.c)}× the cheapest couple).`;
 }
 function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}

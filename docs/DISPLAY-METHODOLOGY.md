@@ -1,164 +1,167 @@
 # Display methodology
 
-How the page turns the fitted values of every (model, effort) couple into what the reader sees: the relative values,
-the charts, the frontier, the price curve, the value index, the four tiers and the crown. The fit itself — how each
-couple's cost and quality are estimated from the measurements — is in `METHODOLOGY.md`. Everything here runs in the
-browser from `site/app.js`, on the grids that `site/grids.py` reads from `model/fit-cache.json`, and is pre-rendered at
-build time so that readers without JavaScript see the same conclusions. This file describes the page as published;
-choices under discussion are listed at the end and are not applied.
+How the page turns the fitted values of every (model, effort) couple into what the reader sees: the charts, the
+frontier, the price trend, the value of each couple, the four tiers and the crown. The fit itself — how each couple's
+cost and quality are estimated from the measurements — is in `METHODOLOGY.md`. Everything here runs in the browser from
+`site/app.js`, on the values that `site/grids.py` reads from `model/fit-cache.json`, and is pre-rendered at build time
+so that readers without JavaScript see the same conclusions.
 
-## 1. From the fit to the grids
+## 1. From the fit to the page
 
-- **Values.** The fit gives each couple a centre and a quasi-standard error on the log scale, reference-free
-  (`METHODOLOGY.md` § Output). `site/grids.py` turns them into a cost grid and a quality grid:
-  value = exp(centre − centre_reference), interval = value × exp(∓ quasi-standard error), i.e. the couple's own
-  16–84 % interval.
-- **Reference couple.** Opus 5 @high (`site/config.py`, `GRID_ANCHOR`). It divides every value, so it reads 1.00 on
-  both axes and 100 on the value index. It is a display choice: the fit does not depend on it.
+- **Values.** For each couple the fit gives, on each axis, a centre (posterior median) and a quasi-standard error
+  (the half-width of the couple's own 16–84 % interval, `METHODOLOGY.md` § Output): the log of the cost on a task of
+  typical size, and the latent quality θ, on the model's logit scale. Both are reference-free: the fit's latent values
+  sum to zero.
+- **No reference couple.** No couple divides the others, in the fit or on the page. Cost is shown as a multiple of the
+  cheapest couple on screen; quality is shown as the **expected panel score** of its θ (§ 2).
+- **Every decision is taken on the latent scale**: log cost and θ. The frontier, the price trend, the tier targets and
+  windows, the picks and the crown never depend on how the axes are drawn.
 - **Publication.** A couple is on the page only if at least two publishers measured it; the others stay in the fit,
   in the fit cache and in the data file.
-- **Monte Carlo stability.** Each value's Monte Carlo error, the reference's included, is carried with it; the build
-  reports any value whose error exceeds half of its last displayed digit.
+- **Monte Carlo stability.** Each value's Monte Carlo error is carried with it; the build reports any value whose
+  error exceeds half of its last displayed digit (§ 3; the cheapest couple's error included in every cost multiple).
 - **Build refusals.** The page is not built from a fit that no longer matches its inputs (fingerprint) or that missed
   the convergence criteria. Effort-ladder inversions (a higher rung costing or scoring less) are printed, not corrected.
 
-## 2. Formatting
+## 2. The expected panel score
 
-- Relative cost and quality: two decimals (`1.08×`, `0.75×`) in cards, tables and the matrix.
-- Chart tick labels: two decimals below 1, one below 10, none above (`0.25×`, `2.5×`, `25×`), on round values 1, 2, 5
-  per decade.
-- Value index: an integer.
+θ has no unit of its own. The fit also publishes a **panel curve**: for a couple of latent quality θ, with no effect of
+its own, the score it is expected to reach averaged over the benchmark panel (each benchmark's share of its bound, with
+the panel weights of `METHODOLOGY.md`), posterior median, on 41 points spanning every couple's θ. The page reads it
+linearly in logit between its points. It **labels** θ — axis ticks, cards, tables — and takes no part in a decision.
+It is monotone, so it never changes an order.
 
-## 3. Older models
+A couple's own panel read-out in the fit (`level`, which includes its publisher and task-type effects) can differ
+slightly from the curve at its θ; the page uses the curve, so that a couple's label always matches its place on the axis.
 
-Opus 4.7 and Sonnet 4.6 are hidden by default; a *Older models* switch shows them. Hidden models leave the charts,
-the matrix, the frontier, the price curve, the tiers and the crown: every recommendation is computed over the models
-on screen.
+## 3. Formatting
 
-## 4. The matrix
+- Cost: a multiple of the cheapest couple, two significant digits — one decimal below 10, none above (`1.8×`, `18×`) —
+  in cards, tables, the matrix and the chart ticks (round values 1, 2, 5 per decade). Finer digits would be noise: the
+  Monte Carlo error of a multiple is about 0.3 % (the cheapest couple's included) and its interval about ±10 %.
+- Quality: an expected score in %, one decimal (`65.8 %`); chart gridlines every 5 points (every 10 when they fall
+  closer than 16 px apart on screen; in the compressed low end, a line closer than 16 px to the previous one is
+  skipped).
+- Value against the trend: `3.5× cheaper` / `1.6× dearer`, one decimal below 10.
 
-One row per model, one column per effort; each cell is the relative cost with its interval, coloured on a heat scale.
-Rows are ordered by the model's relative quality at its highest published effort. A model without effort levels
-(Haiku 4.5, *solo*) fills a single merged cell; an unpublished couple is shown as a dash.
+## 4. Older models
 
-## 5. The charts
+Opus 4.7 and Sonnet 4.6 are hidden by default; an *Older models* switch shows them. Hidden models leave the charts,
+the matrix, the frontier, the price trend, the tiers and the crown: every recommendation is computed over the models on
+screen, and the cheapest couple is the cheapest one on screen.
 
-- **Cost axis**: log₁₀ of the relative cost.
-- **Quality axis**: a symmetric log around parity (the reference's quality),
+## 5. The matrix
 
-      T(Q) = sign(Q − 1) · ln(1 + |Q − 1| / 0.045)
+One row per model, one column per effort; each cell is the cost multiple with its interval, coloured on a heat scale
+(log cost, from the cheapest to the dearest couple). Rows are ordered by the expected score of the model at its highest
+published effort. A model without effort levels (Haiku 4.5, *solo*) fills a single merged cell; an unpublished couple
+is shown as a dash.
 
-  It dilates the band near the reference and compresses both tails. Every distance in quality used below (price
-  curve, tier targets and windows, crown) is measured in T.
+## 6. The charts
+
+- **Cost axis**: log₁₀ of the cost multiple.
+- **Quality axis**: θ, linear above the weakest tier target θ*₁ (§ 10). Below it — couples short of today's level —
+  θ is compressed three times: y = θ*₁ + (θ − θ*₁) ⁄ 3. Older and weaker models sit together at the bottom instead of
+  stretching the axis; the top is not compressed. Gridlines at round expected scores (§ 3).
 - One line per model through its effort ladder. Optional **ovals** draw each couple's 16–84 % interval, with separate
-  radii on each side (the interval is asymmetric on the relative scale); the axes always span the ovals, so turning
-  them on does not rescale the chart.
-- Optional **tier bands** shade the quality range each tier owns: band edges midway, in T, between adjacent targets;
-  the outer bands extend half a gap beyond the first and last targets.
+  radii on each side; the axes always span the ovals, so turning them on does not rescale the chart.
+- Optional **tier bands** shade the quality range each tier owns: from its target up to the next one; the outer bands
+  extend half a gap beyond the first and last targets.
 
-## 6. Pareto frontier
+## 7. Pareto frontier, and the couples within reach
 
-A couple is **dominated** when another couple costs no more and scores no less, and is strictly better on one of the
-two (centres compared). The frontier is the set of non-dominated couples, ordered by cost.
+- **By centres**, a couple is dominated when another costs no more and scores no less, and is strictly better on one
+  of the two. The frontier is the set of non-dominated couples, ordered by cost; it is drawn as a line.
+- **Within reach.** A couple beaten by a hair leaves the frontier although the two intervals overlap. With the
+  intervals, couple o beats couple p with probability
 
-## 7. Price curve
+      P(o beats p) = Φ((θ_o − θ_p) ⁄ √(h_θo² + h_θp²)) × Φ((x_p − x_o) ⁄ √(h_xo² + h_xp²))
 
-What a given quality typically costs, fitted on **every** shown couple, dominated ones included:
+  (x = log cost, h the quasi-standard errors; the two axes are fitted separately, so the two factors are
+  independent). A couple is **within reach** of the frontier unless some couple beats it with probability 0.84 or
+  more — the level of the intervals shown everywhere. The frontier by centres is always within reach. The couples
+  within reach are the **candidates** of every pick (§ 10, § 11); on the chart they carry a dashed outline.
 
-    log₁₀(cost) = g(u) = a + b·u + c·(e^{k·u} − 1)/k ,   u = T(Q) − T_min ,   b ≥ 0, c ≥ 0
+## 8. Price trend
 
-- **Monotone by construction**: g′(u) = b + c·e^{k·u} ≥ 0, so the price of quality never falls as quality rises,
-  extrapolation included; the exponential term lets the slope grow near the ceiling. k is chosen on the grid {0.1,
-  0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2, 2.5, 3} by weighted least squares; a, b, c by constrained weighted least
-  squares (the active set of b ≥ 0, c ≥ 0).
-- **Weight by distance to the frontier**: d = log₁₀(cost) − log₁₀(cost of the cheapest couple offering at least this
-  quality), 0 on the frontier; each couple weighs 1 − d/d_max (a frontier couple fully, the farthest couple not at all).
-- **Centres only**: each couple enters at its centre.
+What a given quality typically costs, fitted on **every** shown couple, dominated ones included — the trend of the
+models, not their frontier:
 
-## 8. Value index
+    ln cost = a + λ·θ
 
-The distance of a couple to the price curve, in log-cost:
+- **Weights**: each couple by its uncertainty across the line, 1 ⁄ (h_x² + λ²·h_θ²) — both axes are uncertain
+  (effective variance) —, iterated to the fixed point.
+- **λ** is the market's price of quality: one more unit of θ costs e^λ times more. It is kept ≥ 0 (quality never gets
+  cheaper as it rises).
+- **Straight** on the latent scale: every step of quality costs the same ratio more, wherever it sits. No shape
+  constant to choose.
+- The chart states its weighted R².
 
-    G = g(T(Q))        what the curve charges for this quality
-    C = log₁₀(cost)    what the couple costs
-    r = G − C          positive = cheaper than the going rate
-    value index = 100 · 10^(r − r_reference)
+## 9. Value
 
-A ratio: 100 is the reference couple, 350 means 3.5 times its value for money, 45 means 0.45 times. The reference's
-residual is read from all couples, so the scale holds even when the reference is off the frontier.
+The distance of a couple to the trend, on the cost axis:
 
-## 9. Tiers: best value by task complexity
+    r = (a + λ·θ) − ln cost          positive = cheaper than the going rate
 
-Four tiers — *Grunt work*, *Everyday tasks*, *Advanced reasoning*, *Cutting-Edge thinking* — each with a target
-quality q*, a window and a cost sensitivity γ.
+shown as e^r times **cheaper** (or e^−r times **dearer**) than the trend at its quality. Since the trend is a straight
+line, the same gap read on the quality axis is r ⁄ λ: the couple's θ above what the trend gives for its cost, shown in
+points of expected score. No reference couple: 1× is the trend itself.
 
-- **Targets**: q*₁…q*₄ spread evenly in T from the frontier's weakest couple to its strongest, so they move with the
-  models.
-- **Window width**: σ = gap / (2·√ln 2), gap the spacing of the targets in T: adjacent windows cross at half weight
-  midway between their targets.
-- **Window**: with δ = (T(Q) − T(q*)) / σ, a couple weighs e^(−δ²) below its target and 1 + 0.20·(1 − e^(−2δ)) at or
-  above it: a shortfall is penalised, clearing the bar earns a bonus that saturates at +20 %.
-- **Score**: weight × 10^(G − γ·C), with γ = 1.20, 1.05, 0.95, 0.80 from the lowest tier to the highest (cost weighs
-  more than proportionally on routine work, less on research-grade work).
-- **Pick**: the frontier couple with the highest score. A card shows the neutral value index (γ = 1).
-- **Sliders**: each tier's q* and σ can be moved. q* travels over the frontier's quality range padded by half a gap in
-  T on each side; σ from a quarter to three times its default.
+## 10. Tiers: best value by task complexity
 
-## 10. The crown
+Four tiers — *Grunt work*, *Everyday tasks*, *Advanced reasoning*, *Cutting-Edge thinking* — each with a target θ*
+and a window width σ.
 
-The best overall pick is the frontier couple that stands out most from its neighbours. Along the frontier ordered by
-cost, its **prominence** is 2·r_n − r_(n−1) − r_(n+1) (the endpoints get 0): a second difference of the distance to
-the price curve, a knee in value. The crown is the most prominent couple, weighted by a Gaussian of width 10 in T
-around parity (nearly flat); its card shows its value index.
+- **Targets**: θ*₁ … θ*₄ spread evenly from (1 − e)·min + e·max to (1 − e)·max + e·min of the frontier's θ (frontier
+  by centres), e = 0.05. The bottom tier follows the weakest frontier couple as it rises, the top one the best; each end
+  is drawn 5 % of the span inward so that no target sits on a single couple. The targets depend on the couples only
+  through these two bounds.
+- **Window width**: σ = gap ⁄ (2·√ln 2), gap the spacing of the targets: adjacent windows cross at half weight midway
+  between their targets.
+- **Score**: among the couples within reach (§ 7),
 
-## 11. Text read without the charts
+      score = window(θ) × e^(λ·θ) ⁄ cost,   window = e^(−δ²) below the target, 1 at or above,   δ = (θ − θ*) ⁄ σ
 
-- The header's sentence names the crown with its relative quality and cost.
+  e^(λθ) ⁄ cost is the couple's value against the trend (e^(r + a)): above its target, a couple wins by bringing more
+  quality than the trend charges for its extra cost — a smooth reward, with no bonus constant. Below the target the
+  window penalises the shortfall.
+- **Cost as people perceive it**: cost enters as a ratio (log cost). Perceived price follows the ratio of prices, not
+  their difference (Weber–Fechner; Monroe 1973, *Journal of Marketing Research* 10(1)): twice as dear weighs the same
+  at every price. A power of the cost such as C^0.88 is not used: that exponent is the curvature of the value of gains
+  and losses in prospect theory (Tversky & Kahneman 1992), measured on lotteries, not on prices.
+- **Pick**: the candidate with the highest score. Two tiers may pick the same couple. A card shows the pick's value
+  against the trend (§ 9).
+- **Sliders**: each tier's θ* and σ can be moved. θ* travels over the targets' range padded by half a gap on each
+  side; σ from a quarter to three times its default.
+
+## 11. The crown
+
+The best overall pick is the couple within reach that sits **furthest below the price trend** (largest r, § 9): the
+most quality for its cost against the going rate. Its card shows both readings of the same gap — e^r times cheaper
+than the trend at its quality, and r ⁄ λ above the trend at its cost, in points of expected score. It does not depend
+on its neighbours on the frontier.
+
+## 12. Text read without the charts
+
+- The header's sentence names the crown with its value against the trend and its expected score.
 - `llms.txt` states the crown, the pick of every tier and the highest measured quality.
 - The tier cards, the crown, the Pareto blocks, the tables and the source counts are pre-rendered at build time
   (`site/prerender.js`, Node, no dependency); the browser redraws everything on load.
 
-## 12. Sources table and counts
+## 13. Sources table and counts
 
 Every group is listed with its verified configuration (harness, effort), its kind (effort sweep, cross-model,
 cross-generation) and the couples it links. The header counts sources, benchmarks and measurements. The page's date
 moves only when its content (text, figures, data) changes.
 
-## 13. Constants
+## 14. Constants
 
 | Where | Value | Why |
 |---|---|---|
-| §1 reference couple | Opus 5 @high | a display divisor |
-| §1 publication | ≥ 2 publishers | one publisher's figures cannot be cross-checked |
-| §5 quality axis | symmetric log around parity, constant 0.045 | display |
-| §7 price curve | k on the grid {0.1 … 3}; weight 1 − d/d_max | see §7 |
-| §9 tiers | 4 tiers; γ = 1.20, 1.05, 0.95, 0.80; bonus +20 %, rate 2 per σ | see §9 |
-| §10 crown | Gaussian of width 10 in T around parity | nearly flat |
-
-## 14. Under discussion (not applied)
-
-Reviewed on 30 September 2026. Where the choices above carry an assumption of their own:
-
-- **The quality scale T leaks into decisions.** It is a display choice (a constant, centred on the reference), yet
-  the price curve, the tier targets and windows and the crown measure quality in T: changing the constant or the
-  reference changes the picks. Proposed: decisions on log Q (the natural scale of a ratio); the display scale stays a
-  free, display-only choice — log above today's level, compressed below it (older models grouped, the top left
-  uncompressed).
-- **No reference couple on the page.** Proposed: quality as a share of the best couple, cost as a multiple of the
-  cheapest frontier couple; the value index as a distance to the going rate rather than a ratio to one couple.
-- **Tier targets.** Chosen: bounds (1 − e)·min + e·max and (1 − e)·max + e·min of the frontier's quality, e = 0.05.
-- **Price curve.** It should describe the trend of the models, not the frontier: the weights 1 − d/d_max pull it
-  toward the frontier and depend on the farthest couple. Proposed: fitted on every couple shown, weighted by its
-  interval, in log Q, same monotone form. On the current data it is almost straight in log–log: 1 % more quality
-  costs about 4.3 % more.
-- **Bonus.** The +20 % saturates within one σ, so it acts as a step and outweighs the value differences between
-  neighbouring couples. Proposed: a smooth reward, score = malus × Q^λ ⁄ C, λ the slope of the trend at the tier's
-  target (d ln C ⁄ d ln Q): a couple wins when it brings more quality than the trend charges for its extra cost. No
-  constant to set. On the current data: Sonnet 5.5 high for the first three tiers (it sits furthest below the trend,
-  3.5 times cheaper), Opus 5.5 high for the last.
-- **Frontier.** Centres only: a couple beaten by a hair leaves the frontier although the intervals overlap. A
-  frontier at 84 % probability would put Haiku 4.5 and Opus 5.5 low back on it.
-- **Crown.** The knee depends on the frontier's neighbours (adding a rung can move it) and never picks an endpoint;
-  the alternative is the best value on the frontier (today Sonnet 5.5 high rather than Opus 5.5 xHigh).
-
-A mock-up of the proposal compares the current and proposed charts and picks.
+| § 1 publication | ≥ 2 publishers | one publisher's figures cannot be cross-checked |
+| § 2 panel curve | 41 points, linear in logit between them | labels only |
+| § 6 low-end compression | 3×, below the weakest tier target | display only: older models grouped, the top left as it is |
+| § 7 within reach | not beaten with probability ≥ 0.84 | the level of every interval shown (one standard deviation) |
+| § 8 price trend | straight line in (θ, ln cost), effective-variance weights | the trend of every couple; no shape constant |
+| § 10 targets | e = 0.05 | ends drawn inward by 5 % of the frontier's span |
+| § 10 windows | σ = gap ⁄ (2·√ln 2) | adjacent windows cross at half weight midway |

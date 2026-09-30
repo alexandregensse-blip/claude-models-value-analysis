@@ -17,7 +17,7 @@ def num(x):
 
 def ratio_grid(field, path, models, anchor):
     """Couple-atomic ROBUST grid for a measured field (cost_usd or score). Each (model,effort) node gets a value
-    RELATIVE to GRID_ANCHOR (opus-5@high)=1.0, built ONLY from within-benchmark ratios (never a cross-benchmark value
+    RELATIVE to the anchor couple passed in (opus-5@high in the checks)=1.0, built ONLY from within-benchmark ratios (never a cross-benchmark value
     comparison). Central value AND uncertainty band come from the SAME per-benchmark estimates:
 
       1. Per benchmark, take log(value) of every current (model,effort) couple — explicit efforts + haiku@solo

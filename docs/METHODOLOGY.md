@@ -9,8 +9,6 @@ the examples in parentheses only illustrate it.
 
 - **Couple** — a model at one effort level (*Opus 5 @high*). A model's couples, from its lowest to its highest
   effort, form its **effort ladder**. A model without an effort setting is a single couple labelled *solo*.
-- **Reference couple** — the couple the page divides by to display relative values (1.0 on both axes). It is a
-  display choice only: the fit does not depend on it, and changing it divides every value by a constant.
 - **Row** — one published measurement of one couple: a cost, a score, or both.
 - **Group** — the rows one source measured on the same task under the same configuration (a leaderboard column, a
   system-card chart, a paper's table). Only within a group are two couples directly comparable.
@@ -148,9 +146,9 @@ For every row *r* (group *b*, couple *c* of model *m*, publisher *s*, task type 
 Every standard deviation (s_g below, s_τ, ψ, ω, s_σ) has a weakly informative half-Student-t(3, 0, 2.5) prior; μ_σ is
 flat.
 
-**No reference couple in the fit.** The θ sum to zero: the origin is the average couple, not a chosen one. The page
-divides by a reference couple afterwards; that is a display choice, which changes neither the fit nor the
-uncertainty of any other couple.
+**No reference couple.** The θ sum to zero: the origin is the average couple, not a chosen one. The page does not
+divide by a reference couple either: it shows cost as a multiple of the cheapest couple and quality as an expected
+panel score (`DISPLAY-METHODOLOGY.md`).
 
 **Gains.**
 - Quality: the discrimination a_b/σ_b is pooled across groups, log(a_b/σ_b) ~ N(0, s_g²). A gain estimated from
@@ -217,9 +215,9 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
 
 A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01, the bulk
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
-refuses one that misses any of them. The Monte Carlo error of every displayed value (anchor included) is stored with
+refuses one that misses any of them. The Monte Carlo error of every displayed value is stored with
 it, and the build reports any value whose error exceeds half of its last displayed digit: such a figure could change
-by one unit in a refit with another seed (in the current fit, one: the cost of Fable 5.1 max, 3.09 ± 0.006).
+by one unit in a refit with another seed (in the current fit, none).
 
 ### Fixed values
 
@@ -259,19 +257,19 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 
 ### Output
 
-- **Relative quality** — the couple's expected score averaged over the benchmark panel, divided by the reference
-  couple's. The panel is every group with a bounded score, each benchmark family counting once. The expected score
-  on a panel group is the group's fitted curve at the couple's θ plus its effects there: the publisher and task-type
-  effects the data contain for this couple, and, for those they do not, the average over their distribution
-  (Gauss–Hermite quadrature). It reads: *if every couple sat every benchmark of this report as its publisher ran it,
-  this couple's average score would be this multiple of the reference couple's.*
-- **Relative cost** — exp(θ_c − θ_reference): the cost ratio on a task of typical elasticity.
-- **Centre** — the posterior median of the couple's read-out, divided by the reference couple's: changing the
-  reference divides every value by the same constant.
+- **Quality** — the couple's latent quality θ (quality axis), on which the page decides. With it, the fit publishes
+  the **panel curve**: the expected score, averaged over the benchmark panel, of a couple of latent quality θ with no
+  effect of its own; the page labels θ with it. The panel is every group with a bounded score, each benchmark family
+  counting once. The fit also keeps each couple's own panel read-out (`level`): the group's fitted curve at the
+  couple's θ plus its effects there — the publisher and task-type effects the data contain for this couple, and, for
+  those they do not, the average over their distribution (Gauss–Hermite quadrature). It reads: *if every couple sat
+  every benchmark of this report as its publisher ran it, this couple's average score would be this.*
+- **Cost** — θ of the cost axis: the log of the cost on a task of typical elasticity, up to a common constant. The page
+  shows exp(θ_c − θ_cheapest), a multiple of the cheapest couple.
+- **Centre** — the posterior median.
 - **Interval** (16–84 %) — the couple's own uncertainty, as a quasi-standard error (Firth & de Menezes 2004): one
   half-width per couple, fitted so that for any two couples √(q_i + q_j) reproduces the 16–84 % spread of their
-  difference across the posterior draws. Two couples compare through their two intervals, whichever the reference;
-  the reference couple has its own interval like any other. The approximation error is reported (§ Checks); it errs
+  difference across the posterior draws. Two couples compare through their two intervals. The approximation error is reported (§ Checks); it errs
   on the wide side for neighbouring rungs of one model, whose difference is known more precisely than two separate
   intervals suggest.
 - **New-source interval** (16–84 %) — what one new source would report for the couple on the same read-out: a new
@@ -309,8 +307,8 @@ Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 Se
 
 ## 6. Display
 
-What the page does with the fitted values — the reference couple, the charts and their scales, the Pareto frontier,
-the price curve, the value index, the four tiers and the crown, the sources table — is described in
+What the page does with the fitted values — the charts and their scales, the Pareto frontier, the price trend, the
+value of each couple, the four tiers and the crown, the sources table — is described in
 [`DISPLAY-METHODOLOGY.md`](DISPLAY-METHODOLOGY.md).
 
 ## 7. Limits
