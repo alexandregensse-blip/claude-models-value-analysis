@@ -354,16 +354,15 @@ function tierPicks(){
   const crown=reach.reduce((a,b)=> b.r > a.r ? b : a);
   return {picks,crown,tr};
 }
-// HEAD-TO-HEAD (site/duels.py, read at build time through prerender.js): for every pair of models shown, the tier
-// picks of tierPicks() restricted to the couples of those two models: their own frontier and couples within reach,
-// the price trend of the main page (every couple shown), the same window × e^(λθ) ⁄ cost score.
+// HEAD-TO-HEAD (site/duels.py, read at build time through prerender.js): for each model shown, its best-scoring
+// couple and its best-value couple (furthest below the price trend of the main page), each with the highest usage
+// tier whose target it reaches (the targets of tierDefaults()).
 function duelData(){
-  const all=couples(), tr=fitTrend(all), ms=[...new Set(all.map(p=>p.m))], out={};
-  for(let i=0;i<ms.length;i++) for(let j=i+1;j<ms.length;j++){
-    const rows=all.filter(p=>p.m===ms[i]||p.m===ms[j]), {reach}=frontier(rows);
-    const tscore=(p,T)=>logWindow(p.t,T)+tr.l*p.t-p.x;
-    out[[ms[i],ms[j]].sort().join("|")]=TIERS.map(T=>{ const w=reach.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a);
-      return {key:T.key,name:T.name,m:w.m,e:w.e,c:w.c,s:w.s,r:valueOf(tr,w)}; }); }
+  const all=couples(), tr=fitTrend(all), out={};
+  const tierOf=p=>{ let k=null; TIERS.forEach(T=>{ if(p.t>=T.t) k=T.name; }); return k; };
+  const pick=p=>({e:p.e,c:p.c,s:p.s,r:valueOf(tr,p),tier:tierOf(p)});
+  [...new Set(all.map(p=>p.m))].forEach(m=>{ const rows=all.filter(p=>p.m===m);
+    out[m]={top:pick(rows.reduce((a,b)=>b.t>a.t?b:a)), value:pick(rows.reduce((a,b)=>valueOf(tr,b)>valueOf(tr,a)?b:a))}; });
   return out;
 }
 function drawTiers(){
