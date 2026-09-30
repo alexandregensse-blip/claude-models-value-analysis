@@ -26,6 +26,43 @@ or Sonnet 5.5 row: the three boards closed their votes before enough 5.5 battles
     every model runs with the arena's search tool (key suffix `-search`, flagged) and carries no effort (`default`),
     except Fable 5 at `high` by its display name. Claude 3.5 and 3 keys are not taken (no couple of the catalogue).
 
+### Sixteenth pass, second half: the other lists of leaderboards
+
+Eleven more lists were read the same day (SAILResearch/awesome-ai-leaderboard, onejune2018/Awesome-LLM-Eval,
+wgwang/awesome-LLM-benchmarks, BenchGecko/awesome-llm-benchmarks, git-git-hurrah/awesome-llm-leaderboards,
+johntron/awesome-ai-leaderboards, gray311/awesome-agentic-benchmarks and four smaller ones): 1 778 links, 383 domains
+absent from the data file. Each page was fetched and searched for the recent Claude models; the eleven boards that
+named them went to four Sonnet agents (12 minutes each; they stopped after two to five), and every number was re-read
+from the saved sources before admission. **185 → 192 sources, 551 → 622 benchmarks, 3782 → 4015 measurements.** Opus
+5.5 rests on 524 measurements in 266 benchmarks from 76 sources (484, 229, 74 before), Sonnet 5.5 on 348 in 175 from 42
+(335, 164, 41).
+
+- **Admitted.**
+  - *Mercor* (mercor.com/apex, one page payload): its four APEX boards (APEX-v1, APEX-SWE under two harnesses,
+    APEX-Agents, APEX-Accounting; pass@1, Opus 5.5 and Sonnet 5.5 at medium and max), ten "Mercor-extended" boards
+    (public benchmarks extended with Mercor's own held-out tasks) and twenty open-source benchmarks "independently
+    evaluated by Mercor" (HLE, SWE-bench Verified, SciCode, GDPval, ProgramBench, …). Score only; effort from each
+    row's own field; the extended and open-source cards show their top five models only (flagged). Epoch's
+    re-publication of APEX-Agents stays out: this is the primary.
+  - *MathArena* (matharena.ai, 43 competition tables): accuracy with its 95 % CI and the average cost of one run on
+    one problem, four runs per problem, mean tokens; 32 tables with two Claude couples or more. The four "overall"
+    tables are declared as composites of their component competitions (their own columns), so that a couple measured
+    on a component leaves the overall out. The ⚠️ mark (model released after the competition) is kept as a flag.
+    Opus 5.5 at high on the May, June and August ArXivMath and BrokenArXiv tables.
+  - *SenseBench* (word-sense disambiguation, lexEN v1): accuracy and cost per million items, one group per prompt
+    set (p001–p003; p004 holds a single Claude couple). Haiku 4.5 "(low)" is kept under `req-low`; the Fable 5 row
+    with an Opus 4.8 fallback is flagged. The agent read the cost as a whole-run cost; the column says "Cost / M items".
+  - *YC-Bench* (final net worth after a simulated year, mean of three seeds), *JobBench* (rubric score, OpenCode),
+    *PinchBench* (average score and cost over each model's submissions), *DigBench* (games beaten, two harnesses):
+    older models only, no effort stated (`default`).
+- **Not taken.**
+  - *FrontierBench* is the official Terminal-Bench 4.0 board, already in as `tb40` (the same thirteen rows).
+  - *Prophet Arena*: its Claude forecasters were scored on different events (Opus 5.5 on 18 over three days, Fable
+    5.1 on 2 050), so they did not answer the same task.
+  - *InferenceBench*: the Opus 5.5 (Max) run is described in the text, but the board is drawn in the browser and its
+    numbers were not found.
+  - The 242 JavaScript pages with no Claude name in their HTML were not reached by the agents.
+
 ## The fit after the fourteenth and fifteenth passes: a trapped chain, pre-fit checks
 
 **What happened.** With the new sources the quality axis stopped converging: nutpie ran 35 minutes for R̂ 2.83, the
