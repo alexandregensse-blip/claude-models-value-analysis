@@ -165,3 +165,19 @@ moves only when its content (text, figures, data) changes.
 | § 8 price trend | straight line in (θ, ln cost), effective-variance weights | the trend of every couple; no shape constant |
 | § 10 targets | e = 0.05 | ends drawn inward by 5 % of the frontier's span |
 | § 10 windows | σ = gap ⁄ (2·√ln 2) | adjacent windows cross at half weight midway |
+
+## 15. The head-to-head page
+
+`claude-models-head-to-head.html`, written by `site/duels.py` from the same grids: every pair of the latest model of
+each family (Fable 5.1, Opus 5.5, Sonnet 5.5, Haiku 4.5), and each of them against its predecessor. Costs are
+multiples of the cheapest couple shown on the main page (older models of § 4 left out), scores the expected panel
+score of § 2.
+
+- **At each shared effort level**, axis by axis (not the two-axis probability of § 7): one couple is cheaper, or
+  higher, when the normal law on the difference of the two centres, with the two quasi-standard errors, puts it
+  ahead with probability ≥ 0.84; otherwise the two are level within the uncertainty.
+- **Match**: for the best-scoring couple of one model, the cheapest couple of the other that it does not out-score
+  at 0.84 (it reaches the same quality within the uncertainty, or more). None: the other model's best is given.
+  A match near the threshold can flip with a refit.
+- Ratios read as on the main page: "3.5× cheaper", "1.6× dearer". A model flagged size-sensitive (§ 5) keeps its
+  note.

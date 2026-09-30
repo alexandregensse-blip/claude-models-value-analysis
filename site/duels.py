@@ -1,9 +1,9 @@
 """The head-to-head page: every pair of current Claude models (plus each model against its predecessor), effort by
 effort, from the same fitted values as the main page. Static HTML: no script is needed to read it. Every sentence is
-computed from the grids, with the main page's rule for uncertainty: one couple is ahead of another on an axis when
-the normal law on the difference of the two centres, with the two quasi-standard errors, puts it ahead with
-probability REACH (0.84, the level of the intervals shown everywhere); otherwise the two are level within the
-uncertainty (docs/DISPLAY-METHODOLOGY.md § 7)."""
+computed from the grids, at the 0.84 level of the main page (docs/DISPLAY-METHODOLOGY.md § 7), axis by axis: one
+couple is ahead of another on an axis when the normal law on the difference of the two centres, with the two
+quasi-standard errors, puts it ahead with probability REACH or more; otherwise the two are level within the
+uncertainty. The rules of this page: docs/DISPLAY-METHODOLOGY.md § 15."""
 import html as htmlmod, json, math, os, sys
 
 from config import ROOT, SITE_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER
@@ -19,6 +19,7 @@ DESCRIPTION = ("Every pair of Claude models compared effort by effort: the cost 
 CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-4.5"]           # the latest model of each family
 SUCCESSION = [("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
 REACH = 0.84
+LEGACY = ["opus-4.7", "sonnet-4.6"]                                    # hidden on the main page (site/app.js)
 EFF = {"low": "low", "medium": "medium", "high": "high", "xhigh": "xHigh", "max": "max", "solo": "its only setting"}
 
 Phi = lambda z: 0.5 * (1 + math.erf(z / math.sqrt(2)))
@@ -42,7 +43,7 @@ def fmt_ratio(r):
 
 def build(CG, QG, PANEL):
     """Returns (html of the page body, plain summary lines for llms.txt)."""
-    x0 = min(v[0] for es in CG.values() for v in es.values())            # the cheapest couple: cost 1.0×
+    x0 = min(v[0] for m, es in CG.items() if m not in LEGACY for v in es.values())   # the cheapest couple shown: 1.0×
     def couple(m, e):
         x, hx = CG[m][e]; t, ht = QG[m][e]
         return dict(m=m, e=e, x=x, hx=hx, t=t, ht=ht, c=math.exp(x - x0), s=100 * panel_score(PANEL, t))
@@ -86,19 +87,27 @@ def build(CG, QG, PANEL):
             span = fmt_ratio(lo) if abs(hi / lo - 1) < 0.05 else f"{fmt_ratio(lo)} to {fmt_ratio(hi)}"
             pts = lambda g: f"{abs(g):.1f} point{'' if f'{abs(g):.1f}' == '1.0' else 's'} {'higher' if g >= 0 else 'lower'}"
             glo, ghi = min(gaps), max(gaps)
-            gspan = pts(glo) if abs(ghi - glo) < 0.05 else f"between {pts(glo)} and {pts(ghi)}"
+            if abs(ghi - glo) < 0.05:
+                gspan = pts(glo)
+            elif (glo >= 0) == (ghi >= 0):                               # same sign: "0.7 to 12.3 points higher"
+                g1, g2 = sorted((abs(glo), abs(ghi)))
+                gspan = f"{g1:.1f} to {g2:.1f} points {'higher' if glo >= 0 else 'lower'}"
+            else:
+                gspan = f"between {pts(glo)} and {pts(ghi)}"
             lines.append(f"At the same effort ({', '.join(EFF[e] for e in common)}), {A} costs {span} what {B} costs "
                          f"and scores {gspan} on the benchmark panel.")
-        else:
+        elif "solo" in (rungs(a) + rungs(b)):
             single = b if rungs(b) == ["solo"] else a
             lines.append(f"{L(single)} is measured at a single setting, with no effort levels, so the two are "
                          f"compared through their cheapest matches.")
+        else:
+            lines.append(f"{A} and {B} share no measured effort level, so they are compared through their cheapest matches.")
         for x, y in ((a, b), (b, a)):                                    # the cheapest match, both ways
             best = max((couple(x, e) for e in rungs(x)), key=lambda p: p["t"])
             m = match(best, y)
             if m:
                 ratio = m["c"] / best["c"]
-                rel = (f"{fmt_ratio(1 / ratio)} less" if ratio < 1 else f"{fmt_ratio(ratio)} more")
+                rel = (f"{fmt_ratio(1 / ratio)} cheaper" if ratio < 1 else f"{fmt_ratio(ratio)} dearer")
                 lines.append(f"To match {name(best)} ({best['s']:.1f} %, cost {fmt_cost(best['c'])}), the cheapest "
                              f"{L(y)} setting is {EFF[m['e']] if m['e'] != 'solo' else 'its only setting'} "
                              f"({m['s']:.1f} %, cost {fmt_cost(m['c'])}): {rel} per task.")
@@ -106,6 +115,10 @@ def build(CG, QG, PANEL):
                 strongest = max((couple(y, e) for e in rungs(y)), key=lambda q: q["t"])
                 lines.append(f"No {L(y)} setting reaches {name(best)} ({best['s']:.1f} %): {L(y)}'s best is "
                              f"{EFF[strongest['e']]} at {strongest['s']:.1f} %.")
+        for m in (a, b):
+            if MODELS[m].get("flag_task_size"):
+                lines.append(f"{L(m)}'s cost is size-sensitive: a verbose model, its cost swings widely between short "
+                             f"and long agentic tasks, hence its wide interval.")
         summary.append(f"{A} vs {B}: " + " ".join(lines))
         table = ("" if not common else
                  f'<div class="chartbox"><table><thead><tr><th>Effort</th><th>{esc(A)} cost</th><th>{esc(B)} cost</th>'
@@ -125,7 +138,7 @@ def build(CG, QG, PANEL):
   <nav class="card pad" aria-label="Pairs"><ul class="tight">{''.join(toc)}</ul></nav>
   {''.join(sections)}
   <section id="how"><div class="card pad"><h2>How to read these comparisons</h2>
-    <p>The values are the ones the <a href="{SITE_URL}">main page</a> shows, fitted from public measurements taken on the same tasks. One model is <b>cheaper</b> or <b>higher</b> than the other at an effort level when the fitted difference puts it ahead with 84&nbsp;% probability, the level of the intervals shown everywhere on the site; otherwise the two are <b>level within the uncertainty</b>. A <b>match</b> is the cheapest setting of the other model that the first does not out-score at that level. Costs count the whole task (tokens at list price, as each source measured them), not the price per token.</p>
+    <p>The values are the ones the <a href="{SITE_URL}">main page</a> shows, fitted from public measurements taken on the same tasks. One model is <b>cheaper</b> or <b>higher</b> than the other at an effort level when the fitted difference puts it ahead with at least 84&nbsp;% probability, the level of the intervals shown everywhere on the site; otherwise the two are <b>level within the uncertainty</b>. A <b>match</b> is the cheapest setting of the other model that the first does not out-score at that level. Costs are what a whole task cost, as each source measured it (the run's actual spend, cache included), not the price per token.</p>
   </div></section>
   </main>
   <div class="foot">
