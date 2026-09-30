@@ -7,7 +7,9 @@
      recognised as republications, whose costs agree within 1 % on every shared couple (the same runs cost the same
      whatever the metric), or, without costs, whose scores do, are probably one set of runs counted twice; they are
      merged or told apart by hand.
-  3. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
+  3. A fraction above 1 (warning): a metric labelled as a fraction (of a peak, of a reference) whose values exceed 1
+     is not bounded; it is read as is, and the label should say so.
+  4. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
      three minutes; a chain left in another region shows there as R̂ far above 1. Above SMOKE_RHAT the full fit is
      not started.
 
@@ -71,6 +73,18 @@ def twin_metrics(data):
     return out
 
 
+def fraction_above_one(data):
+    out = collections.defaultdict(list)
+    for r in data:
+        try:
+            s = float(r["score"])
+        except ValueError:
+            continue
+        if "fraction" in r["score_metric"].lower() and s > 1:
+            out[(r["group"], r["score_metric"])].append(s)
+    return [f"{g} ({m}): {len(v)} values above 1, up to {max(v):g}" for (g, m), v in sorted(out.items())]
+
+
 def smoke(seed=11):
     """Short quality fit; returns (R̂ max, worst parameters)."""
     from catalog import MODEL_ORDER
@@ -88,6 +102,8 @@ def main(run_smoke=False):
         print("!! label contradicted by value:", e)
     for t in twins:
         print("?? same runs under two metrics?", t)
+    for f in fraction_above_one(data):
+        print("?? fraction above 1:", f)
     if errors:
         return 1
     if run_smoke:

@@ -263,10 +263,15 @@ def load(path, models, field="score"):
         for x in rows:
             v = -x["raw"] if x["metric"] in LOWER_IS_BETTER else x["raw"]
             x["h"] = 1.0
+            x["cens"] = 0
             if k == "logit":
                 if n_steps is None:
                     n_steps = scoring_steps([y["raw"] / bound(y["metric"]) for y in rows])
-                q = empirical_q(x["raw"] / bound(x["metric"]), n_steps)
+                p = x["raw"] / bound(x["metric"])
+                x["cens"] = 1 if p >= 0.9995 else -1 if p <= 0.0005 else 0
+                if x["cens"]:                                           # at the bound: censored, "at least (most) the
+                    p = 1 - 0.5 / n_steps if x["cens"] > 0 else 0.5 / n_steps   # value half a scoring step inside"
+                q = empirical_q(p, n_steps)
                 x["y"] = math.log(q / (1 - q))
                 x["h"] = 0.5 / math.sqrt(q * (1 - q))
                 x["dy"] = x["prec"] / bound(x["metric"]) * n_steps / (n_steps + 1) / (q * (1 - q))   # delta method
@@ -336,6 +341,7 @@ def stan_data(groups, axis):
         N=len(entries), G=len(names), C=len(couples), cost=int(axis == "cost"),
         grp=[b + 1 for b, _ in entries], cpl=[ci[x["couple"]] + 1 for _, x in entries],
         z=[x["z"] for _, x in entries], h=[x["h"] for _, x in entries], d=[x["d"] for _, x in entries],
+        cens=[x.get("cens", 0) for _, x in entries],
         ea=[x["ea"] for _, x in entries],
         L1=len(levels["pub_couple"]), L2=len(levels["pub_model"]), L3=len(levels["couple_task"]),
         k1=[lvl("pub_couple", x["publisher"], x["couple"], x["task"]) for _, x in entries],
