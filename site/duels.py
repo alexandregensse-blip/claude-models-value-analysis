@@ -361,7 +361,7 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
   font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.1}
 .duel-legend .ln{display:inline-block;width:26px;height:4px;border-radius:2px;vertical-align:middle;margin-right:10px}
 .duel-legend .vs{font-size:.6em;color:var(--faint);font-variant:normal}
-.duel-same{margin:4px 0 20px;font-size:clamp(16px,1.7vw,18px);line-height:1.45;color:var(--muted)}.duel-same b{color:var(--ink)}
+.duel-same{margin:4px 0 36px;font-size:clamp(16px,1.7vw,18px);line-height:1.45;color:var(--muted)}.duel-same b{color:var(--ink)}
 .cmp-tbl .tbl-title{margin-top:0}
 .tbl-title{margin:26px 0 10px;font-size:15px;font-weight:600;font-family:Georgia,serif;font-variant:small-caps}
 .tbl-title span{display:block;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-variant:normal;font-size:12px;font-weight:400;color:var(--muted);margin-top:2px}
