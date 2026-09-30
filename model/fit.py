@@ -10,7 +10,9 @@ converged = false, and the site refuses it; so does it a fit whose inputs have c
 
 An axis whose model data (the rows it sees, after preparation) and model code are unchanged since the cached fit, and
 whose cached fit converged, is not refitted: adding a quality-only source does not redo the cost axis. `--all` refits
-both axes regardless."""
+both axes regardless. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
+same runs under two metrics are reported; a 3-minute smoke fit of the quality axis must reach R̂ ≤ 1.5); `--no-smoke`
+skips the smoke fit."""
 import hashlib, json, os, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -45,7 +47,10 @@ def axis_fingerprint(data):
     return h.hexdigest()
 
 
-def main(refit_all=False):
+def main(refit_all=False, smoke=True):
+    import precheck
+    if precheck.main(run_smoke=smoke):                               # data errors, then a 3-minute smoke fit
+        sys.exit("!! pre-fit checks failed (model/precheck.py): the fit is not started")
     out = dict(inputs=INPUTS, fingerprint=fingerprint(), seed=SEED, sampler=lqm.SAMPLER, diagnostics={})
     try:
         old = json.load(open(FIT_CACHE))
@@ -76,4 +81,4 @@ def main(refit_all=False):
 
 
 if __name__ == "__main__":
-    main(refit_all="--all" in sys.argv[1:])
+    main(refit_all="--all" in sys.argv[1:], smoke="--no-smoke" not in sys.argv[1:])
