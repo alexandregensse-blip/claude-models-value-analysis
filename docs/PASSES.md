@@ -5,13 +5,51 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the fourteenth and fifteenth passes: a trapped chain, pre-fit checks
+
+**What happened.** With the new sources the quality axis stopped converging: nutpie ran 35 minutes for R̂ 2.83, the
+CmdStan restart 8 more for R̂ 1.016. A three-minute fit (4 × 500 + 500) reproduced it. Two chains out of four sat in a
+region where the spread of the groups' gains (s_g) reached 4–6, a few groups became near-perfect discriminators and
+Haiku 4.5 went to θ −28; their log density was −905 and −3385 against −510 for the two others: not another
+explanation of the data but a trap. nutpie starts every chain at random in (−2, 2) on the unconstrained scale and
+ignores given starting points (checked in its source: `init_mean` is not passed to Stan models), so s_g started
+anywhere in 0.14–7.4; the new data made the funnel of large s_g easier to fall into. Not the cause, tested in short
+fits: dropping the new Haiku rows, a τ shared by all couples, a narrower prior on s_g.
+
+**What changed.**
+- *Writing of the model:* s_g is sampled on its log scale with its origin at a plausible value (log s_g = −0.5, unit
+  0.5): same prior, same density; random starts now fall around s_g 0.2–1.6. Short fit R̂ 2.8 → 1.10.
+- *Pre-fit checks* (`model/precheck.py`, run by `model/fit.py`): a score beyond its label's bound stops the run
+  (two found and rewritten on their labels' scale: `nnrlog-game` 100/50 → 2/1 of 2, `forgep2` 100 → 10 of 10); the
+  same runs under two metrics are reported (same cost within 1 % on 3 shared couples or more, republications
+  already recognised aside; one report, `ctala`/`ctala-cc`, whose costs are list-price assumptions, not duplicates);
+  a fraction above 1 is reported (KernelBench); a 3-minute smoke fit must reach R̂ ≤ 1.5 before the full fit.
+- *Tried and withdrawn:* reading a score at 0 % or 100 % as censored ("at least the value half a step inside the
+  bound"). It kept every couple's order, moved the top couples' θ by 0.1–0.35 (intervals ±0.4–0.8) and the scores by
+  0.2–0.5 point, and made the quality axis 2.5 times slower (27 min against 9).
+
+**Fit of 30 Sep 2026** (smoke 1.14; cost 472 s, R̂ 1.002, ESS 3158; quality 624 s, R̂ 1.009, ESS 410; no
+divergence). Picks before → after the two salvos:
+
+| | before | after |
+|---|---|---|
+| Crown | Sonnet 5.5 high, 4.3× cheaper than the trend | Sonnet 5.5 medium, 5.0× |
+| Grunt work | Sonnet 5.5 high | Sonnet 5.5 medium |
+| Everyday tasks | Sonnet 5.5 high | Sonnet 5.5 high |
+| Advanced reasoning | Opus 5.5 medium | Sonnet 5.5 high |
+| Cutting-Edge thinking | Opus 5.5 high | Opus 5.5 high |
+
+Sonnet 5.5 xHigh joins the frontier and Sonnet 5.5 max comes within reach; Haiku 4.5 and Opus 5.5 low leave it.
+
 ## Fifteenth pass: Opus 5.5 and Sonnet 5.5, fourth salvo
 
 Five Sonnet agents with a 12-minute budget each (leaderboards, GitHub and Hugging Face, English, Japanese, other
 languages), 30 Sep 2026; each stopped after two or three minutes and was resumed once with an absolute end time.
 Every number was re-read at its source; the agents' "new" Vals boards were already in, and their draft Epoch list
 was redone from the archive itself.
-**__COUNTS15__**
+**172 → 185 sources, 491 → 548 benchmarks, 3435 → 3758 measurements over the two salvos** (fourteenth and
+fifteenth passes together, counted as the page counts them). Opus 5.5 rests on 484 measurements in 229 benchmarks from
+74 sources (432, 184, 60 before), Sonnet 5.5 on 335 in 164 from 41 (280, 122, 29).
 
 - **Admitted.**
   - *Epoch AI's own evaluations* (benchmarking-hub archive, read 30 Sep): fifteen benchmarks with effort in the
@@ -41,7 +79,7 @@ Five Sonnet agents on narrow axes, 30 Sep 2026 (two leaderboard lists, GitHub an
 the non-English web), each resumed once when it stopped after two or three minutes. Every number below was re-read
 at its source before entering the data file; several agent drafts were corrected (tables read from the articles'
 images, efforts taken from the configuration, groups split by task).
-**__COUNTS__**
+Counts and effect: see the fifteenth pass, fitted together.
 
 - **Admitted.**
   - *bug-hunt-bench*: Sonnet 5.5 is now a mean of three runs on all five rungs, like Opus 5.5 (tokens averaged
@@ -75,8 +113,6 @@ images, efforts taken from the configuration, groups split by task).
   SWE-bench, swe-rebench, DeepSWE, OSWorld, Sonar (which has added Opus 5.5, not Sonnet 5.5 yet), Hugging Face;
   SEAL, aipricing.guru and marginlab unreachable; restatements of the launch figures in English, Japanese, Chinese
   and Korean.
-
-__IMPACT__
 
 ## Method change: the display without a reference couple, decided on the latent scale
 
