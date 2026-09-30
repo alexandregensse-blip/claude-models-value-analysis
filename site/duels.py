@@ -268,11 +268,14 @@ def build(CG, QG, PANEL):
     body = f"""<div class="wrap">
   <header class="hero">
     {corner}
-    <div class="eyebrow">Data analysis · <a href="{SITE_URL}">{esc(SITE_NAME)}</a> · updated __GENDATE__</div>
+    <div class="eyebrow">Data analysis · <a href="{SITE_URL}">{esc(SITE_NAME)}</a></div>
     <h1>Claude models head-to-head <span class="h1-line">Fable vs Opus vs Sonnet vs Haiku</span></h1>
     <div class="hero-row">
       <div class="lede-col">
         <p class="lede">Each pair of Claude models compared effort by effort, on the same scales as the <a href="{SITE_URL}">main comparison</a>: how much more one costs than the other, how much quality it buys, and the cheapest setting of each that matches the other's best.</p>
+      </div>
+      <div class="meta meta-side">
+        <div><span class="k">Updated</span><br><b>__GENDATE__</b></div>
       </div>
     </div>
   </header>
