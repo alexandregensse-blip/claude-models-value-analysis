@@ -175,11 +175,25 @@ def build(CG, QG, PANEL):
             if len(pts_) > 1:
                 o.append('<path d="' + " ".join(("M" if i == 0 else "L") + f"{X(p['c']):.1f} {Y(p['s']):.1f}" for i, p in enumerate(pts_))
                          + f'" fill="none" style="stroke:{col}" stroke-width="2.4" stroke-linejoin="round"/>')
-            for p in pts_:
-                x, y = X(p["c"]), Y(p["s"])
+            xy = [(X(p["c"]), Y(p["s"])) for p in pts_]
+            for k, p in enumerate(pts_):
+                x, y = xy[k]
                 o.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4.4" style="fill:{col};stroke:var(--panel)" stroke-width="1.6"/>')
-                if p["e"] != "solo":
-                    o.append(f'<text x="{x:.1f}" y="{y-10 if up else y+19:.1f}" text-anchor="middle" font-size="{10.5*fs:.1f}" style="fill:{col}">{EFF[p["e"]]}</text>')
+                if p["e"] == "solo":
+                    continue
+                # the label sits off the curve, along its normal at the point: above it for the first model, below it
+                # for the second; a halo in the card's colour keeps it readable where it crosses a line
+                (x0, y0), (x1, y1) = xy[max(k - 1, 0)], xy[min(k + 1, len(xy) - 1)]
+                tx, ty = x1 - x0, y1 - y0
+                n = math.hypot(tx, ty) or 1.0
+                nx, ny = -ty / n, tx / n                                 # a normal; flipped to point up (or down)
+                if (ny > 0) == up:
+                    nx, ny = -nx, -ny
+                off = 15 * fs
+                lx, ly = x + nx * off, y + ny * off + 4 * fs
+                anchor = "middle" if abs(nx) < 0.35 else ("start" if nx > 0 else "end")
+                o.append(f'<text x="{lx:.1f}" y="{ly:.1f}" text-anchor="{anchor}" font-size="{10.5*fs:.1f}" font-weight="600" '
+                         f'style="fill:{col};stroke:var(--panel);stroke-width:{4*fs:.1f}px;stroke-linejoin:round;paint-order:stroke">{EFF[p["e"]]}</text>')
             last = pts_[-1]
             if not compact: o.append(f'<text x="{X(last["c"])+12:.1f}" y="{Y(last["s"])+(-6 if up else 14):.1f}" font-size="{13.5*fs:.1f}" font-weight="600" style="fill:{col}">{esc(L(m))}</text>')
         o.append("</svg>")
