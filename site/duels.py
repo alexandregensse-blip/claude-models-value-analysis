@@ -210,7 +210,7 @@ def build(CG, QG, PANEL, PICKS):
             if f["kind"] == "match" and f["ratio"] < 1 and f["m"]["m"] != f["best"]["m"]:
                 return (f'<p class="duel-same"><b style="color:var({MODELS[f["m"]["m"]]["colour"]})">{esc(L(f["m"]["m"]))} at {CAP[f["m"]["e"]] or "its only setting"}</b> '
                         f'gives the same quality as <b style="color:var({MODELS[f["best"]["m"]]["colour"]})">{esc(L(f["best"]["m"]))} at {CAP[f["best"]["e"]] or "its only setting"}</b> '
-                        f'({f["m"]["s"]:.1f} vs {f["best"]["s"]:.1f}&nbsp;%, {("a gap within the margin of error" if f["m"]["s"] < f["best"]["s"] else "or better")}) for <b>{fmt_ratio(1 / f["ratio"])} less</b> per task.</p>')
+                        f'for <b>{fmt_ratio(1 / f["ratio"])} less</b> per task.</p>')
         return ""
 
     def tiles(d):
@@ -241,11 +241,11 @@ def build(CG, QG, PANEL, PICKS):
     notes = lambda d: "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"])
 
     def view(d):                                                         # legend, the headline, chart and table, then each model
-        return (f'<div class="card pad cmp-view">{legend(d)}{same(d)}'
-                f'<div class="cmp-grid"><div class="chartbox">{chart(d, compact=True)}</div>'
-                f'<div class="cmp-tbl"><h4 class="tbl-title">By effort level '
+        return (f'<div class="card pad cmp-view"><div class="cmp-grid">'
+                f'<div class="cmp-left">{legend(d)}<div class="chartbox">{chart(d, compact=True)}</div></div>'
+                f'<div class="cmp-right">{same(d)}<div class="cmp-tbl"><h4 class="tbl-title">By effort level '
                 f'<span>cost per task × the cheapest couple · expected score on the benchmark panel</span></h4>{table(d, fold=False)}</div></div>'
-                f'{tiles(d)}{notes(d)}</div>')
+                f'</div>{tiles(d)}{notes(d)}</div>')
 
     def block(d):
         return f'<section id="{d["sid"]}" class="block">{view(d)}</section>'
@@ -371,10 +371,15 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .cmp-empty{text-align:center;margin-top:18px}
 @media (prefers-reduced-motion:reduce){.chip{transition:none}}
 #cmp-out{margin-top:30px}
-.cmp-grid{display:grid;grid-template-columns:1fr;gap:18px 36px;align-items:center;margin-top:8px}
+.cmp-grid{display:grid;grid-template-columns:1fr;gap:22px 36px;align-items:stretch}
+.cmp-left,.cmp-right{display:flex;flex-direction:column;min-width:0}
+.cmp-left .chartbox{flex:1;display:flex;align-items:center}
+.cmp-right .cmp-tbl{flex:1;display:flex;flex-direction:column}
+.cmp-right .cmp-tbl .chartbox{flex:1}
+.cmp-right .duel-tbl{height:100%}
 @media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
-.duel-legend{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 22px;margin:2px 0 14px;
-  font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(22px,2.8vw,30px);line-height:1.1}
+.duel-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin:0 0 12px;
+  font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.1}
 .duel-legend .ln{display:inline-block;width:26px;height:4px;border-radius:2px;vertical-align:middle;margin-right:10px}
 .duel-legend .vs{font-size:.6em;color:var(--faint);font-variant:normal}
 .duel-models{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}
@@ -383,7 +388,7 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .model-card .mc-name{font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:19px;margin-bottom:6px}
 .model-card p{margin:.45em 0 0;font-size:14.5px;color:var(--muted)}.model-card p b{color:var(--ink)}
 .model-card .tier-q{display:block;margin-bottom:1px}
-.duel-same{margin:0 auto 18px;max-width:62ch;text-align:center;font-size:clamp(16px,1.8vw,18px);color:var(--muted)}.duel-same b{color:var(--ink)}
+.duel-same{margin:4px 0 20px;font-size:clamp(16px,1.7vw,18px);line-height:1.45;color:var(--muted)}.duel-same b{color:var(--ink)}
 .cmp-tbl .tbl-title{margin-top:0}
 .tbl-title{margin:26px 0 10px;font-size:15px;font-weight:600;font-family:Georgia,serif;font-variant:small-caps}
 .tbl-title span{display:block;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-variant:normal;font-size:12px;font-weight:400;color:var(--muted);margin-top:2px}
