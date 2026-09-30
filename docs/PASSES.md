@@ -5,6 +5,34 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Seventeenth pass: the boards drawn in the browser, and four new axes
+
+Nine Sonnet agents with 12 minutes each, 30 Sep 2026. Four took the 43 JavaScript leaderboards of the sixteenth pass's
+lists that looked current (their data found behind the page: bundles, embedded payloads, JSON files, the repository
+behind a github.io page); five searched new axes: InferenceBench and the last 48 hours on Opus 5.5 and Sonnet 5.5, other
+directories of leaderboards, coding-agent vendors, September arXiv papers, companies' own evaluations. Every number was
+re-read from the saved sources. **192 → 205 sources, 622 → 636 benchmarks, 4015 → 4073 measurements.** Opus 5.5 rests on
+530 measurements in 268 benchmarks from 78 sources, Sonnet 5.5 on 353 in 176 from 43.
+
+- **Admitted.**
+  - *NonoBench* (30 nonogram puzzles): puzzles solved at every effort for Opus 5.5, Sonnet 5.5 and Fable 5.1 (low to
+    max), Opus 4.5 low/high, Sonnet 4.5 without and with reasoning; the total cost of the 30 puzzles for each model's
+    best configuration.
+  - *InferenceBench* (agents tuning LLM inference serving in Claude Code): geometric-mean speed-up over PyTorch, one group
+    per benchmark prompt (v1.0.1, which holds Opus 5.5 at max, and v1.0); an older Claude Code build of Opus 4.7 superseded
+    on the board is left out.
+  - *arXiv 2609.13463* (root-cause attribution on TRAIL, Claude Agent SDK): Opus 4.8 and Sonnet 5 at low, high and max,
+    Fable 5 at default, weighted F1 at turn 4 and cumulative cost per trajectory, read from the vector coordinates of
+    figures 4 and 5 (the points the text states agree to the third decimal).
+  - Older models, no 5.5: *EQ-Bench 4* (Elo), *EvoClaw* (score and total cost, current board v1.0.2; the 1M-context and
+    OpenHands rows left out), *SecLens* (score and cost per task), *SCBench* (strict solve and cost per checkpoint),
+    *IMProofBench*, *MM-DeepResearch-Bench*, *Labelbox Implicit Intelligence*, *Claw-Bench V1*, *CL-Bench*, *BIRD*,
+    *Claw-Eval-Live*, *SWE-bench-Live Go (AMI Agent)*.
+- **Not taken.** benchlm.ai and kingy.ai restate Artificial Analysis; Devin's posts restate FrontierCode (already in with
+  every effort); avenox's launch-night builds give one model per task; Cloudflare's benchmark holds one Claude model;
+  Scale's PRBench board is behind a bot check; arXiv 2609.27571 compares on a single failed task; the companies' blogs
+  (Harvey, GitLab, Datadog, Arize, …) test pre-5.5 models or announce availability only.
+
 ## Sixteenth pass: the sources cited by the comparison sites
 
 A list of comparison sites (github.com/metaory/awesome-llm-leaderboards, 27 sites, read 30 Sep 2026) was read for the

@@ -2844,6 +2844,86 @@
    "label": "DigBench (Claude Code)",
    "type": "xmodel",
    "config": "DigBench, games to beat, Claude Code · score in % with its interval and runs in the flags; no effort in this table (default); no cost; read 2026-09-30 ✓"
+  },
+  "inferencebench-p101": {
+   "label": "InferenceBench (prompt v1.0.1 (†))",
+   "type": "xmodel",
+   "config": "InferenceBench, agents tuning LLM inference serving in Claude Code · geometric-mean speed-up over the PyTorch eager baseline across four scenarios, ±SEM over seed-pair runs in the flags; runs with the benchmark prompt v1.0.1 (†) only; effort from the model name; no cost; read 2026-09-30 ✓"
+  },
+  "inferencebench-p10": {
+   "label": "InferenceBench (prompt v1.0)",
+   "type": "xmodel",
+   "config": "InferenceBench, agents tuning LLM inference serving in Claude Code · geometric-mean speed-up over the PyTorch eager baseline across four scenarios, ±SEM over seed-pair runs in the flags; runs with the benchmark prompt v1.0 only; effort from the model name; no cost; read 2026-09-30 ✓"
+  },
+  "eqbench4": {
+   "label": "EQ-Bench 4",
+   "type": "xmodel",
+   "config": "EQ-Bench 4, emotional-intelligence conversations judged pairwise by an LLM panel · Elo (soft Bradley-Terry) with its interval and scenario count in the flags; no effort stated (default); no cost; read 2026-09-30 ✓"
+  },
+  "evoclaw": {
+   "label": "EvoClaw",
+   "type": "xmodel",
+   "config": "EvoClaw, long-horizon repository evolution in Claude Code, current board v1.0.2 · overall score in %, total cost of the run (USD) and output tokens; effort from the board's label (Opus 4.8 max 1M, Opus 4.7 xhigh; none stated otherwise); the Opus 4.7 1M-context and OpenHands rows left out (another configuration); read 2026-09-30 ✓"
+  },
+  "seclens": {
+   "label": "SecLens",
+   "type": "xmodel",
+   "config": "SecLens, security vulnerability detection graded for five stakeholder roles · leaderboard score, cost per task (USD); no effort stated (default); read 2026-09-30 ✓"
+  },
+  "improofbench": {
+   "label": "IMProofBench",
+   "type": "xmodel",
+   "config": "IMProofBench (ETH Zürich), research-level proof writing, 47 questions · score in %; no effort stated (default); no cost; read 2026-09-30 ✓"
+  },
+  "mmdeepresearch": {
+   "label": "MM-DeepResearch-Bench",
+   "type": "xmodel",
+   "config": "MM-DeepResearch-Bench, multimodal deep-research reports with web search · overall score (%) of ten judged metrics; no effort stated (default); no cost; read 2026-09-30 ✓"
+  },
+  "nonobench": {
+   "label": "NonoBench",
+   "type": "xmodel",
+   "config": "NonoBench, 30 nonogram puzzles · puzzles solved per effort level (the board's effort-ladder chart); total cost of the 30 puzzles for each model's best configuration (leaderboard rows); Sonnet 4.5 reasoning off/on as nothink/default; read 2026-09-30 ✓"
+  },
+  "scbench": {
+   "label": "SCBench",
+   "type": "xmodel",
+   "config": "SCBench, agentic coding through successive checkpoints in Claude Code · strict solve rate in %, cost per checkpoint (USD); effort from the model label (High); the Claude Code version differs per row; read 2026-09-30 ✓"
+  },
+  "labelbox-implicit": {
+   "label": "Labelbox · Implicit Intelligence",
+   "type": "xmodel",
+   "config": "Labelbox leaderboards, Implicit Intelligence · score as printed (integer), top five models only; effort from the label; read 2026-09-30 ✓"
+  },
+  "clawbench-v1": {
+   "label": "Claw-Bench V1 (Hermes)",
+   "type": "xmodel",
+   "config": "Claw-Bench V1, agent tasks in the Hermes harness, 153 tasks · reward in %; no effort stated (default); no cost; read 2026-09-30 ✓"
+  },
+  "clbench": {
+   "label": "CL-Bench",
+   "type": "xmodel",
+   "config": "CL-Bench, learning from context · overall score on 0–1 with its std in the flags; Opus 4.5 with and without thinking as default/nothink; no cost; read 2026-09-30 ✓"
+  },
+  "birdsql": {
+   "label": "BIRD (text-to-SQL)",
+   "type": "xmodel",
+   "config": "BIRD, text-to-SQL, baseline prompting · test execution accuracy in %, dev in the flags; no effort stated (default); no cost; read 2026-09-30 ✓"
+  },
+  "clawevallive": {
+   "label": "Claw-Eval-Live",
+   "type": "xmodel",
+   "config": "Claw-Eval-Live, 105 enterprise-workflow tasks · pass rate in %, average score and tokens in the flags; no effort stated (default); no cost; read 2026-09-30 ✓"
+  },
+  "swelive-go-ami": {
+   "label": "SWE-bench-Live Go (AMI Agent)",
+   "type": "xmodel",
+   "config": "SWE-bench-Live, Go set (138 tasks), AMI Agent scaffold · resolved in %; no effort stated (default); no cost; read 2026-09-30 ✓"
+  },
+  "arxiv-2609.13463-trail": {
+   "label": "arXiv 2609.13463 · TRAIL root-cause attribution",
+   "type": "sweep",
+   "config": "Root-cause attribution of agent failures on TRAIL, Continual Search judge in the Claude Agent SDK, turn 4 · weighted F1 and cumulative mean cost per trajectory (USD), read from the vector coordinates of figures 4–5 (they agree with the numbers the text states); Opus 4.8 and Sonnet 5 at low/high/max (figure 5), Fable 5 at default settings (figure 4, whose Opus and Sonnet points are figure 5's high runs); read 30 Sep 2026 ✓"
   }
  },
  "merge": {
