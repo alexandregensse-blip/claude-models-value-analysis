@@ -146,8 +146,9 @@ def build(CG, QG, PANEL, PICKS):
                 f'<div class="tier-top"><div class="tier-left"><span class="tier-pick">{pick[0]}</span>'
                 f'<span class="tier-nums">{pick[1]}</span><span class="tier-nums">{pick[2]}</span></div>{yld}</div></a>')
 
-    def chart(d):
-        W, H, mL, mR, mT, mB = 1100, 400, 66, 150, 22, 64
+    def chart(d, compact=False):
+        W, H, mL, mR, mT, mB = (720, 470, 84, 110, 18, 62) if compact else (1100, 400, 66, 150, 22, 64)
+        fs = 1.25 if compact else 1.0                                    # a compact chart is drawn smaller: larger text
         iw, ih = W - mL - mR, H - mT - mB
         allp = d["ca"] + d["cb"]
         xl, xh = math.log(min(p["c"] for p in allp) / 1.25), math.log(max(p["c"] for p in allp) * 1.25)
@@ -160,16 +161,16 @@ def build(CG, QG, PANEL, PICKS):
             if xl <= math.log(t) <= xh:
                 x = X(t)
                 o.append(f'<line x1="{x:.1f}" y1="{mT}" x2="{x:.1f}" y2="{mT+ih}" style="stroke:var(--line)" stroke-width="1"/>'
-                         f'<text x="{x:.1f}" y="{mT+ih+20}" text-anchor="middle" font-size="12" style="fill:var(--muted)">{t:g}×</text>')
+                         f'<text x="{x:.1f}" y="{mT+ih+20}" text-anchor="middle" font-size="{12*fs:.1f}" style="fill:var(--muted)">{t:g}×</text>')
         step = 2 if sh - sl <= 14 else 5 if sh - sl <= 40 else 10
         v = math.ceil(sl / step) * step
         while v <= sh:
             y = Y(v)
             o.append(f'<line x1="{mL}" y1="{y:.1f}" x2="{mL+iw}" y2="{y:.1f}" style="stroke:var(--line)" stroke-width="1"/>'
-                     f'<text x="{mL-10}" y="{y+4:.1f}" text-anchor="end" font-size="12" style="fill:var(--muted)">{v:g}&#8202;%</text>')
+                     f'<text x="{mL-10}" y="{y+4:.1f}" text-anchor="end" font-size="{12*fs:.1f}" style="fill:var(--muted)">{v:g}&#8202;%</text>')
             v += step
-        o.append(f'<text x="{mL+iw/2}" y="{H-14}" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">cost per task, × the cheapest couple (log scale)</text>'
-                 f'<text x="16" y="{mT+ih/2}" text-anchor="middle" font-size="12.5" transform="rotate(-90 16 {mT+ih/2})" style="fill:var(--muted)">expected score on the panel</text>')
+        o.append(f'<text x="{mL+iw/2}" y="{H-14}" text-anchor="middle" font-size="{12.5*fs:.1f}" style="fill:var(--muted)">cost per task, × the cheapest couple (log scale)</text>'
+                 f'<text x="16" y="{mT+ih/2}" text-anchor="middle" font-size="{12.5*fs:.1f}" transform="rotate(-90 16 {mT+ih/2})" style="fill:var(--muted)">expected score on the panel</text>')
         for pts_, m, up in ((d["ca"], d["a"], True), (d["cb"], d["b"], False)):
             col = f'var({MODELS[m]["colour"]})'
             if len(pts_) > 1:
@@ -179,9 +180,9 @@ def build(CG, QG, PANEL, PICKS):
                 x, y = X(p["c"]), Y(p["s"])
                 o.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4.4" style="fill:{col};stroke:var(--panel)" stroke-width="1.6"/>')
                 if p["e"] != "solo":
-                    o.append(f'<text x="{x:.1f}" y="{y-10 if up else y+19:.1f}" text-anchor="middle" font-size="10.5" style="fill:{col}">{EFF[p["e"]]}</text>')
+                    o.append(f'<text x="{x:.1f}" y="{y-10 if up else y+19:.1f}" text-anchor="middle" font-size="{10.5*fs:.1f}" style="fill:{col}">{EFF[p["e"]]}</text>')
             last = pts_[-1]
-            o.append(f'<text x="{X(last["c"])+12:.1f}" y="{Y(last["s"])+(-6 if up else 14):.1f}" font-size="13.5" font-weight="600" style="fill:{col}">{esc(L(m))}</text>')
+            o.append(f'<text x="{X(last["c"])+12:.1f}" y="{Y(last["s"])+(-6 if up else 14):.1f}" font-size="{13.5*fs:.1f}" font-weight="600" style="fill:{col}">{esc(L(m))}</text>')
         o.append("</svg>")
         return "".join(o)
 
@@ -236,10 +237,10 @@ def build(CG, QG, PANEL, PICKS):
 
     def view(d):                                                         # the comparator's result: chart and table side by side
         return (f'<div class="card pad cmp-view"><h3 class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</h3>{legend(d)}'
-                f'<div class="chartbox">{chart(d)}</div>{tiles(d)}'
+                f'<div class="cmp-grid"><div class="chartbox">{chart(d, compact=True)}</div>'
                 f'<div class="cmp-tbl"><h4 class="tbl-title">By effort level '
-                f'<span>cost per task × the cheapest couple · expected score on the benchmark panel</span></h4>{table(d, fold=False)}</div>'
-                f'{notes(d)}</div>')
+                f'<span>cost per task × the cheapest couple · expected score on the benchmark panel</span></h4>{table(d, fold=False)}</div></div>'
+                f'{tiles(d)}{notes(d)}</div>')
 
     cards = "".join(card(d) for d in duels_data)
     blocks = "".join(block(d) for d in duels_data)
@@ -362,8 +363,8 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .cmp-empty{text-align:center;margin-top:18px}
 @media (prefers-reduced-motion:reduce){.chip{transition:none}}
 #cmp-out{margin-top:14px}
-.cmp-grid{display:grid;grid-template-columns:1fr;gap:18px 28px;align-items:start;margin-top:22px}
-@media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.cmp-grid{display:grid;grid-template-columns:1fr;gap:18px 36px;align-items:center;margin-top:8px}
+@media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}
 .duel-tiers{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media (max-width:1080px){.duel-tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.duel-tiers{grid-template-columns:1fr}}
@@ -371,7 +372,7 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .duel-tiers .tier-top{border-bottom:none;padding-bottom:0;margin-bottom:0}
 .duel-tiers .tier-left{flex:1 1 auto}.duel-tiers .tier-yield{flex:0 0 auto;font-size:clamp(24px,2.8vw,32px)}
 .duel-same{margin:16px 0 0;font-size:15px;color:var(--muted)}.duel-same b{color:var(--ink)}
-.cmp-tbl{margin-top:26px;max-width:760px}
+.cmp-tbl .tbl-title{margin-top:0}
 .tbl-title{margin:26px 0 10px;font-size:15px;font-weight:600;font-family:Georgia,serif;font-variant:small-caps}
 .tbl-title span{display:block;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-variant:normal;font-size:12px;font-weight:400;color:var(--muted);margin-top:2px}
 .duel-tbl td.eff{text-align:left;font-weight:600}
