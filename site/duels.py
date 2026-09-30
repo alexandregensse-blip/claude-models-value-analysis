@@ -358,7 +358,7 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .duel-tbl td.mdl{min-width:120px}
 .cmp-ctl{width:fit-content;max-width:100%;margin:0 auto;text-align:center;padding:clamp(20px,3vw,32px) clamp(20px,3.4vw,40px)}
 .cmp-ctl .blocktitle{margin-bottom:.8em}
-.chips{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:16px 28px}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:20px 48px}
 .chip-group{display:flex;flex-direction:column;align-items:center;gap:8px}
 .chip-group .cc-k{margin:0}
 .chip-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
