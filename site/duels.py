@@ -14,8 +14,9 @@ from catalog import MODELS, DISPLAY_ORDER
 FILE  = "claude-models-head-to-head.html"
 URL   = SITE_URL + FILE
 TITLE = "Fable vs Opus vs Sonnet vs Haiku: Claude models head-to-head"
-DESCRIPTION = ("Every pair of Claude models compared effort by effort: the cost gap, the quality gap, and the cheapest "
-               "effort of each that matches the other. Open data.")
+DESCRIPTION = ("Fable vs Opus vs Sonnet vs Haiku, effort by effort: what each Claude model costs against another, "
+               "and the cheapest setting that matches its quality.")
+LEDE_PAIRS = ["fable-5.1|opus-5.5", "opus-5.5|sonnet-5.5"]              # the two findings stated in the lede
 CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-4.5"]           # the latest model of each family
 SUCCESSION = [("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
 REACH = 0.84
@@ -217,6 +218,14 @@ def build(CG, QG, PANEL):
         return (f'<details class="fold"><summary>Effort by effort — {esc(d["A"])} vs {esc(d["B"])}</summary>'
                 f'<div class="fold-body pad">{inner}</div></details>')
 
+    def same_text(d):
+        """The same quality for less, as plain text (the lede), or None."""
+        for f in d["facts"]:
+            if f["kind"] == "match" and f["ratio"] < 1 and f["m"]["m"] != f["best"]["m"]:
+                return (f'{L(f["m"]["m"])} at {EFF[f["m"]["e"]]} gives the same quality as {L(f["best"]["m"])} at '
+                        f'{EFF[f["best"]["e"]]} for {fmt_ratio(1 / f["ratio"])} less per task')
+        return None
+
     def same(d):
         """The same quality for less, said first when a cheaper setting of one model matches the other's best."""
         for f in d["facts"]:
@@ -281,6 +290,8 @@ def build(CG, QG, PANEL):
   }})();
   </script>
 </section>"""
+    lede_facts = "; ".join(t for t in (same_text(picker[k]) for k in LEDE_PAIRS if k in picker) if t)
+    lede_facts = esc(lede_facts[0].upper() + lede_facts[1:] + ".") if lede_facts else ""
     home = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "body.html"), encoding="utf-8").read()
     corner = re.search(r'<div class="hero-corner">.*?<div class="gh-name">.*?</div>\s*</div>', home, re.S).group(0)
     body = f"""<div class="wrap">
@@ -290,7 +301,7 @@ def build(CG, QG, PANEL):
     <h1>Claude models head-to-head <span class="h1-line">Fable vs Opus vs Sonnet vs Haiku</span></h1>
     <div class="hero-row">
       <div class="lede-col">
-        <p class="lede">Each pair of Claude models compared effort by effort, on the same scales as the <a href="{SITE_URL}">main comparison</a>: how much more one costs than the other, how much quality it buys, and the cheapest setting of each that matches the other's best.</p>
+        <p class="lede">Pick two Claude models and compare them effort by effort, on the same scales as the <a href="{SITE_URL}">main comparison</a>. {lede_facts}</p>
       </div>
       <div class="meta meta-side">
         <div><span class="k">Updated</span><br><b>__GENDATE__</b></div>
