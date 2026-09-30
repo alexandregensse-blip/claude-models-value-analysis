@@ -118,7 +118,7 @@ def build(CG, QG, PANEL):
 
     duels_data = [pair(a, b) for a, b in pairs() if rungs(a) and rungs(b)]
     summary = [f"{d['A']} vs {d['B']}: " + " ".join(d["lines"] + d["note"]) for d in duels_data]
-    shown = [m for m in DISPLAY_ORDER if m not in LEGACY and rungs(m)]
+    shown = [m for m in CURRENT if rungs(m)]
     picker = {f"{a}|{b}": pair(a, b) for i, a in enumerate(shown) for b in shown[i + 1:]}
 
     dot = lambda m: f'<span class="dot" style="background:var({MODELS[m]["colour"]})"></span>'
@@ -180,7 +180,7 @@ def build(CG, QG, PANEL):
         o.append("</svg>")
         return "".join(o)
 
-    def table(d):
+    def table(d, fold=True):
         if not d["rows"]:
             return ""
         th = "".join(f"<th>{esc(EFF[r['e']])}</th>" for r in d["rows"])
@@ -191,88 +191,80 @@ def build(CG, QG, PANEL):
             return f'<tr><td class="mdl">{dot(m)}{esc(L(m))}</td>{cells}</tr>'
         pill = lambda who, what: (f'<span class="conf c-high">{esc(who)} {what}</span>' if who else '<span class="conf c-med">level</span>')
         verdict = lambda key, what: "".join(f"<td>{pill(r[key], what)}</td>" for r in d["rows"])
-        return (f'<details class="fold"><summary>Effort by effort — {esc(d["A"])} vs {esc(d["B"])}</summary><div class="fold-body pad">'
-                f'<div class="chartbox"><table class="duel-tbl"><thead><tr><th style="text-align:left">Model</th>{th}</tr></thead><tbody>'
-                f'{row(d["a"], "p")}{row(d["b"], "q")}'
-                f'<tr><td class="mdl muted">Cost</td>{verdict("cost", "cheaper")}</tr>'
-                f'<tr><td class="mdl muted">Quality</td>{verdict("qual", "higher")}</tr></tbody></table></div>'
-                f'<p class="cap">Each cell: cost as a multiple of the cheapest couple, and the expected score on the benchmark panel. '
-                f'<b>Cheaper</b> or <b>higher</b> when the fitted difference puts it ahead with at least 84&nbsp;% probability; <b>level</b> otherwise.</p>'
-                f'</div></details>')
+        inner = (f'<div class="chartbox"><table class="duel-tbl"><thead><tr><th style="text-align:left">Model</th>{th}</tr></thead><tbody>'
+                 f'{row(d["a"], "p")}{row(d["b"], "q")}'
+                 f'<tr><td class="mdl muted">Cost</td>{verdict("cost", "cheaper")}</tr>'
+                 f'<tr><td class="mdl muted">Quality</td>{verdict("qual", "higher")}</tr></tbody></table></div>'
+                 f'<p class="cap">Each cell: cost as a multiple of the cheapest couple, and the expected score on the benchmark panel. '
+                 f'<b>Cheaper</b> or <b>higher</b> when the fitted difference puts it ahead with at least 84&nbsp;% probability; <b>level</b> otherwise.</p>')
+        if not fold:
+            return inner
+        return (f'<details class="fold"><summary>Effort by effort — {esc(d["A"])} vs {esc(d["B"])}</summary>'
+                f'<div class="fold-body pad">{inner}</div></details>')
 
-    def block(d, sid, tag="section", h="h2"):
-        return (f'<{tag} id="{sid}" class="block"><div class="card pad"><{h} class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</{h}>'
-                f'<div class="legend"><span class="lg"><span class="sw" style="background:var({MODELS[d["a"]]["colour"]})"></span>{esc(d["A"])}</span>'
-                f'<span class="lg"><span class="sw" style="background:var({MODELS[d["b"]]["colour"]})"></span>{esc(d["B"])}</span></div>'
-                f'<div class="chartbox">{chart(d)}</div>'
-                f'<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
-                + "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"]) +
-                f'</div>{table(d)}</{tag}>')
+    legend = lambda d: (f'<div class="legend"><span class="lg"><span class="sw" style="background:var({MODELS[d["a"]]["colour"]})"></span>{esc(d["A"])}</span>'
+                        f'<span class="lg"><span class="sw" style="background:var({MODELS[d["b"]]["colour"]})"></span>{esc(d["B"])}</span></div>')
+    lines_html = lambda d: ('<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
+                            + "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"]))
+
+    def block(d):
+        return (f'<section id="{d["sid"]}" class="block"><div class="card pad"><h3 class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</h3>'
+                f'{legend(d)}<div class="chartbox">{chart(d)}</div>{lines_html(d)}</div>{table(d)}</section>')
+
+    def view(d):                                                         # the comparator's result: chart and table side by side
+        return (f'<div class="card pad cmp-view"><h3 class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</h3>{legend(d)}'
+                f'<div class="cmp-grid"><div class="chartbox">{chart(d)}</div><div class="cmp-tbl">{table(d, fold=False)}</div></div>'
+                f'{lines_html(d)}</div>')
 
     cards = "".join(card(d) for d in duels_data)
-    blocks = "".join(block(d, d["sid"]) for d in duels_data)
-    opts = lambda sel: "".join(f'<option value="{m}"{" selected" if m == sel else ""}>{esc(L(m))}</option>' for m in shown)
-    templates = "".join(f'<template data-pair="{k}">{block(d, "cmp-" + d["sid"], "div", "h3")}</template>' for k, d in picker.items())
+    blocks = "".join(block(d) for d in duels_data)
+    first = f"{CURRENT[0]}|{CURRENT[1]}"
+    chips = "".join(f'<button type="button" class="chip" data-m="{m}" aria-pressed="{"true" if m in CURRENT[:2] else "false"}" '
+                    f'style="--c:var({MODELS[m]["colour"]})"><span class="dot" style="background:var({MODELS[m]["colour"]})"></span>{esc(L(m))}</button>'
+                    for m in shown)
+    templates = "".join(f'<template data-pair="{k}">{view(d)}</template>' for k, d in picker.items())
     order = json.dumps(shown)
     compare = f"""<section id="compare" class="major"><div class="card pad cmp-ctl">
-    <h2 class="blocktitle">Compare any two Claude models</h2>
-    <div class="cmp-row">
-      <label class="cmp-sel" for="cmp-a"><span class="cc-k">Model</span><select id="cmp-a">{opts(CURRENT[0])}</select></label>
-      <button type="button" class="tgl cmp-swap" id="cmp-swap" aria-label="Swap the two models">⇄</button>
-      <label class="cmp-sel" for="cmp-b"><span class="cc-k">against</span><select id="cmp-b">{opts(CURRENT[1])}</select></label>
-    </div>
-    <p class="cap cmp-note" id="cmp-note" hidden>Pick two different models.</p>
+    <h2 class="blocktitle">Compare two Claude models</h2>
+    <p class="sub cmp-hint">Pick two models; the last two you click are compared.</p>
+    <div class="chips" role="group" aria-label="Models to compare">{chips}</div>
   </div>
-  <div id="cmp-out"><noscript><p class="cap">The comparator needs JavaScript; every current pair is also written out below.</p></noscript></div>
+  <div id="cmp-out" aria-live="polite">{view(picker[first])}</div>
   {templates}
   <script>
   (function(){{
-    var ORDER={order}, a=document.getElementById("cmp-a"), b=document.getElementById("cmp-b"),
-        out=document.getElementById("cmp-out"), note=document.getElementById("cmp-note");
+    var ORDER={order}, sel=[ORDER[0],ORDER[1]], out=document.getElementById("cmp-out"),
+        chips=[].slice.call(document.querySelectorAll(".chip"));
     function show(){{
-      var x=a.value, y=b.value; out.innerHTML="";
-      note.hidden = x!==y; if(x===y) return;
-      var k = ORDER.indexOf(x)<ORDER.indexOf(y) ? x+"|"+y : y+"|"+x,
+      chips.forEach(function(c){{ c.setAttribute("aria-pressed", sel.indexOf(c.dataset.m)>=0 ? "true" : "false"); }});
+      var k = ORDER.indexOf(sel[0])<ORDER.indexOf(sel[1]) ? sel[0]+"|"+sel[1] : sel[1]+"|"+sel[0],
           t = document.querySelector('template[data-pair="'+k+'"]');
-      if(t) out.appendChild(t.content.cloneNode(true));
+      if(t){{ out.innerHTML=""; out.appendChild(t.content.cloneNode(true)); }}
     }}
-    a.addEventListener("change",show); b.addEventListener("change",show);
-    document.getElementById("cmp-swap").addEventListener("click",function(){{ var v=a.value; a.value=b.value; b.value=v; show(); }});
-    show();
+    chips.forEach(function(c){{ c.addEventListener("click",function(){{
+      var m=c.dataset.m; if(sel.indexOf(m)>=0) return; sel=[sel[1],m]; show(); }}); }});
   }})();
   </script>
 </section>"""
-    blocks = "".join(
-        f'<section id="{d["sid"]}" class="block"><div class="card pad"><h2 class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</h2>'
-        f'<div class="legend"><span class="lg"><span class="sw" style="background:var({MODELS[d["a"]]["colour"]})"></span>{esc(d["A"])}</span>'
-        f'<span class="lg"><span class="sw" style="background:var({MODELS[d["b"]]["colour"]})"></span>{esc(d["B"])}</span></div>'
-        f'<div class="chartbox">{chart(d)}</div>'
-        f'<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
-        + "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"]) +
-        f'</div>{table(d)}</section>' for d in duels_data)
-
     home = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "body.html"), encoding="utf-8").read()
     corner = re.search(r'<div class="hero-corner">.*?<div class="gh-name">.*?</div>\s*</div>', home, re.S).group(0)
     body = f"""<div class="wrap">
   <header class="hero">
     {corner}
-    <div class="eyebrow">Data analysis · <a href="{SITE_URL}">{esc(SITE_NAME)}</a></div>
+    <div class="eyebrow">Data analysis · <a href="{SITE_URL}">{esc(SITE_NAME)}</a> · updated __GENDATE__</div>
     <h1>Claude models head-to-head <span class="h1-line">Fable vs Opus vs Sonnet vs Haiku</span></h1>
     <div class="hero-row">
       <div class="lede-col">
         <p class="lede">Each pair of Claude models compared effort by effort, on the same scales as the <a href="{SITE_URL}">main comparison</a>: how much more one costs than the other, how much quality it buys, and the cheapest setting of each that matches the other's best.</p>
       </div>
-      <div class="meta meta-side">
-        <div><span class="k">Scales</span><br><b>cost × the cheapest couple · expected score on the panel</b></div>
-        <div><span class="k">Pairs</span><br><b>{len(duels_data)}</b></div>
-        <div><span class="k">Updated</span><br><b>__GENDATE__</b></div>
-      </div>
     </div>
   </header>
   <main>
   {compare}
-  <section id="atglance" class="block"><h2 class="blocktitle">The current models, pair by pair</h2><div class="grid duelgrid">{cards}</div></section>
-  {blocks}
+  <section id="pairs" class="block"><details class="fold"><summary>Every pair, written out</summary><div class="fold-body pad">
+    <div class="grid duelgrid">{cards}</div>
+    {blocks}
+  </div></details></section>
   <section id="how" class="block"><details class="fold"><summary>How to read these comparisons</summary><div class="fold-body pad">
     <p class="sub">The values are the ones the <a href="{SITE_URL}">main page</a> shows, fitted from public measurements taken on the same tasks. One model is <b>cheaper</b> or <b>higher</b> than the other at an effort level when the fitted difference puts it ahead with at least 84&nbsp;% probability, the level of the intervals shown everywhere on the site; otherwise the two are <b>level within the uncertainty</b>. A <b>match</b> is the cheapest setting of the other model that the first does not out-score at that level. Costs are what a whole task cost, as each source measured it (the run's actual spend, cache included), not the price per token.</p>
   </div></details></section>
@@ -326,15 +318,24 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .tier-yield.dearer{color:var(--muted)}
 .duel-lines{margin-top:18px}
 .duel-tbl td.mdl{min-width:120px}
-.cmp-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 14px;margin-top:6px}
-.cmp-sel{display:flex;flex-direction:column;gap:6px;flex:1 1 220px;min-width:0}
-.cmp-sel .cc-k{margin:0}
-.cmp-sel select{font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line2);
-  border-radius:10px;padding:9px 12px;cursor:pointer;width:100%}
-.cmp-sel select:hover{border-color:var(--muted)}
-.cmp-sel select:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
-.cmp-swap{padding:9px 14px;font-size:16px;flex:none}
-#cmp-out>.block{margin-top:14px}"""
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.chip{font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line2);
+  border-radius:12px;padding:13px 20px;display:inline-flex;align-items:center;gap:2px;cursor:pointer;opacity:.5;
+  transition:opacity .15s,border-color .15s,background .15s,box-shadow .15s}
+.chip:hover{opacity:.8}
+.chip[aria-pressed="true"]{opacity:1;border-color:var(--c);background:color-mix(in srgb,var(--c) 11%,var(--panel));
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--c) 16%,transparent)}
+.chip:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.chip{transition:none}}
+.cmp-hint{margin:.2em 0 1em}
+#cmp-out{margin-top:14px}
+.cmp-grid{display:grid;grid-template-columns:1fr;gap:18px 28px;align-items:center}
+@media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}}
+.cmp-grid>*{min-width:0}
+.cmp-tbl .duel-tbl{font-size:12.5px}
+.cmp-tbl .cap{margin-top:12px}
+#pairs .fold-body>.block:first-of-type{margin-top:26px}
+#pairs .duelgrid{margin-bottom:6px}"""
 
 
 def write(body, css, date):
