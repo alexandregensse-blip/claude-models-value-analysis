@@ -5,6 +5,27 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Sixteenth pass: the sources cited by the comparison sites
+
+A list of comparison sites (github.com/metaory/awesome-llm-leaderboards, 27 sites, read 30 Sep 2026) was read for the
+measurements it leads to. Its sites measure nothing themselves: 13 are price tables and calculators, 9 aggregators
+that restate Artificial Analysis or the publishers' own figures (whatllm, benchlm and llm.ing say so), OpenCode's data
+page is usage telemetry (tokens and cost per session on each user's own tasks, no Claude model), and Artificial
+Analysis, LiveBench and LMArena WebDev are already in. The ~1 060 links they cite were then checked against the
+data file: every Claude-specific repository and article among them was already in (effort comparisons, Box, FutureSearch,
+CursorBench, Rails, tuabench, …); the rest are benchmark code repositories and model makers' announcements.
+**185 → 185 sources, 548 → 551 benchmarks, 3758 → 3782 measurements** (lmarena.ai was already a source). No Opus 5.5
+or Sonnet 5.5 row: the three boards closed their votes before enough 5.5 battles.
+
+- **Admitted.**
+  - *LMArena Document* (`lmarenadocument`, 14 rows), *LMArena Vision* (`lmarenavision`, 17 rows) and *LMArena Search*
+    (`lmarenasearch`, 10 rows): the three arenas not yet taken beside Text, WebDev and Agent. Elo, score only; each
+    page's default board (Document and Search without style control, vote cutoffs 13 Sep and 24 Aug; Vision with style
+    control, cutoff 28 Sep). Effort read from the model key as on the Text board (`-thinking` → `default`, the same key
+    without it → `nothink`, `-high`, `-max`, `-thinking-16k/32k` → `think-16k/32k`), flagged unconfirmed. On Search
+    every model runs with the arena's search tool (key suffix `-search`, flagged) and carries no effort (`default`),
+    except Fable 5 at `high` by its display name. Claude 3.5 and 3 keys are not taken (no couple of the catalogue).
+
 ## The fit after the fourteenth and fifteenth passes: a trapped chain, pre-fit checks
 
 **What happened.** With the new sources the quality axis stopped converging: nutpie ran 35 minutes for R̂ 2.83, the
