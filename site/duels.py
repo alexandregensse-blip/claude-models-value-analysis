@@ -9,7 +9,7 @@ import html as htmlmod, json, math, os, re, sys
 from config import ROOT, SITE_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER
 from grids import panel_score
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import MODELS
+from catalog import MODELS, DISPLAY_ORDER
 
 FILE  = "claude-models-head-to-head.html"
 URL   = SITE_URL + FILE
@@ -63,10 +63,7 @@ def build(CG, QG, PANEL):
         ok = [q for q in cand if ahead(p, q) < REACH]
         return min(ok, key=lambda q: q["x"]) if ok else None
 
-    duels_data, summary = [], []
-    for a, b in pairs():
-        if not rungs(a) or not rungs(b):
-            continue
+    def pair(a, b):
         A, B = L(a), L(b)
         common = [e for e in rungs(a) if e in rungs(b)]
         rows, lines = [], []
@@ -115,10 +112,14 @@ def build(CG, QG, PANEL):
                              f"{EFF[strongest['e']]} at {strongest['s']:.1f} %.")
         note = [f"{L(m)}'s cost is size-sensitive: a verbose model, its cost swings widely between short and long "
                 f"agentic tasks, hence its wide interval." for m in (a, b) if MODELS[m].get("flag_task_size")]
-        summary.append(f"{A} vs {B}: " + " ".join(lines + note))
         head = min(heads, key=lambda h: h["ratio"]) if heads else None
-        duels_data.append(dict(a=a, b=b, A=A, B=B, sid=slug(a, b), rows=rows, lines=lines, note=note, head=head,
-                               ca=[couple(a, e) for e in rungs(a)], cb=[couple(b, e) for e in rungs(b)]))
+        return dict(a=a, b=b, A=A, B=B, sid=slug(a, b), rows=rows, lines=lines, note=note, head=head,
+                               ca=[couple(a, e) for e in rungs(a)], cb=[couple(b, e) for e in rungs(b)])
+
+    duels_data = [pair(a, b) for a, b in pairs() if rungs(a) and rungs(b)]
+    summary = [f"{d['A']} vs {d['B']}: " + " ".join(d["lines"] + d["note"]) for d in duels_data]
+    shown = [m for m in DISPLAY_ORDER if m not in LEGACY and rungs(m)]
+    picker = {f"{a}|{b}": pair(a, b) for i, a in enumerate(shown) for b in shown[i + 1:]}
 
     dot = lambda m: f'<span class="dot" style="background:var({MODELS[m]["colour"]})"></span>'
     effname = lambda p: "" if p["e"] == "solo" else f" · {EFF[p['e']].capitalize()}"
@@ -199,7 +200,48 @@ def build(CG, QG, PANEL):
                 f'<b>Cheaper</b> or <b>higher</b> when the fitted difference puts it ahead with at least 84&nbsp;% probability; <b>level</b> otherwise.</p>'
                 f'</div></details>')
 
+    def block(d, sid, tag="section", h="h2"):
+        return (f'<{tag} id="{sid}" class="block"><div class="card pad"><{h} class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</{h}>'
+                f'<div class="legend"><span class="lg"><span class="sw" style="background:var({MODELS[d["a"]]["colour"]})"></span>{esc(d["A"])}</span>'
+                f'<span class="lg"><span class="sw" style="background:var({MODELS[d["b"]]["colour"]})"></span>{esc(d["B"])}</span></div>'
+                f'<div class="chartbox">{chart(d)}</div>'
+                f'<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
+                + "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"]) +
+                f'</div>{table(d)}</{tag}>')
+
     cards = "".join(card(d) for d in duels_data)
+    blocks = "".join(block(d, d["sid"]) for d in duels_data)
+    opts = lambda sel: "".join(f'<option value="{m}"{" selected" if m == sel else ""}>{esc(L(m))}</option>' for m in shown)
+    templates = "".join(f'<template data-pair="{k}">{block(d, "cmp-" + d["sid"], "div", "h3")}</template>' for k, d in picker.items())
+    order = json.dumps(shown)
+    compare = f"""<section id="compare" class="major"><div class="card pad cmp-ctl">
+    <h2 class="blocktitle">Compare any two Claude models</h2>
+    <div class="cmp-row">
+      <label class="cmp-sel" for="cmp-a"><span class="cc-k">Model</span><select id="cmp-a">{opts(CURRENT[0])}</select></label>
+      <button type="button" class="tgl cmp-swap" id="cmp-swap" aria-label="Swap the two models">⇄</button>
+      <label class="cmp-sel" for="cmp-b"><span class="cc-k">against</span><select id="cmp-b">{opts(CURRENT[1])}</select></label>
+    </div>
+    <p class="cap cmp-note" id="cmp-note" hidden>Pick two different models.</p>
+  </div>
+  <div id="cmp-out"><noscript><p class="cap">The comparator needs JavaScript; every current pair is also written out below.</p></noscript></div>
+  {templates}
+  <script>
+  (function(){{
+    var ORDER={order}, a=document.getElementById("cmp-a"), b=document.getElementById("cmp-b"),
+        out=document.getElementById("cmp-out"), note=document.getElementById("cmp-note");
+    function show(){{
+      var x=a.value, y=b.value; out.innerHTML="";
+      note.hidden = x!==y; if(x===y) return;
+      var k = ORDER.indexOf(x)<ORDER.indexOf(y) ? x+"|"+y : y+"|"+x,
+          t = document.querySelector('template[data-pair="'+k+'"]');
+      if(t) out.appendChild(t.content.cloneNode(true));
+    }}
+    a.addEventListener("change",show); b.addEventListener("change",show);
+    document.getElementById("cmp-swap").addEventListener("click",function(){{ var v=a.value; a.value=b.value; b.value=v; show(); }});
+    show();
+  }})();
+  </script>
+</section>"""
     blocks = "".join(
         f'<section id="{d["sid"]}" class="block"><div class="card pad"><h2 class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</h2>'
         f'<div class="legend"><span class="lg"><span class="sw" style="background:var({MODELS[d["a"]]["colour"]})"></span>{esc(d["A"])}</span>'
@@ -228,7 +270,8 @@ def build(CG, QG, PANEL):
     </div>
   </header>
   <main>
-  <section id="atglance" class="major"><div class="grid duelgrid">{cards}</div></section>
+  {compare}
+  <section id="atglance" class="block"><h2 class="blocktitle">The current models, pair by pair</h2><div class="grid duelgrid">{cards}</div></section>
   {blocks}
   <section id="how" class="block"><details class="fold"><summary>How to read these comparisons</summary><div class="fold-body pad">
     <p class="sub">The values are the ones the <a href="{SITE_URL}">main page</a> shows, fitted from public measurements taken on the same tasks. One model is <b>cheaper</b> or <b>higher</b> than the other at an effort level when the fitted difference puts it ahead with at least 84&nbsp;% probability, the level of the intervals shown everywhere on the site; otherwise the two are <b>level within the uncertainty</b>. A <b>match</b> is the cheapest setting of the other model that the first does not out-score at that level. Costs are what a whole task cost, as each source measured it (the run's actual spend, cache included), not the price per token.</p>
@@ -282,7 +325,16 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .duelcard .tier-yield{flex:0 0 auto}
 .tier-yield.dearer{color:var(--muted)}
 .duel-lines{margin-top:18px}
-.duel-tbl td.mdl{min-width:120px}"""
+.duel-tbl td.mdl{min-width:120px}
+.cmp-row{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 14px;margin-top:6px}
+.cmp-sel{display:flex;flex-direction:column;gap:6px;flex:1 1 220px;min-width:0}
+.cmp-sel .cc-k{margin:0}
+.cmp-sel select{font:inherit;font-size:15px;font-weight:600;color:var(--ink);background:var(--paper);border:1px solid var(--line2);
+  border-radius:10px;padding:9px 12px;cursor:pointer;width:100%}
+.cmp-sel select:hover{border-color:var(--muted)}
+.cmp-sel select:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
+.cmp-swap{padding:9px 14px;font-size:16px;flex:none}
+#cmp-out>.block{margin-top:14px}"""
 
 
 def write(body, css, date):
