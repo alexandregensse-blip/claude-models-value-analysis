@@ -122,7 +122,7 @@ def build(CG, QG, PANEL):
 
     duels_data = [pair(a, b) for a, b in pairs() if rungs(a) and rungs(b)]
     summary = [f"{d['A']} vs {d['B']}: " + " ".join(d["lines"] + d["note"]) for d in duels_data]
-    shown = [m for m in CURRENT if rungs(m)]
+    shown = [m for m in DISPLAY_ORDER if m not in LEGACY and rungs(m)]   # the models the main page shows
     picker = {f"{a}|{b}": pair(a, b) for i, a in enumerate(shown) for b in shown[i + 1:]}
 
     dot = lambda m: f'<span class="dot" style="background:var({MODELS[m]["colour"]})"></span>'
@@ -246,9 +246,13 @@ def build(CG, QG, PANEL):
     cards = "".join(card(d) for d in duels_data)
     blocks = "".join(block(d) for d in duels_data)
     first = f"{CURRENT[0]}|{CURRENT[1]}"
-    chips = "".join(f'<button type="button" class="chip" data-m="{m}" aria-pressed="{"true" if m in CURRENT[:2] else "false"}" '
-                    f'style="--c:var({MODELS[m]["colour"]})"><span class="dot" style="background:var({MODELS[m]["colour"]})"></span>{esc(L(m))}</button>'
-                    for m in shown)
+    chip = lambda m: (f'<button type="button" class="chip" data-m="{m}" aria-pressed="{"true" if m in CURRENT[:2] else "false"}" '
+                      f'style="--c:var({MODELS[m]["colour"]})"><span class="dot" style="background:var({MODELS[m]["colour"]})"></span>{esc(L(m))}</button>')
+    families = {}
+    for m in shown:                                                      # one row per family, latest first
+        families.setdefault(L(m).split()[0], []).append(m)
+    chips = "".join(f'<div class="chip-group"><span class="cc-k">{esc(f)}</span><div class="chip-row">{"".join(chip(m) for m in ms)}</div></div>'
+                    for f, ms in families.items())
     templates = "".join(f'<template data-pair="{k}">{view(d)}</template>' for k, d in picker.items())
     order = json.dumps(shown)
     compare = f"""<section id="compare" class="major"><div class="card pad cmp-ctl">
@@ -260,7 +264,7 @@ def build(CG, QG, PANEL):
   {templates}
   <script>
   (function(){{
-    var ORDER={order}, sel=[ORDER[0],ORDER[1]], out=document.getElementById("cmp-out"),
+    var ORDER={order}, sel={json.dumps(CURRENT[:2])}, out=document.getElementById("cmp-out"),
         empty=document.getElementById("cmp-empty"), chips=[].slice.call(document.querySelectorAll(".chip"));
     function show(){{
       chips.forEach(function(c){{ c.setAttribute("aria-pressed", sel.indexOf(c.dataset.m)>=0 ? "true" : "false"); }});
@@ -354,9 +358,12 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .duel-tbl td.mdl{min-width:120px}
 .cmp-ctl{width:fit-content;max-width:100%;margin:0 auto;text-align:center;padding:clamp(20px,3vw,32px) clamp(20px,3.4vw,40px)}
 .cmp-ctl .blocktitle{margin-bottom:.8em}
-.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:16px 28px}
+.chip-group{display:flex;flex-direction:column;align-items:center;gap:8px}
+.chip-group .cc-k{margin:0}
+.chip-row{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
 .chip{font:inherit;font-size:17px;font-weight:600;color:var(--ink);background:var(--paper);border:1.5px solid var(--line2);
-  border-radius:14px;padding:18px 28px;min-width:150px;display:inline-flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;opacity:.5;
+  border-radius:14px;padding:16px 22px;min-width:132px;display:inline-flex;align-items:center;justify-content:center;gap:4px;cursor:pointer;opacity:.5;
   transition:opacity .15s,border-color .15s,background .15s,box-shadow .15s}
 .chip .dot{width:11px;height:11px}
 .chip:hover{opacity:.8}
@@ -378,6 +385,7 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .eyebrow a{color:inherit;text-decoration:none}.eyebrow a:hover{text-decoration:underline}
 .duel-legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;margin:0 0 12px;
   font-family:Georgia,serif;font-variant:small-caps;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.1}
+.cmp-left .duel-legend{justify-content:center;padding:0 15.3% 0 11.7%}   /* centred on the plot area of the compact chart (margins 84 and 110 of 720) */
 .duel-legend .ln{display:inline-block;width:26px;height:4px;border-radius:2px;vertical-align:middle;margin-right:10px}
 .duel-legend .vs{font-size:.6em;color:var(--faint);font-variant:normal}
 .duel-same{margin:4px 0 36px;font-size:clamp(16px,1.7vw,18px);line-height:1.45;color:var(--muted)}.duel-same b{color:var(--ink)}
