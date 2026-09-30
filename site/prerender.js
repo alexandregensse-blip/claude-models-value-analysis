@@ -8,7 +8,7 @@ const vm = require("vm");
 
 // Blocks worth serving without JS: element id → innerHTML; "#id tbody" → rows; ".nsrc" → text.
 const WANTED = ["tier-crown-top", "tier-cards-top", "pareto-blocks", "pareto-r2", "tier-cards", "tier-crown",
-                "answer", "#score-tbl tbody", "#matrix-tbl tbody", "#edge-tbl tbody", ".nsrc"];
+                "answer", "#score-tbl tbody", "#matrix-tbl tbody", "#value-tbl tbody", "#edge-tbl tbody", ".nsrc"];
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const escAttr = s => esc(s).replace(/"/g, "&quot;");

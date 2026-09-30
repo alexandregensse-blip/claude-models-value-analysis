@@ -57,6 +57,9 @@ One row per model, one column per effort; each cell is the cost multiple with it
 published effort. A model without effort levels (Haiku 4.5, *solo*) fills a single merged cell; an unpublished couple
 is shown as a dash.
 
+A second matrix gives every couple's **value index** (§ 9) with its 16–84 % range (r ± √(h_x² + λ²·h_θ²)), same rows.
+Its colours follow the data: green above 100, red below, each side scaled to the most extreme index shown (log scale).
+
 ## 6. The charts
 
 - **Cost axis**: log₁₀ of the cost multiple.
