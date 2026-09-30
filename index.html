@@ -380,15 +380,15 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="chart-controls" id="ctrlP"></div>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>dashed</b> = <b>within reach</b> of it (no couple beats it on both axes with 84&nbsp;% probability, the level of the intervals), <b>faded</b> = dominated. The couples within reach are the candidates of every pick below. The faint grey line is the <b>price trend</b> — what a given quality typically costs, fitted on <b>every</b> couple shown. <b>Tier bands</b> (off by default) shade the same four usage tiers as on the landscape above.</p>
-      <div id="pareto-blocks" class="pareto-blocks"><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Low</span><span class="pblock-n">56.2 % · 1.0×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">60.9 % · 1.1×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">High</span><span class="pblock-n">68.2 % · 1.8×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">71.8 % · 3.5×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">72.6 % · 4.0×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">High</span><span class="pblock-n">73.4 % · 4.2×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">75.0 % · 6.7×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A;border-style:dashed"><b>Sonnet 5.5</b><span class="pblock-e">Max</span><span class="pblock-n">74.5 % · 14×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Max</span><span class="pblock-n">75.7 % · 19×</span></span></div>
+      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The frontier couples are the candidates of every pick below. The faint grey line is the <b>price trend</b> — what a given quality typically costs, fitted on <b>every</b> couple shown. <b>Tier bands</b> (off by default) shade the same four usage tiers as on the landscape above.</p>
+      <div id="pareto-blocks" class="pareto-blocks"><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Low</span><span class="pblock-n">56.2 % · 1.0×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">60.9 % · 1.1×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">High</span><span class="pblock-n">68.2 % · 1.8×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">71.8 % · 3.5×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">72.6 % · 4.0×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">High</span><span class="pblock-n">73.4 % · 4.2×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">75.0 % · 6.7×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Max</span><span class="pblock-n">75.7 % · 19×</span></span></div>
       <details class="fold">
         <summary>Value — distance to the price trend</summary>
         <div class="fold-body pad">
-          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality typically costs across <b>all 45 couples</b> shown, not just the frontier: it is the going rate of the models (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.34</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the couples <b>within reach of the frontier</b> are listed.</p>
+          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality typically costs across <b>all 45 couples</b> shown, not just the frontier: it is the going rate of the models (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.34</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the <b>frontier</b> couples are listed.</p>
           <div class="chartbox"><table id="score-tbl">
             <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>expected score</th><th>value index<br><span style="font-weight:400;text-transform:none;letter-spacing:0">trend = 100</span></th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</td><td class="num">1.1×</td><td class="num">60.9 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 50%, transparent); color:var(--ink)">498</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</td><td class="num">1.8×</td><td class="num">68.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 50%, transparent); color:var(--ink)">491</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Low</td><td class="num">1.0×</td><td class="num">56.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 46%, transparent); color:var(--ink)">420</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</td><td class="num">3.5×</td><td class="num">71.8 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 40%, transparent); color:var(--ink)">312</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · xHigh</td><td class="num">4.0×</td><td class="num">72.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 38%, transparent); color:var(--ink)">291</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</td><td class="num">4.2×</td><td class="num">73.4 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 38%, transparent); color:var(--ink)">290</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</td><td class="num">6.7×</td><td class="num">75.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 30%, transparent); color:var(--ink)">206</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Max <span class="faint">(within reach)</span></td><td class="num">14×</td><td class="num">74.5 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 15%, transparent); color:var(--ink)">94</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Max</td><td class="num">19×</td><td class="num">75.7 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 20%, transparent); color:var(--ink)">77</span></td></tr></tbody>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</td><td class="num">1.1×</td><td class="num">60.9 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 50%, transparent); color:var(--ink)">498</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</td><td class="num">1.8×</td><td class="num">68.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 50%, transparent); color:var(--ink)">491</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Low</td><td class="num">1.0×</td><td class="num">56.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 46%, transparent); color:var(--ink)">420</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</td><td class="num">3.5×</td><td class="num">71.8 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 40%, transparent); color:var(--ink)">312</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · xHigh</td><td class="num">4.0×</td><td class="num">72.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 38%, transparent); color:var(--ink)">291</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</td><td class="num">4.2×</td><td class="num">73.4 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 38%, transparent); color:var(--ink)">290</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</td><td class="num">6.7×</td><td class="num">75.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 30%, transparent); color:var(--ink)">206</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Max</td><td class="num">19×</td><td class="num">75.7 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 20%, transparent); color:var(--ink)">77</span></td></tr></tbody>
           </table></div>
           <p class="cap"><b>Value index</b> = 100 × how many times cheaper than the trend the couple is for its quality (100 = the trend). <b>Green</b> = above 100, <b>red</b> = below; intensity = distance to the trend in decades, capped at one. A couple on the Pareto frontier can still be red&nbsp;: being non-dominated does not mean being good value for what it delivers.</p>
         </div>
@@ -397,7 +397,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
-        <p class="sub">Consolidating the frontier into a decision. <b>Four target qualities</b> are <b>derived from the data</b>, not fixed: they spread evenly between the frontier's weakest and strongest couples, each end drawn 5&nbsp;% of the span inward, so that the bottom tier follows the weakest couple available and the top tier the best — as models improve, the targets move with them. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their targets. For each tier we pick, among the couples within reach of the frontier, the one that maximises <b>window × e<sup>λθ</sup>&nbsp;⁄&nbsp;cost</b>, λ the slope of the price trend. Below its target a couple is penalised by a Gaussian window&nbsp;; at or above it the window is 1, and e<sup>λθ</sup>&nbsp;⁄&nbsp;cost rewards <b>smoothly</b> a couple that brings more quality than the trend charges for its extra cost — no bonus constant to set. Cost counts in <b>ratios</b>, as people perceive prices&nbsp;: twice as dear weighs the same at every price. The <b>big figure</b> is the pick's <b>value index</b>&nbsp;: <b>100 = the price trend</b>, 500 means five times cheaper than the trend charges for its quality, 50 twice as dear. The <b>crown</b> is the couple within reach that sits furthest below the trend. Sliders below override the targets and widths.</p>
+        <p class="sub">Consolidating the frontier into a decision. <b>Four target qualities</b> are <b>derived from the data</b>, not fixed: they spread evenly between the frontier's weakest and strongest couples, each end drawn 5&nbsp;% of the span inward, so that the bottom tier follows the weakest couple available and the top tier the best — as models improve, the targets move with them. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their targets. For each tier we pick, among the frontier couples, the one that maximises <b>window × e<sup>λθ</sup>&nbsp;⁄&nbsp;cost</b>, λ the slope of the price trend. Below its target a couple is penalised by a Gaussian window&nbsp;; at or above it the window is 1, and e<sup>λθ</sup>&nbsp;⁄&nbsp;cost rewards <b>smoothly</b> a couple that brings more quality than the trend charges for its extra cost — no bonus constant to set. Cost counts in <b>ratios</b>, as people perceive prices&nbsp;: twice as dear weighs the same at every price. The <b>big figure</b> is the pick's <b>value index</b>&nbsp;: <b>100 = the price trend</b>, 500 means five times cheaper than the trend charges for its quality, 50 twice as dear. The <b>crown</b> is the frontier couple that sits furthest below the trend. Sliders below override the targets and widths.</p>
         <div class="grid" id="tier-cards"><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Target 57.3 % – Grunt work</span></div>
       <div class="tier-top">
@@ -443,7 +443,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</div>
       <div class="crown-line">Cost <b>1.1×</b> · Score <b>60.9 %</b> · Value index <b>498</b></div>
-      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>5.0× less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>24.4 points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>5.0× less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>24.4 points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div></div>
         <details class="fold">
           <summary>Tune the target windows (target, σ)</summary>
@@ -524,7 +524,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <li><b>Weights follow from the data.</b> A group of k couples informs the spacing of couples in proportion to its discrimination² × (k − 2); a saturated or noisy benchmark weighs little; a publisher's weight saturates at its own systematic effect. No weight is set per source.</li>
           <li><b>Nothing counts twice.</b> One execution printed twice — a system card reprinting an earlier card's series, the same run drawn on two charts, one run scored with two metrics — is detected and counted once: its score and its cost must both agree, within their reading precisions and a rounding made the wrong way. An index is left out for a couple whose index components are already in the data.</li>
           <li><b>Values and intervals.</b> Quality = a couple's latent quality θ, shown as the score it predicts averaged over the benchmark panel; cost = its cost on a task of typical size, shown as a multiple of the cheapest couple. <b>No couple serves as a reference</b>, in the fit or on the page. Each couple carries its own 16–84&nbsp;% interval, so two couples compare through their two intervals. A couple measured by a single publisher is not shown.</li>
-          <li><b>From the fit to the picks.</b> Every decision is taken on the latent scale (log cost, θ). The Pareto frontier keeps the couples nothing beats on both axes; a couple beaten with less than 84&nbsp;% probability stays within reach, and a candidate. A price trend — what a given quality typically costs, fitted on every couple — says how many times cheaper or dearer each couple is than the going rate. The four tiers spread their targets across the frontier and pick, around each target, the couple that brings the most quality for its cost against the trend; the crown goes to the couple furthest below the trend.</li>
+          <li><b>From the fit to the picks.</b> Every decision is taken on the latent scale (log cost, θ). The Pareto frontier keeps the couples nothing beats on both axes; they are the candidates of every pick. A price trend — what a given quality typically costs, fitted on every couple — says how many times cheaper or dearer each couple is than the going rate. The four tiers spread their targets across the frontier and pick, around each target, the couple that brings the most quality for its cost against the trend; the crown goes to the couple furthest below the trend.</li>
         </ol>
         <h3 class="blocktitle" style="margin-top:1.3em">Key values</h3>
         <ul class="steps">
@@ -564,10 +564,6 @@ const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.se
 const logTicks=(vmin,vmax)=>{const o=[];for(let e=Math.floor(Math.log10(vmin));Math.pow(10,e)<=vmax*1.0001;e++)for(let b=1;b<=9;b++){const v=b*Math.pow(10,e);if(v>=vmin*0.999&&v<=vmax*1.001)o.push(v);}return o;};
 const tickLbl=v=>{const m=Math.round(v/Math.pow(10,Math.floor(Math.log10(v)+1e-9)));return m===1||m===2||m===5;};
 const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag,step=(n<1.5?1:n<3?2:n<7?5:10)*mag,o=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)o.push(Math.round(t*1e4)/1e4);return o;};
-// Normal CDF (Abramowitz & Stegun 7.1.26, error below 1.5e-7): the probability that one couple beats another.
-const Phi=z=>{ const x=Math.abs(z)/Math.SQRT2, k=1/(1+0.3275911*x),
-  e=1-((((1.061405429*k-1.453152027)*k+1.421413741)*k-0.284496736)*k+0.254829592)*k*Math.exp(-x*x); return z>=0?(1+e)/2:(1-e)/2; };
-
 // The fitted values, reference-free (model/fit-cache.json through site/grids.py), published couples only:
 //   COSTGRID {model:{effort:[ln cost, quasi-standard error]}}: cost on a task of typical size;
 //   QUALGRID {model:{effort:[θ, quasi-standard error]}}: θ the latent quality, on the model's logit scale.
@@ -594,16 +590,11 @@ function couples(){ const rows=[];
   const x0=Math.min(...rows.map(p=>p.x));
   rows.forEach(p=>{ p.c=Math.exp(p.x-x0); p.clo=p.c*Math.exp(-p.hx); p.chi=p.c*Math.exp(p.hx); p.tlo=p.t-p.ht; p.thi=p.t+p.ht; p.s=score(p.t); });
   return rows; }
-// PARETO FRONTIER. By centres, a couple is dominated when another costs no more and scores no less (strictly better on
-// one). With the intervals, a couple is WITHIN REACH of the frontier unless another couple beats it on both axes with
-// probability REACH or more: P(θ higher) × P(cost lower), each a normal law on the difference of the two centres with
-// the two quasi-standard errors (the two axes are fitted separately). REACH = 0.84, the level of the intervals shown
-// everywhere: a couple beaten by a hair stays a candidate. The frontier by centres is always within reach.
-const REACH=0.84;
+// PARETO FRONTIER, by centres: a couple is dominated when another costs no more and scores no less (strictly better on
+// one). The frontier couples are the candidates of every pick.
 function frontier(rows){ const E=1e-9, dom=(o,p)=>o.x<=p.x+E&&o.t>=p.t-E&&(o.x<p.x-E||o.t>p.t+E);
-  const pDom=(o,p)=>Phi((o.t-p.t)/Math.hypot(o.ht,p.ht))*Phi((p.x-o.x)/Math.hypot(o.hx,p.hx));
-  rows.forEach(p=>{ p.front=!rows.some(o=>dom(o,p)); p.reach=!rows.some(o=>o!==p&&pDom(o,p)>=REACH); });
-  return {front:rows.filter(p=>p.front).sort((a,b)=>a.x-b.x), reach:rows.filter(p=>p.reach).sort((a,b)=>a.x-b.x)}; }
+  rows.forEach(p=>{ p.front=!rows.some(o=>dom(o,p)); });
+  return {front:rows.filter(p=>p.front).sort((a,b)=>a.x-b.x)}; }
 // PRICE TREND: what a given quality typically costs, fitted on EVERY shown couple (the trend of the models, not the
 // frontier): ln cost = a + λ·θ, least squares weighted by each couple's uncertainty across the line, 1/(hx² + λ²·ht²)
 // (both axes are uncertain: effective variance), iterated to its fixed point. λ is the market's price of quality: one
@@ -811,14 +802,14 @@ function drawB(){
                :`<span class="lg"><b>hover a point</b> for its identity</span>`);
 }
 
-// ---- Dedicated Pareto chart: cost × quality scatter, the frontier joined, the couples within reach marked ----
+// ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
 // Same shared machinery as the §1 landscape: θ axis, faint interval ovals (hover to reveal), point tooltip,
 // force-directed labels. Full body width.
 const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
   const W=1100,H=619,mL=66,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
-  const pts=couples(), {front,reach}=frontier(pts), tr=fitTrend(pts);    // all current couples incl. Haiku (solo)
+  const pts=couples(), {front}=frontier(pts), tr=fitTrend(pts);    // all current couples incl. Haiku (solo)
   const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)), tmn=Math.min(...pts.map(p=>p.tlo)), tmx=Math.max(...pts.map(p=>p.thi));
   const yp=10, view=s.__view||defView(xmn,xmx,tmn,tmx);   // stored view (zoom/pan) overrides the data bounds
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
@@ -834,30 +825,28 @@ function drawPareto(){
     for(let k=0;k<=200;k++){ const t=tmn-20+(tmx-tmn+40)*k/200, cost=Math.exp(tr.at(t)-x0), yy=Y(t);
       if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+yy+" "; on=true; } else on=false; }
     s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }
-  fillScoreTable(reach,tr);
-  const ells=showOvals?drawOvals(s,reach,X,Y,mL,iw,mT,ih,"clipP"):[];   // optional; ovals only on the couples within reach
+  fillScoreTable(front,tr);
+  const ells=showOvals?drawOvals(s,front,X,Y,mL,iw,mT,ih,"clipP"):[];   // optional; ovals only on the frontier couples
   s.appendChild(el("path",{d:front.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.t)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
   pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);
     s.appendChild(el("circle",p.front?{cx:X(p.c),cy:Y(p.t),r:5.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.3}
-      :p.reach?{cx:X(p.c),cy:Y(p.t),r:5.2,fill:col,"fill-opacity":.35,stroke:col,"stroke-width":1.6,"stroke-dasharray":"2 1.6"}
       :{cx:X(p.c),cy:Y(p.t),r:3.4,fill:col,"fill-opacity":.25})); });
-  // labels (model · effort) on the couples within reach, force-directed to dodge overlaps and the frontier line
-  const ppix=reach.map(p=>({x:X(p.c),y:Y(p.t)})), segs=[];
+  // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line
+  const ppix=front.map(p=>({x:X(p.c),y:Y(p.t)})), segs=[];
   for(let i=0;i<front.length-1;i++) segs.push([X(front[i].c),Y(front[i].t),X(front[i+1].c),Y(front[i+1].t)]);
-  const labs=reach.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`, w=t.length*7.2+8;
+  const labs=front.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`, w=t.length*7.2+8;
     return {ax:X(p.c),ay:Y(p.t),lx:X(p.c)+18+w/2,ly:Y(p.t),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:17,fs:13,mdl:true}; });
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendP");
   if(lg) lg.innerHTML=visibleModels().map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
-    +`<span class="lg"><span class="sw" style="border:1.5px dashed var(--ink);background:transparent;border-radius:50%"></span>within reach of the frontier (not beaten at 84 %)</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
     +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price trend — what a quality typically costs, over every couple · R² = ${tr.R2.toFixed(2)}</span>`;
   const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (cost order), same style as the tier cards but small
-  if(pb) pb.innerHTML=reach.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}${p.front?'':';border-style:dashed'}"><b>${MODELS[p.m].label}</b><span class="pblock-e">${capE(p.e)}</span><span class="pblock-n">${pct(p.s)} · ${fmtC(p.c)}×</span></span>`).join("");
+  if(pb) pb.innerHTML=front.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b>${MODELS[p.m].label}</b><span class="pblock-e">${capE(p.e)}</span><span class="pblock-n">${pct(p.s)} · ${fmtC(p.c)}×</span></span>`).join("");
 }
-// ---- Value table: each couple within reach against the price trend ----
+// ---- Value table: each frontier couple against the price trend ----
 function fillScoreTable(rows,tr){
   const tb=document.querySelector("#score-tbl tbody"); if(!tb) return; tb.innerHTML="";
   rows.map(p=>({...p,r:valueOf(tr,p)})).sort((a,b)=>b.r-a.r).forEach(p=>{ const col=cvar(MODELS[p.m].c),
@@ -865,12 +854,12 @@ function fillScoreTable(rows,tr){
     sc=p.r>=0?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(p.r)/Math.LN10,1)*0.52)*100),
     pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${vIndex(p.r)}</span>`;
     const row=document.createElement("tr");
-    row.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}${p.front?"":" <span class=\"faint\">(within reach)</span>"}</td>`
+    row.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
       +`<td class="num">${fmtC(p.c)}×</td><td class="num">${pct(p.s)}</td>`
       +`<td style="min-width:96px">${pill}</td>`;
     tb.appendChild(row); }); }
 // ---- Tiers: the best value by task complexity; the crown ----
-// Four tiers, each with a TARGET quality θ*. Among the couples within reach of the frontier, each tier picks the one
+// Four tiers, each with a TARGET quality θ*. Among the frontier couples, each tier picks the one
 // that maximises
 //     window(θ) × e^(λ·θ) ⁄ cost
 // λ the slope of the price trend. e^(λθ) ⁄ cost is the couple's value against the trend (the same all along the trend
@@ -903,14 +892,14 @@ function tierDefaults(){
 }
 tierDefaults();
 function tierPicks(){
-  const rows=couples(), {reach}=frontier(rows), tr=fitTrend(rows);
-  reach.forEach(p=>{ p.r=valueOf(tr,p); p.qg=qGain(tr,p); });
+  const rows=couples(), {front}=frontier(rows), tr=fitTrend(rows);
+  front.forEach(p=>{ p.r=valueOf(tr,p); p.qg=qGain(tr,p); });
   const tscore=(p,T)=>logWindow(p.t,T)+tr.l*p.t-p.x;                                   // ln(window × e^(λθ) ⁄ cost)
-  const picks=TIERS.map(T=>({...T, win:reach.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a)}));
-  // CROWN: the couple within reach furthest below the price trend: the most quality for its cost against the going
+  const picks=TIERS.map(T=>({...T, win:front.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a)}));
+  // CROWN: the frontier couple furthest below the price trend: the most quality for its cost against the going
   // rate. Read on the cost axis, e^r times cheaper than the trend at its quality; on the quality axis, r ⁄ λ above what
   // the trend gives for its cost: the same gap, since the trend is a straight line.
-  const crown=reach.reduce((a,b)=> b.r > a.r ? b : a);
+  const crown=front.reduce((a,b)=> b.r > a.r ? b : a);
   return {picks,crown,tr};
 }
 function drawTiers(){
@@ -939,15 +928,15 @@ function drawTiers(){
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
-      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows over the θ axis (labelled in expected score) plus the couples within
-// reach as ticks, and a θ*/σ slider pair per tier that live-updates TIERS and re-renders.
+// frontier couples as ticks, and a θ*/σ slider pair per tier that live-updates TIERS and re-renders.
 // Redraw ONLY the window SVG (called on every slider move) — leaves the slider DOM untouched so dragging keeps working.
 function drawTierWindows(){
   const host=document.getElementById("tier-windows"); if(!host) return;
-  const {reach}=frontier(couples());
+  const {front}=frontier(couples());
   // Axis spans the targets' range (from tierDefaults) plus half a gap of padding, so the end windows are not clipped.
   const padT=0.5*TIERQ.gap, Tmn=TIERQ.lo-padT, Tmx=TIERQ.hi+padT;
   const W=1100,H=140,mL=8,mR=8,mT=8,mB=24, iw=W-mL-mR, ih=H-mT-mB;
@@ -960,7 +949,7 @@ function drawTierWindows(){
     d+=` L ${mL+iw} ${mT+ih} Z`;
     svg+=`<path d="${d}" fill="${col}" fill-opacity="0.06" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
        +`<line x1="${X(T.t)}" y1="${mT}" x2="${X(T.t)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
-  reach.forEach(p=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`; });
+  front.forEach(p=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`; });
   host.innerHTML=svg+`</svg>`;
 }
 // Build the tuner ONCE (window container + persistent sliders). Slider input updates state + redraws windows/cards only.

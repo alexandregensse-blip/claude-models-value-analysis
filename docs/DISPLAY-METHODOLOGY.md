@@ -71,19 +71,13 @@ Its colours follow the data: green above 100, red below, each side scaled to the
 - Optional **tier bands** shade the quality range each tier owns: from its target up to the next one; the outer bands
   extend half a gap beyond the first and last targets.
 
-## 7. Pareto frontier, and the couples within reach
+## 7. Pareto frontier
 
-- **By centres**, a couple is dominated when another costs no more and scores no less, and is strictly better on one
-  of the two. The frontier is the set of non-dominated couples, ordered by cost; it is drawn as a line.
-- **Within reach.** A couple beaten by a hair leaves the frontier although the two intervals overlap. With the
-  intervals, couple o beats couple p with probability
-
-      P(o beats p) = Φ((θ_o − θ_p) ⁄ √(h_θo² + h_θp²)) × Φ((x_p − x_o) ⁄ √(h_xo² + h_xp²))
-
-  (x = log cost, h the quasi-standard errors; the two axes are fitted separately, so the two factors are
-  independent). A couple is **within reach** of the frontier unless some couple beats it with probability 0.84 or
-  more — the level of the intervals shown everywhere. The frontier by centres is always within reach. The couples
-  within reach are the **candidates** of every pick (§ 10, § 11); on the chart they carry a dashed outline.
+A couple is **dominated** when another costs no more and scores no less, and is strictly better on one of the two
+(centres compared). The frontier is the set of non-dominated couples, ordered by cost; it is drawn as a line, and its
+couples are the **candidates** of every pick (§ 10, § 11). A couple beaten on both axes by another is not a candidate,
+however close: a "within reach" rule (not beaten with probability 0.84) was used on 30 Sep 2026 and withdrawn the same
+day, since it let a couple strictly beaten by another be picked.
 
 ## 8. Price trend
 
@@ -122,7 +116,7 @@ and a window width σ.
   through these two bounds.
 - **Window width**: σ = gap ⁄ (2·√ln 2), gap the spacing of the targets: adjacent windows cross at half weight midway
   between their targets.
-- **Score**: among the couples within reach (§ 7),
+- **Score**: among the frontier couples (§ 7),
 
       score = window(θ) × e^(λ·θ) ⁄ cost,   window = e^(−δ²) below the target, 1 at or above,   δ = (θ − θ*) ⁄ σ
 
@@ -140,7 +134,7 @@ and a window width σ.
 
 ## 11. The crown
 
-The best overall pick is the couple within reach that sits **furthest below the price trend** (largest r, § 9): the
+The best overall pick is the frontier couple that sits **furthest below the price trend** (largest r, § 9): the
 most quality for its cost against the going rate. Its card shows its value index, and its note both readings of the
 same gap — e^r times cheaper than the trend at its quality, and r ⁄ λ above the trend at its cost, in points of
 expected score. It does not depend
@@ -166,7 +160,6 @@ moves only when its content (text, figures, data) changes.
 | § 1 publication | ≥ 2 publishers | one publisher's figures cannot be cross-checked |
 | § 2 panel curve | 41 points, linear in logit between them | labels only |
 | § 6 low-end compression | 3×, below the weakest tier target | display only: older models grouped, the top left as it is |
-| § 7 within reach | not beaten with probability ≥ 0.84 | the level of every interval shown (one standard deviation) |
 | § 8 price trend | straight line in (θ, ln cost), effective-variance weights | the trend of every couple; no shape constant |
 | § 10 targets | e = 0.05 | ends drawn inward by 5 % of the frontier's span |
 | § 10 windows | σ = gap ⁄ (2·√ln 2) | adjacent windows cross at half weight midway |
