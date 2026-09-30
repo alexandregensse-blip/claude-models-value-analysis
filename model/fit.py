@@ -3,7 +3,8 @@
 product, which the site reads. Run in the Stan environment:  .stan/venv/bin/python model/fit.py
 
 The cache holds, per couple and axis, reference-free values on the log scale — [centre, quasi-standard error,
-publishers, new-source 16–84 % interval, Monte Carlo error of the centre] — with the fit's diagnostics, the list of
+publishers, new-source 16–84 % interval, Monte Carlo error of the centre, and on the quality axis the latent quality
+θ as [median, quasi-standard error, Monte Carlo error]] — with the fit's diagnostics, the list of
 its input files and their fingerprint. A fit that misses the convergence criteria (lqm.CONVERGED) is written with
 converged = false, and the site refuses it; so does it a fit whose inputs have changed since.
 
@@ -62,7 +63,8 @@ def main(refit_all=False):
         post, maps = lqm.fit(groups, axis, seed=SEED, log=lambda m: print(m, flush=True))
         S, diag = lqm.summarise(post, maps, groups, lqm.stan_data(groups, axis)[0], seed=SEED)
         out[axis] = {c: [round(v["centre"], 5), round(v["half"], 5), v["publishers"], [round(x, 5) for x in v["new_source"]],
-                         round(v["mcse"], 6)] for c, v in sorted(S.items())}
+                         round(v["mcse"], 6)] + ([[round(x, 5) for x in v["theta"]]] if "theta" in v else [])
+                     for c, v in sorted(S.items())}
         diag.update(groups=len(groups), rows=sum(len(g["rows"]) for g in groups.values()), set_aside=dict(report),
                     republished=[list(p) for p in republished],
                     unpublished=sorted(c for c, v in S.items() if not v["published"]),

@@ -1,4 +1,4 @@
-"""Site settings: where it is published, its titles and ownership keys, and the reference couple of the display."""
+"""Site settings: where it is published, its titles and ownership keys."""
 import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -17,5 +17,4 @@ SITE_HOST   = SITE_URL.split("://", 1)[1].rstrip("/")   # shown in the share ima
 BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster Tools ownership (msvalidate.01); keep it
 INDEXNOW_KEY = "b3573dbc1da690e66e9ef05b081b7abe"   # public by design: served as /<key>.txt, proves ownership to IndexNow (Bing…)
 
-GRID_ANCHOR = "opus-5@high"                 # reference couple: shown as 1.0 on both axes (a display choice)
 EFFORT_ORDER = ["low", "medium", "high", "xhigh", "max", "solo"]

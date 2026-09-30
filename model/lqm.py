@@ -667,7 +667,30 @@ def summarise(post, maps, groups, data, lo=0.16, hi=0.84, min_publishers=2, seed
                    mcse=float(mcse_level[i]), publishers=len(pubs[c]), published=len(pubs[c]) >= min_publishers)
            for c, i in maps["ci"].items()}
     diag.update(qv_error_max=round(qv_max, 4), qv_error_median=round(qv_med, 4))
+    if not data["cost"]:                                             # quality: the latent scale θ itself, on which the
+        import arviz as az                                           # page decides, and its reading as a panel score
+        T = post.var("theta")
+        qt, _, _ = quasi_variances(T, lo, hi)
+        x = post.arrays["theta"]
+        mt = np.atleast_1d(az.mcse(az.from_dict({"posterior": {"x": x.reshape(x.shape[0], x.shape[1], -1)}}),
+                                   method="median")["x"].values)
+        for c, i in maps["ci"].items():
+            out[c]["theta"] = [float(np.median(T[:, i])), float(math.sqrt(qt[i])), float(mt[i])]
+        diag["panel_curve"] = panel_curve(post, data, float(T.min()), float(T.max()))
     return out, diag
+
+
+def panel_curve(post, data, lo, hi, n=41):
+    """Expected panel score (share of each benchmark's bound, panel-weighted) of a couple of latent quality θ, with no
+    couple-specific effect: [[θ, score], …] over [lo, hi], posterior median at each θ. The page labels its θ axis
+    with it; decisions stay on θ."""
+    import numpy as np
+    pg = np.asarray(data["pg"], int) - 1
+    pw = np.asarray(data["pw"], float)
+    mu, sd = np.asarray(data["mu"])[pg], np.asarray(data["sd"])[pg]
+    o, a = post.var("o")[:, pg], post.var("a")[:, pg]
+    return [[round(float(t), 4), round(float(np.median(_expit(mu + sd * (o + a * t)) @ pw / pw.sum())), 5)]
+            for t in np.linspace(lo, hi, n)]
 
 
 def diagnostics(post):

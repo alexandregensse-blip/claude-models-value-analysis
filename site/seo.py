@@ -37,7 +37,7 @@ def content_fingerprint(body, pre, data):
                       ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
-def head_tags(date, anchor_label, counts):
+def head_tags(date, counts):
     """Title, description, canonical, icon, Open Graph, Twitter card and the JSON-LD Dataset. Every value is on the page."""
     a = lambda v: htmlmod.escape(v, quote=True)
     dataset = {
@@ -45,7 +45,7 @@ def head_tags(date, anchor_label, counts):
         "name": TITLE,
         "description": ("What each recent Claude model actually costs, at every effort level — reconstructed from public "
                         "measurements and reduced to a relative cost by chaining same-task comparisons. Aggregated from "
-                        f"{counts}; costs and qualities are relative to {anchor_label} = 1.00."),
+                        f"{counts}; cost as a multiple of the cheapest couple, quality as the expected score on the benchmark panel."),
         "url": SITE_URL, "sameAs": REPO_URL,
         "creator": {"@type": "Person", "name": "Alexandre Gensse", "url": "https://github.com/alexandregensse-blip"},
         "dateModified": date.isoformat(),
@@ -53,7 +53,7 @@ def head_tags(date, anchor_label, counts):
         "isAccessibleForFree": True,
         "keywords": ["Claude", "Claude models", "LLM cost", "effort level", "Fable", "Opus", "Sonnet", "Haiku",
                      "benchmark", "Pareto frontier"],
-        "variableMeasured": [f"Relative cost per task ({anchor_label} = 1.00)", f"Relative quality ({anchor_label} = 1.00)"],
+        "variableMeasured": ["Cost per task, as a multiple of the cheapest couple", "Expected score on the benchmark panel (%)"],
         "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": SITE_URL + "raw-data.csv"}],
     }
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": SITE_NAME, "url": SITE_URL}
@@ -76,7 +76,7 @@ def head_tags(date, anchor_label, counts):
         f'<script type="application/ld+json">\n{ld}\n</script>\n'
     )
 
-def write_root_files(date, pre, anchor_label):
+def write_root_files(date, pre):
     """robots.txt, sitemap.xml, llms.txt and the IndexNow key file, next to index.html. llms.txt reuses the
     full answer computed by app.js (answerFull), so it states the same conclusions as the page."""
     plain = lambda h: re.sub(r"\s+(?=:)", "", re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", "", h)))).strip()
@@ -91,7 +91,7 @@ def write_root_files(date, pre, anchor_label):
 
 {pre.get("answer-full", "")}
 
-Costs and qualities are relative to {anchor_label} = 1.00. They are fused from measurements taken on the same task by a latent-quality model that estimates each benchmark's own scale (method: docs/METHODOLOGY.md in the source repository), from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
+Costs are multiples of the cheapest couple's; quality is the expected score on the benchmark panel. Both are fused from measurements taken on the same task by a latent-quality model that estimates each benchmark's own scale (method: docs/METHODOLOGY.md in the source repository), from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
 
 ## Report
 

@@ -1,5 +1,4 @@
 const MODELS = __MODELS__;   // data/catalog/models.json: label, colour variable, task-size flag, in legend order
-const ANCHOR=__ANCHOR_JS__;      // the couple pinned to 1.0 (and to 100 on the value index)
 const LEGACY=["opus-4.7","sonnet-4.6"];                         // older models: hidden unless the reader turns them on
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
@@ -8,19 +7,63 @@ const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.se
 const logTicks=(vmin,vmax)=>{const o=[];for(let e=Math.floor(Math.log10(vmin));Math.pow(10,e)<=vmax*1.0001;e++)for(let b=1;b<=9;b++){const v=b*Math.pow(10,e);if(v>=vmin*0.999&&v<=vmax*1.001)o.push(v);}return o;};
 const tickLbl=v=>{const m=Math.round(v/Math.pow(10,Math.floor(Math.log10(v)+1e-9)));return m===1||m===2||m===5;};
 const linTicks=(lo,hi,target)=>{const raw=(hi-lo)/target,mag=Math.pow(10,Math.floor(Math.log10(raw))),n=raw/mag,step=(n<1.5?1:n<3?2:n<7?5:10)*mag,o=[];for(let t=Math.ceil(lo/step)*step;t<=hi+1e-9;t+=step)o.push(Math.round(t*1e4)/1e4);return o;};
-// Solve a small n×n linear system by Gaussian elimination (n ≤ 3) — used for the price-envelope fit.
-// Returns null on a singular system so the caller can fall back to a lower-order fit.
-function solveN(A,b){ const n=b.length, M=A.map((r,i)=>[...r,b[i]]);
-  for(let c=0;c<n;c++){ let piv=c; for(let r=c+1;r<n;r++) if(Math.abs(M[r][c])>Math.abs(M[piv][c])) piv=r; [M[c],M[piv]]=[M[piv],M[c]];
-    if(Math.abs(M[c][c])<1e-12) return null;
-    for(let r=0;r<n;r++){ if(r===c) continue; const f=M[r][c]/M[c][c]; for(let k=c;k<=n;k++) M[r][k]-=f*M[c][k]; } }
-  return M.map((r,i)=>r[n]/M[i][i]); }
+// Normal CDF (Abramowitz & Stegun 7.1.26, error below 1.5e-7): the probability that one couple beats another.
+const Phi=z=>{ const x=Math.abs(z)/Math.SQRT2, k=1/(1+0.3275911*x),
+  e=1-((((1.061405429*k-1.453152027)*k+1.421413741)*k-0.284496736)*k+0.254829592)*k*Math.exp(-x*x); return z>=0?(1+e)/2:(1-e)/2; };
 
-// COST & QUALITY grids: relative [centre, lo, hi] per (model, effort), ANCHOR = 1.0, from the latent-quality model
-// (model/lqm.py): centre = posterior median; lo–hi = the couple's own 16–84 % interval (quasi-standard error), so that any
-// two couples compare through their two intervals — the anchor is a divisor and shares nothing with the others.
+// The fitted values, reference-free (model/fit-cache.json through site/grids.py), published couples only:
+//   COSTGRID {model:{effort:[ln cost, quasi-standard error]}}: cost on a task of typical size;
+//   QUALGRID {model:{effort:[θ, quasi-standard error]}}: θ the latent quality, on the model's logit scale.
+// The quasi-standard error is the half-width of the couple's own 16–84 % interval: two couples compare through their two
+// intervals. No couple is a reference: the page counts cost from the cheapest couple shown and reads θ as an expected
+// panel score (PANEL). Every decision (frontier, trend, tiers, crown) is taken on ln cost and θ.
 const COSTGRID=__COSTGRID__;
-const QUALGRID=__QUALGRID__;   // {model:{effort:[centre, lo, hi]}}
+const QUALGRID=__QUALGRID__;
+// PANEL = [[θ, expected score]]: the expected score, averaged over the benchmark panel, of a couple of latent quality θ
+// (posterior median, no couple-specific effect). It only LABELS θ; read linearly in logit between its nodes.
+const PANEL=__PANEL__;
+const lgt=s=>Math.log(s/(1-s)), expit=x=>1/(1+Math.exp(-x));
+function score(t){ let i=1; while(i<PANEL.length-1&&PANEL[i][0]<t) i++;
+  const [t0,s0]=PANEL[i-1], [t1,s1]=PANEL[i]; return expit(lgt(s0)+(lgt(s1)-lgt(s0))*(t-t0)/(t1-t0)); }
+function scoreInv(s){ let lo=PANEL[0][0]-100, hi=PANEL[PANEL.length-1][0]+100;   // the score rises with θ
+  for(let k=0;k<60;k++){ const m=(lo+hi)/2; if(score(m)<s) lo=m; else hi=m; } return (lo+hi)/2; }
+const pct=s=>(100*s).toFixed(1)+" %";
+const fmtX=v=>(v<10?v.toFixed(1):v.toFixed(0))+"×";
+// Every shown couple: x = ln cost, t = θ (hx, ht their quasi-standard errors); c = cost as a multiple of the cheapest
+// couple shown, [clo, chi] its interval; [tlo, thi] the interval of θ; s = the expected panel score of θ.
+function couples(){ const rows=[];
+  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
+    for(const e in cg){ const q=qg[e]; if(q) rows.push({m,e,x:cg[e][0],hx:cg[e][1],t:q[0],ht:q[1]}); } }
+  const x0=Math.min(...rows.map(p=>p.x));
+  rows.forEach(p=>{ p.c=Math.exp(p.x-x0); p.clo=p.c*Math.exp(-p.hx); p.chi=p.c*Math.exp(p.hx); p.tlo=p.t-p.ht; p.thi=p.t+p.ht; p.s=score(p.t); });
+  return rows; }
+// PARETO FRONTIER. By centres, a couple is dominated when another costs no more and scores no less (strictly better on
+// one). With the intervals, a couple is WITHIN REACH of the frontier unless another couple beats it on both axes with
+// probability REACH or more: P(θ higher) × P(cost lower), each a normal law on the difference of the two centres with
+// the two quasi-standard errors (the two axes are fitted separately). REACH = 0.84, the level of the intervals shown
+// everywhere: a couple beaten by a hair stays a candidate. The frontier by centres is always within reach.
+const REACH=0.84;
+function frontier(rows){ const E=1e-9, dom=(o,p)=>o.x<=p.x+E&&o.t>=p.t-E&&(o.x<p.x-E||o.t>p.t+E);
+  const pDom=(o,p)=>Phi((o.t-p.t)/Math.hypot(o.ht,p.ht))*Phi((p.x-o.x)/Math.hypot(o.hx,p.hx));
+  rows.forEach(p=>{ p.front=!rows.some(o=>dom(o,p)); p.reach=!rows.some(o=>o!==p&&pDom(o,p)>=REACH); });
+  return {front:rows.filter(p=>p.front).sort((a,b)=>a.x-b.x), reach:rows.filter(p=>p.reach).sort((a,b)=>a.x-b.x)}; }
+// PRICE TREND: what a given quality typically costs, fitted on EVERY shown couple (the trend of the models, not the
+// frontier): ln cost = a + λ·θ, least squares weighted by each couple's uncertainty across the line, 1/(hx² + λ²·ht²)
+// (both axes are uncertain: effective variance), iterated to its fixed point. λ is the market's price of quality: one
+// more unit of θ costs e^λ times more. Kept ≥ 0: quality never gets cheaper as it rises.
+function fitTrend(rows){ let a=0, l=0;
+  for(let it=0; it<100; it++){ let S=0,St=0,Sx=0,Stt=0,Stx=0;
+    rows.forEach(p=>{ const w=1/(p.hx*p.hx+l*l*p.ht*p.ht); S+=w; St+=w*p.t; Sx+=w*p.x; Stt+=w*p.t*p.t; Stx+=w*p.t*p.x; });
+    const l2=Math.max(0,(S*Stx-St*Sx)/(S*Stt-St*St)); a=(Sx-l2*St)/S; const done=Math.abs(l2-l)<1e-12; l=l2; if(done) break; }
+  const w=rows.map(p=>1/(p.hx*p.hx+l*l*p.ht*p.ht)), sw=w.reduce((u,v)=>u+v,0), xm=rows.reduce((u,p,i)=>u+w[i]*p.x,0)/sw;
+  const R2=1-rows.reduce((u,p,i)=>u+w[i]*(p.x-a-l*p.t)**2,0)/rows.reduce((u,p,i)=>u+w[i]*(p.x-xm)**2,0);
+  return {a,l,R2,at:t=>a+l*t}; }
+// VALUE: how much cheaper a couple is than the trend charges for its quality, r = trend(θ) − ln cost, shown as e^r
+// times cheaper (or e^−r times dearer). The same gap read on the quality axis is r/λ: the couple's θ above what the
+// trend gives for its cost, shown in points of expected score.
+const valueOf=(tr,p)=>tr.at(p.t)-p.x;
+const vWord=r=>`${fmtX(Math.exp(Math.abs(r)))} ${r>=0?"cheaper":"dearer"}`;
+const qGain=(tr,p)=>tr.l>0?100*(p.s-score(p.t-valueOf(tr,p)/tr.l)):0;   // points of expected score above the trend
 
 // Older-model toggle: the grids keep a full copy; hiding a model removes it from every view and every fit
 // (frontier, price curve, tiers, matrix), exactly as if it had not been measured.
@@ -53,15 +96,18 @@ function toggleLegacy(){ const fid=document.activeElement?.id; showLegacy=!showL
 applyLegacy();
 
 // ============ shared chart helpers (used by both the landscape §1 and the Pareto) ============
-// Quality axis as a symlog around parity (1.0): dilates the crowded near-parity band, compresses the sparse tails.
-const SQ=0.045, symT=v=>Math.sign(v-1)*Math.log(1+Math.abs(v-1)/SQ), symTinv=u=>1+Math.sign(u)*SQ*(Math.exp(Math.abs(u))-1);
-// Zoom/pan work in the axes' SCREEN-LINEAR coordinates: X is linear in log10(cost), Y in symT(quality).
-// A chart's "view" = [xlo,xhi (log-cost), tLo,tHi (symT-quality)]. Default = data bounds; a stored s.__view overrides it,
+// Quality axis: θ itself (the scale every decision uses), labelled in expected panel score. Below the weakest tier target
+// (couples short of today's level) θ is compressed LOW_SQUEEZE times, so older and weaker models sit together at the
+// bottom instead of stretching the axis; above it the scale is left as it is.
+const LOW_SQUEEZE=3;
+const yOf=t=>{ const t0=TIERQ.lo; return t>=t0?t:t0+(t-t0)/LOW_SQUEEZE; };
+// Zoom/pan work in the axes' SCREEN-LINEAR coordinates: X is linear in log10(cost), Y in yOf(θ).
+// A chart's "view" = [xlo,xhi (log-cost), ylo,yhi (yOf θ)]. Default = data bounds; a stored s.__view overrides it,
 // so zoom re-renders the chart (ticks + labels recompute at fixed size) instead of scaling the whole SVG.
-const defView=(xmn,xmx,ymn,ymx)=>[Math.log10(xmn)-0.06,Math.log10(xmx)+0.06,symT(ymn)-0.12,symT(ymx)+0.12];
+const defView=(xmn,xmx,tmn,tmx)=>{ const a=yOf(tmn), b=yOf(tmx), p=0.03*(b-a); return [Math.log10(xmn)-0.06,Math.log10(xmx)+0.06,a-p,b+p]; };
 const viewAxes=(v,mL,iw,mT,ih,yp)=>({
   X:val=>mL+(Math.log10(val)-v[0])/(v[1]-v[0])*iw,
-  Y:val=>mT+yp+(1-(symT(val)-v[2])/(v[3]-v[2]))*(ih-2*yp) });
+  Y:t=>mT+yp+(1-(yOf(t)-v[2])/(v[3]-v[2]))*(ih-2*yp) });
 // Two-line axis title: big main label + small precision on the next line (a second tspan; under rotation it sits
 // alongside, toward the plot). rot = optional transform string.
 function axisTitle(s,x,y,main,sub,rot){
@@ -70,18 +116,22 @@ function axisTitle(s,x,y,main,sub,rot){
   const b=el("tspan",{x,dy:15,"font-size":10.5,fill:cvar('--faint'),"font-weight":400}); b.textContent=sub; t.appendChild(b);
   s.appendChild(t);
 }
-// Quality gridlines at round quality values (non-uniform spacing under symlog); the 1.0 anchor is dashed.
-function qGrid(s,Y,mL,iw,mT,ih){ [0.4,0.5,0.6,0.7,0.8,0.9,0.95,1.0,1.05,1.1,1.15,1.2,1.3].forEach(val=>{ const y=Y(val); if(y<mT-0.5||y>mT+ih+0.5) return;
-  s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar(val===1?MODELS[ANCHOR.m].c:'--line'),"stroke-width":1,"stroke-dasharray":val===1?"3 4":"","stroke-opacity":val===1?0.5:1}));
-  const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"});t.textContent=val.toFixed(2);s.appendChild(t); }); }
+// Quality gridlines at round expected scores: every 5 points, or 10 when they fall too close.
+function qGrid(s,Y,mL,iw,mT,ih){
+  const at=st=>{ const o=[]; for(let k=1;k*st<0.9999;k++){ const v=Math.round(k*st*1000)/1000, y=Y(scoreInv(v)); if(y>=mT-0.5&&y<=mT+ih+0.5) o.push([v,y]); } return o; };
+  let st=0.05, g=at(st); const gaps=g.slice(1).map((u,i)=>Math.abs(u[1]-g[i][1])).sort((a,b)=>a-b), med=gaps.length?gaps[gaps.length>>1]:99;
+  if(med<16){ st=0.10; g=at(st); }
+  let last=-1e9; g=g.filter(([v,y])=>Math.abs(y-last)>=16?(last=y,true):false);   // the compressed low end: skip lines closer than 16 px
+  g.forEach(([v,y])=>{ s.appendChild(el("line",{x1:mL,y1:y,x2:mL+iw,y2:y,stroke:cvar('--line'),"stroke-width":1}));
+    const t=el("text",{x:mL-9,y:y+4,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"end"}); t.textContent=Math.round(100*v)+"%"; s.appendChild(t); }); }
 // Asymmetric interval ovals (per-side radii from [clo,chi]×[qlo,qhi]), centred on the point, clipped
 // to the plot, faint by default. Returns the array used by hoverTip() to reveal them.
 function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("clipPath",{id:cid});
   cp.appendChild(el("rect",{x:mL,y:mT,width:iw,height:ih})); defs.appendChild(cp); s.appendChild(defs);
   const gEll=el("g",{"clip-path":`url(#${cid})`}); s.appendChild(gEll); const ells=[], byM={};
   pts.forEach(p=>(byM[p.m]=byM[p.m]||[]).push(p));
-  for(const m in byM){ const col=cvar(MODELS[m].c); byM[m].forEach(p=>{ if(p.clo==null) return; const cx=X(p.c), cy=Y(p.q),
-      rxR=Math.max(X(p.chi)-cx,0.6), rxL=Math.max(cx-X(p.clo),0.6), ryU=Math.max(cy-Y(p.qhi),0.6), ryD=Math.max(Y(p.qlo)-cy,0.6);
+  for(const m in byM){ const col=cvar(MODELS[m].c); byM[m].forEach(p=>{ if(p.clo==null) return; const cx=X(p.c), cy=Y(p.t),
+      rxR=Math.max(X(p.chi)-cx,0.6), rxL=Math.max(cx-X(p.clo),0.6), ryU=Math.max(cy-Y(p.thi),0.6), ryD=Math.max(Y(p.tlo)-cy,0.6);
     const d=`M ${cx} ${cy-ryU} A ${rxR} ${ryU} 0 0 1 ${cx+rxR} ${cy} A ${rxR} ${ryD} 0 0 1 ${cx} ${cy+ryD} A ${rxL} ${ryD} 0 0 1 ${cx-rxL} ${cy} A ${rxL} ${ryU} 0 0 1 ${cx} ${cy-ryU} Z`;
     const elp=el("path",{d,fill:col,"fill-opacity":0.4,stroke:col,"stroke-opacity":0.85,"stroke-width":1,opacity:0.15});
     gEll.appendChild(elp); ells.push({el:elp,cx,cy,rxR,rxL,ryU,ryD}); }); }
@@ -93,9 +143,9 @@ function hoverTip(s,ells,pts,X,Y,mL,iw){ const DEF=0.15,HOV=0.78;
   const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU; o.el.setAttribute("opacity",((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
-    let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.q))**2; if(d2<bd){bd=d2;best=p;} });
-    if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+52),mL+iw-52)); ttxt.setAttribute("y",Y(best.q)-11);
-      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — ${best.c}× · ${best.q}×`;
+    let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.t))**2; if(d2<bd){bd=d2;best=p;} });
+    if(best){ ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",Math.min(Math.max(X(best.c),mL+52),mL+iw-52)); ttxt.setAttribute("y",Y(best.t)-11);
+      ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
       const bb=ttxt.getBBox(); trect.setAttribute("x",bb.x-4); trect.setAttribute("y",bb.y-2); trect.setAttribute("width",bb.width+8); trect.setAttribute("height",bb.height+4); tip.setAttribute("opacity",1); }
     else tip.setAttribute("opacity",0); };
   s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); }; }
@@ -126,90 +176,14 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
       s.appendChild(el("line",{x1:L.ax,y1:L.ay,x2:L.lx+dx*sc,y2:cyL+dy*sc,stroke:L.lead,"stroke-width":L.mdl?0.9:0.7,"stroke-opacity":0.4})); }
     const t=el("text",{x:L.lx,y:L.ly,fill:L.col,"font-size":L.fs,"font-weight":600,"text-anchor":"middle"});t.textContent=L.t;s.appendChild(t); }); }
 
-// Price envelope: every couple contributes its centre (posterior median), weighted by its distance to the frontier.
-// Intervals do not enter: smearing a point over its interval through the non-linear T and g shifts it toward parity,
-// which is a bias, not an uncertainty.  Fit: log10(cost) = g(T(quality)).
-//
-// SHAPE: log10(cost) = a + b·u + c·(e^{k·u} − 1)/k, with u = T(q) − T(min) and b, c ≥ 0. Then g'(u) = b + c·e^{k·u}
-// ≥ 0 for EVERY u, positive or negative — monotone by construction, everywhere, extrapolation included. The price of
-// quality cannot fall as quality rises; a decreasing stretch is a fitting artefact, not a shape, and since every value
-// index is a distance to this curve the artefact would propagate to all of them.
-// Fitted on ALL measured couples, not only the Pareto frontier. The frontier is by definition the CHEAPEST couple at
-// each quality: a regression through it is neither the frontier itself nor a market rate, and with one model
-// dominating a long stretch it collapses to 7 points, 5 of them a single effort ladder, with 64% of the quality axis
-// empty. The dominated couples are real measurements of what that quality costs — they are what populates the gap.
-// So the curve reads as "what a given quality typically costs", and a couple's distance to it as how far it beats or
-// trails the going rate.
-// The exponential term matters because the cloud is not parabolic: cost climbs gently across most of the quality
-// range then steepens sharply near the ceiling — curvature that GROWS. k is profiled over a small grid by weighted
-// SSE; as k → 0 the basis degenerates to a plain quadratic, so this is a strict generalisation.
-// INFLUENCE GRADED BY DISTANCE TO THE PARETO FRONTIER. Fitting every couple equally lets strictly-dominated models —
-// worse on both axes than something else — pull the curve; fitting the frontier alone throws away the measurements
-// that populate the middle. So each couple's weight is graded by how far it sits from the frontier, measured the same
-// way everything else in this report is, in log-cost:
-//     d = log10(cost) − log10(cheapest couple offering AT LEAST this quality)
-// d is exactly 0 on the frontier (the couple qualifies against itself), needs no interpolation, and grows with how
-// much you overpay for what you get. Weight = 1 − d/dmax: an efficient couple counts fully, the single worst one not
-// at all, everything in between on a straight line. dmax comes from the data, so the grading rescales by itself.
-function paretoWeights(pts){
-  const d=pts.map(p=>{ let best=Infinity;
-    pts.forEach(o=>{ if(o.q>=p.q-1e-9 && o.c<best) best=o.c; });
-    return Math.log10(p.c)-Math.log10(best); });
-  const dmax=Math.max(...d)||1;
-  return d.map(v=>1-v/dmax); }
-function fitPriceEnvelope(pts){
-  const PW=paretoWeights(pts), samp=[];
-  pts.forEach((p,i)=>{ const Tq=symT(p.q), lc=Math.log10(p.c), w=PW[i];
-    if(w<=0) return;                                                   // the single worst couple carries no influence
-    samp.push([Tq,lc,w]); });
-  const T0=Math.min(...samp.map(s=>s[0])), L=Math.max(...samp.map(s=>s[0]))-T0;
-  const fitK=k=>{
-    const M=[[0,0,0],[0,0,0],[0,0,0]], V=[0,0,0];                    // weighted normal equations on {1, u, (e^{ku}−1)/k}
-    samp.forEach(([Tq,lc,w])=>{ const u=Tq-T0, B=[1,u,(Math.exp(k*u)-1)/k];
-      for(let i=0;i<3;i++){ V[i]+=w*B[i]*lc; for(let j=0;j<3;j++) M[i][j]+=w*B[i]*B[j]; } });
-    const sse=co=>{ let s=0; for(let i=0;i<3;i++){ s-=2*co[i]*V[i]; for(let j=0;j<3;j++) s+=co[i]*co[j]*M[i][j]; } return s; };
-    // Candidate subspaces co = R·y for the b ≥ 0, c ≥ 0 active set: free · b pinned · c pinned · both pinned.
-    const RS=[ [[1,0,0],[0,1,0],[0,0,1]], [[1,0],[0,0],[0,1]], [[1,0],[0,1],[0,0]], [[1],[0],[0]] ];
-    let best=null;
-    RS.forEach(R=>{ const n=R[0].length, A=[], v=[];
-      for(let a=0;a<n;a++){ const row=[];
-        for(let b=0;b<n;b++){ let s=0; for(let i=0;i<3;i++) for(let j=0;j<3;j++) s+=R[i][a]*M[i][j]*R[j][b]; row.push(s); }
-        let s2=0; for(let i=0;i<3;i++) s2+=R[i][a]*V[i]; A.push(row); v.push(s2); }
-      const y=solveN(A,v); if(!y) return;
-      const co=[0,0,0]; for(let i=0;i<3;i++) for(let a=0;a<n;a++) co[i]+=R[i][a]*y[a];
-      if(co[1]<-1e-9 || co[2]<-1e-9) return;                          // infeasible: a negative slope term
-      const e=sse(co); if(!best||e<best.e-1e-12) best={co,e}; });
-    return best; };
-  let best=null, bk=1;
-  [0.1,0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.5,3].forEach(k=>{ const r=fitK(k);
-    if(r && (!best||r.e<best.e-1e-12)){ best=r; bk=k; } });
-  const co=best?best.co:[0,0,0];
-  // NOT clamped: the curve extrapolates freely outside the sampled range. Safe here precisely because b, c ≥ 0 makes
-  // g' ≥ 0 for every u, positive or negative — extrapolation can never fold back on itself, only flatten out below
-  // the data (g → a − c/k + b·u) and steepen above it.
-  return t=>{ const u=t-T0; return co[0]+co[1]*u+co[2]*(Math.exp(bk*u)-1)/bk; }; }
-// Distance of a couple to the price envelope, in LOG-COST: r = log10(price the frontier charges for that quality)
-// − log10(what the couple actually costs). Positive = cheaper than the going price, i.e. good value. Computed on the
-// centres, like the envelope. Split into the two halves so a tier can weight cost differently from quality (see
-// TIERS.gam): G = what the price curve grants for this couple's quality · C = what the couple actually costs, both in
-// log10. The plain residual is exactly G − C.
-function valueParts(gevT,p){
-  return { G: gevT(symT(p.q)), C: Math.log10(p.c) }; }
-function valueResidual(gevT,p){ const {G,C}=valueParts(gevT,p); return G-C; }
-// VALUE INDEX, anchored so ANCHOR = 100. Being an exponentiated difference of log-distances it is a genuine
-// RATIO: 384 reads "3.8× the value-for-money of the anchor", 45 reads "0.45×" — every value above 100 means something,
-// which a linear stretch of a bounded score could not offer. Unbounded above by construction: that is the cost of an
-// interpretable multiple, and it is why the anchor can sit anywhere in the ranking without breaking the scale.
-const valueIndex=(r,rAnc)=>100*Math.pow(10,r-rAnc);
-const anchorResidual=(gevT,pts)=>{ const a=pts.find(p=>p.m===ANCHOR.m&&p.e===ANCHOR.e); return a?valueResidual(gevT,a):0; };
-// Tier bands: the four usage tiers of the picker, as translucent horizontal bands. Band edges sit midway (in the dilated
-// metric T the windows live in) between adjacent tier centres q* — where one Gaussian window starts to outweigh the next —
-// and the outer bands extend half a gap beyond the first and last centres. They follow the sliders (TIERS is live).
-function tierBandEdges(){ const Tc=TIERS.map(t=>symT(t.q)), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];   // half-bell windows: a tier
-  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }                    // owns [its q*, next q*)
+// Tier bands: the four usage tiers of the picker as translucent horizontal bands. A tier owns [its target θ*, the next
+// target): the qualities that clear its bar but not the next one's; the outer bands extend half a gap beyond the first
+// and last targets. They follow the sliders (TIERS is live).
+function tierBandEdges(){ const Tc=TIERS.map(t=>t.t), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
+  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }
 function drawTierBands(s,Y,mL,iw,mT,ih){                                  // translucent fills, drawn UNDER the grid
   const e=tierBandEdges(), n=TIERS.length, g=el("g",{"pointer-events":"none"});
-  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
+  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(e[i+1]))), yB=Math.max(mT,Math.min(mT+ih,Y(e[i])));
     if(yB-yA<1) return;
     g.appendChild(el("rect",{x:mL,y:yA,width:iw,height:yB-yA,fill:TWCOL[i],"fill-opacity":0.10}));
     if(i<n-1) g.appendChild(el("line",{x1:mL,y1:yA,x2:mL+iw,y2:yA,stroke:TWCOL[i],"stroke-opacity":0.35,"stroke-width":1,"stroke-dasharray":"2 5"})); });
@@ -229,46 +203,47 @@ function atLightness(hex,L){
 const isDark=()=>{ const h=cvar('--paper'); return /^#/.test(h) && parseInt(h.slice(1,3),16)<100; };
 function drawTierBandLabels(s,Y,mL,iw,mT,ih){                             // names: left, opaque, ABOVE the grid (paper halo)
   const e=tierBandEdges(), g=el("g",{"pointer-events":"none"});
-  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i+1])))), yB=Math.max(mT,Math.min(mT+ih,Y(symTinv(e[i]))));
+  TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(e[i+1]))), yB=Math.max(mT,Math.min(mT+ih,Y(e[i])));
     if(yB-yA<16) return;
     const tx=el("text",{x:mL+10,y:yB-7,fill:atLightness(TWCOL[i],isDark()?0.80:0.50),"font-size":11.5,"font-weight":700,"text-anchor":"start","letter-spacing":"0.04em",
       stroke:cvar('--panel'),"stroke-width":3,"stroke-linejoin":"round","paint-order":"stroke"});
     tx.textContent=t.name; g.appendChild(tx); });
   s.appendChild(g);
 }
+// Cost multiples: two significant digits (one decimal below 10, none above), as fine as the Monte Carlo error allows
+// (about 0.3 % relative, the cheapest couple's included) and well inside the intervals (about ±10 %).
+const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
+function costTicks(s,X,xlo,xhi,mT,ih,dy){ logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
+  s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
+  if(tickLbl(val)){const t=el("text",{x,y:mT+ih+dy,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}}); }
+const AXIS_C=["Cost","multiple of the cheapest couple · log scale"], AXIS_Q=["Quality","expected score on the benchmark panel · latent scale"];
 function drawB(){
   const s=document.getElementById("chartB"); s.innerHTML="";
-  const W=1100,H=619,mL=58,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
-  // X = cost [central,lo,hi] from COSTGRID · Y = quality [central,lo,hi] from QUALGRID. Haiku excluded here. Bounds DYNAMIC.
-  const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
-  for(const m in COSTGRID){ if(m==="haiku-4.5") continue; const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
-      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);   // bounds include the uncertainty ovals (extents) so they stay fully inside
-      pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const yp=8, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  const W=1100,H=619,mL=66,mR=64,mT=22,mB=72, iw=W-mL-mR, ih=H-mT-mB;   // 16:9, fills body; extra bottom margin so the axis title clears the ticks
+  // X = cost multiple, Y = θ, each with its interval. Haiku excluded here. Bounds include the ovals so they stay inside.
+  const pts=couples().filter(p=>p.m!=="haiku-4.5");
+  const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)), tmn=Math.min(...pts.map(p=>p.tlo)), tmx=Math.max(...pts.map(p=>p.thi));
+  const yp=8, view=s.__view||defView(xmn,xmx,tmn,tmx);   // stored view (zoom/pan) overrides the data bounds
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
-  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];   // symlog quality axis (dilated near parity 1.0)
-  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
+  const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];
   if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier fills, under the grid
-  logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
-    s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
-    if(tickLbl(val)){const t=el("text",{x,y:mT+ih+20,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
+  costTicks(s,X,xlo,xhi,mT,ih,20);
   qGrid(s,Y,mL,iw,mT,ih);
   if(showBands) drawTierBandLabels(s,Y,mL,iw,mT,ih);                     // tier names over the grid
-  axisTitle(s,mL+iw/2,H-30,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
-  axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
+  axisTitle(s,mL+iw/2,H-30,...AXIS_C);
+  axisTitle(s,13,mT+ih/2,...AXIS_Q,`rotate(-90 13 ${mT+ih/2})`);
   const EO=["low","medium","high","xhigh","max"], byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=showOvals?drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB"):[];      // optional asymmetric uncertainty ovals, behind
   const segs=[];                                                          // curves + points on top, collect line segments for label repulsion
   for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
-    s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
-    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})));
-    for(let i=0;i<mp.length-1;i++) segs.push([X(mp[i].c),Y(mp[i].q),X(mp[i+1].c),Y(mp[i+1].q)]); }
-  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.q)})), labs=[];                  // effort labels + model-name labels, force-directed together
-  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.q),lx:X(p.c),ly:Y(p.q)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
+    s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.t)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
+    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})));
+    for(let i=0;i<mp.length-1;i++) segs.push([X(mp[i].c),Y(mp[i].t),X(mp[i+1].c),Y(mp[i+1].t)]); }
+  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.t)})), labs=[];                  // effort labels + model-name labels, force-directed together
+  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.t),lx:X(p.c),ly:Y(p.t)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
   for(const m in byM){ const mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e)), last=mp[mp.length-1], w=MODELS[m].label.length*7+6;
-    labs.push({ax:X(last.c),ay:Y(last.q),lx:X(last.c)+16+w/2,ly:Y(last.q)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }
+    labs.push({ax:X(last.c),ay:Y(last.t),lx:X(last.c)+16+w/2,ly:Y(last.t)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendB"); lg.innerHTML=
@@ -277,260 +252,195 @@ function drawB(){
                :`<span class="lg"><b>hover a point</b> for its identity</span>`);
 }
 
-// ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
-// Same shared machinery as the §1 landscape: symlog quality axis, faint interval ovals (hover to reveal),
-// point tooltip, force-directed frontier labels. Full body width.
+// ---- Dedicated Pareto chart: cost × quality scatter, the frontier joined, the couples within reach marked ----
+// Same shared machinery as the §1 landscape: θ axis, faint interval ovals (hover to reveal), point tooltip,
+// force-directed labels. Full body width.
+const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
-  const W=1100,H=619,mL=54,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
-  // X = cost · Y = quality (central + lo/hi for the ovals). All current nodes incl. Haiku (solo).
-  const pts=[]; let xmn=Infinity,xmx=-Infinity,ymn=Infinity,ymx=-Infinity;
-  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const d=cg[e], q=qg[e]; if(!q) continue;
-      xmn=Math.min(xmn,d[1]); xmx=Math.max(xmx,d[2]); ymn=Math.min(ymn,q[1]); ymx=Math.max(ymx,q[2]);
-      pts.push({m,e,c:d[0],clo:d[1],chi:d[2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const yp=10, view=s.__view||defView(xmn,xmx,ymn,ymx);   // stored view (zoom/pan) overrides the data bounds
+  const W=1100,H=619,mL=66,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
+  const pts=couples(), {front,reach}=frontier(pts), tr=fitTrend(pts);    // all current couples incl. Haiku (solo)
+  const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)), tmn=Math.min(...pts.map(p=>p.tlo)), tmx=Math.max(...pts.map(p=>p.thi));
+  const yp=10, view=s.__view||defView(xmn,xmx,tmn,tmx);   // stored view (zoom/pan) overrides the data bounds
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
   const {X,Y}=viewAxes(view,mL,iw,mT,ih,yp), xlo=view[0], xhi=view[1];
-  const fmtC=v=>(v<1?v.toFixed(2):v<10?v.toFixed(1):v.toFixed(0));
   if(showBands) drawTierBands(s,Y,mL,iw,mT,ih);                          // optional usage-tier fills, under the grid
-  logTicks(Math.pow(10,xlo),Math.pow(10,xhi)).forEach(val=>{ const x=X(val);
-    s.appendChild(el("line",{x1:x,y1:mT,x2:x,y2:mT+ih,stroke:cvar('--line'),"stroke-width":1}));
-    if(tickLbl(val)){const t=el("text",{x,y:mT+ih+18,fill:cvar('--faint'),"font-size":10.5,"text-anchor":"middle"});t.textContent=fmtC(val)+"×";s.appendChild(t);}});
+  costTicks(s,X,xlo,xhi,mT,ih,18);
   qGrid(s,Y,mL,iw,mT,ih);
   if(showBands) drawTierBandLabels(s,Y,mL,iw,mT,ih);                     // tier names over the grid
-  axisTitle(s,mL+iw/2,H-28,"Relative cost",`${ANCHOR.label} = 1.0 · log scale`);
-  axisTitle(s,13,mT+ih/2,"Relative quality",`${ANCHOR.label} = 1.0 · dilated near parity`,`rotate(-90 13 ${mT+ih/2})`);
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const par=pts.filter(p=>!pts.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  const pset=new Set(par.map(p=>p.m+"@"+p.e));
-  // HORIZONTAL price envelope log10(cost) = g(T(quality)), fit UNCERTAINTY-AWARE (5 weighted points per couple). Distance
-  // is measured in log-COST (cheaper/dearer than the frontier price for your quality) so cost is weighted linearly.
-  const gevT=fitPriceEnvelope(pts);                                                                      // all couples, graded by Pareto distance
-  const PW=paretoWeights(pts), sw=PW.reduce((a,b)=>a+b,0);                                              // R² uses the SAME grading as the fit
-  const xm=pts.reduce((a,p,i)=>a+PW[i]*Math.log10(p.c),0)/sw,
-    ssX=pts.reduce((a,p,i)=>a+PW[i]*Math.pow(Math.log10(p.c)-xm,2),0),
-    rssX=pts.reduce((a,p,i)=>a+PW[i]*Math.pow(gevT(symT(p.q))-Math.log10(p.c),2),0), R2=1-rssX/ssX;
-  { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=R2.toFixed(2); }
-  { let d="", on=false; const cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi), Ta=symT(0.45), Tb=symT(1.35);   // draw envelope EDGE TO EDGE (clip to the visible plot rect)
-    for(let k=0;k<=160;k++){ const Tt=Ta+(Tb-Ta)*k/160, q=symTinv(Tt), cost=Math.pow(10,gevT(Tt)), yy=Y(q);
-      if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+Y(q)+" "; on=true; } else on=false; }
-    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }   // envelope: faint grey, behind
-  const rAnc=anchorResidual(gevT,pts);                                                            // 100 = ANCHOR
-  const scored=pts.map(p=>({...p,score:valueIndex(valueResidual(gevT,p),rAnc),front:pset.has(p.m+"@"+p.e)}));
-  fillScoreTable(scored);
-  const ells=showOvals?drawOvals(s,par,X,Y,mL,iw,mT,ih,"clipP"):[];   // optional; ovals only on the frontier points
-  s.appendChild(el("path",{d:par.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.q)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
-  pts.forEach(p=>{ const on=pset.has(p.m+"@"+p.e), col=cvar(MODELS[p.m].c);
-    s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.q),r:on?5.6:3.4,fill:col,"fill-opacity":on?1:.25,stroke:on?cvar('--panel'):"none","stroke-width":1.3})); });
-  // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line
-  const cap=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
-  const ppix=par.map(p=>({x:X(p.c),y:Y(p.q)})), segs=[];   // anti-collision considers ONLY frontier points (faded/dominated ignored)
-  for(let i=0;i<par.length-1;i++) segs.push([X(par[i].c),Y(par[i].q),X(par[i+1].c),Y(par[i+1].q)]);
-  const labs=par.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+cap(p.e)}`, w=t.length*7.2+8;
-    return {ax:X(p.c),ay:Y(p.q),lx:X(p.c)+18+w/2,ly:Y(p.q),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:17,fs:13,mdl:true}; });
+  axisTitle(s,mL+iw/2,H-28,...AXIS_C);
+  axisTitle(s,13,mT+ih/2,...AXIS_Q,`rotate(-90 13 ${mT+ih/2})`);
+  { const r2el=document.getElementById("pareto-r2"); if(r2el) r2el.textContent=tr.R2.toFixed(2); }
+  { const x0=Math.min(...pts.map(p=>p.x)), cLo=Math.pow(10,xlo), cHi=Math.pow(10,xhi); let d="", on=false;   // the trend, edge to edge
+    for(let k=0;k<=200;k++){ const t=tmn-20+(tmx-tmn+40)*k/200, cost=Math.exp(tr.at(t)-x0), yy=Y(t);
+      if(cost>=cLo&&cost<=cHi&&yy>=mT&&yy<=mT+ih){ d+=(on?"L":"M")+X(cost)+" "+yy+" "; on=true; } else on=false; }
+    s.appendChild(el("path",{d,fill:"none",stroke:cvar('--ink'),"stroke-width":1,"stroke-opacity":0.3})); }
+  fillScoreTable(reach,tr);
+  const ells=showOvals?drawOvals(s,reach,X,Y,mL,iw,mT,ih,"clipP"):[];   // optional; ovals only on the couples within reach
+  s.appendChild(el("path",{d:front.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.t)).join(" "),fill:"none",stroke:cvar('--ink'),"stroke-width":2.2,"stroke-opacity":.7,"stroke-linejoin":"round"}));
+  pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);
+    s.appendChild(el("circle",p.front?{cx:X(p.c),cy:Y(p.t),r:5.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.3}
+      :p.reach?{cx:X(p.c),cy:Y(p.t),r:5.2,fill:col,"fill-opacity":.35,stroke:col,"stroke-width":1.6,"stroke-dasharray":"2 1.6"}
+      :{cx:X(p.c),cy:Y(p.t),r:3.4,fill:col,"fill-opacity":.25})); });
+  // labels (model · effort) on the couples within reach, force-directed to dodge overlaps and the frontier line
+  const ppix=reach.map(p=>({x:X(p.c),y:Y(p.t)})), segs=[];
+  for(let i=0;i<front.length-1;i++) segs.push([X(front[i].c),Y(front[i].t),X(front[i+1].c),Y(front[i+1].t)]);
+  const labs=reach.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`, w=t.length*7.2+8;
+    return {ax:X(p.c),ay:Y(p.t),lx:X(p.c)+18+w/2,ly:Y(p.t),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:17,fs:13,mdl:true}; });
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
   const lg=document.getElementById("legendP");
   if(lg) lg.innerHTML=visibleModels().map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")
     +`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`
+    +`<span class="lg"><span class="sw" style="border:1.5px dashed var(--ink);background:transparent;border-radius:50%"></span>within reach of the frontier (not beaten at 84 %)</span>`
     +`<span class="lg"><span class="sw" style="border-top:2.4px solid var(--ink);background:transparent;height:0"></span>Pareto frontier</span>`
-    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price curve — what a quality typically costs, graded by Pareto distance · R² = ${R2.toFixed(2)}</span>`;
-  const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (frontier order), same style as the tier cards but small
-  if(pb) pb.innerHTML=par.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b>${MODELS[p.m].label}</b><span class="pblock-e">${cap(p.e)}</span><span class="pblock-n">${p.q.toFixed(2)}× · ${fmtC(p.c)}×</span></span>`).join("");
+    +`<span class="lg"><span class="sw" style="border-top:1.5px solid var(--ink);opacity:.5;background:transparent;height:0"></span>Price trend — what a quality typically costs, over every couple · R² = ${tr.R2.toFixed(2)}</span>`;
+  const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (cost order), same style as the tier cards but small
+  if(pb) pb.innerHTML=reach.map((p,i)=>`${i?'<span class="pconn">→</span>':''}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}${p.front?'':';border-style:dashed'}"><b>${MODELS[p.m].label}</b><span class="pblock-e">${capE(p.e)}</span><span class="pblock-n">${pct(p.s)} · ${fmtC(p.c)}×</span></span>`).join("");
 }
-// ---- Value-score table : distance of each couple to the fitted Pareto-frontier envelope (from drawPareto) ----
-function fillScoreTable(scored){
+// ---- Value table: each couple within reach against the price trend ----
+function fillScoreTable(rows,tr){
   const tb=document.querySelector("#score-tbl tbody"); if(!tb) return; tb.innerHTML="";
-  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
-  scored.filter(p=>p.front).slice().sort((a,b)=>b.score-a.score).forEach(p=>{ const col=cvar(MODELS[p.m].c),   // frontier couples only
-    // Intensity from the DECADE distance to the anchor, so 2× and 0.5× read equally strong; capped at one decade.
-    sc=p.score>=100?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(Math.log10(p.score/100)),1)*0.52)*100),
-    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${Math.round(p.score)}</span>`;
-    const tr=document.createElement("tr");
-    tr.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}</td>`
-      +`<td class="num">${p.c.toFixed(2)}×</td><td class="num">${p.q.toFixed(2)}×</td>`
+  rows.map(p=>({...p,r:valueOf(tr,p)})).sort((a,b)=>b.r-a.r).forEach(p=>{ const col=cvar(MODELS[p.m].c),
+    // Intensity from the distance to the trend in decades, so 2× cheaper and 2× dearer read equally strong; capped at one decade.
+    sc=p.r>=0?cvar('--good'):cvar('--crit'), al=Math.round((0.14+Math.min(Math.abs(p.r)/Math.LN10,1)*0.52)*100),
+    pill=`<span class="scorepill" style="background:color-mix(in srgb, ${sc} ${al}%, transparent); color:var(--ink)">${vWord(p.r)}</span>`;
+    const row=document.createElement("tr");
+    row.innerHTML=`<td class="mdl"><span class="dot" style="background:${col}"></span>${MODELS[p.m].label} · ${capE(p.e)}${p.front?"":" <span class=\"faint\">(within reach)</span>"}</td>`
+      +`<td class="num">${fmtC(p.c)}×</td><td class="num">${pct(p.s)}</td>`
       +`<td style="min-width:96px">${pill}</td>`;
-    tb.appendChild(tr); }); }
-// ---- Central-complexity tiers + hidden-prominence crown (data-driven from COSTGRID × QUALGRID) ----
-// Each tier targets a CENTRAL complexity q* (relative quality). Among the Pareto-frontier couples we pick the one
-// maximising window(q) × 10^(G − γ·C): the half-bell window below focuses on couples near the target complexity, the
-// tilted value index (see PER-TIER COST SENSITIVITY) favours value.
-// The CROWN uses the HIDDEN PROMINENCE: hid(n) = 2·Sₙ − S_prev − S_next along the frontier (S = signed distance to the
-// envelope, as in the value-score table; endpoints get 0). It marks the sharpest knee — the standout couple overall.
-// q = target complexity, sig = Gaussian width — BOTH live-adjustable via the tuner (drawTierTuner); the proximity
-// is measured in the DILATED metric T(q) (same transform as the fit & the value score), so the windows are consistent
-// with the chart. TWCOL = one colour per tier window.
-// HALF-BELL window: below its target a couple is penalised by the Gaussian as before; at or above it the couple clears
-// the bar and earns a small bonus that saturates fast — 1 + BONUS·(1 − e^(−Δ/τ)), Δ = how far above q* in the dilated
-// metric, τ = σ/2 — so being better never hurts, and helps only a little. Capped at 1 + BONUS.
-const TIER_BONUS=0.20;
-function tierWeight(q,t){ const d=(symT(q)-symT(t.q))/t.sig;
-  return d<0 ? Math.exp(-d*d) : 1+TIER_BONUS*(1-Math.exp(-2*d)); }
+    tb.appendChild(row); }); }
+// ---- Tiers: the best value by task complexity; the crown ----
+// Four tiers, each with a TARGET quality θ*. Among the couples within reach of the frontier, each tier picks the one
+// that maximises
+//     window(θ) × e^(λ·θ) ⁄ cost
+// λ the slope of the price trend. e^(λθ) ⁄ cost is the couple's value against the trend (the same all along the trend
+// line): above its target, a couple wins by bringing more quality than the trend charges for its extra cost, a smooth
+// reward with no constant to set. Below the target the Gaussian window e^(−δ²), δ = (θ − θ*) ⁄ σ, penalises the
+// shortfall; at or above it the window is 1. Cost is weighed in ratios (log cost), as people perceive prices
+// (Weber–Fechner): twice as dear weighs the same at every price.
+function logWindow(t,T){ const d=(t-T.t)/T.sig; return d<0?-d*d:0; }
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
-// q and sig below are PLACEHOLDERS — tierDefaults() overwrites both from the data on load (see there).
+// t (θ*) and sig below are PLACEHOLDERS: tierDefaults() sets both from the data on load.
 const TIERS=[
-  {key:"triage",  name:"Grunt work",             q:0.75, sig:0.80, gam:1.20, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
-  {key:"everyday",name:"Everyday tasks",         q:0.95, sig:0.80, gam:1.05, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
-  {key:"pro",     name:"Advanced reasoning",     q:1.05, sig:0.80, gam:0.95, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
-  {key:"frontier",name:"Cutting-Edge thinking",  q:1.25, sig:0.80, gam:0.80, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
+  {key:"triage",  name:"Grunt work",             t:0, sig:1, ex:"Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate."},
+  {key:"everyday",name:"Everyday tasks",         t:0, sig:1, ex:"Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier."},
+  {key:"pro",     name:"Advanced reasoning",     t:0, sig:1, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
+  {key:"frontier",name:"Cutting-Edge thinking",  t:0, sig:1, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
-// DATA-DERIVED tier windows. Model quality drifts upward release after release: the weakest couple slowly improves
-// and the best one sets a new ceiling, so fixed q* would go stale and could aim at a quality nothing reaches. Centres are spread
-// evenly across the FRONTIER's quality span in the dilated metric T (the one the Gaussian and the chart already use),
-// from the weakest selectable couple to the strongest — so the bottom tracks the floor as it rises, and the top always
-// sits exactly on the best model available rather than on a number fixed at some past release.
-// sigma follows the spacing on a single rule: adjacent windows cross at HALF weight exactly midway between their
-// centres — exp(−((gap/2)/sig)²) = ½ ⟹ sig = gap ⁄ (2·√ln2). The four windows partition the axis instead of
-// overlapping arbitrarily, and sigma rescales automatically when the span widens or narrows.
-let TIERQ={qmn:0.55,qmx:1.30};
+// DATA-DERIVED targets. Models improve release after release, so fixed targets would go stale. The four θ* spread
+// evenly from (1 − e)·min + e·max to (1 − e)·max + e·min of the frontier's quality (frontier by centres), e = TIER_E:
+// the bottom tier follows the weakest frontier couple as it rises, the top one the best, each drawn 5 % of the span
+// inward so that no target sits on a single couple. They depend on the couples only through these two bounds.
+// σ follows the spacing: adjacent windows cross at half weight midway between their targets, σ = gap ⁄ (2·√ln 2).
+const TIER_E=0.05;
+let TIERQ={lo:0,hi:1,gap:1,sig:1};
 function tierDefaults(){
-  const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(q) rows.push({c:cg[e][0],q:q[0]}); } }
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const Ts=rows.filter(p=>!rows.some(o=>dom(o,p))).map(p=>symT(p.q));
-  if(!Ts.length) return;
-  const Tmin=Math.min(...Ts), Tmax=Math.max(...Ts), gap=(Tmax-Tmin)/Math.max(TIERS.length-1,1);
-  const sig=gap/(2*Math.sqrt(Math.LN2));
-  TIERS.forEach((t,i)=>{ t.q=symTinv(Tmin+i*gap); t.sig=sig; });
-  TIERQ={qmn:symTinv(Tmin), qmx:symTinv(Tmax), gap, sig};
+  const {front}=frontier(couples()); if(!front.length) return;
+  const a=Math.min(...front.map(p=>p.t)), b=Math.max(...front.map(p=>p.t)), lo=(1-TIER_E)*a+TIER_E*b, hi=(1-TIER_E)*b+TIER_E*a;
+  const gap=(hi-lo)/Math.max(TIERS.length-1,1), sig=gap/(2*Math.sqrt(Math.LN2));
+  TIERS.forEach((T,i)=>{ T.t=lo+i*gap; T.sig=sig; });
+  TIERQ={lo,hi,gap,sig};
 }
 tierDefaults();
 function tierPicks(){
-  const rows=[];
-  for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{};
-    for(const e in cg){ const q=qg[e]; if(!q) continue; rows.push({m,e,c:cg[e][0],clo:cg[e][1],chi:cg[e][2],q:q[0],qlo:q[1],qhi:q[2]}); } }
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const front=rows.filter(p=>!rows.some(o=>dom(o,p))).sort((a,b)=>a.c-b.c);
-  // uncertainty-aware price envelope + log-distance r + hidden prominence (crown) — same machinery as the value table
-  const gevT=fitPriceEnvelope(rows);                     // ALL couples, not just the frontier
-  rows.forEach(p=>p.S=valueResidual(gevT,p));           // r is defined for EVERY couple — frontier and dominated alike
-  // Prominence stays a 2nd difference of r, i.e. computed in LOG space where these distances are additive, so it keeps
-  // meaning "this couple stands out from its two frontier neighbours". Crown SELECTION only.
-  front.forEach((p,i)=>p.hid=(i===0||i===front.length-1)?0:2*p.S-front[i-1].S-front[i+1].S);
-  // DISPLAYED SCORE = the value index, anchored so ANCHOR = 100 (see valueIndex). The anchor is read from
-  // the FULL set of couples, not the frontier: a new model can push it OFF the Pareto frontier but
-  // never out of the full set, so the reference always exists. And because the index is a ratio rather than a stretch
-  // between two extremes, the anchor sitting low in the ranking no longer distorts anything above it.
-  const rAnc=anchorResidual(gevT,rows);
-  rows.forEach(p=>p.norm=valueIndex(p.S,rAnc));
-  const K=(q,q0,sig)=>Math.exp(-Math.pow((symT(q)-symT(q0))/sig,2));   // proximity in the DILATED metric (consistent with the chart)
-  // Tier winner = the frontier couple maximising PROXIMITY × VALUE INDEX, in log-cost like the price curve, the residual
-  // and the Pareto distance: quality spans a factor of about 2 across the cloud against more than 10 for cost, so a
-  // linear quality ÷ cost would be driven almost entirely by cost. The number a card shows is the criterion that chose it.
-  // PER-TIER COST SENSITIVITY. Cost does not weigh the same at every complexity: on throwaway work you want the
-  // cheapest thing that clears the bar, on research-grade work a few extra points of capability are worth paying for.
-  // Each tier therefore ranks on G − gam·C rather than G − C, i.e. on price-curve-credit ⁄ cost^gam. gam > 1 punishes
-  // cost more than proportionally, gam < 1 less. Only the SELECTION is tilted — the index a card displays stays the
-  // neutral gam = 1 one, so the four cards remain comparable with each other and with the anchor.
-  front.forEach(p=>p.P=valueParts(gevT,p));
-  const tscore=(p,t)=>tierWeight(p.q,t)*Math.pow(10,p.P.G-t.gam*p.P.C);
-  const picks=TIERS.map(t=>({...t, win:front.reduce((a,b)=> tscore(b,t) > tscore(a,t) ? b : a)}));
-  const CROWN_Q=1.0, CROWN_SIG=10;                                                                          // best-overall window: Gaussian centred on parity, very wide
-  const crown=front.reduce((a,b)=> b.hid*K(b.q,CROWN_Q,CROWN_SIG) > a.hid*K(a.q,CROWN_Q,CROWN_SIG) ? b : a);
-  return {picks,crown};
+  const rows=couples(), {reach}=frontier(rows), tr=fitTrend(rows);
+  reach.forEach(p=>{ p.r=valueOf(tr,p); p.qg=qGain(tr,p); });
+  const tscore=(p,T)=>logWindow(p.t,T)+tr.l*p.t-p.x;                                   // ln(window × e^(λθ) ⁄ cost)
+  const picks=TIERS.map(T=>({...T, win:reach.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a)}));
+  // CROWN: the couple within reach furthest below the price trend: the most quality for its cost against the going
+  // rate. Read on the cost axis, e^r times cheaper than the trend at its quality; on the quality axis, r ⁄ λ above what
+  // the trend gives for its cost: the same gap, since the trend is a straight line.
+  const crown=reach.reduce((a,b)=> b.r > a.r ? b : a);
+  return {picks,crown,tr};
 }
 function drawTiers(){
   const host=document.getElementById("tier-cards"); if(!host) return;
-  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   const {picks,crown}=tierPicks();
-  // noQ → header-mirror cards & the top crown: drop the "Q* …" prefix, keep the full card layout
-  const cardHTML=(q,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">${noQ?'':`Q* ${q.toFixed(2)} – `}${name}</span></div>
+  // noQ → header-mirror cards & the top crown: drop the target prefix, keep the full card layout
+  const cardHTML=(T,name,col,w,ex,noQ)=>`<div class="card pad crit tier">
+      <div class="tier-head"><span class="tier-name">${noQ?'':`Target ${pct(score(T.t))} – `}${name}</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-          <span class="tier-nums">Cost <b>${w.c.toFixed(2)}×</b> · Quality <b>${w.q.toFixed(2)}×</b></span>
+          <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b> · Score <b>${pct(w.s)}</b></span>
         </div>
-        <div class="tier-yield">${Math.round(w.norm)}</div>
+        <div class="tier-yield">${fmtX(Math.exp(Math.abs(w.r)))}<small>${w.r>=0?"cheaper":"dearer"} than the trend</small></div>
       </div>
       ${ex?`<span class="ex">${ex}</span>`:''}
     </div>`;
-  host.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");        // detailed cards: keep Q*
+  host.innerHTML=picks.map(t=>cardHTML(t,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,false)).join("");        // detailed cards: keep the target
   const top=document.getElementById("tier-cards-top");
-  if(top) top.innerHTML=picks.map(t=>cardHTML(t.q,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // near-header cards: labels only, no Q*
+  if(top) top.innerHTML=picks.map(t=>cardHTML(t,t.name,cvar(MODELS[t.win.m].c),t.win,t.ex,true)).join("");   // near-header cards: labels only
   const c=crown, col=cvar(MODELS[c.m].c);
-  const crT=document.getElementById("tier-crown-top");   // best-overall above the header cards: SAME tier-card layout (title · model+cost/quality · big score)
-  if(crT) crT.innerHTML=cardHTML(0,"👑 Best overall",col,c,"",true);
+  const crT=document.getElementById("tier-crown-top");   // best overall above the header cards: SAME tier-card layout
+  if(crT) crT.innerHTML=cardHTML(null,"👑 Best overall",col,c,"",true);
   const cr=document.getElementById("tier-crown");   // the detailed section keeps the explained crown
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
-      <div class="crown-line">Cost <b>${c.c.toFixed(2)}×</b> · Quality <b>${c.q.toFixed(2)}×</b> · Score <b>${Math.round(c.norm)}</b></div>
-      <p class="crown-note"><b>Picked</b> by highest <b>local prominence</b> across the frontier (softly centred on parity) — a 2nd difference of the cost-value score S along the frontier, which rewards a clear step up from the cheaper option while the pricier one adds little: the genuine knee. The <b>index</b> shown is the couple's own <b>value index</b> — its IC-weighted distance to the price curve, exponentiated against the anchor&nbsp;: <b>100 = ${ANCHOR.label.replace(/ /g,"&nbsp;")}</b>, and the number reads as a multiple of it. The anchor is taken from <b>every</b> couple, dominated ones included, so the reference survives a release that pushes it off the frontier.</p>
+      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · <b>${vWord(c.r)}</b> than the trend</div>
+      <p class="crown-note"><b>Picked</b> as the couple within reach of the frontier that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. The trend is fitted on <b>every</b> couple shown, so it is the going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
-// Interactive tuner: draws the four tier windows as Gaussians over the DILATED quality axis (so overlaps are visible)
-// plus the frontier couples as ticks, and a q*/σ slider pair per tier that live-updates TIERS and re-renders.
+// Interactive tuner: draws the four tier windows over the θ axis (labelled in expected score) plus the couples within
+// reach as ticks, and a θ*/σ slider pair per tier that live-updates TIERS and re-renders.
 // Redraw ONLY the window SVG (called on every slider move) — leaves the slider DOM untouched so dragging keeps working.
 function drawTierWindows(){
   const host=document.getElementById("tier-windows"); if(!host) return;
-  const rows=[]; for(const m in COSTGRID){ const cg=COSTGRID[m], qg=QUALGRID[m]||{}; for(const e in cg){ const q=qg[e]; if(q) rows.push({m,e,c:cg[e][0],q:q[0]}); } }
-  const E=1e-9, dom=(o,p)=>o.c<=p.c+E&&o.q>=p.q-E&&(o.c<p.c-E||o.q>p.q+E);
-  const front=rows.filter(p=>!rows.some(o=>dom(o,p)));
-  // Axis spans the DATA range (from tierDefaults) plus half a tier-spacing of padding, so the end windows are not
-  // clipped; ticks are generated over whatever that range turns out to be rather than assuming a fixed 0.6–1.2.
-  const padT=0.5*(TIERQ.gap||1), Tmn=symT(TIERQ.qmn)-padT, Tmx=symT(TIERQ.qmx)+padT;
-  const qmn=symTinv(Tmn), qmx=symTinv(Tmx);
+  const {reach}=frontier(couples());
+  // Axis spans the targets' range (from tierDefaults) plus half a gap of padding, so the end windows are not clipped.
+  const padT=0.5*TIERQ.gap, Tmn=TIERQ.lo-padT, Tmx=TIERQ.hi+padT;
   const W=1100,H=140,mL=8,mR=8,mT=8,mB=24, iw=W-mL-mR, ih=H-mT-mB;
-  const X=q=>mL+(symT(q)-Tmn)/(Tmx-Tmn)*iw;
-  let svg=`<svg viewBox="0 0 ${W} ${H}" class="tuner-svg" role="img" aria-label="Tier windows over the dilated quality axis">`;
-  const ticks=[]; for(let v=Math.ceil(qmn*10)/10; v<=qmx+1e-9; v=Math.round((v+0.1)*10)/10) ticks.push(v);
-  ticks.forEach(v=>{ const x=X(v); svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${v.toFixed(1)}</text>`; });
-  TIERS.forEach((t,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
-    for(let k=0;k<=140;k++){ const q=qmn+(qmx-qmn)*k/140, g=tierWeight(q,t)/(1+TIER_BONUS); d+=` L ${X(q).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
+  const X=t=>mL+(t-Tmn)/(Tmx-Tmn)*iw;
+  let svg=`<svg viewBox="0 0 ${W} ${H}" class="tuner-svg" role="img" aria-label="Tier windows over the quality axis">`;
+  for(let v=0.05; v<0.999; v+=0.05){ const t=scoreInv(Math.round(v*100)/100); if(t<Tmn||t>Tmx) continue; const x=X(t);
+    svg+=`<line x1="${x}" y1="${mT}" x2="${x}" y2="${mT+ih}" stroke="${cvar('--line')}" stroke-width="1"/><text x="${x}" y="${mT+ih+15}" fill="${cvar('--faint')}" font-size="10" text-anchor="middle">${Math.round(v*100)}%</text>`; }
+  TIERS.forEach((T,i)=>{ const col=TWCOL[i]; let d=`M ${mL} ${mT+ih}`;
+    for(let k=0;k<=140;k++){ const t=Tmn+(Tmx-Tmn)*k/140, g=Math.exp(logWindow(t,T)); d+=` L ${X(t).toFixed(1)} ${(mT+ih-g*(ih-8)).toFixed(1)}`; }
     d+=` L ${mL+iw} ${mT+ih} Z`;
-    svg+=`<path d="${d}" fill="${col}" fill-opacity="0.13" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
-       +`<line x1="${X(t.q)}" y1="${mT}" x2="${X(t.q)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
-  front.forEach(p=>svg+=`<circle cx="${X(p.q)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`);
+    svg+=`<path d="${d}" fill="${col}" fill-opacity="0.06" stroke="${col}" stroke-opacity="0.7" stroke-width="1.3"/>`
+       +`<line x1="${X(T.t)}" y1="${mT}" x2="${X(T.t)}" y2="${mT+ih}" stroke="${col}" stroke-width="1" stroke-dasharray="3 3"/>`; });
+  reach.forEach(p=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`; });
   host.innerHTML=svg+`</svg>`;
 }
 // Build the tuner ONCE (window container + persistent sliders). Slider input updates state + redraws windows/cards only.
 function drawTierTuner(){
   const host=document.getElementById("tier-tuner"); if(!host) return;
-  // Slider travel follows the data too: Q* spans the padded quality range the windows are drawn over, and sigma runs
-  // from a quarter to triple its derived default — so the useful settings sit in the middle of the travel whatever
-  // the current spread of models is, instead of against a stop.
-  const padT=0.5*(TIERQ.gap||1), s0=TIERQ.sig||0.8;
-  const sQ={lo:symTinv(symT(TIERQ.qmn)-padT).toFixed(2), hi:symTinv(symT(TIERQ.qmx)+padT).toFixed(2)};
-  const sS={lo:(0.25*s0).toFixed(2), hi:(3*s0).toFixed(2)};
+  // Slider travel follows the data: θ* spans the padded range the windows are drawn over, σ runs from a quarter to
+  // triple its default, so the useful settings sit mid-travel whatever the current spread of models is.
+  const padT=0.5*TIERQ.gap, s0=TIERQ.sig;
+  const sQ={lo:(TIERQ.lo-padT).toFixed(2), hi:(TIERQ.hi+padT).toFixed(2)}, sS={lo:(0.25*s0).toFixed(2), hi:(3*s0).toFixed(2)};
   let ctl='';
   TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
-    +`<label><span class="lbl">Q*</span><input type="range" min="${sQ.lo}" max="${sQ.hi}" step="0.01" value="${t.q}" data-i="${i}" data-k="q"><b id="tv-q-${i}">${t.q.toFixed(2)}</b></label>`
+    +`<label><span class="lbl">Target</span><input type="range" min="${sQ.lo}" max="${sQ.hi}" step="0.05" value="${t.t}" data-i="${i}" data-k="t"><b id="tv-q-${i}">${pct(score(t.t))}</b></label>`
     +`<label><span class="lbl">σ</span><input type="range" min="${sS.lo}" max="${sS.hi}" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
   host.innerHTML=`<div id="tier-windows"></div><div class="tuner-ctl">${ctl}</div>`;
   drawTierWindows();
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
     const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
-    document.getElementById((k==='q'?'tv-q-':'tv-s-')+i).textContent=v.toFixed(2);
-    drawTierWindows(); drawTiers(); if(showBands&&k==='q'){ drawB(); drawPareto(); } }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
+    document.getElementById((k==='t'?'tv-q-':'tv-s-')+i).textContent=k==='t'?pct(score(v)):v.toFixed(2);
+    drawTierWindows(); drawTiers(); if(showBands&&k==='t'){ drawB(); drawPareto(); } }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
-// ---------- MATRIX (sorted by relative quality desc) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
-const fr=x=>x.toFixed(2);
-const ciStr=(m,e,v)=> `${fr(v[1])}–${fr(v[2])}`;   // every couple, the anchor included, carries its own 16–84 % interval
-const relQ=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?qg[e][0]:0; };   // quality at the model's top effort
-const M={};
-for(const m in COSTGRID){ const cg=COSTGRID[m]||{}; M[m]={q:relQ(m), tag:MODELS[m].tag};
-  ["low","medium","high","xhigh","max","solo"].forEach(e=>{ M[m][e]= cg[e]? [cg[e][0], ciStr(m,e,cg[e])] : null; }); }
-function heat(v){
-  const t=Math.max(0,Math.min(1,(Math.log10(v)-Math.log10(0.12))/(Math.log10(4.5)-Math.log10(0.12))));
-  const dark=document.documentElement.getAttribute('data-theme')==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&document.documentElement.getAttribute('data-theme')!=='light');
-  const al=dark?(0.10+t*0.42):(0.07+t*0.40);
-  return `background:color-mix(in srgb, var(--opus48) ${Math.round(al*100)}%, transparent)`;
-}
+// ---------- MATRIX (sorted by expected score at top effort) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------
 function drawMatrix(){
   const tb=document.querySelector("#matrix-tbl tbody"); tb.innerHTML="";
-  const rows=Object.keys(M).sort((a,b)=>M[b].q-M[a].q);
-  for(const m of rows){ const md=MODELS[m], tr=document.createElement("tr");
-    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${M[m].tag?' <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span>':''}</td>`;
-    if(M[m].solo){ const c=M[m].solo;   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
-      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>merged · ${c[1]}</small></div></td>`;
+  const xs=Object.values(COSTGRID).flatMap(es=>Object.values(es).map(v=>v[0])), x0=Math.min(...xs), cmax=Math.exp(Math.max(...xs)-x0);
+  const cell=v=>{ const c=Math.exp(v[0]-x0); return [c, `${fmtC(c*Math.exp(-v[1]))}–${fmtC(c*Math.exp(v[1]))}`]; };
+  const topS=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?score(qg[e][0]):0; };
+  const dark=document.documentElement.getAttribute('data-theme')==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&document.documentElement.getAttribute('data-theme')!=='light');
+  const heat=c=>{ const t=cmax>1?Math.log(c)/Math.log(cmax):0, al=dark?(0.10+t*0.42):(0.07+t*0.40);
+    return `background:color-mix(in srgb, var(--opus48) ${Math.round(al*100)}%, transparent)`; };
+  for(const m of Object.keys(COSTGRID).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], cg=COSTGRID[m], tr=document.createElement("tr");
+    let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${md.tag?' <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span>':''}</td>`;
+    if(cg.solo){ const c=cell(cg.solo);   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
+      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>merged · ${c[1]}</small></div></td>`;
     } else {
-      ["low","medium","high","xhigh","max"].forEach(e=>{ const c=M[m][e];
-        row+= c? `<td><div class="cell num" style="${heat(c[0])}">${c[0].toFixed(2)}<small>${c[1]}</small></div></td>`
+      ["low","medium","high","xhigh","max"].forEach(e=>{ const c=cg[e]?cell(cg[e]):null;
+        row+= c? `<td><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>${c[1]}</small></div></td>`
                : `<td class="na">—</td>`; });
     }
-    row+=`<td class="mdl num">${M[m].q.toFixed(2)}×</td>`;
+    row+=`<td class="mdl num">${pct(topS(m))}</td>`;
     tr.innerHTML=row; tb.appendChild(tr);
   }
 }
@@ -567,7 +477,7 @@ function drawEdgeTable(){
 // re-render, so ticks/labels recompute at fixed size for the zoomed window. Registry maps id → its draw function.
 const CHART_RENDER={chartB:drawB, chartP:drawPareto};
 const svgPt=(s,cx,cy)=>{ const P=new DOMPoint(cx,cy).matrixTransform(s.getScreenCTM().inverse()); return {x:P.x,y:P.y}; };
-const dataAt=(s,px,py)=>{ const g=s.__geo, v=s.__view;   // pixel → view coords (log-cost, symT-quality)
+const dataAt=(s,px,py)=>{ const g=s.__geo, v=s.__view;   // pixel → view coords (log-cost, yOf θ)
   return [ v[0]+(px-g.mL)/g.iw*(v[1]-v[0]), v[2]+(1-(py-g.mT-g.yp)/(g.ih-2*g.yp))*(v[3]-v[2]) ]; };
 function zoomView(s,px,py,f){ const [ux,uy]=dataAt(s,px,py), v=s.__view.slice();
   v[0]=ux-(ux-v[0])*f; v[1]=ux+(v[1]-ux)*f; v[2]=uy-(uy-v[2])*f; v[3]=uy+(v[3]-uy)*f; s.__view=v; }
@@ -609,21 +519,20 @@ function fillMeta(){   // all source counts + the footer source list derive from
 // tier, top-quality couple — as plain text for llms.txt. Both pre-rendered at build time (site/prerender.js).
 function answerData(){
   const {picks,crown}=tierPicks();
-  let top=null; for(const m in COSTGRID){ const qg=QUALGRID[m]||{};
-    for(const e in COSTGRID[m]){ const q=qg[e]; if(q&&(!top||q[0]>top.q)) top={m,e,c:COSTGRID[m][e][0],q:q[0]}; } }
+  const top=couples().reduce((a,b)=>b.t>a.t?b:a);
   const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
   return {picks,crown,top,nm};
 }
 function fillAnswer(){
   const host=document.getElementById("answer"); if(!host) return;
   const {crown,nm}=answerData();
-  host.innerHTML=`The best value today is <b>${nm(crown)}</b> — ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost.`;
+  host.innerHTML=`The best value today is <b>${nm(crown)}</b> — ${vWord(crown.r)} than the price trend for its quality (expected score ${pct(crown.s)} on the benchmark panel).`;
 }
 function answerFull(){
   const {picks,crown,top,nm}=answerData();
-  return `Best value overall: ${nm(crown)}, ${crown.q.toFixed(2)}× the quality of ${ANCHOR.label} for ${crown.c.toFixed(2)}× its cost. `
+  return `Best value overall: ${nm(crown)}, ${vWord(crown.r)} than the price trend for its quality (expected score ${pct(crown.s)} on the benchmark panel, cost ${fmtC(crown.c)}× the cheapest couple). `
     +`Best pick by task tier: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join("; ")}. `
-    +(top?`Highest measured quality: ${nm(top)} (${top.q.toFixed(2)}× for ${top.c.toFixed(2)}× the cost).`:"");
+    +`Highest measured quality: ${nm(top)} (expected score ${pct(top.s)}, cost ${fmtC(top.c)}× the cheapest couple).`;
 }
 function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}

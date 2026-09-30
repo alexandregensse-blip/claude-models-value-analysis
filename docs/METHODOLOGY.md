@@ -9,8 +9,6 @@ the examples in parentheses only illustrate it.
 
 - **Couple** — a model at one effort level (*Opus 5 @high*). A model's couples, from its lowest to its highest
   effort, form its **effort ladder**. A model without an effort setting is a single couple labelled *solo*.
-- **Reference couple** — the couple the page divides by to display relative values (1.0 on both axes). It is a
-  display choice only: the fit does not depend on it, and changing it divides every value by a constant.
 - **Row** — one published measurement of one couple: a cost, a score, or both.
 - **Group** — the rows one source measured on the same task under the same configuration (a leaderboard column, a
   system-card chart, a paper's table). Only within a group are two couples directly comparable.
@@ -148,9 +146,9 @@ For every row *r* (group *b*, couple *c* of model *m*, publisher *s*, task type 
 Every standard deviation (s_g below, s_τ, ψ, ω, s_σ) has a weakly informative half-Student-t(3, 0, 2.5) prior; μ_σ is
 flat.
 
-**No reference couple in the fit.** The θ sum to zero: the origin is the average couple, not a chosen one. The page
-divides by a reference couple afterwards; that is a display choice, which changes neither the fit nor the
-uncertainty of any other couple.
+**No reference couple.** The θ sum to zero: the origin is the average couple, not a chosen one. The page does not
+divide by a reference couple either: it shows cost as a multiple of the cheapest couple and quality as an expected
+panel score (`DISPLAY-METHODOLOGY.md`).
 
 **Gains.**
 - Quality: the discrimination a_b/σ_b is pooled across groups, log(a_b/σ_b) ~ N(0, s_g²). A gain estimated from
@@ -217,9 +215,9 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
 
 A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01, the bulk
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
-refuses one that misses any of them. The Monte Carlo error of every displayed value (anchor included) is stored with
+refuses one that misses any of them. The Monte Carlo error of every displayed value is stored with
 it, and the build reports any value whose error exceeds half of its last displayed digit: such a figure could change
-by one unit in a refit with another seed (in the current fit, one: the cost of Fable 5.1 max, 3.09 ± 0.006).
+by one unit in a refit with another seed (in the current fit, none).
 
 ### Fixed values
 
@@ -237,10 +235,6 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 | §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
 | §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
 | §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
-| §7 quality axis | symmetric log around parity, constant 0.045 | display only |
-| §9 price curve | k on the grid {0.1 … 3}; weight 1 − d/d_max | see §9 |
-| §11 tiers | 4 tiers; cost exponents 1.20, 1.05, 0.95, 0.80; bonus above target capped at +20 % | see §11 |
-| §12 crown | Gaussian weight of width 10 around parity | nearly flat, see §12 |
 
 ### Software and references
 
@@ -263,19 +257,19 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 
 ### Output
 
-- **Relative quality** — the couple's expected score averaged over the benchmark panel, divided by the reference
-  couple's. The panel is every group with a bounded score, each benchmark family counting once. The expected score
-  on a panel group is the group's fitted curve at the couple's θ plus its effects there: the publisher and task-type
-  effects the data contain for this couple, and, for those they do not, the average over their distribution
-  (Gauss–Hermite quadrature). It reads: *if every couple sat every benchmark of this report as its publisher ran it,
-  this couple's average score would be this multiple of the reference couple's.*
-- **Relative cost** — exp(θ_c − θ_reference): the cost ratio on a task of typical elasticity.
-- **Centre** — the posterior median of the couple's read-out, divided by the reference couple's: changing the
-  reference divides every value by the same constant.
+- **Quality** — the couple's latent quality θ (quality axis), on which the page decides. With it, the fit publishes
+  the **panel curve**: the expected score, averaged over the benchmark panel, of a couple of latent quality θ with no
+  effect of its own; the page labels θ with it. The panel is every group with a bounded score, each benchmark family
+  counting once. The fit also keeps each couple's own panel read-out (`level`): the group's fitted curve at the
+  couple's θ plus its effects there — the publisher and task-type effects the data contain for this couple, and, for
+  those they do not, the average over their distribution (Gauss–Hermite quadrature). It reads: *if every couple sat
+  every benchmark of this report as its publisher ran it, this couple's average score would be this.*
+- **Cost** — θ of the cost axis: the log of the cost on a task of typical elasticity, up to a common constant. The page
+  shows exp(θ_c − θ_cheapest), a multiple of the cheapest couple.
+- **Centre** — the posterior median.
 - **Interval** (16–84 %) — the couple's own uncertainty, as a quasi-standard error (Firth & de Menezes 2004): one
   half-width per couple, fitted so that for any two couples √(q_i + q_j) reproduces the 16–84 % spread of their
-  difference across the posterior draws. Two couples compare through their two intervals, whichever the reference;
-  the reference couple has its own interval like any other. The approximation error is reported (§ Checks); it errs
+  difference across the posterior draws. Two couples compare through their two intervals. The approximation error is reported (§ Checks); it errs
   on the wide side for neighbouring rungs of one model, whose difference is known more precisely than two separate
   intervals suggest.
 - **New-source interval** (16–84 %) — what one new source would report for the couple on the same read-out: a new
@@ -311,89 +305,13 @@ Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 Se
 - **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported. The
   report is printed, not corrected: an inversion inside the interval is left as the data give it.
 
-## 6. The matrix
+## 6. Display
 
-One row per model, one column per effort, the cell = relative cost with its interval. Rows are ordered by the model's
-relative quality at its highest published effort. A model without effort levels fills a single merged cell; an
-unpublished couple is shown as n/a.
+What the page does with the fitted values — the charts and their scales, the Pareto frontier, the price trend, the
+value of each couple, the four tiers and the crown, the sources table — is described in
+[`DISPLAY-METHODOLOGY.md`](DISPLAY-METHODOLOGY.md).
 
-## 7. The landscape chart
-
-- **Cost axis**: log₁₀ of the relative cost.
-- **Quality axis**: a symmetric log around parity, T(Q) = sign(Q − 1)·ln(1 + |Q − 1| / 0.045). It dilates the
-  crowded band near the reference and compresses the sparse tails; every distance in quality below is measured in T.
-- One curve per model through its effort ladder. Optional ovals draw each couple's 16–84 % interval (cost × quality).
-
-## 8. Pareto frontier
-
-A couple is **dominated** when another couple costs no more and scores no less, and is strictly better on one of
-the two (centres compared). The frontier is the set of non-dominated couples, ordered by cost.
-
-The reader can hide older models (a display switch). Hidden models leave the frontier, the price curve, the tiers
-and the crown as well as the charts: every recommendation is computed over the models on screen.
-
-## 9. Price curve
-
-What a given quality typically costs, fitted on **every** shown couple, dominated ones included:
-
-    log₁₀(cost) = g(u) = α + β·u + γ·(e^{k·u} − 1)/k ,   u = T(Q) − T_min ,   β ≥ 0, γ ≥ 0
-
-- **Monotone by construction.** g′(u) = β + γ·e^{k·u} ≥ 0 everywhere, so the price of quality never falls as quality
-  rises, extrapolation included. The exponential term lets the curvature grow near the quality ceiling, where cost
-  rises sharply; k → 0 gives a quadratic. k is chosen on a grid {0.1 … 3} by weighted least squares; α, β, γ by
-  constrained weighted least squares (the active set of β ≥ 0, γ ≥ 0).
-- **Weight by distance to the frontier.** d = log₁₀(cost) − log₁₀(cost of the cheapest couple offering at least this
-  quality), 0 on the frontier. Each couple weighs 1 − d/d_max: a frontier couple fully, the farthest couple not at
-  all, linearly in between. Equal weights would let strictly dominated couples steer the curve; the frontier alone
-  would discard the measurements that populate the middle.
-- **Centres only.** Each couple enters at its centre. Smearing a point over its interval through the non-linear T
-  and g would shift it toward parity: a bias, not an uncertainty.
-
-## 10. Value index
-
-The distance of a couple to the price curve, in log-cost:
-
-    G = g(T(Q))                                           what the curve charges for this quality
-    C = log₁₀(cost)                                       what the couple costs
-    r = G − C                                             positive = cheaper than the going rate
-    value index = 100 · 10^(r − r_reference)
-
-The index is a ratio: 100 is the reference couple, 350 means 3.5 times its value for money, 45 means 0.45 times; it
-is unbounded above. The reference's residual is read from the full set of couples, so the scale holds even when the
-reference is not on the frontier. A frontier couple can score below 100: being non-dominated does not make it good
-value for what it delivers.
-
-## 11. Tiers: best value by task complexity
-
-Four tiers, from routine throughput work to research-grade problems.
-
-- **Targets.** The four target qualities q*₁…q*₄ are spread evenly in T across the frontier's quality span, from its
-  weakest to its strongest couple, so they move with the models.
-- **Window width.** σ = gap / (2·√ln 2), gap being the spacing of the targets in T: adjacent windows cross at half
-  weight midway between their targets, so the four windows partition the axis.
-- **Half-bell window.** With δ = (T(Q) − T(q*))/σ, a couple's weight is e^(−δ²) below the target and
-  1 + 0.2·(1 − e^(−2δ)) at or above it: falling short is penalised, clearing the bar earns a bonus that saturates at
-  +20 %, so being better never hurts.
-- **Cost sensitivity.** Tier *i* ranks frontier couples on weight × 10^(G − γ_i·C), with γ = 1.20, 1.05, 0.95, 0.80
-  from the lowest to the highest tier: cost weighs more than proportionally on throughput work, less on
-  research-grade work. Only the selection is tilted; a card shows the neutral value index (γ = 1).
-- **Pick.** The frontier couple with the highest tier score. Sliders move the targets and widths; the defaults are
-  the data-derived values above.
-
-## 12. The crown
-
-The best overall pick is the frontier couple that stands out most from its neighbours. Along the frontier ordered by
-cost, its **prominence** is 2·r_n − r_(n−1) − r_(n+1), the endpoints getting 0: a second difference of the distance
-to the price curve, a knee in value. The crown is the most prominent couple, weighted by a Gaussian of width 10 in T
-around parity (nearly flat); its card shows its value index.
-
-## 13. Sources table and counts
-
-Every group is listed with its verified configuration (harness, effort), its kind (effort sweep, cross-model,
-cross-generation) and the couples it links. The header counts sources, benchmarks and measurements. The page's date
-moves only when its content (text, figures, data) changes.
-
-## 14. Limits
+## 7. Limits
 
 - One latent quality per couple, averaged over task types; the ranking can differ on a single task type.
 - Which couples a source chooses to measure is not random. Free offsets absorb the level of the tasks chosen and
