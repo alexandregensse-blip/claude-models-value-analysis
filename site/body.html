@@ -117,7 +117,7 @@
     <details class="fold">
       <summary>How the numbers are built — the method</summary>
       <div class="card pad">
-        <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered. The full methodology, from collection to the tier picks, is in <a href="__REPO__/blob/main/docs/METHODOLOGY.md">METHODOLOGY.md</a>; the validation scripts are in <a href="__REPO__/tree/main/model/validation">model/validation</a>.</p>
+        <p class="sub">Every value in this report is <b>computed</b> from the raw measurements by one procedure — nothing is hand-entered. The full methodology is in <a href="__REPO__/blob/main/docs/METHODOLOGY.md">METHODOLOGY.md</a> (from collection to the fit) and <a href="__REPO__/blob/main/docs/DISPLAY-METHODOLOGY.md">DISPLAY-METHODOLOGY.md</a> (from the fit to the tier picks); the validation scripts are in <a href="__REPO__/tree/main/model/validation">model/validation</a>.</p>
         <p class="sub"><b>In short&nbsp;:</b> scores from different benchmarks do not share a scale — a benchmark near its ceiling compresses differences, a hard one inflates them — so the report never averages raw scores or score ratios. A <b>latent-quality model</b> estimates, for every benchmark, its own zero and its own gain, and for every (model, effort) couple one quality and one cost. Each couple stays <b>atomic</b>: no model×effort separability is assumed.</p>
         <h3 class="blocktitle" style="margin-top:1.3em">The procedure</h3>
         <ol class="steps">
@@ -134,7 +134,7 @@
           <li><b>Set by hand, never tuned to the data:</b> weakly informative priors (half-Student-t(3,&nbsp;0,&nbsp;2.5) on every spread, Gamma(2,&nbsp;0.1) on the noise tails); a logit kept half a step inside 0 and 100&nbsp;%; a printed value's precision at its rounding (last digit&nbsp;/&nbsp;√12); an effect seen in a single measurement left out; a couple shown only when two publishers measured it; a reprint recognised by values that agree within their precisions, on two values at least and on all they share but one.</li>
           <li><b>Uncertainty.</b> Every interval is 16–84&nbsp;% (one standard deviation): the couple's own uncertainty, whatever the reference.</li>
           <li><b>Published only when the fit is sound:</b> R̂&nbsp;≤&nbsp;1.01 and at least 400 effective draws on every parameter, no divergent transition. The Monte Carlo error of each value is checked against its last displayed digit; in this fit every figure is stable to that digit but one, the cost of Fable&nbsp;5.1 at max, which could move by one unit (3.09&nbsp;±&nbsp;0.006).</li>
-          <li><b>Display choices:</b> the quality axis is dilated near parity; the price curve, the value index and the four tiers use constants listed with their reasons in <a href="__REPO__/blob/main/docs/METHODOLOGY.md">METHODOLOGY.md</a>.</li>
+          <li><b>Display choices:</b> the quality axis is dilated near parity; the price curve, the value index and the four tiers use constants listed with their reasons in <a href="__REPO__/blob/main/docs/DISPLAY-METHODOLOGY.md">DISPLAY-METHODOLOGY.md</a>.</li>
         </ul>
         <h3 class="blocktitle" style="margin-top:1.3em">Techniques and software</h3>
         <ul class="steps">

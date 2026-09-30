@@ -44,7 +44,7 @@ the report fuses the measurements with a **latent-quality model** (`model/lqm.py
    carries its own 16–84 % interval. A couple measured by a single publisher is not shown.
 
 The full procedure — collection rules, scales, model, weighting, estimation, price curve, value index, tiers and
-crown — is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md); the checks are reproducible with the scripts in `model/validation/`.
+crown — is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) (the fit) and [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md) (what the page does with it); the checks are reproducible with the scripts in `model/validation/`.
 
 ## Repository
 
@@ -55,7 +55,7 @@ Four parts, each with its own scope; they talk only through the files named in t
 | **data** — collection | what was measured and how to read it | `raw-data.csv` (at the root, because it is served), `data/catalog/` (models, benchmark families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it) — see [`data/README.md`](data/README.md) | the data file and the catalogue |
 | **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm.stan` (the model), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
 | **site** — presentation | from the fit's results to the page | `site/build.py` and its modules (`config`, `grids`, `sources`, `seo`, `render`), `site/{app.js, body.html, style.css, prerender.js}`, `site/assets/` (favicon, share image) — see [`site/README.md`](site/README.md) | the served files at the root |
-| **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
+| **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
 
 Served files, generated at the root by the site: `index.html`, `robots.txt`, `sitemap.xml`, `llms.txt`,
 `favicon.svg`, `favicon.png`, `og-image.png`, the IndexNow key file, and the data file `raw-data.csv`. Licences:

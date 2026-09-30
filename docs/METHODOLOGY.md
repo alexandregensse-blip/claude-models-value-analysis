@@ -237,10 +237,6 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 | §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
 | §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
 | §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
-| §7 quality axis | symmetric log around parity, constant 0.045 | display only |
-| §9 price curve | k on the grid {0.1 … 3}; weight 1 − d/d_max | see §9 |
-| §11 tiers | 4 tiers; cost exponents 1.20, 1.05, 0.95, 0.80; bonus above target capped at +20 % | see §11 |
-| §12 crown | Gaussian weight of width 10 around parity | nearly flat, see §12 |
 
 ### Software and references
 
@@ -311,89 +307,13 @@ Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 Se
 - **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported. The
   report is printed, not corrected: an inversion inside the interval is left as the data give it.
 
-## 6. The matrix
+## 6. Display
 
-One row per model, one column per effort, the cell = relative cost with its interval. Rows are ordered by the model's
-relative quality at its highest published effort. A model without effort levels fills a single merged cell; an
-unpublished couple is shown as n/a.
+What the page does with the fitted values — the reference couple, the charts and their scales, the Pareto frontier,
+the price curve, the value index, the four tiers and the crown, the sources table — is described in
+[`DISPLAY-METHODOLOGY.md`](DISPLAY-METHODOLOGY.md).
 
-## 7. The landscape chart
-
-- **Cost axis**: log₁₀ of the relative cost.
-- **Quality axis**: a symmetric log around parity, T(Q) = sign(Q − 1)·ln(1 + |Q − 1| / 0.045). It dilates the
-  crowded band near the reference and compresses the sparse tails; every distance in quality below is measured in T.
-- One curve per model through its effort ladder. Optional ovals draw each couple's 16–84 % interval (cost × quality).
-
-## 8. Pareto frontier
-
-A couple is **dominated** when another couple costs no more and scores no less, and is strictly better on one of
-the two (centres compared). The frontier is the set of non-dominated couples, ordered by cost.
-
-The reader can hide older models (a display switch). Hidden models leave the frontier, the price curve, the tiers
-and the crown as well as the charts: every recommendation is computed over the models on screen.
-
-## 9. Price curve
-
-What a given quality typically costs, fitted on **every** shown couple, dominated ones included:
-
-    log₁₀(cost) = g(u) = α + β·u + γ·(e^{k·u} − 1)/k ,   u = T(Q) − T_min ,   β ≥ 0, γ ≥ 0
-
-- **Monotone by construction.** g′(u) = β + γ·e^{k·u} ≥ 0 everywhere, so the price of quality never falls as quality
-  rises, extrapolation included. The exponential term lets the curvature grow near the quality ceiling, where cost
-  rises sharply; k → 0 gives a quadratic. k is chosen on a grid {0.1 … 3} by weighted least squares; α, β, γ by
-  constrained weighted least squares (the active set of β ≥ 0, γ ≥ 0).
-- **Weight by distance to the frontier.** d = log₁₀(cost) − log₁₀(cost of the cheapest couple offering at least this
-  quality), 0 on the frontier. Each couple weighs 1 − d/d_max: a frontier couple fully, the farthest couple not at
-  all, linearly in between. Equal weights would let strictly dominated couples steer the curve; the frontier alone
-  would discard the measurements that populate the middle.
-- **Centres only.** Each couple enters at its centre. Smearing a point over its interval through the non-linear T
-  and g would shift it toward parity: a bias, not an uncertainty.
-
-## 10. Value index
-
-The distance of a couple to the price curve, in log-cost:
-
-    G = g(T(Q))                                           what the curve charges for this quality
-    C = log₁₀(cost)                                       what the couple costs
-    r = G − C                                             positive = cheaper than the going rate
-    value index = 100 · 10^(r − r_reference)
-
-The index is a ratio: 100 is the reference couple, 350 means 3.5 times its value for money, 45 means 0.45 times; it
-is unbounded above. The reference's residual is read from the full set of couples, so the scale holds even when the
-reference is not on the frontier. A frontier couple can score below 100: being non-dominated does not make it good
-value for what it delivers.
-
-## 11. Tiers: best value by task complexity
-
-Four tiers, from routine throughput work to research-grade problems.
-
-- **Targets.** The four target qualities q*₁…q*₄ are spread evenly in T across the frontier's quality span, from its
-  weakest to its strongest couple, so they move with the models.
-- **Window width.** σ = gap / (2·√ln 2), gap being the spacing of the targets in T: adjacent windows cross at half
-  weight midway between their targets, so the four windows partition the axis.
-- **Half-bell window.** With δ = (T(Q) − T(q*))/σ, a couple's weight is e^(−δ²) below the target and
-  1 + 0.2·(1 − e^(−2δ)) at or above it: falling short is penalised, clearing the bar earns a bonus that saturates at
-  +20 %, so being better never hurts.
-- **Cost sensitivity.** Tier *i* ranks frontier couples on weight × 10^(G − γ_i·C), with γ = 1.20, 1.05, 0.95, 0.80
-  from the lowest to the highest tier: cost weighs more than proportionally on throughput work, less on
-  research-grade work. Only the selection is tilted; a card shows the neutral value index (γ = 1).
-- **Pick.** The frontier couple with the highest tier score. Sliders move the targets and widths; the defaults are
-  the data-derived values above.
-
-## 12. The crown
-
-The best overall pick is the frontier couple that stands out most from its neighbours. Along the frontier ordered by
-cost, its **prominence** is 2·r_n − r_(n−1) − r_(n+1), the endpoints getting 0: a second difference of the distance
-to the price curve, a knee in value. The crown is the most prominent couple, weighted by a Gaussian of width 10 in T
-around parity (nearly flat); its card shows its value index.
-
-## 13. Sources table and counts
-
-Every group is listed with its verified configuration (harness, effort), its kind (effort sweep, cross-model,
-cross-generation) and the couples it links. The header counts sources, benchmarks and measurements. The page's date
-moves only when its content (text, figures, data) changes.
-
-## 14. Limits
+## 7. Limits
 
 - One latent quality per couple, averaged over task types; the ranking can differ on a single task type.
 - Which couples a source chooses to measure is not random. Free offsets absorb the level of the tasks chosen and
