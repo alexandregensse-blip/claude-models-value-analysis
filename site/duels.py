@@ -66,7 +66,7 @@ def build(CG, QG, PANEL):
     def pair(a, b):
         A, B = L(a), L(b)
         common = [e for e in rungs(a) if e in rungs(b)]
-        rows, lines = [], []
+        rows, lines, facts = [], [], []
         for e in common:
             p, q = couple(a, e), couple(b, e)
             pa, pc = ahead(p, q), cheaper(p, q)
@@ -87,6 +87,7 @@ def build(CG, QG, PANEL):
                 gspan = f"{g1:.1f} to {g2:.1f} points {'higher' if glo >= 0 else 'lower'}"
             else:
                 gspan = f"between {pts(glo)} and {pts(ghi)}"
+            facts.append(dict(kind="same", span=span, lo=lo, hi=hi, glo=glo, ghi=ghi))
             lines.append(f"At the same effort ({', '.join(EFF[e] for e in common)}), {A} costs {span} what {B} costs "
                          f"and scores {gspan} on the benchmark panel.")
         elif "solo" in (rungs(a) + rungs(b)):
@@ -106,14 +107,16 @@ def build(CG, QG, PANEL):
                              f"{L(y)} setting is {EFF[m['e']] if m['e'] != 'solo' else 'its only setting'} "
                              f"({m['s']:.1f} %, cost {fmt_cost(m['c'])}): {rel} per task.")
                 heads.append(dict(ratio=ratio, best=best, m=m))
+                facts.append(dict(kind="match", ratio=ratio, best=best, m=m))
             else:
                 strongest = max((couple(y, e) for e in rungs(y)), key=lambda q: q["t"])
+                facts.append(dict(kind="none", best=best, y=y, strongest=strongest))
                 lines.append(f"No {L(y)} setting reaches {name(best)} ({best['s']:.1f} %): {L(y)}'s best is "
                              f"{EFF[strongest['e']]} at {strongest['s']:.1f} %.")
         note = [f"{L(m)}'s cost is size-sensitive: a verbose model, its cost swings widely between short and long "
                 f"agentic tasks, hence its wide interval." for m in (a, b) if MODELS[m].get("flag_task_size")]
         head = min(heads, key=lambda h: h["ratio"]) if heads else None
-        return dict(a=a, b=b, A=A, B=B, sid=slug(a, b), rows=rows, lines=lines, note=note, head=head,
+        return dict(a=a, b=b, A=A, B=B, sid=slug(a, b), rows=rows, lines=lines, facts=facts, note=note, head=head,
                                ca=[couple(a, e) for e in rungs(a)], cb=[couple(b, e) for e in rungs(b)])
 
     duels_data = [pair(a, b) for a, b in pairs() if rungs(a) and rungs(b)]
@@ -183,40 +186,66 @@ def build(CG, QG, PANEL):
     def table(d, fold=True):
         if not d["rows"]:
             return ""
-        th = "".join(f"<th>{esc(EFF[r['e']])}</th>" for r in d["rows"])
-        def row(m, key):
-            col = MODELS[m]["colour"]
-            cells = "".join(f'<td><div class="cell" style="background:color-mix(in srgb,var({col}) 13%,transparent)">'
-                            f'{fmt_cost(r[key]["c"])}<small>{r[key]["s"]:.1f}&nbsp;%</small></div></td>' for r in d["rows"])
-            return f'<tr><td class="mdl">{dot(m)}{esc(L(m))}</td>{cells}</tr>'
-        pill = lambda who, what: (f'<span class="conf c-high">{esc(who)}{(" " + what) if what else ""}</span>' if who else '<span class="conf c-med">level</span>')
-        verdict = lambda key, what: "".join(f"<td>{pill(r[key], what)}</td>" for r in d["rows"])
-        inner = (f'<div class="chartbox"><table class="duel-tbl">'
-                 f'<caption>Effort level: how long the model reasons before it answers, from low to max</caption>'
-                 f'<thead><tr><th style="text-align:left">Effort level →</th>{th}</tr></thead><tbody>'
-                 f'{row(d["a"], "p")}{row(d["b"], "q")}'
-                 f'<tr><td class="mdl muted">Cheaper</td>{verdict("cost", "")}</tr>'
-                 f'<tr><td class="mdl muted">Scores higher</td>{verdict("qual", "")}</tr></tbody></table></div>'
-                 f'<p class="cap">Each model cell: <b>cost per task</b>, as a multiple of the cheapest couple, and below it the <b>expected score</b> on the benchmark panel. '
-                 f'The last two rows say which model is cheaper, or scores higher, at that effort level: it is ahead with at least 84&nbsp;% probability; <b>level</b> otherwise.</p>')
+        ca, cb = MODELS[d["a"]]["colour"], MODELS[d["b"]]["colour"]
+        tint = lambda col: f' style="background:color-mix(in srgb,var({col}) 10%,transparent)"'
+        body_rows = "".join(
+            f'<tr><td class="eff">{esc(EFF[r["e"]])}</td>'
+            f'<td class="num"{tint(ca)}>{fmt_cost(r["p"]["c"])}</td><td class="num"{tint(ca)}>{r["p"]["s"]:.1f}&nbsp;%</td>'
+            f'<td class="num"{tint(cb)}>{fmt_cost(r["q"]["c"])}</td><td class="num"{tint(cb)}>{r["q"]["s"]:.1f}&nbsp;%</td></tr>'
+            for r in d["rows"])
+        inner = (f'<div class="chartbox"><table class="duel-tbl"><thead>'
+                 f'<tr><th rowspan="2" style="text-align:left">Effort</th><th colspan="2">{dot(d["a"])}{esc(d["A"])}</th><th colspan="2">{dot(d["b"])}{esc(d["B"])}</th></tr>'
+                 f'<tr><th>cost</th><th>score</th><th>cost</th><th>score</th></tr></thead><tbody>{body_rows}</tbody></table></div>')
         if not fold:
             return inner
         return (f'<details class="fold"><summary>Effort by effort — {esc(d["A"])} vs {esc(d["B"])}</summary>'
                 f'<div class="fold-body pad">{inner}</div></details>')
+
+    def tiles(d):
+        """The pair's findings as the main page's tier cards: a label, the pick, the big figure."""
+        out = []
+        for f in d["facts"]:
+            if f["kind"] == "same":
+                more = f["lo"] >= 1
+                g = lambda v: f"{v:+.1f}"
+                gap = g(f["glo"]) if abs(f["ghi"] - f["glo"]) < 0.05 else f"{g(f['glo'])} to {g(f['ghi'])}"
+                lo, hi = fmt_ratio(f["lo"]), fmt_ratio(f["hi"])
+                big = lo if lo == hi else f"{lo[:-1]}–{hi}"
+                out.append(("At the same effort", f'{dot(d["a"])}{esc(d["A"])} vs {esc(d["B"])}',
+                            f'{esc(d["A"])} scores {gap} points', big, "the cost", not more))
+            elif f["kind"] == "match":
+                cheap = f["ratio"] < 1
+                big = fmt_ratio(1 / f["ratio"]) if cheap else fmt_ratio(f["ratio"])
+                out.append(("Cheapest match", f'{dot(f["m"]["m"])}{esc(L(f["m"]["m"]))}{esc(effname(f["m"]))}',
+                            f'reaches {esc(L(f["best"]["m"]))}{esc(effname(f["best"]))} · {f["m"]["s"]:.1f} vs {f["best"]["s"]:.1f}&nbsp;%',
+                            big, "cheaper" if cheap else "dearer", cheap))
+            else:
+                out.append(("Out of reach", f'{dot(f["best"]["m"])}{esc(L(f["best"]["m"]))}{esc(effname(f["best"]))}',
+                            f'no {esc(L(f["y"]))} setting reaches it · best {f["strongest"]["s"]:.1f} vs {f["best"]["s"]:.1f}&nbsp;%',
+                            f'{f["best"]["s"]:.1f}&nbsp;%', "score", True))
+        return '<div class="duel-tiles">' + "".join(
+            f'<div class="card pad tier"><div class="tier-top"><div class="tier-left"><span class="tier-q">{q}</span>'
+            f'<span class="tier-pick">{pick}</span><span class="tier-nums">{nums}</span></div>'
+            f'<div class="tier-yield{"" if good else " dearer"}">{big}<small>{word}</small></div></div></div>'
+            for q, pick, nums, big, word, good in out) + "</div>"
 
     legend = lambda d: (f'<div class="legend"><span class="lg"><span class="sw" style="background:var({MODELS[d["a"]]["colour"]})"></span>{esc(d["A"])}</span>'
                         f'<span class="lg"><span class="sw" style="background:var({MODELS[d["b"]]["colour"]})"></span>{esc(d["B"])}</span></div>')
     lines_html = lambda d: ('<ul class="tight duel-lines">' + "".join(f"<li>{esc(t)}</li>" for t in d["lines"]) + "</ul>"
                             + "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"]))
 
+    notes = lambda d: "".join(f'<p class="cap">{esc(t)}</p>' for t in d["note"])
+
     def block(d):
         return (f'<section id="{d["sid"]}" class="block"><div class="card pad"><h3 class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</h3>'
-                f'{legend(d)}<div class="chartbox">{chart(d)}</div>{lines_html(d)}</div>{table(d)}</section>')
+                f'{legend(d)}<div class="chartbox">{chart(d)}</div>{tiles(d)}{notes(d)}</div>{table(d)}</section>')
 
     def view(d):                                                         # the comparator's result: chart and table side by side
         return (f'<div class="card pad cmp-view"><h3 class="blocktitle">{esc(d["A"])} vs {esc(d["B"])}</h3>{legend(d)}'
-                f'<div class="cmp-grid"><div class="chartbox">{chart(d)}</div><div class="cmp-tbl">{table(d, fold=False)}</div></div>'
-                f'{lines_html(d)}</div>')
+                f'<div class="chartbox">{chart(d)}</div>'
+                f'<div class="cmp-grid">{tiles(d)}<div class="cmp-tbl"><h4 class="tbl-title">By effort level '
+                f'<span>cost per task × the cheapest couple · expected score on the benchmark panel</span></h4>{table(d, fold=False)}</div></div>'
+                f'{notes(d)}</div>')
 
     cards = "".join(card(d) for d in duels_data)
     blocks = "".join(block(d) for d in duels_data)
@@ -337,14 +366,22 @@ a.duelcard:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 .chip:focus-visible{outline:2px solid var(--opus5);outline-offset:2px}
 @media (max-width:520px){.chip{min-width:0;flex:1 1 40%;padding:16px 14px}}
 .cmp-empty{text-align:center;margin-top:18px}
-.duel-tbl caption{caption-side:top;text-align:left;font-size:12.5px;color:var(--muted);padding:0 0 8px}
 @media (prefers-reduced-motion:reduce){.chip{transition:none}}
 #cmp-out{margin-top:14px}
-.cmp-grid{display:grid;grid-template-columns:1fr;gap:18px 28px;align-items:center}
-@media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}}
+.cmp-grid{display:grid;grid-template-columns:1fr;gap:18px 28px;align-items:start;margin-top:22px}
+@media (min-width:1080px){.cmp-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.duel-tiles{display:grid;grid-template-columns:1fr;gap:12px}
+.block .duel-tiles{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:18px}
+.duel-tiles .tier{box-shadow:none;background:var(--paper)}
+.duel-tiles .tier-top{border-bottom:none;padding-bottom:0;margin:0}
+.duel-tiles .tier-q{margin-bottom:4px}
+.duel-tiles .tier-yield{flex:0 0 auto;font-size:clamp(24px,2.8vw,32px)}
+.duel-tiles .tier-left{flex:1 1 auto}
+.tbl-title{margin:0 0 10px;font-size:15px;font-weight:600;font-family:Georgia,serif;font-variant:small-caps}
+.tbl-title span{display:block;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-variant:normal;font-size:12px;font-weight:400;color:var(--muted);margin-top:2px}
+.duel-tbl td.eff{text-align:left;font-weight:600}
+.duel-tbl td.num{font-variant-numeric:tabular-nums;font-weight:600}
 .cmp-grid>*{min-width:0}
-.cmp-tbl .duel-tbl{font-size:12.5px}
-.cmp-tbl .cap{margin-top:12px}
 #pairs .fold-body>.block:first-of-type{margin-top:26px}
 #pairs .duelgrid{margin-bottom:6px}"""
 
