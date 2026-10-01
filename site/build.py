@@ -29,9 +29,9 @@ def main():
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
     body = body.replace("__REPO__", REPO_URL)
     body = body.replace("__NCOSTROWS__", str(DIAG["cost"]["rows"])).replace("__NSCOREROWS__", str(DIAG["quality"]["rows"]))
-    ncpl = sum(len(v) for v in CG.values())                      # (model, effort) couples carried by the grids
     span = math.exp(max(c[0] for v in CG.values() for c in v.values()) - min(c[0] for v in CG.values() for c in v.values()))
-    body = body.replace("__NCOUPLES__", str(ncpl))
+    ntrend = sum(len(CG[m]) for m in duels.CURRENT if m in CG)   # couples of the latest model of each family: the price trend
+    body = body.replace("__NTREND__", str(ntrend))
     body = body.replace("__COSTSPAN__", str(round(span)))
     pre  = prerender(app, css)
     body = inject(body, pre)

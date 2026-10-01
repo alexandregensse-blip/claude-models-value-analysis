@@ -38,7 +38,7 @@
    "name": "Alexandre Gensse",
    "url": "https://github.com/alexandregensse-blip"
   },
-  "dateModified": "2026-09-30",
+  "dateModified": "2026-10-01",
   "license": "https://creativecommons.org/licenses/by/4.0/",
   "isAccessibleForFree": true,
   "keywords": [
@@ -298,13 +298,13 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <div class="hero-row">
       <div class="lede-col">
         <p class="lede">What each recent Claude model actually costs, at every effort level, and the quality it delivers — fused from public benchmark measurements for every (model, effort) pair.</p>
-        <p class="lede answer" id="answer">The best value today is <b>Sonnet 5.5 at medium effort</b> — 5.0× cheaper than the price trend for its quality (expected score 59.6 % on the benchmark panel).</p>
+        <p class="lede answer" id="answer">The best value today is <b>Sonnet 5.5 at high effort</b> — 3.4× cheaper than the price trend for its quality (expected score 67.0 % on the benchmark panel).</p>
         <p class="lede">Quality is the expected score across the whole benchmark panel, not one benchmark: the type of task can move it, <a href="#factors" onclick="document.getElementById('factors').open=true">see what moves everything</a>.</p>
         <p class="lede">To compare two models directly — Fable, Opus, Sonnet or Haiku, effort by effort — see the <a href="claude-models-head-to-head.html">head-to-head page</a>.</p>
       </div>
       <div class="meta meta-side">
         <div><span class="k">Measurements</span><br><b><span class="nsrc">205 sources · 636 benchmarks · 4073 measurements</span></b></div>
-        <div><span class="k">Updated</span><br><b>30 Sep 2026</b></div>
+        <div><span class="k">Updated</span><br><b>01 Oct 2026</b></div>
       </div>
     </div>
   </header>
@@ -317,10 +317,10 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-head"><span class="tier-name">👑 Best overall</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</span>
-          <span class="tier-nums">Cost <b>1.1×</b> · Score <b>59.6 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
+          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>67.0 %</b></span>
         </div>
-        <div class="tier-yield">500</div>
+        <div class="tier-yield">336</div>
       </div>
       
     </div></div>
@@ -331,7 +331,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</span>
           <span class="tier-nums">Cost <b>1.1×</b> · Score <b>59.6 %</b></span>
         </div>
-        <div class="tier-yield">500</div>
+        <div class="tier-yield">289</div>
       </div>
       <span class="ex">Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate.</span>
     </div><div class="card pad crit tier">
@@ -341,27 +341,27 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
           <span class="tier-nums">Cost <b>1.8×</b> · Score <b>67.0 %</b></span>
         </div>
-        <div class="tier-yield">491</div>
+        <div class="tier-yield">336</div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Advanced reasoning</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
-          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>67.0 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
+          <span class="tier-nums">Cost <b>4.2×</b> · Score <b>72.5 %</b></span>
         </div>
-        <div class="tier-yield">491</div>
+        <div class="tier-yield">233</div>
       </div>
       <span class="ex">Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Cutting-Edge thinking</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
-          <span class="tier-nums">Cost <b>4.2×</b> · Score <b>72.5 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</span>
+          <span class="tier-nums">Cost <b>6.7×</b> · Score <b>74.1 %</b></span>
         </div>
-        <div class="tier-yield">296</div>
+        <div class="tier-yield">175</div>
       </div>
       <span class="ex">Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium.</span>
     </div></div>
@@ -381,15 +381,15 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="chart-controls" id="ctrlP"></div>
       <div class="legend" id="legendP"></div>
       <div class="chartbox"><svg id="chartP" viewBox="0 0 1100 619" role="img" aria-label="Pareto frontier: quality vs cost"></svg></div>
-      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The frontier couples are the candidates of every pick below. The faint grey line is the <b>price trend</b> — what a given quality typically costs, fitted on <b>every</b> couple shown. <b>Tier bands</b> (off by default) shade the same four usage tiers as on the landscape above.</p>
+      <p class="cap">The <b>non-dominated</b> (model, effort) couples&nbsp;: nothing offers more quality at equal-or-lower cost. <b>Solid</b> = frontier, <b>faded</b> = dominated. The frontier couples are the candidates of every pick below. The faint grey line is the <b>price trend</b> — what a given quality costs today, fitted on every couple of the <b>latest model of each family</b>. <b>Tier bands</b> (off by default) shade the same four usage tiers as on the landscape above.</p>
       <div id="pareto-blocks" class="pareto-blocks"><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Low</span><span class="pblock-n">55.6 % · 1.0×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">59.6 % · 1.1×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">High</span><span class="pblock-n">67.0 % · 1.8×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Medium</span><span class="pblock-n">71.0 % · 3.5×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#C2385A"><b>Sonnet 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">71.3 % · 4.0×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">High</span><span class="pblock-n">72.5 % · 4.2×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">xHigh</span><span class="pblock-n">74.1 % · 6.7×</span></span><span class="pconn">→</span><span class="pblock" style="border-color:#1C7FB8"><b>Opus 5.5</b><span class="pblock-e">Max</span><span class="pblock-n">75.0 % · 19×</span></span></div>
       <details class="fold">
         <summary>Value — distance to the price trend</summary>
         <div class="fold-body pad">
-          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality typically costs across <b>all 45 couples</b> shown, not just the frontier: it is the going rate of the models (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.33</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the <b>frontier</b> couples are listed.</p>
+          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality costs today across the <b>16 couples of the latest model of each family</b>, not just the frontier: it is the going rate of the models on sale. Earlier generations, dearer per point than their successors, would flatten it and make quality look cheap; it does not move when older models are shown (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.30</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the <b>frontier</b> couples are listed.</p>
           <div class="chartbox"><table id="score-tbl">
             <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>expected score</th><th>value index<br><span style="font-weight:400;text-transform:none;letter-spacing:0">trend = 100</span></th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</td><td class="num">1.1×</td><td class="num">59.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 50%, transparent); color:var(--ink)">500</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</td><td class="num">1.8×</td><td class="num">67.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 50%, transparent); color:var(--ink)">491</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Low</td><td class="num">1.0×</td><td class="num">55.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 47%, transparent); color:var(--ink)">428</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</td><td class="num">3.5×</td><td class="num">71.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 40%, transparent); color:var(--ink)">318</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</td><td class="num">4.2×</td><td class="num">72.5 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 39%, transparent); color:var(--ink)">296</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · xHigh</td><td class="num">4.0×</td><td class="num">71.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 38%, transparent); color:var(--ink)">289</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</td><td class="num">6.7×</td><td class="num">74.1 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 31%, transparent); color:var(--ink)">212</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Max</td><td class="num">19×</td><td class="num">75.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 19%, transparent); color:var(--ink)">80</span></td></tr></tbody>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</td><td class="num">1.8×</td><td class="num">67.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 41%, transparent); color:var(--ink)">336</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</td><td class="num">1.1×</td><td class="num">59.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 38%, transparent); color:var(--ink)">289</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Medium</td><td class="num">3.5×</td><td class="num">71.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 34%, transparent); color:var(--ink)">241</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</td><td class="num">4.2×</td><td class="num">72.5 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 33%, transparent); color:var(--ink)">233</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Low</td><td class="num">1.0×</td><td class="num">55.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 32%, transparent); color:var(--ink)">226</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · xHigh</td><td class="num">4.0×</td><td class="num">71.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 32%, transparent); color:var(--ink)">220</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</td><td class="num">6.7×</td><td class="num">74.1 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 27%, transparent); color:var(--ink)">175</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · Max</td><td class="num">19×</td><td class="num">75.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 23%, transparent); color:var(--ink)">68</span></td></tr></tbody>
           </table></div>
           <p class="cap"><b>Value index</b> = 100 × how many times cheaper than the trend the couple is for its quality (100 = the trend). <b>Green</b> = above 100, <b>red</b> = below; intensity = distance to the trend in decades, capped at one. A couple on the Pareto frontier can still be red&nbsp;: being non-dominated does not mean being good value for what it delivers.</p>
         </div>
@@ -398,7 +398,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
-        <p class="sub">Consolidating the frontier into a decision. <b>Four target qualities</b> are <b>derived from the data</b>, not fixed: they spread evenly between the frontier's weakest and strongest couples, each end drawn 5&nbsp;% of the span inward, so that the bottom tier follows the weakest couple available and the top tier the best — as models improve, the targets move with them. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their targets. For each tier we pick, among the frontier couples, the one that maximises <b>window × e<sup>λθ</sup>&nbsp;⁄&nbsp;cost</b>, λ the slope of the price trend. Below its target a couple is penalised by a Gaussian window&nbsp;; at or above it the window is 1, and e<sup>λθ</sup>&nbsp;⁄&nbsp;cost rewards <b>smoothly</b> a couple that brings more quality than the trend charges for its extra cost — no bonus constant to set. Cost counts in <b>ratios</b>, as people perceive prices&nbsp;: twice as dear weighs the same at every price. The <b>big figure</b> is the pick's <b>value index</b>&nbsp;: <b>100 = the price trend</b>, 500 means five times cheaper than the trend charges for its quality, 50 twice as dear. The <b>crown</b> is the frontier couple that sits furthest below the trend. Sliders below override the targets and widths.</p>
+        <p class="sub">Consolidating the frontier into a decision. <b>Four target qualities</b> are <b>derived from the data</b>, not fixed: they spread evenly between the frontier's weakest and strongest couples, each end drawn 5&nbsp;% of the span inward, so that the bottom tier follows the weakest couple available and the top tier the best — as models improve, the targets move with them. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their targets. For each tier we pick, among the frontier couples, the one that maximises <b>window × e<sup>β·λθ</sup>&nbsp;⁄&nbsp;cost</b>, λ the slope of the price trend and <b>β</b> the tier's <b>price of quality</b> as a multiple of the market's&nbsp;: grunt work pays a quarter of it (β&nbsp;=&nbsp;0.25), everyday tasks 0.63, advanced reasoning 1.59, cutting-edge thinking four times (β&nbsp;=&nbsp;4) — evenly spread in ratio, symmetric about the market. Below its target a couple is penalised by a Gaussian window&nbsp;; at or above it the window is 1, and e<sup>β·λθ</sup>&nbsp;⁄&nbsp;cost rewards <b>smoothly</b> a couple that brings more quality than the tier is ready to pay for its extra cost. Cost counts in <b>ratios</b>, as people perceive prices&nbsp;: twice as dear weighs the same at every price. The <b>big figure</b> is the pick's <b>value index</b>&nbsp;: <b>100 = the price trend</b>, 500 means five times cheaper than the trend charges for its quality, 50 twice as dear. The <b>crown</b> is the frontier couple that sits furthest below the trend. Sliders below override the targets, widths and prices of quality.</p>
         <div class="grid" id="tier-cards"><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Target 56.6 % – Grunt work</span></div>
       <div class="tier-top">
@@ -406,7 +406,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</span>
           <span class="tier-nums">Cost <b>1.1×</b> · Score <b>59.6 %</b></span>
         </div>
-        <div class="tier-yield">500</div>
+        <div class="tier-yield">289</div>
       </div>
       <span class="ex">Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate.</span>
     </div><div class="card pad crit tier">
@@ -416,38 +416,38 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
           <span class="tier-nums">Cost <b>1.8×</b> · Score <b>67.0 %</b></span>
         </div>
-        <div class="tier-yield">491</div>
+        <div class="tier-yield">336</div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Target 69.0 % – Advanced reasoning</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</span>
-          <span class="tier-nums">Cost <b>1.8×</b> · Score <b>67.0 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
+          <span class="tier-nums">Cost <b>4.2×</b> · Score <b>72.5 %</b></span>
         </div>
-        <div class="tier-yield">491</div>
+        <div class="tier-yield">233</div>
       </div>
       <span class="ex">Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Target 74.2 % – Cutting-Edge thinking</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · High</span>
-          <span class="tier-nums">Cost <b>4.2×</b> · Score <b>72.5 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5 · xHigh</span>
+          <span class="tier-nums">Cost <b>6.7×</b> · Score <b>74.1 %</b></span>
         </div>
-        <div class="tier-yield">296</div>
+        <div class="tier-yield">175</div>
       </div>
       <span class="ex">Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium.</span>
     </div></div>
         <div id="tier-crown"><div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
-      <div class="crown-model"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · Medium</div>
-      <div class="crown-line">Cost <b>1.1×</b> · Score <b>59.6 %</b> · Value index <b>500</b></div>
-      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>5.0× less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>22.8 points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <div class="crown-model"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5 · High</div>
+      <div class="crown-line">Cost <b>1.8×</b> · Score <b>67.0 %</b> · Value index <b>336</b></div>
+      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>3.4× less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>14.4 points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on every couple of the latest model of each family, so today's going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div></div>
         <details class="fold">
-          <summary>Tune the target windows (target, σ)</summary>
+          <summary>Tune the tiers (target, σ, price of quality β)</summary>
           <div class="fold-body pad"><div id="tier-tuner"></div></div>
         </details>
       </div>
@@ -463,7 +463,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
         <div class="chartbox">
           <table id="matrix-tbl">
             <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Expected score<br><span style="font-weight:400;text-transform:none;letter-spacing:0">top effort</span></th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 17%, transparent)">2.2<small>2.0–2.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 22%, transparent)">3.5<small>3.3–3.8</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">4.2<small>3.9–4.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 30%, transparent)">6.7<small>6.2–7.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 43%, transparent)">19<small>17–21</small></div></td><td class="mdl num">75.0 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 7%, transparent)">1.0<small>0.87–1.2</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 8%, transparent)">1.1<small>0.95–1.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 14%, transparent)">1.8<small>1.5–2.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">4.0<small>3.5–4.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">14<small>12–16</small></div></td><td class="mdl num">73.4 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#7B3FBF"></span>Fable 5.1</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 31%, transparent)">7.3<small>6.8–8.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.8<small>8.2–9.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">10<small>9.7–11</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 42%, transparent)">18<small>17–20</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 47%, transparent)">28<small>25–30</small></div></td><td class="mdl num">71.0 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#4A5A9C"></span>Opus 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 25%, transparent)">4.6<small>4.2–5.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 28%, transparent)">5.9<small>5.4–6.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.8<small>8.1–9.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 36%, transparent)">11<small>11–12</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">14<small>13–15</small></div></td><td class="mdl num">69.7 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#7C4A6A"></span>Fable 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 32%, transparent)">7.8<small>7.2–8.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">10<small>9.3–11</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 36%, transparent)">11<small>11–12</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 41%, transparent)">17<small>15–18</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 46%, transparent)">25<small>23–27</small></div></td><td class="mdl num">68.5 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#D2912A"></span>Opus 4.8</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 25%, transparent)">4.4<small>4.0–4.8</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 27%, transparent)">5.4<small>4.9–5.9</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 29%, transparent)">6.0<small>5.5–6.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.9<small>8.1–9.7</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 38%, transparent)">13<small>12–14</small></div></td><td class="mdl num">62.6 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#D9694B"></span>Sonnet 5 <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 13%, transparent)">1.7<small>1.5–1.9</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 18%, transparent)">2.4<small>2.2–2.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 21%, transparent)">3.3<small>3.0–3.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 25%, transparent)">4.6<small>4.2–4.9</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">9.9<small>9.1–11</small></div></td><td class="mdl num">58.7 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#3F8A78"></span>Haiku 4.5</td><td colspan="5"><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 10%, transparent)">1.2<small>merged · 1.1–1.4</small></div></td><td class="mdl num">38.9 %</td></tr></tbody>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 17%, transparent)">2.2<small>2.0–2.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 22%, transparent)">3.5<small>3.3–3.8</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">4.2<small>3.9–4.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 30%, transparent)">6.7<small>6.2–7.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 43%, transparent)">19<small>17–21</small></div></td><td class="mdl num">75.0 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 7%, transparent)">1.0<small>0.87–1.2</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 8%, transparent)">1.1<small>0.95–1.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 14%, transparent)">1.8<small>1.5–2.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">4.0<small>3.5–4.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">14<small>12–16</small></div></td><td class="mdl num">73.4 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#7B3FBF"></span>Fable 5.1</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 31%, transparent)">7.3<small>6.8–8.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.8<small>8.2–9.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">10<small>9.7–11</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 42%, transparent)">18<small>17–20</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 47%, transparent)">28<small>25–30</small></div></td><td class="mdl num">71.0 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#4A5A9C"></span>Opus 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 25%, transparent)">4.6<small>4.2–5.0</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 28%, transparent)">5.9<small>5.4–6.3</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 33%, transparent)">8.8<small>8.1–9.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 36%, transparent)">11<small>11–12</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">14<small>13–15</small></div></td><td class="mdl num">69.7 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#7C4A6A"></span>Fable 5</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 32%, transparent)">7.8<small>7.2–8.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">10<small>9.3–11</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 36%, transparent)">11<small>11–12</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 41%, transparent)">17<small>15–18</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 46%, transparent)">25<small>23–27</small></div></td><td class="mdl num">68.5 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#D9694B"></span>Sonnet 5 <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 13%, transparent)">1.7<small>1.5–1.9</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 18%, transparent)">2.4<small>2.2–2.6</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 21%, transparent)">3.3<small>3.0–3.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 25%, transparent)">4.6<small>4.2–4.9</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">9.9<small>9.1–11</small></div></td><td class="mdl num">58.7 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#3F8A78"></span>Haiku 4.5</td><td colspan="5"><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 10%, transparent)">1.2<small>merged · 1.1–1.4</small></div></td><td class="mdl num">38.9 %</td></tr></tbody>
           </table>
         </div>
         <p class="cap">"Expected score&nbsp;· top effort" = the score the model at its top effort is expected to reach on the benchmark panel, from the same fit as the landscape. <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources). n/a&nbsp;: effort not exposed, or measured by a single publisher (a couple is shown only once two publishers measured it).</p>
@@ -472,11 +472,11 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Value-index matrix — every model and effort against the price trend</summary>
       <div class="card pad">
-        <p class="sub">The <b>value index</b> of every couple shown, model × effort, in the same order as the cost matrix&nbsp;: <b>100 = the price trend</b>, what a given quality typically costs across all couples&nbsp;; 500 means five times cheaper than the trend charges for that quality, 50 twice as dear. Under each value, its 16–84&nbsp;% range.</p>
+        <p class="sub">The <b>value index</b> of every couple shown, model × effort, in the same order as the cost matrix&nbsp;: <b>100 = the price trend</b>, what a given quality costs today across the latest model of each family&nbsp;; 500 means five times cheaper than the trend charges for that quality, 50 twice as dear. Under each value, its 16–84&nbsp;% range.</p>
         <div class="chartbox">
           <table id="value-tbl">
             <thead><tr><th style="text-align:left">Model</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 45%, transparent)">329<small>290–374</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 44%, transparent)">318<small>287–353</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 42%, transparent)">296<small>266–329</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 31%, transparent)">212<small>190–237</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 20%, transparent)">80<small>71–90</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 53%, transparent)">428<small>360–508</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 58%, transparent)">500<small>423–590</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 57%, transparent)">491<small>424–569</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 41%, transparent)">289<small>249–334</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 10%, transparent)">97<small>83–113</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#7B3FBF"></span>Fable 5.1</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 9%, transparent)">98<small>89–108</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 10%, transparent)">96<small>87–105</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 15%, transparent)">88<small>80–96</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 37%, transparent)">57<small>52–63</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 54%, transparent)">41<small>37–45</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#4A5A9C"></span>Opus 5</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 19%, transparent)">140<small>127–156</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 18%, transparent)">138<small>126–151</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 9%, transparent)">103<small>95–112</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 15%, transparent)">87<small>80–95</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 23%, transparent)">75<small>69–81</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#7C4A6A"></span>Fable 5</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 25%, transparent)">72<small>65–80</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 25%, transparent)">73<small>66–80</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 26%, transparent)">71<small>64–78</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 40%, transparent)">54<small>49–59</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 58%, transparent)">38<small>34–42</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#D2912A"></span>Opus 4.8</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 14%, transparent)">89<small>79–99</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 14%, transparent)">90<small>81–99</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 14%, transparent)">89<small>81–98</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 26%, transparent)">71<small>64–78</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 43%, transparent)">51<small>46–56</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#D9694B"></span>Sonnet 5</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 16%, transparent)">129<small>113–148</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 16%, transparent)">128<small>115–143</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 15%, transparent)">126<small>114–139</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 9%, transparent)">103<small>94–114</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 41%, transparent)">52<small>47–58</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#3F8A78"></span>Haiku 4.5</td><td colspan="5"><div class="cell num" style="background:color-mix(in srgb, #3F8A78 10%, transparent)">106<small>83–136</small></div></td></tr></tbody>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#1C7FB8"></span>Opus 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 39%, transparent)">212<small>184–245</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 44%, transparent)">241<small>213–271</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 43%, transparent)">233<small>206–264</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 31%, transparent)">175<small>154–199</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 23%, transparent)">68<small>59–78</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#C2385A"></span>Sonnet 5.5</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 42%, transparent)">226<small>186–274</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 52%, transparent)">289<small>241–348</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 58%, transparent)">336<small>286–396</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 41%, transparent)">220<small>186–260</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 17%, transparent)">78<small>66–93</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#7B3FBF"></span>Fable 5.1</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 26%, transparent)">63<small>56–70</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 24%, transparent)">65<small>58–72</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 26%, transparent)">62<small>56–68</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 41%, transparent)">42<small>38–47</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 53%, transparent)">31<small>27–35</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#4A5A9C"></span>Opus 5</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 14%, transparent)">87<small>77–97</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 11%, transparent)">92<small>83–102</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 21%, transparent)">72<small>66–79</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 26%, transparent)">63<small>57–69</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 31%, transparent)">55<small>50–60</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#7C4A6A"></span>Fable 5</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 41%, transparent)">42<small>38–48</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 37%, transparent)">47<small>42–52</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 37%, transparent)">47<small>42–53</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 45%, transparent)">37<small>34–42</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 58%, transparent)">27<small>24–30</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#D9694B"></span>Sonnet 5</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 32%, transparent)">53<small>45–63</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 27%, transparent)">60<small>53–68</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 24%, transparent)">66<small>59–74</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 30%, transparent)">57<small>50–63</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 54%, transparent)">30<small>26–34</small></div></td></tr><tr><td class="mdl"><span class="dot" style="background:#3F8A78"></span>Haiku 4.5</td><td colspan="5"><div class="cell num" style="background:color-mix(in srgb, #C0563B 47%, transparent)">36<small>27–49</small></div></td></tr></tbody>
           </table>
         </div>
         <p class="cap"><b>Green</b> = above 100, cheaper than the trend for its quality&nbsp;; <b>red</b> = below&nbsp;; the deepest green is the best index shown, the deepest red the lowest, on a log scale. A high index does not make a couple a pick&nbsp;: the tiers weigh it against their target quality.</p>
@@ -525,7 +525,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <li><b>Weights follow from the data.</b> A group of k couples informs the spacing of couples in proportion to its discrimination² × (k − 2); a saturated or noisy benchmark weighs little; a publisher's weight saturates at its own systematic effect. No weight is set per source.</li>
           <li><b>Nothing counts twice.</b> One execution printed twice — a system card reprinting an earlier card's series, the same run drawn on two charts, one run scored with two metrics — is detected and counted once: its score and its cost must both agree, within their reading precisions and a rounding made the wrong way. An index is left out for a couple whose index components are already in the data.</li>
           <li><b>Values and intervals.</b> Quality = a couple's latent quality θ, shown as the score it predicts averaged over the benchmark panel; cost = its cost on a task of typical size, shown as a multiple of the cheapest couple. <b>No couple serves as a reference</b>, in the fit or on the page. Each couple carries its own 16–84&nbsp;% interval, so two couples compare through their two intervals. A couple measured by a single publisher is not shown.</li>
-          <li><b>From the fit to the picks.</b> Every decision is taken on the latent scale (log cost, θ). The Pareto frontier keeps the couples nothing beats on both axes; they are the candidates of every pick. A price trend — what a given quality typically costs, fitted on every couple — says how many times cheaper or dearer each couple is than the going rate. The four tiers spread their targets across the frontier and pick, around each target, the couple that brings the most quality for its cost against the trend; the crown goes to the couple furthest below the trend.</li>
+          <li><b>From the fit to the picks.</b> Every decision is taken on the latent scale (log cost, θ). The Pareto frontier keeps the couples nothing beats on both axes; they are the candidates of every pick. A price trend — what a given quality costs today, fitted on the latest model of each family — says how many times cheaper or dearer each couple is than the going rate. The four tiers spread their targets across the frontier and pick, around each target, the couple that brings the most quality for its cost, each tier paying for quality from a quarter of the market price (grunt work) to four times it (cutting-edge thinking); the crown goes to the couple furthest below the trend.</li>
         </ol>
         <h3 class="blocktitle" style="margin-top:1.3em">Key values</h3>
         <ul class="steps">
@@ -557,7 +557,8 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 
 <script>
 const MODELS = {"fable-5.1":{"label":"Fable 5.1","c":"--fable51"},"fable-5":{"label":"Fable 5","c":"--fable5"},"opus-5.5":{"label":"Opus 5.5","c":"--opus55"},"opus-5":{"label":"Opus 5","c":"--opus5"},"opus-4.8":{"label":"Opus 4.8","c":"--opus48"},"sonnet-5.5":{"label":"Sonnet 5.5","c":"--sonnet55"},"sonnet-5":{"label":"Sonnet 5","c":"--sonnet5","tag":true},"opus-4.7":{"label":"Opus 4.7","c":"--opus47"},"sonnet-4.6":{"label":"Sonnet 4.6","c":"--sonnet46"},"haiku-4.5":{"label":"Haiku 4.5","c":"--haiku45"}};   // data/catalog/models.json: label, colour variable, task-size flag, in legend order
-const LEGACY=["opus-4.7","sonnet-4.6"];                         // older models: hidden unless the reader turns them on
+const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8"];              // older models: hidden unless the reader turns them on
+const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-4.5"];  // the latest model of each family: the price trend's couples
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -596,11 +597,13 @@ function couples(){ const rows=[];
 function frontier(rows){ const E=1e-9, dom=(o,p)=>o.x<=p.x+E&&o.t>=p.t-E&&(o.x<p.x-E||o.t>p.t+E);
   rows.forEach(p=>{ p.front=!rows.some(o=>dom(o,p)); });
   return {front:rows.filter(p=>p.front).sort((a,b)=>a.x-b.x)}; }
-// PRICE TREND: what a given quality typically costs, fitted on EVERY shown couple (the trend of the models, not the
-// frontier): ln cost = a + λ·θ, least squares weighted by each couple's uncertainty across the line, 1/(hx² + λ²·ht²)
+// PRICE TREND: what a given quality costs today, fitted on every couple of the latest model of each family (CURRENT),
+// dominated ones included — the going rate of the models on sale, not the frontier. Earlier generations, better and
+// dearer per point than their successors, would flatten it and make quality look cheap; with them out, the trend does
+// not move when the reader shows or hides older models. ln cost = a + λ·θ, least squares weighted by each couple's uncertainty across the line, 1/(hx² + λ²·ht²)
 // (both axes are uncertain: effective variance), iterated to its fixed point. λ is the market's price of quality: one
 // more unit of θ costs e^λ times more. Kept ≥ 0: quality never gets cheaper as it rises.
-function fitTrend(rows){ let a=0, l=0;
+function fitTrend(all){ const rows=all.filter(p=>CURRENT.includes(p.m)); let a=0, l=0;
   for(let it=0; it<100; it++){ let S=0,St=0,Sx=0,Stt=0,Stx=0;
     rows.forEach(p=>{ const w=1/(p.hx*p.hx+l*l*p.ht*p.ht); S+=w; St+=w*p.t; Sx+=w*p.x; Stt+=w*p.t*p.t; Stx+=w*p.t*p.x; });
     const l2=Math.max(0,(S*Stx-St*Sx)/(S*Stt-St*St)); a=(Sx-l2*St)/S; const done=Math.abs(l2-l)<1e-12; l=l2; if(done) break; }
@@ -810,7 +813,7 @@ const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
   const W=1100,H=619,mL=66,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
-  const pts=couples(), {front}=frontier(pts), tr=fitTrend(pts);    // all current couples incl. Haiku (solo)
+  const pts=couples(), {front}=frontier(pts), tr=fitTrend(pts);    // trend: the latest model of each family, Haiku (solo) included
   const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)), tmn=Math.min(...pts.map(p=>p.tlo)), tmx=Math.max(...pts.map(p=>p.thi));
   const yp=10, view=s.__view||defView(xmn,xmx,tmn,tmx);   // stored view (zoom/pan) overrides the data bounds
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
@@ -860,13 +863,14 @@ function fillScoreTable(rows,tr){
       +`<td style="min-width:96px">${pill}</td>`;
     tb.appendChild(row); }); }
 // ---- Tiers: the best value by task complexity; the crown ----
-// Four tiers, each with a TARGET quality θ*. Among the frontier couples, each tier picks the one
-// that maximises
-//     window(θ) × e^(λ·θ) ⁄ cost
-// λ the slope of the price trend. e^(λθ) ⁄ cost is the couple's value against the trend (the same all along the trend
-// line): above its target, a couple wins by bringing more quality than the trend charges for its extra cost, a smooth
-// reward with no constant to set. Below the target the Gaussian window e^(−δ²), δ = (θ − θ*) ⁄ σ, penalises the
-// shortfall; at or above it the window is 1. Cost is weighed in ratios (log cost), as people perceive prices
+// Four tiers, each with a TARGET quality θ* and a PRICE OF QUALITY β·λ. Among the frontier couples, each tier picks
+// the one that maximises
+//     window(θ) × e^(β·λ·θ) ⁄ cost
+// λ the slope of the price trend, β the tier's multiple of it: what that buyer is ready to pay for one more unit of
+// quality, against the market. Grunt work pays it a quarter of the market price, cutting-edge thinking four times:
+// β spread evenly in ratio from 1⁄4 to 4 (TIER_BETA), symmetric about the market (geometric mean 1). Above its target, a
+// couple wins by bringing more quality than the tier pays for its extra cost. Below the target the Gaussian window
+// e^(−δ²), δ = (θ − θ*) ⁄ σ, penalises the shortfall; at or above it the window is 1. Cost is weighed in ratios (log cost), as people perceive prices
 // (Weber–Fechner): twice as dear weighs the same at every price.
 function logWindow(t,T){ const d=(t-T.t)/T.sig; return d<0?-d*d:0; }
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
@@ -883,6 +887,8 @@ const TIERS=[
 // inward so that no target sits on a single couple. They depend on the couples only through these two bounds.
 // σ follows the spacing: adjacent windows cross at half weight midway between their targets, σ = gap ⁄ (2·√ln 2).
 const TIER_E=0.05;
+const TIER_BETA=[0.25,4];   // β of the first and last tier; the others spread evenly in ratio between them
+TIERS.forEach((T,i)=>{ T.beta=TIER_BETA[0]*Math.pow(TIER_BETA[1]/TIER_BETA[0], i/Math.max(TIERS.length-1,1)); });
 let TIERQ={lo:0,hi:1,gap:1,sig:1};
 function tierDefaults(){
   const {front}=frontier(couples()); if(!front.length) return;
@@ -895,7 +901,7 @@ tierDefaults();
 function tierPicks(){
   const rows=couples(), {front}=frontier(rows), tr=fitTrend(rows);
   front.forEach(p=>{ p.r=valueOf(tr,p); p.qg=qGain(tr,p); });
-  const tscore=(p,T)=>logWindow(p.t,T)+tr.l*p.t-p.x;                                   // ln(window × e^(λθ) ⁄ cost)
+  const tscore=(p,T)=>logWindow(p.t,T)+T.beta*tr.l*p.t-p.x;                            // ln(window × e^(βλθ) ⁄ cost)
   const picks=TIERS.map(T=>({...T, win:front.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a)}));
   // CROWN: the frontier couple furthest below the price trend: the most quality for its cost against the going
   // rate. Read on the cost axis, e^r times cheaper than the trend at its quality; on the quality axis, r ⁄ λ above what
@@ -929,7 +935,7 @@ function drawTiers(){
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
-      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on every couple of the latest model of each family, so today's going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows over the θ axis (labelled in expected score) plus the couples within
@@ -953,6 +959,7 @@ function drawTierWindows(){
   front.forEach(p=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`; });
   host.innerHTML=svg+`</svg>`;
 }
+const fmtBeta=b=>(b<1?b.toFixed(2):b.toFixed(1))+"×";   // a tier's price of quality, as a multiple of the market's
 // Build the tuner ONCE (window container + persistent sliders). Slider input updates state + redraws windows/cards only.
 function drawTierTuner(){
   const host=document.getElementById("tier-tuner"); if(!host) return;
@@ -963,12 +970,13 @@ function drawTierTuner(){
   let ctl='';
   TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
     +`<label><span class="lbl">Target</span><input type="range" min="${sQ.lo}" max="${sQ.hi}" step="0.05" value="${t.t}" data-i="${i}" data-k="t"><b id="tv-q-${i}">${pct(score(t.t))}</b></label>`
-    +`<label><span class="lbl">σ</span><input type="range" min="${sS.lo}" max="${sS.hi}" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
+    +`<label><span class="lbl">σ</span><input type="range" min="${sS.lo}" max="${sS.hi}" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label>`
+    +`<label title="Price of quality, as a multiple of the market's"><span class="lbl">β</span><input type="range" min="${Math.log(0.1).toFixed(2)}" max="${Math.log(10).toFixed(2)}" step="0.01" value="${Math.log(t.beta)}" data-i="${i}" data-k="beta"><b id="tv-b-${i}">${fmtBeta(t.beta)}</b></label></div>`; });
   host.innerHTML=`<div id="tier-windows"></div><div class="tuner-ctl">${ctl}</div>`;
   drawTierWindows();
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
-    const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
-    document.getElementById((k==='t'?'tv-q-':'tv-s-')+i).textContent=k==='t'?pct(score(v)):v.toFixed(2);
+    const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=k==='beta'?Math.exp(v):v;
+    document.getElementById({t:'tv-q-',sig:'tv-s-',beta:'tv-b-'}[k]+i).textContent=k==='t'?pct(score(v)):k==='beta'?fmtBeta(Math.exp(v)):v.toFixed(2);
     drawTierWindows(); drawTiers(); if(showBands&&k==='t'){ drawB(); drawPareto(); } }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
 // ---------- MATRIX (sorted by expected score at top effort) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------

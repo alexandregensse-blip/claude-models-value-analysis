@@ -46,9 +46,11 @@ slightly from the curve at its θ; the page uses the curve, so that a couple's l
 
 ## 4. Older models
 
-Opus 4.7 and Sonnet 4.6 are hidden by default; an *Older models* switch shows them. Hidden models leave the charts,
-the matrix, the frontier, the price trend, the tiers and the crown: every recommendation is computed over the models on
-screen, and the cheapest couple is the cheapest one on screen.
+The page shows the latest model of each family and the one before it; older ones — Opus 4.8, Opus 4.7, Sonnet 4.6 —
+are hidden by default, and an *Older models* switch shows them (Opus 4.8 joined them on 1 Oct 2026, two generations
+behind Opus 5.5). Hidden models leave the charts, the matrices, the frontier, the tiers and the crown: every
+recommendation is computed over the models on screen, and the cheapest couple is the cheapest one on screen. The price
+trend never includes them (§ 8).
 
 ## 5. The matrix
 
@@ -81,8 +83,8 @@ day, since it let a couple strictly beaten by another be picked.
 
 ## 8. Price trend
 
-What a given quality typically costs, fitted on **every** shown couple, dominated ones included — the trend of the
-models, not their frontier:
+What a given quality costs today, fitted on every couple of the **latest model of each family** (Fable 5.1, Opus 5.5,
+Sonnet 5.5, Haiku 4.5), dominated ones included — the going rate of the models on sale, not their frontier:
 
     ln cost = a + λ·θ
 
@@ -92,6 +94,10 @@ models, not their frontier:
   cheaper as it rises).
 - **Straight** on the latent scale: every step of quality costs the same ratio more, wherever it sits. No shape
   constant to choose.
+- **Why the latest generation only**: each generation is better and cheaper per point than the one before, so a trend
+  through every generation is flattened by the older, dearer couples and makes quality look cheap (on 30 Sep 2026, λ
+  0.109 over every shown couple, 0.149 over the latest models, 0.236 along the effort ladders of each model). Until
+  1 Oct 2026 the trend was fitted on every shown couple. It now does not move when the reader shows older models.
 - The chart states its weighted R².
 
 ## 9. Value
@@ -107,8 +113,8 @@ points of expected score. No reference couple: 100 is the trend itself.
 
 ## 10. Tiers: best value by task complexity
 
-Four tiers — *Grunt work*, *Everyday tasks*, *Advanced reasoning*, *Cutting-Edge thinking* — each with a target θ*
-and a window width σ.
+Four tiers — *Grunt work*, *Everyday tasks*, *Advanced reasoning*, *Cutting-Edge thinking* — each with a target θ*,
+a window width σ and a price of quality β.
 
 - **Targets**: θ*₁ … θ*₄ spread evenly from (1 − e)·min + e·max to (1 − e)·max + e·min of the frontier's θ (frontier
   by centres), e = 0.05. The bottom tier follows the weakest frontier couple as it rises, the top one the best; each end
@@ -118,18 +124,24 @@ and a window width σ.
   between their targets.
 - **Score**: among the frontier couples (§ 7),
 
-      score = window(θ) × e^(λ·θ) ⁄ cost,   window = e^(−δ²) below the target, 1 at or above,   δ = (θ − θ*) ⁄ σ
+      score = window(θ) × e^(β·λ·θ) ⁄ cost,   window = e^(−δ²) below the target, 1 at or above,   δ = (θ − θ*) ⁄ σ
 
-  e^(λθ) ⁄ cost is the couple's value against the trend (e^(r + a)): above its target, a couple wins by bringing more
-  quality than the trend charges for its extra cost — a smooth reward, with no bonus constant. Below the target the
-  window penalises the shortfall.
+  Above its target, a couple wins by bringing more quality than the tier is ready to pay for its extra cost. Below the
+  target the window penalises the shortfall.
+- **Price of quality β**: what each tier's buyer pays for one more unit of θ, as a multiple of the market's λ. Grunt
+  work runs at scale and would rather pay less for a little less; cutting-edge thinking pays a premium for the last
+  points. β is spread evenly **in ratio** from 1⁄4 to 4 — 0.25, 0.63, 1.59, 4 —, symmetric about the market (geometric
+  mean 1): a multiplier of a price is symmetric in ratio, not in difference. With β = 1 everywhere (until 1 Oct 2026) the
+  term was the couple's value against the trend for every tier, and three tiers picked the same couple. Every
+  geometric spread tried from 0.5 → 2 to 0.1 → 10 gave the same four picks on 1 Oct 2026; increasing the weight of
+  cost instead (cost^γ) ranks as β ⁄ γ with a softer window, so β is the only knob.
 - **Cost as people perceive it**: cost enters as a ratio (log cost). Perceived price follows the ratio of prices, not
   their difference (Weber–Fechner; Monroe 1973, *Journal of Marketing Research* 10(1)): twice as dear weighs the same
   at every price. A power of the cost such as C^0.88 is not used: that exponent is the curvature of the value of gains
   and losses in prospect theory (Tversky & Kahneman 1992), measured on lotteries, not on prices.
 - **Pick**: the candidate with the highest score. Two tiers may pick the same couple. A card shows the pick's value
   against the trend as its value index (§ 9).
-- **Sliders**: each tier's θ* and σ can be moved. θ* travels over the targets' range padded by half a gap on each
+- **Sliders**: each tier's θ*, σ and β can be moved (β from 0.1 to 10, on a log scale). θ* travels over the targets' range padded by half a gap on each
   side; σ from a quarter to three times its default.
 
 ## 11. The crown
@@ -163,6 +175,8 @@ moves only when its content (text, figures, data) changes.
 | § 8 price trend | straight line in (θ, ln cost), effective-variance weights | the trend of every couple; no shape constant |
 | § 10 targets | e = 0.05 | ends drawn inward by 5 % of the frontier's span |
 | § 10 windows | σ = gap ⁄ (2·√ln 2) | adjacent windows cross at half weight midway |
+| § 10 price of quality | β from 1⁄4 to 4, even in ratio | each tier's buyer, symmetric about the market price |
+| § 8 price trend's couples | latest model of each family | today's going rate; older generations would flatten it |
 
 ## 15. The head-to-head page
 

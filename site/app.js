@@ -1,5 +1,6 @@
 const MODELS = __MODELS__;   // data/catalog/models.json: label, colour variable, task-size flag, in legend order
-const LEGACY=["opus-4.7","sonnet-4.6"];                         // older models: hidden unless the reader turns them on
+const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8"];              // older models: hidden unless the reader turns them on
+const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-4.5"];  // the latest model of each family: the price trend's couples
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -38,11 +39,13 @@ function couples(){ const rows=[];
 function frontier(rows){ const E=1e-9, dom=(o,p)=>o.x<=p.x+E&&o.t>=p.t-E&&(o.x<p.x-E||o.t>p.t+E);
   rows.forEach(p=>{ p.front=!rows.some(o=>dom(o,p)); });
   return {front:rows.filter(p=>p.front).sort((a,b)=>a.x-b.x)}; }
-// PRICE TREND: what a given quality typically costs, fitted on EVERY shown couple (the trend of the models, not the
-// frontier): ln cost = a + λ·θ, least squares weighted by each couple's uncertainty across the line, 1/(hx² + λ²·ht²)
+// PRICE TREND: what a given quality costs today, fitted on every couple of the latest model of each family (CURRENT),
+// dominated ones included — the going rate of the models on sale, not the frontier. Earlier generations, better and
+// dearer per point than their successors, would flatten it and make quality look cheap; with them out, the trend does
+// not move when the reader shows or hides older models. ln cost = a + λ·θ, least squares weighted by each couple's uncertainty across the line, 1/(hx² + λ²·ht²)
 // (both axes are uncertain: effective variance), iterated to its fixed point. λ is the market's price of quality: one
 // more unit of θ costs e^λ times more. Kept ≥ 0: quality never gets cheaper as it rises.
-function fitTrend(rows){ let a=0, l=0;
+function fitTrend(all){ const rows=all.filter(p=>CURRENT.includes(p.m)); let a=0, l=0;
   for(let it=0; it<100; it++){ let S=0,St=0,Sx=0,Stt=0,Stx=0;
     rows.forEach(p=>{ const w=1/(p.hx*p.hx+l*l*p.ht*p.ht); S+=w; St+=w*p.t; Sx+=w*p.x; Stt+=w*p.t*p.t; Stx+=w*p.t*p.x; });
     const l2=Math.max(0,(S*Stx-St*Sx)/(S*Stt-St*St)); a=(Sx-l2*St)/S; const done=Math.abs(l2-l)<1e-12; l=l2; if(done) break; }
@@ -252,7 +255,7 @@ const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
   const W=1100,H=619,mL=66,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
-  const pts=couples(), {front}=frontier(pts), tr=fitTrend(pts);    // all current couples incl. Haiku (solo)
+  const pts=couples(), {front}=frontier(pts), tr=fitTrend(pts);    // trend: the latest model of each family, Haiku (solo) included
   const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)), tmn=Math.min(...pts.map(p=>p.tlo)), tmx=Math.max(...pts.map(p=>p.thi));
   const yp=10, view=s.__view||defView(xmn,xmx,tmn,tmx);   // stored view (zoom/pan) overrides the data bounds
   s.__view=view; s.__geo={mL,iw,mT,ih,yp};
@@ -302,13 +305,14 @@ function fillScoreTable(rows,tr){
       +`<td style="min-width:96px">${pill}</td>`;
     tb.appendChild(row); }); }
 // ---- Tiers: the best value by task complexity; the crown ----
-// Four tiers, each with a TARGET quality θ*. Among the frontier couples, each tier picks the one
-// that maximises
-//     window(θ) × e^(λ·θ) ⁄ cost
-// λ the slope of the price trend. e^(λθ) ⁄ cost is the couple's value against the trend (the same all along the trend
-// line): above its target, a couple wins by bringing more quality than the trend charges for its extra cost, a smooth
-// reward with no constant to set. Below the target the Gaussian window e^(−δ²), δ = (θ − θ*) ⁄ σ, penalises the
-// shortfall; at or above it the window is 1. Cost is weighed in ratios (log cost), as people perceive prices
+// Four tiers, each with a TARGET quality θ* and a PRICE OF QUALITY β·λ. Among the frontier couples, each tier picks
+// the one that maximises
+//     window(θ) × e^(β·λ·θ) ⁄ cost
+// λ the slope of the price trend, β the tier's multiple of it: what that buyer is ready to pay for one more unit of
+// quality, against the market. Grunt work pays it a quarter of the market price, cutting-edge thinking four times:
+// β spread evenly in ratio from 1⁄4 to 4 (TIER_BETA), symmetric about the market (geometric mean 1). Above its target, a
+// couple wins by bringing more quality than the tier pays for its extra cost. Below the target the Gaussian window
+// e^(−δ²), δ = (θ − θ*) ⁄ σ, penalises the shortfall; at or above it the window is 1. Cost is weighed in ratios (log cost), as people perceive prices
 // (Weber–Fechner): twice as dear weighs the same at every price.
 function logWindow(t,T){ const d=(t-T.t)/T.sig; return d<0?-d*d:0; }
 const TWCOL=["#3F8A78","#5B8FF0","#C98A2E","#7C4A6A"];
@@ -325,6 +329,8 @@ const TIERS=[
 // inward so that no target sits on a single couple. They depend on the couples only through these two bounds.
 // σ follows the spacing: adjacent windows cross at half weight midway between their targets, σ = gap ⁄ (2·√ln 2).
 const TIER_E=0.05;
+const TIER_BETA=[0.25,4];   // β of the first and last tier; the others spread evenly in ratio between them
+TIERS.forEach((T,i)=>{ T.beta=TIER_BETA[0]*Math.pow(TIER_BETA[1]/TIER_BETA[0], i/Math.max(TIERS.length-1,1)); });
 let TIERQ={lo:0,hi:1,gap:1,sig:1};
 function tierDefaults(){
   const {front}=frontier(couples()); if(!front.length) return;
@@ -337,7 +343,7 @@ tierDefaults();
 function tierPicks(){
   const rows=couples(), {front}=frontier(rows), tr=fitTrend(rows);
   front.forEach(p=>{ p.r=valueOf(tr,p); p.qg=qGain(tr,p); });
-  const tscore=(p,T)=>logWindow(p.t,T)+tr.l*p.t-p.x;                                   // ln(window × e^(λθ) ⁄ cost)
+  const tscore=(p,T)=>logWindow(p.t,T)+T.beta*tr.l*p.t-p.x;                            // ln(window × e^(βλθ) ⁄ cost)
   const picks=TIERS.map(T=>({...T, win:front.reduce((a,b)=> tscore(b,T) > tscore(a,T) ? b : a)}));
   // CROWN: the frontier couple furthest below the price trend: the most quality for its cost against the going
   // rate. Read on the cost axis, e^r times cheaper than the trend at its quality; on the quality axis, r ⁄ λ above what
@@ -371,7 +377,7 @@ function drawTiers(){
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
       <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
-      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on <b>every</b> couple shown, so the going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on every couple of the latest model of each family, so today's going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
 // Interactive tuner: draws the four tier windows over the θ axis (labelled in expected score) plus the couples within
@@ -395,6 +401,7 @@ function drawTierWindows(){
   front.forEach(p=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar('--panel')}" stroke-width="1"/>`; });
   host.innerHTML=svg+`</svg>`;
 }
+const fmtBeta=b=>(b<1?b.toFixed(2):b.toFixed(1))+"×";   // a tier's price of quality, as a multiple of the market's
 // Build the tuner ONCE (window container + persistent sliders). Slider input updates state + redraws windows/cards only.
 function drawTierTuner(){
   const host=document.getElementById("tier-tuner"); if(!host) return;
@@ -405,12 +412,13 @@ function drawTierTuner(){
   let ctl='';
   TIERS.forEach((t,i)=>{ ctl+=`<div class="tuner-row" style="--tw:${TWCOL[i]}"><span class="tuner-name">${t.name}</span>`
     +`<label><span class="lbl">Target</span><input type="range" min="${sQ.lo}" max="${sQ.hi}" step="0.05" value="${t.t}" data-i="${i}" data-k="t"><b id="tv-q-${i}">${pct(score(t.t))}</b></label>`
-    +`<label><span class="lbl">σ</span><input type="range" min="${sS.lo}" max="${sS.hi}" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label></div>`; });
+    +`<label><span class="lbl">σ</span><input type="range" min="${sS.lo}" max="${sS.hi}" step="0.05" value="${t.sig}" data-i="${i}" data-k="sig"><b id="tv-s-${i}">${t.sig.toFixed(2)}</b></label>`
+    +`<label title="Price of quality, as a multiple of the market's"><span class="lbl">β</span><input type="range" min="${Math.log(0.1).toFixed(2)}" max="${Math.log(10).toFixed(2)}" step="0.01" value="${Math.log(t.beta)}" data-i="${i}" data-k="beta"><b id="tv-b-${i}">${fmtBeta(t.beta)}</b></label></div>`; });
   host.innerHTML=`<div id="tier-windows"></div><div class="tuner-ctl">${ctl}</div>`;
   drawTierWindows();
   host.querySelectorAll('input[type=range]').forEach(inp=>inp.addEventListener('input',e=>{
-    const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=v;
-    document.getElementById((k==='t'?'tv-q-':'tv-s-')+i).textContent=k==='t'?pct(score(v)):v.toFixed(2);
+    const i=+e.target.dataset.i, k=e.target.dataset.k, v=+e.target.value; TIERS[i][k]=k==='beta'?Math.exp(v):v;
+    document.getElementById({t:'tv-q-',sig:'tv-s-',beta:'tv-b-'}[k]+i).textContent=k==='t'?pct(score(v)):k==='beta'?fmtBeta(Math.exp(v)):v.toFixed(2);
     drawTierWindows(); drawTiers(); if(showBands&&k==='t'){ drawB(); drawPareto(); } }));   // only the SVG + cards redraw; the sliders stay in the DOM → drag continues
 }
 // ---------- MATRIX (sorted by expected score at top effort) — every cell DATA-DRIVEN from COSTGRID / QUALGRID ----------

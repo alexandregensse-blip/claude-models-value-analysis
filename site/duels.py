@@ -20,7 +20,7 @@ LEDE_PAIRS = ["fable-5.1|opus-5.5", "opus-5.5|sonnet-5.5"]              # the tw
 CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-4.5"]           # the latest model of each family
 SUCCESSION = [("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
 REACH = 0.84
-LEGACY = ["opus-4.7", "sonnet-4.6"]                                    # hidden on the main page (site/app.js)
+LEGACY = ["opus-4.7", "sonnet-4.6", "opus-4.8"]                                 # hidden on the main page (site/app.js)
 CAP = {"low": "Low", "medium": "Medium", "high": "High", "xhigh": "xHigh", "max": "Max", "solo": ""}   # as app.js capE
 EFF = {"low": "low", "medium": "medium", "high": "high", "xhigh": "xHigh", "max": "max", "solo": "its only setting"}
 
