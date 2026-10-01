@@ -5,6 +5,48 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Eighteenth pass: Opus 5.5 and Sonnet 5.5
+
+Six Opus agents, no time limit, 1 Oct 2026, on six axes centred on Opus 5.5 and Sonnet 5.5: research papers (a
+full-text sweep of about 6,400 arXiv papers submitted since 21 Sep), coding-tool vendors, result files on GitHub,
+non-English sources, and two halves of the 138 sources already held that had measured recent models but not both 5.5
+models at two efforts. Every number was re-derived from the saved evidence by a second agent or by the main session
+(scripts that parse the saved JSON, CSV and HTML; images re-read), with spot re-computations of the effort ladders.
+**205 → 242 sources, 636 → 723 benchmarks, 4073 → 4490 measurements.** Opus 5.5 rests on 631 measurements in 349
+benchmarks from 118 sources, Sonnet 5.5 on 430 in 219 from 68. Of the 447 new rows, 259 carry a stated effort (121 of
+them Opus 5.5 or Sonnet 5.5); the others are at the default effort and stay out of the fit.
+
+- **Effort ladders.**
+  - *Hex DataBench* (100 analytics tasks): Opus 5.5 low → max, score, cost and tokens per task. Its scores fall on a
+    grid of 1/200 against 1/300 for every other row, so it was run separately, possibly after the 17 Sep judge
+    recalibration: it is kept in its own group, apart from the full ladders of Opus 5, Fable 5.1, Fable 5, Opus 4.8 and
+    Sonnet 5.
+  - *TaxCalcBench TY25* (50 returns, with and without web search): Opus 5.5 and Sonnet 5.5 at five efforts with five
+    other models; the harness's own effort names map to the API's one rung up (`config.py`: lobotomized → low …
+    ultrathink → max). Strict-correct rate re-counted from the 3,178 per-case files; cost the harness's list-price
+    estimate.
+  - *retort exp-77* (Python and Go): Sonnet 5.5 low → max on the tasks of exp-74 (Opus 5.5); *exp-78* (agent isolated
+    from the host configuration) in its own groups.
+  - *renchris* review corpus: Sonnet 5.5 low → max with Opus 5.5, Opus 5 and Fable 5.1 re-judged in the same pass;
+    a synthesis probe (Sonnet 5.5 medium → xhigh, Opus 5.5 xhigh; Opus 5.5 among the judges).
+  - Shorter ladders: The Endless Exam (Opus 5.5 and Fable 5.1, medium and high), Supabase evals, ParseBench (Opus 5.5
+    low, high, default), the NAV Copilot review suite (Opus 5.5 low → high; Copilot units, not dollars), BVB, Bito,
+    minilab, Convex (medium, three experiments), zenn-uhyo round 18 (Sonnet 5.5 high and max).
+- **Cross-model, new boards.** KlinikeBench, FinancialAuditBench, ClerkBench, RoboDojo, LibraryDesignBench, EnigmaForge
+  (refusals make four rows lower bounds), AutoBCI, DexHoldem; Clerk, Tinybird, Browserbase HardBench, Next.js and Nuxt
+  evals, AIMultiple text-to-SQL, WeirdML v3, Braintrust MathTutorBench, kernelbench MEGA, ReLE (Chinese, total and
+  eight domains, cost in yuan), ChronoBay, bangla-llm-bench, 34bench, PM-LLM-Benchmark v3, Connections, Agents on
+  Guren, LegalForecastBench (Brier score stored as 100 × (1 − Brier)), vercel/eve CI, Anthropic's max_tokens chart
+  (score only: the two models' costs are priced differently), and personal benchmarks in Japanese (cost-only where
+  every model passed every test).
+- **Snapshots replaced.** LMArena Agent (Opus 5.5 high enters) and minebench, from boards updated 30 Sep;
+  aipricing.guru's newer run.
+- **Corrected.** Deloitte's Opus 5.5 row is at the lowest effort ("Even at its lowest effort setting"), not default;
+  FrontierSWE re-scored Fable 5.1 and Fable 5, and its own Sonnet 5.5 row replaces the system-card stand-in.
+- **Not admitted.** merc-bench's re-pricing (an unmerged branch whose absolute costs differ from the held run);
+  behavioural measures (cheating and pressure-fold rates); relative-only partner quotes; self-routed production
+  telemetry; Vidi spec-bench (the Sonnet 5.5 run is unfinished); token counts without cost or score (Balyasny, Base44).
+
 ## The fit after the sixteenth and seventeenth passes
 
 The first fit converged on the cost axis (R̂ 1.002, no divergence) but not on quality: R̂ 1.005 with 4 divergences and a

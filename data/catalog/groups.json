@@ -2924,6 +2924,441 @@
    "label": "arXiv 2609.13463 · TRAIL root-cause attribution",
    "type": "sweep",
    "config": "Root-cause attribution of agent failures on TRAIL, Continual Search judge in the Claude Agent SDK, turn 4 · weighted F1 and cumulative mean cost per trajectory (USD), read from the vector coordinates of figures 4–5 (they agree with the numbers the text states); Opus 4.8 and Sonnet 5 at low/high/max (figure 5), Fable 5 at default settings (figure 4, whose Opus and Sonnet points are figure 5's high runs); read 30 Sep 2026 ✓"
+  },
+  "endless-exam-maths": {
+   "label": "The Endless Exam (2609.24555) — 69 open-ended maths constructions, Claude Code tools off",
+   "type": "xmodel",
+   "config": "Table 2, 69 instances, overall score = 100 x mean relative quality vs reference; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "financialauditbench": {
+   "label": "FinancialAuditBench (2609.32835) — 45 audit workpaper tasks, bash-only agent, 8 runs/task",
+   "type": "xmodel",
+   "config": "Table 8/Table 9 main row, strict pass % and mean cost $/trajectory, 360 trajectories/model; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "klinikebench": {
+   "label": "KlinikeBench (2609.38480) — 333 clinical tasks, Harbor/Terminus-2 ReAct, GPT-5.4-mini patient+judge",
+   "type": "xmodel",
+   "config": "Table 7 strict pass@1 and est. $/task (text for Opus 5/5.5, Fig. 10 digitized for the rest); verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "clerkbench-banded": {
+   "label": "ClerkBench banded_meter_billing (Zenodo 23048151) — pass@1 at L=100, deterministic clerical workload",
+   "type": "xmodel",
+   "config": "Table 6 pass@1 at L=100, Table 2 $/attempt (L=100, mean list-price cost incl. failures); verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "clerkbench-ledger": {
+   "label": "ClerkBench fee_ledger_dropzero (Zenodo 23048151) — pass@1 at L=100, deterministic clerical workload",
+   "type": "xmodel",
+   "config": "Table 6 pass@1 at L=100, Table 2 $/attempt (L=100, mean list-price cost incl. failures); verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "robodojo-native": {
+   "label": "Code-as-Policy / RoboDojo (2609.39018) — 5 simulated manipulation tasks, native interface",
+   "type": "xmodel",
+   "config": "Table 1, avg success rate % over 5 tasks x 5 episodes, output tokens k incl. reasoning; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "robodojo-urai": {
+   "label": "Code-as-Policy / RoboDojo (2609.39018) — 5 simulated manipulation tasks, +URAI interface",
+   "type": "xmodel",
+   "config": "Table 1, avg success rate % over 5 tasks x 5 episodes, output tokens k incl. reasoning; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "librarydesignbench": {
+   "label": "LibraryDesignBench (2609.36730) — 15 library-design problems, 3 implementer models solve them",
+   "type": "xmodel",
+   "config": "Table 1 designers: score (correctness x simplicity composite), $/problem; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "enigmaforge": {
+   "label": "EnigmaForge (2609.30144) — 600 procedurally generated problem-discovery instances, exact-match",
+   "type": "xmodel",
+   "config": "Table 1, fact F1 [95% CI] over 600 instances, one configuration per model; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "autobci": {
+   "label": "AutoBCI (2609.35456) — agentic EEG architecture search, Claude Code, 6-round search",
+   "type": "xmodel",
+   "config": "Table 3, average test bAcc%/wF1/Kappa over MI/emotion/sleep held-out sets; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "dexholdem": {
+   "label": "DexHoldem (2605.18727v2) — 36 agentic perception problems, Claude Code, avg of 3 runs",
+   "type": "xmodel",
+   "config": "Table 2, overall strict % and per-category average column; verified against saved evidence in /work/.salvo14/s18/a1/src/, 2026-10-01; read 2026-10-01 ✓"
+  },
+  "nextjsevals-base": {
+   "label": "Next.js Agent Evals (Vercel), base run",
+   "type": "xmodel",
+   "config": "31 Next.js agent evals, 4 runs each (earlyExit), Claude Code via AI Gateway, no AGENTS.md; https://nextjs.org/evals, github.com/vercel/next-evals-oss@38cb8ad, agent-results.json metadata.experiments[].baseSuccessRate/avgCostUsd; read 2026-10-01 ✓"
+  },
+  "nextjsevals-agentsmd": {
+   "label": "Next.js Agent Evals (Vercel), with AGENTS.md",
+   "type": "xmodel",
+   "config": "Same 31 evals/4 runs/Claude Code setup as nextjsevals-base, but with an AGENTS.md/CLAUDE.md file telling the agent the Next.js version has breaking changes; score = docsSuccessRate (board); cost = mean of per-eval costUsd in agent-results.json['results'][model] (computed-by-us, since the board's avgCostUsd field is the base-run figure, not the AGENTS.md-run figure — the per-eval array's own mean, 0.2456 for Opus 5.5, differs from the base 0.234, confirming the two are different runs); read 2026-10-01 ✓"
+  },
+  "navikt-copilot-review": {
+   "label": "navikt/copilot golden-baselines, code-review suite batch1 (2026-09-30)",
+   "type": "xmodel",
+   "config": "GitHub Copilot CLI 1.0.90-5, code-review agent, 2 fixtures (Kotlin+TSX) with 4 planted-defect assertions each, repeated 10x (opus-5.5) or 5x (sonnet-5.5); cost = Copilot usage event total_nano_aiu/1e9 (AIU, not USD), tokens from assistant_usage_events; source: src/repos/navikt__copilot/gb/*.psv; read 2026-10-01 ✓"
+  },
+  "taxcalc-ty25-notool": {
+   "label": "TaxCalcBench TY25, no web search (column-tax/tax-calc-bench)",
+   "type": "xmodel",
+   "config": "50 TY25 federal+state tax-return cases, 1 run each; strict-correct-return % is the score (lenient% also in the evidence but not used here per instructions); cost = mean litellm-estimate USD/return (n priced noted when <50); source: taxcalc_ty25_claude_by_effort.txt, re-verified against raw evaluation_result_*.md for opus-5.5/ultrathink (40.00%/50.00%/$1.135, exact match); read 2026-10-01 ✓"
+  },
+  "taxcalc-ty25-web": {
+   "label": "TaxCalcBench TY25, with web search (column-tax/tax-calc-bench)",
+   "type": "xmodel",
+   "config": "Same as taxcalc-ty25-notool but with the web-search tool enabled; read 2026-10-01 ✓"
+  },
+  "parsebench": {
+   "label": "ParseBench document-parsing leaderboard (run-llama/ParseBench)",
+   "type": "xmodel",
+   "config": "leaderboard.csv at commit afb36bd8 (2026-09-29); Overall score (Tables/Charts/ContentFaithfulness/SemanticFormatting/VisualGrounding average); cost is USD-cents per page from the repo's own pricing table (not independently verified against token counts, so flagged list-price-cost); n (documents) and run count not given in the csv; read 2026-10-01 ✓"
+  },
+  "guren-stage2-bare": {
+   "label": "Agents on Guren, Stage 2 re-run, bare condition (gurenjs/agents-on-guren)",
+   "type": "xmodel",
+   "config": "RESULTS-STAGE2.md at commit 2b43507 (\"Stage 2 re-run with auto memory off and Sonnet 5.5\", 2026-09-30), bare condition; Claude Code 2.1.284, 3 trials per cell, 9 tasks; pass is hidden-behaviour-test pass/fail per cell (27 cells); cost is median API-equivalent USD per cell from Claude Code total_cost_usd; effort: run.sh passes only --model \"$MODEL\", no effort flag, so default for every model; read 2026-10-01 ✓"
+  },
+  "guren-stage2-shipped": {
+   "label": "Agents on Guren, Stage 2 re-run, shipped condition (gurenjs/agents-on-guren)",
+   "type": "xmodel",
+   "config": "RESULTS-STAGE2.md at commit 2b43507 (\"Stage 2 re-run with auto memory off and Sonnet 5.5\", 2026-09-30), shipped condition; Claude Code 2.1.284, 3 trials per cell, 9 tasks; pass is hidden-behaviour-test pass/fail per cell (27 cells); cost is median API-equivalent USD per cell from Claude Code total_cost_usd; effort: run.sh passes only --model \"$MODEL\", no effort flag, so default for every model; read 2026-10-01 ✓"
+  },
+  "nuxt-evals": {
+   "label": "Nuxt agent evals (nuxt/nuxt-evals), Claude Code via AI Gateway",
+   "type": "xmodel",
+   "config": "agent-results.json exportedAt 2026-09-22; 31 Nuxt agent evals, runs: 4, earlyExit: true; score is avgPassRate (fraction of the 4 runs passing, averaged over 31 evals), *100 for a percentage; cost is the gateway's avg cost USD per eval run; models ran on different dates (opus-5.5 2026-09-22, the rest 2026-08-27 to 09-05); read 2026-10-01 ✓"
+  },
+  "legalforecast-mtd": {
+   "label": "LegalForecastBench, motion-to-dismiss claim forecasting (johnhughes3/LegalForecastBench)",
+   "type": "xmodel",
+   "config": "91 federal MTD cases / 387 claim-defendant units, agentic document access, no web; score is micro-Brier (lower is better, flagged accordingly); costs are heterogeneous across models per the paper's own caveat (cost_usd_estimate column of figure1_brier_ranked.csv, whole-run not per-case) and the Opus 5.5 cost is unavailable (\"basis\": \"unavailable\" in both exp_opus55.json and the source export used for the sonnet row); read 2026-10-01 ✓"
+  },
+  "chronobay-watch-id": {
+   "label": "ChronoBay watch reference identification from one photo (QutaibaAbualrob/chronobay_ai_bench)",
+   "type": "xmodel",
+   "config": "REPORT.md 2026-09-30, 100 images, 1 pass/image, same prompt (sha 4e521b10...); score is exact-reference-number match %; cost is per-image USD computed by the repo from its own token counts and a pinned price table (list-price-cost); read 2026-10-01 ✓"
+  },
+  "bangla-mmlu": {
+   "label": "bangla-llm-bench, mmlu track (paired EN/BN; deluair/bangla-llm-bench)",
+   "type": "xmodel",
+   "config": "scores.csv at commit 0cc4f72 (2026-09-28); n=285 items; score is Bengali (bn) accuracy (the EN score is confound-only); cost is the CLI-reported api_cost_usd for both languages combined (one cost figure covers the en+bn pair); effort: models.toml sets only cli+model, README says \"Each model runs at its provider's default settings\", so default for every Claude model; read 2026-10-01 ✓"
+  },
+  "bangla-belebele": {
+   "label": "bangla-llm-bench, belebele track (paired EN/BN; deluair/bangla-llm-bench)",
+   "type": "xmodel",
+   "config": "scores.csv at commit 0cc4f72 (2026-09-28); n=300 items; score is Bengali (bn) accuracy (the EN score is confound-only); cost is the CLI-reported api_cost_usd for both languages combined (one cost figure covers the en+bn pair); effort: models.toml sets only cli+model, README says \"Each model runs at its provider's default settings\", so default for every Claude model; read 2026-10-01 ✓"
+  },
+  "bangla-mgsm": {
+   "label": "bangla-llm-bench, mgsm track (paired EN/BN; deluair/bangla-llm-bench)",
+   "type": "xmodel",
+   "config": "scores.csv at commit 0cc4f72 (2026-09-28); n=250 items; score is Bengali (bn) accuracy (the EN score is confound-only); cost is the CLI-reported api_cost_usd for both languages combined (one cost figure covers the en+bn pair); effort: models.toml sets only cli+model, README says \"Each model runs at its provider's default settings\", so default for every Claude model; read 2026-10-01 ✓"
+  },
+  "bangla-bnexam": {
+   "label": "bangla-llm-bench, bnexam track (paired EN/BN; deluair/bangla-llm-bench)",
+   "type": "xmodel",
+   "config": "scores.csv at commit 0cc4f72 (2026-09-28); n=300 items; score is Bengali (bn) accuracy (the EN score is confound-only); cost is the CLI-reported api_cost_usd for both languages combined (one cost figure covers the en+bn pair); effort: models.toml sets only cli+model, README says \"Each model runs at its provider's default settings\", so default for every Claude model; read 2026-10-01 ✓"
+  },
+  "34bench-thai-ocr": {
+   "label": "34bench, single Thai bus-route scan transcription, 5 runs/model (dtinth/34bench)",
+   "type": "xmodel",
+   "config": "results.svg (table-in-SVG, parsed as text) for median accuracy (1-weighted-CER over header/forward/return/footer); meta/<model>-<run>.json cost field (OpenRouter USD, independently re-derived here as the median of the 5 runs' own `cost` fields) for cost; effort: meta.json has \"effort\": null and README says each model runs at its default reasoning effort, routed through OpenRouter; read 2026-10-01 ✓"
+  },
+  "pm-llm-bench3": {
+   "label": "PM-LLM-Benchmark v3, process-mining Q&A, judged by grok-4.7 (fit-alessandro-berti/pm-llm-benchmark3)",
+   "type": "xmodel",
+   "config": "leaderboard_grok-4.7.md at commit ab1371c (2026-09-30); 1-shot, 10-category score out of 60, LLM judge (grok-4.7, not a Claude judge); single run; no cost in this board; read 2026-10-01 ✓"
+  },
+  "connections-oneshot": {
+   "label": "NYT Connections, one submission per puzzle, 20 puzzles (matsonj/eval-connections)",
+   "type": "xmodel",
+   "config": "results.md (data behind matsonj.github.io/eval-connections); pts out of max 100 (20 puzzles x up to 5 pts, wins/traps/groups also recorded); cost is total USD for the 20-game run; models ran on different dates (see confound); single run each; read 2026-10-01 ✓"
+  },
+  "rele-total": {
+   "label": "ReLE 总分 (total)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/total.md (alldata); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-general": {
+   "label": "ReLE 通用能力 (general ability)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/通用能力.md (通用能力); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-professional": {
+   "label": "ReLE 专业能力 (professional ability)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/专业能力.md (专业能力); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-reasoning": {
+   "label": "ReLE 推理与数学计算 (reasoning/math)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/推理与数学计算.md (推理与数学计算); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-language": {
+   "label": "ReLE 语言与指令遵从 (language/IF)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/语言与指令遵从.md (语言与指令遵从); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-education": {
+   "label": "ReLE 教育 (education)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/教育.md (教育); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-medical": {
+   "label": "ReLE 医疗与心理健康 (medical/mental health)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/医疗与心理健康.md (医疗与心理健康); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-finance": {
+   "label": "ReLE 金融 (finance)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/金融.md (金融); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "rele-law": {
+   "label": "ReLE 法律与行政公务 (law/admin)",
+   "type": "xmodel",
+   "config": "jeinlee1991/chinese-llm-benchmark leaderboard/法律与行政公务.md (法律与行政公务); 171-leaderboard Chinese-language board; score=accuracy%, cost=CNY per 1,000 calls (花费/千次(元)); no effort level stated by the source (plain '-thinking' suffix vs plain model name is the only variant given); read 2026-10-01 ✓"
+  },
+  "cclab-paperwork": {
+   "label": "Claude Code研究所: 3 paperwork tasks, Sonnet 5.5 vs Opus 5.5 (medium)",
+   "type": "xmodel",
+   "config": "note.com/claudecode_lab/n/n960c8fc026e6; table read from src/notes/cclab_table.png (image, opened and read directly); claude -p --model ... --effort medium --max-turns 20, Claude Code 2.1.286, costUSD=total_cost_usd (API list-price); n=1 per cell; cache-read % given per cell; read 2026-10-01 ✓"
+  },
+  "kamiumi-svg-cost": {
+   "label": "kamiumi_ai: 5 SVG prompts x3 runs, total cost/time, Sonnet 5.5 vs Opus 5.5",
+   "type": "xmodel",
+   "config": "note.com/kamiumi_ai/n/nb7bdc208736e; Claude Code 2.1.284 non-interactive (claude -p-equivalent), no tools, 4-at-a-time parallel execution (so time only comparable as ratio); effort not specified -> Claude Code default (quoted: \"effortは指定しておらず、Claude Codeの既定（medium）で動いています\"); cost = Claude Code execution record at API list price, totals over 5 tasks x3 runs = 15 runs per model; read 2026-10-01 ✓"
+  },
+  "kamiumi-svg-score": {
+   "label": "kamiumi_ai: blind-judged SVG quality by category, Sonnet 5.5 vs Opus 5.5",
+   "type": "xmodel",
+   "config": "note.com/kamiumi_ai/n/nb7bdc208736e; same 15-runs-per-model experiment as kamiumi-svg-cost; blind grading (model name hidden), two judges (Opus 5.5 and Sonnet 5.5); score given is the Opus-5.5-judge score (primary column in report), Sonnet-5.5-judge score quoted in confound; judge=Claude grading Claude -> claude-judge; read 2026-10-01 ✓"
+  },
+  "minilab-notectl": {
+   "label": "minilab: self-repo code review, Sonnet 5.5 (medium/high) vs Opus 5.5 (medium)",
+   "type": "xmodel",
+   "config": "note.com/minilab/n/n7ccd7f6a6421; author's own notectl CLI repo, 2 questions, 1 run per setting, Claude Code; cost = /usage session total (Q1+Q2) at list price, approximate (article uses 約); effort-from-config: \"Sonnet 5.5のmedium、Sonnet 5.5のhigh、Opus 5.5。Opusのeffortは確認して、mediumでした\"; read 2026-10-01 ✓"
+  },
+  "hacklog-setA": {
+   "label": "Hack-Log: 3 easy tasks (13 hidden tests), Sonnet 5.5 vs Opus 5.5, 2 runs each",
+   "type": "xmodel",
+   "config": "note.com/hacklog_stealth/n/n07e2f50a43b9; Claude Code 2.1.281, claude -p --permission-mode bypassPermissions; cost = author's own recomputation from token counts x official list price (Claude Code 2.1.281 mis-displays Sonnet 5.5 cost at Opus prices, costBasis=unknown, flagged by the author); effort-from-config: \"effort は既定のまま\"; read 2026-10-01 ✓"
+  },
+  "hacklog-setB": {
+   "label": "Hack-Log: 1 harder task (Markdown table->list, 9 hidden tests), Sonnet 5.5 vs Opus 5.5, mean of 3 runs",
+   "type": "xmodel",
+   "config": "note.com/hacklog_stealth/n/n07e2f50a43b9; same setup as hacklog-setA, harder single task, 3 runs/model; report gives means directly (not computed by us): mean cost, mean time, mean output tokens; read 2026-10-01 ✓"
+  },
+  "rima-report-cost": {
+   "label": "iam_lima: weekly-report-from-notes task, mean cost/time of 3 runs",
+   "type": "xmodel",
+   "config": "note.com/iam_lima/n/ncfed4a80e005; Claude Code 2.1.284, work-notes with a planted weekday error and a planted arithmetic error, 3 runs per setting, means reported directly by the source; effort-from-config: \"effortはAPIの既定にあたるhighにそろえ、Sonnet 5.5だけはClaude Codeの既定のmediumでも回しました\"; read 2026-10-01 ✓"
+  },
+  "sss-ailabo-3tasks": {
+   "label": "sss_ailabo: 3 tasks (game/LP/bugfix), total time/cost, n=1",
+   "type": "xmodel",
+   "config": "note.com/sss_ailabo/n/n218e2eddafa9; Claude Code or Codex, 1 run per model per task, 3 tasks summed; effort not named, article says \"今回の標準の設定\" (this time's standard settings) -> default; read 2026-10-01 ✓"
+  },
+  "digirise-3prompts": {
+   "label": "digirise/チャエン: 3 prompts (game/summary/earnings), total time/cost, n=1",
+   "type": "xmodel",
+   "config": "digirise.ai/chaen-ai-lab/claude-opus-5-5/ (cites チャエン's X post 2026-09-23); Claude Code, 1 run per model per prompt, 3 prompts summed; effort-from-config: \"Claudeの2モデルはClaude Code経由でeffortはxhigh\"; read 2026-10-01 ✓"
+  },
+  "takuya-sonnet-7task": {
+   "label": "tfcxzaqwerds: 7 coding/build tasks x3 runs (42 total), mean cost+tokens, both 100% pass",
+   "type": "xmodel",
+   "config": "note.com/tfcxzaqwerds/n/nab4b132711a2; Claude Code 2.1.284 headless (claude -p), --setting-sources \"\" --strict-mcp-config (no CLAUDE.md/MCP), sandboxed Bash; cost = Claude Code costUSD (list-price API-equivalent); effort-from-config:\"Claude Code 2.1.284、effort は両モデルとも high（API の既定値）\"; 7 tasks = 5 impl/bugfix (semver,calc,cron,billing,ja_normalize) + 2 build-and-report tasks (budget webapp, sales-CSV report), 3 runs each = 21 runs/model, 42 total; both models scored 21/21 perfect on hidden tests; read 2026-10-01 ✓"
+  },
+  "takuya-sonnet-reasoning": {
+   "label": "tfcxzaqwerds: 9 hard reasoning questions x3 runs (no tools), score",
+   "type": "xmodel",
+   "config": "note.com/tfcxzaqwerds/n/nab4b132711a2; same Claude Code headless setup, effort high, no tools, maze/24-digit-multiplication/logic-puzzles, 9 questions x3 runs = 27 trials/model, 15-min time cap per question; read 2026-10-01 ✓"
+  },
+  "weirdmlv3": {
+   "label": "WeirdML v3 (agentic, token-axis area score)",
+   "type": "xmodel",
+   "config": "11 ML tasks x 15 configurations; score = token-axis area 0-1 with 95% CI; cost = mean API $/run; agent claude_code; read 2026-10-01 ✓"
+  },
+  "braintrustmtb": {
+   "label": "Braintrust MathTutorBench (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "175 examples (7 families x 25); problems-solved over the 5 objectively scored families; writing-quality over all 7 via a GLM-5.3-Flash judge; thinking.type=adaptive, output_config.effort=high, max_tokens=8192; read 2026-10-01 ✓"
+  },
+  "aim-awwwards55": {
+   "label": "AIFM: Awwwards clone (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "AI for Mortals one-shot build, Claude Code /goal mode, high effort both arms; read 2026-10-01 ✓"
+  },
+  "aim-manayerba55": {
+   "label": "AIFM: Mana Yerba Mate site (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "AI for Mortals one-shot build, Claude Code /goal mode, high effort both arms; read 2026-10-01 ✓"
+  },
+  "aim-adizero55": {
+   "label": "AIFM: Adizero shoe in Blender (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "AI for Mortals one-shot build, Claude Code /goal mode, high effort both arms; read 2026-10-01 ✓"
+  },
+  "aim-rct55": {
+   "label": "AIFM: RollerCoaster Tycoon clone (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "AI for Mortals one-shot build, Claude Code /goal mode, high effort both arms; read 2026-10-01 ✓"
+  },
+  "aim-mobydick55": {
+   "label": "AIFM: Moby Dick illustration in code (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "AI for Mortals one-shot build, Claude Code /goal mode, high effort both arms; read 2026-10-01 ✓"
+  },
+  "aim-launchfilm55": {
+   "label": "AIFM: Launch film (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "AI for Mortals one-shot build, Claude Code /goal mode, high effort both arms; read 2026-10-01 ✓"
+  },
+  "aim-thps55": {
+   "label": "AIFM: THPS-style 3D game (Opus 5.5 vs Fable 5.1)",
+   "type": "xmodel",
+   "config": "AI for Mortals one-shot build, Claude Code /goal mode, high effort both arms; read 2026-10-01 ✓"
+  },
+  "docsmaxtok55-16k": {
+   "label": "Anthropic docs: max_tokens cap vs cost (internal repo tasks) (16k cap)",
+   "type": "sweep",
+   "config": "~135 internal repository tasks ('cap measurement'); Opus 5.5 at its default (medium), Fable 5.1 at its default (high); cost = whole-dollar bar labels, digitised from cost-intel-max-tokens-saving-opus-5-5.png; read 2026-10-01 ✓; 16k max_tokens cap only; score only"
+  },
+  "docsmaxtok55-64k": {
+   "label": "Anthropic docs: max_tokens cap vs cost (internal repo tasks) (64k cap)",
+   "type": "sweep",
+   "config": "~135 internal repository tasks ('cap measurement'); Opus 5.5 at its default (medium), Fable 5.1 at its default (high); cost = whole-dollar bar labels, digitised from cost-intel-max-tokens-saving-opus-5-5.png; read 2026-10-01 ✓; 64k max_tokens cap only; score only"
+  },
+  "retort77": {
+   "label": "retort exp-77 py",
+   "type": "sweep",
+   "config": "Claude Code 2.1.284, host-config inherited · rest-api-crud in Python, Sonnet 5.5 × low→max (+default), n=3 (go max n=2, one replicate crashed); requirement coverage 1.0 everywhere → cost only ✓; read 2026-10-01 ✓"
+  },
+  "retort77go": {
+   "label": "retort exp-77 go",
+   "type": "sweep",
+   "config": "Claude Code 2.1.284, host-config inherited · rest-api-crud in Go, Sonnet 5.5 × low→max (+default), n=3 (max n=2, one replicate crashed at the 90-min wall); requirement coverage 1.0 everywhere → cost only ✓; read 2026-10-01 ✓"
+  },
+  "retort78": {
+   "label": "retort exp-78 py (isolated)",
+   "type": "sweep",
+   "config": "Claude Code 2.1.284, agent isolated (no inherited host MCP/settings) · rest-api-crud in Python, Sonnet 5.5 × low/medium/high (+default), n=3; requirement coverage 1.0 everywhere → cost only; separate config from exp-74/77, not comparable without accounting for the ~43% host-inheritance token inflation ✓; read 2026-10-01 ✓"
+  },
+  "retort78go": {
+   "label": "retort exp-78 go (isolated)",
+   "type": "sweep",
+   "config": "Claude Code 2.1.284, agent isolated (no inherited host MCP/settings) · rest-api-crud in Go, Sonnet 5.5 × low/medium/high (+default), n=3; requirement coverage 1.0 everywhere → cost only; separate config from exp-74/77, not comparable without accounting for the ~43% host-inheritance token inflation ✓; read 2026-10-01 ✓"
+  },
+  "renchris-s55sweep": {
+   "label": "renchris review s55 + o55 rejudge",
+   "type": "xmodel",
+   "config": "claude -p no-tools, CC 2.1.284 · same 9-brief corpus as renchris-o55 (7 scored / 36 anchored defects), Sonnet 5.5 low→max (new) judged in the same pass as a re-judging of the held Opus 5.5 medium/high/xhigh outputs; 3 blind judges, strict majority; CLI list cost for the Sonnet 5.5 cells only ✓; read 2026-10-01 ✓"
+  },
+  "kernelbench-mega-cc": {
+   "label": "KernelBench MEGA (Claude Code)",
+   "type": "xmodel",
+   "config": "02_kimi_linear_decode megakernel on RTX PRO 6000 Blackwell · harness=claude (Claude Code) · n=1 per cell, runs months apart (Jun-Sep 2026); NOT the board's CUDA task (that is the held kernelbench-cc/or group); read 2026-10-01 ✓"
+  },
+  "kernelbench-mega-or": {
+   "label": "KernelBench MEGA (or-fable, OpenRouter)",
+   "type": "xmodel",
+   "config": "02_kimi_linear_decode megakernel on RTX PRO 6000 Blackwell · harness=or-fable (OpenRouter agent, different harness from Claude Code) · n=1 per cell, not comparable to the claude-harness rows; read 2026-10-01 ✓"
+  },
+  "renchris-s5synth": {
+   "label": "renchris synthesis-worker probe (Sonnet 5.5 vs Opus 5.5 xhigh)",
+   "type": "xmodel",
+   "config": "6 paired synthesis briefs, 130 key items, 1 cell per arm/brief; judges 2x Opus 5.5 + 1x Opus 5 (claude-judge); mean score /10 over all 18 judge rows; cost/tokens summed over the 6 cells; read 2026-10-01 ✓"
+  },
+  "eve-ci-opencode": {
+   "label": "vercel/eve CI benchmark, opencode harness (swe-lean@v3)",
+   "type": "xmodel",
+   "config": "CI bot 'eve benchmark' PR comments, swe-lean@v3 (7 tasks x 5 attempts = 35 trials), harness=opencode; weak: harness/eve-code commit and day differ per PR, effort not stated (default); read 2026-10-01 ✓"
+  },
+  "eve-ci-pi": {
+   "label": "vercel/eve CI benchmark, pi harness (swe-lean@v3)",
+   "type": "xmodel",
+   "config": "CI bot 'eve benchmark' PR comments, swe-lean@v3 (7 tasks x 5 attempts = 35 trials), harness=pi; weak: harness/eve-code commit and day differ per PR, effort not stated (default); read 2026-10-01 ✓"
+  },
+  "eve-ci-evecode": {
+   "label": "vercel/eve CI benchmark, eve-code harness (swe-lean@v3)",
+   "type": "xmodel",
+   "config": "CI bot 'eve benchmark' PR comments, swe-lean@v3 (7 tasks x 5 attempts = 35 trials), harness=eve-code; weak: harness/eve-code commit and day differ per PR, effort not stated (default); read 2026-10-01 ✓"
+  },
+  "cfgk-bugfix": {
+   "label": "computingforgeeks: Claude Code bug-fix task (log parser)",
+   "type": "xmodel",
+   "config": "4-bug Python log parser + 8-test pytest suite, headless Claude Code, 3 runs/model, default effort per model; score saturated (9/9 green) -> cost only; read 2026-10-01 ✓"
+  },
+  "hexdatabench-o55": {
+   "label": "Hex DataBench (Opus 5.5)",
+   "type": "sweep",
+   "config": "Hex DataBench v1.1, 100 analytics tasks in the Hex workspace, rubric-judged · score in %, average cost per task (USD), tokens per task (one total); effort from the row label; Opus 5.5 kept apart from the older rows: its scores fall on a grid of 1/200 against 1/300 for every other row, so it was run separately, possibly after the 17 Sep judge recalibration that 'especially impacted' Anthropic models; read 2026-10-01 ✓"
+  },
+  "hexdatabench": {
+   "label": "Hex DataBench",
+   "type": "xmodel",
+   "config": "Hex DataBench, 100 analytics tasks in the Hex workspace, rubric-judged · score in %, average cost per task (USD), tokens per task (one total); effort from the row label; Opus 5, Fable 5.1, Fable 5, Opus 4.8, Sonnet 5 at every listed effort (Opus 5.5 in its own group); read 2026-10-01 ✓"
+  },
+  "convex-default": {
+   "label": "Convex evals (with guidelines)",
+   "type": "xmodel",
+   "config": "Convex coding evals, 112 evals in 8 categories, experiment 'with guidelines' · total score in % with its error bar, billed cost per full run (USD, OpenRouter); effort medium from the runner's OpenRouter request (HEAD config, assumed for the runs); read 2026-10-01 ✓"
+  },
+  "convex-noguide": {
+   "label": "Convex evals (no guidelines)",
+   "type": "xmodel",
+   "config": "Convex coding evals, 112 evals in 8 categories, experiment 'no guidelines' · total score in % with its error bar, billed cost per full run (USD, OpenRouter); effort medium from the runner's OpenRouter request (HEAD config, assumed for the runs); read 2026-10-01 ✓"
+  },
+  "convex-noguide-web": {
+   "label": "Convex evals (no guidelines, web research)",
+   "type": "xmodel",
+   "config": "Convex coding evals, 112 evals in 8 categories, experiment 'no guidelines, web research' · total score in % with its error bar, billed cost per full run (USD, OpenRouter); effort medium from the runner's OpenRouter request (HEAD config, assumed for the runs); read 2026-10-01 ✓"
+  },
+  "clerk-base": {
+   "label": "Clerk evals (baseline)",
+   "type": "xmodel",
+   "config": "Clerk auth-integration evals, 17 framework × category cells, baseline · mean cell score in % (computed by us from the published cells), cost summed over the 17 cells (USD, the runner's tokens × list price), tokens; no reasoning option set (default); the 5.5 models ran on 28–29 Sep, the others on 3 Sep; read 2026-10-01 ✓"
+  },
+  "clerk-mcp": {
+   "label": "Clerk evals (with MCP)",
+   "type": "xmodel",
+   "config": "Clerk auth-integration evals, 17 framework × category cells, with MCP · mean cell score in % (computed by us from the published cells); no cost; no reasoning option set (default); the 5.5 models ran on 28–29 Sep, the others on 3 Sep; read 2026-10-01 ✓"
+  },
+  "clerk-skills": {
+   "label": "Clerk evals (with skills)",
+   "type": "xmodel",
+   "config": "Clerk auth-integration evals, 17 framework × category cells, with skills · mean cell score in % (computed by us from the published cells); no cost; no reasoning option set (default); the 5.5 models ran on 28–29 Sep, the others on 3 Sep; read 2026-10-01 ✓"
+  },
+  "tinybird-sql": {
+   "label": "Tinybird SQL benchmark",
+   "type": "xmodel",
+   "config": "Tinybird LLM SQL benchmark, 50 natural-language questions answered in SQL over 200M GH Archive rows, via OpenRouter · composite score (efficiency, exactness); no effort set (default); no cost; read 2026-10-01 ✓"
+  },
+  "stagehand-hard": {
+   "label": "Browserbase HardBench",
+   "type": "xmodel",
+   "config": "Browserbase / Stagehand browser-agent evals, HardBench, Claude rows in Claude Code · accuracy in %, cost per task (USD); no effort stated (default); task and run counts not stated; read 2026-10-01 ✓"
+  },
+  "supabase-skills": {
+   "label": "Supabase evals (with skills)",
+   "type": "xmodel",
+   "config": "Supabase evals in Claude Code, with skills, 23 evals × 3 runs · pass rate in % (computed by us from the published runs), tokens per run; reasoningEffort high from the presets; no cost; read 2026-10-01 ✓"
+  },
+  "supabase-noskills": {
+   "label": "Supabase evals (without skills)",
+   "type": "xmodel",
+   "config": "Supabase evals in Claude Code, without skills, 23 evals × 3 runs · pass rate in % (computed by us from the published runs), tokens per run; reasoningEffort high from the presets; no cost; read 2026-10-01 ✓"
+  },
+  "bito-s55o55": {
+   "label": "Bito agentic coding battery",
+   "type": "xmodel",
+   "config": "Bito's internal agentic coding battery in Claude Code (6 task types, multi-turn sessions), each turn scored out of 50 by Opus 5.5 · mean score /50, cost per session (USD); effort from the post; read 2026-10-01 ✓"
+  },
+  "aimultiple-t2sql-cc": {
+   "label": "AIMultiple text-to-SQL (Claude Code)",
+   "type": "xmodel",
+   "config": "AIMultiple AIM-Text-to-SQL, Opus 5.5 and Fable 5.1 in Claude Code at medium effort · SQL accuracy in %; each model answered its own subset of questions (506 and 491); no cost; read 2026-10-01 ✓"
+  },
+  "aimultiple-t2sql-or": {
+   "label": "AIMultiple text-to-SQL (OpenRouter)",
+   "type": "xmodel",
+   "config": "AIMultiple AIM-Text-to-SQL, Fable 5 and Opus 5 via OpenRouter at temperature 0, effort unstated (default) · SQL accuracy in %; question subsets differ by model; no cost; read 2026-10-01 ✓"
   }
  },
  "merge": {
