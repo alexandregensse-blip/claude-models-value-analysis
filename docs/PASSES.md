@@ -5,6 +5,18 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the eighteenth pass
+
+Both axes converged at the first attempt: quality R̂ 1.0008, ESS 7417/7225, no divergence (876 s); cost R̂ 1.0023, ESS
+1571/1814, no divergence (526 s). The price trend's slope stays at λ 0.149. Expected scores move by less than a point
+(Opus 5.5 max 75.0 → 75.1 %, Sonnet 5.5 high 67.0 → 66.5 %) and costs ease slightly (Opus 5.5 max 19× → 17×).
+**Haiku 4.5 joins the frontier**: it is now 0.3 % cheaper than Sonnet 5.5 low, a gap well inside both intervals (±13 %),
+and as the frontier's weakest couple it pulls the two lower tier targets down (grunt work 56.6 → 41.1 %, everyday
+tasks 62.9 → 51.3 %). Picks: grunt work Sonnet 5.5 low, everyday tasks Sonnet 5.5 medium, advanced reasoning Opus 5.5
+high, cutting-edge thinking Opus 5.5 xHigh; the crown stays Sonnet 5.5 high (3.0× cheaper than the trend). The rule is
+applied as written; a frontier end that is not credibly cheaper than the couples above it was discussed and left for
+later.
+
 ## Eighteenth pass: Opus 5.5 and Sonnet 5.5
 
 Six Opus agents, no time limit, 1 Oct 2026, on six axes centred on Opus 5.5 and Sonnet 5.5: research papers (a
