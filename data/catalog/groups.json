@@ -3359,6 +3359,451 @@
    "label": "AIMultiple text-to-SQL (OpenRouter)",
    "type": "xmodel",
    "config": "AIMultiple AIM-Text-to-SQL, Fable 5 and Opus 5 via OpenRouter at temperature 0, effort unstated (default) · SQL accuracy in %; question subsets differ by model; no cost; read 2026-10-01 ✓"
+  },
+  "argobench": {
+   "label": "Argo-Bench: enterprise data-agent tasks (210 tasks), Inspect AI 0.3.263 harness",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.02122v1 Table 2 (best-effort snapshot, extra-high where offered) + Table 10 (effort ladder, mean score /100, tasks completed at every level); n=1 rollout/task; score = mean task score out of 100 with a model's forecast tasks floored at 0 as a block; cost = API spend per task, excluding BigQuery (Table 2 only, not itemized by effort in Table 10); read 2026-10-05 ✓"
+  },
+  "fourdcodebench": {
+   "label": "4DCodeBench: inverse-graphics-of-dynamic-scenes leaderboard (200 scenes), Claude Code agent",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.03715v1 Figure 4 (src/main_leaderboard.png); Overall = mean of 5 family scores [0,1]; values printed on heatmap cells, read directly (not pixel-digitized); n=1 run/model, no repeats stated; read-from-image; read 2026-10-05 ✓"
+  },
+  "lawandorder-noform": {
+   "label": "Law and Order: TY2025 tax-return autoformalization, method = w/o formalization",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.02792v1 Table 1; correct returns (strict) %; no effort token given for the Claude rows (only GPT-5.5 is marked Medium) -> default; small task set (n~40, strict deltas in multiples of 2.5pp); read 2026-10-05 ✓"
+  },
+  "lawandorder-noform-ws": {
+   "label": "Law and Order: TY2025 tax-return autoformalization, method = w/o formalization + web search",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.02792v1 Table 1; correct returns (strict) %; no effort token given for the Claude rows (only GPT-5.5 is marked Medium) -> default; small task set (n~40, strict deltas in multiples of 2.5pp); read 2026-10-05 ✓"
+  },
+  "lawandorder-direct": {
+   "label": "Law and Order: TY2025 tax-return autoformalization, method = direct translation",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.02792v1 Table 1; correct returns (strict) %; no effort token given for the Claude rows (only GPT-5.5 is marked Medium) -> default; small task set (n~40, strict deltas in multiples of 2.5pp); read 2026-10-05 ✓"
+  },
+  "lawandorder-selfdebug": {
+   "label": "Law and Order: TY2025 tax-return autoformalization, method = self-debugging",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.02792v1 Table 1; correct returns (strict) %; no effort token given for the Claude rows (only GPT-5.5 is marked Medium) -> default; small task set (n~40, strict deltas in multiples of 2.5pp); read 2026-10-05 ✓"
+  },
+  "lawandorder-lo": {
+   "label": "Law and Order: TY2025 tax-return autoformalization, method = Law&Order (localized execution feedback)",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.02792v1 Table 1; correct returns (strict) %; no effort token given for the Claude rows (only GPT-5.5 is marked Medium) -> default; small task set (n~40, strict deltas in multiples of 2.5pp); read 2026-10-05 ✓"
+  },
+  "edithero": {
+   "label": "EditHero: long-horizon part-level 3D mesh editing, comparison subset (416 turns)",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.02298v1 Table 3; IF = instruction-following score [0,1] (headline metric); no effort token given for the Claude rows (Sol 6 and Astra are marked medium, Opus 5.5/Fable 5.1 are not) -> default; harness = Claude Code for both Claude models; single rollout per chain, no repeats stated; other metrics in the source (CC-prev, F_W, LPIPS_E/W, PSNR_W, and the Table 15/16 cond./held-out split) not ingested here; read 2026-10-05 ✓"
+  },
+  "dayjob-healthcare": {
+   "label": "DAYJOB: 50 healthcare work-product tasks, agentic-judge-graded, Harbor",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.01306v1 Table 3 (healthcare column) + text (Opus 5.5 cost only, $7.10/attempt, the only config on the cost frontier whose cost is itemized by model; others 'not on the cost frontier' / not itemized); strict pass@1 %, 5 attempts/task; effort-from-config:\"adaptive/max\" -> max; read 2026-10-05 ✓"
+  },
+  "dayjob-finance": {
+   "label": "DAYJOB: 80 finance work-product tasks, agentic-judge-graded, Harbor",
+   "type": "xmodel",
+   "config": "arxiv.org/html/2610.01306v1 Table 3 (finance column) + text (Opus 5.5 cost only, $11.47/attempt); strict pass@1 %, 5 attempts/task; effort-from-config:\"adaptive/max\" -> max; read 2026-10-05 ✓"
+  },
+  "neutron-shielding-gate": {
+   "label": "OpenMC neutron-shielding single-shot script generation (v2): execution gate, L1-L5",
+   "type": "xmodel",
+   "config": "zenodo.org/records/23067522 (PDF, extracted via pypdf, numbers printed in the PDF table) Table §5.1 'the gate' (scripts that ran, of 15 total, L1-L5); effort-from-config:\"Anthropic models ran at effort=medium in both versions\"; N=3/model/rung, author's own words: 'signals, not rates'; read 2026-10-05 ✓"
+  },
+  "neutron-shielding-physics": {
+   "label": "OpenMC neutron-shielding single-shot script generation (v2): physics-correct, L2-L4",
+   "type": "xmodel",
+   "config": "zenodo.org/records/23067522 (PDF, extracted via pypdf, numbers printed in the PDF table) §5.2 (physics-correct of 9, L2-L4, the rungs with a scorable physics criterion); effort-from-config:\"Anthropic models ran at effort=medium in both versions\"; N=3/model/rung, author's own words: 'signals, not rates'; read 2026-10-05 ✓"
+  },
+  "validate-benchmark-base-pointed": {
+   "label": "TypeScript API-migration task, base documents + pointed instruction, Claude Code 2.1.286 / Harbor 0.22.0",
+   "type": "xmodel",
+   "config": "zenodo.org/records/23075022 (PDF, extracted via pypdf, numbers printed in the PDF table) Table 3, documents=base / instruction=pointed row; 3 attempts/cell; no effort stated -> default (Haiku 4.5 -> solo); read 2026-10-05 ✓"
+  },
+  "validate-benchmark-hard-neutral": {
+   "label": "TypeScript API-migration task, hard documents + neutral instruction, Claude Code 2.1.286 / Harbor 0.22.0",
+   "type": "xmodel",
+   "config": "zenodo.org/records/23075022 (PDF, extracted via pypdf, numbers printed in the PDF table) Table 3, documents=hard / instruction=neutral row; 3 attempts/cell; no effort stated -> default (Haiku 4.5 -> solo); read 2026-10-05 ✓"
+  },
+  "ugi-writing": {
+   "label": "UGI Leaderboard — Writing quality (all Claude models × efforts)",
+   "type": "xmodel",
+   "config": "DontPlanToEnd/UGI-Leaderboard, fixed prompt set, LLM-judged Writing score; test dates vary by model (CSV Test Date column); read 2026-10-05 ✓"
+  },
+  "ugi-score": {
+   "label": "UGI Leaderboard — UGI composite (all Claude models × efforts)",
+   "type": "xmodel",
+   "config": "DontPlanToEnd/UGI-Leaderboard, fixed prompt set, composite UGI score; test dates vary by model (CSV Test Date column); read 2026-10-05 ✓"
+  },
+  "ugi-worldmodel": {
+   "label": "UGI Leaderboard — World Model factual recall (all Claude models × efforts)",
+   "type": "xmodel",
+   "config": "DontPlanToEnd/UGI-Leaderboard, recipe/geoguessr/weight/music percent-error battery; test dates vary by model; read 2026-10-05 ✓"
+  },
+  "lmarenawebdev-html": {
+   "label": "LMArena WebDev — HTML sub-category",
+   "type": "xmodel",
+   "config": "lmarena-ai/leaderboard-dataset, configs/webdev, category=webdev-html, latest split, publish 2026-10-02; read 2026-10-05 ✓"
+  },
+  "lmarenawebdev-react": {
+   "label": "LMArena WebDev — React sub-category",
+   "type": "xmodel",
+   "config": "lmarena-ai/leaderboard-dataset, configs/webdev, category=webdev-react, latest split, publish 2026-10-02; read 2026-10-05 ✓"
+  },
+  "llm-chess-elo": {
+   "label": "llm_chess — aggregated Elo vs Random + Dragon engine (all Claude models)",
+   "type": "xmodel",
+   "config": "maxim-saplin/llm_chess, LLM plays Black vs RANDOM_PLAYER and Dragon engine, Elo anchored to Dragon ladder, 95% CI, average_game_cost as cost per game; read 2026-10-05 ✓"
+  },
+  "llm-chess-vs-random": {
+   "label": "llm_chess — single 10-game match vs RANDOM_PLAYER (Black win rate)",
+   "type": "xmodel",
+   "config": "maxim-saplin/llm_chess raw per-match _aggregate_results.json, n=10 games per model, win% computed by us from black_wins/total_games; read 2026-10-05 ✓"
+  },
+  "lechmazur-writing": {
+   "label": "lechmazur Creative Writing Benchmark — comparison score",
+   "type": "xmodel",
+   "config": "lechmazur/writing, matched creative-brief stories judged pairwise by rotating LLM evaluators, Thurstone/BT-style comparison score centered at 0, bootstrap 95% CI; read 2026-10-05 ✓"
+  },
+  "lechmazur-debate": {
+   "label": "lechmazur Adversarial LLM Debate Benchmark — Bradley-Terry rating",
+   "type": "xmodel",
+   "config": "lechmazur/debate, side-swapped adversarial debates, multi-model judge panel (incl. a Claude judge), Bradley-Terry rating with match counts; read 2026-10-05 ✓"
+  },
+  "lechmazur-nyt": {
+   "label": "lechmazur NYT Connections Extended Benchmark — full 940-puzzle board",
+   "type": "xmodel",
+   "config": "lechmazur/nyt-connections, 940 puzzles, quadratic-v1 scoring (g/4)^2 per puzzle, objective (not model-judged); read 2026-10-05 ✓"
+  },
+  "lechmazur-nyt-hard100": {
+   "label": "lechmazur NYT Connections Extended Benchmark — harder 100-puzzle subset",
+   "type": "xmodel",
+   "config": "lechmazur/nyt-connections, harder 100-puzzle subset, same quadratic-v1 scoring, objective; read 2026-10-05 ✓"
+  },
+  "fable-noskill": {
+   "label": "Fable-workflow-skill: no-skill baseline (2026-10-02 rerun)",
+   "type": "xmodel",
+   "config": "one-shot under-specified rate-limiter spec, no skill injected, scored Thinking/50+Answer/50 by a blind non-contestant judge; read 2026-10-05 ✓"
+  },
+  "fable-withskill": {
+   "label": "Fable-workflow-skill: with-skill (2026-10-02 rerun)",
+   "type": "xmodel",
+   "config": "same task + the fable-workflow skill's one-shot unknowns-list instruction, scored identically; read 2026-10-05 ✓"
+  },
+  "redlinebench": {
+   "label": "RedlineBench legal-redlining benchmark (HF Datasets Leaderboard)",
+   "type": "xmodel",
+   "config": "legal-contract redlining, agent=claude-code, 3-LLM judge panel majority vote, turn-weighted weighted pass rate 0-100; read 2026-10-05 ✓"
+  },
+  "pxpipe-arith": {
+   "label": "pxpipe pixel-reading: arithmetic probe (N=100)",
+   "type": "xmodel",
+   "config": "exact-match count on rendered-text arithmetic probes read back by the model, digitised: image reflow rendering; read 2026-10-05 ✓"
+  },
+  "pxpipe-gist": {
+   "label": "pxpipe pixel-reading: gist probe (N=98)",
+   "type": "xmodel",
+   "config": "exact-match count on rendered-text gist-recall probes; read 2026-10-05 ✓"
+  },
+  "pxpipe-state": {
+   "label": "pxpipe pixel-reading: state probe (N=18)",
+   "type": "xmodel",
+   "config": "exact-match count on rendered-text running-state probes; read 2026-10-05 ✓"
+  },
+  "pxpipe-hex": {
+   "label": "pxpipe pixel-reading: dense hex probe (N=15)",
+   "type": "xmodel",
+   "config": "exact-match count on rendered dense-hex-id probes (near-floor for every Claude model); read 2026-10-05 ✓"
+  },
+  "chaoscypher-native": {
+   "label": "ChaosCypher context-extraction: native suite (N=65)",
+   "type": "xmodel",
+   "config": "War & Peace fixture, mcp:claude-code harness, native suite, pass/fail verdicts; read 2026-10-05 ✓"
+  },
+  "chaoscypher-carrier": {
+   "label": "ChaosCypher context-extraction: carrier suite (N=21)",
+   "type": "xmodel",
+   "config": "War & Peace fixture, mcp:claude-code harness, carrier suite, pass/fail verdicts; read 2026-10-05 ✓"
+  },
+  "chaoscypher-chat": {
+   "label": "ChaosCypher context-extraction: chat suite (N=80)",
+   "type": "xmodel",
+   "config": "War & Peace fixture, mcp:claude-code harness, chat suite, pass/fail verdicts; read 2026-10-05 ✓"
+  },
+  "humanwill-falserefusal": {
+   "label": "HumanWill cybersecurity: 100 - false-refusal rate (424 scenarios)",
+   "type": "xmodel",
+   "config": "source metric is false-refusal rate (%) on 424 cybersecurity scenarios, lower is better; stored here as 100-rate so higher=better like every other score% in this dataset (see confound for the original rate); partial/full withholding counted; 'not everyday refusal rates or an overall safety score' per source; model settings/routes/run-dates vary historically; read 2026-10-05 ✓"
+  },
+  "llmstats-general": {
+   "label": "llm-stats.com arena: general category (Bradley-Terry/TrueSkill-style, own-run)",
+   "type": "xmodel",
+   "config": "llm-stats.com's own per-category arena rating (mu/sigma/CI/games_played), general category, methodology not fully disclosed on homepage; read 2026-10-05 ✓"
+  },
+  "llmstats-reasoning": {
+   "label": "llm-stats.com arena: reasoning category (Bradley-Terry/TrueSkill-style, own-run)",
+   "type": "xmodel",
+   "config": "llm-stats.com's own per-category arena rating (mu/sigma/CI/games_played), reasoning category, methodology not fully disclosed on homepage; read 2026-10-05 ✓"
+  },
+  "llmstats-code": {
+   "label": "llm-stats.com arena: code category (Bradley-Terry/TrueSkill-style, own-run)",
+   "type": "xmodel",
+   "config": "llm-stats.com's own per-category arena rating (mu/sigma/CI/games_played), code category, methodology not fully disclosed on homepage; read 2026-10-05 ✓"
+  },
+  "llmstats-agents": {
+   "label": "llm-stats.com arena: agents category (Bradley-Terry/TrueSkill-style, own-run)",
+   "type": "xmodel",
+   "config": "llm-stats.com's own per-category arena rating (mu/sigma/CI/games_played), agents category, methodology not fully disclosed on homepage; read 2026-10-05 ✓"
+  },
+  "llmstats-multimodal": {
+   "label": "llm-stats.com arena: multimodal category (Bradley-Terry/TrueSkill-style, own-run)",
+   "type": "xmodel",
+   "config": "llm-stats.com's own per-category arena rating (mu/sigma/CI/games_played), multimodal category, methodology not fully disclosed on homepage; read 2026-10-05 ✓"
+  },
+  "llmstats-vision": {
+   "label": "llm-stats.com arena: vision category (Bradley-Terry/TrueSkill-style, own-run)",
+   "type": "xmodel",
+   "config": "llm-stats.com's own per-category arena rating (mu/sigma/CI/games_played), vision category, methodology not fully disclosed on homepage; read 2026-10-05 ✓"
+  },
+  "llmstats-tool_calling": {
+   "label": "llm-stats.com arena: tool_calling category (Bradley-Terry/TrueSkill-style, own-run)",
+   "type": "xmodel",
+   "config": "llm-stats.com's own per-category arena rating (mu/sigma/CI/games_played), tool_calling category, methodology not fully disclosed on homepage; read 2026-10-05 ✓"
+  },
+  "4dcodebench-renders": {
+   "label": "4DCodeBench render-completion rate (of 200 planned cases)",
+   "type": "xmodel",
+   "config": "completion-rate proxy only (did the system produce any render at all), NOT a quality score of the renders; actual quality scoring (if any) is unpublished/not found; read 2026-10-05 ✓"
+  },
+  "graphite-divergence": {
+   "label": "Graphite AI Tells: word-distribution divergence from human writing (Opus 5.5 update)",
+   "type": "xgen",
+   "config": "writing task, 9974 topic-aligned LLM-vs-human article pairs, Jensen-Shannon divergence over unigrams; ref graphite.io/five-percent/research/ai-tells-opus-5-5-update; read 2026-10-05 ✓"
+  },
+  "graphite-mannered": {
+   "label": "Graphite AI Tells: mannered-prose score (Opus 5.5 update)",
+   "type": "xgen",
+   "config": "writing task, 1000-topic subsample, score 0-100 judged by Claude Opus 5; ref graphite.io/five-percent/research/ai-tells-opus-5-5-update; read 2026-10-05 ✓"
+  },
+  "graphite-tells": {
+   "label": "Graphite AI Tells: count of distinct AI tells (Opus 5.5 update)",
+   "type": "xgen",
+   "config": "writing task, 9974 topic-aligned pairs, words/phrases/frames used >=2x human rate; ref graphite.io/five-percent/research/ai-tells-opus-5-5-update; read 2026-10-05 ✓"
+  },
+  "orgpqa": {
+   "label": "OpenRouter GPQA-Diamond rolling-mean board (snapshot 2026-10-03)",
+   "type": "xmodel",
+   "config": "reasoning-math/hard, OR-internal rolling-mean harness, auto-routing provider aggregate; ref openrouter.ai/benchmarks/gpqa-diamond; SNAPSHOT REPLACES prior orgpqa snapshot (2026-09-27); read 2026-10-05 ✓"
+  },
+  "ortau2": {
+   "label": "OpenRouter tau2-bench-airline board (snapshot 2026-10-03)",
+   "type": "xmodel",
+   "config": "agentic-tool/mid, tau2-bench airline tasks, OR-internal harness, auto-routing provider aggregate; ref openrouter.ai/benchmarks/tau2-bench-airline; SNAPSHOT REPLACES prior ortau2 snapshot (2026-09-27); read 2026-10-05 ✓"
+  },
+  "kenji-harada-small6": {
+   "label": "kenji_harada: 6 small coding tasks, Opus 5.5/Opus 5/Fable 5.1 (Claude Code)",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.283 -p, macOS, 6 small Node.js tasks x3 runs, median time/cost at API list price; qiita.com/kenji_harada/items/7d8be259208cd3a5843f; read 2026-10-05 ✓"
+  },
+  "kenji-harada-hard4": {
+   "label": "kenji_harada: 4 hard coding tasks, Opus 5.5 sweep + Fable 5.1 (Claude Code)",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.283 -p, macOS, 4 hard Node.js tasks x3 runs, median time/cost at API list price; qiita.com/kenji_harada/items/7d8be259208cd3a5843f; read 2026-10-05 ✓"
+  },
+  "synthorai-ja-single-55": {
+   "label": "Synthorai (ja mirror): 13 single-shot answer tasks, Sonnet 5.5 / Sonnet 5 / Opus 5.5 by effort",
+   "type": "sweep",
+   "config": "native Messages API via gateway, 13 tasks x3 reps x6 efforts, cost computed from list price; qiita.com/Synthorai/items/98e776a66f483f3ceeaf (mirror of synthorai.io/ja/blog/claude-sonnet-5-5-cost/); read 2026-10-05 ✓"
+  },
+  "synthorai-ja-loop-55": {
+   "label": "Synthorai (ja mirror): 4-question tool-reading loop, Sonnet 5.5 (sweep) and Opus 5.5 default",
+   "type": "xmodel",
+   "config": "native Messages API via gateway, 4 tasks x3 reps per row (n=12), cost computed from list price; qiita.com/Synthorai/items/98e776a66f483f3ceeaf (mirror of synthorai.io/ja/blog/claude-sonnet-5-5-cost/); read 2026-10-05 ✓"
+  },
+  "oubakiou-godot-gamebench-opus55": {
+   "label": "oubakiou godot-llm-gamebench: Opus 5.5 child, 5 efforts, parent fixed opus-5.5@medium",
+   "type": "sweep",
+   "config": "Claude Code CLI child at claude-opus-5-5, parent claude-opus-5-5@medium fixed; Godot 4.4.1 'Ember Warden' mini-game vs private spec, scored by 57 hidden tests; n=3 reps per effort; zenn.dev/oubakiou/articles/fa3b3914e081c8; read 2026-10-05 ✓"
+  },
+  "morinokenjin-keisan-mental": {
+   "label": "morinokenjin: Opus 5.5 vs Sonnet 5.5, mental arithmetic (8 questions, Claude Code, n=1)",
+   "type": "xmodel",
+   "config": "Claude Code -p, claude-opus-5-5 vs claude-sonnet-5-5, both effort medium (Claude Code standard), n=1; zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan; read 2026-10-05 ✓"
+  },
+  "morinokenjin-keisan-progmath": {
+   "label": "morinokenjin: Opus 5.5 vs Sonnet 5.5, program-solved math (3 questions, Claude Code, n=1)",
+   "type": "xmodel",
+   "config": "Claude Code -p, claude-opus-5-5 vs claude-sonnet-5-5, both effort medium (Claude Code standard), n=1, Python+numpy used; zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan; read 2026-10-05 ✓"
+  },
+  "morinokenjin-keisan-csv": {
+   "label": "morinokenjin: Opus 5.5 vs Sonnet 5.5, CSV report speed-up (9 hidden tables, Claude Code, n=1)",
+   "type": "xmodel",
+   "config": "Claude Code -p, claude-opus-5-5 vs claude-sonnet-5-5, both effort medium (Claude Code standard), n=1, score = byte-identical output vs original on 9 hidden tables; zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan; read 2026-10-05 ✓"
+  },
+  "morinokenjin-blender-stilllife": {
+   "label": "morinokenjin: Opus 5.5 vs Sonnet 5.5, Blender still life judged by Gemini 3.8 Flash (n=1)",
+   "type": "xmodel",
+   "config": "Claude Code -p, claude-opus-5-5 vs claude-sonnet-5-5, both effort medium (Claude Code standard), n=1; judge gemini-3.8-flash, 2 passes with swapped order averaged, out of 30; zenn.dev/morinokenjin/articles/opus-sonnet-55-blender; read 2026-10-05 ✓"
+  },
+  "morinokenjin-blender-watch": {
+   "label": "morinokenjin: Opus 5.5 vs Sonnet 5.5, Blender mechanical watch judged by Gemini 3.8 Flash (n=1)",
+   "type": "xmodel",
+   "config": "Claude Code -p, claude-opus-5-5 vs claude-sonnet-5-5, both effort medium (Claude Code standard), n=1; judge gemini-3.8-flash, 2 passes with swapped order averaged, out of 30; zenn.dev/morinokenjin/articles/opus-sonnet-55-blender; read 2026-10-05 ✓"
+  },
+  "morinokenjin-blender-animation": {
+   "label": "morinokenjin: Opus 5.5 vs Sonnet 5.5, Blender animation judged by Gemini 3.8 Flash (n=1)",
+   "type": "xmodel",
+   "config": "Claude Code -p, claude-opus-5-5 vs claude-sonnet-5-5, both effort medium (Claude Code standard), n=1; judge gemini-3.8-flash, 2 passes with swapped order averaged, out of 30; zenn.dev/morinokenjin/articles/opus-sonnet-55-blender; read 2026-10-05 ✓"
+  },
+  "merc-t13": {
+   "label": "merc-bench hard tier T13 (per-task, adopted as core at 5e09655)",
+   "type": "xmodel",
+   "config": "github.com/sirneb/merc-bench, task T13, hard tier adopted from tournament candidates since #8 (5e09655); read 2026-10-05 ✓"
+  },
+  "merc-t14": {
+   "label": "merc-bench hard tier T14 (per-task, adopted as core at 5e09655)",
+   "type": "xmodel",
+   "config": "github.com/sirneb/merc-bench, task T14, hard tier adopted from tournament candidates since #8 (5e09655); read 2026-10-05 ✓"
+  },
+  "merc-t15": {
+   "label": "merc-bench hard tier T15 (per-task, adopted as core at 5e09655)",
+   "type": "xmodel",
+   "config": "github.com/sirneb/merc-bench, task T15, hard tier adopted from tournament candidates since #8 (5e09655); read 2026-10-05 ✓"
+  },
+  "vulcanbench-ciiv4-quality": {
+   "label": "VulcanBench CII-v4 code_quality (LLM judge) for the held Opus 5.5 ladder",
+   "type": "sweep",
+   "config": "github.com/morganlinton/VulcanBench, src/vulcan_gpt61sol-opus55-astra-quality-efforts.csv (commit 3f1bfa61, 2 Oct 2026), same combined-v3.15 Opus 5.5 ladder as group vulcanbench-ciiv4; read 2026-10-05 ✓"
+  },
+  "minecart-opus55-sonnet55": {
+   "label": "Reddit: mine-cart ride in Godot (Opus 5.5 vs Sonnet 5.5)",
+   "type": "xmodel",
+   "config": "one-line prompt, two fresh Godot projects, both in Claude Code over MCP (Flockbay harness); cost = author's own figure 'at API rates', n=1 each, qualitative pass/fail only (no numeric score); read 2026-10-05 ✓"
+  },
+  "pelican-opus55-effort": {
+   "label": "Reddit: pelican-on-a-bicycle SVG, Opus 5.5 effort sweep",
+   "type": "sweep",
+   "config": "one-line prompt 'Write HTML code that displays a 2D animation of a pelican riding a bicycle using SVG graphics...', fresh session each, author's own agent setup (pi with custom skills); n=1 per level, times/costs from session logs, no numeric quality score (qualitative only); read 2026-10-05 ✓"
+  },
+  "towardsai-writing-elo-0922": {
+   "label": "Towards AI internal writing-Elo board, Sep 22, 2026",
+   "type": "xmodel",
+   "config": "10 script tasks x 5 scripts, scored blind out of 100 by three AI judges from three different labs; top-16 leaderboard bar chart, footer 'Board of Sep 22, 2026'; values are printed bar labels, read verbatim, not pixel-digitised; read 2026-10-05 ✓"
+  },
+  "towardsai-writing-elo-b": {
+   "label": "Towards AI internal writing-Elo board, Sep 25, 2026",
+   "type": "sweep",
+   "config": "10 script tasks x 5 scripts, scored blind out of 100 by three AI judges from three different labs; Opus 5.5 six-effort scatter + Fable 5.1 reference point, footer 'Sep 25, 2026'; values are printed point labels, read verbatim, not pixel-digitised; read 2026-10-05 ✓"
+  },
+  "towardsai-writing-elo-c": {
+   "label": "Writing-Elo effort/cost chart, Reddit 1wrkwp0 (r/LLMDevs)",
+   "type": "xgen",
+   "config": "same 'Writing Elo' metric family, 10 real YouTube scripts per OP, scored blind by three judges and a rubric; cost per script, log-x scatter with effort-labelled points; no board date printed on the chart; a different Reddit post/source snapshot than 1wr03jc, kept as its own board version; read 2026-10-05 ✓"
+  },
+  "tinyworld": {
+   "label": "OhMyUnicorn / Dream Loop: ThreeJS planet one-shot, Opus 5.5 vs Sonnet 5.5",
+   "type": "xmodel",
+   "config": "one-shot ThreeJS planet build, no harness, Claude Code, list-price cost from session logs; src/tinyworld.html; read 2026-10-05 ✓"
+  },
+  "messydocs": {
+   "label": "TashonBraganca/messy-docs-bench: field-extraction accuracy, Opus 5.5 vs Sonnet 5",
+   "type": "xmodel",
+   "config": "137 messy documents (receipts/invoices/scans/W-2/statements/contracts), field-level extraction accuracy; github.com/TashonBraganca/messy-docs-bench, src/messydocs_summary.json; read 2026-10-05 ✓"
+  },
+  "pokebench": {
+   "label": "pokebench.tv: Pokemon Red speedrun to Brock, turns/time/cost",
+   "type": "xmodel",
+   "config": "fresh-save Pokemon Red, screenshot+RAM state per turn, budget 1000 turns, Anthropic API list-price cost; https://pokebench.tv/runs.json, src/pokebench_runs.json; read 2026-10-05 ✓"
+  },
+  "bb2": {
+   "label": "Andon Labs Blueprint-Bench 2: floorplan-from-photos, Opus 5.5 vs seven older Claude models",
+   "type": "xmodel",
+   "config": "32-model board, floorplan drawn from apartment-interior photos, score 0-1 vs human baseline 0.59; https://andonlabs.com/evals/blueprint-bench-2, src/andonlabs_bb2.html (SVG bar chart, y/height attributes, axis calibrated y=355->0.0 / y=0->1.0); no Sonnet 5.5 bar on this board; read 2026-10-05 ✓"
+  },
+  "kaloyan": {
+   "label": "kaloyan.blog scenes-cli: rebuild a photo in Blender, Opus 5.5 vs Sonnet 5.5",
+   "type": "xmodel",
+   "config": "model writes/runs Blender Python to rebuild 3 photos, bench renders the saved scene and scores calibrated silhouette/colour/detail/mesh (0-100), 1 run(s)/image, created_at=2026-10-01T07:27:51Z; https://kaloyan.blog/content/eleven-models-in-blender/assets/benchmark-results-newest.json, src/kaloyan_results.json; read 2026-10-05 ✓"
+  },
+  "brinvik-salesforecast": {
+   "label": "brinvik.com: CRM-cleanup + Q4 sales-forecast test, Sonnet 5.5 vs Opus 5.5 (one run each)",
+   "type": "xmodel",
+   "config": "brinvik.com/en/journal/claude-sonnet-5-5-vs-opus-5-5-sales-forecast-test; synthetic 61-deal CRM export, 9 planted errors, build Q4 forecast + Excel workbook + 5 slides; both reached the exact pre-computed answer (DKK 6,529,724 from 27 deals) and caught all 9 planted errors; cost = author's own token-count list-price calculation, n=1 per model; read 2026-10-05 ✓"
+  },
+  "eci": {
+   "label": "Epoch Capabilities Index (composite), every Claude model on the board",
+   "type": "xgen",
+   "config": "epoch.ai/eci (epoch.ai/data/benchmark_data.zip -> epoch_capabilities_index/eci_scores.csv); aggregate meta-index over many sub-benchmarks (mixed/unstated per-model efforts feeding it); one row per model, 95% CI as published; COMPOSITE — see composites.json note below; read 2026-10-05 ✓"
+  },
+  "retort79pyiso": {
+   "label": "retort exp-79 python isolated",
+   "type": "sweep",
+   "config": "Claude Code (isolated, MCP disabled) · rest-api-crud in python, Opus 5.5 × low/medium/high/default, n=3; requirement coverage 1.0 everywhere → cost only; read 2026-10-05 ✓"
+  },
+  "retort79goiso": {
+   "label": "retort exp-79 go isolated",
+   "type": "sweep",
+   "config": "Claude Code (isolated, MCP disabled) · rest-api-crud in go, Opus 5.5 × low/medium/high/default, n=3; requirement coverage 1.0 everywhere → cost only; read 2026-10-05 ✓"
+  },
+  "retort83atddpyneu": {
+   "label": "retort exp-83 ATDD skill python (neutral)",
+   "type": "sweep",
+   "config": "Claude Code + msec ATDD-review skill · brazil in python, prompt=neutral, Opus 5.5 × low/high, n=2, score=atdd_review%; read 2026-10-05 ✓"
+  },
+  "retort83atddpyskill": {
+   "label": "retort exp-83 ATDD skill python (atdd-skill)",
+   "type": "sweep",
+   "config": "Claude Code + msec ATDD-review skill · brazil in python, prompt=atdd-skill, Opus 5.5 × low/high, n=2, score=atdd_review%; read 2026-10-05 ✓"
+  },
+  "retort83atddgoneu": {
+   "label": "retort exp-83 ATDD skill go (neutral)",
+   "type": "sweep",
+   "config": "Claude Code + msec ATDD-review skill · brazil in go, prompt=neutral, Opus 5.5 × low/high, n=2, score=atdd_review%; read 2026-10-05 ✓"
+  },
+  "retort83atddgoskill": {
+   "label": "retort exp-83 ATDD skill go (atdd-skill)",
+   "type": "sweep",
+   "config": "Claude Code + msec ATDD-review skill · brazil in go, prompt=atdd-skill, Opus 5.5 × low/high, n=2, score=atdd_review%; read 2026-10-05 ✓"
+  },
+  "retort83atddtsneu": {
+   "label": "retort exp-83 ATDD skill typescript (neutral)",
+   "type": "sweep",
+   "config": "Claude Code + msec ATDD-review skill · brazil in typescript, prompt=neutral, Opus 5.5 × low/high, n=2, score=atdd_review%; read 2026-10-05 ✓"
+  },
+  "retort83atddtsskill": {
+   "label": "retort exp-83 ATDD skill typescript (atdd-skill)",
+   "type": "sweep",
+   "config": "Claude Code + msec ATDD-review skill · brazil in typescript, prompt=atdd-skill, Opus 5.5 × low/high, n=2, score=atdd_review%; read 2026-10-05 ✓"
+  },
+  "retort79v80py": {
+   "label": "retort exp-79 vs exp-80 python (Opus 5.5 vs Fable 5.1, isolated)",
+   "type": "xgen",
+   "config": "Claude Code (isolated) · rest-api-crud in python, prompt=neutral, effort=low, Opus 5.5 vs Fable 5.1, n=3 each side; requirement coverage 1.0 → cost only; read 2026-10-05 ✓"
+  },
+  "retort79v80go": {
+   "label": "retort exp-79 vs exp-80 go (Opus 5.5 vs Fable 5.1, isolated)",
+   "type": "xgen",
+   "config": "Claude Code (isolated) · rest-api-crud in go, prompt=neutral, effort=default, Opus 5.5 vs Fable 5.1, n=3 each side; requirement coverage 1.0 → cost only; read 2026-10-05 ✓"
+  },
+  "retort79v80rust": {
+   "label": "retort exp-79 vs exp-80 rust (Opus 5.5 vs Fable 5.1, isolated)",
+   "type": "xgen",
+   "config": "Claude Code (isolated) · rest-api-crud in rust, prompt=neutral, effort=low, Opus 5.5 vs Fable 5.1, n=3 each side; requirement coverage 1.0 → cost only; read 2026-10-05 ✓"
+  },
+  "oabriefcont": {
+   "label": "OpenAgents briefing-model factorial (control)",
+   "type": "xmodel",
+   "config": "Claude Code (coder-connect agent) · frozen historical reserve issue, control arm, Opus 5.5 vs Sonnet 5.5 × medium effort, n=4 reps each; score=pass-at-first/final-attempt%, cost=cumulative list-price USD; read 2026-10-05 ✓"
+  },
+  "oabrieftrea": {
+   "label": "OpenAgents briefing-model factorial (treatment)",
+   "type": "xmodel",
+   "config": "Claude Code (coder-connect agent) · frozen historical reserve issue, treatment arm, Opus 5.5 vs Sonnet 5.5 × medium effort, n=4 reps each; score=pass-at-first/final-attempt%, cost=cumulative list-price USD; read 2026-10-05 ✓"
   }
  },
  "merge": {

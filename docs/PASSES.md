@@ -5,6 +5,53 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Nineteenth pass: Opus 5.5 and Sonnet 5.5, and the sites that block the server
+
+Twelve search agents (eight Sonnet, four Opus), 5 Oct 2026, on narrow axes centred on Opus 5.5 and Sonnet 5.5: papers since
+1 Oct (the 1,505 arXiv submissions of 1–5 Oct read in full, 160 revisions, OpenAlex/Zenodo), result files (Hugging Face,
+GitHub pushes since 1 Oct, Sourcegraph for the hosts `gh` does not search), English and non-English posts since
+30 Sep, and the held sources that had one 5.5 model or none (142 re-read). Four routes opened sites that every earlier
+pass found blocked: Reddit through the arctic-shift archive, Bluesky through `api.bsky.app` paged by date windows,
+Medium through a reader mirror, code hosts through Sourcegraph. Every number was then re-derived from the saved evidence
+by eleven verifier agents that had not done the search (scripts parsing the JSON, CSV, SQLite and HTML; images re-read),
+and the main session re-checked the headline values. **242 → 277 sources, 723 → 810 benchmarks, 4490 → 5013
+measurements.** Opus 5.5 rests on 793 measurements in 435 benchmarks from 154 sources (631, 349, 119 before), Sonnet 5.5
+on 517 in 272 from 90 (430, 219, 69). Fit not rerun.
+
+- **Effort ladders.**
+  - *Argo-Bench* (arXiv 2610.02122, 210 enterprise data-agent tasks): Opus 5.5 and Sonnet 5.5 at low, medium, high and
+    extra-high (Table 10), with Sonnet 5 and Haiku 4.5 and the cost per task at each model's highest effort (Table 2).
+  - *UGI-Leaderboard* (Hugging Face): writing, UGI and world-model scores of eight Claude models at every effort the
+    board gives ("(adaptive, effort=…)"), Opus 5.5 low → max among them.
+  - *merc-bench*: the re-pricing that the eighteenth pass left out is merged; core-10 re-read whole at HEAD 5e09655
+    (Sonnet 5.5 low → max enters; every cost moves; the cost of one run re-computed by hand confirms standard prices
+    with the cache write at the one-hour rate, 2 × input), and the new hard tier T13–T15 as one group per task.
+  - Towards AI's internal writing Elo (three board versions found on Reddit, one group each: two printed, one
+    digitised and checked against the two costs its author prints), oubakiou's Godot game (Opus 5.5 low → max), the
+    Synthorai article of 30 Sep (Sonnet 5.5, Sonnet 5 and Opus 5.5 at six settings), kenji_harada (Opus 5.5 low,
+    medium, high against Opus 5 and Fable 5.1), retort exp-79 (Opus 5.5 isolated) and exp-83 (ATDD skill), a pelican
+    drawn at three efforts.
+- **Cross-model, new boards.** 4DCodeBench, DAYJOB, Law and Order (one group per method), EditHero, two Zenodo reports;
+  llm_chess (Elo and cost per game of 25 Claude couples), lechmazur's short-story, debate and Connections boards,
+  RedlineBench, pxpipe, chaoscypher, llm-stats arenas, pokebench (turns stored negated), kaloyan's Blender scenes,
+  Blueprint-Bench 2 (read from the SVG), messy-docs, tinyworld, a Godot mine cart, brinvik, morinokenjin (one group per
+  task), fable-workflow-skill, OpenAgents' registered factorial (pass at the first attempt; the final attempt passes
+  everywhere), retort exp-79 against exp-80 (Opus 5.5 against Fable 5.1 where task, language, prompt and effort match).
+  *Graphite AI Tells* in three groups (divergence and tell count negated, mannered-prose score as 100 − score; the
+  em-dash ratio has no better direction and is left out). *humanwill* false-refusal rate on legitimate security
+  questions, stored as 100 − rate (the search report had it inverted). *Epoch Capabilities Index*, declared a composite
+  of the held groups it aggregates (its rows carry no effort and stay out of the fit).
+- **Snapshots replaced.** LMArena text, webdev, agent, vision, document and search from the arena's own Hugging Face
+  dataset (2 Oct; Sonnet 5.5 enters four boards), OpenRouter GPQA and τ²-airline (Sonnet 5.5 enters), WeirdML v3
+  (Sonnet 5.5 xhigh), aipricing.guru (run of 4 Oct), featherbench (Sonnet 5.5 high), aimultiple text-to-SQL.
+- **Corrected.** MarginLab's Opus 5.5 high was one day (72.34 %); pooled over 24–29 Sep it is 75.62 % (214 of 283).
+- **Not admitted.** Behavioural measures (Drone-Bench cheating, HoneyBench reward hacking, HEXACO self-reports);
+  chosai_1968's thinking tokens and times (no cost, no score that differs); quota percentages; a Reddit horse whose
+  numbers exist only as commenters' readings of a video; restatements of Anthropic and Artificial Analysis (Bluesky,
+  kingy.ai, aireiter, Vellum); dyad's "new" totals (the sum of rows already held).
+- **Still unreachable.** OpenCompass, Zhihu, Scale SEAL, Kaggle Benchmarks (JavaScript or anti-bot pages; no browser
+  was used), X.
+
 ## The fit after the eighteenth pass
 
 Both axes converged at the first attempt: quality R̂ 1.0008, ESS 7417/7225, no divergence (876 s); cost R̂ 1.0023, ESS
