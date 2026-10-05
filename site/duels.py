@@ -315,7 +315,7 @@ def build(CG, QG, PANEL):
     {blocks}
   </div></details></section>
   <section id="how" class="block"><details class="fold"><summary>How to read these comparisons</summary><div class="fold-body pad">
-    <p class="sub">The values are the ones the <a href="{SITE_URL}">main page</a> shows, fitted from public measurements taken on the same tasks. One model is <b>cheaper</b> or <b>higher</b> than the other at an effort level when the fitted difference puts it ahead with at least 84&nbsp;% probability, the level of the intervals shown everywhere on the site; otherwise the two are <b>level within the uncertainty</b>. A <b>match</b> is the cheapest setting of the other model that the first does not out-score at that level. Costs are what a whole task cost, as each source measured it (the run's actual spend, cache included), not the price per token.</p>
+    <p class="sub">The values are the ones the <a href="{SITE_URL}">main page</a> shows, fitted from public measurements taken on the same tasks. One model is <b>cheaper</b> or <b>higher</b> than the other at an effort level when the fitted difference puts it ahead with at least 84&nbsp;% probability, the level of the intervals shown everywhere on the site; otherwise the two are <b>level within the uncertainty</b>. A <b>match</b> is the cheapest setting of the other model that the first does not out-score at that level. Costs are what a whole task cost, as each source measured it (the run's actual spend, cache included), not the price per token. So the cost already counts how many tokens each model uses: a model with a lower price per token can still cost more per task if it writes many more tokens.</p>
   </div></details></section>
   </main>
   <div class="foot">
