@@ -5,6 +5,15 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the nineteenth pass
+
+Both axes converged at the first attempt: quality R̂ 1.0033, bulk ESS 3004, no divergence (966 s); cost R̂ 1.0034, ESS
+1289, no divergence (598 s). **The picks do not move**: grunt work Sonnet 5.5 low, everyday tasks Sonnet 5.5 medium,
+advanced reasoning Opus 5.5 high, cutting-edge thinking Opus 5.5 xHigh; the crown stays Sonnet 5.5 high (2.9× cheaper
+than the price trend, 3.0× before). Expected scores move by less than half a point (Opus 5.5 max 75.1 → 75.2 %, Sonnet
+5.5 max 73.3 → 73.5 %, Fable 5.1 max 70.3 → 70.5 %, Haiku 4.5 39.7 → 39.5 %); Opus 5.5 max costs 18× the cheapest
+couple (17× before). The tank_ai rank rows stay inactive (`#`): a rank is ordinal, as decided in the second salvo.
+
 ## Nineteenth pass: Opus 5.5 and Sonnet 5.5, and the sites that block the server
 
 Twelve search agents (eight Sonnet, four Opus), 5 Oct 2026, on narrow axes centred on Opus 5.5 and Sonnet 5.5: papers since
