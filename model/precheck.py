@@ -9,7 +9,11 @@
      merged or told apart by hand.
   3. A fraction above 1 (warning): a metric labelled as a fraction (of a peak, of a reference) whose values exceed 1
      is not bounded; it is read as is, and the label should say so.
-  4. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
+  4. Memory (blocking): the fit's peak memory, estimated from the last measured peak of each axis
+     (model/memory-peaks.json) scaled by the rows and draws it will hold now, summed when the two axes run at the same
+     time, must stay under 90 % of the container's limit (cgroup memory.max); otherwise the full fit is not started —
+     a fit killed for memory after 45 minutes loses them all.
+  5. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
      three minutes; a chain left in another region shows there as R̂ far above 1. Above SMOKE_RHAT the full fit is
      not started.
 
@@ -23,6 +27,8 @@ import lqm
 
 SMOKE_RHAT = 1.5
 DUP_REL = 0.01
+MEMORY_PEAKS = os.path.join(HERE, "memory-peaks.json")
+MEMORY_SHARE = 0.9
 
 
 def rows(path=os.path.join(ROOT, "raw-data.csv")):
@@ -95,6 +101,37 @@ def smoke(seed=11):
     return diag["rhat_max"], diag["worst_rhat"]
 
 
+def memory_limit():
+    try:
+        v = open("/sys/fs/cgroup/memory.max").read().strip()
+        return None if v == "max" else int(v)
+    except OSError:
+        return None
+
+
+def memory_check():
+    """(estimated peak in bytes, limit in bytes, detail) of the next fit; None when no peak was measured yet."""
+    import json
+    from catalog import MODEL_ORDER
+    try:
+        peaks = json.load(open(MEMORY_PEAKS))
+    except (OSError, ValueError):
+        return None
+    est = {}
+    for axis, field in (("cost", "cost_usd"), ("quality", "score")):
+        if axis not in peaks:
+            continue
+        groups = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field=field)[0]
+        n = sum(len(g["rows"]) for g in groups.values())
+        st = lqm.SAMPLER[axis]
+        draws = st["chains"] * (st["warmup"] + st["samples"])
+        m = peaks[axis]
+        est[axis] = m["peak_bytes"] * (n / m["rows"]) * (draws / m["draws"])
+    parallel = (os.cpu_count() or 1) >= sum(lqm.SAMPLER[a]["chains"] for a in ("cost", "quality"))
+    need = sum(est.values()) if parallel else max(est.values(), default=0)
+    return need, memory_limit(), dict(est, parallel=parallel)
+
+
 def main(run_smoke=False):
     data = rows()
     errors, twins = label_errors(data), twin_metrics(data)
@@ -106,6 +143,18 @@ def main(run_smoke=False):
         print("?? fraction above 1:", f)
     if errors:
         return 1
+    mc = memory_check()
+    if mc is None:
+        print("?? memory: no measured peak yet (model/memory-peaks.json): the fit starts unchecked")
+    else:
+        need, limit, detail = mc
+        axes = ", ".join(f"{a} {v / 2**30:.1f} GB" for a, v in detail.items() if a != "parallel")
+        print(f"memory: estimated peak {need / 2**30:.1f} GB ({axes}; axes {'together' if detail['parallel'] else 'in turn'})"
+              + (f", limit {limit / 2**30:.1f} GB" if limit else ""))
+        if limit and need > MEMORY_SHARE * limit:
+            print(f"!! the fit would exceed {MEMORY_SHARE:.0%} of the container's memory: not started "
+                  "(raise the limit, or run the axes in turn)")
+            return 1
     if run_smoke:
         rhat, worst = smoke()
         print(f"smoke fit (quality, 4 × 500 + 500): R̂ max {rhat} · worst {worst[:4]}")

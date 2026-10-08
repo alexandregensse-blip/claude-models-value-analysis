@@ -12,7 +12,7 @@ An axis whose model data (the rows it sees, after preparation) and model code ar
 whose cached fit converged, is not refitted: adding a quality-only source does not redo the cost axis. `--all` refits
 both axes regardless. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
 same runs under two metrics are reported; a 3-minute smoke fit of the quality axis must reach R̂ ≤ 1.5); `--no-smoke`
-skips the smoke fit."""
+skips the smoke fit. With a core for every chain of both axes, the two axes run at the same time."""
 import hashlib, json, os, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -47,8 +47,36 @@ def axis_fingerprint(data):
     return h.hexdigest()
 
 
+AXES = (("cost", "cost_usd"), ("quality", "score"))
+
+
+def fit_axis(axis, field, old, refit_all=False):
+    """One axis: (values, diagnostics), or the cached ones when its model data and code are unchanged."""
+    t = time.time()
+    groups, report, republished = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field=field)
+    afp = axis_fingerprint(lqm.stan_data(groups, axis)[0])
+    od = old.get("diagnostics", {}).get(axis, {})
+    if not refit_all and od.get("data_fingerprint") == afp and od.get("converged") and axis in old:
+        print(f"{axis}: unchanged since the cached fit, kept", flush=True)
+        return old[axis], od
+    post, maps = lqm.fit(groups, axis, seed=SEED, log=lambda m: print(f"{axis}: {m}", flush=True))
+    S, diag = lqm.summarise(post, maps, groups, lqm.stan_data(groups, axis)[0], seed=SEED)
+    values = {c: [round(v["centre"], 5), round(v["half"], 5), v["publishers"], [round(x, 5) for x in v["new_source"]],
+                  round(v["mcse"], 6)] + ([[round(x, 5) for x in v["theta"]]] if "theta" in v else [])
+              for c, v in sorted(S.items())}
+    diag.update(groups=len(groups), rows=sum(len(g["rows"]) for g in groups.values()), set_aside=dict(report),
+                republished=[list(p) for p in republished],
+                unpublished=sorted(c for c, v in S.items() if not v["published"]),
+                converged=lqm.converged(diag), seconds=round(time.time() - t), data_fingerprint=afp)
+    print(f"{axis}: {json.dumps(diag)}", flush=True)
+    return values, diag
+
+
 def main(refit_all=False, smoke=True):
-    import precheck
+    """Both axes, at the same time when the machine has a core for every chain of both (each axis is its own process,
+    so one stopped does not take the other down); one after the other otherwise. Each axis is written to the cache as
+    soon as it is done, so a run stopped later resumes from it."""
+    import precheck, subprocess, tempfile
     if precheck.main(run_smoke=smoke):                               # data errors, then a 3-minute smoke fit
         sys.exit("!! pre-fit checks failed (model/precheck.py): the fit is not started")
     out = dict(inputs=INPUTS, fingerprint=fingerprint(), seed=SEED, sampler=lqm.SAMPLER, diagnostics={})
@@ -56,33 +84,44 @@ def main(refit_all=False, smoke=True):
         old = json.load(open(FIT_CACHE))
     except (OSError, ValueError):
         old = {}
-    for axis, field in (("cost", "cost_usd"), ("quality", "score")):
-        t = time.time()
-        groups, report, republished = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field=field)
-        afp = axis_fingerprint(lqm.stan_data(groups, axis)[0])
-        od = old.get("diagnostics", {}).get(axis, {})
-        if not refit_all and od.get("data_fingerprint") == afp and od.get("converged") and axis in old:
-            out[axis], out["diagnostics"][axis] = old[axis], od
-            print(f"{axis}: unchanged since the cached fit, kept", flush=True)
-            continue
-        post, maps = lqm.fit(groups, axis, seed=SEED, log=lambda m: print(m, flush=True))
-        S, diag = lqm.summarise(post, maps, groups, lqm.stan_data(groups, axis)[0], seed=SEED)
-        out[axis] = {c: [round(v["centre"], 5), round(v["half"], 5), v["publishers"], [round(x, 5) for x in v["new_source"]],
-                         round(v["mcse"], 6)] + ([[round(x, 5) for x in v["theta"]]] if "theta" in v else [])
-                     for c, v in sorted(S.items())}
-        diag.update(groups=len(groups), rows=sum(len(g["rows"]) for g in groups.values()), set_aside=dict(report),
-                    republished=[list(p) for p in republished],
-                    unpublished=sorted(c for c, v in S.items() if not v["published"]),
-                    converged=lqm.converged(diag), seconds=round(time.time() - t), data_fingerprint=afp)
-        out["diagnostics"][axis] = diag
-        print(f"{axis}: {json.dumps(diag)}", flush=True)
-        json.dump(dict(old, **{k: v for k, v in out.items() if k != "diagnostics"},  # each axis kept as soon as it is
-                       diagnostics=dict(old.get("diagnostics", {}), **out["diagnostics"]),    # done: a run stopped
-                       fingerprint="partial"),                    # later resumes from it; the site refuses it meanwhile
+
+    def keep(axis, values, diag):
+        out[axis], out["diagnostics"][axis] = values, diag
+        json.dump(dict(old, **{k: v for k, v in out.items() if k not in ("diagnostics", "fingerprint")},
+                       diagnostics=dict(old.get("diagnostics", {}), **out["diagnostics"]),
+                       fingerprint="partial"),                    # the site refuses a partial cache
                   open(FIT_CACHE, "w"), indent=1, sort_keys=True)
-    json.dump(out, open(FIT_CACHE, "w"), indent=1, sort_keys=True)
-    print(f"wrote {FIT_CACHE}")
+
+    parallel = (os.cpu_count() or 1) >= sum(lqm.SAMPLER[a]["chains"] for a, _ in AXES)
+    if parallel:
+        tmp = tempfile.mkdtemp(prefix="lqm-fit-")
+        procs = {a: subprocess.Popen([sys.executable, __file__, "--axis", a, os.path.join(tmp, a + ".json")]
+                                     + (["--all"] if refit_all else [])) for a, _ in AXES}
+        for a, p in procs.items():
+            p.wait()
+        for a, _ in AXES:                                            # an axis whose process failed stays as it was
+            try:
+                keep(a, *json.load(open(os.path.join(tmp, a + ".json"))))
+            except (OSError, ValueError):
+                print(f"!! {a}: its fit did not finish (exit {procs[a].returncode})", flush=True)
+    else:
+        for a, f in AXES:
+            keep(a, *fit_axis(a, f, old, refit_all))
+    if all(a in out for a, _ in AXES):
+        json.dump(out, open(FIT_CACHE, "w"), indent=1, sort_keys=True)
+        print(f"wrote {FIT_CACHE}")
+    else:
+        sys.exit("!! the fit is incomplete: model/fit-cache.json holds the finished axes only (partial)")
 
 
 if __name__ == "__main__":
-    main(refit_all="--all" in sys.argv[1:], smoke="--no-smoke" not in sys.argv[1:])
+    args = sys.argv[1:]
+    if "--axis" in args:                                             # one axis, in a process of its own (main())
+        a = args[args.index("--axis") + 1]; dest = args[args.index("--axis") + 2]
+        try:
+            old = json.load(open(FIT_CACHE))
+        except (OSError, ValueError):
+            old = {}
+        json.dump(fit_axis(a, dict(AXES)[a], old, "--all" in args), open(dest, "w"))
+    else:
+        main(refit_all="--all" in args, smoke="--no-smoke" not in args)
