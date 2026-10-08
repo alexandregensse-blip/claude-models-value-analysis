@@ -5,6 +5,72 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the twenty-second pass, and faster fits that survive a stop
+
+Both axes converged: quality R̂ 1.0038, bulk ESS 1155, no divergence, in one batch; cost R̂ 1.0080, ESS 658/526, no
+divergence, after one continuation of 1,500 draws per chain (its tail ESS was 357 at first). The whole fit took 24
+minutes. **The picks do not move**: grunt work Haiku 5.5 low, everyday tasks Haiku 5.5 high, advanced reasoning and
+cutting-edge thinking Opus 5.5 xHigh; the crown stays Haiku 5.5 medium, 4.7× cheaper than the price trend (5.5×
+before; λ 0.282 → 0.284). The frontier keeps its eleven couples. Haiku 5.5 comes out about 13 % dearer against every
+other model — the multiples of Haiku 5.5 low fall accordingly (Opus 5.5 xHigh 122× → 107×, Sonnet 5.5 high 27× → 24×),
+its own ladder unchanged (medium 2.07× → 1.98× low) — from the costs measured on it in these two passes (Vals AI at
+max effort, the Qiita study), and loses 0.1–0.7 point of expected score (max 63.5 → 62.8 %, high 57.3 → 56.8 %); the
+other models move by 0.2 point at most, Haiku 4.5 by +0.5.
+
+The fit itself changed (`model/lqm.py`, `model/fit.py`; METHODOLOGY § Samplers and § Stored draws):
+- **Quality is drawn in batches** of 4 chains × (1,000 warm-up + 3,000 draws); while the criteria are not met a new
+  batch of independent chains is pooled with the others, up to four (the 48,000 draws every fit drew before). The
+  effective draws per draw ranged from 1 % to 15 % across the fits of 30 Sep – 8 Oct with the same model, and a check
+  on the data of 30 Sep and of 8 Oct (two seeds each) traced it to the data: the scale s_τ of the publisher × couple
+  spreads has a long upper tail when the data say little about it (95th percentile 1.25, 168–169 effective draws out
+  of 12,000), which the data added since have shortened (0.38; 975–1,336). On the data published as v2026.10.08 the
+  new sampler gives the same picks, crown and frontier, θ within 0.02 (intervals ±0.5–1), in 391 s instead of 1,658 s.
+- **Continuations are counted in draws**, not seconds (1,500 per slice, up to 4,500 per chain on the cost axis): a
+  loaded machine had skipped the cost continuation on 8 Oct and forced the whole axis to be refitted.
+- **Draws are stored on disk as they are drawn** (`.stan/runs`) and the fit resumes from them after a stop: processes
+  killed by SIGKILL, as the memory limit does, kept their draws up to the stop (identical to an uninterrupted run with
+  the same seed), continued the chains on CmdStan to the planned length, and a stop during the summaries resampled
+  nothing. An axis whose sampling inputs are unchanged is summarised again from its stored draws.
+- **The summaries read the draws block by block**: the quality fit peaked at 5.6 GB on 8 Oct and was killed twice at
+  4 GiB; the two fits run with the new code stayed under 3.1 GB as far as they were watched.
+
+## Twenty-second pass: Haiku 5.5, new sources
+
+Four Sonnet agents, 8 Oct 2026, each on one kind of source not covered by the two morning passes: companies that
+publish their own evaluations (coding tools, evaluation platforms, enterprise users), independent leaderboards,
+newsletters and video, issue trackers and Anthropic's updated pages. Two sources survive verification:
+- *ImperialDragonHarness* (GitHub, PR #1253): Haiku 5.5 medium beside Opus 5.5 low and medium and Sonnet 5.5 medium on
+  the same ten project tickets, scored out of 30 by three non-Claude judges. Scores only: the Haiku 5.5 arm counts
+  every attempt in its cost, the others only the delivered result, and no per-attempt cost lets them be put on one
+  footing.
+- *EQ-Bench creative writing, long form* (its results repository): Haiku 4.5, Opus 4.5, 4.6 and 4.7, Sonnet 4.6,
+  judged by Claude Sonnet 4.6; no Haiku 5.5 yet.
+Most boards and newsletters have not published on Haiku 5.5 yet (BFCL, SimpleBench, Kagi, GSO, ProLLM, Context Arena,
+lechmazur's boards, Zvi, Interconnects, METR, Epoch); others restate Anthropic's figures (AINews, The Decoder,
+YouTube reviews). **286 sources, 886 benchmarks, 5377 measurements** after both passes (281, 871, 5319 before the
+twenty-first). Haiku 5.5 rests on 168 measurements in 94 benchmarks from 21 sources.
+
+## Twenty-first pass: Haiku 5.5 a day after its release
+
+Six Sonnet agents, 8 Oct 2026, a few hours after the twentieth pass: the held boards again, papers and datasets, result
+files on code hosts, English and non-English posts; each finding re-derived from the saved evidence by verifier agents.
+- *Vals AI* added Haiku 5.5 to its index and eight of its boards held here, plus Finance Agent (new group, eight
+  Claude couples). The page's payload gives the effort (`compute_effort: max`), which the first agents had missed.
+  Two of the held boards had been re-run (Terminal-Bench 4.0, Code Migration): Opus 5.5 and Sonnet 5.5 take the new
+  scores and costs, and the two Sonnet 5.5 costs, estimated this morning at the 7 Oct price, are replaced by Vals's
+  republished ones.
+- *OpenRouter* added Haiku 5.5 to GPQA Diamond and tau2-bench (airline).
+- *LiveBench*: the scores held came from older snapshots and formulas that the current table does not reproduce; the
+  whole group now reads one snapshot (commit 85d7d7e) with one formula, the mean of its 23 tasks, and Haiku 5.5's two
+  rows get their first score.
+- *driftproof* Report 014: Haiku 5.5 against Haiku 4.5 on three agent skills, with and without the skill (six groups).
+- *Qiita* (Takuya__, second study): Haiku 5.5, Sonnet 5.5 and Haiku 4.5 on code-reading questions, twelve coding
+  tasks, Banking77 classification across efforts (Haiku 5.5 medium 60.4 %, below Haiku 4.5's 76.0 %, kept as
+  measured) and a prompt variant; costs from the session tokens at list price, with the 7 Oct cache price.
+- *token-marxing* (GitHub): Haiku 4.5, Haiku 5.5 and Opus 5.5 at high effort on one agentic training task, validation
+  bits per byte (lower is better, negated).
+Not data: single-Claude papers (arXiv 2610.09458, 2610.10409), a removed Reddit post, restatements of the launch.
+
 ## The fit after the twentieth pass
 
 Both axes converged: quality R̂ 1.0011, bulk ESS 5284, no divergence; cost R̂ 1.0093, bulk ESS 425, tail 459, no
