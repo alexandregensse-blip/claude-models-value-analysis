@@ -377,6 +377,10 @@ RUNS = os.path.join(STAN_DIR, "runs")                                # each axis
 SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, batches=4),
            "cost": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
                         max_treedepth=10, extend=1500, extend_max=4500)}
+# The two axes run one after the other: on this shared 8-core machine the quality axis took 1,241 s beside the cost
+# axis and 344 s alone (8 Oct 2026) — the chains of both compete for the same cores, so running them together saves
+# no time and adds their memory.
+PARALLEL_AXES = False
 RESTART_RHAT = 1.05                  # above this, a chain is in another region: continuing it would not help
 
 

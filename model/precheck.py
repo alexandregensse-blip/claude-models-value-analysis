@@ -127,7 +127,7 @@ def memory_check():
         draws = st["chains"] * (st["warmup"] + st["samples"])
         m = peaks[axis]
         est[axis] = m["peak_bytes"] * (n / m["rows"]) * (draws / m["draws"])
-    parallel = (os.cpu_count() or 1) >= sum(lqm.SAMPLER[a]["chains"] for a in ("cost", "quality"))
+    parallel = lqm.PARALLEL_AXES and (os.cpu_count() or 1) >= sum(lqm.SAMPLER[a]["chains"] for a in ("cost", "quality"))
     need = sum(est.values()) if parallel else max(est.values(), default=0)
     return need, memory_limit(), dict(est, parallel=parallel)
 

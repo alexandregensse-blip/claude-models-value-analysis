@@ -1,9 +1,16 @@
 {
  "quality": {
-  "rows": 3456,
-  "draws": 52000,
-  "peak_bytes": 5593767936,
-  "measured": "2026-10-08: 5.59 GB peak of the container (cgroup memory.peak) for the whole run at 8 GiB, sampling done, during the summaries; OOM-killed twice at 4 GiB before",
-  "store": "nutpie zarr on disk"
+  "rows": 3484,
+  "draws": 16000,
+  "peak_bytes": 2869227520,
+  "measured": "2026-10-08: whole quality fit alone (compilation, one nutpie batch of 4 x (1000 + 3000), summaries), the container's anon memory sampled every 0.2 s; it includes ~0.36 GB of other processes",
+  "store": "draws on disk, memory-mapped (lqm.RunStore)"
+ },
+ "cost": {
+  "rows": 2908,
+  "draws": 20000,
+  "peak_bytes": 1076400128,
+  "measured": "2026-10-08: cost summaries from the stored draws (4 x 6000), container anon memory sampled every 0.2 s, ~0.37 GB of other processes included; sampling adds CmdStan's CSV read in blocks of 200 draws",
+  "store": "draws on disk, memory-mapped (lqm.RunStore)"
  }
 }

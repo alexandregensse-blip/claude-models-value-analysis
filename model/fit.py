@@ -14,7 +14,7 @@ both axes regardless. Each axis' draws stay on disk (.stan/runs, lqm.RunStore) u
 stopped part-way (out of memory, container restarted) resumes from them, and a change to the code that reads the draws
 is summarised again without sampling. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
 same runs under two metrics are reported; a 3-minute smoke fit of the quality axis must reach R̂ ≤ 1.5); `--no-smoke`
-skips the smoke fit. With a core for every chain of both axes, the two axes run at the same time."""
+skips the smoke fit. The two axes run one after the other (lqm.PARALLEL_AXES)."""
 import hashlib, json, os, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -75,9 +75,9 @@ def fit_axis(axis, field, old, refit_all=False):
 
 
 def main(refit_all=False, smoke=True):
-    """Both axes, at the same time when the machine has a core for every chain of both (each axis is its own process,
-    so one stopped does not take the other down); one after the other otherwise. Each axis is written to the cache as
-    soon as it is done, so a run stopped later resumes from it."""
+    """Both axes, one after the other — or at the same time, each in a process of its own, when lqm.PARALLEL_AXES and
+    the machine has a core for every chain of both. Each axis is written to the cache as soon as it is done, so a run
+    stopped later resumes from it."""
     import precheck, subprocess, tempfile
     if precheck.main(run_smoke=smoke):                               # data errors, then a 3-minute smoke fit
         sys.exit("!! pre-fit checks failed (model/precheck.py): the fit is not started")
@@ -94,7 +94,7 @@ def main(refit_all=False, smoke=True):
                        fingerprint="partial"),                    # the site refuses a partial cache
                   open(FIT_CACHE, "w"), indent=1, sort_keys=True)
 
-    parallel = (os.cpu_count() or 1) >= sum(lqm.SAMPLER[a]["chains"] for a, _ in AXES)
+    parallel = lqm.PARALLEL_AXES and (os.cpu_count() or 1) >= sum(lqm.SAMPLER[a]["chains"] for a, _ in AXES)
     if parallel:
         tmp = tempfile.mkdtemp(prefix="lqm-fit-")
         procs = {a: subprocess.Popen([sys.executable, __file__, "--axis", a, os.path.join(tmp, a + ".json")]
