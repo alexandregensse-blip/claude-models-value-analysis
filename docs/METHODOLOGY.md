@@ -215,11 +215,26 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
 - **Samplers.** Quality: nutpie (Seyboldt et al.), whose adaptation of the mass matrix needs about four times fewer
-  steps here, 4 chains × (1,000 warm-up + 12,000 draws), target acceptance 0.9 (0.85 until 30 Sep 2026, when it left 4 divergences). Cost: CmdStan, 4 chains × (500
-  warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the previous fit (1,000
-  warm-up iterations when there is none). A chain left in another region restarts its axis on CmdStan from the
-  previous fit's draws; too few effective draws continue the same chains, adding draws rather than starting again,
-  within a budget of 10 minutes per axis; an axis whose data and model are unchanged is not refitted.
+  steps here, batches of 4 chains × (1,000 warm-up + 3,000 draws), target acceptance 0.9 (0.85 until 30 Sep 2026, when
+  it left 4 divergences); while the criteria are not met, a new batch of independent chains is drawn and pooled with the
+  others, up to four batches (4 × 12,000 draws in one batch until 8 Oct 2026). The effective draws per draw varied from
+  1 % to 15 % across the fits of 30 Sep – 8 Oct with the same model: the scale s_τ of the publisher × couple spreads
+  has a long upper tail when the data say little about it, and the sampler crosses it slowly. The data added since
+  30 Sep shortened that tail (its 95th percentile 1.25 → 0.38; the jump in effective draws came with the eighteenth
+  pass) and the effective draws rose eightfold (check of 8 Oct, data of 30 Sep against data of 8 Oct, two seeds each:
+  168–169 against 975–1,336 effective draws out of 12,000). Cost:
+  CmdStan, 4 chains × (500 warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the
+  previous fit (1,000 warm-up iterations when there is none); too few effective draws continue the same chains by
+  slices of 1,500 draws, up to 4,500 more. Both limits are counted in draws, not in seconds (a 10-minute budget until
+  8 Oct 2026), so that a loaded machine does not change the fit. A chain left in another region restarts its axis on
+  CmdStan from the previous fit's draws.
+- **Stored draws.** Each axis' draws are written to disk as they are drawn (`.stan/runs`, outside git) and kept until
+  that axis' sampling inputs change — the Stan program, the axis' data, the seed, the sampler settings and the code
+  that samples. A fit stopped part-way, by the machine's memory limit or a restart, resumes from them: each chain
+  continues from its last stored draw with its adapted step size and metric, on CmdStan, as a continuation does. An
+  axis whose sampling inputs are unchanged is summarised again from its stored draws without sampling; an axis whose
+  data and model are unchanged is not refitted. The draws are read from disk block by block, so that summarising
+  them needs memory for one block, not for the whole run.
 - **Where it runs.** The fit runs on the maintainer's machine (`model/fit.py`) and only its results are published
   (`model/fit-cache.json`, with a fingerprint of the data, the model and its settings); building the page does not need
   Stan. The fitting environment is pinned in `model/requirements-fit.txt`.
