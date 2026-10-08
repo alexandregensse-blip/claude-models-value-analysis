@@ -4109,6 +4109,71 @@
    "label": "pelican-bicycle-sigma.vercel.app — Haiku 5.5 effort sweep (SVG pelican-on-bicycle)",
    "type": "sweep",
    "config": "independent site, one Claude model (Haiku 5.5) at five efforts = five couples per RULES.md; cost is the page's own $ figure computed from a usage panel (not a billed invoice) -> list-price-cost; page's own caveat: \"Usage numbers are transcribed from each run's usage panel\" (manual transcription, not raw API JSON); read 2026-10-08 ✓"
+  },
+  "valsfinance": {
+   "label": "Vals AI Finance Agent v2",
+   "type": "xmodel",
+   "config": "vals.ai/benchmarks/vals_index page payload, tasks.finance_agent block, compute_effort=max for all rows present; read 2026-10-08; read 2026-10-08 ✓"
+  },
+  "tokenmarxing-heavy": {
+   "label": "token-marxing heavy autoresearch task (toy CPU LM training, best val_bpb)",
+   "type": "xmodel",
+   "config": "yiheinchai/token-marxing, commit 3c895b32c89a7e9c0edb1c87e1603f8a50254251, labour=heavy, 'solo' arms only (cheap/cheap_h55/solo: one model does the whole run), effort=high (quoted from each run's summary.json) for all three arms; read 2026-10-08 ✓"
+  },
+  "driftproof014-code-review-and-quality-noskill": {
+   "label": "driftproofhq Report 014 — code-review-and-quality (no skill), Haiku 5.5 vs Haiku 4.5",
+   "type": "xmodel",
+   "config": "driftproofhq.com/reports/014/, 3 runs averaged, grader Claude Opus 5 (claude-judge); 'code-review-and-quality' skill, baseline mode; read 2026-10-08 ✓"
+  },
+  "driftproof014-code-review-and-quality-skill": {
+   "label": "driftproofhq Report 014 — code-review-and-quality (with skill), Haiku 5.5 vs Haiku 4.5",
+   "type": "xmodel",
+   "config": "driftproofhq.com/reports/014/, 3 runs averaged, grader Claude Opus 5 (claude-judge); 'code-review-and-quality' skill, with_skill mode; read 2026-10-08 ✓"
+  },
+  "driftproof014-git-workflow-and-versioning-noskill": {
+   "label": "driftproofhq Report 014 — git-workflow-and-versioning (no skill), Haiku 5.5 vs Haiku 4.5",
+   "type": "xmodel",
+   "config": "driftproofhq.com/reports/014/, 3 runs averaged, grader Claude Opus 5 (claude-judge); 'git-workflow-and-versioning' skill, baseline mode; read 2026-10-08 ✓"
+  },
+  "driftproof014-git-workflow-and-versioning-skill": {
+   "label": "driftproofhq Report 014 — git-workflow-and-versioning (with skill), Haiku 5.5 vs Haiku 4.5",
+   "type": "xmodel",
+   "config": "driftproofhq.com/reports/014/, 3 runs averaged, grader Claude Opus 5 (claude-judge); 'git-workflow-and-versioning' skill, with_skill mode; read 2026-10-08 ✓"
+  },
+  "driftproof014-documentation-and-adrs-noskill": {
+   "label": "driftproofhq Report 014 — documentation-and-adrs (no skill), Haiku 5.5 vs Haiku 4.5",
+   "type": "xmodel",
+   "config": "driftproofhq.com/reports/014/, 3 runs averaged, grader Claude Opus 5 (claude-judge); 'documentation-and-adrs' skill, baseline mode; read 2026-10-08 ✓"
+  },
+  "driftproof014-documentation-and-adrs-skill": {
+   "label": "driftproofhq Report 014 — documentation-and-adrs (with skill), Haiku 5.5 vs Haiku 4.5",
+   "type": "xmodel",
+   "config": "driftproofhq.com/reports/014/, 3 runs averaged, grader Claude Opus 5 (claude-judge); 'documentation-and-adrs' skill, with_skill mode; read 2026-10-08 ✓"
+  },
+  "qiita-takuya55-codeqa": {
+   "label": "Takuya__ (qiita, item 2a513efa) code-reading Q&A, sqlite-utils 3.38, 9 questions x2 runs",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.293 claude -p stream-json, Read/Grep/Glob/Bash only, cost = measured tokens x official price table; read 2026-10-08 ✓"
+  },
+  "qiita-takuya55-orchestration": {
+   "label": "Takuya__ (qiita, item 2a513efa) Sonnet-lead orchestration, 9 Q x3 runs, pure single-model baselines only",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.293, Explore subagent delegation; only the two PURE single-model runs are rows (mixed Sonnet-lead+Haiku-Explore run excluded: not a model x effort couple); read 2026-10-08 ✓"
+  },
+  "qiita-takuya55-coding": {
+   "label": "Takuya__ (qiita, item 2a513efa) 12 sqlite-utils bug-fix/feature tasks (incl 4 real upstream issues), x2 runs, full test suite",
+   "type": "xmodel",
+   "config": "Claude Code 2.1.293, Read/Edit/Write/Grep/Glob/Bash, pass = all hidden+existing tests (~1000) green; read 2026-10-08 ✓"
+  },
+  "qiita-takuya55-banking77": {
+   "label": "Takuya__ (qiita, item 2a513efa) Banking77 intent classification, 154 msgs/77 labels, no tools, single API call",
+   "type": "xmodel",
+   "config": "no-tools system-prompt label list, single API call per message, cost computed from measured tokens x price table per 1,000 msgs; read 2026-10-08 ✓"
+  },
+  "qiita-takuya55-banking77-prompttrick": {
+   "label": "Takuya__ (qiita, item 2a513efa) Banking77 intent classification + \"narrow candidates first\" prompt addition",
+   "type": "xmodel",
+   "config": "same task as qiita-takuya55-banking77 but with an added system-prompt instruction to narrow candidates first: different configuration; read 2026-10-08 ✓"
   }
  },
  "merge": {
