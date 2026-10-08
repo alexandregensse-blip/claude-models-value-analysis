@@ -10,7 +10,9 @@ converged = false, and the site refuses it; so does it a fit whose inputs have c
 
 An axis whose model data (the rows it sees, after preparation) and model code are unchanged since the cached fit, and
 whose cached fit converged, is not refitted: adding a quality-only source does not redo the cost axis. `--all` refits
-both axes regardless. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
+both axes regardless. Each axis' draws stay on disk (.stan/runs, lqm.RunStore) until its sampling inputs change: a fit
+stopped part-way (out of memory, container restarted) resumes from them, and a change to the code that reads the draws
+is summarised again without sampling. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
 same runs under two metrics are reported; a 3-minute smoke fit of the quality axis must reach R̂ ≤ 1.5); `--no-smoke`
 skips the smoke fit. With a core for every chain of both axes, the two axes run at the same time."""
 import hashlib, json, os, sys, time
@@ -59,7 +61,7 @@ def fit_axis(axis, field, old, refit_all=False):
     if not refit_all and od.get("data_fingerprint") == afp and od.get("converged") and axis in old:
         print(f"{axis}: unchanged since the cached fit, kept", flush=True)
         return old[axis], od
-    post, maps = lqm.fit(groups, axis, seed=SEED, log=lambda m: print(f"{axis}: {m}", flush=True))
+    post, maps = lqm.fit(groups, axis, seed=SEED, keep=True, log=lambda m: print(m, flush=True))
     S, diag = lqm.summarise(post, maps, groups, lqm.stan_data(groups, axis)[0], seed=SEED)
     values = {c: [round(v["centre"], 5), round(v["half"], 5), v["publishers"], [round(x, 5) for x in v["new_source"]],
                   round(v["mcse"], 6)] + ([[round(x, 5) for x in v["theta"]]] if "theta" in v else [])

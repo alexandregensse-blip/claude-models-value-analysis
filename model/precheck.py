@@ -96,7 +96,7 @@ def smoke(seed=11):
     from catalog import MODEL_ORDER
     groups, _, _ = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field="score")
     data, _ = lqm.stan_data(groups, "quality")
-    post = lqm._sample(data, "quality", dict(lqm.SAMPLER["quality"], warmup=500, samples=500), seed)
+    post = lqm.sample_once(data, "quality", dict(lqm.SAMPLER["quality"], warmup=500, samples=500), seed)
     diag, _ = lqm.diagnostics(post)
     return diag["rhat_max"], diag["worst_rhat"]
 
