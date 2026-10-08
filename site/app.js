@@ -1,6 +1,6 @@
 const MODELS = __MODELS__;   // data/catalog/models.json: label, colour variable, task-size flag, in legend order
 const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8"];              // older models: hidden unless the reader turns them on
-const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-4.5"];  // the latest model of each family: the price trend's couples
+const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-5.5"];  // the latest model of each family: the price trend's couples
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};

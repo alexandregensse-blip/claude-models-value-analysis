@@ -17,7 +17,7 @@ TITLE = "Fable vs Opus vs Sonnet vs Haiku: Claude models head-to-head"
 DESCRIPTION = ("Fable vs Opus vs Sonnet vs Haiku, effort by effort: what each Claude model costs against another, "
                "and the cheapest setting that matches its quality.")
 LEDE_PAIRS = ["fable-5.1|opus-5.5", "opus-5.5|sonnet-5.5"]              # the two findings stated in the lede
-CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-4.5"]           # the latest model of each family
+CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-5.5"]           # the latest model of each family
 SUCCESSION = [("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
 REACH = 0.84
 LEGACY = ["opus-4.7", "sonnet-4.6", "opus-4.8"]                                 # hidden on the main page (site/app.js)

@@ -5,6 +5,61 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the twentieth pass
+
+Both axes converged: quality R̂ 1.0011, bulk ESS 5284, no divergence; cost R̂ 1.0093, bulk ESS 425, tail 459, no
+divergence. The cost axis passes the threshold (400) narrowly where it had 1289 on 5 Oct, so the page's Monte Carlo
+check reports about thirty cost cells whose error exceeds half the last digit shown. Haiku 5.5 replaces Haiku 4.5 among
+the latest model of each family, whose couples make the price trend: its five efforts, cheap for their quality, make
+the trend steeper (λ 0.175 with Haiku 4.5 kept, 0.282 with Haiku 5.5). **Picks**: grunt work Haiku 5.5 low (Sonnet 5.5
+low before), everyday tasks Haiku 5.5 high (Sonnet 5.5 medium), advanced reasoning Opus 5.5 xHigh (Opus 5.5 high),
+cutting-edge thinking Opus 5.5 xHigh (unchanged). The crown goes to Haiku 5.5 medium, 5.5× cheaper than the price trend
+(Sonnet 5.5 high, 2.9×). The advanced pick is a tie in all but name: Opus 5.5 xHigh leads Opus 5.5 high by 1.6 % of
+value and Sonnet 5.5 xHigh by 9 %, far inside their uncertainty; with Haiku 4.5 kept in the trend it would have been
+Sonnet 5.5 xHigh. Left as the rule gives it, the two upper tiers show the same couple. Haiku 4.5 and Sonnet 5.5 low and
+medium leave the frontier, beaten by Haiku 5.5. Costs are now multiples of Haiku 5.5 low (Haiku 4.5 before): Opus 5.5
+max costs 305× it. Expected scores at the top move down by under a point as the panel changes (Opus 5.5 max 75.2 →
+74.5 %, Sonnet 5.5 max 73.5 → 72.7 %, Fable 5.1 max 70.5 → 69.7 %, Haiku 4.5 39.5 → 39.3 %); Haiku 5.5 runs from 48.1 %
+(low) to 63.5 % (max). The lowest tier target rises to 49.4 % with Haiku 5.5 low, so the compressed lower part of the
+quality axis now starts among the plotted couples and the price trend bends there on the chart.
+
+The quality fit was killed by the container's 4 GiB memory limit twice while summarising its draws; it peaked at
+5.6 GB under 8 GiB. The fit now streams nutpie's draws to disk, keeps each axis as soon as it is done, and checks its
+expected peak memory against the container's limit before starting (`model/precheck.py`, `model/memory-peaks.json`).
+
+## Sonnet 5.5 costs on the 7 Oct price
+
+On 7 Oct 2026, with Haiku 5.5, Anthropic halved Sonnet 5.5's cache reads ($0.20 → $0.10 per million tokens); the other
+prices did not move. The data now gives every Sonnet 5.5 cost at today's price. Of 405 Sonnet 5.5 cost rows, 46 are
+replaced by the source's own republished figure, 53 recomputed exactly from the token counts it prints, 46 used no
+cache (unchanged) and 32 were already measured at the new price. The other 228 are estimated: a source that runs agent
+loops reads mostly from cache, a one-shot API call barely at all, so each row takes the median ratio new/old of the
+sources of its kind whose exact ratio is known — Claude Code-style loops ×0.823 (spread 0.123, 11 sources), one-shot
+runs in Claude Code ×0.998, plain API calls ×1.000, mixed or unknown harnesses ×0.907 (0.157). The spread of its kind
+enters the row's cost precision (`data/precision/repricing.json`), and every changed row keeps its former cost in the
+confound field (`cache-cut-2026-10-07:<kind>…;was=<old>`). The repricing alone changes no pick.
+
+## Twentieth pass: Claude Haiku 5.5
+
+Four search agents, 8 Oct 2026, the day after the release of Haiku 5.5, the first Haiku with effort levels (low to max;
+Haiku 4.5 keeps its single operating point, `solo`). Every Haiku 5.5 number had to show the model ID and the effort in
+its source; a source that ran the default effort is recorded as `default`, never guessed as medium, and thinking turned
+off as `nothink`. Verifier agents then re-derived each number from the saved evidence (four reports, corrections listed
+in their notes: a CursorBench sweep read as two efforts of five, the FrontierCode score field, RuneBench recomputed in
+the right configuration, the effort of two launch tables taken from the system card's own words). **277 → 281 sources, 810 → 871
+benchmarks, 5013 → 5319 measurements.** Haiku 5.5 rests on 139 measurements in 70 benchmarks from 15 sources; Sonnet 5.5
+on 589 in 319 from 91 (517, 272, 90 before).
+
+- **Anthropic**: the launch page (FrontierCode, Chartography without tools, OSWorld 2.1, GDPval-AA 2.1, Humanity's
+  Last Exam without tools, Terminal-Bench 4.0 with its cache-price series) and 49 system-card tables and sweeps, Haiku 5.5 at its five efforts beside Sonnet 5.5, Opus 5.5 and Haiku 4.5.
+- **Boards that add Haiku 5.5 to a group already held**: Artificial Analysis Intelligence Index v4.3 (five efforts),
+  Cognition FrontierCode (both subsets), CursorBench 4.0 (five efforts), LiveBench (xhigh, max), FrontierSWE (max),
+  matsonj's Connections (thinking off), hex.tech's data bench.
+- **New**: Simon Willison's pelican sweep, pelican-bicycle-sigma (five efforts with token counts), two Qiita tests by
+  kai_kou (classification; reading checks across efforts), RuneBench, Plotly's data-analytics bench, AIBenchy.
+- Haiku 5.5's prices are tiered: above 100K prompt tokens every rate is five times higher. Costs a source computed
+  from tokens × the lower tier when its prompts may exceed 100K carry the flag `price-tier-unclear`.
+
 ## The fit after the nineteenth pass
 
 Both axes converged at the first attempt: quality R̂ 1.0033, bulk ESS 3004, no divergence (966 s); cost R̂ 1.0034, ESS
