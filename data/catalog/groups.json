@@ -3804,6 +3804,311 @@
    "label": "OpenAgents briefing-model factorial (treatment)",
    "type": "xmodel",
    "config": "Claude Code (coder-connect agent) · frozen historical reserve issue, treatment arm, Opus 5.5 vs Sonnet 5.5 × medium effort, n=4 reps each; score=pass-at-first/final-attempt%, cost=cumulative list-price USD; read 2026-10-05 ✓"
+  },
+  "h55launch-frontiercode": {
+   "label": "Haiku 5.5 launch page: FrontierCode 1.1 (Main) benchmark-grid table",
+   "type": "xmodel",
+   "config": "anthropic.com/claude-haiku-5-5 benchmarkGrid table, no per-effort chart for this benchmark on this page; read 2026-10-08 ✓"
+  },
+  "h55launch-chartography-notools": {
+   "label": "Haiku 5.5 launch page: Chartography (no tools), benchmark-grid table",
+   "type": "xmodel",
+   "config": "anthropic.com/claude-haiku-5-5 benchmarkGrid table, no per-effort chart for this benchmark on this page; read 2026-10-08 ✓"
+  },
+  "h55launch-osworld21": {
+   "label": "Haiku 5.5 launch page: OSWorld 2.1 (offline subset), accuracy vs cost",
+   "type": "sweep",
+   "config": "anthropic.com/claude-haiku-5-5 launch page, embedded chart CSV (exact, not digitised); read 2026-10-08 ✓"
+  },
+  "h55launch-gdpval-aa21": {
+   "label": "Haiku 5.5 launch page: GDPval-AA v2.1, accuracy vs cost",
+   "type": "sweep",
+   "config": "anthropic.com/claude-haiku-5-5 launch page, embedded chart CSV (exact, not digitised); read 2026-10-08 ✓"
+  },
+  "h55launch-hle-notools": {
+   "label": "Haiku 5.5 launch page: Humanity's Last Exam (no tools), accuracy vs cost",
+   "type": "sweep",
+   "config": "anthropic.com/claude-haiku-5-5 launch page, embedded chart CSV (exact, not digitised); read 2026-10-08 ✓"
+  },
+  "h55launch-tb40-cacheprice": {
+   "label": "Haiku 5.5 launch page: Terminal-Bench 4.0, cache-read price-cut illustration (7 Oct 2026)",
+   "type": "xmodel",
+   "config": "anthropic.com/claude-haiku-5-5 launch page, 'Further updates' section, embedded chart CSV (exact); read 2026-10-08 ✓"
+  },
+  "willison-haiku55": {
+   "label": "Simon Willison: pelican-riding-a-bicycle SVG test, own measured cost",
+   "type": "sweep",
+   "config": "llm CLI (llm-anthropic plugin), own measured spend (not list-price computation), n=1 per point, quality is ordinal/qualitative (no numeric score) -> cost-only; all 5 efforts same session per h4's gist; read 2026-10-08 ✓"
+  },
+  "shhlewt": {
+   "label": "Haiku 5.5 system card: Humanity's Last Exam (with tools) score+cost by effort, 5 efforts",
+   "type": "xmodel",
+   "config": "chart image, y-axis printed score labels per point; x-axis (cost, log scale) has printed tick labels ($0.01,$0.02,$0.03,$0.05,$0.07,$0.10,$0.20,$0.30,$0.50,$0.70,$1,$2) but no per-point numeric cost label, so cost is digitised from the marker pixel position (calibration in notes.md: x=1685.88+709.69*log10(cost), fit from the $0.01 and $1 ticks, cross-checked exact at $0.1); Haiku 4.5's single point's x could not be confidently isolated from the crowded pink-diamond legend swatch vs. data point in the time available, left without cost; read 2026-10-08 ✓"
+  },
+  "shwandr": {
+   "label": "Haiku 5.5 system card: WANDR soft F1 score+cost by effort, 5 efforts",
+   "type": "xmodel",
+   "config": "chart image, y-axis printed score labels per point; x-axis (cost, log scale) ticks $0.005,$0.01,$0.02,$0.05,$0.10,$0.20,$0.50,$1,$2,$5,$10,$20 give calibration x=1230.9+457.94*log10(cost) (fit from $0.005 and $20 ticks, cross-checked exact at $1 and $0.10); several Opus/Sonnet 'Med'/'High' markers were partly occluded by a crossing line of another series and their centroid is a merge of fragment pixels (lower confidence, noted in notes.md); Haiku 4.5's point not confidently isolated, left without cost; read 2026-10-08 ✓"
+  },
+  "shosworldstrict": {
+   "label": "Haiku 5.5 system card: OSWorld 2.1 (offline subset) strict pass rate by effort, 5 levels (digitised)",
+   "type": "sweep",
+   "config": "strict pass rate (full-credit, binary) vs effort; cost x-axis identical to the partial-credit OSWorld chart and to the launch-page OSWorld chart (same underlying runs); only the max point (37.1%) is independently stated in text (p.128), the other four come only from this chart; read 2026-10-08 ✓"
+  },
+  "shswebenchpro": {
+   "label": "Haiku 5.5 system card: SWE-Bench Pro, max effort",
+   "type": "xmodel",
+   "config": "Table 8.1.A row; Haiku 5.5 standard config = adaptive thinking at max effort, 5 trials; Haiku 4.5 has no entry in this row (dash); read 2026-10-08 ✓"
+  },
+  "shswebenchml": {
+   "label": "Haiku 5.5 system card: SWE-bench Multilingual, max effort",
+   "type": "xmodel",
+   "config": "Table 8.1.A row; read 2026-10-08 ✓"
+  },
+  "shswebenchmm": {
+   "label": "Haiku 5.5 system card: SWE-bench Multimodal, max effort",
+   "type": "xmodel",
+   "config": "Table 8.1.A row; read 2026-10-08 ✓"
+  },
+  "shfrontiercode81a": {
+   "label": "Haiku 5.5 system card: FrontierCode 1.1 (Main), Table 8.1.A",
+   "type": "xmodel",
+   "config": "DISCREPANCY-FIXED vs h3 report section 2.1: raw text order gives Haiku-5.5 TWO points (max, xhigh), not Haiku-4.5 one point; Haiku 4.5 is a dash (no data) in this row. Corroborated by h3's own section-2.2 image read (xhigh=45.8%, max=46.4% for Haiku 5.5 on the same benchmark's effort chart); read 2026-10-08 ✓"
+  },
+  "shhealthbenchpromax": {
+   "label": "Haiku 5.5 system card: HealthBench Professional (length-adjusted), max effort, xmodel",
+   "type": "xmodel",
+   "config": "Table 8.1.A row; same benchmark as the 8.11.3 per-effort sweep group below (shhealthbenchpro-eff), this is the cross-model max-effort snapshot; read 2026-10-08 ✓"
+  },
+  "shaabriefcasemax": {
+   "label": "Haiku 5.5 system card: AA-Briefcase v1.1, max effort, xmodel",
+   "type": "xmodel",
+   "config": "Table 8.1.A row, run independently by Artificial Analysis; read 2026-10-08 ✓"
+  },
+  "shaabriefcaseeff": {
+   "label": "Haiku 5.5 system card: AA-Briefcase v1.1, Haiku 5.5 at max vs default(medium) effort",
+   "type": "sweep",
+   "config": "text sentence (p.131), not a chart; only 2 points stated for Haiku 5.5 (max, default); read 2026-10-08 ✓"
+  },
+  "shtb40card": {
+   "label": "Haiku 5.5 system card: Terminal-Bench 4.0, safeguards-on, each model's own best-effort config",
+   "type": "xmodel",
+   "config": "Claude Code --bare mode; Haiku 5.5/Haiku 4.5 10 trials/task (660), Sonnet/Opus 5.5 5 trials/task (330); safeguard-flagged trials counted as failures; read 2026-10-08 ✓"
+  },
+  "shtbsci": {
+   "label": "Haiku 5.5 system card: Terminal-Bench-Science 0.1, safeguards-on, max effort",
+   "type": "xmodel",
+   "config": "Claude Code --bare mode, max thinking effort for all except Haiku 4.5 (fixed budget); 700 trials for Haiku 5.5/4.5; read 2026-10-08 ✓"
+  },
+  "shfrontierswe": {
+   "label": "Haiku 5.5 system card: FrontierSWE v2, Proximal's own harness, max effort",
+   "type": "xmodel",
+   "config": "34 ultra-long-horizon tasks, 20h trial budget, mean of 5 trials/task, Proximal's own harness; read 2026-10-08 ✓"
+  },
+  "shprogrambench": {
+   "label": "Haiku 5.5 system card: ProgramBench, 166-task hidden-test subset",
+   "type": "xmodel",
+   "config": "mini-swe-agent harness, no six-hour time limit, hidden hidden-test pass rate; read 2026-10-08 ✓"
+  },
+  "shchartonotools": {
+   "label": "Haiku 5.5 system card: Chartography, no tools, max effort",
+   "type": "xmodel",
+   "config": "Surge AI benchmark, Gemini 3.5 Flash grader, 5 runs averaged; cost digitised from Figure 8.9.1.B (p125, rightmost/highest-cost marker of each dashed 'without tools' curve, anchored by matching its y-pixel to this exact text score, see CHARTCOST note above); read 2026-10-08 ✓"
+  },
+  "shchartotools": {
+   "label": "Haiku 5.5 system card: Chartography, with tools, max effort",
+   "type": "xmodel",
+   "config": "with tools = container with image file, standard libs, image cropping tool; new vs launch page (which only gave the no-tools row); cost digitised from Figure 8.9.1.B (p125, rightmost marker of each solid 'with tools' curve); read 2026-10-08 ✓"
+  },
+  "shbenchcadnotools": {
+   "label": "Haiku 5.5 system card: BenchCAD Vision2Code, no tools, max effort, voxel IoU",
+   "type": "xmodel",
+   "config": "1,000-file random subset of 17,900 Vision2Code files, 5 runs averaged; read 2026-10-08 ✓"
+  },
+  "shbenchcadtools": {
+   "label": "Haiku 5.5 system card: BenchCAD Vision2Code, with tools, max effort, voxel IoU",
+   "type": "xmodel",
+   "config": "same subset, with container + image cropping tool; read 2026-10-08 ✓"
+  },
+  "shhealthbenchproeff": {
+   "label": "Haiku 5.5 system card: HealthBench Professional (length-adjusted) by effort, 5 levels",
+   "type": "sweep",
+   "config": "5 runs/level except 13 repeat runs at max on a different day (mean 64.2% vs reported 64.8%, see confound); read 2026-10-08 ✓"
+  },
+  "shhealthbencheff": {
+   "label": "Haiku 5.5 system card: HealthBench by effort, 5 levels",
+   "type": "sweep",
+   "config": "1 run/level below max, max = mean of 5 runs; read 2026-10-08 ✓"
+  },
+  "shphysicianbencheff": {
+   "label": "Haiku 5.5 system card: PhysicianBench by effort, 5 levels, pass rate",
+   "type": "sweep",
+   "config": "5 attempts/task at each level; read 2026-10-08 ✓"
+  },
+  "shphysicianbenchmax": {
+   "label": "Haiku 5.5 system card: PhysicianBench, max effort, xmodel",
+   "type": "xmodel",
+   "config": "100 physician EHR tasks, 5 attempts/task, pass rate; GPT-6 Luna run by Anthropic (not OpenAI's own figure); read 2026-10-08 ✓"
+  },
+  "shgmmlu": {
+   "label": "Haiku 5.5 system card: Global MMLU average accuracy across 42 languages, max effort",
+   "type": "xmodel",
+   "config": "single trial, safety classifiers enabled, blocked/unanswered questions excluded from average; read 2026-10-08 ✓"
+  },
+  "shmilu": {
+   "label": "Haiku 5.5 system card: MILU average accuracy across 11 languages, max effort",
+   "type": "xmodel",
+   "config": "averaged over 5 trials, safety classifiers enabled; read 2026-10-08 ✓"
+  },
+  "shvct": {
+   "label": "Haiku 5.5 system card: Multimodal virology (VCT) accuracy, xmodel",
+   "type": "xmodel",
+   "config": "350-question multimodal virology troubleshooting set; accuracy stored x100 (source scale 0-1) to match the score% convention used elsewhere in this data file; Claude Mythos 5.1 present in evidence but excluded (not in this salvo's MODELS set); read 2026-10-08 ✓"
+  },
+  "shexploitbench": {
+   "label": "Haiku 5.5 system card: ExploitBench AutoNudge capability-flag capture rate, xmodel",
+   "type": "xmodel",
+   "config": "41 V8 environments, AutoNudge arm, cap rate = % of capability flags captured; cyber safeguards off, escape classifiers on; Claude Mythos 5.1 present in evidence but excluded (not in MODELS set); read 2026-10-08 ✓"
+  },
+  "shcyscenariobench": {
+   "label": "Haiku 5.5 system card: CyScenarioBench solve rate, xmodel",
+   "type": "xmodel",
+   "config": "10-challenge subset, multi-stage cyber operation orchestration; Claude Mythos 5.1 present in evidence but excluded (not in MODELS set); read 2026-10-08 ✓"
+  },
+  "shclaudecodebenign": {
+   "label": "Haiku 5.5 system card: Claude Code dual-use & benign request success rate, xmodel",
+   "type": "xmodel",
+   "config": "share of dual-use/benign coding requests the model assisted with (higher = better, same sense as a 100-refusal% score); Claude Mythos 5.1 present in evidence but excluded (not in MODELS set); read 2026-10-08 ✓"
+  },
+  "shrefusalgeneral-api": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (general, 16 policy areas x 7 languages), stored as 100-refusal% -- condition: API, without a system prompt",
+   "type": "xmodel",
+   "config": "Table 4.1.2.A, over-refusal rate on benign-but-sensitive-subject prompts; condition quoted from the table header: \"API, without a system prompt\"; read 2026-10-08 ✓"
+  },
+  "shrefusalgeneral-claudeai": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (general, 16 policy areas x 7 languages), stored as 100-refusal% -- condition: Claude.ai",
+   "type": "xmodel",
+   "config": "Table 4.1.2.A, over-refusal rate on benign-but-sensitive-subject prompts; condition quoted from the table header: \"Claude.ai\"; read 2026-10-08 ✓"
+  },
+  "shrefusalchild-api": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (child safety), stored as 100-refusal% -- condition: API, without a system prompt",
+   "type": "xmodel",
+   "config": "Table 4.2.A; condition quoted from the table header: \"API, without a system prompt\"; read 2026-10-08 ✓"
+  },
+  "shrefusalchild-claudeai": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (child safety), stored as 100-refusal% -- condition: Claude.ai",
+   "type": "xmodel",
+   "config": "Table 4.2.A; condition quoted from the table header: \"Claude.ai\"; read 2026-10-08 ✓"
+  },
+  "shrefusalselfharm-api": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (suicide/self-harm), stored as 100-refusal% -- condition: API, without a system prompt",
+   "type": "xmodel",
+   "config": "Table 4.3.1.A; condition quoted from the table header: \"API, without a system prompt\"; read 2026-10-08 ✓"
+  },
+  "shrefusalselfharm-claudeai": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (suicide/self-harm), stored as 100-refusal% -- condition: Claude.ai",
+   "type": "xmodel",
+   "config": "Table 4.3.1.A; condition quoted from the table header: \"Claude.ai\"; read 2026-10-08 ✓"
+  },
+  "shrefusaleating-api": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (disordered eating), stored as 100-refusal% -- condition: API, without a system prompt",
+   "type": "xmodel",
+   "config": "Table 4.3.2.A; condition quoted from the table header: \"API, without a system prompt\"; read 2026-10-08 ✓"
+  },
+  "shrefusaleating-claudeai": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (disordered eating), stored as 100-refusal% -- condition: Claude.ai",
+   "type": "xmodel",
+   "config": "Table 4.3.2.A; condition quoted from the table header: \"Claude.ai\"; read 2026-10-08 ✓"
+  },
+  "shrefusalelection-api": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (election integrity), stored as 100-refusal%; Haiku 5.5 is the WORST here (refuses most) -- condition: API, without a system prompt",
+   "type": "xmodel",
+   "config": "Table 4.4.3.A; NOTE: here Haiku 5.5 over-refuses MORE than every other model incl. Haiku 4.5 (inverse of the general trend in the other four refusal tables) -- genuine data, not an error; condition quoted from the table header: \"API, without a system prompt\"; read 2026-10-08 ✓"
+  },
+  "shrefusalelection-claudeai": {
+   "label": "Haiku 5.5 system card: single-turn benign-request refusal (election integrity), stored as 100-refusal%; Haiku 5.5 is the WORST here (refuses most) -- condition: Claude.ai",
+   "type": "xmodel",
+   "config": "Table 4.4.3.A; NOTE: here Haiku 5.5 over-refuses MORE than every other model incl. Haiku 4.5 (inverse of the general trend in the other four refusal tables) -- genuine data, not an error; condition quoted from the table header: \"Claude.ai\"; read 2026-10-08 ✓"
+  },
+  "shlatchspatial": {
+   "label": "Haiku 5.5 system card: LatchBio Bioinformatics, SpatialBench Verified, max effort",
+   "type": "xmodel",
+   "config": "spatial transcriptomics / chromatin-accessibility analysis; bash tool, file editor, prespecified packages; read 2026-10-08 ✓"
+  },
+  "shlatchsinglecell": {
+   "label": "Haiku 5.5 system card: LatchBio Bioinformatics, SingleCellBench, max effort",
+   "type": "xmodel",
+   "config": "single-cell RNA sequencing analysis; read 2026-10-08 ✓"
+  },
+  "shmorphology": {
+   "label": "Haiku 5.5 system card: morphology-to-molecule matching (Axiom Bio), max effort",
+   "type": "xmodel",
+   "config": "matches 4 multi-channel cell-imaging sets to 4 shuffled molecule-dose perturbations, human liver in-vitro assay; read 2026-10-08 ✓"
+  },
+  "shmedchem": {
+   "label": "Haiku 5.5 system card: medicinal chemistry (ADME), max effort, xmodel",
+   "type": "xmodel",
+   "config": "504 questions, drug-like molecule structures, ADME property comparison; read 2026-10-08 ✓"
+  },
+  "shproteinseqgen": {
+   "label": "Haiku 5.5 system card: protein design, Sequence Generation, max effort",
+   "type": "xmodel",
+   "config": "novel protein sequence generation under design constraints; 1 attempt/problem (exception to the chapter's 5-attempt default, stated explicitly); read 2026-10-08 ✓"
+  },
+  "shproteinlibrank": {
+   "label": "Haiku 5.5 system card: protein design, Library Ranking, max effort",
+   "type": "xmodel",
+   "config": "prioritize protein designs for experimental testing; 3 attempts/problem (exception to the chapter default); read 2026-10-08 ✓"
+  },
+  "shbiomedimage": {
+   "label": "Haiku 5.5 system card: biomedical image analysis, max effort",
+   "type": "xmodel",
+   "config": "CT/MRI/histopathology/dermoscopy/retinal/ultrasound/microscopy imaging, scaled to best public-competition result; 1 attempt/problem (exception to the chapter default); read 2026-10-08 ✓"
+  },
+  "shprotocolstroubleshoot": {
+   "label": "Haiku 5.5 system card: Protocols, Troubleshooting, max effort",
+   "type": "xmodel",
+   "config": "detect and fix issues in molecular biology lab protocols; read 2026-10-08 ✓"
+  },
+  "shprotocolsunderstand": {
+   "label": "Haiku 5.5 system card: Protocols, Understanding (V2, Benchling), max effort",
+   "type": "xmodel",
+   "config": "real lab protocol document + practical application question; read 2026-10-08 ✓"
+  },
+  "shexploitgym2h": {
+   "label": "Haiku 5.5 system card: ExploitGym, 2-hour wall-clock budget, xmodel",
+   "type": "xmodel",
+   "config": "successful exploits (unauthorized code execution + secret-flag read) out of 869 vulnerability instances; cyber safeguards off; ASLR/stack-canaries/KASLR/(non-sandbox-escape) V8-heap-sandbox disabled, kernel targets keep SMEP/SMAP enabled; read 2026-10-08 ✓"
+  },
+  "shexploitgym6h": {
+   "label": "Haiku 5.5 system card: ExploitGym, 6-hour wall-clock budget, xmodel",
+   "type": "xmodel",
+   "config": "same setup as the 2-hour group, longer wall-clock budget; read 2026-10-08 ✓"
+  },
+  "qiita-kaikou-classify": {
+   "label": "kai_kou Haiku 5.5 vs 4.5 — support-message classification (Claude Code CLI)",
+   "type": "xgen",
+   "config": "claude -p --model claude-haiku-5-5 / claude-haiku-4-5, --tools \"\", 1-sentence system prompt, same classification task; cost left out of both rows (billing basis differs: Haiku 5.5 input billed as 1h-cache-write $0.20/MTok, Haiku 4.5 as normal input $1/MTok -- not comparable, see notes); score = correct-of-1 (both models classified the message as billing, correctly); read 2026-10-08 ✓"
+  },
+  "qiita-kaikou-readcheck": {
+   "label": "kai_kou Haiku 5.5 effort sweep + Haiku 4.5 — yes/no reading check (38,082-tok doc)",
+   "type": "xmodel",
+   "config": "claude -p --effort low/medium/high (Haiku 5.5) vs Claude Code default (Haiku 4.5); same 38,082-token Japanese document, same yes/no question (correct answer いいえ); score = correct% of trials run at that effort, trial count n given per row in confound (low n=2, others n=1); read 2026-10-08 ✓"
+  },
+  "plotly-dataanalyticsbench": {
+   "label": "Plotly Data Analytics Bench — Haiku 5.5 vs Haiku 4.5 (43-question exam)",
+   "type": "xgen",
+   "config": "plotly.com in-house 43-question data-analytics exam; effort not stated for either Haiku model (no config/slug found in the page's own JSON payload) -> default for both; read 2026-10-08 ✓"
+  },
+  "aibenchy-private-suite": {
+   "label": "aibenchy.com private benchmark suite — Haiku 5.5 (xhigh) vs Opus 5.5 (high)",
+   "type": "xmodel",
+   "config": "aibenchy.com undisclosed-task private suite, score 1-10 scale (site's own verdict text quotes '9.1 vs 9.4'); page states 'Last updated at: 2026-10-07'; Haiku-5.5-xhigh row is the same run repeated across two /compare/ pages (identical score/cost/time/rank), not two independent measurements; read 2026-10-08 ✓"
+  },
+  "pelicansite-sweep": {
+   "label": "pelican-bicycle-sigma.vercel.app — Haiku 5.5 effort sweep (SVG pelican-on-bicycle)",
+   "type": "sweep",
+   "config": "independent site, one Claude model (Haiku 5.5) at five efforts = five couples per RULES.md; cost is the page's own $ figure computed from a usage panel (not a billed invoice) -> list-price-cost; page's own caveat: \"Usage numbers are transcribed from each run's usage panel\" (manual transcription, not raw API JSON); read 2026-10-08 ✓"
   }
  },
  "merge": {
