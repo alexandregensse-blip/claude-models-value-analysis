@@ -44,6 +44,15 @@ precision** of the cost and of the score (§4).
   tokens at wrong rates is re-priced and the correction flagged. Tokens read on a chart and converted at one flat
   price are not a cost: a flat price ignores the mix of input and output tokens, which changes with the effort, and
   so bends the effort ladder; such a cost is left out and the score kept.
+- **Today's prices.** Costs are compared at the prices in force now. When a model's price changes, the costs measured
+  before are put on the new price (Claude Sonnet 5.5 cache reads, \$0.20 → \$0.10 per MTok on 7 Oct 2026: nothing
+  else changed). In order of preference: the publisher's own figure at the new price (a board re-priced, a chart
+  re-plotted with the same runs); the old cost less the change applied to the source's own token counts (its formula
+  checked to reproduce the old cost first); unchanged where the run provably read no cache. Where the source does not
+  say how much it read from the cache, the cost is scaled by the median ratio of the measured sources of the same kind
+  of run — long agent sessions that re-read their context every turn, one-shot `claude -p` calls, plain API calls —
+  and the spread of that ratio across those sources is added to the row's reading error (§4), so an estimated cost
+  weighs less than a measured one (`data/precision/repricing.json`; flag `cache-cut-2026-10-07` with the old value).
 - **Charts are digitised and checked** against any number the same document prints in its text, and flagged; the
   resolution of every digitised chart is measured (§4).
 - **Early access.** A run its source dates before the model's public release is flagged (§5: its noise is inflated
@@ -109,7 +118,9 @@ in its own unit, added to the row's variance (§5):
   roundings along the publisher's pipeline — estimated on the runs printed on two charts (identical printed scores
   prove the run): 0.48 % of the axis span. On a log axis both are relative (about 2 % on a digitised cost);
 - a cost the collector computed from published token counts: the counts' rounding propagated (the largest relative
-  rounding of the counts, conservative), added to the rounding of the result.
+  rounding of the counts, conservative), added to the rounding of the result;
+- a cost put on a later price by a class ratio (§2, today's prices): the spread of that ratio across the measured
+  sources of its class, relative (about 12 % for long agent sessions), added to the above.
 Converted to the model's scale by the derivative of the transformation (the logit's at the observed proportion, the
 log's 1/value). The evidence — per chart the calibration and the re-read points, per source whether each value is
 printed, from a data file or computed — is in `data/precision/`, checked source by source.

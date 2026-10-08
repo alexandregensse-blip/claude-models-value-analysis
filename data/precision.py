@@ -20,6 +20,9 @@ adds it to the row's variance, docs/METHODOLOGY.md §4). Three origins:
              On a log axis the error is relative.
   computed   a cost the collector computed from published token counts: the counts' rounding propagated (the largest
              relative rounding of the counts, conservative), added to the rounding of the result.
+  estimated  a cost put on a later price where the source does not give what the change applies to (Sonnet 5.5 cache
+             reads, 7 Oct 2026, precision/repricing.json): the cost is scaled by the median ratio of the sources of its
+             kind that do, and the spread of those ratios across sources (log scale, so relative) is its error.
 
 A value both digitised and rounded takes both errors in quadrature. Run from the repository root:
     python3 data/precision.py            # rewrites raw-data.csv with the two columns
@@ -60,12 +63,14 @@ def num(x):
 def precision(rows):
     charts = json.load(open(os.path.join(HERE, "precision", "charts.json")))
     origins = json.load(open(os.path.join(HERE, "precision", "origins.json")))["groups"]
+    rp = os.path.join(HERE, "precision", "repricing.json")
+    estimated = {tuple(x["row"]): x["sd"] for x in json.load(open(rp))["rows"]} if os.path.exists(rp) else {}
     frac = charts["chart_to_data"]["fraction_of_axis_span"]
     read = {}                                                        # (row key, column) → δ from a chart
     for c in charts["charts"]:
         for k in c["rows"]:
             read.setdefault((tuple(k), c["column"]), []).append(c)
-    stats = dict(digitised=0, printed_coarser=0, from_tokens=0)
+    stats = dict(digitised=0, printed_coarser=0, from_tokens=0, estimated=0)
     for r in rows:
         k = tuple(r.get(x, "") for x in KEY)
         o = origins.get(r["group"], {})
@@ -84,6 +89,9 @@ def precision(rows):
                           default=0.0)
                 var += (v * rel) ** 2
                 stats["from_tokens"] += 1
+            if col == "cost_usd" and k in estimated:
+                var += (v * estimated[k]) ** 2                       # relative error of the scaling, on the log scale
+                stats["estimated"] += 1
             for c in read.get((k, col), [])[:1]:
                 u = math.hypot(c["per_px"] * c["reading_px"], frac * c["span"])   # reading, then the chart's own error
                 if c["via"] == "tokens_out" and num(r.get("tokens_out")):

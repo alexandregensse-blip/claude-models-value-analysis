@@ -1,0 +1,3084 @@
+{
+ "change": "Claude Sonnet 5.5 cache reads $0.20 → $0.10 per MTok from 7 Oct 2026 (anthropic.com/pricing); nothing else changed. Costs measured before are put on the new price; where the cache-read share is unknown the cost is scaled by its class factor and the class's spread across sources is added to the row's precision (relative standard deviation, on the log scale).",
+ "classes": {
+  "api": {
+   "factor": 1.0,
+   "sd": 0.0023,
+   "sources": {
+    "QutaibaAbualrob/chronobay_ai_bench": 1.0,
+    "anthropic-syscard": 0.997,
+    "column-tax-tax-calc-bench": 1.0,
+    "dtinth/34bench": 1.0,
+    "ed-is-ai/featherbench": 1.0,
+    "github-obviousbench": 1.0,
+    "github-vlmexam": 1.0,
+    "pokebench": 0.993,
+    "run-llama/ParseBench": 1.0,
+    "simonwillison": 1.0,
+    "synthorai": 1.0
+   }
+  },
+  "cc-loop": {
+   "factor": 0.8226,
+   "sd": 0.1232,
+   "sources": {
+    "anthropic-syscard": 0.731,
+    "cursorbench": 0.729,
+    "github-bughuntbench": 0.636,
+    "github-kjlkurt": 0.736,
+    "github-occam": 0.916,
+    "github-openagents": 0.921,
+    "github-renchris-infra": 0.92,
+    "github-runebench": 0.835,
+    "killswitch-bench": 0.731,
+    "note-minilab": 0.823,
+    "vals.ai": 0.929
+   }
+  },
+  "cc-oneshot": {
+   "factor": 0.9983,
+   "sd": 0.0029,
+   "sources": {
+    "github-merc-bench": 0.998,
+    "github-ramenbench": 0.993,
+    "github-renchris-infra": 1.0
+   }
+  },
+  "mixed": {
+   "factor": 0.907,
+   "sd": 0.1572,
+   "sources": {}
+  },
+  "unchanged": {
+   "factor": 1.0,
+   "sd": 0.0,
+   "sources": {}
+  }
+ },
+ "rows": [
+  {
+   "row": [
+    "valsvibecode",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vibe-Code-Bench",
+    "per-test",
+    "vals.ai/benchmarks/vibe-code"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valstb21",
+    "sonnet-5.5",
+    "high",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/terminal-bench-2-1"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valsindex3",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-Index",
+    "per-task",
+    "vals.ai/benchmarks/vals_index (page payload; read 2026-09-30)"
+   ],
+   "cls": "mixed",
+   "factor": 0.907,
+   "sd": 0.1572
+  },
+  {
+   "row": [
+    "fcodemain",
+    "sonnet-5.5",
+    "low",
+    "cognition",
+    "FrontierCode-1.1-main",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "fcodemain",
+    "sonnet-5.5",
+    "medium",
+    "cognition",
+    "FrontierCode-1.1-main",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "fcodemain",
+    "sonnet-5.5",
+    "high",
+    "cognition",
+    "FrontierCode-1.1-main",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "fcodemain",
+    "sonnet-5.5",
+    "xhigh",
+    "cognition",
+    "FrontierCode-1.1-main",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "fcodemain",
+    "sonnet-5.5",
+    "max",
+    "cognition",
+    "FrontierCode-1.1-main",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "scf51fcode",
+    "sonnet-5.5",
+    "low",
+    "cognition",
+    "FrontierCode-Ext",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "scf51fcode",
+    "sonnet-5.5",
+    "medium",
+    "cognition",
+    "FrontierCode-Ext",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "scf51fcode",
+    "sonnet-5.5",
+    "high",
+    "cognition",
+    "FrontierCode-Ext",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "scf51fcode",
+    "sonnet-5.5",
+    "xhigh",
+    "cognition",
+    "FrontierCode-Ext",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "scf51fcode",
+    "sonnet-5.5",
+    "max",
+    "cognition",
+    "FrontierCode-Ext",
+    "per-task",
+    "cognition.com/data/frontiercode-leaderboard/data.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "sc55osw",
+    "sonnet-5.5",
+    "max",
+    "anthropic-syscard",
+    "OSWorld2-partial",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p131"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "chartogt",
+    "sonnet-5.5",
+    "low",
+    "anthropic-syscard",
+    "Chartography-tools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p127"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "chartogt",
+    "sonnet-5.5",
+    "medium",
+    "anthropic-syscard",
+    "Chartography-tools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p127"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "chartogt",
+    "sonnet-5.5",
+    "high",
+    "anthropic-syscard",
+    "Chartography-tools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p127"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "chartogt",
+    "sonnet-5.5",
+    "xhigh",
+    "anthropic-syscard",
+    "Chartography-tools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p127"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdpval",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "GDPval-AA-v2",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdpval",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "GDPval-AA-v2",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdpval",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "GDPval-AA-v2",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdpval",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "GDPval-AA-v2",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdpval",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "GDPval-AA-v2",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aaautob",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "AutomationBench-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aaautob",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "AutomationBench-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aaautob",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "AutomationBench-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aaautob",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "AutomationBench-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aaautob",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "AutomationBench-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valstb4",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/terminal-bench-4"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valsfab2",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/fabv2"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valslegal",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/legal_research"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valssre",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/srebench"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valstbsci",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/terminal-bench-science"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valsbenefits",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/public-benefits-bench"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valstax",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/tax_agent_bench"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valsioi",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/ioi"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valsmystery",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/mysterymechanism"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "senkoflysim",
+    "sonnet-5.5",
+    "xhigh",
+    "senko",
+    "Claude-Code",
+    "per-task",
+    "senko.net/vibecode-bench/"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "senkovoxel",
+    "sonnet-5.5",
+    "xhigh",
+    "senko",
+    "Claude-Code",
+    "per-task",
+    "senko.net/vibecode-bench/"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "senkorts",
+    "sonnet-5.5",
+    "xhigh",
+    "senko",
+    "Claude-Code",
+    "per-task",
+    "senko.net/vibecode-bench/"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aabriefcase",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "AA-Briefcase",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aabriefcase",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "AA-Briefcase",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aabriefcase",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "AA-Briefcase",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aabriefcase",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "AA-Briefcase",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aabriefcase",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "AA-Briefcase",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aatb40",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "TB4.0-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aatb40",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "TB4.0-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aatb40",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "TB4.0-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aatb40",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "TB4.0-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aatb40",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "TB4.0-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aascicode",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "SciCode-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aascicode",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "SciCode-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aascicode",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "SciCode-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aascicode",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "SciCode-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aascicode",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "SciCode-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aahle",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "HLE-AA-notools",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aahle",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "HLE-AA-notools",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aahle",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "HLE-AA-notools",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aahle",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "HLE-AA-notools",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aahle",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "HLE-AA-notools",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aagdppdf",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "GDP-PDF-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdppdf",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "GDP-PDF-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdppdf",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "GDP-PDF-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdppdf",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "GDP-PDF-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aagdppdf",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "GDP-PDF-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "aacritpt",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "CritPt-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aacritpt",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "CritPt-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aacritpt",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "CritPt-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aacritpt",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "CritPt-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aacritpt",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "CritPt-AA",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aalcr",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "AA-LCR",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aalcr",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "AA-LCR",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aalcr",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "AA-LCR",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aalcr",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "AA-LCR",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aalcr",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "AA-LCR",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aaomni",
+    "sonnet-5.5",
+    "low",
+    "artificialanalysis",
+    "AA-Omniscience",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-low"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aaomni",
+    "sonnet-5.5",
+    "medium",
+    "artificialanalysis",
+    "AA-Omniscience",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-medium"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aaomni",
+    "sonnet-5.5",
+    "high",
+    "artificialanalysis",
+    "AA-Omniscience",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-high"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aaomni",
+    "sonnet-5.5",
+    "xhigh",
+    "artificialanalysis",
+    "AA-Omniscience",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5-xhigh"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aaomni",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "AA-Omniscience",
+    "per-task",
+    "artificialanalysis.ai/models/claude-sonnet-5-5"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "aacai",
+    "sonnet-5.5",
+    "max",
+    "artificialanalysis",
+    "ClaudeCode-AA-CAI",
+    "per-task",
+    "artificialanalysis.ai/agents/coding-agents"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "emb",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "EMB",
+    "per-task",
+    "vals.ai/benchmarks/emb"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valscyber",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "mini-swe-agent(Vals)",
+    "per-test",
+    "vals.ai/benchmarks/cyber"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "zapierab",
+    "sonnet-5.5",
+    "low",
+    "anthropic-syscard",
+    "AutomationBench-1.0.6",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p136"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "zapierab",
+    "sonnet-5.5",
+    "medium",
+    "anthropic-syscard",
+    "AutomationBench-1.0.6",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p136"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "zapierab",
+    "sonnet-5.5",
+    "high",
+    "anthropic-syscard",
+    "AutomationBench-1.0.6",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p136"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "zapierab",
+    "sonnet-5.5",
+    "xhigh",
+    "zapier",
+    "AutomationBench-1.0.6",
+    "per-task",
+    "zapier.com/benchmarks (AutomationBench leaderboard; SSR table)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "zapierab",
+    "sonnet-5.5",
+    "max",
+    "zapier",
+    "AutomationBench-1.0.6",
+    "per-task",
+    "zapier.com/benchmarks (AutomationBench leaderboard; SSR table)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "livebench",
+    "sonnet-5.5",
+    "max",
+    "livebench",
+    "LiveBench",
+    "per-task",
+    "github.com/LiveBench/new-livebench/blob/64898844a99fc22f0e672068cf8623ad5c924a42/public/cost_2026_06_25.csv"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "livebench",
+    "sonnet-5.5",
+    "xhigh",
+    "livebench",
+    "LiveBench",
+    "per-task",
+    "github.com/LiveBench/new-livebench/blob/64898844a99fc22f0e672068cf8623ad5c924a42/public/cost_2026_06_25.csv"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valscodemig",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/code-migration"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "valshlab",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/hlab"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valsmedcode",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/medcode"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valsmedscribe",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/medscribe"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valsproof",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/proof_bench"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "valssage",
+    "sonnet-5.5",
+    "max",
+    "vals.ai",
+    "Vals-runner",
+    "per-test",
+    "vals.ai/benchmarks/sage"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "crabbit-o55sig",
+    "sonnet-5.5",
+    "default",
+    "coderabbit",
+    "CodeRabbit",
+    "per-suite",
+    "coderabbit.ai/blog/sonnet-5-5-model-review"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "crabbit-o55sig",
+    "sonnet-5.5",
+    "nothink",
+    "coderabbit",
+    "CodeRabbit",
+    "per-suite",
+    "coderabbit.ai/blog/sonnet-5-5-model-review"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "crabbit-s55oss",
+    "sonnet-5.5",
+    "default",
+    "coderabbit",
+    "CodeRabbit",
+    "per-task",
+    "coderabbit.ai/blog/sonnet-5-5-model-review"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "atomic-expense",
+    "sonnet-5.5",
+    "default",
+    "atomicagent",
+    "AtomicAgent-v0.6.5-OpenRouter",
+    "per-run",
+    "atomicagent.io/blog/claude-sonnet-5-5/"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "dende-sla",
+    "sonnet-5.5",
+    "low",
+    "note-dende2023",
+    "ClaudeCode-2.1.284-print-mode-no-tools",
+    "per-task",
+    "note.com/dende2023/n/n38cab6fe80a6"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "dende-sla",
+    "sonnet-5.5",
+    "medium",
+    "note-dende2023",
+    "ClaudeCode-2.1.284-print-mode-no-tools",
+    "per-task",
+    "note.com/dende2023/n/n38cab6fe80a6"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "dende-sla",
+    "sonnet-5.5",
+    "high",
+    "note-dende2023",
+    "ClaudeCode-2.1.284-print-mode-no-tools",
+    "per-task",
+    "note.com/dende2023/n/n38cab6fe80a6"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "dende-sla",
+    "sonnet-5.5",
+    "max",
+    "note-dende2023",
+    "ClaudeCode-2.1.284-print-mode-no-tools",
+    "per-task",
+    "note.com/dende2023/n/n38cab6fe80a6"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "riku-bugfix",
+    "sonnet-5.5",
+    "default",
+    "note-riku_techlab",
+    "ClaudeCode-2.1.284-no-tools",
+    "rel-cost",
+    "note.com/riku_techlab/n/n626e3641b0c6"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "riku-table",
+    "sonnet-5.5",
+    "default",
+    "note-riku_techlab",
+    "ClaudeCode-2.1.284-no-tools",
+    "rel-cost",
+    "note.com/riku_techlab/n/n626e3641b0c6"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "riku-slides",
+    "sonnet-5.5",
+    "default",
+    "note-riku_techlab",
+    "ClaudeCode-2.1.284-no-tools",
+    "rel-cost",
+    "note.com/riku_techlab/n/n626e3641b0c6"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "parafr-flightsim",
+    "sonnet-5.5",
+    "medium",
+    "github-parafr",
+    "ClaudeCode",
+    "per-task",
+    "github.com/Para-FR/claude-sonnet-vs-opus-flight-sim/blob/56d279e300c9fc181bc3b1c70400d2462beeb71d/README.md"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "scs55osws",
+    "sonnet-5.5",
+    "max",
+    "anthropic-syscard",
+    "OSWorld2.1-strict",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p132"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "scs55bcadn",
+    "sonnet-5.5",
+    "nt-low",
+    "anthropic-syscard",
+    "BenchCAD-V2C-notools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p129"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "scs55bcadn",
+    "sonnet-5.5",
+    "nt-medium",
+    "anthropic-syscard",
+    "BenchCAD-V2C-notools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p129"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "scs55bcadn",
+    "sonnet-5.5",
+    "nt-high",
+    "anthropic-syscard",
+    "BenchCAD-V2C-notools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p129"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "scs55bcadn",
+    "sonnet-5.5",
+    "nt-xhigh",
+    "anthropic-syscard",
+    "BenchCAD-V2C-notools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p129"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "scs55bcadn",
+    "sonnet-5.5",
+    "nt-max",
+    "anthropic-syscard",
+    "BenchCAD-V2C-notools",
+    "per-task",
+    "anthropic.com/claude-sonnet-5-5-system-card#p129"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "renkon-video",
+    "sonnet-5.5",
+    "max",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-slides3",
+    "sonnet-5.5",
+    "high",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-slides3",
+    "sonnet-5.5",
+    "xhigh",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-slides3",
+    "sonnet-5.5",
+    "max",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-dash",
+    "sonnet-5.5",
+    "high",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-dash",
+    "sonnet-5.5",
+    "max",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-email",
+    "sonnet-5.5",
+    "high",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-note",
+    "sonnet-5.5",
+    "high",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-note",
+    "sonnet-5.5",
+    "max",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-slides12",
+    "sonnet-5.5",
+    "xhigh",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-slides12",
+    "sonnet-5.5",
+    "max",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-home",
+    "sonnet-5.5",
+    "high",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-home",
+    "sonnet-5.5",
+    "max",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "renkon-syco",
+    "sonnet-5.5",
+    "high",
+    "note-renkon40",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/renkon40/n/ne55e64e425a8 (tables: images 4 and 10 of the article)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "crb-ce",
+    "sonnet-5.5",
+    "high",
+    "github-codereviewbench",
+    "ClaudeCode-2.1.284",
+    "per-suite",
+    "github.com/kamui/code-review-bench/blob/23716f7/bench/runs/2026-09-29-claude-ce-sonnet-5-5-high/results.v2.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "crb-thermo",
+    "sonnet-5.5",
+    "high",
+    "github-codereviewbench",
+    "ClaudeCode-2.1.284",
+    "per-suite",
+    "github.com/kamui/code-review-bench/blob/23716f7/bench/runs/2026-09-29-claude-thermo-sonnet-5-5-high/results.v1.json"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "cclab-invoice",
+    "sonnet-5.5",
+    "low",
+    "note-claudecode_lab",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/claudecode_lab/n/nb15b49661836 (table: image 4 of the article)"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "cclab-invoice",
+    "sonnet-5.5",
+    "medium",
+    "note-claudecode_lab",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/claudecode_lab/n/nb15b49661836 (table: image 4 of the article)"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "cclab-invoice",
+    "sonnet-5.5",
+    "high",
+    "note-claudecode_lab",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/claudecode_lab/n/nb15b49661836 (table: image 4 of the article)"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "cclab-invoice",
+    "sonnet-5.5",
+    "max",
+    "note-claudecode_lab",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "note.com/claudecode_lab/n/nb15b49661836 (table: image 4 of the article)"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "yama-famous",
+    "sonnet-5.5",
+    "medium",
+    "qiita-yama3133",
+    "ClaudeCode-p",
+    "per-suite",
+    "qiita.com/yama3133/items/164a0c18aa94c35e5970"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "yama-bugfix",
+    "sonnet-5.5",
+    "medium",
+    "qiita-yama3133",
+    "ClaudeCode-p",
+    "per-task",
+    "qiita.com/yama3133/items/164a0c18aa94c35e5970"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "yama-longctx",
+    "sonnet-5.5",
+    "medium",
+    "qiita-yama3133",
+    "ClaudeCode-p",
+    "per-task",
+    "qiita.com/yama3133/items/164a0c18aa94c35e5970"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "yama-random-high",
+    "sonnet-5.5",
+    "high",
+    "qiita-yama3133",
+    "ClaudeCode-p",
+    "per-suite",
+    "qiita.com/yama3133/items/164a0c18aa94c35e5970"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "dyad-relaycrm",
+    "sonnet-5.5",
+    "medium",
+    "github-dyad",
+    "Dyad-local-agent",
+    "per-task",
+    "github.com/dyad-sh/dyad/blob/ba27f52777c847c69b77b5ebcdf1921273c73d38/benchmarks/app-builder/RESULTS.md"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "dyad-deskhero",
+    "sonnet-5.5",
+    "medium",
+    "github-dyad",
+    "Dyad-local-agent",
+    "per-task",
+    "github.com/dyad-sh/dyad/blob/ba27f52777c847c69b77b5ebcdf1921273c73d38/benchmarks/app-builder/RESULTS.md"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "dyad-portalis",
+    "sonnet-5.5",
+    "medium",
+    "github-dyad",
+    "Dyad-local-agent",
+    "per-task",
+    "github.com/dyad-sh/dyad/blob/ba27f52777c847c69b77b5ebcdf1921273c73d38/benchmarks/app-builder/RESULTS.md"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "ibragim-pi",
+    "sonnet-5.5",
+    "high",
+    "ibragim-dev",
+    "Pi-0.85.1",
+    "per-task",
+    "ibragim.dev/leaderboard/"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "ibragim-cc",
+    "sonnet-5.5",
+    "high",
+    "ibragim-dev",
+    "ClaudeCode-2.1.281",
+    "per-task",
+    "ibragim.dev/leaderboard/"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "cfgk3s55",
+    "sonnet-5.5",
+    "high",
+    "computingforgeeks",
+    "raw-api",
+    "per-3task-suite",
+    "computingforgeeks.com/claude-sonnet-5-5-released-features-benchmarks/"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "cfgk3s55",
+    "sonnet-5.5",
+    "medium",
+    "computingforgeeks",
+    "raw-api",
+    "per-3task-suite",
+    "computingforgeeks.com/claude-sonnet-5-5-released-features-benchmarks/"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "cfgk3s55",
+    "sonnet-5.5",
+    "low",
+    "computingforgeeks",
+    "raw-api",
+    "per-3task-suite",
+    "computingforgeeks.com/claude-sonnet-5-5-released-features-benchmarks/"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "cfgk3s55",
+    "sonnet-5.5",
+    "max",
+    "computingforgeeks",
+    "raw-api",
+    "per-3task-suite",
+    "computingforgeeks.com/claude-sonnet-5-5-released-features-benchmarks/"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "nonobench",
+    "sonnet-5.5",
+    "max",
+    "nonobench.com",
+    "NonoBench",
+    "per-suite",
+    "nonobench.com (aria-labels of the effort-ladder chart and the leaderboard)"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "guren-stage2-bare",
+    "sonnet-5.5",
+    "default",
+    "gurenjs/agents-on-guren",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "github.com/gurenjs/agents-on-guren"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "guren-stage2-shipped",
+    "sonnet-5.5",
+    "default",
+    "gurenjs/agents-on-guren",
+    "ClaudeCode-2.1.284",
+    "per-task",
+    "github.com/gurenjs/agents-on-guren"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "legalforecast-mtd",
+    "sonnet-5.5",
+    "high",
+    "johnhughes3/LegalForecastBench",
+    "LegalForecastBench-agentic",
+    "per-run",
+    "github.com/johnhughes3/LegalForecastBench"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "kamiumi-svg-cost",
+    "sonnet-5.5",
+    "default",
+    "note-kamiumi_ai",
+    "ClaudeCode-2.1.284-no-tools-print-mode",
+    "per-15-runs",
+    "note.com/kamiumi_ai/n/nb7bdc208736e"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "minilab-notectl",
+    "sonnet-5.5",
+    "medium",
+    "note-minilab",
+    "ClaudeCode(2.1.x)",
+    "per-2-questions",
+    "note.com/minilab/n/n7ccd7f6a6421"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "minilab-notectl",
+    "sonnet-5.5",
+    "high",
+    "note-minilab",
+    "ClaudeCode(2.1.x)",
+    "per-2-questions",
+    "note.com/minilab/n/n7ccd7f6a6421"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "hacklog-setB",
+    "sonnet-5.5",
+    "default",
+    "note-hacklog_stealth",
+    "ClaudeCode-2.1.281-print-mode",
+    "per-task",
+    "note.com/hacklog_stealth/n/n07e2f50a43b9"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "rima-report-cost",
+    "sonnet-5.5",
+    "high",
+    "note-iam_lima",
+    "ClaudeCode-2.1.284-no-tools",
+    "per-task",
+    "note.com/iam_lima/n/ncfed4a80e005"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "rima-report-cost",
+    "sonnet-5.5",
+    "medium",
+    "note-iam_lima",
+    "ClaudeCode-2.1.284-no-tools",
+    "per-task",
+    "note.com/iam_lima/n/ncfed4a80e005"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "sss-ailabo-3tasks",
+    "sonnet-5.5",
+    "default",
+    "note-sss_ailabo",
+    "ClaudeCode/Codex-print-mode",
+    "per-3-tasks",
+    "note.com/sss_ailabo/n/n218e2eddafa9"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "takuya-sonnet-7task",
+    "sonnet-5.5",
+    "high",
+    "note-tfcxzaqwerds",
+    "ClaudeCode-2.1.284-headless-sandboxed",
+    "per-task",
+    "note.com/tfcxzaqwerds/n/nab4b132711a2"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "cclab-paperwork",
+    "sonnet-5.5",
+    "medium",
+    "note-claudecode_lab",
+    "ClaudeCode-2.1.286-print-mode",
+    "per-3-tasks",
+    "note.com/claudecode_lab/n/n960c8fc026e6 (table image: https://assets.st-note.com/img/1790820294-Kx0TupQfrALXnP2JMReoVZGN.png)"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "hacklog-setA",
+    "sonnet-5.5",
+    "default",
+    "note-hacklog_stealth",
+    "ClaudeCode-2.1.281-print-mode",
+    "per-task",
+    "note.com/hacklog_stealth/n/n07e2f50a43b9"
+   ],
+   "cls": "cc-oneshot",
+   "factor": 0.9983,
+   "sd": 0.0029
+  },
+  {
+   "row": [
+    "bvb",
+    "sonnet-5.5",
+    "xhigh",
+    "arxiv-2609.15478",
+    "Mini-BVB-litellm",
+    "per-scene",
+    "github.com/yunlong10/BVB"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "frontierswe",
+    "sonnet-5.5",
+    "max",
+    "frontierswe",
+    "proximus",
+    "per-trial",
+    "frontierswe.com"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "alebench",
+    "sonnet-5.5",
+    "high",
+    "epoch-archive",
+    "ALE-Bench",
+    "per-task",
+    "sakanaai.github.io/ALE-Bench-Leaderboard/data/results_summary.json"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "retort77",
+    "sonnet-5.5",
+    "low",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77",
+    "sonnet-5.5",
+    "medium",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77",
+    "sonnet-5.5",
+    "high",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77",
+    "sonnet-5.5",
+    "xhigh",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77",
+    "sonnet-5.5",
+    "max",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77",
+    "sonnet-5.5",
+    "default",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77go",
+    "sonnet-5.5",
+    "low",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77go",
+    "sonnet-5.5",
+    "medium",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77go",
+    "sonnet-5.5",
+    "high",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77go",
+    "sonnet-5.5",
+    "xhigh",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77go",
+    "sonnet-5.5",
+    "max",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort77go",
+    "sonnet-5.5",
+    "default",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-77-sonnet55-effort/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78",
+    "sonnet-5.5",
+    "low",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78",
+    "sonnet-5.5",
+    "medium",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78",
+    "sonnet-5.5",
+    "high",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78",
+    "sonnet-5.5",
+    "default",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78go",
+    "sonnet-5.5",
+    "low",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78go",
+    "sonnet-5.5",
+    "medium",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78go",
+    "sonnet-5.5",
+    "high",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "retort78go",
+    "sonnet-5.5",
+    "default",
+    "github-retort",
+    "retort-playpen",
+    "per-task",
+    "github.com/adrianco/retort/tree/1c12a3a8/experiments/adrianco/experiment-78-sonnet55-isolation/rest-api-crud"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "minebench-voxel",
+    "sonnet-5.5",
+    "default",
+    "minebench",
+    "MineBench-arena",
+    "per-task",
+    "minebench.ai/api/leaderboard"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "kernelbench-mega-cc",
+    "sonnet-5.5",
+    "max",
+    "github-kernelbench",
+    "claude",
+    "per-task",
+    "github.com/Infatoshi/kernelbench.com/blob/4112a6d1/public/data/mega/results.csv (and matching per-run annotation yaml)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "cfgk-bugfix",
+    "sonnet-5.5",
+    "medium",
+    "computingforgeeks",
+    "claude-code",
+    "per-run",
+    "computingforgeeks.com/claude-sonnet-5-5-released-features-benchmarks (src/r_cfg.txt around line 344)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "convex-default",
+    "sonnet-5.5",
+    "medium",
+    "convex.dev",
+    "Convex-evals-OpenRouter",
+    "per-run(112-evals)",
+    "convex.dev/llm-leaderboard (Convex query runs:leaderboardScores)"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "convex-noguide",
+    "sonnet-5.5",
+    "medium",
+    "convex.dev",
+    "Convex-evals-OpenRouter",
+    "per-run(112-evals)",
+    "convex.dev/llm-leaderboard (Convex query runs:leaderboardScores)"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "convex-noguide-web",
+    "sonnet-5.5",
+    "medium",
+    "convex.dev",
+    "Convex-evals-OpenRouter",
+    "per-run(112-evals)",
+    "convex.dev/llm-leaderboard (Convex query runs:leaderboardScores)"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "clerk-base",
+    "sonnet-5.5",
+    "default",
+    "clerk.com",
+    "Clerk-evals-AIGateway",
+    "per-suite(17-cells)",
+    "clerk.com/llm-scores.json"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "stagehand-hard",
+    "sonnet-5.5",
+    "default",
+    "stagehand.dev",
+    "ClaudeCode",
+    "per-task",
+    "stagehand.dev/evals (benchmark=hardbench)"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "bito-s55o55",
+    "sonnet-5.5",
+    "medium",
+    "bito.ai",
+    "ClaudeCode",
+    "per-session",
+    "bito.ai/blog/claude-sonnet-5-5-vs-opus-5-5"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "bito-s55o55",
+    "sonnet-5.5",
+    "high",
+    "bito.ai",
+    "ClaudeCode",
+    "per-session",
+    "bito.ai/blog/claude-sonnet-5-5-vs-opus-5-5"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "argobench",
+    "sonnet-5.5",
+    "xhigh",
+    "argo-bench",
+    "Inspect-AI-0.3.263",
+    "per-task",
+    "arxiv.org/abs/2610.02122"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "validate-benchmark-base-pointed",
+    "sonnet-5.5",
+    "default",
+    "zenodo-validate-benchmark",
+    "Claude-Code-2.1.286/Harbor-0.22.0",
+    "per-attempt",
+    "zenodo.org/records/23075022"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "validate-benchmark-hard-neutral",
+    "sonnet-5.5",
+    "default",
+    "zenodo-validate-benchmark",
+    "Claude-Code-2.1.286/Harbor-0.22.0",
+    "per-attempt",
+    "zenodo.org/records/23075022"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "orgpqa",
+    "sonnet-5.5",
+    "default",
+    "openrouter",
+    "OR-internal",
+    "per-q",
+    "openrouter.ai/benchmarks/gpqa-diamond"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "ortau2",
+    "sonnet-5.5",
+    "default",
+    "openrouter",
+    "tau2-bench",
+    "per-task",
+    "openrouter.ai/benchmarks/tau2-bench-airline"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "weirdmlv3",
+    "sonnet-5.5",
+    "xhigh",
+    "epoch-archive",
+    "claude_code-2.1.280",
+    "per-run",
+    "htihle.github.io/weirdml.html"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "morinokenjin-keisan-mental",
+    "sonnet-5.5",
+    "medium",
+    "zenn-morinokenjin",
+    "ClaudeCode-CLI",
+    "per-task",
+    "zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "morinokenjin-keisan-progmath",
+    "sonnet-5.5",
+    "medium",
+    "zenn-morinokenjin",
+    "ClaudeCode-CLI",
+    "per-task",
+    "zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "morinokenjin-keisan-csv",
+    "sonnet-5.5",
+    "medium",
+    "zenn-morinokenjin",
+    "ClaudeCode-CLI",
+    "per-task",
+    "zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "morinokenjin-blender-stilllife",
+    "sonnet-5.5",
+    "medium",
+    "zenn-morinokenjin",
+    "ClaudeCode-CLI",
+    "per-task",
+    "zenn.dev/morinokenjin/articles/opus-sonnet-55-blender"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "morinokenjin-blender-watch",
+    "sonnet-5.5",
+    "medium",
+    "zenn-morinokenjin",
+    "ClaudeCode-CLI",
+    "per-task",
+    "zenn.dev/morinokenjin/articles/opus-sonnet-55-blender"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "morinokenjin-blender-animation",
+    "sonnet-5.5",
+    "medium",
+    "zenn-morinokenjin",
+    "ClaudeCode-CLI",
+    "per-task",
+    "zenn.dev/morinokenjin/articles/opus-sonnet-55-blender"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "minecart-opus55-sonnet55",
+    "sonnet-5.5",
+    "default",
+    "reddit-1wx2inx",
+    "ClaudeCode-MCP-Flockbay",
+    "per-task",
+    "reddit.com/r/ClaudeAI/comments/1wx2inx"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "tinyworld",
+    "sonnet-5.5",
+    "default",
+    "ohmyunicorn",
+    "none(Claude-Code-one-shot)",
+    "per-task",
+    "ohmyunicorn.com/labs/dream-loop/tinyworld-sonnet55-vs-opus55"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "tinyworld",
+    "sonnet-5.5",
+    "default",
+    "ohmyunicorn",
+    "none(Claude-Code-one-shot)",
+    "per-task",
+    "ohmyunicorn.com/labs/dream-loop/tinyworld-sonnet55-vs-opus55"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "tinyworld",
+    "sonnet-5.5",
+    "default",
+    "ohmyunicorn",
+    "none(Claude-Code-one-shot)",
+    "per-task",
+    "ohmyunicorn.com/labs/dream-loop/tinyworld-sonnet55-vs-opus55"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "tinyworld",
+    "sonnet-5.5",
+    "default",
+    "ohmyunicorn",
+    "none(Claude-Code-one-shot)",
+    "per-task",
+    "ohmyunicorn.com/labs/dream-loop/tinyworld-sonnet55-vs-opus55"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "tinyworld",
+    "sonnet-5.5",
+    "default",
+    "ohmyunicorn",
+    "none(Claude-Code-one-shot)",
+    "per-task",
+    "ohmyunicorn.com/labs/dream-loop/tinyworld-sonnet55-vs-opus55"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "tinyworld",
+    "sonnet-5.5",
+    "default",
+    "ohmyunicorn",
+    "none(Claude-Code-one-shot)",
+    "per-task",
+    "ohmyunicorn.com/labs/dream-loop/tinyworld-sonnet55-vs-opus55"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "kaloyan",
+    "sonnet-5.5",
+    "default",
+    "kaloyan-blog",
+    "scenes-cli",
+    "per-attempt",
+    "kaloyan.blog/ai-models-rebuild-a-photo-in-blender"
+   ],
+   "cls": "cc-loop",
+   "factor": 0.8226,
+   "sd": 0.1232
+  },
+  {
+   "row": [
+    "brinvik-salesforecast",
+    "sonnet-5.5",
+    "default",
+    "brinvik.com",
+    "none-stated",
+    "per-run",
+    "brinvik.com/en/journal/claude-sonnet-5-5-vs-opus-5-5-sales-forecast-test"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  },
+  {
+   "row": [
+    "connections-oneshot",
+    "sonnet-5.5",
+    "nothink",
+    "matsonj/eval-connections",
+    "Connections-openrouter-harness",
+    "per-20-games",
+    "github.com/matsonj/eval-connections"
+   ],
+   "cls": "api",
+   "factor": 1.0,
+   "sd": 0.0023
+  }
+ ]
+}
