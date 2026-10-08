@@ -76,6 +76,10 @@ def main(refit_all=False, smoke=True):
                     converged=lqm.converged(diag), seconds=round(time.time() - t), data_fingerprint=afp)
         out["diagnostics"][axis] = diag
         print(f"{axis}: {json.dumps(diag)}", flush=True)
+        json.dump(dict(old, **{k: v for k, v in out.items() if k != "diagnostics"},  # each axis kept as soon as it is
+                       diagnostics=dict(old.get("diagnostics", {}), **out["diagnostics"]),    # done: a run stopped
+                       fingerprint="partial"),                    # later resumes from it; the site refuses it meanwhile
+                  open(FIT_CACHE, "w"), indent=1, sort_keys=True)
     json.dump(out, open(FIT_CACHE, "w"), indent=1, sort_keys=True)
     print(f"wrote {FIT_CACHE}")
 

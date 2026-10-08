@@ -427,7 +427,7 @@ def _from_cmdstan(mcmc, max_depth=10):
 def _from_nutpie(trace):
     import numpy as np
     post, ss = trace["posterior"], trace["sample_stats"]
-    arrays = {v: np.asarray(post[v].values) for v in post.data_vars}
+    arrays = {v: np.array(post[v].values) for v in post.data_vars}      # read now: the store is deleted after
     adapted = None
     if "warmup_sample_stats" in trace.children and "mass_matrix_inv" in trace["warmup_sample_stats"]:
         # nutpie records the mass matrix while it adapts (NaN once it is frozen): the last finite one is the final
@@ -536,10 +536,17 @@ def _sample(data, axis, st, seed, output_dir=None, inits=None, adapted=None, dra
         cm = nutpie.compile_stan_model(filename=STAN_FILE, extra_stanc_args=["--O1"],
                                        extra_compile_args=["STAN_NO_RANGE_CHECKS=true"]).with_data(
             **{k: (np.asarray(v) if isinstance(v, list) else v) for k, v in data.items()})
-        trace = nutpie.sample(cm, draws=draws or st["samples"], tune=st["warmup"], chains=st["chains"],
-                              cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,
-                              target_accept=st["target_accept"], store_mass_matrix=True)
-        return _from_nutpie(trace)
+        import shutil, tempfile
+        from nutpie import zarr_store
+        tmp = tempfile.mkdtemp(prefix="lqm-nutpie-")                # draws go to disk, not memory: nutpie also keeps
+        try:                                                         # the mass matrix of every draw (≈ 1 GB here)
+            trace = nutpie.sample(cm, draws=draws or st["samples"], tune=st["warmup"], chains=st["chains"],
+                                  cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,
+                                  target_accept=st["target_accept"], store_mass_matrix=True,
+                                  zarr_store=zarr_store.LocalStore(tmp))
+            return _from_nutpie(trace)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
     cs = cmdstan()
     model = cs.CmdStanModel(stan_file=STAN_FILE, stanc_options={"O1": True}, cpp_options={"STAN_NO_RANGE_CHECKS": True})
     common = dict(data=data, chains=st["chains"], parallel_chains=min(st["chains"], os.cpu_count() or 1), seed=seed,
