@@ -279,7 +279,8 @@ def load(path, models, field="score"):
         ys = [x["y"] for x in rows]
         mu = sum(ys) / len(ys)
         sd = (sum((y - mu) ** 2 for y in ys) / len(ys)) ** 0.5 if field != "cost_usd" else 1.0
-        sd = sd or 1.0                                                  # a tie away from the bounds: equal couples
+        if max(ys) - min(ys) <= 1e-12 * max(1.0, abs(mu)):             # a tie away from the bounds: equal couples
+            mu, sd = ys[0], 1.0                                         # (the mean of equal floats can miss them by 1e-16)
         for x in rows:
             x["z"] = (x["y"] - mu) / sd                                 # numerical prescale; the model is affine-invariant
             x["d"] = x["dy"] / sd                                       # reading precision on the same scale
