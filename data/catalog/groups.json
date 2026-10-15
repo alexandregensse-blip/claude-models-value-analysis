@@ -4184,6 +4184,891 @@
    "label": "Imperial Dragon Harness tournament, Pi runner, 10 project tickets (own draw per arm)",
    "type": "xmodel",
    "config": "GitHub PR MinhHaDuong/ImperialDragonHarness#1253 (open, head 2905c18b4f on branch results/haiku55-arena-n) adds Haiku 5.5 arm n to the main-branch snapshot (base ea4136d830); 3-judge panel (Gemini 3.1 Pro Preview, Grok 4.3, MiniMax M2.5) scores 0-30; score only ingested (see notes.md: cost scopes are not comparable between arm n and arms d/g); read 2026-10-08 ✓"
+  },
+  "valsswemm": {
+   "label": "vals.ai SWE-bench Multimodal (JS front-end issues with screenshots)",
+   "type": "xmodel",
+   "config": "Vals-run agent; resolve rate overall, cost per test (USD); effort max per vals model pages; page updated 2026-10-13; read 2026-10-15 ✓"
+  },
+  "valsrobo": {
+   "label": "vals.ai Robo-bench (robot arm + humanoid control in a physics sim, most tasks held out)",
+   "type": "xmodel",
+   "config": "claude-code harness; overall score; cost = vals 'Est. API cost' per test (USD, estimate); effort max per vals model pages; page updated 2026-10-13; read 2026-10-15 ✓"
+  },
+  "lb2-design": {
+   "label": "LiveBench 2.0 · Design suite",
+   "type": "xmodel",
+   "config": "LiveBench 2.0 Design suite, single run, every model at its highest effort (max), cost = suite total at list price; read 2026-10-15 ✓"
+  },
+  "lb2-research": {
+   "label": "LiveBench 2.0 · Research suite",
+   "type": "xmodel",
+   "config": "LiveBench 2.0 Research suite, single run, every model at its highest effort (max), cost = suite total at list price; read 2026-10-15 ✓"
+  },
+  "lb2-browser": {
+   "label": "LiveBench 2.0 · Browser Use suite",
+   "type": "xmodel",
+   "config": "LiveBench 2.0 Browser Use suite, single run, every model at its highest effort (max), cost = suite total at list price; read 2026-10-15 ✓"
+  },
+  "lb2-coding": {
+   "label": "LiveBench 2.0 · Coding suite",
+   "type": "xmodel",
+   "config": "LiveBench 2.0 Coding suite, single run, every model at its highest effort (max), cost = suite total at list price; read 2026-10-15 ✓"
+  },
+  "lb2-longhorizon": {
+   "label": "LiveBench 2.0 · Long-Horizon suite",
+   "type": "xmodel",
+   "config": "LiveBench 2.0 Long-Horizon suite, single run, every model at its highest effort (max), cost = suite total at list price; read 2026-10-15 ✓"
+  },
+  "lb2-dataanalysis": {
+   "label": "LiveBench 2.0 · Data Analysis suite",
+   "type": "xmodel",
+   "config": "LiveBench 2.0 Data Analysis suite, single run, every model at its highest effort (max), cost = suite total at list price; read 2026-10-15 ✓"
+  },
+  "lb2-reasoning": {
+   "label": "LiveBench 2.0 · Reasoning suite",
+   "type": "xmodel",
+   "config": "LiveBench 2.0 Reasoning suite, single run, every model at its highest effort (max), cost = suite total at list price; read 2026-10-15 ✓"
+  },
+  "convex2-default": {
+   "label": "Convex LLM leaderboard v92a60e0b · with guidelines",
+   "type": "xmodel",
+   "config": "Convex evals (112), benchmark version 92a60e0b (guidelines compressed 7010→4146 tokens), OpenRouter, reasoning effort medium, with guidelines; read 2026-10-15 ✓"
+  },
+  "convex2-noguide": {
+   "label": "Convex LLM leaderboard v92a60e0b · no guidelines",
+   "type": "xmodel",
+   "config": "Convex evals (112), benchmark version 92a60e0b (guidelines compressed 7010→4146 tokens), OpenRouter, reasoning effort medium, no guidelines; read 2026-10-15 ✓"
+  },
+  "convex2-noguide-web": {
+   "label": "Convex LLM leaderboard v92a60e0b · no guidelines + web",
+   "type": "xmodel",
+   "config": "Convex evals (112), benchmark version 92a60e0b (guidelines compressed 7010→4146 tokens), OpenRouter, reasoning effort medium, no guidelines + web; read 2026-10-15 ✓"
+  },
+  "eveagent2-base": {
+   "label": "vercel/eve agent evals (baseline), case set 336fa6e2",
+   "type": "xmodel",
+   "config": "vercel/eve 7 cases x 3 runs, Claude Code, baseline; cost = list price; read 2026-10-15 ✓"
+  },
+  "eveagent2-guided": {
+   "label": "vercel/eve agent evals (guided), case set 336fa6e2",
+   "type": "xmodel",
+   "config": "vercel/eve 7 cases x 3 runs, Claude Code, guided; cost = list price; read 2026-10-15 ✓"
+  },
+  "mercor-oss-genebench": {
+   "label": "Mercor open-source · GeneBench-Pro",
+   "type": "xmodel",
+   "config": "Mercor open-source evaluation, effort max (board field); read 2026-10-15 ✓"
+  },
+  "mercor-oss-terminal-bench-4-0": {
+   "label": "Mercor open-source · Terminal-Bench 4.0",
+   "type": "xmodel",
+   "config": "Mercor open-source evaluation, effort max (board field); read 2026-10-15 ✓"
+  },
+  "aaharvey2": {
+   "label": "Harvey LAB-AA (Artificial Analysis), criteria-pass rate, re-scored October 2026",
+   "type": "xmodel",
+   "config": "AA eval page harvey-lab-aa, harveyLabBreakdown.criteriaPass; live 15 Oct 2026 (re-scored after group aaharvey); read 2026-10-15 ✓"
+  },
+  "aafrontiercode": {
+   "label": "AA FrontierCode 1.1 (AA-run, weighted score)",
+   "type": "xmodel",
+   "config": "Artificial Analysis AA FrontierCode 1.1 (AA-run, weighted score); score only from the model-page payload; effort from payload effort.slug; read 2026-10-15 ✓"
+  },
+  "aammmupro": {
+   "label": "AA MMMU-Pro",
+   "type": "xmodel",
+   "config": "Artificial Analysis AA MMMU-Pro; score only from the model-page payload; effort from payload effort.slug; read 2026-10-15 ✓"
+  },
+  "aaanalyst": {
+   "label": "AA-AnalystAgent",
+   "type": "xmodel",
+   "config": "Artificial Analysis AA-AnalystAgent; score only from the model-page payload; effort from payload effort.slug; read 2026-10-15 ✓"
+  },
+  "aaitbench": {
+   "label": "ITBench-AA (SRE)",
+   "type": "xmodel",
+   "config": "Artificial Analysis ITBench-AA (SRE); score only from the model-page payload; effort from payload effort.slug; read 2026-10-15 ✓"
+  },
+  "vendingbench2": {
+   "label": "Vending-Bench 2 (Andon Labs)",
+   "type": "xmodel",
+   "config": "andonlabs.com/evals/vending-bench-2: mean final money balance after a simulated year (start $500), mean of runs; 3 rows read from the page, the rest relayed by Epoch's mirror; no effort stated by the page; no cost; read 2026-10-15 ✓"
+  },
+  "epoch-spireclimb": {
+   "label": "SpireClimb (Epoch AI)",
+   "type": "xmodel",
+   "config": "epoch.ai/benchmarks/spireclimb: win rate averaged over Slay the Spire 1 (A20 Heart, 60 runs) and Slay the Spire 2 (A10, 75 runs); computer-use harness (Inspect ReAct), each model at maximum reasoning setting; mean_score; read 2026-10-15 ✓"
+  },
+  "designarena-all": {
+   "label": "Design Arena - all categories",
+   "type": "xmodel",
+   "config": "designarena.ai/leaderboard 'allcategories': crowd human-vote Elo on AI-generated designs/UI (1,817,484 votes, 180 models); effort not in the Claude slugs (other vendors' slugs carry -max/-high) so default; no cost; read 2026-10-15 ✓"
+  },
+  "designarena-fullstack": {
+   "label": "Design Arena - fullstack",
+   "type": "xmodel",
+   "config": "designarena.ai/leaderboard 'fullstack' category: crowd human-vote Elo on full-stack app generation (61,252 votes, 49 models); effort not stated; no cost; read 2026-10-15 ✓"
+  },
+  "arcagi3": {
+   "label": "ARC-AGI-3 (semi-private)",
+   "type": "xmodel",
+   "config": "ARC Prize ARC-AGI-3 semi-private interactive-game set, score in % (as published x100), cost = total run USD; Haiku 5.5 on the Standard harness (the Provider-Adapter harness entry, 2.82 % / $437.14, is a different configuration and is not mixed in); read 2026-10-15 ✓"
+  },
+  "sensebench-p004": {
+   "label": "SenseBench (WSD) · prompt p004",
+   "type": "xmodel",
+   "config": "SenseBench lexEN v1, word-sense disambiguation, prompt set p004 (new prompt variant) · accuracy in % (± in the flags), cost in USD per million items as the board prices it; effort from the model name; read 2026-10-15 ✓"
+  },
+  "cri-lmca": {
+   "label": "Conceptual Reasoning Index · LMCA",
+   "type": "xmodel",
+   "config": "Conceptual Reasoning Index LMCA sub-score (Pearson-r based, x100), cost = average USD per response (site cost chart); effort from the csv effort column (max rows carry the base name); blank = default; read 2026-10-15 ✓"
+  },
+  "cri-dtbench": {
+   "label": "Conceptual Reasoning Index · DTBench",
+   "type": "xmodel",
+   "config": "Conceptual Reasoning Index DTBench sub-score (CRI-rescaled accuracy, x100), cost = average USD per response (site cost chart); effort from the csv effort column; blank = default; read 2026-10-15 ✓"
+  },
+  "parallel-search-web": {
+   "label": "Parallel Search Capability · with search",
+   "type": "xmodel",
+   "config": "Parallel Search Capability Leaderboard, Search Intelligence Score = mean of DSQA, HLE and WISER (100 questions each) with Parallel Search; cost per task incl. estimated search/extract usage; Claude 5.x at max effort per the page notes (Haiku 5.5 effort unstated); read 2026-10-15 ✓"
+  },
+  "parallel-search-baseline": {
+   "label": "Parallel Search Capability · without search",
+   "type": "xmodel",
+   "config": "Same suites without the search tool (model alone); inference cost only; read 2026-10-15 ✓"
+  },
+  "surge-gdp-pdf": {
+   "label": "Surge AI · GDP.pdf",
+   "type": "xmodel",
+   "config": "Surge AI GDP.pdf leaderboard (surgehq.ai/benchmarks/gdp-pdf); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-gdp-xlsx": {
+   "label": "Surge AI · GDP.xlsx",
+   "type": "xmodel",
+   "config": "Surge AI GDP.xlsx leaderboard (surgehq.ai/benchmarks/gdp-xlsx); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-chartography": {
+   "label": "Surge AI · Chartography",
+   "type": "xmodel",
+   "config": "Surge AI Chartography leaderboard (surgehq.ai/benchmarks/chartography); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-complex-constraints": {
+   "label": "Surge AI · ComplexConstraints",
+   "type": "xmodel",
+   "config": "Surge AI ComplexConstraints leaderboard (surgehq.ai/benchmarks/complex-constraints); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-dayjob-finance": {
+   "label": "Surge AI · DAYJOB: Finance",
+   "type": "xmodel",
+   "config": "Surge AI DAYJOB: Finance leaderboard (surgehq.ai/benchmarks/dayjob-finance); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-dayjob-healthcare": {
+   "label": "Surge AI · DAYJOB: Healthcare",
+   "type": "xmodel",
+   "config": "Surge AI DAYJOB: Healthcare leaderboard (surgehq.ai/benchmarks/dayjob-healthcare); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-enterprisebench-corecraft": {
+   "label": "Surge AI · EnterpriseBench: CoreCraft",
+   "type": "xmodel",
+   "config": "Surge AI EnterpriseBench: CoreCraft leaderboard (surgehq.ai/benchmarks/enterprisebench-corecraft); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-handbook": {
+   "label": "Surge AI · HANDBOOK.md Agents",
+   "type": "xmodel",
+   "config": "Surge AI HANDBOOK.md Agents leaderboard (surgehq.ai/benchmarks/handbook); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-riemann-bench": {
+   "label": "Surge AI · Riemann-bench",
+   "type": "xmodel",
+   "config": "Surge AI Riemann-bench leaderboard (surgehq.ai/benchmarks/riemann-bench); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-sudo-l7": {
+   "label": "Surge AI · sudo L7",
+   "type": "xmodel",
+   "config": "Surge AI sudo L7 leaderboard (surgehq.ai/benchmarks/sudo-l7); score in %; effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-antidote": {
+   "label": "Surge AI · Antidote: Everyday Edition",
+   "type": "xmodel",
+   "config": "Surge AI Antidote: Everyday Edition leaderboard (surgehq.ai/benchmarks/antidote); Elo from human preference comparisons (95% CI in flags); effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "surge-hemingway-bench": {
+   "label": "Surge AI · Hemingway-bench",
+   "type": "xmodel",
+   "config": "Surge AI Hemingway-bench leaderboard (surgehq.ai/benchmarks/hemingway-bench); Elo from human preference comparisons (95% CI in flags); effort from the model label; vendor-run; no cost; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.18449-asb": {
+   "label": "Autonomous Science Bench (6 lab campaigns x 3 trials)",
+   "type": "xmodel",
+   "config": "Claude Code agent, 18 trials per configuration, resolved = discovery and learning gates both pass; cost = agent-reported API cost summed over the 18 trials; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.08966-hss": {
+   "label": "Humanity's Sixth Sense (HSS), single-pass API, pass@1",
+   "type": "xmodel",
+   "config": "522 image/video tasks, pass@1 = every rubric criterion met, effort = highest honoured per Table 5; tokens_out = mean thinking + answer tokens per task; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.08966-agent": {
+   "label": "HSS 388-task subset, Claude Code agent",
+   "type": "xmodel",
+   "config": "Claude Code harness on the 388-task subset, pass@1; tokens_out = mean thinking tokens per task inside the harness; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.10388-roboquest": {
+   "label": "RoboQuest (10 tasks, 50 episodes per cell), Inspect Robots harness",
+   "type": "xmodel",
+   "config": "200-decision budget per episode, success rate over 50 episodes x 10 tasks; cost per episode at list prices; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17020-cwebench": {
+   "label": "CWE-bench (120 vulnerability-repair tasks, 4 attempts)",
+   "type": "xmodel",
+   "config": "Claude Code, high reasoning effort, 4 attempts per task, 1 h limit; programmatic pass@1; cost = mean API cost per rollout; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.14397-realitybench": {
+   "label": "RealityBench acceptability (1,378 frames)",
+   "type": "xmodel",
+   "config": "zero-shot VLM acceptability F1 against the rule scorer; cost = whole set at developer list price, thinking at output rate; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.19589-jockeybench": {
+   "label": "JockeyBench Program track (324 races, daily revision agent)",
+   "type": "xmodel",
+   "config": "Claude Code with MCP bridge; log gain in nats relative to uniform, mean over runs; no model cost (fees are betting score-yen); read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04915-bais": {
+   "label": "BAIS single-cell analysis (18 tasks x 3 replicates), official accuracy",
+   "type": "xmodel",
+   "config": "Claude Code headless, official benchmark score on the original evidence (E); read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17768-highlights": {
+   "label": "Reader-highlight sentence ranking (215 dev pages), zero-shot",
+   "type": "xmodel",
+   "config": "average-precision difference vs the cached gemini-3.1-pro-preview reference, first sample, one scoring run; low reasoning effort; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.18122-judge-align": {
+   "label": "LLM judge accuracy on the alignment set (439 DPO pairs), original prompts",
+   "type": "xmodel",
+   "config": "pairwise verdict accuracy vs dataset label, CALM prompt, reasoning off; cost = US$ per 1,000 requests over the full 15,195-request design; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.18122-judge-fact": {
+   "label": "LLM judge accuracy on the fact-related set, original prompts",
+   "type": "xmodel",
+   "config": "pairwise verdict accuracy vs correct answer, CALM prompt, reasoning off; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17724-sauron": {
+   "label": "PA100 rubric verification, verifier Sauron, Claude backbones",
+   "type": "xmodel",
+   "config": "all-criteria F1 vs human labels (2,586 criteria), backbone = the Claude model, verifier Sauron; cost per full run; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17724-gandalf": {
+   "label": "PA100 rubric verification, verifier Gandalf, Claude backbones",
+   "type": "xmodel",
+   "config": "all-criteria F1 vs human labels (2,586 criteria), backbone = the Claude model, verifier Gandalf; cost per full run; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17724-archipelago": {
+   "label": "PA100 rubric verification, verifier Archipelago, Claude backbones",
+   "type": "xmodel",
+   "config": "all-criteria F1 vs human labels (2,586 criteria), backbone = the Claude model, verifier Archipelago; cost per full run; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17724-aaaj": {
+   "label": "PA100 rubric verification, verifier AAAJ, Claude backbones",
+   "type": "xmodel",
+   "config": "all-criteria F1 vs human labels (2,586 criteria), backbone = the Claude model, verifier AAAJ; cost per full run; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17724-autorubric": {
+   "label": "PA100 rubric verification, verifier Autorubric, Claude backbones",
+   "type": "xmodel",
+   "config": "all-criteria F1 vs human labels (2,586 criteria), backbone = the Claude model, verifier Autorubric; cost per full run; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17016-peer": {
+   "label": "ProbabilityBench peer: mean KL vs list price",
+   "type": "xmodel",
+   "config": "peer world, 25 labelled memos per case, 3 seeds; neg-KL = minus mean KL divergence (nats); cost = list price USD per 1,000 predictions; both digitised from the vector Fig. 1 coordinates; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17016-covert": {
+   "label": "ProbabilityBench covert: mean KL vs list price",
+   "type": "xmodel",
+   "config": "covert world, 25 labelled memos per case, 3 seeds; neg-KL = minus mean KL divergence (nats); cost = list price USD per 1,000 predictions; both digitised from the vector Fig. 1 coordinates; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.17016-credit": {
+   "label": "ProbabilityBench credit: mean KL vs list price",
+   "type": "xmodel",
+   "config": "credit world, 25 labelled memos per case, 3 seeds; neg-KL = minus mean KL divergence (nats); cost = list price USD per 1,000 predictions; both digitised from the vector Fig. 1 coordinates; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.06824-cost": {
+   "label": "TasteVal total cost per run, 6-task subset (cost only)",
+   "type": "xmodel",
+   "config": "total API spend of all agents + GPU at $2.5/h per run, standard scaffold, 6 tasks; read from the log axis of Fig. 6 (right); score rows live in the TasteVal score groups; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.03994-lean": {
+   "label": "VeriContest-Lean (theorems proved of 10; cost per proved theorem)",
+   "type": "xmodel",
+   "config": "10 theorems x 5 Claude models x 5 effort settings, one attempt each, Claude Code, 10 iterations/3 h; Table 4-5 of arXiv 2610.03994; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.06668-tier2solve": {
+   "label": "Tier-2 engineering solve items (of 25), Claude Code CLI no tools",
+   "type": "xmodel",
+   "config": "25 multi-regime engineering solve problems, text only, Claude Code CLI replacing the system prompt, effort high where exposed; Supp. Table 3 of arXiv 2610.06668; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.11539-designcreativity": {
+   "label": "Design Creativity Bench (UI generation; overall T-score, median cost per design)",
+   "type": "xmodel",
+   "config": "80 UI design tasks / 160 prompts, one generation per design, highest effort (Opus 5.5 at xhigh); Tables 2 and 9 of arXiv 2610.11539; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.10479-dsh": {
+   "label": "Agentic RSR scene refinement via DeepSeek Harness (scenes passing visual check, of 18)",
+   "type": "xmodel",
+   "config": "18 real scenes per configuration, Oct 6 2026 evaluation summary, DSH harness; Table 3 of arXiv 2610.10479; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.05348-nq": {
+   "label": "Search agent with gold passages kept, answer EM on NQ (vanilla retrieval tool)",
+   "type": "xmodel",
+   "config": "257 NQ questions, BM25 over wiki-18, vanilla tool; Table 1/4 of arXiv 2610.05348; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.05348-hotpotqa": {
+   "label": "Search agent with gold passages kept, answer EM on HOTPOTQA (vanilla retrieval tool)",
+   "type": "xmodel",
+   "config": "300 HotpotQA questions, BM25 over wiki-18, vanilla tool; Table 1/4 of arXiv 2610.05348; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.02459-openrua-libero10": {
+   "label": "OpenRUA: Claude Code driving a robot, LIBERO-10 (LIBERO-PRO)",
+   "type": "xmodel",
+   "config": "200 trials per configuration across both perturbation cells, Claude Code at high effort; Table 11 of arXiv 2610.02459; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.11328-mineodyssey": {
+   "label": "Mine Odyssey: Minecraft spatial navigation (success rate, 180 tasks)",
+   "type": "xmodel",
+   "config": "180 navigation tasks (125 outdoor/55 indoor), 500 decisions or 6 h; Opus 5 at 4 efforts plus Opus 5.5 max; Table 1 of arXiv 2610.11328; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.06824-tasteval-compute": {
+   "label": "TasteVal compute multiplier vs expert baseline (Researcher models, 8 ML-research tasks)",
+   "type": "xmodel",
+   "config": "8 uncontaminated AI R&D tasks, 6 seeds/model/task, 40 H100-hours; Researcher model + fixed Coder (Opus 4.8); Table 2 of arXiv 2610.06824; score only (cost in round 2); read 2026-10-15 ✓"
+  },
+  "arxiv-2610.06824-tasteval-perf": {
+   "label": "TasteVal performance multiplier vs expert baseline",
+   "type": "xmodel",
+   "config": "8 uncontaminated AI R&D tasks, 6 seeds/model/task, 40 H100-hours; Researcher model + fixed Coder (Opus 4.8); Table 2 of arXiv 2610.06824; score only (cost in round 2); read 2026-10-15 ✓"
+  },
+  "arxiv-2610.13668-crbug-premerge": {
+   "label": "CRBugBench pre-merge bugs (Cmt track), recall@5",
+   "type": "xmodel",
+   "config": "500 review tasks per track from 98 OSS repos, copilot-cli 1.0.74 official /review prompt, default prompt; Table 1 of arXiv 2610.13668; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.13668-crbug-postmerge": {
+   "label": "CRBugBench post-merge bugs (Fix track), recall@5",
+   "type": "xmodel",
+   "config": "500 review tasks per track from 98 OSS repos, copilot-cli 1.0.74 official /review prompt, default prompt; Table 1 of arXiv 2610.13668; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.19051-hanabi": {
+   "label": "Hanabi convention-inference accuracy (all teammates), clone teams of one model",
+   "type": "xmodel",
+   "config": "250 fresh Hanabi games, 4 samples per model per game, temperature 1; Table 2 of arXiv 2610.19051; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.19051-taskassign": {
+   "label": "Task-assignment accuracy, clone teams (Haiku 4.5 vs Sonnet 5.5)",
+   "type": "xmodel",
+   "config": "300 episodes, one sample per model; Table 2 of arXiv 2610.19051; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.06511-artifactarena-vgh": {
+   "label": "ArtifactArena model leaderboard, Verifier-Grounded Refinement Harness (VGH) Elo",
+   "type": "xmodel",
+   "config": "Best artifact per (model, harness) in a cross-model Bradley-Terry round robin, MuJoCo robot arena; Figure 2 of arXiv 2610.06511 (read from image); read 2026-10-15 ✓"
+  },
+  "arxiv-2610.06511-artifactarena-sh": {
+   "label": "ArtifactArena model leaderboard, Sampling Harness (SH) Elo",
+   "type": "xmodel",
+   "config": "Best artifact per (model, harness) in a cross-model Bradley-Terry round robin, MuJoCo robot arena; Figure 2 of arXiv 2610.06511 (read from image); read 2026-10-15 ✓"
+  },
+  "arxiv-2610.06511-artifactarena-dlh": {
+   "label": "ArtifactArena model leaderboard, Design Lab Harness (DLH) Elo",
+   "type": "xmodel",
+   "config": "Best artifact per (model, harness) in a cross-model Bradley-Terry round robin, MuJoCo robot arena; Figure 2 of arXiv 2610.06511 (read from image); read 2026-10-15 ✓"
+  },
+  "arxiv-2610.10513-ensosciexam": {
+   "label": "ENSO stochastic-model building (SciExam), final composite score",
+   "type": "xmodel",
+   "config": "agent builds an ENSO model within 6 h eligible time, one run per system, Claude Code on subscription; Table 4/6 of arXiv 2610.10513; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.07563-householdbench": {
+   "label": "HouseholdBench: household-economics prediction, macro-F1 on categorical targets",
+   "type": "xmodel",
+   "config": "32 household tasks, pre-cutoff test split, default reasoning effort; Table 3 of arXiv 2610.07563; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04292-lmbuild": {
+   "label": "LMBuild: buildable/functional 3D structures, mean of four level scores",
+   "type": "xmodel",
+   "config": "200-object core set, Baseline Interaction Protocol, 30 systems; Table 6 of arXiv 2610.04292; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.12596-spirebench": {
+   "label": "SpireBench: Slay the Spire Ascension 20 Ironclad, mean final floor reached",
+   "type": "xmodel",
+   "config": "10 runs per model on the same held-out seeds, themed reskin with note-taking; Table 1 and Table 26 of arXiv 2610.12596; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.12954-mathvis": {
+   "label": "MathVis: mathematical figure generation as TikZ/SVG programs, pass@1",
+   "type": "xmodel",
+   "config": "512 official questions, single-round code generation, 3 rollouts; Table 6 of arXiv 2610.12954; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.14918-skillforge": {
+   "label": "SkillForgeBench: skill-conditioned agent tasks, strict completion score with skill",
+   "type": "xmodel",
+   "config": "842 tasks, OpenHands harness, LLM-judge rubrics; Table 2 of arXiv 2610.14918; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.18868-alecm": {
+   "label": "Agents' Last Exam computing-and-math split (ALE-CM, 18 tasks), mean graded score S@1",
+   "type": "xmodel",
+   "config": "18 tasks x 5 rollouts, Claude Code harness; Table 2 of arXiv 2610.18868; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04184-evalresearch": {
+   "label": "EvalResearchBench: quality of evaluation suites designed by the model (overall Score, 14 targets)",
+   "type": "xmodel",
+   "config": "one research episode per model, frozen assessment on 14 targets; Table 2 of arXiv 2610.04184; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04976-pricedguidance-test": {
+   "label": "Priced Guidance: median compression cost (bits, lower is better), Essence judge, 87 test papers",
+   "type": "xmodel",
+   "config": "generator models guided by a Fable guide, 87 recent deep-learning papers; Figure 2 text of arXiv 2610.04976; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04976-pricedguidance-dev-opus5": {
+   "label": "Priced Guidance dev set (40 papers): Opus 5 high vs max",
+   "type": "sweep",
+   "config": "dev set 40 papers, effort ablation; Figure 7 text of arXiv 2610.04976; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04976-pricedguidance-dev-fable51": {
+   "label": "Priced Guidance dev set (40 papers): Fable 5.1 high vs max",
+   "type": "sweep",
+   "config": "dev set 40 papers, effort ablation; Figure 7 text of arXiv 2610.04976; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.11123-uitau-genuiharness": {
+   "label": "UI-Tau Bench Lite, genuiharness harness, Avg@3 state-EM",
+   "type": "xmodel",
+   "config": "300 tasks, three sessions, temperature 0.7, genuiharness harness; Table 2 of arXiv 2610.11123; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.11123-uitau-smolagents": {
+   "label": "UI-Tau Bench Lite, smolagents harness, Avg@3 state-EM",
+   "type": "xmodel",
+   "config": "300 tasks, three sessions, temperature 0.7, smolagents harness; Table 2 of arXiv 2610.11123; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.11123-uitau-miniswe": {
+   "label": "UI-Tau Bench Lite, miniswe harness, Avg@3 state-EM",
+   "type": "xmodel",
+   "config": "300 tasks, three sessions, temperature 0.7, miniswe harness; Table 2 of arXiv 2610.11123; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.11123-uitau-pi": {
+   "label": "UI-Tau Bench Lite, pi harness, Avg@3 state-EM",
+   "type": "xmodel",
+   "config": "300 tasks, three sessions, temperature 0.7, pi harness; Table 2 of arXiv 2610.11123; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04277-gqa-raw": {
+   "label": "SyclKittens causal GQA kernel, cold-iterative, condition 'raw' (peak@3 vs PyTorch XPU SDPA)",
+   "type": "xmodel",
+   "config": "3 cold-iterative trials per cell on one Intel Max GPU, Claude Code 2.1.214; Table 4 of arXiv 2610.04277; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04277-gqa-syclkittens": {
+   "label": "SyclKittens causal GQA kernel, cold-iterative, condition 'syclkittens' (peak@3 vs PyTorch XPU SDPA)",
+   "type": "xmodel",
+   "config": "3 cold-iterative trials per cell on one Intel Max GPU, Claude Code 2.1.214; Table 4 of arXiv 2610.04277; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04277-gqa-examples": {
+   "label": "SyclKittens causal GQA kernel, cold-iterative, condition 'examples' (peak@3 vs PyTorch XPU SDPA)",
+   "type": "xmodel",
+   "config": "3 cold-iterative trials per cell on one Intel Max GPU, Claude Code 2.1.214; Table 4 of arXiv 2610.04277; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04277-gemm-raw": {
+   "label": "SyclKittens single-GPU BF16 GEMM, cold-iterative, condition 'raw' (peak@3 vs oneDNN)",
+   "type": "xmodel",
+   "config": "3 cold-iterative trials per cell, Claude Code 2.1.214; Table 4/10 of arXiv 2610.04277; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04277-gemm-syclkittens": {
+   "label": "SyclKittens single-GPU BF16 GEMM, cold-iterative, condition 'syclkittens' (peak@3 vs oneDNN)",
+   "type": "xmodel",
+   "config": "3 cold-iterative trials per cell, Claude Code 2.1.214; Table 4/10 of arXiv 2610.04277; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.04277-gemm-examples": {
+   "label": "SyclKittens single-GPU BF16 GEMM, cold-iterative, condition 'examples' (peak@3 vs oneDNN)",
+   "type": "xmodel",
+   "config": "3 cold-iterative trials per cell, Claude Code 2.1.214; Table 4/10 of arXiv 2610.04277; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.05398-mmposttrain": {
+   "label": "MMPostTrainBench: mean task score of the model post-trained by the research agent (Claude Code)",
+   "type": "xmodel",
+   "config": "multimodal post-training research by agent, 8 benchmarks, 24h limit; Table 3 of arXiv 2610.05398; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.03631-neutron-loop": {
+   "label": "NeutronGym McStasBench seen tasks (of 16), agent loop",
+   "type": "xmodel",
+   "config": "16 seen McStasBench tasks, one episode each, temperature 0; Table 1 of arXiv 2610.03631; read 2026-10-15 ✓"
+  },
+  "arxiv-2610.03631-neutron-1shot": {
+   "label": "NeutronGym McStasBench seen tasks (of 16), one-shot",
+   "type": "xmodel",
+   "config": "16 seen McStasBench tasks, one episode each, temperature 0; Table 1 of arXiv 2610.03631; read 2026-10-15 ✓"
+  },
+  "crb-grader-test": {
+   "label": "code-review-bench: Claude 5.5 as claim labeller (12 batches, 493 claims), agreement with GPT-6.1 Sol labels",
+   "type": "xmodel",
+   "config": "kamui/code-review-bench grader-model-test-2026-10-12; 12 sessions (12 batches of 53 reviews; 493 claims); Claude Code high; score = label agreement with the saved GPT-6.1 Sol labelling (not accuracy); read 2026-10-15 ✓"
+  },
+  "gm-bench2-agentic": {
+   "label": "GM-Bench 2.0 agentic lane (hockey-GM 5-season episode, 32 private seeds, Claude Code)",
+   "type": "xmodel",
+   "config": "nedcut/gm-bench README (rows published 12-15 Oct 2026); Claude Code harness default effort; mean score over 32-seed private panel, reference pick-trader heuristic = 249.2; rows flagged unpinned by the source; read 2026-10-15 ✓"
+  },
+  "peterth-autoparallel": {
+   "label": "PeterTh llm-eval-local: LLM autoparallelization of 220 programs (Claude Code, medium)",
+   "type": "xmodel",
+   "config": "PeterTh/llm-eval-local analysis/tables/4d_all_models_score_vs_cost.csv; 220 programs per model-effort profile; slugs claude-<model>-cc-medium; score = mean overall score (0-10); cost = estimated USD per run from tokens x list price; read 2026-10-15 ✓"
+  },
+  "identitybench-v1": {
+   "label": "IdentityBench v1: identity-governance decisions (680 test cases), Claude CLI baseline prompt",
+   "type": "xmodel",
+   "config": "rlwillen0121/identity-eval-harness README leaderboard; frozen test split, baseline prompt, provider claude_cli; no effort set; score = grounded accuracy %; cost = API-equivalent USD per 1,000 decisions; read 2026-10-15 ✓"
+  },
+  "rails-planner-frozen": {
+   "label": "claude-maintain-rails-evals: frozen planner benchmark, Rails case (23 expected findings), 5 reps",
+   "type": "xmodel",
+   "config": "andreimaxim/claude-maintain-rails-evals tests/results/20261012; planner plugin run in Amp threads; score = mean final_actionable findings (of 23) over the repetitions with a plan; cost = mean list-price estimate of recorded requests (complete estimates only); read 2026-10-15 ✓"
+  },
+  "mmlu-prox-lite-avg10": {
+   "label": "MMLU-ProX-Lite: strict accuracy averaged over 10 languages (588 parallel questions each), lm-evaluation-harness",
+   "type": "xmodel",
+   "config": "3ae3ae/mmlu-prox-lite-evals README 'Strict accuracy (%) by language' (en zh ja ko pt de id ru ar sw); developer-default reasoning effort; 'not a leaderboard'; mean of the 10 per-language accuracies computed by us; read 2026-10-15 ✓"
+  },
+  "threadkeeper-128k": {
+   "label": "ThreadKeeper: summarise a 128k-token fake chat (facts, threads, inventions), composite v2",
+   "type": "xmodel",
+   "config": "neko-legends/threadkeeper results/leaderboard.csv; 128k corpus seed 12801; Claude Code 2.1.289; judge venice/gemini-3-8-flash (neutral family) for every arm; composite = 100*(0.45 facts + 0.30 threads + 0.25 invention_score); subscription, no cost; read 2026-10-15 ✓"
+  },
+  "wiggum-flower-given-oneshot": {
+   "label": "Professor Wiggum FlowER mechanism prediction, 10 hard cases, product given, one-shot baseline",
+   "type": "xmodel",
+   "config": "scottmreed/professor-wiggum README harness-vs-baseline table; quality_v2 score (0-1000) on 10 hard FlowER-derived cases; thinking level low; models answered through the agent bridge (cost opaque); read 2026-10-15 ✓"
+  },
+  "wiggum-flower-given-harness": {
+   "label": "Professor Wiggum FlowER mechanism prediction, 10 hard cases, product given, Wiggum harness",
+   "type": "xmodel",
+   "config": "scottmreed/professor-wiggum README harness-vs-baseline table; quality_v2 score (0-1000) on 10 hard FlowER-derived cases; thinking level low; models answered through the agent bridge (cost opaque); read 2026-10-15 ✓"
+  },
+  "wiggum-flower-hidden-oneshot": {
+   "label": "Professor Wiggum FlowER mechanism prediction, 10 hard cases, product hidden, one-shot baseline",
+   "type": "xmodel",
+   "config": "scottmreed/professor-wiggum README harness-vs-baseline table; quality_v2 score (0-1000) on 10 hard FlowER-derived cases; thinking level low; models answered through the agent bridge (cost opaque); read 2026-10-15 ✓"
+  },
+  "wiggum-flower-hidden-harness": {
+   "label": "Professor Wiggum FlowER mechanism prediction, 10 hard cases, product hidden, Wiggum harness",
+   "type": "xmodel",
+   "config": "scottmreed/professor-wiggum README harness-vs-baseline table; quality_v2 score (0-1000) on 10 hard FlowER-derived cases; thinking level low; models answered through the agent bridge (cost opaque); read 2026-10-15 ✓"
+  },
+  "kwts-healthcare": {
+   "label": "Knows When to Stop (KWTS) healthcare admin dataset: 90 cases, Anthropic tool-use runner",
+   "type": "xmodel",
+   "config": "tylergibbs1/kwts-healthcare-dataset results.json (9 Oct 2026); 90 cases (30 finish/stop/distractor triplets), 8 responses & 12 actions cap, 2048 output tokens per response; one repetition per model; score = passed cases %; read 2026-10-15 ✓"
+  },
+  "tw-support-evals": {
+   "label": "tw-support-agent-evals: 40 Traditional-Chinese support cases, Claude Code CLI",
+   "type": "xmodel",
+   "config": "hsuanmingli/tw-support-agent-evals reports/sample-report.md (2026-10-13); backend claude -p (subscription); pass = handoff rule + string rules + LLM judge claude-haiku-5-5; score = pass%; read 2026-10-15 ✓"
+  },
+  "haiku-thinking-handoff": {
+   "label": "haiku-thinking-bench: does thinking-off make Haiku 5.5 skip a needed handoff (24 cases x 10 runs, 80 handoff runs)",
+   "type": "sweep",
+   "config": "17tayyy/haiku-thinking-bench README (Oct 2026); mechanical grading; score = handoffs made correctly of 80 (100 - missed%); cost = cost per conversation (tokens x list price, no caching); read 2026-10-15 ✓"
+  },
+  "idp-invoice-routing": {
+   "label": "IntelligentDocumentProcessing: 250 synthetic German documents, invoice routing correct (single-model systems)",
+   "type": "xmodel",
+   "config": "DanielHuette/IntelligentDocumentProcessing README, measured 8 Oct 2026; one shared prompt; no extended thinking for Claude; cost = tokens billed x list price per 1,000 documents; read 2026-10-15 ✓"
+  },
+  "terraform-haiku-bench": {
+   "label": "claude-haiku-terraform-benchmark: 3 Terraform tasks scored /100 (fmt, validate, tflint, checkov, coverage, conventions), Bedrock",
+   "type": "xmodel",
+   "config": "moriryota62/claude-haiku-terraform-benchmark results/report.md (latest run, 11 Oct 2026); score = mean of 3 task scores; cost = total of the 3 generations at Bedrock regional price (list x1.1); read 2026-10-15 ✓"
+  },
+  "mythos-travas-bugs": {
+   "label": "mythos-5-1-travas: find 5 planted bugs in one repo (3 runs per model), claude -p effort high",
+   "type": "xmodel",
+   "config": "ulissesflores/mythos-5-1-travas results.json (10 Oct 2026); Claude Max subscription; tools Read,Grep,Glob; score = mean planted bugs found (of 5) over 3 runs; cost = mean list-price cost per review; read 2026-10-15 ✓"
+  },
+  "mre-small8": {
+   "label": "model-routing-eval: 8 small coding tasks (t04-t12 subset)",
+   "type": "xmodel",
+   "config": "andre-motta/model-routing-eval session_runs.csv; Claude Code (backend claude), hidden tests, 1 run per task; tasks ['t04_lru_cache', 't05_cli_json_flag', 't06_log_parser', 't07_mutable_default', 't08_timezone_bug', 't09_thread_safety', 't11_async_migration', 't12_needle_bug']; score = pass% over tasks; cost = mean Claude Code cost per run; read 2026-10-15 ✓"
+  },
+  "mre-fromager5": {
+   "label": "model-routing-eval: 5 fromager repo tasks (r01-r05)",
+   "type": "xmodel",
+   "config": "andre-motta/model-routing-eval session_runs.csv; Claude Code (backend claude), hidden tests, 1 run per task; tasks ['r01_fromager_distinfo', 'r02_fromager_age_filter', 'r03_fromager_dep_chain', 'r04_fromager_age_fallback', 'r05_fromager_version_prebuilt']; score = pass% over tasks; cost = mean Claude Code cost per run; read 2026-10-15 ✓"
+  },
+  "mre-tickets3": {
+   "label": "model-routing-eval: 3 fromager ticket tasks (r01t-r03t)",
+   "type": "xmodel",
+   "config": "andre-motta/model-routing-eval session_runs.csv; Claude Code (backend claude), hidden tests, 1 run per task; tasks ['r01t_fromager_distinfo_ticket', 'r02t_fromager_age_filter_ticket', 'r03t_fromager_dep_chain_ticket']; score = pass% over tasks; cost = mean Claude Code cost per run; read 2026-10-15 ✓"
+  },
+  "mre-medium3": {
+   "label": "model-routing-eval: 3 harder coding tasks (t14-t16)",
+   "type": "xmodel",
+   "config": "andre-motta/model-routing-eval session_runs.csv; Claude Code (backend claude), hidden tests, 1 run per task; tasks ['t14_dep_resolver', 't15_perf_regression', 't16_json_patch']; score = pass% over tasks; cost = mean Claude Code cost per run; read 2026-10-15 ✓"
+  },
+  "rtx4090-cloud-claude": {
+   "label": "rtx4090-local-vs-cloud: 8 manufacturing-domain tasks, programmatic grading, cloud Claude rows via Claude Code",
+   "type": "xmodel",
+   "config": "Howard159357/rtx4090-local-vs-cloud-coding-benchmark README (15 Oct 2026); 3 runs per setup, Claude Code CLI with built-in shell/web/plugins disabled; subscription (no API cost); score = mean of 3 runs as printed; read 2026-10-15 ✓"
+  },
+  "scorch-claude-subagent": {
+   "label": "scorch-bench: artillery duel game vs 7 bots, Claude Code subagents (reasoning track), seed 17",
+   "type": "xmodel",
+   "config": "smerwin/scorch-bench bench/RESULTS-claude.md (2026-10-09); 8 matches per model on one seed; one fresh Claude Code subagent per round via relay provider; score = win rate %; read 2026-10-15 ✓"
+  },
+  "synthbench-plain-avg4": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, mean of 4 datasets, plain prompt",
+   "type": "xmodel",
+   "config": "DataViking-Tech/SynthBench leaderboard-results (13-14 Oct 2026); 100 questions x 30 samples per dataset (globalopinionqa, gss, opinionsqa, subpop); via OpenRouter; plain prompt; SPS 0..1 (1 = human-like); mean over datasets of the mean over available runs, computed by us; read 2026-10-15 ✓"
+  },
+  "synthbench-althing-avg4": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, mean of 4 datasets, althing prompt",
+   "type": "xmodel",
+   "config": "DataViking-Tech/SynthBench leaderboard-results (13-14 Oct 2026); 100 questions x 30 samples per dataset (globalopinionqa, gss, opinionsqa, subpop); via OpenRouter; persona-conditioned (althing/) prompt; SPS 0..1 (1 = human-like); mean over datasets of the mean over available runs, computed by us; read 2026-10-15 ✓"
+  },
+  "maple-tools-eval": {
+   "label": "MapleTechLabs/maple: tool-calling eval (50 tasks, k=3 x 2 runs pooled), pass@1",
+   "type": "xmodel",
+   "config": "MapleTechLabs/maple apps/ai/src/evals/BASELINE.md, section 'Tools suite: 2026-10-08, six models, two runs pooled'; 50 tasks, production chat turn, eval world; ceiling-effect suite ('saturated' per source); score = pass@1 %; read 2026-10-15 ✓"
+  },
+  "gitdiagram-haiku55": {
+   "label": "gitdiagram: Haiku 5.5 diagram generation (27 diagrams per setup), arrows backed by the code per blind judge GPT-6 Sol",
+   "type": "sweep",
+   "config": "ahmedkhaleel2004/gitdiagram experiments/diagram-haiku/README.md (2026-10-07, committed 22:30Z); Haiku 5.5 on Anthropic API, identical prompts; judge GPT-6 Sol (not Claude); score = 100 - %arrows not backed by code (judged runs: 19 / 19 / 9); cost = USD per diagram as billed in this eval (no caching for Haiku); read 2026-10-15 ✓"
+  },
+  "krauq-scan2026-ctf": {
+   "label": "krauq.ai SCAN 2026 CTF qualifier (55 flags, 1 attempt each)",
+   "type": "xmodel",
+   "config": "Claude Code (builds 2.1.273/2.1.284/2.1.293), 55 blockchain-investigation CTF flags, one attempt per flag, 20-min limit; score = flags solved of 55; cost = API-equivalent total of the 55 attempts (sum of per-attempt cost_usd; estimated attempts flagged); read 2026-10-15 ✓"
+  },
+  "vals-vcb-single-agent": {
+   "label": "Vals blog: Vibe Code Bench, Opus 5.5 single agent",
+   "type": "sweep",
+   "config": "Claude Code CLI headless, Opus 5.5, single agent, 50 apps, 1 run per setup; score = share of UI tests passed; cost = list-price totals reported by Claude Code per app; read 2026-10-15 ✓"
+  },
+  "vals-vcb-team": {
+   "label": "Vals blog: Vibe Code Bench, Opus 5.5 team (lead + up to 5 subagents)",
+   "type": "sweep",
+   "config": "Claude Code CLI headless, Opus 5.5, team, 50 apps, 1 run per setup; score = share of UI tests passed; cost = list-price totals reported by Claude Code per app; read 2026-10-15 ✓"
+  },
+  "aarobotics-v01": {
+   "label": "Artificial Analysis AA-Robotics v0.1 (8 tasks, 6-axis arm)",
+   "type": "xmodel",
+   "config": "8 zero-shot tabletop tasks, 1 attempt each, human-judged end state, score 0-100 averaged; Claude in Claude Code at high; cost per task; read 2026-10-15 ✓"
+  },
+  "aa3d-v10": {
+   "label": "Artificial Analysis AA-3D v1.0 (blind pairwise Elo, interactive 3D scenes)",
+   "type": "xmodel",
+   "config": "agent in offline sandbox (Stirrup harness), 3 h / 250 turns, brief -> three.js scene, panel blind pairwise votes -> Elo; cost = mean per scene (AA list-price); read 2026-10-15 ✓"
+  },
+  "c0ze-agenteval13": {
+   "label": "c0ze/agent-evaluation: 13 tasks, blind-graded (24-way pass of 13 Oct)",
+   "type": "xmodel",
+   "config": "13 self-contained tasks, 1 run per model, blind rubric grading by Opus 5.5 subagents; score = mean of 13 task totals /10; cost per 13-task run (credit-balance drop, whole $; Haiku API-equivalent); read 2026-10-15 ✓"
+  },
+  "medicrab-lab2": {
+   "label": "MediCrab Lab notes #2: 24 planted errors in one pediatric septic-shock trial",
+   "type": "xmodel",
+   "config": "same prompt, no web search, 2-3 runs each, graded blind; score = mean errors found of 24; read 2026-10-15 ✓"
+  },
+  "buoy-haiku55-effort": {
+   "label": "Buoy: Haiku 5.5 default vs high (256 food-ordering-app jobs)",
+   "type": "sweep",
+   "config": "256 jobs in Buoy's own test app on iOS Simulators, 1 run each; score = jobs done right %; cost per job from tokens x list price; read 2026-10-15 ✓"
+  },
+  "cliphouse-motion-v11": {
+   "label": "cliphou.se Motion Graphics Benchmark v1.1: cost per run (Remotion videos)",
+   "type": "xmodel",
+   "config": "3 briefs x 2 runs via OpenRouter, reasoning high; cost = mean OpenRouter generation cost per run over the 6 runs (computed by us); no quality score published (human review pending); read 2026-10-15 ✓"
+  },
+  "tafla-2026-10-08": {
+   "label": "Tafla benchmark 2026-10-08: everyday calculations, default vs low effort",
+   "type": "sweep",
+   "config": "12 questions x 5 runs x (question + follow-up), live agent with GRID calculation engine; score = correct boards of 120 turns; cost per run (60 runs per lane); read 2026-10-15 ✓"
+  },
+  "reddit-1x1nsaz-codesearch": {
+   "label": "Reddit 1x1nsaz (emarkosov): code search task, Haiku/Sonnet/Opus 5.5 as subagents",
+   "type": "xmodel",
+   "config": "re-run of a real task (find every file for a feature; 48 true files) on each model as subagent, high effort; score = files found of 48; cost as self-reported; read 2026-10-15 ✓"
+  },
+  "reddit-1x1nsaz-web5": {
+   "label": "Reddit 1x1nsaz (emarkosov): 5 web tasks (3 research + 2 fact-check) cost",
+   "type": "xmodel",
+   "config": "5 web tasks as subagents, high effort; cost for all 5 tasks as self-reported; read 2026-10-15 ✓"
+  },
+  "reddit-1x1jbry-unity": {
+   "label": "Reddit 1x1jbry (AlexXx52): one read-only Unity investigation, subscription allowance",
+   "type": "xmodel",
+   "config": "same read-only investigation of a Unity 6 project on each consumer subscription (Claude Pro for Claude); 'cost' = % of the subscription's own usage allowance (NOT USD, not comparable across providers); score = author's subjective quality /10; 1 run; read 2026-10-15 ✓"
+  },
+  "reddit-1x0poki-pigs": {
+   "label": "Reddit 1x0poki (smith2008): Three Little Pigs SVG film, blind cross-judged",
+   "type": "xmodel",
+   "config": "20-s film of 600 SVG frames, each model in Claude Code, one run; each model scored all three films blind (frame sheets); score /10; read 2026-10-15 ✓"
+  },
+  "reddit-1x0iu5x-research": {
+   "label": "Reddit 1x0iu5x (dergachoff): Haiku 5.5 research sub-agent at three efforts vs DeepSeek",
+   "type": "sweep",
+   "config": "4 real research briefs, Haiku 5.5 low/medium/high vs DeepSeek V4.1 Flash (low), Opus blind A/B judge both orders; score = briefs won vs DeepSeek of 4 (ties counted as not won); cost per run as self-reported (scope unstated); read 2026-10-15 ✓"
+  },
+  "reddit-1x132yy-agentic": {
+   "label": "Reddit 1x132yy (Escobar747): cross-language agentic task in a real Rust repo",
+   "type": "xmodel",
+   "config": "one agentic task (move logic across a language boundary following repo conventions); cost per task as self-reported (Sonnet: at list prices); qualitative score only; read 2026-10-15 ✓"
+  },
+  "sane-ailab1-duration": {
+   "label": "note AI実験室 #1 duration_parse (29 hidden pytest tests)",
+   "type": "xmodel",
+   "config": "Claude Code CLI (subscription); hidden pytest; API-equivalent cost from tokens x list price; Haiku 5.5 low/medium vs Opus 5.5 medium; read 2026-10-15 ✓"
+  },
+  "sane-ailab1-arith": {
+   "label": "note AI実験室 #1 arithmetic_parser (165 hidden pytest tests)",
+   "type": "xmodel",
+   "config": "Claude Code CLI (subscription); hidden pytest; API-equivalent cost from tokens x list price; Haiku 5.5 low/medium vs Opus 5.5 medium; read 2026-10-15 ✓"
+  },
+  "sane-ailab1-inventory": {
+   "label": "note AI実験室 #1 inventory_allocation (36 hidden pytest tests)",
+   "type": "xmodel",
+   "config": "Claude Code CLI (subscription); hidden pytest; API-equivalent cost from tokens x list price; Haiku 5.5 low/medium vs Opus 5.5 medium; read 2026-10-15 ✓"
+  },
+  "sane-spec-hard": {
+   "label": "note AI実験室 #2-#4 spec contradiction detection, hard (28 req x 3 specs x 5 runs)",
+   "type": "xmodel",
+   "config": "Claude Code CLI; 3 specs x 5 runs = 15 per condition; F1 on contradiction IDs (auto-scored; code fences stripped for all); cost API-equivalent from tokens x price; read 2026-10-15 ✓"
+  },
+  "sane-spec-easy": {
+   "label": "note AI実験室 #2 spec contradiction detection, easy (20 req x 3 specs x 3 runs)",
+   "type": "xmodel",
+   "config": "Claude Code CLI; 3 specs x 3 runs = 9 per condition; exact-set pass; read 2026-10-15 ✓"
+  },
+  "sane-longdoc": {
+   "label": "note AI実験室 #5 long-document lookup, 8 auxiliary items x 3 context sizes (10K/50K/90K)",
+   "type": "xmodel",
+   "config": "Claude Code CLI; 1 run per cell; score = auxiliary items correct summed over 3 sizes (final answer correct in all 9 runs); read 2026-10-15 ✓"
+  },
+  "yunany90-opus55-brickbreaker": {
+   "label": "Qiita yunany90 Opus 5.5 effort sweep, brick-breaker single index.html",
+   "type": "sweep",
+   "config": "Claude Code (Windows; Max 20x); same request 5 times, only effort changed; cost = ccusage API-equivalent; read 2026-10-15 ✓"
+  },
+  "morinokenjin-slides-report": {
+   "label": "morinokenjin 6th comparison: report slides (library usage)",
+   "type": "xmodel",
+   "config": "claude -p headless; 10-slide index.html; blind scoring by GPT-6 Luna (3 criteria x 10; 2 swapped passes averaged); read 2026-10-15 ✓"
+  },
+  "morinokenjin-slides-lesson": {
+   "label": "morinokenjin 6th comparison: lesson slides (photosynthesis; template)",
+   "type": "xmodel",
+   "config": "claude -p headless; 10-slide index.html; blind scoring by GPT-6 Luna (3 criteria x 10; 2 swapped passes averaged); read 2026-10-15 ✓"
+  },
+  "morinokenjin-slides-talk": {
+   "label": "morinokenjin 6th comparison: presentation slides (new service)",
+   "type": "xmodel",
+   "config": "claude -p headless; 10-slide index.html; blind scoring by GPT-6 Luna (3 criteria x 10; 2 swapped passes averaged); read 2026-10-15 ✓"
+  },
+  "kenji-harada-sonnet55-node6": {
+   "label": "kenji_harada Sonnet 5.5 article: 6 small Node.js tasks x 3, effort high",
+   "type": "xmodel",
+   "config": "claude -p --effort high (2.1.283/2.1.285) on 28 and 30 Sep; hidden tests; median per run; cost = API list-price conversion; read 2026-10-15 ✓"
+  },
+  "moriryota-terraform-bedrock": {
+   "label": "moriryota62 Terraform coding on Bedrock Converse (3 tasks x 3 rounds)",
+   "type": "xmodel",
+   "config": "Bedrock Converse API prompt only (no MCP/tools); mechanical score /100 (fmt validate tflint checkov coverage conventions); 3 rounds; cost = tokens x Bedrock US-Geo price; read 2026-10-15 ✓"
+  },
+  "phyblas-tibetan-reading": {
+   "label": "phyblas Tibetan-script reading web page (Vue), blind grading",
+   "type": "xmodel",
+   "config": "claude -p headless --effort medium, 3 models concurrently, 1 run each; blind grading by Opus 5.5 at high; 100 Wiktionary test words; cost = total_cost_usd (API pricing); read 2026-10-15 ✓"
+  },
+  "cauchye-jp-basic": {
+   "label": "cauchye_asia Japanese text + vision, basic set (21 q x 2)",
+   "type": "xmodel",
+   "config": "paid API default settings (thinking default; Claude max_tokens=4000); string-match scoring; 14 Oct 2026; cost = tokens x PRICE table; read 2026-10-15 ✓"
+  },
+  "cauchye-jp-hard": {
+   "label": "cauchye_asia Japanese text + vision, hard set (10 q x 2)",
+   "type": "xmodel",
+   "config": "paid API default settings (thinking default; Claude max_tokens=4000); string-match scoring; 14 Oct 2026; cost = tokens x PRICE table; read 2026-10-15 ✓"
+  },
+  "clopy-ts-parse-fix": {
+   "label": "clopy TypeScript task: decimal amount parse fix",
+   "type": "xmodel",
+   "config": "claude -p --effort medium requested; Read/Edit/Write only; 3 runs each; independent host-side grading; 10 Oct 2026; subscription; read 2026-10-15 ✓"
+  },
+  "clopy-ts-add-tests": {
+   "label": "clopy TypeScript task: add tests (6 fixed mutations)",
+   "type": "xmodel",
+   "config": "claude -p --effort medium requested; Read/Edit/Write only; 3 runs each; independent host-side grading; 10 Oct 2026; subscription; read 2026-10-15 ✓"
+  },
+  "clopy-ts-refactor": {
+   "label": "clopy TypeScript task: 6-file validateCents refactor",
+   "type": "xmodel",
+   "config": "claude -p --effort medium requested; Read/Edit/Write only; 3 runs each; independent host-side grading; 10 Oct 2026; subscription; read 2026-10-15 ✓"
+  },
+  "serotoninmax-haiku55-tagging": {
+   "label": "serotoninmax Haiku 5.5 effort sweep, tagging 146 Japanese book blurbs x 91 questions",
+   "type": "sweep",
+   "config": "API claude-haiku-5-5 max_tokens 32000, output_config.effort; cached 6.4K-token system prompt; per-item cost = measured tokens x list price; Jev reference not Claude; read 2026-10-15 ✓"
+  },
+  "kikuziro-classifier": {
+   "label": "kikuziro inquiry classifier (6 prompts x 10 runs), Haiku 5.5 vs Haiku 4.5",
+   "type": "xmodel",
+   "config": "API max_tokens=1 (5.5) / 2 (4.5), thinking disabled, number-only answer; accuracy over 60 runs; read 2026-10-15 ✓"
+  },
+  "izumo-review-subagents": {
+   "label": "m_izumo Opus 5.5 review sub-agents on a personal project (15 sections)",
+   "type": "sweep",
+   "config": "Claude Code sub-agents (20 x high; 22 x xhigh); defects verified by main session; coverage = share of verified real defects found by one reviewer; read 2026-10-15 ✓"
+  },
+  "classmethod-euler1012": {
+   "label": "DevelopersIO Project Euler 1012 (hard), Claude 5 family + Haiku 5.5 effort ladder",
+   "type": "xmodel",
+   "config": "claude -p --effort medium (trio) / Haiku 5.5 five efforts x 2 runs; Bash/Read/Write/Edit/WebFetch; cost = Claude Code estimate; read 2026-10-15 ✓"
+  },
+  "hama-pagoda": {
+   "label": "hama-jp: five-story pagoda garden (three.js)",
+   "type": "xmodel",
+   "config": "Claude Code with Playwright MCP; same prompt; 1 run each; effort high (Haiku 4.5 n/a); cost = Claude Code converted amount; subscription; 8 Oct 2026; read 2026-10-15 ✓"
+  },
+  "hama-vikings": {
+   "label": "hama-jp: coastal Viking village (voxel)",
+   "type": "xmodel",
+   "config": "Claude Code with Playwright MCP; same prompt; 1 run each; effort high (Haiku 4.5 n/a); cost = Claude Code converted amount; subscription; 8 Oct 2026; read 2026-10-15 ✓"
+  },
+  "hama-railway": {
+   "label": "hama-jp: model railway with interlocking (3h cap)",
+   "type": "xmodel",
+   "config": "Claude Code with Playwright MCP; same prompt; 1 run each; effort high (Haiku 4.5 n/a); cost = Claude Code converted amount; subscription; 8 Oct 2026; read 2026-10-15 ✓"
+  },
+  "dante-review-classify": {
+   "label": "Dante (Korean YouTube): 40 shopping-review classification (sentiment x topic)",
+   "type": "xmodel",
+   "config": "Claude Code default settings; recorded run (3 runs elsewhere); cost = Claude Code token counts x list price at 1 USD = 1,400 KRW; read 2026-10-15 ✓"
+  },
+  "dante-coding": {
+   "label": "Dante (Korean YouTube): bookkeeping program, 8 requirements, 22 hidden tests",
+   "type": "xmodel",
+   "config": "Claude Code default settings; recorded run; cost = Claude Code tokens x list price, KRW; read 2026-10-15 ✓"
+  },
+  "aiseikatsu-25q": {
+   "label": "AI生活 (YouTube): 25 questions x 99 runs on claude.ai chat, Haiku 5.5 vs Sonnet 5.5 vs Opus 5.5",
+   "type": "xmodel",
+   "config": "claude.ai chat (not API); new chat per question; Q1-12 x5 + Q13-25 x3 = 99 runs; same grading as 29 Sep; runs on different days (Opus 26+29 Sep; Sonnet 29 Sep; Haiku 8 Oct); read 2026-10-15 ✓"
+  },
+  "junrei-blender-llm": {
+   "label": "純鈴AIエージェンシー (YouTube) Blender LLM bench: 12 tasks x 3 runs",
+   "type": "xmodel",
+   "config": "Blender python script graded automatically; 12 tasks levels 1-5 x 3 runs; output cap 128K (after raising from 32K); Haiku via Kilo route; read 2026-10-15 ✓"
+  },
+  "fabian-arcade-race": {
+   "label": "IAmFabian (YouTube, German): arcade of 4 small games, Opus 5.5 alone vs Haiku 5.5 alone",
+   "type": "xmodel",
+   "config": "Claude Code on Max plan; API price from real tokens; 1 run per team; effort not stated; read 2026-10-15 ✓"
   }
  },
  "merge": {
