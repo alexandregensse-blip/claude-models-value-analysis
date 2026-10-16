@@ -5,6 +5,70 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the twenty-third pass, and a tie the prescale missed
+
+Both axes converged: quality R̂ 1.0071, bulk ESS 638, tail 924, no divergence, in one batch (266 s); cost R̂ 1.0028,
+ESS 1709/2470, no divergence, without continuation. The Monte Carlo error exceeds half the last displayed digit on four
+cost cells (Fable 5.1 max and xHigh, Fable 5 max, Opus 5.5 max). **Picks**: grunt work Haiku 5.5 low, everyday tasks
+Haiku 5.5 high and advanced reasoning Opus 5.5 xHigh are unchanged; cutting-edge thinking goes to Opus 5.5 max (xHigh
+before). **The crown moves to Haiku 5.5 high**, 3.5× cheaper than the price trend (Haiku 5.5 medium, 4.7×, before);
+λ 0.284 → 0.363, R² 0.53 → 0.61. The frontier keeps its eleven couples. Expected scores move by under a point (Opus 5.5
+max 74.6 → 74.7 %, Sonnet 5.5 max 72.9 → 73.3 %, Fable 5.1 max 69.8 → 70.1 %, Haiku 5.5 max 62.8 → 63.3 %).
+
+**Haiku 5.5's effort ladder is flatter.** Against Opus 5.5 high, Haiku 5.5 low costs 1.55× what it did, medium 1.05×,
+high and xHigh 0.84×, max 0.90×: the model's level hardly moves, its low end rises and its upper rungs come down (low
+⁄ medium 0.50 → 0.74, medium ⁄ high 0.48 → 0.60; high ⁄ xHigh and xHigh ⁄ max unchanged at 0.48 and 0.44). High
+becomes 16 % cheaper and takes the crown from medium; the multiples of the cheapest couple, Haiku 5.5 low, fall with it
+(Opus 5.5 xHigh 107× → 68×, max 264× → 179×). The data say so directly. Before this pass 15 benchmarks measured Haiku
+5.5 at both low and medium, 7 of them Anthropic's launch charts and system card, whose steepest ladders are WANDR
+(low ⁄ medium 0.06) and HLE with tools (0.31); there are now 52, from 24 publishers. Averaged per publisher, the
+large boards (Anthropic, Artificial Analysis, ARC Prize, Cognition, Cursor, TaxCalcBench, Hex) give 0.49, as the fit
+did; the 16 others (posts, small repositories, papers) give 0.73, and the fit, in which each publisher counts about
+once, gives 0.74. Where Anthropic and Artificial Analysis measured the same benchmark they agree (Terminal-Bench 4.0
+0.62 and 0.61, OSWorld 0.55 and 0.55, HLE 0.48 and 0.54): the difference is in the tasks, not in the measurements.
+Effort is a ceiling on thinking, and on short tasks Haiku 5.5 thinks little at any effort (SenseBench 0.87, a handoff
+test 0.94, tagging 0.85, Banking77 0.93; writing tasks 0.87 against 0.49 on the composite indices). The doubts on Haiku
+5.5 prices (the 5× tier above 100K tokens, a reported Claude Code mispricing in 2.1.289–2.1.294, not verified) scale
+every effort of a source alike and cannot flatten a ladder. The sources in which Haiku 5.5 is dearest against the other
+models (an arXiv Lean study at Claude Code list prices, bug-hunt-bench, model-routing-eval) move the model as a whole,
+which moved by 5 %. Nothing was set aside.
+
+**A tie the prescale missed** (`model/lqm.py`, `load`). Each group is centred and scaled before the fit; a group
+whose values are all equal is kept (METHODOLOGY § 3, Admission) with scale 1, but the test was on the computed
+standard deviation, and the mean of three equal floats (model-routing-eval, tickets, `passed-of-3` 66.7 %) missed them
+by 1e-16: the group was scaled by 1e-16, its values sat at ±1, its precision at ~1e14, and its offset drifted to about
+10¹² in the smoke fit (R̂ 2.0–2.9 over three seeds; 1.04 without the group). The test is now on the spread of the values
+(a tie when max − min ≤ 10⁻¹² of the value), and a tie is centred on its own value. On the data of v2026.10.08b both
+axes give byte-identical Stan data with the old and new code; on this pass's data only that group changes.
+
+## Twenty-third pass: new sources and board updates since 8 Oct
+
+Six Sonnet agents, 15 Oct 2026, two rounds each, on six axes: coding and agentic boards held here, non-coding boards,
+arXiv papers since 1 Oct, code and dataset hosts, English posts (blogs, newsletters, Hacker News, Reddit, Bluesky) and
+non-English posts and video. Each report was re-derived from its saved evidence by a verifier agent that had not
+searched. No Claude model released after 8 Oct and no price change after the 7 Oct Sonnet 5.5 cache cut were met.
+- **New sources** (84, 651 rows): Surge AI's boards (twelve benchmarks), the Conceptual Reasoning Index, Design Arena,
+  Andon Labs' Vending-Bench 2, krauq.ai's security CTF on Claude Code, Parallel's search benchmark, 35 arXiv papers
+  (among them a Lean proving study at five efforts of every 5.5 model), 19 GitHub result repositories
+  (model-routing-eval, merc-bench's new tiers, vlm-exam, haiku-thinking-bench, gitdiagram …), posts and videos in
+  Japanese, Korean and German (Qiita, Zenn, note, YouTube), five Reddit posts.
+- **New benchmarks of held sources**: LiveBench 2 (seven categories), seven Artificial Analysis evaluations (FrontierCode,
+  Analyst, IT-Bench, MMMU-Pro, Robotics, 3D, Harvey legal re-scored as a new group beside the held one), Vals AI's Vibe
+  Code Bench (single agent and team), Robotics and SWE multimodal, ARC-AGI-3, Mercor's open-source boards, Epoch's
+  SpireClimb, Convex's guideline-free v2 runs, SenseBench's per-prompt rows.
+- **Snapshots replaced** (25 groups): the seven LMArena arenas, seven llm-stats boards, Artificial Analysis Briefcase
+  and GDPval, two Vals boards, Epoch's chess puzzles and ECI, minebench, lechmazur writing and debate, OpenRouter GPQA
+  and tau2-bench. Held rows re-read and corrected where the source had re-run or relabelled them (Artificial Analysis'
+  own post-cut Sonnet 5.5 costs replace our estimates, aimultiple's run costs, vlm-exam's extra Opus 5.5 runs,
+  lechmazur's Opus 5.5 row labelled medium).
+- **Sonnet 5.5 costs** new in this pass are put on the 7 Oct price as on 8 Oct (118 rows: 55 measured after the cut and
+  kept, the others scaled by the ratio of their kind of run, whose spread enters the precision). Thirty rows relabelled
+  so that their bounds and direction are read (a lower-is-better median negated, five scores out of 10, 4 or 1).
+- Not data: duplicates of one group found by two agents (kept once), single-couple tables, VulcanBench's Haiku 5.5 costs
+  read from a CLI known to misprice it (scores kept), Scale's Haiku 5.5 rows in another harness than the held board.
+**370 sources, 1063 benchmarks, 6512 measurements** (286, 886, 5377 before). Haiku 5.5 rests on 531 measurements in
+277 benchmarks from 100 sources (168, 94, 21).
+
 ## The fit after the twenty-second pass, and faster fits that survive a stop
 
 Both axes converged: quality R̂ 1.0038, bulk ESS 1155, no divergence, in one batch; cost R̂ 1.0080, ESS 658/526, no
