@@ -5,6 +5,62 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit after the twenty-fourth pass
+
+Both axes converged without continuation: quality R̂ 1.0043, bulk ESS 665, tail 979, no divergence, in one batch
+(251 s); cost R̂ 1.0016, ESS 2359/3516, no divergence (835 s); 22 minutes in all. The Monte Carlo error exceeds half
+the last displayed digit on two cost cells (Fable 5.1 max, Fable 5 max). **The crown stays Haiku 5.5 high**, 3.3×
+cheaper than the price trend (3.5× before); λ 0.363 → 0.373, R² 0.61 → 0.62. **Picks**: everyday tasks Haiku 5.5
+high, advanced reasoning Opus 5.5 xHigh and cutting-edge thinking Opus 5.5 max are unchanged; grunt work goes to
+Haiku 5.5 medium (low before). That pick was a tie and stays one: the tier's score, ln(window × e^(βλθ) ⁄ cost), was
+3.211 for low and 3.209 for medium before this pass, and is 3.145 and 3.151 now — medium costs 1.33× low and brings
+4.8 points of expected score, which the grunt tier, paying a quarter of the market price for quality, values at
+almost exactly that. The frontier loses Opus 5.5 medium (eleven couples → ten): Sonnet 5.5 xHigh now costs less
+(28.5× against 30.3× Haiku 5.5 low) for more quality. Every model comes a little closer to Haiku 5.5 low (Sonnet 5.5
+high 17× → 16×, Opus 5.5 xHigh 68× → 62×, max 179× → 164×), its own ladder hardly moves (medium 1.35× → 1.33×, high
+2.23× → 2.11×, max 10.6× → 10.9×). Expected scores move by under a point (Opus 5.5 max 74.7 → 74.5 %, Sonnet 5.5 xHigh
+70.9 → 70.3 %, Haiku 5.5 low 48.6 → 48.4 %, max 63.3 → 62.7 %). No method change.
+
+## Twenty-fourth pass: new sources and board updates since 15 Oct
+
+Four Sonnet agents, 18 Oct 2026, two rounds each, on four axes: coding and agentic boards held here, non-coding
+boards, papers since 13 Oct with code and dataset hosts, and posts in every language (blogs, Hacker News, Reddit,
+Bluesky, Qiita, Zenn, note, Habr, YouTube descriptions). Each report was re-derived from its saved evidence by verifier
+agents that had not searched (eight). No Claude model released after 15 Oct and no price change were met.
+- **New sources** (26, 206 rows in 73 new groups): AI Coding Daily's leaderboard (four projects in Claude Code, Opus
+  5.5 at three efforts, Sonnet and Haiku 5.5 at two), SlopCodeBench's October campaign (Opus 5.5 medium and xHigh, Fable
+  5.1 xHigh), the official tau2-bench board (banking, Opus 4.6 – Opus 5 and Fable 5 at max), ForecastBench's
+  preliminary board, seven arXiv papers (BioXArena v2, T2J-Bench, Φ-Bench, OSBench, MA-Bench, SWEPatchTest, a
+  side-channel study with Haiku and Sonnet 5.5), GitHub result repositories (roboco's five-language RealWorld backend,
+  livedoc, gbrain's judge replay, a Terraform review benchmark, SimpleEnglish), the worklore tool-count benchmark (5, 50
+  and 100 tools), six YouTube effort ladders read from their descriptions (Opus 5.5, Sonnet 5.5 and Haiku 5.5 at four
+  or five efforts), two Reddit posts, a Zenn post and a self-conditioning test at two Haiku 5.5 efforts.
+- **New benchmarks of held sources**: retort's Haiku 5.5 ladder (six efforts, Go and Python) and its Haiku 5.5 low runs
+  in thirteen languages against Opus 5.5 low (24 groups, cost only: every run covers the requirements), GM-Bench 2.1
+  (a new simulator, beside 2.0), IdentityBench v3, three Rails planner and risk-report sets, the 2 Oct cohort of
+  code-review-bench (two setups), Vals AI's Science Index, weather-card's API runs at five efforts of the three 5.5
+  models, Melvynx's Claude Code runs (two tasks: the others were finished in Cursor), Fable 5 and Opus 4.8 on Convex v2.
+- **Effort ladders completed**: the Conceptual Reasoning Index now carries Opus, Sonnet and Haiku 5.5 at low–max and
+  Haiku 5.5 without thinking (32 rows); its Opus 5.5 row, held as `default`, is labelled max by the board with the same
+  values and relabelled.
+- **Snapshots replaced** (11 groups): four LMArena arenas (text, webdev, its HTML and React categories) and its agent
+  board, minebench (now with the measured spend per build, and the efforts its repository states: max for most models),
+  lechmazur debate, OpenRouter GPQA and tau2-bench, Design Arena (two boards). Held rows corrected where the source
+  re-ran them: Convex (more runs), Parallel's search benchmark (Fable 5.1 re-run on 13 Oct), Artificial Analysis
+  Briefcase (Elo ±2), weather-card's Claude Code rows given their fidelity score; Artificial Analysis' Harvey legal
+  benchmark v1.1 gets its cost per task.
+- **Sonnet 5.5 costs** new in this pass are put on the 7 Oct price as before (43 rows: 9 measured after the cut and
+  kept, the others scaled by the ratio of their kind of run, whose spread enters the precision).
+- Kept as they are: MathArena's overall boards now rank only models run in every month, which leaves Opus 5.5 high as
+  the only Claude couple; the held pair (Opus 5.5 high, Fable 5.1 low) stays as the board stood on 15 Oct rather than
+  mixing the new Opus value with the old Fable one.
+- Not data: LMArena's style-controlled and factuality boards and the gated all-pass rate of Harvey v1.1 (the same votes
+  or runs as held groups under another statistic), LMArena's bash reliability and Vals AI's SAFE-Teen (behaviour, not a
+  task), a note.com series whose "Think=High/Medium/Maximum" settings are never tied to an effort, single-couple tables
+  (3DCodeVerse, MathArena's September tables, the Decision Index), saturated boards without cost (Bluesky Agent Arena).
+**396 sources, 1136 benchmarks, 6762 measurements** (370, 1063, 6512 before). Haiku 5.5 rests on 611 measurements
+in 324 benchmarks from 113 sources (531, 277, 100).
+
 ## The fit after the twenty-third pass, and a tie the prescale missed
 
 Both axes converged: quality R̂ 1.0071, bulk ESS 638, tail 924, no divergence, in one batch (266 s); cost R̂ 1.0028,
