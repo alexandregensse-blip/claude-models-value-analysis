@@ -1175,7 +1175,7 @@ def predict(post, maps, groups, rows, thin=4, seed=0):
     import numpy as np
     rng = np.random.default_rng(seed)
     V = {k: post.var(k)[::thin] for k in ("theta", "o", "a", "sigma", "z1", "z2", "z3", "tau", "psi", "omega", "nu",
-                                           "psi2", "omega3", "psiC", "omegaC", "delta") if k in post.names}
+                                           "psi2", "omega3", "psiC", "omegaC", "deltaC") if k in post.names}
     if "psi2" in V:                                                  # the encompassing variant: scales per maker
         V["psi"], V["omega"] = V["psiC"], V["omegaC"]
     D = len(V["o"])
@@ -1206,8 +1206,8 @@ def predict(post, maps, groups, rows, thin=4, seed=0):
         if x["task"] not in NO_TASK_EFFECT:
             k = li["couple_task"].get((x["couple"], x["task"]))
             lat += Vt[:, k] if k is not None else rng.normal(0, 1, D) * sc("omega", c)
-        if "delta" in V and x.get("home"):
-            lat += V["delta"]
+        if "deltaC" in V and x.get("home"):
+            lat += V["deltaC"][:, c]
         m = V["o"][:, b] + V["a"][:, b] * lat
         noise = np.sqrt((V["sigma"][:, b] * x.get("h", 1.0)) ** 2 + x.get("d", 0.0) ** 2) * rng.standard_t(V["nu"])
         out.append((G["mu"] + G["sd"] * m, G["mu"] + G["sd"] * (m + noise)))

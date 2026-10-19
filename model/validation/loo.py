@@ -47,8 +47,8 @@ def pointwise(axis, thin=3):
     k1, k2, k3 = (np.asarray(data[k]) for k in ("k1", "k2", "k3"))
     pad = lambda E: np.concatenate([E, np.zeros(E.shape[:-1] + (1,))], axis=-1)   # level 0 → the zero at the end
     x = th[..., cpl] + pad(e1)[..., k1 - 1] + pad(e2)[..., k2 - 1] + pad(e3)[..., k3 - 1]
-    if "delta" in post.names:
-        x = x + V("delta")[..., None] * np.asarray(data["home"], float)
+    if "deltaC" in post.names:
+        x = x + V("deltaC")[..., cpl] * np.asarray(data["home"], float)
     h, d, ea = (np.asarray(data[k], float) for k in ("h", "d", "ea"))
     km1 = np.exp(0.5 * V("log_kappa")[..., 0]) - 1 if "log_kappa" in post.names and max(data["ea"]) else 0.0
     if np.ndim(km1): km1 = km1[..., None]

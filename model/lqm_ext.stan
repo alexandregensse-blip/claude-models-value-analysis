@@ -2,8 +2,8 @@
 //  * the scales of the publisher × couple (s_tau), publisher × model (psi) and couple × task-type (omega) effects per
 //    model maker, each maker's log scale drawn around a common one (log s_f = log s_0 + eta · z_f): with eta → 0 it is
 //    lqm.stan, so the data decide whether makers differ;
-//  * a home effect delta on rows a maker published about its own models (Anthropic's outlets on Claude, figures "as
-//    reported by" a vendor): a shift of known direction, excluded from every read-out.
+//  * a home effect per maker, delta_f = delta0 + tau_delta·zd_f, on rows a maker published and measured about its own
+//    models (lqm.is_home): a shift excluded from every read-out; tau_delta → 0 is one effect shared by all makers.
 // Latent quality (or log cost) of (model, effort) couples, fused from heterogeneous benchmarks. Method: METHODOLOGY.md §5;
 // data preparation: lqm.py. For every row r (group b, couple c of model m, publisher s, task type t):
 //
@@ -164,7 +164,9 @@ parameters {
   vector[F] zf_tau;
   vector[F] zf_psi;
   vector[F] zf_omega;
-  real delta;                                        // home effect
+  real delta0;                                       // home effect: common mean …
+  real<lower=0> tau_delta;                           // … and the spread of the makers' own effects around it
+  vector[F] zd;
   real<lower=1> nu;
   array[has_ea] real log_kappa;
   real mu_sig;
@@ -183,6 +185,8 @@ transformed parameters {
   vector[L3] omega3 = omega_f[prov3];
   vector[C] psiC = psi_f[prov_c];
   vector[C] omegaC = omega_f[prov_c];
+  vector[F] delta_f = delta0 + tau_delta * zd;     // each maker's home effect
+  vector[C] deltaC = delta_f[prov_c];
 }
 model {
   {
@@ -192,7 +196,7 @@ model {
     vector[S1] m1 = csr_matrix_times_vector(S1, L1, wA1, vA1, uA1, e1) ./ n1;
     vector[S2] m2 = csr_matrix_times_vector(S2, L2, wA2, vA2, uA2, e2) ./ n2;
     vector[S3] m3 = csr_matrix_times_vector(S3, L3, wA3, vA3, uA3, e3) ./ n3;
-    vector[N] x = theta[cpl] + delta * home
+    vector[N] x = theta[cpl] + deltaC[cpl] .* home
                   + csr_matrix_times_vector(N, L1, wB1, vB1, uB1, e1 - m1[set1])
                   + csr_matrix_times_vector(N, L2, wB2, vB2, uB2, e2 - m2[set2])
                   + csr_matrix_times_vector(N, L3, wB3, vB3, uB3, e3 - m3[set3]);
@@ -218,7 +222,9 @@ model {
   zf_tau ~ std_normal();
   zf_psi ~ std_normal();
   zf_omega ~ std_normal();
-  delta ~ normal(0, 10);                             // as the latent qualities: weakly informative
+  delta0 ~ normal(0, 10);                            // as the latent qualities: weakly informative
+  tau_delta ~ student_t(3, 0, 2.5);
+  zd ~ std_normal();
   nu ~ gamma(2, 0.1);
   if (has_ea) log_kappa[1] ~ normal(0, 1);
   s_sig ~ student_t(3, 0, 2.5);
