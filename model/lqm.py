@@ -50,22 +50,32 @@ def provider(model):
 
 
 def is_home(publisher, model, confound, harness):
-    """A number the model's maker published about its own model: Anthropic's outlets on Claude, figures 'as reported
-    by' the vendor on its own models."""
+    """A number the model's maker published and measured about its own model: Anthropic's outlets on Claude, a maker's
+    own publications (publisher = the maker), figures 'as reported by' the vendor, and a maker's number copied into
+    another publication (restated-from:<the maker>). A board the maker merely quotes (evaluated-by / restated-from a
+    third party) is not home."""
     p = provider(model)
-    if p == "anthropic":
-        return publisher == "anthropic"
     t = (confound or "") + " " + (harness or "")
-    org = {"openai": "OpenAI", "google": "Google", "xai": "xAI", "deepseek": "DeepSeek", "qwen": "Alibaba",
-           "glm": "Zhipu", "kimi": "Moonshot"}.get(p, "~")
-    return any(k in t for k in (f"vendor-reported:{org}", f"as reported by {org}", f"{org}-reported"))
+    org = {"anthropic": "Anthropic", "openai": "OpenAI", "google": "Google", "xai": "xAI", "deepseek": "DeepSeek",
+           "qwen": "Alibaba", "glm": "Zhipu", "kimi": "Moonshot"}.get(p, "~")
+    if f"restated-from:{org}" in t:
+        return True
+    if "evaluated-by:" in t or "restated-from:" in t:
+        return False
+    if publisher == MAKER_PUBLISHER.get(p):
+        return True
+    return p != "anthropic" and any(k in t for k in (f"vendor-reported:{org}", f"as reported by {org}", f"{org}-reported"))
+
+
+MAKER_PUBLISHER = {"anthropic": "anthropic", "openai": "openai", "google": "google", "xai": "xai", "deepseek": "deepseek",
+                   "qwen": "alibaba", "glm": "zhipu", "kimi": "moonshot"}
 
 # ---------------------------------------------------------------- metric rules
 LOG_METRICS = {"best-run-cash$", "xp-x1e5"}                        # positive, unbounded, ratio scale
 UNIT_BOUNDED = {"F1", "accuracy", "success"}                        # proportions written on 0–1
 HUNDRED_BOUNDED = {"weighted-rubric", "BLEU", "EDM-F1", "pass@1", "pass@3", "AA-idx", "LB-global-avg", "mAP50",
                    "RHAE", "score/579-pct"}                         # scores published on 0–100 without a '%'
-LOWER_IS_BETTER = {"subjective-rank-of-4"}
+LOWER_IS_BETTER = {"subjective-rank-of-4", "val_bpb(lower-better)", "MSE(lower-better)", "edit-distance(lower-better)"}
 MAX_STEPS = 100                                                     # finest scoring step assumed: 1 point in 100
 
 
