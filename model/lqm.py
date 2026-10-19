@@ -33,7 +33,32 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
-STAN_FILE = os.path.join(HERE, "lqm.stan")
+STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm") + ".stan")   # lqm_ext: the encompassing variant
+EXT = os.path.basename(STAN_FILE) == "lqm_ext.stan"
+PROVIDERS = ("anthropic", "openai", "google", "xai", "deepseek", "qwen", "glm", "kimi")
+
+
+def provider(model):
+    """Who makes the model (the encompassing variant gives each maker its own effect scales)."""
+    head = model.split("-")[0]
+    if head in ("opus", "sonnet", "haiku", "fable"): return "anthropic"
+    if head in ("gpt", "o1", "o3", "o4", "chatgpt"): return "openai"
+    if head == "gemini": return "google"
+    if head == "grok": return "xai"
+    if head.startswith(("qwen", "qwq")): return "qwen"
+    return head if head in PROVIDERS else "other"
+
+
+def is_home(publisher, model, confound, harness):
+    """A number the model's maker published about its own model: Anthropic's outlets on Claude, figures 'as reported
+    by' the vendor on its own models."""
+    p = provider(model)
+    if p == "anthropic":
+        return publisher == "anthropic"
+    t = (confound or "") + " " + (harness or "")
+    org = {"openai": "OpenAI", "google": "Google", "xai": "xAI", "deepseek": "DeepSeek", "qwen": "Alibaba",
+           "glm": "Zhipu", "kimi": "Moonshot"}.get(p, "~")
+    return any(k in t for k in (f"vendor-reported:{org}", f"as reported by {org}", f"{org}-reported"))
 
 # ---------------------------------------------------------------- metric rules
 LOG_METRICS = {"best-run-cash$", "xp-x1e5"}                        # positive, unbounded, ratio scale
@@ -153,6 +178,7 @@ def load(path, models, field="score"):
             couple=f'{r["model"]}@{r["effort"]}', model=r["model"], publisher=PUBLISHER_OF.get(r["source"], r["source"]),
             task=r["task_type"] or "", raw=val, metric=metric, kind="log" if field == "cost_usd" else kind(metric),
             ea=int("EAP-run" in (r["confound"] or "")), harness=harness_base(r["harness"]), prec=reading_sd(r, field),
+            home=int(is_home(PUBLISHER_OF.get(r["source"], r["source"]), r["model"], r["confound"], r["harness"])),
             step=10.0 ** -(len(r[field].strip().split(".")[1]) if "." in r[field] else 0),
             other=_other_value(r, "score" if field == "cost_usd" else "cost_usd"),
             unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "")))
@@ -354,6 +380,12 @@ def stan_data(groups, axis):
         ptype=[1 + next(i for i, (b2, _) in enumerate(P) if groups[names[b2]]["task"] == groups[names[b]]["task"])
                for b, _ in P],
         K=GH_NODES, ghx=list(xg * math.sqrt(2)), ghw=list(wg / math.sqrt(math.pi)))
+    if EXT:                                                         # the encompassing variant: makers and home rows
+        fi = {f: i + 1 for i, f in enumerate(PROVIDERS + ("other",))}
+        data.update(F=len(fi), prov_c=[fi[provider(model_of[c])] for c in couples],
+                    prov2=[fi[provider(m)] for _, m in levels["pub_model"]],
+                    prov3=[fi[provider(model_of[c])] for c, _ in levels["couple_task"]],
+                    home=[x.get("home", 0) for _, x in entries])
     if not P:                                                       # Stan wants a P × C array even when P = 0
         data.update(r1=np.zeros((0, len(couples)), int), r2=np.zeros((0, len(couples)), int),
                     r3=np.zeros((0, len(couples)), int))
@@ -973,11 +1005,12 @@ def level_new(draws, data, rng, chunk=None):
     1e-15 for given deviates, same quantiles within Monte Carlo error)."""
     import numpy as np
     theta, tau = np.asarray(draws["theta"]), np.asarray(draws["tau"])
-    psi, om = np.asarray(draws["psi"]), np.asarray(draws["omega"])
     D, C = theta.shape
+    psi = np.asarray(draws["psiC"]) if "psiC" in draws else np.asarray(draws["psi"])[:, None] * np.ones((1, C))
+    om = np.asarray(draws["omegaC"]) if "omegaC" in draws else np.asarray(draws["omega"])[:, None] * np.ones((1, C))
     if data["cost"]:
-        return (theta + rng.normal(size=(D, C)) * tau + rng.normal(size=(D, C)) * psi[:, None]
-                + rng.normal(size=(D, C)) * om[:, None])
+        return (theta + rng.normal(size=(D, C)) * tau + rng.normal(size=(D, C)) * psi
+                + rng.normal(size=(D, C)) * om)
     pg = np.asarray(data["pg"], int) - 1
     pw = np.asarray(data["pw"], float)
     mu, sd = np.asarray(data["mu"])[pg], np.asarray(data["sd"])[pg]
@@ -993,9 +1026,9 @@ def level_new(draws, data, rng, chunk=None):
         zv = np.zeros((d, C, P))
         zv[:, :, reps] = rng.normal(size=(d, C, len(reps)))
         zu, zw = rng.normal(size=(d, C)), rng.normal(size=(d, C))
-        vt = np.where(hv, zv * om[sl][:, None, None], 0.0)[:, :, ptype]            # (d, C, P)
+        vt = np.where(hv, zv * om[sl][:, :, None], 0.0)[:, :, ptype]               # (d, C, P)
         o, a = np.asarray(draws["o"])[sl][:, pg], np.asarray(draws["a"])[sl][:, pg]
-        lat = (theta[sl] + zu * tau[sl] + zw * psi[sl][:, None])[:, :, None] + vt
+        lat = (theta[sl] + zu * tau[sl] + zw * psi[sl])[:, :, None] + vt
         out[sl] = np.log(_expit(mu + sd * (o[:, None, :] + a[:, None, :] * lat)) @ pw / pw.sum())
     return out
 
@@ -1049,7 +1082,7 @@ def summarise(post, maps, groups, data, lo=0.16, hi=0.84, min_publishers=2, seed
     for g in groups.values():
         for x in g["rows"]:
             pubs[x["couple"]].add(x["publisher"])
-    Ln = level_new({k: post.var(k) for k in ("theta", "o", "a", "tau", "psi", "omega")}, data,
+    Ln = level_new({k: post.var(k) for k in ("theta", "o", "a", "tau", "psi", "omega", "psiC", "omegaC") if k in post.names}, data,
                    np.random.default_rng(seed))
     diag, mcse_level = diagnostics(post)
     out = {c: dict(centre=float(np.median(L[:, i])), half=float(math.sqrt(q[i])),
@@ -1131,7 +1164,10 @@ def predict(post, maps, groups, rows, thin=4, seed=0):
     effects are used and unknown ones drawn from their distribution; the noise is Student-t_ν(σ_b·h)."""
     import numpy as np
     rng = np.random.default_rng(seed)
-    V = {k: post.var(k)[::thin] for k in ("theta", "o", "a", "sigma", "z1", "z2", "z3", "tau", "psi", "omega", "nu")}
+    V = {k: post.var(k)[::thin] for k in ("theta", "o", "a", "sigma", "z1", "z2", "z3", "tau", "psi", "omega", "nu",
+                                           "psi2", "omega3", "psiC", "omegaC", "delta") if k in post.names}
+    if "psi2" in V:                                                  # the encompassing variant: scales per maker
+        V["psi"], V["omega"] = V["psiC"], V["omegaC"]
     D = len(V["o"])
     names, ci, levels = maps["names"], maps["ci"], maps["levels"]
     bi = {g: i for i, g in enumerate(names)}
@@ -1145,8 +1181,9 @@ def predict(post, maps, groups, rows, thin=4, seed=0):
             E[:, sets == k] -= E[:, sets == k].mean(axis=1, keepdims=True)
         return E
     U = centred(V["z1"] * V["tau"][:, own1], cs["set1"]) if len(own1) else np.zeros((D, 0))
-    W = centred(V["z2"] * V["psi"][:, None], cs["set2"])
-    Vt = centred(V["z3"] * V["omega"][:, None], cs["set3"])
+    W = centred(V["z2"] * (V["psi2"] if "psi2" in V else V["psi"][:, None]), cs["set2"])
+    Vt = centred(V["z3"] * (V["omega3"] if "omega3" in V else V["omega"][:, None]), cs["set3"])
+    sc = lambda v, c: V[v][:, c] if V[v].ndim == 2 else V[v]        # a scale per couple (variant) or one for all
     out = []
     for x in rows:
         b, c = bi[x["group"]], ci[x["couple"]]
@@ -1155,10 +1192,12 @@ def predict(post, maps, groups, rows, thin=4, seed=0):
         k = li["pub_couple"].get((x["publisher"], x["couple"]))
         lat += U[:, k] if k is not None else rng.normal(0, 1, D) * V["tau"][:, c]
         k = li["pub_model"].get((x["publisher"], x["couple"].split("@")[0]))
-        lat += W[:, k] if k is not None else rng.normal(0, 1, D) * V["psi"]
+        lat += W[:, k] if k is not None else rng.normal(0, 1, D) * sc("psi", c)
         if x["task"] not in NO_TASK_EFFECT:
             k = li["couple_task"].get((x["couple"], x["task"]))
-            lat += Vt[:, k] if k is not None else rng.normal(0, 1, D) * V["omega"]
+            lat += Vt[:, k] if k is not None else rng.normal(0, 1, D) * sc("omega", c)
+        if "delta" in V and x.get("home"):
+            lat += V["delta"]
         m = V["o"][:, b] + V["a"][:, b] * lat
         noise = np.sqrt((V["sigma"][:, b] * x.get("h", 1.0)) ** 2 + x.get("d", 0.0) ** 2) * rng.standard_t(V["nu"])
         out.append((G["mu"] + G["sd"] * m, G["mu"] + G["sd"] * (m + noise)))
