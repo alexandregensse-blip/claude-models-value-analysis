@@ -5,6 +5,14 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Correction of 19 Oct: LMArena's agent board is not a bounded score
+
+The agent board of LMArena (group `lmarenaagent`, 7 Claude couples) was labelled `score-of-1`, read as a share of 1 on a
+logit scale. Its arena score is unbounded: competitor models read for the multi-provider test score below 0 on the same
+board. It is relabelled `arena-score` and read on its own scale. Quality refitted (R̂ 1.0091, 309 s; cost unchanged):
+the latent qualities move by 0.07 at most relative to Opus 5.5 high, the expected scores by 0.1 point, intervals are
+unchanged; the crown, the picks and the frontier are unchanged.
+
 ## The fit after the twenty-fourth pass
 
 Both axes converged without continuation: quality R̂ 1.0043, bulk ESS 665, tail 979, no divergence, in one batch
