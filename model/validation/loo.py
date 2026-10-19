@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
 
-def pointwise(axis, thin=3):
+def pointwise(axis, thin=None, max_draws=2000):
     import numpy as np
     sys.path[:0] = [os.path.join(ROOT, "model"), os.path.join(ROOT, "data")]
     import lqm
@@ -27,6 +27,9 @@ def pointwise(axis, thin=3):
     if not store.parts:
         sys.exit(f"!! no stored draws for this data and model at {path}: fit the axis first")
     post = store.posterior()
+    if thin is None:                                                 # memory: (chains × kept draws × rows) floats
+        n = np.asarray(post.chains("nu")).shape                       # per array; keep about max_draws draws
+        thin = max(1, (n[0] * n[1]) // max_draws)
     V = lambda k: np.asarray(post.chains(k), float)[:, ::thin]       # (chains, draws, …)
     th, o, a, sig = V("theta"), V("o"), V("a"), V("sigma")
     z1, z2, z3, nu = V("z1"), V("z2"), V("z3"), V("nu")
