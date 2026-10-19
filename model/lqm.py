@@ -965,7 +965,7 @@ def _expit(x):
     return out
 
 
-def level_new(draws, data, rng, chunk=500):
+def level_new(draws, data, rng, chunk=None):
     """What one NEW source would report for each couple, per posterior draw (draws × couples, log scale): fresh
     publisher × couple (sd τ_c), publisher × model (sd ψ) and, per task type of the panel, couple × task-type (sd ω)
     effects, read on the same panel as `level` (quality) or added to θ (cost). Computed here rather than in Stan, where
@@ -985,7 +985,8 @@ def level_new(draws, data, rng, chunk=500):
     ptype = np.asarray(data["ptype"], int) - 1
     reps = np.unique(ptype)                                          # one fresh task-type effect per task type
     P = len(pw)
-    out = np.empty((D, C))
+    chunk = chunk or max(1, min(500, int(2.5e7 // (C * P))))     # draws per block: a few (draws, C, P) arrays of
+    out = np.empty((D, C))                                           # 200 MB each (500 on the published data)
     for d0 in range(0, D, chunk):
         sl = slice(d0, min(D, d0 + chunk))
         d = theta[sl].shape[0]
@@ -1020,10 +1021,11 @@ def quasi_variances(L, lo=0.16, hi=0.84):
         q = np.exp(lq)
         s = q[I] + q[J]
         res = np.log(s) - np.log(V)
-        Jm = np.zeros((len(I), C))
-        Jm[np.arange(len(I)), I] = q[I] / s
-        Jm[np.arange(len(I)), J] = q[J] / s
-        step = np.linalg.lstsq(Jm, -res, rcond=None)[0]
+        wI, wJ = q[I] / s, q[J] / s                                  # the Jacobian has two entries per pair: its
+        A = np.diag(np.bincount(I, wI * wI, C) + np.bincount(J, wJ * wJ, C))      # normal equations are built
+        np.add.at(A, (I, J), wI * wJ); np.add.at(A, (J, I), wI * wJ)              # without it (pairs × couples
+        g = -(np.bincount(I, wI * res, C) + np.bincount(J, wJ * res, C))         # is 430 MB at 476 couples)
+        step = np.linalg.lstsq(A, g, rcond=None)[0]
         lq += np.clip(step, -1, 1)                                   # damped: a step never multiplies q by more than e
         if np.max(np.abs(step)) < 1e-10:
             break
