@@ -5,6 +5,15 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Correction of 19 Oct: one label per thinking budget
+
+Thinking-budget efforts were written as the source wrote them, so one budget had several labels (`think-1024` and
+`think-1k`). Labels are now in thousands of tokens, snapped to the usual rung (1, 2, 4, 8, 16, 24, 32, 48, 64, 128k)
+within 5 %: `think-1024` → `think-1k`, `think-2048` → `think-2k`, `think-5000` → `think-5k`, `think-10000` → `think-10k`,
+`think-65535` → `think-64k`, and `think-none` → `nothink` (8 rows; the old label stays in the confound field).
+`think-unstated` (a "-thinking" variant with no budget given) and `think-high` (a harness level for a model without
+an effort setting) are kept. None of the 8 rows enters the fit: both axes unchanged.
+
 ## Correction of 19 Oct: LMArena's agent board is not a bounded score
 
 The agent board of LMArena (group `lmarenaagent`, 7 Claude couples) was labelled `score-of-1`, read as a share of 1 on a
