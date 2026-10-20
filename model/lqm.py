@@ -413,9 +413,12 @@ INITS = os.path.join(STAN_DIR, "inits-{axis}.json")                  # last draw
 RUNS = os.path.join(STAN_DIR, "runs")                                # each axis' draws on disk (RunStore)
 # Compilation: stanc --O1 with STAN_NO_RANGE_CHECKS (lqm.stan is written so that --O1 keeps every vector in the fast
 # struct-of-arrays form: −36 % per gradient; --O1 on a loop-by-element program can be 30× slower instead).
-# Sampler per axis (validated in /work/.geom/JOURNAL.md): quality = nutpie (diagonal mass matrix adapted by Fisher
-# divergence), which needs 4× fewer leapfrog steps here; cost = CmdStan NUTS started from the previous fit's last
-# draws (nutpie cannot be given starting points, and random starts can leave a cost chain in a remote region).
+# Sampler per axis (validated in /work/.geom/JOURNAL.md): nutpie (diagonal mass matrix adapted by Fisher divergence),
+# which needs 4× fewer leapfrog steps on quality; on the cost axis of the global data (20 Oct 2026, .salvo14/nut) it
+# took 537 leapfrog steps per draw against CmdStan's ~1,000 (at the depth cap on 99.97 % of draws), no divergence
+# against 5, and drew twice the effective draws per second on the slowest parameter (user's go, 20 Oct). nutpie cannot
+# be given starting points, and a random start can leave a cost chain in a remote region: then the axis restarts on
+# CmdStan NUTS from the previous fit's last draws (RESTART_RHAT, SAMPLER["restart"]).
 # Too few effective draws: on nutpie, a new batch of independent chains is drawn and pooled with the others, up to
 # `batches` batches (nutpie cannot continue a chain); on CmdStan, the same chains continue by slices of `extend` draws,
 # up to `extend_max` draws per chain beyond the planned ones. Both are counted in draws, not seconds: a slow or loaded
@@ -423,8 +426,9 @@ RUNS = os.path.join(STAN_DIR, "runs")                                # each axis
 # 15 % across the fits of 30 Sep – 8 Oct (s_τ's posterior tail, which the data shortens: .salvo14/s21/ess), so one batch
 # meets the criteria on most data and four batches — the 48,000 draws drawn by every fit before 8 Oct — on the worst.
 SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, batches=4),
-           "cost": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
-                        max_treedepth=10, extend=1500, extend_max=4500)}
+           "cost": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, batches=4),
+           "restart": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
+                           max_treedepth=10, extend=1500, extend_max=4500)}
 # The two axes run one after the other: on this shared 8-core machine the quality axis took 1,241 s beside the cost
 # axis and 344 s alone (8 Oct 2026) — the chains of both compete for the same cores, so running them together saves
 # no time and adds their memory.
@@ -900,13 +904,13 @@ def _run(store, data, axis, st, seed, say):
         complete()
     restarted = store.parts[0]["engine"] != st["engine"]
     if restarted:
-        st = dict(SAMPLER["cost"], chains=st["chains"], engine="cmdstan")
+        st = dict(SAMPLER["restart"], chains=st["chains"], engine="cmdstan")
     post = store.posterior()
     diag, _ = diagnostics(post)
     say(f"{axis}: {store.parts[0]['engine']} {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
         f"{diag['ess_tail_min']}, divergences {diag['divergences']}")
     if diag["rhat_max"] > RESTART_RHAT and st["engine"] == "nutpie":
-        st = dict(SAMPLER["cost"], chains=st["chains"], engine="cmdstan")
+        st = dict(SAMPLER["restart"], chains=st["chains"], engine="cmdstan")
         store.reset()
         segment("cmdstan", seed + 1, st["samples"], inits=_inits(axis, st["chains"]))
         complete()
