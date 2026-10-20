@@ -36,6 +36,7 @@ from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
 STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm") + ".stan")   # lqm_ext: the encompassing variant
 EXT = os.path.basename(STAN_FILE) in ("lqm_ext.stan", "lqm_ext2.stan")
 EXT_PRESENT = os.path.basename(STAN_FILE) == "lqm_ext2.stan"           # makers without data are not levels
+LINE = {}                                                       # model key -> the model it is a build / mode of
 PROVIDERS = ("anthropic", "openai", "google", "xai", "deepseek", "qwen", "glm", "kimi")
 
 
@@ -355,7 +356,7 @@ def stan_data(groups, axis):
     entries = [(b, x) for b, g in enumerate(names) for x in groups[g]["rows"]]
     couples = sorted({x["couple"] for _, x in entries})
     ci = {c: i for i, c in enumerate(couples)}
-    model_of = {c: c.split("@")[0] for c in couples}
+    model_of = {c: LINE.get(c.split("@")[0], c.split("@")[0]) for c in couples}   # builds and modes share their model
     key = {"pub_couple": lambda s, c, t: (s, c),
            "pub_model": lambda s, c, t: (s, model_of[c]),
            "couple_task": lambda s, c, t: None if t in NO_TASK_EFFECT else (c, t)}

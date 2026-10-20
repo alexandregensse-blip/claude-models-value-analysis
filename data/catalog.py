@@ -20,6 +20,9 @@ def _load(name):
 
 _m = _load("models")
 MODELS, MODEL_ORDER, DISPLAY_ORDER = _m["models"], _m["order"], _m["display_order"]
+# a build or a mode of one model (a dated re-train, a preview, OpenAI's Pro mode) keeps its own key, so its own couples,
+# and names the model it belongs to: the publisher × model effect is shared across the line (user decision, 20 Oct 2026)
+MODEL_LINE = {k: v["line"] for k, v in MODELS.items() if v.get("line")}
 FAMILIES = _load("families")
 FAMILY_OF = {g: f for f, gs in FAMILIES.items() for g in gs}
 PUBLISHER_OF = _load("publishers")

@@ -21,7 +21,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import lqm
-from catalog import FILES as CATALOG_FILES, MODEL_ORDER
+from catalog import FILES as CATALOG_FILES, MODEL_ORDER, MODEL_LINE
+lqm.LINE = MODEL_LINE
 
 FIT_CACHE = os.path.join(HERE, "fit-cache.json")
 SEED = 11
