@@ -13,7 +13,12 @@
      (model/memory-peaks.json) scaled by the rows and draws it will hold now, summed when the two axes run at the same
      time, must stay under 90 % of the container's limit (cgroup memory.max); otherwise the full fit is not started —
      a fit killed for memory after 45 minutes loses them all.
-  5. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
+  5. One couple twice in a group, discordant (warning): two rows of one model@effort in one group and one setup
+     (harness, metric, unit) whose costs differ by more than DUP_COST_RATIO, or whose scores differ by more than
+     DUP_SCORE_SHARE of the scale, are probably two builds or two configurations under one key (20 Oct 2026: ARC
+     Prize's dated and undated GPT-5.6 Luna, costs 5× apart, left the cost fit at R̂ 2.0 after an hour). Replicates of
+     one configuration agree; these do not.
+  6. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
      three minutes; a chain left in another region shows there as R̂ far above 1. Above SMOKE_RHAT the full fit is
      not started.
 
@@ -91,6 +96,34 @@ def fraction_above_one(data):
     return [f"{g} ({m}): {len(v)} values above 1, up to {max(v):g}" for (g, m), v in sorted(out.items())]
 
 
+DUP_COST_RATIO = 1.5
+DUP_SCORE_SHARE = 0.10
+
+
+def discordant_twins(data, order):
+    """Pairs of rows of one couple in one group and setup whose values are too far apart to be replicates."""
+    by = collections.defaultdict(list)
+    for r in data:
+        if r["model"] in order and r["effort"] in lqm.EFFORTS:
+            by[(r["group"], r["model"], r["effort"], lqm.harness_base(r["harness"]), r["score_metric"], r["unit"])].append(r)
+    out = []
+    for (g, m, e, *_), rs in sorted(by.items()):
+        if len(rs) < 2:
+            continue
+        costs = [float(r["cost_usd"]) for r in rs if r["cost_usd"] not in ("", None) and float(r["cost_usd"]) > 0]
+        scores = [float(r["score"]) for r in rs if r["score"] not in ("", None)]
+        why = []
+        if len(costs) > 1 and max(costs) / min(costs) > DUP_COST_RATIO:
+            why.append(f"costs {min(costs):g}..{max(costs):g}")
+        if len(scores) > 1:
+            b = lqm.bound(rs[0]["score_metric"]) or max(abs(x) for x in scores) or 1
+            if (max(scores) - min(scores)) / b > DUP_SCORE_SHARE:
+                why.append(f"scores {min(scores):g}..{max(scores):g}")
+        if why:
+            out.append(f"{g} {m}@{e} ×{len(rs)}: " + ", ".join(why))
+    return out
+
+
 def smoke(seed=11):
     """Short quality fit; returns (R̂ max, worst parameters)."""
     from catalog import MODEL_ORDER
@@ -141,6 +174,9 @@ def main(run_smoke=False):
         print("?? same runs under two metrics?", t)
     for f in fraction_above_one(data):
         print("?? fraction above 1:", f)
+    from catalog import MODEL_ORDER
+    for t in discordant_twins(data, set(MODEL_ORDER)):
+        print("?? one couple twice in a group, discordant (two builds or configurations under one key?):", t)
     if errors:
         return 1
     mc = memory_check()

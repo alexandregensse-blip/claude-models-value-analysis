@@ -429,6 +429,7 @@ SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=3000,
 # axis and 344 s alone (8 Oct 2026) — the chains of both compete for the same cores, so running them together saves
 # no time and adds their memory.
 PARALLEL_AXES = False
+DIVERGENT_SHARE = 0.001               # continuing an unconverged run is allowed up to this share of divergent draws
 RESTART_RHAT = 1.05                  # above this, a chain is in another region: continuing it would not help
 
 
@@ -914,7 +915,9 @@ def _run(store, data, axis, st, seed, say):
         say(f"{axis}: restarted on CmdStan {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
             f"{diag['ess_tail_min']}")
     batches = st["engine"] == "nutpie" and st.get("batches")
-    while not converged(diag) and diag["divergences"] == 0 and diag["rhat_max"] <= RESTART_RHAT:
+    # a few divergent draws (≤ 0.1 %: 5 of 18,000 on the cost axis of 20 Oct 2026) do not forbid continuing the chains
+    while (not converged(diag) and diag["divergences"] <= DIVERGENT_SHARE * diag["draws"]
+           and diag["rhat_max"] <= RESTART_RHAT):
         if batches:                                                  # new independent chains, pooled
             if len(store.parts) >= st["batches"]:
                 break
