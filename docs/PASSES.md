@@ -5,6 +5,20 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Correction of 20 Oct: Claude rows read again from their sources
+
+Cross-checks made during the multi-provider work found Claude rows that did not match their source. **Costs:** the
+FrontierCode Diamond chart of the Fable 5 card (7 points re-digitised; three independent readings agree within
+0.01 USD, the held ones had been read by eye, off by up to 17 %); Melvynx med2 (the elysian task's resumed session
+was left out: 2 rows, cost and tokens); bug-hunt-bench (15 rows: its board of 19 Oct prices cache writes as Claude
+Code bills them, 1 h at 2×, where the held rows were priced at 5 min; rows already at 1 h are unchanged, Sonnet 5.5
+keeps its own cache-cut repricing). **Efforts from the source's own configuration:** connections-oneshot (its
+OpenRouter adapter sends `reasoning.effort = "minimal"`, an OpenRouter level, not an Anthropic rung: `req-minimal`,
+8 rows, outside the fit), RoboQuest (medium, 2), StrokeEval (web interfaces at high effort, 2), the navikt Copilot
+review (Sonnet 5.5 medium, from its usage events), Argo-Bench (Sonnet 5 at extra-high, Table 2) and MathArena's
+"(Think)" rows (a 32k thinking budget, 19 rows, outside the fit). Argo-Bench's Sonnet 5 effort ladder (Table 10,
+scores only) is added. Refit: quality moves by 0.003 at most, cost by 0.019 (log) at most; picks and crown unchanged.
+
 ## Correction of 20 Oct: an unstated effort takes the API default only when that is proven
 
 A row whose source states no effort is labelled `default`. It now takes the effort the API applies by default —
