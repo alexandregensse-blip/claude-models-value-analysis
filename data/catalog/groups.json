@@ -14884,6 +14884,1186 @@
    "label": "AgentDojo clean-task utility, no intervention (6 high-ASR models)",
    "type": "xmodel",
    "config": "AgentDojo clean (non-injected) tasks from all four suites, 3 trajectories per task at temperature 1.0, 291 clean runs per model-method; No-Intervention row of Table 3 (defence rows are other setups, not made); 32,768-token cap; paper 2026-08; read 2026-10-20 ✓"
+  },
+  "runtimewire-editorial-craft": {
+   "label": "RuntimeWire Editorial Craft (12 writing tasks, judge gpt-5.4)",
+   "type": "xmodel",
+   "config": "RuntimeWire own 12-task Editorial Craft battery, one task at a time, no tools, no retries on content; 2 deterministic tasks + 10 open-ended graded 0-10 blind by gpt-5.4, normalised 0-1 (x100); cost = publisher's estimate from published per-token pricing; article/board 2026-08-20; read 2026-10-20 ✓"
+  },
+  "aisi-cyber-expert": {
+   "label": "UK AISI advanced cyber tasks, Expert tier (pass rate, 50M token budget)",
+   "type": "xmodel",
+   "config": "UK AISI advanced cyber suite, Expert-level tasks (21 Expert + 27 Practitioner in Figure 1), 50M token budget, basic ReAct agent with Bash+Python in Kali container; average pass rate (+-1 SEM); blog 2026-04-30; read 2026-10-20 ✓"
+  },
+  "pokelike-v4": {
+   "label": "pokelike llm-bench harness v4 (badges mean, 50 seeds)",
+   "type": "xmodel",
+   "config": "pokelike llm-bench harness v4 (Pokemon-style game, 50 seeds 10000-10049, 1 pass per model, set notes=12 only); metric badges_mean of 50 runs (0-8 cap); tokens per run from the pass JSON; $/run computed by the README table from published per-token prices at print time; runs 2026-08-21 and 2026-08-22; saved repo pierpierpy/pokelike.xyz.bot; read 2026-10-20 ✓"
+  },
+  "tbench20-capy": {
+   "label": "Terminal-Bench 2.0 · harness Capy (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Capy; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-claude-code": {
+   "label": "Terminal-Bench 2.0 · harness Claude Code (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Claude Code; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-codebrain-1-5": {
+   "label": "Terminal-Bench 2.0 · harness CodeBrain-1.5 (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent CodeBrain-1.5; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-codex-cli": {
+   "label": "Terminal-Bench 2.0 · harness Codex CLI (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Codex CLI; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-crux": {
+   "label": "Terminal-Bench 2.0 · harness Crux (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Crux; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-droid": {
+   "label": "Terminal-Bench 2.0 · harness Droid (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Droid; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-goose": {
+   "label": "Terminal-Bench 2.0 · harness Goose (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Goose; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-letta-code": {
+   "label": "Terminal-Bench 2.0 · harness Letta Code (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Letta Code; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-maya-v2": {
+   "label": "Terminal-Bench 2.0 · harness MAYA-V2 (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent MAYA-V2; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-mini-swe-agent": {
+   "label": "Terminal-Bench 2.0 · harness Mini-SWE-Agent (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Mini-SWE-Agent; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-mux": {
+   "label": "Terminal-Bench 2.0 · harness Mux (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Mux; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-openhands": {
+   "label": "Terminal-Bench 2.0 · harness OpenHands (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent OpenHands; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-sageagent": {
+   "label": "Terminal-Bench 2.0 · harness SageAgent (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent SageAgent; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-terminus-2": {
+   "label": "Terminal-Bench 2.0 · harness Terminus 2 (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Terminus 2; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-terminus-kira": {
+   "label": "Terminal-Bench 2.0 · harness Terminus-KIRA (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent Terminus-KIRA; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "tbench20-tongagents": {
+   "label": "Terminal-Bench 2.0 · harness TongAgents (tbench.ai, 26 Aug 2026)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (tbench.ai leaderboard, Wayback 2026-08-26 snapshot); accuracy % (board accuracy x100); harness = board agent TongAgents; one row per submission; no effort field on the board; read 2026-10-20 ✓"
+  },
+  "swerebench3": {
+   "label": "SWE-rebench · task window 1 Nov 2025 – 1 Feb 2026 · resolved %",
+   "type": "xmodel",
+   "config": "SWE-rebench leaderboard (swe-rebench.com), task-range window 2025-11-01..2026-02-01 (rangeStats key 1761955200000:1769904000000); resolvedRate %; board agent 'tools' (SWE-agent harness as in the held windows swerebench / swerebench2); cost = board instanceCosts USD per instance; read 2026-10-20 ✓"
+  },
+  "epoch-proofbench-v10": {
+   "label": "ProofBench v1.0-era values (vals.ai, Epoch relay) · accuracy %",
+   "type": "xmodel",
+   "config": "ProofBench v1.0-era values relayed by Epoch AI (proofbench_external.csv, rows annotated 'v1.0-era value; model absent from the v1.1 board ... Not comparable to v1.1 rows'); vals.ai ProofBench v1.0 methodology (the held group valsproof is the v1.1 re-grade of 2026-08-14); cost per test as relayed; read 2026-10-20 ✓"
+  },
+  "openai-codexmax-post-swebench": {
+   "label": "OpenAI GPT-5.1-Codex-Max post appendix · SWE-bench Verified (n=500)",
+   "type": "xmodel",
+   "config": "OpenAI launch post 19 Nov 2025 appendix 'Model evaluations'; column labels carry the effort: 'GPT-5.1-Codex (high)' / 'GPT-5.1-Codex-Max (xhigh)'; footnote 'All evals were run with compaction enabled at Extra High reasoning effort'; read 2026-10-20 ✓"
+  },
+  "openai-codexmax-post-swelancer": {
+   "label": "OpenAI GPT-5.1-Codex-Max post appendix · SWE-Lancer IC SWE",
+   "type": "xmodel",
+   "config": "OpenAI launch post 19 Nov 2025 appendix 'Model evaluations'; column labels carry the effort: 'GPT-5.1-Codex (high)' / 'GPT-5.1-Codex-Max (xhigh)'; footnote 'All evals were run with compaction enabled at Extra High reasoning effort'; read 2026-10-20 ✓"
+  },
+  "openai-codexmax-post-tb2": {
+   "label": "OpenAI GPT-5.1-Codex-Max post appendix · Terminal-Bench 2.0",
+   "type": "xmodel",
+   "config": "OpenAI launch post 19 Nov 2025 appendix 'Model evaluations'; column labels carry the effort: 'GPT-5.1-Codex (high)' / 'GPT-5.1-Codex-Max (xhigh)'; footnote 'All evals were run with compaction enabled at Extra High reasoning effort'; read 2026-10-20 ✓"
+  },
+  "syscard51cm-swelancer": {
+   "label": "OpenAI GPT-5.1-Codex-Max system card · SWE-Lancer IC SWE Diamond · pass@1 avg of 3",
+   "type": "xmodel",
+   "config": "System card section 5.1.3.1 / Figure 8 (PDF p.21 image, 'pass@1 avg of 3', gpt-5 / gpt-5.1 'no browsing'); results of the 17 July 2025 SWE-Lancer update; no effort statement for this figure; read 2026-10-20 ✓"
+  },
+  "syscard51cm-paperbench10": {
+   "label": "OpenAI GPT-5.1-Codex-Max system card · PaperBench-10 · pass@1, no browsing",
+   "type": "xmodel",
+   "config": "System card section 5.1.3.2 / Figure 9 (PDF p.20 image): 10-paper subset; 'We report pass@1 performance with Extra High reasoning effort and no browsing.'; read 2026-10-20 ✓"
+  },
+  "syscard51cm-mlebench30": {
+   "label": "OpenAI GPT-5.1-Codex-Max system card · MLE-bench-30 · pass@1, no browsing",
+   "type": "xmodel",
+   "config": "System card section 5.1.3.3 / Figure 12 (PDF p.22 image): 30 Kaggle competitions, 24 h per competition (up to 100 h in some experiments); no effort statement; read 2026-10-20 ✓"
+  },
+  "datallm-9tasks": {
+   "label": "DataLLM Lab · nine executed Python tasks · score x/9 · cost per task",
+   "type": "xmodel",
+   "config": "DataLLM Lab blog (22 Aug 2026): nine Python tasks, hidden asserts, temperature 0, max_tokens 4000, one scored attempt each, via OpenRouter; cost derived by the source from measured tokens x list price captured 2026-08-22, printed per 1,000 tasks (divided by 1000 here); all four score 9/9 (ceiling); read 2026-10-20 ✓"
+  },
+  "scheme-baseline-main": {
+   "label": "SCHEME (arXiv 2605.29178) · main-task pass rate, side task removed (benign baseline)",
+   "type": "xmodel",
+   "config": "SCHEME multi-agent coding benchmark, baseline runs with include_side_task=false: 17 instances x 5 epochs = 85 trajectories per model; temperature 1.0; 32,000 max output tokens; rates printed as rounded integers in the text; read 2026-10-20 ✓"
+  },
+  "svgbench-readme": {
+   "label": "SVGBench README leaderboard · score %",
+   "type": "xmodel",
+   "config": "SVGBench (github.com/johnbean393/SVGBench) README leaderboard at commit 55c1cde8 (2026-02-12): single score column, 100+ SVG-generation questions with requirement-based scoring; effort = the label in parentheses where present; read 2026-10-20 ✓"
+  },
+  "featurebench-lite-openhands": {
+   "label": "FeatureBench Lite split · %PASSED · scaffold OpenHands",
+   "type": "xmodel",
+   "config": "FeatureBench README leaderboard (Dataset V1.0, Lite split), column %PASSED, rows whose scaffold is OpenHands; efforts not stated; read 2026-10-20 ✓"
+  },
+  "openai-codex-spark-launch-swebenchpro": {
+   "label": "OpenAI Codex-Spark launch chart · SWE-Bench Pro accuracy by reasoning effort",
+   "type": "xmodel",
+   "config": "OpenAI launch post 2026-02-12, vega chart SWE-Bench Pro (accuracy vs task duration; axis 'Reasoning effort'); harness / attempts / subset not stated on the page; read 2026-10-20 ✓"
+  },
+  "openai-codex-spark-launch-terminalbench2": {
+   "label": "OpenAI Codex-Spark launch chart · Terminal-Bench 2.0 (group B)",
+   "type": "xmodel",
+   "config": "OpenAI launch post 2026-02-12, vega chart Terminal-Bench 2.0, 'Group B' (Spark vs GPT-5.3-Codex); group meaning unexplained on the page; efforts not stated; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_203-shatter-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.203 · shatter v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.203; case shatter v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_204-shatter-v1_0_0-warhead": {
+   "label": "Test Cabinet · claude 2.1.204 · shatter v1.0.0 · warhead",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.204; case shatter v1.0.0; variant warhead; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_205-fathom-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.205 · fathom v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.205; case fathom v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_206-floe-bear-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.206 · floe-bear v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.206; case floe-bear v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_208-fathom-v1_1_0-kindle": {
+   "label": "Test Cabinet · claude 2.1.208 · fathom v1.1.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.208; case fathom v1.1.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_211-fathom-v1_1_0-kindle": {
+   "label": "Test Cabinet · claude 2.1.211 · fathom v1.1.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.211; case fathom v1.1.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_211-valence-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.211 · valence v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.211; case valence v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_233-deepcore-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.233 · deepcore v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.233; case deepcore v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_233-fathom-v2_0_0-kindle": {
+   "label": "Test Cabinet · claude 2.1.233 · fathom v2.0.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.233; case fathom v2.0.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_234-arc-foundry-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.234 · arc-foundry v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.234; case arc-foundry v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_234-deepcore-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.234 · deepcore v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.234; case deepcore v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_234-pong-v2_1_0-base": {
+   "label": "Test Cabinet · claude 2.1.234 · pong v2.1.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.234; case pong v2.1.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_235-coil-v1_0_0-base": {
+   "label": "Test Cabinet · claude 2.1.235 · coil v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.235; case coil v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_235-pong-v2_1_0-base": {
+   "label": "Test Cabinet · claude 2.1.235 · pong v2.1.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.235; case pong v2.1.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_235-pong-v2_1_0-gyre": {
+   "label": "Test Cabinet · claude 2.1.235 · pong v2.1.0 · gyre",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.235; case pong v2.1.0; variant gyre; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_237-band-of-bots-v1_0_0-default": {
+   "label": "Test Cabinet · claude 2.1.237 · band-of-bots v1.0.0 · default",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.237; case band-of-bots v1.0.0; variant default; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_237-pong-v2_1_0-gyre": {
+   "label": "Test Cabinet · claude 2.1.237 · pong v2.1.0 · gyre",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.237; case pong v2.1.0; variant gyre; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_238-band-of-bots-v1_0_0-default": {
+   "label": "Test Cabinet · claude 2.1.238 · band-of-bots v1.0.0 · default",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.238; case band-of-bots v1.0.0; variant default; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-claude-2_1_302-pong-v3_0_0-base-simple-2d": {
+   "label": "Test Cabinet · claude 2.1.302 · pong v3.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness claude 2.1.302; case pong v3.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_142_4-pong-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.142.4 · pong v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.142.4; case pong v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_142_4-pong-v1_0_0-gyre": {
+   "label": "Test Cabinet · codex 0.142.4 · pong v1.0.0 · gyre",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.142.4; case pong v1.0.0; variant gyre; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_142_5-shatter-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.142.5 · shatter v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.142.5; case shatter v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_142_5-shatter-v1_0_0-warhead": {
+   "label": "Test Cabinet · codex 0.142.5 · shatter v1.0.0 · warhead",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.142.5; case shatter v1.0.0; variant warhead; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_143_0-fathom-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.143.0 · fathom v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.143.0; case fathom v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_144_0-fathom-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.144.0 · fathom v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.144.0; case fathom v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_144_1-floe-bear-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.144.1 · floe-bear v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.144.1; case floe-bear v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_144_3-fathom-v1_1_0-kindle": {
+   "label": "Test Cabinet · codex 0.144.3 · fathom v1.1.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.144.3; case fathom v1.1.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_144_4-fathom-v1_1_0-base": {
+   "label": "Test Cabinet · codex 0.144.4 · fathom v1.1.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.144.4; case fathom v1.1.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_144_4-fathom-v1_1_0-kindle": {
+   "label": "Test Cabinet · codex 0.144.4 · fathom v1.1.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.144.4; case fathom v1.1.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_144_4-floe-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.144.4 · floe v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.144.4; case floe v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_144_4-shatter-v1_0_1-warhead": {
+   "label": "Test Cabinet · codex 0.144.4 · shatter v1.0.1 · warhead",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.144.4; case shatter v1.0.1; variant warhead; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_145_0-pong-v2_0_0-gyre": {
+   "label": "Test Cabinet · codex 0.145.0 · pong v2.0.0 · gyre",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.145.0; case pong v2.0.0; variant gyre; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-arc-foundry-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.147.0 · arc-foundry v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case arc-foundry v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-band-of-bots-v1_0_0-default": {
+   "label": "Test Cabinet · codex 0.147.0 · band-of-bots v1.0.0 · default",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case band-of-bots v1.0.0; variant default; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-coil-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.147.0 · coil v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case coil v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-comfort-zone-v1_0_0-default": {
+   "label": "Test Cabinet · codex 0.147.0 · comfort-zone v1.0.0 · default",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case comfort-zone v1.0.0; variant default; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-dealers-choice-v1_0_0-default": {
+   "label": "Test Cabinet · codex 0.147.0 · dealers-choice v1.0.0 · default",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case dealers-choice v1.0.0; variant default; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-deepcore-v1_0_0-base": {
+   "label": "Test Cabinet · codex 0.147.0 · deepcore v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case deepcore v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-fathom-v2_0_0-kindle": {
+   "label": "Test Cabinet · codex 0.147.0 · fathom v2.0.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case fathom v2.0.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-floe-v2_0_0-base": {
+   "label": "Test Cabinet · codex 0.147.0 · floe v2.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case floe v2.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-outside-the-box-v1_0_0-default": {
+   "label": "Test Cabinet · codex 0.147.0 · outside-the-box v1.0.0 · default",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case outside-the-box v1.0.0; variant default; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-pong-v2_0_1-base": {
+   "label": "Test Cabinet · codex 0.147.0 · pong v2.0.1 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case pong v2.0.1; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-pong-v2_1_0-base": {
+   "label": "Test Cabinet · codex 0.147.0 · pong v2.1.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case pong v2.1.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-pong-v2_1_0-gyre": {
+   "label": "Test Cabinet · codex 0.147.0 · pong v2.1.0 · gyre",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case pong v2.1.0; variant gyre; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-shatter-v2_0_0-base": {
+   "label": "Test Cabinet · codex 0.147.0 · shatter v2.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case shatter v2.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-shatter-v2_0_1-warhead": {
+   "label": "Test Cabinet · codex 0.147.0 · shatter v2.0.1 · warhead",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case shatter v2.0.1; variant warhead; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_147_0-well-well-well-v1_0_0-default": {
+   "label": "Test Cabinet · codex 0.147.0 · well-well-well v1.0.0 · default",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.147.0; case well-well-well v1.0.0; variant default; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_0-pong-v3_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.0 · pong v3.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.0; case pong v3.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-cascade-v3_0_0-draw-three-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · cascade v3.0.0 · draw-three",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case cascade v3.0.0; variant draw-three; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-coil-v2_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · coil v2.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case coil v2.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-facet-v1_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · facet v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case facet v1.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-fathom-v3_0_0-kindle-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · fathom v3.0.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case fathom v3.0.0; variant kindle; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-kessler-v1_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · kessler v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case kessler v1.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-pong-v3_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · pong v3.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case pong v3.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-pong-v3_0_0-gyre-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · pong v3.0.0 · gyre",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case pong v3.0.0; variant gyre; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-refract-v1_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · refract v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case refract v1.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_162_1-shatter-v3_0_0-warhead-simple-2d": {
+   "label": "Test Cabinet · codex 0.162.1 · shatter v3.0.0 · warhead",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.162.1; case shatter v3.0.0; variant warhead; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_163_0-kessler-v1_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.163.0 · kessler v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.163.0; case kessler v1.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_163_0-orrery-v1_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.163.0 · orrery v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.163.0; case orrery v1.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_163_0-volute-v1_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.163.0 · volute v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.163.0; case volute v1.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-codex-0_163_0-wick-v1_0_0-base-simple-2d": {
+   "label": "Test Cabinet · codex 0.163.0 · wick v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness codex 0.163.0; case wick v1.0.0; variant base; engine simple-2d; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-opencode-1_17_20-fathom-v1_1_0-kindle": {
+   "label": "Test Cabinet · opencode 1.17.20 · fathom v1.1.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness opencode 1.17.20; case fathom v1.1.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-opencode-1_18_1-fathom-v1_1_0-kindle": {
+   "label": "Test Cabinet · opencode 1.18.1 · fathom v1.1.0 · kindle",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness opencode 1.18.1; case fathom v1.1.0; variant kindle; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "tc-opencode-1_18_2-valence-v1_0_0-base": {
+   "label": "Test Cabinet · opencode 1.18.2 · valence v1.0.0 · base",
+   "type": "xmodel",
+   "config": "snapshot.testcabinet.ai 2026-10-20T0238Z (runs.json); harness opencode 1.18.2; case valence v1.0.0; variant base; engine none; score = validator checklist earned/total x100, mean over completed runs; cost = mean cost.comparable (list-price, as the held opencode groups tc-*); efforts not recorded; read 2026-10-20 ✓"
+  },
+  "scale-tutorbench": {
+   "label": "Scale TutorBench (board score %, Wayback 2026-10-16)",
+   "type": "xmodel",
+   "config": "https://labs.scale.com/leaderboard/tutorbench; Wayback capture 20261016182047 (saved gpt-5.1-chat-latest/src/scale/dec_tutorbench.html); score = board score % with 95% CI; tutoring rubrics, high-school/AP; read 2026-10-20 ✓"
+  },
+  "scale-hle-text": {
+   "label": "Scale Humanity's Last Exam text-only (Wayback 2026-10-07)",
+   "type": "xmodel",
+   "config": "https://labs.scale.com/leaderboard/humanitys_last_exam_text_only; Wayback capture 20261007135520 (saved gpt-5.1-chat-latest/src/scale/dec_humanitys_last_exam_text_only.html); score = board score % with 95% CI; HLE text-only, board page of 2026-10-07 (HLE-Rolling note of 17 Sep 2026); read 2026-10-20 ✓"
+  },
+  "scale-multinrc": {
+   "label": "Scale MultiNRC (Wayback 2026-10-16)",
+   "type": "xmodel",
+   "config": "https://labs.scale.com/leaderboard/multinrc; Wayback capture 20261016182047 (saved gpt-5.1-chat-latest/src/scale/dec_multinrc.html); score = board score % with 95% CI; multilingual reasoning; read 2026-10-20 ✓"
+  },
+  "scale-vlu": {
+   "label": "Scale Visual-Language Understanding / VISTA (Wayback 2026-10-16)",
+   "type": "xmodel",
+   "config": "https://labs.scale.com/leaderboard/visual_language_understanding; Wayback capture 20261016182047 (saved gpt-5.1-chat-latest/src/scale/dec_visual_language_understanding.html); score = board score % with 95% CI; multimodal; read 2026-10-20 ✓"
+  },
+  "scale-enigma-1016": {
+   "label": "Scale EnigmaEval (Wayback 2026-10-16, current 5-model board)",
+   "type": "xmodel",
+   "config": "https://labs.scale.com/leaderboard/enigma_eval; Wayback capture 20261016182047 (saved gpt-5.1-chat-latest/src/scale/dec_enigma_eval.html); score = board score % with 95% CI; puzzle hunts; current board (models listed with a -high / -xhigh suffix); read 2026-10-20 ✓"
+  },
+  "scale-enigma-0602": {
+   "label": "Scale EnigmaEval (Wayback 2026-06-02, earlier 47-entry board)",
+   "type": "xmodel",
+   "config": "https://labs.scale.com/leaderboard/enigma_eval; Wayback capture 20260602105941 (saved verify/v3/ev/wb_20260602105941.html); score = board score % with 95% CI; puzzle hunts; earlier board, different setup from the 2026-10 board (gemini-3.1-pro 19.76 then, 36.78 now); read 2026-10-20 ✓"
+  },
+  "epoch-hle-external": {
+   "label": "Epoch AI HLE external table (accuracy %, 2026-10-15 zip)",
+   "type": "xmodel",
+   "config": "epoch.ai/data/benchmark_data.zip (hle_external.csv; zip read 2026-10-15; copy gc/c4/src/epoch/2026-10-15); Humanity's Last Exam, accuracy with standard error; Notes column empty (provenance unstated); values differ from every Scale HLE capture (not a restatement); read 2026-10-20 ✓"
+  },
+  "arxiv2601-negotiation-control": {
+   "label": "Negotiation deal-closure, Control condition (Table 2, mean over 240/300/360 s)",
+   "type": "xmodel",
+   "config": "arXiv 2601.13206v2 Table 2, deal-closure %, simulated negotiation, N=300 per condition; provider-default settings; GPT-5.1-chat-latest called 2025-11-22 (Table A.2); control and time-aware are two prompts (two sets of runs); read 2026-10-20 ✓"
+  },
+  "arxiv2601-negotiation-timeaware": {
+   "label": "Negotiation deal-closure, Time-Aware condition (Table 2, mean over 240/300/360 s)",
+   "type": "xmodel",
+   "config": "arXiv 2601.13206v2 Table 2, deal-closure %, simulated negotiation, N=300 per condition; provider-default settings; GPT-5.1-chat-latest called 2025-11-22 (Table A.2); control and time-aware are two prompts (two sets of runs); read 2026-10-20 ✓"
+  },
+  "prescience-lacer": {
+   "label": "PreScience contribution generation, LACER scored by GPT-5 (Table 9, n=1000)",
+   "type": "xmodel",
+   "config": "arXiv 2602.20459 Table 9 'LACER scores (n=1000) for Contribution Generation as judged by GPT-5 and Claude Opus 4.5'; LACER (GPT-5) column; influential-reference input; Table 2 (main) restates the same generations (rule 8, not a group); read 2026-10-20 ✓"
+  },
+  "palia-voice-overall": {
+   "label": "Palia voice-pipeline LLM candidates, Overall judge score (median of 5), 2026-07-06",
+   "type": "xmodel",
+   "config": "github.com/ChiChuRita/Palia agent/bench/results.md commit b46fdc270c (2026-07-06); 'Voice pipeline benchmark - 2026-07-06T10:20Z'; median of 5 runs per cell; judge gpt-5.5; Overall column (1-10, composite incl. warmth/mirroring/safety/brevity); read 2026-10-20 ✓"
+  },
+  "writ-tau2-gpt51": {
+   "label": "tau2-bench Retail+Airline, GPT-5.1 variants (WRIT Table 4)",
+   "type": "sweep",
+   "config": "arXiv 2606.02908 Table 4 p.8: official tau2-bench, agent temperature 0, user simulator GPT-4.1 temp 0.5; Pass1 average; cost = agent-side API cost of one full Retail+Airline evaluation (method unstated); read 2026-10-20 ✓"
+  },
+  "etchr-avg-pass1-baseline": {
+   "label": "ETCHR main table: average Pass@1 of the baselines (no ETCHR)",
+   "type": "xmodel",
+   "config": "arXiv 2605.23897v1 (2026-05-22); Pass@1 temperature 0; no thinking setting stated; read 2026-10-20 ✓"
+  },
+  "gblog-imo2025": {
+   "label": "Gemini 3 Deep Think blog table (12 Feb 2026): imo2025",
+   "type": "xmodel",
+   "config": "blog.google Deep Think post, evaluation table image; imo2025; maker-reported, no cost; read 2026-10-20 ✓"
+  },
+  "gblog-codeforces": {
+   "label": "Gemini 3 Deep Think blog table (12 Feb 2026): codeforces",
+   "type": "xmodel",
+   "config": "blog.google Deep Think post, evaluation table image; codeforces; maker-reported, no cost; read 2026-10-20 ✓"
+  },
+  "gblog-ipho2025": {
+   "label": "Gemini 3 Deep Think blog table (12 Feb 2026): ipho2025",
+   "type": "xmodel",
+   "config": "blog.google Deep Think post, evaluation table image; ipho2025; maker-reported, no cost; read 2026-10-20 ✓"
+  },
+  "gblog-cmt": {
+   "label": "Gemini 3 Deep Think blog table (12 Feb 2026): cmt",
+   "type": "xmodel",
+   "config": "blog.google Deep Think post, evaluation table image; cmt; maker-reported, no cost; read 2026-10-20 ✓"
+  },
+  "gblog-icho2025": {
+   "label": "Gemini 3 Deep Think blog table (12 Feb 2026): icho2025",
+   "type": "xmodel",
+   "config": "blog.google Deep Think post, evaluation table image; icho2025; maker-reported, no cost; read 2026-10-20 ✓"
+  },
+  "google-cybergym-codemender": {
+   "label": "CyberGym pass@1, Gemini 3.5 Flash Cyber in CodeMender (max 5 model calls), Google launch chart",
+   "type": "xmodel",
+   "config": "deepmind.google blog 21 Jul 2026, chart config dm_datavis_2; competitor numbers provider self-reported; read 2026-10-20 ✓"
+  },
+  "google-bigsleep-eval": {
+   "label": "Big Sleep evaluation pass@1 (Google internal, cases undisclosed)",
+   "type": "xmodel",
+   "config": "deepmind.google blog 21 Jul 2026, chart config dm_datavis_0; read 2026-10-20 ✓"
+  },
+  "google-chrome-commit-scan": {
+   "label": "Chrome production commit scanning pipeline pass@1 (Google)",
+   "type": "xmodel",
+   "config": "deepmind.google blog 21 Jul 2026, chart config dm_datavis_1; vulnerabilities not disclosed; read 2026-10-20 ✓"
+  },
+  "google-v8-unique-issues": {
+   "label": "V8 engine: unique confirmed issues found (count), fixed number of invocations (unstated)",
+   "type": "xmodel",
+   "config": "deepmind.google blog 21 Jul 2026, text only; read 2026-10-20 ✓"
+  },
+  "google-cybergym-38": {
+   "label": "CyberGym pass@1, C/C++ vulnerability discovery, Gemini 3.8 Flash Cyber launch chart (2 Sep 2026)",
+   "type": "xmodel",
+   "config": "blog.google 3.8 Flash Cyber chart; setup unstated (no harness/attempts); competitor cell GPT-5.6 Sol 83.6 = same cell as google-cybergym-codemender, kept there only; read 2026-10-20 ✓"
+  },
+  "google-cwe-bench": {
+   "label": "CWE-Bench (Collinear) pass@1 vs average cost per rollout, Google Pareto chart (2 Sep 2026)",
+   "type": "xmodel",
+   "config": "blog.google 3.8 Flash Cyber chart; pass@1 + cost per rollout; pass digitised except the 3.8 Cyber score (text 47.2) and Fable 5 (text 47.8 = leading frontier model); cost digitised; read 2026-10-20 ✓"
+  },
+  "gbstox-agronomy": {
+   "label": "gbstox agronomy LLM benchmark: text-based Overall Score (425 questions), live README 2026-10-17",
+   "type": "xmodel",
+   "config": "gbstox/agronomy_llm_benchmarking README leaderboard (pushed 2026-10-17); Overall Score = text categories (image columns excluded); per-model Date Tested 2026-06..10; OpenRouter, quality-first quantization routing; no reasoning setting stated; read 2026-10-20 ✓"
+  },
+  "attractorbench-codex": {
+   "label": "AttractorBench v2.0.0 NLSpec (T1/T2/T3+judge), codex harness, best run per model",
+   "type": "xmodel",
+   "config": "strongdm/attractorbench bench_version 2.0.0, main task only; score=5% build+5% self-test+25% T1+25% T2+25% T3+15% judge; Harbor, agent codex; leaderboard statistic = best run per agent/model (snapshot 2026-02-26); cost = Harbor result.json x litellm pricing; read 2026-10-20 ✓"
+  },
+  "attractorbench-claudecode": {
+   "label": "AttractorBench v2.0.0 NLSpec (T1/T2/T3+judge), claude-code harness, best run per model",
+   "type": "xmodel",
+   "config": "strongdm/attractorbench bench_version 2.0.0, main task only; score=5% build+5% self-test+25% T1+25% T2+25% T3+15% judge; Harbor, agent claude-code; leaderboard statistic = best run per agent/model (snapshot 2026-02-26); cost = Harbor result.json x litellm pricing; read 2026-10-20 ✓"
+  },
+  "medmistake-bench": {
+   "label": "MedMistake-Bench, share of correct answers (Table 2 Total)",
+   "type": "xmodel",
+   "config": "MedMistake-Bench (expert-validated subset, 215 questions), single-shot QA judged by a binary LLM judge, no effort or temperature stated; arXiv 2512.20983 v1 2025-12-24 (v2 2026-04-07), both before the 2026-05-15 xAI redirect; read 2026-10-20 ✓"
+  },
+  "mulmochat-spreadsheet-20251130": {
+   "label": "MulmoChat spreadsheet-generation benchmark, average score (7 tests)",
+   "type": "xmodel",
+   "config": "github.com/receptron/MulmoChat benchmark/SUMMARY.md at commit d8e4eb03f7 (2025-11-30 22:53Z, 'Benchmark Run Date: November 30, 2025'); 7 test cases per model, all 7/7 completed; verifier fixes of 26-28 Nov applied; read 2026-10-20 ✓"
+  },
+  "arxiv2604-18309-repair": {
+   "label": "Downstream fix pass rate with LLM failure explanations (Table 5, three-way batch)",
+   "type": "xmodel",
+   "config": "arXiv 2604.18309 v1 (2026-04-20): Table 5 'three-way' context batch, Expl.?=Yes, pass rate (passed/total=2052); one model per sweep explains, judges and fixes; 'lowest possible reasoning settings supported by each provider', temperature 0; isolated/two-way batches are the same runs summarised differently (not kept); read 2026-10-20 ✓"
+  },
+  "spullara-gridpath": {
+   "label": "spullara/models grid-path single prompt (pass/fail, n=1)",
+   "type": "xmodel",
+   "config": "one prompt solve_grid (max-sum path, every 3rd move diagonal), 4x4 test grid, one run per model, max_tokens 32768, no reasoning/effort param sent; pass = syntax valid + path valid + returned sum = recomputed sum (optimality not tested); eval date per row; commit 59c2b35a; gridpath = gridsum (same runs, rule 8); read 2026-10-20 ✓"
+  },
+  "dinobase-sql-accuracy": {
+   "label": "Dinobase SQL accuracy (RevOps, 15 questions)",
+   "type": "xmodel",
+   "config": "kappa90/dinobase REPORT.md, SQL column, 15 RevOps questions (HubSpot+Stripe), max turns 15, temp 0, OpenRouter; 15 per model per REPORT.md (README says 75: conflict noted); read 2026-10-20 ✓"
+  },
+  "dinobase-mcp-accuracy": {
+   "label": "Dinobase per-source MCP accuracy (RevOps, 15 questions)",
+   "type": "xmodel",
+   "config": "same questions/models, per-source MCP tools column; 15 per model; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-nl2repo": {
+   "label": "Qwen3.8-Omni paper Table 2: NL2Repo-Bench (Claude Code)",
+   "type": "xmodel",
+   "config": "Table 2 footnote 1: DeepSWE 1.1 = highest of Claude Code and mini-SWE-agent; footnote 2: SWE-bench Pro Claude Code harness, temp 1.0 top_p 0.95 256K except Claude-Opus-4.6 (Max) = officially published score; footnote 3 SWE-bench Multilingual mini-SWE-agent; footnote 4 NL2Repo Claude Code; footnote 6 HLE judged by GPT-4o; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-hle": {
+   "label": "Qwen3.8-Omni paper Table 2: HLE (GPT-4o judge)",
+   "type": "xmodel",
+   "config": "Table 2 footnote 1: DeepSWE 1.1 = highest of Claude Code and mini-SWE-agent; footnote 2: SWE-bench Pro Claude Code harness, temp 1.0 top_p 0.95 256K except Claude-Opus-4.6 (Max) = officially published score; footnote 3 SWE-bench Multilingual mini-SWE-agent; footnote 4 NL2Repo Claude Code; footnote 6 HLE judged by GPT-4o; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-clawevalmm-average": {
+   "label": "Qwen3.8-Omni paper Table 3: ClawEval-MM average (Pass@3 of the same runs not kept, rule 8)",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-androidworld": {
+   "label": "Qwen3.8-Omni paper Table 3: AndroidWorld",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-vision2web": {
+   "label": "Qwen3.8-Omni paper Table 3: Vision2Web",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-erqa": {
+   "label": "Qwen3.8-Omni paper Table 3: ERQA",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-realworldqa": {
+   "label": "Qwen3.8-Omni paper Table 3: RealWorldQA",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-mathvision": {
+   "label": "Qwen3.8-Omni paper Table 3: MathVision (default setting)",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-mathvision-ci": {
+   "label": "Qwen3.8-Omni paper Table 3: MathVision with CI",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-charxiv": {
+   "label": "Qwen3.8-Omni paper Table 3: CharXiv (RQ) default setting",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-charxiv-ci": {
+   "label": "Qwen3.8-Omni paper Table 3: CharXiv (RQ) with CI",
+   "type": "xmodel",
+   "config": "Table 3 (visual); footnote 3 of the paper: MathVision/CharXiv report default and +CI settings; other models take the better of with/without the boxed-answer instruction (as printed); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-spotsoundbench": {
+   "label": "Qwen3.8-Omni paper Table 4: SpotSoundBench",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-mmau": {
+   "label": "Qwen3.8-Omni paper Table 4: MMAU",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-mmar": {
+   "label": "Qwen3.8-Omni paper Table 4: MMAR",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-mmsu": {
+   "label": "Qwen3.8-Omni paper Table 4: MMSU",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-muchomusic-rul": {
+   "label": "Qwen3.8-Omni paper Table 4: MuchoMusic-RUL",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-hummusqa": {
+   "label": "Qwen3.8-Omni paper Table 4: HumMusQA",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-mustbench": {
+   "label": "Qwen3.8-Omni paper Table 4: MusTBench",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-audio-multichallenge": {
+   "label": "Qwen3.8-Omni paper Table 4: Audio MultiChallenge",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-wildspeech": {
+   "label": "Qwen3.8-Omni paper Table 4: WildSpeech",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-voicebench": {
+   "label": "Qwen3.8-Omni paper Table 4: VoiceBench",
+   "type": "xmodel",
+   "config": "Table 4 (audio); all results concern textual outputs from audio inputs (paper); baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-dailyomni": {
+   "label": "Qwen3.8-Omni paper Table 5: DailyOmni",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-worldsense": {
+   "label": "Qwen3.8-Omni paper Table 5: WorldSense",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-avut": {
+   "label": "Qwen3.8-Omni paper Table 5: AVUT",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-joinavbench": {
+   "label": "Qwen3.8-Omni paper Table 5: JoinAVBench",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-avspeaker": {
+   "label": "Qwen3.8-Omni paper Table 5: AVSpeaker",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omnivideobench-static": {
+   "label": "Qwen3.8-Omni paper Table 5: OmniVideoBench",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-videomme-v2-static": {
+   "label": "Qwen3.8-Omni paper Table 5: Video-MME-v2",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-mmou": {
+   "label": "Qwen3.8-Omni paper Table 5: MMOU",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-lvomnibench-static": {
+   "label": "Qwen3.8-Omni paper Table 5: LVOmniBench",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omnicloze": {
+   "label": "Qwen3.8-Omni paper Table 5: OmniCloze",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-qivd": {
+   "label": "Qwen3.8-Omni paper Table 5: QIVD",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omnivchat-bench": {
+   "label": "Qwen3.8-Omni paper Table 5: OmniVChat-Bench",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-proactivevideoqa": {
+   "label": "Qwen3.8-Omni paper Table 5: ProactiveVideoQA",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-streamingbench": {
+   "label": "Qwen3.8-Omni paper Table 5: StreamingBench",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omnicap-if-csr": {
+   "label": "Qwen3.8-Omni paper Table 5: OmniCap-IF CSR (ISR of the same outputs not kept, rule 8)",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omni2web-tracka": {
+   "label": "Qwen3.8-Omni paper Table 5: Omni2Web Track A",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omni2web-trackb": {
+   "label": "Qwen3.8-Omni paper Table 5: Omni2Web Track B",
+   "type": "xmodel",
+   "config": "Table 5 (audio-visual); static direct-input setting; baselines Seed 2.0 Lite / Muse Spark 1.2 are not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-wildclawbench-mm": {
+   "label": "Qwen3.8-Omni paper Table 6: WildClawBench-MM",
+   "type": "xmodel",
+   "config": "Table 6 (omni agentic); WildClawBench-MM and AgenticVBench use Claude Code, UniClawBench uses OpenClaw, OmniGAIA no external harness (distinct settings per row, paper text); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-uniclawbench": {
+   "label": "Qwen3.8-Omni paper Table 6: UniClawBench",
+   "type": "xmodel",
+   "config": "Table 6 (omni agentic); WildClawBench-MM and AgenticVBench use Claude Code, UniClawBench uses OpenClaw, OmniGAIA no external harness (distinct settings per row, paper text); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-agenticvbench": {
+   "label": "Qwen3.8-Omni paper Table 6: AgenticVBench",
+   "type": "xmodel",
+   "config": "Table 6 (omni agentic); WildClawBench-MM and AgenticVBench use Claude Code, UniClawBench uses OpenClaw, OmniGAIA no external harness (distinct settings per row, paper text); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omnigaia": {
+   "label": "Qwen3.8-Omni paper Table 6: OmniGAIA",
+   "type": "xmodel",
+   "config": "Table 6 (omni agentic); WildClawBench-MM and AgenticVBench use Claude Code, UniClawBench uses OpenClaw, OmniGAIA no external harness (distinct settings per row, paper text); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-omnivideobench-qwencode": {
+   "label": "Qwen3.8-Omni paper Table 7: OmniVideoBench under the Qwen Code agent setting",
+   "type": "xmodel",
+   "config": "Table 7, Qwen Code agentic setting (distinct from the static Table 5 setting); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-videomme-v2-qwencode": {
+   "label": "Qwen3.8-Omni paper Table 7: Video-MME-v2 under the Qwen Code agent setting",
+   "type": "xmodel",
+   "config": "Table 7, Qwen Code agentic setting (distinct from the static Table 5 setting); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.25611-lvomnibench-qwencode": {
+   "label": "Qwen3.8-Omni paper Table 7: LVOmniBench under the Qwen Code agent setting",
+   "type": "xmodel",
+   "config": "Table 7, Qwen Code agentic setting (distinct from the static Table 5 setting); read 2026-10-20 ✓"
+  },
+  "openrouter-vgi-bench": {
+   "label": "OpenRouter VGI-Bench (video general intelligence, 439 multiple-choice questions on long videos): accuracy and cost per question",
+   "type": "xmodel",
+   "config": "VGI-Bench public split 439 questions (by Seldon), run through OpenRouter default routing, one turn, full video + question, temperature 0, graded letter after 'Answer:'; listed only with >=395 answered; scores aggregate successful runs of the newest 90 days; board last run 2026-10-18 12:18 UTC; cost = average cost per question as printed; read 2026-10-20 ✓"
+  },
+  "arxiv-2608.26480-lcb100": {
+   "label": "GVS5H paper: LiveCodeBench release_v6 hard-split LCB-100 pass@1 and cost per pass, single call (no manager scaffold)",
+   "type": "xmodel",
+   "config": "LCB-100 (100 most recent hard LiveCodeBench v6 problems), pass@1 mean of 5 passes, 128k max_tokens, reasoning on (Table 1 header), pinned backends, single call at temperature 0.2, corrected evaluator (App. B); cost = list rate x tokens of one pass over the 100 problems (Table 2, source-computed, retried attempts counted); manager-scaffold arms not rows; read 2026-10-20 ✓"
+  },
+  "datallmlab-python9": {
+   "label": "DataLLM Lab: 9 executed Python tasks, Qwen3.8 Max family (Prime, Max, Max-0902), pass and cost per 1,000 tasks",
+   "type": "xmodel",
+   "config": "9 executed Python tasks (python3 -I subprocess, 12 s timeout), temperature 0, max_tokens 4000, one scored attempt, via OpenRouter; three runs on different days (Prime 2026-10-02, Max 2026-08-20, Max-0902 2026-09-16); cost = measured tokens x list price on the priced-on date (source-computed, 'not a billing statement'); read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-cl-bench": {
+   "label": "CL-bench accuracy (paper Table 1, GPT-5.1 judge)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 1; task accuracy all-or-nothing over rubrics; GPT-5.1 judge with low reasoning effort; reference models; Gemma-4-31B-it and Hy4-preview not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-cl-bench-life": {
+   "label": "CL-bench Life accuracy (paper Table 1, GPT-5.1 judge)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 1; task accuracy all-or-nothing over rubrics; GPT-5.1 judge with high reasoning effort; reference models; Gemma-4-31B-it and Hy4-preview not in the eight makers; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-hle": {
+   "label": "Full board: HLE (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-arc-agi-1": {
+   "label": "Full board: ARC-AGI-1 (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-arc-agi-2": {
+   "label": "Full board: ARC-AGI-2 (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-gpqa-diamond": {
+   "label": "Full board: GPQA-Diamond (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-supergpqa": {
+   "label": "Full board: SuperGPQA (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-mmlu-pro": {
+   "label": "Full board: MMLU-Pro (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-mmlu-redux": {
+   "label": "Full board: MMLU-Redux (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-simpleqa": {
+   "label": "Full board: SimpleQA (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-ceval": {
+   "label": "Full board: CEval (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-aime-2025": {
+   "label": "Full board: AIME-2025 (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-hmmt-feb-2025": {
+   "label": "Full board: HMMT-Feb-2025 (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-hmmt-nov-2025": {
+   "label": "Full board: HMMT-Nov-2025 (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-imo-answerbench": {
+   "label": "Full board: IMO-AnswerBench (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-longbench-v2": {
+   "label": "Full board: LongBench v2 (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-aalcr": {
+   "label": "Full board: AALCR (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-mrcr-2needle": {
+   "label": "Full board: MRCR-2needle (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-mrcr-4needle": {
+   "label": "Full board: MRCR-4needle (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-mrcr-8needle": {
+   "label": "Full board: MRCR-8needle (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-graphwalks-bfs": {
+   "label": "Full board: GraphWalks-BFS (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-ifbench": {
+   "label": "Full board: IFBench (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-inverseifeval": {
+   "label": "Full board: InverseIFEval (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-ifeval": {
+   "label": "Full board: IFEval (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-multichallenge": {
+   "label": "Full board: MultiChallenge (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-advancedif": {
+   "label": "Full board: AdvancedIF (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-livecodebench-v6": {
+   "label": "Full board: LiveCodeBench-v6 (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-scicode": {
+   "label": "Full board: SciCode (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "arxiv-2609.33642-ojbench": {
+   "label": "Full board: OJBench (paper Table 7, gpt-oss-120b judge for free-form)",
+   "type": "xmodel",
+   "config": "arXiv 2609.33642 Table 7 (appendix B); benchmarks with objective answers scored by native protocol, free-form judged by gpt-oss-120b; no tools; reference models; HY3-preview and the student variants are not in the eight makers / not published models; read 2026-10-20 ✓"
+  },
+  "contextarena-needle8": {
+   "label": "Context Arena 8-needle retrieval, 4K-128K bins (the five bins every model has)",
+   "type": "xmodel",
+   "config": "contextarena.ai API needles=8 mode=full, read 2026-10-20; score = sample-weighted mean of the five bins 4K-128K that all models share (models with more bins, up to 1M, are cut to these so the context range is the same); bins recomputed from the payload; reasoning_mode as the board labels it; read 2026-10-20 ✓"
+  },
+  "pask-latentneeds-avg": {
+   "label": "PASK LatentNeeds-Bench, balanced accuracy, mean of 10 subsets (paper column Avg)",
+   "type": "xmodel",
+   "config": "arXiv 2604.08000 / repo xzf-thu/Pask d54646c (17 Apr 2026); 100 sessions 3,936 turns; prompt level = best of 3 per model; temperature 0.3; max_tokens 4000; the 10 subsets W1..D3 are breakdowns of the same runs (not separate groups); read 2026-10-20 ✓"
+  },
+  "tqgexp-avg-avg3": {
+   "label": "TQG-Exp Table 1 'No Experience' rows, mean Avg@3 over ALFWorld seen/unseen, WebShop, ScienceWorld",
+   "type": "xmodel",
+   "config": "arXiv 2610.14877 (10 Oct 2026) Table 1; 3 rollouts, 100 instances per benchmark, max 30 steps; Pass@3 and per-benchmark columns are the same runs (not groups); read 2026-10-20 ✓"
+  },
+  "taasaa-bench46": {
+   "label": "taasaa/bench 46-task correctness (API runs, Jun-Aug 2026, one author)",
+   "type": "xmodel",
+   "config": "github.com/taasaa/bench results/*.md (read 2026-10-20); 46 eval tasks 177 samples; Correctness x100 from Overall Scores; no effort text; no USD cost; tokens = run totals; read 2026-10-20 ✓"
+  },
+  "blueprintrepair-typed": {
+   "label": "BlueprintRepair Lean proof-blueprint repair, 142 states, typed local edits interface",
+   "type": "xmodel",
+   "config": "arXiv 2607.28110v1 (30 Jul 2026) Table 5 totals; all calls via OpenRouter; no decoding parameters sent; max output 49,152; solved/142; one interface = one group; the USD totals cover the 3 interfaces together (no per-group cost); read 2026-10-20 ✓"
+  },
+  "blueprintrepair-patch": {
+   "label": "BlueprintRepair Lean proof-blueprint repair, 142 states, patch interface",
+   "type": "xmodel",
+   "config": "arXiv 2607.28110v1 (30 Jul 2026) Table 5 totals; all calls via OpenRouter; no decoding parameters sent; max output 49,152; solved/142; one interface = one group; the USD totals cover the 3 interfaces together (no per-group cost); read 2026-10-20 ✓"
+  },
+  "blueprintrepair-rewrite": {
+   "label": "BlueprintRepair Lean proof-blueprint repair, 142 states, rewrite interface",
+   "type": "xmodel",
+   "config": "arXiv 2607.28110v1 (30 Jul 2026) Table 5 totals; all calls via OpenRouter; no decoding parameters sent; max output 49,152; solved/142; one interface = one group; the USD totals cover the 3 interfaces together (no per-group cost); read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-superGPQA": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): SuperGPQA",
+   "type": "xmodel",
+   "config": "SuperGPQA; 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-aa-omniscience": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): AA-Omniscience Index",
+   "type": "xmodel",
+   "config": "AA-Omniscience Index; 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-gdpval-aa": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): GDPval-AA",
+   "type": "xmodel",
+   "config": "GDPval-AA; 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-qwenchinesebench": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): QwenChineseBench (internal)",
+   "type": "xmodel",
+   "config": "QwenChineseBench (internal); 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-qwenclawbench": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): QwenClawBench (internal)",
+   "type": "xmodel",
+   "config": "QwenClawBench (internal); 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-skillsbench": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): SkillsBench",
+   "type": "xmodel",
+   "config": "SkillsBench; 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-toolcallformatifbench": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): ToolcallFormatIFBench (internal)",
+   "type": "xmodel",
+   "config": "ToolcallFormatIFBench (internal); 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-qwenwebbench": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): QwenWebBench Elo (internal)",
+   "type": "xmodel",
+   "config": "QwenWebBench Elo (internal); 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-scicode": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): SciCode",
+   "type": "xmodel",
+   "config": "SciCode; 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-nl2repo": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): NL2Repo",
+   "type": "xmodel",
+   "config": "NL2Repo; 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-terminal-bench-2-terminus2": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): Terminal-Bench 2.0 (Terminus-2)",
+   "type": "xmodel",
+   "config": "Terminal-Bench 2.0 (Terminus-2); 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "qwenblog-q36maxprev-swe-bench-pro": {
+   "label": "Qwen3.6-Max-Preview launch chart (18 Apr 2026): SWE-bench Pro",
+   "type": "xmodel",
+   "config": "SWE-bench Pro; 5 bars as printed on the maker chart; harness, n, effort, run dates unstated; read 2026-10-20 ✓"
+  },
+  "openwrt-alpha": {
+   "label": "OpenWrt docs4ai rubric, alpha batch (6 scenarios), authoritative Opus-4.6-Thinking pass 2026-03-28 0807am",
+   "type": "xmodel",
+   "config": "OpenWrt docs4ai rubric, alpha batch (6 scenarios), authoritative Opus-4.6-Thinking pass 2026-03-28 0807am; single-turn code answers graded pass/fail per scenario by an LLM against the author's golden key; other passes of the same outputs not used (one run one group); read 2026-10-20 ✓"
+  },
+  "openwrt-beta": {
+   "label": "OpenWrt docs4ai rubric, beta batch (6 scenarios), pass 2026-03-30",
+   "type": "xmodel",
+   "config": "OpenWrt docs4ai rubric, beta batch (6 scenarios), pass 2026-03-30; single-turn code answers graded pass/fail per scenario by an LLM against the author's golden key; other passes of the same outputs not used (one run one group); read 2026-10-20 ✓"
+  },
+  "surfsense-smoke": {
+   "label": "SurfSense capability screen, case smoke (verdict of the screening run)",
+   "type": "xmodel",
+   "config": "SurfSense sweep 2026-10-07/08 via OpenRouter, case=smoke; score = verdict of the retained run (100 pass / 0 fail); 'below'-level models are not run on later cases (conditional selection); cost = recorded USD of that run; effort not in manifest; models 'assumed' not run are excluded; read 2026-10-20 ✓"
+  },
+  "surfsense-pdf-brief": {
+   "label": "SurfSense capability screen, case pdf-brief (verdict of the screening run)",
+   "type": "xmodel",
+   "config": "SurfSense sweep 2026-10-07/08 via OpenRouter, case=pdf-brief; score = verdict of the retained run (100 pass / 0 fail); 'below'-level models are not run on later cases (conditional selection); cost = recorded USD of that run; effort not in manifest; models 'assumed' not run are excluded; read 2026-10-20 ✓"
+  },
+  "surfsense-board-pack": {
+   "label": "SurfSense capability screen, case board-pack (verdict of the screening run)",
+   "type": "xmodel",
+   "config": "SurfSense sweep 2026-10-07/08 via OpenRouter, case=board-pack; score = verdict of the retained run (100 pass / 0 fail); 'below'-level models are not run on later cases (conditional selection); cost = recorded USD of that run; effort not in manifest; models 'assumed' not run are excluded; read 2026-10-20 ✓"
+  },
+  "aaarticle-index": {
+   "label": "AA Intelligence Index, AA article 29 Jan 2026 (index version of that date)",
+   "type": "xmodel",
+   "config": "AA Intelligence Index, AA article 29 Jan 2026 (index version of that date); values as printed in the article text; AA measurements (dated snapshot, different cells from the held aa-index* groups of Jul-Sep 2026); read 2026-10-20 ✓"
+  },
+  "aaarticle-gdpval": {
+   "label": "GDPval-AA Elo, AA article 29 Jan 2026",
+   "type": "xmodel",
+   "config": "GDPval-AA Elo, AA article 29 Jan 2026; values as printed in the article text; AA measurements (dated snapshot, different cells from the held aa-index* groups of Jul-Sep 2026); read 2026-10-20 ✓"
+  },
+  "aaarticle-ifbench": {
+   "label": "IFBench %, AA article 29 Jan 2026",
+   "type": "xmodel",
+   "config": "IFBench %, AA article 29 Jan 2026; values as printed in the article text; AA measurements (dated snapshot, different cells from the held aa-index* groups of Jul-Sep 2026); read 2026-10-20 ✓"
+  },
+  "aaarticle-omniscience": {
+   "label": "AA-Omniscience Index, AA article 29 Jan 2026",
+   "type": "xmodel",
+   "config": "AA-Omniscience Index, AA article 29 Jan 2026; values as printed in the article text; AA measurements (dated snapshot, different cells from the held aa-index* groups of Jul-Sep 2026); read 2026-10-20 ✓"
+  },
+  "aaarticle-hle": {
+   "label": "HLE %, AA article 29 Jan 2026",
+   "type": "xmodel",
+   "config": "HLE %, AA article 29 Jan 2026; values as printed in the article text; AA measurements (dated snapshot, different cells from the held aa-index* groups of Jul-Sep 2026); read 2026-10-20 ✓"
   }
  },
  "merge": {
