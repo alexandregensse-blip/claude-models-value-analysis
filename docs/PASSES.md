@@ -5,6 +5,16 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Correction of 20 Oct: an unstated effort takes the API default only when that is proven
+
+A row whose source states no effort is labelled `default`. It now takes the effort the API applies by default —
+`high`, `medium` for Opus 5.5 — only when three things are shown from the source: it called Anthropic's API directly
+(no harness or agent in between that may set an effort), it sent no effort setting, and the documented default held
+over the whole window in which it ran. 18 Claude rows pass (latitude ×4, cyberq ×3, realitybench ×4, kwts ×2,
+cauchye ×2, mcptox, aimecontract, computingforgeeks); routes that are not proven (OpenRouter, Mercor, Epoch, Vals,
+Harbor-based runs) stay `default` with a flag. Refit: quality moves by 0.006 at most, cost by 0.045 (log) at most,
+intervals unchanged.
+
 ## Correction of 19 Oct: one label per thinking budget
 
 Thinking-budget efforts were written as the source wrote them, so one budget had several labels (`think-1024` and
