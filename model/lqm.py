@@ -34,7 +34,8 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
 STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm") + ".stan")   # lqm_ext: the encompassing variant
-EXT = os.path.basename(STAN_FILE) == "lqm_ext.stan"
+EXT = os.path.basename(STAN_FILE) in ("lqm_ext.stan", "lqm_ext2.stan")
+EXT_PRESENT = os.path.basename(STAN_FILE) == "lqm_ext2.stan"           # makers without data are not levels
 PROVIDERS = ("anthropic", "openai", "google", "xai", "deepseek", "qwen", "glm", "kimi")
 
 
@@ -392,6 +393,9 @@ def stan_data(groups, axis):
         K=GH_NODES, ghx=list(xg * math.sqrt(2)), ghw=list(wg / math.sqrt(math.pi)))
     if EXT:                                                         # the encompassing variant: makers and home rows
         fi = {f: i + 1 for i, f in enumerate(PROVIDERS + ("other",))}
+        if EXT_PRESENT:
+            here = {provider(model_of[c]) for c in couples}
+            fi = {f: i + 1 for i, f in enumerate(f for f in PROVIDERS + ("other",) if f in here)}
         data.update(F=len(fi), prov_c=[fi[provider(model_of[c])] for c in couples],
                     prov2=[fi[provider(m)] for _, m in levels["pub_model"]],
                     prov3=[fi[provider(model_of[c])] for c, _ in levels["couple_task"]],
