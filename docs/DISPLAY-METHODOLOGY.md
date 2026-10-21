@@ -195,3 +195,36 @@ score of § 2.
   A match near the threshold can flip with a refit.
 - Ratios read as on the main page: "3.5× cheaper", "1.6× dearer". A model flagged size-sensitive (§ 5) keeps its
   note.
+
+## 16. The multi-site draft (models.agensse.com)
+
+A draft, built locally only and not served: `python3 site/multisite.py` writes `out/models/` (gitignored): the
+**global page** (`index.html`) and one page per model maker (`claude/`, `openai/`, `google/`, `xai/`, `deepseek/`,
+`qwen/`, `glm/`, `kimi/`), with `llms.txt`, `robots.txt`, `summary.json` (per page: size, couples shown, counts,
+the full answer, the effort-ladder inversions) and the icons. It reuses the Claude page — `app.js`, `body.html`,
+`style.css`, the pre-render — with the per-site settings of `site/makers.json`, applied as exact replacements that
+stop the build when one no longer applies. `python3 site/build.py` and the files it writes are unchanged.
+
+- **Same rules as §§ 1–14** on every page: publication by two publishers or more, the frontier, the price trend, the
+  value, the tiers and the crown, all computed **among the page's couples on screen**. A couple is shown when it is
+  published on **both** axes (the ones a chart can place); on the Claude page every cost couple has its quality.
+- **Global page**: by default, the **current model of each family of every maker** (each maker's `current` list),
+  so the frontier, the tiers and the crown compare what can be bought today across makers; *Older models* adds
+  every other model of the eight makers. The price trend is fitted on the same current models. One hue per maker,
+  its models in steps of lightness; Claude's model names carry "Claude".
+- **Maker pages**: the maker's models in its own colours (the Claude page keeps the catalogue's), its tiers and
+  crown among its own couples, its price trend on its current models; the maker's older models are hidden by default
+  (`legacy`), as on the Claude page (§ 4).
+- **Current models** (`current`): the latest model of each family, every build and mode of it except previews. The
+  families are an editorial reading of the makers' line-ups, listed in `site/makers.json`.
+- **Lines** (the catalogue's `line`: a dated build, a preview, OpenAI's Pro mode): separate couples of one model,
+  each with its own effort ladder. They share the model's colour and its single legend entry; the first is drawn
+  solid, the others dashed or dotted with hollow points, and the legend lists each with its stroke and what it is
+  ("0813 build", "preview", "Pro"; the undated build is "original release", the model beside its Pro mode
+  "standard"). Chart labels, tooltips and table rows give the full name ("DeepSeek V4.1 Flash 1017 build").
+- **Sources table**: the groups that measured at least one couple shown on the page, with those couples; sources
+  are counted by publisher (`data/catalog/publishers.json`). A group without a verified configuration note shows "—".
+  The Claude page at the repository root still lists every Claude couple a group measured, efforts outside the fit
+  included, so its counts are larger.
+- **Draft**: every page carries a banner and a `noindex` tag while `draft` in `site/makers.json` is set: the other
+  makers' costs are not yet put on today's prices. An empty `draft` removes both and writes the sitemap.

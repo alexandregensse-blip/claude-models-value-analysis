@@ -1,0 +1,192 @@
+{
+ "_doc": "Settings of the multi-site build (python3 site/multisite.py, output out/models/): the global page and one page per model maker, for models.agensse.com. Site part only: the fit inputs (model/, raw-data.csv, data/catalog/) are never read for these settings. Per maker: the models in legend order (base keys; the catalogue's lines — dated builds, previews, Pro modes — follow their model), the label of each key, the tag of each line, the price trend's couples (current: the latest model of each family, every build and mode of it except previews) and the models hidden by default (legacy). Rules: docs/DISPLAY-METHODOLOGY.md § 16.",
+ "base_url": "https://models.agensse.com/",
+ "out_dir": "out/models",
+ "draft": "Draft: the other makers' costs are not yet put on today's prices (a price update is under way), so the cost of a non-Claude model, and every comparison that uses it, may still move.",
+ "global": {
+  "path": "",
+  "title": "AI models compared: cost vs quality across eight model makers",
+  "site_name": "AI models cost vs quality",
+  "description": "What the current models of Anthropic, OpenAI, Google, xAI, DeepSeek, Qwen, Zhipu (GLM) and Moonshot (Kimi) cost at every effort level, and which gives the best quality for the price. Open data, CC BY 4.0.",
+  "h1": "AI models compared <span class=\"h1-line\">cost vs quality across eight makers</span>",
+  "lede": "What the current model of each family, from eight model makers, actually costs at every effort level, and the quality it delivers — fused from public benchmark measurements for every (model, effort) pair, on one scale for all makers.",
+  "noun": "",
+  "label_prefix": {"claude": "Claude "},
+  "hide_landscape": [],
+  "hide_note": "",
+  "generation": "Each release buys the same quality for less: turn on <b>Older models</b> to set each family's earlier models beside its current one, on the same scales."
+ },
+ "makers": {
+  "claude": {
+   "name": "Claude",
+   "maker": "Anthropic",
+   "path": "claude/",
+   "prefixes": ["fable-", "opus-", "sonnet-", "haiku-"],
+   "colours": "catalog",
+   "hue": 30,
+   "title": "Claude models compared: cost vs quality at every effort level",
+   "description": "What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives the best quality for the price. Open data, CC BY 4.0.",
+   "h1": "Claude models compared <span class=\"h1-line\">cost vs quality at every effort level</span>",
+   "lede": "What each recent Claude model actually costs, at every effort level, and the quality it delivers — fused from public benchmark measurements for every (model, effort) pair.",
+   "noun": "Claude",
+   "hide_landscape": ["haiku-4.5"],
+   "hide_note": " <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.",
+   "generation": "Each release buys the same quality for less — <b>Sonnet&nbsp;5.5</b> beats Sonnet&nbsp;5's <em>max</em> quality at its own <em>high</em> effort for about a fifth of the cost, <b>Opus&nbsp;5.5</b> beats Fable&nbsp;5.1's <em>max</em> quality at its own <em>high</em> effort for about a sixth of the cost, <b>Fable&nbsp;5.1</b> beats Fable&nbsp;5's <em>max</em> quality at its own <em>xHigh</em> effort for about three quarters of the cost, and <b>Opus&nbsp;5</b> reaches Fable-5-class quality for a little over half the cost per task; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.",
+   "models": {
+    "fable-5.1": "Fable 5.1", "fable-5": "Fable 5", "opus-5.5": "Opus 5.5", "opus-5": "Opus 5", "opus-4.8": "Opus 4.8",
+    "sonnet-5.5": "Sonnet 5.5", "sonnet-5": "Sonnet 5", "opus-4.7": "Opus 4.7", "sonnet-4.6": "Sonnet 4.6",
+    "haiku-5.5": "Haiku 5.5", "haiku-4.5": "Haiku 4.5"
+   },
+   "lines": {},
+   "current": ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-5.5"],
+   "legacy": ["opus-4.7", "sonnet-4.6", "opus-4.8"]
+  },
+  "openai": {
+   "name": "OpenAI",
+   "maker": "OpenAI",
+   "path": "openai/",
+   "prefixes": ["gpt-"],
+   "hue": 150,
+   "models": {
+    "gpt-6.1-sol": "GPT-6.1 Sol", "gpt-6-sol": "GPT-6 Sol", "gpt-6-astra": "GPT-6 Astra", "gpt-6-luna": "GPT-6 Luna",
+    "gpt-5.6-sol": "GPT-5.6 Sol", "gpt-5.6-terra": "GPT-5.6 Terra", "gpt-5.6-luna": "GPT-5.6 Luna",
+    "gpt-5.5": "GPT-5.5", "gpt-5.5-pro": "GPT-5.5 Pro", "gpt-5.5-instant": "GPT-5.5 Instant",
+    "gpt-5.5-instant-05-26": "GPT-5.5 Instant 05-26", "gpt-5.5-instant-06-26": "GPT-5.5 Instant 06-26",
+    "gpt-5.5-pre-release": "GPT-5.5 pre-release", "gpt-5.5-pro-pre-release": "GPT-5.5 Pro pre-release",
+    "gpt-5.4": "GPT-5.4", "gpt-5.4-pro": "GPT-5.4 Pro", "gpt-5.4-mini": "GPT-5.4 mini", "gpt-5.4-nano": "GPT-5.4 nano",
+    "gpt-5.3-codex": "GPT-5.3-Codex", "gpt-5.3-codex-spark": "GPT-5.3-Codex-Spark", "gpt-5.3-chat": "GPT-5.3 Chat",
+    "gpt-5.3-chat-latest": "GPT-5.3 Chat (latest)",
+    "gpt-5.2": "GPT-5.2", "gpt-5.2-pro": "GPT-5.2 Pro", "gpt-5.2-codex": "GPT-5.2-Codex", "gpt-5.2-chat": "GPT-5.2 Chat",
+    "gpt-5.2-chat-latest": "GPT-5.2 Chat (latest)",
+    "gpt-5.1": "GPT-5.1", "gpt-5.1-codex": "GPT-5.1-Codex", "gpt-5.1-codex-max": "GPT-5.1-Codex-Max",
+    "gpt-5.1-codex-mini": "GPT-5.1-Codex-Mini", "gpt-5.1-chat": "GPT-5.1 Chat", "gpt-5.1-chat-latest": "GPT-5.1 Chat (latest)",
+    "gpt-5.1-instant": "GPT-5.1 Instant", "gpt-5.1-thinking": "GPT-5.1 Thinking"
+   },
+   "lines": {
+    "gpt-6.1-sol-pro": "Pro", "gpt-6-sol-pro": "Pro", "gpt-6-astra-pro": "Pro", "gpt-6-luna-pro": "Pro",
+    "gpt-5.6-sol-pro": "Pro", "gpt-5.6-terra-pro": "Pro", "gpt-5.6-luna-pro": "Pro", "gpt-5.6-luna-0730": "0730 build"
+   },
+   "current": ["gpt-6.1-sol", "gpt-6.1-sol-pro", "gpt-6-astra", "gpt-6-astra-pro", "gpt-6-luna", "gpt-6-luna-pro"],
+   "legacy": ["gpt-5.5", "gpt-5.5-pro", "gpt-5.4", "gpt-5.4-pro", "gpt-5.4-mini", "gpt-5.4-nano", "gpt-5.3-codex",
+              "gpt-5.3-codex-spark", "gpt-5.2", "gpt-5.2-pro", "gpt-5.2-codex", "gpt-5.1", "gpt-5.1-codex",
+              "gpt-5.1-codex-max", "gpt-5.1-codex-mini"]
+  },
+  "google": {
+   "name": "Google",
+   "maker": "Google",
+   "path": "google/",
+   "prefixes": ["gemini-"],
+   "hue": 250,
+   "models": {
+    "gemini-4-argon": "Gemini 4 Argon", "gemini-3.8-flash": "Gemini 3.8 Flash", "gemini-3.8-flash-cyber": "Gemini 3.8 Flash Cyber",
+    "gemini-3.7-flash": "Gemini 3.7 Flash", "gemini-3.6-flash": "Gemini 3.6 Flash", "gemini-3.5-flash": "Gemini 3.5 Flash",
+    "gemini-3.5-flash-cyber": "Gemini 3.5 Flash Cyber", "gemini-3.5-flash-lite": "Gemini 3.5 Flash-Lite",
+    "gemini-3.1-pro": "Gemini 3.1 Pro", "gemini-3.1-pro-customtools": "Gemini 3.1 Pro (custom tools)",
+    "gemini-3.1-flash-lite": "Gemini 3.1 Flash-Lite", "gemini-3-pro": "Gemini 3 Pro", "gemini-3-flash": "Gemini 3 Flash",
+    "gemini-3-deepthink": "Gemini 3 Deep Think", "gemini-3-deepthink-preview": "Gemini 3 Deep Think preview"
+   },
+   "lines": {"gemini-3.1-flash-lite-preview": "preview"},
+   "current": ["gemini-4-argon", "gemini-3.8-flash", "gemini-3.5-flash-lite"],
+   "legacy": ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3-pro", "gemini-3-flash", "gemini-3-deepthink",
+              "gemini-3-deepthink-preview"]
+  },
+  "xai": {
+   "name": "xAI",
+   "maker": "xAI",
+   "path": "xai/",
+   "chroma": 0.025,
+   "prefixes": ["grok-"],
+   "hue": 260,
+   "models": {
+    "grok-4.7": "Grok 4.7", "grok-4.6": "Grok 4.6", "grok-4.5": "Grok 4.5", "grok-4.5-heavy": "Grok 4.5 Heavy",
+    "grok-4.3": "Grok 4.3", "grok-4.20": "Grok 4.20", "grok-4.20-multi-agent": "Grok 4.20 Multi-Agent",
+    "grok-4.20-multi-agent-exp-beta-0304": "Grok 4.20 Multi-Agent exp. beta 0304",
+    "grok-4.20-non-reasoning-exp-beta-0304": "Grok 4.20 Non-Reasoning exp. beta 0304",
+    "grok-4.1": "Grok 4.1", "grok-4.1-fast": "Grok 4.1 Fast", "grok-4.1-thinking": "Grok 4.1 Thinking"
+   },
+   "lines": {"grok-4.20-beta": "beta", "grok-4.20-multi-agent-beta": "beta"},
+   "current": ["grok-4.7"],
+   "legacy": ["grok-4.5", "grok-4.5-heavy", "grok-4.3", "grok-4.20", "grok-4.20-multi-agent", "grok-4.1", "grok-4.1-fast",
+              "grok-4.1-thinking"]
+  },
+  "deepseek": {
+   "name": "DeepSeek",
+   "maker": "DeepSeek",
+   "path": "deepseek/",
+   "prefixes": ["deepseek-"],
+   "hue": 290,
+   "models": {
+    "deepseek-v4.1-flash": "DeepSeek V4.1 Flash", "deepseek-v4-pro": "DeepSeek V4 Pro", "deepseek-v4-flash": "DeepSeek V4 Flash",
+    "deepseek-v4-flash-vision-exp": "DeepSeek V4 Flash Vision exp.", "deepseek-v3.2": "DeepSeek V3.2",
+    "deepseek-v3.2-speciale": "DeepSeek V3.2-Speciale"
+   },
+   "lines": {
+    "deepseek-v4.1-flash-1017": "1017 build", "deepseek-v4-pro-0813": "0813 build", "deepseek-v4-pro-preview": "preview",
+    "deepseek-v4-flash-0731": "0731 build", "deepseek-v4-flash-preview": "preview"
+   },
+   "current": ["deepseek-v4.1-flash", "deepseek-v4.1-flash-1017", "deepseek-v4-pro", "deepseek-v4-pro-0813"],
+   "legacy": ["deepseek-v3.2", "deepseek-v3.2-speciale"]
+  },
+  "qwen": {
+   "name": "Qwen",
+   "maker": "Alibaba (Qwen)",
+   "path": "qwen/",
+   "prefixes": ["qwen"],
+   "hue": 80,
+   "models": {
+    "qwen3.8-max": "Qwen3.8 Max", "qwen3.8-max-prime": "Qwen3.8 Max Prime", "qwen3.8-2.4t-a95b": "Qwen3.8-2.4T-A95B",
+    "qwen3.8-flash": "Qwen3.8 Flash", "qwen3.8-flash-next": "Qwen3.8 Flash Next", "qwen3.8-27b": "Qwen3.8-27B",
+    "qwen3.8-omni-flash": "Qwen3.8-Omni Flash",
+    "qwen3.7-max": "Qwen3.7 Max", "qwen3.7-plus": "Qwen3.7 Plus", "qwen3.7-flash": "Qwen3.7 Flash",
+    "qwen3.6-max": "Qwen3.6 Max", "qwen3.6-plus": "Qwen3.6 Plus", "qwen3.6-flash": "Qwen3.6 Flash",
+    "qwen3.6-27b": "Qwen3.6-27B", "qwen3.6-35b-a3b": "Qwen3.6-35B-A3B",
+    "qwen3.5-max": "Qwen3.5 Max", "qwen3.5-plus": "Qwen3.5 Plus", "qwen3.5-plus-02-15": "Qwen3.5 Plus 02-15",
+    "qwen3.5-flash": "Qwen3.5 Flash", "qwen3.5-omni-plus": "Qwen3.5-Omni Plus", "qwen3.5-omni-flash": "Qwen3.5-Omni Flash",
+    "qwen3.5-397b-a17b": "Qwen3.5-397B-A17B", "qwen3.5-122b-a10b": "Qwen3.5-122B-A10B", "qwen3.5-35b-a3b": "Qwen3.5-35B-A3B",
+    "qwen3.5-27b": "Qwen3.5-27B", "qwen3.5-9b": "Qwen3.5-9B", "qwen3.5-4b": "Qwen3.5-4B", "qwen3.5-2b": "Qwen3.5-2B",
+    "qwen3.5-0.8b": "Qwen3.5-0.8B",
+    "qwen3-max-thinking": "Qwen3-Max-Thinking", "qwen3-coder-next": "Qwen3-Coder-Next", "qwen3-8b": "Qwen3-8B"
+   },
+   "lines": {
+    "qwen3.8-max-0902": "0902 build", "qwen3.8-max-preview": "preview", "qwen3.7-max-preview": "preview",
+    "qwen3.6-max-preview": "preview", "qwen3.6-plus-preview": "preview", "qwen3.5-max-preview": "preview",
+    "qwen3.5-plus-0420": "0420 build", "qwen3-max-thinking-preview": "preview"
+   },
+   "current": ["qwen3.8-max", "qwen3.8-max-0902", "qwen3.8-2.4t-a95b", "qwen3.8-flash", "qwen3.8-flash-next", "qwen3.8-27b",
+               "qwen3.7-plus"],
+   "legacy": ["qwen3.6-max", "qwen3.6-flash", "qwen3.6-35b-a3b", "qwen3.5-max", "qwen3.5-plus", "qwen3.5-plus-02-15",
+              "qwen3.5-flash", "qwen3.5-omni-plus", "qwen3.5-omni-flash", "qwen3.5-397b-a17b", "qwen3.5-122b-a10b",
+              "qwen3.5-35b-a3b", "qwen3.5-27b", "qwen3.5-9b", "qwen3.5-4b", "qwen3.5-2b", "qwen3.5-0.8b",
+              "qwen3-max-thinking", "qwen3-coder-next", "qwen3-8b"]
+  },
+  "glm": {
+   "name": "GLM",
+   "maker": "Zhipu AI (GLM)",
+   "path": "glm/",
+   "prefixes": ["glm-"],
+   "hue": 200,
+   "models": {
+    "glm-5.3": "GLM-5.3", "glm-5.3-prime": "GLM-5.3-Prime", "glm-5.3-flash": "GLM-5.3-Flash", "glm-5.3-flashx": "GLM-5.3-FlashX",
+    "glm-5.2": "GLM-5.2", "glm-5.1": "GLM-5.1", "glm-5": "GLM-5", "glm-5-turbo": "GLM-5-Turbo", "glm-5v-turbo": "GLM-5V-Turbo",
+    "glm-4.7": "GLM-4.7", "glm-4.7-flash": "GLM-4.7-Flash"
+   },
+   "lines": {},
+   "current": ["glm-5.3", "glm-5.3-flash", "glm-5.3-flashx"],
+   "legacy": ["glm-5.1", "glm-5", "glm-5-turbo", "glm-5v-turbo", "glm-4.7", "glm-4.7-flash"]
+  },
+  "kimi": {
+   "name": "Kimi",
+   "maker": "Moonshot AI (Kimi)",
+   "path": "kimi/",
+   "prefixes": ["kimi-"],
+   "hue": 340,
+   "models": {
+    "kimi-k3": "Kimi K3", "kimi-k2.7-code": "Kimi K2.7 Code", "kimi-k2.6": "Kimi K2.6", "kimi-k2.5": "Kimi K2.5",
+    "kimi-k2-thinking": "Kimi K2 Thinking"
+   },
+   "lines": {},
+   "current": ["kimi-k3"],
+   "legacy": ["kimi-k2.5", "kimi-k2-thinking"]
+  }
+ }
+}

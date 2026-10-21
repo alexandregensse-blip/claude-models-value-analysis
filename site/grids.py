@@ -29,13 +29,16 @@ def panel_score(curve, t):
     return 1 / (1 + math.exp(-(lg(s0) + (lg(s1) - lg(s0)) * (t - t0) / (t1 - t0))))
 
 
-def fused_grids():
+def fused_grids(models=None, both_axes=False):
     """The fitted values the page decides on, reference-free, published couples only: cost {model: {effort: [ln cost,
     quasi-standard error]}} and quality {model: {effort: [θ, quasi-standard error]}} (θ the latent quality, logit
     scale), with the panel curve θ → expected panel score that labels θ. Refuses to build from a fit that no longer
     matches its inputs, or that did not converge. Also returns the fit's diagnostics and, per axis, the Monte Carlo
     error of each published value as the page prints it: the cost as a multiple of the cheapest couple (two
-    decimals), the quality as an expected panel score in % (one decimal)."""
+    decimals), the quality as an expected panel score in % (one decimal).
+    `models` (default: the Claude page's DISPLAY_ORDER) picks the models; `both_axes` keeps only the couples published
+    on both axes, the ones a chart can place (the multi-site pages, site/multisite.py)."""
+    models = DISPLAY_ORDER if models is None else models
     try:
         cache = json.load(open(FIT_CACHE))
     except (OSError, ValueError):
@@ -51,7 +54,7 @@ def fused_grids():
     for axis in ("cost", "quality"):
         S = cache[axis]
         grid, err = {}, {}
-        for m in DISPLAY_ORDER:
+        for m in models:
             row = {}
             for e in EFFORT_ORDER:
                 v = S.get(f"{m}@{e}")
@@ -59,6 +62,10 @@ def fused_grids():
                     row[e] = [round(v[0], 4), round(v[1], 4)] if axis == "cost" else [round(v[5][0], 4), round(v[5][1], 4)]
             if row: grid[m] = row
         grids[axis] = grid
+    if both_axes:                                                   # a couple a chart can place: published on both axes
+        for a, b in (("cost", "quality"), ("quality", "cost")):
+            grids[a] = {m: r for m, es in grids[a].items()
+                        if (r := {e: v for e, v in es.items() if e in grids[b].get(m, {})})}
     cheapest = min((v[0], f"{m}@{e}") for m, es in grids["cost"].items() for e, v in es.items())[1]
     for m, es in grids["cost"].items():                             # Monte Carlo error of the displayed multiple
         for e, v in es.items():

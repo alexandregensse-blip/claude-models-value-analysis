@@ -4,7 +4,7 @@ import csv, os, sys
 
 from config import ROOT
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import DISPLAY_ORDER, GROUP_DISPLAY, GROUP_MERGE
+from catalog import DISPLAY_ORDER, GROUP_DISPLAY, GROUP_MERGE, PUBLISHER_OF
 
 
 def model_label(m):
@@ -15,12 +15,16 @@ def model_label(m):
 SHOWN = set(DISPLAY_ORDER)            # the site's models: the data file may hold other makers' rows (the global fit)
 
 
-def groups_data():
+def groups_data(couples=None, unverified=None):
     """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
     derived from raw-data.csv.
     Only the editorial metadata per group — display label, edge type (sweep/xmodel/xgen), verified config note —
     lives in the catalogue (data/catalog/groups.json). Some sources publish several sub-benchmarks (AIReiter) → MERGE folds them into one node-set
-    so corroboration counts the source once."""
+    so corroboration counts the source once.
+    The Claude page (no argument) lists the Claude couples each group measured. The multi-site pages (site/multisite.py)
+    pass `couples`, the couples the page displays: a group is listed with those it measured, each row also carries its
+    publisher (data/catalog/publishers.json), and a group without editorial metadata gets `unverified` as its
+    configuration note instead of a check mark."""
     GMETA, MERGE = GROUP_DISPLAY, GROUP_MERGE          # editorial metadata: data/catalog/groups.json
     rows = [r for r in csv.DictReader(open(os.path.join(ROOT, "raw-data.csv")))
             if r["group"] and not r["group"].startswith("#")]
@@ -47,11 +51,14 @@ def groups_data():
         rs = buckets[gk]; nodes, seen = [], set()
         for r in rs:
             nid = f'{r["model"]}@{r["effort"]}'
-            if r["model"] in SHOWN and nid not in seen: seen.add(nid); nodes.append(nid)
+            if (nid in couples if couples is not None else r["model"] in SHOWN) and nid not in seen:
+                seen.add(nid); nodes.append(nid)
         if not nodes:                                                   # a source with no Claude couple: not this site's
             continue
-        lbl, t, h = GMETA.get(gk, (gk, "xmodel", "config ✓"))
+        lbl, t, h = GMETA.get(gk, (gk, "xmodel", "config ✓" if unverified is None else unverified))
         out.append({"s": rs[0]["source"], "g": lbl, "t": t, "h": h, "n": nodes, "u": pick_url(rs, rs[0]["source"])})
+        if couples is not None:
+            out[-1]["p"] = PUBLISHER_OF.get(rs[0]["source"], rs[0]["source"])   # one publisher = one source
     return out
 
 

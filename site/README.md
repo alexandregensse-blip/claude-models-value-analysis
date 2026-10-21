@@ -15,6 +15,7 @@ the repository root (`index.html`, `claude-models-head-to-head.html`, `robots.tx
 | `duels.py` | the head-to-head page: a comparator for any two models shown, and the current pairs written out (rules: `docs/DISPLAY-METHODOLOGY.md` § 15) |
 | `render.py`, `prerender.js` | runs `app.js` at build time in Node so the served HTML carries the figures |
 | `app.js`, `body.html`, `style.css` | the page: charts, tables, tiers, interactions (vanilla JS/SVG) |
+| `multisite.py`, `makers.json` | the multi-site draft for models.agensse.com — the global page and one page per model maker — built locally into `out/models/` (gitignored): `python3 site/multisite.py`; settings per site in `makers.json` (rules: `docs/DISPLAY-METHODOLOGY.md` § 16) |
 | `assets/` | `favicon_png.py`, `og_image.py`: redraw the icon and the share image |
 
 **Publishing a fork:** set `SITE_URL`, `REPO_URL`, and the two ownership keys in `config.py` (see the root README).
