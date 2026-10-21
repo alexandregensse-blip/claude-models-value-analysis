@@ -5,7 +5,7 @@ import hashlib, json, math, os, sys
 
 from config import ROOT, EFFORT_ORDER
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import MODEL_ORDER
+from catalog import DISPLAY_ORDER   # the site shows the Claude models; the fit may hold others (the global fit)
 
 FIT_CACHE = os.path.join(ROOT, "model", "fit-cache.json")
 
@@ -51,7 +51,7 @@ def fused_grids():
     for axis in ("cost", "quality"):
         S = cache[axis]
         grid, err = {}, {}
-        for m in MODEL_ORDER:
+        for m in DISPLAY_ORDER:
             row = {}
             for e in EFFORT_ORDER:
                 v = S.get(f"{m}@{e}")
