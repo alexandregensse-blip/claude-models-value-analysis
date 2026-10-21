@@ -32,6 +32,9 @@ Its inputs, checked source by source with quoted evidence (September 2026):
 |---|---|
 | `precision/charts.json` | every digitised chart axis: units per pixel (recomputed from the tick coordinates), reading error in pixels (from an independent re-reading of its points), the rows read on it |
 | `precision/origins.json` | per group: whether each value is printed, from a primary data file or computed, and the step of its last published digit |
+| `precision/repricing.json` | Claude Sonnet 5.5's costs put on the 7 Oct 2026 price (cache reads), per row and class |
+| `precision/repricing_makers.json`, `repricing_makers.py` | the other makers' costs put on today's list price (21 Oct 2026): price schedules per model with the maker's sources, the prices each source computed with (AA payloads, Vals, Cursor, ARC, OpenAI posts…), one record per row (re-priced, unchanged, cost set aside, and why); `repricing_makers_aa.py` extracts the AA payload prices |
+| `precision/price_variants.json` | promotions in force today and DeepSeek's off-peak rate: per couple, the ratio of the promotional cost to the base cost, for the page |
 
 A new row brings its precision: run `python3 data/precision.py` after adding rows (a printed value needs nothing
 more; a digitised chart needs its entry in `precision/charts.json`).

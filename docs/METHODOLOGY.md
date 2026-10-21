@@ -53,6 +53,16 @@ precision** of the cost and of the score (§4).
   of run — long agent sessions that re-read their context every turn, one-shot `claude -p` calls, plain API calls —
   and the spread of that ratio across those sources is added to the row's reading error (§4), so an estimated cost
   weighs less than a measured one (`data/precision/repricing.json`; flag `cache-cut-2026-10-07` with the old value).
+  The other makers' costs are put on today's base price the same way (21 Oct 2026, `data/precision/repricing_makers.py`
+  and `.json`): the standard list price in force today, without a temporary promotion, DeepSeek's peak rate, a retired
+  model's last list price. The price a cost was computed with is the source's own (Artificial Analysis' payload
+  prices, a price quoted, the price its token counts reproduce) or the price in force on its price-basis date (the
+  reading date of a board that recomputes, else the run date, bounded by the release and the capture or publication);
+  a uniform change is applied as its factor, a non-uniform one through the source's token counts or class split. A
+  cost whose price cannot be established — no date that tells which price applied, or no token counts for a
+  non-uniform change — is set aside, its score kept (flags `reprice-<date>:<change>(<method>):was=` and
+  `cost-out:<reason>:was=`). A promotion in force today is a second point of its couple on the page
+  (`data/precision/price_variants.json`), not a change of the fit.
 - **Charts are digitised and checked** against any number the same document prints in its text, and flagged; the
   resolution of every digitised chart is measured (§4).
 - **Early access.** A run its source dates before the model's public release is flagged (§5: its noise is inflated
