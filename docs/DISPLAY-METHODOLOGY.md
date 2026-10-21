@@ -84,7 +84,7 @@ day, since it let a couple strictly beaten by another be picked.
 ## 8. Price trend
 
 What a given quality costs today, fitted on every couple of the **latest model of each family** (Fable 5.1, Opus 5.5,
-Sonnet 5.5, Haiku 4.5), dominated ones included — the going rate of the models on sale, not their frontier:
+Sonnet 5.5, Haiku 5.5), dominated ones included — the going rate of the models on sale, not their frontier:
 
     ln cost = a + λ·θ
 
@@ -183,7 +183,7 @@ moves only when its content (text, figures, data) changes.
 ## 15. The head-to-head page
 
 `claude-models-head-to-head.html`, written by `site/duels.py` from the same grids: every pair of the latest model of
-each family (Fable 5.1, Opus 5.5, Sonnet 5.5, Haiku 4.5), and each of them against its predecessor. Costs are
+each family (Fable 5.1, Opus 5.5, Sonnet 5.5, Haiku 5.5), and each of them against its predecessor. Costs are
 multiples of the cheapest couple shown on the main page (older models of § 4 left out), scores the expected panel
 score of § 2.
 
