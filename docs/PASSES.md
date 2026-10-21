@@ -5,6 +5,97 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The global fit (19–21 Oct 2026)
+
+**Method change** (v2026.10.21). The fit now takes every couple of eight model makers measured in the data —
+Anthropic, OpenAI, Google, xAI, DeepSeek, Qwen, GLM and Kimi — and the page still shows the Claude couples.
+- **Other makers' rows.** 18,253 rows of other makers' couples, in the groups already held, read in the same snapshot
+  as the Claude rows and checked against their sources; then a salvo on the least-sourced models (one Haiku agent per
+  model, every row re-derived by a verifier): 1,390 rows in 237 new groups, 70 corrections.
+- **Model keys.** An audit of every key against the makers' own model lists: aliases, routes and efforts written in a
+  key go to the model's key (the old one kept in the confound field); a key that names no real model leaves the fit
+  order; OpenAI's Pro mode keeps its own key where the source documents it, otherwise its rows leave the computation.
+  A name a maker moved from one build to another (DeepSeek and Qwen re-trains, previews made generally available) is
+  read against the maker's dated redirects: a run after a redirect is the build it measured, an undated run leaves
+  the computation. A build, a preview or a mode names its model (`line` in `data/catalog/models.json`), with which it
+  shares the publisher × model effect.
+- **Identity in doubt, out.** Rule B of 20 Oct for every maker (an unstated effort takes the API default only when the
+  source called the maker's API directly, sent no setting, and the default is documented for the run's date); a row
+  whose model, build, effort or mode is not established stays in the data file, flagged, outside the computation.
+  The pre-fit check now reports one couple appearing twice in a group with discordant values (cost ratio above 1.5,
+  scores more than 10 % of the scale apart): 10 cases were read again at their sources and 13 rows set aside; one is
+  kept on purpose (bughunt Grok 4.5 high, three runs the source gives as its variance).
+- **Model** (`model/lqm_ext2.stan`). The sizes of the publisher × couple, publisher × model and couple × task-type
+  effects per maker, drawn around common ones, and a home effect per maker on the rows a maker published about its
+  own models, left out of every read-out (`METHODOLOGY.md` §5). On the data of 19–20 Oct the makers' scales differ
+  (η 0.60, 0.32, 0.69, 90 % intervals away from 0) and every home effect's interval includes 0 (Anthropic +0.40,
+  −0.36 to +1.42 on θ); held-out prediction is the same as without the makers' terms (PSIS-LOO Δelpd +3.5 ± 17.6). The
+  rule fixed before the comparison — publish the encompassing model unless it fails to converge or predicts clearly
+  worse — keeps it.
+- **Sampler.** On the global cost axis CmdStan hit its step limit on almost every draw and did not converge in 2 h
+  (R̂ 1.0207, ESS 348, 5 divergences); an ARC row of a dated GPT-5.6 Luna build, five times cheaper, mixed with the
+  undated build under one key had first left it at R̂ 2.0. nutpie now samples both axes and continues its chains in
+  the sampling process, checked every 1,000 draws, instead of drawing new batches: a second batch of random starts
+  left two cost chains in a remote region (ν at its bound, the effects' scales 10–25 times their value; no data to
+  blame: the loss of fit spread over every group). A run continues with at most 0.03 % divergent draws.
+
+**The fit.** Both axes converged with nutpie: cost R̂ 1.0081, ESS 594/1018, no divergence, stopped at the check of
+5,000 draws per chain (68 min); quality R̂ 1.0096, ESS 430/826, no divergence, at the first check (58 min). Quality:
+16,011 rows in 1,513 groups, 304 couples; cost: 10,378 rows in 830 groups, 265 couples. The Monte Carlo error exceeds
+half the last displayed digit on three cost cells (Fable 5.1, Fable 5 and Opus 5.5 at max, about ±0.5 on multiples
+of 190–300) and on the quality of Opus 4.8 *solo* (±0.06 point), all far inside their intervals; left as they are.
+
+**What moved on the page** (against v2026.10.20, every change above together). The page draws on 574 sources ·
+1,927 benchmarks · 8,509 measurements (396 · 1,136 · 6,765). **The crown stays Haiku 5.5 high**, 2.8× cheaper than
+the price trend (3.4×). **Picks**: grunt work Haiku 5.5 low (medium before: the low/medium tie of the twenty-fourth
+pass), cutting-edge thinking Opus 5.5 xHigh (max before: max scores 0.8 point more for 2.6 times the cost); everyday
+tasks Haiku 5.5 high and advanced reasoning Opus 5.5 xHigh unchanged. The order of the couples holds. Costs rise by
+5–20 % against Haiku 5.5 low, most at the top (Fable 5.1 max 244× → 293×, Opus 5.5 max 167× → 194×); expected scores
+rise by 0.1 to 5.7 points, most for the weaker couples (Opus 5.5 max +0.1, Sonnet 4.6 +3.5 to +5.7): the benchmark
+panel changed with the global groups. Cost intervals widen a little (±7–9 % → ±8–11 %), quality intervals hold or
+narrow. Opus 4.8 *solo* is published on quality (62.3 %). The sources table lists the groups with a Claude couple.
+
+## Correction of 20 Oct: Claude rows read again from their sources
+
+Cross-checks made during the multi-provider work found Claude rows that did not match their source. **Costs:** the
+FrontierCode Diamond chart of the Fable 5 card (7 points re-digitised; three independent readings agree within
+0.01 USD, the held ones had been read by eye, off by up to 17 %); Melvynx med2 (the elysian task's resumed session
+was left out: 2 rows, cost and tokens); bug-hunt-bench (15 rows: its board of 19 Oct prices cache writes as Claude
+Code bills them, 1 h at 2×, where the held rows were priced at 5 min; rows already at 1 h are unchanged, Sonnet 5.5
+keeps its own cache-cut repricing). **Efforts from the source's own configuration:** connections-oneshot (its
+OpenRouter adapter sends `reasoning.effort = "minimal"`, an OpenRouter level, not an Anthropic rung: `req-minimal`,
+8 rows, outside the fit), RoboQuest (medium, 2), StrokeEval (web interfaces at high effort, 2), the navikt Copilot
+review (Sonnet 5.5 medium, from its usage events), Argo-Bench (Sonnet 5 at extra-high, Table 2) and MathArena's
+"(Think)" rows (a 32k thinking budget, 19 rows, outside the fit). Argo-Bench's Sonnet 5 effort ladder (Table 10,
+scores only) is added. Refit: quality moves by 0.003 at most, cost by 0.019 (log) at most; picks and crown unchanged.
+
+## Correction of 20 Oct: an unstated effort takes the API default only when that is proven
+
+A row whose source states no effort is labelled `default`. It now takes the effort the API applies by default —
+`high`, `medium` for Opus 5.5 — only when three things are shown from the source: it called Anthropic's API directly
+(no harness or agent in between that may set an effort), it sent no effort setting, and the documented default held
+over the whole window in which it ran. 18 Claude rows pass (latitude ×4, cyberq ×3, realitybench ×4, kwts ×2,
+cauchye ×2, mcptox, aimecontract, computingforgeeks); routes that are not proven (OpenRouter, Mercor, Epoch, Vals,
+Harbor-based runs) stay `default` with a flag. Refit: quality moves by 0.006 at most, cost by 0.045 (log) at most,
+intervals unchanged.
+
+## Correction of 19 Oct: one label per thinking budget
+
+Thinking-budget efforts were written as the source wrote them, so one budget had several labels (`think-1024` and
+`think-1k`). Labels are now in thousands of tokens, snapped to the usual rung (1, 2, 4, 8, 16, 24, 32, 48, 64, 128k)
+within 5 %: `think-1024` → `think-1k`, `think-2048` → `think-2k`, `think-5000` → `think-5k`, `think-10000` → `think-10k`,
+`think-65535` → `think-64k`, and `think-none` → `nothink` (8 rows; the old label stays in the confound field).
+`think-unstated` (a "-thinking" variant with no budget given) and `think-high` (a harness level for a model without
+an effort setting) are kept. None of the 8 rows enters the fit: both axes unchanged.
+
+## Correction of 19 Oct: LMArena's agent board is not a bounded score
+
+The agent board of LMArena (group `lmarenaagent`, 7 Claude couples) was labelled `score-of-1`, read as a share of 1 on a
+logit scale. Its arena score is unbounded: competitor models read for the multi-provider test score below 0 on the same
+board. It is relabelled `arena-score` and read on its own scale. Quality refitted (R̂ 1.0091, 309 s; cost unchanged):
+the latent qualities move by 0.07 at most relative to Opus 5.5 high, the expected scores by 0.1 point, intervals are
+unchanged; the crown, the picks and the frontier are unchanged.
+
 ## The fit after the twenty-fourth pass
 
 Both axes converged without continuation: quality R̂ 1.0043, bulk ESS 665, tail 979, no divergence, in one batch
