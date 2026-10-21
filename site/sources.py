@@ -4,13 +4,16 @@ import csv, os, sys
 
 from config import ROOT
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import GROUP_DISPLAY, GROUP_MERGE
+from catalog import DISPLAY_ORDER, GROUP_DISPLAY, GROUP_MERGE
 
 
 def model_label(m):
     """'opus-5.5' → 'Opus 5.5'."""
     name, _, version = m.partition("-")
     return f"{name.capitalize()} {version}".strip()
+
+SHOWN = set(DISPLAY_ORDER)            # the site's models: the data file may hold other makers' rows (the global fit)
+
 
 def groups_data():
     """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
@@ -44,7 +47,9 @@ def groups_data():
         rs = buckets[gk]; nodes, seen = [], set()
         for r in rs:
             nid = f'{r["model"]}@{r["effort"]}'
-            if nid not in seen: seen.add(nid); nodes.append(nid)
+            if r["model"] in SHOWN and nid not in seen: seen.add(nid); nodes.append(nid)
+        if not nodes:                                                   # a source with no Claude couple: not this site's
+            continue
         lbl, t, h = GMETA.get(gk, (gk, "xmodel", "config ✓"))
         out.append({"s": rs[0]["source"], "g": lbl, "t": t, "h": h, "n": nodes, "u": pick_url(rs, rs[0]["source"])})
     return out
