@@ -384,7 +384,8 @@ class Decider:
             lo = max(lo, rel) if hi >= rel else lo
             per = self.b.periods(k, lo, hi)
             if rule.get("no_promo"):                             # a source that never applies a promotion
-                per = [p for p in per if p[0] != "promo"] or [("unknown", None, "promotion only", lo, hi)]
+                per = [p for p in per if p[0] != "promo"] or [("list", spec["base"], "standard price, no promotion",
+                                                                 lo, hi)]
             known = [p for p in per if p[0] != "unknown"]
             unknown = [p for p in per if p[0] == "unknown"]
             if not known:
