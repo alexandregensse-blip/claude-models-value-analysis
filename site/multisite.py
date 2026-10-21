@@ -22,8 +22,32 @@ OUT  = os.path.join(ROOT, SET["out_dir"])
 BASE = SET["base_url"]
 DRAFT = SET.get("draft", "")            # one setting: "" removes the banner and the noindex tag on every page
 DASH = ["", "6 4", "1.5 3.5"]           # a model's builds and modes: solid, dashed, dotted (hollow points)
+
+
+def load_variants():
+    """Price variants of a couple ({"model@effort": [{kind, label, cost_ratio, until, evidence}]}): the first file of
+    makers.json's `price_variants` that exists (the repricing salvo's file once copied in, else the mock). A variant
+    whose `until` is past is dropped."""
+    for path in SET["price_variants"]:
+        f = os.path.join(ROOT, path)
+        if not os.path.exists(f): continue
+        raw, today, out = json.load(open(f, encoding="utf-8")), datetime.date.today().isoformat(), {}
+        for c, vs in raw.items():
+            if c.startswith("_"): continue
+            for v in vs:
+                if v.get("kind") not in ("promo", "offpeak") or not v.get("cost_ratio", 0) > 0:
+                    warn(f"price variant of {c} not understood, left out: {v}"); continue
+                if v.get("until") and v["until"] < today:
+                    warn(f"price variant of {c} ended on {v['until']}, left out"); continue
+                out.setdefault(c, []).append({k: v.get(k) for k in ("kind", "label", "cost_ratio", "until", "evidence")})
+        return path, out
+    return None, {}
+
+
 esc = lambda s: htmlmod.escape(s, quote=True)
 warn = lambda s: print("  !! " + s)
+VARIANTS_FILE, VARIANTS = load_variants()
+MOCK = bool(VARIANTS_FILE and "mock" in os.path.basename(VARIANTS_FILE))
 
 
 # ---------------------------------------------------------------- per-site models, labels, colours
@@ -135,7 +159,11 @@ def sites():
         return t
     G = SET["global"]
     gkeys = [k for mk in SET["makers"] for k in maker_keys(mk)]
-    gcur = [k for mk, M in SET["makers"].items() for k in M["current"]]
+    FAM = SET["families"]
+    for k in maker_of:
+        if k not in FAM: warn(f"no family entry for {k} in site/makers.json: shown, not current")
+    is_cur = lambda k: FAM.get(k, {}).get("current", False)
+    gcur = [k for k in gkeys if is_cur(k)]
     out.append(dict(G, id="global", name="All makers", keys=gkeys, current=gcur, legacy=None, maker_of=maker_of,
                     label=labeller(G.get("label_prefix", {})), tag=tag))
     for mk, M in SET["makers"].items():
@@ -149,7 +177,9 @@ def sites():
                        f"same scales as every other maker's on this site."),
                  noun=M["name"], hide_landscape=[], hide_note="", generation=SET["global"]["generation"])
         s.update({k: v for k, v in M.items() if k in s})
-        s.update(id=mk, name=M["name"], path=M["path"], keys=maker_keys(mk), current=M["current"], legacy=M["legacy"],
+        mkeys = maker_keys(mk)
+        s.update(id=mk, name=M["name"], path=M["path"], keys=mkeys, current=[k for k in mkeys if is_cur(k)],
+                 legacy=[k for k in mkeys if FAM.get(k, {}).get("hidden", False)],
                  maker_of=maker_of, label=labeller({}), tag=tag)
         out.append(s)
     return out
@@ -157,10 +187,11 @@ def sites():
 
 # ---------------------------------------------------------------- page text: exact replacements
 def patch(text, reps, what):
-    for old, new in reps:
+    for rep in reps:
+        old, new, want = rep if len(rep) == 3 else (*rep, 1)
         n = text.count(old) if isinstance(old, str) else len(old.findall(text))
-        if n != 1:
-            sys.exit(f"!! {what}: expected one occurrence of {old if isinstance(old, str) else old.pattern!r:.90}, found {n}")
+        if n != want:
+            sys.exit(f"!! {what}: expected {want} occurrence(s) of {old if isinstance(old, str) else old.pattern!r:.90}, found {n}")
         text = text.replace(old, new) if isinstance(old, str) else old.sub(lambda m: new, text)
     return text
 
@@ -172,9 +203,26 @@ const lsty=m=>MODELS[m].ls||0;
 function legendModels(ms){ const groups=[], at={};
   ms.forEach(m=>{ const b=MODELS[m].base||m; if(!(b in at)){ at[b]=groups.length; groups.push({b,ms:[]}); } groups[at[b]].ms.push(m); });
   const smp=(m,col)=>`<svg class="lgs" width="24" height="10" aria-hidden="true"><line x1="1" y1="5" x2="23" y2="5" stroke="${col}" stroke-width="2.2"${lsty(m)?` stroke-dasharray="${DASH[lsty(m)]}"`:""}/><circle cx="12" cy="5" r="3.2" fill="${lsty(m)?cvar('--panel'):col}" stroke="${col}" stroke-width="1.6"/></svg>`;
+  const vk=Object.keys(VARIANTS).some(k=>ms.includes(k.split("@")[0]));
   return groups.map(g=>{ const m0=g.ms[0], col=cvar(MODELS[m0].c);
     if(g.ms.length===1&&!MODELS[m0].lt) return `<span class="lg"><span class="sw" style="background:${col}"></span>${MODELS[m0].label}</span>`;
-    return `<span class="lg"><span class="sw" style="background:${col}"></span>${MODELS[m0].bl}<span class="lgl">${g.ms.map(m=>`<span class="lgi">${smp(m,col)}${MODELS[m].lt}</span>`).join("")}</span></span>`; }).join(""); }
+    return `<span class="lg"><span class="sw" style="background:${col}"></span>${MODELS[m0].bl}<span class="lgl">${g.ms.map(m=>`<span class="lgi">${smp(m,col)}${MODELS[m].lt}</span>`).join("")}</span></span>`; }).join("")
+    +(vk?`<span class="lg"><svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${cvar('--ink')}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${cvar('--ink')}" stroke-width="1.4"/></svg>the same couple at a promotional or off-peak price — shown, never used in a pick</span>`:""); }
+// Global page: the couples of older models that another model of the same maker strictly beats, hidden by default.
+function hideCouples(){ Object.keys(HIDE_C).forEach(m=>[[COSTGRID,GRID_ALL.cost],[QUALGRID,GRID_ALL.qual]].forEach(([G,A])=>{ if(!A[m]) return;
+  G[m]=showLegacy?A[m]:Object.fromEntries(Object.entries(A[m]).filter(([e])=>!HIDE_C[m].includes(e))); })); }
+// Price variants (a promotion, an off-peak rate) of a couple: the same couple at another price. Drawn as a hollow
+// diamond joined to its couple by a dotted line, labelled in tooltips and tables; never a candidate of the frontier,
+// the trend, the tiers or the crown.
+const VTAG={promo:"promo",offpeak:"off-peak"};
+function variantPts(pts){ const o=[]; pts.forEach(p=>(VARIANTS[p.m+"@"+p.e]||[]).forEach(v=>o.push({m:p.m,e:p.e,c:p.c*v.cost_ratio,t:p.t,s:p.s,
+  base:p,front:p.front,vl:v.label,tag:VTAG[v.kind]||v.kind}))); return o; }
+function drawVariants(s,pts,X,Y,fade){ variantPts(pts).forEach(v=>{ const col=cvar(MODELS[v.m].c), op=fade&&!v.front?0.3:0.9, x=X(v.c), y=Y(v.t), r=4.6;
+  s.appendChild(el("line",{x1:X(v.base.c),y1:y,x2:x,y2:y,stroke:col,"stroke-width":1.3,"stroke-dasharray":"1.5 3","stroke-opacity":op}));
+  s.appendChild(el("path",{d:`M ${x} ${y-r} L ${x+r} ${y} L ${x} ${y+r} L ${x-r} ${y} Z`,fill:cvar('--panel'),stroke:col,"stroke-width":1.6,"stroke-opacity":op})); }); }
+function variantLabels(labs,ppix,vp,X,Y,fs){ vp.forEach(v=>{ ppix.push({x:X(v.c),y:Y(v.t)});
+  labs.push({ax:X(v.c),ay:Y(v.t),lx:X(v.c),ly:Y(v.t)-9,t:v.tag,col:cvar(MODELS[v.m].c),lead:cvar(MODELS[v.m].c),w:v.tag.length*fs*0.64+4,h:fs+3,fs,mdl:false}); }); }
+const vNote=(m,e,c)=>(VARIANTS[m+"@"+e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${fmtC(c*v.cost_ratio)}×</small>`).join("");
 '''
 
 
@@ -184,7 +232,25 @@ def app_patches(S):
         ('const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8"];', f"const LEGACY={j(S['legacy_keys'])};"),
         ('const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-5.5"];',
          f"const CURRENT={j(S['current_keys'])};\nconst HIDE_B={j(S['hide_landscape'])}, LEGACY_HINT={j(S['legacy_hint'])}, "
-         f"DASH={j(DASH)};   // per-site settings (site/makers.json)"),
+         f"DASH={j(DASH)}, HIDE_C={j(S['hide_couples'])}, VARIANTS={j(S['variants'])};   // per-site settings (site/makers.json)"),
+        ('  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }', '  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); hideCouples(); }'),
+        ('const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)),',
+         'const xmn=Math.min(...pts.map(p=>p.clo),...variantPts(pts).map(v=>v.c)), xmx=Math.max(...pts.map(p=>p.chi),...variantPts(pts).map(v=>v.c)),', 2),
+        ('  const segs=[];                                                          // curves + points on top',
+         '  drawVariants(s,pts,X,Y,false);\n  const segs=[];                                                          // curves + points on top'),
+        ('  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts,X,Y,mL,iw);\n  const lg=document.getElementById("legendB");',
+         '  variantLabels(labs,ppix,variantPts(pts),X,Y,8.5);\n  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw);\n  const lg=document.getElementById("legendB");'),
+        ('  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts,X,Y,mL,iw);\n  const lg=document.getElementById("legendP");',
+         '  variantLabels(labs,ppix,variantPts(front),X,Y,10);\n  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw);\n  const lg=document.getElementById("legendP");'),
+        ('  pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);\n    s.appendChild(el("circle",p.front?',
+         '  drawVariants(s,pts,X,Y,true);\n  pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);\n    s.appendChild(el("circle",p.front?'),
+        ('ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — cost ${fmtC(best.c)}× · score ${pct(best.s)}`;',
+         'ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:""} — cost ${fmtC(best.c)}× · score ${pct(best.s)}`;'),
+        ('${fmtC(c[0])}<small>merged · ${c[1]}</small></div>', '${fmtC(c[0])}<small>merged · ${c[1]}</small>${vNote(m,"solo",c[0])}</div>'),
+        ('${fmtC(c[0])}<small>${c[1]}</small></div></td>`', '${fmtC(c[0])}<small>${c[1]}</small>${vNote(m,e,c[0])}</div></td>`'),
+        ('<td class="num">${fmtC(p.c)}×</td><td class="num">${pct(p.s)}</td>', '<td class="num">${fmtC(p.c)}×${vNote(p.m,p.e,p.c)}</td><td class="num">${pct(p.s)}</td>'),
+        ('${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small></div>`; };',
+         '${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${(VARIANTS[p.m+"@"+p.e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${vIndex(r-Math.log(v.cost_ratio))}</small>`).join("")}</div>`; };'),
         ('const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n',
          'const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n' + LEGEND_FN),
         ('const legacy=id=>tgl(id,showLegacy,"Older models","Opus 4.7 · Sonnet 4.6","toggleLegacy");',
@@ -209,13 +275,15 @@ def app_patches(S):
     ]
 
 
-def body_patches(S, engines):
+def body_patches(S, mc_sentence):
     cur = ' aria-current="page"'
     nav = "".join(f'<a href="{S["up"]}{t["path"]}"{cur if t["id"] == S["id"] else ""}>{esc(t["name"])}</a>' for t in S["all"])
-    banner = f'  <p class="draft-banner" role="note">{esc(DRAFT)}</p>\n' if DRAFT else ""
+    banner = (f'  <p class="draft-banner" role="note">{esc(DRAFT)}'
+              + (f' <b>The price variants shown are a mock</b> ({esc(VARIANTS_FILE)}), for testing the display.' if MOCK else "")
+              + '</p>\n') if DRAFT or MOCK else ""
     noun = (S["noun"] + " ") if S["noun"] else ""
-    eng = ("run with " + (f'<a href="https://github.com/pymc-devs/nutpie">nutpie</a> on both axes' if engines == {"nutpie"}
-           else ", ".join(sorted(engines))))
+    shows = ("this page shows the current models of every maker, and the older ones no other model of their maker beats"
+             if S["id"] == "global" else f"this page shows the {S['name']} couples")
     return [
         ('<div class="wrap">\n  <header class="hero">',
          f'<div class="wrap">\n  <nav class="sitenav" aria-label="Model makers">{nav}</nav>\n{banner}  <header class="hero">'),
@@ -235,7 +303,11 @@ def body_patches(S, engines):
         (re.compile(r"<p>Each release buys the same quality for less — .*?</p>"), f"<p>{S['generation']}</p>"),
         ('<p class="sub"><b>Checks.</b> ',
          '<p class="sub"><b>Checks</b>, on the fit of 29 September 2026, before the other makers\' couples joined the data<b>.</b> '),
-        ('run with CmdStan (cost) and <a href="https://github.com/pymc-devs/nutpie">nutpie</a> (quality)', eng),
+        ("The fit takes the other makers' couples measured in the same groups (OpenAI, Google, xAI, DeepSeek, Qwen, GLM, Kimi): "
+         "they link more benchmarks; this page shows the Claude couples.",
+         "The fit takes the couples of eight makers measured in the same groups (Anthropic, OpenAI, Google, xAI, DeepSeek, "
+         f"Qwen, GLM, Kimi), on one scale; {shows}."),
+        (re.compile(r"in this fit (?:every figure is stable to that digit|[^<]*?far inside their intervals)\."), mc_sentence),
         ("not affiliated with or endorsed by Anthropic", "not affiliated with or endorsed by any model maker"),
         ('<a href="raw-data.csv">download the data (CSV)</a>', f'<a href="{REPO_URL}/blob/main/raw-data.csv">download the data (CSV)</a>'),
     ]
@@ -251,6 +323,7 @@ EXTRA_CSS = """
 .lgl{display:inline-flex;flex-wrap:wrap;gap:2px 9px;margin-left:4px;font-size:11.5px;color:var(--muted)}
 .lgi{display:inline-flex;align-items:center;gap:3px}
 .lgs{flex:none}
+.vnote{display:block;font-style:italic;color:var(--muted)}
 """
 
 
@@ -297,20 +370,54 @@ def plain(h):
     return re.sub(r"\s+(?=:)", "", re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", "", h)))).strip()
 
 
+def mc_text(CG, MCSE, models):
+    """The page's Monte Carlo sentence, as build.py checks it: a value whose Monte Carlo error exceeds half of its last
+    displayed digit (a cost multiple 0.005 below 1, 0.05 below 10, 0.5 above; a score 0.05 point)."""
+    x0 = min(v[0] for es in CG.values() for v in es.values())
+    loose = []
+    for axis in ("cost", "quality"):
+        for c, e in sorted(MCSE[axis].items()):
+            m, eff = c.split("@")
+            val = math.exp(CG[m][eff][0] - x0) if axis == "cost" else 0
+            half = 0.05 if axis == "quality" else 0.005 if val < 1 else 0.05 if val < 10 else 0.5
+            if e > half:
+                loose.append(f"the {axis} of {models[m]['label']}" + ("" if eff == "solo" else f" at {eff}"))
+    if not loose:
+        return "in this fit every figure on this page is stable to that digit."
+    words = "one two three four five six seven eight nine ten".split()
+    n = len(loose)
+    return (f"in this fit {words[n - 1] if n <= 10 else n} figure{'s' if n > 1 else ''} on this page can move by one unit "
+            f"in that digit ({', '.join(loose)}), far inside their intervals.")
+
+
 # ---------------------------------------------------------------- one page
 def build_page(S, css0, body0, app0):
     CG, QG, PANEL, DIAG, MCSE = fused_grids(models=S["keys"], both_axes=True)
     models, mcss = page_models(S, S["keys"], CG)
     shown = list(models)
     S["has_lines"] = any("ls" in v for v in models.values())
-    lines_of = lambda ks: [k for k in shown if k in ks or MODEL_LINE.get(k) in ks]
     S["current_keys"] = [k for k in S["current"] if k in CG]
     for k in S["current"]:
         if k not in S["keys"]: warn(f"{S['id']}: current key {k} is not one of the page's keys")
-    S["legacy_keys"] = ([k for k in shown if k not in S["current_keys"]] if S["legacy"] is None else lines_of(S["legacy"]))
-    leg = [k for k in S["legacy_keys"] if not models[k].get("ls")]
-    names = [models[k].get("bl", models[k]["label"]) for k in leg]
-    S["legacy_hint"] = (" · ".join(names) if len(names) <= 3 else " · ".join(names[:2]) + f" and {len(names) - 2} more")
+    S["hide_couples"] = {}
+    if S["legacy"] is None:                    # global page: current models, and the couples of older models that no
+        maker, base = S["maker_of"], (lambda k: MODEL_LINE.get(k, k))   # other model of the same maker strictly beats
+        beaten = lambda k, e: any(maker[k2] == maker[k] and base(k2) != base(k) and CG[k2][e2][0] < CG[k][e][0]
+                                  and QG[k2][e2][0] > QG[k][e][0] for k2 in shown for e2 in CG[k2])
+        for k in shown:
+            if k in S["current_keys"]: continue
+            out = [e for e in CG[k] if beaten(k, e)]
+            if out: S["hide_couples"][k] = out
+        S["legacy_keys"] = [k for k, es in S["hide_couples"].items() if len(es) == len(CG[k])]
+        S["hide_couples"] = {k: es for k, es in S["hide_couples"].items() if k not in S["legacy_keys"]}
+        n = sum(len(CG[k]) for k in S["legacy_keys"]) + sum(map(len, S["hide_couples"].values()))
+        S["legacy_hint"] = f"{n} couples that another model of the same maker beats"
+    else:
+        S["legacy_keys"] = [k for k in shown if k in S["legacy"]]
+        leg = [k for k in S["legacy_keys"] if not models[k].get("ls")]
+        names = [models[k].get("bl", models[k]["label"]) for k in leg]
+        S["legacy_hint"] = (" · ".join(names) if len(names) <= 3 else " · ".join(names[:2]) + f" and {len(names) - 2} more")
+    S["variants"] = {c: v for c, v in VARIANTS.items() if c.split("@")[0] in CG and c.split("@")[1] in CG[c.split("@")[0]]}
     couples = {f"{m}@{e}" for m, es in CG.items() for e in es}
     GD = groups_data(couples=couples, unverified="—")
     css = with_colours(css0, *mcss) + EXTRA_CSS
@@ -320,8 +427,7 @@ def build_page(S, css0, body0, app0):
     app = app.replace("__QUALGRID__", json.dumps(QG, separators=(",", ":")))
     app = app.replace("__PANEL__", json.dumps(PANEL, separators=(",", ":")))
     app = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",", ":"), ensure_ascii=False))
-    engines = {DIAG[a].get("engine", "?") for a in ("cost", "quality")}
-    body = patch(body0, body_patches(S, engines), f"body.html ({S['id']})")
+    body = patch(body0, body_patches(S, mc_text(CG, MCSE, models)), f"body.html ({S['id']})")
     body = body.replace("__REPO__", REPO_URL)
     body = body.replace("__NCOSTROWS__", str(DIAG["cost"]["rows"])).replace("__NSCOREROWS__", str(DIAG["quality"]["rows"]))
     body = body.replace("__NTREND__", str(sum(len(CG[m]) for m in S["current_keys"])))
@@ -337,8 +443,10 @@ def build_page(S, css0, body0, app0):
     d = os.path.join(OUT, S["path"]); os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(html)
     vis = [k for k in shown if k not in S["legacy_keys"]]
+    hid = lambda k: S["hide_couples"].get(k, [])
     info = dict(id=S["id"], path=S["path"], title=S["title"], bytes=len(html.encode()), date=date.isoformat(),
-                couples_default=sum(len(CG[k]) for k in vis), models_default=len(vis),
+                couples_default=sum(len(CG[k]) - len(hid(k)) for k in vis), models_default=len(vis),
+                variants={c: [x["label"] for x in v] for c, v in S["variants"].items()},
                 couples_all=sum(len(CG[k]) for k in shown), models_all=len(shown),
                 counts=plain(pre.get(".nsrc", "")), answer=pre.get("answer-full", ""),
                 ladder=monotonicity_report({k: CG[k] for k in vis}, {k: QG[k] for k in vis}),

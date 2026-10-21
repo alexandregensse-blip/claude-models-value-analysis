@@ -208,15 +208,21 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
 - **Same rules as §§ 1–14** on every page: publication by two publishers or more, the frontier, the price trend, the
   value, the tiers and the crown, all computed **among the page's couples on screen**. A couple is shown when it is
   published on **both** axes (the ones a chart can place); on the Claude page every cost couple has its quality.
-- **Global page**: by default, the **current model of each family of every maker** (each maker's `current` list),
-  so the frontier, the tiers and the crown compare what can be bought today across makers; *Older models* adds
-  every other model of the eight makers. The price trend is fitted on the same current models. One hue per maker,
-  its models in steps of lightness; Claude's model names carry "Claude".
+- **Global page**: by default, the **current models of every maker, and the couples of older models that no other
+  model of the same maker strictly beats** — no couple of another model of that maker (its own builds and modes do
+  not count) both costs less and scores more, on the published centres. The frontier, the tiers and the crown are
+  taken among these; *Older models* adds the beaten couples. The price trend is fitted on the current models. One hue
+  per maker, its models in steps of lightness; Claude's model names carry "Claude".
 - **Maker pages**: the maker's models in its own colours (the Claude page keeps the catalogue's), its tiers and
-  crown among its own couples, its price trend on its current models; the maker's older models are hidden by default
-  (`legacy`), as on the Claude page (§ 4).
-- **Current models** (`current`): the latest model of each family, every build and mode of it except previews. The
-  families are an editorial reading of the makers' line-ups, listed in `site/makers.json`.
+  crown among its own couples, its price trend on its current models; the maker's older models are hidden by default,
+  as on the Claude page (§ 4).
+- **Families** — one place, `families` in `site/makers.json`: per catalogue key its family, `current` (the latest
+  model of its family: the trend's couples, always shown on the global page) and `hidden` (hidden by default on its
+  maker's page). `python3 site/import_families.py` fills it from the families salvo (`families.tsv` per maker, with
+  the makers' pages as evidence): current = status `current`; an unknown status, or "not a model", is not current;
+  shown on the maker's page = current, or followed by a current key (the latest model and the one before); a line
+  that is not current follows its model. `family_overrides` holds a user decision the files do not carry (Gemini 3.1
+  Pro current beside Gemini 4 Argon). Claude keeps its settings.
 - **Lines** (the catalogue's `line`: a dated build, a preview, OpenAI's Pro mode): separate couples of one model,
   each with its own effort ladder. They share the model's colour and its single legend entry; the first is drawn
   solid, the others dashed or dotted with hollow points, and the legend lists each with its stroke and what it is
@@ -226,5 +232,12 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   are counted by publisher (`data/catalog/publishers.json`). A group without a verified configuration note shows "—".
   The Claude page at the repository root still lists every Claude couple a group measured, efforts outside the fit
   included, so its counts are larger.
+- **Price variants** (a promotion, an off-peak rate): the published cost is the list price without promotion
+  (DeepSeek at its peak rate). A variant is the same couple at another price: a hollow diamond at cost × its ratio,
+  joined to the couple by a dotted line and tagged (promo, off-peak); its label in the tooltip; under the couple's
+  cost in the matrix and the frontier table, and its value index in the value matrix. It never enters the frontier,
+  the trend, the tiers or the crown, and a variant whose `until` is past is dropped. Read from the first file of
+  `price_variants` in `site/makers.json` that exists: `site/price_variants.json` (the repricing salvo's file), else
+  `site/price_variants.mock.json`, a mock the draft banner then names.
 - **Draft**: every page carries a banner and a `noindex` tag while `draft` in `site/makers.json` is set: the other
   makers' costs are not yet put on today's prices. An empty `draft` removes both and writes the sitemap.
