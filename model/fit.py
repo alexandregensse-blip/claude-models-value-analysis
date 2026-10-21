@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fits the latent-quality model (lqm.py, lqm.stan) on both axes and writes model/fit-cache.json, the model's only
+"""Fits the latent-quality model (lqm.py, lqm_ext2.stan) on both axes and writes model/fit-cache.json, the model's only
 product, which the site reads. Run in the Stan environment:  .stan/venv/bin/python model/fit.py
 
 The cache holds, per couple and axis, reference-free values on the log scale — [centre, quasi-standard error,
@@ -26,7 +26,8 @@ lqm.LINE = MODEL_LINE
 
 FIT_CACHE = os.path.join(HERE, "fit-cache.json")
 SEED = 11
-INPUTS = ["raw-data.csv", *CATALOG_FILES, "model/lqm.py", "model/lqm.stan", "model/fit.py"]
+STAN = os.path.relpath(lqm.STAN_FILE, ROOT)                          # model/lqm_ext2.stan unless LQM_MODEL says
+INPUTS = ["raw-data.csv", *CATALOG_FILES, "model/lqm.py", STAN, "model/fit.py"]
 
 
 def fingerprint(inputs=INPUTS, root=ROOT):
@@ -43,7 +44,7 @@ def fingerprint(inputs=INPUTS, root=ROOT):
 def axis_fingerprint(data):
     """SHA-256 of what one axis' fit depends on: the model code and settings, and the axis' prepared data."""
     h = hashlib.sha256()
-    for path in ("model/lqm.py", "model/lqm.stan"):
+    for path in ("model/lqm.py", STAN):
         with open(os.path.join(ROOT, path), "rb") as f:
             h.update(f.read())
     h.update(json.dumps(dict(data=data, seed=SEED), sort_keys=True, default=lambda a: a.tolist()).encode())

@@ -6,7 +6,11 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 | File | Role |
 |---|---|
 | `lqm.py` | data preparation (groups, scales, composites, republications, effects), the samplers, the read-out |
-| `lqm.stan` | the model, in Stan |
+| `lqm_ext2.stan` | the model, in Stan (since v2026.10.21; `LQM_MODEL` selects another) |
+| `lqm.stan` | the model until v2026.10.20, without the makers' scales and home effects |
+| `lqm_ext.stan` | an experiment of 19–20 Oct (makers' offsets not summing to zero; it did not converge) |
+| `precheck.py` | the checks run before a fit (bounds, twin metrics, discordant twins, memory) |
+| `peek.py` | a provisional R̂ from the draws on disk while a fit runs |
 | `fit.py` | fits both axes and writes `fit-cache.json` |
 | `fit-cache.json` | **the model's only product**, read by the site |
 | `validation/` | the checks reported in docs/METHODOLOGY.md (see its README) |
@@ -30,7 +34,7 @@ converged fit is kept as it is (`--all` refits both).
 
 ## The contract with the site: `fit-cache.json`
 
-- `inputs` — the files the fit depends on (data file, catalogue, `lqm.py`, `lqm.stan`, `fit.py`), and `fingerprint`
+- `inputs` — the files the fit depends on (data file, catalogue, `lqm.py`, the Stan model in use, `fit.py`), and `fingerprint`
   — SHA-256 over their paths and contents, in order. The site recomputes it and refuses a stale cache.
 - `quality`, `cost` — per couple `[centre, half, publishers, [new_lo, new_hi], mcse]`, on the log scale and
   reference-free: `centre` is the posterior median of the read-out, `half` its quasi-standard error (16–84 %),

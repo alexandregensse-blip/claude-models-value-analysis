@@ -34,8 +34,11 @@ the report fuses the measurements with a **latent-quality model** (`model/lqm.py
 3. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
    matter); every `(model, effort)` couple has one latent quality and one latent cost, atomic — no model × effort
    separability is assumed. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
-   or one kind of task from tilting the result. Student-t noise with estimated tails; early-access runs down-weighted
-   by an estimated factor. No couple is a reference inside the fit. Fitted in Stan.
+   or one kind of task from tilting the result, with sizes estimated per model maker; a maker's own charts about its
+   own models carry an estimated home effect, left out of every read-out. Student-t noise with estimated tails;
+   early-access runs down-weighted by an estimated factor. No couple is a reference inside the fit. The fit takes every
+   maker's couples measured in the data (OpenAI, Google, xAI, DeepSeek, Qwen, GLM, Kimi beside Claude): they link more
+   groups; the page shows the Claude couples. Fitted in Stan.
 4. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
    publisher's weight saturates at its own systematic effect. One execution counts once: a run reprinted, drawn on
    two charts or scored with two metrics is recognised by its values (score and cost agreeing within their precisions).
@@ -53,7 +56,7 @@ Four parts, each with its own scope; they talk only through the files named in t
 | Part | Scope | Contents | Hands over |
 |---|---|---|---|
 | **data** — collection | what was measured and how to read it | `raw-data.csv` (at the root, because it is served), `data/catalog/` (models, benchmark families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it) — see [`data/README.md`](data/README.md) | the data file and the catalogue |
-| **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm.stan` (the model), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
+| **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm_ext2.stan` (the model; `lqm.stan` without the makers' terms, until v2026.10.20), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
 | **site** — presentation | from the fit's results to the page | `site/build.py` and its modules (`config`, `grids`, `sources`, `seo`, `render`), `site/{app.js, body.html, style.css, prerender.js}`, `site/assets/` (favicon, share image) — see [`site/README.md`](site/README.md) | the served files at the root |
 | **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
 
@@ -88,6 +91,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.10.08b` | 8 Oct 2026 | twenty-first and twenty-second source passes on **Haiku 5.5** a day after its release: Vals AI (its index, eight held boards and Finance Agent, at max effort), OpenRouter GPQA Diamond and tau2-bench, driftproof Report 014, a second Qiita study, token-marxing, ImperialDragonHarness, EQ-Bench long-form writing; LiveBench read from one snapshot. **Fit method**: quality drawn in batches of 4 × 3,000 until the criteria hold, continuations counted in draws, draws stored on disk so that a stopped fit resumes — a full fit in 24 minutes. Picks unchanged; crown Haiku 5.5 medium, 4.7× below the trend — 5377 measurements, 286 sources, 886 benchmarks |
 | `v2026.10.15` | 15 Oct 2026 | twenty-third source pass (six agents, two rounds each), on sources published since 8 Oct: Surge AI's boards, the Conceptual Reasoning Index, Design Arena, Vending-Bench 2, LiveBench 2, seven new Artificial Analysis evaluations, Vals AI's Vibe Code Bench, ARC-AGI-3, 35 arXiv papers and some fifty posts, repositories and videos; 25 board snapshots replaced. Haiku 5.5 now rests on 100 sources: its effort ladder comes out flatter than Anthropic's launch charts drew it (low ⁄ medium cost 0.50 → 0.74), so high becomes the crown, 3.5× below the trend. **Fit**: a group of equal values is detected on their spread (one group had been scaled by 1e-16 and stalled the sampler; the published data are unaffected). Picks: grunt work Haiku 5.5 low, everyday tasks Haiku 5.5 high, advanced reasoning Opus 5.5 xHigh, cutting-edge thinking Opus 5.5 max — 6512 measurements, 370 sources, 1063 benchmarks |
 | `v2026.10.18` | 18 Oct 2026 | twenty-fourth source pass (four agents, two rounds each), on sources published since 15 Oct: AI Coding Daily's leaderboard, SlopCodeBench's October campaign, the official tau2-bench board, seven arXiv papers, the Conceptual Reasoning Index's full effort ladders of the three 5.5 models, retort's Haiku 5.5 runs in thirteen languages, GM-Bench 2.1, IdentityBench v3, six YouTube effort ladders and some twenty repositories and posts; 11 board snapshots replaced. Crown Haiku 5.5 high, 3.3× below the trend; grunt work goes to Haiku 5.5 medium, a tie with low that tips by 0.006; the frontier loses Opus 5.5 medium. Picks: grunt work Haiku 5.5 medium, everyday tasks Haiku 5.5 high, advanced reasoning Opus 5.5 xHigh, cutting-edge thinking Opus 5.5 max — 6762 measurements, 396 sources, 1136 benchmarks |
+| `v2026.10.21` | 21 Oct 2026 | **Method**: the fit becomes global — every couple of eight model makers measured in the data (18,253 rows of other makers' couples checked, a salvo of 1,390 rows on the least-sourced models, model keys audited, builds dated against the makers' redirects, rows whose model, build or effort is in doubt kept out of the computation); the model estimates the effects' sizes per maker and a home effect per maker (`lqm_ext2.stan`; same prediction of held-out rows as before, PSIS-LOO); nutpie samples both axes and continues its chains in one process until the criteria are met. The page shows the Claude couples, from 574 sources · 1,927 benchmarks · 8,509 measurements. Crown Haiku 5.5 high, 2.8× below the price trend (3.4× before); grunt work Haiku 5.5 low (medium before), cutting-edge thinking Opus 5.5 xHigh (max before); everyday and advanced reasoning unchanged. Details in `PASSES.md`. |
 
 The notes behind each version — every source pass, what it admitted, rejected or corrected, and each method
 change — are in [`docs/PASSES.md`](docs/PASSES.md).
@@ -102,7 +106,7 @@ No dependencies beyond the Python 3 standard library and Node.js (any recent ver
 
 ### Refit
 
-Needed only when the data, `model/lqm.py`, `model/lqm.stan` or `data/catalog/` change (the build says so). It needs a
+Needed only when the data, `model/lqm.py`, `model/lqm_ext2.stan` or `data/catalog/` change (the build says so). It needs a
 C++17 compiler and `make`, then:
 
 ```bash

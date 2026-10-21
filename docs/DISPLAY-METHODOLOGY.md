@@ -161,8 +161,10 @@ on its neighbours on the frontier.
 
 ## 13. Sources table and counts
 
-Every group is listed with its verified configuration (harness, effort), its kind (effort sweep, cross-model,
-cross-generation) and the couples it links. The header counts sources, benchmarks and measurements. The page's date
+Every group that measured a Claude couple is listed with its verified configuration (harness, effort), its kind
+(effort sweep, cross-model, cross-generation) and the Claude couples it links; the groups of other makers' couples
+alone, which the fit also uses (METHODOLOGY.md §5), are not. The header counts sources, benchmarks and measurements
+of the listed groups. The page's date
 moves only when its content (text, figures, data) changes.
 
 ## 14. Constants

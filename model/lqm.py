@@ -22,9 +22,12 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            out (indistinguishable from that row's noise). u and w are centred within their publisher, v within its
            task type: their mean is confounded with the free offsets of that publisher's (type's) groups.
   Priors:  θ ~ N(0, 10²); s_g, s_τ, ψ, ω, s_σ ~ half-Student-t(3, 0, 2.5); ν ~ Gamma(2, 0.1).
+  Makers (lqm_ext2.stan, the published model): the scales s_τ, ψ, ω per model maker around common ones, and a home
+  effect per maker on the rows a maker published about its own models, excluded from every read-out.
 
-Estimation: Hamiltonian Monte Carlo (NUTS) on lqm.stan — nutpie on the quality axis, CmdStan (CmdStanPy) warm-started
-from the previous fit on the cost axis (SAMPLER). The read-out `level` is computed in Stan for every draw; `summarise`
+Estimation: Hamiltonian Monte Carlo (NUTS) on lqm_ext2.stan — nutpie on both axes, its chains continued in the
+sampling process until the criteria are met; CmdStan (CmdStanPy) from the previous fit's draws when a chain is left in
+a remote region (SAMPLER). The read-out `level` is computed in Stan for every draw; `summarise`
 turns it into a centre and a per-couple interval (quasi-variances).
 """
 import collections, csv, itertools, math, os, re, sys
@@ -33,7 +36,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
-STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm") + ".stan")   # lqm_ext: the encompassing variant
+STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm_ext2") + ".stan")   # the published model since 21 Oct
+# 2026 (lqm.stan plus per-maker scales and home effects); LQM_MODEL=lqm: the model until then, lqm_ext: an experiment
 EXT = os.path.basename(STAN_FILE) in ("lqm_ext.stan", "lqm_ext2.stan")
 EXT_PRESENT = os.path.basename(STAN_FILE) == "lqm_ext2.stan"           # makers without data are not levels
 LINE = {}                                                       # model key -> the model it is a build / mode of

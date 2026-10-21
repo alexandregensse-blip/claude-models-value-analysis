@@ -60,6 +60,15 @@ precision** of the cost and of the score (§4).
 - **Uninformative scores.** A score stuck at the floor or the ceiling of its metric for one couple while the others
   are not (3 successes out of 657 tasks) says little and depends on how the bound is handled; such a score is left
   blank and the cost kept.
+- **One build, one key.** A model name its maker moved from one build to another (a dated re-train, a preview made
+  generally available) is read against the maker's dated redirects: a run placed after a redirect is the build it
+  measured; a run whose date does not place it on one build stays in the data file, flagged, and outside the
+  computation. A build, a preview or a mode of a model (OpenAI's Pro mode) keeps its own couples and names the model it
+  belongs to: its **line** (§5).
+- **Identity in doubt, out of the computation.** A row whose model, build, effort or mode is not established by its
+  source or its maker — an alias that served several models, a default effort not documented for the run's date, a
+  mode its source does not document — stays in the data file with its flag, outside the computation, as *default*
+  above.
 - **Flag, do not drop.** Doubts (cost basis undocumented, a fallback model served part of the run, an effort inferred
   from order, a digitised value) are written in the confound field. A source is excluded only when it breaks a rule
   above.
@@ -136,9 +145,15 @@ bound weighs what it is worth.
 
 ### Model
 
-For every row *r* (group *b*, couple *c* of model *m*, publisher *s*, task type *t*), with *f* the transformation of §4:
+The fit takes every couple measured in the data file, of every model maker (Anthropic, OpenAI, Google, xAI, DeepSeek,
+Qwen, Z.ai's GLM, Moonshot's Kimi), under the same rules: a group in which other makers' couples sit beside Claude
+couples, or which links two such groups, adds to what is known of the Claude couples and of the scales below. The page
+shows the Claude couples only.
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r ,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
+For every row *r* (group *b*, couple *c* of model *m* by maker *k*, publisher *s*, task type *t*), with *f* the
+transformation of §4:
+
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t} + δ_k · H_r) + ε_r ,   ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
 
 | Term | Meaning | Prior |
 |---|---|---|
@@ -148,14 +163,25 @@ For every row *r* (group *b*, couple *c* of model *m*, publisher *s*, task type 
 | σ_b | the group's noise: how far its measurements scatter beyond their reading error | log σ_b ~ N(μ_σ, s_σ²), pooled |
 | h_r | the noise shape of a bounded score (§4); 1 on other scales | fixed by the data |
 | d_r | the value's reading precision (§4), on the model's scale | known |
-| u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²), τ_c ~ N⁺(0, s_τ²) pooled over couples |
-| w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels | N(0, ψ²) |
-| v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω²) |
+| u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²), τ_c ~ N⁺(0, s_{τ,k}²) pooled over the maker's couples |
+| w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels and by its line (its builds, previews and modes) | N(0, ψ_k²) |
+| v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω_k²) |
+| s_{τ,k}, ψ_k, ω_k | each maker's scales of the three effects | log s_k = log s_0 + η · z_k, z_k ~ N(0, 1) summing to zero over the makers with data |
+| δ_k, H_r | the maker's **home effect**: the shift of the rows a maker published about its own models (H_r = 1; 0 otherwise), excluded from every read-out | δ_k = δ_0 + τ_δ · z_k, z_k summing to zero; δ_0 ~ N(0, 10²) |
 | κ_r | the variance multiplier of an early-access run (1 for other runs) | log κ ~ N(0, 1), estimated |
 | ν | the Student-t's degrees of freedom: how heavy the tails of the noise are | Gamma(2, 0.1), estimated |
 
-Every standard deviation (s_g below, s_τ, ψ, ω, s_σ) has a weakly informative half-Student-t(3, 0, 2.5) prior; μ_σ is
-flat.
+Every standard deviation (s_g below, the common scales s_0 of s_τ, ψ and ω, their spreads η across makers, τ_δ, s_σ)
+has a weakly informative half-Student-t(3, 0, 2.5) prior; μ_σ is flat.
+
+**Makers.** One maker's couples can be more or less consistent across publishers, task types and benchmarks than
+another's, and a maker's own charts can place its models apart from what others measure. Both are estimated rather
+than assumed: each maker's scales are drawn around common ones, and with η → 0 the model is the same for all makers
+(the model until v2026.10.20, `model/lqm.stan`); with τ_δ → 0 the home effect is one shift shared by all makers. On the
+data of 19–20 Oct 2026 the makers' scales differ (η of the three scales 0.60, 0.32, 0.69, every 90 % interval away
+from 0), and every home effect's interval includes 0 (Anthropic +0.40, 90 % interval −0.36 to +1.42 on θ). The two
+models predict held-out rows equally well (PSIS-LOO, § Checks); the encompassing one was chosen by a rule fixed
+before the comparison: it is published unless it fails to converge or predicts clearly worse.
 
 **No reference couple.** The θ sum to zero: the origin is the average couple, not a chosen one. The page does not
 divide by a reference couple either: it shows cost as a multiple of the cheapest couple and quality as an expected
@@ -205,7 +231,8 @@ runs are estimated.
 
 ### Estimation
 
-The model is written in Stan (`model/lqm.stan`); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
+The model is written in Stan (`model/lqm_ext2.stan`; `model/lqm.stan` is the model without the makers' terms, used
+until v2026.10.20); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
 the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; Betancourt 2017).
 
 - **Writing.** How a model is written changes how fast the sampler explores it, not what it estimates. Each group's
@@ -214,20 +241,20 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   centred and mapped to rows by sparse matrix products, so that Stan's optimiser (`stanc --O1`) keeps every vector in
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
-- **Samplers.** Quality: nutpie (Seyboldt et al.), whose adaptation of the mass matrix needs about four times fewer
-  steps here, batches of 4 chains × (1,000 warm-up + 3,000 draws), target acceptance 0.9 (0.85 until 30 Sep 2026, when
-  it left 4 divergences); while the criteria are not met, a new batch of independent chains is drawn and pooled with the
-  others, up to four batches (4 × 12,000 draws in one batch until 8 Oct 2026). The effective draws per draw varied from
-  1 % to 15 % across the fits of 30 Sep – 8 Oct with the same model: the scale s_τ of the publisher × couple spreads
-  has a long upper tail when the data say little about it, and the sampler crosses it slowly. The data added since
-  30 Sep shortened that tail (its 95th percentile 1.25 → 0.38; the jump in effective draws came with the eighteenth
-  pass) and the effective draws rose eightfold (check of 8 Oct, data of 30 Sep against data of 8 Oct, two seeds each:
-  168–169 against 975–1,336 effective draws out of 12,000). Cost:
-  CmdStan, 4 chains × (500 warm-up + 4,500 draws), target acceptance 0.9, each chain started from the last draw of the
-  previous fit (1,000 warm-up iterations when there is none); too few effective draws continue the same chains by
-  slices of 1,500 draws, up to 4,500 more. Both limits are counted in draws, not in seconds (a 10-minute budget until
-  8 Oct 2026), so that a loaded machine does not change the fit. A chain left in another region restarts its axis on
-  CmdStan from the previous fit's draws.
+- **Samplers.** nutpie (Seyboldt et al.) on both axes, whose adaptation of the mass matrix needs fewer steps here:
+  4 chains × (1,000 warm-up + 3,000 draws), target acceptance 0.9. While the criteria are not met, the same chains
+  continue within the sampling process, checked every 1,000 draws on the draws up to the check, up to 9,000 more; the
+  run stops at the first check that meets them and keeps exactly the draws up to it. Before 21 Oct 2026 the quality
+  axis drew new batches of independent chains instead (up to four), and the cost axis was sampled with CmdStan from
+  the previous fit's last draws. On the cost axis of the data of 20–21 Oct, CmdStan reached its step limit on almost
+  every draw (about 1,000 leapfrog steps, 5 divergent transitions, not converged in 2 h); nutpie took about 530 steps
+  per draw, with no divergence, and drew twice the effective draws per second on the slowest parameter. A second
+  batch of random starts left two of its four chains in a remote region (the Student-t's ν at its bound, the effects'
+  scales 10 to 25 times their value elsewhere, no data in particular to blame): continuing the chains that have
+  converged avoids drawing new starts. A chain left in another region (R̂ above 1.05) restarts its axis on CmdStan
+  from the previous fit's last draws, 4 × (500 warm-up + 4,500 draws), continued by slices of 1,500 draws up to 4,500
+  more. A run continues only while at most 0.03 % of its draws diverged. Every limit is counted in draws, not in
+  seconds, and a check reads only the draws up to it, so that a loaded machine does not change the fit.
 - **Stored draws.** Each axis' draws are written to disk as they are drawn (`.stan/runs`, outside git) and kept until
   that axis' sampling inputs change — the Stan program, the axis' data, the seed, the sampler settings and the code
   that samples. A fit stopped part-way, by the machine's memory limit or a restart, resumes from them: each chain
@@ -247,7 +274,9 @@ A fit is published only if, on every parameter and read-out, the rank-normalised
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
 refuses one that misses any of them. The Monte Carlo error of every displayed value is stored with
 it, and the build reports any value whose error exceeds half of its last displayed digit: such a figure could change
-by one unit in a refit with another seed (in the current fit, none).
+by one unit in a refit with another seed. In the current fit: the cost of Fable 5.1, Fable 5 and Opus 5.5 at max
+(about ±0.5 on multiples of 190–300 shown to the unit, against intervals of about ±9 %) and the quality of Opus 4.8
+*solo* (±0.06 point, against an interval of about ±4.6 points); they are shown as they are.
 
 ### Fixed values
 
@@ -264,6 +293,7 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 | §5 publication | measured by ≥ 2 publishers | one publisher's figures cannot be cross-checked |
 | §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
 | §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
+| §5 sampling | 4 chains × (1,000 + 3,000), checked every 1,000 draws up to 12,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 restarts on CmdStan | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
 | §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
 
 ### Software and references
@@ -309,7 +339,7 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 
 ### Checks
 
-Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 September 2026:
+Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 September 2026 unless stated:
 
 - **Held-out prediction** (`heldout.py`). One fifth of the percentage scores removed, the model refitted, the
   removed scores predicted, five times; compared with a score-ratio baseline (per-benchmark ratios to the reference,
@@ -325,6 +355,10 @@ Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 Se
   62 / 77 / 77 % for both intervals: calibrated on average, a little narrow when scores are exactly proportional and a
   little wide otherwise. These checks use shorter fits (4 × 1,000 draws; the mixed case ended at R̂ 1.017 with 5
   divergent transitions, within what a check tolerates, not a published fit).
+- **Makers' terms** (`loo.py`, data of 19–20 Oct 2026, both models fitted on the same rows). PSIS-LOO: the model with
+  the makers' terms against the one without, Δelpd +3.5 ± 17.6 (Claude rows −10.2 ± 8.0, others +13.7 ± 15.7): no
+  detectable difference in prediction; about 5 % of rows have an unreliable leave-one-out estimate (k > 0.7). The
+  Claude couples keep their order (Spearman 0.999, median |Δθ| 0.06).
 - **Sensitivity** (`compare.py`). Removing the largest publisher, the model vendor itself (system cards, blog
   charts, documentation): cost Kendall τ 0.988, median move 2.4 %, largest 14.6 % (Sonnet 5.5 medium); quality
   τ 0.960, median 0.9 %, largest 3.5 % (Opus 4.7 max).
@@ -356,6 +390,8 @@ value of each couple, the four tiers and the crown, the sources table — is des
   count its components twice.
 - Costs are what each source measured at the prices of its day; a price change a source did not report is not
   corrected, and the data file has no measurement date to apply one systematically.
+- The other makers' couples are fitted by the same rules, from the groups collected for this report; their figures are
+  not published here. A maker's home effect is one shift for all its models and both of its publications' kinds.
 - The cost of the largest models rests heavily on their vendor's system cards; removing that publisher moves some
   costs by more than 10 %.
 - Differences smaller than the intervals — two neighbouring rungs, a crown between two close couples — are ties.
