@@ -47,9 +47,9 @@ PROVIDERS = ("anthropic", "openai", "google", "xai", "deepseek", "qwen", "glm", 
 def provider(model):
     """Who makes the model (the encompassing variant gives each maker its own effect scales)."""
     head = model.split("-")[0]
-    if head in ("opus", "sonnet", "haiku", "fable"): return "anthropic"
+    if head in ("opus", "sonnet", "haiku", "fable", "claude"): return "anthropic"
     if head in ("gpt", "o1", "o3", "o4", "chatgpt"): return "openai"
-    if head == "gemini": return "google"
+    if head in ("gemini", "gemma"): return "google"
     if head == "grok": return "xai"
     if head.startswith(("qwen", "qwq")): return "qwen"
     return head if head in PROVIDERS else "other"
