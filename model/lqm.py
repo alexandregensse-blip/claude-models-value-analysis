@@ -419,14 +419,18 @@ RUNS = os.path.join(STAN_DIR, "runs")                                # each axis
 # against 5, and drew twice the effective draws per second on the slowest parameter (user's go, 20 Oct). nutpie cannot
 # be given starting points, and a random start can leave a cost chain in a remote region: then the axis restarts on
 # CmdStan NUTS from the previous fit's last draws (RESTART_RHAT, SAMPLER["restart"]).
-# Too few effective draws: on nutpie, a new batch of independent chains is drawn and pooled with the others, up to
-# `batches` batches (nutpie cannot continue a chain); on CmdStan, the same chains continue by slices of `extend` draws,
-# up to `extend_max` draws per chain beyond the planned ones. Both are counted in draws, not seconds: a slow or loaded
-# machine must not change the fit. Quality draws 4 × 3,000 per batch: the effective draws per draw ranged from 1 % to
-# 15 % across the fits of 30 Sep – 8 Oct (s_τ's posterior tail, which the data shortens: .salvo14/s21/ess), so one batch
-# meets the criteria on most data and four batches — the 48,000 draws drawn by every fit before 8 Oct — on the worst.
-SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, batches=4),
-           "cost": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, batches=4),
+# Too few effective draws: the same chains continue by slices of `extend` draws, up to `extend_max` draws per chain
+# beyond the planned ones — on nutpie within the sampling process (the chains run on, checked at every slice and
+# stopped at the first that meets the criteria: no second warm-up, user's request of 21 Oct 2026), on CmdStan from the
+# last state with the adapted step size and metric. Counted in draws, not seconds: the check at a slice reads only the
+# draws up to it, so a slow or loaded machine does not change the fit. Quality draws 4 × 3,000 at least: the effective
+# draws per draw ranged from 1 % to 15 % across the fits of 30 Sep – 8 Oct (s_τ's posterior tail, which the data
+# shortens: .salvo14/s21/ess), so 3,000 meet the criteria on most data and 12,000 — the 48,000 draws drawn by every fit
+# before 8 Oct — on the worst.
+SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, extend=1000,
+                           extend_max=9000),
+           "cost": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, extend=1000,
+                        extend_max=9000),
            "restart": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
                            max_treedepth=10, extend=1500, extend_max=4500)}
 # The two axes run one after the other: on this shared 8-core machine the quality axis took 1,241 s beside the cost
@@ -616,6 +620,7 @@ class RunStore:
             if n:
                 self.manifest["shapes"].update({v: list(s) for v, s in shapes.items()})
                 part["draws"] = d0 + n
+                part["planned"] = max(part["planned"], part["draws"])   # a run that continued itself, then stopped
                 for key in ("divergences", "max_treedepth_hits"):
                     part["stats"][key] = None if stats.get(key) is None else (part["stats"].get(key) or 0) + stats[key]
                 part["stats"]["leapfrog_sum"] += stats["leapfrog_sum"]
@@ -626,6 +631,58 @@ class RunStore:
                 self._save()
         shutil.rmtree(self.seg, ignore_errors=True)
         return n
+
+
+def _nutpie_written(g, root, done=False):
+    """Draws per chain that every chain of nutpie's store has written for good: all of a finished run; of a run in
+    progress or stopped, the chunks written but the last (which a stop may have cut)."""
+    post, ss = g["posterior"], g["sample_stats"]
+    arrays = [post[v] for v in post.array_keys()] + [ss["n_steps"], ss["step_size"]]   # always written: zarr skips a
+    # chunk equal to the fill value (`diverging` all False), which then reads as that value
+
+    def kept(a):
+        if done:
+            return a.shape[1]
+        d = os.path.join(root, a.path, "c")
+        out = []
+        for c in range(a.shape[0]):
+            have = set(os.listdir(os.path.join(d, str(c)))) if os.path.isdir(os.path.join(d, str(c))) else set()
+            j = 0
+            while str(j) in have:
+                j += 1
+            out.append(max(0, j - 1) * a.chunks[1])
+        return min(out)
+    return min(kept(a) for a in arrays if a.size)
+
+
+class _NutpieDraws(Posterior):
+    """The first n draws of every chain of nutpie's store, read block by block from disk while the run goes on: what
+    diagnostics() needs to check a run that continues itself."""
+
+    def __init__(self, g, n):
+        import numpy as np
+        self.g, self.n, post = g, n, g["posterior"]
+        self.parts = {v: None for v in post.array_keys()}
+        ss = g["sample_stats"]
+        self.stats = dict(divergences=int(np.asarray(ss["diverging"][:, :n]).sum()), max_treedepth_hits=None,
+                          leapfrog_mean=round(float(np.asarray(ss["n_steps"][:, :n], dtype=np.float64).mean()), 1))
+        self.adapted = None
+
+    def shape(self, name):
+        a = self.g["posterior"][name]
+        return (a.shape[0], self.n, *a.shape[2:])
+
+    def blocks(self, name, size=256):
+        import numpy as np
+        a = self.g["posterior"][name]
+        rest = math.prod(a.shape[3:]) if a.ndim > 3 else 1
+        if a.ndim == 2:
+            yield 0, np.asarray(a[:, :self.n], dtype=np.float64)[:, :, None]
+            return
+        rows = max(1, size // rest)
+        for i0 in range(0, a.shape[2], rows):
+            x = np.asarray(a[:, :self.n, i0:i0 + rows], dtype=np.float64)
+            yield i0 * rest, x.reshape(x.shape[0], x.shape[1], -1)
 
 
 def _read_nutpie(seg, info):
@@ -640,22 +697,8 @@ def _read_nutpie(seg, info):
         post, ss = g["posterior"], g["sample_stats"]
     except Exception:
         return None
-    arrays = [post[v] for v in post.array_keys()] + [ss["n_steps"], ss["step_size"]]   # always written: zarr skips a
-    # chunk equal to the fill value (`diverging` all False), which then reads as that value
-
-    def kept(a):
-        if info.get("done"):
-            return a.shape[1]
-        d = os.path.join(root, a.path, "c")
-        out = []
-        for c in range(a.shape[0]):
-            have = set(os.listdir(os.path.join(d, str(c)))) if os.path.isdir(os.path.join(d, str(c))) else set()
-            j = 0
-            while str(j) in have:
-                j += 1
-            out.append(max(0, j - 1) * a.chunks[1])
-        return min(out)
-    n = min(kept(a) for a in arrays if a.size)
+    n = _nutpie_written(g, root, info.get("done"))
+    n = min(n, info.get("stop", n))                                  # a run that continued itself: up to its last check
     if n == 0:
         return None
     C = ss["diverging"].shape[0]
@@ -841,9 +884,9 @@ def fit(groups, axis="quality", seed=7, settings=None, keep=False, save_inits=Tr
     The run is checked against the validity criteria (CONVERGED):
       * a chain left in a remote region (R̂ > RESTART_RHAT) restarts the axis on CmdStan from the previous fit's last
         draws (the only engine that takes starting points per chain);
-      * otherwise too few effective draws add draws, never throw any away: on nutpie a new batch of independent
-        chains (up to `batches`), on CmdStan the SAME chains continued (last state, adapted step size and metric, no
-        new warm-up) by slices of `extend` draws, up to `extend_max` per chain beyond the planned ones.
+      * otherwise too few effective draws add draws, never throw any away: the SAME chains continue (no new warm-up)
+        by slices of `extend` draws, up to `extend_max` per chain beyond the planned ones — on nutpie in the sampling
+        process itself, on CmdStan from the last state with the adapted step size and metric.
     A run stopped part-way (memory, restart) resumes from its stored draws: each chain continues on CmdStan from its
     last stored draw, with its adapted step size and metric, up to the draws planned."""
     import shutil, tempfile
@@ -875,10 +918,10 @@ def _run(store, data, axis, st, seed, say):
     t0 = time.time()
     resumed = 0
 
-    def segment(engine, s, draws, part=None, inits=None, adapted=None):
+    def segment(engine, s, draws, part=None, inits=None, adapted=None, grow=False):
         seg = store.begin(engine=engine, seed=s, chains=st["chains"], draws=draws, part=part, adapted=adapted,
                           max_treedepth=st.get("max_treedepth", 10))
-        _sample(data, axis, dict(st, engine=engine), s, seg, inits=inits, adapted=adapted, draws=draws)
+        _sample(data, axis, dict(st, engine=engine), s, seg, inits=inits, adapted=adapted, draws=draws, grow=grow)
         return store.commit()
 
     def complete():
@@ -900,7 +943,7 @@ def _run(store, data, axis, st, seed, say):
         store.reset()                                                # stopped too early to be continued
     complete()
     if not store.parts:
-        segment(st["engine"], seed, st["samples"])
+        segment(st["engine"], seed, st["samples"], grow=st["engine"] == "nutpie")
         complete()
     restarted = store.parts[0]["engine"] != st["engine"]
     if restarted:
@@ -918,39 +961,33 @@ def _run(store, data, axis, st, seed, say):
         diag, _ = diagnostics(post)
         say(f"{axis}: restarted on CmdStan {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
             f"{diag['ess_tail_min']}")
-    batches = st["engine"] == "nutpie" and st.get("batches")
     # a few divergent draws (≤ 0.03 % (user, 20 Oct): 5 of 18,000 on the cost axis of 20 Oct 2026) do not forbid continuing the chains
     while (not converged(diag) and diag["divergences"] <= DIVERGENT_SHARE * diag["draws"]
            and diag["rhat_max"] <= RESTART_RHAT):
-        if batches:                                                  # new independent chains, pooled
-            if len(store.parts) >= st["batches"]:
-                break
-            segment("nutpie", seed + 100 * len(store.parts), st["samples"])
-            complete()
-            what = f"batch {len(store.parts)} of {st['chains']} new chains"
-        else:                                                        # the same chains, continued
-            p = store.parts[0]
-            extra = p["planned"] - st["samples"]
-            if post.adapted is None or extra >= st["extend_max"]:
-                break
-            n = min(st["extend"], st["extend_max"] - extra)
-            store.plan(0, p["planned"] + n)
-            complete()
-            what = f"continued +{n} draws/chain"
+        p = store.parts[0]                                           # the same chains, continued (a nutpie run
+        extra = p["planned"] - st["samples"]                         # continued itself: here only after a stop)
+        if post.adapted is None or extra >= st["extend_max"]:
+            break
+        n = min(st["extend"], st["extend_max"] - extra)
+        store.plan(0, p["planned"] + n)
+        complete()
+        what = f"continued +{n} draws/chain"
         post = store.posterior()
         diag, _ = diagnostics(post)
         say(f"{axis}: {what} {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
             f"{diag['ess_tail_min']}")
     p = store.parts[0]
-    ext = len(store.parts) - 1 if batches else (-(-(p["planned"] - st["samples"]) // st["extend"])
-                                                if p["planned"] > st["samples"] else 0)
+    ext = -(-(p["planned"] - st["samples"]) // st["extend"]) if p["planned"] > st["samples"] else 0
     post.stats.update(extensions=ext, engine=st["engine"], resumed=resumed)
     return post
 
 
-def _sample(data, axis, st, seed, seg, inits=None, adapted=None, draws=None):
+def _sample(data, axis, st, seed, seg, inits=None, adapted=None, draws=None, grow=False):
     """One sampling run, written into the segment directory seg (nutpie's store, or CmdStan's CSV files). adapted =
-    the chains' step sizes and inverse metrics: continue them without warm-up."""
+    the chains' step sizes and inverse metrics: continue them without warm-up. grow (nutpie): the chains run on past
+    the planned draws, by slices of `extend` up to `extend_max` more, checked at each slice on the draws up to it
+    (diagnostics, as _run checks a run), and stop at the first slice that ends the run; seg.json records the draws kept
+    (`stop`)."""
     import json, numpy as np
     if st["engine"] == "nutpie" and adapted is None:
         import nutpie
@@ -960,13 +997,22 @@ def _sample(data, axis, st, seed, seg, inits=None, adapted=None, draws=None):
                                        extra_compile_args=["STAN_NO_RANGE_CHECKS=true"]).with_data(
             **{k: (np.asarray(v) if isinstance(v, list) else v) for k, v in data.items()})
         os.makedirs(os.path.join(seg, "store"), exist_ok=True)
-        nutpie.sample(cm, draws=draws or st["samples"], tune=st["warmup"], chains=st["chains"],     # draws go to disk
-                      cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,  # as they come
-                      target_accept=st["target_accept"], store_mass_matrix=True,
-                      zarr_store=zarr_store.LocalStore(os.path.join(seg, "store")))
+        planned = draws or st["samples"]
+        top = planned + st["extend_max"] if grow else planned
+        run = nutpie.sample(cm, draws=top, tune=st["warmup"], chains=st["chains"],     # draws go to disk as they come
+                            cores=min(st["chains"], os.cpu_count() or 1), seed=seed, progress_bar=False,
+                            target_accept=st["target_accept"], store_mass_matrix=True, blocking=not grow,
+                            zarr_store=zarr_store.LocalStore(os.path.join(seg, "store")))
+        stop = top
+        if grow:
+            try:
+                stop = _grow(run, os.path.join(seg, "store"), planned, top, st["extend"])
+            except BaseException:
+                run.cancel()                                         # no sampler left running behind the error
+                raise
         info = json.load(open(os.path.join(seg, "seg.json")))
-        with open(os.path.join(seg, "seg.json"), "w") as f:         # finished: every chunk is whole
-            json.dump(dict(info, done=True), f)
+        with open(os.path.join(seg, "seg.json"), "w") as f:         # finished: every chunk is whole (or kept to stop)
+            json.dump(dict(info, done=stop == top, stop=stop, draws=stop), f)
         return
     cs = cmdstan()
     model = cs.CmdStanModel(stan_file=STAN_FILE, stanc_options={"O1": True}, cpp_options={"STAN_NO_RANGE_CHECKS": True})
@@ -986,6 +1032,44 @@ def _sample(data, axis, st, seed, seg, inits=None, adapted=None, draws=None):
             inits = None
     model.sample(**common, inits=inits or None, iter_warmup=st["warmup"] if inits else st["warmup_cold"],
                  iter_sampling=draws or st["samples"], adapt_delta=st["adapt_delta"])
+
+
+def _grow(run, root, planned, top, extend):
+    """A nutpie run in progress (non-blocking) checked at planned, planned + extend, …, top draws per chain: at each,
+    once every chain has written it, diagnostics() on the draws up to it; the run stops at the first check that would
+    end _run's loop (converged, too many divergences, a chain in another region). Returns the draws per chain kept."""
+    import time, zarr
+
+    def finished():
+        try:
+            return run.is_finished
+        except TimeoutError:                                         # nutpie 0.16: "not finished" raises
+            return False
+    k = planned
+    while True:
+        while True:                                                  # wait until every chain has written k draws
+            finished_ = finished()
+            try:
+                g = zarr.open_group(root, mode="r")
+                n = _nutpie_written(g, root, finished_)
+            except Exception:
+                n = 0
+            if n >= k or finished_:
+                break
+            time.sleep(15)
+        if finished_ and n < k:                                       # the run ended short (an error): wait() raises it
+            run.wait()
+            return n
+        if k >= top:
+            run.wait()
+            return top
+        diag, _ = diagnostics(_NutpieDraws(g, k))
+        if (converged(diag) or diag["divergences"] > DIVERGENT_SHARE * diag["draws"]
+                or diag["rhat_max"] > RESTART_RHAT):
+            if not finished():
+                run.abort()
+            return k
+        k = min(top, k + extend)
 
 
 def sample_once(data, axis, st, seed):
