@@ -1,6 +1,7 @@
 # Data pipeline: findings, registries, decision tree (proposal v3, 22 Oct 2026)
 
-Status: **draft — two independent reviews (/work/.salvo14/review-pipeline/, review-pipeline2/), revised; no code yet.**
+Status: **draft — three independent reviews (/work/.salvo14/review-pipeline{,2,3}/), revised; schemas can be written;
+no code yet.**
 
 The data the fit reads becomes **computed tables**, built by one script from what agents write (the **findings**: what a
 source says) and what we define (the **registries**). **Agents write facts only.** The model, the effort, the campaign,
@@ -91,14 +92,14 @@ The agent groups the facts of one measure and names the setup; it writes no key,
 ## 4. Registries
 
 **models.json** — the only keys. Per model: label, maker, `released` (datetime, from the maker), `line`,
-`open_weights`, `thinking` (`levels | on-off | always | none`), `solo_means` (the one configuration `solo` denotes:
-the model's default when it has no effort parameter; for an on-off model whose default is off, `nothink` and `solo`
-are the same configuration and the build writes `solo`); `names`: each API id or display name and the model it
+`open_weights`, `thinking` (`levels | on-off | always | none`), `solo_means` (the one configuration `solo` denotes: the model's default when it has no effort parameter); `names`: each API id or display name and the model it
 **serves** over `{from, to}` — the maker's own dates (release, redirect or shutdown date from its changelog); `efforts`,
 `default`, `conversions` (requested → served, per route), `modes` (request parameters that select another key: Pro →
-`<id>-pro`), each over `{from, to, evidence}` where `from` is the effective date the maker's document states, else its
-earliest capture, and `to` the change the document states, else the last capture still showing it; a gap between
-captures is not covered. Build checks: two keys of one maker serving one API id over overlapping intervals, or with
+`<id>-pro`). `efforts` (the levels the maker serves **as themselves**: the ladder) start at the release (release post,
+model card or API reference at release) unless a document dates a later addition. `default`, `conversions` and `modes`
+are dated by their evidence: `from` = the effective date the maker's document states, else its earliest capture; `to` =
+the change the document states, else the last capture still showing it. Between two captures showing the same text the
+interval is covered; between a capture showing it and the next one not showing it, it is not. Build checks: two keys of one maker serving one API id over overlapping intervals, or with
 identical display names, fail the build until resolved.
 
 **routes.json** — vocabulary `maker-api · reseller (Bedrock, Vertex, Azure) · router (OpenRouter, AI Gateway) ·
@@ -119,8 +120,9 @@ working).
 **prices.json** — per model and route: list prices per class (input, output, cache read, cache write 5m and 1h), long-
 context tiers with their per-request threshold, promotions (recorded, flagged, never a base; their display on the site
 is set aside), batch and flex factors; each dated with evidence. `as_of` pinned per build. Base route = the maker's API.
-Base price = the standard list price in force on `as_of`; for a model whose standard price never applied before it was
-withdrawn, the price actually charged (Gemini 3.7 Flash, $0.75: the maintainer, 21 Oct).
+Base price = the standard list price in force on `as_of`; for a retired model, its last list price (decision 1 of
+21 Oct); for a model whose standard price never applied before it was withdrawn, the price actually charged (Gemini 3.7
+Flash, $0.75: the maintainer, 21 Oct).
 
 **rules.json** — each rule: id, inputs, output, conditions, precision formula, date, decided by. Deduction rules:
 `alias-by-date`, `mode-to-line`, `label-to-ladder`, `maker-conversion-dated`, `route-mapping-dated`,
@@ -142,39 +144,47 @@ facts hash no longer matches is reported, not applied.
 
 ### 5.1 Facts → fields (build)
 
-**Run date.** A stated run date, start or end gives the interval directly (`[start, end]`, or the stated day). Otherwise
-`[lower, upper]`: lower = the model's `released` (not clamped for an `early-access` run), upper = the earliest of
-publication, capture, commit. Datetimes when known. Needed only when a dated event of the model falls inside it.
+**Run date.** A stated `run-date` (a per-run timestamp counts as one) gives the day; `run-start` and `run-end` give the
+interval; a lone start or end gives that bound, the other is the default bound. Default bounds: lower = the model's
+`released` (computed per candidate key for an alias; not clamped for an `early-access` run), upper = the earliest of
+the source's publication, the earliest capture carrying the measure's value, and the commit. Datetimes when known.
+Needed only when a dated event of the model falls inside it.
 
-**Model.** The model-name / API-id facts resolve through `names` at the run date; the run interval must lie inside one
-`serves` interval (a stated run date before a redirect, or a proven bound like `alias-date-proven`, does). Two facts that
+**Model.** The model-name / API-id facts resolve through `names` at the run date; for a name that has served more than one
+model (an alias), the run interval must lie inside one `serves` interval (names that never moved are not date-checked,
+so early-access runs pass) (a stated run date before a redirect, or a proven bound like `alias-date-proven`, does). Two facts that
 resolve to different keys → `contradictory`. `mode` facts → the line key; a route that cannot separate the mode →
 `not-established:absent`. **Early access**: an `early-access` fact, or a run upper bound before `released`.
 
 **Effort** — first match wins; every rule's interval must cover the run interval:
 1. a `thinking-budget` → `think-<budget>`; a numeric scale → `scalar-<n>`;
-2. an `effort-setting` (a code/config line at the run, or `config-unchanged-over-interval`) at a level the whole route
-   chain accepts → that level;
-3. an `effort-label` that names a level of the model's ladder → that level (standing label rule);
-4. an `effort-label` in other words → `label-to-ladder` when the maker's ladder makes it unique;
-5. a requested level → the route chain applied in order **harness → router/reseller → maker**, each step dated
+2. a model without an effort parameter, or with thinking always on → `solo` (`solo_means`), whatever else is stated
+   (K2.7 Code, Haiku 4.5 at its default);
+3. an `effort-setting` (a code/config line at the run, or `config-unchanged-over-interval`; the fact records where it was
+   read: the source's own call, or a harness/router config) at a level of the model's ladder that every step of the
+   route chain serves as itself → that level; a level the maker or a route converts goes to step 6;
+4. an `effort-label` that names a level of the model's ladder, served as itself → that level (standing label rule); a
+   label naming a converted level (GLM-5.2 `low`) goes to step 6;
+5. an `effort-label` in other words → `label-to-ladder` when the maker's ladder makes it unique;
+6. a requested or converted level → the route chain applied in order **harness → router/reseller → maker**, each step dated
    (identity where documented); route unknown → every candidate route is evaluated and the level is accepted only if all
    agree, else `not-established:absent`; a router budget → `budget-converted`; a tie → `ambiguous`;
-6. `no-effort-sent` → `api-default-documented`: on the maker's API, the maker's documented default; through a router
+7. `no-effort-sent` → `api-default-documented`: on the maker's API, the maker's documented default; through a router
    (route known), the router's own documented default for that model (the maintainer, 22 Oct); else `default`;
-7. a model without an effort parameter, or thinking always on → `solo` (`solo_means`); thinking off → `nothink`
-   (= `solo` on an on-off model whose default is off); `reasoning_effort: none` → `nothink`;
-8. nothing → `unstated`.
+8. thinking off → `nothink` (kept apart from `solo` even when it is the model's default: §9); `reasoning_effort: none`
+   → `nothink`;
+9. nothing → `unstated`.
 Ids outside the ladder (`minimal nothink think-* scalar-* budget-converted enabled adaptive default unstated req-<label>
 app-* priceblend`) → `out:effort-outside-ladder` or `out:effort-not-established`. A tools regime (`nt-*`), a fast mode
 or an application setting is part of the setup, not the effort.
 
 **Campaign** (computed). A setup's campaign is its `version` (benchmark, protocol or board version). Snapshots of one
-board are linked by `snapshot_of`. Within one campaign, a couple measured again replaces the earlier value (recorded as
+board are linked by `snapshot_of`; a snapshot without a version fact inherits the campaign of the snapshot it continues,
+and a board that never states a version has one campaign. Within one campaign, a couple measured again replaces the earlier value (recorded as
 `prev`): rating boards always (Elo, arena, rolling means, re-fitted indices), run boards when the version is unchanged
 (a re-score or a regrade of the same runs). New couples join the current campaign. A new version is a new campaign; the
 earlier campaign stays (both are measurements). `same-runs-as` (stated, or proven by identical other-axis values on all
-shared couples) links two documents: the later grading replaces the earlier, and the cost counts once.
+shared couples, ≥ 2 of them, equality by METHODOLOGY §3's closeness test) links two documents: the later grading replaces the earlier, and the cost counts once.
 
 ### 5.2 Quality axis (decisions first; then the first failing step gives the status)
 0. **Decision** pinned to the measure → its status (`in:decision:<id>` / `out:decision:<id>`).
@@ -182,7 +192,8 @@ shared couples) links two documents: the later grading replaces the earlier, and
 2. **Model** accepted and in models.json → else `out:model-not-established`.
 3. **Effort** in the ladder → else `out:effort-outside-ladder` / `out:effort-not-established`.
 4. **Value** accepted; `source-estimate` → `out:estimate`; `failure` (did not complete, infrastructure error) →
-   `out:failed-run`; `partial` (items missing, not scored) → `out:partial` unless the source scores them as wrong; `cap`
+   `out:failed-run`; a source's mean that includes a failed run → recomputed by `mean-of-runs` when the per-run values
+   are written, else `out:failed-run`; `partial` (items missing, not scored) → `out:partial` unless the source scores them as wrong; `cap`
    (a declared cap, scored) is a setup attribute, in; an anomaly `assumed` → `out:anomaly-assumed`; `contradictory` →
    `out:contradictory`.
 5. **Metric** = the setup's headline → else `out:not-headline`.
@@ -195,16 +206,20 @@ shared couples) links two documents: the later grading replaces the earlier, and
    component. (Phase 1: the build computes the residuals; dropping the composite stays in `lqm.load`.)
 9. **Republication**: `restated-from` → counted once (phase 1: `lqm.load`'s rule — the larger group keeps it; phase 2:
    the original); identical values across groups beyond chance → once (`lqm.load`).
-10. **Group** = setup × publisher × campaign, ≥ 2 accepted couples → `in`; else `out:single-couple`.
+10. **Group** = setup × publisher × campaign, ≥ 2 accepted couples of models in the fit's model list → `in`; else
+   `out:single-couple`.
 
 ### 5.3 Cost axis
-Steps 0–4 and 7–10 apply. Then:
+Steps 0–4 and 7–10 apply. Measures citing the same spend facts (one run scored under several metrics) are one cost
+measure, on the headline measure's setup (else the first). A composite's cost residual is the total minus the present
+components' costs, only on one unit and one run; otherwise the composite's cost is dropped. Then:
 1. **Base-price value**, METHODOLOGY's order: the publisher's own figure at the base price; the price change applied to
    the source's own cost once its formula reproduces it from the run's tokens (`cost-delta-on-source`; per-request
    long-context tiers only when `requests` and per-call sizes are known); a uniform factor (`cost-uniform-factor`); the
    class-median ratio (`cost-class-ratio`); otherwise the cost is **unrepriced**, at its own basis.
    `price_date` = the date of the prices the source applied: the run date for a billed spend; the capture date for a
-   source that recomputes at its current price (AA); the stated date for a list estimate.
+   source that recomputes at its current price (AA); the stated date for a list estimate, else [run lower bound,
+   publication].
 2. **Partition** of the setup's measures by `basis` (`billed · list-estimate · router-billed · subscription · unknown`)
    × `method` (vocab: `tokens×list`, `cli-total`, `provider-invoice`, `router-invoice`, `publisher-table`…) × unit ×
    currency × route. In each part: the re-priced measures form one subset; each unrepriced model forms its own subset
@@ -222,12 +237,17 @@ The build writes **one table per axis** in today's `raw-data.csv` columns, holdi
   the same execution when known (republication detection reads it; the quality fit never does);
 - `fit-cost.csv`: group = the quality group × cost subset (suffix `~c<n>`), the cost at the base price, and the score of
   the same execution when known;
-- confound flags regenerated from the facts (home, restated-from, evaluated-by, EAP-run, reading sd, `prev`…), so
-  `lqm.load` keeps working;
+- `source` = the publisher's id in publishers.json (maker publishers named as `lqm.load`'s maker map: anthropic,
+  openai, google, alibaba…), never a snapshot id, so publishers, unit aliases and the home effect resolve as today;
+- confound flags regenerated from the facts in the exact spellings `lqm.load` reads (`EAP-run`, `restated-from:<maker>`,
+  `vendor-reported:<org>`, `evaluated-by:`, `reading-sd`…, listed in vocab.json), plus `prev`;
 - `group-map.json`: fit group → base group, used by the catalog lookups (families, composites, publishers, unit aliases).
 
 Code changes this needs (no change of method): `fit.py` reads one path per axis; `catalog` resolves a group through
-`group-map.json`. `lqm.load` keeps its composites rule, homogeneity split and republication rule in phase 1, and its
+`group-map.json`. The build also writes the public data file (every measure, today's columns plus `status_quality` and
+`status_cost`), read by precheck.py, validation/*.py, site/sources.py (through the group map) and the CSV download;
+precision.py is replaced by the facts' precision model. **Acceptance test** before any new fact is used: the legacy
+facts alone must give `lqm.load` the same groups, rows and report as v2026.10.21's raw-data.csv. `lqm.load` keeps its composites rule, homogeneity split and republication rule in phase 1, and its
 report is written back into the status report. Site fields stay in the site's registry.
 
 ## 7. Validation
@@ -253,7 +273,14 @@ report is written back into the status report. Site fields stay in the site's re
    source by source.
 5. Rebuild; before/after against v2026.10.21; the maintainer's yes before any fit.
 
-## 9. Decided by the maintainer during the reviews
+## 9. Decisions
+
+Pending:
+- **nothink vs solo on an on-off model whose default is thinking off** (Haiku 4.5: 375 `solo`, 43 `nothink` rows; 17
+  `nothink` rows in 17 groups would enter the fit): are they one configuration? Until the maintainer answers, `nothink`
+  stays out.
+
+Decided by the maintainer during the reviews:
 - `api-default-documented` through a router (22 Oct): when the run is known to have gone through the router with no
   effort sent, the router's dated documented default for that model is the effort (latitude kimi-k3: OpenRouter
   `default_effort: max`, captured 21 Jul, run 23 Jul).
