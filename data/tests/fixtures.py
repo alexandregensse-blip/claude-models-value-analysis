@@ -102,7 +102,7 @@ class Sc:
           unit="per-task", basis=None, method=None, tokens=None, run_date=(), route=(), anomalies=(), version=None,
           value_level="written", entry=None, value_seen_in=(), price_table=None, model_says="model-api-id",
           namespace="maker-api", early_access=False, same_runs_as=None, restated_from=None, evaluated_by=None,
-          mode=None, cost_level="written", value_form="data-file", spend_shared=None):
+          mode=None, cost_level="written", value_form="data-file", spend_shared=None, runs=None):
         n = len(self.msets[sid]) + 1
         entry = entry or f"{model}-{n}"
         F = lambda says, value, about=entry, **kw: self.fact(sid, says, value, about=about, **kw)  # noqa: E731
@@ -144,12 +144,15 @@ class Sc:
             usage.append(F(says, v))
         rd = [F(says, v) for says, v in run_date]
         rt = [F("route", v, about=None, **({"term": t} if t else {})) for v, t in route]
-        an = [F(says, v, level=lv) for says, v, lv in anomalies]
+        an = [F(a[0], a[1], level=a[2], **({"run": a[3]} if len(a) > 3 and a[3] else {})) for a in anomalies]
+        rs = [F("run-score", v, term=metric, scale=scale, run=rid) for rid, v in (runs or [])]
         facts = {"value": value, "model": model_f, "effort": eff, "run_date": rd, "usage": usage, "spend": spend,
                  "version": F("version", version, about=None) if version else None, "judge": None,
                  "anomalies": an, "restated_from": F("restated-from", restated_from, about=None) if restated_from
                  else None, "same_runs_as": F("same-runs-as", same_runs_as, about=None) if same_runs_as else None,
                  "route": rt, "value_seen_in": list(value_seen_in)}
+        if rs:
+            facts["runs"] = rs
         if early_access:
             facts["early_access"] = [F("early-access", "early access", about=None)]
         if evaluated_by:
@@ -182,6 +185,7 @@ class Sc:
             doc["sha256"]["saved.txt"] = hashlib.sha256(b"placeholder\n").hexdigest()
         for sid, (fname, text, bad_sha) in self.cells.items():
             p = os.path.join(fnd, "sources", fname)
+            os.makedirs(os.path.dirname(p), exist_ok=True)
             with open(p, "w", encoding="utf-8") as f:
                 f.write(text)
             self.sources[sid]["sha256"][fname] = "0" * 64 if bad_sha else hashlib.sha256(text.encode()).hexdigest()

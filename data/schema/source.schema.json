@@ -308,6 +308,11 @@
        }
       ]
      },
+     "run": {
+      "type": "string",
+      "minLength": 1,
+      "description": "For a run-score fact (required) and a failure / partial fact about one run: the run's id within the measure (a failure naming no run leaves the mean not recomputable)."
+     },
      "note": {
       "type": "string",
       "description": "Free note for the verifier; never read by the tree."
@@ -343,7 +348,7 @@
      },
      "where": {
       "type": "string",
-      "description": "Where the table is in the file (JSON path, CSV, sheet).",
+      "description": "Where the table is in the file. format json: a JSON path ($, .key, ['key'], [n], [*]) to the list of row objects (or to an object of row objects, row_key '$key' = their keys); a column is a key of the row object or a dotted path in it. csv: free text.",
       "minLength": 1
      },
      "format": {

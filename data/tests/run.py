@@ -689,6 +689,143 @@ def cost_method_unstated_setting():
 
 
 @test
+def reason_value_not_established():
+    sc = base()
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], value_level="not-established:assumed")
+    eq(sc.run().q(m1), "out:value-not-established", "an assumed value")
+
+
+# ================================================================ JSON tables, runs, counts
+def json_case(sc, doc, where, row_key, s_name="j"):
+    import json
+    sc.model("mg", configs=("nothink", "low", "medium", "high"))
+    s = sc.source(s_name)
+    sc.cells[s] = ("saved/data.json", json.dumps(doc), False)
+    sc.sources[s]["tables"] = [{"id": "T1", "file": "saved/data.json", "where": where, "format": "json", "row_key": row_key,
+                                "columns": {"model": {"says": ["model-api-id", "route"], "namespace": "prefix"},
+                                            "cfg.effort": "effort-setting",
+                                            "score": {"says": "score", "term": "pass%", "scale": "fraction"}}}]
+    for i, e in enumerate(("e1", "e2"), 1):
+        sc.msets[s].append({"id": f"M{i}", "setup": "s1", "verified": None, "facts": {
+            "value": f"T1/{e}/score", "model": [f"T1/{e}/model"], "effort": [f"T1/{e}/cfg.effort"],
+            "route": [f"T1/{e}/model"], "value_seen_in": []}})
+    return s
+
+
+@test
+def json_tables():
+    rows = [{"id": "e1", "model": "mk/mg", "cfg": {"effort": "none"}, "score": 0.5},
+            {"id": "e2", "model": "mk/ma", "cfg": {"effort": "high"}, "score": 0.625}]
+    sc = base()
+    s = json_case(sc, {"meta": {"v": 1}, "results": rows}, "$.results", "id")
+    r = sc.run(check_files=True)
+    eq((r.cfg(f"{s}#M1"), r.q(f"{s}#M1")), ("nothink", "in"), "JSON path $.results")
+    eq(r.rows("fit-quality.csv", model="ma")[0]["score"], "62.5", "number kept as written, then × 100")
+    sc = base()
+    s = json_case(sc, {"data": {"rows": {r_["id"]: r_ for r_ in rows}}}, "$['data'].rows", "$key")
+    r = sc.run(check_files=True)
+    eq((r.cfg(f"{s}#M2"), r.q(f"{s}#M2")), ("high", "in"), "an object of rows, row_key $key")
+    sc = base()
+    s = json_case(sc, {"results": rows}, "results", "id")
+    r = sc.run(check_files=True)
+    eq(r.q(f"{s}#M1"), "out:no-proof", "a json table's where must be a JSON path")
+    eq(any("must be a JSON path" in e for e in r.rep["validation"]["errors"]), True, "reported by validate.py")
+
+
+@test
+def mean_of_runs():
+    sc = base()
+    s = sc.source("a")
+    runs = [("r1", "50.0%"), ("r2", "60.0%"), ("r3", "70.0%")]
+    m1 = sc.m(s, model="ma", effort=[LOW], score="60.0%", runs=runs,
+              anomalies=[("failure", "run r1 crashed", "written", "r1")])
+    m2 = sc.m(s, model="mb", effort=[LOW], score="60.0%", runs=runs, anomalies=[("failure", "a run crashed", "written")])
+    m3 = sc.m(s, model="mb", effort=[HIGH], score="62.0%", runs=runs,
+              anomalies=[("failure", "run r1 crashed", "written", "r1")])
+    sc.m(s, model="ma", effort=[HIGH], score="55.0%")
+    r = sc.run()
+    eq(r.q(m1), "in", "recomputed without the failed run")
+    eq(float(r[m1]["fields"]["score"]["number"]), 65.0, "mean of r2, r3")
+    eq("mean-of-runs" in r[m1]["rules_used"], True, "rule")
+    eq(r.q(m2), "out:failed-run", "the failure names no run")
+    eq(r.q(m3), "out:failed-run", "the runs do not reproduce the source's mean")
+    sc = base()
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], score="60.0%", runs=runs,
+              anomalies=[("failure", "run r9 crashed", "written", "r9")])
+    sc.m(s, model="mb", effort=[LOW], score="61.0%")
+    eq(sc.run().q(m1), "out:no-proof", "validate.py: a failure naming a run not cited")
+    sc = base()
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], score="60.0%", runs=runs)
+    next(f for f in sc.sources[s]["facts"] if f["says"] == "run-score").pop("run")
+    eq(sc.run().q(m1), "out:no-proof", "validate.py: a run-score names its run")
+
+
+@test
+def percent_from_counts():
+    sc = base()
+    sc.setup("sf", metric="accuracy", bounds=(0, 1))
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], score="45 of 60", scale="counts")
+    sc.m(s, model="mb", effort=[LOW], score="1,000/2,000", scale="counts")
+    m3 = sc.m(s, setup="sf", model="ma", effort=[LOW], score="3 out of 4", scale="counts")
+    sc.m(s, setup="sf", model="mb", effort=[LOW], score="1/4", scale="counts")
+    m5 = sc.m(s, model="ma", effort=[HIGH], score="about 45", scale="counts")
+    r = sc.run()
+    eq((r.q(m1), r.rows("fit-quality.csv", model="ma", group="s1")[0]["score"]), ("in", "75"), "100·k/N")
+    eq(r.rows("fit-quality.csv", model="ma", group="sf")[0]["score"], "0.75", "k/N on a fraction metric")
+    eq("percent-from-counts" in r[m3]["rules_used"], True, "rule")
+    eq(r.q(m5), "out:no-proof", "validate.py: a counts score is written k of N")
+    eq(any("a counts score is written" in e for e in r.rep["validation"]["errors"]), True, "reported by validate.py")
+
+
+# ================================================================ long-context tiers, retired models
+@test
+def cost_long_context():
+    sc = base()
+    sc.model("mc")
+    lc = lambda i, o, c: [{"threshold_input_tokens": 200000, "classes": {"input": i, "output": o, "cache-read": c}}]  # noqa
+    for k in ("ma", "mb", "mc"):
+        sc.prices["prices"] += [
+            price(k, "2026-01-01", "2026-06-30", {"input": 1, "output": 5, "cache-read": 0.1}, long_context=lc(2, 10, 0.2)),
+            price(k, "2026-07-01", "2026-10-01", {"input": 1, "output": 5, "cache-read": 0.05}, long_context=lc(2, 10, 0.1))]
+    s = sc.source("a")
+    tok = {"tokens-in": "1000000", "tokens-out": "200000", "tokens-cache-read": "2000000"}
+    pt = "list prices of 1 June 2026"
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="2.20", price_table=pt,
+              tokens=dict(tok, requests="10", **{"tokens-in-per-request": "100000"}))
+    m2 = sc.m(s, model="mb", effort=[LOW], cost="2.20", price_table=pt, tokens=tok)
+    m3 = sc.m(s, model="mc", effort=[LOW], cost="4.40", price_table=pt,
+              tokens=dict(tok, requests="1", **{"tokens-in-per-request": "300000"}))
+    m4 = sc.m(s, model="mc", effort=[HIGH], cost="4.40", price_table=pt,
+              tokens=dict(tok, requests="10", **{"tokens-in-per-request": "300000"}))
+    r = sc.run()
+    eq(round(r[m1]["fields"]["cost"]["base"]["value"], 6), 2.1, "every call below the threshold: standard prices")
+    eq(r[m2]["fields"]["cost"]["base"], None, "requests and per-call sizes unknown: not re-priceable")
+    eq("not re-priceable" in r[m2]["fields"]["cost"]["reprice_detail"], True, "why")
+    eq(round(r[m3]["fields"]["cost"]["base"]["value"], 6), 4.2, "one call above the threshold: the tier")
+    eq(r[m4]["fields"]["cost"]["base"], None, "calls on both sides cannot be split")
+
+
+@test
+def cost_retired_last_list_price():
+    sc = base()
+    for k in ("ma", "mb"):
+        sc.prices["prices"].append(price(k, "2026-01-01", "2026-06-30", {"input": 1, "output": 5}))
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0")
+    m2 = sc.m(s, model="mb", effort=[LOW], cost="2.0")
+    r = sc.run()
+    eq(r.c(m1), "in", "a retired model: priced at its last list price")
+    eq("base-last-list-price" in r[m1]["flags"], True, "flagged")
+    sc.prices["prices"].append(price("mb", "2026-07-01", "2026-07-31", {"input": 0.5, "output": 2.5}, base=True))
+    r = sc.run()
+    eq(r[m2]["fields"]["cost"]["base"]["value"], 1.0, "a base entry says otherwise: × 0.5")
+
+
+@test
 def report_counts_and_diff():
     import shutil, tempfile
     sc = base()

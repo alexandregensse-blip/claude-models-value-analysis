@@ -102,6 +102,15 @@ they expected:
   - makers now include `other` (never a publisher's maker), with `display_prefixes`;
   - capture kinds.
 
+## Added for the build (22 Oct)
+
+The build is described in data/BUILD.md. It added these terms:
+- fact types `run-score` (slot `runs`, mean-of-runs) and `tokens-in-per-request` (long-context tiers);
+- the fact field `run`;
+- score scale `counts` (percent-from-counts);
+- reason code `out:value-not-established`;
+- JSON tables, whose `where` is a JSON path (`$`, `.key`, `['key']`, `[n]`, `[*]`), now read by validate.py.
+
 ## Choices where the document left freedom
 
 1. **Fields on facts:**

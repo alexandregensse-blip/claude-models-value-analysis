@@ -211,7 +211,7 @@ class Source:
             return None, f"cell {ref}: sha256 of {os.path.basename(p)} does not match"
         rows = V.table_rows(tb, self.path)
         if rows is None:
-            return None, f"cell {ref}: table format {tb.get('format')} not readable by the build (csv only)"
+            return None, f"cell {ref}: table format {tb.get('format')} not readable by the build (csv, json)"
         cols, byrow = rows
         if row not in byrow or col not in cols:
             return None, f"cell {ref}: no such row or column in the saved file"
@@ -945,38 +945,97 @@ def precision_sd(f, step, chart=None):
     return float(step) / S12 if step is not None else None
 
 
+def score_number(M, f):
+    """A score (or run-score) fact on the setup's scale → (number, step, sd, rules) or None when not a number.
+    scale-conversion: fraction ↔ percent, exact; percent-from-counts: 'k of N' → 100·k/N (k/N on a fraction metric)."""
+    b = M.setup.get("bounds") or [None, None]
+    target = "percent" if b[1] == 100 else "fraction" if b[1] == 1 else "raw"
+    if f.scale == "counts":
+        m = V.COUNTS.fullmatch(f.value or "")
+        if not m or int(m.group(2).replace(",", "")) == 0:
+            return None
+        k, n = Decimal(m.group(1).replace(",", "")), Decimal(m.group(2).replace(",", ""))
+        d = k * 100 / n if target == "percent" else k / n if target == "fraction" else k
+        d = d.quantize(Decimal("1e-6")).normalize() if target != "raw" else d
+        return d, Decimal("1e-6"), 0.0, ["percent-from-counts"]
+    parsed = parse_number(f.value)
+    if parsed is None:
+        return None
+    d, step = parsed
+    sd = precision_sd(f, step)
+    rules = []
+    if f.scale == "fraction" and target == "percent":
+        d, step, sd, rules = d.scaleb(2), step.scaleb(2), (sd * 100 if sd is not None else None), ["scale-conversion"]
+    elif f.scale == "percent" and target == "fraction":
+        d, step, sd, rules = d.scaleb(-2), step.scaleb(-2), (sd / 100 if sd is not None else None), ["scale-conversion"]
+    return d, step, sd, rules
+
+
 def score_field(M):
     f = M.value
     if f is None or "score" not in f.says:
         return None
-    parsed = parse_number(f.value)
     out = dict(text=f.value, level=f.level, facts=[f.ref], number=None, prec=None, rules=[])
-    if parsed is None:
+    got = score_number(M, f)
+    if got is None:
         out["level"] = "unreadable"
         M.faults.append(f"value {f.ref}: {f.value!r} is not a number")
         M.fields["score"] = out
         return out
-    d, step = parsed
-    sd = precision_sd(f, step)
-    b = M.setup.get("bounds") or [None, None]
-    target = "percent" if b[1] == 100 else "fraction" if b[1] == 1 else "raw"
-    if f.scale == "fraction" and target == "percent":
-        d, step = d.scaleb(2), step.scaleb(2)
-        sd = sd * 100 if sd is not None else None
-        out["rules"].append("scale-conversion")
-        M.rule("scale-conversion")
-        out["level"] = "computed" if f.level == "written" else f.level
-    elif f.scale == "percent" and target == "fraction":
-        d, step = d.scaleb(-2), step.scaleb(-2)
-        sd = sd / 100 if sd is not None else None
-        out["rules"].append("scale-conversion")
-        M.rule("scale-conversion")
-        out["level"] = "computed" if f.level == "written" else f.level
+    d, step, sd, rules = got
+    for r in rules:
+        out["rules"].append(r)
+        M.rule(r)
+    if rules and f.level == "written":
+        out["level"] = "computed"
     if f.level == "read":
         M.rule("chart-reading")
     out.update(number=d, step=step, prec=sd)
     M.fields["score"] = out
     return out
+
+
+def run_id(f):
+    """A per-run fact's run: its `run`, or for a table cell its row key."""
+    return f.about if f.ref.startswith("T") else f.run
+
+
+def mean_of_runs(M, failures):
+    """The source's mean includes a failed run: recompute it from the per-run values without the failed runs, once
+    the mean of all of them reproduces the source's value. → None when recomputed, else why not."""
+    sf = M.fields.get("score")
+    runs = [f for f in M.slot("runs") if f.level in ACCEPTED]
+    if not runs or not sf or sf.get("number") is None:
+        return "no per-run values written"
+    vals, steps = {}, []
+    for f in runs:
+        got = score_number(M, f)
+        if got is None or run_id(f) in vals:
+            return f"run {run_id(f)!r} unreadable or listed twice"
+        vals[run_id(f)] = got
+        steps.append(float(got[1]))
+    failed = set()
+    for a in failures:
+        rid = a.run if not a.ref.startswith("T") else (a.about if a.about in vals else None)
+        if not rid or rid not in vals:
+            return f"failure {a.ref} names no run of the mean"
+        failed.add(rid)
+    mean_all = sum(float(v[0]) for v in vals.values()) / len(vals)
+    if abs(mean_all - float(sf["number"])) > float(sf["step"]) + max(steps):
+        return f"the runs' mean {mean_all:.6g} does not reproduce the source's {num_text(sf['number'])}"
+    kept = [v for r, v in vals.items() if r not in failed]
+    if not kept:
+        return "every run failed"
+    mean = sum(v[0] for v in kept) / Decimal(len(kept))
+    dec = max(0, -Decimal(str(min(steps))).as_tuple().exponent) + 2
+    mean = round(mean, dec).normalize()
+    sds = [v[2] for v in kept if v[2] is not None]
+    sf.update(number=mean, prec=(math.sqrt(sum(x * x for x in sds)) / len(kept)) if sds else None,
+              level="computed", source_mean=sf["text"], runs_kept=sorted(r for r in vals if r not in failed),
+              runs_failed=sorted(failed))
+    sf["rules"].append("mean-of-runs")
+    M.rule("mean-of-runs")
+    return None
 
 
 def cost_field(M):
@@ -1036,7 +1095,7 @@ def cost_field(M):
             continue
         if s in TOKEN_CLASS:
             tok[TOKEN_CLASS[s]] = p
-        elif s in ("tokens-reasoning", "tokens-total", "requests", "cached-share"):
+        elif s in ("tokens-reasoning", "tokens-total", "requests", "cached-share", "tokens-in-per-request"):
             tok[s] = p
     out["tokens"] = tok
     out["reasoning_included"] = any(x.level in ACCEPTED for x in M.slot("usage", "reasoning-included-in-out"))
@@ -1062,7 +1121,10 @@ def base_price(ctx, key):
         return None
     t = V.when(asof)
     on = [p for p in std_entries(ctx, key) if V.when(p["from"]) <= t <= V.when(p["to"], True)]
-    return on[0] if on else None
+    if on:
+        return on[0]
+    past = sorted((p for p in std_entries(ctx, key) if V.when(p["to"], True) < t), key=lambda p: V.when(p["to"], True))
+    return dict(past[-1], _last_list=True) if past else None   # a retired model: its last list price
 
 
 def prices_over(ctx, key, lo, hi, route="maker-api"):
@@ -1079,13 +1141,48 @@ def prices_over(ctx, key, lo, hi, route="maker-api"):
     covered = covered and bool(es) and cur >= hi
     vecs = []
     for e in es:
-        c = {k: v for k, v in e["classes"].items() if v is not None}
+        c = price_vector(e)
         if c not in vecs:
             vecs.append(c)
     return vecs, covered
 
 
+def price_vector(e):
+    """Class prices of an entry, its long-context tiers as 'lc><threshold>:<class>'."""
+    c = {k: v for k, v in (e.get("classes") or {}).items() if v is not None}
+    for t in e.get("long_context", []):
+        for k, v in t["classes"].items():
+            if v is not None:
+                c[f"lc>{t['threshold_input_tokens']}:{k}"] = v
+    return c
+
+
+def tiered(vec):
+    return {k for k in vec if k.startswith("lc>")}
+
+
+def effective_classes(vec, tok):
+    """The class prices the run's calls paid under a vector with long-context tiers (per-request thresholds): every
+    call at or below the lowest threshold → the standard prices; a single call above → that tier. → (classes, why)."""
+    th = sorted({int(k[3:].split(":")[0]) for k in tiered(vec)})
+    std = {k: v for k, v in vec.items() if not k.startswith("lc>")}
+    if not th:
+        return std, ""
+    req, per = tok.get("requests"), tok.get("tokens-in-per-request")
+    if req is None or per is None:
+        return None, "long-context tiers: requests and per-call sizes not stated"
+    per, req = float(per[0]), float(req[0])
+    if per <= th[0]:
+        return std, ""
+    if req == 1:
+        t = max(x for x in th if x < per)
+        return dict(std, **{k.split(":", 1)[1]: v for k, v in vec.items() if k.startswith(f"lc>{t}:")}), ""
+    return None, "long-context tiers: calls on both sides of a threshold cannot be split"
+
+
 def uniform_ratio(new, old):
+    if tiered(new) != tiered(old):
+        return None
     ks = [k for k in new if new.get(k) is not None and old.get(k) is not None]
     if not ks or any(old[k] == 0 for k in ks):
         return None
@@ -1132,7 +1229,10 @@ def reprice(M, C, key):
     if bp["currency"] != C.get("currency"):
         C["reprice_detail"] = f"cost in {C.get('currency')}, base price in {bp['currency']}"
         return
-    base = {k: v for k, v in bp["classes"].items() if v is not None}
+    if bp.get("_last_list"):
+        M.flags.append("base-last-list-price")
+        C["base_price"] = f"last list price ({bp['from']} → {bp['to']}): no maker-API price in force on as_of"
+    base = price_vector(bp)
     cost, prec = float(C["number"]), C.get("prec")
     if not covered or not vecs:
         C["reprice_detail"] = "prices over the price date not registered"
@@ -1144,6 +1244,15 @@ def reprice(M, C, key):
         return
     # 2. the price change on the source's own tokens, once its formula reproduces the cost
     tok = C.get("tokens", {})
+    if tiered(base) or any(tiered(v) for v in vecs):
+        eff_base, why = effective_classes(base, tok)
+        eff_old = [effective_classes(v, tok) for v in vecs]
+        why = why or next((w for _, w in eff_old if w), "")
+        if why:
+            C["reprice_detail"] = why + ": not re-priceable"
+            return
+        base, vecs = eff_base, [c for c, _ in eff_old]
+        C["long_context"] = "tiers resolved from requests and per-call sizes"
     classes = {k: v for k, v in tok.items() if k in base}
     usage_unit_ok = not C.get("usage_unit") or not C.get("unit") or C["usage_unit"] == C["unit"]
     if len(vecs) == 1 and classes and usage_unit_ok:
@@ -1241,6 +1350,7 @@ def value_step(M, field, axis):
     lv = field.get("level")
     if lv == "source-estimate":
         return "out:estimate"
+    failures = []
     for a in M.slot("anomalies"):
         s = a.says[0]
         if a.level == "not-established:assumed":
@@ -1250,7 +1360,8 @@ def value_step(M, field, axis):
         if a.level not in ACCEPTED:
             continue
         if s == "failure":
-            return "out:failed-run"
+            failures.append(a)
+            continue
         if s == "partial" and not PARTIAL_SCORED.search((a.value or "") + " " + (a.quote or "")):
             return "out:partial"
         if s == "cap":
@@ -1259,7 +1370,12 @@ def value_step(M, field, axis):
             or field.get("unit") == "contradictory":
         return "out:contradictory"
     if lv not in ACCEPTED:
-        return "out:estimate"
+        return "out:value-not-established"
+    if failures:
+        why = mean_of_runs(M, failures) if axis == "quality" else "mean-of-runs recomputes scores only"
+        if why:
+            field["detail"] = f"failed run: {why}"
+            return "out:failed-run"
     return None
 
 

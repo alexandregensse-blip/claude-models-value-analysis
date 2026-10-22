@@ -13,7 +13,7 @@ python3 data/build.py ... --cost-method-unstated out                # the settin
 python3 data/build.py ... --fit-models catalog                      # the fit's model list (default: models.json keys)
 python3 data/build.py ... --no-lqm                                  # skip the lqm.load step
 python3 data/build_lqm.py build/                                    # the lqm.load step alone
-python3 data/tests/run.py [name-filter]                             # the tests (39, under a second)
+python3 data/tests/run.py [name-filter]                             # the tests (45, under a second)
 ```
 
 The build runs in five steps:
@@ -62,12 +62,20 @@ The fit tables carry these confound flags:
 
 ## Interpretations
 
-These are the places where the spec left room. Items marked **(method)** are method questions put to the maintainer;
-the build does one thing for now and can be changed.
+These are the places where the spec left room. Items marked **(decided)** were settled by the coordinator on 22 Oct
+(5, 8, 10, 16, 19, 20 and 21 kept as written; 14 and 25 changed); items marked **(method)** remain method questions for
+the maintainer. Every other item was accepted as written.
 
 **Proof and reading**
-1. A table cell is read from its saved CSV. If the file is unreachable, its sha256 does not match, or the table is not
-   CSV, the measure gets `out:no-proof`. JSON, YAML and HTML tables are not read yet.
+1. A table cell is read from its saved file, CSV or JSON. If the file is unreachable, its sha256 does not match, or
+   the table is neither, the measure gets `out:no-proof`. **YAML and HTML tables can wait**: validate.py warns about
+   them.
+   - **JSON tables.** The table's `where` is a JSON path in the subset `$`, `.key`, `['key']`, `[n]`, `[*]`, and
+     validate.py rejects a JSON table whose `where` is not one.
+   - The path leads to a list of row objects, or to an object whose values are rows; `row_key: "$key"` then means the
+     object's keys.
+   - A column is a key of the row object, else a dotted path inside it (`cfg.effort`).
+   - Numbers are kept as written: the file is parsed with numbers left as text.
 2. A value or cost that cannot be read as a number gets `out:no-proof`.
 
 **Run date**
@@ -77,7 +85,7 @@ the build does one thing for now and can be changed.
    `contradictory`.
 4. The commit date is taken from the capture of that commit. When the source has no publication date, no capture and
    no commit, the upper bound is the harvest.
-5. **Early access (method).** A configuration dated from the release (`from_basis: release`) covers an early-access
+5. **Early access (decided).** A configuration dated from the release (`from_basis: release`) covers an early-access
    run. Without this, no early-access run could ever have a configuration. Records dated by captures are not extended
    this way, and an alias's `serves` intervals are always date-checked.
 
@@ -94,7 +102,7 @@ the build does one thing for now and can be changed.
    - A reseller uses the maker's defaults, with conversions dated under its own route id.
    - When the route is unknown, the candidates are `maker-api` plus every route whose entry for the model has a
      dated record overlapping the run.
-8. **Undocumented steps (method).** A non-maker step that documents nothing covering the run (no mapping, `accepts` or
+8. **Undocumented steps (decided: strict; the registry will document each harness).** A non-maker step that documents nothing covering the run (no mapping, `accepts` or
    `level_mapping`) leaves the configuration not established. It is not assumed to be identity. This also applies to
    step 7 through a harness. It is README open item 3 (Inspect).
 
@@ -113,7 +121,7 @@ the build does one thing for now and can be changed.
     - a single level id left after dropping {effort, level, setting, reasoning, the, at}.
 
     `label-to-ladder` maps lowest / least / minimum to the lowest level and highest / maximum / most to the highest.
-    **(method)** "Lowest" is `ambiguous` when `nothink` is also in the model's list (thinking off, or the lowest
+    **(decided)** "Lowest" is `ambiguous` when `nothink` is also in the model's list (thinking off, or the lowest
     level). `think` is never on the ladder.
 11. A `config-history` fact takes its interval from the first two ISO dates in its `where`, and that interval must
     cover the run.
@@ -124,29 +132,40 @@ the build does one thing for now and can be changed.
 
 **Value**
 
-14. **(method)** A value whose level is `not-established` (other than contradictory) gets `out:estimate`: no reason
-    code fits it better.
-15. `mean-of-runs` is not implemented, because no slot holds per-run values: a `failure` always gives
-    `out:failed-run`. The `partial` exception ("scored as wrong") is found in the fact's text, since no fact field
-    carries it.
-16. **Uninformative (method).** A score counts as uninformative when it is exactly equal to a bound of the setup,
+14. **(decided)** A value whose level is `not-established` (absent, assumed or ambiguous) gets the new reason code
+    `out:value-not-established`. A contradictory value keeps `out:contradictory`.
+15. **mean-of-runs.**
+    - Per-run values go in the new measure slot `runs`: fact type `run-score`, with `term` and `scale` as for a score.
+      A fact names its run in its new `run` field; a table cell's run is its row key.
+    - A `failure` (or `partial`) about one run names that run; validate.py checks that it is one of the runs cited.
+    - When the value is a mean that includes a failed run, the build recomputes it without the failed runs, but only
+      after checking that the mean of all the runs reproduces the source's value (within one unit of the last digit
+      of the value plus one of the runs).
+    - The mean stays `out:failed-run` when a failure names no run, when the runs do not reproduce the mean, and on
+      the cost axis (mean-of-runs recomputes scores only).
+    - The `partial` exception ("scored as wrong") is found in the fact's text, since no fact field carries it.
+16. **Uninformative (decided).** A score counts as uninformative when it is exactly equal to a bound of the setup,
     and some but not all couples of the group sit at a bound. A group where every couple is at a bound is left to
     lqm's saturated rule.
 17. Scale conversion takes the target scale from the setup's `bounds`: upper 100 → percent, upper 1 → fraction. A
     `raw` score is left as it is.
+    - **percent-from-counts.** A score written as counts ('45 of 60', '3/4', '1,000 out of 2,000') takes the new
+      scale `counts`, and validate.py checks its form.
+    - The build gives 100·k/N on a percent metric, k/N on a fraction metric, and k on a raw one. The result is exact
+      (precision 0), written to 6 decimals.
 
 **Campaigns**
 
 18. Replacement happens only between measures that passed steps 0–5, and only across sources: two measures of one
     couple in one source both stay. Sources are ordered by publication date, else earliest capture, else harvest.
-19. **Rating boards (method).** Rating boards and run boards are treated the same way: within a campaign the later
+19. **Rating boards (decided).** Rating boards and run boards are treated the same way: within a campaign the later
     value replaces the earlier, and a new version starts a new campaign for both kinds. "Rating boards always" is read
     as no more than that.
 20. A stated `same-runs-as` names the other source by its id or one of its URLs, and links measures within one
-    benchmark family. **(method)** It counts as proven when ≥ 2 shared couples have identical costs (§3's closeness
+    benchmark family. **(decided)** It counts as proven when ≥ 2 shared couples have identical costs (§3's closeness
     test) and at least one score differs. When the scores are identical too, the case is left to lqm's republication
     rule. The earlier measure's cost goes out only when the later measure has an accepted cost.
-21. **Composite residuals (method).** A composite residual is computed only for a linear composite with no
+21. **Composite residuals (decided).** A composite residual is computed only for a linear composite with no
     normalisation:
     - the weights are normalised to sum to 1, and the residual is (C − Σ present ŵ·c) / Σ missing ŵ, the weighted
       mean of the missing components;
@@ -164,8 +183,11 @@ the build does one thing for now and can be changed.
     - `publisher-table` is treated as "a source that recomputes at its current price": the price date is the capture
       dates of `value_seen_in`, else the harvest;
     - a stated date is the first date found in a `price-table` fact.
-25. The base price is the entry marked `base`, else the standard maker-API price in force on `as_of`. There is no
-    automatic "last list price" fallback: the schema's `base` marker exists for that case.
+25. **(decided)** The base price is, in order:
+    - the entry marked `base`;
+    - else the standard maker-API price in force on `as_of`;
+    - else, for a retired model (no maker-API price in force on `as_of`), its last list price: the latest standard
+      maker-API entry, flagged `base-last-list-price`.
 26. "The publisher's own figure at the base price" means that every price that could have applied over the price date
     equals the base price.
 27. `cost-delta-on-source` applies when:
@@ -175,7 +197,16 @@ the build does one thing for now and can be changed.
 
     The tolerance is one unit of the cost's last digit, plus the largest relative rounding of the token counts × the
     computed cost. `tokens-reasoning` is tried both added to output and not, unless `reasoning-included-in-out` is
-    stated. Long-context tiers are ignored.
+    stated.
+
+    **Long-context tiers** are folded into the price vectors as `lc><threshold>:<class>`, so equality and the uniform
+    factor include them.
+    - Tiers are applied only when `requests` and the per-call size are both known. The per-call size is the new usage
+      fact `tokens-in-per-request`: each request's input, or the largest.
+    - Every call at or below the lowest threshold → the standard prices.
+    - A single request above a threshold → that tier's prices.
+    - Otherwise (sizes unknown, or several calls above a threshold) the cost is not re-priceable. Steps 2–4 do not
+      apply, and the cost goes to the per-model-subset or not-comparable test.
 28. `cost-uniform-factor` requires every candidate vector to be the same uniform multiple of the base. An unrepriced
     model gets its own subset when its registered prices fully cover its price dates and are uniform multiples of one
     another (a single vector counts). When no registered price covers the price date, the cost gets
@@ -210,10 +241,30 @@ the build does one thing for now and can be changed.
     - chart-pixel: the given `sd`, or blank when none is given;
     - exact: 0.
 
+## Schema changes made for the build (22 Oct)
+
+- `vocab.json`:
+  - fact types `run-score` (slot `runs`) and `tokens-in-per-request` (slot `usage`);
+  - measure slot `runs`;
+  - score scale `counts`;
+  - reason code `out:value-not-established`.
+- `measure.schema.json`: the slot `runs`.
+- `source.schema.json`: the fact field `run`, and a JSON path as a JSON table's `where`.
+- `validate.py`:
+  - JSON tables (path check, cell reading, `value_seen_in` comparisons);
+  - a run-score needs its `scale` and `run`, and is on the setup's metric;
+  - a failure or partial naming a run names one of the runs cited;
+  - the form of a counts score.
+
+## Tests
+
+`python3 data/tests/run.py` runs 45 fixtures: every reason code, configuration steps 1–8, the run-date, campaign and
+cost rules, JSON tables, mean-of-runs, percent-from-counts, long-context tiers, a retired model's base price, decisions
+and the stale hash, and the three examples. Separately, 23 faults were planted in build.py and validate.py (each step
+switched off in turn), and every one made a test fail.
+
 ## Not implemented yet
 
-- `mean-of-runs` and `percent-from-counts`;
-- long-context price tiers;
 - cost residuals of composites;
 - conversion between currencies (`currency-fixed`): a cost is repriced only in its base price's currency;
-- non-CSV tables.
+- YAML and HTML tables.

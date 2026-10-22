@@ -597,6 +597,9 @@ def column_says(spec):
     return [says] if isinstance(says, str) else list(says)
 
 
+COUNTS = re.compile(r"\s*([0-9][0-9,]*)\s*(?:/|of|out of)\s*([0-9][0-9,]*)\s*", re.I)
+
+
 def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
     L = rel(path)
     V = vocab["$defs"]
@@ -636,14 +639,18 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
         if t["file"] not in saved:
             rep.err(L, f"{t['id']}: file '{t['file']}' has no sha256 entry")
     for t in tables.values():
+        if t.get("format") == "json" and parse_json_path(t["where"]) is None:
+            rep.err(L, f"{t['id']}: a json table's where must be a JSON path ($, .key, ['key'], [n], [*]): {t['where']!r}")
+        elif t.get("format") in ("yaml", "html", "other"):
+            rep.warn(L, f"{t['id']}: {t['format']} tables are not read by the build yet (csv, json)")
         for col, spec in t["columns"].items():
             for says in column_says(spec):
                 if says in closed and (isinstance(spec, str) or "term" not in spec):
                     rep.err(L, f"{t['id']}.{col}: a {says} column needs a term")
                 elif says in closed and not in_vocab(schemas, closed[says]["vocab"], spec["term"]):
                     rep.err(L, f"{t['id']}.{col}: term '{spec['term']}' not in vocab {closed[says]['vocab']}")
-                if says == "score" and (isinstance(spec, str) or "scale" not in spec):
-                    rep.err(L, f"{t['id']}.{col}: a score column needs a scale")
+                if says in ("score", "run-score") and (isinstance(spec, str) or "scale" not in spec):
+                    rep.err(L, f"{t['id']}.{col}: a {says} column needs a scale")
                 if says == "model-api-id" and (isinstance(spec, str) or "namespace" not in spec):
                     rep.err(L, f"{t['id']}.{col}: a model-api-id column needs a namespace")
                 if not isinstance(spec, str) and spec.get("namespace") not in (None, "prefix") and spec["namespace"] not in routes:
@@ -682,10 +689,16 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                 rep.err(F, f"a {f['says']} fact needs a term (vocab {closed[f['says']]['vocab']})")
             elif not in_vocab(schemas, closed[f["says"]]["vocab"], f["term"]):
                 rep.err(F, f"term '{f['term']}' not in vocab {closed[f['says']]['vocab']}")
-        if f["says"] == "score" and "scale" not in f:
-            rep.err(F, "a score fact needs its scale (fraction, percent, raw)")
-        if "scale" in f and f["says"] != "score":
+        if f["says"] in ("score", "run-score") and "scale" not in f:
+            rep.err(F, f"a {f['says']} fact needs its scale (fraction, percent, raw, counts)")
+        if "scale" in f and f["says"] not in ("score", "run-score"):
             rep.err(F, "scale is for score facts")
+        if f.get("scale") == "counts" and not COUNTS.fullmatch(f["value"]):
+            rep.err(F, f"a counts score is written 'k of N', 'k/N' or 'k out of N', not {f['value']!r}")
+        if f["says"] == "run-score" and not f.get("run"):
+            rep.err(F, "a run-score fact names its run (run)")
+        if f.get("run") and f["says"] not in ("run-score", "failure", "partial"):
+            rep.err(F, "run is for run-score, failure and partial facts")
         if f["says"] == "thinking-budget" and not re.fullmatch(r"[1-9][0-9]*", f.get("term", "")):
             rep.err(F, "a thinking-budget fact needs its token count as term (digits)")
         if f["says"] == "model-api-id":
@@ -717,17 +730,103 @@ def check_saved(src, path, rep):
             rep.err(f"{L} {f['id']}", f"quote not found in the saved file {os.path.basename(p)}")
 
 
-def table_rows(table, path, file=None, cache={}):
-    """Rows of a CSV table keyed by its row_key, or None when not readable here."""
-    p = saved_path(file or table["file"], path)
-    if not p or table.get("format", "csv") != "csv" and not p.endswith(".csv"):
+JSON_PATH_TOKEN = re.compile(r"\.([A-Za-z_$][A-Za-z0-9_$-]*)|\[([0-9]+)\]|\['([^']*)'\]|\[\"([^\"]*)\"\]|(\[\*\]|\.\*)")
+
+
+def parse_json_path(path):
+    """A JSON path of the subset $ . key ['key'] [n] [*] → its steps (str key, int index, '*'), or None."""
+    if not isinstance(path, str) or not path.startswith("$"):
         return None
-    if p not in cache:
-        with open(p, encoding="utf-8", newline="") as f:
-            rows = list(csv.DictReader(f))
-        cache[p] = (rows[0].keys() if rows else set(), rows)
-    cols, rows = cache[p]
-    return cols, {r.get(table["row_key"]): r for r in rows}
+    steps, i, rest = [], 0, path[1:]
+    while i < len(rest):
+        m = JSON_PATH_TOKEN.match(rest, i)
+        if not m:
+            return None
+        k, n, q1, q2, star = m.groups()
+        steps.append("*" if star else int(n) if n is not None else (k if k is not None else q1 if q1 is not None else q2))
+        i = m.end()
+    return steps
+
+
+def json_path(node, steps):
+    """Nodes at the parsed JSON path."""
+    nodes = [node]
+    for st in steps:
+        out = []
+        for x in nodes:
+            if st == "*":
+                out += list(x.values()) if isinstance(x, dict) else list(x) if isinstance(x, list) else []
+            elif isinstance(st, int):
+                if isinstance(x, list) and st < len(x):
+                    out.append(x[st])
+            elif isinstance(x, dict) and st in x:
+                out.append(x[st])
+        nodes = out
+    return nodes
+
+
+def json_text(x):
+    """A JSON scalar as text (numbers verbatim: the file is parsed with numbers kept as written)."""
+    if x is None:
+        return ""
+    if isinstance(x, bool):
+        return "true" if x else "false"
+    if isinstance(x, (dict, list)):
+        return json.dumps(x, ensure_ascii=False, sort_keys=True)
+    return str(x)
+
+
+def json_cell(row, column):
+    """A column of a JSON row object: its key, else a dotted / JSON path inside it."""
+    if isinstance(row, dict) and column in row:
+        return json_text(row[column])
+    steps = parse_json_path(column if column.startswith("$") else "$." + column)
+    got = json_path(row, steps) if steps is not None else []
+    return json_text(got[0]) if len(got) == 1 else None
+
+
+def json_rows(table, p):
+    """(columns found, {row key: {column: text}}) of a JSON table, or None when its path finds no rows."""
+    steps = parse_json_path(table["where"])
+    if steps is None:
+        return None
+    with open(p, encoding="utf-8") as f:
+        doc = json.load(f, parse_float=str, parse_int=str)
+    nodes = json_path(doc, steps)
+    if len(nodes) == 1 and isinstance(nodes[0], (list, dict)) and not (steps and steps[-1] == "*"):
+        nodes = list(nodes[0].items()) if isinstance(nodes[0], dict) else [(None, x) for x in nodes[0]]
+    else:
+        nodes = [(None, x) for x in nodes]
+    rows, cols = {}, set()
+    for key, obj in nodes:
+        if not isinstance(obj, dict):
+            continue
+        rk = key if table["row_key"] == "$key" else json_cell(obj, table["row_key"])
+        cells = {}
+        for col in table["columns"]:
+            v = json_cell(obj, col)
+            if v is not None:
+                cells[col] = v
+                cols.add(col)
+        if rk is not None:
+            rows[rk] = cells
+    return cols, rows
+
+
+def table_rows(table, path, file=None, cache={}):
+    """Rows of a CSV or JSON table keyed by its row_key, or None when not readable here."""
+    p = saved_path(file or table["file"], path)
+    fmt = table.get("format") or ("csv" if (p or "").endswith(".csv") else "json" if (p or "").endswith(".json") else None)
+    if not p or fmt not in ("csv", "json"):
+        return None
+    if (p, table["id"]) not in cache:
+        if fmt == "json":
+            cache[(p, table["id"])] = json_rows(table, p)
+        else:
+            with open(p, encoding="utf-8", newline="") as f:
+                rows = list(csv.DictReader(f))
+            cache[(p, table["id"])] = (rows[0].keys() if rows else set(), {r.get(table["row_key"]): r for r in rows})
+    return cache[(p, table["id"])]
 
 
 def ref_info(ref, facts, tables):
@@ -809,7 +908,7 @@ def check_measures(ms, path, sources, reg, rep, vocab, check_files):
         # the value and per-entry facts are about an entry a model fact names
         model_abouts = {g[1] for (slot, _), g in info.items() if slot == "model" and g[1] is not None}
         for (slot, ref), (says, about, term, rec) in info.items():
-            if slot in ("value", "spend", "usage", "judge", "anomalies") and about is not None and model_abouts \
+            if slot in ("value", "runs", "spend", "usage", "judge", "anomalies") and about is not None and model_abouts \
                     and about not in model_abouts:
                 rep.err(M, f"{slot}: {ref} is about '{about}', not an entry the measure's model facts name {sorted(model_abouts)}")
         # the value's metric is the setup's metric
@@ -818,6 +917,19 @@ def check_measures(ms, path, sources, reg, rep, vocab, check_files):
             says, about, term, rec = info[("value", v)]
             if "score" in says and term != setups[m["setup"]]["metric"]:
                 rep.err(M, f"value {v} is on metric '{term}', the setup '{m['setup']}' on '{setups[m['setup']]['metric']}'")
+        # per-run values: on the setup's metric; a failure or partial naming a run names one of them
+        run_ids = set()
+        for (slot, ref), (says, about, term, rec) in info.items():
+            if slot != "runs":
+                continue
+            run_ids.add(split_cell(ref)[1] if ref.startswith("T") else rec.get("run"))
+            if m["setup"] in setups and term != setups[m["setup"]]["metric"]:
+                rep.err(M, f"runs: {ref} is on metric '{term}', the setup on '{setups[m['setup']]['metric']}'")
+        for (slot, ref), (says, about, term, rec) in info.items():
+            run = split_cell(ref)[1] if (slot == "anomalies" and ref.startswith("T") and run_ids) else \
+                (rec.get("run") if not ref.startswith("T") else None)
+            if slot == "anomalies" and run and run not in run_ids:
+                rep.err(M, f"anomalies: {ref} names run {run!r}, not one of the runs cited {sorted(r for r in run_ids if r)}")
         # model facts resolve under the name rule (any date: the run date is the build's)
         for (slot, ref), (says, about, term, rec) in info.items():
             if slot != "model":

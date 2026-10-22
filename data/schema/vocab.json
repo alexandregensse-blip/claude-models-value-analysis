@@ -8,6 +8,7 @@
    "description": "Fact types (DATA-PIPELINE §2). x-terms: description and the measure slots a fact of this type may fill.",
    "enum": [
     "score",
+    "run-score",
     "metric-definition",
     "headline-metric",
     "cost",
@@ -26,6 +27,7 @@
     "reasoning-included-in-out",
     "cached-share",
     "requests",
+    "tokens-in-per-request",
     "model-name",
     "model-api-id",
     "route",
@@ -63,6 +65,12 @@
      "description": "A score the source gives for one entry (a cell, a printed number, a chart point).",
      "slots": [
       "value"
+     ]
+    },
+    "run-score": {
+     "description": "The score of one run of a measure whose value is a mean of runs (DATA-PIPELINE §5.2 step 4, mean-of-runs): `term` = its metric, `scale` as a score; a fact carries `run` (the run's id), a table cell's run is its row key.",
+     "slots": [
+      "runs"
      ]
     },
     "metric-definition": {
@@ -171,6 +179,12 @@
     },
     "requests": {
      "description": "Number of requests or calls of the run.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "tokens-in-per-request": {
+     "description": "Input tokens of each request of the run, or the largest of them (per-call size): with `requests`, it decides whether a long-context price tier applies (DATA-PIPELINE §5.3 step 1).",
      "slots": [
       "usage"
      ]
@@ -371,6 +385,7 @@
    "description": "Fact types whose `term` is required and checked against a vocabulary (fact type → vocabulary). A thinking-budget's term is its token count (digits); a score's term is its metric.",
    "enum": [
     "score",
+    "run-score",
     "unit",
     "currency",
     "cost-basis",
@@ -391,6 +406,9 @@
     },
     "cost-method": {
      "vocab": "cost_method"
+    },
+    "run-score": {
+     "vocab": "metric"
     }
    }
   },
@@ -398,6 +416,7 @@
    "description": "Slots of a measure's `facts` (DATA-PIPELINE §3, plus the slots the tree reads that §3's example omits). x-terms: allowed fact types (null = any) and whether the slot takes a list.",
    "enum": [
     "value",
+    "runs",
     "model",
     "effort",
     "run_date",
@@ -426,6 +445,13 @@
       "cost"
      ],
      "list": false
+    },
+    "runs": {
+     "description": "Per-run values of a measure whose value is a mean of runs (mean-of-runs: recomputed without the failed runs).",
+     "fact_types": [
+      "run-score"
+     ],
+     "list": true
     },
     "model": {
      "description": "Facts naming the model (names, API ids, mode).",
@@ -471,6 +497,7 @@
       "reasoning-included-in-out",
       "cached-share",
       "requests",
+      "tokens-in-per-request",
       "unit"
      ],
      "list": true
@@ -1956,11 +1983,12 @@
    }
   },
   "score_scale": {
-   "description": "How a score is written in the source (required on score facts and score columns). The rule scale-conversion converts fraction ↔ percent exactly to the setup metric's scale; never inferred from the size of the value.",
+   "description": "How a score is written in the source (required on score facts and score columns). The rule scale-conversion converts fraction ↔ percent exactly (and percent-from-counts a count) to the setup metric's scale; never inferred from the size of the value.",
    "enum": [
     "fraction",
     "percent",
-    "raw"
+    "raw",
+    "counts"
    ],
    "x-terms": {
     "fraction": {
@@ -1971,6 +1999,9 @@
     },
     "raw": {
      "description": "the metric's own units (Elo, counts, points, an index)"
+    },
+    "counts": {
+     "description": "'k of N', 'k/N', 'k out of N': percent-from-counts gives 100·k/N (exact) on a percent metric, k/N on a fraction metric"
     }
    }
   },
@@ -2471,6 +2502,7 @@
       "out:budget-config",
       "out:effort-not-established",
       "out:estimate",
+      "out:value-not-established",
       "out:failed-run",
       "out:partial",
       "out:anomaly-assumed",
@@ -2510,6 +2542,9 @@
     },
     "out:estimate": {
      "description": "value is a source-estimate"
+    },
+    "out:value-not-established": {
+     "description": "value not established (absent, assumed or ambiguous; contradictory has its own code)"
     },
     "out:failed-run": {
      "description": "failure anomaly, or a mean including a failed run not recomputable"
