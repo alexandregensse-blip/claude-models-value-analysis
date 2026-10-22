@@ -1,0 +1,204 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "routes.schema.json",
+ "title": "Routes registry",
+ "description": "data/registry/routes.json: makers' APIs, resellers, hosts, routers, harnesses, self-hosting, with their dated level maps and defaults (DATA-PIPELINE §4).",
+ "type": "object",
+ "properties": {
+  "routes": {
+   "type": "object",
+   "description": "Route id → route.",
+   "propertyNames": {
+    "$ref": "common.schema.json#/$defs/route_id"
+   },
+   "additionalProperties": {
+    "type": "object",
+    "description": "One route.",
+    "properties": {
+     "class": {
+      "$ref": "vocab.json#/$defs/route_class"
+     },
+     "label": {
+      "type": "string",
+      "description": "Display label.",
+      "minLength": 1
+     },
+     "operator": {
+      "description": "The maker running it (maker-api, reseller of its own models), or null.",
+      "anyOf": [
+       {
+        "$ref": "vocab.json#/$defs/maker"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "spellings": {
+      "type": "array",
+      "description": "How sources name this route (a model-string prefix such as 'openrouter/', a provider name, a flag), so a route fact without a term resolves; matched case-insensitively.",
+      "items": {
+       "type": "string",
+       "description": "A verbatim spelling.",
+       "minLength": 1
+      }
+     },
+     "level_mapping": {
+      "type": "array",
+      "description": "Route-wide level mapping rules, dated.",
+      "items": {
+       "type": "object",
+       "description": "How the route maps a level, dated.",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "rule": {
+         "$ref": "vocab.json#/$defs/level_mapping_rule"
+        },
+        "ties": {
+         "description": "Tie handling for nearest-supported (ambiguous per DATA-PIPELINE §4).",
+         "enum": [
+          "ambiguous",
+          null
+         ]
+        }
+       },
+       "required": [
+        "rule"
+       ],
+       "unevaluatedProperties": false
+      }
+     },
+     "models": {
+      "type": "object",
+      "description": "Model key → what the route does with it.",
+      "propertyNames": {
+       "$ref": "common.schema.json#/$defs/model_key"
+      },
+      "additionalProperties": {
+       "type": "object",
+       "description": "What a route does with one model.",
+       "properties": {
+        "ids": {
+         "type": "array",
+         "description": "The route's ids for the model.",
+         "items": {
+          "type": "object",
+          "description": "A route id.",
+          "allOf": [
+           {
+            "$ref": "common.schema.json#/$defs/interval"
+           }
+          ],
+          "properties": {
+           "name": {
+            "type": "string",
+            "description": "The route's id for the model.",
+            "minLength": 1
+           }
+          },
+          "required": [
+           "name"
+          ],
+          "unevaluatedProperties": false
+         }
+        },
+        "accepts": {
+         "type": "array",
+         "description": "Configurations the route accepts, dated.",
+         "items": {
+          "type": "object",
+          "description": "An accepted configuration.",
+          "allOf": [
+           {
+            "$ref": "common.schema.json#/$defs/interval"
+           }
+          ],
+          "properties": {
+           "configuration": {
+            "$ref": "vocab.json#/$defs/configuration"
+           }
+          },
+          "required": [
+           "configuration"
+          ],
+          "unevaluatedProperties": false
+         }
+        },
+        "mapping": {
+         "type": "array",
+         "description": "Documented mapping requested → served (identity entries when documented as identity).",
+         "items": {
+          "type": "object",
+          "description": "One mapping entry.",
+          "allOf": [
+           {
+            "$ref": "common.schema.json#/$defs/interval"
+           }
+          ],
+          "properties": {
+           "requested": {
+            "type": "string",
+            "description": "Requested level / setting.",
+            "minLength": 1
+           },
+           "served": {
+            "description": "What the model receives.",
+            "anyOf": [
+             {
+              "$ref": "vocab.json#/$defs/configuration"
+             },
+             {
+              "$ref": "vocab.json#/$defs/mapping_result"
+             }
+            ]
+           }
+          },
+          "required": [
+           "requested",
+           "served"
+          ],
+          "unevaluatedProperties": false
+         }
+        },
+        "default": {
+         "type": "array",
+         "description": "The route's own documented default for the model (routers and hosts; DATA-PIPELINE §5.1 step 7).",
+         "items": {
+          "$ref": "common.schema.json#/$defs/dated_configuration"
+         }
+        },
+        "note": {
+         "type": "string",
+         "description": "Free note."
+        }
+       },
+       "required": [],
+       "unevaluatedProperties": false
+      }
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "class",
+     "label"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {
+   "type": "string",
+   "description": "Free note."
+  }
+ },
+ "required": [
+  "routes"
+ ],
+ "unevaluatedProperties": false
+}

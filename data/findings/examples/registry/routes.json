@@ -1,0 +1,189 @@
+{
+ "routes": {
+  "maker-api": {
+   "class": "maker-api",
+   "label": "The maker's own API",
+   "operator": null,
+   "spellings": [
+    "anthropic/",
+    "openai/",
+    "Anthropic API",
+    "OpenAI API"
+   ],
+   "models": {},
+   "note": "One route for every maker's own API; its defaults and conversions are the models.json ones."
+  },
+  "openrouter": {
+   "class": "router",
+   "label": "OpenRouter",
+   "operator": null,
+   "spellings": [
+    "openrouter/",
+    "served-by:openrouter",
+    "OpenRouter"
+   ],
+   "models": {
+    "qwen3.6-27b": {
+     "ids": [
+      {
+       "name": "qwen/qwen3.6-27b",
+       "from": "2026-07-21T07:00:40Z",
+       "to": "2026-09-20T10:45:00Z",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-21T07:00:40Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260721070040.json",
+         "sha256": "17a2f6840e9018746fca0891fe7912c17d06f2b1bcf84fa27df6f6fc2131b267",
+         "where": "data[id=qwen/qwen3.6-27b]"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-20T10:45:00Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260920104500.json",
+         "sha256": "8d111ff9cad03d096dc6984cb54223a82ff15a835d0b06860e833b5ada2b1e4b",
+         "where": "data[id=qwen/qwen3.6-27b]"
+        }
+       ]
+      }
+     ],
+     "accepts": [
+      {
+       "configuration": "nothink",
+       "from": "2026-07-21T07:00:40Z",
+       "to": "2026-09-20T10:45:00Z",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-21T07:00:40Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260721070040.json",
+         "sha256": "17a2f6840e9018746fca0891fe7912c17d06f2b1bcf84fa27df6f6fc2131b267",
+         "where": "data[id=qwen/qwen3.6-27b].reasoning",
+         "quote": "\"mandatory\":false"
+        }
+       ]
+      },
+      {
+       "configuration": "think",
+       "from": "2026-07-21T07:00:40Z",
+       "to": "2026-09-20T10:45:00Z",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-21T07:00:40Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260721070040.json",
+         "sha256": "17a2f6840e9018746fca0891fe7912c17d06f2b1bcf84fa27df6f6fc2131b267",
+         "where": "data[id=qwen/qwen3.6-27b].reasoning",
+         "quote": "\"mandatory\":false"
+        }
+       ]
+      }
+     ],
+     "default": [
+      {
+       "configuration": "think",
+       "from": "2026-07-21T07:00:40Z",
+       "to": "2026-09-20T10:45:00Z",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-21T07:00:40Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260721070040.json",
+         "sha256": "17a2f6840e9018746fca0891fe7912c17d06f2b1bcf84fa27df6f6fc2131b267",
+         "where": "data[id=qwen/qwen3.6-27b].reasoning",
+         "quote": "\"default_enabled\":true"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-20T10:45:00Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260920104500.json",
+         "sha256": "8d111ff9cad03d096dc6984cb54223a82ff15a835d0b06860e833b5ada2b1e4b",
+         "where": "data[id=qwen/qwen3.6-27b].reasoning",
+         "quote": "\"default_enabled\":true"
+        }
+       ]
+      }
+     ]
+    },
+    "gpt-5.5": {
+     "default": [
+      {
+       "configuration": "medium",
+       "from": "2026-07-21T07:00:40Z",
+       "to": "2026-09-20T10:45:00Z",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-21T07:00:40Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260721070040.json",
+         "sha256": "17a2f6840e9018746fca0891fe7912c17d06f2b1bcf84fa27df6f6fc2131b267",
+         "where": "data[id=openai/gpt-5.5].reasoning",
+         "quote": "\"default_effort\":\"medium\""
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-20T10:45:00Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260920104500.json",
+         "sha256": "8d111ff9cad03d096dc6984cb54223a82ff15a835d0b06860e833b5ada2b1e4b",
+         "where": "data[id=openai/gpt-5.5].reasoning",
+         "quote": "\"default_effort\":\"medium\""
+        }
+       ]
+      }
+     ],
+     "mapping": [
+      {
+       "requested": "none",
+       "served": "nothink",
+       "from": "2026-07-21T07:00:40Z",
+       "to": "2026-09-20T10:45:00Z",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-21T07:00:40Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260721070040.json",
+         "sha256": "17a2f6840e9018746fca0891fe7912c17d06f2b1bcf84fa27df6f6fc2131b267",
+         "where": "data[id=openai/gpt-5.5].reasoning.supported_efforts",
+         "quote": "\"supported_efforts\":[\"xhigh\",\"high\",\"medium\",\"low\",\"none\"]",
+         "note": "'none' listed as supported: served as itself"
+        }
+       ]
+      }
+     ]
+    },
+    "haiku-4.5": {
+     "ids": [
+      {
+       "name": "anthropic/claude-haiku-4.5",
+       "from": "2026-07-21T07:00:40Z",
+       "to": "2026-09-20T10:45:00Z",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-21T07:00:40Z",
+         "file": "/work/.salvo14/arb/apidefault/evidence/or/models_20260721070040.json",
+         "sha256": "17a2f6840e9018746fca0891fe7912c17d06f2b1bcf84fa27df6f6fc2131b267",
+         "where": "data[id=anthropic/claude-haiku-4.5]"
+        }
+       ]
+      }
+     ]
+    }
+   }
+  }
+ }
+}

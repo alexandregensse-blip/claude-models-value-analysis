@@ -1,0 +1,71 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "publishers.schema.json",
+ "title": "Publishers registry",
+ "description": "data/registry/publishers.json: publisher → its maker, or none (home effect, DATA-PIPELINE §4).",
+ "type": "object",
+ "properties": {
+  "publishers": {
+   "type": "object",
+   "description": "Publisher id → publisher.",
+   "propertyNames": {
+    "$ref": "common.schema.json#/$defs/publisher_id"
+   },
+   "additionalProperties": {
+    "type": "object",
+    "description": "One publisher.",
+    "properties": {
+     "label": {
+      "type": "string",
+      "description": "Label.",
+      "minLength": 1
+     },
+     "maker": {
+      "description": "The maker this publisher is (home effect), or null.",
+      "anyOf": [
+       {
+        "$ref": "vocab.json#/$defs/maker"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "outlets": {
+      "type": "array",
+      "description": "Today's raw-data.csv source spellings merged into this publisher (data/catalog/publishers.json).",
+      "items": {
+       "type": "string",
+       "description": "Legacy source spelling."
+      }
+     },
+     "urls": {
+      "type": "array",
+      "description": "Home pages.",
+      "items": {
+       "type": "string",
+       "description": "URL."
+      }
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "label",
+     "maker"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {
+   "type": "string",
+   "description": "Free note."
+  }
+ },
+ "required": [
+  "publishers"
+ ],
+ "unevaluatedProperties": false
+}

@@ -1,0 +1,272 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "models.schema.json",
+ "title": "Models registry",
+ "description": "data/registry/models.json: the only model keys (DATA-PIPELINE §4). Build checks (validate.py): two keys of one maker serving one API id over overlapping intervals, or with identical display names, fail; solo only alone; defaults, selects and conversions within the model's configurations.",
+ "type": "object",
+ "properties": {
+  "models": {
+   "type": "object",
+   "description": "Model key → model.",
+   "propertyNames": {
+    "$ref": "common.schema.json#/$defs/model_key"
+   },
+   "additionalProperties": {
+    "type": "object",
+    "description": "One model key.",
+    "properties": {
+     "label": {
+      "type": "string",
+      "description": "Display label (site).",
+      "minLength": 1
+     },
+     "maker": {
+      "$ref": "vocab.json#/$defs/maker"
+     },
+     "released": {
+      "type": "object",
+      "description": "Release (datetime when known), from the maker (release post, model card, API reference).",
+      "properties": {
+       "value": {
+        "$ref": "common.schema.json#/$defs/date_or_datetime"
+       },
+       "evidence": {
+        "$ref": "common.schema.json#/$defs/evidence_list"
+       }
+      },
+      "required": [
+       "value",
+       "evidence"
+      ],
+      "unevaluatedProperties": false
+     },
+     "line": {
+      "description": "The key this model is a build / mode of (lqm LINE), or null.",
+      "anyOf": [
+       {
+        "$ref": "common.schema.json#/$defs/model_key"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "open_weights": {
+      "type": "boolean",
+      "description": "Weights published."
+     },
+     "configurations": {
+      "type": "array",
+      "description": "The configurations the model offers (DATA-PIPELINE §4); [solo] only for a single-configuration model.",
+      "items": {
+       "type": "object",
+       "description": "One configuration the model offers, dated.",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "id": {
+         "$ref": "vocab.json#/$defs/configuration",
+         "description": "Configuration id."
+        },
+        "served": {
+         "type": "string",
+         "description": "itself: served as itself; converted: the maker converts it (see conversions; a converted level goes through the route chain, DATA-PIPELINE §5.1 step 6).",
+         "enum": [
+          "itself",
+          "converted"
+         ]
+        },
+        "budget_min": {
+         "type": "integer",
+         "description": "For think-<budget>: smallest accepted budget (tokens).",
+         "minimum": 1
+        },
+        "budget_max": {
+         "description": "For think-<budget>: largest accepted budget (tokens), or null when bounded only by max_tokens.",
+         "anyOf": [
+          {
+           "type": "integer",
+           "description": "Tokens.",
+           "minimum": 1
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "id",
+        "served"
+       ],
+       "unevaluatedProperties": false
+      },
+      "minItems": 1
+     },
+     "names": {
+      "type": "array",
+      "description": "Names served over time.",
+      "items": {
+       "type": "object",
+       "description": "One name of the model.",
+       "properties": {
+        "name": {
+         "type": "string",
+         "description": "The API id or display name, verbatim.",
+         "minLength": 1
+        },
+        "kind": {
+         "$ref": "vocab.json#/$defs/name_kind"
+        },
+        "serves": {
+         "type": "array",
+         "description": "When this name served this key (the maker's own dates: release, redirect, shutdown).",
+         "items": {
+          "$ref": "common.schema.json#/$defs/interval"
+         },
+         "minItems": 1
+        },
+        "selects": {
+         "description": "The configuration this name selects (deepseek-chat → nothink, a -thinking id → think), or null.",
+         "anyOf": [
+          {
+           "$ref": "vocab.json#/$defs/configuration"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "route": {
+         "description": "The route where the name applies (maker-api when null).",
+         "anyOf": [
+          {
+           "$ref": "common.schema.json#/$defs/route_id"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "name",
+        "kind",
+        "serves"
+       ],
+       "unevaluatedProperties": false
+      },
+      "minItems": 1
+     },
+     "default": {
+      "type": "array",
+      "description": "The configuration a call with no setting gets (on the maker's API), dated by its evidence.",
+      "items": {
+       "$ref": "common.schema.json#/$defs/dated_configuration"
+      }
+     },
+     "conversions": {
+      "type": "array",
+      "description": "Conversions requested → served, per route, dated.",
+      "items": {
+       "type": "object",
+       "description": "A maker conversion requested → served (dated: decision C, conversions only when dated).",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "route": {
+         "$ref": "common.schema.json#/$defs/route_id",
+         "description": "Route where the conversion happens (maker-api for the maker's own)."
+        },
+        "requested": {
+         "type": "string",
+         "description": "Requested level or setting, verbatim configuration id where it is one.",
+         "minLength": 1
+        },
+        "served": {
+         "description": "Configuration actually served.",
+         "anyOf": [
+          {
+           "$ref": "vocab.json#/$defs/configuration"
+          },
+          {
+           "$ref": "vocab.json#/$defs/mapping_result"
+          }
+         ]
+        }
+       },
+       "required": [
+        "route",
+        "requested",
+        "served"
+       ],
+       "unevaluatedProperties": false
+      }
+     },
+     "modes": {
+      "type": "array",
+      "description": "Modes selecting another key, dated.",
+      "items": {
+       "type": "object",
+       "description": "A mode selecting another key.",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "parameter": {
+         "type": "string",
+         "description": "Request parameter or product switch (verbatim).",
+         "minLength": 1
+        },
+        "value": {
+         "type": "string",
+         "description": "Its value."
+        },
+        "key": {
+         "$ref": "common.schema.json#/$defs/model_key",
+         "description": "The key it selects (e.g. <id>-pro)."
+        }
+       },
+       "required": [
+        "parameter",
+        "key"
+       ],
+       "unevaluatedProperties": false
+      }
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "label",
+     "maker",
+     "released",
+     "line",
+     "open_weights",
+     "configurations",
+     "names",
+     "default"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {
+   "type": "string",
+   "description": "Free note."
+  }
+ },
+ "required": [
+  "models"
+ ],
+ "unevaluatedProperties": false
+}

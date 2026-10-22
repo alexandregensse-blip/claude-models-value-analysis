@@ -1,0 +1,74 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "decisions.schema.json",
+ "title": "Maintainer decisions",
+ "description": "data/decisions.json: the maintainer's per-measure decisions, evaluated first; a decision whose facts hash no longer matches is reported, not applied (DATA-PIPELINE §4, §5.2.0). facts_hash = SHA-256 of the canonical JSON (sorted keys, no spaces) of the list, in `measures` order, of [measure, [the facts and cells it cites]] (validate.py --hash).",
+ "type": "object",
+ "properties": {
+  "decisions": {
+   "type": "array",
+   "description": "The decisions.",
+   "items": {
+    "type": "object",
+    "description": "One decision.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Decision id.",
+      "pattern": "^D[0-9]+$"
+     },
+     "measures": {
+      "type": "array",
+      "description": "Measures judged.",
+      "items": {
+       "$ref": "common.schema.json#/$defs/measure_ref"
+      },
+      "minItems": 1
+     },
+     "facts_hash": {
+      "$ref": "common.schema.json#/$defs/sha256",
+      "description": "Hash of the facts judged."
+     },
+     "axis": {
+      "description": "Axis it applies to.",
+      "enum": [
+       "quality",
+       "cost",
+       "both"
+      ]
+     },
+     "status": {
+      "$ref": "vocab.json#/$defs/status"
+     },
+     "reason": {
+      "type": "string",
+      "description": "Why, in one sentence.",
+      "minLength": 1
+     },
+     "date": {
+      "$ref": "common.schema.json#/$defs/date"
+     },
+     "decided_by": {
+      "type": "string",
+      "description": "Who.",
+      "minLength": 1
+     }
+    },
+    "required": [
+     "id",
+     "measures",
+     "facts_hash",
+     "axis",
+     "status",
+     "reason",
+     "date"
+    ],
+    "unevaluatedProperties": false
+   }
+  }
+ },
+ "required": [
+  "decisions"
+ ],
+ "unevaluatedProperties": false
+}

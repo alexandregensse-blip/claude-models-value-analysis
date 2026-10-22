@@ -1,0 +1,117 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "prices.schema.json",
+ "title": "Prices registry",
+ "description": "data/registry/prices.json: dated prices per model and route (DATA-PIPELINE §4). Base route = the maker's API; base price = the standard list price in force on as_of (retired model: its last list price; never applied: the price charged).",
+ "type": "object",
+ "properties": {
+  "as_of": {
+   "$ref": "common.schema.json#/$defs/date",
+   "description": "The pinned date of the build's base prices."
+  },
+  "prices": {
+   "type": "array",
+   "description": "Price entries.",
+   "items": {
+    "type": "object",
+    "description": "One price entry, dated.",
+    "allOf": [
+     {
+      "$ref": "common.schema.json#/$defs/interval"
+     }
+    ],
+    "properties": {
+     "model": {
+      "$ref": "common.schema.json#/$defs/model_key"
+     },
+     "route": {
+      "$ref": "common.schema.json#/$defs/route_id"
+     },
+     "kind": {
+      "$ref": "vocab.json#/$defs/price_kind"
+     },
+     "currency": {
+      "$ref": "vocab.json#/$defs/currency"
+     },
+     "per": {
+      "type": "string",
+      "description": "Quantity a price is for.",
+      "enum": [
+       "MTok"
+      ]
+     },
+     "classes": {
+      "type": "object",
+      "description": "Price per class, in currency per `per` (null = not offered / not stated).",
+      "propertyNames": {
+       "$ref": "vocab.json#/$defs/price_class"
+      },
+      "additionalProperties": {
+       "type": [
+        "number",
+        "null"
+       ],
+       "minimum": 0
+      }
+     },
+     "factor": {
+      "type": "number",
+      "description": "For batch / flex / promotion entries: the multiplier of the standard price, when given that way.",
+      "minimum": 0
+     },
+     "long_context": {
+      "type": "array",
+      "description": "Long-context tiers.",
+      "items": {
+       "type": "object",
+       "description": "A long-context tier.",
+       "properties": {
+        "threshold_input_tokens": {
+         "type": "integer",
+         "description": "Per-request input tokens above which the tier applies.",
+         "minimum": 1
+        },
+        "classes": {
+         "type": "object",
+         "description": "Price per class, in currency per `per` (null = not offered / not stated).",
+         "propertyNames": {
+          "$ref": "vocab.json#/$defs/price_class"
+         },
+         "additionalProperties": {
+          "type": [
+           "number",
+           "null"
+          ],
+          "minimum": 0
+         }
+        }
+       },
+       "required": [
+        "threshold_input_tokens",
+        "classes"
+       ],
+       "unevaluatedProperties": false
+      }
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "model",
+     "route",
+     "kind",
+     "currency",
+     "per"
+    ],
+    "unevaluatedProperties": false
+   }
+  }
+ },
+ "required": [
+  "as_of",
+  "prices"
+ ],
+ "unevaluatedProperties": false
+}

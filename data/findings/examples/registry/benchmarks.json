@@ -1,0 +1,111 @@
+{
+ "families": {
+  "obviousbench": {
+   "label": "ObviousBench"
+  },
+  "hotkv-banking77": {
+   "label": "HotKV Banking77 semantic cache"
+  },
+  "Chartography": {
+   "label": "Chartography (Surge AI)"
+  }
+ },
+ "setups": {
+  "obvbench": {
+   "family": "obviousbench",
+   "label": "ObviousBench 0.2",
+   "benchmark": "ObviousBench",
+   "subset": "private held-out pass^3 snapshot (144 items)",
+   "harness": "inspect-ai",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "answer_pass3%",
+   "headline": {
+    "metric": "non-strict answer pass^3",
+    "basis": "designated",
+    "evidence": [
+     {
+      "where": "docs/reference/methodology.md lines 50-51",
+      "source": "src-github-obviousbench-v0.2-aggregate-2026-10-10",
+      "fact": "F1"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "obvbench"
+   ],
+   "note": "the data file gives a fraction (0.958333); the metric is a percentage (see the schema README, open items)"
+  },
+  "hotkv-banking77-fresh": {
+   "family": "hotkv-banking77",
+   "label": "HotKV Banking77, fresh answers judged",
+   "benchmark": "HotKV Banking77 semantic-cache test",
+   "subset": "semantic hits at threshold 0.81",
+   "harness": "direct-api-baseline",
+   "tools_regime": null,
+   "judge_panel": "Opus 5.5 judges Fable 5.1, Sonnet 5.5, Haiku 5.5; Fable 5.1 judges Opus 5.5",
+   "metric": "fresh answer fits % (judged, semantic-hit subset)",
+   "headline": {
+    "metric": "fresh answer fits % (judged, semantic-hit subset)",
+    "basis": "decision",
+    "decision": null
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "hotkv-banking77-fresh"
+   ],
+   "note": "the post designates no headline among its quality columns and ranks by none: pending a decision"
+  },
+  "chartogt": {
+   "family": "Chartography",
+   "label": "Chartography +tools",
+   "benchmark": "Chartography",
+   "subset": null,
+   "harness": "Chartography-tools",
+   "tools_regime": "with tools (container + image cropping tool)",
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "where": "p186 y-axis title",
+      "source": "src-anthropic-fable-5-1-system-card-2026-09-01",
+      "fact": "F11",
+      "note": "the card reports one metric, accuracy"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "chartogt"
+   ]
+  }
+ }
+}

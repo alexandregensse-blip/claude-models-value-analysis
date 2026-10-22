@@ -1,0 +1,539 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "source.schema.json",
+ "title": "Source snapshot",
+ "description": "One source snapshot (data/findings/sources/<id>.json): its words, as facts with proofs (DATA-PIPELINE §2). Written by salvo agents; facts only, no key, effort, campaign or status.",
+ "type": "object",
+ "properties": {
+  "id": {
+   "$ref": "common.schema.json#/$defs/source_id"
+  },
+  "publisher": {
+   "$ref": "common.schema.json#/$defs/publisher_id",
+   "description": "publishers.json id."
+  },
+  "urls": {
+   "type": "array",
+   "description": "Live URLs of the source.",
+   "items": {
+    "type": "string",
+    "description": "URL."
+   },
+   "minItems": 1
+  },
+  "wayback": {
+   "type": "array",
+   "description": "Wayback captures (their timestamps date the captures).",
+   "items": {
+    "type": "string",
+    "description": "Wayback capture URL."
+   }
+  },
+  "commit": {
+   "description": "Repository commit of the snapshot, or null.",
+   "anyOf": [
+    {
+     "type": "string",
+     "description": "Hex commit id.",
+     "pattern": "^[0-9a-f]{7,40}$"
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "sha256": {
+   "type": "object",
+   "description": "Saved file → its SHA-256 (the saved copies stay outside git).",
+   "additionalProperties": {
+    "$ref": "common.schema.json#/$defs/sha256"
+   }
+  },
+  "harvested_at": {
+   "$ref": "common.schema.json#/$defs/datetime",
+   "description": "When the agent harvested it (UTC)."
+  },
+  "published": {
+   "description": "Publication date of the source, or null if not stated.",
+   "anyOf": [
+    {
+     "type": "object",
+     "description": "The source's publication date (default run upper bound, DATA-PIPELINE §5.1).",
+     "properties": {
+      "value": {
+       "$ref": "common.schema.json#/$defs/date_or_datetime"
+      },
+      "where": {
+       "type": "string",
+       "description": "Locator of the date.",
+       "minLength": 1
+      },
+      "quote": {
+       "type": "string",
+       "description": "Exact text of the date."
+      },
+      "file": {
+       "type": "string",
+       "description": "Saved copy."
+      }
+     },
+     "required": [
+      "value",
+      "where"
+     ],
+     "unevaluatedProperties": false
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "salvo": {
+   "type": "string",
+   "description": "Salvo name.",
+   "minLength": 1
+  },
+  "agent": {
+   "type": "string",
+   "description": "Agent (or person) who wrote the file.",
+   "minLength": 1
+  },
+  "snapshot_of": {
+   "description": "Earlier source id of the same board, or null.",
+   "anyOf": [
+    {
+     "$ref": "common.schema.json#/$defs/source_id"
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "facts": {
+   "type": "array",
+   "description": "The facts.",
+   "items": {
+    "type": "object",
+    "description": "One fact: what the source says, with its proof.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Fact id, unique in the source (F1, F2...).",
+      "pattern": "^F[0-9]+$"
+     },
+     "says": {
+      "$ref": "vocab.json#/$defs/fact_type",
+      "description": "Fact type (vocab fact_type)."
+     },
+     "about": {
+      "description": "The source's entry name, verbatim (row label, model string as printed); null for a source-wide fact.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "value": {
+      "type": "string",
+      "description": "The value, verbatim as the source writes it (numbers as printed, with their % or $).",
+      "minLength": 1
+     },
+     "term": {
+      "type": "string",
+      "description": "For fact types with a closed vocabulary (vocab closed_term_fact_types: unit, currency, cost-basis, cost-method): the vocabulary term this verbatim value stands for; for a route: the routes.json id when registered. Re-derived by the verifier."
+     },
+     "level": {
+      "$ref": "vocab.json#/$defs/level",
+      "description": "Certainty of the fact as written by the agent (DATA-PIPELINE §1)."
+     },
+     "form": {
+      "$ref": "vocab.json#/$defs/fact_form",
+      "description": "Where the fact sits; prose, table-cell, label, code and image-text need a quote."
+     },
+     "file": {
+      "type": "string",
+      "description": "The saved copy holding it: a key of the source's sha256 map (required when the source has several saved files)."
+     },
+     "where": {
+      "type": "string",
+      "description": "Locator in that file: page, line, JSON path, CSV row/column, chart marker px.",
+      "minLength": 1
+     },
+     "table": {
+      "type": "string",
+      "description": "For a data-file fact standing for a table cell: the table id.",
+      "pattern": "^T[0-9]+$"
+     },
+     "chart": {
+      "type": "string",
+      "description": "For a chart fact: the chart id.",
+      "pattern": "^C[0-9]+$"
+     },
+     "quote": {
+      "type": "string",
+      "description": "Exact text; required for prose, table cells, labels, code and image text, and it must contain the value.",
+      "minLength": 1
+     },
+     "translation": {
+      "type": "string",
+      "description": "English translation of the quote, if needed."
+     },
+     "precision": {
+      "type": "object",
+      "description": "Precision model of the value (an attribute, never a level).",
+      "properties": {
+       "model": {
+        "$ref": "vocab.json#/$defs/precision_model"
+       },
+       "step": {
+        "type": "number",
+        "description": "Printed: one unit of the last digit, in the value's unit.",
+        "minimum": 0
+       },
+       "sd": {
+        "type": "number",
+        "description": "Chart-pixel: reading sd in the value's unit (or computed from reading_px and the chart calibration).",
+        "minimum": 0
+       },
+       "reading_px": {
+        "type": "number",
+        "description": "Chart-pixel: reading error in pixels.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "model"
+      ],
+      "unevaluatedProperties": false
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note for the verifier; never read by the tree."
+     }
+    },
+    "required": [
+     "id",
+     "says",
+     "about",
+     "value",
+     "level",
+     "form",
+     "where"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "tables": {
+   "type": "array",
+   "description": "Data-file tables standing for their cells.",
+   "items": {
+    "type": "object",
+    "description": "A data-file table standing for its cells (DATA-PIPELINE §2): proven by the file's sha256 and this locator.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Table id (T1...). Its cells are cited as T<n>/<row key>/<column>.",
+      "pattern": "^T[0-9]+$"
+     },
+     "file": {
+      "type": "string",
+      "description": "The saved data file (a key of the sha256 map)."
+     },
+     "where": {
+      "type": "string",
+      "description": "Where the table is in the file (JSON path, CSV, sheet).",
+      "minLength": 1
+     },
+     "format": {
+      "type": "string",
+      "description": "csv | json | yaml | html | other.",
+      "enum": [
+       "csv",
+       "json",
+       "yaml",
+       "html",
+       "other"
+      ]
+     },
+     "row_key": {
+      "type": "string",
+      "description": "The column whose value names a row (the `about` of its cells).",
+      "minLength": 1
+     },
+     "columns": {
+      "type": "object",
+      "description": "Column name → the fact type of its cells (only the columns used need be listed).",
+      "additionalProperties": {
+       "description": "A table column: the fact type its cells state (string), or an object with the type and, for closed-vocabulary types, the term all its cells stand for.",
+       "anyOf": [
+        {
+         "$ref": "vocab.json#/$defs/fact_type"
+        },
+        {
+         "type": "object",
+         "description": "A typed column.",
+         "properties": {
+          "says": {
+           "$ref": "vocab.json#/$defs/fact_type"
+          },
+          "term": {
+           "type": "string",
+           "description": "Vocabulary term of the column's cells."
+          },
+          "note": {
+           "type": "string",
+           "description": "Free note."
+          }
+         },
+         "required": [
+          "says"
+         ],
+         "unevaluatedProperties": false
+        }
+       ]
+      }
+     },
+     "level": {
+      "$ref": "vocab.json#/$defs/level",
+      "description": "Level of its cells (default written)."
+     },
+     "precision": {
+      "type": "object",
+      "description": "Precision model of the value (an attribute, never a level).",
+      "properties": {
+       "model": {
+        "$ref": "vocab.json#/$defs/precision_model"
+       },
+       "step": {
+        "type": "number",
+        "description": "Printed: one unit of the last digit, in the value's unit.",
+        "minimum": 0
+       },
+       "sd": {
+        "type": "number",
+        "description": "Chart-pixel: reading sd in the value's unit (or computed from reading_px and the chart calibration).",
+        "minimum": 0
+       },
+       "reading_px": {
+        "type": "number",
+        "description": "Chart-pixel: reading error in pixels.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "model"
+      ],
+      "unevaluatedProperties": false
+     }
+    },
+    "required": [
+     "id",
+     "file",
+     "where",
+     "row_key",
+     "columns"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "charts": {
+   "type": "array",
+   "description": "Digitised charts.",
+   "items": {
+    "type": "object",
+    "description": "A digitised chart: the calibration its read facts depend on.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Chart id (C1...).",
+      "pattern": "^C[0-9]+$"
+     },
+     "file": {
+      "type": "string",
+      "description": "The saved document or image (a key of the sha256 map)."
+     },
+     "page": {
+      "type": "integer",
+      "description": "Page in the document.",
+      "minimum": 1
+     },
+     "image": {
+      "type": "string",
+      "description": "Extracted image (path), if any."
+     },
+     "where": {
+      "type": "string",
+      "description": "Figure locator (number, caption).",
+      "minLength": 1
+     },
+     "kind": {
+      "type": "string",
+      "description": "raster (pixels: points are read) | vector (paths: points are written, exact).",
+      "enum": [
+       "raster",
+       "vector"
+      ]
+     },
+     "x": {
+      "type": "object",
+      "description": "One calibrated axis.",
+      "properties": {
+       "quantity": {
+        "type": "string",
+        "description": "What the axis carries (score, cost...)."
+       },
+       "scale": {
+        "type": "string",
+        "description": "linear | log.",
+        "enum": [
+         "linear",
+         "log"
+        ]
+       },
+       "ticks": {
+        "type": "array",
+        "description": "Ticks used for the calibration.",
+        "items": {
+         "type": "object",
+         "description": "One axis tick.",
+         "properties": {
+          "px": {
+           "type": "number",
+           "description": "Pixel coordinate."
+          },
+          "value": {
+           "type": "number",
+           "description": "Axis value."
+          },
+          "label": {
+           "type": "string",
+           "description": "Tick label as printed."
+          }
+         },
+         "required": [
+          "px",
+          "value"
+         ],
+         "unevaluatedProperties": false
+        },
+        "minItems": 2
+       },
+       "units_per_px": {
+        "type": "number",
+        "description": "Fitted units (or log10 decades) per pixel."
+       },
+       "fit_residual_px": {
+        "type": "number",
+        "description": "Residual of the tick fit, px.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "scale",
+       "ticks"
+      ],
+      "unevaluatedProperties": false
+     },
+     "y": {
+      "type": "object",
+      "description": "One calibrated axis.",
+      "properties": {
+       "quantity": {
+        "type": "string",
+        "description": "What the axis carries (score, cost...)."
+       },
+       "scale": {
+        "type": "string",
+        "description": "linear | log.",
+        "enum": [
+         "linear",
+         "log"
+        ]
+       },
+       "ticks": {
+        "type": "array",
+        "description": "Ticks used for the calibration.",
+        "items": {
+         "type": "object",
+         "description": "One axis tick.",
+         "properties": {
+          "px": {
+           "type": "number",
+           "description": "Pixel coordinate."
+          },
+          "value": {
+           "type": "number",
+           "description": "Axis value."
+          },
+          "label": {
+           "type": "string",
+           "description": "Tick label as printed."
+          }
+         },
+         "required": [
+          "px",
+          "value"
+         ],
+         "unevaluatedProperties": false
+        },
+        "minItems": 2
+       },
+       "units_per_px": {
+        "type": "number",
+        "description": "Fitted units (or log10 decades) per pixel."
+       },
+       "fit_residual_px": {
+        "type": "number",
+        "description": "Residual of the tick fit, px.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "scale",
+       "ticks"
+      ],
+      "unevaluatedProperties": false
+     },
+     "marker_px": {
+      "type": "number",
+      "description": "Marker diameter, px.",
+      "minimum": 0
+     },
+     "reading_px": {
+      "type": "number",
+      "description": "Reading error of a point, px (from an independent re-reading).",
+      "minimum": 0
+     },
+     "checks": {
+      "type": "string",
+      "description": "How the reading was checked (re-reading, printed cross-checks)."
+     },
+     "digitised_by": {
+      "type": "string",
+      "description": "Tool / agent that read it."
+     }
+    },
+    "required": [
+     "id",
+     "file",
+     "where",
+     "kind",
+     "x",
+     "y"
+    ],
+    "unevaluatedProperties": false
+   }
+  }
+ },
+ "required": [
+  "id",
+  "publisher",
+  "urls",
+  "sha256",
+  "harvested_at",
+  "salvo",
+  "agent",
+  "snapshot_of",
+  "facts"
+ ],
+ "unevaluatedProperties": false
+}

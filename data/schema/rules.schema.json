@@ -1,0 +1,74 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "rules.schema.json",
+ "title": "Rules registry",
+ "description": "data/registry/rules.json: deduction rules and standing rules, each dated, with who decided (DATA-PIPELINE §4).",
+ "type": "object",
+ "properties": {
+  "rules": {
+   "type": "array",
+   "description": "The rules.",
+   "items": {
+    "type": "object",
+    "description": "One rule.",
+    "properties": {
+     "id": {
+      "$ref": "vocab.json#/$defs/rule_id"
+     },
+     "kind": {
+      "$ref": "vocab.json#/$defs/rule_kind"
+     },
+     "statement": {
+      "type": "string",
+      "description": "The rule in one or two sentences.",
+      "minLength": 1
+     },
+     "inputs": {
+      "type": "array",
+      "description": "Inputs.",
+      "items": {
+       "type": "string",
+       "description": "Fact type or registry field."
+      }
+     },
+     "output": {
+      "type": "string",
+      "description": "What it produces (a field and its level)."
+     },
+     "conditions": {
+      "type": "string",
+      "description": "When it applies."
+     },
+     "precision": {
+      "type": "string",
+      "description": "Precision formula of the output."
+     },
+     "date": {
+      "$ref": "common.schema.json#/$defs/date"
+     },
+     "decided_by": {
+      "type": "string",
+      "description": "Who decided (the maintainer, a review).",
+      "minLength": 1
+     },
+     "ref": {
+      "type": "string",
+      "description": "Where it is written (document §, PASSES entry)."
+     }
+    },
+    "required": [
+     "id",
+     "kind",
+     "statement",
+     "date",
+     "decided_by"
+    ],
+    "unevaluatedProperties": false
+   }
+  }
+ },
+ "required": [
+  "rules"
+ ],
+ "unevaluatedProperties": false
+}

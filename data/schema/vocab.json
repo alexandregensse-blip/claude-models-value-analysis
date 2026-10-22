@@ -1,0 +1,2136 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "vocab.json",
+ "title": "Closed vocabularies",
+ "description": "Closed vocabularies of the data pipeline (docs/DATA-PIPELINE.md). Each entry of $defs is a JSON Schema (enum, or anyOf of an enum and patterns) referenced as vocab.json#/$defs/<name>; x-terms carries one record per term (x-* keys are ignored by JSON Schema validators). First filled 22 Oct 2026 from /work/.wt-px/raw-data.csv (42,298 rows), data/catalog/unit_aliases.json and model/lqm.py.",
+ "$defs": {
+  "fact_type": {
+   "description": "Fact types (DATA-PIPELINE §2). x-terms: description and the measure slots a fact of this type may fill.",
+   "enum": [
+    "score",
+    "metric-definition",
+    "headline-metric",
+    "cost",
+    "currency",
+    "unit",
+    "cost-basis",
+    "cost-method",
+    "price-table",
+    "tokens-in",
+    "tokens-out",
+    "tokens-cache-read",
+    "tokens-cache-write-5m",
+    "tokens-cache-write-1h",
+    "tokens-reasoning",
+    "reasoning-included-in-out",
+    "cached-share",
+    "requests",
+    "model-name",
+    "model-api-id",
+    "route",
+    "mode",
+    "effort-label",
+    "effort-setting",
+    "thinking-on",
+    "thinking-off",
+    "no-effort-sent",
+    "config-history",
+    "thinking-budget",
+    "tools-regime",
+    "run-date",
+    "run-start",
+    "run-end",
+    "run-id",
+    "version",
+    "early-access",
+    "harness",
+    "judge",
+    "aggregation",
+    "failure",
+    "partial",
+    "cap",
+    "restated-from",
+    "same-runs-as",
+    "evaluated-by",
+    "component-of",
+    "items",
+    "attempts",
+    "note"
+   ],
+   "x-terms": {
+    "score": {
+     "description": "A score the source gives for one entry (a cell, a printed number, a chart point).",
+     "slots": [
+      "value"
+     ]
+    },
+    "metric-definition": {
+     "description": "What a metric measures, as the source defines it (formula, scale, bounds).",
+     "slots": [
+      "setup"
+     ]
+    },
+    "headline-metric": {
+     "description": "The source's designated headline metric (or the metric it ranks by).",
+     "slots": [
+      "setup"
+     ]
+    },
+    "cost": {
+     "description": "A money amount the source gives for one run or entry (spend or estimate).",
+     "slots": [
+      "value",
+      "spend"
+     ]
+    },
+    "currency": {
+     "description": "The currency of a cost; `term` = a currency of this vocabulary.",
+     "slots": [
+      "spend"
+     ]
+    },
+    "unit": {
+     "description": "What one cost or usage figure covers (per task, per suite...); `term` = a unit of this vocabulary (usage and spend share it).",
+     "slots": [
+      "spend",
+      "usage"
+     ]
+    },
+    "cost-basis": {
+     "description": "How the cost was obtained, in the source's words; `term` = a cost basis of this vocabulary.",
+     "slots": [
+      "spend"
+     ]
+    },
+    "cost-method": {
+     "description": "How the cost was computed, in the source's words; `term` = a cost method of this vocabulary.",
+     "slots": [
+      "spend"
+     ]
+    },
+    "price-table": {
+     "description": "The prices the source applied (per class, with their date when stated).",
+     "slots": [
+      "spend"
+     ]
+    },
+    "tokens-in": {
+     "description": "Input tokens (uncached input when the source separates cache).",
+     "slots": [
+      "usage"
+     ]
+    },
+    "tokens-out": {
+     "description": "Output tokens.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "tokens-cache-read": {
+     "description": "Cache-read input tokens.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "tokens-cache-write-5m": {
+     "description": "Cache-write tokens, 5-minute lifetime.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "tokens-cache-write-1h": {
+     "description": "Cache-write tokens, 1-hour lifetime.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "tokens-reasoning": {
+     "description": "Reasoning (thinking) tokens.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "reasoning-included-in-out": {
+     "description": "The source states whether reasoning tokens are counted inside output tokens.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "cached-share": {
+     "description": "Share of input served from cache, as the source states it.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "requests": {
+     "description": "Number of requests or calls of the run.",
+     "slots": [
+      "usage"
+     ]
+    },
+    "model-name": {
+     "description": "A model's display name as the source writes it.",
+     "slots": [
+      "model"
+     ]
+    },
+    "model-api-id": {
+     "description": "A model's API id / slug as the source writes it.",
+     "slots": [
+      "model"
+     ]
+    },
+    "route": {
+     "description": "Through what the model was called (maker API, reseller, host, router, self-hosting); `term` = a routes.json id when the route is registered.",
+     "slots": [
+      "route"
+     ]
+    },
+    "mode": {
+     "description": "A request parameter or product mode that selects another key (Pro, Deep Think...).",
+     "slots": [
+      "model",
+      "mode"
+     ]
+    },
+    "effort-label": {
+     "description": "A label the source gives to a configuration (\"high\", \"lowest effort setting\", \"標準\").",
+     "slots": [
+      "effort"
+     ]
+    },
+    "effort-setting": {
+     "description": "A setting line read in code or config (the source's own call, a harness or router config), with where it was read.",
+     "slots": [
+      "effort"
+     ]
+    },
+    "thinking-on": {
+     "description": "Thinking enabled with no level (a `-thinking` id, AA \"(Reasoning)\", enable_thinking: true).",
+     "slots": [
+      "effort"
+     ]
+    },
+    "thinking-off": {
+     "description": "Thinking disabled (a spelling of `nothink_spelling`).",
+     "slots": [
+      "effort"
+     ]
+    },
+    "no-effort-sent": {
+     "description": "The source states that no effort / thinking parameter was sent.",
+     "slots": [
+      "effort"
+     ]
+    },
+    "config-history": {
+     "description": "A config file's history over an interval (commits showing the same setting).",
+     "slots": [
+      "effort"
+     ]
+    },
+    "thinking-budget": {
+     "description": "A thinking token budget (exact count as written).",
+     "slots": [
+      "effort"
+     ]
+    },
+    "tools-regime": {
+     "description": "Which tools the model had (with tools, without tools, code execution...).",
+     "slots": [
+      "setup"
+     ]
+    },
+    "run-date": {
+     "description": "The day (or datetime) the run took place; a per-run timestamp counts as one.",
+     "slots": [
+      "run_date"
+     ]
+    },
+    "run-start": {
+     "description": "Start of the run interval.",
+     "slots": [
+      "run_date"
+     ]
+    },
+    "run-end": {
+     "description": "End of the run interval.",
+     "slots": [
+      "run_date"
+     ]
+    },
+    "run-id": {
+     "description": "The source's id of a run.",
+     "slots": [
+      "aggregation",
+      "other"
+     ]
+    },
+    "version": {
+     "description": "Benchmark, protocol or board version (the campaign).",
+     "slots": [
+      "version"
+     ]
+    },
+    "early-access": {
+     "description": "The run used a pre-release / early-access model.",
+     "slots": [
+      "early_access"
+     ]
+    },
+    "harness": {
+     "description": "The agent, CLI or evaluation framework that ran the model.",
+     "slots": [
+      "harness",
+      "setup",
+      "route"
+     ]
+    },
+    "judge": {
+     "description": "The judge (model or panel) that graded this entry, per row when it varies.",
+     "slots": [
+      "judge"
+     ]
+    },
+    "aggregation": {
+     "description": "Which runs a mean covers (number of runs, epochs, which were excluded).",
+     "slots": [
+      "aggregation"
+     ]
+    },
+    "failure": {
+     "description": "Anomaly: the run did not complete or hit an infrastructure error.",
+     "slots": [
+      "anomalies"
+     ]
+    },
+    "partial": {
+     "description": "Anomaly: items missing / not scored.",
+     "slots": [
+      "anomalies"
+     ]
+    },
+    "cap": {
+     "description": "Anomaly: a declared cap (tokens, turns, dollars), scored.",
+     "slots": [
+      "anomalies"
+     ]
+    },
+    "restated-from": {
+     "description": "The number is copied from another publication (named).",
+     "slots": [
+      "restated_from"
+     ]
+    },
+    "same-runs-as": {
+     "description": "The source states these are the same runs as another document's.",
+     "slots": [
+      "same_runs_as"
+     ]
+    },
+    "evaluated-by": {
+     "description": "Who ran the evaluation, when it is not the publisher.",
+     "slots": [
+      "evaluated_by"
+     ]
+    },
+    "component-of": {
+     "description": "This setup is a component of a composite (with its weight).",
+     "slots": [
+      "component_of"
+     ]
+    },
+    "items": {
+     "description": "Optional, never read by the tree: number of items.",
+     "slots": [
+      "other"
+     ]
+    },
+    "attempts": {
+     "description": "Optional, never read by the tree: attempts per item.",
+     "slots": [
+      "other"
+     ]
+    },
+    "note": {
+     "description": "Optional, never read by the tree: anything else worth keeping.",
+     "slots": [
+      "other"
+     ]
+    }
+   }
+  },
+  "closed_term_fact_types": {
+   "description": "Fact types whose `term` is required and checked against a vocabulary (fact type → vocabulary).",
+   "enum": [
+    "unit",
+    "currency",
+    "cost-basis",
+    "cost-method"
+   ],
+   "x-terms": {
+    "unit": {
+     "vocab": "unit"
+    },
+    "currency": {
+     "vocab": "currency"
+    },
+    "cost-basis": {
+     "vocab": "cost_basis"
+    },
+    "cost-method": {
+     "vocab": "cost_method"
+    }
+   }
+  },
+  "measure_slot": {
+   "description": "Slots of a measure's `facts` (DATA-PIPELINE §3, plus the slots the tree reads that §3's example omits). x-terms: allowed fact types (null = any) and whether the slot takes a list.",
+   "enum": [
+    "value",
+    "model",
+    "effort",
+    "run_date",
+    "usage",
+    "spend",
+    "version",
+    "judge",
+    "anomalies",
+    "restated_from",
+    "same_runs_as",
+    "route",
+    "harness",
+    "mode",
+    "early_access",
+    "aggregation",
+    "setup",
+    "evaluated_by",
+    "component_of",
+    "other"
+   ],
+   "x-terms": {
+    "value": {
+     "description": "The measured value (a score, or for a cost-only measure a cost).",
+     "fact_types": [
+      "score",
+      "cost"
+     ],
+     "list": false
+    },
+    "model": {
+     "description": "Facts naming the model (names, API ids, mode).",
+     "fact_types": [
+      "model-name",
+      "model-api-id",
+      "mode"
+     ],
+     "list": true
+    },
+    "effort": {
+     "description": "Facts about the configuration.",
+     "fact_types": [
+      "effort-label",
+      "effort-setting",
+      "thinking-on",
+      "thinking-off",
+      "no-effort-sent",
+      "config-history",
+      "thinking-budget"
+     ],
+     "list": true
+    },
+    "run_date": {
+     "description": "Run date or interval.",
+     "fact_types": [
+      "run-date",
+      "run-start",
+      "run-end"
+     ],
+     "list": true
+    },
+    "usage": {
+     "description": "Token / request usage of the run.",
+     "fact_types": [
+      "tokens-in",
+      "tokens-out",
+      "tokens-cache-read",
+      "tokens-cache-write-5m",
+      "tokens-cache-write-1h",
+      "tokens-reasoning",
+      "reasoning-included-in-out",
+      "cached-share",
+      "requests",
+      "unit"
+     ],
+     "list": true
+    },
+    "spend": {
+     "description": "The run's cost with its currency, unit, basis, method and price table.",
+     "fact_types": [
+      "cost",
+      "currency",
+      "unit",
+      "cost-basis",
+      "cost-method",
+      "price-table"
+     ],
+     "list": true
+    },
+    "version": {
+     "description": "The version fact (campaign).",
+     "fact_types": [
+      "version"
+     ],
+     "list": false
+    },
+    "judge": {
+     "description": "The judge of this entry.",
+     "fact_types": [
+      "judge"
+     ],
+     "list": false
+    },
+    "anomalies": {
+     "description": "Anomaly facts.",
+     "fact_types": [
+      "failure",
+      "partial",
+      "cap"
+     ],
+     "list": true
+    },
+    "restated_from": {
+     "description": "Restatement.",
+     "fact_types": [
+      "restated-from"
+     ],
+     "list": false
+    },
+    "same_runs_as": {
+     "description": "Same runs as another document.",
+     "fact_types": [
+      "same-runs-as"
+     ],
+     "list": false
+    },
+    "route": {
+     "description": "Route chain facts (route, harness when it routes).",
+     "fact_types": [
+      "route",
+      "harness"
+     ],
+     "list": true
+    },
+    "harness": {
+     "description": "Harness facts.",
+     "fact_types": [
+      "harness"
+     ],
+     "list": true
+    },
+    "mode": {
+     "description": "Mode facts.",
+     "fact_types": [
+      "mode"
+     ],
+     "list": true
+    },
+    "early_access": {
+     "description": "Early-access facts.",
+     "fact_types": [
+      "early-access"
+     ],
+     "list": true
+    },
+    "aggregation": {
+     "description": "Which runs the value covers.",
+     "fact_types": [
+      "aggregation",
+      "run-id"
+     ],
+     "list": true
+    },
+    "setup": {
+     "description": "Facts proving the setup fields (harness, tools regime, metric, headline).",
+     "fact_types": [
+      "harness",
+      "tools-regime",
+      "metric-definition",
+      "headline-metric",
+      "judge",
+      "version"
+     ],
+     "list": true
+    },
+    "evaluated_by": {
+     "description": "Who ran it.",
+     "fact_types": [
+      "evaluated-by"
+     ],
+     "list": true
+    },
+    "component_of": {
+     "description": "Composite membership.",
+     "fact_types": [
+      "component-of"
+     ],
+     "list": true
+    },
+    "other": {
+     "description": "Facts kept for the verifier, never read by the tree.",
+     "fact_types": null,
+     "list": true
+    }
+   }
+  },
+  "level": {
+   "description": "Certainty level of a source fact as the agent writes it (DATA-PIPELINE §1-2). `computed` is the build's own and never written by an agent.",
+   "enum": [
+    "written",
+    "read",
+    "source-estimate",
+    "not-established:absent",
+    "not-established:assumed",
+    "not-established:contradictory",
+    "not-established:ambiguous"
+   ],
+   "x-terms": {
+    "written": {
+     "description": "The source states it: printed number, data-file value, code/config line, API id, label."
+    },
+    "read": {
+     "description": "Measured off a chart's geometry (pixels); needs a chart-pixel precision."
+    },
+    "source-estimate": {
+     "description": "A value the source did not measure on this run (imputed, projected, filled, \"estimated\")."
+    },
+    "not-established:absent": {
+     "description": "The source does not state it."
+    },
+    "not-established:assumed": {
+     "description": "Assumed, not stated."
+    },
+    "not-established:contradictory": {
+     "description": "The source, or two facts, state two things."
+    },
+    "not-established:ambiguous": {
+     "description": "A rule gives two answers."
+    }
+   }
+  },
+  "field_level": {
+   "description": "Level of a measure field computed by the build (status report; never written by agents).",
+   "enum": [
+    "written",
+    "read",
+    "computed",
+    "source-estimate",
+    "not-established:absent",
+    "not-established:assumed",
+    "not-established:contradictory",
+    "not-established:ambiguous"
+   ],
+   "x-terms": {
+    "written": {},
+    "read": {},
+    "computed": {
+     "description": "Produced by the build with a rules.json rule from accepted inputs."
+    },
+    "source-estimate": {},
+    "not-established:absent": {},
+    "not-established:assumed": {},
+    "not-established:contradictory": {},
+    "not-established:ambiguous": {}
+   }
+  },
+  "fact_form": {
+   "description": "Where in the saved copy the fact sits; decides whether a quote is required (x-terms.quote).",
+   "enum": [
+    "prose",
+    "table-cell",
+    "label",
+    "code",
+    "image-text",
+    "data-file",
+    "chart"
+   ],
+   "x-terms": {
+    "prose": {
+     "description": "Running text of a page or paper.",
+     "quote": true
+    },
+    "table-cell": {
+     "description": "A cell of a table printed in a page (HTML/Markdown/PDF table).",
+     "quote": true
+    },
+    "label": {
+     "description": "A label (legend, column header, model display string, board label).",
+     "quote": true
+    },
+    "code": {
+     "description": "A code or config line (source's call, harness or router config).",
+     "quote": true
+    },
+    "image-text": {
+     "description": "A number or label printed on an image (written).",
+     "quote": true
+    },
+    "data-file": {
+     "description": "A value of a saved data file (CSV/JSON/YAML), proven by sha256 + locator.",
+     "quote": false
+    },
+    "chart": {
+     "description": "A point read off a chart's geometry (level read; vector paths are written).",
+     "quote": false
+    }
+   }
+  },
+  "precision_model": {
+   "description": "Precision model of a value (an attribute, never a level).",
+   "enum": [
+    "printed",
+    "chart-pixel",
+    "exact"
+   ],
+   "x-terms": {
+    "printed": {
+     "description": "Rounding of a printed number: one unit of its last digit (step)."
+    },
+    "chart-pixel": {
+     "description": "Reading sd of a chart point (sd in the value's unit or px with the chart's calibration)."
+    },
+    "exact": {
+     "description": "Exact (vector path, integer count, data file at full precision)."
+    }
+   }
+  },
+  "unit": {
+   "description": "Cost / usage units: every distinct non-empty `unit` of /work/.wt-px/raw-data.csv (22 Oct 2026), x-rows = its row count. x-aliases = data/catalog/unit_aliases.json (publisher → {label: unit}). Usage and spend share this list.",
+   "enum": [
+    "%",
+    "AIU-per-session",
+    "CNY-per-question",
+    "CNY-per-task",
+    "MAE%",
+    "USD",
+    "USD per 3,000 requests (baseline)",
+    "USD per 507x20-trial campaign",
+    "USD per 6-task set",
+    "USD per PR",
+    "USD per Retail+Airline eval",
+    "USD per correct answer",
+    "USD per fix",
+    "USD per resolved task",
+    "USD per run (mean)",
+    "USD per task",
+    "USD whole-run cost estimate (cost_usd_estimate, not per case)",
+    "USD-per-task",
+    "USD/arm",
+    "USD/episode",
+    "USD/full-benchmark-run",
+    "USD/instance",
+    "USD/rollout",
+    "USD/run",
+    "USD/run-50-tasks",
+    "USD/run-day",
+    "USD/secondary-study",
+    "USD/task",
+    "USD/task-set",
+    "USD/trial",
+    "accuracy-%",
+    "author average 1-10",
+    "author composite 0-10",
+    "blended-per-M",
+    "cents-per-page",
+    "credits-per-run",
+    "exact-match%",
+    "lacer-score",
+    "n/a",
+    "none",
+    "pass % (119 hidden tests)",
+    "pass % (90 runs)",
+    "pass-rate-%",
+    "pass-rate-0-1",
+    "pass@1",
+    "pct",
+    "pct-of-Claude-Pro-allowance-per-run",
+    "per-100-responses",
+    "per-100-tasks",
+    "per-1000-docs",
+    "per-1000-requests",
+    "per-1000-tasks",
+    "per-1000msgs",
+    "per-10prompt-session",
+    "per-10run",
+    "per-13-task-run",
+    "per-1378-frames",
+    "per-15-runs",
+    "per-18-trials",
+    "per-1M-items",
+    "per-1k-calls",
+    "per-1k-calls-CNY",
+    "per-1k-decisions",
+    "per-1k-predictions",
+    "per-1k-questions",
+    "per-2-questions",
+    "per-20-games",
+    "per-20-sessions",
+    "per-3-task-round-mean",
+    "per-3-tasks",
+    "per-360-episodes",
+    "per-360-tasks",
+    "per-3task-suite",
+    "per-5-tasks",
+    "per-55-attempts",
+    "per-5prompts",
+    "per-5tasks",
+    "per-6-cells",
+    "per-72-task-set",
+    "per-741-requests",
+    "per-75-attempts",
+    "per-85-gates-total",
+    "per-PR (cost set aside)",
+    "per-app",
+    "per-attempt",
+    "per-brief",
+    "per-build",
+    "per-call",
+    "per-campaign(196ckpt)",
+    "per-category",
+    "per-cell",
+    "per-challenge",
+    "per-checkpoint",
+    "per-ckpt",
+    "per-claim",
+    "per-comment",
+    "per-contract",
+    "per-conversation",
+    "per-correct",
+    "per-debate",
+    "per-design-median",
+    "per-diagram",
+    "per-episode",
+    "per-exec",
+    "per-full-run",
+    "per-game",
+    "per-generation",
+    "per-harness-total",
+    "per-image",
+    "per-image-median-of-5",
+    "per-investigation",
+    "per-item",
+    "per-job",
+    "per-panel-32-episodes",
+    "per-problem",
+    "per-prompt",
+    "per-proved-theorem",
+    "per-q",
+    "per-query",
+    "per-question",
+    "per-repo",
+    "per-response",
+    "per-return",
+    "per-review",
+    "per-rollout",
+    "per-run",
+    "per-run(112-evals)",
+    "per-run(3-tasks-x-buggy+clean)",
+    "per-run-JPY",
+    "per-run-KRW",
+    "per-run-both-langs",
+    "per-run-mean",
+    "per-run-median",
+    "per-run-scope-unstated",
+    "per-run-total",
+    "per-scene",
+    "per-script",
+    "per-seed-run-total",
+    "per-session",
+    "per-solve",
+    "per-solved-item",
+    "per-solved-task",
+    "per-split",
+    "per-suite",
+    "per-suite(150q)",
+    "per-suite(17-cells)",
+    "per-suite(18q)",
+    "per-suite(202q)",
+    "per-suite(25q)",
+    "per-suite(29q)",
+    "per-suite-445-trials",
+    "per-summary",
+    "per-task",
+    "per-task-mean",
+    "per-task-median",
+    "per-test",
+    "per-test-set-total",
+    "per-ticket",
+    "per-trace",
+    "per-trajectory",
+    "per-trial",
+    "per-window",
+    "points (27 tasks x3)",
+    "rel-cost",
+    "relative-index",
+    "score",
+    "score (median of 2 builds)",
+    "score 0-100",
+    "score%",
+    "score-0-100",
+    "score/10",
+    "suite",
+    "tokens-to-success",
+    "usd-per-repetition",
+    "usd-per-run",
+    "usd-per-suite",
+    "usd-per-task",
+    "usd/10-calls",
+    "usd/100-completions",
+    "usd/11-worlds",
+    "usd/call",
+    "usd/correct-answer",
+    "usd/instance",
+    "usd/run",
+    "usd/suite",
+    "usd/trial",
+    "yuan"
+   ],
+   "x-rows": {
+    "%": 52,
+    "AIU-per-session": 6,
+    "CNY-per-question": 71,
+    "CNY-per-task": 4,
+    "MAE%": 12,
+    "USD": 1984,
+    "USD per 3,000 requests (baseline)": 4,
+    "USD per 507x20-trial campaign": 14,
+    "USD per 6-task set": 2,
+    "USD per PR": 48,
+    "USD per Retail+Airline eval": 2,
+    "USD per correct answer": 4,
+    "USD per fix": 2,
+    "USD per resolved task": 6,
+    "USD per run (mean)": 17,
+    "USD per task": 18,
+    "USD whole-run cost estimate (cost_usd_estimate, not per case)": 12,
+    "USD-per-task": 4,
+    "USD/arm": 11,
+    "USD/episode": 9,
+    "USD/full-benchmark-run": 2,
+    "USD/instance": 48,
+    "USD/rollout": 7,
+    "USD/run": 34,
+    "USD/run-50-tasks": 17,
+    "USD/run-day": 5,
+    "USD/secondary-study": 12,
+    "USD/task": 40,
+    "USD/task-set": 18,
+    "USD/trial": 4,
+    "accuracy-%": 7,
+    "author average 1-10": 4,
+    "author composite 0-10": 7,
+    "blended-per-M": 2,
+    "cents-per-page": 76,
+    "credits-per-run": 6,
+    "exact-match%": 65,
+    "lacer-score": 4,
+    "n/a": 18,
+    "none": 5,
+    "pass % (119 hidden tests)": 4,
+    "pass % (90 runs)": 21,
+    "pass-rate-%": 57,
+    "pass-rate-0-1": 6,
+    "pass@1": 6,
+    "pct": 146,
+    "pct-of-Claude-Pro-allowance-per-run": 16,
+    "per-100-responses": 6,
+    "per-100-tasks": 8,
+    "per-1000-docs": 5,
+    "per-1000-requests": 7,
+    "per-1000-tasks": 45,
+    "per-1000msgs": 8,
+    "per-10prompt-session": 18,
+    "per-10run": 2,
+    "per-13-task-run": 14,
+    "per-1378-frames": 21,
+    "per-15-runs": 2,
+    "per-18-trials": 7,
+    "per-1M-items": 230,
+    "per-1k-calls": 106,
+    "per-1k-calls-CNY": 558,
+    "per-1k-decisions": 19,
+    "per-1k-predictions": 20,
+    "per-1k-questions": 26,
+    "per-2-questions": 3,
+    "per-20-games": 43,
+    "per-20-sessions": 2,
+    "per-3-task-round-mean": 3,
+    "per-3-tasks": 13,
+    "per-360-episodes": 18,
+    "per-360-tasks": 16,
+    "per-3task-suite": 78,
+    "per-5-tasks": 4,
+    "per-55-attempts": 71,
+    "per-5prompts": 3,
+    "per-5tasks": 15,
+    "per-6-cells": 4,
+    "per-72-task-set": 26,
+    "per-741-requests": 5,
+    "per-75-attempts": 9,
+    "per-85-gates-total": 15,
+    "per-PR (cost set aside)": 12,
+    "per-app": 8,
+    "per-attempt": 172,
+    "per-brief": 15,
+    "per-build": 68,
+    "per-call": 3,
+    "per-campaign(196ckpt)": 10,
+    "per-category": 1035,
+    "per-cell": 59,
+    "per-challenge": 3,
+    "per-checkpoint": 15,
+    "per-ckpt": 13,
+    "per-claim": 17,
+    "per-comment": 4,
+    "per-contract": 8,
+    "per-conversation": 4,
+    "per-correct": 6,
+    "per-debate": 41,
+    "per-design-median": 13,
+    "per-diagram": 4,
+    "per-episode": 56,
+    "per-exec": 16,
+    "per-full-run": 54,
+    "per-game": 5,
+    "per-generation": 9,
+    "per-harness-total": 40,
+    "per-image": 4,
+    "per-image-median-of-5": 21,
+    "per-investigation": 7,
+    "per-item": 4,
+    "per-job": 3,
+    "per-panel-32-episodes": 19,
+    "per-problem": 844,
+    "per-prompt": 48,
+    "per-proved-theorem": 40,
+    "per-q": 185,
+    "per-query": 113,
+    "per-question": 48,
+    "per-repo": 10,
+    "per-response": 368,
+    "per-return": 175,
+    "per-review": 14,
+    "per-rollout": 14,
+    "per-run": 2278,
+    "per-run(112-evals)": 181,
+    "per-run(3-tasks-x-buggy+clean)": 3,
+    "per-run-JPY": 3,
+    "per-run-KRW": 8,
+    "per-run-both-langs": 44,
+    "per-run-mean": 50,
+    "per-run-median": 9,
+    "per-run-scope-unstated": 4,
+    "per-run-total": 102,
+    "per-scene": 63,
+    "per-script": 47,
+    "per-seed-run-total": 3,
+    "per-session": 24,
+    "per-solve": 5,
+    "per-solved-item": 14,
+    "per-solved-task": 4,
+    "per-split": 4,
+    "per-suite": 4129,
+    "per-suite(150q)": 34,
+    "per-suite(17-cells)": 24,
+    "per-suite(18q)": 34,
+    "per-suite(202q)": 34,
+    "per-suite(25q)": 102,
+    "per-suite(29q)": 34,
+    "per-suite-445-trials": 2,
+    "per-summary": 3,
+    "per-task": 10972,
+    "per-task-mean": 31,
+    "per-task-median": 9,
+    "per-test": 2021,
+    "per-test-set-total": 10,
+    "per-ticket": 17,
+    "per-trace": 8,
+    "per-trajectory": 58,
+    "per-trial": 58,
+    "per-window": 12,
+    "points (27 tasks x3)": 7,
+    "rel-cost": 14,
+    "relative-index": 2,
+    "score": 14,
+    "score (median of 2 builds)": 6,
+    "score 0-100": 5,
+    "score%": 69,
+    "score-0-100": 32,
+    "score/10": 5,
+    "suite": 6,
+    "tokens-to-success": 6,
+    "usd-per-repetition": 6,
+    "usd-per-run": 62,
+    "usd-per-suite": 11,
+    "usd-per-task": 21,
+    "usd/10-calls": 2,
+    "usd/100-completions": 8,
+    "usd/11-worlds": 8,
+    "usd/call": 12,
+    "usd/correct-answer": 11,
+    "usd/instance": 5,
+    "usd/run": 92,
+    "usd/suite": 22,
+    "usd/trial": 2,
+    "yuan": 18
+   },
+   "x-aliases": {
+    "vals.ai": {
+     "per-test": "per-task"
+    }
+   }
+  },
+  "currency": {
+   "description": "Currencies seen in the data's units and flags (USD, CNY incl. yuan/RMB, JPY). A cents unit stays USD; the unit carries the scale.",
+   "enum": [
+    "USD",
+    "CNY",
+    "JPY"
+   ],
+   "x-terms": {
+    "USD": {
+     "spellings": [
+      "USD",
+      "$",
+      "usd",
+      "cents"
+     ]
+    },
+    "CNY": {
+     "spellings": [
+      "CNY",
+      "yuan",
+      "RMB",
+      "¥ (mainland)"
+     ]
+    },
+    "JPY": {
+     "spellings": [
+      "JPY",
+      "yen",
+      "円"
+     ]
+    }
+   }
+  },
+  "cost_basis": {
+   "description": "Cost bases (DATA-PIPELINE §5.3.2). x-terms.legacy_flags: regex over today's confound text used to map legacy rows (migration; flag-map.json will own it). list-estimate is reached through the methods mapped to it.",
+   "enum": [
+    "billed",
+    "list-estimate",
+    "router-billed",
+    "subscription",
+    "unknown"
+   ],
+   "x-terms": {
+    "billed": {
+     "description": "What the provider invoiced for this run.",
+     "legacy_flags": "billed-cost|cost-basis:\\s*billed|cost_basis:\\s*metered|billing metered|recorded-provider-spend|measured-usd-spend|measured-dollar-cost|provider-billed|provider-invoice"
+    },
+    "list-estimate": {
+     "description": "The run's own tokens at a stated list price, or a CLI's total_cost_usd (written, DATA-PIPELINE §1).",
+     "legacy_flags": null
+    },
+    "router-billed": {
+     "description": "What a router (OpenRouter...) charged for this run.",
+     "legacy_flags": "router-billed|openrouter[-_ ](billed|invoice|usage-cost|actual)|OR-billed"
+    },
+    "subscription": {
+     "description": "Covered by a plan / subscription: no per-run price (out:cost-basis).",
+     "legacy_flags": "plan-billing|billing plan|subscription"
+    },
+    "unknown": {
+     "description": "The source does not say.",
+     "legacy_flags": "cost-method-unstated|cost-basis-undocumented|price-basis-unstated|basis unstated|cost_basis:\\s*\\\"not-stated\\\"|cost-basis-unclear"
+    }
+   }
+  },
+  "cost_method": {
+   "description": "Cost methods (DATA-PIPELINE §5.3.2), derived from today's confound flags. x-terms: basis it implies and legacy_flags (regex, first match in this order wins; order = x-order). Coverage: `validate.py --legacy-coverage raw-data.csv`.",
+   "enum": [
+    "publisher-table",
+    "library-table",
+    "cli-total",
+    "router-invoice",
+    "provider-invoice",
+    "tokens×list",
+    "unstated"
+   ],
+   "x-order": [
+    "publisher-table",
+    "library-table",
+    "cli-total",
+    "router-invoice",
+    "provider-invoice",
+    "tokens×list",
+    "unstated"
+   ],
+   "x-terms": {
+    "publisher-table": {
+     "basis": "list-estimate",
+     "description": "The publisher applied its own price table to the run's tokens (AA cost per task, a board's prices).",
+     "legacy_flags": "intelligenceIndexEvaluations-costPerTask|AA[ -]cost ?per ?task|AA costPerTask|AA price table|board prices|board-computed-cost|weighted-cost-per-task-over-published-eval-weight|OpenRouter-catalogue"
+    },
+    "library-table": {
+     "basis": "list-estimate",
+     "description": "A library's price table applied to the run's tokens (litellm, runcost, tokencost). Added from the flags; not in the document's list.",
+     "legacy_flags": "litellm|runcost|tokencost|usage\\.cost\\.estimated|costEstimated|obviousbench-estimated_cost_usd"
+    },
+    "cli-total": {
+     "basis": "list-estimate",
+     "description": "A CLI's or harness's own total (Claude Code total_cost_usd, Codex...).",
+     "legacy_flags": "cli-total-cost-usd|cli-measured|claude-code-reported|total_cost_usd|claude-code-run-cost_usd|tokenUsage\\.costUsd|harness-built-cost_usd|summary cost\\.total_usd"
+    },
+    "router-invoice": {
+     "basis": "router-billed",
+     "description": "A router's invoice / usage cost for the run.",
+     "legacy_flags": "router-billed|openrouter[-_ ](billed|invoice|usage-cost|actual)|OR-billed"
+    },
+    "provider-invoice": {
+     "basis": "billed",
+     "description": "The provider's invoice / metered spend.",
+     "legacy_flags": "billed-cost|cost-basis:\\s*billed|cost_basis:\\s*metered|billing metered|recorded-provider-spend|measured-usd-spend|measured-dollar-cost|provider-billed|provider-invoice"
+    },
+    "tokens×list": {
+     "basis": "list-estimate",
+     "description": "The source multiplied the run's tokens by the maker's list price.",
+     "legacy_flags": "list-price-cost|measured-tokens-x-|measured-output-tokens-x-output-rate|list-price-from-usage|tokens-x-list-price|measured-tokens-priced-at-list|list-price-derived|api-equivalent|API-price-equivalent|list-price-uncached|list-price-standard-tier|list-price-estimate|list-price-est\\b|file-list-prices|cost-basis:\\s*list-price"
+    },
+    "unstated": {
+     "basis": "unknown",
+     "description": "The source does not say how the cost was obtained.",
+     "legacy_flags": "cost-method-unstated|cost-basis-undocumented|price-basis-unstated|basis unstated|cost_basis:\\s*\\\"not-stated\\\"|cost-basis-unclear"
+    }
+   },
+   "x-not-methods": {
+    "simulated-cost": "a cost simulated offline (OpenAI launch pages): a level question (source-estimate?), not a method; today also carries list-price-cost",
+    "reprice-YYYY-MM-DD / cache-cut / prev-cost*": "our own repricing (computed, prev), not the source's method",
+    "price-date / cache-price-date": "a price-date fact, not a method",
+    "cost-unit-CNY-not-USD": "a currency fact",
+    "digitised-cost / digitized-*": "the fact's form and level (chart, read), not a method",
+    "cost / cost-note / cost-source / cost-per-run (generic prefixes)": "free text: needs the source re-read"
+   }
+  },
+  "anomaly": {
+   "description": "Anomaly types (fact types failure / partial / cap) and their effect (DATA-PIPELINE §5.2.4).",
+   "enum": [
+    "failure",
+    "partial",
+    "cap"
+   ],
+   "x-terms": {
+    "failure": {
+     "effect": "out:failed-run; a mean including it is recomputed by mean-of-runs when per-run values are written"
+    },
+    "partial": {
+     "effect": "out:partial unless the source scores missing items as wrong"
+    },
+    "cap": {
+     "effect": "setup attribute, in"
+    }
+   }
+  },
+  "route_class": {
+   "description": "Route classes (DATA-PIPELINE §4 routes.json). The chain is applied harness → router / reseller / host → maker.",
+   "enum": [
+    "maker-api",
+    "reseller",
+    "host",
+    "router",
+    "harness",
+    "self-hosted"
+   ],
+   "x-terms": {
+    "maker-api": {
+     "description": "The maker's own API.",
+     "maker_defaults_apply": true
+    },
+    "reseller": {
+     "description": "The maker's model resold (Bedrock, Vertex, Azure).",
+     "maker_defaults_apply": true
+    },
+    "host": {
+     "description": "Open weights served by a third party (Fireworks, Together, DeepInfra, Groq).",
+     "maker_defaults_apply": false
+    },
+    "router": {
+     "description": "OpenRouter, AI Gateway.",
+     "maker_defaults_apply": true
+    },
+    "harness": {
+     "description": "Harness / CLI (Inspect, Pi, Claude Code, Codex CLI, IronBee...).",
+     "maker_defaults_apply": true
+    },
+    "self-hosted": {
+     "description": "vLLM, SGLang... The maker's defaults and conversions do not apply.",
+     "maker_defaults_apply": false
+    }
+   }
+  },
+  "configuration": {
+   "description": "Configuration ids a model can offer (models.json configurations; DATA-PIPELINE §4). think-<n>: thinking on with a budget of n tokens (exact count as written; the build merges budgets within 5 %). In the fit: every id but think-<n> (out:budget-config). In models.json a model whose thinking takes any budget lists the family `think-<budget>` with budget_min / budget_max.",
+   "anyOf": [
+    {
+     "enum": [
+      "minimal",
+      "low",
+      "medium",
+      "high",
+      "xhigh",
+      "max",
+      "nothink",
+      "think",
+      "solo"
+     ]
+    },
+    {
+     "type": "string",
+     "pattern": "^think-[1-9][0-9]*$"
+    },
+    {
+     "const": "think-<budget>"
+    }
+   ],
+   "x-terms": {
+    "minimal": {
+     "in_fit": true,
+     "kind": "level"
+    },
+    "low": {
+     "in_fit": true,
+     "kind": "level"
+    },
+    "medium": {
+     "in_fit": true,
+     "kind": "level"
+    },
+    "high": {
+     "in_fit": true,
+     "kind": "level"
+    },
+    "xhigh": {
+     "in_fit": true,
+     "kind": "level"
+    },
+    "max": {
+     "in_fit": true,
+     "kind": "level"
+    },
+    "nothink": {
+     "in_fit": true,
+     "kind": "thinking off"
+    },
+    "think": {
+     "in_fit": true,
+     "kind": "thinking on, no level (on-off models without levels)"
+    },
+    "solo": {
+     "in_fit": true,
+     "kind": "only for a model whose list is [solo]"
+    },
+    "think-<n>": {
+     "in_fit": false,
+     "kind": "thinking budget",
+     "reason": "out:budget-config"
+    }
+   }
+  },
+  "configuration_not_established": {
+   "description": "Configuration values the build can compute that are not established (all → out:effort-not-established). Today's data spells some of them (req-*, app-*, scalar).",
+   "anyOf": [
+    {
+     "enum": [
+      "budget-converted",
+      "enabled",
+      "adaptive",
+      "default",
+      "unstated",
+      "priceblend"
+     ]
+    },
+    {
+     "type": "string",
+     "pattern": "^(scalar-[0-9.]+|req-[A-Za-z0-9.-]+|app-[A-Za-z0-9.-]+)$"
+    }
+   ]
+  },
+  "nothink_spelling": {
+   "description": "Spellings of thinking off seen in today's data (confound text of the nothink / req-nothink rows of raw-data.csv). x-terms.kind: setting (an effort-setting or thinking-off fact read in code), label (a thinking-off label fact), name (a name that selects nothink in models.json names). x-terms.rows: rows whose confound or ref matches (case-insensitive).",
+   "enum": [
+    "reasoning_effort: none",
+    "reasoning_effort: disabled",
+    "effort=none",
+    "enable_thinking: false",
+    "thinking: {type: disabled}",
+    "thinking disabled",
+    "thinking off",
+    "reasoning off",
+    "no thinking",
+    "without thinking",
+    "Non-reasoning",
+    "non-thinking",
+    "chat mode",
+    "instant"
+   ],
+   "x-terms": {
+    "reasoning_effort: none": {
+     "kind": "setting",
+     "regex": "reasoning[_.]effort\\s*[:=]\\s*[\\\"']?none",
+     "rows": 59
+    },
+    "reasoning_effort: disabled": {
+     "kind": "setting",
+     "regex": "reasoning[_.]effort\\s*[:=]\\s*[\\\"']?disabled",
+     "rows": 15
+    },
+    "effort=none": {
+     "kind": "setting",
+     "regex": "\\beffort\\s*=\\s*none",
+     "rows": 1
+    },
+    "enable_thinking: false": {
+     "kind": "setting",
+     "regex": "enable_thinking\\s*[:=]\\s*[\\\"']?false",
+     "rows": 5
+    },
+    "thinking: {type: disabled}": {
+     "kind": "setting",
+     "regex": "thinking\\s*[:=]\\s*\\{\\s*[\\\"']?type[\\\"']?\\s*:\\s*[\\\"']?disabled",
+     "rows": 2
+    },
+    "thinking disabled": {
+     "kind": "label",
+     "regex": "thinking[ -]disabled",
+     "rows": 18
+    },
+    "thinking off": {
+     "kind": "label",
+     "regex": "thinking[ -]off",
+     "rows": 115
+    },
+    "reasoning off": {
+     "kind": "label",
+     "regex": "reasoning off",
+     "rows": 13
+    },
+    "no thinking": {
+     "kind": "label",
+     "regex": "no[ -]thinking|nothinking",
+     "rows": 235
+    },
+    "without thinking": {
+     "kind": "label",
+     "regex": "without thinking",
+     "rows": 3
+    },
+    "Non-reasoning": {
+     "kind": "label",
+     "regex": "non-?reasoning",
+     "rows": 1077
+    },
+    "non-thinking": {
+     "kind": "label",
+     "regex": "non-thinking",
+     "rows": 117
+    },
+    "chat mode": {
+     "kind": "name",
+     "regex": "chat mode",
+     "rows": 96
+    },
+    "instant": {
+     "kind": "name",
+     "regex": "\\binstant\\b",
+     "rows": 6
+    }
+   }
+  },
+  "think_spelling": {
+   "description": "Spellings of thinking on with no level seen in today's solo / req-enabled / req-thinking / think-unstated rows (re-read at migration into think).",
+   "enum": [
+    "-thinking id suffix",
+    "(Reasoning)",
+    "thinking on",
+    "thinking mode",
+    "thinking variant",
+    "enable_thinking: true",
+    "thinking enabled",
+    "reasoner (deepseek-reasoner)"
+   ],
+   "x-terms": {
+    "-thinking id suffix": {
+     "kind": "name",
+     "regex": "-thinking\\b",
+     "rows": 522
+    },
+    "(Reasoning)": {
+     "kind": "label",
+     "regex": "\\(reasoning\\)",
+     "rows": 557
+    },
+    "thinking on": {
+     "kind": "label",
+     "regex": "thinking on",
+     "rows": 686
+    },
+    "thinking mode": {
+     "kind": "label",
+     "regex": "thinking mode",
+     "rows": 338
+    },
+    "thinking variant": {
+     "kind": "name",
+     "regex": "thinking variant",
+     "rows": 28
+    },
+    "enable_thinking: true": {
+     "kind": "setting",
+     "regex": "enable_thinking\\s*[:=]\\s*[\\\"']?true",
+     "rows": 11
+    },
+    "thinking enabled": {
+     "kind": "label",
+     "regex": "thinking[ -]enabled",
+     "rows": 5
+    },
+    "reasoner (deepseek-reasoner)": {
+     "kind": "name",
+     "regex": "reasoner",
+     "rows": 10
+    }
+   }
+  },
+  "reason_code": {
+   "description": "Status reason codes named in DATA-PIPELINE §5-6 (status report). Decisions add in:decision:<id> / out:decision:<id>.",
+   "anyOf": [
+    {
+     "enum": [
+      "in",
+      "out:no-proof",
+      "out:model-not-established",
+      "out:budget-config",
+      "out:effort-not-established",
+      "out:estimate",
+      "out:failed-run",
+      "out:partial",
+      "out:anomaly-assumed",
+      "out:contradictory",
+      "out:not-headline",
+      "out:uninformative",
+      "out:superseded",
+      "out:composite",
+      "out:republished",
+      "out:single-couple",
+      "out:cost-not-comparable",
+      "out:cost-single-couple",
+      "out:cost-basis"
+     ]
+    },
+    {
+     "type": "string",
+     "pattern": "^(in|out):decision:D[0-9]+$"
+    }
+   ],
+   "x-terms": {
+    "in": {
+     "description": "accepted on this axis"
+    },
+    "out:no-proof": {
+     "description": "a fact used lacks a locator (or a required quote)"
+    },
+    "out:model-not-established": {
+     "description": "model not accepted or not in models.json"
+    },
+    "out:budget-config": {
+     "description": "a think-<budget> configuration (recorded, not fitted)"
+    },
+    "out:effort-not-established": {
+     "description": "configuration not established, or not in the model's list"
+    },
+    "out:estimate": {
+     "description": "value is a source-estimate"
+    },
+    "out:failed-run": {
+     "description": "failure anomaly, or a mean including a failed run not recomputable"
+    },
+    "out:partial": {
+     "description": "items missing, not scored"
+    },
+    "out:anomaly-assumed": {
+     "description": "an anomaly assumed"
+    },
+    "out:contradictory": {
+     "description": "value contradictory"
+    },
+    "out:not-headline": {
+     "description": "metric is not the setup's headline"
+    },
+    "out:uninformative": {
+     "description": "score at the floor or ceiling while the others are not (cost kept)"
+    },
+    "out:superseded": {
+     "description": "replaced within its campaign (kept as prev)"
+    },
+    "out:composite": {
+     "description": "composite row dropped by lqm.load's composites rule (a component measured)"
+    },
+    "out:republished": {
+     "description": "dropped by lqm.load's republication rule"
+    },
+    "out:single-couple": {
+     "description": "group with fewer than 2 accepted couples of fit models"
+    },
+    "out:cost-not-comparable": {
+     "description": "unrepriced cost whose price change is not uniform across classes"
+    },
+    "out:cost-single-couple": {
+     "description": "cost subset with fewer than 2 couples"
+    },
+    "out:cost-basis": {
+     "description": "subscription basis"
+    }
+   }
+  },
+  "maker": {
+   "description": "Makers (models.json maker, publishers.json maker). Ids = lqm.MAKER_PUBLISHER's publisher spellings; x-terms.org = the spelling lqm.is_home matches in flags; x-terms.lqm_provider = lqm.provider(). Extend by hand when a model of another maker is registered (lqm.provider gives it 'other').",
+   "enum": [
+    "anthropic",
+    "openai",
+    "google",
+    "xai",
+    "deepseek",
+    "alibaba",
+    "zhipu",
+    "moonshot"
+   ],
+   "x-terms": {
+    "anthropic": {
+     "org": "Anthropic",
+     "lqm_provider": "anthropic"
+    },
+    "openai": {
+     "org": "OpenAI",
+     "lqm_provider": "openai"
+    },
+    "google": {
+     "org": "Google",
+     "lqm_provider": "google"
+    },
+    "xai": {
+     "org": "xAI",
+     "lqm_provider": "xai"
+    },
+    "deepseek": {
+     "org": "DeepSeek",
+     "lqm_provider": "deepseek"
+    },
+    "alibaba": {
+     "org": "Alibaba",
+     "lqm_provider": "qwen"
+    },
+    "zhipu": {
+     "org": "Zhipu",
+     "lqm_provider": "glm"
+    },
+    "moonshot": {
+     "org": "Moonshot",
+     "lqm_provider": "kimi"
+    }
+   }
+  },
+  "lqm_flag": {
+   "description": "Confound flag spellings model/lqm.py (load, is_home) and model/validation/ratio_baseline.py read in the fit table; the build regenerates them from facts. <Org> = maker.x-terms.org.",
+   "enum": [
+    "EAP-run",
+    "restated-from:<Org>",
+    "restated-from:",
+    "evaluated-by:",
+    "vendor-reported:<Org>",
+    "as reported by <Org>",
+    "<Org>-reported",
+    "prev",
+    "reading-sd"
+   ],
+   "x-terms": {
+    "EAP-run": {
+     "reads": "lqm.load (ea covariate), validation/ratio_baseline.py",
+     "from_facts": "early-access fact, or run upper bound before released"
+    },
+    "restated-from:<Org>": {
+     "reads": "lqm.is_home: home when <Org> is the model's maker",
+     "from_facts": "restated-from"
+    },
+    "restated-from:": {
+     "reads": "lqm.is_home: any other restatement is not home",
+     "from_facts": "restated-from"
+    },
+    "evaluated-by:": {
+     "reads": "lqm.is_home: not home",
+     "from_facts": "evaluated-by"
+    },
+    "vendor-reported:<Org>": {
+     "reads": "lqm.is_home: home (non-Anthropic makers)",
+     "from_facts": "evaluated-by / restated-from naming the maker"
+    },
+    "as reported by <Org>": {
+     "reads": "lqm.is_home (substring, also in the harness column)",
+     "from_facts": "legacy spelling; the build writes vendor-reported:<Org>"
+    },
+    "<Org>-reported": {
+     "reads": "lqm.is_home (substring)",
+     "from_facts": "legacy spelling; the build writes vendor-reported:<Org>"
+    },
+    "prev": {
+     "reads": "none today (DATA-PIPELINE §6: written for replaced values)",
+     "from_facts": "campaign replacement"
+    },
+    "reading-sd": {
+     "reads": "none: lqm.reading_sd reads the score_prec / cost_prec columns, not a flag (DATA-PIPELINE §6 lists it as a flag)",
+     "from_facts": "precision attribute → score_prec / cost_prec"
+    }
+   }
+  },
+  "fit_column": {
+   "description": "Columns of the fit tables (today's raw-data.csv header) and what reads them.",
+   "enum": [
+    "group",
+    "source",
+    "model",
+    "effort",
+    "task_type",
+    "complexity",
+    "harness",
+    "unit",
+    "cost_usd",
+    "cost_prec",
+    "tokens_in",
+    "tokens_out",
+    "score",
+    "score_metric",
+    "score_prec",
+    "cached_pct",
+    "confound",
+    "ref",
+    "status_quality",
+    "status_cost"
+   ],
+   "x-terms": {
+    "group": {
+     "reads": "lqm.load"
+    },
+    "source": {
+     "reads": "lqm.load via catalog.PUBLISHER_OF / UNIT_ALIASES (publisher id)"
+    },
+    "model": {
+     "reads": "lqm.load"
+    },
+    "effort": {
+     "reads": "lqm.load (EFFORTS)"
+    },
+    "task_type": {
+     "reads": "lqm.load"
+    },
+    "complexity": {
+     "reads": "site"
+    },
+    "harness": {
+     "reads": "lqm.load (homogeneity split, is_home)"
+    },
+    "unit": {
+     "reads": "lqm.load (cost axis)"
+    },
+    "cost_usd": {
+     "reads": "lqm.load"
+    },
+    "cost_prec": {
+     "reads": "lqm.reading_sd"
+    },
+    "tokens_in": {
+     "reads": "site"
+    },
+    "tokens_out": {
+     "reads": "site"
+    },
+    "score": {
+     "reads": "lqm.load"
+    },
+    "score_metric": {
+     "reads": "lqm.load (bound, kind)"
+    },
+    "score_prec": {
+     "reads": "lqm.reading_sd"
+    },
+    "cached_pct": {
+     "reads": "site"
+    },
+    "confound": {
+     "reads": "lqm.load (EAP-run), lqm.is_home"
+    },
+    "ref": {
+     "reads": "site"
+    },
+    "status_quality": {
+     "reads": "public data file only"
+    },
+    "status_cost": {
+     "reads": "public data file only"
+    }
+   }
+  },
+  "rule_id": {
+   "description": "Rule ids of rules.json (DATA-PIPELINE §4): deduction rules then standing rules.",
+   "enum": [
+    "alias-by-date",
+    "mode-to-line",
+    "label-to-ladder",
+    "maker-conversion-dated",
+    "route-mapping-dated",
+    "api-default-documented",
+    "config-unchanged-over-interval",
+    "no-effort-setting",
+    "thinking-off",
+    "mean-of-runs",
+    "percent-from-counts",
+    "composite-residual",
+    "cost-publisher-figure",
+    "cost-delta-on-source",
+    "cost-uniform-factor",
+    "cost-class-ratio",
+    "chart-reading",
+    "currency-fixed",
+    "label-rule",
+    "pro-via-router-out",
+    "decision-c-conversions-dated",
+    "composite-residual-rule",
+    "cost-comparability-rule",
+    "uninformative-scores"
+   ],
+   "x-terms": {
+    "alias-by-date": {
+     "kind": "deduction"
+    },
+    "mode-to-line": {
+     "kind": "deduction"
+    },
+    "label-to-ladder": {
+     "kind": "deduction"
+    },
+    "maker-conversion-dated": {
+     "kind": "deduction"
+    },
+    "route-mapping-dated": {
+     "kind": "deduction"
+    },
+    "api-default-documented": {
+     "kind": "deduction"
+    },
+    "config-unchanged-over-interval": {
+     "kind": "deduction"
+    },
+    "no-effort-setting": {
+     "kind": "deduction"
+    },
+    "thinking-off": {
+     "kind": "deduction"
+    },
+    "mean-of-runs": {
+     "kind": "deduction"
+    },
+    "percent-from-counts": {
+     "kind": "deduction"
+    },
+    "composite-residual": {
+     "kind": "deduction"
+    },
+    "cost-publisher-figure": {
+     "kind": "deduction"
+    },
+    "cost-delta-on-source": {
+     "kind": "deduction"
+    },
+    "cost-uniform-factor": {
+     "kind": "deduction"
+    },
+    "cost-class-ratio": {
+     "kind": "deduction"
+    },
+    "chart-reading": {
+     "kind": "deduction"
+    },
+    "currency-fixed": {
+     "kind": "deduction"
+    },
+    "label-rule": {
+     "kind": "standing"
+    },
+    "pro-via-router-out": {
+     "kind": "standing"
+    },
+    "decision-c-conversions-dated": {
+     "kind": "standing"
+    },
+    "composite-residual-rule": {
+     "kind": "standing"
+    },
+    "cost-comparability-rule": {
+     "kind": "standing"
+    },
+    "uninformative-scores": {
+     "kind": "standing"
+    }
+   }
+  },
+  "name_kind": {
+   "description": "Kinds of models.json names.",
+   "enum": [
+    "api-id",
+    "display-name"
+   ],
+   "x-terms": {
+    "api-id": {},
+    "display-name": {}
+   }
+  },
+  "interval_from_basis": {
+   "description": "Why an interval starts where it does (DATA-PIPELINE §4).",
+   "enum": [
+    "release",
+    "stated",
+    "earliest-capture"
+   ],
+   "x-terms": {
+    "release": {
+     "description": "configuration served as itself from the release"
+    },
+    "stated": {
+     "description": "effective date the document states"
+    },
+    "earliest-capture": {
+     "description": "no stated date: earliest capture showing it"
+    }
+   }
+  },
+  "interval_to_basis": {
+   "description": "Why an interval ends where it does.",
+   "enum": [
+    "stated",
+    "last-capture",
+    "open"
+   ],
+   "x-terms": {
+    "stated": {
+     "description": "the change the document states (redirect, shutdown...)"
+    },
+    "last-capture": {
+     "description": "last capture still showing it (the next one does not)"
+    },
+    "open": {
+     "description": "no end known; to = null"
+    }
+   }
+  },
+  "level_mapping_rule": {
+   "description": "How a route maps a requested level (routes.json).",
+   "enum": [
+    "identity",
+    "nearest-supported",
+    "budget",
+    "table"
+   ],
+   "x-terms": {
+    "identity": {
+     "description": "documented as identity"
+    },
+    "nearest-supported": {
+     "description": "nearest supported level (OpenRouter); ties per `ties`"
+    },
+    "budget": {
+     "description": "model without an effort parameter: level → token budget (budget-converted)"
+    },
+    "table": {
+     "description": "a documented table (mapping entries)"
+    }
+   }
+  },
+  "mapping_result": {
+   "description": "What a route mapping can yield besides a configuration id.",
+   "enum": [
+    "budget-converted",
+    "ambiguous"
+   ],
+   "x-terms": {
+    "budget-converted": {},
+    "ambiguous": {}
+   }
+  },
+  "price_class": {
+   "description": "Price / usage classes (prices.json classes).",
+   "enum": [
+    "input",
+    "output",
+    "cache-read",
+    "cache-write-5m",
+    "cache-write-1h"
+   ],
+   "x-terms": {
+    "input": {},
+    "output": {},
+    "cache-read": {},
+    "cache-write-5m": {},
+    "cache-write-1h": {}
+   }
+  },
+  "price_kind": {
+   "description": "Kinds of price entries. Only `standard` is ever a base price; promotions and off-peak are recorded and flagged.",
+   "enum": [
+    "standard",
+    "promotion",
+    "off-peak",
+    "batch",
+    "flex",
+    "fast"
+   ],
+   "x-terms": {
+    "standard": {
+     "base": true
+    },
+    "promotion": {
+     "base": false
+    },
+    "off-peak": {
+     "base": false
+    },
+    "batch": {
+     "base": false
+    },
+    "flex": {
+     "base": false
+    },
+    "fast": {
+     "base": false
+    }
+   }
+  },
+  "benchmark_kind": {
+   "description": "Setup kind (DATA-PIPELINE §4).",
+   "enum": [
+    "rating",
+    "runs"
+   ],
+   "x-terms": {
+    "rating": {
+     "description": "Elo, arena, re-fitted index"
+    },
+    "runs": {}
+   }
+  },
+  "direction": {
+   "description": "Score direction.",
+   "enum": [
+    "higher",
+    "lower"
+   ],
+   "x-terms": {
+    "higher": {},
+    "lower": {}
+   }
+  },
+  "task_type": {
+   "description": "Task types (raw-data.csv header comment).",
+   "enum": [
+    "coding",
+    "agentic-tool",
+    "computer-use",
+    "reasoning-math",
+    "writing",
+    "mixed"
+   ],
+   "x-terms": {
+    "coding": {},
+    "agentic-tool": {},
+    "computer-use": {},
+    "reasoning-math": {},
+    "writing": {},
+    "mixed": {}
+   }
+  },
+  "complexity": {
+   "description": "Complexity (raw-data.csv header comment).",
+   "enum": [
+    "trivial",
+    "easy",
+    "mid",
+    "hard",
+    "frontier"
+   ],
+   "x-terms": {
+    "trivial": {},
+    "easy": {},
+    "mid": {},
+    "hard": {},
+    "frontier": {}
+   }
+  },
+  "headline_basis": {
+   "description": "How a setup's headline metric was chosen (DATA-PIPELINE §4).",
+   "enum": [
+    "designated",
+    "ranked-by",
+    "decision"
+   ],
+   "x-terms": {
+    "designated": {
+     "description": "the source's designated headline"
+    },
+    "ranked-by": {
+     "description": "no designation: the metric the source ranks by"
+    },
+    "decision": {
+     "description": "neither: a maintainer decision"
+    }
+   }
+  },
+  "axis": {
+   "description": "Fit axes.",
+   "enum": [
+    "quality",
+    "cost"
+   ],
+   "x-terms": {
+    "quality": {},
+    "cost": {}
+   }
+  },
+  "status": {
+   "description": "Decision statuses.",
+   "enum": [
+    "in",
+    "out"
+   ],
+   "x-terms": {
+    "in": {},
+    "out": {}
+   }
+  },
+  "rule_kind": {
+   "description": "Rule kinds.",
+   "enum": [
+    "deduction",
+    "standing"
+   ],
+   "x-terms": {
+    "deduction": {},
+    "standing": {}
+   }
+  }
+ }
+}

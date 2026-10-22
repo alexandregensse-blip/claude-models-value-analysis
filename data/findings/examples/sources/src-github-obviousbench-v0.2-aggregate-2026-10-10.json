@@ -1,0 +1,127 @@
+{
+ "id": "src-github-obviousbench-v0.2-aggregate-2026-10-10",
+ "publisher": "github-obviousbench",
+ "urls": [
+  "https://github.com/adamallcock/obviousbench/blob/222d9551d1a64252be76dd45a3edad3547a0d5b2/reports/v0_2/aggregate/summary.csv",
+  "https://github.com/adamallcock/obviousbench/tree/claude/2026-10-10-release-649-public"
+ ],
+ "wayback": [],
+ "commit": "222d9551d1a64252be76dd45a3edad3547a0d5b2",
+ "sha256": {
+  "/work/.salvo14/arb/obv/evidence/summary-222d955.csv": "0dbedf95c291efbd4ce75cfbc1930bc007cd233a1394c36fe791691435418df6",
+  "/work/.salvo14/arb/obv/evidence/methodology-222d955.md": "d8597827bc39cf7fb303d1e8ad5562e70f7bb29767fd1b61b14596773df0a316",
+  "/work/.salvo14/arb/obv/evidence/release_v0_2_0-222d955.yaml": "7d6ea664c964cd3e4e3b74399400a5aec439efd043d50d7791fdead471bfcd2f",
+  "/work/.salvo14/arb/obv/evidence/git-log-main.txt": "56bf997c2f90fccc3ca81ff85c8f5c26d4eaa80477d04e7f9dd50679f78209e0",
+  "/work/.salvo14/arb/obv/repo/pyproject.toml": "796d13f75c950fe71c69b6dd310c0066578e66c1e7259025db51fdb609f7e583",
+  "/work/.salvo14/arb/obv/repo/obviousbench/analysis/costing.py": "dcab4580d564df7d0430e797d53bb77e76ebb634c57e2ca32b8261de198f7b75",
+  "/work/.salvo14/arb/obv/repo/obviousbench/analysis/benchmark_report.py": "2f1f3c717cf23b639a5373cb9c42eaa21df361f923dcad4572ea03349fafc8bb"
+ },
+ "harvested_at": "2026-10-21T20:06:09Z",
+ "published": {
+  "value": "2026-10-10T18:32:25Z",
+  "where": "git log, commit 222d955 (branch claude/2026-10-10-release-649-public, one commit on top of main 855ee80, not merged)",
+  "quote": "222d955 2026-10-10 14:32:25 -0400",
+  "file": "/work/.salvo14/arb/obv/evidence/git-log-main.txt"
+ },
+ "salvo": "salvo14/arb/obv (hand conversion, schema example)",
+ "agent": "schema-writer (Opus 5.5), from the obv arbitration's saved copies",
+ "snapshot_of": null,
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/arb/obv/evidence/summary-222d955.csv",
+   "where": "reports/v0_2/aggregate/summary.csv at 222d955 (649 rows, one per model setting)",
+   "format": "csv",
+   "row_key": "model_entry_id",
+   "columns": {
+    "label": "model-name",
+    "provider_model": "model-api-id",
+    "inspect_model": "route",
+    "reasoning_effort": "effort-setting",
+    "answer_pass3_accuracy": "score",
+    "estimated_cost_usd": "cost",
+    "input_tokens": "tokens-in",
+    "output_tokens": "tokens-out",
+    "reasoning_tokens": "tokens-reasoning",
+    "items": "items"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1", "says": "headline-metric", "about": null, "value": "non-strict answer pass^3",
+   "level": "written", "form": "prose", "file": "/work/.salvo14/arb/obv/evidence/methodology-222d955.md",
+   "where": "docs/reference/methodology.md lines 50-51",
+   "quote": "For v0.2 public interpretation, use non-strict answer pass^3 as the headline metric."
+  },
+  {
+   "id": "F2", "says": "metric-definition", "about": null,
+   "value": "answer_pass3 = item/model/config cells where all 3 attempts are answer-correct",
+   "level": "written", "form": "code", "file": "/work/.salvo14/arb/obv/evidence/methodology-222d955.md",
+   "where": "docs/reference/methodology.md line 47 (text block under 'Primary metric:')",
+   "quote": "answer_pass3 = item/model/config cells where all 3 attempts are answer-correct"
+  },
+  {
+   "id": "F3", "says": "version", "about": null, "value": "0.2.0",
+   "level": "written", "form": "code", "file": "/work/.salvo14/arb/obv/evidence/release_v0_2_0-222d955.yaml",
+   "where": "configs/releases/release_v0_2_0.yaml line 4 (release.version)",
+   "quote": "version: 0.2.0"
+  },
+  {
+   "id": "F4", "says": "harness", "about": null, "value": "inspect-ai>=0.3.259,<0.3.260",
+   "level": "written", "form": "code", "file": "/work/.salvo14/arb/obv/repo/pyproject.toml",
+   "where": "pyproject.toml line 16 (dependencies), clone at 855ee80 (222d955's parent; 222d955 changes only the aggregate)",
+   "quote": "\"inspect-ai>=0.3.259,<0.3.260\","
+  },
+  {
+   "id": "F5", "says": "cost-method", "about": null, "value": "runcost", "term": "library-table",
+   "level": "written", "form": "code", "file": "/work/.salvo14/arb/obv/repo/obviousbench/analysis/costing.py",
+   "where": "obviousbench/analysis/costing.py line 20 (price_records_with_runcost docstring), clone at 855ee80",
+   "quote": "Price normalized usage via the local Node runcost bridge."
+  },
+  {
+   "id": "F6", "says": "cost-basis", "about": null, "value": "estimated cost", "term": "list-estimate",
+   "level": "written", "form": "prose", "file": "/work/.salvo14/arb/obv/evidence/methodology-222d955.md",
+   "where": "docs/reference/methodology.md lines 53-55",
+   "quote": "token usage, estimated cost, and provider error counts."
+  },
+  {
+   "id": "F7", "says": "currency", "about": null, "value": "usd", "term": "USD",
+   "level": "written", "form": "label", "file": "/work/.salvo14/arb/obv/evidence/summary-222d955.csv",
+   "where": "summary.csv header, column 33",
+   "quote": "estimated_cost_usd"
+  },
+  {
+   "id": "F8", "says": "unit", "about": null, "value": "attempt_rows", "term": "per-suite",
+   "level": "written", "form": "label", "file": "/work/.salvo14/arb/obv/evidence/summary-222d955.csv",
+   "where": "summary.csv header, column 9: a row sums its attempt rows (144 items x 3 attempts)",
+   "quote": "attempt_rows",
+   "note": "the unit is the whole 144-item suite of one model setting; today's rows say per-suite"
+  },
+  {
+   "id": "F9", "says": "no-effort-sent", "about": null, "value": "provider default when no setting was sent",
+   "level": "written", "form": "code", "file": "/work/.salvo14/arb/obv/repo/obviousbench/analysis/benchmark_report.py",
+   "where": "obviousbench/analysis/benchmark_report.py lines 317-318 (report 'Reading Notes'), clone at 855ee80",
+   "quote": "or provider default when no setting was sent. Reported reasoning",
+   "note": "the convention behind a reasoning_effort of 'default' (panel YAML: 'Default')"
+  },
+  {
+   "id": "F10", "says": "no-effort-sent", "about": "old-5-anthropic-claude-haiku-4-5", "value": "default",
+   "level": "written", "form": "data-file", "table": "T1", "file": "/work/.salvo14/arb/obv/evidence/summary-222d955.csv",
+   "where": "row old-5-anthropic-claude-haiku-4-5, column reasoning_effort"
+  },
+  {
+   "id": "F11", "says": "no-effort-sent", "about": "old-158-qwen-qwen3-6-27b", "value": "default",
+   "level": "written", "form": "data-file", "table": "T1", "file": "/work/.salvo14/arb/obv/evidence/summary-222d955.csv",
+   "where": "row old-158-qwen-qwen3-6-27b, column reasoning_effort"
+  },
+  {
+   "id": "F12", "says": "thinking-budget", "about": "manual-20260612-anthropic-claude-haiku-4-5-low-budget-1024",
+   "value": "low_budget_1024",
+   "level": "written", "form": "data-file", "table": "T1", "file": "/work/.salvo14/arb/obv/evidence/summary-222d955.csv",
+   "where": "row manual-20260612-anthropic-claude-haiku-4-5-low-budget-1024, column reasoning_effort",
+   "note": "budget 1,024 tokens (the setting key names it)"
+  }
+ ]
+}

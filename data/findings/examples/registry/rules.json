@@ -1,0 +1,62 @@
+{
+ "rules": [
+  {
+   "id": "label-rule",
+   "kind": "standing",
+   "statement": "A label that names a level of the model's configurations, served as itself, is that level (LMArena kept).",
+   "inputs": [
+    "effort-label"
+   ],
+   "output": "configuration (written)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §4, §5.1 step 4"
+  },
+  {
+   "id": "label-to-ladder",
+   "kind": "deduction",
+   "statement": "An effort label in other words maps to a configuration when the model's configurations make it unique (\"lowest effort setting\" on [low ... max] → low).",
+   "inputs": [
+    "effort-label",
+    "models.json configurations at the run date"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "unique match; the configuration is served as itself",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (reviewed)",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 5"
+  },
+  {
+   "id": "api-default-documented",
+   "kind": "deduction",
+   "statement": "No effort sent → the documented default: the maker's on its API or a reseller; a router's or host's own dated default when the run is known to have gone through it.",
+   "inputs": [
+    "no-effort-sent",
+    "route",
+    "models.json default",
+    "routes.json default"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "the default's interval covers the run interval",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (router clause, 22 Oct)",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 7, §9"
+  },
+  {
+   "id": "chart-reading",
+   "kind": "deduction",
+   "statement": "A point read off a raster chart takes the chart's calibration and reading sd as its precision.",
+   "inputs": [
+    "read facts",
+    "chart calibration"
+   ],
+   "output": "value (read)",
+   "precision": "sd = reading_px × units per px (log axes: on log10)",
+   "date": "2026-09-29",
+   "decided_by": "data/README.md, reading precision (September 2026)",
+   "ref": "data/README.md 'Reading precision'"
+  }
+ ]
+}

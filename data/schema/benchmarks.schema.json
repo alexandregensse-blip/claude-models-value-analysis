@@ -1,0 +1,256 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "benchmarks.schema.json",
+ "title": "Benchmarks registry",
+ "description": "data/registry/benchmarks.json: families ⊃ setups, headline metrics, composites (DATA-PIPELINE §4).",
+ "type": "object",
+ "properties": {
+  "families": {
+   "type": "object",
+   "description": "Family id → family.",
+   "additionalProperties": {
+    "type": "object",
+    "description": "A benchmark family (today's families.json).",
+    "properties": {
+     "label": {
+      "type": "string",
+      "description": "Label.",
+      "minLength": 1
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "label"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "setups": {
+   "type": "object",
+   "description": "Setup id → setup.",
+   "propertyNames": {
+    "$ref": "common.schema.json#/$defs/setup_id"
+   },
+   "additionalProperties": {
+    "type": "object",
+    "description": "A setup = benchmark × subset × harness (without version) × tools regime × judge panel × metric.",
+    "properties": {
+     "family": {
+      "type": "string",
+      "description": "Family id (benchmarks.json families).",
+      "minLength": 1
+     },
+     "label": {
+      "type": "string",
+      "description": "Display label."
+     },
+     "benchmark": {
+      "type": "string",
+      "description": "Benchmark name.",
+      "minLength": 1
+     },
+     "subset": {
+      "description": "Subset / split, or null.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "harness": {
+      "description": "Harness without its version (patch releases are one configuration), or null.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "tools_regime": {
+      "description": "Tools regime, or null.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "judge_panel": {
+      "description": "Judge panel, or null when not judged.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "metric": {
+      "type": "string",
+      "description": "The metric this setup's values are on (today's score_metric spelling).",
+      "minLength": 1
+     },
+     "headline": {
+      "type": "object",
+      "description": "The setup's headline metric.",
+      "properties": {
+       "metric": {
+        "type": "string",
+        "description": "The headline metric.",
+        "minLength": 1
+       },
+       "basis": {
+        "$ref": "vocab.json#/$defs/headline_basis"
+       },
+       "evidence": {
+        "$ref": "common.schema.json#/$defs/evidence_list"
+       },
+       "decision": {
+        "description": "decisions.json id when basis = decision; null while the decision is pending (the tree then gives out:not-headline).",
+        "anyOf": [
+         {
+          "type": "string",
+          "description": "Decision id.",
+          "pattern": "^D[0-9]+$"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       }
+      },
+      "required": [
+       "metric",
+       "basis"
+      ],
+      "unevaluatedProperties": false
+     },
+     "bounds": {
+      "description": "[lower, upper] of the metric, or null when unbounded.",
+      "anyOf": [
+       {
+        "type": "array",
+        "description": "Bounds.",
+        "items": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "minItems": 2,
+        "maxItems": 2
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "direction": {
+      "$ref": "vocab.json#/$defs/direction"
+     },
+     "task_type": {
+      "$ref": "vocab.json#/$defs/task_type"
+     },
+     "complexity": {
+      "$ref": "vocab.json#/$defs/complexity"
+     },
+     "kind": {
+      "$ref": "vocab.json#/$defs/benchmark_kind"
+     },
+     "composite": {
+      "description": "Composite definition, or null.",
+      "anyOf": [
+       {
+        "type": "object",
+        "description": "Composite definition (DATA-PIPELINE §4, §5.2.8).",
+        "properties": {
+         "components": {
+          "type": "array",
+          "description": "Component setups.",
+          "items": {
+           "$ref": "common.schema.json#/$defs/setup_id"
+          },
+          "minItems": 1
+         },
+         "formula": {
+          "type": "object",
+          "description": "The composite's formula.",
+          "properties": {
+           "weights": {
+            "type": "object",
+            "description": "Component setup → weight.",
+            "additionalProperties": {
+             "type": "number"
+            }
+           },
+           "normalisation": {
+            "type": "string",
+            "description": "How components are normalised before weighting."
+           },
+           "text": {
+            "type": "string",
+            "description": "The formula as the publisher documents it."
+           }
+          },
+          "required": [
+           "weights"
+          ],
+          "unevaluatedProperties": false
+         },
+         "linear": {
+          "type": "boolean",
+          "description": "Linear in its components (a residual can be computed)."
+         },
+         "validated_on": {
+          "type": "string",
+          "description": "Complete couples on which the formula reproduces the composite."
+         },
+         "evidence": {
+          "$ref": "common.schema.json#/$defs/evidence_list"
+         }
+        },
+        "required": [
+         "components",
+         "formula",
+         "linear",
+         "evidence"
+        ],
+        "unevaluatedProperties": false
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "legacy_groups": {
+      "type": "array",
+      "description": "Today's raw-data.csv group names this setup continues (catalog maps keep working).",
+      "items": {
+       "type": "string",
+       "description": "Group name."
+      }
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "family",
+     "benchmark",
+     "metric",
+     "headline",
+     "direction",
+     "task_type",
+     "complexity",
+     "kind"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {
+   "type": "string",
+   "description": "Free note."
+  }
+ },
+ "required": [
+  "families",
+  "setups"
+ ],
+ "unevaluatedProperties": false
+}
