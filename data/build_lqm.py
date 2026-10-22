@@ -76,16 +76,12 @@ def run(out_dir, models=None):
     finally:
         lqm.COMPOSITES, lqm.FAMILY_OF = saved
     rep["build"]["lqm"] = "done"
-    cnt = {"quality": collections.Counter(), "cost": collections.Counter()}
-    for e in rep["measures"].values():
-        for ax in cnt:
-            if e["status"][ax] is not None and not (ax == "cost" and e.get("cost_measure")):
-                cnt[ax][e["status"][ax]] += 1
-    rep["counts"] = {ax: dict(sorted(c.items())) for ax, c in cnt.items()}
     # cost measures sharing a carrier follow it
     for e in rep["measures"].values():
         if e.get("cost_measure") and e["cost_measure"] in rep["measures"]:
             e["status"]["cost"] = rep["measures"][e["cost_measure"]]["status"]["cost"]
+    import build
+    rep["counts"] = build.counts(rep["measures"])
     with open(rp, "w", encoding="utf-8") as f:
         json.dump(rep, f, indent=1, ensure_ascii=False)
     rewrite_data(out_dir, rep)
@@ -109,7 +105,18 @@ def outcome(lqm, rep, axis, field, path, groups, republished, comps, models):
     for r in rows:
         if passes(r):
             measured[r["group"]].add(f'{r["model"]}@{r["effort"]}')
-    rep_groups = {base_of(g) for t in republished for g in t[:2]}
+    partners = collections.defaultdict(set)              # group → groups it shares a republished series with
+    for t in republished:
+        a_, b_ = base_of(t[0]), base_of(t[1])
+        partners[a_].add(b_)
+        partners[b_].add(a_)
+    metric_of = {}
+    for r in rows:
+        metric_of.setdefault(r["group"], r["score_metric"])
+    couples_in = collections.defaultdict(set)
+    for r in rows:
+        if passes(r):
+            couples_in[r["group"]].add(f'{r["model"]}@{r["effort"]}')
     entries = [(ref, e, e.get("fit_rows", {}).get(axis)) for ref, e in rep["measures"].items()]
     entries = [(ref, e, fr) for ref, e, fr in entries if fr]
     by_group = collections.defaultdict(list)
@@ -132,21 +139,22 @@ def outcome(lqm, rep, axis, field, path, groups, republished, comps, models):
         g = fr["group"]
         if g in comps and any(c in measured.get(h, set()) for h in comps[g]):
             code = "out:composite"
-        elif g in rep_groups:
-            code = "out:republished"
+        elif any(c in couples_in[h] for h in partners.get(g, ())):
+            code = "out:republished"                     # its couple is in the group it was copied from
         else:
             vals = [x for x in by_group[g] if passes({"model": x["model"], "effort": x["effort"], field: x["value"]})]
-            metric = None
             n = None
             if axis == "quality":
-                row = next((x for x in csv.DictReader(open(path, encoding="utf-8")) if x["group"] == g), None)
-                metric = row["score_metric"] if row else ""
-                n = lqm.bound(metric)
+                n = lqm.bound(metric_of.get(g, ""))
             at = n is not None and all(float(x["value"]) >= 0.9995 * n or float(x["value"]) <= 0.0005 * n
                                        for x in vals) and len({float(x["value"]) for x in vals}) == 1
             code = "out:saturated" if at else ("out:single-couple" if axis == "quality" else "out:cost-single-couple")
         lo[axis] = f"dropped by lqm.load: {code}"
-        if (e["status"][axis] or "").startswith("in"):
+        st = e["status"][axis] or ""
+        if st == "legacy:in":
+            e["status"][axis] = "legacy:" + code
+            e["reason_detail"][axis] = f"lqm.load (phase 1): {code}"
+        elif st.startswith("in"):
             e["status"][axis] = code
             e["reason_detail"][axis] = f"lqm.load (phase 1): {code}"
 

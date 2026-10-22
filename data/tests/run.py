@@ -355,6 +355,16 @@ def cfg3_cells_with_prefix_and_column():
 
 
 @test
+def cfg3_unlisted_does_not_match():
+    sc = base()
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[("effort-setting", "max"), ("effort-label", "High")])
+    sc.m(s, model="mb", effort=[LOW])
+    r = sc.run()
+    eq(r.cfg(m1), "high", "max is not one of ma's configurations: only the label matches")
+
+
+@test
 def cfg4_label():
     sc = base()
     sc.model("mq", configs=("nothink", "think"))
@@ -572,7 +582,7 @@ def cost_publisher_figure():
     r = sc.run()
     eq(r.c(m1), "in", "re-priced: figure at the base price")
     eq(r[m1]["fields"]["cost"]["base"]["rule"], "cost-publisher-figure", "rule")
-    eq(r.rows("fit-cost.csv", model="ma")[0]["cost_usd"], "1", "value")
+    eq(r.rows("fit-cost.csv", model="ma")[0]["cost_usd"], "1.0", "the cost as written")
 
 
 def two_prices(sc, model, old, new, change="2026-07-01"):
@@ -609,6 +619,15 @@ def cost_uniform_factor():
     b = r[m1]["fields"]["cost"]["base"]
     eq((b["rule"], b["value"]), ("cost-uniform-factor", 2.0), "× 0.5")
     eq(r.c(m1), "in", "re-priced")
+    sc = base()
+    two_prices(sc, "ma", {"input": 3, "output": 15}, {"input": 1, "output": 5})
+    two_prices(sc, "mb", {"input": 3, "output": 15}, {"input": 1, "output": 5})
+    s = sc.source("a")
+    sc.m(s, model="ma", effort=[LOW], cost="4.10", price_table="prices of 2026-06-01")
+    sc.m(s, model="mb", effort=[LOW], cost="3.00", price_table="prices of 2026-06-01")
+    r = sc.run()
+    eq([x["cost_usd"] for x in r.tables["fit-cost.csv"]], ["1.37", "1"], "the original's significant digits "
+       "(repricing_makers.fmt)")
 
 
 @test
@@ -662,9 +681,14 @@ def cost_currency():
     m1 = sc.m(s, model="ma", effort=[LOW], cost="7.0", currency="CNY")
     m2 = sc.m(s, model="mb", effort=[LOW], cost="1.0")
     r = sc.run()
-    eq(r[m1]["fields"]["cost"]["part"][3], "CNY", "partitioned by currency")
-    eq(r.c(m1), "out:cost-single-couple", "alone in its currency")
+    eq(r.c(m1), "out:cost-not-comparable", "a CNY cost: no CNY price registered (the USD vector is not used)")
     eq(r.c(m2), "out:cost-single-couple", "alone in its currency")
+    same_price(sc, "ma", "mb", classes={"input": 2, "output": 8})
+    for p in sc.prices["prices"][-2:]:
+        p["currency"] = "CNY"
+    r = sc.run()
+    eq(r[m1]["fields"]["cost"]["part"][3], "CNY", "partitioned by currency")
+    eq((r.c(m1), r.c(m2)), ("out:cost-single-couple", "out:cost-single-couple"), "each alone in its currency")
 
 
 @test
@@ -886,7 +910,129 @@ def examples():
     eq(M[f"{card}#M5"]["fields"]["score"]["text"], "86.2%", "printed over read")
 
 
+# ================================================================ legacy path, arguments, diff by source, run date
+def legacy_csv(rows):
+    head = "group,source,model,effort,task_type,complexity,harness,unit,cost_usd,cost_prec,tokens_in,tokens_out," \
+           "score,score_metric,score_prec,cached_pct,confound,ref"
+    return head + "\n# a free-text comment line\n" + "\n".join(rows) + "\n"
+
+
+@test
+def legacy_path():
+    import csv, io, json, shutil, subprocess, tempfile
+    import legacy as LG
+    rows = ['g1,srcA,ma,low,coding,mid,"h, v1",per-task,0.30,0.00289,,,71.5,pass%,0.082,,"reprice-2026-10-07:x:was=0.31",r1',
+            'g1,srcB,mb,high,coding,mid,h,per-task,,,,,80.0,pass%,0.0289,,,r2',
+            'g1,srcB,ma,nothink,coding,mid,h,per-task,0.10,,,,60.0,pass%,,,,r3',
+            '#g1,srcB,mb,low,coding,mid,h,per-task,0.10,,,,61.0,pass%,,,,r4',
+            'g2,srcB,zz,low,coding,mid,h,per-task,0.10,,,,61.0,pass%,,,,r5',
+            'g2,srcA,ma,solo,coding,mid,h,per-task,0.0,,,,100,pass%,,,,r6']
+    root = tempfile.mkdtemp(prefix="legacy-")
+    try:
+        p = os.path.join(root, "raw.csv")
+        open(p, "w").write(legacy_csv(rows))
+        info = LG.convert(p, os.path.join(root, "f"), os.path.join(root, "reg"))
+        eq((info["rows"], info["sources"], info["skipped_lines"]), (6, 2, [2]), "conversion")
+        fm = os.path.join(DATA, "findings", "examples", "registry", "flag-map.json")
+        shutil.copy(fm, os.path.join(root, "reg", "flag-map.json"))
+        lst = os.path.join(root, "fit.txt")
+        open(lst, "w").write("ma mb")
+        out = os.path.join(root, "b")
+        import contextlib
+        with contextlib.redirect_stdout(io.StringIO()):
+            code = build.main(["--registry", os.path.join(root, "reg"), "--findings", os.path.join(root, "f"),
+                               "--decisions", os.path.join(root, "none.json"), "--out", out, "--fit-models", lst,
+                               "--no-lqm"])
+        eq(code, 0, "build")
+        rep = json.load(open(os.path.join(out, "status-report.json")))
+        st = {e["line"]: (e["status"]["quality"], e["status"]["cost"]) for e in rep["measures"].values()}
+        eq(st[3], ("legacy:in", "legacy:in"), "admitted as today, flags and all")
+        eq(st[4], ("legacy:in", "legacy:out:no-value"), "no cost")
+        eq(st[5], ("legacy:out:effort-not-in-efforts", "legacy:out:effort-not-in-efforts"), "nothink: today's EFFORTS")
+        eq(st[6][0], "legacy:out:comment", "a #-ed row")
+        eq(st[7][0], "legacy:out:model-not-in-fit-list", "model not in the fit list")
+        eq(st[8], ("legacy:in", "legacy:out:no-value"), "solo, 100 % and cost 0: no tree step, no uninformative")
+        fq = open(os.path.join(out, "fit-quality.csv")).read().split("\n")
+        eq(fq[1:-1], [rows[0], rows[1], rows[5]], "verbatim lines, in the CSV's order")
+        e4 = next(e for e in rep["measures"].values() if e["line"] == 3)
+        eq(e4["tree_would_say"]["configuration"], "low", "informative column")
+        eq(e4["kind"], "legacy", "reported as legacy")
+        eq(rep["counts"]["quality"], {}, "tree counts apart from legacy counts")
+        # a later build where one row changed: the diff per source names it
+        rows2 = list(rows)
+        rows2[1] = rows2[1].replace("80.0", "81.0")
+        open(p, "w").write(legacy_csv(rows2))
+        shutil.rmtree(os.path.join(root, "f"))
+        LG.convert(p, os.path.join(root, "f"))
+        with contextlib.redirect_stdout(io.StringIO()):
+            build.main(["--registry", os.path.join(root, "reg"), "--findings", os.path.join(root, "f"), "--decisions",
+                        os.path.join(root, "none.json"), "--out", out + "2", "--fit-models", lst, "--no-lqm",
+                        "--previous", os.path.join(out, "status-report.json")])
+        d = json.load(open(os.path.join(out + "2", "status-report.json")))["diff"]["by_source"]
+        eq(list(d), ["srcB"], "one source changed")
+        eq(d["srcB"]["changed"][0]["changes"], {"score": ["80.0", "81.0"]}, "the row's change")
+        # a legacy fact whose row is not a line of its CSV: no proof
+        sp = os.path.join(root, "f", "sources")
+        fn = next(x for x in sorted(os.listdir(sp)) if "srca" in x)
+        doc = json.load(open(os.path.join(sp, fn)))
+        doc["facts"][0]["value"] = doc["facts"][0]["value"].replace("71.5", "71.6")
+        json.dump(doc, open(os.path.join(sp, fn), "w"))
+        with contextlib.redirect_stdout(io.StringIO()):
+            build.main(["--registry", os.path.join(root, "reg"), "--findings", os.path.join(root, "f"), "--decisions",
+                        os.path.join(root, "none.json"), "--out", out + "3", "--fit-models", lst, "--no-lqm"])
+        rep3 = json.load(open(os.path.join(out + "3", "status-report.json")))
+        eq(next(e for e in rep3["measures"].values() if e["line"] == 3)["status"]["quality"], "legacy:out:no-proof",
+           "the row is not a line of its CSV")
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+@test
+def bad_arguments_clean_errors():
+    import subprocess, tempfile, shutil
+    root = tempfile.mkdtemp(prefix="args-")
+    ex = os.path.join(DATA, "findings", "examples")
+    base_args = [sys.executable, os.path.join(DATA, "build.py"), "--registry", os.path.join(ex, "registry"),
+                 "--findings", ex, "--no-lqm", "--no-check-files"]
+    try:
+        open(os.path.join(root, "afile"), "w").write("x")
+        open(os.path.join(root, "bad.json"), "w").write("{")
+        cases = [["--out", os.path.join(root, "afile")], ["--fit-models", "/nonexistent"],
+                 ["--previous", os.path.join(root, "bad.json"), "--out", os.path.join(root, "o")],
+                 ["--class-ratios", os.path.join(root, "bad.json"), "--out", os.path.join(root, "o")],
+                 ["--registry", "/nonexistent", "--out", os.path.join(root, "o")]]
+        for c in cases:
+            p = subprocess.run(base_args + c, capture_output=True, text=True)
+            eq((p.returncode, "Traceback" in p.stderr, p.stderr.startswith("error: ")), (2, False, True), str(c))
+        reg = os.path.join(root, "reg")
+        shutil.copytree(os.path.join(ex, "registry"), reg)
+        os.remove(os.path.join(reg, "prices.json"))
+        p = subprocess.run(base_args + ["--registry", reg, "--out", os.path.join(root, "o")], capture_output=True,
+                           text=True)
+        eq((p.returncode, "no prices.json" in p.stderr), (1, True), "a missing prices.json stops the build")
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+@test
+def run_date_contradictory_with_event():
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    sc.model("md", default=[dict(iv("2026-05-01", "2026-05-31", **win), configuration="medium")])
+    s = sc.source("a", published="2026-06-01")
+    m1 = sc.m(s, model="md", effort=[LOW], run_date=[("run-start", "2026-07-01")])
+    m2 = sc.m(s, model="ma", effort=[LOW], run_date=[("run-start", "2026-07-01")])
+    sc.m(s, model="mb", effort=[LOW])
+    r = sc.run()
+    eq(r.q(m1), "out:contradictory", "a dated event of md (its default) inside the widened window")
+    eq(r.q(m2), "in", "no dated event of ma inside: the run date is not needed")
+
+
 def main():
+    import review_tests
+    for t in review_tests.TESTS:
+        t.__name__ = "review_" + t.__name__
+        TESTS.append(t)
     pat = sys.argv[1] if len(sys.argv) > 1 else ""
     t0, fails, skips = time.time(), 0, 0
     sel = [t for t in TESTS if pat in t.__name__]

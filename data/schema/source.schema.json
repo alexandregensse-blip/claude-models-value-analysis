@@ -657,6 +657,34 @@
     ],
     "unevaluatedProperties": false
    }
+  },
+  "legacy": {
+   "type": "object",
+   "description": "Migration: the CSV these legacy-row facts are records of (today's raw-data.csv).",
+   "properties": {
+    "file": {
+     "type": "string",
+     "description": "The saved CSV (a key of the sha256 map)."
+    },
+    "columns": {
+     "type": "array",
+     "description": "Its header.",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "source": {
+     "type": "string",
+     "description": "The raw-data.csv `source` value of every row of this file."
+    }
+   },
+   "required": [
+    "file",
+    "columns",
+    "source"
+   ],
+   "unevaluatedProperties": false
   }
  },
  "required": [

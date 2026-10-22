@@ -110,6 +110,9 @@ The build is described in data/BUILD.md. It added these terms:
 - score scale `counts` (percent-from-counts);
 - reason code `out:value-not-established`;
 - JSON tables, whose `where` is a JSON path (`$`, `.key`, `['key']`, `[n]`, `[*]`), now read by validate.py.
+- the legacy path (migration): fact type `legacy-row`, fact form `legacy`, measure slot `legacy`, the source's `legacy`
+  block, and the reason codes `legacy:in` / `legacy:out:<why>`;
+- a decision on a missing measure is now a warning (reported, not applied).
 
 ## Choices where the document left freedom
 

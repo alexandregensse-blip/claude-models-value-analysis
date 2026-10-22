@@ -48,6 +48,36 @@ class Fatal(Exception):
     pass
 
 
+class BadInput(Exception):
+    """A bad argument or input file: a one-line error, exit 2."""
+
+
+def read_json_arg(path, what):
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except OSError as e:
+        raise BadInput(f"{what} {path}: {e.strerror}")
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        raise BadInput(f"{what} {path}: not JSON ({e})")
+
+
+def read_class_ratios(path):
+    x = read_json_arg(path, "class ratios")
+    if not isinstance(x, dict) or not isinstance(x.get("ratios"), list):
+        raise BadInput(f"class ratios {path}: expected {{\"ratios\": [...]}}")
+    for i, e in enumerate(x["ratios"]):
+        ok = isinstance(e, dict) and isinstance(e.get("model"), str) and V.parse_when(e.get("change") or "") \
+            and isinstance(e.get("classes"), dict) and all(
+                isinstance(c, dict) and isinstance(c.get("factor"), (int, float)) and isinstance(c.get("sd"), (int, float))
+                for c in e["classes"].values()) \
+            and all(isinstance(e.get(k, {}), dict) for k in ("setups", "measures"))
+        if not ok:
+            raise BadInput(f"class ratios {path}: ratios[{i}] needs model, change (a date), classes {{cls: {{factor, "
+                           f"sd}}}} and optional setups / measures maps")
+    return x
+
+
 # ---------------------------------------------------------------- small helpers
 def covers(rec, iv):
     """A dated record {from, to} covers the run interval iv = (lo, hi, ea). lo None = unclamped (early access): only a
@@ -139,12 +169,23 @@ def num_text(d):
     return s
 
 
-def fmt_float(x, sig=6):
-    if x is None:
-        return ""
-    if x == 0:
-        return "0"
-    return f"{x:.{sig}g}"
+def fmt_prec(x):
+    """A precision column as today (data/precision.py): three significant digits."""
+    return "" if x is None else f"{x:.3g}"
+
+
+def sig_digits(text):
+    t = text.strip().lower().split("e")[0].replace("-", "").replace(".", "").lstrip("0")
+    return max(len(t), 1)
+
+
+def fmt_like(v, like):
+    """v with the significant digits of the original text (data/precision/repricing_makers.py's rule)."""
+    n = sig_digits(like)
+    s = f"{v:.{n}g}"
+    if "e" in s:
+        s = f"{v:.{max(n - 1 - int(math.floor(math.log10(abs(v)))), 0)}f}"
+    return s
 
 
 def norm_version(v):
@@ -251,6 +292,9 @@ class Ctx:
             if not os.path.isfile(p):
                 if k in V.REQUIRED_REGISTRIES:
                     rep.err(V.rel(a.registry), f"no {name}")
+                elif k == "prices":
+                    rep.err(V.rel(a.registry), "no prices.json: the cost build needs the registered prices "
+                                               "(DATA-PIPELINE §8.2; an empty list with its as_of is allowed)")
                 continue
             x = V.load_json(p, rep)
             if x is not None and schemas.validate(x, f"{k}.schema.json", V.rel(p), rep):
@@ -266,7 +310,7 @@ class Ctx:
         self.prices = reg.get("prices") or {"as_of": None, "prices": []}
         self.rules = {r["id"]: r for r in (reg.get("rules") or {}).get("rules", [])}
         cr = a.class_ratios or os.path.join(a.registry, "class-ratios.json")
-        self.class_ratios = V.load_json(cr, rep) if os.path.isfile(cr) else {"ratios": []}
+        self.class_ratios = read_class_ratios(cr) if os.path.isfile(cr) else {"ratios": []}
 
         # sources
         self.sources, self.measure_files = {}, []
@@ -322,6 +366,11 @@ class Ctx:
                 vsources = {k: (s.path, s.doc) for k, s in self.sources.items()}
                 V.check_decisions(x, a.decisions, vsources, mvalid, reg, rep)
                 self.decisions = x["decisions"]
+                for d in self.decisions:
+                    gone = [r for r in d.get("measures", []) if tuple(r.split("#")) not in mvalid]
+                    if gone:
+                        self.stale.append(dict(id=d["id"], measures=d["measures"], axis=d["axis"],
+                                               why=f"measure(s) not found: {', '.join(gone)}"))
             fatal += rep.errors[n:]
         else:
             for sid, s in self.setups.items():
@@ -330,17 +379,28 @@ class Ctx:
         if fatal:
             raise Fatal("\n".join(fatal))
         self.fit_models = self.read_fit_models()
+        self.fit_set = set(self.fit_models)
+        meth = self.vocab["$defs"]["cost_method"]
+        self.method_patterns = [(m, re.compile(meth["x-terms"][m]["legacy_flags"], re.I)) for m in meth["x-order"]]
 
     def read_fit_models(self):
         p = self.args.fit_models
         if not p:
             return list(self.models)
         if p == "catalog":
-            with open(os.path.join(HERE, "catalog", "models.json"), encoding="utf-8") as f:
-                return json.load(f)["order"]
-        with open(p, encoding="utf-8") as f:
-            t = f.read()
-        return json.loads(t) if t.lstrip().startswith("[") else [w for w in t.split() if w]
+            return read_json_arg(os.path.join(HERE, "catalog", "models.json"), "--fit-models catalog")["order"]
+        try:
+            with open(p, encoding="utf-8") as f:
+                t = f.read()
+        except OSError as e:
+            raise BadInput(f"--fit-models {p}: {e.strerror}")
+        try:
+            out = json.loads(t) if t.lstrip().startswith("[") else [w for w in t.split() if w]
+        except json.JSONDecodeError as e:
+            raise BadInput(f"--fit-models {p}: not a JSON list ({e})")
+        if not out or not all(isinstance(x, str) for x in out):
+            raise BadInput(f"--fit-models {p}: an empty or malformed model list")
+        return out
 
     # -- registry lookups
     def released(self, key):
@@ -362,7 +422,10 @@ class Measure:
         self.setup_id = m["setup"]
         self.setup = ctx.setups.get(m["setup"], {})
         self.publisher = S.publisher
-        self.faults = list(S.faults) + list(mfaults)
+        self.faults = [(None, x) for x in S.faults]
+        for x in mfaults:                                 # 'slot: …' / 'slot ref: …' → that slot, else the whole measure
+            head = re.match(r"([a-z_]+)[ :]", x)
+            self.faults.append((head.group(1) if head and head.group(1) in m["facts"] else None, x))
         self.rules = set()
         self.flags = []
         self.fields = {}
@@ -378,13 +441,29 @@ class Measure:
             for ref in refs:
                 f, fault = S.fact(ref)
                 if fault:
-                    self.faults.append(f"{slot} {ref}: {fault}")
+                    self.faults.append((slot, f"{slot} {ref}: {fault}"))
                 if f is not None:
                     out.append(f)
                     self.used.append(ref)
             self.slots[slot] = out
         self.value = (self.slots.get("value") or [None])[0]
         self.is_cost_only = self.value is not None and "score" not in self.value.says
+
+    def value_is_score(self):
+        ref = self.m["facts"].get("value")
+        if not ref:
+            return False
+        if ref.startswith("T"):
+            t, _, col = V.split_cell(ref)
+            spec = self.S.tables.get(t, {}).get("columns", {}).get(col)
+            return spec is not None and "score" in V.column_says(spec)
+        return self.S.facts.get(ref, {}).get("says") == "score"
+
+    def axis_faults(self, axis):
+        """Step 1 reads every fact *used* on the axis: the score's facts do not take the cost out, nor the reverse."""
+        off = {"spend", "usage"} if axis == "quality" else ({"runs", "judge"} | ({"value"} if self.value_is_score()
+                                                                                   else set()))
+        return [msg for slot, msg in self.faults if slot not in off]
 
     def slot(self, name, says=None):
         fs = self.slots.get(name, [])
@@ -440,8 +519,9 @@ def run_interval(M, key):
     hi = min(hi_c) if hi_c else hi_default
     basis = {"lo": "stated" if lo_c else "release", "hi": "stated" if hi_c else hi_basis}
     level = "written" if (lo_c or hi_c) else "computed"
-    if lo is not None and lo > hi:                       # stated bounds contradict: the wider interval
-        lo, hi = min([lo] + lo_c + [b[0] for b in ends]), max([hi] + hi_c + [b[1] for b in starts])
+    if lo is not None and lo > hi:                       # stated bounds contradict: the widest interval, defaults too
+        lo = min([lo] + lo_c + [b[0] for b in ends] + ([released] if released else []))
+        hi = max([hi, hi_default] + hi_c + [b[1] for b in starts])
         level = "not-established:contradictory"
     ea_fact = any(f.level in ACCEPTED for f in M.slot("early_access"))
     ea = bool(ea_fact or (released is not None and hi < released))
@@ -510,9 +590,13 @@ def resolve_model(M):
         keys = sorted({k for k, _ in matches})
         rule = None
         if len(keys) > 1:                                # an alias: the run must lie in one serves interval
-            # no early-access exception here: a name that moved is date-checked against its serves intervals
-            ok = [k for k in keys if any(covers(iv, run_interval(M, k)[:2] + (False,)) for kk, n in matches
-                                          if kk == k for iv in n["serves"])]
+            # no early-access exception here: a name that moved is date-checked against its serves intervals, on
+            # one run interval for every candidate (lower bound = the earliest candidate's release, so an interval
+            # straddling the switch fits no candidate: never the newer model by default)
+            ivs = [run_interval(M, k) for k in keys]
+            lo = None if any(x[0] is None for x in ivs) else min(x[0] for x in ivs)
+            common = (lo, max(x[1] for x in ivs), False)
+            ok = [k for k in keys if any(covers(iv, common) for kk, n in matches if kk == k for iv in n["serves"])]
             if len(ok) == 1:
                 keys, rule = ok, "alias-by-date"
             else:
@@ -545,6 +629,8 @@ def resolve_model(M):
                    f.value.strip().casefold() in {md["parameter"].casefold(), (md.get("value") or "").casefold(),
                                                   f"{md['parameter']}={md.get('value', '')}".casefold()}]
             chain, unknown = route_chain_facts(M)
+            if unknown:                                  # every candidate route counts
+                chain = [r for ch, _ in chains(M, key) for r in ch]
             if not hit:
                 out.update(value=None, level="not-established:absent", detail=f"mode {f.value!r} not registered")
             elif any(ctx.routes.get(r, {}).get("class") == "router" for r in chain):
@@ -753,15 +839,18 @@ def map_setting(ctx, value, column=None):
 
 
 def map_label(ctx, value):
-    c = spelling_match(ctx, value, ("label",))
-    if c:
-        return c
+    """The label rule first: a label naming one level ('high', 'high (thinking on)') is that level; then the
+    thinking spellings ('Non-reasoning', '(Reasoning)')."""
     t = (value or "").casefold()
     for a, lv in LEVEL_ALIASES.items():
         t = t.replace(a, lv)
     toks = [w for w in re.findall(r"[a-z0-9]+", t) if w not in LABEL_FILLER]
-    if len(toks) == 1 and toks[0] in LEVELS:
-        return toks[0]
+    levels = {w for w in toks if w in LEVELS}
+    if len(levels) == 1:
+        return levels.pop()
+    c = spelling_match(ctx, value, ("label",))
+    if c:
+        return c
     if len(toks) == 1 and re.fullmatch(r"[0-9]+(\.[0-9]+)?", toks[0]):
         return f"scalar-{toks[0]}"
     return None
@@ -809,11 +898,12 @@ def configuration(M, key):
     results = []                                         # (step, config or None, level, detail, fact ref, kind)
 
     def via_chain(req, step, ref, kind):
-        if req not in configs and not in_list(req, configs):
-            results.append((step, req, "written", f"{req} is not one of the model's configurations", ref, kind))
-            return
+        # the route chain applies to every requested configuration, also one the model does not list (a router's
+        # nearest supported level); what comes out must be one of the model's configurations to match
         cfg, lv, d = over_chains(M, key, lambda ch: serve(M, key, ch, req, iv, configs))
-        results.append((step, cfg, lv, d, ref, kind))
+        if cfg and not in_list(cfg, configs):
+            d = (d + "; " if d else "") + f"{cfg} is not one of the model's configurations"
+        results.append((step if cfg == req or not cfg else 6, cfg, lv, d, ref, kind))
 
     for f in accepted:
         s = f.says[0] if len(f.says) == 1 else next((x for x in f.says if x in (
@@ -884,9 +974,18 @@ def configuration(M, key):
                    detail=r[3])
         return
     est.sort(key=lambda r: r[0])
+    listed = [r for r in est if in_list(r[1], configs)]
+    if listed:                                           # a step matches only one of the model's configurations
+        est = listed
     vals = {r[1] for r in est}
     if len(vals) > 1:
         kinds = {r[5] for r in est}
+        lv = [r for r in est if r[1] in LEVELS and r[5] in ("effort-setting", "config-history", "effort-label")]
+        if {r[1] for r in est} - {r[1] for r in lv} == {"think"} and len({r[1] for r in lv}) == 1 and \
+                all(r[5] in ("thinking-on", "name-selects") for r in est if r[1] == "think"):
+            r = lv[0]                                    # thinking on and a level: the level is the more specific
+            out.update(value=r[1], level=r[2], step=r[0], detail="thinking on with a level: the level")
+            return
         specific = [r for r in est if r[5] in ("name-selects", "thinking-on", "thinking-off")]
         # the id selects thinking, the null field says no level was sent → the more specific statement
         if kinds <= {"no-effort-sent", "name-selects", "thinking-on", "thinking-off"} and \
@@ -979,7 +1078,7 @@ def score_field(M):
     got = score_number(M, f)
     if got is None:
         out["level"] = "unreadable"
-        M.faults.append(f"value {f.ref}: {f.value!r} is not a number")
+        M.faults.append(("value", f"value {f.ref}: {f.value!r} is not a number"))
         M.fields["score"] = out
         return out
     d, step, sd, rules = got
@@ -1057,7 +1156,7 @@ def cost_field(M):
     out["level"] = f.level
     if parsed is None:
         out.update(level="unreadable")
-        M.faults.append(f"cost {f.ref}: {f.value!r} is not a number")
+        M.faults.append(("spend", f"cost {f.ref}: {f.value!r} is not a number"))
         M.fields["cost"] = out
         return out
     out["number"], out["step"] = parsed
@@ -1108,28 +1207,35 @@ def ctx_vocab_terms(ctx, name):
 
 
 # ---------------------------------------------------------------- prices (§4 prices.json, §5.3.1)
-def std_entries(ctx, key, route="maker-api"):
-    return [p for p in ctx.prices["prices"] if p["model"] == key and p["route"] == route and p["kind"] == "standard"]
+def std_entries(ctx, key, route="maker-api", currency=None):
+    return [p for p in ctx.prices["prices"] if p["model"] == key and p["route"] == route and p["kind"] == "standard"
+            and (currency is None or p["currency"] == currency)]
 
 
-def base_price(ctx, key):
-    marked = [p for p in ctx.prices["prices"] if p["model"] == key and p.get("base")]
+def base_price(ctx, key, currency=None):
+    """The base price in the cost's currency: the entry marked base, else the standard maker-API price in force on
+    as_of, else (a retired model) its last list price."""
+    marked = [p for p in ctx.prices["prices"] if p["model"] == key and p.get("base")
+              and (currency is None or p["currency"] == currency)]
     if marked:
         return marked[0]
     asof = ctx.prices.get("as_of")
     if not asof:
         return None
     t = V.when(asof)
-    on = [p for p in std_entries(ctx, key) if V.when(p["from"]) <= t <= V.when(p["to"], True)]
+    on = [p for p in std_entries(ctx, key, currency=currency) if V.when(p["from"]) <= t <= V.when(p["to"], True)]
     if on:
         return on[0]
-    past = sorted((p for p in std_entries(ctx, key) if V.when(p["to"], True) < t), key=lambda p: V.when(p["to"], True))
+    past = sorted((p for p in std_entries(ctx, key, currency=currency) if V.when(p["to"], True) < t),
+                  key=lambda p: V.when(p["to"], True))
     return dict(past[-1], _last_list=True) if past else None   # a retired model: its last list price
 
 
-def prices_over(ctx, key, lo, hi, route="maker-api"):
-    """(distinct class vectors of the standard prices that could have applied over [lo, hi], fully covered?)."""
-    es = sorted((p for p in std_entries(ctx, key, route) if overlaps(p, lo, hi)), key=lambda p: V.when(p["from"]))
+def prices_over(ctx, key, lo, hi, route="maker-api", currency=None):
+    """(distinct class vectors of the standard prices in the cost's currency that could have applied over [lo, hi],
+    fully covered?)."""
+    es = sorted((p for p in std_entries(ctx, key, route, currency) if overlaps(p, lo, hi)),
+                key=lambda p: V.when(p["from"]))
     if lo is None:
         return [e["classes"] for e in es], False
     cur, covered = lo, True
@@ -1219,15 +1325,19 @@ def reprice(M, C, key):
         pd_lo, pd_hi, how = lo, pub_hi, "[run lower bound, publication]"
     C["price_date"] = dict(lo=pd_lo.isoformat() if pd_lo else None, hi=pd_hi.isoformat(), how=how)
     C["base"] = None
-    bp = base_price(ctx, key)
+    cur = C.get("currency")
+    bp = base_price(ctx, key, cur)
     route = "maker-api"
-    vecs, covered = prices_over(ctx, key, pd_lo, pd_hi, route)
+    if pd_lo is None:                                    # an early-access run: list prices start at the release
+        pd_lo = ctx.released(key)
+        C["price_date"]["lo"] = pd_lo.isoformat()
+        C["price_date"]["how"] += " (early access: from the release)"
+    if pd_lo > pd_hi:
+        pd_lo = pd_hi
+    vecs, covered = prices_over(ctx, key, pd_lo, pd_hi, route, cur) if cur else ([], False)
     C["price_vectors"], C["price_covered"] = vecs, covered
     if bp is None:
-        C["reprice_detail"] = f"no base price for {key} on as_of"
-        return
-    if bp["currency"] != C.get("currency"):
-        C["reprice_detail"] = f"cost in {C.get('currency')}, base price in {bp['currency']}"
+        C["reprice_detail"] = f"no base price for {key} in {cur or 'an unstated currency'}"
         return
     if bp.get("_last_list"):
         M.flags.append("base-last-list-price")
@@ -1320,7 +1430,8 @@ def decision_for(ctx, M, axis):
             entries.append(V.facts_hash(ctx.sources[sid].doc, m, mref))
         if entries is None or V.hash_of(entries) != d["facts_hash"]:
             if d["id"] not in [s["id"] for s in ctx.stale]:
-                ctx.stale.append(dict(id=d["id"], measures=d["measures"], axis=d["axis"]))
+                ctx.stale.append(dict(id=d["id"], measures=d["measures"], axis=d["axis"],
+                                      why="facts_hash no longer matches"))
             M.flags.append(f"stale-decision:{d['id']}")
             continue
         return f"{d['status']}:decision:{d['id']}", d["reason"]
@@ -1385,11 +1496,20 @@ def early_steps(M, axis, field):
     d = decision_for(ctx, M, axis)
     if d:
         return d
-    if M.faults:
-        return "out:no-proof", "; ".join(M.faults)
+    faults = M.axis_faults(axis)
+    if faults:
+        return "out:no-proof", "; ".join(faults)
     mf = M.fields["model"]
     if not mf.get("value") or mf.get("level") not in ACCEPTED:
         return "out:model-not-established", mf.get("detail", "")
+    key = mf["value"]
+    rd = (M.fields.get("run_date_detail") or {}).get(key, {})
+    if rd.get("level") == "not-established:contradictory":
+        lo, hi = V.when(rd["lo"]) if rd.get("lo") else MIN, V.when(rd["hi"])
+        ev = [t for t in model_events(ctx, key) if lo < t < hi]
+        if ev:
+            return "out:contradictory", (f"run date contradictory, and a dated event of {key} falls inside its "
+                                         f"window ({min(ev).date()})")
     cf = M.fields.get("configuration", {})
     c = cf.get("value")
     offered = {x: {"id": x} for x in M.fields.get("configurations_offered", [])}
@@ -1412,13 +1532,112 @@ def early_steps(M, axis, field):
     return None, ""
 
 
+def model_events(ctx, key):
+    """Datetimes where something dated about the model changes: its records in models.json, its route entries,
+    its prices."""
+    docs = [ctx.models[key]] + [r.get("models", {}).get(key, {}) for r in ctx.routes.values()] + \
+        [p for p in ctx.prices["prices"] if p["model"] == key]
+    out = set()
+    for d in docs:
+        for _, _, rec in V.walk_intervals(d):
+            out.add(V.when(rec["from"]))
+            if rec.get("to") is not None:
+                out.add(V.when(rec["to"], True))
+        if "from" in d and "to" in d:
+            out.add(V.when(d["from"]))
+            if d.get("to") is not None:
+                out.add(V.when(d["to"], True))
+    return sorted(t for t in out if MIN < t < MAX)
+
+
 def couple(M):
     return f"{M.fields['model']['value']}@{M.fields['configuration']['value']}"
 
 
+# ---------------------------------------------------------------- legacy measures (migration, §8.1)
+LEGACY_EFFORTS = {"low", "medium", "high", "xhigh", "max", "solo"}   # lqm.EFFORTS at v2026.10.21 (acceptance checks it)
+
+
+class LegacyMeasure:
+    """A row of today's raw-data.csv carried as it is: today's status (lqm.load's own admission), none of the tree's
+    steps, no repricing, no replacement; written to the fit tables verbatim."""
+    kind = "legacy"
+
+    def __init__(self, ctx, S, m, mfaults):
+        self.ctx, self.S, self.m = ctx, S, m
+        self.ref = f"{S.id}#{m['id']}"
+        self.setup_id = m["setup"]
+        self.faults = list(S.faults) + list(mfaults)
+        f, fault = S.fact(m["facts"]["legacy"][0])
+        if fault:
+            self.faults.append(fault)
+        cols = S.doc["legacy"]["columns"]
+        self.line = f.value if f else ""
+        rec = next(csv.reader([self.line]), []) if f else []
+        self.row = dict(zip(cols, rec)) if len(rec) == len(cols) else {c: "" for c in cols}
+        m_ = re.search(r"\d+", (f.where if f else "") or "")
+        self.order = int(m_.group()) if m_ else 0
+        self.publisher = self.row.get("source", "")
+        self.status, self.detail = {}, {}
+        fit = ctx.fit_set
+        for axis, field in (("quality", "score"), ("cost", "cost_usd")):
+            why = self.admission(field, fit)
+            self.status[axis] = "legacy:in" if why is None else f"legacy:out:{why}"
+            self.detail[axis] = "today's admission (lqm.load's filters)" if why is None else why
+
+    def admission(self, field, fit):
+        if self.faults:
+            return "no-proof"
+        r = self.row
+        if not r.get("group"):
+            return "no-group"
+        if r["group"].startswith("#"):
+            return "comment"
+        if r.get("model") not in fit:
+            return "model-not-in-fit-list"
+        if r.get("effort") not in LEGACY_EFFORTS:
+            return "effort-not-in-efforts"
+        try:
+            v = float(r.get(field))
+        except (TypeError, ValueError):
+            return "no-value"
+        if field == "cost_usd" and v <= 0:
+            return "no-value"
+        return None
+
+
+def tree_would_say(ctx, row):
+    """Informative only: what flag-map.json and the vocabularies say this legacy row's configuration and cost method
+    would be once its source is converted (never changes its status)."""
+    fm = ctx.reg.get("flag-map") or {}
+    eff = row.get("effort", "")
+    ev = (fm.get("effort_values") or {}).get(eff)
+    if ev:
+        cfg = ev["to"]
+    elif V.in_vocab(ctx.schemas, "configuration", eff):
+        cfg = eff if eff not in ("solo",) else "re-read: solo only for a [solo] model"
+    elif V.in_vocab(ctx.schemas, "configuration_not_established", eff):
+        cfg = "not established"
+    else:
+        cfg = "re-read (no flag-map entry)"
+    out = {"configuration": cfg}
+    if (row.get("cost_usd") or "").strip():
+        t = row.get("confound") or ""
+        e = (fm.get("cost_method_by_source") or {}).get(row.get("source"))
+        if e and e.get("groups") and row.get("group") not in e["groups"]:
+            e = None
+        m = e["method"] if e and e["applies"] == "all" else next((m for m, p in ctx.method_patterns if p.search(t)), None)
+        m = m or (e["method"] if e else None)
+        out["cost_method"] = m or "unmapped"
+        out["cost_basis"] = ctx.vocab["$defs"]["cost_method"]["x-terms"][m]["basis"] if m else "unknown"
+    return out
+
+
 # ---------------------------------------------------------------- the build
 def build(ctx):
-    measures = [Measure(ctx, S, m, mf) for S, m, mf in ctx.measures]
+    legacy = sorted((LegacyMeasure(ctx, S, m, mf) for S, m, mf in ctx.measures if m["facts"].get("legacy")),
+                    key=lambda L: (L.order, L.ref))
+    measures = [Measure(ctx, S, m, mf) for S, m, mf in ctx.measures if not m["facts"].get("legacy")]
     for M in measures:
         key = resolve_model(M)
         if key:
@@ -1437,12 +1656,17 @@ def build(ctx):
     residuals = composite_residuals(ctx, measures)
     group_step(ctx, measures + residuals, "quality")
     cost(ctx, measures)
-    return measures, residuals
+    return measures, residuals, legacy
 
 
 def campaign_of(M):
     v = (M.slots.get("version") or [None])[0] or next(iter(M.slot("setup", "version")), None)
     M.version = norm_version(v.value) if v is not None and v.level in ACCEPTED else None
+
+
+def version_key(v):
+    """Natural order of versions: '9' < '10', '1.2' < '1.10'."""
+    return [(0, int(p), "") if p.isdigit() else (1, 0, p) for p in re.split(r"[.\-_ ]+|(?<=\d)(?=\D)|(?<=\D)(?=\d)", v) if p]
 
 
 def inherited_campaign(M, measures):
@@ -1454,7 +1678,8 @@ def inherited_campaign(M, measures):
         prev = M.ctx.sources.get(S.doc["snapshot_of"])
         if prev is None:
             break
-        vs = sorted({x.version for x in measures if x.S is prev and x.setup_id == M.setup_id and x.version})
+        vs = sorted({x.version for x in measures if x.S is prev and x.setup_id == M.setup_id and x.version},
+                    key=version_key)
         if vs:
             return vs[-1]
         S = prev
@@ -1469,8 +1694,8 @@ def quality(ctx, measures):
     pending = []
     for M in measures:
         f = M.fields.get("score")
-        if f is None and M.value is None and M.m["facts"].get("value") and M.faults:
-            M.status["quality"], M.detail["quality"] = "out:no-proof", "; ".join(M.faults)
+        if f is None and M.value is None and M.m["facts"].get("value") and M.axis_faults("quality"):
+            M.status["quality"], M.detail["quality"] = "out:no-proof", "; ".join(M.axis_faults("quality"))
             continue
         if f is None:
             M.status["quality"] = None
@@ -1576,8 +1801,10 @@ def same_runs(ctx, measures, candidates):
                         links.append((Sa, Sb))
     for S1, S2 in links:
         later, earlier = sorted((S1, S2), key=lambda S: (S.date(), S.doc["harvested_at"], S.id), reverse=True)
-        lat = {(family(ctx, M), couple(M)): M for M in measures if M.S is later
-               and M.fields["model"].get("value") and M.fields["configuration"].get("value")}
+        # only a later measure accepted so far replaces (a refused regrade leaves the earlier grading in)
+        lat = {(family(ctx, M), couple(M)): M for M in measures if M.S is later and M in candidates
+               and M.status["quality"] is None and M.fields["model"].get("value")
+               and M.fields["configuration"].get("value")}
         for M in measures:
             if M.S is not earlier or not M.fields["model"].get("value") or not M.fields["configuration"].get("value"):
                 continue
@@ -1590,7 +1817,7 @@ def same_runs(ctx, measures, candidates):
                 M.detail["quality"] = f"same runs as {later.id}: the later grading ({N.ref}) replaces it"
             nc = N.fields.get("cost") or {}
             if nc.get("number") is not None and nc.get("level") in ACCEPTED:
-                M.cost_counted_by = N.ref
+                M.cost_counted_by = N                    # applied only if N's cost is accepted (cost steps 0–4)
 
 
 def composite_residuals(ctx, measures):
@@ -1615,10 +1842,20 @@ def composite_residuals(ctx, measures):
             continue
         val = float(M.fields["score"]["number"])
         prec = (M.fields["score"]["prec"] or 0.0) ** 2
+        top = (M.setup.get("bounds") or [None, None])[1]
+        ok = True
         for c, ms in present.items():
             x = sorted(ms.values(), key=source_order)[-1]
-            val -= w.get(c, 0) / tot * float(x.fields["score"]["number"])
-            prec += (w.get(c, 0) / tot * (x.fields["score"]["prec"] or 0.0)) ** 2
+            ctop = (x.setup.get("bounds") or [None, None])[1]
+            k = 1.0 if ctop == top else (top / ctop if top in (1, 100) and ctop in (1, 100) else None)
+            if k is None:                                # a component on another, unconvertible scale: no residual
+                ok = False
+                break
+            val -= w.get(c, 0) / tot * float(x.fields["score"]["number"]) * k
+            prec += (w.get(c, 0) / tot * (x.fields["score"]["prec"] or 0.0) * k) ** 2
+        if not ok:
+            M.flags.append("composite-residual-refused:scale")
+            continue
         wm = sum(w.get(c, 0) for c in missing) / tot
         if wm <= 0:
             continue
@@ -1685,8 +1922,8 @@ def cost(ctx, measures):
         M.cost_subset = None
         M.cost_carrier = None
         C = M.fields.get("cost")
-        if not C and M.faults and M.m["facts"].get("spend") and not isinstance(M, Residual):
-            M.status["cost"], M.detail["cost"] = "out:no-proof", "; ".join(M.faults)
+        if not C and not isinstance(M, Residual) and M.m["facts"].get("spend") and M.axis_faults("cost"):
+            M.status["cost"], M.detail["cost"] = "out:no-proof", "; ".join(M.axis_faults("cost"))
             continue
         if not C:
             M.status["cost"] = None
@@ -1710,10 +1947,10 @@ def cost(ctx, measures):
             pending.append(M)
     supersede(ctx, pending, "cost")
     for M in pending:
-        by = getattr(M, "cost_counted_by", None)
-        if by and M.status["cost"] is None:
+        N = getattr(M, "cost_counted_by", None)
+        if N is not None and M.status["cost"] is None and N in pending and N.status["cost"] is None:
             M.status["cost"] = "out:superseded"
-            M.detail["cost"] = f"same runs as {by}: the cost counts once"
+            M.detail["cost"] = f"same runs as {N.ref}: the cost counts once"
     live = [M for M in pending if M.status["cost"] is None]
     # 1. base-price value; 2. partition; 3. subsets
     for M in live:
@@ -1856,10 +2093,10 @@ def row_of(ctx, M, names, cnames, axis_cost=False):
         g = cnames.get((gkey(M), M.cost_subset), g)
     cost_val, cost_prec = "", ""
     if C.get("number") is not None and C.get("level") in ACCEPTED:
-        if axis_cost and C.get("base"):
-            cost_val, cost_prec = fmt_float(C["base"]["value"], 8), fmt_float(C["base"]["prec"])
-        else:
-            cost_val, cost_prec = num_text(C["number"]), fmt_float(C.get("prec"))
+        if axis_cost and C.get("base") and C["base"]["rule"] != "cost-publisher-figure":
+            cost_val, cost_prec = fmt_like(C["base"]["value"], num_text(C["number"])), fmt_prec(C["base"]["prec"])
+        else:                                            # the cost as the source wrote it
+            cost_val, cost_prec = num_text(C["number"]), fmt_prec(C.get("prec"))
     score = num_text(sf["number"]) if sf.get("number") is not None and sf.get("level") in ACCEPTED else ""
     model_cell = key or "?" + ((M.slots.get("model") or [Fact(value="")])[0].value or "")
     cached = tok.get("cached-share")
@@ -1871,18 +2108,23 @@ def row_of(ctx, M, names, cnames, axis_cost=False):
                 cost_usd=cost_val, cost_prec=cost_prec,
                 tokens_in=num_text(tok["input"][0]) if "input" in tok else "",
                 tokens_out=num_text(tok["output"][0]) if "output" in tok else "",
-                score=score, score_metric=M.setup.get("metric", ""),
-                score_prec=fmt_float(sf.get("prec")) if score else "",
+                score=score, score_metric=(M.value.term if M.value is not None and M.value.term and
+                                           "score" in M.value.says else M.setup.get("metric", "")),
+                score_prec=fmt_prec(sf.get("prec")) if score else "",
                 cached_pct=num_text(cached[0]) if cached else "", confound=confound(ctx, M),
                 ref=f"{(S.doc.get('urls') or [''])[0]} ({where})")
 
 
 def write_csv(path, rows, columns):
+    """Rows are dicts, or a legacy row's verbatim line (written as it is)."""
     with open(path, "w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=columns, lineterminator="\n")
         w.writeheader()
         for r in rows:
-            w.writerow({c: r.get(c, "") for c in columns})
+            if isinstance(r, str):
+                f.write(r + "\n")
+            else:
+                w.writerow({c: r.get(c, "") for c in columns})
 
 
 def jsonable(x):
@@ -1911,11 +2153,22 @@ def report_entry(ctx, M, names, cnames):
                 cost_measure=getattr(M, "cost_carrier", None))
 
 
-def outputs(ctx, measures, residuals, out_dir, previous=None):
+def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
     os.makedirs(out_dir, exist_ok=True)
     allm = measures + residuals
     names, cnames = group_names(ctx, allm)
     fq, fc, data, gm, fit_rows = [], [], [], {}, collections.defaultdict(dict)
+    for L in legacy:                                     # first, in the CSV's order (lqm.load's order-dependent rules)
+        r = L.row
+        if L.status["quality"] == "legacy:in":
+            fq.append(L.line)
+            gm[r["group"]] = r["group"]
+            fit_rows[L.ref]["quality"] = dict(group=r["group"], model=r["model"], effort=r["effort"], value=r["score"])
+        if L.status["cost"] == "legacy:in":
+            fc.append(L.line)
+            gm[r["group"]] = r["group"]
+            fit_rows[L.ref]["cost"] = dict(group=r["group"], model=r["model"], effort=r["effort"], value=r["cost_usd"])
+        data.append(dict(r, status_quality=L.status["quality"], status_cost=L.status["cost"]))
     for M in allm:
         r = row_of(ctx, M, names, cnames)
         q, c = M.status["quality"], M.status["cost"]
@@ -1931,9 +2184,8 @@ def outputs(ctx, measures, residuals, out_dir, previous=None):
                                            value=rc["cost_usd"])
         d = dict(r, status_quality=q or "", status_cost=c or "")
         data.append(d)
-    order = lambda r: (r["group"], r["model"], r["effort"], r["ref"])  # noqa: E731
-    write_csv(os.path.join(out_dir, "fit-quality.csv"), sorted(fq, key=order), FIT_COLUMNS)
-    write_csv(os.path.join(out_dir, "fit-cost.csv"), sorted(fc, key=order), FIT_COLUMNS)
+    write_csv(os.path.join(out_dir, "fit-quality.csv"), fq, FIT_COLUMNS)
+    write_csv(os.path.join(out_dir, "fit-cost.csv"), fc, FIT_COLUMNS)
     write_csv(os.path.join(out_dir, "data.csv"), data, DATA_COLUMNS)
     with open(os.path.join(out_dir, "group-map.json"), "w", encoding="utf-8") as f:
         json.dump(dict(sorted(gm.items())), f, indent=1, ensure_ascii=False)
@@ -1943,9 +2195,20 @@ def outputs(ctx, measures, residuals, out_dir, previous=None):
                           lqm="pending" if not ctx.args.no_lqm else "skipped"),
                measures={}, counts={}, stale_decisions=ctx.stale,
                validation=dict(warnings=ctx.rep.warnings, errors=ctx.rep.errors))
+    for L in legacy:
+        r = L.row
+        rep["measures"][L.ref] = dict(
+            kind="legacy", source=L.S.id, setup=L.setup_id, line=L.order, status=dict(L.status),
+            reason_detail=dict(L.detail), tree_would_say=tree_would_say(ctx, r), fit_rows=fit_rows.get(L.ref, {}),
+            row=dict(source=r.get("source"), group=r.get("group"), base_group=r.get("group"), model=r.get("model"),
+                     effort=r.get("effort"), score=r.get("score"), cost_usd=r.get("cost_usd")))
     for M in allm:
         e = report_entry(ctx, M, names, cnames)
         e["fit_rows"] = fit_rows.get(M.ref, {})
+        rq = row_of(ctx, M, names, cnames)
+        rc = row_of(ctx, M, names, cnames, axis_cost=True) if (M.status["cost"] or "").startswith("in") else rq
+        e["row"] = dict(source=rq["source"], group=rq["group"], base_group=base_group(ctx, M), model=rq["model"],
+                        effort=rq["effort"], score=rq["score"], cost_usd=rc["cost_usd"])
         rep["measures"][M.ref] = e
     rep["counts"] = counts(rep["measures"])
     if previous:
@@ -1956,12 +2219,17 @@ def outputs(ctx, measures, residuals, out_dir, previous=None):
 
 
 def counts(ms):
+    """Counts per reason and axis; legacy measures counted apart (they are reported as legacy)."""
     out = {"quality": collections.Counter(), "cost": collections.Counter()}
+    leg = {"quality": collections.Counter(), "cost": collections.Counter()}
     for e in ms.values():
         for ax in out:
             if e["status"][ax] is not None and not (ax == "cost" and e.get("cost_measure")):
-                out[ax][e["status"][ax]] += 1
-    return {ax: dict(sorted(c.items())) for ax, c in out.items()}
+                (leg if e.get("kind") == "legacy" else out)[ax][e["status"][ax]] += 1
+    res = {ax: dict(sorted(c.items())) for ax, c in out.items()}
+    if any(leg.values()):
+        res["legacy"] = {ax: dict(sorted(c.items())) for ax, c in leg.items()}
+    return res
 
 
 def diff(prev_path, rep):
@@ -1975,7 +2243,64 @@ def diff(prev_path, rep):
         if d:
             changed[k] = d
     return dict(previous=prev_path, added=sorted(set(nm) - set(pm)), removed=sorted(set(pm) - set(nm)),
-                changed=changed)
+                changed=changed, by_source=diff_by_source(pm, nm))
+
+
+def diff_by_source(pm, nm):
+    """Per row source (the fit tables' `source`): rows whose status, value or group changes, matched by (base group,
+    model, effort) whatever their measure ids (a migrated source replaces its legacy measures), with the reasons."""
+    def index(ms):
+        out = collections.defaultdict(lambda: collections.defaultdict(list))
+        for ref, e in ms.items():
+            r = e.get("row") or {}
+            out[r.get("source")][(r.get("base_group"), r.get("model"), r.get("effort"))].append((ref, e))
+        return out
+    old, new = index(pm), index(nm)
+    res = {}
+    for src in sorted(set(old) | set(new), key=str):
+        ch, added, removed = [], [], []
+        for k in sorted(set(old[src]) | set(new[src]), key=str):
+            a, b = old[src].get(k, []), new[src].get(k, [])
+            for i in range(max(len(a), len(b))):
+                if i >= len(a):
+                    added.append(dict(row=list(k), measure=b[i][0], status=b[i][1]["status"],
+                                      reasons=b[i][1].get("reason_detail")))
+                elif i >= len(b):
+                    removed.append(dict(row=list(k), measure=a[i][0], status=a[i][1]["status"]))
+                else:
+                    (ra, ea), (rb, eb) = a[i], b[i]
+                    d = {}
+                    for ax in ("quality", "cost"):
+                        if ea["status"].get(ax) != eb["status"].get(ax):
+                            d[f"status_{ax}"] = [ea["status"].get(ax), eb["status"].get(ax)]
+                    for fld in ("group", "score", "cost_usd"):
+                        if (ea.get("row") or {}).get(fld) != (eb.get("row") or {}).get(fld):
+                            d[fld] = [(ea.get("row") or {}).get(fld), (eb.get("row") or {}).get(fld)]
+                    if d:
+                        ch.append(dict(row=list(k), measures=[ra, rb], changes=d, reasons=eb.get("reason_detail")))
+        if ch or added or removed:
+            res[src] = dict(changed=ch, added=added, removed=removed)
+    return res
+
+
+def check_args(a):
+    for opt, p in (("--registry", a.registry), ("--findings", a.findings)):
+        if not os.path.isdir(p):
+            raise BadInput(f"{opt} {p}: not a folder")
+    if a.class_ratios and not os.path.isfile(a.class_ratios):
+        raise BadInput(f"--class-ratios {a.class_ratios}: no such file")
+    if os.path.exists(a.out) and not os.path.isdir(a.out):
+        raise BadInput(f"--out {a.out}: exists and is not a folder")
+    if a.previous:
+        prev = read_json_arg(a.previous, "--previous")
+        if not isinstance(prev, dict) or not isinstance(prev.get("measures"), dict):
+            raise BadInput(f"--previous {a.previous}: not a status report (no measures)")
+    if a.decisions and os.path.exists(a.decisions) and not os.path.isfile(a.decisions):
+        raise BadInput(f"--decisions {a.decisions}: not a file")
+    try:
+        os.makedirs(a.out, exist_ok=True)
+    except OSError as e:
+        raise BadInput(f"--out {a.out}: {e.strerror}")
 
 
 def main(argv=None):
@@ -1996,12 +2321,16 @@ def main(argv=None):
     ap.add_argument("--no-lqm", action="store_true", help="skip the lqm.load step (data/build_lqm.py)")
     a = ap.parse_args(argv)
     try:
+        check_args(a)
         ctx = Ctx(a)
+    except BadInput as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 2
     except Fatal as e:
         print("build stopped: validation errors\n" + str(e), file=sys.stderr)
         return 1
-    measures, residuals = build(ctx)
-    rep = outputs(ctx, measures, residuals, a.out, a.previous)
+    measures, residuals, legacy = build(ctx)
+    rep = outputs(ctx, measures, residuals, legacy, a.out, a.previous)
     if not a.no_lqm:
         import build_lqm
         build_lqm.run(a.out)

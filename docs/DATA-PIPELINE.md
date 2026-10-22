@@ -170,7 +170,8 @@ Needed only when a dated event of the model falls inside it.
 
 **Model.** The model-name / API-id facts resolve through `names` at the run date; for a name that has served more than one
 model (an alias), the run interval must lie inside one `serves` interval (names that never moved are not date-checked,
-so early-access runs pass) (a stated run date before a redirect, or a proven bound like `alias-date-proven`, does). Two facts that
+so early-access runs pass); for an alias the run interval is one for all candidates, its lower bound the earliest
+candidate's release, so an interval straddling the switch is ambiguous, never the newer model (22 Oct) (a stated run date before a redirect, or a proven bound like `alias-date-proven`, does). Two facts that
 resolve to different keys → `contradictory`. `mode` facts → the line key; a route that cannot separate the mode →
 `not-established:absent`. **Early access**: an `early-access` fact, or a run upper bound before `released`.
 
@@ -297,7 +298,9 @@ report is written back into the status report. Site fields stay in the site's re
 
 ## 8. Migration
 1. Legacy facts: each `raw-data.csv` row becomes a fact set whose proof is `legacy` (its `ref` and confound text),
-   accepted by step 1 only until its source is converted; `flag-map.json` maps the confound flags (4,571 distinct
+   accepted by step 1 only until its source is converted. A legacy measure is a pass-through (22 Oct): it carries
+   today's row as it is, its status is today's (lqm.load's admission), none of the tree's steps apply, and the build
+   writes it verbatim (data/legacy.py, data/BUILD.md; acceptance: data/tests/acceptance.py); `flag-map.json` maps the confound flags (4,571 distinct
    prefixes) to facts and levels — e.g. `requested-as` → requested level, `alias-date-proven` → run bound,
    `index-estimated` → `source-estimate`, AA `was-estimate=` → `prev` (our earlier estimate, replaced) — versioned,
    tested on every row, with the unmapped prefixes reported.

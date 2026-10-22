@@ -298,15 +298,22 @@ def sha256_of(path):
     return h.hexdigest()
 
 
+def stamp(path):
+    """A cache key that changes with the file (several builds in one process)."""
+    st = os.stat(path)
+    return (path, st.st_mtime_ns, st.st_size)
+
+
 def file_text(path, cache={}):
-    if path not in cache:
+    key = stamp(path)
+    if key not in cache:
         with open(path, encoding="utf-8", errors="replace") as f:
             t = f.read()
         if path.endswith((".html", ".htm", ".xml")):
             t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", t, flags=re.S | re.I)
             t = re.sub(r"<[^>]+>", " ", t)
-        cache[path] = norm(t)
-    return cache[path]
+        cache[key] = norm(t)
+    return cache[key]
 
 
 def cited(measure):
@@ -682,7 +689,7 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                 rep.err(F, "a read fact needs a chart-pixel precision")
         elif f["level"] == "read":
             rep.err(F, "only chart facts are read")
-        if f["form"] == "data-file" and not (f.get("table") or f.get("file") or len(saved) == 1):
+        if f["form"] in ("data-file", "legacy") and not (f.get("table") or f.get("file") or len(saved) == 1):
             rep.err(F, "a data-file fact names its table or file")
         if f["says"] in closed:
             if "term" not in f:
@@ -695,6 +702,16 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
             rep.err(F, "scale is for score facts")
         if f.get("scale") == "counts" and not COUNTS.fullmatch(f["value"]):
             rep.err(F, f"a counts score is written 'k of N', 'k/N' or 'k out of N', not {f['value']!r}")
+        if (f["form"] == "legacy") != (f["says"] == "legacy-row"):
+            rep.err(F, "a legacy-row fact has the form legacy, and only it")
+        elif f["form"] == "legacy":
+            leg = src.get("legacy")
+            if not leg:
+                rep.err(F, "a legacy fact needs the source's legacy block (file, columns)")
+            else:
+                rec = next(csv.reader([f["value"]]), [])
+                if len(rec) != len(leg["columns"]):
+                    rep.err(F, f"a legacy row has {len(rec)} fields, the CSV {len(leg['columns'])}")
         if f["says"] == "run-score" and not f.get("run"):
             rep.err(F, "a run-score fact names its run (run)")
         if f.get("run") and f["says"] not in ("run-score", "failure", "partial"):
@@ -708,11 +725,14 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                 rep.err(F, f"namespace '{f['namespace']}' not registered in routes.json")
         if f["says"] == "route" and "term" in f and f["term"] not in routes:
             rep.err(F, f"route term '{f['term']}' not registered in routes.json")
+    leg = src.get("legacy")
+    if leg and leg["file"] not in saved:
+        rep.err(L, f"legacy: file '{leg['file']}' has no sha256 entry")
     if check_files:
         check_saved(src, path, rep)
 
 
-def check_saved(src, path, rep):
+def check_saved(src, path, rep, lines_cache={}):
     L = rel(path)
     reach = {}
     for key, h in src.get("sha256", {}).items():
@@ -724,6 +744,15 @@ def check_saved(src, path, rep):
         if sha256_of(p) != h:
             rep.err(L, f"sha256 mismatch: {key}")
     only = next(iter(reach.values())) if len(src.get("sha256", {})) == 1 and reach else None
+    leg = src.get("legacy")
+    if leg and reach.get(leg["file"]):
+        p = reach[leg["file"]]
+        if stamp(p) not in lines_cache:
+            with open(p, encoding="utf-8", newline="") as f:
+                lines_cache[stamp(p)] = set(f.read().split("\n"))
+        for f in src.get("facts", []):
+            if f["form"] == "legacy" and f["value"] not in lines_cache[stamp(p)]:
+                rep.err(f"{L} {f['id']}", "the legacy row is not a line of its CSV")
     for f in src.get("facts", []):
         p = reach.get(f.get("file")) if f.get("file") else only
         if f.get("quote") and p and p.endswith(TEXT_EXT) and norm(f["quote"]) not in file_text(p):
@@ -819,14 +848,15 @@ def table_rows(table, path, file=None, cache={}):
     fmt = table.get("format") or ("csv" if (p or "").endswith(".csv") else "json" if (p or "").endswith(".json") else None)
     if not p or fmt not in ("csv", "json"):
         return None
-    if (p, table["id"]) not in cache:
+    key = (stamp(p), table["id"], table["row_key"])
+    if key not in cache:
         if fmt == "json":
-            cache[(p, table["id"])] = json_rows(table, p)
+            cache[key] = json_rows(table, p)
         else:
             with open(p, encoding="utf-8", newline="") as f:
                 rows = list(csv.DictReader(f))
-            cache[(p, table["id"])] = (rows[0].keys() if rows else set(), {r.get(table["row_key"]): r for r in rows})
-    return cache[(p, table["id"])]
+            cache[key] = (rows[0].keys() if rows else set(), {r.get(table["row_key"]): r for r in rows})
+    return cache[key]
 
 
 def ref_info(ref, facts, tables):
@@ -872,7 +902,11 @@ def check_measures(ms, path, sources, reg, rep, vocab, check_files):
         M = f"{L} {m['id']}"
         if m["setup"] not in setups:
             rep.err(M, f"setup '{m['setup']}' not registered in benchmarks.json")
-        if m["facts"].get("value") is None and not m["facts"].get("spend"):
+        if m["facts"].get("legacy"):
+            if len(m["facts"]["legacy"]) != 1 or m["facts"].get("value") or m["facts"].get("model") or \
+                    any(v for k, v in m["facts"].items() if k not in ("legacy", "value", "model")):
+                rep.err(M, "a legacy measure cites its one legacy row and nothing else")
+        elif m["facts"].get("value") is None and not m["facts"].get("spend"):
             rep.err(M, "a measure needs a value or a spend")
         for cid in m["facts"].get("value_seen_in", []):
             if cid not in captures:
@@ -979,8 +1013,8 @@ def check_decisions(dec, path, sources, measures, reg, rep):
         for mref in d["measures"]:
             sid, mid = mref.split("#")
             m = measures.get((sid, mid))
-            if not m:
-                rep.err(f"{L} {d['id']}", f"measure {mref} not found")
+            if not m:                                    # renumbered or retired: reported, not applied
+                rep.warn(f"{L} {d['id']}", f"measure {mref} not found: the decision is reported, not applied")
                 ok = False
                 continue
             entries.append(facts_hash(sources[sid][1], m, mref))
