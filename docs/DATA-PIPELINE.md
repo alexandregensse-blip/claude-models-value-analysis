@@ -160,8 +160,8 @@ resolve to different keys → `contradictory`. `mode` facts → the line key; a 
 5. a requested level → the route chain applied in order **harness → router/reseller → maker**, each step dated
    (identity where documented); route unknown → every candidate route is evaluated and the level is accepted only if all
    agree, else `not-established:absent`; a router budget → `budget-converted`; a tie → `ambiguous`;
-6. `no-effort-sent` → `api-default-documented`: the maker's API directly (a router's default: pending the maintainer,
-   see §9); else `default`;
+6. `no-effort-sent` → `api-default-documented`: on the maker's API, the maker's documented default; through a router
+   (route known), the router's own documented default for that model (the maintainer, 22 Oct); else `default`;
 7. a model without an effort parameter, or thinking always on → `solo` (`solo_means`); thinking off → `nothink`
    (= `solo` on an on-off model whose default is off); `reasoning_effort: none` → `nothink`;
 8. nothing → `unstated`.
@@ -253,6 +253,7 @@ report is written back into the status report. Site fields stay in the site's re
    source by source.
 5. Rebuild; before/after against v2026.10.21; the maintainer's yes before any fit.
 
-## 9. Pending the maintainer
-- `api-default-documented` through a router: does a router's own dated documented default count (latitude kimi-k3 via
-  OpenRouter's `default_effort: max`), or only the maker's API?
+## 9. Decided by the maintainer during the reviews
+- `api-default-documented` through a router (22 Oct): when the run is known to have gone through the router with no
+  effort sent, the router's dated documented default for that model is the effort (latitude kimi-k3: OpenRouter
+  `default_effort: max`, captured 21 Jul, run 23 Jul).
