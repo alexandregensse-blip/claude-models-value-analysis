@@ -67,7 +67,8 @@ A data file is proven by its sha256 and a locator (a `tables` entry stands for i
 `score`, `metric-definition`, `headline-metric`, `cost`, `currency`, `unit` (vocabulary = today's unit list + aliases;
 usage and spend share it), `cost-basis`, `cost-method`, `price-table`, `tokens-in`, `tokens-out`, `tokens-cache-read`,
 `tokens-cache-write-5m`, `tokens-cache-write-1h`, `tokens-reasoning` (+ `reasoning-included-in-out`), `cached-share`,
-`requests`, `model-name`, `model-api-id`, `route`, `mode`, `effort-label`, `effort-setting` (the parameter sent),
+`requests`, `model-name`, `model-api-id`, `route`, `mode`, `effort-label`, `effort-setting` (a setting line read in code or config, with where it was read),
+`thinking-on` (thinking enabled with no level, e.g. a `-thinking` id or AA "(Reasoning)"), `thinking-off`,
 `no-effort-sent`, `config-history` (a config file's history over an interval), `thinking-budget`, `tools-regime`,
 `run-date`, `run-start`, `run-end`, `run-id`, `version` (benchmark/protocol/board version), `early-access`, `harness`,
 `judge` (per row when it varies), `aggregation` (which runs a mean covers), `failure`, `partial`, `cap`,
@@ -92,22 +93,30 @@ The agent groups the facts of one measure and names the setup; it writes no key,
 ## 4. Registries
 
 **models.json** — the only keys. Per model: label, maker, `released` (datetime, from the maker), `line`,
-`open_weights`, `thinking` (`levels | on-off | always | none`), `configurations`: the model's own list of
-configurations over dated intervals (Opus 5.5: low…max; GPT-5.x: none/nothink, minimal, low…xhigh; Haiku 4.5: nothink,
-thinking with a budget; a hybrid Qwen: nothink and its levels; a model with no setting at all: `solo` only — `solo` means
-exactly that: one configuration, nothing to set); `names`: each API id or display name and the model it
-**serves** over `{from, to}` — the maker's own dates (release, redirect or shutdown date from its changelog); `efforts`,
-`default`, `conversions` (requested → served, per route), `modes` (request parameters that select another key: Pro →
-`<id>-pro`). The levels the maker serves **as themselves** (its ladder, part of `configurations`) start at the release (release post,
-model card or API reference at release) unless a document dates a later addition. `default`, `conversions` and `modes`
-are dated by their evidence: `from` = the effective date the maker's document states, else its earliest capture; `to` =
-the change the document states, else the last capture still showing it. Between two captures showing the same text the
-interval is covered; between a capture showing it and the next one not showing it, it is not. Build checks: two keys of one maker serving one API id over overlapping intervals, or with
-identical display names, fail the build until resolved.
+`open_weights`, and its **configurations**: the list of configurations the model offers, each dated (`{from, to,
+evidence}`) and each either served as itself or converted:
+- levels of an effort parameter (`minimal`, `low` … `max`), `nothink` (thinking off: `reasoning_effort: none`,
+  `enable_thinking: false`, `thinking: disabled`, a non-reasoning id…; the spellings are listed in vocab.json),
+  `think` (thinking on with no level: the only thinking configuration of an on-off model without levels — DeepSeek
+  V3.2 thinking mode, Kimi K2.5, GLM-5, the Qwen 3.5–3.7 hybrids), `think-<budget>` (thinking on with a token budget);
+- `solo` only for a model whose list is `[solo]`: nothing to set (K2.7 Code, a model with thinking always on and no
+  level). Examples: Opus 5.5 `[low … max]`; GPT-5.x `[nothink, minimal, low … xhigh]`; Haiku 4.5 `[nothink,
+  think-<budget>]`; a hybrid Qwen `[nothink, think]` or `[nothink, low … xhigh]`.
+`names`: each API id or display name, the model it **serves** over `{from, to}` (the maker's own dates: release,
+redirect, shutdown), and optionally the configuration it selects (`deepseek-chat` → nothink, a `-thinking` id →
+think). `default` (the configuration a call with no setting gets), `conversions` (requested → served, per route),
+`modes` (request parameters that select another key: Pro → `<id>-pro`). Configurations served as themselves start at
+the release (release post, model card or API reference) unless a document dates a later addition; `default`,
+`conversions` and `modes` are dated by their evidence: `from` = the effective date the maker's document states, else
+its earliest capture; `to` = the change it states, else the last capture still showing it. Between two captures showing
+the same text the interval is covered; between a capture showing it and the next one not showing it, it is not. Build
+checks: two keys of one maker serving one API id over overlapping intervals, or with identical display names, fail the
+build until resolved.
 
-**routes.json** — vocabulary `maker-api · reseller (Bedrock, Vertex, Azure) · router (OpenRouter, AI Gateway) ·
-harness/CLI (Inspect, Pi, Claude Code, Codex CLI, IronBee…) · self-hosted (vLLM, SGLang…)`. Per route and model, dated:
-the levels it accepts, how it maps a level (identity when documented as identity; OpenRouter nearest supported level,
+**routes.json** — vocabulary `maker-api · reseller (Bedrock, Vertex, Azure: the maker's model resold) · host (Fireworks,
+Together, DeepInfra…: open weights served by a third party) · router (OpenRouter, AI Gateway) · harness/CLI (Inspect,
+Pi, Claude Code, Codex CLI, IronBee…) · self-hosted (vLLM, SGLang…)`. Per route and model, dated: the configurations it
+accepts, how it maps a level (identity when documented as identity; OpenRouter nearest supported level,
 ties `ambiguous`; a model without an effort parameter → a token budget: `budget-converted`), its documented default.
 On a self-hosted route the maker's defaults and conversions do not apply.
 
@@ -159,31 +168,34 @@ so early-access runs pass) (a stated run date before a redirect, or a proven bou
 resolve to different keys → `contradictory`. `mode` facts → the line key; a route that cannot separate the mode →
 `not-established:absent`. **Early access**: an `early-access` fact, or a run upper bound before `released`.
 
-**Effort** — first match wins; every rule's interval must cover the run interval:
-1. a `thinking-budget` → `think-<budget>`; a numeric scale → `scalar-<n>`;
-2. a model with a single configuration (no setting at all, thinking always on) → `solo`, whatever else is stated
-   (K2.7 Code);
-3. an `effort-setting` (a code/config line at the run, or `config-unchanged-over-interval`; the fact records where it was
-   read: the source's own call, or a harness/router config) at a level of the model's ladder that every step of the
-   route chain serves as itself → that level; a level the maker or a route converts goes to step 6;
-4. an `effort-label` that names a level of the model's ladder, served as itself → that level (standing label rule); a
-   label naming a converted level (GLM-5.2 `low`) goes to step 6;
-5. an `effort-label` in other words → `label-to-ladder` when the maker's ladder makes it unique;
-6. a requested or converted level → the route chain applied in order **harness → router/reseller → maker**, each step dated
-   (identity where documented); route unknown → every candidate route is evaluated and the level is accepted only if all
-   agree, else `not-established:absent`; a router budget → `budget-converted`; a tie → `ambiguous`;
-7. `no-effort-sent` → `api-default-documented`: on the maker's API, the maker's documented default; through a router
-   (route known), the router's own documented default for that model (the maintainer, 22 Oct); else `default`;
-8. thinking off → `nothink`; `reasoning_effort: none` → `nothink`; a model's default configuration proven by
-   `api-default-documented` (e.g. Haiku 4.5 on the maker's API: thinking off) → that configuration;
-9. nothing → `unstated`.
-A measure's configuration must be one of the model's `configurations` at the run date. **In the fit**: every
-configuration of the list (`low … max`, `minimal`, `nothink`, `solo`) as its own couple, **except thinking budgets**
-(`think-<budget>`: recorded, `out:budget-config` — too few and an unusual use: the maintainer, 22 Oct). Not
-established (`scalar-*` without a mapping, `budget-converted`, `enabled` without a level, `adaptive`, `default`,
-`unstated`, `req-<label>`, `app-*`, `priceblend`) → `out:effort-not-established`. A budget is stored as its exact token
-count; budgets within 5 % are one value (10k = 10,000 = 10,240). A tools regime (`nt-*`), a fast mode
-or an application setting is part of the setup, not the effort.
+**Configuration** (the effort) — first match wins; every rule's interval must cover the run interval; "the model's
+configurations" are those of models.json at the run date:
+1. a model whose configurations are `[solo]` → `solo`, whatever else is stated (K2.7 Code);
+2. a `thinking-budget` → `think-<budget>` (exact token count; budgets within 5 % are one value: 10k = 10,000 = 10,240);
+   a numeric scale → `scalar-<n>`;
+3. an `effort-setting` (a code/config line at the run, or `config-unchanged-over-interval`; read in the source's own
+   call, or in a harness/router config), a `thinking-on` / `thinking-off` fact, or a `names` entry that selects a
+   configuration → that configuration, when it is one of the model's configurations and every step of the route chain
+   serves it as itself; a configuration the maker or a route converts goes to step 6;
+4. an `effort-label` that names one of the model's configurations, served as itself → that configuration (standing label
+   rule); a label naming a converted level (GLM-5.2 `low`) goes to step 6;
+5. an `effort-label` in other words → `label-to-ladder` when the model's configurations make it unique;
+6. a requested or converted configuration → the route chain applied in order **harness → router / reseller / host →
+   maker**, each step dated (identity where documented); route unknown → every candidate route is evaluated and the
+   configuration is accepted only if all agree, else `not-established:absent`; a router budget → `budget-converted`;
+   a tie → `ambiguous`;
+7. `no-effort-sent` → `api-default-documented`: on the maker's API or a reseller, the maker's documented default (Haiku
+   4.5: thinking off → `nothink`); through a router or host (route known), its own documented default for that model
+   (the maintainer, 22 Oct); else `default`;
+8. nothing → `unstated`.
+Two facts giving two configurations (a `-thinking` id with an effort field null) → `not-established:contradictory`
+unless one is the more specific statement of the same call (the id selects thinking, the null field says no level was
+sent → `think`). **In the fit**: every configuration of the model's list as its own couple (`low … max`, `minimal`,
+`nothink`, `think`, `solo`), **except** `think-<budget>` (recorded, `out:budget-config`: too few and an unusual use,
+the maintainer, 22 Oct). A configuration not in the model's list → `out:effort-not-established`; not established
+(`scalar-*` without a mapping, `budget-converted`, `enabled` without a level, `adaptive`, `default`, `unstated`,
+`req-<label>`, `app-*`, `priceblend`) → `out:effort-not-established`. A tools regime (`nt-*`), a fast mode or an
+application setting is part of the setup, not the configuration.
 
 **Campaign** (computed). A setup's campaign is its `version` (benchmark, protocol or board version). Snapshots of one
 board are linked by `snapshot_of`; a snapshot without a version fact inherits the campaign of the snapshot it continues,
@@ -197,7 +209,8 @@ shared couples, ≥ 2 of them, equality by METHODOLOGY §3's closeness test) lin
 0. **Decision** pinned to the measure → its status (`in:decision:<id>` / `out:decision:<id>`).
 1. **Proof**: every fact used has a locator (and a quote where required) → else `out:no-proof`.
 2. **Model** accepted and in models.json → else `out:model-not-established`.
-3. **Configuration** established and in the fit → else `out:budget-config` / `out:effort-not-established`.
+3. **Configuration** established, in the model's list and in the fit → else `out:budget-config` /
+   `out:effort-not-established`.
 4. **Value** accepted; `source-estimate` → `out:estimate`; `failure` (did not complete, infrastructure error) →
    `out:failed-run`; a source's mean that includes a failed run → recomputed by `mean-of-runs` when the per-run values
    are written, else `out:failed-run`; `partial` (items missing, not scored) → `out:partial` unless the source scores them as wrong; `cap`
@@ -250,8 +263,14 @@ The build writes **one table per axis** in today's `raw-data.csv` columns, holdi
   `vendor-reported:<org>`, `evaluated-by:`, `reading-sd`…, listed in vocab.json), plus `prev`;
 - `group-map.json`: fit group → base group, used by the catalog lookups (families, composites, publishers, unit aliases).
 
-Code changes this needs (no change of method): `fit.py` reads one path per axis; `catalog` resolves a group through
-`group-map.json`. The build also writes the public data file (every measure, today's columns plus `status_quality` and
+Code changes for the tables (no change of method): `fit.py` reads one path per axis; `catalog` resolves a group
+through `group-map.json`. `lqm.load`'s per-row outcome is recovered by comparing its input with the rows it keeps
+(group, couple, value): a row dropped by its composites rule → `out:composite`, by its republication rule →
+`out:republished`, written into the status report. **Method change** (configurations per model, 22 Oct), with its
+before/after: `lqm.EFFORTS` → the configurations in the fit; METHODOLOGY §2 ("a model without an effort setting … solo",
+"nothink … outside the computation") and DISPLAY-METHODOLOGY (effort ladders) rewritten; the site's effort order,
+grids, monotonicity report and duels (`EFFORT_ORDER`, `ORD`, `CAP`, `EFF`) extended to `nothink`, `minimal`, `think`
+(placed below `low`). The build also writes the public data file (every measure, today's columns plus `status_quality` and
 `status_cost`), read by precheck.py, validation/*.py, site/sources.py (through the group map) and the CSV download;
 precision.py is replaced by the facts' precision model. **Acceptance test** before any new fact is used: the legacy
 facts alone must give `lqm.load` the same groups, rows and report as v2026.10.21's raw-data.csv. `lqm.load` keeps its composites rule, homogeneity split and republication rule in phase 1, and its
@@ -274,7 +293,9 @@ report is written back into the status report. Site fields stay in the site's re
    tested on every row, with the unmapped prefixes reported.
 2. prices.json filled for every model in the fit before the first cost build; `as_of` pinned.
 3. First build; the status report lists, per source, the measures of today's fit that become `out:*-not-established`
-   (≈ 3,780 ladder rows carry no recognisable effort proof today) and those still in the data that the tree now refuses
+   (≈ 3,780 configuration rows carry no recognisable effort proof today; every `solo` row of a model whose list is not
+`[solo]` — ≈ 1,760 in-list rows, Haiku 4.5's 375 included, ≈ 1,200 of them on hybrid models where `solo` meant
+"thinking on" — is re-read into `nothink`, `think`, a level, a budget, or not established) and those still in the data that the tree now refuses
    (e.g. AA indices flagged estimated).
 4. Agents convert sources to real files, worst first, re-reading the saved copy or the live source; legacy proof retires
    source by source.
