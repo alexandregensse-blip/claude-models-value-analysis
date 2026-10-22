@@ -1,192 +1,235 @@
-# Data pipeline: findings, registries, decision tree (proposal, 22 Oct 2026)
+# Data pipeline: findings, registries, decision tree (proposal v2, 22 Oct 2026)
 
-Status: **draft for the maintainer's validation — no code is written against it yet.**
+Status: **draft — reviewed once (/work/.salvo14/review-pipeline/review.md), revised; no code is written against it yet.**
 
-The data the fit reads (`raw-data.csv` today) becomes a **computed table**. It is built by one script from two inputs that
-people and agents write: the **findings** (what a source says, and the measures we draw from it) and the **registries**
-(what we define: models, efforts, benchmarks, publishers, prices, rules). Nobody sets a row's status by hand any more
-(no `#` group, no `req-*` label): the decision tree below computes it, with a reason.
+The data the fit reads becomes a **computed table**, built by one script from what agents write (the **findings**: what
+a source says) and what we define (the **registries**). **Agents write facts only.** The model, the effort, every
+certainty level and every status are **computed by the build** from the facts and the registries; nobody sets them by
+hand, except the maintainer's own per-measure decisions, which live in one file and are cited by id.
 
 ```
-data/findings/sources/<source-id>.json    what one source says (facts, each with its proof)        ← salvo agents
-data/findings/measures/<source-id>.json   the measures drawn from those facts (our keys, our rules) ← salvo agents, verifiers
-data/registry/models.json                 models, aliases (dated), effort ladders and defaults (dated)
-data/registry/benchmarks.json             benchmarks and setups: headline metric, bounds, task, composites (formula)
-data/registry/publishers.json             publishers, the maker they belong to (home effect)
-data/registry/prices.json                 dated list prices per model (classes, tiers, promotions, routes)
-data/registry/rules.json                  the deduction rules a measure may cite
-build/fit-table.csv                       computed: one row per accepted measure, per axis, with its status and reason
-build/status-report.json                  computed: every measure, accepted or not, and why
+data/findings/sources/<source-id>.json   one source snapshot: its words, as facts with proofs        ← salvo agents
+data/findings/measures/<source-id>.json  which facts form one measure, and on which setup          ← salvo agents
+data/registry/models.json                models, names served over time, efforts, defaults, conversions, modes (dated)
+data/registry/routes.json                routers and harnesses: the levels they accept and how they map them (dated)
+data/registry/benchmarks.json            families, setups, headline metrics, composites (formula)
+data/registry/publishers.json            publisher → maker (home effect)
+data/registry/prices.json                dated prices per model and route, as_of pinned
+data/registry/rules.json                 the deduction rules the build applies
+data/registry/vocab.json                 closed vocabularies (fact types, cost bases, cost methods, units, anomalies, effort ids)
+data/registry/flag-map.json              legacy: confound flag → fact/level (migration only, versioned, tested on every row)
+data/decisions.json                      the maintainer's per-measure decisions (selector, status, reason, date)
+build/fit-table.csv                      computed: the rows the fit reads (today's raw-data.csv columns + status columns)
+build/status-report.json                 computed: every measure, its status per axis, its reason, and the diff to the last build
 ```
 
-Saved pages (HTML, PDF, JSON dumps, clones) stay **outside git** (salvo folders); git keeps their links, their Wayback
-address, their sha256 and the extracted facts with their quotes.
+Saved pages, dumps and clones stay outside git in the salvo folders, which are kept; git keeps the URLs, the Wayback
+captures, the sha256 of each saved file and the extracted facts.
 
 ---
 
-## 1. Certainty levels
-
-Every fact and every measure field carries one level. A level exists only because the tree treats it differently.
+## 1. Certainty levels (of a fact, and computed for each measure field)
 
 | Level | Meaning | Tree |
 |---|---|---|
-| `written` | the source states it in its own words: a printed number, a data-file value, a code/config line at the run's commit, an API id, a label | accepted |
-| `read` | read off a chart or an image | accepted; the reading precision enters the uncertainty |
-| `computed` | obtained by a rule of `rules.json` from accepted inputs (mean of runs, percent from counts, residual of a composite, tokens × price, alias resolved by date, label translated by the maker's ladder, maker conversion dated before the run, router mapping, documented default) | accepted when the rule is registered and every input is accepted; worth its weakest input |
-| `source-estimate` | the source's own estimate, imputation or projection (an AA "estimated" index, a projected score) | refused: not a measurement |
-| `not-established` | with a reason: `absent`, `assumed` (plausible, not proven), `contradictory` (the source states two things) | refused; the reason tells the next search |
+| `written` | the source states it: a printed number (also a number printed on an image), a data-file value, a code or config line at the run's commit, an API id, a label | accepted |
+| `read` | measured off a chart's geometry (pixels; vector paths are `written`, exact) | accepted; its reading sd enters the value's precision |
+| `computed` | produced by the build with a rule of rules.json from accepted inputs | accepted when every input is accepted; the precision is propagated by the rule's formula |
+| `source-estimate` | a value the source did not measure on this run: imputed, projected, filled, an "estimated" index | refused (`out:estimate`) |
+| `not-established` | `absent` · `assumed` (plausible, unproven) · `contradictory` (the source states two things) · `ambiguous` (a rule gives two answers, e.g. a router tie) | refused, with the reason |
 
-Not levels but attributes, kept next to the value: the **precision** (printed step, reading sd), the **route** (direct,
-router, self-hosted, quantized), **restated-from** (the value is another source's: counted once, home effect), and
-**anomalies** (failed or partial run, errors, truncation).
+A cost the source computed from **this run's own tokens** at a stated price is `written`, basis `list-estimate` — not a
+`source-estimate`. Each measure field (model, effort, run date, value, setup fields, each usage class, the price) gets its
+own level; a measure is in only if every field the tree reads is accepted.
+
+Attributes kept next to the value, never levels: the **precision model** (`printed` step from the digits · `chart-pixel`
+reading sd · `exact`), the **route**, **restated-from** (with its own level), **anomalies** (with their own level).
 
 ---
 
-## 2. Source file — what the source says
-
-One file per source snapshot. It holds the source's words only: no key of ours, no interpretation.
+## 2. Source file
 
 ```json
-{
- "id": "src-<publisher>-<what>-<YYYY-MM-DD>",
- "publisher": "<publishers.json id>",
- "urls": ["<the page / data file / repo URL>"],
- "wayback": ["<web.archive.org capture>"],
- "commit": "<repo commit, when the source is a repo>",
- "sha256": {"<local file name>": "<hash>"},
- "harvested_at": "<ISO datetime UTC>",
- "published_at": {"value": "<date or interval>", "level": "written", "where": "...", "quote": "..."},
- "salvo": "<salvo id>", "agent": "<agent id>",
+{"id": "src-<publisher>-<what>-<YYYY-MM-DD>", "publisher": "<publishers.json id>",
+ "urls": ["…"], "wayback": ["…"], "commit": "<repo commit or null>", "sha256": {"<saved file>": "<hash>"},
+ "harvested_at": "<ISO datetime UTC>", "salvo": "…", "agent": "…",
+ "snapshot_of": "<earlier source id of the same board, or null>",
  "facts": [
-  {"id": "F1", "says": "<fact type>", "about": "<the source's name for the entry, verbatim>",
-   "value": "<verbatim>", "level": "written|read|source-estimate|not-established",
-   "where": "<locator: table/row/column, JSON path, file@commit line, PDF page, chart + axis>",
-   "quote": "<exact text, original language>", "translation": "<English, when not English>"}
- ]
+  {"id": "F1", "says": "<vocab fact type>", "about": "<the source's entry name, verbatim>", "value": "<verbatim>",
+   "level": "written|read|source-estimate|not-established:<reason>",
+   "where": "<locator>", "quote": "<exact text, original language; required for prose and labels, optional for data files>",
+   "translation": "<English, when not English>"}
+ ],
+ "tables": [{"id": "T1", "file": "<saved file>", "where": "<JSON path / CSV / table locator>", "columns": {…}}]
 }
 ```
 
-Fact types (`says`): `score`, `metric-definition`, `headline-metric`, `cost-usd`, `cost-basis`, `price-table`, `tokens-in`,
-`tokens-out`, `tokens-cache-read`, `tokens-cache-write`, `tokens-reasoning`, `model-name`, `model-api-id`, `route`,
-`effort-label`, `effort-setting` (the parameter actually sent), `no-effort-sent`, `thinking-budget`, `run-date`,
-`version`, `harness`, `judge`, `items`, `attempts`, `aggregation` (mean of n runs…), `estimate-flag`, `failure`,
-`restated-from`, `component-of` (composite membership and weights), `note`.
+A data file is proven by its sha256 and a locator (a `tables` entry stands for all its cells); a quote is required for
+prose, labels and code. Fact types (vocab.json): `score`, `metric-definition`, `headline-metric`, `cost`, `currency`,
+`cost-unit`, `cost-basis`, `cost-method`, `price-table`, `tokens-in`, `tokens-out`, `tokens-cache-read`,
+`tokens-cache-write-5m`, `tokens-cache-write-1h`, `tokens-reasoning` (+ `reasoning-included-in-out`), `cached-share`,
+`requests` (number of calls, for per-request tiers), `per` (task · run · suite · 1k calls), `model-name`, `model-api-id`,
+`route`, `mode` (e.g. `reasoning.mode=pro`), `effort-label`, `effort-setting` (the parameter actually sent),
+`no-effort-sent`, `thinking-budget`, `tools-regime`, `run-date`, `run-id`, `early-access`, `version`, `harness`, `judge`
+(per row when it varies), `aggregation` (mean of n runs, which runs), `failure`, `restated-from`, `evaluated-by`,
+`component-of` (with weights). Optional, never read by the tree: `items`, `attempts`, `note`.
 
-## 3. Measure file — what we draw from it
+## 3. Measure file
 
-One file per source, next to it. Each measure is one value of one couple on one setup, and cites the facts it rests on.
+The agent groups the facts that make one measure and names the setup; it does **not** write our model key, effort or
+levels.
 
 ```json
-{
- "source": "src-…",
- "measures": [
-  {"id": "M1",
-   "setup": "<benchmarks.json setup id>",
-   "model":  {"id": "<models.json id>", "facts": ["F2"], "rule": "<rules.json id or null>", "level": "written|computed|…"},
-   "effort": {"id": "low|medium|high|xhigh|max|minimal|solo|nothink|think-<budget>|unstated|default",
-              "facts": ["F3"], "rule": "…", "level": "…"},
-   "run_date": {"from": "<date>", "to": "<date>", "facts": ["F4"], "level": "…"},
-   "score":  {"value": 71.4, "step": 0.1, "metric": "<as in setup>", "facts": ["F1"], "rule": null, "level": "written"},
-   "usage":  {"in": 1830000, "out": 412000, "cache_read": null, "cache_write": null, "reasoning": null,
-              "per": "task|run|suite", "facts": ["F5", "F6"], "level": "written"},
-   "spend":  {"usd": 3.12, "basis": "billed|list-estimate|router-billed|subscription|unknown",
-              "price_date": {"from": "…", "to": "…"}, "method": "<free text naming the source's cost method>",
-              "facts": ["F7", "F8"], "level": "written"},
-   "anomalies": [],
-   "verified": {"by": "<verifier id>", "at": "<datetime>", "rederived": true}}
- ]
-}
+{"source": "src-…",
+ "measures": [{"id": "M1", "setup": "<benchmarks.json setup id>", "campaign": "<run id / board version, or null>",
+   "facts": {"value": "F1", "model": ["F2"], "effort": ["F3"], "run_date": ["F4"], "usage": ["F5", "F6"],
+             "spend": ["F7", "F8", "F9"], "judge": null, "anomalies": [], "restated_from": null},
+   "verified": {"by": "…", "at": "…", "rederived": true}}]}
 ```
+
+The build computes from these: `model.id` (names served at the run date), `mode`/`line` key, `effort.id` (rules below),
+every level, the run-date interval, the cost value and its subset, and the status.
 
 ---
 
 ## 4. Registries
 
-**models.json** — the only keys a measure may use.
-```json
-{"<id>": {"label": "Gemini 3.7 Flash", "maker": "google", "released": "2026-08-13", "line": "<model id of the line, or null>",
-  "open_weights": false,
-  "names": [{"name": "gemini-3.7-flash", "serves": "<id>", "from": "2026-08-13", "to": "2026-10-07", "evidence": "…"},
-            {"name": "gemini-3.7-flash", "serves": "gemini-3.8-flash", "from": "2026-10-08", "to": null, "evidence": "…"}],
-  "efforts": [{"levels": ["minimal", "low", "medium", "high"], "from": "…", "to": null, "evidence": "…"}],
-  "default": [{"level": "medium", "from": "…", "to": null, "evidence": "<doc capture URL + date>"}],
-  "conversions": [{"requested": "max", "served": "xhigh", "route": "direct", "from": "<earliest dated doc>", "evidence": "…"}],
-  "thinking": "levels|on-off|always|none"}}
-```
-**benchmarks.json** — `setup` = benchmark × version × subset × harness × judge panel; its headline metric, the metric's
-bounds and direction, task type, complexity, and for a composite its components and formula (weights, normalisation,
-validated on complete couples).
-**publishers.json** — publisher id → the maker it belongs to (home effect) or none.
-**prices.json** — per model and route: dated list prices per token class, long-context tiers, promotions (recorded and
-flagged, never a base; their display on the site is set aside for now), batch/flex factors; each with its evidence. "Today's price" = the standard list price in force on the build date.
-**rules.json** — each deduction rule: id, inputs (fact types / registry entries), output field, conditions. First set:
-`alias-by-date`, `label-to-ladder`, `maker-conversion-dated`, `router-nearest-level-dated`, `api-default-documented`
-(code shows nothing sent + direct route or a router's dated default + maker doc captured before the run + run date),
-`no-effort-setting` (→ solo), `thinking-off` (→ nothink), `mean-of-runs`, `percent-from-counts`, `composite-residual`,
-`cost-from-tokens`, `cost-uniform-factor` (a proven uniform price factor: Flex = ½, a uniform cut), `chart-reading`.
+**models.json** — the only keys. Per model: label, maker, `released` (datetime), `line`, `open_weights`; `names`: each
+name (API id or display name) with the model it **serves** over a dated interval; `efforts`: the accepted levels over
+dated intervals; `solo_means` (the single configuration `solo` denotes, for models without an effort parameter or with
+thinking always on); `thinking`: `levels | on-off | always | none`; `default`: level per dated interval; `conversions`:
+requested → served, per route, per dated interval; `modes`: request parameters that select another key (Pro → `<id>-pro`).
+Dated intervals everywhere are `{from, to, evidence_from, evidence_to}`: `from` = the earliest capture showing it, `to` =
+the last capture still showing it (null if current); a gap between captures is **not covered**.
+Build-time identity checks: two keys of one maker whose names serve the same API id over overlapping intervals, or
+identical display names, fail the build until resolved (merge, or a dated `serves`).
+
+**routes.json** — per router (OpenRouter, Vercel AI Gateway, Bedrock…) and harness (Inspect, Pi, Claude Code, Codex
+CLI, IronBee…): dated `supported_efforts` per model, the mapping rule (OpenRouter: nearest supported level, ties
+`ambiguous`; on a model without an effort parameter the effort becomes a token budget → `budget-converted`), the
+router's own documented default per model and date.
+
+**benchmarks.json** — `family` (one benchmark across publishers) ⊃ `setup` (benchmark × version × subset × harness ×
+tools regime × judge panel × metric) ; per setup: headline metric (the source's designated one; if none, the metric the
+source ranks by; else a decision), bounds, direction, task type, complexity; composites: components, formula (weights,
+normalisation), validated on complete couples, linear or not.
+
+**publishers.json** — publisher → the maker it belongs to, or none.
+
+**prices.json** — per model and route: list prices per token class (input, output, cache read, cache write 5m and 1h),
+long-context tiers with their per-request threshold, promotions (recorded, flagged, never a base; their display on the
+site is set aside for now), batch and flex factors; each with its evidence and dated interval. `as_of` is pinned per
+build. The **base route** of a model is its maker's API. The **base price** is the standard list price in force on
+`as_of`; for a model whose standard price never applied (sold only at its launch price until withdrawn: Gemini 3.7
+Flash), the price actually charged.
+
+**rules.json** — each rule: id, inputs, output, conditions, precision formula. Set: `alias-by-date`, `mode-to-line`,
+`label-to-ladder`, `maker-conversion-dated`, `route-mapping-dated`, `api-default-documented` (code shows nothing sent at
+the run's commit; the maker's API directly, or a router whose dated documented default is known; the default's interval
+covers the run; the run date known), `no-effort-setting` (→ solo), `thinking-off` (→ nothink), `mean-of-runs` (failed
+runs excluded), `percent-from-counts`, `composite-residual`, `cost-from-tokens`, `cost-publisher-figure`,
+`cost-uniform-factor` (a proven uniform factor: Flex = ½, a uniform cut), `cost-class-ratio` (the class-median ratio of
+METHODOLOGY §2, its spread added to the precision), `chart-reading`, `currency-fixed` (no conversion: a non-USD cost
+stays in its own subset).
+
+**decisions.json** — `{id, selector (source/setup/model/effort or measure ids), axis, status, reason, date, by}`; cited in
+the status as `in:decision:<id>` / `out:decision:<id>`.
 
 ---
 
-## 5. Decision tree (per measure; quality and cost axes separately)
+## 5. Decision tree
 
-Each step either passes or gives the measure its status with a reason code. Order matters only for the reason reported.
+### 5.1 Facts → fields (build)
+- **Model**: `names` resolves the model-name/API-id fact at the run date. The run-date interval must lie inside one
+  `serves` interval; straddling a switch → `not-established:ambiguous`. `mode` facts map to the line key (`modes`); a
+  route that cannot separate a mode (Pro via a router that does not say) → `not-established:absent`.
+- **Effort**, first match wins:
+  1. `effort-setting` written at the run's commit, at a level the model accepts at the run date → that level;
+  2. an `effort-label` equal to a level name of the model's ladder → that level (`written`);
+  3. an `effort-label` in other words → `label-to-ladder` when the maker's ladder makes it unique;
+  4. a requested level the model does not accept → `maker-conversion-dated` (direct route) or `route-mapping-dated`
+     (router/harness); the conversion's interval must **cover** the run-date interval;
+  5. `no-effort-sent` → `api-default-documented`; the default's interval must cover the run-date interval;
+  6. a model without effort parameter / thinking always on → `solo` (`solo_means`); thinking off → `nothink`;
+  7. otherwise: `thinking-budget` → `think-<budget>`; a numeric scale (DeepSeek 1–100) → `scalar-<n>`; a router budget →
+     `budget-converted`; `default` stated without a known default → `default`; nothing → `unstated`.
+  Effort ids and statuses: `low medium high xhigh max solo` → ladder; `minimal nothink think-* scalar-* budget-converted
+  enabled default unstated` → `out:effort-outside-ladder` or `out:effort-not-established`. A tools regime (`nt-*`) is
+  part of the setup, not the effort.
+- **Run date**: interval `[max(released, earliest evidence), min(run-date fact, publication, capture, commit)]`, as
+  datetimes. Needed only when a dated event of the model (a `serves` switch, a conversion/default interval edge, a price
+  change for the cost) falls inside `[released, upper bound]`.
+- **Early access**: an `early-access` fact, or a run-date upper bound before `released`.
 
-**Q — quality axis**
-1. **Source**: URL, harvest date and at least one locator per fact used; else `out:no-proof`.
-2. **Model**: `model.id` in models.json and its level accepted. A name that serves different models over time is resolved
-   by `alias-by-date`; the run-date interval must lie on one side of the switch; else `out:model-not-established`.
-   A route that can change the weights (self-hosted, quantized, unknown provider of open weights) is part of the setup.
-3. **Effort**: level accepted and the effort in the fit ladder (`low…max`, `solo`); `minimal`, `nothink`, `think-*` are
-   their own couples outside the ladder; `default`/`unstated` → `out:effort-not-established`. A conversion or a default
-   needs its dated document before the run (`run_date.to` < the evidence date fails).
-4. **Value**: level `written`, `read` or `computed`; `source-estimate` → `out:estimate`; anomaly `failed-run` →
-   `out:failed-run`; `contradictory` → `out:contradictory`.
-5. **Metric**: the setup's headline metric (another metric of the same run is the same execution: one measure, not two).
-6. **Setup homogeneity**: one setup = one harness, one judge panel, one version; a re-published board is the same setup
-   when it is a continuation (latest value kept, earlier one recorded) and a new setup when the runs were redone.
-7. **Composites**: a couple whose components are measured loses the composite; with part of them measured, only the
-   `composite-residual` of the missing part is kept (formula validated; residuals of an estimated index refused).
-8. **Republication**: a value restated from another source, or identical across groups beyond chance, counts once.
-9. **Group**: a setup becomes a fit group with ≥ 2 accepted couples.
+### 5.2 Quality axis (per measure; the first failing step gives the status)
+1. **Proof**: every fact used has a locator (and a quote where required) → else `out:no-proof`.
+2. **Model** accepted → else `out:model-not-established`.
+3. **Effort** in the ladder → else `out:effort-outside-ladder` / `out:effort-not-established`.
+4. **Value**: `written`/`read`/`computed`; `source-estimate` → `out:estimate`; an anomaly `written` (failed, partial,
+   errored) → `out:failed-run`; an anomaly `assumed` (inferred failure) → `out:anomaly-assumed`; `contradictory` →
+   `out:contradictory`.
+5. **Metric**: the setup's headline metric; another metric of the same run is the same execution (one measure).
+6. **Campaign**: two snapshots of a board are linked by `snapshot_of`. Same `run-id`, or same run date with the value
+   unchanged → **continuation**: the latest value is kept, the earlier recorded as `prev`. Re-run (new run id or run
+   date) → a new campaign. A regrade of the same runs is a new setup sharing the execution (its cost counts once).
+7. **Composites**: a couple with **any** component measured loses the composite; a linear composite with part of its
+   components measured keeps only its `composite-residual` (setup = composite × missing set × capture; residuals of an
+   estimated index refused); a non-linear composite (Epoch ECI) is kept whole only for couples with no component.
+8. **Republication**: `restated-from` (accepted) → the original is kept; if it is not in the data, the restatement, with
+   home = (original publisher = maker); identical values across groups beyond chance (lqm.load's rule) count once.
+9. **Decision** (`decisions.json`) overrides, cited.
+10. **Group** = setup × publisher × campaign, with ≥ 2 accepted couples → `in`; else `out:single-couple`.
 
-**C — cost axis** (after steps 1–3, 6 of Q)
-1. **Cost value**, in order of preference: tokens by class → `cost-from-tokens` at today's price; else dollars with a
-   stated basis and a price date → rescaled by the price ratio (old → today) when known, or by a proven uniform factor;
-   else `unknown` for the step below.
-2. **Comparability (the cost rule)**: a cost enters the fit in the largest subset of the setup's measures that share **one
-   cost method** and whose **price ratios between the possible price date and today are known** (unchanged, or changed
-   by the same known factor). Typical subsets: the whole setup (no price moved); one model's efforts (its price moved,
-   date unknown: the effort ratios hold); the models of one route. A subset of one measure carries nothing → `out:cost-
-   not-comparable`.
-3. **Basis**: `subscription` / CLI flat billing → `out:cost-basis`; mixed bases in a setup → one subset per basis.
-4. **Promotions / off-peak** are never the base. (Showing them on the site is set aside for now — user, 22 Oct.)
+### 5.3 Cost axis
+Steps 1–4 and 6–10 of 5.2 apply (estimates, failed runs, composites and republication included). Then:
+1. **Cost value at the base price**, first that applies: the publisher's own figure at today's price; the run's tokens per
+   class × the base price (`cost-from-tokens`; per-request long-context tiers only when `requests` and per-call sizes are
+   known, else the measure is not re-priceable); a stated cost rescaled by the old→base price factor when the price at
+   the price date is known (`cost-uniform-factor` or the per-class factor on the run's tokens); `cost-class-ratio`;
+   otherwise the cost stays at its own basis, **unrepriced**, for step 2.
+   `price_date` = the date of the prices the source applied: the run date for a billed spend; the capture/reading date for
+   a source that recomputes at its current price (AA); the stated date for a list estimate.
+2. **Partition**: the setup's measures are split by `basis` × `method` × `unit` × `currency` × `route` (closed
+   vocabularies). Within a part, the re-priced measures form one subset; the unrepriced ones form one subset per model,
+   and only when the model's price change over the price-date interval is uniform across token classes, or its class
+   tokens are known (its efforts' ratios then hold); measures with no known price over their interval and models whose
+   change is not uniform → `out:cost-not-comparable`.
+3. A subset with fewer than 2 couples → `out:cost-single-couple`. `subscription` / flat CLI billing →
+   `out:cost-basis`.
+4. Promotions and off-peak prices are never the base.
 
-Every measure ends with `in` or `out:<reason>` on each axis; the build writes both into `status-report.json`, and the
-fit table holds the `in` measures with their group (setup, plus the cost subset on the cost axis).
+The cost group = group × subset.
 
 ---
 
-## 6. Validation
+## 6. The fit table and the fit
 
-- **Schema check** (build): every file valid; every key in a registry; every fact used has a locator and a quote (or a
-  chart reference for `read`); every `computed` cites a registered rule whose inputs exist.
-- **Re-derivation** (verifier agents): each number re-derived from the saved copy; a mismatch is an `contradictory` fact.
-- **Precheck** fails when a measure in the fit lacks a proof for model, effort, value, or (when an event is in its
-  window) run date; it reports the counts per reason code, before/after against the last build.
-- **Audit trail**: the status report diffs between two builds show every measure that changed status and why.
+Phase 1 (this redesign): the build writes `build/fit-table.csv` with today's `raw-data.csv` columns — group (setup ×
+publisher × campaign [× cost subset]), source, model, effort, task_type, complexity, harness, unit, cost_usd,
+cost_prec, tokens, score, score_metric, score_prec, cached_pct, confound (flags regenerated from the facts: home,
+restated-from, evaluated-by, EAP-run, reading sd, `prev`…), ref — for every measure `in` on at least one axis (the other
+axis' value kept when known, since republication detection uses it), plus `status_quality`, `status_cost`. `lqm.load`
+reads it unchanged; steps 7–8 (composites, republication) and the homogeneity split stay in `lqm.load` in phase 1, and
+its report is written back into the status report (so they run once). Phase 2 may move them into the build.
+Site fields (label, colour, order, display order, group labels, unit aliases) stay in the site's registry.
 
-## 7. Migration of the existing data
+## 7. Validation
 
-1. Convert every `raw-data.csv` row into a source fact set + measure, with levels inferred from today's flags
-   (`effort-from-source`, `requested-as`, `alias-date-proven`, `cost-out`, `reprice`, …); what no flag proves becomes
-   `assumed`.
-2. Build; list the measures in today's fit whose status becomes `out:*-not-established`.
-3. Agents re-read the sources for those measures only (saved copies first, then the live source / Wayback), source by
-   source, and fill the facts.
-4. Rebuild; before/after against v2026.10.21; the maintainer's yes before any fit.
+- Schema: every file against its schema and vocab.json; every key in a registry; identity checks of models.json.
+- Re-derivation by verifier agents: for every measure `in`, or changing status, each number re-derived from the saved
+  file; a mismatch makes the fact `contradictory`.
+- Precheck fails when a measure `in` lacks an accepted model, effort, value or (when an event is in its window) run date;
+  reports counts per reason, and the status diff to the last build.
 
-## 8. Open points
+## 8. Migration
 
-- Setup ids and benchmark families: merge today's `groups.json`, `families.json`, `composites.json` into benchmarks.json.
-- The fit's group = setup (+ cost subset): today's homogeneity split (publisher, harness, scale, unit) moves into the setup.
-- Precision fields: `step` from the printed value, `reading_sd` for charts (today's `origins.json`).
+1. **Legacy facts**: each `raw-data.csv` row becomes a source fact set whose proof is `legacy` (the row's `ref` and its
+   confound text), accepted by step 1 only until that row's source is converted; `flag-map.json` maps the confound flags
+   (4,571 distinct prefixes) to facts and levels, versioned and tested on every row, with a report of unmapped prefixes.
+2. **prices.json** filled for every model in the fit before the first cost build (79 models have no price history today);
+   `as_of` pinned.
+3. First build; the status report lists, per source, the measures of today's fit that become `out:*-not-established`
+   (≈ 3,780 ladder rows carry no recognisable effort proof today: anthropic-syscard, artificialanalysis, vals.ai…).
+4. Agents convert sources to real source/measure files, worst sources first, re-reading the saved copy or the live
+   source where a fact is missing; legacy proof retires source by source.
+5. Rebuild; before/after against v2026.10.21; the maintainer's yes before any fit.
