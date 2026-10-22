@@ -109,6 +109,94 @@
     }
    ]
   },
+  "captures": {
+   "type": "array",
+   "description": "Captures of the source (Wayback, commits, our fetches): measures name those carrying their value (value_seen_in); the earliest gives the run's default upper bound.",
+   "items": {
+    "type": "object",
+    "description": "One capture of the source.",
+    "properties": {
+     "id": {
+      "$ref": "common.schema.json#/$defs/capture_id"
+     },
+     "kind": {
+      "$ref": "vocab.json#/$defs/capture_kind"
+     },
+     "url": {
+      "type": "string",
+      "description": "Capture URL (Wayback URL with its timestamp, commit URL)."
+     },
+     "commit": {
+      "type": "string",
+      "description": "Commit id (kind commit).",
+      "pattern": "^[0-9a-f]{7,40}$"
+     },
+     "captured": {
+      "$ref": "common.schema.json#/$defs/date_or_datetime",
+      "description": "When the capture was made (Wayback timestamp, commit date, our fetch time)."
+     },
+     "file": {
+      "type": "string",
+      "description": "Saved copy of this capture (a key of the sha256 map)."
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "id",
+     "kind",
+     "captured"
+    ],
+    "unevaluatedProperties": false,
+    "anyOf": [
+     {
+      "required": [
+       "url"
+      ]
+     },
+     {
+      "required": [
+       "commit"
+      ]
+     },
+     {
+      "required": [
+       "file"
+      ]
+     }
+    ]
+   }
+  },
+  "extractions": {
+   "type": "array",
+   "description": "Text extractions of binary saved copies (PDF): quotes of facts in a PDF point at the extraction, where the validator finds them (NFKC-normalised).",
+   "items": {
+    "type": "object",
+    "description": "A text extraction.",
+    "properties": {
+     "file": {
+      "type": "string",
+      "description": "The text extraction (a key of the sha256 map)."
+     },
+     "from": {
+      "type": "string",
+      "description": "The saved binary it was extracted from (a key of the sha256 map), e.g. a PDF."
+     },
+     "tool": {
+      "type": "string",
+      "description": "Tool and version (pypdf 5.x...)."
+     }
+    },
+    "required": [
+     "file",
+     "from",
+     "tool"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
   "facts": {
    "type": "array",
    "description": "The facts.",
@@ -126,7 +214,7 @@
       "description": "Fact type (vocab fact_type)."
      },
      "about": {
-      "description": "The source's entry name, verbatim (row label, model string as printed); null for a source-wide fact.",
+      "description": "The source's entry name, verbatim (row label, model string as printed; for a chart point, the series' legend label, the marker going in `where`); null for a source-wide fact. Within a measure, the value and the per-entry facts (spend, usage, judge, anomalies) are about an entry a model fact names.",
       "type": [
        "string",
        "null"
@@ -139,7 +227,7 @@
      },
      "term": {
       "type": "string",
-      "description": "For fact types with a closed vocabulary (vocab closed_term_fact_types: unit, currency, cost-basis, cost-method): the vocabulary term this verbatim value stands for; for a route: the routes.json id when registered. Re-derived by the verifier."
+      "description": "For fact types with a closed vocabulary (vocab closed_term_fact_types: score → metric, unit, currency, cost-basis, cost-method): the vocabulary term this verbatim value stands for; for a thinking-budget: its token count (digits); for a route: the routes.json id when registered. Re-derived by the verifier."
      },
      "level": {
       "$ref": "vocab.json#/$defs/level",
@@ -205,6 +293,21 @@
       ],
       "unevaluatedProperties": false
      },
+     "scale": {
+      "$ref": "vocab.json#/$defs/score_scale",
+      "description": "For score facts (required): how the value is written (fraction, percent, raw). Never inferred from the value."
+     },
+     "namespace": {
+      "description": "For model-api-id facts (required): whose naming the id is written in — a routes.json id (maker-api: the maker's own ids; openrouter: OpenRouter slugs), or `prefix` when the value's head up to the first '/' names the route (Inspect / LiteLLM provider prefixes). Not the route the call took. See models.schema.json for the resolution rule.",
+      "anyOf": [
+       {
+        "$ref": "common.schema.json#/$defs/route_id"
+       },
+       {
+        "const": "prefix"
+       }
+      ]
+     },
      "note": {
       "type": "string",
       "description": "Free note for the verifier; never read by the tree."
@@ -263,7 +366,7 @@
       "type": "object",
       "description": "Column name → the fact type of its cells (only the columns used need be listed).",
       "additionalProperties": {
-       "description": "A table column: the fact type its cells state (string), or an object with the type and, for closed-vocabulary types, the term all its cells stand for.",
+       "description": "A table column: the fact type its cells state (string), or an object with the type(s) and, for closed-vocabulary types, the term all its cells stand for. A score column needs term (metric) and scale; a model-api-id column needs namespace.",
        "anyOf": [
         {
          "$ref": "vocab.json#/$defs/fact_type"
@@ -273,11 +376,38 @@
          "description": "A typed column.",
          "properties": {
           "says": {
-           "$ref": "vocab.json#/$defs/fact_type"
+           "description": "The fact type of its cells, or several when one cell states several facts (an Inspect model string 'openrouter/qwen/qwen3.6-27b' is both a route and an API id).",
+           "anyOf": [
+            {
+             "$ref": "vocab.json#/$defs/fact_type"
+            },
+            {
+             "type": "array",
+             "description": "Fact types.",
+             "items": {
+              "$ref": "vocab.json#/$defs/fact_type"
+             },
+             "minItems": 2
+            }
+           ]
           },
           "term": {
            "type": "string",
            "description": "Vocabulary term of the column's cells."
+          },
+          "scale": {
+           "$ref": "vocab.json#/$defs/score_scale"
+          },
+          "namespace": {
+           "description": "As a fact's namespace.",
+           "anyOf": [
+            {
+             "$ref": "common.schema.json#/$defs/route_id"
+            },
+            {
+             "const": "prefix"
+            }
+           ]
           },
           "note": {
            "type": "string",

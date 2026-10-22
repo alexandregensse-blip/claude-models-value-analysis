@@ -2,68 +2,134 @@
  "$schema": "https://json-schema.org/draft/2020-12/schema",
  "$id": "decisions.schema.json",
  "title": "Maintainer decisions",
- "description": "data/decisions.json: the maintainer's per-measure decisions, evaluated first; a decision whose facts hash no longer matches is reported, not applied (DATA-PIPELINE §4, §5.2.0). facts_hash = SHA-256 of the canonical JSON (sorted keys, no spaces) of the list, in `measures` order, of [measure, [the facts and cells it cites]] (validate.py --hash).",
+ "description": "data/decisions.json: the maintainer's per-measure decisions, evaluated first; a decision whose facts hash no longer matches is reported, not applied (DATA-PIPELINE §4, §5.2.0). facts_hash = SHA-256 of the canonical JSON (sorted keys, no spaces) of the list, in `measures` order, of [measure, setup, [slot, the facts and cells it cites, without note/translation]] (validate.py --hash). Headline decisions (kind headline) choose a setup's headline metric (benchmarks.json headline.decision points at them).",
  "type": "object",
  "properties": {
   "decisions": {
    "type": "array",
    "description": "The decisions.",
    "items": {
-    "type": "object",
-    "description": "One decision.",
-    "properties": {
-     "id": {
-      "type": "string",
-      "description": "Decision id.",
-      "pattern": "^D[0-9]+$"
-     },
-     "measures": {
-      "type": "array",
-      "description": "Measures judged.",
-      "items": {
-       "$ref": "common.schema.json#/$defs/measure_ref"
+    "description": "A measure decision (kind measure, the default) or a setup-level headline decision (kind headline).",
+    "anyOf": [
+     {
+      "type": "object",
+      "description": "A measure decision.",
+      "properties": {
+       "kind": {
+        "description": "measure (default).",
+        "const": "measure"
+       },
+       "id": {
+        "type": "string",
+        "description": "Decision id.",
+        "pattern": "^D[0-9]+$"
+       },
+       "measures": {
+        "type": "array",
+        "description": "Measures judged.",
+        "items": {
+         "$ref": "common.schema.json#/$defs/measure_ref"
+        },
+        "minItems": 1
+       },
+       "facts_hash": {
+        "$ref": "common.schema.json#/$defs/sha256",
+        "description": "Hash of the facts judged."
+       },
+       "axis": {
+        "description": "Axis it applies to.",
+        "enum": [
+         "quality",
+         "cost",
+         "both"
+        ]
+       },
+       "status": {
+        "$ref": "vocab.json#/$defs/status"
+       },
+       "reason": {
+        "type": "string",
+        "description": "Why, in one sentence.",
+        "minLength": 1
+       },
+       "date": {
+        "$ref": "common.schema.json#/$defs/date"
+       },
+       "decided_by": {
+        "type": "string",
+        "description": "Who.",
+        "minLength": 1
+       }
       },
-      "minItems": 1
+      "required": [
+       "id",
+       "measures",
+       "facts_hash",
+       "axis",
+       "status",
+       "reason",
+       "date"
+      ],
+      "unevaluatedProperties": false
      },
-     "facts_hash": {
-      "$ref": "common.schema.json#/$defs/sha256",
-      "description": "Hash of the facts judged."
-     },
-     "axis": {
-      "description": "Axis it applies to.",
-      "enum": [
-       "quality",
-       "cost",
-       "both"
-      ]
-     },
-     "status": {
-      "$ref": "vocab.json#/$defs/status"
-     },
-     "reason": {
-      "type": "string",
-      "description": "Why, in one sentence.",
-      "minLength": 1
-     },
-     "date": {
-      "$ref": "common.schema.json#/$defs/date"
-     },
-     "decided_by": {
-      "type": "string",
-      "description": "Who.",
-      "minLength": 1
+     {
+      "type": "object",
+      "description": "A headline decision (no facts hash: it judges a setup, not facts).",
+      "properties": {
+       "kind": {
+        "description": "headline.",
+        "const": "headline"
+       },
+       "id": {
+        "type": "string",
+        "description": "Decision id.",
+        "pattern": "^D[0-9]+$"
+       },
+       "setup": {
+        "$ref": "common.schema.json#/$defs/setup_id",
+        "description": "The setup whose headline is chosen."
+       },
+       "metric": {
+        "$ref": "vocab.json#/$defs/metric",
+        "description": "The headline metric chosen."
+       },
+       "publisher": {
+        "description": "When the choice holds for one publisher of the setup only, its id; else null.",
+        "anyOf": [
+         {
+          "$ref": "common.schema.json#/$defs/publisher_id"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "reason": {
+        "type": "string",
+        "description": "Why.",
+        "minLength": 1
+       },
+       "date": {
+        "$ref": "common.schema.json#/$defs/date"
+       },
+       "decided_by": {
+        "type": "string",
+        "description": "Who.",
+        "minLength": 1
+       }
+      },
+      "required": [
+       "kind",
+       "id",
+       "setup",
+       "metric",
+       "reason",
+       "date",
+       "decided_by"
+      ],
+      "unevaluatedProperties": false
      }
-    },
-    "required": [
-     "id",
-     "measures",
-     "facts_hash",
-     "axis",
-     "status",
-     "reason",
-     "date"
-    ],
-    "unevaluatedProperties": false
+    ]
    }
   }
  },

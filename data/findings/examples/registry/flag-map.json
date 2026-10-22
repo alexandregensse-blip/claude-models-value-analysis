@@ -1,0 +1,38 @@
+{
+ "version": "0-example",
+ "date": "2026-10-22",
+ "cost_method_by_source": {
+  "github-obviousbench": {
+   "method": "library-table",
+   "basis": "list-estimate",
+   "applies": "all",
+   "evidence": [
+    {
+     "where": "obviousbench/analysis/costing.py line 20",
+     "source": "src-github-obviousbench-v0.2-aggregate-2026-10-10",
+     "fact": "F5"
+    }
+   ],
+   "note": "the source's own costing code (runcost) overrides today's flags (measured-tokens-x-rate → tokens×list)"
+  },
+  "hotkv": {
+   "method": "tokens×list",
+   "basis": "list-estimate",
+   "applies": "unmapped",
+   "evidence": [
+    {
+     "where": "section 'What we counted'",
+     "source": "src-hotkv-banking77-semantic-cache-2026-10-12",
+     "fact": "F14"
+    }
+   ]
+  }
+ },
+ "effort_values": {
+  "nt-low": {
+   "to": "low",
+   "note": "nt-: no-tools regime, a setup attribute"
+  }
+ },
+ "note": "Example only: the real flag-map.json is written at migration (DATA-PIPELINE §8), with one entry per source whose cost rows no flag maps."
+}

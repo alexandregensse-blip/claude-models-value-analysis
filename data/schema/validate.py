@@ -6,20 +6,21 @@ need no decision tree (docs/DATA-PIPELINE.md §7, first bullet). Python 3 standa
     python3 data/schema/validate.py --registry data/findings/examples/registry --findings data/findings/examples
     python3 data/schema/validate.py --check-files ...        # also re-hash the saved copies, find quotes and CSV cells in them
     python3 data/schema/validate.py --hash <source id>#M1 ... # print a decision's facts_hash
-    python3 data/schema/validate.py --legacy-coverage raw-data.csv   # how far vocab's legacy patterns map today's flags
+    python3 data/schema/validate.py --legacy-coverage raw-data.csv [--flag-map F]  # how far vocab + flag-map map today's flags
     python3 data/schema/validate.py FILE.json ...            # schema check of single files only (kind from name / folder)
 
 JSON Schema subset implemented: $ref (local and cross-file, JSON pointer), type, enum, const, pattern, minLength,
 minimum, maximum, minItems, maxItems, items, properties, required, additionalProperties, propertyNames, allOf, anyOf,
-unevaluatedProperties (properties of the schema, its allOf members and $ref targets). Unknown keywords and x-* are
+format (date, date-time, date-or-date-time: parsed strictly), unevaluatedProperties (properties of the schema, its allOf members and $ref targets). Unknown keywords and x-* are
 ignored. Exit code 1 on any error; warnings do not fail."""
-import argparse, collections, csv, datetime as dt, glob, hashlib, html, json, os, re, sys
+import argparse, collections, csv, datetime as dt, glob, hashlib, html, json, os, re, sys, unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 REGISTRY_FILES = {"models": "models.json", "routes": "routes.json", "benchmarks": "benchmarks.json",
-                  "publishers": "publishers.json", "prices": "prices.json", "rules": "rules.json"}
+                  "publishers": "publishers.json", "prices": "prices.json", "rules": "rules.json", "flag-map": "flag-map.json"}
 REQUIRED_REGISTRIES = ("models", "routes", "benchmarks", "publishers")
+OPEN_TO = ("configurations", "serves")          # interval lists where to = null (no end known) is allowed
 TEXT_EXT = (".txt", ".md", ".csv", ".json", ".yaml", ".yml", ".py", ".ts", ".js", ".mjs", ".toml", ".html", ".htm", ".xml", ".tsv")
 
 
@@ -148,6 +149,8 @@ class Schemas:
         if isinstance(x, str):
             if "pattern" in s and not self._re(s["pattern"]).search(x):
                 out.append((path, f"{x!r} does not match {s['pattern']}"))
+            elif s.get("format") in ("date", "date-time", "date-or-date-time") and parse_when(x) is None:
+                out.append((path, f"{x!r} is not a real {s['format']}"))
             if len(x) < s.get("minLength", 0):
                 out.append((path, "empty string"))
         if isinstance(x, (int, float)) and not isinstance(x, bool):
@@ -192,15 +195,23 @@ class Schemas:
 
 
 # ---------------------------------------------------------------- helpers
+def parse_when(s):
+    """A date / datetime string → naive UTC datetime, or None when it is not a real date."""
+    try:
+        if len(s) == 10:
+            return dt.datetime.strptime(s, "%Y-%m-%d")
+        t = dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
+        return t.astimezone(dt.timezone.utc).replace(tzinfo=None) if t.tzinfo else t
+    except (ValueError, TypeError):
+        return None
+
+
 def when(s, end=False):
-    """A date / datetime string → naive UTC datetime; a date as `to` means its whole day."""
-    if s is None:
+    """A date / datetime string → naive UTC datetime; a date as `to` means its whole day (bad dates → open bound)."""
+    t = parse_when(s) if s is not None else None
+    if t is None:
         return dt.datetime.max if end else dt.datetime.min
-    if len(s) == 10:
-        d = dt.datetime.strptime(s, "%Y-%m-%d")
-        return d + dt.timedelta(days=1, microseconds=-1) if end else d
-    t = dt.datetime.fromisoformat(s.replace("Z", "+00:00"))
-    return t.astimezone(dt.timezone.utc).replace(tzinfo=None) if t.tzinfo else t
+    return t + dt.timedelta(days=1, microseconds=-1) if end and len(s) == 10 else t
 
 
 def overlap(a, b):
@@ -208,7 +219,46 @@ def overlap(a, b):
 
 
 def norm(t):
-    return re.sub(r"\s+", " ", html.unescape(t or "")).strip().casefold()
+    """Quote matching: NFKC (ligatures: 'ﬁ' → 'fi'), HTML entities, whitespace collapsed, casefolded."""
+    return re.sub(r"\s+", " ", unicodedata.normalize("NFKC", html.unescape(t or ""))).strip().casefold()
+
+
+def norm_display(name, vocab):
+    """Display-name rule N (models.schema.json): NFKC, casefold, '_' '-' ':' '/' as spaces, spaces collapsed, one leading
+    maker spelling (vocab maker x-terms.display_prefixes) dropped."""
+    t = re.sub(r"[_\-:/]", " ", unicodedata.normalize("NFKC", name).casefold())
+    t = re.sub(r"\s+", " ", t).strip()
+    for rec in vocab["$defs"]["maker"]["x-terms"].values():
+        for p in rec.get("display_prefixes", []):
+            p = p.casefold()
+            if t.startswith(p + " ") and len(t) > len(p) + 1:
+                return t[len(p) + 1:]
+    return t
+
+
+def resolve_api_id(value, namespace, models, routes):
+    """Model keys an API id resolves to under the name rule (models.schema.json), ignoring dates."""
+    def in_ns(v, route):
+        prefixes = sorted((routes.get(route or "maker-api", {}).get("name_prefixes") or []), key=len, reverse=True)
+        for p in prefixes:
+            if v.casefold().startswith(p.casefold()):
+                v = v[len(p):]
+                break
+        ns = None if route in (None, "maker-api") else route
+        return {k for k, m in models.items() for n in m.get("names", [])
+                if n["kind"] == "api-id" and (n.get("route") or None) == ns and n["name"] == v}
+    if namespace != "prefix":
+        return in_ns(value, namespace)
+    head, sep, rest = value.partition("/")
+    if sep:
+        for rid, r in routes.items():
+            if any(p.casefold() == (head + "/").casefold() for p in r.get("name_prefixes") or []):
+                return in_ns(value, rid)
+    keys = set()
+    for rid in list(routes) or ["maker-api"]:
+        keys |= in_ns(rest, rid) if sep else set()
+        keys |= in_ns(value, rid)
+    return keys
 
 
 def vocab_terms(vocab, name):
@@ -260,15 +310,17 @@ def file_text(path, cache={}):
 
 
 def cited(measure):
-    """(slot, ref) for every fact the measure cites, in slot order."""
+    """(slot, ref) for every fact the measure cites, in slot order (value_seen_in holds capture ids, not facts)."""
     for slot, v in measure["facts"].items():
+        if slot == "value_seen_in":
+            continue
         for ref in (v if isinstance(v, list) else [v]):
             if ref is not None:
                 yield slot, ref
 
 
 def facts_hash(source, measure, mref):
-    facts = {f["id"]: f for f in source.get("facts", [])}
+    facts = {f["id"]: {k: v for k, v in f.items() if k not in ("note", "translation")} for f in source.get("facts", [])}
     tables = {t["id"]: t for t in source.get("tables", [])}
     items = []
     for slot, ref in cited(measure):
@@ -278,7 +330,7 @@ def facts_hash(source, measure, mref):
             items.append({"slot": slot, "cell": ref, "table": tb, "file_sha256": source.get("sha256", {}).get(tb.get("file"))})
         else:
             items.append({"slot": slot, "fact": facts.get(ref)})
-    return [mref, items]
+    return [mref, measure.get("setup"), items]
 
 
 def hash_of(entries):
@@ -324,12 +376,82 @@ def check_vocab(vocab, rep, schemas):
 
 
 # ---------------------------------------------------------------- registry checks
-def check_registries(reg, rep, schemas, vocab, paths):
+def walk_intervals(x, key=None, path="$"):
+    """(path, container key, record) for every dated record {from, to, evidence} in a registry document."""
+    if isinstance(x, dict):
+        if "from" in x and "to" in x and "evidence" in x:
+            yield path, key, x
+        for k, v in x.items():
+            yield from walk_intervals(v, k if isinstance(v, list) else key, f"{path}.{k}")
+    elif isinstance(x, list):
+        for i, v in enumerate(x):
+            yield from walk_intervals(v, key, f"{path}[{i}]")
+
+
+def walk_evidence(x, path="$"):
+    """(path, evidence) for every evidence record of a registry document."""
+    if isinstance(x, dict):
+        for k, v in x.items():
+            if k == "evidence" and isinstance(v, list):
+                for i, e in enumerate(v):
+                    if isinstance(e, dict):
+                        yield f"{path}.evidence[{i}]", e
+            else:
+                yield from walk_evidence(v, f"{path}.{k}")
+    elif isinstance(x, list):
+        for i, v in enumerate(x):
+            yield from walk_evidence(v, f"{path}[{i}]")
+
+
+def check_dated(doc, label, rep):
+    """Interval rules of DATA-PIPELINE §4 on every dated record of a registry file."""
+    for path, key, r in walk_intervals(doc):
+        if r["to"] is None:
+            if key not in OPEN_TO:
+                rep.err(label, f"{path}: to = null; a dated {key} ends at its stated change or its last capture")
+        elif when(r["from"]) > when(r["to"], True):
+            rep.err(label, f"{path}: interval {r['from']} → {r['to']} ends before it starts")
+        if r.get("from_basis") == "earliest-capture" and len(r["from"]) != 10:
+            rep.err(label, f"{path}: a bound taken from a capture is the capture's day (YYYY-MM-DD), not {r['from']}")
+        if r.get("to_basis") == "last-capture" and r["to"] is not None and len(r["to"]) != 10:
+            rep.err(label, f"{path}: a bound taken from a capture is the capture's day (YYYY-MM-DD), not {r['to']}")
+        if r.get("to_basis") == "open" and r["to"] is not None:
+            rep.err(label, f"{path}: to_basis open but to = {r['to']}")
+
+
+def check_evidence_files(doc, path, label, rep):
+    """--check-files on registry evidence: sha256 and quote of every saved copy reachable here."""
+    for p, e in walk_evidence(doc):
+        if not e.get("file"):
+            continue
+        f = saved_path(e["file"], path)
+        if not f:
+            rep.warn(label, f"{p}: saved file not reachable here: {e['file']}")
+            continue
+        if e.get("sha256") and sha256_of(f) != e["sha256"]:
+            rep.err(label, f"{p}: sha256 mismatch: {e['file']}")
+        if e.get("quote"):
+            if f.endswith(".pdf"):
+                rep.err(label, f"{p}: a quote in a PDF points at its text extraction")
+            elif f.endswith(TEXT_EXT) and norm(e["quote"]) not in file_text(f):
+                rep.err(label, f"{p}: quote not found in {os.path.basename(f)}")
+
+
+def overlapping_defaults(defaults):
+    return [(a["configuration"], b["configuration"]) for i, a in enumerate(defaults) for b in defaults[i + 1:]
+            if a["configuration"] != b["configuration"] and overlap(a, b)]
+
+
+def check_registries(reg, rep, schemas, vocab, paths, check_files):
     models = (reg.get("models") or {}).get("models", {})
     routes = (reg.get("routes") or {}).get("routes", {})
     bench = reg.get("benchmarks") or {}
     setups, families = bench.get("setups", {}), bench.get("families", {})
     lab = {k: rel(p) for k, p in paths.items()}
+    for k, doc in reg.items():
+        check_dated(doc, lab[k], rep)
+        if check_files:
+            check_evidence_files(doc, paths[k], lab[k], rep)
 
     # models.json: references and the identity checks of DATA-PIPELINE §4
     by_maker = collections.defaultdict(list)
@@ -354,6 +476,8 @@ def check_registries(reg, rep, schemas, vocab, paths):
         for d in m.get("default", []):
             if d["configuration"] not in ids:
                 rep.err(L, f"default '{d['configuration']}' is not one of its configurations {sorted(ids)}")
+        for a_, b_ in overlapping_defaults(m.get("default", [])):
+            rep.err(L, f"defaults '{a_}' and '{b_}' overlap in time")
         for n in m.get("names", []):
             if n.get("selects") and n["selects"] not in ids:
                 rep.err(L, f"name {n['name']} selects '{n['selects']}', not one of its configurations")
@@ -367,19 +491,17 @@ def check_registries(reg, rep, schemas, vocab, paths):
         for md in m.get("modes", []):
             if md["key"] not in models:
                 rep.err(L, f"mode {md['parameter']} → '{md['key']}' not registered")
-        for rec in m.get("configurations", []) + m.get("default", []) + m.get("conversions", []) + m.get("modes", []) + \
-                [s for n in m.get("names", []) for s in n["serves"]]:
-            if when(rec["from"]) > when(rec["to"], True):
-                rep.err(L, f"interval {rec['from']} → {rec['to']} ends before it starts")
     for maker, keys in by_maker.items():
         for i, a in enumerate(keys):
             for b in keys[i + 1:]:
                 ma, mb = models[a], models[b]
-                if ma["label"].strip().casefold() == mb["label"].strip().casefold():
+                if norm_display(ma["label"], vocab) == norm_display(mb["label"], vocab):
                     rep.err(lab["models"], f"identity: {a} and {b} ({maker}) have the same display label '{ma['label']}'")
                 for na in ma.get("names", []):
                     for nb in mb.get("names", []):
-                        if na["name"].casefold() == nb["name"].casefold() and na["kind"] == nb["kind"] \
+                        same = norm_display(na["name"], vocab) == norm_display(nb["name"], vocab) if na["kind"] == "display-name" \
+                            else na["name"] == nb["name"]
+                        if same and na["kind"] == nb["kind"] \
                                 and (na.get("route") or "maker-api") == (nb.get("route") or "maker-api") \
                                 and any(overlap(x, y) for x in na["serves"] for y in nb["serves"]):
                             rep.err(lab["models"], f"identity: {a} and {b} ({maker}) both serve {na['kind']} '{na['name']}' over overlapping intervals")
@@ -401,6 +523,8 @@ def check_registries(reg, rep, schemas, vocab, paths):
             for d in rm.get("default", []):
                 if d["configuration"] not in ids:
                     rep.err(L, f"default '{d['configuration']}' not one of the model's configurations {sorted(ids)}")
+            for a_, b_ in overlapping_defaults(rm.get("default", [])):
+                rep.err(L, f"defaults '{a_}' and '{b_}' overlap in time")
 
     # benchmarks.json
     for sid, s in setups.items():
@@ -420,10 +544,15 @@ def check_registries(reg, rep, schemas, vocab, paths):
         if s["headline"]["basis"] != "decision" and not s["headline"].get("evidence"):
             rep.err(L, "headline without evidence")
 
+    # publishers.json
+    for pid, p in (reg.get("publishers") or {}).get("publishers", {}).items():
+        if p.get("maker") == "other":
+            rep.err(f"{lab['publishers']} {pid}", "maker 'other' is never a publisher's maker (no home effect)")
+
     # prices.json
     prices = reg.get("prices")
     if prices:
-        base = set()
+        base, chosen = set(), collections.Counter()
         for i, p in enumerate(prices["prices"]):
             L = f"{lab['prices']} prices[{i}]"
             if p["model"] not in models:
@@ -435,7 +564,14 @@ def check_registries(reg, rep, schemas, vocab, paths):
                     base.add(p["model"])
             if p["kind"] == "standard" and not p.get("classes"):
                 rep.err(L, "standard price without classes")
-        for key in sorted({p["model"] for p in prices["prices"]} - base):
+            if p.get("base"):
+                chosen[p["model"]] += 1
+                if p["kind"] in ("promotion", "off-peak"):
+                    rep.err(L, f"a {p['kind']} price is never the base")
+        for key, n in chosen.items():
+            if n > 1:
+                rep.err(lab["prices"], f"{key}: {n} entries marked base")
+        for key in sorted({p["model"] for p in prices["prices"]} - base - set(chosen)):
             rep.warn(lab["prices"], f"{key}: no standard maker-API price in force on as_of {prices['as_of']}")
 
     # rules.json
@@ -446,9 +582,22 @@ def check_registries(reg, rep, schemas, vocab, paths):
             if n > 1:
                 rep.err(lab["rules"], f"rule id {k} defined {n} times")
 
+    # flag-map.json
+    fm = reg.get("flag-map")
+    if fm:
+        meth = vocab["$defs"]["cost_method"]["x-terms"]
+        for src, e in fm["cost_method_by_source"].items():
+            if meth[e["method"]]["basis"] != e["basis"]:
+                rep.err(f"{lab['flag-map']} {src}", f"basis {e['basis']} contradicts method {e['method']} (basis {meth[e['method']]['basis']})")
+
 
 # ---------------------------------------------------------------- findings checks
-def check_source(src, path, reg, rep, schemas, vocab, check_files):
+def column_says(spec):
+    says = spec if isinstance(spec, str) else spec["says"]
+    return [says] if isinstance(says, str) else list(says)
+
+
+def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
     L = rel(path)
     V = vocab["$defs"]
     publishers = (reg.get("publishers") or {}).get("publishers", {})
@@ -457,6 +606,8 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files):
         rep.err(L, f"file name must be the source id '{src['id']}'")
     if src["publisher"] not in publishers:
         rep.err(L, f"publisher '{src['publisher']}' not registered in publishers.json")
+    if src.get("snapshot_of") and src["snapshot_of"] not in all_ids:
+        rep.err(L, f"snapshot_of '{src['snapshot_of']}' is not a source file")
     slug = src["publisher"].lower().replace("/", "_")
     if not src["id"].startswith(f"src-{slug}-"):
         rep.warn(L, f"id does not start with src-{slug}-")
@@ -465,20 +616,38 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files):
     closed = V["closed_term_fact_types"]["x-terms"]
     tables = {t["id"]: t for t in src.get("tables", [])}
     charts = {c["id"]: c for c in src.get("charts", [])}
-    for kind, items in (("table", src.get("tables", [])), ("chart", src.get("charts", [])), ("fact", src.get("facts", []))):
+    extracted = {e["from"]: e["file"] for e in src.get("extractions", [])}
+    for kind, items in (("table", src.get("tables", [])), ("chart", src.get("charts", [])), ("fact", src.get("facts", [])),
+                        ("capture", src.get("captures", []))):
         for k, n in collections.Counter(x["id"] for x in items).items():
             if n > 1:
                 rep.err(L, f"{kind} id {k} used {n} times")
+    for c in src.get("captures", []):
+        if c.get("file") and c["file"] not in saved:
+            rep.err(L, f"capture {c['id']}: file '{c['file']}' has no sha256 entry")
+    for w in src.get("wayback", []):
+        if not any(c.get("url") == w for c in src.get("captures", [])):
+            rep.warn(L, f"wayback URL without a capture entry: {w}")
+    for e in src.get("extractions", []):
+        for k in ("file", "from"):
+            if e[k] not in saved:
+                rep.err(L, f"extraction: {k} '{e[k]}' has no sha256 entry")
     for t in list(tables.values()) + list(charts.values()):
         if t["file"] not in saved:
             rep.err(L, f"{t['id']}: file '{t['file']}' has no sha256 entry")
     for t in tables.values():
         for col, spec in t["columns"].items():
-            says = spec if isinstance(spec, str) else spec["says"]
-            if says in closed and (isinstance(spec, str) or "term" not in spec):
-                rep.err(L, f"{t['id']}.{col}: a {says} column needs a term")
-            elif says in closed and not in_vocab(schemas, closed[says]["vocab"], spec["term"]):
-                rep.err(L, f"{t['id']}.{col}: term '{spec['term']}' not in vocab {closed[says]['vocab']}")
+            for says in column_says(spec):
+                if says in closed and (isinstance(spec, str) or "term" not in spec):
+                    rep.err(L, f"{t['id']}.{col}: a {says} column needs a term")
+                elif says in closed and not in_vocab(schemas, closed[says]["vocab"], spec["term"]):
+                    rep.err(L, f"{t['id']}.{col}: term '{spec['term']}' not in vocab {closed[says]['vocab']}")
+                if says == "score" and (isinstance(spec, str) or "scale" not in spec):
+                    rep.err(L, f"{t['id']}.{col}: a score column needs a scale")
+                if says == "model-api-id" and (isinstance(spec, str) or "namespace" not in spec):
+                    rep.err(L, f"{t['id']}.{col}: a model-api-id column needs a namespace")
+                if not isinstance(spec, str) and spec.get("namespace") not in (None, "prefix") and spec["namespace"] not in routes:
+                    rep.err(L, f"{t['id']}.{col}: namespace '{spec['namespace']}' not registered in routes.json")
     for f in src.get("facts", []):
         F = f"{L} {f['id']}"
         if f.get("file") and f["file"] not in saved:
@@ -493,6 +662,9 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files):
             rep.err(F, f"a {f['form']} fact needs a quote")
         if f.get("quote") and norm(f["value"]) not in norm(f["quote"]):
             rep.err(F, f"the quote does not contain the value {f['value']!r}")
+        if f.get("quote") and (f.get("file") or "").lower().endswith(".pdf"):
+            rep.err(F, "a quote in a PDF points at its text extraction (extractions), where it can be checked"
+                       + (f": {extracted[f['file']]}" if f.get("file") in extracted else ""))
         if f["form"] == "chart":
             c = charts.get(f.get("chart"))
             if not c:
@@ -510,6 +682,17 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files):
                 rep.err(F, f"a {f['says']} fact needs a term (vocab {closed[f['says']]['vocab']})")
             elif not in_vocab(schemas, closed[f["says"]]["vocab"], f["term"]):
                 rep.err(F, f"term '{f['term']}' not in vocab {closed[f['says']]['vocab']}")
+        if f["says"] == "score" and "scale" not in f:
+            rep.err(F, "a score fact needs its scale (fraction, percent, raw)")
+        if "scale" in f and f["says"] != "score":
+            rep.err(F, "scale is for score facts")
+        if f["says"] == "thinking-budget" and not re.fullmatch(r"[1-9][0-9]*", f.get("term", "")):
+            rep.err(F, "a thinking-budget fact needs its token count as term (digits)")
+        if f["says"] == "model-api-id":
+            if "namespace" not in f:
+                rep.err(F, "a model-api-id fact needs a namespace (a routes.json id, or prefix)")
+            elif f["namespace"] != "prefix" and f["namespace"] not in routes:
+                rep.err(F, f"namespace '{f['namespace']}' not registered in routes.json")
         if f["says"] == "route" and "term" in f and f["term"] not in routes:
             rep.err(F, f"route term '{f['term']}' not registered in routes.json")
     if check_files:
@@ -534,9 +717,9 @@ def check_saved(src, path, rep):
             rep.err(f"{L} {f['id']}", f"quote not found in the saved file {os.path.basename(p)}")
 
 
-def table_rows(src, table, path, cache={}):
+def table_rows(table, path, file=None, cache={}):
     """Rows of a CSV table keyed by its row_key, or None when not readable here."""
-    p = saved_path(table["file"], path)
+    p = saved_path(file or table["file"], path)
     if not p or table.get("format", "csv") != "csv" and not p.endswith(".csv"):
         return None
     if p not in cache:
@@ -547,9 +730,23 @@ def table_rows(src, table, path, cache={}):
     return cols, {r.get(table["row_key"]): r for r in rows}
 
 
+def ref_info(ref, facts, tables):
+    """(fact types, about, metric term, record) of a cited fact or cell, or None."""
+    if ref.startswith("T"):
+        t, row, col = split_cell(ref)
+        spec = tables.get(t, {}).get("columns", {}).get(col)
+        if spec is None:
+            return None
+        return column_says(spec), row, (None if isinstance(spec, str) else spec.get("term")), spec
+    f = facts.get(ref)
+    return None if f is None else ([f["says"]], f["about"], f.get("term"), f)
+
+
 def check_measures(ms, path, sources, reg, rep, vocab, check_files):
     L = rel(path)
     setups = (reg.get("benchmarks") or {}).get("setups", {})
+    models = (reg.get("models") or {}).get("models", {})
+    routes = (reg.get("routes") or {}).get("routes", {})
     stem = os.path.splitext(os.path.basename(path))[0]
     if stem != ms["source"]:
         rep.err(L, f"file name must be the source id '{ms['source']}'")
@@ -560,52 +757,112 @@ def check_measures(ms, path, sources, reg, rep, vocab, check_files):
     spath, src = src
     facts = {f["id"]: f for f in src.get("facts", [])}
     tables = {t["id"]: t for t in src.get("tables", [])}
+    captures = {c["id"]: c for c in src.get("captures", [])}
     slots = vocab["$defs"]["measure_slot"]["x-terms"]
     for k, n in collections.Counter(m["id"] for m in ms["measures"]).items():
         if n > 1:
             rep.err(L, f"measure id {k} used {n} times")
+    values = collections.defaultdict(list)
+    for m in ms["measures"]:
+        if m["facts"].get("value"):
+            values[m["facts"]["value"]].append(m["id"])
+    for ref, ids in values.items():
+        if len(ids) > 1:
+            rep.err(L, f"value {ref} is cited by several measures: {', '.join(ids)}")
     for m in ms["measures"]:
         M = f"{L} {m['id']}"
         if m["setup"] not in setups:
             rep.err(M, f"setup '{m['setup']}' not registered in benchmarks.json")
         if m["facts"].get("value") is None and not m["facts"].get("spend"):
             rep.err(M, "a measure needs a value or a spend")
+        for cid in m["facts"].get("value_seen_in", []):
+            if cid not in captures:
+                rep.err(M, f"value_seen_in: capture {cid} not defined in the source")
+        info = {}
         for slot, ref in cited(m):
             allowed = slots[slot]["fact_types"]
-            if ref.startswith("T"):
-                t, row, col = split_cell(ref)
-                if t not in tables:
-                    rep.err(M, f"{slot}: {ref}: table {t} not defined")
-                    continue
-                spec = tables[t]["columns"].get(col)
-                if spec is None:
-                    rep.err(M, f"{slot}: {ref}: column '{col}' not declared in {t}.columns")
-                    continue
-                says = spec if isinstance(spec, str) else spec["says"]
-                if check_files:
-                    got = table_rows(src, tables[t], spath)
-                    if got:
-                        cols, rows = got
-                        if col not in cols:
-                            rep.err(M, f"{ref}: column '{col}' not in the saved file")
-                        elif row not in rows:
-                            rep.err(M, f"{ref}: no row '{row}' in the saved file")
-                        elif not (rows[row].get(col) or "").strip():
-                            rep.err(M, f"{ref}: the cell is empty")
-            else:
-                if ref not in facts:
+            got = ref_info(ref, facts, tables)
+            if got is None:
+                if ref.startswith("T"):
+                    t, row, col = split_cell(ref)
+                    rep.err(M, f"{slot}: {ref}: " + (f"table {t} not defined" if t not in tables else f"column '{col}' not declared in {t}.columns"))
+                else:
                     rep.err(M, f"{slot}: fact {ref} does not exist in {ms['source']}")
+                continue
+            says, about, term, rec = got
+            info[(slot, ref)] = got
+            if ref.startswith("T") and check_files:
+                t, row, col = split_cell(ref)
+                rows = table_rows(tables[t], spath)
+                if rows:
+                    cols, byrow = rows
+                    if col not in cols:
+                        rep.err(M, f"{ref}: column '{col}' not in the saved file")
+                    elif row not in byrow:
+                        rep.err(M, f"{ref}: no row '{row}' in the saved file")
+                    elif not (byrow[row].get(col) or "").strip():
+                        rep.err(M, f"{ref}: the cell is empty")
+            if allowed is not None and not set(says) & set(allowed):
+                rep.err(M, f"{slot}: {ref} is a '{'/'.join(says)}' fact, not one of {allowed}")
+            if slot == "value" and not set(says) & {"score", "cost"}:
+                rep.err(M, f"value {ref} is a '{'/'.join(says)}' fact")
+        # the value and per-entry facts are about an entry a model fact names
+        model_abouts = {g[1] for (slot, _), g in info.items() if slot == "model" and g[1] is not None}
+        for (slot, ref), (says, about, term, rec) in info.items():
+            if slot in ("value", "spend", "usage", "judge", "anomalies") and about is not None and model_abouts \
+                    and about not in model_abouts:
+                rep.err(M, f"{slot}: {ref} is about '{about}', not an entry the measure's model facts name {sorted(model_abouts)}")
+        # the value's metric is the setup's metric
+        v = m["facts"].get("value")
+        if v and ("value", v) in info and m["setup"] in setups:
+            says, about, term, rec = info[("value", v)]
+            if "score" in says and term != setups[m["setup"]]["metric"]:
+                rep.err(M, f"value {v} is on metric '{term}', the setup '{m['setup']}' on '{setups[m['setup']]['metric']}'")
+        # model facts resolve under the name rule (any date: the run date is the build's)
+        for (slot, ref), (says, about, term, rec) in info.items():
+            if slot != "model":
+                continue
+            value = rec.get("value") if not ref.startswith("T") else split_cell(ref)[1]
+            if "model-api-id" in says:
+                ns = rec.get("namespace")
+                cell = None
+                if ref.startswith("T") and check_files:
+                    t, row, col = split_cell(ref)
+                    rows = table_rows(tables[t], spath)
+                    cell = rows[1].get(row, {}).get(col) if rows else None
+                if ref.startswith("T") and cell is None:
                     continue
-                says = facts[ref]["says"]
-            if allowed is not None and says not in allowed:
-                rep.err(M, f"{slot}: {ref} is a '{says}' fact, not one of {allowed}")
-            if slot == "value" and says not in ("score", "cost"):
-                rep.err(M, f"value {ref} is a '{says}' fact")
+                keys = resolve_api_id(cell if cell is not None else value, ns, models, routes)
+                if len(keys) != 1:
+                    rep.warn(M, f"model {ref} ({cell or value!r}, namespace {ns}) resolves to {sorted(keys) or 'no key'}")
+            elif "model-name" in says and not ref.startswith("T"):
+                n = norm_display(value, vocab)
+                keys = {k for k, mm in models.items() for nm in mm.get("names", [])
+                        if nm["kind"] == "display-name" and norm_display(nm["name"], vocab) == n}
+                if len(keys) != 1:
+                    rep.warn(M, f"model {ref} ({value!r}) resolves to {sorted(keys) or 'no key'} under the display-name rule")
+        # with the files: a value cell must read the same in every capture said to carry it
+        if check_files and v and v.startswith("T"):
+            t, row, col = split_cell(v)
+            base = table_rows(tables[t], spath)
+            for cid in m["facts"].get("value_seen_in", []):
+                c = captures.get(cid)
+                if not c or not c.get("file") or c["file"] == tables[t]["file"]:
+                    continue
+                other = table_rows(tables[t], spath, c["file"])
+                if base and other and (other[1].get(row) or {}).get(col) != (base[1].get(row) or {}).get(col):
+                    rep.err(M, f"value_seen_in {cid}: {row}/{col} reads {(other[1].get(row) or {}).get(col)!r} there, "
+                               f"{(base[1].get(row) or {}).get(col)!r} in {os.path.basename(tables[t]['file'])}")
 
 
-def check_decisions(dec, path, sources, measures, rep):
+def check_decisions(dec, path, sources, measures, reg, rep):
     L = rel(path)
+    setups = (reg.get("benchmarks") or {}).get("setups", {})
     for d in dec["decisions"]:
+        if d.get("kind") == "headline":
+            if d["setup"] not in setups:
+                rep.err(f"{L} {d['id']}", f"setup '{d['setup']}' not registered")
+            continue
         entries, ok = [], True
         for mref in d["measures"]:
             sid, mid = mref.split("#")
@@ -617,20 +874,35 @@ def check_decisions(dec, path, sources, measures, rep):
             entries.append(facts_hash(sources[sid][1], m, mref))
         if ok and hash_of(entries) != d["facts_hash"]:
             rep.warn(f"{L} {d['id']}", "facts_hash no longer matches: the decision is reported, not applied")
+    heads = {d["id"]: d for d in dec["decisions"] if d.get("kind") == "headline"}
+    for sid, s in setups.items():
+        h = s["headline"]
+        if h.get("decision"):
+            d = heads.get(h["decision"])
+            if not d:
+                rep.err(f"{L}", f"setup {sid}: headline decision {h['decision']} not found (kind headline)")
+            elif d["setup"] != sid or d["metric"] != h["metric"]:
+                rep.err(f"{L} {d['id']}", f"decides {d['setup']} / {d['metric']}, the setup says {sid} / {h['metric']}")
 
 
 # ---------------------------------------------------------------- legacy coverage
-def legacy_coverage(csv_path, vocab):
+def legacy_coverage(csv_path, vocab, flag_map):
     V = vocab["$defs"]
     meth = V["cost_method"]
     order = [(m, re.compile(meth["x-terms"][m]["legacy_flags"], re.I)) for m in meth["x-order"]]
     subs = re.compile(V["cost_basis"]["x-terms"]["subscription"]["legacy_flags"], re.I)
+    by_source = (flag_map or {}).get("cost_method_by_source", {})
     rows = list(csv.DictReader(open(csv_path, encoding="utf-8")))
     cost = [r for r in rows if (r.get("cost_usd") or "").strip()]
     per, unmapped_src, unmapped_flags = collections.Counter(), collections.Counter(), collections.Counter()
     for r in cost:
         t = r.get("confound") or ""
-        m = next((m for m, p in order if p.search(t)), None)
+        e = by_source.get(r["source"])
+        if e and e.get("groups") and r["group"] not in e["groups"]:
+            e = None
+        m = e["method"] if e and e["applies"] == "all" else next((m for m, p in order if p.search(t)), None)
+        if m is None and e:
+            m = e["method"]
         per[m or ("(subscription basis only)" if subs.search(t) else None)] += 1
         if m is None:
             unmapped_src[r["source"]] += 1
@@ -638,7 +910,7 @@ def legacy_coverage(csv_path, vocab):
                 head = re.split(r"[:=(]", tok.strip())[0].strip()[:50]
                 if re.search(r"cost|price|bill|spend|usd", head, re.I):
                     unmapped_flags[head] += 1
-    print(f"rows with a cost: {len(cost)}")
+    print(f"rows with a cost: {len(cost)}; flag-map per-source entries: {len(by_source)}")
     for m, n in per.most_common():
         print(f"  {n:6d}  {m or 'UNMAPPED'}" + (f"  (basis {meth['x-terms'][m]['basis']})" if m in meth['x-terms'] else ""))
     print("unmapped, by source:", ", ".join(f"{s} {n}" for s, n in unmapped_src.most_common(15)))
@@ -674,12 +946,17 @@ def main():
     ap.add_argument("--decisions", default=os.path.join(REPO, "data", "decisions.json"))
     ap.add_argument("--check-files", action="store_true", help="re-hash reachable saved copies, look for quotes and CSV cells in them")
     ap.add_argument("--hash", nargs="+", metavar="MEASURE_REF", help="print the facts_hash of these measures (one decision)")
-    ap.add_argument("--legacy-coverage", metavar="RAW_DATA_CSV", help="report how vocab's legacy patterns map today's flags")
+    ap.add_argument("--legacy-coverage", metavar="RAW_DATA_CSV", help="report how vocab's legacy patterns (and --flag-map) map today's flags")
+    ap.add_argument("--flag-map", help="flag-map.json for --legacy-coverage (default: <registry>/flag-map.json when present)")
     a = ap.parse_args()
     rep, schemas = Report(), Schemas(HERE)
     vocab = schemas.doc("vocab.json")
     if a.legacy_coverage:
-        return legacy_coverage(a.legacy_coverage, vocab)
+        fmp = a.flag_map or os.path.join(a.registry, "flag-map.json")
+        fm = load_json(fmp, rep) if os.path.isfile(fmp) else None
+        if fm is not None and not schemas.validate(fm, "flag-map.schema.json", rel(fmp), rep):
+            return rep.done()
+        return legacy_coverage(a.legacy_coverage, vocab, fm)
     check_vocab(vocab, rep, schemas)
     rep.checked.append("data/schema/vocab.json")
     schema_of = {"source": "source.schema.json", "measure": "measure.schema.json", "decisions": "decisions.schema.json",
@@ -708,17 +985,19 @@ def main():
             reg[k] = x
         rep.checked.append(rel(p))
     if all(k in reg for k in REQUIRED_REGISTRIES):
-        check_registries(reg, rep, schemas, vocab, paths)
+        check_registries(reg, rep, schemas, vocab, paths, a.check_files)
 
     sources, measures = {}, {}
-    for p in sorted(glob.glob(os.path.join(a.findings, "sources", "*.json"))):
-        x = load_json(p, rep)
+    files = sorted(glob.glob(os.path.join(a.findings, "sources", "*.json")))
+    loaded = [(p, load_json(p, rep)) for p in files]
+    all_ids = {x.get("id") for _, x in loaded if isinstance(x, dict)}
+    for p, x in loaded:
         rep.checked.append(rel(p))
         if x is not None and schemas.validate(x, "source.schema.json", rel(p), rep):
             if x["id"] in sources:
                 rep.err(rel(p), f"source id {x['id']} also in {rel(sources[x['id']][0])}")
             sources[x["id"]] = (p, x)
-            check_source(x, p, reg, rep, schemas, vocab, a.check_files)
+            check_source(x, p, reg, rep, schemas, vocab, a.check_files, all_ids)
     for p in sorted(glob.glob(os.path.join(a.findings, "measures", "*.json"))):
         x = load_json(p, rep)
         rep.checked.append(rel(p))
@@ -745,7 +1024,11 @@ def main():
         x = load_json(a.decisions, rep)
         rep.checked.append(rel(a.decisions))
         if x is not None and schemas.validate(x, "decisions.schema.json", rel(a.decisions), rep):
-            check_decisions(x, a.decisions, sources, measures, rep)
+            check_decisions(x, a.decisions, sources, measures, reg, rep)
+    else:
+        for sid, s in (reg.get("benchmarks") or {}).get("setups", {}).items():
+            if s["headline"].get("decision"):
+                rep.err(rel(paths["benchmarks"]), f"setup {sid}: headline decision {s['headline']['decision']} but no decisions file")
     return rep.done()
 
 

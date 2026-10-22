@@ -6,18 +6,35 @@
   "https://www.anthropic.com/claude-fable-5-1-system-card"
  ],
  "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://www.anthropic.com/claude-fable-5-1-system-card",
+   "captured": "2026-09-29",
+   "file": "/work/.prec/src/card-fable51.pdf"
+  }
+ ],
  "commit": null,
  "sha256": {
   "/work/.prec/src/card-fable51.pdf": "b0d59edc7a60eef32a879c13d713cce60c3fefd7e6b5183afdc8b835af3c8c39",
+  "/work/.prec/src/card-fable51.pypdf.txt": "b4e6f75780008aee11d5b18fd4aac2527406b3d1b6d77088bef5c4fd99096cce",
   "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png": "c15305f9264e22f9ac18cfbc44e3cbd8f4a4ba98455a01f60c93b8914b03bf9e",
   "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/measure.json": "19ef492a78fb35756ab18b9f9431e6586472c88646699958de61fc171657ca40"
  },
+ "extractions": [
+  {
+   "file": "/work/.prec/src/card-fable51.pypdf.txt",
+   "from": "/work/.prec/src/card-fable51.pdf",
+   "tool": "pypdf 6.19.0, page by page ('=== page N ===')"
+  }
+ ],
  "harvested_at": "2026-09-29T13:27:57Z",
  "published": {
   "value": "2026-09-01",
   "where": "cover page",
   "quote": "September 1, 2026",
-  "file": "/work/.prec/src/card-fable51.pdf"
+  "file": "/work/.prec/src/card-fable51.pypdf.txt"
  },
  "salvo": "prec (September 2026 chart dossiers; hand conversion, schema example)",
  "agent": "schema-writer (Opus 5.5), from the chart dossier measure.json",
@@ -125,7 +142,7 @@
    "value": "graded against an acceptable range set by experts",
    "level": "written",
    "form": "prose",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/src/card-fable51.pypdf.txt",
    "where": "p184, section 8.14.1 Chartography, paragraph 1",
    "quote": "each answer is graded against an acceptable range set by experts for that specific chart"
   },
@@ -136,20 +153,21 @@
    "value": "with tools",
    "level": "written",
    "form": "prose",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/src/card-fable51.pypdf.txt",
    "where": "p184, section 8.14.1, paragraph 2",
    "quote": "When evaluated with tools, the model is provided with a container (with the image file and standard libraries installed) and an image cropping tool."
   },
   {
    "id": "F3",
-   "says": "effort-setting",
+   "says": "note",
    "about": null,
    "value": "We use the effort parameter",
    "level": "written",
    "form": "prose",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/src/card-fable51.pypdf.txt",
    "where": "p186, caption of Figure 8.14.1.B",
-   "quote": "Models are evaluated with adaptive thinking at various effort levels, with and without tools. We use the effort parameter to adjust the amount of test-time compute spent."
+   "quote": "Models are evaluated with adaptive thinking at various effort levels, with and without tools. We use the effort parameter to adjust the amount of test-time compute spent.",
+   "note": "names no level: the chart's points carry no effort label"
   },
   {
    "id": "F4",
@@ -158,21 +176,21 @@
    "value": "averaged over five runs",
    "level": "written",
    "form": "prose",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/src/card-fable51.pypdf.txt",
    "where": "p186, caption of Figure 8.14.1.B",
    "quote": "Scores are averaged over five runs at each effort level."
   },
   {
    "id": "F5",
-   "says": "effort-setting",
+   "says": "effort-label",
    "about": null,
-   "value": "max effort enabled in all runs",
+   "value": "max effort",
    "level": "written",
    "form": "prose",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/src/card-fable51.pypdf.txt",
    "where": "p184, section 8.14.1, paragraph 2",
    "quote": "The model is configured with adaptive thinking and max effort enabled in all runs, both with and without tools.",
-   "note": "states max effort for all runs; the p186 chart shows a sweep over effort levels (see schema README, open items)"
+   "note": "the label of the printed results of paragraph 3 (F6)"
   },
   {
    "id": "F6",
@@ -181,9 +199,11 @@
    "value": "86.2%",
    "level": "written",
    "form": "prose",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/src/card-fable51.pypdf.txt",
    "where": "p184, section 8.14.1, paragraph 3",
    "quote": "Claude Fable 5.1 achieved a score of 42.6% without tools and 86.2% with tools.",
+   "term": "score%",
+   "scale": "percent",
    "precision": {
     "model": "printed",
     "step": 0.1
@@ -196,7 +216,7 @@
    "value": "Claude Fable 5.1",
    "level": "written",
    "form": "image-text",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
    "where": "p186 figure legend, orange line",
    "quote": "Claude Fable 5.1"
@@ -204,11 +224,11 @@
   {
    "id": "F8",
    "says": "tools-regime",
-   "about": "solid lines",
+   "about": null,
    "value": "With tools (solid)",
    "level": "written",
    "form": "image-text",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
    "where": "p186 figure legend",
    "quote": "With tools (solid)"
@@ -221,7 +241,7 @@
    "term": "per-task",
    "level": "written",
    "form": "image-text",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
    "where": "p186 figure, x-axis title",
    "quote": "Cost per task (USD, log scale)"
@@ -234,7 +254,7 @@
    "term": "USD",
    "level": "written",
    "form": "image-text",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
    "where": "p186 figure, x-axis title",
    "quote": "Cost per task (USD, log scale)"
@@ -246,7 +266,7 @@
    "value": "Accuracy (%)",
    "level": "written",
    "form": "image-text",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
    "where": "p186 figure, y-axis title",
    "quote": "Accuracy (%)"
@@ -254,13 +274,15 @@
   {
    "id": "F12",
    "says": "score",
-   "about": "Claude Fable 5.1, with tools, marker 1 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "53.31",
+   "term": "score%",
+   "scale": "percent",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1165, 717] (x, y)",
+   "where": "solid orange series (with tools), marker 1 of 5 in cost order, centre px [1165, 717] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.288,
@@ -270,13 +292,13 @@
   {
    "id": "F13",
    "says": "cost",
-   "about": "Claude Fable 5.1, with tools, marker 1 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "0.1471",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1165, 717] (x, y)",
+   "where": "solid orange series (with tools), marker 1 of 5 in cost order, centre px [1165, 717] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.47,
@@ -286,25 +308,27 @@
   {
    "id": "F14",
    "says": "effort-label",
-   "about": "Claude Fable 5.1, with tools, marker 1 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "marker 1 of 5",
-   "level": "not-established:absent",
+   "level": "not-established:assumed",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1165, 717]: no label on the marker; caption says 'various effort levels'",
-   "note": "today's rows give low, medium, high, xhigh, max in cost order; no rule maps a marker's rank to a level (schema README, open items)"
+   "where": "solid orange series (with tools), marker 1 of 5 in cost order, centre px [1165, 717] (x, y) of chart.png: no label on the marker",
+   "note": "a level from the marker's order alone is not-established:assumed (DATA-PIPELINE §1, 9f3e7ef)"
   },
   {
    "id": "F15",
    "says": "score",
-   "about": "Claude Fable 5.1, with tools, marker 2 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "66.39",
+   "term": "score%",
+   "scale": "percent",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1271, 566] (x, y)",
+   "where": "solid orange series (with tools), marker 2 of 5 in cost order, centre px [1271, 566] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.288,
@@ -314,13 +338,13 @@
   {
    "id": "F16",
    "says": "cost",
-   "about": "Claude Fable 5.1, with tools, marker 2 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "0.2219",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1271, 566] (x, y)",
+   "where": "solid orange series (with tools), marker 2 of 5 in cost order, centre px [1271, 566] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.47,
@@ -330,25 +354,27 @@
   {
    "id": "F17",
    "says": "effort-label",
-   "about": "Claude Fable 5.1, with tools, marker 2 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "marker 2 of 5",
-   "level": "not-established:absent",
+   "level": "not-established:assumed",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1271, 566]: no label on the marker; caption says 'various effort levels'",
-   "note": "today's rows give low, medium, high, xhigh, max in cost order; no rule maps a marker's rank to a level (schema README, open items)"
+   "where": "solid orange series (with tools), marker 2 of 5 in cost order, centre px [1271, 566] (x, y) of chart.png: no label on the marker",
+   "note": "a level from the marker's order alone is not-established:assumed (DATA-PIPELINE §1, 9f3e7ef)"
   },
   {
    "id": "F18",
    "says": "score",
-   "about": "Claude Fable 5.1, with tools, marker 3 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "72.76",
+   "term": "score%",
+   "scale": "percent",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1426, 483] (x, y)",
+   "where": "solid orange series (with tools), marker 3 of 5 in cost order, centre px [1426, 483] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.288,
@@ -358,13 +384,13 @@
   {
    "id": "F19",
    "says": "cost",
-   "about": "Claude Fable 5.1, with tools, marker 3 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "0.3872",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1426, 483] (x, y)",
+   "where": "solid orange series (with tools), marker 3 of 5 in cost order, centre px [1426, 483] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.47,
@@ -374,25 +400,27 @@
   {
    "id": "F20",
    "says": "effort-label",
-   "about": "Claude Fable 5.1, with tools, marker 3 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "marker 3 of 5",
-   "level": "not-established:absent",
+   "level": "not-established:assumed",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1426, 483]: no label on the marker; caption says 'various effort levels'",
-   "note": "today's rows give low, medium, high, xhigh, max in cost order; no rule maps a marker's rank to a level (schema README, open items)"
+   "where": "solid orange series (with tools), marker 3 of 5 in cost order, centre px [1426, 483] (x, y) of chart.png: no label on the marker",
+   "note": "a level from the marker's order alone is not-established:assumed (DATA-PIPELINE §1, 9f3e7ef)"
   },
   {
    "id": "F21",
    "says": "score",
-   "about": "Claude Fable 5.1, with tools, marker 4 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "87.58",
+   "term": "score%",
+   "scale": "percent",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1742, 307] (x, y)",
+   "where": "solid orange series (with tools), marker 4 of 5 in cost order, centre px [1742, 307] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.288,
@@ -402,13 +430,13 @@
   {
    "id": "F22",
    "says": "cost",
-   "about": "Claude Fable 5.1, with tools, marker 4 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "1.2895",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1742, 307] (x, y)",
+   "where": "solid orange series (with tools), marker 4 of 5 in cost order, centre px [1742, 307] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.47,
@@ -418,25 +446,27 @@
   {
    "id": "F23",
    "says": "effort-label",
-   "about": "Claude Fable 5.1, with tools, marker 4 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "marker 4 of 5",
-   "level": "not-established:absent",
+   "level": "not-established:assumed",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1742, 307]: no label on the marker; caption says 'various effort levels'",
-   "note": "today's rows give low, medium, high, xhigh, max in cost order; no rule maps a marker's rank to a level (schema README, open items)"
+   "where": "solid orange series (with tools), marker 4 of 5 in cost order, centre px [1742, 307] (x, y) of chart.png: no label on the marker",
+   "note": "a level from the marker's order alone is not-established:assumed (DATA-PIPELINE §1, 9f3e7ef)"
   },
   {
    "id": "F24",
    "says": "score",
-   "about": "Claude Fable 5.1, with tools, marker 5 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "86.18",
+   "term": "score%",
+   "scale": "percent",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1881, 321] (x, y)",
+   "where": "solid orange series (with tools), marker 5 of 5 in cost order, centre px [1881, 321] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.288,
@@ -446,13 +476,13 @@
   {
    "id": "F25",
    "says": "cost",
-   "about": "Claude Fable 5.1, with tools, marker 5 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "2.1675",
    "level": "read",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1881, 321] (x, y)",
+   "where": "solid orange series (with tools), marker 5 of 5 in cost order, centre px [1881, 321] (x, y) of chart.png",
    "precision": {
     "model": "chart-pixel",
     "reading_px": 2.47,
@@ -462,14 +492,14 @@
   {
    "id": "F26",
    "says": "effort-label",
-   "about": "Claude Fable 5.1, with tools, marker 5 of 5 (by cost)",
+   "about": "Claude Fable 5.1",
    "value": "marker 5 of 5",
-   "level": "not-established:absent",
+   "level": "not-established:assumed",
    "form": "chart",
-   "file": "/work/.prec/src/card-fable51.pdf",
+   "file": "/work/.prec/charts/chartogt-chartogn__card-fable51-p186/chart.png",
    "chart": "C1",
-   "where": "chart.png marker centre px [1881, 321]: no label on the marker; caption says 'various effort levels'",
-   "note": "today's rows give low, medium, high, xhigh, max in cost order; no rule maps a marker's rank to a level (schema README, open items)"
+   "where": "solid orange series (with tools), marker 5 of 5 in cost order, centre px [1881, 321] (x, y) of chart.png: no label on the marker",
+   "note": "a level from the marker's order alone is not-established:assumed (DATA-PIPELINE §1, 9f3e7ef)"
   }
  ]
 }

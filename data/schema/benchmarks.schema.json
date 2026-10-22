@@ -81,18 +81,16 @@
       ]
      },
      "metric": {
-      "type": "string",
-      "description": "The metric this setup's values are on (today's score_metric spelling).",
-      "minLength": 1
+      "$ref": "vocab.json#/$defs/metric",
+      "description": "The metric this setup's values are on (vocab metric; a score fact's term must equal it)."
      },
      "headline": {
       "type": "object",
       "description": "The setup's headline metric.",
       "properties": {
        "metric": {
-        "type": "string",
-        "description": "The headline metric.",
-        "minLength": 1
+        "$ref": "vocab.json#/$defs/metric",
+        "description": "The headline metric of the benchmark, as a metric term: step 5 compares it with the setup's metric. When publishers of one setup designate different headlines, the benchmark's own designation holds and a disagreement goes to a headline decision."
        },
        "basis": {
         "$ref": "vocab.json#/$defs/headline_basis"
@@ -101,7 +99,7 @@
         "$ref": "common.schema.json#/$defs/evidence_list"
        },
        "decision": {
-        "description": "decisions.json id when basis = decision; null while the decision is pending (the tree then gives out:not-headline).",
+        "description": "A headline decision of decisions.json (kind headline, same setup and metric) when basis = decision; null while the decision is pending (the tree then gives out:not-headline).",
         "anyOf": [
          {
           "type": "string",

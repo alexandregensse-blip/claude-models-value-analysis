@@ -45,6 +45,20 @@
    "ref": "docs/DATA-PIPELINE.md §5.1 step 7, §9"
   },
   {
+   "id": "scale-conversion",
+   "kind": "deduction",
+   "statement": "A score written as a fraction is put on a percent metric (× 100) and back (÷ 100), exactly; the scale comes from the fact's `scale`, never from the size of the value.",
+   "inputs": [
+    "score (scale)",
+    "setup metric"
+   ],
+   "output": "value (computed)",
+   "precision": "the printed step × 100 (or ÷ 100)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (DATA-PIPELINE 9f3e7ef)",
+   "ref": "docs/DATA-PIPELINE.md §4 rules.json"
+  },
+  {
    "id": "chart-reading",
    "kind": "deduction",
    "statement": "A point read off a raster chart takes the chart's calibration and reading sd as its precision.",

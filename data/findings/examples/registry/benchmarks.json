@@ -21,13 +21,14 @@
    "judge_panel": null,
    "metric": "answer_pass3%",
    "headline": {
-    "metric": "non-strict answer pass^3",
+    "metric": "answer_pass3%",
     "basis": "designated",
     "evidence": [
      {
       "where": "docs/reference/methodology.md lines 50-51",
       "source": "src-github-obviousbench-v0.2-aggregate-2026-10-10",
-      "fact": "F1"
+      "fact": "F1",
+      "note": "'non-strict answer pass^3' = column answer_pass3_accuracy (strict pass^3 is a diagnostic)"
      }
     ]
    },
@@ -43,7 +44,7 @@
    "legacy_groups": [
     "obvbench"
    ],
-   "note": "the data file gives a fraction (0.958333); the metric is a percentage (see the schema README, open items)"
+   "note": "the data file gives fractions (scale fraction on T1.answer_pass3_accuracy): scale-conversion puts them on answer_pass3%"
   },
   "hotkv-banking77-fresh": {
    "family": "hotkv-banking77",

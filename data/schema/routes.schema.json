@@ -36,11 +36,20 @@
      },
      "spellings": {
       "type": "array",
-      "description": "How sources name this route (a model-string prefix such as 'openrouter/', a provider name, a flag), so a route fact without a term resolves; matched case-insensitively.",
+      "description": "How sources name this route (a provider name, a flag), so a route fact without a term resolves; matched exactly, case-insensitively.",
       "items": {
        "type": "string",
        "description": "A verbatim spelling.",
        "minLength": 1
+      }
+     },
+     "name_prefixes": {
+      "type": "array",
+      "description": "Prefixes written before ids of this namespace (Inspect / LiteLLM provider prefixes: 'anthropic/', 'openai/' for maker-api; 'openrouter/' for openrouter). Stripped once when resolving a name in this namespace; the head of a `prefix` value is looked up here, which also names the route.",
+      "items": {
+       "type": "string",
+       "description": "A prefix ending in '/'.",
+       "pattern": "/$"
       }
      },
      "level_mapping": {
