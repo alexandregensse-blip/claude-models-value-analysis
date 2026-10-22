@@ -1,11 +1,12 @@
 # Data pipeline: findings, registries, decision tree (proposal v3, 22 Oct 2026)
 
-Status: **draft — three independent reviews (/work/.salvo14/review-pipeline{,2,3}/), revised; schemas can be written;
+Status: **draft — four independent reviews (/work/.salvo14/review-pipeline{,2,3,4}/), revised; schemas can be written;
 no code yet.**
 
 The data the fit reads becomes **computed tables**, built by one script from what agents write (the **findings**: what a
-source says) and what we define (the **registries**). **Agents write facts only.** The model, the effort, the campaign,
-every certainty level and every status are computed by the build. The maintainer's decisions are the only hand-set
+source says) and what we define (the **registries**). **Agents write facts only**: what the source says and how it says it (printed,
+read off a chart, flagged by the source as an estimate…), which the verifiers check. The model, the configuration, the
+campaign, every measure field's level and every status are computed by the build. The maintainer's decisions are the only hand-set
 statuses; they live in one file, are pinned to the facts they judged, and are evaluated first.
 
 ```
@@ -45,6 +46,9 @@ A cost the source computed from this run's own tokens at a stated price, or a CL
 basis `list-estimate`. Each measure field (model, effort, run date, value, each setup field, each usage class, the price)
 gets its own level; a measure is in only if every field the tree reads is accepted.
 
+When one value is both printed and read off a chart, the printed value is used. A chart's effort labels (legend, axis,
+point labels) are `written`; a level inferred from a marker's position or order alone is `not-established:assumed`.
+
 Attributes, never levels: the **precision model** (`printed` step · `chart-pixel` sd · `exact`), the **route**,
 **restated-from** and **same-runs-as** (each with its own level), **anomalies** (each with its own level).
 
@@ -66,7 +70,8 @@ Attributes, never levels: the **precision model** (`printed` step · `chart-pixe
 A data file is proven by its sha256 and a locator (a `tables` entry stands for its cells). Fact types (vocab.json):
 `score`, `metric-definition`, `headline-metric`, `cost`, `currency`, `unit` (vocabulary = today's unit list + aliases;
 usage and spend share it), `cost-basis`, `cost-method`, `price-table`, `tokens-in`, `tokens-out`, `tokens-cache-read`,
-`tokens-cache-write-5m`, `tokens-cache-write-1h`, `tokens-reasoning` (+ `reasoning-included-in-out`), `cached-share`,
+`tokens-cache-write-5m`, `tokens-cache-write-1h`, `tokens-reasoning` (+ `reasoning-included-in-out`), `tokens-total` (no class split: usable only through a uniform
+factor, or for ratios within one model), `cached-share`,
 `requests`, `model-name`, `model-api-id`, `route`, `mode`, `effort-label`, `effort-setting` (a setting line read in code or config, with where it was read),
 `thinking-on` (thinking enabled with no level, e.g. a `-thinking` id or AA "(Reasoning)"), `thinking-off`,
 `no-effort-sent`, `config-history` (a config file's history over an interval), `thinking-budget`, `tools-regime`,
@@ -84,7 +89,7 @@ The agent groups the facts of one measure and names the setup; it writes no key,
  "measures": [{"id": "M1", "setup": "<benchmarks.json setup id>",
    "facts": {"value": "F1", "model": ["F2"], "effort": ["F3"], "run_date": ["F4"], "usage": ["F5", "F6"],
              "spend": ["F7", "F8", "F9"], "version": "F10", "judge": null, "anomalies": [], "restated_from": null,
-             "same_runs_as": null},
+             "same_runs_as": null, "value_seen_in": ["<capture ids carrying this value>"]},
    "verified": {"by": "…", "at": "…", "rederived": true}}]}
 ```
 
@@ -109,7 +114,8 @@ think). `default` (the configuration a call with no setting gets), `conversions`
 the release (release post, model card or API reference) unless a document dates a later addition; `default`,
 `conversions` and `modes` are dated by their evidence: `from` = the effective date the maker's document states, else
 its earliest capture; `to` = the change it states, else the last capture still showing it. Between two captures showing
-the same text the interval is covered; between a capture showing it and the next one not showing it, it is not. Build
+the same text the interval is covered; between a capture showing it and the next one not showing it, it is not; a single
+capture covers its own day only. Build
 checks: two keys of one maker serving one API id over overlapping intervals, or with identical display names, fail the
 build until resolved.
 
@@ -140,7 +146,7 @@ Flash, $0.75: the maintainer, 21 Oct).
 `alias-by-date`, `mode-to-line`, `label-to-ladder`, `maker-conversion-dated`, `route-mapping-dated`,
 `api-default-documented`, `config-unchanged-over-interval` (the config's history covers the run interval with the same
 setting), `no-effort-setting`, `thinking-off`, `mean-of-runs` (failed runs excluded), `percent-from-counts`,
-`composite-residual`, `cost-publisher-figure`, `cost-delta-on-source` (the price change applied to the source's own
+`composite-residual`, `scale-conversion` (fraction ↔ percent, exact), `cost-publisher-figure`, `cost-delta-on-source` (the price change applied to the source's own
 cost once its formula reproduces it), `cost-uniform-factor`, `cost-class-ratio` (METHODOLOGY §2, spread added),
 `chart-reading`, `currency-fixed`. Standing rules (the maintainer's): the label rule (a label that names a level of the
 model's ladder is that level — LMArena kept, 22 Oct), "Pro via a router that cannot separate it → out" (20 Oct),
@@ -181,7 +187,8 @@ configurations" are those of models.json at the run date:
    rule); a label naming a converted level (GLM-5.2 `low`) goes to step 6;
 5. an `effort-label` in other words → `label-to-ladder` when the model's configurations make it unique;
 6. a requested or converted configuration → the route chain applied in order **harness → router / reseller / host →
-   maker**, each step dated (identity where documented); route unknown → every candidate route is evaluated and the
+   maker**, each step dated (identity where documented); route unknown → every candidate route (each route of routes.json that served the model at the run date, the maker's API
+   always included) is evaluated and the
    configuration is accepted only if all agree, else `not-established:absent`; a router budget → `budget-converted`;
    a tie → `ambiguous`;
 7. `no-effort-sent` → `api-default-documented`: on the maker's API or a reseller, the maker's documented default (Haiku
@@ -241,7 +248,9 @@ components' costs, only on one unit and one run; otherwise the composite's cost 
    source that recomputes at its current price (AA); the stated date for a list estimate, else [run lower bound,
    publication].
 2. **Partition** of the setup's measures by `basis` (`billed · list-estimate · router-billed · subscription · unknown`)
-   × `method` (vocab: `tokens×list`, `cli-total`, `provider-invoice`, `router-invoice`, `publisher-table`…) × unit ×
+   × `method` (vocab: `tokens×list`, `cli-total`, `provider-invoice`, `router-invoice`, `publisher-table`,
+   `library-table` (litellm-style price tables)…; a "simulated" cost is classified per source at migration: computed from
+   this run's tokens → `tokens×list`, otherwise `source-estimate`) × unit ×
    currency × route. In each part: the re-priced measures form one subset; each unrepriced model forms its own subset
    when its price change over the price-date interval is uniform across classes (its efforts' ratios hold); the others →
    `out:cost-not-comparable`.
@@ -260,8 +269,9 @@ The build writes **one table per axis** in today's `raw-data.csv` columns, holdi
 - `source` = the publisher's id in publishers.json (maker publishers named as `lqm.load`'s maker map: anthropic,
   openai, google, alibaba…), never a snapshot id, so publishers, unit aliases and the home effect resolve as today;
 - confound flags regenerated from the facts in the exact spellings `lqm.load` reads (`EAP-run`, `restated-from:<maker>`,
-  `vendor-reported:<org>`, `evaluated-by:`, `reading-sd`…, listed in vocab.json), plus `prev`;
-- `group-map.json`: fit group → base group, used by the catalog lookups (families, composites, publishers, unit aliases).
+  `vendor-reported:<org>`, `evaluated-by:`, …, listed in vocab.json), plus `prev`; the reading sd in its column (`score_prec` / `cost_prec`), as today;
+- `group-map.json`: fit group → base group, for the group-keyed catalog maps (families, composites, group display);
+  the source-keyed maps (publishers, unit aliases) are keyed by the publisher id in the `source` column.
 
 Code changes for the tables (no change of method): `fit.py` reads one path per axis; `catalog` resolves a group
 through `group-map.json`. `lqm.load`'s per-row outcome is recovered by comparing its input with the rows it keeps
@@ -306,7 +316,7 @@ report is written back into the status report. Site fields stay in the site's re
 Decided by the maintainer during the reviews:
 - **Configurations per model** (22 Oct): each model has its own list of configurations; `nothink` and `minimal` enter
   the fit as couples of their model (≈ 72 + 12 couples measured by ≥ 2 publishers today); thinking budgets stay out.
-  `solo` only for a model with a single configuration: Haiku 4.5's 373 `solo` rows are re-read at migration into
+  `solo` only for a model with a single configuration: every `solo` row of a model whose list is not `[solo]` (Haiku 4.5's 375 included) are re-read at migration into
   `nothink`, a budget, or not established. A method change: before/after before main.
 - `api-default-documented` through a router (22 Oct): when the run is known to have gone through the router with no
   effort sent, the router's dated documented default for that model is the effort (latitude kimi-k3: OpenRouter
