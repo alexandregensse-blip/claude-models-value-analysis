@@ -117,8 +117,8 @@ One file per source, next to it. Each measure is one value of one couple on one 
 bounds and direction, task type, complexity, and for a composite its components and formula (weights, normalisation,
 validated on complete couples).
 **publishers.json** — publisher id → the maker it belongs to (home effect) or none.
-**prices.json** — per model and route: dated list prices per token class, long-context tiers, promotions (flagged, never a
-base), batch/flex factors; each with its evidence. "Today's price" = the standard list price in force on the build date.
+**prices.json** — per model and route: dated list prices per token class, long-context tiers, promotions (recorded and
+flagged, never a base; their display on the site is set aside for now), batch/flex factors; each with its evidence. "Today's price" = the standard list price in force on the build date.
 **rules.json** — each deduction rule: id, inputs (fact types / registry entries), output field, conditions. First set:
 `alias-by-date`, `label-to-ladder`, `maker-conversion-dated`, `router-nearest-level-dated`, `api-default-documented`
 (code shows nothing sent + direct route or a router's dated default + maker doc captured before the run + run date),
@@ -159,7 +159,7 @@ Each step either passes or gives the measure its status with a reason code. Orde
    date unknown: the effort ratios hold); the models of one route. A subset of one measure carries nothing → `out:cost-
    not-comparable`.
 3. **Basis**: `subscription` / CLI flat billing → `out:cost-basis`; mixed bases in a setup → one subset per basis.
-4. **Promotions / off-peak** are variants for the site, never the base.
+4. **Promotions / off-peak** are never the base. (Showing them on the site is set aside for now — user, 22 Oct.)
 
 Every measure ends with `in` or `out:<reason>` on each axis; the build writes both into `status-report.json`, and the
 fit table holds the `in` measures with their group (setup, plus the cost subset on the cost axis).
