@@ -92,10 +92,13 @@ The agent groups the facts of one measure and names the setup; it writes no key,
 ## 4. Registries
 
 **models.json** — the only keys. Per model: label, maker, `released` (datetime, from the maker), `line`,
-`open_weights`, `thinking` (`levels | on-off | always | none`), `solo_means` (the one configuration `solo` denotes: the model's default when it has no effort parameter); `names`: each API id or display name and the model it
+`open_weights`, `thinking` (`levels | on-off | always | none`), `configurations`: the model's own list of
+configurations over dated intervals (Opus 5.5: low…max; GPT-5.x: none/nothink, minimal, low…xhigh; Haiku 4.5: nothink,
+thinking with a budget; a hybrid Qwen: nothink and its levels; a model with no setting at all: `solo` only — `solo` means
+exactly that: one configuration, nothing to set); `names`: each API id or display name and the model it
 **serves** over `{from, to}` — the maker's own dates (release, redirect or shutdown date from its changelog); `efforts`,
 `default`, `conversions` (requested → served, per route), `modes` (request parameters that select another key: Pro →
-`<id>-pro`). `efforts` (the levels the maker serves **as themselves**: the ladder) start at the release (release post,
+`<id>-pro`). The levels the maker serves **as themselves** (its ladder, part of `configurations`) start at the release (release post,
 model card or API reference at release) unless a document dates a later addition. `default`, `conversions` and `modes`
 are dated by their evidence: `from` = the effective date the maker's document states, else its earliest capture; `to` =
 the change the document states, else the last capture still showing it. Between two captures showing the same text the
@@ -158,8 +161,8 @@ resolve to different keys → `contradictory`. `mode` facts → the line key; a 
 
 **Effort** — first match wins; every rule's interval must cover the run interval:
 1. a `thinking-budget` → `think-<budget>`; a numeric scale → `scalar-<n>`;
-2. a model without an effort parameter, or with thinking always on → `solo` (`solo_means`), whatever else is stated
-   (K2.7 Code, Haiku 4.5 at its default);
+2. a model with a single configuration (no setting at all, thinking always on) → `solo`, whatever else is stated
+   (K2.7 Code);
 3. an `effort-setting` (a code/config line at the run, or `config-unchanged-over-interval`; the fact records where it was
    read: the source's own call, or a harness/router config) at a level of the model's ladder that every step of the
    route chain serves as itself → that level; a level the maker or a route converts goes to step 6;
@@ -171,11 +174,15 @@ resolve to different keys → `contradictory`. `mode` facts → the line key; a 
    agree, else `not-established:absent`; a router budget → `budget-converted`; a tie → `ambiguous`;
 7. `no-effort-sent` → `api-default-documented`: on the maker's API, the maker's documented default; through a router
    (route known), the router's own documented default for that model (the maintainer, 22 Oct); else `default`;
-8. thinking off → `nothink` (kept apart from `solo` even when it is the model's default: §9); `reasoning_effort: none`
-   → `nothink`;
+8. thinking off → `nothink`; `reasoning_effort: none` → `nothink`; a model's default configuration proven by
+   `api-default-documented` (e.g. Haiku 4.5 on the maker's API: thinking off) → that configuration;
 9. nothing → `unstated`.
-Ids outside the ladder (`minimal nothink think-* scalar-* budget-converted enabled adaptive default unstated req-<label>
-app-* priceblend`) → `out:effort-outside-ladder` or `out:effort-not-established`. A tools regime (`nt-*`), a fast mode
+A measure's configuration must be one of the model's `configurations` at the run date. **In the fit**: every
+configuration of the list (`low … max`, `minimal`, `nothink`, `solo`) as its own couple, **except thinking budgets**
+(`think-<budget>`: recorded, `out:budget-config` — too few and an unusual use: the maintainer, 22 Oct). Not
+established (`scalar-*` without a mapping, `budget-converted`, `enabled` without a level, `adaptive`, `default`,
+`unstated`, `req-<label>`, `app-*`, `priceblend`) → `out:effort-not-established`. A budget is stored as its exact token
+count; budgets within 5 % are one value (10k = 10,000 = 10,240). A tools regime (`nt-*`), a fast mode
 or an application setting is part of the setup, not the effort.
 
 **Campaign** (computed). A setup's campaign is its `version` (benchmark, protocol or board version). Snapshots of one
@@ -190,7 +197,7 @@ shared couples, ≥ 2 of them, equality by METHODOLOGY §3's closeness test) lin
 0. **Decision** pinned to the measure → its status (`in:decision:<id>` / `out:decision:<id>`).
 1. **Proof**: every fact used has a locator (and a quote where required) → else `out:no-proof`.
 2. **Model** accepted and in models.json → else `out:model-not-established`.
-3. **Effort** in the ladder → else `out:effort-outside-ladder` / `out:effort-not-established`.
+3. **Configuration** established and in the fit → else `out:budget-config` / `out:effort-not-established`.
 4. **Value** accepted; `source-estimate` → `out:estimate`; `failure` (did not complete, infrastructure error) →
    `out:failed-run`; a source's mean that includes a failed run → recomputed by `mean-of-runs` when the per-run values
    are written, else `out:failed-run`; `partial` (items missing, not scored) → `out:partial` unless the source scores them as wrong; `cap`
@@ -275,12 +282,11 @@ report is written back into the status report. Site fields stay in the site's re
 
 ## 9. Decisions
 
-Pending:
-- **nothink vs solo on an on-off model whose default is thinking off** (Haiku 4.5: 375 `solo`, 43 `nothink` rows; 17
-  `nothink` rows in 17 groups would enter the fit): are they one configuration? Until the maintainer answers, `nothink`
-  stays out.
-
 Decided by the maintainer during the reviews:
+- **Configurations per model** (22 Oct): each model has its own list of configurations; `nothink` and `minimal` enter
+  the fit as couples of their model (≈ 72 + 12 couples measured by ≥ 2 publishers today); thinking budgets stay out.
+  `solo` only for a model with a single configuration: Haiku 4.5's 373 `solo` rows are re-read at migration into
+  `nothink`, a budget, or not established. A method change: before/after before main.
 - `api-default-documented` through a router (22 Oct): when the run is known to have gone through the router with no
   effort sent, the router's dated documented default for that model is the effort (latitude kimi-k3: OpenRouter
   `default_effort: max`, captured 21 Jul, run 23 Jul).
