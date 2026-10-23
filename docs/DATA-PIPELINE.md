@@ -114,7 +114,8 @@ redirect, shutdown), and optionally the configuration it selects (`deepseek-chat
 think). Names are matched exactly, except in the Hugging Face namespace (`huggingface`: repository ids such as
 `Qwen/Qwen3.8-27B`), matched case-insensitively (23 Oct). `default` (the configuration a call with no setting gets), `conversions` (requested → served, per route),
 `modes` (request parameters that select another key: Pro → `<id>-pro`). Configurations served as themselves start at
-the release (release post, model card or API reference) unless a document dates a later addition; `default`,
+the release (release post, model card or API reference) unless a document dates a later addition, and last until the
+maker states a change or the model's shutdown (a capability is not bounded by the last capture); `default`,
 `conversions` and `modes` are dated by their evidence: `from` = the effective date the maker's document states, else
 its earliest capture; `to` = the change it states, else the last capture still showing it. Between two captures showing
 the same text the interval is covered; between a capture showing it and the next one not showing it, it is not; a single
