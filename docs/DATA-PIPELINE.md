@@ -317,6 +317,9 @@ report is written back into the status report. Site fields stay in the site's re
 ## 9. Decisions
 
 Decided by the maintainer during the reviews:
+- **Cost method unstated** (23 Oct): for a source whose cost method is found neither in its documentation nor by
+  reproducing its costs from its tokens, one table of one source is taken as one method (`cost_method_unstated =
+  single-per-table`, flag `cost-method-assumed-single`).
 - **Configurations per model** (22 Oct): each model has its own list of configurations; `nothink` and `minimal` enter
   the fit as couples of their model (≈ 72 + 12 couples measured by ≥ 2 publishers today); thinking budgets stay out.
   `solo` only for a model with a single configuration: every `solo` row of a model whose list is not `[solo]` (Haiku 4.5's 375 included) are re-read at migration into
