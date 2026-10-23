@@ -246,7 +246,7 @@ def resolve_api_id(value, namespace, models, routes):
                 break
         ns = None if route in (None, "maker-api") else route
         return {k for k, m in models.items() for n in m.get("names", [])
-                if n["kind"] == "api-id" and (n.get("route") or None) == ns and n["name"] == v}
+                if n["kind"] == "api-id" and (n.get("route") or None) == ns and same_name(n["name"], v, route, routes)}
     if namespace != "prefix":
         return in_ns(value, namespace)
     head, sep, rest = value.partition("/")
@@ -259,6 +259,19 @@ def resolve_api_id(value, namespace, models, routes):
         keys |= in_ns(rest, rid) if sep else set()
         keys |= in_ns(value, rid)
     return keys
+
+
+def same_name(registered, value, route, routes):
+    """An API id against a registered name of one namespace: exact, or casefolded in a namespace whose route has
+    names_case_insensitive (the Hugging Face namespace: repository ids are case-insensitive)."""
+    if (routes.get(route or "maker-api") or {}).get("names_case_insensitive"):
+        return registered.casefold() == value.casefold()
+    return registered == value
+
+
+def component_names(comp):
+    """(name, setup id or None) of a composite's components: a plain setup id is its own name."""
+    return [(c, c) if isinstance(c, str) else (c["name"], c.get("setup")) for c in comp.get("components", [])]
 
 
 def vocab_terms(vocab, name):
@@ -304,16 +317,23 @@ def stamp(path):
     return (path, st.st_mtime_ns, st.st_size)
 
 
-def file_text(path, cache={}):
-    key = stamp(path)
+def file_text(path, cache={}, raw=False):
+    key = stamp(path) + (raw,)
     if key not in cache:
         with open(path, encoding="utf-8", errors="replace") as f:
             t = f.read()
-        if path.endswith((".html", ".htm", ".xml")):
+        if path.endswith((".html", ".htm", ".xml")) and not raw:
             t = re.sub(r"<script.*?</script>|<style.*?</style>", " ", t, flags=re.S | re.I)
             t = re.sub(r"<[^>]+>", " ", t)
         cache[key] = norm(t)
     return cache[key]
+
+
+def quote_in_file(quote, path):
+    """A quote is in a saved text file: in its visible text, or, for a saved page, in its raw source (data embedded in
+    a script, such as a Next.js payload: the pricing pages of 2024)."""
+    q = norm(quote)
+    return q in file_text(path) or (path.endswith((".html", ".htm")) and q in file_text(path, raw=True))
 
 
 def cited(measure):
@@ -440,7 +460,7 @@ def check_evidence_files(doc, path, label, rep):
         if e.get("quote"):
             if f.endswith(".pdf"):
                 rep.err(label, f"{p}: a quote in a PDF points at its text extraction")
-            elif f.endswith(TEXT_EXT) and norm(e["quote"]) not in file_text(f):
+            elif f.endswith(TEXT_EXT) and not quote_in_file(e["quote"], f):
                 rep.err(label, f"{p}: quote not found in {os.path.basename(f)}")
 
 
@@ -507,7 +527,7 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
                 for na in ma.get("names", []):
                     for nb in mb.get("names", []):
                         same = norm_display(na["name"], vocab) == norm_display(nb["name"], vocab) if na["kind"] == "display-name" \
-                            else na["name"] == nb["name"]
+                            else same_name(na["name"], nb["name"], na.get("route"), routes)
                         if same and na["kind"] == nb["kind"] \
                                 and (na.get("route") or "maker-api") == (nb.get("route") or "maker-api") \
                                 and any(overlap(x, y) for x in na["serves"] for y in nb["serves"]):
@@ -540,12 +560,17 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
             rep.err(L, f"family '{s['family']}' not registered")
         comp = s.get("composite")
         if comp:
-            for c in comp["components"]:
-                if c not in setups:
+            names = component_names(comp)
+            for n, c in names:
+                if c is not None and c not in setups:
                     rep.err(L, f"composite component '{c}' not registered")
+            if len({n for n, _ in names}) != len(names):
+                rep.err(L, "composite components with the same name")
             for c in comp["formula"]["weights"]:
-                if c not in comp["components"]:
+                if c not in {n for n, _ in names}:
                     rep.err(L, f"weight for '{c}', not a component")
+            if comp["linear"] is True and not comp["formula"]["weights"]:
+                rep.err(L, "a linear composite without weights (write linear: \"unknown\" while they are not in hand)")
         if s["headline"]["basis"] == "decision" and not s["headline"].get("decision"):
             rep.warn(L, "headline pending a maintainer decision (the tree gives out:not-headline until then)")
         if s["headline"]["basis"] != "decision" and not s["headline"].get("evidence"):
@@ -564,6 +589,10 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
             L = f"{lab['prices']} prices[{i}]"
             if p["model"] not in models:
                 rep.err(L, f"model '{p['model']}' not registered")
+            else:
+                for c in p.get("configurations", []):
+                    if c not in config_ids(models[p["model"]]):
+                        rep.err(L, f"price for configuration '{c}', not one of {p['model']}'s configurations")
             if p["route"] not in routes:
                 rep.err(L, f"route '{p['route']}' not registered")
             elif p["kind"] == "standard" and routes[p["route"]]["class"] == "maker-api":
@@ -572,13 +601,28 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
             if p["kind"] == "standard" and not p.get("classes"):
                 rep.err(L, "standard price without classes")
             if p.get("base"):
-                chosen[p["model"]] += 1
+                for c in p.get("configurations") or [None]:
+                    chosen[(p["model"], c)] += 1
                 if p["kind"] in ("promotion", "off-peak"):
                     rep.err(L, f"a {p['kind']} price is never the base")
-        for key, n in chosen.items():
-            if n > 1:
-                rep.err(lab["prices"], f"{key}: {n} entries marked base")
-        for key in sorted({p["model"] for p in prices["prices"]} - base - set(chosen)):
+        for (key, c), n in chosen.items():
+            if n > 1 or (c is None and any(k == key and cc is not None for k, cc in chosen)):
+                rep.err(lab["prices"], f"{key}: {n} entries marked base" + (f" for {c}" if c else "")
+                        + ("" if n > 1 else " (one for every configuration, others per configuration)"))
+        # configuration-dependent prices: entries of one model, route, kind and currency that overlap in time must
+        # not share a configuration (an entry without `configurations` covers them all)
+        groups = collections.defaultdict(list)
+        for i, p in enumerate(prices["prices"]):
+            groups[(p["model"], p["route"], p["kind"], p["currency"])].append((i, p))
+        for g in groups.values():
+            if not any(p.get("configurations") for _, p in g):
+                continue
+            for x, (i, a) in enumerate(g):
+                for j, b in g[x + 1:]:
+                    ca, cb = a.get("configurations"), b.get("configurations")
+                    if overlap(a, b) and (ca is None or cb is None or set(ca) & set(cb)):
+                        rep.err(f"{lab['prices']} prices[{i}]", f"overlaps prices[{j}] ({a['model']}, {a['kind']}) on a shared configuration")
+        for key in sorted({p["model"] for p in prices["prices"]} - base - {k for k, _ in chosen}):
             rep.warn(lab["prices"], f"{key}: no standard maker-API price in force on as_of {prices['as_of']}")
 
     # rules.json
@@ -755,7 +799,7 @@ def check_saved(src, path, rep, lines_cache={}):
                 rep.err(f"{L} {f['id']}", "the legacy row is not a line of its CSV")
     for f in src.get("facts", []):
         p = reach.get(f.get("file")) if f.get("file") else only
-        if f.get("quote") and p and p.endswith(TEXT_EXT) and norm(f["quote"]) not in file_text(p):
+        if f.get("quote") and p and p.endswith(TEXT_EXT) and not quote_in_file(f["quote"], p):
             rep.err(f"{L} {f['id']}", f"quote not found in the saved file {os.path.basename(p)}")
 
 

@@ -1027,6 +1027,79 @@ def run_date_contradictory_with_event():
     eq(r.q(m1), "out:contradictory", "a dated event of md (its default) inside the widened window")
     eq(r.q(m2), "in", "no dated event of ma inside: the run date is not needed")
 
+# ================================================================ registry extensions of 23 Oct (merge of the parts)
+@test
+def ext_composite_named_component_and_linear_unknown():
+    sc = base()
+    sc.setup("c1", family="f1")
+    sc.setup("comp", family="fc", composite={"components": ["c1", {"name": "x-part", "setup": None}],
+                                             "formula": {"weights": {"c1": 1, "x-part": 1}}, "linear": True,
+                                             "evidence": EV})
+    sc.setup("compu", family="fu", composite={"components": ["c1"], "formula": {"weights": {}}, "linear": "unknown",
+                                              "evidence": EV})
+    s = sc.source("a")
+    k1 = sc.m(s, setup="comp", model="ma", effort=[LOW], score="60%")
+    sc.m(s, setup="comp", model="mb", effort=[LOW], score="70%")
+    u1 = sc.m(s, setup="compu", model="ma", effort=[LOW], score="60%")
+    sc.m(s, setup="compu", model="mb", effort=[LOW], score="70%")
+    sc.m(s, setup="c1", model="ma", effort=[LOW], score="50%")
+    sc.m(s, setup="c1", model="mb", effort=[LOW], score="80%")
+    r = sc.run()
+    res = r[k1 + "~resid"]
+    eq(res["setup"], "comp-resid-x-part", "residual for the unregistered component")
+    eq(float(res["fields"]["score"]["number"]), 70.0, "(60 − ½·50) / ½")
+    eq(u1 + "~resid" in r.rep["measures"], False, "linear unknown: no residual")
+
+
+@test
+def ext_price_per_configuration():
+    sc = base()
+    sc.model("mq", configs=("nothink", "think"))
+    sc.model("mr", configs=("nothink", "think"))
+    for k in ("mq", "mr"):
+        sc.prices["prices"] += [
+            price(k, "2026-01-01", "2026-10-01", {"input": 1, "output": 5}, configurations=["nothink"]),
+            price(k, "2026-01-01", "2026-06-30", {"input": 1, "output": 10}, configurations=["think"]),
+            price(k, "2026-07-01", "2026-10-01", {"input": 1, "output": 20}, configurations=["think"])]
+    s = sc.source("a", published="2026-06-01")
+    tok = {"tokens-in": "1000000", "tokens-out": "100000"}
+    on, off = [("thinking-on", "enable_thinking: true")], [("thinking-off", "enable_thinking: false")]
+    t1 = sc.m(s, model="mq", effort=on, cost="2.00", tokens=tok, price_table="list prices of 1 June 2026")
+    sc.m(s, model="mr", effort=on, cost="2.00", tokens=tok, price_table="list prices of 1 June 2026")
+    n1 = sc.m(s, model="mq", effort=off, cost="1.50", tokens=tok, price_table="list prices of 1 June 2026")
+    sc.m(s, model="mr", effort=off, cost="1.50", tokens=tok, price_table="list prices of 1 June 2026")
+    r = sc.run()
+    eq(r[t1]["fields"]["cost"]["base"]["rule"], "cost-delta-on-source", "think: its own price changed")
+    eq(round(r[t1]["fields"]["cost"]["base"]["value"], 6), 3.0, "2.00 + 0.1 MTok × $10")
+    eq(r[n1]["fields"]["cost"]["base"]["rule"], "cost-publisher-figure", "nothink: its price never changed")
+
+
+@test
+def ext_hugging_face_names_case_insensitive():
+    sc = base()
+    sc.route("huggingface", "self-hosted", prefixes=("hf/",))
+    sc.routes["huggingface"]["names_case_insensitive"] = True
+    sc.model("mh", names=[name("Org/Model-8B", route="huggingface")])
+    s = sc.source("a")
+    m1 = sc.m(s, model="org/model-8b", namespace="prefix", effort=[LOW])
+    m2 = sc.m(s, model="hf/ORG/model-8B", namespace="prefix", effort=[LOW])
+    m3 = sc.m(s, model="MA", effort=[LOW])
+    r = sc.run()
+    eq(r.model(m1), "mh", "repository id, any case, route unknown")
+    eq(r.model(m2), "mh", "hf/ prefix names the namespace")
+    eq(r.q(m3), "out:model-not-established", "maker namespace stays case-sensitive")
+
+
+@test
+def ext_between_tools_recorded_not_fitted():
+    sc = base()
+    sc.model("ms", configs=("low", "high", "between-tools"))
+    s = sc.source("a")
+    m1 = sc.m(s, model="ms", effort=[("effort-setting", "thinking: {\"type\": \"between_tools\"}")])
+    r = sc.run()
+    eq(r.cfg(m1), "between-tools", "the setting")
+    eq(r.q(m1), "out:effort-not-established", "in_fit false in vocab")
+
 
 def main():
     import review_tests

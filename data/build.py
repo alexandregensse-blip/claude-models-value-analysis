@@ -549,7 +549,7 @@ def api_matches(ctx, value, ns):
                 break
         nsr = None if rid in (None, "maker-api") else rid
         return [(k, n) for k, m in models.items() for n in m.get("names", [])
-                if n["kind"] == "api-id" and (n.get("route") or None) == nsr and n["name"] == v]
+                if n["kind"] == "api-id" and (n.get("route") or None) == nsr and V.same_name(n["name"], v, rid, routes)]
     if ns != "prefix":
         return in_ns(value, ns), ns, False
     head, sep, rest = value.partition("/")
@@ -828,6 +828,9 @@ def map_setting(ctx, value, column=None):
         c = spelling_match(ctx, t, ("setting",))
         if c:
             return c, "spelling"
+    for cid, rec in ctx_vocab_terms(ctx, "configuration").items():   # a configuration with its own spelling
+        if rec.get("regex") and re.search(rec["regex"], value or "", re.I):
+            return cid, "spelling"
     if re.fullmatch(r"[0-9]+(\.[0-9]+)?", v):
         return f"scalar-{v}", "scalar"
     if v in NOT_ESTABLISHED:
@@ -1207,34 +1210,41 @@ def ctx_vocab_terms(ctx, name):
 
 
 # ---------------------------------------------------------------- prices (§4 prices.json, §5.3.1)
-def std_entries(ctx, key, route="maker-api", currency=None):
+def for_config(p, config):
+    """A price entry applies to the configuration: no `configurations` (every one), or the configuration is listed."""
+    return not p.get("configurations") or config in p["configurations"]
+
+
+def std_entries(ctx, key, route="maker-api", currency=None, config=None):
     return [p for p in ctx.prices["prices"] if p["model"] == key and p["route"] == route and p["kind"] == "standard"
-            and (currency is None or p["currency"] == currency)]
+            and (currency is None or p["currency"] == currency) and for_config(p, config)]
 
 
-def base_price(ctx, key, currency=None):
-    """The base price in the cost's currency: the entry marked base, else the standard maker-API price in force on
-    as_of, else (a retired model) its last list price."""
+def base_price(ctx, key, currency=None, config=None):
+    """The base price in the cost's currency (and for the measure's configuration, when the maker prices
+    configurations differently): the entry marked base, else the standard maker-API price in force on as_of, else
+    (a retired model) its last list price."""
     marked = [p for p in ctx.prices["prices"] if p["model"] == key and p.get("base")
-              and (currency is None or p["currency"] == currency)]
+              and (currency is None or p["currency"] == currency) and for_config(p, config)]
     if marked:
         return marked[0]
     asof = ctx.prices.get("as_of")
     if not asof:
         return None
     t = V.when(asof)
-    on = [p for p in std_entries(ctx, key, currency=currency) if V.when(p["from"]) <= t <= V.when(p["to"], True)]
+    on = [p for p in std_entries(ctx, key, currency=currency, config=config)
+          if V.when(p["from"]) <= t <= V.when(p["to"], True)]
     if on:
         return on[0]
-    past = sorted((p for p in std_entries(ctx, key, currency=currency) if V.when(p["to"], True) < t),
+    past = sorted((p for p in std_entries(ctx, key, currency=currency, config=config) if V.when(p["to"], True) < t),
                   key=lambda p: V.when(p["to"], True))
     return dict(past[-1], _last_list=True) if past else None   # a retired model: its last list price
 
 
-def prices_over(ctx, key, lo, hi, route="maker-api", currency=None):
+def prices_over(ctx, key, lo, hi, route="maker-api", currency=None, config=None):
     """(distinct class vectors of the standard prices in the cost's currency that could have applied over [lo, hi],
     fully covered?)."""
-    es = sorted((p for p in std_entries(ctx, key, route, currency) if overlaps(p, lo, hi)),
+    es = sorted((p for p in std_entries(ctx, key, route, currency, config) if overlaps(p, lo, hi)),
                 key=lambda p: V.when(p["from"]))
     if lo is None:
         return [e["classes"] for e in es], False
@@ -1326,7 +1336,8 @@ def reprice(M, C, key):
     C["price_date"] = dict(lo=pd_lo.isoformat() if pd_lo else None, hi=pd_hi.isoformat(), how=how)
     C["base"] = None
     cur = C.get("currency")
-    bp = base_price(ctx, key, cur)
+    cfg = (M.fields.get("configuration") or {}).get("value")
+    bp = base_price(ctx, key, cur, cfg)
     route = "maker-api"
     if pd_lo is None:                                    # an early-access run: list prices start at the release
         pd_lo = ctx.released(key)
@@ -1334,7 +1345,7 @@ def reprice(M, C, key):
         C["price_date"]["how"] += " (early access: from the release)"
     if pd_lo > pd_hi:
         pd_lo = pd_hi
-    vecs, covered = prices_over(ctx, key, pd_lo, pd_hi, route, cur) if cur else ([], False)
+    vecs, covered = prices_over(ctx, key, pd_lo, pd_hi, route, cur, cfg) if cur else ([], False)
     C["price_vectors"], C["price_covered"] = vecs, covered
     if bp is None:
         C["reprice_detail"] = f"no base price for {key} in {cur or 'an unstated currency'}"
@@ -1521,6 +1532,9 @@ def early_steps(M, axis, field):
         return "out:effort-not-established", f"{c} is not in the model's list {sorted(offered)}"
     if re.fullmatch(r"think-[0-9]+", c):
         return "out:budget-config", f"{c}: thinking budgets are recorded, not fitted"
+    term = ctx_vocab_terms(ctx, "configuration").get(c) or {}
+    if term.get("in_fit") is False:                      # a configuration recorded, not fitted (between-tools)
+        return term.get("reason", "out:effort-not-established"), f"{c}: recorded, not in the fit (vocab x-terms)"
     r = value_step(M, field, axis)
     if r:
         return r, field.get("detail", "") if field else ""
@@ -1830,14 +1844,17 @@ def composite_residuals(ctx, measures):
         by[(M.setup_id, M.publisher, couple(M))][M.S.id] = M
     for M in inq:
         comp = M.setup.get("composite")
-        if not comp or not comp.get("linear") or comp.get("formula", {}).get("normalisation") not in (None, "", "none"):
-            continue
+        if not comp or comp.get("linear") is not True \
+                or comp.get("formula", {}).get("normalisation") not in (None, "", "none"):
+            continue                                     # linear false or "unknown": no residual
         w = comp["formula"]["weights"]
         tot = sum(w.values())
         if not tot:
             continue
-        present = {c: by[(c, M.publisher, couple(M))] for c in comp["components"] if by.get((c, M.publisher, couple(M)))}
-        missing = [c for c in comp["components"] if c not in present]
+        names = V.component_names(comp)                  # (weight key, setup id or None: never present)
+        present = {n: by[(c, M.publisher, couple(M))] for n, c in names
+                   if c is not None and by.get((c, M.publisher, couple(M)))}
+        missing = [n for n, _ in names if n not in present]
         if not present or not missing:
             continue
         val = float(M.fields["score"]["number"])

@@ -47,7 +47,7 @@ def expanded_maps(lqm, rep, gm):
         fam[g] = lqm.FAMILY_OF.get(b) or (bench.get(s, {}).get("family") if s else None)
         members = set(lqm.COMPOSITES.get(b, []))
         sc = (bench.get(s, {}) if s else {}).get("composite") or {}
-        members_setups = set(sc.get("components", []))
+        members_setups = {c if isinstance(c, str) else c.get("setup") for c in sc.get("components", [])} - {None}
         if members or members_setups:
             comps[g] = sorted(h for h, hb in gm.items() if hb in members or setup_of.get(h) in members_setups)
     return comps, fam

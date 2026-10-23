@@ -1150,7 +1150,7 @@
    }
   },
   "metric": {
-   "description": "Score metrics: every distinct non-empty `score_metric` of /work/.wt-px/raw-data.csv (22 Oct 2026), x-rows = its row count. A setup's `metric` and `headline.metric`, a score fact's or score column's `term`, are terms of this list: DATA-PIPELINE §5.2 step 5 compares them as terms. lqm.bound/kind read the spelling (a '%' means a 0-100 scale).",
+   "description": "Score metrics: every distinct non-empty `score_metric` of /work/.wt-px/raw-data.csv (22 Oct 2026), x-rows = its row count. A setup's `metric` and `headline.metric`, a score fact's or score column's `term`, are terms of this list: DATA-PIPELINE §5.2 step 5 compares them as terms. lqm.bound/kind read the spelling (a '%' means a 0-100 scale). `none` (added 23 Oct 2026): a cost-only setup, whose rows carry no score (its metric and headline are `none`; no score fact can be on it).",
    "enum": [
     "%PASSED",
     "22-benchmark average (%)",
@@ -1574,7 +1574,8 @@
     "wins-vs-deepseek-of-4",
     "within-length-of-4",
     "within20%",
-    "xp-x1e5"
+    "xp-x1e5",
+    "none"
    ],
    "x-rows": {
     "%PASSED": 11,
@@ -2213,7 +2214,7 @@
    }
   },
   "configuration": {
-   "description": "Configuration ids a model can offer (models.json configurations; DATA-PIPELINE §4). think-<n>: thinking on with a budget of n tokens (exact count as written; the build merges budgets within 5 %). In the fit: every id but think-<n> (out:budget-config). In models.json a model whose thinking takes any budget lists the family `think-<budget>` with budget_min / budget_max.",
+   "description": "Configuration ids a model can offer (models.json configurations; DATA-PIPELINE §4). think-<n>: thinking on with a budget of n tokens (exact count as written; the build merges budgets within 5 %). In the fit: every id but think-<n> (out:budget-config). In models.json a model whose thinking takes any budget lists the family `think-<budget>` with budget_min / budget_max. between-tools (23 Oct 2026): Sonnet 5.5's thinking: {type: between_tools}; recorded, not fitted (x-terms.in_fit false: the build gives out:effort-not-established).",
    "anyOf": [
     {
      "enum": [
@@ -2225,6 +2226,7 @@
       "max",
       "nothink",
       "think",
+      "between-tools",
       "solo"
      ]
     },
@@ -2268,6 +2270,13 @@
     "think": {
      "in_fit": true,
      "kind": "thinking on, no level (on-off models without levels)"
+    },
+    "between-tools": {
+     "in_fit": false,
+     "kind": "thinking: {type: between_tools} (Anthropic, Claude Sonnet 5.5): up-front thinking off, thinking between tool calls; accepted with effort low, medium or high only",
+     "reason": "out:effort-not-established",
+     "note": "added 23 Oct 2026 (merge of the registry parts): documented by Anthropic as a thinking setting; it combines with an effort level, so one couple would mix levels. Kept out of the fit until the maintainer decides (a method change). `regex`: how a setting line names it (thinking: {type: \"between_tools\"}).",
+     "regex": "between[_-]tools"
     },
     "solo": {
      "in_fit": true,
@@ -2829,7 +2838,7 @@
    }
   },
   "rule_id": {
-   "description": "Rule ids of rules.json (DATA-PIPELINE §4): deduction rules then standing rules.",
+   "description": "Rule ids of rules.json (DATA-PIPELINE §4): deduction rules then standing rules. Standing rules added 23 Oct 2026 for the decisions of DATA-PIPELINE §4 (prices) and §9: configurations-per-model, cost-method-unstated-single, base-price-retired-last-list, base-price-charged-never-applied.",
    "enum": [
     "alias-by-date",
     "mode-to-line",
@@ -2855,7 +2864,11 @@
     "decision-c-conversions-dated",
     "composite-residual-rule",
     "cost-comparability-rule",
-    "uninformative-scores"
+    "uninformative-scores",
+    "configurations-per-model",
+    "cost-method-unstated-single",
+    "base-price-retired-last-list",
+    "base-price-charged-never-applied"
    ],
    "x-terms": {
     "alias-by-date": {
@@ -2931,6 +2944,18 @@
      "kind": "standing"
     },
     "uninformative-scores": {
+     "kind": "standing"
+    },
+    "configurations-per-model": {
+     "kind": "standing"
+    },
+    "cost-method-unstated-single": {
+     "kind": "standing"
+    },
+    "base-price-retired-last-list": {
+     "kind": "standing"
+    },
+    "base-price-charged-never-applied": {
      "kind": "standing"
     }
    }
@@ -3083,14 +3108,22 @@
     "output",
     "cache-read",
     "cache-write-5m",
-    "cache-write-1h"
+    "cache-write-1h",
+    "cache-write-30m",
+    "cache-write-12h"
    ],
    "x-terms": {
     "input": {},
     "output": {},
     "cache-read": {},
     "cache-write-5m": {},
-    "cache-write-1h": {}
+    "cache-write-1h": {},
+    "cache-write-30m": {
+     "description": "OpenAI 30-minute cache write (GPT-6 pricing tables, 23 Oct 2026)"
+    },
+    "cache-write-12h": {
+     "description": "OpenAI 12-hour cache write (GPT-6 pricing tables, 23 Oct 2026)"
+    }
    }
   },
   "price_kind": {

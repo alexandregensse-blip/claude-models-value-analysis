@@ -114,6 +114,36 @@ The build is described in data/BUILD.md. It added these terms:
   block, and the reason codes `legacy:in` / `legacy:out:<why>`;
 - a decision on a missing measure is now a warning (reported, not applied).
 
+## Added at the merge of the registry parts (23 Oct)
+
+The wave-1/2 parts (data/registry/parts/, reports in /work/.salvo14/mig/<part>/report.md) were merged into data/registry/
+(/work/.salvo14/mig/merge/report.md). They needed:
+- **vocab.json:** metric `none` (cost-only setups: metric and headline `none`); configuration `between-tools` (Sonnet
+  5.5's `thinking: {type: between_tools}`, with `regex` for its setting line; x-terms `in_fit: false`, so the build gives
+  `out:effort-not-established` until the maintainer decides); price classes `cache-write-30m`, `cache-write-12h`
+  (OpenAI); rule ids `configurations-per-model`, `cost-method-unstated-single`, `base-price-retired-last-list`,
+  `base-price-charged-never-applied` (standing: the decisions of DATA-PIPELINE §4 prices and §9).
+- **benchmarks.schema.json:** `headline.level` (`written` / `not-established:assumed`); composite components are a setup
+  id or `{name, setup}` with `setup: null` for a component the registry does not hold (weights keyed by the name; never
+  present, so a residual always covers it); `linear: true | false | "unknown"` (unknown: no residual).
+- **prices.schema.json:** `configurations` on an entry: the configurations the price applies to (Qwen3-8B thinking
+  output 2.1, non-thinking 0.7); absent = all. Base: at most one per model and configuration; entries of one model,
+  route, kind and currency that overlap in time may not share a configuration. The build re-prices with the entries of
+  the measure's configuration.
+- **routes.schema.json:** `names_case_insensitive`. **Rule:** in a namespace whose route sets it (`huggingface`, the
+  Hugging Face namespace: repository ids `Org/Name`), an API id matches a registered name casefolded, after the route's
+  prefix (`hf/`) is stripped; the identity check compares those names casefolded too. Every other namespace stays
+  exact (case-sensitive). With namespace `prefix`, a head no route lists (`qwen/`) leaves the route unknown, and the
+  rest, then the whole value, are tried in every namespace, the Hugging Face one included.
+- **common.schema.json:** publisher ids may contain spaces and parentheses (two raw-data.csv sources do).
+- **validate.py:** a quote in a saved HTML page is also looked for in its raw source (data embedded in a script: the
+  2024 Anthropic pricing pages carry their prices in a Next.js payload); the checks above. **build.py:** the same name
+  rule, component objects, `linear` read as `is True`, prices per configuration, `in_fit: false` terms out.
+- One `maker-api` route for every maker's own API (the id models.json conversions, names with route null and the base
+  price use); the part's per-maker routes are folded into it, their spellings and prefixes kept.
+- Tests: 4 more (`ext_*`: named component and linear unknown, price per configuration, Hugging Face names,
+  between-tools), each failing when its change is removed.
+
 ## Choices where the document left freedom
 
 1. **Fields on facts:**
@@ -130,7 +160,8 @@ The build is described in data/BUILD.md. It added these terms:
      `openrouter/qwen/qwen3.6-27b` is a route and an API id.
 4. **Name resolution (models.schema.json):** no substring or fuzzy match.
    - An API id carries its `namespace` (a route id, or `prefix`). The longest `name_prefixes` entry of that route is
-     stripped once, then the id must match a name registered under that namespace exactly.
+     stripped once, then the id must match a name registered under that namespace exactly (casefolded in a namespace
+     with `names_case_insensitive`: the Hugging Face one).
    - With `prefix`, the head up to `/` names the route. An unknown head means the route is unknown: the rest, then the
      whole value, is tried in every candidate route, and exactly one key must result.
    - Display names are compared under N: NFKC, casefold, separators as spaces, one leading maker spelling dropped.

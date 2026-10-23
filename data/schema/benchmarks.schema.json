@@ -110,6 +110,13 @@
           "type": "null"
          }
         ]
+       },
+       "level": {
+        "description": "Certainty level of the headline designation (23 Oct 2026): `written` when the source designates or ranks by it (with evidence); `not-established:assumed` when it is only the metric held (the only metric in today's rows, or the most common one) until the source is converted.",
+        "enum": [
+         "written",
+         "not-established:assumed"
+        ]
        }
       },
       "required": [
@@ -159,9 +166,40 @@
         "properties": {
          "components": {
           "type": "array",
-          "description": "Component setups.",
+          "description": "Components: a setup id, or {name, setup} where setup is the registered setup or null for a component the registry does not hold (its weight is keyed by its name; it is never present, so a residual always covers it).",
           "items": {
-           "$ref": "common.schema.json#/$defs/setup_id"
+           "anyOf": [
+            {
+             "$ref": "common.schema.json#/$defs/setup_id"
+            },
+            {
+             "type": "object",
+             "description": "A named component.",
+             "properties": {
+              "name": {
+               "type": "string",
+               "description": "The component's name (the weight key).",
+               "minLength": 1
+              },
+              "setup": {
+               "description": "Its setup id, or null when not registered.",
+               "anyOf": [
+                {
+                 "$ref": "common.schema.json#/$defs/setup_id"
+                },
+                {
+                 "type": "null"
+                }
+               ]
+              }
+             },
+             "required": [
+              "name",
+              "setup"
+             ],
+             "unevaluatedProperties": false
+            }
+           ]
           },
           "minItems": 1
          },
@@ -171,7 +209,7 @@
           "properties": {
            "weights": {
             "type": "object",
-            "description": "Component setup → weight.",
+            "description": "Component name (the setup id for a plain component) → weight; {} when the weights are not in hand.",
             "additionalProperties": {
              "type": "number"
             }
@@ -191,8 +229,15 @@
           "unevaluatedProperties": false
          },
          "linear": {
-          "type": "boolean",
-          "description": "Linear in its components (a residual can be computed)."
+          "description": "Linear in its components (a residual can be computed): true, false, or \"unknown\" (weights or formula not in hand: no residual, treated as non-linear).",
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "const": "unknown"
+           }
+          ]
          },
          "validated_on": {
           "type": "string",

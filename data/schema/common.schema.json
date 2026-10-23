@@ -39,8 +39,8 @@
   },
   "publisher_id": {
    "type": "string",
-   "description": "A publishers.json id: today's catalog publisher spelling (the value of data/catalog/publishers.json, or the raw-data.csv source itself when not merged), so lqm.load's maps resolve as today.",
-   "pattern": "^[A-Za-z0-9][A-Za-z0-9._/@-]*$"
+   "description": "A publishers.json id: today's catalog publisher spelling (the value of data/catalog/publishers.json, or the raw-data.csv source itself when not merged), so lqm.load's maps resolve as today. Spaces and parentheses are allowed (23 Oct 2026) because two raw-data.csv sources carry them ('EQ-bench/eqbench-leaderboard-results (GitHub)', 'epoch.ai (vals.ai ProofBench v1.0-era)'); a source id writes its publisher slug lowercased, with '/', spaces and parentheses as '_'.",
+   "pattern": "^[A-Za-z0-9][A-Za-z0-9._/@() -]*[A-Za-z0-9._/@()-]$|^[A-Za-z0-9]$"
   },
   "source_id": {
    "type": "string",

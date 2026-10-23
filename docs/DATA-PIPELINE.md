@@ -103,13 +103,16 @@ evidence}`) and each either served as itself or converted:
 - levels of an effort parameter (`minimal`, `low` … `max`), `nothink` (thinking off: `reasoning_effort: none`,
   `enable_thinking: false`, `thinking: disabled`, a non-reasoning id…; the spellings are listed in vocab.json),
   `think` (thinking on with no level: the only thinking configuration of an on-off model without levels — DeepSeek
-  V3.2 thinking mode, Kimi K2.5, GLM-5, the Qwen 3.5–3.7 hybrids), `think-<budget>` (thinking on with a token budget);
+  V3.2 thinking mode, Kimi K2.5, GLM-5, the Qwen 3.5–3.7 hybrids), `think-<budget>` (thinking on with a token budget),
+  `between-tools` (Sonnet 5.5's `thinking: {type: between_tools}`, combined with a level ≤ high: recorded, not fitted,
+  pending a decision; 23 Oct);
 - `solo` only for a model whose list is `[solo]`: nothing to set (K2.7 Code, a model with thinking always on and no
   level). Examples: Opus 5.5 `[low … max]`; GPT-5.x `[nothink, minimal, low … xhigh]`; Haiku 4.5 `[nothink,
   think-<budget>]`; a hybrid Qwen `[nothink, think]` or `[nothink, low … xhigh]`.
 `names`: each API id or display name, the model it **serves** over `{from, to}` (the maker's own dates: release,
 redirect, shutdown), and optionally the configuration it selects (`deepseek-chat` → nothink, a `-thinking` id →
-think). `default` (the configuration a call with no setting gets), `conversions` (requested → served, per route),
+think). Names are matched exactly, except in the Hugging Face namespace (`huggingface`: repository ids such as
+`Qwen/Qwen3.8-27B`), matched case-insensitively (23 Oct). `default` (the configuration a call with no setting gets), `conversions` (requested → served, per route),
 `modes` (request parameters that select another key: Pro → `<id>-pro`). Configurations served as themselves start at
 the release (release post, model card or API reference) unless a document dates a later addition; `default`,
 `conversions` and `modes` are dated by their evidence: `from` = the effective date the maker's document states, else
@@ -128,14 +131,17 @@ On a self-hosted route the maker's defaults and conversions do not apply.
 
 **benchmarks.json** — `family` ⊃ `setup` = benchmark × subset × harness (without its version: patch releases are one
 configuration) × tools regime × judge panel × metric. Per setup: headline metric (the source's designated one; if none,
-the metric the source ranks by; else a decision), bounds, direction, task type, complexity, `kind` (`rating` — Elo,
-arena, re-fitted index — or `runs`); for composites the components, the formula (weights, normalisation), validated on
-complete couples, and whether it is linear. Setup ids keep today's group names where they exist (the catalog maps keep
+the metric the source ranks by; else a decision; with its level, `written` or `not-established:assumed` when it is only
+the metric held; a cost-only setup has metric `none`), bounds, direction, task type, complexity, `kind` (`rating` — Elo,
+arena, re-fitted index — or `runs`); for composites the components (a setup, or a named component the
+registry does not hold), the formula (weights, normalisation), validated on
+complete couples, and whether it is linear (`true`, `false`, or `unknown` while the formula is not in hand: no residual). Setup ids keep today's group names where they exist (the catalog maps keep
 working).
 
 **publishers.json** — publisher → its maker, or none.
 
-**prices.json** — per model and route: list prices per class (input, output, cache read, cache write 5m and 1h), long-
+**prices.json** — per model and route: list prices per class (input, output, cache read, cache write 5m and 1h; OpenAI's 30m and 12h), per
+configuration when the maker prices them differently (Qwen3-8B thinking output), long-
 context tiers with their per-request threshold, promotions (recorded, flagged, never a base; their display on the site
 is set aside), batch and flex factors; each dated with evidence. `as_of` pinned per build. Base route = the maker's API.
 Base price = the standard list price in force on `as_of`; for a retired model, its last list price (decision 1 of
