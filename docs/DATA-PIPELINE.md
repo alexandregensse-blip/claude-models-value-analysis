@@ -156,7 +156,7 @@ setting), `no-effort-setting`, `thinking-off`, `mean-of-runs` (failed runs exclu
 `composite-residual`, `scale-conversion` (fraction ↔ percent, exact), `cost-publisher-figure`, `cost-delta-on-source` (the price change applied to the source's own
 cost once its formula reproduces it), `cost-uniform-factor`, `cost-class-ratio` (METHODOLOGY §2, spread added),
 `chart-reading`, `currency-fixed`. Standing rules (the maintainer's): the label rule (a label that names a level of the
-model's ladder is that level — LMArena kept, 22 Oct), "Pro via a router that cannot separate it → out" (20 Oct),
+model's ladder is that level — LMArena kept, 22 Oct), `closed-harness-label` (a closed harness — Cursor, Antigravity, Grok CLI, Copilot, Amp, Kiro: routes with `label_as_level` — that shows a level without documenting what it sends: the label is the level sent to the maker's API, flag `harness-label-as-level:<route>`; a dated mapping of the harness wins; 26 Oct), "Pro via a router that cannot separate it → out" (20 Oct),
 decision C as restated (conversions only when dated), the composite residual rule (22 Oct), the cost comparability rule
 (22 Oct), uninformative scores (METHODOLOGY §2).
 
@@ -334,3 +334,6 @@ Decided by the maintainer during the reviews:
 - `api-default-documented` through a router (22 Oct): when the run is known to have gone through the router with no
   effort sent, the router's dated documented default for that model is the effort (latitude kimi-k3: OpenRouter
   `default_effort: max`, captured 21 Jul, run 23 Jul).
+- **Closed harnesses** (26 Oct): the level label a closed harness shows (Cursor 371 fit rows, Antigravity 65, Grok CLI 31,
+  Copilot 27, Amp 18, Kiro 15) is the level sent, as LMArena's labels, flagged; strict doubt (out, LMArena with them)
+  was not retained. Rule `closed-harness-label`, route field `label_as_level`.

@@ -818,6 +818,10 @@ def chains(M, key):
     if not unknown:
         return [(close(known), "stated")]
     harness = [r for r in known if ctx.routes[r]["class"] == "harness"]
+    if harness and all(ctx.routes[r].get("label_as_level") for r in harness):
+        # a closed harness whose label is the level sent (the maintainer's rule closed-harness-label, 26 Oct): the call
+        # reaches the maker's API, so no other candidate route is weighed
+        return [(close(harness + ["maker-api"]), "closed harness: label as level")]
     cands = [r for r in ctx.routes if ctx.routes[r]["class"] not in ("harness", "maker-api")
              and route_serves_model(ctx, r, key, iv)]
     out = [(close(harness + ["maker-api"]), "candidate maker-api")]
@@ -865,6 +869,11 @@ def serve(M, key, chain, req, iv, configs):
         if cur in acc:
             continue
         lm = [x for x in r.get("level_mapping", []) if on(x) and covers(x, iv)]
+        if not lm and cls == "harness" and r.get("label_as_level"):
+            M.rule("closed-harness-label")
+            if f"harness-label-as-level:{step}" not in M.flags:
+                M.flags.append(f"harness-label-as-level:{step}")
+            continue
         if not lm:
             return None, "not-established:absent", f"{step} documents nothing for {key} @ {cur} at the run date"
         rule = lm[0]["rule"]

@@ -1146,6 +1146,29 @@ def ext_harness_per_provider():
     eq(r.q(m4), "out:effort-not-established", "ma has no entry at orz: the router documents nothing for it")
 
 
+@test
+def ext_closed_harness_label():
+    # a closed harness that documents nothing: its label is the level sent, flagged (the maintainer, 26 Oct); a
+    # harness without the rule still documents nothing, so the configuration is not established
+    sc = base()
+    sc.model("mz", configs=("low", "high"))
+    sc.route("orz", "router", spellings=["ORZ"], models={"mz": {"accepts": [
+        dict(iv("2026-01-01", "2026-12-31", from_basis="stated", to_basis="stated"), configuration="low")]}})
+    sc.route("cz", "harness", spellings=["CZ"])
+    sc.routes["cz"]["label_as_level"] = {"rule": "closed-harness-label", "date": "2026-10-26",
+                                         "decided_by": "the maintainer"}
+    sc.route("hz", "harness", spellings=["HZ"])
+    s = sc.source("a")
+    m1 = sc.m(s, model="mz", effort=[HIGH], route=[("CZ", None)])
+    m2 = sc.m(s, model="mz", effort=[LOW], route=[("CZ", None)], score="55%")
+    m3 = sc.m(s, model="mz", effort=[HIGH], route=[("HZ", None)], score="58%")
+    r = sc.run()
+    eq(r.cfg(m1), "high", "closed harness: the label is the level")
+    eq("harness-label-as-level:cz" in r[m1]["flags"], True, "flagged")
+    eq(r.cfg(m2), "low", "closed harness: low")
+    eq(r.q(m3), "out:effort-not-established", "a harness without the rule documents nothing")
+
+
 def main():
     import review_tests, pilot_tests
     for t in pilot_tests.TESTS:

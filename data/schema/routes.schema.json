@@ -299,6 +299,28 @@
        ],
        "unevaluatedProperties": false
       }
+     },
+     "label_as_level": {
+      "type": "object",
+      "description": "A closed harness that shows a level label without documenting what it sends: the maintainer's standing rule `closed-harness-label` (26 Oct 2026) takes the label as the level sent, flagged `harness-label-as-level:<route>`, as LMArena's labels. Applies only where the harness documents nothing for the run (a dated mapping, accepts or level mapping wins); the call then reaches the maker's API.",
+      "properties": {
+       "rule": {
+        "const": "closed-harness-label"
+       },
+       "date": {
+        "$ref": "common.schema.json#/$defs/date_or_datetime"
+       },
+       "decided_by": {
+        "type": "string",
+        "minLength": 1
+       }
+      },
+      "required": [
+       "rule",
+       "date",
+       "decided_by"
+      ],
+      "additionalProperties": false
      }
     },
     "required": [
