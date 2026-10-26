@@ -353,3 +353,6 @@ Decided by the maintainer during the reviews:
 - **A publisher's model page** (vals.ai '/models/…': 'All evaluations were run … using "xhigh" reasoning, except on …')
   states the configuration of that model's runs on its boards, except where it names an exception or the board states
   another: a written effort fact for those rows (26 Oct).
+- **Thinking on, no level** (26 Oct): 'Reasoning' or thinking-on without a level, on a model whose list has levels but no
+  `think`, is the maker's documented effort default over the route chain (step 7), rule `thinking-on-default-level`,
+  flag `level-from-default`; no documented default → not established.

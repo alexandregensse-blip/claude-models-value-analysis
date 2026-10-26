@@ -1260,6 +1260,26 @@ def ext_chart_effort_order():
     eq(r.q(m4), "out:no-proof", "a caption that does not say effort: the computed fact has no proof")
 
 
+@test
+def ext_thinking_on_default_level():
+    # "(Reasoning)" with no level on a model with levels and no `think`: the maker's documented effort default
+    # (flag level-from-default); a model with `think` keeps think (26 Oct)
+    win = dict(from_basis="stated", to_basis="stated")
+    sc = base()
+    sc.model("ml", configs=("low", "medium", "high"), default=[dict(iv("2026-01-01", "2026-12-31", **win), configuration="high")])
+    sc.model("mh", configs=("nothink", "think"))
+    sc.model("mn", configs=("low", "high"))
+    s = sc.source("a")
+    lab = ("effort-label", "(Reasoning)")
+    m1 = sc.m(s, model="ml", effort=[lab], score="50%")
+    m2 = sc.m(s, model="mh", effort=[lab], score="60%")
+    m3 = sc.m(s, model="mn", effort=[lab], score="40%")
+    r = sc.run()
+    eq((r.cfg(m1), "level-from-default" in r[m1]["flags"]), ("high", True), "the documented default level")
+    eq(r.cfg(m2), "think", "a model with think")
+    eq(r.q(m3), "out:effort-not-established", "no documented default")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

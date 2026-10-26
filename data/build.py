@@ -1094,6 +1094,20 @@ def configuration(M, key):
             d = (d + "; " if d else "") + f"{cfg} is not one of the model's configurations"
         results.append((step if cfg == req or not cfg else 6, cfg, lv, d, ref, kind))
 
+    def think_or_default(step, ref, kind):
+        # thinking on with no level, on a model whose list has levels but no `think` (reasoning always on, or thinking
+        # only with a level): the maker's documented effort default is the level (the maintainer's judgement, 26 Oct)
+        if "think" in configs or not any(c in configs for c in LEVELS):
+            via_chain("think", step, ref, kind)
+            return
+        cfg, lv, d = over_chains(M, key, lambda ch: default_via(M, key, ch, iv, configs))
+        if cfg:
+            M.rule("thinking-on-default-level")
+            if "level-from-default" not in M.flags:
+                M.flags.append("level-from-default")
+        results.append((7, cfg, lv if cfg else "not-established:absent",
+                        d or ("" if cfg else "thinking on, no level, no documented default"), ref, kind))
+
     for f in accepted:
         s = f.says[0] if len(f.says) == 1 else next((x for x in f.says if x in (
             "thinking-budget", "effort-setting", "effort-label", "thinking-on", "thinking-off", "no-effort-sent",
@@ -1122,7 +1136,7 @@ def configuration(M, key):
             else:
                 via_chain(got[0], 3, f.ref, s)
         elif s == "thinking-on":
-            via_chain("think", 3, f.ref, s)
+            think_or_default(3, f.ref, s)
         elif s == "thinking-off":
             M.rule("thinking-off")
             via_chain("nothink", 3, f.ref, s)
@@ -1130,6 +1144,9 @@ def configuration(M, key):
             lab = map_label(ctx, f.value)
             if lab and lab.startswith("scalar-"):
                 results.append((2, lab, f.level, "a numeric scale without a mapping", f.ref, s))
+            elif lab == "think":
+                M.rule("label-rule")
+                think_or_default(4, f.ref, s)
             elif lab:
                 M.rule("label-rule")
                 via_chain(lab, 4, f.ref, s)
