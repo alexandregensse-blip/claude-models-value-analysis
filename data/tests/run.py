@@ -1199,6 +1199,16 @@ def ext_label_med_abbreviation():
     eq("media" in B.LEVEL_TOKEN_ALIASES, False, "whole tokens only")
 
 
+@test
+def ext_display_name_without_brand():
+    # 'Haiku 5.5' in a system card is the display name 'Claude Haiku 5.5' (leading maker spellings dropped, 26 Oct)
+    import validate as VV, json as _j
+    voc = _j.load(open(os.path.join(DATA, "schema", "vocab.json")))
+    eq(VV.norm_display("Haiku 5.5", voc), VV.norm_display("Claude Haiku 5.5", voc), "brand dropped")
+    eq(VV.norm_display("Anthropic Claude Haiku 5.5", voc), "haiku 5.5", "both spellings dropped")
+    eq(VV.norm_display("Claude", voc), "claude", "a name that is only the brand stays")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

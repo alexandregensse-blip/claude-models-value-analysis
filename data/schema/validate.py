@@ -265,11 +265,14 @@ def norm_display(name, vocab):
     maker spelling (vocab maker x-terms.display_prefixes) dropped."""
     t = re.sub(r"[_\-:/]", " ", unicodedata.normalize("NFKC", name).casefold())
     t = re.sub(r"\s+", " ", t).strip()
-    for rec in vocab["$defs"]["maker"]["x-terms"].values():
-        for p in rec.get("display_prefixes", []):
-            p = p.casefold()
+    prefixes = [p.casefold() for rec in vocab["$defs"]["maker"]["x-terms"].values() for p in rec.get("display_prefixes", [])]
+    cut = True
+    while cut:                                       # leading maker spellings ('Anthropic Claude Opus 5' → 'opus 5'; 26 Oct)
+        cut = False
+        for p in prefixes:
             if t.startswith(p + " ") and len(t) > len(p) + 1:
-                return t[len(p) + 1:]
+                t, cut = t[len(p) + 1:], True
+                break
     return t
 
 
