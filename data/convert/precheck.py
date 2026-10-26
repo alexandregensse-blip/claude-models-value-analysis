@@ -25,6 +25,27 @@ class _Ctx:
         self.vocab = json.load(open(os.path.join(DATA, "schema", "vocab.json"), encoding="utf-8"))
 
 
+class _Fact:
+    """The few attributes build.route_of_fact reads, for a prefix head standing as a route fact."""
+    def __init__(self, value, term=None, says=("route-name",), namespace=None):
+        self.level, self.value, self.term, self.says, self.namespace = "written", value, term, list(says), namespace
+
+
+def head_route(ctx, head):
+    """The route a prefix head names, by the build's own rule (build.route_of_fact): the head as a route term, then
+    as a name prefix ('head/'), then as a route spelling, case-insensitive. None when it names no route."""
+    for rid in ctx.routes:                                   # term, case-insensitive
+        if rid.casefold() == head.casefold():
+            head = rid
+            break
+    for f in (_Fact(head, term=head),
+              _Fact(head + "/x", says=("model-api-id",), namespace="prefix")):
+        r = build.route_of_fact(ctx, f)
+        if r:
+            return r
+    return None
+
+
 def model_values(findings, sid):
     """(ref, says, value, namespace) of every model fact or model cell the source's measures cite."""
     src = json.load(open(os.path.join(findings, "sources", f"{sid}.json"), encoding="utf-8"))
@@ -59,7 +80,7 @@ def precheck(registry, findings, sid):
             continue
         if "model-api-id" in says:
             matches, route, unknown = build.api_matches(ctx, value, ns or "maker-api")
-            if ns == "prefix" and "/" in value and unknown:
+            if ns == "prefix" and "/" in value and unknown and not head_route(ctx, value.split("/", 1)[0]):
                 heads[value.split("/", 1)[0]] += 1
         elif "model-name" in says:
             matches = build.display_matches(ctx, value)

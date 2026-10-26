@@ -2507,7 +2507,7 @@ def diff(prev_path, rep):
 def diff_by_legacy_ref(pm, nm):
     """The per-row diff of converted sources (DATA-PIPELINE §8.5): each new measure carrying a legacy_ref is paired
     with the legacy row of the previous report it replaces. Per raw-data `source`: the pairs whose status, value,
-    group, model or effort changed (with the new reasons), the unchanged count, the legacy rows of that source no
+    group, model key or configuration (effort) changed (with the new reasons; the digits' spelling does not count), the unchanged count, the legacy rows of that source no
     new measure claims (unmatched_old) and the new measures of the same findings sources that claim no row
     (unmatched_new)."""
     old = {(e.get("line"), e.get("row_sha256")): (ref, e) for ref, e in pm.items() if e.get("kind") == "legacy"}
@@ -2530,8 +2530,14 @@ def diff_by_legacy_ref(pm, nm):
         for ax in ("quality", "cost"):
             if oe["status"].get(ax) != e["status"].get(ax):
                 d[f"status_{ax}"] = [oe["status"].get(ax), e["status"].get(ax)]
-        for fld in ("group", "model", "effort", "score", "cost_usd"):
+        for fld in ("group", "model", "effort", "score", "cost_usd"):     # keys on both sides; the digits' spelling does not count
             a_, b_ = (oe.get("row") or {}).get(fld), (e.get("row") or {}).get(fld)
+            if fld in ("score", "cost_usd"):
+                try:
+                    if float(a_) == float(b_):
+                        continue
+                except (TypeError, ValueError):
+                    pass
             if a_ != b_:
                 d[fld] = [a_, b_]
         if d:

@@ -11,12 +11,13 @@ measure its `legacy_ref`, with the unmatched rows of both sides listed, never gu
     res["pairs"]          # [(source row index, raw (line, sha, row), strategy)]
     res["unmatched_raw"], res["unmatched_source"], res["ambiguous"], res["how"]
     mapping.legacy_ref(raw_entry, csv_sha)  # the measure's legacy_ref
+    mapping.save("mapping.json", res, src_rows, src_key)    # then: python3 data/convert/mapping.py mapping.json [--csv raw-data.csv]
 
 Strategies are tried in order; a strategy pairs a source row with a raw row only when its key is unique on both
 sides among the rows still unpaired (a key shared by several rows is reported as ambiguous and left to the next
 strategy). A key function returning None or '' skips the row for that strategy.
 """
-import collections, csv, hashlib, re
+import argparse, collections, csv, hashlib, json, re, sys
 
 
 def raw_rows(csv_path, source=None):
@@ -93,3 +94,67 @@ def write_tsv(path, res, src_rows, src_key):
             w.writerow([j, src_key(s), e[0] if e else "", how])
         for line, _, row in res["unmatched_raw"]:
             w.writerow(["", "", line, "unmatched raw row"])
+
+
+def save(path, res, src_rows=None, src_key=None):
+    """The result as JSON for the CLI: pairs (source row, raw line, strategy), the ambiguous keys, the unpaired raw
+    rows (line, sha, row) and the unpaired source rows (index and, with src_key, their key)."""
+    out = dict(how=res["how"], pairs=[dict(source_row=j, raw_line=e[0], strategy=how) for j, e, how in res["pairs"]],
+               ambiguous=res["ambiguous"],
+               unmatched_raw=[dict(line=l, row_sha256=h, row=r) for l, h, r in res["unmatched_raw"]],
+               unmatched_source=[dict(source_row=j, key=(str(src_key(src_rows[j])) if src_rows and src_key else None))
+                                 for j in res["unmatched_source"]])
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=1, ensure_ascii=False)
+
+
+def report(data, raw_by_line=None, limit=None):
+    """Text lines: the ambiguous tags (the raw lines sharing each), then the unpaired raw rows and source rows."""
+    L = [f"paired {len(data['pairs'])} ({', '.join(f'{k}: {v}' for k, v in data.get('how', {}).items())}); "
+         f"{len(data['ambiguous'])} ambiguous key(s), {len(data['unmatched_raw'])} unpaired raw row(s), "
+         f"{len(data['unmatched_source'])} unpaired source row(s)"]
+
+    def brief(row):
+        return ", ".join(f"{k}={row[k]}" for k in ("group", "model", "effort", "tokens_in", "tokens_out", "score", "confound")
+                         if row.get(k) not in (None, ""))
+    L.append("== ambiguous (not paired; left to the next strategy, still unpaired if none takes them)")
+    for a in data["ambiguous"][:limit]:
+        L.append(f"  [{a['strategy']}] key {a['key']}: source rows {a['source_rows']}, raw lines {a['raw_lines']}")
+        for ln in a["raw_lines"]:
+            if raw_by_line and ln in raw_by_line:
+                L.append(f"      line {ln}: {brief(raw_by_line[ln])}")
+    L.append("== unpaired raw rows")
+    for u in data["unmatched_raw"][:limit]:
+        row = u.get("row") or (raw_by_line or {}).get(u["line"]) or {}
+        L.append(f"  line {u['line']}: {brief(row)}")
+    L.append("== unpaired source rows")
+    for u in data["unmatched_source"][:limit]:
+        L.append(f"  row {u['source_row']}" + (f": {u['key']}" if u.get("key") else ""))
+    return L
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="Print the ambiguous tags and the unpaired rows/measures of a saved "
+                                             "mapping (mapping.save).")
+    ap.add_argument("result", help="JSON written by mapping.save")
+    ap.add_argument("--csv", help="raw-data.csv, to show the raw rows of ambiguous lines")
+    ap.add_argument("--source", help="raw-data `source` filter for --csv")
+    ap.add_argument("--limit", type=int)
+    ap.add_argument("--json", action="store_true", help="print the ambiguous and unpaired parts as JSON")
+    a = ap.parse_args(argv)
+    try:
+        data = json.load(open(a.result, encoding="utf-8"))
+        by = {l: r for l, _, r in raw_rows(a.csv, a.source)} if a.csv else None
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 2
+    if a.json:
+        print(json.dumps({k: data[k] for k in ("ambiguous", "unmatched_raw", "unmatched_source")}, indent=1,
+                         ensure_ascii=False))
+    else:
+        print("\n".join(report(data, by, a.limit)))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

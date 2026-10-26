@@ -21,7 +21,14 @@ EFFORT_RULES = [
     Rule(r"minimal|low|medium|high|xhigh|x-high|max", None, None, "a level: the cell itself (effort-setting column)"),
     Rule(r"none|disabled|off|no[ _-]?thinking", None, None, "thinking off: the cell itself (the column name makes the "
                                                             "setting line, e.g. reasoning_effort: none)"),
-    Rule(r"thinking|enabled|on", "thinking-on", None, "thinking on, no level"),
+    # The build's own reading (build.map_setting, NOT_ESTABLISHED; BUILD.md step 10): `enabled`, `adaptive`, `dynamic`,
+    # `auto` are "not established" -- so NOT a thinking-on fact (which the build maps to `think`, an established
+    # configuration). They stay plain cells and the build refuses them with its own reason. `reasoning` is in no
+    # vocabulary: the build says "setting 'reasoning' not recognised" (not-established:absent), its own reason.
+    Rule(r"enabled|adaptive|dynamic|auto", None, None, "not established by the build (configuration_not_established): "
+                                                      "the cell itself, no thinking-on fact"),
+    Rule(r"reasoning", None, None, "no level, not recognised by the build: the cell itself, the build gives its reason"),
+    Rule(r"thinking|on", "thinking-on", None, "thinking on, no level"),
     Rule(r"[0-9]+(?:\.[0-9]+)?", None, None, "a numeric scale: the cell itself (scalar, not established)"),
 ]
 

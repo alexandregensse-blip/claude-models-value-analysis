@@ -1170,7 +1170,8 @@ def ext_closed_harness_label():
 
 
 def main():
-    import review_tests, pilot_tests
+    import review_tests, pilot_tests, gaps2_tests
+    TESTS.extend(gaps2_tests.TESTS)
     for t in pilot_tests.TESTS:
         TESTS.append(t)
     for t in review_tests.TESTS:
