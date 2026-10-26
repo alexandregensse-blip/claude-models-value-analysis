@@ -319,10 +319,11 @@
      },
      "rule": {
       "type": "string",
-      "description": "For a computed fact: the rule deriving it (cell-difference: inputs[0] − inputs[1] − …; cell-sum: their sum).",
+      "description": "For a computed fact: the rule deriving it (cell-difference: inputs[0] − inputs[1] − …; cell-sum: their sum; chart-effort-order: an effort-order fact 'k/n', inputs[0] the fact stating the chart's points are effort levels).",
       "enum": [
        "cell-difference",
-       "cell-sum"
+       "cell-sum",
+       "chart-effort-order"
       ]
      },
      "inputs": {
@@ -331,7 +332,7 @@
       "items": {
        "$ref": "common.schema.json#/$defs/fact_ref"
       },
-      "minItems": 2
+      "minItems": 1
      },
      "pattern": {
       "type": "string",

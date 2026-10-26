@@ -61,7 +61,8 @@
     "items",
     "attempts",
     "note",
-    "legacy-row"
+    "legacy-row",
+    "effort-order"
    ],
    "x-terms": {
     "score": {
@@ -398,6 +399,12 @@
      "description": "Migration (DATA-PIPELINE §8.1): one row of today's raw-data.csv, verbatim (the CSV record as its value, form legacy). A legacy measure carries it as it is: the build gives it today's status and applies none of the tree's steps.",
      "slots": [
       "legacy"
+     ]
+    },
+    "effort-order": {
+     "description": "A chart point's rank among its series' points in increasing cost (or tokens) order, 'k/n', where the source states the points are the model's effort levels (a caption, title, legend or the text: 'reasoning-effort scaling'); computed by rule chart-effort-order from that statement (the maintainer, 26 Oct).",
+     "slots": [
+      "effort"
      ]
     }
    }
@@ -2903,7 +2910,8 @@
     "cell-sum",
     "run-date-from-id-convention",
     "cost-tier-factor",
-    "cost-reproduction"
+    "cost-reproduction",
+    "chart-effort-order"
    ],
    "x-terms": {
     "alias-by-date": {
@@ -3013,6 +3021,10 @@
     },
     "route-presumed-maker-api": {
      "description": "no route named: the maker's API is presumed, flagged (the maintainer, 26 Oct 2026)"
+    },
+    "chart-effort-order": {
+     "kind": "standing",
+     "description": "the k-th of n points of an effort chart is the model's k-th level when it has n levels (the maintainer, 26 Oct)"
     }
    }
   },

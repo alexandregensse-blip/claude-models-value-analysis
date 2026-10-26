@@ -346,3 +346,10 @@ Decided by the maintainer during the reviews:
 - **Route not named** (26 Oct): a source that names no router, reseller or host (≈ 90 % of today's fit rows) is
   presumed to have run through the maker's API, flagged `route-presumed-maker-api`; the strict reading (every candidate
   route must agree, OpenRouter included) was not retained. Rule `route-presumed-maker-api`.
+- **Effort charts** (26 Oct): a chart whose caption, title, legend or text says its points are effort levels
+  ('reasoning-effort scaling'): the k-th of a series' n points in increasing cost (or tokens) order is the model's k-th
+  level when the model has n levels (fact `effort-order` 'k/n', rule `chart-effort-order`, flag
+  `effort-from-chart-order`); a different count → ambiguous. Judgement asked by the maintainer: the order is not doubted.
+- **A publisher's model page** (vals.ai '/models/…': 'All evaluations were run … using "xhigh" reasoning, except on …')
+  states the configuration of that model's runs on its boards, except where it names an exception or the board states
+  another: a written effort fact for those rows (26 Oct).

@@ -1239,6 +1239,27 @@ def ext_display_name_without_brand():
     eq(VV.norm_display("Claude", voc), "claude", "a name that is only the brand stays")
 
 
+@test
+def ext_chart_effort_order():
+    # an effort chart (its caption says the points are effort levels): the k-th of n points in cost order is the
+    # model's k-th level when it has n levels, flagged; else ambiguous (the maintainer, 26 Oct)
+    sc = base()
+    sc.model("mz", configs=("low", "medium", "high", "xhigh", "max"))
+    s = sc.source("card")
+    cap = sc.fact(s, "effort-label", "reasoning-effort scaling", quote="HLE reasoning-effort scaling")
+    nocap = sc.fact(s, "effort-label", "HLE accuracy", quote="Accuracy on HLE")
+    eo = lambda k, n, c=cap: ("effort-order", f"{k}/{n}", {"level": "computed", "rule": "chart-effort-order", "inputs": [c]})
+    m1 = sc.m(s, model="mz", effort=[eo(3, 5)], score="50%")
+    m2 = sc.m(s, model="mz", effort=[eo(5, 5)], score="60%")
+    m3 = sc.m(s, model="mz", effort=[eo(2, 4)], score="45%")
+    m4 = sc.m(s, model="mz", effort=[eo(1, 5, nocap)], score="40%")
+    r = sc.run()
+    eq((r.cfg(m1), r.cfg(m2)), ("high", "max"), "3rd and 5th of 5")
+    eq("effort-from-chart-order" in r[m1]["flags"], True, "flagged")
+    eq(r[m3]["fields"]["configuration"]["level"], "not-established:ambiguous", "4 points, 5 levels")
+    eq(r.q(m4), "out:no-proof", "a caption that does not say effort: the computed fact has no proof")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

@@ -233,6 +233,19 @@ class Source:
         value must agree within one unit of the last digits. Its level is computed when every input is accepted."""
         if x.ref in seen:
             return f"computed fact {x.ref}: its inputs cycle"
+        if x.rule == "chart-effort-order":            # 'k/n' and the statement that the points are effort levels
+            m = re.fullmatch(r"\s*([0-9]+)\s*/\s*([0-9]+)\s*", x.value or "")
+            if not m or not (1 <= int(m.group(1)) <= int(m.group(2))) or len(x.inputs or []) != 1:
+                return f"computed fact {x.ref}: chart-effort-order needs 'k/n' and one statement fact"
+            f, fault = self.fact(x.inputs[0], seen | {x.ref})
+            if fault or f is None:
+                return f"computed fact {x.ref}: input {x.inputs[0]}: {fault or 'missing'}"
+            if f.level not in ACCEPTED:
+                x["level"] = f.level
+                return None
+            if not re.search(r"effort", " ".join(str(f.get(k) or "") for k in ("quote", "value")), re.I):
+                return f"computed fact {x.ref}: its statement {x.inputs[0]} does not say the points are effort levels"
+            return None
         if x.rule not in ("cell-difference", "cell-sum") or len(x.inputs or []) < 2:
             return f"computed fact {x.ref}: without its rule and two inputs"
         vals, sds, steps = [], [], []
@@ -1084,7 +1097,7 @@ def configuration(M, key):
     for f in accepted:
         s = f.says[0] if len(f.says) == 1 else next((x for x in f.says if x in (
             "thinking-budget", "effort-setting", "effort-label", "thinking-on", "thinking-off", "no-effort-sent",
-            "config-history")), f.says[0])
+            "config-history", "effort-order")), f.says[0])
         if s == "thinking-budget":
             n = int(f.term) if (f.term or "").isdigit() else None
             if n is None:
@@ -1128,6 +1141,17 @@ def configuration(M, key):
                 else:
                     results.append((5, None, "not-established:ambiguous" if d.startswith("ambiguous")
                                     else "not-established:absent", f"label {f.value!r}: {d}", f.ref, s))
+        elif s == "effort-order":                       # the k-th of n points of an effort chart (the maintainer, 26 Oct)
+            k, n = (int(x) for x in f.value.split("/"))
+            lv = [c for c in LEVELS if c in configs]
+            if len(lv) != n:
+                results.append((5, None, "not-established:ambiguous",
+                                f"chart point {k} of {n}: the model has {len(lv)} levels ({', '.join(lv) or 'none'})", f.ref, s))
+            else:
+                M.rule("chart-effort-order")
+                if "effort-from-chart-order" not in M.flags:
+                    M.flags.append("effort-from-chart-order")
+                via_chain(lv[k - 1], 5, f.ref, s)
         elif s == "no-effort-sent":
             M.rule("no-effort-setting")
             cfg, lv, d = over_chains(M, key, lambda ch: default_via(M, key, ch, iv, configs))
