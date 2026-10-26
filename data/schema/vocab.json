@@ -2242,7 +2242,7 @@
    }
   },
   "configuration": {
-   "description": "Configuration ids a model can offer (models.json configurations; DATA-PIPELINE §4). think-<n>: thinking on with a budget of n tokens (exact count as written; the build merges budgets within 5 %). In the fit: every id but think-<n> (out:budget-config). In models.json a model whose thinking takes any budget lists the family `think-<budget>` with budget_min / budget_max. between-tools (23 Oct 2026): Sonnet 5.5's thinking: {type: between_tools}; recorded, not fitted (x-terms.in_fit false: the build gives out:effort-not-established).",
+   "description": "Configuration ids a model can offer (models.json configurations; DATA-PIPELINE §4). think-<n>: thinking on with a budget of n tokens (exact count as written; the build merges budgets within 5 %). In the fit: every id but think-<n> (out:budget-config). In models.json a model whose thinking takes any budget lists the family `think-<budget>` with budget_min / budget_max. between-tools (23 Oct 2026): Sonnet 5.5's thinking: {type: between_tools}; in the fit like every configuration of a model's list (coordinator, 26 Oct 2026). x-terms.in_fit false would keep a term recorded but out of the fit (none does today).",
    "anyOf": [
     {
      "enum": [
@@ -2300,10 +2300,9 @@
      "kind": "thinking on, no level (on-off models without levels)"
     },
     "between-tools": {
-     "in_fit": false,
+     "in_fit": true,
      "kind": "thinking: {type: between_tools} (Anthropic, Claude Sonnet 5.5): up-front thinking off, thinking between tool calls; accepted with effort low, medium or high only",
-     "reason": "out:effort-not-established",
-     "note": "added 23 Oct 2026 (merge of the registry parts): documented by Anthropic as a thinking setting; it combines with an effort level, so one couple would mix levels. Kept out of the fit until the maintainer decides (a method change). `regex`: how a setting line names it (thinking: {type: \"between_tools\"}).",
+     "note": "added 23 Oct 2026 (merge of the registry parts): documented by Anthropic as a thinking setting; it combines with an effort level (low, medium or high). Kept out of the fit at first (in_fit false); in the fit since 26 Oct 2026 (coordinator: a configuration of Sonnet 5.5's list, fitted like every configuration of a model's list). `regex`: how a setting line names it (thinking: {type: \"between_tools\"}).",
      "regex": "between[_-]tools"
     },
     "solo": {

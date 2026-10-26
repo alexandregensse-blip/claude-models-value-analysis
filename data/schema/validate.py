@@ -535,8 +535,12 @@ def check_evidence_complete(doc, label, rep):
 
 
 def overlapping_defaults(defaults):
+    """Two defaults answering for the same call (the whole call and a `thinking` default both answer for a call that
+    sends nothing; an `effort` default for a call that turns thinking on) naming different configurations over
+    overlapping intervals."""
+    side = lambda d: "effort" if d.get("setting") == "effort" else "call"   # noqa: E731
     return [(a["configuration"], b["configuration"]) for i, a in enumerate(defaults) for b in defaults[i + 1:]
-            if a["configuration"] != b["configuration"] and overlap(a, b)]
+            if side(a) == side(b) and a["configuration"] != b["configuration"] and overlap(a, b)]
 
 
 def check_registries(reg, rep, schemas, vocab, paths, check_files):
@@ -611,7 +615,26 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
                             rep.err(lab["models"], f"identity: {a} and {b} ({maker}) both serve {na['kind']} '{na['name']}' over overlapping intervals")
 
     # routes.json
+    makers = set(vocab["$defs"]["maker"].get("enum", []))
     for rid, r in routes.items():
+        # per-provider records of a harness (registry fix, 26 Oct): via a registered route, a known maker, known keys
+        recs = [("level_mapping", x) for x in r.get("level_mapping", [])] + [("mapping", x) for x in r.get("mapping", [])]
+        recs += [(f"{k}/{f}", x) for k, rm in r.get("models", {}).items() for f in ("accepts", "mapping", "default")
+                 for x in rm.get(f, [])]
+        for what, x in recs:
+            L = f"{lab['routes']} {rid} {what}"
+            if x.get("via") and x["via"] not in routes:
+                rep.err(L, f"via '{x['via']}' is not a registered route")
+            if x.get("via") == rid:
+                rep.err(L, "via names the route itself")
+            if x.get("maker") and x["maker"] not in makers:
+                rep.err(L, f"maker '{x['maker']}' is not a vocabulary maker")
+            for k in x.get("models", []):
+                if k not in models:
+                    rep.err(L, f"model '{k}' not registered")
+                elif what == "mapping" and x["served"] not in config_ids(models[k]) and \
+                        not in_vocab(schemas, "mapping_result", x["served"]) and not x["served"].startswith("think-"):
+                    rep.err(L, f"maps {x['requested']} to '{x['served']}', not one of {k}'s configurations")
         for key, rm in r.get("models", {}).items():
             L = f"{lab['routes']} {rid}/{key}"
             if key not in models:

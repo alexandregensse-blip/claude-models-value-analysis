@@ -77,6 +77,22 @@
           "ambiguous",
           null
          ]
+        },
+        "via": {
+         "$ref": "common.schema.json#/$defs/route_id",
+         "description": "For a harness: the next step this record applies to (the route the harness hands the call to: maker-api, openrouter, bedrock…). Absent: every next step. A harness maps a level per provider (its provider adapter), so its records name the provider (registry fix, 26 Oct 2026)."
+        },
+        "maker": {
+         "$ref": "vocab.json#/$defs/maker",
+         "description": "For a harness: the maker whose models this record applies to (a provider adapter of the harness: Inspect's anthropic provider on the maker's API). Absent: every maker."
+        },
+        "models": {
+         "type": "array",
+         "description": "The model keys this record applies to (absent: every model of `maker`, or every model).",
+         "items": {
+          "$ref": "common.schema.json#/$defs/model_key"
+         },
+         "minItems": 1
         }
        },
        "required": [
@@ -133,6 +149,10 @@
           "properties": {
            "configuration": {
             "$ref": "vocab.json#/$defs/configuration"
+           },
+           "via": {
+            "$ref": "common.schema.json#/$defs/route_id",
+            "description": "For a harness: the next step this record applies to (the route the harness hands the call to: maker-api, openrouter, bedrock…). Absent: every next step. A harness maps a level per provider (its provider adapter), so its records name the provider (registry fix, 26 Oct 2026)."
            }
           },
           "required": [
@@ -168,6 +188,10 @@
               "$ref": "vocab.json#/$defs/mapping_result"
              }
             ]
+           },
+           "via": {
+            "$ref": "common.schema.json#/$defs/route_id",
+            "description": "For a harness: the next step this record applies to (the route the harness hands the call to: maker-api, openrouter, bedrock…). Absent: every next step. A harness maps a level per provider (its provider adapter), so its records name the provider (registry fix, 26 Oct 2026)."
            }
           },
           "required": [
@@ -181,7 +205,34 @@
          "type": "array",
          "description": "The route's own documented default for the model (routers and hosts; DATA-PIPELINE §5.1 step 7).",
          "items": {
-          "$ref": "common.schema.json#/$defs/dated_configuration"
+          "type": "object",
+          "description": "A route default for the model, dated (optionally per next step).",
+          "allOf": [
+           {
+            "$ref": "common.schema.json#/$defs/interval"
+           }
+          ],
+          "properties": {
+           "configuration": {
+            "$ref": "vocab.json#/$defs/configuration",
+            "description": "A configuration id."
+           },
+           "setting": {
+            "enum": [
+             "thinking",
+             "effort"
+            ],
+            "description": "As in models.json defaults."
+           },
+           "via": {
+            "$ref": "common.schema.json#/$defs/route_id",
+            "description": "For a harness: the next step this record applies to (the route the harness hands the call to: maker-api, openrouter, bedrock…). Absent: every next step. A harness maps a level per provider (its provider adapter), so its records name the provider (registry fix, 26 Oct 2026)."
+           }
+          },
+          "required": [
+           "configuration"
+          ],
+          "unevaluatedProperties": false
          }
         },
         "note": {
@@ -196,6 +247,58 @@
      "note": {
       "type": "string",
       "description": "Free note."
+     },
+     "mapping": {
+      "type": "array",
+      "description": "Route-wide documented mapping requested → served, dated (a harness's provider adapter: Inspect sends max as xhigh to OpenRouter). Read after the model's own `mapping` and before its `accepts`; filtered by `via`, `maker` and `models`.",
+      "items": {
+       "type": "object",
+       "description": "One route-wide mapping entry.",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "requested": {
+         "type": "string",
+         "description": "Requested level / setting.",
+         "minLength": 1
+        },
+        "served": {
+         "description": "What the next step receives.",
+         "anyOf": [
+          {
+           "$ref": "vocab.json#/$defs/configuration"
+          },
+          {
+           "$ref": "vocab.json#/$defs/mapping_result"
+          }
+         ]
+        },
+        "via": {
+         "$ref": "common.schema.json#/$defs/route_id",
+         "description": "For a harness: the next step this record applies to (the route the harness hands the call to: maker-api, openrouter, bedrock…). Absent: every next step. A harness maps a level per provider (its provider adapter), so its records name the provider (registry fix, 26 Oct 2026)."
+        },
+        "maker": {
+         "$ref": "vocab.json#/$defs/maker",
+         "description": "For a harness: the maker whose models this record applies to (a provider adapter of the harness: Inspect's anthropic provider on the maker's API). Absent: every maker."
+        },
+        "models": {
+         "type": "array",
+         "description": "The model keys this record applies to (absent: every model of `maker`, or every model).",
+         "items": {
+          "$ref": "common.schema.json#/$defs/model_key"
+         },
+         "minItems": 1
+        }
+       },
+       "required": [
+        "requested",
+        "served"
+       ],
+       "unevaluatedProperties": false
+      }
      }
     },
     "required": [

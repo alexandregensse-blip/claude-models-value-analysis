@@ -123,8 +123,9 @@ The build is described in data/BUILD.md. It added these terms:
 The wave-1/2 parts (data/registry/parts/, reports in /work/.salvo14/mig/<part>/report.md) were merged into data/registry/
 (/work/.salvo14/mig/merge/report.md). They needed:
 - **vocab.json:** metric `none` (cost-only setups: metric and headline `none`); configuration `between-tools` (Sonnet
-  5.5's `thinking: {type: between_tools}`, with `regex` for its setting line; x-terms `in_fit: false`, so the build gives
-  `out:effort-not-established` until the maintainer decides); price classes `cache-write-30m`, `cache-write-12h`
+  5.5's `thinking: {type: between_tools}`, with `regex` for its setting line; x-terms `in_fit: false` at first, so the
+  build gave `out:effort-not-established`; `in_fit: true` since 26 Oct, the coordinator's decision: it is in the fit like
+  every configuration of a model's list); price classes `cache-write-30m`, `cache-write-12h`
   (OpenAI); rule ids `configurations-per-model`, `cost-method-unstated-single`, `base-price-retired-last-list`,
   `base-price-charged-never-applied` (standing: the decisions of DATA-PIPELINE §4 prices and §9).
 - **benchmarks.schema.json:** `headline.level` (`written` / `not-established:assumed`); composite components are a setup
@@ -147,6 +148,23 @@ The wave-1/2 parts (data/registry/parts/, reports in /work/.salvo14/mig/<part>/r
   price use); the part's per-maker routes are folded into it, their spellings and prefixes kept.
 - Tests: 4 more (`ext_*`: named component and linear unknown, price per configuration, Hugging Face names,
   between-tools), each failing when its change is removed.
+
+## Added at the registry fix (26 Oct)
+
+The gap parts (gaps-keys, gaps-prices, gaps-openrouter, gaps-configdates, gaps-configdates-routes) were merged and the
+registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.md). data/registry now validates with
+`--check-files`: 0 errors. Schema changes:
+- **common.schema.json:** a default may carry `setting` (`thinking` · `effort`; absent = the whole call). validate.py
+  checks overlaps per side: the whole call and `thinking` answer for a call that sends nothing, `effort` for a call
+  that turns thinking on.
+- **routes.schema.json:** `via` (the next step: a route id) on `level_mapping`, on the route-wide `mapping` (new) and on
+  a model entry's `accepts`, `mapping` and `default`; `maker` and `models` on the route-wide records. validate.py checks
+  that `via` is a registered route other than the route itself, `maker` a vocabulary maker, `models` registered keys,
+  and a route-wide mapping's result one of each listed model's configurations.
+- **models.schema.json:** the configuration list may be empty (configurations not established: every measure
+  out:effort-not-established).
+- **vocab.json:** `between-tools` `in_fit: true` (the coordinator: in the fit like every configuration of a model's
+  list).
 
 ## Choices where the document left freedom
 

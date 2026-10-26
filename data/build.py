@@ -836,9 +836,10 @@ def serve(M, key, chain, req, iv, configs):
     → (configuration or None, level, detail)."""
     ctx = M.ctx
     cur = req
-    for step in chain:
+    for i, step in enumerate(chain):
         r = ctx.routes[step]
         cls = r["class"]
+        on = step_filter(ctx, key, chain, i)
         if cls in ("maker-api", "reseller"):
             conv = [c for c in ctx.models[key].get("conversions", []) if c["route"] == step and covers(c, iv)
                     and map_requested(ctx, c["requested"]) == cur]
@@ -852,17 +853,18 @@ def serve(M, key, chain, req, iv, configs):
                 return None, f"not-established:{'ambiguous' if cur == 'ambiguous' else 'absent'}", cur
             continue
         e = r.get("models", {}).get(key, {})
-        mp = [x for x in e.get("mapping", []) if covers(x, iv) and map_requested(ctx, x["requested"]) == cur]
+        mp = [x for x in e.get("mapping", []) + r.get("mapping", []) if on(x) and covers(x, iv)
+              and map_requested(ctx, x["requested"]) == cur]
         if mp:
             M.rule("route-mapping-dated")
             cur = mp[0]["served"]
             if cur in ("budget-converted", "ambiguous"):
                 return None, f"not-established:{'ambiguous' if cur == 'ambiguous' else 'absent'}", f"{step}: {cur}"
             continue
-        acc = [a["configuration"] for a in e.get("accepts", []) if covers(a, iv)]
+        acc = [a["configuration"] for a in e.get("accepts", []) if on(a) and covers(a, iv)]
         if cur in acc:
             continue
-        lm = [x for x in r.get("level_mapping", []) if covers(x, iv)]
+        lm = [x for x in r.get("level_mapping", []) if on(x) and covers(x, iv)]
         if not lm:
             return None, "not-established:absent", f"{step} documents nothing for {key} @ {cur} at the run date"
         rule = lm[0]["rule"]
@@ -889,6 +891,19 @@ def serve(M, key, chain, req, iv, configs):
     return cur, "computed" if cur != req else "written", ""
 
 
+def step_filter(ctx, key, chain, i):
+    """A route record applies to this step of the chain when its `via` names the next step (a harness maps a level
+    per provider: registry fix, 26 Oct), its `maker` is the model's maker and its `models` list the key (each absent:
+    any)."""
+    nxt = chain[i + 1] if i + 1 < len(chain) else None
+    maker = ctx.models[key].get("maker")
+
+    def on(x):
+        return (not x.get("via") or x["via"] == nxt) and (not x.get("maker") or x["maker"] == maker) and \
+            (not x.get("models") or key in x["models"])
+    return on
+
+
 def over_chains(M, key, fn):
     """Evaluate fn(chain) over the candidate chains; accepted only if all agree."""
     res = [(how, fn(ch)) for ch, how in chains(M, key)]
@@ -901,6 +916,24 @@ def over_chains(M, key, fn):
         f"{h} → {r[0] or r[1]}" for h, r in res)
 
 
+def thinking_requested(M):
+    """The call turned thinking on: an accepted thinking-on fact, or a name selecting think."""
+    return any(f.level in ACCEPTED and "thinking-on" in f.says for f in M.slot("effort")) or \
+        any(sel == "think" for _, sel in M.selects)
+
+
+def maker_defaults(M, key, iv):
+    """The maker's defaults covering the run for this call. A default with `setting` answers for part of the call
+    (registry fix, 26 Oct): `thinking` for a call with no thinking field, `effort` for a call that turns thinking on
+    but sends no level. A call that turned thinking on gets the effort default (else the whole-call one); a call that
+    sent neither gets the whole-call default, else the thinking default."""
+    d = [x for x in M.ctx.models[key].get("default", []) if covers(x, iv)]
+    call = [x for x in d if not x.get("setting")]
+    if thinking_requested(M):
+        return [x for x in d if x.get("setting") == "effort"] or call
+    return call or [x for x in d if x.get("setting") == "thinking"]
+
+
 def default_via(M, key, chain, iv, configs):
     """Step 7: the documented default along the chain (a router's or host's own when it is on the chain)."""
     ctx = M.ctx
@@ -908,12 +941,13 @@ def default_via(M, key, chain, iv, configs):
         r = ctx.routes[step]
         cls = r["class"]
         if cls in ("maker-api", "reseller"):
-            d = [x for x in ctx.models[key].get("default", []) if covers(x, iv)]
+            d = maker_defaults(M, key, iv)
             if not d:
                 return None, "not-established:absent", f"no documented default of {key} covering the run (→ default)"
             M.rule("api-default-documented")
             return serve(M, key, chain[i:], d[0]["configuration"], iv, configs)
-        d = [x for x in r.get("models", {}).get(key, {}).get("default", []) if covers(x, iv)]
+        on = step_filter(ctx, key, chain, i)
+        d = [x for x in r.get("models", {}).get(key, {}).get("default", []) if on(x) and covers(x, iv)]
         if d:
             M.rule("api-default-documented")
             return serve(M, key, chain[i + 1:], d[0]["configuration"], iv, configs)

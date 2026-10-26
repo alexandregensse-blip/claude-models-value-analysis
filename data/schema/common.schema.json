@@ -175,7 +175,7 @@
   },
   "dated_configuration": {
    "type": "object",
-   "description": "A configuration in force over an interval (a default).",
+   "description": "A configuration in force over an interval (a default). `setting` splits a default in two when the maker documents the thinking default and the effort default separately (Anthropic Opus 4.5–4.8, Sonnet 4.6: a call with no thinking field is thinking off, the effort parameter defaults to high).",
    "allOf": [
     {
      "$ref": "common.schema.json#/$defs/interval"
@@ -185,6 +185,13 @@
     "configuration": {
      "$ref": "vocab.json#/$defs/configuration",
      "description": "A configuration id."
+    },
+    "setting": {
+     "description": "Which part of a call with no setting the default covers (absent: the whole call). `thinking`: what a call with no thinking field gets (nothink = thinking off). `effort`: the level a call gets when it sends no effort level while thinking is on (a thinking-on fact, or a name selecting think). A call that sends neither gets the `thinking` default, the `effort` one only through thinking on; at most one default per setting at a time.",
+     "enum": [
+      "thinking",
+      "effort"
+     ]
     }
    },
    "required": [

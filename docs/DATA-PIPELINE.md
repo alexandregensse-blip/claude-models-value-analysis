@@ -104,15 +104,15 @@ evidence}`) and each either served as itself or converted:
   `enable_thinking: false`, `thinking: disabled`, a non-reasoning id…; the spellings are listed in vocab.json),
   `think` (thinking on with no level: the only thinking configuration of an on-off model without levels — DeepSeek
   V3.2 thinking mode, Kimi K2.5, GLM-5, the Qwen 3.5–3.7 hybrids), `think-<budget>` (thinking on with a token budget),
-  `between-tools` (Sonnet 5.5's `thinking: {type: between_tools}`, combined with a level ≤ high: recorded, not fitted,
-  pending a decision; 23 Oct);
+  `between-tools` (Sonnet 5.5's `thinking: {type: between_tools}`, combined with a level ≤ high: in the fit like every
+  configuration of the model's list; 23 Oct, in the fit since 26 Oct);
 - `solo` only for a model whose list is `[solo]`: nothing to set (K2.7 Code, a model with thinking always on and no
   level). Examples: Opus 5.5 `[low … max]`; GPT-5.x `[nothink, minimal, low … xhigh]`; Haiku 4.5 `[nothink,
   think-<budget>]`; a hybrid Qwen `[nothink, think]` or `[nothink, low … xhigh]`.
 `names`: each API id or display name, the model it **serves** over `{from, to}` (the maker's own dates: release,
 redirect, shutdown), and optionally the configuration it selects (`deepseek-chat` → nothink, a `-thinking` id →
 think). Names are matched exactly, except in the Hugging Face namespace (`huggingface`: repository ids such as
-`Qwen/Qwen3.8-27B`), matched case-insensitively (23 Oct). `default` (the configuration a call with no setting gets), `conversions` (requested → served, per route),
+`Qwen/Qwen3.8-27B`), matched case-insensitively (23 Oct). `default` (the configuration a call with no setting gets; when the maker documents the thinking default and the effort default separately, two dated records with `setting: thinking` and `setting: effort`: Anthropic Opus 4.5–4.8 and Sonnet 4.6, a call with no thinking field is thinking off, the effort default high applies with thinking on; 26 Oct), `conversions` (requested → served, per route),
 `modes` (request parameters that select another key: Pro → `<id>-pro`). Configurations served as themselves start at
 the release (release post, model card or API reference) unless a document dates a later addition, and last until the
 maker states a change or the model's shutdown (a capability is not bounded by the last capture); `default`,
@@ -128,7 +128,7 @@ Together, DeepInfra…: open weights served by a third party) · router (OpenRou
 Pi, Claude Code, Codex CLI, IronBee…) · self-hosted (vLLM, SGLang…)`. Per route and model, dated: the configurations it
 accepts, how it maps a level (identity when documented as identity; OpenRouter nearest supported level,
 ties `ambiguous`; a model without an effort parameter → a token budget: `budget-converted`), its documented default.
-On a self-hosted route the maker's defaults and conversions do not apply.
+On a self-hosted route the maker's defaults and conversions do not apply. A harness maps a level per provider: its records name the next step they apply to (`via`), and route-wide records the maker and models (26 Oct).
 
 **benchmarks.json** — `family` ⊃ `setup` = benchmark × subset × harness (without its version: patch releases are one
 configuration) × tools regime × judge panel × metric. Per setup: headline metric (the source's designated one; if none,

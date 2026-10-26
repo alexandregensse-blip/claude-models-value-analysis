@@ -1091,14 +1091,59 @@ def ext_hugging_face_names_case_insensitive():
 
 
 @test
-def ext_between_tools_recorded_not_fitted():
+def ext_between_tools_in_fit():
+    # between-tools is a configuration of the model's list, fitted like every other (coordinator, 26 Oct 2026)
     sc = base()
     sc.model("ms", configs=("low", "high", "between-tools"))
     s = sc.source("a")
     m1 = sc.m(s, model="ms", effort=[("effort-setting", "thinking: {\"type\": \"between_tools\"}")])
+    m2 = sc.m(s, model="ma", effort=[LOW], score="60%")
     r = sc.run()
     eq(r.cfg(m1), "between-tools", "the setting")
-    eq(r.q(m1), "out:effort-not-established", "in_fit false in vocab")
+    eq(r.q(m1), "in", "between-tools is in the fit (vocab x-terms in_fit true)")
+    eq(r.q(m2), "in", "its group partner")
+
+
+@test
+def ext_split_default_thinking_and_effort():
+    # Anthropic Opus 4.5–4.8, Sonnet 4.6: a call with no thinking field is thinking off; the effort default (high)
+    # applies to a call that turns thinking on without a level (registry fix, 26 Oct 2026)
+    sc = base()
+    sc.model("mt", configs=("nothink", "low", "high"), default=[
+        dict(iv("2026-01-01", "2026-12-31", from_basis="stated", to_basis="stated"), configuration="nothink", setting="thinking"),
+        dict(iv("2026-01-01", "2026-12-31", from_basis="stated", to_basis="stated"), configuration="high", setting="effort")])
+    s = sc.source("a")
+    m1 = sc.m(s, model="mt", effort=[("no-effort-sent", "null")])
+    m2 = sc.m(s, model="mt", effort=[("no-effort-sent", "null"), ("thinking-on", "adaptive")], score="60%")
+    r = sc.run()
+    eq(r.cfg(m1), "nothink", "no thinking field, no effort: the thinking default")
+    eq(r.cfg(m2), "high", "thinking on, no effort: the effort default")
+
+
+@test
+def ext_harness_per_provider():
+    # a harness maps a level per provider: records with `via` (the next step) and `maker` (registry fix, 26 Oct)
+    sc = base()
+    sc.model("mz", configs=("low", "high", "xhigh", "max"))
+    sc.route("orz", "router", spellings=["ORZ"], models={"mz": {"accepts": [
+        dict(iv("2026-01-01", "2026-12-31", from_basis="stated", to_basis="stated"), configuration=c)
+        for c in ("low", "high", "xhigh")]}})
+    sc.route("hz", "harness", spellings=["HZ"], level_mapping=[
+        dict(iv("2026-01-01", "2026-12-31", from_basis="stated", to_basis="stated"), rule="identity", via="maker-api",
+             maker="anthropic"),
+        dict(iv("2026-01-01", "2026-12-31", from_basis="stated", to_basis="stated"), rule="identity", via="orz")])
+    sc.routes["hz"]["mapping"] = [dict(iv("2026-01-01", "2026-12-31", from_basis="stated", to_basis="stated"),
+                                       requested="max", served="xhigh", via="orz")]
+    s = sc.source("a")
+    m1 = sc.m(s, model="mz", effort=[("effort-setting", "max")], route=[("HZ", None), ("Maker API", "maker-api")])
+    m2 = sc.m(s, model="mz", effort=[("effort-setting", "max")], route=[("HZ", None), ("ORZ", None)], score="60%")
+    m3 = sc.m(s, model="mz", effort=[LOW], route=[("HZ", None), ("ORZ", None)], score="55%")
+    m4 = sc.m(s, model="ma", effort=[LOW], route=[("HZ", None), ("ORZ", None)], score="45%")
+    r = sc.run()
+    eq(r.cfg(m1), "max", "to the maker's API: identity (anthropic provider)")
+    eq(r.cfg(m2), "xhigh", "to the router: max sent as xhigh")
+    eq(r.cfg(m3), "low", "to the router: identity")
+    eq(r.q(m4), "out:effort-not-established", "ma has no entry at orz: the router documents nothing for it")
 
 
 def main():

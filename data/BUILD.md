@@ -15,7 +15,7 @@ python3 data/build.py ... --fit-models catalog                      # the fit's 
 python3 data/build.py ... --no-lqm                                  # skip the lqm.load step
 python3 data/build_lqm.py build/                                    # the lqm.load step alone
 python3 data/legacy.py raw-data.csv OUT/findings --registry OUT/registry   # raw-data.csv → legacy findings
-python3 data/tests/run.py [name-filter]                             # the tests (91, about two seconds)
+python3 data/tests/run.py [name-filter]                             # the tests (96, about two seconds)
 python3 data/tests/acceptance.py [raw-data.csv] [--registry data/registry]   # the legacy acceptance test (≈ 20 s)
 python3 data/schema/validate.py [--verbose]                          # per-file summary; registry warnings apart
 python3 data/convert/precheck.py SOURCE_ID                           # names and route heads against the registry
@@ -194,15 +194,25 @@ validate.py now reports these as errors (an error stops the build):
 - an evidence record without a saved file or a quote. A findings fact cited by `source` and `fact` carries its own.
 
 The placeholder `legacy` setup now has a headline by decision (no evidence), and the examples' five OpenRouter
-evidence records have quotes from their saved listings. **data/registry does not pass these checks yet**: it has
-287 errors, the review's items 2, 5 and 6:
-- 180 evidence records without a quote or a file;
-- 88 defaults, conversions and accepts outside their configuration's dates;
-- 6 prices after `as_of`;
-- 9 prices before the model's release.
+evidence records have quotes from their saved listings. data/registry had 287 errors against these checks (the review's
+items 2, 5 and 6); since the registry fix of 26 Oct (below) it has **0 errors** with `--check-files`.
 
-A build against data/registry therefore stops until the registry owners fix them. The acceptance test is identical
-with the minimal registry.
+## Registry fix (26 Oct)
+
+The gap parts were merged and the review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.md). The build
+reads two new things:
+- **Split defaults.** A maker default may carry `setting`: `thinking` (what a call with no thinking field gets) or
+  `effort` (the level a call that turns thinking on gets when it sends no level). A call with neither gets the whole-call
+  default, else the `thinking` one; a call with a thinking-on fact (or a name selecting think) gets the `effort` one,
+  else the whole-call one (`maker_defaults`). Anthropic Opus 4.5–4.8 and Sonnet 4.6: no thinking field → `nothink`,
+  effort default `high` only with thinking on.
+- **Per-provider route records.** A route's `level_mapping`, its route-wide `mapping` (new) and a model entry's
+  `accepts`, `mapping` and `default` may carry `via` (the next step of the chain the record applies to), and the
+  route-wide records `maker` and `models` (`step_filter`). A harness maps a level per provider: Inspect sends max as
+  xhigh to OpenRouter, passes levels to Anthropic's 4.6+ models (minimal → low) and turns them into budgets on the
+  earlier ones. Route-wide `mapping` is read after the model's own and before its `accepts`.
+- `between-tools` is in the fit (vocab x-terms `in_fit: true`, the coordinator, 26 Oct).
+- A model's configuration list may be empty: its configurations are not established (grok-4.20-multi-agent).
 
 ## Converter toolkit (`data/convert/`)
 
@@ -452,8 +462,9 @@ group, so a1 is `out:single-couple`. What the test is about still holds: the ref
 
 ## Tests
 
-`python3 data/tests/run.py` runs 94 fixtures: the build's 49, the review's 26, and 19 for the pilot fixes and the
-registry review (data/tests/pilot_tests.py). Between them they cover:
+`python3 data/tests/run.py` runs 96 fixtures: 55 in run.py (the build's, the merge's `ext_*`, and the registry fix's
+`ext_split_default_thinking_and_effort` and `ext_harness_per_provider`; `ext_between_tools_in_fit` replaces the
+not-fitted test), the review's 26, and 15 for the pilot fixes and the registry review (data/tests/pilot_tests.py). Between them they cover:
 - every reason code;
 - configuration steps 1–8;
 - the run-date, campaign and cost rules;
