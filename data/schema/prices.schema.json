@@ -108,6 +108,23 @@
      "note": {
       "type": "string",
       "description": "Free note."
+     },
+     "list_after": {
+      "type": "object",
+      "description": "A promotion with a stated end that states the list price after it ('$0.75 through December 31, 2026. $1.50 starting January 1, 2027'): that list price and its start, cited by the promotion's own evidence. base_price uses it when no standard price is in force on as_of (promotions are never a base; coordinator 26 Oct).",
+      "properties": {
+       "from": {
+        "$ref": "common.schema.json#/$defs/date_or_datetime"
+       },
+       "classes": {
+        "type": "object"
+       }
+      },
+      "required": [
+       "from",
+       "classes"
+      ],
+      "additionalProperties": false
      }
     },
     "required": [

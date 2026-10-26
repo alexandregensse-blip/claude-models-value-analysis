@@ -147,7 +147,9 @@ context tiers with their per-request threshold, promotions (recorded, flagged, n
 is set aside), batch and flex factors; each dated with evidence. `as_of` pinned per build. Base route = the maker's API.
 Base price = the standard list price in force on `as_of`; for a retired model, its last list price (decision 1 of
 21 Oct); for a model whose standard price never applied before it was withdrawn, the price actually charged (Gemini 3.7
-Flash, $0.75: the maintainer, 21 Oct).
+Flash, $0.75: the maintainer, 21 Oct). An introductory price with a stated end is a promotion; when it states the list price after it
+(`list_after`: Gemini 3.6 / 3.8 Flash, Gemini 4 Argon), that list price is the base while no standard price is in force,
+flag `base-scheduled-list-price` (coordinator, 26 Oct, from the rule that promotions are never a base).
 
 **rules.json** — each rule: id, inputs, output, conditions, precision formula, date, decided by. Deduction rules:
 `alias-by-date`, `mode-to-line`, `label-to-ladder`, `maker-conversion-dated`, `route-mapping-dated`,

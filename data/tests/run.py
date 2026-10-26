@@ -663,6 +663,24 @@ def cost_promotion_window_is_a_price_applied():
 
 
 @test
+def cost_base_scheduled_list_price():
+    # an introductory price with a stated end and the list price after it: the promotion is charged, the stated list
+    # price is the base (gemini-3.8-flash, gemini-4-argon; coordinator 26 Oct)
+    import build as B
+    sc = base()
+    for k in ("ma", "mb"):
+        sc.prices["prices"].append(price(k, "2026-05-01", "2026-10-01", {"input": 1, "output": 5}, kind="promotion",
+                                         list_after={"from": "2027-01-01", "classes": {"input": 2, "output": 10}}))
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0", price_table="prices of 2026-06-01")
+    sc.m(s, model="mb", effort=[LOW], cost="3.0", price_table="prices of 2026-06-01")
+    r = sc.run()
+    b = r[m1]["fields"]["cost"]["base"]
+    eq((b["rule"], b["value"]), ("cost-uniform-factor", 2.0), "× 2 to the stated list price")
+    eq("base-scheduled-list-price" in r[m1]["flags"], True, "flagged")
+
+
+@test
 def cost_class_ratio():
     sc = base()
     old, new = {"input": 1, "output": 5, "cache-read": 0.1}, {"input": 1, "output": 5, "cache-read": 0.05}

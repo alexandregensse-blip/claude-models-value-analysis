@@ -1449,6 +1449,13 @@ def base_price(ctx, key, currency=None, config=None):
           if V.when(p["from"]) <= t <= V.when(p["to"], True)]
     if on:
         return on[0]
+    promo = [p for p in ctx.prices["prices"] if p["model"] == key and p["route"] == "maker-api" and p["kind"] == "promotion"
+             and p.get("list_after") and (currency is None or p["currency"] == currency) and for_config(p, config)
+             and V.when(p["from"]) <= t <= V.when(p["to"], True)]
+    if promo:                                            # a promotion in force that states the list price after it
+        la = promo[0]["list_after"]
+        return dict(promo[0], kind="standard", classes=la["classes"], long_context=[], **{"from": la["from"], "to": la["from"]},
+                    _scheduled_list=True)
     past = sorted((p for p in std_entries(ctx, key, currency=currency, config=config) if V.when(p["to"], True) < t),
                   key=lambda p: V.when(p["to"], True))
     return dict(past[-1], _last_list=True) if past else None   # a retired model: its last list price
@@ -1587,6 +1594,9 @@ def reprice(M, C, key):
     if bp is None:
         C["reprice_detail"] = f"no base price for {key} in {cur or 'an unstated currency'}"
         return
+    if bp.get("_scheduled_list"):
+        M.flags.append("base-scheduled-list-price")
+        C["base_price"] = f"list price stated after the promotion (from {bp['from']}): no standard price in force on as_of"
     if bp.get("_last_list"):
         M.flags.append("base-last-list-price")
         C["base_price"] = f"last list price ({bp['from']} → {bp['to']}): no maker-API price in force on as_of"

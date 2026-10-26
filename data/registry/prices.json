@@ -661,7 +661,15 @@
      "quote": "Input price Free of charge $0.75 through December 31, 2026. $1.50 starting January 1, 2027. Output price (including thinking tokens) Free of charge $3.75 through December 31, 2026. $7.50 starting January 1, 2027. Context caching price Free of charge $0.075 through December 31, 2026. $0.15 starting J"
     }
    ],
-   "note": "introductory price through 31 Dec 2026 (stated); from 1 Jan 2027 the standard 1.50 / 7.50 / 0.15 is scheduled (not recorded: not yet in force)"
+   "note": "introductory price through 31 Dec 2026 (stated); from 1 Jan 2027 the standard 1.50 / 7.50 / 0.15 is scheduled (not recorded: not yet in force)",
+   "list_after": {
+    "from": "2027-01-01",
+    "classes": {
+     "input": 1.5,
+     "output": 7.5,
+     "cache-read": 0.15
+    }
+   }
   },
   {
    "model": "gemini-3.7-flash",
@@ -710,7 +718,7 @@
   {
    "model": "gemini-3.8-flash",
    "route": "maker-api",
-   "kind": "standard",
+   "kind": "promotion",
    "currency": "USD",
    "per": "MTok",
    "classes": {
@@ -748,13 +756,20 @@
      "quote": "Input price Free of charge $0.75 through December 31, 2026. $1.50 starting January 1, 2027. Output price (including thinking tokens) Free of charge $3.75 through December 31, 2026. $7.50 starting January 1, 2027. Context caching price Free of charge $0.075 through December 31, 2026. $0.15 starting J"
     }
    ],
-   "base": true,
-   "note": "introductory price through 31 Dec 2026 (stated), the price charged in force on 23 Oct; 1.50 / 7.50 / 0.15 scheduled from 1 Jan 2027 (not recorded)"
+   "note": "introductory price with a stated end (a promotion: never a base; coordinator 26 Oct, consistent with gemini-3.6-flash). introductory price through 31 Dec 2026 (stated), the price charged in force on 23 Oct; 1.50 / 7.50 / 0.15 scheduled from 1 Jan 2027 (not recorded)",
+   "list_after": {
+    "from": "2027-01-01",
+    "classes": {
+     "input": 1.5,
+     "output": 7.5,
+     "cache-read": 0.15
+    }
+   }
   },
   {
    "model": "gemini-4-argon",
    "route": "maker-api",
-   "kind": "standard",
+   "kind": "promotion",
    "currency": "USD",
    "per": "MTok",
    "classes": {
@@ -784,7 +799,15 @@
      "quote": "Input price Not available $2.00 through November 30, 2026. $4.00 starting December 1, 2026. Output price (including thinking tokens) Not available $10.00 through November 30, 2026. $20.00 starting December 1, 2026. Context caching price Not available $0.10 through November 30, 2026. $0.20 starting D"
     }
    ],
-   "note": "implicit cache only (explicit caching not supported); 4.00 / 20.00 / 0.20 from 1 Dec 2026 (scheduled, not recorded)"
+   "note": "introductory price with a stated end (a promotion: never a base; coordinator 26 Oct, consistent with gemini-3.6-flash). implicit cache only (explicit caching not supported); 4.00 / 20.00 / 0.20 from 1 Dec 2026 (scheduled, not recorded)",
+   "list_after": {
+    "from": "2026-12-01",
+    "classes": {
+     "input": 4.0,
+     "output": 20.0,
+     "cache-read": 0.2
+    }
+   }
   },
   {
    "model": "gemma-4-26b-a4b-it",
@@ -23093,7 +23116,7 @@
   {
    "model": "gemini-4-argon",
    "route": "maker-api",
-   "kind": "standard",
+   "kind": "promotion",
    "currency": "USD",
    "per": "MTok",
    "classes": {
@@ -23123,7 +23146,15 @@
      "quote": "October 13, 2026 Gemini 4 Argon ( gemini-4-argon ) generally available (GA) : Released Gemini 4 Argon"
     }
    ],
-   "note": "Earliest capture of the pricing page showing the model (2026-10-13)."
+   "note": "introductory price with a stated end (a promotion: never a base; coordinator 26 Oct, consistent with gemini-3.6-flash). Earliest capture of the pricing page showing the model (2026-10-13).",
+   "list_after": {
+    "from": "2026-12-01",
+    "classes": {
+     "input": 4.0,
+     "output": 20.0,
+     "cache-read": 0.2
+    }
+   }
   },
   {
    "model": "gemini-3-flash",
