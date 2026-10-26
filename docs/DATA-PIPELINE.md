@@ -263,7 +263,9 @@ components' costs, only on one unit and one run; otherwise the composite's cost 
    when its price change over the price-date interval is uniform across classes (its efforts' ratios hold); the others →
    `out:cost-not-comparable`.
 3. A subset with fewer than 2 couples → `out:cost-single-couple`; `subscription` → `out:cost-basis`.
-4. Promotions and off-peak prices are never the base.
+4. Promotions and off-peak prices are never the base. A promotion is a price charged over its interval: it is one of
+   the prices a source may have applied over the price date (`prices_over`), so a window where only a promotion is
+   printed is covered (26 Oct).
 
 ---
 

@@ -1441,9 +1441,12 @@ def base_price(ctx, key, currency=None, config=None):
 
 
 def prices_over(ctx, key, lo, hi, route="maker-api", currency=None, config=None):
-    """(distinct class vectors of the standard prices in the cost's currency that could have applied over [lo, hi],
-    fully covered?)."""
-    es = sorted((p for p in std_entries(ctx, key, route, currency, config) if overlaps(p, lo, hi)),
+    """(distinct class vectors of the prices in the cost's currency that could have applied over [lo, hi], fully
+    covered?). A promotion is a price charged over its interval, so it is one of the prices the source may have applied
+    (never a base: base_price reads standard records only; coordinator, 26 Oct)."""
+    promos = [p for p in ctx.prices["prices"] if p["model"] == key and p["route"] == route and p["kind"] == "promotion"
+              and (currency is None or p["currency"] == currency) and for_config(p, config)]
+    es = sorted((p for p in std_entries(ctx, key, route, currency, config) + promos if overlaps(p, lo, hi)),
                 key=lambda p: V.when(p["from"]))
     if lo is None:
         return [e["classes"] for e in es], False

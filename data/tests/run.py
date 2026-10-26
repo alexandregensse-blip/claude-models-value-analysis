@@ -631,6 +631,24 @@ def cost_uniform_factor():
 
 
 @test
+def cost_promotion_window_is_a_price_applied():
+    # a window where only a promotion is printed: the promotion is the price charged (never the base); before the
+    # fix the price date was "not registered" (coordinator, 26 Oct)
+    sc = base()
+    for k in ("ma", "mb"):
+        sc.prices["prices"] += [price(k, "2026-01-01", "2026-04-30", {"input": 2, "output": 10}),
+                                price(k, "2026-05-01", "2026-06-30", {"input": 1, "output": 5}, kind="promotion"),
+                                price(k, "2026-07-01", "2026-10-01", {"input": 2, "output": 10})]
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0", price_table="prices of 2026-06-01")
+    sc.m(s, model="mb", effort=[LOW], cost="2.0", price_table="prices of 2026-06-01")
+    r = sc.run()
+    c = r[m1]["fields"]["cost"]
+    eq(c.get("price_covered"), True, "the promotion covers the price date")
+    eq(c.get("price_vectors"), [{"input": 1, "output": 5}], "the promotion's classes")
+
+
+@test
 def cost_class_ratio():
     sc = base()
     old, new = {"input": 1, "output": 5, "cache-read": 0.1}, {"input": 1, "output": 5, "cache-read": 0.05}
