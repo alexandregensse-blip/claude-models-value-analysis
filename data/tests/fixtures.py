@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(DATA, "schema"))
 import build  # noqa: E402
 import validate as V  # noqa: E402
 
-EV = [{"url": "https://example.org/doc", "where": "fixture"}]
+EV = [{"url": "https://example.org/doc", "file": "ev.txt", "where": "fixture", "quote": "fixture evidence"}]
 
 
 def iv(frm, to=None, **kw):
@@ -186,6 +186,8 @@ class Sc:
         for d in (reg, os.path.join(fnd, "sources"), os.path.join(fnd, "measures")):
             os.makedirs(d, exist_ok=True)
         dump = lambda p, x: json.dump(x, open(p, "w", encoding="utf-8"), indent=1, ensure_ascii=False)  # noqa: E731
+        with open(os.path.join(reg, "ev.txt"), "w") as f:      # the saved copy every fixture evidence cites
+            f.write("fixture evidence\n")
         dump(os.path.join(reg, "models.json"), {"models": self.models})
         dump(os.path.join(reg, "routes.json"), {"routes": self.routes})
         dump(os.path.join(reg, "benchmarks.json"), {"families": self.families, "setups": self.setups})

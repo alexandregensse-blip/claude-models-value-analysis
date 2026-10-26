@@ -176,9 +176,33 @@ The fit tables carry these confound flags:
   `decided_by` names the fact that gave the key.
   - Two facts giving two keys → `not-established:contradictory`; the detail says when one key is a mode of the other.
   - Two mode facts selecting two keys → `not-established:contradictory`.
-  - **(method)** A second fact that resolves to no key is reported, not refused (provider_model `…-pro`, unregistered).
+  - **(decided)** A model fact that resolves to no key refuses the model even when another fact resolves (doubt →
+    out). It gets `not-established:absent`, with the reason `unresolved model fact '<value>'`, and gaps.py lists the
+    name to register.
 - **validate.py's output.** It prints one section per findings or decisions file, with its own errors and warnings,
   then the registry's section: its errors in full, and its warnings counted by kind. `--verbose` lists them all.
+
+## Registry checks added after the registry review (23 Oct)
+
+validate.py now reports these as errors (an error stops the build):
+- a model's default or conversion naming a configuration that does not exist on the record's start date. Outlasting
+  the configuration's dates is an error too;
+- the same for a route's `accepts` and route defaults, except that outlasting is only a warning there: a host may keep
+  serving open weights after the maker's API stops;
+- a price starting before the model's release;
+- a price whose `to` lies after `as_of`;
+- an evidence record without a saved file or a quote. A findings fact cited by `source` and `fact` carries its own.
+
+The placeholder `legacy` setup now has a headline by decision (no evidence), and the examples' five OpenRouter
+evidence records have quotes from their saved listings. **data/registry does not pass these checks yet**: it has
+287 errors, the review's items 2, 5 and 6:
+- 180 evidence records without a quote or a file;
+- 88 defaults, conversions and accepts outside their configuration's dates;
+- 6 prices after `as_of`;
+- 9 prices before the model's release.
+
+A build against data/registry therefore stops until the registry owners fix them. The acceptance test is identical
+with the minimal registry.
 
 ## Converter toolkit (`data/convert/`)
 
@@ -240,7 +264,10 @@ marked **(method)** remain method questions for the maintainer.
 
 8. Route facts resolve by their term, then the prefix head, then a route's spellings.
    - A chain that names only harnesses counts as route unknown.
-   - After a router, `maker-api` is added to the chain; after a reseller, host or self-hosted route it is not.
+   - **(registry review, 23 Oct)** `maker-api` closes a chain only when nothing else serves the run (a harness
+     alone, or nothing). The maker's conversions and defaults reach a run only through the maker's API or a reseller,
+     never after a router, a host or self-hosting. A configuration the maker converts is therefore not established
+     through a router, and a router without its own documented default gives no default.
    - A reseller uses the maker's defaults, with conversions dated under its own route id.
    - When the route is unknown, the candidates are `maker-api` plus every route whose entry for the model has a
      dated record overlapping the run.
@@ -425,8 +452,8 @@ group, so a1 is `out:single-couple`. What the test is about still holds: the ref
 
 ## Tests
 
-`python3 data/tests/run.py` runs 91 fixtures: the build's 49, the review's 26, and 16 for the pilot fixes
-(data/tests/pilot_tests.py). Between them they cover:
+`python3 data/tests/run.py` runs 94 fixtures: the build's 49, the review's 26, and 19 for the pilot fixes and the
+registry review (data/tests/pilot_tests.py). Between them they cover:
 - every reason code;
 - configuration steps 1–8;
 - the run-date, campaign and cost rules;
@@ -444,7 +471,8 @@ Separately, 45 faults were planted, each switching one step off in turn in build
 - one for argument checking;
 - five for the legacy path.
 
-Every one made a test fail. For the pilot fixes, 22 more faults were planted and 21 are caught. The other one
+Every one made a test fail. For the pilot fixes and the registry review, 30 more faults were planted and 29 are
+caught. The other one
 (dropping the "documented" check on a run-date convention) cannot change an outcome: the level filter before it, and
 validate.py's quote rule, refuse an undocumented convention anyway. `data/tests/acceptance.py` is the legacy
 acceptance test. As a negative control, it

@@ -20,11 +20,11 @@ Into a real registry, add the setup `legacy` and the publisher `legacy` (LEGACY_
 import argparse, csv, collections, hashlib, json, os, re, sys
 
 LEGACY_PUBLISHER = {"legacy": {"label": "raw-data.csv (legacy rows, before conversion)", "maker": None}}
-EV = [{"url": "raw-data.csv", "where": "legacy rows (DATA-PIPELINE §8.1)"}]
+EV = []
 LEGACY_SETUP = {"legacy": {
     "family": "legacy", "label": "legacy rows", "benchmark": "raw-data.csv rows", "subset": None, "harness": None,
     "tools_regime": None, "judge_panel": None, "metric": "pass%",
-    "headline": {"metric": "pass%", "basis": "designated", "evidence": EV}, "bounds": None, "direction": "higher",
+    "headline": {"metric": "pass%", "basis": "decision", "decision": None}, "bounds": None, "direction": "higher",
     "task_type": "mixed", "complexity": "mid", "kind": "runs", "composite": None,
     "note": "placeholder: a legacy measure carries its own group, metric, harness, unit and task type in its row"}}
 

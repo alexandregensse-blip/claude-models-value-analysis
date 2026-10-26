@@ -714,9 +714,14 @@ def resolve_model(M):
         key = got.pop()
         rules = {r for _, k, r in keys_by_fact if k and r}
         out.update(value=key, level="computed" if rules else "written", decided_by=first)
-        unresolved = [x["fact"] for x in res if x["outcome"].startswith("unresolved")]
-        if unresolved:
-            out["detail"] = f"decided by {first}; {', '.join(unresolved)} resolved to no key (reported, not refused)"
+        unresolved = [x for x in res if x["outcome"].startswith("unresolved")]
+        if unresolved:                                   # doubt → out (the coordinator, 23 Oct)
+            out.update(value=None, level="not-established:absent", decided_by=None,
+                       detail="; ".join(f"unresolved model fact {x['value']!r} ({x['fact']}): {x['outcome'][12:]}"
+                                        for x in unresolved) + f" (the other facts give {key})")
+            M.fields["model"] = out
+            M.selects = selects
+            return None
         for r in rules:
             M.rule(r)
         selected = set()
@@ -803,8 +808,11 @@ def chains(M, key):
     iv = run_interval(M, key)
 
     def close(ch):
+        """The maker's API closes a chain only when nothing else serves the run (a harness alone, or nothing): the
+        maker's conversions and defaults reach a run only through the maker's API or a reseller, never through a
+        router, a host or self-hosting (registry review, 23 Oct)."""
         ch = list(ch)
-        if not any(ctx.routes[r]["class"] in ("maker-api", "reseller", "host", "self-hosted") for r in ch):
+        if not any(ctx.routes[r]["class"] in ("maker-api", "reseller", "router", "host", "self-hosted") for r in ch):
             ch.append("maker-api")
         return ch
     if not unknown:
@@ -874,6 +882,10 @@ def serve(M, key, chain, req, iv, configs):
             cur = dist[0][1]
             continue
         return None, "not-established:absent", f"{step}: table mapping without an entry for {cur}"
+    if not any(ctx.routes[st]["class"] in ("maker-api", "reseller") for st in chain) and \
+            configs.get(cur, {}).get("served") == "converted":
+        return None, "not-established:absent", (f"{cur}: converted by the maker, and the conversion reaches a run "
+                                                f"only through the maker's API or a reseller")
     return cur, "computed" if cur != req else "written", ""
 
 

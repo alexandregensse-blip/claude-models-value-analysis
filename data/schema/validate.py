@@ -501,6 +501,39 @@ def check_evidence_files(doc, path, label, rep):
                 rep.err(label, f"{p}: quote not found in {os.path.basename(f)}")
 
 
+def within_configuration(rec, cid, model, what, L, rep, route_entry=False):
+    """A dated record naming a configuration (a default, a conversion's result, a route's accepts or default) lies
+    within that configuration's dated intervals: starting before the configuration exists is an error; outlasting it
+    is an error for the maker's own records and a warning for a route's (a host may keep serving open weights after
+    the maker's API stops)."""
+    ivs = [c for c in model.get("configurations", []) if c["id"] == cid or
+           (cid.startswith("think-") and cid[6:].isdigit() and c["id"] == "think-<budget>")]
+    if not ivs:
+        return
+    start = when(rec["from"])
+    host = [c for c in ivs if when(c["from"]) <= start <= (when(c["to"], True) if c.get("to") is not None else dt.datetime.max)]
+    if not host:
+        rep.err(L, f"{what} '{cid}' from {rec['from']}: its configuration does not exist then "
+                   f"({', '.join(c['from'] + ' → ' + str(c.get('to')) for c in ivs)})")
+        return
+    end = when(rec["to"], True) if rec.get("to") is not None else dt.datetime.max
+    if not any(when(c["from"]) <= start and end <= (when(c["to"], True) if c.get("to") is not None else dt.datetime.max)
+               for c in ivs):
+        (rep.warn if route_entry else rep.err)(L, f"{what} '{cid}' {rec['from']} → {rec.get('to')} outlasts its "
+                                                  f"configuration's dates")
+
+
+def check_evidence_complete(doc, label, rep):
+    """Every evidence record of a registry entry has a saved file and a quote (a findings fact cited by source and
+    fact carries its own)."""
+    for p, e in walk_evidence(doc):
+        if e.get("source"):
+            continue
+        missing = [k for k in ("file", "quote") if not e.get(k)]
+        if missing:
+            rep.err(label, f"{p}: evidence without its {' and '.join(missing)}")
+
+
 def overlapping_defaults(defaults):
     return [(a["configuration"], b["configuration"]) for i, a in enumerate(defaults) for b in defaults[i + 1:]
             if a["configuration"] != b["configuration"] and overlap(a, b)]
@@ -514,6 +547,8 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
     lab = {k: rel(p) for k, p in paths.items()}
     for k, doc in reg.items():
         check_dated(doc, lab[k], rep)
+        if k != "flag-map":
+            check_evidence_complete(doc, lab[k], rep)
         if check_files:
             check_evidence_files(doc, paths[k], lab[k], rep)
 
@@ -540,6 +575,11 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
         for d in m.get("default", []):
             if d["configuration"] not in ids:
                 rep.err(L, f"default '{d['configuration']}' is not one of its configurations {sorted(ids)}")
+            else:
+                within_configuration(d, d["configuration"], m, "default", L, rep)
+        for c in m.get("conversions", []):
+            if c["served"] in ids:
+                within_configuration(c, c["served"], m, f"conversion {c['requested']} →", L, rep)
         for a_, b_ in overlapping_defaults(m.get("default", [])):
             rep.err(L, f"defaults '{a_}' and '{b_}' overlap in time")
         for n in m.get("names", []):
@@ -581,12 +621,16 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
             for a in rm.get("accepts", []):
                 if a["configuration"] not in ids:
                     rep.warn(L, f"accepts '{a['configuration']}', not in the model's configurations {sorted(ids)}")
+                else:
+                    within_configuration(a, a["configuration"], models[key], "accepts", L, rep, route_entry=True)
             for mp in rm.get("mapping", []):
                 if mp["served"] not in ids and not in_vocab(schemas, "mapping_result", mp["served"]):
                     rep.err(L, f"maps to '{mp['served']}', not one of the model's configurations")
             for d in rm.get("default", []):
                 if d["configuration"] not in ids:
                     rep.err(L, f"default '{d['configuration']}' not one of the model's configurations {sorted(ids)}")
+                else:
+                    within_configuration(d, d["configuration"], models[key], "route default", L, rep, route_entry=True)
             for a_, b_ in overlapping_defaults(rm.get("default", [])):
                 rep.err(L, f"defaults '{a_}' and '{b_}' overlap in time")
 
@@ -627,6 +671,9 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
             if p["model"] not in models:
                 rep.err(L, f"model '{p['model']}' not registered")
             else:
+                rel_ = models[p["model"]].get("released", {}).get("value")
+                if rel_ and when(p["from"]) < when(rel_[:10]):
+                    rep.err(L, f"priced from {p['from']}, before {p['model']}'s release {rel_}")
                 for c in p.get("configurations", []):
                     if c not in config_ids(models[p["model"]]):
                         rep.err(L, f"price for configuration '{c}', not one of {p['model']}'s configurations")
@@ -635,6 +682,8 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
             elif p["kind"] == "standard" and routes[p["route"]]["class"] == "maker-api":
                 if when(p["from"]) <= when(prices["as_of"]) <= when(p["to"], True):
                     base.add(p["model"])
+            if p.get("to") is not None and when(p["to"]) > when(prices["as_of"], True):
+                rep.err(L, f"to {p['to']} lies after as_of {prices['as_of']} (a price ends at its last capture)")
             if p["kind"] == "standard" and not p.get("classes"):
                 rep.err(L, "standard price without classes")
             if p.get("base"):

@@ -92,19 +92,30 @@ def legacy_ref_replaces_and_diff():
 
 @test
 def legacy_build_against_real_registry():
+    """The legacy findings add no error of their own against data/registry (the build supplies the legacy setup and
+    publisher); the build runs when the registry itself validates, and otherwise stops on the registry's own errors
+    only (the registry review's items, 23 Oct)."""
     root = tempfile.mkdtemp(prefix="pilot-")
     try:
         csvp = write_csv(root, ["obvbench,github-obviousbench,opus-5.5,low,coding,mid,h,per-task,0.3,,,,95.8,answer_pass3%,,,,r"])
         fnd = os.path.join(root, "f")
         LG.convert(csvp, fnd)
         out = os.path.join(root, "b")
-        with contextlib.redirect_stdout(io.StringIO()):
+        err = io.StringIO()
+        with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(err):
             code = build.main(["--registry", os.path.join(DATA, "registry"), "--findings", fnd, "--decisions",
                                os.path.join(root, "none.json"), "--out", out, "--no-check-files", "--no-lqm"])
-        eq(code, 0, "a legacy-only build runs against data/registry")
-        rep = json.load(open(os.path.join(out, "status-report.json")))
-        e = next(iter(rep["measures"].values()))
-        eq(e["kind"], "legacy", "legacy measure")
+        lines = [l for l in err.getvalue().splitlines()[1:] if l.strip()]
+        eq([l for l in lines if not l.startswith(os.path.relpath(os.path.join(DATA, "registry"), build.REPO))], [],
+           "no error outside the registry's own files")
+        if code == 0:
+            e = next(iter(json.load(open(os.path.join(out, "status-report.json")))["measures"].values()))
+            eq(e["kind"], "legacy", "legacy measure")
+        reg = {k: json.load(open(os.path.join(DATA, "registry", f))) for k, f in (("benchmarks", "benchmarks.json"),
+                                                                                  ("publishers", "publishers.json"))}
+        sup = build.Ctx.supply_legacy(reg, fnd)
+        eq(("legacy" in reg["benchmarks"]["setups"], "legacy" in reg["publishers"]["publishers"]), (True, True),
+           f"supplied: {sup}")
     finally:
         shutil.rmtree(root, ignore_errors=True)
 
@@ -196,10 +207,97 @@ def model_contradictions_reported():
     eq(f1["level"], "not-established:contradictory", "two facts, two keys")
     eq([x["outcome"] for x in f1["resolution"]], ["decided", "contradicts: gives mb"], "which fact said what")
     f2 = r[m2]["fields"]["model"]
-    eq((f2["value"], f2["decided_by"]), ("ma", f2["resolution"][0]["fact"]), "decided by the first fact")
+    eq((f2["value"], f2["level"]), (None, "not-established:absent"), "a second fact resolving to no key: refused")
+    eq(f2["detail"].startswith("unresolved model fact 'ma-pro-x'"), True, "the reason names it")
     eq(f2["resolution"][1]["outcome"].startswith("unresolved"), True, "the other: why it did not decide")
+    eq(r.q(m2), "out:model-not-established", "doubt → out")
     eq(r[m3]["fields"]["model"]["level"], "not-established:contradictory", "two modes selecting two keys")
     eq(r.model(m4), "mp-pro", "one mode: its line's key")
+
+
+@test
+def router_chain_has_no_maker_step():
+    sc = base()
+    conv = [dict(iv("2026-01-01", "2026-12-31", **WIN), route="maker-api", requested="max", served="high")]
+    sc.model("mc", configs=("low", "high", {"id": "max", "served": "converted", **iv("2026-01-01", None)}),
+             conversions=conv, default=[dict(iv("2026-01-01", "2026-12-31", **WIN), configuration="high")])
+    acc = [dict(iv("2026-01-01", "2026-12-31", **WIN), configuration=c) for c in ("low", "high", "max")]
+    sc.route("orx", "router", spellings=["ORX"], models={"mc": {"accepts": acc}})
+    s = sc.source("a")
+    nes = [("no-effort-sent", "default")]
+    m1 = sc.m(s, model="mc", effort=[("effort-setting", "max")], route=[("Maker API", "maker-api")])
+    m2 = sc.m(s, model="mc", effort=[("effort-setting", "max")], route=[("ORX", None)])
+    m3 = sc.m(s, model="mc", effort=nes, route=[("ORX", None)])
+    m4 = sc.m(s, model="mc", effort=nes, route=[("Maker API", "maker-api")])
+    r = sc.run()
+    eq(r.cfg(m1), "high", "the maker's API: its dated conversion max → high")
+    eq(r.q(m2), "out:effort-not-established", "through a router: the maker's conversion does not reach the run")
+    eq(r.q(m3), "out:effort-not-established", "through a router without its own default: no maker default")
+    eq(r.cfg(m4), "high", "the maker's API: its documented default")
+
+
+@test
+def gaps_name_to_register():
+    sc = base()
+    s = sc.source("a")
+    sc.m(s, model="ma", effort=[LOW], model_facts=[("model-api-id", "ma-pro-x", {"namespace": "maker-api"})])
+    root = tempfile.mkdtemp(prefix="pilot-")
+    try:
+        reg, fnd, dec = sc.write(root)
+        out = os.path.join(root, "b")
+        with contextlib.redirect_stdout(io.StringIO()):
+            build.main(["--registry", reg, "--findings", fnd, "--decisions", dec, "--out", out, "--no-check-files",
+                        "--no-lqm"])
+        g = gaps.gaps(json.load(open(os.path.join(out, "status-report.json"))))[s]
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+    eq([k.split("  ")[0] for k in g["ids"]], ["ma-pro-x"], "the name to register")
+
+
+def validate_messages(sc):
+    root = tempfile.mkdtemp(prefix="pilot-")
+    try:
+        reg, fnd, dec = sc.write(root)
+        p = subprocess.run([sys.executable, os.path.join(DATA, "schema", "validate.py"), "--registry", reg,
+                            "--findings", fnd, "--verbose"], capture_output=True, text=True)
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+    return p.stdout
+
+
+@test
+def validate_registry_dates_and_evidence():
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    cases = []
+    sc = base()                                           # a default before its configuration exists
+    sc.model("mx", configs=[dict(iv("2026-03-01", None, from_basis="stated", to_basis="open"), id="high", served="itself"),
+                            dict(iv("2026-01-01", None, from_basis="release", to_basis="open"), id="low", served="itself")],
+             default=[dict(iv("2026-02-01", "2026-02-28", **win), configuration="high")])
+    cases.append((sc, "ERROR", "default 'high' from 2026-02-01: its configuration does not exist then"))
+    sc = base()                                           # a route's accepts before / after the configuration
+    sc.model("my", configs=[dict(iv("2026-03-01", "2026-05-31", from_basis="stated", to_basis="stated"), id="low",
+                                 served="itself")])
+    sc.route("orq", "router", models={"my": {"accepts": [dict(iv("2026-02-01", "2026-04-30", **win), configuration="low")]}})
+    cases.append((sc, "ERROR", "accepts 'low' from 2026-02-01: its configuration does not exist then"))
+    sc = base()
+    sc.model("my", configs=[dict(iv("2026-03-01", "2026-05-31", from_basis="stated", to_basis="stated"), id="low",
+                                 served="itself")])
+    sc.route("orq", "router", models={"my": {"accepts": [dict(iv("2026-04-01", "2026-07-31", **win), configuration="low")]}})
+    cases.append((sc, "WARNING", "accepts 'low' 2026-04-01 → 2026-07-31 outlasts its configuration's dates"))
+    sc = base()                                           # a price before the release, a price after as_of
+    sc.prices["prices"].append(price("ma", "2025-12-01", "2026-09-30", {"input": 1, "output": 5}))
+    cases.append((sc, "ERROR", "priced from 2025-12-01, before ma's release 2026-01-01"))
+    sc = base()
+    sc.prices["prices"].append(price("ma", "2026-01-01", "2026-12-31", {"input": 1, "output": 5}))
+    cases.append((sc, "ERROR", "to 2026-12-31 lies after as_of 2026-10-01"))
+    sc = base()                                           # evidence without its saved file and quote
+    sc.models["ma"]["released"]["evidence"] = [{"url": "https://example.org/release", "where": "post"}]
+    cases.append((sc, "ERROR", "released.evidence[0]: evidence without its file and quote"))
+    for sc, kind, msg in cases:
+        out = validate_messages(sc)
+        eq(any(l.startswith(kind) and msg in l for l in out.splitlines()), True, f"{kind} {msg}")
+    out = validate_messages(base())
+    eq(" 0 error(s)" in out.splitlines()[-1], True, "the base fixture is clean")
 
 
 # ---------------------------------------------------------------- 7: validate.py's per-file summary
