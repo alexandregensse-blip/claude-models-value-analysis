@@ -880,8 +880,9 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
         if (f["level"] == "computed") != bool(f.get("rule") or f.get("inputs")):
             rep.err(F, "a computed fact has its rule and inputs, and only a computed fact has them")
         elif f["level"] == "computed":
-            if not f.get("rule") or len(f.get("inputs") or []) < 2:
-                rep.err(F, "a computed fact needs its rule and at least two inputs")
+            need = 1 if f.get("rule") == "chart-effort-order" else 2
+            if not f.get("rule") or len(f.get("inputs") or []) < need:
+                rep.err(F, f"a computed fact needs its rule and at least {need} input(s)")
             for ref in f.get("inputs") or []:
                 if ref == f["id"]:
                     rep.err(F, "a computed fact cannot be its own input")
