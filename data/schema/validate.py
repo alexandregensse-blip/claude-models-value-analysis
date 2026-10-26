@@ -263,8 +263,8 @@ def norm(t):
 def norm_display(name, vocab):
     """Display-name rule N (models.schema.json): NFKC, casefold, '_' '-' ':' '/' as spaces, spaces collapsed, one leading
     maker spelling (vocab maker x-terms.display_prefixes) dropped."""
-    t = re.sub(r"[_\-:/]", " ", unicodedata.normalize("NFKC", name).casefold())
-    t = re.sub(r"\s+", " ", t).strip()
+    t = re.sub(r"[_\-:/\u2010\u2011\u2012\u2013]", " ", unicodedata.normalize("NFKC", name).casefold())
+    t = re.sub(r"(?<=[a-z]) (?=[0-9])", "", re.sub(r"\s+", " ", t).strip())   # 'Qwen 3.6' is 'Qwen3.6' (26 Oct)
     prefixes = [p.casefold() for rec in vocab["$defs"]["maker"]["x-terms"].values() for p in rec.get("display_prefixes", [])]
     cut = True
     while cut:                                       # leading maker spellings ('Anthropic Claude Opus 5' → 'opus 5'; 26 Oct)

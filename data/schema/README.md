@@ -186,7 +186,7 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
      with `names_case_insensitive`: the Hugging Face one).
    - With `prefix`, the head up to `/` names the route. An unknown head means the route is unknown: the rest, then the
      whole value, is tried in every candidate route, and exactly one key must result.
-   - Display names are compared under N: NFKC, casefold, separators as spaces, the leading maker spellings dropped ('Anthropic', 'Claude': 'Haiku 5.5' is 'Claude Haiku 5.5').
+   - Display names are compared under N: NFKC, casefold, separators as spaces, the leading maker spellings dropped ('Anthropic', 'Claude': 'Haiku 5.5' is 'Claude Haiku 5.5'), Unicode hyphens as separators, no space between a word and its version ('Qwen 3.6' is 'Qwen3.6').
      A label carrying the configuration is not a model-name fact.
 5. **Headlines:** a headline is a metric term compared with the setup's metric. It is the benchmark's own designation;
    when publishers of one setup disagree, a headline decision settles it (`kind: headline`, optionally per publisher).
