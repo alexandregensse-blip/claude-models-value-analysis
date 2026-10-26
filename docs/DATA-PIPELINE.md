@@ -195,8 +195,10 @@ configurations" are those of models.json at the run date:
    rule); a label naming a converted level (GLM-5.2 `low`) goes to step 6;
 5. an `effort-label` in other words → `label-to-ladder` when the model's configurations make it unique;
 6. a requested or converted configuration → the route chain applied in order **harness → router / reseller / host →
-   maker**, each step dated (identity where documented); route unknown → every candidate route (each route of routes.json that served the model at the run date, the maker's API
-   always included) is evaluated and the
+   maker**, each step dated (identity where documented); no router, reseller or host named (nothing, or only a harness)
+   → the maker's API is presumed, flag `route-presumed-maker-api` (the maintainer, 26 Oct; a name prefix that names a
+   route counts as naming it); a route named but not resolvable → every candidate route (each route of routes.json that
+   served the model at the run date, the maker's API always included) is evaluated and the
    configuration is accepted only if all agree, else `not-established:absent`; a router budget → `budget-converted`;
    a tie → `ambiguous`;
 7. `no-effort-sent` → `api-default-documented`: on the maker's API or a reseller, the maker's documented default (Haiku
@@ -339,3 +341,6 @@ Decided by the maintainer during the reviews:
 - **Closed harnesses** (26 Oct): the level label a closed harness shows (Cursor 371 fit rows, Antigravity 65, Grok CLI 31,
   Copilot 27, Amp 18, Kiro 15) is the level sent, as LMArena's labels, flagged; strict doubt (out, LMArena with them)
   was not retained. Rule `closed-harness-label`, route field `label_as_level`.
+- **Route not named** (26 Oct): a source that names no router, reseller or host (≈ 90 % of today's fit rows) is
+  presumed to have run through the maker's API, flagged `route-presumed-maker-api`; the strict reading (every candidate
+  route must agree, OpenRouter included) was not retained. Rule `route-presumed-maker-api`.

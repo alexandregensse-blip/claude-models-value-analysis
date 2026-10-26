@@ -313,6 +313,18 @@
    "ref": "docs/DATA-PIPELINE.md §4, §5.1 step 6"
   },
   {
+   "id": "route-presumed-maker-api",
+   "kind": "standing",
+   "statement": "A source that names no router, reseller or host (no route at all, or only a harness) is presumed to have run through the maker's API, flagged route-presumed-maker-api; a router is weighed only when the source names it (or a name prefix names it). A route the source names but the registry cannot resolve stays unknown: every candidate route must agree.",
+   "inputs": [
+    "route"
+   ],
+   "output": "route chain (computed)",
+   "date": "2026-10-26",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 6"
+  },
+  {
    "id": "pro-via-router-out",
    "kind": "standing",
    "statement": "A Pro (or other) mode run through a router that cannot separate it from the base model is out: its model is not established.",

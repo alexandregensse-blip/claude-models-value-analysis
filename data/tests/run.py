@@ -425,11 +425,13 @@ def cfg6_route_chain():
     sc2.route("orz", "router", models={"ma": {"mapping": [dict(iv("2026-01-01", "2026-12-31", **win),
                                                                requested="high", served="medium")]}})
     s = sc2.source("a")
-    m1 = sc2.m(s, model="ma", effort=[HIGH])
-    m2 = sc2.m(s, model="mb", effort=[HIGH])
+    m1 = sc2.m(s, model="ma", effort=[HIGH], route=[("Unregistered Provider", None)])
+    m2 = sc2.m(s, model="mb", effort=[HIGH], route=[("Unregistered Provider", None)])
+    m3 = sc2.m(s, model="ma", effort=[HIGH])
     r = sc2.run()
-    eq(r.q(m1), "out:effort-not-established", "maker-api says high, orz says medium")
+    eq(r.q(m1), "out:effort-not-established", "a route named but unresolved: maker-api says high, orz says medium")
     eq(r.cfg(m2), "high", "only the maker's API serves mb")
+    eq((r.cfg(m3), "route-presumed-maker-api" in r[m3]["flags"]), ("high", True), "no route named: maker-api presumed")
 
 
 @test
@@ -442,7 +444,8 @@ def cfg7_default():
         dict(iv("2026-01-01", "2026-12-31", **win), configuration="high")]}})
     s = sc.source("a")
     mk = [("Maker API", "maker-api")]                      # unknown route: orr documents md1 too (they disagree)
-    m0 = sc.m(s, model="md1", effort=[("no-effort-sent", "default")])
+    m0 = sc.m(s, model="md1", effort=[("no-effort-sent", "default")], route=[("Unregistered Provider", None)])
+    m4 = sc.m(s, model="md1", effort=[("no-effort-sent", "default")])
     m1 = sc.m(s, model="md1", effort=[("no-effort-sent", "default")], route=mk)
     m2 = sc.m(s, model="md2", effort=[("no-effort-sent", "default")])
     m3 = sc.m(s, model="md1", effort=[("no-effort-sent", "default")], route=[("ORR", None)])
@@ -452,6 +455,7 @@ def cfg7_default():
     eq(r.cfg(m2), "default", "default not covering the run")
     eq(r.q(m2), "out:effort-not-established", "default not covering the run")
     eq(r.cfg(m3), "high", "the router's own documented default")
+    eq(r.cfg(m4), "medium", "no route named: the maker's default (maker-api presumed)")
 
 
 @test
@@ -513,8 +517,8 @@ def run_date_early_access():
     m2 = sc.m(s, model="mn", effort=[LOW])                 # published 2026-06-01, before the release
     r = sc.run()
     eq(r.q(m1), "in", "early access in")
-    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], "EAP-run", "early-access fact → EAP-run")
-    eq(r.rows("fit-quality.csv", model="mn")[0]["confound"], "EAP-run", "upper bound before the release")
+    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], "EAP-run; route-presumed-maker-api", "early-access fact → EAP-run")
+    eq(r.rows("fit-quality.csv", model="mn")[0]["confound"], "EAP-run; route-presumed-maker-api", "upper bound before the release")
 
 
 # ================================================================ campaigns
@@ -532,7 +536,7 @@ def campaign_continuation():
     eq(r.q(a1), "out:superseded", "replaced within its campaign")
     eq(r.q(a2), "in", "the later value")
     eq(r.q(b2), "in", "the later value")
-    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], f"prev=50% ({a1})", "prev recorded")
+    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], f"route-presumed-maker-api; prev=50% ({a1})", "prev recorded")
 
 
 @test

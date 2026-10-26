@@ -73,11 +73,11 @@ def router_default_known_unknown():
     s = sc.source("a", published="2026-07-25")
     nes = [("no-effort-sent", "null")]
     m1 = sc.m(s, model="kk", effort=nes, route=[("OpenRouter", None)], run_date=[("run-date", "2026-07-21")])
-    m2 = sc.m(s, model="kk", effort=nes, run_date=[("run-date", "2026-07-21")])
+    m2 = sc.m(s, model="kk", effort=nes, route=[("Unregistered Provider", None)], run_date=[("run-date", "2026-07-21")])
     m3 = sc.m(s, model="kk", effort=nes, route=[("OpenRouter", None)], run_date=[("run-date", "2026-07-23")])
     r = sc.run()
     eq(r.cfg(m1), "max", "route known: the router's own documented default")
-    eq(r.q(m2), "out:effort-not-established", "route unknown: maker high vs router max disagree")
+    eq(r.q(m2), "out:effort-not-established", "a route named but unresolved: maker high vs router max disagree")
     eq(r.q(m3), "out:effort-not-established", "a single capture covers its own day only (21 Jul), run 23 Jul")
 
 # 4. hybrid think
@@ -362,9 +362,11 @@ def mode_route_unknown():
     sc.model("gp-pro", configs=("low", "high"), line="gp")
     sc.route("openrouter", "router", spellings=["OpenRouter"], models={"gp": {"ids": [dict(iv("2026-01-01", "2026-12-31", **WIN), name="o/gp")]}})
     s = sc.source("a")
-    m1 = sc.m(s, model="gp", effort=[HIGH], mode="pro")
+    m1 = sc.m(s, model="gp", effort=[HIGH], mode="pro", route=[("Unregistered Provider", None)])
+    m2 = sc.m(s, model="gp", effort=[HIGH], mode="pro")
     r = sc.run()
-    eq(r.model(m1), None, "route unknown and a router that cannot separate Pro is a candidate → not established")
+    eq(r.model(m1), None, "route named but unresolved, a router that cannot separate Pro is a candidate → not established")
+    eq(r.model(m2), "gp-pro", "no route named: maker-api presumed, the mode selects the Pro key")
 
 # 17. run-start after publication (contradictory run date) - the run-date field's level
 @test
