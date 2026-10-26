@@ -356,3 +356,6 @@ Decided by the maintainer during the reviews:
 - **Thinking on, no level** (26 Oct): 'Reasoning' or thinking-on without a level, on a model whose list has levels but no
   `think`, is the maker's documented effort default over the route chain (step 7), rule `thinking-on-default-level`,
   flag `level-from-default`; no documented default → not established.
+- **Run before shutdown** (26 Oct): a closed model's run with no stated end lies before its maker-API ids stopped
+  serving it (every such id ended): the default upper bound is capped there (rule `run-before-shutdown`, basis
+  `shutdown`); open weights are not capped.

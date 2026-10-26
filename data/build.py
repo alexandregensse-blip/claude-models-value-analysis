@@ -573,6 +573,18 @@ def default_upper(M):
     return min(c), "default"
 
 
+def shutdown(ctx, key):
+    """The last moment a closed model's own maker-API ids served it (every such id ended), else None."""
+    m = ctx.models.get(key) or {}
+    if m.get("open_weights"):
+        return None
+    ends = [iv.get("to") for n in m.get("names", []) if n.get("kind") == "api-id" and not n.get("route")
+            for iv in n.get("serves", [])]
+    if not ends or any(e is None for e in ends):
+        return None
+    return max(V.when(e, True) for e in ends)
+
+
 def run_interval(M, key):
     """(lo, hi, ea) for the measure under candidate key; lo None = unclamped (early access). Cached per key."""
     cache = M.__dict__.setdefault("_iv", {})
@@ -612,6 +624,11 @@ def run_interval(M, key):
     lo = max(lo_c) if lo_c else released
     hi = min(hi_c) if hi_c else hi_default
     basis = {"lo": "stated" if lo_c else "release", "hi": "stated" if hi_c else hi_basis}
+    if key and not hi_c:                                 # a closed model cannot run after its maker API ids stopped
+        shut = shutdown(ctx, key)                        # serving it (26 Oct): the default upper bound is capped there
+        if shut is not None and shut < hi and (lo is None or lo <= shut):
+            hi, basis["hi"] = shut, "shutdown"
+            M.rule("run-before-shutdown")
     level = "written" if (lo_c or hi_c) else "computed"
     if lo is not None and lo > hi:                       # stated bounds contradict: the widest interval, defaults too
         lo = min([lo] + lo_c + [b[0] for b in ends] + ([released] if released else []))

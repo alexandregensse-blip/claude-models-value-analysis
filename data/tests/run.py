@@ -1280,6 +1280,21 @@ def ext_thinking_on_default_level():
     eq(r.q(m3), "out:effort-not-established", "no documented default")
 
 
+@test
+def ext_run_before_shutdown():
+    # a page read after a closed model's shutdown: its run lies before the shutdown, so a configuration ending there
+    # still covers it (26 Oct); an open-weights model is not capped
+    win = dict(from_basis="stated", to_basis="stated")
+    sc = base()
+    cf = lambda c: {"id": c, "served": "itself", **iv("2026-01-01", "2026-06-30", **win)}
+    sc.model("mo", released="2026-01-01", names=[name("mo-1", "2026-01-01", "2026-06-30")], configs=(cf("low"), cf("high")))
+    s = sc.source("a", published="2026-09-01")
+    m1 = sc.m(s, model="mo-1", effort=[LOW], score="50%")
+    r = sc.run()
+    eq(r.cfg(m1), "low", "the run is capped at the shutdown")
+    eq(r[m1]["fields"]["run_date_detail"]["mo"]["basis"]["hi"], "shutdown", "basis")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)
