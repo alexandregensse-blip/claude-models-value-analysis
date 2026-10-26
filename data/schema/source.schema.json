@@ -316,6 +316,27 @@
      "note": {
       "type": "string",
       "description": "Free note for the verifier; never read by the tree."
+     },
+     "rule": {
+      "type": "string",
+      "description": "For a computed fact: the rule deriving it (cell-difference: inputs[0] − inputs[1] − …; cell-sum: their sum).",
+      "enum": [
+       "cell-difference",
+       "cell-sum"
+      ]
+     },
+     "inputs": {
+      "type": "array",
+      "description": "For a computed fact: the facts or cells it is derived from, in the rule's order.",
+      "items": {
+       "$ref": "common.schema.json#/$defs/fact_ref"
+      },
+      "minItems": 2
+     },
+     "pattern": {
+      "type": "string",
+      "minLength": 1,
+      "description": "For a run-date-convention fact: a regex with a named group `date` (YYYYMMDD) matched against the measure's row key or run-id."
      }
     },
     "required": [
@@ -417,6 +438,31 @@
           "note": {
            "type": "string",
            "description": "Free note."
+          },
+          "precision": {
+           "type": "object",
+           "description": "Precision model of this column's cells (overrides the table's).",
+           "properties": {
+            "model": {
+             "$ref": "vocab.json#/$defs/precision_model"
+            },
+            "step": {
+             "type": "number",
+             "minimum": 0
+            },
+            "sd": {
+             "type": "number",
+             "minimum": 0
+            },
+            "reading_px": {
+             "type": "number",
+             "minimum": 0
+            }
+           },
+           "required": [
+            "model"
+           ],
+           "unevaluatedProperties": false
           }
          },
          "required": [

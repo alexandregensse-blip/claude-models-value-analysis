@@ -48,6 +48,8 @@ def main():
     default = "/work/.wt-px/raw-data.csv" if os.path.isfile("/work/.wt-px/raw-data.csv") else os.path.join(REPO, "raw-data.csv")
     ap.add_argument("csv", nargs="?", default=default)
     ap.add_argument("--keep", help="keep the converted findings and the build here")
+    ap.add_argument("--registry", help="build against this registry (e.g. data/registry; the build supplies the "
+                                       "legacy setup and publisher) instead of the minimal one data/legacy.py writes")
     a = ap.parse_args()
     t0 = time.time()
     diffs = []
@@ -59,16 +61,19 @@ def main():
         fnd, reg, out = (os.path.join(root, x) for x in ("findings", "registry", "build"))
         for d in (fnd, reg):
             shutil.rmtree(d, ignore_errors=True)
-        info = legacy.convert(a.csv, fnd, reg)
-        fm = os.path.join(DATA, "registry", "flag-map.json")
-        fm = fm if os.path.isfile(fm) else os.path.join(DATA, "findings", "examples", "registry", "flag-map.json")
-        shutil.copy(fm, os.path.join(reg, "flag-map.json"))       # informative column only
+        info = legacy.convert(a.csv, fnd, None if a.registry else reg)
+        if a.registry:
+            reg = a.registry
+        else:
+            fm = os.path.join(DATA, "registry", "flag-map.json")
+            fm = fm if os.path.isfile(fm) else os.path.join(DATA, "findings", "examples", "registry", "flag-map.json")
+            shutil.copy(fm, os.path.join(reg, "flag-map.json"))       # informative column only
         print(f"converted: {info['rows']} rows, {info['sources']} legacy sources, lines skipped (free text) "
               f"{info['skipped_lines']} ({time.time() - t0:.0f} s)", flush=True)
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
             code = build.main(["--registry", reg, "--findings", fnd, "--decisions", os.path.join(root, "none.json"),
-                               "--out", out, "--fit-models", "catalog"])
+                               "--out", out, "--fit-models", "catalog"] + (["--no-check-files"] if a.registry else []))
         print(buf.getvalue().strip()[:600])
         if code != 0:
             print("build failed")

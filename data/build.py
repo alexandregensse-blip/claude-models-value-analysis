@@ -14,7 +14,7 @@ every measure (run-date interval, model through `names`, configuration through �
 campaign, value on the setup's scale, cost at the base price); 3. status per axis (decisions first, then the first
 failing step); 4. outputs: build/fit-quality.csv, build/fit-cost.csv, build/group-map.json, build/data.csv,
 build/status-report.json; 5. unless --no-lqm, data/build_lqm.py recovers lqm.load's per-row outcome."""
-import argparse, collections, csv, datetime as dt, glob, json, math, os, re, sys
+import argparse, collections, csv, datetime as dt, glob, hashlib, json, math, os, re, sys
 from decimal import Decimal, InvalidOperation
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -227,7 +227,44 @@ class Source:
         caps = [V.when(c["captured"]) for c in self.captures.values()]
         return min(caps) if caps else V.when(self.doc["harvested_at"])
 
-    def fact(self, ref):
+    def derive(self, x, seen):
+        """A computed fact (a derived cell, e.g. input − cache read): recomputed from its inputs by its rule; the stated
+        value must agree within one unit of the last digits. Its level is computed when every input is accepted."""
+        if x.ref in seen:
+            return f"computed fact {x.ref}: its inputs cycle"
+        if x.rule not in ("cell-difference", "cell-sum") or len(x.inputs or []) < 2:
+            return f"computed fact {x.ref}: without its rule and two inputs"
+        vals, sds, steps = [], [], []
+        for ref in x.inputs or []:
+            f, fault = self.fact(ref, seen | {x.ref})
+            if fault or f is None:
+                return f"computed fact {x.ref}: input {ref}: {fault or 'missing'}"
+            if f.level not in ACCEPTED:
+                x["level"] = f.level
+                return None
+            p = parse_number(f.value)
+            if p is None:
+                return f"computed fact {x.ref}: input {ref} {f.value!r} is not a number"
+            vals.append(p[0])
+            steps.append(p[1])
+            sd = precision_sd(f, p[1])
+            sds.append(sd or 0.0)
+        got = vals[0] - sum(vals[1:]) if x.rule == "cell-difference" else sum(vals)
+        stated = parse_number(x.value)
+        if stated is None:
+            return f"computed fact {x.ref}: {x.value!r} is not a number"
+        # agreement within the roundings: half a unit of each rounded number (a plain integer is an exact count)
+        exact = lambda t: re.fullmatch(r"[0-9]+", (t or "").strip().rstrip("%")) is not None  # noqa: E731
+        texts = [self.fact(r, seen | {x.ref})[0].value for r in x.inputs]
+        tol = sum(float(st) / 2 for st, t in zip(steps, texts) if not exact(t)) + \
+            (0.0 if exact(x.value) else float(stated[1]) / 2)
+        if abs(float(got - stated[0])) > tol + 1e-12:
+            return f"computed fact {x.ref}: stated {x.value}, its inputs give {num_text(got)} ({x.rule})"
+        x["precision"] = {"model": "printed", "sd": math.sqrt(sum(v * v for v in sds))}
+        x["derived"] = dict(rule=x.rule, inputs=list(x.inputs), value=num_text(got))
+        return None
+
+    def fact(self, ref, _seen=frozenset()):
         """(Fact, fault or None)."""
         if not ref.startswith("T"):
             f = self.facts.get(ref)
@@ -236,6 +273,8 @@ class Source:
             x = Fact(f)
             x["ref"], x["says"] = ref, [f["says"]]
             fault = "; ".join(self.fact_faults.get(ref, [])) or None
+            if f["level"] == "computed" and not fault:
+                fault = self.derive(x, _seen)
             return x, fault
         t, row, col = V.split_cell(ref)
         tb = self.tables.get(t)
@@ -262,7 +301,7 @@ class Source:
         says = V.column_says(spec)
         x = Fact(ref=ref, says=says, value=cell, about=row, level=tb.get("level", "written"), form="data-file",
                  where=f"{tb['where']} / row {row} / column {col}", file=tb["file"], table=t, column=col,
-                 precision=tb.get("precision"))
+                 precision=(spec.get("precision") if isinstance(spec, dict) else None) or tb.get("precision"))
         if isinstance(spec, dict):
             for k in ("term", "scale", "namespace"):
                 if k in spec:
@@ -299,6 +338,7 @@ class Ctx:
             x = V.load_json(p, rep)
             if x is not None and schemas.validate(x, f"{k}.schema.json", V.rel(p), rep):
                 reg[k] = x
+        self.supplied = self.supply_legacy(reg, a.findings)
         if all(k in reg for k in V.REQUIRED_REGISTRIES):
             V.check_registries(reg, rep, schemas, self.vocab, paths, a.check_files)
         fatal += rep.errors[n0:]
@@ -308,6 +348,7 @@ class Ctx:
         self.setups = (reg.get("benchmarks") or {}).get("setups", {})
         self.publishers = (reg.get("publishers") or {}).get("publishers", {})
         self.prices = reg.get("prices") or {"as_of": None, "prices": []}
+        self.price_tables = (reg.get("price-tables") or {}).get("tables", {})
         self.rules = {r["id"]: r for r in (reg.get("rules") or {}).get("rules", [])}
         cr = a.class_ratios or os.path.join(a.registry, "class-ratios.json")
         self.class_ratios = read_class_ratios(cr) if os.path.isfile(cr) else {"ratios": []}
@@ -382,6 +423,28 @@ class Ctx:
         self.fit_set = set(self.fit_models)
         meth = self.vocab["$defs"]["cost_method"]
         self.method_patterns = [(m, re.compile(meth["x-terms"][m]["legacy_flags"], re.I)) for m in meth["x-order"]]
+
+    @staticmethod
+    def supply_legacy(reg, findings):
+        """Legacy findings (src-legacy-*) need the placeholder setup `legacy` and the publisher `legacy`: the build
+        supplies them when the registry lacks them (data/legacy.py's constants), so a legacy build runs against the
+        real registry. → what was supplied."""
+        if not glob.glob(os.path.join(findings, "sources", "src-legacy-*.json")):
+            return []
+        import legacy as LG
+        out = []
+        bench, pubs = reg.get("benchmarks"), reg.get("publishers")
+        if bench is not None:
+            if "legacy" not in bench.setdefault("setups", {}):
+                bench["setups"].update(LG.LEGACY_SETUP)
+                out.append("benchmarks.setups.legacy")
+            if "legacy" not in bench.setdefault("families", {}):
+                bench["families"]["legacy"] = {"label": "legacy rows"}
+                out.append("benchmarks.families.legacy")
+        if pubs is not None and "legacy" not in pubs.setdefault("publishers", {}):
+            pubs["publishers"].update(LG.LEGACY_PUBLISHER)
+            out.append("publishers.legacy")
+        return out
 
     def read_fit_models(self):
         p = self.args.fit_models
@@ -503,14 +566,31 @@ def run_interval(M, key):
         return cache[key]
     ctx = M.ctx
     days, starts, ends, bad = [], [], [], []
+    conv = []
     for f in M.slot("run_date"):
         if f.level not in ACCEPTED:
+            continue
+        if f.says[0] == "run-date-convention":
+            if f.level == "written" and f.pattern:       # a documented convention only
+                conv.append(f)
             continue
         b = find_date(f.value)
         if b is None:
             bad.append(f.ref)
             continue
         {"run-date": days, "run-start": starts, "run-end": ends}[f.says[0]].append(b)
+    if conv:                                             # ids encoding the run date (documented convention)
+        ids = [V.split_cell(M.m["facts"]["value"])[1]] if (M.m["facts"].get("value") or "").startswith("T") else []
+        ids += [f.value for f in M.slot("aggregation", "run-id") if f.level in ACCEPTED]
+        for f in conv:
+            for i in ids:
+                mm = re.search(f.pattern, i or "")
+                d = mm and re.fullmatch(r"(\d{4})(\d{2})(\d{2})", mm.groupdict().get("date") or "")
+                b = _ymd(int(d.group(1)), int(d.group(2)), int(d.group(3))) if d else None
+                if b:
+                    days.append(b)
+                    M.rule("run-date-from-id-convention")
+                    break
     hi_default, hi_basis = default_upper(M)
     released = ctx.released(key) if key else None
     lo_c = [b[0] for b in starts] + ([min(b[0] for b in days)] if days else [])
@@ -574,9 +654,11 @@ def display_matches(ctx, value):
 def resolve_model(M):
     ctx = M.ctx
     keys_by_fact, ne, selects, modes = [], [], [], []
+    res = []                                             # per fact: what it resolved to, and why (status report)
     for f in M.slot("model"):
         if f.level not in ACCEPTED:
             ne.append(f.level)
+            res.append(dict(fact=f.ref, value=f.value, keys=[], outcome=f"not accepted ({f.level})"))
             continue
         if f.says == ["mode"]:
             modes.append(f)
@@ -611,18 +693,33 @@ def resolve_model(M):
             if k == keys[0] and n.get("selects"):
                 selects.append((f.ref, n["selects"]))
     got = {k for _, k, _ in keys_by_fact if k}
-    out = dict(value=None, level=None, facts=[r for r, _, _ in keys_by_fact], detail="")
+    vals = {r: v for r, v in ((f.ref, f.value) for f in M.slot("model"))}
+    out = dict(value=None, level=None, facts=[r for r, _, _ in keys_by_fact], detail="", resolution=res,
+               decided_by=None)
+    first = next((r for r, k, _ in keys_by_fact if k), None)
+    for r, k, d in keys_by_fact:
+        res.append(dict(fact=r, value=vals.get(r), keys=[k] if k else [],
+                        outcome=("unresolved: " + (d or "no key")) if not k else
+                        ("decided" if r == first else "agrees" if k == dict((a, b) for a, b, _ in keys_by_fact)[first]
+                         else f"contradicts: gives {k}") + (f" ({d})" if k and d else "")))
     if len(got) > 1:
-        out.update(level="not-established:contradictory", detail=f"model facts give {sorted(got)}")
+        mode_of = {md["key"]: k for k in got for md in ctx.models[k].get("modes", [])}
+        rel = [f"{k} is a mode of {mode_of[k]}" for k in sorted(got) if mode_of.get(k) in got]
+        out.update(level="not-established:contradictory",
+                   detail=f"model facts give {sorted(got)}" + (f" ({'; '.join(rel)})" if rel else ""))
     elif not got:
         lv = ne[0] if ne and not keys_by_fact else "not-established:absent"
         out.update(level=lv, detail="; ".join(d for _, k, d in keys_by_fact if not k and d) or "no model fact")
     else:
         key = got.pop()
         rules = {r for _, k, r in keys_by_fact if k and r}
-        out.update(value=key, level="computed" if rules else "written")
+        out.update(value=key, level="computed" if rules else "written", decided_by=first)
+        unresolved = [x["fact"] for x in res if x["outcome"].startswith("unresolved")]
+        if unresolved:
+            out["detail"] = f"decided by {first}; {', '.join(unresolved)} resolved to no key (reported, not refused)"
         for r in rules:
             M.rule(r)
+        selected = set()
         for f in modes:                                  # a mode selects its line's key
             iv = run_interval(M, key)
             hit = [md for md in ctx.models[key].get("modes", []) if covers(md, iv) and
@@ -633,13 +730,20 @@ def resolve_model(M):
                 chain = [r for ch, _ in chains(M, key) for r in ch]
             if not hit:
                 out.update(value=None, level="not-established:absent", detail=f"mode {f.value!r} not registered")
+                break
             elif any(ctx.routes.get(r, {}).get("class") == "router" for r in chain):
                 M.rule("pro-via-router-out")
                 out.update(value=None, level="not-established:absent",
                            detail=f"mode {f.value!r} through a router that cannot separate it")
+                break
             else:
                 M.rule("mode-to-line")
-                out.update(value=hit[0]["key"], level="computed")
+                selected.add(hit[0]["key"])
+                res.append(dict(fact=f.ref, value=f.value, keys=[hit[0]["key"]], outcome=f"mode: {key} → {hit[0]['key']}"))
+                out.update(value=hit[0]["key"], level="computed", decided_by=f.ref)
+        if len(selected) > 1:                            # two mode facts select two keys: a mode contradicted
+            out.update(value=None, level="not-established:contradictory",
+                       detail=f"mode facts select {sorted(selected)}")
     M.fields["model"] = out
     M.selects = selects
     return out["value"]
@@ -1036,6 +1140,8 @@ def budgets_merge(measures):
 def precision_sd(f, step, chart=None):
     p = f.precision or {}
     m = p.get("model")
+    if m == "printed" and p.get("sd") is not None:        # a computed fact: its inputs' readings propagated
+        return float(p["sd"])
     if m == "exact":
         return 0.0
     if m == "chart-pixel":
@@ -1200,9 +1306,47 @@ def cost_field(M):
         elif s in ("tokens-reasoning", "tokens-total", "requests", "cached-share", "tokens-in-per-request"):
             tok[s] = p
     out["tokens"] = tok
-    out["reasoning_included"] = any(x.level in ACCEPTED for x in M.slot("usage", "reasoning-included-in-out"))
+    ri = {x.term for x in M.slot("usage", "reasoning-included-in-out") if x.level in ACCEPTED and x.term in ("true", "false")}
+    out["reasoning_included"] = True if ri == {"true"} else False if ri == {"false"} else None   # None: not stated
     M.fields["cost"] = out
     return out
+
+
+def reproduce_cost(M, key):
+    """A stated cost method with a pinned price table (a price-table fact whose term is a price-tables.json id):
+    reproduced from the run's tokens; off by more than its rounding → the cost is contradictory (out); no card or no
+    tokens → accepted as written (coordinator, 23 Oct)."""
+    from convert import reproduce as RP
+    C = M.fields["cost"]
+    pins = sorted({x.term for x in M.slot("spend", "price-table") if x.level in ACCEPTED and x.term})
+    if not pins or C.get("number") is None or C.get("level") not in ACCEPTED:
+        return
+    if C.get("method") not in ("tokens×list", "library-table", "publisher-table"):
+        C["reproduction"] = "a pinned table but no stated token-based method: not reproduced"
+        return
+    table = M.ctx.price_tables.get(pins[0])
+    if table is None:
+        C["reproduction"] = f"price table {pins[0]} not registered: accepted as written"
+        return
+    cand = [c for c, _ in chains(M, key)]
+    route = next((r for r in cand[0] if r != "maker-api"), None) if len(cand) == 1 else None
+    card = RP.find_card(table, key, route)
+    if card is None or card.get("currency") != C.get("currency"):
+        C["reproduction"] = f"no card for {key} in {pins[0]}: accepted as written"
+        return
+    tok = {k: v[0] for k, v in (C.get("tokens") or {}).items() if k in RP.CLASSES or k == "tokens-reasoning"}
+    computed, why = RP.card_cost(tok, card["classes"], table.get("input_includes_cache_read", False),
+                                 table.get("reasoning_in_output", True), C.get("reasoning_included"))
+    if computed is None:
+        C["reproduction"] = f"not reproducible ({why}): accepted as written"
+        return
+    rel = max([count_rel_rounding(v) for k, v in (C.get("tokens") or {}).items() if k in RP.CLASSES] + [0.0])
+    v, gap = RP.verdict(float(C["number"]), float(C["step"]), computed, rel)
+    M.rule("cost-reproduction")
+    C["reproduction"] = f"{v}: {pins[0]} gives {computed:.6g} for {num_text(C['number'])} ({gap:.2%} apart)"
+    if v == "off":
+        C["level"] = "not-established:contradictory"
+        C["detail"] = f"stated method reproduced and off by more than its rounding: {C['reproduction']}"
 
 
 def ctx_vocab_terms(ctx, name):
@@ -1347,6 +1491,27 @@ def reprice(M, C, key):
         pd_lo = pd_hi
     vecs, covered = prices_over(ctx, key, pd_lo, pd_hi, route, cur, cfg) if cur else ([], False)
     C["price_vectors"], C["price_covered"] = vecs, covered
+    tiers = sorted({x.term for x in M.slot("spend", "price-tier") if x.level in ACCEPTED and x.term})
+    if tiers:                                            # a Flex / batch cost → standard by its proven uniform factor
+        tier_entries = [p for p in ctx.prices["prices"] if p["model"] == key and p["route"] == route
+                        and p["kind"] == tiers[0] and p["currency"] == cur and overlaps(p, pd_lo, pd_hi)
+                        and for_config(p, cfg)]
+        stds = [p for p in std_entries(ctx, key, route, cur, cfg) if overlaps(p, pd_lo, pd_hi)]
+        factors = []
+        for tp in tier_entries:
+            if tp.get("factor"):
+                factors.append(float(tp["factor"]))
+                continue
+            for sp in stds:
+                if overlaps(sp, V.when(tp["from"]), V.when(tp["to"], True)):
+                    factors.append(uniform_ratio(price_vector(tp), price_vector(sp)))
+        if len(tiers) > 1 or not factors or None in factors or max(factors) - min(factors) > 1e-9 * max(factors):
+            C["tier_unproven"] = (f"{'/'.join(tiers)} tier: no proven uniform factor to the standard price over the "
+                                  f"price date")
+            return
+        C["tier"] = dict(kind=tiers[0], factor=factors[0])
+        C["std_cost"] = float(C["number"]) / factors[0]
+        M.rule("cost-tier-factor")
     if bp is None:
         C["reprice_detail"] = f"no base price for {key} in {cur or 'an unstated currency'}"
         return
@@ -1354,7 +1519,8 @@ def reprice(M, C, key):
         M.flags.append("base-last-list-price")
         C["base_price"] = f"last list price ({bp['from']} → {bp['to']}): no maker-API price in force on as_of"
     base = price_vector(bp)
-    cost, prec = float(C["number"]), C.get("prec")
+    k_tier = (C.get("tier") or {}).get("factor", 1.0)
+    cost, prec = C.get("std_cost", float(C["number"])), (C.get("prec") / k_tier if C.get("prec") is not None else None)
     if not covered or not vecs:
         C["reprice_detail"] = "prices over the price date not registered"
         return class_ratio(M, C, key, pd_hi)
@@ -1378,7 +1544,8 @@ def reprice(M, C, key):
     usage_unit_ok = not C.get("usage_unit") or not C.get("unit") or C["usage_unit"] == C["unit"]
     if len(vecs) == 1 and classes and usage_unit_ok:
         old = vecs[0]
-        variants = [False] if C.get("reasoning_included") or "tokens-reasoning" not in tok else [False, True]
+        ri = C.get("reasoning_included")                 # True: inside output; False: added to it; None: both tried
+        variants = [False] if ri is True or "tokens-reasoning" not in tok else [True] if ri is False else [False, True]
         for add_reasoning in variants:
             t = {k: float(v[0]) for k, v in classes.items()}
             if add_reasoning:
@@ -1416,7 +1583,7 @@ def class_ratio(M, C, key, pd_hi):
         if not cls or cls not in e.get("classes", {}):
             continue
         k, sd = e["classes"][cls]["factor"], e["classes"][cls]["sd"]
-        cost, prec = float(C["number"]), C.get("prec") or 0.0
+        cost, prec = C.get("std_cost", float(C["number"])), C.get("prec") or 0.0
         M.rule("cost-class-ratio")
         C["base"] = dict(value=cost * k, prec=math.hypot(prec * k, cost * k * sd), rule="cost-class-ratio",
                          detail=f"class {cls}: factor {k}, spread {sd}")
@@ -1592,6 +1759,7 @@ class LegacyMeasure:
         m_ = re.search(r"\d+", (f.where if f else "") or "")
         self.order = int(m_.group()) if m_ else 0
         self.publisher = self.row.get("source", "")
+        self.row_sha256 = hashlib.sha256(self.line.encode("utf-8")).hexdigest()
         self.status, self.detail = {}, {}
         fit = ctx.fit_set
         for axis, field in (("quality", "score"), ("cost", "cost_usd")):
@@ -1652,6 +1820,14 @@ def build(ctx):
     legacy = sorted((LegacyMeasure(ctx, S, m, mf) for S, m, mf in ctx.measures if m["facts"].get("legacy")),
                     key=lambda L: (L.order, L.ref))
     measures = [Measure(ctx, S, m, mf) for S, m, mf in ctx.measures if not m["facts"].get("legacy")]
+    # a converted measure's legacy_ref replaces its legacy row (the source migrated, its legacy file kept or not)
+    claimed = {(M.m["legacy_ref"]["line"], M.m["legacy_ref"]["row_sha256"]): M.ref for M in measures
+               if M.m.get("legacy_ref")}
+    for L in legacy:
+        by = claimed.get((L.order, L.row_sha256))
+        if by:
+            for ax in ("quality", "cost"):
+                L.status[ax], L.detail[ax] = "legacy:out:replaced", f"replaced by {by} (its legacy_ref)"
     for M in measures:
         key = resolve_model(M)
         if key:
@@ -1661,6 +1837,8 @@ def build(ctx):
             M.fields["configuration"] = dict(value=None, level="not-established:absent", detail="model not established")
         score_field(M)
         cost_field(M)
+        if key and M.fields.get("cost"):
+            reproduce_cost(M, key)
         campaign_of(M)
     budgets_merge(measures)
     # campaigns inherited along snapshot_of
@@ -1979,6 +2157,9 @@ def cost(ctx, measures):
         if C.get("currency") is None:
             C["currency_note"] = "currency not stated"
         reprice(M, C, key)
+        if C.get("tier_unproven"):
+            M.status["cost"], M.detail["cost"] = "out:cost-not-comparable", C["tier_unproven"]
+            continue
         method = C.get("method")
         if not method:
             if ctx.settings["cost_method_unstated"] == "out":
@@ -2110,8 +2291,11 @@ def row_of(ctx, M, names, cnames, axis_cost=False):
         g = cnames.get((gkey(M), M.cost_subset), g)
     cost_val, cost_prec = "", ""
     if C.get("number") is not None and C.get("level") in ACCEPTED:
-        if axis_cost and C.get("base") and C["base"]["rule"] != "cost-publisher-figure":
+        if axis_cost and C.get("base") and (C["base"]["rule"] != "cost-publisher-figure" or C.get("std_cost")):
             cost_val, cost_prec = fmt_like(C["base"]["value"], num_text(C["number"])), fmt_prec(C["base"]["prec"])
+        elif axis_cost and C.get("std_cost") is not None:     # a tier cost, unrepriced: at standard all the same
+            cost_val = fmt_like(C["std_cost"], num_text(C["number"]))
+            cost_prec = fmt_prec(C["prec"] / C["tier"]["factor"] if C.get("prec") is not None else None)
         else:                                            # the cost as the source wrote it
             cost_val, cost_prec = num_text(C["number"]), fmt_prec(C.get("prec"))
     score = num_text(sf["number"]) if sf.get("number") is not None and sf.get("level") in ACCEPTED else ""
@@ -2206,7 +2390,7 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
     write_csv(os.path.join(out_dir, "data.csv"), data, DATA_COLUMNS)
     with open(os.path.join(out_dir, "group-map.json"), "w", encoding="utf-8") as f:
         json.dump(dict(sorted(gm.items())), f, indent=1, ensure_ascii=False)
-    rep = dict(build=dict(as_of=ctx.prices.get("as_of"), settings=ctx.settings, registry=V.rel(ctx.args.registry),
+    rep = dict(build=dict(as_of=ctx.prices.get("as_of"), settings=ctx.settings, supplied=ctx.supplied, registry=V.rel(ctx.args.registry),
                           findings=V.rel(ctx.args.findings), decisions=V.rel(ctx.args.decisions),
                           fit_models=ctx.fit_models, benchmarks=os.path.abspath(ctx.paths["benchmarks"]),
                           lqm="pending" if not ctx.args.no_lqm else "skipped"),
@@ -2215,7 +2399,7 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
     for L in legacy:
         r = L.row
         rep["measures"][L.ref] = dict(
-            kind="legacy", source=L.S.id, setup=L.setup_id, line=L.order, status=dict(L.status),
+            kind="legacy", source=L.S.id, setup=L.setup_id, line=L.order, row_sha256=L.row_sha256, status=dict(L.status),
             reason_detail=dict(L.detail), tree_would_say=tree_would_say(ctx, r), fit_rows=fit_rows.get(L.ref, {}),
             row=dict(source=r.get("source"), group=r.get("group"), base_group=r.get("group"), model=r.get("model"),
                      effort=r.get("effort"), score=r.get("score"), cost_usd=r.get("cost_usd")))
@@ -2226,6 +2410,8 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
         rc = row_of(ctx, M, names, cnames, axis_cost=True) if (M.status["cost"] or "").startswith("in") else rq
         e["row"] = dict(source=rq["source"], group=rq["group"], base_group=base_group(ctx, M), model=rq["model"],
                         effort=rq["effort"], score=rq["score"], cost_usd=rc["cost_usd"])
+        if getattr(M, "m", None) is not None and M.m.get("legacy_ref") and not isinstance(M, Residual):
+            e["legacy_ref"] = M.m["legacy_ref"]
         rep["measures"][M.ref] = e
     rep["counts"] = counts(rep["measures"])
     if previous:
@@ -2260,7 +2446,55 @@ def diff(prev_path, rep):
         if d:
             changed[k] = d
     return dict(previous=prev_path, added=sorted(set(nm) - set(pm)), removed=sorted(set(pm) - set(nm)),
-                changed=changed, by_source=diff_by_source(pm, nm))
+                changed=changed, by_source=diff_by_source(pm, nm), by_legacy_ref=diff_by_legacy_ref(pm, nm))
+
+
+def diff_by_legacy_ref(pm, nm):
+    """The per-row diff of converted sources (DATA-PIPELINE §8.5): each new measure carrying a legacy_ref is paired
+    with the legacy row of the previous report it replaces. Per raw-data `source`: the pairs whose status, value,
+    group, model or effort changed (with the new reasons), the unchanged count, the legacy rows of that source no
+    new measure claims (unmatched_old) and the new measures of the same findings sources that claim no row
+    (unmatched_new)."""
+    old = {(e.get("line"), e.get("row_sha256")): (ref, e) for ref, e in pm.items() if e.get("kind") == "legacy"}
+    claims = [(ref, e) for ref, e in nm.items() if e.get("legacy_ref")]
+    if not claims:
+        return {}
+    res = collections.defaultdict(lambda: dict(changed=[], unchanged=0, unmatched_old=[], unmatched_new=[]))
+    used, src_of_findings = set(), collections.defaultdict(collections.Counter)
+    for ref, e in claims:
+        k = (e["legacy_ref"]["line"], e["legacy_ref"]["row_sha256"])
+        if k not in old:
+            res["(no legacy row)"]["unmatched_new"].append(dict(measure=ref, legacy_ref=e["legacy_ref"],
+                                                                 why="its legacy_ref is not a row of the previous build"))
+            continue
+        oref, oe = old[k]
+        used.add(k)
+        raw_src = (oe.get("row") or {}).get("source")
+        src_of_findings[e["source"]][raw_src] += 1
+        d = {}
+        for ax in ("quality", "cost"):
+            if oe["status"].get(ax) != e["status"].get(ax):
+                d[f"status_{ax}"] = [oe["status"].get(ax), e["status"].get(ax)]
+        for fld in ("group", "model", "effort", "score", "cost_usd"):
+            a_, b_ = (oe.get("row") or {}).get(fld), (e.get("row") or {}).get(fld)
+            if a_ != b_:
+                d[fld] = [a_, b_]
+        if d:
+            res[raw_src]["changed"].append(dict(line=k[0], legacy=oref, measure=ref, changes=d,
+                                                reasons=e.get("reason_detail")))
+        else:
+            res[raw_src]["unchanged"] += 1
+    touched = {s for c in src_of_findings.values() for s in c}
+    for k, (oref, oe) in old.items():
+        s = (oe.get("row") or {}).get("source")
+        if s in touched and k not in used:
+            res[s]["unmatched_old"].append(dict(line=k[0], legacy=oref, row=oe.get("row"), status=oe["status"]))
+    for ref, e in nm.items():
+        if e.get("kind") == "legacy" or e.get("legacy_ref") or e.get("source") not in src_of_findings:
+            continue
+        s = src_of_findings[e["source"]].most_common(1)[0][0]
+        res[s]["unmatched_new"].append(dict(measure=ref, row=e.get("row"), status=e["status"]))
+    return dict(res)
 
 
 def diff_by_source(pm, nm):

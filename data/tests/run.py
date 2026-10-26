@@ -1102,7 +1102,9 @@ def ext_between_tools_recorded_not_fitted():
 
 
 def main():
-    import review_tests
+    import review_tests, pilot_tests
+    for t in pilot_tests.TESTS:
+        TESTS.append(t)
     for t in review_tests.TESTS:
         t.__name__ = "review_" + t.__name__
         TESTS.append(t)

@@ -42,6 +42,8 @@ class Sc:
         self.decisions = []
         self.sources, self.msets = {}, {}
         self.class_ratios = None
+        self.price_tables = None
+        self.before_build = []              # fn(findings dir) run after writing (legacy findings dropped in)
         self.cells = {}                     # source id → (file name, csv text)
         self.after_hash = []                # edits applied after the decisions' hashes (stale test)
 
@@ -102,19 +104,22 @@ class Sc:
           unit="per-task", basis=None, method=None, tokens=None, run_date=(), route=(), anomalies=(), version=None,
           value_level="written", entry=None, value_seen_in=(), price_table=None, model_says="model-api-id",
           namespace="maker-api", early_access=False, same_runs_as=None, restated_from=None, evaluated_by=None,
-          mode=None, cost_level="written", value_form="data-file", spend_shared=None, runs=None):
+          mode=None, cost_level="written", value_form="data-file", spend_shared=None, runs=None, more=None,
+          measure_keys=None, value_kw=None, model_facts=None):
         n = len(self.msets[sid]) + 1
         entry = entry or f"{model}-{n}"
         F = lambda says, value, about=entry, **kw: self.fact(sid, says, value, about=about, **kw)  # noqa: E731
         kwm = {"namespace": namespace} if model_says == "model-api-id" else {}
         model_f = [F(model_says, model, **kwm)]
+        for says, v, kw in (model_facts or []):          # more model facts (contradictions, modes)
+            model_f.append(F(says, v, **kw))
         if mode:
             model_f.append(F("mode", mode))
         value = None
         metric = self.setups[setup]["metric"]
         if score is not None:
             extra = {} if value_form == "data-file" else {"form": value_form}
-            value = F("score", score, term=metric, scale=scale, level=value_level, **extra)
+            value = F("score", score, term=metric, scale=scale, level=value_level, **extra, **(value_kw or {}))
         eff = []
         for e in effort:
             says, v = e[0], e[1]
@@ -136,7 +141,8 @@ class Sc:
             if method:
                 spend.append(F("cost-method", method, about=None, term=method))
             if price_table:
-                spend.append(F("price-table", price_table, about=None))
+                pv, pt = price_table if isinstance(price_table, tuple) else (price_table, None)
+                spend.append(F("price-table", pv, about=None, **({"term": pt} if pt else {})))
         if score is None and spend:
             value = spend[0]
         usage = []
@@ -153,11 +159,19 @@ class Sc:
                  "route": rt, "value_seen_in": list(value_seen_in)}
         if rs:
             facts["runs"] = rs
+        for slot, items in (more or {}).items():        # further facts by slot: [(says, value, kw)]
+            refs = [F(says, v, about=kw.pop("about", entry if slot in ("usage", "spend", "anomalies") else None), **kw)
+                    for says, v, kw in [(a, b, dict(c)) for a, b, c in items]]
+            if isinstance(facts.get(slot), list):
+                facts[slot] = facts[slot] + refs
+            else:
+                facts[slot] = refs
         if early_access:
             facts["early_access"] = [F("early-access", "early access", about=None)]
         if evaluated_by:
             facts["evaluated_by"] = [F("evaluated-by", evaluated_by, about=None)]
-        self.msets[sid].append({"id": f"M{n}", "setup": setup, "facts": facts, "verified": None})
+        self.msets[sid].append(dict({"id": f"M{n}", "setup": setup, "facts": facts, "verified": None},
+                                    **(measure_keys or {})))
         return f"{sid}#M{n}"
 
     def decide(self, mref, axis, status, reason="test decision"):
@@ -179,6 +193,8 @@ class Sc:
         dump(os.path.join(reg, "prices.json"), self.prices)
         if self.class_ratios:
             dump(os.path.join(reg, "class-ratios.json"), self.class_ratios)
+        if self.price_tables:
+            dump(os.path.join(reg, "price-tables.json"), {"tables": self.price_tables})
         with open(os.path.join(fnd, "sources", "saved.txt"), "w") as f:
             f.write("placeholder\n")
         for doc in self.sources.values():
@@ -212,6 +228,8 @@ class Sc:
         root = tempfile.mkdtemp(prefix="buildtest-")
         try:
             reg, fnd, dec = self.write(root)
+            for fn in self.before_build:
+                fn(fnd)
             out = os.path.join(root, "build")
             argv = ["--registry", reg, "--findings", fnd, "--decisions", dec, "--out", out, *extra]
             if not check_files:

@@ -15,8 +15,12 @@ python3 data/build.py ... --fit-models catalog                      # the fit's 
 python3 data/build.py ... --no-lqm                                  # skip the lqm.load step
 python3 data/build_lqm.py build/                                    # the lqm.load step alone
 python3 data/legacy.py raw-data.csv OUT/findings --registry OUT/registry   # raw-data.csv → legacy findings
-python3 data/tests/run.py [name-filter]                             # the tests (75, about a second)
-python3 data/tests/acceptance.py [raw-data.csv]                     # the legacy acceptance test (about 20 s)
+python3 data/tests/run.py [name-filter]                             # the tests (91, about two seconds)
+python3 data/tests/acceptance.py [raw-data.csv] [--registry data/registry]   # the legacy acceptance test (≈ 20 s)
+python3 data/schema/validate.py [--verbose]                          # per-file summary; registry warnings apart
+python3 data/convert/precheck.py SOURCE_ID                           # names and route heads against the registry
+python3 data/convert/gaps.py build/status-report.json [--registry R --findings F]   # registry gaps per source
+python3 data/convert/reproduce.py --tables … --table … --csv …       # per-row cost reproduction (pinned table)
 ```
 
 The build runs in five steps:
@@ -79,6 +83,21 @@ On /work/.wt-px/raw-data.csv (42,296 rows, 769 sources) the result is **identica
 
 The repository's raw-data.csv is identical too.
 
+**Against the real registry.** When the findings hold legacy sources (`src-legacy-*`) and the registry lacks the
+placeholder setup `legacy`, its family or the publisher `legacy`, the build supplies them from data/legacy.py's
+constants and lists them in the report (`build.supplied`). A legacy-only build then runs against data/registry, and the
+acceptance test passes with `--registry data/registry` too (identical, 12 s).
+
+**legacy_ref.** A converted measure may carry `legacy_ref: {line, row_sha256[, csv_sha256]}`, the raw-data.csv row it
+replaces. That legacy row then becomes `legacy:out:replaced` (it is not written twice), whether its legacy file is kept
+or removed. With `--previous`, `diff.by_legacy_ref` pairs each such measure with the legacy row of the previous report.
+It lists, per raw-data `source`:
+- the pairs whose status, group, model, effort, score or cost changed, with the new reasons, and the unchanged count;
+- `unmatched_old`: the legacy rows of that source no measure claims;
+- `unmatched_new`: the measures of the same findings sources that claim no row.
+
+data/convert/mapping.py builds the mapping that gives each measure its `legacy_ref`.
+
 **Diff per source.** Once a source is converted, `--previous` adds `diff.by_source` to the report. For each fit-table
 `source`, it lists the rows whose status, value or group changed, plus the rows added and removed. Rows are matched by
 (base group, model, effort), whatever their measure ids, and each change comes with the new reasons.
@@ -110,6 +129,25 @@ The fit tables carry these confound flags:
 - the build's own flags, which `lqm` ignores: `cost-method-assumed-single`, `cost-unrepriced`,
   `cost-base-price:<rule>`, `base-last-list-price`, `cap`, `composite-residual-refused:scale`, `stale-decision:<id>`.
 
+## The coordinator's build rules (23 Oct)
+
+- **A stated cost method is reproduced.** This applies when a `price-table` fact's `term` names a table of
+  `price-tables.json` (a library's cards at a pinned version, or a board's own table) and the method is token-based:
+  - the build recomputes the cost from the run's tokens (data/convert/reproduce.py), with the table's
+    `input_includes_cache_read` and `reasoning_in_output`, unless the source states `reasoning-included-in-out`;
+  - off by more than its rounding (one unit of the cost's last digit plus the token counts' rounding) → the cost is
+    `not-established:contradictory` (`out:contradictory` on the cost axis);
+  - no card, a card in another currency, or no tokens → accepted as written;
+  - `fields.cost.reproduction` says which case applied.
+- **A run date from an id convention** counts only when the source documents the convention. The fact
+  `run-date-convention` is written, quoted, and carries a `pattern` with a named group `date` (YYYYMMDD). Cited in
+  `run_date`, it reads the measure's row key (the value cell's row) or its `run-id` facts, and gives a stated run date
+  (rule `run-date-from-id-convention`). An undocumented convention (assumed) gives nothing.
+- **A Flex or batch tier cost** (a `price-tier` fact, term flex / batch / …) is re-priced to standard by the tier's
+  proven uniform factor, then priced as any cost (rule `cost-tier-factor`). The factor comes from prices.json: the
+  tier entry's `factor`, or its classes as one uniform multiple of the standard's over the price date. No such entry,
+  a non-uniform tier, or two factors → `out:cost-not-comparable`. The fit table carries the standard-equivalent cost.
+
 ## Settings
 
 | Setting | Values | Effect |
@@ -118,7 +156,41 @@ The fit tables carry these confound flags:
 | `--fit-models` | a file, `catalog`, or omitted | The model list used by step 10 (≥ 2 couples), by the legacy admission, and passed to `lqm.load`. |
 | `class-ratios.json` (`--class-ratios`) | optional registry file | Feeds `cost-class-ratio`. Its shape is checked, but it has no schema yet: `{"ratios": [{"model", "change": <date>, "classes": {cls: {factor, sd}}, "setups": {setup: cls}, "measures": {ref: cls}}]}`. It applies to a cost whose price date ends before `change`. Without the file, the class-ratio step never fires. |
 
-`rules.json` is optional: the build records the rule ids it applies but reads nothing from the file.
+`rules.json` is optional: the build records the rule ids it applies but reads nothing from the file. So is
+`price-tables.json` (schema price-tables.schema.json; validate.py checks its cards' models and routes).
+
+## Pilot fixes (ObviousBench conversion, 23 Oct)
+
+- **`reasoning-included-in-out` is a boolean.** Its `term` is `true` or `false` (vocab `boolean`, required). `true`:
+  the reasoning is inside output. `false`: it is added to output. No fact: both readings are tried by
+  cost-delta-on-source. The HotKV example now says `term: true`.
+- **Precision per column.** A table column may carry its own `precision`, which overrides the table's (exact counts
+  and printed costs in one table).
+- **A derived cell is a computed fact.** It has `level: computed`, `rule` (`cell-difference`: inputs[0] − the
+  others; `cell-sum`) and `inputs` (facts or cells), plus the stated value. The build recomputes it and refuses it
+  (`out:no-proof`, on the axis using it) when the stated value differs beyond the roundings: half a unit of each
+  rounded number, and a plain integer is an exact count. Its precision is its inputs' readings combined.
+  validate.py checks the rule, the inputs, and that no other fact carries them.
+- **Model facts.** `fields.model.resolution` lists, per model fact, its value, the keys it gives and its outcome:
+  `decided`, `agrees`, `contradicts: gives K`, `unresolved: why`, `not accepted`, or `mode: K → K-pro`.
+  `decided_by` names the fact that gave the key.
+  - Two facts giving two keys → `not-established:contradictory`; the detail says when one key is a mode of the other.
+  - Two mode facts selecting two keys → `not-established:contradictory`.
+  - **(method)** A second fact that resolves to no key is reported, not refused (provider_model `…-pro`, unregistered).
+- **validate.py's output.** It prints one section per findings or decisions file, with its own errors and warnings,
+  then the registry's section: its errors in full, and its warnings counted by kind. `--verbose` lists them all.
+
+## Converter toolkit (`data/convert/`)
+
+| Module | What it does |
+|---|---|
+| `mapping.py` | raw-data.csv rows ↔ a source's rows. Strategies are tried in order (an entry tag, then tokens + effort, …). A key pairs rows only when it is unique on both sides; ambiguous keys are reported. Unmatched rows are listed on both sides, and `legacy_ref()` gives each measure its reference. |
+| `rules.py` | Value → fact-type rules for a column: `default` → no-effort-sent, `*_budget_<n>` → thinking-budget (term n), levels and `none` → the cell itself, `thinking` → thinking-on. Unknown values are reported, never cited. |
+| `precheck.py` | Before a build: every model fact or cell resolved with the build's name rule (resolved, no key, several keys), and the prefix heads that name no route. |
+| `gaps.py` | From a build's report, per source: heads, ids, configurations (not in the list, or none at the run date), defaults (none documented over the run) and prices (no registered or base price). |
+| `reproduce.py` | The reproduction core shared with the build, and a CLI giving each row of a source CSV its status against a pinned table: reproduced / off / no-card / no-tokens, with the computed cost and the gap. |
+
+## Settings
 
 ## Interpretations
 
@@ -313,6 +385,26 @@ earlier a1 to stay `in`. But the accepted regrade b2 does replace b1 (same runs)
 group, so a1 is `out:single-couple`. What the test is about still holds: the refused a2 replaces nothing. robust.py's
 34 cases end in a result or a clean error; none gives a traceback.
 
+## Schema changes made for the pilot fixes (23 Oct)
+
+- `vocab.json`:
+  - the vocabulary `boolean`;
+  - closed terms for `reasoning-included-in-out` (boolean) and `price-tier` (price kinds);
+  - fact types `run-date-convention` (slot `run_date`) and `price-tier` (slot `spend`);
+  - the level `computed`;
+  - rule ids `cell-difference`, `cell-sum`, `run-date-from-id-convention`, `cost-tier-factor` and
+    `cost-reproduction`.
+- `source.schema.json`:
+  - the fact fields `rule`, `inputs` and `pattern`;
+  - a table column's `precision`.
+- `measure.schema.json`: `legacy_ref`.
+- `price-tables.schema.json`: new.
+- `validate.py`:
+  - computed facts, run-date conventions, price tiers and pinned tables;
+  - `legacy_ref` claimed once;
+  - price-tables.json cards;
+  - the per-file summary.
+
 ## Schema changes made for the build (22 Oct)
 
 - `vocab.json`:
@@ -333,7 +425,8 @@ group, so a1 is `out:single-couple`. What the test is about still holds: the ref
 
 ## Tests
 
-`python3 data/tests/run.py` runs 75 fixtures: the build's 49 and the review's 26. Between them they cover:
+`python3 data/tests/run.py` runs 91 fixtures: the build's 49, the review's 26, and 16 for the pilot fixes
+(data/tests/pilot_tests.py). Between them they cover:
 - every reason code;
 - configuration steps 1–8;
 - the run-date, campaign and cost rules;
@@ -351,7 +444,10 @@ Separately, 45 faults were planted, each switching one step off in turn in build
 - one for argument checking;
 - five for the legacy path.
 
-Every one made a test fail. `data/tests/acceptance.py` is the legacy acceptance test. As a negative control, it
+Every one made a test fail. For the pilot fixes, 22 more faults were planted and 21 are caught. The other one
+(dropping the "documented" check on a run-date convention) cannot change an outcome: the level filter before it, and
+validate.py's quote rule, refuse an undocumented convention anyway. `data/tests/acceptance.py` is the legacy
+acceptance test. As a negative control, it
 reports a dropped row, two swapped rows and a changed digit.
 
 ## Not implemented yet

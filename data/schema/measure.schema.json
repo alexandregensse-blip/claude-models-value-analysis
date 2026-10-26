@@ -252,6 +252,30 @@
      "note": {
       "type": "string",
       "description": "Free note."
+     },
+     "legacy_ref": {
+      "type": "object",
+      "description": "Migration: the raw-data.csv row this converted measure replaces (the per-source diff is keyed by it).",
+      "properties": {
+       "line": {
+        "type": "integer",
+        "minimum": 1,
+        "description": "Line of the row in raw-data.csv."
+       },
+       "row_sha256": {
+        "$ref": "common.schema.json#/$defs/sha256",
+        "description": "SHA-256 of the row's line as written (without its newline)."
+       },
+       "csv_sha256": {
+        "$ref": "common.schema.json#/$defs/sha256",
+        "description": "SHA-256 of that raw-data.csv."
+       }
+      },
+      "required": [
+       "line",
+       "row_sha256"
+      ],
+      "unevaluatedProperties": false
      }
     },
     "required": [

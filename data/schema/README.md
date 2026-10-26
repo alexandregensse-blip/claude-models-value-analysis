@@ -113,6 +113,10 @@ The build is described in data/BUILD.md. It added these terms:
 - the legacy path (migration): fact type `legacy-row`, fact form `legacy`, measure slot `legacy`, the source's `legacy`
   block, and the reason codes `legacy:in` / `legacy:out:<why>`;
 - a decision on a missing measure is now a warning (reported, not applied).
+- after the ObviousBench pilot (23 Oct): `reasoning-included-in-out` takes a boolean term; a table column carries its
+  own precision; a computed fact (`level: computed`, `rule`, `inputs`) stands for a derived cell; `run-date-convention`
+  (with its `pattern`) and `price-tier` facts; `legacy_ref` on a converted measure; price-tables.json (pinned price
+  tables, price-tables.schema.json); validate.py prints a summary per file, registry warnings apart (data/BUILD.md).
 
 ## Added at the merge of the registry parts (23 Oct)
 

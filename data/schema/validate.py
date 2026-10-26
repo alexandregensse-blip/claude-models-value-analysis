@@ -18,7 +18,8 @@ import argparse, collections, csv, datetime as dt, glob, hashlib, html, json, os
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
 REGISTRY_FILES = {"models": "models.json", "routes": "routes.json", "benchmarks": "benchmarks.json",
-                  "publishers": "publishers.json", "prices": "prices.json", "rules": "rules.json", "flag-map": "flag-map.json"}
+                  "publishers": "publishers.json", "prices": "prices.json", "rules": "rules.json", "flag-map": "flag-map.json",
+                  "price-tables": "price-tables.json"}
 REQUIRED_REGISTRIES = ("models", "routes", "benchmarks", "publishers")
 OPEN_TO = ("configurations", "serves")          # interval lists where to = null (no end known) is allowed
 TEXT_EXT = (".txt", ".md", ".csv", ".json", ".yaml", ".yml", ".py", ".ts", ".js", ".mjs", ".toml", ".html", ".htm", ".xml", ".tsv")
@@ -35,14 +36,50 @@ class Report:
     def warn(self, where, msg):
         self.warnings.append(f"{where}: {msg}")
 
+    registry = None          # the registry folder (relative): its messages are summarised apart
+    verbose = False          # every registry warning, and every file checked
+
+    def file_of(self, where):
+        return where.split(" ", 1)[0].rstrip(":")
+
     def done(self):
-        for f in self.checked:
-            print(f"checked  {f}")
-        for w in self.warnings:
-            print(f"WARNING  {w}")
-        for e in self.errors:
-            print(f"ERROR    {e}")
-        print(f"\n{len(self.checked)} file(s), {len(self.errors)} error(s), {len(self.warnings)} warning(s)")
+        """A summary per file: each findings / decisions file with its own errors and warnings, then the registry's
+        (its errors in full, its warnings counted by kind unless --verbose)."""
+        per = collections.OrderedDict()
+        for kind, msgs in (("ERROR", self.errors), ("WARNING", self.warnings)):
+            for m in msgs:
+                per.setdefault(self.file_of(m), []).append((kind, m))
+        reg = self.registry or "\0"
+        is_reg = lambda f: f.startswith(reg) or f.endswith("vocab.json")  # noqa: E731
+        if self.verbose:
+            for f in self.checked:
+                print(f"checked  {f}")
+        own = [f for f in per if not is_reg(f)]
+        for f in own:
+            ms = per[f]
+            print(f"== {f}: {sum(k == 'ERROR' for k, _ in ms)} error(s), {sum(k == 'WARNING' for k, _ in ms)} warning(s)")
+            for k, m in sorted(ms, key=lambda x: x[0] != "ERROR"):
+                print(f"{k:8} {m}")
+        rf = [f for f in per if is_reg(f)]
+        re_ = [m for f in rf for k, m in per[f] if k == "ERROR"]
+        rw = [m for f in rf for k, m in per[f] if k == "WARNING"]
+        if rf:
+            print(f"== registry ({reg}): {len(re_)} error(s), {len(rw)} warning(s)")
+            for m in re_:
+                print(f"ERROR    {m}")
+            if self.verbose:
+                for m in rw:
+                    print(f"WARNING  {m}")
+            else:
+                kinds = collections.Counter(re.sub(r"'[^']*'|\b\d[\d.:-]*\b", "…", re.sub(r"\[[^\]]*\]", "[…]",
+                                                   m.split(": ", 1)[-1]))[:90] for m in rw)
+                for k, n in kinds.most_common(12):
+                    print(f"WARNING  ×{n:<5} {k}")
+                if len(kinds) > 12:
+                    print(f"WARNING  … {len(kinds) - 12} more kinds (--verbose lists every warning)")
+        print(f"\n{len(self.checked)} file(s), {len(self.errors)} error(s), {len(self.warnings)} warning(s)"
+              f" — findings and decisions: {sum(len(per[f]) for f in own)} message(s) in {len(own)} file(s); "
+              f"registry: {len(re_)} error(s), {len(rw)} warning(s)")
         return 1 if self.errors else 0
 
 
@@ -625,6 +662,14 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
         for key in sorted({p["model"] for p in prices["prices"]} - base - {k for k, _ in chosen}):
             rep.warn(lab["prices"], f"{key}: no standard maker-API price in force on as_of {prices['as_of']}")
 
+    # price-tables.json
+    for tid, t in ((reg.get("price-tables") or {}).get("tables") or {}).items():
+        for i, c in enumerate(t["cards"]):
+            if c["model"] not in models:
+                rep.err(f"{lab['price-tables']} {tid}.cards[{i}]", f"model '{c['model']}' not registered")
+            if c.get("route") and c["route"] not in routes:
+                rep.err(f"{lab['price-tables']} {tid}.cards[{i}]", f"route '{c['route']}' not registered")
+
     # rules.json
     rules = reg.get("rules")
     if rules:
@@ -656,6 +701,7 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
     V = vocab["$defs"]
     publishers = (reg.get("publishers") or {}).get("publishers", {})
     routes = (reg.get("routes") or {}).get("routes", {})
+    ptables = (reg.get("price-tables") or {}).get("tables", {})
     if os.path.splitext(os.path.basename(path))[0] != src["id"]:
         rep.err(L, f"file name must be the source id '{src['id']}'")
     if src["publisher"] not in publishers:
@@ -756,6 +802,36 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                 rec = next(csv.reader([f["value"]]), [])
                 if len(rec) != len(leg["columns"]):
                     rep.err(F, f"a legacy row has {len(rec)} fields, the CSV {len(leg['columns'])}")
+        if (f["level"] == "computed") != bool(f.get("rule") or f.get("inputs")):
+            rep.err(F, "a computed fact has its rule and inputs, and only a computed fact has them")
+        elif f["level"] == "computed":
+            if not f.get("rule") or len(f.get("inputs") or []) < 2:
+                rep.err(F, "a computed fact needs its rule and at least two inputs")
+            for ref in f.get("inputs") or []:
+                if ref == f["id"]:
+                    rep.err(F, "a computed fact cannot be its own input")
+                elif ref.startswith("T"):
+                    t, _, col = split_cell(ref)
+                    if t not in tables or col not in tables[t]["columns"]:
+                        rep.err(F, f"input {ref}: table or column not declared")
+                elif ref not in {x["id"] for x in src.get("facts", [])}:
+                    rep.err(F, f"input {ref}: no such fact")
+        if f["says"] == "run-date-convention":
+            pat = f.get("pattern")
+            try:
+                ok = pat and "date" in re.compile(pat).groupindex
+            except re.error:
+                ok = False
+            if not ok:
+                rep.err(F, "a run-date-convention fact needs a pattern (regex) with a named group 'date' (YYYYMMDD)")
+            if f["level"] == "written" and not forms.get(f["form"], {}).get("quote"):
+                rep.err(F, "a run-date convention counts only as the source documents it (prose, code or label, quoted)")
+        elif f.get("pattern"):
+            rep.err(F, "pattern is for run-date-convention facts")
+        if f["says"] == "price-tier" and f.get("term") == "standard":
+            rep.err(F, "a price-tier fact names a tier other than standard")
+        if f["says"] == "price-table" and f.get("term") is not None and f["term"] not in ptables:
+            rep.err(F, f"price table '{f['term']}' is not registered in price-tables.json")
         if f["says"] == "run-score" and not f.get("run"):
             rep.err(F, "a run-score fact names its run (run)")
         if f.get("run") and f["says"] not in ("run-score", "failure", "partial"):
@@ -942,6 +1018,10 @@ def check_measures(ms, path, sources, reg, rep, vocab, check_files):
     for ref, ids in values.items():
         if len(ids) > 1:
             rep.err(L, f"value {ref} is cited by several measures: {', '.join(ids)}")
+    for k, n in collections.Counter((m["legacy_ref"]["line"], m["legacy_ref"]["row_sha256"]) for m in ms["measures"]
+                                    if m.get("legacy_ref")).items():
+        if n > 1:
+            rep.err(L, f"legacy_ref line {k[0]} is claimed by {n} measures")
     for m in ms["measures"]:
         M = f"{L} {m['id']}"
         if m["setup"] not in setups:
@@ -1137,9 +1217,11 @@ def main():
     ap.add_argument("--check-files", action="store_true", help="re-hash reachable saved copies, look for quotes and CSV cells in them")
     ap.add_argument("--hash", nargs="+", metavar="MEASURE_REF", help="print the facts_hash of these measures (one decision)")
     ap.add_argument("--legacy-coverage", metavar="RAW_DATA_CSV", help="report how vocab's legacy patterns (and --flag-map) map today's flags")
+    ap.add_argument("--verbose", action="store_true", help="list every file checked and every registry warning")
     ap.add_argument("--flag-map", help="flag-map.json for --legacy-coverage (default: <registry>/flag-map.json when present)")
     a = ap.parse_args()
     rep, schemas = Report(), Schemas(HERE)
+    rep.registry, rep.verbose = rel(a.registry), a.verbose
     vocab = schemas.doc("vocab.json")
     if a.legacy_coverage:
         fmp = a.flag_map or os.path.join(a.registry, "flag-map.json")
@@ -1168,7 +1250,8 @@ def main():
         p = os.path.join(a.registry, name)
         paths[k] = p
         if not os.path.isfile(p):
-            (rep.err if k in REQUIRED_REGISTRIES else rep.warn)(rel(a.registry), f"no {name}")
+            if k != "price-tables":                     # optional, and usually absent
+                (rep.err if k in REQUIRED_REGISTRIES else rep.warn)(rel(a.registry), f"no {name}")
             continue
         x = load_json(p, rep)
         if x is not None and schemas.validate(x, schema_of[k], rel(p), rep):

@@ -17,6 +17,7 @@
     "cost-basis",
     "cost-method",
     "price-table",
+    "price-tier",
     "tokens-in",
     "tokens-out",
     "tokens-cache-read",
@@ -43,6 +44,7 @@
     "run-date",
     "run-start",
     "run-end",
+    "run-date-convention",
     "run-id",
     "version",
     "early-access",
@@ -124,6 +126,12 @@
       "spend"
      ]
     },
+    "price-tier": {
+     "description": "The price tier the cost was computed or billed at (`term`: a price kind other than standard, e.g. flex, batch): re-priced to standard by the tier's proven uniform factor (prices.json).",
+     "slots": [
+      "spend"
+     ]
+    },
     "tokens-in": {
      "description": "Input tokens (uncached input when the source separates cache).",
      "slots": [
@@ -167,7 +175,7 @@
      ]
     },
     "reasoning-included-in-out": {
-     "description": "The source states whether reasoning tokens are counted inside output tokens.",
+     "description": "Whether the output tokens include the reasoning tokens: `term` true or false (vocab boolean), read as such.",
      "slots": [
       "usage"
      ]
@@ -277,6 +285,12 @@
     },
     "run-end": {
      "description": "End of the run interval.",
+     "slots": [
+      "run_date"
+     ]
+    },
+    "run-date-convention": {
+     "description": "The source documents that its row or run ids encode the run date (e.g. manual-YYYYMMDD-…): `pattern` = a regex with a named group `date` (YYYYMMDD). Cited in run_date, it gives the measure's row key or run-id a stated run date. Only a documented convention (written, with its quote) counts.",
      "slots": [
       "run_date"
      ]
@@ -396,7 +410,9 @@
     "unit",
     "currency",
     "cost-basis",
-    "cost-method"
+    "cost-method",
+    "reasoning-included-in-out",
+    "price-tier"
    ],
    "x-terms": {
     "score": {
@@ -416,6 +432,12 @@
     },
     "run-score": {
      "vocab": "metric"
+    },
+    "reasoning-included-in-out": {
+     "vocab": "boolean"
+    },
+    "price-tier": {
+     "vocab": "price_kind"
     }
    }
   },
@@ -488,7 +510,8 @@
      "fact_types": [
       "run-date",
       "run-start",
-      "run-end"
+      "run-end",
+      "run-date-convention"
      ],
      "list": true
     },
@@ -518,7 +541,8 @@
       "unit",
       "cost-basis",
       "cost-method",
-      "price-table"
+      "price-table",
+      "price-tier"
      ],
      "list": true
     },
@@ -638,10 +662,11 @@
    }
   },
   "level": {
-   "description": "Certainty level of a source fact as the agent writes it (DATA-PIPELINE §1-2). `computed` is the build's own and never written by an agent.",
+   "description": "Certainty level of a source fact as the agent writes it (DATA-PIPELINE §1-2). `computed`: a derived value with its rule and inputs, recomputed by the build.",
    "enum": [
     "written",
     "read",
+    "computed",
     "source-estimate",
     "not-established:absent",
     "not-established:assumed",
@@ -654,6 +679,9 @@
     },
     "read": {
      "description": "Measured off a chart's geometry (pixels); needs a chart-pixel precision."
+    },
+    "computed": {
+     "description": "A value derived from cited inputs by a stated rule (`rule`, `inputs`): the build recomputes it and refuses it when it differs (e.g. input − cache read)."
     },
     "source-estimate": {
      "description": "A value the source did not measure on this run (imputed, projected, filled, \"estimated\")."
@@ -2868,7 +2896,12 @@
     "configurations-per-model",
     "cost-method-unstated-single",
     "base-price-retired-last-list",
-    "base-price-charged-never-applied"
+    "base-price-charged-never-applied",
+    "cell-difference",
+    "cell-sum",
+    "run-date-from-id-convention",
+    "cost-tier-factor",
+    "cost-reproduction"
    ],
    "x-terms": {
     "alias-by-date": {
@@ -2957,6 +2990,21 @@
     },
     "base-price-charged-never-applied": {
      "kind": "standing"
+    },
+    "cell-difference": {
+     "kind": "deduction"
+    },
+    "cell-sum": {
+     "kind": "deduction"
+    },
+    "run-date-from-id-convention": {
+     "kind": "deduction"
+    },
+    "cost-tier-factor": {
+     "kind": "deduction"
+    },
+    "cost-reproduction": {
+     "kind": "deduction"
     }
    }
   },
@@ -3267,6 +3315,17 @@
    "x-terms": {
     "deduction": {},
     "standing": {}
+   }
+  },
+  "boolean": {
+   "description": "A yes/no fact's term (reasoning-included-in-out): the build reads the term, never the level alone.",
+   "enum": [
+    "true",
+    "false"
+   ],
+   "x-terms": {
+    "true": {},
+    "false": {}
    }
   }
  }
