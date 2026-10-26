@@ -132,7 +132,7 @@ On a self-hosted route the maker's defaults and conversions do not apply. A harn
 
 **benchmarks.json** — `family` ⊃ `setup` = benchmark × subset × harness (without its version: patch releases are one
 configuration) × tools regime × judge panel × metric. Per setup: headline metric (the source's designated one; if none,
-the metric the source ranks by; else a decision; with its level, `written` or `not-established:assumed` when it is only
+the metric the source ranks by; if the source reports a single metric for this benchmark, that one (`only-metric`, 26 Oct); else a decision; with its level, `written` or `not-established:assumed` when it is only
 the metric held; a cost-only setup has metric `none`), bounds, direction, task type, complexity, `kind` (`rating` — Elo,
 arena, re-fitted index — or `runs`); for composites the components (a setup, or a named component the
 registry does not hold), the formula (weights, normalisation), validated on
