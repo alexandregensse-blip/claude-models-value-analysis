@@ -10079,6 +10079,57 @@
   },
   "zhenhuanbench-reasoning": {
    "label": "ZhenhuanBench overall, reasoning settings (Table G.1)"
+  },
+  "taxcalc-ty25-notool-2026-10-21": {
+   "label": "tax-calc-bench TY25 no tool (21 Oct 2026 snapshot; replaces the held group)"
+  },
+  "tankai-rain": {
+   "label": "tankai-rain"
+  },
+  "tankai-essay": {
+   "label": "tankai-essay"
+  },
+  "convex2-default-2026-10-21": {
+   "label": "Convex LLM leaderboard default re-published 21 Oct 2026 (replaces the held convex2-default snapshot)"
+  },
+  "convex2-noguide-2026-10-21": {
+   "label": "Convex LLM leaderboard noguide re-published 21 Oct 2026 (replaces the held convex2-noguide snapshot)"
+  },
+  "convex2-noguide-web-2026-10-21": {
+   "label": "Convex LLM leaderboard noguide-web re-published 21 Oct 2026 (replaces the held convex2-noguide-web snapshot)"
+  },
+  "xai41f-tau2telecom": {
+   "label": "tau2-bench Telecom (xAI Grok 4.1 Fast post)"
+  },
+  "deepu-cc-set1": {
+   "label": "deepu-cc-set1"
+  },
+  "deepu-cc-set2": {
+   "label": "deepu-cc-set2"
+  },
+  "sketchverify-humaneval": {
+   "label": "sketchverify-humaneval"
+  },
+  "rsi-single-webshop": {
+   "label": "RSI-Router single-model baselines: WebShop"
+  },
+  "edgebench-codex4h-b1-kimi": {
+   "label": "edgebench-codex4h-b1-kimi"
+  },
+  "edgebench-codex8h-b2": {
+   "label": "edgebench-codex8h-b2"
+  },
+  "deepu-pi-set1": {
+   "label": "deepu-pi-set1"
+  },
+  "deepu-pi-set2": {
+   "label": "deepu-pi-set2"
+  },
+  "taxcalc-ty25-web-2026-10-21": {
+   "label": "tax-calc-bench TY25 web search (21 Oct 2026 snapshot; replaces the held group)"
+  },
+  "llm-chess-elo-2026-10-21": {
+   "label": "llm_chess Elo (Dragon ladder) re-fit 21 Oct 2026: whole held group re-published with its new value and new couples"
   }
  },
  "setups": {
@@ -110972,6 +111023,484 @@
    ],
    "label": "ZhenhuanBench overall, reasoning settings (Table G.1)",
    "note": "headline: not-established:assumed (only metric held: 'overall score (%)'); to be proven from the source"
+  },
+  "taxcalc-ty25-notool-2026-10-21": {
+   "family": "taxcalc-ty25-notool-2026-10-21",
+   "benchmark": "tax-calc-bench TY25 no tool (21 Oct 2026 snapshot; replaces the held group)",
+   "subset": null,
+   "harness": "tax-calc-bench",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-correct%",
+   "headline": {
+    "metric": "strict-correct%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "taxcalc-ty25-notool-2026-10-21"
+   ],
+   "label": "tax-calc-bench TY25 no tool (21 Oct 2026 snapshot; replaces the held group)",
+   "note": "headline: not-established:assumed (only metric held: 'strict-correct%'); to be proven from the source; dated republication of taxcalc-ty25-notool (own setup, held group untouched; hn verification of 21 Oct 2026 /work/.salvo14/hn/VERIFY-hn.md: whole-group replacements are new groups named <held group>-2026-10-21; pending-arbitration:17)"
+  },
+  "tankai-rain": {
+   "family": "tankai-rain",
+   "benchmark": "tankai-rain",
+   "subset": null,
+   "harness": "ClaudeCode-subagent-fixed-model-effort-single-shot",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "blind-rank-of-6(low=better)",
+   "headline": {
+    "metric": "blind-rank-of-6(low=better)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "coding",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "tankai-rain"
+   ],
+   "label": "tankai-rain",
+   "note": "headline: not-established:assumed (only metric held: 'blind-rank-of-6(low=better)'); to be proven from the source; direction lower: the metric name states 'low=better' (today's lqm.LOWER_IS_BETTER does not list it; the groups are out of the fit)"
+  },
+  "tankai-essay": {
+   "family": "tankai-essay",
+   "benchmark": "tankai-essay",
+   "subset": null,
+   "harness": "ClaudeCode-subagent-fixed-model-effort-single-shot",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "GPT6Astra-blind-rank-of-6(low=better)",
+   "headline": {
+    "metric": "GPT6Astra-blind-rank-of-6(low=better)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "writing",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "tankai-essay"
+   ],
+   "label": "tankai-essay",
+   "note": "headline: not-established:assumed (only metric held: 'GPT6Astra-blind-rank-of-6(low=better)'); to be proven from the source; direction lower: the metric name states 'low=better' (today's lqm.LOWER_IS_BETTER does not list it; the groups are out of the fit)"
+  },
+  "convex2-default-2026-10-21": {
+   "family": "convex2-default-2026-10-21",
+   "benchmark": "Convex LLM leaderboard default re-published 21 Oct 2026 (replaces the held convex2-default snapshot)",
+   "subset": null,
+   "harness": "Convex-evals-OpenRouter",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "convex2-default-2026-10-21"
+   ],
+   "label": "Convex LLM leaderboard default re-published 21 Oct 2026 (replaces the held convex2-default snapshot)",
+   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source; dated republication of convex2-default (own setup, held group untouched; hn verification of 21 Oct 2026 /work/.salvo14/hn/VERIFY-hn.md: whole-group replacements are new groups named <held group>-2026-10-21; pending-arbitration:13)"
+  },
+  "convex2-noguide-2026-10-21": {
+   "family": "convex2-noguide-2026-10-21",
+   "benchmark": "Convex LLM leaderboard noguide re-published 21 Oct 2026 (replaces the held convex2-noguide snapshot)",
+   "subset": null,
+   "harness": "Convex-evals-OpenRouter",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "convex2-noguide-2026-10-21"
+   ],
+   "label": "Convex LLM leaderboard noguide re-published 21 Oct 2026 (replaces the held convex2-noguide snapshot)",
+   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source; dated republication of convex2-noguide (own setup, held group untouched; hn verification of 21 Oct 2026 /work/.salvo14/hn/VERIFY-hn.md: whole-group replacements are new groups named <held group>-2026-10-21; pending-arbitration:13)"
+  },
+  "convex2-noguide-web-2026-10-21": {
+   "family": "convex2-noguide-web-2026-10-21",
+   "benchmark": "Convex LLM leaderboard noguide-web re-published 21 Oct 2026 (replaces the held convex2-noguide-web snapshot)",
+   "subset": null,
+   "harness": "Convex-evals-OpenRouter",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "convex2-noguide-web-2026-10-21"
+   ],
+   "label": "Convex LLM leaderboard noguide-web re-published 21 Oct 2026 (replaces the held convex2-noguide-web snapshot)",
+   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source; dated republication of convex2-noguide-web (own setup, held group untouched; hn verification of 21 Oct 2026 /work/.salvo14/hn/VERIFY-hn.md: whole-group replacements are new groups named <held group>-2026-10-21; pending-arbitration:13)"
+  },
+  "xai41f-tau2telecom": {
+   "family": "xai41f-tau2telecom",
+   "benchmark": "tau2-bench Telecom (xAI Grok 4.1 Fast post)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "xai41f-tau2telecom"
+   ],
+   "label": "tau2-bench Telecom (xAI Grok 4.1 Fast post)",
+   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source; harness unstated in all rows"
+  },
+  "deepu-cc-set1": {
+   "family": "deepu-cc-set1",
+   "benchmark": "deepu-cc-set1",
+   "subset": null,
+   "harness": "ClaudeCode (auto mode)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "rubric % of 8 (avg of 2 graders)",
+   "headline": {
+    "metric": "rubric % of 8 (avg of 2 graders)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "deepu-cc-set1"
+   ],
+   "label": "deepu-cc-set1",
+   "note": "headline: not-established:assumed (only metric held: 'rubric % of 8 (avg of 2 graders)'); to be proven from the source"
+  },
+  "deepu-cc-set2": {
+   "family": "deepu-cc-set2",
+   "benchmark": "deepu-cc-set2",
+   "subset": null,
+   "harness": "ClaudeCode (auto mode)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "rubric % of 8 (avg of 2 graders)",
+   "headline": {
+    "metric": "rubric % of 8 (avg of 2 graders)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "deepu-cc-set2"
+   ],
+   "label": "deepu-cc-set2",
+   "note": "headline: not-established:assumed (only metric held: 'rubric % of 8 (avg of 2 graders)'); to be proven from the source"
+  },
+  "sketchverify-humaneval": {
+   "family": "sketchverify-humaneval",
+   "benchmark": "sketchverify-humaneval",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass@1%",
+   "headline": {
+    "metric": "pass@1%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "sketchverify-humaneval"
+   ],
+   "label": "sketchverify-humaneval",
+   "note": "headline: not-established:assumed (only metric held: 'pass@1%'); to be proven from the source; harness unstated in all rows"
+  },
+  "rsi-single-webshop": {
+   "family": "rsi-single-webshop",
+   "benchmark": "RSI-Router single-model baselines: WebShop",
+   "subset": null,
+   "harness": "mini-SWE-agent-based",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-1",
+   "headline": {
+    "metric": "score-of-1",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "rsi-single-webshop"
+   ],
+   "label": "RSI-Router single-model baselines: WebShop",
+   "note": "headline: not-established:assumed (only metric held: 'score-of-1'); to be proven from the source"
+  },
+  "edgebench-codex4h-b1-kimi": {
+   "family": "edgebench-codex4h-b1-kimi",
+   "benchmark": "edgebench-codex4h-b1-kimi",
+   "subset": null,
+   "harness": "Codex-scaffold",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "mean-best-pass-rate-0-1",
+   "headline": {
+    "metric": "mean-best-pass-rate-0-1",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "edgebench-codex4h-b1-kimi"
+   ],
+   "label": "edgebench-codex4h-b1-kimi",
+   "note": "headline: not-established:assumed (only metric held: 'mean-best-pass-rate-0-1'); to be proven from the source"
+  },
+  "edgebench-codex8h-b2": {
+   "family": "edgebench-codex8h-b2",
+   "benchmark": "edgebench-codex8h-b2",
+   "subset": null,
+   "harness": "Codex-scaffold",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "mean-best-pass-rate-0-1",
+   "headline": {
+    "metric": "mean-best-pass-rate-0-1",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "edgebench-codex8h-b2"
+   ],
+   "label": "edgebench-codex8h-b2",
+   "note": "headline: not-established:assumed (only metric held: 'mean-best-pass-rate-0-1'); to be proven from the source"
+  },
+  "deepu-pi-set1": {
+   "family": "deepu-pi-set1",
+   "benchmark": "deepu-pi-set1",
+   "subset": null,
+   "harness": "Pi",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "rubric % of 8 (avg of 2 graders)",
+   "headline": {
+    "metric": "rubric % of 8 (avg of 2 graders)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "deepu-pi-set1"
+   ],
+   "label": "deepu-pi-set1",
+   "note": "headline: not-established:assumed (only metric held: 'rubric % of 8 (avg of 2 graders)'); to be proven from the source"
+  },
+  "deepu-pi-set2": {
+   "family": "deepu-pi-set2",
+   "benchmark": "deepu-pi-set2",
+   "subset": null,
+   "harness": "Pi",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "rubric % of 8 (avg of 2 graders)",
+   "headline": {
+    "metric": "rubric % of 8 (avg of 2 graders)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "deepu-pi-set2"
+   ],
+   "label": "deepu-pi-set2",
+   "note": "headline: not-established:assumed (only metric held: 'rubric % of 8 (avg of 2 graders)'); to be proven from the source"
+  },
+  "taxcalc-ty25-web-2026-10-21": {
+   "family": "taxcalc-ty25-web-2026-10-21",
+   "benchmark": "tax-calc-bench TY25 web search (21 Oct 2026 snapshot; replaces the held group)",
+   "subset": null,
+   "harness": "tax-calc-bench",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-correct%",
+   "headline": {
+    "metric": "strict-correct%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "taxcalc-ty25-web-2026-10-21"
+   ],
+   "label": "tax-calc-bench TY25 web search (21 Oct 2026 snapshot; replaces the held group)",
+   "note": "headline: not-established:assumed (only metric held: 'strict-correct%'); to be proven from the source; dated republication of taxcalc-ty25-web (own setup, held group untouched; hn verification of 21 Oct 2026 /work/.salvo14/hn/VERIFY-hn.md: whole-group replacements are new groups named <held group>-2026-10-21; pending-arbitration:17)"
+  },
+  "llm-chess-elo-2026-10-21": {
+   "family": "llm-chess-elo-2026-10-21",
+   "benchmark": "llm_chess Elo (Dragon ladder) re-fit 21 Oct 2026: whole held group re-published with its new value and new couples",
+   "subset": null,
+   "harness": "llm_chess-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "Elo",
+   "headline": {
+    "metric": "Elo",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "rating",
+   "composite": null,
+   "legacy_groups": [
+    "llm-chess-elo-2026-10-21"
+   ],
+   "label": "llm_chess Elo (Dragon ladder) re-fit 21 Oct 2026: whole held group re-published with its new value and new couples",
+   "note": "headline: not-established:assumed (only metric held: 'Elo'); to be proven from the source; dated republication of llm-chess-elo (own setup, held group untouched; hn verification of 21 Oct 2026 /work/.salvo14/hn/VERIFY-hn.md: whole-group replacements are new groups named <held group>-2026-10-21; pending-arbitration:13)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
