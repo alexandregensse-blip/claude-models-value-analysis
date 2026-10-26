@@ -42,6 +42,7 @@ MONTHS = {m: i for i, ms in enumerate((("january", "jan"), ("february", "feb"), 
                                        ("december", "dec")), 1) for m in ms}
 LEVEL_ALIASES = {"x-high": "xhigh", "x high": "xhigh", "extra-high": "xhigh", "extra high": "xhigh"}
 LABEL_FILLER = {"effort", "level", "setting", "reasoning", "the", "at"}
+LEVEL_TOKEN_ALIASES = {"med": "medium"}   # chart legends abbreviate (Anthropic system cards: "Med"; 26 Oct)
 
 
 class Fatal(Exception):
@@ -1006,7 +1007,7 @@ def map_label(ctx, value):
     t = (value or "").casefold()
     for a, lv in LEVEL_ALIASES.items():
         t = t.replace(a, lv)
-    toks = [w for w in re.findall(r"[a-z0-9]+", t) if w not in LABEL_FILLER]
+    toks = [LEVEL_TOKEN_ALIASES.get(w, w) for w in re.findall(r"[a-z0-9]+", t) if w not in LABEL_FILLER]
     levels = {w for w in toks if w in LEVELS}
     if len(levels) == 1:
         return levels.pop()

@@ -1187,6 +1187,14 @@ def ext_closed_harness_label():
     eq(r.q(m3), "out:effort-not-established", "a harness without the rule documents nothing")
 
 
+@test
+def ext_label_med_abbreviation():
+    # a chart legend's "Med" names medium (Anthropic system cards, 26 Oct)
+    import build as B
+    eq((B.map_label(None, "Med"), B.map_label(None, "med effort"), B.map_label(None, "Medium")), ("medium",) * 3, "Med")
+    eq("media" in B.LEVEL_TOKEN_ALIASES, False, "whole tokens only")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)
