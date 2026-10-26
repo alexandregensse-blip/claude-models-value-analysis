@@ -81,6 +81,8 @@ def build_table(prices, ctx, table_id, label, version, evidence, input_includes_
     .routes (the registry). The key of a string is the build's name rule (build.api_matches, prefix namespace); a
     string with no key, several keys, a static (source-priced) card or no priced class is listed in the report and
     gets no card; one card per (model, route), the lowest price when a string has several."""
+    data = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    sys.path[:0] = [p for p in (data, os.path.join(data, "schema")) if p not in sys.path]
     import build
     cards, rep = {}, dict(unresolved=[], static=[], multi_price=[], mapped={})
     for st in sorted(prices):

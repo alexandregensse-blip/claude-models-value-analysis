@@ -2530,11 +2530,16 @@ def diff_by_legacy_ref(pm, nm):
         raw_src = (oe.get("row") or {}).get("source")
         src_of_findings[e["source"]][raw_src] += 1
         d = {}
+        fam = lambda st: "in" if st in ("in", "legacy:in") else "out"   # the verdict; the legacy and tree reasons differ in name
         for ax in ("quality", "cost"):
-            if oe["status"].get(ax) != e["status"].get(ax):
+            if fam(oe["status"].get(ax)) != fam(e["status"].get(ax)):
                 d[f"status_{ax}"] = [oe["status"].get(ax), e["status"].get(ax)]
+        norm = dict(group=lambda v: (v or "").lstrip("#"),                # a comment group is the out verdict, above
+                    effort=lambda v: (v or "")[4:] if (v or "").startswith("req-") else v)
         for fld in ("group", "model", "effort", "score", "cost_usd"):     # keys on both sides; the digits' spelling does not count
             a_, b_ = (oe.get("row") or {}).get(fld), (e.get("row") or {}).get(fld)
+            if fld in norm:
+                a_, b_ = norm[fld](a_), norm[fld](b_)
             if fld in ("score", "cost_usd"):
                 try:
                     if float(a_) == float(b_):

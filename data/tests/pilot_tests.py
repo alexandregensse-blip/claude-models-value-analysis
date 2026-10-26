@@ -85,7 +85,7 @@ def legacy_ref_replaces_and_diff():
     ch = {c["line"]: c["changes"] for c in d["changed"]}
     eq(ch[2]["score"], ["50.0", "55.0"], "value change on the replaced row")
     eq(ch[2]["group"], ["g1", "s1"], "group change")
-    eq(ch[3]["status_quality"], ["legacy:in", "in"], "status change")
+    eq(("status_quality" in ch[3], ch[3]["group"]), (False, ["g1", "s1"]), "same verdict (legacy:in → in): no status change")
     eq([x["line"] for x in d["unmatched_old"]], [4], "a legacy row no measure claims")
     eq([x["measure"] for x in d["unmatched_new"]], [m3], "a converted measure claiming no row")
 

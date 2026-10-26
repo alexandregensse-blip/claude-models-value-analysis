@@ -79,6 +79,14 @@ def diff_unchanged_ignores_digits():
     d = build.diff_by_legacy_ref(pm, nm)["src"]
     eq((d["unchanged"], list(d["changed"][0]["changes"])), (0, ["model"]), "a model key change counts")
     nm["M1"]["row"]["model"] = "opus-5"
+    pm["L1"]["status"] = {"quality": "legacy:in", "cost": "legacy:in"}
+    pm["L1"]["row"]["effort"] = "req-high"
+    d = build.diff_by_legacy_ref(pm, nm)["src"]
+    eq(d["unchanged"], 1, "legacy status names and the req- prefix do not count")
+    pm["L1"]["status"] = {"quality": "legacy:out:comment", "cost": "legacy:in"}
+    d = build.diff_by_legacy_ref(pm, nm)["src"]
+    eq(list(d["changed"][0]["changes"]), ["status_quality"], "an out → in verdict counts")
+    pm["L1"]["status"] = {"quality": "legacy:in", "cost": "legacy:in"}
     nm["M1"]["row"]["effort"] = "low"
     d = build.diff_by_legacy_ref(pm, nm)["src"]
     eq((d["unchanged"], list(d["changed"][0]["changes"])), (0, ["effort"]), "configuration counts")
