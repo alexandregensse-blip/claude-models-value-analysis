@@ -1295,6 +1295,22 @@ def ext_run_before_shutdown():
     eq(r[m1]["fields"]["run_date_detail"]["mo"]["basis"]["hi"], "shutdown", "basis")
 
 
+@test
+def ext_none_label_and_complement():
+    # an effort legend 'none' is nothink; a printed error rate whose complement the setup holds (26 Oct)
+    sc = base()
+    sc.model("mq", configs=("nothink", "low", "high"))
+    s = sc.source("post")
+    rate = sc.fact(s, "score", "12.5%", term="pass%", scale="percent")
+    m1 = sc.m(s, model="mq", effort=[("effort-label", "none")], score="70%")
+    m2 = sc.m(s, model="mq", effort=[LOW], score="87.5%", value_level="computed",
+              value_kw={"rule": "complement-of-percent", "inputs": [rate]})
+    sc.m(s, model="ma", effort=[LOW], score="80%")
+    r = sc.run()
+    eq(r.cfg(m1), "nothink", "'none' legend")
+    eq(r.q(m2), "in", "100 − 12.5")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

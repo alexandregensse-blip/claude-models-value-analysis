@@ -2366,7 +2366,8 @@
     "\"thinking\": \"off\"",
     "'effort':'none'",
     "(thinking=False)",
-    "Non-Think"
+    "Non-Think",
+    "none (label)"
    ],
    "x-terms": {
     "reasoning_effort: none": {
@@ -2473,6 +2474,12 @@
      "kind": "label",
      "regex": "non-think\\b",
      "rows": 37
+    },
+    "none (label)": {
+     "kind": "label",
+     "regex": "^\\s*none\\s*$",
+     "rows": 0,
+     "note": "a reasoning-effort legend or column whose value is 'none' (OpenAI charts: reasoning effort none = no reasoning; coordinator 26 Oct)"
     }
    }
   },
@@ -2914,7 +2921,8 @@
     "cost-reproduction",
     "chart-effort-order",
     "thinking-on-default-level",
-    "run-before-shutdown"
+    "run-before-shutdown",
+    "complement-of-percent"
    ],
    "x-terms": {
     "alias-by-date": {
@@ -3036,6 +3044,10 @@
     "run-before-shutdown": {
      "kind": "deduction",
      "description": "a closed model's run with no stated end lies before its maker API ids stopped serving it (26 Oct)"
+    },
+    "complement-of-percent": {
+     "kind": "deduction",
+     "description": "100 − a stated percentage (an error or refusal rate printed, its complement held), exact (26 Oct)"
     }
    }
   },

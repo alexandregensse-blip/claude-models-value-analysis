@@ -246,6 +246,24 @@ class Source:
             if not re.search(r"effort", " ".join(str(f.get(k) or "") for k in ("quote", "value")), re.I):
                 return f"computed fact {x.ref}: its statement {x.inputs[0]} does not say the points are effort levels"
             return None
+        if x.rule == "complement-of-percent":         # 100 − a printed rate (the setup holds its complement)
+            if len(x.inputs or []) != 1:
+                return f"computed fact {x.ref}: complement-of-percent needs one input"
+            f, fault = self.fact(x.inputs[0], seen | {x.ref})
+            if fault or f is None:
+                return f"computed fact {x.ref}: input {x.inputs[0]}: {fault or 'missing'}"
+            if f.level not in ACCEPTED:
+                x["level"] = f.level
+                return None
+            p, st = parse_number(f.value), parse_number(x.value)
+            if p is None or st is None:
+                return f"computed fact {x.ref}: not a number"
+            got = 100 - p[0]
+            if abs(float(got - st[0])) > float(p[1]) / 2 + float(st[1]) / 2 + 1e-12:
+                return f"computed fact {x.ref}: stated {x.value}, 100 − {f.value} gives {num_text(got)}"
+            x["precision"] = {"model": "printed", "sd": precision_sd(f, p[1]) or 0.0}
+            x["derived"] = dict(rule=x.rule, inputs=list(x.inputs), value=num_text(got))
+            return None
         if x.rule not in ("cell-difference", "cell-sum") or len(x.inputs or []) < 2:
             return f"computed fact {x.ref}: without its rule and two inputs"
         vals, sds, steps = [], [], []
