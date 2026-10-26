@@ -258,6 +258,8 @@ class Source:
             p, st = parse_number(f.value), parse_number(x.value)
             if p is None or st is None:
                 return f"computed fact {x.ref}: not a number"
+            if (f.get("scale") or "") == "fraction":       # a fraction input in percent first (scale-conversion, exact)
+                p = (p[0] * 100, p[1] * 100)
             got = 100 - p[0]
             if abs(float(got - st[0])) > float(p[1]) / 2 + float(st[1]) / 2 + 1e-12:
                 return f"computed fact {x.ref}: stated {x.value}, 100 − {f.value} gives {num_text(got)}"

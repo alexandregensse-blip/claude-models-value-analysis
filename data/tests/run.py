@@ -1309,6 +1309,14 @@ def ext_none_label_and_complement():
     r = sc.run()
     eq(r.cfg(m1), "nothink", "'none' legend")
     eq(r.q(m2), "in", "100 − 12.5")
+    sc = base()
+    s = sc.source("post")
+    rate = sc.fact(s, "score", "0.3681", term="pass%", scale="fraction")
+    m3 = sc.m(s, model="ma", effort=[LOW], score="63.19%", value_level="computed",
+              value_kw={"rule": "complement-of-percent", "inputs": [rate]})
+    sc.m(s, model="mb", effort=[LOW], score="70%")
+    r = sc.run()
+    eq(r.q(m3), "in", "100 − a fraction input in percent")
 
 
 def main():
