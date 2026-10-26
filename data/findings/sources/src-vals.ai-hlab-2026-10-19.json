@@ -1,0 +1,146 @@
+{
+ "id": "src-vals.ai-hlab-2026-10-19",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/hlab"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/hlab.html": "043aba8121e716e5fca4f15769d7ea0a900f415fa2e8a8d3117ede9a457acf81",
+  "/work/.salvo14/hk/qwen3.8-flash-next/src/boards/vals/hlab.html": "043aba8121e716e5fca4f15769d7ea0a900f415fa2e8a8d3117ede9a457acf81",
+  "/work/.salvo14/hk/gpt-5.1-codex-max/src/routes/vals/hlab.html": "043aba8121e716e5fca4f15769d7ea0a900f415fa2e8a8d3117ede9a457acf81",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-hlab-2026-10-19.json": "1292d4ddf5c603a6e77cbecca68676f2e0df70c5041d17a10b3e98a5451de432"
+ },
+ "harvested_at": "2026-10-20T09:30:05Z",
+ "published": {
+  "value": "2026-10-19",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 10/19/2026",
+  "file": "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/hlab.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": "src-vals.ai-hlab-2026-10-18",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/hlab",
+   "captured": "2026-10-20T09:30:05Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/hlab",
+   "captured": "2026-10-20T09:30:30Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/hlab",
+   "captured": "2026-10-20T09:49:33Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-hlab-2026-10-19.json",
+   "from": "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/hlab.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-hlab-2026-10-19.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "1.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/hlab.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"1.1\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/hlab.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/hlab.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$10.55",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/hlab.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  }
+ ]
+}

@@ -1,0 +1,162 @@
+{
+ "id": "src-vals.ai-programbench-2026-10-12",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/programbench"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g2/src/vals/programbench.html": "619ee079d035dd3c843e3720fc10701eb8aa80c8b1e4f078bcf63edc82773dcc",
+  "/work/.salvo14/s23/b1/src/vals/programbench.html": "f51fc83f32afb586b4d27d6b721b1e27f3b5ea71ab4df21cfa7e1cfefbd8b6b4",
+  "/work/.salvo14/s24/c1/src/vals/programbench.html": "1fb5bd3a4a4c272edc92a2976a772d6811a09fedae36ece2f161e05ba59d9a1b",
+  "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/programbench.html": "77d1b16c1f6eb2a0ac17922cd931f845d235e4af6bc2ee66a2b84945c1c92e90",
+  "/work/.salvo14/hk/qwen3.8-flash-next/src/boards/vals/programbench.html": "77d1b16c1f6eb2a0ac17922cd931f845d235e4af6bc2ee66a2b84945c1c92e90",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-programbench-2026-10-12.json": "b3f398df52c7b1f6607f24fcd0e1dcbf9bd413bf71fab0d7e45ac2d1566be36e"
+ },
+ "harvested_at": "2026-10-15T15:33:17Z",
+ "published": {
+  "value": "2026-10-12",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 10/12/2026",
+  "file": "/work/.salvo14/g/g2/src/vals/programbench.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/programbench",
+   "captured": "2026-10-19T07:45:09Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/programbench",
+   "captured": "2026-10-15T15:33:17Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/programbench",
+   "captured": "2026-10-18T16:38:57Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/programbench",
+   "captured": "2026-10-20T09:30:07Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S5",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/programbench",
+   "captured": "2026-10-20T09:30:31Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-programbench-2026-10-12.json",
+   "from": "/work/.salvo14/g/g2/src/vals/programbench.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-programbench-2026-10-12.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/programbench.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"1\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/programbench.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/g/g2/src/vals/programbench.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$68.05",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/programbench.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  }
+ ]
+}

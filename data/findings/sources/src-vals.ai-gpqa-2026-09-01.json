@@ -1,0 +1,854 @@
+{
+ "id": "src-vals.ai-gpqa-2026-09-01",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/gpqa"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g2/src/vals/gpqa.html": "28ca03eb6c471154df19a24d2727084f61355c176eecc5406e5f5602fee9cfac",
+  "/work/.salvo14/s2/src/boards/vals/gpqa.html": "7be9019d75d0f95db698f0b4e6d615fad1f490b2c851901edcf7fb440ac705c3",
+  "/work/.salvo14/s23/b1/src/vals/gpqa.html": "59146c5957ef1c99fd2064189aab28c1dae5e66682c1e0d265ccea966d5b9624",
+  "/work/.salvo14/s24/c1/src/vals/gpqa.html": "c11ad234f89eb95a2cc924adb58db13043672dafa15e7b8e7b4f435328f677cc",
+  "/work/.salvo14/rd/google1/src/vals_gpqa.html": "4ede9b794ccdb3e8d15797dc69c458a3a01f8c4445713a06138bc001d99c14c1",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-gpqa-2026-09-01.json": "b1d1c6179858eba2752ecaba508da8cb7825a76e68af2ddf360e11b1e69b5c0d"
+ },
+ "harvested_at": "2026-09-30T06:32:31Z",
+ "published": {
+  "value": "2026-09-01",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 9/1/2026",
+  "file": "/work/.salvo14/g/g2/src/vals/gpqa.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/gpqa",
+   "captured": "2026-10-19T07:45:00Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/gpqa",
+   "captured": "2026-09-30T06:32:31Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/gpqa",
+   "captured": "2026-10-15T15:33:01Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/gpqa",
+   "captured": "2026-10-18T16:38:46Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S5",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/gpqa",
+   "captured": "2026-10-20T07:12:23Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-gpqa-2026-09-01.json",
+   "from": "/work/.salvo14/g/g2/src/vals/gpqa.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-gpqa-2026-09-01.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "accuracy%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/gpqa.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"1\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/gpqa.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/g/g2/src/vals/gpqa.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$2",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/gpqa.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  },
+  {
+   "id": "F10",
+   "says": "note",
+   "value": "\"use_cost_per_test\":[0,false]",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/gpqa.html",
+   "where": "payload metadata of the board (the page table shows \"Cost In / Out\" prices, no per-test cost column)",
+   "quote": "\"use_cost_per_test\":[0,false]",
+   "about": null
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-fable-5-1, column provider",
+   "id": "F11"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-fable-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-fable-5, column provider",
+   "id": "F12"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-opus-4-8",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-opus-4-8, column provider",
+   "id": "F13"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-sonnet-5, column provider",
+   "id": "F14"
+  },
+  {
+   "says": "thinking-on",
+   "about": "anthropic/claude-sonnet-4-6",
+   "value": "reasoning: true",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-sonnet-4-6, column reasoning (payload field reasoning = true)",
+   "id": "F15"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-sonnet-4-6",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-sonnet-4-6, column provider",
+   "id": "F16"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-opus-4-7",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-opus-4-7, column provider",
+   "id": "F17"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-haiku-4-5-20251001-thinking",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-haiku-4-5-20251001-thinking, column provider",
+   "id": "F18"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-opus-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-opus-5, column provider",
+   "id": "F19"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3-max",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3-max, column provider",
+   "id": "F20"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3-max-2026-01-23",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3-max-2026-01-23, column provider",
+   "id": "F21"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3-max-preview",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3-max-preview, column provider",
+   "id": "F22"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.5-flash",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.5-flash, column provider",
+   "id": "F23"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.5-plus-thinking",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.5-plus-thinking, column provider",
+   "id": "F24"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.6-plus",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.6-plus, column provider",
+   "id": "F25"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.7-max",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.7-max, column provider",
+   "id": "F26"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.8-27b",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.8-27b, column provider",
+   "id": "F27"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.8-max",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.8-max, column provider",
+   "id": "F28"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4-flash-0731, column provider",
+   "id": "F29"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4-pro",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4-pro, column provider",
+   "id": "F30"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4-pro-0813, column provider",
+   "id": "F31"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-1.5-flash-002",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-1.5-flash-002, column provider",
+   "id": "F32"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-1.5-pro-002",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-1.5-pro-002, column provider",
+   "id": "F33"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-2.0-flash-001",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-2.0-flash-001, column provider",
+   "id": "F34"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-2.5-flash-lite-preview-09-2025",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-2.5-flash-lite-preview-09-2025, column provider",
+   "id": "F35"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-2.5-flash-lite-preview-09-2025-thinking",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-2.5-flash-lite-preview-09-2025-thinking, column provider",
+   "id": "F36"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-2.5-flash-preview-04-17",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-2.5-flash-preview-04-17, column provider",
+   "id": "F37"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-2.5-flash-preview-09-2025",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-2.5-flash-preview-09-2025, column provider",
+   "id": "F38"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-2.5-flash-preview-09-2025-thinking",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-2.5-flash-preview-09-2025-thinking, column provider",
+   "id": "F39"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-2.5-pro-exp-03-25",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-2.5-pro-exp-03-25, column provider",
+   "id": "F40"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3-flash-preview",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3-flash-preview, column provider",
+   "id": "F41"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3-pro-preview",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3-pro-preview, column provider",
+   "id": "F42"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.1-flash-lite-preview",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.1-flash-lite-preview, column provider",
+   "id": "F43"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.1-pro-preview, column provider",
+   "id": "F44"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.5-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.5-flash, column provider",
+   "id": "F45"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.5-flash-lite, column provider",
+   "id": "F46"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.6-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.6-flash, column provider",
+   "id": "F47"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.7-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.7-flash, column provider",
+   "id": "F48"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.8-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.8-flash, column provider",
+   "id": "F49"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-3.5-turbo",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-3.5-turbo, column provider",
+   "id": "F50"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-4.1-2025-04-14",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-4.1-2025-04-14, column provider",
+   "id": "F51"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-4.1-mini-2025-04-14",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-4.1-mini-2025-04-14, column provider",
+   "id": "F52"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-4.1-nano-2025-04-14",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-4.1-nano-2025-04-14, column provider",
+   "id": "F53"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-4o-2024-05-13",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-4o-2024-05-13, column provider",
+   "id": "F54"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-4o-2024-11-20",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-4o-2024-11-20, column provider",
+   "id": "F55"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-4o-mini-2024-07-18",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-4o-mini-2024-07-18, column provider",
+   "id": "F56"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5-2025-08-07",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5-2025-08-07, column provider",
+   "id": "F57"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5-mini-2025-08-07",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5-mini-2025-08-07, column provider",
+   "id": "F58"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5-nano-2025-08-07",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5-nano-2025-08-07, column provider",
+   "id": "F59"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.1-2025-11-13",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.1-2025-11-13, column provider",
+   "id": "F60"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.2-2025-12-11",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.2-2025-12-11, column provider",
+   "id": "F61"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.4-2026-03-05",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.4-2026-03-05, column provider",
+   "id": "F62"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.4-mini-2026-03-17",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.4-mini-2026-03-17, column provider",
+   "id": "F63"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.4-nano-2026-03-17",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.4-nano-2026-03-17, column provider",
+   "id": "F64"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.5",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.5, column provider",
+   "id": "F65"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.6-luna",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.6-luna, column provider",
+   "id": "F66"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.6-sol",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.6-sol, column provider",
+   "id": "F67"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.6-terra",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.6-terra, column provider",
+   "id": "F68"
+  },
+  {
+   "says": "route",
+   "about": "openai/o1-2024-12-17",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/o1-2024-12-17, column provider",
+   "id": "F69"
+  },
+  {
+   "says": "route",
+   "about": "openai/o3-2025-04-16",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/o3-2025-04-16, column provider",
+   "id": "F70"
+  },
+  {
+   "says": "route",
+   "about": "openai/o3-mini-2025-01-31",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/o3-mini-2025-01-31, column provider",
+   "id": "F71"
+  },
+  {
+   "says": "route",
+   "about": "openai/o4-mini-2025-04-16",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/o4-mini-2025-04-16, column provider",
+   "id": "F72"
+  }
+ ]
+}

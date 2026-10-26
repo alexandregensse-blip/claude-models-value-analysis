@@ -1,0 +1,173 @@
+{
+ "id": "src-vals.ai-case_law_v2-2026-05-04",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/case_law_v2"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g2/src/vals/case_law_v2.html": "4fac5b4da0fd20c5af669d39a40f3e45455bca8a52541e55666dfb0b21833dfb",
+  "/work/.salvo14/s23/b1/src/vals/case_law_v2.html": "d0f2bcd9f0b82152a99cdd9255342602278a7bf3854c0f49c86ec0e80d68526e",
+  "/work/.salvo14/s24/c1/src/vals/case_law_v2.html": "404101a66a9a39e386afaec96e07d89cc5daf4e0b3a30984edd041905f234b03",
+  "/work/.salvo14/rd/xai1/src/vlive/valscaselaw.html": "63825585df204560418daa49ec183240a991f498607032c02fe9979deea6d0e0",
+  "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/case_law_v2.html": "63825585df204560418daa49ec183240a991f498607032c02fe9979deea6d0e0",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-case_law_v2-2026-05-04.json": "ff936b64d631901366b7ecd47d994966d67aa7f4a814d3f6c106c87cad5653a8"
+ },
+ "harvested_at": "2026-10-15T15:32:56Z",
+ "published": {
+  "value": "2026-05-04",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 5/4/2026",
+  "file": "/work/.salvo14/g/g2/src/vals/case_law_v2.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/case_law_v2",
+   "captured": "2026-10-19T07:45:03Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/case_law_v2",
+   "captured": "2026-10-15T15:32:56Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/case_law_v2",
+   "captured": "2026-10-18T16:39:27Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/case_law_v2",
+   "captured": "2026-10-20T07:26:37Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S5",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/case_law_v2",
+   "captured": "2026-10-20T09:30:04Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-case_law_v2-2026-05-04.json",
+   "from": "/work/.salvo14/g/g2/src/vals/case_law_v2.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-case_law_v2-2026-05-04.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "2",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/case_law_v2.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"2\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/case_law_v2.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/g/g2/src/vals/case_law_v2.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$1.25",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/case_law_v2.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  },
+  {
+   "id": "F10",
+   "says": "note",
+   "value": "\"use_cost_per_test\":[0,false]",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/case_law_v2.html",
+   "where": "payload metadata of the board (the page table shows \"Cost In / Out\" prices, no per-test cost column)",
+   "quote": "\"use_cost_per_test\":[0,false]",
+   "about": null
+  }
+ ]
+}

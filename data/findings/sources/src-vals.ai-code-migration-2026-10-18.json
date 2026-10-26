@@ -1,0 +1,623 @@
+{
+ "id": "src-vals.ai-code-migration-2026-10-18",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/code-migration"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g2/src/vals/code-migration.html": "b4733c79a4aa5c2e4a97074dd29b15647d08d95162f2001c00651b01a86424c5",
+  "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/code-migration.html": "98ecdb86cc507ea64cb8e5bf0b0fec9eff42db16f6e529ca17078d3cbf611481",
+  "/work/.salvo14/hk/qwen3.8-flash-next/src/boards/vals/code-migration.html": "98ecdb86cc507ea64cb8e5bf0b0fec9eff42db16f6e529ca17078d3cbf611481",
+  "/work/.salvo14/hk/gpt-5.1-codex-max/src/routes/vals/code-migration.html": "98ecdb86cc507ea64cb8e5bf0b0fec9eff42db16f6e529ca17078d3cbf611481",
+  "/work/.salvo14/hn/news-boards/src/vals/code-migration.html": "15845a256df9913f0f7ab3bacfb12d951c803d146662a74c033c81230da804c5",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-code-migration-2026-10-18.json": "b6c454321ede1a96b2191de6532313d7496e411e8543ea470ffbd42d26d023d9"
+ },
+ "harvested_at": "2026-10-19T07:45:04Z",
+ "published": {
+  "value": "2026-10-18",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 10/18/2026",
+  "file": "/work/.salvo14/g/g2/src/vals/code-migration.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/code-migration",
+   "captured": "2026-10-19T07:45:04Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/code-migration",
+   "captured": "2026-10-20T09:30:05Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/code-migration",
+   "captured": "2026-10-20T09:30:29Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/code-migration",
+   "captured": "2026-10-20T09:49:29Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S5",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/code-migration",
+   "captured": "2026-10-21T15:05:49Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-code-migration-2026-10-18.json",
+   "from": "/work/.salvo14/g/g2/src/vals/code-migration.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-code-migration-2026-10-18.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/code-migration.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"1\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/code-migration.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/g/g2/src/vals/code-migration.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$75.83",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/code-migration.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-fable-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-fable-5, column provider",
+   "id": "F11"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-fable-5-1, column provider",
+   "id": "F12"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-haiku-4-5-20251001-thinking",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-haiku-4-5-20251001-thinking, column provider",
+   "id": "F13"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-opus-4-7",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-opus-4-7, column provider",
+   "id": "F14"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-opus-4-8",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-opus-4-8, column provider",
+   "id": "F15"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-opus-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-opus-5, column provider",
+   "id": "F16"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-opus-5-5, column provider",
+   "id": "F17"
+  },
+  {
+   "says": "thinking-on",
+   "about": "anthropic/claude-sonnet-4-6",
+   "value": "reasoning: true",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-sonnet-4-6, column reasoning (payload field reasoning = true)",
+   "id": "F18"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-sonnet-4-6",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-sonnet-4-6, column provider",
+   "id": "F19"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-sonnet-5, column provider",
+   "id": "F20"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-sonnet-5-5, column provider",
+   "id": "F21"
+  },
+  {
+   "says": "route",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row anthropic/claude-haiku-5-5, column provider",
+   "id": "F22"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.6-plus",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.6-plus, column provider",
+   "id": "F23"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.7-max",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.7-max, column provider",
+   "id": "F24"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.7-plus",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.7-plus, column provider",
+   "id": "F25"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.8-27b",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.8-27b, column provider",
+   "id": "F26"
+  },
+  {
+   "says": "route",
+   "about": "alibaba/qwen3.8-max",
+   "value": "Alibaba",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row alibaba/qwen3.8-max, column provider",
+   "id": "F27"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4-flash-0731, column provider",
+   "id": "F28"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4-pro",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4-pro, column provider",
+   "id": "F29"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4-pro-0813, column provider",
+   "id": "F30"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4.1-flash, column provider",
+   "id": "F31"
+  },
+  {
+   "says": "route",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "DeepSeek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row deepseek/deepseek-v4.1-flash-1017, column provider",
+   "id": "F32"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3-flash-preview",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3-flash-preview, column provider",
+   "id": "F33"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.1-flash-lite-preview",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.1-flash-lite-preview, column provider",
+   "id": "F34"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.1-pro-preview, column provider",
+   "id": "F35"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.5-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.5-flash, column provider",
+   "id": "F36"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.5-flash-lite, column provider",
+   "id": "F37"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.6-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.6-flash, column provider",
+   "id": "F38"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.7-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.7-flash, column provider",
+   "id": "F39"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-3.8-flash",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-3.8-flash, column provider",
+   "id": "F40"
+  },
+  {
+   "says": "route",
+   "about": "google/gemini-4-argon",
+   "value": "Google",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row google/gemini-4-argon, column provider",
+   "id": "F41"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.4-2026-03-05",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.4-2026-03-05, column provider",
+   "id": "F42"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.4-mini-2026-03-17",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.4-mini-2026-03-17, column provider",
+   "id": "F43"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.4-nano-2026-03-17",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.4-nano-2026-03-17, column provider",
+   "id": "F44"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.5",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.5, column provider",
+   "id": "F45"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.6-luna",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.6-luna, column provider",
+   "id": "F46"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.6-sol",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.6-sol, column provider",
+   "id": "F47"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-5.6-terra",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-5.6-terra, column provider",
+   "id": "F48"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-6-astra",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-6-astra, column provider",
+   "id": "F49"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-6-luna",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-6-luna, column provider",
+   "id": "F50"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-6-sol",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-6-sol, column provider",
+   "id": "F51"
+  },
+  {
+   "says": "route",
+   "about": "openai/gpt-6.1-sol",
+   "value": "OpenAI",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "where": "row openai/gpt-6.1-sol, column provider",
+   "id": "F52"
+  }
+ ]
+}

@@ -1,0 +1,173 @@
+{
+ "id": "src-vals.ai-medscribe-2026-10-13",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/medscribe"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g2/src/vals/medscribe.html": "7602aa57cac1ddaff775c5ec4f50e7b1e8e99acece41ceca08b1d1f716c7b9ff",
+  "/work/.salvo14/s23/b1/src/vals/medscribe.html": "d7b3276be7a3c76ab7884dc82cf0f550d5cf4c36404ff097ce4fe1ea2cbfb409",
+  "/work/.salvo14/s24/c1/src/vals/medscribe.html": "e1ed678d980b6b96e0c8df3509a887050911d67b718c8669e0b2191029bcefca",
+  "/work/.salvo14/rd/xai1/src/vlive/valsmedscribe.html": "10c7d605b2b031a96aeea72d7ff0bf9436e0af7df431ad55637b822334ac3cab",
+  "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/medscribe.html": "10c7d605b2b031a96aeea72d7ff0bf9436e0af7df431ad55637b822334ac3cab",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-medscribe-2026-10-13.json": "b48c275e1d3d84c793b3fc44fbed68b119084e44bcbca257f7d65451660202e3"
+ },
+ "harvested_at": "2026-10-15T15:33:08Z",
+ "published": {
+  "value": "2026-10-13",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 10/13/2026",
+  "file": "/work/.salvo14/g/g2/src/vals/medscribe.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/medscribe",
+   "captured": "2026-10-19T07:44:39Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/medscribe",
+   "captured": "2026-10-15T15:33:08Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/medscribe",
+   "captured": "2026-10-18T16:38:54Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/medscribe",
+   "captured": "2026-10-20T07:26:42Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S5",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/medscribe",
+   "captured": "2026-10-20T09:30:06Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-medscribe-2026-10-13.json",
+   "from": "/work/.salvo14/g/g2/src/vals/medscribe.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-medscribe-2026-10-13.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/medscribe.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"1\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/medscribe.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/g/g2/src/vals/medscribe.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$4",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/medscribe.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  },
+  {
+   "id": "F10",
+   "says": "note",
+   "value": "\"use_cost_per_test\":[0,false]",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/medscribe.html",
+   "where": "payload metadata of the board (the page table shows \"Cost In / Out\" prices, no per-test cost column)",
+   "quote": "\"use_cost_per_test\":[0,false]",
+   "about": null
+  }
+ ]
+}

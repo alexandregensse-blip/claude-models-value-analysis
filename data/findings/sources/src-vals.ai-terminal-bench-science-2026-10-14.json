@@ -1,0 +1,162 @@
+{
+ "id": "src-vals.ai-terminal-bench-science-2026-10-14",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/terminal-bench-science"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g2/src/vals/terminal-bench-science.html": "3dbfcbad4b22e08c8f2765514958355ae8a5418556df89f5ec7cbd210cb8fdbf",
+  "/work/.salvo14/s23/b1/src/vals/terminal-bench-science.html": "e8e7f8e1cf9c069a9737aadf61f57b552b1aed68624da991a4b2cf4f4c1f89b2",
+  "/work/.salvo14/s24/c1/src/vals/terminal-bench-science.html": "2f82fdd66eb9524b8d782768b0d4dd0911b508e5bf3dc05282c24d1ee046cad8",
+  "/work/.salvo14/hk/qwen3.8-2.4t-a95b/src/vals/terminal-bench-science.html": "01cc69b54905d30a8bed7b3e2c7674c75bd8d927c7597230b47ad2e3c4d4a113",
+  "/work/.salvo14/hk/qwen3.8-flash-next/src/boards/vals/terminal-bench-science.html": "01cc69b54905d30a8bed7b3e2c7674c75bd8d927c7597230b47ad2e3c4d4a113",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-terminal-bench-science-2026-10-14.json": "26a2cdc86eae229db53319a6f09085b44f9974aa77e1e77f12a5d41c2b337578"
+ },
+ "harvested_at": "2026-10-15T15:33:28Z",
+ "published": {
+  "value": "2026-10-14",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 10/14/2026",
+  "file": "/work/.salvo14/g/g2/src/vals/terminal-bench-science.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/terminal-bench-science",
+   "captured": "2026-10-19T07:45:14Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/terminal-bench-science",
+   "captured": "2026-10-15T15:33:28Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/terminal-bench-science",
+   "captured": "2026-10-18T16:39:09Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/terminal-bench-science",
+   "captured": "2026-10-20T09:30:08Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  },
+  {
+   "id": "S5",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/terminal-bench-science",
+   "captured": "2026-10-20T09:30:33Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-terminal-bench-science-2026-10-14.json",
+   "from": "/work/.salvo14/g/g2/src/vals/terminal-bench-science.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-terminal-bench-science-2026-10-14.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "accuracy%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "0.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/g/g2/src/vals/terminal-bench-science.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"0.1\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/terminal-bench-science.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/g/g2/src/vals/terminal-bench-science.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$20.80",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g2/src/vals/terminal-bench-science.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  }
+ ]
+}
