@@ -677,7 +677,11 @@ def resolve_model(M):
             # one run interval for every candidate (lower bound = the earliest candidate's release, so an interval
             # straddling the switch fits no candidate: never the newer model by default)
             ivs = [run_interval(M, k) for k in keys]
-            lo = None if any(x[0] is None for x in ivs) else min(x[0] for x in ivs)
+            if any(f.level in ACCEPTED for f in M.slot("early_access")):
+                lo = None                                # a stated early-access run: no lower bound
+            else:                                        # a candidate released after the run's upper bound has no
+                # lower bound of its own (early access by date): the earliest candidate's release is the bound (26 Oct)
+                lo = min(x[0] if x[0] is not None else ctx.released(k) for k, x in zip(keys, ivs))
             common = (lo, max(x[1] for x in ivs), False)
             ok = [k for k in keys if any(covers(iv, common) for kk, n in matches if kk == k for iv in n["serves"])]
             if len(ok) == 1:

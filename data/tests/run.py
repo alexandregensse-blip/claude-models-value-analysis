@@ -483,6 +483,16 @@ def run_date_alias():
     eq(r.model(m2), "aa2", "after the redirect")
     eq(r.q(m3), "out:model-not-established", "an interval across the redirect")
     eq("alias-by-date" in r[m1]["rules_used"], True, "rule recorded")
+    # a run that ends before the newer candidate's release (early access by date for it): the bound is the earliest
+    # release, so the older model is placed (vals.ai gemini-3.5-flash, 26 Oct); a source published before the
+    # release, no run date stated
+    sc = base()
+    sc.model("ab1", released="2026-01-01", names=[name("alias-y", "2026-01-01", "2026-06-30")])
+    sc.model("ab2", released="2026-07-01", names=[name("alias-y", "2026-07-01")])
+    s = sc.source("a", published="2026-05-01")
+    m4 = sc.m(s, model="alias-y", effort=[LOW])
+    r = sc.run()
+    eq(r.model(m4), "ab1", "the newer candidate's early access does not unbound the alias")
 
 
 @test
