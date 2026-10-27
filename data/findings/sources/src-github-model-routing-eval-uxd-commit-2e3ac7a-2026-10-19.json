@@ -1,0 +1,1071 @@
+{
+ "id": "src-github-model-routing-eval-uxd-commit-2e3ac7a-2026-10-19",
+ "publisher": "github-model-routing-eval",
+ "urls": [
+  "https://github.com/andre-motta/model-routing-eval/tree/2e3ac7aa2c16c726ee749422e60487b8fb92306e"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "2e3ac7aa2c16c726ee749422e60487b8fb92306e",
+   "captured": "2026-10-19T18:58:00Z",
+   "url": "https://github.com/andre-motta/model-routing-eval/commit/2e3ac7aa2c16c726ee749422e60487b8fb92306e",
+   "note": "commit \"Tier 7 skill pipeline: uxd-prototype-create across models, standalone and in-codebase\" (2026-10-19T18:58:00Z, salvo hn news-code); files saved by salvo hn news-code2a"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/results__uxdws__report__runs.csv": "41f3891943ba844c8d3d3ed6f485e6a014e04801e61a59c26a0ae9173f2a2775",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-uxd-runs.csv": "42be0bd66997eb829d986a92a0760705879a6fd05aaacacbba5e184fcba10be8",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/results__uxd__report__runs.csv": "ea03e14f95f7077bd3505066a1738188f6dc6cd550ef67f40ed8bc1daf480416",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv": "1a84b0e8c44e9cee68935d4805c0d65f81ea01479511c03469542728bd98b27d",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml": "b09e2b58ed4ea0139f49cd49f71edbf68ac4a9a975799554de04fb62c465b493",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd-codex.yaml": "bee2aa2fd91527478f7e60b406cd96c25f31309f04b6f8f05131eff53c0405ed",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd-glm.yaml": "4836a152d98df6903ecdc370d85ed41d2c9418a74e43ec431ae97c5a6fb320c8"
+ },
+ "harvested_at": "2026-10-27T09:01:47Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-model-routing-eval (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the files of commit 2e3ac7a saved by salvo hn news-code2a",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-uxd-runs.csv",
+   "from": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/results__uxd__report__runs.csv",
+   "tool": "convert.py (this folder): the rep rows of results/uxd/report/runs.csv and results/uxdws/report/runs.csv (the latter is a second input, sha256 listed) grouped by setup, backend, model and effort: passed_of_n = passed rows / rows, quality_mean = mean of the quality column (2 decimals), cost_mean = mean of the cost column (4 decimals), tok_*_mean = means rounded to integers. Derived cells: the repo prints per-run rows only"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "from": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/results__uxd__report__runs.csv",
+   "tool": "convert.py (this folder): one row per rep row of results/uxd and results/uxdws report/runs.csv (in file order within each config, id = cell id + \"#\" + the row's order), with its quality cell unchanged"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-uxd-runs.csv",
+   "where": "derived cells of the runs.csv files: one row per setup, backend, model and effort",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "setup": "note",
+    "backend": "harness",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "effort": "effort-setting",
+    "n_tasks": "note",
+    "passed_of_n": {
+     "says": "score",
+     "term": "pass%(structural-checker)",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "quality_mean": {
+     "says": "score",
+     "term": "quality-1to5-judge-mean",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "cost_mean": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "tok_in_mean": {
+     "says": "tokens-in",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "tok_cache_mean": {
+     "says": "tokens-cache-read",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "tok_out_mean": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "covers": "aggregation"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-haiku-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-haiku-5-5/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-haiku-5-5/low#1"
+  },
+  {
+   "id": "F2",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-haiku-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-haiku-5-5/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-haiku-5-5/low#2"
+  },
+  {
+   "id": "F3",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-haiku-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-haiku-5-5/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-haiku-5-5/medium#1"
+  },
+  {
+   "id": "F4",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-haiku-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-haiku-5-5/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-haiku-5-5/medium#2"
+  },
+  {
+   "id": "F5",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-opus-5-5/low",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-opus-5-5/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-opus-5-5/low#1"
+  },
+  {
+   "id": "F6",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-opus-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-opus-5-5/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-opus-5-5/low#2"
+  },
+  {
+   "id": "F7",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-opus-5-5/medium",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-opus-5-5/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-opus-5-5/medium#1"
+  },
+  {
+   "id": "F8",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-opus-5-5/medium",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-opus-5-5/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-opus-5-5/medium#2"
+  },
+  {
+   "id": "F9",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-sonnet-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-sonnet-5-5/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-sonnet-5-5/low#1"
+  },
+  {
+   "id": "F10",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-sonnet-5-5/low",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-sonnet-5-5/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-sonnet-5-5/low#2"
+  },
+  {
+   "id": "F11",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-sonnet-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-sonnet-5-5/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-sonnet-5-5/medium#1"
+  },
+  {
+   "id": "F12",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-sonnet-5-5/medium",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-sonnet-5-5/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-sonnet-5-5/medium#2"
+  },
+  {
+   "id": "F13",
+   "says": "run-score",
+   "about": "mre-uxd-u01/claude/claude-sonnet-5-5/medium",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/claude/claude-sonnet-5-5/medium#3, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/claude/claude-sonnet-5-5/medium#3"
+  },
+  {
+   "id": "F14",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/rits/zai-org/glm-5-3/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/rits/zai-org/glm-5-3/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/rits/zai-org/glm-5-3/medium#1"
+  },
+  {
+   "id": "F15",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/rits/zai-org/glm-5-3/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/rits/zai-org/glm-5-3/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/rits/zai-org/glm-5-3/medium#2"
+  },
+  {
+   "id": "F16",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-astra/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-astra/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-astra/low#1"
+  },
+  {
+   "id": "F17",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-astra/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-astra/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-astra/low#2"
+  },
+  {
+   "id": "F18",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-luna/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-luna/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-luna/low#1"
+  },
+  {
+   "id": "F19",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-luna/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-luna/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-luna/low#2"
+  },
+  {
+   "id": "F20",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-luna/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-luna/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-luna/medium#1"
+  },
+  {
+   "id": "F21",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-luna/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-luna/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-luna/medium#2"
+  },
+  {
+   "id": "F22",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6.1-sol/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6.1-sol/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6.1-sol/low#1"
+  },
+  {
+   "id": "F23",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6.1-sol/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6.1-sol/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6.1-sol/low#2"
+  },
+  {
+   "id": "F24",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-astra/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-astra/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-astra/medium#1"
+  },
+  {
+   "id": "F25",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6-astra/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6-astra/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6-astra/medium#2"
+  },
+  {
+   "id": "F26",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6.1-sol/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6.1-sol/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6.1-sol/medium#1"
+  },
+  {
+   "id": "F27",
+   "says": "run-score",
+   "about": "mre-uxd-u01/codex/gpt-6.1-sol/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxd-u01/codex/gpt-6.1-sol/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxd-u01/codex/gpt-6.1-sol/medium#2"
+  },
+  {
+   "id": "F28",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-haiku-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-haiku-5-5/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-haiku-5-5/low#1"
+  },
+  {
+   "id": "F29",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-haiku-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-haiku-5-5/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-haiku-5-5/low#2"
+  },
+  {
+   "id": "F30",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-haiku-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-haiku-5-5/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-haiku-5-5/medium#1"
+  },
+  {
+   "id": "F31",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-haiku-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-haiku-5-5/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-haiku-5-5/medium#2"
+  },
+  {
+   "id": "F32",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-opus-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-opus-5-5/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-opus-5-5/low#1"
+  },
+  {
+   "id": "F33",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-opus-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-opus-5-5/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-opus-5-5/low#2"
+  },
+  {
+   "id": "F34",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-opus-5-5/medium",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-opus-5-5/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-opus-5-5/medium#1"
+  },
+  {
+   "id": "F35",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-opus-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-opus-5-5/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-opus-5-5/medium#2"
+  },
+  {
+   "id": "F36",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-sonnet-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-sonnet-5-5/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-sonnet-5-5/low#1"
+  },
+  {
+   "id": "F37",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-sonnet-5-5/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-sonnet-5-5/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-sonnet-5-5/low#2"
+  },
+  {
+   "id": "F38",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-sonnet-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-sonnet-5-5/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-sonnet-5-5/medium#1"
+  },
+  {
+   "id": "F39",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-sonnet-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-sonnet-5-5/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-sonnet-5-5/medium#2"
+  },
+  {
+   "id": "F40",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/claude/claude-sonnet-5-5/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/claude/claude-sonnet-5-5/medium#3, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/claude/claude-sonnet-5-5/medium#3"
+  },
+  {
+   "id": "F41",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/rits/zai-org/glm-5-3/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/rits/zai-org/glm-5-3/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/rits/zai-org/glm-5-3/medium#1"
+  },
+  {
+   "id": "F42",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/rits/zai-org/glm-5-3/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/rits/zai-org/glm-5-3/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/rits/zai-org/glm-5-3/medium#2"
+  },
+  {
+   "id": "F43",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-astra/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-astra/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-astra/low#1"
+  },
+  {
+   "id": "F44",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-astra/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-astra/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-astra/low#2"
+  },
+  {
+   "id": "F45",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-astra/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-astra/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-astra/medium#1"
+  },
+  {
+   "id": "F46",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-astra/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-astra/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-astra/medium#2"
+  },
+  {
+   "id": "F47",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-luna/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-luna/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-luna/low#1"
+  },
+  {
+   "id": "F48",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-luna/low",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-luna/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-luna/low#2"
+  },
+  {
+   "id": "F49",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-luna/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-luna/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-luna/medium#1"
+  },
+  {
+   "id": "F50",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6-luna/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6-luna/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6-luna/medium#2"
+  },
+  {
+   "id": "F51",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6.1-sol/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6.1-sol/low#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6.1-sol/low#1"
+  },
+  {
+   "id": "F52",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6.1-sol/low",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6.1-sol/low#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6.1-sol/low#2"
+  },
+  {
+   "id": "F53",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6.1-sol/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6.1-sol/medium#1, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6.1-sol/medium#1"
+  },
+  {
+   "id": "F54",
+   "says": "run-score",
+   "about": "mre-uxdws-u02/codex/gpt-6.1-sol/medium",
+   "value": "3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row mre-uxdws-u02/codex/gpt-6.1-sol/medium#2, column quality (one rep of the cell)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/runs-uxd.csv",
+   "term": "quality-1to5-judge-mean",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   },
+   "run": "mre-uxdws-u02/codex/gpt-6.1-sol/medium#2"
+  },
+  {
+   "id": "F55",
+   "says": "judge",
+   "about": null,
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd.yaml, models.judge (the LLM judge of prototype_quality, score_range [1, 5]; the eval-uxdws.yaml profile extends it)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml",
+   "quote": "judge: runner:/claude-opus-5-5"
+  },
+  {
+   "id": "F56",
+   "says": "harness",
+   "about": null,
+   "value": "claude-code",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd.yaml, runner.type (the claude backend; eval-uxdws.yaml extends it)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml",
+   "quote": "type: claude-code",
+   "term": "claude-code"
+  },
+  {
+   "id": "F57",
+   "says": "harness",
+   "about": null,
+   "value": "codex",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd-codex.yaml, runner.type (the codex backend)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd-codex.yaml",
+   "quote": "type: codex",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F58",
+   "says": "route",
+   "about": null,
+   "value": "EnMaaS gateway",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd-glm.yaml, header comment",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd-glm.yaml",
+   "quote": "GLM 5.3 through the EnMaaS gateway for the tier 7 skill-pipeline suite, driven by Codex CLI."
+  },
+  {
+   "id": "F59",
+   "says": "currency",
+   "about": null,
+   "value": "max_budget_usd",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd.yaml, execution (budget in USD)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml",
+   "quote": "max_budget_usd: 8.0",
+   "term": "USD"
+  },
+  {
+   "id": "F60",
+   "says": "unit",
+   "about": null,
+   "value": "per run (mean of the rep rows)",
+   "level": "written",
+   "form": "data-file",
+   "where": "column cost_mean: mean of the cost column over the reps of the cell",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-uxd-runs.csv",
+   "term": "per-run"
+  },
+  {
+   "id": "F61",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Re-price Codex cases from harness/pricing.py list prices",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd.yaml, hooks.before_scoring",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml",
+   "quote": "Re-price Codex cases from harness/pricing.py list prices",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F62",
+   "says": "cost-method",
+   "about": null,
+   "value": "Re-price Codex cases from harness/pricing.py list prices",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd.yaml, hooks.before_scoring",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml",
+   "quote": "Re-price Codex cases from harness/pricing.py list prices",
+   "term": "tokens×list"
+  }
+ ]
+}

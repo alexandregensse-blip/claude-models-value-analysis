@@ -1,0 +1,106 @@
+{
+ "id": "src-arxiv-2609.19883-v1-2026-09-17",
+ "publisher": "arxiv-2609.19883",
+ "urls": [
+  "https://arxiv.org/abs/2609.19883",
+  "https://github.com/pyrroskoussios/PetriBench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "57d5ff0d44079e7d042d8a3303f529b2ae45910b",
+   "captured": "2026-09-18T08:02:58Z",
+   "url": "https://github.com/pyrroskoussios/PetriBench/commit/57d5ff0d44079e7d042d8a3303f529b2ae45910b",
+   "note": "commit 57d5ff0d of pyrroskoussios/PetriBench (2026-09-18, committer date) holding RESULTS.json; saved by salvo g4 (petri-RESULTS.json, petri-head.json)"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/pdf/2609.19883v1",
+   "captured": "2026-10-27T09:55:28Z",
+   "note": "paper PDF (arXiv v1, 17 Sep 2026) saved by salvo g4"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/petri-RESULTS.json": "6ff7f48e2d5c875d62778010200664e9b7d0fb56632f81a2fe5b4f55b6e5b0c0",
+  "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/petri-head.json": "421e87bcdfaf90b2633c8a726b66d5b47ba105598d076a2f317340e1703122b4",
+  "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/p.pdf": "989f94fb791597ecaf66b234829f141ae17dc5d60a3dc6f87e126cdc41b16a91",
+  "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/p.txt": "d268f0ea65a39400f07c5b106c986ab32d9ed0749841fa3b594619715a8f9cf8",
+  "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/systems.csv": "0f8df97d661720feffe80074591e497adbaf24a30020a3d12bd0293c6ae0af68"
+ },
+ "harvested_at": "2026-10-27T09:55:28Z",
+ "published": {
+  "value": "2026-09-17",
+  "where": "page 1, arXiv stamp",
+  "quote": "arXiv:2609.19883v1 [cs.CL] 17 Sep 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/p.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2609.19883 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the repository file RESULTS.json (salvo g4) and the paper PDF text",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/p.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/p.pdf",
+   "tool": "text extraction of the PDF by salvo g4 (page by page); quotes are matched after NFKC and whitespace normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/systems.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/petri-RESULTS.json",
+   "tool": "convert.py (this folder): one row per system (model, effort) of RESULTS.json; correct_of_total = the sum of `correct` over the system's 18 task x difficulty records / the sum of `total` (4800 questions), parse_failures and truncations = sums of the data file's fields. A derived cell: the data file holds the per-task counts only"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/systems.csv",
+   "where": "derived per-system cells of RESULTS.json",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "name": "model-name",
+    "developer": "note",
+    "effort": "effort-setting",
+    "correct_of_total": {
+     "says": "score",
+     "term": "exact-match%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "parse_failures": "note",
+    "truncations": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "aggregation",
+   "about": null,
+   "value": "a single completion per question",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix (Table 15 caption)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/p.txt",
+   "quote": "We obtain a single completion per question"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "Maximum output tokens is set to the minimum of 128,000 tokens and the maximum output length supported by the corresponding provider",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 15 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.19883/evidence/p.txt",
+   "quote": "Maximum output tokens is set to the minimum of 128,000 tokens and the maximum output length supported by the corresponding provider"
+  }
+ ]
+}

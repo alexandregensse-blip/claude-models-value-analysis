@@ -1,0 +1,119 @@
+{
+ "id": "src-github-model-routing-eval-session-runs-2026-10-15",
+ "publisher": "github-model-routing-eval",
+ "urls": [
+  "https://github.com/andre-motta/model-routing-eval/blob/main/results/session_runs.csv"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://github.com/andre-motta/model-routing-eval/blob/main/results/session_runs.csv",
+   "captured": "2026-10-27T09:01:47Z",
+   "note": "session_runs.csv of the repo main branch saved by salvo s23 b4 (file mtime, 15 Oct)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-session-runs.csv": "57fca1fc8c18e6a6e9aab49ca84573158deb8ebcff90c7266eecaec17c3bcb1b",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/session_runs.csv": "488544f51fab8bcbc924b6d7012ab5cb439322734c59b7874451ae771c6c3020",
+  "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml": "b09e2b58ed4ea0139f49cd49f71edbf68ac4a9a975799554de04fb62c465b493"
+ },
+ "harvested_at": "2026-10-27T09:01:47Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-model-routing-eval (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from results/session_runs.csv saved by salvo s23 b4 (15 Oct)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-session-runs.csv",
+   "from": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/session_runs.csv",
+   "tool": "convert.py (this folder): the per-task rows of session_runs.csv grouped by the task sets of the setups (mre-small8 = t04-t09, t11, t12; mre-fromager5 = r01-r05; mre-tickets3 = r01t-r03t; mre-medium3 = t14-t16) and by (model, effort): passed_of_n = passed rows / rows, cost_mean = mean of the cost column rounded to 4 decimals, tok_*_mean = means of the token columns rounded to integers. A derived cell: the repo prints per-task rows only"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-session-runs.csv",
+   "where": "derived cells of session_runs.csv: one row per task set, model and effort",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "setup": "note",
+    "backend": "harness",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "effort": "effort-setting",
+    "n_tasks": "note",
+    "passed_of_n": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "quality_mean": "note",
+    "cost_mean": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "tok_in_mean": {
+     "says": "tokens-in",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "tok_cache_mean": {
+     "says": "tokens-cache-read",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "tok_out_mean": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "covers": "aggregation"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "max_budget_usd",
+   "level": "written",
+   "form": "code",
+   "where": "eval-uxd.yaml, execution (the budget of the same harness is in USD)",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/eval-uxd.yaml",
+   "quote": "max_budget_usd: 8.0",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "per task (mean of the task rows)",
+   "level": "written",
+   "form": "data-file",
+   "where": "column cost_mean: mean of the cost column over the tasks of the set",
+   "file": "/work/.salvo14/mig/convert-github-model-routing-eval/evidence/cells-session-runs.csv",
+   "term": "per-task"
+  }
+ ]
+}

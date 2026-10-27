@@ -1,0 +1,224 @@
+{
+ "id": "src-google-gemini-3-6-flash-card-2026-10-19",
+ "publisher": "google",
+ "urls": [
+  "https://deepmind.google/models/model-cards/gemini-3-6-flash/",
+  "https://deepmind.google/models/evals-methodology/gemini-3-6-flash/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://deepmind.google/models/model-cards/gemini-3-6-flash/",
+   "captured": "2026-10-19T15:43:23Z",
+   "note": "model card fetched by salvo gs/s2 (file mtime 2026-10-19); the card says \"Results as of July, 2026\""
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://deepmind.google/models/evals-methodology/gemini-3-6-flash/",
+   "captured": "2026-10-19T15:44:39Z",
+   "note": "methodology page fetched by salvo gs/s2 (file mtime 2026-10-19)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/gs/s2/src/mc-gemini-3-6-flash.txt": "35cba36587c67f0c1bd3f34d8433ccb677bf141eaeda7111e229dd2b555a06aa",
+  "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt": "f11cecb8f7491dd7e582254c052c94afe742655863bd010eec2120398b406f72",
+  "/work/.salvo14/gs/s2/src/mc-gemini-3-6-flash.html": "7d483b708d9c84ad45049d3c69104ac35db196868c02d65254e5c4175a2f08eb",
+  "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.pdf": "590f82308b3dac37c97be237b209313a9feb18d59dec228ef6ee353c132d3cbd",
+  "/work/.salvo14/mig/convert-google-gemini-3.6-flash-card/evidence/card-results.csv": "cce89b1fbe868e3689d8136048621327cf57df79374911b4ae6c7a1f346284fa"
+ },
+ "harvested_at": "2026-10-19T15:43:23Z",
+ "published": null,
+ "salvo": "salvo14/mig convert-google-gemini-3-6-flash-card (Wave C2, 27 Oct)",
+ "agent": "converter c2lib-15/gcard.py (Sonnet 5.5), from the saved model card text and methodology text",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-google-gemini-3.6-flash-card/evidence/card-results.csv",
+   "from": "/work/.salvo14/gs/s2/src/mc-gemini-3-6-flash.txt",
+   "tool": "gcard.py: the Results table of the model card text (whitespace-joined) cut per benchmark row; the 6 values at the end of each row segment are the columns Gemini 3.6 Flash, Gemini 3.5 Flash, Gemini 3.1 Pro, GPT-5.6 Luna, Grok 4.5, Claude Sonnet 5; % signs dropped, id = benchmark/model"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-google-gemini-3.6-flash-card/evidence/card-results.csv",
+   "where": "model card Results table, one row per benchmark and model",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "benchmark": "note",
+    "model": "model-name",
+    "value": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "evaluated-by",
+   "about": null,
+   "value": "Google DeepMind",
+   "level": "written",
+   "form": "prose",
+   "where": "page title of the model card: the maker publishes its own evaluation",
+   "file": "/work/.salvo14/gs/s2/src/mc-gemini-3-6-flash.txt",
+   "quote": "Model Card — Google DeepMind"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "default sampling settings",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: Gemini rows ran through the Gemini API with default sampling settings; no thinking level stated",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "with default sampling settings"
+  },
+  {
+   "id": "F3",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "default sampling settings",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: all Gemini API results use default sampling settings unless indicated otherwise below",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "with default sampling settings"
+  },
+  {
+   "id": "F4",
+   "says": "harness",
+   "about": null,
+   "value": "internal version of the Antigravity harness",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, SWE-Bench Pro (Public)",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "internal version of the Antigravity harness"
+  },
+  {
+   "id": "F5",
+   "says": "restated-from",
+   "about": null,
+   "value": "providers' self reported numbers",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, intro",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "All the results for non-Gemini models are sourced from providers' self reported numbers unless otherwise mentioned below"
+  },
+  {
+   "id": "F6",
+   "says": "restated-from",
+   "about": null,
+   "value": "Available scores for other models are sourced from https://contextarena.ai/",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, GDM-MRCR v2 128k",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "Available scores for other models are sourced from https://contextarena.ai/"
+  },
+  {
+   "id": "F7",
+   "says": "restated-from",
+   "about": null,
+   "value": "DeepSWE v1.1 results for Gemini models are reported from the public leaderboard from deepswe.datacurve.ai",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, DeepSWE v1.1",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "DeepSWE v1.1 results for Gemini models are reported from the public leaderboard from deepswe.datacurve.ai"
+  },
+  {
+   "id": "F8",
+   "says": "effort-label",
+   "about": "Gemini 3.6 Flash",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, DeepSWE: \"highest scoring thinking level for each model\"",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "high reasoning for Gemini 3.6 Flash"
+  },
+  {
+   "id": "F9",
+   "says": "effort-label",
+   "about": "Gemini 3.5 Flash",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, DeepSWE: \"highest scoring thinking level for each model\"",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "medium reasoning for Gemini 3.5"
+  },
+  {
+   "id": "F10",
+   "says": "harness",
+   "about": null,
+   "value": "Terminus-2",
+   "level": "written",
+   "form": "prose",
+   "where": "card Results table notes, Terminal-bench 2.1",
+   "file": "/work/.salvo14/gs/s2/src/mc-gemini-3-6-flash.txt",
+   "quote": "Terminus-2 harness",
+   "term": "terminus-2"
+  },
+  {
+   "id": "F11",
+   "says": "restated-from",
+   "about": null,
+   "value": "for other models are reported from the public leaderboard and Artiﬁcial Analysis",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Terminal-bench 2.1",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "for other models are reported from the public leaderboard and Artiﬁcial Analysis"
+  },
+  {
+   "id": "F12",
+   "says": "harness",
+   "about": null,
+   "value": "interactive Bash terminal harness",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, MLE-Bench",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "interactive Bash terminal harness"
+  },
+  {
+   "id": "F13",
+   "says": "restated-from",
+   "about": null,
+   "value": "GDPVal-AA v2 results are sourced from the Artiﬁcial Analysis public leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, GDPVal-AA v2",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-6-flash.txt",
+   "quote": "GDPVal-AA v2 results are sourced from the Artiﬁcial Analysis public leaderboard"
+  }
+ ]
+}

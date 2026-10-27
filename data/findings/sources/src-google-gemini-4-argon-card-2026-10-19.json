@@ -1,0 +1,191 @@
+{
+ "id": "src-google-gemini-4-argon-card-2026-10-19",
+ "publisher": "google",
+ "urls": [
+  "https://deepmind.google/models/model-cards/gemini-4-argon/",
+  "https://deepmind.google/models/evals-methodology/gemini-4-argon/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://deepmind.google/models/model-cards/gemini-4-argon/",
+   "captured": "2026-10-19T15:43:18Z",
+   "note": "model card fetched by salvo gs/s2 (file mtime 2026-10-19); the card says \"Results as of ...\""
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://deepmind.google/models/evals-methodology/gemini-4-argon/",
+   "captured": "2026-10-19T15:44:06Z",
+   "note": "methodology page fetched by salvo gs/s2 (file mtime 2026-10-19)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/gs/s2/src/mc-gemini-4-argon.txt": "0914b769793fb12dac0f54b075f6c408f442d5fbf32627aa1a135305556aad66",
+  "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt": "648d1b8efb94b7368ba64cefb63041fb7ce79cf5af329c9deeaac8ada3dd0be9",
+  "/work/.salvo14/gs/s2/src/mc-gemini-4-argon.html": "71d099474d38ad8966a95e5f7a9d991984b10fac3f8b4976c7452cb20283e224",
+  "/work/.salvo14/gs/s2/src/em-gemini-4-argon.pdf": "ff1df6bdeddc4c0f48840c09a8a7813b10ae7ad9e053892da68dabf64f09bff7",
+  "/work/.salvo14/mig/convert-google-gemini-4-argon-card/evidence/card-results.csv": "6892b9e437b7a85001991b45f3a4dc72e1b8c1b64badc8fa1476dec3154b8488"
+ },
+ "harvested_at": "2026-10-19T15:43:18Z",
+ "published": null,
+ "salvo": "salvo14/mig convert-google-gemini-4-argon-card (Wave C2, 27 Oct)",
+ "agent": "converter c2lib-15/gcard.py (Sonnet 5.5), from the saved model card text and methodology text",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-google-gemini-4-argon-card/evidence/card-results.csv",
+   "from": "/work/.salvo14/gs/s2/src/mc-gemini-4-argon.txt",
+   "tool": "gcard.py: the Results table of the model card text (whitespace-joined) cut per benchmark row; the 4 values at the end of each row segment are the columns Gemini 4 Argon, GPT-6 Astra, Claude Fable 5.1, Claude Opus 5.5; % signs dropped, id = benchmark/model"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-google-gemini-4-argon-card/evidence/card-results.csv",
+   "where": "model card Results table, one row per benchmark and model",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "benchmark": "note",
+    "model": "model-name",
+    "value": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "evaluated-by",
+   "about": null,
+   "value": "Google DeepMind",
+   "level": "written",
+   "form": "prose",
+   "where": "page title of the model card: the maker publishes its own evaluation",
+   "file": "/work/.salvo14/gs/s2/src/mc-gemini-4-argon.txt",
+   "quote": "Model Card — Google DeepMind"
+  },
+  {
+   "id": "F2",
+   "says": "effort-label",
+   "about": null,
+   "value": "highest thinking settings",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology intro (all Gemini results; \"unless indicated otherwise below\")",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "All of the results are run with the Gemini API with the highest thinking settings"
+  },
+  {
+   "id": "F3",
+   "says": "harness",
+   "about": null,
+   "value": "mini-swe agent harness",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, DeepSWE v1.1",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "using a mini-swe agent harness"
+  },
+  {
+   "id": "F4",
+   "says": "restated-from",
+   "about": null,
+   "value": "Fable 5.1 and Opus 5.5 results are taken from their respective system cards",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, DeepSWE v1.1",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "Fable 5.1 and Opus 5.5 results are taken from their respective system cards"
+  },
+  {
+   "id": "F5",
+   "says": "restated-from",
+   "about": null,
+   "value": "Fable 5.1 and Opus 5.5 results are taken from their respective system cards",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, DeepSWE v1.1",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "Fable 5.1 and Opus 5.5 results are taken from their respective system cards"
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": null,
+   "value": "OpenCode",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, PostTrainBench",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "We use v1.1 with the OpenCode harness for all models",
+   "term": "opencode"
+  },
+  {
+   "id": "F7",
+   "says": "restated-from",
+   "about": null,
+   "value": "All other results are reported from the oﬃcial public leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Terminal-Bench Science 0.1",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "All other results are reported from the oﬃcial public leaderboard"
+  },
+  {
+   "id": "F8",
+   "says": "harness",
+   "about": null,
+   "value": "default ALE-Claw harness",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Agent's Last Exam",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "using the default ALE-Claw harness"
+  },
+  {
+   "id": "F9",
+   "says": "restated-from",
+   "about": null,
+   "value": "GPT-6 Astra and Opus 5.5 results are taken from the oﬃcial public leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Agent's Last Exam",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "GPT-6 Astra and Opus 5.5 results are taken from the oﬃcial public leaderboard"
+  },
+  {
+   "id": "F10",
+   "says": "restated-from",
+   "about": null,
+   "value": "GPT Astra results were taken from the oﬃcial blog post",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, OSWorld-2.0 Offline subset",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-4-argon.txt",
+   "quote": "GPT Astra results were taken from the oﬃcial blog post"
+  }
+ ]
+}

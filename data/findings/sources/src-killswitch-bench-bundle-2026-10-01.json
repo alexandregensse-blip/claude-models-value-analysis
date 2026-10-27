@@ -1,0 +1,556 @@
+{
+ "id": "src-killswitch-bench-bundle-2026-10-01",
+ "publisher": "killswitch-bench",
+ "urls": [
+  "https://bench.killswitch-lang.org/",
+  "https://bench.killswitch-lang.org/assets/index-CckTLNGS.js"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://bench.killswitch-lang.org/assets/index-CckTLNGS.js",
+   "captured": "2026-10-27T10:01:16Z",
+   "note": "bundle index-CckTLNGS.js of bench.killswitch-lang.org saved by salvo s18 a6 (file mtime 1 Oct)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-killswitch-bench/evidence/bundle-CckTLNGS.js": "0e598dcd19fd3d5693572273855536840ae03b874a9c1d1981351491549f88bb",
+  "/work/.salvo14/mig/convert-killswitch-bench/evidence/records-A.json": "fdad0b19c1fb8329463418f142973054f36e21e7dce8192d116f99a047afd203",
+  "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv": "854dacdcf82420f77a068e4747ef25bbb3382081f4fb2a82843e1e731f75682c"
+ },
+ "harvested_at": "2026-10-27T10:01:16Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-killswitch-bench (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved JS of the site",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/records-A.json",
+   "from": "/work/.salvo14/mig/convert-killswitch-bench/evidence/bundle-CckTLNGS.js",
+   "tool": "convert.py (this folder): the JSON array of run records embedded in the script as JSON.parse('[...]') (the first such literal), written unchanged (165 records)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "from": "/work/.salvo14/mig/convert-killswitch-bench/evidence/records-A.json",
+   "tool": "convert.py (this folder): one row per (model id, agent) of the run records: runs = their number, passed_of_runs = records with status \"passed\" / runs, cost_mean = mean of total_cost_usd (4 decimals), first_start / last_finish = the earliest started_at / latest finished_at, caps = counts of the statuses timeout_exceeded and budget_exceeded, budget = budget_usd. Derived cells: the site computes pass rate in the browser"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "where": "derived per-model cells of the run records",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "display": "model-name",
+    "agent": "note",
+    "backend": "note",
+    "runs": "note",
+    "passed_of_runs": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_mean": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "first_start": "run-start",
+    "last_finish": "run-end",
+    "caps": "note",
+    "budget": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "Score combines pass rate, cost, and code size",
+   "level": "written",
+   "form": "code",
+   "where": "Leaderboard heading of the site: the leaderboard score combines pass rate, cost and code size (the board's own score is not a held metric)",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/bundle-CckTLNGS.js",
+   "quote": "Score combines pass rate, cost, and code size"
+  },
+  {
+   "id": "F2",
+   "says": "currency",
+   "about": null,
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "data-file",
+   "where": "field total_cost_usd of every run record",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/records-A.json",
+   "term": "USD"
+  },
+  {
+   "id": "F3",
+   "says": "unit",
+   "about": null,
+   "value": "USD per run (mean)",
+   "level": "written",
+   "form": "data-file",
+   "where": "column cost_mean: mean of total_cost_usd over the runs of the model and agent",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "per-run"
+  },
+  {
+   "id": "F4",
+   "says": "harness",
+   "about": "@cf/moonshotai/kimi-k2.7-code|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row @cf/moonshotai/kimi-k2.7-code|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F5",
+   "says": "route",
+   "about": "@cf/moonshotai/kimi-k2.7-code|opencode",
+   "value": "workers-ai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row @cf/moonshotai/kimi-k2.7-code|opencode (Cloudflare Workers AI model ids \"@cf/...\")",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": "claude-fable-5-1|claude",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row claude-fable-5-1|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "claude-code"
+  },
+  {
+   "id": "F7",
+   "says": "route",
+   "about": "claude-fable-5-1|claude",
+   "value": "anthropic",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row claude-fable-5-1|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F8",
+   "says": "harness",
+   "about": "gpt-5.6-luna|codex",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row gpt-5.6-luna|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F9",
+   "says": "route",
+   "about": "gpt-5.6-luna|codex",
+   "value": "openai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row gpt-5.6-luna|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F10",
+   "says": "harness",
+   "about": "@cf/qwen/qwen3.8-27b|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row @cf/qwen/qwen3.8-27b|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F11",
+   "says": "route",
+   "about": "@cf/qwen/qwen3.8-27b|opencode",
+   "value": "workers-ai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row @cf/qwen/qwen3.8-27b|opencode (Cloudflare Workers AI model ids \"@cf/...\")",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F12",
+   "says": "cap",
+   "about": "@cf/qwen/qwen3.8-27b|opencode",
+   "value": "budget_usd 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row @cf/qwen/qwen3.8-27b|opencode: runs ended by a declared cap, scored as failures (10 timeout_exceeded); column budget = the per-run budget in USD",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F13",
+   "says": "harness",
+   "about": "gpt-6-astra|codex",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row gpt-6-astra|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F14",
+   "says": "route",
+   "about": "gpt-6-astra|codex",
+   "value": "openai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row gpt-6-astra|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F15",
+   "says": "harness",
+   "about": "@cf/deepseek-ai/deepseek-v4-pro-0813|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row @cf/deepseek-ai/deepseek-v4-pro-0813|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F16",
+   "says": "route",
+   "about": "@cf/deepseek-ai/deepseek-v4-pro-0813|opencode",
+   "value": "workers-ai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row @cf/deepseek-ai/deepseek-v4-pro-0813|opencode (Cloudflare Workers AI model ids \"@cf/...\")",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F17",
+   "says": "cap",
+   "about": "@cf/deepseek-ai/deepseek-v4-pro-0813|opencode",
+   "value": "budget_usd 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row @cf/deepseek-ai/deepseek-v4-pro-0813|opencode: runs ended by a declared cap, scored as failures (2 budget_exceeded; 2 timeout_exceeded); column budget = the per-run budget in USD",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F18",
+   "says": "harness",
+   "about": "claude-sonnet-5|claude",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row claude-sonnet-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "claude-code"
+  },
+  {
+   "id": "F19",
+   "says": "route",
+   "about": "claude-sonnet-5|claude",
+   "value": "anthropic",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row claude-sonnet-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F20",
+   "says": "harness",
+   "about": "@cf/zai-org/glm-5.3|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row @cf/zai-org/glm-5.3|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F21",
+   "says": "route",
+   "about": "@cf/zai-org/glm-5.3|opencode",
+   "value": "workers-ai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row @cf/zai-org/glm-5.3|opencode (Cloudflare Workers AI model ids \"@cf/...\")",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F22",
+   "says": "cap",
+   "about": "@cf/zai-org/glm-5.3|opencode",
+   "value": "budget_usd 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row @cf/zai-org/glm-5.3|opencode: runs ended by a declared cap, scored as failures (2 budget_exceeded); column budget = the per-run budget in USD",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F23",
+   "says": "harness",
+   "about": "gpt-5.6-sol|codex",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row gpt-5.6-sol|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F24",
+   "says": "route",
+   "about": "gpt-5.6-sol|codex",
+   "value": "openai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row gpt-5.6-sol|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F25",
+   "says": "harness",
+   "about": "claude-opus-5|claude",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row claude-opus-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "claude-code"
+  },
+  {
+   "id": "F26",
+   "says": "route",
+   "about": "claude-opus-5|claude",
+   "value": "anthropic",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row claude-opus-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F27",
+   "says": "cap",
+   "about": "claude-opus-5|claude",
+   "value": "budget_usd 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-5|claude: runs ended by a declared cap, scored as failures (1 budget_exceeded); column budget = the per-run budget in USD",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F28",
+   "says": "harness",
+   "about": "moonshotai/kimi-k3|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row moonshotai/kimi-k3|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F29",
+   "says": "route",
+   "about": "moonshotai/kimi-k3|opencode",
+   "value": "openrouter",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row moonshotai/kimi-k3|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "openrouter"
+  },
+  {
+   "id": "F30",
+   "says": "cap",
+   "about": "moonshotai/kimi-k3|opencode",
+   "value": "budget_usd 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row moonshotai/kimi-k3|opencode: runs ended by a declared cap, scored as failures (1 budget_exceeded; 2 timeout_exceeded); column budget = the per-run budget in USD",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F31",
+   "says": "harness",
+   "about": "meta/muse-spark-1.3|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row meta/muse-spark-1.3|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F32",
+   "says": "route",
+   "about": "meta/muse-spark-1.3|opencode",
+   "value": "openrouter",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row meta/muse-spark-1.3|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "openrouter"
+  },
+  {
+   "id": "F33",
+   "says": "cap",
+   "about": "meta/muse-spark-1.3|opencode",
+   "value": "budget_usd 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row meta/muse-spark-1.3|opencode: runs ended by a declared cap, scored as failures (1 budget_exceeded); column budget = the per-run budget in USD",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F34",
+   "says": "harness",
+   "about": "deepseek/deepseek-v4.1-flash|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row deepseek/deepseek-v4.1-flash|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F35",
+   "says": "route",
+   "about": "deepseek/deepseek-v4.1-flash|opencode",
+   "value": "openrouter",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row deepseek/deepseek-v4.1-flash|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "openrouter"
+  },
+  {
+   "id": "F36",
+   "says": "cap",
+   "about": "deepseek/deepseek-v4.1-flash|opencode",
+   "value": "budget_usd 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row deepseek/deepseek-v4.1-flash|opencode: runs ended by a declared cap, scored as failures (6 timeout_exceeded); column budget = the per-run budget in USD",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv"
+  },
+  {
+   "id": "F37",
+   "says": "harness",
+   "about": "xiaomi/mimo-v2.6-pro|opencode",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row xiaomi/mimo-v2.6-pro|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "opencode"
+  },
+  {
+   "id": "F38",
+   "says": "route",
+   "about": "xiaomi/mimo-v2.6-pro|opencode",
+   "value": "openrouter",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row xiaomi/mimo-v2.6-pro|opencode",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "openrouter"
+  },
+  {
+   "id": "F39",
+   "says": "harness",
+   "about": "claude-opus-5-5|claude",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row claude-opus-5-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "claude-code"
+  },
+  {
+   "id": "F40",
+   "says": "route",
+   "about": "claude-opus-5-5|claude",
+   "value": "anthropic",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row claude-opus-5-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F41",
+   "says": "harness",
+   "about": "gpt-6-sol|codex",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row gpt-6-sol|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F42",
+   "says": "route",
+   "about": "gpt-6-sol|codex",
+   "value": "openai",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row gpt-6-sol|codex",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  },
+  {
+   "id": "F43",
+   "says": "harness",
+   "about": "claude-sonnet-5-5|claude",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "where": "column agent of row claude-sonnet-5-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "claude-code"
+  },
+  {
+   "id": "F44",
+   "says": "route",
+   "about": "claude-sonnet-5-5|claude",
+   "value": "anthropic",
+   "level": "written",
+   "form": "data-file",
+   "where": "column backend of row claude-sonnet-5-5|claude",
+   "file": "/work/.salvo14/mig/convert-killswitch-bench/evidence/models-A.csv",
+   "term": "maker-api"
+  }
+ ]
+}
