@@ -1378,6 +1378,21 @@ def ext_decimal_comma_and_counts_words():
     eq(x["value"], "1234.5", "thousands dot")
 
 
+@test
+def ext_thinking_on_with_level_on_levels_only_model():
+    # thinking on plus a stated level, on a model whose list has levels and no `think`: the level, not a contradiction
+    # with the maker's default that thinking on alone would read (bazaar-2608.00102, 27 Oct)
+    sc = base()
+    win = dict(from_basis="stated", to_basis="stated")
+    sc.model("ml5", configs=("low", "medium", "high"),
+             default=[dict(iv("2026-01-01", "2026-12-31", **win), configuration="medium")])
+    s = sc.source("p")
+    m1 = sc.m(s, model="ml5", effort=[("thinking-on", "thinking enabled"), ("effort-label", "high")], score="50%")
+    sc.m(s, model="ma", effort=[LOW], score="40%")
+    r = sc.run()
+    eq((r.cfg(m1), "level-from-default" in r[m1]["flags"]), ("high", False), "the stated level")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

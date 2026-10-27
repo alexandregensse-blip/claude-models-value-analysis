@@ -139,6 +139,9 @@ The fit tables carry these confound flags:
     `not-established:contradictory` (`out:contradictory` on the cost axis);
   - no card, a card in another currency, or no tokens → accepted as written;
   - `fields.cost.reproduction` says which case applied.
+- **Thinking on with a stated level** (27 Oct). On a model whose list has levels and no `think`, thinking on plus a
+  stated level (setting, label, chart order) gives the level; the maker's default that thinking on alone would read is
+  not used (no contradiction, no `level-from-default`).
 - **A decimal comma** (27 Oct). A source whose numbers use a decimal comma carries `decimal_mark: ","`: the build reads
   '12,5' as 12.5, '1.234,5' and '1.234' as thousands; the quotes keep the printed value. A counts score may write
   "k of N" in the source's language (из, von, sur, de, su, di).

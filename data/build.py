@@ -1158,7 +1158,7 @@ def configuration(M, key):
             if "level-from-default" not in M.flags:
                 M.flags.append("level-from-default")
         results.append((7, cfg, lv if cfg else "not-established:absent",
-                        d or ("" if cfg else "thinking on, no level, no documented default"), ref, kind))
+                        d or ("" if cfg else "thinking on, no level, no documented default"), ref, kind + ":default"))
 
     for f in accepted:
         s = f.says[0] if len(f.says) == 1 else next((x for x in f.says if x in (
@@ -1257,10 +1257,19 @@ def configuration(M, key):
     vals = {r[1] for r in est}
     if len(vals) > 1:
         kinds = {r[5] for r in est}
-        lv = [r for r in est if r[1] in LEVELS and r[5] in ("effort-setting", "config-history", "effort-label")]
-        if {r[1] for r in est} - {r[1] for r in lv} == {"think"} and len({r[1] for r in lv}) == 1 and \
-                all(r[5] in ("thinking-on", "name-selects") for r in est if r[1] == "think"):
-            r = lv[0]                                    # thinking on and a level: the level is the more specific
+        lv = [r for r in est if r[1] in LEVELS and r[5] in ("effort-setting", "config-history", "effort-label",
+                                                            "effort-order")]
+        others = [r for r in est if r not in lv]
+        # thinking on and a level: the level is the more specific; also when thinking on alone would have read the
+        # maker's default level (a levels-only model, thinking-on-default-level, 27 Oct)
+        if lv and others and len({r[1] for r in lv}) == 1 and all(
+                (r[1] == "think" and r[5] in ("thinking-on", "name-selects")) or r[5].endswith(":default") for r in others):
+            r = lv[0]
+            if any(o[5].endswith(":default") for o in others) and \
+                    not any(o[5].endswith(":default") for o in results if o not in others):
+                M.rules.discard("thinking-on-default-level")   # the default was not used: the level was stated
+                if "level-from-default" in M.flags:
+                    M.flags.remove("level-from-default")
             out.update(value=r[1], level=r[2], step=r[0], detail="thinking on with a level: the level")
             return
         specific = [r for r in est if r[5] in ("name-selects", "thinking-on", "thinking-off")]
