@@ -10223,6 +10223,42 @@
   },
   "hf-qwen3.8-flash-next-charxiv-rq-with-ci": {
    "label": "hf-qwen3.8-flash-next: charxiv-rq-with-ci"
+  },
+  "improofbench-complete": {
+   "label": "IMProofBench Complete Solution Rate (Progress Grades)"
+  },
+  "rsigeneval2-quality": {
+   "label": "Designer-RSI · GenEval2 (generation quality)"
+  },
+  "rsidpgbench-quality": {
+   "label": "Designer-RSI · DPG-Bench (generation quality)"
+  },
+  "rsioneigen-quality": {
+   "label": "Designer-RSI · OneIG-EN (generation quality)"
+  },
+  "rsioneigzh-quality": {
+   "label": "Designer-RSI · OneIG-ZH (generation quality)"
+  },
+  "messydocs-docexact": {
+   "label": "messy-docs-bench documents fully right (all 137 documents)"
+  },
+  "messydocs-docexact-contracts": {
+   "label": "messy-docs-bench documents fully right (contracts)"
+  },
+  "messydocs-docexact-invoices": {
+   "label": "messy-docs-bench documents fully right (invoices)"
+  },
+  "messydocs-docexact-receipts": {
+   "label": "messy-docs-bench documents fully right (receipts (CORD))"
+  },
+  "messydocs-docexact-sroie": {
+   "label": "messy-docs-bench documents fully right (SROIE receipts)"
+  },
+  "messydocs-docexact-statements": {
+   "label": "messy-docs-bench documents fully right (statements)"
+  },
+  "messydocs-docexact-w2": {
+   "label": "messy-docs-bench documents fully right (W-2 forms)"
   }
  },
  "setups": {
@@ -69860,10 +69896,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "complete%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://improofbench.math.ethz.ch/questions/leaderboard",
+      "captured": "2026-10-19",
+      "where": "leaderboard page: the Progress Grades tab is the default tab ('Progress Grades Tab (Default)', localStorage default 'progress') and its first view is the Complete Solution Rate",
+      "quote": "Complete Solution Rate",
+      "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/page-text.txt",
+      "sha256": "b1f354c2f3dfce5b78ef0e9597720ac95c5dd1ca0e6a6a8b78744b2002376ff5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -78920,10 +78965,19 @@
    "judge_panel": null,
    "metric": "field-acc%",
    "headline": {
-    "metric": "field-acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100105,10 +100159,19 @@
    "judge_panel": null,
    "metric": "score/10",
    "headline": {
-    "metric": "score/10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "win%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/renchris/claude-infrastructure/blob/main/docs/research/sonnet55-synth-probe-2026-09-28/table.md",
+      "captured": "2026-10-27",
+      "where": "Section 6 Verdict: the doc decides on the per-brief pairwise majority wins of the arms (OX against SM / SH / SX), not on the mean score; the held setup keeps the mean score, so its measures go out as not the headline (a pairwise win tally is not printed per arm)",
+      "quote": "OX won or tied every per-brief majority against all three Sonnet arms",
+      "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+      "sha256": "7624a449d728db569d17a1d1580731e44ea67036ef976ca9ed08bb998c140bd6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103198,10 +103261,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "win%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 2: the specialized design tasks are compared by Evolve-vs-Base pairwise win rate (abstract: 61.8% and 67.6% win rates against the no-skill agent)",
+      "quote": "Pairwise win rates on specialized graphic design tasks.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103227,10 +103299,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "win%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 2: the specialized design tasks are compared by Evolve-vs-Base pairwise win rate (abstract: 61.8% and 67.6% win rates against the no-skill agent)",
+      "quote": "Pairwise win rates on specialized graphic design tasks.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103256,10 +103337,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103285,10 +103375,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103314,10 +103413,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "win%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 2: the specialized design tasks are compared by Evolve-vs-Base pairwise win rate (abstract: 61.8% and 67.6% win rates against the no-skill agent)",
+      "quote": "Pairwise win rates on specialized graphic design tasks.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103343,10 +103451,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103372,10 +103489,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103401,10 +103527,19 @@
    "judge_panel": null,
    "metric": "complete%",
    "headline": {
-    "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "win%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 2: the specialized design tasks are compared by Evolve-vs-Base pairwise win rate (abstract: 61.8% and 67.6% win rates against the no-skill agent)",
+      "quote": "Pairwise win rates on specialized graphic design tasks.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -132787,6 +132922,438 @@
    "legacy_groups": [],
    "label": "hf-qwen3.8-flash-next: charxiv-rq-with-ci",
    "note": "cells of the Qwen3.8-Flash-Next card the registry did not hold; new setup of wave C2 (27 Oct); the card prints two metrics for this benchmark and designates none: headline pending"
+  },
+  "improofbench-complete": {
+   "family": "improofbench-complete",
+   "benchmark": "IMProofBench (Progress Grades: Complete Solution Rate)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "complete%",
+   "headline": {
+    "metric": "complete%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://improofbench.math.ethz.ch/questions/leaderboard",
+      "captured": "2026-10-19",
+      "where": "leaderboard page: the Progress Grades tab is the default tab ('Progress Grades Tab (Default)', localStorage default 'progress') and its first view is the Complete Solution Rate",
+      "quote": "Complete Solution Rate",
+      "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/page-text.txt",
+      "sha256": "b1f354c2f3dfce5b78ef0e9597720ac95c5dd1ca0e6a6a8b78744b2002376ff5"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "IMProofBench Complete Solution Rate",
+   "note": "new setup (27 Oct fix-up): the page's default tab; IRT-estimated share of problems with a grade-3 (complete) solution, 62 questions"
+  },
+  "rsigeneval2-quality": {
+   "family": "rsigeneval2-quality",
+   "benchmark": "Designer-RSI · GenEval2 (generation quality)",
+   "subset": null,
+   "harness": "DesignAgent-BASE",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "quality",
+   "headline": {
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Designer-RSI · GenEval2 (generation quality)",
+   "note": "new setup (27 Oct fix-up): Base agent generation quality, Table 1 (first number of each cell)"
+  },
+  "rsidpgbench-quality": {
+   "family": "rsidpgbench-quality",
+   "benchmark": "Designer-RSI · DPG-Bench (generation quality)",
+   "subset": null,
+   "harness": "DesignAgent-BASE",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "quality",
+   "headline": {
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Designer-RSI · DPG-Bench (generation quality)",
+   "note": "new setup (27 Oct fix-up): Base agent generation quality, Table 1 (first number of each cell)"
+  },
+  "rsioneigen-quality": {
+   "family": "rsioneigen-quality",
+   "benchmark": "Designer-RSI · OneIG-EN (generation quality)",
+   "subset": null,
+   "harness": "DesignAgent-BASE",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "quality",
+   "headline": {
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Designer-RSI · OneIG-EN (generation quality)",
+   "note": "new setup (27 Oct fix-up): Base agent generation quality, Table 1 (first number of each cell)"
+  },
+  "rsioneigzh-quality": {
+   "family": "rsioneigzh-quality",
+   "benchmark": "Designer-RSI · OneIG-ZH (generation quality)",
+   "subset": null,
+   "harness": "DesignAgent-BASE",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "quality",
+   "headline": {
+    "metric": "quality",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.22086",
+      "captured": "2026-10-19",
+      "where": "Table 1 caption: each cell reports the generation quality followed by the success rate; the text and abstract report the quality gains (+11.99 points in generation quality)",
+      "quote": "Each cell reports the generation quality followed by the success rate (%).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.22086/evidence/arxiv-2609.22086v1.txt",
+      "sha256": "fef09a83e177594790e406a04fa275be92ecc967995b6042276c01fc42ab2fc9"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Designer-RSI · OneIG-ZH (generation quality)",
+   "note": "new setup (27 Oct fix-up): Base agent generation quality, Table 1 (first number of each cell)"
+  },
+  "messydocs-docexact": {
+   "family": "messydocs-docexact",
+   "benchmark": "TashonBraganca/messy-docs-bench: documents with every field right (all 137 documents)",
+   "subset": null,
+   "harness": "none",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "exact-match%",
+   "headline": {
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "messy-docs-bench documents fully right (all 137 documents)",
+   "note": "new setup (27 Oct fix-up): the README's headline metric; README results table, counts k/137"
+  },
+  "messydocs-docexact-contracts": {
+   "family": "messydocs-docexact-contracts",
+   "benchmark": "TashonBraganca/messy-docs-bench: documents with every field right (contracts)",
+   "subset": null,
+   "harness": "none",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "exact-match%",
+   "headline": {
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "messy-docs-bench documents fully right (contracts)",
+   "note": "new setup (27 Oct fix-up): the README's headline metric; results/summary.json doc_exact of the document type"
+  },
+  "messydocs-docexact-invoices": {
+   "family": "messydocs-docexact-invoices",
+   "benchmark": "TashonBraganca/messy-docs-bench: documents with every field right (invoices)",
+   "subset": null,
+   "harness": "none",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "exact-match%",
+   "headline": {
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "messy-docs-bench documents fully right (invoices)",
+   "note": "new setup (27 Oct fix-up): the README's headline metric; results/summary.json doc_exact of the document type"
+  },
+  "messydocs-docexact-receipts": {
+   "family": "messydocs-docexact-receipts",
+   "benchmark": "TashonBraganca/messy-docs-bench: documents with every field right (receipts (CORD))",
+   "subset": null,
+   "harness": "none",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "exact-match%",
+   "headline": {
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "messy-docs-bench documents fully right (receipts (CORD))",
+   "note": "new setup (27 Oct fix-up): the README's headline metric; results/summary.json doc_exact of the document type"
+  },
+  "messydocs-docexact-sroie": {
+   "family": "messydocs-docexact-sroie",
+   "benchmark": "TashonBraganca/messy-docs-bench: documents with every field right (SROIE receipts)",
+   "subset": null,
+   "harness": "none",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "exact-match%",
+   "headline": {
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "messy-docs-bench documents fully right (SROIE receipts)",
+   "note": "new setup (27 Oct fix-up): the README's headline metric; results/summary.json doc_exact of the document type"
+  },
+  "messydocs-docexact-statements": {
+   "family": "messydocs-docexact-statements",
+   "benchmark": "TashonBraganca/messy-docs-bench: documents with every field right (statements)",
+   "subset": null,
+   "harness": "none",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "exact-match%",
+   "headline": {
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "messy-docs-bench documents fully right (statements)",
+   "note": "new setup (27 Oct fix-up): the README's headline metric; results/summary.json doc_exact of the document type"
+  },
+  "messydocs-docexact-w2": {
+   "family": "messydocs-docexact-w2",
+   "benchmark": "TashonBraganca/messy-docs-bench: documents with every field right (W-2 forms)",
+   "subset": null,
+   "harness": "none",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "exact-match%",
+   "headline": {
+    "metric": "exact-match%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/TashonBraganca/messy-docs-bench",
+      "captured": "2026-10-05",
+      "where": "README: 'The headline number is documents with every field right' (the Documents fully right column)",
+      "quote": "The headline number is **documents with every field right**",
+      "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+      "sha256": "97af5ef40cb929f113df51086d9c391b738ecfde6c319152eb9cef40e94c195d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "messy-docs-bench documents fully right (W-2 forms)",
+   "note": "new setup (27 Oct fix-up): the README's headline metric; results/summary.json doc_exact of the document type"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."

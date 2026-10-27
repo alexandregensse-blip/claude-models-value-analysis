@@ -51,6 +51,15 @@
       "model": "printed",
       "step": 0.0001
      }
+    },
+    "doc_exact": {
+     "says": "score",
+     "term": "exact-match%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
     }
    },
    "level": "written"
@@ -1217,6 +1226,206 @@
    "where": "entry qwen3-vl-8b-local|single|w2, field type (the document type of this score)",
    "quote": "\"type\": \"w2\"",
    "table": "T1"
+  },
+  {
+   "id": "F100",
+   "about": "claude-opus-5.5|overall",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, row label (the quantisation and device are in the same cell)",
+   "quote": "| Claude Opus 5.5 | 98.1% | 89% (122/137) |"
+  },
+  {
+   "id": "F101",
+   "about": "claude-opus-5.5|overall",
+   "says": "score",
+   "value": "122/137",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, column Documents fully right",
+   "quote": "| Claude Opus 5.5 | 98.1% | 89% (122/137) |",
+   "term": "exact-match%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F102",
+   "about": "claude-opus-5.5|overall",
+   "says": "harness",
+   "value": "\"claude\", \"-p\"",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py MODELS entry of claude-opus-5.5",
+   "quote": "cmd = [\"claude\", \"-p\", \"--model\", model",
+   "term": "claude-code"
+  },
+  {
+   "id": "F103",
+   "about": "claude-opus-5.5|overall",
+   "says": "no-effort-sent",
+   "value": "\"--tools\", \"\", \"--strict-mcp-config\", \"-",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py: the headless `claude -p` command line carries --model but no --effort flag",
+   "quote": "\"--tools\", \"\", \"--strict-mcp-config\", \"--no-session-persistence\""
+  },
+  {
+   "id": "F104",
+   "about": "claude-sonnet-5|overall",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, row label (the quantisation and device are in the same cell)",
+   "quote": "| Claude Sonnet 5 | 97.6% | 85% (116/137) |"
+  },
+  {
+   "id": "F105",
+   "about": "claude-sonnet-5|overall",
+   "says": "score",
+   "value": "116/137",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, column Documents fully right",
+   "quote": "| Claude Sonnet 5 | 97.6% | 85% (116/137) |",
+   "term": "exact-match%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F106",
+   "about": "claude-sonnet-5|overall",
+   "says": "harness",
+   "value": "\"claude\", \"-p\"",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py MODELS entry of claude-sonnet-5",
+   "quote": "cmd = [\"claude\", \"-p\", \"--model\", model",
+   "term": "claude-code"
+  },
+  {
+   "id": "F107",
+   "about": "claude-sonnet-5|overall",
+   "says": "no-effort-sent",
+   "value": "\"--tools\", \"\", \"--strict-mcp-config\", \"-",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py: the headless `claude -p` command line carries --model but no --effort flag",
+   "quote": "\"--tools\", \"\", \"--strict-mcp-config\", \"--no-session-persistence\""
+  },
+  {
+   "id": "F108",
+   "about": "gpt-5.6-terra|overall",
+   "says": "model-name",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, row label (the quantisation and device are in the same cell)",
+   "quote": "| GPT-5.6 Terra | 89.3% | 57% (78/137) |"
+  },
+  {
+   "id": "F109",
+   "about": "gpt-5.6-terra|overall",
+   "says": "score",
+   "value": "78/137",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, column Documents fully right",
+   "quote": "| GPT-5.6 Terra | 89.3% | 57% (78/137) |",
+   "term": "exact-match%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F110",
+   "about": "gpt-5.6-terra|overall",
+   "says": "harness",
+   "value": "azure",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py MODELS entry of gpt-5.6-terra",
+   "quote": "\"gpt-5.6-terra\": {\"call\": azure",
+   "term": "azure"
+  },
+  {
+   "id": "F111",
+   "about": "gpt-5.6-terra|overall",
+   "says": "no-effort-sent",
+   "value": "\"max_completion_tokens\": 16000}, {\"api-k",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py: the Azure chat-completions payload carries no reasoning_effort field",
+   "quote": "\"max_completion_tokens\": 16000}, {\"api-key\": e[\"AZURE_OPENAI_API_KEY\"]})"
+  },
+  {
+   "id": "F112",
+   "about": "qwen3-vl-8b-local|overall",
+   "says": "model-name",
+   "value": "Qwen3-VL 8B Instruct",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, row label (the quantisation and device are in the same cell)",
+   "quote": "| Qwen3-VL 8B Instruct, Q4_K_M, on a laptop | 92.7% | 59% (81/137) |"
+  },
+  {
+   "id": "F113",
+   "about": "qwen3-vl-8b-local|overall",
+   "says": "score",
+   "value": "81/137",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/README.md",
+   "where": "README results table, column Documents fully right",
+   "quote": "| Qwen3-VL 8B Instruct, Q4_K_M, on a laptop | 92.7% | 59% (81/137) |",
+   "term": "exact-match%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F114",
+   "about": "qwen3-vl-8b-local|overall",
+   "says": "harness",
+   "value": "ollama",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py MODELS entry of qwen3-vl-8b-local",
+   "quote": "\"qwen3-vl-8b-local\": {\"call\": ollama(\"qwen3-vl:8b-instruct\")",
+   "term": "ollama"
+  },
+  {
+   "id": "F115",
+   "about": "qwen3-vl-8b-local|overall",
+   "says": "no-effort-sent",
+   "value": "\"options\": {\"temperature\": 0, \"num_ctx\":",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-messydocsbench/evidence/models.py",
+   "where": "models.py: the Ollama request carries no thinking or reasoning option",
+   "quote": "\"options\": {\"temperature\": 0, \"num_ctx\": 32768, \"num_predict\": 4096}}"
   }
  ]
 }

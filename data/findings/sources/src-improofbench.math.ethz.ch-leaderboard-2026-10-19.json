@@ -34,7 +34,9 @@
   "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/leaderboard-2026-10-19.html": "fa74e33af7103ba1d90133c0f8662a0cc1f3c85c8f59b7d479300ec1175b93d3",
   "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/leaderboard-2026-10-20.html": "bf346eea8453dccdbafcb3887abfa463d27e0cc334f3dbea177e6774c1298ee8",
   "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/leaderboard-data.json": "ca790bf83083faccc634f50dbf7e522802755d9dc5160f4c84b95b02d5eb77ed",
-  "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/page-text.txt": "b1f354c2f3dfce5b78ef0e9597720ac95c5dd1ca0e6a6a8b78744b2002376ff5"
+  "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/page-text.txt": "b1f354c2f3dfce5b78ef0e9597720ac95c5dd1ca0e6a6a8b78744b2002376ff5",
+  "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-data.json": "abe3ddabf017a4256d7f5e5bb3ebf32f54be6e122759932dbd8f29277c3c1b4b",
+  "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json": "2361b54e7eba3ff2200ec8b4818f3d95173dbdc704beb975efa727934078ad61"
  },
  "harvested_at": "2026-10-19T08:22:15Z",
  "published": null,
@@ -51,6 +53,16 @@
    "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/page-text.txt",
    "from": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/leaderboard-2026-10-19.html",
    "tool": "convert.py: visible text of the page (scripts and styles dropped, tags replaced by newlines, blank lines squeezed)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-data.json",
+   "from": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/leaderboard-2026-10-19.html",
+   "tool": "convert.py: the object passed as 2nd argument of createProgressGradeChart('progressGradeChart', ...) in the page's script (10 models), copied verbatim; percentages = [grade 0, 1, 2, 3] in %, grade 3 = Complete Solution (the script pushes percentages[3] into completeData)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "from": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-data.json",
+   "tool": "convert.py: per model, model_name, framework_type and complete_solution = percentages[3] as written (digits unchanged)"
   }
  ],
  "tables": [
@@ -65,6 +77,24 @@
     "score_percentage": {
      "says": "score",
      "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "model_name",
+   "columns": {
+    "complete_solution": {
+     "says": "score",
+     "term": "complete%",
      "scale": "percent",
      "precision": {
       "model": "exact"
@@ -133,6 +163,125 @@
    "where": "entry 'ChatGPT 5.4 Pro (Browser)', field display_name: the setting word; framework_type is manual_eval",
    "quote": "\"display_name\": \"ChatGPT 5.4 Pro (Browser)\"",
    "table": "T1"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "metric-definition",
+   "value": "The percentage of problems where each model produced a complete and correct mathematical proof.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/page-text.txt",
+   "where": "page text, Progress Grades tab (default): Complete Solution Rate",
+   "quote": "The percentage of problems where each model produced a complete and correct mathematical proof."
+  },
+  {
+   "id": "F7",
+   "about": "GPT-5.4",
+   "says": "model-name",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'GPT-5.4', field model_name",
+   "quote": "\"model_name\": \"GPT-5.4\"",
+   "table": "T2"
+  },
+  {
+   "id": "F8",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro Preview",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'Gemini 3.1 Pro Preview', field model_name",
+   "quote": "\"model_name\": \"Gemini 3.1 Pro Preview\"",
+   "table": "T2"
+  },
+  {
+   "id": "F9",
+   "about": "GPT-5.2",
+   "says": "model-name",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'GPT-5.2', field model_name",
+   "quote": "\"model_name\": \"GPT-5.2\"",
+   "table": "T2"
+  },
+  {
+   "id": "F10",
+   "about": "Claude Opus 4.6",
+   "says": "model-name",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'Claude Opus 4.6', field model_name",
+   "quote": "\"model_name\": \"Claude Opus 4.6\"",
+   "table": "T2"
+  },
+  {
+   "id": "F11",
+   "about": "GPT-5",
+   "says": "model-name",
+   "value": "GPT-5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'GPT-5', field model_name",
+   "quote": "\"model_name\": \"GPT-5\"",
+   "table": "T2"
+  },
+  {
+   "id": "F12",
+   "about": "Grok 4",
+   "says": "model-name",
+   "value": "Grok 4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'Grok 4', field model_name",
+   "quote": "\"model_name\": \"Grok 4\"",
+   "table": "T2"
+  },
+  {
+   "id": "F13",
+   "about": "o4-mini",
+   "says": "model-name",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'o4-mini', field model_name",
+   "quote": "\"model_name\": \"o4-mini\"",
+   "table": "T2"
+  },
+  {
+   "id": "F14",
+   "about": "Gemini 2.5 Pro",
+   "says": "model-name",
+   "value": "Gemini 2.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'Gemini 2.5 Pro', field model_name",
+   "quote": "\"model_name\": \"Gemini 2.5 Pro\"",
+   "table": "T2"
+  },
+  {
+   "id": "F15",
+   "about": "Claude Opus 4.1",
+   "says": "model-name",
+   "value": "Claude Opus 4.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-improofbench.math.ethz.ch/evidence/progress-complete.json",
+   "where": "entry 'Claude Opus 4.1', field model_name",
+   "quote": "\"model_name\": \"Claude Opus 4.1\"",
+   "table": "T2"
   }
  ]
 }
