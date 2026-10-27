@@ -1,0 +1,154 @@
+{
+ "id": "src-arxiv-2608-13547-2026-08-13",
+ "publisher": "arxiv-2608.13547",
+ "urls": [
+  "https://arxiv.org/abs/2608.13547",
+  "https://arxiv.org/html/2608.13547"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2608.13547",
+   "captured": "2026-10-19T08:00:00Z",
+   "note": "arXiv HTML v1 (13 Aug 2026) saved by salvo g/g8 (src/a2608.13547.raw, text src/a2608.13547.txt; file mtime 19 Oct)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g8/src/a2608.13547.txt": "ac998dfad2048a348e90911d51936d0683681d94603974d762280fae406ae838",
+  "/work/.salvo14/g/g8/src/a2608.13547.raw": "d22253846a7a0a0e69326d3eaeca578e0112329c7dec9907a52230c2c7d326e2",
+  "/work/.salvo14/mig/convert-arxiv-2608.13547/evidence/table12-13.csv": "a7c29198291e1b63633f3b3fa00eb88afcfa389dad47e9791d67383e2d6732a2"
+ },
+ "harvested_at": "2026-10-19T08:00:00Z",
+ "published": {
+  "value": "2026-08-13",
+  "where": "arXiv stamp",
+  "quote": "13 Aug 2026",
+  "file": "/work/.salvo14/g/g8/src/a2608.13547.txt"
+ },
+ "salvo": "salvo14/mig convert-arxiv-2608.13547 (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved arXiv HTML text",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.13547/evidence/table12-13.csv",
+   "from": "/work/.salvo14/g/g8/src/a2608.13547.txt",
+   "tool": "convert.py: Table 12 (matched-nested effort ladders: per model the slash-separated settings, success rates, mean output tokens, split cell by cell, order preserved) joined with Table 13 (model identifier and decoding parameters) of the text extraction; id = display name/setting"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.13547/evidence/table12-13.csv",
+   "where": "Table 12 x Table 13, one row per model and setting",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "display_name": "note",
+    "model_identifier": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "setting": "effort-setting",
+    "success_pct": {
+     "says": "score",
+     "term": "success%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "mean_output_tokens": {
+     "says": "tokens-out"
+    },
+    "decoding_parameters": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "Each point uses trial 0 over 56 tasks",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 12 caption",
+   "file": "/work/.salvo14/g/g8/src/a2608.13547.txt",
+   "quote": "Each point uses trial 0 over 56 tasks"
+  },
+  {
+   "id": "F2",
+   "says": "run-end",
+   "about": null,
+   "value": "2026-07-31",
+   "level": "written",
+   "form": "prose",
+   "where": "Hosted-deployment note: the sweep was queried on 2026-07-31 and the effort ladders earlier in July 2026 (upper bound for the ladders)",
+   "file": "/work/.salvo14/g/g8/src/a2608.13547.txt",
+   "quote": "the same-window mechanism sweep was queried on 2026-07-31 and the effort ladders earlier in July 2026"
+  },
+  {
+   "id": "F3",
+   "says": "aggregation",
+   "about": null,
+   "value": "trial 0 over 56 tasks",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 12 caption",
+   "file": "/work/.salvo14/g/g8/src/a2608.13547.txt",
+   "quote": "Each point uses trial 0 over 56 tasks"
+  },
+  {
+   "id": "F4",
+   "says": "thinking-off",
+   "about": "Qwen3.5-27B/non-thinking",
+   "value": "non-thinking",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 12/13 setting of the Qwen row (think toggle off)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.13547/evidence/table12-13.csv",
+   "quote": "non-thinking"
+  },
+  {
+   "id": "F5",
+   "says": "model-api-id",
+   "about": "Qwen3.5-27B/non-thinking",
+   "value": "Qwen/Qwen3.5-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 13, model identifier (a Hugging Face repository id)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.13547/evidence/table12-13.csv",
+   "quote": "Qwen/Qwen3.5-27B",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F6",
+   "says": "thinking-on",
+   "about": "Qwen3.5-27B/thinking",
+   "value": "thinking",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 12/13 setting of the Qwen row (think toggle on)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.13547/evidence/table12-13.csv",
+   "quote": "thinking"
+  },
+  {
+   "id": "F7",
+   "says": "model-api-id",
+   "about": "Qwen3.5-27B/thinking",
+   "value": "Qwen/Qwen3.5-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 13, model identifier (a Hugging Face repository id)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.13547/evidence/table12-13.csv",
+   "quote": "Qwen/Qwen3.5-27B",
+   "namespace": "huggingface"
+  }
+ ]
+}

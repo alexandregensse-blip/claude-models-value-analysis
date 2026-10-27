@@ -1,0 +1,247 @@
+{
+ "id": "src-arxiv-dayjob-2610-01306-2026-10-01",
+ "publisher": "arxiv-dayjob",
+ "urls": [
+  "https://arxiv.org/abs/2610.01306",
+  "https://arxiv.org/pdf/2610.01306"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/pdf/2610.01306",
+   "captured": "2026-10-19T00:00:00Z",
+   "note": "arXiv:2610.01306v1 (1 Oct 2026) saved by salvo g/g4 (p.pdf, text p.txt, file mtime 19 Oct)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g4/src/a2610.01306/p.pdf": "9bbda84cf47ce3f33a93aeaf528c6a0c1de317d7e9354fde3c9ec394ccfff721",
+  "/work/.salvo14/g/g4/src/a2610.01306/p.txt": "30f997dbb908b88b5e4c478523fdb4b88f7c95cd63b9633374e15c975c03ad63",
+  "/work/.salvo14/mig/convert-arxiv-dayjob/evidence/table3.csv": "2d4bc8e3ae9d5bae34a22379e60cf4cd7ae95a7b3f66ba1bdb07774ab3387631"
+ },
+ "harvested_at": "2026-10-19T00:00:00Z",
+ "published": {
+  "value": "2026-10-01",
+  "where": "arXiv stamp on page 1",
+  "quote": "1 Oct 2026",
+  "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt"
+ },
+ "salvo": "salvo14/mig convert-arxiv-dayjob (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved paper text",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-dayjob/evidence/table3.csv",
+   "from": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "tool": "convert.py: Table 3 of the paper (PDF page 6) from the text extraction, 6 lines per configuration (Configuration, Developer, healthcare Strict, Rank, finance Strict, Rank), copied verbatim; the model and setting columns split the Configuration string at its parenthesis"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-dayjob/evidence/table3.csv",
+   "where": "Table 3: launch leaderboard, one row per configuration",
+   "format": "csv",
+   "row_key": "configuration",
+   "columns": {
+    "configuration": "note",
+    "model": "model-name",
+    "setting": "effort-setting",
+    "developer": "note",
+    "strict_healthcare": {
+     "says": "score",
+     "term": "strict-pass@1%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "rank_healthcare": "note",
+    "strict_finance": {
+     "says": "score",
+     "term": "strict-pass@1%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "rank_finance": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "Parenthesized labels give the reasoning setting passed to the provider",
+   "level": "written",
+   "form": "prose",
+   "where": "section 4.2: the setting in each Configuration label is the setting passed to the provider",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "Parenthesized labels give the reasoning setting passed to the provider"
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "OpenHands Software Agent SDK",
+   "level": "written",
+   "form": "prose",
+   "where": "section 4.1 Harness",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "an agent loop built on the OpenHands Software Agent SDK",
+   "term": "openhands"
+  },
+  {
+   "id": "F3",
+   "says": "route",
+   "about": null,
+   "value": "model provider’s API host",
+   "level": "written",
+   "form": "prose",
+   "where": "section 4.1 Harness: network egress is limited to the provider API host",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "Network egress is limited to the model provider’s API host",
+   "term": "maker-api"
+  },
+  {
+   "id": "F4",
+   "says": "judge",
+   "about": null,
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "prose",
+   "where": "section 4.3 Grading",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "with Claude Opus 4.8 as its model"
+  },
+  {
+   "id": "F5",
+   "says": "aggregation",
+   "about": null,
+   "value": "Each configuration attempts every task five times",
+   "level": "written",
+   "form": "prose",
+   "where": "section 4.2",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "Each configuration attempts every task five times"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "Attempts that end in an error, such as a time-out or a provider failure, are excluded from",
+   "level": "written",
+   "form": "prose",
+   "where": "section 4.2",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "Attempts that end in an error, such as a time-out or a provider failure, are excluded from"
+  },
+  {
+   "id": "F7",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "where": "Figure 3 axis",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "Mean cost per attempt (USD, log scale)",
+   "term": "USD"
+  },
+  {
+   "id": "F8",
+   "says": "unit",
+   "about": null,
+   "value": "per attempt",
+   "level": "written",
+   "form": "prose",
+   "where": "section 5.3 Cost and tokens",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "Mean cost per attempt",
+   "term": "per-attempt"
+  },
+  {
+   "id": "F9",
+   "says": "cost-basis",
+   "about": null,
+   "value": "litellm’s prices",
+   "level": "written",
+   "form": "prose",
+   "where": "section 5.3",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "at litellm’s prices, or at provider billing where litellm has no price",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F10",
+   "says": "cost-method",
+   "about": null,
+   "value": "litellm’s prices",
+   "level": "written",
+   "form": "prose",
+   "where": "section 5.3",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "at litellm’s prices, or at provider billing where litellm has no price",
+   "term": "library-table"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": null,
+   "value": "excludes the judge",
+   "level": "written",
+   "form": "prose",
+   "where": "section 5.3",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "excludes the judge"
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": "Claude Opus 5.5 (adaptive/max)",
+   "value": "7.10",
+   "level": "written",
+   "form": "prose",
+   "where": "section 5.3: the frontier ends at Claude Opus 5.5 at $7.10 per healthcare attempt",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "$7.10 per healthcare",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "says": "cost",
+   "about": "Claude Opus 5.5 (adaptive/max)",
+   "value": "11.47",
+   "level": "written",
+   "form": "prose",
+   "where": "section 5.3: ... and $11.47 per finance attempt",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "$11.47 per finance",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F14",
+   "says": "effort-label",
+   "about": null,
+   "value": "maximum effort",
+   "level": "written",
+   "form": "prose",
+   "where": "section 4.2: \"adaptive/max\" denotes adaptive thinking at maximum effort",
+   "file": "/work/.salvo14/g/g4/src/a2610.01306/p.txt",
+   "quote": "maximum effort. Each configuration attempts every task five times"
+  }
+ ]
+}

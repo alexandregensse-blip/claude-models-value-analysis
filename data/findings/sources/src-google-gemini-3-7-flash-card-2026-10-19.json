@@ -1,0 +1,156 @@
+{
+ "id": "src-google-gemini-3-7-flash-card-2026-10-19",
+ "publisher": "google",
+ "urls": [
+  "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+  "https://deepmind.google/models/evals-methodology/gemini-3-7-flash/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://deepmind.google/models/model-cards/gemini-3-7-flash/",
+   "captured": "2026-10-19T15:43:21Z",
+   "note": "model card fetched by salvo gs/s2 (file mtime 19 Oct); the card says \"Results as of August 2026\""
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://deepmind.google/models/evals-methodology/gemini-3-7-flash/",
+   "captured": "2026-10-19T15:43:51Z",
+   "note": "methodology PDF fetched by salvo gs/s2 (file mtime 19 Oct)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/gs/s2/src/mc-gemini-3-7-flash.txt": "d054032cbd05052c165fd1f7c43ce06b4ab99fd652e5c23fefee7a7095346bca",
+  "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt": "6c8d6e99e14275f19029d516865f106851f13e4579e1744ed8d91f9f62a387b8",
+  "/work/.salvo14/gs/s2/src/mc-gemini-3-7-flash.html": "3f8b451c3b37e6936e94dd2aa4a5d20e5254857d65db533a103d89061464217d",
+  "/work/.salvo14/mig/convert-google-gemini-3.7-flash-card/evidence/card-results.csv": "58e9bb76d8bb2155377beeef24ae70c3fad384672f83e7c18d7a1272e6b17143"
+ },
+ "harvested_at": "2026-10-19T15:43:21Z",
+ "published": null,
+ "salvo": "salvo14/mig convert-google-gemini-3.7-flash-card (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved model card text",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-google-gemini-3.7-flash-card/evidence/card-results.csv",
+   "from": "/work/.salvo14/gs/s2/src/mc-gemini-3-7-flash.txt",
+   "tool": "convert.py: the Results table of the model card text (mc-gemini-3-7-flash.txt, whitespace-joined) cut per benchmark row; the 5 values after each benchmark label are the columns Gemini 3.7 Flash, Gemini 3.6 Flash, Claude Sonnet 5, GPT-5.6 Terra, Muse Spark 1.2 (header \"Benchmark Notes Gemini 3.7 Flash ...\"); % signs dropped, id = benchmark/model"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-google-gemini-3.7-flash-card/evidence/card-results.csv",
+   "where": "model card Results table, one row per benchmark and model",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "benchmark": "note",
+    "model": "model-name",
+    "value": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "default sampling settings",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: Gemini rows ran through the Gemini API with default sampling settings; no thinking level stated",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt",
+   "quote": "with default sampling settings"
+  },
+  {
+   "id": "F2",
+   "says": "restated-from",
+   "about": null,
+   "value": "official public Web Dev leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Coding",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt",
+   "quote": "Code Arena results are sourced from the oﬃcial public Web Dev leaderboard"
+  },
+  {
+   "id": "F3",
+   "says": "restated-from",
+   "about": null,
+   "value": "official public leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Coding",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt",
+   "quote": "Terminal-Bench 3 results are reported from the oﬃcial public leaderboard"
+  },
+  {
+   "id": "F4",
+   "says": "restated-from",
+   "about": null,
+   "value": "Artiﬁcial Analysis public leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Knowledge work",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt",
+   "quote": "GDPVal-AA v2 results are sourced from the Artiﬁcial Analysis public leaderboard"
+  },
+  {
+   "id": "F5",
+   "says": "restated-from",
+   "about": null,
+   "value": "oﬃcial public leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Multimodal",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt",
+   "quote": "GDP.PDF results for GPT-5.6 Terra and Muse Spark 1.2 are taken from the oﬃcial public leaderboard"
+  },
+  {
+   "id": "F6",
+   "says": "restated-from",
+   "about": null,
+   "value": "oﬃcial blog post",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Computer use",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt",
+   "quote": "GPT-5.6 Terra results are taken from the oﬃcial blog post"
+  },
+  {
+   "id": "F7",
+   "says": "restated-from",
+   "about": null,
+   "value": "oﬃcial public leaderboard",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology, Computer use",
+   "file": "/work/.salvo14/gs/s2/src/em-gemini-3-7-flash.txt",
+   "quote": "GPT-5.6 Terra results are taken from the oﬃcial public leaderboard"
+  }
+ ]
+}
