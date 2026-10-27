@@ -1,0 +1,98 @@
+{
+ "id": "src-arxiv-2605.04312-v1-2026-05-05",
+ "publisher": "arxiv-2605.04312",
+ "urls": [
+  "https://arxiv.org/abs/2605.04312",
+  "https://arxiv.org/html/2605.04312"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2605.04312",
+   "captured": "2026-10-20T06:15:55Z",
+   "note": "arXiv HTML saved by salvo gt/t6 (file mtime 20 Oct 2026)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.html": "c472c328a16230ee8a1b03566d085c06a7e7ae860eea5cf709ce5f92d35acf5c",
+  "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.txt": "e7ebd868501820ef90c78a3535d0f8cb091eea7b5cd1470fa0b1a0f6b749949e",
+  "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/table-1.csv": "19f67f49573f39227701fcd18dafbaf291e3863183ca7965529edf30404e450b"
+ },
+ "harvested_at": "2026-10-20T06:15:55Z",
+ "published": {
+  "value": "2026-05-05",
+  "where": "page header",
+  "quote": "arXiv:2605.04312v1 [cs.AI] 05 May 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2605.04312 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the arXiv HTML saved by salvo gt/t6 (20 Oct) and its text extraction (htmltxt.py)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.html",
+   "tool": "htmltxt.py (convert-arxiv-2610.13075): text of the arXiv HTML, one line per paragraph, one table cell per line ending \" |\""
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/table-1.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.txt",
+   "tool": "convert.py: Table 1 of the paper (rank, model, mean, 95% CI, games, wins) from the text extraction, one CSV row per rank, cells copied verbatim"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/table-1.csv",
+   "where": "table-1.csv: Table 1, Plackett-Luce rankings (posterior mean of lambda), one row per rank",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "mean": {
+     "says": "score",
+     "term": "PL-skill",
+     "scale": "raw"
+    },
+    "ci95": "note",
+    "games": "items",
+    "wins": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "Sampler: T=2000 iterations, B=500 burn-in, seed 42",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.txt",
+   "quote": "Sampler: T=2000 iterations, B=500 burn-in, seed 42"
+  },
+  {
+   "id": "F2",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Mean is the posterior mean of",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 caption: \"Mean is the posterior mean of λi. 95% CI is from posterior quantiles.\"",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.04312/evidence/arxiv-2605.04312.txt",
+   "quote": "Mean is the posterior mean of"
+  }
+ ]
+}

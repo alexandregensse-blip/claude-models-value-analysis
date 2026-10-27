@@ -1,0 +1,2844 @@
+{
+ "id": "src-ed-is-ai-featherbench-cec729c-2026-10-10",
+ "publisher": "ed-is-ai/featherbench",
+ "urls": [
+  "https://github.com/ed-is-ai/featherbench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "cec729c76caef7fe601f6f3a15bc45fc1a94786b",
+   "captured": "2026-10-20T07:19:42Z",
+   "url": "https://github.com/ed-is-ai/featherbench/commit/cec729c76caef7fe601f6f3a15bc45fc1a94786b",
+   "note": "commit cec729c (\"publish Claude Haiku 5.5 benchmark\", author date 2026-10-10 09:24 +0100); files read with git show from the clone saved by salvo rd/deepseek1. The Efficiency table of ed-o-meter.md is identical at 5e4c95d / 7d47273 for the rows that exist there."
+  }
+ ],
+ "commit": "cec729c76caef7fe601f6f3a15bc45fc1a94786b",
+ "sha256": {
+  "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md": "b9a6a021727f9568cd0f30f873cfe2c59811be1c7f76c5143a08d05161d4e646",
+  "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json": "5e6af5b516308b5fde1e9007fea781da50c4ab52b1a7d31f9ebce52600d29de1",
+  "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/README-cec729c.md": "7325d99acf8ef125adf31022d0b9f789134e4fcf9db9dd06075b492b2ec21b4c",
+  "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/eval-cec729c.py": "3f15f0b26861a8b0a1096f98fa26ccb744693b9aa25b08f2c458a2b3aad47c51",
+  "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/summary-cec729c.json": "694616e1d60cf7e1851f464f7bee393073b42b24491eb83e923c80c0d93021a1",
+  "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/records-cec729c.csv": "fde457e5ea311c472ad20e8c2016539ef88c8516344b7ce4cbc7ccd8a9efa8c0"
+ },
+ "harvested_at": "2026-10-20T07:19:42Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-ed-is-ai-featherbench (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the clone of ed-is-ai/featherbench at cec729c (salvo rd/deepseek1, git show of ed-o-meter.md, models.json, README.md, eval.py, results/summary.json)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/records-cec729c.csv",
+   "from": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/summary-cec729c.json",
+   "tool": "convert.py: one CSV row per records[] entry of results/summary.json (model, run_id, trial, timestamp copied as written; id = model|run_id|task|trial)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/records-cec729c.csv",
+   "where": "records-cec729c.csv: one row per trial record of results/summary.json",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "model": "note",
+    "timestamp": "run-date",
+    "trial": "note",
+    "run_id": "run-id"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "route",
+   "about": null,
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, Setup: \"Every model ... is reached through OpenRouter\"",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/README-cec729c.md",
+   "quote": "reached through OpenRouter",
+   "term": "openrouter"
+  },
+  {
+   "id": "F2",
+   "says": "cost-method",
+   "about": null,
+   "value": "Cost comes straight from OpenRouter's per-response",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, Models section: ... per-response `usage.cost`",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/README-cec729c.md",
+   "quote": "Cost comes straight from OpenRouter's per-response",
+   "term": "router-invoice"
+  },
+  {
+   "id": "F3",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Cost comes straight from OpenRouter's per-response",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, Models section: ... per-response `usage.cost`",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/README-cec729c.md",
+   "quote": "Cost comes straight from OpenRouter's per-response",
+   "term": "router-billed"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, column Cost/trial ($0.0004 ...)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "$0.0004",
+   "term": "USD"
+  },
+  {
+   "id": "F5",
+   "says": "unit",
+   "about": null,
+   "value": "Cost/trial",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table header",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost/trial",
+   "term": "per-task"
+  },
+  {
+   "id": "F6",
+   "says": "aggregation",
+   "about": null,
+   "value": "Every row here is single-trial",
+   "level": "written",
+   "form": "prose",
+   "where": "note above the first table",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Every row here is single-trial"
+  },
+  {
+   "id": "F7",
+   "says": "cost-method",
+   "about": null,
+   "value": "stated at list price, not as billed",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 13: the gpt-5.6 Cost cells",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "stated at list price, not as billed",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F8",
+   "says": "cost-basis",
+   "about": null,
+   "value": "stated at list price, not as billed",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 13: the gpt-5.6 Cost cells",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "stated at list price, not as billed",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F9",
+   "says": "cost-method",
+   "about": null,
+   "value": "Cost is stated at list price, not as billed",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 19: glm-5.3-flash",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated at list price, not as billed",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F10",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Cost is stated at list price, not as billed",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 19: glm-5.3-flash",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated at list price, not as billed",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F11",
+   "says": "cost-method",
+   "about": null,
+   "value": "Cost is stated at list price",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 21: deepseek-v4.1-flash",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated at list price",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F12",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Cost is stated at list price",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 21: deepseek-v4.1-flash",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated at list price",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F13",
+   "says": "cost-method",
+   "about": null,
+   "value": "Cost is stated at list price",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 22: gemini-3.8-flash and gpt-6-astra",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated at list price",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F14",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Cost is stated at list price",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 22: gemini-3.8-flash and gpt-6-astra",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated at list price",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F15",
+   "says": "cost-method",
+   "about": null,
+   "value": "recomputes all 28 answers from 6,527 input and 55,133 output tokens at the common rate",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 23: gemini-3.7-flash",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "recomputes all 28 answers from 6,527 input and 55,133 output tokens at the common rate",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F16",
+   "says": "cost-basis",
+   "about": null,
+   "value": "recomputes all 28 answers from 6,527 input and 55,133 output tokens at the common rate",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 23: gemini-3.7-flash",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "recomputes all 28 answers from 6,527 input and 55,133 output tokens at the common rate",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F17",
+   "says": "cost-method",
+   "about": null,
+   "value": "List-rate generation totals",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 24: opus-5-5, gpt-6-luna, gpt-6-sol",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "List-rate generation totals",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F18",
+   "says": "cost-basis",
+   "about": null,
+   "value": "List-rate generation totals",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 24: opus-5-5, gpt-6-luna, gpt-6-sol",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "List-rate generation totals",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F19",
+   "says": "cost-method",
+   "about": null,
+   "value": "list-rate generation totals were",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 25: sonnet-5-5 and gpt-6.1-sol",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "list-rate generation totals were",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F20",
+   "says": "cost-basis",
+   "about": null,
+   "value": "list-rate generation totals were",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 25: sonnet-5-5 and gpt-6.1-sol",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "list-rate generation totals were",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F21",
+   "says": "cost-method",
+   "about": null,
+   "value": "Cost is stated as billed, which equals list",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 20",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated as billed, which equals list",
+   "term": "router-invoice"
+  },
+  {
+   "id": "F22",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Cost is stated as billed, which equals list",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 20",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated as billed, which equals list",
+   "term": "router-billed"
+  },
+  {
+   "id": "F23",
+   "says": "cost-method",
+   "about": null,
+   "value": "Cost is stated as billed, which equals current list",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 27",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated as billed, which equals current list",
+   "term": "router-invoice"
+  },
+  {
+   "id": "F24",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Cost is stated as billed, which equals current list",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 27",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "Cost is stated as billed, which equals current list",
+   "term": "router-billed"
+  },
+  {
+   "id": "F25",
+   "says": "cost-method",
+   "about": null,
+   "value": "this table uses their auditable sum",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 26",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "this table uses their auditable sum",
+   "term": "router-invoice"
+  },
+  {
+   "id": "F26",
+   "says": "cost-basis",
+   "about": null,
+   "value": "source records total",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 26: \"The 28 source records total $0.401572 for generation\"",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "source records total",
+   "term": "router-billed"
+  },
+  {
+   "id": "F27",
+   "says": "note",
+   "about": null,
+   "value": "answering trials only",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 4 (fable-5, opus-5: refused trials excluded from the token and cost means)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "answering trials only"
+  },
+  {
+   "id": "F28",
+   "says": "model-api-id",
+   "about": "fable-5",
+   "value": "anthropic/claude-fable-5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"fable-5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-fable-5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "fable-5",
+   "value": "87.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5 ⁴ | 87.7% | 355 | 1,297 | 1,652 | $0.0684",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "tokens-in",
+   "about": "fable-5",
+   "value": "355",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5 ⁴ | 87.7% | 355 | 1,297 | 1,652 | $0.0684",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F31",
+   "says": "tokens-out",
+   "about": "fable-5",
+   "value": "1,297",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5 ⁴ | 87.7% | 355 | 1,297 | 1,652 | $0.0684",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "cost",
+   "about": "fable-5",
+   "value": "0.0684",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5 ⁴ | 87.7% | 355 | 1,297 | 1,652 | $0.0684",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F33",
+   "says": "effort-setting",
+   "about": "fable-5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"fable-5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F34",
+   "says": "model-api-id",
+   "about": "fable-5-1",
+   "value": "anthropic/claude-fable-5.1",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"fable-5-1\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-fable-5.1\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "fable-5-1",
+   "value": "96.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5-1, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5-1 ²⁰ | 96.4% | 363 | 1,909 | 2,272 | $0.0991",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "tokens-in",
+   "about": "fable-5-1",
+   "value": "363",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5-1, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5-1 ²⁰ | 96.4% | 363 | 1,909 | 2,272 | $0.0991",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F37",
+   "says": "tokens-out",
+   "about": "fable-5-1",
+   "value": "1,909",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5-1, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5-1 ²⁰ | 96.4% | 363 | 1,909 | 2,272 | $0.0991",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "cost",
+   "about": "fable-5-1",
+   "value": "0.0991",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row fable-5-1, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "fable-5-1 ²⁰ | 96.4% | 363 | 1,909 | 2,272 | $0.0991",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F39",
+   "says": "effort-setting",
+   "about": "fable-5-1",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"fable-5-1\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F40",
+   "says": "model-api-id",
+   "about": "sonnet-4-6",
+   "value": "anthropic/claude-sonnet-4.6",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"sonnet-4-6\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-sonnet-4.6\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "sonnet-4-6",
+   "value": "96.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-4-6, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-4-6 | 96.4% | 287 | 4,162 | 4,448 | $0.0633",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "tokens-in",
+   "about": "sonnet-4-6",
+   "value": "287",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-4-6, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-4-6 | 96.4% | 287 | 4,162 | 4,448 | $0.0633",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F43",
+   "says": "tokens-out",
+   "about": "sonnet-4-6",
+   "value": "4,162",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-4-6, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-4-6 | 96.4% | 287 | 4,162 | 4,448 | $0.0633",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F44",
+   "says": "cost",
+   "about": "sonnet-4-6",
+   "value": "0.0633",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-4-6, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-4-6 | 96.4% | 287 | 4,162 | 4,448 | $0.0633",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F45",
+   "says": "effort-setting",
+   "about": "sonnet-4-6",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"sonnet-4-6\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F46",
+   "says": "model-api-id",
+   "about": "sonnet-5",
+   "value": "anthropic/claude-sonnet-5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"sonnet-5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-sonnet-5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "sonnet-5",
+   "value": "92.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5 | 92.9% | 362 | 1,119 | 1,481 | $0.0119",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "tokens-in",
+   "about": "sonnet-5",
+   "value": "362",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5 | 92.9% | 362 | 1,119 | 1,481 | $0.0119",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F49",
+   "says": "tokens-out",
+   "about": "sonnet-5",
+   "value": "1,119",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5 | 92.9% | 362 | 1,119 | 1,481 | $0.0119",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": "sonnet-5",
+   "value": "0.0119",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5 | 92.9% | 362 | 1,119 | 1,481 | $0.0119",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F51",
+   "says": "effort-setting",
+   "about": "sonnet-5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"sonnet-5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F52",
+   "says": "model-api-id",
+   "about": "haiku-4-5",
+   "value": "anthropic/claude-haiku-4.5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"haiku-4-5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-haiku-4.5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "haiku-4-5",
+   "value": "96.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-4-5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-4-5 | 96.4% | 287 | 817 | 1,104 | $0.0044",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F54",
+   "says": "tokens-in",
+   "about": "haiku-4-5",
+   "value": "287",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-4-5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-4-5 | 96.4% | 287 | 817 | 1,104 | $0.0044",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F55",
+   "says": "tokens-out",
+   "about": "haiku-4-5",
+   "value": "817",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-4-5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-4-5 | 96.4% | 287 | 817 | 1,104 | $0.0044",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F56",
+   "says": "cost",
+   "about": "haiku-4-5",
+   "value": "0.0044",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-4-5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-4-5 | 96.4% | 287 | 817 | 1,104 | $0.0044",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F57",
+   "says": "no-effort-sent",
+   "about": "haiku-4-5",
+   "value": "Omitted entirely for",
+   "level": "written",
+   "form": "code",
+   "where": "eval.py, call_openrouter: the reasoning effort is sent only when the models.json entry has an effort key",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/eval-cec729c.py",
+   "quote": "Omitted entirely for"
+  },
+  {
+   "id": "F58",
+   "says": "model-api-id",
+   "about": "opus-5",
+   "value": "anthropic/claude-opus-5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"opus-5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-opus-5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "opus-5",
+   "value": "89",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5 ⁴ ⁷ | 89% | 371 | 2,712 | 3,082 | $0.0696",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F60",
+   "says": "tokens-in",
+   "about": "opus-5",
+   "value": "371",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5 ⁴ ⁷ | 89% | 371 | 2,712 | 3,082 | $0.0696",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F61",
+   "says": "tokens-out",
+   "about": "opus-5",
+   "value": "2,712",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5 ⁴ ⁷ | 89% | 371 | 2,712 | 3,082 | $0.0696",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F62",
+   "says": "cost",
+   "about": "opus-5",
+   "value": "0.0696",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5 ⁴ ⁷ | 89% | 371 | 2,712 | 3,082 | $0.0696",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F63",
+   "says": "effort-setting",
+   "about": "opus-5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"opus-5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F64",
+   "says": "model-api-id",
+   "about": "opus-5-5",
+   "value": "anthropic/claude-opus-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"opus-5-5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-opus-5.5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F65",
+   "says": "score",
+   "about": "opus-5-5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5-5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5-5 | 100% ²⁴ | 360 | 2,340 | 2,700 | $0.0482 ²⁴",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F66",
+   "says": "tokens-in",
+   "about": "opus-5-5",
+   "value": "360",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5-5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5-5 | 100% ²⁴ | 360 | 2,340 | 2,700 | $0.0482 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F67",
+   "says": "tokens-out",
+   "about": "opus-5-5",
+   "value": "2,340",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5-5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5-5 | 100% ²⁴ | 360 | 2,340 | 2,700 | $0.0482 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F68",
+   "says": "cost",
+   "about": "opus-5-5",
+   "value": "0.0482",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row opus-5-5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "opus-5-5 | 100% ²⁴ | 360 | 2,340 | 2,700 | $0.0482 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F69",
+   "says": "effort-setting",
+   "about": "opus-5-5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"opus-5-5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F70",
+   "says": "model-api-id",
+   "about": "sonnet-5-5",
+   "value": "anthropic/claude-sonnet-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"sonnet-5-5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-sonnet-5.5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "sonnet-5-5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5-5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5-5 | 100% ²⁵ | 360 | 1,841 | 2,201 | $0.0191 ²⁵",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F72",
+   "says": "tokens-in",
+   "about": "sonnet-5-5",
+   "value": "360",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5-5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5-5 | 100% ²⁵ | 360 | 1,841 | 2,201 | $0.0191 ²⁵",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F73",
+   "says": "tokens-out",
+   "about": "sonnet-5-5",
+   "value": "1,841",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5-5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5-5 | 100% ²⁵ | 360 | 1,841 | 2,201 | $0.0191 ²⁵",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F74",
+   "says": "cost",
+   "about": "sonnet-5-5",
+   "value": "0.0191",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row sonnet-5-5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "sonnet-5-5 | 100% ²⁵ | 360 | 1,841 | 2,201 | $0.0191 ²⁵",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F75",
+   "says": "effort-setting",
+   "about": "sonnet-5-5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"sonnet-5-5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F76",
+   "says": "model-api-id",
+   "about": "haiku-5-5",
+   "value": "anthropic/claude-haiku-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"haiku-5-5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"anthropic/claude-haiku-5.5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F77",
+   "says": "score",
+   "about": "haiku-5-5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-5-5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-5-5 | 100% ²⁷ | 360 | 2,912 | 3,272 | $0.0015 ²⁷",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F78",
+   "says": "tokens-in",
+   "about": "haiku-5-5",
+   "value": "360",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-5-5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-5-5 | 100% ²⁷ | 360 | 2,912 | 3,272 | $0.0015 ²⁷",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F79",
+   "says": "tokens-out",
+   "about": "haiku-5-5",
+   "value": "2,912",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-5-5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-5-5 | 100% ²⁷ | 360 | 2,912 | 3,272 | $0.0015 ²⁷",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F80",
+   "says": "cost",
+   "about": "haiku-5-5",
+   "value": "0.0015",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row haiku-5-5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "haiku-5-5 | 100% ²⁷ | 360 | 2,912 | 3,272 | $0.0015 ²⁷",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F81",
+   "says": "effort-setting",
+   "about": "haiku-5-5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"haiku-5-5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F82",
+   "says": "model-api-id",
+   "about": "gpt-5.5",
+   "value": "openai/gpt-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-5.5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F83",
+   "says": "score",
+   "about": "gpt-5.5",
+   "value": "97.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.5 | 97.6% | 220 | 1,642 | 1,862 | $0.0504",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F84",
+   "says": "tokens-in",
+   "about": "gpt-5.5",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.5 | 97.6% | 220 | 1,642 | 1,862 | $0.0504",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F85",
+   "says": "tokens-out",
+   "about": "gpt-5.5",
+   "value": "1,642",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.5 | 97.6% | 220 | 1,642 | 1,862 | $0.0504",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F86",
+   "says": "cost",
+   "about": "gpt-5.5",
+   "value": "0.0504",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.5 | 97.6% | 220 | 1,642 | 1,862 | $0.0504",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F87",
+   "says": "effort-setting",
+   "about": "gpt-5.5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F88",
+   "says": "model-api-id",
+   "about": "glm-5.2",
+   "value": "z-ai/glm-5.2",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"glm-5.2\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"z-ai/glm-5.2\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F89",
+   "says": "score",
+   "about": "glm-5.2",
+   "value": "89.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.2, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.2 | 89.3% ¹¹ | 238 | 1,371 | 1,609 | $0.0064",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F90",
+   "says": "tokens-in",
+   "about": "glm-5.2",
+   "value": "238",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.2, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.2 | 89.3% ¹¹ | 238 | 1,371 | 1,609 | $0.0064",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F91",
+   "says": "tokens-out",
+   "about": "glm-5.2",
+   "value": "1,371",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.2, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.2 | 89.3% ¹¹ | 238 | 1,371 | 1,609 | $0.0064",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F92",
+   "says": "cost",
+   "about": "glm-5.2",
+   "value": "0.0064",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.2, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.2 | 89.3% ¹¹ | 238 | 1,371 | 1,609 | $0.0064",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F93",
+   "says": "no-effort-sent",
+   "about": "glm-5.2",
+   "value": "Omitted entirely for",
+   "level": "written",
+   "form": "code",
+   "where": "eval.py, call_openrouter: the reasoning effort is sent only when the models.json entry has an effort key",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/eval-cec729c.py",
+   "quote": "Omitted entirely for"
+  },
+  {
+   "id": "F94",
+   "says": "model-api-id",
+   "about": "gpt-5.6-terra",
+   "value": "openai/gpt-5.6-terra",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.6-terra\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-5.6-terra\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F95",
+   "says": "score",
+   "about": "gpt-5.6-terra",
+   "value": "85.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-terra, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-terra | 85.7% | 220 | 1,415 | 1,635 | $0.0174 ¹³",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F96",
+   "says": "tokens-in",
+   "about": "gpt-5.6-terra",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-terra, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-terra | 85.7% | 220 | 1,415 | 1,635 | $0.0174 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F97",
+   "says": "tokens-out",
+   "about": "gpt-5.6-terra",
+   "value": "1,415",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-terra, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-terra | 85.7% | 220 | 1,415 | 1,635 | $0.0174 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F98",
+   "says": "cost",
+   "about": "gpt-5.6-terra",
+   "value": "0.0174",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-terra, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-terra | 85.7% | 220 | 1,415 | 1,635 | $0.0174 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F99",
+   "says": "effort-setting",
+   "about": "gpt-5.6-terra",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.6-terra\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F100",
+   "says": "model-api-id",
+   "about": "gpt-5.6-sol",
+   "value": "openai/gpt-5.6-sol",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.6-sol\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-5.6-sol\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F101",
+   "says": "score",
+   "about": "gpt-5.6-sol",
+   "value": "85.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-sol, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-sol | 85.7% | 220 | 1,686 | 1,906 | $0.0517 ¹³",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F102",
+   "says": "tokens-in",
+   "about": "gpt-5.6-sol",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-sol, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-sol | 85.7% | 220 | 1,686 | 1,906 | $0.0517 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F103",
+   "says": "tokens-out",
+   "about": "gpt-5.6-sol",
+   "value": "1,686",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-sol, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-sol | 85.7% | 220 | 1,686 | 1,906 | $0.0517 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F104",
+   "says": "cost",
+   "about": "gpt-5.6-sol",
+   "value": "0.0517",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-sol, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-sol | 85.7% | 220 | 1,686 | 1,906 | $0.0517 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F105",
+   "says": "effort-setting",
+   "about": "gpt-5.6-sol",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.6-sol\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F106",
+   "says": "model-api-id",
+   "about": "gpt-5.6-luna",
+   "value": "openai/gpt-5.6-luna",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.6-luna\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-5.6-luna\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F107",
+   "says": "score",
+   "about": "gpt-5.6-luna",
+   "value": "78.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-luna, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-luna | 78.6% ¹⁵ | 220 | 1,870 | 2,090 | $0.0023 ¹³",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F108",
+   "says": "tokens-in",
+   "about": "gpt-5.6-luna",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-luna, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-luna | 78.6% ¹⁵ | 220 | 1,870 | 2,090 | $0.0023 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F109",
+   "says": "tokens-out",
+   "about": "gpt-5.6-luna",
+   "value": "1,870",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-luna, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-luna | 78.6% ¹⁵ | 220 | 1,870 | 2,090 | $0.0023 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F110",
+   "says": "cost",
+   "about": "gpt-5.6-luna",
+   "value": "0.0023",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-5.6-luna, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-5.6-luna | 78.6% ¹⁵ | 220 | 1,870 | 2,090 | $0.0023 ¹³",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F111",
+   "says": "effort-setting",
+   "about": "gpt-5.6-luna",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-5.6-luna\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F112",
+   "says": "model-api-id",
+   "about": "kimi-k3",
+   "value": "moonshotai/kimi-k3",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"kimi-k3\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"moonshotai/kimi-k3\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F113",
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "96.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row kimi-k3, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "kimi-k3 | 96.5% | 308 | 2,124 | 2,433 | $0.0327",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F114",
+   "says": "tokens-in",
+   "about": "kimi-k3",
+   "value": "308",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row kimi-k3, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "kimi-k3 | 96.5% | 308 | 2,124 | 2,433 | $0.0327",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F115",
+   "says": "tokens-out",
+   "about": "kimi-k3",
+   "value": "2,124",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row kimi-k3, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "kimi-k3 | 96.5% | 308 | 2,124 | 2,433 | $0.0327",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F116",
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.0327",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row kimi-k3, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "kimi-k3 | 96.5% | 308 | 2,124 | 2,433 | $0.0327",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F117",
+   "says": "effort-setting",
+   "about": "kimi-k3",
+   "value": "max",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"kimi-k3\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"max\""
+  },
+  {
+   "id": "F118",
+   "says": "model-api-id",
+   "about": "gemini-3.6-flash",
+   "value": "google/gemini-3.6-flash",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gemini-3.6-flash\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"google/gemini-3.6-flash\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F119",
+   "says": "score",
+   "about": "gemini-3.6-flash",
+   "value": "96",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.6-flash, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.6-flash | 96% ¹⁰ | 233 | 2,216 | 2,449 | $0.0170",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F120",
+   "says": "tokens-in",
+   "about": "gemini-3.6-flash",
+   "value": "233",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.6-flash, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.6-flash | 96% ¹⁰ | 233 | 2,216 | 2,449 | $0.0170",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F121",
+   "says": "tokens-out",
+   "about": "gemini-3.6-flash",
+   "value": "2,216",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.6-flash, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.6-flash | 96% ¹⁰ | 233 | 2,216 | 2,449 | $0.0170",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F122",
+   "says": "cost",
+   "about": "gemini-3.6-flash",
+   "value": "0.0170",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.6-flash, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.6-flash | 96% ¹⁰ | 233 | 2,216 | 2,449 | $0.0170",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F123",
+   "says": "effort-setting",
+   "about": "gemini-3.6-flash",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gemini-3.6-flash\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F124",
+   "says": "model-api-id",
+   "about": "grok-4.5",
+   "value": "x-ai/grok-4.5",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"grok-4.5\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"x-ai/grok-4.5\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F125",
+   "says": "score",
+   "about": "grok-4.5",
+   "value": "96",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.5, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.5 | 96% ⁹ | 433 | 898 | 1,331 | $0.0060",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F126",
+   "says": "tokens-in",
+   "about": "grok-4.5",
+   "value": "433",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.5, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.5 | 96% ⁹ | 433 | 898 | 1,331 | $0.0060",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F127",
+   "says": "tokens-out",
+   "about": "grok-4.5",
+   "value": "898",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.5, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.5 | 96% ⁹ | 433 | 898 | 1,331 | $0.0060",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F128",
+   "says": "cost",
+   "about": "grok-4.5",
+   "value": "0.0060",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.5, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.5 | 96% ⁹ | 433 | 898 | 1,331 | $0.0060",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F129",
+   "says": "effort-setting",
+   "about": "grok-4.5",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"grok-4.5\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F130",
+   "says": "model-api-id",
+   "about": "grok-4.6",
+   "value": "x-ai/grok-4.6",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"grok-4.6\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"x-ai/grok-4.6\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F131",
+   "says": "score",
+   "about": "grok-4.6",
+   "value": "96.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.6, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.6 | 96.4% | 433 | 1,894 | 2,328 | $0.0120",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F132",
+   "says": "tokens-in",
+   "about": "grok-4.6",
+   "value": "433",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.6, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.6 | 96.4% | 433 | 1,894 | 2,328 | $0.0120",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F133",
+   "says": "tokens-out",
+   "about": "grok-4.6",
+   "value": "1,894",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.6, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.6 | 96.4% | 433 | 1,894 | 2,328 | $0.0120",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F134",
+   "says": "cost",
+   "about": "grok-4.6",
+   "value": "0.0120",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4.6, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4.6 | 96.4% | 433 | 1,894 | 2,328 | $0.0120",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F135",
+   "says": "effort-setting",
+   "about": "grok-4.6",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"grok-4.6\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F136",
+   "says": "model-api-id",
+   "about": "gemini-3.7-flash",
+   "value": "google/gemini-3.7-flash",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gemini-3.7-flash\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"google/gemini-3.7-flash\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F137",
+   "says": "score",
+   "about": "gemini-3.7-flash",
+   "value": "92.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.7-flash, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.7-flash | 92.9% | 233 | 1,969 | 2,202 | $0.0076 ²³",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F138",
+   "says": "tokens-in",
+   "about": "gemini-3.7-flash",
+   "value": "233",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.7-flash, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.7-flash | 92.9% | 233 | 1,969 | 2,202 | $0.0076 ²³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F139",
+   "says": "tokens-out",
+   "about": "gemini-3.7-flash",
+   "value": "1,969",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.7-flash, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.7-flash | 92.9% | 233 | 1,969 | 2,202 | $0.0076 ²³",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F140",
+   "says": "cost",
+   "about": "gemini-3.7-flash",
+   "value": "0.0076",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.7-flash, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.7-flash | 92.9% | 233 | 1,969 | 2,202 | $0.0076 ²³",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F141",
+   "says": "effort-setting",
+   "about": "gemini-3.7-flash",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gemini-3.7-flash\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F142",
+   "says": "model-api-id",
+   "about": "glm-5.3",
+   "value": "z-ai/glm-5.3",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"glm-5.3\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"z-ai/glm-5.3\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F143",
+   "says": "score",
+   "about": "glm-5.3",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3 | 100% | 238 | 2,223 | 2,461 | $0.0101",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F144",
+   "says": "tokens-in",
+   "about": "glm-5.3",
+   "value": "238",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3 | 100% | 238 | 2,223 | 2,461 | $0.0101",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F145",
+   "says": "tokens-out",
+   "about": "glm-5.3",
+   "value": "2,223",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3 | 100% | 238 | 2,223 | 2,461 | $0.0101",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F146",
+   "says": "cost",
+   "about": "glm-5.3",
+   "value": "0.0101",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3 | 100% | 238 | 2,223 | 2,461 | $0.0101",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F147",
+   "says": "no-effort-sent",
+   "about": "glm-5.3",
+   "value": "Omitted entirely for",
+   "level": "written",
+   "form": "code",
+   "where": "eval.py, call_openrouter: the reasoning effort is sent only when the models.json entry has an effort key",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/eval-cec729c.py",
+   "quote": "Omitted entirely for"
+  },
+  {
+   "id": "F148",
+   "says": "model-api-id",
+   "about": "deepseek-v4-pro",
+   "value": "deepseek/deepseek-v4-pro",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"deepseek-v4-pro\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"deepseek/deepseek-v4-pro\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F149",
+   "says": "score",
+   "about": "deepseek-v4-pro",
+   "value": "96.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4-pro, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4-pro | 96.4% | 323 | 3,461 | 3,784 | $0.0029",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F150",
+   "says": "tokens-in",
+   "about": "deepseek-v4-pro",
+   "value": "323",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4-pro, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4-pro | 96.4% | 323 | 3,461 | 3,784 | $0.0029",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F151",
+   "says": "tokens-out",
+   "about": "deepseek-v4-pro",
+   "value": "3,461",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4-pro, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4-pro | 96.4% | 323 | 3,461 | 3,784 | $0.0029",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F152",
+   "says": "cost",
+   "about": "deepseek-v4-pro",
+   "value": "0.0029",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4-pro, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4-pro | 96.4% | 323 | 3,461 | 3,784 | $0.0029",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F153",
+   "says": "effort-setting",
+   "about": "deepseek-v4-pro",
+   "value": "max",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"deepseek-v4-pro\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"max\""
+  },
+  {
+   "id": "F154",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "z-ai/glm-5.3-flash",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"glm-5.3-flash\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"z-ai/glm-5.3-flash\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F155",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3-flash, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3-flash | 100% ¹⁹ | 238 | 643 | 881 | $0.0004 ¹⁹",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F156",
+   "says": "tokens-in",
+   "about": "glm-5.3-flash",
+   "value": "238",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3-flash, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3-flash | 100% ¹⁹ | 238 | 643 | 881 | $0.0004 ¹⁹",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F157",
+   "says": "tokens-out",
+   "about": "glm-5.3-flash",
+   "value": "643",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3-flash, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3-flash | 100% ¹⁹ | 238 | 643 | 881 | $0.0004 ¹⁹",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F158",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.0004",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row glm-5.3-flash, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "glm-5.3-flash | 100% ¹⁹ | 238 | 643 | 881 | $0.0004 ¹⁹",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F159",
+   "says": "effort-setting",
+   "about": "glm-5.3-flash",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"glm-5.3-flash\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F160",
+   "says": "model-api-id",
+   "about": "deepseek-v4.1-flash",
+   "value": "deepseek/deepseek-v4.1-flash",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"deepseek-v4.1-flash\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"deepseek/deepseek-v4.1-flash\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F161",
+   "says": "score",
+   "about": "deepseek-v4.1-flash",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4.1-flash, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4.1-flash ²¹ | 100% | 268 | 2,669 | 2,937 | $0.0919 ²¹",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F162",
+   "says": "tokens-in",
+   "about": "deepseek-v4.1-flash",
+   "value": "268",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4.1-flash, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4.1-flash ²¹ | 100% | 268 | 2,669 | 2,937 | $0.0919 ²¹",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F163",
+   "says": "tokens-out",
+   "about": "deepseek-v4.1-flash",
+   "value": "2,669",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4.1-flash, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4.1-flash ²¹ | 100% | 268 | 2,669 | 2,937 | $0.0919 ²¹",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F164",
+   "says": "cost",
+   "about": "deepseek-v4.1-flash",
+   "value": "0.0919",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row deepseek-v4.1-flash, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "deepseek-v4.1-flash ²¹ | 100% | 268 | 2,669 | 2,937 | $0.0919 ²¹",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F165",
+   "says": "effort-setting",
+   "about": "deepseek-v4.1-flash",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"deepseek-v4.1-flash\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F166",
+   "says": "model-api-id",
+   "about": "gemini-3.8-flash",
+   "value": "google/gemini-3.8-flash",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gemini-3.8-flash\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"google/gemini-3.8-flash\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F167",
+   "says": "score",
+   "about": "gemini-3.8-flash",
+   "value": "92.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.8-flash, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.8-flash | 92.9% ²² | 233 | 2,537 | 2,770 | $0.0097 ²²",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F168",
+   "says": "tokens-in",
+   "about": "gemini-3.8-flash",
+   "value": "233",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.8-flash, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.8-flash | 92.9% ²² | 233 | 2,537 | 2,770 | $0.0097 ²²",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F169",
+   "says": "tokens-out",
+   "about": "gemini-3.8-flash",
+   "value": "2,537",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.8-flash, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.8-flash | 92.9% ²² | 233 | 2,537 | 2,770 | $0.0097 ²²",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F170",
+   "says": "cost",
+   "about": "gemini-3.8-flash",
+   "value": "0.0097",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gemini-3.8-flash, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gemini-3.8-flash | 92.9% ²² | 233 | 2,537 | 2,770 | $0.0097 ²²",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F171",
+   "says": "effort-setting",
+   "about": "gemini-3.8-flash",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gemini-3.8-flash\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F172",
+   "says": "model-api-id",
+   "about": "gpt-6-astra",
+   "value": "openai/gpt-6-astra",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6-astra\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-6-astra\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F173",
+   "says": "score",
+   "about": "gpt-6-astra",
+   "value": "96.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-astra, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-astra | 96.4% ²² | 220 | 1,056 | 1,276 | $0.0550 ²²",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F174",
+   "says": "tokens-in",
+   "about": "gpt-6-astra",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-astra, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-astra | 96.4% ²² | 220 | 1,056 | 1,276 | $0.0550 ²²",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F175",
+   "says": "tokens-out",
+   "about": "gpt-6-astra",
+   "value": "1,056",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-astra, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-astra | 96.4% ²² | 220 | 1,056 | 1,276 | $0.0550 ²²",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F176",
+   "says": "cost",
+   "about": "gpt-6-astra",
+   "value": "0.0550",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-astra, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-astra | 96.4% ²² | 220 | 1,056 | 1,276 | $0.0550 ²²",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F177",
+   "says": "effort-setting",
+   "about": "gpt-6-astra",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6-astra\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F178",
+   "says": "model-api-id",
+   "about": "gpt-6-luna",
+   "value": "openai/gpt-6-luna",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6-luna\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-6-luna\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F179",
+   "says": "score",
+   "about": "gpt-6-luna",
+   "value": "96.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-luna, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-luna | 96.4% ²⁴ | 220 | 1,602 | 1,822 | $0.0008 ²⁴",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F180",
+   "says": "tokens-in",
+   "about": "gpt-6-luna",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-luna, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-luna | 96.4% ²⁴ | 220 | 1,602 | 1,822 | $0.0008 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F181",
+   "says": "tokens-out",
+   "about": "gpt-6-luna",
+   "value": "1,602",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-luna, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-luna | 96.4% ²⁴ | 220 | 1,602 | 1,822 | $0.0008 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F182",
+   "says": "cost",
+   "about": "gpt-6-luna",
+   "value": "0.0008",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-luna, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-luna | 96.4% ²⁴ | 220 | 1,602 | 1,822 | $0.0008 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F183",
+   "says": "effort-setting",
+   "about": "gpt-6-luna",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6-luna\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F184",
+   "says": "model-api-id",
+   "about": "gpt-6-sol",
+   "value": "openai/gpt-6-sol",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6-sol\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-6-sol\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F185",
+   "says": "score",
+   "about": "gpt-6-sol",
+   "value": "82.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-sol, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-sol | 82.1% ²⁴ | 220 | 708 | 928 | $0.0075 ²⁴",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F186",
+   "says": "tokens-in",
+   "about": "gpt-6-sol",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-sol, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-sol | 82.1% ²⁴ | 220 | 708 | 928 | $0.0075 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F187",
+   "says": "tokens-out",
+   "about": "gpt-6-sol",
+   "value": "708",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-sol, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-sol | 82.1% ²⁴ | 220 | 708 | 928 | $0.0075 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F188",
+   "says": "cost",
+   "about": "gpt-6-sol",
+   "value": "0.0075",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6-sol, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6-sol | 82.1% ²⁴ | 220 | 708 | 928 | $0.0075 ²⁴",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F189",
+   "says": "effort-setting",
+   "about": "gpt-6-sol",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6-sol\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F190",
+   "says": "model-api-id",
+   "about": "grok-4-7",
+   "value": "x-ai/grok-4.7",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"grok-4-7\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"x-ai/grok-4.7\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F191",
+   "says": "score",
+   "about": "grok-4-7",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4-7, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4-7 | 100% ²⁶ | 1,469 | 1,901 | 3,370 | $0.0143 ²⁶",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F192",
+   "says": "tokens-in",
+   "about": "grok-4-7",
+   "value": "1,469",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4-7, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4-7 | 100% ²⁶ | 1,469 | 1,901 | 3,370 | $0.0143 ²⁶",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F193",
+   "says": "tokens-out",
+   "about": "grok-4-7",
+   "value": "1,901",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4-7, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4-7 | 100% ²⁶ | 1,469 | 1,901 | 3,370 | $0.0143 ²⁶",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F194",
+   "says": "cost",
+   "about": "grok-4-7",
+   "value": "0.0143",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row grok-4-7, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "grok-4-7 | 100% ²⁶ | 1,469 | 1,901 | 3,370 | $0.0143 ²⁶",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F195",
+   "says": "effort-setting",
+   "about": "grok-4-7",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"grok-4-7\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  },
+  {
+   "id": "F196",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "openai/gpt-6.1-sol",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6.1-sol\"].model (OpenRouter slug)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"model\": \"openai/gpt-6.1-sol\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F197",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "93",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6.1-sol, column Pass %",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6.1-sol | 93% ²⁵ | 220 | 920 | 1,140 | $0.0096 ²⁵",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F198",
+   "says": "tokens-in",
+   "about": "gpt-6.1-sol",
+   "value": "220",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6.1-sol, column Input tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6.1-sol | 93% ²⁵ | 220 | 920 | 1,140 | $0.0096 ²⁵",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F199",
+   "says": "tokens-out",
+   "about": "gpt-6.1-sol",
+   "value": "920",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6.1-sol, column Output tokens (mean)",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6.1-sol | 93% ²⁵ | 220 | 920 | 1,140 | $0.0096 ²⁵",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F200",
+   "says": "cost",
+   "about": "gpt-6.1-sol",
+   "value": "0.0096",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Efficiency table, row gpt-6.1-sol, column Cost/trial",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/ed-o-meter-cec729c.md",
+   "quote": "gpt-6.1-sol | 93% ²⁵ | 220 | 920 | 1,140 | $0.0096 ²⁵",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F201",
+   "says": "effort-setting",
+   "about": "gpt-6.1-sol",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "models.json[\"gpt-6.1-sol\"].effort",
+   "file": "/work/.salvo14/mig/convert-ed-is-ai-featherbench/evidence/models-cec729c.json",
+   "quote": "\"effort\": \"high\""
+  }
+ ]
+}

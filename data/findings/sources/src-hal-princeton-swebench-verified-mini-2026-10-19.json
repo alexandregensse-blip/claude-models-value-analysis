@@ -1,0 +1,589 @@
+{
+ "id": "src-hal-princeton-swebench-verified-mini-2026-10-19",
+ "publisher": "hal-princeton",
+ "urls": [
+  "https://hal.cs.princeton.edu/swebench_verified_mini"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://hal.cs.princeton.edu/swebench_verified_mini",
+   "captured": "2026-10-19T07:57:15Z",
+   "note": "page evidence/swebench_verified_mini.html saved by salvo g/g6 (file mtime)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini.html": "c01f3a7167bf8885c6e72ae94d2560a57059a7a21f3af7e97d090a7535cea798",
+  "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv": "0be0e81100a51af44a5c0bbbfb8e889ba0da758d8c18e5ee75a388378b93ff2e"
+ },
+ "harvested_at": "2026-10-19T07:57:15Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-hal-princeton (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the HAL board page saved on 19 Oct by salvo g/g6",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "from": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini.html",
+   "tool": "python re: the rows of the leaderboard table of the page (rank, scaffold without the Pareto marker, model label, verified, accuracy and its CI, total cost and its CI, runs), one CSV row each, text copied as printed"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank)",
+   "format": "csv",
+   "row_key": "rank",
+   "columns": {
+    "scaffold": "harness",
+    "model": "note",
+    "accuracy": {
+     "says": "score",
+     "term": "resolved%",
+     "scale": "percent"
+    },
+    "runs": "aggregation"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "thinking-budget",
+   "about": null,
+   "value": "4,096",
+   "level": "written",
+   "form": "prose",
+   "where": "Primary Model column header note: \"the reasoning token budget is set at 1,024 (low), 2,048 (medium), and 4,096 (high)\" for non-OpenAI reasoning models",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini.html",
+   "quote": "and 4,096 (high)",
+   "term": "4096"
+  },
+  {
+   "id": "F2",
+   "says": "model-name",
+   "about": "1",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 1, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 High (September 2025)"
+  },
+  {
+   "id": "F3",
+   "says": "effort-label",
+   "about": "1",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 1, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 High (September 2025)"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": "1",
+   "value": "September 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 1, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 High (September 2025)"
+  },
+  {
+   "id": "F5",
+   "says": "model-name",
+   "about": "2",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 2, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 (September 2025)"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": "2",
+   "value": "September 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 2, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 (September 2025)"
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "3",
+   "value": "Claude Opus 4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 3, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Opus 4.1 (August 2025)"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": "3",
+   "value": "August 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 3, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Opus 4.1 (August 2025)"
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "4",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 4, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": "4",
+   "value": "Low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 4, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": "4",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 4, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F12",
+   "says": "model-name",
+   "about": "7",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 7, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": "7",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 7, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F14",
+   "says": "note",
+   "about": "7",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 7, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "10",
+   "value": "GPT-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 10, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F16",
+   "says": "effort-label",
+   "about": "10",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 10, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F17",
+   "says": "note",
+   "about": "10",
+   "value": "August 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 10, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F18",
+   "says": "model-name",
+   "about": "12",
+   "value": "o3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 12, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F19",
+   "says": "effort-label",
+   "about": "12",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 12, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F20",
+   "says": "note",
+   "about": "12",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 12, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "14",
+   "value": "GPT-4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 14, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F22",
+   "says": "note",
+   "about": "14",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 14, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": "21",
+   "value": "Gemini 2.0 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 21, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F24",
+   "says": "note",
+   "about": "21",
+   "value": "February 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 21, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "22",
+   "value": "DeepSeek V3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 22, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F26",
+   "says": "note",
+   "about": "22",
+   "value": "March 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 22, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "25",
+   "value": "GPT-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 25, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F28",
+   "says": "effort-label",
+   "about": "25",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 25, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F29",
+   "says": "note",
+   "about": "25",
+   "value": "August 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 25, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F30",
+   "says": "model-name",
+   "about": "26",
+   "value": "DeepSeek V3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 26, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F31",
+   "says": "note",
+   "about": "26",
+   "value": "March 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 26, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F32",
+   "says": "model-name",
+   "about": "27",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 27, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F33",
+   "says": "effort-label",
+   "about": "27",
+   "value": "Low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 27, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F34",
+   "says": "note",
+   "about": "27",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 27, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F35",
+   "says": "model-name",
+   "about": "28",
+   "value": "DeepSeek R1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 28, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F36",
+   "says": "note",
+   "about": "28",
+   "value": "January 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 28, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F37",
+   "says": "model-name",
+   "about": "29",
+   "value": "Gemini 2.0 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 29, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F38",
+   "says": "note",
+   "about": "29",
+   "value": "February 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 29, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F39",
+   "says": "model-name",
+   "about": "30",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 30, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F40",
+   "says": "effort-label",
+   "about": "30",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 30, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F41",
+   "says": "note",
+   "about": "30",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 30, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F42",
+   "says": "model-name",
+   "about": "31",
+   "value": "GPT-4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 31, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F43",
+   "says": "note",
+   "about": "31",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 31, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "32",
+   "value": "DeepSeek R1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 32, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F45",
+   "says": "note",
+   "about": "32",
+   "value": "January 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 32, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F46",
+   "says": "model-name",
+   "about": "33",
+   "value": "o3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 33, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F47",
+   "says": "effort-label",
+   "about": "33",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 33, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F48",
+   "says": "note",
+   "about": "33",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 33, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  }
+ ]
+}

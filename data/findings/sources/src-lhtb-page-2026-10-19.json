@@ -1,0 +1,171 @@
+{
+ "id": "src-lhtb-page-2026-10-19",
+ "publisher": "lhtb",
+ "urls": [
+  "https://zli12321.github.io/LHTB/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zli12321.github.io/LHTB/",
+   "captured": "2026-10-19T15:46:47Z",
+   "note": "page (evidence/lhtb-page.html) and script saved by salvo gs/s8 (file mtimes 19 Oct 2026 15:46-15:47 UTC; lhtb.fetched: 2026-10-19)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-script.js": "8b9c27664cc6298fa234c607ca27c953ec91b2eb9d116b8530cfaaa6722fa39e",
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html": "897fdedd6dfcff911585ad4cbb5afa5bd1b4cf53f1ed86d246414317e6f4c3d1",
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv": "2afcfec137f72adf0dce290bb9c9df2953188281848101732e966fb869633ab3",
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt": "6e14286f569ce42b816584f64e3515458b123b82614e3036d94b9e20dd96723c"
+ },
+ "harvested_at": "2026-10-19T15:46:47Z",
+ "salvo": "salvo14/mig/convert-lhtb (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the page and script saved on 19 Oct by salvo gs/s8",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "from": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-script.js",
+   "tool": "python re: the entries of `const LB = [...]` of the page script (name, vendor, mean, solved, cost), one CSV row each, values copied as written"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "from": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "tool": "htmltxt.py (convert-arxiv-2610.13075): visible text of the page, one line per block"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model",
+   "format": "csv",
+   "row_key": "name",
+   "columns": {
+    "name": "model-name",
+    "mean": {
+     "says": "score",
+     "term": "mean-reward%",
+     "scale": "fraction"
+    },
+    "solved": "note",
+    "cost": "cost",
+    "vendor": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "Terminus-2",
+   "level": "written",
+   "form": "prose",
+   "where": "Part 04 Evaluation Setup, spec \"Harness\": \"Terminus-2, identical for all\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "Terminus-2, identical for all",
+   "term": "terminus-2"
+  },
+  {
+   "id": "F2",
+   "says": "cost-method",
+   "about": null,
+   "value": "Costs are computed from per-token prices at each provider's list rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out <details> block of the page source): last sentence",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "Costs are computed from per-token prices at each provider's list rates",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F3",
+   "says": "cost-basis",
+   "about": null,
+   "value": "per-token prices at each provider's list rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block): same sentence",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "per-token prices at each provider's list rates",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "where": "In one minute: \"MiniMax M3 scores 0.39 at ~$6 per task\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "~$6 per task",
+   "term": "USD"
+  },
+  {
+   "id": "F5",
+   "says": "unit",
+   "about": null,
+   "value": "per task",
+   "level": "written",
+   "form": "prose",
+   "where": "In one minute: \"~$6 per task\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F6",
+   "says": "aggregation",
+   "about": null,
+   "value": "One attempt",
+   "level": "written",
+   "form": "prose",
+   "where": "Part 04 Evaluation Setup, spec \"Budget\": \"90 min per task. One attempt.\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "One attempt"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "required reruns after an API-budget outage; all 46 tasks ultimately completed",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block)",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "Kimi K2.7 Code</b> required reruns after an API-budget outage; all 46 tasks ultimately completed"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "failed three tasks by exceeding its context window; these are genuine model limitations and score 0",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block)",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "failed three tasks by exceeding its context window; these are genuine model limitations and score 0"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": null,
+   "value": "carries two infrastructure-failed tasks (Docker build errors, unrelated to the model) scored as 0",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block)",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "carries two infrastructure-failed tasks (Docker build errors, unrelated to the model) scored as 0"
+  }
+ ]
+}

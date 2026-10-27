@@ -1,0 +1,1929 @@
+{
+ "id": "src-github-peterth-llm-eval-local-984f45f-2026-10-19",
+ "publisher": "github-peterth-llm-eval-local",
+ "urls": [
+  "https://github.com/PeterTh/llm-eval-local",
+  "https://peterth.github.io/llm-eval-local"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "984f45fe951e5379382867ff94e55bcb001d07ea",
+   "captured": "2026-10-21T15:20:17Z",
+   "url": "https://github.com/PeterTh/llm-eval-local/commit/984f45fe951e5379382867ff94e55bcb001d07ea",
+   "note": "clone HEAD 984f45f (author date 2026-10-19 11:56 +0200); the two tables are byte-identical to the copy saved on 20 Oct by salvo gt/t8 (4d)"
+  }
+ ],
+ "commit": "984f45fe951e5379382867ff94e55bcb001d07ea",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv": "0bb2f83827a108fb7c579f4b828e68a05cae9eea3b88767d2316335be970e568",
+  "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv": "25a574e4b8474b9c7210cf4cef7355055835ed0c92efbdae393a4e35d37db1e0",
+  "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/analysis-README.md": "54e39f5f6b96a57ad94deec31c097032c1e10bb020a1b9f617bb5a41393da126",
+  "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/README.md": "05526f9688c9eb3a1e308658eb748bcfb6872ad387d57aac36bb9d902385b38e",
+  "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json": "4787d40ac9404721cba515fb2b3082834c1d11b42f79df74ff09e52c7072acc6"
+ },
+ "harvested_at": "2026-10-21T15:20:17Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-peterth-llm-eval-local (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the clone of PeterTh/llm-eval-local at 984f45f saved by salvo hn qwen3.8-flash-r2",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "where": "4d_all_models_score_vs_cost.csv: one row per profile (model/effort/harness), means over the 220 programs",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": "note",
+    "score_run_count": "aggregation",
+    "mean_overall_score": {
+     "says": "score",
+     "term": "score-of-10",
+     "scale": "raw"
+    },
+    "mean_input_tokens": "tokens-in",
+    "mean_cached_input_tokens": "tokens-cache-read",
+    "mean_output_tokens": "tokens-out",
+    "estimated_cost_usd_per_run": "cost"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv",
+   "where": "4c_gpt56_score_vs_cost.csv: one row per GPT-5.6 variant x effort (Codex), means over 220 programs",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": "note",
+    "model_label": "model-name",
+    "effort": "effort-label",
+    "mean_overall_score": {
+     "says": "score",
+     "term": "score-of-10",
+     "scale": "raw"
+    },
+    "run_count": "aggregation",
+    "mean_input_tokens": "tokens-in",
+    "mean_cached_input_tokens": "tokens-cache-read",
+    "mean_output_tokens": "tokens-out",
+    "estimated_cost_usd_per_run": "cost"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "data-file",
+   "where": "USD per million tokens / USD per run (column names input_price_usd_per_million, estimated_cost_usd_per_run)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "per-run",
+   "level": "written",
+   "form": "data-file",
+   "where": "column estimated_cost_usd_per_run",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "per-run"
+  },
+  {
+   "id": "F3",
+   "says": "cost-method",
+   "about": null,
+   "value": "uncached input, cached input, and output tokens priced separately",
+   "level": "written",
+   "form": "data-file",
+   "where": "column cost_method (first words of every row)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F4",
+   "says": "cost-method",
+   "about": null,
+   "value": "Costs price uncached input, cached input, and output separately.",
+   "level": "written",
+   "form": "prose",
+   "where": "analysis/README.md, section GPT-5.6 score/cost comparison",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/analysis-README.md",
+   "quote": "Costs price uncached input, cached input, and output separately.",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F5",
+   "says": "cost-basis",
+   "about": null,
+   "value": "API-rate comparison",
+   "level": "written",
+   "form": "prose",
+   "where": "analysis/README.md, section GPT-5.6 score/cost comparison: \"This remains an API-rate comparison, not a ChatGPT subscription bill.\"",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/analysis-README.md",
+   "quote": "This remains an API-rate comparison",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F6",
+   "says": "reasoning-included-in-out",
+   "about": null,
+   "value": "reasoning is a subset of output",
+   "level": "written",
+   "form": "prose",
+   "where": "analysis/README.md, section GPT-5.6 score/cost comparison",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/analysis-README.md",
+   "quote": "reasoning is a subset of output",
+   "term": "true"
+  },
+  {
+   "id": "F7",
+   "says": "harness",
+   "about": null,
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, intro to the dataset layout",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/README.md",
+   "quote": "Codex cost estimates use exact reported token counts from retained",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F8",
+   "says": "model-name",
+   "about": "gpt-6-luna-medium",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-6-luna-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-6 Luna Medium"
+  },
+  {
+   "id": "F9",
+   "says": "harness",
+   "about": null,
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=codex-cli].label",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"label\": \"Codex CLI\"",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F10",
+   "says": "effort-setting",
+   "about": "gpt-6-luna-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-6-luna-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F11",
+   "says": "tokens-in",
+   "about": "gpt-6-luna-medium",
+   "value": "20996.800000",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-6-luna-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-6-luna-medium/mean_input_tokens",
+    "T1/gpt-6-luna-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F12",
+   "says": "price-table",
+   "about": "gpt-6-luna-medium",
+   "value": "input 0.050000 / cached input 0.005000 / output 0.250000 USD per million tokens; pricing_as_of 2026-10-02; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-luna-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F13",
+   "says": "price-tier",
+   "about": "gpt-6-luna-medium",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-luna-medium, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "gpt-6-luna-oc-medium",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-6-luna-oc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-6 Luna Medium (OpenCode)"
+  },
+  {
+   "id": "F15",
+   "says": "harness",
+   "about": null,
+   "value": "OpenCode",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=opencode].label",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"label\": \"OpenCode\"",
+   "term": "opencode"
+  },
+  {
+   "id": "F16",
+   "says": "effort-setting",
+   "about": "gpt-6-luna-oc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-6-luna-oc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F17",
+   "says": "tokens-in",
+   "about": "gpt-6-luna-oc-medium",
+   "value": "25376.150000",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-6-luna-oc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-6-luna-oc-medium/mean_input_tokens",
+    "T1/gpt-6-luna-oc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F18",
+   "says": "price-table",
+   "about": "gpt-6-luna-oc-medium",
+   "value": "input 0.050000 / cached input 0.005000 / output 0.250000 USD per million tokens; pricing_as_of 2026-10-19; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-luna-oc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F19",
+   "says": "price-tier",
+   "about": "gpt-6-luna-oc-medium",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-luna-oc-medium, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": "gpt-5-mini",
+   "value": "GPT-5 Mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-5-mini, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-5 Mini"
+  },
+  {
+   "id": "F21",
+   "says": "harness",
+   "about": null,
+   "value": "GitHub Copilot CLI",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].label",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"label\": \"GitHub Copilot CLI\"",
+   "term": "copilot-cli"
+  },
+  {
+   "id": "F22",
+   "says": "no-effort-sent",
+   "about": "gpt-5-mini",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"gpt-5-mini\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F23",
+   "says": "tokens-in",
+   "about": "gpt-5-mini",
+   "value": "24838.181818",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-5-mini: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-5-mini/mean_input_tokens",
+    "T1/gpt-5-mini/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F24",
+   "says": "price-table",
+   "about": "gpt-5-mini",
+   "value": "input 0.125000 / cached input 0.012500 / output 1.000000 USD per million tokens; pricing_as_of 2026-08-22; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5-mini, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F25",
+   "says": "price-tier",
+   "about": "gpt-5-mini",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5-mini, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F26",
+   "says": "model-name",
+   "about": "deepseek-v4-flash",
+   "value": "DeepSeek V4 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row deepseek-v4-flash, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "DeepSeek V4 Flash"
+  },
+  {
+   "id": "F27",
+   "says": "no-effort-sent",
+   "about": "deepseek-v4-flash",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"deepseek-v4-flash\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F28",
+   "says": "tokens-in",
+   "about": "deepseek-v4-flash",
+   "value": "35873.853211",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row deepseek-v4-flash: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/deepseek-v4-flash/mean_input_tokens",
+    "T1/deepseek-v4-flash/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F29",
+   "says": "price-table",
+   "about": "deepseek-v4-flash",
+   "value": "input 0.058660 / cached input 0.011732 / output 0.117320 USD per million tokens; pricing_as_of 2026-08-22; provider StreamLake (streamlake/fp8)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row deepseek-v4-flash, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F30",
+   "says": "model-name",
+   "about": "gpt-5.6-luna-xhigh",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-5.6-luna-xhigh, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-5.6 Luna XHigh"
+  },
+  {
+   "id": "F31",
+   "says": "effort-setting",
+   "about": "gpt-5.6-luna-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-luna-xhigh\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"xhigh\""
+  },
+  {
+   "id": "F32",
+   "says": "tokens-in",
+   "about": "gpt-5.6-luna-xhigh",
+   "value": "77898.259091",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-luna-xhigh: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-5.6-luna-xhigh/mean_input_tokens",
+    "T1/gpt-5.6-luna-xhigh/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F33",
+   "says": "price-table",
+   "about": "gpt-5.6-luna-xhigh",
+   "value": "input 0.100000 / cached input 0.010000 / output 0.600000 USD per million tokens; pricing_as_of 2026-08-22; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-luna-xhigh, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F34",
+   "says": "price-tier",
+   "about": "gpt-5.6-luna-xhigh",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-luna-xhigh, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F35",
+   "says": "model-name",
+   "about": "claude-haiku-5.5-cc-medium",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-haiku-5.5-cc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Haiku 5.5 Medium"
+  },
+  {
+   "id": "F36",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=claude-code].label",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"label\": \"Claude Code\"",
+   "term": "claude-code"
+  },
+  {
+   "id": "F37",
+   "says": "effort-setting",
+   "about": "claude-haiku-5.5-cc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"claude-haiku-5.5-cc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F38",
+   "says": "tokens-in",
+   "about": "claude-haiku-5.5-cc-medium",
+   "value": "71640.572727",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-haiku-5.5-cc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-haiku-5.5-cc-medium/mean_input_tokens",
+    "T1/claude-haiku-5.5-cc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F39",
+   "says": "price-table",
+   "about": "claude-haiku-5.5-cc-medium",
+   "value": "input 0.100000 / cached input 0.010000 / output 0.500000 USD per million tokens; pricing_as_of 2026-10-14; provider Anthropic (anthropic)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-haiku-5.5-cc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F40",
+   "says": "model-name",
+   "about": "gpt-6.1-sol-oc-medium",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-6.1-sol-oc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-6.1 Sol Medium (OpenCode)"
+  },
+  {
+   "id": "F41",
+   "says": "effort-setting",
+   "about": "gpt-6.1-sol-oc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-6.1-sol-oc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F42",
+   "says": "tokens-in",
+   "about": "gpt-6.1-sol-oc-medium",
+   "value": "33903.981818",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-oc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-6.1-sol-oc-medium/mean_input_tokens",
+    "T1/gpt-6.1-sol-oc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F43",
+   "says": "price-table",
+   "about": "gpt-6.1-sol-oc-medium",
+   "value": "input 1.000000 / cached input 0.050000 / output 5.000000 USD per million tokens; pricing_as_of 2026-10-18; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-oc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F44",
+   "says": "price-tier",
+   "about": "gpt-6.1-sol-oc-medium",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-oc-medium, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F45",
+   "says": "model-name",
+   "about": "gpt-6-sol-medium",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-6-sol-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-6 Sol Medium"
+  },
+  {
+   "id": "F46",
+   "says": "effort-setting",
+   "about": "gpt-6-sol-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-6-sol-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F47",
+   "says": "tokens-in",
+   "about": "gpt-6-sol-medium",
+   "value": "33229.672727",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-6-sol-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-6-sol-medium/mean_input_tokens",
+    "T1/gpt-6-sol-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F48",
+   "says": "price-table",
+   "about": "gpt-6-sol-medium",
+   "value": "input 1.000000 / cached input 0.100000 / output 5.000000 USD per million tokens; pricing_as_of 2026-10-02; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-sol-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F49",
+   "says": "price-tier",
+   "about": "gpt-6-sol-medium",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-sol-medium, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F50",
+   "says": "model-name",
+   "about": "gpt-6.1-sol-medium",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-6.1-sol-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-6.1 Sol Medium"
+  },
+  {
+   "id": "F51",
+   "says": "effort-setting",
+   "about": "gpt-6.1-sol-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-6.1-sol-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F52",
+   "says": "tokens-in",
+   "about": "gpt-6.1-sol-medium",
+   "value": "39871.895455",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-6.1-sol-medium/mean_input_tokens",
+    "T1/gpt-6.1-sol-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F53",
+   "says": "price-table",
+   "about": "gpt-6.1-sol-medium",
+   "value": "input 1.000000 / cached input 0.050000 / output 5.000000 USD per million tokens; pricing_as_of 2026-10-11; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F54",
+   "says": "price-tier",
+   "about": "gpt-6.1-sol-medium",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-medium, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F55",
+   "says": "model-name",
+   "about": "claude-sonnet-5.5-cc-medium",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-sonnet-5.5-cc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Sonnet 5.5 Medium"
+  },
+  {
+   "id": "F56",
+   "says": "effort-setting",
+   "about": "claude-sonnet-5.5-cc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"claude-sonnet-5.5-cc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F57",
+   "says": "tokens-in",
+   "about": "claude-sonnet-5.5-cc-medium",
+   "value": "23404.454545",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-sonnet-5.5-cc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-sonnet-5.5-cc-medium/mean_input_tokens",
+    "T1/claude-sonnet-5.5-cc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F58",
+   "says": "price-table",
+   "about": "claude-sonnet-5.5-cc-medium",
+   "value": "input 2.000000 / cached input 0.100000 / output 10.000000 USD per million tokens; pricing_as_of 2026-10-15; provider Anthropic (anthropic)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-sonnet-5.5-cc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F59",
+   "says": "model-name",
+   "about": "qwen3.7-plus",
+   "value": "Qwen 3.7 Plus",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row qwen3.7-plus, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Qwen 3.7 Plus"
+  },
+  {
+   "id": "F60",
+   "says": "no-effort-sent",
+   "about": "qwen3.7-plus",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"qwen3.7-plus\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F61",
+   "says": "tokens-in",
+   "about": "qwen3.7-plus",
+   "value": "121874.429224",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row qwen3.7-plus: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/qwen3.7-plus/mean_input_tokens",
+    "T1/qwen3.7-plus/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F62",
+   "says": "price-table",
+   "about": "qwen3.7-plus",
+   "value": "input 0.320000 / cached input 0.064000 / output 1.280000 USD per million tokens; pricing_as_of 2026-08-22; provider Alibaba (alibaba)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row qwen3.7-plus, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F63",
+   "says": "model-name",
+   "about": "qwen-3.6-27B-udq4",
+   "value": "Qwen 3.6 27B U-DQ4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row qwen-3.6-27B-udq4, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Qwen 3.6 27B U-DQ4"
+  },
+  {
+   "id": "F64",
+   "says": "no-effort-sent",
+   "about": "qwen-3.6-27B-udq4",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"qwen-3.6-27B-udq4\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F65",
+   "says": "model-name",
+   "about": "qwen-3.6-27B-udq4",
+   "value": "Qwen 3.6 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row qwen-3.6-27B-udq4, column model_label (model; the suffix U-DQ4 is the quantisation)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Qwen 3.6 27B U-DQ4"
+  },
+  {
+   "id": "F66",
+   "says": "note",
+   "about": "qwen-3.6-27B-udq4",
+   "value": "U-DQ4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row qwen-3.6-27B-udq4, column model_label: quantisation suffix of the model label",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Qwen 3.6 27B U-DQ4"
+  },
+  {
+   "id": "F67",
+   "says": "tokens-in",
+   "about": "qwen-3.6-27B-udq4",
+   "value": "58873.181818",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row qwen-3.6-27B-udq4: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/qwen-3.6-27B-udq4/mean_input_tokens",
+    "T1/qwen-3.6-27B-udq4/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F68",
+   "says": "price-table",
+   "about": "qwen-3.6-27B-udq4",
+   "value": "input 0.300000 / cached input 0.030000 / output 2.000000 USD per million tokens; pricing_as_of 2026-08-22; provider Chutes (chutes/fp8)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row qwen-3.6-27B-udq4, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F69",
+   "says": "model-name",
+   "about": "gpt-5.2",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-5.2, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-5.2"
+  },
+  {
+   "id": "F70",
+   "says": "no-effort-sent",
+   "about": "gpt-5.2",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"gpt-5.2\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F71",
+   "says": "tokens-in",
+   "about": "gpt-5.2",
+   "value": "59358.636364",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-5.2: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-5.2/mean_input_tokens",
+    "T1/gpt-5.2/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F72",
+   "says": "price-table",
+   "about": "gpt-5.2",
+   "value": "input 0.875000 / cached input 0.087500 / output 7.000000 USD per million tokens; pricing_as_of 2026-08-22; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.2, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F73",
+   "says": "price-tier",
+   "about": "gpt-5.2",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.2, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F74",
+   "says": "model-name",
+   "about": "gpt-5.6-terra-xhigh",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-5.6-terra-xhigh, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-5.6 Terra XHigh"
+  },
+  {
+   "id": "F75",
+   "says": "effort-setting",
+   "about": "gpt-5.6-terra-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-terra-xhigh\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"xhigh\""
+  },
+  {
+   "id": "F76",
+   "says": "tokens-in",
+   "about": "gpt-5.6-terra-xhigh",
+   "value": "52808.909091",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-terra-xhigh: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-5.6-terra-xhigh/mean_input_tokens",
+    "T1/gpt-5.6-terra-xhigh/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F77",
+   "says": "price-table",
+   "about": "gpt-5.6-terra-xhigh",
+   "value": "input 1.000000 / cached input 0.100000 / output 6.000000 USD per million tokens; pricing_as_of 2026-08-22; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-terra-xhigh, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F78",
+   "says": "price-tier",
+   "about": "gpt-5.6-terra-xhigh",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-terra-xhigh, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F79",
+   "says": "model-name",
+   "about": "gpt-6.1-sol-xhigh",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-6.1-sol-xhigh, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-6.1 Sol XHigh"
+  },
+  {
+   "id": "F80",
+   "says": "effort-setting",
+   "about": "gpt-6.1-sol-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-6.1-sol-xhigh\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"xhigh\""
+  },
+  {
+   "id": "F81",
+   "says": "tokens-in",
+   "about": "gpt-6.1-sol-xhigh",
+   "value": "70757.413636",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-xhigh: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-6.1-sol-xhigh/mean_input_tokens",
+    "T1/gpt-6.1-sol-xhigh/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F82",
+   "says": "price-table",
+   "about": "gpt-6.1-sol-xhigh",
+   "value": "input 1.000000 / cached input 0.050000 / output 5.000000 USD per million tokens; pricing_as_of 2026-10-11; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-xhigh, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F83",
+   "says": "price-tier",
+   "about": "gpt-6.1-sol-xhigh",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6.1-sol-xhigh, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F84",
+   "says": "model-name",
+   "about": "claude-haiku-4.5",
+   "value": "Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-haiku-4.5, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Haiku 4.5"
+  },
+  {
+   "id": "F85",
+   "says": "no-effort-sent",
+   "about": "claude-haiku-4.5",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"claude-haiku-4.5\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F86",
+   "says": "tokens-in",
+   "about": "claude-haiku-4.5",
+   "value": "40500.909091",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-haiku-4.5: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-haiku-4.5/mean_input_tokens",
+    "T1/claude-haiku-4.5/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F87",
+   "says": "price-table",
+   "about": "claude-haiku-4.5",
+   "value": "input 1.000000 / cached input 0.100000 / output 5.000000 USD per million tokens; pricing_as_of 2026-08-22; provider Anthropic (anthropic)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-haiku-4.5, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F88",
+   "says": "model-name",
+   "about": "gpt-5.6-sol-xhigh",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-5.6-sol-xhigh, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-5.6 Sol XHigh"
+  },
+  {
+   "id": "F89",
+   "says": "effort-setting",
+   "about": "gpt-5.6-sol-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-sol-xhigh\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"xhigh\""
+  },
+  {
+   "id": "F90",
+   "says": "tokens-in",
+   "about": "gpt-5.6-sol-xhigh",
+   "value": "81258.259091",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-sol-xhigh: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-5.6-sol-xhigh/mean_input_tokens",
+    "T1/gpt-5.6-sol-xhigh/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F91",
+   "says": "price-table",
+   "about": "gpt-5.6-sol-xhigh",
+   "value": "input 1.000000 / cached input 0.100000 / output 5.000000 USD per million tokens; pricing_as_of 2026-08-22; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-sol-xhigh, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F92",
+   "says": "price-tier",
+   "about": "gpt-5.6-sol-xhigh",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.6-sol-xhigh, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F93",
+   "says": "model-name",
+   "about": "gpt-4.1",
+   "value": "GPT-4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-4.1, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-4.1"
+  },
+  {
+   "id": "F94",
+   "says": "no-effort-sent",
+   "about": "gpt-4.1",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"gpt-4.1\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F95",
+   "says": "tokens-in",
+   "about": "gpt-4.1",
+   "value": "79336.818182",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-4.1: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-4.1/mean_input_tokens",
+    "T1/gpt-4.1/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F96",
+   "says": "price-table",
+   "about": "gpt-4.1",
+   "value": "input 2.000000 / cached input 0.500000 / output 8.000000 USD per million tokens; pricing_as_of 2026-08-22; provider OpenAI (openai)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-4.1, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F97",
+   "says": "model-name",
+   "about": "gpt-5.2-codex",
+   "value": "GPT-5.2 Codex",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-5.2-codex, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-5.2 Codex"
+  },
+  {
+   "id": "F98",
+   "says": "no-effort-sent",
+   "about": "gpt-5.2-codex",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"gpt-5.2-codex\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F99",
+   "says": "tokens-in",
+   "about": "gpt-5.2-codex",
+   "value": "69803.181818",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-5.2-codex: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-5.2-codex/mean_input_tokens",
+    "T1/gpt-5.2-codex/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F100",
+   "says": "price-table",
+   "about": "gpt-5.2-codex",
+   "value": "input 1.750000 / cached input 0.175000 / output 14.000000 USD per million tokens; pricing_as_of 2026-08-22; provider Azure (azure)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-5.2-codex, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F101",
+   "says": "model-name",
+   "about": "gpt-6-astra-medium",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gpt-6-astra-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "GPT-6 Astra Medium"
+  },
+  {
+   "id": "F102",
+   "says": "effort-setting",
+   "about": "gpt-6-astra-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-6-astra-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F103",
+   "says": "tokens-in",
+   "about": "gpt-6-astra-medium",
+   "value": "31850.322727",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gpt-6-astra-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gpt-6-astra-medium/mean_input_tokens",
+    "T1/gpt-6-astra-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F104",
+   "says": "price-table",
+   "about": "gpt-6-astra-medium",
+   "value": "input 5.000000 / cached input 0.500000 / output 25.000000 USD per million tokens; pricing_as_of 2026-10-02; provider OpenAI (openai/flex)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-astra-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F105",
+   "says": "price-tier",
+   "about": "gpt-6-astra-medium",
+   "value": "flex",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gpt-6-astra-medium, column pricing_provider_tag = openai/flex",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "term": "flex"
+  },
+  {
+   "id": "F106",
+   "says": "model-name",
+   "about": "claude-sonnet-5-cc-medium",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-sonnet-5-cc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Sonnet 5 Medium"
+  },
+  {
+   "id": "F107",
+   "says": "effort-setting",
+   "about": "claude-sonnet-5-cc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"claude-sonnet-5-cc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F108",
+   "says": "tokens-in",
+   "about": "claude-sonnet-5-cc-medium",
+   "value": "43217.359091",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-sonnet-5-cc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-sonnet-5-cc-medium/mean_input_tokens",
+    "T1/claude-sonnet-5-cc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F109",
+   "says": "price-table",
+   "about": "claude-sonnet-5-cc-medium",
+   "value": "input 2.000000 / cached input 0.200000 / output 10.000000 USD per million tokens; pricing_as_of 2026-09-29; provider Anthropic (anthropic)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-sonnet-5-cc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F110",
+   "says": "model-name",
+   "about": "claude-sonnet-4.5",
+   "value": "Sonnet 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-sonnet-4.5, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Sonnet 4.5"
+  },
+  {
+   "id": "F111",
+   "says": "no-effort-sent",
+   "about": "claude-sonnet-4.5",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"claude-sonnet-4.5\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F112",
+   "says": "tokens-in",
+   "about": "claude-sonnet-4.5",
+   "value": "36345.000000",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-sonnet-4.5: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-sonnet-4.5/mean_input_tokens",
+    "T1/claude-sonnet-4.5/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F113",
+   "says": "price-table",
+   "about": "claude-sonnet-4.5",
+   "value": "input 3.000000 / cached input 0.300000 / output 15.000000 USD per million tokens; pricing_as_of 2026-08-22; provider Google (google-vertex/global)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-sonnet-4.5, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F114",
+   "says": "model-name",
+   "about": "gemini-3-pro-preview",
+   "value": "Gemini 3 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row gemini-3-pro-preview, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Gemini 3 Pro"
+  },
+  {
+   "id": "F115",
+   "says": "no-effort-sent",
+   "about": "gemini-3-pro-preview",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"gemini-3-pro-preview\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F116",
+   "says": "tokens-in",
+   "about": "gemini-3-pro-preview",
+   "value": "106553.636363",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row gemini-3-pro-preview: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/gemini-3-pro-preview/mean_input_tokens",
+    "T1/gemini-3-pro-preview/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F117",
+   "says": "price-table",
+   "about": "gemini-3-pro-preview",
+   "value": "input 2.000000 / cached input 0.200000 / output 12.000000 USD per million tokens; pricing_as_of 2026-08-22; provider Google (retired)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row gemini-3-pro-preview, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F118",
+   "says": "model-name",
+   "about": "claude-opus-4.6",
+   "value": "Opus 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-opus-4.6, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Opus 4.6"
+  },
+  {
+   "id": "F119",
+   "says": "no-effort-sent",
+   "about": "claude-opus-4.6",
+   "value": "copilot [parameters] --model <model> -p <instruction>",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, harnesses[id=copilot-cli].commandTemplate: no effort option in the call; models[\"claude-opus-4.6\"] has no reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"commandTemplate\": \"copilot [parameters] --model <model> -p <instruction>\""
+  },
+  {
+   "id": "F120",
+   "says": "tokens-in",
+   "about": "claude-opus-4.6",
+   "value": "58964.545455",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-opus-4.6: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-opus-4.6/mean_input_tokens",
+    "T1/claude-opus-4.6/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F121",
+   "says": "price-table",
+   "about": "claude-opus-4.6",
+   "value": "input 5.000000 / cached input 0.500000 / output 25.000000 USD per million tokens; pricing_as_of 2026-08-22; provider Azure (azure/global)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-opus-4.6, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F122",
+   "says": "model-name",
+   "about": "claude-opus-5.5-cc-medium",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-opus-5.5-cc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Opus 5.5 Medium"
+  },
+  {
+   "id": "F123",
+   "says": "effort-setting",
+   "about": "claude-opus-5.5-cc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"claude-opus-5.5-cc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F124",
+   "says": "tokens-in",
+   "about": "claude-opus-5.5-cc-medium",
+   "value": "76619.618182",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-opus-5.5-cc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-opus-5.5-cc-medium/mean_input_tokens",
+    "T1/claude-opus-5.5-cc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F125",
+   "says": "price-table",
+   "about": "claude-opus-5.5-cc-medium",
+   "value": "input 4.000000 / cached input 0.200000 / output 20.000000 USD per million tokens; pricing_as_of 2026-10-06; provider Anthropic (anthropic)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-opus-5.5-cc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F126",
+   "says": "model-name",
+   "about": "claude-fable-5-cc-medium",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-fable-5-cc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Fable 5 Medium"
+  },
+  {
+   "id": "F127",
+   "says": "effort-setting",
+   "about": "claude-fable-5-cc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"claude-fable-5-cc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F128",
+   "says": "tokens-in",
+   "about": "claude-fable-5-cc-medium",
+   "value": "34581.450000",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-fable-5-cc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-fable-5-cc-medium/mean_input_tokens",
+    "T1/claude-fable-5-cc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F129",
+   "says": "price-table",
+   "about": "claude-fable-5-cc-medium",
+   "value": "input 10.000000 / cached input 1.000000 / output 50.000000 USD per million tokens; pricing_as_of 2026-09-29; provider Anthropic (anthropic)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-fable-5-cc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F130",
+   "says": "model-name",
+   "about": "claude-opus-5-cc-medium",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "4d row claude-opus-5-cc-medium, column model_label (the profile label: model, effort word, harness)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "quote": "Opus 5 Medium"
+  },
+  {
+   "id": "F131",
+   "says": "effort-setting",
+   "about": "claude-opus-5-cc-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"claude-opus-5-cc-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F132",
+   "says": "tokens-in",
+   "about": "claude-opus-5-cc-medium",
+   "value": "102709.181818",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4d row claude-opus-5-cc-medium: mean_input_tokens minus mean_cached_input_tokens (analysis README: cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T1/claude-opus-5-cc-medium/mean_input_tokens",
+    "T1/claude-opus-5-cc-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F133",
+   "says": "price-table",
+   "about": "claude-opus-5-cc-medium",
+   "value": "input 5.000000 / cached input 0.500000 / output 25.000000 USD per million tokens; pricing_as_of 2026-09-29; provider Anthropic (anthropic)",
+   "level": "written",
+   "form": "data-file",
+   "where": "4d row claude-opus-5-cc-medium, columns input_price_usd_per_million, cached_input_price_usd_per_million, output_price_usd_per_million, pricing_as_of, pricing_provider_tag",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4d_all_models_score_vs_cost.csv"
+  },
+  {
+   "id": "F134",
+   "says": "effort-setting",
+   "about": "gpt-5.6-luna-low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-luna-low\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"low\""
+  },
+  {
+   "id": "F135",
+   "says": "tokens-in",
+   "about": "gpt-5.6-luna-low",
+   "value": "29701.386364",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4c row gpt-5.6-luna-low: mean_input_tokens minus mean_cached_input_tokens (cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T2/gpt-5.6-luna-low/mean_input_tokens",
+    "T2/gpt-5.6-luna-low/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F136",
+   "says": "effort-setting",
+   "about": "gpt-5.6-luna-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-luna-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F137",
+   "says": "tokens-in",
+   "about": "gpt-5.6-luna-medium",
+   "value": "41507.254545",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4c row gpt-5.6-luna-medium: mean_input_tokens minus mean_cached_input_tokens (cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T2/gpt-5.6-luna-medium/mean_input_tokens",
+    "T2/gpt-5.6-luna-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F138",
+   "says": "effort-setting",
+   "about": "gpt-5.6-terra-low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-terra-low\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"low\""
+  },
+  {
+   "id": "F139",
+   "says": "tokens-in",
+   "about": "gpt-5.6-terra-low",
+   "value": "29232.627273",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4c row gpt-5.6-terra-low: mean_input_tokens minus mean_cached_input_tokens (cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T2/gpt-5.6-terra-low/mean_input_tokens",
+    "T2/gpt-5.6-terra-low/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F140",
+   "says": "effort-setting",
+   "about": "gpt-5.6-terra-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-terra-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F141",
+   "says": "tokens-in",
+   "about": "gpt-5.6-terra-medium",
+   "value": "32841.350000",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4c row gpt-5.6-terra-medium: mean_input_tokens minus mean_cached_input_tokens (cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T2/gpt-5.6-terra-medium/mean_input_tokens",
+    "T2/gpt-5.6-terra-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F142",
+   "says": "effort-setting",
+   "about": "gpt-5.6-sol-low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-sol-low\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"low\""
+  },
+  {
+   "id": "F143",
+   "says": "tokens-in",
+   "about": "gpt-5.6-sol-low",
+   "value": "31006.177273",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4c row gpt-5.6-sol-low: mean_input_tokens minus mean_cached_input_tokens (cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T2/gpt-5.6-sol-low/mean_input_tokens",
+    "T2/gpt-5.6-sol-low/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F144",
+   "says": "effort-setting",
+   "about": "gpt-5.6-sol-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "code",
+   "where": "web/config/methodology.json, models[\"gpt-5.6-sol-medium\"].reasoningEffort",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/methodology.json",
+   "quote": "\"reasoningEffort\": \"medium\""
+  },
+  {
+   "id": "F145",
+   "says": "tokens-in",
+   "about": "gpt-5.6-sol-medium",
+   "value": "44733.604545",
+   "level": "computed",
+   "form": "data-file",
+   "where": "4c row gpt-5.6-sol-medium: mean_input_tokens minus mean_cached_input_tokens (cached input is a subset of input)",
+   "file": "/work/.salvo14/mig/convert-github-peterth-llm-eval-local/evidence/4c_gpt56_score_vs_cost.csv",
+   "rule": "cell-difference",
+   "inputs": [
+    "T2/gpt-5.6-sol-medium/mean_input_tokens",
+    "T2/gpt-5.6-sol-medium/mean_cached_input_tokens"
+   ],
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  }
+ ]
+}

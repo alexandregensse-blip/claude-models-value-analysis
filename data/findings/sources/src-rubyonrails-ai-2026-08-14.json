@@ -1,0 +1,167 @@
+{
+ "id": "src-rubyonrails-ai-2026-08-14",
+ "publisher": "rubyonrails",
+ "urls": [
+  "https://rubyonrails.org/ai"
+ ],
+ "wayback": [
+  "https://web.archive.org/web/20260814014647/https://rubyonrails.org/ai"
+ ],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260814014647/https://rubyonrails.org/ai",
+   "captured": "2026-08-14T01:46:47Z",
+   "note": "page evidence/rails-ai-20260814.html (Wayback capture)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html": "bade02c85397a8f079459e21b0032bd38bd18ca16e37b3239eeba287989be698",
+  "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv": "1ef0747d62ddc24c27ece6d9780637c62491dbcf2df5d3e4bc960701ad78a64a"
+ },
+ "harvested_at": "2026-08-14T01:46:47Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-rubyonrails (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved /ai page capture",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "from": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "tool": "python re: the <tr data-model> rows of the benchmark tables of the page (benchmark = data-benchmark, model name and effort labels of the first cell, the data-sort-column cells accuracy / speed / tokens / cost / api-recall as printed), one CSV row per table row; the 14 Aug capture has the atomic-task table only"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "model": "model-name",
+    "effort": "effort-label",
+    "accuracy": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent"
+    },
+    "speed": "note",
+    "tokens": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "api_recall": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost column, values printed with $",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "$1.9",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "means per run",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"tokens and cost are means per run\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "tokens and cost are means per run",
+   "term": "per-run"
+  },
+  {
+   "id": "F3",
+   "says": "aggregation",
+   "about": null,
+   "value": "ran every evaluation three times",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph under the Stage 1 table (63 runs per model)",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "ran every evaluation three times"
+  },
+  {
+   "id": "F4",
+   "says": "run-date",
+   "about": null,
+   "value": "August 2026",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "ran every evaluation three times in August 2026"
+  },
+  {
+   "id": "F5",
+   "says": "no-effort-sent",
+   "about": "atomic/kimi-k3",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  },
+  {
+   "id": "F6",
+   "says": "no-effort-sent",
+   "about": "atomic/sol",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  },
+  {
+   "id": "F7",
+   "says": "no-effort-sent",
+   "about": "atomic/luna",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  },
+  {
+   "id": "F8",
+   "says": "no-effort-sent",
+   "about": "atomic/glm-5-2",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  }
+ ]
+}

@@ -1,0 +1,167 @@
+{
+ "id": "src-arxiv-2608.20318-2026-08-21",
+ "publisher": "arxiv-2608.20318",
+ "urls": [
+  "https://arxiv.org/abs/2608.20318",
+  "https://arxiv.org/pdf/2608.20318"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/pdf/2608.20318",
+   "captured": "2026-10-19T07:59:01Z",
+   "note": "PDF saved by salvo g/g4 (evidence/arxiv-2608.20318.pdf, file mtime 19 Oct 2026)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.pdf": "93029b04f8612f4bfdd221a6f726e86a2d1408cab0a3256866f164e3c3749dfc",
+  "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt": "29e8c7ccf2430864241825b734e42600679f443dd5f78ff8041c58bdb2ac2a78",
+  "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/tables-2-3.csv": "f4ba89ad32489d14534b81a26b641b075e689d0df0de7787ab1fc748ba7b792b"
+ },
+ "harvested_at": "2026-10-19T07:59:01Z",
+ "published": {
+  "value": "2026-08-21",
+  "where": "front page: \"Date: August 21, 2026\"",
+  "quote": "Date: August 21, 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2608.20318 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the PDF and its text extraction saved on 19 Oct by salvo g/g4",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.pdf",
+   "tool": "text extraction saved by salvo g/g4 (p.txt): page text, one table cell per line, pages separated by =====PAGE n=====. Quotes matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/tables-2-3.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "tool": "convert.py: Table 3 (PDF page 8: the avg column, last of 14 lines per configuration) and Table 2 (PDF page 7: the Cost (USD) column, last of 14 lines per configuration) from the text extraction, one CSV row per (system, harness, effort), values copied verbatim; the baseline row of Table 2 is not a system"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/tables-2-3.csv",
+   "where": "tables-2-3.csv: one row per configuration (system, harness, effort): avg = Table 3 last column (mean mapped score over the 10 tasks), cost = Table 2 last column (USD)",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "system": "model-name",
+    "effort": "effort-label",
+    "avg": {
+     "says": "score",
+     "term": "mapped-x100",
+     "scale": "fraction"
+    },
+    "cost": {
+     "says": "cost"
+    }
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "aggregation",
+   "about": null,
+   "value": "29 configurations, each attempting all ten tasks, for 290 cells",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.1 Setup",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "29 configurations, each attempting all ten tasks, for 290 cells"
+  },
+  {
+   "id": "F2",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 2 caption: \"$ is what the four hours of exploration cost\"",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "$ is what the four hours of exploration cost",
+   "term": "USD"
+  },
+  {
+   "id": "F3",
+   "says": "unit",
+   "about": null,
+   "value": "Every configuration on every task",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 2 caption: one cost per configuration, summed over the ten tasks (the 29 values add up to $5,336 against the text's $5,334)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "Every configuration on every task",
+   "term": "per-suite"
+  },
+  {
+   "id": "F4",
+   "says": "cost-basis",
+   "about": null,
+   "value": "consumed $5,334 of API calls",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.2: \"The exploration stage of the whole evaluation consumed $5,334 of API calls, with Kimi K3 converted from Chinese yuan and with neither the GPU hours of the twelve-hour runs nor the evaluator's compute included.\"",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "consumed $5,334 of API calls",
+   "term": "billed"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Kimi K3 converted from Chinese yuan",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.2",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "Kimi K3 converted from Chinese yuan"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "neither the GPU hours of the twelve-hour runs nor the evaluator’s compute included",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.2",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "neither the GPU hours of the twelve-hour runs nor the evaluator’s compute included"
+  },
+  {
+   "id": "F7",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.1 Setup: Opus 5 and Sonnet 5 under Claude Code",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "Claude Code",
+   "term": "claude-code"
+  },
+  {
+   "id": "F8",
+   "says": "harness",
+   "about": null,
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.1 Setup: Sol, Terra, Luna under Codex at all six effort levels",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.20318/evidence/arxiv-2608.20318.txt",
+   "quote": "under Codex at all six effort levels",
+   "term": "codex-cli"
+  }
+ ]
+}

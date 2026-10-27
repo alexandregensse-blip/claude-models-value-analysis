@@ -1,0 +1,119 @@
+{
+ "id": "src-ibragim-dev-leaderboard-2026-09-30",
+ "publisher": "ibragim-dev",
+ "urls": [
+  "https://ibragim.dev/leaderboard/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://ibragim.dev/leaderboard/",
+   "captured": "2026-10-01T02:45:45Z",
+   "note": "page evidence/ibragim-leaderboard-20260930.html (saved by salvo s18/a6, file mtime); the page says \"Updated 2026-09-30\""
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930.html": "1494229ddc420237a88652642d9426448ad3a7854685595a6aefa0a59b6ff4a2",
+  "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930-table.csv": "7796a5f23f5bf3f090d230435b704f0a8cf2a9c71ee0fb97e3da25fdae92bb82"
+ },
+ "harvested_at": "2026-10-01T02:45:45Z",
+ "published": {
+  "value": "2026-09-30",
+  "where": "page text: \"Updated 2026-09-30.\"",
+  "quote": "Updated 2026-09-30.",
+  "file": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930.html"
+ },
+ "salvo": "salvo14/mig/convert-ibragim-dev (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved leaderboard page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930-table.csv",
+   "from": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930.html",
+   "tool": "python re: the rows of the leaderboard table of the page, one CSV row per table row, cell text as printed (id = Harness|Model|Effort)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930-table.csv",
+   "where": "ibragim-leaderboard-20260930-table.csv: one row per leaderboard row",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "harness": "harness",
+    "model": "model-name",
+    "effort": "effort-label",
+    "pass1": {
+     "says": "score",
+     "term": "pass@1%",
+     "scale": "percent"
+    },
+    "pass3": "note",
+    "pass_all_3": "note",
+    "cost_per_task": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "time_per_task": "note",
+    "steps": "note",
+    "tokens_per_task": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "printed",
+      "step": 1000
+     }
+    },
+    "cache_hit": "cached-share"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "column $/task",
+   "file": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930.html",
+   "quote": "$/task",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "$/task",
+   "level": "written",
+   "form": "table-cell",
+   "where": "column $/task",
+   "file": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930.html",
+   "quote": "$/task",
+   "term": "per-task"
+  },
+  {
+   "id": "F3",
+   "says": "aggregation",
+   "about": null,
+   "value": "10 tasks × 3 runs per config",
+   "level": "written",
+   "form": "prose",
+   "where": "page header: \"Suite core10-v1.3: 10 tasks × 3 runs per config.\"",
+   "file": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260930.html",
+   "quote": "10 tasks × 3 runs per config"
+  }
+ ]
+}

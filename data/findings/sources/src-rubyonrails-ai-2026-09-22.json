@@ -1,0 +1,123 @@
+{
+ "id": "src-rubyonrails-ai-2026-09-22",
+ "publisher": "rubyonrails",
+ "urls": [
+  "https://rubyonrails.org/ai"
+ ],
+ "wayback": [
+  "https://web.archive.org/web/20260922013109/https://rubyonrails.org/ai"
+ ],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260922013109/https://rubyonrails.org/ai",
+   "captured": "2026-09-22T01:31:09Z",
+   "note": "page evidence/rails-ai-20260922.html (Wayback capture)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922.html": "134ed4f9f003d8981fe896ee3f8bbfa2e6276b043fe70b24317439e84ac077d1",
+  "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922-table.csv": "48124420faddd3cec23e770c9697ba2a14ba9e7369b7307f0394cfba32bf6e52"
+ },
+ "harvested_at": "2026-09-22T01:31:09Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-rubyonrails (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved /ai page capture",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922-table.csv",
+   "from": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922.html",
+   "tool": "python re: the <tr data-model> rows of the benchmark tables of the page (benchmark = data-benchmark, model name and effort labels of the first cell, the data-sort-column cells accuracy / speed / tokens / cost / api-recall as printed), one CSV row per table row; the 14 Aug capture has the atomic-task table only"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922-table.csv",
+   "where": "rails-ai-20260922-table.csv: one row per table row of the page",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "model": "model-name",
+    "effort": "effort-label",
+    "accuracy": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent"
+    },
+    "speed": "note",
+    "tokens": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "api_recall": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost column, values printed with $",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922.html",
+   "quote": "$6.63",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "means per run",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"tokens and cost are means per run\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922.html",
+   "quote": "tokens and cost are means per run",
+   "term": "per-run"
+  },
+  {
+   "id": "F3",
+   "says": "aggregation",
+   "about": null,
+   "value": "ran every ticket three times",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph under the Stage 2 table (60 runs per model and effort)",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922.html",
+   "quote": "ran every ticket three times"
+  },
+  {
+   "id": "F4",
+   "says": "run-date",
+   "about": null,
+   "value": "September 2026",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260922.html",
+   "quote": "ran every ticket three times in September 2026"
+  }
+ ]
+}
