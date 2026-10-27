@@ -22,7 +22,8 @@
   "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html": "de2b698306b3ab3600edbc58f5d36582c68cafa4267559c1381565f64445defe",
   "/work/.salvo14/mig/convert-testcabinet/evidence/doc_results.html": "72a79eb230bea89d1f31087549f667fce10fdd267c5a9aadd1e8c695259fd019",
   "/work/.salvo14/mig/convert-testcabinet/evidence/SOURCE.txt": "7e227a317cfadc4a186d2169970fa8fc5d63872155e4f5ba2dc94785156fd046",
-  "/work/.salvo14/mig/convert-testcabinet/evidence/rows-runs.json": "5eb74fb18505bc004268a47102d31c51a651191ae2b1a630d5ba2407fbc22d62"
+  "/work/.salvo14/mig/convert-testcabinet/evidence/rows-runs.json": "cfacbf669c28fa582211d44fce08e75ce6ebe48d16f37ca17ed720299f771945",
+  "/work/.salvo14/mig/convert-testcabinet/evidence/rows-means.json": "b7040096783c8e93980a8d6650d5559e7ee68630917443500e2f3e116fc52e7b"
  },
  "harvested_at": "2026-10-20T05:49:06Z",
  "published": {
@@ -39,6 +40,11 @@
    "file": "/work/.salvo14/mig/convert-testcabinet/evidence/rows-runs.json",
    "from": "/work/.salvo14/mig/convert-testcabinet/evidence/runs-2026-10-20T0238Z.json",
    "tool": "flattening of runs.json: one row per completed run of the groups the registry holds as setups; score = int(score.earned)/int(score.total) joined with '/'; harness = harnessSlug + ' ' + harnessVersion; case = slug version variant engine; other fields verbatim"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/rows-means.json",
+   "from": "/work/.salvo14/mig/convert-testcabinet/evidence/runs-2026-10-20T0238Z.json",
+   "tool": "rows-means.json: one row per (setup, model) group of runs that the earlier legacy rows averaged (n>1 runs): the arithmetic mean of the runs' per-run score percent (6 decimals), tokens (1 decimal) and cost.comparable (6 decimals); computed by convert.py (statistics.fmean); first_start and last_end are the earliest startedAt and the latest finishedAt of the runs (the hull the mean's runs cover); the site publishes no mean"
   }
  ],
  "tables": [
@@ -68,6 +74,11 @@
      "term": "pct-checklist",
      "scale": "counts"
     },
+    "run_score": {
+     "says": "run-score",
+     "term": "pct-checklist",
+     "scale": "counts"
+    },
     "tokens_uncached_input": "tokens-in",
     "tokens_cached_input": "tokens-cache-read",
     "tokens_output": "tokens-out",
@@ -80,6 +91,70 @@
      }
     },
     "cost_actual": "note"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/rows-means.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "first_start": "run-start",
+    "last_end": "run-end",
+    "id": "note",
+    "group": "note",
+    "n_runs": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "subject.modelId of the runs"
+    },
+    "score_mean_pct": {
+     "says": "score",
+     "term": "pct-checklist",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "tokens_uncached_input_mean": {
+     "says": "tokens-in",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "tokens_cached_input_mean": {
+     "says": "tokens-cache-read",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "tokens_output_mean": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "tokens_reasoning_mean": {
+     "says": "tokens-reasoning",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "cost_comparable_mean": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    }
    },
    "level": "written"
   }

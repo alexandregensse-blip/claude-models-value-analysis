@@ -36,6 +36,9 @@
   "/work/.salvo14/gt/t8/src/r2/cvx/lb-noargs.json": "f481bd15885090a0b01fbdbac5eab81e7d75971d3e5132b929f004c048249426",
   "/work/.salvo14/gt/t8/src/r2/cvx/lb-experimentno_guidelines.json": "178ee967361c63ca360b98f1b7f47c9e6b68c3d76dddf485351cd2cfba46af31",
   "/work/.salvo14/gt/t8/src/r2/cvx/lb-experimentno_guidelines_with_web.json": "42ecedd6e3bcf1af9f92e86e0b1e1545aa6d8b993ef5241182441dcd4604b81e",
+  "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-noargs.json": "0e0edb4cbde39e4c21fdb136324c7c5b5afe8dae6898352624188ad4b9af9f28",
+  "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-noguide.json": "2463484012fa5789b45fbd100ccb4dfdbf0c674f733ac8f429efbb0c150f7cb1",
+  "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-web.json": "1189b8d655ee3725171170c623711035ad68b8a3ebef259417a0235f317fc194",
   "/work/.salvo14/s18/a2/src/convex/modelCodegen.ts": "57f4c357d8b584e2ed89b67015bc9dbc72fd5d27dce0460071ccd508ebb80e74",
   "/work/.salvo14/mig/convert-convex.dev/evidence/convex-evals-config-history-20261026.txt": "eda86ac6d272ae58a611434fc66bf35dd8af96e69ca4b466e515379458ce4c5d",
   "/work/.salvo14/s23/b1/src/convex/modelCodegen_now.ts": "57f4c357d8b584e2ed89b67015bc9dbc72fd5d27dce0460071ccd508ebb80e74",
@@ -154,6 +157,62 @@
     "formattedName": "note"
    },
    "level": "written"
+  },
+  {
+   "id": "T4",
+   "file": "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-noargs.json",
+   "where": "$.value",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": "note",
+    "latestRunTime": "run-date",
+    "openRouterFirstSeenAt": "run-date"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T5",
+   "file": "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-noguide.json",
+   "where": "$.value",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": "note",
+    "latestRunTime": "run-date",
+    "openRouterFirstSeenAt": "run-date"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T6",
+   "file": "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-web.json",
+   "where": "$.value",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": "note",
+    "latestRunTime": "run-date",
+    "openRouterFirstSeenAt": "run-date"
+   },
+   "level": "written"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-noargs.json",
+   "from": "/work/.salvo14/gt/t8/src/r2/cvx/lb-noargs.json",
+   "tool": "python json: for each row of $.value, the fields latestRunTime and openRouterFirstSeenAt (epoch milliseconds, stored by Convex as floats such as 1791907477000.0) as integers int(x), nothing else changed"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-noguide.json",
+   "from": "/work/.salvo14/gt/t8/src/r2/cvx/lb-experimentno_guidelines.json",
+   "tool": "python json: for each row of $.value, the fields latestRunTime and openRouterFirstSeenAt (epoch milliseconds, stored by Convex as floats such as 1791907477000.0) as integers int(x), nothing else changed"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-convex.dev/evidence/times-src-convex.dev-llm-leaderboard-92a60e0b-2026-10-20-web.json",
+   "from": "/work/.salvo14/gt/t8/src/r2/cvx/lb-experimentno_guidelines_with_web.json",
+   "tool": "python json: for each row of $.value, the fields latestRunTime and openRouterFirstSeenAt (epoch milliseconds, stored by Convex as floats such as 1791907477000.0) as integers int(x), nothing else changed"
   }
  ],
  "facts": [
