@@ -1,0 +1,1298 @@
+{
+ "urls": [
+  "https://github.com/rlwillen0121/identity-eval-harness/blob/1f1ed39d11c6c26862253b3fd2e771eff7ea64c1/reports/v41-lite/skill_orchestration.html"
+ ],
+ "wayback": [],
+ "commit": "1f1ed39d11c6c26862253b3fd2e771eff7ea64c1",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_skill_orchestration.html": "cdbe4419dd7af4bc28f15aee0ffc6807c1ad00f6e647aafe3f2752f9adb46239",
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json": "a1db42b1ff3186ebb572d026b0953b8eb2ded727c7597eee7289b55a7d707729",
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py": "00a63200c33d60b87fd6704850fbc70e074118958fc373387d82cdb69abc746b",
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py": "64ef017e28476c59c7a0ef63527d1081e1c9a156bb9fec45d8027583acb3aa4e"
+ },
+ "harvested_at": "2026-10-21T16:33:00Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "1f1ed39d11c6c26862253b3fd2e771eff7ea64c1",
+   "url": "https://github.com/rlwillen0121/identity-eval-harness/blob/1f1ed39d11c6c26862253b3fd2e771eff7ea64c1/reports/v41-lite/skill_orchestration.html",
+   "captured": "2026-10-21T15:29:41Z",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_skill_orchestration.html",
+   "note": "reports/v41-lite/skill_orchestration.html, run_skill_orchestration.py and build_skill_orchestration_report.py at commit 1f1ed39d1 (committer date from the GitHub commits API on 27 Oct), byte-identical to the copies saved by salvo hn/news-code2d on 2026-10-21 (the legacy rows cite the file's creation commit a37de7401, whose version is smaller: 44 KB instead of 111 KB); the page embeds its data as `const PAYLOAD = {...}`, extracted to s1f_payload.json"
+  }
+ ],
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-identitybench (Wave C2)",
+ "agent": "converter convert_skill.py (Sonnet 5.5), from the files of the repository at the commit",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "from": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_skill_orchestration.html",
+   "tool": "json.JSONDecoder().raw_decode of the object assigned to `const PAYLOAD = ` in the HTML page, re-dumped (ensure_ascii off, indent 0); equal to the payload.json saved by salvo hn/news-code2d"
+  }
+ ],
+ "tables": [],
+ "charts": [],
+ "id": "src-github-identitybench-skill-orchestration-1f1ed39-2026-10-21",
+ "publisher": "github-identitybench",
+ "facts": [
+  {
+   "says": "unit",
+   "value": "72",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[].tasks_total = 72 (12 multi-wave scenarios x 6 governance categories per cell)",
+   "term": "per-72-task-set",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[].cost_usd (the page prints '$' amounts: cost_usd.toFixed(2))",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost: a cost the CLI or endpoint reported is labelled 'billed'",
+   "quote": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "eff_in = in_tok * 0.18",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost: without a reported cost, input tokens x 0.18 (an assumed ~85% prefix-cache discount) at a hard-coded price table (TOKEN_PRICING_PER_M)",
+   "quote": "eff_in = in_tok * 0.18",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "TOKEN_PRICING_PER_M",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py: the hard-coded per-1M-token prices (no date) behind the estimates",
+   "quote": "TOKEN_PRICING_PER_M: dict[str, tuple[float, float, str]] = {",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "claude-haiku-5-5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['claude-haiku-5-5'].name (the cell's model_key is 'claude-haiku-5-5')",
+   "id": "F6"
+  },
+  {
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "25",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F7"
+  },
+  {
+   "says": "harness",
+   "value": "claude_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 826-832, MODEL_SPECS['claude-haiku-5-5']",
+   "quote": "\"provider\": \"claude_cli\"",
+   "term": "claude-code",
+   "id": "F8",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 826-832, MODEL_SPECS['claude-haiku-5-5']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "Claude Haiku 5.5",
+   "id": "F9"
+  },
+  {
+   "says": "cost",
+   "about": "claude-haiku-5-5",
+   "value": "1.351",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A1_solo_no_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F10"
+  },
+  {
+   "says": "cost-basis",
+   "value": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost: the cost the CLI or endpoint reported",
+   "quote": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "term": "list-estimate",
+   "id": "F11",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost: the cost the CLI or endpoint reported",
+   "quote": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "term": "cli-total",
+   "id": "F12",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "claude-opus-5-5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['claude-opus-5-5'].name (the cell's model_key is 'claude-opus-5-5')",
+   "id": "F13"
+  },
+  {
+   "says": "score",
+   "about": "claude-opus-5-5",
+   "value": "58",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F14"
+  },
+  {
+   "says": "harness",
+   "value": "claude_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 819-825, MODEL_SPECS['claude-opus-5-5']",
+   "quote": "\"provider\": \"claude_cli\"",
+   "term": "claude-code",
+   "id": "F15",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 819-825, MODEL_SPECS['claude-opus-5-5']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "Claude Opus 5.5",
+   "id": "F16"
+  },
+  {
+   "says": "cost",
+   "about": "claude-opus-5-5",
+   "value": "44.626",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A1_solo_no_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F17"
+  },
+  {
+   "says": "model-name",
+   "about": "claude-sonnet-5-5",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['claude-sonnet-5-5'].name (the cell's model_key is 'claude-sonnet-5-5')",
+   "id": "F18"
+  },
+  {
+   "says": "score",
+   "about": "claude-sonnet-5-5",
+   "value": "46",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F19"
+  },
+  {
+   "says": "harness",
+   "value": "claude_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 812-818, MODEL_SPECS['claude-sonnet-5-5']",
+   "quote": "\"provider\": \"claude_cli\"",
+   "term": "claude-code",
+   "id": "F20",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 812-818, MODEL_SPECS['claude-sonnet-5-5']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "Claude Sonnet 5.5",
+   "id": "F21"
+  },
+  {
+   "says": "cost",
+   "about": "claude-sonnet-5-5",
+   "value": "22.848",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A1_solo_no_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F22"
+  },
+  {
+   "says": "model-name",
+   "about": "gemini-3.8-flash",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['gemini-3.8-flash'].name (the cell's model_key is 'gemini-3.8-flash')",
+   "id": "F23"
+  },
+  {
+   "says": "score",
+   "about": "gemini-3.8-flash",
+   "value": "26",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F24"
+  },
+  {
+   "says": "harness",
+   "value": "agy_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 841-848, MODEL_SPECS['gemini-3.8-flash']",
+   "quote": "\"provider\": \"agy_cli\"",
+   "term": "antigravity-cli",
+   "id": "F25",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 841-848, MODEL_SPECS['gemini-3.8-flash']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "Gemini 3.8 Flash",
+   "id": "F26"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-3.8-flash",
+   "value": "1.05",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A1_solo_no_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F27"
+  },
+  {
+   "says": "cost-basis",
+   "value": "eff_in = in_tok * 0.18",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost (est branch)",
+   "quote": "eff_in = in_tok * 0.18",
+   "term": "list-estimate",
+   "id": "F28",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "eff_in = in_tok * 0.18",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost (est branch)",
+   "quote": "eff_in = in_tok * 0.18",
+   "term": "tokens×list",
+   "id": "F29",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "gemini-4-argon",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['gemini-4-argon'].name (the cell's model_key is 'gemini-4-argon')",
+   "id": "F30"
+  },
+  {
+   "says": "score",
+   "about": "gemini-4-argon",
+   "value": "62",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F31"
+  },
+  {
+   "says": "harness",
+   "value": "agy_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 833-840, MODEL_SPECS['gemini-4-argon']",
+   "quote": "\"provider\": \"agy_cli\"",
+   "term": "antigravity-cli",
+   "id": "F32",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 833-840, MODEL_SPECS['gemini-4-argon']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "Gemini 4 Argon",
+   "id": "F33"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-4-argon",
+   "value": "4.18",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A1_solo_no_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F34"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-6-astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['gpt-6-astra'].name (the cell's model_key is 'gpt-6-astra')",
+   "id": "F35"
+  },
+  {
+   "says": "score",
+   "about": "gpt-6-astra",
+   "value": "72",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6-astra__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F36"
+  },
+  {
+   "says": "harness",
+   "value": "codex_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 856-862, MODEL_SPECS['gpt-6-astra']",
+   "quote": "\"provider\": \"codex_cli\"",
+   "term": "codex-cli",
+   "id": "F37",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 856-862, MODEL_SPECS['gpt-6-astra']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "GPT-6 Astra",
+   "id": "F38"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-6-astra",
+   "value": "2.05",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6-astra__A1_solo_no_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F39"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-6-luna",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['gpt-6-luna'].name (the cell's model_key is 'gpt-6-luna')",
+   "id": "F40"
+  },
+  {
+   "says": "score",
+   "about": "gpt-6-luna",
+   "value": "0",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6-luna__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F41"
+  },
+  {
+   "says": "harness",
+   "value": "codex_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 863-869, MODEL_SPECS['gpt-6-luna']",
+   "quote": "\"provider\": \"codex_cli\"",
+   "term": "codex-cli",
+   "id": "F42",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 863-869, MODEL_SPECS['gpt-6-luna']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "GPT-6 Luna",
+   "id": "F43"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-6-luna",
+   "value": "0.1",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6-luna__A1_solo_no_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F44"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-6.1-sol",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['gpt-6.1-sol'].name (the cell's model_key is 'gpt-6.1-sol')",
+   "id": "F45"
+  },
+  {
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "71",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6.1-sol__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F46"
+  },
+  {
+   "says": "harness",
+   "value": "codex_cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 849-855, MODEL_SPECS['gpt-6.1-sol']",
+   "quote": "\"provider\": \"codex_cli\"",
+   "term": "codex-cli",
+   "id": "F47",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 849-855, MODEL_SPECS['gpt-6.1-sol']",
+   "quote": "\"effort\": \"medium\"",
+   "about": "GPT-6.1 Sol",
+   "id": "F48"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-6.1-sol",
+   "value": "1.75",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6.1-sol__A1_solo_no_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F49"
+  },
+  {
+   "says": "model-name",
+   "about": "kimi-k3",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload models_meta['kimi-k3'].name (the cell's model_key is 'kimi-k3')",
+   "id": "F50"
+  },
+  {
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "27",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A1_solo_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F51"
+  },
+  {
+   "says": "route",
+   "value": "OPENROUTER_BASE_URL",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 870-879, MODEL_SPECS['kimi-k3']",
+   "quote": "\"base_url_env\": \"OPENROUTER_BASE_URL\"",
+   "term": "openrouter",
+   "id": "F52",
+   "about": null
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"moonshotai/kimi-k3\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_run_skill_orchestration.py",
+   "where": "run_skill_orchestration.py lines 870-879, MODEL_SPECS['kimi-k3']: the spec has no effort key",
+   "quote": "\"model\": \"moonshotai/kimi-k3\"",
+   "about": "Kimi K3",
+   "id": "F53"
+  },
+  {
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.84",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A1_solo_no_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F54"
+  },
+  {
+   "says": "cost-basis",
+   "value": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost: the cost the CLI or endpoint reported",
+   "quote": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "term": "router-billed",
+   "id": "F55",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_build_skill_orchestration_report.py",
+   "where": "build_skill_orchestration_report.py _estimate_cost: the cost the CLI or endpoint reported",
+   "quote": "if reported is not None and reported > 0: return round(reported, 3), \"billed\"",
+   "term": "router-invoice",
+   "id": "F56",
+   "about": null
+  },
+  {
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "12",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A2_native_checker_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F57"
+  },
+  {
+   "says": "cost",
+   "about": "claude-haiku-5-5",
+   "value": "1.344",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A2_native_checker_no_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F58"
+  },
+  {
+   "says": "score",
+   "about": "claude-sonnet-5-5",
+   "value": "32",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A2_native_checker_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F59"
+  },
+  {
+   "says": "cost",
+   "about": "claude-sonnet-5-5",
+   "value": "21.452",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A2_native_checker_no_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F60"
+  },
+  {
+   "says": "score",
+   "about": "gemini-3.8-flash",
+   "value": "24",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A2_native_checker_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F61"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-3.8-flash",
+   "value": "0.71",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A2_native_checker_no_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F62"
+  },
+  {
+   "says": "score",
+   "about": "gemini-4-argon",
+   "value": "51",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A2_native_checker_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F63"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-4-argon",
+   "value": "5.84",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A2_native_checker_no_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F64"
+  },
+  {
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "19",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A2_native_checker_no_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F65"
+  },
+  {
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "4.65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A2_native_checker_no_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F66"
+  },
+  {
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "53",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A3_solo_defined_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F67"
+  },
+  {
+   "says": "cost",
+   "about": "claude-haiku-5-5",
+   "value": "1.118",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A3_solo_defined_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F68"
+  },
+  {
+   "says": "score",
+   "about": "claude-opus-5-5",
+   "value": "72",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A3_solo_defined_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F69"
+  },
+  {
+   "says": "partial",
+   "about": "claude-opus-5-5",
+   "value": "n_valid 3 of n_total 12",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A3_solo_defined_skill'].n_valid / n_total: only 3 of the 12 episodes of the cell are valid",
+   "id": "F70"
+  },
+  {
+   "says": "cost",
+   "about": "claude-opus-5-5",
+   "value": "37.593",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A3_solo_defined_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F71"
+  },
+  {
+   "says": "score",
+   "about": "claude-sonnet-5-5",
+   "value": "69",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A3_solo_defined_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F72"
+  },
+  {
+   "says": "cost",
+   "about": "claude-sonnet-5-5",
+   "value": "18.955",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A3_solo_defined_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F73"
+  },
+  {
+   "says": "score",
+   "about": "gemini-3.8-flash",
+   "value": "14",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A3_solo_defined_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F74"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-3.8-flash",
+   "value": "0.63",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A3_solo_defined_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F75"
+  },
+  {
+   "says": "score",
+   "about": "gemini-4-argon",
+   "value": "58",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A3_solo_defined_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F76"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-4-argon",
+   "value": "3.84",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A3_solo_defined_skill'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F77"
+  },
+  {
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "32",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A3_solo_defined_skill'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F78"
+  },
+  {
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "4.595",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A3_solo_defined_skill'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F79"
+  },
+  {
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "53",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F80"
+  },
+  {
+   "says": "cost",
+   "about": "claude-haiku-5-5",
+   "value": "1.678",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-haiku-5-5__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F81"
+  },
+  {
+   "says": "score",
+   "about": "claude-opus-5-5",
+   "value": "72",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F82"
+  },
+  {
+   "says": "partial",
+   "about": "claude-opus-5-5",
+   "value": "n_valid 9 of n_total 12",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A4_skill_plus_maker_checker'].n_valid / n_total: only 9 of the 12 episodes of the cell are valid",
+   "id": "F83"
+  },
+  {
+   "says": "cost",
+   "about": "claude-opus-5-5",
+   "value": "44.121",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-opus-5-5__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F84"
+  },
+  {
+   "says": "score",
+   "about": "claude-sonnet-5-5",
+   "value": "72",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F85"
+  },
+  {
+   "says": "cost",
+   "about": "claude-sonnet-5-5",
+   "value": "25.776",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='claude-sonnet-5-5__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F86"
+  },
+  {
+   "says": "score",
+   "about": "gemini-3.8-flash",
+   "value": "13",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F87"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-3.8-flash",
+   "value": "0.62",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-3.8-flash__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F88"
+  },
+  {
+   "says": "score",
+   "about": "gemini-4-argon",
+   "value": "62",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F89"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-4-argon",
+   "value": "5.79",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gemini-4-argon__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F90"
+  },
+  {
+   "says": "score",
+   "about": "gpt-6-luna",
+   "value": "0",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6-luna__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F91"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-6-luna",
+   "value": "0.13",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6-luna__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F92"
+  },
+  {
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "69",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6.1-sol__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F93"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-6.1-sol",
+   "value": "1.88",
+   "level": "source-estimate",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='gpt-6.1-sol__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'est'): an estimate (tokens x 0.18 assumed cache factor x hard-coded prices), not a measured cost",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F94"
+  },
+  {
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "25",
+   "term": "solved-of-72",
+   "scale": "raw",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A4_skill_plus_maker_checker'].tasks_passed",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F95"
+  },
+  {
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "6.289",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/s1f_payload.json",
+   "where": "payload cells[cell_id='kimi-k3__A4_skill_plus_maker_checker'].cost_usd (cost_basis 'billed')",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   },
+   "id": "F96"
+  }
+ ]
+}

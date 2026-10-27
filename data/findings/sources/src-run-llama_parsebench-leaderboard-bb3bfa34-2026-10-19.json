@@ -1,0 +1,4195 @@
+{
+ "urls": [
+  "https://github.com/run-llama/ParseBench/blob/main/leaderboard.csv"
+ ],
+ "wayback": [],
+ "commit": "bb3bfa34c2e9e14edf5ee328434790462ac8dc53",
+ "sha256": {
+  "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv": "5e0bbcf7eaffcd8cebc2280054169540baed8ec80a54f8b2d68c7002d5296a26",
+  "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py": "98390d43390e1f59c38f613df59efe336cdb9ba3b28e625efc74a7d121a0d79f",
+  "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/README.md": "30f2796fad5aa80dd29ffbdf500b484397f9bef2f0e72c8bb010e0ab048a4be3",
+  "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/CHANGELOG.md": "7d616785469ae4bfbf3cd5c1315a3a339eac79ae9f7669f89597dc629c04df32",
+  "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/pipelines.md": "5d3ff35e876409332db93796da15703dcb6b27b70f5d07753afed49863ffc88e",
+  "/work/.salvo14/g/g4/src/parsebench-72eb1a68.csv": "c86580feee12c732dcdc484756108c4a37789b84065df08dd93c3c0f722d87e8"
+ },
+ "harvested_at": "2026-10-20T05:44:00Z",
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "bb3bfa34c2e9e14edf5ee328434790462ac8dc53",
+   "url": "https://github.com/run-llama/ParseBench/blob/bb3bfa34c2e9e14edf5ee328434790462ac8dc53/leaderboard.csv",
+   "captured": "2026-10-19T23:38:22Z",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "note": "leaderboard.csv at commit bb3bfa34c2 ('Add Nemotron 3.5 Parse pipeline and leaderboard row', the last commit touching the file before 22 Oct): byte-identical to the copy saved by salvo gt t8 on 2026-10-20 (lb_20261020.csv, sha256 5e0bbcf7...); re-fetched from raw.githubusercontent.com on 27 Oct, with README.md, CHANGELOG.md, docs/pipelines.md and src/parse_bench/inference/pipelines/parse.py at the same commit. The committer date is from the GitHub commits API."
+  },
+  {
+   "id": "G2",
+   "kind": "commit",
+   "commit": "72eb1a68a64fb45ffe23fbf7e1fe3033ec5ad6a5",
+   "url": "https://github.com/run-llama/ParseBench/blob/72eb1a68a64fb45ffe23fbf7e1fe3033ec5ad6a5/leaderboard.csv",
+   "captured": "2026-10-08T01:36:33Z",
+   "file": "/work/.salvo14/g/g4/src/parsebench-72eb1a68.csv",
+   "note": "leaderboard.csv at commit 72eb1a68 (committer date from the GitHub commits API), saved by salvo g g4: the rows listed in value_seen_in carry the same Overall and Cost_Per_Page there"
+  }
+ ],
+ "published": null,
+ "salvo": "salvo14/mig/convert-run-llama-ParseBench (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the files of the repository at the commit",
+ "snapshot_of": null,
+ "tables": [],
+ "extractions": [],
+ "id": "src-run-llama_parsebench-leaderboard-bb3bfa34-2026-10-19",
+ "publisher": "run-llama/ParseBench",
+ "facts": [
+  {
+   "says": "cost-basis",
+   "value": "re-prices saved runs via `Provider.recompute_cost`",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/CHANGELOG.md",
+   "where": "CHANGELOG.md, Cost columns entry",
+   "quote": "Anthropic prompt-cache tokens are priced. `parse-bench inference renormalize` re-prices saved runs via `Provider.recompute_cost` without re-running inference.",
+   "term": "list-estimate",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "re-prices saved runs via `Provider.recompute_cost`",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/CHANGELOG.md",
+   "where": "CHANGELOG.md, Cost columns entry (prices in the repository's providers; no price table or date is stated)",
+   "quote": "Anthropic prompt-cache tokens are priced. `parse-bench inference renormalize` re-prices saved runs via `Provider.recompute_cost` without re-running inference.",
+   "term": "tokens×list",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "¢ / Page",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/README.md",
+   "where": "README.md, leaderboard table header (cost column of leaderboard.csv: Cost_Per_Page)",
+   "quote": "| Rank | Provider | Category | Overall | Tables | Charts | Content Faith. | Sem. Format. | Visual Ground. | ¢ / Page |",
+   "term": "cents-per-page",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "¢",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/README.md",
+   "where": "README.md, leaderboard table row 6 ('6.13¢'; the CSV cell is 6.13)",
+   "quote": "| 6 | Anthropic Opus 5.5 (Effort High) | VLM - Proprietary | 79.85 | 94.25 | 70.89 | 91.72 | 77.04 | 65.33 | 6.13¢ |",
+   "term": "USD",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5 Mini (Reasoning Minimal)",
+   "value": "GPT-5 Mini",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 5, column Provider ('OpenAI GPT-5 Mini (Reasoning Minimal)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5 Mini (Reasoning Minimal)",
+   "id": "F5"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5 Mini (Reasoning Minimal)",
+   "value": "46.83",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 5, column Overall (row 'OpenAI GPT-5 Mini (Reasoning Minimal)')",
+   "quote": "46.83",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F6"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5 Mini (Reasoning Minimal)",
+   "value": "0.88",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 5, column Cost_Per_Page (row 'OpenAI GPT-5 Mini (Reasoning Minimal)'; cents per page)",
+   "quote": "0.88",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F7"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"reasoning_effort\": \"minimal\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2227-2237, PipelineSpec 'openai_gpt5_mini_reasoning_minimal_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"reasoning_effort\": \"minimal\"",
+   "id": "F8",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5 Mini (Reasoning Minimal)",
+   "value": "minimal",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 5, column Provider (setting in parentheses: 'Reasoning Minimal')",
+   "quote": "OpenAI GPT-5 Mini (Reasoning Minimal)",
+   "id": "F9"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5 Mini (Reasoning Medium)",
+   "value": "GPT-5 Mini",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 6, column Provider ('OpenAI GPT-5 Mini (Reasoning Medium)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5 Mini (Reasoning Medium)",
+   "id": "F10"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5 Mini (Reasoning Medium)",
+   "value": "51.52",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 6, column Overall (row 'OpenAI GPT-5 Mini (Reasoning Medium)')",
+   "quote": "51.52",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F11"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5 Mini (Reasoning Medium)",
+   "value": "3.05",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 6, column Cost_Per_Page (row 'OpenAI GPT-5 Mini (Reasoning Medium)'; cents per page)",
+   "quote": "3.05",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F12"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"gpt-5-mini\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2213-2222, PipelineSpec 'openai_gpt5_mini_reasoning_medium_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"gpt-5-mini\"",
+   "id": "F13",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5 Mini (Reasoning Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 6, column Provider (setting in parentheses: 'Reasoning Medium')",
+   "quote": "OpenAI GPT-5 Mini (Reasoning Medium)",
+   "id": "F14"
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Haiku 4.5 (Disable Thinking)",
+   "value": "Haiku 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 7, column Provider ('Anthropic Haiku 4.5 (Disable Thinking)'; the model before its parenthesised setting)",
+   "quote": "Anthropic Haiku 4.5 (Disable Thinking)",
+   "id": "F15"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Haiku 4.5 (Disable Thinking)",
+   "value": "45.17",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 7, column Overall (row 'Anthropic Haiku 4.5 (Disable Thinking)')",
+   "quote": "45.17",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F16"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Haiku 4.5 (Disable Thinking)",
+   "value": "1.64",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 7, column Cost_Per_Page (row 'Anthropic Haiku 4.5 (Disable Thinking)'; cents per page)",
+   "quote": "1.64",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F17"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"claude-haiku-4-5-20251001\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2414-2423, PipelineSpec 'anthropic_haiku_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"claude-haiku-4-5-20251001\"",
+   "id": "F18",
+   "about": null
+  },
+  {
+   "says": "thinking-off",
+   "about": "Anthropic Haiku 4.5 (Disable Thinking)",
+   "value": "Disable Thinking",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 7, column Provider (setting in parentheses)",
+   "quote": "Anthropic Haiku 4.5 (Disable Thinking)",
+   "id": "F19"
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Haiku 4.5 (Thinking)",
+   "value": "Haiku 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 8, column Provider ('Anthropic Haiku 4.5 (Thinking)'; the model before its parenthesised setting)",
+   "quote": "Anthropic Haiku 4.5 (Thinking)",
+   "id": "F20"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Haiku 4.5 (Thinking)",
+   "value": "53.12",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 8, column Overall (row 'Anthropic Haiku 4.5 (Thinking)')",
+   "quote": "53.12",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F21"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Haiku 4.5 (Thinking)",
+   "value": "3.69",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 8, column Cost_Per_Page (row 'Anthropic Haiku 4.5 (Thinking)'; cents per page)",
+   "quote": "3.69",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F22"
+  },
+  {
+   "says": "thinking-budget",
+   "value": "\"budget_tokens\": 32768",
+   "term": "32768",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2593-2603, PipelineSpec 'anthropic_haiku_thinking_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"budget_tokens\": 32768",
+   "id": "F23",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3 Flash (Thinking Minimal)",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 9, column Provider ('Google Gemini 3 Flash (Thinking Minimal)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3 Flash (Thinking Minimal)",
+   "id": "F24"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3 Flash (Thinking Minimal)",
+   "value": "71.04",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 9, column Overall (row 'Google Gemini 3 Flash (Thinking Minimal)')",
+   "quote": "71.04",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F25"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3 Flash (Thinking Minimal)",
+   "value": "0.65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 9, column Cost_Per_Page (row 'Google Gemini 3 Flash (Thinking Minimal)'; cents per page)",
+   "quote": "0.65",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F26"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"thinking_level\": \"minimal\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1761-1771, PipelineSpec 'google_gemini_3_flash_thinking_minimal_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking_level\": \"minimal\"",
+   "id": "F27",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3 Flash (Thinking Minimal)",
+   "value": "minimal",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 9, column Provider (setting in parentheses: 'Thinking Minimal')",
+   "quote": "Google Gemini 3 Flash (Thinking Minimal)",
+   "id": "F28"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3 Flash (Thinking High)",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 10, column Provider ('Google Gemini 3 Flash (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3 Flash (Thinking High)",
+   "id": "F29"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3 Flash (Thinking High)",
+   "value": "75.05",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 10, column Overall (row 'Google Gemini 3 Flash (Thinking High)')",
+   "quote": "75.05",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F30"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3 Flash (Thinking High)",
+   "value": "2.41",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 10, column Cost_Per_Page (row 'Google Gemini 3 Flash (Thinking High)'; cents per page)",
+   "quote": "2.41",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F31"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"thinking_level\": \"high\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1776-1786, PipelineSpec 'google_gemini_3_flash_thinking_high_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking_level\": \"high\"",
+   "id": "F32",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3 Flash (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 10, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "Google Gemini 3 Flash (Thinking High)",
+   "id": "F33"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3 Flash (Thinking Medium)",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 11, column Provider ('Google Gemini 3 Flash (Thinking Medium)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3 Flash (Thinking Medium)",
+   "id": "F34"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3 Flash (Thinking Medium)",
+   "value": "75.00",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 11, column Overall (row 'Google Gemini 3 Flash (Thinking Medium)')",
+   "quote": "75.00",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F35"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3 Flash (Thinking Medium)",
+   "value": "1.98",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 11, column Cost_Per_Page (row 'Google Gemini 3 Flash (Thinking Medium)'; cents per page)",
+   "quote": "1.98",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F36"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3 Flash (Thinking Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 11, column Provider (setting in parentheses: 'Thinking Medium')",
+   "quote": "Google Gemini 3 Flash (Thinking Medium)",
+   "id": "F37"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5.3 Flash",
+   "value": "GLM-5.3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 12, column Provider ('GLM-5.3 Flash'; the model before its parenthesised setting)",
+   "quote": "GLM-5.3 Flash",
+   "id": "F38"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5.3 Flash",
+   "value": "70.75",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 12, column Overall (row 'GLM-5.3 Flash')",
+   "quote": "70.75",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F39"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5.3 Flash",
+   "value": "0.44",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 12, column Cost_Per_Page (row 'GLM-5.3 Flash'; cents per page)",
+   "quote": "0.44",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F40"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"glm-5.3-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1304-1313, PipelineSpec 'glm_5_3_flash_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"glm-5.3-flash\"",
+   "id": "F41",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6.1 Sol (Reasoning Low)",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 13, column Provider ('OpenAI GPT-6.1 Sol (Reasoning Low)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6.1 Sol (Reasoning Low)",
+   "id": "F42"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6.1 Sol (Reasoning Low)",
+   "value": "70.48",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 13, column Overall (row 'OpenAI GPT-6.1 Sol (Reasoning Low)')",
+   "quote": "70.48",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F43"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6.1 Sol (Reasoning Low)",
+   "value": "1.95",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 13, column Cost_Per_Page (row 'OpenAI GPT-6.1 Sol (Reasoning Low)'; cents per page)",
+   "quote": "1.95",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F44"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"reasoning_effort\": \"low\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2351-2361, PipelineSpec 'openai_gpt_6_1_sol_reasoning_low_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"reasoning_effort\": \"low\"",
+   "id": "F45",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6.1 Sol (Reasoning Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 13, column Provider (setting in parentheses: 'Reasoning Low')",
+   "quote": "OpenAI GPT-6.1 Sol (Reasoning Low)",
+   "id": "F46"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.5 Flash (Thinking Medium)",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 14, column Provider ('Google Gemini 3.5 Flash (Thinking Medium)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.5 Flash (Thinking Medium)",
+   "id": "F47"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.5 Flash (Thinking Medium)",
+   "value": "69.92",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 14, column Overall (row 'Google Gemini 3.5 Flash (Thinking Medium)')",
+   "quote": "69.92",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F48"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.5 Flash (Thinking Medium)",
+   "value": "4.28",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 14, column Cost_Per_Page (row 'Google Gemini 3.5 Flash (Thinking Medium)'; cents per page)",
+   "quote": "4.28",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F49"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.5 Flash (Thinking Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 14, column Provider (setting in parentheses: 'Thinking Medium')",
+   "quote": "Google Gemini 3.5 Flash (Thinking Medium)",
+   "id": "F50"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.5 Flash (Thinking Minimal)",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 15, column Provider ('Google Gemini 3.5 Flash (Thinking Minimal)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.5 Flash (Thinking Minimal)",
+   "id": "F51"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.5 Flash (Thinking Minimal)",
+   "value": "63.09",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 15, column Overall (row 'Google Gemini 3.5 Flash (Thinking Minimal)')",
+   "quote": "63.09",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F52"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.5 Flash (Thinking Minimal)",
+   "value": "1.82",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 15, column Cost_Per_Page (row 'Google Gemini 3.5 Flash (Thinking Minimal)'; cents per page)",
+   "quote": "1.82",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F53"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.5 Flash (Thinking Minimal)",
+   "value": "minimal",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 15, column Provider (setting in parentheses: 'Thinking Minimal')",
+   "quote": "Google Gemini 3.5 Flash (Thinking Minimal)",
+   "id": "F54"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.5 Flash (Thinking High)",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 16, column Provider ('Google Gemini 3.5 Flash (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.5 Flash (Thinking High)",
+   "id": "F55"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.5 Flash (Thinking High)",
+   "value": "74.02",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 16, column Overall (row 'Google Gemini 3.5 Flash (Thinking High)')",
+   "quote": "74.02",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F56"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.5 Flash (Thinking High)",
+   "value": "4.95",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 16, column Cost_Per_Page (row 'Google Gemini 3.5 Flash (Thinking High)'; cents per page)",
+   "quote": "4.95",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F57"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.5 Flash (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 16, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "Google Gemini 3.5 Flash (Thinking High)",
+   "id": "F58"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.6 Flash (Thinking Medium)",
+   "value": "Gemini 3.6 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 17, column Provider ('Google Gemini 3.6 Flash (Thinking Medium)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.6 Flash (Thinking Medium)",
+   "id": "F59"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.6 Flash (Thinking Medium)",
+   "value": "66.78",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 17, column Overall (row 'Google Gemini 3.6 Flash (Thinking Medium)')",
+   "quote": "66.78",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F60"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.6 Flash (Thinking Medium)",
+   "value": "3.76",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 17, column Cost_Per_Page (row 'Google Gemini 3.6 Flash (Thinking Medium)'; cents per page)",
+   "quote": "3.76",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F61"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.6 Flash (Thinking Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 17, column Provider (setting in parentheses: 'Thinking Medium')",
+   "quote": "Google Gemini 3.6 Flash (Thinking Medium)",
+   "id": "F62"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.6 Flash (Thinking Minimal)",
+   "value": "Gemini 3.6 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 18, column Provider ('Google Gemini 3.6 Flash (Thinking Minimal)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.6 Flash (Thinking Minimal)",
+   "id": "F63"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.6 Flash (Thinking Minimal)",
+   "value": "65.60",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 18, column Overall (row 'Google Gemini 3.6 Flash (Thinking Minimal)')",
+   "quote": "65.60",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F64"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.6 Flash (Thinking Minimal)",
+   "value": "1.48",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 18, column Cost_Per_Page (row 'Google Gemini 3.6 Flash (Thinking Minimal)'; cents per page)",
+   "quote": "1.48",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F65"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.6 Flash (Thinking Minimal)",
+   "value": "minimal",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 18, column Provider (setting in parentheses: 'Thinking Minimal')",
+   "quote": "Google Gemini 3.6 Flash (Thinking Minimal)",
+   "id": "F66"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.6 Flash (Thinking High)",
+   "value": "Gemini 3.6 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 19, column Provider ('Google Gemini 3.6 Flash (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.6 Flash (Thinking High)",
+   "id": "F67"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.6 Flash (Thinking High)",
+   "value": "70.03",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 19, column Overall (row 'Google Gemini 3.6 Flash (Thinking High)')",
+   "quote": "70.03",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F68"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.6 Flash (Thinking High)",
+   "value": "4.25",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 19, column Cost_Per_Page (row 'Google Gemini 3.6 Flash (Thinking High)'; cents per page)",
+   "quote": "4.25",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F69"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.6 Flash (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 19, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "Google Gemini 3.6 Flash (Thinking High)",
+   "id": "F70"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.7 Flash (Thinking High)",
+   "value": "Gemini 3.7 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 20, column Provider ('Google Gemini 3.7 Flash (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.7 Flash (Thinking High)",
+   "id": "F71"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.7 Flash (Thinking High)",
+   "value": "71.27",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 20, column Overall (row 'Google Gemini 3.7 Flash (Thinking High)')",
+   "quote": "71.27",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F72"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.7 Flash (Thinking High)",
+   "value": "1.91",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 20, column Cost_Per_Page (row 'Google Gemini 3.7 Flash (Thinking High)'; cents per page)",
+   "quote": "1.91",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F73"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"thinking_level\": \"high\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2010-2020, PipelineSpec 'google_gemini_3_7_flash_thinking_high_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking_level\": \"high\"",
+   "id": "F74",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.7 Flash (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 20, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "Google Gemini 3.7 Flash (Thinking High)",
+   "id": "F75"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.7 Flash (Thinking Medium)",
+   "value": "Gemini 3.7 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 21, column Provider ('Google Gemini 3.7 Flash (Thinking Medium)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.7 Flash (Thinking Medium)",
+   "id": "F76"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.7 Flash (Thinking Medium)",
+   "value": "70.78",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 21, column Overall (row 'Google Gemini 3.7 Flash (Thinking Medium)')",
+   "quote": "70.78",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F77"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.7 Flash (Thinking Medium)",
+   "value": "1.06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 21, column Cost_Per_Page (row 'Google Gemini 3.7 Flash (Thinking Medium)'; cents per page)",
+   "quote": "1.06",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F78"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.7 Flash (Thinking Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 21, column Provider (setting in parentheses: 'Thinking Medium')",
+   "quote": "Google Gemini 3.7 Flash (Thinking Medium)",
+   "id": "F79"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.7 Flash (Thinking Low)",
+   "value": "Gemini 3.7 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 22, column Provider ('Google Gemini 3.7 Flash (Thinking Low)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.7 Flash (Thinking Low)",
+   "id": "F80"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.7 Flash (Thinking Low)",
+   "value": "69.57",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 22, column Overall (row 'Google Gemini 3.7 Flash (Thinking Low)')",
+   "quote": "69.57",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F81"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.7 Flash (Thinking Low)",
+   "value": "0.70",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 22, column Cost_Per_Page (row 'Google Gemini 3.7 Flash (Thinking Low)'; cents per page)",
+   "quote": "0.70",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F82"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.7 Flash (Thinking Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 22, column Provider (setting in parentheses: 'Thinking Low')",
+   "quote": "Google Gemini 3.7 Flash (Thinking Low)",
+   "id": "F83"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.8 Flash (Thinking High)",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 23, column Provider ('Google Gemini 3.8 Flash (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.8 Flash (Thinking High)",
+   "id": "F84"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.8 Flash (Thinking High)",
+   "value": "72.08",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 23, column Overall (row 'Google Gemini 3.8 Flash (Thinking High)')",
+   "quote": "72.08",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F85"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.8 Flash (Thinking High)",
+   "value": "3.41",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 23, column Cost_Per_Page (row 'Google Gemini 3.8 Flash (Thinking High)'; cents per page)",
+   "quote": "3.41",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F86"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"thinking_level\": \"high\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2025-2035, PipelineSpec 'google_gemini_3_8_flash_thinking_high_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking_level\": \"high\"",
+   "id": "F87",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.8 Flash (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 23, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "Google Gemini 3.8 Flash (Thinking High)",
+   "id": "F88"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.8 Flash (Thinking Low)",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 24, column Provider ('Google Gemini 3.8 Flash (Thinking Low)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.8 Flash (Thinking Low)",
+   "id": "F89"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.8 Flash (Thinking Low)",
+   "value": "70.15",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 24, column Overall (row 'Google Gemini 3.8 Flash (Thinking Low)')",
+   "quote": "70.15",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F90"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.8 Flash (Thinking Low)",
+   "value": "0.71",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 24, column Cost_Per_Page (row 'Google Gemini 3.8 Flash (Thinking Low)'; cents per page)",
+   "quote": "0.71",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F91"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"thinking_level\": \"low\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2040-2050, PipelineSpec 'google_gemini_3_8_flash_thinking_low_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking_level\": \"low\"",
+   "id": "F92",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.8 Flash (Thinking Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 24, column Provider (setting in parentheses: 'Thinking Low')",
+   "quote": "Google Gemini 3.8 Flash (Thinking Low)",
+   "id": "F93"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.8 Flash (Thinking Medium)",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 25, column Provider ('Google Gemini 3.8 Flash (Thinking Medium)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.8 Flash (Thinking Medium)",
+   "id": "F94"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.8 Flash (Thinking Medium)",
+   "value": "70.70",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 25, column Overall (row 'Google Gemini 3.8 Flash (Thinking Medium)')",
+   "quote": "70.70",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F95"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.8 Flash (Thinking Medium)",
+   "value": "1.24",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 25, column Cost_Per_Page (row 'Google Gemini 3.8 Flash (Thinking Medium)'; cents per page)",
+   "quote": "1.24",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F96"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.8 Flash (Thinking Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 25, column Provider (setting in parentheses: 'Thinking Medium')",
+   "quote": "Google Gemini 3.8 Flash (Thinking Medium)",
+   "id": "F97"
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Opus 4.6",
+   "value": "Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 26, column Provider ('Anthropic Opus 4.6'; the model before its parenthesised setting)",
+   "quote": "Anthropic Opus 4.6",
+   "id": "F98"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Opus 4.6",
+   "value": "54.07",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 26, column Overall (row 'Anthropic Opus 4.6')",
+   "quote": "54.07",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F99"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Opus 4.6",
+   "value": "5.78",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 26, column Cost_Per_Page (row 'Anthropic Opus 4.6'; cents per page)",
+   "quote": "5.78",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F100"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"claude-opus-4-6\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2443-2452, PipelineSpec 'anthropic_opus_4_6_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"claude-opus-4-6\"",
+   "id": "F101",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Opus 4.7",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 27, column Provider ('Anthropic Opus 4.7'; the model before its parenthesised setting)",
+   "quote": "Anthropic Opus 4.7",
+   "id": "F102"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Opus 4.7",
+   "value": "63.34",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 27, column Overall (row 'Anthropic Opus 4.7')",
+   "quote": "63.34",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F103"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Opus 4.7",
+   "value": "7.14",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 27, column Cost_Per_Page (row 'Anthropic Opus 4.7'; cents per page)",
+   "quote": "7.14",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F104"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"claude-opus-4-7\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2457-2466, PipelineSpec 'anthropic_opus_4_7_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"claude-opus-4-7\"",
+   "id": "F105",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Opus 4.8",
+   "value": "Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 28, column Provider ('Anthropic Opus 4.8'; the model before its parenthesised setting)",
+   "quote": "Anthropic Opus 4.8",
+   "id": "F106"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Opus 4.8",
+   "value": "63.70",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 28, column Overall (row 'Anthropic Opus 4.8')",
+   "quote": "63.70",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F107"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Opus 4.8",
+   "value": "7.30",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 28, column Cost_Per_Page (row 'Anthropic Opus 4.8'; cents per page)",
+   "quote": "7.30",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F108"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"claude-opus-4-8\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2471-2480, PipelineSpec 'anthropic_opus_4_8_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"claude-opus-4-8\"",
+   "id": "F109",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Opus 5.5 (Effort High)",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 29, column Provider ('Anthropic Opus 5.5 (Effort High)'; the model before its parenthesised setting)",
+   "quote": "Anthropic Opus 5.5 (Effort High)",
+   "id": "F110"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Opus 5.5 (Effort High)",
+   "value": "79.85",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 29, column Overall (row 'Anthropic Opus 5.5 (Effort High)')",
+   "quote": "79.85",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F111"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Opus 5.5 (Effort High)",
+   "value": "6.13",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 29, column Cost_Per_Page (row 'Anthropic Opus 5.5 (Effort High)'; cents per page)",
+   "quote": "6.13",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F112"
+  },
+  {
+   "says": "effort-label",
+   "about": "Anthropic Opus 5.5 (Effort High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 29, column Provider (setting in parentheses: 'Effort High')",
+   "quote": "Anthropic Opus 5.5 (Effort High)",
+   "id": "F113"
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Opus 5.5",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 30, column Provider ('Anthropic Opus 5.5'; the model before its parenthesised setting)",
+   "quote": "Anthropic Opus 5.5",
+   "id": "F114"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Opus 5.5",
+   "value": "78.01",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 30, column Overall (row 'Anthropic Opus 5.5')",
+   "quote": "78.01",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F115"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Opus 5.5",
+   "value": "5.79",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 30, column Cost_Per_Page (row 'Anthropic Opus 5.5'; cents per page)",
+   "quote": "5.79",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F116"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"claude-opus-5-5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2487-2496, PipelineSpec 'anthropic_opus_5_5_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"claude-opus-5-5\"",
+   "id": "F117",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Opus 5.5 (Effort Low)",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 31, column Provider ('Anthropic Opus 5.5 (Effort Low)'; the model before its parenthesised setting)",
+   "quote": "Anthropic Opus 5.5 (Effort Low)",
+   "id": "F118"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Opus 5.5 (Effort Low)",
+   "value": "74.47",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 31, column Overall (row 'Anthropic Opus 5.5 (Effort Low)')",
+   "quote": "74.47",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F119"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Opus 5.5 (Effort Low)",
+   "value": "5.46",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 31, column Cost_Per_Page (row 'Anthropic Opus 5.5 (Effort Low)'; cents per page)",
+   "quote": "5.46",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F120"
+  },
+  {
+   "says": "effort-label",
+   "about": "Anthropic Opus 5.5 (Effort Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 31, column Provider (setting in parentheses: 'Effort Low')",
+   "quote": "Anthropic Opus 5.5 (Effort Low)",
+   "id": "F121"
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Fable 5",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 32, column Provider ('Anthropic Fable 5'; the model before its parenthesised setting)",
+   "quote": "Anthropic Fable 5",
+   "id": "F122"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Fable 5",
+   "value": "70.78",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 32, column Overall (row 'Anthropic Fable 5')",
+   "quote": "70.78",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F123"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Fable 5",
+   "value": "15.60",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 32, column Cost_Per_Page (row 'Anthropic Fable 5'; cents per page)",
+   "quote": "15.60",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F124"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"claude-fable-5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2565-2574, PipelineSpec 'anthropic_fable_5_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"claude-fable-5\"",
+   "id": "F125",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Fable 5.1",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 33, column Provider ('Anthropic Fable 5.1'; the model before its parenthesised setting)",
+   "quote": "Anthropic Fable 5.1",
+   "id": "F126"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Fable 5.1",
+   "value": "78.92",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 33, column Overall (row 'Anthropic Fable 5.1')",
+   "quote": "78.92",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F127"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Fable 5.1",
+   "value": "16.05",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 33, column Cost_Per_Page (row 'Anthropic Fable 5.1'; cents per page)",
+   "quote": "16.05",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F128"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"claude-fable-5-1\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2579-2588, PipelineSpec 'anthropic_fable_5_1_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"claude-fable-5-1\"",
+   "id": "F129",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Sonnet 5",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 34, column Provider ('Anthropic Sonnet 5'; the model before its parenthesised setting)",
+   "quote": "Anthropic Sonnet 5",
+   "id": "F130"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Sonnet 5",
+   "value": "62.13",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 34, column Overall (row 'Anthropic Sonnet 5')",
+   "quote": "62.13",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F131"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Sonnet 5",
+   "value": "3.18",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 34, column Cost_Per_Page (row 'Anthropic Sonnet 5'; cents per page)",
+   "quote": "3.18",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F132"
+  },
+  {
+   "says": "thinking-on",
+   "value": "\"thinking\": {\"type\": \"adaptive\"}",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2535-2545, PipelineSpec 'anthropic_sonnet_5_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking\": {\"type\": \"adaptive\"}",
+   "id": "F133",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Sonnet 5.5",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 35, column Provider ('Anthropic Sonnet 5.5'; the model before its parenthesised setting)",
+   "quote": "Anthropic Sonnet 5.5",
+   "id": "F134"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Sonnet 5.5",
+   "value": "70.18",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 35, column Overall (row 'Anthropic Sonnet 5.5')",
+   "quote": "70.18",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F135"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Sonnet 5.5",
+   "value": "2.74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 35, column Cost_Per_Page (row 'Anthropic Sonnet 5.5'; cents per page)",
+   "quote": "2.74",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F136"
+  },
+  {
+   "says": "thinking-on",
+   "value": "\"thinking\": {\"type\": \"adaptive\"}",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2550-2560, PipelineSpec 'anthropic_sonnet_5_5_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking\": {\"type\": \"adaptive\"}",
+   "id": "F137",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.1 Pro",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 36, column Provider ('Google Gemini 3.1 Pro'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.1 Pro",
+   "id": "F138"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.1 Pro",
+   "value": "69.14",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 36, column Overall (row 'Google Gemini 3.1 Pro')",
+   "quote": "69.14",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F139"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.1 Pro",
+   "value": "8.49",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 36, column Cost_Per_Page (row 'Google Gemini 3.1 Pro'; cents per page)",
+   "quote": "8.49",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F140"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"gemini-3.1-pro-preview\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1868-1877, PipelineSpec 'google_gemini_3_1_pro_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"gemini-3.1-pro-preview\"",
+   "id": "F141",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.1 Pro (Thinking Low)",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 37, column Provider ('Google Gemini 3.1 Pro (Thinking Low)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.1 Pro (Thinking Low)",
+   "id": "F142"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.1 Pro (Thinking Low)",
+   "value": "60.82",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 37, column Overall (row 'Google Gemini 3.1 Pro (Thinking Low)')",
+   "quote": "60.82",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F143"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.1 Pro (Thinking Low)",
+   "value": "2.50",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 37, column Cost_Per_Page (row 'Google Gemini 3.1 Pro (Thinking Low)'; cents per page)",
+   "quote": "2.50",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F144"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.1 Pro (Thinking Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 37, column Provider (setting in parentheses: 'Thinking Low')",
+   "quote": "Google Gemini 3.1 Pro (Thinking Low)",
+   "id": "F145"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.1 Flash Lite",
+   "value": "Gemini 3.1 Flash Lite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 38, column Provider ('Google Gemini 3.1 Flash Lite'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.1 Flash Lite",
+   "id": "F146"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.1 Flash Lite",
+   "value": "58.32",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 38, column Overall (row 'Google Gemini 3.1 Flash Lite')",
+   "quote": "58.32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F147"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.1 Flash Lite",
+   "value": "0.29",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 38, column Cost_Per_Page (row 'Google Gemini 3.1 Flash Lite'; cents per page)",
+   "quote": "0.29",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F148"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"gemini-3.1-flash-lite-preview\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1825-1834, PipelineSpec 'google_gemini_3_1_flash_lite_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"gemini-3.1-flash-lite-preview\"",
+   "id": "F149",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking Medium)",
+   "value": "Gemini 3.1 Flash Lite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 39, column Provider ('Google Gemini 3.1 Flash Lite (Thinking Medium)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.1 Flash Lite (Thinking Medium)",
+   "id": "F150"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking Medium)",
+   "value": "58.13",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 39, column Overall (row 'Google Gemini 3.1 Flash Lite (Thinking Medium)')",
+   "quote": "58.13",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F151"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking Medium)",
+   "value": "0.32",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 39, column Cost_Per_Page (row 'Google Gemini 3.1 Flash Lite (Thinking Medium)'; cents per page)",
+   "quote": "0.32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F152"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 39, column Provider (setting in parentheses: 'Thinking Medium')",
+   "quote": "Google Gemini 3.1 Flash Lite (Thinking Medium)",
+   "id": "F153"
+  },
+  {
+   "says": "model-name",
+   "about": "Anthropic Haiku 5.5",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 40, column Provider ('Anthropic Haiku 5.5'; the model before its parenthesised setting)",
+   "quote": "Anthropic Haiku 5.5",
+   "id": "F154"
+  },
+  {
+   "says": "score",
+   "about": "Anthropic Haiku 5.5",
+   "value": "57.40",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 40, column Overall (row 'Anthropic Haiku 5.5')",
+   "quote": "57.40",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F155"
+  },
+  {
+   "says": "cost",
+   "about": "Anthropic Haiku 5.5",
+   "value": "0.14",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 40, column Cost_Per_Page (row 'Anthropic Haiku 5.5'; cents per page)",
+   "quote": "0.14",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F156"
+  },
+  {
+   "says": "thinking-on",
+   "value": "\"thinking\": {\"type\": \"adaptive\"}",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2428-2438, PipelineSpec 'anthropic_haiku_5_5_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking\": {\"type\": \"adaptive\"}",
+   "id": "F157",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking High)",
+   "value": "Gemini 3.1 Flash Lite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 41, column Provider ('Google Gemini 3.1 Flash Lite (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.1 Flash Lite (Thinking High)",
+   "id": "F158"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking High)",
+   "value": "57.29",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 41, column Overall (row 'Google Gemini 3.1 Flash Lite (Thinking High)')",
+   "quote": "57.29",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F159"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking High)",
+   "value": "1.04",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 41, column Cost_Per_Page (row 'Google Gemini 3.1 Flash Lite (Thinking High)'; cents per page)",
+   "quote": "1.04",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F160"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"thinking_level\": \"high\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1840-1850, PipelineSpec 'google_gemini_3_1_flash_lite_thinking_high_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking_level\": \"high\"",
+   "id": "F161",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.1 Flash Lite (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 41, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "Google Gemini 3.1 Flash Lite (Thinking High)",
+   "id": "F162"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.5 Flash Lite",
+   "value": "Gemini 3.5 Flash Lite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 42, column Provider ('Google Gemini 3.5 Flash Lite'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.5 Flash Lite",
+   "id": "F163"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.5 Flash Lite",
+   "value": "57.15",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 42, column Overall (row 'Google Gemini 3.5 Flash Lite')",
+   "quote": "57.15",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F164"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.5 Flash Lite",
+   "value": "0.56",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 42, column Cost_Per_Page (row 'Google Gemini 3.5 Flash Lite'; cents per page)",
+   "quote": "0.56",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F165"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"gemini-3.5-flash-lite\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1854-1863, PipelineSpec 'google_gemini_3_5_flash_lite_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"gemini-3.5-flash-lite\"",
+   "id": "F166",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking High)",
+   "value": "Gemini 3.5 Flash Lite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 43, column Provider ('Google Gemini 3.5 Flash Lite (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.5 Flash Lite (Thinking High)",
+   "id": "F167"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking High)",
+   "value": "60.64",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 43, column Overall (row 'Google Gemini 3.5 Flash Lite (Thinking High)')",
+   "quote": "60.64",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F168"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking High)",
+   "value": "1.18",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 43, column Cost_Per_Page (row 'Google Gemini 3.5 Flash Lite (Thinking High)'; cents per page)",
+   "quote": "1.18",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F169"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 43, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "Google Gemini 3.5 Flash Lite (Thinking High)",
+   "id": "F170"
+  },
+  {
+   "says": "model-name",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking Medium)",
+   "value": "Gemini 3.5 Flash Lite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 44, column Provider ('Google Gemini 3.5 Flash Lite (Thinking Medium)'; the model before its parenthesised setting)",
+   "quote": "Google Gemini 3.5 Flash Lite (Thinking Medium)",
+   "id": "F171"
+  },
+  {
+   "says": "score",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking Medium)",
+   "value": "54.30",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 44, column Overall (row 'Google Gemini 3.5 Flash Lite (Thinking Medium)')",
+   "quote": "54.30",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F172"
+  },
+  {
+   "says": "cost",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking Medium)",
+   "value": "0.47",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 44, column Cost_Per_Page (row 'Google Gemini 3.5 Flash Lite (Thinking Medium)'; cents per page)",
+   "quote": "0.47",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F173"
+  },
+  {
+   "says": "effort-label",
+   "about": "Google Gemini 3.5 Flash Lite (Thinking Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 44, column Provider (setting in parentheses: 'Thinking Medium')",
+   "quote": "Google Gemini 3.5 Flash Lite (Thinking Medium)",
+   "id": "F174"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.4 (Reasoning None)",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 45, column Provider ('OpenAI GPT-5.4 (Reasoning None)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.4 (Reasoning None)",
+   "id": "F175"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.4 (Reasoning None)",
+   "value": "62.23",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 45, column Overall (row 'OpenAI GPT-5.4 (Reasoning None)')",
+   "quote": "62.23",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F176"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.4 (Reasoning None)",
+   "value": "2.90",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 45, column Cost_Per_Page (row 'OpenAI GPT-5.4 (Reasoning None)'; cents per page)",
+   "quote": "2.90",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F177"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.4 (Reasoning None)",
+   "value": "none",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 45, column Provider (setting in parentheses: 'Reasoning None')",
+   "quote": "OpenAI GPT-5.4 (Reasoning None)",
+   "id": "F178"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.5 (Reasoning Medium)",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 46, column Provider ('OpenAI GPT-5.5 (Reasoning Medium)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.5 (Reasoning Medium)",
+   "id": "F179"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.5 (Reasoning Medium)",
+   "value": "67.76",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 46, column Overall (row 'OpenAI GPT-5.5 (Reasoning Medium)')",
+   "quote": "67.76",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F180"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.5 (Reasoning Medium)",
+   "value": "13.09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 46, column Cost_Per_Page (row 'OpenAI GPT-5.5 (Reasoning Medium)'; cents per page)",
+   "quote": "13.09",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F181"
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"reasoning_effort\": \"medium\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2256-2266, PipelineSpec 'openai_gpt_5_5_reasoning_medium_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"reasoning_effort\": \"medium\"",
+   "id": "F182",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.5 (Reasoning Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 46, column Provider (setting in parentheses: 'Reasoning Medium')",
+   "quote": "OpenAI GPT-5.5 (Reasoning Medium)",
+   "id": "F183"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.5 (Reasoning None)",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 47, column Provider ('OpenAI GPT-5.5 (Reasoning None)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.5 (Reasoning None)",
+   "id": "F184"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.5 (Reasoning None)",
+   "value": "64.39",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 47, column Overall (row 'OpenAI GPT-5.5 (Reasoning None)')",
+   "quote": "64.39",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F185"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.5 (Reasoning None)",
+   "value": "5.93",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 47, column Cost_Per_Page (row 'OpenAI GPT-5.5 (Reasoning None)'; cents per page)",
+   "quote": "5.93",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F186"
+  },
+  {
+   "says": "note",
+   "value": "\"reasoning_effort\": \"none\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2271-2281, PipelineSpec 'openai_gpt_5_5_reasoning_none_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline) (the label 'Reasoning None' carries the setting: a quoted JSON 'none' is not a setting spelling of the vocabulary)",
+   "quote": "\"reasoning_effort\": \"none\"",
+   "id": "F187",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.5 (Reasoning None)",
+   "value": "none",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 47, column Provider (setting in parentheses: 'Reasoning None')",
+   "quote": "OpenAI GPT-5.5 (Reasoning None)",
+   "id": "F188"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Medium)",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 48, column Provider ('OpenAI GPT-5.6 Terra (Reasoning Medium)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Terra (Reasoning Medium)",
+   "id": "F189"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Medium)",
+   "value": "68.39",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 48, column Overall (row 'OpenAI GPT-5.6 Terra (Reasoning Medium)')",
+   "quote": "68.39",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F190"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Medium)",
+   "value": "2.71",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 48, column Cost_Per_Page (row 'OpenAI GPT-5.6 Terra (Reasoning Medium)'; cents per page)",
+   "quote": "2.71",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F191"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 48, column Provider (setting in parentheses: 'Reasoning Medium')",
+   "quote": "OpenAI GPT-5.6 Terra (Reasoning Medium)",
+   "id": "F192"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Low)",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 49, column Provider ('OpenAI GPT-5.6 Terra (Reasoning Low)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Terra (Reasoning Low)",
+   "id": "F193"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Low)",
+   "value": "68.07",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 49, column Overall (row 'OpenAI GPT-5.6 Terra (Reasoning Low)')",
+   "quote": "68.07",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F194"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Low)",
+   "value": "2.59",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 49, column Cost_Per_Page (row 'OpenAI GPT-5.6 Terra (Reasoning Low)'; cents per page)",
+   "quote": "2.59",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F195"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 49, column Provider (setting in parentheses: 'Reasoning Low')",
+   "quote": "OpenAI GPT-5.6 Terra (Reasoning Low)",
+   "id": "F196"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning None)",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 50, column Provider ('OpenAI GPT-5.6 Terra (Reasoning None)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Terra (Reasoning None)",
+   "id": "F197"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning None)",
+   "value": "64.17",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 50, column Overall (row 'OpenAI GPT-5.6 Terra (Reasoning None)')",
+   "quote": "64.17",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F198"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning None)",
+   "value": "2.36",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 50, column Cost_Per_Page (row 'OpenAI GPT-5.6 Terra (Reasoning None)'; cents per page)",
+   "quote": "2.36",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F199"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Terra (Reasoning None)",
+   "value": "none",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 50, column Provider (setting in parentheses: 'Reasoning None')",
+   "quote": "OpenAI GPT-5.6 Terra (Reasoning None)",
+   "id": "F200"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning High)",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 51, column Provider ('OpenAI GPT-5.6 Sol (Reasoning High)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Sol (Reasoning High)",
+   "id": "F201"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning High)",
+   "value": "75.35",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 51, column Overall (row 'OpenAI GPT-5.6 Sol (Reasoning High)')",
+   "quote": "75.35",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F202"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning High)",
+   "value": "8.08",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 51, column Cost_Per_Page (row 'OpenAI GPT-5.6 Sol (Reasoning High)'; cents per page)",
+   "quote": "8.08",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F203"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 51, column Provider (setting in parentheses: 'Reasoning High')",
+   "quote": "OpenAI GPT-5.6 Sol (Reasoning High)",
+   "id": "F204"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning None)",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 52, column Provider ('OpenAI GPT-5.6 Sol (Reasoning None)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Sol (Reasoning None)",
+   "id": "F205"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning None)",
+   "value": "62.12",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 52, column Overall (row 'OpenAI GPT-5.6 Sol (Reasoning None)')",
+   "quote": "62.12",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F206"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning None)",
+   "value": "4.06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 52, column Cost_Per_Page (row 'OpenAI GPT-5.6 Sol (Reasoning None)'; cents per page)",
+   "quote": "4.06",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F207"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Sol (Reasoning None)",
+   "value": "none",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 52, column Provider (setting in parentheses: 'Reasoning None')",
+   "quote": "OpenAI GPT-5.6 Sol (Reasoning None)",
+   "id": "F208"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Max)",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 53, column Provider ('OpenAI GPT-5.6 Luna (Reasoning Max)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning Max)",
+   "id": "F209"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Max)",
+   "value": "68.34",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 53, column Overall (row 'OpenAI GPT-5.6 Luna (Reasoning Max)')",
+   "quote": "68.34",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F210"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Max)",
+   "value": "1.70",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 53, column Cost_Per_Page (row 'OpenAI GPT-5.6 Luna (Reasoning Max)'; cents per page)",
+   "quote": "1.70",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F211"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Max)",
+   "value": "max",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 53, column Provider (setting in parentheses: 'Reasoning Max')",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning Max)",
+   "id": "F212"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning XHigh)",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 54, column Provider ('OpenAI GPT-5.6 Luna (Reasoning XHigh)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning XHigh)",
+   "id": "F213"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning XHigh)",
+   "value": "68.24",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 54, column Overall (row 'OpenAI GPT-5.6 Luna (Reasoning XHigh)')",
+   "quote": "68.24",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F214"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning XHigh)",
+   "value": "1.01",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 54, column Cost_Per_Page (row 'OpenAI GPT-5.6 Luna (Reasoning XHigh)'; cents per page)",
+   "quote": "1.01",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F215"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning XHigh)",
+   "value": "xhigh",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 54, column Provider (setting in parentheses: 'Reasoning XHigh')",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning XHigh)",
+   "id": "F216"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning High)",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 55, column Provider ('OpenAI GPT-5.6 Luna (Reasoning High)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning High)",
+   "id": "F217"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning High)",
+   "value": "67.37",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 55, column Overall (row 'OpenAI GPT-5.6 Luna (Reasoning High)')",
+   "quote": "67.37",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F218"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning High)",
+   "value": "0.59",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 55, column Cost_Per_Page (row 'OpenAI GPT-5.6 Luna (Reasoning High)'; cents per page)",
+   "quote": "0.59",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F219"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 55, column Provider (setting in parentheses: 'Reasoning High')",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning High)",
+   "id": "F220"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Medium)",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 56, column Provider ('OpenAI GPT-5.6 Luna (Reasoning Medium)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning Medium)",
+   "id": "F221"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Medium)",
+   "value": "63.58",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 56, column Overall (row 'OpenAI GPT-5.6 Luna (Reasoning Medium)')",
+   "quote": "63.58",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F222"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Medium)",
+   "value": "0.29",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 56, column Cost_Per_Page (row 'OpenAI GPT-5.6 Luna (Reasoning Medium)'; cents per page)",
+   "quote": "0.29",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F223"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 56, column Provider (setting in parentheses: 'Reasoning Medium')",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning Medium)",
+   "id": "F224"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Low)",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 57, column Provider ('OpenAI GPT-5.6 Luna (Reasoning Low)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning Low)",
+   "id": "F225"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Low)",
+   "value": "60.18",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 57, column Overall (row 'OpenAI GPT-5.6 Luna (Reasoning Low)')",
+   "quote": "60.18",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F226"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Low)",
+   "value": "0.23",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 57, column Cost_Per_Page (row 'OpenAI GPT-5.6 Luna (Reasoning Low)'; cents per page)",
+   "quote": "0.23",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F227"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 57, column Provider (setting in parentheses: 'Reasoning Low')",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning Low)",
+   "id": "F228"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning None)",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 58, column Provider ('OpenAI GPT-5.6 Luna (Reasoning None)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning None)",
+   "id": "F229"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning None)",
+   "value": "56.32",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 58, column Overall (row 'OpenAI GPT-5.6 Luna (Reasoning None)')",
+   "quote": "56.32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F230"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning None)",
+   "value": "0.22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 58, column Cost_Per_Page (row 'OpenAI GPT-5.6 Luna (Reasoning None)'; cents per page)",
+   "quote": "0.22",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F231"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-5.6 Luna (Reasoning None)",
+   "value": "none",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 58, column Provider (setting in parentheses: 'Reasoning None')",
+   "quote": "OpenAI GPT-5.6 Luna (Reasoning None)",
+   "id": "F232"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Astra (Reasoning Low)",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 59, column Provider ('OpenAI GPT-6 Astra (Reasoning Low)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Astra (Reasoning Low)",
+   "id": "F233"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Astra (Reasoning Low)",
+   "value": "70.67",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 59, column Overall (row 'OpenAI GPT-6 Astra (Reasoning Low)')",
+   "quote": "70.67",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F234"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Astra (Reasoning Low)",
+   "value": "9.87",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 59, column Cost_Per_Page (row 'OpenAI GPT-6 Astra (Reasoning Low)'; cents per page)",
+   "quote": "9.87",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F235"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Astra (Reasoning Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 59, column Provider (setting in parentheses: 'Reasoning Low')",
+   "quote": "OpenAI GPT-6 Astra (Reasoning Low)",
+   "id": "F236"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Sol (Reasoning High)",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 60, column Provider ('OpenAI GPT-6 Sol (Reasoning High)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Sol (Reasoning High)",
+   "id": "F237"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Sol (Reasoning High)",
+   "value": "69.69",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 60, column Overall (row 'OpenAI GPT-6 Sol (Reasoning High)')",
+   "quote": "69.69",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F238"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Sol (Reasoning High)",
+   "value": "3.47",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 60, column Cost_Per_Page (row 'OpenAI GPT-6 Sol (Reasoning High)'; cents per page)",
+   "quote": "3.47",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F239"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Sol (Reasoning High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 60, column Provider (setting in parentheses: 'Reasoning High')",
+   "quote": "OpenAI GPT-6 Sol (Reasoning High)",
+   "id": "F240"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Sol (Reasoning Medium)",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 61, column Provider ('OpenAI GPT-6 Sol (Reasoning Medium)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Sol (Reasoning Medium)",
+   "id": "F241"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Sol (Reasoning Medium)",
+   "value": "68.19",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 61, column Overall (row 'OpenAI GPT-6 Sol (Reasoning Medium)')",
+   "quote": "68.19",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F242"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Sol (Reasoning Medium)",
+   "value": "2.40",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 61, column Cost_Per_Page (row 'OpenAI GPT-6 Sol (Reasoning Medium)'; cents per page)",
+   "quote": "2.40",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F243"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Sol (Reasoning Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 61, column Provider (setting in parentheses: 'Reasoning Medium')",
+   "quote": "OpenAI GPT-6 Sol (Reasoning Medium)",
+   "id": "F244"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Sol (Reasoning None)",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 62, column Provider ('OpenAI GPT-6 Sol (Reasoning None)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Sol (Reasoning None)",
+   "id": "F245"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Sol (Reasoning None)",
+   "value": "66.10",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 62, column Overall (row 'OpenAI GPT-6 Sol (Reasoning None)')",
+   "quote": "66.10",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F246"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Sol (Reasoning None)",
+   "value": "1.86",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 62, column Cost_Per_Page (row 'OpenAI GPT-6 Sol (Reasoning None)'; cents per page)",
+   "quote": "1.86",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F247"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Sol (Reasoning None)",
+   "value": "none",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 62, column Provider (setting in parentheses: 'Reasoning None')",
+   "quote": "OpenAI GPT-6 Sol (Reasoning None)",
+   "id": "F248"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Luna (Reasoning Max)",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 63, column Provider ('OpenAI GPT-6 Luna (Reasoning Max)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Luna (Reasoning Max)",
+   "id": "F249"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Luna (Reasoning Max)",
+   "value": "65.77",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 63, column Overall (row 'OpenAI GPT-6 Luna (Reasoning Max)')",
+   "quote": "65.77",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F250"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Luna (Reasoning Max)",
+   "value": "0.72",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 63, column Cost_Per_Page (row 'OpenAI GPT-6 Luna (Reasoning Max)'; cents per page)",
+   "quote": "0.72",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F251"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Luna (Reasoning Max)",
+   "value": "max",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 63, column Provider (setting in parentheses: 'Reasoning Max')",
+   "quote": "OpenAI GPT-6 Luna (Reasoning Max)",
+   "id": "F252"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Luna (Reasoning XHigh)",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 64, column Provider ('OpenAI GPT-6 Luna (Reasoning XHigh)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Luna (Reasoning XHigh)",
+   "id": "F253"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Luna (Reasoning XHigh)",
+   "value": "64.32",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 64, column Overall (row 'OpenAI GPT-6 Luna (Reasoning XHigh)')",
+   "quote": "64.32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F254"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Luna (Reasoning XHigh)",
+   "value": "0.29",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 64, column Cost_Per_Page (row 'OpenAI GPT-6 Luna (Reasoning XHigh)'; cents per page)",
+   "quote": "0.29",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F255"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Luna (Reasoning XHigh)",
+   "value": "xhigh",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 64, column Provider (setting in parentheses: 'Reasoning XHigh')",
+   "quote": "OpenAI GPT-6 Luna (Reasoning XHigh)",
+   "id": "F256"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Luna (Reasoning High)",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 65, column Provider ('OpenAI GPT-6 Luna (Reasoning High)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Luna (Reasoning High)",
+   "id": "F257"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Luna (Reasoning High)",
+   "value": "64.21",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 65, column Overall (row 'OpenAI GPT-6 Luna (Reasoning High)')",
+   "quote": "64.21",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F258"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Luna (Reasoning High)",
+   "value": "0.21",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 65, column Cost_Per_Page (row 'OpenAI GPT-6 Luna (Reasoning High)'; cents per page)",
+   "quote": "0.21",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F259"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Luna (Reasoning High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 65, column Provider (setting in parentheses: 'Reasoning High')",
+   "quote": "OpenAI GPT-6 Luna (Reasoning High)",
+   "id": "F260"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Luna (Reasoning Medium)",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 66, column Provider ('OpenAI GPT-6 Luna (Reasoning Medium)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Luna (Reasoning Medium)",
+   "id": "F261"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Luna (Reasoning Medium)",
+   "value": "62.38",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 66, column Overall (row 'OpenAI GPT-6 Luna (Reasoning Medium)')",
+   "quote": "62.38",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F262"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Luna (Reasoning Medium)",
+   "value": "0.14",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 66, column Cost_Per_Page (row 'OpenAI GPT-6 Luna (Reasoning Medium)'; cents per page)",
+   "quote": "0.14",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F263"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Luna (Reasoning Medium)",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 66, column Provider (setting in parentheses: 'Reasoning Medium')",
+   "quote": "OpenAI GPT-6 Luna (Reasoning Medium)",
+   "id": "F264"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Luna (Reasoning Low)",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 67, column Provider ('OpenAI GPT-6 Luna (Reasoning Low)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Luna (Reasoning Low)",
+   "id": "F265"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Luna (Reasoning Low)",
+   "value": "59.32",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 67, column Overall (row 'OpenAI GPT-6 Luna (Reasoning Low)')",
+   "quote": "59.32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F266"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Luna (Reasoning Low)",
+   "value": "0.11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 67, column Cost_Per_Page (row 'OpenAI GPT-6 Luna (Reasoning Low)'; cents per page)",
+   "quote": "0.11",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F267"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Luna (Reasoning Low)",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 67, column Provider (setting in parentheses: 'Reasoning Low')",
+   "quote": "OpenAI GPT-6 Luna (Reasoning Low)",
+   "id": "F268"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-6 Luna (Reasoning None)",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 68, column Provider ('OpenAI GPT-6 Luna (Reasoning None)'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-6 Luna (Reasoning None)",
+   "id": "F269"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-6 Luna (Reasoning None)",
+   "value": "52.93",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 68, column Overall (row 'OpenAI GPT-6 Luna (Reasoning None)')",
+   "quote": "52.93",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F270"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-6 Luna (Reasoning None)",
+   "value": "0.09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 68, column Cost_Per_Page (row 'OpenAI GPT-6 Luna (Reasoning None)'; cents per page)",
+   "quote": "0.09",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F271"
+  },
+  {
+   "says": "effort-label",
+   "about": "OpenAI GPT-6 Luna (Reasoning None)",
+   "value": "none",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 68, column Provider (setting in parentheses: 'Reasoning None')",
+   "quote": "OpenAI GPT-6 Luna (Reasoning None)",
+   "id": "F272"
+  },
+  {
+   "says": "model-name",
+   "about": "OpenAI GPT-5.4 Nano",
+   "value": "GPT-5.4 Nano",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 69, column Provider ('OpenAI GPT-5.4 Nano'; the model before its parenthesised setting)",
+   "quote": "OpenAI GPT-5.4 Nano",
+   "id": "F273"
+  },
+  {
+   "says": "score",
+   "about": "OpenAI GPT-5.4 Nano",
+   "value": "43.35",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 69, column Overall (row 'OpenAI GPT-5.4 Nano')",
+   "quote": "43.35",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F274"
+  },
+  {
+   "says": "cost",
+   "about": "OpenAI GPT-5.4 Nano",
+   "value": "0.25",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 69, column Cost_Per_Page (row 'OpenAI GPT-5.4 Nano'; cents per page)",
+   "quote": "0.25",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F275"
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "\"model\": \"gpt-5.4-nano\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 2381-2390, PipelineSpec 'openai_gpt_5_4_nano_parse_with_layout_file' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline); no reasoning_effort, effort, thinking_level or thinking key in the config",
+   "quote": "\"model\": \"gpt-5.4-nano\"",
+   "id": "F276",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3-VL-8B-Instruct",
+   "value": "Qwen3-VL-8B-Instruct",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 95, column Provider ('Qwen3-VL-8B-Instruct'; the model before its parenthesised setting)",
+   "quote": "Qwen3-VL-8B-Instruct",
+   "id": "F277"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3-VL-8B-Instruct",
+   "value": "61.97",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 95, column Overall (row 'Qwen3-VL-8B-Instruct')",
+   "quote": "61.97",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F278"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen 3.8 27B",
+   "value": "Qwen 3.8 27B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 96, column Provider ('Qwen 3.8 27B'; the model before its parenthesised setting)",
+   "quote": "Qwen 3.8 27B",
+   "id": "F279"
+  },
+  {
+   "says": "score",
+   "about": "Qwen 3.8 27B",
+   "value": "61.21",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 96, column Overall (row 'Qwen 3.8 27B')",
+   "quote": "61.21",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F280"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen 3.8 27B (Thinking)",
+   "value": "Qwen 3.8 27B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 97, column Provider ('Qwen 3.8 27B (Thinking)'; the model before its parenthesised setting)",
+   "quote": "Qwen 3.8 27B (Thinking)",
+   "id": "F281"
+  },
+  {
+   "says": "score",
+   "about": "Qwen 3.8 27B (Thinking)",
+   "value": "70.79",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 97, column Overall (row 'Qwen 3.8 27B (Thinking)')",
+   "quote": "70.79",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F282"
+  },
+  {
+   "says": "thinking-on",
+   "about": "Qwen 3.8 27B (Thinking)",
+   "value": "Thinking",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 97, column Provider (setting in parentheses)",
+   "quote": "Qwen 3.8 27B (Thinking)",
+   "id": "F283"
+  },
+  {
+   "says": "model-name",
+   "about": "Gemma-4-31B-it",
+   "value": "Gemma-4-31B-it",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 107, column Provider ('Gemma-4-31B-it'; the model before its parenthesised setting)",
+   "quote": "Gemma-4-31B-it",
+   "id": "F284"
+  },
+  {
+   "says": "score",
+   "about": "Gemma-4-31B-it",
+   "value": "62.4",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 107, column Overall (row 'Gemma-4-31B-it')",
+   "quote": "62.4",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F285"
+  },
+  {
+   "says": "model-name",
+   "about": "Gemma-4-26B-A4B-it",
+   "value": "Gemma-4-26B-A4B-it",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 109, column Provider ('Gemma-4-26B-A4B-it'; the model before its parenthesised setting)",
+   "quote": "Gemma-4-26B-A4B-it",
+   "id": "F286"
+  },
+  {
+   "says": "score",
+   "about": "Gemma-4-26B-A4B-it",
+   "value": "58.5",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 109, column Overall (row 'Gemma-4-26B-A4B-it')",
+   "quote": "58.5",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F287"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "Qwen3.6-35B-A3B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 121, column Provider ('Qwen3.6-35B-A3B'; the model before its parenthesised setting)",
+   "quote": "Qwen3.6-35B-A3B",
+   "id": "F288"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "44.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 121, column Overall (row 'Qwen3.6-35B-A3B')",
+   "quote": "44.1",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F289"
+  },
+  {
+   "says": "model-name",
+   "about": "DeepSeek-OCR-2",
+   "value": "DeepSeek-OCR-2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 123, column Provider ('DeepSeek-OCR-2'; the model before its parenthesised setting)",
+   "quote": "DeepSeek-OCR-2",
+   "id": "F290"
+  },
+  {
+   "says": "score",
+   "about": "DeepSeek-OCR-2",
+   "value": "41.2",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 123, column Overall (row 'DeepSeek-OCR-2')",
+   "quote": "41.2",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F291"
+  },
+  {
+   "says": "model-name",
+   "about": "Gemma-4-E4B-it",
+   "value": "Gemma-4-E4B-it",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 126, column Provider ('Gemma-4-E4B-it'; the model before its parenthesised setting)",
+   "quote": "Gemma-4-E4B-it",
+   "id": "F292"
+  },
+  {
+   "says": "score",
+   "about": "Gemma-4-E4B-it",
+   "value": "40.5",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 126, column Overall (row 'Gemma-4-E4B-it')",
+   "quote": "40.5",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F293"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.5-4B",
+   "value": "Qwen3.5-4B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 130, column Provider ('Qwen3.5-4B'; the model before its parenthesised setting)",
+   "quote": "Qwen3.5-4B",
+   "id": "F294"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.5-4B",
+   "value": "35.4",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 130, column Overall (row 'Qwen3.5-4B')",
+   "quote": "35.4",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F295"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.5-9B",
+   "value": "Qwen3.5-9B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 131, column Provider ('Qwen3.5-9B'; the model before its parenthesised setting)",
+   "quote": "Qwen3.5-9B",
+   "id": "F296"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "31.9",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 131, column Overall (row 'Qwen3.5-9B')",
+   "quote": "31.9",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F297"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.5-0.8B",
+   "value": "Qwen3.5-0.8B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 132, column Provider ('Qwen3.5-0.8B'; the model before its parenthesised setting)",
+   "quote": "Qwen3.5-0.8B",
+   "id": "F298"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.5-0.8B",
+   "value": "28.4",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 132, column Overall (row 'Qwen3.5-0.8B')",
+   "quote": "28.4",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F299"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.5-2B",
+   "value": "Qwen3.5-2B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 133, column Provider ('Qwen3.5-2B'; the model before its parenthesised setting)",
+   "quote": "Qwen3.5-2B",
+   "id": "F300"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.5-2B",
+   "value": "27.3",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 133, column Overall (row 'Qwen3.5-2B')",
+   "quote": "27.3",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F301"
+  },
+  {
+   "says": "model-name",
+   "about": "DeepSeek V4.1 Flash (Thinking High)",
+   "value": "DeepSeek V4.1 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 139, column Provider ('DeepSeek V4.1 Flash (Thinking High)'; the model before its parenthesised setting)",
+   "quote": "DeepSeek V4.1 Flash (Thinking High)",
+   "id": "F302"
+  },
+  {
+   "says": "score",
+   "about": "DeepSeek V4.1 Flash (Thinking High)",
+   "value": "65.72",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 139, column Overall (row 'DeepSeek V4.1 Flash (Thinking High)')",
+   "quote": "65.72",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F303"
+  },
+  {
+   "says": "thinking-on",
+   "value": "\"thinking\": \"enabled\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1327-1338, PipelineSpec 'deepseek_v4_1_flash_parse_with_layout' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking\": \"enabled\"",
+   "id": "F304",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "value": "\"reasoning_effort\": \"high\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1327-1338, PipelineSpec 'deepseek_v4_1_flash_parse_with_layout' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"reasoning_effort\": \"high\"",
+   "id": "F305",
+   "about": null
+  },
+  {
+   "says": "effort-label",
+   "about": "DeepSeek V4.1 Flash (Thinking High)",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 139, column Provider (setting in parentheses: 'Thinking High')",
+   "quote": "DeepSeek V4.1 Flash (Thinking High)",
+   "id": "F306"
+  },
+  {
+   "says": "model-name",
+   "about": "DeepSeek V4.1 Flash (No Thinking)",
+   "value": "DeepSeek V4.1 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 140, column Provider ('DeepSeek V4.1 Flash (No Thinking)'; the model before its parenthesised setting)",
+   "quote": "DeepSeek V4.1 Flash (No Thinking)",
+   "id": "F307"
+  },
+  {
+   "says": "score",
+   "about": "DeepSeek V4.1 Flash (No Thinking)",
+   "value": "56.57",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 140, column Overall (row 'DeepSeek V4.1 Flash (No Thinking)')",
+   "quote": "56.57",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F308"
+  },
+  {
+   "says": "thinking-off",
+   "value": "\"thinking\": \"disabled\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/parse.py",
+   "where": "parse.py lines 1342-1352, PipelineSpec 'deepseek_v4_1_flash_no_thinking_parse_with_layout' (matched to the leaderboard row by name: docs/pipelines.md lists the pipeline)",
+   "quote": "\"thinking\": \"disabled\"",
+   "id": "F309",
+   "about": null
+  },
+  {
+   "says": "thinking-off",
+   "about": "DeepSeek V4.1 Flash (No Thinking)",
+   "value": "No Thinking",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-run-llama-ParseBench/evidence/leaderboard.csv",
+   "where": "leaderboard.csv line 140, column Provider (setting in parentheses)",
+   "quote": "DeepSeek V4.1 Flash (No Thinking)",
+   "id": "F310"
+  }
+ ]
+}
