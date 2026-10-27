@@ -1,0 +1,100 @@
+{
+ "id": "src-eqbench.com-eqbench4-2026-09-30",
+ "publisher": "eqbench.com",
+ "urls": [
+  "https://eqbench.com/",
+  "https://eqbench.com/eqbench4/eqbench4_data.js"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://eqbench.com/eqbench4/eqbench4_data.js",
+   "captured": "2026-09-30T16:52:14Z",
+   "note": "eqbench4_data.js (generated_at 2026-07-26T01:26:10+00:00), saved 30 Sep by s17/b1; the same bytes were saved again by s18/a5 (1 Oct), g/g7 (19 Oct) and hk/grok-4.1 (20 Oct)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_data.js": "188d8ea4a393978063a6c24dff6c92ce185169827038bfa558091212a68c29d8",
+  "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_models.json": "7517a2918902c610443c64551dab1b6f8e05a4179f38798b8477dbc996125c75"
+ },
+ "harvested_at": "2026-09-30T16:52:14Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-eqbench.com (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the board data file eqbench4_data.js saved by salvo s17/b1 (identical md5 6e0bc88a in s18/a5, g/g7, hk/grok-4.1)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_models.json",
+   "from": "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_data.js",
+   "tool": "convert.py: the `models` array of the JS data object (const EQBENCH4_DATA = {...}) with the fields model, display, elo, ci_low, ci_high, sigma, n_scenarios, rank copied as text; nothing else changed"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_models.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "ci_low": "note",
+    "ci_high": "note",
+    "sigma": "note",
+    "n_scenarios": "note",
+    "rank": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "2026-07-26T01:26:10+00:00",
+   "level": "written",
+   "form": "data-file",
+   "where": "EQBENCH4_DATA.generated_at (the board data export time; not a run date)",
+   "file": "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_data.js",
+   "quote": "\"generated_at\": \"2026-07-26T01:26:10+00:00\""
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "Per-judge soft Bradley-Terry Elo solve over fractional pairwise verdicts.",
+   "level": "written",
+   "form": "data-file",
+   "where": "EQBENCH4_DATA.judge_bias.ranking_method",
+   "file": "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_data.js",
+   "quote": "Per-judge soft Bradley-Terry Elo solve over fractional pairwise verdicts."
+  },
+  {
+   "id": "F3",
+   "says": "judge",
+   "about": null,
+   "value": "\"claude-opus-4-6\", \"gemini-3.1-pro-preview\", \"gpt-5.5\"",
+   "level": "written",
+   "form": "data-file",
+   "where": "EQBENCH4_DATA.judge_bias.judges (the three pairwise judges; judge_report.pairwise lists their comparisons)",
+   "file": "/work/.salvo14/mig/convert-eqbench.com/evidence/eqbench4_data.js",
+   "quote": "\"judges\": [ \"claude-opus-4-6\", \"gemini-3.1-pro-preview\", \"gpt-5.5\" ]"
+  }
+ ]
+}

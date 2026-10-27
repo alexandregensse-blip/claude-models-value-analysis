@@ -1,0 +1,142 @@
+{
+ "id": "src-github-yhenon-surface-evolver-llm-eval-2026-10-09",
+ "publisher": "yhenon-surface-evolver",
+ "urls": [
+  "https://github.com/yhenon/surface-evolver-llm-eval"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "ce34daf2aa69eb50d8023fbb8dd295df60ab4060",
+   "url": "https://github.com/yhenon/surface-evolver-llm-eval/commit/ce34daf2aa69eb50d8023fbb8dd295df60ab4060",
+   "captured": "2026-10-09T20:35:38Z",
+   "note": "commit ce34daf \"update plotting\" (committer date 2026-10-09T22:35:38+02:00); docs/data/aggregates.json last changed in 2e54f6d (add mistral large 4, 2026-10-09T21:33:47+02:00)"
+  }
+ ],
+ "commit": "ce34daf2aa69eb50d8023fbb8dd295df60ab4060",
+ "sha256": {
+  "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/aggregates.json": "04fa2274fa1f67bdd53981091edd6e157d3bb52d62e5eee8c09e0c6f75232f8c",
+  "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/eval_config.json": "181f847e6af64526c07d5f3398cdb18ca38dc32a7c040b1507aaa29a373e5024",
+  "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/README.md": "4fdb8a9ea347984e1eeb37fd85c2d5d61f9242e689d87ea3962a7045ef2c0a55",
+  "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/models.json": "2bb0e95a699daf3216843bcaa00a2c32a22d11f7ffe3b74e6b47084488d1396e"
+ },
+ "harvested_at": "2026-10-09T20:35:38Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-yhenon-surface-evolver (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from docs/data/aggregates.json, eval_config.json and README.md of the repo at commit ce34daf (copies saved by salvo gc/c6 on 19 Oct are byte-identical to the blobs of that commit in the clone saved by rd/google1)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/models.json",
+   "from": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/aggregates.json",
+   "tool": "convert.py: one object per entry of aggregates.json by_model (key, mean_score, mean_total_cost_usd, mean_total_tokens, runs, passed, costed_runs, provider copied as text) joined with the eval_config.json model entry of the same configuration (name, model, reasoning_effort); the key -> config name join is the KEYMAP of convert.py (the key repeats the config name and effort)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/models.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "mean_score": {
+     "says": "score",
+     "term": "mean-score%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 1e-05
+     }
+    },
+    "mean_total_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-05
+     }
+    },
+    "mean_total_tokens": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "model": {
+     "says": "model-api-id",
+     "namespace": "openrouter"
+    },
+    "reasoning_effort": "effort-setting",
+    "runs": "aggregation",
+    "passed": "note",
+    "costed_runs": "note",
+    "provider": "note",
+    "config_name": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "route",
+   "about": null,
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "where": "README: the runner uses OpenRouter by default",
+   "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/README.md",
+   "quote": "It uses OpenRouter by default and reads",
+   "term": "openrouter"
+  },
+  {
+   "id": "F2",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "omits",
+   "level": "written",
+   "form": "prose",
+   "where": "README, reasoning_effort: if neither the CLI nor config sets one the request omits reasoning controls and the API default applies",
+   "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/README.md",
+   "quote": "If neither the CLI nor config sets one, the request omits"
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "code",
+   "where": "aggregates.json field total_cost_usd / mean_total_cost_usd",
+   "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/aggregates.json",
+   "quote": "\"total_cost_usd\"",
+   "term": "USD"
+  },
+  {
+   "id": "F4",
+   "says": "unit",
+   "about": null,
+   "value": "mean_total_cost_usd",
+   "level": "written",
+   "form": "code",
+   "where": "mean_total_cost_usd: mean over the costed runs of one configuration (one run = one task attempt)",
+   "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/aggregates.json",
+   "quote": "\"mean_total_cost_usd\"",
+   "term": "per-run"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Native OpenAI Responses do not include a dollar cost in their usage object",
+   "level": "written",
+   "form": "prose",
+   "where": "README: the runner estimates standard-tier cost only for native OpenAI Responses runs; OpenRouter runs record the cost",
+   "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/README.md",
+   "quote": "Native OpenAI Responses do not include a dollar cost in their usage object"
+  }
+ ]
+}

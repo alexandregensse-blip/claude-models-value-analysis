@@ -1,0 +1,124 @@
+{
+ "id": "src-uniclaw-openclaw-arena-2026-07-18",
+ "publisher": "uniclaw-openclaw-arena",
+ "urls": [
+  "https://app.uniclaw.ai/arena",
+  "https://app.uniclaw.ai/api/v1/benchmarks/leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://app.uniclaw.ai/api/v1/benchmarks/leaderboard",
+   "captured": "2026-10-20T05:59:42Z",
+   "note": "leaderboard JSON (generatedAt 2026-07-18T06:47:07.654Z: the public cache served on 20 Oct is that old) saved by gt/t4; the pareto JSON and the methodology page (v1.3) saved beside it"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/uc_leaderboard.json": "6b163ecc72d2a42f7e9324367eef46660e4403b02c3498e2e4269a3314b2340c",
+  "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/uc_pareto.json": "c4b0becfb7cab0c9331958ddfefa681433fda7603f25cfcb3844821d68b4204c",
+  "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.html": "c27edf539a4cc91854b4afcbff09c73612ecc0b7e4ec86e0bdde9836a512e81a",
+  "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.txt": "021afbe8b9994fe12ac3e7205a8782c5e04f9a368551a42b6f6d690807401410"
+ },
+ "harvested_at": "2026-10-20T05:59:42Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-uniclaw-openclaw-arena (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the board API JSON (leaderboard, pareto) and the methodology page saved by salvo gt/t4 (20 Oct)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.txt",
+   "from": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.html",
+   "tool": "c2lib-g/htmltxt2.py: visible text of the methodology page"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/uc_leaderboard.json",
+   "where": "$.performance",
+   "format": "json",
+   "row_key": "modelId",
+   "columns": {
+    "score": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "modelId": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "scoreCiLow": "note",
+    "scoreCiHigh": "note",
+    "battleCount": "note",
+    "eligibilityTier": "note",
+    "rank": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: models run as full agents on OpenClaw",
+   "file": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.txt",
+   "quote": "OpenClaw Arena battles evaluate models as full agents running real benchmark tasks on OpenClaw"
+  },
+  {
+   "id": "F2",
+   "says": "version",
+   "about": null,
+   "value": "v1.3",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology page header \"v1.3\" (Updated 2026-04-07)",
+   "file": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.txt",
+   "quote": "v1.3"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "Elo-like scale",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: scores are displayed on an Elo-like scale",
+   "file": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.txt",
+   "quote": "Scores are displayed on an Elo-like scale for readability."
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "excludes battles where the judge model is also one of the evaluated models",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: official-board exclusions",
+   "file": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/meth.txt",
+   "quote": "The official board excludes battles where the judge model is also one of the evaluated models."
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "2026-07-18T06:47:07.654Z",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard JSON generatedAt (board export time, not a run date)",
+   "file": "/work/.salvo14/mig/convert-uniclaw-openclaw-arena/evidence/uc_leaderboard.json",
+   "quote": "\"generatedAt\":\"2026-07-18T06:47:07.654Z\""
+  }
+ ]
+}

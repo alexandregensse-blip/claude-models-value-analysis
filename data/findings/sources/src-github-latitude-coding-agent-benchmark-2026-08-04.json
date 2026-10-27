@@ -1,0 +1,366 @@
+{
+ "id": "src-github-latitude-coding-agent-benchmark-2026-08-04",
+ "publisher": "github-latitude",
+ "urls": [
+  "https://github.com/latitude-dev/coding-agent-benchmark"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "cd28f3965d4d9d2fc9a49faca573f16b5102b488",
+   "captured": "2026-08-04T12:46:17Z",
+   "url": "https://github.com/latitude-dev/coding-agent-benchmark/commit/cd28f3965d4d9d2fc9a49faca573f16b5102b488",
+   "note": "commit cd28f39 of the coding-agent-benchmark repo (committer date 2026-08-04T14:46:17+02:00 in the clone saved by salvo g/g8; results/results.jsonl last changed in f93b5a8 of the same minute); README.md, ARTICLE.md, src/models.ts, src/agent.ts from the same clone"
+  }
+ ],
+ "commit": "cd28f3965d4d9d2fc9a49faca573f16b5102b488",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-latitude/evidence/results.jsonl": "1bdc50ba229f5a072b1e1bf8ea8ab3a4224bf3b7f0bb6598a7f735b400ef726f",
+  "/work/.salvo14/mig/convert-github-latitude/evidence/README.md": "22899f5e4dce4649aaff485811214cd4032e533d7f84f79666cb2bbbf8f437c8",
+  "/work/.salvo14/mig/convert-github-latitude/evidence/ARTICLE.md": "e0989f7903a8dc968d73706996a931cbe25cc47532f0e3af16201295d596417a",
+  "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts": "c0dace07f661c5d1f7a56ef62544fb57cddf420155690f3658fb67bcb3bac985",
+  "/work/.salvo14/mig/convert-github-latitude/evidence/agent.ts": "84bc55d8d33cc45d27a1089f5b2aee0368f47a56fc8f04b50db248816ab27dbd",
+  "/work/.salvo14/mig/convert-github-latitude/evidence/runs.json": "60941d83a565fd5af17f5335560a2ee4894bb8aef5b3c0a0737ae6fd8222598a",
+  "/work/.salvo14/mig/convert-github-latitude/evidence/means.json": "b3698c952f64d3a2afcd1085f04581070dc93d189a034dbbed530a2c5554fd1c"
+ },
+ "harvested_at": "2026-08-04T12:46:17Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/runs.json",
+   "from": "/work/.salvo14/mig/convert-github-latitude/evidence/results.jsonl",
+   "tool": "convert.py: the 847 rows of results/results.jsonl flattened one object per run (key = runId), fields copied (solved true/false -> 1.0/0.0), plus tier = easy for tasks 01-12 and hard for tasks 13-18 (task number from the task id)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/means.json",
+   "from": "/work/.salvo14/mig/convert-github-latitude/evidence/runs.json",
+   "tool": "convert.py: per (setup, model, effort) the arithmetic mean over its runs (OUR aggregation): n_solved/n_runs, mean costUsd, mean tokens; setup = latitude-easy (tasks 01-12), latitude-cross6 (tasks 13-18), latitude-sweep (Opus 5 at its five efforts and Kimi K3, tasks 13-18)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/runs.json",
+   "where": "$.runs",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "solved": {
+     "says": "run-score",
+     "term": "solved%",
+     "scale": "fraction",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "task": "note",
+    "trial": "note",
+    "mode": "note",
+    "finishedAt": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "effort": "effort-setting"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/means.json",
+   "where": "$.configs",
+   "format": "json",
+   "row_key": "config",
+   "columns": {
+    "mean_solved": {
+     "says": "score",
+     "term": "solved%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "mean_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "mean_input_tokens": {
+     "says": "tokens-in",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "mean_output_tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "mean_cached_input_tokens": {
+     "says": "tokens-cache-read",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "effort": "effort-setting",
+    "n_runs": "aggregation",
+    "first_finished": "run-start",
+    "last_finished": "run-end"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/results.jsonl",
+   "where": "field costUsd of the results.jsonl rows",
+   "quote": "\"costUsd\""
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "run",
+   "term": "per-run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/results.jsonl",
+   "where": "costUsd is the cost of one run (one row); mean_cost_usd is the mean over the rows",
+   "quote": "\"runId\""
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-method",
+   "value": "token usage priced from",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/README.md",
+   "where": "README.md, section What gets measured: Cost",
+   "quote": "token usage priced from [models.dev](https://models.dev) data, cache reads included",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "cost-basis",
+   "value": "token usage priced from",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/README.md",
+   "where": "README.md, section What gets measured: Cost",
+   "quote": "token usage priced from [models.dev](https://models.dev) data",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "price-table",
+   "value": "USD per million tokens, from models.dev (base tier; our tasks stay far under tier cutoffs)",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, comment above the ModelSpec pricing field (rates per model in the same file; no date stated)",
+   "quote": "// USD per million tokens, from models.dev (base tier; our tasks stay far under tier cutoffs)"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "default model settings (no reasoning-effort or temperature overrides)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/README.md",
+   "where": "README.md, 'Running it': the published results were produced on 2026-07-14 with default model settings",
+   "quote": "with default model settings (no reasoning-effort or temperature overrides)"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "harness",
+   "value": "ai@7.0.26",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/README.md",
+   "where": "README.md, 'Running it' (Vercel AI SDK, ai@7.0.26)",
+   "quote": "`ai@7.0.26`"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "note",
+   "value": "effort && spec.provider === 'anthropic'",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/agent.ts",
+   "where": "src/agent.ts runOne: providerOptions is set only when effort is set and the provider is anthropic",
+   "quote": "effort && spec.provider === 'anthropic' ? { anthropic: { effort } } : undefined"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "note",
+   "value": "const oracle = mode === 'oracle'",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/agent.ts",
+   "where": "src/agent.ts runOne: `const oracle = mode === 'oracle'`; the tier means pool both modes",
+   "quote": "const oracle = mode === 'oracle'"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "route",
+   "value": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts: Kimi K3 is called through the OpenRouter openai-compatible client",
+   "quote": "baseURL: 'https://openrouter.ai/api/v1'",
+   "term": "openrouter"
+  },
+  {
+   "id": "F11",
+   "about": "claude-sonnet-5",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key claude-sonnet-5: model: () => anthropic('claude-sonnet-5')",
+   "quote": "anthropic('claude-sonnet-5')"
+  },
+  {
+   "id": "F12",
+   "about": "gpt-5.3-codex",
+   "says": "model-api-id",
+   "value": "gpt-5.3-codex",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key gpt-5.3-codex: model: () => openai('gpt-5.3-codex')",
+   "quote": "openai('gpt-5.3-codex')"
+  },
+  {
+   "id": "F13",
+   "about": "gpt-5.5",
+   "says": "model-api-id",
+   "value": "gpt-5.5",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key gpt-5.5: model: () => openai('gpt-5.5')",
+   "quote": "openai('gpt-5.5')"
+  },
+  {
+   "id": "F14",
+   "about": "claude-opus-4-8",
+   "says": "model-api-id",
+   "value": "claude-opus-4-8",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key claude-opus-4-8: model: () => anthropic('claude-opus-4-8')",
+   "quote": "anthropic('claude-opus-4-8')"
+  },
+  {
+   "id": "F15",
+   "about": "claude-fable-5",
+   "says": "model-api-id",
+   "value": "claude-fable-5",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key claude-fable-5: model: () => anthropic('claude-fable-5')",
+   "quote": "anthropic('claude-fable-5')"
+  },
+  {
+   "id": "F16",
+   "about": "gpt-5.6-sol",
+   "says": "model-api-id",
+   "value": "gpt-5.6-sol",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key gpt-5.6-sol: model: () => openai('gpt-5.6-sol')",
+   "quote": "openai('gpt-5.6-sol')"
+  },
+  {
+   "id": "F17",
+   "about": "gpt-5.6-luna",
+   "says": "model-api-id",
+   "value": "gpt-5.6-luna",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key gpt-5.6-luna: model: () => openai('gpt-5.6-luna')",
+   "quote": "openai('gpt-5.6-luna')"
+  },
+  {
+   "id": "F18",
+   "about": "gpt-5.6-terra",
+   "says": "model-api-id",
+   "value": "gpt-5.6-terra",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key gpt-5.6-terra: model: () => openai('gpt-5.6-terra')",
+   "quote": "openai('gpt-5.6-terra')"
+  },
+  {
+   "id": "F19",
+   "about": "kimi-k3",
+   "says": "model-api-id",
+   "value": "moonshotai/kimi-k3",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key kimi-k3: model: () => openrouter('moonshotai/kimi-k3')",
+   "quote": "openrouter('moonshotai/kimi-k3')"
+  },
+  {
+   "id": "F20",
+   "about": "claude-opus-5",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-latitude/evidence/models.ts",
+   "where": "src/models.ts, the ModelSpec of key claude-opus-5: model: () => anthropic('claude-opus-5')",
+   "quote": "anthropic('claude-opus-5')"
+  }
+ ]
+}
