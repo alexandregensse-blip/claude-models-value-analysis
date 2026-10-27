@@ -1,0 +1,268 @@
+{
+ "id": "src-parallel-ai-search-leaderboard-2026-10-18",
+ "publisher": "parallel.ai",
+ "urls": [
+  "https://parallel.ai/leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://parallel.ai/leaderboard",
+   "captured": "2026-10-18T16:45:38Z",
+   "note": "page fetched by salvo s24/c2 (saved file misc/parallel.html) on 18 Oct (file mtime); payload meta asOf 2026-10-18, nPairs 90"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://parallel.ai/leaderboard",
+   "captured": "2026-10-19T08:04:00Z",
+   "note": "page fetched by salvo g/g8 (saved file src/parallel.raw) on 19 Oct (file mtime of the g8 save; same size class as rb/rb4 save of 19 Oct 17:46): the 90 pairs carry the same values as S1 plus a field evaluatedAt (asserted by convert.py); this is the capture the table is read from"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/s24/c2/src/misc/parallel.html": "0e7cdb6831960dd583b3441399d438bba4ecd391a9bdb49f4d24de81b59e3f85",
+  "/work/.salvo14/g/g8/src/parallel.raw": "bd59258e5f324a82bc7a6f4c3d603e73fcccbb539c6ad0b160d6312e1cfbfc46",
+  "/work/.salvo14/mig/convert-parallel.ai/evidence/pairs.json": "cf3729f0004f289350ca1c8ffd698de26bcd32de18108c3eaa90e407b8a54abe"
+ },
+ "harvested_at": "2026-10-18T16:45:38Z",
+ "published": {
+  "value": "2026-10-18",
+  "where": "page header: \"Latest update October 18, 2026\" (payload meta asOf 2026-10-18)",
+  "quote": "asOf\":\"2026-10-18",
+  "file": "/work/.salvo14/s24/c2/src/misc/parallel.html"
+ },
+ "salvo": "salvo14/mig convert-parallel.ai (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page captures (the \"pairs\" array embedded in the page data)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-parallel.ai/evidence/pairs.json",
+   "from": "/work/.salvo14/g/g8/src/parallel.raw",
+   "tool": "convert.py: the \"pairs\" array of the leaderboard payload embedded in the page (Next.js flight data, JSON unescaped; 90 pairs copied verbatim). P1 (18 Oct) holds the same 90 pairs with the same values but without the field evaluatedAt (asserted)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-parallel.ai/evidence/pairs.json",
+   "where": "$.pairs",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": "note",
+    "modelDisplay": "model-name",
+    "provider": {
+     "says": "route"
+    },
+    "nTasks": "note",
+    "searchCondition": "note",
+    "searchConditionLabel": "note",
+    "dataStatus": "note",
+    "label": "note",
+    "shortLabel": "note",
+    "intelligenceIndex": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "evaluatedAt": "run-date",
+    "dsqa": "note",
+    "hle": "note",
+    "wiser": "note",
+    "costPerTask": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "llmCostPerTask": "note",
+    "searchCostPerTask": "note",
+    "extractCostPerTask": "note",
+    "timePerTaskSec": "note",
+    "costPerIntelligence": "note",
+    "rank": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note: a price quoted in dollars",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "priced at inference-net's OpenRouter rates ($0.10 input, $0.002 cached input, and $0.50 output per 1M tokens)",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "per task",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note on costs",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "reported per task in the dataset and displayed per 1,000 tasks",
+   "term": "per-task"
+  },
+  {
+   "id": "F3",
+   "says": "metric-definition",
+   "about": null,
+   "value": "DSQA F1, HLE accuracy, and WISER accuracy, weighted equally",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology section, \"Search Intelligence Score\"",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "DSQA F1, HLE accuracy, and WISER accuracy, weighted equally on a 0"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "Reasoning settings and token limits may vary by model to reflect provider recommendations, when provided",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"Each model answers the same 100 questions per benchmark\"; no effort is stated for the other models",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "Reasoning settings and token limits may vary by model to reflect provider recommendations, when provided."
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Each model answers the same 100 questions per benchmark, with and without",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "Each model answers the same 100 questions per benchmark, with and without"
+  },
+  {
+   "id": "F6",
+   "says": "effort-label",
+   "about": "Claude Opus 5.5",
+   "value": "max effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "The three Claude models use 2026-09-24 runs with explicit 1h prompt caching at max effort"
+  },
+  {
+   "id": "F7",
+   "says": "effort-label",
+   "about": "Claude Sonnet 5.5",
+   "value": "max effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "Claude Sonnet 5.5 at max effort"
+  },
+  {
+   "id": "F8",
+   "says": "effort-label",
+   "about": "Claude Fable 5.1",
+   "value": "max-effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "Anthropic's Claude Fable 5.1 comes from a 2026-10-13 max-effort re-run"
+  },
+  {
+   "id": "F9",
+   "says": "effort-label",
+   "about": "Gemini 4 Argon",
+   "value": "high-effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "Google's Gemini 4 Argon is a 2026-10-13 high-effort run"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": "GPT-6.1 Sol",
+   "value": "max-effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "GPT-6.1 Sol is a 2026-09-30 max-effort run"
+  },
+  {
+   "id": "F11",
+   "says": "effort-label",
+   "about": "DeepSeek V4.1 Flash (1017)",
+   "value": "max-effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "DeepSeek V4.1 Flash (1017) is a 2026-10-17 max-effort run"
+  },
+  {
+   "id": "F12",
+   "says": "effort-label",
+   "about": "GPT-6 Sol",
+   "value": "max-effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "GPT-6 Luna and GPT-6 Sol are 2026-09-23 direct OpenAI max-effort runs"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": "Grok 4.7 Medium",
+   "value": "medium-effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology note (page payload string) on the origin of the cells",
+   "file": "/work/.salvo14/s24/c2/src/misc/parallel.html",
+   "quote": "Grok 4.7 Medium is a 2026-10-10 medium-effort run"
+  },
+  {
+   "id": "F14",
+   "says": "model-api-id",
+   "about": "x-ai/grok-4.7__with-search",
+   "value": "x-ai/grok-4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "pairs[id=x-ai/grok-4.7__with-search].model (the page names the run: x-ai/grok-4.7 via OpenRouter)",
+   "file": "/work/.salvo14/mig/convert-parallel.ai/evidence/pairs.json",
+   "quote": "x-ai/grok-4.7",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F15",
+   "says": "model-api-id",
+   "about": "x-ai/grok-4.7__without-search",
+   "value": "x-ai/grok-4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "pairs[id=x-ai/grok-4.7__without-search].model (the page names the run: x-ai/grok-4.7 via OpenRouter)",
+   "file": "/work/.salvo14/mig/convert-parallel.ai/evidence/pairs.json",
+   "quote": "x-ai/grok-4.7",
+   "namespace": "prefix"
+  }
+ ]
+}

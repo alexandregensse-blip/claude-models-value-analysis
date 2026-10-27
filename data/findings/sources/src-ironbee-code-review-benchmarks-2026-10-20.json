@@ -1,0 +1,862 @@
+{
+ "id": "src-ironbee-code-review-benchmarks-2026-10-20",
+ "publisher": "ironbee",
+ "urls": [
+  "https://github.com/ironbee-ai/code-review-benchmarks",
+  "https://ironbee.ai/blog/the-honest-raw-llm-code-review-benchmark"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://github.com/ironbee-ai/code-review-benchmarks",
+   "captured": "2026-10-21T15:13:32Z",
+   "note": "clone of the repository saved by salvo hn/news-posts (file mtime 21 Oct); the saved configs/models.yaml and docs/METHODOLOGY.md are byte-identical to the copies the arbitration agent labels-a cites as commit d7300e86 of 20 Oct (arb/labels-a/report.md, Item 24); the clone itself keeps no commit id"
+  }
+ ],
+ "commit": "d7300e86",
+ "sha256": {
+  "/work/.salvo14/hn/news-posts/src/ironbee.txt": "928c943a032fac9c2d95dc300ca1cf79f3eaf905946d52f98313e4d648a2c86e",
+  "/work/.salvo14/hn/news-posts/src/ironbee.html": "2f9af7c4e1331fb77d96564a74f3e3a372e77af2b5c786668ece7040cf0ad1a4",
+  "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml": "5734a1d8eac8727ed69fa4bc436c468c8f5b798357bbc3b96a8118d00bbcf0a8",
+  "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/pricing.yaml": "704f71e04232294916d56b6fa73cb7f8628d74286a731e7f7894f857b2bb2c9a",
+  "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md": "0a95f53c25188eee197105f8684eae8e030485dacdd352d2b8f65eee01ef15a0",
+  "/work/.salvo14/hn/news-posts/src/ironbee-repo/reports/full-r123/report.md": "0bd8145fe32431df5fa6c9b540efdc5ddecabcd032330b858cca2f6f04077292",
+  "/work/.salvo14/hn/news-posts/src/ironbee-repo/reports/full-r123/configs.csv": "3f0e8184aeb1b3bebd6405f28a3e0e9860a737ca5141ab2db656e6546ac48486",
+  "/work/.salvo14/hn/news-posts/src/ironbee-repo/reports/frontier-r123/configs.csv": "5776f218ad513997d57beb847a0e9dac17f05836552b3c45d47dc08471cc875e",
+  "/work/.salvo14/mig/convert-ironbee/evidence/configs-full.csv": "375db49f63be1ad991b480599c58965c968ed1e2e535d21c0f9bd759a591eee9",
+  "/work/.salvo14/mig/convert-ironbee/evidence/configs-frontier.csv": "1cad1df5f3ec0e6f2865503cf6c17851b23804f6ad8e81638b1f3e5dbe1c05fd"
+ },
+ "harvested_at": "2026-10-21T15:13:32Z",
+ "published": {
+  "value": "2026-10-19",
+  "where": "blog byline \"Serkan Ozal Oct 19, 2026 49 min read\"",
+  "quote": "Oct 19, 2026",
+  "file": "/work/.salvo14/hn/news-posts/src/ironbee.txt"
+ },
+ "salvo": "salvo14/mig convert-ironbee (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved clone of the benchmark repository and the saved blog page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-ironbee/evidence/configs-full.csv",
+   "from": "/work/.salvo14/hn/news-posts/src/ironbee-repo/reports/full-r123/configs.csv",
+   "tool": "convert.py: reports/full-r123/configs.csv copied verbatim with a first column id = model/tier (the repository file has no unique row key)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-ironbee/evidence/configs-frontier.csv",
+   "from": "/work/.salvo14/hn/news-posts/src/ironbee-repo/reports/frontier-r123/configs.csv",
+   "tool": "convert.py: reports/frontier-r123/configs.csv copied verbatim with a first column id = model/tier"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-ironbee/evidence/configs-full.csv",
+   "where": "reports/full-r123/configs.csv: one row per configuration",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": {
+     "says": "model-name"
+    },
+    "family": "note",
+    "tier": "note",
+    "route": {
+     "says": "route"
+    },
+    "repeats": "note",
+    "prs": "note",
+    "precision": "note",
+    "recall": "note",
+    "f1": "note",
+    "f2": {
+     "says": "score",
+     "term": "F2 core (0-100), mean 3 passes",
+     "scale": "fraction",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "f1_sd": "note",
+    "f2_ci_low": "note",
+    "f2_ci_high": "note",
+    "tp": "note",
+    "fp": "note",
+    "fn": "note",
+    "f1_all": "note",
+    "recall_all": "note",
+    "findings_per_pr": "note",
+    "cost_per_pr": "note",
+    "cost_uncached_per_pr": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_reported_per_pr": "note",
+    "cost_total": "note",
+    "input_per_pr": "note",
+    "cache_read_per_pr": "note",
+    "output_per_pr": "note",
+    "reasoning_per_pr": "note",
+    "latency_median_s": "note",
+    "latency_p90_s": "note",
+    "runs": "note",
+    "parse_errors": "note",
+    "salvaged": "note",
+    "errors": "note",
+    "incomplete_votes": "note",
+    "kappa_golden": "note",
+    "unanimous_golden": "note"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-ironbee/evidence/configs-frontier.csv",
+   "where": "reports/frontier-r123/configs.csv: one row per configuration",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": {
+     "says": "model-name"
+    },
+    "family": "note",
+    "tier": "note",
+    "route": {
+     "says": "route"
+    },
+    "repeats": "note",
+    "prs": "note",
+    "precision": "note",
+    "recall": "note",
+    "f1": "note",
+    "f2": {
+     "says": "score",
+     "term": "F2 core (0-100), mean 3 passes",
+     "scale": "fraction",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "f1_sd": "note",
+    "f2_ci_low": "note",
+    "f2_ci_high": "note",
+    "tp": "note",
+    "fp": "note",
+    "fn": "note",
+    "f1_all": "note",
+    "recall_all": "note",
+    "findings_per_pr": "note",
+    "cost_per_pr": "note",
+    "cost_uncached_per_pr": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_reported_per_pr": "note",
+    "cost_total": "note",
+    "input_per_pr": "note",
+    "cache_read_per_pr": "note",
+    "output_per_pr": "note",
+    "reasoning_per_pr": "note",
+    "latency_median_s": "note",
+    "latency_p90_s": "note",
+    "runs": "note",
+    "parse_errors": "note",
+    "salvaged": "note",
+    "errors": "note",
+    "incomplete_votes": "note",
+    "kappa_golden": "note",
+    "unanimous_golden": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "code",
+   "where": "configs/pricing.yaml, header comment",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/pricing.yaml",
+   "quote": "# List prices in USD per 1M tokens",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "per pull request",
+   "level": "written",
+   "form": "prose",
+   "where": "reports/full-r123/report.md, introduction",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/reports/full-r123/report.md",
+   "quote": "Costs at list price per pull request",
+   "term": "USD per PR"
+  },
+  {
+   "id": "F3",
+   "says": "cost-basis",
+   "about": null,
+   "value": "list price",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md, Scores / Cost",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "The list price of the tokens each call used",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F4",
+   "says": "cost-method",
+   "about": null,
+   "value": "list price of the tokens each call used",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md, Scores / Cost",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "The list price of the tokens each call used",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Uncached",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md: \"Uncached\" prices every input token at the input rate; the write-up uses it (column cost_uncached_per_pr)",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "\"Uncached\" prices every input token at the input rate"
+  },
+  {
+   "id": "F6",
+   "says": "price-table",
+   "about": null,
+   "value": "read on 2026-10-16, checked on 2026-10-17",
+   "level": "written",
+   "form": "prose",
+   "where": "configs/pricing.yaml, header comment",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/pricing.yaml",
+   "quote": "read on 2026-10-16, checked on 2026-10-17"
+  },
+  {
+   "id": "F7",
+   "says": "judge",
+   "about": null,
+   "value": "first three judges outside its own family",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md, Judging, \"The panel\" (the pool, in order, is Gemini 4 Argon, GPT-6.1 Sol, Claude Opus 5.5, Grok 4.7)",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "model is judged by the first three judges outside its own family"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "The pool, in order, is Gemini 4 Argon, GPT-6.1 Sol, Claude Opus 5.5, Grok 4.7",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md, Judging, \"The panel\"",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "The pool, in order, is Gemini 4 Argon, GPT-6.1 Sol, Claude Opus 5.5, Grok 4.7."
+  },
+  {
+   "id": "F9",
+   "says": "aggregation",
+   "about": null,
+   "value": "Pooling three passes adds up their counts",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md, Scores",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "Pooling three passes adds up their counts"
+  },
+  {
+   "id": "F10",
+   "says": "harness",
+   "about": null,
+   "value": "with no tools and no repository access",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md, The review call",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "One call per (model, effort level, pull request, repeat), with no tools and no repository access"
+  },
+  {
+   "id": "F11",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "no effort parameter at all",
+   "level": "written",
+   "form": "prose",
+   "where": "docs/METHODOLOGY.md, Effort levels: the default tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/docs/METHODOLOGY.md",
+   "quote": "no effort parameter at all"
+  },
+  {
+   "id": "F12",
+   "says": "effort-setting",
+   "about": "claude-sonnet-5.5/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-sonnet-5.5: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F13",
+   "says": "effort-setting",
+   "about": "grok-4.7/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id grok-4.7: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: {}, xhigh: { reasoning: { effort: xhigh } } }"
+  },
+  {
+   "id": "F14",
+   "says": "model-api-id",
+   "about": "grok-4.7/low",
+   "value": "x-ai/grok-4.7",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id grok-4.7: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: x-ai/grok-4.7",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F15",
+   "says": "effort-setting",
+   "about": "claude-opus-5.5/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-opus-5.5: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F16",
+   "says": "effort-setting",
+   "about": "gemini-4-argon/xhigh",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gemini-4-argon: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: {}, xhigh: { reasoning: { effort: high } } }   # Gemini's top level is high"
+  },
+  {
+   "id": "F17",
+   "says": "model-api-id",
+   "about": "gemini-4-argon/xhigh",
+   "value": "google/gemini-4-argon",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gemini-4-argon: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: google/gemini-4-argon",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F18",
+   "says": "model-api-id",
+   "about": "gemini-4-argon/default",
+   "value": "google/gemini-4-argon",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gemini-4-argon: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: google/gemini-4-argon",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F19",
+   "says": "effort-setting",
+   "about": "gemini-4-argon/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gemini-4-argon: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: {}, xhigh: { reasoning: { effort: high } } }   # Gemini's top level is high"
+  },
+  {
+   "id": "F20",
+   "says": "model-api-id",
+   "about": "gemini-4-argon/low",
+   "value": "google/gemini-4-argon",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gemini-4-argon: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: google/gemini-4-argon",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F21",
+   "says": "effort-setting",
+   "about": "kimi-k3/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id kimi-k3: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F22",
+   "says": "effort-setting",
+   "about": "claude-opus-5/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-opus-5: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F23",
+   "says": "model-api-id",
+   "about": "grok-4.7/default",
+   "value": "x-ai/grok-4.7",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id grok-4.7: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: x-ai/grok-4.7",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F24",
+   "says": "effort-setting",
+   "about": "kimi-k3/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id kimi-k3: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F25",
+   "says": "effort-setting",
+   "about": "claude-sonnet-5.5/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-sonnet-5.5: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F26",
+   "says": "effort-setting",
+   "about": "deepseek-v4.1-flash/default",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4.1-flash: the default tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: { reasoning: { effort: high } }, xhigh: { same_as: default } }"
+  },
+  {
+   "id": "F27",
+   "says": "model-api-id",
+   "about": "deepseek-v4.1-flash/default",
+   "value": "deepseek/deepseek-v4.1-flash-1017",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4.1-flash: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: deepseek/deepseek-v4.1-flash-1017",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F28",
+   "says": "effort-setting",
+   "about": "deepseek-v4-pro/default",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4-pro: the default tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: { reasoning: { effort: high } }, xhigh: { same_as: default } }"
+  },
+  {
+   "id": "F29",
+   "says": "model-api-id",
+   "about": "deepseek-v4-pro/default",
+   "value": "deepseek/deepseek-v4-pro-0813",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4-pro: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: deepseek/deepseek-v4-pro-0813",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F30",
+   "says": "effort-setting",
+   "about": "deepseek-v4.1-flash/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4.1-flash: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: { reasoning: { effort: high } }, xhigh: { same_as: default } }"
+  },
+  {
+   "id": "F31",
+   "says": "model-api-id",
+   "about": "deepseek-v4.1-flash/low",
+   "value": "deepseek/deepseek-v4.1-flash-1017",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4.1-flash: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: deepseek/deepseek-v4.1-flash-1017",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F32",
+   "says": "effort-setting",
+   "about": "claude-opus-5.5/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-opus-5.5: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F33",
+   "says": "effort-setting",
+   "about": "qwen3.8-max/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id qwen3.8-max: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: {}, xhigh: { reasoning: { effort: xhigh } } }"
+  },
+  {
+   "id": "F34",
+   "says": "model-api-id",
+   "about": "qwen3.8-max/low",
+   "value": "qwen/qwen3.8-max-0902",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id qwen3.8-max: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: qwen/qwen3.8-max-0902",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F35",
+   "says": "effort-setting",
+   "about": "deepseek-v4-pro/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4-pro: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: { reasoning: { effort: high } }, xhigh: { same_as: default } }"
+  },
+  {
+   "id": "F36",
+   "says": "model-api-id",
+   "about": "deepseek-v4-pro/low",
+   "value": "deepseek/deepseek-v4-pro-0813",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id deepseek-v4-pro: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: deepseek/deepseek-v4-pro-0813",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F37",
+   "says": "effort-setting",
+   "about": "grok-4.7/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id grok-4.7: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: {}, xhigh: { reasoning: { effort: xhigh } } }"
+  },
+  {
+   "id": "F38",
+   "says": "model-api-id",
+   "about": "grok-4.7/xhigh",
+   "value": "x-ai/grok-4.7",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id grok-4.7: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: x-ai/grok-4.7",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F39",
+   "says": "effort-setting",
+   "about": "gpt-6.1-sol/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-6.1-sol: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F40",
+   "says": "effort-setting",
+   "about": "gpt-5.6-terra/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-5.6-terra: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F41",
+   "says": "effort-setting",
+   "about": "glm-5.3/default",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id glm-5.3: the default tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: { reasoning: { effort: high } }, xhigh: { same_as: default } }"
+  },
+  {
+   "id": "F42",
+   "says": "model-api-id",
+   "about": "glm-5.3/default",
+   "value": "z-ai/glm-5.3",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id glm-5.3: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: z-ai/glm-5.3",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F43",
+   "says": "effort-setting",
+   "about": "gpt-5.6-terra/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-5.6-terra: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F44",
+   "says": "effort-setting",
+   "about": "gpt-6-luna/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-6-luna: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F45",
+   "says": "effort-setting",
+   "about": "gpt-6.1-sol/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-6.1-sol: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F46",
+   "says": "effort-setting",
+   "about": "gpt-6-luna/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-6-luna: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F47",
+   "says": "effort-setting",
+   "about": "claude-opus-5/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-opus-5: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F48",
+   "says": "effort-setting",
+   "about": "qwen3.8-max/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id qwen3.8-max: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: {}, xhigh: { reasoning: { effort: xhigh } } }"
+  },
+  {
+   "id": "F49",
+   "says": "model-api-id",
+   "about": "qwen3.8-max/xhigh",
+   "value": "qwen/qwen3.8-max-0902",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id qwen3.8-max: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: qwen/qwen3.8-max-0902",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F50",
+   "says": "model-api-id",
+   "about": "qwen3.8-max/default",
+   "value": "qwen/qwen3.8-max-0902",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id qwen3.8-max: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: qwen/qwen3.8-max-0902",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F51",
+   "says": "effort-setting",
+   "about": "glm-5.3/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id glm-5.3: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning: { effort: low } }, default: { reasoning: { effort: high } }, xhigh: { same_as: default } }"
+  },
+  {
+   "id": "F52",
+   "says": "model-api-id",
+   "about": "glm-5.3/low",
+   "value": "z-ai/glm-5.3",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id glm-5.3: the OpenRouter model slug",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "model: z-ai/glm-5.3",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F53",
+   "says": "effort-setting",
+   "about": "claude-sonnet-5/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-sonnet-5: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F54",
+   "says": "effort-setting",
+   "about": "claude-haiku-5.5/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-haiku-5.5: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F55",
+   "says": "effort-setting",
+   "about": "claude-haiku-5.5/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-haiku-5.5: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F56",
+   "says": "effort-setting",
+   "about": "claude-sonnet-5/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-sonnet-5: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F57",
+   "says": "effort-setting",
+   "about": "claude-fable-5.1/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-fable-5.1: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F58",
+   "says": "effort-setting",
+   "about": "gpt-6-astra/low",
+   "value": "low",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-6-astra: the low tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  },
+  {
+   "id": "F59",
+   "says": "effort-setting",
+   "about": "claude-fable-5.1/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id claude-fable-5.1: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { effort: low }, default: {}, xhigh: { effort: xhigh } }"
+  },
+  {
+   "id": "F60",
+   "says": "effort-setting",
+   "about": "gpt-6-astra/xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "configs/models.yaml, entry id gpt-6-astra: the xhigh tier",
+   "file": "/work/.salvo14/hn/news-posts/src/ironbee-repo/configs/models.yaml",
+   "quote": "tiers: { low: { reasoning_effort: low }, default: {}, xhigh: { reasoning_effort: xhigh } }"
+  }
+ ]
+}
