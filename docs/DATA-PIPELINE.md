@@ -359,3 +359,7 @@ Decided by the maintainer during the reviews:
 - **Run before shutdown** (26 Oct): a closed model's run with no stated end lies before its maker-API ids stopped
   serving it (every such id ended): the default upper bound is capped there (rule `run-before-shutdown`, basis
   `shutdown`); open weights are not capped.
+- **LMArena bare names** (27 Oct, the maintainer): a model name without a setting on LMArena's boards is a call with no
+  reasoning parameter (Search Arena post of 14 Apr 2025: "By default, we use each provider's standard API settings";
+  FastChat's api_provider.py sends none), extended to the 2026 boards: the maker's documented default at the run date.
+  chinese-llm-benchmark: the board's own catalogue (nonelinear.com) states each model's default setting.
