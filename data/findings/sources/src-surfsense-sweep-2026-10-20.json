@@ -1,0 +1,208 @@
+{
+ "id": "src-surfsense-sweep-2026-10-20",
+ "publisher": "surfsense-sweep",
+ "urls": [
+  "https://github.com/MODSetter/SurfSense"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/MODSetter/SurfSense/main/surfsense_local/backend/scripts/capability_list/sweep/openrouter-screen-v1.json",
+   "captured": "2026-10-20T10:28:22Z",
+   "note": "manifest (generated 2026-10-08T06:30:27Z, date 2026-10-08) and runs/2026-10-07-screen/attempts.jsonl fetched by salvo hk qwen3.5-plus-0420 on 20 Oct 2026 (file mtimes 10:28 UTC); the live manifest has grown since (247,457 bytes against 241,7xx saved)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/MODSetter/SurfSense/main/surfsense_local/backend/tests/live/sweep/attempt.py",
+   "captured": "2026-10-27T05:27:23Z",
+   "note": "sweep code (sweep_input.py, sweep_rows.py, verdict.py, tests/live/sweep/attempt.py) fetched from main by this converter on 27 Oct 2026, used only to read what the manifest and attempts fields mean"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/hk/qwen3.5-plus-0420/src/surfsense-openrouter-screen.json": "bc51f2b6d436f303be34aeff5536dd075e1b0d689eac031ceb9060b26c82c9af",
+  "/work/.salvo14/hk/qwen3.5-plus-0420/src/surfsense-attempts.jsonl": "57b793f32df3fc8fcac2d2ce3fc398bc49b1f008f134e75fa0a38bdfb70a7196",
+  "/work/.salvo14/mig/convert-surfsense-sweep/evidence/cells.csv": "93c39ba6c77f505aad2c87d57d53c54b82bbc377eb6928643f87a18de4fba03c",
+  "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/scripts_capability_list_sweep_input.py": "6f58ad3a66a27fc71cd0cc0c36987c2c53c1298169f22ecd8e333a1b452810ef",
+  "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py": "145e6cec81cd993b84bc60f757f1d65d74dddbf5af68ad8a8322101e988000c3",
+  "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/scripts_capability_list_verdict.py": "6d91dc4861307f3fea22efec1fe3d53a3c5edb0ee8e03061455ec7fc6d51e43d",
+  "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/scripts_capability_list_sweep_rows.py": "3b1bf3b34ce8b97d1b455734435514039cd36d5a72dc067b9b2edf80badeaa6b"
+ },
+ "harvested_at": "2026-10-20T10:28:22Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/cells.csv",
+   "from": "/work/.salvo14/hk/qwen3.5-plus-0420/src/surfsense-openrouter-screen.json",
+   "tool": "convert.py: one row per (model, case) of the manifest with a verdict pass or fail (models[].smoke / pdf_brief / board_pack); counted_run = models[].runs[case]; score_counts = '1 of 1' for pass, '0 of 1' for fail (the verdict is the outcome of the one counted run: sweep code attempts 'passed' and 'failed' are the model's); counted_attempt_outcome, cost_usd and cost_reported = the attempts.jsonl line whose run_folder is counted_run (empty when that line is not in the saved attempts.jsonl); served_by and measured_on from the model record"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/cells.csv",
+   "from": "/work/.salvo14/hk/qwen3.5-plus-0420/src/surfsense-attempts.jsonl",
+   "tool": "convert.py: the attempts.jsonl line (fields outcome, cost, reported, served_by) whose run_folder equals the manifest's counted run (see the first extraction)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/cells.csv",
+   "where": "all rows",
+   "format": "csv",
+   "row_key": "cell",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "openrouter"
+    },
+    "case": "note",
+    "verdict": "note",
+    "score_counts": {
+     "says": "score",
+     "term": "pass-verdict%",
+     "scale": "counts"
+    },
+    "counted_run": "note",
+    "counted_attempt_outcome": "note",
+    "cost_usd": "cost",
+    "cost_reported": "note",
+    "served_by": "note",
+    "measured_on": "run-end"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "unit",
+   "value": "one attempt",
+   "term": "per-run",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py",
+   "where": "tests/live/sweep/attempt.py line 39: the Attempt record (one attempt at a (model, case)) holds the cost",
+   "quote": "What one attempt at a (model, case) came to"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "cost-basis",
+   "value": "OpenRouter's own bill",
+   "term": "router-billed",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py",
+   "where": "tests/live/sweep/attempt.py line 6: comment on Attempt.cost; cost_reported true = the bill, false = the ledger's",
+   "quote": "OpenRouter's own bill when every request carried one"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-method",
+   "value": "OpenRouter's own bill",
+   "term": "router-invoice",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py",
+   "where": "tests/live/sweep/attempt.py: same comment on Attempt.cost",
+   "quote": "OpenRouter's own bill when every request carried one"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "currency",
+   "value": "dollars",
+   "term": "USD",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py",
+   "where": "tests/live/sweep/attempt.py line 161: ledger_dollars() reads the attempt's cost in dollars (the cost field of Attempt)",
+   "quote": "return float(ledger.get(\"dollars\") or 0.0)"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "route",
+   "value": "openrouter",
+   "term": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/scripts_capability_list_sweep_rows.py",
+   "where": "scripts/capability_list/sweep_rows.py line 19: PROVIDER of the sweep rows",
+   "quote": "PROVIDER = \"openrouter\""
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "harness",
+   "value": "What one attempt at a (model, case) came to",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py",
+   "where": "tests/live/sweep/attempt.py module docstring: what one attempt at a (model, case) came to, read from its run folder",
+   "quote": "What one attempt at a (model, case) came to"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "note",
+   "value": "`passed` and `failed` are the model's.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py",
+   "where": "tests/live/sweep/attempt.py module docstring",
+   "quote": "`passed` and `failed` are the model's."
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "note",
+   "value": "The day the model's last run ended.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/scripts_capability_list_sweep_input.py",
+   "where": "scripts/capability_list/sweep_input.py line 52: SweptModel.measured_on",
+   "quote": "The day the model's last run ended."
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "note",
+   "value": "\"smoke\": \"pass\", \"pdf_brief\": \"pass\", \"board_pack\": \"fail\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/scripts_capability_list_sweep_input.py",
+   "where": "scripts/capability_list/sweep_input.py module docstring: the manifest's per-model record",
+   "quote": "\"smoke\": \"pass\", \"pdf_brief\": \"pass\", \"board_pack\": \"fail\""
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "note",
+   "value": "after the smoke check",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/scripts_capability_list_sweep_rows.py",
+   "where": "scripts/capability_list/sweep_rows.py line 17",
+   "quote": "after the smoke check"
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "says": "metric-definition",
+   "value": "`passed` and `failed` are the model's.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-surfsense-sweep/evidence/code/tests_live_sweep_attempt.py",
+   "where": "tests/live/sweep/attempt.py module docstring: outcomes passed / failed are the model's",
+   "quote": "`passed` and `failed` are the model's."
+  }
+ ]
+}

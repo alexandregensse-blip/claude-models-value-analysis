@@ -1,0 +1,722 @@
+{
+ "id": "src-github-kernelbench-2026-10-18",
+ "publisher": "github-kernelbench",
+ "urls": [
+  "https://github.com/Infatoshi/kernelbench.com",
+  "https://kernelbench.com"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "71f7c3dbd530c3ed7eaac8070b7def71d9bfd18f",
+   "captured": "2026-10-18T20:03:21Z",
+   "url": "https://github.com/Infatoshi/kernelbench.com/commit/71f7c3dbd530c3ed7eaac8070b7def71d9bfd18f",
+   "note": "DeepSeek V4.1 Flash (1017) post charts: CUDA per-problem vs the September checkpoint, Mega...; the saved checkout (arb/apidefault open39 clone) is at this commit and benchmarks/cuda/results/leaderboard.json, benchmarks/hard/results/leaderboard.json and public/data/mega/results.csv are byte-identical to the salvo gt t8 copies saved on 20 Oct (also hn news-boards2, 21 Oct)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://github.com/Infatoshi/kernelbench.com",
+   "captured": "2026-10-27T05:52:30Z",
+   "note": "salvo gt t8 copies of the three data files (sha256 as listed), 20 Oct 2026"
+  }
+ ],
+ "commit": "71f7c3dbd530c3ed7eaac8070b7def71d9bfd18f",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/benchmarks_cuda_results_leaderboard.json": "b2fb5a3e264ba15798fa45c321f1f238a31300e8474b8436ff97439631fdc265",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/benchmarks_hard_results_leaderboard.json": "ba62cbfcdc2ef977ee98bbceec345d051f313ba70725279ad9479101c2c0d2bc",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/public_data_mega_results.csv": "4457eb98834459b866e257de664354ac196f31b375b67838f18e42e523ecc362",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md": "384275c3ff79dab40e975c97b6cdd6d094382f33dcfb2fa1917b5626e444c661",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/hard_AGENTS.md": "005f552510f2940ac94af540c4a817b4f7c90dfd54bbe414f062003c238332ab",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/README.md": "51e454e413d7825bd92f1c08fa4ae930606e8050274f811b9527468c8f23407f",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/kb-runs.csv": "12cab3c21c8ec4d9263a9b876c1caff36fb4cae2387619c7193a3b1cc58a495c",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode.yaml": "1a853fa32bff3dae35fcca8438f1de0a31ae7059015317b70be3914834ade671",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode.yaml": "e37c57e77ab9f9ceb3c7fb6271fcc4d98ad8ff0a81a4e23fc6c960e9759679af",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode.yaml": "51a66ba1c921f2d138a9474961361e8a290f34bcc9d8b7241e0dfda163293069",
+  "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode.yaml": "b723d9b8b4b06abafa1c3890f7f80254ffb3584d3120a5640de08a7f2a850c0b"
+ },
+ "harvested_at": "2026-10-27T05:52:30Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/kb-runs.csv",
+   "from": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/benchmarks_cuda_results_leaderboard.json",
+   "tool": "convert.py: one row per (model, problem) of models[].results in the cuda leaderboard.json (label, harness, model, effort of the model entry; run_id, correct, peak_fraction as value, elapsed_seconds, output_tokens, annotation_verdict of the result); rows with a null peak_fraction are left out (see the report)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/kb-runs.csv",
+   "from": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/benchmarks_hard_results_leaderboard.json",
+   "tool": "convert.py: the same for the hard leaderboard.json"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/kb-runs.csv",
+   "from": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/public_data_mega_results.csv",
+   "tool": "convert.py: rows of the mega results.csv whose gpu is 'RTX PRO 6000 Blackwell' (the B200 and H100 rows belong to boards the registry holds no setup for); value = the score column; rows with an empty score (correct false) are left out"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/kb-runs.csv",
+   "where": "all rows",
+   "format": "csv",
+   "row_key": "run_id",
+   "columns": {
+    "run_id": "note",
+    "board": "note",
+    "problem": "note",
+    "setup": "note",
+    "harness": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "model_or": {
+     "says": "model-api-id",
+     "namespace": "openrouter"
+    },
+    "effort": "effort-setting",
+    "label": "note",
+    "correct": "note",
+    "value": {
+     "says": "score",
+     "term": "peak-fraction",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "speedup": {
+     "says": "score",
+     "term": "speedup-x",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "metric": "note",
+    "elapsed_s": "note",
+    "output_tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "annotation": "note",
+    "gpu": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "run-date-convention",
+   "value": "outputs/runs/<ts>_<harness>_<model>_<problem>/",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/hard_AGENTS.md",
+   "pattern": "^(?P<date>\\d{8})_\\d{6}_",
+   "where": "benchmarks/hard/AGENTS.md line 79: a run's directory is <ts>_<harness>_<model>_<problem> (example in line 110: 20260428_040539_claude_claude-opus-4-7_01_fp8_gemm); run_id = the directory name",
+   "quote": "outputs/runs/<ts>_<harness>_<model>_<problem>/"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/hard_AGENTS.md",
+   "where": "benchmarks/hard/AGENTS.md line 116: the run annotation's effort field: the effort tier, empty when the run used the default (no effort override); the leaderboard.json effort field is the same field",
+   "quote": "\"\" if default"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "note",
+   "value": "Always container mode",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 57: Route notes",
+   "quote": "Always container mode"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "harness",
+   "value": "agy",
+   "quote": "`agy`",
+   "term": "antigravity-cli",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 41: Harness routes table, row `agy`"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "harness",
+   "value": "claude",
+   "quote": "`claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 23: Harness routes table, row `claude`"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "route",
+   "value": "Native Claude Code to Anthropic",
+   "quote": "Native Claude Code to Anthropic",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 23: Harness routes table, row `claude`"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "harness",
+   "value": "codex",
+   "quote": "`codex`",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 37: Harness routes table, row `codex`"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "harness",
+   "value": "grok",
+   "quote": "`grok`",
+   "term": "grok-cli",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 44: Harness routes table, row `grok`"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "harness",
+   "value": "kinetic-claude",
+   "quote": "`kinetic-claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 28: Harness routes table, row `kinetic-claude`"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to `KINETIC_ANTHROPIC_BASE_URL`",
+   "quote": "Claude Code to `KINETIC_ANTHROPIC_BASE_URL`",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 28: Harness routes table, row `kinetic-claude`"
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "says": "harness",
+   "value": "or-fable",
+   "quote": "`or-fable`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 29: Harness routes table, row `or-fable`"
+  },
+  {
+   "id": "F12",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to OpenRouter's Anthropic API",
+   "quote": "Claude Code to OpenRouter's Anthropic API",
+   "term": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 29: Harness routes table, row `or-fable`"
+  },
+  {
+   "id": "F13",
+   "about": null,
+   "says": "harness",
+   "value": "deepseek-claude",
+   "quote": "`deepseek-claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 35: Harness routes table, row `deepseek-claude`"
+  },
+  {
+   "id": "F14",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to `DEEPSEEK_ANTHROPIC_BASE_URL`",
+   "quote": "Claude Code to `DEEPSEEK_ANTHROPIC_BASE_URL`",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 35: Harness routes table, row `deepseek-claude`"
+  },
+  {
+   "id": "F15",
+   "about": null,
+   "says": "harness",
+   "value": "muse",
+   "quote": "`muse`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 42: Harness routes table, row `muse`"
+  },
+  {
+   "id": "F16",
+   "about": null,
+   "says": "harness",
+   "value": "or-opus",
+   "quote": "`or-opus`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 29: Harness routes table, row `or-opus`"
+  },
+  {
+   "id": "F17",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to OpenRouter's Anthropic API",
+   "quote": "Claude Code to OpenRouter's Anthropic API",
+   "term": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 29: Harness routes table, row `or-opus`"
+  },
+  {
+   "id": "F18",
+   "about": null,
+   "says": "harness",
+   "value": "zai-claude",
+   "quote": "`zai-claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 25: Harness routes table, row `zai-claude`"
+  },
+  {
+   "id": "F19",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to Z.ai Anthropic API",
+   "quote": "Claude Code to Z.ai Anthropic API",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 25: Harness routes table, row `zai-claude`"
+  },
+  {
+   "id": "F20",
+   "about": null,
+   "says": "harness",
+   "value": "longcat-claude",
+   "quote": "`longcat-claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 30: Harness routes table, row `longcat-claude`"
+  },
+  {
+   "id": "F21",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to `LONGCAT_ANTHROPIC_BASE_URL`",
+   "quote": "Claude Code to `LONGCAT_ANTHROPIC_BASE_URL`",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 30: Harness routes table, row `longcat-claude`"
+  },
+  {
+   "id": "F22",
+   "about": null,
+   "says": "harness",
+   "value": "minimax-claude",
+   "quote": "`minimax-claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 26: Harness routes table, row `minimax-claude`"
+  },
+  {
+   "id": "F23",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to `MINIMAX_ANTHROPIC_BASE_URL`",
+   "quote": "Claude Code to `MINIMAX_ANTHROPIC_BASE_URL`",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 26: Harness routes table, row `minimax-claude`"
+  },
+  {
+   "id": "F24",
+   "about": null,
+   "says": "harness",
+   "value": "qwen-claude",
+   "quote": "`qwen-claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 36: Harness routes table, row `qwen-claude`"
+  },
+  {
+   "id": "F25",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to `QWEN_ANTHROPIC_BASE_URL`",
+   "quote": "Claude Code to `QWEN_ANTHROPIC_BASE_URL`",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 36: Harness routes table, row `qwen-claude`"
+  },
+  {
+   "id": "F26",
+   "about": "20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode",
+   "says": "cost",
+   "value": "39.544114",
+   "term": "USD",
+   "quote": "cost_usd_real: 39.544114",
+   "where": "benchmarks/mega/results/annotations/20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode.yaml line 9: the run's annotation (cost of the run, cost_usd_real)",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   },
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F27",
+   "about": "20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode",
+   "says": "currency",
+   "value": "costBasis \"list\"",
+   "term": "USD",
+   "quote": "costBasis \"list\"",
+   "where": "same file line 9: dollars",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F28",
+   "about": "20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode",
+   "says": "unit",
+   "value": "cost_usd_real: 39.544114",
+   "term": "per-task",
+   "quote": "cost_usd_real: 39.544114",
+   "where": "same file line 9: the annotation belongs to this one run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F29",
+   "about": "20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode",
+   "says": "cost-method",
+   "value": "result event total_cost_usd",
+   "term": "cli-total",
+   "quote": "result event total_cost_usd",
+   "where": "same file line 9",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F30",
+   "about": "20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode",
+   "says": "cost-basis",
+   "value": "costBasis \"list\"",
+   "term": "list-estimate",
+   "quote": "costBasis \"list\"",
+   "where": "same file line 9",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260922_121505_claude_claude-opus-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F31",
+   "about": "20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode",
+   "says": "cost",
+   "value": "56.48",
+   "term": "USD",
+   "quote": "cost_usd_real: 56.48",
+   "where": "benchmarks/mega/results/annotations/20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode.yaml line 9: the run's annotation (cost of the run, cost_usd_real)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F32",
+   "about": "20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode",
+   "says": "currency",
+   "value": "list price",
+   "term": "USD",
+   "quote": "list price",
+   "where": "same file line 9: dollars",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F33",
+   "about": "20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode",
+   "says": "unit",
+   "value": "cost_usd_real: 56.48",
+   "term": "per-task",
+   "quote": "cost_usd_real: 56.48",
+   "where": "same file line 9: the annotation belongs to this one run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F34",
+   "about": "20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode",
+   "says": "cost-method",
+   "value": "result event total_cost_usd",
+   "term": "cli-total",
+   "quote": "result event total_cost_usd",
+   "where": "same file line 9",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F35",
+   "about": "20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode",
+   "says": "cost-basis",
+   "value": "list price",
+   "term": "list-estimate",
+   "quote": "list price",
+   "where": "same file line 9",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260928_122208_claude_claude-sonnet-5-5_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F36",
+   "about": "20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode",
+   "says": "cost",
+   "value": "41.74",
+   "term": "USD",
+   "quote": "OpenRouter cost $41.74",
+   "where": "benchmarks/mega/results/annotations/20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode.yaml line 60: the run's annotation (cost of the run, cost_usd_real)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F37",
+   "about": "20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode",
+   "says": "currency",
+   "value": "OpenRouter cost $",
+   "term": "USD",
+   "quote": "OpenRouter cost $",
+   "where": "same file line 60: dollars",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F38",
+   "about": "20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode",
+   "says": "unit",
+   "value": "OpenRouter cost $41.74",
+   "term": "per-task",
+   "quote": "OpenRouter cost $41.74",
+   "where": "same file line 60: the annotation belongs to this one run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F39",
+   "about": "20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode",
+   "says": "cost-method",
+   "value": "OpenRouter cost $41.74",
+   "term": "router-invoice",
+   "quote": "OpenRouter cost $41.74",
+   "where": "same file line 60",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F40",
+   "about": "20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode",
+   "says": "cost-basis",
+   "value": "OpenRouter cost $",
+   "term": "router-billed",
+   "quote": "OpenRouter cost $",
+   "where": "same file line 60",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260903_215119_or-fable_anthropic_claude-fable-5-1_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F41",
+   "about": "20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode",
+   "says": "cost",
+   "value": "1.74",
+   "term": "USD",
+   "quote": "cost_usd_real: 1.74",
+   "where": "benchmarks/mega/results/annotations/20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode.yaml line 9: the run's annotation (cost of the run, cost_usd_real)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F42",
+   "about": "20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode",
+   "says": "currency",
+   "value": "DeepSeek list price",
+   "term": "USD",
+   "quote": "DeepSeek list price",
+   "where": "same file line 9: dollars",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F43",
+   "about": "20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode",
+   "says": "unit",
+   "value": "cost_usd_real: 1.74",
+   "term": "per-task",
+   "quote": "cost_usd_real: 1.74",
+   "where": "same file line 9: the annotation belongs to this one run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F44",
+   "about": "20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode",
+   "says": "cost-method",
+   "value": "DeepSeek list price on result.json usage",
+   "term": "tokens×list",
+   "quote": "DeepSeek list price on result.json usage",
+   "where": "same file line 9",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F45",
+   "about": "20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode",
+   "says": "cost-basis",
+   "value": "DeepSeek list price",
+   "term": "list-estimate",
+   "quote": "DeepSeek list price",
+   "where": "same file line 9",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/annotations/20260910_084202_deepseek-claude_deepseek-flash_02_kimi_linear_decode.yaml"
+  },
+  {
+   "id": "F46",
+   "about": null,
+   "says": "harness",
+   "value": "kimi-claude",
+   "quote": "`kimi-claude`",
+   "term": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 27: Harness routes table, row `kimi-claude`"
+  },
+  {
+   "id": "F47",
+   "about": null,
+   "says": "route",
+   "value": "Claude Code to `KIMI_ANTHROPIC_BASE_URL`",
+   "quote": "Claude Code to `KIMI_ANTHROPIC_BASE_URL`",
+   "term": "maker-api",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 27: Harness routes table, row `kimi-claude`"
+  },
+  {
+   "id": "F48",
+   "about": null,
+   "says": "harness",
+   "value": "cursor",
+   "quote": "`cursor`",
+   "term": "cursor-cli",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 43: Harness routes table, row `cursor`"
+  },
+  {
+   "id": "F49",
+   "about": null,
+   "says": "harness",
+   "value": "gemini",
+   "quote": "`gemini`",
+   "term": "gemini-cli",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-kernelbench/evidence/repo/kbtool_AGENTS.md",
+   "where": "kbtool/AGENTS.md line 40: Harness routes table, row `gemini`"
+  }
+ ]
+}

@@ -1,0 +1,241 @@
+{
+ "id": "src-github-merc-bench-2026-10-14",
+ "publisher": "github-merc-bench",
+ "urls": [
+  "https://github.com/sirneb/merc-bench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "998e4e94d2",
+   "captured": "2026-10-14T03:08:03Z",
+   "url": "https://github.com/sirneb/merc-bench/commit/998e4e94d2",
+   "note": "Add Haiku 5.5 to the grid (150 runs), score declined answers, bill capped runs (#9): the head of the repository on 27 Oct (commits API); results/scores.csv fetched from raw.githubusercontent.com at this commit on 27 Oct 2026"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://github.com/sirneb/merc-bench/blob/998e4e94/results/scores.csv",
+   "captured": "2026-10-15T15:41:44Z",
+   "note": "salvo s23 b4 copy (src/merc/scores.csv, 15 Oct), byte-identical to the 27 Oct copy; the 5e09655bf1 file (4 Oct, saved s19 c3) holds the same 1,119 rows except 3 costs"
+  }
+ ],
+ "commit": "998e4e94d2",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/results_scores.csv": "bf69c47cef9f28a46f38365fba8df289ee2b8a2ca74ce39419970a69b189f392",
+  "/work/.salvo14/s23/b4/src/merc/scores.csv": "bf69c47cef9f28a46f38365fba8df289ee2b8a2ca74ce39419970a69b189f392",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/configs.csv": "b62bf994242a4f2897b563c43ad51d70f7d7480cf359248ebd567309295ab32a",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/runs.csv": "67023e94586551be6a24167cb517b5b57e903cc1d2a2568797f328135a423234",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/README.md": "7002c5a06d80ddd4be78ee77bce32a3deb59e903676c2c31179eacdb9a882621",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_results-format.md": "b38e59812869bb5bf30bab0e329c14c288a90f653bf7089aa2d0dcf449a8585c",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_methodology.md": "467217b7289b76590eaf2487a970c22f1c524f87448a822895a5716940c0ae1b",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/runner_run.py": "5ed3809e8e79e0669ec885322e853a0013cb1a6e641988f6b7aa2fd52ca034f4",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/runner_aggregate.py": "ef801ac7e464508b44c0a710f83eb042f1d73b7f11928450dea2c8f09ef6e689",
+  "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/report_config.json": "b86ea78d166a02a290e42046f0a0e224a4c0a9345c0df8d7005b040befaf0661"
+ },
+ "harvested_at": "2026-10-14T03:08:03Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/runs.csv",
+   "from": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/results_scores.csv",
+   "tool": "agg.py runs_of: one row per (setup, family, effort, sample): for merc-t13 / -t14 / -t15 the one task's row of scores.csv; for merc-core10 the sum over the ten tasks T1 T2 T3 T4 T5A T6 T7 T8 T9 T10 of the same sample (only samples that have all ten): points = sum of score, points_total = sum of total, score_pct = 100 x points / points_total, cost_usd = sum of cost_usd (empty when a task run has none), output_tokens = sum, first/last date = min/max of the date column"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/configs.csv",
+   "from": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/results_scores.csv",
+   "tool": "convert.py: one row per (setup, family, effort): n_runs = number of samples, mean_score_pct = mean of the runs' score_pct (all samples of the config, selftest and cc3 included, as the repo's aggregator does), mean_cost_usd = mean of the runs' cost (empty when any run has no cost or a task run is cost_estimated), mean_output_tokens, first/last date, model_id = report/config.json family -> model_id, harness = scores.csv harness"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/configs.csv",
+   "where": "all rows",
+   "format": "csv",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "setup": "note",
+    "family": "note",
+    "effort": "effort-setting",
+    "model_id": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "n_runs": "note",
+    "samples": "note",
+    "mean_score_pct": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "mean_cost_usd": {
+     "says": "cost",
+     "term": "USD",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "mean_output_tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "first_date": "run-start",
+    "last_date": "run-end",
+    "cost_estimated_task_runs": "note",
+    "harness": {
+     "says": "harness",
+     "term": "claude-code"
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/runs.csv",
+   "where": "all rows",
+   "format": "csv",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "score_pct": {
+     "says": "run-score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "points": "note",
+    "points_total": "note",
+    "cost_usd": "note",
+    "output_tokens": "note",
+    "first_date": "note",
+    "last_date": "note",
+    "files": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_methodology.md",
+   "where": "docs/methodology.md line 40: Measurement, Cost at standard list rates (USD/MTok)",
+   "quote": "list rates (USD/MTok)"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "cost-basis",
+   "value": "list rates",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_methodology.md",
+   "where": "docs/methodology.md lines 39-40: Measurement, Cost = tokens priced at standard list rates, from per-request logs",
+   "quote": "list rates (USD/MTok), from per-request logs"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-method",
+   "value": "priced at standard",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_methodology.md",
+   "where": "docs/methodology.md lines 39-40: Measurement, Cost = input + cache-write + cache-read + output tokens priced at standard list rates (USD/MTok), from per-request logs; results-format.md: the aggregator recomputes cost_usd from usage",
+   "quote": "output tokens priced at standard"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "unit",
+   "value": "full-sweep samples",
+   "term": "per-suite",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_methodology.md",
+   "where": "docs/methodology.md line 18: Replication, a sample is a full sweep (a pass over the tasks); merc-core10 sums the ten core tasks of one sample",
+   "quote": "full-sweep samples"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "unit",
+   "value": "One JSON file per run",
+   "term": "per-task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_results-format.md",
+   "where": "docs/results-format.md line 3: one record = one run of one task, with its own cost_usd",
+   "quote": "One JSON file per run"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "note",
+   "value": "Runs from 2026-09-27",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/README.md",
+   "where": "README.md line 111: Provenance; earlier runs carry ~20k extra harness system-prompt tokens per call",
+   "quote": "Runs from 2026-09-27"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "note",
+   "value": "a null answer (score 0)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/README.md",
+   "where": "README.md line 114: Provenance",
+   "quote": "a null answer (score 0)"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "aggregation",
+   "value": "samples of the same config are aggregated",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_results-format.md",
+   "where": "docs/results-format.md line 41: the repo aggregates every sample of a config (min-max ranges; the mean is taken over them)",
+   "quote": "samples of the same config are aggregated"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "metric-definition",
+   "value": "The original ten core tasks (T1–T10",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-merc-bench/evidence/repo/docs_methodology.md",
+   "where": "docs/methodology.md line 22: the ten core tasks (E and T5B are supplementary); merc-core10 = their points won / points possible per sample (T1 T2 T3 T4 T5A T6 T7 T8 T9 T10, 98 points), averaged over the samples",
+   "quote": "The original ten core tasks (T1–T10"
+  }
+ ]
+}

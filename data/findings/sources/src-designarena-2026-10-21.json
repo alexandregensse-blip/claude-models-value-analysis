@@ -1,0 +1,127 @@
+{
+ "id": "src-designarena-2026-10-21",
+ "publisher": "designarena",
+ "urls": [
+  "https://www.designarena.ai/leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://www.designarena.ai/leaderboard",
+   "captured": "2026-10-21T15:31:25Z",
+   "note": "leaderboard page saved hn/news-boards2/src/designarena.html (file mtime); the boards' lastUpdateTime is 2026-10-21T14:08:08.410136+00:00 (allcategories) and 2026-10-21T14:08:16.091107+00:00 (fullstack)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/hn/news-boards2/src/designarena.html": "c37f63d4116a038626f9a8e6728f9301206c49a04f5324ab7a96019316fa8cf1",
+  "/work/.salvo14/mig/convert-designarena/evidence/rows-1.csv": "64e8ca9eb9cf7ab1d921a7a97d36c271859a91798d0f8b296ce4b85bfc0e2ac2"
+ },
+ "harvested_at": "2026-10-21T15:31:25Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": "src-designarena-2026-10-18",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-designarena/evidence/rows-1.csv",
+   "from": "/work/.salvo14/hn/news-boards2/src/designarena.html",
+   "tool": "extract.py boards(): the Next.js flight string of the page that holds \"initialBoards\" is JSON-decoded and the object after \"initialBoards\": parsed; one row per modelStats entry of the two boards (allcategories, fullstack): model slug, elo, wins, losses, total, winRate, btStdErr, isNew; updated = the board's metadata.lastUpdateTime, total_votes = the board's totalVotes"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-designarena/evidence/rows-1.csv",
+   "where": "all rows",
+   "format": "csv",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "board": "note",
+    "setup": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "wins": "note",
+    "losses": "note",
+    "total": "note",
+    "win_rate": "note",
+    "bt_std_err": "note",
+    "is_new": "note",
+    "updated": "note",
+    "total_votes": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "metric-definition",
+   "value": "Ratings are calculated using the standard Bradley-Terry model",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/hn/news-boards2/src/designarena.html",
+   "where": "the leaderboard page's text bundle (eloDescription): 'Elo Rating: A skill-based rating system starting at 1200. Ratings are calculated using the standard Bradley-Terry model.'",
+   "quote": "Ratings are calculated using the standard Bradley-Terry model"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "headline-metric",
+   "value": "Each AI model is ranked using the Bradley Terry rating system (denoted as Elo rating)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/hn/news-boards2/src/designarena.html",
+   "where": "the leaderboard page's text bundle (modelPerformanceDescription): the models are ranked by the Elo rating",
+   "quote": "Each AI model is ranked using the Bradley Terry rating system (denoted as Elo rating)"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "note",
+   "value": "Models use their latest available versions and are configured with per-model temperature settings where supported",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/hn/news-boards2/src/designarena.html",
+   "where": "the page's text bundle (technicalStandardsDescription1): how models are configured (temperature only; no reasoning-effort statement on the page)",
+   "quote": "Models use their latest available versions and are configured with per-model temperature settings where supported"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "note",
+   "value": "Models with limited evaluations are marked as preliminary until reaching sufficient pairwise comparisons",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/hn/news-boards2/src/designarena.html",
+   "where": "the page's text bundle (technicalStandardsDescription1): preliminary models",
+   "quote": "Models with limited evaluations are marked as preliminary until reaching sufficient pairwise comparisons"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "harness",
+   "value": "head-to-head design matchups",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/hn/news-boards2/src/designarena.html",
+   "where": "the page's text bundle (modelPerformanceDescription): ranked 'based on its performance in head-to-head design matchups'",
+   "quote": "head-to-head design matchups"
+  }
+ ]
+}
