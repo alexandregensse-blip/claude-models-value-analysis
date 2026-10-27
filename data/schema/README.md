@@ -212,3 +212,7 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
    so `value_seen_in` lists only 855ee80 and 222d955.
 7. **Fable chart, other models:** Fable 5 (84.2 %) and Opus 5 (83.0 %) at max are printed on the same page. Adding them
    gives the max-effort couples a group of 3.
+
+## Added on 27 Oct
+
+- the source field `decimal_mark` (a decimal comma, data/BUILD.md); counts scores in the source's language (validate.py COUNTS).

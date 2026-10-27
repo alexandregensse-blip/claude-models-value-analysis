@@ -768,7 +768,8 @@ def column_says(spec):
     return [says] if isinstance(says, str) else list(says)
 
 
-COUNTS = re.compile(r"\s*([0-9][0-9,]*)\s*(?:/|of|out of)\s*([0-9][0-9,]*)\s*", re.I)
+# "k of N" in the source's language too: из (ru), von (de), sur (fr), de (es, pt), su / di (it) (27 Oct)
+COUNTS = re.compile(r"\s*([0-9][0-9,]*)\s*(?:/|of|out of|из|von|sur|de|su|di)\s*([0-9][0-9,]*)\s*", re.I)
 
 
 def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):

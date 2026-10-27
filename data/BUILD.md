@@ -139,6 +139,9 @@ The fit tables carry these confound flags:
     `not-established:contradictory` (`out:contradictory` on the cost axis);
   - no card, a card in another currency, or no tokens → accepted as written;
   - `fields.cost.reproduction` says which case applied.
+- **A decimal comma** (27 Oct). A source whose numbers use a decimal comma carries `decimal_mark: ","`: the build reads
+  '12,5' as 12.5, '1.234,5' and '1.234' as thousands; the quotes keep the printed value. A counts score may write
+  "k of N" in the source's language (из, von, sur, de, su, di).
 - **A run date from an id convention** counts only when the source documents the convention. The fact
   `run-date-convention` is written, quoted, and carries a `pattern` with a named group `date` (YYYYMMDD). Cited in
   `run_date`, it reads the measure's row key (the value cell's row) or its `run-id` facts, and gives a stated run date

@@ -1358,6 +1358,26 @@ def ext_restated_from_providers():
     eq("restated-from:Anthropic" in r.rows("fit-quality.csv", model="ma")[0]["confound"], True, "the model's maker")
 
 
+@test
+def ext_decimal_comma_and_counts_words():
+    # a source with decimal_mark "," reads '12,5' as 12.5 and '1.234,5' as 1234.5; 'k из N' is a counts score (27 Oct)
+    sc = base()
+    s = sc.source("habr")
+    sc.sources[s]["decimal_mark"] = ","
+    m1 = sc.m(s, model="ma", effort=[LOW], score="12,5%")
+    m2 = sc.m(s, model="mb", effort=[LOW], score="45 из 60", scale="counts")
+    t = sc.source("en")
+    m3 = sc.m(t, model="ma", effort=[HIGH], score="12,5%")
+    r = sc.run()
+    eq(r.rows("fit-quality.csv", model="ma", effort="low")[0]["score"], "12.5", "decimal comma")
+    eq(r.rows("fit-quality.csv", model="mb", group="s1")[0]["score"], "75", "из")
+    eq(r.q(m3) == "in" and r.rows("fit-quality.csv", model="ma", effort="high")[0]["score"] == "125", True,
+       "no decimal_mark: the comma is a thousands separator, as before")
+    import build as B
+    x = B.Fact(value="1.234,5"); B.Source("p", {"id": "x", "publisher": "p", "decimal_mark": ","}, None).decimal(x)
+    eq(x["value"], "1234.5", "thousands dot")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

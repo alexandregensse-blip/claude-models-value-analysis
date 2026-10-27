@@ -204,6 +204,9 @@ def kv_value(text):
 
 
 # ---------------------------------------------------------------- facts
+DECIMAL_COMMA = re.compile(r"[+-]?(?:\d{1,3}(?:[.\s\u00a0\u202f]\d{3})+(?:,\d+)?|\d+,\d+)\s?%?")
+
+
 class Fact(dict):
     """A cited fact or cell: ref, says (list), value, level, form, where, quote, term, scale, namespace, precision,
     about, file, column, chart, table."""
@@ -301,6 +304,13 @@ class Source:
         x["derived"] = dict(rule=x.rule, inputs=list(x.inputs), value=num_text(got))
         return None
 
+    def decimal(self, x):
+        """A source whose numbers use a decimal comma (`decimal_mark: ","`): '12,5' → '12.5', '1.234,5' → '1234.5', '1.234' → '1234'; a
+        counts value ('45 из 60') is left as written (27 Oct)."""
+        v = x.get("value")
+        if self.doc.get("decimal_mark") == "," and isinstance(v, str) and DECIMAL_COMMA.fullmatch(v.strip()):
+            x["value"] = re.sub(r"[.\s\u00a0\u202f]", "", v.strip()).replace(",", ".")
+
     def fact(self, ref, _seen=frozenset()):
         """(Fact, fault or None)."""
         if not ref.startswith("T"):
@@ -309,6 +319,7 @@ class Source:
                 return None, f"fact {ref} not found"
             x = Fact(f)
             x["ref"], x["says"] = ref, [f["says"]]
+            self.decimal(x)
             fault = "; ".join(self.fact_faults.get(ref, [])) or None
             if f["level"] == "computed" and not fault:
                 fault = self.derive(x, _seen)
@@ -339,6 +350,7 @@ class Source:
         x = Fact(ref=ref, says=says, value=cell, about=row, level=tb.get("level", "written"), form="data-file",
                  where=f"{tb['where']} / row {row} / column {col}", file=tb["file"], table=t, column=col,
                  precision=(spec.get("precision") if isinstance(spec, dict) else None) or tb.get("precision"))
+        self.decimal(x)
         if isinstance(spec, dict):
             for k in ("term", "scale", "namespace"):
                 if k in spec:
