@@ -1,0 +1,3129 @@
+{
+ "id": "src-anthropic-docs-cost-intelligence-2026-10-01",
+ "publisher": "anthropic",
+ "urls": [
+  "https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence",
+   "captured": "2026-10-01T02:45:17Z",
+   "note": "the docs page 'Optimizing for cost and intelligence' (Next.js HTML, 900 KB) and its chart images saved by salvo s18 a5 on 1 Oct 2026 (file mtimes 02:45); the images are served from https://platform.claude.com/docs/images/"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html": "3d18e42cf73932de8dca1165a16a39b761a34b0d6d20f284d643c73e802b95f3",
+  "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png": "b9ed70cf3b2a186ecebd93c6182bed1f114849a62ab5c7d32aabd124fce9cb68",
+  "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png": "c30dccb8bae41ca79509f3a75ec38d4b38c6d5fe677440cba25ca7e1d6d7f18e",
+  "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png": "d28be104e10dfcff739e37778cf759517ac0d54704c6f81513a4f1445d737c14",
+  "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png": "4a385387c03cef3bc09b99224b98b118910569cf543dcad35f84e70cd09b8b83",
+  "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-max-tokens-saving-opus-5-5.png": "97c6d402af16579afd385426d8372d0097750380ed3aa62c851e30b3e58e2e87"
+ },
+ "harvested_at": "2026-10-01T02:45:17Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "cost-basis",
+   "value": "priced as a customer's organization is metered",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, SWE-bench Pro subset paragraph (reference 3)",
+   "quote": "priced as a customer's organization is metered: each request's prior prompt as a cache read and its new tokens as a 5-minute cache write, from the runs' own usage records",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "cost-method",
+   "value": "from the runs' own usage records",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, SWE-bench Pro subset paragraph (reference 3)",
+   "quote": "priced as a customer's organization is metered: each request's prior prompt as a cache read and its new tokens as a 5-minute cache write, from the runs' own usage records",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "x axis of every panel, under the panel: axis title 'cost per task ($)'",
+   "quote": "$",
+   "term": "USD"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "unit",
+   "value": "cost per task",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "x axis of every panel, under the panel: axis title 'cost per task ($)'",
+   "quote": "cost per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "x axis title: axis title 'cost per task ($, as a customer is billed)'",
+   "quote": "$",
+   "term": "USD"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "unit",
+   "value": "cost per task",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "x axis title: axis title 'cost per task ($, as a customer is billed)'",
+   "quote": "cost per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "x axis title: axis title 'cost per attempt ($, as a customer is billed)'",
+   "quote": "$",
+   "term": "USD"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "unit",
+   "value": "cost per attempt",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "x axis title: axis title 'cost per attempt ($, as a customer is billed)'",
+   "quote": "cost per attempt",
+   "term": "per-attempt"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "x axis title: axis title 'all-in cost per episode ($)'",
+   "quote": "$",
+   "term": "USD"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "unit",
+   "value": "cost per episode",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "x axis title: axis title 'all-in cost per episode ($)'",
+   "quote": "cost per episode",
+   "term": "per-episode"
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "says": "cost-basis",
+   "value": "Every point priced as a customer is billed (5-minute prompt cache, current list prices)",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "footnote under the chart",
+   "quote": "Every point priced as a customer is billed (5-minute prompt cache, current list prices)"
+  },
+  {
+   "id": "F12",
+   "about": null,
+   "says": "cost-method",
+   "value": "Every point priced as a customer is billed (5-minute prompt cache, current list prices)",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "footnote under the chart",
+   "quote": "Every point priced as a customer is billed (5-minute prompt cache, current list prices)"
+  },
+  {
+   "id": "F13",
+   "about": null,
+   "says": "cost-basis",
+   "value": "priced as a customer is billed",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "footnote under the chart",
+   "quote": "priced as a customer is billed"
+  },
+  {
+   "id": "F14",
+   "about": null,
+   "says": "cost-method",
+   "value": "priced as a customer is billed",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "footnote under the chart",
+   "quote": "priced as a customer is billed"
+  },
+  {
+   "id": "F15",
+   "about": null,
+   "says": "cost-basis",
+   "value": "Every point priced as a customer is billed, at list prices",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "footnote under the chart",
+   "quote": "Every point priced as a customer is billed, at list prices"
+  },
+  {
+   "id": "F16",
+   "about": null,
+   "says": "cost-method",
+   "value": "Every point priced as a customer is billed, at list prices",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "footnote under the chart",
+   "quote": "Every point priced as a customer is billed, at list prices"
+  },
+  {
+   "id": "F17",
+   "about": null,
+   "says": "cost-basis",
+   "value": "Fable 5.1 at the launch card (cache reads $0.25); Sonnet legs priced at $2 and $10 per million tokens",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "footnote under the chart",
+   "quote": "Fable 5.1 at the launch card (cache reads $0.25); Sonnet legs priced at $2 and $10 per million tokens"
+  },
+  {
+   "id": "F18",
+   "about": null,
+   "says": "cost-method",
+   "value": "Fable 5.1 at the launch card (cache reads $0.25); Sonnet legs priced at $2 and $10 per million tokens",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "footnote under the chart",
+   "quote": "Fable 5.1 at the launch card (cache reads $0.25); Sonnet legs priced at $2 and $10 per million tokens"
+  },
+  {
+   "id": "F19",
+   "about": "Claude Opus 5.5",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "panel title 'SWE-bench Pro  (Claude Opus 5.5)', text box about x 670-1060, y 548-575 px",
+   "quote": "Claude Opus 5.5"
+  },
+  {
+   "id": "F20",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "87.4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task' (the 478-problem SWE-bench Pro subset); the chart read for the same point (low) is 87.4",
+   "quote": "At <code>low</code>, Opus 5.5 solved 87.4% for $0.12",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "point label 'low' beside the marker at px [724.0, 839.0] of the SWE-bench Pro panel",
+   "quote": "low"
+  },
+  {
+   "id": "F22",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "0.110",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "Claude Opus 5.5, point 'low': marker centre px [724.0, 839.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00301
+   }
+  },
+  {
+   "id": "F23",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "92.8",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task' (chart read for the same point: 92.8)",
+   "quote": "Opus 5.5 at its default, <code>medium</code>, matched Fable 5.1 at its default (92.8% against 92.3%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "medium (default)",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "point label 'medium (default)' beside the marker at px [774.0, 718.9] of the SWE-bench Pro panel",
+   "quote": "medium (default)"
+  },
+  {
+   "id": "F25",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "0.211",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "Claude Opus 5.5, point 'medium': marker centre px [774.0, 718.9] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00301
+   }
+  },
+  {
+   "id": "F26",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "95.3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Tune effort' (chart read: 95.3; the printed $0.29 equals the chart cost read)",
+   "quote": "against 95.3% for $0.29 running everything at <code>high</code>",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "point label 'high' beside the marker at px [813.8, 663.3] of the SWE-bench Pro panel",
+   "quote": "high"
+  },
+  {
+   "id": "F28",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "0.291",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "Claude Opus 5.5, point 'high': marker centre px [813.8, 663.3] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00301
+   }
+  },
+  {
+   "id": "F29",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "96.62",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "Claude Opus 5.5, point 'xhigh': marker centre px [1038.0, 633.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.06709
+   },
+   "term": "pass%",
+   "scale": "percent"
+  },
+  {
+   "id": "F30",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "point label 'xhigh' beside the marker at px [1038.0, 633.0] of the SWE-bench Pro panel",
+   "quote": "xhigh"
+  },
+  {
+   "id": "F31",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "0.741",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C15",
+   "where": "Claude Opus 5.5, point 'xhigh': marker centre px [1038.0, 633.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00301
+   }
+  },
+  {
+   "id": "F32",
+   "about": "Claude Fable 5.1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task'",
+   "quote": "Claude Fable 5.1 at <code>low</code> effort solved 88.6% of tasks for $0.54 per solved task"
+  },
+  {
+   "id": "F33",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "88.6",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, SWE-bench Pro subset paragraph (reference 3): 'an earlier set at low effort, run August 21, 2026' (same value in the page text)",
+   "quote": "an earlier set at <code>low</code> effort, run August 21, 2026, scored 88.6% unbudgeted at $0.48 per task",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3",
+   "quote": "an earlier set at <code>low</code> effort"
+  },
+  {
+   "id": "F35",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "0.48",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3: 'at $0.48 per task'",
+   "quote": "an earlier set at <code>low</code> effort, run August 21, 2026, scored 88.6% unbudgeted at $0.48 per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3",
+   "quote": "$0.48 per task"
+  },
+  {
+   "id": "F37",
+   "about": null,
+   "says": "unit",
+   "value": "per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3",
+   "quote": "$0.48 per task"
+  },
+  {
+   "id": "F38",
+   "about": "Claude Fable 5.1",
+   "says": "run-date",
+   "value": "August 21, 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3: the low-effort Fable 5.1 set",
+   "quote": "run August 21, 2026"
+  },
+  {
+   "id": "F39",
+   "about": "Claude Fable 5.1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3",
+   "quote": "The Claude Fable 5.1 task-budget figures are one run per budget"
+  },
+  {
+   "id": "F40",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "high (default)",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "label of the third blue point of the DeepResearch Bench II chart (the page's own statement of Claude Fable 5.1's default effort, text box about x 1030-1155, y 215-235 px)",
+   "quote": "high (default)"
+  },
+  {
+   "id": "F41",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "92.1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3: 'at the default effort, run August 26, 2026, with an unbudgeted run the same day'",
+   "quote": "with an unbudgeted run the same day (92.1%, $1.10 per task)",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "1.10",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3: '$1.10 per task'",
+   "quote": "with an unbudgeted run the same day (92.1%, $1.10 per task)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3",
+   "quote": "$1.10 per task"
+  },
+  {
+   "id": "F44",
+   "about": null,
+   "says": "unit",
+   "value": "per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3",
+   "quote": "$1.10 per task"
+  },
+  {
+   "id": "F45",
+   "about": "Claude Fable 5.1",
+   "says": "run-date",
+   "value": "August 26, 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 3",
+   "quote": "run August 26, 2026, with an unbudgeted run the same day"
+  },
+  {
+   "id": "F46",
+   "about": "Claude Sonnet 5",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task'",
+   "quote": "against 77.4% for $0.84 from Claude Sonnet 5 at its default"
+  },
+  {
+   "id": "F47",
+   "about": "Claude Sonnet 5",
+   "says": "score",
+   "value": "77.4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task' (Claude Sonnet 5 alone twice, Aug 7-8 2026: reference 3)",
+   "quote": "against 77.4% for $0.84 from Claude Sonnet 5 at its default",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F48",
+   "about": "Claude Sonnet 5",
+   "says": "effort-label",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text: 'at its default'",
+   "quote": "against 77.4% for $0.84 from Claude Sonnet 5 at its default"
+  },
+  {
+   "id": "F49",
+   "about": "Claude Sonnet 5",
+   "says": "cost",
+   "value": "0.84",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text: '$0.84 ... per solved task' (cost per SOLVED task, not per task)",
+   "quote": "against 77.4% for $0.84 from Claude Sonnet 5 at its default",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F50",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text",
+   "quote": "$0.84 from Claude Sonnet 5"
+  },
+  {
+   "id": "F51",
+   "about": null,
+   "says": "unit",
+   "value": "per solved task",
+   "term": "USD per resolved task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text: 'for $0.54 per solved task, against 77.4% for $0.84'",
+   "quote": "per solved task, against 77.4% for $0.84"
+  },
+  {
+   "id": "F52",
+   "about": "Claude Fable 5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "panel title 'WideSearch  (Claude Fable 5)', text box at the top of the panel",
+   "quote": "Claude Fable 5"
+  },
+  {
+   "id": "F53",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "point label 'low' beside the marker at px [185.0, 288.0] of the WideSearch panel",
+   "quote": "low"
+  },
+  {
+   "id": "F54",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "78.49",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "Claude Fable 5, point 'low': marker centre px [185.0, 288.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F55",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "2.446",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "Claude Fable 5, point 'low': marker centre px [185.0, 288.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.01351
+   }
+  },
+  {
+   "id": "F56",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "point label 'medium' beside the marker at px [304.0, 245.0] of the WideSearch panel",
+   "quote": "medium"
+  },
+  {
+   "id": "F57",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "79.78",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "Claude Fable 5, point 'medium': marker centre px [304.0, 245.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F58",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "3.518",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "Claude Fable 5, point 'medium': marker centre px [304.0, 245.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.01351
+   }
+  },
+  {
+   "id": "F59",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "footnote under the figure: the point labelled 'default' at px [478.0, 238.0] of the WideSearch panel is served as high effort",
+   "quote": "'default' is served as high effort"
+  },
+  {
+   "id": "F60",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "79.99",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "Claude Fable 5, point 'default': marker centre px [478.0, 238.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F61",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "5.086",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C11",
+   "where": "Claude Fable 5, point 'default': marker centre px [478.0, 238.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.01351
+   }
+  },
+  {
+   "id": "F62",
+   "about": "Claude Fable 5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "panel title 'DeepWideSearch  (Claude Fable 5)', text box at the top of the panel",
+   "quote": "Claude Fable 5"
+  },
+  {
+   "id": "F63",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "point label 'low' beside the marker at px [751.0, 275.0] of the DeepWideSearch panel",
+   "quote": "low"
+  },
+  {
+   "id": "F64",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "64.88",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "Claude Fable 5, point 'low': marker centre px [751.0, 275.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F65",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "2.532",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "Claude Fable 5, point 'low': marker centre px [751.0, 275.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.0128
+   }
+  },
+  {
+   "id": "F66",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "point label 'medium' beside the marker at px [881.0, 241.0] of the DeepWideSearch panel",
+   "quote": "medium"
+  },
+  {
+   "id": "F67",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "65.90",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "Claude Fable 5, point 'medium': marker centre px [881.0, 241.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F68",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "3.641",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "Claude Fable 5, point 'medium': marker centre px [881.0, 241.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.0128
+   }
+  },
+  {
+   "id": "F69",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "footnote under the figure: the point labelled 'default' at px [1044.0, 224.0] of the DeepWideSearch panel is served as high effort",
+   "quote": "'default' is served as high effort"
+  },
+  {
+   "id": "F70",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "66.40",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "Claude Fable 5, point 'default': marker centre px [1044.0, 224.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F71",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "5.032",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C12",
+   "where": "Claude Fable 5, point 'default': marker centre px [1044.0, 224.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.0128
+   }
+  },
+  {
+   "id": "F72",
+   "about": "Claude Fable 5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "panel title 'BrowseComp  (Claude Fable 5)', text box at the top of the panel",
+   "quote": "Claude Fable 5"
+  },
+  {
+   "id": "F73",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "point label 'low' beside the marker at px [1318.1, 288.0] of the BrowseComp panel",
+   "quote": "low"
+  },
+  {
+   "id": "F74",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "78.49",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "Claude Fable 5, point 'low': marker centre px [1318.1, 288.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F75",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "3.402",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "Claude Fable 5, point 'low': marker centre px [1318.1, 288.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00933
+   }
+  },
+  {
+   "id": "F76",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "point label 'medium' beside the marker at px [1500.9, 187.0] of the BrowseComp panel",
+   "quote": "medium"
+  },
+  {
+   "id": "F77",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "81.51",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "Claude Fable 5, point 'medium': marker centre px [1500.9, 187.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F78",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "4.540",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "Claude Fable 5, point 'medium': marker centre px [1500.9, 187.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00933
+   }
+  },
+  {
+   "id": "F79",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "footnote under the figure: the point labelled 'default' at px [1611.0, 194.0] of the BrowseComp panel is served as high effort",
+   "quote": "'default' is served as high effort"
+  },
+  {
+   "id": "F80",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "81.30",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "Claude Fable 5, point 'default': marker centre px [1611.0, 194.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04478
+   },
+   "term": "accuracy%",
+   "scale": "percent"
+  },
+  {
+   "id": "F81",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "5.225",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C13",
+   "where": "Claude Fable 5, point 'default': marker centre px [1611.0, 194.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00933
+   }
+  },
+  {
+   "id": "F82",
+   "about": "Claude Fable 5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "panel title 'GDPval  (Claude Fable 5)', text box at the top of the panel",
+   "quote": "Claude Fable 5"
+  },
+  {
+   "id": "F83",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "point label 'low' beside the marker at px [185.0, 731.0] of the GDPval panel",
+   "quote": "low"
+  },
+  {
+   "id": "F84",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "83.50",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "Claude Fable 5, point 'low': marker centre px [185.0, 731.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04458
+   },
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F85",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "1.124",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "Claude Fable 5, point 'low': marker centre px [185.0, 731.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00676
+   }
+  },
+  {
+   "id": "F86",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "point label 'medium' beside the marker at px [311.0, 715.0] of the GDPval panel",
+   "quote": "medium"
+  },
+  {
+   "id": "F87",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "83.97",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "Claude Fable 5, point 'medium': marker centre px [311.0, 715.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04458
+   },
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F88",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "1.691",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "Claude Fable 5, point 'medium': marker centre px [311.0, 715.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00676
+   }
+  },
+  {
+   "id": "F89",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "footnote under the figure: the point labelled 'default' at px [478.0, 745.0] of the GDPval panel is served as high effort",
+   "quote": "'default' is served as high effort"
+  },
+  {
+   "id": "F90",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "83.08",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "Claude Fable 5, point 'default': marker centre px [478.0, 745.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.04458
+   },
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F91",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "2.444",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "chart": "C14",
+   "where": "Claude Fable 5, point 'default': marker centre px [478.0, 745.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00676
+   }
+  },
+  {
+   "id": "F92",
+   "about": "Claude Fable 5.1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "series label of the blue line, italic text at about x 533-690, y 150-175 px",
+   "quote": "Claude Fable 5.1"
+  },
+  {
+   "id": "F93",
+   "about": "Claude Fable 5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "series label of the grey line, italic text 'Claude Fable 5 (earlier generation)' at about x 170-500, y 505-528 px",
+   "quote": "Claude Fable 5"
+  },
+  {
+   "id": "F94",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "point label 'low' beside the marker at px [610.0, 233.0]",
+   "quote": "low"
+  },
+  {
+   "id": "F95",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "65.61",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5.1, point 'low': marker centre px [610.0, 233.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.03972
+   },
+   "term": "rubric%",
+   "scale": "percent"
+  },
+  {
+   "id": "F96",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "4.66",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task' (chart read 4.66)",
+   "quote": "Fable 5.1 at <code>low</code> scored 10 points above Sonnet 5 (66% against 56%) at about four times the cost per task ($4.66 against $1.20)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F97",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "point label 'medium' beside the marker at px [844.0, 237.0]",
+   "quote": "medium"
+  },
+  {
+   "id": "F98",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "65.50",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5.1, point 'medium': marker centre px [844.0, 237.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.03972
+   },
+   "term": "rubric%",
+   "scale": "percent"
+  },
+  {
+   "id": "F99",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "5.856",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5.1, point 'medium': marker centre px [844.0, 237.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00769
+   }
+  },
+  {
+   "id": "F100",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "high (default)",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "point label 'high (default)' beside the marker at px [1090.0, 256.0]",
+   "quote": "high (default)"
+  },
+  {
+   "id": "F101",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "65.00",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5.1, point 'high': marker centre px [1090.0, 256.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.03972
+   },
+   "term": "rubric%",
+   "scale": "percent"
+  },
+  {
+   "id": "F102",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "7.12",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task' (chart read 7.12)",
+   "quote": "above Fable 5.1 at its default (65% for $7.12)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F103",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "point label 'low' beside the marker at px [211.2, 460.0]",
+   "quote": "low"
+  },
+  {
+   "id": "F104",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "59.60",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5, point 'low': marker centre px [211.2, 460.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.03972
+   },
+   "term": "rubric%",
+   "scale": "percent"
+  },
+  {
+   "id": "F105",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "2.611",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5, point 'low': marker centre px [211.2, 460.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00769
+   }
+  },
+  {
+   "id": "F106",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "point label 'medium' beside the marker at px [499.0, 358.0]",
+   "quote": "medium"
+  },
+  {
+   "id": "F107",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "62.30",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5, point 'medium': marker centre px [499.0, 358.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.03972
+   },
+   "term": "rubric%",
+   "scale": "percent"
+  },
+  {
+   "id": "F108",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "4.087",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5, point 'medium': marker centre px [499.0, 358.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00769
+   }
+  },
+  {
+   "id": "F109",
+   "about": "Claude Fable 5",
+   "says": "effort-label",
+   "value": "high (default)",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "point label 'high (default)' beside the marker at px [685.0, 324.0]",
+   "quote": "high (default)"
+  },
+  {
+   "id": "F110",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "63.20",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5, point 'high': marker centre px [685.0, 324.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.03972
+   },
+   "term": "rubric%",
+   "scale": "percent"
+  },
+  {
+   "id": "F111",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "5.041",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "Claude Fable 5, point 'high': marker centre px [685.0, 324.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00769
+   }
+  },
+  {
+   "id": "F112",
+   "about": "Claude Sonnet 5",
+   "says": "model-name",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models on cost per task'",
+   "quote": "Fable 5.1 at <code>low</code> scored 10 points above Sonnet 5 (66% against 56%) at about four times the cost per task ($4.66 against $1.20)"
+  },
+  {
+   "id": "F113",
+   "about": "Claude Sonnet 5",
+   "says": "score",
+   "value": "56",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text (rounded to the percent; the page prints 56%)",
+   "quote": "Fable 5.1 at <code>low</code> scored 10 points above Sonnet 5 (66% against 56%) at about four times the cost per task ($4.66 against $1.20)",
+   "term": "rubric%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F114",
+   "about": "Claude Sonnet 5",
+   "says": "cost",
+   "value": "1.20",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text: '$1.20' per task",
+   "quote": "Fable 5.1 at <code>low</code> scored 10 points above Sonnet 5 (66% against 56%) at about four times the cost per task ($4.66 against $1.20)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F115",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text",
+   "quote": "cost per task ($4.66 against $1.20)"
+  },
+  {
+   "id": "F116",
+   "about": null,
+   "says": "unit",
+   "value": "cost per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text",
+   "quote": "the cost per task ($4.66 against $1.20)"
+  },
+  {
+   "id": "F117",
+   "about": "Claude Opus 5",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7 (DeepResearch Bench II)",
+   "quote": "Claude Opus 5 at its default effort ran on the same surface and subset, three runs, on August 28, 2026: 68.8% on the raw 50 tasks, 70.8% on the 33-task basis, and 71.1% on the 21-task set, at $6.71 per task ($23.72 without caching)"
+  },
+  {
+   "id": "F118",
+   "about": "Claude Opus 5",
+   "says": "score",
+   "value": "70.8",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7: '70.8% on the 33-task basis' (the basis of the other rows of this chart)",
+   "quote": "Claude Opus 5 at its default effort ran on the same surface and subset, three runs, on August 28, 2026: 68.8% on the raw 50 tasks, 70.8% on the 33-task basis, and 71.1% on the 21-task set, at $6.71 per task ($23.72 without caching)",
+   "term": "rubric%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F119",
+   "about": "Claude Opus 5",
+   "says": "effort-label",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7",
+   "quote": "Claude Opus 5 at its default effort"
+  },
+  {
+   "id": "F120",
+   "about": "Claude Opus 5",
+   "says": "cost",
+   "value": "6.71",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7: '$6.71 per task'",
+   "quote": "Claude Opus 5 at its default effort ran on the same surface and subset, three runs, on August 28, 2026: 68.8% on the raw 50 tasks, 70.8% on the 33-task basis, and 71.1% on the 21-task set, at $6.71 per task ($23.72 without caching)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F121",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7",
+   "quote": "$6.71 per task"
+  },
+  {
+   "id": "F122",
+   "about": null,
+   "says": "unit",
+   "value": "per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7",
+   "quote": "$6.71 per task"
+  },
+  {
+   "id": "F123",
+   "about": "Claude Opus 5",
+   "says": "run-date",
+   "value": "August 28, 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7",
+   "quote": "three runs, on August 28, 2026"
+  },
+  {
+   "id": "F124",
+   "about": "Claude Opus 5",
+   "says": "aggregation",
+   "value": "three runs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 7",
+   "quote": "three runs, on August 28, 2026"
+  },
+  {
+   "id": "F125",
+   "about": "Claude Opus 5.5",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "legend of the chart (blue disc), text box about x 1010-1380, y 495-517 px",
+   "quote": "Claude Opus 5.5 alone (effort settings)"
+  },
+  {
+   "id": "F126",
+   "about": "Claude Fable 5.1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "legend of the chart (grey disc), text box about x 1010-1460, y 522-545 px",
+   "quote": "Claude Fable 5.1 alone (effort settings, August)"
+  },
+  {
+   "id": "F127",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "point label 'low, one attempt per task' beside the marker at px [182.0, 520.0]",
+   "quote": "low, one attempt per task"
+  },
+  {
+   "id": "F128",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "74.77",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "Claude Opus 5.5, point 'low': marker centre px [182.0, 520.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.06269
+   },
+   "term": "pass%",
+   "scale": "percent"
+  },
+  {
+   "id": "F129",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "0.351",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "Claude Opus 5.5, point 'low': marker centre px [182.0, 520.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00596
+   }
+  },
+  {
+   "id": "F130",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "medium (default)",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "point label 'medium (default)' beside the marker at px [305.0, 238.1]",
+   "quote": "medium (default)"
+  },
+  {
+   "id": "F131",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "86.6",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Advisor strategy' / 'Compare models' ('it' = Opus 5.5 at its default, medium; chart read 86.6)",
+   "quote": "it scored 86.6% against 84.2% for Fable 5.1 at <code>medium</code> (a single Fable 5.1 run), for under a third of the cost per attempt ($0.84 against $2.68)",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F132",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "0.84",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text: '$0.84' per attempt (chart read 0.84)",
+   "quote": "it scored 86.6% against 84.2% for Fable 5.1 at <code>medium</code> (a single Fable 5.1 run), for under a third of the cost per attempt ($0.84 against $2.68)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F133",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "point label 'high' beside the marker at px [442.0, 194.0]",
+   "quote": "high"
+  },
+  {
+   "id": "F134",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "88.40",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "Claude Opus 5.5, point 'high': marker centre px [442.0, 194.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.06269
+   },
+   "term": "pass%",
+   "scale": "percent"
+  },
+  {
+   "id": "F135",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "1.38",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Advisor strategy' (chart read 1.38)",
+   "quote": "$1.36 per attempt against $1.38 for Opus 5.5 alone at <code>high</code>",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F136",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "point label 'xhigh, one attempt per task' beside the marker at px [1128.0, 131.0]",
+   "quote": "xhigh, one attempt per task"
+  },
+  {
+   "id": "F137",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "91.1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Advisor strategy' (chart read 91.0)",
+   "quote": "Opus 5.5 alone at <code>xhigh</code> scored 91.1% for $4.11 per attempt (one attempt per task)",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F138",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "4.11",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text: '$4.11 per attempt'",
+   "quote": "Opus 5.5 alone at <code>xhigh</code> scored 91.1% for $4.11 per attempt (one attempt per task)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F139",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "point label 'low' beside the marker at px [573.3, 387.9]",
+   "quote": "low"
+  },
+  {
+   "id": "F140",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "80.29",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "Claude Fable 5.1, point 'low': marker centre px [573.3, 387.9] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.06269
+   },
+   "term": "pass%",
+   "scale": "percent"
+  },
+  {
+   "id": "F141",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "1.907",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "Claude Fable 5.1, point 'low': marker centre px [573.3, 387.9] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00596
+   }
+  },
+  {
+   "id": "F142",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "point label 'medium' beside the marker at px [766.9, 295.0]",
+   "quote": "medium"
+  },
+  {
+   "id": "F143",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "84.2",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text, 'Compare models' ('84.2% for Fable 5.1 at medium (a single Fable 5.1 run)'; chart read 84.2)",
+   "quote": "it scored 86.6% against 84.2% for Fable 5.1 at <code>medium</code> (a single Fable 5.1 run), for under a third of the cost per attempt ($0.84 against $2.68)",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F144",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "2.68",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "page text: '$2.68' per attempt (chart read 2.68)",
+   "quote": "it scored 86.6% against 84.2% for Fable 5.1 at <code>medium</code> (a single Fable 5.1 run), for under a third of the cost per attempt ($0.84 against $2.68)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F145",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "point label 'high' beside the marker at px [1266.0, 261.0]",
+   "quote": "high"
+  },
+  {
+   "id": "F146",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "85.60",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "Claude Fable 5.1, point 'high': marker centre px [1266.0, 261.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.06269
+   },
+   "term": "pass%",
+   "scale": "percent"
+  },
+  {
+   "id": "F147",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "4.661",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "chart": "C3",
+   "where": "Claude Fable 5.1, point 'high': marker centre px [1266.0, 261.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00596
+   }
+  },
+  {
+   "id": "F148",
+   "about": "Claude Fable 5.1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "legend of the chart (blue disc), text box about x 1025-1285, y 546-568 px",
+   "quote": "Claude Fable 5.1 solo (effort)"
+  },
+  {
+   "id": "F149",
+   "about": "Claude Sonnet 5",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "legend of the chart (green disc), text box about x 1025-1215, y 576-598 px",
+   "quote": "Claude Sonnet 5 solo"
+  },
+  {
+   "id": "F150",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "point label 'low' beside the marker at px [727.0, 182.0]",
+   "quote": "low"
+  },
+  {
+   "id": "F151",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "0.8898",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Fable 5.1, point 'low': marker centre px [727.0, 182.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00062
+   },
+   "term": "F1x100",
+   "scale": "fraction"
+  },
+  {
+   "id": "F152",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "468.1",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Fable 5.1, point 'low': marker centre px [727.0, 182.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.77469
+   }
+  },
+  {
+   "id": "F153",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "point label 'medium' beside the marker at px [830.2, 179.6]",
+   "quote": "medium"
+  },
+  {
+   "id": "F154",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "0.8908",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Fable 5.1, point 'medium': marker centre px [830.2, 179.6] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00062
+   },
+   "term": "F1x100",
+   "scale": "fraction"
+  },
+  {
+   "id": "F155",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "521.4",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Fable 5.1, point 'medium': marker centre px [830.2, 179.6] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.77469
+   }
+  },
+  {
+   "id": "F156",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "point label 'high' beside the marker at px [889.6, 114.4]",
+   "quote": "high"
+  },
+  {
+   "id": "F157",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "0.9176",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Fable 5.1, point 'high': marker centre px [889.6, 114.4] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00062
+   },
+   "term": "F1x100",
+   "scale": "fraction"
+  },
+  {
+   "id": "F158",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "552.1",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Fable 5.1, point 'high': marker centre px [889.6, 114.4] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.77469
+   }
+  },
+  {
+   "id": "F159",
+   "about": "Claude Sonnet 5",
+   "says": "score",
+   "value": "0.7616",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Sonnet 5, point 'solo': marker centre px [259.0, 494.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.00062
+   },
+   "term": "F1x100",
+   "scale": "fraction"
+  },
+  {
+   "id": "F160",
+   "about": "Claude Sonnet 5",
+   "says": "cost",
+   "value": "226.4",
+   "level": "read",
+   "form": "chart",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "chart": "C4",
+   "where": "Claude Sonnet 5, point 'solo': marker centre px [259.0, 494.0] (x, y) of the image",
+   "precision": {
+    "model": "chart-pixel",
+    "reading_px": 1.5,
+    "sd": 0.77469
+   }
+  },
+  {
+   "id": "F161",
+   "about": "Claude Opus 5.5",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-max-tokens-saving-opus-5-5.png",
+   "where": "left panel title 'Claude Opus 5.5: solved 58% at the 16k cap, 76% at 64k', text at about x 115-715, y 88-110 px",
+   "quote": "Claude Opus 5.5: solved 58% at the 16k cap, 76% at 64k"
+  },
+  {
+   "id": "F162",
+   "about": "Claude Fable 5.1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-max-tokens-saving-opus-5-5.png",
+   "where": "right panel title 'Claude Fable 5.1: solved 36% at the 16k cap, 59% at 64k', text at about x 802-1405, y 88-110 px",
+   "quote": "Claude Fable 5.1: solved 36% at the 16k cap, 59% at 64k"
+  },
+  {
+   "id": "F163",
+   "about": "Claude Opus 5.5",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 12 (internal repository-task benchmark, cap measurement)",
+   "quote": "September 19, 2026 (Claude Opus 5.5, at its default effort, <code>medium</code>)"
+  },
+  {
+   "id": "F164",
+   "about": "Claude Fable 5.1",
+   "says": "effort-label",
+   "value": "high (default)",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "chart": "C2",
+   "where": "label of the third blue point of the DeepResearch Bench II chart: the page's statement of Claude Fable 5.1's default effort (the cap measurement ran 'at the default effort set explicitly')",
+   "quote": "high (default)"
+  },
+  {
+   "id": "F165",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "58",
+   "term": "solved%",
+   "scale": "percent",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-max-tokens-saving-opus-5-5.png",
+   "where": "left panel title: 'solved 58% at the 16k cap'",
+   "quote": "solved 58% at the 16k cap",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F166",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "76",
+   "term": "solved%",
+   "scale": "percent",
+   "level": "written",
+   "form": "image-text",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-max-tokens-saving-opus-5-5.png",
+   "where": "left panel title: '76% at 64k'",
+   "quote": "76% at 64k",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F167",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "36.3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 12",
+   "quote": "the 16,384-token figure averages two runs (36.3% on both)",
+   "term": "solved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F168",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "58.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 12",
+   "quote": "the 64,000 and 128,000 figures are single runs (58.5% and 60.0%)",
+   "term": "solved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F169",
+   "about": "Claude Opus 5.5",
+   "says": "run-date",
+   "value": "September 19, 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 12",
+   "quote": "September 19, 2026 (Claude Opus 5.5, at its default effort"
+  },
+  {
+   "id": "F170",
+   "about": "Claude Fable 5.1",
+   "says": "run-date",
+   "value": "August 20, 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 12",
+   "quote": "run August 20, 2026 (Claude Fable 5.1)"
+  },
+  {
+   "id": "F171",
+   "about": "Claude Opus 5.5",
+   "says": "aggregation",
+   "value": "averages two runs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 12",
+   "quote": "The Claude Opus 5.5 16,384-token figure averages two runs (134 and 135 tasks scored)"
+  },
+  {
+   "id": "F172",
+   "about": "Claude Fable 5.1",
+   "says": "aggregation",
+   "value": "averages two runs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/anthdocs_cost_intel.html",
+   "where": "References, reference 12",
+   "quote": "the 16,384-token figure averages two runs (36.3% on both)"
+  }
+ ],
+ "charts": [
+  {
+   "id": "C11",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "where": "'The effort dial' figure of the docs page (https://platform.claude.com/docs/images/cost-intel-effort-sweep-opus-5-5.png, 1710x1035 px), panel WideSearch  (Claude Fable 5)",
+   "kind": "raster",
+   "x": {
+    "quantity": "cost per task ($)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 135.5,
+      "value": 2,
+      "label": "2"
+     },
+     {
+      "px": 246.5,
+      "value": 3,
+      "label": "3"
+     },
+     {
+      "px": 357.5,
+      "value": 4,
+      "label": "4"
+     },
+     {
+      "px": 468.5,
+      "value": 5,
+      "label": "5"
+     }
+    ],
+    "units_per_px": 0.009009,
+    "fit_residual_px": 0.0
+   },
+   "y": {
+    "quantity": "accuracy (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 170.5,
+      "value": 82,
+      "label": "82"
+     },
+     {
+      "px": 237.5,
+      "value": 80,
+      "label": "80"
+     },
+     {
+      "px": 304.5,
+      "value": 78,
+      "label": "78"
+     },
+     {
+      "px": 371.5,
+      "value": 76,
+      "label": "76"
+     }
+    ],
+    "units_per_px": 0.029851,
+    "fit_residual_px": 0.0
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  },
+  {
+   "id": "C12",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "where": "'The effort dial' figure of the docs page (https://platform.claude.com/docs/images/cost-intel-effort-sweep-opus-5-5.png, 1710x1035 px), panel DeepWideSearch  (Claude Fable 5)",
+   "kind": "raster",
+   "x": {
+    "quantity": "cost per task ($)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 688.5,
+      "value": 2.0,
+      "label": "2.0"
+     },
+     {
+      "px": 747.5,
+      "value": 2.5,
+      "label": "2.5"
+     },
+     {
+      "px": 805.5,
+      "value": 3.0,
+      "label": "3.0"
+     },
+     {
+      "px": 864.5,
+      "value": 3.5,
+      "label": "3.5"
+     },
+     {
+      "px": 923.5,
+      "value": 4.0,
+      "label": "4.0"
+     },
+     {
+      "px": 981.5,
+      "value": 4.5,
+      "label": "4.5"
+     },
+     {
+      "px": 1040.5,
+      "value": 5.0,
+      "label": "5.0"
+     },
+     {
+      "px": 1098.5,
+      "value": 5.5,
+      "label": "5.5"
+     }
+    ],
+    "units_per_px": 0.008533,
+    "fit_residual_px": 0.45
+   },
+   "y": {
+    "quantity": "accuracy (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 170.5,
+      "value": 68,
+      "label": "68"
+     },
+     {
+      "px": 237.5,
+      "value": 66,
+      "label": "66"
+     },
+     {
+      "px": 304.5,
+      "value": 64,
+      "label": "64"
+     },
+     {
+      "px": 371.5,
+      "value": 62,
+      "label": "62"
+     }
+    ],
+    "units_per_px": 0.029851,
+    "fit_residual_px": 0.0
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  },
+  {
+   "id": "C13",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "where": "'The effort dial' figure of the docs page (https://platform.claude.com/docs/images/cost-intel-effort-sweep-opus-5-5.png, 1710x1035 px), panel BrowseComp  (Claude Fable 5)",
+   "kind": "raster",
+   "x": {
+    "quantity": "cost per task ($)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 1253.5,
+      "value": 3.0,
+      "label": "3.0"
+     },
+     {
+      "px": 1333.5,
+      "value": 3.5,
+      "label": "3.5"
+     },
+     {
+      "px": 1414.5,
+      "value": 4.0,
+      "label": "4.0"
+     },
+     {
+      "px": 1494.5,
+      "value": 4.5,
+      "label": "4.5"
+     },
+     {
+      "px": 1574.5,
+      "value": 5.0,
+      "label": "5.0"
+     },
+     {
+      "px": 1655.5,
+      "value": 5.5,
+      "label": "5.5"
+     }
+    ],
+    "units_per_px": 0.006221,
+    "fit_residual_px": 0.39
+   },
+   "y": {
+    "quantity": "accuracy (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 170.5,
+      "value": 82,
+      "label": "82"
+     },
+     {
+      "px": 237.5,
+      "value": 80,
+      "label": "80"
+     },
+     {
+      "px": 304.5,
+      "value": 78,
+      "label": "78"
+     },
+     {
+      "px": 371.5,
+      "value": 76,
+      "label": "76"
+     }
+    ],
+    "units_per_px": 0.029851,
+    "fit_residual_px": 0.0
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  },
+  {
+   "id": "C14",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "where": "'The effort dial' figure of the docs page (https://platform.claude.com/docs/images/cost-intel-effort-sweep-opus-5-5.png, 1710x1035 px), panel GDPval  (Claude Fable 5)",
+   "kind": "raster",
+   "x": {
+    "quantity": "cost per task ($)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 157.5,
+      "value": 1.0,
+      "label": "1.0"
+     },
+     {
+      "px": 268.5,
+      "value": 1.5,
+      "label": "1.5"
+     },
+     {
+      "px": 379.5,
+      "value": 2.0,
+      "label": "2.0"
+     },
+     {
+      "px": 490.5,
+      "value": 2.5,
+      "label": "2.5"
+     }
+    ],
+    "units_per_px": 0.004505,
+    "fit_residual_px": 0.0
+   },
+   "y": {
+    "quantity": "accuracy (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 646.5,
+      "value": 86,
+      "label": "86"
+     },
+     {
+      "px": 714.5,
+      "value": 84,
+      "label": "84"
+     },
+     {
+      "px": 781.5,
+      "value": 82,
+      "label": "82"
+     },
+     {
+      "px": 848.5,
+      "value": 80,
+      "label": "80"
+     }
+    ],
+    "units_per_px": 0.029717,
+    "fit_residual_px": 0.4
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  },
+  {
+   "id": "C15",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-sweep-opus-5-5.png",
+   "where": "'The effort dial' figure of the docs page (https://platform.claude.com/docs/images/cost-intel-effort-sweep-opus-5-5.png, 1710x1035 px), panel SWE-bench Pro  (Claude Opus 5.5)",
+   "kind": "raster",
+   "x": {
+    "quantity": "cost per task ($)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 768.5,
+      "value": 0.2,
+      "label": "0.2"
+     },
+     {
+      "px": 868.5,
+      "value": 0.4,
+      "label": "0.4"
+     },
+     {
+      "px": 967.5,
+      "value": 0.6,
+      "label": "0.6"
+     },
+     {
+      "px": 1067.5,
+      "value": 0.8,
+      "label": "0.8"
+     }
+    ],
+    "units_per_px": 0.002008,
+    "fit_residual_px": 0.3
+   },
+   "y": {
+    "quantity": "accuracy (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 602.5,
+      "value": 98,
+      "label": "98"
+     },
+     {
+      "px": 646.5,
+      "value": 96,
+      "label": "96"
+     },
+     {
+      "px": 691.5,
+      "value": 94,
+      "label": "94"
+     },
+     {
+      "px": 736.5,
+      "value": 92,
+      "label": "92"
+     },
+     {
+      "px": 781.5,
+      "value": 90,
+      "label": "90"
+     },
+     {
+      "px": 825.5,
+      "value": 88,
+      "label": "88"
+     },
+     {
+      "px": 870.5,
+      "value": 86,
+      "label": "86"
+     }
+    ],
+    "units_per_px": 0.044728,
+    "fit_residual_px": 0.43
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  },
+  {
+   "id": "C2",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-effort-limit.png",
+   "where": "'DeepResearch Bench II: on Fable 5.1, higher effort buys no score, only cost' (https://platform.claude.com/docs/images/cost-intel-effort-limit.png, 1290x750 px)",
+   "kind": "raster",
+   "x": {
+    "quantity": "cost per task ($, as a customer is billed)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 92,
+      "value": 2,
+      "label": "2"
+     },
+     {
+      "px": 287,
+      "value": 3,
+      "label": "3"
+     },
+     {
+      "px": 482,
+      "value": 4,
+      "label": "4"
+     },
+     {
+      "px": 677,
+      "value": 5,
+      "label": "5"
+     },
+     {
+      "px": 872,
+      "value": 6,
+      "label": "6"
+     },
+     {
+      "px": 1067,
+      "value": 7,
+      "label": "7"
+     }
+    ],
+    "units_per_px": 0.005128,
+    "fit_residual_px": 0.0
+   },
+   "y": {
+    "quantity": "rubric score (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 67,
+      "value": 70,
+      "label": "70"
+     },
+     {
+      "px": 143,
+      "value": 68,
+      "label": "68"
+     },
+     {
+      "px": 218,
+      "value": 66,
+      "label": "66"
+     },
+     {
+      "px": 294,
+      "value": 64,
+      "label": "64"
+     },
+     {
+      "px": 369,
+      "value": 62,
+      "label": "62"
+     },
+     {
+      "px": 445,
+      "value": 60,
+      "label": "60"
+     },
+     {
+      "px": 520,
+      "value": 58,
+      "label": "58"
+     },
+     {
+      "px": 596,
+      "value": 56,
+      "label": "56"
+     }
+    ],
+    "units_per_px": 0.026482,
+    "fit_residual_px": 0.31
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  },
+  {
+   "id": "C3",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-internal-coding-advisor-opus-5-5.png",
+   "where": "'A Fable 5.1 advisor adds 1.7 points to Opus 5.5 at high' (https://platform.claude.com/docs/images/cost-intel-internal-coding-advisor-opus-5-5.png, 1564x752 px)",
+   "kind": "raster",
+   "x": {
+    "quantity": "cost per attempt ($, as a customer is billed)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 345.5,
+      "value": 1,
+      "label": "1"
+     },
+     {
+      "px": 596.5,
+      "value": 2,
+      "label": "2"
+     },
+     {
+      "px": 848.5,
+      "value": 3,
+      "label": "3"
+     },
+     {
+      "px": 1099.5,
+      "value": 4,
+      "label": "4"
+     },
+     {
+      "px": 1351.5,
+      "value": 5,
+      "label": "5"
+     }
+    ],
+    "units_per_px": 0.003976,
+    "fit_residual_px": 0.3
+   },
+   "y": {
+    "quantity": "attempts solved (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 107.5,
+      "value": 92,
+      "label": "92"
+     },
+     {
+      "px": 155.5,
+      "value": 90,
+      "label": "90"
+     },
+     {
+      "px": 203.5,
+      "value": 88,
+      "label": "88"
+     },
+     {
+      "px": 251.5,
+      "value": 86,
+      "label": "86"
+     },
+     {
+      "px": 299.5,
+      "value": 84,
+      "label": "84"
+     },
+     {
+      "px": 347.5,
+      "value": 82,
+      "label": "82"
+     },
+     {
+      "px": 394.5,
+      "value": 80,
+      "label": "80"
+     },
+     {
+      "px": 442.5,
+      "value": 78,
+      "label": "78"
+     },
+     {
+      "px": 490.5,
+      "value": 76,
+      "label": "76"
+     },
+     {
+      "px": 538.5,
+      "value": 74,
+      "label": "74"
+     }
+    ],
+    "units_per_px": 0.041793,
+    "fit_residual_px": 0.47
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  },
+  {
+   "id": "C4",
+   "file": "/work/.salvo14/mig/convert-anthropic-docs/src/img/cost-intel-corpus-pareto.png",
+   "where": "'Delegation buys most of the accuracy for about half the cost' (https://platform.claude.com/docs/images/cost-intel-corpus-pareto.png, 1403x782 px)",
+   "kind": "raster",
+   "x": {
+    "quantity": "all-in cost per episode ($)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 207.5,
+      "value": 200,
+      "label": "200"
+     },
+     {
+      "px": 401.5,
+      "value": 300,
+      "label": "300"
+     },
+     {
+      "px": 595.5,
+      "value": 400,
+      "label": "400"
+     },
+     {
+      "px": 788.5,
+      "value": 500,
+      "label": "500"
+     },
+     {
+      "px": 982.5,
+      "value": 600,
+      "label": "600"
+     },
+     {
+      "px": 1176.5,
+      "value": 700,
+      "label": "700"
+     },
+     {
+      "px": 1369.0,
+      "value": 800,
+      "label": "800"
+     }
+    ],
+    "units_per_px": 0.516462,
+    "fit_residual_px": 0.59
+   },
+   "y": {
+    "quantity": "planted defects found (F1 score)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 157.5,
+      "value": 0.9,
+      "label": "0.9"
+     },
+     {
+      "px": 278.5,
+      "value": 0.85,
+      "label": "0.85"
+     },
+     {
+      "px": 400.5,
+      "value": 0.8,
+      "label": "0.8"
+     },
+     {
+      "px": 522.5,
+      "value": 0.75,
+      "label": "0.75"
+     }
+    ],
+    "units_per_px": 0.000411,
+    "fit_residual_px": 0.4
+   },
+   "marker_px": 19.3,
+   "reading_px": 1.5,
+   "checks": "marker centres by colour-disk fit (dig/dig.py: pixels within 30-40 of the series colour, eroded by an 11x11 kernel, centroids; the DeepWideSearch medium marker, half hidden under the orange diamond, by a disc-template fit, radius 9 px); axes from the light gridlines (colour 220,215,205, found by dig/dig.py) labelled with the printed tick values; point labels read from the image",
+   "digitised_by": "converter (Sonnet 5.5): dig/dig.py, dig/read.py"
+  }
+ ]
+}

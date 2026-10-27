@@ -1,0 +1,4557 @@
+{
+ "urls": [
+  "https://suyoumo.github.io/bench/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://suyoumo.github.io/bench/",
+   "captured": "2026-10-20T05:57:45Z",
+   "note": "static leaderboard page (794 KB) fetched by salvo gt/t2 on 2026-10-20 (SOURCE.txt); rows updated to 2026-07-17; arXiv 2608.22510 describes the board"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-clawprobench-board/src/home.html": "2db56404eff23de66f543463ac914400e543be4ea4325b8f1c6a763e5c6736a5"
+ },
+ "harvested_at": "2026-10-20T05:57:45Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (agent C2-e)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "id": "src-clawprobench-board-2026-10-20",
+ "publisher": "clawprobench-board",
+ "facts": [
+  {
+   "says": "cost-method",
+   "value": "cost_usd = (input_tokens + 0.5 * (cache_read_tokens + cache_write_tokens)) * price_usd_input / 1e6 + output_tokens * price_usd_output / 1e6",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6950: leaderboard note 'cost_usd = …' (reproduces 87 of the 90 non-zero costs of the page, checked)",
+   "quote": "cost_usd = (input_tokens + 0.5 * (cache_read_tokens + cache_write_tokens)) * price_usd_input / 1e6 + output_tokens * price_usd_output / 1e6",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "cost_usd = (input_tokens + 0.5 * (cache_read_tokens + cache_write_tokens)) * price_usd_input / 1e6 + output_tokens * price_usd_output / 1e6",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6950: cost computed from the run's tokens at the row's price",
+   "quote": "cost_usd = (input_tokens + 0.5 * (cache_read_tokens + cache_write_tokens)) * price_usd_input / 1e6 + output_tokens * price_usd_output / 1e6",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "Cost column cells '$19.0706' (USD; the Price cell adds a CNY line)",
+   "quote": "$19.0706",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "Cost",
+   "term": "per-run-total",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "Cost column of the leaderboard: total of the run's tokens (Total Token column) at the row's price",
+   "quote": ">Cost<",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "headline-metric",
+   "value": "Final Score is the default rank signal",
+   "term": "final-score-0-100",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 91: leaderboard intro",
+   "quote": "Final Score is the default rank signal",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "metric-definition",
+   "value": "Open Final Score = 100 × AvgScore^0.40",
+   "term": "final-score-0-100",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6954: leaderboard note",
+   "quote": "Open Final Score = 100 × AvgScore^0.40",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "slightly overstated",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6951: leaderboard note: 'mimo-v2.5-pro and deepseek-v4-pro currently use 1M-context list pricing, so their displayed Cost is slightly overstated'",
+   "quote": "slightly overstated",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "DeepSeek-V3.2",
+   "value": "DeepSeek-V3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: Model cell (<strong>) of the open-dataset row siliconflow__deepseek-ai__DeepSeek-V3.2",
+   "quote": "<strong>DeepSeek-V3.2</strong>",
+   "id": "F8"
+  },
+  {
+   "says": "route",
+   "about": "DeepSeek-V3.2",
+   "value": "siliconflow",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: Model cell second line 'deepseek-ai · siliconflow' (maker · route)",
+   "quote": "deepseek-ai · siliconflow",
+   "term": "siliconflow",
+   "id": "F9"
+  },
+  {
+   "says": "score",
+   "about": "DeepSeek-V3.2",
+   "value": "60.1313",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: Final Score cell (data-value) of the open-dataset row siliconflow__deepseek-ai__DeepSeek-V3.2",
+   "quote": "<td data-value=\"60.1313\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F10"
+  },
+  {
+   "says": "tokens-in",
+   "about": "DeepSeek-V3.2",
+   "value": "10004682",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">10004682<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F11"
+  },
+  {
+   "says": "tokens-out",
+   "about": "DeepSeek-V3.2",
+   "value": "637259",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">637259<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F12"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "DeepSeek-V3.2",
+   "value": "54826944",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">54826944<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F13"
+  },
+  {
+   "says": "cost",
+   "about": "DeepSeek-V3.2",
+   "value": "9.9709",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: Cost cell of the open-dataset row siliconflow__deepseek-ai__DeepSeek-V3.2",
+   "quote": "<td data-value=\"9.9709\">$9.9709</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F14"
+  },
+  {
+   "says": "price-table",
+   "about": "DeepSeek-V3.2",
+   "value": "$0.26 / $0.38",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.26 / $0.38</strong>",
+   "id": "F15"
+  },
+  {
+   "says": "run-end",
+   "about": "DeepSeek-V3.2",
+   "value": "2026-04-03",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2986: Updated cell (data-value 2026-04-03T09:14:13+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-03T09:14:13+00:00\">",
+   "id": "F16"
+  },
+  {
+   "says": "model-name",
+   "about": "deepseek-v4-flash",
+   "value": "deepseek-v4-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: Model cell (<strong>) of the open-dataset row deepseek__deepseek-v4-flash",
+   "quote": "<strong>deepseek-v4-flash</strong>",
+   "id": "F17"
+  },
+  {
+   "says": "route",
+   "about": "deepseek-v4-flash",
+   "value": "deepseek",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: Model cell second line 'deepseek · deepseek' (maker · route)",
+   "quote": "deepseek · deepseek",
+   "id": "F18"
+  },
+  {
+   "says": "score",
+   "about": "deepseek-v4-flash",
+   "value": "61.4738",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: Final Score cell (data-value) of the open-dataset row deepseek__deepseek-v4-flash",
+   "quote": "<td data-value=\"61.4738\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F19"
+  },
+  {
+   "says": "tokens-in",
+   "about": "deepseek-v4-flash",
+   "value": "8281350",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">8281350<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F20"
+  },
+  {
+   "says": "tokens-out",
+   "about": "deepseek-v4-flash",
+   "value": "1484274",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">1484274<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F21"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "deepseek-v4-flash",
+   "value": "26225152",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">26225152<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F22"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek-v4-flash",
+   "value": "3.5399",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: Cost cell of the open-dataset row deepseek__deepseek-v4-flash",
+   "quote": "<td data-value=\"3.5399\">$3.5399</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F23"
+  },
+  {
+   "says": "price-table",
+   "about": "deepseek-v4-flash",
+   "value": "$0.1453 / $0.2906",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.1453 / $0.2906</strong>",
+   "id": "F24"
+  },
+  {
+   "says": "run-end",
+   "about": "deepseek-v4-flash",
+   "value": "2026-04-25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2376: Updated cell (data-value 2026-04-25T15:19:19.056679+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-25T15:19:19.056679+00:00\">",
+   "id": "F25"
+  },
+  {
+   "says": "model-name",
+   "about": "deepseek-v4-pro",
+   "value": "deepseek-v4-pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: Model cell (<strong>) of the open-dataset row deepseek__deepseek-v4-pro",
+   "quote": "<strong>deepseek-v4-pro</strong>",
+   "id": "F26"
+  },
+  {
+   "says": "score",
+   "about": "deepseek-v4-pro",
+   "value": "64.3814",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: Final Score cell (data-value) of the open-dataset row deepseek__deepseek-v4-pro",
+   "quote": "<td data-value=\"64.3814\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F27"
+  },
+  {
+   "says": "tokens-in",
+   "about": "deepseek-v4-pro",
+   "value": "8007935",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">8007935<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F28"
+  },
+  {
+   "says": "tokens-out",
+   "about": "deepseek-v4-pro",
+   "value": "1429306",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">1429306<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F29"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "deepseek-v4-pro",
+   "value": "25193472",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">25193472<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F30"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek-v4-pro",
+   "value": "50.634",
+   "level": "not-established:contradictory",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: Cost cell of the open-dataset row deepseek__deepseek-v4-pro",
+   "quote": "<td data-value=\"50.634\">$50.634</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F31"
+  },
+  {
+   "says": "price-table",
+   "about": "deepseek-v4-pro",
+   "value": "$2.0341 / $6.1023",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2.0341 / $6.1023</strong>",
+   "id": "F32"
+  },
+  {
+   "says": "run-end",
+   "about": "deepseek-v4-pro",
+   "value": "2026-04-25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1457: Updated cell (data-value 2026-04-25T15:23:21.307161+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-25T15:23:21.307161+00:00\">",
+   "id": "F33"
+  },
+  {
+   "says": "model-name",
+   "about": "gemini-3-flash-preview",
+   "value": "gemini-3-flash-preview",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: Model cell (<strong>) of the open-dataset row openrouter__google__gemini-3-flash-preview",
+   "quote": "<strong>gemini-3-flash-preview</strong>",
+   "id": "F34"
+  },
+  {
+   "says": "route",
+   "about": "gemini-3-flash-preview",
+   "value": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: Model cell second line 'google · openrouter' (maker · route)",
+   "quote": "google · openrouter",
+   "term": "openrouter",
+   "id": "F35"
+  },
+  {
+   "says": "score",
+   "about": "gemini-3-flash-preview",
+   "value": "48.9861",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: Final Score cell (data-value) of the open-dataset row openrouter__google__gemini-3-flash-preview",
+   "quote": "<td data-value=\"48.9861\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F36"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gemini-3-flash-preview",
+   "value": "26076719",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">26076719<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F37"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gemini-3-flash-preview",
+   "value": "244800",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">244800<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F38"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gemini-3-flash-preview",
+   "value": "82729254",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">82729254<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F39"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-3-flash-preview",
+   "value": "34.4551",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: Cost cell of the open-dataset row openrouter__google__gemini-3-flash-preview",
+   "quote": "<td data-value=\"34.4551\">$34.4551</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F40"
+  },
+  {
+   "says": "price-table",
+   "about": "gemini-3-flash-preview",
+   "value": "$0.5 / $3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.5 / $3</strong>",
+   "id": "F41"
+  },
+  {
+   "says": "run-end",
+   "about": "gemini-3-flash-preview",
+   "value": "2026-04-05",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5596: Updated cell (data-value 2026-04-05T14:17:42.838803+08:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-05T14:17:42.838803+08:00\">",
+   "id": "F42"
+  },
+  {
+   "says": "model-name",
+   "about": "gemini-3.1-pro-preview",
+   "value": "gemini-3.1-pro-preview",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: Model cell (<strong>) of the open-dataset row openrouter__google__gemini-3.1-pro-preview",
+   "quote": "<strong>gemini-3.1-pro-preview</strong>",
+   "id": "F43"
+  },
+  {
+   "says": "score",
+   "about": "gemini-3.1-pro-preview",
+   "value": "53.9542",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: Final Score cell (data-value) of the open-dataset row openrouter__google__gemini-3.1-pro-preview",
+   "quote": "<td data-value=\"53.9542\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F44"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gemini-3.1-pro-preview",
+   "value": "14860816",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">14860816<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F45"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gemini-3.1-pro-preview",
+   "value": "717196",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">717196<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F46"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gemini-3.1-pro-preview",
+   "value": "34100574",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">34100574<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F47"
+  },
+  {
+   "says": "cost",
+   "about": "gemini-3.1-pro-preview",
+   "value": "72.4286",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: Cost cell of the open-dataset row openrouter__google__gemini-3.1-pro-preview",
+   "quote": "<td data-value=\"72.4286\">$72.4286</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F48"
+  },
+  {
+   "says": "price-table",
+   "about": "gemini-3.1-pro-preview",
+   "value": "$2 / $12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2 / $12</strong>",
+   "id": "F49"
+  },
+  {
+   "says": "run-end",
+   "about": "gemini-3.1-pro-preview",
+   "value": "2026-04-02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4933: Updated cell (data-value 2026-04-02T19:14:06.659265+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-02T19:14:06.659265+00:00\">",
+   "id": "F50"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-4.7",
+   "value": "GLM-4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: Model cell (<strong>) of the open-dataset row glm__GLM-4.7",
+   "quote": "<strong>GLM-4.7</strong>",
+   "id": "F51"
+  },
+  {
+   "says": "route",
+   "about": "GLM-4.7",
+   "value": "glm",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: Model cell second line 'glm · glm' (maker · route)",
+   "quote": "glm · glm",
+   "id": "F52"
+  },
+  {
+   "says": "score",
+   "about": "GLM-4.7",
+   "value": "54.5797",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: Final Score cell (data-value) of the open-dataset row glm__GLM-4.7",
+   "quote": "<td data-value=\"54.5797\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F53"
+  },
+  {
+   "says": "tokens-in",
+   "about": "GLM-4.7",
+   "value": "3276264",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">3276264<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F54"
+  },
+  {
+   "says": "tokens-out",
+   "about": "GLM-4.7",
+   "value": "829547",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">829547<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F55"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "GLM-4.7",
+   "value": "36217405",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">36217405<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F56"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-4.7",
+   "value": "9.7918",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: Cost cell of the open-dataset row glm__GLM-4.7",
+   "quote": "<td data-value=\"9.7918\">$9.7918</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F57"
+  },
+  {
+   "says": "price-table",
+   "about": "GLM-4.7",
+   "value": "$0.39 / $1.75",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.39 / $1.75</strong>",
+   "id": "F58"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-4.7",
+   "value": "2026-04-01",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4812: Updated cell (data-value 2026-04-01T02:22:30.898669+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-01T02:22:30.898669+00:00\">",
+   "id": "F59"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5-Turbo",
+   "value": "GLM-5-Turbo",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: Model cell (<strong>) of the open-dataset row glm__GLM-5-Turbo",
+   "quote": "<strong>GLM-5-Turbo</strong>",
+   "id": "F60"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5-Turbo",
+   "value": "61.916",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: Final Score cell (data-value) of the open-dataset row glm__GLM-5-Turbo",
+   "quote": "<td data-value=\"61.916\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F61"
+  },
+  {
+   "says": "tokens-in",
+   "about": "GLM-5-Turbo",
+   "value": "2087604",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">2087604<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F62"
+  },
+  {
+   "says": "tokens-out",
+   "about": "GLM-5-Turbo",
+   "value": "303610",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">303610<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F63"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "GLM-5-Turbo",
+   "value": "20731241",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">20731241<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F64"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5-Turbo",
+   "value": "16.1583",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: Cost cell of the open-dataset row glm__GLM-5-Turbo",
+   "quote": "<td data-value=\"16.1583\">$16.1583</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F65"
+  },
+  {
+   "says": "price-table",
+   "about": "GLM-5-Turbo",
+   "value": "$1.2 / $4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1.2 / $4</strong>",
+   "id": "F66"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-5-Turbo",
+   "value": "2026-04-28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2255: Updated cell (data-value 2026-04-28T02:10:12.586993+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-28T02:10:12.586993+00:00\">",
+   "id": "F67"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5.1",
+   "value": "GLM-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: Model cell (<strong>) of the open-dataset row glm__GLM-5.1",
+   "quote": "<strong>GLM-5.1</strong>",
+   "id": "F68"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "62.9325",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: Final Score cell (data-value) of the open-dataset row glm__GLM-5.1",
+   "quote": "<td data-value=\"62.9325\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F69"
+  },
+  {
+   "says": "tokens-in",
+   "about": "GLM-5.1",
+   "value": "2299534",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">2299534<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F70"
+  },
+  {
+   "says": "tokens-out",
+   "about": "GLM-5.1",
+   "value": "356684",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">356684<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F71"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "GLM-5.1",
+   "value": "44965504",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">44965504<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F72"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5.1",
+   "value": "25.9237",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: Cost cell of the open-dataset row glm__GLM-5.1",
+   "quote": "<td data-value=\"25.9237\">$25.9237</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F73"
+  },
+  {
+   "says": "price-table",
+   "about": "GLM-5.1",
+   "value": "$1 / $3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1 / $3.2</strong>",
+   "id": "F74"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-5.1",
+   "value": "2026-03-30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1886: Updated cell (data-value 2026-03-30T21:44:57.032332+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-03-30T21:44:57.032332+00:00\">",
+   "id": "F75"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 171: Model cell (<strong>) of the open-dataset row glm__GLM-5.2",
+   "quote": "<strong>GLM-5.2</strong>",
+   "id": "F76"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "80.05",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 171: Final Score cell (data-value) of the open-dataset row glm__GLM-5.2",
+   "quote": "<td data-value=\"80.05\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F77"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-5.2",
+   "value": "2026-06-14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 171: Updated cell (data-value 2026-06-14T11:59:46.996602Z): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-06-14T11:59:46.996602Z\">",
+   "id": "F78"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5",
+   "value": "GLM-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: Model cell (<strong>) of the open-dataset row glm__GLM-5",
+   "quote": "<strong>GLM-5</strong>",
+   "id": "F79"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5",
+   "value": "57.0539",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: Final Score cell (data-value) of the open-dataset row glm__GLM-5",
+   "quote": "<td data-value=\"57.0539\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F80"
+  },
+  {
+   "says": "tokens-in",
+   "about": "GLM-5",
+   "value": "3229307",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">3229307<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F81"
+  },
+  {
+   "says": "tokens-out",
+   "about": "GLM-5",
+   "value": "564274",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">564274<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F82"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "GLM-5",
+   "value": "31183424",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">31183424<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F83"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5",
+   "value": "14.849",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: Cost cell of the open-dataset row glm__GLM-5",
+   "quote": "<td data-value=\"14.849\">$14.849</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F84"
+  },
+  {
+   "says": "price-table",
+   "about": "GLM-5",
+   "value": "$0.72 / $2.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.72 / $2.3</strong>",
+   "id": "F85"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-5",
+   "value": "2026-03-31",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4385: Updated cell (data-value 2026-03-31T18:21:46.334200+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-03-31T18:21:46.334200+00:00\">",
+   "id": "F86"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "gpt-5.3-codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: Model cell (<strong>) of the open-dataset row codex-cli__gpt-5.3-codex (the name before the '-xhigh' suffix)",
+   "quote": "<strong>gpt-5.3-codex-xhigh</strong>",
+   "id": "F87"
+  },
+  {
+   "says": "effort-label",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: Model cell, suffix of the name",
+   "quote": "<strong>gpt-5.3-codex-xhigh</strong>",
+   "id": "F88"
+  },
+  {
+   "says": "route",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "openai",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: Model cell second line 'openai · openai' (maker · route)",
+   "quote": "openai · openai",
+   "id": "F89"
+  },
+  {
+   "says": "score",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "65.4466",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: Final Score cell (data-value) of the open-dataset row codex-cli__gpt-5.3-codex",
+   "quote": "<td data-value=\"65.4466\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F90"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "67094837",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">67094837<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F91"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "1348392",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">1348392<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F92"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "61451008",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">61451008<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F93"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "190.0631",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: Cost cell of the open-dataset row codex-cli__gpt-5.3-codex",
+   "quote": "<td data-value=\"190.0631\">$190.0631</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F94"
+  },
+  {
+   "says": "price-table",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "$1.75 / $14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1.75 / $14</strong>",
+   "id": "F95"
+  },
+  {
+   "says": "run-end",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "2026-05-06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1334: Updated cell (data-value 2026-05-06T22:27:48.457634+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-06T22:27:48.457634+00:00\">",
+   "id": "F96"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-5.4-xhigh",
+   "value": "gpt-5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: Model cell (<strong>) of the open-dataset row codex-cli__gpt-5.4 (the name before the '-xhigh' suffix)",
+   "quote": "<strong>gpt-5.4-xhigh</strong>",
+   "id": "F97"
+  },
+  {
+   "says": "effort-label",
+   "about": "gpt-5.4-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: Model cell, suffix of the name",
+   "quote": "<strong>gpt-5.4-xhigh</strong>",
+   "id": "F98"
+  },
+  {
+   "says": "score",
+   "about": "gpt-5.4-xhigh",
+   "value": "67.2538",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: Final Score cell (data-value) of the open-dataset row codex-cli__gpt-5.4",
+   "quote": "<td data-value=\"67.2538\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F99"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gpt-5.4-xhigh",
+   "value": "74566518",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">74566518<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F100"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gpt-5.4-xhigh",
+   "value": "1723981",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">1723981<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F101"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gpt-5.4-xhigh",
+   "value": "60966016",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">60966016<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F102"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-5.4-xhigh",
+   "value": "288.4835",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: Cost cell of the open-dataset row codex-cli__gpt-5.4",
+   "quote": "<td data-value=\"288.4835\">$288.4835</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F103"
+  },
+  {
+   "says": "price-table",
+   "about": "gpt-5.4-xhigh",
+   "value": "$2.5 / $15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2.5 / $15</strong>",
+   "id": "F104"
+  },
+  {
+   "says": "run-end",
+   "about": "gpt-5.4-xhigh",
+   "value": "2026-05-05",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1211: Updated cell (data-value 2026-05-05T18:41:50.209518+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-05T18:41:50.209518+00:00\">",
+   "id": "F105"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-5.5-xhigh",
+   "value": "gpt-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: Model cell (<strong>) of the open-dataset row codex-cli__gpt-5.5 (the name before the '-xhigh' suffix)",
+   "quote": "<strong>gpt-5.5-xhigh</strong>",
+   "id": "F106"
+  },
+  {
+   "says": "effort-label",
+   "about": "gpt-5.5-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: Model cell, suffix of the name",
+   "quote": "<strong>gpt-5.5-xhigh</strong>",
+   "id": "F107"
+  },
+  {
+   "says": "score",
+   "about": "gpt-5.5-xhigh",
+   "value": "67.8997",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: Final Score cell (data-value) of the open-dataset row codex-cli__gpt-5.5",
+   "quote": "<td data-value=\"67.8997\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F108"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gpt-5.5-xhigh",
+   "value": "72643986",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">72643986<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F109"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gpt-5.5-xhigh",
+   "value": "1352681",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">1352681<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F110"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gpt-5.5-xhigh",
+   "value": "65777152",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">65777152<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F111"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-5.5-xhigh",
+   "value": "568.2432",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: Cost cell of the open-dataset row codex-cli__gpt-5.5",
+   "quote": "<td data-value=\"568.2432\">$568.2432</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F112"
+  },
+  {
+   "says": "price-table",
+   "about": "gpt-5.5-xhigh",
+   "value": "$5 / $30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$5 / $30</strong>",
+   "id": "F113"
+  },
+  {
+   "says": "run-end",
+   "about": "gpt-5.5-xhigh",
+   "value": "2026-05-04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1088: Updated cell (data-value 2026-05-04T07:21:33.330389+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-04T07:21:33.330389+00:00\">",
+   "id": "F114"
+  },
+  {
+   "says": "model-name",
+   "about": "grok-4.20",
+   "value": "grok-4.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: Model cell (<strong>) of the open-dataset row openrouter__x-ai__grok-4.20",
+   "quote": "<strong>grok-4.20</strong>",
+   "id": "F115"
+  },
+  {
+   "says": "route",
+   "about": "grok-4.20",
+   "value": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: Model cell second line 'x-ai · openrouter' (maker · route)",
+   "quote": "x-ai · openrouter",
+   "term": "openrouter",
+   "id": "F116"
+  },
+  {
+   "says": "score",
+   "about": "grok-4.20",
+   "value": "43.0369",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: Final Score cell (data-value) of the open-dataset row openrouter__x-ai__grok-4.20",
+   "quote": "<td data-value=\"43.0369\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F117"
+  },
+  {
+   "says": "tokens-in",
+   "about": "grok-4.20",
+   "value": "7668306",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">7668306<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F118"
+  },
+  {
+   "says": "tokens-out",
+   "about": "grok-4.20",
+   "value": "197632",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">197632<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F119"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "grok-4.20",
+   "value": "43267072",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">43267072<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F120"
+  },
+  {
+   "says": "cost",
+   "about": "grok-4.20",
+   "value": "59.7895",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: Cost cell of the open-dataset row openrouter__x-ai__grok-4.20",
+   "quote": "<td data-value=\"59.7895\">$59.7895</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F121"
+  },
+  {
+   "says": "price-table",
+   "about": "grok-4.20",
+   "value": "$2 / $6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2 / $6</strong>",
+   "id": "F122"
+  },
+  {
+   "says": "run-end",
+   "about": "grok-4.20",
+   "value": "2026-04-04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6019: Updated cell (data-value 2026-04-04T16:20:52.816438+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-04T16:20:52.816438+00:00\">",
+   "id": "F123"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi-K2-Thinking",
+   "value": "Kimi-K2-Thinking",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: Model cell (<strong>) of the open-dataset row siliconflow__moonshotai__Kimi-K2-Thinking",
+   "quote": "<strong>Kimi-K2-Thinking</strong>",
+   "id": "F124"
+  },
+  {
+   "says": "route",
+   "about": "Kimi-K2-Thinking",
+   "value": "siliconflow",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: Model cell second line 'moonshot · siliconflow' (maker · route)",
+   "quote": "moonshot · siliconflow",
+   "term": "siliconflow",
+   "id": "F125"
+  },
+  {
+   "says": "score",
+   "about": "Kimi-K2-Thinking",
+   "value": "47.829",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: Final Score cell (data-value) of the open-dataset row siliconflow__moonshotai__Kimi-K2-Thinking",
+   "quote": "<td data-value=\"47.829\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F126"
+  },
+  {
+   "says": "tokens-in",
+   "about": "Kimi-K2-Thinking",
+   "value": "35311598",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">35311598<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F127"
+  },
+  {
+   "says": "tokens-out",
+   "about": "Kimi-K2-Thinking",
+   "value": "1020509",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">1020509<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F128"
+  },
+  {
+   "says": "cost",
+   "about": "Kimi-K2-Thinking",
+   "value": "23.7382",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: Cost cell of the open-dataset row siliconflow__moonshotai__Kimi-K2-Thinking",
+   "quote": "<td data-value=\"23.7382\">$23.7382</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F129"
+  },
+  {
+   "says": "price-table",
+   "about": "Kimi-K2-Thinking",
+   "value": "$0.6 / $2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.6 / $2.5</strong>",
+   "id": "F130"
+  },
+  {
+   "says": "run-end",
+   "about": "Kimi-K2-Thinking",
+   "value": "2026-04-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5779: Updated cell (data-value 2026-04-09T15:38:43.865300+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-09T15:38:43.865300+00:00\">",
+   "id": "F131"
+  },
+  {
+   "says": "model-name",
+   "about": "kimi-k2.5",
+   "value": "kimi-k2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: Model cell (<strong>) of the open-dataset row moonshot__kimi-k2.5",
+   "quote": "<strong>kimi-k2.5</strong>",
+   "id": "F132"
+  },
+  {
+   "says": "route",
+   "about": "kimi-k2.5",
+   "value": "moonshot",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: Model cell second line 'moonshot · moonshot' (maker · route)",
+   "quote": "moonshot · moonshot",
+   "id": "F133"
+  },
+  {
+   "says": "score",
+   "about": "kimi-k2.5",
+   "value": "58.4948",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: Final Score cell (data-value) of the open-dataset row moonshot__kimi-k2.5",
+   "quote": "<td data-value=\"58.4948\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F134"
+  },
+  {
+   "says": "tokens-in",
+   "about": "kimi-k2.5",
+   "value": "3470897",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">3470897<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F135"
+  },
+  {
+   "says": "tokens-out",
+   "about": "kimi-k2.5",
+   "value": "369572",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">369572<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F136"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "kimi-k2.5",
+   "value": "37839104",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">37839104<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F137"
+  },
+  {
+   "says": "cost",
+   "about": "kimi-k2.5",
+   "value": "9.2045",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: Cost cell of the open-dataset row moonshot__kimi-k2.5",
+   "quote": "<td data-value=\"9.2045\">$9.2045</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F138"
+  },
+  {
+   "says": "price-table",
+   "about": "kimi-k2.5",
+   "value": "$0.3827 / $1.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.3827 / $1.72</strong>",
+   "id": "F139"
+  },
+  {
+   "says": "run-end",
+   "about": "kimi-k2.5",
+   "value": "2026-04-02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3718: Updated cell (data-value 2026-04-02T19:39:36.143965+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-02T19:39:36.143965+00:00\">",
+   "id": "F140"
+  },
+  {
+   "says": "model-name",
+   "about": "kimi-k2.6",
+   "value": "kimi-k2.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: Model cell (<strong>) of the open-dataset row volcengine-plan__kimi-k2.6",
+   "quote": "<strong>kimi-k2.6</strong>",
+   "id": "F141"
+  },
+  {
+   "says": "route",
+   "about": "kimi-k2.6",
+   "value": "volcengine-plan",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: Model cell second line 'moonshot · volcengine-plan' (maker · route)",
+   "quote": "moonshot · volcengine-plan",
+   "term": "volcengine",
+   "id": "F142"
+  },
+  {
+   "says": "score",
+   "about": "kimi-k2.6",
+   "value": "59.3141",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: Final Score cell (data-value) of the open-dataset row volcengine-plan__kimi-k2.6",
+   "quote": "<td data-value=\"59.3141\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F143"
+  },
+  {
+   "says": "tokens-in",
+   "about": "kimi-k2.6",
+   "value": "11160022",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">11160022<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F144"
+  },
+  {
+   "says": "tokens-out",
+   "about": "kimi-k2.6",
+   "value": "935949",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">935949<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F145"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "kimi-k2.6",
+   "value": "44265670",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">44265670<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F146"
+  },
+  {
+   "says": "cost",
+   "about": "kimi-k2.6",
+   "value": "35.1856",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: Cost cell of the open-dataset row volcengine-plan__kimi-k2.6",
+   "quote": "<td data-value=\"35.1856\">$35.1856</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F147"
+  },
+  {
+   "says": "price-table",
+   "about": "kimi-k2.6",
+   "value": "$0.9444 / $4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.9444 / $4</strong>",
+   "id": "F148"
+  },
+  {
+   "says": "run-end",
+   "about": "kimi-k2.6",
+   "value": "2026-04-28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3286: Updated cell (data-value 2026-04-28T02:14:21.776264+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-28T02:14:21.776264+00:00\">",
+   "id": "F149"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K3",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 294: Model cell (<strong>) of the open-dataset row moonshot__kimi-k3",
+   "quote": "<strong>Kimi K3</strong>",
+   "id": "F150"
+  },
+  {
+   "says": "route",
+   "about": "Kimi K3",
+   "value": "kimi",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 294: Model cell second line 'moonshot · kimi' (maker · route)",
+   "quote": "moonshot · kimi",
+   "id": "F151"
+  },
+  {
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "78.4",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 294: Final Score cell (data-value) of the open-dataset row moonshot__kimi-k3",
+   "quote": "<td data-value=\"78.4\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F152"
+  },
+  {
+   "says": "run-end",
+   "about": "Kimi K3",
+   "value": "2026-07-17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 294: Updated cell (data-value 2026-07-17T10:00:00.000000Z): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-07-17T10:00:00.000000Z\">",
+   "id": "F153"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3-coder-next",
+   "value": "qwen3-coder-next",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: Model cell (<strong>) of the open-dataset row bailian__qwen3-coder-next",
+   "quote": "<strong>qwen3-coder-next</strong>",
+   "id": "F154"
+  },
+  {
+   "says": "route",
+   "about": "qwen3-coder-next",
+   "value": "bailiancodingplan",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: Model cell second line 'qwen · bailiancodingplan' (maker · route)",
+   "quote": "qwen · bailiancodingplan",
+   "id": "F155"
+  },
+  {
+   "says": "score",
+   "about": "qwen3-coder-next",
+   "value": "46.8411",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: Final Score cell (data-value) of the open-dataset row bailian__qwen3-coder-next",
+   "quote": "<td data-value=\"46.8411\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F156"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3-coder-next",
+   "value": "12293170",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">12293170<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F157"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3-coder-next",
+   "value": "381362",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">381362<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F158"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3-coder-next",
+   "value": "92048109",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">92048109<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F159"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3-coder-next",
+   "value": "21.7349",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: Cost cell of the open-dataset row bailian__qwen3-coder-next",
+   "quote": "<td data-value=\"21.7349\">$21.7349</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F160"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3-coder-next",
+   "value": "$0.3632 / $1.4529",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.3632 / $1.4529</strong>",
+   "id": "F161"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3-coder-next",
+   "value": "2026-04-08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 5897: Updated cell (data-value 2026-04-08T01:01:40.529897+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-08T01:01:40.529897+00:00\">",
+   "id": "F162"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.5-397b-a17b",
+   "value": "qwen3.5-397b-a17b",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: Model cell (<strong>) of the open-dataset row bailian-compatible__qwen3.5-397b-a17b",
+   "quote": "<strong>qwen3.5-397b-a17b</strong>",
+   "id": "F163"
+  },
+  {
+   "says": "route",
+   "about": "qwen3.5-397b-a17b",
+   "value": "bailiantokenplan",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: Model cell second line 'qwen · bailiantokenplan' (maker · route)",
+   "quote": "qwen · bailiantokenplan",
+   "id": "F164"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.5-397b-a17b",
+   "value": "64.1781",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: Final Score cell (data-value) of the open-dataset row bailian-compatible__qwen3.5-397b-a17b",
+   "quote": "<td data-value=\"64.1781\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F165"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.5-397b-a17b",
+   "value": "10647098",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">10647098<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F166"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.5-397b-a17b",
+   "value": "535556",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">535556<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F167"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.5-397b-a17b",
+   "value": "46011469",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">46011469<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F168"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.5-397b-a17b",
+   "value": "16.0699",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: Cost cell of the open-dataset row bailian-compatible__qwen3.5-397b-a17b",
+   "quote": "<td data-value=\"16.0699\">$16.0699</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F169"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.5-397b-a17b",
+   "value": "$0.4359 / $2.6153",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.4359 / $2.6153</strong>",
+   "id": "F170"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.5-397b-a17b",
+   "value": "2026-04-30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1701: Updated cell (data-value 2026-04-30T06:52:19.582831+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-30T06:52:19.582831+00:00\">",
+   "id": "F171"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.5-plus",
+   "value": "qwen3.5-plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: Model cell (<strong>) of the open-dataset row bailian__qwen3.5-plus",
+   "quote": "<strong>qwen3.5-plus</strong>",
+   "id": "F172"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.5-plus",
+   "value": "64.1931",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: Final Score cell (data-value) of the open-dataset row bailian__qwen3.5-plus",
+   "quote": "<td data-value=\"64.1931\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F173"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.5-plus",
+   "value": "10347477",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">10347477<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F174"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.5-plus",
+   "value": "534393",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">534393<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F175"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.5-plus",
+   "value": "63374406",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">63374406<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F176"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.5-plus",
+   "value": "11.7627",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: Cost cell of the open-dataset row bailian__qwen3.5-plus",
+   "quote": "<td data-value=\"11.7627\">$11.7627</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F177"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.5-plus",
+   "value": "$0.26 / $1.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.26 / $1.56</strong>",
+   "id": "F178"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.5-plus",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1580: Updated cell (data-value 2026-04-06T13:27:40.908665+08:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-06T13:27:40.908665+08:00\">",
+   "id": "F179"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.6-27b",
+   "value": "qwen3.6-27b",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: Model cell (<strong>) of the open-dataset row bailian-compatible__qwen3.6-27b",
+   "quote": "<strong>qwen3.6-27b</strong>",
+   "id": "F180"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.6-27b",
+   "value": "58.7411",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: Final Score cell (data-value) of the open-dataset row bailian-compatible__qwen3.6-27b",
+   "quote": "<td data-value=\"58.7411\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F181"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.6-27b",
+   "value": "10744142",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">10744142<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F182"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.6-27b",
+   "value": "691108",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">691108<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F183"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.6-27b",
+   "value": "38750119",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">38750119<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F184"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.6-27b",
+   "value": "14.9364",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: Cost cell of the open-dataset row bailian-compatible__qwen3.6-27b",
+   "quote": "<td data-value=\"14.9364\">$14.9364</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F185"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.6-27b",
+   "value": "$0.4359 / $2.6153",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.4359 / $2.6153</strong>",
+   "id": "F186"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.6-27b",
+   "value": "2026-04-26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3656: Updated cell (data-value 2026-04-26T13:53:44.931850+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-26T13:53:44.931850+00:00\">",
+   "id": "F187"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.6-35b-a3b",
+   "value": "qwen3.6-35b-a3b",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: Model cell (<strong>) of the open-dataset row bailian-compatible__qwen3.6-35b-a3b",
+   "quote": "<strong>qwen3.6-35b-a3b</strong>",
+   "id": "F188"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.6-35b-a3b",
+   "value": "56.9379",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: Final Score cell (data-value) of the open-dataset row bailian-compatible__qwen3.6-35b-a3b",
+   "quote": "<td data-value=\"56.9379\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F189"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.6-35b-a3b",
+   "value": "11059276",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">11059276<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F190"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.6-35b-a3b",
+   "value": "743635",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">743635<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F191"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.6-35b-a3b",
+   "value": "41977370",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">41977370<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F192"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.6-35b-a3b",
+   "value": "9.5475",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: Cost cell of the open-dataset row bailian-compatible__qwen3.6-35b-a3b",
+   "quote": "<td data-value=\"9.5475\">$9.5475</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F193"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.6-35b-a3b",
+   "value": "$0.2615 / $1.5692",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.2615 / $1.5692</strong>",
+   "id": "F194"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.6-35b-a3b",
+   "value": "2026-04-26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4445: Updated cell (data-value 2026-04-26T13:43:36.636609+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-26T13:43:36.636609+00:00\">",
+   "id": "F195"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.6-flash",
+   "value": "qwen3.6-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: Model cell (<strong>) of the open-dataset row bailian-compatible__qwen3.6-flash",
+   "quote": "<strong>qwen3.6-flash</strong>",
+   "id": "F196"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.6-flash",
+   "value": "56.5531",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: Final Score cell (data-value) of the open-dataset row bailian-compatible__qwen3.6-flash",
+   "quote": "<td data-value=\"56.5531\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F197"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.6-flash",
+   "value": "10973905",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">10973905<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F198"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.6-flash",
+   "value": "834629",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">834629<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F199"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.6-flash",
+   "value": "49646631",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">49646631<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F200"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.6-flash",
+   "value": "28.4575",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: Cost cell of the open-dataset row bailian-compatible__qwen3.6-flash",
+   "quote": "<td data-value=\"28.4575\">$28.4575</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F201"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.6-flash",
+   "value": "$0.6974 / $4.1845",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.6974 / $4.1845</strong>",
+   "id": "F202"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.6-flash",
+   "value": "2026-04-26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4507: Updated cell (data-value 2026-04-26T13:19:18.379876+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-26T13:19:18.379876+00:00\">",
+   "id": "F203"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.6-max-preview",
+   "value": "qwen3.6-max-preview",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: Model cell (<strong>) of the open-dataset row bailian-compatible__qwen3.6-max-preview",
+   "quote": "<strong>qwen3.6-max-preview</strong>",
+   "id": "F204"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.6-max-preview",
+   "value": "57.4018",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: Final Score cell (data-value) of the open-dataset row bailian-compatible__qwen3.6-max-preview",
+   "quote": "<td data-value=\"57.4018\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F205"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.6-max-preview",
+   "value": "11239120",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">11239120<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F206"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.6-max-preview",
+   "value": "629190",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">629190<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F207"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.6-max-preview",
+   "value": "48958664",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">48958664<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F208"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.6-max-preview",
+   "value": "86.0724",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: Cost cell of the open-dataset row bailian-compatible__qwen3.6-max-preview",
+   "quote": "<td data-value=\"86.0724\">$86.0724</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F209"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.6-max-preview",
+   "value": "$2.1794 / $13.0765",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2.1794 / $13.0765</strong>",
+   "id": "F210"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.6-max-preview",
+   "value": "2026-04-24",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4200: Updated cell (data-value 2026-04-24T15:08:10.960489+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-24T15:08:10.960489+00:00\">",
+   "id": "F211"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.6-plus",
+   "value": "qwen3.6-plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: Model cell (<strong>) of the open-dataset row bailian-compatible__qwen3.6-plus",
+   "quote": "<strong>qwen3.6-plus</strong>",
+   "id": "F212"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.6-plus",
+   "value": "60.2045",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: Final Score cell (data-value) of the open-dataset row bailian-compatible__qwen3.6-plus",
+   "quote": "<td data-value=\"60.2045\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F213"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.6-plus",
+   "value": "10301722",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">10301722<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F214"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.6-plus",
+   "value": "614619",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">614619<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F215"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.6-plus",
+   "value": "37955848",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">37955848<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F216"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.6-plus",
+   "value": "38.2483",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: Cost cell of the open-dataset row bailian-compatible__qwen3.6-plus",
+   "quote": "<td data-value=\"38.2483\">$38.2483</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F217"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.6-plus",
+   "value": "$1.16 / $6.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1.16 / $6.97</strong>",
+   "id": "F218"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.6-plus",
+   "value": "2026-04-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2865: Updated cell (data-value 2026-04-22T10:43:39.117240+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-04-22T10:43:39.117240+00:00\">",
+   "id": "F219"
+  },
+  {
+   "says": "model-name",
+   "about": "Claude Sonnet 4.6",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2622: Model cell (<strong>) of the open-dataset row openrouter__claude-sonnet-4-6",
+   "quote": "<strong>Claude Sonnet 4.6</strong>",
+   "id": "F220"
+  },
+  {
+   "says": "route",
+   "about": "Claude Sonnet 4.6",
+   "value": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2622: Model cell second line 'anthropic · openrouter' (maker · route)",
+   "quote": "anthropic · openrouter",
+   "term": "openrouter",
+   "id": "F221"
+  },
+  {
+   "says": "score",
+   "about": "Claude Sonnet 4.6",
+   "value": "60.497",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2622: Final Score cell (data-value) of the open-dataset row openrouter__claude-sonnet-4-6",
+   "quote": "<td data-value=\"60.497\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F222"
+  },
+  {
+   "says": "tokens-in",
+   "about": "Claude Sonnet 4.6",
+   "value": "28539688",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2622: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">28539688<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F223"
+  },
+  {
+   "says": "tokens-out",
+   "about": "Claude Sonnet 4.6",
+   "value": "592315",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2622: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">592315<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F224"
+  },
+  {
+   "says": "cost",
+   "about": "Claude Sonnet 4.6",
+   "value": "94.5038",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2622: Cost cell of the open-dataset row openrouter__claude-sonnet-4-6",
+   "quote": "<td data-value=\"94.5038\">$94.5038</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F225"
+  },
+  {
+   "says": "price-table",
+   "about": "Claude Sonnet 4.6",
+   "value": "$3 / $15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2622: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$3 / $15</strong>",
+   "id": "F226"
+  },
+  {
+   "says": "model-name",
+   "about": "DeepSeek-V3.2",
+   "value": "DeepSeek-V3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: Model cell (<strong>) of the closed-dataset row volcengine-plan__deepseek-v3.2",
+   "quote": "<strong>DeepSeek-V3.2</strong>",
+   "id": "F227"
+  },
+  {
+   "says": "route",
+   "about": "DeepSeek-V3.2",
+   "value": "volcengine-plan",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: Model cell second line 'deepseek-ai · volcengine-plan' (maker · route)",
+   "quote": "deepseek-ai · volcengine-plan",
+   "term": "volcengine",
+   "id": "F228"
+  },
+  {
+   "says": "score",
+   "about": "DeepSeek-V3.2",
+   "value": "54.0045",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: Final Score cell (data-value) of the closed-dataset row volcengine-plan__deepseek-v3.2",
+   "quote": "<td data-value=\"54.0045\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F229"
+  },
+  {
+   "says": "tokens-in",
+   "about": "DeepSeek-V3.2",
+   "value": "6440532",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">6440532<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F230"
+  },
+  {
+   "says": "tokens-out",
+   "about": "DeepSeek-V3.2",
+   "value": "146561",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">146561<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F231"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "DeepSeek-V3.2",
+   "value": "26629980",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">26629980<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F232"
+  },
+  {
+   "says": "cost",
+   "about": "DeepSeek-V3.2",
+   "value": "5.1921",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: Cost cell of the closed-dataset row volcengine-plan__deepseek-v3.2",
+   "quote": "<td data-value=\"5.1921\">$5.1921</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F233"
+  },
+  {
+   "says": "price-table",
+   "about": "DeepSeek-V3.2",
+   "value": "$0.26 / $0.38",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.26 / $0.38</strong>",
+   "id": "F234"
+  },
+  {
+   "says": "run-end",
+   "about": "DeepSeek-V3.2",
+   "value": "2026-05-16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3104: Updated cell (data-value 2026-05-16T17:43:00.460003+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-16T17:43:00.460003+00:00\">",
+   "id": "F235"
+  },
+  {
+   "says": "model-name",
+   "about": "deepseek-v4-flash",
+   "value": "deepseek-v4-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: Model cell (<strong>) of the closed-dataset row deepseek__deepseek-v4-flash",
+   "quote": "<strong>deepseek-v4-flash</strong>",
+   "id": "F236"
+  },
+  {
+   "says": "score",
+   "about": "deepseek-v4-flash",
+   "value": "46.6789",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: Final Score cell (data-value) of the closed-dataset row deepseek__deepseek-v4-flash",
+   "quote": "<td data-value=\"46.6789\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F237"
+  },
+  {
+   "says": "tokens-in",
+   "about": "deepseek-v4-flash",
+   "value": "2429587",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">2429587<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F238"
+  },
+  {
+   "says": "tokens-out",
+   "about": "deepseek-v4-flash",
+   "value": "416918",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">416918<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F239"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "deepseek-v4-flash",
+   "value": "10410368",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">10410368<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F240"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek-v4-flash",
+   "value": "1.2305",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: Cost cell of the closed-dataset row deepseek__deepseek-v4-flash",
+   "quote": "<td data-value=\"1.2305\">$1.2305</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F241"
+  },
+  {
+   "says": "price-table",
+   "about": "deepseek-v4-flash",
+   "value": "$0.1453 / $0.2906",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.1453 / $0.2906</strong>",
+   "id": "F242"
+  },
+  {
+   "says": "run-end",
+   "about": "deepseek-v4-flash",
+   "value": "2026-05-16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2436: Updated cell (data-value 2026-05-16T20:00:22.951108+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-16T20:00:22.951108+00:00\">",
+   "id": "F243"
+  },
+  {
+   "says": "model-name",
+   "about": "deepseek-v4-pro",
+   "value": "deepseek-v4-pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: Model cell (<strong>) of the closed-dataset row deepseek__deepseek-v4-pro",
+   "quote": "<strong>deepseek-v4-pro</strong>",
+   "id": "F244"
+  },
+  {
+   "says": "score",
+   "about": "deepseek-v4-pro",
+   "value": "56.3501",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: Final Score cell (data-value) of the closed-dataset row deepseek__deepseek-v4-pro",
+   "quote": "<td data-value=\"56.3501\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F245"
+  },
+  {
+   "says": "tokens-in",
+   "about": "deepseek-v4-pro",
+   "value": "2428295",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">2428295<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F246"
+  },
+  {
+   "says": "tokens-out",
+   "about": "deepseek-v4-pro",
+   "value": "395219",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">395219<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F247"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "deepseek-v4-pro",
+   "value": "10250240",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">10250240<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F248"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek-v4-pro",
+   "value": "17.7761",
+   "level": "not-established:contradictory",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: Cost cell of the closed-dataset row deepseek__deepseek-v4-pro",
+   "quote": "<td data-value=\"17.7761\">$17.7761</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F249"
+  },
+  {
+   "says": "price-table",
+   "about": "deepseek-v4-pro",
+   "value": "$2.0341 / $6.1023",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2.0341 / $6.1023</strong>",
+   "id": "F250"
+  },
+  {
+   "says": "run-end",
+   "about": "deepseek-v4-pro",
+   "value": "2026-05-14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1517: Updated cell (data-value 2026-05-14T19:00:20.991935+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-14T19:00:20.991935+00:00\">",
+   "id": "F251"
+  },
+  {
+   "says": "model-name",
+   "about": "gemini-3.1-pro-preview",
+   "value": "gemini-3.1-pro-preview",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4991: Model cell (<strong>) of the closed-dataset row openrouter__google__gemini-3.1-pro-preview",
+   "quote": "<strong>gemini-3.1-pro-preview</strong>",
+   "id": "F252"
+  },
+  {
+   "says": "route",
+   "about": "gemini-3.1-pro-preview",
+   "value": "agy",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4991: Model cell second line 'google · agy' (maker · route)",
+   "quote": "google · agy",
+   "id": "F253"
+  },
+  {
+   "says": "score",
+   "about": "gemini-3.1-pro-preview",
+   "value": "55.3729",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4991: Final Score cell (data-value) of the closed-dataset row openrouter__google__gemini-3.1-pro-preview",
+   "quote": "<td data-value=\"55.3729\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F254"
+  },
+  {
+   "says": "run-end",
+   "about": "gemini-3.1-pro-preview",
+   "value": "2026-05-25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4991: Updated cell (data-value 2026-05-25T19:00:26.130045+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-25T19:00:26.130045+00:00\">",
+   "id": "F255"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-4.7",
+   "value": "GLM-4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: Model cell (<strong>) of the closed-dataset row glm__GLM-4.7",
+   "quote": "<strong>GLM-4.7</strong>",
+   "id": "F256"
+  },
+  {
+   "says": "score",
+   "about": "GLM-4.7",
+   "value": "47.9641",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: Final Score cell (data-value) of the closed-dataset row glm__GLM-4.7",
+   "quote": "<td data-value=\"47.9641\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F257"
+  },
+  {
+   "says": "tokens-in",
+   "about": "GLM-4.7",
+   "value": "561065",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">561065<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F258"
+  },
+  {
+   "says": "tokens-out",
+   "about": "GLM-4.7",
+   "value": "271780",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">271780<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F259"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "GLM-4.7",
+   "value": "12270464",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">12270464<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F260"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-4.7",
+   "value": "3.0872",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: Cost cell of the closed-dataset row glm__GLM-4.7",
+   "quote": "<td data-value=\"3.0872\">$3.0872</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F261"
+  },
+  {
+   "says": "price-table",
+   "about": "GLM-4.7",
+   "value": "$0.39 / $1.75",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.39 / $1.75</strong>",
+   "id": "F262"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-4.7",
+   "value": "2026-05-16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4870: Updated cell (data-value 2026-05-16T19:08:20.456336+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-16T19:08:20.456336+00:00\">",
+   "id": "F263"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5-Turbo",
+   "value": "GLM-5-Turbo",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: Model cell (<strong>) of the closed-dataset row glm__GLM-5-Turbo",
+   "quote": "<strong>GLM-5-Turbo</strong>",
+   "id": "F264"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5-Turbo",
+   "value": "51.8828",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: Final Score cell (data-value) of the closed-dataset row glm__GLM-5-Turbo",
+   "quote": "<td data-value=\"51.8828\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F265"
+  },
+  {
+   "says": "tokens-in",
+   "about": "GLM-5-Turbo",
+   "value": "420194",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">420194<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F266"
+  },
+  {
+   "says": "tokens-out",
+   "about": "GLM-5-Turbo",
+   "value": "103036",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">103036<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F267"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "GLM-5-Turbo",
+   "value": "11532096",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">11532096<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F268"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5-Turbo",
+   "value": "7.8356",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: Cost cell of the closed-dataset row glm__GLM-5-Turbo",
+   "quote": "<td data-value=\"7.8356\">$7.8356</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F269"
+  },
+  {
+   "says": "price-table",
+   "about": "GLM-5-Turbo",
+   "value": "$1.2 / $4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1.2 / $4</strong>",
+   "id": "F270"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-5-Turbo",
+   "value": "2026-05-16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2313: Updated cell (data-value 2026-05-16T21:26:33.725072+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-16T21:26:33.725072+00:00\">",
+   "id": "F271"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5.1",
+   "value": "GLM-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: Model cell (<strong>) of the closed-dataset row glm__GLM-5.1",
+   "quote": "<strong>GLM-5.1</strong>",
+   "id": "F272"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "52.8875",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: Final Score cell (data-value) of the closed-dataset row glm__GLM-5.1",
+   "quote": "<td data-value=\"52.8875\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F273"
+  },
+  {
+   "says": "tokens-in",
+   "about": "GLM-5.1",
+   "value": "424654",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">424654<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F274"
+  },
+  {
+   "says": "tokens-out",
+   "about": "GLM-5.1",
+   "value": "99483",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">99483<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F275"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "GLM-5.1",
+   "value": "11465216",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">11465216<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F276"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5.1",
+   "value": "6.4756",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: Cost cell of the closed-dataset row glm__GLM-5.1",
+   "quote": "<td data-value=\"6.4756\">$6.4756</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F277"
+  },
+  {
+   "says": "price-table",
+   "about": "GLM-5.1",
+   "value": "$1 / $3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1 / $3.2</strong>",
+   "id": "F278"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-5.1",
+   "value": "2026-05-16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1946: Updated cell (data-value 2026-05-16T21:23:30.078827+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-16T21:23:30.078827+00:00\">",
+   "id": "F279"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 231: Model cell (<strong>) of the closed-dataset row glm__GLM-5.2",
+   "quote": "<strong>GLM-5.2</strong>",
+   "id": "F280"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "56.1035",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 231: Final Score cell (data-value) of the closed-dataset row glm__GLM-5.2",
+   "quote": "<td data-value=\"56.1035\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F281"
+  },
+  {
+   "says": "run-end",
+   "about": "GLM-5.2",
+   "value": "2026-06-14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 231: Updated cell (data-value 2026-06-14T12:00:25.662541Z): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-06-14T12:00:25.662541Z\">",
+   "id": "F282"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "gpt-5.3-codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: Model cell (<strong>) of the closed-dataset row codex-cli__gpt-5.3-codex (the name before the '-xhigh' suffix)",
+   "quote": "<strong>gpt-5.3-codex-xhigh</strong>",
+   "id": "F283"
+  },
+  {
+   "says": "effort-label",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: Model cell, suffix of the name",
+   "quote": "<strong>gpt-5.3-codex-xhigh</strong>",
+   "id": "F284"
+  },
+  {
+   "says": "score",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "58.446",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: Final Score cell (data-value) of the closed-dataset row codex-cli__gpt-5.3-codex",
+   "quote": "<td data-value=\"58.446\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F285"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "30926521",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">30926521<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F286"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "575404",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">575404<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F287"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "28464512",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">28464512<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F288"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "87.0835",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: Cost cell of the closed-dataset row codex-cli__gpt-5.3-codex",
+   "quote": "<td data-value=\"87.0835\">$87.0835</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F289"
+  },
+  {
+   "says": "price-table",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "$1.75 / $14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1.75 / $14</strong>",
+   "id": "F290"
+  },
+  {
+   "says": "run-end",
+   "about": "gpt-5.3-codex-xhigh",
+   "value": "2026-05-13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1394: Updated cell (data-value 2026-05-13T18:10:35.066394+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-13T18:10:35.066394+00:00\">",
+   "id": "F291"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-5.4-xhigh",
+   "value": "gpt-5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: Model cell (<strong>) of the closed-dataset row codex-cli__gpt-5.4 (the name before the '-xhigh' suffix)",
+   "quote": "<strong>gpt-5.4-xhigh</strong>",
+   "id": "F292"
+  },
+  {
+   "says": "effort-label",
+   "about": "gpt-5.4-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: Model cell, suffix of the name",
+   "quote": "<strong>gpt-5.4-xhigh</strong>",
+   "id": "F293"
+  },
+  {
+   "says": "score",
+   "about": "gpt-5.4-xhigh",
+   "value": "53.0434",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: Final Score cell (data-value) of the closed-dataset row codex-cli__gpt-5.4",
+   "quote": "<td data-value=\"53.0434\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F294"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gpt-5.4-xhigh",
+   "value": "27146296",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">27146296<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F295"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gpt-5.4-xhigh",
+   "value": "598495",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">598495<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F296"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gpt-5.4-xhigh",
+   "value": "23399168",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">23399168<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F297"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-5.4-xhigh",
+   "value": "106.0921",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: Cost cell of the closed-dataset row codex-cli__gpt-5.4",
+   "quote": "<td data-value=\"106.0921\">$106.0921</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F298"
+  },
+  {
+   "says": "price-table",
+   "about": "gpt-5.4-xhigh",
+   "value": "$2.5 / $15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2.5 / $15</strong>",
+   "id": "F299"
+  },
+  {
+   "says": "run-end",
+   "about": "gpt-5.4-xhigh",
+   "value": "2026-05-13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1271: Updated cell (data-value 2026-05-13T17:59:37.393454+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-13T17:59:37.393454+00:00\">",
+   "id": "F300"
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-5.5-xhigh",
+   "value": "gpt-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: Model cell (<strong>) of the closed-dataset row codex-cli__gpt-5.5 (the name before the '-xhigh' suffix)",
+   "quote": "<strong>gpt-5.5-xhigh</strong>",
+   "id": "F301"
+  },
+  {
+   "says": "effort-label",
+   "about": "gpt-5.5-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: Model cell, suffix of the name",
+   "quote": "<strong>gpt-5.5-xhigh</strong>",
+   "id": "F302"
+  },
+  {
+   "says": "score",
+   "about": "gpt-5.5-xhigh",
+   "value": "55.774",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: Final Score cell (data-value) of the closed-dataset row codex-cli__gpt-5.5",
+   "quote": "<td data-value=\"55.774\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F303"
+  },
+  {
+   "says": "tokens-in",
+   "about": "gpt-5.5-xhigh",
+   "value": "30958715",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">30958715<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F304"
+  },
+  {
+   "says": "tokens-out",
+   "about": "gpt-5.5-xhigh",
+   "value": "597426",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">597426<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F305"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "gpt-5.5-xhigh",
+   "value": "27090176",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">27090176<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F306"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-5.5-xhigh",
+   "value": "240.4418",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: Cost cell of the closed-dataset row codex-cli__gpt-5.5",
+   "quote": "<td data-value=\"240.4418\">$240.4418</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F307"
+  },
+  {
+   "says": "price-table",
+   "about": "gpt-5.5-xhigh",
+   "value": "$5 / $30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$5 / $30</strong>",
+   "id": "F308"
+  },
+  {
+   "says": "run-end",
+   "about": "gpt-5.5-xhigh",
+   "value": "2026-05-13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1148: Updated cell (data-value 2026-05-13T18:06:39.990954+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-13T18:06:39.990954+00:00\">",
+   "id": "F309"
+  },
+  {
+   "says": "model-name",
+   "about": "kimi-k2.6",
+   "value": "kimi-k2.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: Model cell (<strong>) of the closed-dataset row volcengine-plan__kimi-k2.6",
+   "quote": "<strong>kimi-k2.6</strong>",
+   "id": "F310"
+  },
+  {
+   "says": "score",
+   "about": "kimi-k2.6",
+   "value": "54.1446",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: Final Score cell (data-value) of the closed-dataset row volcengine-plan__kimi-k2.6",
+   "quote": "<td data-value=\"54.1446\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F311"
+  },
+  {
+   "says": "tokens-in",
+   "about": "kimi-k2.6",
+   "value": "6555533",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">6555533<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F312"
+  },
+  {
+   "says": "tokens-out",
+   "about": "kimi-k2.6",
+   "value": "286299",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">286299<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F313"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "kimi-k2.6",
+   "value": "12946163",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">12946163<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F314"
+  },
+  {
+   "says": "cost",
+   "about": "kimi-k2.6",
+   "value": "13.4494",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: Cost cell of the closed-dataset row volcengine-plan__kimi-k2.6",
+   "quote": "<td data-value=\"13.4494\">$13.4494</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F315"
+  },
+  {
+   "says": "price-table",
+   "about": "kimi-k2.6",
+   "value": "$0.9444 / $4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.9444 / $4</strong>",
+   "id": "F316"
+  },
+  {
+   "says": "run-end",
+   "about": "kimi-k2.6",
+   "value": "2026-05-11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 3346: Updated cell (data-value 2026-05-11T15:53:46.850593+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-11T15:53:46.850593+00:00\">",
+   "id": "F317"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.5-plus",
+   "value": "qwen3.5-plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: Model cell (<strong>) of the closed-dataset row bailian__qwen3.5-plus",
+   "quote": "<strong>qwen3.5-plus</strong>",
+   "id": "F318"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.5-plus",
+   "value": "52.3912",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: Final Score cell (data-value) of the closed-dataset row bailian__qwen3.5-plus",
+   "quote": "<td data-value=\"52.3912\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F319"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.5-plus",
+   "value": "6489516",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">6489516<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F320"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.5-plus",
+   "value": "216852",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">216852<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F321"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.5-plus",
+   "value": "13823191",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">13823191<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F322"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.5-plus",
+   "value": "3.8226",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: Cost cell of the closed-dataset row bailian__qwen3.5-plus",
+   "quote": "<td data-value=\"3.8226\">$3.8226</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F323"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.5-plus",
+   "value": "$0.26 / $1.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$0.26 / $1.56</strong>",
+   "id": "F324"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.5-plus",
+   "value": "2026-05-16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 1638: Updated cell (data-value 2026-05-16T22:28:47.196537+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-16T22:28:47.196537+00:00\">",
+   "id": "F325"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.6-max-preview",
+   "value": "qwen3.6-max-preview",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: Model cell (<strong>) of the closed-dataset row bailian-compatible__qwen3.6-max-preview",
+   "quote": "<strong>qwen3.6-max-preview</strong>",
+   "id": "F326"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.6-max-preview",
+   "value": "51.4753",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: Final Score cell (data-value) of the closed-dataset row bailian-compatible__qwen3.6-max-preview",
+   "quote": "<td data-value=\"51.4753\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F327"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.6-max-preview",
+   "value": "6493368",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">6493368<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F328"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.6-max-preview",
+   "value": "202535",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">202535<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F329"
+  },
+  {
+   "says": "tokens-cache-read",
+   "about": "qwen3.6-max-preview",
+   "value": "13760254",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: token stack of the row (cr)",
+   "quote": "cacheread:</span><span class=\"bench-token-value\">13760254<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F330"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.6-max-preview",
+   "value": "31.7946",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: Cost cell of the closed-dataset row bailian-compatible__qwen3.6-max-preview",
+   "quote": "<td data-value=\"31.7946\">$31.7946</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F331"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.6-max-preview",
+   "value": "$2.1794 / $13.0765",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$2.1794 / $13.0765</strong>",
+   "id": "F332"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.6-max-preview",
+   "value": "2026-05-13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 4260: Updated cell (data-value 2026-05-13T17:06:38.798036+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-13T17:06:38.798036+00:00\">",
+   "id": "F333"
+  },
+  {
+   "says": "model-name",
+   "about": "qwen3.6-plus",
+   "value": "qwen3.6-plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2925: Model cell (<strong>) of the closed-dataset row bailian-compatible__qwen3.6-plus",
+   "quote": "<strong>qwen3.6-plus</strong>",
+   "id": "F334"
+  },
+  {
+   "says": "score",
+   "about": "qwen3.6-plus",
+   "value": "57.0776",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2925: Final Score cell (data-value) of the closed-dataset row bailian-compatible__qwen3.6-plus",
+   "quote": "<td data-value=\"57.0776\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F335"
+  },
+  {
+   "says": "tokens-in",
+   "about": "qwen3.6-plus",
+   "value": "12982159",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2925: token stack of the row (in)",
+   "quote": "bench-token-label\">input:</span><span class=\"bench-token-value\">12982159<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F336"
+  },
+  {
+   "says": "tokens-out",
+   "about": "qwen3.6-plus",
+   "value": "257351",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2925: token stack of the row (out)",
+   "quote": "output:</span><span class=\"bench-token-value\">257351<",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F337"
+  },
+  {
+   "says": "cost",
+   "about": "qwen3.6-plus",
+   "value": "16.853",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2925: Cost cell of the closed-dataset row bailian-compatible__qwen3.6-plus",
+   "quote": "<td data-value=\"16.853\">$16.853</td>",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F338"
+  },
+  {
+   "says": "price-table",
+   "about": "qwen3.6-plus",
+   "value": "$1.16 / $6.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2925: Price cell (USD per million tokens, input / output) of the row",
+   "quote": "<strong>$1.16 / $6.97</strong>",
+   "id": "F339"
+  },
+  {
+   "says": "run-end",
+   "about": "qwen3.6-plus",
+   "value": "2026-05-13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 2925: Updated cell (data-value 2026-05-13T17:20:14.697907+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-13T17:20:14.697907+00:00\">",
+   "id": "F340"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.7-Max",
+   "value": "Qwen3.7-Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6804: Model cell (<strong>) of the closed-dataset row qoder-cli__Qwen3.7-Max",
+   "quote": "<strong>Qwen3.7-Max</strong>",
+   "id": "F341"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.7-Max",
+   "value": "62.7511",
+   "term": "final-score-0-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6804: Final Score cell (data-value) of the closed-dataset row qoder-cli__Qwen3.7-Max",
+   "quote": "<td data-value=\"62.7511\">",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F342"
+  },
+  {
+   "says": "run-end",
+   "about": "Qwen3.7-Max",
+   "value": "2026-05-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-clawprobench-board/src/home.html",
+   "where": "home.html line 6804: Updated cell (data-value 2026-05-23T16:52:40.322407+00:00): the row was last updated on this date, so the run ended by then",
+   "quote": "<td data-value=\"2026-05-23T16:52:40.322407+00:00\">",
+   "id": "F343"
+  }
+ ]
+}

@@ -1,0 +1,284 @@
+{
+ "id": "src-arxiv-2610.02122-argo-bench-v1-2026-10-01",
+ "publisher": "argo-bench",
+ "urls": [
+  "https://arxiv.org/abs/2610.02122"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2610.02122v1",
+   "captured": "2026-10-19T08:28:00Z",
+   "note": "arXiv HTML v1 (stamp 'arXiv:2610.02122v1 [cs.CL] 01 Oct 2026') saved by salvo g8 on 19 Oct 2026; the copy of 5 Oct (salvo s19) gives the same tables (cell by cell)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html": "52a0ccb285efe3a80f4a0737d6a45c4ed0c2d56cb7260beda165481b3425751a",
+  "/work/.salvo14/mig/convert-argo-bench/src/argo_oct05.html": "fc617b46215e413ba815758f26df1a87269885dbbdd0bf1c22681ebb1c7edda5",
+  "/work/.salvo14/mig/convert-argo-bench/evidence/table2.csv": "a76796a33996d31e08abd340e08f8810ba788750565083787dd0118f5e25ba5b",
+  "/work/.salvo14/mig/convert-argo-bench/evidence/table10.csv": "265ec5988d3887538e3cdc542a8766f0aa19070badf073958bade73f18202161"
+ },
+ "harvested_at": "2026-10-19T08:28:00Z",
+ "published": {
+  "value": "2026-10-01",
+  "where": "arXiv stamp of the HTML page",
+  "quote": "v1 [cs.CL] 01 Oct 2026",
+  "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-argo-bench/evidence/table2.csv",
+   "from": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "tool": "Table 2 of the arXiv HTML paper (id S3.T2.4) -> CSV (cells verbatim; the two header rows folded; the group rows 'Proprietary' / 'Open-weight' dropped)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-argo-bench/evidence/table10.csv",
+   "from": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "tool": "Table 10 of the arXiv HTML paper (id A9.T10.2) -> CSV (cells verbatim; a dash is the en dash '–' as printed)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-argo-bench/evidence/table2.csv",
+   "where": "Table 2 (id S3.T2.4), one row per model at its highest effort",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Model": "model-name",
+    "Score": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Cost ($)": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T10",
+   "file": "/work/.salvo14/mig/convert-argo-bench/evidence/table10.csv",
+   "where": "Table 10 (id A9.T10.2), mean score by reasoning effort",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Model": "model-name",
+    "Low": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Medium": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "High": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Extra-high": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "note",
+   "value": "highest reasoning effort we ran, extra-high where offered",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 2 caption",
+   "quote": "each model at the highest reasoning effort we ran, extra-high where offered"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "per-task averages",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 2 caption",
+   "quote": "cost (API spend, excluding BigQuery) are per-task averages",
+   "term": "per-task"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-basis",
+   "value": "API spend",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 2 caption",
+   "quote": "cost (API spend, excluding BigQuery) are per-task averages",
+   "term": "billed"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "currency",
+   "value": "Cost ($)",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 2, column header 'Cost ($)'",
+   "quote": "Cost ($)"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "harness",
+   "value": "Inspect AI 0.3.263",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Section 3 Evaluation, first sentence",
+   "quote": "We run all experiments on Inspect AI 0.3.263",
+   "term": "inspect-ai"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "version",
+   "value": "v1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "page header stamp",
+   "quote": "arXiv:2610.02122v1"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "note",
+   "value": "Kimi K3 and DeepSeek V4.1 Flash map medium onto high, GLM 5.3 Flash maps low and medium onto high, Gemini 3.8 Flash and Qwen 3.8 Max map extra-high onto high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 10 caption",
+   "quote": "Kimi K3 and DeepSeek V4.1 Flash map medium onto high, GLM 5.3 Flash maps low and medium onto high, Gemini 3.8 Flash and Qwen 3.8 Max map extra-high onto high",
+   "note": "a dash marks a level the model does not offer; the offered levels are the non-dash columns"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "Claude Haiku 4.5 has no effort setting (its single run is shown under high)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 10 caption",
+   "quote": "Claude Haiku 4.5 has no effort setting (its single run is shown under high)"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "metric-definition",
+   "value": "score is the mean task score out of 100",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 2 caption",
+   "quote": "score is the mean task score out of 100",
+   "term": "score%"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "effort-label",
+   "value": "the vendor’s maximum setting",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 10 caption: 'For Kimi K3, DeepSeek V4.1 Flash, and GLM 5.3 Flash, extra-high is the vendor’s maximum setting.'",
+   "quote": "extra-high is the vendor’s maximum setting"
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "says": "effort-label",
+   "value": "Low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 10, column header 'Low' (reasoning effort; the table is 'Mean score by reasoning effort')",
+   "quote": "Low"
+  },
+  {
+   "id": "F12",
+   "about": null,
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 10, column header 'Medium' (reasoning effort; the table is 'Mean score by reasoning effort')",
+   "quote": "Medium"
+  },
+  {
+   "id": "F13",
+   "about": null,
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 10, column header 'High' (reasoning effort; the table is 'Mean score by reasoning effort')",
+   "quote": "High"
+  },
+  {
+   "id": "F14",
+   "about": null,
+   "says": "effort-label",
+   "value": "Extra-high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-argo-bench/src/argo_oct19.html",
+   "where": "Table 10, column header 'Extra-high' (reasoning effort; the table is 'Mean score by reasoning effort')",
+   "quote": "Extra-high"
+  }
+ ]
+}
