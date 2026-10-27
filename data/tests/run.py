@@ -1278,6 +1278,13 @@ def ext_thinking_on_default_level():
     eq((r.cfg(m1), "level-from-default" in r[m1]["flags"]), ("high", True), "the documented default level")
     eq(r.cfg(m2), "think", "a model with think")
     eq(r.q(m3), "out:effort-not-established", "no documented default")
+    sc = base()
+    sc.model("ml", configs=("low", "medium", "high"), default=[dict(iv("2026-01-01", "2026-12-31", **win), configuration="high")])
+    s = sc.source("card")
+    m4 = sc.m(s, model="ml", effort=[("effort-label", "Thinking")], score="50%")
+    sc.m(s, model="mb", effort=[LOW], score="40%")
+    r = sc.run()
+    eq(r.cfg(m4), "high", "a bare 'Thinking' column label")
 
 
 @test
