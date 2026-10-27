@@ -1187,6 +1187,14 @@ def configuration(M, key):
             elif lab == "think":
                 M.rule("label-rule")
                 think_or_default(4, f.ref, s)
+            elif lab == "max" and not any(c["id"] == "max" for c in ctx.models[key].get("configurations", [])) \
+                    and any(c in configs for c in LEVELS):
+                # "max effort" written for a model that has no `max` level at all: its highest level (27 Oct)
+                c, d = label_to_ladder("maximum", configs)
+                M.rule("label-to-ladder")
+                if "max-as-highest" not in M.flags:
+                    M.flags.append("max-as-highest")
+                via_chain(c, 5, f.ref, s)
             elif lab:
                 M.rule("label-rule")
                 via_chain(lab, 4, f.ref, s)

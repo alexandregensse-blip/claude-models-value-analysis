@@ -1326,6 +1326,20 @@ def ext_epoch_ms_date():
     eq(B.find_date("12345"), None, "not a timestamp")
 
 
+@test
+def ext_max_label_on_model_without_max():
+    # "max effort" written for a model whose list has no max at any date: its highest level, flagged (27 Oct)
+    sc = base()
+    sc.model("mx5", configs=("low", "medium", "high", "xhigh"))
+    sc.model("mm5", configs=("low", "high", "max"))
+    s = sc.source("card")
+    m1 = sc.m(s, model="mx5", effort=[("effort-label", "max effort")], score="50%")
+    m2 = sc.m(s, model="mm5", effort=[("effort-label", "max effort")], score="60%")
+    r = sc.run()
+    eq((r.cfg(m1), "max-as-highest" in r[m1]["flags"]), ("xhigh", True), "highest level")
+    eq(r.cfg(m2), "max", "a model with max")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)
