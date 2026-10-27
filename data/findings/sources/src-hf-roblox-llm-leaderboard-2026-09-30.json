@@ -1,0 +1,1138 @@
+{
+ "id": "src-hf-roblox-llm-leaderboard-2026-09-30",
+ "publisher": "hf-roblox-llm-leaderboard",
+ "urls": [
+  "https://huggingface.co/spaces/TorpedoSoftware/Roblox-LLM-Leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://huggingface.co/spaces/TorpedoSoftware/Roblox-LLM-Leaderboard/raw/main/data/leaderboard.json",
+   "captured": "2026-10-20T05:44:46Z",
+   "note": "data/leaderboard.json + data/models.json + assets/js/scores.js of the HF space (last modified 2026-09-30T23:05:28Z, sha 676755cd82ed2886048e282f1a6106ddf6e5fea5; payload generatedAt 2026-09-30), saved by salvo gt/t2 on 20 Oct 2026; README.md fetched 27 Oct 2026"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json": "98ccf6f3d70deffc06d715f02933ae37385f2cb2a9c4c6c45c2a7183b0e3fa08",
+  "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json": "cd9b3f13f5384c073508d1adcd849c6277fb3ee668428e5e9265ee2d7103e79c",
+  "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/scores.js": "7c01e25a4acaa0bd14610ccaee4308dc1936ab03f21edc96e4f53eb5ae8bd5a6",
+  "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/README.md": "1c6aa47628ad506916d61773fb8a22c6e0677a0bef8732e582f60c79ec6df631",
+  "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/SOURCE.txt": "03d363f7b02401640c660cbbb67d3089cc38ca061193e0b2731e1e0b85f6235a",
+  "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/derived.json": "0d44ac203e2e0ca27858c58b3a92788cf2d01b6a5f74efe960a16529e8423149"
+ },
+ "harvested_at": "2026-10-20T05:44:46Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/derived.json",
+   "from": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/scores.js",
+   "tool": "convert.py: assets/js/scores.js applied to leaderboard.json (README, 'Each model entry holds only measured facts'; the site computes everything derivable in the browser): per model the knowledge subscore 0.7 freeform% + 0.3 multiple-choice%, the coding subscore (per difficulty 0.4 unit tests + 0.25 fully solved + 0.15 partially solved + 0.1 code quality + 0.1 valid syntax, blended 0.2 easy + 0.35 medium + 0.45 hard), composite = 0.5 knowledge + 0.5 coding; suite cost = sum over the five splits of (input tokens x input price + output tokens x output price) / 1e6 (null for electricity-priced models); token sums. Four decimals."
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/derived.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "name",
+   "columns": {
+    "freeform_counts": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "multiple_choice_counts": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "lc_easy_unit_pass": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "lc_medium_unit_pass": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "lc_hard_unit_pass": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "composite": "note",
+    "cost_usd": "note",
+    "tokens_in": "note",
+    "tokens_out": "note",
+    "knowledge": "note",
+    "coding": "note",
+    "freeform_pct": "note",
+    "multiple_choice_pct": "note",
+    "index": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/README.md",
+   "where": "README, Data format: `price` is { input, output } in USD per million tokens",
+   "quote": "in USD per million tokens"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "the whole bill",
+   "term": "per-suite",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/scores.js",
+   "where": "assets/js/scores.js costOf / addCosts: the cost of a model is the sum over its five splits (two QA splits, three Leetcode difficulties), i.e. the whole evaluation",
+   "quote": "A missing piece makes the whole bill unknown rather than zero."
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-basis",
+   "value": "price",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/README.md",
+   "where": "README: every cost is computed from the `price` table: (input tokens × input + output tokens × output) / 1M for hosted models",
+   "quote": "every cost, from the `price` table: `(input tokens × input + output tokens × output) / 1M` for hosted models"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "cost-method",
+   "value": "(input tokens × input + output tokens × output) / 1M",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/README.md",
+   "where": "README: every cost, from the `price` table",
+   "quote": "every cost, from the `price` table: `(input tokens × input + output tokens × output) / 1M` for hosted models"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "price-table",
+   "value": "from OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/README.md",
+   "where": "README, Data format: the price in USD per million tokens is taken 'from OpenRouter' (the rate depends on how the run was served; some prices were set by hand)",
+   "quote": "(from OpenRouter;"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "metric-definition",
+   "value": "the composite score: `0.5 × knowledge + 0.5 × coding`",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/README.md",
+   "where": "README, How the score is computed",
+   "quote": "the composite score: `0.5 × knowledge + 0.5 × coding`"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "note",
+   "value": "the site re-sorts by composite score on load",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/README.md",
+   "where": "README, Data format notes",
+   "quote": "the site re-sorts by composite score on load"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "aggregation",
+   "value": "one run per model",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "leaderboard.json: one entry per model, counts of correct answers over 3,000 freeform + 3,000 multiple-choice questions and 208 Luau Leetcode problems"
+  },
+  {
+   "id": "F9",
+   "about": "Qwen 2.5 Coder 32B (Q4_K_M)",
+   "says": "model-name",
+   "value": "Qwen 2.5 Coder 32B (Q4_K_M)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[0].name"
+  },
+  {
+   "id": "F10",
+   "about": "Qwen 3 4B Instruct 2507 (Q8_0)",
+   "says": "model-name",
+   "value": "Qwen 3 4B Instruct 2507 (Q8_0)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[1].name"
+  },
+  {
+   "id": "F11",
+   "about": "Qwen 3 Coder 30B-A3B",
+   "says": "model-name",
+   "value": "Qwen 3 Coder 30B-A3B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[2].name"
+  },
+  {
+   "id": "F12",
+   "about": "Qwen 3.5 9B",
+   "says": "model-name",
+   "value": "Qwen 3.5 9B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[3].name"
+  },
+  {
+   "id": "F13",
+   "about": "Qwen 3.6 27B",
+   "says": "model-name",
+   "value": "Qwen 3.6 27B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[4].name"
+  },
+  {
+   "id": "F14",
+   "about": "Qwen 3.6 35B-A3B",
+   "says": "model-name",
+   "value": "Qwen 3.6 35B-A3B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[5].name"
+  },
+  {
+   "id": "F15",
+   "about": "Qwen 3.8 2.4T-A95B",
+   "says": "model-name",
+   "value": "Qwen 3.8 2.4T-A95B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[6].name"
+  },
+  {
+   "id": "F16",
+   "about": "Qwen 3.8 2.4T-A95B",
+   "says": "route",
+   "value": "digitalocean",
+   "term": "digitalocean",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Qwen 3.8 2.4T-A95B'].resultFiles.freeform = 'qwen-qwen3.8-2.4t-a95b_ff_route-digitalocean_maxtok52000.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F17",
+   "about": "Qwen 3.8 27B (Medium, Q4_K_XL)",
+   "says": "model-name",
+   "value": "Qwen 3.8 27B (Medium, Q4_K_XL)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[7].name"
+  },
+  {
+   "id": "F18",
+   "about": "Qwen 3.8 27B (XHigh, Q4_K_XL)",
+   "says": "model-name",
+   "value": "Qwen 3.8 27B (XHigh, Q4_K_XL)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[8].name"
+  },
+  {
+   "id": "F19",
+   "about": "Qwen 3.8 Flash Next (Medium, NVFP4)",
+   "says": "model-name",
+   "value": "Qwen 3.8 Flash Next (Medium, NVFP4)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[9].name"
+  },
+  {
+   "id": "F20",
+   "about": "Qwen 3.8 Flash Next (XHigh, NVFP4)",
+   "says": "model-name",
+   "value": "Qwen 3.8 Flash Next (XHigh, NVFP4)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[10].name"
+  },
+  {
+   "id": "F21",
+   "about": "Claude Fable 5 (Medium)",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[11].name = 'Claude Fable 5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F22",
+   "about": "Claude Fable 5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[11].name = 'Claude Fable 5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F23",
+   "about": "Claude Fable 5.1 (Medium)",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[12].name = 'Claude Fable 5.1 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F24",
+   "about": "Claude Fable 5.1 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[12].name = 'Claude Fable 5.1 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F25",
+   "about": "Claude Haiku 4.5 (Extended Thinking)",
+   "says": "model-name",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[13].name = 'Claude Haiku 4.5 (Extended Thinking)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F26",
+   "about": "Claude Haiku 4.5 (Extended Thinking)",
+   "says": "thinking-on",
+   "value": "Extended Thinking",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[13].name = 'Claude Haiku 4.5 (Extended Thinking)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F27",
+   "about": "Claude Opus 4.8 (Medium)",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[14].name = 'Claude Opus 4.8 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F28",
+   "about": "Claude Opus 4.8 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[14].name = 'Claude Opus 4.8 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F29",
+   "about": "Claude Opus 5 (Medium)",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[15].name = 'Claude Opus 5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F30",
+   "about": "Claude Opus 5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[15].name = 'Claude Opus 5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F31",
+   "about": "Claude Opus 5.5 (Medium)",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[16].name = 'Claude Opus 5.5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F32",
+   "about": "Claude Opus 5.5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[16].name = 'Claude Opus 5.5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F33",
+   "about": "Claude Sonnet 4 (Medium)",
+   "says": "model-name",
+   "value": "Claude Sonnet 4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[17].name = 'Claude Sonnet 4 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F34",
+   "about": "Claude Sonnet 4 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[17].name = 'Claude Sonnet 4 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F35",
+   "about": "Claude Sonnet 5 (Medium)",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[18].name = 'Claude Sonnet 5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F36",
+   "about": "Claude Sonnet 5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[18].name = 'Claude Sonnet 5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F37",
+   "about": "Claude Sonnet 5.5 (Medium)",
+   "says": "model-name",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[19].name = 'Claude Sonnet 5.5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F38",
+   "about": "Claude Sonnet 5.5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[19].name = 'Claude Sonnet 5.5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F39",
+   "about": "Deepseek R1 0528",
+   "says": "model-name",
+   "value": "Deepseek R1 0528",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[20].name"
+  },
+  {
+   "id": "F40",
+   "about": "Deepseek R1 0528",
+   "says": "route",
+   "value": "siliconflow-fp8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Deepseek R1 0528'].resultFiles.freeform = 'deepseek-deepseek-r1-0528_ff_route-siliconflow-fp8.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F41",
+   "about": "Deepseek V4 Flash",
+   "says": "model-name",
+   "value": "Deepseek V4 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[21].name"
+  },
+  {
+   "id": "F42",
+   "about": "Deepseek V4 Flash 0731",
+   "says": "model-name",
+   "value": "Deepseek V4 Flash 0731",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[22].name"
+  },
+  {
+   "id": "F43",
+   "about": "Deepseek V4 Flash 0731",
+   "says": "route",
+   "value": "siliconflow-fp8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Deepseek V4 Flash 0731'].resultFiles.freeform = 'deepseek-deepseek-v4-flash-0731_ff_route-siliconflow-fp8_maxtok128000.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F44",
+   "about": "Deepseek V4 Pro 0813 (High)",
+   "says": "model-name",
+   "value": "Deepseek V4 Pro 0813",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[23].name = 'Deepseek V4 Pro 0813 (High)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F45",
+   "about": "Deepseek V4 Pro 0813 (High)",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[23].name = 'Deepseek V4 Pro 0813 (High)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F46",
+   "about": "Deepseek V4 Pro 0813 (High)",
+   "says": "route",
+   "value": "deepseek",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Deepseek V4 Pro 0813 (High)'].resultFiles.freeform = 'deepseek-deepseek-v4-pro-0813_ff_effort-high_route-deepseek.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F47",
+   "about": "Gemini 2.5 Pro (Medium)",
+   "says": "model-name",
+   "value": "Gemini 2.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[24].name = 'Gemini 2.5 Pro (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F48",
+   "about": "Gemini 2.5 Pro (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[24].name = 'Gemini 2.5 Pro (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F49",
+   "about": "Gemini 3.1 Pro (Medium)",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[25].name = 'Gemini 3.1 Pro (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F50",
+   "about": "Gemini 3.1 Pro (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[25].name = 'Gemini 3.1 Pro (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F51",
+   "about": "Gemini 3.7 Flash (Medium)",
+   "says": "model-name",
+   "value": "Gemini 3.7 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[26].name = 'Gemini 3.7 Flash (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F52",
+   "about": "Gemini 3.7 Flash (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[26].name = 'Gemini 3.7 Flash (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F53",
+   "about": "Gemini 3.7 Flash (Medium)",
+   "says": "route",
+   "value": "google-vertex-global",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Gemini 3.7 Flash (Medium)'].resultFiles.freeform = 'google-gemini-3.7-flash_ff_route-google-vertex-global.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F54",
+   "about": "Gemini 3.8 Flash (High)",
+   "says": "model-name",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[27].name = 'Gemini 3.8 Flash (High)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F55",
+   "about": "Gemini 3.8 Flash (High)",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[27].name = 'Gemini 3.8 Flash (High)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F56",
+   "about": "Gemma 3 27B",
+   "says": "model-name",
+   "value": "Gemma 3 27B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[28].name"
+  },
+  {
+   "id": "F57",
+   "about": "Gemma 4 26B-A4B",
+   "says": "model-name",
+   "value": "Gemma 4 26B-A4B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[29].name"
+  },
+  {
+   "id": "F58",
+   "about": "Gemma 4 26B-A4B",
+   "says": "route",
+   "value": "novita-bf16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Gemma 4 26B-A4B'].resultFiles.freeform = 'google-gemma-4-26b-a4b-it_ff_route-novita-bf16.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F59",
+   "about": "Gemma 4 31B",
+   "says": "model-name",
+   "value": "Gemma 4 31B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[30].name"
+  },
+  {
+   "id": "F60",
+   "about": "Llama 3.1 8B Instruct",
+   "says": "model-name",
+   "value": "Llama 3.1 8B Instruct",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[31].name"
+  },
+  {
+   "id": "F61",
+   "about": "Muse Glimmer 30B (Q4_K_XL)",
+   "says": "model-name",
+   "value": "Muse Glimmer 30B (Q4_K_XL)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[32].name"
+  },
+  {
+   "id": "F62",
+   "about": "Devstral Small 2507 (Q4_K_M)",
+   "says": "model-name",
+   "value": "Devstral Small 2507 (Q4_K_M)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[33].name"
+  },
+  {
+   "id": "F63",
+   "about": "Kimi K3 (High)",
+   "says": "model-name",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[34].name = 'Kimi K3 (High)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F64",
+   "about": "Kimi K3 (High)",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[34].name = 'Kimi K3 (High)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F65",
+   "about": "Nemotron 3.5 Lightning",
+   "says": "model-name",
+   "value": "Nemotron 3.5 Lightning",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[35].name"
+  },
+  {
+   "id": "F66",
+   "about": "Nemotron 3.5 Lightning",
+   "says": "route",
+   "value": "coreweave-bf16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Nemotron 3.5 Lightning'].resultFiles.freeform = 'nvidia-nemotron-3.5-lightning_ff_route-coreweave-bf16.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F67",
+   "about": "GPT 5 (Medium)",
+   "says": "model-name",
+   "value": "GPT 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[36].name = 'GPT 5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F68",
+   "about": "GPT 5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[36].name = 'GPT 5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F69",
+   "about": "GPT 5.4 nano (High)",
+   "says": "model-name",
+   "value": "GPT 5.4 nano",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[37].name = 'GPT 5.4 nano (High)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F70",
+   "about": "GPT 5.4 nano (High)",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[37].name = 'GPT 5.4 nano (High)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F71",
+   "about": "GPT 5.5 (Medium)",
+   "says": "model-name",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[38].name = 'GPT 5.5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F72",
+   "about": "GPT 5.5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[38].name = 'GPT 5.5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F73",
+   "about": "GPT 5.6 Luna (Medium)",
+   "says": "model-name",
+   "value": "GPT 5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[39].name = 'GPT 5.6 Luna (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F74",
+   "about": "GPT 5.6 Luna (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[39].name = 'GPT 5.6 Luna (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F75",
+   "about": "GPT 5.6 Sol (Medium)",
+   "says": "model-name",
+   "value": "GPT 5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[40].name = 'GPT 5.6 Sol (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F76",
+   "about": "GPT 5.6 Sol (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[40].name = 'GPT 5.6 Sol (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F77",
+   "about": "GPT 5.6 Terra (Medium)",
+   "says": "model-name",
+   "value": "GPT 5.6 Terra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[41].name = 'GPT 5.6 Terra (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F78",
+   "about": "GPT 5.6 Terra (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[41].name = 'GPT 5.6 Terra (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F79",
+   "about": "GPT 6 Astra (Medium)",
+   "says": "model-name",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[42].name = 'GPT 6 Astra (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F80",
+   "about": "GPT 6 Astra (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[42].name = 'GPT 6 Astra (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F81",
+   "about": "GPT 6 Luna (Medium)",
+   "says": "model-name",
+   "value": "GPT 6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[43].name = 'GPT 6 Luna (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F82",
+   "about": "GPT 6 Luna (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[43].name = 'GPT 6 Luna (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F83",
+   "about": "GPT 6 Sol (Medium)",
+   "says": "model-name",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[44].name = 'GPT 6 Sol (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F84",
+   "about": "GPT 6 Sol (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[44].name = 'GPT 6 Sol (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F85",
+   "about": "GPT 6.1 Sol (Medium)",
+   "says": "model-name",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[45].name = 'GPT 6.1 Sol (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F86",
+   "about": "GPT 6.1 Sol (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[45].name = 'GPT 6.1 Sol (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F87",
+   "about": "GPT OSS 20B",
+   "says": "model-name",
+   "value": "GPT OSS 20B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[46].name"
+  },
+  {
+   "id": "F88",
+   "about": "Luau Devstral 24B Instruct v0.2 (Q5_K_XL)",
+   "says": "model-name",
+   "value": "Luau Devstral 24B Instruct v0.2 (Q5_K_XL)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[47].name"
+  },
+  {
+   "id": "F89",
+   "about": "Luau Qwen3 4B FIM v0.1 (Q8_0)",
+   "says": "model-name",
+   "value": "Luau Qwen3 4B FIM v0.1 (Q8_0)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[48].name"
+  },
+  {
+   "id": "F90",
+   "about": "Grok 4.5 (Medium)",
+   "says": "model-name",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[49].name = 'Grok 4.5 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F91",
+   "about": "Grok 4.5 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[49].name = 'Grok 4.5 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F92",
+   "about": "Grok 4.6 (Medium)",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[50].name = 'Grok 4.6 (Medium)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F93",
+   "about": "Grok 4.6 (Medium)",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[50].name = 'Grok 4.6 (Medium)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F94",
+   "about": "Grok 4.6 (Medium)",
+   "says": "route",
+   "value": "xai-zdr",
+   "term": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['Grok 4.6 (Medium)'].resultFiles.freeform = 'x-ai-grok-4.6_ff_effort-medium_route-xai-zdr.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F95",
+   "about": "GLM 4.7 Flash",
+   "says": "model-name",
+   "value": "GLM 4.7 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[51].name"
+  },
+  {
+   "id": "F96",
+   "about": "GLM 5.2 (High)",
+   "says": "model-name",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[52].name = 'GLM 5.2 (High)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F97",
+   "about": "GLM 5.2 (High)",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[52].name = 'GLM 5.2 (High)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F98",
+   "about": "GLM 5.2 (High)",
+   "says": "route",
+   "value": "baidu-fp8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/models.json",
+   "where": "models.json['GLM 5.2 (High)'].resultFiles.freeform = 'z-ai-glm-5.2_ff_effort-high_route-baidu-fp8.json5' (the '_route-' token of the run file: README, 'Through OpenRouter, pinned with --route')"
+  },
+  {
+   "id": "F99",
+   "about": "GLM 5.3 (High)",
+   "says": "model-name",
+   "value": "GLM 5.3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[53].name = 'GLM 5.3 (High)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F100",
+   "about": "GLM 5.3 (High)",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[53].name = 'GLM 5.3 (High)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  },
+  {
+   "id": "F101",
+   "about": "GLM 5.3 Flash (High)",
+   "says": "model-name",
+   "value": "GLM 5.3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[54].name = 'GLM 5.3 Flash (High)' (the model words, without the parenthesised setting)"
+  },
+  {
+   "id": "F102",
+   "about": "GLM 5.3 Flash (High)",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-roblox-llm-leaderboard/evidence/leaderboard.json",
+   "where": "$.models[54].name = 'GLM 5.3 Flash (High)' (the parenthesised setting; the run files of models.json carry '_effort-<level>' too)"
+  }
+ ]
+}
