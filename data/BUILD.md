@@ -139,6 +139,9 @@ The fit tables carry these confound flags:
     `not-established:contradictory` (`out:contradictory` on the cost axis);
   - no card, a card in another currency, or no tokens → accepted as written;
   - `fields.cost.reproduction` says which case applied.
+- **A converter's loop** (27 Oct). `--registry-files-checked` (build.py and validate.py) skips the saved-copy checks of
+  the registry's evidence only, on an unchanged registry copy; the findings' files are still checked. With one source's
+  findings (and its legacy rows) a build takes seconds; the full build with every check runs at install.
 - **Thinking on with a stated level** (27 Oct). On a model whose list has levels and no `think`, thinking on plus a
   stated level (setting, label, chart order) gives the level; the maker's default that thinking on alone would read is
   not used (no contradiction, no `level-from-default`).

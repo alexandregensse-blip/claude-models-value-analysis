@@ -1292,6 +1292,8 @@ def main():
     ap.add_argument("--findings", default=os.path.join(REPO, "data", "findings"))
     ap.add_argument("--decisions", default=os.path.join(REPO, "data", "decisions.json"))
     ap.add_argument("--check-files", action="store_true", help="re-hash reachable saved copies, look for quotes and CSV cells in them")
+    ap.add_argument("--registry-files-checked", action="store_true",
+                    help="with --check-files: check the findings' saved copies, not the registry's evidence (unchanged registry)")
     ap.add_argument("--hash", nargs="+", metavar="MEASURE_REF", help="print the facts_hash of these measures (one decision)")
     ap.add_argument("--legacy-coverage", metavar="RAW_DATA_CSV", help="report how vocab's legacy patterns (and --flag-map) map today's flags")
     ap.add_argument("--verbose", action="store_true", help="list every file checked and every registry warning")
@@ -1335,7 +1337,7 @@ def main():
             reg[k] = x
         rep.checked.append(rel(p))
     if all(k in reg for k in REQUIRED_REGISTRIES):
-        check_registries(reg, rep, schemas, vocab, paths, a.check_files)
+        check_registries(reg, rep, schemas, vocab, paths, a.check_files and not a.registry_files_checked)
 
     sources, measures = {}, {}
     files = sorted(glob.glob(os.path.join(a.findings, "sources", "*.json")))

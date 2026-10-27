@@ -389,7 +389,8 @@ class Ctx:
                 reg[k] = x
         self.supplied = self.supply_legacy(reg, a.findings)
         if all(k in reg for k in V.REQUIRED_REGISTRIES):
-            V.check_registries(reg, rep, schemas, self.vocab, paths, a.check_files)
+            V.check_registries(reg, rep, schemas, self.vocab, paths,
+                                 a.check_files and not getattr(a, "registry_files_checked", False))
         fatal += rep.errors[n0:]
         self.reg, self.paths = reg, paths
         self.models = (reg.get("models") or {}).get("models", {})
@@ -2776,6 +2777,9 @@ def main(argv=None):
     ap.add_argument("--no-check-files", dest="check_files", action="store_false",
                     help="skip validate.py's re-hashing of every saved copy (cells read are still hashed)")
     ap.add_argument("--no-lqm", action="store_true", help="skip the lqm.load step (data/build_lqm.py)")
+    ap.add_argument("--registry-files-checked", action="store_true",
+                    help="skip the saved-copy checks of the registry's evidence only (a converter's loop on an unchanged "
+                         "registry copy); the findings' files are still checked")
     a = ap.parse_args(argv)
     try:
         check_args(a)
