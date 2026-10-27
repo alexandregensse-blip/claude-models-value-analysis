@@ -110,6 +110,9 @@ def find_date(text):
     b = day_bounds(text.strip())
     if b:
         return b
+    if re.fullmatch(r"\s*1[6-9]\d{11}\s*", text):    # epoch milliseconds (a JSON timestamp; convex.dev, 27 Oct)
+        t = dt.datetime.utcfromtimestamp(int(text) / 1000)
+        return t, t
     m = re.search(r"\b(\d{4}-\d{2}-\d{2})(T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2}))?", text)
     if m:
         return day_bounds(m.group(0)) or day_bounds(m.group(1))

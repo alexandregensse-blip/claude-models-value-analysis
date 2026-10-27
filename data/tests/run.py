@@ -1319,6 +1319,13 @@ def ext_none_label_and_complement():
     eq(r.q(m3), "in", "100 − a fraction input in percent")
 
 
+@test
+def ext_epoch_ms_date():
+    import build as B
+    eq(B.find_date("1760572800000")[0].isoformat(), "2025-10-16T00:00:00", "epoch milliseconds")
+    eq(B.find_date("12345"), None, "not a timestamp")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)
