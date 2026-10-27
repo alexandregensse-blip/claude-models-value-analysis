@@ -1,0 +1,542 @@
+{
+ "id": "src-kilo-leaderboard-2026-10-19",
+ "publisher": "kilo",
+ "urls": [
+  "https://kilo.ai/leaderboard",
+  "https://kilo.ai/kilobench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://kilo.ai/leaderboard",
+   "captured": "2026-10-19T08:13:16Z",
+   "note": "live page saved by salvo g/g8 (src/kilo.raw, file mtime 19 Oct 2026) as evidence/kilo-leaderboard-2026-10-19.html"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://kilo.ai/kilobench",
+   "captured": "2026-10-27",
+   "note": "methodology page fetched 27 Oct 2026 (evidence/kilobench-2026-10-27.html); cited for the harness, the cost description and the primary metric"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-kilo/evidence/kilo-leaderboard-2026-10-19.html": "e2bcc1a730e0fd305b118735de8315d0658807512a514c25b106e7db11abf316",
+  "/work/.salvo14/mig/convert-kilo/evidence/kilo-leaderboard-2026-10-19.txt": "2f702a29091fa6c229154d2c8b9d3e498654797a80ce2a6da9c624318e166131",
+  "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.html": "ba1b53f83d2d1d2dd76bcf27411f5626f189e94acd807c249b6721bdd5efa5c4",
+  "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.txt": "a9c861265bf976bbaefd455ffb22ef7a3e6b399bc38949fa26ec8f89c9690f99",
+  "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json": "4c0baed7a10506b28f4de2779b6cec9bd678cc990a92156c113981ec7328cc63"
+ },
+ "harvested_at": "2026-10-19T08:13:16Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "from": "/work/.salvo14/mig/convert-kilo/evidence/kilo-leaderboard-2026-10-19.html",
+   "tool": "convert.py: the JSON array after 'points' in the page's Next.js payload (the chart data of the cost-vs-performance bubble chart, 38 models), backslash-unescaped, copied verbatim"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-leaderboard-2026-10-19.txt",
+   "from": "/work/.salvo14/mig/convert-kilo/evidence/kilo-leaderboard-2026-10-19.html",
+   "tool": "htmltxt.py (this folder): visible text, scripts and styles dropped, entities unescaped"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.txt",
+   "from": "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.html",
+   "tool": "htmltxt.py (this folder): visible text of kilo.ai/kilobench fetched 27 Oct 2026"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "slug",
+   "columns": {
+    "completionPercentage": {
+     "says": "score",
+     "term": "complete%",
+     "scale": "percent",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "eval.averageAttemptCostUsd": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "eval.averageAttemptInputTokens": {
+     "says": "tokens-in",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "eval.averageAttemptOutputTokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "eval.averageAttemptCacheReadTokens": {
+     "says": "tokens-cache-read",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "key name of the cost field in the page data",
+   "quote": "\"averageAttemptCostUsd\"",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "per complete benchmark attempt",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-leaderboard-2026-10-19.txt",
+   "where": "leaderboard page, note under the Kilo Benchmark table",
+   "quote": "Cost and token usage are averaged per complete benchmark attempt.",
+   "term": "per-attempt"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-basis",
+   "value": "the actual bill, not the sticker price",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.txt",
+   "where": "kilo.ai/kilobench, 'What KiloBench measures that others don't', 'True cost per attempt'",
+   "quote": "KiloBench captures all of it — the actual bill, not the sticker price.",
+   "term": "billed"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "cost-method",
+   "value": "the actual bill",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.txt",
+   "where": "kilo.ai/kilobench, 'True cost per attempt': reasoning tokens billed at output rates, context re-sends and agent-loop overhead included",
+   "quote": "the actual bill",
+   "term": "provider-invoice"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "aggregation",
+   "value": "averaged per complete benchmark attempt",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-leaderboard-2026-10-19.txt",
+   "where": "leaderboard page; nAttempts 5 in each eval object",
+   "quote": "Cost and token usage are averaged per complete benchmark attempt."
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "attempts",
+   "value": "5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "eval.nAttempts of the page data (all entries)",
+   "quote": "\"nAttempts\":5"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "harness",
+   "value": "Kilo's actual agent framework",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.txt",
+   "where": "kilo.ai/kilobench 'How to read KiloBench results': Harness",
+   "quote": "Kilo's actual agent framework",
+   "term": "kilo-code"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "tools-regime",
+   "value": "through Kilo's harness",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilobench-2026-10-27.txt",
+   "where": "kilo.ai/kilobench, 'Completion % is the primary signal'",
+   "quote": "It measures the fraction of benchmark tasks the model completed end-to-end through Kilo's harness"
+  },
+  {
+   "id": "F9",
+   "about": "openai-gpt-6-astra",
+   "says": "model-name",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry openai-gpt-6-astra, field name ('OpenAI: GPT-6 Astra ($$$$)': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"OpenAI: GPT-6 Astra ($$$$)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F10",
+   "about": "openai-gpt-6-astra",
+   "says": "note",
+   "value": "$$$$",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry openai-gpt-6-astra, field name: a price/promotion mark of the board label",
+   "quote": "\"name\":\"OpenAI: GPT-6 Astra ($$$$)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F11",
+   "about": "openai-gpt-5-6-sol",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry openai-gpt-5-6-sol, field name ('OpenAI: GPT-5.6 Sol': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"OpenAI: GPT-5.6 Sol\"",
+   "table": "T1"
+  },
+  {
+   "id": "F12",
+   "about": "anthropic-claude-fable-5-1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-fable-5-1, field name ('Anthropic: Claude Fable 5.1 ($$$$)': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Anthropic: Claude Fable 5.1 ($$$$)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F13",
+   "about": "anthropic-claude-fable-5-1",
+   "says": "note",
+   "value": "$$$$",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-fable-5-1, field name: a price/promotion mark of the board label",
+   "quote": "\"name\":\"Anthropic: Claude Fable 5.1 ($$$$)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F14",
+   "about": "deepseek-deepseek-v4-1-flash",
+   "says": "model-name",
+   "value": "DeepSeek V4.1 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry deepseek-deepseek-v4-1-flash, field name ('DeepSeek: DeepSeek V4.1 Flash': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"DeepSeek: DeepSeek V4.1 Flash\"",
+   "table": "T1"
+  },
+  {
+   "id": "F15",
+   "about": "google-gemini-3-8-flash",
+   "says": "model-name",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry google-gemini-3-8-flash, field name ('Google: Gemini 3.8 Flash (50% off)': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Google: Gemini 3.8 Flash (50% off)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F16",
+   "about": "google-gemini-3-8-flash",
+   "says": "note",
+   "value": "50% off",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry google-gemini-3-8-flash, field name: a price/promotion mark of the board label",
+   "quote": "\"name\":\"Google: Gemini 3.8 Flash (50% off)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F17",
+   "about": "openai-gpt-5-5",
+   "says": "model-name",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry openai-gpt-5-5, field name ('OpenAI: GPT-5.5': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"OpenAI: GPT-5.5\"",
+   "table": "T1"
+  },
+  {
+   "id": "F18",
+   "about": "x-ai-grok-4-6",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry x-ai-grok-4-6, field name ('SpaceXAI: Grok 4.6': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"SpaceXAI: Grok 4.6\"",
+   "table": "T1"
+  },
+  {
+   "id": "F19",
+   "about": "moonshotai-kimi-k3",
+   "says": "model-name",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry moonshotai-kimi-k3, field name ('MoonshotAI: Kimi K3': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"MoonshotAI: Kimi K3\"",
+   "table": "T1"
+  },
+  {
+   "id": "F20",
+   "about": "anthropic-claude-opus-5",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-opus-5, field name ('Anthropic: Claude Opus 5': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Anthropic: Claude Opus 5\"",
+   "table": "T1"
+  },
+  {
+   "id": "F21",
+   "about": "anthropic-claude-fable-5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-fable-5, field name ('Anthropic: Claude Fable 5 ($$$$)': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Anthropic: Claude Fable 5 ($$$$)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F22",
+   "about": "anthropic-claude-fable-5",
+   "says": "note",
+   "value": "$$$$",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-fable-5, field name: a price/promotion mark of the board label",
+   "quote": "\"name\":\"Anthropic: Claude Fable 5 ($$$$)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F23",
+   "about": "x-ai-grok-4-5",
+   "says": "model-name",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry x-ai-grok-4-5, field name ('SpaceXAI: Grok 4.5': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"SpaceXAI: Grok 4.5\"",
+   "table": "T1"
+  },
+  {
+   "id": "F24",
+   "about": "anthropic-claude-opus-4-7",
+   "says": "model-name",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-opus-4-7, field name ('Anthropic: Claude Opus 4.7': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Anthropic: Claude Opus 4.7\"",
+   "table": "T1"
+  },
+  {
+   "id": "F25",
+   "about": "anthropic-claude-opus-4-8",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-opus-4-8, field name ('Anthropic: Claude Opus 4.8': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Anthropic: Claude Opus 4.8\"",
+   "table": "T1"
+  },
+  {
+   "id": "F26",
+   "about": "google-gemini-3-5-flash",
+   "says": "model-name",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry google-gemini-3-5-flash, field name ('Google: Gemini 3.5 Flash': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Google: Gemini 3.5 Flash\"",
+   "table": "T1"
+  },
+  {
+   "id": "F27",
+   "about": "moonshotai-kimi-k2-7-code",
+   "says": "model-name",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry moonshotai-kimi-k2-7-code, field name ('MoonshotAI: Kimi K2.7 Code': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"MoonshotAI: Kimi K2.7 Code\"",
+   "table": "T1"
+  },
+  {
+   "id": "F28",
+   "about": "anthropic-claude-sonnet-5",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-sonnet-5, field name ('Anthropic: Claude Sonnet 5': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Anthropic: Claude Sonnet 5\"",
+   "table": "T1"
+  },
+  {
+   "id": "F29",
+   "about": "anthropic-claude-sonnet-4-6",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry anthropic-claude-sonnet-4-6, field name ('Anthropic: Claude Sonnet 4.6': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Anthropic: Claude Sonnet 4.6\"",
+   "table": "T1"
+  },
+  {
+   "id": "F30",
+   "about": "qwen-qwen3-7-max",
+   "says": "model-name",
+   "value": "Qwen3.7 Max",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry qwen-qwen3-7-max, field name ('Qwen: Qwen3.7 Max': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Qwen: Qwen3.7 Max\"",
+   "table": "T1"
+  },
+  {
+   "id": "F31",
+   "about": "moonshotai-kimi-k2-6",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry moonshotai-kimi-k2-6, field name ('MoonshotAI: Kimi K2.6': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"MoonshotAI: Kimi K2.6\"",
+   "table": "T1"
+  },
+  {
+   "id": "F32",
+   "about": "qwen-qwen3-8-max",
+   "says": "model-name",
+   "value": "Qwen3.8 Max",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry qwen-qwen3-8-max, field name ('Qwen: Qwen3.8 Max': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Qwen: Qwen3.8 Max\"",
+   "table": "T1"
+  },
+  {
+   "id": "F33",
+   "about": "z-ai-glm-5-2",
+   "says": "model-name",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry z-ai-glm-5-2, field name ('Z.ai: GLM 5.2': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Z.ai: GLM 5.2\"",
+   "table": "T1"
+  },
+  {
+   "id": "F34",
+   "about": "x-ai-grok-build-0-1",
+   "says": "model-name",
+   "value": "Grok Build 0.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry x-ai-grok-build-0-1, field name ('SpaceXAI: Grok Build 0.1': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"SpaceXAI: Grok Build 0.1\"",
+   "table": "T1"
+  },
+  {
+   "id": "F35",
+   "about": "z-ai-glm-5-1",
+   "says": "model-name",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry z-ai-glm-5-1, field name ('Z.ai: GLM 5.1': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Z.ai: GLM 5.1\"",
+   "table": "T1"
+  },
+  {
+   "id": "F36",
+   "about": "google-gemini-3-6-flash",
+   "says": "model-name",
+   "value": "Gemini 3.6 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry google-gemini-3-6-flash, field name ('Google: Gemini 3.6 Flash': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"Google: Gemini 3.6 Flash\"",
+   "table": "T1"
+  },
+  {
+   "id": "F37",
+   "about": "deepseek-deepseek-v4-pro",
+   "says": "model-name",
+   "value": "DeepSeek V4 Pro 0423",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-kilo/evidence/kilo-points.json",
+   "where": "entry deepseek-deepseek-v4-pro, field name ('DeepSeek: DeepSeek V4 Pro 0423': provider prefix and price/promotion marks dropped)",
+   "quote": "\"name\":\"DeepSeek: DeepSeek V4 Pro 0423\"",
+   "table": "T1"
+  }
+ ]
+}
