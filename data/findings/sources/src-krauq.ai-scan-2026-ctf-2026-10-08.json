@@ -1,0 +1,1317 @@
+{
+ "id": "src-krauq.ai-scan-2026-ctf-2026-10-08",
+ "publisher": "krauq.ai",
+ "urls": [
+  "https://krauq.ai/benchmarks/scan-2026/",
+  "https://krauq.ai/benchmarks/scan-2026/data/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://krauq.ai/benchmarks/scan-2026/data/",
+   "captured": "2026-10-15T15:56:00Z",
+   "note": "configurations.csv and results.csv downloaded by salvo s23/b5 (file mtime 15 Oct); the page data say generated 2026-10-08T16:20:12Z, version 1.0.0, released 2026-10-08"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://krauq.ai/benchmarks/scan-2026/data/configurations.csv",
+   "captured": "2026-10-27T06:50:00Z",
+   "note": "the live configurations.csv fetched by this converter on 27 Oct is byte-identical to S1 (cmp)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-krauq.ai/evidence/results.csv": "73b31535f95c0bb4ab1fefc69d38af2c0669d8f46794401c2ff6c55efbd8d322",
+  "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_.html": "fe19fa169e5fa5671953783b09907837b3bff61f4c02ba912b5f78cbd3a05d0b",
+  "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_data_.html": "71d7dccee08ef0a44bd4caee67995f465f39736315cc01f65e7cbcdfec9a9016",
+  "/work/.salvo14/mig/convert-krauq.ai/evidence/krauq_report_data.json": "fc339d982ff275eb3391acefeb1a84e9aa9b7b398c6ff409b62458b8d8e90e44",
+  "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv": "10277898b941cad04bdbe2b1a50340cd9690803b381a23353df7a6fc7b19e881",
+  "/work/.salvo14/mig/convert-krauq.ai/evidence/rows-settings.csv": "cb407b4ac69324533d09f168778c555bc08d033f7040a576ff055f8fd8763b6e"
+ },
+ "harvested_at": "2026-10-15T15:56:00Z",
+ "published": {
+  "value": "2026-10-08",
+  "where": "krauq_report_data.json (page-embedded data): \"released\"",
+  "quote": "\"released\": \"2026-10-08\"",
+  "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/krauq_report_data.json"
+ },
+ "salvo": "salvo14/mig/convert-krauq.ai (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved exports configurations.csv / results.csv (salvo s23/b5) and the live pages fetched on 27 Oct",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/rows-settings.csv",
+   "from": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "tool": "convert.py: configurations.csv rows verbatim (71 settings) plus two computed columns from results.csv (3,905 attempts): first_start_utc = the earliest started_at_utc of the setting, last_end_utc = the latest started_at_utc + attempt_seconds"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/rows-settings.csv",
+   "where": "one row per model/effort setting",
+   "format": "csv",
+   "row_key": "setting_id",
+   "columns": {
+    "setting_id": "note",
+    "model_id": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "model": "model-name",
+    "effort": "effort-setting",
+    "agent": "note",
+    "solved": {
+     "says": "score",
+     "term": "solved-of-55",
+     "scale": "raw",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "points": "note",
+    "median_solve_seconds": "note",
+    "total_attempt_seconds": "note",
+    "cost_usd": "note",
+    "estimated_cost_attempts": "note",
+    "total_tokens": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "wrong": "note",
+    "no_answer": "note",
+    "timeouts": "note",
+    "refused": "note",
+    "out_of_memory": "note",
+    "price_date": "price-table",
+    "first_start_utc": "run-start",
+    "last_end_utc": "run-end"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "cost_usd",
+   "level": "written",
+   "form": "label",
+   "where": "configurations.csv header cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "cost_usd",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "API-equivalent cost of all 55 attempts",
+   "level": "written",
+   "form": "label",
+   "where": "/data/ page, configurations.csv columns: \"cost_usd API-equivalent cost of all 55 attempts\"",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_data_.html",
+   "quote": "API-equivalent cost of all 55 attempts",
+   "term": "per-suite"
+  },
+  {
+   "id": "F3",
+   "says": "cost-basis",
+   "about": null,
+   "value": "API-equivalent",
+   "level": "written",
+   "form": "label",
+   "where": "/data/ page, results.csv columns: \"cost_usd API-equivalent cost used in the charts: Codex at the lower bound (standard-context rates), Claude at the midpoint\"",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_data_.html",
+   "quote": "API-equivalent cost used in the charts",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F4",
+   "says": "cost-method",
+   "about": null,
+   "value": "Date of the list prices used for cost",
+   "level": "written",
+   "form": "label",
+   "where": "/data/ page, configurations.csv columns: \"price_date Date of the list prices used for cost\": the cost is the attempts' tokens at list prices of that date",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_data_.html",
+   "quote": "Date of the list prices used for cost",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F5",
+   "says": "version",
+   "about": null,
+   "value": "1.0.0",
+   "level": "written",
+   "form": "data-file",
+   "where": "krauq_report_data.json (data embedded in the results page): \"version\"",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/krauq_report_data.json",
+   "quote": "\"version\": \"1.0.0\""
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "Claude at the midpoint",
+   "level": "written",
+   "form": "label",
+   "where": "/data/ page: for Claude rows cost_usd is the midpoint between cost_lower_usd and cost_upper_usd where the pricing rule is ambiguous (results.csv holds both bounds per attempt); for Codex rows the lower bound",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_data_.html",
+   "quote": "Claude at the midpoint"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "Reasoning effort passed to the CLI (Haiku 4.5 ignores it)",
+   "level": "written",
+   "form": "label",
+   "where": "/data/ page, results.csv columns: the effort column",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_data_.html",
+   "quote": "Reasoning effort passed to the CLI (Haiku 4.5 ignores it)"
+  },
+  {
+   "id": "F8",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "Haiku 4.5 doesn't support the effort setting, so the five Haiku rows are separate runs of the same configuration.",
+   "level": "written",
+   "form": "label",
+   "where": "results page, embedded setting data (effNote of the five claude-haiku-4-5-20251001 settings): the effort labels low..max of these rows are not a setting of the model",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/page_benchmarks_scan-2026_.html",
+   "quote": "Haiku 4.5 doesn't support the effort setting, so the five Haiku rows are separate runs of the same configuration."
+  },
+  {
+   "id": "F9",
+   "says": "harness",
+   "about": null,
+   "value": "Codex CLI 0.159.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv column agent (\"Agent CLI and version\"), cell Codex CLI 0.159.3",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "Codex CLI 0.159.3",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F10",
+   "says": "cost",
+   "about": null,
+   "value": "1.0238",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-luna--none, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-luna--none,gpt-5.6-luna,GPT-5.6 Luna,none,Codex CLI 0.159.3,28,4700,75.89,8943.1,1.0238,1,17804153,19,7,1,0,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F11",
+   "says": "harness",
+   "about": null,
+   "value": "Codex CLI 0.156.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv column agent (\"Agent CLI and version\"), cell Codex CLI 0.156.1",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "Codex CLI 0.156.1",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": null,
+   "value": "0.8359",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-luna--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-luna--low,gpt-5.6-luna,GPT-5.6 Luna,low,Codex CLI 0.156.1,33,5625,67.83,6148.7,0.8359,0,12327079,19,3,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F13",
+   "says": "cost",
+   "about": null,
+   "value": "1.4131",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-luna--medium, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-luna--medium,gpt-5.6-luna,GPT-5.6 Luna,medium,Codex CLI 0.156.1,39,6425,117.1,11386.7,1.4131,1,22183172,13,1,1,0,1,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F14",
+   "says": "cost",
+   "about": null,
+   "value": "2.3327",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-luna--high, column cost_usd; 3 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-luna--high,gpt-5.6-luna,GPT-5.6 Luna,high,Codex CLI 0.156.1,47,8450,184.63,17437.2,2.3327,3,35249139,6,0,2,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F15",
+   "says": "cost",
+   "about": null,
+   "value": "2.8522",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-luna--xhigh, column cost_usd; 2 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-luna--xhigh,gpt-5.6-luna,GPT-5.6 Luna,xhigh,Codex CLI 0.156.1,50,9125,246.31,19860.1,2.8522,2,50439597,3,0,2,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F16",
+   "says": "cost",
+   "about": null,
+   "value": "3.0633",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-luna--max, column cost_usd; 4 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-luna--max,gpt-5.6-luna,GPT-5.6 Luna,max,Codex CLI 0.156.1,51,9250,269.64,21313.8,3.0633,4,44644228,2,0,2,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F17",
+   "says": "cost",
+   "about": null,
+   "value": "11.0087",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-terra--none, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-terra--none,gpt-5.6-terra,GPT-5.6 Terra,none,Codex CLI 0.159.3,38,5975,89.8,7401.1,11.0087,0,26842353,6,11,0,0,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": null,
+   "value": "11.8914",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-terra--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-terra--low,gpt-5.6-terra,GPT-5.6 Terra,low,Codex CLI 0.156.1,50,9250,126.19,8905.1,11.8914,0,22373291,5,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F19",
+   "says": "cost",
+   "about": null,
+   "value": "13.35",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-terra--medium, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-terra--medium,gpt-5.6-terra,GPT-5.6 Terra,medium,Codex CLI 0.156.1,48,8525,117.03,9910.2,13.35,0,25856237,7,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F20",
+   "says": "cost",
+   "about": null,
+   "value": "18.3618",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-terra--high, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-terra--high,gpt-5.6-terra,GPT-5.6 Terra,high,Codex CLI 0.156.1,52,9400,166.31,12527.3,18.3618,0,39348408,3,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F21",
+   "says": "cost",
+   "about": null,
+   "value": "22.8903",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-terra--xhigh, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-terra--xhigh,gpt-5.6-terra,GPT-5.6 Terra,xhigh,Codex CLI 0.156.1,53,9650,201.03,15620.4,22.8903,0,47290116,2,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F22",
+   "says": "cost",
+   "about": null,
+   "value": "32.4648",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-terra--max, column cost_usd; 2 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-terra--max,gpt-5.6-terra,GPT-5.6 Terra,max,Codex CLI 0.156.1,53,9775,293.47,21894.9,32.4648,2,61854701,0,0,2,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F23",
+   "says": "cost",
+   "about": null,
+   "value": "26.0663",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-sol--none, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-sol--none,gpt-5.6-sol,GPT-5.6 Sol,none,Codex CLI 0.159.3,43,7550,157.47,12085.8,26.0663,1,28282865,5,6,0,0,1,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F24",
+   "says": "cost",
+   "about": null,
+   "value": "21.3138",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-sol--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-sol--low,gpt-5.6-sol,GPT-5.6 Sol,low,Codex CLI 0.156.1,51,9600,194.41,12931.1,21.3138,0,20985227,4,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F25",
+   "says": "cost",
+   "about": null,
+   "value": "25.1689",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-sol--medium, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-sol--medium,gpt-5.6-sol,GPT-5.6 Sol,medium,Codex CLI 0.156.1,54,9925,246.44,16075.1,25.1689,0,24313035,1,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F26",
+   "says": "cost",
+   "about": null,
+   "value": "32.0271",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-sol--high, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-sol--high,gpt-5.6-sol,GPT-5.6 Sol,high,Codex CLI 0.156.1,55,10000,296.04,19144.2,32.0271,0,34835410,0,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F27",
+   "says": "cost",
+   "about": null,
+   "value": "33.7898",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-sol--xhigh, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-sol--xhigh,gpt-5.6-sol,GPT-5.6 Sol,xhigh,Codex CLI 0.156.1,53,9675,309.63,21606.3,33.7898,1,33228946,1,0,1,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F28",
+   "says": "cost",
+   "about": null,
+   "value": "45.204",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-5.6-sol--max, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-5.6-sol--max,gpt-5.6-sol,GPT-5.6 Sol,max,Codex CLI 0.156.1,55,10000,414.27,26514.5,45.204,0,51875328,0,0,0,0,0,2026-09-21",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F29",
+   "says": "cost",
+   "about": null,
+   "value": "1.249",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-luna--none, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-luna--none,gpt-6-luna,GPT-6 Luna,none,Codex CLI 0.156.1,34,5150,121.23,13283.1,1.249,1,65761022,8,12,1,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F30",
+   "says": "cost",
+   "about": null,
+   "value": "0.5494",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-luna--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-luna--low,gpt-6-luna,GPT-6 Luna,low,Codex CLI 0.156.1,37,6725,85.81,7806.9,0.5494,0,23799001,6,12,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F31",
+   "says": "cost",
+   "about": null,
+   "value": "0.5122",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-luna--medium, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-luna--medium,gpt-6-luna,GPT-6 Luna,medium,Codex CLI 0.156.1,43,7575,98.23,9257.0,0.5122,0,20476702,6,6,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F32",
+   "says": "cost",
+   "about": null,
+   "value": "0.7938",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-luna--high, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-luna--high,gpt-6-luna,GPT-6 Luna,high,Codex CLI 0.156.1,45,7325,167.72,14839.5,0.7938,0,31246818,5,5,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F33",
+   "says": "cost",
+   "about": null,
+   "value": "1.2836",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-luna--xhigh, column cost_usd; 6 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-luna--xhigh,gpt-6-luna,GPT-6 Luna,xhigh,Codex CLI 0.156.1,46,7525,267.63,25454.6,1.2836,6,33152455,2,1,6,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F34",
+   "says": "cost",
+   "about": null,
+   "value": "1.3083",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-luna--max, column cost_usd; 4 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-luna--max,gpt-6-luna,GPT-6 Luna,max,Codex CLI 0.156.1,49,7925,335.56,26720.7,1.3083,4,37156908,1,2,3,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F35",
+   "says": "cost",
+   "about": null,
+   "value": "18.4167",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-sol--none, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-sol--none,gpt-6-sol,GPT-6 Sol,none,Codex CLI 0.156.1,52,9500,111.94,11333.0,18.4167,0,54452717,2,1,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": null,
+   "value": "11.2699",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-sol--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-sol--low,gpt-6-sol,GPT-6 Sol,low,Codex CLI 0.156.1,54,9800,97.42,8184.4,11.2699,0,27259266,1,0,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F37",
+   "says": "cost",
+   "about": null,
+   "value": "15.7397",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-sol--medium, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-sol--medium,gpt-6-sol,GPT-6 Sol,medium,Codex CLI 0.156.1,53,9725,142.02,11347.2,15.7397,0,39553837,2,0,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F38",
+   "says": "cost",
+   "about": null,
+   "value": "17.8663",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-sol--high, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-sol--high,gpt-6-sol,GPT-6 Sol,high,Codex CLI 0.156.1,54,9925,175.0,14022.0,17.8663,0,42023738,1,0,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F39",
+   "says": "cost",
+   "about": null,
+   "value": "16.6426",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-sol--xhigh, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-sol--xhigh,gpt-6-sol,GPT-6 Sol,xhigh,Codex CLI 0.156.1,54,9925,190.0,13516.3,16.6426,0,36230813,1,0,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F40",
+   "says": "cost",
+   "about": null,
+   "value": "20.7873",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-sol--max, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-sol--max,gpt-6-sol,GPT-6 Sol,max,Codex CLI 0.156.1,54,9925,235.06,16735.4,20.7873,0,47455327,0,1,0,0,0,2026-09-23",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F41",
+   "says": "cost",
+   "about": null,
+   "value": "56.8287",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-astra--low, column cost_usd; 5 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-astra--low,gpt-6-astra,GPT-6 Astra,low,Codex CLI 0.159.3,50,9275,179.54,12044.2,56.8287,5,26282834,0,1,0,4,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F42",
+   "says": "cost",
+   "about": null,
+   "value": "47.9194",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6-astra--medium, column cost_usd; 5 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6-astra--medium,gpt-6-astra,GPT-6 Astra,medium,Codex CLI 0.159.3,49,8575,201.05,11154.3,47.9194,5,19971456,1,0,0,5,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F43",
+   "says": "cost",
+   "about": null,
+   "value": "8.5835",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6.1-sol--low, column cost_usd; 10 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6.1-sol--low,gpt-6.1-sol,GPT-6.1 Sol,low,Codex CLI 0.159.3,45,7875,180.03,10784.2,8.5835,10,26512938,0,0,0,10,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F44",
+   "says": "cost",
+   "about": null,
+   "value": "9.4687",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6.1-sol--medium, column cost_usd; 10 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6.1-sol--medium,gpt-6.1-sol,GPT-6.1 Sol,medium,Codex CLI 0.159.3,45,7600,216.68,11950.2,9.4687,10,27289618,0,0,0,10,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F45",
+   "says": "cost",
+   "about": null,
+   "value": "12.3131",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6.1-sol--high, column cost_usd; 4 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6.1-sol--high,gpt-6.1-sol,GPT-6.1 Sol,high,Codex CLI 0.159.3,52,9200,259.12,16731.4,12.3131,4,29084878,0,0,1,2,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": null,
+   "value": "13.4776",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6.1-sol--xhigh, column cost_usd; 3 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6.1-sol--xhigh,gpt-6.1-sol,GPT-6.1 Sol,xhigh,Codex CLI 0.159.3,52,9175,309.49,19243.0,13.4776,3,29367533,0,0,1,2,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F47",
+   "says": "cost",
+   "about": null,
+   "value": "14.5437",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row gpt-6.1-sol--max, column cost_usd; 3 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "gpt-6.1-sol--max,gpt-6.1-sol,GPT-6.1 Sol,max,Codex CLI 0.159.3,52,9250,358.01,22191.0,14.5437,3,29409735,0,0,1,2,0,2026-10-02",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F48",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code 2.1.273",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv column agent (\"Agent CLI and version\"), cell Claude Code 2.1.273",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "Claude Code 2.1.273",
+   "term": "claude-code"
+  },
+  {
+   "id": "F49",
+   "says": "cost",
+   "about": null,
+   "value": "14.5435",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-4-5-20251001--low, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-4-5-20251001--low,claude-haiku-4-5-20251001,Haiku 4.5,low,Claude Code 2.1.273,33,5025,150.37,15918.9,14.5435,1,53810129,16,4,1,0,1,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": null,
+   "value": "14.1195",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-4-5-20251001--medium, column cost_usd; 3 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-4-5-20251001--medium,claude-haiku-4-5-20251001,Haiku 4.5,medium,Claude Code 2.1.273,33,5150,128.34,15377.6,14.1195,3,53965225,13,6,3,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F51",
+   "says": "cost",
+   "about": null,
+   "value": "14.9954",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-4-5-20251001--high, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-4-5-20251001--high,claude-haiku-4-5-20251001,Haiku 4.5,high,Claude Code 2.1.273,31,4625,130.48,16355.0,14.9954,1,57621206,18,5,1,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F52",
+   "says": "cost",
+   "about": null,
+   "value": "14.6196",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-4-5-20251001--xhigh, column cost_usd; 3 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-4-5-20251001--xhigh,claude-haiku-4-5-20251001,Haiku 4.5,xhigh,Claude Code 2.1.273,32,5100,118.07,16725.0,14.6196,3,54941574,16,4,3,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F53",
+   "says": "cost",
+   "about": null,
+   "value": "15.2835",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-4-5-20251001--max, column cost_usd; 2 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-4-5-20251001--max,claude-haiku-4-5-20251001,Haiku 4.5,max,Claude Code 2.1.273,32,4750,133.11,15565.9,15.2835,2,59753108,15,6,2,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F54",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code 2.1.293",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv column agent (\"Agent CLI and version\"), cell Claude Code 2.1.293",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "Claude Code 2.1.293",
+   "term": "claude-code"
+  },
+  {
+   "id": "F55",
+   "says": "cost",
+   "about": null,
+   "value": "0.4927",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-5-5--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-5-5--low,claude-haiku-5-5,Haiku 5.5,low,Claude Code 2.1.293,44,7525,37.8,6347.7,0.4927,0,10788827,3,8,0,0,0,2026-10-07",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F56",
+   "says": "cost",
+   "about": null,
+   "value": "0.7671",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-5-5--medium, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-5-5--medium,claude-haiku-5-5,Haiku 5.5,medium,Claude Code 2.1.293,45,8350,56.43,10302.5,0.7671,1,17032571,2,7,1,0,0,2026-10-07",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F57",
+   "says": "cost",
+   "about": null,
+   "value": "1.2127",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-5-5--high, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-5-5--high,claude-haiku-5-5,Haiku 5.5,high,Claude Code 2.1.293,49,8700,86.69,12055.1,1.2127,1,29003189,1,4,1,0,0,2026-10-07",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F58",
+   "says": "cost",
+   "about": null,
+   "value": "1.8745",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-5-5--xhigh, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-5-5--xhigh,claude-haiku-5-5,Haiku 5.5,xhigh,Claude Code 2.1.293,50,9050,164.92,15040.0,1.8745,0,43491559,0,5,0,0,0,2026-10-07",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F59",
+   "says": "cost",
+   "about": null,
+   "value": "2.8915",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-haiku-5-5--max, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-haiku-5-5--max,claude-haiku-5-5,Haiku 5.5,max,Claude Code 2.1.293,48,8550,263.48,20058.3,2.8915,0,58280360,0,7,0,0,0,2026-10-07",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F60",
+   "says": "cost",
+   "about": null,
+   "value": "16.4862",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5--low,claude-sonnet-5,Sonnet 5,low,Claude Code 2.1.273,48,8350,80.57,8353.7,16.4862,0,35377271,4,3,0,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F61",
+   "says": "cost",
+   "about": null,
+   "value": "24.4579",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5--medium, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5--medium,claude-sonnet-5,Sonnet 5,medium,Claude Code 2.1.273,49,9175,98.69,13759.4,24.4579,1,53902648,2,3,1,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F62",
+   "says": "cost",
+   "about": null,
+   "value": "24.9339",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5--high, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5--high,claude-sonnet-5,Sonnet 5,high,Claude Code 2.1.273,50,9175,137.02,12528.5,24.9339,1,51818718,3,2,0,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F63",
+   "says": "cost",
+   "about": null,
+   "value": "29.7346",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5--xhigh, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5--xhigh,claude-sonnet-5,Sonnet 5,xhigh,Claude Code 2.1.273,47,8325,157.1,14041.8,29.7346,1,60020907,4,3,1,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F64",
+   "says": "cost",
+   "about": null,
+   "value": "34.6302",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5--max, column cost_usd; 2 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5--max,claude-sonnet-5,Sonnet 5,max,Claude Code 2.1.273,51,9375,208.44,18268.5,34.6302,2,63155956,1,2,1,0,0,2026-09-24",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F65",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code 2.1.284",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv column agent (\"Agent CLI and version\"), cell Claude Code 2.1.284",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "Claude Code 2.1.284",
+   "term": "claude-code"
+  },
+  {
+   "id": "F66",
+   "says": "cost",
+   "about": null,
+   "value": "5.053",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5-5--low, column cost_usd; 2 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5-5--low,claude-sonnet-5-5,Sonnet 5.5,low,Claude Code 2.1.284,48,8675,19.95,6465.1,5.053,2,6205725,2,3,2,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F67",
+   "says": "cost",
+   "about": null,
+   "value": "5.5061",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5-5--medium, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5-5--medium,claude-sonnet-5-5,Sonnet 5.5,medium,Claude Code 2.1.284,47,8850,35.02,6630.1,5.5061,1,6972303,6,1,1,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F68",
+   "says": "cost",
+   "about": null,
+   "value": "9.4958",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5-5--high, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5-5--high,claude-sonnet-5-5,Sonnet 5.5,high,Claude Code 2.1.284,50,8975,35.67,7854.8,9.4958,0,17575735,2,3,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F69",
+   "says": "cost",
+   "about": null,
+   "value": "12.1833",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5-5--xhigh, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5-5--xhigh,claude-sonnet-5-5,Sonnet 5.5,xhigh,Claude Code 2.1.284,54,9725,88.46,8409.8,12.1833,0,15119925,0,1,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F70",
+   "says": "cost",
+   "about": null,
+   "value": "43.9239",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-sonnet-5-5--max, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-sonnet-5-5--max,claude-sonnet-5-5,Sonnet 5.5,max,Claude Code 2.1.284,53,9650,408.47,25399.7,43.9239,0,55337969,0,2,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F71",
+   "says": "cost",
+   "about": null,
+   "value": "21.5652",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5--low,claude-opus-5,Opus 5,low,Claude Code 2.1.284,55,10000,93.65,8417.6,21.5652,0,11210257,0,0,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F72",
+   "says": "cost",
+   "about": null,
+   "value": "27.0434",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5--medium, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5--medium,claude-opus-5,Opus 5,medium,Claude Code 2.1.284,53,9775,124.44,11092.6,27.0434,0,13388631,2,0,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F73",
+   "says": "cost",
+   "about": null,
+   "value": "37.1671",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5--high, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5--high,claude-opus-5,Opus 5,high,Claude Code 2.1.284,52,9575,184.23,16769.0,37.1671,1,18898608,0,2,1,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F74",
+   "says": "cost",
+   "about": null,
+   "value": "47.6486",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5--xhigh, column cost_usd; 3 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5--xhigh,claude-opus-5,Opus 5,xhigh,Claude Code 2.1.284,53,9725,251.2,21328.0,47.6486,3,25266682,0,0,2,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F75",
+   "says": "cost",
+   "about": null,
+   "value": "53.0694",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5--max, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5--max,claude-opus-5,Opus 5,max,Claude Code 2.1.284,54,9925,248.05,17952.1,53.0694,1,26384425,0,1,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F76",
+   "says": "cost",
+   "about": null,
+   "value": "8.6557",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5-5--low, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5-5--low,claude-opus-5-5,Opus 5.5,low,Claude Code 2.1.284,51,8900,33.78,4996.8,8.6557,0,5607907,3,0,0,1,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F77",
+   "says": "cost",
+   "about": null,
+   "value": "12.5142",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5-5--medium, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5-5--medium,claude-opus-5-5,Opus 5.5,medium,Claude Code 2.1.284,54,9725,50.04,5977.7,12.5142,1,7766863,0,0,1,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F78",
+   "says": "cost",
+   "about": null,
+   "value": "14.8871",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5-5--high, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5-5--high,claude-opus-5-5,Opus 5.5,high,Claude Code 2.1.284,54,9925,56.25,5683.3,14.8871,0,9587503,0,1,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F79",
+   "says": "cost",
+   "about": null,
+   "value": "22.3845",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5-5--xhigh, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5-5--xhigh,claude-opus-5-5,Opus 5.5,xhigh,Claude Code 2.1.284,54,9925,88.97,7806.7,22.3845,0,15148636,0,1,0,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F80",
+   "says": "cost",
+   "about": null,
+   "value": "42.3252",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-opus-5-5--max, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-opus-5-5--max,claude-opus-5-5,Opus 5.5,max,Claude Code 2.1.284,53,9825,231.78,18700.4,42.3252,1,25794523,0,1,1,0,0,2026-10-01",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F81",
+   "says": "cost",
+   "about": null,
+   "value": "37.6221",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-fable-5--low, column cost_usd; 2 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-fable-5--low,claude-fable-5,Fable 5,low,Claude Code 2.1.284,51,8725,63.82,6185.3,37.6221,2,8827245,1,0,0,3,0,2026-10-03",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F82",
+   "says": "cost",
+   "about": null,
+   "value": "54.5306",
+   "level": "written",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-fable-5--medium, column cost_usd",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-fable-5--medium,claude-fable-5,Fable 5,medium,Claude Code 2.1.284,53,9300,99.33,8842.3,54.5306,0,13293079,1,0,0,1,0,2026-10-03",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F83",
+   "says": "cost",
+   "about": null,
+   "value": "37.3071",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-fable-5-1--low, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-fable-5-1--low,claude-fable-5-1,Fable 5.1,low,Claude Code 2.1.284,52,9025,106.6,8883.0,37.3071,1,9026317,1,0,1,1,0,2026-10-03",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F84",
+   "says": "cost",
+   "about": null,
+   "value": "41.0771",
+   "level": "source-estimate",
+   "form": "table-cell",
+   "where": "configurations.csv, row claude-fable-5-1--medium, column cost_usd; 1 of the 55 attempts have an estimated cost (cost_estimated: \"True when cost_usd is estimated from partial usage\"), so the sum includes imputed attempts",
+   "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/configurations.csv",
+   "quote": "claude-fable-5-1--medium,claude-fable-5-1,Fable 5.1,medium,Claude Code 2.1.284,52,9050,116.82,9627.2,41.0771,1,10197706,1,0,1,1,0,2026-10-03",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  }
+ ]
+}

@@ -1,0 +1,157 @@
+{
+ "id": "src-hex-databench-page-2026-10-07",
+ "publisher": "hex.tech",
+ "urls": [
+  "https://hex.tech/databench",
+  "https://hex.tech/blog/databench-agentic-analytics-benchmark/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://hex.tech/databench",
+   "captured": "2026-10-08T02:47:48Z",
+   "note": "page fetched by salvo s20/h2 (saved file /work/.salvo14/s20/h2/src/web/26705f8e.html) (file mtime); the page says \"Last updated: October 7, 2026\""
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://hex.tech/databench",
+   "captured": "2026-10-21T15:09:00Z",
+   "note": "page fetched by salvo hn/glm-flashx-5v (saved file /work/.salvo14/hn/glm-flashx-5v/src/hex_20261021.html) on 21 Oct (file mtime): the ranking-table data (72 rows) are identical to S1, the page still says \"Last updated: October 7, 2026\""
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-hex.tech/evidence/blog.html": "8676c4680a9450ef133f1c18bd4e831248657dfecb655d68b3f92f9428cb0c2e",
+  "/work/.salvo14/s20/h2/src/web/26705f8e.html": "3ac52b5e3a2c7a9b7afe674ffd1e321a1b4fd127ee6fcb6388dc1e12a1f7ef65",
+  "/work/.salvo14/hn/glm-flashx-5v/src/hex_20261021.html": "65fe2ce398bb956897e82f8934ca54b11fe06b0b7607ad7db7f8fe5d6cec1963",
+  "/work/.salvo14/mig/convert-hex.tech/evidence/rows-board.json": "8e7a65f5f6b21464f988e2f31a9a1cdde19e7db3236faaeb2f0f116b24b59048"
+ },
+ "harvested_at": "2026-10-08T02:47:48Z",
+ "published": {
+  "value": "2026-10-07",
+  "where": "page header: \"Last updated: October 7, 2026\"",
+  "quote": "Last updated: October 7, 2026",
+  "file": "/work/.salvo14/s20/h2/src/web/26705f8e.html"
+ },
+ "salvo": "salvo14/mig/convert-hex.tech (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page captures (the embedded ranking-table data of the page)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-hex.tech/evidence/rows-board.json",
+   "from": "/work/.salvo14/s20/h2/src/web/26705f8e.html",
+   "tool": "convert.py: the \"rows\" array of the DataBench ranking table embedded in the page (Next.js flight data, JSON unescaped; 72 rows, copied verbatim) plus, for each row, label and effortLabel taken from the chart series of the same page (\"label\", \"runs\"[].effortLabel; cost and score checked equal to the row). Identical in P1 and P2 (asserted)."
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-hex.tech/evidence/rows-board.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": "note",
+    "label": "model-name",
+    "effortLabel": "effort-label",
+    "rank": "note",
+    "scoreValue": {
+     "says": "score",
+     "term": "score%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "score": "note",
+    "costPerTaskValue": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "costPerTask": "note",
+    "tokensPerTaskValue": "note",
+    "tokensPerTask": "note",
+    "medianLatencyValue": "note",
+    "medianLatency": "note",
+    "accentColor": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "ranking chart table, column \"Average cost per task\": costs printed with a $ sign",
+   "file": "/work/.salvo14/s20/h2/src/web/26705f8e.html",
+   "quote": "<td>$3.57</td>",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "Average cost per task",
+   "level": "written",
+   "form": "label",
+   "where": "ranking chart table header (the per-task average)",
+   "file": "/work/.salvo14/s20/h2/src/web/26705f8e.html",
+   "quote": "Average cost per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F3",
+   "says": "version",
+   "about": null,
+   "value": "v1.1",
+   "level": "written",
+   "form": "prose",
+   "where": "page, section Changelog: the latest entry of the board (17 Sep 2026: updated judges and rubrics); the table is the board at that version",
+   "file": "/work/.salvo14/s20/h2/src/web/26705f8e.html",
+   "quote": "v1.1: Judge calibration improvements"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "Updated judges and rubrics to fix accidental rewarding of misleading responses",
+   "level": "written",
+   "form": "prose",
+   "where": "page, Changelog v1.1 (September 17, 2026): \"This makes the benchmark significantly more difficult overall, with Anthropic models especially impacted\"; the page does not say which rows were re-run",
+   "file": "/work/.salvo14/s20/h2/src/web/26705f8e.html",
+   "quote": "Updated judges and rubrics to fix accidental rewarding of misleading responses"
+  },
+  {
+   "id": "F5",
+   "says": "harness",
+   "about": null,
+   "value": "Hex workspace",
+   "level": "written",
+   "form": "prose",
+   "where": "blog post \"Introducing DataBench\" (13 Aug 2026), section Performance on DataBench: \"Everything runs in the Hex workspace of a synthetic business called Shorelane Commerce, and is executed & judged using the native Evals functionality\"",
+   "file": "/work/.salvo14/mig/convert-hex.tech/evidence/blog.html",
+   "quote": "Everything runs in the Hex workspace of a synthetic business called Shorelane Commerce"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "Hover to compare cost, token usage, and reasoning effort",
+   "level": "written",
+   "form": "prose",
+   "where": "page: the chart legend lists Low / Medium / High / XHigh / Max Effort; the effort of a row is its label",
+   "file": "/work/.salvo14/s20/h2/src/web/26705f8e.html",
+   "quote": "Hover to compare cost, token usage, and reasoning effort."
+  }
+ ]
+}

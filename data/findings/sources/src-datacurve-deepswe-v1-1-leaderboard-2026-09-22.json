@@ -1,0 +1,180 @@
+{
+ "id": "src-datacurve-deepswe-v1-1-leaderboard-2026-09-22",
+ "publisher": "datacurve",
+ "urls": [
+  "https://deepswe.datacurve.ai/",
+  "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://deepswe.datacurve.ai/artifacts/v1.1/leaderboard-live.json",
+   "captured": "2026-10-01T02:32:00Z",
+   "note": "saved by salvo s18/a5 (file mtime 1 Oct); generated_at 2026-09-22T06:27:15Z. The live file fetched on 27 Oct by this converter is identical (== on the parsed JSON: same generated_at, 70 rows, no row differs); the home page of the same date says \"113 tasks · updated September 22, 2026\""
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json": "a7c15d66288fd249c020b9931c017b92d1a3b90e480b3ff34974b752bd030019",
+  "/work/.salvo14/mig/convert-datacurve/evidence/home.saved.html": "14436c31be1e50a0b62171e4aee4dd0ae0ce66b1e390af89c7e6e095ad59f1f1",
+  "/work/.salvo14/mig/convert-datacurve/evidence/rows-board.json": "89f5e741b5d25937caf5d0e040f58d907d81c36e8dd78ea95e0e0968886b4af0"
+ },
+ "harvested_at": "2026-10-01T02:32:00Z",
+ "published": {
+  "value": "2026-09-22T06:27:15Z",
+  "where": "leaderboard-live.json, field generated_at",
+  "quote": "\"generated_at\": \"2026-09-22T06:27:15.860279+00:00\"",
+  "file": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json"
+ },
+ "salvo": "salvo14/mig/convert-datacurve (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved leaderboard-live.json (salvo s18/a5, 1 Oct) and the home page; the live file of 27 Oct is identical",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/rows-board.json",
+   "from": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json",
+   "tool": "convert.py: the 70 rows of leaderboard-live.json copied verbatim plus one derived column score_counts = \"<n_passed> of <n_attempted>\" (the row's own two integers; pass_at_1 = n_passed / n_attempted)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/rows-board.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "config",
+   "columns": {
+    "config": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "harness": "note",
+    "provider": "note",
+    "reasoning_effort": "effort-setting",
+    "source": "note",
+    "cost_basis": "note",
+    "score_counts": {
+     "says": "score",
+     "term": "pass@1%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "pass_rate": "note",
+    "pass_at_1": "note",
+    "pass_at_4": "note",
+    "n_passed": "note",
+    "n_attempted": "note",
+    "n_tasks_attempted": "note",
+    "n_tasks_passed_any": "note",
+    "n_runs": "aggregation",
+    "mean_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "mean_cost_usd",
+   "level": "written",
+   "form": "label",
+   "where": "leaderboard-live.json, field name mean_cost_usd of every row (a $ amount: the home page prints \"Avg cost $4.43\")",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json",
+   "quote": "\"mean_cost_usd\"",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "Avg cost per task",
+   "level": "written",
+   "form": "label",
+   "where": "home page, leaderboard chart: x axis \"Avg cost per task\"; the JSON field is mean_cost_usd, the mean over scored attempts",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/home.saved.html",
+   "quote": "Avg cost per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F3",
+   "says": "metric-definition",
+   "about": null,
+   "value": "pass@1 is attempt pass rate over scored rollout attempts",
+   "level": "written",
+   "form": "prose",
+   "where": "leaderboard-live.json, field unit",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json",
+   "quote": "pass@1 is attempt pass rate over scored rollout attempts"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "Context-window failures and agent timeouts are scored failures; provider/verifier/network errors are excluded.",
+   "level": "written",
+   "form": "prose",
+   "where": "leaderboard-live.json, field unit: errors are excluded from n_attempted, failures are scored",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json",
+   "quote": "Context-window failures and agent timeouts are scored failures; provider/verifier/network errors are excluded."
+  },
+  {
+   "id": "F5",
+   "says": "version",
+   "about": null,
+   "value": "v1.1",
+   "level": "written",
+   "form": "label",
+   "where": "home page: leaderboard toggle \"v1.1 / v1\" and the Data link /data/v1.1; the file path is artifacts/v1.1/",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/home.saved.html",
+   "quote": "href=\"/data/v1.1\""
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": null,
+   "value": "mini-swe-agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard-live.json rows, field harness",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json",
+   "quote": "\"harness\": \"mini-swe-agent\"",
+   "term": "mini-swe-agent"
+  },
+  {
+   "id": "F7",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard-live.json, row mini_swe_agent_gpt_6_astra_xhigh, field cost_basis (states the prices applied to the tokens)",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json",
+   "quote": "Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F8",
+   "says": "cost-method",
+   "about": null,
+   "value": "Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard-live.json, row mini_swe_agent_gpt_6_astra_xhigh, field cost_basis: per-class prices applied to the row's tokens",
+   "file": "/work/.salvo14/mig/convert-datacurve/evidence/leaderboard-live.saved.json",
+   "quote": "Current pricing at all context lengths: $10/M uncached input, $12.50/M cache writes, $1/M cache reads, $50/M output; no separate compute-unit fee.",
+   "term": "tokens×list"
+  }
+ ]
+}
