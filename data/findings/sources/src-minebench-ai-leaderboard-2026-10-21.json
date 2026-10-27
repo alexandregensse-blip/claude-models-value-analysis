@@ -1,0 +1,525 @@
+{
+ "id": "src-minebench-ai-leaderboard-2026-10-21",
+ "publisher": "minebench",
+ "urls": [
+  "https://minebench.ai/leaderboard",
+  "https://minebench.ai/api/leaderboard",
+  "https://github.com/Ammaar-Alam/minebench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://minebench.ai/api/leaderboard",
+   "captured": "2026-10-21T15:09:00Z",
+   "note": "board JSON saved by salvo hn/glm-flashx-5v (file mtime 21 Oct 15:09); the latest read; 35 Elo values differ from the 20 Oct read, a second 21 Oct copy (hn/qwen3.8-flash) differs on 2 models"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/hn/glm-flashx-5v/src/minebench_20261021.json": "db92a83b207e3e0717de3ccced9c343510531f9fc0c5ea1018785f362a7a1a9f",
+  "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json": "e171d3588dc1c6c4fcbda9e8ff12b410b6fb8f9e9f2ab53944cae3aad86c6b12",
+  "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt": "1b5158296f67e8685bf579d97f43652e31ff9f000bbd508a16a2af65cc1920d3"
+ },
+ "harvested_at": "2026-10-21T15:09:00Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-minebench (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved board read (salvo g/g8, = s24/c2) and the profile file of the repository at the 66 commits of its history fetched on 27 Oct",
+ "snapshot_of": "src-minebench-ai-leaderboard-2026-10-18",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "from": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "tool": "convert.py (prof.py): per model key the history of MODEL_RUN_PARAMETERS in lib/ai/modelBenchmarkProfiles.ts over the 66 commits listed in commits-list.json (the file at each commit saved in profiles/<sha>.ts; constants such as OPENAI_PRO_MAX resolved to their label/value lists)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/hn/glm-flashx-5v/src/minebench_20261021.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "slug": "note",
+    "provider": "note",
+    "displayName": "model-name",
+    "stability": "note",
+    "eloRating": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "ratingDeviation": "note",
+    "ci95": "note",
+    "rank": "note",
+    "shownCount": "note",
+    "winCount": "note",
+    "lossCount": "note",
+    "drawCount": "note",
+    "meanScore": "note",
+    "sampledVotes": "note",
+    "coveredPrompts": "note",
+    "benchmark.averageCostUsd": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "benchmark.costEstimated": "note",
+    "benchmark.expectedBuildCount": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "averageCostUsd",
+   "level": "written",
+   "form": "label",
+   "where": "leaderboard JSON, field benchmark.averageCostUsd",
+   "file": "/work/.salvo14/hn/glm-flashx-5v/src/minebench_20261021.json",
+   "quote": "\"averageCostUsd\"",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "averageCostUsd",
+   "level": "written",
+   "form": "label",
+   "where": "average cost of one build (see the 18 Oct source)",
+   "file": "/work/.salvo14/hn/glm-flashx-5v/src/minebench_20261021.json",
+   "quote": "\"averageCostUsd\"",
+   "term": "per-build"
+  },
+  {
+   "id": "F3",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-22 to 2026-10-23: the entry anthropic_claude_opus_5_5 of MODEL_RUN_PARAMETERS is identical in all 17 commits of lib/ai/modelBenchmarkProfiles.ts from 6358c525ad to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F4",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying anthropic_claude_opus_5_5 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-22T22:09:32Z"
+  },
+  {
+   "id": "F5",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-07-25 to 2026-10-23: the entry anthropic_claude_opus_5 of MODEL_RUN_PARAMETERS is identical in all 52 commits of lib/ai/modelBenchmarkProfiles.ts from b977412f2f to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F6",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-07-25",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying anthropic_claude_opus_5 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-07-25T01:50:09Z"
+  },
+  {
+   "id": "F7",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-28 to 2026-10-23: the entry anthropic_claude_sonnet_5_5 of MODEL_RUN_PARAMETERS is identical in all 11 commits of lib/ai/modelBenchmarkProfiles.ts from d598e48044 to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F8",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-28",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying anthropic_claude_sonnet_5_5 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-28T20:23:51Z"
+  },
+  {
+   "id": "F9",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-01 to 2026-10-23: the entry anthropic_claude_fable_5_1 of MODEL_RUN_PARAMETERS is identical in all 28 commits of lib/ai/modelBenchmarkProfiles.ts from c0943621dd to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F10",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-01",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying anthropic_claude_fable_5_1 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-01T19:57:23Z"
+  },
+  {
+   "id": "F11",
+   "says": "config-history",
+   "about": null,
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "where": "2026-10-14 to 2026-10-23: the entry gemini_4_argon of MODEL_RUN_PARAMETERS is identical in all 6 commits of lib/ai/modelBenchmarkProfiles.ts from 65d775bbda to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Thinking level: High"
+  },
+  {
+   "id": "F12",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-10-14",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying gemini_4_argon (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-10-14T00:43:26Z"
+  },
+  {
+   "id": "F13",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-04 to 2026-10-23: the entry openai_gpt_6_astra of MODEL_RUN_PARAMETERS is identical in all 21 commits of lib/ai/modelBenchmarkProfiles.ts from b5cec20d27 to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F14",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-04",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying openai_gpt_6_astra (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-04T20:52:56Z"
+  },
+  {
+   "id": "F15",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-29 to 2026-10-23: the entry openai_gpt_6_1_sol of MODEL_RUN_PARAMETERS is identical in all 9 commits of lib/ai/modelBenchmarkProfiles.ts from 8d8949a0c1 to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F16",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-29",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying openai_gpt_6_1_sol (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-29T23:52:13Z"
+  },
+  {
+   "id": "F17",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-22 to 2026-10-23: the entry openai_gpt_6_sol of MODEL_RUN_PARAMETERS is identical in all 17 commits of lib/ai/modelBenchmarkProfiles.ts from 6358c525ad to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F18",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying openai_gpt_6_sol (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-22T22:09:32Z"
+  },
+  {
+   "id": "F19",
+   "says": "config-history",
+   "about": null,
+   "value": "XHigh",
+   "level": "written",
+   "form": "code",
+   "where": "2026-10-15 to 2026-10-23: the entry xai_grok_4_7 of MODEL_RUN_PARAMETERS is identical in all 5 commits of lib/ai/modelBenchmarkProfiles.ts from 99e350948f to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: XHigh"
+  },
+  {
+   "id": "F20",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-10-15",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying xai_grok_4_7 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-10-15T01:17:07Z"
+  },
+  {
+   "id": "F21",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-10 to 2026-10-23: the entry deepseek_v4_1_flash of MODEL_RUN_PARAMETERS is identical in all 19 commits of lib/ai/modelBenchmarkProfiles.ts from 9eec6ed777 to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F22",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-10",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying deepseek_v4_1_flash (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-10T14:40:16Z"
+  },
+  {
+   "id": "F23",
+   "says": "config-history",
+   "about": null,
+   "value": "XHigh",
+   "level": "written",
+   "form": "code",
+   "where": "2026-08-12 to 2026-10-23: the entry xai_grok_4_6 of MODEL_RUN_PARAMETERS is identical in all 41 commits of lib/ai/modelBenchmarkProfiles.ts from 3212e3d1de to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: XHigh"
+  },
+  {
+   "id": "F24",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-08-12",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying xai_grok_4_6 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-08-12T16:21:09Z"
+  },
+  {
+   "id": "F25",
+   "says": "config-history",
+   "about": null,
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-02 to 2026-10-23: the entry gemini_3_8_flash of MODEL_RUN_PARAMETERS is identical in all 26 commits of lib/ai/modelBenchmarkProfiles.ts from a15c4d83c4 to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Thinking level: High"
+  },
+  {
+   "id": "F26",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-02",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying gemini_3_8_flash (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-02T15:49:28Z"
+  },
+  {
+   "id": "F27",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-08-26 to 2026-10-23: the entry zai_glm_5_3_flash of MODEL_RUN_PARAMETERS is identical in all 32 commits of lib/ai/modelBenchmarkProfiles.ts from 350c34e067 to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F28",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-08-26",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying zai_glm_5_3_flash (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-08-26T18:57:45Z"
+  },
+  {
+   "id": "F29",
+   "says": "config-history",
+   "about": null,
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "where": "2026-08-13 to 2026-10-23: the entry gemini_3_7_flash of MODEL_RUN_PARAMETERS is identical in all 39 commits of lib/ai/modelBenchmarkProfiles.ts from 28244a3dfd to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Thinking level: High"
+  },
+  {
+   "id": "F30",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-08-13",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying gemini_3_7_flash (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-08-13T17:37:59Z"
+  },
+  {
+   "id": "F31",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-08-19 to 2026-10-23: the entry zai_glm_5_3 of MODEL_RUN_PARAMETERS is identical in all 35 commits of lib/ai/modelBenchmarkProfiles.ts from d148cff38d to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F32",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-08-19",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying zai_glm_5_3 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-08-19T00:31:43Z"
+  },
+  {
+   "id": "F33",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-09-22 to 2026-10-23: the entry openai_gpt_6_luna of MODEL_RUN_PARAMETERS is identical in all 17 commits of lib/ai/modelBenchmarkProfiles.ts from 6358c525ad to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F34",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying openai_gpt_6_luna (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-09-22T22:09:32Z"
+  },
+  {
+   "id": "F35",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-08-07 to 2026-10-23: the entry openai_gpt_5_6_luna of MODEL_RUN_PARAMETERS is identical in all 44 commits of lib/ai/modelBenchmarkProfiles.ts from 37e5dba3d1 to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F36",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-08-07",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying openai_gpt_5_6_luna (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-08-07T04:38:54Z"
+  },
+  {
+   "id": "F37",
+   "says": "config-history",
+   "about": null,
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "where": "2026-08-01 to 2026-10-23: the entry deepseek_v4_flash_0731 of MODEL_RUN_PARAMETERS is identical in all 47 commits of lib/ai/modelBenchmarkProfiles.ts from 20f8ba2d0a to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: Max"
+  },
+  {
+   "id": "F38",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-08-01",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying deepseek_v4_flash_0731 (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-08-01T21:34:38Z"
+  },
+  {
+   "id": "F39",
+   "says": "config-history",
+   "about": null,
+   "value": "XHigh",
+   "level": "written",
+   "form": "code",
+   "where": "2026-08-07 to 2026-10-23: the entry qwen_qwen3_8_max of MODEL_RUN_PARAMETERS is identical in all 45 commits of lib/ai/modelBenchmarkProfiles.ts from d5da21ac4a to cc9eee3072; params in profile-history.txt",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/profile-history.txt",
+   "quote": "Reasoning effort: XHigh"
+  },
+  {
+   "id": "F40",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-08-07",
+   "level": "written",
+   "form": "code",
+   "where": "lower bound: first commit carrying qwen_qwen3_8_max (our inference, see the 18 Oct source)",
+   "file": "/work/.salvo14/mig/convert-minebench/evidence/commits-list.json",
+   "quote": "2026-08-07T04:21:35Z"
+  }
+ ]
+}
