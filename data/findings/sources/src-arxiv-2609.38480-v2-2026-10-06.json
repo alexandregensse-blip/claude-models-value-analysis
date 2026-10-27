@@ -1,0 +1,1100 @@
+{
+ "id": "src-arxiv-2609.38480-v2-2026-10-06",
+ "publisher": "arxiv-2609.38480",
+ "urls": [
+  "https://arxiv.org/abs/2609.38480",
+  "https://arxiv.org/html/2609.38480v2",
+  "https://arxiv.org/html/2609.38480v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2609.38480v2",
+   "captured": "2026-10-19T08:10:08Z",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.html",
+   "note": "arXiv HTML v2 (6 Oct 2026) saved by salvo g8 (file mtime 19 Oct)"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2609.38480v1",
+   "captured": "2026-10-01T02:37:45Z",
+   "note": "arXiv HTML v1 (29 Sep 2026) saved by salvo s18 a1 (file mtime 1 Oct): its text equals v2 except the version stamp and a line of affiliations (diffed)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.html": "f9372b95af389fd38f408a1e22cec393f1f7b5e231713eaf5dacf5dbb69d7748",
+  "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480v1.html": "00d8dc31559d065bf83b3a718a185e09bf377f180ee984982948521e2ba9b0fc",
+  "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt": "787b236ca0b765f8b5ece74fd939b366da10c31b36bed71292197faa70571bcb"
+ },
+ "harvested_at": "2026-10-19T08:10:08Z",
+ "published": {
+  "value": "2026-10-06",
+  "where": "page header of the saved HTML (v2)",
+  "quote": "arXiv:2609.38480v2 [cs.CL] 06 Oct 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2609.38480 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved arXiv HTML (v2: salvo g8; v1: salvo s18 a1) and its text extraction htmltxt.py",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.html",
+   "tool": "htmltxt.py (../c2lib-f/htmltxt.py): text of the arXiv HTML v2, one line per paragraph / heading, one table cell per line ending \" |\"; quotes are matched after NFKC, whitespace and case normalisation"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "effort-label",
+   "about": null,
+   "value": "Medium",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.2: \"We evaluate 31 models from seven families ... Medium reasoning effort is used across all models.\"",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Medium reasoning effort is used across all models."
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "ReAct-style Terminus-2 harness",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.2: the benchmark is integrated into Harbor",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "The evaluated model uses the ReAct-style Terminus-2 harness to question the patient, execute tools through the clinic command interface, and record a diagnosis.",
+   "term": "terminus-2"
+  },
+  {
+   "id": "F3",
+   "says": "judge",
+   "about": null,
+   "value": "GPT-5.4-mini",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.3",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.4-mini serves as both the patient simulator and history-topic judge in the main evaluation"
+  },
+  {
+   "id": "F4",
+   "says": "aggregation",
+   "about": null,
+   "value": "one rollout per task",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 2.2 metrics",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "with one rollout per task"
+  },
+  {
+   "id": "F5",
+   "says": "cap",
+   "about": null,
+   "value": "32 turns, including tool calls",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 2: interaction limit",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "within 32 turns, including tool calls"
+  },
+  {
+   "id": "F6",
+   "says": "cost-basis",
+   "about": null,
+   "value": "listed token rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Figure 10 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Costs use the workbook’s average input, cached-input, and output tokens and listed token rates; patient and judge costs are excluded.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F7",
+   "says": "cost-method",
+   "about": null,
+   "value": "listed token rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Figure 10 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Costs use the workbook’s average input, cached-input, and output tokens and listed token rates; patient and judge costs are excluded.",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F8",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix D text (costs in dollars)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "at an estimated $0.30 per task",
+   "term": "USD"
+  },
+  {
+   "id": "F9",
+   "says": "unit",
+   "about": null,
+   "value": "estimated clinician cost per task",
+   "level": "written",
+   "form": "prose",
+   "where": "Figure 10 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "estimated clinician cost per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "Claude Opus 5",
+   "value": "29.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Claude Opus 5, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Opus 5 (Anthropic, 2026b) | 29.4% | 90.7% | 44.1% | 89.9%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "Claude Opus 5",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Opus 5 (Anthropic, 2026b) | 29.4% | 90.7% | 44.1% | 89.9%"
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": "Claude Opus 5",
+   "value": "0.30",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix D.2: costs of the models with pricing data",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Opus 5 achieves the highest success rate (29.4%) at an estimated $0.30 per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "28.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Claude Opus 5.5, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Opus 5.5 (Anthropic, 2026c) | 28.8% | 90.7% | 49.8% | 84.4%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Opus 5.5 (Anthropic, 2026c) | 28.8% | 90.7% | 49.8% | 84.4%"
+  },
+  {
+   "id": "F15",
+   "says": "cost",
+   "about": "Claude Opus 5.5",
+   "value": "0.20",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix D.2: costs of the models with pricing data",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Opus 5.5 reaches 28.8% at $0.20",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Claude Opus 4.8",
+   "value": "16.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Claude Opus 4.8, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Opus 4.8 (Anthropic, 2026a) | 16.8% | 89.2% | 27.9% | 85.5%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "model-name",
+   "about": "Claude Opus 4.8",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Opus 4.8 (Anthropic, 2026a) | 16.8% | 89.2% | 27.9% | 85.5%"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "Claude Sonnet 5",
+   "value": "13.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Claude Sonnet 5, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Sonnet 5 (Anthropic, 2026e) | 13.8% | 87.4% | 24.0% | 85.1%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "Claude Sonnet 5",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Sonnet 5 (Anthropic, 2026e) | 13.8% | 87.4% | 24.0% | 85.1%"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "Claude Sonnet 4.5",
+   "value": "9.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Claude Sonnet 4.5, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Sonnet 4.5 (Anthropic, 2025b) | 9.9% | 82.3% | 25.8% | 76.7%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "Claude Sonnet 4.5",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Sonnet 4.5 (Anthropic, 2025b) | 9.9% | 82.3% | 25.8% | 76.7%"
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "Claude Sonnet 4.6",
+   "value": "8.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Claude Sonnet 4.6, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Sonnet 4.6 (Anthropic, 2026d) | 8.4% | 83.8% | 22.8% | 73.8%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": "Claude Sonnet 4.6",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Sonnet 4.6 (Anthropic, 2026d) | 8.4% | 83.8% | 22.8% | 73.8%"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "Claude Haiku 4.5",
+   "value": "2.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Claude Haiku 4.5, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Haiku 4.5 (Anthropic, 2025a) | 2.7% | 72.1% | 8.1% | 70.6%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "Claude Haiku 4.5",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Claude Haiku 4.5 (Anthropic, 2025a) | 2.7% | 72.1% | 8.1% | 70.6%"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "GPT-6-astra",
+   "value": "24.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-6-astra, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-6-astra (OpenAI, 2026f) | 24.3% | 87.4% | 39.3% | 88.0%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "GPT-6-astra",
+   "value": "GPT-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-6-astra (OpenAI, 2026f) | 24.3% | 87.4% | 39.3% | 88.0%"
+  },
+  {
+   "id": "F28",
+   "says": "cost",
+   "about": "GPT-6-astra",
+   "value": "1.09",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix D.2: costs of the models with pricing data",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-6-astra costs $1.09 per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "GPT-5.6-sol",
+   "value": "23.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.6-sol, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.6-sol (OpenAI, 2026e) | 23.7% | 86.2% | 36.6% | 90.8%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "model-name",
+   "about": "GPT-5.6-sol",
+   "value": "GPT-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.6-sol (OpenAI, 2026e) | 23.7% | 86.2% | 36.6% | 90.8%"
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "23.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.4, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.4 (OpenAI, 2026b) | 23.4% | 80.2% | 53.2% | 73.5%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "model-name",
+   "about": "GPT-5.4",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.4 (OpenAI, 2026b) | 23.4% | 80.2% | 53.2% | 73.5%"
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "16.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.5, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.5 (OpenAI, 2026d) | 16.8% | 86.2% | 30.0% | 87.5%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "GPT-5.5",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.5 (OpenAI, 2026d) | 16.8% | 86.2% | 30.0% | 87.5%"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "GPT-5.4-mini",
+   "value": "15.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.4-mini, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.4-mini (OpenAI, 2026c) | 15.9% | 73.9% | 35.1% | 80.6%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "model-name",
+   "about": "GPT-5.4-mini",
+   "value": "GPT-5.4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.4-mini (OpenAI, 2026c) | 15.9% | 73.9% | 35.1% | 80.6%"
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "GPT-5.1",
+   "value": "15.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.1, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.1 (OpenAI, 2025) | 15.3% | 73.9% | 25.2% | 89.6%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "model-name",
+   "about": "GPT-5.1",
+   "value": "GPT-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.1 (OpenAI, 2025) | 15.3% | 73.9% | 25.2% | 89.6%"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GPT-5.6-terra",
+   "value": "8.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.6-terra, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.6-terra (OpenAI, 2026e) | 8.4% | 84.7% | 19.5% | 85.6%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F40",
+   "says": "model-name",
+   "about": "GPT-5.6-terra",
+   "value": "GPT-5.6-terra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.6-terra (OpenAI, 2026e) | 8.4% | 84.7% | 19.5% | 85.6%"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "GPT-5.6-luna",
+   "value": "7.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.6-luna, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.6-luna (OpenAI, 2026e) | 7.5% | 81.1% | 16.2% | 84.4%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "model-name",
+   "about": "GPT-5.6-luna",
+   "value": "GPT-5.6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.6-luna (OpenAI, 2026e) | 7.5% | 81.1% | 16.2% | 84.4%"
+  },
+  {
+   "id": "F43",
+   "says": "cost",
+   "about": "GPT-5.6-luna",
+   "value": "0.02",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix D.2: costs of the models with pricing data",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.6-luna has the lowest estimated cost ($0.02)",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "GPT-4.1",
+   "value": "7.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-4.1, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4.1 | 7.5% | 74.2% | 12.6% | 89.1%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F45",
+   "says": "model-name",
+   "about": "GPT-4.1",
+   "value": "GPT-4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4.1 | 7.5% | 74.2% | 12.6% | 89.1%"
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "GPT-4o",
+   "value": "3.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-4o, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4o (Hurst et al., 2024) | 3.9% | 66.4% | 12.9% | 79.5%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "GPT-4o",
+   "value": "GPT-4o",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4o (Hurst et al., 2024) | 3.9% | 66.4% | 12.9% | 79.5%"
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "GPT-5.3-codex",
+   "value": "3.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-5.3-codex, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.3-codex (OpenAI, 2026a) | 3.6% | 84.4% | 8.7% | 78.3%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F49",
+   "says": "model-name",
+   "about": "GPT-5.3-codex",
+   "value": "GPT-5.3-codex",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-5.3-codex (OpenAI, 2026a) | 3.6% | 84.4% | 8.7% | 78.3%"
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "GPT-4.1-mini",
+   "value": "2.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-4.1-mini, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4.1-mini | 2.1% | 71.2% | 6.9% | 83.1%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F51",
+   "says": "model-name",
+   "about": "GPT-4.1-mini",
+   "value": "GPT-4.1-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4.1-mini | 2.1% | 71.2% | 6.9% | 83.1%"
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "GPT-4.1-nano",
+   "value": "0.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-4.1-nano, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4.1-nano | 0.9% | 55.6% | 9.0% | 56.9%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F53",
+   "says": "model-name",
+   "about": "GPT-4.1-nano",
+   "value": "GPT-4.1-nano",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4.1-nano | 0.9% | 55.6% | 9.0% | 56.9%"
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "GPT-4o-mini",
+   "value": "0.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GPT-4o-mini, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4o-mini | 0.6% | 51.4% | 6.6% | 68.6%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F55",
+   "says": "model-name",
+   "about": "GPT-4o-mini",
+   "value": "GPT-4o-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GPT-4o-mini | 0.6% | 51.4% | 6.6% | 68.6%"
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "Gemini-3.8-flash",
+   "value": "18.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Gemini-3.8-flash, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Gemini-3.8-flash (Google DeepMind, 2026c) | 18.9% | 80.8% | 53.8% | 76.5%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F57",
+   "says": "model-name",
+   "about": "Gemini-3.8-flash",
+   "value": "Gemini-3.8-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Gemini-3.8-flash (Google DeepMind, 2026c) | 18.9% | 80.8% | 53.8% | 76.5%"
+  },
+  {
+   "id": "F58",
+   "says": "cost",
+   "about": "Gemini-3.8-flash",
+   "value": "0.09",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix D.2: costs of the models with pricing data",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Gemini-3.8-flash reaches 18.9% at $0.09",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "Gemini-3.5-flash",
+   "value": "15.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Gemini-3.5-flash, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Gemini-3.5-flash (Google DeepMind, 2026a) | 15.6% | 75.7% | 43.8% | 76.6%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F60",
+   "says": "model-name",
+   "about": "Gemini-3.5-flash",
+   "value": "Gemini-3.5-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Gemini-3.5-flash (Google DeepMind, 2026a) | 15.6% | 75.7% | 43.8% | 76.6%"
+  },
+  {
+   "id": "F61",
+   "says": "score",
+   "about": "Gemini-3.7-flash",
+   "value": "10.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Gemini-3.7-flash, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Gemini-3.7-flash (Google DeepMind, 2026b) | 10.8% | 79.9% | 53.5% | 67.1%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F62",
+   "says": "model-name",
+   "about": "Gemini-3.7-flash",
+   "value": "Gemini-3.7-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Gemini-3.7-flash (Google DeepMind, 2026b) | 10.8% | 79.9% | 53.5% | 67.1%"
+  },
+  {
+   "id": "F63",
+   "says": "score",
+   "about": "Grok-4.7",
+   "value": "22.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Grok-4.7, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Grok-4.7 (xAI, 2026b) | 22.2% | 83.2% | 35.1% | 87.5%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F64",
+   "says": "model-name",
+   "about": "Grok-4.7",
+   "value": "Grok-4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Grok-4.7 (xAI, 2026b) | 22.2% | 83.2% | 35.1% | 87.5%"
+  },
+  {
+   "id": "F65",
+   "says": "score",
+   "about": "Grok-4.6",
+   "value": "21.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Grok-4.6, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Grok-4.6 (xAI, 2026a) | 21.9% | 81.4% | 36.9% | 89.0%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F66",
+   "says": "model-name",
+   "about": "Grok-4.6",
+   "value": "Grok-4.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Grok-4.6 (xAI, 2026a) | 21.9% | 81.4% | 36.9% | 89.0%"
+  },
+  {
+   "id": "F67",
+   "says": "score",
+   "about": "Grok-4.3",
+   "value": "21.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Grok-4.3, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Grok-4.3 | 21.3% | 77.8% | 45.6% | 83.3%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F68",
+   "says": "model-name",
+   "about": "Grok-4.3",
+   "value": "Grok-4.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Grok-4.3 | 21.3% | 77.8% | 45.6% | 83.3%"
+  },
+  {
+   "id": "F69",
+   "says": "score",
+   "about": "DeepSeek-v4-pro",
+   "value": "8.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row DeepSeek-v4-pro, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "DeepSeek-v4-pro (DeepSeek-AI et al., 2026) | 8.1% | 29.4% | 13.8% | 87.8%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F70",
+   "says": "model-name",
+   "about": "DeepSeek-v4-pro",
+   "value": "DeepSeek-v4-pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "DeepSeek-v4-pro (DeepSeek-AI et al., 2026) | 8.1% | 29.4% | 13.8% | 87.8%"
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "DeepSeek-v4-flash",
+   "value": "3.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row DeepSeek-v4-flash, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "DeepSeek-v4-flash (DeepSeek-AI et al., 2026) | 3.9% | 18.0% | 9.3% | 81.3%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F72",
+   "says": "model-name",
+   "about": "DeepSeek-v4-flash",
+   "value": "DeepSeek-v4-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "DeepSeek-v4-flash (DeepSeek-AI et al., 2026) | 3.9% | 18.0% | 9.3% | 81.3%"
+  },
+  {
+   "id": "F73",
+   "says": "score",
+   "about": "Kimi-K2.6",
+   "value": "23.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row Kimi-K2.6, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Kimi-K2.6 (Moonshot AI, 2026) | 23.4% | 77.2% | 48.7% | 84.7%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "says": "model-name",
+   "about": "Kimi-K2.6",
+   "value": "Kimi-K2.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "Kimi-K2.6 (Moonshot AI, 2026) | 23.4% | 77.2% | 48.7% | 84.7%"
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, row GLM-5.1, column Strict pass@1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GLM-5.1 (Zeng et al., 2026) | 4.8% | 24.9% | 10.8% | 30.8%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F76",
+   "says": "model-name",
+   "about": "GLM-5.1",
+   "value": "GLM-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 7, column Model (the citation of the cell removed)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.38480/evidence/arxiv-2609.38480.txt",
+   "quote": "GLM-5.1 (Zeng et al., 2026) | 4.8% | 24.9% | 10.8% | 30.8%"
+  }
+ ]
+}

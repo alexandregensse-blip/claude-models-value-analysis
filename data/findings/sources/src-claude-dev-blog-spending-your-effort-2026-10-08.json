@@ -1,0 +1,1524 @@
+{
+ "id": "src-claude-dev-blog-spending-your-effort-2026-10-08",
+ "publisher": "anthropic",
+ "urls": [
+  "https://claude.dev/blog/spending-your-effort"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://claude.dev/blog/spending-your-effort",
+   "captured": "2026-10-27T09:26:09Z",
+   "note": "page saved by salvo s22 k4 (file mtime 8 Oct); the payload is identical in the copies of 1 Oct (s18 a5) and 5 Oct (s19 b3), the SVG chart identical to the 5 Oct copy"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://claude.dev/blog/spending-your-effort",
+   "captured": "2026-10-27T09:26:09Z",
+   "note": "page saved by salvo s19 b3 (file mtime 5 Oct): same payload and same SVG"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1005.html": "96f9900d5e2323fe5993340a7ca2bf41d6b73524e8d9166e8706d24dd7e3e42d",
+  "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt": "ea83390e9b788401b0e4aff10aef69f9acbcded1f827100bf5602156724181f3",
+  "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html": "285633af15ff4b8efdb9944e83ce93f4a993bc220ed43608ff6367b71826e3d0",
+  "/work/.salvo14/mig/convert-claude-dev-blog/evidence/settings.json": "5e73d18f45cf8081dd9333a42b73943a7aae100fc315b5b10df89580318fdfc4"
+ },
+ "harvested_at": "2026-10-27T09:26:09Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-claude-dev-blog (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page (salvo s22 k4), its text extraction htmltxt.py, its embedded payload and its SVG chart",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt",
+   "from": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "tool": "htmltxt.py (../c2lib-f/htmltxt.py): text of the page, one line per block; quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/settings.json",
+   "from": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "tool": "convert.py (this folder): the Next.js payload of the page (script text self.__next_f, the object whose data.settings lists, per model and effort setting, raw (the effort value), label, attempts, passes, median_tokens, failure counts) re-keyed as {\"<model>|<raw>\": {...}} with score = \"passes/attempts\"; failure counts dropped, nothing else changed"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/settings.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "$key",
+   "columns": {
+    "model": "model-name",
+    "raw": "note",
+    "label": "effort-label",
+    "attempts": "note",
+    "passes": "note",
+    "score": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "median_tokens": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "Opus 5’s max is its effort-120 run",
+   "level": "written",
+   "form": "prose",
+   "where": "figure caption of the effort-curve chart",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt",
+   "quote": "Opus 5’s max is its effort-120 run"
+  },
+  {
+   "id": "F2",
+   "says": "aggregation",
+   "about": null,
+   "value": "5 attempts per task",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 1 \"A note on the numbers\"",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt",
+   "quote": "5 attempts per task"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "these come from our own internal runs, 5 attempts per task",
+   "level": "written",
+   "form": "prose",
+   "where": "footnote 1",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt",
+   "quote": "these come from our own internal runs, 5 attempts per task"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "Pass rate against tokens spent, by effort setting",
+   "level": "written",
+   "form": "prose",
+   "where": "figure subtitle of the effort-curve chart: the points are the effort settings",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt",
+   "quote": "Pass rate against tokens spent, by effort setting"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Terminal-Bench 3.0, the same 70 tasks for every model (the 4 GPU tasks are left out)",
+   "level": "written",
+   "form": "prose",
+   "where": "figure caption",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt",
+   "quote": "Terminal-Bench 3.0, the same 70 tasks for every model (the 4 GPU tasks are left out)"
+  },
+  {
+   "id": "F6",
+   "says": "cap",
+   "about": null,
+   "value": "responses capped at 128k tokens",
+   "level": "written",
+   "form": "prose",
+   "where": "figure caption: Opus 5.5 ran about three weeks later, with responses capped at 128k tokens and no GitHub or PyPI access",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.txt",
+   "quote": "responses capped at 128k tokens"
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "Fable 5",
+   "value": "22.6",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 1 of 5 at px (178.9, 392.8): y -> 22.6 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F8",
+   "says": "tokens-total",
+   "about": "Fable 5",
+   "value": "60971",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 1 of 5 at px (178.9, 392.8): x -> 60971 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "Fable 5",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"449.4\" y=\"257.2\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5</text>"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": "Fable 5",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 1",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"166.9\" y=\"396.8\" text-anchor=\"end\">low</text>"
+  },
+  {
+   "id": "F11",
+   "says": "effort-order",
+   "about": "Fable 5",
+   "value": "1/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 1 of 5 at px (178.9, 392.8): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "Fable 5",
+   "value": "33.4",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 2 of 5 at px (271.3, 317.2): y -> 33.4 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F13",
+   "says": "tokens-total",
+   "about": "Fable 5",
+   "value": "87971",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 2 of 5 at px (271.3, 317.2): x -> 87971 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "Fable 5",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"449.4\" y=\"257.2\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5</text>"
+  },
+  {
+   "id": "F15",
+   "says": "effort-label",
+   "about": "Fable 5",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 2",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"259.3\" y=\"321.2\" text-anchor=\"end\">medium</text>"
+  },
+  {
+   "id": "F16",
+   "says": "effort-order",
+   "about": "Fable 5",
+   "value": "2/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 2 of 5 at px (271.3, 317.2): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "Fable 5",
+   "value": "36.6",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 3 of 5 at px (329.9, 294.8): y -> 36.6 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F18",
+   "says": "tokens-total",
+   "about": "Fable 5",
+   "value": "110997",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 3 of 5 at px (329.9, 294.8): x -> 110997 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "Fable 5",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"449.4\" y=\"257.2\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5</text>"
+  },
+  {
+   "id": "F20",
+   "says": "effort-order",
+   "about": "Fable 5",
+   "value": "3/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 3 of 5 at px (329.9, 294.8): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "Fable 5",
+   "value": "43.4",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 4 of 5 at px (393.8, 247.2): y -> 43.4 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F22",
+   "says": "tokens-total",
+   "about": "Fable 5",
+   "value": "143027",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 4 of 5 at px (393.8, 247.2): x -> 143027 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": "Fable 5",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"449.4\" y=\"257.2\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5</text>"
+  },
+  {
+   "id": "F24",
+   "says": "effort-label",
+   "about": "Fable 5",
+   "value": "xhigh",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 4",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"393.8\" y=\"235.2\" text-anchor=\"middle\">xhigh</text>"
+  },
+  {
+   "id": "F25",
+   "says": "effort-order",
+   "about": "Fable 5",
+   "value": "4/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 4 of 5 at px (393.8, 247.2): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "Fable 5",
+   "value": "43.4",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 5 of 5 at px (437.3, 247.2): y -> 43.4 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F27",
+   "says": "tokens-total",
+   "about": "Fable 5",
+   "value": "169971",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 5 of 5 at px (437.3, 247.2): x -> 169971 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F28",
+   "says": "model-name",
+   "about": "Fable 5",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"449.4\" y=\"257.2\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5</text>"
+  },
+  {
+   "id": "F29",
+   "says": "effort-label",
+   "about": "Fable 5",
+   "value": "max",
+   "level": "written",
+   "form": "label",
+   "where": "svg text \"max\" printed under the series end label (last marker)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"571.6\" y=\"113.1\" font-size=\"12\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--viz-muted);stroke:var(--bg)\">max</text>"
+  },
+  {
+   "id": "F30",
+   "says": "effort-order",
+   "about": "Fable 5",
+   "value": "5/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5\", marker 5 of 5 at px (437.3, 247.2): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "Opus 5",
+   "value": "26.9",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 1 of 5 at px (231.0, 362.7): y -> 26.9 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F32",
+   "says": "tokens-total",
+   "about": "Opus 5",
+   "value": "74972",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 1 of 5 at px (231.0, 362.7): x -> 74972 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F33",
+   "says": "model-name",
+   "about": "Opus 5",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"545.6\" y=\"201.8\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5</text>"
+  },
+  {
+   "id": "F34",
+   "says": "effort-label",
+   "about": "Opus 5",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 1",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"231.0\" y=\"382.7\" text-anchor=\"middle\">low</text>"
+  },
+  {
+   "id": "F35",
+   "says": "effort-order",
+   "about": "Opus 5",
+   "value": "1/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 1 of 5 at px (231.0, 362.7): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "Opus 5",
+   "value": "37.7",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 2 of 5 at px (341.0, 287.1): y -> 37.7 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F37",
+   "says": "tokens-total",
+   "about": "Opus 5",
+   "value": "115995",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 2 of 5 at px (341.0, 287.1): x -> 115995 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F38",
+   "says": "model-name",
+   "about": "Opus 5",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"545.6\" y=\"201.8\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5</text>"
+  },
+  {
+   "id": "F39",
+   "says": "effort-label",
+   "about": "Opus 5",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 2",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"353.1\" y=\"303.1\" text-anchor=\"start\">medium</text>"
+  },
+  {
+   "id": "F40",
+   "says": "effort-order",
+   "about": "Opus 5",
+   "value": "2/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 2 of 5 at px (341.0, 287.1): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "Opus 5",
+   "value": "43.4",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 3 of 5 at px (422.1, 247.2): y -> 43.4 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F42",
+   "says": "tokens-total",
+   "about": "Opus 5",
+   "value": "160023",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 3 of 5 at px (422.1, 247.2): x -> 160023 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F43",
+   "says": "model-name",
+   "about": "Opus 5",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"545.6\" y=\"201.8\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5</text>"
+  },
+  {
+   "id": "F44",
+   "says": "effort-order",
+   "about": "Opus 5",
+   "value": "3/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 3 of 5 at px (422.1, 247.2): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Opus 5",
+   "value": "46.9",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 4 of 5 at px (480.8, 222.7): y -> 46.9 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F46",
+   "says": "tokens-total",
+   "about": "Opus 5",
+   "value": "201989",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 4 of 5 at px (480.8, 222.7): x -> 201989 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "Opus 5",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"545.6\" y=\"201.8\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5</text>"
+  },
+  {
+   "id": "F48",
+   "says": "effort-order",
+   "about": "Opus 5",
+   "value": "4/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 4 of 5 at px (480.8, 222.7): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "Opus 5",
+   "value": "50.6",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 5 of 5 at px (533.5, 196.8): y -> 50.6 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F50",
+   "says": "tokens-total",
+   "about": "Opus 5",
+   "value": "248963",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 5 of 5 at px (533.5, 196.8): x -> 248963 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F51",
+   "says": "model-name",
+   "about": "Opus 5",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"545.6\" y=\"201.8\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5</text>"
+  },
+  {
+   "id": "F52",
+   "says": "effort-label",
+   "about": "Opus 5",
+   "value": "max",
+   "level": "written",
+   "form": "label",
+   "where": "svg text \"max\" printed under the series end label (last marker)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"497.9\" y=\"167.0\" font-size=\"12\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--viz-muted);stroke:var(--bg)\">max</text>"
+  },
+  {
+   "id": "F53",
+   "says": "effort-order",
+   "about": "Opus 5",
+   "value": "5/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5\", marker 5 of 5 at px (533.5, 196.8): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "Fable 5.1",
+   "value": "32.0",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 1 of 5 at px (191.1, 327.0): y -> 32.0 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F55",
+   "says": "tokens-total",
+   "about": "Fable 5.1",
+   "value": "63995",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 1 of 5 at px (191.1, 327.0): x -> 63995 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F56",
+   "says": "model-name",
+   "about": "Fable 5.1",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5.1\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"497.9\" y=\"150.0\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5.1</text>"
+  },
+  {
+   "id": "F57",
+   "says": "effort-label",
+   "about": "Fable 5.1",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 1",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"179.0\" y=\"331.0\" text-anchor=\"end\">low</text>"
+  },
+  {
+   "id": "F58",
+   "says": "effort-order",
+   "about": "Fable 5.1",
+   "value": "1/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 1 of 5 at px (191.1, 327.0): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "Fable 5.1",
+   "value": "40.0",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 2 of 5 at px (271.3, 271.0): y -> 40.0 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F60",
+   "says": "tokens-total",
+   "about": "Fable 5.1",
+   "value": "87971",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 2 of 5 at px (271.3, 271.0): x -> 87971 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F61",
+   "says": "model-name",
+   "about": "Fable 5.1",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5.1\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"497.9\" y=\"150.0\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5.1</text>"
+  },
+  {
+   "id": "F62",
+   "says": "effort-label",
+   "about": "Fable 5.1",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 2",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"259.3\" y=\"275.0\" text-anchor=\"end\">medium</text>"
+  },
+  {
+   "id": "F63",
+   "says": "effort-order",
+   "about": "Fable 5.1",
+   "value": "2/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 2 of 5 at px (271.3, 271.0): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "Fable 5.1",
+   "value": "46.3",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 3 of 5 at px (347.4, 226.9): y -> 46.3 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F65",
+   "says": "tokens-total",
+   "about": "Fable 5.1",
+   "value": "118978",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 3 of 5 at px (347.4, 226.9): x -> 118978 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F66",
+   "says": "model-name",
+   "about": "Fable 5.1",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5.1\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"497.9\" y=\"150.0\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5.1</text>"
+  },
+  {
+   "id": "F67",
+   "says": "effort-label",
+   "about": "Fable 5.1",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 3",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"335.3\" y=\"230.9\" text-anchor=\"end\">high</text>"
+  },
+  {
+   "id": "F68",
+   "says": "effort-order",
+   "about": "Fable 5.1",
+   "value": "3/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 3 of 5 at px (347.4, 226.9): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F69",
+   "says": "score",
+   "about": "Fable 5.1",
+   "value": "54.0",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 4 of 5 at px (444.7, 173.0): y -> 54.0 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F70",
+   "says": "tokens-total",
+   "about": "Fable 5.1",
+   "value": "175035",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 4 of 5 at px (444.7, 173.0): x -> 175035 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F71",
+   "says": "model-name",
+   "about": "Fable 5.1",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5.1\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"497.9\" y=\"150.0\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5.1</text>"
+  },
+  {
+   "id": "F72",
+   "says": "effort-label",
+   "about": "Fable 5.1",
+   "value": "xhigh",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 4",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"456.8\" y=\"189.0\" text-anchor=\"start\">xhigh</text>"
+  },
+  {
+   "id": "F73",
+   "says": "effort-order",
+   "about": "Fable 5.1",
+   "value": "4/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 4 of 5 at px (444.7, 173.0): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F74",
+   "says": "score",
+   "about": "Fable 5.1",
+   "value": "58.0",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 5 of 5 at px (485.8, 145.0): y -> 58.0 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F75",
+   "says": "tokens-total",
+   "about": "Fable 5.1",
+   "value": "206036",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 5 of 5 at px (485.8, 145.0): x -> 206036 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F76",
+   "says": "model-name",
+   "about": "Fable 5.1",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Fable 5.1\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"497.9\" y=\"150.0\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Fable 5.1</text>"
+  },
+  {
+   "id": "F77",
+   "says": "effort-label",
+   "about": "Fable 5.1",
+   "value": "max",
+   "level": "written",
+   "form": "label",
+   "where": "svg text \"max\" printed under the series end label (last marker)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"545.6\" y=\"218.8\" font-size=\"12\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--viz-muted);stroke:var(--bg)\">max</text>"
+  },
+  {
+   "id": "F78",
+   "says": "effort-order",
+   "about": "Fable 5.1",
+   "value": "5/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Fable 5.1\", marker 5 of 5 at px (485.8, 145.0): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F79",
+   "says": "score",
+   "about": "Opus 5.5",
+   "value": "36.6",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 1 of 5 at px (90.9, 294.8): y -> 36.6 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F80",
+   "says": "tokens-total",
+   "about": "Opus 5.5",
+   "value": "43002",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 1 of 5 at px (90.9, 294.8): x -> 43002 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F81",
+   "says": "model-name",
+   "about": "Opus 5.5",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5.5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"571.6\" y=\"96.1\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5.5</text>"
+  },
+  {
+   "id": "F82",
+   "says": "effort-label",
+   "about": "Opus 5.5",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 1",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"78.8\" y=\"298.8\" text-anchor=\"end\">low</text>"
+  },
+  {
+   "id": "F83",
+   "says": "effort-order",
+   "about": "Opus 5.5",
+   "value": "1/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 1 of 5 at px (90.9, 294.8): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F84",
+   "says": "score",
+   "about": "Opus 5.5",
+   "value": "54.6",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 2 of 5 at px (240.9, 168.8): y -> 54.6 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F85",
+   "says": "tokens-total",
+   "about": "Opus 5.5",
+   "value": "77975",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 2 of 5 at px (240.9, 168.8): x -> 77975 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F86",
+   "says": "model-name",
+   "about": "Opus 5.5",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5.5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"571.6\" y=\"96.1\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5.5</text>"
+  },
+  {
+   "id": "F87",
+   "says": "effort-label",
+   "about": "Opus 5.5",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 2",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"228.8\" y=\"172.8\" text-anchor=\"end\">medium</text>"
+  },
+  {
+   "id": "F88",
+   "says": "effort-order",
+   "about": "Opus 5.5",
+   "value": "2/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 2 of 5 at px (240.9, 168.8): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F89",
+   "says": "score",
+   "about": "Opus 5.5",
+   "value": "58.9",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 3 of 5 at px (311.1, 138.7): y -> 58.9 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F90",
+   "says": "tokens-total",
+   "about": "Opus 5.5",
+   "value": "103019",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 3 of 5 at px (311.1, 138.7): x -> 103019 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F91",
+   "says": "model-name",
+   "about": "Opus 5.5",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5.5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"571.6\" y=\"96.1\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5.5</text>"
+  },
+  {
+   "id": "F92",
+   "says": "effort-label",
+   "about": "Opus 5.5",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 3",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"311.1\" y=\"126.7\" text-anchor=\"middle\">high</text>"
+  },
+  {
+   "id": "F93",
+   "says": "effort-order",
+   "about": "Opus 5.5",
+   "value": "3/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 3 of 5 at px (311.1, 138.7): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F94",
+   "says": "score",
+   "about": "Opus 5.5",
+   "value": "62.6",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 4 of 5 at px (451.7, 112.8): y -> 62.6 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F95",
+   "says": "tokens-total",
+   "about": "Opus 5.5",
+   "value": "179964",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 4 of 5 at px (451.7, 112.8): x -> 179964 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F96",
+   "says": "model-name",
+   "about": "Opus 5.5",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5.5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"571.6\" y=\"96.1\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5.5</text>"
+  },
+  {
+   "id": "F97",
+   "says": "effort-label",
+   "about": "Opus 5.5",
+   "value": "xhigh",
+   "level": "written",
+   "form": "label",
+   "where": "svg text label beside marker 4",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"451.7\" y=\"100.8\" text-anchor=\"middle\">xhigh</text>"
+  },
+  {
+   "id": "F98",
+   "says": "effort-order",
+   "about": "Opus 5.5",
+   "value": "4/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 4 of 5 at px (451.7, 112.8): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  },
+  {
+   "id": "F99",
+   "says": "score",
+   "about": "Opus 5.5",
+   "value": "65.7",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 5 of 5 at px (559.5, 91.1): y -> 65.7 % (share of attempts that passed)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F100",
+   "says": "tokens-total",
+   "about": "Opus 5.5",
+   "value": "276017",
+   "level": "written",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 5 of 5 at px (559.5, 91.1): x -> 276017 median tokens per attempt (log axis)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F101",
+   "says": "model-name",
+   "about": "Opus 5.5",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "series end label \"Opus 5.5\" (svg text element next to the last marker of the series)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"571.6\" y=\"96.1\" font-size=\"14\" font-weight=\"500\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--ink);stroke:var(--bg)\">Opus 5.5</text>"
+  },
+  {
+   "id": "F102",
+   "says": "effort-label",
+   "about": "Opus 5.5",
+   "value": "max",
+   "level": "written",
+   "form": "label",
+   "where": "svg text \"max\" printed under the series end label (last marker)",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "quote": "<text x=\"449.4\" y=\"274.2\" font-size=\"12\" stroke-width=\"3\" stroke-linejoin=\"round\" paint-order=\"stroke\" style=\"fill:var(--viz-muted);stroke:var(--bg)\">max</text>"
+  },
+  {
+   "id": "F103",
+   "says": "effort-order",
+   "about": "Opus 5.5",
+   "value": "5/5",
+   "level": "computed",
+   "form": "chart",
+   "where": "series \"Opus 5.5\", marker 5 of 5 at px (559.5, 91.1): k-th of the series' points in increasing token order",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "chart": "C1",
+   "rule": "chart-effort-order",
+   "inputs": [
+    "F4"
+   ]
+  }
+ ],
+ "charts": [
+  {
+   "id": "C1",
+   "file": "/work/.salvo14/mig/convert-claude-dev-blog/evidence/spending-your-effort-1008.html",
+   "where": "effort-curve chart (svg#effort-curve-tb3): \"Pass rate against tokens spent, by effort setting\", Terminal-Bench 3.0, 70 tasks",
+   "kind": "vector",
+   "x": {
+    "quantity": "median tokens per attempt",
+    "scale": "log",
+    "ticks": [
+     {
+      "px": 128.9,
+      "value": 50000.0,
+      "label": "50k"
+     },
+     {
+      "px": 303.6,
+      "value": 100000.0,
+      "label": "100k"
+     },
+     {
+      "px": 478.3,
+      "value": 200000.0,
+      "label": "200k"
+     },
+     {
+      "px": 580.5,
+      "value": 300000.0,
+      "label": "300k"
+     }
+    ],
+    "units_per_px": 0.0017231,
+    "fit_residual_px": 0.0
+   },
+   "y": {
+    "quantity": "share of attempts that passed (%)",
+    "scale": "linear",
+    "ticks": [
+     {
+      "px": 411.0,
+      "value": 20.0
+     },
+     {
+      "px": 341.0,
+      "value": 30.0
+     },
+     {
+      "px": 271.0,
+      "value": 40.0
+     },
+     {
+      "px": 201.0,
+      "value": 50.0
+     },
+     {
+      "px": 131.0,
+      "value": 60.0
+     },
+     {
+      "px": 61.0,
+      "value": 70.0
+     }
+    ],
+    "units_per_px": 0.142857,
+    "fit_residual_px": 0.0
+   },
+   "checks": "SVG vector circles: cx/cy are exact coordinates of the markers. x: log10(tokens) is linear in cx through the four tick labels 50k/100k/200k/300k (consistent to 2e-4 in log10); y: linear in cy through the six gridlines 20%..70% (labels sit 5 px above their gridline). Values are the fitted ones: pass rate rounded to 0.01 point and tokens to the unit; the page is rendered inside <g transform=\"translate(20 66)\">, a common translation that does not change the calibration.",
+   "digitised_by": "converter convert.py (Sonnet 5.5): regular expressions over the saved SVG source"
+  }
+ ]
+}

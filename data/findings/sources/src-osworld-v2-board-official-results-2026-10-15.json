@@ -1,0 +1,109 @@
+{
+ "id": "src-osworld-v2-board-official-results-2026-10-15",
+ "publisher": "osworld-v2-board",
+ "urls": [
+  "https://osworld-v2.xlang.ai/",
+  "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json",
+   "captured": "2026-10-19T07:51:03Z",
+   "file": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.csv",
+   "note": "JSON saved by salvo g/g6 (evidence/official-results-20261015.json, updatedAt 2026-10-15); the capture file is its CSV export (same rows, one per results[] entry)"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json",
+   "captured": "2026-10-01T02:41:45Z",
+   "file": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20260917.csv",
+   "note": "JSON saved by salvo s18/a6 (evidence/official-results-20260917.json, updatedAt 2026-09-17); CSV export"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.csv": "cfc9d7739d896d67695593916fef07da7fe1abd10b26af481fbc9665f5f9c9fa",
+  "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20260917.csv": "c720795b6ed6ce37c59f23e6e0cd2894f5bc6ed3bf1085a95ab9271989c98577",
+  "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.json": "1bd159e867f183f1f146e556f1d82b5eb10e0cede37bfd33e90437f00f7c4ef5",
+  "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20260917.json": "99fdf3d27a9273b99584e00f8615e26123f5264e1c4b282e427da864aa7f27c8"
+ },
+ "harvested_at": "2026-10-19T07:51:03Z",
+ "salvo": "salvo14/mig/convert-osworld-v2-board (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the board JSON saved by salvo g/g6 (19 Oct, updatedAt 2026-10-15) and s18/a6 (1 Oct, updatedAt 2026-09-17)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.csv",
+   "from": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.json",
+   "tool": "convert.py export(): one CSV row per results[] entry of the JSON (numbers copied as the JSON text, null -> empty cell), id = model|reasoning|toolSetting|stepBudget|releaseVersion|datasetScope (unique)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20260917.csv",
+   "from": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20260917.json",
+   "tool": "convert.py export(): same export of the 2026-09-17 copy"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.csv",
+   "where": "official-results.json results[] (CSV export): one row per model x reasoning x toolSetting x stepBudget x releaseVersion x datasetScope",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "model": "model-name",
+    "reasoning": "effort-label",
+    "toolSetting": "note",
+    "stepBudget": "note",
+    "releaseVersion": "version",
+    "datasetScope": "note",
+    "partialScore": {
+     "says": "score",
+     "term": "partial%",
+     "scale": "percent"
+    },
+    "binaryAccuracy": {
+     "says": "score",
+     "term": "binary%",
+     "scale": "percent"
+    },
+    "outputTokensPerTask": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "estimatedCostUsd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "official": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "data-file",
+   "where": "column estimatedCostUsd (the JSON field name carries the currency)",
+   "file": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.csv",
+   "term": "USD"
+  }
+ ]
+}

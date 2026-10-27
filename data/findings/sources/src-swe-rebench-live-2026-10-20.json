@@ -1,0 +1,125 @@
+{
+ "id": "src-swe-rebench-live-2026-10-20",
+ "publisher": "swe-rebench",
+ "urls": [
+  "https://swe-rebench.com/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://swe-rebench.com/",
+   "captured": "2026-10-20T09:45:30Z",
+   "note": "live page saved by salvo hk gpt-5.1-codex-max (file mtime 20 Oct; the same bytes are held by 11 other salvo copies of 30 Sep - 21 Oct)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json": "0ef1a84e7fc1f4464879ae07bcb871f40854798d6047a19fceea2446c7ddf4cf",
+  "/work/.salvo14/hk/gpt-5.1-codex-max/src/routes/swerebench.html": "fbb1b659562843da266aa20ec2295253d727ccd9b9469c78ab32df6fad1fffed"
+ },
+ "harvested_at": "2026-10-20T09:45:30Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-swe-rebench (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved live page (salvo hk gpt-5.1-codex-max, 20 Oct) and its embedded payload",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json",
+   "from": "/work/.salvo14/hk/gpt-5.1-codex-max/src/routes/swerebench.html",
+   "tool": "convert.py (this folder): the models of the page payload (script text self.__next_f; objects with modelName and per-window records) that have a non-zero record for the window key 1761955200000:1769904000000 (task window 2025-11-01 .. 2026-02-01, epoch ms), re-keyed by model name; the other windows and the copies of the same record are dropped, numbers kept as text"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "$key",
+   "columns": {
+    "model": "model-name",
+    "resolvedRate": {
+     "says": "score",
+     "term": "resolved%",
+     "scale": "percent",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "sem": "note",
+    "passN": "note",
+    "instanceCosts": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "totalTokenUsage": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cachedTokenPercentage": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "data-file",
+   "where": "field instanceCosts (the board column \"Cost per Problem ($)\")",
+   "file": "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "instanceCosts (cost per problem)",
+   "level": "written",
+   "form": "data-file",
+   "where": "field instanceCosts",
+   "file": "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json",
+   "term": "per-problem"
+  },
+  {
+   "id": "F3",
+   "says": "version",
+   "about": null,
+   "value": "1761955200000:1769904000000",
+   "level": "written",
+   "form": "data-file",
+   "where": "record key of the window (epoch ms start:end, 2025-11-01 .. 2026-02-01)",
+   "file": "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json"
+  },
+  {
+   "id": "F4",
+   "says": "effort-label",
+   "about": "gpt-5.2-2025-12-11-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "data-file",
+   "where": "label \"gpt-5.2-2025-12-11-medium\": the suffix of the model name",
+   "file": "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json"
+  },
+  {
+   "id": "F5",
+   "says": "model-api-id",
+   "about": "gpt-5.2-2025-12-11-medium",
+   "value": "gpt-5.2-2025-12-11",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.2-2025-12-11-medium: label without its effort suffix",
+   "file": "/work/.salvo14/mig/convert-swe-rebench/evidence/payload-window.json",
+   "namespace": "maker-api"
+  }
+ ]
+}
