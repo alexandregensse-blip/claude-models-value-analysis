@@ -12,13 +12,32 @@
    "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
    "captured": "2026-10-15T15:40:58Z",
    "note": "config search parquet (HF mirror); capture time = mtime of the earliest saved identical copy (s23/b2/src/lmarena/search.parquet, same sha256), a copy time rather than the download time"
+  },
+  {
+   "id": "G8",
+   "kind": "fetch",
+   "url": "https://blog.lmarena.ai/blog/2025/search-arena/",
+   "captured": "2026-10-27T05:14:00Z",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmposts/2025-04-14-search-arena.md",
+   "note": "source markdown of the Search Arena post (lmarena/lmarena.github.io _posts/2025-04-14-search-arena.md, raw.githubusercontent.com), fetched 2026-10-27; the post dates from 14 Apr 2025 and speaks of the 11 models then supported"
+  },
+  {
+   "id": "G7",
+   "kind": "commit",
+   "commit": "d161b647843491eefa9b0679c923d1bc7822abb8",
+   "url": "https://github.com/lm-sys/FastChat/blob/d161b647843491eefa9b0679c923d1bc7822abb8/fastchat/serve/api_provider.py",
+   "captured": "2025-01-23T05:01:12Z",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/gh-api_provider.py",
+   "note": "fastchat/serve/api_provider.py as of main (587d5cf, 2025-06-02) fetched 2026-10-27; d161b64 is the last commit touching the file"
   }
  ],
  "commit": null,
  "sha256": {
   "/work/.salvo14/g/g3/src/lm/search.parquet": "f9e7c88f49068ca10834991ba1017e9f92d52399541deeb7d79f87acdedfa5d8",
   "/work/.salvo14/arb/openrouter-arena/evidence/arena-faq.txt": "94a049410e60181129f2ff215e81f4b9e7272309422b36f9d8a4371dfd796029",
-  "/work/.salvo14/mig/convert-lmarena.ai/evidence/search-overall-2026-10-13.json": "a9e5c486dfed1d223f6f6215283cf1d1cc630071e95b07081e5fb1eae11ab636"
+  "/work/.salvo14/mig/convert-lmarena.ai/evidence/search-overall-2026-10-13.json": "a9e5c486dfed1d223f6f6215283cf1d1cc630071e95b07081e5fb1eae11ab636",
+  "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmposts/2025-04-14-search-arena.md": "56aa1ef25c1d613fa6ff796b1da5feeaf7b53547e0899a22226efc2b8ae13de8",
+  "/work/.salvo14/mig/check-sites-arena-chinese/ev/gh-api_provider.py": "3827eace2d4f8da95bc262c998439fbeb95cfb27010aeed5c5edcf7bd04cdbd5"
  },
  "harvested_at": "2026-10-15T15:40:58Z",
  "published": {
@@ -796,6 +815,30 @@
    "where": "row api-gpt-4o-search, column model_name (Arena's model string, read as a maker API id)",
    "quote": "api-gpt-4o-search",
    "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  },
+  {
+   "id": "F55",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmposts/2025-04-14-search-arena.md",
+   "where": "post 'Search Arena', section on models, line 139",
+   "quote": "By default, we use each provider’s standard API settings.",
+   "note": "extended to the 2026 boards by the maintainer's decision of 27 Oct; FastChat's public api_provider.py sends no reasoning parameter. The post itself speaks of the 11 Search Arena models of April 2025"
+  },
+  {
+   "id": "F56",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "temperature",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/gh-api_provider.py",
+   "where": "fastchat/serve/api_provider.py, the provider stream functions (e.g. line 80): the call takes temperature, top_p, max_new_tokens; grep for reasoning/thinking/effort finds none",
+   "quote": "model_name, prompt, temperature, top_p, max_new_tokens",
+   "note": "public FastChat code (2023-25) sends no reasoning parameter; Arena's production serving is not public, so this supports the maintainer's decision, it does not prove the 2026 calls"
   }
  ]
 }

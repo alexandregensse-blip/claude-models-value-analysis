@@ -2,7 +2,8 @@
  "id": "src-lmarena.ai-text-2026-10-15",
  "publisher": "lmarena.ai",
  "urls": [
-  "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+  "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
+  "https://arena.ai/blog/arena-expert"
  ],
  "wayback": [],
  "captures": [
@@ -12,13 +13,41 @@
    "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
    "captured": "2026-10-18T16:39:50Z",
    "note": "config text parquet (HF mirror); capture time = mtime of the earliest saved identical copy (s24/c2/src/lm/text.parquet, same sha256), a copy time rather than the download time"
+  },
+  {
+   "id": "G8",
+   "kind": "fetch",
+   "url": "https://blog.lmarena.ai/blog/2025/search-arena/",
+   "captured": "2026-10-27T05:14:00Z",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmposts/2025-04-14-search-arena.md",
+   "note": "source markdown of the Search Arena post (lmarena/lmarena.github.io _posts/2025-04-14-search-arena.md, raw.githubusercontent.com), fetched 2026-10-27; the post dates from 14 Apr 2025 and speaks of the 11 models then supported"
+  },
+  {
+   "id": "G7",
+   "kind": "commit",
+   "commit": "d161b647843491eefa9b0679c923d1bc7822abb8",
+   "url": "https://github.com/lm-sys/FastChat/blob/d161b647843491eefa9b0679c923d1bc7822abb8/fastchat/serve/api_provider.py",
+   "captured": "2025-01-23T05:01:12Z",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/gh-api_provider.py",
+   "note": "fastchat/serve/api_provider.py as of main (587d5cf, 2025-06-02) fetched 2026-10-27; d161b64 is the last commit touching the file"
+  },
+  {
+   "id": "G9",
+   "kind": "fetch",
+   "url": "https://arena.ai/blog/arena-expert",
+   "captured": "2026-10-27T05:13:00Z",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmblog-arena-expert.html",
+   "note": "Arena blog 'Arena Expert and Occupational Categories', published 5 Nov 2025, last updated 18 Dec 2025 (page header), fetched 2026-10-27 (lmarena.ai/blog → arena.ai/blog); a statement about the Expert category and the models named, read for the rows of the same ids"
   }
  ],
  "commit": null,
  "sha256": {
   "/work/.salvo14/g/g3/src/lm/text.parquet": "1735d8b7e31781eae4433c4ab32c642868dde6bb755d3367f37e51e1094d7a95",
   "/work/.salvo14/arb/openrouter-arena/evidence/arena-faq.txt": "94a049410e60181129f2ff215e81f4b9e7272309422b36f9d8a4371dfd796029",
-  "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-15.json": "1021a1162e66a55f2f38967597377074ffa96f72b951a068fb3adc57b162665a"
+  "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-15.json": "1021a1162e66a55f2f38967597377074ffa96f72b951a068fb3adc57b162665a",
+  "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmposts/2025-04-14-search-arena.md": "56aa1ef25c1d613fa6ff796b1da5feeaf7b53547e0899a22226efc2b8ae13de8",
+  "/work/.salvo14/mig/check-sites-arena-chinese/ev/gh-api_provider.py": "3827eace2d4f8da95bc262c998439fbeb95cfb27010aeed5c5edcf7bd04cdbd5",
+  "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmblog-arena-expert.html": "6dda257a9ada88f7445874e763e935ed3ed258acf0c45011ef8ae1f6cada918b"
  },
  "harvested_at": "2026-10-18T16:39:50Z",
  "published": {
@@ -6370,6 +6399,54 @@
    "where": "row llama-13b, column model_name (Arena's model string, read as a maker API id)",
    "quote": "llama-13b",
    "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  },
+  {
+   "id": "F460",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmposts/2025-04-14-search-arena.md",
+   "where": "post 'Search Arena', section on models, line 139",
+   "quote": "By default, we use each provider’s standard API settings.",
+   "note": "extended to the 2026 boards by the maintainer's decision of 27 Oct; FastChat's public api_provider.py sends no reasoning parameter. The post itself speaks of the 11 Search Arena models of April 2025"
+  },
+  {
+   "id": "F461",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "temperature",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/gh-api_provider.py",
+   "where": "fastchat/serve/api_provider.py, the provider stream functions (e.g. line 80): the call takes temperature, top_p, max_new_tokens; grep for reasoning/thinking/effort finds none",
+   "quote": "model_name, prompt, temperature, top_p, max_new_tokens",
+   "note": "public FastChat code (2023-25) sends no reasoning parameter; Arena's production serving is not public, so this supports the maintainer's decision, it does not prove the 2026 calls"
+  },
+  {
+   "id": "F462",
+   "about": null,
+   "says": "thinking-off",
+   "value": "no thinking",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmblog-arena-expert.html",
+   "where": "blog 'Arena Expert and Occupational Categories', 'LMArena ranking' line",
+   "quote": "Claude Opus 4.1 (no thinking)",
+   "note": "Arena's own label for the Claude Opus 4.1 entry without the thinking variant (the other entry is 'Claude Opus 4.1 (thinking)'); read as the id claude-opus-4-1-20250805 (the thinking one is claude-opus-4-1-20250805-thinking-16k). The blog states the thinking-off state, not an API parameter"
+  },
+  {
+   "id": "F463",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "normal",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/check-sites-arena-chinese/ev/lmblog-arena-expert.html",
+   "where": "blog 'Arena Expert and Occupational Categories', paragraph after the GDPval comparison (the page emphasizes 'does' and 'normal')",
+   "quote": "o3 and o4 mini with normal reasoning",
+   "note": "GDPval ran o3 and o4 mini at high reasoning; Arena says it tests them at 'normal' reasoning and calls the difference 'the discrepancy in the reasoning parameter'. Read: no reasoning level raised (the maker default). The sentence is about the Expert category; read for the same model ids on the other boards"
   }
  ]
 }
