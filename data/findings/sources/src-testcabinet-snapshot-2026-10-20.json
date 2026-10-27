@@ -1,0 +1,185 @@
+{
+ "urls": [
+  "https://snapshot.testcabinet.ai/index.json",
+  "https://snapshot.testcabinet.ai/snapshots/2026-10-20T0238Z-0195940d/runs.json",
+  "https://docs.testcabinet.ai/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://snapshot.testcabinet.ai/snapshots/2026-10-20T0238Z-0195940d/runs.json",
+   "captured": "2026-10-20T05:49:06Z",
+   "note": "runs.json of snapshot 2026-10-20T0238Z-0195940d, fetched by salvo gt/t2 (file mtime), saved copy in evidence/; the same bytes were saved by hk/gpt-5.3-codex-spark; the snapshot index (index.json) reports 1288 runs; the live index now points to a newer snapshot (2026-10-24T1929Z) and the 10-20 snapshot URLs answer 404"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-testcabinet/evidence/runs-2026-10-20T0238Z.json": "a328e60f0596338395b83bfb7b8e50b72496a2ec9877ccd93e02f1d0c582443f",
+  "/work/.salvo14/mig/convert-testcabinet/evidence/models-2026-10-20T0238Z.json": "a87cd1260f07e090c7514cf697c8b219af56daf85dd16953ac2af3d92a28b207",
+  "/work/.salvo14/mig/convert-testcabinet/evidence/index-2026-10-20T0238Z.json": "43a0325158f54119249a902acb7c9c699dc758c3277dfc2966ef8e235efdbd5e",
+  "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html": "de2b698306b3ab3600edbc58f5d36582c68cafa4267559c1381565f64445defe",
+  "/work/.salvo14/mig/convert-testcabinet/evidence/doc_results.html": "72a79eb230bea89d1f31087549f667fce10fdd267c5a9aadd1e8c695259fd019",
+  "/work/.salvo14/mig/convert-testcabinet/evidence/SOURCE.txt": "7e227a317cfadc4a186d2169970fa8fc5d63872155e4f5ba2dc94785156fd046",
+  "/work/.salvo14/mig/convert-testcabinet/evidence/rows-runs.json": "5eb74fb18505bc004268a47102d31c51a651191ae2b1a630d5ba2407fbc22d62"
+ },
+ "harvested_at": "2026-10-20T05:49:06Z",
+ "published": {
+  "value": "2026-10-20T02:38:48Z",
+  "where": "index.json generatedAt of the snapshot",
+  "quote": "2026-10-20T02:38:48.194541049Z",
+  "file": "/work/.salvo14/mig/convert-testcabinet/evidence/index-2026-10-20T0238Z.json"
+ },
+ "salvo": "salvo14/mig/convert-testcabinet (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved snapshot",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/rows-runs.json",
+   "from": "/work/.salvo14/mig/convert-testcabinet/evidence/runs-2026-10-20T0238Z.json",
+   "tool": "flattening of runs.json: one row per completed run of the groups the registry holds as setups; score = int(score.earned)/int(score.total) joined with '/'; harness = harnessSlug + ' ' + harnessVersion; case = slug version variant engine; other fields verbatim"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/rows-runs.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "group": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "subject.modelId: the id the harness was given (openrouter/<vendor>/<model> for opencode, the maker's id for claude and codex)"
+    },
+    "harness": "harness",
+    "case": "note",
+    "started": "run-start",
+    "finished": "run-end",
+    "state": "note",
+    "rating": "note",
+    "run_time_s": "note",
+    "score": {
+     "says": "score",
+     "term": "pct-checklist",
+     "scale": "counts"
+    },
+    "tokens_uncached_input": "tokens-in",
+    "tokens_cached_input": "tokens-cache-read",
+    "tokens_output": "tokens-out",
+    "tokens_reasoning": "tokens-reasoning",
+    "cost_comparable": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-18
+     }
+    },
+    "cost_actual": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-testcabinet-snapshot-2026-10-20",
+ "publisher": "testcabinet",
+ "facts": [
+  {
+   "says": "currency",
+   "value": "comparable",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html",
+   "where": "doc_metrics.html, section Cost: 'The comparable cost, the canonical figure' (the unit is the run; the amount is in USD per the catalog rates 'per Mtok'; the page shows cost.comparable as the canonical figure)",
+   "quote": "The comparable cost, the canonical figure.",
+   "note": "the doc names no currency symbol in this sentence; the 'cost' fields are USD figures (the legacy rows carry USD); the currency is the converter's reading of the rates 'per Mtok' held in models.json (listPrice, a plain number per token)",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "run",
+   "term": "per-run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html",
+   "where": "doc_metrics.html, section Metrics Overview: every run records tokens and cost",
+   "quote": "Every run records cost two ways",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "computed from the model’s list price",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html",
+   "where": "doc_metrics.html, section Cost",
+   "quote": "It is computed from the model’s list price, the uncached input, cached input, and output rates per Mtok held on its catalog entry",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "rates per Mtok",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html",
+   "where": "doc_metrics.html, section Cost",
+   "quote": "the uncached input, cached input, and output rates per Mtok",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "a run is scored at the list price its model carried at enqueue",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html",
+   "where": "doc_metrics.html, section Cost / List price resolution",
+   "quote": "a run is scored at the list price its model carried at enqueue and keeps that cost when the entry’s price later changes",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "reasoning-included-in-out",
+   "value": "Output tokens: non-reasoning output tokens",
+   "term": "false",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_metrics.html",
+   "where": "doc_metrics.html, section Tokens",
+   "quote": "Output tokens: non-reasoning output tokens.",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "metric-definition",
+   "value": "A review’s score is the earned weight over the total declared weight.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_results.html",
+   "where": "doc_results.html, section Reviews / The checklist",
+   "quote": "A review’s score is the earned weight over the total declared weight.",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "validators’ own score stands",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-testcabinet/evidence/doc_results.html",
+   "where": "doc_results.html: the run's score is the average of its reviews' scores; on a validator-rated run the validators' own score stands",
+   "quote": "While a validator-rated run has no reviews, the validators’ own score stands",
+   "id": "F8",
+   "about": null
+  }
+ ]
+}

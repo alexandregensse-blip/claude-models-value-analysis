@@ -1,0 +1,246 @@
+{
+ "id": "src-llm_chess-data-js-2026-10-21",
+ "publisher": "llm_chess",
+ "urls": [
+  "https://maxim-saplin.github.io/llm_chess/",
+  "https://github.com/maxim-saplin/llm_chess"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-21T15:05:00Z",
+   "note": "saved copy hn/qwen3.8-2.4t-a95b/src/boards/llmchess.raw (salvo hn qwen3.8-2.4t (earliest saved copy)); capture time = mtime of that file"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-21T15:14:57Z",
+   "note": "saved copy hn/news-boards/src/llmchess/data.js (salvo hn news-boards (same bytes)); capture time = mtime of that file"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1021.csv": "9132ff01450eb60787948ceb909d60d450d2eff52fc355331e0706c55238f861",
+  "/work/.salvo14/gc/c6/src/chess/README.md": "20785c7a59a99097bb05be33701b804c86b8f3a7978593426a8a9566ca5e5abc",
+  "/work/.salvo14/rb/rb4/src/chess/notes.md": "8b3c6cf5259576f115c34712008fb9234cc5dad42d2e1bd5702f97df93039fbf",
+  "/work/.salvo14/hn/qwen3.8-2.4t-a95b/src/boards/llmchess.raw": "1f0f4005e178b69732a9a91486c3dea1b444798a478547427b52ced476abed7f",
+  "/work/.salvo14/hn/news-boards/src/llmchess/data.js": "1f0f4005e178b69732a9a91486c3dea1b444798a478547427b52ced476abed7f",
+  "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json": "562d23ce12256a6c3361e097690969414e57f327c4ad50001578d2e1c3500b8f",
+  "/work/.salvo14/s19/b2/src/chess_model_metadata.js": "2e5a6cc6908153e24d2be646f1099258f25f9ee1878ffef206c240f12750242a",
+  "/work/.salvo14/rb/rb4/src/chess/models_metadata.csv": "8397b71ee3d27f1fd794dc0ced7effc9443e8d47f45c2b8ad9248704bac8bfd8",
+  "/work/.salvo14/hn/news-code/src/gh/llmchess/models_metadata.csv": "4be307a0ebaa39d6001772ccbde4820c10f85fe23eb7ee801ec1f8a189793d84"
+ },
+ "harvested_at": "2026-10-21T15:05:00Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-llm_chess (Wave C2)",
+ "agent": "converter convert_elo.py (Sonnet 5.5), from the saved copies",
+ "snapshot_of": "src-llm_chess-data-js-2026-10-15",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1021.csv",
+   "from": "/work/.salvo14/hn/qwen3.8-2.4t-a95b/src/boards/llmchess.raw",
+   "tool": "python re: the text between 'const data = `\\n' and the closing backtick, written unchanged (a CSV)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "from": "/work/.salvo14/s19/b2/src/chess_model_metadata.js",
+   "tool": "python re/json: the object literal after 'const modelMetadata = ', written unchanged (JSON)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1021.csv",
+   "where": "the CSV text inside `const data = \\`...\\``",
+   "format": "csv",
+   "row_key": "Player",
+   "level": "written",
+   "columns": {
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "average_game_cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-09
+     }
+    },
+    "min_game_date": "run-start",
+    "total_games": "items",
+    "elo_moe_95": "note",
+    "games_vs_random": "note",
+    "games_vs_dragon": "note"
+   }
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/rb/rb4/src/chess/models_metadata.csv",
+   "where": "models_metadata.csv, one row per model entry",
+   "format": "csv",
+   "row_key": "model",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note",
+    "1m_prompt": "price-table",
+    "1m_completion": "price-table"
+   }
+  },
+  {
+   "id": "T3",
+   "file": "/work/.salvo14/hn/news-code/src/gh/llmchess/models_metadata.csv",
+   "where": "models_metadata.csv, one row per model entry",
+   "format": "csv",
+   "row_key": "model",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note",
+    "1m_prompt": "price-table",
+    "1m_completion": "price-table"
+   }
+  },
+  {
+   "id": "T4",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "$key",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note"
+   }
+  }
+ ],
+ "facts": [
+  {
+   "says": "metric-definition",
+   "value": "Estimated rating (±95% CI), anchored to Dragon/chess.com. Combines Random/Dragon data.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gc/c6/src/chess/README.md",
+   "where": "README.md line 150 (Metrics, Elo)",
+   "quote": "Estimated rating (±95% CI), anchored to Dragon/chess.com. Combines Random/Dragon data.",
+   "note": "the Elo is anchored to Dragon ladder levels (Elo = 125 x (level + 1)); it is not on an external scale",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/rb/rb4/src/chess/notes.md",
+   "where": "notes.md line 68 (the repository's notes: 'an average cost of a game of $1')",
+   "quote": "average cost of a game of $1",
+   "note": "the only place in the saved repository text that gives the currency of the game costs",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "cost/game",
+   "term": "per-game",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gc/c6/src/chess/README.md",
+   "where": "README.md line 154 (Metrics, Other: cost/game)",
+   "quote": "cost/game",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "gpt-6-luna-max",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/rb/rb4/src/chess/models_metadata.csv",
+   "where": "row 'gpt-6-luna-max', column reasoning_level",
+   "id": "F4"
+  },
+  {
+   "says": "effort-label",
+   "about": "gpt-6-luna-max",
+   "value": "max",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1021.csv",
+   "where": "row 'gpt-6-luna-max', column Player: the string ends in '-max' (the board's player label)",
+   "note": "the metadata's reasoning_level for the same string is 'default': the two disagree",
+   "id": "F5"
+  },
+  {
+   "says": "model-api-id",
+   "about": "xai.grok-4.7-high",
+   "value": "xai.grok-4.7-high",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1021.csv",
+   "where": "row 'xai.grok-4.7-high', column Player (the board's player string; no metadata row for it)",
+   "id": "F6"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-3-5-haiku",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T4",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-5-haiku', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F7"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-3-sonnet",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T4",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-sonnet', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F8"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-3-opus",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T4",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-opus', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F9"
+  }
+ ]
+}

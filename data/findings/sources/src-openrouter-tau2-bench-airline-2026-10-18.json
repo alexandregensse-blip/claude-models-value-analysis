@@ -1,0 +1,173 @@
+{
+ "urls": [
+  "https://openrouter.ai/benchmarks/tau2-bench-airline"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://openrouter.ai/benchmarks/tau2-bench-airline",
+   "captured": "2026-10-18T16:44:28Z",
+   "note": "page HTML saved by salvo s24/c1 (file mtime); the board data are in the page's Next.js payload (models[].median); the live page has since moved to later snapshots (checked 2026-10-26: '2026-10-26 snapshot')"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html": "1e5c0b2d35280cb535c7680c4025122ff0f92bf86b80238a35be10c44aa80a2d",
+  "/work/.salvo14/mig/convert-openrouter/evidence/rows-tau2-bench-airline.json": "b7437bf7c6441e09a85fca45bd10a8be977e8c7952793be771ab278820cddb70"
+ },
+ "harvested_at": "2026-10-18T16:44:28Z",
+ "published": {
+  "value": "2026-10-18",
+  "where": "citation line: 'OpenRouter (2026). ... results on OpenRouter, 2026-10-18 snapshot.'",
+  "quote": "2026-10-18 snapshot",
+  "file": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html"
+ },
+ "salvo": "salvo14/mig/convert-openrouter (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/rows-tau2-bench-airline.json",
+   "from": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html",
+   "tool": "Next.js payload of the page (escaped JSON in the HTML source) decoded; the 'median' object of every models[] entry copied verbatim (providers[] per-endpoint rows not extracted)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/rows-tau2-bench-airline.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "modelName": "note",
+    "modelSlug": {
+     "says": "model-api-id",
+     "namespace": "openrouter",
+     "note": "the OpenRouter model slug"
+    },
+    "modelPermaslug": {
+     "says": "model-api-id",
+     "namespace": "openrouter",
+     "note": "the dated OpenRouter permaslug (used as the model fact only when the row has no modelSlug)"
+    },
+    "providerName": "note",
+    "accuracy": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "accuracyStdDev": "note",
+    "runCount": "aggregation",
+    "totalTasks": "items",
+    "avgCostPerTask": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "avgInputTokensPerTask": {
+     "says": "tokens-in",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "avgOutputTokensPerTask": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "avgDurationPerTaskMs": "note",
+    "lastRunTimestamp": "run-end",
+    "isParetoOptimal": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-openrouter-tau2-bench-airline-2026-10-18",
+ "publisher": "openrouter",
+ "facts": [
+  {
+   "says": "route",
+   "value": "OpenRouter",
+   "term": "openrouter",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html",
+   "where": "page JSON-LD name and citation: the results are OpenRouter's own, 'results on OpenRouter'",
+   "quote": "τ²-Bench: Airline results on OpenRouter",
+   "note": "OpenRouter's own benchmark runs against its provider endpoints: the route is OpenRouter by definition (publisher = router)",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "metric-definition",
+   "value": "Simulated airline support conversations are run against production provider endpoints with a fixed model playing the customer.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html",
+   "where": "page JSON-LD measurementTechnique",
+   "quote": "Simulated airline support conversations are run against production provider endpoints with a fixed model playing the customer.",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "aggregation",
+   "value": "Scores aggregate repeated runs weighted by task count.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html",
+   "where": "page JSON-LD measurementTechnique (second sentence): the mean covers the repeated runs",
+   "quote": "Scores aggregate repeated runs weighted by task count.",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "Cost per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html",
+   "where": "page JSON-LD variableMeasured",
+   "quote": "Cost per task",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Oct 18, 2026, 9:23 AM UTC",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html",
+   "where": "page text 'leads ... as of <date>'",
+   "quote": "Oct 18, 2026, 9:23 AM UTC",
+   "note": "the snapshot date of the board (also dateModified in the JSON-LD and the citation '2026-10-18 snapshot')",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "headline-metric",
+   "value": "accuracy",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/tau2-bench-airline.html",
+   "where": "page description (meta / JSON-LD): the board compares accuracy; the headline text ranks the leader by it",
+   "quote": "agentic accuracy",
+   "note": "the board names its leader by accuracy ('X leads ... at N%')",
+   "id": "F6",
+   "about": null
+  }
+ ]
+}

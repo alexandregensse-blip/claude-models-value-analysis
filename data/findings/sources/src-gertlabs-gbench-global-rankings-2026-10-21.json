@@ -1,0 +1,126 @@
+{
+ "id": "src-gertlabs-gbench-global-rankings-2026-10-21",
+ "publisher": "gertlabs-gbench",
+ "urls": [
+  "https://gertlabs.com/rankings",
+  "https://gertlabs.com/api/v1/global/rankings?limit=300"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://gertlabs.com/api/v1/global/rankings?limit=300",
+   "captured": "2026-10-21T15:37:11Z",
+   "file": "/work/.salvo14/mig/convert-gertlabs-gbench/evidence/gert_rankings_20261021.json",
+   "note": "API response, meta.request_id 2b1a6db4-9bdc-4663-a46d-e88e3c0f061b, meta.timestamp 2026-10-21T15:37:11Z; 127 models"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-gertlabs-gbench/evidence/gert_rankings_20261021.json": "e96f9906ea7be940b2bf9ad27d035489b840da03e5635a99d7b2dd8ae914c33f"
+ },
+ "harvested_at": "2026-10-21T15:37:11Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-gertlabs-gbench (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved API responses",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-gertlabs-gbench/evidence/gert_rankings_20261021.json",
+   "where": "$.data.rankings",
+   "format": "json",
+   "row_key": "model_id",
+   "columns": {
+    "model_id": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "model": "note",
+    "provider": "note",
+    "agentic_coding.gscore": {
+     "says": "score",
+     "term": "gscore-0-1",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "agentic_coding.avg_cost_usd": "cost",
+    "agentic_coding.games_played": "items"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-gertlabs-gbench/evidence/gert_rankings_20261021.json",
+   "where": "$.data.rankings",
+   "format": "json",
+   "row_key": "model_id",
+   "columns": {
+    "model_id": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "model": "note",
+    "provider": "note",
+    "oneshot_coding.gscore": {
+     "says": "score",
+     "term": "gscore-0-1",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "oneshot_coding.avg_cost_usd": "cost",
+    "oneshot_coding.games_played": "items"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T3",
+   "file": "/work/.salvo14/mig/convert-gertlabs-gbench/evidence/gert_rankings_20261021.json",
+   "where": "$.data.rankings",
+   "format": "json",
+   "row_key": "model_id",
+   "columns": {
+    "model_id": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "model": "note",
+    "provider": "note",
+    "decision_making.gscore": {
+     "says": "score",
+     "term": "gscore-0-1",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "decision_making.avg_cost_usd": "cost",
+    "decision_making.games_played": "items"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "USD",
+   "level": "written",
+   "form": "data-file",
+   "where": "decision_making.avg_cost_usd of the entry deepseek/deepseek-v4.1-flash-1017 (the field name carries the currency)",
+   "file": "/work/.salvo14/mig/convert-gertlabs-gbench/evidence/gert_rankings_20261021.json",
+   "quote": "avg_cost_usd",
+   "term": "USD"
+  }
+ ]
+}

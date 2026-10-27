@@ -1,0 +1,184 @@
+{
+ "urls": [
+  "https://openrouter.ai/benchmarks/gpqa-diamond"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://openrouter.ai/benchmarks/gpqa-diamond",
+   "captured": "2026-10-18T16:44:25Z",
+   "note": "page HTML saved by salvo s24/c1 (file mtime); the board data are in the page's Next.js payload (models[].median); the live page has since moved to later snapshots (checked 2026-10-26: '2026-10-26 snapshot')"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html": "db541effbc5afc2cf6faee0004cf7f65fa72bdced36d0cb195caa93816b9b494",
+  "/work/.salvo14/mig/convert-openrouter/evidence/rows-gpqa-diamond.json": "ff35df53f250c277b62bf62e889493201f5db1584d6687ead378ce5e15824279"
+ },
+ "harvested_at": "2026-10-18T16:44:25Z",
+ "published": {
+  "value": "2026-10-18",
+  "where": "citation line: 'OpenRouter (2026). ... results on OpenRouter, 2026-10-18 snapshot.'",
+  "quote": "2026-10-18 snapshot",
+  "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html"
+ },
+ "salvo": "salvo14/mig/convert-openrouter (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/rows-gpqa-diamond.json",
+   "from": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "tool": "Next.js payload of the page (escaped JSON in the HTML source) decoded; the 'median' object of every models[] entry copied verbatim (providers[] per-endpoint rows not extracted)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/rows-gpqa-diamond.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "modelName": "note",
+    "modelSlug": {
+     "says": "model-api-id",
+     "namespace": "openrouter",
+     "note": "the OpenRouter model slug"
+    },
+    "modelPermaslug": {
+     "says": "model-api-id",
+     "namespace": "openrouter",
+     "note": "the dated OpenRouter permaslug (used as the model fact only when the row has no modelSlug)"
+    },
+    "providerName": "note",
+    "accuracy": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "accuracyStdDev": "note",
+    "runCount": "aggregation",
+    "totalTasks": "items",
+    "avgCostPerTask": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "avgInputTokensPerTask": {
+     "says": "tokens-in",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "avgOutputTokensPerTask": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "avgDurationPerTaskMs": "note",
+    "lastRunTimestamp": "run-end",
+    "isParetoOptimal": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-openrouter-gpqa-diamond-2026-10-18",
+ "publisher": "openrouter",
+ "facts": [
+  {
+   "says": "route",
+   "value": "OpenRouter",
+   "term": "openrouter",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "where": "page JSON-LD name and citation: the results are OpenRouter's own, 'results on OpenRouter'",
+   "quote": "GPQA Diamond results on OpenRouter",
+   "note": "OpenRouter's own benchmark runs against its provider endpoints: the route is OpenRouter by definition (publisher = router)",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "metric-definition",
+   "value": "The same fixed GPQA Diamond question set is run against production provider endpoints.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "where": "page JSON-LD measurementTechnique",
+   "quote": "The same fixed GPQA Diamond question set is run against production provider endpoints.",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "aggregation",
+   "value": "Scores aggregate repeated runs weighted by question count, and a model’s headline score is a single representative result rather than its best-performing provider.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "where": "page JSON-LD measurementTechnique (second sentence): the mean covers the repeated runs",
+   "quote": "Scores aggregate repeated runs weighted by question count, and a model’s headline score is a single representative result rather than its best-performing provider.",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "Cost per question",
+   "term": "per-q",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "where": "page JSON-LD variableMeasured",
+   "quote": "Cost per question",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Oct 18, 2026, 9:00 AM UTC",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "where": "page text 'leads ... as of <date>'",
+   "quote": "Oct 18, 2026, 9:00 AM UTC",
+   "note": "the snapshot date of the board (also dateModified in the JSON-LD and the citation '2026-10-18 snapshot')",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "headline-metric",
+   "value": "accuracy",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "where": "page description (meta / JSON-LD): the board compares accuracy; the headline text ranks the leader by it",
+   "quote": "graduate-level science accuracy",
+   "note": "the board names its leader by accuracy ('X leads ... at N%')",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "The headline row uses default routing where available; otherwise, it uses a representative provider result.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openrouter/evidence/gpqa-diamond.html",
+   "where": "page text under the title",
+   "quote": "The headline row uses default routing where available; otherwise, it uses a representative provider result.",
+   "id": "F7",
+   "about": null
+  }
+ ]
+}

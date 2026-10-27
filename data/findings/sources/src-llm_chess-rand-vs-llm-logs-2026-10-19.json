@@ -1,0 +1,97 @@
+{
+ "id": "src-llm_chess-rand-vs-llm-logs-2026-10-19",
+ "publisher": "llm_chess",
+ "urls": [
+  "https://github.com/maxim-saplin/llm_chess"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://github.com/maxim-saplin/llm_chess/tree/main/_logs/rand_vs_llm",
+   "captured": "2026-10-19T08:00:01Z",
+   "note": "44 aggregate_results.json files of the repository's _logs/rand_vs_llm saved by salvo g g7 (mtimes 2026-10-19 07:59-08:00; capture time = mtime)"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://github.com/maxim-saplin/llm_chess/tree/main/_logs/rand_vs_llm",
+   "captured": "2026-10-15T16:14:50Z",
+   "note": "the 3 Claude folders of _logs/rand_vs_llm saved by salvo s23 b2 (mtime 2026-10-15 16:14; capture time = mtime)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_matches.csv": "f1b8688c645004ec614ca5aee54c79ffb9a2a0752d36d4f52f2b0704ebb97cad",
+  "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_aggregate_results.tar": "73b26d5e1af605255579714de7a643f0a42996be9c861cce38a857d4dac5f147",
+  "/work/.salvo14/gc/c6/src/chess/README.md": "20785c7a59a99097bb05be33701b804c86b8f3a7978593426a8a9566ca5e5abc"
+ },
+ "harvested_at": "2026-10-19T08:00:01Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-llm_chess (Wave C2)",
+ "agent": "converter convert_rand.py (Sonnet 5.5), from the saved json files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_matches.csv",
+   "from": "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_aggregate_results.tar",
+   "tool": "python json: fields run_metadata.metadata.{log_folder_relative,time_started_formatted}, run_metadata.llm_configs.black.{model,api_type,reasoning_effort}, total_games, black_wins, white_wins, draws copied unchanged into one CSV row per file; wins_of_games composed as 'black_wins of total_games'"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_matches.csv",
+   "where": "one row per aggregate_results.json file (fields copied unchanged; wins_of_games = black_wins + ' of ' + total_games)",
+   "format": "csv",
+   "row_key": "file",
+   "columns": {
+    "wins_of_games": {
+     "says": "score",
+     "term": "win%",
+     "scale": "counts"
+    },
+    "reasoning_effort": "effort-setting",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "time_started_formatted": "run-start",
+    "total_games": "items",
+    "api_type": "note",
+    "log_folder_relative": "note",
+    "black_wins": "note",
+    "white_wins": "note",
+    "draws": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "says": "route",
+   "value": "azure",
+   "term": "azure",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_matches.csv",
+   "about": "DeepSeek-R1-0528__2026-04-19-11-55-59___aggregate_results.json",
+   "where": "row 'DeepSeek-R1-0528__2026-04-19-11-55-59___aggregate_results.json', column api_type (llm_configs.black.api_type of the file)",
+   "id": "F1"
+  },
+  {
+   "says": "route",
+   "value": "groq",
+   "term": "groq",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_matches.csv",
+   "about": "groq-gpt-oss-120b-high__2025-08-19-22-44-48___aggregate_results.json",
+   "where": "row 'groq-gpt-oss-120b-high__2025-08-19-22-44-48___aggregate_results.json', column api_type (llm_configs.black.api_type of the file)",
+   "id": "F2"
+  }
+ ]
+}

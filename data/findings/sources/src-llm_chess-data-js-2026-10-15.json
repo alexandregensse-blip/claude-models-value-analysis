@@ -1,0 +1,832 @@
+{
+ "id": "src-llm_chess-data-js-2026-10-15",
+ "publisher": "llm_chess",
+ "urls": [
+  "https://maxim-saplin.github.io/llm_chess/",
+  "https://github.com/maxim-saplin/llm_chess"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-15T15:33:39Z",
+   "note": "saved copy s23/b2/src/chess_data_new.js (salvo s23 b2 (earliest saved copy)); capture time = mtime of that file"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-15T16:00:19Z",
+   "note": "saved copy s23/b4/src/chess/data.js (salvo s23 b4 (same bytes)); capture time = mtime of that file"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-18T16:38:52Z",
+   "note": "saved copy s24/c2/src/chess_data.js (salvo s24 c2 (same bytes)); capture time = mtime of that file"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-19T08:54:33Z",
+   "note": "saved copy g/g7/verify/src/chess_data_20261018.js (salvo g g7 verify (same bytes; the file the raw rows cite)); capture time = mtime of that file"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1018.csv": "c8b859ba9cffec44e07302b58e1119770dee9a07644e97ad73c064da99da488a",
+  "/work/.salvo14/gc/c6/src/chess/README.md": "20785c7a59a99097bb05be33701b804c86b8f3a7978593426a8a9566ca5e5abc",
+  "/work/.salvo14/rb/rb4/src/chess/notes.md": "8b3c6cf5259576f115c34712008fb9234cc5dad42d2e1bd5702f97df93039fbf",
+  "/work/.salvo14/s23/b2/src/chess_data_new.js": "ad5963bf39eb79b1bff4d349e1bd7a25abe7171c6faa8f8f07a64f6e04247509",
+  "/work/.salvo14/s23/b4/src/chess/data.js": "ad5963bf39eb79b1bff4d349e1bd7a25abe7171c6faa8f8f07a64f6e04247509",
+  "/work/.salvo14/s24/c2/src/chess_data.js": "ad5963bf39eb79b1bff4d349e1bd7a25abe7171c6faa8f8f07a64f6e04247509",
+  "/work/.salvo14/g/g7/verify/src/chess_data_20261018.js": "ad5963bf39eb79b1bff4d349e1bd7a25abe7171c6faa8f8f07a64f6e04247509",
+  "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json": "562d23ce12256a6c3361e097690969414e57f327c4ad50001578d2e1c3500b8f",
+  "/work/.salvo14/s19/b2/src/chess_model_metadata.js": "2e5a6cc6908153e24d2be646f1099258f25f9ee1878ffef206c240f12750242a",
+  "/work/.salvo14/rb/rb4/src/chess/models_metadata.csv": "8397b71ee3d27f1fd794dc0ced7effc9443e8d47f45c2b8ad9248704bac8bfd8",
+  "/work/.salvo14/hn/news-code/src/gh/llmchess/models_metadata.csv": "4be307a0ebaa39d6001772ccbde4820c10f85fe23eb7ee801ec1f8a189793d84"
+ },
+ "harvested_at": "2026-10-15T15:33:39Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-llm_chess (Wave C2)",
+ "agent": "converter convert_elo.py (Sonnet 5.5), from the saved copies",
+ "snapshot_of": "src-llm_chess-data-js-2026-10-05",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1018.csv",
+   "from": "/work/.salvo14/s23/b2/src/chess_data_new.js",
+   "tool": "python re: the text between 'const data = `\\n' and the closing backtick, written unchanged (a CSV)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "from": "/work/.salvo14/s19/b2/src/chess_model_metadata.js",
+   "tool": "python re/json: the object literal after 'const modelMetadata = ', written unchanged (JSON)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1018.csv",
+   "where": "the CSV text inside `const data = \\`...\\``",
+   "format": "csv",
+   "row_key": "Player",
+   "level": "written",
+   "columns": {
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "average_game_cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-09
+     }
+    },
+    "min_game_date": "run-start",
+    "total_games": "items",
+    "elo_moe_95": "note",
+    "games_vs_random": "note",
+    "games_vs_dragon": "note"
+   }
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "$key",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note"
+   }
+  },
+  {
+   "id": "T3",
+   "file": "/work/.salvo14/hn/news-code/src/gh/llmchess/models_metadata.csv",
+   "where": "models_metadata.csv, one row per model entry",
+   "format": "csv",
+   "row_key": "model",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note",
+    "1m_prompt": "price-table",
+    "1m_completion": "price-table"
+   }
+  },
+  {
+   "id": "T4",
+   "file": "/work/.salvo14/rb/rb4/src/chess/models_metadata.csv",
+   "where": "models_metadata.csv, one row per model entry",
+   "format": "csv",
+   "row_key": "model",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note",
+    "1m_prompt": "price-table",
+    "1m_completion": "price-table"
+   }
+  }
+ ],
+ "facts": [
+  {
+   "says": "metric-definition",
+   "value": "Estimated rating (±95% CI), anchored to Dragon/chess.com. Combines Random/Dragon data.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gc/c6/src/chess/README.md",
+   "where": "README.md line 150 (Metrics, Elo)",
+   "quote": "Estimated rating (±95% CI), anchored to Dragon/chess.com. Combines Random/Dragon data.",
+   "note": "the Elo is anchored to Dragon ladder levels (Elo = 125 x (level + 1)); it is not on an external scale",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/rb/rb4/src/chess/notes.md",
+   "where": "notes.md line 68 (the repository's notes: 'an average cost of a game of $1')",
+   "quote": "average cost of a game of $1",
+   "note": "the only place in the saved repository text that gives the currency of the game costs",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "cost/game",
+   "term": "per-game",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gc/c6/src/chess/README.md",
+   "where": "README.md line 154 (Metrics, Other: cost/game)",
+   "quote": "cost/game",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "deepseek-r1-0528",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'deepseek-r1-0528', column reasoning_level",
+   "id": "F4"
+  },
+  {
+   "says": "thinking-off",
+   "about": "qwen3-next-80b-a3b",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3-next-80b-a3b', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F5"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-5.2-chat",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-5.2-chat', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F6"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "qwen3.5-4b-thinking@bf16",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3.5-4b-thinking@bf16', column reasoning_level",
+   "id": "F7"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "zai.glm-5",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'zai.glm-5', column reasoning_level",
+   "id": "F8"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "grok-4-fast-reasoning",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-4-fast-reasoning', column reasoning_level",
+   "id": "F9"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "gemini-3-flash-preview",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-3-flash-preview', column reasoning_level",
+   "id": "F10"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-5-chat",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-5-chat', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F11"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "kimi-k2.5",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'kimi-k2.5', column reasoning_level",
+   "id": "F12"
+  },
+  {
+   "says": "thinking-off",
+   "about": "deepseek-V3.2_non-reasoning",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'deepseek-V3.2_non-reasoning', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F13"
+  },
+  {
+   "says": "thinking-off",
+   "about": "grok-4-20-non-reasoning",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-4-20-non-reasoning', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F14"
+  },
+  {
+   "says": "thinking-off",
+   "about": "grok-4-1-fast-non-reasoning",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-4-1-fast-non-reasoning', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F15"
+  },
+  {
+   "says": "thinking-off",
+   "about": "grok-4-fast-non-reasoning",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-4-fast-non-reasoning', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F16"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "qwen3-4b-thinking@q8",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3-4b-thinking@q8', column reasoning_level",
+   "id": "F17"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "qwen3.8-27b@q4_k_m",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3.8-27b@q4_k_m', column reasoning_level",
+   "id": "F18"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "qwen3.5-9b-thinking@bf16",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3.5-9b-thinking@bf16', column reasoning_level",
+   "id": "F19"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "gemini-3.1-flash-lite-preview",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-3.1-flash-lite-preview', column reasoning_level",
+   "id": "F20"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "glm-4.7-flash@q4",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'glm-4.7-flash@q4', column reasoning_level",
+   "id": "F21"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "grok-4-1-fast-reasoning",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-4-1-fast-reasoning', column reasoning_level",
+   "id": "F22"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "qwen3-30b-a3b-thinking@q4_k_m",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3-30b-a3b-thinking@q4_k_m', column reasoning_level",
+   "id": "F23"
+  },
+  {
+   "says": "thinking-off",
+   "about": "qwen3.5-9b@q8_0",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3.5-9b@q8_0', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F24"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "qwen3.6-27b@q4_k_s",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3.6-27b@q4_k_s', column reasoning_level",
+   "id": "F25"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "qwen3.5-35b-a3b@q4_k_m",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen3.5-35b-a3b@q4_k_m', column reasoning_level",
+   "id": "F26"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "unsloth/qwen3.8-27b@q2_k_xl",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'unsloth/qwen3.8-27b@q2_k_xl', column reasoning_level",
+   "id": "F27"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-5.1-chat",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-5.1-chat', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F28"
+  },
+  {
+   "says": "thinking-off",
+   "about": "kimi-k2-instruct",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'kimi-k2-instruct', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F29"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4.1-mini",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4.1-mini', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F30"
+  },
+  {
+   "says": "thinking-off",
+   "about": "qwen-3-235b-a22b-instruct-2507",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen-3-235b-a22b-instruct-2507', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F31"
+  },
+  {
+   "says": "thinking-off",
+   "about": "grok-3-mini-beta",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-3-mini-beta', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F32"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F33"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "gemini-2.5-pro-preview-05-06",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-2.5-pro-preview-05-06', column reasoning_level",
+   "id": "F34"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4.1",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4.1', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F35"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4.5-preview",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4.5-preview', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F36"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "gemini-2.5-pro",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-2.5-pro', column reasoning_level",
+   "id": "F37"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "gemini-2.5-flash",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-2.5-flash', column reasoning_level",
+   "id": "F38"
+  },
+  {
+   "says": "thinking-off",
+   "about": "grok-3-beta",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-3-beta', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F39"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "gemini-2.5-pro-preview-03-25",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-2.5-pro-preview-03-25', column reasoning_level",
+   "id": "F40"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4o-2024-11-20",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4o-2024-11-20', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F41"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4o-mini",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4o-mini', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F42"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4-turbo",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4-turbo', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F43"
+  },
+  {
+   "says": "thinking-off",
+   "about": "deepseek-v3-0324",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'deepseek-v3-0324', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F44"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gemini-1.5-pro-preview",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-1.5-pro-preview', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F45"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "deepseek-r1",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'deepseek-r1', column reasoning_level",
+   "id": "F46"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "o1-preview",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'o1-preview', column reasoning_level",
+   "id": "F47"
+  },
+  {
+   "says": "thinking-off",
+   "about": "qwen2.5-72b-instruct",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen2.5-72b-instruct', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F48"
+  },
+  {
+   "says": "thinking-off",
+   "about": "qwen-max",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen-max', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F49"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "o1-mini",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'o1-mini', column reasoning_level",
+   "id": "F50"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gemini-2.0-flash-001",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-2.0-flash-001', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F51"
+  },
+  {
+   "says": "thinking-off",
+   "about": "qwen-plus",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'qwen-plus', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F52"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4o-2024-05-13",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4o-2024-05-13', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F53"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4-32k",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4-32k', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F54"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gpt-4o-2024-08-06",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gpt-4o-2024-08-06', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F55"
+  },
+  {
+   "says": "thinking-off",
+   "about": "deepseek-v3",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'deepseek-v3', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F56"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gemini-1.5-flash-001",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-1.5-flash-001', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F57"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gemini-2.0-flash-lite-001",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-2.0-flash-lite-001', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F58"
+  },
+  {
+   "says": "thinking-off",
+   "about": "gemini-2.0-flash-exp",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'gemini-2.0-flash-exp', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F59"
+  },
+  {
+   "says": "thinking-off",
+   "about": "grok-2",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-2', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F60"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "grok-4-20-reasoning",
+   "value": "default",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'grok-4-20-reasoning', column reasoning_level",
+   "id": "F61"
+  }
+ ]
+}

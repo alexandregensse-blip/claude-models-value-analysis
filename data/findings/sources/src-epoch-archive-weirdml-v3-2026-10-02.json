@@ -1,0 +1,172 @@
+{
+ "urls": [
+  "https://htihle.github.io/weirdml.html"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://htihle.github.io/weirdml_v3.json",
+   "captured": "2026-10-05T04:25:56Z",
+   "note": "weirdml_v3.json ('Prepared data (.json)' of the WeirdML v3 page) as saved by salvo s19/b4 (file mtime); generated 2026-10-02T10:13:42Z per the file"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml_v3.json": "ca8f2e117edbc4b195a4935532424c45e776f526aff7869e36e6b1da9d818fba",
+  "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml.html": "5c2fe91d0a374910b7ba818888c6c8333b5337f80dde0ce1acf54eca3b96f5ec",
+  "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml_summary.html": "d0e108c33dd7e3d730ac989ee2602173bce1b38e03d1982186adaa064feb75dd",
+  "/work/.salvo14/mig/convert-epoch-archive/evidence/rows-weirdml-v3.json": "c43fabbf75dda2772166be140a6411b1459b94dc4d36e7598ac2ae5dcc96bb5b"
+ },
+ "harvested_at": "2026-10-05T04:25:56Z",
+ "published": {
+  "value": "2026-10-02T10:13:42Z",
+  "where": "weirdml_v3.json 'generated'",
+  "quote": "2026-10-02T10:13:42Z",
+  "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml_v3.json"
+ },
+ "salvo": "salvo14/mig/convert-epoch-archive (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved json and page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/rows-weirdml-v3.json",
+   "from": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml_v3.json",
+   "tool": "models[] of weirdml_v3.json flattened: harnesses[0] name+version joined; interval split; configurations/curves not extracted"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/rows-weirdml-v3.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "name": "note",
+    "agent": "note",
+    "slug": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "slug of the model: maker/model"
+    },
+    "harness": "harness",
+    "release_date": "note",
+    "score": {
+     "says": "score",
+     "term": "score-of-1",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 1e-09
+     }
+    },
+    "interval_low": "note",
+    "interval_high": "note",
+    "mean_api_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "mean_output_tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "runs": "aggregation",
+    "mean_final_best": "note",
+    "reasoning_effort": "effort-setting"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-epoch-archive-weirdml-v3-2026-10-02",
+ "publisher": "epoch-archive",
+ "facts": [
+  {
+   "says": "metric-definition",
+   "value": "That model’s official score is 80% normalized area under its line on a logarithmic token axis, plus 20% of its final value.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml.html",
+   "where": "weirdml.html (WeirdML v3 page), paragraph under the plot",
+   "quote": "That model’s official score is 80% normalized area under its line on a logarithmic token axis, plus 20% of its final value.",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "headline-metric",
+   "value": "official score",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml.html",
+   "where": "weirdml.html: 'That model’s official score is ...' (the only score the page ranks by)",
+   "quote": "official score",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "aggregation",
+   "value": "The curve averages runs within each configuration, then weights each of the 11 tasks equally",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml.html",
+   "where": "weirdml.html, same paragraph",
+   "quote": "The curve averages runs within each configuration, then weights each of the 11 tasks equally",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "Cost is mean API cost per run",
+   "term": "per-run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml.html",
+   "where": "weirdml.html, same paragraph",
+   "quote": "Cost is mean API cost per run",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "Cost / Run (USD)",
+   "term": "USD",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml_summary.html",
+   "where": "weirdml_summary.html, table header 'Cost / Run (USD)'",
+   "quote": "Cost / Run (USD)",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Harness shows the agent software and version used for the included runs.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml.html",
+   "where": "weirdml.html, same paragraph",
+   "quote": "Harness shows the agent software and version used for the included runs.",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "2026-10-02T10:13:42Z",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-epoch-archive/evidence/weirdml_v3.json",
+   "where": "weirdml_v3.json, header field generated (mode real, source_commit fd5d5d5)",
+   "quote": "2026-10-02T10:13:42Z",
+   "id": "F7",
+   "about": null
+  }
+ ]
+}

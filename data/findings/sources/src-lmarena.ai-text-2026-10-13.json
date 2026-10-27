@@ -1,0 +1,165 @@
+{
+ "id": "src-lmarena.ai-text-2026-10-13",
+ "publisher": "lmarena.ai",
+ "urls": [
+  "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://huggingface.co/datasets/lmarena-ai/leaderboard-dataset",
+   "captured": "2026-10-15T15:41:03Z",
+   "note": "config text parquet (HF mirror); capture time = mtime of the earliest saved identical copy (s23/b2/src/lmarena/text.parquet, same sha256), a copy time rather than the download time"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/s23/b2/src/lmarena/text.parquet": "e8a6046e38590ea329858fd4f425b9dfc4e8ba1db5a8d2fd8a60d131762a57f0",
+  "/work/.salvo14/arb/openrouter-arena/evidence/arena-faq.txt": "94a049410e60181129f2ff215e81f4b9e7272309422b36f9d8a4371dfd796029",
+  "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json": "d7fb3ca96fe4af98fae5c56a0df6547e4914a4bbb4fc87d6b0ac41bfa5b9de09"
+ },
+ "harvested_at": "2026-10-15T15:41:03Z",
+ "published": {
+  "value": "2026-10-13",
+  "where": "column leaderboard_publish_date of the rows (one value for the category)",
+  "quote": "2026-10-13",
+  "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json"
+ },
+ "salvo": "salvo14/mig/convert-lmarena.ai (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved HF parquet files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "from": "/work/.salvo14/s23/b2/src/lmarena/text.parquet",
+   "tool": "pyarrow (Python) read_table().to_pylist(): rows of category 'overall', all columns, dropped duplicated model names: none"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "model_name",
+   "columns": {
+    "model_name": "model-name",
+    "rating": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "leaderboard_publish_date": "note",
+    "rating_lower": "note",
+    "rating_upper": "note",
+    "rank": "note",
+    "variance": "note",
+    "vote_count": "items"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "headline-metric",
+   "value": "Bradley-Terry rating",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/arb/openrouter-arena/evidence/arena-faq.txt",
+   "where": "Arena FAQ, 'How is my feedback used to rank AI models?'",
+   "quote": "Your votes directly shape the model rankings through the Bradley-Terry rating system",
+   "note": "the dataset column `rating` of the config; rank follows it (checked on all rows of each category)"
+  },
+  {
+   "id": "F2",
+   "about": "claude-3-5-sonnet-20241022",
+   "says": "model-api-id",
+   "value": "claude-3-5-sonnet-20241022",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "where": "row claude-3-5-sonnet-20241022, column model_name (Arena's model string, read as a maker API id)",
+   "quote": "claude-3-5-sonnet-20241022",
+   "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  },
+  {
+   "id": "F3",
+   "about": "claude-3-5-sonnet-20240620",
+   "says": "model-api-id",
+   "value": "claude-3-5-sonnet-20240620",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "where": "row claude-3-5-sonnet-20240620, column model_name (Arena's model string, read as a maker API id)",
+   "quote": "claude-3-5-sonnet-20240620",
+   "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  },
+  {
+   "id": "F4",
+   "about": "claude-3-opus-20240229",
+   "says": "model-api-id",
+   "value": "claude-3-opus-20240229",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "where": "row claude-3-opus-20240229, column model_name (Arena's model string, read as a maker API id)",
+   "quote": "claude-3-opus-20240229",
+   "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  },
+  {
+   "id": "F5",
+   "about": "claude-3-5-haiku-20241022",
+   "says": "model-api-id",
+   "value": "claude-3-5-haiku-20241022",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "where": "row claude-3-5-haiku-20241022, column model_name (Arena's model string, read as a maker API id)",
+   "quote": "claude-3-5-haiku-20241022",
+   "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  },
+  {
+   "id": "F6",
+   "about": "claude-3-sonnet-20240229",
+   "says": "model-api-id",
+   "value": "claude-3-sonnet-20240229",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "where": "row claude-3-sonnet-20240229, column model_name (Arena's model string, read as a maker API id)",
+   "quote": "claude-3-sonnet-20240229",
+   "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  },
+  {
+   "id": "F7",
+   "about": "claude-3-haiku-20240307",
+   "says": "model-api-id",
+   "value": "claude-3-haiku-20240307",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-lmarena.ai/evidence/text-overall-2026-10-13.json",
+   "where": "row claude-3-haiku-20240307, column model_name (Arena's model string, read as a maker API id)",
+   "quote": "claude-3-haiku-20240307",
+   "note": "Arena's own model string; read as a maker API id spelling (the namespace is our reading)"
+  }
+ ]
+}

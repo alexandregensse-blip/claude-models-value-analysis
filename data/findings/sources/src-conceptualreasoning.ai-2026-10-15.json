@@ -1,0 +1,220 @@
+{
+ "id": "src-conceptualreasoning.ai-2026-10-15",
+ "publisher": "conceptualreasoning.ai",
+ "urls": [
+  "https://conceptualreasoning.ai",
+  "https://conceptualreasoning.ai/data/cri-scores.csv"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://conceptualreasoning.ai/data/cri-scores.csv",
+   "file": "/work/.salvo14/s23/b2/verify/src/cri-scores.csv",
+   "captured": "2026-10-15T16:16:15Z",
+   "note": "salvo s23 b2 fetch of data/cri-scores.csv (file mtime)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://conceptualreasoning.ai/data/cri-scores.csv",
+   "file": "/work/.salvo14/g/g7/src/cri-scores_20261015.csv",
+   "captured": "2026-10-19T08:00:00Z",
+   "note": "same bytes, copy saved by salvo g7 (file mtime 2026-10-19 08:00)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/s23/b2/verify/src/cri-scores.csv": "69eb1fd077ba84e80e921914f34fdcc8334308fc97f28693b5c956d392d990ec",
+  "/work/.salvo14/g/g7/src/cri-scores_20261015.csv": "69eb1fd077ba84e80e921914f34fdcc8334308fc97f28693b5c956d392d990ec",
+  "/work/.salvo14/s24/c2/src/cr/data/README.md": "defd5552fe33b1ccb3123f49a773a41b7c5a67a2412f613036e3774851a838a2",
+  "/work/.salvo14/s23/b2/verify/src/cri_cost-chart.jsx": "1e5e09398143b81517eb7bddb0fd56a65fc8766888f56345f7ba387dd0d1f9b5",
+  "/work/.salvo14/gc/c5/src/cri_methodology.html": "8b975648bd685f0d8327103d3e3c6a9e9eb239212dd920e7564e93052b0fc078"
+ },
+ "harvested_at": "2026-10-15T16:16:15Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/s23/b2/verify/src/cri-scores.csv",
+   "where": "all rows of data/cri-scores.csv",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": "model-name",
+    "base_model": "model-name",
+    "effort": "effort-label",
+    "lmca": {
+     "says": "score",
+     "term": "score-of-100",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "dtbench": {
+     "says": "score",
+     "term": "score-of-100",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "lmca_cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "dt_cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "lmca_ci": "note",
+    "dtbench_ci": "note",
+    "company": "note",
+    "release_date": "note",
+    "partial": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "headline-metric",
+   "value": "LMCA subindex, 0–100 (scaled)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 22 (column lmca)",
+   "quote": "LMCA subindex, 0–100 (scaled)",
+   "note": "README.md of the site's data folder, fetched 2026-10-18 16:51 (after snapshot A's CSV of 15 Oct: the column definitions are assumed unchanged)"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "headline-metric",
+   "value": "DTBench subindex, 0–100 (scaled)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 24 (column dtbench)",
+   "quote": "DTBench subindex, 0–100 (scaled)",
+   "note": "README.md of the site's data folder, fetched 2026-10-18 16:51 (after snapshot A's CSV of 15 Oct: the column definitions are assumed unchanged)"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "currency",
+   "value": "average USD cost per LMCA response",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 32 (column lmca_cost)",
+   "quote": "average USD cost per LMCA response",
+   "note": "README.md of the site's data folder, fetched 2026-10-18 16:51 (after snapshot A's CSV of 15 Oct: the column definitions are assumed unchanged)"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "unit",
+   "value": "average USD cost per LMCA response",
+   "term": "per-response",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 32 (column lmca_cost)",
+   "quote": "average USD cost per LMCA response",
+   "note": "also the site's cost chart axis label 'Avg cost per response (USD; log scale)' (cri_cost-chart.jsx)"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "currency",
+   "value": "average USD cost per DTBench response",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 33 (column dt_cost)",
+   "quote": "average USD cost per DTBench response",
+   "note": "README.md of the site's data folder, fetched 2026-10-18 16:51 (after snapshot A's CSV of 15 Oct: the column definitions are assumed unchanged)"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "unit",
+   "value": "average USD cost per DTBench response",
+   "term": "per-response",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 33 (column dt_cost)",
+   "quote": "average USD cost per DTBench response"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "cost-basis",
+   "value": "average USD cost per LMCA response",
+   "term": "unknown",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 32",
+   "quote": "average USD cost per LMCA response",
+   "note": "the README gives no price table, no price date and no token counts: how the average cost was obtained is not stated"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "cost-method",
+   "value": "average USD cost per LMCA response",
+   "term": "unstated",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 32",
+   "quote": "average USD cost per LMCA response",
+   "note": "no method stated"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "note",
+   "value": "reasoning-effort level",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/s24/c2/src/cr/data/README.md",
+   "where": "data/README.md line 30 (column effort)",
+   "quote": "reasoning-effort level",
+   "note": "README: low/medium/high/xhigh/max for the inference-effort experiment; blank for single-config models (a blank is not a statement of the default)"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "effort-label",
+   "value": "maximum possible token limit and effort and thinking setting",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gc/c5/src/cri_methodology.html",
+   "where": "methodology page, section 'Model parameters'",
+   "quote": "We use the maximum possible token limit and effort and thinking setting for every model",
+   "note": "the publisher's statement for every model; page saved 2026-10-19 13:57 (after both CSV snapshots; assumed unchanged); rows whose effort column names a level (the inference-effort experiment) carry that level instead"
+  }
+ ]
+}

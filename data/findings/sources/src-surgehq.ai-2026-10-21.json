@@ -1,0 +1,396 @@
+{
+ "id": "src-surgehq.ai-2026-10-21",
+ "publisher": "surgehq.ai",
+ "urls": [
+  "https://surgehq.ai/benchmarks"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://surgehq.ai/benchmarks/handbook",
+   "captured": "2026-10-21T15:30:00Z",
+   "note": "hn/news-boards2/src/surge/handbook.html (file mtime 2026-10-21 15:30 UTC): 14 rows in place of the 37 of 15 Oct"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/hn/news-boards2/src/surge/handbook.html": "b5365389819bd9d035c57393d580dcdd63eb867ca00d073643ac4aec9693b057",
+  "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv": "0cbc2c408acc48691eae87abb56696f7a5e39d1dcb2993aac7588348637c35c0"
+ },
+ "harvested_at": "2026-10-21T15:30:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": "src-surgehq.ai-2026-10-15",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "from": "/work/.salvo14/hn/news-boards2/src/surge/handbook.html",
+   "tool": "parse_surge.py: the rows (elements with data-leaderboard-row) of the page's leaderboard, in page order: rank, brand + name as displayed (joined by a space), score (data-score text), CI lower / upper (data-leaderboard-ci-lower/upper attributes, Elo boards only)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "all rows of the leaderboard of HANDBOOK.md Benchmark | Surge AI",
+   "format": "csv",
+   "row_key": "model_label",
+   "columns": {
+    "rank": "note",
+    "ci_lower": "note",
+    "ci_upper": "note",
+    "score": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": "Claude Opus 5.5 (Adaptive/Max)",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Claude Opus 5.5 (Adaptive/Max), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Claude Opus 5.5"
+  },
+  {
+   "id": "F2",
+   "about": "Claude Opus 5.5 (Adaptive/Max)",
+   "says": "effort-label",
+   "value": "Adaptive/Max",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Claude Opus 5.5 (Adaptive/Max), column model_label (parenthesised label)",
+   "quote": "(Adaptive/Max)"
+  },
+  {
+   "id": "F3",
+   "about": "Claude Sonnet 5.5 (Adaptive/Max)",
+   "says": "model-name",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Claude Sonnet 5.5 (Adaptive/Max), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Claude Sonnet 5.5"
+  },
+  {
+   "id": "F4",
+   "about": "Claude Sonnet 5.5 (Adaptive/Max)",
+   "says": "effort-label",
+   "value": "Adaptive/Max",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Claude Sonnet 5.5 (Adaptive/Max), column model_label (parenthesised label)",
+   "quote": "(Adaptive/Max)"
+  },
+  {
+   "id": "F5",
+   "about": "Claude Fable 5.1 (Adaptive/Max)",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Claude Fable 5.1 (Adaptive/Max), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Claude Fable 5.1"
+  },
+  {
+   "id": "F6",
+   "about": "Claude Fable 5.1 (Adaptive/Max)",
+   "says": "effort-label",
+   "value": "Adaptive/Max",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Claude Fable 5.1 (Adaptive/Max), column model_label (parenthesised label)",
+   "quote": "(Adaptive/Max)"
+  },
+  {
+   "id": "F7",
+   "about": "Grok 4.7 (xHigh reasoning)",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Grok 4.7 (xHigh reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Grok 4.7"
+  },
+  {
+   "id": "F8",
+   "about": "Grok 4.7 (xHigh reasoning)",
+   "says": "effort-label",
+   "value": "xHigh reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Grok 4.7 (xHigh reasoning), column model_label (parenthesised label)",
+   "quote": "(xHigh reasoning)"
+  },
+  {
+   "id": "F9",
+   "about": "Gemini 4 Argon (High reasoning)",
+   "says": "model-name",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Gemini 4 Argon (High reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Gemini 4 Argon"
+  },
+  {
+   "id": "F10",
+   "about": "Gemini 4 Argon (High reasoning)",
+   "says": "effort-label",
+   "value": "High reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Gemini 4 Argon (High reasoning), column model_label (parenthesised label)",
+   "quote": "(High reasoning)"
+  },
+  {
+   "id": "F11",
+   "about": "Muse Spark 1.3 (Max reasoning)",
+   "says": "model-name",
+   "value": "Muse Spark 1.3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Muse Spark 1.3 (Max reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Muse Spark 1.3"
+  },
+  {
+   "id": "F12",
+   "about": "Muse Spark 1.3 (Max reasoning)",
+   "says": "effort-label",
+   "value": "Max reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Muse Spark 1.3 (Max reasoning), column model_label (parenthesised label)",
+   "quote": "(Max reasoning)"
+  },
+  {
+   "id": "F13",
+   "about": "GPT 6 Astra (Max reasoning)",
+   "says": "model-name",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row GPT 6 Astra (Max reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "GPT 6 Astra"
+  },
+  {
+   "id": "F14",
+   "about": "GPT 6 Astra (Max reasoning)",
+   "says": "effort-label",
+   "value": "Max reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row GPT 6 Astra (Max reasoning), column model_label (parenthesised label)",
+   "quote": "(Max reasoning)"
+  },
+  {
+   "id": "F15",
+   "about": "Qwen 3.8 Max (xHigh reasoning)",
+   "says": "model-name",
+   "value": "Qwen 3.8 Max",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Qwen 3.8 Max (xHigh reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Qwen 3.8 Max"
+  },
+  {
+   "id": "F16",
+   "about": "Qwen 3.8 Max (xHigh reasoning)",
+   "says": "effort-label",
+   "value": "xHigh reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Qwen 3.8 Max (xHigh reasoning), column model_label (parenthesised label)",
+   "quote": "(xHigh reasoning)"
+  },
+  {
+   "id": "F17",
+   "about": "GLM 5.3 (Max reasoning)",
+   "says": "model-name",
+   "value": "GLM 5.3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row GLM 5.3 (Max reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "GLM 5.3"
+  },
+  {
+   "id": "F18",
+   "about": "GLM 5.3 (Max reasoning)",
+   "says": "effort-label",
+   "value": "Max reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row GLM 5.3 (Max reasoning), column model_label (parenthesised label)",
+   "quote": "(Max reasoning)"
+  },
+  {
+   "id": "F19",
+   "about": "Muse Wonder (Max reasoning)",
+   "says": "model-name",
+   "value": "Muse Wonder",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Muse Wonder (Max reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Muse Wonder"
+  },
+  {
+   "id": "F20",
+   "about": "Muse Wonder (Max reasoning)",
+   "says": "effort-label",
+   "value": "Max reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Muse Wonder (Max reasoning), column model_label (parenthesised label)",
+   "quote": "(Max reasoning)"
+  },
+  {
+   "id": "F21",
+   "about": "Kimi K3 (Max reasoning)",
+   "says": "model-name",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Kimi K3 (Max reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Kimi K3"
+  },
+  {
+   "id": "F22",
+   "about": "Kimi K3 (Max reasoning)",
+   "says": "effort-label",
+   "value": "Max reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Kimi K3 (Max reasoning), column model_label (parenthesised label)",
+   "quote": "(Max reasoning)"
+  },
+  {
+   "id": "F23",
+   "about": "GPT 6.1 Sol (Max reasoning)",
+   "says": "model-name",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row GPT 6.1 Sol (Max reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "GPT 6.1 Sol"
+  },
+  {
+   "id": "F24",
+   "about": "GPT 6.1 Sol (Max reasoning)",
+   "says": "effort-label",
+   "value": "Max reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row GPT 6.1 Sol (Max reasoning), column model_label (parenthesised label)",
+   "quote": "(Max reasoning)"
+  },
+  {
+   "id": "F25",
+   "about": "Gemini 3.8 Flash (High reasoning)",
+   "says": "model-name",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Gemini 3.8 Flash (High reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Gemini 3.8 Flash"
+  },
+  {
+   "id": "F26",
+   "about": "Gemini 3.8 Flash (High reasoning)",
+   "says": "effort-label",
+   "value": "High reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Gemini 3.8 Flash (High reasoning), column model_label (parenthesised label)",
+   "quote": "(High reasoning)"
+  },
+  {
+   "id": "F27",
+   "about": "Hy Hy4 Preview (High reasoning)",
+   "says": "model-name",
+   "value": "Hy4 Preview",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Hy Hy4 Preview (High reasoning), column model_label (brand and name, before the parenthesised level and the bracketed harness)",
+   "quote": "Hy4 Preview"
+  },
+  {
+   "id": "F28",
+   "about": "Hy Hy4 Preview (High reasoning)",
+   "says": "effort-label",
+   "value": "High reasoning",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-surgehq.ai/evidence/2/handbook.csv",
+   "where": "row Hy Hy4 Preview (High reasoning), column model_label (parenthesised label)",
+   "quote": "(High reasoning)"
+  }
+ ]
+}

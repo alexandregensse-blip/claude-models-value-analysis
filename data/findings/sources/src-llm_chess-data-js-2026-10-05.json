@@ -1,0 +1,378 @@
+{
+ "id": "src-llm_chess-data-js-2026-10-05",
+ "publisher": "llm_chess",
+ "urls": [
+  "https://maxim-saplin.github.io/llm_chess/",
+  "https://github.com/maxim-saplin/llm_chess"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-05T04:25:47Z",
+   "note": "saved copy s19/b2/src/chess_data.js (salvo s19 b2 (earliest saved copy)); capture time = mtime of that file"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/maxim-saplin/llm_chess/main/docs/data.js",
+   "captured": "2026-10-19T07:59:24Z",
+   "note": "saved copy g/g7/src/chess_data_20261005.js (salvo g g7 (same bytes)); capture time = mtime of that file"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1005.csv": "4003c89f8f8a8b90de1bffd1b447e7421ae6e9f9b0fee5c0d3957651e17649cf",
+  "/work/.salvo14/gc/c6/src/chess/README.md": "20785c7a59a99097bb05be33701b804c86b8f3a7978593426a8a9566ca5e5abc",
+  "/work/.salvo14/rb/rb4/src/chess/notes.md": "8b3c6cf5259576f115c34712008fb9234cc5dad42d2e1bd5702f97df93039fbf",
+  "/work/.salvo14/s19/b2/src/chess_data.js": "2d284a87c8ac450984328d4a6bec78b6463262272fe5b9315af052f25848dd7b",
+  "/work/.salvo14/g/g7/src/chess_data_20261005.js": "2d284a87c8ac450984328d4a6bec78b6463262272fe5b9315af052f25848dd7b",
+  "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json": "562d23ce12256a6c3361e097690969414e57f327c4ad50001578d2e1c3500b8f",
+  "/work/.salvo14/s19/b2/src/chess_model_metadata.js": "2e5a6cc6908153e24d2be646f1099258f25f9ee1878ffef206c240f12750242a",
+  "/work/.salvo14/hn/news-code/src/gh/llmchess/models_metadata.csv": "4be307a0ebaa39d6001772ccbde4820c10f85fe23eb7ee801ec1f8a189793d84"
+ },
+ "harvested_at": "2026-10-05T04:25:47Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-llm_chess (Wave C2)",
+ "agent": "converter convert_elo.py (Sonnet 5.5), from the saved copies",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1005.csv",
+   "from": "/work/.salvo14/s19/b2/src/chess_data.js",
+   "tool": "python re: the text between 'const data = `\\n' and the closing backtick, written unchanged (a CSV)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "from": "/work/.salvo14/s19/b2/src/chess_model_metadata.js",
+   "tool": "python re/json: the object literal after 'const modelMetadata = ', written unchanged (JSON)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_data_d1005.csv",
+   "where": "the CSV text inside `const data = \\`...\\``",
+   "format": "csv",
+   "row_key": "Player",
+   "level": "written",
+   "columns": {
+    "elo": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "average_game_cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-09
+     }
+    },
+    "min_game_date": "run-start",
+    "total_games": "items",
+    "elo_moe_95": "note",
+    "games_vs_random": "note",
+    "games_vs_dragon": "note"
+   }
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "$key",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note"
+   }
+  },
+  {
+   "id": "T3",
+   "file": "/work/.salvo14/hn/news-code/src/gh/llmchess/models_metadata.csv",
+   "where": "models_metadata.csv, one row per model entry",
+   "format": "csv",
+   "row_key": "model",
+   "level": "written",
+   "columns": {
+    "reasoning_level": "effort-setting",
+    "mode_family": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "date_released": "note",
+    "1m_prompt": "price-table",
+    "1m_completion": "price-table"
+   }
+  }
+ ],
+ "facts": [
+  {
+   "says": "metric-definition",
+   "value": "Estimated rating (±95% CI), anchored to Dragon/chess.com. Combines Random/Dragon data.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gc/c6/src/chess/README.md",
+   "where": "README.md line 150 (Metrics, Elo)",
+   "quote": "Estimated rating (±95% CI), anchored to Dragon/chess.com. Combines Random/Dragon data.",
+   "note": "the Elo is anchored to Dragon ladder levels (Elo = 125 x (level + 1)); it is not on an external scale",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/rb/rb4/src/chess/notes.md",
+   "where": "notes.md line 68 (the repository's notes: 'an average cost of a game of $1')",
+   "quote": "average cost of a game of $1",
+   "note": "the only place in the saved repository text that gives the currency of the game costs",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "cost/game",
+   "term": "per-game",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gc/c6/src/chess/README.md",
+   "where": "README.md line 154 (Metrics, Other: cost/game)",
+   "quote": "cost/game",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "model-api-id",
+   "about": "claude-opus-4-5-20251101_thinking_16000",
+   "value": "claude-opus-4-5",
+   "namespace": "maker-api",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-opus-4-5-thinking_16000', column mode_family; the file's `aliases` maps the board string 'claude-opus-4-5-20251101_thinking_16000' to 'claude-opus-4-5-thinking_16000'",
+   "id": "F4"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-opus-4-5-20251101_thinking_16000",
+   "value": "budget_16000",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-opus-4-5-thinking_16000', column reasoning_level",
+   "term": "16000",
+   "id": "F5"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-opus-4-5",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-opus-4-5', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F6"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-sonnet-4-5_thinking_16000",
+   "value": "budget_16000",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-sonnet-4-5_thinking_16000', column reasoning_level",
+   "term": "16000",
+   "id": "F7"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-haiku-4-5_thinking_16000",
+   "value": "budget_16000",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-haiku-4-5_thinking_16000', column reasoning_level",
+   "term": "16000",
+   "id": "F8"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-sonnet-4-5",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-sonnet-4-5', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F9"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-opus-4-1",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-opus-4-1', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F10"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-sonnet-5",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-sonnet-5', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F11"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-haiku-4-5",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-haiku-4-5', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F12"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-sonnet-4-6",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-sonnet-4-6', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F13"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-3-7-sonnet",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-7-sonnet', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F14"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-opus-4",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-opus-4', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F15"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-3-7-sonnet_thinking_2048",
+   "value": "budget_2048",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-7-sonnet_thinking_2048', column reasoning_level",
+   "term": "2048",
+   "id": "F16"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-3-7-sonnet_thinking_10000",
+   "value": "budget_10000",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-7-sonnet_thinking_10000', column reasoning_level",
+   "term": "10000",
+   "id": "F17"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-opus-4_thinking_16000",
+   "value": "budget_16000",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-opus-4_thinking_16000', column reasoning_level",
+   "term": "16000",
+   "id": "F18"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-sonnet-4_thinking_16000",
+   "value": "budget_16000",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-sonnet-4_thinking_16000', column reasoning_level",
+   "term": "16000",
+   "id": "F19"
+  },
+  {
+   "says": "thinking-off",
+   "about": "claude-sonnet-4",
+   "value": "none",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-sonnet-4', column reasoning_level = 'none' (the metadata's reasoning_status of that row is not recorded in the JSON metadata)",
+   "id": "F20"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-3-7-sonnet_thinking_1024",
+   "value": "budget_1024",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-7-sonnet_thinking_1024', column reasoning_level",
+   "term": "1024",
+   "id": "F21"
+  },
+  {
+   "says": "thinking-budget",
+   "about": "claude-3-7-sonnet_thinking_5000",
+   "value": "budget_5000",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-llm_chess/evidence/chess_model_metadata_20261005.json",
+   "where": "row 'claude-3-7-sonnet_thinking_5000', column reasoning_level",
+   "term": "5000",
+   "id": "F22"
+  }
+ ]
+}

@@ -1,0 +1,2246 @@
+{
+ "id": "src-arxiv-2609.04298-v3-2026-09-10",
+ "publisher": "arxiv-2609.04298",
+ "urls": [
+  "https://arxiv.org/abs/2609.04298",
+  "https://arxiv.org/html/2609.04298v3"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2609.04298v3",
+   "captured": "2026-10-20T05:55:28Z",
+   "note": "the arXiv HTML (LaTeXML) of version v3 (10 Sep 2026), saved by salvo gt t6 on 2026-10-20 (file mtime)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/gt/t6/src/html/2609.04298.html": "a9ae596ec745fa816bec47ef3812bb2487ea0290cd5cd1ac8d036d398b321955",
+  "/work/.salvo14/gt/t6/src/arx3/q7.xml": "55d44302c786110c20682b727656d63b6829390d38173e026c8a3d5d53252081",
+  "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv": "6a7f8848617850c79675af898ab159181a7fe3e9ce4cda2bdfa621dd1af64ca7",
+  "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table6.csv": "b592d952d2cf46acc73c134ed8d10cdbb57a678d47e926021055f7e9cfd5ea09",
+  "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table7.csv": "16c24edb6901fff8c9a7402cf19f0090734a9787fb904dbac3816c229fe69719",
+  "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table8.csv": "87e0988c68416139895e85a6b870438ae9c7986249370a55af47711858973526"
+ },
+ "harvested_at": "2026-10-20T05:55:28Z",
+ "published": {
+  "value": "2026-09-03T16:26:20Z",
+  "where": "arXiv API entry of 2609.04298 (v1 <published>); the saved HTML is v3 of 10 Sep 2026 ('arXiv:2609.04298v3 [cs.AI] 10 Sep 2026')",
+  "quote": "2026-09-03T16:26:20Z",
+  "file": "/work/.salvo14/gt/t6/src/arx3/q7.xml"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "from": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "tool": "Table 1 of the HTML paper (id S4.T1.6) -> CSV by parse_tables.py (html.parser; cells verbatim; the two header rows folded into one: column groups 'Native Harness' and 'Terminus-2' prefixed to the sub-headers Pass % and $ per run)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table6.csv",
+   "from": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "tool": "Table 6 of the HTML paper (id A5.T6.2) -> CSV by parse_tables.py, TRANSPOSED (cells verbatim): one row per (model, harness) column of the paper's table (key 'model · harness', from its two header rows), one column per benchmark row"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table7.csv",
+   "from": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "tool": "Table 7 of the HTML paper (id A5.T7.2) -> CSV by parse_tables.py, TRANSPOSED (cells verbatim): one row per (model, harness) column of the paper's table (key 'model · harness', from its two header rows), one column per benchmark row"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table8.csv",
+   "from": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "tool": "Table 8 of the HTML paper (id A5.T8.2) -> CSV by parse_tables.py, TRANSPOSED (cells verbatim): one row per (model, harness) column of the paper's table (key 'model · harness', from its two header rows), one column per benchmark row"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "Table 1 (id S4.T1.6), rows of the nine models",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Model": "model-name",
+    "Agent": "harness",
+    "Native Harness Pass %": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Native Harness $ per run": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "Terminus-2 Pass %": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Terminus-2 $ per run": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table6.csv",
+   "where": "Table 6: one row per model-harness column, one column per benchmark row (54)",
+   "format": "csv",
+   "row_key": "Config",
+   "columns": {
+    "Model": "model-name",
+    "Harness": "harness",
+    "SWE-bench Verified": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Bench-Multilingual": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-smith": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CRUST-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GSO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Bench Pro": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWT Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Aider Polyglot": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AlgoTune": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CompileBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "FeatureBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BigCodeBench-Hard": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "USACO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Lancer": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LiveCodeBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "HumanEvalFix": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "QuixBugs": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "IneqMath": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Omni-Math": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Reasoning Gym": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "KUMO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AIME 24 & 25": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ARC-AGI-2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AA-LCR": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SimpleQA": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GPQA Diamond": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Humanity’s Last Exam": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MMMLU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GAIA": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SkillsBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BFCL": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GAIA2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Terminal-Bench 2.0": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "DeepSynth": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Seal-0": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "WideSearch": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Spider 2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "DA-Code": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SpreadsheetBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "FinanceAgent": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LawBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "PIXIU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MedAgentBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LAB-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SLDBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BIX-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ReplicationBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "QCircuitBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ResearchCodeBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SciCode": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CodePDE": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "StrongReject": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CyberGym": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MMAU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T3",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table7.csv",
+   "where": "Table 7: one row per model-harness column, one column per benchmark row (54)",
+   "format": "csv",
+   "row_key": "Config",
+   "columns": {
+    "Model": "model-name",
+    "Harness": "harness",
+    "SWE-bench Verified": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Bench-Multilingual": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-smith": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CRUST-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GSO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Bench Pro": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWT Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Aider Polyglot": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AlgoTune": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CompileBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "FeatureBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BigCodeBench-Hard": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "USACO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Lancer": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LiveCodeBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "HumanEvalFix": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "QuixBugs": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "IneqMath": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Omni-Math": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Reasoning Gym": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "KUMO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AIME 24 & 25": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ARC-AGI-2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AA-LCR": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SimpleQA": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GPQA Diamond": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Humanity’s Last Exam": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MMMLU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GAIA": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SkillsBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BFCL": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GAIA2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Terminal-Bench 2.0": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "DeepSynth": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Seal-0": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "WideSearch": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Spider 2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "DA-Code": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SpreadsheetBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "FinanceAgent": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LawBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "PIXIU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MedAgentBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LAB-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SLDBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BIX-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ReplicationBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "QCircuitBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ResearchCodeBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SciCode": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CodePDE": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "StrongReject": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CyberGym": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MMAU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T4",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table8.csv",
+   "where": "Table 8: one row per model-harness column, one column per benchmark row (54)",
+   "format": "csv",
+   "row_key": "Config",
+   "columns": {
+    "Model": "model-name",
+    "Harness": "harness",
+    "SWE-bench Verified": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Bench-Multilingual": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-smith": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CRUST-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GSO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Bench Pro": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWT Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Aider Polyglot": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AlgoTune": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CompileBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "FeatureBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BigCodeBench-Hard": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "USACO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SWE-Lancer": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LiveCodeBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "HumanEvalFix": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "QuixBugs": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "IneqMath": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Omni-Math": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Reasoning Gym": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "KUMO": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AIME 24 & 25": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ARC-AGI-2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "AA-LCR": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SimpleQA": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GPQA Diamond": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Humanity’s Last Exam": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MMMLU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GAIA": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SkillsBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BFCL": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "GAIA2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Terminal-Bench 2.0": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "DeepSynth": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Seal-0": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "WideSearch": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "Spider 2": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "DA-Code": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SpreadsheetBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "FinanceAgent": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LawBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "PIXIU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MedAgentBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "LAB-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SLDBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "BIX-Bench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ReplicationBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "QCircuitBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "ResearchCodeBench": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "SciCode": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CodePDE": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "StrongReject": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "CyberGym": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "MMAU": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "we use each provider’s default settings for temperature, context length, reasoning effort, and other provider-specific parameters",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Appendix E.1, paragraph 'Language model services'",
+   "quote": "we use each provider’s default settings for temperature, context length, reasoning effort, and other provider-specific parameters",
+   "note": "the paper sends no effort / thinking parameter 'unless otherwise specified'; no model or table is said to be an exception"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "note",
+   "value": "for example, GPT-5.4 is evaluated with the default medium reasoning effort and Claude Opus 4.6 is evaluated with the default high effort",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Appendix E.1, paragraph 'Language model services'",
+   "quote": "for example, GPT-5.4 is evaluated with the default medium reasoning effort and Claude Opus 4.6 is evaluated with the default high effort",
+   "note": "the paper's own statement of what the provider defaults were for these two models; not an effort label (nothing is sent)"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "default temperature, context length, and reasoning effort",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Section 4.2 Evaluation Settings",
+   "quote": "All models run under default temperature, context length, and reasoning effort."
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "route",
+   "value": "the corresponding first-party provider API",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Appendix E.1, paragraph 'Language model services'",
+   "quote": "We access each language model through the corresponding first-party provider API",
+   "term": "maker-api"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "route",
+   "value": "first-party APIs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Section 4.2 Evaluation Settings",
+   "quote": "GPT-5.5, Claude Opus 4.8, and Gemini 3.1 Pro are served by first-party APIs",
+   "term": "maker-api"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "route",
+   "value": "served through OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Section 4.2 Evaluation Settings",
+   "quote": "the other six models are served through OpenRouter",
+   "term": "openrouter"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "aggregation",
+   "value": "3 trials",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Section 2 (Harbor Adapters evaluation), last paragraph",
+   "quote": "Each (benchmark, model, harness) setting is repeated for 3 trials",
+   "note": "the cell is the mean over the 3 trials of the (benchmark, model, harness) setting"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "headline-metric",
+   "value": "pass rate (%)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Table 1 caption",
+   "quote": "Results on Harbor-Index 1.0 (82 tasks): pass rate (%) and approximate per-run cost (USD) for a full Index run.",
+   "note": "the only score of Table 1"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "currency",
+   "value": "(USD)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Table 1 caption",
+   "quote": "approximate per-run cost (USD)",
+   "term": "USD"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "unit",
+   "value": "for a full Index run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Table 1 caption",
+   "quote": "for a full Index run",
+   "term": "per-full-run",
+   "note": "82 tasks, one complete Harbor-Index run (Figure 6 caption: 'Pass rate versus cost for one complete Harbor-Index run (82 tasks)')"
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "says": "cost-basis",
+   "value": "reconstruct token usage at official API pricing",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Table 1 caption",
+   "quote": "Costs reconstruct token usage at official API pricing for GPT/Claude/Gemini and OpenRouter pricing for the other models",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F12",
+   "about": null,
+   "says": "cost-method",
+   "value": "reconstruct token usage at official API pricing",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Table 1 caption",
+   "quote": "Costs reconstruct token usage at official API pricing for GPT/Claude/Gemini and OpenRouter pricing for the other models",
+   "term": "tokens×list",
+   "note": "the caption adds 'whose cost Claude Code on OpenRouter can inflate via low cache-hit rates'; no price date and no token counts are given"
+  },
+  {
+   "id": "F13",
+   "about": null,
+   "says": "note",
+   "value": "benchmark scores",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Appendix E.5 Evaluation Results",
+   "quote": "we present the benchmark scores for all model–harness configurations on all the benchmarks we study",
+   "note": "Tables 6-8 give 'benchmark scores' on a [0,1] scale (Table 15 caption); no other metric is named for them"
+  },
+  {
+   "id": "F14",
+   "about": null,
+   "says": "note",
+   "value": "Models marked † are closed-weight",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Table 1 caption",
+   "quote": "Models marked † are closed-weight (weights not publicly released); the rest are open-weight."
+  },
+  {
+   "id": "F15",
+   "about": null,
+   "says": "model-api-id",
+   "value": "gemini-3.1-pro-preview",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Appendix E.1, paragraph 'Model and harness matrix'",
+   "quote": "the job-configuration identifiers are gemini-3.1-pro-preview and gemini-3-flash-preview",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F16",
+   "about": null,
+   "says": "model-api-id",
+   "value": "gemini-3-flash-preview",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Appendix E.1, paragraph 'Model and harness matrix'",
+   "quote": "the job-configuration identifiers are gemini-3.1-pro-preview and gemini-3-flash-preview",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F17",
+   "about": null,
+   "says": "note",
+   "value": "Evaluations using these endpoints were run in April 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t6/src/html/2609.04298.html",
+   "where": "Appendix E.1, paragraph 'Model and harness matrix'",
+   "quote": "Evaluations using these endpoints were run in April 2026.",
+   "note": "the Gemini preview configurations of Tables 6-8 only; no day"
+  },
+  {
+   "id": "F18",
+   "about": "GPT-5.5†",
+   "says": "model-name",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row GPT-5.5†, column Model (the name before its † marker)",
+   "quote": "GPT-5.5†"
+  },
+  {
+   "id": "F19",
+   "about": "GPT-5.5†",
+   "says": "harness",
+   "value": "Codex",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row GPT-5.5†, column Agent",
+   "quote": "Codex"
+  },
+  {
+   "id": "F20",
+   "about": "GPT-5.5†",
+   "says": "model-name",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row GPT-5.5†, column Model (the name before its † marker)",
+   "quote": "GPT-5.5†"
+  },
+  {
+   "id": "F21",
+   "about": "GPT-5.5†",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F22",
+   "about": "Claude Opus 4.8†",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Claude Opus 4.8†, column Model (the name before its † marker)",
+   "quote": "Claude Opus 4.8†"
+  },
+  {
+   "id": "F23",
+   "about": "Claude Opus 4.8†",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Claude Opus 4.8†, column Agent",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F24",
+   "about": "Claude Opus 4.8†",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Claude Opus 4.8†, column Model (the name before its † marker)",
+   "quote": "Claude Opus 4.8†"
+  },
+  {
+   "id": "F25",
+   "about": "Claude Opus 4.8†",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F26",
+   "about": "Gemini 3.1 Pro†",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Gemini 3.1 Pro†, column Model (the name before its † marker)",
+   "quote": "Gemini 3.1 Pro†"
+  },
+  {
+   "id": "F27",
+   "about": "Gemini 3.1 Pro†",
+   "says": "harness",
+   "value": "Gemini CLI",
+   "term": "gemini-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Gemini 3.1 Pro†, column Agent",
+   "quote": "Gemini CLI"
+  },
+  {
+   "id": "F28",
+   "about": "Gemini 3.1 Pro†",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Gemini 3.1 Pro†, column Model (the name before its † marker)",
+   "quote": "Gemini 3.1 Pro†"
+  },
+  {
+   "id": "F29",
+   "about": "Gemini 3.1 Pro†",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F30",
+   "about": "GLM 5.2",
+   "says": "model-name",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row GLM 5.2, column Model",
+   "quote": "GLM 5.2"
+  },
+  {
+   "id": "F31",
+   "about": "GLM 5.2",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row GLM 5.2, column Agent",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F32",
+   "about": "GLM 5.2",
+   "says": "model-name",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row GLM 5.2, column Model",
+   "quote": "GLM 5.2"
+  },
+  {
+   "id": "F33",
+   "about": "GLM 5.2",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F34",
+   "about": "Kimi K2.6",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Kimi K2.6, column Model",
+   "quote": "Kimi K2.6"
+  },
+  {
+   "id": "F35",
+   "about": "Kimi K2.6",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Kimi K2.6, column Agent",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F36",
+   "about": "Kimi K2.6",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Kimi K2.6, column Model",
+   "quote": "Kimi K2.6"
+  },
+  {
+   "id": "F37",
+   "about": "Kimi K2.6",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F38",
+   "about": "MiniMax M3",
+   "says": "model-name",
+   "value": "MiniMax M3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row MiniMax M3, column Model",
+   "quote": "MiniMax M3"
+  },
+  {
+   "id": "F39",
+   "about": "MiniMax M3",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row MiniMax M3, column Agent",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F40",
+   "about": "MiniMax M3",
+   "says": "model-name",
+   "value": "MiniMax M3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row MiniMax M3, column Model",
+   "quote": "MiniMax M3"
+  },
+  {
+   "id": "F41",
+   "about": "MiniMax M3",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F42",
+   "about": "Qwen3.7 Max†",
+   "says": "model-name",
+   "value": "Qwen3.7 Max",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Qwen3.7 Max†, column Model (the name before its † marker)",
+   "quote": "Qwen3.7 Max†"
+  },
+  {
+   "id": "F43",
+   "about": "Qwen3.7 Max†",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Qwen3.7 Max†, column Agent",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F44",
+   "about": "Qwen3.7 Max†",
+   "says": "model-name",
+   "value": "Qwen3.7 Max",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row Qwen3.7 Max†, column Model (the name before its † marker)",
+   "quote": "Qwen3.7 Max†"
+  },
+  {
+   "id": "F45",
+   "about": "Qwen3.7 Max†",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F46",
+   "about": "DeepSeek V4 Pro",
+   "says": "model-name",
+   "value": "DeepSeek V4 Pro",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row DeepSeek V4 Pro, column Model",
+   "quote": "DeepSeek V4 Pro"
+  },
+  {
+   "id": "F47",
+   "about": "DeepSeek V4 Pro",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row DeepSeek V4 Pro, column Agent",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F48",
+   "about": "DeepSeek V4 Pro",
+   "says": "model-name",
+   "value": "DeepSeek V4 Pro",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row DeepSeek V4 Pro, column Model",
+   "quote": "DeepSeek V4 Pro"
+  },
+  {
+   "id": "F49",
+   "about": "DeepSeek V4 Pro",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  },
+  {
+   "id": "F50",
+   "about": "MiMo V2.5 Pro",
+   "says": "model-name",
+   "value": "MiMo V2.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row MiMo V2.5 Pro, column Model",
+   "quote": "MiMo V2.5 Pro"
+  },
+  {
+   "id": "F51",
+   "about": "MiMo V2.5 Pro",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row MiMo V2.5 Pro, column Agent",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F52",
+   "about": "MiMo V2.5 Pro",
+   "says": "model-name",
+   "value": "MiMo V2.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "row MiMo V2.5 Pro, column Model",
+   "quote": "MiMo V2.5 Pro"
+  },
+  {
+   "id": "F53",
+   "about": "MiMo V2.5 Pro",
+   "says": "harness",
+   "value": "Terminus-2",
+   "term": "terminus-2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.04298/evidence/table1.csv",
+   "where": "header of the column group 'Terminus-2' (columns 5 and 6)",
+   "quote": "Terminus-2 Pass %"
+  }
+ ]
+}

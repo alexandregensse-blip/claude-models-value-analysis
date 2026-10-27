@@ -1,0 +1,642 @@
+{
+ "urls": [
+  "https://cognition.com/frontiercode",
+  "https://cognition.com/data/frontiercode-leaderboard/data.json"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "captured": "2026-10-18T16:46:49Z",
+   "note": "data.json as saved by salvo s24/c1, copied to /work/.salvo14/mig/convert-cognition/evidence/data-2026-10-18.json (captured = file mtime); 90,180 bytes, identical to the copies saved by hk/* on 2026-10-20"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://cognition.com/data/frontiercode-leaderboard/data.json",
+   "captured": "2026-10-26T19:00:00Z",
+   "note": "data.json fetched again on 2026-10-26 by this conversion (/work/.salvo14/mig/convert-cognition/evidence/data-live-2026-10-26.json): same bytes (sha256 identical to S1)"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://cognition.com/frontiercode",
+   "captured": "2026-10-26T18:59:00Z",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "note": "leaderboard page HTML (changelog, methodology text); the table itself is rendered in the browser from data.json"
+  },
+  {
+   "id": "S4",
+   "kind": "fetch",
+   "url": "https://cognition.com/_next/static/immutable/chunks/0_uvie1vx3hyu.js",
+   "captured": "2026-10-26T19:00:00Z",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0_uvie1vx3hyu.js",
+   "note": "page JS: leaderboard table, revisions, sort order, 'none' effort"
+  },
+  {
+   "id": "S5",
+   "kind": "fetch",
+   "url": "https://cognition.com/_next/static/immutable/chunks/0zz3afiygnmf4.js",
+   "captured": "2026-10-26T19:00:00Z",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0zz3afiygnmf4.js",
+   "note": "page JS: metric and axis definitions (Score, Pass rate, Cost, Output tokens)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-cognition/evidence/data-2026-10-18.json": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
+  "/work/.salvo14/mig/convert-cognition/evidence/data-live-2026-10-26.json": "ff0040778b7bdf69c705ad7474f771fb5e53cfaf5cf8573b3a4614153543d75f",
+  "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html": "b8a69c26b439a3c8a7eaaf89f02dca35ec3f70733aab6d14b06e6e6fc7c341a1",
+  "/work/.salvo14/mig/convert-cognition/evidence/chunks/0_uvie1vx3hyu.js": "f6d6797bad044826bfb0f482cf1bccd38bb179c76ff8ebb1db5b75a92b3e64ab",
+  "/work/.salvo14/mig/convert-cognition/evidence/chunks/0zz3afiygnmf4.js": "4a9ce513fd223d1bc3e6fb89a3f09462b638c6f61ac8e2f94509d30ee1cf8196",
+  "/work/.salvo14/mig/convert-cognition/evidence/rows-v1_1-main.json": "c558a495ca078dc1f240ffbbb456c3366ec8a4f83ddc3bc019dd701942dcb10f",
+  "/work/.salvo14/mig/convert-cognition/evidence/rows-v1_1-extended.json": "596ac04770c479f5b6d7b8b49973c87722e3853f423bf3b7b491d3badbac6d93",
+  "/work/.salvo14/mig/convert-cognition/evidence/rows-v1-main.json": "fdcec2a06e1d091f20f1b58eac4e8579fcdd244cbc09a6bec065dd7296e909a5",
+  "/work/.salvo14/mig/convert-cognition/evidence/rows-v1-extended.json": "ae6f7b7ae110099cbe93fb8520e2224b567d342ea8a6304ea5ee17c310e6f7aa"
+ },
+ "harvested_at": "2026-10-18T16:46:49Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-cognition (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved data.json, page and JS chunks",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1_1-main.json",
+   "from": "/work/.salvo14/mig/convert-cognition/evidence/data-2026-10-18.json",
+   "tool": "flattening of data['v1_1']['data'][model][effort]['main'] (+ models' harness, from data['v1_1']['harness']) into one row per model and effort; values copied verbatim, null fields omitted"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1_1-extended.json",
+   "from": "/work/.salvo14/mig/convert-cognition/evidence/data-2026-10-18.json",
+   "tool": "flattening of data['v1_1']['data'][model][effort]['extended'] (+ models' harness, from data['v1_1']['harness']) into one row per model and effort; values copied verbatim, null fields omitted"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1-main.json",
+   "from": "/work/.salvo14/mig/convert-cognition/evidence/data-2026-10-18.json",
+   "tool": "flattening of data['v1']['data'][model][effort]['main'] (+ models' harness, from data['v1']['harness']) into one row per model and effort; values copied verbatim, null fields omitted"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1-extended.json",
+   "from": "/work/.salvo14/mig/convert-cognition/evidence/data-2026-10-18.json",
+   "tool": "flattening of data['v1']['data'][model][effort]['extended'] (+ models' harness, from data['v1']['harness']) into one row per model and effort; values copied verbatim, null fields omitted"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1_1-main.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "version": "note",
+    "subset": "note",
+    "model": "model-name",
+    "effort": "effort-label",
+    "harness": "harness",
+    "new_score": {
+     "says": "score",
+     "term": "weighted-rubric",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "correct": "note",
+    "flagged_rate": "note",
+    "duration_min": "note",
+    "tool_calls": "note",
+    "steps": "note"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1_1-extended.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "version": "note",
+    "subset": "note",
+    "model": "model-name",
+    "effort": "effort-label",
+    "harness": "harness",
+    "new_score": {
+     "says": "score",
+     "term": "score%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "correct": "note",
+    "flagged_rate": "note",
+    "duration_min": "note",
+    "tool_calls": "note",
+    "steps": "note"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T3",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1-main.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "version": "note",
+    "subset": "note",
+    "model": "model-name",
+    "effort": "effort-label",
+    "harness": "harness",
+    "new_score": {
+     "says": "score",
+     "term": "weighted-rubric",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "correct": "note"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T4",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/rows-v1-extended.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "version": "note",
+    "subset": "note",
+    "model": "model-name",
+    "effort": "effort-label",
+    "harness": "harness",
+    "new_score": {
+     "says": "score",
+     "term": "weighted-rubric",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "correct": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-cognition-frontiercode-leaderboard-2026-10-18",
+ "publisher": "cognition",
+ "facts": [
+  {
+   "says": "metric-definition",
+   "value": "is a weighted aggregate of the rubric items. Solutions that don’t pass blocking criteria receive 0.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0zz3afiygnmf4.js",
+   "where": "leaderboard chunk 0zz3afiygnmf4.js, metric table: new_score.body (the 'Score' toggle)",
+   "quote": "is a weighted aggregate of the rubric items. Solutions that don’t pass blocking criteria receive 0.",
+   "note": "the field new_score of data.json is the page's 'Score'; the same table also defines 'Pass rate' (field correct): the fraction of trials in which the model satisfies every blocker criterion",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "headline-metric",
+   "value": "score",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0_uvie1vx3hyu.js",
+   "where": "leaderboard chunk 0_uvie1vx3hyu.js, function p(): the rows are sorted by the Score (100*new_score)",
+   "quote": "l.sort((e,t)=>t.score-e.score)",
+   "note": "the page ranks the leaderboard by the Score; Pass rate, cost, tokens are further columns",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "cost",
+   "value": "Cost ($): the mean USD spend per rollout.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0zz3afiygnmf4.js",
+   "where": "leaderboard chunk 0zz3afiygnmf4.js, chart-axis table: cost.note",
+   "quote": "Cost ($): the mean USD spend per rollout.",
+   "note": "cost definition (the amount, not a cost fact itself)",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0zz3afiygnmf4.js",
+   "where": "leaderboard chunk 0zz3afiygnmf4.js, chart-axis table: cost.axisLabel / note",
+   "quote": "avg cost (USD) per rollout",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "per rollout",
+   "term": "per-rollout",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0zz3afiygnmf4.js",
+   "where": "leaderboard chunk 0zz3afiygnmf4.js, chart-axis table: cost.note and tokens.note (both 'per rollout')",
+   "quote": "Cost ($): the mean USD spend per rollout.",
+   "note": "cost and output tokens are means over rollouts; a rollout is one attempt at one task",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Output tokens: the mean number of tokens a model generated per rollout.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0zz3afiygnmf4.js",
+   "where": "leaderboard chunk 0zz3afiygnmf4.js, chart-axis table: tokens.note",
+   "quote": "Output tokens: the mean number of tokens a model generated per rollout.",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "none",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0_uvie1vx3hyu.js",
+   "where": "leaderboard chunk 0_uvie1vx3hyu.js, table row renderer: the effort is displayed unless it equals 'none'",
+   "quote": "\"none\"!==e.effort&&",
+   "note": "the page treats the effort key 'none' as no effort label; models whose efforts list is ['none'] (mini-swe-agent, chisel, cursor-cli harnesses) have no effort setting to display. This reading ('none' = no effort sent) is the converter's from the page code; the data file does not define it",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Current revision. Runs flagged for unfair internet use are zeroed.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0_uvie1vx3hyu.js",
+   "where": "leaderboard chunk 0_uvie1vx3hyu.js, revision list: FrontierCode 1.1",
+   "quote": "Current revision. Runs flagged for unfair internet use are zeroed.",
+   "id": "F8",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Original revision. Superseded by FrontierCode 1.1.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/chunks/0_uvie1vx3hyu.js",
+   "where": "leaderboard chunk 0_uvie1vx3hyu.js, revision list: FrontierCode 1.0",
+   "quote": "Original revision. Superseded by FrontierCode 1.1.",
+   "id": "F9",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added SWE-2.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 10, 2026 (Models)",
+   "quote": "Added SWE-2.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F10",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Claude Opus 5.5.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 22, 2026 (Models)",
+   "quote": "Added Claude Opus 5.5.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F11",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Claude Sonnet 5.5.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 28, 2026 (Models)",
+   "quote": "Added Claude Sonnet 5.5.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F12",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Claude Haiku 5.5.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Oct 7, 2026 (Models)",
+   "quote": "Added Claude Haiku 5.5.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F13",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added GPT-6 Sol and GPT-6 Luna.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 22, 2026 (Models)",
+   "quote": "Added GPT-6 Sol and GPT-6 Luna.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F14",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added GPT-6.1 Sol.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 29, 2026 (Models)",
+   "quote": "Added GPT-6.1 Sol.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F15",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Corrected Claude Fable 5 costs on the FrontierCode 1.0 leaderboard.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Jul 17, 2026 (Reporting)",
+   "quote": "Corrected Claude Fable 5 costs on the FrontierCode 1.0 leaderboard.",
+   "note": "statement about the pricing used for the cost figures",
+   "id": "F16",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Claude Fable 5.1.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 1, 2026 (Models)",
+   "quote": "Added Claude Fable 5.1.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F17",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Fixed GPT-6 Astra and GPT-5.6 Terra/Luna pricing, and updated GPT-5.6 Sol to promotional pricing.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 10, 2026 (Reporting)",
+   "quote": "Fixed GPT-6 Astra and GPT-5.6 Terra/Luna pricing, and updated GPT-5.6 Sol to promotional pricing.",
+   "note": "statement about the pricing used for the cost figures",
+   "id": "F18",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added GPT-6 Astra.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 3, 2026 (Models)",
+   "quote": "Added GPT-6 Astra.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F19",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Grok 4.6.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Aug 12, 2026 (Models)",
+   "quote": "Added Grok 4.6.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F20",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Grok 4.7.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 21, 2026 (Models)",
+   "quote": "Added Grok 4.7.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F21",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Updated GPT-5.6 Terra and Luna results to account for adjusted pricing.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Jul 30, 2026 (Reporting)",
+   "quote": "Updated GPT-5.6 Terra and Luna results to account for adjusted pricing.",
+   "note": "statement about the pricing used for the cost figures",
+   "id": "F22",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Claude Opus 5 and SWE-1.6.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Jul 24, 2026 (Models)",
+   "quote": "Added Claude Opus 5 and SWE-1.6.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F23",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Kimi K3.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Jul 27, 2026 (Models)",
+   "quote": "Added Kimi K3.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F24",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Updated Kimi K3 results to account for adjusted pricing.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Aug 6, 2026 (Reporting)",
+   "quote": "Updated Kimi K3 results to account for adjusted pricing.",
+   "note": "statement about the pricing used for the cost figures",
+   "id": "F25",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Gemini 3.6 Flash, GPT-5.4-mini, Claude Opus 4.6, Claude Sonnet 4.6, DeepSeek V4 Flash 0731, Nemotron 3 Ultra, and Mistral 3.5 Medium.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Aug 6, 2026 (Models)",
+   "quote": "Added Gemini 3.6 Flash, GPT-5.4-mini, Claude Opus 4.6, Claude Sonnet 4.6, DeepSeek V4 Flash 0731, Nemotron 3 Ultra, and Mistral 3.5 Medium.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F26",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Gemini 3.7 Flash.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Aug 13, 2026 (Models)",
+   "quote": "Added Gemini 3.7 Flash.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F27",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Updated Gemini 3.7 Flash results to account for adjusted pricing.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Aug 14, 2026 (Reporting)",
+   "quote": "Updated Gemini 3.7 Flash results to account for adjusted pricing.",
+   "note": "statement about the pricing used for the cost figures",
+   "id": "F28",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Mistral Large 4 (Preview).",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Oct 13, 2026 (Models)",
+   "quote": "Added Mistral Large 4 (Preview).",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F29",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Gemini 3.8 Flash, GLM 5.3, GLM 5.3 Flash, and DeepSeek V4 Pro 0813.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Sep 2, 2026 (Models)",
+   "quote": "Added Gemini 3.8 Flash, GLM 5.3, GLM 5.3 Flash, and DeepSeek V4 Pro 0813.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F30",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added DeepSeek V4.1 Flash.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Oct 13, 2026 (Models)",
+   "quote": "Added DeepSeek V4.1 Flash.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F31",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Added Gemini 4 Argon.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-cognition/evidence/cognition.com_frontiercode.html",
+   "where": "leaderboard page, changelog entry of Oct 9, 2026 (Models)",
+   "quote": "Added Gemini 4 Argon.",
+   "note": "date the model was added to the leaderboard (an upper bound for its run, not a run date)",
+   "id": "F32",
+   "about": null
+  }
+ ]
+}
