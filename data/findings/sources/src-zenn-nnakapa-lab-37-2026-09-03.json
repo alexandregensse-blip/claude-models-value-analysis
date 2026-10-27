@@ -1,0 +1,766 @@
+{
+ "id": "src-zenn-nnakapa-lab-37-2026-09-03",
+ "publisher": "zenn-nnakapa",
+ "urls": [
+  "https://zenn.dev/nnakapa/articles/lab-37-fable51-opus5-qcd"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zenn.dev/nnakapa/articles/lab-37-fable51-opus5-qcd",
+   "captured": "2026-10-19T07:43:32Z",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.html",
+   "note": "HTML saved by salvo g8 (file mtime); canonical link of the page: https://zenn.dev/nnakapa/articles/lab-37-fable51-opus5-qcd"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.html": "43b23dfb94a4884daf7c1459a5724c0e5e7f0a7151a154df1436d670c83941de",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt": "182ee65bbaf70b55b000c9014dea36a8b3246b1b4ea5a63c2d94e624069aa3cd",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv": "0b57b92a51ba26dfeffde279ad3dd6cdedb188459b49e6297ba924a180f7dc55"
+ },
+ "harvested_at": "2026-10-19T07:43:32Z",
+ "published": {
+  "value": "2026-09-03",
+  "where": "article header (the date under the title)",
+  "quote": "2026/09/03に公開",
+  "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt"
+ },
+ "salvo": "salvo14/mig/convert-zenn-nnakapa (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved HTML of the article (salvo g8 copy) and its text extraction htmltxt.py",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.html",
+   "tool": "htmltxt.py (this folder): text of the page body, one line per paragraph / list item / heading, one table cell per line ending \" |\"; script, style and head dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "tool": "qcd-gates.csv columns: gate_T1..T3 = the gate passes \"k/10\" of the three tasks as printed in the article (per-task table, column gate/10); gates = \"k of 30\", k = the sum of the three k (ours: the article prints no pooled count); cost_T1..T3 = the per-task median costs printed in the per-task table (column C 中央値($)), blank where the article prints none"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "where": "derived table of lab 37: one row per model x effort of the article",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "lab": "note",
+    "group_in_raw": "note",
+    "model_label": "note",
+    "effort": "note",
+    "gate_T1": "note",
+    "gate_T2": "note",
+    "gate_T3": "note",
+    "gates": {
+     "says": "score",
+     "term": "gate-pass%(3tasks-n30)",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_T1": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T2": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T3": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code v2.1.258",
+   "level": "written",
+   "form": "table-cell",
+   "where": "environment table, row 実行 CLI",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "実行 CLI | Claude Code v2.1.258（自動更新を止め、全試行で固定）",
+   "term": "claude-code"
+  },
+  {
+   "id": "F2",
+   "says": "model-api-id",
+   "about": "37-Opus5-low",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F3",
+   "says": "effort-label",
+   "about": "37-Opus5-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | low | 80% | ⚠️ | 79 | 0.54"
+  },
+  {
+   "id": "F4",
+   "says": "attempts",
+   "about": "37-Opus5-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | low | T1_txn | 10/10 | 100.0 | 26.03 | 0.1775"
+  },
+  {
+   "id": "F5",
+   "says": "attempts",
+   "about": "37-Opus5-low",
+   "value": "8/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | low | T2_param | 8/10 | 100.0 | 29.69 | 0.1864"
+  },
+  {
+   "id": "F6",
+   "says": "attempts",
+   "about": "37-Opus5-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | low | T3_optlock | 10/10 | 100.0 | 23.23 | 0.1733"
+  },
+  {
+   "id": "F7",
+   "says": "model-api-id",
+   "about": "37-Opus5-medium",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F8",
+   "says": "effort-label",
+   "about": "37-Opus5-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | medium | 90% | ⚠️ | 159 | 0.79"
+  },
+  {
+   "id": "F9",
+   "says": "attempts",
+   "about": "37-Opus5-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | medium | T1_txn | 10/10 | 96.36 | 57.96 | 0.2820"
+  },
+  {
+   "id": "F10",
+   "says": "attempts",
+   "about": "37-Opus5-medium",
+   "value": "9/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | medium | T2_param | 9/10 | 99.25 | 53.20 | 0.2611"
+  },
+  {
+   "id": "F11",
+   "says": "attempts",
+   "about": "37-Opus5-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | medium | T3_optlock | 10/10 | 100.0 | 47.35 | 0.2418"
+  },
+  {
+   "id": "F12",
+   "says": "model-api-id",
+   "about": "37-Opus5-high",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": "37-Opus5-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | high | 100% | ✅ | 247 | 1.10"
+  },
+  {
+   "id": "F14",
+   "says": "attempts",
+   "about": "37-Opus5-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | high | T1_txn | 10/10 | 98.18 | 100.13 | 0.4119"
+  },
+  {
+   "id": "F15",
+   "says": "attempts",
+   "about": "37-Opus5-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | high | T2_param | 10/10 | 99.25 | 78.52 | 0.3643"
+  },
+  {
+   "id": "F16",
+   "says": "attempts",
+   "about": "37-Opus5-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | high | T3_optlock | 10/10 | 100.0 | 68.41 | 0.3232"
+  },
+  {
+   "id": "F17",
+   "says": "model-api-id",
+   "about": "37-Opus5-xhigh",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F18",
+   "says": "effort-label",
+   "about": "37-Opus5-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | xhigh | 100% | ✅ | 348 | 1.44"
+  },
+  {
+   "id": "F19",
+   "says": "attempts",
+   "about": "37-Opus5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | xhigh | T1_txn | 10/10 | 98.18 | 148.12 | 0.5833"
+  },
+  {
+   "id": "F20",
+   "says": "attempts",
+   "about": "37-Opus5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | xhigh | T2_param | 10/10 | 99.25 | 110.54 | 0.4530"
+  },
+  {
+   "id": "F21",
+   "says": "attempts",
+   "about": "37-Opus5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | xhigh | T3_optlock | 10/10 | 100.0 | 88.83 | 0.3996"
+  },
+  {
+   "id": "F22",
+   "says": "model-api-id",
+   "about": "37-Fable51-low",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Claude Fable 5.1（claude-fable-5-1）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F23",
+   "says": "effort-label",
+   "about": "37-Fable51-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | low | 100% | ✅ | 95 | 1.10"
+  },
+  {
+   "id": "F24",
+   "says": "attempts",
+   "about": "37-Fable51-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | low | T1_txn | 10/10 | 100.0 | 30.14 | 0.3870"
+  },
+  {
+   "id": "F25",
+   "says": "attempts",
+   "about": "37-Fable51-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | low | T2_param | 10/10 | 100.0 | 37.14 | 0.3550"
+  },
+  {
+   "id": "F26",
+   "says": "attempts",
+   "about": "37-Fable51-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | low | T3_optlock | 10/10 | 100.0 | 28.03 | 0.3538"
+  },
+  {
+   "id": "F27",
+   "says": "model-api-id",
+   "about": "37-Fable51-medium",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Claude Fable 5.1（claude-fable-5-1）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F28",
+   "says": "effort-label",
+   "about": "37-Fable51-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | medium | 100% | ✅ | 126 | 1.30"
+  },
+  {
+   "id": "F29",
+   "says": "attempts",
+   "about": "37-Fable51-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | medium | T1_txn | 10/10 | 100.0 | 43.60 | 0.4295"
+  },
+  {
+   "id": "F30",
+   "says": "attempts",
+   "about": "37-Fable51-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | medium | T2_param | 10/10 | 100.0 | 41.44 | 0.4379"
+  },
+  {
+   "id": "F31",
+   "says": "attempts",
+   "about": "37-Fable51-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | medium | T3_optlock | 10/10 | 100.0 | 40.69 | 0.4289"
+  },
+  {
+   "id": "F32",
+   "says": "model-api-id",
+   "about": "37-Fable51-high",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Claude Fable 5.1（claude-fable-5-1）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F33",
+   "says": "effort-label",
+   "about": "37-Fable51-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | high | 100% | ✅ | 158 | 1.49"
+  },
+  {
+   "id": "F34",
+   "says": "attempts",
+   "about": "37-Fable51-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | high | T1_txn | 10/10 | 97.43 | 58.31 | 0.5398"
+  },
+  {
+   "id": "F35",
+   "says": "attempts",
+   "about": "37-Fable51-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | high | T2_param | 10/10 | 100.0 | 48.40 | 0.4811"
+  },
+  {
+   "id": "F36",
+   "says": "attempts",
+   "about": "37-Fable51-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | high | T3_optlock | 10/10 | 100.0 | 51.65 | 0.4725"
+  },
+  {
+   "id": "F37",
+   "says": "model-api-id",
+   "about": "37-Fable51-xhigh",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Claude Fable 5.1（claude-fable-5-1）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F38",
+   "says": "effort-label",
+   "about": "37-Fable51-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | xhigh | 100% | ✅ | 577 | 3.92"
+  },
+  {
+   "id": "F39",
+   "says": "attempts",
+   "about": "37-Fable51-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | xhigh | T1_txn | 10/10 | 96.36 | 216.51 | 1.4409"
+  },
+  {
+   "id": "F40",
+   "says": "attempts",
+   "about": "37-Fable51-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | xhigh | T2_param | 10/10 | 100.0 | 225.77 | 1.4947"
+  },
+  {
+   "id": "F41",
+   "says": "attempts",
+   "about": "37-Fable51-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Fable 5.1 | xhigh | T3_optlock | 10/10 | 100.0 | 134.21 | 0.9791"
+  },
+  {
+   "id": "F42",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "label",
+   "where": "summary table header \"コスト($)\"",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "コスト($)",
+   "term": "USD"
+  },
+  {
+   "id": "F43",
+   "says": "unit",
+   "about": null,
+   "value": "処理時間(s) とコスト($) は、各タスクの中央値をパターン単位で合算した値です",
+   "level": "written",
+   "form": "prose",
+   "where": "note under the summary table",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "処理時間(s) とコスト($) は、各タスクの中央値をパターン単位で合算した値です",
+   "term": "per-3task-suite"
+  },
+  {
+   "id": "F44",
+   "says": "cost-method",
+   "about": null,
+   "value": "コスト（C）は Claude Code が報告するトークン量に各モデルの単価を掛けて算出しました。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "コスト（C）は Claude Code が報告するトークン量に各モデルの単価を掛けて算出しました。",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F45",
+   "says": "cost-basis",
+   "about": null,
+   "value": "トークン量 × 単価と CLI が記録した金額との一致は、全 240 試行で確認済みです。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "トークン量 × 単価と CLI が記録した金額との一致は、全 240 試行で確認済みです。",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": null,
+   "value": "0.5372",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Opus5-low (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Opus5-low/cost_T1",
+    "T1/37-Opus5-low/cost_T2",
+    "T1/37-Opus5-low/cost_T3"
+   ]
+  },
+  {
+   "id": "F47",
+   "says": "price-table",
+   "about": null,
+   "value": "Opus 5 | $5 | $25 | $0.50",
+   "level": "written",
+   "form": "table-cell",
+   "where": "price table / paragraph of the article",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Opus 5 | $5 | $25 | $0.50"
+  },
+  {
+   "id": "F48",
+   "says": "cost",
+   "about": null,
+   "value": "0.7849",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Opus5-medium (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Opus5-medium/cost_T1",
+    "T1/37-Opus5-medium/cost_T2",
+    "T1/37-Opus5-medium/cost_T3"
+   ]
+  },
+  {
+   "id": "F49",
+   "says": "cost",
+   "about": null,
+   "value": "1.0994",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Opus5-high (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Opus5-high/cost_T1",
+    "T1/37-Opus5-high/cost_T2",
+    "T1/37-Opus5-high/cost_T3"
+   ]
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": null,
+   "value": "1.4359",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Opus5-xhigh (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Opus5-xhigh/cost_T1",
+    "T1/37-Opus5-xhigh/cost_T2",
+    "T1/37-Opus5-xhigh/cost_T3"
+   ]
+  },
+  {
+   "id": "F51",
+   "says": "cost",
+   "about": null,
+   "value": "1.0958",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Fable51-low (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Fable51-low/cost_T1",
+    "T1/37-Fable51-low/cost_T2",
+    "T1/37-Fable51-low/cost_T3"
+   ]
+  },
+  {
+   "id": "F52",
+   "says": "price-table",
+   "about": null,
+   "value": "Claude Fable 5.1 | $10 | $50 | $0.25",
+   "level": "written",
+   "form": "table-cell",
+   "where": "price table / paragraph of the article",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "Claude Fable 5.1 | $10 | $50 | $0.25"
+  },
+  {
+   "id": "F53",
+   "says": "cost",
+   "about": null,
+   "value": "1.2963",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Fable51-medium (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Fable51-medium/cost_T1",
+    "T1/37-Fable51-medium/cost_T2",
+    "T1/37-Fable51-medium/cost_T3"
+   ]
+  },
+  {
+   "id": "F54",
+   "says": "cost",
+   "about": null,
+   "value": "1.4934",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Fable51-high (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Fable51-high/cost_T1",
+    "T1/37-Fable51-high/cost_T2",
+    "T1/37-Fable51-high/cost_T3"
+   ]
+  },
+  {
+   "id": "F55",
+   "says": "cost",
+   "about": null,
+   "value": "3.9147",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 37-Fable51-xhigh (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab37.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/37-Fable51-xhigh/cost_T1",
+    "T1/37-Fable51-xhigh/cost_T2",
+    "T1/37-Fable51-xhigh/cost_T3"
+   ]
+  },
+  {
+   "id": "F56",
+   "says": "run-date",
+   "about": null,
+   "value": "2026-09-02",
+   "level": "written",
+   "form": "table-cell",
+   "where": "environment table, row 計測日",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+   "quote": "計測日 | 2026-09-02"
+  }
+ ]
+}

@@ -1,0 +1,3184 @@
+{
+ "id": "src-simplebench-leaderboard-2026-10-19",
+ "publisher": "simplebench",
+ "urls": [
+  "https://simple-bench.com/",
+  "https://simple-bench.com/static/js/leaderboard-data.js"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://simple-bench.com/static/js/leaderboard-data.js",
+   "captured": "2026-10-19T15:45:19Z",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "note": "payload read by salvo gs s9 on 19 Oct 2026 (src/sb.fetched \"Mon Oct 19 15:45:22 UTC 2026\"); the 14-Oct-era copy of salvo gt t8 has the same bytes"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js": "b2d0285ad3e4e15750ed20d39897e7558d1c05e8962e90c861b06f93c8019dc9",
+  "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench.html": "1f63d381dc81a9910fa7c4866d285c7191272b8e6b1d0b14d28fdd9560e782ad",
+  "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-index.js": "1451842a26f6edc73fd0fa4a8f1f5975e87a95928a75108069d39916feeaa700",
+  "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench.txt": "bc2bafac6eb96ed8500e4f106dc8e447009df39e685965778dc0dcfcfdb36556"
+ },
+ "harvested_at": "2026-10-19T15:45:19Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-simplebench (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved leaderboard payload (leaderboard-data.js), the page and its index.js (salvo gs s9)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench.txt",
+   "from": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench.html",
+   "tool": "htmltxt.py (this folder): text of the page, one line per block, one table cell per line ending \" |\""
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "aggregation",
+   "about": null,
+   "value": "Score (AVG@5)",
+   "level": "written",
+   "form": "label",
+   "where": "leaderboard column header",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench.txt",
+   "quote": "Score (AVG@5)"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "temperature: 0.7, top-p: 0.95 (except o1 series)",
+   "level": "written",
+   "form": "prose",
+   "where": "page: benchmark settings",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench.txt",
+   "quote": "temperature: 0.7, top-p: 0.95 (except o1 series)"
+  },
+  {
+   "id": "F3",
+   "says": "price-table",
+   "about": null,
+   "value": "USD per 1M tokens. Source: OpenRouter live model catalogue",
+   "level": "written",
+   "form": "code",
+   "where": "payload comment above modelMeta (undated catalogue: the prices are those of the read date)",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "// Pricing: USD per 1M tokens. Source: OpenRouter live model catalogue (openrouter.ai/api/v1/models)."
+  },
+  {
+   "id": "F4",
+   "says": "cost-method",
+   "about": null,
+   "value": "cpr = pre-computed cost to run the whole benchmark once (measured tokens x OpenRouter price)",
+   "level": "written",
+   "form": "code",
+   "where": "index.js comment on cpr (Perf / $ tab)",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-index.js",
+   "quote": "// cpr = pre-computed cost to run the whole benchmark once (measured tokens x OpenRouter price).",
+   "term": "publisher-table"
+  },
+  {
+   "id": "F5",
+   "says": "cost-basis",
+   "about": null,
+   "value": "measured tokens x OpenRouter price",
+   "level": "written",
+   "form": "code",
+   "where": "index.js comment on cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-index.js",
+   "quote": "// cpr = pre-computed cost to run the whole benchmark once (measured tokens x OpenRouter price).",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F6",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "code",
+   "where": "payload comment above modelMeta",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "// Pricing: USD per 1M tokens. Source: OpenRouter live model catalogue (openrouter.ai/api/v1/models).",
+   "term": "USD"
+  },
+  {
+   "id": "F7",
+   "says": "unit",
+   "about": null,
+   "value": "whole benchmark once",
+   "level": "written",
+   "form": "code",
+   "where": "index.js comment on cpr: the cost to run the whole benchmark once",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-index.js",
+   "quote": "// cpr = pre-computed cost to run the whole benchmark once (measured tokens x OpenRouter price).",
+   "term": "per-suite"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "3",
+   "value": "88.4%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 3 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"1st\",  model: \"Claude Opus 5.5\",            score: \"88.4%\", organization: \"Anthropic\",   dateAdded: \"2026-09-24\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "3",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 3, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"1st\",  model: \"Claude Opus 5.5\",            score: \"88.4%\", organization: \"Anthropic\",   dateAdded: \"2026-09-24\" },"
+  },
+  {
+   "id": "F10",
+   "says": "cost",
+   "about": "3",
+   "value": "2.74",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 124 (modelMeta \"Claude Opus 5.5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 5.5\":             { input:    4.0, output:    20.0, released: \"2026-09-22\", est: false, tout: 575, cpr: 2.74 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F11",
+   "says": "price-table",
+   "about": "3",
+   "value": "input: 4.0, output: 20.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 124 (modelMeta \"Claude Opus 5.5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 5.5\":             { input:    4.0, output:    20.0, released: \"2026-09-22\", est: false, tout: 575, cpr: 2.74 },"
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "4",
+   "value": "86.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 4 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"2nd\",  model: \"Claude Fable 5.1\",           score: \"86.6%\", organization: \"Anthropic\",   dateAdded: \"2026-09-03\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F13",
+   "says": "model-name",
+   "about": "4",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 4, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"2nd\",  model: \"Claude Fable 5.1\",           score: \"86.6%\", organization: \"Anthropic\",   dateAdded: \"2026-09-03\" },"
+  },
+  {
+   "id": "F14",
+   "says": "cost",
+   "about": "4",
+   "value": "6.25",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 129 (modelMeta \"Claude Fable 5.1\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Fable 5.1\":            { input:   10.0, output:    50.0, released: \"2026-09-01\", est: false, tout: 519, cpr: 6.25 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F15",
+   "says": "price-table",
+   "about": "4",
+   "value": "input: 10.0, output: 50.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 129 (modelMeta \"Claude Fable 5.1\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Fable 5.1\":            { input:   10.0, output:    50.0, released: \"2026-09-01\", est: false, tout: 519, cpr: 6.25 },"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "5",
+   "value": "86.5%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 5 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"3rd\",  model: \"GPT-6 Astra Pro\",            score: \"86.5%\", organization: \"OpenAI\",      dateAdded: \"2026-09-07\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "model-name",
+   "about": "5",
+   "value": "GPT-6 Astra Pro",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 5, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"3rd\",  model: \"GPT-6 Astra Pro\",            score: \"86.5%\", organization: \"OpenAI\",      dateAdded: \"2026-09-07\" },"
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": "5",
+   "value": "8.29",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 127 (modelMeta \"GPT-6 Astra Pro\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6 Astra Pro\":             { input:   10.0, output:    50.0, released: \"2026-09-04\", est: false, tout: 307, cpr: 8.29 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F19",
+   "says": "price-table",
+   "about": "5",
+   "value": "input: 10.0, output: 50.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 127 (modelMeta \"GPT-6 Astra Pro\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6 Astra Pro\":             { input:   10.0, output:    50.0, released: \"2026-09-04\", est: false, tout: 307, cpr: 8.29 },"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "7",
+   "value": "83.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 7 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"4th\",  model: \"GPT-6 Astra\",                score: \"83.6%\", organization: \"OpenAI\",      dateAdded: \"2026-09-07\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "7",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 7, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"4th\",  model: \"GPT-6 Astra\",                score: \"83.6%\", organization: \"OpenAI\",      dateAdded: \"2026-09-07\" },"
+  },
+  {
+   "id": "F22",
+   "says": "cost",
+   "about": "7",
+   "value": "1.92",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 128 (modelMeta \"GPT-6 Astra\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6 Astra\":                 { input:   10.0, output:    50.0, released: \"2026-09-04\", est: false, tout: 136, cpr: 1.92 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F23",
+   "says": "price-table",
+   "about": "7",
+   "value": "input: 10.0, output: 50.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 128 (modelMeta \"GPT-6 Astra\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6 Astra\":                 { input:   10.0, output:    50.0, released: \"2026-09-04\", est: false, tout: 136, cpr: 1.92 },"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "8",
+   "value": "82.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 8 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"5th\", model: \"GPT-6.1 Sol\",                score: \"82.9%\", organization: \"OpenAI\",      dateAdded: \"2026-10-01\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "8",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 8, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"5th\", model: \"GPT-6.1 Sol\",                score: \"82.9%\", organization: \"OpenAI\",      dateAdded: \"2026-10-01\" },"
+  },
+  {
+   "id": "F26",
+   "says": "cost",
+   "about": "8",
+   "value": "0.39",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 122 (modelMeta \"GPT-6.1 Sol\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6.1 Sol\":                 { input:    2.0, output:    10.0, released: \"2026-09-29\", est: false, tout: 140, cpr: 0.39 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F27",
+   "says": "price-table",
+   "about": "8",
+   "value": "input: 2.0, output: 10.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 122 (modelMeta \"GPT-6.1 Sol\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6.1 Sol\":                 { input:    2.0, output:    10.0, released: \"2026-09-29\", est: false, tout: 140, cpr: 0.39 },"
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "9",
+   "value": "82.4%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 9 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"6th\",  model: \"Gemini 3.8 Flash\",           score: \"82.4%\", organization: \"Google\",      dateAdded: \"2026-09-03\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F29",
+   "says": "model-name",
+   "about": "9",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 9, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"6th\",  model: \"Gemini 3.8 Flash\",           score: \"82.4%\", organization: \"Google\",      dateAdded: \"2026-09-03\" },"
+  },
+  {
+   "id": "F30",
+   "says": "cost",
+   "about": "9",
+   "value": "1.31",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 130 (modelMeta \"Gemini 3.8 Flash\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3.8 Flash\":            { input:   0.75, output:    3.75, released: \"2026-09-02\", est: false, tout: 1576, cpr: 1.31 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "price-table",
+   "about": "9",
+   "value": "input: 0.75, output: 3.75",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 130 (modelMeta \"Gemini 3.8 Flash\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3.8 Flash\":            { input:   0.75, output:    3.75, released: \"2026-09-02\", est: false, tout: 1576, cpr: 1.31 },"
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "10",
+   "value": "81.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 10 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"7th\",  model: \"Claude Fable\",                     score: \"81.9%\", organization: \"Anthropic\",   dateAdded: \"2026-06-10\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F33",
+   "says": "model-name",
+   "about": "10",
+   "value": "Claude Fable",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 10, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"7th\",  model: \"Claude Fable\",                     score: \"81.9%\", organization: \"Anthropic\",   dateAdded: \"2026-06-10\" },"
+  },
+  {
+   "id": "F34",
+   "says": "cost",
+   "about": "10",
+   "value": "8.13",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 137 (modelMeta \"Claude Fable\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Fable\":                { input:   10.0, output:    50.0, released: \"2026-06-09\", est: false, tout: 694, cpr: 8.13 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F35",
+   "says": "price-table",
+   "about": "10",
+   "value": "input: 10.0, output: 50.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 137 (modelMeta \"Claude Fable\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Fable\":                { input:   10.0, output:    50.0, released: \"2026-06-09\", est: false, tout: 694, cpr: 8.13 },"
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "12",
+   "value": "80.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 12 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"9th\",  model: \"Claude Opus 5\",           score: \"80.6%\", organization: \"Anthropic\",   dateAdded: \"2026-07-24\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F37",
+   "says": "model-name",
+   "about": "12",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 12, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"9th\",  model: \"Claude Opus 5\",           score: \"80.6%\", organization: \"Anthropic\",   dateAdded: \"2026-07-24\" },"
+  },
+  {
+   "id": "F38",
+   "says": "cost",
+   "about": "12",
+   "value": "4.57",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 147 (modelMeta \"Claude Opus 5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 5\":               { input:    5.0, output:    25.0, released: \"2026-07-24\", est: false, tout: 786, cpr: 4.57 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F39",
+   "says": "price-table",
+   "about": "12",
+   "value": "input: 5.0, output: 25.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 147 (modelMeta \"Claude Opus 5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 5\":               { input:    5.0, output:    25.0, released: \"2026-07-24\", est: false, tout: 786, cpr: 4.57 },"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "13",
+   "value": "79.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 13 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"10th\",  model: \"Gemini 3.1 Pro Preview\",           score: \"79.6%\", organization: \"Google\",      dateAdded: \"2026-02-17\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "model-name",
+   "about": "13",
+   "value": "Gemini 3.1 Pro Preview",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 13, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"10th\",  model: \"Gemini 3.1 Pro Preview\",           score: \"79.6%\", organization: \"Google\",      dateAdded: \"2026-02-17\" },"
+  },
+  {
+   "id": "F42",
+   "says": "cost",
+   "about": "13",
+   "value": "8.94",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 138 (modelMeta \"Gemini 3.1 Pro Preview\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3.1 Pro Preview\":      { input:    2.0, output:    12.0, released: \"2026-02-19\", est: false, tout: 3415, cpr: 8.94 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "says": "price-table",
+   "about": "13",
+   "value": "input: 2.0, output: 12.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 138 (modelMeta \"Gemini 3.1 Pro Preview\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3.1 Pro Preview\":      { input:    2.0, output:    12.0, released: \"2026-02-19\", est: false, tout: 3415, cpr: 8.94 },"
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "14",
+   "value": "76.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 14 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"11th\",  model: \"GPT-5.5 Pro\",                      score: \"76.9%\", organization: \"OpenAI\",      dateAdded: \"2026-04-24\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F45",
+   "says": "model-name",
+   "about": "14",
+   "value": "GPT-5.5 Pro",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 14, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"11th\",  model: \"GPT-5.5 Pro\",                      score: \"76.9%\", organization: \"OpenAI\",      dateAdded: \"2026-04-24\" },"
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": "14",
+   "value": "148.59",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 139 (modelMeta \"GPT-5.5 Pro\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.5 Pro\":                 { input:   30.0, output:   180.0, released: \"2026-04-24\", est: false, tout: 3787, cpr: 148.59 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "price-table",
+   "about": "14",
+   "value": "input: 30.0, output: 180.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 139 (modelMeta \"GPT-5.5 Pro\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.5 Pro\":                 { input:   30.0, output:   180.0, released: \"2026-04-24\", est: false, tout: 3787, cpr: 148.59 },"
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "15",
+   "value": "76.7%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 15 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"12th\",  model: \"Gemini 3.5 Flash\",                 score: \"76.7%\", organization: \"Google\",      dateAdded: \"2026-05-20\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F49",
+   "says": "model-name",
+   "about": "15",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 15, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"12th\",  model: \"Gemini 3.5 Flash\",                 score: \"76.7%\", organization: \"Google\",      dateAdded: \"2026-05-20\" },"
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": "15",
+   "value": "6.95",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 140 (modelMeta \"Gemini 3.5 Flash\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3.5 Flash\":            { input:    1.5, output:     9.0, released: \"2026-05-19\", est: false, tout: 3539, cpr: 6.95 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "says": "price-table",
+   "about": "15",
+   "value": "input: 1.5, output: 9.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 140 (modelMeta \"Gemini 3.5 Flash\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3.5 Flash\":            { input:    1.5, output:     9.0, released: \"2026-05-19\", est: false, tout: 3539, cpr: 6.95 },"
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "16",
+   "value": "76.4%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 16 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"13th\",  model: \"Gemini 3 Pro Preview\",             score: \"76.4%\", organization: \"Google\",      dateAdded: \"2025-11-18\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F53",
+   "says": "model-name",
+   "about": "16",
+   "value": "Gemini 3 Pro Preview",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 16, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"13th\",  model: \"Gemini 3 Pro Preview\",             score: \"76.4%\", organization: \"Google\",      dateAdded: \"2025-11-18\" },"
+  },
+  {
+   "id": "F54",
+   "says": "cost",
+   "about": "16",
+   "value": "14.31",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 141 (modelMeta \"Gemini 3 Pro Preview\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3 Pro Preview\":        { input:    2.0, output:    12.0, released: \"2025-11-18\", est: true, tout: 5486, cpr: 14.31 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F55",
+   "says": "price-table",
+   "about": "16",
+   "value": "input: 2.0, output: 12.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 141 (modelMeta \"Gemini 3 Pro Preview\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3 Pro Preview\":        { input:    2.0, output:    12.0, released: \"2025-11-18\", est: true, tout: 5486, cpr: 14.31 },"
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "17",
+   "value": "75.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 17 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"14th\", model: \"Grok 4.6\",                   score: \"75.9%\", organization: \"xAI\",         dateAdded: \"2026-08-13\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F57",
+   "says": "model-name",
+   "about": "17",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 17, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"14th\", model: \"Grok 4.6\",                   score: \"75.9%\", organization: \"xAI\",         dateAdded: \"2026-08-13\" },"
+  },
+  {
+   "id": "F58",
+   "says": "cost",
+   "about": "17",
+   "value": "4.87",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 134 (modelMeta \"Grok 4.6\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Grok 4.6\":                    { input:    2.0, output:     6.0, released: \"2026-08-12\", est: false, tout: 3621, cpr: 4.87 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F59",
+   "says": "price-table",
+   "about": "17",
+   "value": "input: 2.0, output: 6.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 134 (modelMeta \"Grok 4.6\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Grok 4.6\":                    { input:    2.0, output:     6.0, released: \"2026-08-12\", est: false, tout: 3621, cpr: 4.87 },"
+  },
+  {
+   "id": "F60",
+   "says": "score",
+   "about": "18",
+   "value": "75.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 18 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"15th\", model: \"Claude Sonnet 5.5\",           score: \"75.9%\", organization: \"Anthropic\",   dateAdded: \"2026-10-01\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F61",
+   "says": "model-name",
+   "about": "18",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 18, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"15th\", model: \"Claude Sonnet 5.5\",           score: \"75.9%\", organization: \"Anthropic\",   dateAdded: \"2026-10-01\" },"
+  },
+  {
+   "id": "F62",
+   "says": "cost",
+   "about": "18",
+   "value": "1.48",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 123 (modelMeta \"Claude Sonnet 5.5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Sonnet 5.5\":           { input:    2.0, output:    10.0, released: \"2026-09-28\", est: false, tout: 625, cpr: 1.48 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F63",
+   "says": "price-table",
+   "about": "18",
+   "value": "input: 2.0, output: 10.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 123 (modelMeta \"Claude Sonnet 5.5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Sonnet 5.5\":           { input:    2.0, output:    10.0, released: \"2026-09-28\", est: false, tout: 625, cpr: 1.48 },"
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "20",
+   "value": "73.1%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 20 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"17th\", model: \"GPT-6 Sol\",                  score: \"73.1%\", organization: \"OpenAI\",      dateAdded: \"2026-09-24\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F65",
+   "says": "model-name",
+   "about": "20",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 20, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"17th\", model: \"GPT-6 Sol\",                  score: \"73.1%\", organization: \"OpenAI\",      dateAdded: \"2026-09-24\" },"
+  },
+  {
+   "id": "F66",
+   "says": "cost",
+   "about": "20",
+   "value": "0.67",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 125 (modelMeta \"GPT-6 Sol\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6 Sol\":                   { input:    2.0, output:    10.0, released: \"2026-09-22\", est: false, tout: 267, cpr: 0.67 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F67",
+   "says": "price-table",
+   "about": "20",
+   "value": "input: 2.0, output: 10.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 125 (modelMeta \"GPT-6 Sol\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-6 Sol\":                   { input:    2.0, output:    10.0, released: \"2026-09-22\", est: false, tout: 267, cpr: 0.67 },"
+  },
+  {
+   "id": "F68",
+   "says": "score",
+   "about": "21",
+   "value": "71.7%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 21 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"18th\",  model: \"GPT-5.6 Sol Pro (xhigh)\",                  score: \"71.7%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F69",
+   "says": "model-name",
+   "about": "21",
+   "value": "GPT-5.6 Sol Pro",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 21, field model (the part before \"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"18th\",  model: \"GPT-5.6 Sol Pro (xhigh)\",                  score: \"71.7%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F70",
+   "says": "effort-label",
+   "about": "21",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 21, field model (\"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"18th\",  model: \"GPT-5.6 Sol Pro (xhigh)\",                  score: \"71.7%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F71",
+   "says": "cost",
+   "about": "21",
+   "value": "10.39",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 142 (modelMeta \"GPT-5.6 Sol Pro (xhigh)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Sol Pro (xhigh)\":             { input:    5.0, output:    30.0, released: \"2026-07-09\", est: false, tout: 1074, cpr: 10.39 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F72",
+   "says": "price-table",
+   "about": "21",
+   "value": "input: 5.0, output: 30.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 142 (modelMeta \"GPT-5.6 Sol Pro (xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Sol Pro (xhigh)\":             { input:    5.0, output:    30.0, released: \"2026-07-09\", est: false, tout: 1074, cpr: 10.39 },"
+  },
+  {
+   "id": "F73",
+   "says": "score",
+   "about": "22",
+   "value": "70.4%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 22 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"19th\",  model: \"Qwen 3.7 Max\",                     score: \"70.4%\", organization: \"Alibaba\",     dateAdded: \"2026-05-22\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "says": "model-name",
+   "about": "22",
+   "value": "Qwen 3.7 Max",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 22, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"19th\",  model: \"Qwen 3.7 Max\",                     score: \"70.4%\", organization: \"Alibaba\",     dateAdded: \"2026-05-22\" },"
+  },
+  {
+   "id": "F75",
+   "says": "cost",
+   "about": "22",
+   "value": "2.58",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 143 (modelMeta \"Qwen 3.7 Max\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.7 Max\":                { input:   1.25, output:    3.75, released: \"2026-05-21\", est: false, tout: 3117, cpr: 2.58 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F76",
+   "says": "price-table",
+   "about": "22",
+   "value": "input: 1.25, output: 3.75",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 143 (modelMeta \"Qwen 3.7 Max\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.7 Max\":                { input:   1.25, output:    3.75, released: \"2026-05-21\", est: false, tout: 3117, cpr: 2.58 },"
+  },
+  {
+   "id": "F77",
+   "says": "score",
+   "about": "23",
+   "value": "70.0%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 23 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"20th\",  model: \"Grok 4.5\",                         score: \"70.0%\", organization: \"xAI\",         dateAdded: \"2026-07-08\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F78",
+   "says": "model-name",
+   "about": "23",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 23, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"20th\",  model: \"Grok 4.5\",                         score: \"70.0%\", organization: \"xAI\",         dateAdded: \"2026-07-08\" },"
+  },
+  {
+   "id": "F79",
+   "says": "cost",
+   "about": "23",
+   "value": "6.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 144 (modelMeta \"Grok 4.5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Grok 4.5\":                    { input:    2.0, output:     6.0, released: \"2026-07-08\", est: false, tout: 4492, cpr: 6.0 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F80",
+   "says": "price-table",
+   "about": "23",
+   "value": "input: 2.0, output: 6.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 144 (modelMeta \"Grok 4.5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Grok 4.5\":                    { input:    2.0, output:     6.0, released: \"2026-07-08\", est: false, tout: 4492, cpr: 6.0 },"
+  },
+  {
+   "id": "F81",
+   "says": "score",
+   "about": "24",
+   "value": "69.0%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 24 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"21st\",  model: \"GPT-5.5\",                          score: \"69.0%\", organization: \"OpenAI\",      dateAdded: \"2026-04-24\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F82",
+   "says": "model-name",
+   "about": "24",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 24, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"21st\",  model: \"GPT-5.5\",                          score: \"69.0%\", organization: \"OpenAI\",      dateAdded: \"2026-04-24\" },"
+  },
+  {
+   "id": "F83",
+   "says": "cost",
+   "about": "24",
+   "value": "7.44",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 145 (modelMeta \"GPT-5.5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.5\":                     { input:    5.0, output:    30.0, released: \"2026-04-24\", est: false, tout: 1113, cpr: 7.44 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F84",
+   "says": "price-table",
+   "about": "24",
+   "value": "input: 5.0, output: 30.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 145 (modelMeta \"GPT-5.5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.5\":                     { input:    5.0, output:    30.0, released: \"2026-04-24\", est: false, tout: 1113, cpr: 7.44 },"
+  },
+  {
+   "id": "F85",
+   "says": "score",
+   "about": "25",
+   "value": "67.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 25 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"22nd\", model: \"Claude Opus 4.6\",                  score: \"67.6%\", organization: \"Anthropic\",   dateAdded: \"2026-02-17\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F86",
+   "says": "model-name",
+   "about": "25",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 25, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"22nd\", model: \"Claude Opus 4.6\",                  score: \"67.6%\", organization: \"Anthropic\",   dateAdded: \"2026-02-17\" },"
+  },
+  {
+   "id": "F87",
+   "says": "cost",
+   "about": "25",
+   "value": "2.79",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 146 (modelMeta \"Claude Opus 4.6\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.6\":             { input:    5.0, output:    25.0, released: \"2026-02-04\", est: false, tout: 473, cpr: 2.79 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F88",
+   "says": "price-table",
+   "about": "25",
+   "value": "input: 5.0, output: 25.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 146 (modelMeta \"Claude Opus 4.6\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.6\":             { input:    5.0, output:    25.0, released: \"2026-02-04\", est: false, tout: 473, cpr: 2.79 },"
+  },
+  {
+   "id": "F89",
+   "says": "score",
+   "about": "26",
+   "value": "66.7%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 26 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"23rd\", model: \"DeepSeek V4.1 Flash\",         score: \"66.7%\", organization: \"DeepSeek\",    dateAdded: \"2026-09-12\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F90",
+   "says": "model-name",
+   "about": "26",
+   "value": "DeepSeek V4.1 Flash",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 26, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"23rd\", model: \"DeepSeek V4.1 Flash\",         score: \"66.7%\", organization: \"DeepSeek\",    dateAdded: \"2026-09-12\" },"
+  },
+  {
+   "id": "F91",
+   "says": "cost",
+   "about": "26",
+   "value": "0.70",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 126 (modelMeta \"DeepSeek V4.1 Flash\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4.1 Flash\":         { input:   0.15, output:     0.6, released: \"2026-09-10\", est: false, tout: 5359, cpr: 0.70 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F92",
+   "says": "price-table",
+   "about": "26",
+   "value": "input: 0.15, output: 0.6",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 126 (modelMeta \"DeepSeek V4.1 Flash\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4.1 Flash\":         { input:   0.15, output:     0.6, released: \"2026-09-10\", est: false, tout: 5359, cpr: 0.70 },"
+  },
+  {
+   "id": "F93",
+   "says": "score",
+   "about": "27",
+   "value": "66.2%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 27 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"24th\", model: \"GLM 5.3\",                    score: \"66.2%\", organization: \"Z.ai\",       dateAdded: \"2026-08-19\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F94",
+   "says": "model-name",
+   "about": "27",
+   "value": "GLM 5.3",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 27, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"24th\", model: \"GLM 5.3\",                    score: \"66.2%\", organization: \"Z.ai\",       dateAdded: \"2026-08-19\" },"
+  },
+  {
+   "id": "F95",
+   "says": "cost",
+   "about": "27",
+   "value": "4.13",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 133 (modelMeta \"GLM 5.3\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5.3\":                     { input:    1.4, output:     4.4, released: \"2026-08-18\", est: false, tout: 4275, cpr: 4.13 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F96",
+   "says": "price-table",
+   "about": "27",
+   "value": "input: 1.4, output: 4.4",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 133 (modelMeta \"GLM 5.3\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5.3\":                     { input:    1.4, output:     4.4, released: \"2026-08-18\", est: false, tout: 4275, cpr: 4.13 },"
+  },
+  {
+   "id": "F97",
+   "says": "score",
+   "about": "28",
+   "value": "64.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 28 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"25th\", model: \"Claude Opus 4.8\",                  score: \"64.8%\", organization: \"Anthropic\",   dateAdded: \"2026-05-29\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F98",
+   "says": "model-name",
+   "about": "28",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 28, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"25th\", model: \"Claude Opus 4.8\",                  score: \"64.8%\", organization: \"Anthropic\",   dateAdded: \"2026-05-29\" },"
+  },
+  {
+   "id": "F99",
+   "says": "cost",
+   "about": "28",
+   "value": "2.49",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 148 (modelMeta \"Claude Opus 4.8\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.8\":             { input:    5.0, output:    25.0, released: \"2026-05-27\", est: false, tout: 402, cpr: 2.49 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F100",
+   "says": "price-table",
+   "about": "28",
+   "value": "input: 5.0, output: 25.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 148 (modelMeta \"Claude Opus 4.8\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.8\":             { input:    5.0, output:    25.0, released: \"2026-05-27\", est: false, tout: 402, cpr: 2.49 },"
+  },
+  {
+   "id": "F101",
+   "says": "score",
+   "about": "29",
+   "value": "64.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 29 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"26th\", model: \"GPT-5.6 Sol (xhigh)\",                      score: \"64.8%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F102",
+   "says": "model-name",
+   "about": "29",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 29, field model (the part before \"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"26th\", model: \"GPT-5.6 Sol (xhigh)\",                      score: \"64.8%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F103",
+   "says": "effort-label",
+   "about": "29",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 29, field model (\"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"26th\", model: \"GPT-5.6 Sol (xhigh)\",                      score: \"64.8%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F104",
+   "says": "cost",
+   "about": "29",
+   "value": "2.2",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 149 (modelMeta \"GPT-5.6 Sol (xhigh)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Sol (xhigh)\":                 { input:    5.0, output:    30.0, released: \"2026-07-09\", est: false, tout: 304, cpr: 2.2 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F105",
+   "says": "price-table",
+   "about": "29",
+   "value": "input: 5.0, output: 30.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 149 (modelMeta \"GPT-5.6 Sol (xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Sol (xhigh)\":                 { input:    5.0, output:    30.0, released: \"2026-07-09\", est: false, tout: 304, cpr: 2.2 },"
+  },
+  {
+   "id": "F106",
+   "says": "score",
+   "about": "30",
+   "value": "63.0%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 30 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"27th\", model: \"Qwen 3.6 Max Preview\",             score: \"63.0%\", organization: \"Alibaba\",     dateAdded: \"2026-05-20\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F107",
+   "says": "model-name",
+   "about": "30",
+   "value": "Qwen 3.6 Max Preview",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 30, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"27th\", model: \"Qwen 3.6 Max Preview\",             score: \"63.0%\", organization: \"Alibaba\",     dateAdded: \"2026-05-20\" },"
+  },
+  {
+   "id": "F108",
+   "says": "cost",
+   "about": "30",
+   "value": "4.07",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 150 (modelMeta \"Qwen 3.6 Max Preview\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.6 Max Preview\":        { input:   1.04, output:    6.24, released: \"2026-04-27\", est: false, tout: 2980, cpr: 4.07 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F109",
+   "says": "price-table",
+   "about": "30",
+   "value": "input: 1.04, output: 6.24",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 150 (modelMeta \"Qwen 3.6 Max Preview\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.6 Max Preview\":        { input:   1.04, output:    6.24, released: \"2026-04-27\", est: false, tout: 2980, cpr: 4.07 },"
+  },
+  {
+   "id": "F110",
+   "says": "score",
+   "about": "31",
+   "value": "62.5%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 31 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"28th\", model: \"Qwen 3.8 2.4T A95B\",         score: \"62.5%\", organization: \"Alibaba\",     dateAdded: \"2026-08-13\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F111",
+   "says": "model-name",
+   "about": "31",
+   "value": "Qwen 3.8 2.4T A95B",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 31, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"28th\", model: \"Qwen 3.8 2.4T A95B\",         score: \"62.5%\", organization: \"Alibaba\",     dateAdded: \"2026-08-13\" },"
+  },
+  {
+   "id": "F112",
+   "says": "cost",
+   "about": "31",
+   "value": "13.88",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 136 (modelMeta \"Qwen 3.8 2.4T A95B\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.8 2.4T A95B\":          { input:    2.0, output:     6.0, released: \"2026-08-12\", est: false, tout: 10618, cpr: 13.88 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F113",
+   "says": "price-table",
+   "about": "31",
+   "value": "input: 2.0, output: 6.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 136 (modelMeta \"Qwen 3.8 2.4T A95B\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.8 2.4T A95B\":          { input:    2.0, output:     6.0, released: \"2026-08-12\", est: false, tout: 10618, cpr: 13.88 },"
+  },
+  {
+   "id": "F114",
+   "says": "score",
+   "about": "33",
+   "value": "62.0%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 33 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"30th\", model: \"Claude Opus 4.5\",                  score: \"62.0%\", organization: \"Anthropic\",   dateAdded: \"2025-11-20\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F115",
+   "says": "model-name",
+   "about": "33",
+   "value": "Claude Opus 4.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 33, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"30th\", model: \"Claude Opus 4.5\",                  score: \"62.0%\", organization: \"Anthropic\",   dateAdded: \"2025-11-20\" },"
+  },
+  {
+   "id": "F116",
+   "says": "cost",
+   "about": "33",
+   "value": "2.79",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 152 (modelMeta \"Claude Opus 4.5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.5\":             { input:    5.0, output:    25.0, released: \"2025-11-24\", est: false, tout: 471, cpr: 2.79 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F117",
+   "says": "price-table",
+   "about": "33",
+   "value": "input: 5.0, output: 25.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 152 (modelMeta \"Claude Opus 4.5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.5\":             { input:    5.0, output:    25.0, released: \"2025-11-24\", est: false, tout: 471, cpr: 2.79 },"
+  },
+  {
+   "id": "F118",
+   "says": "score",
+   "about": "34",
+   "value": "61.7%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 34 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"31st\", model: \"Claude Opus 4.7\",                  score: \"61.7%\", organization: \"Anthropic\",   dateAdded: \"2026-04-22\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F119",
+   "says": "model-name",
+   "about": "34",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 34, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"31st\", model: \"Claude Opus 4.7\",                  score: \"61.7%\", organization: \"Anthropic\",   dateAdded: \"2026-04-22\" },"
+  },
+  {
+   "id": "F120",
+   "says": "cost",
+   "about": "34",
+   "value": "2.95",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 153 (modelMeta \"Claude Opus 4.7\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.7\":             { input:    5.0, output:    25.0, released: \"2026-04-16\", est: false, tout: 486, cpr: 2.95 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F121",
+   "says": "price-table",
+   "about": "34",
+   "value": "input: 5.0, output: 25.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 153 (modelMeta \"Claude Opus 4.7\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Opus 4.7\":             { input:    5.0, output:    25.0, released: \"2026-04-16\", est: false, tout: 486, cpr: 2.95 },"
+  },
+  {
+   "id": "F122",
+   "says": "score",
+   "about": "36",
+   "value": "61.1%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 36 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"33rd\", model: \"Gemini 3 Flash Preview\",           score: \"61.1%\", organization: \"Google\",      dateAdded: \"2025-12-19\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F123",
+   "says": "model-name",
+   "about": "36",
+   "value": "Gemini 3 Flash Preview",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 36, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"33rd\", model: \"Gemini 3 Flash Preview\",           score: \"61.1%\", organization: \"Google\",      dateAdded: \"2025-12-19\" },"
+  },
+  {
+   "id": "F124",
+   "says": "cost",
+   "about": "36",
+   "value": "2.22",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 155 (modelMeta \"Gemini 3 Flash Preview\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3 Flash Preview\":      { input:    0.5, output:     3.0, released: \"2025-12-17\", est: false, tout: 3394, cpr: 2.22 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F125",
+   "says": "price-table",
+   "about": "36",
+   "value": "input: 0.5, output: 3.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 155 (modelMeta \"Gemini 3 Flash Preview\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Gemini 3 Flash Preview\":      { input:    0.5, output:     3.0, released: \"2025-12-17\", est: false, tout: 3394, cpr: 2.22 },"
+  },
+  {
+   "id": "F126",
+   "says": "score",
+   "about": "37",
+   "value": "61.1%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 37 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"34th\", model: \"DeepSeek V4 Flash\",       score: \"61.1%\", organization: \"DeepSeek\",    dateAdded: \"2026-08-03\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F127",
+   "says": "model-name",
+   "about": "37",
+   "value": "DeepSeek V4 Flash",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 37, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"34th\", model: \"DeepSeek V4 Flash\",       score: \"61.1%\", organization: \"DeepSeek\",    dateAdded: \"2026-08-03\" },"
+  },
+  {
+   "id": "F128",
+   "says": "cost",
+   "about": "37",
+   "value": "0.30",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 173 (modelMeta \"DeepSeek V4 Flash\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4 Flash\":           { input:   0.14, output:    0.28, released: \"2026-07-31\", est: false, tout: 4846, cpr: 0.30 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F129",
+   "says": "price-table",
+   "about": "37",
+   "value": "input: 0.14, output: 0.28",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 173 (modelMeta \"DeepSeek V4 Flash\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4 Flash\":           { input:   0.14, output:    0.28, released: \"2026-07-31\", est: false, tout: 4846, cpr: 0.30 },"
+  },
+  {
+   "id": "F130",
+   "says": "score",
+   "about": "38",
+   "value": "60.7%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 38 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"35th\", model: \"Kimi K3 (max)\",                 score: \"60.7%\", organization: \"Moonshot AI\", dateAdded: \"2026-07-17\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F131",
+   "says": "model-name",
+   "about": "38",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 38, field model (the part before \"(max)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"35th\", model: \"Kimi K3 (max)\",                 score: \"60.7%\", organization: \"Moonshot AI\", dateAdded: \"2026-07-17\" },"
+  },
+  {
+   "id": "F132",
+   "says": "effort-label",
+   "about": "38",
+   "value": "max",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 38, field model (\"(max)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"35th\", model: \"Kimi K3 (max)\",                 score: \"60.7%\", organization: \"Moonshot AI\", dateAdded: \"2026-07-17\" },"
+  },
+  {
+   "id": "F133",
+   "says": "cost",
+   "about": "38",
+   "value": "15.41",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 218 (modelMeta \"Kimi K3 (max)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K3 (max)\":                     { input:    3.0, output:    15.0, released: \"2026-07-16\", est: false, tout: 4699, cpr: 15.41 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F134",
+   "says": "price-table",
+   "about": "38",
+   "value": "input: 3.0, output: 15.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 218 (modelMeta \"Kimi K3 (max)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K3 (max)\":                     { input:    3.0, output:    15.0, released: \"2026-07-16\", est: false, tout: 4699, cpr: 15.41 },"
+  },
+  {
+   "id": "F135",
+   "says": "score",
+   "about": "39",
+   "value": "60.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 39 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"36th\", model: \"Claude Sonnet 5\",                  score: \"60.6%\", organization: \"Anthropic\",   dateAdded: \"2026-07-09\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F136",
+   "says": "model-name",
+   "about": "39",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 39, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"36th\", model: \"Claude Sonnet 5\",                  score: \"60.6%\", organization: \"Anthropic\",   dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F137",
+   "says": "cost",
+   "about": "39",
+   "value": "4.15",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 220 (modelMeta \"Claude Sonnet 5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Sonnet 5\":             { input:    2.0, output:    10.0, released: \"2026-06-30\", est: false, tout: 1863, cpr: 4.15 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F138",
+   "says": "price-table",
+   "about": "39",
+   "value": "input: 2.0, output: 10.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 220 (modelMeta \"Claude Sonnet 5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude Sonnet 5\":             { input:    2.0, output:    10.0, released: \"2026-06-30\", est: false, tout: 1863, cpr: 4.15 },"
+  },
+  {
+   "id": "F139",
+   "says": "score",
+   "about": "41",
+   "value": "60.2%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 41 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"38th\", model: \"Qwen 3.8 27B\",               score: \"60.2%\", organization: \"Alibaba\",     dateAdded: \"2026-08-20\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F140",
+   "says": "model-name",
+   "about": "41",
+   "value": "Qwen 3.8 27B",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 41, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"38th\", model: \"Qwen 3.8 27B\",               score: \"60.2%\", organization: \"Alibaba\",     dateAdded: \"2026-08-20\" },"
+  },
+  {
+   "id": "F141",
+   "says": "cost",
+   "about": "41",
+   "value": "8.88",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 132 (modelMeta \"Qwen 3.8 27B\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.8 27B\":                { input:   0.45, output:     3.2, released: \"2026-08-14\", est: false, tout: 12809, cpr: 8.88 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F142",
+   "says": "price-table",
+   "about": "41",
+   "value": "input: 0.45, output: 3.2",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 132 (modelMeta \"Qwen 3.8 27B\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Qwen 3.8 27B\":                { input:   0.45, output:     3.2, released: \"2026-08-14\", est: false, tout: 12809, cpr: 8.88 },"
+  },
+  {
+   "id": "F143",
+   "says": "score",
+   "about": "42",
+   "value": "60.0%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 42 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"39th\", model: \"Claude 4.1 Opus\",                  score: \"60.0%\", organization: \"Anthropic\",   dateAdded: null },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F144",
+   "says": "model-name",
+   "about": "42",
+   "value": "Claude 4.1 Opus",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 42, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"39th\", model: \"Claude 4.1 Opus\",                  score: \"60.0%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F145",
+   "says": "score",
+   "about": "43",
+   "value": "58.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 43 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"40th\", model: \"Claude 4 Opus\",                    score: \"58.8%\", organization: \"Anthropic\",   dateAdded: null },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F146",
+   "says": "model-name",
+   "about": "43",
+   "value": "Claude 4 Opus",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 43, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"40th\", model: \"Claude 4 Opus\",                    score: \"58.8%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F147",
+   "says": "score",
+   "about": "44",
+   "value": "58.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 44 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"41st\", model: \"GLM 5.2\",                          score: \"58.8%\", organization: \"Z.ai\",        dateAdded: \"2026-06-17\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F148",
+   "says": "model-name",
+   "about": "44",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 44, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"41st\", model: \"GLM 5.2\",                          score: \"58.8%\", organization: \"Z.ai\",        dateAdded: \"2026-06-17\" },"
+  },
+  {
+   "id": "F149",
+   "says": "cost",
+   "about": "44",
+   "value": "1.37",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 159 (modelMeta \"GLM 5.2\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5.2\":                     { input:   0.54, output:    1.76, released: \"2026-06-16\", est: false, tout: 3541, cpr: 1.37 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F150",
+   "says": "price-table",
+   "about": "44",
+   "value": "input: 0.54, output: 1.76",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 159 (modelMeta \"GLM 5.2\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5.2\":                     { input:   0.54, output:    1.76, released: \"2026-06-16\", est: false, tout: 3541, cpr: 1.37 },"
+  },
+  {
+   "id": "F151",
+   "says": "score",
+   "about": "45",
+   "value": "57.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 45 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"42nd\", model: \"Kimi K2.7 Code\",                   score: \"57.9%\", organization: \"Moonshot AI\", dateAdded: \"2026-07-09\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F152",
+   "says": "model-name",
+   "about": "45",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 45, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"42nd\", model: \"Kimi K2.7 Code\",                   score: \"57.9%\", organization: \"Moonshot AI\", dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F153",
+   "says": "cost",
+   "about": "45",
+   "value": "2.86",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 217 (modelMeta \"Kimi K2.7 Code\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K2.7 Code\":                   { input:   0.72, output:     3.5, released: \"2026-06-12\", est: false, tout: 3741, cpr: 2.86 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F154",
+   "says": "price-table",
+   "about": "45",
+   "value": "input: 0.72, output: 3.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 217 (modelMeta \"Kimi K2.7 Code\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K2.7 Code\":                   { input:   0.72, output:     3.5, released: \"2026-06-12\", est: false, tout: 3741, cpr: 2.86 },"
+  },
+  {
+   "id": "F155",
+   "says": "score",
+   "about": "46",
+   "value": "57.4%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 46 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"43rd\", model: \"GPT-5.2 Pro (xhigh)\",              score: \"57.4%\", organization: \"OpenAI\",      dateAdded: \"2025-12-12\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F156",
+   "says": "model-name",
+   "about": "46",
+   "value": "GPT-5.2 Pro",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 46, field model (the part before \"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"43rd\", model: \"GPT-5.2 Pro (xhigh)\",              score: \"57.4%\", organization: \"OpenAI\",      dateAdded: \"2025-12-12\" },"
+  },
+  {
+   "id": "F157",
+   "says": "effort-label",
+   "about": "46",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 46, field model (\"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"43rd\", model: \"GPT-5.2 Pro (xhigh)\",              score: \"57.4%\", organization: \"OpenAI\",      dateAdded: \"2025-12-12\" },"
+  },
+  {
+   "id": "F158",
+   "says": "cost",
+   "about": "46",
+   "value": "42.86",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 160 (modelMeta \"GPT-5.2 Pro (xhigh)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.2 Pro (xhigh)\":         { input:   21.0, output:   168.0, released: \"2025-12-10\", est: false, tout: 1154, cpr: 42.86 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F159",
+   "says": "price-table",
+   "about": "46",
+   "value": "input: 21.0, output: 168.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 160 (modelMeta \"GPT-5.2 Pro (xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.2 Pro (xhigh)\":         { input:   21.0, output:   168.0, released: \"2025-12-10\", est: false, tout: 1154, cpr: 42.86 },"
+  },
+  {
+   "id": "F160",
+   "says": "score",
+   "about": "48",
+   "value": "56.0%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 48 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"45th\", model: \"Grok 4.1 Fast\",                    score: \"56.0%\", organization: \"xAI\",         dateAdded: \"2025-11-20\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F161",
+   "says": "model-name",
+   "about": "48",
+   "value": "Grok 4.1 Fast",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 48, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"45th\", model: \"Grok 4.1 Fast\",                    score: \"56.0%\", organization: \"xAI\",         dateAdded: \"2025-11-20\" },"
+  },
+  {
+   "id": "F162",
+   "says": "cost",
+   "about": "48",
+   "value": "0.57",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 162 (modelMeta \"Grok 4.1 Fast\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Grok 4.1 Fast\":               { input:    0.2, output:     0.5, released: \"2025-11-20\", est: true, tout: 5117, cpr: 0.57 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F163",
+   "says": "price-table",
+   "about": "48",
+   "value": "input: 0.2, output: 0.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 162 (modelMeta \"Grok 4.1 Fast\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Grok 4.1 Fast\":               { input:    0.2, output:     0.5, released: \"2025-11-20\", est: true, tout: 5117, cpr: 0.57 },"
+  },
+  {
+   "id": "F164",
+   "says": "score",
+   "about": "49",
+   "value": "55.1%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 49 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"46th\", model: \"GLM 5.1\",                          score: \"55.1%\", organization: \"Z.ai\",        dateAdded: \"2026-07-09\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F165",
+   "says": "model-name",
+   "about": "49",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 49, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"46th\", model: \"GLM 5.1\",                          score: \"55.1%\", organization: \"Z.ai\",        dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F166",
+   "says": "cost",
+   "about": "49",
+   "value": "8.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 221 (modelMeta \"GLM 5.1\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5.1\":                    { input:   0.97, output:    3.04, released: \"2026-04-07\", est: false, tout: 12113, cpr: 8.0 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F167",
+   "says": "price-table",
+   "about": "49",
+   "value": "input: 0.97, output: 3.04",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 221 (modelMeta \"GLM 5.1\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5.1\":                    { input:   0.97, output:    3.04, released: \"2026-04-07\", est: false, tout: 12113, cpr: 8.0 },"
+  },
+  {
+   "id": "F168",
+   "says": "score",
+   "about": "51",
+   "value": "54.3%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 51 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"48th\", model: \"Claude 4.5 Sonnet\",                score: \"54.3%\", organization: \"Anthropic\",   dateAdded: null },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F169",
+   "says": "model-name",
+   "about": "51",
+   "value": "Claude 4.5 Sonnet",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 51, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"48th\", model: \"Claude 4.5 Sonnet\",                score: \"54.3%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F170",
+   "says": "cost",
+   "about": "51",
+   "value": "1.54",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 163 (modelMeta \"Claude 4.5 Sonnet\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude 4.5 Sonnet\":           { input:    3.0, output:    15.0, released: \"2025-09-29\", est: false, tout: 430, cpr: 1.54 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F171",
+   "says": "price-table",
+   "about": "51",
+   "value": "input: 3.0, output: 15.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 163 (modelMeta \"Claude 4.5 Sonnet\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Claude 4.5 Sonnet\":           { input:    3.0, output:    15.0, released: \"2025-09-29\", est: false, tout: 430, cpr: 1.54 },"
+  },
+  {
+   "id": "F172",
+   "says": "score",
+   "about": "52",
+   "value": "53.2%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 52 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"49th\", model: \"GPT-5.1 (high)\",                   score: \"53.2%\", organization: \"OpenAI\",      dateAdded: \"2025-11-16\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F173",
+   "says": "model-name",
+   "about": "52",
+   "value": "GPT-5.1",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 52, field model (the part before \"(high)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"49th\", model: \"GPT-5.1 (high)\",                   score: \"53.2%\", organization: \"OpenAI\",      dateAdded: \"2025-11-16\" },"
+  },
+  {
+   "id": "F174",
+   "says": "effort-label",
+   "about": "52",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 52, field model (\"(high)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"49th\", model: \"GPT-5.1 (high)\",                   score: \"53.2%\", organization: \"OpenAI\",      dateAdded: \"2025-11-16\" },"
+  },
+  {
+   "id": "F175",
+   "says": "cost",
+   "about": "52",
+   "value": "2.1",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 164 (modelMeta \"GPT-5.1 (high)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.1 (high)\":              { input:   1.25, output:    10.0, released: \"2025-11-13\", est: false, tout: 944, cpr: 2.1 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F176",
+   "says": "price-table",
+   "about": "52",
+   "value": "input: 1.25, output: 10.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 164 (modelMeta \"GPT-5.1 (high)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.1 (high)\":              { input:   1.25, output:    10.0, released: \"2025-11-13\", est: false, tout: 944, cpr: 2.1 },"
+  },
+  {
+   "id": "F177",
+   "says": "score",
+   "about": "53",
+   "value": "53.2%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 53 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"50th\", model: \"GLM 5\",                            score: \"53.2%\", organization: \"Zhipu AI\",    dateAdded: \"2026-02-17\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F178",
+   "says": "model-name",
+   "about": "53",
+   "value": "GLM 5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 53, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"50th\", model: \"GLM 5\",                            score: \"53.2%\", organization: \"Zhipu AI\",    dateAdded: \"2026-02-17\" },"
+  },
+  {
+   "id": "F179",
+   "says": "cost",
+   "about": "53",
+   "value": "4.37",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 165 (modelMeta \"GLM 5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5\":                       { input:    0.6, output:    1.92, released: \"2026-02-11\", est: false, tout: 10475, cpr: 4.37 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F180",
+   "says": "price-table",
+   "about": "53",
+   "value": "input: 0.6, output: 1.92",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 165 (modelMeta \"GLM 5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 5\":                       { input:    0.6, output:    1.92, released: \"2026-02-11\", est: false, tout: 10475, cpr: 4.37 },"
+  },
+  {
+   "id": "F181",
+   "says": "score",
+   "about": "55",
+   "value": "52.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 55 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"52nd\", model: \"DeepSeek 3.2 Speciale\",            score: \"52.6%\", organization: \"DeepSeek\",    dateAdded: \"2025-12-12\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F182",
+   "says": "model-name",
+   "about": "55",
+   "value": "DeepSeek 3.2 Speciale",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 55, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"52nd\", model: \"DeepSeek 3.2 Speciale\",            score: \"52.6%\", organization: \"DeepSeek\",    dateAdded: \"2025-12-12\" },"
+  },
+  {
+   "id": "F183",
+   "says": "cost",
+   "about": "55",
+   "value": "0.59",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 167 (modelMeta \"DeepSeek 3.2 Speciale\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek 3.2 Speciale\":       { input: 0.2288, output:  0.3432, released: \"2025-12-01\", est: false, tout: 7882, cpr: 0.59 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F184",
+   "says": "price-table",
+   "about": "55",
+   "value": "input: 0.2288, output: 0.3432",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 167 (modelMeta \"DeepSeek 3.2 Speciale\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek 3.2 Speciale\":       { input: 0.2288, output:  0.3432, released: \"2025-12-01\", est: false, tout: 7882, cpr: 0.59 },"
+  },
+  {
+   "id": "F185",
+   "says": "score",
+   "about": "57",
+   "value": "50.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 57 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"54th\", model: \"DeepSeek V4 Pro\",                  score: \"50.9%\", organization: \"DeepSeek\",    dateAdded: \"2026-06-02\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F186",
+   "says": "model-name",
+   "about": "57",
+   "value": "DeepSeek V4 Pro",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 57, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"54th\", model: \"DeepSeek V4 Pro\",                  score: \"50.9%\", organization: \"DeepSeek\",    dateAdded: \"2026-06-02\" },"
+  },
+  {
+   "id": "F187",
+   "says": "cost",
+   "about": "57",
+   "value": "1.99",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 169 (modelMeta \"DeepSeek V4 Pro\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4 Pro\":             { input:  0.435, output:    0.87, released: \"2026-04-24\", est: false, tout: 10466, cpr: 1.99 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F188",
+   "says": "price-table",
+   "about": "57",
+   "value": "input: 0.435, output: 0.87",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 169 (modelMeta \"DeepSeek V4 Pro\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4 Pro\":             { input:  0.435, output:    0.87, released: \"2026-04-24\", est: false, tout: 10466, cpr: 1.99 },"
+  },
+  {
+   "id": "F189",
+   "says": "score",
+   "about": "59",
+   "value": "48.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 59 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"56th\", model: \"GPT-5.6 Terra (xhigh)\",                    score: \"48.9%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F190",
+   "says": "model-name",
+   "about": "59",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 59, field model (the part before \"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"56th\", model: \"GPT-5.6 Terra (xhigh)\",                    score: \"48.9%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F191",
+   "says": "effort-label",
+   "about": "59",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 59, field model (\"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"56th\", model: \"GPT-5.6 Terra (xhigh)\",                    score: \"48.9%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F192",
+   "says": "cost",
+   "about": "59",
+   "value": "1.06",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 222 (modelMeta \"GPT-5.6 Terra (xhigh)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Terra (xhigh)\":              { input:    2.5, output:    15.0, released: \"2026-07-09\", est: false, tout: 292, cpr: 1.06 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F193",
+   "says": "price-table",
+   "about": "59",
+   "value": "input: 2.5, output: 15.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 222 (modelMeta \"GPT-5.6 Terra (xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Terra (xhigh)\":              { input:    2.5, output:    15.0, released: \"2026-07-09\", est: false, tout: 292, cpr: 1.06 },"
+  },
+  {
+   "id": "F194",
+   "says": "score",
+   "about": "60",
+   "value": "47.7%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 60 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"57th\", model: \"GLM 4.7\",                          score: \"47.7%\", organization: \"Z.ai\",        dateAdded: \"2025-12-23\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F195",
+   "says": "model-name",
+   "about": "60",
+   "value": "GLM 4.7",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 60, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"57th\", model: \"GLM 4.7\",                          score: \"47.7%\", organization: \"Z.ai\",        dateAdded: \"2025-12-23\" },"
+  },
+  {
+   "id": "F196",
+   "says": "cost",
+   "about": "60",
+   "value": "3.72",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 170 (modelMeta \"GLM 4.7\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 4.7\":                     { input:    0.4, output:    1.75, released: \"2025-12-22\", est: false, tout: 9786, cpr: 3.72 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F197",
+   "says": "price-table",
+   "about": "60",
+   "value": "input: 0.4, output: 1.75",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 170 (modelMeta \"GLM 4.7\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GLM 4.7\":                     { input:    0.4, output:    1.75, released: \"2025-12-22\", est: false, tout: 9786, cpr: 3.72 },"
+  },
+  {
+   "id": "F198",
+   "says": "score",
+   "about": "61",
+   "value": "46.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 61 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"58th\", model: \"Kimi K2.5\",                        score: \"46.8%\", organization: \"Moonshot AI\", dateAdded: \"2026-02-17\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F199",
+   "says": "model-name",
+   "about": "61",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 61, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"58th\", model: \"Kimi K2.5\",                        score: \"46.8%\", organization: \"Moonshot AI\", dateAdded: \"2026-02-17\" },"
+  },
+  {
+   "id": "F200",
+   "says": "cost",
+   "about": "61",
+   "value": "4.28",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 171 (modelMeta \"Kimi K2.5\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K2.5\":                   { input:  0.375, output:   2.025, released: \"2026-01-27\", est: false, tout: 9756, cpr: 4.28 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F201",
+   "says": "price-table",
+   "about": "61",
+   "value": "input: 0.375, output: 2.025",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 171 (modelMeta \"Kimi K2.5\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K2.5\":                   { input:  0.375, output:   2.025, released: \"2026-01-27\", est: false, tout: 9756, cpr: 4.28 },"
+  },
+  {
+   "id": "F202",
+   "says": "score",
+   "about": "62",
+   "value": "46.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 62 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"59th\", model: \"GPT-5.6 Luna (xhigh)\",                     score: \"46.8%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F203",
+   "says": "model-name",
+   "about": "62",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 62, field model (the part before \"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"59th\", model: \"GPT-5.6 Luna (xhigh)\",                     score: \"46.8%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F204",
+   "says": "effort-label",
+   "about": "62",
+   "value": "xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 62, field model (\"(xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"59th\", model: \"GPT-5.6 Luna (xhigh)\",                     score: \"46.8%\", organization: \"OpenAI\",      dateAdded: \"2026-07-09\" },"
+  },
+  {
+   "id": "F205",
+   "says": "cost",
+   "about": "62",
+   "value": "0.16",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 223 (modelMeta \"GPT-5.6 Luna (xhigh)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Luna (xhigh)\":               { input:    0.2, output:     1.2, released: \"2026-07-09\", est: false, tout: 585, cpr: 0.16 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F206",
+   "says": "price-table",
+   "about": "62",
+   "value": "input: 0.2, output: 1.2",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 223 (modelMeta \"GPT-5.6 Luna (xhigh)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.6 Luna (xhigh)\":               { input:    0.2, output:     1.2, released: \"2026-07-09\", est: false, tout: 585, cpr: 0.16 },"
+  },
+  {
+   "id": "F207",
+   "says": "score",
+   "about": "63",
+   "value": "46.4%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 63 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"60th\", model: \"Claude 3.7 Sonnet (thinking)\",     score: \"46.4%\", organization: \"Anthropic\",   dateAdded: null },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F208",
+   "says": "model-name",
+   "about": "63",
+   "value": "Claude 3.7 Sonnet",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 63, field model (the part before \"(thinking)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"60th\", model: \"Claude 3.7 Sonnet (thinking)\",     score: \"46.4%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F209",
+   "says": "thinking-on",
+   "about": "63",
+   "value": "thinking",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 63, field model (\"(thinking)\", no level)",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"60th\", model: \"Claude 3.7 Sonnet (thinking)\",     score: \"46.4%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F210",
+   "says": "score",
+   "about": "64",
+   "value": "46.3%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 64 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"61st\", model: \"DeepSeek V4 Flash (preview)\",                score: \"46.3%\", organization: \"DeepSeek\",    dateAdded: \"2026-06-02\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F211",
+   "says": "model-name",
+   "about": "64",
+   "value": "DeepSeek V4 Flash",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 64, field model (the part before \"(preview)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"61st\", model: \"DeepSeek V4 Flash (preview)\",                score: \"46.3%\", organization: \"DeepSeek\",    dateAdded: \"2026-06-02\" },"
+  },
+  {
+   "id": "F212",
+   "says": "cost",
+   "about": "64",
+   "value": "0.28",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 174 (modelMeta \"DeepSeek V4 Flash (preview)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4 Flash (preview)\":           { input:   0.14, output:    0.28, released: \"2026-04-24\", est: false, tout: 4636, cpr: 0.28 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F213",
+   "says": "price-table",
+   "about": "64",
+   "value": "input: 0.14, output: 0.28",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 174 (modelMeta \"DeepSeek V4 Flash (preview)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"DeepSeek V4 Flash (preview)\":           { input:   0.14, output:    0.28, released: \"2026-04-24\", est: false, tout: 4636, cpr: 0.28 },"
+  },
+  {
+   "id": "F214",
+   "says": "score",
+   "about": "65",
+   "value": "45.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 65 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"62nd\", model: \"GPT-5.2 (high)\",                   score: \"45.8%\", organization: \"OpenAI\",      dateAdded: \"2025-12-12\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F215",
+   "says": "model-name",
+   "about": "65",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 65, field model (the part before \"(high)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"62nd\", model: \"GPT-5.2 (high)\",                   score: \"45.8%\", organization: \"OpenAI\",      dateAdded: \"2025-12-12\" },"
+  },
+  {
+   "id": "F216",
+   "says": "effort-label",
+   "about": "65",
+   "value": "high",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 65, field model (\"(high)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"62nd\", model: \"GPT-5.2 (high)\",                   score: \"45.8%\", organization: \"OpenAI\",      dateAdded: \"2025-12-12\" },"
+  },
+  {
+   "id": "F217",
+   "says": "cost",
+   "about": "65",
+   "value": "2.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 175 (modelMeta \"GPT-5.2 (high)\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.2 (high)\":              { input:   1.75, output:    14.0, released: \"2025-12-10\", est: false, tout: 635, cpr: 2.0 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F218",
+   "says": "price-table",
+   "about": "65",
+   "value": "input: 1.75, output: 14.0",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 175 (modelMeta \"GPT-5.2 (high)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"GPT-5.2 (high)\":              { input:   1.75, output:    14.0, released: \"2025-12-10\", est: false, tout: 635, cpr: 2.0 },"
+  },
+  {
+   "id": "F219",
+   "says": "score",
+   "about": "67",
+   "value": "45.5%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 67 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"64th\", model: \"Claude 4 Sonnet (thinking)\",       score: \"45.5%\", organization: \"Anthropic\",   dateAdded: null },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F220",
+   "says": "model-name",
+   "about": "67",
+   "value": "Claude 4 Sonnet",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 67, field model (the part before \"(thinking)\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"64th\", model: \"Claude 4 Sonnet (thinking)\",       score: \"45.5%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F221",
+   "says": "thinking-on",
+   "about": "67",
+   "value": "thinking",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 67, field model (\"(thinking)\", no level)",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"64th\", model: \"Claude 4 Sonnet (thinking)\",       score: \"45.5%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F222",
+   "says": "score",
+   "about": "68",
+   "value": "44.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 68 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"65th\", model: \"Claude 3.7 Sonnet\",                score: \"44.9%\", organization: \"Anthropic\",   dateAdded: null },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F223",
+   "says": "model-name",
+   "about": "68",
+   "value": "Claude 3.7 Sonnet",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 68, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"65th\", model: \"Claude 3.7 Sonnet\",                score: \"44.9%\", organization: \"Anthropic\",   dateAdded: null },"
+  },
+  {
+   "id": "F224",
+   "says": "score",
+   "about": "76",
+   "value": "39.6%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 76 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"73rd\", model: \"Kimi K2 Thinking\",                 score: \"39.6%\", organization: \"Moonshot AI\", dateAdded: \"2025-11-07\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F225",
+   "says": "model-name",
+   "about": "76",
+   "value": "Kimi K2 Thinking",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 76, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"73rd\", model: \"Kimi K2 Thinking\",                 score: \"39.6%\", organization: \"Moonshot AI\", dateAdded: \"2025-11-07\" },"
+  },
+  {
+   "id": "F226",
+   "says": "cost",
+   "about": "76",
+   "value": "4.61",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 185 (modelMeta \"Kimi K2 Thinking\"), field cpr",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K2 Thinking\":            { input:    0.6, output:     2.5, released: \"2025-11-06\", est: false, tout: 8485, cpr: 4.61 },",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F227",
+   "says": "price-table",
+   "about": "76",
+   "value": "input: 0.6, output: 2.5",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 185 (modelMeta \"Kimi K2 Thinking\")",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "\"Kimi K2 Thinking\":            { input:    0.6, output:     2.5, released: \"2025-11-06\", est: false, tout: 8485, cpr: 4.61 },"
+  },
+  {
+   "id": "F228",
+   "says": "score",
+   "about": "80",
+   "value": "35.2%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 80 (leaderboardData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"77th\", model: \"Qwen 3.6 Flash\",                   score: \"35.2%\", organization: \"Alibaba\",     dateAdded: \"2026-07-10\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F229",
+   "says": "model-name",
+   "about": "80",
+   "value": "Qwen 3.6 Flash",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 80, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"77th\", model: \"Qwen 3.6 Flash\",                   score: \"35.2%\", organization: \"Alibaba\",     dateAdded: \"2026-07-10\" },"
+  },
+  {
+   "id": "F230",
+   "says": "score",
+   "about": "113",
+   "value": "64.8%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 113 (openEndedData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"1st\", model: \"Gemini 3.1 Pro Preview\",         score: \"64.8%\", organization: \"Google\", dateAdded: \"2026-02-17\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F231",
+   "says": "model-name",
+   "about": "113",
+   "value": "Gemini 3.1 Pro Preview",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 113, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"1st\", model: \"Gemini 3.1 Pro Preview\",         score: \"64.8%\", organization: \"Google\", dateAdded: \"2026-02-17\" },"
+  },
+  {
+   "id": "F232",
+   "says": "score",
+   "about": "114",
+   "value": "62.9%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 114 (openEndedData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"2nd\", model: \"Claude Opus 4.7\",                score: \"62.9%\", organization: \"Anthropic\", dateAdded: \"2026-04-22\" },",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F233",
+   "says": "model-name",
+   "about": "114",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 114, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"2nd\", model: \"Claude Opus 4.7\",                score: \"62.9%\", organization: \"Anthropic\", dateAdded: \"2026-04-22\" },"
+  },
+  {
+   "id": "F234",
+   "says": "score",
+   "about": "115",
+   "value": "59.7%",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 115 (openEndedData), field score",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"3rd\", model: \"Claude Opus 4.6\",                score: \"59.7%\", organization: \"Anthropic\", dateAdded: \"2026-02-17\" }",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F235",
+   "says": "model-name",
+   "about": "115",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "code",
+   "where": "payload line 115, field model",
+   "file": "/work/.salvo14/mig/convert-simplebench/evidence/simple-bench-leaderboard-data.js",
+   "quote": "{ rank: \"3rd\", model: \"Claude Opus 4.6\",                score: \"59.7%\", organization: \"Anthropic\", dateAdded: \"2026-02-17\" }"
+  }
+ ]
+}

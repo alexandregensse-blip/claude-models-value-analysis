@@ -1,0 +1,766 @@
+{
+ "id": "src-zenn-nnakapa-lab-34-2026-08-12",
+ "publisher": "zenn-nnakapa",
+ "urls": [
+  "https://zenn.dev/nnakapa/articles/lab-34-opus5-sonnet5-qcd"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zenn.dev/nnakapa/articles/lab-34-opus5-sonnet5-qcd",
+   "captured": "2026-10-19T07:43:34Z",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.html",
+   "note": "HTML saved by salvo g8 (file mtime); canonical link of the page: https://zenn.dev/nnakapa/articles/lab-34-opus5-sonnet5-qcd"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.html": "9834f2a68351986b076c4f2c6a0e3f1ed0fa5b42b8fa72b54a5bba716629a8c0",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt": "c9060e9d5e95dee47cf28eb53baf553167f8c7618244e2441897711f7152e049",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv": "43ff50033bf6639816c23042d294adeddbdda13b0950388e193254ee7f95c170"
+ },
+ "harvested_at": "2026-10-19T07:43:34Z",
+ "published": {
+  "value": "2026-08-12",
+  "where": "article header (the date under the title)",
+  "quote": "2026/08/12に公開",
+  "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt"
+ },
+ "salvo": "salvo14/mig/convert-zenn-nnakapa (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved HTML of the article (salvo g8 copy) and its text extraction htmltxt.py",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.html",
+   "tool": "htmltxt.py (this folder): text of the page body, one line per paragraph / list item / heading, one table cell per line ending \" |\"; script, style and head dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "tool": "qcd-gates.csv columns: gate_T1..T3 = the gate passes \"k/10\" of the three tasks as printed in the article (per-task table, column gate/10); gates = \"k of 30\", k = the sum of the three k (ours: the article prints no pooled count); cost_T1..T3 = the per-task median costs printed in the per-task table (column C 中央値($)), blank where the article prints none"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "where": "derived table of lab 34: one row per model x effort of the article",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "lab": "note",
+    "group_in_raw": "note",
+    "model_label": "note",
+    "effort": "note",
+    "gate_T1": "note",
+    "gate_T2": "note",
+    "gate_T3": "note",
+    "gates": {
+     "says": "score",
+     "term": "gate-pass%(3tasks-n30)",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_T1": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T2": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T3": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code v2.1.226",
+   "level": "written",
+   "form": "table-cell",
+   "where": "environment table, row 実行 CLI",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "実行 CLI | Claude Code v2.1.226（全試行バージョンを固定）",
+   "term": "claude-code"
+  },
+  {
+   "id": "F2",
+   "says": "model-api-id",
+   "about": "34-Sonnet5-low",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F3",
+   "says": "effort-label",
+   "about": "34-Sonnet5-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | low | 0% | ❌ | 56 | 0.19"
+  },
+  {
+   "id": "F4",
+   "says": "attempts",
+   "about": "34-Sonnet5-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | low | T1_txn | 10/10 | 97.27 | 20.33 | 0.0639"
+  },
+  {
+   "id": "F5",
+   "says": "attempts",
+   "about": "34-Sonnet5-low",
+   "value": "0/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | low | T2_param | 0/10 | 50.0 | 18.38 | 0.0624"
+  },
+  {
+   "id": "F6",
+   "says": "attempts",
+   "about": "34-Sonnet5-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | low | T3_optlock | 10/10 | 100.0 | 17.28 | 0.0601"
+  },
+  {
+   "id": "F7",
+   "says": "model-api-id",
+   "about": "34-Sonnet5-medium",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F8",
+   "says": "effort-label",
+   "about": "34-Sonnet5-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | medium | 40% | ❌ | 69 | 0.22"
+  },
+  {
+   "id": "F9",
+   "says": "attempts",
+   "about": "34-Sonnet5-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | medium | T1_txn | 10/10 | 98.18 | 23.53 | 0.0776"
+  },
+  {
+   "id": "F10",
+   "says": "attempts",
+   "about": "34-Sonnet5-medium",
+   "value": "4/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | medium | T2_param | 4/10 | 50.0 | 26.13 | 0.0801"
+  },
+  {
+   "id": "F11",
+   "says": "attempts",
+   "about": "34-Sonnet5-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | medium | T3_optlock | 10/10 | 100.0 | 19.58 | 0.0618"
+  },
+  {
+   "id": "F12",
+   "says": "model-api-id",
+   "about": "34-Sonnet5-high",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": "34-Sonnet5-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | high | 80% | ⚠️ | 88 | 0.26"
+  },
+  {
+   "id": "F14",
+   "says": "attempts",
+   "about": "34-Sonnet5-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | high | T1_txn | 10/10 | 98.18 | 29.29 | 0.0824"
+  },
+  {
+   "id": "F15",
+   "says": "attempts",
+   "about": "34-Sonnet5-high",
+   "value": "8/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | high | T2_param | 8/10 | 99.25 | 32.14 | 0.0917"
+  },
+  {
+   "id": "F16",
+   "says": "attempts",
+   "about": "34-Sonnet5-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | high | T3_optlock | 10/10 | 100.0 | 26.48 | 0.0820"
+  },
+  {
+   "id": "F17",
+   "says": "model-api-id",
+   "about": "34-Sonnet5-xhigh",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F18",
+   "says": "effort-label",
+   "about": "34-Sonnet5-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | xhigh | 100% | ✅ | 122 | 0.33"
+  },
+  {
+   "id": "F19",
+   "says": "attempts",
+   "about": "34-Sonnet5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | xhigh | T1_txn | 10/10 | 100.0 | 48.00 | 0.1228"
+  },
+  {
+   "id": "F20",
+   "says": "attempts",
+   "about": "34-Sonnet5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | xhigh | T2_param | 10/10 | 100.0 | 46.30 | 0.1186"
+  },
+  {
+   "id": "F21",
+   "says": "attempts",
+   "about": "34-Sonnet5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | xhigh | T3_optlock | 10/10 | 100.0 | 27.28 | 0.0850"
+  },
+  {
+   "id": "F22",
+   "says": "model-api-id",
+   "about": "34-Opus5-low",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F23",
+   "says": "effort-label",
+   "about": "34-Opus5-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | low | 100% | ✅ | 97 | 0.59"
+  },
+  {
+   "id": "F24",
+   "says": "attempts",
+   "about": "34-Opus5-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | low | T1_txn | 10/10 | 96.36 | 32.44 | 0.1952"
+  },
+  {
+   "id": "F25",
+   "says": "attempts",
+   "about": "34-Opus5-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | low | T2_param | 10/10 | 99.63 | 32.39 | 0.1985"
+  },
+  {
+   "id": "F26",
+   "says": "attempts",
+   "about": "34-Opus5-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | low | T3_optlock | 10/10 | 99.25 | 32.24 | 0.1922"
+  },
+  {
+   "id": "F27",
+   "says": "model-api-id",
+   "about": "34-Opus5-medium",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F28",
+   "says": "effort-label",
+   "about": "34-Opus5-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | medium | 90% | ⚠️ | 130 | 0.71"
+  },
+  {
+   "id": "F29",
+   "says": "attempts",
+   "about": "34-Opus5-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | medium | T1_txn | 10/10 | 98.18 | 47.95 | 0.2509"
+  },
+  {
+   "id": "F30",
+   "says": "attempts",
+   "about": "34-Opus5-medium",
+   "value": "9/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | medium | T2_param | 9/10 | 99.25 | 41.44 | 0.2193"
+  },
+  {
+   "id": "F31",
+   "says": "attempts",
+   "about": "34-Opus5-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | medium | T3_optlock | 10/10 | 100.0 | 40.89 | 0.2438"
+  },
+  {
+   "id": "F32",
+   "says": "model-api-id",
+   "about": "34-Opus5-high",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F33",
+   "says": "effort-label",
+   "about": "34-Opus5-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | high | 90% | ⚠️ | 240 | 1.05"
+  },
+  {
+   "id": "F34",
+   "says": "attempts",
+   "about": "34-Opus5-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | high | T1_txn | 10/10 | 96.36 | 94.88 | 0.3954"
+  },
+  {
+   "id": "F35",
+   "says": "attempts",
+   "about": "34-Opus5-high",
+   "value": "9/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | high | T2_param | 9/10 | 99.25 | 78.77 | 0.3485"
+  },
+  {
+   "id": "F36",
+   "says": "attempts",
+   "about": "34-Opus5-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | high | T3_optlock | 10/10 | 100.0 | 66.76 | 0.3093"
+  },
+  {
+   "id": "F37",
+   "says": "model-api-id",
+   "about": "34-Opus5-xhigh",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5（claude-opus-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F38",
+   "says": "effort-label",
+   "about": "34-Opus5-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | xhigh | 100% | ✅ | 345 | 1.47"
+  },
+  {
+   "id": "F39",
+   "says": "attempts",
+   "about": "34-Opus5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | xhigh | T1_txn | 10/10 | 96.36 | 146.91 | 0.5743"
+  },
+  {
+   "id": "F40",
+   "says": "attempts",
+   "about": "34-Opus5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | xhigh | T2_param | 10/10 | 100.0 | 107.54 | 0.4600"
+  },
+  {
+   "id": "F41",
+   "says": "attempts",
+   "about": "34-Opus5-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | xhigh | T3_optlock | 10/10 | 100.0 | 90.12 | 0.4322"
+  },
+  {
+   "id": "F42",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "label",
+   "where": "summary table header \"コスト($)\"",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "コスト($)",
+   "term": "USD"
+  },
+  {
+   "id": "F43",
+   "says": "unit",
+   "about": null,
+   "value": "処理時間(s) とコスト($) は、各タスクの中央値をパターン単位で合算した値です",
+   "level": "written",
+   "form": "prose",
+   "where": "note under the summary table",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "処理時間(s) とコスト($) は、各タスクの中央値をパターン単位で合算した値です",
+   "term": "per-3task-suite"
+  },
+  {
+   "id": "F44",
+   "says": "cost-method",
+   "about": null,
+   "value": "コスト (C)は Claude Code が報告するトークン量から算出し、Sonnet 5 は継続される単価（入力 $2 / 出力 $10）に換算しています。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "コスト (C)は Claude Code が報告するトークン量から算出し、Sonnet 5 は継続される単価（入力 $2 / 出力 $10）に換算しています。",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F45",
+   "says": "cost-basis",
+   "about": null,
+   "value": "計測時に記録されていた単価と、トークン量から算出した金額とが一致することを全 240 試行で確認済みです。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "計測時に記録されていた単価と、トークン量から算出した金額とが一致することを全 240 試行で確認済みです。",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": null,
+   "value": "0.1864",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Sonnet5-low (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Sonnet5-low/cost_T1",
+    "T1/34-Sonnet5-low/cost_T2",
+    "T1/34-Sonnet5-low/cost_T3"
+   ]
+  },
+  {
+   "id": "F47",
+   "says": "price-table",
+   "about": null,
+   "value": "Sonnet 5 | $2 | $10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "price table / paragraph of the article",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Sonnet 5 | $2 | $10"
+  },
+  {
+   "id": "F48",
+   "says": "cost",
+   "about": null,
+   "value": "0.2195",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Sonnet5-medium (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Sonnet5-medium/cost_T1",
+    "T1/34-Sonnet5-medium/cost_T2",
+    "T1/34-Sonnet5-medium/cost_T3"
+   ]
+  },
+  {
+   "id": "F49",
+   "says": "cost",
+   "about": null,
+   "value": "0.2561",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Sonnet5-high (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Sonnet5-high/cost_T1",
+    "T1/34-Sonnet5-high/cost_T2",
+    "T1/34-Sonnet5-high/cost_T3"
+   ]
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": null,
+   "value": "0.3264",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Sonnet5-xhigh (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Sonnet5-xhigh/cost_T1",
+    "T1/34-Sonnet5-xhigh/cost_T2",
+    "T1/34-Sonnet5-xhigh/cost_T3"
+   ]
+  },
+  {
+   "id": "F51",
+   "says": "cost",
+   "about": null,
+   "value": "0.5859",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Opus5-low (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Opus5-low/cost_T1",
+    "T1/34-Opus5-low/cost_T2",
+    "T1/34-Opus5-low/cost_T3"
+   ]
+  },
+  {
+   "id": "F52",
+   "says": "price-table",
+   "about": null,
+   "value": "Opus 5 | $5 | $25",
+   "level": "written",
+   "form": "table-cell",
+   "where": "price table / paragraph of the article",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "Opus 5 | $5 | $25"
+  },
+  {
+   "id": "F53",
+   "says": "cost",
+   "about": null,
+   "value": "0.7140",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Opus5-medium (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Opus5-medium/cost_T1",
+    "T1/34-Opus5-medium/cost_T2",
+    "T1/34-Opus5-medium/cost_T3"
+   ]
+  },
+  {
+   "id": "F54",
+   "says": "cost",
+   "about": null,
+   "value": "1.0532",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Opus5-high (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Opus5-high/cost_T1",
+    "T1/34-Opus5-high/cost_T2",
+    "T1/34-Opus5-high/cost_T3"
+   ]
+  },
+  {
+   "id": "F55",
+   "says": "cost",
+   "about": null,
+   "value": "1.4665",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 34-Opus5-xhigh (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab34.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/34-Opus5-xhigh/cost_T1",
+    "T1/34-Opus5-xhigh/cost_T2",
+    "T1/34-Opus5-xhigh/cost_T3"
+   ]
+  },
+  {
+   "id": "F56",
+   "says": "run-date",
+   "about": null,
+   "value": "2026-08-10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "environment table, row 計測日",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+   "quote": "計測日 | 2026-08-10"
+  }
+ ]
+}

@@ -2437,6 +2437,9 @@ def confound(ctx, M):
     for f in M.slots.get("restated_from", []):
         if f.level in ACCEPTED:
             o = names_org(f.value)
+            if o is None and org != "~" and re.search(r"self[- ]reported|providers?'? (own )?(reported|numbers)|as reported by (the )?(provider|vendor|maker)s?",
+                                                     f.value or "", re.I):
+                o = org                                  # "providers' self reported numbers": the model's own maker (27 Oct)
             flags.append(f"restated-from:{o}" if o else f"restated-from:{f.value}")
     for f in M.slots.get("evaluated_by", []):
         if f.level in ACCEPTED:

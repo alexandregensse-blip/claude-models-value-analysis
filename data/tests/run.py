@@ -1340,6 +1340,17 @@ def ext_max_label_on_model_without_max():
     eq(r.cfg(m2), "max", "a model with max")
 
 
+@test
+def ext_restated_from_providers():
+    # "Providers' self reported numbers" restates each model's maker: restated-from:<the model's maker> (27 Oct)
+    sc = base()
+    s = sc.source("card", publisher="puby")
+    m1 = sc.m(s, model="ma", effort=[LOW], restated_from="Providers' self reported numbers")
+    sc.m(s, model="mb", effort=[LOW], score="60%")
+    r = sc.run()
+    eq("restated-from:Anthropic" in r.rows("fit-quality.csv", model="ma")[0]["confound"], True, "the model's maker")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

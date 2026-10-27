@@ -1,0 +1,96 @@
+{
+ "id": "src-eqbench-eqbench-leaderboard-results-2026-05-31",
+ "publisher": "EQ-bench/eqbench-leaderboard-results (GitHub)",
+ "urls": [
+  "https://github.com/EQ-bench/eqbench-leaderboard-results"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "266853f2ac7d10c31430cb3bd00d64c758beb581",
+   "captured": "2026-05-31T00:52:06Z",
+   "url": "https://github.com/EQ-bench/eqbench-leaderboard-results/commit/266853f2ac7d10c31430cb3bd00d64c758beb581",
+   "note": "clone saved by salvo hn qwen3.8-flash-r2 (HEAD 266853f2 \"update to leaderboard parity\", 2026-05-31 10:52 +1000, the commit the legacy rows cite); the 62 JSON files of creative-writing-longform/results_sonnet-4.6 read here carry the legacy scores"
+  }
+ ],
+ "commit": "266853f2ac7d10c31430cb3bd00d64c758beb581",
+ "sha256": {
+  "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/runs.csv": "3f7a4a572a1b0991df8dda6bb0ad59d5905d56e0664db5f505e98fdafdd6e99c",
+  "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/results-json.tar": "9c14c25f0021e2a262cf43acf7f37f8cd6a10648880cbf6b873146a8d17aef56",
+  "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/claude-opus-4-7.json": "0b1f015b9a5d4a130389e8c625a97d55363e822b2fc01dbda8386597fcd3d6b4"
+ },
+ "harvested_at": "2026-10-21T15:25:20Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved clone of EQ-bench/eqbench-leaderboard-results at 266853f2 (salvo hn qwen3.8-flash-r2)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/runs.csv",
+   "from": "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/results-json.tar",
+   "tool": "convert.py: one row per result file used (62 of the 117 run entries of results_sonnet-4.6/*.json), the fields copied as they are from each JSON: test_model, judge_model, iterations, status, start_time, end_time and results.benchmark_results.{num_tasks_scored, num_tasks_total, eqbench_longform_score_0_100, overall_score_0_20, bootstrap_analysis.ci_lower / ci_upper / confidence_level}; run_key = the entry key of the file (a file may hold several runs)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/runs.csv",
+   "where": "one row per result file",
+   "format": "csv",
+   "row_key": "file",
+   "columns": {
+    "file": "note",
+    "run_key": "note",
+    "test_model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "judge_model": "judge",
+    "iterations": "note",
+    "status": "note",
+    "start_time": "run-start",
+    "end_time": "run-end",
+    "num_tasks_scored": "note",
+    "num_tasks_total": "note",
+    "eqbench_longform_score_0_100": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "overall_score_0_20": "note",
+    "ci_lower_0_20": "note",
+    "ci_upper_0_20": "note",
+    "confidence_level": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "thinking-on",
+   "about": "claude-opus-4-5-20251101-thinking.json",
+   "value": "claude-opus-4-5-20251101-thinking.json",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-5-20251101-thinking.json: the result file's name carries '-thinking' (test_model 'claude-opus-4-5-20251101' has no suffix)",
+   "file": "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/runs.csv"
+  },
+  {
+   "id": "F2",
+   "says": "effort-label",
+   "about": "gpt-5-2025-08-07-high-reasoning.json",
+   "value": "high-reasoning",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5-2025-08-07-high-reasoning.json, column test_model ('gpt-5-2025-08-07-high-reasoning-high-reasoning': the 'high-reasoning' suffix)",
+   "file": "/work/.salvo14/mig/convert-EQ-bench-eqbench-leaderboard-results/evidence/runs.csv"
+  }
+ ]
+}

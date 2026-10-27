@@ -1,0 +1,563 @@
+{
+ "id": "src-zenn-nnakapa-lab-20-2026-05-31",
+ "publisher": "zenn-nnakapa",
+ "urls": [
+  "https://zenn.dev/nnakapa/articles/lab-20-opus48-qcd"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zenn.dev/nnakapa/articles/lab-20-opus48-qcd",
+   "captured": "2026-10-19T07:43:41Z",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.html",
+   "note": "HTML saved by salvo g8 (file mtime); canonical link of the page: https://zenn.dev/nnakapa/articles/lab-20-opus48-qcd"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.html": "6d979eaed7eefc2ae3359a9088aaa28f1fa29361db4b1dfb800a15560ba6a57b",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt": "02b81ff5e94e075b85ad406f3f0b2c9c2e5d3b5350eb0bc85fefa3b93d32446a",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab20.csv": "fcee2428a7fc1578c27d140f20f81a25dd93a25f9862a56064deb1bcc9a4017d"
+ },
+ "harvested_at": "2026-10-19T07:43:41Z",
+ "published": {
+  "value": "2026-05-31",
+  "where": "article header (the date under the title)",
+  "quote": "2026/05/31に公開",
+  "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt"
+ },
+ "salvo": "salvo14/mig/convert-zenn-nnakapa (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved HTML of the article (salvo g8 copy) and its text extraction htmltxt.py",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.html",
+   "tool": "htmltxt.py (this folder): text of the page body, one line per paragraph / list item / heading, one table cell per line ending \" |\"; script, style and head dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab20.csv",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "tool": "qcd-gates.csv columns: gate_T1..T3 = the gate passes \"k/10\" of the three tasks as printed in the article (T2 = the printed T2 pass rate x 10 (summary table); T1 = T3 = 10/10 as the prose states: \"どの試行でも 10/10\"); gates = \"k of 30\", k = the sum of the three k (ours: the article prints no pooled count); cost_T1..T3 = the per-task median costs printed in the per-task table (column C 中央値($)), blank where the article prints none"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab20.csv",
+   "where": "derived table of lab 20: one row per model x effort of the article",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "lab": "note",
+    "group_in_raw": "note",
+    "model_label": "note",
+    "effort": "note",
+    "gate_T1": "note",
+    "gate_T2": "note",
+    "gate_T3": "note",
+    "gates": {
+     "says": "score",
+     "term": "gate-pass%(3tasks-n30)",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_T1": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T2": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T3": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code v2.1.157",
+   "level": "written",
+   "form": "prose",
+   "where": "setup paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "タスクの実行に使う CLI は Claude Code v2.1.157 に固定し",
+   "term": "claude-code"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "Opus 4.7 [1m]",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (the model cell carries [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m]"
+  },
+  {
+   "id": "F3",
+   "says": "model-name",
+   "about": "20-Opus47-low",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.7 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m]"
+  },
+  {
+   "id": "F4",
+   "says": "effort-label",
+   "about": "20-Opus47-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m] | low | 30 試行"
+  },
+  {
+   "id": "F5",
+   "says": "attempts",
+   "about": "20-Opus47-low",
+   "value": "0 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-low | 0 %"
+  },
+  {
+   "id": "F6",
+   "says": "attempts",
+   "about": null,
+   "value": "10/10",
+   "level": "written",
+   "form": "prose",
+   "where": "quality-gate paragraph: T1 and T3 pass 10/10 in every trial",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "タスク 1（T1）とタスク 3（T3）は、どの試行でも 10/10 で全部通ってしまいます"
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "20-Opus47-medium",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.7 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m]"
+  },
+  {
+   "id": "F8",
+   "says": "effort-label",
+   "about": "20-Opus47-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m] | medium | 30 試行"
+  },
+  {
+   "id": "F9",
+   "says": "attempts",
+   "about": "20-Opus47-medium",
+   "value": "30 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-medium | 30 %"
+  },
+  {
+   "id": "F10",
+   "says": "model-name",
+   "about": "20-Opus47-high",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.7 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m]"
+  },
+  {
+   "id": "F11",
+   "says": "effort-label",
+   "about": "20-Opus47-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m] | high | 30 試行"
+  },
+  {
+   "id": "F12",
+   "says": "attempts",
+   "about": "20-Opus47-high",
+   "value": "90 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-high | 90 %"
+  },
+  {
+   "id": "F13",
+   "says": "model-name",
+   "about": "20-Opus47-xhigh",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.7 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m]"
+  },
+  {
+   "id": "F14",
+   "says": "effort-label",
+   "about": "20-Opus47-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.7 [1m] | xhigh | 30 試行"
+  },
+  {
+   "id": "F15",
+   "says": "attempts",
+   "about": "20-Opus47-xhigh",
+   "value": "100 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-xhigh | 100 %"
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": "20-Opus48-low",
+   "value": "Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.8 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m]"
+  },
+  {
+   "id": "F17",
+   "says": "effort-label",
+   "about": "20-Opus48-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m] | low | 30 試行"
+  },
+  {
+   "id": "F18",
+   "says": "attempts",
+   "about": "20-Opus48-low",
+   "value": "60 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-low | 60 %"
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "20-Opus48-medium",
+   "value": "Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.8 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m]"
+  },
+  {
+   "id": "F20",
+   "says": "effort-label",
+   "about": "20-Opus48-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m] | medium（基準） | 30 試行"
+  },
+  {
+   "id": "F21",
+   "says": "attempts",
+   "about": "20-Opus48-medium",
+   "value": "100 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-medium | 100 %"
+  },
+  {
+   "id": "F22",
+   "says": "model-name",
+   "about": "20-Opus48-high",
+   "value": "Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.8 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m]"
+  },
+  {
+   "id": "F23",
+   "says": "effort-label",
+   "about": "20-Opus48-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m] | high | 30 試行"
+  },
+  {
+   "id": "F24",
+   "says": "attempts",
+   "about": "20-Opus48-high",
+   "value": "100 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-high | 100 %"
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "20-Opus48-xhigh",
+   "value": "Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table, column モデル (label Opus 4.8 [1m])",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m]"
+  },
+  {
+   "id": "F26",
+   "says": "effort-label",
+   "about": "20-Opus48-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "trial table (model, effort level, trials)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Opus 4.8 [1m] | xhigh | 30 試行"
+  },
+  {
+   "id": "F27",
+   "says": "attempts",
+   "about": "20-Opus48-xhigh",
+   "value": "100 %",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column T2 通過 (a pass rate over 10 trials: k = rate x 10)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-xhigh | 100 %"
+  },
+  {
+   "id": "F28",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "label",
+   "where": "summary table header \"コスト($)\"",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "コスト($)",
+   "term": "USD"
+  },
+  {
+   "id": "F29",
+   "says": "unit",
+   "about": null,
+   "value": "Delivery：処理時間(s) と Cost：API利用料金($) は 3 タスク合計の中央値。",
+   "level": "written",
+   "form": "prose",
+   "where": "note under the summary table",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Delivery：処理時間(s) と Cost：API利用料金($) は 3 タスク合計の中央値。",
+   "term": "per-3task-suite"
+  },
+  {
+   "id": "F30",
+   "says": "cost-method",
+   "about": null,
+   "value": "API利用料金",
+   "level": "written",
+   "form": "label",
+   "where": "note under the summary table: \"Cost：API利用料金($)\"",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Cost：API利用料金($)",
+   "term": "unstated"
+  },
+  {
+   "id": "F31",
+   "says": "cost-basis",
+   "about": null,
+   "value": "API利用料金",
+   "level": "written",
+   "form": "label",
+   "where": "note under the summary table: \"Cost：API利用料金($)\" (what the fee was, who charged it and by what price is not said)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "Cost：API利用料金($)",
+   "term": "unknown"
+  },
+  {
+   "id": "F32",
+   "says": "cost",
+   "about": "20-Opus47-low",
+   "value": "0.565",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.7-low, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-low | 0 % | ❌ | 73.2 | 0.565",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F33",
+   "says": "cost",
+   "about": "20-Opus47-medium",
+   "value": "0.640",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.7-medium, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-medium | 30 % | ❌ | 81.9 | 0.640",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F34",
+   "says": "cost",
+   "about": "20-Opus47-high",
+   "value": "0.852",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.7-high, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-high | 90 % | ⚠️ | 122.3 | 0.852",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F35",
+   "says": "cost",
+   "about": "20-Opus47-xhigh",
+   "value": "0.981",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.7-xhigh, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.7-xhigh | 100 % | ✅ | 161.8 | 0.981",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": "20-Opus48-low",
+   "value": "0.449",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.8-low, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-low | 60 % | ⚠️ | 78.8 | 0.449",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F37",
+   "says": "cost",
+   "about": "20-Opus48-medium",
+   "value": "0.486",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.8-medium, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-medium | 100 % | ✅ | 87.8 | 0.486",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F38",
+   "says": "cost",
+   "about": "20-Opus48-high",
+   "value": "0.545",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.8-high, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-high | 100 % | ✅ | 106.6 | 0.545",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F39",
+   "says": "cost",
+   "about": "20-Opus48-xhigh",
+   "value": "1.132",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, row 4.8-xhigh, column コスト($)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+   "quote": "4.8-xhigh | 100 % | ✅ | 286.3 | 1.132",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ]
+}

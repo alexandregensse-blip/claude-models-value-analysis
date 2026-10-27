@@ -1,0 +1,802 @@
+{
+ "id": "src-zenn-nnakapa-lab-35-2026-08-14",
+ "publisher": "zenn-nnakapa",
+ "urls": [
+  "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+   "captured": "2026-10-19T07:43:38Z",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.html",
+   "note": "HTML saved by salvo g8 (file mtime); canonical link of the page: https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.html": "284db5248298929ef791a2d1b41c3e73dad2cec6284d5806243d60d459b38b1f",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c",
+  "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv": "a2e7bba488f28edc520ea13e969271f6265e144f692457fa8bb7eb4afb8d5d43"
+ },
+ "harvested_at": "2026-10-19T07:43:38Z",
+ "published": {
+  "value": "2026-08-14",
+  "where": "article header (the date under the title)",
+  "quote": "2026/08/14に公開",
+  "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt"
+ },
+ "salvo": "salvo14/mig/convert-zenn-nnakapa (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved HTML of the article (salvo g8 copy) and its text extraction htmltxt.py",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.html",
+   "tool": "htmltxt.py (this folder): text of the page body, one line per paragraph / list item / heading, one table cell per line ending \" |\"; script, style and head dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "from": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "tool": "qcd-gates.csv columns: gate_T1..T3 = the gate passes \"k/10\" of the three tasks as printed in the article (per-task table, column gate/10); gates = \"k of 30\", k = the sum of the three k (ours: the article prints no pooled count); cost_T1..T3 = the per-task median costs printed in the per-task table (column C 中央値($)), blank where the article prints none"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "where": "derived table of lab 35: one row per model x effort of the article",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "lab": "note",
+    "group_in_raw": "note",
+    "model_label": "note",
+    "effort": "note",
+    "gate_T1": "note",
+    "gate_T2": "note",
+    "gate_T3": "note",
+    "gates": {
+     "says": "score",
+     "term": "gate-pass%(3tasks-n30)",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_T1": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T2": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "cost_T3": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code v2.1.229",
+   "level": "written",
+   "form": "table-cell",
+   "where": "environment table, row 実行 CLI",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "実行 CLI | Claude Code v2.1.229 / GitHub Copilot CLI v1.0.79（全試行バージョンを固定）",
+   "term": "claude-code"
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "GitHub Copilot CLI v1.0.79",
+   "level": "written",
+   "form": "table-cell",
+   "where": "environment table, row 実行 CLI",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "実行 CLI | Claude Code v2.1.229 / GitHub Copilot CLI v1.0.79（全試行バージョンを固定）",
+   "term": "copilot-cli"
+  },
+  {
+   "id": "F3",
+   "says": "model-api-id",
+   "about": "35-ClaudeCode-low",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F4",
+   "says": "effort-label",
+   "about": "35-ClaudeCode-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | low | 0% | ❌ | 58.1 | 0.197"
+  },
+  {
+   "id": "F5",
+   "says": "attempts",
+   "about": "35-ClaudeCode-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | low | T1_txn | 10/10 | 96.36 | 20.68 | 0.0697"
+  },
+  {
+   "id": "F6",
+   "says": "attempts",
+   "about": "35-ClaudeCode-low",
+   "value": "0/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | low | T2_param | 0/10 | 50.0 | 19.23 | 0.0647"
+  },
+  {
+   "id": "F7",
+   "says": "attempts",
+   "about": "35-ClaudeCode-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | low | T3_optlock | 10/10 | 100.0 | 18.18 | 0.0626"
+  },
+  {
+   "id": "F8",
+   "says": "model-api-id",
+   "about": "35-ClaudeCode-medium",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F9",
+   "says": "effort-label",
+   "about": "35-ClaudeCode-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | medium | 40% | ❌ | 72.5 | 0.231"
+  },
+  {
+   "id": "F10",
+   "says": "attempts",
+   "about": "35-ClaudeCode-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | medium | T1_txn | 10/10 | 99.09 | 24.63 | 0.0793"
+  },
+  {
+   "id": "F11",
+   "says": "attempts",
+   "about": "35-ClaudeCode-medium",
+   "value": "4/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | medium | T2_param | 4/10 | 50.0 | 26.48 | 0.0841"
+  },
+  {
+   "id": "F12",
+   "says": "attempts",
+   "about": "35-ClaudeCode-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | medium | T3_optlock | 10/10 | 100.0 | 21.43 | 0.0677"
+  },
+  {
+   "id": "F13",
+   "says": "model-api-id",
+   "about": "35-ClaudeCode-high",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F14",
+   "says": "effort-label",
+   "about": "35-ClaudeCode-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | high | 90% | ⚠️ | 93.0 | 0.267"
+  },
+  {
+   "id": "F15",
+   "says": "attempts",
+   "about": "35-ClaudeCode-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | high | T1_txn | 10/10 | 100.0 | 34.69 | 0.0960"
+  },
+  {
+   "id": "F16",
+   "says": "attempts",
+   "about": "35-ClaudeCode-high",
+   "value": "9/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | high | T2_param | 9/10 | 99.25 | 28.83 | 0.0862"
+  },
+  {
+   "id": "F17",
+   "says": "attempts",
+   "about": "35-ClaudeCode-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | high | T3_optlock | 10/10 | 100.0 | 29.49 | 0.0845"
+  },
+  {
+   "id": "F18",
+   "says": "model-api-id",
+   "about": "35-ClaudeCode-xhigh",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F19",
+   "says": "effort-label",
+   "about": "35-ClaudeCode-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | xhigh | 100% | ✅ | 156.2 | 0.389"
+  },
+  {
+   "id": "F20",
+   "says": "attempts",
+   "about": "35-ClaudeCode-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | xhigh | T1_txn | 10/10 | 99.62 | 62.86 | 0.1439"
+  },
+  {
+   "id": "F21",
+   "says": "attempts",
+   "about": "35-ClaudeCode-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | xhigh | T2_param | 10/10 | 100.0 | 58.60 | 0.1453"
+  },
+  {
+   "id": "F22",
+   "says": "attempts",
+   "about": "35-ClaudeCode-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Claude Code | xhigh | T3_optlock | 10/10 | 100.0 | 34.79 | 0.0995"
+  },
+  {
+   "id": "F23",
+   "says": "model-api-id",
+   "about": "35-CopilotCLI-low",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F24",
+   "says": "effort-label",
+   "about": "35-CopilotCLI-low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | low | 30% | ❌ | 78.4 | 0.240"
+  },
+  {
+   "id": "F25",
+   "says": "attempts",
+   "about": "35-CopilotCLI-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | low | T1_txn | 10/10 | 97.97 | 28.64 | 0.0861"
+  },
+  {
+   "id": "F26",
+   "says": "attempts",
+   "about": "35-CopilotCLI-low",
+   "value": "3/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | low | T2_param | 3/10 | 50.0 | 25.78 | 0.0898"
+  },
+  {
+   "id": "F27",
+   "says": "attempts",
+   "about": "35-CopilotCLI-low",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | low | T3_optlock | 10/10 | 100.0 | 23.98 | 0.0645"
+  },
+  {
+   "id": "F28",
+   "says": "model-api-id",
+   "about": "35-CopilotCLI-medium",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F29",
+   "says": "effort-label",
+   "about": "35-CopilotCLI-medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | medium | 60% | ⚠️ | 87.9 | 0.249"
+  },
+  {
+   "id": "F30",
+   "says": "attempts",
+   "about": "35-CopilotCLI-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | medium | T1_txn | 10/10 | 98.18 | 31.19 | 0.0967"
+  },
+  {
+   "id": "F31",
+   "says": "attempts",
+   "about": "35-CopilotCLI-medium",
+   "value": "6/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | medium | T2_param | 6/10 | 99.25 | 33.44 | 0.0790"
+  },
+  {
+   "id": "F32",
+   "says": "attempts",
+   "about": "35-CopilotCLI-medium",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | medium | T3_optlock | 10/10 | 100.0 | 23.28 | 0.0731"
+  },
+  {
+   "id": "F33",
+   "says": "model-api-id",
+   "about": "35-CopilotCLI-high",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F34",
+   "says": "effort-label",
+   "about": "35-CopilotCLI-high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | high | 100% | ✅ | 94.7 | 0.247"
+  },
+  {
+   "id": "F35",
+   "says": "attempts",
+   "about": "35-CopilotCLI-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | high | T1_txn | 10/10 | 100.0 | 33.14 | 0.0912"
+  },
+  {
+   "id": "F36",
+   "says": "attempts",
+   "about": "35-CopilotCLI-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | high | T2_param | 10/10 | 100.0 | 35.24 | 0.0835"
+  },
+  {
+   "id": "F37",
+   "says": "attempts",
+   "about": "35-CopilotCLI-high",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | high | T3_optlock | 10/10 | 100.0 | 26.29 | 0.0722"
+  },
+  {
+   "id": "F38",
+   "says": "model-api-id",
+   "about": "35-CopilotCLI-xhigh",
+   "value": "claude-sonnet-5",
+   "level": "written",
+   "form": "prose",
+   "where": "environment table, model row",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "両 CLI とも Sonnet 5（claude-sonnet-5）",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F39",
+   "says": "effort-label",
+   "about": "35-CopilotCLI-xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "summary table, column effort level",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | xhigh | 100% | ✅ | 118.6 | 0.302"
+  },
+  {
+   "id": "F40",
+   "says": "attempts",
+   "about": "35-CopilotCLI-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T1_txn",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | xhigh | T1_txn | 10/10 | 98.18 | 46.50 | 0.1064"
+  },
+  {
+   "id": "F41",
+   "says": "attempts",
+   "about": "35-CopilotCLI-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T2_param",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | xhigh | T2_param | 10/10 | 100.0 | 43.25 | 0.1067"
+  },
+  {
+   "id": "F42",
+   "says": "attempts",
+   "about": "35-CopilotCLI-xhigh",
+   "value": "10/10",
+   "level": "written",
+   "form": "table-cell",
+   "where": "per-task table, column gate/10, row T3_optlock",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI | xhigh | T3_optlock | 10/10 | 100.0 | 28.84 | 0.0887"
+  },
+  {
+   "id": "F43",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "label",
+   "where": "summary table header \"コスト($)\"",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "コスト($)",
+   "term": "USD"
+  },
+  {
+   "id": "F44",
+   "says": "unit",
+   "about": null,
+   "value": "処理時間(s) とコスト($) は、各タスクの中央値をパターン単位で合算した値です",
+   "level": "written",
+   "form": "prose",
+   "where": "note under the summary table",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "処理時間(s) とコスト($) は、各タスクの中央値をパターン単位で合算した値です",
+   "term": "per-3task-suite"
+  },
+  {
+   "id": "F45",
+   "says": "cost-method",
+   "about": null,
+   "value": "コスト (C)は、Claude Code は CLI が報告するトークン量から算出し、#34 と同じ恒久単価（入力 $2 / 出力 $10）に換算しています。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "コスト (C)は、Claude Code は CLI が報告するトークン量から算出し、#34 と同じ恒久単価（入力 $2 / 出力 $10）に換算しています。",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F46",
+   "says": "cost-basis",
+   "about": null,
+   "value": "コスト (C)は、Claude Code は CLI が報告するトークン量から算出し、#34 と同じ恒久単価（入力 $2 / 出力 $10）に換算しています。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "コスト (C)は、Claude Code は CLI が報告するトークン量から算出し、#34 と同じ恒久単価（入力 $2 / 出力 $10）に換算しています。",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F47",
+   "says": "cost",
+   "about": null,
+   "value": "0.1970",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-ClaudeCode-low (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-ClaudeCode-low/cost_T1",
+    "T1/35-ClaudeCode-low/cost_T2",
+    "T1/35-ClaudeCode-low/cost_T3"
+   ]
+  },
+  {
+   "id": "F48",
+   "says": "price-table",
+   "about": null,
+   "value": "#34 と同じ恒久単価（入力 $2 / 出力 $10）",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "#34 と同じ恒久単価（入力 $2 / 出力 $10）"
+  },
+  {
+   "id": "F49",
+   "says": "cost",
+   "about": null,
+   "value": "0.2311",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-ClaudeCode-medium (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-ClaudeCode-medium/cost_T1",
+    "T1/35-ClaudeCode-medium/cost_T2",
+    "T1/35-ClaudeCode-medium/cost_T3"
+   ]
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": null,
+   "value": "0.2667",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-ClaudeCode-high (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-ClaudeCode-high/cost_T1",
+    "T1/35-ClaudeCode-high/cost_T2",
+    "T1/35-ClaudeCode-high/cost_T3"
+   ]
+  },
+  {
+   "id": "F51",
+   "says": "cost",
+   "about": null,
+   "value": "0.3887",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-ClaudeCode-xhigh (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-ClaudeCode-xhigh/cost_T1",
+    "T1/35-ClaudeCode-xhigh/cost_T2",
+    "T1/35-ClaudeCode-xhigh/cost_T3"
+   ]
+  },
+  {
+   "id": "F52",
+   "says": "cost-method",
+   "about": null,
+   "value": "Copilot CLI は、CLI が残す課金記録の値をそのまま使いました。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI は、CLI が残す課金記録の値をそのまま使いました。",
+   "term": "provider-invoice"
+  },
+  {
+   "id": "F53",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Copilot CLI は、CLI が残す課金記録の値をそのまま使いました。",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "Copilot CLI は、CLI が残す課金記録の値をそのまま使いました。",
+   "term": "billed"
+  },
+  {
+   "id": "F54",
+   "says": "cost",
+   "about": null,
+   "value": "0.2404",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-CopilotCLI-low (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-CopilotCLI-low/cost_T1",
+    "T1/35-CopilotCLI-low/cost_T2",
+    "T1/35-CopilotCLI-low/cost_T3"
+   ]
+  },
+  {
+   "id": "F55",
+   "says": "price-table",
+   "about": null,
+   "value": "こちらの単価も入力 $2 / 出力 $10（GitHub の公式料金表に掲載されている Usage Based Billing の単価[1]）",
+   "level": "written",
+   "form": "prose",
+   "where": "cost paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "こちらの単価も入力 $2 / 出力 $10（GitHub の公式料金表に掲載されている Usage Based Billing の単価[1]）"
+  },
+  {
+   "id": "F56",
+   "says": "cost",
+   "about": null,
+   "value": "0.2488",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-CopilotCLI-medium (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-CopilotCLI-medium/cost_T1",
+    "T1/35-CopilotCLI-medium/cost_T2",
+    "T1/35-CopilotCLI-medium/cost_T3"
+   ]
+  },
+  {
+   "id": "F57",
+   "says": "cost",
+   "about": null,
+   "value": "0.2469",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-CopilotCLI-high (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-CopilotCLI-high/cost_T1",
+    "T1/35-CopilotCLI-high/cost_T2",
+    "T1/35-CopilotCLI-high/cost_T3"
+   ]
+  },
+  {
+   "id": "F58",
+   "says": "cost",
+   "about": null,
+   "value": "0.3018",
+   "level": "computed",
+   "form": "data-file",
+   "where": "sum of the three per-task median costs of row 35-CopilotCLI-xhigh (cells cost_T1..T3)",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/qcd-gates-lab35.csv",
+   "rule": "cell-sum",
+   "inputs": [
+    "T1/35-CopilotCLI-xhigh/cost_T1",
+    "T1/35-CopilotCLI-xhigh/cost_T2",
+    "T1/35-CopilotCLI-xhigh/cost_T3"
+   ]
+  },
+  {
+   "id": "F59",
+   "says": "run-date",
+   "about": null,
+   "value": "2026-08-13",
+   "level": "written",
+   "form": "table-cell",
+   "where": "environment table, row 計測日",
+   "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+   "quote": "計測日 | 2026-08-13"
+  }
+ ]
+}

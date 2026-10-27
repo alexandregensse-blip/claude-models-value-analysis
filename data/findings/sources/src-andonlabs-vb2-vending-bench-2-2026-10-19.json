@@ -1,0 +1,973 @@
+{
+ "id": "src-andonlabs-vb2-vending-bench-2-2026-10-19",
+ "publisher": "andonlabs-vb2",
+ "urls": [
+  "https://andonlabs.com/evals/vending-bench-2",
+  "https://epoch.ai/data/benchmark_data.zip"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://epoch.ai/data/benchmark_data.zip (vending_bench_2_external.csv)",
+   "captured": "2026-10-19T08:07:28Z",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "note": "file of Epoch AI's benchmark_data.zip, saved by salvo g4 (file mtime); the legacy rows cite it as the relay of andonlabs.com/evals/vending-bench-2"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://andonlabs.com/evals/vending-bench-2",
+   "captured": "2026-10-19T08:07:43Z",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.html",
+   "note": "the board page (leaderboard: top 10 visible, the rest hydrates client-side), saved by salvo g4; the same bytes as the 15 Oct copy of salvo s23"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv": "85e5ce791a8aae78c17d4fc37772102b539e02cd0a8b3fc8adaac774924b4db4",
+  "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.html": "d7143e4bf3833c19e6aee1c43d370cd88ca765e7c0180f2e018fcb125ec7ffef",
+  "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt": "b856608da92aa062c79381162fe41cc8e889097fb038bf4748c99e68ee9cecb9"
+ },
+ "harvested_at": "2026-10-19T08:07:28Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-andonlabs-vb2 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved Epoch CSV vending_bench_2_external.csv and the saved Andon Labs page (salvo g4 copies)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "from": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.html",
+   "tool": "htmltxt.py (this folder): text of the page, one line per block, one table cell per line ending \" |\"; script and style dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "where": "Epoch AI vending_bench_2_external.csv: one row per model version",
+   "format": "csv",
+   "row_key": "Model version",
+   "columns": {
+    "Model version": "note",
+    "Score": {
+     "says": "score",
+     "term": "USD-final-balance",
+     "scale": "raw",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "Release date": "note",
+    "Organization": "note",
+    "Name": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "scored on their bank account balance at the end",
+   "level": "written",
+   "form": "prose",
+   "where": "page intro",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Models are tasked with running a simulated vending machine business over a year and scored on their bank account balance at the end."
+  },
+  {
+   "id": "F2",
+   "says": "aggregation",
+   "about": null,
+   "value": "Average across runs",
+   "level": "written",
+   "form": "label",
+   "where": "leaderboard header \"Current leaderboard — Average across runs\"",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Current leaderboard Average across runs"
+  },
+  {
+   "id": "F3",
+   "says": "headline-metric",
+   "about": null,
+   "value": "Money Balance",
+   "level": "written",
+   "form": "label",
+   "where": "leaderboard column header",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Model | Money Balance"
+  },
+  {
+   "id": "F4",
+   "says": "model-name",
+   "about": "claude-opus-5_unknown",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-5_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 5"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": "claude-opus-5_unknown",
+   "value": "Claude Opus 5 | $11,181.87 ± $2,094",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Claude Opus 5 | $11,181.87 ± $2,094"
+  },
+  {
+   "id": "F6",
+   "says": "model-name",
+   "about": "claude-sonnet-5-5_unknown",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-sonnet-5-5_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Sonnet 5.5"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": "claude-sonnet-5-5_unknown",
+   "value": "Claude Sonnet 5.5 New | $11,165.28 ± $1,585",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Claude Sonnet 5.5 New | $11,165.28 ± $1,585"
+  },
+  {
+   "id": "F8",
+   "says": "model-name",
+   "about": "claude-opus-4-7_unknown",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-7_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 4.7"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": "claude-opus-4-7_unknown",
+   "value": "Claude Opus 4.7 | $10,936.76 ± $1,181",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Claude Opus 4.7 | $10,936.76 ± $1,181"
+  },
+  {
+   "id": "F10",
+   "says": "model-name",
+   "about": "claude-opus-5-5_unknown",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-5-5_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 5.5"
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "claude-opus-4-6_unknown",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-6_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 4.6"
+  },
+  {
+   "id": "F12",
+   "says": "model-name",
+   "about": "claude-sonnet-4-6_unknown",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-sonnet-4-6_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Sonnet 4.6"
+  },
+  {
+   "id": "F13",
+   "says": "model-name",
+   "about": "claude-sonnet-5_unknown",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-sonnet-5_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Sonnet 5"
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "claude-opus-4-8_unknown",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-8_unknown, column Name (the part before the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 4.8 - High"
+  },
+  {
+   "id": "F15",
+   "says": "effort-label",
+   "about": "claude-opus-4-8_unknown",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-8_unknown, column Name (the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 4.8 - High"
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": "claude-fable-5_high",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_high, column Name (the part before the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - High"
+  },
+  {
+   "id": "F17",
+   "says": "effort-label",
+   "about": "claude-fable-5_high",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_high, column Name (the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - High"
+  },
+  {
+   "id": "F18",
+   "says": "model-name",
+   "about": "claude-fable-5-1_unknown",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5-1_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5.1"
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "claude-fable-5_low",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_low, column Name (the part before the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - Low"
+  },
+  {
+   "id": "F20",
+   "says": "effort-label",
+   "about": "claude-fable-5_low",
+   "value": "Low",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_low, column Name (the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - Low"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "claude-opus-4-5-20251101_unknown",
+   "value": "Claude Opus 4.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-5-20251101_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 4.5"
+  },
+  {
+   "id": "F22",
+   "says": "model-name",
+   "about": "claude-fable-5_max",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_max, column Name (the part before the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - Max"
+  },
+  {
+   "id": "F23",
+   "says": "effort-label",
+   "about": "claude-fable-5_max",
+   "value": "Max",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_max, column Name (the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - Max"
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": "claude-fable-5",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5, column Name (the part before the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - None"
+  },
+  {
+   "id": "F25",
+   "says": "effort-label",
+   "about": "claude-fable-5",
+   "value": "None",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5, column Name (the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - None"
+  },
+  {
+   "id": "F26",
+   "says": "model-name",
+   "about": "claude-fable-5_medium",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_medium, column Name (the part before the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - Medium"
+  },
+  {
+   "id": "F27",
+   "says": "effort-label",
+   "about": "claude-fable-5_medium",
+   "value": "Medium",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-fable-5_medium, column Name (the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Fable 5 - Medium"
+  },
+  {
+   "id": "F28",
+   "says": "model-name",
+   "about": "claude-sonnet-4-5-20250929_unknown",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-sonnet-4-5-20250929_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Sonnet 4.5"
+  },
+  {
+   "id": "F29",
+   "says": "model-name",
+   "about": "claude-haiku-5-5_unknown",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-haiku-5-5_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Haiku 5.5"
+  },
+  {
+   "id": "F30",
+   "says": "model-name",
+   "about": "claude-opus-4-8_max",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-8_max, column Name (the part before the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 4.8 - Max"
+  },
+  {
+   "id": "F31",
+   "says": "effort-label",
+   "about": "claude-opus-4-8_max",
+   "value": "Max",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-opus-4-8_max, column Name (the level suffix)",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Opus 4.8 - Max"
+  },
+  {
+   "id": "F32",
+   "says": "model-name",
+   "about": "claude-haiku-4-5-20251001_unknown",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row claude-haiku-4-5-20251001_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Claude Haiku 4.5"
+  },
+  {
+   "id": "F33",
+   "says": "model-name",
+   "about": "gpt-6-astra_unknown",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-6-astra_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-6 Astra"
+  },
+  {
+   "id": "F34",
+   "says": "note",
+   "about": "gpt-6-astra_unknown",
+   "value": "GPT-6 Astra | $15,514.70 ± $1,074",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "GPT-6 Astra | $15,514.70 ± $1,074"
+  },
+  {
+   "id": "F35",
+   "says": "model-name",
+   "about": "gpt-6-sol_unknown",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-6-sol_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-6 Sol"
+  },
+  {
+   "id": "F36",
+   "says": "note",
+   "about": "gpt-6-sol_unknown",
+   "value": "GPT-6 Sol | $14,427.85 ± $1,051",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "GPT-6 Sol | $14,427.85 ± $1,051"
+  },
+  {
+   "id": "F37",
+   "says": "model-name",
+   "about": "gemini-4-argon_unknown",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-4-argon_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 4 Argon"
+  },
+  {
+   "id": "F38",
+   "says": "note",
+   "about": "gemini-4-argon_unknown",
+   "value": "Gemini 4 Argon New | $13,718.16 ± $3,100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Gemini 4 Argon New | $13,718.16 ± $3,100"
+  },
+  {
+   "id": "F39",
+   "says": "model-name",
+   "about": "grok-4.7_unknown",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "data-file",
+   "where": "row grok-4.7_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Grok 4.7"
+  },
+  {
+   "id": "F40",
+   "says": "note",
+   "about": "grok-4.7_unknown",
+   "value": "Grok 4.7 | $10,536.83 ± $652",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "Grok 4.7 | $10,536.83 ± $652"
+  },
+  {
+   "id": "F41",
+   "says": "model-name",
+   "about": "gpt-5.6-sol_unknown",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.6-sol_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.6 Sol"
+  },
+  {
+   "id": "F42",
+   "says": "note",
+   "about": "gpt-5.6-sol_unknown",
+   "value": "GPT-5.6 Sol | $9,619.37 ± $1,338",
+   "level": "written",
+   "form": "table-cell",
+   "where": "leaderboard row of the page (top 10): the page prints the mean and its spread",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/andonlabs-vending-bench-2.txt",
+   "quote": "GPT-5.6 Sol | $9,619.37 ± $1,338"
+  },
+  {
+   "id": "F43",
+   "says": "model-name",
+   "about": "grok-4.6_unknown",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "data-file",
+   "where": "row grok-4.6_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Grok 4.6"
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "glm-5.2_unknown",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "data-file",
+   "where": "row glm-5.2_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GLM-5.2"
+  },
+  {
+   "id": "F45",
+   "says": "model-name",
+   "about": "glm-5.3_unknown",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row glm-5.3_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GLM-5.3"
+  },
+  {
+   "id": "F46",
+   "says": "model-name",
+   "about": "gpt-5.5_unknown",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.5_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.5"
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "gpt-5.6-terra_unknown",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.6-terra_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.6 Terra"
+  },
+  {
+   "id": "F48",
+   "says": "model-name",
+   "about": "kimi-k2.6",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "where": "row kimi-k2.6, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Kimi K2.6"
+  },
+  {
+   "id": "F49",
+   "says": "model-name",
+   "about": "gpt-5.4-2026-03-05_unknown",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.4-2026-03-05_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.4"
+  },
+  {
+   "id": "F50",
+   "says": "model-name",
+   "about": "gpt-5.3-codex",
+   "value": "GPT-5.3-Codex",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.3-codex, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.3-Codex"
+  },
+  {
+   "id": "F51",
+   "says": "model-name",
+   "about": "glm-5.1",
+   "value": "GLM-5.1",
+   "level": "written",
+   "form": "data-file",
+   "where": "row glm-5.1, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GLM-5.1"
+  },
+  {
+   "id": "F52",
+   "says": "model-name",
+   "about": "gemini-3-pro-preview",
+   "value": "Gemini 3 Pro",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-3-pro-preview, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 3 Pro"
+  },
+  {
+   "id": "F53",
+   "says": "model-name",
+   "about": "gemini-3.5-flash_unknown",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-3.5-flash_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 3.5 Flash"
+  },
+  {
+   "id": "F54",
+   "says": "model-name",
+   "about": "kimi-k3_unknown",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row kimi-k3_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Kimi K3 (Moonshot)"
+  },
+  {
+   "id": "F55",
+   "says": "model-name",
+   "about": "qwen3.6-plus",
+   "value": "Qwen 3.6 Plus",
+   "level": "written",
+   "form": "data-file",
+   "where": "row qwen3.6-plus, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Qwen 3.6 Plus"
+  },
+  {
+   "id": "F56",
+   "says": "model-name",
+   "about": "gemini-3.8-flash_unknown",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-3.8-flash_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 3.8 Flash"
+  },
+  {
+   "id": "F57",
+   "says": "model-name",
+   "about": "kimi-k2.7-code",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "data-file",
+   "where": "row kimi-k2.7-code, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Kimi K2.7 Code"
+  },
+  {
+   "id": "F58",
+   "says": "model-name",
+   "about": "grok-4-20",
+   "value": "Grok 4.20",
+   "level": "written",
+   "form": "data-file",
+   "where": "row grok-4-20, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Grok 4.20"
+  },
+  {
+   "id": "F59",
+   "says": "model-name",
+   "about": "glm-5",
+   "value": "GLM-5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row glm-5, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GLM-5"
+  },
+  {
+   "id": "F60",
+   "says": "model-name",
+   "about": "qwen3.6-max-preview",
+   "value": "Qwen 3.6 Max",
+   "level": "written",
+   "form": "data-file",
+   "where": "row qwen3.6-max-preview, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Qwen 3.6 Max"
+  },
+  {
+   "id": "F61",
+   "says": "model-name",
+   "about": "gpt-5.6-luna_unknown",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.6-luna_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.6 Luna"
+  },
+  {
+   "id": "F62",
+   "says": "model-name",
+   "about": "grok-4.5_unknown",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row grok-4.5_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Grok 4.5"
+  },
+  {
+   "id": "F63",
+   "says": "model-name",
+   "about": "gemini-3.1-pro-preview-customtools",
+   "value": "Gemini 3.1 Pro Custom Tools",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-3.1-pro-preview-customtools, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 3.1 Pro Custom Tools"
+  },
+  {
+   "id": "F64",
+   "says": "model-name",
+   "about": "gemini-3-flash-preview",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-3-flash-preview, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 3 Flash"
+  },
+  {
+   "id": "F65",
+   "says": "model-name",
+   "about": "gpt-5.2-2025-12-11_unknown",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.2-2025-12-11_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.2"
+  },
+  {
+   "id": "F66",
+   "says": "model-name",
+   "about": "deepseek-v4-pro_unknown",
+   "value": "Deepseek V4 Pro",
+   "level": "written",
+   "form": "data-file",
+   "where": "row deepseek-v4-pro_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Deepseek V4 Pro"
+  },
+  {
+   "id": "F67",
+   "says": "model-name",
+   "about": "glm-4.7",
+   "value": "GLM-4.7",
+   "level": "written",
+   "form": "data-file",
+   "where": "row glm-4.7, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GLM-4.7"
+  },
+  {
+   "id": "F68",
+   "says": "model-name",
+   "about": "gpt-5.1-2025-11-13_unknown",
+   "value": "GPT-5.1",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5.1-2025-11-13_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5.1"
+  },
+  {
+   "id": "F69",
+   "says": "model-name",
+   "about": "kimi-k2.5",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "row kimi-k2.5, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Kimi K2.5"
+  },
+  {
+   "id": "F70",
+   "says": "model-name",
+   "about": "grok-4-1-fast-reasoning",
+   "value": "Grok 4.1 Fast",
+   "level": "written",
+   "form": "data-file",
+   "where": "row grok-4-1-fast-reasoning, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Grok 4.1 Fast"
+  },
+  {
+   "id": "F71",
+   "says": "model-name",
+   "about": "DeepSeek-V3.2-Exp_unknown",
+   "value": "DeepSeek-V3.2",
+   "level": "written",
+   "form": "data-file",
+   "where": "row DeepSeek-V3.2-Exp_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "DeepSeek-V3.2"
+  },
+  {
+   "id": "F72",
+   "says": "model-name",
+   "about": "gemini-3.1-pro-preview",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-3.1-pro-preview, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 3.1 Pro"
+  },
+  {
+   "id": "F73",
+   "says": "model-name",
+   "about": "gemini-2.5-pro",
+   "value": "Gemini 2.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-2.5-pro, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 2.5 Pro"
+  },
+  {
+   "id": "F74",
+   "says": "model-name",
+   "about": "gemini-2.5-flash",
+   "value": "Gemini 2.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gemini-2.5-flash, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Gemini 2.5 Flash"
+  },
+  {
+   "id": "F75",
+   "says": "model-name",
+   "about": "qwen3.5-flash",
+   "value": "Qwen 3.5 35B A3B",
+   "level": "written",
+   "form": "data-file",
+   "where": "row qwen3.5-flash, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Qwen 3.5 35B A3B"
+  },
+  {
+   "id": "F76",
+   "says": "model-name",
+   "about": "qwen3.5-27B",
+   "value": "Qwen 3.5 27B",
+   "level": "written",
+   "form": "data-file",
+   "where": "row qwen3.5-27B, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Qwen 3.5 27B"
+  },
+  {
+   "id": "F77",
+   "says": "model-name",
+   "about": "qwen3-max-2025-09-23",
+   "value": "Qwen3 Max",
+   "level": "written",
+   "form": "data-file",
+   "where": "row qwen3-max-2025-09-23, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Qwen3 Max"
+  },
+  {
+   "id": "F78",
+   "says": "model-name",
+   "about": "grok-4.3_unknown",
+   "value": "Grok 4.3",
+   "level": "written",
+   "form": "data-file",
+   "where": "row grok-4.3_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Grok 4.3"
+  },
+  {
+   "id": "F79",
+   "says": "model-name",
+   "about": "qwen3.5-plus",
+   "value": "Qwen 3.5 Plus",
+   "level": "written",
+   "form": "data-file",
+   "where": "row qwen3.5-plus, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Qwen 3.5 Plus"
+  },
+  {
+   "id": "F80",
+   "says": "model-name",
+   "about": "Qwen3-235B-A22B-Thinking-2507",
+   "value": "Qwen3 235B A22B Thinking",
+   "level": "written",
+   "form": "data-file",
+   "where": "row Qwen3-235B-A22B-Thinking-2507, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "Qwen3 235B A22B Thinking"
+  },
+  {
+   "id": "F81",
+   "says": "model-name",
+   "about": "gpt-oss-120b",
+   "value": "GPT-OSS-120b",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-oss-120b, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-OSS-120b"
+  },
+  {
+   "id": "F82",
+   "says": "model-name",
+   "about": "gpt-5-mini-2025-08-07_unknown",
+   "value": "GPT-5 mini",
+   "level": "written",
+   "form": "data-file",
+   "where": "row gpt-5-mini-2025-08-07_unknown, column Name",
+   "file": "/work/.salvo14/mig/convert-andonlabs-vb2/evidence/vending_bench_2_external.csv",
+   "quote": "GPT-5 mini"
+  }
+ ]
+}

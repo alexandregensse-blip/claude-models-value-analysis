@@ -1,0 +1,230 @@
+{
+ "id": "src-aimultiple.com-text-to-sql-2026-10-14",
+ "publisher": "aimultiple.com",
+ "urls": [
+  "https://aimultiple.com/text-to-sql"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://aimultiple.com/text-to-sql",
+   "captured": "2026-10-19T08:06:32Z",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.html",
+   "note": "page copy saved by salvo g8 (\"Last updated: October 14, 2026\"; article \"updated on Oct 1, 2026\"); the legacy refs name this copy"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.html": "7a8f8a09e7a4a69e14d4dd980406942e3c970ef3dda60322c576bb7dd515b1ca",
+  "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt": "7c507d962cc763b9708e810aaf5f460016363b1e4a79a582743e35e352791903",
+  "/work/.salvo14/mig/convert-aimultiple.com/evidence/text-to-sql-data.csv": "f733d9535193ee6cb8253c4935de114795eeb4bf319dc6656a5d27f1d5a35c53"
+ },
+ "harvested_at": "2026-10-19T08:06:32Z",
+ "published": {
+  "value": "2026-10-01",
+  "where": "article header",
+  "quote": "updated on Oct 1, 2026",
+  "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt"
+ },
+ "salvo": "salvo14/mig/convert-aimultiple.com (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved HTML of the page (copy of 14 Oct, salvo g8) and the JSON of its chart and table components",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "from": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.html",
+   "tool": "htmltxt.py (this folder): text of the page, one line per block, one table cell per line ending \" |\"; script and style dropped"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/text-to-sql-data.csv",
+   "from": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.html",
+   "tool": "convert.py: the page embeds its charts and tables as JSON (escaped in the HTML); one row per model of the cost-vs-accuracy scatter chart (x run cost, y SQL accuracy, cost_basis, actual_cost_basis, harness, harness_label, cache_note, cached_input_pct) joined by name with the row of the results table (SQL accuracy, before reference review, after answer review, main n / comparison n) printed by the page; values copied as they are"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/text-to-sql-data.csv",
+   "where": "one row per model: scatter point + table row of the page",
+   "format": "csv",
+   "row_key": "name",
+   "columns": {
+    "name": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "sql_accuracy_pct": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "run_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "cost_basis": "note",
+    "actual_cost_basis": "note",
+    "harness": "note",
+    "harness_label": "note",
+    "cache_note": "note",
+    "cached_input_pct": "note",
+    "table_sql_accuracy": "note",
+    "table_before_reference_review": "note",
+    "table_after_answer_review": "note",
+    "table_main_n_comparison_n": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "Each model reaches a different set of SQL questions because scoring depends on its database choices.",
+   "level": "written",
+   "form": "prose",
+   "where": "findings",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "Each model reaches a different set of SQL questions because scoring depends on its database choices."
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "For the 46 OpenRouter runs, we requested temperature 0.",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: Questions and execution",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "For the 46 OpenRouter runs, we requested temperature 0."
+  },
+  {
+   "id": "F3",
+   "says": "unit",
+   "about": null,
+   "value": "benchmark run",
+   "level": "written",
+   "form": "prose",
+   "where": "Cost vs. SQL accuracy paragraph",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "Run cost covers the retained routing and SQL responses from each model’s benchmark run.",
+   "term": "per-run"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "where": "Cost vs. SQL accuracy paragraph: \"$188.71\", \"$7.67 per run\"",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "Opus 5.5’s 87.8% score is paired with an estimated API-equivalent cost of $188.71.",
+   "term": "USD"
+  },
+  {
+   "id": "F5",
+   "says": "cost-basis",
+   "about": null,
+   "value": "metered costs",
+   "level": "written",
+   "form": "prose",
+   "where": "Cost vs. SQL accuracy paragraph",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "The 73 API models use metered costs.",
+   "term": "billed"
+  },
+  {
+   "id": "F6",
+   "says": "cost-method",
+   "about": null,
+   "value": "metered costs",
+   "level": "written",
+   "form": "prose",
+   "where": "Cost vs. SQL accuracy paragraph",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "The 73 API models use metered costs.",
+   "term": "provider-invoice"
+  },
+  {
+   "id": "F7",
+   "says": "cost-basis",
+   "about": null,
+   "value": "estimates based on their recorded CLI tokens and OpenRouter prices checked on 1 October 2026",
+   "level": "written",
+   "form": "prose",
+   "where": "Cost vs. SQL accuracy paragraph",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "Opus 5.5, Fable 5.1 and GPT-6 Astra have separately labeled estimates based on their recorded CLI tokens and OpenRouter prices checked on 1 October 2026",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F8",
+   "says": "cost-method",
+   "about": null,
+   "value": "estimates based on their recorded CLI tokens and OpenRouter prices",
+   "level": "written",
+   "form": "prose",
+   "where": "Cost vs. SQL accuracy paragraph",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "Opus 5.5, Fable 5.1 and GPT-6 Astra have separately labeled estimates based on their recorded CLI tokens and OpenRouter prices checked on 1 October 2026",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F9",
+   "says": "price-table",
+   "about": null,
+   "value": "OpenRouter prices checked on 1 October 2026",
+   "level": "written",
+   "form": "prose",
+   "where": "Cost vs. SQL accuracy paragraph",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "Opus 5.5, Fable 5.1 and GPT-6 Astra have separately labeled estimates based on their recorded CLI tokens and OpenRouter prices checked on 1 October 2026"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": null,
+   "value": "medium reasoning effort",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: Questions and execution",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "GPT-6 Astra ran through Codex CLI. Opus 5.5 and Fable 5.1 used Claude Code. All three CLI runs used medium reasoning effort."
+  },
+  {
+   "id": "F11",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "GPT-6 Astra ran through Codex CLI. Opus 5.5 and Fable 5.1 used Claude Code. All three CLI runs used medium reasoning effort.",
+   "term": "claude-code"
+  },
+  {
+   "id": "F12",
+   "says": "harness",
+   "about": null,
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology",
+   "file": "/work/.salvo14/mig/convert-aimultiple.com/evidence/aimultiple-text-to-sql-20261014.txt",
+   "quote": "GPT-6 Astra ran through Codex CLI. Opus 5.5 and Fable 5.1 used Claude Code. All three CLI runs used medium reasoning effort.",
+   "term": "codex-cli"
+  }
+ ]
+}
