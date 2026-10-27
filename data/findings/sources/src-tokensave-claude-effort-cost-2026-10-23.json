@@ -1,0 +1,1074 @@
+{
+ "urls": [
+  "https://tokensave.app/data/claude-effort-cost"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://tokensave.app/data/claude-effort-cost",
+   "captured": "2026-10-27T10:25:03Z",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "note": "Live fetch 2026-10-27 (curl); the page states 'Updated 2026-10-23'. It still lists the 2026-10-09 and 2026-10-21 runs the legacy rows came from (the legacy rows were read from the Hugging Face CSV, which is not the page)."
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html": "d0134d03c145f1c90e3f0965cab268ad5549d41452bf3c31cef81fec3ccd4ac6"
+ },
+ "harvested_at": "2026-10-27T10:25:03Z",
+ "published": {
+  "value": "2026-10-23",
+  "where": "page header 'Updated 2026-10-23'",
+  "quote": "Updated 2026-10-23",
+  "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html"
+ },
+ "salvo": "salvo14/mig C2 wave (agent C2 tokensave)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page",
+ "snapshot_of": null,
+ "id": "src-tokensave-claude-effort-cost-2026-10-23",
+ "publisher": "tokensave",
+ "facts": [
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "cost columns of the tables ('$0.48')",
+   "quote": "Opus 5.5 · low 2026-10-09 32 s 3,368 129,315 $0.48 138",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "Three runs per level and one task.",
+   "term": "per-run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "page header: 'the same coding task' per run ('Three runs per level'; one row = one run)",
+   "quote": "Three runs per level and one task.",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method",
+   "quote": "Claude Code 2.1.295 on Windows 11",
+   "term": "claude-code",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "ccusage at API prices",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method, first measurement (2026-10-09)",
+   "quote": "tokens and cost from ccusage at API prices",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "ccusage at API prices",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method, first measurement (2026-10-09)",
+   "quote": "tokens and cost from ccusage at API prices",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "Claude Code’s own usage report at list prices",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method, runs of 2026-10-23 and Haiku 5.5 of 2026-10-21 ('same settings as above')",
+   "quote": "Tokens and cost from Claude Code’s own usage report at list prices",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "Claude Code’s own usage report at list prices",
+   "term": "cli-total",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method, runs of 2026-10-23 and Haiku 5.5 of 2026-10-21 ('same settings as above')",
+   "quote": "Tokens and cost from Claude Code’s own usage report at list prices",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "one run per level on an earlier Claude Code version with default settings",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method, first measurement (2026-10-09)",
+   "quote": "one run per level on an earlier Claude Code version with default settings",
+   "id": "F8",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "claude -p --model … --effort … --permission-mode acceptEdits --output-format stream-json --strict-mcp-config",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method, runs of 2026-10-23",
+   "quote": "claude -p --model … --effort … --permission-mode acceptEdits --output-format stream-json --strict-mcp-config",
+   "id": "F9",
+   "about": null
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · low",
+   "value": "0.48",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · low', cost column (2026-10-09)",
+   "quote": "Opus 5.5 · low 2026-10-09 32 s 3,368 129,315 $0.48 138",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F10"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · low",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · low', model label",
+   "quote": "Opus 5.5 · low 2026-10-09 32 s 3,368 129,315 $0.48 138",
+   "id": "F11"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · low', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · low 2026-10-09 32 s 3,368 129,315 $0.48 138",
+   "id": "F12"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · low",
+   "value": "2026-10-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "'All runs' table, row 'Opus 5.5 · low', column Measured",
+   "quote": "Opus 5.5 · low 2026-10-09 32 s 3,368 129,315 $0.48 138",
+   "id": "F13"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · medium",
+   "value": "0.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · medium', cost column (2026-10-09)",
+   "quote": "Opus 5.5 · medium 2026-10-09 52 s 6,299 133,428 $0.56 358",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F14"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · medium",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · medium', model label",
+   "quote": "Opus 5.5 · medium 2026-10-09 52 s 6,299 133,428 $0.56 358",
+   "id": "F15"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · medium', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · medium 2026-10-09 52 s 6,299 133,428 $0.56 358",
+   "id": "F16"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · medium",
+   "value": "2026-10-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "'All runs' table, row 'Opus 5.5 · medium', column Measured",
+   "quote": "Opus 5.5 · medium 2026-10-09 52 s 6,299 133,428 $0.56 358",
+   "id": "F17"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · high",
+   "value": "0.75",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · high', cost column (2026-10-09)",
+   "quote": "Opus 5.5 · high 2026-10-09 1 min 50 s 12,376 222,854 $0.75 523",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F18"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · high",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · high', model label",
+   "quote": "Opus 5.5 · high 2026-10-09 1 min 50 s 12,376 222,854 $0.75 523",
+   "id": "F19"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · high', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · high 2026-10-09 1 min 50 s 12,376 222,854 $0.75 523",
+   "id": "F20"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · high",
+   "value": "2026-10-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "'All runs' table, row 'Opus 5.5 · high', column Measured",
+   "quote": "Opus 5.5 · high 2026-10-09 1 min 50 s 12,376 222,854 $0.75 523",
+   "id": "F21"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · xhigh",
+   "value": "1.36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · xhigh', cost column (2026-10-09)",
+   "quote": "Opus 5.5 · xhigh 2026-10-09 4 min 32 s 32,435 472,082 $1.36 639",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F22"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · xhigh",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · xhigh', model label",
+   "quote": "Opus 5.5 · xhigh 2026-10-09 4 min 32 s 32,435 472,082 $1.36 639",
+   "id": "F23"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · xhigh', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · xhigh 2026-10-09 4 min 32 s 32,435 472,082 $1.36 639",
+   "id": "F24"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · xhigh",
+   "value": "2026-10-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "'All runs' table, row 'Opus 5.5 · xhigh', column Measured",
+   "quote": "Opus 5.5 · xhigh 2026-10-09 4 min 32 s 32,435 472,082 $1.36 639",
+   "id": "F25"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · max",
+   "value": "5.25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · max', cost column (2026-10-09)",
+   "quote": "Opus 5.5 · max 2026-10-09 22 min 22 s 160,033 2,504,957 $5.25 1,121",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F26"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · max",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · max', model label",
+   "quote": "Opus 5.5 · max 2026-10-09 22 min 22 s 160,033 2,504,957 $5.25 1,121",
+   "id": "F27"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · max",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · max', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · max 2026-10-09 22 min 22 s 160,033 2,504,957 $5.25 1,121",
+   "id": "F28"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · max",
+   "value": "2026-10-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "'All runs' table, row 'Opus 5.5 · max', column Measured",
+   "quote": "Opus 5.5 · max 2026-10-09 22 min 22 s 160,033 2,504,957 $5.25 1,121",
+   "id": "F29"
+  },
+  {
+   "says": "cost",
+   "about": "Sonnet 5.5 · medium",
+   "value": "0.25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · medium', cost column (2026-10-09)",
+   "quote": "Sonnet 5.5 · medium 2026-10-09 37 s 4,100 115,073 $0.25 198",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F30"
+  },
+  {
+   "says": "model-name",
+   "about": "Sonnet 5.5 · medium",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · medium', model label",
+   "quote": "Sonnet 5.5 · medium 2026-10-09 37 s 4,100 115,073 $0.25 198",
+   "id": "F31"
+  },
+  {
+   "says": "effort-label",
+   "about": "Sonnet 5.5 · medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · medium', effort label (the runs pass --effort)",
+   "quote": "Sonnet 5.5 · medium 2026-10-09 37 s 4,100 115,073 $0.25 198",
+   "id": "F32"
+  },
+  {
+   "says": "run-date",
+   "about": "Sonnet 5.5 · medium",
+   "value": "2026-10-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "'All runs' table, row 'Sonnet 5.5 · medium', column Measured",
+   "quote": "Sonnet 5.5 · medium 2026-10-09 37 s 4,100 115,073 $0.25 198",
+   "id": "F33"
+  },
+  {
+   "says": "cost",
+   "about": "Sonnet 5.5 · high",
+   "value": "0.30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · high', cost column (2026-10-09)",
+   "quote": "Sonnet 5.5 · high 2026-10-09 58 s 8,073 137,593 $0.30 398",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F34"
+  },
+  {
+   "says": "model-name",
+   "about": "Sonnet 5.5 · high",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · high', model label",
+   "quote": "Sonnet 5.5 · high 2026-10-09 58 s 8,073 137,593 $0.30 398",
+   "id": "F35"
+  },
+  {
+   "says": "effort-label",
+   "about": "Sonnet 5.5 · high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · high', effort label (the runs pass --effort)",
+   "quote": "Sonnet 5.5 · high 2026-10-09 58 s 8,073 137,593 $0.30 398",
+   "id": "F36"
+  },
+  {
+   "says": "run-date",
+   "about": "Sonnet 5.5 · high",
+   "value": "2026-10-09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "'All runs' table, row 'Sonnet 5.5 · high', column Measured",
+   "quote": "Sonnet 5.5 · high 2026-10-09 58 s 8,073 137,593 $0.30 398",
+   "id": "F37"
+  },
+  {
+   "says": "cost",
+   "about": "Haiku 5.5 · low",
+   "value": "0.0095",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level (average of 3 runs)', row low, column Cost",
+   "quote": "low $0.0095 8,979 38 s 2.7 334 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F38"
+  },
+  {
+   "says": "model-name",
+   "about": "Haiku 5.5 · low",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Haiku 5.5 by effort level (average of 3 runs)'",
+   "quote": "Haiku 5.5 by effort level (average of 3 runs)",
+   "id": "F39"
+  },
+  {
+   "says": "effort-label",
+   "about": "Haiku 5.5 · low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level', column Effort, row low (the runs pass --effort)",
+   "quote": "low $0.0095 8,979 38 s 2.7 334 3/3",
+   "id": "F40"
+  },
+  {
+   "says": "run-date",
+   "about": "Haiku 5.5 · low",
+   "value": "2026-10-21",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method: 'Haiku 5.5 (2026-10-21)'",
+   "quote": "Haiku 5.5 (2026-10-21): Claude Code 2.1.295",
+   "id": "F41"
+  },
+  {
+   "says": "aggregation",
+   "value": "average of 3 runs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title",
+   "quote": "Haiku 5.5 by effort level (average of 3 runs)",
+   "id": "F42",
+   "about": null
+  },
+  {
+   "says": "cost",
+   "about": "Haiku 5.5 · medium",
+   "value": "0.0142",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level (average of 3 runs)', row medium, column Cost",
+   "quote": "medium $0.0142 16,123 1 min 8 s 2.0 386 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F43"
+  },
+  {
+   "says": "model-name",
+   "about": "Haiku 5.5 · medium",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Haiku 5.5 by effort level (average of 3 runs)'",
+   "quote": "Haiku 5.5 by effort level (average of 3 runs)",
+   "id": "F44"
+  },
+  {
+   "says": "effort-label",
+   "about": "Haiku 5.5 · medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level', column Effort, row medium (the runs pass --effort)",
+   "quote": "medium $0.0142 16,123 1 min 8 s 2.0 386 3/3",
+   "id": "F45"
+  },
+  {
+   "says": "run-date",
+   "about": "Haiku 5.5 · medium",
+   "value": "2026-10-21",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method: 'Haiku 5.5 (2026-10-21)'",
+   "quote": "Haiku 5.5 (2026-10-21): Claude Code 2.1.295",
+   "id": "F46"
+  },
+  {
+   "says": "cost",
+   "about": "Haiku 5.5 · high",
+   "value": "0.0205",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level (average of 3 runs)', row high, column Cost",
+   "quote": "high $0.0205 24,683 1 min 38 s 3.3 479 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F47"
+  },
+  {
+   "says": "model-name",
+   "about": "Haiku 5.5 · high",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Haiku 5.5 by effort level (average of 3 runs)'",
+   "quote": "Haiku 5.5 by effort level (average of 3 runs)",
+   "id": "F48"
+  },
+  {
+   "says": "effort-label",
+   "about": "Haiku 5.5 · high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level', column Effort, row high (the runs pass --effort)",
+   "quote": "high $0.0205 24,683 1 min 38 s 3.3 479 3/3",
+   "id": "F49"
+  },
+  {
+   "says": "run-date",
+   "about": "Haiku 5.5 · high",
+   "value": "2026-10-21",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method: 'Haiku 5.5 (2026-10-21)'",
+   "quote": "Haiku 5.5 (2026-10-21): Claude Code 2.1.295",
+   "id": "F50"
+  },
+  {
+   "says": "cost",
+   "about": "Haiku 5.5 · xhigh",
+   "value": "0.0388",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level (average of 3 runs)', row xhigh, column Cost",
+   "quote": "xhigh $0.0388 50,904 3 min 23 s 3.7 593 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F51"
+  },
+  {
+   "says": "model-name",
+   "about": "Haiku 5.5 · xhigh",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Haiku 5.5 by effort level (average of 3 runs)'",
+   "quote": "Haiku 5.5 by effort level (average of 3 runs)",
+   "id": "F52"
+  },
+  {
+   "says": "effort-label",
+   "about": "Haiku 5.5 · xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level', column Effort, row xhigh (the runs pass --effort)",
+   "quote": "xhigh $0.0388 50,904 3 min 23 s 3.7 593 3/3",
+   "id": "F53"
+  },
+  {
+   "says": "run-date",
+   "about": "Haiku 5.5 · xhigh",
+   "value": "2026-10-21",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method: 'Haiku 5.5 (2026-10-21)'",
+   "quote": "Haiku 5.5 (2026-10-21): Claude Code 2.1.295",
+   "id": "F54"
+  },
+  {
+   "says": "cost",
+   "about": "Haiku 5.5 · max",
+   "value": "0.38",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level (average of 3 runs)', row max, column Cost",
+   "quote": "max $0.38 136,954 9 min 21 s 15.0 661 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F55"
+  },
+  {
+   "says": "model-name",
+   "about": "Haiku 5.5 · max",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Haiku 5.5 by effort level (average of 3 runs)'",
+   "quote": "Haiku 5.5 by effort level (average of 3 runs)",
+   "id": "F56"
+  },
+  {
+   "says": "effort-label",
+   "about": "Haiku 5.5 · max",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table 'Haiku 5.5 by effort level', column Effort, row max (the runs pass --effort)",
+   "quote": "max $0.38 136,954 9 min 21 s 15.0 661 3/3",
+   "id": "F57"
+  },
+  {
+   "says": "run-date",
+   "about": "Haiku 5.5 · max",
+   "value": "2026-10-21",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "Method: 'Haiku 5.5 (2026-10-21)'",
+   "quote": "Haiku 5.5 (2026-10-21): Claude Code 2.1.295",
+   "id": "F58"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · low",
+   "value": "0.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · low', cost column (2026-10-23)",
+   "quote": "Opus 5.5 · low $0.17 3,299 48,781 29 s 131 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F59"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · low",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · low', model label",
+   "quote": "Opus 5.5 · low $0.17 3,299 48,781 29 s 131 3/3",
+   "id": "F60"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · low', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · low $0.17 3,299 48,781 29 s 131 3/3",
+   "id": "F61"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · low",
+   "value": "2026-10-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)'",
+   "quote": "Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)",
+   "id": "F62"
+  },
+  {
+   "says": "aggregation",
+   "value": "average of 3 runs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table heading",
+   "quote": "average of 3 runs",
+   "id": "F63",
+   "about": null
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · medium",
+   "value": "0.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · medium', cost column (2026-10-23)",
+   "quote": "Opus 5.5 · medium $0.26 6,177 72,290 51 s 347 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F64"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · medium",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · medium', model label",
+   "quote": "Opus 5.5 · medium $0.26 6,177 72,290 51 s 347 3/3",
+   "id": "F65"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · medium', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · medium $0.26 6,177 72,290 51 s 347 3/3",
+   "id": "F66"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · medium",
+   "value": "2026-10-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)'",
+   "quote": "Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)",
+   "id": "F67"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · high",
+   "value": "0.35",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · high', cost column (2026-10-23)",
+   "quote": "Opus 5.5 · high $0.35 9,690 71,065 1 min 21 s 512 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F68"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · high",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · high', model label",
+   "quote": "Opus 5.5 · high $0.35 9,690 71,065 1 min 21 s 512 3/3",
+   "id": "F69"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · high', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · high $0.35 9,690 71,065 1 min 21 s 512 3/3",
+   "id": "F70"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · high",
+   "value": "2026-10-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)'",
+   "quote": "Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)",
+   "id": "F71"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · xhigh",
+   "value": "0.82",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · xhigh', cost column (2026-10-23)",
+   "quote": "Opus 5.5 · xhigh $0.82 26,120 151,812 3 min 45 s 686 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F72"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · xhigh",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · xhigh', model label",
+   "quote": "Opus 5.5 · xhigh $0.82 26,120 151,812 3 min 45 s 686 3/3",
+   "id": "F73"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · xhigh', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · xhigh $0.82 26,120 151,812 3 min 45 s 686 3/3",
+   "id": "F74"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · xhigh",
+   "value": "2026-10-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)'",
+   "quote": "Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)",
+   "id": "F75"
+  },
+  {
+   "says": "cost",
+   "about": "Opus 5.5 · max",
+   "value": "5.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · max', cost column (2026-10-23)",
+   "quote": "Opus 5.5 · max $5.33 170,839 2,279,626 24 min 43 s 959 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F76"
+  },
+  {
+   "says": "model-name",
+   "about": "Opus 5.5 · max",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · max', model label",
+   "quote": "Opus 5.5 · max $5.33 170,839 2,279,626 24 min 43 s 959 3/3",
+   "id": "F77"
+  },
+  {
+   "says": "effort-label",
+   "about": "Opus 5.5 · max",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Opus 5.5 · max', effort label (the runs pass --effort)",
+   "quote": "Opus 5.5 · max $5.33 170,839 2,279,626 24 min 43 s 959 3/3",
+   "id": "F78"
+  },
+  {
+   "says": "run-date",
+   "about": "Opus 5.5 · max",
+   "value": "2026-10-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)'",
+   "quote": "Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)",
+   "id": "F79"
+  },
+  {
+   "says": "cost",
+   "about": "Sonnet 5.5 · medium",
+   "value": "0.0973",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · medium', cost column (2026-10-23)",
+   "quote": "Sonnet 5.5 · medium $0.0973 3,982 49,745 24 s 176 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "id": "F80"
+  },
+  {
+   "says": "model-name",
+   "about": "Sonnet 5.5 · medium",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · medium', model label",
+   "quote": "Sonnet 5.5 · medium $0.0973 3,982 49,745 24 s 176 3/3",
+   "id": "F81"
+  },
+  {
+   "says": "effort-label",
+   "about": "Sonnet 5.5 · medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · medium', effort label (the runs pass --effort)",
+   "quote": "Sonnet 5.5 · medium $0.0973 3,982 49,745 24 s 176 3/3",
+   "id": "F82"
+  },
+  {
+   "says": "run-date",
+   "about": "Sonnet 5.5 · medium",
+   "value": "2026-10-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)'",
+   "quote": "Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)",
+   "id": "F83"
+  },
+  {
+   "says": "cost",
+   "about": "Sonnet 5.5 · high",
+   "value": "0.12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · high', cost column (2026-10-23)",
+   "quote": "Sonnet 5.5 · high $0.12 5,317 52,404 33 s 293 3/3",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F84"
+  },
+  {
+   "says": "model-name",
+   "about": "Sonnet 5.5 · high",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · high', model label",
+   "quote": "Sonnet 5.5 · high $0.12 5,317 52,404 33 s 293 3/3",
+   "id": "F85"
+  },
+  {
+   "says": "effort-label",
+   "about": "Sonnet 5.5 · high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table row 'Sonnet 5.5 · high', effort label (the runs pass --effort)",
+   "quote": "Sonnet 5.5 · high $0.12 5,317 52,404 33 s 293 3/3",
+   "id": "F86"
+  },
+  {
+   "says": "run-date",
+   "about": "Sonnet 5.5 · high",
+   "value": "2026-10-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-tokensave/evidence/claude-effort-cost.html",
+   "where": "table title 'Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)'",
+   "quote": "Opus 5.5 and Sonnet 5.5 by effort level (average of 3 runs, 2026-10-23)",
+   "id": "F87"
+  }
+ ]
+}
