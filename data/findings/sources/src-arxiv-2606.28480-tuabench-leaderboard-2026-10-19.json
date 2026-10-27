@@ -1,0 +1,157 @@
+{
+ "id": "src-arxiv-2606.28480-tuabench-leaderboard-2026-10-19",
+ "publisher": "arxiv-2606.28480",
+ "urls": [
+  "https://tuabench.ai/",
+  "https://arxiv.org/abs/2606.28480"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://tuabench.ai/leaderboard.json",
+   "captured": "2026-10-19T07:51:36Z",
+   "note": "leaderboard.json fetched live by salvo g/g5 on 19 Oct 2026 (39 rows)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://tuabench.ai/leaderboard.json",
+   "captured": "2026-10-27T09:19:00Z",
+   "note": "fetched again on 27 Oct 2026: the 39 rows are identical (asserted) to the 19 Oct copy"
+  },
+  {
+   "id": "G3",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2606.28480",
+   "captured": "2026-10-27T09:19:00Z",
+   "note": "paper HTML (v1 of 26 Jun 2026) fetched on 27 Oct 2026: Table 5 prints the same 39 configurations (Agent, Model, Thinking, Success Rate, Pass@1, Pass@5, All-5) without cost; costs are in the leaderboard file (Figure 5 plots them)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/tuabench-leaderboard.json": "b2784bb06f0798ce97233c56576d7a1c9ef1f64c4e7971582436cd24a3f25c38",
+  "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.txt": "eef0f5dd6ed42b6c8cf25f0fd7e0cabd149d00ea09facabee83377b5485f43cd",
+  "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.html": "99d3b982ae27c9fb0e27d7eb82ac4899212d9f0c0d573e1bc96e2bb1c028edc8",
+  "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/live.json": "b2784bb06f0798ce97233c56576d7a1c9ef1f64c4e7971582436cd24a3f25c38"
+ },
+ "harvested_at": "2026-10-19T07:51:36Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.html",
+   "tool": "htmltxt.py (/work/.salvo14/mig/c2lib-f): text of the arXiv HTML page, one line per block, one table cell per line ending ' |'; script and style dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/tuabench-leaderboard.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "agent": "harness",
+    "model": "model-name",
+    "thinking": "effort-label",
+    "successRate": {
+     "says": "score",
+     "term": "score%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "costPerRun": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "successError": "note",
+    "pass1": "note",
+    "pass5": "note",
+    "all5": "note",
+    "logo": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/tuabench-leaderboard.json",
+   "where": "$._comment",
+   "quote": "costPerRun is USD for one full pass over the task suite"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "one full pass over the task suite",
+   "term": "per-suite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/tuabench-leaderboard.json",
+   "where": "$._comment: costPerRun = total cost / attempts per task",
+   "quote": "costPerRun is USD for one full pass over the task suite (total cost / attempts per task)"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "aggregation",
+   "value": "5 independent trials per task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.txt",
+   "where": "paper, Section 4.1 Metrics: mean success rate across the 5 trials of each agent-model-thinking configuration",
+   "quote": "we run 5 independent trials per task and report the mean success rate across all trials"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "metric-definition",
+   "value": "Success rate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.txt",
+   "where": "paper, Table 5 header; the leaderboard row field successRate is the same fraction (x100)",
+   "quote": "Success rate is the per-task pass rate averaged over five independent runs"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "items",
+   "value": "120 real-world tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.txt",
+   "where": "paper abstract",
+   "quote": "TUA-Bench includes 120 real-world tasks"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "note",
+   "value": "All configurations use the highest available reasoning-effort setting, except Claude Haiku 4.5†, for which thinking is disabled.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.28480/evidence/paper.txt",
+   "where": "paper, Table 3 caption (main results; the full table 5 covers the other settings)",
+   "quote": "All configurations use the highest available reasoning-effort setting, except Claude Haiku 4.5†, for which thinking is disabled."
+  }
+ ]
+}

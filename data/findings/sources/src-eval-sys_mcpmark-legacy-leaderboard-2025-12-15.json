@@ -1,0 +1,758 @@
+{
+ "id": "src-eval-sys_mcpmark-legacy-leaderboard-2025-12-15",
+ "publisher": "eval-sys/mcpmark",
+ "urls": [
+  "https://mcpmark.ai/leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://mcpmark.ai/leaderboard",
+   "captured": "2026-10-19T08:21:19Z",
+   "note": "page ('Legacy Leaderboard', Updated at 12/15/2025 06:36:08) saved by salvo g/g5 (src/mcpm.raw, file mtime). The same generated_at and the same 39-entry JSON block are in the copies of s23/b1 (15 Oct), s24/c1 (18 Oct), rb/rb2 (19 Oct), rd/xai1 and hk/qwen3.5-flash (20 Oct) and hn/qwen3.8-2.4t-a95b (21 Oct): the board is static"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.html": "6d93816abd80a2f0f806799b780070bce5b1b6140176c8b1dd789c029781b57b",
+  "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt": "49eb60a7755a1fab3d560fc20a26a00934b91a921755d5dc04f3bb6e9ab9043e",
+  "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark-data.json": "ef711a347eafa999113470bfd7715476a272f3ca710d2130bb0e12f1ad921828"
+ },
+ "harvested_at": "2026-10-19T08:21:19Z",
+ "published": {
+  "value": "2025-12-15",
+  "where": "page text 'Updated at 12/15/2025 06:36:08'; JSON generated_at 2025-12-15T06:36:08",
+  "quote": "\"generated_at\": \"2025-12-15T06:36:08",
+  "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "from": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.html",
+   "tool": "htmltxt.py (/work/.salvo14/mig/c2lib-f): text of the page, one line per block, one table cell per line; script and style dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark-data.json",
+   "from": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.html",
+   "tool": "the JSON block printed at the end of the page ('JSON { \"generated_at\": ... }', the page's own 'view the JSON below for detailed grade information'), copied verbatim from the text extraction (one line)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark-data.json",
+   "where": "$.overall",
+   "format": "json",
+   "row_key": "$key",
+   "columns": {
+    "actual_model_name": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "$['pass@1'].avg": {
+     "says": "score",
+     "term": "pass@1%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "per_run_cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "per_run_input_tokens": "note",
+    "per_run_output_tokens": "note",
+    "total_tasks": "note",
+    "avg_turns": "note",
+    "pass@4": "note",
+    "pass^4": "note",
+    "is_reasoning_model": "note",
+    "is_open_source_model": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Cost per run (the cells print '$466.18' etc.)",
+   "quote": "$466.18"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "Cost per run",
+   "term": "per-suite",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table header; one run = the whole benchmark (127 tasks of the five MCP servers); the JSON per_run_cost is total cost / 4 runs",
+   "quote": "Cost per run"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "aggregation",
+   "value": "4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark-data.json",
+   "where": "$.k (number of runs: Pass@1 is the average of k=4 runs, Pass@4 / Pass^4 use all four)"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "metric-definition",
+   "value": "Pass@1 (avg ± std)",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table header; rows are ordered by it",
+   "quote": "Pass@1 (avg ± std)"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "note",
+   "value": "claude-opus only ran pass@1 evaluation",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "footnote under the leaderboard table",
+   "quote": "claude-opus only ran pass@1 evaluation"
+  },
+  {
+   "id": "F6",
+   "about": "deepseek-v3-1-terminus-thinking",
+   "says": "model-name",
+   "value": "deepseek-v3.1-terminus",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark-data.json",
+   "where": "$.overall['deepseek-v3-1-terminus-thinking'].actual_model_name = 'deepseek-v3.1-terminus-thinking' (the model words, without the setting word 'thinking')"
+  },
+  {
+   "id": "F7",
+   "about": "deepseek-v3-1-terminus-thinking",
+   "says": "thinking-on",
+   "value": "thinking",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'deepseek-v3-1-terminus-thinking' (its suffix 'thinking')",
+   "quote": "deepseek-v3-1-terminus-thinking"
+  },
+  {
+   "id": "F8",
+   "about": "deepseek-v3-1-terminus-thinking",
+   "says": "note",
+   "value": "deepseek-v3-1-terminus-thinking",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 12.998, per_run_input_tokens 43080769.5, per_run_output_tokens 1859289.5 (not claimed as token classes), pass@4 0.3701, pass^4 0.0551, std 0.0329",
+   "quote": "deepseek-v3-1-terminus-thinking"
+  },
+  {
+   "id": "F9",
+   "about": "deepseek-chat",
+   "says": "note",
+   "value": "deepseek-chat",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 19.4331, per_run_input_tokens 62616943, per_run_output_tokens 356408.75 (not claimed as token classes), pass@4 0.2835, pass^4 0.0787, std 0.0141",
+   "quote": "deepseek-chat"
+  },
+  {
+   "id": "F10",
+   "about": "gpt-4-1",
+   "says": "note",
+   "value": "gpt-4-1",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 9.9449, per_run_input_tokens 41020860.25, per_run_output_tokens 196761.75 (not claimed as token classes), pass@4 0.126, pass^4 0.0315, std 0.0065",
+   "quote": "gpt-4-1"
+  },
+  {
+   "id": "F11",
+   "about": "claude-opus-4-1",
+   "says": "note",
+   "value": "claude-opus-4-1",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 17.4331, per_run_input_tokens 74430756, per_run_output_tokens 653210 (not claimed as token classes), pass@4 None, pass^4 None, std 0",
+   "quote": "claude-opus-4-1"
+  },
+  {
+   "id": "F12",
+   "about": "glm-4-5",
+   "says": "note",
+   "value": "glm-4-5",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 18.1378, per_run_input_tokens 53296503.25, per_run_output_tokens 519669.75 (not claimed as token classes), pass@4 0.2441, pass^4 0.063, std 0.0116",
+   "quote": "glm-4-5"
+  },
+  {
+   "id": "F13",
+   "about": "o3",
+   "says": "note",
+   "value": "o3",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 16.4724, per_run_input_tokens 52606685, per_run_output_tokens 1091337.25 (not claimed as token classes), pass@4 0.4331, pass^4 0.126, std 0.0204",
+   "quote": "o3"
+  },
+  {
+   "id": "F14",
+   "about": "claude-sonnet-4-5",
+   "says": "note",
+   "value": "claude-sonnet-4-5",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 16.7638, per_run_input_tokens 89917848, per_run_output_tokens 789724.75 (not claimed as token classes), pass@4 0.4646, pass^4 0.1654, std 0.0232",
+   "quote": "claude-sonnet-4-5"
+  },
+  {
+   "id": "F15",
+   "about": "claude-sonnet-4-low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'claude-sonnet-4-low' (its level suffix)",
+   "quote": "claude-sonnet-4-low"
+  },
+  {
+   "id": "F16",
+   "about": "claude-sonnet-4-low",
+   "says": "note",
+   "value": "claude-sonnet-4-low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 19.4232, per_run_input_tokens 150511017.75, per_run_output_tokens 627711 (not claimed as token classes), pass@4 0.3937, pass^4 0.1811, std 0.017",
+   "quote": "claude-sonnet-4-low"
+  },
+  {
+   "id": "F17",
+   "about": "gemini-2-5-pro",
+   "says": "note",
+   "value": "gemini-2-5-pro",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 10.9469, per_run_input_tokens 59645307, per_run_output_tokens 891020.75 (not claimed as token classes), pass@4 0.2992, pass^4 0.0472, std 0.0056",
+   "quote": "gemini-2-5-pro"
+  },
+  {
+   "id": "F18",
+   "about": "qwen-3-coder-plus",
+   "says": "note",
+   "value": "qwen-3-coder-plus",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 23.7461, per_run_input_tokens 180526181, per_run_output_tokens 446040.25 (not claimed as token classes), pass@4 0.4094, pass^4 0.126, std 0.0205",
+   "quote": "qwen-3-coder-plus"
+  },
+  {
+   "id": "F19",
+   "about": "gpt-5-mini-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-mini-high' (its level suffix)",
+   "quote": "gpt-5-mini-high"
+  },
+  {
+   "id": "F20",
+   "about": "gpt-5-mini-high",
+   "says": "note",
+   "value": "gpt-5-mini-high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 19.1791, per_run_input_tokens 132184681.25, per_run_output_tokens 3654251.5 (not claimed as token classes), pass@4 0.4646, pass^4 0.1654, std 0.0172",
+   "quote": "gpt-5-mini-high"
+  },
+  {
+   "id": "F21",
+   "about": "gpt-5-nano-low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-nano-low' (its level suffix)",
+   "quote": "gpt-5-nano-low"
+  },
+  {
+   "id": "F22",
+   "about": "gpt-5-nano-low",
+   "says": "note",
+   "value": "gpt-5-nano-low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 12.0118, per_run_input_tokens 37084526.25, per_run_output_tokens 1624259.75 (not claimed as token classes), pass@4 0.1024, pass^4 0.0079, std 0.0118",
+   "quote": "gpt-5-nano-low"
+  },
+  {
+   "id": "F23",
+   "about": "gpt-5-medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-medium' (its level suffix)",
+   "quote": "gpt-5-medium"
+  },
+  {
+   "id": "F24",
+   "about": "gpt-5-medium",
+   "says": "note",
+   "value": "gpt-5-medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 14.7146, per_run_input_tokens 79713423.75, per_run_output_tokens 2782218.5 (not claimed as token classes), pass@4 0.685, pass^4 0.3386, std 0.0129",
+   "quote": "gpt-5-medium"
+  },
+  {
+   "id": "F25",
+   "about": "claude-sonnet-4",
+   "says": "note",
+   "value": "claude-sonnet-4",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 18.4803, per_run_input_tokens 81200168.5, per_run_output_tokens 587323.75 (not claimed as token classes), pass@4 0.4488, pass^4 0.126, std 0.0257",
+   "quote": "claude-sonnet-4"
+  },
+  {
+   "id": "F26",
+   "about": "gpt-5-low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-low' (its level suffix)",
+   "quote": "gpt-5-low"
+  },
+  {
+   "id": "F27",
+   "about": "gpt-5-low",
+   "says": "note",
+   "value": "gpt-5-low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 14.1949, per_run_input_tokens 81478574.5, per_run_output_tokens 2401803.75 (not claimed as token classes), pass@4 0.6299, pass^4 0.2677, std 0.0287",
+   "quote": "gpt-5-low"
+  },
+  {
+   "id": "F28",
+   "about": "gpt-5-mini-medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-mini-medium' (its level suffix)",
+   "quote": "gpt-5-mini-medium"
+  },
+  {
+   "id": "F29",
+   "about": "gpt-5-mini-medium",
+   "says": "note",
+   "value": "gpt-5-mini-medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 15.6713, per_run_input_tokens 93627435, per_run_output_tokens 1308932.25 (not claimed as token classes), pass@4 0.4567, pass^4 0.0945, std 0.0312",
+   "quote": "gpt-5-mini-medium"
+  },
+  {
+   "id": "F30",
+   "about": "gpt-4-1-nano",
+   "says": "note",
+   "value": "gpt-4-1-nano",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 10.7815, per_run_input_tokens 24557366.5, per_run_output_tokens 207759.75 (not claimed as token classes), pass@4 0, pass^4 0, std 0",
+   "quote": "gpt-4-1-nano"
+  },
+  {
+   "id": "F31",
+   "about": "grok-code-fast-1",
+   "says": "note",
+   "value": "grok-code-fast-1",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 18.4173, per_run_input_tokens 74993763.5, per_run_output_tokens 717520.5 (not claimed as token classes), pass@4 0.3071, pass^4 0.0945, std 0.0339",
+   "quote": "grok-code-fast-1"
+  },
+  {
+   "id": "F32",
+   "about": "deepseek-v3-2-thinking",
+   "says": "note",
+   "value": "deepseek-v3-2-thinking",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 26.2717, per_run_input_tokens 114198519, per_run_output_tokens 1115318 (not claimed as token classes), pass@4 0.5118, pass^4 0.2126, std 0.0179",
+   "quote": "deepseek-v3-2-thinking"
+  },
+  {
+   "id": "F33",
+   "about": "gemini-2-5-flash",
+   "says": "note",
+   "value": "gemini-2-5-flash",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 11.4075, per_run_input_tokens 130059874, per_run_output_tokens 1117454.75 (not claimed as token classes), pass@4 0.1811, pass^4 0.0394, std 0.0068",
+   "quote": "gemini-2-5-flash"
+  },
+  {
+   "id": "F34",
+   "about": "gpt-5-nano-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-nano-high' (its level suffix)",
+   "quote": "gpt-5-nano-high"
+  },
+  {
+   "id": "F35",
+   "about": "gpt-5-nano-high",
+   "says": "note",
+   "value": "gpt-5-nano-high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 19.7461, per_run_input_tokens 102939156.25, per_run_output_tokens 6613087.75 (not claimed as token classes), pass@4 0.1417, pass^4 0, std 0.0205",
+   "quote": "gpt-5-nano-high"
+  },
+  {
+   "id": "F36",
+   "about": "gpt-5-mini-low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-mini-low' (its level suffix)",
+   "quote": "gpt-5-mini-low"
+  },
+  {
+   "id": "F37",
+   "about": "gpt-5-mini-low",
+   "says": "note",
+   "value": "gpt-5-mini-low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 8.3189, per_run_input_tokens 28204881, per_run_output_tokens 402338.5 (not claimed as token classes), pass@4 0.189, pass^4 0.0079, std 0.0131",
+   "quote": "gpt-5-mini-low"
+  },
+  {
+   "id": "F38",
+   "about": "deepseek-v3-1-terminus",
+   "says": "note",
+   "value": "deepseek-v3-1-terminus",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 15.2618, per_run_input_tokens 59052181.25, per_run_output_tokens 316704.25 (not claimed as token classes), pass@4 0.2992, pass^4 0.0394, std 0.0507",
+   "quote": "deepseek-v3-1-terminus"
+  },
+  {
+   "id": "F39",
+   "about": "qwen-3-max",
+   "says": "note",
+   "value": "qwen-3-max",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 23.8465, per_run_input_tokens 131440040, per_run_output_tokens 379216.25 (not claimed as token classes), pass@4 0.2283, pass^4 0.1102, std 0.0131",
+   "quote": "qwen-3-max"
+  },
+  {
+   "id": "F40",
+   "about": "claude-opus-4-5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'claude-opus-4-5-high' (its level suffix)",
+   "quote": "claude-opus-4-5-high"
+  },
+  {
+   "id": "F41",
+   "about": "claude-opus-4-5-high",
+   "says": "note",
+   "value": "claude-opus-4-5-high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 16.1988, per_run_input_tokens 86546710.5, per_run_output_tokens 1337728.5 (not claimed as token classes), pass@4 0.5354, pass^4 0.3386, std 0.0196",
+   "quote": "claude-opus-4-5-high"
+  },
+  {
+   "id": "F42",
+   "about": "deepseek-v3-2-chat",
+   "says": "note",
+   "value": "deepseek-v3-2-chat",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 24.2461, per_run_input_tokens 97403549, per_run_output_tokens 691056 (not claimed as token classes), pass@4 0.4646, pass^4 0.1339, std 0.0151",
+   "quote": "deepseek-v3-2-chat"
+  },
+  {
+   "id": "F43",
+   "about": "kimi-k2-0711",
+   "says": "note",
+   "value": "kimi-k2-0711",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 18.7087, per_run_input_tokens 59188875.5, per_run_output_tokens 375549 (not claimed as token classes), pass@4 0.315, pass^4 0.1181, std 0.0161",
+   "quote": "kimi-k2-0711"
+  },
+  {
+   "id": "F44",
+   "about": "gemini-3-pro-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gemini-3-pro-high' (its level suffix)",
+   "quote": "gemini-3-pro-high"
+  },
+  {
+   "id": "F45",
+   "about": "gemini-3-pro-high",
+   "says": "note",
+   "value": "gemini-3-pro-high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 15.6929, per_run_input_tokens 126003558.5, per_run_output_tokens 1131699.75 (not claimed as token classes), pass@4 0.6693, pass^4 0.378, std 0.0039",
+   "quote": "gemini-3-pro-high"
+  },
+  {
+   "id": "F46",
+   "about": "gpt-5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-high' (its level suffix)",
+   "quote": "gpt-5-high"
+  },
+  {
+   "id": "F47",
+   "about": "gpt-5-high",
+   "says": "note",
+   "value": "gpt-5-high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 15.6535, per_run_input_tokens 85780971.75, per_run_output_tokens 4666119.25 (not claimed as token classes), pass@4 0.6614, pass^4 0.3307, std 0.0252",
+   "quote": "gpt-5-high"
+  },
+  {
+   "id": "F48",
+   "about": "kimi-k2-0905",
+   "says": "note",
+   "value": "kimi-k2-0905",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 26.9508, per_run_input_tokens 118300404, per_run_output_tokens 636425 (not claimed as token classes), pass@4 0.315, pass^4 0.126, std 0.0116",
+   "quote": "kimi-k2-0905"
+  },
+  {
+   "id": "F49",
+   "about": "gpt-5-nano-medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-nano-medium' (its level suffix)",
+   "quote": "gpt-5-nano-medium"
+  },
+  {
+   "id": "F50",
+   "about": "gpt-5-nano-medium",
+   "says": "note",
+   "value": "gpt-5-nano-medium",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 14.5, per_run_input_tokens 56894732.75, per_run_output_tokens 3026129.25 (not claimed as token classes), pass@4 0.1181, pass^4 0.0157, std 0.0201",
+   "quote": "gpt-5-nano-medium"
+  },
+  {
+   "id": "F51",
+   "about": "gpt-5-2-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gpt-5-2-high' (its level suffix)",
+   "quote": "gpt-5-2-high"
+  },
+  {
+   "id": "F52",
+   "about": "gpt-5-2-high",
+   "says": "note",
+   "value": "gpt-5-2-high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 19.6417, per_run_input_tokens 114896972.25, per_run_output_tokens 3528672.5 (not claimed as token classes), pass@4 0.6693, pass^4 0.4488, std 0.0111",
+   "quote": "gpt-5-2-high"
+  },
+  {
+   "id": "F53",
+   "about": "grok-4",
+   "says": "note",
+   "value": "grok-4",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 16.248, per_run_input_tokens 80455430.5, per_run_output_tokens 1069299.25 (not claimed as token classes), pass@4 0.4488, pass^4 0.1811, std 0.0291",
+   "quote": "grok-4"
+  },
+  {
+   "id": "F54",
+   "about": "claude-sonnet-4-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'claude-sonnet-4-high' (its level suffix)",
+   "quote": "claude-sonnet-4-high"
+  },
+  {
+   "id": "F55",
+   "about": "claude-sonnet-4-high",
+   "says": "note",
+   "value": "claude-sonnet-4-high",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 19.4567, per_run_input_tokens 144243831.25, per_run_output_tokens 639579 (not claimed as token classes), pass@4 0.4094, pass^4 0.1811, std 0.0236",
+   "quote": "claude-sonnet-4-high"
+  },
+  {
+   "id": "F56",
+   "about": "gemini-3-pro-low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "leaderboard table, column Model: the board label 'gemini-3-pro-low' (its level suffix)",
+   "quote": "gemini-3-pro-low"
+  },
+  {
+   "id": "F57",
+   "about": "gemini-3-pro-low",
+   "says": "note",
+   "value": "gemini-3-pro-low",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 15.6161, per_run_input_tokens 121838263.75, per_run_output_tokens 1122640.75 (not claimed as token classes), pass@4 0.6772, pass^4 0.3071, std 0.0205",
+   "quote": "gemini-3-pro-low"
+  },
+  {
+   "id": "F58",
+   "about": "gpt-oss-120b",
+   "says": "note",
+   "value": "gpt-oss-120b",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 5.3957, per_run_input_tokens 8192023.25, per_run_output_tokens 174413.25 (not claimed as token classes), pass@4 0.1339, pass^4 0, std 0.0096",
+   "quote": "gpt-oss-120b"
+  },
+  {
+   "id": "F59",
+   "about": "grok-4-fast",
+   "says": "note",
+   "value": "grok-4-fast",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 15.498, per_run_input_tokens 86554373.75, per_run_output_tokens 1129256.25 (not claimed as token classes), pass@4 0.3858, pass^4 0.126, std 0.0307",
+   "quote": "grok-4-fast"
+  },
+  {
+   "id": "F60",
+   "about": "o4-mini",
+   "says": "note",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 14.6024, per_run_input_tokens 49923776.75, per_run_output_tokens 1977538.25 (not claimed as token classes), pass@4 0.315, pass^4 0.063, std 0.023",
+   "quote": "o4-mini"
+  },
+  {
+   "id": "F61",
+   "about": "gpt-4-1-mini",
+   "says": "note",
+   "value": "gpt-4-1-mini",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-eval-sys_mcpmark/evidence/mcpmark.txt",
+   "where": "board label; the JSON entry also gives total_tasks 127, avg_turns 16.3898, per_run_input_tokens 148933363.75, per_run_output_tokens 241084.5 (not claimed as token classes), pass@4 0.0709, pass^4 0.0157, std 0.0096",
+   "quote": "gpt-4-1-mini"
+  }
+ ]
+}

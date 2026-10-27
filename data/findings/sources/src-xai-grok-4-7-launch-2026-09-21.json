@@ -1,0 +1,2429 @@
+{
+ "id": "src-xai-grok-4-7-launch-2026-09-21",
+ "publisher": "xai",
+ "urls": [
+  "https://x.ai/news/grok-4-7"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://x.ai/news/grok-4-7",
+   "captured": "2026-10-19T15:44:11Z",
+   "note": "page saved by salvo gs/s3 on 19 Oct 2026 (grok-4-7.html; markdown reading grok-4-7.md)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html": "c7157081f9a362d6b4924fabe939fb7f99f37e140595355d8c653dbedea24727",
+  "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md": "55754ceae969d120d6147c535dabce95c874dcc2f96b9dfc271016b5d8b9cb8e",
+  "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/charts-tabs.json": "07708db8e37d39f1a2459c8275ae1cac198f6f645d4c569995affb220787915a"
+ },
+ "harvested_at": "2026-10-19T15:44:11Z",
+ "published": {
+  "value": "2026-09-21",
+  "where": "page header of the markdown reading: 'Published Time: 2026-09-21T00:00:00Z'",
+  "quote": "Published Time: 2026-09-21T00:00:00Z",
+  "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "from": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "tool": "markdown reading of the page (fetch tool, salvo gs/s3): headings, paragraphs and the benchmark table with one cell per line; quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/charts-tabs.json",
+   "from": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "tool": "convert.py: the `tabs` array of the page's chart component (GDPval, AA Briefcase, EEBench bars) taken out of the escaped Next.js payload of the HTML and unescaped, 3 tabs copied verbatim"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/charts-tabs.json",
+   "where": "$.tabs[0].bars",
+   "format": "json",
+   "row_key": "label",
+   "columns": {
+    "label": "model-name",
+    "effort": "effort-label",
+    "score": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/charts-tabs.json",
+   "where": "$.tabs[1].bars",
+   "format": "json",
+   "row_key": "label",
+   "columns": {
+    "label": "model-name",
+    "effort": "effort-label",
+    "score": {
+     "says": "score",
+     "term": "Elo",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T3",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/charts-tabs.json",
+   "where": "$.tabs[2].bars",
+   "format": "json",
+   "row_key": "label",
+   "columns": {
+    "label": "model-name",
+    "effort": "effort-label",
+    "score": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "note",
+   "value": "* high effort",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "footnote under the table: an asterisk on the Grok 4.7 DeepSWE cell marks a high-effort score",
+   "quote": "* high effort"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "note",
+   "value": "An asterisk on Grok 4.7 DeepSWE marks a high-effort score.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "caption of the table",
+   "quote": "An asterisk on Grok 4.7 DeepSWE marks a high-effort score."
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point labels",
+   "quote": "$6.01 avg cost per task"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "unit",
+   "value": "avg cost per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point labels",
+   "quote": "$6.01 avg cost per task"
+  },
+  {
+   "id": "F5",
+   "about": "Fable 5.1|Max|cursor",
+   "says": "score",
+   "value": "51.8",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Max' (SVG aria-label)",
+   "quote": "Fable 5.1 Max: 51.8%, $17.28 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F6",
+   "about": "Fable 5.1|Max|cursor",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Max' (the model words)",
+   "quote": "Fable 5.1 Max: 51.8%, $17.28 avg cost per task"
+  },
+  {
+   "id": "F7",
+   "about": "Fable 5.1|Max|cursor",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Max' (the level words)",
+   "quote": "Fable 5.1 Max: 51.8%, $17.28 avg cost per task"
+  },
+  {
+   "id": "F8",
+   "about": "Fable 5.1|Max|cursor",
+   "says": "cost",
+   "value": "17.28",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Max'",
+   "quote": "Fable 5.1 Max: 51.8%, $17.28 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F9",
+   "about": "Fable 5.1|Extra High|cursor",
+   "says": "score",
+   "value": "51.6",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Extra High' (SVG aria-label)",
+   "quote": "Fable 5.1 Extra High: 51.6%, $13.01 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Fable 5.1|Extra High|cursor",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Extra High' (the model words)",
+   "quote": "Fable 5.1 Extra High: 51.6%, $13.01 avg cost per task"
+  },
+  {
+   "id": "F11",
+   "about": "Fable 5.1|Extra High|cursor",
+   "says": "effort-label",
+   "value": "Extra High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Extra High' (the level words)",
+   "quote": "Fable 5.1 Extra High: 51.6%, $13.01 avg cost per task"
+  },
+  {
+   "id": "F12",
+   "about": "Fable 5.1|Extra High|cursor",
+   "says": "cost",
+   "value": "13.01",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Extra High'",
+   "quote": "Fable 5.1 Extra High: 51.6%, $13.01 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "about": "Fable 5.1|Medium|cursor",
+   "says": "score",
+   "value": "46.8",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Medium' (SVG aria-label)",
+   "quote": "Fable 5.1 Medium: 46.8%, $7.05 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "about": "Fable 5.1|Medium|cursor",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Medium' (the model words)",
+   "quote": "Fable 5.1 Medium: 46.8%, $7.05 avg cost per task"
+  },
+  {
+   "id": "F15",
+   "about": "Fable 5.1|Medium|cursor",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Medium' (the level words)",
+   "quote": "Fable 5.1 Medium: 46.8%, $7.05 avg cost per task"
+  },
+  {
+   "id": "F16",
+   "about": "Fable 5.1|Medium|cursor",
+   "says": "cost",
+   "value": "7.05",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Medium'",
+   "quote": "Fable 5.1 Medium: 46.8%, $7.05 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F17",
+   "about": "Opus 5|Max|cursor",
+   "says": "score",
+   "value": "46.6",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Max' (SVG aria-label)",
+   "quote": "Opus 5 Max: 46.6%, $11.95 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "about": "Opus 5|Max|cursor",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Max' (the model words)",
+   "quote": "Opus 5 Max: 46.6%, $11.95 avg cost per task"
+  },
+  {
+   "id": "F19",
+   "about": "Opus 5|Max|cursor",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Max' (the level words)",
+   "quote": "Opus 5 Max: 46.6%, $11.95 avg cost per task"
+  },
+  {
+   "id": "F20",
+   "about": "Opus 5|Max|cursor",
+   "says": "cost",
+   "value": "11.95",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Max'",
+   "quote": "Opus 5 Max: 46.6%, $11.95 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F21",
+   "about": "Opus 5|Extra High|cursor",
+   "says": "score",
+   "value": "46.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Extra High' (SVG aria-label)",
+   "quote": "Opus 5 Extra High: 46.1%, $11.43 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "about": "Opus 5|Extra High|cursor",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Extra High' (the model words)",
+   "quote": "Opus 5 Extra High: 46.1%, $11.43 avg cost per task"
+  },
+  {
+   "id": "F23",
+   "about": "Opus 5|Extra High|cursor",
+   "says": "effort-label",
+   "value": "Extra High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Extra High' (the level words)",
+   "quote": "Opus 5 Extra High: 46.1%, $11.43 avg cost per task"
+  },
+  {
+   "id": "F24",
+   "about": "Opus 5|Extra High|cursor",
+   "says": "cost",
+   "value": "11.43",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Extra High'",
+   "quote": "Opus 5 Extra High: 46.1%, $11.43 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F25",
+   "about": "Fable 5.1|Low|cursor",
+   "says": "score",
+   "value": "45.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Low' (SVG aria-label)",
+   "quote": "Fable 5.1 Low: 45.1%, $5.44 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "about": "Fable 5.1|Low|cursor",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Low' (the model words)",
+   "quote": "Fable 5.1 Low: 45.1%, $5.44 avg cost per task"
+  },
+  {
+   "id": "F27",
+   "about": "Fable 5.1|Low|cursor",
+   "says": "effort-label",
+   "value": "Low",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 Low' (the level words)",
+   "quote": "Fable 5.1 Low: 45.1%, $5.44 avg cost per task"
+  },
+  {
+   "id": "F28",
+   "about": "Fable 5.1|Low|cursor",
+   "says": "cost",
+   "value": "5.44",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 Low'",
+   "quote": "Fable 5.1 Low: 45.1%, $5.44 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F29",
+   "about": "Opus 5|Medium|cursor",
+   "says": "score",
+   "value": "43.3",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Medium' (SVG aria-label)",
+   "quote": "Opus 5 Medium: 43.3%, $6.94 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "about": "Opus 5|Medium|cursor",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Medium' (the model words)",
+   "quote": "Opus 5 Medium: 43.3%, $6.94 avg cost per task"
+  },
+  {
+   "id": "F31",
+   "about": "Opus 5|Medium|cursor",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Medium' (the level words)",
+   "quote": "Opus 5 Medium: 43.3%, $6.94 avg cost per task"
+  },
+  {
+   "id": "F32",
+   "about": "Opus 5|Medium|cursor",
+   "says": "cost",
+   "value": "6.94",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Medium'",
+   "quote": "Opus 5 Medium: 43.3%, $6.94 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F33",
+   "about": "GPT-5.6 Sol|Max|cursor",
+   "says": "score",
+   "value": "41.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Max' (SVG aria-label)",
+   "quote": "GPT-5.6 Sol Max: 41.7%, $8.23 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "about": "GPT-5.6 Sol|Max|cursor",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Max' (the model words)",
+   "quote": "GPT-5.6 Sol Max: 41.7%, $8.23 avg cost per task"
+  },
+  {
+   "id": "F35",
+   "about": "GPT-5.6 Sol|Max|cursor",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Max' (the level words)",
+   "quote": "GPT-5.6 Sol Max: 41.7%, $8.23 avg cost per task"
+  },
+  {
+   "id": "F36",
+   "about": "GPT-5.6 Sol|Max|cursor",
+   "says": "cost",
+   "value": "8.23",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Max'",
+   "quote": "GPT-5.6 Sol Max: 41.7%, $8.23 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "about": "Opus 5|Low|cursor",
+   "says": "score",
+   "value": "40.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Low' (SVG aria-label)",
+   "quote": "Opus 5 Low: 40.7%, $4.87 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "about": "Opus 5|Low|cursor",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Low' (the model words)",
+   "quote": "Opus 5 Low: 40.7%, $4.87 avg cost per task"
+  },
+  {
+   "id": "F39",
+   "about": "Opus 5|Low|cursor",
+   "says": "effort-label",
+   "value": "Low",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 Low' (the level words)",
+   "quote": "Opus 5 Low: 40.7%, $4.87 avg cost per task"
+  },
+  {
+   "id": "F40",
+   "about": "Opus 5|Low|cursor",
+   "says": "cost",
+   "value": "4.87",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 Low'",
+   "quote": "Opus 5 Low: 40.7%, $4.87 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F41",
+   "about": "GPT-5.6 Sol|Extra High|cursor",
+   "says": "score",
+   "value": "37.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Extra High' (SVG aria-label)",
+   "quote": "GPT-5.6 Sol Extra High: 37.7%, $4.40 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "about": "GPT-5.6 Sol|Extra High|cursor",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Extra High' (the model words)",
+   "quote": "GPT-5.6 Sol Extra High: 37.7%, $4.40 avg cost per task"
+  },
+  {
+   "id": "F43",
+   "about": "GPT-5.6 Sol|Extra High|cursor",
+   "says": "effort-label",
+   "value": "Extra High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Extra High' (the level words)",
+   "quote": "GPT-5.6 Sol Extra High: 37.7%, $4.40 avg cost per task"
+  },
+  {
+   "id": "F44",
+   "about": "GPT-5.6 Sol|Extra High|cursor",
+   "says": "cost",
+   "value": "4.40",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Extra High'",
+   "quote": "GPT-5.6 Sol Extra High: 37.7%, $4.40 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F45",
+   "about": "GPT-5.6 Sol|High|cursor",
+   "says": "score",
+   "value": "35.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol High' (SVG aria-label)",
+   "quote": "GPT-5.6 Sol High: 35.7%, $2.85 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F46",
+   "about": "GPT-5.6 Sol|High|cursor",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol High' (the model words)",
+   "quote": "GPT-5.6 Sol High: 35.7%, $2.85 avg cost per task"
+  },
+  {
+   "id": "F47",
+   "about": "GPT-5.6 Sol|High|cursor",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol High' (the level words)",
+   "quote": "GPT-5.6 Sol High: 35.7%, $2.85 avg cost per task"
+  },
+  {
+   "id": "F48",
+   "about": "GPT-5.6 Sol|High|cursor",
+   "says": "cost",
+   "value": "2.85",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol High'",
+   "quote": "GPT-5.6 Sol High: 35.7%, $2.85 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "about": "Sonnet 5|Max|cursor",
+   "says": "score",
+   "value": "34.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Max' (SVG aria-label)",
+   "quote": "Sonnet 5 Max: 34.1%, $7.17 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "about": "Sonnet 5|Max|cursor",
+   "says": "model-name",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Max' (the model words)",
+   "quote": "Sonnet 5 Max: 34.1%, $7.17 avg cost per task"
+  },
+  {
+   "id": "F51",
+   "about": "Sonnet 5|Max|cursor",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Max' (the level words)",
+   "quote": "Sonnet 5 Max: 34.1%, $7.17 avg cost per task"
+  },
+  {
+   "id": "F52",
+   "about": "Sonnet 5|Max|cursor",
+   "says": "cost",
+   "value": "7.17",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Max'",
+   "quote": "Sonnet 5 Max: 34.1%, $7.17 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F53",
+   "about": "Sonnet 5|Extra High|cursor",
+   "says": "score",
+   "value": "32.0",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Extra High' (SVG aria-label)",
+   "quote": "Sonnet 5 Extra High: 32.0%, $4.55 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F54",
+   "about": "Sonnet 5|Extra High|cursor",
+   "says": "model-name",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Extra High' (the model words)",
+   "quote": "Sonnet 5 Extra High: 32.0%, $4.55 avg cost per task"
+  },
+  {
+   "id": "F55",
+   "about": "Sonnet 5|Extra High|cursor",
+   "says": "effort-label",
+   "value": "Extra High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Extra High' (the level words)",
+   "quote": "Sonnet 5 Extra High: 32.0%, $4.55 avg cost per task"
+  },
+  {
+   "id": "F56",
+   "about": "Sonnet 5|Extra High|cursor",
+   "says": "cost",
+   "value": "4.55",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Extra High'",
+   "quote": "Sonnet 5 Extra High: 32.0%, $4.55 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F57",
+   "about": "Sonnet 5|Medium|cursor",
+   "says": "score",
+   "value": "28.0",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Medium' (SVG aria-label)",
+   "quote": "Sonnet 5 Medium: 28.0%, $2.31 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F58",
+   "about": "Sonnet 5|Medium|cursor",
+   "says": "model-name",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Medium' (the model words)",
+   "quote": "Sonnet 5 Medium: 28.0%, $2.31 avg cost per task"
+  },
+  {
+   "id": "F59",
+   "about": "Sonnet 5|Medium|cursor",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Medium' (the level words)",
+   "quote": "Sonnet 5 Medium: 28.0%, $2.31 avg cost per task"
+  },
+  {
+   "id": "F60",
+   "about": "Sonnet 5|Medium|cursor",
+   "says": "cost",
+   "value": "2.31",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Medium'",
+   "quote": "Sonnet 5 Medium: 28.0%, $2.31 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F61",
+   "about": "GPT-5.6 Sol|Low|cursor",
+   "says": "score",
+   "value": "24.6",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Low' (SVG aria-label)",
+   "quote": "GPT-5.6 Sol Low: 24.6%, $0.87 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F62",
+   "about": "GPT-5.6 Sol|Low|cursor",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Low' (the model words)",
+   "quote": "GPT-5.6 Sol Low: 24.6%, $0.87 avg cost per task"
+  },
+  {
+   "id": "F63",
+   "about": "GPT-5.6 Sol|Low|cursor",
+   "says": "effort-label",
+   "value": "Low",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Low' (the level words)",
+   "quote": "GPT-5.6 Sol Low: 24.6%, $0.87 avg cost per task"
+  },
+  {
+   "id": "F64",
+   "about": "GPT-5.6 Sol|Low|cursor",
+   "says": "cost",
+   "value": "0.87",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Low'",
+   "quote": "GPT-5.6 Sol Low: 24.6%, $0.87 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F65",
+   "about": "Sonnet 5|Low|cursor",
+   "says": "score",
+   "value": "24.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Low' (SVG aria-label)",
+   "quote": "Sonnet 5 Low: 24.1%, $1.39 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F66",
+   "about": "Sonnet 5|Low|cursor",
+   "says": "model-name",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Low' (the model words)",
+   "quote": "Sonnet 5 Low: 24.1%, $1.39 avg cost per task"
+  },
+  {
+   "id": "F67",
+   "about": "Sonnet 5|Low|cursor",
+   "says": "effort-label",
+   "value": "Low",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 Low' (the level words)",
+   "quote": "Sonnet 5 Low: 24.1%, $1.39 avg cost per task"
+  },
+  {
+   "id": "F68",
+   "about": "Sonnet 5|Low|cursor",
+   "says": "cost",
+   "value": "1.39",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 Low'",
+   "quote": "Sonnet 5 Low: 24.1%, $1.39 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "about": "Grok 4.7|Extra High|cursor",
+   "says": "score",
+   "value": "46.3",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 Extra High' (SVG aria-label)",
+   "quote": "Grok 4.7 Extra High: 46.3%, $6.01 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F70",
+   "about": "Grok 4.7|Extra High|cursor",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 Extra High' (the model words)",
+   "quote": "Grok 4.7 Extra High: 46.3%, $6.01 avg cost per task"
+  },
+  {
+   "id": "F71",
+   "about": "Grok 4.7|Extra High|cursor",
+   "says": "effort-label",
+   "value": "Extra High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 Extra High' (the level words)",
+   "quote": "Grok 4.7 Extra High: 46.3%, $6.01 avg cost per task"
+  },
+  {
+   "id": "F72",
+   "about": "Grok 4.7|Extra High|cursor",
+   "says": "cost",
+   "value": "6.01",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 Extra High'",
+   "quote": "Grok 4.7 Extra High: 46.3%, $6.01 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "about": "Grok 4.7|Medium|cursor",
+   "says": "score",
+   "value": "41.6",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 Medium' (SVG aria-label)",
+   "quote": "Grok 4.7 Medium: 41.6%, $3.49 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "about": "Grok 4.7|Medium|cursor",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 Medium' (the model words)",
+   "quote": "Grok 4.7 Medium: 41.6%, $3.49 avg cost per task"
+  },
+  {
+   "id": "F75",
+   "about": "Grok 4.7|Medium|cursor",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 Medium' (the level words)",
+   "quote": "Grok 4.7 Medium: 41.6%, $3.49 avg cost per task"
+  },
+  {
+   "id": "F76",
+   "about": "Grok 4.7|Medium|cursor",
+   "says": "cost",
+   "value": "3.49",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 Medium'",
+   "quote": "Grok 4.7 Medium: 41.6%, $3.49 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F77",
+   "about": "Grok 4.7|Low|cursor",
+   "says": "score",
+   "value": "33.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 Low' (SVG aria-label)",
+   "quote": "Grok 4.7 Low: 33.1%, $1.58 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F78",
+   "about": "Grok 4.7|Low|cursor",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 Low' (the model words)",
+   "quote": "Grok 4.7 Low: 33.1%, $1.58 avg cost per task"
+  },
+  {
+   "id": "F79",
+   "about": "Grok 4.7|Low|cursor",
+   "says": "effort-label",
+   "value": "Low",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 Low' (the level words)",
+   "quote": "Grok 4.7 Low: 33.1%, $1.58 avg cost per task"
+  },
+  {
+   "id": "F80",
+   "about": "Grok 4.7|Low|cursor",
+   "says": "cost",
+   "value": "1.58",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 Low'",
+   "quote": "Grok 4.7 Low: 33.1%, $1.58 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F81",
+   "about": "Fable 5.1|High|cursor",
+   "says": "score",
+   "value": "49.2",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 High' (SVG aria-label)",
+   "quote": "Fable 5.1 High: 49.2%, $9.08 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F82",
+   "about": "Fable 5.1|High|cursor",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 High' (the model words)",
+   "quote": "Fable 5.1 High: 49.2%, $9.08 avg cost per task"
+  },
+  {
+   "id": "F83",
+   "about": "Fable 5.1|High|cursor",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Fable 5.1 High' (the level words)",
+   "quote": "Fable 5.1 High: 49.2%, $9.08 avg cost per task"
+  },
+  {
+   "id": "F84",
+   "about": "Fable 5.1|High|cursor",
+   "says": "cost",
+   "value": "9.08",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Fable 5.1 High'",
+   "quote": "Fable 5.1 High: 49.2%, $9.08 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F85",
+   "about": "Opus 5|High|cursor",
+   "says": "score",
+   "value": "44.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 High' (SVG aria-label)",
+   "quote": "Opus 5 High: 44.7%, $9.00 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F86",
+   "about": "Opus 5|High|cursor",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 High' (the model words)",
+   "quote": "Opus 5 High: 44.7%, $9.00 avg cost per task"
+  },
+  {
+   "id": "F87",
+   "about": "Opus 5|High|cursor",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Opus 5 High' (the level words)",
+   "quote": "Opus 5 High: 44.7%, $9.00 avg cost per task"
+  },
+  {
+   "id": "F88",
+   "about": "Opus 5|High|cursor",
+   "says": "cost",
+   "value": "9.00",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Opus 5 High'",
+   "quote": "Opus 5 High: 44.7%, $9.00 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F89",
+   "about": "GPT-5.6 Sol|Medium|cursor",
+   "says": "score",
+   "value": "31.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Medium' (SVG aria-label)",
+   "quote": "GPT-5.6 Sol Medium: 31.1%, $1.77 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F90",
+   "about": "GPT-5.6 Sol|Medium|cursor",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Medium' (the model words)",
+   "quote": "GPT-5.6 Sol Medium: 31.1%, $1.77 avg cost per task"
+  },
+  {
+   "id": "F91",
+   "about": "GPT-5.6 Sol|Medium|cursor",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'GPT-5.6 Sol Medium' (the level words)",
+   "quote": "GPT-5.6 Sol Medium: 31.1%, $1.77 avg cost per task"
+  },
+  {
+   "id": "F92",
+   "about": "GPT-5.6 Sol|Medium|cursor",
+   "says": "cost",
+   "value": "1.77",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'GPT-5.6 Sol Medium'",
+   "quote": "GPT-5.6 Sol Medium: 31.1%, $1.77 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F93",
+   "about": "Sonnet 5|High|cursor",
+   "says": "score",
+   "value": "30.8",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 High' (SVG aria-label)",
+   "quote": "Sonnet 5 High: 30.8%, $3.48 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F94",
+   "about": "Sonnet 5|High|cursor",
+   "says": "model-name",
+   "value": "Sonnet 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 High' (the model words)",
+   "quote": "Sonnet 5 High: 30.8%, $3.48 avg cost per task"
+  },
+  {
+   "id": "F95",
+   "about": "Sonnet 5|High|cursor",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Sonnet 5 High' (the level words)",
+   "quote": "Sonnet 5 High: 30.8%, $3.48 avg cost per task"
+  },
+  {
+   "id": "F96",
+   "about": "Sonnet 5|High|cursor",
+   "says": "cost",
+   "value": "3.48",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Sonnet 5 High'",
+   "quote": "Sonnet 5 High: 30.8%, $3.48 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F97",
+   "about": "Grok 4.7|High|cursor",
+   "says": "score",
+   "value": "43.9",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 High' (SVG aria-label)",
+   "quote": "Grok 4.7 High: 43.9%, $4.69 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F98",
+   "about": "Grok 4.7|High|cursor",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 High' (the model words)",
+   "quote": "Grok 4.7 High: 43.9%, $4.69 avg cost per task"
+  },
+  {
+   "id": "F99",
+   "about": "Grok 4.7|High|cursor",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart point label 'Grok 4.7 High' (the level words)",
+   "quote": "Grok 4.7 High: 43.9%, $4.69 avg cost per task"
+  },
+  {
+   "id": "F100",
+   "about": "Grok 4.7|High|cursor",
+   "says": "cost",
+   "value": "4.69",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.html",
+   "where": "chart 'CursorBench 4.0 score by average cost per task', point 'Grok 4.7 High'",
+   "quote": "Grok 4.7 High: 43.9%, $4.69 avg cost per task",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F101",
+   "about": "Grok 4.6|High|cursorbench40",
+   "says": "score",
+   "value": "40.4",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Software engineering CursorBench 4.0, column Grok 4.6 High",
+   "quote": "Software engineering CursorBench 4.0 46.3% 40.4% 41.7% 51.8%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F102",
+   "about": "Grok 4.6|High|cursorbench40",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F103",
+   "about": "Grok 4.6|High|cursorbench40",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F104",
+   "about": "Grok 4.7|xHigh|xai47-deepswe",
+   "says": "score",
+   "value": "71.0",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Software engineering DeepSWE v1.1, column Grok 4.7 xHigh",
+   "quote": "Software engineering DeepSWE v1.1 71.0%* 65.2% 72.7% 70.0%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F105",
+   "about": "Grok 4.7|xHigh|xai47-deepswe",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F106",
+   "about": "Grok 4.7|xHigh|xai47-deepswe",
+   "says": "effort-label",
+   "value": "high effort",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "DeepSWE cell of Grok 4.7: the asterisk and the footnote '* high effort' override the column's xHigh label",
+   "quote": "* high effort"
+  },
+  {
+   "id": "F107",
+   "about": "Grok 4.6|High|xai47-deepswe",
+   "says": "score",
+   "value": "65.2",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Software engineering DeepSWE v1.1, column Grok 4.6 High",
+   "quote": "Software engineering DeepSWE v1.1 71.0%* 65.2% 72.7% 70.0%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F108",
+   "about": "Grok 4.6|High|xai47-deepswe",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F109",
+   "about": "Grok 4.6|High|xai47-deepswe",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F110",
+   "about": "GPT-5.6 Sol|Max|xai47-deepswe",
+   "says": "score",
+   "value": "72.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Software engineering DeepSWE v1.1, column GPT-5.6 Sol Max",
+   "quote": "Software engineering DeepSWE v1.1 71.0%* 65.2% 72.7% 70.0%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F111",
+   "about": "GPT-5.6 Sol|Max|xai47-deepswe",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F112",
+   "about": "GPT-5.6 Sol|Max|xai47-deepswe",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F113",
+   "about": "Fable 5.1|Max|xai47-deepswe",
+   "says": "score",
+   "value": "70.0",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Software engineering DeepSWE v1.1, column Fable 5.1 Max",
+   "quote": "Software engineering DeepSWE v1.1 71.0%* 65.2% 72.7% 70.0%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F114",
+   "about": "Fable 5.1|Max|xai47-deepswe",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F115",
+   "about": "Fable 5.1|Max|xai47-deepswe",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F116",
+   "about": "Grok 4.7|xHigh|xai47-eebench",
+   "says": "score",
+   "value": "64.0",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Electrical engineering EEBench, column Grok 4.7 xHigh",
+   "quote": "Electrical engineering EEBench 64.0% 53.0% 39.4% 56.4%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F117",
+   "about": "Grok 4.7|xHigh|xai47-eebench",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F118",
+   "about": "Grok 4.7|xHigh|xai47-eebench",
+   "says": "effort-label",
+   "value": "xHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F119",
+   "about": "Grok 4.6|High|xai47-eebench",
+   "says": "score",
+   "value": "53.0",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Electrical engineering EEBench, column Grok 4.6 High",
+   "quote": "Electrical engineering EEBench 64.0% 53.0% 39.4% 56.4%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F120",
+   "about": "Grok 4.6|High|xai47-eebench",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F121",
+   "about": "Grok 4.6|High|xai47-eebench",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F122",
+   "about": "GPT-5.6 Sol|Max|xai47-eebench",
+   "says": "score",
+   "value": "39.4",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Electrical engineering EEBench, column GPT-5.6 Sol Max",
+   "quote": "Electrical engineering EEBench 64.0% 53.0% 39.4% 56.4%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F123",
+   "about": "GPT-5.6 Sol|Max|xai47-eebench",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F124",
+   "about": "GPT-5.6 Sol|Max|xai47-eebench",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F125",
+   "about": "Fable 5.1|Max|xai47-eebench",
+   "says": "score",
+   "value": "56.4",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Electrical engineering EEBench, column Fable 5.1 Max",
+   "quote": "Electrical engineering EEBench 64.0% 53.0% 39.4% 56.4%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F126",
+   "about": "Fable 5.1|Max|xai47-eebench",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F127",
+   "about": "Fable 5.1|Max|xai47-eebench",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F128",
+   "about": "Grok 4.7|xHigh|xai47-briefcase",
+   "says": "score",
+   "value": "1,657",
+   "term": "Elo",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour office work AA Briefcase v1.1, column Grok 4.7 xHigh",
+   "quote": "Multi-hour office work AA Briefcase v1.1 1,657 1,546 1,487 1,678",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F129",
+   "about": "Grok 4.7|xHigh|xai47-briefcase",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F130",
+   "about": "Grok 4.7|xHigh|xai47-briefcase",
+   "says": "effort-label",
+   "value": "xHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F131",
+   "about": "Grok 4.6|High|xai47-briefcase",
+   "says": "score",
+   "value": "1,546",
+   "term": "Elo",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour office work AA Briefcase v1.1, column Grok 4.6 High",
+   "quote": "Multi-hour office work AA Briefcase v1.1 1,657 1,546 1,487 1,678",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F132",
+   "about": "Grok 4.6|High|xai47-briefcase",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F133",
+   "about": "Grok 4.6|High|xai47-briefcase",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F134",
+   "about": "GPT-5.6 Sol|Max|xai47-briefcase",
+   "says": "score",
+   "value": "1,487",
+   "term": "Elo",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour office work AA Briefcase v1.1, column GPT-5.6 Sol Max",
+   "quote": "Multi-hour office work AA Briefcase v1.1 1,657 1,546 1,487 1,678",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F135",
+   "about": "GPT-5.6 Sol|Max|xai47-briefcase",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F136",
+   "about": "GPT-5.6 Sol|Max|xai47-briefcase",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F137",
+   "about": "Fable 5.1|Max|xai47-briefcase",
+   "says": "score",
+   "value": "1,678",
+   "term": "Elo",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour office work AA Briefcase v1.1, column Fable 5.1 Max",
+   "quote": "Multi-hour office work AA Briefcase v1.1 1,657 1,546 1,487 1,678",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F138",
+   "about": "Fable 5.1|Max|xai47-briefcase",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F139",
+   "about": "Fable 5.1|Max|xai47-briefcase",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F140",
+   "about": "Grok 4.7|xHigh|xai47-terminal40",
+   "says": "score",
+   "value": "37.6",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour terminal work Terminal-Bench 4.0, column Grok 4.7 xHigh",
+   "quote": "Multi-hour terminal work Terminal-Bench 4.0 37.6% 20.3% 37.3% 57.9%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F141",
+   "about": "Grok 4.7|xHigh|xai47-terminal40",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F142",
+   "about": "Grok 4.7|xHigh|xai47-terminal40",
+   "says": "effort-label",
+   "value": "xHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F143",
+   "about": "Grok 4.6|High|xai47-terminal40",
+   "says": "score",
+   "value": "20.3",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour terminal work Terminal-Bench 4.0, column Grok 4.6 High",
+   "quote": "Multi-hour terminal work Terminal-Bench 4.0 37.6% 20.3% 37.3% 57.9%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F144",
+   "about": "Grok 4.6|High|xai47-terminal40",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F145",
+   "about": "Grok 4.6|High|xai47-terminal40",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F146",
+   "about": "GPT-5.6 Sol|Max|xai47-terminal40",
+   "says": "score",
+   "value": "37.3",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour terminal work Terminal-Bench 4.0, column GPT-5.6 Sol Max",
+   "quote": "Multi-hour terminal work Terminal-Bench 4.0 37.6% 20.3% 37.3% 57.9%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F147",
+   "about": "GPT-5.6 Sol|Max|xai47-terminal40",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F148",
+   "about": "GPT-5.6 Sol|Max|xai47-terminal40",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F149",
+   "about": "Fable 5.1|Max|xai47-terminal40",
+   "says": "score",
+   "value": "57.9",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Multi-hour terminal work Terminal-Bench 4.0, column Fable 5.1 Max",
+   "quote": "Multi-hour terminal work Terminal-Bench 4.0 37.6% 20.3% 37.3% 57.9%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F150",
+   "about": "Fable 5.1|Max|xai47-terminal40",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F151",
+   "about": "Fable 5.1|Max|xai47-terminal40",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F152",
+   "about": "Grok 4.7|xHigh|xai47-harvey",
+   "says": "score",
+   "value": "19.6",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Legal work Harvey Legal Agent Benchmark, column Grok 4.7 xHigh",
+   "quote": "Legal work Harvey Legal Agent Benchmark 19.6% 15.8% 2.5% 6.7%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F153",
+   "about": "Grok 4.7|xHigh|xai47-harvey",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F154",
+   "about": "Grok 4.7|xHigh|xai47-harvey",
+   "says": "effort-label",
+   "value": "xHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F155",
+   "about": "Grok 4.6|High|xai47-harvey",
+   "says": "score",
+   "value": "15.8",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Legal work Harvey Legal Agent Benchmark, column Grok 4.6 High",
+   "quote": "Legal work Harvey Legal Agent Benchmark 19.6% 15.8% 2.5% 6.7%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F156",
+   "about": "Grok 4.6|High|xai47-harvey",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F157",
+   "about": "Grok 4.6|High|xai47-harvey",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F158",
+   "about": "GPT-5.6 Sol|Max|xai47-harvey",
+   "says": "score",
+   "value": "2.5",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Legal work Harvey Legal Agent Benchmark, column GPT-5.6 Sol Max",
+   "quote": "Legal work Harvey Legal Agent Benchmark 19.6% 15.8% 2.5% 6.7%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F159",
+   "about": "GPT-5.6 Sol|Max|xai47-harvey",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F160",
+   "about": "GPT-5.6 Sol|Max|xai47-harvey",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F161",
+   "about": "Fable 5.1|Max|xai47-harvey",
+   "says": "score",
+   "value": "6.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Legal work Harvey Legal Agent Benchmark, column Fable 5.1 Max",
+   "quote": "Legal work Harvey Legal Agent Benchmark 19.6% 15.8% 2.5% 6.7%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F162",
+   "about": "Fable 5.1|Max|xai47-harvey",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F163",
+   "about": "Fable 5.1|Max|xai47-harvey",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F164",
+   "about": "Grok 4.7|xHigh|xai47-healthbenchpro",
+   "says": "score",
+   "value": "56.7",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Clinical reasoning HealthBench Professional, column Grok 4.7 xHigh",
+   "quote": "Clinical reasoning HealthBench Professional 56.7% 48.5% 60.5% 62.1%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F165",
+   "about": "Grok 4.7|xHigh|xai47-healthbenchpro",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F166",
+   "about": "Grok 4.7|xHigh|xai47-healthbenchpro",
+   "says": "effort-label",
+   "value": "xHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.7 xHigh",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F167",
+   "about": "Grok 4.6|High|xai47-healthbenchpro",
+   "says": "score",
+   "value": "48.5",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Clinical reasoning HealthBench Professional, column Grok 4.6 High",
+   "quote": "Clinical reasoning HealthBench Professional 56.7% 48.5% 60.5% 62.1%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F168",
+   "about": "Grok 4.6|High|xai47-healthbenchpro",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F169",
+   "about": "Grok 4.6|High|xai47-healthbenchpro",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Grok 4.6 High",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F170",
+   "about": "GPT-5.6 Sol|Max|xai47-healthbenchpro",
+   "says": "score",
+   "value": "60.5",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Clinical reasoning HealthBench Professional, column GPT-5.6 Sol Max",
+   "quote": "Clinical reasoning HealthBench Professional 56.7% 48.5% 60.5% 62.1%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F171",
+   "about": "GPT-5.6 Sol|Max|xai47-healthbenchpro",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F172",
+   "about": "GPT-5.6 Sol|Max|xai47-healthbenchpro",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column GPT-5.6 Sol Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F173",
+   "about": "Fable 5.1|Max|xai47-healthbenchpro",
+   "says": "score",
+   "value": "62.1",
+   "term": "score%",
+   "scale": "percent",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table, row Clinical reasoning HealthBench Professional, column Fable 5.1 Max",
+   "quote": "Clinical reasoning HealthBench Professional 56.7% 48.5% 60.5% 62.1%",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F174",
+   "about": "Fable 5.1|Max|xai47-healthbenchpro",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  },
+  {
+   "id": "F175",
+   "about": "Fable 5.1|Max|xai47-healthbenchpro",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-xai-grok-4-7-launch/evidence/grok-4-7.md",
+   "where": "table header, column Fable 5.1 Max",
+   "quote": "Grok 4.7 xHigh Grok 4.6 High GPT-5.6 Sol Max Fable 5.1 Max"
+  }
+ ]
+}

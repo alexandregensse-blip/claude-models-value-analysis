@@ -1,0 +1,154 @@
+{
+ "id": "src-pinchbench.com-leaderboard-2026-09-30",
+ "publisher": "pinchbench.com",
+ "urls": [
+  "https://pinchbench.com/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://pinchbench.com/",
+   "captured": "2026-09-30T14:07:53Z",
+   "note": "page saved by salvo s16/a4 on 30 Sep 2026 (pinchbench.html, file mtime); the payload holds 59 entries, the rendered page 10"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.html": "41b794acf54581cc0004005f28c67dd0952075ab7c85a504e67be5a043e97548",
+  "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt": "c80d417fbfee895be28cb8e92b65cb39235d50a66839fd2885ab721c000d5efe",
+  "/work/.salvo14/mig/convert-pinchbench.com/evidence/entries.json": "67954df4dfed6e2554cd279112663370ff88b14d6b71909075891c33e6d64e5a"
+ },
+ "harvested_at": "2026-09-30T14:07:53Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt",
+   "from": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.html",
+   "tool": "htmltxt.py (/work/.salvo14/mig/c2lib-f): text of the page, one line per block, one table cell per line; script and style dropped. Quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/entries.json",
+   "from": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.html",
+   "tool": "convert.py: the `entries` array of the page's Next.js payload (all 59 models; the rendered page shows 10), taken out of the escaped payload of the HTML and unescaped; identical to the entries file saved by salvo s16/a4"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/entries.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "average_score_percentage": {
+     "says": "score",
+     "term": "score%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed"
+     }
+    },
+    "average_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed"
+     }
+    },
+    "submission_count": "aggregation",
+    "percentage": "note",
+    "provider": "note",
+    "weights": "note",
+    "timestamp": "note",
+    "rank": "note",
+    "average_execution_time_seconds": "note",
+    "best_cost_usd": "note",
+    "best_execution_time_seconds": "note",
+    "submission_id": "note",
+    "value_score": "note",
+    "cpst": "note",
+    "hf_link": "note",
+    "official": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt",
+   "where": "Quick Picks: 'Average Score93.5% overall · $159.60'",
+   "quote": "93.5% overall · $159.60"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "benchmark run",
+   "term": "per-run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt",
+   "where": "Quick Picks, Best Budget: the cost figures are costs of a benchmark run (the entries give the average over the model's submissions)",
+   "quote": "Lowest observed non-zero benchmark run cost."
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "harness",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt",
+   "where": "page title 'PinchBench v2 · OpenClaw Leaderboard'; 'Percentage of tasks completed successfully across standardized OpenClaw agent tests'",
+   "quote": "Percentage of tasks completed successfully across standardized OpenClaw agent tests"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "metric-definition",
+   "value": "sorted by average score",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt",
+   "where": "Success rate rankings: the board is sorted by the average score (column 'Avg %'; 'Best %' is the best single submission)",
+   "quote": "10 models • sorted by average score"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "judge",
+   "value": "automated checks and LLM judge",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt",
+   "where": "page text under 'Success rate by model'",
+   "quote": "Scores are graded via automated checks and LLM judge."
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "items",
+   "value": "147 tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-pinchbench.com/evidence/pinchbench.txt",
+   "where": "page header: '59 models 147 tasks 620 runs'",
+   "quote": "147 tasks"
+  }
+ ]
+}

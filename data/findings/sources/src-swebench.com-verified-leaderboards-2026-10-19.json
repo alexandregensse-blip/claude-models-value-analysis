@@ -1,0 +1,120 @@
+{
+ "id": "src-swebench.com-verified-leaderboards-2026-10-19",
+ "publisher": "swebench.com",
+ "urls": [
+  "https://www.swebench.com/",
+  "https://github.com/SWE-bench/swe-bench.github.io"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/SWE-bench/swe-bench.github.io/master/data/leaderboards.json",
+   "captured": "2026-10-19T08:13:50Z",
+   "note": "leaderboards.json (the data file of swebench.com, also embedded in https://www.swebench.com/) fetched by salvo g/g6 on 19 Oct 2026; 5 leaderboards, Verified = 180 results of which 47 are mini-SWE-agent rows"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://www.swebench.com/js/mainResults.js",
+   "captured": "2026-10-27T08:49:30Z",
+   "note": "the site's table script, fetched live on 27 Oct 2026 (column headers: % Resolved, Avg. $ = average cost per task instance, Reasoning effort badge)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-swebench.com/evidence/mainResults.js": "f8afd60f7b6d3aeba34db407fb7f04faadd18c0474c147ffa013baebccfea616",
+  "/work/.salvo14/mig/convert-swebench.com/evidence/swebench-leaderboards.json": "83cd949a9582f4dd68b0a07148cd86ff0eae6a05b0f2d2298a8f3717baf89d2d"
+ },
+ "harvested_at": "2026-10-19T08:13:50Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-swebench.com/evidence/swebench-leaderboards.json",
+   "where": "$.leaderboards[2].results",
+   "format": "json",
+   "row_key": "folder",
+   "columns": {
+    "model_display": "model-name",
+    "agent": "harness",
+    "resolved": {
+     "says": "score",
+     "term": "resolved%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed"
+     }
+    },
+    "instance_cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed"
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "date": "run-end",
+    "checked": "note",
+    "mini-swe-agent_version": "note",
+    "cost": "note",
+    "instance_calls": "note",
+    "model_org": "note",
+    "name": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-swebench.com/evidence/mainResults.js",
+   "where": "site script js/mainResults.js, table header of the leaderboard (mini-swe-agent rows): 'Avg. $'",
+   "quote": "title=\"Average cost per task instance in the benchmark\">Avg. $</th>"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "Average cost per task instance in the benchmark",
+   "term": "per-task",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-swebench.com/evidence/mainResults.js",
+   "where": "site script js/mainResults.js, header title of the column Avg. $ (JSON field instance_cost)",
+   "quote": "title=\"Average cost per task instance in the benchmark\""
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "metric-definition",
+   "value": "% Resolved",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-swebench.com/evidence/mainResults.js",
+   "where": "site script js/mainResults.js, table header (JSON field resolved)",
+   "quote": "data-sort=\"resolved\">% Resolved</th>"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "note",
+   "value": "Reasoning effort",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-swebench.com/evidence/mainResults.js",
+   "where": "site script js/mainResults.js: the reasoning_effort field of a submission is displayed with the title 'Reasoning effort'",
+   "quote": "title=\"Reasoning effort\""
+  }
+ ]
+}
