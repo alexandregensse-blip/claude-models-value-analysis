@@ -1,0 +1,421 @@
+{
+ "urls": [
+  "https://contextarena.ai/",
+  "https://contextarena.ai/api/leaderboard?needles=8&mode=full"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://contextarena.ai/api/leaderboard?needles=8&mode=full",
+   "captured": "2026-10-20T10:28:53Z",
+   "note": "API response as saved by salvo hk (file mtime), copy /work/.salvo14/mig/convert-contextarena.ai/evidence/api_needles_8_20261020.json; the same bytes were saved as api_needles_8_mode_full.json"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://contextarena.ai/",
+   "captured": "2026-10-27T05:53:00Z",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "note": "the page's JS chunk nodes/0.DavlzjYY.js holding the FAQ text, fetched on 27 Oct 2026 by this conversion (after the data: the text may differ from the 20 Oct page)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-contextarena.ai/evidence/api_needles_8_20261020.json": "e40315b86cfc0b4b8cb85d73c5926f1f31694473803733abc41b210e2ea0594a",
+  "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js": "e1543c42fa871f9611d6c97b372d0d488de805b8341445d1ae8bc5373ac8820c",
+  "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json": "91ddf9314e528d230b9bf342885b07906f524349b6ae2823381c27c8c6b90ee3"
+ },
+ "harvested_at": "2026-10-20T10:28:53Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-contextarena.ai (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved API JSON and the page's JS",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "from": "/work/.salvo14/mig/convert-contextarena.ai/evidence/api_needles_8_20261020.json",
+   "tool": "convert.py: one JSON row per (model_slug, reasoning_mode) entry of the API leaderboard that a legacy row cites; values copied verbatim as text; the five bins (4096,8192] ... (65536,131072] as avg_<bin>/n_<bin> (avg_score, sample_count); derived column score = 'K of N' with N = the sum of the five bins' sample_count (x 10^9) and K = the sum of avg_score x sample_count (x 10^9, rounded to an integer): the sample-weighted mean accuracy over the 4K-128K bins, the registry's metric acc%-4K-128K; for the entries that have only these five bins K/N equals the board's overall_score (asserted to 1e-9)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "model_slug": {
+     "says": "model-api-id",
+     "namespace": "openrouter"
+    },
+    "reasoning_mode": "effort-setting",
+    "n_bins_total": "note",
+    "overall_score": "note",
+    "total_samples": "note",
+    "score": {
+     "says": "score",
+     "term": "acc%-4K-128K",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "avg_4k_8k": "note",
+    "n_4k_8k": "note",
+    "avg_8k_16k": "note",
+    "n_8k_16k": "note",
+    "avg_16k_32k": "note",
+    "n_16k_32k": "note",
+    "avg_32k_64k": "note",
+    "n_32k_64k": "note",
+    "avg_64k_128k": "note",
+    "n_64k_128k": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-contextarena.ai-needles8-2026-10-20",
+ "publisher": "contextarena.ai",
+ "facts": [
+  {
+   "says": "metric-definition",
+   "value": "Score shown is the average across all samples in that bin.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "where": "Context Arena home page (JS chunk nodes/0), FAQ 4 'What are the context length bins?'",
+   "quote": "Score shown is the average across all samples in that bin.",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "metric-definition",
+   "value": "similarity, 0–100%",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "where": "FAQ 3 'How is each test scored?'",
+   "quote": "similarity, 0–100%",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Tests are grouped by total",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "where": "FAQ 4",
+   "quote": "Tests are grouped by total",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "headline-metric",
+   "value": "AUC @128k and @1M",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "where": "'Leaderboard Insights' block, point 1: 'Context Arena ranks models by AUC @128k and @1M'",
+   "quote": "Context Arena ranks models by <strong class=\"svelte-yjn5pt\">AUC @128k and @1M</strong>",
+   "note": "the board's own ranking metrics are the trapezoidal AUCs over the bins; the registry's metric acc%-4K-128K (sample-weighted bin mean) is not one of them",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "primarily through OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "where": "FAQ 16 'Can I submit or request model results?': results are generated by running models against the published GDM dataset via API",
+   "quote": "primarily through OpenRouter",
+   "note": "'primarily': the route of one run is not stated, so no route fact is cited",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Sourced from OpenRouter model metadata",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "where": "FAQ 11 'What does Max Ctx show?'",
+   "quote": "Sourced from OpenRouter model metadata",
+   "note": "the model_slug values are OpenRouter model ids (cited as model-api-id in the openrouter namespace)",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Reasoning enabled for this variant",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/js/node_0.DavlzjYY.js",
+   "where": "FAQ 8 'What do the badges mean?' (Capability)",
+   "quote": "Reasoning enabled for this variant",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/api_needles_8_20261020.json",
+   "where": "API response top-level field needles (8-needle: 'Hard' per FAQ 2)",
+   "quote": "\"needles\":8",
+   "id": "F8",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "full",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/api_needles_8_20261020.json",
+   "where": "API response top-level field mode",
+   "quote": "\"mode\":\"full\"",
+   "id": "F9",
+   "about": null
+  },
+  {
+   "about": "qwen/qwen3.6-max-preview",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.6-max-preview|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F10"
+  },
+  {
+   "about": "qwen/qwen3.6-35b-a3b",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.6-35b-a3b|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F11"
+  },
+  {
+   "about": "qwen/qwen3.6-27b",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.6-27b|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F12"
+  },
+  {
+   "about": "qwen/qwen3.5-397b-a17b",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.5-397b-a17b|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F13"
+  },
+  {
+   "about": "qwen/qwen3.5-27b",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.5-27b|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F14"
+  },
+  {
+   "about": "qwen/qwen3.5-122b-a10b",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.5-122b-a10b|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F15"
+  },
+  {
+   "about": "qwen/qwen3.5-35b-a3b",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.5-35b-a3b|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F16"
+  },
+  {
+   "about": "moonshotai/kimi-k2.6",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'moonshotai/kimi-k2.6|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F17"
+  },
+  {
+   "about": "z-ai/glm-5.1",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'z-ai/glm-5.1|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F18"
+  },
+  {
+   "about": "moonshotai/kimi-k2.5",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'moonshotai/kimi-k2.5|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F19"
+  },
+  {
+   "about": "qwen/qwen3.7-flash",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.7-flash|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F20"
+  },
+  {
+   "about": "qwen/qwen3.6-plus",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.6-plus|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F21"
+  },
+  {
+   "about": "deepseek/deepseek-v4-pro",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'deepseek/deepseek-v4-pro|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F22"
+  },
+  {
+   "about": "deepseek/deepseek-v4-flash",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'deepseek/deepseek-v4-flash|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F23"
+  },
+  {
+   "about": "qwen/qwen3.5-plus",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.5-plus|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F24"
+  },
+  {
+   "about": "qwen/qwen3.5-9b",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'qwen/qwen3.5-9b|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F25"
+  },
+  {
+   "about": "anthropic/claude-haiku-4.5",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'anthropic/claude-haiku-4.5|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F26"
+  },
+  {
+   "about": "x-ai/grok-4.20",
+   "says": "thinking-on",
+   "value": "enabled",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-contextarena.ai/evidence/rows-api.json",
+   "where": "row 'x-ai/grok-4.20|enabled', column reasoning_mode",
+   "quote": "enabled",
+   "note": "'enabled' is a reasoning_mode value with no level; the site's badge says 'Reasoning enabled for this variant'",
+   "id": "F27"
+  }
+ ]
+}

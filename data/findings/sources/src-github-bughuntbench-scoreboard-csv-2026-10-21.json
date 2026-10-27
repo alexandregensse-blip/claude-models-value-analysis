@@ -1,0 +1,156 @@
+{
+ "urls": [
+  "https://github.com/phuryn/bug-hunt-bench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/phuryn/bug-hunt-bench/main/results/combined-scoreboard.csv",
+   "captured": "2026-10-21T15:11:47Z",
+   "note": "results/combined-scoreboard.csv as saved by salvo hn/news-boards; capture time = file mtime (the 15 Oct copy s23/b1 holds the same row)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/hn/news-boards/src/bughunt/combined-scoreboard.csv": "1636e4e08269a5d9b57214438f030374fb2b127cfe88cbb100734ac0195f490b",
+  "/work/.salvo14/mig/convert-github-bughuntbench/evidence/rows-csv.json": "ae9de9807e38088d3abf995838f5d5091ef4c9ee3b0c275acf5c746e7deeb243",
+  "/work/.salvo14/gt/t8/src/bughunt_20261020.json": "c55a0ce0366582bff133175ee05b60d07d30c14b9d2659d665b55cf600aa7446"
+ },
+ "harvested_at": "2026-10-21T15:11:47Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-bughuntbench (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5)",
+ "snapshot_of": "src-github-bughuntbench-board-2026-10-19",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-bughuntbench/evidence/rows-csv.json",
+   "from": "/work/.salvo14/hn/news-boards/src/bughunt/combined-scoreboard.csv",
+   "tool": "convert.py: the CSV row 'Gemini 4 Argon (high effort)' as one JSON row, values verbatim; derived columns: model / effort = the two parts of the label '<model> (<effort> effort)', score = '<fixed_of_105> of 105'"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-bughuntbench/evidence/rows-csv.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "label",
+   "columns": {
+    "label": "note",
+    "model": "model-name",
+    "effort": "effort-label",
+    "harness": "harness",
+    "fixed_of_105": "note",
+    "fixed_v1_of_45": "note",
+    "fixed_v2_of_60": "note",
+    "genuine_extras_total": "note",
+    "wall_min_total": "note",
+    "score": {
+     "says": "score",
+     "term": "strict-fix%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_usd_list_equiv_total": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-github-bughuntbench-scoreboard-csv-2026-10-21",
+ "publisher": "github-bughuntbench",
+ "facts": [
+  {
+   "says": "note",
+   "value": "list",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/gt/t8/src/bughunt_20261020.json",
+   "where": "data/benchmark.json, glossary.cost_list (the board's definition of the cost kind `list`; the CSV carries no kind column)",
+   "quote": "A token-count estimate at published list rates, not a bill.",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "cost_usd_list_equiv_total",
+   "term": "USD",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/hn/news-boards/src/bughunt/combined-scoreboard.csv",
+   "where": "results/combined-scoreboard.csv header",
+   "quote": "cost_usd_list_equiv_total",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "cost_usd_list_equiv_total",
+   "term": "per-suite",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/hn/news-boards/src/bughunt/combined-scoreboard.csv",
+   "where": "results/combined-scoreboard.csv header: total over both repos",
+   "quote": "cost_usd_list_equiv_total",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "list_equiv",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/hn/news-boards/src/bughunt/combined-scoreboard.csv",
+   "where": "results/combined-scoreboard.csv header: cost_usd_list_equiv_total (list-price equivalent)",
+   "quote": "list_equiv",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "list_equiv",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/hn/news-boards/src/bughunt/combined-scoreboard.csv",
+   "where": "results/combined-scoreboard.csv header: cost_usd_list_equiv_total",
+   "quote": "list_equiv",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "metric-definition",
+   "value": "Planted bugs fixed and verified against the withheld answer key. The only number in the score.",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/gt/t8/src/bughunt_20261020.json",
+   "where": "data/benchmark.json, glossary.fixed (the CSV column fixed_of_105 is the same count)",
+   "quote": "Planted bugs fixed and verified against the withheld answer key. The only number in the score.",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "about": "Gemini 4 Argon (high effort)",
+   "says": "harness",
+   "value": "Gemini CLI",
+   "term": "gemini-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-bughuntbench/evidence/rows-csv.json",
+   "where": "row 'Gemini 4 Argon (high effort)', column harness",
+   "quote": "Gemini CLI",
+   "id": "F7"
+  }
+ ]
+}

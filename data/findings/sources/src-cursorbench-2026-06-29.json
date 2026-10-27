@@ -1,0 +1,147 @@
+{
+ "urls": [
+  "https://cursor.com/cursorbench"
+ ],
+ "wayback": [
+  "https://web.archive.org/web/20260629220638/https://cursor.com/cursorbench",
+  "https://web.archive.org/web/20260606222450/https://cursor.com/cursorbench",
+  "https://web.archive.org/web/20260609170930/https://cursor.com/cursorbench",
+  "https://web.archive.org/web/20260617115722/https://cursor.com/cursorbench"
+ ],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260629220638/https://cursor.com/cursorbench",
+   "captured": "2026-06-29T22:06:38Z",
+   "note": "saved copy /work/.salvo14/g/g8/src/cursor/cb-20260629220638.html"
+  },
+  {
+   "id": "S2",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260606222450/https://cursor.com/cursorbench",
+   "captured": "2026-06-06T22:24:50Z",
+   "note": "saved copy /work/.salvo14/g/g8/src/cursor/cb-20260606222450.html; the same version section; listed for the values it carries too"
+  },
+  {
+   "id": "S3",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260609170930/https://cursor.com/cursorbench",
+   "captured": "2026-06-09T17:09:30Z",
+   "note": "saved copy /work/.salvo14/g/g8/src/cursor/cb-20260609170930.html; the same version section; listed for the values it carries too"
+  },
+  {
+   "id": "S4",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260617115722/https://cursor.com/cursorbench",
+   "captured": "2026-06-17T11:57:22Z",
+   "note": "saved copy /work/.salvo14/g/g8/src/cursor/cb-20260617115722.html; the same version section; listed for the values it carries too"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/g/g8/src/cursor/cb-20260629220638.html": "4313ba3bb5393b65bb4e4516ddb528295e438a27e6e88ae15ae4f0ce6b191a87",
+  "/work/.salvo14/mig/convert-cursorbench/evidence/rows-20260629.json": "4c9393b477559b6b9a799e01a174fd06849b9f9607998ded7d742a0c1d91e526",
+  "/work/.salvo14/g/g8/src/cursor/cb-20260606222450.html": "47c4d487ba6ace03ce2e7c38ead24c70862e13ace77d2747a3f39f49f05ac194",
+  "/work/.salvo14/g/g8/src/cursor/cb-20260609170930.html": "87ccb1509853e33c68aa25a1650983f6b4f055ef56828f47a91404be617ab92b",
+  "/work/.salvo14/g/g8/src/cursor/cb-20260617115722.html": "9c618e34b001b6de1d9345b3d777bfe8cfb3c9b7ce20369f5818df079265220e"
+ },
+ "harvested_at": "2026-06-29T22:06:38Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-cursorbench (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-cursorbench/evidence/rows-20260629.json",
+   "from": "/work/.salvo14/g/g8/src/cursor/cb-20260629220638.html",
+   "tool": "convert.py/parse.py: the rows of the page's leaderboard table (section CursorBench 3.1: rank, label, score, cost, tokens, steps), the table printed twice in the page deduplicated; label split into model and effort at the trailing level word (Max, Extra High, High, Medium, Low, Minimal)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-cursorbench/evidence/rows-20260629.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "label": "note",
+    "model": "model-name",
+    "effort": "effort-label",
+    "rank": "note",
+    "score": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "tokens": "note",
+    "steps": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-cursorbench-2026-06-29",
+ "publisher": "cursorbench",
+ "facts": [
+  {
+   "says": "version",
+   "value": "CursorBench 3.1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/g/g8/src/cursor/cb-20260629220638.html",
+   "where": "page heading of the leaderboard section",
+   "quote": "CursorBench 3.1",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g8/src/cursor/cb-20260629220638.html",
+   "where": "the Cost column of the table and the chart labels print '$<amount>'",
+   "quote": "$",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "Average cost per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/g/g8/src/cursor/cb-20260629220638.html",
+   "where": "table column headers 'Cost / task', chart axis 'Average cost per task'",
+   "quote": "Average cost per task",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "harness",
+   "value": "Cursor",
+   "term": "cursor-cli",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/g/g8/src/cursor/cb-20260629220638.html",
+   "where": "page title: 'Cursor · CursorBench'; the maintainer's rule (26 Oct): Cursor is a closed harness whose level labels pass as levels (routes.json cursor-cli label_as_level)",
+   "quote": "We evaluate agents on ambiguous, multi-file tasks from real Cursor sessions.",
+   "id": "F4",
+   "about": null
+  }
+ ]
+}

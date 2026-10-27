@@ -1,0 +1,208 @@
+{
+ "urls": [
+  "https://cursor.com/cursorbench"
+ ],
+ "wayback": [
+  "https://web.archive.org/web/20260910222956/https://cursor.com/cursorbench"
+ ],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://cursor.com/cursorbench",
+   "captured": "2026-10-20T05:55:50Z",
+   "note": "saved copy /work/.salvo14/gt/t8/src/r2/cursorbench.html"
+  },
+  {
+   "id": "S2",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260910222956/https://cursor.com/cursorbench",
+   "captured": "2026-09-10T22:29:56Z",
+   "note": "saved copy /work/.salvo14/g/g8/src/cursor/cb-20260910222956.html; the same version section; listed for the values it carries too"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://cursor.com/cursorbench",
+   "captured": "2026-10-08T02:48:04Z",
+   "note": "saved copy /work/.salvo14/g/g8/src/cursor/cb-20261008-live-saved-s20h1.html; the same version section; listed for the values it carries too"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/gt/t8/src/r2/cursorbench.html": "8ea7875b4c40b27ed624853fc3bdf93ffe71012367695275139eb03f7e7457db",
+  "/work/.salvo14/mig/convert-cursorbench/evidence/rows-20261020.json": "4eae90358e35584d68b1d4c77814e572677e63f0b0f007adeae0e59a164d94d5",
+  "/work/.salvo14/g/g8/src/cursor/cb-20260910222956.html": "75ab14dd58884c742dd3de64a23fb0b56d644d220d3c240c4d4aca89aa030ac7",
+  "/work/.salvo14/g/g8/src/cursor/cb-20261008-live-saved-s20h1.html": "5f65c46f6978b55c56a8c3ee96d26758027941542c56aeb0c7314cddd62968d8"
+ },
+ "harvested_at": "2026-10-20T05:55:50Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-cursorbench (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved page",
+ "snapshot_of": "src-cursorbench-2026-10-08",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-cursorbench/evidence/rows-20261020.json",
+   "from": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "tool": "convert.py/parse.py: the rows of the page's leaderboard table (section CursorBench 4.0: rank, label, score, cost, tokens, steps), the table printed twice in the page deduplicated; label split into model and effort at the trailing level word (Max, Extra High, High, Medium, Low, Minimal)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-cursorbench/evidence/rows-20261020.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "key": "note",
+    "label": "note",
+    "model": "model-name",
+    "effort": "effort-label",
+    "rank": "note",
+    "score": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "tokens": "note",
+    "steps": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "id": "src-cursorbench-2026-10-20",
+ "publisher": "cursorbench",
+ "facts": [
+  {
+   "says": "version",
+   "value": "CursorBench 4.0",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page heading of the leaderboard section",
+   "quote": "CursorBench 4.0",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "the Cost column of the table and the chart labels print '$<amount>'",
+   "quote": "$",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "Average cost per task",
+   "term": "per-task",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "table column headers 'Cost / task', chart axis 'Average cost per task'",
+   "quote": "Average cost per task",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "published per-million-token pricing",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page footnote under the table",
+   "quote": "Avg cost / task is computed by applying each model's published per-million-token pricing (input, cache read, cache write, and output) to the tokens it used on each task.",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "applying each model's published per-million-token pricing",
+   "term": "tokens×list",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page footnote under the table",
+   "quote": "applying each model's published per-million-token pricing (input, cache read, cache write, and output) to the tokens it used on each task",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "harness",
+   "value": "Cursor",
+   "term": "cursor-cli",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page title: 'Cursor · CursorBench'; the maintainer's rule (26 Oct): Cursor is a closed harness whose level labels pass as levels (routes.json cursor-cli label_as_level)",
+   "quote": "We evaluate agents on ambiguous, multi-file tasks from real Cursor sessions.",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Updated Sonnet 5.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page changelog, entry of Oct 7, 2026 (Reporting)",
+   "quote": "Updated Sonnet 5.",
+   "note": "the page's statement that costs of the named models were re-computed at adjusted pricing from the date given (not a price table)",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Updated Sonnet 5 results to account for adjusted pricing.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page changelog, entry of Aug 11, 2026 (Reporting)",
+   "quote": "Updated Sonnet 5 results to account for adjusted pricing.",
+   "note": "the page's statement that costs of the named models were re-computed at adjusted pricing from the date given (not a price table)",
+   "id": "F8",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Updated GPT-5.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page changelog, entry of Jul 30, 2026 (Reporting)",
+   "quote": "Updated GPT-5.",
+   "note": "the page's statement that costs of the named models were re-computed at adjusted pricing from the date given (not a price table)",
+   "id": "F9",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Updated GPT-5.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/gt/t8/src/r2/cursorbench.html",
+   "where": "page changelog, entry of Jul 9, 2026 (Reporting)",
+   "quote": "Updated GPT-5.",
+   "note": "the page's statement that costs of the named models were re-computed at adjusted pricing from the date given (not a price table)",
+   "id": "F10",
+   "about": null
+  }
+ ]
+}
