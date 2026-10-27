@@ -1,0 +1,375 @@
+{
+ "id": "src-hf-redlinebench-leaderboard-2026-10-05",
+ "publisher": "hf-redlinebench",
+ "urls": [
+  "https://huggingface.co/datasets/crosbylegal/RedlineBench",
+  "https://huggingface.co/api/datasets/crosbylegal/RedlineBench/leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://huggingface.co/api/datasets/crosbylegal/RedlineBench/leaderboard",
+   "captured": "2026-10-05T04:20:17Z",
+   "note": "HF dataset leaderboard API, saved by salvo s19/b2 (capture time = mtime of that saved file)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json": "790069eed43f35fdf486c8e1fe7a20c0fcd641185d26d650f7edbbf7a687ff86"
+ },
+ "harvested_at": "2026-10-05T04:20:17Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "rank",
+   "columns": {
+    "modelId": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "value": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "notes": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "judge",
+   "value": "3-LLM judge panel (majority vote)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[*].notes (identical in the 13 entries)",
+   "quote": "3-LLM judge panel (majority vote)"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "aggregation",
+   "value": "turn-weighted weighted pass rate (0-100)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[*].notes (identical in the 13 entries)",
+   "quote": "turn-weighted weighted pass rate (0-100)"
+  },
+  {
+   "id": "F3",
+   "about": "crosbylegal/claude-opus-5",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[0].notes (rank 1)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F4",
+   "about": "crosbylegal/claude-opus-5",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[0].notes (rank 1): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F5",
+   "about": "crosbylegal/gpt-5.6-sol",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[1].notes (rank 2)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F6",
+   "about": "crosbylegal/gpt-5.6-sol",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[1].notes (rank 2): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F7",
+   "about": "crosbylegal/gpt-5.6-luna",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[2].notes (rank 3)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F8",
+   "about": "crosbylegal/gpt-5.6-luna",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[2].notes (rank 3): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F9",
+   "about": "crosbylegal/gemini-3.8-flash",
+   "says": "harness",
+   "value": "opencode",
+   "term": "opencode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[3].notes (rank 4)",
+   "quote": "agent=opencode"
+  },
+  {
+   "id": "F10",
+   "about": "crosbylegal/gemini-3.8-flash",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[3].notes (rank 4): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F11",
+   "about": "crosbylegal/claude-opus-5-5",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[4].notes (rank 5)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F12",
+   "about": "crosbylegal/claude-opus-5-5",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[4].notes (rank 5): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F13",
+   "about": "crosbylegal/gemini-3.6-flash",
+   "says": "harness",
+   "value": "opencode",
+   "term": "opencode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[5].notes (rank 6)",
+   "quote": "agent=opencode"
+  },
+  {
+   "id": "F14",
+   "about": "crosbylegal/gemini-3.6-flash",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[5].notes (rank 6): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F15",
+   "about": "crosbylegal/gpt-5.5",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[6].notes (rank 7)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F16",
+   "about": "crosbylegal/gpt-5.5",
+   "says": "note",
+   "value": "published report figure",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[6].notes (rank 7): the entry's kind",
+   "quote": "published report figure"
+  },
+  {
+   "id": "F17",
+   "about": "moonshotai/Kimi-K3",
+   "says": "harness",
+   "value": "kimi-k3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[7].notes (rank 8)",
+   "quote": "agent=kimi-k3"
+  },
+  {
+   "id": "F18",
+   "about": "moonshotai/Kimi-K3",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[7].notes (rank 8): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F19",
+   "about": "crosbylegal/gpt-5.6-terra",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[8].notes (rank 9)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F20",
+   "about": "crosbylegal/gpt-5.6-terra",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[8].notes (rank 9): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F21",
+   "about": "crosbylegal/claude-fable-5",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[9].notes (rank 10)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F22",
+   "about": "crosbylegal/claude-fable-5",
+   "says": "note",
+   "value": "published report figure",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[9].notes (rank 10): the entry's kind",
+   "quote": "published report figure"
+  },
+  {
+   "id": "F23",
+   "about": "zai-org/GLM-5.2",
+   "says": "harness",
+   "value": "glm-5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[10].notes (rank 11)",
+   "quote": "agent=glm-5.2"
+  },
+  {
+   "id": "F24",
+   "about": "zai-org/GLM-5.2",
+   "says": "note",
+   "value": "post-publication run",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[10].notes (rank 11): the entry's kind",
+   "quote": "post-publication run"
+  },
+  {
+   "id": "F25",
+   "about": "crosbylegal/gemini-3.5-flash",
+   "says": "harness",
+   "value": "opencode",
+   "term": "opencode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[11].notes (rank 12)",
+   "quote": "agent=opencode"
+  },
+  {
+   "id": "F26",
+   "about": "crosbylegal/gemini-3.5-flash",
+   "says": "note",
+   "value": "published report figure",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[11].notes (rank 12): the entry's kind",
+   "quote": "published report figure"
+  },
+  {
+   "id": "F27",
+   "about": "crosbylegal/claude-opus-4-8",
+   "says": "harness",
+   "value": "claude-code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[12].notes (rank 13)",
+   "quote": "agent=claude-code"
+  },
+  {
+   "id": "F28",
+   "about": "crosbylegal/claude-opus-4-8",
+   "says": "note",
+   "value": "published report figure",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+   "where": "$[12].notes (rank 13): the entry's kind",
+   "quote": "published report figure"
+  }
+ ]
+}

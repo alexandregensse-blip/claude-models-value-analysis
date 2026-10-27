@@ -1,0 +1,250 @@
+{
+ "id": "src-braintrust-glm-52-vs-opus-48-technical-report-2026-06-30",
+ "publisher": "braintrust",
+ "urls": [
+  "https://www.braintrust.dev/evals/glm-52-vs-opus-48-technical-report"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://www.braintrust.dev/evals/glm-52-vs-opus-48-technical-report",
+   "captured": "2026-10-27T12:00:00Z",
+   "note": "page fetched on 27 Oct 2026 (no earlier copy was saved)",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.html"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt": "116e03b0e793f22adf15e9e208fa8ab73fa2f2bc0fc356b8b2284c9948b7709b",
+  "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.html": "117a8851cdbb8e6dd3321149b7b32d2ec5408a47a107f6cf3de2fc00b599aa80"
+ },
+ "harvested_at": "2026-10-27T12:00:00Z",
+ "published": {
+  "value": "2026-06-30",
+  "where": "page header date",
+  "quote": "30 June 2026",
+  "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "from": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the page, one block per line, every table row on one line with cells joined by ' | '"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "table 'Model | Tier | AST | ... | Cost | Duration'",
+   "quote": "Sonnet 4.6 | 25K | 56.0% | 81.1% | 74.3% | 70.5% | $0.040 | 5.76s",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "Estimated cost per eval case ($)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "chart axis label of the cost/quality chart (Cost column of the table)",
+   "quote": "Estimated cost per eval case ($)",
+   "term": "per-trace"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "aggregation",
+   "value": "three trials on T25 and two trials on T50",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "'Historical Anthropic baselines'",
+   "quote": "Opus 4.6 and Sonnet 4.6 each ran three trials on T25 and two trials on T50"
+  },
+  {
+   "id": "F4",
+   "about": "Sonnet 4.6|25K",
+   "says": "model-name",
+   "value": "Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "table 'Model | Tier | AST ...', row Sonnet 4.6 25K, column Model",
+   "quote": "Sonnet 4.6 | 25K | 56.0% | 81.1% | 74.3% | 70.5% | $0.040 | 5.76s"
+  },
+  {
+   "id": "F5",
+   "about": "Sonnet 4.6|25K",
+   "says": "score",
+   "value": "56.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column AST (ASTSemanticMatch)",
+   "quote": "Sonnet 4.6 | 25K | 56.0% | 81.1% | 74.3% | 70.5% | $0.040 | 5.76s",
+   "term": "ASTMatch%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F6",
+   "about": "Sonnet 4.6|25K",
+   "says": "cost",
+   "value": "0.040",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column Cost",
+   "quote": "Sonnet 4.6 | 25K | 56.0% | 81.1% | 74.3% | 70.5% | $0.040 | 5.76s",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F7",
+   "about": "Sonnet 4.6|50K",
+   "says": "model-name",
+   "value": "Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "table 'Model | Tier | AST ...', row Sonnet 4.6 50K, column Model",
+   "quote": "Sonnet 4.6 | 50K | 66.7% | 84.0% | 79.3% | 76.7% | $0.080 | 6.07s"
+  },
+  {
+   "id": "F8",
+   "about": "Sonnet 4.6|50K",
+   "says": "score",
+   "value": "66.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column AST (ASTSemanticMatch)",
+   "quote": "Sonnet 4.6 | 50K | 66.7% | 84.0% | 79.3% | 76.7% | $0.080 | 6.07s",
+   "term": "ASTMatch%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F9",
+   "about": "Sonnet 4.6|50K",
+   "says": "cost",
+   "value": "0.080",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column Cost",
+   "quote": "Sonnet 4.6 | 50K | 66.7% | 84.0% | 79.3% | 76.7% | $0.080 | 6.07s",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Opus 4.6|25K",
+   "says": "model-name",
+   "value": "Opus 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "table 'Model | Tier | AST ...', row Opus 4.6 25K, column Model",
+   "quote": "Opus 4.6 | 25K | 57.3% | 81.5% | 75.0% | 71.3% | $0.060 | 8.87s"
+  },
+  {
+   "id": "F11",
+   "about": "Opus 4.6|25K",
+   "says": "score",
+   "value": "57.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column AST (ASTSemanticMatch)",
+   "quote": "Opus 4.6 | 25K | 57.3% | 81.5% | 75.0% | 71.3% | $0.060 | 8.87s",
+   "term": "ASTMatch%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "about": "Opus 4.6|25K",
+   "says": "cost",
+   "value": "0.060",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column Cost",
+   "quote": "Opus 4.6 | 25K | 57.3% | 81.5% | 75.0% | 71.3% | $0.060 | 8.87s",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F13",
+   "about": "Opus 4.6|50K",
+   "says": "model-name",
+   "value": "Opus 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "table 'Model | Tier | AST ...', row Opus 4.6 50K, column Model",
+   "quote": "Opus 4.6 | 50K | 66.8% | 83.8% | 76.4% | 75.7% | $0.130 | 12.04s"
+  },
+  {
+   "id": "F14",
+   "about": "Opus 4.6|50K",
+   "says": "score",
+   "value": "66.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column AST (ASTSemanticMatch)",
+   "quote": "Opus 4.6 | 50K | 66.8% | 83.8% | 76.4% | 75.7% | $0.130 | 12.04s",
+   "term": "ASTMatch%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F15",
+   "about": "Opus 4.6|50K",
+   "says": "cost",
+   "value": "0.130",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+   "where": "same row, column Cost",
+   "quote": "Opus 4.6 | 50K | 66.8% | 83.8% | 76.4% | 75.7% | $0.130 | 12.04s",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ]
+}

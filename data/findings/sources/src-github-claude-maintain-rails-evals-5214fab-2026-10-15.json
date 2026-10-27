@@ -1,0 +1,648 @@
+{
+ "id": "src-github-claude-maintain-rails-evals-5214fab-2026-10-15",
+ "publisher": "github-claude-maintain-rails-evals",
+ "urls": [
+  "https://github.com/andreimaxim/claude-maintain-rails-evals/tree/5214faba442b7627ee0097787e58cd461d95f4a4"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "url": "https://github.com/andreimaxim/claude-maintain-rails-evals/tree/5214faba442b7627ee0097787e58cd461d95f4a4",
+   "captured": "2026-10-15T17:35:45Z",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "note": "README.md at commit 5214faba (author date 2026-10-15T17:35:45Z, from git log of the clone news-code2c/src/c/repo); saved copy by salvo s24/c3 (rails_README_5214fab.md)"
+  }
+ ],
+ "commit": "5214faba442b7627ee0097787e58cd461d95f4a4",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md": "49ac97aee30ce766f1d891c77658baf3df4f2db551c13bcd85e8bb21bdd4c21e"
+ },
+ "harvested_at": "2026-10-18T16:49:47Z",
+ "published": null,
+ "salvo": "salvo14/mig convert-github-claude-maintain-rails-evals (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the repo README at commit 5214fab saved by salvo s24/c3",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "claude -p --plugin-dir",
+   "level": "written",
+   "form": "prose",
+   "where": "README intro: each run loads the skill variant under test for one headless session",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "Each run loads the skill variant under test for one headless session with `claude -p --plugin-dir`",
+   "term": "claude-code"
+  },
+  {
+   "id": "F2",
+   "says": "cost-method",
+   "about": null,
+   "value": "the session's `total_cost_usd`",
+   "level": "written",
+   "form": "prose",
+   "where": "README run protocol: receipt.json holds the session total_cost_usd",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "every result record and the session's `total_cost_usd`",
+   "term": "cli-total"
+  },
+  {
+   "id": "F3",
+   "says": "cost-basis",
+   "about": null,
+   "value": "not invoices or complete bills",
+   "level": "written",
+   "form": "prose",
+   "where": "README run protocol: costs are list-price estimates, not invoices",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "These are not invoices or complete bills",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results tables (cost column in $)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |",
+   "term": "USD"
+  },
+  {
+   "id": "F5",
+   "says": "unit",
+   "about": null,
+   "value": "Median cost",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header: median cost of a run (five runs per cell)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Model and effort | v12 mean | v16 mean | Median cost (v12 / v16) |",
+   "term": "per-run"
+  },
+  {
+   "id": "F6",
+   "says": "aggregation",
+   "about": null,
+   "value": "v12 mean | v16 mean",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table: score = mean of five runs; cost = median of five runs",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Model and effort | v12 mean | v16 mean | Median cost (v12 / v16) |"
+  },
+  {
+   "id": "F7",
+   "says": "aggregation",
+   "about": null,
+   "value": "medians of five Rails runs each",
+   "level": "written",
+   "form": "prose",
+   "where": "risk-report section: \"The table gives medians of five Rails runs each\"",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "The table gives medians of five Rails runs each"
+  },
+  {
+   "id": "F8",
+   "says": "unit",
+   "about": null,
+   "value": "Median cost",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table header",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Variant and model | Found (of 23) | Same level as the label | High rated high (of 7) | Wrong claims in 5 runs | Median cost | Median time |",
+   "term": "per-run"
+  },
+  {
+   "id": "F9",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 high | 22 | 19 | 6 | 2 | $5.86 | 15.8 min |",
+   "term": "USD"
+  },
+  {
+   "id": "F10",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Found (of 23)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table column: planted changes found of 23",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Variant and model | Found (of 23) | Same level as the label | High rated high (of 7) | Wrong claims in 5 runs | Median cost | Median time |"
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "rails-v12-headless|Opus 5.5 low",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |"
+  },
+  {
+   "id": "F12",
+   "says": "effort-label",
+   "about": "rails-v12-headless|Opus 5.5 low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |"
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "rails-v12-headless|Opus 5.5 low",
+   "value": "21.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column v12 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "cost",
+   "about": "rails-v12-headless|Opus 5.5 low",
+   "value": "2.97",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column Median cost (v12)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "rails-v16-headless|Opus 5.5 low",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |"
+  },
+  {
+   "id": "F16",
+   "says": "effort-label",
+   "about": "rails-v16-headless|Opus 5.5 low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "rails-v16-headless|Opus 5.5 low",
+   "value": "21.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column v16 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": "rails-v16-headless|Opus 5.5 low",
+   "value": "3.01",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Opus 5.5 low, column Median cost (v16)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |"
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "rails-v12-headless|Sonnet 5.5 medium",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |"
+  },
+  {
+   "id": "F20",
+   "says": "effort-label",
+   "about": "rails-v12-headless|Sonnet 5.5 medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "rails-v12-headless|Sonnet 5.5 medium",
+   "value": "19.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column v12 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "cost",
+   "about": "rails-v12-headless|Sonnet 5.5 medium",
+   "value": "2.04",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column Median cost (v12)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |"
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": "rails-v16-headless|Sonnet 5.5 medium",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |"
+  },
+  {
+   "id": "F24",
+   "says": "effort-label",
+   "about": "rails-v16-headless|Sonnet 5.5 medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |"
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "rails-v16-headless|Sonnet 5.5 medium",
+   "value": "19.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column v16 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "says": "cost",
+   "about": "rails-v16-headless|Sonnet 5.5 medium",
+   "value": "2.20",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 medium, column Median cost (v16)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 medium | 19.0 | 19.6 | $2.04 / $2.20 | 14.9 / 14.3 min | 10 of 10 |"
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "rails-v12-headless|Sonnet 5.5 low",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |"
+  },
+  {
+   "id": "F28",
+   "says": "effort-label",
+   "about": "rails-v12-headless|Sonnet 5.5 low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "rails-v12-headless|Sonnet 5.5 low",
+   "value": "18.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column v12 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "cost",
+   "about": "rails-v12-headless|Sonnet 5.5 low",
+   "value": "1.62",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column Median cost (v12)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |"
+  },
+  {
+   "id": "F31",
+   "says": "model-name",
+   "about": "rails-v16-headless|Sonnet 5.5 low",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |"
+  },
+  {
+   "id": "F32",
+   "says": "effort-label",
+   "about": "rails-v16-headless|Sonnet 5.5 low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |"
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "rails-v16-headless|Sonnet 5.5 low",
+   "value": "16.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column v16 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "cost",
+   "about": "rails-v16-headless|Sonnet 5.5 low",
+   "value": "1.37",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Sonnet 5.5 low, column Median cost (v16)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Sonnet 5.5 low | 18.4 | 16.2 | $1.62 / $1.37 | 11.9 / 10.1 min | 10 of 10 |"
+  },
+  {
+   "id": "F35",
+   "says": "model-name",
+   "about": "rails-v12-headless|Haiku 5.5 high",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |"
+  },
+  {
+   "id": "F36",
+   "says": "effort-label",
+   "about": "rails-v12-headless|Haiku 5.5 high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |"
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "rails-v12-headless|Haiku 5.5 high",
+   "value": "16.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column v12 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "cost",
+   "about": "rails-v12-headless|Haiku 5.5 high",
+   "value": "2.35",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column Median cost (v12)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |"
+  },
+  {
+   "id": "F39",
+   "says": "model-name",
+   "about": "rails-v16-headless|Haiku 5.5 high",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |"
+  },
+  {
+   "id": "F40",
+   "says": "effort-label",
+   "about": "rails-v16-headless|Haiku 5.5 high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column Model and effort",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "rails-v16-headless|Haiku 5.5 high",
+   "value": "16.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column v16 mean (mean of five runs, findings of 23)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "cost",
+   "about": "rails-v16-headless|Haiku 5.5 high",
+   "value": "2.20",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row Haiku 5.5 high, column Median cost (v16)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| Haiku 5.5 high | 16.4 | 16.6 | $2.35 / $2.20 | 42.8 / 18.1 min | 6 of 10 |"
+  },
+  {
+   "id": "F43",
+   "says": "model-name",
+   "about": "rails-risk-v20|v20, Opus 5.5 high",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 high, column Variant and model",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 high | 22 | 19 | 6 | 2 | $5.86 | 15.8 min |"
+  },
+  {
+   "id": "F44",
+   "says": "effort-label",
+   "about": "rails-risk-v20|v20, Opus 5.5 high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 high, column Variant and model",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 high | 22 | 19 | 6 | 2 | $5.86 | 15.8 min |"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "rails-risk-v20|v20, Opus 5.5 high",
+   "value": "22",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 high, column Found (of 23) (median of five runs)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 high | 22 | 19 | 6 | 2 | $5.86 | 15.8 min |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": "rails-risk-v20|v20, Opus 5.5 high",
+   "value": "5.86",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 high, column Median cost",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 high | 22 | 19 | 6 | 2 | $5.86 | 15.8 min |"
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "rails-risk-v20|v20, Opus 5.5 low",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 low, column Variant and model",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 low | 16 | 12 | 4 | 6 | $0.82 | 3.4 min |"
+  },
+  {
+   "id": "F48",
+   "says": "effort-label",
+   "about": "rails-risk-v20|v20, Opus 5.5 low",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 low, column Variant and model",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 low | 16 | 12 | 4 | 6 | $0.82 | 3.4 min |"
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "rails-risk-v20|v20, Opus 5.5 low",
+   "value": "16",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 low, column Found (of 23) (median of five runs)",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 low | 16 | 12 | 4 | 6 | $0.82 | 3.4 min |",
+   "term": "found-of-23",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": "rails-risk-v20|v20, Opus 5.5 low",
+   "value": "0.82",
+   "level": "written",
+   "form": "table-cell",
+   "where": "risk-report table, row v20, Opus 5.5 low, column Median cost",
+   "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+   "quote": "| v20, Opus 5.5 low | 16 | 12 | 4 | 6 | $0.82 | 3.4 min |"
+  }
+ ]
+}

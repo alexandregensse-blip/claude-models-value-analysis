@@ -1,0 +1,152 @@
+{
+ "id": "src-aipricing.guru-cost-per-task-2026-10-04",
+ "publisher": "aipricing.guru",
+ "urls": [
+  "https://aipricing.guru/labs/cost-per-task.json"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://aipricing.guru/labs/cost-per-task.json",
+   "captured": "2026-10-05T07:39:57Z",
+   "note": "board JSON saved by salvo s19/c2 on 5 Oct 2026 (run 2026-10-04T04-21-33Z; same sha256 as the copies of g5 and gc/c6)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json": "e1ae94c0afc214c7ea7e8cfa3fa51583784a1fdbf1629d758179c0d08d30447d"
+ },
+ "harvested_at": "2026-10-05T07:39:57Z",
+ "published": {
+  "value": "2026-10-04",
+  "where": "$.generatedAt",
+  "quote": "\"generatedAt\": \"2026-10-04T04:29:43.515Z\"",
+  "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.modelSummaries",
+   "format": "json",
+   "row_key": "pricingId",
+   "columns": {
+    "openrouterId": {
+     "says": "model-api-id",
+     "namespace": "openrouter"
+    },
+    "label": "model-name",
+    "accuracy": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "fraction",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "spendUsd": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "promptTokens": "tokens-in",
+    "completionTokens": "tokens-out"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "cost-basis",
+   "value": "AI Pricing Guru direct-provider list prices from /opt/aipricing/repo/public/pricing.json",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.methodology.costBasis",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "cost-method",
+   "value": "AI Pricing Guru direct-provider list prices from /opt/aipricing/repo/public/pricing.json",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.methodology.costBasis",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.modelSummaries[*].spendUsd (key name 'spendUsd')",
+   "term": "USD"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "unit",
+   "value": "cost-per-task-v2 suite (49 tasks attempted per model)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.suite.id, $.modelSummaries[*].attempted",
+   "term": "per-suite"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "route",
+   "value": "OpenRouter chat completions",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.methodology.inferenceRoute",
+   "term": "openrouter"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "cap",
+   "value": "1024",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.methodology.maxOutputTokens"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "run-date",
+   "value": "2026-10-04T04:29:43.515Z",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.generatedAt"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "metric-definition",
+   "value": "deterministic exact/number/regex/contains/json_fields graders; no LLM judge",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+   "where": "$.methodology.grading"
+  }
+ ]
+}

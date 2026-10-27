@@ -1,0 +1,688 @@
+{
+ "id": "src-posttrainbench-v12-2026-10-20",
+ "publisher": "posttrainbench",
+ "urls": [
+  "https://posttrainbench.com/?version=v1.2"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://posttrainbench.com/?version=v1.2",
+   "captured": "2026-10-20T05:47:00Z",
+   "note": "board page and JS payloads (scores-v1.2.js, config.js) saved by salvo gt/t4, 20 Oct 2026"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-posttrainbench/evidence/scores-v1.2.js": "a68baa3f1ea316ec2b7f7539ed16e79a5de4a1b3703f9a953e381c4c9ae46a3b",
+  "/work/.salvo14/mig/convert-posttrainbench/evidence/scores-v1.2.js.json": "2eb93dafecc065462fc23946cba6077a37395e83a99eaedc9eb633c6b820a3ea",
+  "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js": "e7310a54e93da21579dac453910bacaf1001ecd32499d3a448932875fdd427c9",
+  "/work/.salvo14/mig/convert-posttrainbench/evidence/posttrainbench_com__version_v1_1.html": "0a2e9ff819b1cae59053394b6243ceb5a6f7781cf8c850e0a94ae3ec41eebc41",
+  "/work/.salvo14/mig/convert-posttrainbench/evidence/page.txt": "e20359209d71284d8d7030071fa881579361a485c9211b1eb22a05ec5f311b47"
+ },
+ "harvested_at": "2026-10-20T05:47:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/scores-v1.2.js.json",
+   "from": "/work/.salvo14/mig/convert-posttrainbench/evidence/scores-v1.2.js",
+   "tool": "python json.dump of the object literal assigned to window.SCORES_DATA_V12 (the .js file is the JSON object behind 'window.SCORES_DATA_V12 = '); numbers unchanged"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/page.txt",
+   "from": "/work/.salvo14/mig/convert-posttrainbench/evidence/posttrainbench_com__version_v1_1.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the board page"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/scores-v1.2.js.json",
+   "where": "$.aggregatedScores",
+   "format": "json",
+   "row_key": "$key",
+   "columns": {
+    "avg": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "version",
+   "value": "v1.2",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/page.txt",
+   "where": "changelog, Sep 30, 2026 entry (results version v1.2)",
+   "quote": "Released PostTrainBench v1.2: dropped BFCL (six reweighted benchmarks), fixed HumanEval scoring, averaged final evaluations over up to five seeds, and contamination verdicts now take the majority of three judge runs."
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "aggregation",
+   "value": "Average performance across four base models and seven weighted benchmarks.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/page.txt",
+   "where": "Leaderboard section heading (the v1.2 changelog: six reweighted benchmarks)",
+   "quote": "Average performance across four base models and seven weighted benchmarks."
+  },
+  {
+   "id": "F3",
+   "about": "fable-5.1",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5.1'].name",
+   "quote": "\"fable-5.1\": { name: \"Fable 5.1\", description: \"Claude Fable 5.1 with a 1M context window, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Five Fable 5.1 GPQA Main cells fell back to Opus 5.\" }"
+  },
+  {
+   "id": "F4",
+   "about": "fable-5.1",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5.1'].scaffold",
+   "quote": "\"fable-5.1\": { name: \"Fable 5.1\", description: \"Claude Fable 5.1 with a 1M context window, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Five Fable 5.1 GPQA Main cells fell back to Opus 5.\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F5",
+   "about": "fable-5.1",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5.1'].reasoningEffort",
+   "quote": "\"fable-5.1\": { name: \"Fable 5.1\", description: \"Claude Fable 5.1 with a 1M context window, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Five Fable 5.1 GPQA Main cells fell back to Opus 5.\" }"
+  },
+  {
+   "id": "F6",
+   "about": "fable-5.1",
+   "says": "partial",
+   "value": "Five Fable 5.1 GPQA Main cells fell back to Opus 5.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5.1'].provenanceNote: some GPQA Main cells of the aggregate are another model's results",
+   "quote": "\"fable-5.1\": { name: \"Fable 5.1\", description: \"Claude Fable 5.1 with a 1M context window, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Five Fable 5.1 GPQA Main cells fell back to Opus 5.\" }"
+  },
+  {
+   "id": "F7",
+   "about": "opus-5.5-max",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-5.5-max'].name",
+   "quote": "\"opus-5.5-max\": { name: \"Opus 5.5\", description: \"Claude Opus 5.5 with a 1M context window, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F8",
+   "about": "opus-5.5-max",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-5.5-max'].scaffold",
+   "quote": "\"opus-5.5-max\": { name: \"Opus 5.5\", description: \"Claude Opus 5.5 with a 1M context window, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F9",
+   "about": "opus-5.5-max",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-5.5-max'].reasoningEffort",
+   "quote": "\"opus-5.5-max\": { name: \"Opus 5.5\", description: \"Claude Opus 5.5 with a 1M context window, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F10",
+   "about": "gpt-6-astra",
+   "says": "model-name",
+   "value": "GPT 6 (Astra)",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-6-astra'].name",
+   "quote": "\"gpt-6-astra\": { name: \"GPT 6 (Astra)\", description: \"GPT 6 Astra max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F11",
+   "about": "gpt-6-astra",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-6-astra'].scaffold",
+   "quote": "\"gpt-6-astra\": { name: \"GPT 6 (Astra)\", description: \"GPT 6 Astra max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F12",
+   "about": "gpt-6-astra",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-6-astra'].reasoningEffort",
+   "quote": "\"gpt-6-astra\": { name: \"GPT 6 (Astra)\", description: \"GPT 6 Astra max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F13",
+   "about": "gpt-6.1-sol",
+   "says": "model-name",
+   "value": "GPT 6.1 (Sol)",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-6.1-sol'].name",
+   "quote": "\"gpt-6.1-sol\": { name: \"GPT 6.1 (Sol)\", description: \"GPT 6.1 Sol max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F14",
+   "about": "gpt-6.1-sol",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-6.1-sol'].scaffold",
+   "quote": "\"gpt-6.1-sol\": { name: \"GPT 6.1 (Sol)\", description: \"GPT 6.1 Sol max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F15",
+   "about": "gpt-6.1-sol",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-6.1-sol'].reasoningEffort",
+   "quote": "\"gpt-6.1-sol\": { name: \"GPT 6.1 (Sol)\", description: \"GPT 6.1 Sol max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F16",
+   "about": "fable-5",
+   "says": "model-name",
+   "value": "Fable 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5'].name",
+   "quote": "\"fable-5\": { name: \"Fable 5\", description: \"Claude Fable 5 with 1M context, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Fable 5 GPQA Main cells use Opus 4.8 Max fallback scores.\" }"
+  },
+  {
+   "id": "F17",
+   "about": "fable-5",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5'].scaffold",
+   "quote": "\"fable-5\": { name: \"Fable 5\", description: \"Claude Fable 5 with 1M context, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Fable 5 GPQA Main cells use Opus 4.8 Max fallback scores.\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F18",
+   "about": "fable-5",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5'].reasoningEffort",
+   "quote": "\"fable-5\": { name: \"Fable 5\", description: \"Claude Fable 5 with 1M context, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Fable 5 GPQA Main cells use Opus 4.8 Max fallback scores.\" }"
+  },
+  {
+   "id": "F19",
+   "about": "fable-5",
+   "says": "partial",
+   "value": "Fable 5 GPQA Main cells use Opus 4.8 Max fallback scores.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['fable-5'].provenanceNote: some GPQA Main cells of the aggregate are another model's results",
+   "quote": "\"fable-5\": { name: \"Fable 5\", description: \"Claude Fable 5 with 1M context, max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\", provenanceLabel: \"mixed GPQA\", provenanceNote: \"Fable 5 GPQA Main cells use Opus 4.8 Max fallback scores.\" }"
+  },
+  {
+   "id": "F20",
+   "about": "glm-5.3-flash",
+   "says": "model-name",
+   "value": "GLM 5.3 Flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.3-flash'].name",
+   "quote": "\"glm-5.3-flash\": { name: \"GLM 5.3 Flash\", description: \"GLM 5.3 Flash agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F21",
+   "about": "glm-5.3-flash",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.3-flash'].scaffold",
+   "quote": "\"glm-5.3-flash\": { name: \"GLM 5.3 Flash\", description: \"GLM 5.3 Flash agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F22",
+   "about": "glm-5.3-flash",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.3-flash'].reasoningEffort",
+   "quote": "\"glm-5.3-flash\": { name: \"GLM 5.3 Flash\", description: \"GLM 5.3 Flash agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F23",
+   "about": "opus-5",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-5'].name",
+   "quote": "\"opus-5\": { name: \"Opus 5\", description: \"Claude Opus 5 agent\", scaffold: \"Claude Code\" }"
+  },
+  {
+   "id": "F24",
+   "about": "opus-5",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-5'].scaffold",
+   "quote": "\"opus-5\": { name: \"Opus 5\", description: \"Claude Opus 5 agent\", scaffold: \"Claude Code\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F25",
+   "about": "glm-5.3",
+   "says": "model-name",
+   "value": "GLM 5.3",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.3'].name",
+   "quote": "\"glm-5.3\": { name: \"GLM 5.3\", description: \"GLM 5.3 agent with a 1M context window\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F26",
+   "about": "glm-5.3",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.3'].scaffold",
+   "quote": "\"glm-5.3\": { name: \"GLM 5.3\", description: \"GLM 5.3 agent with a 1M context window\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F27",
+   "about": "glm-5.3",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.3'].reasoningEffort",
+   "quote": "\"glm-5.3\": { name: \"GLM 5.3\", description: \"GLM 5.3 agent with a 1M context window\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F28",
+   "about": "kimi-k3",
+   "says": "model-name",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['kimi-k3'].name",
+   "quote": "\"kimi-k3\": { name: \"Kimi K3\", description: \"Kimi K3 agent with a 1M context window\", scaffold: \"Claude Code\" }"
+  },
+  {
+   "id": "F29",
+   "about": "kimi-k3",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['kimi-k3'].scaffold",
+   "quote": "\"kimi-k3\": { name: \"Kimi K3\", description: \"Kimi K3 agent with a 1M context window\", scaffold: \"Claude Code\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F30",
+   "about": "gpt-5.6-sol",
+   "says": "model-name",
+   "value": "GPT 5.6 (Sol)",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.6-sol'].name",
+   "quote": "\"gpt-5.6-sol\": { name: \"GPT 5.6 (Sol)\", description: \"GPT 5.6 Sol max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F31",
+   "about": "gpt-5.6-sol",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.6-sol'].scaffold",
+   "quote": "\"gpt-5.6-sol\": { name: \"GPT 5.6 (Sol)\", description: \"GPT 5.6 Sol max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F32",
+   "about": "gpt-5.6-sol",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.6-sol'].reasoningEffort",
+   "quote": "\"gpt-5.6-sol\": { name: \"GPT 5.6 (Sol)\", description: \"GPT 5.6 Sol max reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F33",
+   "about": "opus-4.8-max",
+   "says": "model-name",
+   "value": "Opus 4.8",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.8-max'].name",
+   "quote": "\"opus-4.8-max\": { name: \"Opus 4.8\", description: \"Claude Opus 4.8 max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F34",
+   "about": "opus-4.8-max",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.8-max'].scaffold",
+   "quote": "\"opus-4.8-max\": { name: \"Opus 4.8\", description: \"Claude Opus 4.8 max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F35",
+   "about": "opus-4.8-max",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.8-max'].reasoningEffort",
+   "quote": "\"opus-4.8-max\": { name: \"Opus 4.8\", description: \"Claude Opus 4.8 max reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F36",
+   "about": "opus-4.8",
+   "says": "model-name",
+   "value": "Opus 4.8",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.8'].name",
+   "quote": "\"opus-4.8\": { name: \"Opus 4.8\", description: \"Claude Opus 4.8 high reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"High\" }"
+  },
+  {
+   "id": "F37",
+   "about": "opus-4.8",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.8'].scaffold",
+   "quote": "\"opus-4.8\": { name: \"Opus 4.8\", description: \"Claude Opus 4.8 high reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"High\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F38",
+   "about": "opus-4.8",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.8'].reasoningEffort",
+   "quote": "\"opus-4.8\": { name: \"Opus 4.8\", description: \"Claude Opus 4.8 high reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"High\" }"
+  },
+  {
+   "id": "F39",
+   "about": "glm-5.2",
+   "says": "model-name",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.2'].name",
+   "quote": "\"glm-5.2\": { name: \"GLM 5.2\", description: \"GLM 5.2 agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F40",
+   "about": "glm-5.2",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.2'].scaffold",
+   "quote": "\"glm-5.2\": { name: \"GLM 5.2\", description: \"GLM 5.2 agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F41",
+   "about": "glm-5.2",
+   "says": "effort-label",
+   "value": "Max",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['glm-5.2'].reasoningEffort",
+   "quote": "\"glm-5.2\": { name: \"GLM 5.2\", description: \"GLM 5.2 agent\", scaffold: \"Claude Code\", reasoningEffort: \"Max\" }"
+  },
+  {
+   "id": "F42",
+   "about": "opus-4.7",
+   "says": "model-name",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.7'].name",
+   "quote": "\"opus-4.7\": { name: \"Opus 4.7\", description: \"Claude Opus 4.7 extra-high reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"xHigh\" }"
+  },
+  {
+   "id": "F43",
+   "about": "opus-4.7",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.7'].scaffold",
+   "quote": "\"opus-4.7\": { name: \"Opus 4.7\", description: \"Claude Opus 4.7 extra-high reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"xHigh\" }",
+   "term": "claude-code"
+  },
+  {
+   "id": "F44",
+   "about": "opus-4.7",
+   "says": "effort-label",
+   "value": "xHigh",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['opus-4.7'].reasoningEffort",
+   "quote": "\"opus-4.7\": { name: \"Opus 4.7\", description: \"Claude Opus 4.7 extra-high reasoning agent\", scaffold: \"Claude Code\", reasoningEffort: \"xHigh\" }"
+  },
+  {
+   "id": "F45",
+   "about": "gpt-5.5-xhigh",
+   "says": "model-name",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.5-xhigh'].name",
+   "quote": "\"gpt-5.5-xhigh\": { name: \"GPT 5.5\", description: \"GPT 5.5 extra-high reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"xHigh\" }"
+  },
+  {
+   "id": "F46",
+   "about": "gpt-5.5-xhigh",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.5-xhigh'].scaffold",
+   "quote": "\"gpt-5.5-xhigh\": { name: \"GPT 5.5\", description: \"GPT 5.5 extra-high reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"xHigh\" }",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F47",
+   "about": "gpt-5.5-xhigh",
+   "says": "effort-label",
+   "value": "xHigh",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.5-xhigh'].reasoningEffort",
+   "quote": "\"gpt-5.5-xhigh\": { name: \"GPT 5.5\", description: \"GPT 5.5 extra-high reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"xHigh\" }"
+  },
+  {
+   "id": "F48",
+   "about": "grok-4.5-high",
+   "says": "model-name",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['grok-4.5-high'].name",
+   "quote": "\"grok-4.5-high\": { name: \"Grok 4.5\", description: \"Grok 4.5 high reasoning agent\", scaffold: \"Cursor CLI\", reasoningEffort: \"High\" }"
+  },
+  {
+   "id": "F49",
+   "about": "grok-4.5-high",
+   "says": "harness",
+   "value": "Cursor CLI",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['grok-4.5-high'].scaffold",
+   "quote": "\"grok-4.5-high\": { name: \"Grok 4.5\", description: \"Grok 4.5 high reasoning agent\", scaffold: \"Cursor CLI\", reasoningEffort: \"High\" }",
+   "term": "cursor-cli"
+  },
+  {
+   "id": "F50",
+   "about": "grok-4.5-high",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['grok-4.5-high'].reasoningEffort",
+   "quote": "\"grok-4.5-high\": { name: \"Grok 4.5\", description: \"Grok 4.5 high reasoning agent\", scaffold: \"Cursor CLI\", reasoningEffort: \"High\" }"
+  },
+  {
+   "id": "F51",
+   "about": "gemini-3.1-pro",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gemini-3.1-pro'].name",
+   "quote": "\"gemini-3.1-pro\": { name: \"Gemini 3.1 Pro\", description: \"Gemini 3.1 Pro agent\", scaffold: \"OpenCode\" }"
+  },
+  {
+   "id": "F52",
+   "about": "gemini-3.1-pro",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gemini-3.1-pro'].scaffold",
+   "quote": "\"gemini-3.1-pro\": { name: \"Gemini 3.1 Pro\", description: \"Gemini 3.1 Pro agent\", scaffold: \"OpenCode\" }",
+   "term": "opencode"
+  },
+  {
+   "id": "F53",
+   "about": "gpt-5.4-high",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.4-high'].name",
+   "quote": "\"gpt-5.4-high\": { name: \"GPT 5.4\", description: \"GPT 5.4 high reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"High\" }"
+  },
+  {
+   "id": "F54",
+   "about": "gpt-5.4-high",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.4-high'].scaffold",
+   "quote": "\"gpt-5.4-high\": { name: \"GPT 5.4\", description: \"GPT 5.4 high reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"High\" }",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F55",
+   "about": "gpt-5.4-high",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/config.js",
+   "where": "config.js agentInfo['gpt-5.4-high'].reasoningEffort",
+   "quote": "\"gpt-5.4-high\": { name: \"GPT 5.4\", description: \"GPT 5.4 high reasoning agent\", scaffold: \"Codex CLI\", reasoningEffort: \"High\" }"
+  }
+ ]
+}

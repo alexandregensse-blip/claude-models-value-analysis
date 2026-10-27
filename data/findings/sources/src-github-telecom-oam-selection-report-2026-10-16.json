@@ -1,0 +1,783 @@
+{
+ "id": "src-github-telecom-oam-selection-report-2026-10-16",
+ "publisher": "github-telecom-oam",
+ "urls": [
+  "https://github.com/qianqiuqiu/Telecom_OM_LLM_Evaluation"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://github.com/qianqiuqiu/Telecom_OM_LLM_Evaluation/blob/1d1cde8/reports/selection/selection_report.md",
+   "captured": "2026-10-21T15:47:15Z",
+   "note": "repo at commit 1d1cde8: reports/selection/selection_report.md, reports/thinking/thinking_main.md, configs/models.yaml, saved by salvo hn (qwen3.8-flash-r2), 21 Oct 2026"
+  }
+ ],
+ "commit": "1d1cde8",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md": "3d41e29db575c6e444c71aa521e9de0947586a64e961b4de0a38b3d2d4170d6c",
+  "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md": "2163c56bfdb4af4750c42228a7a718aaa59872746b00a256504eaae1b69695c7",
+  "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml": "f84de7f8be393bf1bf66ec273a7230c7c3e5d2093df1adb6119bf273004aba0a"
+ },
+ "harvested_at": "2026-10-21T15:47:15Z",
+ "published": {
+  "value": "2026-10-16",
+  "where": "report header line",
+  "quote": "2026-10-16 · @Qianqiu",
+  "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "thinking-off",
+   "value": "关思考",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 1.4 'Two forms': the main experiments are all run with thinking off",
+   "quote": "底座能力（关思考）**：横评主实验、精度回归一律关思考、温度 0",
+   "translation": "Base capability (thinking off): the main (cross-model) experiments are always run with thinking off, temperature 0"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "thinking-off",
+   "value": "enable_thinking: false",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, modes: 'off' (the mode of the main experiments)",
+   "quote": "\"off\": {enable_thinking: false, temperature: 0}"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "thinking-on",
+   "value": "enable_thinking: true",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, modes: 'on' (no reasoning level given)",
+   "quote": "\"on\":  {enable_thinking: true}"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "route",
+   "value": "阿里云百炼 OpenAI 兼容接口",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 1.3: all main experiments go through Alibaba Cloud Bailian's OpenAI-compatible API",
+   "quote": "主实验全部经阿里云百炼 OpenAI 兼容接口调用",
+   "translation": "all main experiments are called through Alibaba Cloud Bailian's OpenAI-compatible API",
+   "term": "maker-api"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "judge",
+   "value": "要点取 Haiku、一票否决须两档都触发",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 0, answer 2 (judge)",
+   "quote": "所以主分定为「要点取 Haiku、一票否决须两档都触发」",
+   "translation": "so the main score is set as: points from Haiku, the veto only when both tiers trigger"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "aggregation",
+   "value": "7 模型 × 45 题 = 315 份回答",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 1.2 table, row 场景题横评: 7 models x 45 questions = 315 answers",
+   "quote": "7 模型 × 45 题 = 315 份回答",
+   "translation": "7 models x 45 questions = 315 answers"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "aggregation",
+   "value": "开思考每题按已有次数取均值",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 heading",
+   "quote": "开思考每题按已有次数取均值",
+   "translation": "thinking on: per-question mean over the runs available"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "route",
+   "value": "OpenCode Go",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md intro: qwen3.8-flash thinking-on runs go through OpenCode Go",
+   "quote": "qwen3.8-flash（开思考经 OpenCode Go，模型 ID 记为 qwen3.8-flash-ocgo",
+   "translation": "qwen3.8-flash (thinking on through OpenCode Go, model id recorded as qwen3.8-flash-ocgo)"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "thinking-on",
+   "value": "开思考",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md intro: qwen3.8-flash thinking on through OpenCode Go",
+   "quote": "qwen3.8-flash（开思考经 OpenCode Go",
+   "translation": "qwen3.8-flash (thinking on through OpenCode Go)"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "says": "model-api-id",
+   "value": "qwen3.8-flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, opencode_go entry: api_model",
+   "quote": "{id: qwen3.8-flash-ocgo, api_model: qwen3.8-flash",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "says": "partial",
+   "value": "21/117",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, column 截断 (truncated)",
+   "quote": "qwen3.8-flash-ocgo | 58.0 | **78.1** | +20.1 | [+13.1, +27.5] | <0.0001 | 0.0005 * | 12.6 | 8.9 | 6 → 1.3 | 21/117 |"
+  },
+  {
+   "id": "F12",
+   "about": "kimi-k3",
+   "says": "score",
+   "value": "90.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row kimi-k3, column 正确率 (5 subsets pooled)",
+   "quote": "| kimi-k3 | **90.1%** | [88.1, 92.0] | 88.4% |",
+   "term": "accuracy-%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F13",
+   "about": "kimi-k3",
+   "says": "model-name",
+   "value": "kimi-k3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row kimi-k3",
+   "quote": "| kimi-k3 | **90.1%** | [88.1, 92.0] | 88.4% |"
+  },
+  {
+   "id": "F14",
+   "about": null,
+   "says": "model-api-id",
+   "value": "kimi-k3",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, main list: id kimi-k3",
+   "quote": "id: kimi-k3",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F15",
+   "about": "qwen3.8-max-0902",
+   "says": "score",
+   "value": "89.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row qwen3.8-max-0902, column 正确率 (5 subsets pooled)",
+   "quote": "| qwen3.8-max-0902 | **89.4%** | [87.5, 91.3] | 87.6% |",
+   "term": "accuracy-%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "about": "qwen3.8-max-0902",
+   "says": "model-name",
+   "value": "qwen3.8-max-0902",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row qwen3.8-max-0902",
+   "quote": "| qwen3.8-max-0902 | **89.4%** | [87.5, 91.3] | 87.6% |"
+  },
+  {
+   "id": "F17",
+   "about": null,
+   "says": "model-api-id",
+   "value": "qwen3.8-max-0902",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, main list: id qwen3.8-max-0902",
+   "quote": "id: qwen3.8-max-0902",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F18",
+   "about": "qwen3.7-plus",
+   "says": "score",
+   "value": "87.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row qwen3.7-plus, column 正确率 (5 subsets pooled)",
+   "quote": "| qwen3.7-plus | 87.5% | [85.4, 89.6] | 84.8% |",
+   "term": "accuracy-%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F19",
+   "about": "qwen3.7-plus",
+   "says": "model-name",
+   "value": "qwen3.7-plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row qwen3.7-plus",
+   "quote": "| qwen3.7-plus | 87.5% | [85.4, 89.6] | 84.8% |"
+  },
+  {
+   "id": "F20",
+   "about": null,
+   "says": "model-api-id",
+   "value": "qwen3.7-plus",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, main list: id qwen3.7-plus",
+   "quote": "id: qwen3.7-plus",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F21",
+   "about": "deepseek-v4-pro-0813",
+   "says": "score",
+   "value": "87.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row deepseek-v4-pro-0813, column 正确率 (5 subsets pooled)",
+   "quote": "| deepseek-v4-pro-0813 | 87.0% | [84.9, 89.1] | 84.4% |",
+   "term": "accuracy-%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "about": "deepseek-v4-pro-0813",
+   "says": "model-name",
+   "value": "deepseek-v4-pro-0813",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row deepseek-v4-pro-0813",
+   "quote": "| deepseek-v4-pro-0813 | 87.0% | [84.9, 89.1] | 84.4% |"
+  },
+  {
+   "id": "F23",
+   "about": null,
+   "says": "model-api-id",
+   "value": "deepseek-v4-pro-0813",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, main list: id deepseek-v4-pro-0813",
+   "quote": "id: deepseek-v4-pro-0813",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F24",
+   "about": "deepseek-v4.1-flash",
+   "says": "score",
+   "value": "86.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row deepseek-v4.1-flash, column 正确率 (5 subsets pooled)",
+   "quote": "| deepseek-v4.1-flash | 86.1% | [83.9, 88.2] | 83.3% |",
+   "term": "accuracy-%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F25",
+   "about": "deepseek-v4.1-flash",
+   "says": "model-name",
+   "value": "deepseek-v4.1-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row deepseek-v4.1-flash",
+   "quote": "| deepseek-v4.1-flash | 86.1% | [83.9, 88.2] | 83.3% |"
+  },
+  {
+   "id": "F26",
+   "about": null,
+   "says": "model-api-id",
+   "value": "deepseek-v4.1-flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, main list: id deepseek-v4.1-flash",
+   "quote": "id: deepseek-v4.1-flash",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F27",
+   "about": "qwen3.8-flash",
+   "says": "score",
+   "value": "86.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row qwen3.8-flash, column 正确率 (5 subsets pooled)",
+   "quote": "| qwen3.8-flash | 86.0% | [83.8, 88.1] | 82.4% |",
+   "term": "accuracy-%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "about": "qwen3.8-flash",
+   "says": "model-name",
+   "value": "qwen3.8-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row qwen3.8-flash",
+   "quote": "| qwen3.8-flash | 86.0% | [83.8, 88.1] | 82.4% |"
+  },
+  {
+   "id": "F29",
+   "about": null,
+   "says": "model-api-id",
+   "value": "qwen3.8-flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, main list: id qwen3.8-flash",
+   "quote": "id: qwen3.8-flash",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F30",
+   "about": "glm-5.2",
+   "says": "score",
+   "value": "85.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row glm-5.2, column 正确率 (5 subsets pooled)",
+   "quote": "| glm-5.2 | 85.3% | [83.1, 87.4] | 82.1% |",
+   "term": "accuracy-%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F31",
+   "about": "glm-5.2",
+   "says": "model-name",
+   "value": "glm-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.1 table, row glm-5.2",
+   "quote": "| glm-5.2 | 85.3% | [83.1, 87.4] | 82.1% |"
+  },
+  {
+   "id": "F32",
+   "about": null,
+   "says": "model-api-id",
+   "value": "glm-5.2",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/models.yaml",
+   "where": "configs/models.yaml, main list: id glm-5.2",
+   "quote": "id: glm-5.2",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F33",
+   "about": "kimi-k3",
+   "says": "score",
+   "value": "72.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row kimi-k3, column 均分",
+   "quote": "| 1 | kimi-k3 | **72.5** | [65.9, 78.2] | 1 | 56.7 | 76.6 | 81.7 | 4%（2/45） |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "about": "kimi-k3",
+   "says": "model-name",
+   "value": "kimi-k3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row kimi-k3",
+   "quote": "| 1 | kimi-k3 | **72.5** | [65.9, 78.2] | 1 | 56.7 | 76.6 | 81.7 | 4%（2/45） |"
+  },
+  {
+   "id": "F35",
+   "about": "deepseek-v4.1-flash",
+   "says": "score",
+   "value": "69.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row deepseek-v4.1-flash, column 均分",
+   "quote": "| 2 | deepseek-v4.1-flash | **69.0** | [62.0, 75.5] | 1 | 58.5 | 68.2 | 82.2 | 7%（3/45） |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "about": "deepseek-v4.1-flash",
+   "says": "model-name",
+   "value": "deepseek-v4.1-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row deepseek-v4.1-flash",
+   "quote": "| 2 | deepseek-v4.1-flash | **69.0** | [62.0, 75.5] | 1 | 58.5 | 68.2 | 82.2 | 7%（3/45） |"
+  },
+  {
+   "id": "F37",
+   "about": "qwen3.8-max-0902",
+   "says": "score",
+   "value": "65.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row qwen3.8-max-0902, column 均分",
+   "quote": "| 3 | qwen3.8-max-0902 | **65.6** | [58.1, 72.5] | 1 | 60.9 | 68.9 | 63.9 | 9%（4/45） |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "about": "qwen3.8-max-0902",
+   "says": "model-name",
+   "value": "qwen3.8-max-0902",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row qwen3.8-max-0902",
+   "quote": "| 3 | qwen3.8-max-0902 | **65.6** | [58.1, 72.5] | 1 | 60.9 | 68.9 | 63.9 | 9%（4/45） |"
+  },
+  {
+   "id": "F39",
+   "about": "deepseek-v4-pro-0813",
+   "says": "score",
+   "value": "63.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row deepseek-v4-pro-0813, column 均分",
+   "quote": "| 4 | deepseek-v4-pro-0813 | 63.4 | [56.4, 69.6] | 2 | 51.9 | 68.5 | 65.6 | 7%（3/45） |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F40",
+   "about": "deepseek-v4-pro-0813",
+   "says": "model-name",
+   "value": "deepseek-v4-pro-0813",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row deepseek-v4-pro-0813",
+   "quote": "| 4 | deepseek-v4-pro-0813 | 63.4 | [56.4, 69.6] | 2 | 51.9 | 68.5 | 65.6 | 7%（3/45） |"
+  },
+  {
+   "id": "F41",
+   "about": "glm-5.2",
+   "says": "score",
+   "value": "60.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row glm-5.2, column 均分",
+   "quote": "| 5 | glm-5.2 | 60.9 | [54.1, 67.3] | 2 | 54.3 | 62.2 | 65.5 | 9%（4/45） |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "about": "glm-5.2",
+   "says": "model-name",
+   "value": "glm-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row glm-5.2",
+   "quote": "| 5 | glm-5.2 | 60.9 | [54.1, 67.3] | 2 | 54.3 | 62.2 | 65.5 | 9%（4/45） |"
+  },
+  {
+   "id": "F43",
+   "about": "qwen3.8-flash",
+   "says": "score",
+   "value": "59.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row qwen3.8-flash, column 均分",
+   "quote": "| 6 | qwen3.8-flash | 59.6 | [51.6, 67.0] | 2 | 43.3 | 65.2 | 66.2 | 13%（6/45） |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F44",
+   "about": "qwen3.8-flash",
+   "says": "model-name",
+   "value": "qwen3.8-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row qwen3.8-flash",
+   "quote": "| 6 | qwen3.8-flash | 59.6 | [51.6, 67.0] | 2 | 43.3 | 65.2 | 66.2 | 13%（6/45） |"
+  },
+  {
+   "id": "F45",
+   "about": "qwen3.7-plus",
+   "says": "score",
+   "value": "58.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row qwen3.7-plus, column 均分",
+   "quote": "| 7 | qwen3.7-plus | 58.9 | [51.1, 66.1] | 2 | 53.2 | 72.1 | 38.7 | 11%（5/45） |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F46",
+   "about": "qwen3.7-plus",
+   "says": "model-name",
+   "value": "qwen3.7-plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+   "where": "report section 2.2 table, row qwen3.7-plus",
+   "quote": "| 7 | qwen3.7-plus | 58.9 | [51.1, 66.1] | 2 | 53.2 | 72.1 | 38.7 | 11%（5/45） |"
+  },
+  {
+   "id": "F47",
+   "about": "qwen3.8-max",
+   "says": "score",
+   "value": "82.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row qwen3.8-max, column 开思考",
+   "quote": "| qwen3.8-max | 64.5 | **82.9** | +18.4 | [+12.1, +25.7] | <0.0001 | 0.0005 * | 12.3 | 6.9 | 4 → 0.7 | 0/123 |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F48",
+   "about": "qwen3.8-max",
+   "says": "model-name",
+   "value": "qwen3.8-max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row qwen3.8-max",
+   "quote": "| qwen3.8-max | 64.5 | **82.9** | +18.4 | [+12.1, +25.7] | <0.0001 | 0.0005 * | 12.3 | 6.9 | 4 → 0.7 | 0/123 |"
+  },
+  {
+   "id": "F49",
+   "about": "deepseek-v4.1-flash",
+   "says": "score",
+   "value": "79.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row deepseek-v4.1-flash, column 开思考",
+   "quote": "| deepseek-v4.1-flash | 67.3 | **79.6** | +12.3 | [+6.5, +19.2] | <0.0001 | 0.0005 * | 11.3 | 6.1 | 3 → 0.3 | 0/123 |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "about": "deepseek-v4.1-flash",
+   "says": "model-name",
+   "value": "deepseek-v4.1-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row deepseek-v4.1-flash",
+   "quote": "| deepseek-v4.1-flash | 67.3 | **79.6** | +12.3 | [+6.5, +19.2] | <0.0001 | 0.0005 * | 11.3 | 6.1 | 3 → 0.3 | 0/123 |"
+  },
+  {
+   "id": "F51",
+   "about": "qwen3.8-flash-ocgo",
+   "says": "score",
+   "value": "78.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row qwen3.8-flash-ocgo, column 开思考",
+   "quote": "| qwen3.8-flash-ocgo | 58.0 | **78.1** | +20.1 | [+13.1, +27.5] | <0.0001 | 0.0005 * | 12.6 | 8.9 | 6 → 1.3 | 21/117 |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F52",
+   "about": "qwen3.8-flash-ocgo",
+   "says": "model-name",
+   "value": "qwen3.8-flash-ocgo",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row qwen3.8-flash-ocgo",
+   "quote": "| qwen3.8-flash-ocgo | 58.0 | **78.1** | +20.1 | [+13.1, +27.5] | <0.0001 | 0.0005 * | 12.6 | 8.9 | 6 → 1.3 | 21/117 |"
+  },
+  {
+   "id": "F53",
+   "about": "deepseek-v4-pro",
+   "says": "score",
+   "value": "70.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row deepseek-v4-pro, column 开思考",
+   "quote": "| deepseek-v4-pro | 61.7 | **70.3** | +8.5 | [+2.8, +14.3] | 0.0053 | 0.0106 * | 10.1 | 9.1 | 3 → 2.7 | 1/123 |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F54",
+   "about": "deepseek-v4-pro",
+   "says": "model-name",
+   "value": "deepseek-v4-pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row deepseek-v4-pro",
+   "quote": "| deepseek-v4-pro | 61.7 | **70.3** | +8.5 | [+2.8, +14.3] | 0.0053 | 0.0106 * | 10.1 | 9.1 | 3 → 2.7 | 1/123 |"
+  },
+  {
+   "id": "F55",
+   "about": "glm-5.2",
+   "says": "score",
+   "value": "63.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row glm-5.2, column 开思考",
+   "quote": "| glm-5.2 | 59.4 | **63.1** | +3.8 | [-2.7, +11.0] | 0.3073 | 0.3073 | 12.1 | 11.8 | 4 → 2.7 | 2/117 |",
+   "term": "main-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F56",
+   "about": "glm-5.2",
+   "says": "model-name",
+   "value": "glm-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+   "where": "thinking_main.md section 1 table, row glm-5.2",
+   "quote": "| glm-5.2 | 59.4 | **63.1** | +3.8 | [-2.7, +11.0] | 0.3073 | 0.3073 | 12.1 | 11.8 | 4 → 2.7 | 2/117 |"
+  }
+ ]
+}

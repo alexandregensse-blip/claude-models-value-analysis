@@ -1,0 +1,239 @@
+{
+ "id": "src-github-llmcost2026-bbd8e90-2026-10-27",
+ "publisher": "github-llmcost2026",
+ "urls": [
+  "https://github.com/CROOJ02/llm-cost-benchmark-2026/tree/bbd8e909a518160099eb090d0591809466b262f0"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "url": "https://github.com/CROOJ02/llm-cost-benchmark-2026/tree/bbd8e909a518160099eb090d0591809466b262f0",
+   "captured": "2026-10-27T10:55:31Z",
+   "note": "repo files at commit bbd8e909 fetched 27 Oct 2026 (README, CHANGELOG v1.0 of 12 May 2026, runners/, analysis/out/)"
+  }
+ ],
+ "commit": "bbd8e909a518160099eb090d0591809466b262f0",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_run_anthropic.py": "9eb387e759fbfbc9db618b33b00303852bb140783cac1cbc6a2e814ea932293b",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_run_openai.py": "5b7b707029566223ac4f2d4a62e56fcd09d4ebe1f68811bb5cba6ad7343ef6ed",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_lever_batch.py": "1511e0a9b76de6dc00dfaa7d4d3c31d9c2842322681eae34640b553df6e287fa",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_budget.py": "cb90e92d265c694931ea164c2dd49b55e0ac6b9569d6d6354fdac00d79f93ffd",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/README.md": "2f80ea4521c5457bbbbda983b1f7bc49a0376a9c826475309ec80bae6d98d3f2",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/CHANGELOG.md": "ff98c9e56408cdb9a7ace158a1b16728625276e77c196df0aaa014ddcf021373",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md": "c3b76b33bc04bfbb52f3ebc9e549286bd95820aef4775028f528aa37d9ce4f5b",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_lever_output_cap.py": "b0cf15a7c5c21e6cf88c9824595830fc63c0ded9b65f35c150bbaa14ae70c2db",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_lever_compression.py": "d98b4c9ab3d7c8aa58160723cb791a679abffab96721c4606cc903df51d326cf",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_lever_matrix.csv": "a64191de8686177191a6259e558f67445a46ffbd8aa8d8ee4094fdf8171ee575",
+  "/work/.salvo14/mig/convert-github-llmcost2026/evidence/lever_matrix.keyed.csv": "c5878c4a8f4a43f0829f8d6179555e0d894a8f3c57485bae1d4963bb9b4e1f1d"
+ },
+ "harvested_at": "2026-10-27T10:55:31Z",
+ "published": {
+  "value": "2026-05-12",
+  "where": "CHANGELOG.md: \"v1.0 — 12 May 2026\", Initial public release",
+  "quote": "v1.0 — 12 May 2026",
+  "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/CHANGELOG.md"
+ },
+ "salvo": "salvo14/mig convert-github-llmcost2026 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the repo files at commit bbd8e90 (fetched from raw.githubusercontent.com 27 Oct; the g7/rb4 salvo copies of README, run_*.py, lever_matrix.csv are byte-identical)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/lever_matrix.keyed.csv",
+   "from": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_lever_matrix.csv",
+   "tool": "the file analysis/out/lever_matrix.csv with one added first column id = model|lever (so that a row has a key); all other cells unchanged"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/lever_matrix.keyed.csv",
+   "where": "analysis/out/lever_matrix.csv: one row per model and lever (the added id column = model|lever)",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "lever": "note",
+    "n_rows": "items",
+    "mean_canonical_score": {
+     "says": "score",
+     "term": "judge%",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "mean_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "tier_1_pass_rate_all": "note",
+    "tier_1_pass_rate_applicable": "note",
+    "delta_canonical_vs_baseline": "note",
+    "cost_ratio_vs_baseline": "note",
+    "delta_t1_pass_rate_all_vs_baseline": "note",
+    "delta_t1_pass_rate_applicable_vs_baseline": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "code",
+   "where": "estimate_cost_usd docstring: \"Cost in USD from token counts.\"",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_budget.py",
+   "quote": "Cost in USD from token counts.",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "per task",
+   "level": "written",
+   "form": "prose",
+   "where": "headline scalar 1: \"$0.000557 per task\"",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md",
+   "quote": "canonical_score 0.881 at \\$0.000557 per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F3",
+   "says": "cost-method",
+   "about": null,
+   "value": "Cost in USD from token counts.",
+   "level": "written",
+   "form": "code",
+   "where": "runners/budget.py estimate_cost_usd",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_budget.py",
+   "quote": "Cost in USD from token counts.",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F4",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Cost in USD from token counts.",
+   "level": "written",
+   "form": "code",
+   "where": "runners/budget.py estimate_cost_usd (not an invoice)",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_budget.py",
+   "quote": "Cost in USD from token counts.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F5",
+   "says": "price-table",
+   "about": null,
+   "value": "OpenAI prices verified 2026-05-08",
+   "level": "written",
+   "form": "code",
+   "where": "runners/budget.py PRICING_USD_PER_MTOK",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_budget.py",
+   "quote": "OpenAI prices verified 2026-05-08 against developers.openai.com/api/docs/pricing"
+  },
+  {
+   "id": "F6",
+   "says": "price-tier",
+   "about": null,
+   "value": "batch",
+   "level": "written",
+   "form": "code",
+   "where": "runners/budget.py: BATCH_DISCOUNT applied by estimate_cost_usd when batch_discount=True",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_budget.py",
+   "quote": "BATCH_DISCOUNT: float = 0.5",
+   "term": "batch"
+  },
+  {
+   "id": "F7",
+   "says": "judge",
+   "about": null,
+   "value": "judge A (Claude Opus 4.6) and judge B (GPT-5.5)",
+   "level": "written",
+   "form": "prose",
+   "where": "analysis/out/headlines.md intro (Tier-2 dual-judge panel)",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md",
+   "quote": "judge A (Claude Opus 4.6) and judge B (GPT-5.5)"
+  },
+  {
+   "id": "F8",
+   "says": "metric-definition",
+   "about": null,
+   "value": "agreement rows use the mean of judge A (Claude Opus 4.6) and judge B (GPT-5.5)",
+   "level": "written",
+   "form": "prose",
+   "where": "analysis/out/headlines.md intro",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md",
+   "quote": "Canonical score is the per-row Tier-2 quality number: agreement rows use the mean of judge A (Claude Opus 4.6) and judge B (GPT-5.5)"
+  },
+  {
+   "id": "F9",
+   "says": "aggregation",
+   "about": null,
+   "value": "Single-shot scoring per (prompt, model, lever, judge)",
+   "level": "written",
+   "form": "prose",
+   "where": "CHANGELOG v1.0 Known limitations",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/CHANGELOG.md",
+   "quote": "Single-shot scoring per (prompt, model, lever, judge); no statistical replication."
+  },
+  {
+   "id": "F10",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "resp = client.messages.create( model=model, max_tokens=max_tokens, temperature=0, system=prompt.input.system, messages=messages, )",
+   "level": "written",
+   "form": "code",
+   "where": "runners/run_anthropic.py call_anthropic: client.messages.create(model, max_tokens, temperature, system, messages) (also used by the output_cap and compression levers via _base.run_one)",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_run_anthropic.py",
+   "quote": "resp = client.messages.create( model=model, max_tokens=max_tokens, temperature=0, system=prompt.input.system, messages=messages, )"
+  },
+  {
+   "id": "F11",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "\"max_tokens\": max_tokens, \"temperature\": 0, \"system\": p.input.system, \"messages\": [{\"role\": \"user\", \"content\": p.input.user}],",
+   "level": "written",
+   "form": "code",
+   "where": "runners/lever_batch.py Anthropic batch request params",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_lever_batch.py",
+   "quote": "\"max_tokens\": max_tokens, \"temperature\": 0, \"system\": p.input.system, \"messages\": [{\"role\": \"user\", \"content\": p.input.user}],"
+  },
+  {
+   "id": "F12",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "We do NOT pass reasoning_effort to the API",
+   "level": "written",
+   "form": "code",
+   "where": "runners/run_openai.py annotate_optimisation_config_for_reasoning_effort docstring (also used by the output_cap and compression levers)",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_run_openai.py",
+   "quote": "We do NOT pass reasoning_effort to the API (so the API default applies)"
+  },
+  {
+   "id": "F13",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "let reasoning_effort default to API default",
+   "level": "written",
+   "form": "code",
+   "where": "runners/lever_batch.py OpenAI batch body: comment above the request lines",
+   "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/runners_lever_batch.py",
+   "quote": "let reasoning_effort default to API default ('medium' for GPT-5.4"
+  }
+ ]
+}

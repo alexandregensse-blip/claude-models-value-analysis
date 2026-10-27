@@ -10259,6 +10259,45 @@
   },
   "messydocs-docexact-w2": {
    "label": "messy-docs-bench documents fully right (W-2 forms)"
+  },
+  "synthbench-plain-globalopinionqa": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GlobalOpinionQA, plain prompt (raw)"
+  },
+  "synthbench-plain-gss": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GSS, plain prompt (raw)"
+  },
+  "synthbench-plain-opinionsqa": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, OpinionsQA, plain prompt (raw)"
+  },
+  "synthbench-plain-subpop": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, SubPOP, plain prompt (raw)"
+  },
+  "synthbench-althing-globalopinionqa": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GlobalOpinionQA, althing prompt (persona product)"
+  },
+  "synthbench-althing-gss": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GSS, althing prompt (persona product)"
+  },
+  "synthbench-althing-opinionsqa": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, OpinionsQA, althing prompt (persona product)"
+  },
+  "synthbench-althing-subpop": {
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, SubPOP, althing prompt (persona product)"
+  },
+  "arxiv-2610.14397-realitybench-doc": {
+   "label": "RealityBench documentation (scorer-acceptable frames)"
+  },
+  "cte-effvm-answers-revealed": {
+   "label": "CTE-Bench effect-step VM, Answers revealed"
+  },
+  "cte-effvm-no-feedback": {
+   "label": "CTE-Bench effect-step VM, No feedback"
+  },
+  "cte-effvm-free-rollout": {
+   "label": "CTE-Bench effect-step VM, Free rollout"
+  },
+  "cte-effvm-reason24": {
+   "label": "CTE-Bench effect-step VM, reasoning-mode probe, 24 delayed-effect scenarios, answers revealed"
   }
  },
  "setups": {
@@ -14460,9 +14499,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://aipricing.guru/labs/cost-per-task.json",
+      "captured": "2026-10-05",
+      "where": "the board reports one accuracy per model (graded by deterministic graders)",
+      "quote": "\"grading\": \"deterministic exact/number/regex/contains/json_fields graders; no LLM judge\"",
+      "file": "/work/.salvo14/mig/convert-aipricing.guru/evidence/aipricing_cost-per-task_20261004.json",
+      "sha256": "e1ae94c0afc214c7ea7e8cfa3fa51583784a1fdbf1629d758179c0d08d30447d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18254,9 +18302,18 @@
    "metric": "overall-score-of-1",
    "headline": {
     "metric": "overall-score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.36777v1",
+      "captured": "2026-10-19",
+      "where": "Table 2 caption, B. Private set: \"Rows follow Smodel within each set\" (S model = the Overall column)",
+      "quote": "Rows follow Smodel within each set",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36777/evidence/arxiv-2609.36777.txt",
+      "sha256": "f9061de85413a2bf38de267a72a12e8645792e40d9265f043daa5046b2e94b22"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18283,9 +18340,18 @@
    "metric": "overall-score-of-1",
    "headline": {
     "metric": "overall-score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.36777v1",
+      "captured": "2026-10-19",
+      "where": "Table 2 caption, A. Public set: \"Rows follow Smodel within each set\" (S model = the Overall column)",
+      "quote": "Rows follow Smodel within each set",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36777/evidence/arxiv-2609.36777.txt",
+      "sha256": "f9061de85413a2bf38de267a72a12e8645792e40d9265f043daa5046b2e94b22"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18524,9 +18590,18 @@
    "metric": "peak@3%-of-oneDNN",
    "headline": {
     "metric": "peak@3%-of-oneDNN",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04277",
+      "captured": "2026-10-15",
+      "where": "Tables 3 and 4 report one measure per model and context: peak@3 relative to the vendor baseline",
+      "quote": "Haiku 4.5 | 3/3; 0.7 | 3/3; 1.0 | 3/3; 1.3",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04277/evidence/arxiv-2610.04277v1.txt",
+      "sha256": "1be440290e27ea67231fc07e34a2f314b5f212459b92ace30e810a7014ba6b56"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18553,9 +18628,18 @@
    "metric": "peak@3%-of-oneDNN",
    "headline": {
     "metric": "peak@3%-of-oneDNN",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04277",
+      "captured": "2026-10-15",
+      "where": "Tables 3 and 4 report one measure per model and context: peak@3 relative to the vendor baseline",
+      "quote": "Haiku 4.5 | 3/3; 0.7 | 3/3; 1.0 | 3/3; 1.3",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04277/evidence/arxiv-2610.04277v1.txt",
+      "sha256": "1be440290e27ea67231fc07e34a2f314b5f212459b92ace30e810a7014ba6b56"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18582,9 +18666,18 @@
    "metric": "peak@3%-of-oneDNN",
    "headline": {
     "metric": "peak@3%-of-oneDNN",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04277",
+      "captured": "2026-10-15",
+      "where": "Tables 3 and 4 report one measure per model and context: peak@3 relative to the vendor baseline",
+      "quote": "Haiku 4.5 | 3/3; 0.7 | 3/3; 1.0 | 3/3; 1.3",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04277/evidence/arxiv-2610.04277v1.txt",
+      "sha256": "1be440290e27ea67231fc07e34a2f314b5f212459b92ace30e810a7014ba6b56"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18611,9 +18704,18 @@
    "metric": "peak@3%-of-PyTorch-XPU-SDPA",
    "headline": {
     "metric": "peak@3%-of-PyTorch-XPU-SDPA",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04277",
+      "captured": "2026-10-15",
+      "where": "Tables 3 and 4 report one measure per model and context: peak@3 relative to the vendor baseline",
+      "quote": "Haiku 4.5 | 3/3; 0.7 | 3/3; 1.0 | 3/3; 1.3",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04277/evidence/arxiv-2610.04277v1.txt",
+      "sha256": "1be440290e27ea67231fc07e34a2f314b5f212459b92ace30e810a7014ba6b56"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18640,9 +18742,18 @@
    "metric": "peak@3%-of-PyTorch-XPU-SDPA",
    "headline": {
     "metric": "peak@3%-of-PyTorch-XPU-SDPA",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04277",
+      "captured": "2026-10-15",
+      "where": "Tables 3 and 4 report one measure per model and context: peak@3 relative to the vendor baseline",
+      "quote": "Haiku 4.5 | 3/3; 0.7 | 3/3; 1.0 | 3/3; 1.3",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04277/evidence/arxiv-2610.04277v1.txt",
+      "sha256": "1be440290e27ea67231fc07e34a2f314b5f212459b92ace30e810a7014ba6b56"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18669,9 +18780,18 @@
    "metric": "peak@3%-of-PyTorch-XPU-SDPA",
    "headline": {
     "metric": "peak@3%-of-PyTorch-XPU-SDPA",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04277",
+      "captured": "2026-10-15",
+      "where": "Tables 3 and 4 report one measure per model and context: peak@3 relative to the vendor baseline",
+      "quote": "Haiku 4.5 | 3/3; 0.7 | 3/3; 1.0 | 3/3; 1.3",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04277/evidence/arxiv-2610.04277v1.txt",
+      "sha256": "1be440290e27ea67231fc07e34a2f314b5f212459b92ace30e810a7014ba6b56"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -20402,9 +20522,18 @@
    "metric": "recall@5%",
    "headline": {
     "metric": "recall@5%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.13668",
+      "captured": "2026-10-15",
+      "where": "Section 4.2: recall@k is the main performance metric (Table 1 @5 column is the abstract's headline: 'within top-5 review comments')",
+      "quote": "catches 79.6% of bugs that humans found before merge, and 64.2% of bugs that humans found after merge, within top-5 review comments",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.13668/evidence/arxiv-2610.13668.txt",
+      "sha256": "3375c902d0663ebb12409f0363f6470a0cf41a6096ce5a4cf79e51220f6a30ef"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -20431,9 +20560,18 @@
    "metric": "recall@5%",
    "headline": {
     "metric": "recall@5%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.13668",
+      "captured": "2026-10-15",
+      "where": "Section 4.2: recall@k is the main performance metric (Table 1 @5 column is the abstract's headline: 'within top-5 review comments')",
+      "quote": "catches 79.6% of bugs that humans found before merge, and 64.2% of bugs that humans found after merge, within top-5 review comments",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.13668/evidence/arxiv-2610.13668.txt",
+      "sha256": "3375c902d0663ebb12409f0363f6470a0cf41a6096ce5a4cf79e51220f6a30ef"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -20460,9 +20598,18 @@
    "metric": "F1",
    "headline": {
     "metric": "F1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.14397v2",
+      "captured": "2026-10-14",
+      "where": "Introduction, summary of results: the acceptability task is summarised by its F1 against the scorer (precision, recall, false-accept and miss rates are the detail columns of Table 5)",
+      "quote": "On acceptability, the best models score about as well as a single non-author rater (F1 0.61 against 0.59)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.14397/evidence/p2610.14397v2.txt",
+      "sha256": "cec02119d7240a0236c2505ae9c064e4b701db6c6332a82e7712acb769899c3e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26626,9 +26773,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-opus-55-faster-and-leaner-high-quality-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Consumer products (76% → 82%)",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-opus-55-faster-and-leaner-high-quality-work.txt",
+      "sha256": "9e552781807aa22ff2a8642142c7521093efa710b44a1dbc72fe51c875c2f47b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26655,9 +26811,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-opus-55-faster-and-leaner-high-quality-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Financial services (73% → 75%)",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-opus-55-faster-and-leaner-high-quality-work.txt",
+      "sha256": "9e552781807aa22ff2a8642142c7521093efa710b44a1dbc72fe51c875c2f47b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26684,9 +26849,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-sonnet-55-real-enterprise-knowledge-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Sonnet 5.5 reached 65% overall accuracy against Sonnet 5's 61%",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-sonnet-55-real-enterprise-knowledge-work.txt",
+      "sha256": "1656f1cad78cfa41e80572edce62b1e9e75ae4614be63f69894eb34fe266a124"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26763,9 +26937,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-sonnet-55-real-enterprise-knowledge-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Financial services (63% to 81%)",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-sonnet-55-real-enterprise-knowledge-work.txt",
+      "sha256": "1656f1cad78cfa41e80572edce62b1e9e75ae4614be63f69894eb34fe266a124"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26792,9 +26975,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-sonnet-55-real-enterprise-knowledge-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Legal (60% to 67%)",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-sonnet-55-real-enterprise-knowledge-work.txt",
+      "sha256": "1656f1cad78cfa41e80572edce62b1e9e75ae4614be63f69894eb34fe266a124"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26821,9 +27013,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-sonnet-55-real-enterprise-knowledge-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Life sciences (54% to 62%)",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-sonnet-55-real-enterprise-knowledge-work.txt",
+      "sha256": "1656f1cad78cfa41e80572edce62b1e9e75ae4614be63f69894eb34fe266a124"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26850,9 +27051,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-sonnet-55-real-enterprise-knowledge-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Public sector (55% to 62%)",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-sonnet-55-real-enterprise-knowledge-work.txt",
+      "sha256": "1656f1cad78cfa41e80572edce62b1e9e75ae4614be63f69894eb34fe266a124"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26879,9 +27089,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.box.com/claude-opus-55-faster-and-leaner-high-quality-work",
+      "captured": "2026-10-19",
+      "where": "the blog gives one accuracy figure per model and industry (the first is the earlier model, the second the new one)",
+      "quote": "Technology (63% → 74%)",
+      "file": "/work/.salvo14/mig/convert-box.com/evidence/box-claude-opus-55-faster-and-leaner-high-quality-work.txt",
+      "sha256": "9e552781807aa22ff2a8642142c7521093efa710b44a1dbc72fe51c875c2f47b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26908,9 +27127,18 @@
    "metric": "ASTMatch%",
    "headline": {
     "metric": "ASTMatch%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://www.braintrust.dev/evals/glm-52-vs-opus-48-technical-report",
+      "captured": "2026-10-27",
+      "where": "technical report, scorers list: ASTSemanticMatch is the primary scorer",
+      "quote": "ASTSemanticMatch: deterministic primary scorer aligned to each AST-derived question type.",
+      "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+      "sha256": "116e03b0e793f22adf15e9e208fa8ab73fa2f2bc0fc356b8b2284c9948b7709b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26936,9 +27164,18 @@
    "metric": "ASTMatch%",
    "headline": {
     "metric": "ASTMatch%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://www.braintrust.dev/evals/glm-52-vs-opus-48-technical-report",
+      "captured": "2026-10-27",
+      "where": "technical report, scorers list: ASTSemanticMatch is the primary scorer",
+      "quote": "ASTSemanticMatch: deterministic primary scorer aligned to each AST-derived question type.",
+      "file": "/work/.salvo14/mig/convert-braintrust/evidence/glm-52-vs-opus-48-technical-report.txt",
+      "sha256": "116e03b0e793f22adf15e9e208fa8ab73fa2f2bc0fc356b8b2284c9948b7709b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -26964,9 +27201,18 @@
    "metric": "problems-solved%",
    "headline": {
     "metric": "problems-solved%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://www.braintrust.dev/evals/opus-55-vs-gpt-6",
+      "captured": "2026-09-22",
+      "where": "results table caption",
+      "quote": "Ranked by problems solved; writing quality shown alongside",
+      "file": "/work/.salvo14/mig/convert-braintrust/evidence/opus-55-vs-gpt-6.txt",
+      "sha256": "7204fba6650ecc9d399f565095f2116bd94273a70b89c58897108a6bf23b7fd4"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -28078,8 +28324,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://computingforgeeks.com/claude-opus-5-released-features-benchmarks/",
+      "captured": "2026-10-19",
+      "where": "cost table (Terraform / K8s / Bash): the article gives only per-task latency, output tokens and cost; it reports no quality score for these tasks (the linters are described in prose, not scored)",
+      "quote": "Bash script | 22.3s / 2,042 (0 thinking) | 6.7s / 512 | $0.052 | $0.014 |",
+      "file": "/work/.salvo14/mig/convert-computingforgeeks/evidence/cfg-opus5.txt",
+      "sha256": "1a1fc536e345b0a4991e2deeb1add5f7c35c57931ede43699247014d0914b816"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -28102,8 +28358,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://computingforgeeks.com/claude-opus-5-released-features-benchmarks/",
+      "captured": "2026-10-19",
+      "where": "cost table (Terraform / K8s / Bash): the article gives only per-task latency, output tokens and cost; it reports no quality score for these tasks (the linters are described in prose, not scored)",
+      "quote": "K8s bug fix | 5.2s / 351 (130 thinking) | 2.8s / 214 | $0.010 | $0.007 |",
+      "file": "/work/.salvo14/mig/convert-computingforgeeks/evidence/cfg-opus5.txt",
+      "sha256": "1a1fc536e345b0a4991e2deeb1add5f7c35c57931ede43699247014d0914b816"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -28126,8 +28392,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://computingforgeeks.com/claude-opus-5-released-features-benchmarks/",
+      "captured": "2026-10-19",
+      "where": "cost table (Terraform / K8s / Bash): the article gives only per-task latency, output tokens and cost; it reports no quality score for these tasks (the linters are described in prose, not scored)",
+      "quote": "Terraform module | 28.0s / 3,079 (244 thinking) | 19.2s / 1,906 | $0.078 | $0.048 |",
+      "file": "/work/.salvo14/mig/convert-computingforgeeks/evidence/cfg-opus5.txt",
+      "sha256": "1a1fc536e345b0a4991e2deeb1add5f7c35c57931ede43699247014d0914b816"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -28150,8 +28426,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://computingforgeeks.com/claude-sonnet-5-5-released-features-benchmarks/",
+      "captured": "2026-10-19",
+      "where": "bug-fix paragraph: all nine runs ended green, only time and cost are reported",
+      "quote": "Sonnet 5 took 12 or 13 tool calls per run: it read the files one at a time, then fixed the bugs with three or four separate Edit calls. Sonnet 5.5 used three (four in the run with a retry, below). It ran the suite and listed the package in one Bash call, dumped the source files and tests in a second, then fixed all four bugs and reran pytest in a single scripted third call. Averaged, that is $0.057 and 12 seconds per run against $0.157 and 48 seconds for Sonnet 5, so about a third of the cost at four times the speed. Opus 5.5 took the same three-call path at $0.100 per run.",
+      "file": "/work/.salvo14/mig/convert-computingforgeeks/evidence/cfg-s55.txt",
+      "sha256": "097d1597315bb5671fdc9de2384e6668dbbb8005e3695e910608e383109d4b7a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -28175,9 +28461,18 @@
    "metric": "k3s-deploy-pass%(3runs)",
    "headline": {
     "metric": "k3s-deploy-pass%(3runs)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://computingforgeeks.com/claude-sonnet-5-5-released-features-benchmarks/",
+      "captured": "2026-10-19",
+      "where": "k3s table: the article reports one quality column for these runs (successful deploys out of 3); lint pass is uniform 9/9",
+      "quote": "Model (effort) | Lint pass | k3s deploy + HTTP 200 | Output tokens (9 calls) | Wall time | Cost |",
+      "file": "/work/.salvo14/mig/convert-computingforgeeks/evidence/cfg-s55.txt",
+      "sha256": "097d1597315bb5671fdc9de2384e6668dbbb8005e3695e910608e383109d4b7a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -29404,9 +29699,18 @@
    "metric": "avg-score-x100",
    "headline": {
     "metric": "avg-score-x100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2606.22902v3",
+      "captured": "2026-10-19",
+      "where": "Table 9 caption: AVG is the average performance across 9 dimensions (AvgPerf, the paper's performance metric)",
+      "quote": "AvgPerf: average performance score across all tasks.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2606.22902/evidence/arxiv-2606.22902.txt",
+      "sha256": "4c57a1f77bce1ed5c3f1f7fb976e8e58a11bba3786af6df892bec4f2491548f0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -29433,9 +29737,18 @@
    "metric": "resolved%",
    "headline": {
     "metric": "resolved%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2606.22902v3",
+      "captured": "2026-10-19",
+      "where": "Section on OOD results: the OOD AvgPerf column is the resolved rate",
+      "quote": "The OOD AvgPerf column is the harness-graded resolved-rate (#resolved / 176)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2606.22902/evidence/arxiv-2606.22902.txt",
+      "sha256": "4c57a1f77bce1ed5c3f1f7fb976e8e58a11bba3786af6df892bec4f2491548f0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -31190,9 +31503,18 @@
    "metric": "complete%",
    "headline": {
     "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.databricks.com/blog/benchmarking-coding-agents-databricks-multi-million-line-codebase",
+      "captured": "2026-10-19",
+      "where": "the blog reports one score per model and harness: the overall pass-rate / task completion (Figure 1 y-axis, text)",
+      "quote": "scoring six points lower on task completion (81% vs 87%)",
+      "file": "/work/.salvo14/mig/convert-databricks/evidence/p.txt",
+      "sha256": "b9494832ef6e505f811e1fa740e1c76bf4867cbadd7b52188e42fbf4c204f4cf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -31219,9 +31541,18 @@
    "metric": "complete%",
    "headline": {
     "metric": "complete%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.databricks.com/blog/benchmarking-coding-agents-databricks-multi-million-line-codebase",
+      "captured": "2026-10-19",
+      "where": "the blog reports one score per model and harness: the overall pass-rate / task completion (Figure 1 y-axis, text)",
+      "quote": "scoring six points lower on task completion (81% vs 87%)",
+      "file": "/work/.salvo14/mig/convert-databricks/evidence/p.txt",
+      "sha256": "b9494832ef6e505f811e1fa740e1c76bf4867cbadd7b52188e42fbf4c204f4cf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -32156,9 +32487,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/kappa90/dinobase/blob/4ac17e783d/benchmarks/results/REPORT.md",
+      "captured": "2026-04-01",
+      "where": "Per-Model Results: one accuracy column per approach; the report's other columns are latency and cost per correct answer",
+      "quote": "| Model | SQL Accuracy | MCP Accuracy | Gap | SQL Latency | MCP Latency | SQL $/Correct | MCP $/Correct |",
+      "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+      "sha256": "4711fd94240d852b98ca03eb028944fd870226a263adf5e565d759a51f63a67f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -32185,9 +32525,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/kappa90/dinobase/blob/4ac17e783d/benchmarks/results/REPORT.md",
+      "captured": "2026-04-01",
+      "where": "Per-Model Results: one accuracy column per approach; the report's other columns are latency and cost per correct answer",
+      "quote": "| Model | SQL Accuracy | MCP Accuracy | Gap | SQL Latency | MCP Latency | SQL $/Correct | MCP $/Correct |",
+      "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+      "sha256": "4711fd94240d852b98ca03eb028944fd870226a263adf5e565d759a51f63a67f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -34417,9 +34766,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "model card table, row Apex Bench v1.1: the card gives one number per benchmark and model",
+      "quote": "| Apex Bench v1.1 | 72.1 | 64.6 | 47.8 | 56.6 | 54.3 | 65.8 |",
+      "file": "/work/.salvo14/mig/convert-deepseek-v41-flash-1017/evidence/hf-DeepSeek-V4.1-Flash-1017.md",
+      "sha256": "b72b796e4f4c739eca5d0ad360a7679b39118ca7eb64891f7151a527b292c42a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -34446,9 +34804,18 @@
    "metric": "Terminal-Bench 4.0 score %",
    "headline": {
     "metric": "Terminal-Bench 4.0 score %",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "model card table, row Terminal-Bench 4.0: the card gives one number per benchmark and model",
+      "quote": "| Terminal-Bench 4.0 | 42.3 | 31.2 | 12.6 | 37.9 | 39.9 | 51.8 |",
+      "file": "/work/.salvo14/mig/convert-deepseek-v41-flash-1017/evidence/hf-DeepSeek-V4.1-Flash-1017.md",
+      "sha256": "b72b796e4f4c739eca5d0ad360a7679b39118ca7eb64891f7151a527b292c42a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -36773,9 +37140,18 @@
    "metric": "final-assets-kyuan",
    "headline": {
     "metric": "final-assets-kyuan",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.30730",
+      "captured": "2026-10-27",
+      "where": "Table 2 caption: 'Final assets carries the primary score'",
+      "quote": "Final assets carries the primary score",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.30730/evidence/a.txt",
+      "sha256": "47eb311893480e25d2a2aa197dcd08a947494c23aad6467c0e5cf2e16776f2ea"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -37146,9 +37522,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.24555v2",
+      "captured": "2026-10-01",
+      "where": "Table 2 caption: the headline column is the Overall score (first score column; the text compares configurations by it)",
+      "quote": "Overall score is uncapped.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.24555/evidence/arxiv-2609.24555.txt",
+      "sha256": "ede93ac59a27d1d20e857b3840e71af09baf709fe90c4d9f19b88c283865d270"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -37174,10 +37559,19 @@
    "judge_panel": null,
    "metric": "funcpass%",
    "headline": {
-    "metric": "funcpass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://www.endorlabs.com/research/ai-code-security-benchmark",
+      "captured": "2026-10-19",
+      "where": "league table sub-title: the board is sorted by security correctness (SecPass), not by FuncPass",
+      "quote": "Updated as new commercial agents and models ship. Sorted by security correctness.",
+      "file": "/work/.salvo14/mig/convert-endorlabs/evidence/lb2.txt",
+      "sha256": "9838ba194575bba22770a1cb33dc97795ab536376d0025009dabcd5bb4ab763a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -39266,9 +39660,18 @@
    "metric": "rubric-qual%",
    "headline": {
     "metric": "rubric-qual%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.11683",
+      "captured": "2026-09-29",
+      "where": "Section 5.1: the macro-averaged Rubric Qualification Rate represents a system's performance",
+      "quote": "we then calculate Macro-averaged Rubric Qualification Rate as the mean of the per-query rates over all queries and use it to represent a system’s performance",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.11683/evidence/arxiv-2608.11683.txt",
+      "sha256": "4cc4a147f5d97977504fa68c95a6f6463c80cf28ff91c9bab2fa069dc3453701"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -39295,9 +39698,18 @@
    "metric": "rubric-qual%",
    "headline": {
     "metric": "rubric-qual%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.11683",
+      "captured": "2026-09-29",
+      "where": "Section 5.1: the macro-averaged Rubric Qualification Rate represents a system's performance",
+      "quote": "we then calculate Macro-averaged Rubric Qualification Rate as the mean of the per-query rates over all queries and use it to represent a system’s performance",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.11683/evidence/arxiv-2608.11683.txt",
+      "sha256": "4cc4a147f5d97977504fa68c95a6f6463c80cf28ff91c9bab2fa069dc3453701"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -39493,9 +39905,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.32835v1",
+      "captured": "2026-10-01",
+      "where": "Section 6.2: the strict pass rate is the reported performance measure",
+      "quote": "Strict pass rates measure whether all applicable rubric criteria are satisfied",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.32835/evidence/arxiv-2609.32835.txt",
+      "sha256": "dc2b245fc78df2c5a2d3bc30351e7de5b1b0c8c930556f952a6cb9596bf9d159"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -40322,9 +40743,18 @@
    "metric": "overall-score-of-1",
    "headline": {
     "metric": "overall-score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.03715",
+      "captured": "2026-10-19",
+      "where": "Figure 4 caption: the leaderboard rows are sorted by Overall",
+      "quote": "rows are sorted by Overall",
+      "file": "/work/.salvo14/mig/convert-4dcodebench/evidence/arxiv-2610.03715v1.txt",
+      "sha256": "41820aed4835ff300c5c0f5167b21b2fda7d23093e4d1a509d0ce732bbbb61c4"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -40634,9 +41064,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://futuresearch.ai/effort-scaling",
+      "captured": "2026-10-19",
+      "where": "the table reports one accuracy metric (Score) per model and effort, with cost and time",
+      "quote": "Model | Effort | Score | Cost/task | Time",
+      "file": "/work/.salvo14/mig/convert-futuresearch/evidence/effort-scaling.txt",
+      "sha256": "aaf8f061c7008fb089980aaa6de4e18ce2a3a3fb9f946916bfeac3779d65a3ff"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -41974,9 +42413,18 @@
    "metric": "accuracy-%",
    "headline": {
     "metric": "accuracy-%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/qianqiuqiu/Telecom_OM_LLM_Evaluation",
+      "captured": "2026-10-21",
+      "where": "section 2.1: the report ranks the models by pooled accuracy (正确率) on the objective subset",
+      "quote": "kimi-k3 | **90.1%**",
+      "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+      "sha256": "3d41e29db575c6e444c71aa521e9de0947586a64e961b4de0a38b3d2d4170d6c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -42003,9 +42451,18 @@
    "metric": "main-score-0-100",
    "headline": {
     "metric": "main-score-0-100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/qianqiuqiu/Telecom_OM_LLM_Evaluation",
+      "captured": "2026-10-21",
+      "where": "section 2.2: the report ranks by 均分 (main score, the table is ranked 名次 1..7)",
+      "quote": "kimi-k3 | **72.5**",
+      "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/selection_report.md",
+      "sha256": "3d41e29db575c6e444c71aa521e9de0947586a64e961b4de0a38b3d2d4170d6c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -42029,9 +42486,18 @@
    "metric": "main-score-0-100",
    "headline": {
     "metric": "main-score-0-100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/qianqiuqiu/Telecom_OM_LLM_Evaluation",
+      "captured": "2026-10-21",
+      "where": "thinking_main.md: the thinking-on ranking (开思考名次) is by 开思考均分",
+      "quote": "qwen3.8-max | 64.5 | **82.9**",
+      "file": "/work/.salvo14/mig/convert-github-telecom-oam/evidence/thinking_main.md",
+      "sha256": "2163c56bfdb4af4750c42228a7a718aaa59872746b00a256504eaae1b69695c7"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -42080,9 +42546,18 @@
    "metric": "ifeval-pass%",
    "headline": {
     "metric": "ifeval-pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://georgeliu.substack.com/p/claude-opus-5-vs-opus-55-effort-levels",
+      "captured": "2026-10-27",
+      "where": "the post reports instruction following only as IFEval scores out of 9 (table 'IFEval: Opus 5.5 went 9/9 everywhere')",
+      "quote": "Nine of the ten have a pass/fail check, so every IFEval score in this post is out of 9.",
+      "file": "/work/.salvo14/mig/convert-ai.georgeliu/evidence/claude-opus-5-vs-opus-55-effort-levels.txt",
+      "sha256": "30b91a9b2285651cba61e5396bea160332c2283a3ae95330e667781beba2e76c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -42109,9 +42584,18 @@
    "metric": "ifeval-pass%",
    "headline": {
     "metric": "ifeval-pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://georgeliu.substack.com/p/claude-sonnet-5-vs-sonnet-46-prompt",
+      "captured": "2026-10-27",
+      "where": "the post reports instruction following only as IFEval passes out of 9 per cell",
+      "quote": "I score these as IFEval passes, short for instruction-following evaluation.",
+      "file": "/work/.salvo14/mig/convert-ai.georgeliu/evidence/claude-sonnet-5-vs-sonnet-46-prompt.txt",
+      "sha256": "fa588bf889b4bdf8933bef56658741a4ffd95d87c877d19a8b312728fa429b39"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -42445,9 +42929,18 @@
    "metric": "score-of-100",
    "headline": {
     "metric": "score-of-100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://graphite.io/five-percent/research/ai-tells-opus-5-5-update",
+      "captured": "2026-10-19",
+      "where": "the page reports the mannered-prose score per model (one score per model for this benchmark view)",
+      "quote": "Mannered-prose values are mean scores assigned by Claude Opus 5 on a 0",
+      "file": "/work/.salvo14/mig/convert-graphite/evidence/graphite_next_f_decoded.txt",
+      "sha256": "e833171148ff9e150a313215f69faa2af99539a72d39aa141852a9ad9d5e627f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -42871,9 +43364,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
+      "captured": "2026-10-19",
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -43280,12 +43782,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-3-Flash-Model-Card.pdf",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
       "captured": "2026-10-19",
-      "where": "the card's results table gives one score per benchmark row and model: the one metric reported for the benchmark (printed text of the table image)",
-      "quote": "61.9%",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3-flash-card/src/table.png",
-      "sha256": "d998a962eb157f8456fc61138883f55f5ead4bdc59fbcf5fd906873ce66b99f9"
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
      }
     ],
     "level": "written"
@@ -43639,9 +44141,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
+      "captured": "2026-10-19",
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -43747,12 +44258,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-pro/",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
       "captured": "2026-10-19",
-      "where": "the card's results table gives one score per benchmark row and model: the one metric reported for the benchmark (printed text of the table image)",
-      "quote": "37.5%",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3-pro-card/src/table.png",
-      "sha256": "3bb6a659de3f587217406d7f714b88f3522961e11eb59360f9e20259a4e5c1e4"
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
      }
     ],
     "level": "written"
@@ -43934,9 +44445,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
+      "captured": "2026-10-19",
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -44267,12 +44787,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-pro/",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
       "captured": "2026-10-19",
-      "where": "the card's results table gives one score per benchmark row and model: the one metric reported for the benchmark (printed text of the table image)",
-      "quote": "91.8%",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3-pro-card/src/table.png",
-      "sha256": "3bb6a659de3f587217406d7f714b88f3522961e11eb59360f9e20259a4e5c1e4"
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
      }
     ],
     "level": "written"
@@ -44305,12 +44825,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
       "captured": "2026-10-19",
       "where": "model card Results table: one metric per benchmark",
-      "quote": "Results as of May, 2026",
-      "file": "/work/.salvo14/gs/s2/src/mc-gemini-3-5-flash.txt",
-      "sha256": "80286e75d043e1eb9af34e0ced33a0e7ce9b74eceda9d51b0f190021d253b2ce"
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
      }
     ],
     "level": "written"
@@ -44343,12 +44863,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
       "captured": "2026-10-19",
-      "where": "Results table of the model card: one score per benchmark and model",
-      "quote": "Results as of July, 2026 are listed below",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3.5-flash-lite-card/evidence/mc-gemini-3-5-flash-lite.txt",
-      "sha256": "01a80cc9e67ce855100e6da466e244c51733ec14fbe2ecf8794c0e0c15a4819c"
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
      }
     ],
     "level": "written"
@@ -44457,12 +44977,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-5-flash/",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
       "captured": "2026-10-19",
       "where": "model card Results table: one metric per benchmark",
-      "quote": "Results as of May, 2026",
-      "file": "/work/.salvo14/gs/s2/src/mc-gemini-3-5-flash.txt",
-      "sha256": "80286e75d043e1eb9af34e0ced33a0e7ce9b74eceda9d51b0f190021d253b2ce"
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
      }
     ],
     "level": "written"
@@ -44872,12 +45392,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-pro/",
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
       "captured": "2026-10-19",
-      "where": "the card's results table gives one score per benchmark row and model: the one metric reported for the benchmark (printed text of the table image)",
-      "quote": "72.1%",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3-pro-card/src/table.png",
-      "sha256": "3bb6a659de3f587217406d7f714b88f3522961e11eb59360f9e20259a4e5c1e4"
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
      }
     ],
     "level": "written"
@@ -45553,9 +46073,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
+      "captured": "2026-10-19",
+      "where": "model card Results table: one metric per benchmark",
+      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
+      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
+      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -53580,9 +54109,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+      "captured": "2026-10-19",
+      "where": "the card's charts give one score per model and benchmark",
+      "quote": "This model supports only non-thinking mode and does not generate ``<think></think>`` blocks in its output.",
+      "file": "/work/.salvo14/mig/convert-qwen-hf-qwen3-coder-next/evidence/Qwen3-Coder-Next.md",
+      "sha256": "548db6d595e3bd88d7f6e7f4eae8e66ce8e6f980fd5ce52d7daf222e38559af6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -53609,9 +54147,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+      "captured": "2026-10-19",
+      "where": "the card's charts give one score per model and benchmark",
+      "quote": "This model supports only non-thinking mode and does not generate ``<think></think>`` blocks in its output.",
+      "file": "/work/.salvo14/mig/convert-qwen-hf-qwen3-coder-next/evidence/Qwen3-Coder-Next.md",
+      "sha256": "548db6d595e3bd88d7f6e7f4eae8e66ce8e6f980fd5ce52d7daf222e38559af6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -53638,9 +54185,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+      "captured": "2026-10-19",
+      "where": "the card's charts give one score per model and benchmark",
+      "quote": "This model supports only non-thinking mode and does not generate ``<think></think>`` blocks in its output.",
+      "file": "/work/.salvo14/mig/convert-qwen-hf-qwen3-coder-next/evidence/Qwen3-Coder-Next.md",
+      "sha256": "548db6d595e3bd88d7f6e7f4eae8e66ce8e6f980fd5ce52d7daf222e38559af6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -53667,9 +54223,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+      "captured": "2026-10-19",
+      "where": "the card's charts give one score per model and benchmark",
+      "quote": "This model supports only non-thinking mode and does not generate ``<think></think>`` blocks in its output.",
+      "file": "/work/.salvo14/mig/convert-qwen-hf-qwen3-coder-next/evidence/Qwen3-Coder-Next.md",
+      "sha256": "548db6d595e3bd88d7f6e7f4eae8e66ce8e6f980fd5ce52d7daf222e38559af6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -53696,9 +54261,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+      "captured": "2026-10-19",
+      "where": "the card's charts give one score per model and benchmark",
+      "quote": "This model supports only non-thinking mode and does not generate ``<think></think>`` blocks in its output.",
+      "file": "/work/.salvo14/mig/convert-qwen-hf-qwen3-coder-next/evidence/Qwen3-Coder-Next.md",
+      "sha256": "548db6d595e3bd88d7f6e7f4eae8e66ce8e6f980fd5ce52d7daf222e38559af6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -53725,9 +54299,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3-Coder-Next",
+      "captured": "2026-10-19",
+      "where": "the card's charts give one score per model and benchmark",
+      "quote": "This model supports only non-thinking mode and does not generate ``<think></think>`` blocks in its output.",
+      "file": "/work/.salvo14/mig/convert-qwen-hf-qwen3-coder-next/evidence/Qwen3-Coder-Next.md",
+      "sha256": "548db6d595e3bd88d7f6e7f4eae8e66ce8e6f980fd5ce52d7daf222e38559af6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -70834,9 +71417,18 @@
    "metric": "recall/13",
    "headline": {
     "metric": "recall/13",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/kaybenleroll/random_llm_projects/blob/5a4711ccb9d106eab11b8c937c36709abd623b07/claude_code_research/notes/effort-benchmark-120.md",
+      "captured": "2026-10-18",
+      "where": "title of the benchmark note: the question asked is the plan-review recall",
+      "quote": "Effort benchmark (#120): does reasoning effort change plan-review recall?",
+      "file": "/work/.salvo14/mig/convert-github-kaybenleroll/evidence/effort-benchmark-120.md",
+      "sha256": "ccd672139cd137b45ec20a513c57d104cf446cf6a58bed6a78a8c213747084fc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -70863,9 +71455,18 @@
    "metric": "recall/13",
    "headline": {
     "metric": "recall/13",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/kaybenleroll/random_llm_projects/blob/5a4711ccb9d106eab11b8c937c36709abd623b07/claude_code_research/notes/effort-benchmark-120.md",
+      "captured": "2026-10-18",
+      "where": "title of the benchmark note: the question asked is the plan-review recall",
+      "quote": "Effort benchmark (#120): does reasoning effort change plan-review recall?",
+      "file": "/work/.salvo14/mig/convert-github-kaybenleroll/evidence/effort-benchmark-120.md",
+      "sha256": "ccd672139cd137b45ec20a513c57d104cf446cf6a58bed6a78a8c213747084fc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -71008,9 +71609,18 @@
    "metric": "solved-of-12",
    "headline": {
     "metric": "solved-of-12",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/kenji_harada/items/7d8be259208cd3a5843f",
+      "captured": "2026-10-19",
+      "where": "the article reports one quality metric (success counts by test pass/fail), with time and cost beside it",
+      "quote": "成否はテストの合否だけで判定しました。",
+      "file": "/work/.salvo14/mig/convert-qiita-kenji-harada/evidence/qiita-7d8be259208cd3a5843f-body.md",
+      "sha256": "2e650972559ac1de166d5c9f9640fde2d7e952f085182f98e7c89cbaee51accf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -71037,9 +71647,18 @@
    "metric": "solved-of-18",
    "headline": {
     "metric": "solved-of-18",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/kenji_harada/items/7d8be259208cd3a5843f",
+      "captured": "2026-10-19",
+      "where": "the article reports one quality metric (success counts by test pass/fail), with time and cost beside it",
+      "quote": "成否はテストの合否だけで判定しました。",
+      "file": "/work/.salvo14/mig/convert-qiita-kenji-harada/evidence/qiita-7d8be259208cd3a5843f-body.md",
+      "sha256": "2e650972559ac1de166d5c9f9640fde2d7e952f085182f98e7c89cbaee51accf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -71066,9 +71685,18 @@
    "metric": "solved-of-18",
    "headline": {
     "metric": "solved-of-18",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/kenji_harada/items/43f5348563728dea7e12",
+      "captured": "2026-10-19",
+      "where": "the article reports one quality metric (success counts), with time, turns, tokens and cost beside it",
+      "quote": "成功とみなしたのは、元のテストと隠しテストがともに通り、",
+      "file": "/work/.salvo14/mig/convert-qiita-kenji-harada/evidence/qiita-43f5348563728dea7e12-body.md",
+      "sha256": "e511dbecaa56e9b1d0d4ccc9c10a18dfefeb31ad0c7c1958dd8259ca1cd2266e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -72702,9 +73330,18 @@
    "metric": "solved%",
    "headline": {
     "metric": "solved%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/latitude-dev/coding-agent-benchmark",
+      "captured": "2026-08-04",
+      "where": "README.md, What gets measured: Solved is the only quality score of a run (results.jsonl field solved); the other bullets are cost, latency, tool-call reliability and tamper flags, reported apart from the score",
+      "quote": "**Solved**: tests pass against pristine test files",
+      "file": "/work/.salvo14/mig/convert-github-latitude/evidence/README.md",
+      "sha256": "22899f5e4dce4649aaff485811214cd4032e533d7f84f79666cb2bbbf8f437c8"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -72730,9 +73367,18 @@
    "metric": "solved%",
    "headline": {
     "metric": "solved%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/latitude-dev/coding-agent-benchmark",
+      "captured": "2026-08-04",
+      "where": "README.md, What gets measured: Solved is the only quality score of a run (results.jsonl field solved); the other bullets are cost, latency, tool-call reliability and tamper flags, reported apart from the score",
+      "quote": "**Solved**: tests pass against pristine test files",
+      "file": "/work/.salvo14/mig/convert-github-latitude/evidence/README.md",
+      "sha256": "22899f5e4dce4649aaff485811214cd4032e533d7f84f79666cb2bbbf8f437c8"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -72759,9 +73405,18 @@
    "metric": "solved%",
    "headline": {
     "metric": "solved%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/latitude-dev/coding-agent-benchmark",
+      "captured": "2026-08-04",
+      "where": "README.md, What gets measured: Solved is the only quality score of a run (results.jsonl field solved); the other bullets are cost, latency, tool-call reliability and tamper flags, reported apart from the score",
+      "quote": "**Solved**: tests pass against pristine test files",
+      "file": "/work/.salvo14/mig/convert-github-latitude/evidence/README.md",
+      "sha256": "22899f5e4dce4649aaff485811214cd4032e533d7f84f79666cb2bbbf8f437c8"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73198,9 +73853,18 @@
    "metric": "judge%",
    "headline": {
     "metric": "judge%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/CROOJ02/llm-cost-benchmark-2026/tree/bbd8e909a518160099eb090d0591809466b262f0",
+      "captured": "2026-10-27",
+      "where": "analysis/out/lever_matrix.csv: one quality column (mean_canonical_score) per model and lever; the repo reports no other quality score per model",
+      "quote": "canonical_score 0.881 at \\$0.000557 per task",
+      "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md",
+      "sha256": "c3b76b33bc04bfbb52f3ebc9e549286bd95820aef4775028f528aa37d9ce4f5b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73226,9 +73890,18 @@
    "metric": "judge%",
    "headline": {
     "metric": "judge%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/CROOJ02/llm-cost-benchmark-2026/tree/bbd8e909a518160099eb090d0591809466b262f0",
+      "captured": "2026-10-27",
+      "where": "analysis/out/lever_matrix.csv: one quality column (mean_canonical_score) per model and lever; the repo reports no other quality score per model",
+      "quote": "canonical_score 0.881 at \\$0.000557 per task",
+      "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md",
+      "sha256": "c3b76b33bc04bfbb52f3ebc9e549286bd95820aef4775028f528aa37d9ce4f5b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73254,9 +73927,18 @@
    "metric": "judge%",
    "headline": {
     "metric": "judge%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/CROOJ02/llm-cost-benchmark-2026/tree/bbd8e909a518160099eb090d0591809466b262f0",
+      "captured": "2026-10-27",
+      "where": "analysis/out/lever_matrix.csv: one quality column (mean_canonical_score) per model and lever; the repo reports no other quality score per model",
+      "quote": "canonical_score 0.881 at \\$0.000557 per task",
+      "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md",
+      "sha256": "c3b76b33bc04bfbb52f3ebc9e549286bd95820aef4775028f528aa37d9ce4f5b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73283,9 +73965,18 @@
    "metric": "judge%",
    "headline": {
     "metric": "judge%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/CROOJ02/llm-cost-benchmark-2026/tree/bbd8e909a518160099eb090d0591809466b262f0",
+      "captured": "2026-10-27",
+      "where": "analysis/out/lever_matrix.csv: one quality column (mean_canonical_score) per model and lever; the repo reports no other quality score per model",
+      "quote": "canonical_score 0.881 at \\$0.000557 per task",
+      "file": "/work/.salvo14/mig/convert-github-llmcost2026/evidence/analysis_out_headlines.md",
+      "sha256": "c3b76b33bc04bfbb52f3ebc9e549286bd95820aef4775028f528aa37d9ce4f5b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73760,9 +74451,18 @@
    "metric": "S%",
    "headline": {
     "metric": "S%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36380",
+      "captured": "2026-10-20",
+      "where": "Section 4.2 / Table 3: the benchmark score is S, the validity-gated mean of Reconstruction and Appearance (V, R, A are its components)",
+      "quote": "The benchmark score averages over all N attempted cases, including failures:",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36380/evidence/t.txt",
+      "sha256": "5955fe18bbf708621761292a665641687565df6914acc771eb0f6682f35fd70f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73789,9 +74489,18 @@
    "metric": "S%",
    "headline": {
     "metric": "S%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36380",
+      "captured": "2026-10-20",
+      "where": "Section 4.2 / Table 3: the benchmark score is S, the validity-gated mean of Reconstruction and Appearance (V, R, A are its components)",
+      "quote": "The benchmark score averages over all N attempted cases, including failures:",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36380/evidence/t.txt",
+      "sha256": "5955fe18bbf708621761292a665641687565df6914acc771eb0f6682f35fd70f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73818,9 +74527,18 @@
    "metric": "S%",
    "headline": {
     "metric": "S%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36380",
+      "captured": "2026-10-20",
+      "where": "Section 4.2 / Table 3: the benchmark score is S, the validity-gated mean of Reconstruction and Appearance (V, R, A are its components)",
+      "quote": "The benchmark score averages over all N attempted cases, including failures:",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36380/evidence/t.txt",
+      "sha256": "5955fe18bbf708621761292a665641687565df6914acc771eb0f6682f35fd70f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -85995,9 +86713,18 @@
    "metric": "score-of-30",
    "headline": {
     "metric": "score-of-30",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-blender",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "アニメーション 18.1点・24分42秒・$0.77 17.7点・7分35秒・$0.23 引き分け",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_opus-sonnet-55-blender.txt",
+      "sha256": "ca20a343a4ab9290ba73da803db6016570ba9844031ab8386c9ec407b62c2e33"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86024,9 +86751,18 @@
    "metric": "score-of-30",
    "headline": {
     "metric": "score-of-30",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-blender",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "静物 20.5点・7分23秒・$0.74 14.0点・17分32秒・$0.72 Opus 5.5 の勝ち",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_opus-sonnet-55-blender.txt",
+      "sha256": "ca20a343a4ab9290ba73da803db6016570ba9844031ab8386c9ec407b62c2e33"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86053,9 +86789,18 @@
    "metric": "score-of-30",
    "headline": {
     "metric": "score-of-30",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-blender",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "機械式時計 21.0点・6分02秒・$0.76 15.5点・5分40秒・$0.33 Opus 5.5 の勝ち",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_opus-sonnet-55-blender.txt",
+      "sha256": "ca20a343a4ab9290ba73da803db6016570ba9844031ab8386c9ec407b62c2e33"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86082,9 +86827,18 @@
    "metric": "identical-output-of-9",
    "headline": {
     "metric": "identical-output-of-9",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "集計の高速化（渡していない9つの表） 9/9・7分31秒・$0.31 9/9・34秒・$0.12 引き分け",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_opus-sonnet-55-keisan.txt",
+      "sha256": "14f9ad551e007def4db16af80fd695708d1ebb42f0efcd6d67bdb7507024e5a1"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86111,9 +86865,18 @@
    "metric": "solved-of-8",
    "headline": {
     "metric": "solved-of-8",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "暗算（8問） 8/8・39秒・$0.16 8/8・27秒・$0.08 引き分け",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_opus-sonnet-55-keisan.txt",
+      "sha256": "14f9ad551e007def4db16af80fd695708d1ebb42f0efcd6d67bdb7507024e5a1"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86140,9 +86903,18 @@
    "metric": "solved-of-3",
    "headline": {
     "metric": "solved-of-3",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-keisan",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "プログラムで解く計算（3問） 3/3・48秒・$0.15 3/3・33秒・$0.06 引き分け",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_opus-sonnet-55-keisan.txt",
+      "sha256": "14f9ad551e007def4db16af80fd695708d1ebb42f0efcd6d67bdb7507024e5a1"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86169,9 +86941,18 @@
    "metric": "score-of-30",
    "headline": {
     "metric": "score-of-30",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-slides",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "授業スライド（光合成、テンプレートつき） 26.5点・4分19秒・$0.82 26.0点・50秒・$0.13 引き分け",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_morinokenjin_slides.txt",
+      "sha256": "5203d9246c21999179b8fa30a4f41ec9bb86faa9594567ce8c1f562ea1852ac4"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86198,9 +86979,18 @@
    "metric": "score-of-30",
    "headline": {
     "metric": "score-of-30",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-slides",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "報告スライド（図書館の利用状況） 27.0点・5分22秒・$1.24 26.0点・1分08秒・$0.18 引き分け",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_morinokenjin_slides.txt",
+      "sha256": "5203d9246c21999179b8fa30a4f41ec9bb86faa9594567ce8c1f562ea1852ac4"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -86227,9 +87017,18 @@
    "metric": "score-of-30",
    "headline": {
     "metric": "score-of-30",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/morinokenjin/articles/opus-sonnet-55-slides",
+      "captured": "2026-10-15",
+      "where": "summary table: one result per model and task (the article reports a single metric for the task)",
+      "quote": "発表スライド（新しいサービスの紹介） 27.0点・5分36秒・$1.24 25.0点・1分11秒・$0.17 引き分け",
+      "file": "/work/.salvo14/mig/convert-zenn-morinokenjin/evidence/zenn_morinokenjin_slides.txt",
+      "sha256": "5203d9246c21999179b8fa30a4f41ec9bb86faa9594567ce8c1f562ea1852ac4"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -95784,9 +96583,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://openrouter.ai/benchmarks/vgi-bench",
+      "captured": "2026-10-20",
+      "where": "leaderboard rows are ranked by accuracy ('Most Accurate', 'Representative-run accuracy, best first')",
+      "quote": "Representative-run accuracy, best first.",
+      "file": "/work/.salvo14/mig/convert-openrouter-vgi-bench/evidence/v.txt",
+      "sha256": "6b1183c473f90ad470bb66cb8df120c6f03f5dbf772ef089b13a0d02e57d96cc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -97532,9 +98340,18 @@
    "metric": "avg-score%",
    "headline": {
     "metric": "avg-score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2603.08640",
+      "captured": "2026-10-20",
+      "where": "Table 1 ranks methods by the weighted-average Avg (leaderboard, Figure 1)",
+      "quote": "Table 1. POSTTRAINBENCH: Weighted average agent performance",
+      "file": "/work/.salvo14/mig/convert-arxiv-2603.08640/evidence/arxiv-2603.08640.txt",
+      "sha256": "33070ce746f4bf05a5d9645bc1a113d5e76557ce990850d485088abad9473bf2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -97561,9 +98378,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://posttrainbench.com/?version=v1.2",
+      "captured": "2026-10-20",
+      "where": "scores-v1.2.js aggregatedScores: one average score per agent (the board's score)",
+      "quote": "\"fable-5.1\": {\"avg\": 44.65",
+      "file": "/work/.salvo14/mig/convert-posttrainbench/evidence/scores-v1.2.js.json",
+      "sha256": "2eb93dafecc065462fc23946cba6077a37395e83a99eaedc9eb633c6b820a3ea"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98144,8 +98970,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/suwa_nobu/items/870b1d6c5502aca68f55",
+      "captured": "2026-10-05",
+      "where": "cost table of task A: the article reports cost and speed only (\"品質は測っていません\")",
+      "quote": "1回目 | 約6万トークン | 約8万トークン | $0.6495 | $0.4952 | 24%安",
+      "file": "/work/.salvo14/mig/convert-qiita-suwanobu/evidence/qiita_suwa2.txt",
+      "sha256": "9ef22ef5e56be379142f6c520b964e5c53909ffc2b19993cc157b5d1ed1c6de9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -98169,8 +99005,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/suwa_nobu/items/870b1d6c5502aca68f55",
+      "captured": "2026-10-05",
+      "where": "cost table of task A: the article reports cost and speed only (\"品質は測っていません\")",
+      "quote": "2・3回目 | 0 | 約14万トークン | $0.073258 | $0.029842 | 59%安",
+      "file": "/work/.salvo14/mig/convert-qiita-suwanobu/evidence/qiita_suwa2.txt",
+      "sha256": "9ef22ef5e56be379142f6c520b964e5c53909ffc2b19993cc157b5d1ed1c6de9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -98252,9 +99098,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/Takuya__/items/2a513efa04bed9d9ca24",
+      "captured": "2026-10-08",
+      "where": "the article reports one result column per experiment (correct / pass / accuracy) for every configuration",
+      "quote": "| Haiku 5.5 low | 55.8% | 6 | $0.13 | 0.65 秒 | 4 |",
+      "file": "/work/.salvo14/mig/convert-qiita-takuya55/evidence/body.md",
+      "sha256": "eebda3d355ce7e33ae781016f21d6fce91ae3f14b9fc243fb2cefe1596208f4d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98281,9 +99136,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/Takuya__/items/2a513efa04bed9d9ca24",
+      "captured": "2026-10-08",
+      "where": "the article reports one result column per experiment (correct / pass / accuracy) for every configuration",
+      "quote": "| Haiku 5.5 medium＋候補を絞らせる | 76.0% | 2 | $0.40 | 2.89 秒 | 302 |",
+      "file": "/work/.salvo14/mig/convert-qiita-takuya55/evidence/body.md",
+      "sha256": "eebda3d355ce7e33ae781016f21d6fce91ae3f14b9fc243fb2cefe1596208f4d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98310,9 +99174,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/Takuya__/items/2a513efa04bed9d9ca24",
+      "captured": "2026-10-08",
+      "where": "the article reports one result column per experiment (correct / pass / accuracy) for every configuration",
+      "quote": "| Haiku 5.5 low | 18/18 | $0.0023 | 7.2 秒 | 5.2 |",
+      "file": "/work/.salvo14/mig/convert-qiita-takuya55/evidence/body.md",
+      "sha256": "eebda3d355ce7e33ae781016f21d6fce91ae3f14b9fc243fb2cefe1596208f4d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98339,9 +99212,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/Takuya__/items/2a513efa04bed9d9ca24",
+      "captured": "2026-10-08",
+      "where": "the article reports one result column per experiment (correct / pass / accuracy) for every configuration",
+      "quote": "| Haiku 5.5 medium | 24/24 | $0.019 | 52 秒 | 20.8 | — |",
+      "file": "/work/.salvo14/mig/convert-qiita-takuya55/evidence/body.md",
+      "sha256": "eebda3d355ce7e33ae781016f21d6fce91ae3f14b9fc243fb2cefe1596208f4d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98368,9 +99250,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/Takuya__/items/2a513efa04bed9d9ca24",
+      "captured": "2026-10-08",
+      "where": "the article reports one result column per experiment (correct / pass / accuracy) for every configuration",
+      "quote": "| 全部 Sonnet 5.5 | 9/9 × 3 回 | $0.297 | $0.297 | — | 62 秒 |",
+      "file": "/work/.salvo14/mig/convert-qiita-takuya55/evidence/body.md",
+      "sha256": "eebda3d355ce7e33ae781016f21d6fce91ae3f14b9fc243fb2cefe1596208f4d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98426,9 +99317,18 @@
    "metric": "pass@1",
    "headline": {
     "metric": "pass@1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.04072",
+      "captured": "2026-10-17",
+      "where": "Table 2 / abstract: version fidelity is reported as the diagonal Pass@1 (the paper's headline measure; Pass@3 is the second column)",
+      "quote": "Table 2: Version fidelity: Pass@1 and Pass@3 for each model on its target version",
+      "file": "/work/.salvo14/mig/convert-quantum-api-drift-2607.04072/evidence/arxiv-2607.04072.txt",
+      "sha256": "fee09317bd4f724b5df200d693899c6e0fd82e8c1b0ef5a6cd4630c7bd99aa7c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98455,9 +99355,18 @@
    "metric": "pass@1",
    "headline": {
     "metric": "pass@1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.04072",
+      "captured": "2026-10-17",
+      "where": "Table 2 / abstract: version fidelity is reported as the diagonal Pass@1 (the paper's headline measure; Pass@3 is the second column)",
+      "quote": "Table 2: Version fidelity: Pass@1 and Pass@3 for each model on its target version",
+      "file": "/work/.salvo14/mig/convert-quantum-api-drift-2607.04072/evidence/arxiv-2607.04072.txt",
+      "sha256": "fee09317bd4f724b5df200d693899c6e0fd82e8c1b0ef5a6cd4630c7bd99aa7c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98484,9 +99393,18 @@
    "metric": "pass@1",
    "headline": {
     "metric": "pass@1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.04072",
+      "captured": "2026-10-17",
+      "where": "Table 2 / abstract: version fidelity is reported as the diagonal Pass@1 (the paper's headline measure; Pass@3 is the second column)",
+      "quote": "Table 2: Version fidelity: Pass@1 and Pass@3 for each model on its target version",
+      "file": "/work/.salvo14/mig/convert-quantum-api-drift-2607.04072/evidence/arxiv-2607.04072.txt",
+      "sha256": "fee09317bd4f724b5df200d693899c6e0fd82e8c1b0ef5a6cd4630c7bd99aa7c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98617,9 +99535,18 @@
    "metric": "pass@1%",
    "headline": {
     "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://quesma.com/blog/baba-kimi-k3-opus-5/",
+      "captured": "2026-10-19",
+      "where": "Stage 0 table: rows are ordered by pass@1 (100, 100, ..., 96, 92, 88, ... 25), the first sorted column",
+      "quote": "Anthropic Claude Opus 5 | | | | | | | | | 100% | 100% | 7 | 23k | $17.15",
+      "file": "/work/.salvo14/mig/convert-quesma/evidence/q.txt",
+      "sha256": "d1eb6f8d7002044d713e23264644787449d261a1697cea45efd45b78072ac8cc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -99167,9 +100094,18 @@
    "metric": "found-of-23",
    "headline": {
     "metric": "found-of-23",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/andreimaxim/claude-maintain-rails-evals/tree/5214faba442b7627ee0097787e58cd461d95f4a4",
+      "captured": "2026-10-18",
+      "where": "README risk-report table: one score (findings of 23, median of five runs) per variant and model",
+      "quote": "| v20, Opus 5.5 high | 22 | 19 | 6 | 2 | $5.86 | 15.8 min |",
+      "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+      "sha256": "49ac97aee30ce766f1d891c77658baf3df4f2db551c13bcd85e8bb21bdd4c21e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -99272,9 +100208,18 @@
    "metric": "found-of-23",
    "headline": {
     "metric": "found-of-23",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/andreimaxim/claude-maintain-rails-evals/tree/5214faba442b7627ee0097787e58cd461d95f4a4",
+      "captured": "2026-10-18",
+      "where": "README results table of v12 and v16 on Rails: one score (mean findings of 23) per model and effort",
+      "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |",
+      "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+      "sha256": "49ac97aee30ce766f1d891c77658baf3df4f2db551c13bcd85e8bb21bdd4c21e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -99301,9 +100246,18 @@
    "metric": "found-of-23",
    "headline": {
     "metric": "found-of-23",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/andreimaxim/claude-maintain-rails-evals/tree/5214faba442b7627ee0097787e58cd461d95f4a4",
+      "captured": "2026-10-18",
+      "where": "README results table of v12 and v16 on Rails: one score (mean findings of 23) per model and effort",
+      "quote": "| Opus 5.5 low | 21.0 | 21.0 | $2.97 / $3.01 | 15.0 / 11.0 min | 10 of 10 |",
+      "file": "/work/.salvo14/mig/convert-github-claude-maintain-rails-evals/evidence/README-5214fab.md",
+      "sha256": "49ac97aee30ce766f1d891c77658baf3df4f2db551c13bcd85e8bb21bdd4c21e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -99534,9 +100488,18 @@
    "metric": "subjective-quality-of-10",
    "headline": {
     "metric": "subjective-quality-of-10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.reddit.com/r/ChatGPTCoding/comments/1x1jbry/i_tested_16_ai_modelreasoning_combinations_on_the/",
+      "captured": "2026-10-27",
+      "where": "the post gives allowance, time and one quality rating per model and mode; quality is the only score",
+      "quote": "|Claude Sonnet 5.5|Medium|approx. 1%|5 min|8.3/10|",
+      "file": "/work/.salvo14/mig/convert-reddit-AlexXx52/evidence/post_1x1jbry_selftext.txt",
+      "sha256": "eb9168742b0ad15911a56cae02e40b9a2f683b0c623eaa41a426dbdb811169d9"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -99617,9 +100580,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/api/datasets/crosbylegal/RedlineBench/leaderboard",
+      "captured": "2026-10-05",
+      "where": "the leaderboard list carries one value per entry (the turn-weighted weighted pass rate) and ranks by it",
+      "quote": "turn-weighted weighted pass rate (0-100)",
+      "file": "/work/.salvo14/mig/convert-hf-redlinebench/evidence/redlinebench_leaderboard.json",
+      "sha256": "790069eed43f35fdf486c8e1fe7a20c0fcd641185d26d650f7edbbf7a687ff86"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100198,9 +101170,18 @@
    "metric": "points/100",
    "headline": {
     "metric": "points/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100227,9 +101208,18 @@
    "metric": "correct-of-49",
    "headline": {
     "metric": "correct-of-49",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100256,9 +101246,18 @@
    "metric": "points/100",
    "headline": {
     "metric": "points/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100285,9 +101284,18 @@
    "metric": "points/100",
    "headline": {
     "metric": "points/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100314,9 +101322,18 @@
    "metric": "points/100",
    "headline": {
     "metric": "points/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100343,9 +101360,18 @@
    "metric": "points/100",
    "headline": {
     "metric": "points/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100372,9 +101398,18 @@
    "metric": "points/10",
    "headline": {
     "metric": "points/10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100401,9 +101436,18 @@
    "metric": "points/100",
    "headline": {
     "metric": "points/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/renkon40/n/ne55e64e425a8",
+      "captured": "2026-09-30",
+      "where": "results table: one score per model per task (points, correct of 49)",
+      "quote": "8つの仕事の点と費用を、表にまとめました。",
+      "file": "/work/.salvo14/mig/convert-note-renkon40/evidence/b_body.txt",
+      "sha256": "6b7015c6f4ef3bb09cc720c8563628866840303eb7179037e537e09a9a4b637b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -102352,9 +103396,18 @@
    "metric": "score/42",
    "headline": {
     "metric": "score/42",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.02436",
+      "captured": "2026-10-27",
+      "where": "Tables 5, 7 and S1 report one outcome per cell for the benchmark: the functional score (/42) (first-try rate and repair burden are other measures of the paper, not per-model scores held here)",
+      "quote": "Eight configurations, six repeated runs each.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2607.02436/evidence/arxiv-2607.02436.txt",
+      "sha256": "659ef88082544ac81bf549ba5d3b71dc0b222c6944da76d6d28f2689fd9dc9a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -102380,9 +103433,18 @@
    "metric": "score/42",
    "headline": {
     "metric": "score/42",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.02436",
+      "captured": "2026-10-27",
+      "where": "Tables 5, 7 and S1 report one outcome per cell for the benchmark: the functional score (/42) (first-try rate and repair burden are other measures of the paper, not per-model scores held here)",
+      "quote": "Eight configurations, six repeated runs each.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2607.02436/evidence/arxiv-2607.02436.txt",
+      "sha256": "659ef88082544ac81bf549ba5d3b71dc0b222c6944da76d6d28f2689fd9dc9a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -102438,9 +103500,18 @@
    "metric": "score/42",
    "headline": {
     "metric": "score/42",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.02436",
+      "captured": "2026-10-27",
+      "where": "Tables 5, 7 and S1 report one outcome per cell for the benchmark: the functional score (/42) (first-try rate and repair burden are other measures of the paper, not per-model scores held here)",
+      "quote": "Eight configurations, six repeated runs each.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2607.02436/evidence/arxiv-2607.02436.txt",
+      "sha256": "659ef88082544ac81bf549ba5d3b71dc0b222c6944da76d6d28f2689fd9dc9a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -102467,9 +103538,18 @@
    "metric": "score/42",
    "headline": {
     "metric": "score/42",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.02436",
+      "captured": "2026-10-27",
+      "where": "Tables 5, 7 and S1 report one outcome per cell for the benchmark: the functional score (/42) (first-try rate and repair burden are other measures of the paper, not per-model scores held here)",
+      "quote": "Eight configurations, six repeated runs each.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2607.02436/evidence/arxiv-2607.02436.txt",
+      "sha256": "659ef88082544ac81bf549ba5d3b71dc0b222c6944da76d6d28f2689fd9dc9a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103912,9 +104992,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/sane_mink364/n/na123fbece359",
+      "captured": "2026-10-27",
+      "where": "the article reports pass/fail only (合格回数：23回)",
+      "quote": "合格回数：23回",
+      "file": "/work/.salvo14/mig/convert-note-sane_mink364/evidence/na123fbece359.txt",
+      "sha256": "d6f59e36e5ec97a46b8d05631b132a2db97577d5e6d40f48b17c3510679a32a6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103941,9 +105030,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/sane_mink364/n/na123fbece359",
+      "captured": "2026-10-27",
+      "where": "the article reports pass/fail only (合格回数：23回)",
+      "quote": "合格回数：23回",
+      "file": "/work/.salvo14/mig/convert-note-sane_mink364/evidence/na123fbece359.txt",
+      "sha256": "d6f59e36e5ec97a46b8d05631b132a2db97577d5e6d40f48b17c3510679a32a6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103970,9 +105068,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/sane_mink364/n/na123fbece359",
+      "captured": "2026-10-27",
+      "where": "the article reports pass/fail only (合格回数：23回)",
+      "quote": "合格回数：23回",
+      "file": "/work/.salvo14/mig/convert-note-sane_mink364/evidence/na123fbece359.txt",
+      "sha256": "d6f59e36e5ec97a46b8d05631b132a2db97577d5e6d40f48b17c3510679a32a6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -104028,9 +105135,18 @@
    "metric": "solved-of-9",
    "headline": {
     "metric": "solved-of-9",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://note.com/sane_mink364/n/ndec1e85d49aa",
+      "captured": "2026-10-27",
+      "where": "experiment 1 reports the number of perfect trials per condition only",
+      "quote": "Haiku medium：9試行すべて完全正解",
+      "file": "/work/.salvo14/mig/convert-note-sane_mink364/evidence/ndec1e85d49aa.txt",
+      "sha256": "a70cbaa3f82961bd216e7c68baa05999545c873f7c9fb601926e3d903259d895"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -111745,9 +112861,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://stagehand.dev/evals",
+      "captured": "2026-10-15",
+      "where": "board header: the table is ranked by accuracy",
+      "quote": "15 runs, ranked by accuracy",
+      "file": "/work/.salvo14/mig/convert-stagehand.dev/evidence/stagehand-evals-15oct.txt",
+      "sha256": "baf36158866307d57764d7d998e68db2ed25a8e33a648d484996d59bb8b1b5a6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -114109,9 +115234,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://qiita.com/suwa_nobu/items/5749949156f8df6f728b",
+      "captured": "2026-10-05",
+      "where": "the article reports cost and API time per model; correctness is given only as counts in one sentence (pass of 3 runs): the one quality figure",
+      "quote": "10モデルは3回とも正解でしたが、Fable 5.1 が0/3、Sonnet 4.6 が2/3でした",
+      "file": "/work/.salvo14/mig/convert-qiita-suwanobu/evidence/qiita_suwa1.txt",
+      "sha256": "2874a583c877bd0a343b8bf3fabb718e492390ec24dceeeede00d5a3ddb0ea18"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -124603,9 +125737,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.10912v1",
+      "captured": "2026-10-19",
+      "where": "Table 2 (and Table 5): the paper reports one score (%) per model, the Overall column over the 60 tasks; Multimodal and Pure Text are its parts",
+      "quote": "Time (Minutes) and cost (USD) are per-task averages. Score is reported in %.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.10912/evidence/arxiv-2605.10912.txt",
+      "sha256": "bec929894bb3bfa152624c253f4298968a13fd1fd0d99c0173141b8962e066b4"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -133354,6 +134497,510 @@
    "legacy_groups": [],
    "label": "messy-docs-bench documents fully right (W-2 forms)",
    "note": "new setup (27 Oct fix-up): the README's headline metric; results/summary.json doc_exact of the document type"
+  },
+  "synthbench-plain-globalopinionqa": {
+   "family": "synthbench-plain-globalopinionqa",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, GlobalOpinionQA, plain prompt (raw)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GlobalOpinionQA, plain prompt (raw)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "synthbench-plain-gss": {
+   "family": "synthbench-plain-gss",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, GSS, plain prompt (raw)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GSS, plain prompt (raw)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "synthbench-plain-opinionsqa": {
+   "family": "synthbench-plain-opinionsqa",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, OpinionsQA, plain prompt (raw)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, OpinionsQA, plain prompt (raw)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "synthbench-plain-subpop": {
+   "family": "synthbench-plain-subpop",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, SubPOP, plain prompt (raw)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, SubPOP, plain prompt (raw)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "synthbench-althing-globalopinionqa": {
+   "family": "synthbench-althing-globalopinionqa",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, GlobalOpinionQA, althing prompt (persona product)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GlobalOpinionQA, althing prompt (persona product)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "synthbench-althing-gss": {
+   "family": "synthbench-althing-gss",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, GSS, althing prompt (persona product)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, GSS, althing prompt (persona product)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "synthbench-althing-opinionsqa": {
+   "family": "synthbench-althing-opinionsqa",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, OpinionsQA, althing prompt (persona product)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, OpinionsQA, althing prompt (persona product)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "synthbench-althing-subpop": {
+   "family": "synthbench-althing-subpop",
+   "benchmark": "SynthBench Parity Score (SPS) vs human survey distributions, SubPOP, althing prompt (persona product)",
+   "subset": null,
+   "harness": "OpenRouter-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sps-of-1",
+   "headline": {
+    "metric": "sps-of-1",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/DataViking-Tech/SynthBench",
+      "captured": "2026-10-18",
+      "where": "site/src/data/leaderboard.json (published leaderboard): the entries of each dataset carry a rank, and the ranks follow sps in decreasing order in every dataset (checked on the 4 datasets); first entry shown",
+      "quote": "\"rank\": 1,",
+      "file": "/work/.salvo14/mig/convert-github-synthbench/evidence/leaderboard.json",
+      "sha256": "9b3845760c8b10d167def097490947741c59a004e5e40b22b4fd2af18ad73ff2"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SynthBench Parity Score (SPS) vs human survey distributions, SubPOP, althing prompt (persona product)",
+   "note": "per-dataset setup of the Wave C2 conversion of github-synthbench: value = mean of the SPS of the run files of the configuration (13-14 Oct 2026)"
+  },
+  "arxiv-2610.14397-realitybench-doc": {
+   "family": "arxiv-2610.14397-realitybench-doc",
+   "benchmark": "RealityBench documentation (scorer-acceptable frames)",
+   "subset": null,
+   "harness": "API-single-call",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-1",
+   "headline": {
+    "metric": "score-of-1",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.14397v2",
+      "captured": "2026-10-14",
+      "where": "Table 5 column doc.: the documentation task reports one score per model (mean per-field score on scorer-acceptable frames, with a 95% interval)",
+      "quote": "Documentation scores are high when the answer is text in frame",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.14397/evidence/p2610.14397v2.txt",
+      "sha256": "cec02119d7240a0236c2505ae9c064e4b701db6c6332a82e7712acb769899c3e"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "RealityBench documentation (scorer-acceptable frames)",
+   "note": "Wave C2: the documentation task of the paper (Table 5 column doc.), a separate task from the acceptability task of arxiv-2610.14397-realitybench; the paper reports both side by side and designates no cross-task metric; cost of the whole set is held by the acceptability measures"
+  },
+  "endor-asl-secpass": {
+   "family": "endor-asl",
+   "benchmark": "Agent Security League, SecPass (functional and secure), memorization removed",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://www.endorlabs.com/research/ai-code-security-benchmark",
+      "captured": "2026-10-19",
+      "where": "league table sub-title: the board is sorted by security correctness (SecPass), not by FuncPass",
+      "quote": "Updated as new commercial agents and models ship. Sorted by security correctness.",
+      "file": "/work/.salvo14/mig/convert-endorlabs/evidence/lb2.txt",
+      "sha256": "9838ba194575bba22770a1cb33dc97795ab536376d0025009dabcd5bb4ab763a"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Agent Security League, SecPass",
+   "note": "the board's designated (sorting) metric: the share of the 200 tasks (179-task denominator after exclusions) whose patch passes the functional and the hidden security tests, confirmed cheating removed"
+  },
+  "cte-effvm-answers-revealed": {
+   "family": "cte-effvm-answers-revealed",
+   "benchmark": "CTE-Bench core-v1 effect-step VM (Eff. VM), Answers revealed",
+   "subset": null,
+   "harness": "own-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract: 'The main score is effect-step value match (VM)'",
+      "quote": "The main score is effect-step value match (VM): exact response equality on the 2,476 future calls whose response the intervention changes.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "CTE-Bench Eff. VM, Answers revealed",
+   "note": "the paper's designated main score (effect-step value match, Eff. VM column), under the protocol named; the held setup of the same name holds the all-call VM column, which is not the designated metric (its headline stays pending: its measures go out as not the headline). Metric term score% is the generic percent term: the vocabulary has no effect-step VM term."
+  },
+  "cte-effvm-no-feedback": {
+   "family": "cte-effvm-no-feedback",
+   "benchmark": "CTE-Bench core-v1 effect-step VM (Eff. VM), No feedback",
+   "subset": null,
+   "harness": "own-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract: 'The main score is effect-step value match (VM)'",
+      "quote": "The main score is effect-step value match (VM): exact response equality on the 2,476 future calls whose response the intervention changes.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "CTE-Bench Eff. VM, No feedback",
+   "note": "the paper's designated main score (effect-step value match, Eff. VM column), under the protocol named; the held setup of the same name holds the all-call VM column, which is not the designated metric (its headline stays pending: its measures go out as not the headline). Metric term score% is the generic percent term: the vocabulary has no effect-step VM term."
+  },
+  "cte-effvm-free-rollout": {
+   "family": "cte-effvm-free-rollout",
+   "benchmark": "CTE-Bench core-v1 effect-step VM (Eff. VM), Free rollout",
+   "subset": null,
+   "harness": "own-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract: 'The main score is effect-step value match (VM)'",
+      "quote": "The main score is effect-step value match (VM): exact response equality on the 2,476 future calls whose response the intervention changes.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "CTE-Bench Eff. VM, Free rollout",
+   "note": "the paper's designated main score (effect-step value match, Eff. VM column), under the protocol named; the held setup of the same name holds the all-call VM column, which is not the designated metric (its headline stays pending: its measures go out as not the headline). Metric term score% is the generic percent term: the vocabulary has no effect-step VM term."
+  },
+  "cte-effvm-reason24": {
+   "family": "cte-effvm-reason24",
+   "benchmark": "CTE-Bench core-v1 effect-step VM (Eff. VM), reasoning-mode probe, 24 delayed-effect scenarios, answers revealed",
+   "subset": null,
+   "harness": "own-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract: 'The main score is effect-step value match (VM)'",
+      "quote": "The main score is effect-step value match (VM): exact response equality on the 2,476 future calls whose response the intervention changes.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "CTE-Bench Eff. VM, reasoning-mode probe, 24 delayed-effect scenarios, answers revealed",
+   "note": "the paper's designated main score (effect-step value match, Eff. VM column), under the protocol named; the held setup of the same name holds the all-call VM column, which is not the designated metric (its headline stays pending: its measures go out as not the headline). Metric term score% is the generic percent term: the vocabulary has no effect-step VM term."
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
