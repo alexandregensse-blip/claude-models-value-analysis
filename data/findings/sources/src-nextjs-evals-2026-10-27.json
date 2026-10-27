@@ -1,0 +1,4165 @@
+{
+ "id": "src-nextjs-evals-2026-10-27",
+ "publisher": "nextjs-evals",
+ "urls": [
+  "https://nextjs.org/evals"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://nextjs.org/evals",
+   "captured": "2026-10-27T09:20:00Z",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/evals.html",
+   "note": "page fetched live on 27 Oct 2026 ('Last run date: October 16, 2026')"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-nextjs-evals/evidence/evals.html": "2e137dfa75c182d5cf8918db0bb5426fe51c92d9d137e14b11a86969f19137a8",
+  "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json": "67f0b05dc8fa9c27232fdd75f7cf4ad709411564c3d2f50e669b3a81b3382630"
+ },
+ "harvested_at": "2026-10-27T09:20:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "from": "/work/.salvo14/mig/convert-nextjs-evals/evidence/evals.html",
+   "tool": "the JSON objects embedded in the page's script payload (backslash-escaped quotes un-escaped, brace matching), taken verbatim in page order; the page's table shows the same models, agents, durations, costs and success rates"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/evals.html",
+   "where": "page table, column 'Avg List Cost' (first row: $0.234 for Claude Opus 5.5 (high))",
+   "quote": "$0.234"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "cost-basis",
+   "value": "Avg List Cost",
+   "term": "list-estimate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/evals.html",
+   "where": "page table column header",
+   "quote": "Avg List Cost"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "headline-metric",
+   "value": "Success Rate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/evals.html",
+   "where": "page table: 'Success Rate' (the 'Success Rate with AGENTS.md' column is the same metric under the docs condition); rows are ordered by Success Rate",
+   "quote": "Success Rate"
+  },
+  {
+   "id": "F4",
+   "about": "Claude Fable 5 (high) | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "77",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F5",
+   "about": "Claude Fable 5 (high) | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].modelName = 'Claude Fable 5 (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F6",
+   "about": "Claude Fable 5 (high) | Claude Code | without AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].modelName = 'Claude Fable 5 (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F7",
+   "about": "Claude Fable 5 (high) | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F8",
+   "about": "Claude Fable 5 (high) | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-08",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].timestamp"
+  },
+  {
+   "id": "F9",
+   "about": "Claude Fable 5 (high) | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "1.78302784375",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Claude Fable 5 (high) | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "77",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F11",
+   "about": "Claude Fable 5 (high) | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].modelName = 'Claude Fable 5 (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F12",
+   "about": "Claude Fable 5 (high) | Claude Code | with AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].modelName = 'Claude Fable 5 (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F13",
+   "about": "Claude Fable 5 (high) | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F14",
+   "about": "Claude Fable 5 (high) | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-08",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[0].timestamp"
+  },
+  {
+   "id": "F15",
+   "about": "Claude Fable 5.1 (high) | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F16",
+   "about": "Claude Fable 5.1 (high) | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].modelName = 'Claude Fable 5.1 (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F17",
+   "about": "Claude Fable 5.1 (high) | Claude Code | without AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].modelName = 'Claude Fable 5.1 (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F18",
+   "about": "Claude Fable 5.1 (high) | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F19",
+   "about": "Claude Fable 5.1 (high) | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].timestamp"
+  },
+  {
+   "id": "F20",
+   "about": "Claude Fable 5.1 (high) | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.7215370188172042",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F21",
+   "about": "Claude Fable 5.1 (high) | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F22",
+   "about": "Claude Fable 5.1 (high) | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].modelName = 'Claude Fable 5.1 (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F23",
+   "about": "Claude Fable 5.1 (high) | Claude Code | with AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].modelName = 'Claude Fable 5.1 (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F24",
+   "about": "Claude Fable 5.1 (high) | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F25",
+   "about": "Claude Fable 5.1 (high) | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[1].timestamp"
+  },
+  {
+   "id": "F26",
+   "about": "Claude Opus 4.6 | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "58",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F27",
+   "about": "Claude Opus 4.6 | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].modelName = 'Claude Opus 4.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F28",
+   "about": "Claude Opus 4.6 | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F29",
+   "about": "Claude Opus 4.6 | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].timestamp"
+  },
+  {
+   "id": "F30",
+   "about": "Claude Opus 4.6 | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.2041845901268116",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F31",
+   "about": "Claude Opus 4.6 | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F32",
+   "about": "Claude Opus 4.6 | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].modelName = 'Claude Opus 4.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F33",
+   "about": "Claude Opus 4.6 | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F34",
+   "about": "Claude Opus 4.6 | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[2].timestamp"
+  },
+  {
+   "id": "F35",
+   "about": "Claude Opus 4.7 (max) | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "58",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F36",
+   "about": "Claude Opus 4.7 (max) | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].modelName = 'Claude Opus 4.7 (max)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F37",
+   "about": "Claude Opus 4.7 (max) | Claude Code | without AGENTS.md",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].modelName = 'Claude Opus 4.7 (max)' (the parenthesised level)"
+  },
+  {
+   "id": "F38",
+   "about": "Claude Opus 4.7 (max) | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F39",
+   "about": "Claude Opus 4.7 (max) | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].timestamp"
+  },
+  {
+   "id": "F40",
+   "about": "Claude Opus 4.7 (max) | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.44537971150362304",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F41",
+   "about": "Claude Opus 4.7 (max) | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F42",
+   "about": "Claude Opus 4.7 (max) | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].modelName = 'Claude Opus 4.7 (max)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F43",
+   "about": "Claude Opus 4.7 (max) | Claude Code | with AGENTS.md",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].modelName = 'Claude Opus 4.7 (max)' (the parenthesised level)"
+  },
+  {
+   "id": "F44",
+   "about": "Claude Opus 4.7 (max) | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F45",
+   "about": "Claude Opus 4.7 (max) | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[3].timestamp"
+  },
+  {
+   "id": "F46",
+   "about": "Claude Opus 4.8 | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "68",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F47",
+   "about": "Claude Opus 4.8 | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].modelName = 'Claude Opus 4.8' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F48",
+   "about": "Claude Opus 4.8 | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F49",
+   "about": "Claude Opus 4.8 | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-05-28",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].timestamp"
+  },
+  {
+   "id": "F50",
+   "about": "Claude Opus 4.8 | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.34813750860507253",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F51",
+   "about": "Claude Opus 4.8 | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F52",
+   "about": "Claude Opus 4.8 | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].modelName = 'Claude Opus 4.8' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F53",
+   "about": "Claude Opus 4.8 | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F54",
+   "about": "Claude Opus 4.8 | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-05-28",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[4].timestamp"
+  },
+  {
+   "id": "F55",
+   "about": "Claude Opus 5 | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "94",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F56",
+   "about": "Claude Opus 5 | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].modelName = 'Claude Opus 5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F57",
+   "about": "Claude Opus 5 | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F58",
+   "about": "Claude Opus 5 | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].timestamp"
+  },
+  {
+   "id": "F59",
+   "about": "Claude Opus 5 | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "1.9599052419354832",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F60",
+   "about": "Claude Opus 5 | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F61",
+   "about": "Claude Opus 5 | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].modelName = 'Claude Opus 5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F62",
+   "about": "Claude Opus 5 | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F63",
+   "about": "Claude Opus 5 | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[5].timestamp"
+  },
+  {
+   "id": "F64",
+   "about": "Claude Opus 5.5 (high) | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F65",
+   "about": "Claude Opus 5.5 (high) | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].modelName = 'Claude Opus 5.5 (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F66",
+   "about": "Claude Opus 5.5 (high) | Claude Code | without AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].modelName = 'Claude Opus 5.5 (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F67",
+   "about": "Claude Opus 5.5 (high) | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F68",
+   "about": "Claude Opus 5.5 (high) | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].timestamp"
+  },
+  {
+   "id": "F69",
+   "about": "Claude Opus 5.5 (high) | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.23391567258064516",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F70",
+   "about": "Claude Opus 5.5 (high) | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F71",
+   "about": "Claude Opus 5.5 (high) | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].modelName = 'Claude Opus 5.5 (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F72",
+   "about": "Claude Opus 5.5 (high) | Claude Code | with AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].modelName = 'Claude Opus 5.5 (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F73",
+   "about": "Claude Opus 5.5 (high) | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F74",
+   "about": "Claude Opus 5.5 (high) | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[6].timestamp"
+  },
+  {
+   "id": "F75",
+   "about": "Claude Sonnet 4.5 | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "39",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F76",
+   "about": "Claude Sonnet 4.5 | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].modelName = 'Claude Sonnet 4.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F77",
+   "about": "Claude Sonnet 4.5 | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F78",
+   "about": "Claude Sonnet 4.5 | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].timestamp"
+  },
+  {
+   "id": "F79",
+   "about": "Claude Sonnet 4.5 | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.1301018894021739",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F80",
+   "about": "Claude Sonnet 4.5 | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F81",
+   "about": "Claude Sonnet 4.5 | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].modelName = 'Claude Sonnet 4.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F82",
+   "about": "Claude Sonnet 4.5 | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F83",
+   "about": "Claude Sonnet 4.5 | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[7].timestamp"
+  },
+  {
+   "id": "F84",
+   "about": "Claude Sonnet 4.6 | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "45",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F85",
+   "about": "Claude Sonnet 4.6 | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].modelName = 'Claude Sonnet 4.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F86",
+   "about": "Claude Sonnet 4.6 | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F87",
+   "about": "Claude Sonnet 4.6 | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].timestamp"
+  },
+  {
+   "id": "F88",
+   "about": "Claude Sonnet 4.6 | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.1397931179347826",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F89",
+   "about": "Claude Sonnet 4.6 | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F90",
+   "about": "Claude Sonnet 4.6 | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].modelName = 'Claude Sonnet 4.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F91",
+   "about": "Claude Sonnet 4.6 | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F92",
+   "about": "Claude Sonnet 4.6 | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[8].timestamp"
+  },
+  {
+   "id": "F93",
+   "about": "Claude Sonnet 5 | Claude Code | without AGENTS.md",
+   "says": "score",
+   "value": "81",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F94",
+   "about": "Claude Sonnet 5 | Claude Code | without AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].modelName = 'Claude Sonnet 5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F95",
+   "about": "Claude Sonnet 5 | Claude Code | without AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F96",
+   "about": "Claude Sonnet 5 | Claude Code | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].timestamp"
+  },
+  {
+   "id": "F97",
+   "about": "Claude Sonnet 5 | Claude Code | without AGENTS.md",
+   "says": "cost",
+   "value": "0.3858187790322581",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F98",
+   "about": "Claude Sonnet 5 | Claude Code | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F99",
+   "about": "Claude Sonnet 5 | Claude Code | with AGENTS.md",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].modelName = 'Claude Sonnet 5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F100",
+   "about": "Claude Sonnet 5 | Claude Code | with AGENTS.md",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].agentHarness",
+   "term": "claude-code"
+  },
+  {
+   "id": "F101",
+   "about": "Claude Sonnet 5 | Claude Code | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[9].timestamp"
+  },
+  {
+   "id": "F102",
+   "about": "Cursor Composer 2.0 | Cursor | without AGENTS.md",
+   "says": "score",
+   "value": "58",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F103",
+   "about": "Cursor Composer 2.0 | Cursor | without AGENTS.md",
+   "says": "model-name",
+   "value": "Cursor Composer 2.0",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].modelName = 'Cursor Composer 2.0' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F104",
+   "about": "Cursor Composer 2.0 | Cursor | without AGENTS.md",
+   "says": "harness",
+   "value": "Cursor",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].agentHarness",
+   "term": "cursor-cli"
+  },
+  {
+   "id": "F105",
+   "about": "Cursor Composer 2.0 | Cursor | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].timestamp"
+  },
+  {
+   "id": "F106",
+   "about": "Cursor Composer 2.0 | Cursor | without AGENTS.md",
+   "says": "cost",
+   "value": "0.0308417429347826",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F107",
+   "about": "Cursor Composer 2.0 | Cursor | with AGENTS.md",
+   "says": "score",
+   "value": "71",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F108",
+   "about": "Cursor Composer 2.0 | Cursor | with AGENTS.md",
+   "says": "model-name",
+   "value": "Cursor Composer 2.0",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].modelName = 'Cursor Composer 2.0' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F109",
+   "about": "Cursor Composer 2.0 | Cursor | with AGENTS.md",
+   "says": "harness",
+   "value": "Cursor",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].agentHarness",
+   "term": "cursor-cli"
+  },
+  {
+   "id": "F110",
+   "about": "Cursor Composer 2.0 | Cursor | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[10].timestamp"
+  },
+  {
+   "id": "F111",
+   "about": "Cursor Composer 2.5 | Cursor | without AGENTS.md",
+   "says": "score",
+   "value": "81",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F112",
+   "about": "Cursor Composer 2.5 | Cursor | without AGENTS.md",
+   "says": "model-name",
+   "value": "Cursor Composer 2.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].modelName = 'Cursor Composer 2.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F113",
+   "about": "Cursor Composer 2.5 | Cursor | without AGENTS.md",
+   "says": "harness",
+   "value": "Cursor",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].agentHarness",
+   "term": "cursor-cli"
+  },
+  {
+   "id": "F114",
+   "about": "Cursor Composer 2.5 | Cursor | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-10",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].timestamp"
+  },
+  {
+   "id": "F115",
+   "about": "Cursor Composer 2.5 | Cursor | without AGENTS.md",
+   "says": "cost",
+   "value": "0.06174026088709678",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F116",
+   "about": "Cursor Composer 2.5 | Cursor | with AGENTS.md",
+   "says": "score",
+   "value": "94",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F117",
+   "about": "Cursor Composer 2.5 | Cursor | with AGENTS.md",
+   "says": "model-name",
+   "value": "Cursor Composer 2.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].modelName = 'Cursor Composer 2.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F118",
+   "about": "Cursor Composer 2.5 | Cursor | with AGENTS.md",
+   "says": "harness",
+   "value": "Cursor",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].agentHarness",
+   "term": "cursor-cli"
+  },
+  {
+   "id": "F119",
+   "about": "Cursor Composer 2.5 | Cursor | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-10",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[11].timestamp"
+  },
+  {
+   "id": "F120",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "score",
+   "value": "52",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F121",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 3.0 Pro Preview",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].modelName = 'Gemini 3.0 Pro Preview' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F122",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "harness",
+   "value": "Gemini CLI",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].agentHarness",
+   "term": "gemini-cli"
+  },
+  {
+   "id": "F123",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].timestamp"
+  },
+  {
+   "id": "F124",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "cost",
+   "value": "0.16534729927536232",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F125",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "score",
+   "value": "65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F126",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 3.0 Pro Preview",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].modelName = 'Gemini 3.0 Pro Preview' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F127",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "harness",
+   "value": "Gemini CLI",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].agentHarness",
+   "term": "gemini-cli"
+  },
+  {
+   "id": "F128",
+   "about": "Gemini 3.0 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[12].timestamp"
+  },
+  {
+   "id": "F129",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "score",
+   "value": "58",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F130",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro Preview",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].modelName = 'Gemini 3.1 Pro Preview' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F131",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "harness",
+   "value": "Gemini CLI",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].agentHarness",
+   "term": "gemini-cli"
+  },
+  {
+   "id": "F132",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].timestamp"
+  },
+  {
+   "id": "F133",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | without AGENTS.md",
+   "says": "cost",
+   "value": "0.10952818369565215",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F134",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "score",
+   "value": "71",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F135",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro Preview",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].modelName = 'Gemini 3.1 Pro Preview' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F136",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "harness",
+   "value": "Gemini CLI",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].agentHarness",
+   "term": "gemini-cli"
+  },
+  {
+   "id": "F137",
+   "about": "Gemini 3.1 Pro Preview | Gemini CLI | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[13].timestamp"
+  },
+  {
+   "id": "F138",
+   "about": "Gemini 3.8 Flash | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F139",
+   "about": "Gemini 3.8 Flash | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].modelName = 'Gemini 3.8 Flash' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F140",
+   "about": "Gemini 3.8 Flash | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F141",
+   "about": "Gemini 3.8 Flash | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].timestamp"
+  },
+  {
+   "id": "F142",
+   "about": "Gemini 3.8 Flash | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.6049656808467743",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F143",
+   "about": "Gemini 3.8 Flash | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F144",
+   "about": "Gemini 3.8 Flash | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].modelName = 'Gemini 3.8 Flash' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F145",
+   "about": "Gemini 3.8 Flash | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F146",
+   "about": "Gemini 3.8 Flash | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[14].timestamp"
+  },
+  {
+   "id": "F147",
+   "about": "Gemini 4 Argon | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F148",
+   "about": "Gemini 4 Argon | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].modelName = 'Gemini 4 Argon' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F149",
+   "about": "Gemini 4 Argon | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F150",
+   "about": "Gemini 4 Argon | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-10-13",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].timestamp"
+  },
+  {
+   "id": "F151",
+   "about": "Gemini 4 Argon | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.435034480376344",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F152",
+   "about": "Gemini 4 Argon | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F153",
+   "about": "Gemini 4 Argon | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].modelName = 'Gemini 4 Argon' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F154",
+   "about": "Gemini 4 Argon | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F155",
+   "about": "Gemini 4 Argon | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-10-13",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[15].timestamp"
+  },
+  {
+   "id": "F156",
+   "about": "GLM 5.1 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "58",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F157",
+   "about": "GLM 5.1 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].modelName = 'GLM 5.1' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F158",
+   "about": "GLM 5.1 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F159",
+   "about": "GLM 5.1 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].timestamp"
+  },
+  {
+   "id": "F160",
+   "about": "GLM 5.1 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.07744346347826085",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F161",
+   "about": "GLM 5.1 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F162",
+   "about": "GLM 5.1 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].modelName = 'GLM 5.1' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F163",
+   "about": "GLM 5.1 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F164",
+   "about": "GLM 5.1 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[16].timestamp"
+  },
+  {
+   "id": "F165",
+   "about": "GLM 5.2 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "81",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F166",
+   "about": "GLM 5.2 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].modelName = 'GLM 5.2' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F167",
+   "about": "GLM 5.2 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F168",
+   "about": "GLM 5.2 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].timestamp"
+  },
+  {
+   "id": "F169",
+   "about": "GLM 5.2 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.15155040413978493",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F170",
+   "about": "GLM 5.2 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F171",
+   "about": "GLM 5.2 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].modelName = 'GLM 5.2' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F172",
+   "about": "GLM 5.2 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F173",
+   "about": "GLM 5.2 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[17].timestamp"
+  },
+  {
+   "id": "F174",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "45",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F175",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.2 Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].modelName = 'GPT 5.2 Codex (xhigh)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F176",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].modelName = 'GPT 5.2 Codex (xhigh)' (the parenthesised level)"
+  },
+  {
+   "id": "F177",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F178",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].timestamp"
+  },
+  {
+   "id": "F179",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "0.15025527644927536",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F180",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "61",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F181",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.2 Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].modelName = 'GPT 5.2 Codex (xhigh)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F182",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].modelName = 'GPT 5.2 Codex (xhigh)' (the parenthesised level)"
+  },
+  {
+   "id": "F183",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F184",
+   "about": "GPT 5.2 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[18].timestamp"
+  },
+  {
+   "id": "F185",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "68",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F186",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.3 Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].modelName = 'GPT 5.3 Codex (xhigh)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F187",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].modelName = 'GPT 5.3 Codex (xhigh)' (the parenthesised level)"
+  },
+  {
+   "id": "F188",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F189",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].timestamp"
+  },
+  {
+   "id": "F190",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "0.27774447996794865",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F191",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F192",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.3 Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].modelName = 'GPT 5.3 Codex (xhigh)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F193",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].modelName = 'GPT 5.3 Codex (xhigh)' (the parenthesised level)"
+  },
+  {
+   "id": "F194",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F195",
+   "about": "GPT 5.3 Codex (xhigh) | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[19].timestamp"
+  },
+  {
+   "id": "F196",
+   "about": "GPT 5.4 (xhigh) | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F197",
+   "about": "GPT 5.4 (xhigh) | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].modelName = 'GPT 5.4 (xhigh)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F198",
+   "about": "GPT 5.4 (xhigh) | Codex | without AGENTS.md",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].modelName = 'GPT 5.4 (xhigh)' (the parenthesised level)"
+  },
+  {
+   "id": "F199",
+   "about": "GPT 5.4 (xhigh) | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F200",
+   "about": "GPT 5.4 (xhigh) | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-07-17",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].timestamp"
+  },
+  {
+   "id": "F201",
+   "about": "GPT 5.4 (xhigh) | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "0.23759627380952383",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F202",
+   "about": "GPT 5.4 (xhigh) | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "68",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F203",
+   "about": "GPT 5.4 (xhigh) | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].modelName = 'GPT 5.4 (xhigh)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F204",
+   "about": "GPT 5.4 (xhigh) | Codex | with AGENTS.md",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].modelName = 'GPT 5.4 (xhigh)' (the parenthesised level)"
+  },
+  {
+   "id": "F205",
+   "about": "GPT 5.4 (xhigh) | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F206",
+   "about": "GPT 5.4 (xhigh) | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-07-17",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[20].timestamp"
+  },
+  {
+   "id": "F207",
+   "about": "GPT 5.5 Pro | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F208",
+   "about": "GPT 5.5 Pro | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].modelName = 'GPT 5.5 Pro' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F209",
+   "about": "GPT 5.5 Pro | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F210",
+   "about": "GPT 5.5 Pro | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-26",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].timestamp"
+  },
+  {
+   "id": "F211",
+   "about": "GPT 5.5 Pro | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "18.20529456521739",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F212",
+   "about": "GPT 5.5 Pro | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F213",
+   "about": "GPT 5.5 Pro | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].modelName = 'GPT 5.5 Pro' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F214",
+   "about": "GPT 5.5 Pro | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F215",
+   "about": "GPT 5.5 Pro | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-26",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[21].timestamp"
+  },
+  {
+   "id": "F216",
+   "about": "GPT 5.6 Sol (ultra) | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "77",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F217",
+   "about": "GPT 5.6 Sol (ultra) | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].modelName = 'GPT 5.6 Sol (ultra)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F218",
+   "about": "GPT 5.6 Sol (ultra) | Codex | without AGENTS.md",
+   "says": "effort-label",
+   "value": "ultra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].modelName = 'GPT 5.6 Sol (ultra)' (the parenthesised level)"
+  },
+  {
+   "id": "F219",
+   "about": "GPT 5.6 Sol (ultra) | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F220",
+   "about": "GPT 5.6 Sol (ultra) | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-08",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].timestamp"
+  },
+  {
+   "id": "F221",
+   "about": "GPT 5.6 Sol (ultra) | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "0.73967178525641",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F222",
+   "about": "GPT 5.6 Sol (ultra) | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "77",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F223",
+   "about": "GPT 5.6 Sol (ultra) | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].modelName = 'GPT 5.6 Sol (ultra)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F224",
+   "about": "GPT 5.6 Sol (ultra) | Codex | with AGENTS.md",
+   "says": "effort-label",
+   "value": "ultra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].modelName = 'GPT 5.6 Sol (ultra)' (the parenthesised level)"
+  },
+  {
+   "id": "F225",
+   "about": "GPT 5.6 Sol (ultra) | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F226",
+   "about": "GPT 5.6 Sol (ultra) | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-08",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[22].timestamp"
+  },
+  {
+   "id": "F227",
+   "about": "GPT 6 Astra (high) | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F228",
+   "about": "GPT 6 Astra (high) | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].modelName = 'GPT 6 Astra (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F229",
+   "about": "GPT 6 Astra (high) | Codex | without AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].modelName = 'GPT 6 Astra (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F230",
+   "about": "GPT 6 Astra (high) | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F231",
+   "about": "GPT 6 Astra (high) | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].timestamp"
+  },
+  {
+   "id": "F232",
+   "about": "GPT 6 Astra (high) | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "0.9691917419354837",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F233",
+   "about": "GPT 6 Astra (high) | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F234",
+   "about": "GPT 6 Astra (high) | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].modelName = 'GPT 6 Astra (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F235",
+   "about": "GPT 6 Astra (high) | Codex | with AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].modelName = 'GPT 6 Astra (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F236",
+   "about": "GPT 6 Astra (high) | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F237",
+   "about": "GPT 6 Astra (high) | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[23].timestamp"
+  },
+  {
+   "id": "F238",
+   "about": "GPT 6 Luna (high) | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "77",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F239",
+   "about": "GPT 6 Luna (high) | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].modelName = 'GPT 6 Luna (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F240",
+   "about": "GPT 6 Luna (high) | Codex | without AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].modelName = 'GPT 6 Luna (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F241",
+   "about": "GPT 6 Luna (high) | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F242",
+   "about": "GPT 6 Luna (high) | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].timestamp"
+  },
+  {
+   "id": "F243",
+   "about": "GPT 6 Luna (high) | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "0.01186910495295699",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F244",
+   "about": "GPT 6 Luna (high) | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "87",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F245",
+   "about": "GPT 6 Luna (high) | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 6 Luna",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].modelName = 'GPT 6 Luna (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F246",
+   "about": "GPT 6 Luna (high) | Codex | with AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].modelName = 'GPT 6 Luna (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F247",
+   "about": "GPT 6 Luna (high) | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F248",
+   "about": "GPT 6 Luna (high) | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[24].timestamp"
+  },
+  {
+   "id": "F249",
+   "about": "GPT 6 Sol (high) | Codex | without AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F250",
+   "about": "GPT 6 Sol (high) | Codex | without AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].modelName = 'GPT 6 Sol (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F251",
+   "about": "GPT 6 Sol (high) | Codex | without AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].modelName = 'GPT 6 Sol (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F252",
+   "about": "GPT 6 Sol (high) | Codex | without AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F253",
+   "about": "GPT 6 Sol (high) | Codex | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].timestamp"
+  },
+  {
+   "id": "F254",
+   "about": "GPT 6 Sol (high) | Codex | without AGENTS.md",
+   "says": "cost",
+   "value": "0.2571716962365591",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F255",
+   "about": "GPT 6 Sol (high) | Codex | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F256",
+   "about": "GPT 6 Sol (high) | Codex | with AGENTS.md",
+   "says": "model-name",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].modelName = 'GPT 6 Sol (high)' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F257",
+   "about": "GPT 6 Sol (high) | Codex | with AGENTS.md",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].modelName = 'GPT 6 Sol (high)' (the parenthesised level)"
+  },
+  {
+   "id": "F258",
+   "about": "GPT 6 Sol (high) | Codex | with AGENTS.md",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].agentHarness",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F259",
+   "about": "GPT 6 Sol (high) | Codex | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[25].timestamp"
+  },
+  {
+   "id": "F260",
+   "about": "Grok 4.5 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "65",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F261",
+   "about": "Grok 4.5 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].modelName = 'Grok 4.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F262",
+   "about": "Grok 4.5 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F263",
+   "about": "Grok 4.5 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-07-08",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].timestamp"
+  },
+  {
+   "id": "F264",
+   "about": "Grok 4.5 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.07334867500000002",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F265",
+   "about": "Grok 4.5 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F266",
+   "about": "Grok 4.5 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].modelName = 'Grok 4.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F267",
+   "about": "Grok 4.5 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F268",
+   "about": "Grok 4.5 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-07-08",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[26].timestamp"
+  },
+  {
+   "id": "F269",
+   "about": "Grok 4.6 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "71",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F270",
+   "about": "Grok 4.6 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].modelName = 'Grok 4.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F271",
+   "about": "Grok 4.6 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F272",
+   "about": "Grok 4.6 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-08-13",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].timestamp"
+  },
+  {
+   "id": "F273",
+   "about": "Grok 4.6 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.16022740625",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F274",
+   "about": "Grok 4.6 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "71",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F275",
+   "about": "Grok 4.6 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].modelName = 'Grok 4.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F276",
+   "about": "Grok 4.6 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F277",
+   "about": "Grok 4.6 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-08-13",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[27].timestamp"
+  },
+  {
+   "id": "F278",
+   "about": "Grok 4.7 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "94",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F279",
+   "about": "Grok 4.7 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].modelName = 'Grok 4.7' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F280",
+   "about": "Grok 4.7 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F281",
+   "about": "Grok 4.7 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-21",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].timestamp"
+  },
+  {
+   "id": "F282",
+   "about": "Grok 4.7 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.18222428225806453",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F283",
+   "about": "Grok 4.7 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "94",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F284",
+   "about": "Grok 4.7 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].modelName = 'Grok 4.7' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F285",
+   "about": "Grok 4.7 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F286",
+   "about": "Grok 4.7 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-21",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[28].timestamp"
+  },
+  {
+   "id": "F287",
+   "about": "Kimi K2.5 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F288",
+   "about": "Kimi K2.5 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].modelName = 'Kimi K2.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F289",
+   "about": "Kimi K2.5 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F290",
+   "about": "Kimi K2.5 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].timestamp"
+  },
+  {
+   "id": "F291",
+   "about": "Kimi K2.5 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.01785406793478261",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F292",
+   "about": "Kimi K2.5 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "45",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F293",
+   "about": "Kimi K2.5 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].modelName = 'Kimi K2.5' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F294",
+   "about": "Kimi K2.5 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F295",
+   "about": "Kimi K2.5 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[29].timestamp"
+  },
+  {
+   "id": "F296",
+   "about": "Kimi K2.6 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "52",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F297",
+   "about": "Kimi K2.6 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].modelName = 'Kimi K2.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F298",
+   "about": "Kimi K2.6 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F299",
+   "about": "Kimi K2.6 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-06-17",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].timestamp"
+  },
+  {
+   "id": "F300",
+   "about": "Kimi K2.6 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.05702877067028986",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F301",
+   "about": "Kimi K2.6 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F302",
+   "about": "Kimi K2.6 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].modelName = 'Kimi K2.6' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F303",
+   "about": "Kimi K2.6 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F304",
+   "about": "Kimi K2.6 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-06-17",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[30].timestamp"
+  },
+  {
+   "id": "F305",
+   "about": "Kimi K2.7 Code | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "74",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F306",
+   "about": "Kimi K2.7 Code | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].modelName = 'Kimi K2.7 Code' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F307",
+   "about": "Kimi K2.7 Code | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F308",
+   "about": "Kimi K2.7 Code | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].timestamp"
+  },
+  {
+   "id": "F309",
+   "about": "Kimi K2.7 Code | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.13891133760752689",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F310",
+   "about": "Kimi K2.7 Code | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F311",
+   "about": "Kimi K2.7 Code | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].modelName = 'Kimi K2.7 Code' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F312",
+   "about": "Kimi K2.7 Code | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F313",
+   "about": "Kimi K2.7 Code | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[31].timestamp"
+  },
+  {
+   "id": "F314",
+   "about": "Kimi K3 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "84",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F315",
+   "about": "Kimi K3 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].modelName = 'Kimi K3' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F316",
+   "about": "Kimi K3 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F317",
+   "about": "Kimi K3 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].timestamp"
+  },
+  {
+   "id": "F318",
+   "about": "Kimi K3 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.28078726249999997",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F319",
+   "about": "Kimi K3 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F320",
+   "about": "Kimi K3 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].modelName = 'Kimi K3' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F321",
+   "about": "Kimi K3 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F322",
+   "about": "Kimi K3 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[32].timestamp"
+  },
+  {
+   "id": "F323",
+   "about": "MiniMax M2.7 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "39",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F324",
+   "about": "MiniMax M2.7 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "MiniMax M2.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].modelName = 'MiniMax M2.7' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F325",
+   "about": "MiniMax M2.7 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F326",
+   "about": "MiniMax M2.7 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].timestamp"
+  },
+  {
+   "id": "F327",
+   "about": "MiniMax M2.7 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.025899485706521737",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F328",
+   "about": "MiniMax M2.7 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "48",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F329",
+   "about": "MiniMax M2.7 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "MiniMax M2.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].modelName = 'MiniMax M2.7' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F330",
+   "about": "MiniMax M2.7 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F331",
+   "about": "MiniMax M2.7 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-04-06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[33].timestamp"
+  },
+  {
+   "id": "F332",
+   "about": "MiniMax M3 | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "81",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F333",
+   "about": "MiniMax M3 | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "MiniMax M3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].modelName = 'MiniMax M3' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F334",
+   "about": "MiniMax M3 | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F335",
+   "about": "MiniMax M3 | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].timestamp"
+  },
+  {
+   "id": "F336",
+   "about": "MiniMax M3 | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.05283992516129031",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F337",
+   "about": "MiniMax M3 | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F338",
+   "about": "MiniMax M3 | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "MiniMax M3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].modelName = 'MiniMax M3' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F339",
+   "about": "MiniMax M3 | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F340",
+   "about": "MiniMax M3 | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[34].timestamp"
+  },
+  {
+   "id": "F341",
+   "about": "Muse Spark Open | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "84",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F342",
+   "about": "Muse Spark Open | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Muse Spark Open",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].modelName = 'Muse Spark Open' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F343",
+   "about": "Muse Spark Open | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F344",
+   "about": "Muse Spark Open | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-10-16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].timestamp"
+  },
+  {
+   "id": "F345",
+   "about": "Muse Spark Open | OpenCode | without AGENTS.md",
+   "says": "cost",
+   "value": "0.23462366915322583",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].avgCostUsd",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F346",
+   "about": "Muse Spark Open | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F347",
+   "about": "Muse Spark Open | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Muse Spark Open",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].modelName = 'Muse Spark Open' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F348",
+   "about": "Muse Spark Open | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F349",
+   "about": "Muse Spark Open | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-10-16",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[35].timestamp"
+  },
+  {
+   "id": "F350",
+   "about": "Pixel Canary | OpenCode | without AGENTS.md",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].docsImpact.baseSuccessRate (page column 'Success Rate')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F351",
+   "about": "Pixel Canary | OpenCode | without AGENTS.md",
+   "says": "model-name",
+   "value": "Pixel Canary",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].modelName = 'Pixel Canary' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F352",
+   "about": "Pixel Canary | OpenCode | without AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F353",
+   "about": "Pixel Canary | OpenCode | without AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-25",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].timestamp"
+  },
+  {
+   "id": "F354",
+   "about": "Pixel Canary | OpenCode | with AGENTS.md",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].docsImpact.docsSuccessRate (page column 'Success Rate with AGENTS.md')",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F355",
+   "about": "Pixel Canary | OpenCode | with AGENTS.md",
+   "says": "model-name",
+   "value": "Pixel Canary",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].modelName = 'Pixel Canary' (the model words, without the parenthesis)"
+  },
+  {
+   "id": "F356",
+   "about": "Pixel Canary | OpenCode | with AGENTS.md",
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].agentHarness",
+   "term": "opencode"
+  },
+  {
+   "id": "F357",
+   "about": "Pixel Canary | OpenCode | with AGENTS.md",
+   "says": "run-date",
+   "value": "2026-09-25",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nextjs-evals/evidence/entries.json",
+   "where": "$[36].timestamp"
+  }
+ ]
+}
