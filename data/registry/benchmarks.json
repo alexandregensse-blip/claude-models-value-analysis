@@ -10598,6 +10598,27 @@
   },
   "lobdeleg-B-mono": {
    "label": "Low or Bust 2 (Delegation), package B, mono"
+  },
+  "legalforecast-mtd-micro-brier": {
+   "label": "LegalForecastBench, motion-to-dismiss claim forecasting: micro-Brier loss (lower is better), printed per configuration"
+  },
+  "arxiv-2610.04976-pricedguidance-test-median-bits": {
+   "label": "Priced Guidance: median compression cost (bits, lower is better), Essence judge, 87 test papers"
+  },
+  "arxiv-2610.04976-pricedguidance-dev-opus5-median-bits": {
+   "label": "Priced Guidance dev set (40 papers), Opus 5 high vs max: median compression cost (bits), Directional judge"
+  },
+  "arxiv-2610.04976-pricedguidance-dev-fable51-median-bits": {
+   "label": "Priced Guidance dev set (40 papers), Fable 5.1 high vs max: median compression cost (bits), Directional judge"
+  },
+  "arxiv-2610.17016-peer-kl-nats": {
+   "label": "ProbabilityBench peer review: mean KL (nats) at 25 shots, Medium visibility, vs list price"
+  },
+  "arxiv-2610.17016-covert-kl-nats": {
+   "label": "ProbabilityBench covert transfer: mean KL (nats) at 25 shots, Medium visibility, vs list price"
+  },
+  "arxiv-2610.17016-credit-kl-nats": {
+   "label": "ProbabilityBench credit risk: mean KL (nats) at 25 shots, Medium visibility, vs list price"
   }
  },
  "setups": {
@@ -19454,10 +19475,19 @@
    "judge_panel": null,
    "metric": "neg-median-bits",
    "headline": {
-    "metric": "neg-median-bits",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "median-bits",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/html/2610.04976",
+      "captured": "2026-10-19",
+      "where": "Section 5 (Ablations): the dev-set comparisons are reported as median compression cost (Figure 7, Directional judge)",
+      "quote": "Increasing the reasoning effort of Opus 5 from high to max raises the median compression cost from 45.0 to 54.6 bits",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04976/evidence/a04976.txt",
+      "sha256": "74967d1eecaf5928769806e45ce810bf04bf7259669585d2525100b57b35b6c0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -19480,10 +19510,19 @@
    "judge_panel": null,
    "metric": "neg-median-bits",
    "headline": {
-    "metric": "neg-median-bits",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "median-bits",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/html/2610.04976",
+      "captured": "2026-10-19",
+      "where": "Section 5 (Ablations): the dev-set comparisons are reported as median compression cost (Figure 7, Directional judge)",
+      "quote": "Increasing the reasoning effort of Opus 5 from high to max raises the median compression cost from 45.0 to 54.6 bits",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04976/evidence/a04976.txt",
+      "sha256": "74967d1eecaf5928769806e45ce810bf04bf7259669585d2525100b57b35b6c0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -19506,10 +19545,19 @@
    "judge_panel": null,
    "metric": "neg-median-bits",
    "headline": {
-    "metric": "neg-median-bits",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "median-bits",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/html/2610.04976",
+      "captured": "2026-10-19",
+      "where": "Section 1 (Introduction): the paper ranks its generators by median compression cost (test set, Essence judge)",
+      "quote": "Fable 5.1 achieves the lowest median compression cost at 69.9 bits",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04976/evidence/a04976.txt",
+      "sha256": "74967d1eecaf5928769806e45ce810bf04bf7259669585d2525100b57b35b6c0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -21351,10 +21399,19 @@
    "judge_panel": null,
    "metric": "neg-KL-nats",
    "headline": {
-    "metric": "neg-KL-nats",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "KL-nats",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/abs/2610.17016v1",
+      "captured": "2026-10-27",
+      "where": "Appendix A.3 (Cost and Probability Quality): Figure 1 shows the mean KL at 25 shots, Medium visibility; caption: 'Lower price and KL are better'",
+      "quote": "Fig. 1 places each model at its measured price and its mean KL at 25 shots at Medium visibility.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17016/evidence/arxiv-2610.17016.pymupdf.txt",
+      "sha256": "7f5ca5c6df9a305c67a8b6a8a45e618e5d96ac5bbe4ef3ee4f534edf324f157a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -21377,10 +21434,19 @@
    "judge_panel": null,
    "metric": "neg-KL-nats",
    "headline": {
-    "metric": "neg-KL-nats",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "KL-nats",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/abs/2610.17016v1",
+      "captured": "2026-10-27",
+      "where": "Appendix A.3 (Cost and Probability Quality): Figure 1 shows the mean KL at 25 shots, Medium visibility; caption: 'Lower price and KL are better'",
+      "quote": "Fig. 1 places each model at its measured price and its mean KL at 25 shots at Medium visibility.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17016/evidence/arxiv-2610.17016.pymupdf.txt",
+      "sha256": "7f5ca5c6df9a305c67a8b6a8a45e618e5d96ac5bbe4ef3ee4f534edf324f157a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -21403,10 +21469,19 @@
    "judge_panel": null,
    "metric": "neg-KL-nats",
    "headline": {
-    "metric": "neg-KL-nats",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "KL-nats",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/abs/2610.17016v1",
+      "captured": "2026-10-27",
+      "where": "Appendix A.3 (Cost and Probability Quality): Figure 1 shows the mean KL at 25 shots, Medium visibility; caption: 'Lower price and KL are better'",
+      "quote": "Fig. 1 places each model at its measured price and its mean KL at 25 shots at Medium visibility.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17016/evidence/arxiv-2610.17016.pymupdf.txt",
+      "sha256": "7f5ca5c6df9a305c67a8b6a8a45e618e5d96ac5bbe4ef3ee4f534edf324f157a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -76743,10 +76818,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "micro-Brier",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/johnhughes3/LegalForecastBench",
+      "captured": "2026-10-19",
+      "where": "Section 'Scoring and statistical inference': the primary metric is the micro-Brier loss (Eq. micro); Table tab:main sorted by it",
+      "quote": "the primary metric is the micro-Brier loss",
+      "file": "/work/.salvo14/mig/convert-johnhughes3-LegalForecastBench/evidence/LegalForecastBench-paper.tex",
+      "sha256": "7948d9a4812b51a7b63feaa646d462fb9fc20c2e7c7121cd5a88a341395c2283"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -144071,6 +144155,240 @@
    "legacy_groups": [],
    "label": "MediCrab Lab notes #2: clinical errors found of 7 (specialist errors), same runs",
    "note": "C2 new setup: the chart's CLINICAL /7 column (printed per model, same runs as the held setup); headline pending (only metric held); not the held metric"
+  },
+  "legalforecast-mtd-micro-brier": {
+   "family": "legalforecast-mtd-micro-brier",
+   "benchmark": "LegalForecastBench, motion-to-dismiss claim forecasting: micro-Brier loss (lower is better), printed per configuration",
+   "subset": null,
+   "harness": "LegalForecastBench-agentic",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "micro-Brier",
+   "headline": {
+    "metric": "micro-Brier",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/johnhughes3/LegalForecastBench",
+      "captured": "2026-10-19",
+      "where": "Section 'Scoring and statistical inference': the primary metric is the micro-Brier loss (Eq. micro); Table tab:main sorted by it",
+      "quote": "the primary metric is the micro-Brier loss",
+      "file": "/work/.salvo14/mig/convert-johnhughes3-LegalForecastBench/evidence/LegalForecastBench-paper.tex",
+      "sha256": "7948d9a4812b51a7b63feaa646d462fb9fc20c2e7c7121cd5a88a341395c2283"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "lower",
+   "task_type": "mixed",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LegalForecastBench, motion-to-dismiss claim forecasting: micro-Brier loss (lower is better), printed per configuration",
+   "note": "C2 wave 28 Oct: the paper's designated metric (micro-Brier loss, lower is better), printed per configuration in Table tab:main; replaces score% = 100(1-Brier) (our transform)"
+  },
+  "arxiv-2610.04976-pricedguidance-test-median-bits": {
+   "family": "arxiv-2610.04976-pricedguidance-test-median-bits",
+   "benchmark": "Priced Guidance, 87 test papers (Essence judge)",
+   "subset": null,
+   "harness": "PricedGuidance-guide-protocol",
+   "tools_regime": null,
+   "judge_panel": "Essence judge",
+   "metric": "median-bits",
+   "headline": {
+    "metric": "median-bits",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/html/2610.04976",
+      "captured": "2026-10-19",
+      "where": "Section 1 (Introduction): the paper ranks its generators by median compression cost (test set, Essence judge)",
+      "quote": "Fable 5.1 achieves the lowest median compression cost at 69.9 bits",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04976/evidence/a04976.txt",
+      "sha256": "74967d1eecaf5928769806e45ce810bf04bf7259669585d2525100b57b35b6c0"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Priced Guidance: median compression cost (bits, lower is better), Essence judge, 87 test papers",
+   "note": "C2 wave 28 Oct: the paper's median compression cost in bits (lower is better), printed per generator (Section 4, Figure 2); replaces neg-median-bits (our negation)"
+  },
+  "arxiv-2610.04976-pricedguidance-dev-opus5-median-bits": {
+   "family": "arxiv-2610.04976-pricedguidance-dev-opus5-median-bits",
+   "benchmark": "Priced Guidance, 40 dev papers (Directional judge), Opus 5",
+   "subset": null,
+   "harness": "PricedGuidance-guide-protocol",
+   "tools_regime": null,
+   "judge_panel": "Directional judge",
+   "metric": "median-bits",
+   "headline": {
+    "metric": "median-bits",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/html/2610.04976",
+      "captured": "2026-10-19",
+      "where": "Section 5 (Ablations): the dev-set comparisons are reported as median compression cost (Figure 7, Directional judge)",
+      "quote": "Increasing the reasoning effort of Opus 5 from high to max raises the median compression cost from 45.0 to 54.6 bits",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04976/evidence/a04976.txt",
+      "sha256": "74967d1eecaf5928769806e45ce810bf04bf7259669585d2525100b57b35b6c0"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Priced Guidance dev set (40 papers), Opus 5 high vs max: median compression cost (bits), Directional judge",
+   "note": "C2 wave 28 Oct: Figure 7(c) legends, median compression cost in bits (lower is better), Directional judge"
+  },
+  "arxiv-2610.04976-pricedguidance-dev-fable51-median-bits": {
+   "family": "arxiv-2610.04976-pricedguidance-dev-fable51-median-bits",
+   "benchmark": "Priced Guidance, 40 dev papers (Directional judge), Fable 5.1",
+   "subset": null,
+   "harness": "PricedGuidance-guide-protocol",
+   "tools_regime": null,
+   "judge_panel": "Directional judge",
+   "metric": "median-bits",
+   "headline": {
+    "metric": "median-bits",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/html/2610.04976",
+      "captured": "2026-10-19",
+      "where": "Section 5 (Ablations): the dev-set comparisons are reported as median compression cost (Figure 7, Directional judge)",
+      "quote": "Increasing the reasoning effort of Opus 5 from high to max raises the median compression cost from 45.0 to 54.6 bits",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04976/evidence/a04976.txt",
+      "sha256": "74967d1eecaf5928769806e45ce810bf04bf7259669585d2525100b57b35b6c0"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Priced Guidance dev set (40 papers), Fable 5.1 high vs max: median compression cost (bits), Directional judge",
+   "note": "C2 wave 28 Oct: Figure 7(d) legends, median compression cost in bits (lower is better), Directional judge; panel (d) indicative (guides differ)"
+  },
+  "arxiv-2610.17016-peer-kl-nats": {
+   "family": "arxiv-2610.17016-peer-kl-nats",
+   "benchmark": "ProbabilityBench peer review: mean KL (nats) at 25 shots, Medium visibility, vs list price",
+   "subset": null,
+   "harness": "API-memo-to-probability",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "KL-nats",
+   "headline": {
+    "metric": "KL-nats",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/abs/2610.17016v1",
+      "captured": "2026-10-27",
+      "where": "Appendix A.3 (Cost and Probability Quality): Figure 1 shows the mean KL at 25 shots, Medium visibility; caption: 'Lower price and KL are better'",
+      "quote": "Fig. 1 places each model at its measured price and its mean KL at 25 shots at Medium visibility.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17016/evidence/arxiv-2610.17016.pymupdf.txt",
+      "sha256": "7f5ca5c6df9a305c67a8b6a8a45e618e5d96ac5bbe4ef3ee4f534edf324f157a"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProbabilityBench peer review: mean KL (nats) at 25 shots, Medium visibility, vs list price",
+   "note": "C2 wave 28 Oct: mean KL (nats, lower is better) per model as plotted in Figure 1 (vector; read from the paths, calibrated on the printed ticks); replaces neg-KL-nats (our negation)"
+  },
+  "arxiv-2610.17016-covert-kl-nats": {
+   "family": "arxiv-2610.17016-covert-kl-nats",
+   "benchmark": "ProbabilityBench covert transfer: mean KL (nats) at 25 shots, Medium visibility, vs list price",
+   "subset": null,
+   "harness": "API-memo-to-probability",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "KL-nats",
+   "headline": {
+    "metric": "KL-nats",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/abs/2610.17016v1",
+      "captured": "2026-10-27",
+      "where": "Appendix A.3 (Cost and Probability Quality): Figure 1 shows the mean KL at 25 shots, Medium visibility; caption: 'Lower price and KL are better'",
+      "quote": "Fig. 1 places each model at its measured price and its mean KL at 25 shots at Medium visibility.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17016/evidence/arxiv-2610.17016.pymupdf.txt",
+      "sha256": "7f5ca5c6df9a305c67a8b6a8a45e618e5d96ac5bbe4ef3ee4f534edf324f157a"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProbabilityBench covert transfer: mean KL (nats) at 25 shots, Medium visibility, vs list price",
+   "note": "C2 wave 28 Oct: mean KL (nats, lower is better) per model as plotted in Figure 1 (vector; read from the paths, calibrated on the printed ticks); replaces neg-KL-nats (our negation)"
+  },
+  "arxiv-2610.17016-credit-kl-nats": {
+   "family": "arxiv-2610.17016-credit-kl-nats",
+   "benchmark": "ProbabilityBench credit risk: mean KL (nats) at 25 shots, Medium visibility, vs list price",
+   "subset": null,
+   "harness": "API-memo-to-probability",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "KL-nats",
+   "headline": {
+    "metric": "KL-nats",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "arxiv.org/abs/2610.17016v1",
+      "captured": "2026-10-27",
+      "where": "Appendix A.3 (Cost and Probability Quality): Figure 1 shows the mean KL at 25 shots, Medium visibility; caption: 'Lower price and KL are better'",
+      "quote": "Fig. 1 places each model at its measured price and its mean KL at 25 shots at Medium visibility.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17016/evidence/arxiv-2610.17016.pymupdf.txt",
+      "sha256": "7f5ca5c6df9a305c67a8b6a8a45e618e5d96ac5bbe4ef3ee4f534edf324f157a"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProbabilityBench credit risk: mean KL (nats) at 25 shots, Medium visibility, vs list price",
+   "note": "C2 wave 28 Oct: mean KL (nats, lower is better) per model as plotted in Figure 1 (vector; read from the paths, calibrated on the printed ticks); replaces neg-KL-nats (our negation)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
