@@ -1,0 +1,276 @@
+{
+ "id": "src-arxiv-2608.18595-v1-2026-08-19",
+ "publisher": "arxiv-2608.18595",
+ "urls": [
+  "https://arxiv.org/abs/2608.18595",
+  "https://arxiv.org/html/2608.18595v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2608.18595v1",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "note": "our fetch of the arXiv HTML v1 (saved raw copy html-v1.html; text extracted by a stdlib script, table cells joined)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2608.18595v1",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/abs.html",
+   "note": "our fetch of the abstract page (version list, citation_date 2026/08/19)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.html": "18502abb905b93f99785ed884f7d2bd3a934c121a86e01d264d63d868ac7f005",
+  "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt": "862fd10793f772f7986a00353813bf1aa248401854ae8d27df61308391cc8b41",
+  "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/abs.html": "b19a957e5068e04fa0687d672eb2f58f3a99a5da6ea659a69cf0b418af2f8bc2",
+  "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/paper.pdf": "51a7f9b2b74fd78cb6d8d7c28d6e25da9f104c5db13171d57158fe74302177dc"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": {
+  "value": "2026-08-19",
+  "where": "arXiv abstract page, citation_date (Submitted on 19 Aug 2026)",
+  "quote": "content=\"2026/08/19\"",
+  "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/abs.html"
+ },
+ "salvo": "salvo14/mig C2 wave (28 Oct)",
+ "agent": "converter (Haiku 5.5), C2 wave, from the saved arXiv HTML v1 and abstract page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.html",
+   "tool": "stdlib html parser (re + html.unescape): tags removed, table cells joined with ' | ' (MathML residue kept)"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "about": null,
+   "value": "v1",
+   "level": "written",
+   "form": "prose",
+   "where": "arXiv abstract page: the version list",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/abs.html",
+   "quote": "[v1]"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "one shared protocol",
+   "level": "written",
+   "form": "prose",
+   "where": "Experimental setup, 'Models and Controls' paragraph of the paper",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "under one shared protocol"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "The final artifact will record model identifiers, API date, decoding parameters, context budget, concurrency, retry behavior, and per-instance cost and latency",
+   "level": "written",
+   "form": "prose",
+   "where": "'Models and Controls' paragraph: the release records (not printed for these runs)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "The final artifact will record model identifiers, API date, decoding parameters, context budget, concurrency, retry behavior, and per-instance cost and latency"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "one scored patch for each model-instance pair",
+   "level": "written",
+   "form": "prose",
+   "where": "'Models and Controls' paragraph (one attempt per model and instance)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "one scored patch for each model-instance pair"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Table 2 reports only these three supplied metrics",
+   "level": "written",
+   "form": "prose",
+   "where": "'Metrics and Failure Taxonomy' paragraph (Apply, Repro, Resolved; no designated headline)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "Table 2 reports only these three supplied metrics"
+  },
+  {
+   "id": "F6",
+   "says": "model-name",
+   "about": null,
+   "value": "GPT-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'GPT-5.6-sol', column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "GPT-5.6-sol | 100.0% | 90.5% | 50.6%"
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": null,
+   "value": "50.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'GPT-5.6-sol', column Resolved",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "GPT-5.6-sol | 100.0% | 90.5% | 50.6%",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F8",
+   "says": "model-name",
+   "about": null,
+   "value": "GPT-5.6-terra-max",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'GPT-5.6-terra-max', column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "GPT-5.6-terra-max | 99.4% | 90.5% | 48.8%"
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": null,
+   "value": "48.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'GPT-5.6-terra-max', column Resolved",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "GPT-5.6-terra-max | 99.4% | 90.5% | 48.8%",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F10",
+   "says": "model-name",
+   "about": null,
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'GLM-5.2', column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "GLM-5.2 | 100.0% | 94.6% | 57.7%"
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": null,
+   "value": "57.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'GLM-5.2', column Resolved",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "GLM-5.2 | 100.0% | 94.6% | 57.7%",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "says": "model-name",
+   "about": null,
+   "value": "MiniMax-M3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'MiniMax-M3', column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "MiniMax-M3 | 93.5% | 88.7% | 45.8%"
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": null,
+   "value": "45.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'MiniMax-M3', column Resolved",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "MiniMax-M3 | 93.5% | 88.7% | 45.8%",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": null,
+   "value": "Qwen3.8-Max",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'Qwen3.8-Max', column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "Qwen3.8-Max | 100.0% | 96.4% | 48.8%"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": null,
+   "value": "48.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'Qwen3.8-Max', column Resolved",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "Qwen3.8-Max | 100.0% | 96.4% | 48.8%",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": null,
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'Kimi-K3', column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "Kimi-K3 | 100.0% | 93.5% | 66.7%"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": null,
+   "value": "66.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, row 'Kimi-K3', column Resolved",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.18595/evidence/html-v1.txt",
+   "quote": "Kimi-K3 | 100.0% | 93.5% | 66.7%",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ]
+}
