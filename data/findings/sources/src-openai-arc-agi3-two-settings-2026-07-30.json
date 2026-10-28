@@ -1,0 +1,70 @@
+{
+ "id": "src-openai-arc-agi3-two-settings-2026-07-30",
+ "publisher": "openai",
+ "urls": [
+  "https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-openai-arc-agi3-two-settings/evidence/wb-arc-20260730064036.html": "01ee1443b91b8cc8f3e62d6e9cfa0a44243771153ab1c6fa1eaa073b0900c5ea",
+  "/work/.salvo14/mig/convert-openai-arc-agi3-two-settings/evidence/specs-how-two-settings.json": "4c8987d4744d200177f96cc301e95b5250467689fd17f3eb2556be1f1b427cb7"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": null,
+ "salvo": "mig/convert-openai-arc-agi3-two-settings (C2 wave, 28 Oct)",
+ "agent": "C2 wave conversion (Haiku 5.5, coordinator wave C2)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "W1",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260730064036/https://openai.com/index/how-two-settings-tripled-our-arc-agi-3-scores/",
+   "captured": "2026-07-30",
+   "file": "/work/.salvo14/mig/convert-openai-arc-agi3-two-settings/evidence/specs-how-two-settings.json",
+   "note": "first valid Wayback capture (legacy ref, 20260730064036); the file is the chart data of that capture (specs JSON, grep-checked against the saved page)"
+  }
+ ],
+ "extractions": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "headline-metric",
+   "about": "ARC-AGI-3 public set",
+   "value": "Relative Human Action Efficiency",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-openai-arc-agi3-two-settings/evidence/wb-arc-20260730064036.html",
+   "where": "article text, under the ARC-AGI-3 chart",
+   "quote": "Scores measure Relative Human Action Efficiency"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-openai-arc-agi3-two-settings/evidence/specs-how-two-settings.json",
+   "where": "$[0].data.values",
+   "format": "json",
+   "row_key": "completion_tokens",
+   "columns": {
+    "model_label": {
+     "says": "model-name"
+    },
+    "effort": {
+     "says": "effort-label"
+    },
+    "harness_label": {
+     "says": "harness"
+    },
+    "score": {
+     "says": "score",
+     "term": "score%",
+     "scale": "fraction"
+    },
+    "output_tokens_per_game": {
+     "says": "tokens-out"
+    }
+   }
+  }
+ ]
+}

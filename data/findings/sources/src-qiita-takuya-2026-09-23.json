@@ -1,0 +1,1342 @@
+{
+ "id": "src-qiita-takuya-2026-09-23",
+ "publisher": "qiita-takuya",
+ "urls": [
+  "https://qiita.com/Takuya__/items/66bc1d3bc1e6b294af18"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://qiita.com/Takuya__/items/66bc1d3bc1e6b294af18",
+   "captured": "2026-10-28T10:45:00Z",
+   "note": "Qiita API item (fetched by the wave-C2 converter, 28 Oct 2026)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-qiita-takuya/evidence/qiita-api.json": "36f20fa18e75ac476e47986fe8d2fae064149cdc624fa03109044d0986fd1be1",
+  "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md": "6208f0a76b490e5036e53b006229b43b175ab304fa006caabba39373a473e301"
+ },
+ "harvested_at": "2026-10-28T10:45:00Z",
+ "published": {
+  "value": "2026-09-23",
+  "where": "Qiita API field created_at",
+  "quote": "\"created_at\":\"2026-09-23T13:58:37+09:00\"",
+  "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/qiita-api.json"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "from": "/work/.salvo14/mig/convert-qiita-takuya/evidence/qiita-api.json",
+   "tool": "python json: the 'body' field (Markdown) of the Qiita API response, written unchanged"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "cost-method",
+   "value": "記録したトークン数に各社の定価を掛けて計算しました",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "section 'the verification environment' (API equivalent cost)",
+   "quote": "API で同じことをしたときの費用は、記録したトークン数に各社の定価を掛けて計算しました",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "cost-basis",
+   "value": "記録したトークン数に各社の定価を掛けて計算しました",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "section 'the verification environment'",
+   "quote": "API で同じことをしたときの費用は、記録したトークン数に各社の定価を掛けて計算しました",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "run-date",
+   "value": "2026年9月23日",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "verification environment table, row 実施日",
+   "quote": "| 実施日 | 2026年9月23日（Opus 5.5 公開の翌日） |"
+  },
+  {
+   "id": "F4",
+   "about": "qiita-takuya-reason-std|opus-5.5-high",
+   "says": "score",
+   "value": "30/30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（標準）10問×3回, row Opus 5.5",
+   "quote": "| Opus 5.5（high） | 30/30 | **24/27** | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "unit",
+   "value": "推論問題1問あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose",
+   "quote": "推論問題1問あたりの API 換算コスト",
+   "term": "per-q"
+  },
+  {
+   "id": "F6",
+   "about": "qiita-takuya-reason-std|opus-5.5-high",
+   "says": "cost",
+   "value": "0.072",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose: cost per reasoning question",
+   "quote": "推論問題1問あたりの API 換算コストは、Opus 5.5（medium）が$0.067、Opus 5.5（high）が$0.072、Opus 5 が$0.091、GPT-6 Astra が$0.184、Fable 5.1 が$0.251でした",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F7",
+   "about": "qiita-takuya-reason-std|opus-5.5-high",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F8",
+   "about": "qiita-takuya-reason-std|opus-5.5-high",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: API id",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F9",
+   "about": "qiita-takuya-reason-std|opus-5.5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: effort",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F10",
+   "about": "qiita-takuya-reason-std|opus-5.5-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: CLI",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F11",
+   "about": "qiita-takuya-reason-std|opus-5.5-medium",
+   "says": "score",
+   "value": "29/30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（標準）10問×3回, row Opus 5.5",
+   "quote": "| Opus 5.5（medium） | 29/30 | 23/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F12",
+   "about": null,
+   "says": "unit",
+   "value": "推論問題1問あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose",
+   "quote": "推論問題1問あたりの API 換算コスト",
+   "term": "per-q"
+  },
+  {
+   "id": "F13",
+   "about": "qiita-takuya-reason-std|opus-5.5-medium",
+   "says": "cost",
+   "value": "0.067",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose: cost per reasoning question",
+   "quote": "推論問題1問あたりの API 換算コストは、Opus 5.5（medium）が$0.067、Opus 5.5（high）が$0.072、Opus 5 が$0.091、GPT-6 Astra が$0.184、Fable 5.1 が$0.251でした",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F14",
+   "about": "qiita-takuya-reason-std|opus-5.5-medium",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F15",
+   "about": "qiita-takuya-reason-std|opus-5.5-medium",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: API id",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F16",
+   "about": "qiita-takuya-reason-std|opus-5.5-medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: effort",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F17",
+   "about": "qiita-takuya-reason-std|opus-5.5-medium",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: CLI",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F18",
+   "about": "qiita-takuya-reason-std|opus-5-high",
+   "says": "score",
+   "value": "30/30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（標準）10問×3回, row Opus 5",
+   "quote": "| Opus 5（high） | 30/30 | 21/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F19",
+   "about": null,
+   "says": "unit",
+   "value": "推論問題1問あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose",
+   "quote": "推論問題1問あたりの API 換算コスト",
+   "term": "per-q"
+  },
+  {
+   "id": "F20",
+   "about": "qiita-takuya-reason-std|opus-5-high",
+   "says": "cost",
+   "value": "0.091",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose: cost per reasoning question",
+   "quote": "推論問題1問あたりの API 換算コストは、Opus 5.5（medium）が$0.067、Opus 5.5（high）が$0.072、Opus 5 が$0.091、GPT-6 Astra が$0.184、Fable 5.1 が$0.251でした",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F21",
+   "about": "qiita-takuya-reason-std|opus-5-high",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F22",
+   "about": "qiita-takuya-reason-std|opus-5-high",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: API id",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F23",
+   "about": "qiita-takuya-reason-std|opus-5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: effort",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F24",
+   "about": "qiita-takuya-reason-std|opus-5-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: CLI",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F25",
+   "about": "qiita-takuya-reason-std|fable-5.1-high",
+   "says": "score",
+   "value": "29/30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（標準）10問×3回, row Fable 5.1",
+   "quote": "| Fable 5.1（high） | 29/30 | 22/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F26",
+   "about": null,
+   "says": "unit",
+   "value": "推論問題1問あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose",
+   "quote": "推論問題1問あたりの API 換算コスト",
+   "term": "per-q"
+  },
+  {
+   "id": "F27",
+   "about": "qiita-takuya-reason-std|fable-5.1-high",
+   "says": "cost",
+   "value": "0.251",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose: cost per reasoning question",
+   "quote": "推論問題1問あたりの API 換算コストは、Opus 5.5（medium）が$0.067、Opus 5.5（high）が$0.072、Opus 5 が$0.091、GPT-6 Astra が$0.184、Fable 5.1 が$0.251でした",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F28",
+   "about": "qiita-takuya-reason-std|fable-5.1-high",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F29",
+   "about": "qiita-takuya-reason-std|fable-5.1-high",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: API id",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F30",
+   "about": "qiita-takuya-reason-std|fable-5.1-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: effort",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F31",
+   "about": "qiita-takuya-reason-std|fable-5.1-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: CLI",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F32",
+   "about": "qiita-takuya-reason-std|gpt-6-astra-high",
+   "says": "score",
+   "value": "30/30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（標準）10問×3回, row GPT-6 Astra",
+   "quote": "| GPT-6 Astra（high） | 30/30 | 23/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F33",
+   "about": null,
+   "says": "unit",
+   "value": "推論問題1問あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose",
+   "quote": "推論問題1問あたりの API 換算コスト",
+   "term": "per-q"
+  },
+  {
+   "id": "F34",
+   "about": "qiita-takuya-reason-std|gpt-6-astra-high",
+   "says": "cost",
+   "value": "0.184",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results prose: cost per reasoning question",
+   "quote": "推論問題1問あたりの API 換算コストは、Opus 5.5（medium）が$0.067、Opus 5.5（high）が$0.072、Opus 5 が$0.091、GPT-6 Astra が$0.184、Fable 5.1 が$0.251でした",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F35",
+   "about": "qiita-takuya-reason-std|gpt-6-astra-high",
+   "says": "model-name",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F36",
+   "about": "qiita-takuya-reason-std|gpt-6-astra-high",
+   "says": "model-api-id",
+   "value": "gpt-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: API id",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F37",
+   "about": "qiita-takuya-reason-std|gpt-6-astra-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: effort",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F38",
+   "about": "qiita-takuya-reason-std|gpt-6-astra-high",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: CLI",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F39",
+   "about": "qiita-takuya-reason-hard|opus-5.5-high",
+   "says": "score",
+   "value": "24/27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（難）9問×3回, row Opus 5.5",
+   "quote": "| Opus 5.5（high） | 30/30 | **24/27** | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F40",
+   "about": "qiita-takuya-reason-hard|opus-5.5-high",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F41",
+   "about": "qiita-takuya-reason-hard|opus-5.5-high",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: API id",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F42",
+   "about": "qiita-takuya-reason-hard|opus-5.5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: effort",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F43",
+   "about": "qiita-takuya-reason-hard|opus-5.5-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: CLI",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F44",
+   "about": "qiita-takuya-reason-hard|opus-5.5-medium",
+   "says": "score",
+   "value": "23/27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（難）9問×3回, row Opus 5.5",
+   "quote": "| Opus 5.5（medium） | 29/30 | 23/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F45",
+   "about": "qiita-takuya-reason-hard|opus-5.5-medium",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F46",
+   "about": "qiita-takuya-reason-hard|opus-5.5-medium",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: API id",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F47",
+   "about": "qiita-takuya-reason-hard|opus-5.5-medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: effort",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F48",
+   "about": "qiita-takuya-reason-hard|opus-5.5-medium",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: CLI",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F49",
+   "about": "qiita-takuya-reason-hard|opus-5-high",
+   "says": "score",
+   "value": "21/27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（難）9問×3回, row Opus 5",
+   "quote": "| Opus 5（high） | 30/30 | 21/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F50",
+   "about": "qiita-takuya-reason-hard|opus-5-high",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F51",
+   "about": "qiita-takuya-reason-hard|opus-5-high",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: API id",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F52",
+   "about": "qiita-takuya-reason-hard|opus-5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: effort",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F53",
+   "about": "qiita-takuya-reason-hard|opus-5-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: CLI",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F54",
+   "about": "qiita-takuya-reason-hard|fable-5.1-high",
+   "says": "score",
+   "value": "22/27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（難）9問×3回, row Fable 5.1",
+   "quote": "| Fable 5.1（high） | 29/30 | 22/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F55",
+   "about": "qiita-takuya-reason-hard|fable-5.1-high",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F56",
+   "about": "qiita-takuya-reason-hard|fable-5.1-high",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: API id",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F57",
+   "about": "qiita-takuya-reason-hard|fable-5.1-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: effort",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F58",
+   "about": "qiita-takuya-reason-hard|fable-5.1-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: CLI",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F59",
+   "about": "qiita-takuya-reason-hard|gpt-6-astra-high",
+   "says": "score",
+   "value": "23/27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column 推論（難）9問×3回, row GPT-6 Astra",
+   "quote": "| GPT-6 Astra（high） | 30/30 | 23/27 | 100%（15回すべて満点） |",
+   "term": "acc%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F60",
+   "about": "qiita-takuya-reason-hard|gpt-6-astra-high",
+   "says": "model-name",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F61",
+   "about": "qiita-takuya-reason-hard|gpt-6-astra-high",
+   "says": "model-api-id",
+   "value": "gpt-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: API id",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F62",
+   "about": "qiita-takuya-reason-hard|gpt-6-astra-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: effort",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F63",
+   "about": "qiita-takuya-reason-hard|gpt-6-astra-high",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: CLI",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F64",
+   "about": "qiita-takuya-code|opus-5.5-high",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column コーディング5題×3回（非公開テスト）, same row",
+   "quote": "| Opus 5.5（high） | 30/30 | **24/27** | 100%（15回すべて満点） |",
+   "term": "hidden-test%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F65",
+   "about": "qiita-takuya-code|opus-5.5-high",
+   "says": "cost",
+   "value": "0.27",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text or prose: cost per coding task (API equivalent)",
+   "quote": "Opus 5.5 high は0.27ドル",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F66",
+   "about": null,
+   "says": "unit",
+   "value": "コーディング1題あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: coding cost per task",
+   "quote": "コーディング1題あたりの API 換算コスト",
+   "term": "per-task"
+  },
+  {
+   "id": "F67",
+   "about": "qiita-takuya-code|opus-5.5-high",
+   "says": "tokens-out",
+   "value": "6,986",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: output tokens per coding task",
+   "quote": "コーディングの出力トークンは Opus 5.5 high 6,986、medium 5,365、Opus 5 17,000、Fable 5.1 8,860、Astra 4,219",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F68",
+   "about": "qiita-takuya-code|opus-5.5-high",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F69",
+   "about": "qiita-takuya-code|opus-5.5-high",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: API id",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F70",
+   "about": "qiita-takuya-code|opus-5.5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: effort",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F71",
+   "about": "qiita-takuya-code|opus-5.5-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（high）: CLI",
+   "quote": "| Opus 5.5（high） | `claude-opus-5-5` | high | Claude Code |"
+  },
+  {
+   "id": "F72",
+   "about": "qiita-takuya-code|opus-5.5-medium",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column コーディング5題×3回（非公開テスト）, same row",
+   "quote": "| Opus 5.5（medium） | 29/30 | 23/27 | 100%（15回すべて満点） |",
+   "term": "hidden-test%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F73",
+   "about": "qiita-takuya-code|opus-5.5-medium",
+   "says": "cost",
+   "value": "0.23",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text or prose: cost per coding task (API equivalent)",
+   "quote": "Opus 5.5（medium）は1題$0.23で最安",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F74",
+   "about": null,
+   "says": "unit",
+   "value": "コーディング1題あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: coding cost per task",
+   "quote": "コーディング1題あたりの API 換算コスト",
+   "term": "per-task"
+  },
+  {
+   "id": "F75",
+   "about": "qiita-takuya-code|opus-5.5-medium",
+   "says": "tokens-out",
+   "value": "5,365",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: output tokens per coding task",
+   "quote": "コーディングの出力トークンは Opus 5.5 high 6,986、medium 5,365、Opus 5 17,000、Fable 5.1 8,860、Astra 4,219",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F76",
+   "about": "qiita-takuya-code|opus-5.5-medium",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F77",
+   "about": "qiita-takuya-code|opus-5.5-medium",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: API id",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F78",
+   "about": "qiita-takuya-code|opus-5.5-medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: effort",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F79",
+   "about": "qiita-takuya-code|opus-5.5-medium",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5.5（medium）: CLI",
+   "quote": "| Opus 5.5（medium） | `claude-opus-5-5` | medium（既定） | Claude Code |"
+  },
+  {
+   "id": "F80",
+   "about": "qiita-takuya-code|opus-5-high",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column コーディング5題×3回（非公開テスト）, same row",
+   "quote": "| Opus 5（high） | 30/30 | 21/27 | 100%（15回すべて満点） |",
+   "term": "hidden-test%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F81",
+   "about": "qiita-takuya-code|opus-5-high",
+   "says": "cost",
+   "value": "0.82",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text or prose: cost per coding task (API equivalent)",
+   "quote": "Opus 5 high は0.82ドル",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F82",
+   "about": null,
+   "says": "unit",
+   "value": "コーディング1題あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: coding cost per task",
+   "quote": "コーディング1題あたりの API 換算コスト",
+   "term": "per-task"
+  },
+  {
+   "id": "F83",
+   "about": "qiita-takuya-code|opus-5-high",
+   "says": "tokens-out",
+   "value": "17,000",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: output tokens per coding task",
+   "quote": "コーディングの出力トークンは Opus 5.5 high 6,986、medium 5,365、Opus 5 17,000、Fable 5.1 8,860、Astra 4,219",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F84",
+   "about": "qiita-takuya-code|opus-5-high",
+   "says": "model-name",
+   "value": "Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F85",
+   "about": "qiita-takuya-code|opus-5-high",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: API id",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F86",
+   "about": "qiita-takuya-code|opus-5-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: effort",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F87",
+   "about": "qiita-takuya-code|opus-5-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Opus 5（high）: CLI",
+   "quote": "| Opus 5（high） | `claude-opus-5` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F88",
+   "about": "qiita-takuya-code|fable-5.1-high",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column コーディング5題×3回（非公開テスト）, same row",
+   "quote": "| Fable 5.1（high） | 29/30 | 22/27 | 100%（15回すべて満点） |",
+   "term": "hidden-test%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F89",
+   "about": "qiita-takuya-code|fable-5.1-high",
+   "says": "cost",
+   "value": "0.86",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text or prose: cost per coding task (API equivalent)",
+   "quote": "Fable 5.1 high は0.86ドル",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F90",
+   "about": null,
+   "says": "unit",
+   "value": "コーディング1題あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: coding cost per task",
+   "quote": "コーディング1題あたりの API 換算コスト",
+   "term": "per-task"
+  },
+  {
+   "id": "F91",
+   "about": "qiita-takuya-code|fable-5.1-high",
+   "says": "tokens-out",
+   "value": "8,860",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: output tokens per coding task",
+   "quote": "コーディングの出力トークンは Opus 5.5 high 6,986、medium 5,365、Opus 5 17,000、Fable 5.1 8,860、Astra 4,219",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F92",
+   "about": "qiita-takuya-code|fable-5.1-high",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F93",
+   "about": "qiita-takuya-code|fable-5.1-high",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: API id",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F94",
+   "about": "qiita-takuya-code|fable-5.1-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: effort",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F95",
+   "about": "qiita-takuya-code|fable-5.1-high",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row Fable 5.1（high）: CLI",
+   "quote": "| Fable 5.1（high） | `claude-fable-5-1` | high（既定） | Claude Code |"
+  },
+  {
+   "id": "F96",
+   "about": "qiita-takuya-code|gpt-6-astra-high",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "results table, column コーディング5題×3回（非公開テスト）, same row",
+   "quote": "| GPT-6 Astra（high） | 30/30 | 23/27 | 100%（15回すべて満点） |",
+   "term": "hidden-test%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F97",
+   "about": "qiita-takuya-code|gpt-6-astra-high",
+   "says": "cost",
+   "value": "0.52",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text or prose: cost per coding task (API equivalent)",
+   "quote": "GPT-6 Astra high は0.52ドル",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F98",
+   "about": null,
+   "says": "unit",
+   "value": "コーディング1題あたりの API 換算コスト",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: coding cost per task",
+   "quote": "コーディング1題あたりの API 換算コスト",
+   "term": "per-task"
+  },
+  {
+   "id": "F99",
+   "about": "qiita-takuya-code|gpt-6-astra-high",
+   "says": "tokens-out",
+   "value": "4,219",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "figure alt text: output tokens per coding task",
+   "quote": "コーディングの出力トークンは Opus 5.5 high 6,986、medium 5,365、Opus 5 17,000、Fable 5.1 8,860、Astra 4,219",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F100",
+   "about": "qiita-takuya-code|gpt-6-astra-high",
+   "says": "model-name",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F101",
+   "about": "qiita-takuya-code|gpt-6-astra-high",
+   "says": "model-api-id",
+   "value": "gpt-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: API id",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F102",
+   "about": "qiita-takuya-code|gpt-6-astra-high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: effort",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  },
+  {
+   "id": "F103",
+   "about": "qiita-takuya-code|gpt-6-astra-high",
+   "says": "harness",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-qiita-takuya/evidence/body.md",
+   "where": "settings table, row GPT-6 Astra（high）: CLI",
+   "quote": "| GPT-6 Astra（high） | `gpt-6-astra` | high | Codex CLI |"
+  }
+ ]
+}

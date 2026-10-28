@@ -1,0 +1,295 @@
+{
+ "id": "src-physai-2609.23695-arxiv-2026-10-28",
+ "publisher": "physai-2609.23695",
+ "urls": [
+  "https://arxiv.org/abs/2609.23695"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.html": "b6ba02a4b5a335721dabfd56f3f4ada9976ab4e41de7e5d9e1c2025aec0361b2",
+  "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.text.txt": "c75366a508293561523051927c2c5d9c814b389eac9f575206b2af0a2b1e634c",
+  "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt": "ac6ee288e7ad01b02e9b78ffbb9c2a85fab742b715f0a70051b11383a3fd0583"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": null,
+ "salvo": "mig/convert-physai-2609.23695 (C2 wave, 28 Oct)",
+ "agent": "C2 wave conversion (Haiku 5.5, coordinator wave C2)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2609.23695",
+   "captured": "2026-10-20",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.html",
+   "note": "saved arXiv HTML (2609.23695)"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.text.txt",
+   "from": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.html",
+   "tool": "stdlib html-to-text (tags to line breaks, MathML alt text kept); extract.py in this folder"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "from": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.html",
+   "tool": "stdlib html.parser, the 31-row table of Table IV (held-out); extract.py in this folder"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "headline-metric",
+   "about": "PhysAI-Bench held-out",
+   "value": "decision accuracy",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.text.txt",
+   "where": "abstract",
+   "quote": "GPT-5.3 achieves the highest decision accuracy (52.00%)"
+  },
+  {
+   "id": "F2",
+   "says": "score",
+   "about": "GPT-5.3 Chat",
+   "value": "52.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'GPT-5.3 Chat', column 'Held-Out Acc. (%)'",
+   "quote": "52.00±0.72",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F3",
+   "says": "model-name",
+   "about": "GPT-5.3 Chat",
+   "value": "GPT-5.3 Chat",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'GPT-5.3 Chat'",
+   "quote": "GPT-5.3 Chat |"
+  },
+  {
+   "id": "F4",
+   "says": "score",
+   "about": "GPT-5.2 Chat",
+   "value": "49.40",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'GPT-5.2 Chat', column 'Held-Out Acc. (%)'",
+   "quote": "49.40±1.44",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F5",
+   "says": "model-name",
+   "about": "GPT-5.2 Chat",
+   "value": "GPT-5.2 Chat",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'GPT-5.2 Chat'",
+   "quote": "GPT-5.2 Chat |"
+  },
+  {
+   "id": "F6",
+   "says": "score",
+   "about": "xAI Grok 4.5",
+   "value": "49.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'xAI Grok 4.5', column 'Held-Out Acc. (%)'",
+   "quote": "49.07±0.81",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "xAI Grok 4.5",
+   "value": "xAI Grok 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'xAI Grok 4.5'",
+   "quote": "xAI Grok 4.5 |"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "Qwen3.7-Plus",
+   "value": "47.73",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'Qwen3.7-Plus', column 'Held-Out Acc. (%)'",
+   "quote": "47.73±0.50",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "Qwen3.7-Plus",
+   "value": "Qwen3.7-Plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'Qwen3.7-Plus'",
+   "quote": "Qwen3.7-Plus |"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "Qwen3.7-Max",
+   "value": "46.40",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'Qwen3.7-Max', column 'Held-Out Acc. (%)'",
+   "quote": "46.40±0.40",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "Qwen3.7-Max",
+   "value": "Qwen3.7-Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'Qwen3.7-Max'",
+   "quote": "Qwen3.7-Max |"
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "DeepSeek V3.2",
+   "value": "46.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'DeepSeek V3.2', column 'Held-Out Acc. (%)'",
+   "quote": "46.07±0.50",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F13",
+   "says": "model-name",
+   "about": "DeepSeek V3.2",
+   "value": "DeepSeek V3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'DeepSeek V3.2'",
+   "quote": "DeepSeek V3.2 |"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Claude Haiku 4.5",
+   "value": "44.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'Claude Haiku 4.5', column 'Held-Out Acc. (%)'",
+   "quote": "44.80±0.00",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "Claude Haiku 4.5",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'Claude Haiku 4.5'",
+   "quote": "Claude Haiku 4.5 |"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Kimi K2.5",
+   "value": "41.87",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'Kimi K2.5', column 'Held-Out Acc. (%)'",
+   "quote": "41.87±0.12",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F17",
+   "says": "model-name",
+   "about": "Kimi K2.5",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'Kimi K2.5'",
+   "quote": "Kimi K2.5 |"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "GPT-5.4 Nano",
+   "value": "37.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'GPT-5.4 Nano', column 'Held-Out Acc. (%)'",
+   "quote": "37.33±0.31",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "GPT-5.4 Nano",
+   "value": "GPT-5.4 Nano",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'GPT-5.4 Nano'",
+   "quote": "GPT-5.4 Nano |"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "Claude Fable 5",
+   "value": "36.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV (held-out), row 'Claude Fable 5', column 'Held-Out Acc. (%)'",
+   "quote": "36.07±0.46",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "Claude Fable 5",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-physai-2609.23695/evidence/2609.23695.table-held-out.txt",
+   "where": "Table IV, row 'Claude Fable 5'",
+   "quote": "Claude Fable 5 |"
+  }
+ ],
+ "tables": []
+}
