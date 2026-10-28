@@ -123,6 +123,13 @@ def find_date(text):
     m = re.search(r"\b([a-z]+)\.?\s+(\d{1,2})(?:st|nd|rd|th)?,?\s+(\d{4})\b", low)
     if m and m.group(1) in MONTHS:
         return _ymd(int(m.group(3)), MONTHS[m.group(1)], int(m.group(2)))
+    m = re.fullmatch(r"\s*(?:([a-z]+)\.?\s+(\d{4})|(\d{4})-(\d{2}))\s*", low)   # a month only ('April 2026',
+    if m:                                                # '2026-04'): its first to its last day (28 Oct)
+        y, mo = (int(m.group(2)), MONTHS.get(m.group(1))) if m.group(1) else (int(m.group(3)), int(m.group(4)))
+        if mo and 1 <= mo <= 12:
+            first = dt.datetime(y, mo, 1)
+            nxt = dt.datetime(y + (mo == 12), mo % 12 + 1, 1)
+            return first, nxt - dt.timedelta(microseconds=1)
     return None
 
 
@@ -665,13 +672,15 @@ def run_interval(M, key):
     lo = max(lo_c) if lo_c else released
     hi = min(hi_c) if hi_c else hi_default
     basis = {"lo": "stated" if lo_c else "release", "hi": "stated" if hi_c else hi_basis}
+    if lo_c and released is not None and lo < released <= hi:  # a stated start before the release: the model ran
+        lo, basis["lo"] = released, "release"            # from its release (no early access stated or by date; 28 Oct)
     if key and not hi_c:                                 # a closed model cannot run after its maker API ids stopped
         shut = shutdown(ctx, key)                        # serving it (26 Oct): the default upper bound is capped there
         if shut is not None and shut < hi and (lo is None or lo <= shut):
             hi, basis["hi"] = shut, "shutdown"
             M.rule("run-before-shutdown")
     level = "written" if (lo_c or hi_c) else "computed"
-    if lo_c and lo > hi:                                 # stated bounds contradict: the widest interval, defaults too
+    if lo_c and max(lo_c) > hi:                          # stated bounds contradict: the widest interval, defaults too
         # (a release after the run's upper bound is no contradiction: early access by date, below; 28 Oct)
         lo = min([lo] + lo_c + [b[0] for b in ends] + ([released] if released else []))
         hi = max([hi, hi_default] + hi_c + [b[1] for b in starts])

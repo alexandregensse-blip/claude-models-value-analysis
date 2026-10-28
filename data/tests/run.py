@@ -503,6 +503,21 @@ def run_date_alias():
     m6 = sc.m(s, model="alias-z", effort=[LOW])
     r = sc.run()
     eq((r.model(m5), r.q(m6)), ("ac1", "out:model-not-established"), "run end before the switch; none stated")
+    # a stated run start before the model's release: the run is from the release, so a default documented from the
+    # release covers it (arxiv-2609.04298 Harbor@v0.6.4 1 May, Opus 4.8 released 28 May; 28 Oct)
+    sc = base()
+    win = dict(from_basis="stated", to_basis="stated")
+    sc.model("ad1", released="2026-05-28", configs=("low", "medium", "high"),
+             default=[dict(iv("2026-05-28", "2026-12-31", **win), configuration="medium")])
+    s = sc.source("a", published="2026-09-03")
+    m7 = sc.m(s, model="ad1", effort=[("no-effort-sent", "default settings")], run_date=[("run-start", "2026-05-01")],
+              score="50%")
+    sc.m(s, model="ma", effort=[LOW], score="40%")
+    r = sc.run()
+    eq(r.cfg(m7), "medium", "the release is the lower bound")
+    import build as B
+    eq([x.date().isoformat() for x in B.find_date("April 2026")], ["2026-04-01", "2026-04-30"], "a month only")
+    eq((B.find_date("2026-13"), B.find_date("may be 2026")), (None, None), "not a month")
 
 
 @test
