@@ -1,0 +1,263 @@
+{
+ "id": "src-superclue-fin-2607-2026-10-19",
+ "publisher": "superclue-fin",
+ "urls": [
+  "https://www.superclueai.com/data/specialized_list/Fin/2026年7月.xlsx"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://www.superclueai.com/data/specialized_list/Fin/2026年7月.xlsx",
+   "captured": "2026-10-19T15:48:12Z",
+   "note": "workbook fetched by salvo gs s10 (capture time = mtime of the saved file); sheets: 总榜, 耗时、成本、token"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/gs/s10/src/x_specialized_list_Fin_2026年7月.xlsx": "0620bd218561a15df89f536230969c719d92a313b34aa087621d4ac7f7c6ee31",
+  "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json": "5c0de721ed1dc12dc659641921e5353281055d818bb7335437ca0a8773e20439"
+ },
+ "harvested_at": "2026-10-19T15:48:12Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-superclue-fin (Wave C2)",
+ "agent": "converter scripts/extract.py (openpyxl via the gemdates venv), from the saved workbook",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "from": "/work/.salvo14/gs/s10/src/x_specialized_list_Fin_2026年7月.xlsx",
+   "tool": "openpyxl 3.1 (data_only): every row as {header: value}, header line breaks removed"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "$['总榜']",
+   "format": "json",
+   "row_key": "模型名称",
+   "columns": {
+    "模型名称": "model-name",
+    "总分": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "$['耗时、成本、token']",
+   "format": "json",
+   "row_key": "模型名称",
+   "columns": {
+    "模型名称": "model-name",
+    "平均每题成本（元）": "cost",
+    "平均每题token消耗": "tokens-total"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "about": "Kimi-K3(max)",
+   "says": "model-name",
+   "value": "Kimi-K3",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Kimi-K3(max), column 模型名称 (the name before its final label)",
+   "quote": "Kimi-K3(max)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F1"
+  },
+  {
+   "about": "Kimi-K3(max)",
+   "says": "effort-label",
+   "value": "(max)",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Kimi-K3(max), column 模型名称 (final label)",
+   "quote": "Kimi-K3(max)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F2"
+  },
+  {
+   "about": "Qwen3.7-Max",
+   "says": "model-name",
+   "value": "Qwen3.7-Max",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Qwen3.7-Max, column 模型名称 (the name before its final label)",
+   "quote": "Qwen3.7-Max",
+   "level": "written",
+   "form": "data-file",
+   "id": "F3"
+  },
+  {
+   "about": "Doubao-Seed-2.1-pro(high)",
+   "says": "model-name",
+   "value": "Doubao-Seed-2.1-pro(high)",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Doubao-Seed-2.1-pro(high), column 模型名称 (the name before its final label)",
+   "quote": "Doubao-Seed-2.1-pro(high)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F4"
+  },
+  {
+   "about": "MiniMax-M3",
+   "says": "model-name",
+   "value": "MiniMax-M3",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row MiniMax-M3, column 模型名称 (the name before its final label)",
+   "quote": "MiniMax-M3",
+   "level": "written",
+   "form": "data-file",
+   "id": "F5"
+  },
+  {
+   "about": "DeepSeek-V4-Pro(max)",
+   "says": "model-name",
+   "value": "DeepSeek-V4-Pro",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row DeepSeek-V4-Pro(max), column 模型名称 (the name before its final label)",
+   "quote": "DeepSeek-V4-Pro(max)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F6"
+  },
+  {
+   "about": "DeepSeek-V4-Pro(max)",
+   "says": "effort-label",
+   "value": "(max)",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row DeepSeek-V4-Pro(max), column 模型名称 (final label)",
+   "quote": "DeepSeek-V4-Pro(max)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F7"
+  },
+  {
+   "about": "Hy3(high)",
+   "says": "model-name",
+   "value": "Hy3(high)",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Hy3(high), column 模型名称 (the name before its final label)",
+   "quote": "Hy3(high)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F8"
+  },
+  {
+   "about": "Kimi-K2.6",
+   "says": "model-name",
+   "value": "Kimi-K2.6",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Kimi-K2.6, column 模型名称 (the name before its final label)",
+   "quote": "Kimi-K2.6",
+   "level": "written",
+   "form": "data-file",
+   "id": "F9"
+  },
+  {
+   "about": "GLM-5.2(max)",
+   "says": "model-name",
+   "value": "GLM-5.2",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row GLM-5.2(max), column 模型名称 (the name before its final label)",
+   "quote": "GLM-5.2(max)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F10"
+  },
+  {
+   "about": "GLM-5.2(max)",
+   "says": "effort-label",
+   "value": "(max)",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row GLM-5.2(max), column 模型名称 (final label)",
+   "quote": "GLM-5.2(max)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F11"
+  },
+  {
+   "about": "LongCat-2.0",
+   "says": "model-name",
+   "value": "LongCat-2.0",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row LongCat-2.0, column 模型名称 (the name before its final label)",
+   "quote": "LongCat-2.0",
+   "level": "written",
+   "form": "data-file",
+   "id": "F12"
+  },
+  {
+   "about": "Step-3.7-Flash(high)",
+   "says": "model-name",
+   "value": "Step-3.7-Flash(high)",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Step-3.7-Flash(high), column 模型名称 (the name before its final label)",
+   "quote": "Step-3.7-Flash(high)",
+   "level": "written",
+   "form": "data-file",
+   "id": "F13"
+  },
+  {
+   "about": "Mimo-V2.5-Pro",
+   "says": "model-name",
+   "value": "Mimo-V2.5-Pro",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "row Mimo-V2.5-Pro, column 模型名称 (the name before its final label)",
+   "quote": "Mimo-V2.5-Pro",
+   "level": "written",
+   "form": "data-file",
+   "id": "F14"
+  },
+  {
+   "says": "currency",
+   "value": "元",
+   "term": "CNY",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "sheet 耗时、成本、token, header 平均每题成本（元）",
+   "quote": "平均每题成本（元）",
+   "about": null,
+   "level": "written",
+   "id": "F15"
+  },
+  {
+   "says": "unit",
+   "value": "平均每题",
+   "term": "CNY-per-question",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-superclue-fin/evidence/fin-2607.json",
+   "where": "sheet 耗时、成本、token, header 平均每题成本（元）",
+   "quote": "平均每题成本（元）",
+   "translation": "average cost per question (yuan)",
+   "about": null,
+   "level": "written",
+   "id": "F16"
+  }
+ ]
+}
