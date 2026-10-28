@@ -10385,6 +10385,9 @@
   },
   "xrepotest-tpr-php": {
    "label": "XRepoTest TPR, PHP (arXiv 2608.25939, Table A.4, standard setting)"
+  },
+  "bito-s55o55-pct": {
+   "label": "Bito agentic coding battery, percent of maximum (posts of 9 Oct 2026)"
   }
  },
  "setups": {
@@ -22420,9 +22423,18 @@
    "metric": "bAcc%",
    "headline": {
     "metric": "bAcc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.35456",
+      "captured": "2026-10-28",
+      "where": "Abstract",
+      "quote": "achieves 64.16% average test balanced accuracy (bAcc)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.35456/evidence/2609.35456.txt",
+      "sha256": "5286996a96c5b39e87fcb1130a8213e3d92b99a99a0e569b976305c9565b6811"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -22816,9 +22828,18 @@
    "metric": "score/50",
    "headline": {
     "metric": "score/50",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://bito.ai/blog/claude-sonnet-5-5-vs-opus-5-5",
+      "captured": "2026-10-28",
+      "where": "'How we tested'",
+      "quote": "Every turn is scored out of 50 against an answer key",
+      "file": "/work/.salvo14/mig/convert-bito.ai/evidence/bito_claude-sonnet-5-5-vs-opus-5-5.txt",
+      "sha256": "c92d9f89e8a83df48517481b40e7563c044962dda5a5d8375eb4ff2571958565"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -29393,9 +29414,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://claw-bench.com/",
+      "captured": "2026-10-28",
+      "where": "'How scoring works'",
+      "quote": "Ranked by Reward (lenient).",
+      "file": "/work/.salvo14/mig/convert-claw-bench.com/evidence/clawbench.txt",
+      "sha256": "891871623113a5d843cd53e56ba9eccadb71a66ea5ba744f86b2c66324970298"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -139444,6 +139474,42 @@
    "legacy_groups": [],
    "label": "DiscoverPhysics 11 worlds, Antigravity CLI (ARA bridge)",
    "note": "headline: not-established:assumed (the scoreboard's bold PASS share is the board's own summary; the designation is the coordinator's decision)"
+  },
+  "bito-s55o55-pct": {
+   "family": "bito-s55o55-pct",
+   "label": "Bito agentic coding battery, percent of maximum (posts of 9 Oct 2026)",
+   "benchmark": "Bito agentic coding battery (blended percent of maximum, posts of 9 Oct 2026)",
+   "subset": null,
+   "harness": "ClaudeCode",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://bito.ai/blog/claude-haiku-5-5-vs-sonnet-5-5-vs-opus-5-5",
+      "captured": "2026-10-28",
+      "where": "scores paragraph above the table",
+      "quote": "Scores are percentages of the maximum",
+      "file": "/work/.salvo14/mig/convert-bito.ai/evidence/bito_claude-haiku-5-5-vs-sonnet-5-5-vs-opus-5-5.txt",
+      "sha256": "6b406203e66e2f521e564848096719e1c4a00b85375d9b596fc71c209133f8f3"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "the percent figures the posts of 9 Oct print (blended across the six main tasks); the 29 Sep post prints the same benchmark out of 50 (bito-s55o55)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
