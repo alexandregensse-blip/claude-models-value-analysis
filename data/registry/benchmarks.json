@@ -15264,9 +15264,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.15766v2",
+      "captured": "2026-10-19",
+      "where": "Section 3: the paper prioritises the penalized all-task average",
+      "quote": "We prioritize the penalized all-task average",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.15766/evidence/arxiv-2605.15766.txt",
+      "sha256": "5508b98fd05548d2284cd948b5cabb5b5613292bade2923a4131d91c0f8745eb"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -28858,9 +28867,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.10677",
+      "captured": "2026-10-28",
+      "where": "Table 3 gives one pass@1 per configuration",
+      "quote": "Rank Model (configuration) Developer Pass@1 (%)±95% CI",
+      "file": "/work/.salvo14/mig/convert-chartography-2608.10677/evidence/chartography-2608.10677.txt",
+      "sha256": "471aa8d7536b593dc623284a3ad5d66fc9d480cf80f8ef99de69dff41ca4177f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -127294,9 +127312,18 @@
    "metric": "Elo",
    "headline": {
     "metric": "Elo",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://x.ai/news/grok-4-1",
+      "captured": "2026-10-19",
+      "where": "the chart gives one normalized Elo per model",
+      "quote": "CHART Creative Writing v3",
+      "file": "/work/.salvo14/mig/convert-xai-grok-4-1-launch/evidence/chart-props.txt",
+      "sha256": "811b48d0c38af459f79ce8b28c202fa1ba4b53c08803cadb3cb511edd7d15139"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -127320,9 +127347,18 @@
    "metric": "Elo",
    "headline": {
     "metric": "Elo",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://x.ai/news/grok-4-1",
+      "captured": "2026-10-19",
+      "where": "the chart gives one normalized Elo per model",
+      "quote": "CHART EQ-Bench",
+      "file": "/work/.salvo14/mig/convert-xai-grok-4-1-launch/evidence/chart-props.txt",
+      "sha256": "811b48d0c38af459f79ce8b28c202fa1ba4b53c08803cadb3cb511edd7d15139"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -127346,9 +127382,18 @@
    "metric": "Elo",
    "headline": {
     "metric": "Elo",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://x.ai/news/grok-4-1",
+      "captured": "2026-10-19",
+      "where": "the chart gives one Elo per model",
+      "quote": "CHART LMArena Text Leaderboard",
+      "file": "/work/.salvo14/mig/convert-xai-grok-4-1-launch/evidence/chart-props.txt",
+      "sha256": "811b48d0c38af459f79ce8b28c202fa1ba4b53c08803cadb3cb511edd7d15139"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -136415,6 +136460,150 @@
    "legacy_groups": [],
    "label": "CodeAgentBench SWE-Bench-Pro, agent Kimi CLI 1.40.0",
    "note": "new setup (wave C2): an agent of the CodeAgentBench page with no legacy group"
+  },
+  "arxiv-2610.04292-lmbuild-s": {
+   "family": "arxiv-2610.04292-lmbuild",
+   "benchmark": "LMBuild: Soundness level score (S/A/D/R, Table 6), full core set of 200 objects",
+   "subset": null,
+   "harness": "LMBuild-baseline-protocol",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04292",
+      "captured": "2026-10-19",
+      "where": "Table 6: one score per model for this level; the paper designates no overall score",
+      "quote": "Level scores, computed as the mean of the three metrics within each level with N/A metrics excluded",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04292/evidence/arxiv-2610.04292.txt",
+      "sha256": "69692475f16270a19221778ffecd5e6a6839a2040e4268df9fad34bdf47d2832"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LMBuild Soundness level score (Table 6, full core)",
+   "note": "level score S of the paper's Table 6 (mean of its three Soundness metrics, N/A excluded): a component of the legacy setup arxiv-2610.04292-lmbuild (our mean of S, A, D, R)"
+  },
+  "arxiv-2610.04292-lmbuild-a": {
+   "family": "arxiv-2610.04292-lmbuild",
+   "benchmark": "LMBuild: Affordance level score (S/A/D/R, Table 6), full core set of 200 objects",
+   "subset": null,
+   "harness": "LMBuild-baseline-protocol",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04292",
+      "captured": "2026-10-19",
+      "where": "Table 6: one score per model for this level; the paper designates no overall score",
+      "quote": "Level scores, computed as the mean of the three metrics within each level with N/A metrics excluded",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04292/evidence/arxiv-2610.04292.txt",
+      "sha256": "69692475f16270a19221778ffecd5e6a6839a2040e4268df9fad34bdf47d2832"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LMBuild Affordance level score (Table 6, full core)",
+   "note": "level score A of the paper's Table 6 (mean of its three Affordance metrics, N/A excluded): a component of the legacy setup arxiv-2610.04292-lmbuild (our mean of S, A, D, R)"
+  },
+  "arxiv-2610.04292-lmbuild-d": {
+   "family": "arxiv-2610.04292-lmbuild",
+   "benchmark": "LMBuild: Design level score (S/A/D/R, Table 6), full core set of 200 objects",
+   "subset": null,
+   "harness": "LMBuild-baseline-protocol",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04292",
+      "captured": "2026-10-19",
+      "where": "Table 6: one score per model for this level; the paper designates no overall score",
+      "quote": "Level scores, computed as the mean of the three metrics within each level with N/A metrics excluded",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04292/evidence/arxiv-2610.04292.txt",
+      "sha256": "69692475f16270a19221778ffecd5e6a6839a2040e4268df9fad34bdf47d2832"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LMBuild Design level score (Table 6, full core)",
+   "note": "level score D of the paper's Table 6 (mean of its three Design metrics, N/A excluded): a component of the legacy setup arxiv-2610.04292-lmbuild (our mean of S, A, D, R)"
+  },
+  "arxiv-2610.04292-lmbuild-r": {
+   "family": "arxiv-2610.04292-lmbuild",
+   "benchmark": "LMBuild: Realization level score (S/A/D/R, Table 6), full core set of 200 objects",
+   "subset": null,
+   "harness": "LMBuild-baseline-protocol",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04292",
+      "captured": "2026-10-19",
+      "where": "Table 6: one score per model for this level; the paper designates no overall score",
+      "quote": "Level scores, computed as the mean of the three metrics within each level with N/A metrics excluded",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04292/evidence/arxiv-2610.04292.txt",
+      "sha256": "69692475f16270a19221778ffecd5e6a6839a2040e4268df9fad34bdf47d2832"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LMBuild Realization level score (Table 6, full core)",
+   "note": "level score R of the paper's Table 6 (mean of its three Realization metrics, N/A excluded): a component of the legacy setup arxiv-2610.04292-lmbuild (our mean of S, A, D, R)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
