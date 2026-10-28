@@ -10349,6 +10349,27 @@
   },
   "clawevallive-completion": {
    "label": "Claw-Eval-Live: Overall Completion Score"
+  },
+  "evorisk-asr-claudecode": {
+   "label": "EvoRiskBench attack success rate (Claude Code harness)"
+  },
+  "evorisk-asr-codex": {
+   "label": "EvoRiskBench attack success rate (Codex harness)"
+  },
+  "evorisk-asr-openclaw": {
+   "label": "EvoRiskBench attack success rate (OpenClaw harness)"
+  },
+  "dseffi-bench-temporal": {
+   "label": "DSEffi-Bench temporal test set (N=304), Pass (correctness) %"
+  },
+  "mmlu-prox-lite-strict": {
+   "label": "MMLU-ProX-Lite: strict accuracy by language (10 languages, 588 questions each), lm-evaluation-harness"
+  },
+  "forecastbench-tourn-ws128k-overall": {
+   "label": "ForecastBench tournament leaderboard: Overall Brier Index (dataset and market questions), web search + code execution, 128k"
+  },
+  "arxiv-2610.10479-codex-agg": {
+   "label": "Agentic RSR scene refinement, Codex implementation, 18-scene aggregate of 6 Oct 2026 (arXiv 2610.10479 Table 8)"
   }
  },
  "setups": {
@@ -15543,9 +15564,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.10226v2",
+      "captured": "2026-10-28",
+      "where": "section 'Main Results': the overall score (the Full column of Table 1) of the strongest model",
+      "quote": "Even the strongest model, Claude Opus 5, achieves an overall score of only 36.53%",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.10226/evidence/arxiv-2609.10226v2.txt",
+      "sha256": "cae522f13d0d47690df81b37366ac6172f7133956dd0be72d96a244089c5db7b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -18680,9 +18710,18 @@
    "metric": "ccc-score-x100",
    "headline": {
     "metric": "ccc-score-x100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.04184",
+      "captured": "2026-10-28",
+      "where": "Table 2 caption: rows are ordered by overall Score (the ranking column is Overall, 14 targets, Avg.)",
+      "quote": "Rows are ordered by overall Score",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04184/evidence/arxiv-2610.04184-latest.txt",
+      "sha256": "3ea5dee8cb95d42b71a9a83dab10e6e73029a6873b83fe4c7af234b703cb68b7"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -21001,9 +21040,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.17020",
+      "captured": "2026-10-28",
+      "where": "Table 2 is sorted by programmatic Pass@1 (68, 68, 68, 67, 58, 57, 55, 55, 53, 52, 37); first row",
+      "quote": "Grok 4.7 OpenCode 68% 81% 64% 82% 2.75",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17020/evidence/p.txt",
+      "sha256": "f8e394fa5b66e645f590f3c403c0490fa1277150005674dcf89afe542b09ce59"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -21220,9 +21268,18 @@
    "metric": "delta-AP-vs-gemini-3.1-pro",
    "headline": {
     "metric": "delta-AP-vs-gemini-3.1-pro",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.17768v1",
+      "captured": "2026-10-19",
+      "where": "Table 1 (page text, section 3): one column of per-model differences from the cited reference, the only per-model score the paper reports; the absolute AP is printed only for the seven models together (abstract: 'at an average precision of at most 0.3744')",
+      "quote": "Table 1: Zero-shot ranking on the development set (215 pages, one scoring run): each model’s first sample against the cached reference.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.17768/evidence/v.txt",
+      "sha256": "52afd603387da1742b43c0932015c3d55ea535241dacb6b4ae5941ef102f5351"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -29954,9 +30011,18 @@
    "metric": "success-of-75",
    "headline": {
     "metric": "success-of-75",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.33807",
+      "captured": "2026-10-20",
+      "where": "Table 10 (sorted by success, arrow on 'Success (/75)') and Section 4.1: the success-based ranking",
+      "quote": "These diagnostics do not affect the success-based ranking.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.33807/evidence/2609.33807.txt",
+      "sha256": "6204629a1183a3745bffc786adeb05efd5c744addfb64a69e0ec380f3a1de2f2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -29983,9 +30049,18 @@
    "metric": "success-of-75",
    "headline": {
     "metric": "success-of-75",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.33807",
+      "captured": "2026-10-20",
+      "where": "Table 10 (sorted by success, arrow on 'Success (/75)') and Section 3.5: the success-based ranking",
+      "quote": "These diagnostics do not affect the success-based ranking.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.33807/evidence/2609.33807.txt",
+      "sha256": "6204629a1183a3745bffc786adeb05efd5c744addfb64a69e0ec380f3a1de2f2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30302,9 +30377,18 @@
    "metric": "score-of-70",
    "headline": {
     "metric": "score-of-70",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/coleam00/kimi-k3-reliability-benchmark",
+      "captured": "2026-10-20",
+      "where": "card image, label 'quality score' (subtitle: judged by Opus on a 7-dimension rubric (/70))",
+      "quote": "quality score",
+      "file": "/work/.salvo14/mig/convert-github-coleam00-kimi-k3-reliability/evidence/coleam_k3-build-quality-light.png",
+      "sha256": "0ed3e4796780b9df43f0744a50039e2ef2dfc8c8ab460d4a47fea8a9732c16dc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30331,9 +30415,18 @@
    "metric": "score-of-70",
    "headline": {
     "metric": "score-of-70",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/coleam00/kimi-k3-reliability-benchmark",
+      "captured": "2026-10-20",
+      "where": "card image, label 'quality score' (subtitle: judged by Opus on a 7-dimension rubric (/70))",
+      "quote": "quality score",
+      "file": "/work/.salvo14/mig/convert-github-coleam00-kimi-k3-reliability/evidence/coleam_k3-build-quality-light.png",
+      "sha256": "0ed3e4796780b9df43f0744a50039e2ef2dfc8c8ab460d4a47fea8a9732c16dc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30360,9 +30453,18 @@
    "metric": "fail-rate-pct-LOWER-IS-BETTER",
    "headline": {
     "metric": "fail-rate-pct-LOWER-IS-BETTER",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/coleam00/kimi-k3-reliability-benchmark",
+      "captured": "2026-10-20",
+      "where": "README 'The finding' table, header 'Failure rate on trap tasks'",
+      "quote": "Failure rate on trap tasks",
+      "file": "/work/.salvo14/mig/convert-github-coleam00-kimi-k3-reliability/evidence/coleam00_kimi-k3-reliability-benchmark.md",
+      "sha256": "74bb45046b242b4ccf32e6c6b4261b96b822480e723610a76b38fb2ae9335f74"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -39854,10 +39956,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.03153",
+      "captured": "2026-10-20",
+      "where": "Abstract",
+      "quote": "reaches a 68.44% attack success rate (ASR)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.03153/evidence/2610.03153.txt",
+      "sha256": "dafa5849a747d38b2cb9202bdb083b2d0242ed217a910e57343555f650d2ecaf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -39883,10 +39994,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.03153",
+      "captured": "2026-10-20",
+      "where": "Abstract",
+      "quote": "reaches a 68.44% attack success rate (ASR)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.03153/evidence/2610.03153.txt",
+      "sha256": "dafa5849a747d38b2cb9202bdb083b2d0242ed217a910e57343555f650d2ecaf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -39912,10 +40032,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.03153",
+      "captured": "2026-10-20",
+      "where": "Abstract",
+      "quote": "reaches a 68.44% attack success rate (ASR)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.03153/evidence/2610.03153.txt",
+      "sha256": "dafa5849a747d38b2cb9202bdb083b2d0242ed217a910e57343555f650d2ecaf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -39993,9 +40122,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/joey114132/fable-workflow-skill",
+      "captured": "2026-10-28",
+      "where": "README Benchmark table: one score column per model (No skill column)",
+      "quote": "Scored on **answer + thinking quality** out of 100, split Thinking /50 + Answer /50",
+      "file": "/work/.salvo14/mig/convert-github-fable-workflow/evidence/fable-wf.md",
+      "sha256": "0f5f6f5fd6e5a170d51fbfa4ee0976c9fc4cccec13a7c5f924410a6f68e6d26a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -40022,9 +40160,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/joey114132/fable-workflow-skill",
+      "captured": "2026-10-28",
+      "where": "README Benchmark table: one score column per model (With skill column)",
+      "quote": "Scored on **answer + thinking quality** out of 100, split Thinking /50 + Answer /50",
+      "file": "/work/.salvo14/mig/convert-github-fable-workflow/evidence/fable-wf.md",
+      "sha256": "0f5f6f5fd6e5a170d51fbfa4ee0976c9fc4cccec13a7c5f924410a6f68e6d26a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -40575,9 +40722,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.08634",
+      "captured": "2026-10-20",
+      "where": "Section 5.1",
+      "quote": "Claude Opus 4.6 is the best performing model by accuracy (88.4%)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.08634/evidence/2608.08634.txt",
+      "sha256": "91a171f5d4f286c24f734602c1d0ca098e36f8431fadddfba2ce687beac170cd"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -41380,9 +41536,18 @@
    "metric": "brier-index%",
    "headline": {
     "metric": "brier-index%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://www.forecastbench.org/leaderboards/",
+      "captured": "2026-10-28",
+      "where": "Preliminary board note: 'The preliminary leaderboard ranks models on all resolved dataset questions' (the CSV Dataset column is in rank order)",
+      "quote": "The preliminary leaderboard ranks models on all resolved dataset questions",
+      "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html",
+      "sha256": "c3216d6aa6dd9917cc3439383abcf367f2208ae2547e4bd72a6407ff98a18c11"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -41408,10 +41573,19 @@
    "judge_panel": null,
    "metric": "brier-index%(dataset)",
    "headline": {
-    "metric": "brier-index%(dataset)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "brier-index%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://www.forecastbench.org/leaderboards/",
+      "captured": "2026-10-28",
+      "where": "Brier Index paragraph: 'Forecasters are then ranked by their Overall Brier Index' (the tournament CSV Rank follows Overall, not Dataset)",
+      "quote": "ranked by their Overall Brier Index",
+      "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html",
+      "sha256": "c3216d6aa6dd9917cc3439383abcf367f2208ae2547e4bd72a6407ff98a18c11"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -43593,9 +43767,26 @@
    "metric": "pass@1%",
    "headline": {
     "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+      "captured": "2026-10-20",
+      "where": "blog text: CWE-Bench result is given as pass@1",
+      "quote": "with a pass@1 of 47.2% compared to a leading frontier model at 47.8%",
+      "file": "/work/.salvo14/mig/convert-google-blog-3-8-cyber/evidence/blog.txt",
+      "sha256": "c7bcbae7951979af0053fb7d2069ccd437553dc5f89ce59d35996a2bdd4699f5"
+     },
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+      "captured": "2026-10-20",
+      "where": "chart C2 title",
+      "quote": "CWE-Bench Pass@1 vs. Cost per Rollout",
+      "file": "/work/.salvo14/mig/convert-google-blog-3-8-cyber/evidence/chart-transcript.txt",
+      "sha256": "99f5c8d369c71b84f6fa8eabc8cdb6503a2e29700cb6216fd1387b6f4edfc59d"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -43622,9 +43813,18 @@
    "metric": "pass@1%",
    "headline": {
     "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/",
+      "captured": "2026-10-20",
+      "where": "chart C1 title: the chart names the metric",
+      "quote": "CyberGym Pass@1",
+      "file": "/work/.salvo14/mig/convert-google-blog-3-8-cyber/evidence/chart-transcript.txt",
+      "sha256": "99f5c8d369c71b84f6fa8eabc8cdb6503a2e29700cb6216fd1387b6f4edfc59d"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -98396,10 +98596,19 @@
    "judge_panel": null,
    "metric": "partial%",
    "headline": {
-    "metric": "partial%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "binary%",
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2606.29537",
+      "captured": "2026-10-20",
+      "where": "Section 1, results paragraph: the paper's primary metric",
+      "quote": "Under our primary binary-completion metric at 500 steps",
+      "file": "/work/.salvo14/mig/convert-arxiv-2606.29537/evidence/osw.txt",
+      "sha256": "8c230183b066bc2342c945a7672704a4baddcb5f6dc4975d525f74fb379c0250"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -98503,17 +98712,17 @@
    "headline": {
     "metric": "binary%",
     "basis": "designated",
+    "level": "written",
     "evidence": [
      {
-      "url": "https://osworld-v2.xlang.ai/static/data/leaderboard/official-results.json",
-      "captured": "2026-10-19",
-      "where": "board JSON field defaultMetric (metrics: binaryAccuracy \"Binary Accuracy\", partialScore \"Partial Score\"); the site abstract calls binary completion the primary metric",
-      "quote": "\"defaultMetric\": \"binaryAccuracy\"",
-      "file": "/work/.salvo14/mig/convert-osworld-v2-board/evidence/official-results-20261015.json",
-      "sha256": "1bd159e867f183f1f146e556f1d82b5eb10e0cede37bfd33e90437f00f7c4ef5"
+      "url": "https://arxiv.org/abs/2606.29537",
+      "captured": "2026-10-20",
+      "where": "Section 1, results paragraph: the paper's primary metric",
+      "quote": "Under our primary binary-completion metric at 500 steps",
+      "file": "/work/.salvo14/mig/convert-arxiv-2606.29537/evidence/osw.txt",
+      "sha256": "8c230183b066bc2342c945a7672704a4baddcb5f6dc4975d525f74fb379c0250"
      }
-    ],
-    "level": "written"
+    ]
    },
    "bounds": [
     0,
@@ -117210,9 +117419,18 @@
    "metric": "BT-logit",
    "headline": {
     "metric": "BT-logit",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.12569",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption: rows sorted by the full-schedule Bradley-Terry rating",
+      "quote": "The rows are sorted in descending order by the full-schedule Bradley-Terry log-strength rating",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.12569/evidence/2610.12569.txt",
+      "sha256": "1906700e5a009854fa3f99875388020fe562cccceeeba091581bbc83975dff57"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -117236,9 +117454,18 @@
    "metric": "BT-logit",
    "headline": {
     "metric": "BT-logit",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.12569",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption: rows sorted by the full-schedule Bradley-Terry rating",
+      "quote": "The rows are sorted in descending order by the full-schedule Bradley-Terry log-strength rating",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.12569/evidence/2610.12569.txt",
+      "sha256": "1906700e5a009854fa3f99875388020fe562cccceeeba091581bbc83975dff57"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -126153,9 +126380,18 @@
    "metric": "V2WScore",
    "headline": {
     "metric": "V2WScore",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.04432",
+      "captured": "2026-10-20",
+      "where": "section 4.2: 'the strongest model by V2WScore' (Table 2 sorted by Score)",
+      "quote": "Even Fable-5.1, the strongest model by V2WScore",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.04432/evidence/2610.04432.txt",
+      "sha256": "6574c7646bb2282c827bb2c08380b0e0525091b5c3781ab2ba9a9af9130c5248"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -137924,6 +138160,636 @@
     "decision": null,
     "level": "not-established:assumed"
    }
+  },
+  "gameasg-strict-codex-cli": {
+   "family": "gameasg-strict",
+   "benchmark": "GameASG-Bench: strict task success, Codex CLI",
+   "subset": null,
+   "harness": "Codex CLI",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "success%",
+   "headline": {
+    "metric": "success%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.21293",
+      "captured": "2026-10-20",
+      "where": "Section 4.1 Evaluation metrics",
+      "quote": "The primary metric is the strict task success rate over all 47 planned tasks",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.21293/evidence/2609.21293.txt",
+      "sha256": "799b1c37dcd7f9a528336e1672c71c48c07d528c0f04e7e6806d6457c8263122"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "GameASG-Bench strict task success (Codex CLI)",
+   "note": "new setup (C2, 28 Oct): one harness; the primary metric the paper designates; the legacy group gameasg-strict mixed two harnesses"
+  },
+  "gameasg-strict-claude-code": {
+   "family": "gameasg-strict",
+   "benchmark": "GameASG-Bench: strict task success, Claude Code",
+   "subset": null,
+   "harness": "Claude Code",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "success%",
+   "headline": {
+    "metric": "success%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.21293",
+      "captured": "2026-10-20",
+      "where": "Section 4.1 Evaluation metrics",
+      "quote": "The primary metric is the strict task success rate over all 47 planned tasks",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.21293/evidence/2609.21293.txt",
+      "sha256": "799b1c37dcd7f9a528336e1672c71c48c07d528c0f04e7e6806d6457c8263122"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "GameASG-Bench strict task success (Claude Code)",
+   "note": "new setup (C2, 28 Oct): one harness; the primary metric the paper designates; the legacy group gameasg-strict mixed two harnesses"
+  },
+  "evorisk-asr-claudecode": {
+   "family": "evorisk-asr-claudecode",
+   "benchmark": "EvoRiskBench attack success rate (Claude Code harness)",
+   "subset": null,
+   "harness": "Claude Code",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "ASR%",
+   "headline": {
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.03153",
+      "captured": "2026-10-20",
+      "where": "Abstract",
+      "quote": "reaches a 68.44% attack success rate (ASR)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.03153/evidence/2610.03153.txt",
+      "sha256": "dafa5849a747d38b2cb9202bdb083b2d0242ed217a910e57343555f650d2ecaf"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "lower",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "EvoRiskBench ASR (Claude Code harness)",
+   "note": "new setup (C2, 28 Oct): the designated metric (the abstract's headline); one harness"
+  },
+  "evorisk-asr-codex": {
+   "family": "evorisk-asr-codex",
+   "benchmark": "EvoRiskBench attack success rate (Codex harness)",
+   "subset": null,
+   "harness": "Codex",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "ASR%",
+   "headline": {
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.03153",
+      "captured": "2026-10-20",
+      "where": "Abstract",
+      "quote": "reaches a 68.44% attack success rate (ASR)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.03153/evidence/2610.03153.txt",
+      "sha256": "dafa5849a747d38b2cb9202bdb083b2d0242ed217a910e57343555f650d2ecaf"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "lower",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "EvoRiskBench ASR (Codex harness)",
+   "note": "new setup (C2, 28 Oct): the designated metric (the abstract's headline); one harness"
+  },
+  "evorisk-asr-openclaw": {
+   "family": "evorisk-asr-openclaw",
+   "benchmark": "EvoRiskBench attack success rate (OpenClaw harness)",
+   "subset": null,
+   "harness": "OpenClaw",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "ASR%",
+   "headline": {
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.03153",
+      "captured": "2026-10-20",
+      "where": "Abstract",
+      "quote": "reaches a 68.44% attack success rate (ASR)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.03153/evidence/2610.03153.txt",
+      "sha256": "dafa5849a747d38b2cb9202bdb083b2d0242ed217a910e57343555f650d2ecaf"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "lower",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "EvoRiskBench ASR (OpenClaw harness)",
+   "note": "new setup (C2, 28 Oct): the designated metric (the abstract's headline); one harness"
+  },
+  "dseffi-bench-temporal": {
+   "family": "dseffi-bench-temporal",
+   "benchmark": "DSEffi-Bench temporal test set, Pass %",
+   "subset": "temporal test set (N=304)",
+   "harness": "own-test-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DSEffi-Bench temporal test set (N=304), Pass %",
+   "note": "new setup (C2): Table 6 of arXiv 2608.30248; headline pending (the paper designates none)"
+  },
+  "mmlu-prox-lite-strict-en": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, English: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, English (588 parallel questions), strict exact match",
+   "subset": "en",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'en' (English) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-zh": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Chinese: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Chinese (588 parallel questions), strict exact match",
+   "subset": "zh",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'zh' (Chinese) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-ja": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Japanese: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Japanese (588 parallel questions), strict exact match",
+   "subset": "ja",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'ja' (Japanese) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-ko": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Korean: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Korean (588 parallel questions), strict exact match",
+   "subset": "ko",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'ko' (Korean) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-pt": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Portuguese: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Portuguese (588 parallel questions), strict exact match",
+   "subset": "pt",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'pt' (Portuguese) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-de": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, German: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, German (588 parallel questions), strict exact match",
+   "subset": "de",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'de' (German) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-id": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Indonesian: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Indonesian (588 parallel questions), strict exact match",
+   "subset": "id",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'id' (Indonesian) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-ru": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Russian: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Russian (588 parallel questions), strict exact match",
+   "subset": "ru",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'ru' (Russian) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-ar": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Arabic: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Arabic (588 parallel questions), strict exact match",
+   "subset": "ar",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'ar' (Arabic) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "mmlu-prox-lite-strict-sw": {
+   "family": "mmlu-prox-lite-strict",
+   "label": "MMLU-ProX-Lite, Swahili: strict accuracy (588 questions)",
+   "benchmark": "MMLU-ProX-Lite, Swahili (588 parallel questions), strict exact match",
+   "subset": "sw",
+   "harness": "lm-evaluation-harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "strict-acc%",
+   "headline": {
+    "metric": "strict-acc%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/3ae3ae/mmlu-prox-lite-evals",
+      "captured": "2026-10-19",
+      "where": "README section 'Methodology (protocol v1)', bullet 'Scoring' (the official score), table 'Strict accuracy (%) by language', column 'sw' (Swahili) for the cells",
+      "quote": "the official score is lm-eval's `exact_match` with the task's per-language answer regex",
+      "file": "/work/.salvo14/mig/convert-github-mmlu-prox-lite-evals/evidence/mmlu-README.md",
+      "sha256": "5981e10a76fb0b3c7835f5b03262b0b407417d9caffcf182ebec777642f71d13"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: per-language setup; the legacy 10-language average is not converted (our mean of these cells)."
+  },
+  "forecastbench-tourn-ws128k-overall": {
+   "family": "forecastbench-tourn-ws128k-overall",
+   "label": "ForecastBench tournament leaderboard: Overall Brier Index, web search + code execution, 128k",
+   "benchmark": "ForecastBench tournament leaderboard: Overall Brier Index (equal-weighted dataset and market difficulty-adjusted Brier scores, converted to a Brier Index), web search + code execution, 128k",
+   "subset": null,
+   "harness": "forecastbench-harness(ws+code128k)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "brier-index%",
+   "headline": {
+    "metric": "brier-index%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://www.forecastbench.org/leaderboards/",
+      "captured": "2026-10-28",
+      "where": "Brier Index paragraph: 'Forecasters are then ranked by their Overall Brier Index'; the tournament CSV Rank follows the Overall column",
+      "quote": "ranked by their Overall Brier Index",
+      "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html",
+      "sha256": "c3216d6aa6dd9917cc3439383abcf367f2208ae2547e4bd72a6407ff98a18c11"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "note": "wave C2: the designated (ranked-by) index of the tournament board; the legacy rows hold the dataset index only."
+  },
+  "arxiv-2610.10479-codex-agg": {
+   "family": "arxiv-2610.10479-codex-agg",
+   "benchmark": "Agentic RSR scene reconstruction, Codex implementation, aggregate of 6 Oct 2026 (arXiv 2610.10479 Table 8)",
+   "subset": null,
+   "harness": "Codex implementation",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "solved-of-18",
+   "headline": {
+    "metric": "solved-of-18",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    18
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Agentic RSR, Codex implementation, 18-scene aggregate of 6 Oct 2026 (Table 8)",
+   "note": "new setup (28 Oct): Table 8 is a second batch, not the DSH batch; headline pending (no designation in the source)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."

@@ -1,0 +1,545 @@
+{
+ "id": "src-forecastbench-boards-2026-10-28",
+ "publisher": "forecastbench",
+ "urls": [
+  "https://github.com/forecastingresearch/forecastbench-datasets/blob/main/leaderboards/csv/leaderboard_preliminary.csv",
+  "https://github.com/forecastingresearch/forecastbench-datasets/blob/main/leaderboards/csv/leaderboard_tournament.csv",
+  "https://www.forecastbench.org/leaderboards/"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv": "f581bb3eeea4cb2035a0687588ade5ea2ddcff38e1437b7a861a0be83b4c9258",
+  "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv": "4faf9c937827fbd113f7408c040f3e3d8380a972be484df0e768be3f88f699f0",
+  "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html": "c3216d6aa6dd9917cc3439383abcf367f2208ae2547e4bd72a6407ff98a18c11"
+ },
+ "harvested_at": "2026-10-28T11:17:00Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-forecastbench (Wave C2, 28 Oct): raw.githubusercontent main fetched 28 Oct; legacy rows cite reads of 18-19 Oct",
+ "agent": "convert agent (Haiku 5.5), C2 wave",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/forecastingresearch/forecastbench-datasets/main/leaderboards/csv/leaderboard_preliminary.csv",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/forecastingresearch/forecastbench-datasets/main/leaderboards/csv/leaderboard_tournament.csv",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://www.forecastbench.org/leaderboards/",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "where": "csv",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Dataset": {
+     "says": "score",
+     "term": "brier-index%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    }
+   }
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "where": "csv",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Dataset": {
+     "says": "score",
+     "term": "brier-index%(dataset)",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Overall": {
+     "says": "score",
+     "term": "brier-index%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    }
+   }
+  }
+ ],
+ "facts": [
+  {
+   "says": "metric-definition",
+   "value": "an interpretable 0-100% scale where higher is better",
+   "form": "prose",
+   "where": "forecastbench.org/leaderboards page, the paragraph on the Brier Index",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html",
+   "quote": "an interpretable 0-100% scale where higher is better (100% = perfect accuracy, 50% = maximally uninformed, 0% = maximally wrong)",
+   "level": "written",
+   "about": null,
+   "id": "F1"
+  },
+  {
+   "says": "metric-definition",
+   "value": "ranks models on all resolved dataset questions",
+   "form": "prose",
+   "where": "forecastbench.org/leaderboards page, the Preliminary board note",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html",
+   "quote": "The preliminary leaderboard ranks models on all resolved dataset questions",
+   "level": "written",
+   "about": null,
+   "id": "F2"
+  },
+  {
+   "says": "metric-definition",
+   "value": "ranked by their Overall Brier Index",
+   "form": "prose",
+   "where": "forecastbench.org/leaderboards page, the Brier Index paragraph",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboards-page.html",
+   "quote": "ranked by their Overall Brier Index",
+   "level": "written",
+   "about": null,
+   "id": "F3"
+  },
+  {
+   "says": "score",
+   "value": "61.7",
+   "form": "data-file",
+   "where": "CSV line 144, column Dataset",
+   "about": "claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F4"
+  },
+  {
+   "says": "model-name",
+   "value": "claude-opus-5",
+   "form": "label",
+   "where": "CSV line 144, column Model",
+   "about": "claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k",
+   "quote": "140,ForecastBench,Anthropic,claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k,61.7,984,\"[60.7, 62.6]\",Likely,0.02,Yes,<0.01,0.0,0.0,0.026,0.123",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F5"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 144, column Model (the slug's effort word)",
+   "about": "claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k",
+   "quote": "140,ForecastBench,Anthropic,claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k,61.7,984,\"[60.7, 62.6]\",Likely,0.02,Yes,<0.01,0.0,0.0,0.026,0.123",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F6"
+  },
+  {
+   "says": "score",
+   "value": "61.4",
+   "form": "data-file",
+   "where": "CSV line 172, column Dataset",
+   "about": "claude-fable-5-max-web-search-code-execution-128k",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F7"
+  },
+  {
+   "says": "model-name",
+   "value": "claude-fable-5",
+   "form": "label",
+   "where": "CSV line 172, column Model",
+   "about": "claude-fable-5-max-web-search-code-execution-128k",
+   "quote": "171,ForecastBench,Anthropic,claude-fable-5-max-web-search-code-execution-128k,61.4,984,\"[60.4, 62.3]\",Yes,<0.01,Yes,<0.01,0.0,0.0,0.024,0.121",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F8"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 172, column Model (the slug's effort word)",
+   "about": "claude-fable-5-max-web-search-code-execution-128k",
+   "quote": "171,ForecastBench,Anthropic,claude-fable-5-max-web-search-code-execution-128k,61.4,984,\"[60.4, 62.3]\",Yes,<0.01,Yes,<0.01,0.0,0.0,0.024,0.121",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F9"
+  },
+  {
+   "says": "score",
+   "value": "61.0",
+   "form": "data-file",
+   "where": "CSV line 209, column Dataset",
+   "about": "claude-fable-5-high-web-search-code-execution-128k†",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F10"
+  },
+  {
+   "says": "model-name",
+   "value": "claude-fable-5",
+   "form": "label",
+   "where": "CSV line 209, column Model",
+   "about": "claude-fable-5-high-web-search-code-execution-128k†",
+   "quote": "204,ForecastBench,Anthropic,claude-fable-5-high-web-search-code-execution-128k†,61.0,984,\"[60.2, 61.8]\",Yes,<0.01,Likely,0.01,0.0,0.0,0.021,0.118",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F11"
+  },
+  {
+   "says": "effort-label",
+   "value": "high",
+   "form": "label",
+   "where": "CSV line 209, column Model (the slug's effort word)",
+   "about": "claude-fable-5-high-web-search-code-execution-128k†",
+   "quote": "204,ForecastBench,Anthropic,claude-fable-5-high-web-search-code-execution-128k†,61.0,984,\"[60.2, 61.8]\",Yes,<0.01,Likely,0.01,0.0,0.0,0.021,0.118",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F12"
+  },
+  {
+   "says": "score",
+   "value": "60.7",
+   "form": "data-file",
+   "where": "CSV line 226, column Dataset",
+   "about": "gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F13"
+  },
+  {
+   "says": "model-name",
+   "value": "gpt-5.6-sol-pro",
+   "form": "label",
+   "where": "CSV line 226, column Model",
+   "about": "gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized",
+   "quote": "222,ForecastBench,OpenAI,gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized,60.7,984,\"[59.5, 61.8]\",Yes,<0.001,Likely,0.05,0.0,0.0,0.018,0.116",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F14"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 226, column Model (the slug's effort word)",
+   "about": "gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized",
+   "quote": "222,ForecastBench,OpenAI,gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized,60.7,984,\"[59.5, 61.8]\",Yes,<0.001,Likely,0.05,0.0,0.0,0.018,0.116",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F15"
+  },
+  {
+   "says": "score",
+   "value": "60.1",
+   "form": "data-file",
+   "where": "CSV line 280, column Dataset",
+   "about": "gpt-5.6-sol-standard-max-web-search-code-execution-128k",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F16"
+  },
+  {
+   "says": "model-name",
+   "value": "gpt-5.6-sol",
+   "form": "label",
+   "where": "CSV line 280, column Model",
+   "about": "gpt-5.6-sol-standard-max-web-search-code-execution-128k",
+   "quote": "272,ForecastBench,OpenAI,gpt-5.6-sol-standard-max-web-search-code-execution-128k,60.1,984,\"[59.0, 61.3]\",Yes,<0.001,No,0.15,0.0,0.0,0.013,0.111",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F17"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 280, column Model (the slug's effort word)",
+   "about": "gpt-5.6-sol-standard-max-web-search-code-execution-128k",
+   "quote": "272,ForecastBench,OpenAI,gpt-5.6-sol-standard-max-web-search-code-execution-128k,60.1,984,\"[59.0, 61.3]\",Yes,<0.001,No,0.15,0.0,0.0,0.013,0.111",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_preliminary.csv",
+   "level": "written",
+   "id": "F18"
+  },
+  {
+   "says": "model-name",
+   "value": "claude-opus-5",
+   "form": "label",
+   "where": "CSV line 67, column Model",
+   "about": "claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k",
+   "quote": "65,ForecastBench,Anthropic,claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k,61.5,984,\"[60.6, 62.5]\",72.1,223,\"[70.9, 73.4]\",66.4,1207,\"[65.7, 67.2]\",Yes,<0.01,Yes,<0.001,0.0,0.0,0.027,0.065,0.148,0.078,0.113",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F19"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 67, column Model (the slug's effort word)",
+   "about": "claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k",
+   "quote": "65,ForecastBench,Anthropic,claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k,61.5,984,\"[60.6, 62.5]\",72.1,223,\"[70.9, 73.4]\",66.4,1207,\"[65.7, 67.2]\",Yes,<0.01,Yes,<0.001,0.0,0.0,0.027,0.065,0.148,0.078,0.113",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F20"
+  },
+  {
+   "says": "score",
+   "value": "61.5",
+   "form": "data-file",
+   "where": "CSV line 67, column Dataset",
+   "about": "claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%(dataset)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F21"
+  },
+  {
+   "says": "score",
+   "value": "66.4",
+   "form": "data-file",
+   "where": "CSV line 67, column Overall",
+   "about": "claude-opus-5-adaptive-thinking-max-web-search-code-execution-128k",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F22"
+  },
+  {
+   "says": "model-name",
+   "value": "claude-fable-5",
+   "form": "label",
+   "where": "CSV line 73, column Model",
+   "about": "claude-fable-5-max-web-search-code-execution-128k",
+   "quote": "72,ForecastBench,Anthropic,claude-fable-5-max-web-search-code-execution-128k,61.3,984,\"[60.3, 62.2]\",71.9,223,\"[70.8, 73.1]\",66.2,1207,\"[65.4, 66.9]\",Yes,<0.01,Yes,<0.01,0.0,0.05,0.025,0.063,0.15,0.079,0.114",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F23"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 73, column Model (the slug's effort word)",
+   "about": "claude-fable-5-max-web-search-code-execution-128k",
+   "quote": "72,ForecastBench,Anthropic,claude-fable-5-max-web-search-code-execution-128k,61.3,984,\"[60.3, 62.2]\",71.9,223,\"[70.8, 73.1]\",66.2,1207,\"[65.4, 66.9]\",Yes,<0.01,Yes,<0.01,0.0,0.05,0.025,0.063,0.15,0.079,0.114",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F24"
+  },
+  {
+   "says": "score",
+   "value": "61.3",
+   "form": "data-file",
+   "where": "CSV line 73, column Dataset",
+   "about": "claude-fable-5-max-web-search-code-execution-128k",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%(dataset)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F25"
+  },
+  {
+   "says": "score",
+   "value": "66.2",
+   "form": "data-file",
+   "where": "CSV line 73, column Overall",
+   "about": "claude-fable-5-max-web-search-code-execution-128k",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F26"
+  },
+  {
+   "says": "model-name",
+   "value": "gpt-5.6-sol-pro",
+   "form": "label",
+   "where": "CSV line 119, column Model",
+   "about": "gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized",
+   "quote": "115,ForecastBench,OpenAI,gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized,60.6,984,\"[59.5, 61.8]\",71.7,223,\"[70.6, 72.9]\",65.7,1207,\"[64.9, 66.5]\",Yes,<0.001,Yes,<0.01,0.0,0.0,0.022,0.06,0.155,0.08,0.118",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F27"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 119, column Model (the slug's effort word)",
+   "about": "gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized",
+   "quote": "115,ForecastBench,OpenAI,gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized,60.6,984,\"[59.5, 61.8]\",71.7,223,\"[70.6, 72.9]\",65.7,1207,\"[64.9, 66.5]\",Yes,<0.001,Yes,<0.01,0.0,0.0,0.022,0.06,0.155,0.08,0.118",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F28"
+  },
+  {
+   "says": "score",
+   "value": "60.6",
+   "form": "data-file",
+   "where": "CSV line 119, column Dataset",
+   "about": "gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%(dataset)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F29"
+  },
+  {
+   "says": "score",
+   "value": "65.7",
+   "form": "data-file",
+   "where": "CSV line 119, column Overall",
+   "about": "gpt-5.6-sol-pro-max-web-search-code-execution-128k-cost-optimized",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F30"
+  },
+  {
+   "says": "model-name",
+   "value": "gpt-5.6-sol",
+   "form": "label",
+   "where": "CSV line 139, column Model",
+   "about": "gpt-5.6-sol-standard-max-web-search-code-execution-128k",
+   "quote": "137,ForecastBench,OpenAI,gpt-5.6-sol-standard-max-web-search-code-execution-128k,60.0,984,\"[58.9, 61.2]\",71.7,223,\"[70.6, 72.9]\",65.4,1207,\"[64.6, 66.2]\",Yes,<0.001,Yes,<0.01,0.0,0.0,0.02,0.058,0.16,0.08,0.12",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F31"
+  },
+  {
+   "says": "effort-label",
+   "value": "max",
+   "form": "label",
+   "where": "CSV line 139, column Model (the slug's effort word)",
+   "about": "gpt-5.6-sol-standard-max-web-search-code-execution-128k",
+   "quote": "137,ForecastBench,OpenAI,gpt-5.6-sol-standard-max-web-search-code-execution-128k,60.0,984,\"[58.9, 61.2]\",71.7,223,\"[70.6, 72.9]\",65.4,1207,\"[64.6, 66.2]\",Yes,<0.001,Yes,<0.01,0.0,0.0,0.02,0.058,0.16,0.08,0.12",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "level": "written",
+   "id": "F32"
+  },
+  {
+   "says": "score",
+   "value": "60.0",
+   "form": "data-file",
+   "where": "CSV line 139, column Dataset",
+   "about": "gpt-5.6-sol-standard-max-web-search-code-execution-128k",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%(dataset)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F33"
+  },
+  {
+   "says": "score",
+   "value": "65.4",
+   "form": "data-file",
+   "where": "CSV line 139, column Overall",
+   "about": "gpt-5.6-sol-standard-max-web-search-code-execution-128k",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-forecastbench/evidence/leaderboard_tournament.csv",
+   "term": "brier-index%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "level": "written",
+   "id": "F34"
+  }
+ ]
+}
