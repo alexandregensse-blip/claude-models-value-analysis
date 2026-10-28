@@ -1,0 +1,394 @@
+{
+ "id": "src-github-kwts-healthcare-report-2026-10-08",
+ "publisher": "github-kwts-healthcare",
+ "urls": [
+  "https://github.com/tylergibbs1/kwts-healthcare-dataset/blob/main/REPORT.md",
+  "https://github.com/tylergibbs1/kwts-healthcare-dataset/blob/main/scripts/run_pilot.py"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://github.com/tylergibbs1/kwts-healthcare-dataset/blob/main/REPORT.md",
+   "captured": "2026-10-28T13:30:00Z",
+   "note": "REPORT.md on the main branch, fetched 28 Oct 2026"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://github.com/tylergibbs1/kwts-healthcare-dataset/blob/main/scripts/run_pilot.py",
+   "captured": "2026-10-28T13:30:00Z",
+   "note": "scripts/run_pilot.py on the main branch, fetched 28 Oct 2026"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md": "64c87ebf75397da5a9ff656d7fdd105adee6dce0b17d0a785d926b546a224d1b",
+  "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/run_pilot.py": "c3a362dd403669d03af22ab9cf15cc4aebc02fcd0ce4a0ebb7b881e88035a288"
+ },
+ "harvested_at": "2026-10-28T13:30:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter)",
+ "agent": "converter (Haiku 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "route",
+   "value": "https://api.anthropic.com/v1/messages",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/run_pilot.py",
+   "where": "run_pilot.py: the request URL (the maker's own API)",
+   "quote": "https://api.anthropic.com/v1/messages",
+   "term": "maker-api"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "note",
+   "value": "run once each",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "report intro: one run per model",
+   "quote": "Four models from one provider were run once each on 90 public synthetic administrative cases"
+  },
+  {
+   "id": "F3",
+   "about": "kwts-healthcare|claude-haiku-5-5|unstated",
+   "says": "model-api-id",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: the run's model id",
+   "quote": "| [claude-haiku-5-5](runs/claude-haiku-5-5) | kwts-json-tools-v1.2 | 89/90 |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F4",
+   "about": "kwts-healthcare|claude-haiku-5-5|unstated",
+   "says": "harness",
+   "value": "kwts-json-tools-v1.2",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: harness column",
+   "quote": "| [claude-haiku-5-5](runs/claude-haiku-5-5) | kwts-json-tools-v1.2 | 89/90 |"
+  },
+  {
+   "id": "F5",
+   "about": "kwts-healthcare|claude-haiku-5-5|unstated",
+   "says": "no-effort-sent",
+   "value": "provider defaults; temperature omitted",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/run_pilot.py",
+   "where": "run_pilot.py: the run's config (no reasoning or effort parameter is sent in the request)",
+   "quote": "\"sampling\": \"provider defaults; temperature omitted\""
+  },
+  {
+   "id": "F6",
+   "about": "kwts-healthcare|claude-haiku-5-5|unstated",
+   "says": "score",
+   "value": "89/90",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: passed tasks of the 90 cases",
+   "quote": "| [claude-haiku-5-5](runs/claude-haiku-5-5) | kwts-json-tools-v1.2 | 89/90 |",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F7",
+   "about": "kwts-healthcare|claude-haiku-5-5|unstated",
+   "says": "tokens-in",
+   "value": "920251",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: input tokens (provider-returned)",
+   "quote": "| claude-haiku-5-5 | 920251 | 86372 |"
+  },
+  {
+   "id": "F8",
+   "about": "kwts-healthcare|claude-haiku-5-5|unstated",
+   "says": "tokens-out",
+   "value": "86372",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: output tokens (provider-returned)",
+   "quote": "| claude-haiku-5-5 | 920251 | 86372 |"
+  },
+  {
+   "id": "F9",
+   "about": "kwts-healthcare|claude-haiku-5-5|unstated",
+   "says": "note",
+   "value": "passed tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "group tables: cells are passed tasks",
+   "quote": "Cells show passed tasks · caught stops · completed finishable cases"
+  },
+  {
+   "id": "F10",
+   "about": "kwts-healthcare|claude-sonnet-5-5|unstated",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: the run's model id",
+   "quote": "| [claude-sonnet-5-5](runs/claude-sonnet-5-5) | kwts-json-tools-v1.2 | 90/90 |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F11",
+   "about": "kwts-healthcare|claude-sonnet-5-5|unstated",
+   "says": "harness",
+   "value": "kwts-json-tools-v1.2",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: harness column",
+   "quote": "| [claude-sonnet-5-5](runs/claude-sonnet-5-5) | kwts-json-tools-v1.2 | 90/90 |"
+  },
+  {
+   "id": "F12",
+   "about": "kwts-healthcare|claude-sonnet-5-5|unstated",
+   "says": "no-effort-sent",
+   "value": "provider defaults; temperature omitted",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/run_pilot.py",
+   "where": "run_pilot.py: the run's config (no reasoning or effort parameter is sent in the request)",
+   "quote": "\"sampling\": \"provider defaults; temperature omitted\""
+  },
+  {
+   "id": "F13",
+   "about": "kwts-healthcare|claude-sonnet-5-5|unstated",
+   "says": "score",
+   "value": "90/90",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: passed tasks of the 90 cases",
+   "quote": "| [claude-sonnet-5-5](runs/claude-sonnet-5-5) | kwts-json-tools-v1.2 | 90/90 |",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F14",
+   "about": "kwts-healthcare|claude-sonnet-5-5|unstated",
+   "says": "tokens-in",
+   "value": "760601",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: input tokens (provider-returned)",
+   "quote": "| claude-sonnet-5-5 | 760601 | 48065 |"
+  },
+  {
+   "id": "F15",
+   "about": "kwts-healthcare|claude-sonnet-5-5|unstated",
+   "says": "tokens-out",
+   "value": "48065",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: output tokens (provider-returned)",
+   "quote": "| claude-sonnet-5-5 | 760601 | 48065 |"
+  },
+  {
+   "id": "F16",
+   "about": "kwts-healthcare|claude-sonnet-5-5|unstated",
+   "says": "note",
+   "value": "passed tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "group tables: cells are passed tasks",
+   "quote": "Cells show passed tasks · caught stops · completed finishable cases"
+  },
+  {
+   "id": "F17",
+   "about": "kwts-healthcare|claude-opus-5-5|unstated",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: the run's model id",
+   "quote": "| [claude-opus-5-5](runs/claude-opus-5-5) | kwts-json-tools-v1.2 | 90/90 |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F18",
+   "about": "kwts-healthcare|claude-opus-5-5|unstated",
+   "says": "harness",
+   "value": "kwts-json-tools-v1.2",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: harness column",
+   "quote": "| [claude-opus-5-5](runs/claude-opus-5-5) | kwts-json-tools-v1.2 | 90/90 |"
+  },
+  {
+   "id": "F19",
+   "about": "kwts-healthcare|claude-opus-5-5|unstated",
+   "says": "no-effort-sent",
+   "value": "provider defaults; temperature omitted",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/run_pilot.py",
+   "where": "run_pilot.py: the run's config (no reasoning or effort parameter is sent in the request)",
+   "quote": "\"sampling\": \"provider defaults; temperature omitted\""
+  },
+  {
+   "id": "F20",
+   "about": "kwts-healthcare|claude-opus-5-5|unstated",
+   "says": "score",
+   "value": "90/90",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: passed tasks of the 90 cases",
+   "quote": "| [claude-opus-5-5](runs/claude-opus-5-5) | kwts-json-tools-v1.2 | 90/90 |",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F21",
+   "about": "kwts-healthcare|claude-opus-5-5|unstated",
+   "says": "tokens-in",
+   "value": "807507",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: input tokens (provider-returned)",
+   "quote": "| claude-opus-5-5 | 807507 | 52265 |"
+  },
+  {
+   "id": "F22",
+   "about": "kwts-healthcare|claude-opus-5-5|unstated",
+   "says": "tokens-out",
+   "value": "52265",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: output tokens (provider-returned)",
+   "quote": "| claude-opus-5-5 | 807507 | 52265 |"
+  },
+  {
+   "id": "F23",
+   "about": "kwts-healthcare|claude-opus-5-5|unstated",
+   "says": "note",
+   "value": "passed tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "group tables: cells are passed tasks",
+   "quote": "Cells show passed tasks · caught stops · completed finishable cases"
+  },
+  {
+   "id": "F24",
+   "about": "kwts-healthcare|claude-haiku-4-5-20251001|unstated",
+   "says": "model-api-id",
+   "value": "claude-haiku-4-5-20251001",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: the run's model id",
+   "quote": "| [claude-haiku-4-5-20251001](runs/claude-haiku-4-5-20251001) | kwts-json-tools-v1.2 | 75/90 |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F25",
+   "about": "kwts-healthcare|claude-haiku-4-5-20251001|unstated",
+   "says": "harness",
+   "value": "kwts-json-tools-v1.2",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: harness column",
+   "quote": "| [claude-haiku-4-5-20251001](runs/claude-haiku-4-5-20251001) | kwts-json-tools-v1.2 | 75/90 |"
+  },
+  {
+   "id": "F26",
+   "about": "kwts-healthcare|claude-haiku-4-5-20251001|unstated",
+   "says": "no-effort-sent",
+   "value": "provider defaults; temperature omitted",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/run_pilot.py",
+   "where": "run_pilot.py: the run's config (no reasoning or effort parameter is sent in the request)",
+   "quote": "\"sampling\": \"provider defaults; temperature omitted\""
+  },
+  {
+   "id": "F27",
+   "about": "kwts-healthcare|claude-haiku-4-5-20251001|unstated",
+   "says": "score",
+   "value": "75/90",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "results table: passed tasks of the 90 cases",
+   "quote": "| [claude-haiku-4-5-20251001](runs/claude-haiku-4-5-20251001) | kwts-json-tools-v1.2 | 75/90 |",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F28",
+   "about": "kwts-healthcare|claude-haiku-4-5-20251001|unstated",
+   "says": "tokens-in",
+   "value": "848190",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: input tokens (provider-returned)",
+   "quote": "| claude-haiku-4-5-20251001 | 848190 | 61981 |"
+  },
+  {
+   "id": "F29",
+   "about": "kwts-healthcare|claude-haiku-4-5-20251001|unstated",
+   "says": "tokens-out",
+   "value": "61981",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "usage table: output tokens (provider-returned)",
+   "quote": "| claude-haiku-4-5-20251001 | 848190 | 61981 |"
+  },
+  {
+   "id": "F30",
+   "about": "kwts-healthcare|claude-haiku-4-5-20251001|unstated",
+   "says": "note",
+   "value": "passed tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-kwts-healthcare/evidence/REPORT.md",
+   "where": "group tables: cells are passed tasks",
+   "quote": "Cells show passed tasks · caught stops · completed finishable cases"
+  }
+ ]
+}
