@@ -10346,6 +10346,9 @@
   },
   "wildclaw-pt": {
    "label": "WildClawBench pure-text split (34 tasks, InternLM board)"
+  },
+  "clawevallive-completion": {
+   "label": "Claw-Eval-Live: Overall Completion Score"
   }
  },
  "setups": {
@@ -29284,9 +29287,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://claw-eval-live.github.io/",
+      "captured": "2026-10-28",
+      "where": "page text, Scoring & Ranking / FAQ: \"Models are ranked primarily by Pass Rate, with Overall Completion Score as tiebreaker.\"",
+      "quote": "Models are ranked primarily by Pass Rate, with Overall Completion Score as tiebreaker.",
+      "file": "/work/.salvo14/mig/convert-claw-eval-live.github.io/evidence/clawevallive-page.raw",
+      "sha256": "a07011e068f8d16113fe195d5b06823a407092cfc6cda85541878fee77f77d69"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -37970,9 +37982,18 @@
    "metric": "abstain%",
    "headline": {
     "metric": "abstain%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.14839v1",
+      "captured": "2026-10-19",
+      "where": "Section IV-D: \"Table II reports per-model abstention rates on optimal code under the IIV penalty condition.\"",
+      "quote": "Table II reports per-model abstention rates on optimal code under the IIV penalty condition.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.14839/evidence/arxiv-2609.14839v1.txt",
+      "sha256": "de80a6bc8084ef9e319b207fb4bc46db78c7bd0fb9843cc1e173a3473f1dd418"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -137831,6 +137852,33 @@
    "legacy_groups": [],
    "label": "BullshitBench v1, strict detection (github-cc-83510)",
    "note": "new setup (28 Oct, C2): the issue's designated metric is its strict detection, printed per model; the held setup bullshitbench-v1 holds detect% and keeps the legacy rows"
+  },
+  "clawevallive-completion": {
+   "family": "clawevallive-completion",
+   "benchmark": "Claw-Eval-Live: Overall Completion Score (mean of 105 task scores, board page v1.0)",
+   "subset": null,
+   "harness": "ClawEvalLive",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score",
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Claw-Eval-Live: Overall Completion Score",
+   "note": "the board prints this score per model beside Pass Rate; it is the tiebreak, so its headline is not designated (pending)",
+   "headline": {
+    "metric": "score",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   }
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
