@@ -1,0 +1,198 @@
+{
+ "id": "src-arxiv-2605.28398-2026-10-19",
+ "publisher": "arxiv-2605.28398",
+ "urls": [
+  "https://arxiv.org/abs/2605.28398",
+  "https://arxiv.org/html/2605.28398"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2605.28398",
+   "captured": "2026-10-19T15:50:22Z",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.html",
+   "note": "arXiv HTML (v1) saved by salvo gs/s9"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.html": "82ab5f2bcf59665e585e1f038241a9d3bfb1642a7b2d36e117cd983452c5f470",
+  "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt": "3943d859757b17adcbbe07477cfb2d29c7c76e07430bb361029009c0cd07f513",
+  "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/table4.csv": "8d359170d6892c3aad493a44953a0ded319025d3229400b855b9fd289d179db7"
+ },
+ "harvested_at": "2026-10-19T15:50:22Z",
+ "published": {
+  "value": "2026-05-27",
+  "where": "arXiv stamp on the first page (v1)",
+  "quote": "arXiv:2605.28398v1 [cs.AI] 27 May 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2605.28398 (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the arXiv HTML saved by salvo gs/s9 and its text reading",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.html",
+   "tool": "htmltxt.py (convert-arxiv-2610.13075): visible text of the arXiv HTML, one line per block, one table cell per line ending \" |\""
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/table4.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt",
+   "tool": "convert.py: the cells of Table 4 (6 models x 5 strategies, Acc and Tok) in reading order, copied as printed"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/table4.csv",
+   "where": "Table 4: model-scale table, averaged over five benchmarks",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": "model-name",
+    "size": "note",
+    "full_think_acc": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "full_think_tok": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 100
+     }
+    },
+    "no_think_acc": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "no_think_tok": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 100
+     }
+    },
+    "pt_tf_acc": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "pt_tf_tok": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 100
+     }
+    },
+    "rt_tf_acc": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "rt_tf_tok": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 100
+     }
+    },
+    "spec_tf_acc": {
+     "says": "score",
+     "term": "acc%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "spec_tf_tok": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "printed",
+      "step": 100
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "averaged over five benchmarks",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt",
+   "quote": "averaged over five benchmarks"
+  },
+  {
+   "id": "F2",
+   "says": "thinking-on",
+   "about": null,
+   "value": "always think",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.5, fixed baselines: Full-Think",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt",
+   "quote": "Full-Think (always think), No-Think (always no_think), and Budget-Aware"
+  },
+  {
+   "id": "F3",
+   "says": "thinking-off",
+   "about": null,
+   "value": "always no_think",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.5, fixed baselines: No-Think",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt",
+   "quote": "Full-Think (always think), No-Think (always no_think), and Budget-Aware"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "Spec-TF reports the Entropy variant",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt",
+   "quote": "Spec-TF reports the Entropy variant"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Tok: Average output token cost (including CoT)",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.4",
+   "file": "/work/.salvo14/mig/convert-arxiv-2605.28398/evidence/p2605.28398.txt",
+   "quote": "Tok: Average output token cost (including CoT)."
+  }
+ ]
+}
