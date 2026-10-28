@@ -1,0 +1,659 @@
+{
+ "id": "src-arxiv-2608.14718-v1-2026-08-12",
+ "publisher": "arxiv-2608.14718",
+ "urls": [
+  "https://arxiv.org/abs/2608.14718",
+  "https://arxiv.org/html/2608.14718"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2608.14718",
+   "captured": "2026-10-20T00:00:00Z",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.html",
+   "note": "arXiv HTML page as saved by salvos gt-t5 / gt-t6 / bd-b3 (byte-identical copies)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.html": "5daedb5193b6bf6ac328663504fddd1f7523a3f903e0dfa16866a0cdfd1a9b19",
+  "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt": "93479baa33edc7622432f784524b7f12d87c06188e623ac8f7f42e1472ca7911"
+ },
+ "harvested_at": "2026-10-20T00:00:00Z",
+ "published": {
+  "value": "2026-08-12",
+  "where": "arXiv stamp (page header)",
+  "quote": "arXiv:2608.14718v1 [cs.CV] 12 Aug 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.html",
+   "tool": "htmltxt2.py (BeautifulSoup): visible text, one block per line, table rows on one line with ' | '"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "aggregation",
+   "value": "averaged across three independent runs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Section 4.1: pass@1 averaged over three independent runs",
+   "quote": "each result is averaged across three independent runs"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "harness",
+   "value": "ReAct",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Section 4.1: all models under the same ReAct agent loop (40 steps, same prompts, tools, frame resolution)",
+   "quote": "unified agent loop protocol based on the ReAct"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "judge",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Section 4.1: judge GPT-5.5 (DeepSeek-V4-Pro only as fallback)",
+   "quote": "Predictions are judged against the human-verified reference answer by GPT-5.5"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "note",
+   "value": "same prompts, tools, frame resolution, and step budget for every model",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Section 4.1",
+   "quote": "use the same prompts, tools, frame resolution, and step budget for every model"
+  },
+  {
+   "id": "F5",
+   "about": "Qwen3.5-397B",
+   "says": "model-name",
+   "value": "Qwen3.5-397B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.5-397B",
+   "quote": "Qwen3.5-397B Qwen Team (2026a) | 43.10 | 52.38 | 55.74 | 45.45 | 56.41 | 33.33 | 50.18"
+  },
+  {
+   "id": "F6",
+   "about": "Qwen3.5-397B",
+   "says": "score",
+   "value": "50.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.5-397B, column Overall (pass@1 %)",
+   "quote": "Qwen3.5-397B Qwen Team (2026a) | 43.10 | 52.38 | 55.74 | 45.45 | 56.41 | 33.33 | 50.18",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F7",
+   "about": "Qwen3.5-Plus",
+   "says": "model-name",
+   "value": "Qwen3.5-Plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.5-Plus",
+   "quote": "Qwen3.5-Plus Qwen Team (2026a) | 46.55 | 47.62 | 54.10 | 63.64 | 56.41 | 16.67 | 52.03"
+  },
+  {
+   "id": "F8",
+   "about": "Qwen3.5-Plus",
+   "says": "score",
+   "value": "52.03",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.5-Plus, column Overall (pass@1 %)",
+   "quote": "Qwen3.5-Plus Qwen Team (2026a) | 46.55 | 47.62 | 54.10 | 63.64 | 56.41 | 16.67 | 52.03",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F9",
+   "about": "Qwen3.6-Plus",
+   "says": "model-name",
+   "value": "Qwen3.6-Plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.6-Plus",
+   "quote": "Qwen3.6-Plus Qwen Team (2026b) | 46.55 | 46.03 | 50.82 | 54.55 | 48.72 | 50.00 | 49.08"
+  },
+  {
+   "id": "F10",
+   "about": "Qwen3.6-Plus",
+   "says": "score",
+   "value": "49.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.6-Plus, column Overall (pass@1 %)",
+   "quote": "Qwen3.6-Plus Qwen Team (2026b) | 46.55 | 46.03 | 50.82 | 54.55 | 48.72 | 50.00 | 49.08",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F11",
+   "about": "Qwen3.7-Plus",
+   "says": "model-name",
+   "value": "Qwen3.7-Plus",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.7-Plus",
+   "quote": "Qwen3.7-Plus Qwen Team (2026c) | 50.00 | 58.73 | 57.38 | 56.82 | 58.97 | 50.00 | 56.09"
+  },
+  {
+   "id": "F12",
+   "about": "Qwen3.7-Plus",
+   "says": "score",
+   "value": "56.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.7-Plus, column Overall (pass@1 %)",
+   "quote": "Qwen3.7-Plus Qwen Team (2026c) | 50.00 | 58.73 | 57.38 | 56.82 | 58.97 | 50.00 | 56.09",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "about": "Qwen3.8-Max",
+   "says": "model-name",
+   "value": "Qwen3.8-Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.8-Max",
+   "quote": "Qwen3.8-Max Qwen Team (2026d) | 44.83 | 42.86 | 62.30 | 50.00 | 51.28 | 50.00 | 50.18"
+  },
+  {
+   "id": "F14",
+   "about": "Qwen3.8-Max",
+   "says": "score",
+   "value": "50.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Qwen3.8-Max, column Overall (pass@1 %)",
+   "quote": "Qwen3.8-Max Qwen Team (2026d) | 44.83 | 42.86 | 62.30 | 50.00 | 51.28 | 50.00 | 50.18",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F15",
+   "about": "Qwen3.8-Max",
+   "says": "model-name",
+   "value": "Qwen3.8-Max-Preview",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "References: the cited release of 'Qwen Team (2026d)', Table 1's Qwen3.8-Max row",
+   "quote": "Qwen3.8-Max-Preview."
+  },
+  {
+   "id": "F16",
+   "about": "GLM-4.6V",
+   "says": "model-name",
+   "value": "GLM-4.6V",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GLM-4.6V",
+   "quote": "GLM-4.6V Z.ai (2025) | 48.28 | 42.86 | 50.82 | 50.00 | 41.03 | 50.00 | 46.86"
+  },
+  {
+   "id": "F17",
+   "about": "GLM-4.6V",
+   "says": "score",
+   "value": "46.86",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GLM-4.6V, column Overall (pass@1 %)",
+   "quote": "GLM-4.6V Z.ai (2025) | 48.28 | 42.86 | 50.82 | 50.00 | 41.03 | 50.00 | 46.86",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F18",
+   "about": "GLM-5V-Turbo",
+   "says": "model-name",
+   "value": "GLM-5V-Turbo",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GLM-5V-Turbo",
+   "quote": "GLM-5V-Turbo Hong et al. (2026) | 51.72 | 44.44 | 54.10 | 52.27 | 48.72 | 50.00 | 50.18"
+  },
+  {
+   "id": "F19",
+   "about": "GLM-5V-Turbo",
+   "says": "score",
+   "value": "50.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GLM-5V-Turbo, column Overall (pass@1 %)",
+   "quote": "GLM-5V-Turbo Hong et al. (2026) | 51.72 | 44.44 | 54.10 | 52.27 | 48.72 | 50.00 | 50.18",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F20",
+   "about": "Seed2.0-Pro",
+   "says": "model-name",
+   "value": "Seed2.0-Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Seed2.0-Pro",
+   "quote": "Seed2.0-Pro Seed (2026) | 51.72 | 60.32 | 60.66 | 54.55 | 66.67 | 50.00 | 58.30"
+  },
+  {
+   "id": "F21",
+   "about": "Seed2.0-Pro",
+   "says": "score",
+   "value": "58.30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Seed2.0-Pro, column Overall (pass@1 %)",
+   "quote": "Seed2.0-Pro Seed (2026) | 51.72 | 60.32 | 60.66 | 54.55 | 66.67 | 50.00 | 58.30",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F22",
+   "about": "MiMo-V2.5",
+   "says": "model-name",
+   "value": "MiMo-V2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row MiMo-V2.5",
+   "quote": "MiMo-V2.5 MiMo Team (2026) | 53.45 | 47.62 | 44.26 | 52.27 | 48.72 | 33.33 | 48.71"
+  },
+  {
+   "id": "F23",
+   "about": "MiMo-V2.5",
+   "says": "score",
+   "value": "48.71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row MiMo-V2.5, column Overall (pass@1 %)",
+   "quote": "MiMo-V2.5 MiMo Team (2026) | 53.45 | 47.62 | 44.26 | 52.27 | 48.72 | 33.33 | 48.71",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F24",
+   "about": "Kimi-K2.5",
+   "says": "model-name",
+   "value": "Kimi-K2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Kimi-K2.5",
+   "quote": "Kimi-K2.5 Team, Kimi et al. (2026) | 50.00 | 46.03 | 50.82 | 50.00 | 53.85 | 50.00 | 49.82"
+  },
+  {
+   "id": "F25",
+   "about": "Kimi-K2.5",
+   "says": "score",
+   "value": "49.82",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Kimi-K2.5, column Overall (pass@1 %)",
+   "quote": "Kimi-K2.5 Team, Kimi et al. (2026) | 50.00 | 46.03 | 50.82 | 50.00 | 53.85 | 50.00 | 49.82",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F26",
+   "about": "Kimi-K2.6",
+   "says": "model-name",
+   "value": "Kimi-K2.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Kimi-K2.6",
+   "quote": "Kimi-K2.6 Kimi Team (2026a) | 50.00 | 46.03 | 59.02 | 59.09 | 51.28 | 50.00 | 52.77"
+  },
+  {
+   "id": "F27",
+   "about": "Kimi-K2.6",
+   "says": "score",
+   "value": "52.77",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Kimi-K2.6, column Overall (pass@1 %)",
+   "quote": "Kimi-K2.6 Kimi Team (2026a) | 50.00 | 46.03 | 59.02 | 59.09 | 51.28 | 50.00 | 52.77",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F28",
+   "about": "Kimi-K3",
+   "says": "model-name",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Kimi-K3",
+   "quote": "Kimi-K3 Kimi Team (2026b) | 50.00 | 49.21 | 65.57 | 52.27 | 56.41 | 50.00 | 54.61"
+  },
+  {
+   "id": "F29",
+   "about": "Kimi-K3",
+   "says": "score",
+   "value": "54.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Kimi-K3, column Overall (pass@1 %)",
+   "quote": "Kimi-K3 Kimi Team (2026b) | 50.00 | 49.21 | 65.57 | 52.27 | 56.41 | 50.00 | 54.61",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F30",
+   "about": "Gemini-3.1-Pro",
+   "says": "model-name",
+   "value": "Gemini-3.1-Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Gemini-3.1-Pro",
+   "quote": "Gemini-3.1-Pro Google (2026a) | 41.38 | 49.21 | 57.38 | 54.55 | 53.85 | 50.00 | 50.92"
+  },
+  {
+   "id": "F31",
+   "about": "Gemini-3.1-Pro",
+   "says": "score",
+   "value": "50.92",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Gemini-3.1-Pro, column Overall (pass@1 %)",
+   "quote": "Gemini-3.1-Pro Google (2026a) | 41.38 | 49.21 | 57.38 | 54.55 | 53.85 | 50.00 | 50.92",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F32",
+   "about": "Gemini-3.5-Flash",
+   "says": "model-name",
+   "value": "Gemini-3.5-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Gemini-3.5-Flash",
+   "quote": "Gemini-3.5-Flash Google (2026b) | 37.93 | 30.16 | 47.54 | 45.45 | 64.10 | 66.67 | 43.91"
+  },
+  {
+   "id": "F33",
+   "about": "Gemini-3.5-Flash",
+   "says": "score",
+   "value": "43.91",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Gemini-3.5-Flash, column Overall (pass@1 %)",
+   "quote": "Gemini-3.5-Flash Google (2026b) | 37.93 | 30.16 | 47.54 | 45.45 | 64.10 | 66.67 | 43.91",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F34",
+   "about": "Claude-Opus-4.6",
+   "says": "model-name",
+   "value": "Claude-Opus-4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Claude-Opus-4.6",
+   "quote": "Claude-Opus-4.6 Anthropic (2026a) | 37.93 | 39.68 | 52.46 | 59.09 | 51.28 | 83.33 | 47.97"
+  },
+  {
+   "id": "F35",
+   "about": "Claude-Opus-4.6",
+   "says": "score",
+   "value": "47.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Claude-Opus-4.6, column Overall (pass@1 %)",
+   "quote": "Claude-Opus-4.6 Anthropic (2026a) | 37.93 | 39.68 | 52.46 | 59.09 | 51.28 | 83.33 | 47.97",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "about": "Claude-Opus-4.7",
+   "says": "model-name",
+   "value": "Claude-Opus-4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Claude-Opus-4.7",
+   "quote": "Claude-Opus-4.7 Anthropic (2026b) | 46.55 | 30.16 | 31.15 | 34.09 | 28.21 | 50.00 | 34.69"
+  },
+  {
+   "id": "F37",
+   "about": "Claude-Opus-4.7",
+   "says": "score",
+   "value": "34.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Claude-Opus-4.7, column Overall (pass@1 %)",
+   "quote": "Claude-Opus-4.7 Anthropic (2026b) | 46.55 | 30.16 | 31.15 | 34.09 | 28.21 | 50.00 | 34.69",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F38",
+   "about": "Claude-Opus-4.8",
+   "says": "model-name",
+   "value": "Claude-Opus-4.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Claude-Opus-4.8",
+   "quote": "Claude-Opus-4.8 Anthropic (2026c) | 39.66 | 30.16 | 49.18 | 36.36 | 25.64 | 33.33 | 36.90"
+  },
+  {
+   "id": "F39",
+   "about": "Claude-Opus-4.8",
+   "says": "score",
+   "value": "36.90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row Claude-Opus-4.8, column Overall (pass@1 %)",
+   "quote": "Claude-Opus-4.8 Anthropic (2026c) | 39.66 | 30.16 | 49.18 | 36.36 | 25.64 | 33.33 | 36.90",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "about": "GPT-5.2",
+   "says": "model-name",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GPT-5.2",
+   "quote": "GPT-5.2 OpenAI (2025) | 50.00 | 39.68 | 57.38 | 54.55 | 53.85 | 66.67 | 50.92"
+  },
+  {
+   "id": "F41",
+   "about": "GPT-5.2",
+   "says": "score",
+   "value": "50.92",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GPT-5.2, column Overall (pass@1 %)",
+   "quote": "GPT-5.2 OpenAI (2025) | 50.00 | 39.68 | 57.38 | 54.55 | 53.85 | 66.67 | 50.92",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F42",
+   "about": "GPT-5.4",
+   "says": "model-name",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GPT-5.4",
+   "quote": "GPT-5.4 OpenAI (2026a) | 56.90 | 42.86 | 52.46 | 65.91 | 43.59 | 50.00 | 52.03"
+  },
+  {
+   "id": "F43",
+   "about": "GPT-5.4",
+   "says": "score",
+   "value": "52.03",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GPT-5.4, column Overall (pass@1 %)",
+   "quote": "GPT-5.4 OpenAI (2026a) | 56.90 | 42.86 | 52.46 | 65.91 | 43.59 | 50.00 | 52.03",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F44",
+   "about": "GPT-5.5",
+   "says": "model-name",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GPT-5.5",
+   "quote": "GPT-5.5 OpenAI (2026b) | 50.00 | 46.03 | 62.30 | 54.55 | 56.41 | 33.33 | 53.14"
+  },
+  {
+   "id": "F45",
+   "about": "GPT-5.5",
+   "says": "score",
+   "value": "53.14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.14718/evidence/a.txt",
+   "where": "Table 1, row GPT-5.5, column Overall (pass@1 %)",
+   "quote": "GPT-5.5 OpenAI (2026b) | 50.00 | 46.03 | 62.30 | 54.55 | 56.41 | 33.33 | 53.14",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "id": "src-researchclawbench-2026-10-13",
+ "publisher": "researchclawbench",
+ "urls": [
+  "https://internscience.github.io/ResearchClawBench-Home/",
+  "https://github.com/InternScience/ResearchClawBench-Home"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "e475e00092c16c7108e09e5606574ce25ce1208e",
+   "captured": "2026-10-13T02:56:12Z",
+   "url": "https://github.com/InternScience/ResearchClawBench-Home/blob/e475e00092c16c7108e09e5606574ce25ce1208e/data/leaderboard.json",
+   "note": "data/leaderboard.json and README.md of the ResearchClawBench-Home repo as saved by salvo gt-t4 on 20 Oct 2026 (commit.txt: e475e00, 2026-10-13T02:56:12Z)"
+  }
+ ],
+ "commit": "e475e00092c16c7108e09e5606574ce25ce1208e",
+ "sha256": {
+  "/work/.salvo14/mig/convert-researchclawbench/evidence/leaderboard.json": "b75d4250446b9e4e99cf39a2a6c45ddb714d9e66f33f46ec89823971e75d807a",
+  "/work/.salvo14/mig/convert-researchclawbench/evidence/README.md": "51c01009045332971763ac7910079399543ffba6cdaa1401115715dc7073a454",
+  "/work/.salvo14/mig/convert-researchclawbench/evidence/rh-runs.json": "56cc37505b850d1ca18bb7f4f7cea3dd083428385bbf260ddec2c4fc614c94be",
+  "/work/.salvo14/mig/convert-researchclawbench/evidence/rh-means.json": "d80c49b36f67fccbe3ec29233fc4dcfbe398102fcb485a596b088bd6221dc73a"
+ },
+ "harvested_at": "2026-10-20T05:47:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-researchclawbench/evidence/rh-runs.json",
+   "from": "/work/.salvo14/mig/convert-researchclawbench/evidence/leaderboard.json",
+   "tool": "convert.py: for each ResearchHarness arm of leaderboard.json, one row per task of the 15 tasks scored by all 21 ResearchHarness arms (key = arm|task); score, cost_usd, run_id, duration, model, model_display copied"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-researchclawbench/evidence/rh-means.json",
+   "from": "/work/.salvo14/mig/convert-researchclawbench/evidence/rh-runs.json",
+   "tool": "convert.py: per arm the mean of the 15 task scores (OUR mean over the matched tasks) and the sum of the 15 cost_usd (OUR sum)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-researchclawbench/evidence/rh-runs.json",
+   "where": "$.runs",
+   "format": "json",
+   "row_key": "key",
+   "columns": {
+    "score": {
+     "says": "run-score",
+     "term": "score-of-100",
+     "scale": "raw",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "cost_usd": "note",
+    "arm": "note",
+    "task": "note",
+    "run_id": "note",
+    "duration_seconds": "note",
+    "model": "note",
+    "model_display": "model-name"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-researchclawbench/evidence/rh-means.json",
+   "where": "$.configs",
+   "format": "json",
+   "row_key": "config",
+   "columns": {
+    "model_display": "model-name",
+    "harness": "harness",
+    "n_tasks": "aggregation",
+    "mean_score": {
+     "says": "score",
+     "term": "score-of-100",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "total_cost_usd": {
+     "says": "cost",
+     "term": "USD",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-researchclawbench/evidence/leaderboard.json",
+   "where": "field cost_usd of every run in $.scores",
+   "quote": "\"cost_usd\""
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "cost_usd",
+   "term": "per-suite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-researchclawbench/evidence/leaderboard.json",
+   "where": "total_cost_usd = our sum of the cost_usd of the 15 tasks all 21 ResearchHarness arms completed (the board gives one cost per task run)",
+   "quote": "\"cost_usd\""
+  }
+ ]
+}
