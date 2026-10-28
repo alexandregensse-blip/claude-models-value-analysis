@@ -1,0 +1,246 @@
+{
+ "id": "src-vidali-gist-2026-09-24",
+ "publisher": "vidali-gist",
+ "urls": [
+  "https://gist.github.com/kaividali/3cb175d8a473b6295c88862bbcf4d481"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://api.github.com/gists/3cb175d8a473b6295c88862bbcf4d481",
+   "captured": "2026-10-28T10:16:08Z",
+   "note": "gist API response (revision a029350c, updated 2026-09-24T14:44:04Z) saved by salvo s19 c4 (src/vidali_gist.json, capture time = file mtime); evidence files are its files[].content"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md": "ae0cf5075d44a5813196d12a04cbbec27e137f71143d0a176cda4479d5e39d74",
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/gist-api.json": "848a03a716dd7346f58cd8d4c420ade2151254c7e9cdafc01b4d01348d08d62e",
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/effort_test_summary.json": "fd311da53299602723bc6cd66934f82ea3afa5bf0928c85bafa31b7a0b511670",
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/summary.json": "855b6b7205b1e4782cb426fee3982e45498bff552ce257b8e03f3740299c2099",
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/effort-means.json": "f5340220b3982b98dae85ef1941726b62c5c7077364dfcb4de148793d9a8ab42",
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/graded-means.json": "58f43694e8ebeb96af839b64afd88362f9b3808201a6f368fde98c9189d59614",
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/effort_test.csv": "7238f7c679fd08eb4dbddeb8f3896c30ebd55c026de5b4889cbdbb6ba42b5354",
+  "/work/.salvo14/mig/convert-vidali-gist/evidence/attempts.csv": "1d9ae2974aa919a8e35f121faf634862d1647f869cc511f365a184e67ae7462f"
+ },
+ "harvested_at": "2026-10-28T10:16:08Z",
+ "published": {
+  "value": "2026-09-24",
+  "where": "README: 'updated 24 September 2026 with the effort test' (gist updated_at 2026-09-24T14:44:04Z)",
+  "quote": "updated 24 September 2026 with the effort test",
+  "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "from": "/work/.salvo14/mig/convert-vidali-gist/evidence/gist-api.json",
+   "tool": "json.load of the gist API response, files[<name>].content written verbatim"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/effort_test_summary.json",
+   "from": "/work/.salvo14/mig/convert-vidali-gist/evidence/gist-api.json",
+   "tool": "json.load of the gist API response, files[<name>].content written verbatim"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/summary.json",
+   "from": "/work/.salvo14/mig/convert-vidali-gist/evidence/gist-api.json",
+   "tool": "json.load of the gist API response, files[<name>].content written verbatim"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/effort_test.csv",
+   "from": "/work/.salvo14/mig/convert-vidali-gist/evidence/gist-api.json",
+   "tool": "json.load of the gist API response, files[<name>].content written verbatim"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/attempts.csv",
+   "from": "/work/.salvo14/mig/convert-vidali-gist/evidence/gist-api.json",
+   "tool": "json.load of the gist API response, files[<name>].content written verbatim"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/effort-means.json",
+   "from": "/work/.salvo14/mig/convert-vidali-gist/evidence/effort_test_summary.json",
+   "tool": "convert.py: the 9 records of effort_test_summary.json copied verbatim, each preceded by an id = model|effort_flag (ours; the file has no row key)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/graded-means.json",
+   "from": "/work/.salvo14/mig/convert-vidali-gist/evidence/summary.json",
+   "tool": "convert.py: the 6 records of summary.json copied verbatim, each preceded by an id = model|run (ours; the file has no row key)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/effort-means.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "effort_flag": "note",
+    "attempts": "note",
+    "output_tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "thinking_tokens": "note",
+    "tool_calls": "note",
+    "citations_in_answer": "note",
+    "share_with_thinking": "note",
+    "served": "note"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/graded-means.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "maker-api"
+    },
+    "run": "note",
+    "attempts": "note",
+    "output_tokens": {
+     "says": "tokens-out",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "judge_citation_recall": {
+     "says": "score",
+     "term": "citation-recall%",
+     "scale": "fraction",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "first": "run-start",
+    "last": "run-end",
+    "thinking_tokens": "note",
+    "tool_calls": "note",
+    "citations_in_answer": "note",
+    "answer_chars": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "harness",
+   "value": "Claude Code CLI 2.1.278",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, table of the two runs of 22 Sept (column Client); the effort test uses the same CLI version",
+   "quote": "Claude Code CLI 2.1.278",
+   "term": "claude-code"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "`none` means no flag, i.e. the client's default on that day",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, Files, effort_test.csv: effort_flag none = no --effort flag",
+   "quote": "`none` means no flag, i.e. the client's default on that day"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "The effort level was not set explicitly in either run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, What was measured: the two runs of 22 September (graded) inherited the client's default",
+   "quote": "The effort level was not set explicitly in either run"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "unit",
+   "value": "Output tokens",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, effort-test table: the figures are means per attempt (33 questions, one attempt each)",
+   "quote": "Output tokens",
+   "term": "per-task"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "unit",
+   "value": "means per attempt",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, Summary: means per attempt over 33 questions x 3 attempts",
+   "quote": "means per attempt, 33 questions × 3 attempts",
+   "term": "per-task"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "run-date",
+   "value": "24 September 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, section Effort test",
+   "quote": "Effort test (24 September 2026)"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "run-date",
+   "value": "22 September 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README title: the graded runs (evening run 22:20 to 00:05 CEST)",
+   "quote": "afternoon vs. evening of 22 September 2026"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "judge",
+   "value": "Sonnet 5 grades Opus 5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, Caveats: the grader of the Opus 5 attempts",
+   "quote": "Sonnet 5 grades Opus 5"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "judge",
+   "value": "Opus 5 grades the others",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vidali-gist/evidence/README.md",
+   "where": "README, Caveats: the grader of the Sonnet 5 and Haiku 4.5 attempts",
+   "quote": "Opus 5 grades the others"
+  }
+ ]
+}
