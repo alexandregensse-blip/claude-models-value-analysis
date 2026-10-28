@@ -1,0 +1,219 @@
+{
+ "id": "src-llm-jp-leaderboard-v2-dataset-2026-10-20",
+ "publisher": "llm-jp-leaderboard-v2",
+ "urls": [
+  "https://huggingface.co/datasets/llm-jp/leaderboard-contents-v2/resolve/main/leaderboard.parquet",
+  "https://huggingface.co/datasets/llm-jp/leaderboard-contents-v2"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://huggingface.co/datasets/llm-jp/leaderboard-contents-v2/resolve/main/leaderboard.parquet",
+   "captured": "2026-10-20T06:14:42Z",
+   "file": "/work/.salvo14/gt/t2/src/hfd/llmjp_leaderboard.parquet",
+   "note": "SOURCE_llmjp.txt: fetched 2026-10-20T06:15:09Z; the parquet, sha256 72a51348f63ef7e83bb929700c555aab7080ef1a6318db3777275e00d99a20c5"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://huggingface.co/datasets/llm-jp/leaderboard-contents-v2/resolve/main/leaderboard.parquet",
+   "captured": "2026-10-20T06:14:42Z",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "note": "JSON of parquet rows 10, 11 and 13 (dump_llmjp.py output, key row = parquet index)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/gt/t2/src/hfd/llmjp_leaderboard.parquet": "72a51348f63ef7e83bb929700c555aab7080ef1a6318db3777275e00d99a20c5",
+  "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json": "0c477b08678900f2acc2ccd6962a49ea7b8282d1516176634cb3430110d3596d",
+  "/work/.salvo14/gt/t2/verify/dump_llmjp.py": "5be4d36d28ad7908602406213187d5110c9061d71fd43cb04c4836db6f5f39d1"
+ },
+ "harvested_at": "2026-10-20T06:14:42Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-llm-jp-leaderboard-v2 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py, from the saved parquet (salvo gt/t2 src/hfd) through its JSON dump (gt/t2 verify/dump_llmjp.py, pandas)",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "row",
+   "columns": {
+    "AVG": {
+     "says": "score",
+     "term": "score-of-1",
+     "scale": "fraction",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-api-id",
+   "about": "qwen3.5-27b",
+   "value": "Qwen/Qwen3.5-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1 row parquet-row-10, column model",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "Qwen/Qwen3.5-27B",
+   "table": "T1",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F2",
+   "says": "score",
+   "about": "qwen3.5-27b",
+   "value": "0.5778813423417334",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-10/AVG",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "0.5778813423417334",
+   "table": "T1",
+   "term": "score-of-1",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F3",
+   "says": "thinking-off",
+   "about": "qwen3.5-27b",
+   "value": "false",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-10/enable_thinking (leaderboard row: enable_thinking=False)",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "false",
+   "table": "T1"
+  },
+  {
+   "id": "F4",
+   "says": "route",
+   "about": "qwen3.5-27b",
+   "value": "v0.11.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-10/vllm_version (served with vLLM)",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "v0.11.0",
+   "table": "T1",
+   "term": "vllm"
+  },
+  {
+   "id": "F5",
+   "says": "version",
+   "about": "qwen3.5-27b",
+   "value": "v2.0.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-10/llm_jp_eval_version",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "v2.0.0",
+   "table": "T1"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": "qwen3.5-27b",
+   "value": "true",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-10/apply_chat_template (setup: chat template on)",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "true",
+   "table": "T1"
+  },
+  {
+   "id": "F7",
+   "says": "model-api-id",
+   "about": "qwen3.6-27b",
+   "value": "Qwen/Qwen3.6-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1 row parquet-row-13, column model",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "Qwen/Qwen3.6-27B",
+   "table": "T1",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "qwen3.6-27b",
+   "value": "0.5894459736839605",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-13/AVG",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "0.5894459736839605",
+   "table": "T1",
+   "term": "score-of-1",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F9",
+   "says": "thinking-off",
+   "about": "qwen3.6-27b",
+   "value": "false",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-13/enable_thinking (leaderboard row: enable_thinking=False)",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "false",
+   "table": "T1"
+  },
+  {
+   "id": "F10",
+   "says": "route",
+   "about": "qwen3.6-27b",
+   "value": "v0.11.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-13/vllm_version (served with vLLM)",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "v0.11.0",
+   "table": "T1",
+   "term": "vllm"
+  },
+  {
+   "id": "F11",
+   "says": "version",
+   "about": "qwen3.6-27b",
+   "value": "v2.0.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-13/llm_jp_eval_version",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "v2.0.0",
+   "table": "T1"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": "qwen3.6-27b",
+   "value": "true",
+   "level": "written",
+   "form": "table-cell",
+   "where": "T1/parquet-row-13/apply_chat_template (setup: chat template on)",
+   "file": "/work/.salvo14/mig/convert-llm-jp-leaderboard-v2/src/llmjp-rows-from-parquet.json",
+   "quote": "true",
+   "table": "T1"
+  }
+ ]
+}
