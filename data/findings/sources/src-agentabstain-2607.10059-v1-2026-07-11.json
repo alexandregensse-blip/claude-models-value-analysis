@@ -1,0 +1,853 @@
+{
+ "id": "src-agentabstain-2607.10059-v1-2026-07-11",
+ "publisher": "agentabstain-2607.10059",
+ "urls": [
+  "https://arxiv.org/abs/2607.10059",
+  "https://arxiv.org/pdf/2607.10059v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/pdf/2607.10059v1",
+   "captured": "2026-10-28T09:35:10Z",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.pdf",
+   "note": "arXiv PDF v1 (stamp 'arXiv:2607.10059v1 [cs.AI] 11 Jul 2026') saved by salvo gt t7 (src/pdf2/2607.10059.pdf)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.pdf": "9d059f54f84bbc787ac8644db46cb270ff9a9afe73136bb63964eedc90ef1694",
+  "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt": "347402ba4a5677753b90ad726d2e5e116f48d82304e56ce3ddb69ac18f3323dd"
+ },
+ "harvested_at": "2026-10-28T09:35:10Z",
+ "published": {
+  "value": "2026-07-11",
+  "where": "arXiv stamp on the first page",
+  "quote": "arXiv:2607.10059v1 [cs.AI] 11 Jul 2026",
+  "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "from": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.pdf",
+   "tool": "pymupdf (../convert-arxiv-2607.24653/extract.py): words grouped by baseline into lines, page by page (=====PAGE n=====); rotated margin text appended apart; quotes matched after NFKC, whitespace and case normalisation"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "default reasoning behavior",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Appendix E.1 Agent Harness Configuration, paragraph 'Provider integrations'",
+   "quote": "Differences across providers (function-calling format, conversation memory, default reasoning behavior) are absorbed inside each harness so that the model",
+   "note": "the only statement on reasoning: no reasoning effort / thinking parameter is named anywhere in the paper (decoding settings list max_turns = 30 and temperature only); 'default reasoning behavior' is absorbed inside each harness"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "judge",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Appendix E.2, paragraph 'Judge model and decoding'",
+   "quote": "The LLM judge is configured with one model (GPT-5.4)"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "aggregation",
+   "value": "Each model runs each task exactly once",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Appendix E.1, paragraph 'Single-rollout evaluation'",
+   "quote": "Each model runs each task exactly once."
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "note",
+   "value": "Sampling temperature is set to 0 for every model that exposes a configurable temperature",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Appendix E.1, paragraph 'Decoding settings'",
+   "quote": "Sampling temperature is set to 0 for every model that exposes a configurable temperature.",
+   "note": "the OpenAI GPT-5 family runs under the provider default sampling (Table 6); temperature is not an effort setting"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "headline-metric",
+   "value": "Paired Accuracy (our primary metric)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Figure 3 caption",
+   "quote": "Paired Accuracy (our primary metric)"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "metric-definition",
+   "value": "requires both variants of a pair to pass",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Figure 3 caption",
+   "quote": "requires both variants of a pair to pass"
+  },
+  {
+   "id": "F7",
+   "about": "Gemini 3.1 Pro",
+   "says": "score",
+   "value": "0.595",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row Gemini 3.1 Pro, column Paired Acc.",
+   "quote": "1 Gemini 3.1 Pro 0.905 0.654 0.595 0.657",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F8",
+   "about": "Gemini 3.1 Pro",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "1 Gemini 3.1 Pro 0.905 0.654 0.595 0.657"
+  },
+  {
+   "id": "F9",
+   "about": "Gemini 3.1 Pro",
+   "says": "harness",
+   "value": "Google ADK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row Gemini 3.1 Pro, column Integration",
+   "quote": "Gemini 3.1 Pro Google ADK T = 0"
+  },
+  {
+   "id": "F10",
+   "about": "Claude Opus 4.7",
+   "says": "score",
+   "value": "0.594",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row Claude Opus 4.7, column Paired Acc.",
+   "quote": "2 Claude Opus 4.7 0.765 0.790 0.594 0.776",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F11",
+   "about": "Claude Opus 4.7",
+   "says": "model-name",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "2 Claude Opus 4.7 0.765 0.790 0.594 0.776"
+  },
+  {
+   "id": "F12",
+   "about": "Claude Opus 4.7",
+   "says": "harness",
+   "value": "Claude SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row Claude Opus 4.7, column Integration",
+   "quote": "Claude Opus 4.7 Claude SDK T = 0"
+  },
+  {
+   "id": "F13",
+   "about": "Claude Sonnet 4.6",
+   "says": "score",
+   "value": "0.534",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row Claude Sonnet 4.6, column Paired Acc.",
+   "quote": "3 Claude Sonnet 4.6 0.831 0.664 0.534 0.654",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F14",
+   "about": "Claude Sonnet 4.6",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "3 Claude Sonnet 4.6 0.831 0.664 0.534 0.654"
+  },
+  {
+   "id": "F15",
+   "about": "Claude Sonnet 4.6",
+   "says": "harness",
+   "value": "Claude SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row Claude Sonnet 4.6, column Integration",
+   "quote": "Claude Sonnet 4.6 Claude SDK T = 0"
+  },
+  {
+   "id": "F16",
+   "about": "GPT-5.5",
+   "says": "score",
+   "value": "0.525",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GPT-5.5, column Paired Acc.",
+   "quote": "4 GPT-5.5 0.874 0.611 0.525 0.598",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F17",
+   "about": "GPT-5.5",
+   "says": "model-name",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "4 GPT-5.5 0.874 0.611 0.525 0.598"
+  },
+  {
+   "id": "F18",
+   "about": "GPT-5.5",
+   "says": "harness",
+   "value": "OpenAI Agents SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-5.5, column Integration",
+   "quote": "GPT-5.5 OpenAI Agents SDK provider default"
+  },
+  {
+   "id": "F19",
+   "about": "Claude Haiku 4.5",
+   "says": "score",
+   "value": "0.497",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row Claude Haiku 4.5, column Paired Acc.",
+   "quote": "5 Claude Haiku 4.5 0.805 0.656 0.497 0.618",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F20",
+   "about": "Claude Haiku 4.5",
+   "says": "model-name",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "5 Claude Haiku 4.5 0.805 0.656 0.497 0.618"
+  },
+  {
+   "id": "F21",
+   "about": "Claude Haiku 4.5",
+   "says": "harness",
+   "value": "Claude SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row Claude Haiku 4.5, column Integration",
+   "quote": "Claude Haiku 4.5 Claude SDK T = 0"
+  },
+  {
+   "id": "F22",
+   "about": "GPT-5",
+   "says": "score",
+   "value": "0.496",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GPT-5, column Paired Acc.",
+   "quote": "6 GPT-5 0.746 0.698 0.496 0.665",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F23",
+   "about": "GPT-5",
+   "says": "model-name",
+   "value": "GPT-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "6 GPT-5 0.746 0.698 0.496 0.665"
+  },
+  {
+   "id": "F24",
+   "about": "GPT-5",
+   "says": "harness",
+   "value": "OpenAI Agents SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-5, column Integration",
+   "quote": "GPT-5 OpenAI Agents SDK provider default"
+  },
+  {
+   "id": "F25",
+   "about": "GPT-5.4",
+   "says": "score",
+   "value": "0.487",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GPT-5.4, column Paired Acc.",
+   "quote": "7 GPT-5.4 0.769 0.678 0.487 0.640",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F26",
+   "about": "GPT-5.4",
+   "says": "model-name",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "7 GPT-5.4 0.769 0.678 0.487 0.640"
+  },
+  {
+   "id": "F27",
+   "about": "GPT-5.4",
+   "says": "harness",
+   "value": "OpenAI Agents SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-5.4, column Integration",
+   "quote": "GPT-5.4 OpenAI Agents SDK provider default"
+  },
+  {
+   "id": "F28",
+   "about": "GLM-5",
+   "says": "score",
+   "value": "0.478",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GLM-5, column Paired Acc.",
+   "quote": "8 GLM-5 0.825 0.618 0.478 0.591",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F29",
+   "about": "GLM-5",
+   "says": "model-name",
+   "value": "GLM-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "8 GLM-5 0.825 0.618 0.478 0.591"
+  },
+  {
+   "id": "F30",
+   "about": "GLM-5",
+   "says": "harness",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GLM-5, column Integration",
+   "quote": "GLM-5 OpenClaw / Bedrock T = 0",
+   "term": "openclaw"
+  },
+  {
+   "id": "F31",
+   "about": "GLM-5",
+   "says": "route",
+   "value": "Bedrock",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GLM-5, column Integration ('OpenClaw / Bedrock')",
+   "quote": "GLM-5 OpenClaw / Bedrock T = 0",
+   "term": "bedrock"
+  },
+  {
+   "id": "F32",
+   "about": "GPT-OSS 120B",
+   "says": "score",
+   "value": "0.462",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GPT-OSS 120B, column Paired Acc.",
+   "quote": "9 GPT-OSS 120B 0.783 0.595 0.462 0.582",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F33",
+   "about": "GPT-OSS 120B",
+   "says": "model-name",
+   "value": "GPT-OSS 120B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "9 GPT-OSS 120B 0.783 0.595 0.462 0.582"
+  },
+  {
+   "id": "F34",
+   "about": "GPT-OSS 120B",
+   "says": "harness",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-OSS 120B, column Integration",
+   "quote": "GPT-OSS 120B OpenClaw / Bedrock T = 0",
+   "term": "openclaw"
+  },
+  {
+   "id": "F35",
+   "about": "GPT-OSS 120B",
+   "says": "route",
+   "value": "Bedrock",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-OSS 120B, column Integration ('OpenClaw / Bedrock')",
+   "quote": "GPT-OSS 120B OpenClaw / Bedrock T = 0",
+   "term": "bedrock"
+  },
+  {
+   "id": "F36",
+   "about": "GPT-5.2",
+   "says": "score",
+   "value": "0.429",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GPT-5.2, column Paired Acc.",
+   "quote": "10 GPT-5.2 0.747 0.631 0.429 0.592",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F37",
+   "about": "GPT-5.2",
+   "says": "model-name",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "10 GPT-5.2 0.747 0.631 0.429 0.592"
+  },
+  {
+   "id": "F38",
+   "about": "GPT-5.2",
+   "says": "harness",
+   "value": "OpenAI Agents SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-5.2, column Integration",
+   "quote": "GPT-5.2 OpenAI Agents SDK provider default"
+  },
+  {
+   "id": "F39",
+   "about": "MiniMax M2.5",
+   "says": "score",
+   "value": "0.419",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row MiniMax M2.5, column Paired Acc.",
+   "quote": "11 MiniMax M2.5 0.838 0.501 0.419 0.496",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F40",
+   "about": "MiniMax M2.5",
+   "says": "model-name",
+   "value": "MiniMax M2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "11 MiniMax M2.5 0.838 0.501 0.419 0.496"
+  },
+  {
+   "id": "F41",
+   "about": "MiniMax M2.5",
+   "says": "harness",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row MiniMax M2.5, column Integration",
+   "quote": "MiniMax M2.5 OpenClaw / Bedrock T = 0",
+   "term": "openclaw"
+  },
+  {
+   "id": "F42",
+   "about": "MiniMax M2.5",
+   "says": "route",
+   "value": "Bedrock",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row MiniMax M2.5, column Integration ('OpenClaw / Bedrock')",
+   "quote": "MiniMax M2.5 OpenClaw / Bedrock T = 0",
+   "term": "bedrock"
+  },
+  {
+   "id": "F43",
+   "about": "DeepSeek V3.2",
+   "says": "score",
+   "value": "0.414",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row DeepSeek V3.2, column Paired Acc.",
+   "quote": "12 DeepSeek V3.2 0.824 0.521 0.414 0.502",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F44",
+   "about": "DeepSeek V3.2",
+   "says": "model-name",
+   "value": "DeepSeek V3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "12 DeepSeek V3.2 0.824 0.521 0.414 0.502"
+  },
+  {
+   "id": "F45",
+   "about": "DeepSeek V3.2",
+   "says": "harness",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row DeepSeek V3.2, column Integration",
+   "quote": "DeepSeek V3.2 OpenClaw / Bedrock T = 0",
+   "term": "openclaw"
+  },
+  {
+   "id": "F46",
+   "about": "DeepSeek V3.2",
+   "says": "route",
+   "value": "Bedrock",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row DeepSeek V3.2, column Integration ('OpenClaw / Bedrock')",
+   "quote": "DeepSeek V3.2 OpenClaw / Bedrock T = 0",
+   "term": "bedrock"
+  },
+  {
+   "id": "F47",
+   "about": "GPT-5.1",
+   "says": "score",
+   "value": "0.406",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GPT-5.1, column Paired Acc.",
+   "quote": "13 GPT-5.1 0.750 0.607 0.406 0.532",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F48",
+   "about": "GPT-5.1",
+   "says": "model-name",
+   "value": "GPT-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "13 GPT-5.1 0.750 0.607 0.406 0.532"
+  },
+  {
+   "id": "F49",
+   "about": "GPT-5.1",
+   "says": "harness",
+   "value": "OpenAI Agents SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-5.1, column Integration",
+   "quote": "GPT-5.1 OpenAI Agents SDK provider default"
+  },
+  {
+   "id": "F50",
+   "about": "Gemini 3 Flash",
+   "says": "score",
+   "value": "0.397",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row Gemini 3 Flash, column Paired Acc.",
+   "quote": "14 Gemini 3 Flash 0.917 0.436 0.397 0.434",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F51",
+   "about": "Gemini 3 Flash",
+   "says": "model-name",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "14 Gemini 3 Flash 0.917 0.436 0.397 0.434"
+  },
+  {
+   "id": "F52",
+   "about": "Gemini 3 Flash",
+   "says": "harness",
+   "value": "Google ADK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row Gemini 3 Flash, column Integration",
+   "quote": "Gemini 3 Flash Google ADK T = 0"
+  },
+  {
+   "id": "F53",
+   "about": "DeepSeek V4 Pro",
+   "says": "score",
+   "value": "0.369",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row DeepSeek V4 Pro, column Paired Acc.",
+   "quote": "15 DeepSeek V4 Pro 0.870 0.428 0.369 0.423",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F54",
+   "about": "DeepSeek V4 Pro",
+   "says": "model-name",
+   "value": "DeepSeek V4 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "15 DeepSeek V4 Pro 0.870 0.428 0.369 0.423"
+  },
+  {
+   "id": "F55",
+   "about": "DeepSeek V4 Pro",
+   "says": "harness",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row DeepSeek V4 Pro, column Integration",
+   "quote": "DeepSeek V4 Pro OpenClaw / OpenRouter T = 0",
+   "term": "openclaw"
+  },
+  {
+   "id": "F56",
+   "about": "DeepSeek V4 Pro",
+   "says": "route",
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row DeepSeek V4 Pro, column Integration ('OpenClaw / OpenRouter')",
+   "quote": "DeepSeek V4 Pro OpenClaw / OpenRouter T = 0",
+   "term": "openrouter"
+  },
+  {
+   "id": "F57",
+   "about": "Kimi K2.5",
+   "says": "score",
+   "value": "0.334",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row Kimi K2.5, column Paired Acc.",
+   "quote": "16 Kimi K2.5 0.639 0.520 0.334 0.532",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F58",
+   "about": "Kimi K2.5",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "16 Kimi K2.5 0.639 0.520 0.334 0.532"
+  },
+  {
+   "id": "F59",
+   "about": "Kimi K2.5",
+   "says": "harness",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row Kimi K2.5, column Integration",
+   "quote": "Kimi K2.5 OpenClaw / Bedrock T = 0",
+   "term": "openclaw"
+  },
+  {
+   "id": "F60",
+   "about": "Kimi K2.5",
+   "says": "route",
+   "value": "Bedrock",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row Kimi K2.5, column Integration ('OpenClaw / Bedrock')",
+   "quote": "Kimi K2.5 OpenClaw / Bedrock T = 0",
+   "term": "bedrock"
+  },
+  {
+   "id": "F61",
+   "about": "GPT-4o",
+   "says": "score",
+   "value": "0.330",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), row GPT-4o, column Paired Acc.",
+   "quote": "17 GPT-4o 0.821 0.442 0.330 0.409",
+   "term": "score%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F62",
+   "about": "GPT-4o",
+   "says": "model-name",
+   "value": "GPT-4o",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 7 (page 43), column Model",
+   "quote": "17 GPT-4o 0.821 0.442 0.330 0.409"
+  },
+  {
+   "id": "F63",
+   "about": "GPT-4o",
+   "says": "harness",
+   "value": "OpenAI Agents SDK",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-agentabstain-2607.10059/evidence/2607.10059.txt",
+   "where": "Table 6 (page 37), row GPT-4o, column Integration",
+   "quote": "GPT-4o OpenAI Agents SDK T = 0"
+  }
+ ]
+}
