@@ -1,0 +1,264 @@
+{
+ "id": "src-arxiv-2609.26779-v1-2026-09-22",
+ "publisher": "arxiv-2609.26779",
+ "urls": [
+  "https://arxiv.org/abs/2609.26779v1",
+  "https://arxiv.org/pdf/2609.26779v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/pdf/2609.26779v1",
+   "captured": "2026-10-28T10:30:35Z",
+   "note": "saved PDF /work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.pdf"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.pdf": "0324a6727e2fc6e515858f5131ed8f0d9a73ea4fe82c6e39444dd767b4621d6b",
+  "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt": "d745f13f9cd8bc112ee08d043bebc31b0fb0c3626dfe5e2c9b61c22769cb6fba",
+  "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/table-4-k1.csv": "f05105bf5b77ffa28e726dbde809e1b5b22dffe097996c81daf607f84dfadca8",
+  "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/table-13-k1.csv": "a03c3808d22f9e2afdb306322d29c44430f15a06998677a40468e96e34d2996b"
+ },
+ "harvested_at": "2026-10-28T10:30:35Z",
+ "published": {
+  "value": "2026-09-22",
+  "where": "page 1 footer",
+  "quote": "arXiv:2609.26779v1 [cs.AI] 22 Sep 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2609.26779 (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Haiku 5.5), from the saved PDF and its text extraction (/work/.prec/src)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.pdf",
+   "tool": "text extraction of the saved PDF (/work/.prec/src/arxiv-2609.26779v1.txt, pdf text)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/table-4-k1.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "tool": "convert.py: the k=1 rows of the table, one printed line each (asserted present in the extraction), cells as printed"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/table-13-k1.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "tool": "convert.py: the k=1 rows of the table, one printed line each (asserted present in the extraction), cells as printed"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/table-4-k1.csv",
+   "where": "Table 4: Test-time scaling on Terminal-Bench 2.0, k=1 rows (Practical = pass@1)",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-name"
+    },
+    "scaffold": {
+     "says": "harness"
+    },
+    "context": "note",
+    "k": "note",
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "practical": {
+     "says": "score",
+     "term": "pass@1%",
+     "scale": "percent"
+    }
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/table-13-k1.csv",
+   "where": "Table 13: Test-time scaling on SWE-bench Verified, k=1 rows (Practical = pass@1)",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-name"
+    },
+    "scaffold": {
+     "says": "harness"
+    },
+    "context": "note",
+    "k": "note",
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "practical": {
+     "says": "score",
+     "term": "pass@1%",
+     "scale": "percent"
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "at k=1 it is plain pass@1",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "at k=1 it is plain pass@1"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "Test-time scaling on Terminal-Bench 2.0, ordered by accuracy",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 caption: rows ordered by accuracy",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Test-time scaling on Terminal-Bench 2.0, ordered by accuracy"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "Test-time scaling on SWE-bench Verified, ordered by accuracy",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 13 caption: rows ordered by accuracy",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Test-time scaling on SWE-bench Verified, ordered by accuracy"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 and Table 13 header",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Cost (USD)",
+   "term": "USD"
+  },
+  {
+   "id": "F5",
+   "says": "harness",
+   "about": null,
+   "value": "mini-swe-agent",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 13 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "All rows use mini-swe-agent"
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": null,
+   "value": "Terminus-2",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "surpassing every proprietary baseline evaluated on the same Terminus-2 harness"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "Score from the Claude Opus 4.7 system card.",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 footnote ‡ (Opus 4.7 score taken from its system card)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Score from the Claude Opus 4.7 system card."
+  },
+  {
+   "id": "F8",
+   "says": "cost-method",
+   "about": null,
+   "value": "Costs from the Terminal-Bench leaderboard (Terminus-2): Opus 4.6 uses the reported cost",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 footnote †",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Costs from the Terminal-Bench leaderboard (Terminus-2): Opus 4.6 uses the reported cost",
+   "term": "publisher-table"
+  },
+  {
+   "id": "F9",
+   "says": "cost-method",
+   "about": null,
+   "value": "GPT 5.3 Codex is computed from its token counts",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 footnote †",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "GPT 5.3 Codex is computed from its token counts",
+   "term": "unstated"
+  },
+  {
+   "id": "F10",
+   "says": "cost-method",
+   "about": null,
+   "value": "Token prices used for cost calculation. Prices are reported in USD per one million tokens",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 9 caption (tokens x the stated prices)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Token prices used for cost calculation. Prices are reported in USD per one million tokens",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F11",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Token prices used for cost calculation. Prices are reported in USD per one million tokens",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 9 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Token prices used for cost calculation. Prices are reported in USD per one million tokens",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F12",
+   "says": "effort-label",
+   "about": null,
+   "value": "high reasoning",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 13 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Opus 4.5 (high reasoning)",
+   "term": "high"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": null,
+   "value": "high reasoning",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 13 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.26779/evidence/paper.txt",
+   "quote": "Gemini 3 Flash (high reasoning)",
+   "term": "high"
+  }
+ ]
+}

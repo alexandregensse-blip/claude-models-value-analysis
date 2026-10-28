@@ -1,0 +1,359 @@
+{
+ "id": "src-arxiv-2610.11328-v1-2026-10-08",
+ "publisher": "arxiv-2610.11328",
+ "urls": [
+  "https://arxiv.org/abs/2610.11328",
+  "https://arxiv.org/html/2610.11328v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/pdf/2610.11328v1",
+   "captured": "2026-10-28T10:32:14Z",
+   "note": "saved PDF /work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.pdf"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.pdf": "1b13ccb0a9ccc6b657663bec564616b103c3b84b4407b55edeb7083d13100aff",
+  "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt": "3df590272e0353b6a81d7795af3512eb5722a230a53c07a762aec20e19e72b9d",
+  "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/table-1.csv": "b883889d30e5aa33ccca44058a28bd3e701436a1774a164069e41cfe5f6f2327"
+ },
+ "harvested_at": "2026-10-28T10:32:14Z",
+ "published": {
+  "value": "2026-10-08",
+  "where": "page 1 header",
+  "quote": "arXiv:2610.11328v1  [cs.AI]  8 Oct 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2610.11328 (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Haiku 5.5), from the saved PDF text extraction (/work/.salvo14/g/g7/src/ax2610.11328/p.txt)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.pdf",
+   "tool": "text extraction of the saved PDF (p.txt, /work/.salvo14/g/g7/src/ax2610.11328)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/table-1.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "tool": "convert.py: Table 1 rows, one printed line each (asserted present), the numbers in the printed order (SR all, SR outdoor, SR indoor, CC, then SPL, turns, PL as printed)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/table-1.csv",
+   "where": "Table 1: Main results on 180 tasks (SR all, outdoor, indoor, CC; SPL, turns, PL as printed)",
+   "format": "csv",
+   "row_key": "row",
+   "columns": {
+    "model": {
+     "says": "model-name"
+    },
+    "level": "note",
+    "SR_all": {
+     "says": "score",
+     "term": "success%",
+     "scale": "percent"
+    },
+    "SR_outdoor": "note",
+    "SR_indoor": "note",
+    "CC": "note",
+    "printed_rest": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "We evaluate each model on 180 tasks and reportSuccess Rate(SR)",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.1 Tasks and metrics: the success rate (SR) is the reported success metric",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "We evaluate each model on 180 tasks and reportSuccess Rate(SR)"
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "native tool calls",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.1 Models and configuration",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "All models use native tool calls through the same action interface"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "Within Opus 5, increasing effort from low to max raises SR from 35.0% to 50.6%",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.2 Main results (effort within Opus 5)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Within Opus 5, increasing effort from low to max raises SR from 35.0% to 50.6%"
+  },
+  {
+   "id": "F4",
+   "says": "effort-label",
+   "about": null,
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "GPT-6 Astra (medium)",
+   "term": "medium"
+  },
+  {
+   "id": "F5",
+   "says": "effort-label",
+   "about": null,
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5.5 (max)",
+   "term": "max"
+  },
+  {
+   "id": "F6",
+   "says": "effort-label",
+   "about": null,
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5 (max)",
+   "term": "max"
+  },
+  {
+   "id": "F7",
+   "says": "effort-label",
+   "about": null,
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5 (high)",
+   "term": "high"
+  },
+  {
+   "id": "F8",
+   "says": "effort-label",
+   "about": null,
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5 (medium)",
+   "term": "medium"
+  },
+  {
+   "id": "F9",
+   "says": "effort-label",
+   "about": null,
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5 (low)",
+   "term": "low"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": null,
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "GPT-5.6 Sol (max)",
+   "term": "max"
+  },
+  {
+   "id": "F11",
+   "says": "effort-label",
+   "about": null,
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Gemini 3.8 Flash (high)",
+   "term": "high"
+  },
+  {
+   "id": "F12",
+   "says": "effort-label",
+   "about": null,
+   "value": "xhigh",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Grok 4.6 (xhigh)",
+   "term": "xhigh"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": null,
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "DeepSeek-V4.1-Flash (max)",
+   "term": "max"
+  },
+  {
+   "id": "F14",
+   "says": "effort-label",
+   "about": null,
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "GLM-5.3-Flash (max)",
+   "term": "max"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": null,
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "GPT-6 Astra"
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": null,
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5.5"
+  },
+  {
+   "id": "F17",
+   "says": "model-name",
+   "about": null,
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5"
+  },
+  {
+   "id": "F18",
+   "says": "model-name",
+   "about": null,
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5"
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": null,
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5"
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": null,
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Claude Opus 5"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": null,
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "GPT-5.6 Sol"
+  },
+  {
+   "id": "F22",
+   "says": "model-name",
+   "about": null,
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Gemini 3.8 Flash"
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": null,
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "Grok 4.6"
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": null,
+   "value": "DeepSeek-V4.1-Flash",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "DeepSeek-V4.1-Flash"
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": null,
+   "value": "GLM-5.3-Flash",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 1 row label",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.11328/evidence/paper.txt",
+   "quote": "GLM-5.3-Flash"
+  }
+ ]
+}

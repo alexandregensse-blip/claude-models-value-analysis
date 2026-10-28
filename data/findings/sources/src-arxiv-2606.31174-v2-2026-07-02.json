@@ -1,0 +1,206 @@
+{
+ "id": "src-arxiv-2606.31174-v2-2026-07-02",
+ "publisher": "arxiv-2606.31174",
+ "urls": [
+  "https://arxiv.org/abs/2606.31174",
+  "https://arxiv.org/html/2606.31174v2"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2606.31174v2",
+   "captured": "2026-10-28T10:28:17Z",
+   "note": "arXiv HTML text saved by salvo g/g5 (/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt": "1f66a3e9f990956a8cc5e8426eafe68d0c50103bddf48395b066aac2dd436ed1",
+  "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/main-results.csv": "5ea35b470b6c69363c2d436e679d719477c120f94ad249f5442ff5925e4fced2"
+ },
+ "harvested_at": "2026-10-28T10:28:17Z",
+ "published": {
+  "value": "2026-07-02",
+  "where": "page header (v2)",
+  "quote": "arXiv:2606.31174v2 [cs.AI] 02 Jul 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2606.31174 (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Haiku 5.5), from the arXiv text saved by salvo g/g5 (ax_2606.31174.txt, v2)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/main-results.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "tool": "convert.py: main results table (model, TCR, TPP, ROC, WPP, MCA, Sms, cost, rounds), nine text lines per row, cells verbatim"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/main-results.csv",
+   "where": "Main results table: per-model TCR, TPP, ROC, WPP, MCA, Sms, cost ($), rounds (12 models, 41 scenarios)",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-name"
+    },
+    "TCR": {
+     "says": "score",
+     "term": "TCR%",
+     "scale": "percent"
+    },
+    "TPP": "note",
+    "ROC": "note",
+    "WPP": "note",
+    "MCA": "note",
+    "Sms": {
+     "says": "score",
+     "term": "Sms%",
+     "scale": "percent"
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "rounds": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "headline-metric",
+   "about": null,
+   "value": "an overall score—the Subagent-Management Score",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.1/abstract: the overall score",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "an overall score—the Subagent-Management Score",
+   "term": "Sms%"
+  },
+  {
+   "id": "F2",
+   "says": "metric-definition",
+   "about": null,
+   "value": "The composite Subagent-Management Score is",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.5 Scoring, equation (1): Sms = TCR x (TPP+ROC+WPP+MCA)/4",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "The composite Subagent-Management Score is"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "is evaluated as shipped, with a vendor-recommended",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.1 Setup: claude-fable-5 refusal fallback to claude-opus-4-8",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "is evaluated as shipped, with a vendor-recommended"
+  },
+  {
+   "id": "F4",
+   "says": "cost-basis",
+   "about": null,
+   "value": "computed at provider or OpenRouter list rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 3 caption: Cost ($) per-run main-agent API cost",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "computed at provider or OpenRouter list rates",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F5",
+   "says": "cost-method",
+   "about": null,
+   "value": "API cost is computed from token usage at provider or OpenRouter list prices",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.1 Setup, subagent pool and scoring",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "API cost is computed from token usage at provider or OpenRouter list prices",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "self-hosted models are priced at their OpenRouter reference rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.1 Setup",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "self-hosted models are priced at their OpenRouter reference rates"
+  },
+  {
+   "id": "F7",
+   "says": "currency",
+   "about": null,
+   "value": "Cost ($)",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 3 column header (main results)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "Cost ($)",
+   "term": "USD"
+  },
+  {
+   "id": "F8",
+   "says": "route",
+   "about": null,
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.1 Setup",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "kimi-k2.6 and deepseek-v4-pro via OpenRouter",
+   "term": "openrouter"
+  },
+  {
+   "id": "F9",
+   "says": "route",
+   "about": null,
+   "value": "official z.ai API",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.1 Setup",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "glm-5.2 via the official z.ai API"
+  },
+  {
+   "id": "F10",
+   "says": "route",
+   "about": null,
+   "value": "local vLLM",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 4.1 Setup",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "Self-hosted open models served through local vLLM include",
+   "term": "vllm"
+  },
+  {
+   "id": "F11",
+   "says": "route",
+   "about": null,
+   "value": "reached through provider-native or OpenAI-compatible APIs (Gemini, OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix D, main-agent APIs",
+   "file": "/work/.salvo14/mig/convert-arxiv-2606.31174/evidence/paper.txt",
+   "quote": "reached through provider-native or OpenAI-compatible APIs (Gemini, OpenRouter",
+   "term": "maker-api"
+  }
+ ]
+}

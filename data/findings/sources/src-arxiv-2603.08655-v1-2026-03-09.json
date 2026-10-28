@@ -1,0 +1,175 @@
+{
+ "id": "src-arxiv-2603.08655-v1-2026-03-09",
+ "publisher": "arxiv-2603.08655",
+ "urls": [
+  "https://arxiv.org/abs/2603.08655",
+  "https://arxiv.org/html/2603.08655"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2603.08655",
+   "captured": "2026-10-28T10:26:10Z",
+   "note": "arXiv HTML text saved by salvo g/g5 (file /work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt": "84a426b9f819ec28dcdb145d07f47cf4b1a96d0d00489b50336b5ec546f52706",
+  "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/table-4.csv": "803a99d165cd2fa8a95a21f76db315cc7c0c3f1911ef216e085d1765b006b6a5"
+ },
+ "harvested_at": "2026-10-28T10:26:10Z",
+ "published": {
+  "value": "2026-03-09",
+  "where": "page header",
+  "quote": "arXiv:2603.08655v1 [cs.AI] 09 Mar 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt"
+ },
+ "salvo": "salvo14/mig/convert-arxiv-2603.08655 (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Haiku 5.5), from the arXiv text saved by salvo g/g5 (ax_2603.08655.txt)",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/table-4.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "tool": "convert.py: Table 4 (model, reasoning, correctness, latency, tool calls, cost), six lines per row of the text extraction, cells verbatim"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/table-4.csv",
+   "where": "Table 4: Model correctness (%) at 0.0% error threshold, latency (minutes), average tool calls, and cost, custom agent",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-name"
+    },
+    "reasoning": "note",
+    "correctness": {
+     "says": "score",
+     "term": "correct%",
+     "scale": "percent"
+    },
+    "latency": "note",
+    "tool_calls": "note",
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "We report correctness (%) at 0.0% allowable absolute relative error, average latency, average tool calls, and cost per sample",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3 (agent baselines) evaluation sentence",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "We report correctness (%) at 0.0% allowable absolute relative error, average latency, average tool calls, and cost per sample"
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "for the custom agent with Databricks’ ai_parse_document and file search on OfficeQA Pro",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "for the custom agent with Databricks’ ai_parse_document and file search on OfficeQA Pro"
+  },
+  {
+   "id": "F3",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Token pricing assumptions used for cost calculations (USD per 1 million tokens)",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 8 caption (Appendix E.2)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "Token pricing assumptions used for cost calculations (USD per 1 million tokens)",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F4",
+   "says": "cost-method",
+   "about": null,
+   "value": "Token pricing assumptions used for cost calculations (USD per 1 million tokens)",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 8 caption (Appendix E.2)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "Token pricing assumptions used for cost calculations (USD per 1 million tokens)",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F5",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 8 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "Token pricing assumptions used for cost calculations (USD per 1 million tokens)",
+   "term": "USD"
+  },
+  {
+   "id": "F6",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "We use these models with their out-of-the-box default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix E.1 (model list), Anthropic models",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "We use these models with their out-of-the-box default settings"
+  },
+  {
+   "id": "F7",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "We use these models with their default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix E.1 (model list), Google models",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "We use these models with their default settings"
+  },
+  {
+   "id": "F8",
+   "says": "effort-setting",
+   "about": null,
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix E.1 (model list), OpenAI models",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "we set them to high reasoning",
+   "term": "high"
+  },
+  {
+   "id": "F9",
+   "says": "effort-setting",
+   "about": null,
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 3.1 footnote 4",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.08655/evidence/paper.txt",
+   "quote": "GPT 5.4 was configured to run with high reasoning",
+   "term": "high"
+  }
+ ]
+}
