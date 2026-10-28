@@ -1,0 +1,281 @@
+{
+ "id": "src-lesterppo-model-arena-r10-2026-10-21",
+ "publisher": "lesterppo",
+ "urls": [
+  "https://github.com/lesterppo/model-arena"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://github.com/lesterppo/model-arena",
+   "captured": "2026-10-21T15:24:18Z",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "note": "README of the repo as saved on 21 Oct 2026 (file time); no commit id in the saved copy"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://github.com/lesterppo/model-arena",
+   "captured": "2026-10-21T15:24:18Z",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "note": "harness/round10.py as saved (same bytes as the copy round10_317d620f1.py kept in the salvo arb folder)"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://github.com/lesterppo/model-arena",
+   "captured": "2026-10-21T15:24:18Z",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/results_results10.json",
+   "note": "results of round 10 (raw answers and scores per taker, 24 tests each) as saved"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-lesterppo/evidence/README.md": "d33ce7f9b1fbfd58cfb439f6cb19678b116e7643a66d7c4f62633418448dcf40",
+  "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py": "a217f95e6ac999b631b93209a098c1b0842f8059b2e6117376413775a8c32885",
+  "/work/.salvo14/mig/convert-lesterppo/evidence/results_results10.json": "063052b1bab32e68c0eda46792a3409f904276503b76ee0eca906f2dafd408f6"
+ },
+ "harvested_at": "2026-10-21T15:24:18Z",
+ "published": null,
+ "salvo": "salvo14/mig convert-lesterppo (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (claude-haiku-5-5), from the repo copies saved by salvo hn/news-code",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Round 10: four flash-class models cross-scored on four fresh batteries",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py docstring, first lines",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "Round 10: four flash-class models cross-scored on four fresh batteries."
+  },
+  {
+   "id": "F2",
+   "says": "metric-definition",
+   "about": null,
+   "value": "every answer key verified independently by",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py docstring, batteries paragraph",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "every answer key verified independently by"
+  },
+  {
+   "id": "F3",
+   "says": "run-date",
+   "about": null,
+   "value": "2026-10-21",
+   "level": "written",
+   "form": "prose",
+   "where": "README, Round 10 bullet",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "Round 10** (2026-10-21)"
+  },
+  {
+   "id": "F4",
+   "says": "harness",
+   "about": null,
+   "value": "harness/round10.py",
+   "level": "written",
+   "form": "prose",
+   "where": "README, round 10 bullet",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "Run it with `harness/round10.py`."
+  },
+  {
+   "id": "F5",
+   "says": "model-api-id",
+   "about": "gpt-6-luna",
+   "value": "gpt-6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row label",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| gpt-6-luna | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F6",
+   "says": "score",
+   "about": "gpt-6-luna",
+   "value": "24/24",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row gpt-6-luna, column TOTAL",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| gpt-6-luna | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "term": "pass-fraction-24-tests",
+   "scale": "counts"
+  },
+  {
+   "id": "F7",
+   "says": "route",
+   "about": "gpt-6-luna",
+   "value": "OpenAI",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py docstring, model table row gpt-6-luna",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "gpt-6-luna         OpenAI   /v1/chat/completions"
+  },
+  {
+   "id": "F8",
+   "says": "no-effort-sent",
+   "about": "gpt-6-luna",
+   "value": "\"max_completion_tokens\": max_tokens}",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py, request body of gpt-6-luna (chat body (OpenAI path) sends model, messages and max_completion_tokens only)",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "\"max_completion_tokens\": max_tokens}"
+  },
+  {
+   "id": "F9",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row label",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| claude-haiku-5-5 | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "24/24",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row claude-haiku-5-5, column TOTAL",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| claude-haiku-5-5 | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "term": "pass-fraction-24-tests",
+   "scale": "counts"
+  },
+  {
+   "id": "F11",
+   "says": "route",
+   "about": "claude-haiku-5-5",
+   "value": "Anthropic",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py docstring, model table row claude-haiku-5-5",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "claude-haiku-5-5   Anthropic /v1/messages  (x-api-key + anthropic-version)"
+  },
+  {
+   "id": "F12",
+   "says": "no-effort-sent",
+   "about": "claude-haiku-5-5",
+   "value": "body = {\"model\": model, \"max_tokens\": max_tokens,",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py, request body of claude-haiku-5-5 (Anthropic body sends model, max_tokens and messages only)",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "body = {\"model\": model, \"max_tokens\": max_tokens,"
+  },
+  {
+   "id": "F13",
+   "says": "model-api-id",
+   "about": "deepseek-flash",
+   "value": "deepseek-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row label",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| deepseek-flash | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "deepseek-flash",
+   "value": "24/24",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row deepseek-flash, column TOTAL",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| deepseek-flash | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "term": "pass-fraction-24-tests",
+   "scale": "counts"
+  },
+  {
+   "id": "F15",
+   "says": "route",
+   "about": "deepseek-flash",
+   "value": "DeepSeek",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py docstring, model table row deepseek-flash",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "deepseek-flash     DeepSeek  /chat/completions  (DeepSeek V4.1 Flash)"
+  },
+  {
+   "id": "F16",
+   "says": "no-effort-sent",
+   "about": "deepseek-flash",
+   "value": "body = {\"model\": model, \"messages\": messages, \"max_tokens\": max_tokens}",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py, request body of deepseek-flash (DeepSeek body sends model, messages and max_tokens only)",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "body = {\"model\": model, \"messages\": messages, \"max_tokens\": max_tokens}"
+  },
+  {
+   "id": "F17",
+   "says": "model-api-id",
+   "about": "minimax-m3.1-flash",
+   "value": "minimax-m3.1-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row label",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| minimax-m3.1-flash | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "minimax-m3.1-flash",
+   "value": "24/24",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, round 10 summary table, row minimax-m3.1-flash, column TOTAL",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+   "quote": "| minimax-m3.1-flash | 6/6 | 6/6 | 6/6 | 6/6 | **24/24** |",
+   "term": "pass-fraction-24-tests",
+   "scale": "counts"
+  },
+  {
+   "id": "F19",
+   "says": "route",
+   "about": "minimax-m3.1-flash",
+   "value": "MiniMax",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py docstring, model table row minimax-m3.1-flash",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "MiniMax-M3.1-Flash MiniMax   /v1/chat/completions"
+  },
+  {
+   "id": "F20",
+   "says": "no-effort-sent",
+   "about": "minimax-m3.1-flash",
+   "value": "body = {\"model\": model, \"messages\": messages, \"max_tokens\": max_tokens}",
+   "level": "written",
+   "form": "code",
+   "where": "round10.py, request body of minimax-m3.1-flash (MiniMax body sends model, messages and max_tokens only)",
+   "file": "/work/.salvo14/mig/convert-lesterppo/evidence/round10.py",
+   "quote": "body = {\"model\": model, \"messages\": messages, \"max_tokens\": max_tokens}"
+  }
+ ]
+}

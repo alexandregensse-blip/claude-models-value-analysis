@@ -1,0 +1,238 @@
+{
+ "id": "src-hf-ale-official-2026-10-28",
+ "publisher": "hf-ale-official",
+ "urls": [
+  "https://huggingface.co/api/datasets/agents-last-exam/agents-last-exam/leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://huggingface.co/api/datasets/agents-last-exam/agents-last-exam/leaderboard",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "note": "Hugging Face API JSON of the leaderboard (agents-last-exam dataset)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json": "86b7e393c407eaa702adfd03a319cbb7ee4654c63d99a7de4f01d20765dbbc50",
+  "/work/.wt-px/raw-data.csv": "489b5d480f65dbd0d44c68c38bfefae55c0f04355bad447d98108c376eb48a27"
+ },
+ "harvested_at": "2026-10-28T14:26:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave 2 (4 sources, 28 Oct)",
+ "agent": "converter (Haiku 5.5), C2 wave, from the saved files",
+ "snapshot_of": null,
+ "legacy": {
+  "file": "/work/.wt-px/raw-data.csv",
+  "columns": [
+   "group",
+   "source",
+   "model",
+   "effort",
+   "task_type",
+   "complexity",
+   "harness",
+   "unit",
+   "cost_usd",
+   "cost_prec",
+   "tokens_in",
+   "tokens_out",
+   "score",
+   "score_metric",
+   "score_prec",
+   "cached_pct",
+   "confound",
+   "ref"
+  ],
+  "source": "hf-ale-official"
+ },
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "filename",
+   "columns": {
+    "value": {
+     "says": "score",
+     "term": "pct-tasks-passed",
+     "scale": "percent"
+    },
+    "modelId": {
+     "says": "model-api-id",
+     "namespace": "huggingface"
+    },
+    "notes": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "says": "model-api-id",
+   "about": ".eval_results/ale-claude-code-thinking-max.yaml",
+   "value": "moonshotai/Kimi-K3",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-thinking-max.yaml, field modelId",
+   "quote": "\"modelId\":\"moonshotai/Kimi-K3\"",
+   "namespace": "huggingface",
+   "id": "F1",
+   "level": "written"
+  },
+  {
+   "says": "effort-label",
+   "about": ".eval_results/ale-claude-code-thinking-max.yaml",
+   "value": "max",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-thinking-max.yaml, field notes",
+   "quote": "harness=claude_code; harness_variant=thinking-max",
+   "id": "F2",
+   "level": "written"
+  },
+  {
+   "says": "route",
+   "about": ".eval_results/ale-claude-code-thinking-max.yaml",
+   "value": "claude_code",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-thinking-max.yaml, field notes",
+   "quote": "harness=claude_code",
+   "term": "claude-code",
+   "id": "F3",
+   "level": "written"
+  },
+  {
+   "says": "attempts",
+   "about": ".eval_results/ale-claude-code-thinking-max.yaml",
+   "value": "149/152",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-thinking-max.yaml, field notes",
+   "quote": "attempted=149/152",
+   "id": "F4",
+   "level": "written"
+  },
+  {
+   "says": "model-api-id",
+   "about": ".eval_results/ale-claude-code-max.yaml",
+   "value": "zai-org/GLM-5.2",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-max.yaml, field modelId",
+   "quote": "\"modelId\":\"zai-org/GLM-5.2\"",
+   "namespace": "huggingface",
+   "id": "F5",
+   "level": "written"
+  },
+  {
+   "says": "effort-label",
+   "about": ".eval_results/ale-claude-code-max.yaml",
+   "value": "max",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-max.yaml, field notes",
+   "quote": "harness=claude_code; harness_variant=max",
+   "id": "F6",
+   "level": "written"
+  },
+  {
+   "says": "route",
+   "about": ".eval_results/ale-claude-code-max.yaml",
+   "value": "claude_code",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-max.yaml, field notes",
+   "quote": "harness=claude_code",
+   "term": "claude-code",
+   "id": "F7",
+   "level": "written"
+  },
+  {
+   "says": "attempts",
+   "about": ".eval_results/ale-claude-code-max.yaml",
+   "value": "146/152",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-max.yaml, field notes",
+   "quote": "attempted=146/152",
+   "id": "F8",
+   "level": "written"
+  },
+  {
+   "says": "model-api-id",
+   "about": ".eval_results/ale-claude-code-reasoning-max.yaml",
+   "value": "Qwen/Qwen3.8-27B",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-reasoning-max.yaml, field modelId",
+   "quote": "\"modelId\":\"Qwen/Qwen3.8-27B\"",
+   "namespace": "huggingface",
+   "id": "F9",
+   "level": "written"
+  },
+  {
+   "says": "effort-label",
+   "about": ".eval_results/ale-claude-code-reasoning-max.yaml",
+   "value": "max",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-reasoning-max.yaml, field notes",
+   "quote": "harness=claude_code; harness_variant=reasoning-max",
+   "id": "F10",
+   "level": "written"
+  },
+  {
+   "says": "route",
+   "about": ".eval_results/ale-claude-code-reasoning-max.yaml",
+   "value": "claude_code",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-reasoning-max.yaml, field notes",
+   "quote": "harness=claude_code",
+   "term": "claude-code",
+   "id": "F11",
+   "level": "written"
+  },
+  {
+   "says": "attempts",
+   "about": ".eval_results/ale-claude-code-reasoning-max.yaml",
+   "value": "148/152",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "row .eval_results/ale-claude-code-reasoning-max.yaml, field notes",
+   "quote": "attempted=148/152",
+   "id": "F12",
+   "level": "written"
+  },
+  {
+   "says": "metric-definition",
+   "about": null,
+   "value": "pass threshold score>=0.999",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+   "where": "field notes of every entry (the board's note)",
+   "quote": "values are percentages (0-100); equal-task aggregation; unattempted tasks contribute zero; pass threshold score>=0.999",
+   "id": "F13",
+   "level": "written"
+  }
+ ]
+}

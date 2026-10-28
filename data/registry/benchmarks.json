@@ -13325,9 +13325,18 @@
    "metric": "pct-tasks-passed",
    "headline": {
     "metric": "pct-tasks-passed",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/api/datasets/agents-last-exam/agents-last-exam/leaderboard",
+      "captured": "2026-10-28",
+      "where": "T1 column 'value' (one score per entry, the only score column of the export); the board's note on the unit",
+      "quote": "values are percentages (0-100); equal-task aggregation; unattempted tasks contribute zero; pass threshold score>=0.999",
+      "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+      "sha256": "86b7e393c407eaa702adfd03a319cbb7ee4654c63d99a7de4f01d20765dbbc50"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -22615,9 +22624,18 @@
    "metric": "score-of-1",
    "headline": {
     "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.03332",
+      "captured": "2026-10-20",
+      "where": "HTML text, paragraph after Table 1",
+      "quote": "the headline ARI is the unweighted mean over this fixed evaluation set",
+      "file": "/work/.salvo14/gt/t4/src/a2607.03332.html",
+      "sha256": "bfe99d1cad1d0989c2eec37d77decd2fc52f5c4955ae5f3fa2d0eeba7530609f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -36073,7 +36091,7 @@
       "captured": "2026-10-19",
       "where": "model card table, row Terminal-Bench 4.0: the card gives one number per benchmark and model",
       "quote": "| Terminal-Bench 4.0 | 42.3 | 31.2 | 12.6 | 37.9 | 39.9 | 51.8 |",
-      "file": "/work/.salvo14/mig/convert-deepseek-v41-flash-1017/evidence/hf-DeepSeek-V4.1-Flash-1017.md",
+      "file": "/work/.salvo14/mig/convert-deepseek-model-card/evidence/hf-DeepSeek-V4.1-Flash-1017.md",
       "sha256": "b72b796e4f4c739eca5d0ad360a7679b39118ca7eb64891f7151a527b292c42a"
      }
     ],
@@ -41439,9 +41457,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2605.17962",
+      "captured": "2026-10-28",
+      "where": "Sec. 4.2 Evaluation Metrics, paragraph 'Overall Performance Metric' (page 6): the paper names the Overall Score as its overall metric",
+      "quote": "calculate theOverall Scoreusing a macro-average strategy. We scaleopen_endedscores to a 0-100",
+      "file": "/work/.salvo14/mig/convert-findocmre-2605.17962/evidence/paper.pypdf.txt",
+      "sha256": "dfca3717dd948b87821a57e3fa194e48127f0415b2078a17ba087c983bfa9e05"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73256,9 +73283,18 @@
    "metric": "score/100",
    "headline": {
     "metric": "score/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.youtube.com/watch?v=DRSWSwcY9h4",
+      "captured": "2026-10-19",
+      "where": "description, paragraph 'この動画で分かること': the bench's average (平均点), the only score printed per model",
+      "quote": "独自ベンチの平均点は Haiku 83.9点／Luna 80.6点",
+      "file": "/work/.salvo14/mig/convert-youtube-junrei-ai/evidence/yt-DRSWSwcY9h4-description.txt",
+      "sha256": "f42c7472b3fc905325ead1fd4bc7faad1d1bfc76dd78a8dec650fb2d1d4c7d2a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -76725,9 +76761,18 @@
    "metric": "pass-fraction-24-tests",
    "headline": {
     "metric": "pass-fraction-24-tests",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/lesterppo/model-arena",
+      "captured": "2026-10-21",
+      "where": "README, round 10 summary table: one TOTAL column per taker (the designer columns are the parts of it)",
+      "quote": "| taker \\ designer | deepseek | luna | haiku | minimax | TOTAL |",
+      "file": "/work/.salvo14/mig/convert-lesterppo/evidence/README.md",
+      "sha256": "d33ce7f9b1fbfd58cfb439f6cb19678b116e7643a66d7c4f62633418448dcf40"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -100182,9 +100227,18 @@
    "metric": "balanced-accuracy%",
    "headline": {
     "metric": "balanced-accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/xzf-thu/Pask",
+      "captured": "2026-10-20",
+      "where": "assets/README.md at d54646c, section Results: the leaderboard table ranks the models by 'Balanced Acc' (rank column 2 to 10)",
+      "quote": "Here's how they stack up:",
+      "file": "/work/.salvo14/mig/convert-pask-latentneeds/evidence/pask_assets_README.md",
+      "sha256": "767fe6f55c04cd133f657db88c8089f37eebc8be872b055e845af9e9e40bbb48"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -115382,9 +115436,18 @@
    "metric": "frames-lower-better",
    "headline": {
     "metric": "frames-lower-better",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.08076",
+      "captured": "2026-10-28",
+      "where": "Sec. 4.3 ONLINE PLAY RESULTS, paragraph 1: the paper gives one metric for the ONLINE Pokemon runs (frames to the first badge) and no other per model",
+      "quote": "Opus 5 takes 160,021 frames, GPT-5.6-sol 283,474, and Grok 4.6 477,140, so the best agent is",
+      "file": "/work/.salvo14/mig/convert-speedrunbench-2610.08076/evidence/paper.pypdf.txt",
+      "sha256": "9670f6ec7c2250a77e029ea18c6bf97b8c8273052deb8f3c7a4a0f757e43ad63"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -123629,9 +123692,18 @@
    "metric": "score-of-100",
    "headline": {
     "metric": "score-of-100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/moriryota62/claude-haiku-terraform-review-benchmark",
+      "captured": "2026-10-18",
+      "where": "README.md, 結果 section: the 3-run average is the score the README designates (3回平均の総合スコア)",
+      "quote": "3回平均の総合スコア(100点満点)",
+      "file": "/work/.salvo14/mig/convert-github-claude-haiku-terraform-review-benchmark/evidence/README.md",
+      "sha256": "e5abeef4336e5ea2cba637615b014d7536d449bf99450ce3e56737d2a931544f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -131144,9 +131216,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/xdotli/gpt-5.2-tb2",
+      "captured": "2026-10-20",
+      "where": "README 'Results Summary' table (header: one pass-rate column per run stage)",
+      "quote": "| Model | Original | After Retries | Timeouts |",
+      "file": "/work/.salvo14/gt/t6/src/gh/xdotli_gpt-5.2-tb2/README.md",
+      "sha256": "cb7e4d582e959c532e00a528a7c7a599d1c98c2c5dad9448fe3ebb63db4e99d7"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -136089,9 +136170,18 @@
    "metric": "success%",
    "headline": {
     "metric": "success%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/mappy55/articles/small-ai-hands-05",
+      "captured": "2026-10-18",
+      "where": "本文, results table: the one score column (成否), the other columns are seconds, tokens and cost",
+      "quote": "成否",
+      "file": "/work/.salvo14/mig/convert-zenn-mappy55/evidence/zenn_small-ai-hands-05.txt",
+      "sha256": "4f6f23b2c5f8c62440e6bd02984dade6e09ce5c06f4176f8dcd48920e1a3d280"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -136485,9 +136575,18 @@
    "metric": "pass@1%",
    "headline": {
     "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.08658v1",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption",
+      "quote": "Table 1 : Pass@1 (%) on HumanEval+ with K = 10 , M = 10",
+      "file": "/work/.salvo14/hk/gemini-3.1-flash-lite-preview/src/html_2605.08658v1.html",
+      "sha256": "e170002fc5204304675951d31c2cccbfbfbe93dd798c82c3128f5c5b68797546"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
