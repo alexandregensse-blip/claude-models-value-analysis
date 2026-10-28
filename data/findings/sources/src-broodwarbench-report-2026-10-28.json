@@ -1,0 +1,1024 @@
+{
+ "id": "src-broodwarbench-report-2026-10-28",
+ "publisher": "broodwarbench",
+ "urls": [
+  "https://bw.swerdlow.dev/report"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://bw.swerdlow.dev/report",
+   "captured": "2026-10-28T06:00:00Z",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.html",
+   "note": "live page fetched 28 Oct 2026 (byte-identical to the copy saved by salvo g4 on 19 Oct 2026, sha256 d77e172c...); the report data is the JSON of <script id=\"report-data\"> saved apart as report-data.json"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt": "aef1f24acf1cfd4112c3079ff50ea617b594af40b3a31b67c3f803c58de12b24",
+  "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.html": "d77e172c8b60778524cde0cabf86d6a031854a6175282ca4ea49c2e977fe0321",
+  "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json": "2e02f115e2320124f49739fd49b43db6e6b1bb8bfc99533a559e9f3e252bc7c6"
+ },
+ "harvested_at": "2026-10-28T06:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "from": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the page, one block per line, every table row on one line with cells joined by ' | '"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "cost-basis",
+   "value": "Average cost per game",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "caption of the 'Win rate vs. cost' chart",
+   "quote": "Average cost per game, using the same prices as the leaderboard. Codex and Sonnet costs are token-based estimates.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column Cost / game",
+   "quote": "🥇 | Codex Astra / xhigh | 18 | 0 | 12.6 | $10.54 | 100.0%",
+   "term": "USD"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "unit",
+   "value": "Cost / game",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard header",
+   "quote": "Rank | System | Wins | Losses | APM | Cost / game | Win rate",
+   "term": "per-task"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "cost-method",
+   "value": "token-based estimates",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "caption of the 'Win rate vs. cost' chart (Codex and Sonnet rows)",
+   "quote": "Average cost per game, using the same prices as the leaderboard. Codex and Sonnet costs are token-based estimates.",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "harness",
+   "value": "claude-code",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.html",
+   "where": "leaderboard rows of the Claude systems: the logo /benchmark/claude-code.svg (chart legend: Claude = claude-code.svg)",
+   "quote": "<img class=\"model-logo model-logo-claude\" src=\"/benchmark/claude-code.svg\" alt=\"\"/>",
+   "term": "claude-code"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "harness",
+   "value": "codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.html",
+   "where": "leaderboard rows of the Codex systems: the logo /benchmark/codex.svg; the page's og:image:alt names 'Codex, Claude Code, and Grok logos'",
+   "quote": "<img class=\"model-logo model-logo-codex\" src=\"/benchmark/codex.svg\" alt=\"\"/>",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "aggregation",
+   "value": "round-robin matrix",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "'How the benchmark ran'",
+   "quote": "We built a round-robin matrix of model and effort configurations and had every configuration play every other."
+  },
+  {
+   "id": "F8",
+   "about": "Codex Astra / xhigh",
+   "says": "model-name",
+   "value": "Codex Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "🥇 | Codex Astra / xhigh | 18 | 0 | 12.6 | $10.54 | 100.0%"
+  },
+  {
+   "id": "F9",
+   "about": "Codex Astra / xhigh",
+   "says": "score",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[0].winRate (win rate = wins / games; 18 wins, 0 losses; printed 100.0%)",
+   "quote": "\"winRate\":1",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Codex Astra / xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "🥇 | Codex Astra / xhigh | 18 | 0 | 12.6 | $10.54 | 100.0%"
+  },
+  {
+   "id": "F11",
+   "about": "Codex Astra / xhigh",
+   "says": "cost",
+   "value": "10.54",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column Cost / game",
+   "quote": "🥇 | Codex Astra / xhigh | 18 | 0 | 12.6 | $10.54 | 100.0%",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F12",
+   "about": "Codex Astra / medium",
+   "says": "model-name",
+   "value": "Codex Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "🥈 | Codex Astra / medium | 16 | 2 | 17.2 | $15.11 | 88.9%"
+  },
+  {
+   "id": "F13",
+   "about": "Codex Astra / medium",
+   "says": "score",
+   "value": "0.8888888888888888",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[1].winRate (win rate = wins / games; 16 wins, 2 losses; printed 88.9%)",
+   "quote": "\"winRate\":0.8888888888888888",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F14",
+   "about": "Codex Astra / medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "🥈 | Codex Astra / medium | 16 | 2 | 17.2 | $15.11 | 88.9%"
+  },
+  {
+   "id": "F15",
+   "about": "Codex Astra / medium",
+   "says": "cost",
+   "value": "15.11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column Cost / game",
+   "quote": "🥈 | Codex Astra / medium | 16 | 2 | 17.2 | $15.11 | 88.9%",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F16",
+   "about": "Claude Fable",
+   "says": "model-name",
+   "value": "Claude Fable",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "🥉 | Claude Fable | 15 | 3 | 12.6 | $12.24 | 83.3%"
+  },
+  {
+   "id": "F17",
+   "about": "Claude Fable",
+   "says": "score",
+   "value": "0.8333333333333334",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[2].winRate (win rate = wins / games; 15 wins, 3 losses; printed 83.3%)",
+   "quote": "\"winRate\":0.8333333333333334",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F18",
+   "about": "Claude Fable",
+   "says": "no-effort-sent",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "the system's configuration id in the report data (Claude systems end in '-default'; the Codex and Grok systems end in their effort level)",
+   "quote": "\"id\":\"claude-fable-default\""
+  },
+  {
+   "id": "F19",
+   "about": "Claude Fable",
+   "says": "cost",
+   "value": "12.235380500000002",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[2].averageReportedCostUsd (printed $12.24)",
+   "quote": "\"averageReportedCostUsd\":12.235380500000002",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F20",
+   "about": "Claude Fable",
+   "says": "cost-method",
+   "value": "averageReportedCostUsd",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json field name: the cost reported by the harness (Claude Code); the caption says only Codex and Sonnet are token-based estimates",
+   "quote": "\"averageReportedCostUsd\"",
+   "term": "cli-total"
+  },
+  {
+   "id": "F21",
+   "about": "Codex Astra / low",
+   "says": "model-name",
+   "value": "Codex Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "4 | Codex Astra / low | 14 | 4 | 25.7 | $21.07 | 77.8%"
+  },
+  {
+   "id": "F22",
+   "about": "Codex Astra / low",
+   "says": "score",
+   "value": "0.7777777777777778",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[3].winRate (win rate = wins / games; 14 wins, 4 losses; printed 77.8%)",
+   "quote": "\"winRate\":0.7777777777777778",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F23",
+   "about": "Codex Astra / low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "4 | Codex Astra / low | 14 | 4 | 25.7 | $21.07 | 77.8%"
+  },
+  {
+   "id": "F24",
+   "about": "Codex Astra / low",
+   "says": "cost",
+   "value": "21.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column Cost / game",
+   "quote": "4 | Codex Astra / low | 14 | 4 | 25.7 | $21.07 | 77.8%",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F25",
+   "about": "Codex 5.6 Sol / medium",
+   "says": "model-name",
+   "value": "Codex 5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "5 | Codex 5.6 Sol / medium | 13 | 5 | 10.1 | $5.12 | 72.2%"
+  },
+  {
+   "id": "F26",
+   "about": "Codex 5.6 Sol / medium",
+   "says": "score",
+   "value": "0.7222222222222222",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[4].winRate (win rate = wins / games; 13 wins, 5 losses; printed 72.2%)",
+   "quote": "\"winRate\":0.7222222222222222",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F27",
+   "about": "Codex 5.6 Sol / medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "5 | Codex 5.6 Sol / medium | 13 | 5 | 10.1 | $5.12 | 72.2%"
+  },
+  {
+   "id": "F28",
+   "about": "Codex 5.6 Sol / low",
+   "says": "model-name",
+   "value": "Codex 5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "6 | Codex 5.6 Sol / low | 12 | 6 | 18.1 | $9.23 | 66.7%"
+  },
+  {
+   "id": "F29",
+   "about": "Codex 5.6 Sol / low",
+   "says": "score",
+   "value": "0.6666666666666666",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[5].winRate (win rate = wins / games; 12 wins, 6 losses; printed 66.7%)",
+   "quote": "\"winRate\":0.6666666666666666",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F30",
+   "about": "Codex 5.6 Sol / low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "6 | Codex 5.6 Sol / low | 12 | 6 | 18.1 | $9.23 | 66.7%"
+  },
+  {
+   "id": "F31",
+   "about": "Claude Opus 5",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "7 | Claude Opus 5 | 12 | 6 | 10.5 | $20.78 | 66.7%"
+  },
+  {
+   "id": "F32",
+   "about": "Claude Opus 5",
+   "says": "score",
+   "value": "0.6666666666666666",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[6].winRate (win rate = wins / games; 12 wins, 6 losses; printed 66.7%)",
+   "quote": "\"winRate\":0.6666666666666666",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F33",
+   "about": "Claude Opus 5",
+   "says": "no-effort-sent",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "the system's configuration id in the report data (Claude systems end in '-default'; the Codex and Grok systems end in their effort level)",
+   "quote": "\"id\":\"claude-opus-default\""
+  },
+  {
+   "id": "F34",
+   "about": "Claude Opus 5",
+   "says": "cost",
+   "value": "20.781034999999996",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[6].averageReportedCostUsd (printed $20.78)",
+   "quote": "\"averageReportedCostUsd\":20.781034999999996",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F35",
+   "about": "Claude Opus 5",
+   "says": "cost-method",
+   "value": "averageReportedCostUsd",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json field name: the cost reported by the harness (Claude Code); the caption says only Codex and Sonnet are token-based estimates",
+   "quote": "\"averageReportedCostUsd\"",
+   "term": "cli-total"
+  },
+  {
+   "id": "F36",
+   "about": "Codex 5.6 Sol / xhigh",
+   "says": "model-name",
+   "value": "Codex 5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "8 | Codex 5.6 Sol / xhigh | 11 | 7 | 8.0 | $3.23 | 61.1%"
+  },
+  {
+   "id": "F37",
+   "about": "Codex 5.6 Sol / xhigh",
+   "says": "score",
+   "value": "0.6111111111111112",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[7].winRate (win rate = wins / games; 11 wins, 7 losses; printed 61.1%)",
+   "quote": "\"winRate\":0.6111111111111112",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F38",
+   "about": "Codex 5.6 Sol / xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "8 | Codex 5.6 Sol / xhigh | 11 | 7 | 8.0 | $3.23 | 61.1%"
+  },
+  {
+   "id": "F39",
+   "about": "Codex 5.6 Luna / low",
+   "says": "model-name",
+   "value": "Codex 5.6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "9 | Codex 5.6 Luna / low | 9 | 9 | 23.8 | $0.42 | 50.0%"
+  },
+  {
+   "id": "F40",
+   "about": "Codex 5.6 Luna / low",
+   "says": "score",
+   "value": "0.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[8].winRate (win rate = wins / games; 9 wins, 9 losses; printed 50.0%)",
+   "quote": "\"winRate\":0.5",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F41",
+   "about": "Codex 5.6 Luna / low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "9 | Codex 5.6 Luna / low | 9 | 9 | 23.8 | $0.42 | 50.0%"
+  },
+  {
+   "id": "F42",
+   "about": "Codex 5.6 Terra / xhigh",
+   "says": "model-name",
+   "value": "Codex 5.6 Terra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "10 | Codex 5.6 Terra / xhigh | 9 | 9 | 15.8 | $2.10 | 50.0%"
+  },
+  {
+   "id": "F43",
+   "about": "Codex 5.6 Terra / xhigh",
+   "says": "score",
+   "value": "0.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[9].winRate (win rate = wins / games; 9 wins, 9 losses; printed 50.0%)",
+   "quote": "\"winRate\":0.5",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F44",
+   "about": "Codex 5.6 Terra / xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "10 | Codex 5.6 Terra / xhigh | 9 | 9 | 15.8 | $2.10 | 50.0%"
+  },
+  {
+   "id": "F45",
+   "about": "Codex 5.6 Terra / medium",
+   "says": "model-name",
+   "value": "Codex 5.6 Terra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "11 | Codex 5.6 Terra / medium | 8 | 10 | 10.5 | $3.15 | 44.4%"
+  },
+  {
+   "id": "F46",
+   "about": "Codex 5.6 Terra / medium",
+   "says": "score",
+   "value": "0.4444444444444444",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[10].winRate (win rate = wins / games; 8 wins, 10 losses; printed 44.4%)",
+   "quote": "\"winRate\":0.4444444444444444",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F47",
+   "about": "Codex 5.6 Terra / medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "11 | Codex 5.6 Terra / medium | 8 | 10 | 10.5 | $3.15 | 44.4%"
+  },
+  {
+   "id": "F48",
+   "about": "Codex 5.6 Terra / low",
+   "says": "model-name",
+   "value": "Codex 5.6 Terra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "12 | Codex 5.6 Terra / low | 8 | 10 | 48.3 | $4.65 | 44.4%"
+  },
+  {
+   "id": "F49",
+   "about": "Codex 5.6 Terra / low",
+   "says": "score",
+   "value": "0.4444444444444444",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[11].winRate (win rate = wins / games; 8 wins, 10 losses; printed 44.4%)",
+   "quote": "\"winRate\":0.4444444444444444",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F50",
+   "about": "Codex 5.6 Terra / low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "12 | Codex 5.6 Terra / low | 8 | 10 | 48.3 | $4.65 | 44.4%"
+  },
+  {
+   "id": "F51",
+   "about": "Codex 5.6 Luna / xhigh",
+   "says": "model-name",
+   "value": "Codex 5.6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "13 | Codex 5.6 Luna / xhigh | 7 | 11 | 5.2 | $0.16 | 38.9%"
+  },
+  {
+   "id": "F52",
+   "about": "Codex 5.6 Luna / xhigh",
+   "says": "score",
+   "value": "0.3888888888888889",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[12].winRate (win rate = wins / games; 7 wins, 11 losses; printed 38.9%)",
+   "quote": "\"winRate\":0.3888888888888889",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F53",
+   "about": "Codex 5.6 Luna / xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "13 | Codex 5.6 Luna / xhigh | 7 | 11 | 5.2 | $0.16 | 38.9%"
+  },
+  {
+   "id": "F54",
+   "about": "Claude Sonnet",
+   "says": "model-name",
+   "value": "Claude Sonnet",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "14 | Claude Sonnet | 7 | 11 | 6.2 | $8.98 | 38.9%"
+  },
+  {
+   "id": "F55",
+   "about": "Claude Sonnet",
+   "says": "score",
+   "value": "0.3888888888888889",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[13].winRate (win rate = wins / games; 7 wins, 11 losses; printed 38.9%)",
+   "quote": "\"winRate\":0.3888888888888889",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F56",
+   "about": "Claude Sonnet",
+   "says": "no-effort-sent",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "the system's configuration id in the report data (Claude systems end in '-default'; the Codex and Grok systems end in their effort level)",
+   "quote": "\"id\":\"claude-sonnet-default\""
+  },
+  {
+   "id": "F57",
+   "about": "Claude Sonnet",
+   "says": "cost",
+   "value": "8.98",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column Cost / game",
+   "quote": "14 | Claude Sonnet | 7 | 11 | 6.2 | $8.98 | 38.9%",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F58",
+   "about": "Codex 5.6 Luna / medium",
+   "says": "model-name",
+   "value": "Codex 5.6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "15 | Codex 5.6 Luna / medium | 6 | 12 | 14.8 | $0.30 | 33.3%"
+  },
+  {
+   "id": "F59",
+   "about": "Codex 5.6 Luna / medium",
+   "says": "score",
+   "value": "0.3333333333333333",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[14].winRate (win rate = wins / games; 6 wins, 12 losses; printed 33.3%)",
+   "quote": "\"winRate\":0.3333333333333333",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F60",
+   "about": "Codex 5.6 Luna / medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "15 | Codex 5.6 Luna / medium | 6 | 12 | 14.8 | $0.30 | 33.3%"
+  },
+  {
+   "id": "F61",
+   "about": "Grok 4.6 / xhigh",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "16 | Grok 4.6 / xhigh | 2 | 15 | 2.8 | $0.66 | 11.1%"
+  },
+  {
+   "id": "F62",
+   "about": "Grok 4.6 / xhigh",
+   "says": "score",
+   "value": "0.1111111111111111",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[15].winRate (win rate = wins / games; 2 wins, 15 losses; printed 11.1%)",
+   "quote": "\"winRate\":0.1111111111111111",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F63",
+   "about": "Grok 4.6 / xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "16 | Grok 4.6 / xhigh | 2 | 15 | 2.8 | $0.66 | 11.1%"
+  },
+  {
+   "id": "F64",
+   "about": "Grok 4.6 / xhigh",
+   "says": "cost",
+   "value": "0.66253573",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[15].averageReportedCostUsd (printed $0.66)",
+   "quote": "\"averageReportedCostUsd\":0.66253573",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F65",
+   "about": "Grok 4.6 / medium",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "17 | Grok 4.6 / medium | 1 | 16 | 3.2 | $0.79 | 5.6%"
+  },
+  {
+   "id": "F66",
+   "about": "Grok 4.6 / medium",
+   "says": "score",
+   "value": "0.05555555555555555",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[16].winRate (win rate = wins / games; 1 wins, 16 losses; printed 5.6%)",
+   "quote": "\"winRate\":0.05555555555555555",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F67",
+   "about": "Grok 4.6 / medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "17 | Grok 4.6 / medium | 1 | 16 | 3.2 | $0.79 | 5.6%"
+  },
+  {
+   "id": "F68",
+   "about": "Grok 4.6 / medium",
+   "says": "cost",
+   "value": "0.78697437",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[16].averageReportedCostUsd (printed $0.79)",
+   "quote": "\"averageReportedCostUsd\":0.78697437",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F69",
+   "about": "Claude Haiku",
+   "says": "model-name",
+   "value": "Claude Haiku",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "18 | Claude Haiku | 0 | 16 | 0.3 | $0.34 | 0.0%"
+  },
+  {
+   "id": "F70",
+   "about": "Claude Haiku",
+   "says": "score",
+   "value": "0",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[17].winRate (win rate = wins / games; 0 wins, 16 losses; printed 0.0%)",
+   "quote": "\"winRate\":0",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F71",
+   "about": "Claude Haiku",
+   "says": "no-effort-sent",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "the system's configuration id in the report data (Claude systems end in '-default'; the Codex and Grok systems end in their effort level)",
+   "quote": "\"id\":\"claude-haiku-default\""
+  },
+  {
+   "id": "F72",
+   "about": "Claude Haiku",
+   "says": "cost",
+   "value": "0.3426906722222222",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[17].averageReportedCostUsd (printed $0.34)",
+   "quote": "\"averageReportedCostUsd\":0.3426906722222222",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F73",
+   "about": "Claude Haiku",
+   "says": "cost-method",
+   "value": "averageReportedCostUsd",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json field name: the cost reported by the harness (Claude Code); the caption says only Codex and Sonnet are token-based estimates",
+   "quote": "\"averageReportedCostUsd\"",
+   "term": "cli-total"
+  },
+  {
+   "id": "F74",
+   "about": "Grok 4.6 / low",
+   "says": "model-name",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the name before the effort)",
+   "quote": "19 | Grok 4.6 / low | 0 | 16 | 4.2 | $1.26 | 0.0%"
+  },
+  {
+   "id": "F75",
+   "about": "Grok 4.6 / low",
+   "says": "score",
+   "value": "0",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[18].winRate (win rate = wins / games; 0 wins, 16 losses; printed 0.0%)",
+   "quote": "\"winRate\":0",
+   "term": "win%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F76",
+   "about": "Grok 4.6 / low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+   "where": "Leaderboard, column System (the effort after ' / ')",
+   "quote": "19 | Grok 4.6 / low | 0 | 16 | 4.2 | $1.26 | 0.0%"
+  },
+  {
+   "id": "F77",
+   "about": "Grok 4.6 / low",
+   "says": "cost",
+   "value": "1.2612256933333335",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/report-data.json",
+   "where": "report-data.json $.initialReport.leaderboard[18].averageReportedCostUsd (printed $1.26)",
+   "quote": "\"averageReportedCostUsd\":1.2612256933333335",
+   "precision": {
+    "model": "exact"
+   }
+  }
+ ]
+}

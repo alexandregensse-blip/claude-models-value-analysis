@@ -1,0 +1,162 @@
+{
+ "id": "src-frontierswe-2026-10-08",
+ "publisher": "frontierswe",
+ "urls": [
+  "https://frontierswe.com/",
+  "https://frontierswe.com/blog/v2"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://frontierswe.com/",
+   "captured": "2026-10-08T02:48:00Z",
+   "note": "leaderboard page saved by salvo s20/h1 on 8 Oct (file mtime); the g5 copy of 19 Oct is byte-identical; evidence/page-mean.json is the entries.abs.mean array of its embedded Next.js payload"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://frontierswe.com/blog/v2",
+   "captured": "2026-10-28T08:15:00Z",
+   "note": "blog post FrontierSWE v2 of 2 Sep 2026, fetched by the converter"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-frontierswe/evidence/page-mean.json": "e45ede0fb531661446f9a04cd49da6d8a10e7f9bf12b045284b29bc59f1ea48d",
+  "/work/.salvo14/mig/convert-frontierswe/evidence/frontierswe-page.html": "f5d8949e2def0df46f4ae982588590056e3620d687fee5f8604eeebc72b0d85c",
+  "/work/.salvo14/mig/convert-frontierswe/evidence/blog-v2.html": "69308876f1ff4cb42e8c38f7d09417a7e62fc7b9c180bab86f877f908e71fe72",
+  "/work/.salvo14/mig/convert-frontierswe/evidence/page.txt": "0162dca47c94b784a36e49d3e1d900feccf0a0b92f684a6de4d9f11244326ab4",
+  "/work/.salvo14/mig/convert-frontierswe/evidence/blog-v2.txt": "c5c55b052b9b107eb9bc26bb414bfa089f1f49d29d074168c139d9bf6cc5f4a1"
+ },
+ "harvested_at": "2026-10-08T02:48:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page-mean.json",
+   "from": "/work/.salvo14/mig/convert-frontierswe/evidence/frontierswe-page.html",
+   "tool": "convert.py: the 'entries.abs.mean' array of the page's Next.js flight payload (backslash escapes removed), saved as JSON; fields as printed"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/blog-v2.txt",
+   "from": "/work/.salvo14/mig/convert-frontierswe/evidence/blog-v2.html",
+   "tool": "blog-v2.html text (script/style dropped, tags to line breaks, entities unescaped); quotes matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page.txt",
+   "from": "/work/.salvo14/mig/convert-frontierswe/evidence/frontierswe-page.html",
+   "tool": "text of the page (script/style dropped, tags to line breaks, entities unescaped)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page-mean.json",
+   "where": "$.entries.abs.mean",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": "model-name",
+    "overall": {
+     "says": "score",
+     "term": "mean-reward@5",
+     "scale": "percent",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "avgCostUsd": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page-mean.json",
+   "where": "$.entries.abs.mean[*].avgCostUsd (key name 'avgCostUsd')",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "per-trial",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page.txt",
+   "where": "leaderboard footnote",
+   "quote": "Cost and time are per-trial averages.",
+   "term": "per-trial"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-basis",
+   "value": "per-trial averages",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page.txt",
+   "where": "leaderboard footnote",
+   "quote": "Cost and time are per-trial averages.",
+   "term": "unknown"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "effort-label",
+   "value": "maximum reasoning effort",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/blog-v2.txt",
+   "where": "blog v2 (2 Sep 2026), Results: the models of its results table",
+   "quote": "We evaluate each model at its maximum reasoning effort, with Proximus as the default harness and a 20-hour budget per task."
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "aggregation",
+   "value": "Each model runs 5 trials per task with a 20-hour budget.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page.txt",
+   "where": "leaderboard header",
+   "quote": "Each model runs 5 trials per task with a 20-hour budget."
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "harness",
+   "value": "proximus",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/page-mean.json",
+   "where": "$.entries.abs.mean[*].harness"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "headline-metric",
+   "value": "mean@5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-frontierswe/evidence/blog-v2.txt",
+   "where": "blog v2 Results",
+   "quote": "We report mean@5 scores across all 34 tasks."
+  }
+ ]
+}

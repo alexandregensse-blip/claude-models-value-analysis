@@ -1,0 +1,1884 @@
+{
+ "id": "src-nuxt-nuxt-evals-agent-results-2026-10-15",
+ "publisher": "nuxt/nuxt-evals",
+ "urls": [
+  "https://nuxt.com/evals",
+  "https://github.com/nuxt/nuxt-evals"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://github.com/nuxt/nuxt-evals",
+   "captured": "2026-10-15T15:42:00Z",
+   "note": "agent-results.json (exportedAt 2026-10-15T10:34:09Z) and README.md of the repo (commit 0a4045de per salvo s23/b4), saved on 15 Oct 2026",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://nuxt.com/evals",
+   "captured": "2026-10-28T07:00:00Z",
+   "note": "nuxt.com/evals fetched 28 Oct 2026 ('Last run date: October 15, 2026'), html + text (htmltxt2.py)",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt": "d1ff8c46a620b8af0edb1c40799ab00bd748b03c324b1cc3903d4d1360bd6c64",
+  "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.html": "3c7f8f64104cf391b9e71273e72a1d003405bf800c409305b000a153ab7f0eb6",
+  "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md": "132f91c14dfcaa87c25c3cb0fe7b0e1491d2b4ce44a7f68474f27fe358187baa",
+  "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json": "57d7f4c7fd2acc35e258c6310849e466945c8efc15fffbb133046315a7772a31"
+ },
+ "harvested_at": "2026-10-28T07:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "from": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the page, one block per line, every table row on one line with cells joined by ' | '"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "unit",
+   "value": "mean list cost per eval",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README, 'pnpm run export-results'",
+   "quote": "Each experiment also gets an `avgCostUsd`: the mean list cost per eval. Tokens are read from each run's `transcript-raw.jsonl` (handled per harness in `scripts/cost.ts`) and multiplied by the list prices in `MODEL_PRICING`.",
+   "term": "per-task"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "cost-basis",
+   "value": "list cost",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README, 'pnpm run export-results'",
+   "quote": "Each experiment also gets an `avgCostUsd`: the mean list cost per eval. Tokens are read from each run's `transcript-raw.jsonl` (handled per harness in `scripts/cost.ts`) and multiplied by the list prices in `MODEL_PRICING`.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "cost-method",
+   "value": "multiplied by the list prices in `MODEL_PRICING`",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README, 'pnpm run export-results'",
+   "quote": "Each experiment also gets an `avgCostUsd`: the mean list cost per eval. Tokens are read from each run's `transcript-raw.jsonl` (handled per harness in `scripts/cost.ts`) and multiplied by the list prices in `MODEL_PRICING`.",
+   "term": "publisher-table"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "note",
+   "value": "Prices are a snapshot",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README, 'pnpm run export-results'",
+   "quote": "Prices are a snapshot, so re-run the export to refresh them."
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "aggregation",
+   "value": "Each evaluation is attempted up to 4 times",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "page footnote under the results table",
+   "quote": "Each evaluation is attempted up to 4 times."
+  },
+  {
+   "id": "F6",
+   "about": "Claude Fable 5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Claude Fable 5 | Claude Code | 310.54s | $1.193 | 97% | 94%"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "harness",
+   "value": "claude-code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Agent (vercel-ai-gateway/claude-code)",
+   "quote": "| `claude-fable-5` | `vercel-ai-gateway/claude-code` | `anthropic/claude-fable-5` |",
+   "term": "claude-code"
+  },
+  {
+   "id": "F8",
+   "about": "Claude Fable 5",
+   "says": "no-effort-sent",
+   "value": "`anthropic/claude-fable-5`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `claude-fable-5` | `vercel-ai-gateway/claude-code` | `anthropic/claude-fable-5` |"
+  },
+  {
+   "id": "F9",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "0.9516129032258065",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[0].avgPassRate (experiment claude-fable-5)",
+   "quote": "\"avgPassRate\": 0.9516129032258065",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Claude Fable 5",
+   "says": "cost",
+   "value": "1.1928297862903228",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[0].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 1.1928297862903228",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json field name avgCostUsd",
+   "quote": "\"avgCostUsd\"",
+   "term": "USD"
+  },
+  {
+   "id": "F12",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Claude Fable 5 | Claude Code | 310.54s | $1.193 | 97% | 94%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F13",
+   "about": "Claude Fable 5",
+   "says": "run-date",
+   "value": "2026-07-03",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-fable-5'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-07-03T13:08:55.474Z\""
+  },
+  {
+   "id": "F14",
+   "about": "Claude Fable 5",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-fable-5'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:23:48.059Z\""
+  },
+  {
+   "id": "F15",
+   "about": "Claude Fable 5.1",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Claude Fable 5.1 | Claude Code | 281.44s | $0.556 | 97% | 94%"
+  },
+  {
+   "id": "F16",
+   "about": "Claude Fable 5.1",
+   "says": "no-effort-sent",
+   "value": "`anthropic/claude-fable-5.1`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `claude-fable-5.1` | `vercel-ai-gateway/claude-code` | `anthropic/claude-fable-5.1` |"
+  },
+  {
+   "id": "F17",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "0.9516129032258065",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[1].avgPassRate (experiment claude-fable-5.1)",
+   "quote": "\"avgPassRate\": 0.9516129032258065",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F18",
+   "about": "Claude Fable 5.1",
+   "says": "cost",
+   "value": "0.5559735544354839",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[1].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.5559735544354839",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F19",
+   "about": "Claude Fable 5.1",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Claude Fable 5.1 | Claude Code | 281.44s | $0.556 | 97% | 94%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F20",
+   "about": "Claude Fable 5.1",
+   "says": "run-date",
+   "value": "2026-09-05",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-fable-5.1'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-05T08:59:30.884Z\""
+  },
+  {
+   "id": "F21",
+   "about": "Claude Fable 5.1",
+   "says": "run-date",
+   "value": "2026-09-05",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-fable-5.1'][30].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-05T08:59:30.884Z\""
+  },
+  {
+   "id": "F22",
+   "about": "Claude Opus 4.8",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Claude Opus 4.8 | Claude Code | 266.44s | $0.555 | 97% | 87%"
+  },
+  {
+   "id": "F23",
+   "about": "Claude Opus 4.8",
+   "says": "no-effort-sent",
+   "value": "`anthropic/claude-opus-4.8`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `claude-opus-4.8` | `vercel-ai-gateway/claude-code` | `anthropic/claude-opus-4.8` |"
+  },
+  {
+   "id": "F24",
+   "about": "Claude Opus 4.8",
+   "says": "score",
+   "value": "0.9112903225806451",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[4].avgPassRate (experiment claude-opus-4.8)",
+   "quote": "\"avgPassRate\": 0.9112903225806451",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F25",
+   "about": "Claude Opus 4.8",
+   "says": "cost",
+   "value": "0.5545285725806451",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[4].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.5545285725806451",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F26",
+   "about": "Claude Opus 4.8",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Claude Opus 4.8 | Claude Code | 266.44s | $0.555 | 97% | 87%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F27",
+   "about": "Claude Opus 4.8",
+   "says": "run-date",
+   "value": "2026-06-11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-opus-4.8'][13].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-06-11T14:28:10.369Z\""
+  },
+  {
+   "id": "F28",
+   "about": "Claude Opus 4.8",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-opus-4.8'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:35:16.361Z\""
+  },
+  {
+   "id": "F29",
+   "about": "Claude Opus 5",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Claude Opus 5 | Claude Code | 417.25s | $1.859 | 97% | 94%"
+  },
+  {
+   "id": "F30",
+   "about": "Claude Opus 5",
+   "says": "no-effort-sent",
+   "value": "`anthropic/claude-opus-5`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `claude-opus-5` | `vercel-ai-gateway/claude-code` | `anthropic/claude-opus-5` |"
+  },
+  {
+   "id": "F31",
+   "about": "Claude Opus 5",
+   "says": "score",
+   "value": "0.9516129032258065",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[5].avgPassRate (experiment claude-opus-5)",
+   "quote": "\"avgPassRate\": 0.9516129032258065",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F32",
+   "about": "Claude Opus 5",
+   "says": "cost",
+   "value": "1.8592697318548388",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[5].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 1.8592697318548388",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F33",
+   "about": "Claude Opus 5",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Claude Opus 5 | Claude Code | 417.25s | $1.859 | 97% | 94%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F34",
+   "about": "Claude Opus 5",
+   "says": "run-date",
+   "value": "2026-07-31",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-opus-5'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-07-31T15:46:30.086Z\""
+  },
+  {
+   "id": "F35",
+   "about": "Claude Opus 5",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-opus-5'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:23:48.081Z\""
+  },
+  {
+   "id": "F36",
+   "about": "Claude Opus 5.5",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Claude Opus 5.5 | Claude Code | 226.80s | $0.171 | 100% | 97%"
+  },
+  {
+   "id": "F37",
+   "about": "Claude Opus 5.5",
+   "says": "no-effort-sent",
+   "value": "`anthropic/claude-opus-5.5`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `claude-opus-5.5` | `vercel-ai-gateway/claude-code` | `anthropic/claude-opus-5.5` |"
+  },
+  {
+   "id": "F38",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "0.9838709677419355",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[6].avgPassRate (experiment claude-opus-5.5)",
+   "quote": "\"avgPassRate\": 0.9838709677419355",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F39",
+   "about": "Claude Opus 5.5",
+   "says": "cost",
+   "value": "0.17057513548387093",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[6].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.17057513548387093",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F40",
+   "about": "Claude Opus 5.5",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Claude Opus 5.5 | Claude Code | 226.80s | $0.171 | 100% | 97%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F41",
+   "about": "Claude Opus 5.5",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-opus-5.5'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-22T18:28:46.144Z\""
+  },
+  {
+   "id": "F42",
+   "about": "Claude Opus 5.5",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-opus-5.5'][30].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-22T18:28:46.144Z\""
+  },
+  {
+   "id": "F43",
+   "about": "Claude Sonnet 5",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Claude Sonnet 5 | Claude Code | 308.45s | $0.510 | 94% | 94%"
+  },
+  {
+   "id": "F44",
+   "about": "Claude Sonnet 5",
+   "says": "no-effort-sent",
+   "value": "`anthropic/claude-sonnet-5`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `claude-sonnet-5` | `vercel-ai-gateway/claude-code` | `anthropic/claude-sonnet-5` |"
+  },
+  {
+   "id": "F45",
+   "about": "Claude Sonnet 5",
+   "says": "score",
+   "value": "0.9354838709677419",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[9].avgPassRate (experiment claude-sonnet-5)",
+   "quote": "\"avgPassRate\": 0.9354838709677419",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F46",
+   "about": "Claude Sonnet 5",
+   "says": "cost",
+   "value": "0.510344893548387",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[9].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.510344893548387",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F47",
+   "about": "Claude Sonnet 5",
+   "says": "score",
+   "value": "94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Claude Sonnet 5 | Claude Code | 308.45s | $0.510 | 94% | 94%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F48",
+   "about": "Claude Sonnet 5",
+   "says": "run-date",
+   "value": "2026-07-03",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-sonnet-5'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-07-03T15:14:44.287Z\""
+  },
+  {
+   "id": "F49",
+   "about": "Claude Sonnet 5",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-sonnet-5'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:23:48.102Z\""
+  },
+  {
+   "id": "F50",
+   "about": "Claude Sonnet 5.5",
+   "says": "model-name",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Claude Sonnet 5.5 | Claude Code | 183.13s | $0.074 | 90% | 87%"
+  },
+  {
+   "id": "F51",
+   "about": "Claude Sonnet 5.5",
+   "says": "no-effort-sent",
+   "value": "`anthropic/claude-sonnet-5.5`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `claude-sonnet-5.5` | `vercel-ai-gateway/claude-code` | `anthropic/claude-sonnet-5.5` |"
+  },
+  {
+   "id": "F52",
+   "about": "Claude Sonnet 5.5",
+   "says": "score",
+   "value": "0.8870967741935484",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[10].avgPassRate (experiment claude-sonnet-5.5)",
+   "quote": "\"avgPassRate\": 0.8870967741935484",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F53",
+   "about": "Claude Sonnet 5.5",
+   "says": "cost",
+   "value": "0.07415309677419354",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[10].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.07415309677419354",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F54",
+   "about": "Claude Sonnet 5.5",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Claude Sonnet 5.5 | Claude Code | 183.13s | $0.074 | 90% | 87%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F55",
+   "about": "Claude Sonnet 5.5",
+   "says": "run-date",
+   "value": "2026-10-15",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-sonnet-5.5'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-10-15T10:07:13.455Z\""
+  },
+  {
+   "id": "F56",
+   "about": "Claude Sonnet 5.5",
+   "says": "run-date",
+   "value": "2026-10-15",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['claude-sonnet-5.5'][30].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-10-15T10:07:13.455Z\""
+  },
+  {
+   "id": "F57",
+   "about": "DeepSeek V4 Pro",
+   "says": "model-name",
+   "value": "DeepSeek V4 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| DeepSeek V4 Pro | OpenCode | 316.27s | $0.096 | 87% | 55%"
+  },
+  {
+   "id": "F58",
+   "about": null,
+   "says": "harness",
+   "value": "opencode",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Agent (vercel-ai-gateway/opencode)",
+   "quote": "| `deepseek-v4-pro` | `vercel-ai-gateway/opencode` | `vercel/deepseek/deepseek-v4-pro-0813` |",
+   "term": "opencode"
+  },
+  {
+   "id": "F59",
+   "about": "DeepSeek V4 Pro",
+   "says": "no-effort-sent",
+   "value": "`vercel/deepseek/deepseek-v4-pro-0813`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `deepseek-v4-pro` | `vercel-ai-gateway/opencode` | `vercel/deepseek/deepseek-v4-pro-0813` |"
+  },
+  {
+   "id": "F60",
+   "about": "DeepSeek V4 Pro",
+   "says": "score",
+   "value": "0.674731182795699",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[13].avgPassRate (experiment deepseek-v4-pro)",
+   "quote": "\"avgPassRate\": 0.674731182795699",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F61",
+   "about": "DeepSeek V4 Pro",
+   "says": "cost",
+   "value": "0.09583540645161288",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[13].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.09583540645161288",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F62",
+   "about": "DeepSeek V4 Pro",
+   "says": "score",
+   "value": "87",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| DeepSeek V4 Pro | OpenCode | 316.27s | $0.096 | 87% | 55%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F63",
+   "about": "DeepSeek V4 Pro",
+   "says": "run-date",
+   "value": "2026-08-28",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['deepseek-v4-pro'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-28T23:11:33.365Z\""
+  },
+  {
+   "id": "F64",
+   "about": "DeepSeek V4 Pro",
+   "says": "run-date",
+   "value": "2026-08-28",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['deepseek-v4-pro'][30].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-28T23:11:33.365Z\""
+  },
+  {
+   "id": "F65",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro Preview",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Gemini 3.1 Pro Preview | OpenCode | 301.03s | $0.275 | 90% | 77%"
+  },
+  {
+   "id": "F66",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "no-effort-sent",
+   "value": "`vercel/google/gemini-3.1-pro-preview`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `gemini-3.1-pro-preview` | `vercel-ai-gateway/opencode` | `vercel/google/gemini-3.1-pro-preview` |"
+  },
+  {
+   "id": "F67",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "score",
+   "value": "0.8252688172043011",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[14].avgPassRate (experiment gemini-3.1-pro-preview)",
+   "quote": "\"avgPassRate\": 0.8252688172043011",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F68",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "cost",
+   "value": "0.27513656451612906",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[14].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.27513656451612906",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F69",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Gemini 3.1 Pro Preview | OpenCode | 301.03s | $0.275 | 90% | 77%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F70",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "run-date",
+   "value": "2026-06-11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gemini-3.1-pro-preview'][13].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-06-11T13:18:49.142Z\""
+  },
+  {
+   "id": "F71",
+   "about": "Gemini 3.1 Pro Preview",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gemini-3.1-pro-preview'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:41:16.549Z\""
+  },
+  {
+   "id": "F72",
+   "about": "GLM 5.3",
+   "says": "model-name",
+   "value": "GLM 5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| GLM 5.3 | OpenCode | 406.60s | $0.228 | 97% | 90%"
+  },
+  {
+   "id": "F73",
+   "about": "GLM 5.3",
+   "says": "no-effort-sent",
+   "value": "`vercel/zai/glm-5.3`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `glm-5.3` | `vercel-ai-gateway/opencode` | `vercel/zai/glm-5.3` |"
+  },
+  {
+   "id": "F74",
+   "about": "GLM 5.3",
+   "says": "score",
+   "value": "0.9274193548387096",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[16].avgPassRate (experiment glm-5.3)",
+   "quote": "\"avgPassRate\": 0.9274193548387096",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F75",
+   "about": "GLM 5.3",
+   "says": "cost",
+   "value": "0.22793296381720432",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[16].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.22793296381720432",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F76",
+   "about": "GLM 5.3",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| GLM 5.3 | OpenCode | 406.60s | $0.228 | 97% | 90%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F77",
+   "about": "GLM 5.3",
+   "says": "run-date",
+   "value": "2026-08-31",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['glm-5.3'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-31T08:26:10.685Z\""
+  },
+  {
+   "id": "F78",
+   "about": "GLM 5.3",
+   "says": "run-date",
+   "value": "2026-08-31",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['glm-5.3'][30].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-31T08:26:10.685Z\""
+  },
+  {
+   "id": "F79",
+   "about": "GPT 5.3 Codex (xhigh)",
+   "says": "model-name",
+   "value": "GPT 5.3 Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| GPT 5.3 Codex (xhigh) | Codex | 296.30s | $0.205 | 97% | 87%"
+  },
+  {
+   "id": "F80",
+   "about": null,
+   "says": "harness",
+   "value": "codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Agent (vercel-ai-gateway/codex)",
+   "quote": "| `gpt-5.3-codex-xhigh` | `vercel-ai-gateway/codex` | `openai/gpt-5.3-codex?reasoningEffort=xhigh` |",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F81",
+   "about": "GPT 5.3 Codex (xhigh)",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: ?reasoningEffort= query of the model string",
+   "quote": "| `gpt-5.3-codex-xhigh` | `vercel-ai-gateway/codex` | `openai/gpt-5.3-codex?reasoningEffort=xhigh` |"
+  },
+  {
+   "id": "F82",
+   "about": "GPT 5.3 Codex (xhigh)",
+   "says": "score",
+   "value": "0.9139784946236559",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[17].avgPassRate (experiment gpt-5.3-codex-xhigh)",
+   "quote": "\"avgPassRate\": 0.9139784946236559",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F83",
+   "about": "GPT 5.3 Codex (xhigh)",
+   "says": "cost",
+   "value": "0.20548878131720427",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[17].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.20548878131720427",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F84",
+   "about": "GPT 5.3 Codex (xhigh)",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| GPT 5.3 Codex (xhigh) | Codex | 296.30s | $0.205 | 97% | 87%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F85",
+   "about": "GPT 5.3 Codex (xhigh)",
+   "says": "run-date",
+   "value": "2026-06-11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.3-codex-xhigh'][13].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-06-11T12:17:55.178Z\""
+  },
+  {
+   "id": "F86",
+   "about": "GPT 5.3 Codex (xhigh)",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.3-codex-xhigh'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:41:16.586Z\""
+  },
+  {
+   "id": "F87",
+   "about": "GPT 5.4 (xhigh)",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| GPT 5.4 (xhigh) | Codex | 322.11s | $0.399 | 90% | 74%"
+  },
+  {
+   "id": "F88",
+   "about": "GPT 5.4 (xhigh)",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: ?reasoningEffort= query of the model string",
+   "quote": "| `gpt-5.4-xhigh` | `vercel-ai-gateway/codex` | `openai/gpt-5.4?reasoningEffort=xhigh` |"
+  },
+  {
+   "id": "F89",
+   "about": "GPT 5.4 (xhigh)",
+   "says": "score",
+   "value": "0.8037634408602151",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[18].avgPassRate (experiment gpt-5.4-xhigh)",
+   "quote": "\"avgPassRate\": 0.8037634408602151",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F90",
+   "about": "GPT 5.4 (xhigh)",
+   "says": "cost",
+   "value": "0.3988750470430108",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[18].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.3988750470430108",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F91",
+   "about": "GPT 5.4 (xhigh)",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| GPT 5.4 (xhigh) | Codex | 322.11s | $0.399 | 90% | 74%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F92",
+   "about": "GPT 5.4 (xhigh)",
+   "says": "run-date",
+   "value": "2026-06-11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.4-xhigh'][24].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-06-11T13:18:42.884Z\""
+  },
+  {
+   "id": "F93",
+   "about": "GPT 5.4 (xhigh)",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.4-xhigh'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T14:28:38.836Z\""
+  },
+  {
+   "id": "F94",
+   "about": "GPT 5.5 Pro",
+   "says": "model-name",
+   "value": "GPT 5.5 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| GPT 5.5 Pro | Codex | 720.24s | $9.126 | 97% | 90%"
+  },
+  {
+   "id": "F95",
+   "about": "GPT 5.5 Pro",
+   "says": "no-effort-sent",
+   "value": "`openai/gpt-5.5-pro`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `gpt-5.5-pro` | `vercel-ai-gateway/codex` | `openai/gpt-5.5-pro` |"
+  },
+  {
+   "id": "F96",
+   "about": "GPT 5.5 Pro",
+   "says": "score",
+   "value": "0.9247311827956989",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[19].avgPassRate (experiment gpt-5.5-pro)",
+   "quote": "\"avgPassRate\": 0.9247311827956989",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F97",
+   "about": "GPT 5.5 Pro",
+   "says": "cost",
+   "value": "9.125661048387096",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[19].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 9.125661048387096",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F98",
+   "about": "GPT 5.5 Pro",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| GPT 5.5 Pro | Codex | 720.24s | $9.126 | 97% | 90%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F99",
+   "about": "GPT 5.5 Pro",
+   "says": "run-date",
+   "value": "2026-07-03",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.5-pro'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-07-03T13:08:55.731Z\""
+  },
+  {
+   "id": "F100",
+   "about": "GPT 5.5 Pro",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.5-pro'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:41:16.692Z\""
+  },
+  {
+   "id": "F101",
+   "about": "GPT 5.6 Sol (xhigh)",
+   "says": "model-name",
+   "value": "GPT 5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| GPT 5.6 Sol (xhigh) | Codex | 325.19s | $0.165 | 100% | 94%"
+  },
+  {
+   "id": "F102",
+   "about": "GPT 5.6 Sol (xhigh)",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: ?reasoningEffort= query of the model string",
+   "quote": "| `gpt-5.6-sol-xhigh` | `vercel-ai-gateway/codex` | `openai/gpt-5.6-sol?reasoningEffort=xhigh` |"
+  },
+  {
+   "id": "F103",
+   "about": "GPT 5.6 Sol (xhigh)",
+   "says": "score",
+   "value": "0.9596774193548387",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[20].avgPassRate (experiment gpt-5.6-sol-xhigh)",
+   "quote": "\"avgPassRate\": 0.9596774193548387",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F104",
+   "about": "GPT 5.6 Sol (xhigh)",
+   "says": "cost",
+   "value": "0.16471722741935485",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[20].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.16471722741935485",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F105",
+   "about": "GPT 5.6 Sol (xhigh)",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| GPT 5.6 Sol (xhigh) | Codex | 325.19s | $0.165 | 100% | 94%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F106",
+   "about": "GPT 5.6 Sol (xhigh)",
+   "says": "run-date",
+   "value": "2026-07-29",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.6-sol-xhigh'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-07-29T14:44:58.724Z\""
+  },
+  {
+   "id": "F107",
+   "about": "GPT 5.6 Sol (xhigh)",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-5.6-sol-xhigh'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:41:16.727Z\""
+  },
+  {
+   "id": "F108",
+   "about": "GPT 6 Astra (high)",
+   "says": "model-name",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| GPT 6 Astra (high) | Codex | 348.62s | $1.501 | 97% | 94%"
+  },
+  {
+   "id": "F109",
+   "about": "GPT 6 Astra (high)",
+   "says": "effort-setting",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: ?reasoningEffort= query of the model string",
+   "quote": "| `gpt-6-astra-high` | `vercel-ai-gateway/codex` | `openai/gpt-6-astra?reasoningEffort=high` |"
+  },
+  {
+   "id": "F110",
+   "about": "GPT 6 Astra (high)",
+   "says": "score",
+   "value": "0.9516129032258065",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[21].avgPassRate (experiment gpt-6-astra-high)",
+   "quote": "\"avgPassRate\": 0.9516129032258065",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F111",
+   "about": "GPT 6 Astra (high)",
+   "says": "cost",
+   "value": "1.500822298387097",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[21].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 1.500822298387097",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F112",
+   "about": "GPT 6 Astra (high)",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| GPT 6 Astra (high) | Codex | 348.62s | $1.501 | 97% | 94%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F113",
+   "about": "GPT 6 Astra (high)",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-6-astra-high'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-09T09:37:27.689Z\""
+  },
+  {
+   "id": "F114",
+   "about": "GPT 6 Astra (high)",
+   "says": "run-date",
+   "value": "2026-09-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-6-astra-high'][30].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-09T09:37:27.689Z\""
+  },
+  {
+   "id": "F115",
+   "about": "GPT 6 Sol (high)",
+   "says": "model-name",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| GPT 6 Sol (high) | Codex | 330.25s | $0.290 | 97% | 97%"
+  },
+  {
+   "id": "F116",
+   "about": "GPT 6 Sol (high)",
+   "says": "effort-setting",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: ?reasoningEffort= query of the model string",
+   "quote": "| `gpt-6-sol-high` | `vercel-ai-gateway/codex` | `openai/gpt-6-sol?reasoningEffort=high` |"
+  },
+  {
+   "id": "F117",
+   "about": "GPT 6 Sol (high)",
+   "says": "score",
+   "value": "0.967741935483871",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[22].avgPassRate (experiment gpt-6-sol-high)",
+   "quote": "\"avgPassRate\": 0.967741935483871",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F118",
+   "about": "GPT 6 Sol (high)",
+   "says": "cost",
+   "value": "0.2904146483870968",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[22].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.2904146483870968",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F119",
+   "about": "GPT 6 Sol (high)",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| GPT 6 Sol (high) | Codex | 330.25s | $0.290 | 97% | 97%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F120",
+   "about": "GPT 6 Sol (high)",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-6-sol-high'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-22T19:17:23.920Z\""
+  },
+  {
+   "id": "F121",
+   "about": "GPT 6 Sol (high)",
+   "says": "run-date",
+   "value": "2026-09-22",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['gpt-6-sol-high'][30].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-09-22T19:17:23.920Z\""
+  },
+  {
+   "id": "F122",
+   "about": "Kimi K2.6",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Kimi K2.6 | OpenCode | 295.87s | $0.085 | 90% | 77%"
+  },
+  {
+   "id": "F123",
+   "about": "Kimi K2.6",
+   "says": "no-effort-sent",
+   "value": "`vercel/moonshotai/kimi-k2.6`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `kimi-k2.6` | `vercel-ai-gateway/opencode` | `vercel/moonshotai/kimi-k2.6` |"
+  },
+  {
+   "id": "F124",
+   "about": "Kimi K2.6",
+   "says": "score",
+   "value": "0.8279569892473118",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[25].avgPassRate (experiment kimi-k2.6)",
+   "quote": "\"avgPassRate\": 0.8279569892473118",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F125",
+   "about": "Kimi K2.6",
+   "says": "cost",
+   "value": "0.0845562702956989",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[25].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.0845562702956989",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F126",
+   "about": "Kimi K2.6",
+   "says": "score",
+   "value": "90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Kimi K2.6 | OpenCode | 295.87s | $0.085 | 90% | 77%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F127",
+   "about": "Kimi K2.6",
+   "says": "run-date",
+   "value": "2026-06-11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['kimi-k2.6'][13].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-06-11T13:19:12.233Z\""
+  },
+  {
+   "id": "F128",
+   "about": "Kimi K2.6",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['kimi-k2.6'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:35:16.609Z\""
+  },
+  {
+   "id": "F129",
+   "about": "Kimi K2.7 Code",
+   "says": "model-name",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Kimi K2.7 Code | OpenCode | 339.07s | $0.094 | 97% | 77%"
+  },
+  {
+   "id": "F130",
+   "about": "Kimi K2.7 Code",
+   "says": "no-effort-sent",
+   "value": "`vercel/moonshotai/kimi-k2.7-code`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `kimi-k2.7-code` | `vercel-ai-gateway/opencode` | `vercel/moonshotai/kimi-k2.7-code` |"
+  },
+  {
+   "id": "F131",
+   "about": "Kimi K2.7 Code",
+   "says": "score",
+   "value": "0.8494623655913979",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[26].avgPassRate (experiment kimi-k2.7-code)",
+   "quote": "\"avgPassRate\": 0.8494623655913979",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F132",
+   "about": "Kimi K2.7 Code",
+   "says": "cost",
+   "value": "0.09387503814516131",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[26].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.09387503814516131",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F133",
+   "about": "Kimi K2.7 Code",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Kimi K2.7 Code | OpenCode | 339.07s | $0.094 | 97% | 77%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F134",
+   "about": "Kimi K2.7 Code",
+   "says": "run-date",
+   "value": "2026-07-03",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['kimi-k2.7-code'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-07-03T15:27:06.357Z\""
+  },
+  {
+   "id": "F135",
+   "about": "Kimi K2.7 Code",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['kimi-k2.7-code'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:41:16.754Z\""
+  },
+  {
+   "id": "F136",
+   "about": "Kimi K3",
+   "says": "model-name",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Model (without the effort in parentheses)",
+   "quote": "| Kimi K3 | OpenCode | 412.22s | $0.313 | 97% | 94%"
+  },
+  {
+   "id": "F137",
+   "about": "Kimi K3",
+   "says": "no-effort-sent",
+   "value": "`vercel/moonshotai/kimi-k3`",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/README.md",
+   "where": "README Models table, column Model: the model string passed to the agent has no `?reasoningEffort=` query, while the Codex rows that set an effort write it",
+   "quote": "| `kimi-k3` | `vercel-ai-gateway/opencode` | `vercel/moonshotai/kimi-k3` |"
+  },
+  {
+   "id": "F138",
+   "about": "Kimi K3",
+   "says": "score",
+   "value": "0.9516129032258065",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[27].avgPassRate (experiment kimi-k3)",
+   "quote": "\"avgPassRate\": 0.9516129032258065",
+   "term": "avgPassRate%",
+   "scale": "fraction",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F139",
+   "about": "Kimi K3",
+   "says": "cost",
+   "value": "0.3127970290322581",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.metadata.experiments[27].avgCostUsd (mean list cost per eval, 31 evals)",
+   "quote": "\"avgCostUsd\": 0.3127970290322581",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F140",
+   "about": "Kimi K3",
+   "says": "score",
+   "value": "97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+   "where": "results table, column Success Rate (the share of evals that passed on at least one attempt; the table is ranked by it)",
+   "quote": "| Kimi K3 | OpenCode | 412.22s | $0.313 | 97% | 94%",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F141",
+   "about": "Kimi K3",
+   "says": "run-date",
+   "value": "2026-07-29",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['kimi-k3'][0].result.timestamp (earliest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-07-29T14:44:58.901Z\""
+  },
+  {
+   "id": "F142",
+   "about": "Kimi K3",
+   "says": "run-date",
+   "value": "2026-08-27",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/agent-results.json",
+   "where": "agent-results.json $.results['kimi-k3'][20].result.timestamp (latest of the 31 evals of the experiment)",
+   "quote": "\"timestamp\": \"2026-08-27T13:10:27.124Z\""
+  }
+ ]
+}

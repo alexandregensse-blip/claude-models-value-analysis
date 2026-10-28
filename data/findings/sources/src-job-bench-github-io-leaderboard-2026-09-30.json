@@ -1,0 +1,263 @@
+{
+ "id": "src-job-bench-github-io-leaderboard-2026-09-30",
+ "publisher": "job-bench.github.io",
+ "urls": [
+  "https://job-bench.github.io/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://job-bench.github.io/",
+   "captured": "2026-09-30T14:07:00Z",
+   "note": "home page (page-0930.html) and its leaderboard.json (src/data/leaderboard.json of the page bundle) saved by salvo s16/a4 on 30 Sep 2026 (html 14:07, json 14:09 UTC)",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.txt": "06f14eb3f7291a8408a22c52b208a833ded1606bb9ff74917085cd6d8b2f4844",
+  "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.html": "1e9c8686978b338e4db9b27448f5279ae5840e54b6da6f15fd49bb438d2dfd39",
+  "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json": "99e4daef12d3e7ea2b8334aeb6329d7d374a807933f7c32c30a14ffa7869254e"
+ },
+ "harvested_at": "2026-09-30T14:09:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.txt",
+   "from": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the page, one block per line, every table row on one line with cells joined by ' | '"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "effort-label",
+   "value": "corresponding max reasoning effort",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.txt",
+   "where": "page footnote under the Model leaderboard: the effort of all models",
+   "quote": "All models run on the same harness — OpenCode v1.14.18 — with corresponding max reasoning effort."
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "harness",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.txt",
+   "where": "page footnote under the Model leaderboard",
+   "quote": "All models run on the same harness — OpenCode v1.14.18 — with corresponding max reasoning effort.",
+   "term": "opencode"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "version",
+   "value": "v1.14.18",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.txt",
+   "where": "page footnote: harness version",
+   "quote": "All models run on the same harness — OpenCode v1.14.18 — with corresponding max reasoning effort."
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "judge",
+   "value": "Grok 4.3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.txt",
+   "where": "page footnote: the rubric judge",
+   "quote": "Grok 4.3 is used as the rubric judge."
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "note",
+   "value": "Claude Fable 5 runs with fallback to Claude Opus 4.8 on refusals",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-0930.txt",
+   "where": "page footnote",
+   "quote": "Claude Fable 5 runs with fallback to Claude Opus 4.8 on refusals."
+  },
+  {
+   "id": "F6",
+   "about": "Claude Opus 5",
+   "says": "model-name",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[0].displayName",
+   "quote": "\"displayName\": \"Claude Opus 5\""
+  },
+  {
+   "id": "F7",
+   "about": "Claude Opus 5",
+   "says": "score",
+   "value": "65.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[0].overallScore (weighted score shown on the page; 65 tasks)",
+   "quote": "\"overallScore\": 65.7",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F8",
+   "about": "Claude Fable 5",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[4].displayName",
+   "quote": "\"displayName\": \"Claude Fable 5\""
+  },
+  {
+   "id": "F9",
+   "about": "Claude Fable 5",
+   "says": "score",
+   "value": "57.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[4].overallScore (weighted score shown on the page; 63 tasks)",
+   "quote": "\"overallScore\": 57.4",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Claude Opus 4.8",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[8].displayName",
+   "quote": "\"displayName\": \"Claude Opus 4.8\""
+  },
+  {
+   "id": "F11",
+   "about": "Claude Opus 4.8",
+   "says": "score",
+   "value": "48.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[8].overallScore (weighted score shown on the page; 61 tasks)",
+   "quote": "\"overallScore\": 48.4",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "about": "Claude Opus 4.7",
+   "says": "model-name",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[10].displayName",
+   "quote": "\"displayName\": \"Claude Opus 4.7\""
+  },
+  {
+   "id": "F13",
+   "about": "Claude Opus 4.7",
+   "says": "score",
+   "value": "44.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[10].overallScore (weighted score shown on the page; 65 tasks)",
+   "quote": "\"overallScore\": 44.5",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "about": "Claude Sonnet 4.6",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[13].displayName",
+   "quote": "\"displayName\": \"Claude Sonnet 4.6\""
+  },
+  {
+   "id": "F15",
+   "about": "Claude Sonnet 4.6",
+   "says": "score",
+   "value": "36.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[13].overallScore (weighted score shown on the page; 64 tasks)",
+   "quote": "\"overallScore\": 36.6",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "about": "Claude Sonnet 4.5",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[19].displayName",
+   "quote": "\"displayName\": \"Claude Sonnet 4.5\""
+  },
+  {
+   "id": "F17",
+   "about": "Claude Sonnet 4.5",
+   "says": "score",
+   "value": "20.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/lb-0930.json",
+   "where": "lb-0930.json $.leaderboard[19].overallScore (weighted score shown on the page; 65 tasks)",
+   "quote": "\"overallScore\": 20.7",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ]
+}

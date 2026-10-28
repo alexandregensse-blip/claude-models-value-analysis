@@ -10298,6 +10298,9 @@
   },
   "cte-effvm-reason24": {
    "label": "CTE-Bench effect-step VM, reasoning-mode probe, 24 delayed-effect scenarios, answers revealed"
+  },
+  "programbench-board-resolved": {
+   "label": "ProgramBench board (Meta/Stanford/Harvard), mini-SWE-agent, Resolved %"
   }
  },
  "setups": {
@@ -27264,9 +27267,18 @@
    "metric": "win%",
    "headline": {
     "metric": "win%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://bw.swerdlow.dev/report",
+      "captured": "2026-10-28",
+      "where": "Leaderboard: the systems are ranked by wins (win rate); the win rate is the only score column",
+      "quote": "Rank | System | Wins | Losses | APM | Cost / game | Win rate",
+      "file": "/work/.salvo14/mig/convert-broodwarbench/evidence/bw.txt",
+      "sha256": "aef1f24acf1cfd4112c3079ff50ea617b594af40b3a31b67c3f803c58de12b24"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30318,9 +30330,18 @@
    "metric": "recall%",
    "headline": {
     "metric": "recall%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/kamui/code-review-bench",
+      "captured": "2026-10-19",
+      "where": "skill-matrix README, 'Published results': scores are the attempt-level findings scores of each run's results file (recall_attempt_level), which the repo publishes for the twelve-task runs too",
+      "quote": "Scores are attempt-level findings scores from each run's results file",
+      "file": "/work/.salvo14/mig/convert-github-codereviewbench/evidence/skillmatrix-README.md",
+      "sha256": "bb58e8433464aef72b1a21e92e3e109e0afb3dda15cb577da1489a8c001751cd"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30347,9 +30368,18 @@
    "metric": "agreement%",
    "headline": {
     "metric": "agreement%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/kamui/code-review-bench",
+      "captured": "2026-10-19",
+      "where": "grader README agreement table: one figure per grader (k of N claims labelled as the reference)",
+      "quote": "| Opus against Sol | 401 of 422 | 59 of 71 | 460 of 493 |",
+      "file": "/work/.salvo14/mig/convert-github-codereviewbench/evidence/grader-README.md",
+      "sha256": "de13c8d4579d45a81026033003368a6421ce490d8a40f2285ef49f6af2988f9e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30376,9 +30406,18 @@
    "metric": "recall%",
    "headline": {
     "metric": "recall%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/kamui/code-review-bench",
+      "captured": "2026-10-19",
+      "where": "skill-matrix README, 'Published results': scores are the attempt-level findings scores of each run's results file (recall_attempt_level)",
+      "quote": "Scores are attempt-level findings scores from each run's results file",
+      "file": "/work/.salvo14/mig/convert-github-codereviewbench/evidence/skillmatrix-README.md",
+      "sha256": "bb58e8433464aef72b1a21e92e3e109e0afb3dda15cb577da1489a8c001751cd"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30405,9 +30444,18 @@
    "metric": "recall%",
    "headline": {
     "metric": "recall%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/kamui/code-review-bench",
+      "captured": "2026-10-19",
+      "where": "skill-matrix README, 'Published results': the table's score is the attempt-level findings score",
+      "quote": "Scores are attempt-level findings scores from each run's results file",
+      "file": "/work/.salvo14/mig/convert-github-codereviewbench/evidence/skillmatrix-README.md",
+      "sha256": "bb58e8433464aef72b1a21e92e3e109e0afb3dda15cb577da1489a8c001751cd"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30434,9 +30482,18 @@
    "metric": "recall%",
    "headline": {
     "metric": "recall%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/kamui/code-review-bench",
+      "captured": "2026-10-19",
+      "where": "skill-matrix README, 'Published results': the table's score is the attempt-level findings score",
+      "quote": "Scores are attempt-level findings scores from each run's results file",
+      "file": "/work/.salvo14/mig/convert-github-codereviewbench/evidence/skillmatrix-README.md",
+      "sha256": "bb58e8433464aef72b1a21e92e3e109e0afb3dda15cb577da1489a8c001751cd"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -40842,12 +40899,12 @@
     "basis": "designated",
     "evidence": [
      {
-      "url": "https://www.anthropic.com/claude-sonnet-5-5-system-card",
-      "captured": "2026-09-29",
-      "where": "p114, sentence (the card reports this metric for the benchmark; it names no other)",
-      "quote": "Claude Sonnet 5.5 scored 61.9%",
-      "file": "/work/.salvo14/mig/convert-anthropic-syscard/text/sonnet55.pypdf.txt",
-      "sha256": "b0f724cb05a8a5fad8c3fdf13048de4a44b7627e06c9344bc3a3cad523ed5da9"
+      "url": "https://frontierswe.com/blog/v2",
+      "captured": "2026-10-28",
+      "where": "blog v2, Results: the one metric reported",
+      "quote": "We report mean@5 scores across all 34 tasks.",
+      "file": "/work/.salvo14/mig/convert-frontierswe/evidence/blog-v2.txt",
+      "sha256": "c5c55b052b9b107eb9bc26bb414bfa089f1f49d29d074168c139d9bf6cc5f4a1"
      }
     ],
     "level": "written"
@@ -41357,9 +41414,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "50.5%",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -41386,9 +41452,18 @@
    "metric": "elo",
    "headline": {
     "metric": "elo",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "3455",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -41412,9 +41487,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "82.8%",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -41441,9 +41525,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "81.5%",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -41470,9 +41563,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "87.7%",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -44258,12 +44360,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
-      "captured": "2026-10-19",
-      "where": "model card Results table: one metric per benchmark",
-      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
-      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "48.4%",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
      }
     ],
     "level": "written"
@@ -44296,12 +44398,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-pro/",
-      "captured": "2026-10-19",
-      "where": "the card's results table gives one score per benchmark row and model: the one metric reported for the benchmark (printed text of the table image)",
-      "quote": "45.8%",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3-pro-card/src/table.png",
-      "sha256": "3bb6a659de3f587217406d7f714b88f3522961e11eb59360f9e20259a4e5c1e4"
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "53.4%",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
      }
     ],
     "level": "written"
@@ -44825,12 +44927,12 @@
     "basis": "only-metric",
     "evidence": [
      {
-      "url": "https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/",
-      "captured": "2026-10-19",
-      "where": "model card Results table: one metric per benchmark",
-      "quote": "Gemini 3.1 Flash-Lite results as of March, 2026 are below",
-      "file": "/work/.salvo14/mig/convert-google-gemini-3.1-flash-lite-card/evidence/mc-gemini-3-1-flash-lite.txt",
-      "sha256": "8b53241982af890c02dd09d853c7e585c86ce89ecbe793bf4e27a3df78b39b5d"
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-deep-think/",
+      "captured": "2026-10-20",
+      "where": "evals table image: one score per model per benchmark, no other metric",
+      "quote": "81.5%",
+      "file": "/work/.salvo14/mig/convert-googleblog-deepthink-feb26/evidence/deepthink_evals_table.gif",
+      "sha256": "86a20c0d925275b3bb7591f59a166f7aeb0b7dbfacc2f54a04d37611449baade"
      }
     ],
     "level": "written"
@@ -70396,9 +70498,18 @@
    "metric": "pct-compliance",
    "headline": {
     "metric": "pct-compliance",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.25987",
+      "captured": "2026-10-20",
+      "where": "Table 1 (main results) ranks by Overall = scenario-weighted pass rate over all conflict scenarios",
+      "quote": "Overall is the scenario-weighted pass rate over all conflict scenarios across both tracks",
+      "file": "/work/.salvo14/mig/convert-ih-benchmark-2607.25987/evidence/arxiv-2607.25987.txt",
+      "sha256": "d125ef6ee0117f72f9a31b5ac2ff1e221e2d772dafb36e03e9b8f2fdf1ddf20f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -71238,9 +71349,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://job-bench.github.io/",
+      "captured": "2026-10-05",
+      "where": "home page: the Model leaderboard is ranked by this one score (the 'Weighted score' of the current leader is the top row's score)",
+      "quote": "Model leaderboard",
+      "file": "/work/.salvo14/mig/convert-job-bench.github.io/evidence/page-1005.txt",
+      "sha256": "06f14eb3f7291a8408a22c52b208a833ded1606bb9ff74917085cd6d8b2f4844"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -75009,9 +75129,18 @@
    "metric": "score-median(中位分数)",
    "headline": {
     "metric": "score-median(中位分数)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/llm2014/llm_benchmark",
+      "captured": "2026-10-21",
+      "where": "CSV rows are listed in descending order of 中位分数 (all 42 rows verified); the source designates no headline",
+      "quote": "\"GPT-6 Astra (xhigh)\",\"89.99\",\"86.53\"",
+      "file": "/work/.salvo14/mig/convert-llm2014-logic/evidence/logic-2026-10.csv",
+      "sha256": "2f910f56459eff8d7e14178bbcf593ca95950fde396bc8e7f1c0c83c23191703"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -89737,10 +89866,19 @@
    "judge_panel": null,
    "metric": "avgPassRate%",
    "headline": {
-    "metric": "avgPassRate%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "success%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://nuxt.com/evals",
+      "captured": "2026-10-28",
+      "where": "page header and footnote: the page measures 'success rate and execution time' and ranks its table by Success Rate (First-Try Rate breaks ties)",
+      "quote": "Performance results of AI coding agents on Nuxt code generation tasks, measuring success rate and execution time.",
+      "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+      "sha256": "d1ff8c46a620b8af0edb1c40799ab00bd748b03c324b1cc3903d4d1360bd6c64"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98565,10 +98703,19 @@
    "judge_panel": null,
    "metric": "avg-test-pass%",
    "headline": {
-    "metric": "avg-test-pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "resolved%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -121487,9 +121634,18 @@
    "metric": "points/100",
    "headline": {
     "metric": "points/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/uhyo/articles/react-profession-bench-17",
+      "captured": "2026-10-19",
+      "where": "article 17, 結果: the models are ranked by the overall score (スコア, out of 100) in the ranking table",
+      "quote": "順位 | モデル | effort | スコア",
+      "file": "/work/.salvo14/mig/convert-zenn-uhyo/evidence/a17.txt",
+      "sha256": "d4c255db3d0dd6724e193f87382b2ff507bb60189eea810e70ff5f9e2dc9cca0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -135001,6 +135157,78 @@
    "legacy_groups": [],
    "label": "CTE-Bench Eff. VM, reasoning-mode probe, 24 delayed-effect scenarios, answers revealed",
    "note": "the paper's designated main score (effect-step value match, Eff. VM column), under the protocol named; the held setup of the same name holds the all-call VM column, which is not the designated metric (its headline stays pending: its measures go out as not the headline). Metric term score% is the generic percent term: the vocabulary has no effect-step VM term."
+  },
+  "programbench-board-resolved": {
+   "family": "programbench-board-resolved",
+   "benchmark": "ProgramBench board (Meta/Stanford/Harvard), mini-SWE-agent, Resolved %",
+   "subset": null,
+   "harness": "mini-SWE-agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "resolved%",
+   "headline": {
+    "metric": "resolved%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProgramBench board (Meta/Stanford/Harvard), mini-SWE-agent, Resolved %",
+   "note": "C2 wave 28 Oct: the board's primary metric (fully resolved instances), printed per model in the Resolved column"
+  },
+  "nuxt-evals-success": {
+   "family": "nuxt-evals",
+   "benchmark": "Nuxt agent evals (nuxt.com/evals), success rate (share of the 31 evals passed on at least one attempt)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "success%",
+   "headline": {
+    "metric": "success%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://nuxt.com/evals",
+      "captured": "2026-10-28",
+      "where": "page header and footnote: the page measures 'success rate and execution time' and ranks its table by Success Rate (First-Try Rate breaks ties)",
+      "quote": "Performance results of AI coding agents on Nuxt code generation tasks, measuring success rate and execution time.",
+      "file": "/work/.salvo14/mig/convert-nuxt-nuxt-evals/evidence/nuxt-evals-page.txt",
+      "sha256": "d1ff8c46a620b8af0edb1c40799ab00bd748b03c324b1cc3903d4d1360bd6c64"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Nuxt agent evals (nuxt.com/evals), success rate",
+   "note": "NEW setup (wave C2, 28 Oct): the page nuxt.com/evals designates and ranks by Success Rate; the held setup nuxt-evals (avgPassRate%) is not the page's headline metric."
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
