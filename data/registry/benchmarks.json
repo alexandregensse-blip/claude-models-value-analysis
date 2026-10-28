@@ -10535,6 +10535,69 @@
   },
   "algbench-idas": {
    "label": "AlgBench: algorithm IDAS, Pass@k accuracy"
+  },
+  "lob-code-fix-merge-intervals": {
+   "label": "Low or Bust: Fix buggy mergeIntervals"
+  },
+  "lob-code-lru-cache": {
+   "label": "Low or Bust: Implement LRUCache"
+  },
+  "lob-code-parse-duration": {
+   "label": "Low or Bust: Implement parseDuration"
+  },
+  "lob-reason-race-order": {
+   "label": "Low or Bust: Race order deduction"
+  },
+  "lob-reason-snail-pole": {
+   "label": "Low or Bust: Snail on a pole"
+  },
+  "lob-reason-trailing-zeros": {
+   "label": "Low or Bust: Trailing zeros of 137!"
+  },
+  "lob-write-container-summary": {
+   "label": "Low or Bust: Summarize a passage in 3 bullets"
+  },
+  "lob-write-https-explainer": {
+   "label": "Low or Bust: Explain HTTPS to a 12-year-old"
+  },
+  "lob-write-launch-email": {
+   "label": "Low or Bust: Product announcement email"
+  },
+  "lob-hard-coin-faces": {
+   "label": "Low or Bust: Conditional probability with loaded coins"
+  },
+  "lob-hard-count-multiples": {
+   "label": "Low or Bust: Divisible by 3 or 5 but not 15"
+  },
+  "lob-hard-lex-topo-order": {
+   "label": "Low or Bust: Lexicographically smallest task order"
+  },
+  "lob-hard-locking-tradeoff": {
+   "label": "Low or Bust: Optimistic vs pessimistic locking, exactly 3 paragraphs"
+  },
+  "lob-hard-parse-csv-line": {
+   "label": "Low or Bust: Parse one RFC-4180 CSV line"
+  },
+  "lob-hard-postmortem-rewrite": {
+   "label": "Low or Bust: Constrained postmortem rewrite"
+  },
+  "lob-hard-puzzle-hunt": {
+   "label": "Low or Bust: Five-person finish order"
+  },
+  "lob-hard-weighted-intervals": {
+   "label": "Low or Bust: Max-value non-overlapping intervals"
+  },
+  "lobdeleg-A-deleg": {
+   "label": "Low or Bust 2 (Delegation), package A, deleg"
+  },
+  "lobdeleg-A-mono": {
+   "label": "Low or Bust 2 (Delegation), package A, mono"
+  },
+  "lobdeleg-B-deleg": {
+   "label": "Low or Bust 2 (Delegation), package B, deleg"
+  },
+  "lobdeleg-B-mono": {
+   "label": "Low or Bust 2 (Delegation), package B, mono"
   }
  },
  "setups": {
@@ -74398,9 +74461,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://qiita.com/kikuziro/items/53465eeb52b464757555",
+      "captured": "2026-10-28",
+      "where": "verification 3, table: the only score row (正解率（60 回）), one column per model",
+      "quote": "| 正解率（60 回） | 100% | 100% | 100% |",
+      "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt",
+      "sha256": "d272627f08064b14f2beadeffa1715c6e45db2c99175f35fcf775a2e5ac843b8"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143405,6 +143477,573 @@
    "legacy_groups": [],
    "label": "AlgBench: algorithm IDAS (heuristic-optimized (Table 5)), Pass@k accuracy",
    "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "lob-code-fix-merge-intervals": {
+   "family": "lob-code-fix-merge-intervals",
+   "benchmark": "Low or Bust: Fix buggy mergeIntervals",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Fix buggy mergeIntervals",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-code-lru-cache": {
+   "family": "lob-code-lru-cache",
+   "benchmark": "Low or Bust: Implement LRUCache",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Implement LRUCache",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-code-parse-duration": {
+   "family": "lob-code-parse-duration",
+   "benchmark": "Low or Bust: Implement parseDuration",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Implement parseDuration",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-reason-race-order": {
+   "family": "lob-reason-race-order",
+   "benchmark": "Low or Bust: Race order deduction",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy%",
+   "headline": {
+    "metric": "accuracy%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Race order deduction",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-reason-snail-pole": {
+   "family": "lob-reason-snail-pole",
+   "benchmark": "Low or Bust: Snail on a pole",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy%",
+   "headline": {
+    "metric": "accuracy%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Snail on a pole",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-reason-trailing-zeros": {
+   "family": "lob-reason-trailing-zeros",
+   "benchmark": "Low or Bust: Trailing zeros of 137!",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy%",
+   "headline": {
+    "metric": "accuracy%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Trailing zeros of 137!",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-write-container-summary": {
+   "family": "lob-write-container-summary",
+   "benchmark": "Low or Bust: Summarize a passage in 3 bullets",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "writing",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Summarize a passage in 3 bullets",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-write-https-explainer": {
+   "family": "lob-write-https-explainer",
+   "benchmark": "Low or Bust: Explain HTTPS to a 12-year-old",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "writing",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Explain HTTPS to a 12-year-old",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-write-launch-email": {
+   "family": "lob-write-launch-email",
+   "benchmark": "Low or Bust: Product announcement email",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "writing",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Product announcement email",
+   "note": "per-task setup from the per-run JSON of ['lob9-fable', 'lob9-opus48'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-coin-faces": {
+   "family": "lob-hard-coin-faces",
+   "benchmark": "Low or Bust: Conditional probability with loaded coins",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy%",
+   "headline": {
+    "metric": "accuracy%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Conditional probability with loaded coins",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-count-multiples": {
+   "family": "lob-hard-count-multiples",
+   "benchmark": "Low or Bust: Divisible by 3 or 5 but not 15",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy%",
+   "headline": {
+    "metric": "accuracy%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Divisible by 3 or 5 but not 15",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-lex-topo-order": {
+   "family": "lob-hard-lex-topo-order",
+   "benchmark": "Low or Bust: Lexicographically smallest task order",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Lexicographically smallest task order",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-locking-tradeoff": {
+   "family": "lob-hard-locking-tradeoff",
+   "benchmark": "Low or Bust: Optimistic vs pessimistic locking, exactly 3 paragraphs",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "writing",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Optimistic vs pessimistic locking, exactly 3 paragraphs",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-parse-csv-line": {
+   "family": "lob-hard-parse-csv-line",
+   "benchmark": "Low or Bust: Parse one RFC-4180 CSV line",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Parse one RFC-4180 CSV line",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-postmortem-rewrite": {
+   "family": "lob-hard-postmortem-rewrite",
+   "benchmark": "Low or Bust: Constrained postmortem rewrite",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "writing",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Constrained postmortem rewrite",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-puzzle-hunt": {
+   "family": "lob-hard-puzzle-hunt",
+   "benchmark": "Low or Bust: Five-person finish order",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy%",
+   "headline": {
+    "metric": "accuracy%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Five-person finish order",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lob-hard-weighted-intervals": {
+   "family": "lob-hard-weighted-intervals",
+   "benchmark": "Low or Bust: Max-value non-overlapping intervals",
+   "subset": null,
+   "harness": "claude -p (Claude Code, headless, --effort)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust: Max-value non-overlapping intervals",
+   "note": "per-task setup from the per-run JSON of ['lobhard-fable'] (one trial, t1); headline not designated (pending)"
+  },
+  "lobdeleg-A-deleg": {
+   "family": "lobdeleg-A-deleg",
+   "benchmark": "Low or Bust 2 (Delegation), package A, delegation arm (fresh worker per step)",
+   "subset": null,
+   "harness": "orchestrator dispatching fresh workers per step, Read/Edit/Write/Glob/Grep",
+   "tools_regime": "Read,Edit,Write,Glob,Grep (no shell)",
+   "judge_panel": null,
+   "metric": "hidden-test%",
+   "headline": {
+    "metric": "hidden-test%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust 2 (Delegation), package A, deleg",
+   "note": "per-cell setup from results-delegation/raw (score = hidden tests of the cell, one cell = one trial t1..t3); headline pending"
+  },
+  "lobdeleg-A-mono": {
+   "family": "lobdeleg-A-mono",
+   "benchmark": "Low or Bust 2 (Delegation), package A, monolith arm",
+   "subset": null,
+   "harness": "claude -p, one agent, Read/Edit/Write/Glob/Grep",
+   "tools_regime": "Read,Edit,Write,Glob,Grep (no shell)",
+   "judge_panel": null,
+   "metric": "hidden-test%",
+   "headline": {
+    "metric": "hidden-test%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust 2 (Delegation), package A, mono",
+   "note": "per-cell setup from results-delegation/raw (score = hidden tests of the cell, one cell = one trial t1..t3); headline pending"
+  },
+  "lobdeleg-B-deleg": {
+   "family": "lobdeleg-B-deleg",
+   "benchmark": "Low or Bust 2 (Delegation), package B, delegation arm (fresh worker per step)",
+   "subset": null,
+   "harness": "orchestrator dispatching fresh workers per step, Read/Edit/Write/Glob/Grep",
+   "tools_regime": "Read,Edit,Write,Glob,Grep (no shell)",
+   "judge_panel": null,
+   "metric": "hidden-test%",
+   "headline": {
+    "metric": "hidden-test%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust 2 (Delegation), package B, deleg",
+   "note": "per-cell setup from results-delegation/raw (score = hidden tests of the cell, one cell = one trial t1..t3); headline pending"
+  },
+  "lobdeleg-B-mono": {
+   "family": "lobdeleg-B-mono",
+   "benchmark": "Low or Bust 2 (Delegation), package B, monolith arm",
+   "subset": null,
+   "harness": "claude -p, one agent, Read/Edit/Write/Glob/Grep",
+   "tools_regime": "Read,Edit,Write,Glob,Grep (no shell)",
+   "judge_panel": null,
+   "metric": "hidden-test%",
+   "headline": {
+    "metric": "hidden-test%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Low or Bust 2 (Delegation), package B, mono",
+   "note": "per-cell setup from results-delegation/raw (score = hidden tests of the cell, one cell = one trial t1..t3); headline pending"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."

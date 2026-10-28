@@ -1,0 +1,305 @@
+{
+ "id": "src-github-esagduyu-livedoc-2026-10-28",
+ "publisher": "github-esagduyu-livedoc",
+ "urls": [
+  "https://github.com/esagduyu/livedoc-local-vs-claude-benchmark"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/esagduyu/livedoc-local-vs-claude-benchmark/main/README.md",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/esagduyu/livedoc-local-vs-claude-benchmark/main/results/RESULTS.md",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/RESULTS.md"
+  },
+  {
+   "id": "S3",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/esagduyu/livedoc-local-vs-claude-benchmark/main/metrics.py",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md": "86d26968c74744f52968d797dc67cccbab58dea901f2f0595010ab1d77391708",
+  "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/RESULTS.md": "60be2394dfafa94ba1230a39b0d02eac9c425b10b79bf14b8b5bafcd4a7807ed",
+  "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py": "3b500f98d591817e52e3129c8b931788c209eaea14702677cb4dcf9bc8c3e6d3"
+ },
+ "extractions": [],
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": null,
+ "salvo": "wave C2 (28 Oct), conversion of github-esagduyu-livedoc",
+ "agent": "C2 conversion (Haiku 5.5, wave C2 of 28 Oct)",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F5",
+   "says": "no-effort-sent",
+   "about": "Claude Code default thinking (both Claude arms)",
+   "value": "default thinking",
+   "level": "written",
+   "form": "prose",
+   "where": "README, 'Known caveats', first bullet",
+   "quote": "Claude ran in Claude Code with its default thinking",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md",
+   "note": "stated for the Claude arms; no reasoning parameter is named"
+  },
+  {
+   "id": "F6",
+   "says": "aggregation",
+   "about": "3 runs per arm",
+   "value": "3 per arm",
+   "level": "written",
+   "form": "prose",
+   "where": "README, 'Arms', list, first bullet",
+   "quote": "- **Repetitions:** 3 per arm.",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md"
+  },
+  {
+   "id": "F11",
+   "says": "cost-method",
+   "about": "total_cost_usd of the Claude CLI result event (summarised per run by the repo's metrics.py)",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "code",
+   "where": "metrics.py, per-run metrics of the claude -p logs",
+   "quote": "\"cost_usd\": ev.get(\"total_cost_usd\"),",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py",
+   "term": "cli-total"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": "claude -p logs carry the cost in their final result event",
+   "value": "the final `result`",
+   "level": "written",
+   "form": "prose",
+   "where": "metrics.py, module docstring",
+   "quote": "claude -p --output-format stream-json logs (Claude arms): the final `result`",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Arms' table",
+   "quote": "| **haiku** | — | Claude Haiku 5.5 | Claude Code 2.1.300 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md"
+  },
+  {
+   "id": "F22",
+   "says": "harness",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Code 2.1.300",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Arms' table, Harness column",
+   "quote": "| **haiku** | — | Claude Haiku 5.5 | Claude Code 2.1.300 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md"
+  },
+  {
+   "id": "F23",
+   "says": "cost",
+   "about": "Claude Haiku 5.5",
+   "value": "$0.65",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Results' table, Cost per run column",
+   "quote": "| **Haiku 5.5** | 51, 51, 51 | **51** | 39, 39, 39 | **~13 min** | **$0.65** |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F24",
+   "says": "currency",
+   "about": "Claude Haiku 5.5",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Results' table, Cost per run column (the $ sign)",
+   "quote": "| **Haiku 5.5** | 51, 51, 51 | **51** | 39, 39, 39 | **~13 min** | **$0.65** |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md",
+   "term": "USD"
+  },
+  {
+   "id": "F25",
+   "says": "unit",
+   "about": "Claude Haiku 5.5",
+   "value": "cost per run",
+   "level": "written",
+   "form": "label",
+   "where": "README, 'Results' table header",
+   "quote": "| Arm | Final score /51 (per run) | Median | Stage 1 at 60-min deadline /39 | Wall time per run | Cost per run |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md",
+   "term": "USD/run"
+  },
+  {
+   "id": "F26",
+   "says": "cost-basis",
+   "about": "Claude Haiku 5.5",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "code",
+   "where": "metrics.py, per-run metrics",
+   "quote": "\"cost_usd\": ev.get(\"total_cost_usd\"),",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F27",
+   "says": "cost-method",
+   "about": "Claude Haiku 5.5",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "code",
+   "where": "metrics.py, per-run metrics",
+   "quote": "\"cost_usd\": ev.get(\"total_cost_usd\"),",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py",
+   "term": "cli-total"
+  },
+  {
+   "id": "F29",
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Arms' table",
+   "quote": "| **opus** | — | Claude Opus 5.5 | Claude Code 2.1.300 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md"
+  },
+  {
+   "id": "F30",
+   "says": "harness",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Code 2.1.300",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Arms' table, Harness column",
+   "quote": "| **opus** | — | Claude Opus 5.5 | Claude Code 2.1.300 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md"
+  },
+  {
+   "id": "F31",
+   "says": "cost",
+   "about": "Claude Opus 5.5",
+   "value": "$4.00",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Results' table, Cost per run column",
+   "quote": "| **Opus 5.5** | 51, 51, 51 | **51** | 39, 39, 39 | ~13 min | $4.00 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F32",
+   "says": "currency",
+   "about": "Claude Opus 5.5",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, 'Results' table, Cost per run column (the $ sign)",
+   "quote": "| **Opus 5.5** | 51, 51, 51 | **51** | 39, 39, 39 | ~13 min | $4.00 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md",
+   "term": "USD"
+  },
+  {
+   "id": "F33",
+   "says": "unit",
+   "about": "Claude Opus 5.5",
+   "value": "cost per run",
+   "level": "written",
+   "form": "label",
+   "where": "README, 'Results' table header",
+   "quote": "| Arm | Final score /51 (per run) | Median | Stage 1 at 60-min deadline /39 | Wall time per run | Cost per run |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/readme.md",
+   "term": "USD/run"
+  },
+  {
+   "id": "F34",
+   "says": "cost-basis",
+   "about": "Claude Opus 5.5",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "code",
+   "where": "metrics.py, per-run metrics",
+   "quote": "\"cost_usd\": ev.get(\"total_cost_usd\"),",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F35",
+   "says": "cost-method",
+   "about": "Claude Opus 5.5",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "code",
+   "where": "metrics.py, per-run metrics",
+   "quote": "\"cost_usd\": ev.get(\"total_cost_usd\"),",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/metrics.py",
+   "term": "cli-total"
+  },
+  {
+   "id": "F40",
+   "says": "note",
+   "about": "Claude Haiku 5.5",
+   "value": "$0.74",
+   "level": "written",
+   "form": "table-cell",
+   "where": "RESULTS.md, 'Per run' table, row haiku-r1, column Cost",
+   "quote": "| haiku-r1 | 51 | 39 | 39 | 12 | 7.3 min (0) | 7.6 min (0) | 55 | 132,350 | 54 | 788 | $0.74 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/RESULTS.md"
+  },
+  {
+   "id": "F41",
+   "says": "note",
+   "about": "Claude Opus 5.5",
+   "value": "$4.67",
+   "level": "written",
+   "form": "table-cell",
+   "where": "RESULTS.md, 'Per run' table, row opus-r2, column Cost",
+   "quote": "| opus-r2 | 51 | 39 | 39 | 12 | 9.7 min (0) | 8.5 min (0) | 38 | 81,860 | 145 | 870 | $4.67 |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/RESULTS.md"
+  },
+  {
+   "id": "F42",
+   "says": "note",
+   "about": "Claude Haiku 5.5",
+   "value": "$1.96 total",
+   "level": "written",
+   "form": "table-cell",
+   "where": "RESULTS.md, 'Per arm' table, row Haiku 5.5 (Claude Code), column Cost",
+   "quote": "| Haiku 5.5 (Claude Code) | 51 [51–51] | 39 [39–39] | 39 [39–39] | 12 [12–12] | 13 min | $1.96 total |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/RESULTS.md"
+  },
+  {
+   "id": "F43",
+   "says": "note",
+   "about": "Claude Opus 5.5",
+   "value": "$11.99 total",
+   "level": "written",
+   "form": "table-cell",
+   "where": "RESULTS.md, 'Per arm' table, row Opus 5.5 (Claude Code), column Cost",
+   "quote": "| Opus 5.5 (Claude Code) | 51 [51–51] | 39 [39–39] | 39 [39–39] | 12 [12–12] | 13 min | $11.99 total |",
+   "file": "/work/.salvo14/mig/convert-github-esagduyu-livedoc/evidence/RESULTS.md"
+  }
+ ]
+}

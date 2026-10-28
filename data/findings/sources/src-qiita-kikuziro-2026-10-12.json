@@ -1,0 +1,188 @@
+{
+ "id": "src-qiita-kikuziro-2026-10-12",
+ "publisher": "qiita-kikuziro",
+ "urls": [
+  "https://qiita.com/kikuziro/items/53465eeb52b464757555"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://qiita.com/kikuziro/items/53465eeb52b464757555",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.html"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.html": "f0b1a89770f3d68320d8ce0baf0fadfc183d3bb34af744562abb21bea22a45fa",
+  "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt": "d272627f08064b14f2beadeffa1715c6e45db2c99175f35fcf775a2e5ac843b8"
+ },
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt",
+   "from": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.html",
+   "tool": "python3 html.parser: text of div.it-MdContent, one line per table row (evidence/extract.py)"
+  }
+ ],
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": {
+  "value": "2026-10-12",
+  "where": "page metadata datePublished (JST)",
+  "quote": "\"datePublished\":\"2026-10-12T22:07:07.000+09:00\"",
+  "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.html"
+ },
+ "salvo": "wave C2 (28 Oct), conversion of qiita-kikuziro",
+ "agent": "C2 conversion (Haiku 5.5, wave C2 of 28 Oct)",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "code",
+   "where": "verification 1, code block (client.messages.create)",
+   "quote": "model=\"claude-haiku-5-5\",",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F2",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5",
+   "value": "Haiku 5.5",
+   "level": "written",
+   "form": "prose",
+   "where": "introduction, first paragraph",
+   "quote": "2026年10月7日に出たClaude Haiku 5.5は",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt"
+  },
+  {
+   "id": "F3",
+   "says": "model-name",
+   "about": "Claude Haiku 4.5",
+   "value": "Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "verification 3, header row",
+   "quote": "| 項目 | Haiku 5.5 | Haiku 4.5 | Jev |",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt"
+  },
+  {
+   "id": "F4",
+   "says": "route",
+   "about": "Claude API (api.anthropic.com, global inference region), called directly",
+   "value": "Claude API（api.anthropic.com、推論リージョンはglobal）を直接呼んだ往復時間",
+   "level": "written",
+   "form": "prose",
+   "where": "verification 1, paragraph before the table",
+   "quote": "判断時間は、米国のクラウド環境からClaude API（api.anthropic.com、推論リージョンはglobal）を直接呼んだ往復時間で、日本からやBedrock経由だと変わります",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt",
+   "term": "maker-api"
+  },
+  {
+   "id": "F5",
+   "says": "thinking-off",
+   "about": "thinking disabled for Haiku 5.5",
+   "value": "thinking={\"type\": \"disabled\"}",
+   "level": "written",
+   "form": "code",
+   "where": "verification 1, code block: the request's thinking field",
+   "quote": "thinking={\"type\": \"disabled\"},",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt"
+  },
+  {
+   "id": "F6",
+   "says": "metric-definition",
+   "about": "accuracy over 10 runs per example (verification 1)",
+   "value": "正解率（10回）",
+   "level": "written",
+   "form": "table-cell",
+   "where": "verification 1, table header",
+   "quote": "| # | 例文 | 期待 | 正解率（10回） | 判断時間 |",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt"
+  },
+  {
+   "id": "F7",
+   "says": "aggregation",
+   "about": "6 examples x 10 runs = 60 runs",
+   "value": "例文6本×10回",
+   "level": "written",
+   "form": "prose",
+   "where": "verification 1, paragraph before the table",
+   "quote": "例文6本×10回の小規模な検証です",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "Claude Haiku 5.5",
+   "value": "100%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "verification 3, row 正解率（60 回), column Haiku 5.5",
+   "quote": "| 正解率（60 回） | 100% | 100% | 100% |",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "Claude Haiku 4.5",
+   "value": "100%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "verification 3, row 正解率（60 回), column Haiku 4.5",
+   "quote": "| 正解率（60 回） | 100% | 100% | 100% |",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt",
+   "term": "acc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F10",
+   "says": "route",
+   "about": "Haiku 4.5 route not stated (verification 3 repeats verification 1's problem)",
+   "value": "検証1の問題をhaiku4.5と5.5、Jevで比べてみました。",
+   "level": "written",
+   "form": "prose",
+   "where": "verification 3, first sentence",
+   "quote": "検証1の問題をhaiku4.5と5.5、Jevで比べてみました。",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt",
+   "note": "no route fact: the source does not name the route for Haiku 4.5 (the sentence reuses verification 1's problem)"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": "Haiku 4.5 needs max_tokens 2; no reasoning parameter is printed for it",
+   "value": "必要な max_tokens",
+   "level": "written",
+   "form": "table-cell",
+   "where": "verification 3, row 必要な max_tokens, column Haiku 4.5",
+   "quote": "| 必要な max_tokens | 1 | 2 | 指定なし |",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": "median latency of the 60 runs (not a measure slot)",
+   "value": "約 515ms",
+   "level": "written",
+   "form": "table-cell",
+   "where": "verification 3, row 判断時間（中央値）",
+   "quote": "| 判断時間（中央値） | 約 515ms | 約 455ms | 約 193ms |",
+   "file": "/work/.salvo14/mig/convert-qiita-kikuziro/evidence/kikuziro.txt"
+  }
+ ]
+}

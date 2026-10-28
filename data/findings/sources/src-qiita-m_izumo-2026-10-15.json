@@ -1,0 +1,187 @@
+{
+ "id": "src-qiita-m_izumo-2026-10-15",
+ "publisher": "qiita-m_izumo",
+ "urls": [
+  "https://qiita.com/m_izumo/items/6a69b18b966f8efa9dff"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://qiita.com/m_izumo/items/6a69b18b966f8efa9dff",
+   "captured": "2026-10-28",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.html"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.html": "b62cde3c870216f5417291ee1aec82353120c0262ab4ff90ea14404f9a048590",
+  "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt": "634a594cc5ef668f349284b47097e256a16876b91437606e6e0efc1777e1951f"
+ },
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+   "from": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.html",
+   "tool": "python3 html.parser: text of div.it-MdContent, one line per table row (evidence/extract.py)"
+  }
+ ],
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": {
+  "value": "2026-10-15",
+  "where": "page metadata datePublished (JST)",
+  "quote": "\"datePublished\":\"2026-10-15T17:39:45.000+09:00\"",
+  "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.html"
+ },
+ "salvo": "wave C2 (28 Oct), conversion of qiita-m_izumo",
+ "agent": "C2 conversion (Haiku 5.5, wave C2 of 28 Oct)",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table '役割' (roles), row レビュー担当",
+   "quote": "| レビュー担当 | Claude Opus 5.5(サブエージェント、high または xhigh) |",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  },
+  {
+   "id": "F2",
+   "says": "effort-label",
+   "about": "high (review sub-agents; one of the two levels mixed in the study)",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "where": "introduction, paragraph 1",
+   "quote": "effort は high と xhigh を混ぜ、レビュー担当は合わせて 45 本走らせました。",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  },
+  {
+   "id": "F3",
+   "says": "effort-label",
+   "about": "high (the high definition differs from the xhigh one only in name, description and effort)",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'effort は、エージェント定義ファイルの front matter で指定しました', after the xhigh definition",
+   "quote": "high 用の定義は、name、description、effort の 3 行だけが違います。",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+   "note": "the high definition's effort line is not printed; the level is named in the prose (F2)"
+  },
+  {
+   "id": "F4",
+   "says": "effort-setting",
+   "about": "effort: xhigh",
+   "value": "effort: xhigh",
+   "level": "written",
+   "form": "code",
+   "where": "section 'effort は、エージェント定義ファイルの front matter で指定しました', agent definition opus-xhigh-worker",
+   "quote": "effort: xhigh",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  },
+  {
+   "id": "F5",
+   "says": "harness",
+   "about": "Claude Code sub-agents",
+   "value": "Claude Code のサブエージェント",
+   "level": "written",
+   "form": "prose",
+   "where": "introduction, paragraph 1",
+   "quote": "個人開発のソフトウェアをリリースする前に、Claude Code のサブエージェントで不具合を洗い出しました。",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  },
+  {
+   "id": "F6",
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "55%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table 'high と xhigh（1 本あたり）', row 網羅率, column high",
+   "quote": "| 網羅率 | 55% | 67% |",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+   "term": "coverage%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "67%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table 'high と xhigh（1 本あたり）', row 網羅率, column xhigh",
+   "quote": "| 網羅率 | 55% | 67% |",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+   "term": "coverage%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F8",
+   "says": "metric-definition",
+   "about": "coverage (網羅率): share of the real defects of a section that one reviewer found",
+   "value": "網羅率",
+   "level": "written",
+   "form": "prose",
+   "where": "section '数え方' (counting)",
+   "quote": "網羅率: その区分でどれかのレビュー担当が見つけた実欠陥のうち、その 1 本が見つけた割合です",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+   "note": "the main session's own finds are not in the denominator (same section)"
+  },
+  {
+   "id": "F9",
+   "says": "aggregation",
+   "about": "per reviewer run, one reviewer per run; 20 high and 22 xhigh reviewers compared",
+   "value": "本数 | 20 | 22",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table 'high と xhigh（1 本あたり）', row 本数",
+   "quote": "| 本数 | 20 | 22 |",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  },
+  {
+   "id": "F10",
+   "says": "note",
+   "about": "reviewer runs of the high arm, incl. three phase-2 runs excluded from the comparison",
+   "value": "45 本",
+   "level": "written",
+   "form": "prose",
+   "where": "introduction, paragraph 1",
+   "quote": "レビュー担当は合わせて 45 本走らせました。",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": "cost per reviewer (not a cost fact): tokens processed, high and xhigh",
+   "value": "約 3,400 万",
+   "level": "written",
+   "form": "table-cell",
+   "where": "section 'コスト', table, row 処理したトークン(API の使用量の累計)",
+   "quote": "| 処理したトークン(API の使用量の累計) | 約 3,400 万 | 約 6,100 万 | 約 1.8 倍(区分ごとに 1.1〜2.7 倍) |",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": "time per reviewer (not a cost fact): high and xhigh",
+   "value": "約 50 分",
+   "level": "written",
+   "form": "table-cell",
+   "where": "section 'コスト', table, row 時間",
+   "quote": "| 時間 | 約 50 分 | 約 63 分 | 約 1.3 倍 |",
+   "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt"
+  }
+ ]
+}
