@@ -10370,6 +10370,21 @@
   },
   "arxiv-2610.10479-codex-agg": {
    "label": "Agentic RSR scene refinement, Codex implementation, 18-scene aggregate of 6 Oct 2026 (arXiv 2610.10479 Table 8)"
+  },
+  "xrepotest-tpr-rust": {
+   "label": "XRepoTest TPR, Rust (arXiv 2608.25939, Table A.4, standard setting)"
+  },
+  "xrepotest-tpr-julia": {
+   "label": "XRepoTest TPR, Julia (arXiv 2608.25939, Table A.4, standard setting)"
+  },
+  "xrepotest-tpr-go": {
+   "label": "XRepoTest TPR, Go (arXiv 2608.25939, Table A.4, standard setting)"
+  },
+  "xrepotest-tpr-ruby": {
+   "label": "XRepoTest TPR, Ruby (arXiv 2608.25939, Table A.4, standard setting)"
+  },
+  "xrepotest-tpr-php": {
+   "label": "XRepoTest TPR, PHP (arXiv 2608.25939, Table A.4, standard setting)"
   }
  },
  "setups": {
@@ -39617,9 +39632,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.21132",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption",
+      "quote": "Table 1: Overall accuracy (%) by input configuration.",
+      "file": "/work/.salvo14/gt/t4/src/p2601.21132.txt",
+      "sha256": "db00e13a4d6d3364be02b1d8f532da8589d0aebce227b6f4d16e66136adfb9a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -39646,9 +39670,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.21132",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption",
+      "quote": "Table 1: Overall accuracy (%) by input configuration.",
+      "file": "/work/.salvo14/gt/t4/src/p2601.21132.txt",
+      "sha256": "db00e13a4d6d3364be02b1d8f532da8589d0aebce227b6f4d16e66136adfb9a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -139141,6 +139174,276 @@
    "legacy_groups": [],
    "label": "Autonomous Science Bench, resolution rate (%) per configuration, arXiv 2610.18449",
    "note": "C2 conversion: the designated metric (Rate (%)) printed per configuration; the costs of the same table ride in the same measures"
+  },
+  "xrepotest-tpr-rust": {
+   "family": "xrepotest-tpr-rust",
+   "benchmark": "XRepoTest (arXiv 2608.25939), test pass rate, Rust, standard setting",
+   "subset": null,
+   "harness": "standard setting (focal method and class signature)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "XRepoTest TPR, Rust (standard setting)",
+   "note": "headline: not-established:assumed (the source does not designate TPR per language; the 5-language mean of the legacy group is ours and is not converted)"
+  },
+  "xrepotest-tpr-julia": {
+   "family": "xrepotest-tpr-julia",
+   "benchmark": "XRepoTest (arXiv 2608.25939), test pass rate, Julia, standard setting",
+   "subset": null,
+   "harness": "standard setting (focal method and class signature)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "XRepoTest TPR, Julia (standard setting)",
+   "note": "headline: not-established:assumed (the source does not designate TPR per language; the 5-language mean of the legacy group is ours and is not converted)"
+  },
+  "xrepotest-tpr-go": {
+   "family": "xrepotest-tpr-go",
+   "benchmark": "XRepoTest (arXiv 2608.25939), test pass rate, Go, standard setting",
+   "subset": null,
+   "harness": "standard setting (focal method and class signature)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "XRepoTest TPR, Go (standard setting)",
+   "note": "headline: not-established:assumed (the source does not designate TPR per language; the 5-language mean of the legacy group is ours and is not converted)"
+  },
+  "xrepotest-tpr-ruby": {
+   "family": "xrepotest-tpr-ruby",
+   "benchmark": "XRepoTest (arXiv 2608.25939), test pass rate, Ruby, standard setting",
+   "subset": null,
+   "harness": "standard setting (focal method and class signature)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "XRepoTest TPR, Ruby (standard setting)",
+   "note": "headline: not-established:assumed (the source does not designate TPR per language; the 5-language mean of the legacy group is ours and is not converted)"
+  },
+  "xrepotest-tpr-php": {
+   "family": "xrepotest-tpr-php",
+   "benchmark": "XRepoTest (arXiv 2608.25939), test pass rate, PHP, standard setting",
+   "subset": null,
+   "harness": "standard setting (focal method and class signature)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "XRepoTest TPR, PHP (standard setting)",
+   "note": "headline: not-established:assumed (the source does not designate TPR per language; the 5-language mean of the legacy group is ours and is not converted)"
+  },
+  "discoverphysics-ara-claude-code": {
+   "family": "discoverphysics-ara",
+   "benchmark": "DiscoverPhysics 11 worlds (ARA Labs runs), Claude Code (CC + ARA bridge)",
+   "subset": null,
+   "harness": "Claude Code (CC + ARA bridge)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DiscoverPhysics 11 worlds, Claude Code (CC + ARA bridge)",
+   "note": "headline: not-established:assumed (the scoreboard's bold PASS share is the board's own summary; the designation is the coordinator's decision)"
+  },
+  "discoverphysics-ara-codex": {
+   "family": "discoverphysics-ara",
+   "benchmark": "DiscoverPhysics 11 worlds (ARA Labs runs), Codex CLI (ARA bridge)",
+   "subset": null,
+   "harness": "Codex CLI (ARA bridge)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DiscoverPhysics 11 worlds, Codex CLI (ARA bridge)",
+   "note": "headline: not-established:assumed (the scoreboard's bold PASS share is the board's own summary; the designation is the coordinator's decision)"
+  },
+  "discoverphysics-ara-grok-cli": {
+   "family": "discoverphysics-ara",
+   "benchmark": "DiscoverPhysics 11 worlds (ARA Labs runs), grok CLI (ARA bridge)",
+   "subset": null,
+   "harness": "grok CLI (ARA bridge)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DiscoverPhysics 11 worlds, grok CLI (ARA bridge)",
+   "note": "headline: not-established:assumed (the scoreboard's bold PASS share is the board's own summary; the designation is the coordinator's decision)"
+  },
+  "discoverphysics-ara-kimi-code": {
+   "family": "discoverphysics-ara",
+   "benchmark": "DiscoverPhysics 11 worlds (ARA Labs runs), kimi-code CLI (ARA bridge)",
+   "subset": null,
+   "harness": "kimi-code CLI (ARA bridge)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DiscoverPhysics 11 worlds, kimi-code CLI (ARA bridge)",
+   "note": "headline: not-established:assumed (the scoreboard's bold PASS share is the board's own summary; the designation is the coordinator's decision)"
+  },
+  "discoverphysics-ara-antigravity": {
+   "family": "discoverphysics-ara",
+   "benchmark": "DiscoverPhysics 11 worlds (ARA Labs runs), Antigravity CLI (ARA bridge)",
+   "subset": null,
+   "harness": "Antigravity CLI (ARA bridge)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DiscoverPhysics 11 worlds, Antigravity CLI (ARA bridge)",
+   "note": "headline: not-established:assumed (the scoreboard's bold PASS share is the board's own summary; the designation is the coordinator's decision)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
