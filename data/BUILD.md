@@ -262,6 +262,8 @@ marked **(method)** remain method questions for the maintainer.
    date gets the widest interval, default bounds included, and the level `contradictory`. If a dated event of the
    model falls strictly inside that window, the measure gets `out:contradictory`; otherwise the run date is not
    needed. A dated event is any bound of its records in models.json or routes.json, or of its prices.
+   A model released after the stated upper bound is no contradiction: that is early access by date (step 5); for an
+   alias, the older candidate is then placed by that bound (28 Oct).
 4. The commit date is taken from the capture of that commit. When the source has no publication date, no capture and
    no commit, the upper bound is the harvest.
 5. **Early access (decided).** A configuration dated from the release (`from_basis: release`) covers an early-access

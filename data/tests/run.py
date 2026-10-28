@@ -493,6 +493,16 @@ def run_date_alias():
     m4 = sc.m(s, model="alias-y", effort=[LOW])
     r = sc.run()
     eq(r.model(m4), "ab1", "the newer candidate's early access does not unbound the alias")
+    # a stated run end before the newer release, in a source published after it: the newer candidate's release is
+    # no contradiction (it used to widen its interval to the publication and straddle the switch; matharena, 28 Oct)
+    sc = base()
+    sc.model("ac1", released="2026-01-01", names=[name("alias-z", "2026-01-01", "2026-06-30")])
+    sc.model("ac2", released="2026-07-01", names=[name("alias-z", "2026-07-01")])
+    s = sc.source("a", published="2026-10-01")
+    m5 = sc.m(s, model="alias-z", effort=[LOW], run_date=[("run-end", "2026-06-23")])
+    m6 = sc.m(s, model="alias-z", effort=[LOW])
+    r = sc.run()
+    eq((r.model(m5), r.q(m6)), ("ac1", "out:model-not-established"), "run end before the switch; none stated")
 
 
 @test

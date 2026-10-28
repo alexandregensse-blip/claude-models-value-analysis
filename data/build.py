@@ -671,7 +671,8 @@ def run_interval(M, key):
             hi, basis["hi"] = shut, "shutdown"
             M.rule("run-before-shutdown")
     level = "written" if (lo_c or hi_c) else "computed"
-    if lo is not None and lo > hi:                       # stated bounds contradict: the widest interval, defaults too
+    if lo_c and lo > hi:                                 # stated bounds contradict: the widest interval, defaults too
+        # (a release after the run's upper bound is no contradiction: early access by date, below; 28 Oct)
         lo = min([lo] + lo_c + [b[0] for b in ends] + ([released] if released else []))
         hi = max([hi, hi_default] + hi_c + [b[1] for b in starts])
         level = "not-established:contradictory"
