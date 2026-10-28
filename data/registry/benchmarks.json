@@ -10430,6 +10430,30 @@
   },
   "kamiumi-svg-motion": {
    "label": "kamiumi_ai: SVG motion diagram (Sonnet 5.5 vs Opus 5.5)"
+  },
+  "dataspace-harnesses": {
+   "label": "DataSpace harness comparison (MiMo-V2.5 fixed): Task Accuracy (410 tasks)"
+  },
+  "vmmev2-hf-model-cards": {
+   "label": "Video-MME-v2 model-card records on the Hugging Face API (MiniMax-M3, Muse Spark Open, dots3-note Preview; not the 512/64-frame leaderboard)"
+  },
+  "programgym-mini-swe-agent": {
+   "label": "ProgramGym paper (arXiv 2610.13395), ProgramBench, mini-SWE-agent (flagship rows restated from Yang et al. 2026b), tests passed %"
+  },
+  "statem-tb21-references": {
+   "label": "Terminal-Bench 2.1 scores printed in the StateM paper (arXiv 2608.15089): reference configurations and other rows"
+  },
+  "lhtb-cli-doc-table": {
+   "label": "LHTB document-table-layout-reconstruction, installed-CLI agents (ARA Labs board)"
+  },
+  "lhtb-cli-great-exp": {
+   "label": "LHTB great-expectations-audit, installed-CLI agents (ARA Labs board)"
+  },
+  "lhtb-cli-langchain": {
+   "label": "LHTB langchain-version-migration, installed-CLI agents (ARA Labs board)"
+  },
+  "lhtb-cli-sci-fig": {
+   "label": "LHTB scientific-figure-data-reconstruction, installed-CLI agents (ARA Labs board)"
   }
  },
  "setups": {
@@ -28052,9 +28076,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://buoy.gg/blog/claude-haiku-5-5-vs-gpt-6-luna",
+      "captured": "2026-10-19",
+      "where": "post text: chart 'Jobs done right, higher is better' (one score per model)",
+      "quote": "Jobs done right",
+      "file": "/work/.salvo14/mig/convert-buoy.gg/evidence/buoy-post-text.txt",
+      "sha256": "156d5d03aa724f407c684bddf89bd77ec86061327b7e61b58bf5e9b2119a26e2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -32763,9 +32796,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.03451",
+      "captured": "2026-10-27",
+      "where": "Section 6.2: Table 3 reports Task Accuracy",
+      "quote": "Table 3 reports Task Accuracy for both controlled comparisons",
+      "file": "/work/.salvo14/mig/convert-dataspace-2608.03451/evidence/2608.03451.txt",
+      "sha256": "7de9e768c58ad85c49f7508cee1383caa194b00084bcad52dd3508f65400c75e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -37893,9 +37935,18 @@
    "metric": "score-of-1",
    "headline": {
     "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/dvallslanaquera/glm5.2-benchmark",
+      "captured": "2026-10-20",
+      "where": "README line 43, 'Benchmark 1 — Blast Radius': File level, 'This is the headline metric.'",
+      "quote": "This is the headline metric.",
+      "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md",
+      "sha256": "9d1cd0f36d323c80a7aac5fbf7f0a59d512439696de5acd7a072b1f566658f66"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -42576,9 +42627,18 @@
    "metric": "score/579-pct",
    "headline": {
     "metric": "score/579-pct",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.25158",
+      "captured": "2026-10-19",
+      "where": "Figure 6 caption (page 9)",
+      "quote": "Figure 6: Total benchmark score of each model over the 77-challenge corpus, placed against the maximum achievable score of 579.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.25158/evidence/2608.25158.txt",
+      "sha256": "4b14844e0a972c8ae3d440c2a97707c8a0f53769a929c35a9adad577ef3b9392"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -88788,9 +88848,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.23653",
+      "captured": "2026-10-20",
+      "where": "section 6.2, primary effectiveness metric (pass count, percent-from-counts)",
+      "quote": "The primary effectiveness metric is the task pass count.",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2608.23653.txt",
+      "sha256": "c72fd2b8bbb11c38d9656dc149a51df95fa82a51883375f70069530c9c5559cf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -88817,9 +88886,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.23653",
+      "captured": "2026-10-20",
+      "where": "section 6.2, primary effectiveness metric (pass count, percent-from-counts)",
+      "quote": "The primary effectiveness metric is the task pass count.",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2608.23653.txt",
+      "sha256": "c72fd2b8bbb11c38d9656dc149a51df95fa82a51883375f70069530c9c5559cf"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100955,9 +101033,18 @@
    "metric": "AUROC%",
    "headline": {
     "metric": "AUROC%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.21046",
+      "captured": "2026-10-20",
+      "where": "text line 182, section 'Metrics'",
+      "quote": "Systems are evaluated by AUROC with factual errors as the class to detect,",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.21046/evidence/2610.21046.txt",
+      "sha256": "592328b637ce5f796a8bb93fc18d57363d530c08f3538c2aa1956db79842b245"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -103219,9 +103306,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.19974",
+      "captured": "2026-10-20",
+      "where": "section 3.4: 'Main F1' scores the binary decision (line-broken: 'de-' 'cision')",
+      "quote": "Main F1 scores only the binary de-",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2608.19974.txt",
+      "sha256": "d2988f8c4432a489a407dc2747213330469cea36866ece4a43e4cc7d0bb0faaa"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -114657,10 +114753,19 @@
    "judge_panel": null,
    "metric": "pass@1%",
    "headline": {
-    "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass-rate%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://snorkel.ai/blog/opus-5-5-vs-opus-5-vs-fable-5-1-coding-benchmark-results/",
+      "captured": "2026-10-05",
+      "where": "post, dek under the title",
+      "quote": "Opus 5.5 posts the strongest results we’ve measured on our frontier task set, with a pass rate of 68%, up from 61% for Opus 5 and 49% for Fable 5.1 on the same tasks.",
+      "file": "/work/.salvo14/mig/convert-snorkel/evidence/snorkel-blog.txt",
+      "sha256": "5e7dc306bdf0bbae33c2612edf1129c3f767f4f056c2ee4082bad995ffa9cff4"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -115877,9 +115982,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.15089",
+      "captured": "2026-10-28",
+      "where": "Abstract: the paper's Terminal-Bench 2.1 result is stated as accuracy",
+      "quote": "On Terminal-Bench 2.1, GPT-5.5 xhigh withStateMreaches 92.1% accuracy",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.15089/evidence/2608.15089.txt",
+      "sha256": "34501db12bedf732f6fd93537ff44360ba7df5e1ce791c1ded840bc3a33ee961"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -117590,9 +117704,18 @@
    "metric": "score-of-100",
    "headline": {
     "metric": "score-of-100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://we0.ai/zh/articles/deepseek-v4-pro-takes-second-in",
+      "captured": "2026-10-20",
+      "where": "article: the board's ranking by score ('在当前排名中')",
+      "quote": "在当前排名中，Kimi K3以60.61分保持第一",
+      "file": "/work/.salvo14/gt/t3/src/cn/https___we0.ai_zh_articles_deepseek-v4-pro-takes-second-in.txt",
+      "sha256": "17c9bb49f0a8b36366a9460d72e8a5bd04c1fed8e608d3e78cfb682b7630c641"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -123279,9 +123402,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2606.03461",
+      "captured": "2026-10-20",
+      "where": "Table 1: one standalone score column per teacher (TB 2.0); the SFT columns are students",
+      "quote": "Teacher Model Trajectory Num. TB 2.0 Avg. Turns SFT Avg. Pass@1",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2606.03461.txt",
+      "sha256": "17848e1c993c6c79cacaedc69571362c568a75916542929a9ec356114d5cd8dd"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141544,6 +141676,333 @@
    "legacy_groups": [],
    "label": "text-to-MRS (Hajdik split), 998-sentence sample",
    "note": "the paper's Q3 parse (Table 3) is on the 998 sentences of its 1,000-item sample, not the 9,932-item split of the realization test; the legacy mrsparse rows claim the 9932 split"
+  },
+  "dataspace-harnesses": {
+   "family": "dataspace-harnesses",
+   "benchmark": "DataSpace harness comparison (MiMo-V2.5 fixed): Task Accuracy (410 tasks)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.03451",
+      "captured": "2026-10-27",
+      "where": "Section 6.2: Table 3 reports Task Accuracy",
+      "quote": "Table 3 reports Task Accuracy for both controlled comparisons",
+      "file": "/work/.salvo14/mig/convert-dataspace-2608.03451/evidence/2608.03451.txt",
+      "sha256": "7de9e768c58ad85c49f7508cee1383caa194b00084bcad52dd3508f65400c75e"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DataSpace harness comparison (MiMo-V2.5 fixed): Task Accuracy (410 tasks)",
+   "note": "new setup (C2, 28 Oct): the harness rows of Table 3 (MiMo-V2.5 fixed), printed in the paper, not in raw-data.csv"
+  },
+  "vmmev2-hf-model-cards": {
+   "family": "vmmev2-hf-model-cards",
+   "benchmark": "Video-MME-v2 model-card records on the Hugging Face API (MiniMax-M3, Muse Spark Open, dots3-note Preview; not the 512/64-frame leaderboard)",
+   "subset": null,
+   "harness": "model card (self-reported)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-0-100",
+   "headline": {
+    "metric": "score-0-100",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Video-MME-v2 model-card records on the Hugging Face API (MiniMax-M3, Muse Spark Open, dots3-note Preview; not the 512/64-frame leaderboard)",
+   "note": "new setup (C2): model-card values of the Hub record, self-reported; not legacy rows"
+  },
+  "programgym-mini-swe-agent": {
+   "family": "programgym-mini-swe-agent",
+   "benchmark": "ProgramGym paper (arXiv 2610.13395), ProgramBench, mini-SWE-agent (flagship rows restated from Yang et al. 2026b), tests passed %",
+   "subset": null,
+   "harness": "mini-SWE-agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "tests-passed-pct",
+   "headline": {
+    "metric": "tests-passed-pct",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProgramGym flagship rows (mini-SWE-agent), tests passed %",
+   "note": "new setup (C2, 28 Oct): flagship rows of Table 2 (restated from Yang et al. 2026b; not legacy rows)"
+  },
+  "statem-tb21-references": {
+   "family": "statem-tb21-references",
+   "benchmark": "Terminal-Bench 2.1 scores printed in the StateM paper (arXiv 2608.15089): reference configurations and other rows",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.15089",
+      "captured": "2026-10-28",
+      "where": "Abstract: the paper's Terminal-Bench 2.1 result is stated as accuracy",
+      "quote": "On Terminal-Bench 2.1, GPT-5.5 xhigh withStateMreaches 92.1% accuracy",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.15089/evidence/2608.15089.txt",
+      "sha256": "34501db12bedf732f6fd93537ff44360ba7df5e1ce791c1ded840bc3a33ee961"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Terminal-Bench 2.1 scores printed in the StateM paper (arXiv 2608.15089): reference configurations and other rows",
+   "note": "new setup (C2, 28 Oct): reference and other printed rows of the paper, harness as the paper states it (none when not stated)"
+  },
+  "lhtb-cli-doc-table": {
+   "family": "lhtb-cli-doc-table",
+   "benchmark": "LHTB task document-table-layout-reconstruction, installed-CLI agents (ARA Labs board)",
+   "subset": "document-table-layout-reconstruction",
+   "harness": "vendor installed CLI (Harbor patched, 90 min)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-1",
+   "headline": {
+    "metric": "score-of-1",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/lhtb-glm5.2-trajectories",
+      "captured": "2026-10-20",
+      "where": "board table, row document-table-layout-reconstruction, column reward",
+      "quote": "| long-horizon-terminal-bench/document-table-layout-reconstruction | 0.020 | 91m | 24694856 | 282121 | — | EXC |",
+      "file": "/work/.salvo14/mig/convert-hf-agentnativeresearchlab-lhtb/evidence/lhtb-board-glm5.2.SB.md",
+      "sha256": "11ad0af9035eafc41e8721c7b778fbcb7c2ac377ca07fe2ed572c768a7c8e35f"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LHTB document-table-layout-reconstruction (installed CLI)",
+   "note": "one trial per task on the board; the 4-task mean of the legacy rows is not printed by the source"
+  },
+  "lhtb-cli-great-exp": {
+   "family": "lhtb-cli-great-exp",
+   "benchmark": "LHTB task great-expectations-audit, installed-CLI agents (ARA Labs board)",
+   "subset": "great-expectations-audit",
+   "harness": "vendor installed CLI (Harbor patched, 90 min)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-1",
+   "headline": {
+    "metric": "score-of-1",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/lhtb-glm5.2-trajectories",
+      "captured": "2026-10-20",
+      "where": "board table, row great-expectations-audit, column reward",
+      "quote": "| long-horizon-terminal-bench/great-expectations-audit | 0.545 | 93m | 9563849 | 324600 | — | EXC |",
+      "file": "/work/.salvo14/mig/convert-hf-agentnativeresearchlab-lhtb/evidence/lhtb-board-glm5.2.SB.md",
+      "sha256": "11ad0af9035eafc41e8721c7b778fbcb7c2ac377ca07fe2ed572c768a7c8e35f"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LHTB great-expectations-audit (installed CLI)",
+   "note": "one trial per task on the board; the 4-task mean of the legacy rows is not printed by the source"
+  },
+  "lhtb-cli-langchain": {
+   "family": "lhtb-cli-langchain",
+   "benchmark": "LHTB task langchain-version-migration, installed-CLI agents (ARA Labs board)",
+   "subset": "langchain-version-migration",
+   "harness": "vendor installed CLI (Harbor patched, 90 min)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-1",
+   "headline": {
+    "metric": "score-of-1",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/lhtb-glm5.2-trajectories",
+      "captured": "2026-10-20",
+      "where": "board table, row langchain-version-migration, column reward",
+      "quote": "| long-horizon-terminal-bench/langchain-version-migration | 1.000 | 48m | 7875578 | 152940 | $3.68 |  |",
+      "file": "/work/.salvo14/mig/convert-hf-agentnativeresearchlab-lhtb/evidence/lhtb-board-glm5.2.SB.md",
+      "sha256": "11ad0af9035eafc41e8721c7b778fbcb7c2ac377ca07fe2ed572c768a7c8e35f"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LHTB langchain-version-migration (installed CLI)",
+   "note": "one trial per task on the board; the 4-task mean of the legacy rows is not printed by the source"
+  },
+  "lhtb-cli-sci-fig": {
+   "family": "lhtb-cli-sci-fig",
+   "benchmark": "LHTB task scientific-figure-data-reconstruction, installed-CLI agents (ARA Labs board)",
+   "subset": "scientific-figure-data-reconstruction",
+   "harness": "vendor installed CLI (Harbor patched, 90 min)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-1",
+   "headline": {
+    "metric": "score-of-1",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/lhtb-glm5.2-trajectories",
+      "captured": "2026-10-20",
+      "where": "board table, row scientific-figure-data-reconstruction, column reward",
+      "quote": "| long-horizon-terminal-bench/scientific-figure-data-reconstruction | 0.040 | 91m | 29419435 | 302334 | — | EXC |",
+      "file": "/work/.salvo14/mig/convert-hf-agentnativeresearchlab-lhtb/evidence/lhtb-board-glm5.2.SB.md",
+      "sha256": "11ad0af9035eafc41e8721c7b778fbcb7c2ac377ca07fe2ed572c768a7c8e35f"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LHTB scientific-figure-data-reconstruction (installed CLI)",
+   "note": "one trial per task on the board; the 4-task mean of the legacy rows is not printed by the source"
+  },
+  "snorkel-tbplus-passrate": {
+   "family": "snorkel-tbplus",
+   "benchmark": "Snorkel Terminal-Bench+ (frontier task set): trajectory pass rate",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass-rate%",
+   "headline": {
+    "metric": "pass-rate%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://snorkel.ai/blog/opus-5-5-vs-opus-5-vs-fable-5-1-coding-benchmark-results/",
+      "captured": "2026-10-05",
+      "where": "post, dek under the title",
+      "quote": "Opus 5.5 posts the strongest results we’ve measured on our frontier task set, with a pass rate of 68%, up from 61% for Opus 5 and 49% for Fable 5.1 on the same tasks.",
+      "file": "/work/.salvo14/mig/convert-snorkel/evidence/snorkel-blog.txt",
+      "sha256": "5e7dc306bdf0bbae33c2612edf1129c3f767f4f056c2ee4082bad995ffa9cff4"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Snorkel Terminal-Bench+ (frontier task set): trajectory pass rate",
+   "note": "trajectories passed out of the task set's trajectories (136/200, 94/191, 118/195): the post's designated pass rate; harness unstated, effort unstated"
+  },
+  "tokenmarxing-heavy-valbpb": {
+   "family": "tokenmarxing-heavy",
+   "benchmark": "token-marxing heavy autoresearch task (toy CPU LM training, best val_bpb, lower is better)",
+   "subset": null,
+   "harness": "Claude Code (marx router)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "val_bpb(lower-better)",
+   "headline": {
+    "metric": "val_bpb(lower-better)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "token-marxing heavy autoresearch task: best val_bpb per run (lower is better), printed in results/REPORT.md",
+   "note": "headline pending: the source prints val_bpb per arm and per run but designates no headline metric"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."

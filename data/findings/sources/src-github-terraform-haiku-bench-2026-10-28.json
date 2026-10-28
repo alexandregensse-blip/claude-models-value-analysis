@@ -1,0 +1,271 @@
+{
+ "id": "src-github-terraform-haiku-bench-2026-10-28",
+ "publisher": "github-terraform-haiku-bench",
+ "urls": [
+  "https://github.com/moriryota62/claude-haiku-terraform-benchmark"
+ ],
+ "wayback": [],
+ "commit": "58520d803328660cf8dafda8be384d9ae978a2cb",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/moriryota62/claude-haiku-terraform-benchmark/main/results/report.md",
+   "captured": "2026-10-28T14:12:06Z",
+   "note": "results/report.md of main, 28 Oct 2026 (tree sha 58520d8 in tree.json)"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/moriryota62/claude-haiku-terraform-benchmark/main/README.md",
+   "captured": "2026-10-28T14:12:06Z",
+   "note": "README.md of main, 28 Oct 2026"
+  }
+ ],
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md": "3550b45883f12ed8c4b34e7c059beee68fd656ffb044913e66aaf599df51fabc",
+  "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/README.md": "22e0fe14b330d5d8f2050165232f44a14c5188ffdb0e67520f199a75776e97b1",
+  "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/tree.json": "8b707852e27b974cfb3c50eee14a927dd30efcc81b342666a3a956eb9029f05c"
+ },
+ "harvested_at": "2026-10-28T14:12:06Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-terraform-haiku-bench (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Haiku 5.5), from the saved report and README of the repository",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "route",
+   "about": null,
+   "value": "bedrock",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, section 検証方法 step 2",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/README.md",
+   "quote": "Amazon Bedrock経由で3モデルに同一プロンプトを与え、コードを生成する",
+   "term": "bedrock"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "最新(3回目)の評価結果",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, ディレクトリ構成 (results/)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/README.md",
+   "quote": "最新(3回目)の評価結果(JSON/Markdown)"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "同一の要件(コーディング規約を含む)",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, 概要 paragraph",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/README.md",
+   "quote": "同一の要件(コーディング規約を含む)を Claude Haiku 4.5 / Claude Sonnet 5.5 / Claude Haiku 5.5 の3モデルに与えてTerraformコードを生成させ"
+  },
+  {
+   "id": "F4",
+   "says": "cost-basis",
+   "about": null,
+   "value": "コストはAmazon Bedrock(US Geo cross-region inference、`us.anthropic.*`)の価格",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 生成時間・トークン数・コスト section (lead sentence)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "コストはAmazon Bedrock(US Geo cross-region inference、`us.anthropic.*`)の価格",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F5",
+   "says": "cost-method",
+   "about": null,
+   "value": "から算出した",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, same section: cost computed from the stated prices and tokens",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "から算出した",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F6",
+   "says": "price-table",
+   "about": "Claude Haiku 4.5",
+   "value": "Claude Haiku 4.5: 入力$1.1/出力$5.5 (per 1M tokens)",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, same section: prices stated per 1M tokens",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "Claude Haiku 4.5: 入力$1.1/出力$5.5 (per 1M tokens)"
+  },
+  {
+   "id": "F7",
+   "says": "price-table",
+   "about": "Claude Sonnet 5.5",
+   "value": "Claude Sonnet 5.5: 入力$2.2/出力$11.0 (per 1M tokens)",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, same section",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "Claude Sonnet 5.5: 入力$2.2/出力$11.0 (per 1M tokens)"
+  },
+  {
+   "id": "F8",
+   "says": "price-table",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Haiku 5.5: 入力$0.11/出力$0.55 (per 1M tokens)",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, same section",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "Claude Haiku 5.5: 入力$0.11/出力$0.55 (per 1M tokens)"
+  },
+  {
+   "id": "F9",
+   "says": "model-api-id",
+   "about": "Claude Haiku 4.5",
+   "value": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, 使用モデル table",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/README.md",
+   "quote": "| Haiku 4.5 | `us.anthropic.claude-haiku-4-5-20251001-v1:0` |",
+   "namespace": "bedrock"
+  },
+  {
+   "id": "F10",
+   "says": "model-api-id",
+   "about": "Claude Sonnet 5.5",
+   "value": "us.anthropic.claude-sonnet-5-5",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, 使用モデル table",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/README.md",
+   "quote": "| Sonnet 5.5 | `us.anthropic.claude-sonnet-5-5` |",
+   "namespace": "bedrock"
+  },
+  {
+   "id": "F11",
+   "says": "model-api-id",
+   "about": "Claude Haiku 5.5",
+   "value": "us.anthropic.claude-haiku-5-5",
+   "level": "written",
+   "form": "prose",
+   "where": "README.md, 使用モデル table",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/README.md",
+   "quote": "| Haiku 5.5 | `us.anthropic.claude-haiku-5-5` |",
+   "namespace": "bedrock"
+  },
+  {
+   "id": "F12",
+   "says": "model-name",
+   "about": "Claude Haiku 4.5",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 総合スコア table header (the three columns)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "| タスク | Claude Haiku 4.5 | Claude Sonnet 5.5 | Claude Haiku 5.5 |"
+  },
+  {
+   "id": "F13",
+   "says": "model-name",
+   "about": "Claude Sonnet 5.5",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 総合スコア table header (the three columns)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "| タスク | Claude Haiku 4.5 | Claude Sonnet 5.5 | Claude Haiku 5.5 |"
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 総合スコア table header (the three columns)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "| タスク | Claude Haiku 4.5 | Claude Sonnet 5.5 | Claude Haiku 5.5 |"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "Claude Haiku 4.5",
+   "value": "75.3",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 総合スコア table, row 平均 (printed mean of the three task totals)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "**平均** | **75.3** | **84.0** | **81.4**",
+   "term": "score-of-100",
+   "scale": "raw"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Claude Sonnet 5.5",
+   "value": "84.0",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 総合スコア table, row 平均 (printed mean of the three task totals)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "**平均** | **75.3** | **84.0** | **81.4**",
+   "term": "score-of-100",
+   "scale": "raw"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "Claude Haiku 5.5",
+   "value": "81.4",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 総合スコア table, row 平均 (printed mean of the three task totals)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "**平均** | **75.3** | **84.0** | **81.4**",
+   "term": "score-of-100",
+   "scale": "raw"
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": "Claude Haiku 4.5",
+   "value": "0.0353",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 合計 table (per model total cost in USD)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "| Claude Haiku 4.5 | 23.9 | 0.0353 |"
+  },
+  {
+   "id": "F19",
+   "says": "cost",
+   "about": "Claude Sonnet 5.5",
+   "value": "0.1286",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 合計 table (per model total cost in USD)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "| Claude Sonnet 5.5 | 61.0 | 0.1286 |"
+  },
+  {
+   "id": "F20",
+   "says": "cost",
+   "about": "Claude Haiku 5.5",
+   "value": "0.0080",
+   "level": "written",
+   "form": "prose",
+   "where": "results/report.md, 合計 table (per model total cost in USD)",
+   "file": "/work/.salvo14/mig/convert-github-terraform-haiku-bench/evidence/results_report.md",
+   "quote": "| Claude Haiku 5.5 | 52.8 | 0.0080 |"
+  }
+ ]
+}

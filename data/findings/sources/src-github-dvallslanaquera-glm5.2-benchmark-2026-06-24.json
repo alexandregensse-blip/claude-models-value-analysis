@@ -1,0 +1,398 @@
+{
+ "urls": [
+  "https://github.com/dvallslanaquera/glm5.2-benchmark"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://github.com/dvallslanaquera/glm5.2-benchmark",
+   "captured": "2026-10-20T00:00:00Z",
+   "note": "repo snapshot (README, models.py, config.py, results/*.json) saved in gt/t4/src/gh2/ and copied to evidence/"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md": "9d1cd0f36d323c80a7aac5fbf7f0a59d512439696de5acd7a072b1f566658f66",
+  "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/models.py": "8139600b32de9acb06461e23fac42cd0020f102c2f05bc183bb0048f0b92d5d2",
+  "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/config.py": "2ce1127647ffa61082b17e53aa05946cfcad201d68d1a1967eecc4e542e8d227",
+  "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json": "67190c3dbdea5e6c72db3146b221170e3e4b39f5ab04fdce8378a41838f29142",
+  "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json": "4254312dd500247a9238656a227561b788303a2ff20d96d6c1db0b67d77f6460"
+ },
+ "harvested_at": "2026-10-20T00:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (agent C2-e)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "id": "src-github-dvallslanaquera-glm5.2-benchmark-2026-06-24",
+ "publisher": "github-dvallslanaquera-glm5.2-benchmark",
+ "facts": [
+  {
+   "says": "headline-metric",
+   "value": "This is the headline metric.",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md",
+   "where": "README line 43, section 'Benchmark 1 — Blast Radius', 'File level' bullet",
+   "quote": "This is the headline metric.",
+   "level": "written",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "$5 / $25 per 1M tokens",
+   "term": "list-estimate",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md",
+   "where": "README line 195, section 'Pricing'",
+   "quote": "Opus 4.8** input/output pricing is built in ($5 / $25 per 1M tokens)",
+   "level": "written",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "billed_input / 1e6 * cfg.input_price_per_mtok",
+   "term": "tokens×list",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/models.py",
+   "where": "models.py line 106, function _anthropic_cost",
+   "quote": "        billed_input / 1e6 * cfg.input_price_per_mtok",
+   "level": "written",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "+ 1.25 * r.cache_creation_tokens",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/models.py",
+   "where": "models.py line 102, function _anthropic_cost",
+   "quote": "        + 1.25 * r.cache_creation_tokens\n        + 0.10 * r.cache_read_tokens",
+   "level": "written",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$5 / $25 per 1M tokens",
+   "term": "USD",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md",
+   "where": "README line 195, section 'Pricing'",
+   "quote": "Opus 4.8** input/output pricing is built in ($5 / $25 per 1M tokens)",
+   "level": "written",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "no-effort-sent",
+   "value": "resp = self.client.messages.create(",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/models.py",
+   "where": "models.py lines 154-158, function ask (the Anthropic call)",
+   "quote": "            resp = self.client.messages.create(\n                model=self.cfg.model_id,\n                max_tokens=config.MAX_OUTPUT_TOKENS,\n                system=self.system,\n                messages=[{\"role\": \"user\", \"content\": USER_TEMPLATE.format(symbol=symbol)}],\n            )",
+   "level": "written",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "route",
+   "value": "Anthropic API",
+   "term": "maker-api",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md",
+   "where": "README line 169-170, section 'Keys'",
+   "quote": "Opus uses the Anthropic API",
+   "level": "written",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "model-api-id",
+   "about": "Claude Opus 4.8",
+   "value": "claude-opus-4-8",
+   "namespace": "maker-api",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/config.py",
+   "where": "config.py line 73, OPUS config (provider anthropic)",
+   "quote": "model_id=\"claude-opus-4-8\",",
+   "level": "written",
+   "id": "F8"
+  },
+  {
+   "says": "route",
+   "value": "Ollama Cloud",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md",
+   "where": "README line 169-170, section 'Keys'",
+   "quote": "GLM-5.2's default path is **Ollama Cloud** (`glm-5.2:cloud`)",
+   "level": "written",
+   "id": "F9",
+   "about": null
+  },
+  {
+   "says": "model-api-id",
+   "about": "GLM-5.2",
+   "value": "glm-5.2:cloud",
+   "namespace": "prefix",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/config.py",
+   "where": "config.py line 97, GLM config (provider ollama)",
+   "quote": "model_id=os.getenv(\"GLM_MODEL\", \"glm-5.2:cloud\"),",
+   "level": "written",
+   "id": "F10"
+  },
+  {
+   "says": "note",
+   "value": "only indicative",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/dval_README.md",
+   "where": "README line 200, section 'Pricing' (GLM-5.2)",
+   "quote": "so the per-token cost is only indicative",
+   "level": "written",
+   "id": "F11",
+   "about": null
+  },
+  {
+   "about": "Claude Opus 4.8",
+   "says": "score",
+   "term": "score-of-1",
+   "scale": "fraction",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "0.9398",
+   "where": "T1/opus-4-8/aggregate.file.macro.f1",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "level": "written",
+   "id": "F12"
+  },
+  {
+   "about": "Claude Opus 4.8",
+   "says": "cost",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "2.3206",
+   "where": "T1/opus-4-8/aggregate.total_cost_usd",
+   "level": "written",
+   "id": "F13"
+  },
+  {
+   "about": "Claude Opus 4.8",
+   "says": "tokens-in",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "2162",
+   "where": "T1/opus-4-8/aggregate.total_input_tokens",
+   "level": "written",
+   "id": "F14"
+  },
+  {
+   "about": "Claude Opus 4.8",
+   "says": "tokens-out",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "4362",
+   "where": "T1/opus-4-8/aggregate.total_output_tokens",
+   "level": "written",
+   "id": "F15"
+  },
+  {
+   "about": "Claude Opus 4.8",
+   "says": "score",
+   "term": "score-of-1",
+   "scale": "fraction",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json",
+   "value": "1.0",
+   "where": "T2/opus-4-8/aggregate.pass_at_1",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "level": "written",
+   "id": "F16"
+  },
+  {
+   "about": "Claude Opus 4.8",
+   "says": "cost",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json",
+   "value": "0.612946",
+   "where": "T2/opus-4-8/aggregate.mean_cost_usd",
+   "level": "written",
+   "id": "F17"
+  },
+  {
+   "about": "Claude Opus 4.8",
+   "says": "aggregation",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json",
+   "value": "5",
+   "where": "T2/opus-4-8/aggregate.trials",
+   "level": "written",
+   "id": "F18"
+  },
+  {
+   "about": "GLM-5.2",
+   "says": "score",
+   "term": "score-of-1",
+   "scale": "fraction",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "0.9342",
+   "where": "T1/glm-5-2/aggregate.file.macro.f1",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "level": "written",
+   "id": "F19"
+  },
+  {
+   "about": "GLM-5.2",
+   "says": "cost",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "2.037169",
+   "where": "T1/glm-5-2/aggregate.total_cost_usd",
+   "level": "written",
+   "id": "F20"
+  },
+  {
+   "about": "GLM-5.2",
+   "says": "tokens-in",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "1445443",
+   "where": "T1/glm-5-2/aggregate.total_input_tokens",
+   "level": "written",
+   "id": "F21"
+  },
+  {
+   "about": "GLM-5.2",
+   "says": "tokens-out",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "value": "3079",
+   "where": "T1/glm-5-2/aggregate.total_output_tokens",
+   "level": "written",
+   "id": "F22"
+  },
+  {
+   "about": "GLM-5.2",
+   "says": "score",
+   "term": "score-of-1",
+   "scale": "fraction",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json",
+   "value": "0.4",
+   "where": "T2/glm-5-2/aggregate.pass_at_1",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   },
+   "level": "written",
+   "id": "F23"
+  },
+  {
+   "about": "GLM-5.2",
+   "says": "cost",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json",
+   "value": "0.662361",
+   "where": "T2/glm-5-2/aggregate.mean_cost_usd",
+   "level": "written",
+   "id": "F24"
+  },
+  {
+   "about": "GLM-5.2",
+   "says": "aggregation",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json",
+   "value": "5",
+   "where": "T2/glm-5-2/aggregate.trials",
+   "level": "written",
+   "id": "F25"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/latest.json",
+   "where": "$.models",
+   "row_key": "$key",
+   "format": "json",
+   "columns": {
+    "aggregate.file.macro.f1": {
+     "says": "score",
+     "term": "score-of-1",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "aggregate.total_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "aggregate.total_input_tokens": {
+     "says": "tokens-in"
+    },
+    "aggregate.total_output_tokens": {
+     "says": "tokens-out"
+    }
+   }
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-github-dvallslanaquera-glm5.2-benchmark/evidence/debug_loop_latest.json",
+   "where": "$.models",
+   "row_key": "$key",
+   "format": "json",
+   "columns": {
+    "aggregate.pass_at_1": {
+     "says": "score",
+     "term": "score-of-1",
+     "scale": "fraction",
+     "precision": {
+      "model": "printed",
+      "step": 0.0001
+     }
+    },
+    "aggregate.mean_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "aggregate.trials": {
+     "says": "requests"
+    }
+   }
+  }
+ ]
+}
