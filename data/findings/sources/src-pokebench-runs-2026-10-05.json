@@ -1,0 +1,106 @@
+{
+ "id": "src-pokebench-runs-2026-10-05",
+ "publisher": "pokebench",
+ "urls": [
+  "https://pokebench.tv/runs.json",
+  "https://pokebench.tv"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "file": "/work/.salvo14/s19/d2/src/pokebench_runs.json",
+   "captured": "2026-10-05T09:54:45Z",
+   "url": "https://pokebench.tv/runs.json",
+   "note": "saved copy; capture time = file mtime"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/s19/d2/src/pokebench_runs.json": "fee44cd3e04ada2ee362c65d9abf4aa7caafc0c30e9a5f1f34bfcb833bba2312",
+  "/work/.salvo14/s19/d2/src/pokebench_home.html": "6c56ea207237053fafb9e8eaa0bbee0aacb0784bc36729a49d122570befa018c",
+  "/work/.salvo14/s19/d2/src/pokebench_app.js": "a9cbd683223603de554eb067963c03dfcf3f956ce809dd7209b63be7eca62511"
+ },
+ "harvested_at": "2026-10-05T09:54:45Z",
+ "published": null,
+ "salvo": "s19/d2 (saved by the earlier salvo); C2 conversion 28 Oct 2026",
+ "agent": "C2 converter (Haiku 5.5), from the saved copies",
+ "snapshot_of": null,
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/s19/d2/src/pokebench_runs.json",
+   "format": "json",
+   "where": "$",
+   "row_key": "run_id",
+   "columns": {
+    "display_name": "model-name",
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "execution_route": "route",
+    "think_level": "effort-setting",
+    "run_date": "run-date",
+    "turns_used": "note",
+    "budget_turns": "note",
+    "termination_reason": "note",
+    "beat_brock": "note",
+    "cost_usd": "cost",
+    "tokens_in": "tokens-in",
+    "tokens_out": "tokens-out",
+    "harness_git_sha": "harness",
+    "prompt_version": "version"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Every score here is read out of the game's own memory, never judged by a human",
+   "level": "written",
+   "form": "prose",
+   "where": "pokebench_home.html, page text (hero section)",
+   "quote": "Every score here is read out of the game's own memory, never judged by a human",
+   "file": "/work/.salvo14/s19/d2/src/pokebench_home.html"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "// Spec tiebreaker: same furthest milestone -> fewer turns to REACH it.",
+   "level": "written",
+   "form": "code",
+   "where": "pokebench_app.js, rankSort and the comment above it",
+   "quote": "// Spec tiebreaker: same furthest milestone -> fewer turns to REACH it.",
+   "file": "/work/.salvo14/s19/d2/src/pokebench_app.js"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "const rankSort = (a, b) => b.furthest_index - a.furthest_index || furthestTurn(a) - furthestTurn(b)",
+   "level": "written",
+   "form": "code",
+   "where": "pokebench_app.js, const rankSort",
+   "quote": "const rankSort = (a, b) => b.furthest_index - a.furthest_index || furthestTurn(a) - furthestTurn(b)",
+   "file": "/work/.salvo14/s19/d2/src/pokebench_app.js"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "code",
+   "where": "pokebench_app.js, function price (the COST figures are printed with a $ sign)",
+   "quote": "'$' + run.cost_usd.toLocaleString('en-US'",
+   "file": "/work/.salvo14/s19/d2/src/pokebench_app.js",
+   "term": "USD"
+  }
+ ]
+}
