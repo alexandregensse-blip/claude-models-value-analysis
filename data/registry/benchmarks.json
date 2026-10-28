@@ -10391,6 +10391,21 @@
   },
   "arxiv-2602.02537-accuracy": {
    "label": "WorldVQA paper: overall accuracy (Table 3, designated primary metric)"
+  },
+  "aireiter-coding": {
+   "label": "AIReiter coding test (Claude Code CLI, 1 Jul 2026)"
+  },
+  "aireiter-writing": {
+   "label": "AIReiter writing test (Claude Code CLI, 1 Jul 2026)"
+  },
+  "aireiter-agentic": {
+   "label": "AIReiter agentic lookup test (Claude Code CLI, 1 Jul 2026)"
+  },
+  "lsp-ref-grep": {
+   "label": "LSP vs grep: reference completeness, grep arm (F1)"
+  },
+  "lsp-ref-lsp": {
+   "label": "LSP vs grep: reference completeness, LSP arm (F1)"
   }
  },
  "setups": {
@@ -99510,9 +99525,18 @@
    "metric": "PartForge score points",
    "headline": {
     "metric": "PartForge score points",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.partforge.ai/blog/default-model-sonnet-5-5",
+      "captured": "2026-10-21",
+      "where": "post, section 'What our tests showed', paragraph 3: the results table has one score column; the post compares the models on it",
+      "quote": "The scores are close. All seven models are within four points, and with three tries per task, a gap that small doesn't tell you much.",
+      "file": "/work/.salvo14/mig/convert-partforge/evidence/partforge.html",
+      "sha256": "2d88a88368b7c792d43ef2cbac96b56f97efff95b96cffb25eb554ab59bc803e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -139828,6 +139852,146 @@
    "legacy_groups": [],
    "label": "WorldVQA paper: overall accuracy (Table 3)",
    "note": "new setup (C2, 28 Oct): the paper designates Accuracy as its primary single-number metric and prints it per model (Table 3, first column); the held F-score setup mwvqa-fscore takes this headline"
+  },
+  "aireiter-coding": {
+   "family": "aireiter-coding",
+   "benchmark": "AIReiter coding test (Claude Code CLI, 1 Jul 2026)",
+   "subset": null,
+   "harness": "ClaudeCode",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://web.archive.org/web/20260908073332/https://aireiter.com/blog/claude-sonnet-5-vs-opus-4-8",
+      "captured": "2026-09-08",
+      "where": "article, 'Test 2' paragraph after the table: the coding test's only result is the tests passed (8/8 pass); no other metric is printed",
+      "quote": "passed every test on the first run.",
+      "file": "/work/.salvo14/mig/convert-aireiter/evidence/aireiter-claude-sonnet-5-vs-opus-4-8-wb20260908073332.html",
+      "sha256": "3666d4753d75a0ba93301ee798167ea3c3b4fc17674f8dbdb8e2712a2a251554"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "aireiter"
+   ],
+   "label": "AIReiter coding (1 Jul 2026)",
+   "note": "wave C2 (aireiter): cut from the Wayback copy of the Sonnet 5 vs Opus 4.8 article (run 1 Jul 2026, Claude Code CLI). Passes are counts of the model's own tests ('8/8 tests pass'): not a common test set."
+  },
+  "aireiter-writing": {
+   "family": "aireiter-writing",
+   "benchmark": "AIReiter writing test (Claude Code CLI, 1 Jul 2026)",
+   "subset": null,
+   "harness": "ClaudeCode",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "none",
+   "headline": {
+    "metric": "none",
+    "basis": "decision",
+    "decision": null
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "writing",
+   "complexity": "trivial",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "aireiter2"
+   ],
+   "label": "AIReiter writing (1 Jul 2026)",
+   "note": "wave C2 (aireiter): cut from the Wayback copy of the Sonnet 5 vs Opus 4.8 article (run 1 Jul 2026, Claude Code CLI). Cost only: the article prints no score for this test (headline pending: nothing designated, nothing ranked)."
+  },
+  "aireiter-agentic": {
+   "family": "aireiter-agentic",
+   "benchmark": "AIReiter agentic lookup test (Claude Code CLI, 1 Jul 2026)",
+   "subset": null,
+   "harness": "ClaudeCode",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "none",
+   "headline": {
+    "metric": "none",
+    "basis": "decision",
+    "decision": null
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "aireiter3"
+   ],
+   "label": "AIReiter agentic lookup (1 Jul 2026)",
+   "note": "wave C2 (aireiter): cut from the Wayback copy of the Sonnet 5 vs Opus 4.8 article (run 1 Jul 2026, Claude Code CLI). Cost only: the article prints no score for this test ('identical correct answer' in words)."
+  },
+  "lsp-ref-grep": {
+   "family": "lsp-ref-grep",
+   "benchmark": "LSP vs grep: reference completeness, grep arm (F1)",
+   "subset": null,
+   "harness": "grep-baseline",
+   "tools_regime": "grep+read+edit",
+   "judge_panel": null,
+   "metric": "F1",
+   "headline": {
+    "metric": "F1",
+    "basis": "decision",
+    "decision": null
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LSP vs grep, reference completeness (grep arm)",
+   "note": "wave C2: arXiv 2608.13568 section 6.4 F1 (grep arm A). The paper's primary metric is tokens-to-success; F1 is not designated (headline pending). No effort is stated (rows out)."
+  },
+  "lsp-ref-lsp": {
+   "family": "lsp-ref-lsp",
+   "benchmark": "LSP vs grep: reference completeness, LSP arm (F1)",
+   "subset": null,
+   "harness": "lsp-only",
+   "tools_regime": "references/definition/documentSymbol+read+edit",
+   "judge_panel": null,
+   "metric": "F1",
+   "headline": {
+    "metric": "F1",
+    "basis": "decision",
+    "decision": null
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "LSP vs grep, reference completeness (LSP arm)",
+   "note": "wave C2: arXiv 2608.13568 section 6.4 F1 (LSP arm B). Headline pending (F1 not designated). No effort is stated (rows out)."
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
