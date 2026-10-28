@@ -1,0 +1,505 @@
+{
+ "id": "src-github-caloriebench-leaderboard-v1-2026-10-19",
+ "publisher": "github-caloriebench",
+ "urls": [
+  "https://github.com/mmiddlezong/calorie-bench/tree/66e4316d050fb086655f5d44cbda93f6dd55e55a/results/v1",
+  "https://github.com/mmiddlezong/calorie-bench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://github.com/mmiddlezong/calorie-bench/tree/66e4316d050fb086655f5d44cbda93f6dd55e55a/results/v1",
+   "captured": "2026-10-19T08:01:00Z",
+   "note": "results/v1 at commit 66e4316d (leaderboard JSON/MD and the four meta.json saved 19 Oct 2026 by g4; the three other Claude meta.json fetched raw from the same commit on 28 Oct 2026)"
+  }
+ ],
+ "commit": "66e4316d050fb086655f5d44cbda93f6dd55e55a",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.json": "95e4290d11e77ec4f4644a63074a8f255567c6387b065f8a500c3e89e41223ea",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.md": "1f567e64429bf67673b4bdc8cd9adfe2f2f490778fd306a33203486fcd31c68b",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-claude-fable-5-1.json": "dd6a10fb4f77c972434548a4e01bf68c7552b5870a51d740bb5dc11af2c55664",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-astra.json": "e7fa7bc2f94c209e55a7694cb44fb38adec78ee9c1878c5ef24121230ddcf8e8",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-luna.json": "a1bee34b94529e3e1168c0c6cfe723c240adb4ba5c475744eeb68de9eaddaa96",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-sol.json": "dfc58061a353e3572c5e38b1da95b004f5a7b7e38fc92c132b96d5525ae31fa4",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-haiku-4-5.json": "6d0ff260f04deba18fa9ecaf0de5c08ce9ecae47e74ac914ec4a5c083d7dbcf6",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-opus-5-5.json": "6372fe23ea0481a7f885709eea15be4dad258ae5e6e0beb522bc3b14f81533f9",
+  "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-sonnet-5.json": "c480b71823f1b881365ea8bee66eceb0ff42f05736a453028cfd5dc8accef5c2"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (28 Oct)",
+ "agent": "converter (Haiku 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.json",
+   "where": "$.models",
+   "format": "json",
+   "row_key": "model_id",
+   "columns": {
+    "calories.within_20pct": {
+     "says": "score",
+     "term": "within20%",
+     "scale": "fraction",
+     "precision": {
+      "model": "exact"
+     }
+    },
+    "usage.total_cost_usd": {
+     "says": "cost",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "level": "written",
+   "says": "unit",
+   "value": "per 200 dishes",
+   "term": "per-suite",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.json",
+   "where": "$.models[*].n_dishes (200 per entry)"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "level": "written",
+   "says": "cost-basis",
+   "value": "actual API spend per 100 dishes at list prices",
+   "term": "list-estimate",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.md",
+   "where": "Columns paragraph, *Cost* definition",
+   "quote": "*Cost*: actual API spend per 100 dishes at list prices."
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "level": "written",
+   "says": "metric-definition",
+   "value": "share of dishes estimated within 20% of the true value",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.md",
+   "where": "Columns paragraph, *Within ±20%* definition",
+   "quote": "*Within ±20%*: share of dishes estimated within 20% of the true value"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "level": "written",
+   "says": "currency",
+   "value": "USD",
+   "term": "USD",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.json",
+   "where": "$.models[*].usage.total_cost_usd (key name total_cost_usd)"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "level": "written",
+   "says": "headline-metric",
+   "value": "Ranked by mean absolute calorie error (lower is better)",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.md",
+   "where": "Leaderboard heading line",
+   "quote": "Ranked by mean absolute calorie error (lower is better)."
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "level": "written",
+   "says": "note",
+   "value": "prompt version v1 (prompt_hash cb252f13b2dfbd12 in every meta.json)",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-luna.json",
+   "where": "$.prompt_version, $.prompt_hash"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "level": "written",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-claude-fable-5-1.json",
+   "where": "$.display_name"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-claude-fable-5-1.json",
+   "where": "$.model_id",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "level": "written",
+   "says": "route",
+   "value": "anthropic",
+   "term": "maker-api",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-claude-fable-5-1.json",
+   "where": "$.request_config.provider"
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "level": "written",
+   "says": "run-date",
+   "value": "2026-09-25T17:55:39+00:00",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-claude-fable-5-1.json",
+   "where": "$.started_at"
+  },
+  {
+   "id": "F11",
+   "about": null,
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-claude-fable-5-1.json",
+   "where": "$.request_config.params.effort"
+  },
+  {
+   "id": "F12",
+   "about": null,
+   "level": "written",
+   "says": "model-name",
+   "value": "Claude Opus 5.5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-opus-5-5.json",
+   "where": "$.display_name"
+  },
+  {
+   "id": "F13",
+   "about": null,
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-opus-5-5.json",
+   "where": "$.model_id",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F14",
+   "about": null,
+   "level": "written",
+   "says": "route",
+   "value": "anthropic",
+   "term": "maker-api",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-opus-5-5.json",
+   "where": "$.request_config.provider"
+  },
+  {
+   "id": "F15",
+   "about": null,
+   "level": "written",
+   "says": "run-date",
+   "value": "2026-09-25T17:55:47+00:00",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-opus-5-5.json",
+   "where": "$.started_at"
+  },
+  {
+   "id": "F16",
+   "about": null,
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-opus-5-5.json",
+   "where": "$.request_config.params.effort"
+  },
+  {
+   "id": "F17",
+   "about": null,
+   "level": "written",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-sonnet-5.json",
+   "where": "$.display_name"
+  },
+  {
+   "id": "F18",
+   "about": null,
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-sonnet-5.json",
+   "where": "$.model_id",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F19",
+   "about": null,
+   "level": "written",
+   "says": "route",
+   "value": "anthropic",
+   "term": "maker-api",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-sonnet-5.json",
+   "where": "$.request_config.provider"
+  },
+  {
+   "id": "F20",
+   "about": null,
+   "level": "written",
+   "says": "run-date",
+   "value": "2026-09-25T17:55:52+00:00",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-sonnet-5.json",
+   "where": "$.started_at"
+  },
+  {
+   "id": "F21",
+   "about": null,
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-sonnet-5.json",
+   "where": "$.request_config.params.effort"
+  },
+  {
+   "id": "F22",
+   "about": null,
+   "level": "written",
+   "says": "model-name",
+   "value": "GPT-6 Luna",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-luna.json",
+   "where": "$.display_name"
+  },
+  {
+   "id": "F23",
+   "about": null,
+   "level": "written",
+   "says": "model-api-id",
+   "value": "gpt-6-luna",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-luna.json",
+   "where": "$.model_id",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F24",
+   "about": null,
+   "level": "written",
+   "says": "route",
+   "value": "openai",
+   "term": "maker-api",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-luna.json",
+   "where": "$.request_config.provider"
+  },
+  {
+   "id": "F25",
+   "about": null,
+   "level": "written",
+   "says": "run-date",
+   "value": "2026-09-25T18:17:19+00:00",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-luna.json",
+   "where": "$.started_at"
+  },
+  {
+   "id": "F26",
+   "about": null,
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-luna.json",
+   "where": "$.request_config.params.reasoning_effort"
+  },
+  {
+   "id": "F27",
+   "about": null,
+   "level": "written",
+   "says": "model-name",
+   "value": "GPT-6 Sol",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-sol.json",
+   "where": "$.display_name"
+  },
+  {
+   "id": "F28",
+   "about": null,
+   "level": "written",
+   "says": "model-api-id",
+   "value": "gpt-6-sol",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-sol.json",
+   "where": "$.model_id",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F29",
+   "about": null,
+   "level": "written",
+   "says": "route",
+   "value": "openai",
+   "term": "maker-api",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-sol.json",
+   "where": "$.request_config.provider"
+  },
+  {
+   "id": "F30",
+   "about": null,
+   "level": "written",
+   "says": "run-date",
+   "value": "2026-09-25T18:13:07+00:00",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-sol.json",
+   "where": "$.started_at"
+  },
+  {
+   "id": "F31",
+   "about": null,
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-sol.json",
+   "where": "$.request_config.params.reasoning_effort"
+  },
+  {
+   "id": "F32",
+   "about": null,
+   "level": "written",
+   "says": "model-name",
+   "value": "Claude Haiku 4.5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-haiku-4-5.json",
+   "where": "$.display_name"
+  },
+  {
+   "id": "F33",
+   "about": null,
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-haiku-4-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-haiku-4-5.json",
+   "where": "$.model_id",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F34",
+   "about": null,
+   "level": "written",
+   "says": "route",
+   "value": "anthropic",
+   "term": "maker-api",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-haiku-4-5.json",
+   "where": "$.request_config.provider"
+  },
+  {
+   "id": "F35",
+   "about": null,
+   "level": "written",
+   "says": "run-date",
+   "value": "2026-09-25T17:55:56+00:00",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-haiku-4-5.json",
+   "where": "$.started_at"
+  },
+  {
+   "id": "F36",
+   "about": null,
+   "level": "written",
+   "says": "thinking-on",
+   "value": "enabled",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-haiku-4-5.json",
+   "where": "$.request_config.params.thinking.type"
+  },
+  {
+   "id": "F37",
+   "about": null,
+   "level": "written",
+   "says": "thinking-budget",
+   "value": "8000",
+   "term": "8000",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/meta-claude-haiku-4-5.json",
+   "where": "$.request_config.params.thinking.budget_tokens"
+  },
+  {
+   "id": "F38",
+   "about": null,
+   "level": "written",
+   "says": "model-name",
+   "value": "GPT-6 Astra",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-astra.json",
+   "where": "$.display_name"
+  },
+  {
+   "id": "F39",
+   "about": null,
+   "level": "written",
+   "says": "model-api-id",
+   "value": "gpt-6-astra",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-astra.json",
+   "where": "$.model_id",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F40",
+   "about": null,
+   "level": "written",
+   "says": "route",
+   "value": "openai",
+   "term": "maker-api",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-astra.json",
+   "where": "$.request_config.provider"
+  },
+  {
+   "id": "F41",
+   "about": null,
+   "level": "written",
+   "says": "run-date",
+   "value": "2026-09-25T18:06:51+00:00",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-astra.json",
+   "where": "$.started_at"
+  },
+  {
+   "id": "F42",
+   "about": null,
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-meta-gpt-6-astra.json",
+   "where": "$.request_config.params.reasoning_effort"
+  }
+ ]
+}
