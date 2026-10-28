@@ -10454,6 +10454,87 @@
   },
   "lhtb-cli-sci-fig": {
    "label": "LHTB scientific-figure-data-reconstruction, installed-CLI agents (ARA Labs board)"
+  },
+  "algbench-id": {
+   "label": "AlgBench: algorithm ID, Pass@k accuracy"
+  },
+  "algbench-ps": {
+   "label": "AlgBench: algorithm PS, Pass@k accuracy"
+  },
+  "algbench-diff": {
+   "label": "AlgBench: algorithm Diff, Pass@k accuracy"
+  },
+  "algbench-bs": {
+   "label": "AlgBench: algorithm BS, Pass@k accuracy"
+  },
+  "algbench-tdg": {
+   "label": "AlgBench: algorithm TDG, Pass@k accuracy"
+  },
+  "algbench-tug": {
+   "label": "AlgBench: algorithm TUG, Pass@k accuracy"
+  },
+  "algbench-bgc": {
+   "label": "AlgBench: algorithm BGC, Pass@k accuracy"
+  },
+  "algbench-bgm": {
+   "label": "AlgBench: algorithm BGM, Pass@k accuracy"
+  },
+  "algbench-nf": {
+   "label": "AlgBench: algorithm NF, Pass@k accuracy"
+  },
+  "algbench-dt": {
+   "label": "AlgBench: algorithm DT, Pass@k accuracy"
+  },
+  "algbench-ug": {
+   "label": "AlgBench: algorithm UG, Pass@k accuracy"
+  },
+  "algbench-greedy": {
+   "label": "AlgBench: algorithm Greedy, Pass@k accuracy"
+  },
+  "algbench-sssp": {
+   "label": "AlgBench: algorithm SSSP, Pass@k accuracy"
+  },
+  "algbench-mst": {
+   "label": "AlgBench: algorithm MST, Pass@k accuracy"
+  },
+  "algbench-dc": {
+   "label": "AlgBench: algorithm DC, Pass@k accuracy"
+  },
+  "algbench-ldp": {
+   "label": "AlgBench: algorithm LDP, Pass@k accuracy"
+  },
+  "algbench-idp": {
+   "label": "AlgBench: algorithm IDP, Pass@k accuracy"
+  },
+  "algbench-tdp": {
+   "label": "AlgBench: algorithm TDP, Pass@k accuracy"
+  },
+  "algbench-bldp": {
+   "label": "AlgBench: algorithm BLDP, Pass@k accuracy"
+  },
+  "algbench-bdp": {
+   "label": "AlgBench: algorithm BDP, Pass@k accuracy"
+  },
+  "algbench-mssp": {
+   "label": "AlgBench: algorithm MSSP, Pass@k accuracy"
+  },
+  "algbench-lca": {
+   "label": "AlgBench: algorithm LCA, Pass@k accuracy"
+  },
+  "algbench-bo": {
+   "label": "AlgBench: algorithm BO, Pass@k accuracy"
+  },
+  "algbench-recursion": {
+   "label": "AlgBench: algorithm Recursion, Pass@k accuracy"
+  },
+  "algbench-searching": {
+   "label": "AlgBench: algorithm Searching, Pass@k accuracy"
+  },
+  "algbench-as": {
+   "label": "AlgBench: algorithm AS, Pass@k accuracy"
+  },
+  "algbench-idas": {
+   "label": "AlgBench: algorithm IDAS, Pass@k accuracy"
   }
  },
  "setups": {
@@ -32481,9 +32562,26 @@
    "metric": "judge-score-of-10",
    "headline": {
     "metric": "judge-score-of-10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/dakshjain-1616/Claude-Opus-4.7-vs-GPT-5.5-vs-DeepSeek-V4-Pro-Reasoning-Benchmark",
+      "captured": "2026-10-20",
+      "where": "Leaderboard table, rows sorted by rank (Avg)",
+      "quote": "| 🥇 | `anthropic/claude-opus-4.7` | **9.23** | 1.64 | 13 | 0 | 2,793 | 25.9s |",
+      "file": "/work/.salvo14/gt/t3/src/gh/dakshjain-1616_Claude-Opus-4.7-vs-GPT-5.5-vs-DeepSeek-V4-Pro.md",
+      "sha256": "1d99f400234001b2ed1aa8a9322d1b8eb3e408abfb8e501046509cb7718db379"
+     },
+     {
+      "url": "https://github.com/dakshjain-1616/Claude-Opus-4.7-vs-GPT-5.5-vs-DeepSeek-V4-Pro-Reasoning-Benchmark",
+      "captured": "2026-10-20",
+      "where": "Leaderboard table, last row",
+      "quote": "| 🥉 | `deepseek/deepseek-v4-pro` | 7.31 | 3.95 | 13 | 3 | 4,569 | 288.3s |",
+      "file": "/work/.salvo14/gt/t3/src/gh/dakshjain-1616_Claude-Opus-4.7-vs-GPT-5.5-vs-DeepSeek-V4-Pro.md",
+      "sha256": "1d99f400234001b2ed1aa8a9322d1b8eb3e408abfb8e501046509cb7718db379"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -43730,9 +43828,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.09112",
+      "captured": "2026-10-20",
+      "where": "Table 6 caption (designates accuracy in %)",
+      "quote": "Table 6: Capability leaderboard (accuracy in %, combined",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2610.09112.txt",
+      "sha256": "6b4d9729824afd5af9d2cced56a5ff0d508b0f577be353fb7ed0c7aede07870a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -43759,9 +43866,26 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2606.12821",
+      "captured": "2026-10-20",
+      "where": "Table 1 (rows in accuracy order)",
+      "quote": "Claude Sonnet 4 —60.8%±0.8% $11.84 0.127",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2606.12821.txt",
+      "sha256": "0b6618aec97dad9f385465f30b27418306db2fb65a2a6379e0948f25f9305a17"
+     },
+     {
+      "url": "https://arxiv.org/abs/2606.12821",
+      "captured": "2026-10-20",
+      "where": "Table 1 (rows in accuracy order)",
+      "quote": "Gemma-3-27B 27B15.8%±1.6% $5.81 0.062",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2606.12821.txt",
+      "sha256": "0b6618aec97dad9f385465f30b27418306db2fb65a2a6379e0948f25f9305a17"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -142048,6 +142172,978 @@
    "legacy_groups": [],
    "label": "token-marxing heavy autoresearch task: best val_bpb per run (lower is better), printed in results/REPORT.md",
    "note": "headline pending: the source prints val_bpb per arm and per run but designates no headline metric"
+  },
+  "algbench-id": {
+   "family": "algbench-id",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm ID",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column ID",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm ID (Euclidean-structured (Table 2/4, structure-oriented)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-ps": {
+   "family": "algbench-ps",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm PS",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column PS",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm PS (Euclidean-structured (Table 2/4, structure-oriented)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-diff": {
+   "family": "algbench-diff",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm Diff",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column Diff",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm Diff (Euclidean-structured (Table 2/4, structure-oriented)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-bs": {
+   "family": "algbench-bs",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm BS",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column BS",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm BS (Euclidean-structured (Table 2/4, structure-oriented)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-tdg": {
+   "family": "algbench-tdg",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm TDG",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column TDG",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm TDG (non-Euclidean-structured (Table 2/4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-tug": {
+   "family": "algbench-tug",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm TUG",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column TUG",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm TUG (non-Euclidean-structured (Table 2/4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-bgc": {
+   "family": "algbench-bgc",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm BGC",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column BGC",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm BGC (non-Euclidean-structured (Table 2/4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-bgm": {
+   "family": "algbench-bgm",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm BGM",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column BGM",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm BGM (non-Euclidean-structured (Table 2/4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-nf": {
+   "family": "algbench-nf",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm NF",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column NF",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm NF (non-Euclidean-structured (Table 2/4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-dt": {
+   "family": "algbench-dt",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm DT",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column DT",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm DT (non-Euclidean-structured (Table 2/4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-ug": {
+   "family": "algbench-ug",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm UG",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column UG",
+      "quote": "ID PS Diff BS Avg. TDG TUG BGC BGM NF DT UG Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm UG (non-Euclidean-structured (Table 2/4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-greedy": {
+   "family": "algbench-greedy",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm Greedy",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column Greedy",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm Greedy (local-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-sssp": {
+   "family": "algbench-sssp",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm SSSP",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column SSSP",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm SSSP (local-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-mst": {
+   "family": "algbench-mst",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm MST",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column MST",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm MST (local-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-dc": {
+   "family": "algbench-dc",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm DC",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column DC",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm DC (local-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-ldp": {
+   "family": "algbench-ldp",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm LDP",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column LDP",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm LDP (global-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-idp": {
+   "family": "algbench-idp",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm IDP",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column IDP",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm IDP (global-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-tdp": {
+   "family": "algbench-tdp",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm TDP",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column TDP",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm TDP (global-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-bldp": {
+   "family": "algbench-bldp",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm BLDP",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column BLDP",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm BLDP (global-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-bdp": {
+   "family": "algbench-bdp",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm BDP",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column BDP",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm BDP (global-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-mssp": {
+   "family": "algbench-mssp",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm MSSP",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column MSSP",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm MSSP (global-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-lca": {
+   "family": "algbench-lca",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm LCA",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 4: one score column per model, column LCA",
+      "quote": "Greedy SSSP MST DC Avg. LDP IDP TDP BLDP BDP MSSP LCA Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm LCA (global-optimized (Table 4)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-bo": {
+   "family": "algbench-bo",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm BO",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 5: one score column per model, column BO",
+      "quote": "BO Recursion Searching Avg. AS IDAS Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm BO (non-optimized (Table 5)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-recursion": {
+   "family": "algbench-recursion",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm Recursion",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 5: one score column per model, column Recursion",
+      "quote": "BO Recursion Searching Avg. AS IDAS Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm Recursion (non-optimized (Table 5)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-searching": {
+   "family": "algbench-searching",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm Searching",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 5: one score column per model, column Searching",
+      "quote": "BO Recursion Searching Avg. AS IDAS Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm Searching (non-optimized (Table 5)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-as": {
+   "family": "algbench-as",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm AS",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 5: one score column per model, column AS",
+      "quote": "BO Recursion Searching Avg. AS IDAS Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm AS (heuristic-optimized (Table 5)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
+  },
+  "algbench-idas": {
+   "family": "algbench-idas",
+   "benchmark": "AlgBench: algorithmic reasoning, algorithm IDAS",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy",
+   "headline": {
+    "metric": "accuracy",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2601.04996",
+      "captured": "2026-10-20",
+      "where": "Table 5: one score column per model, column IDAS",
+      "quote": "BO Recursion Searching Avg. AS IDAS Avg.",
+      "file": "/work/.salvo14/gt/t3/src/s2/p/2601.04996.txt",
+      "sha256": "2378656c866758add2c04cf78124dfed535df935c4ff5170ea4f05ce3193da41"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AlgBench: algorithm IDAS (heuristic-optimized (Table 5)), Pass@k accuracy",
+   "note": "one setup per algorithm (components of the 27-algorithm mean, which is ours and not converted); Pass@k accuracy printed as a fraction; k not stated in the paper"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
