@@ -1393,6 +1393,28 @@ def ext_thinking_on_with_level_on_levels_only_model():
     eq((r.cfg(m1), "level-from-default" in r[m1]["flags"]), ("high", False), "the stated level")
 
 
+@test
+def ext_cents_cjk_ladder_nothink_spellings():
+    # '51¢' / '10.017 cents' are US cents (/100); 最大值/最低 name the top/bottom level; 'no reasoning' and
+    # 'Reasoning:disabled' are thinking off (28 Oct)
+    import build as B
+    eq(B.parse_number("51¢"), (B.Decimal("0.51"), B.Decimal("0.01")), "cents sign")
+    eq(B.parse_number("10.017 cents")[0], B.Decimal("0.10017"), "cents word")
+    eq(B.parse_number("$51")[0], B.Decimal("51"), "dollars unchanged")
+    cf = {"low": 1, "medium": 1, "high": 1}
+    eq((B.label_to_ladder("最大值", cf)[0], B.label_to_ladder("最低", cf)[0], B.label_to_ladder("中", cf)[0]),
+       ("high", "low", None), "CJK ladder")
+    sc = base()
+    sc.model("mn", configs=("nothink", "low", "high"))
+    s = sc.source("p")
+    m1 = sc.m(s, model="mn", effort=[("effort-label", "no reasoning")], score="50%")
+    m2 = sc.m(s, model="mn", effort=[("effort-label", "Reasoning:disabled")], score="40%")
+    m3 = sc.m(s, model="mn", effort=[("effort-label", "reasoning")], score="45%")
+    sc.m(s, model="ma", effort=[LOW], score="30%")
+    r = sc.run()
+    eq((r.cfg(m1), r.cfg(m2), r.cfg(m3) == "nothink"), ("nothink", "nothink", False), "nothink spellings")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

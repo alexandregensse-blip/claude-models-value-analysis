@@ -151,6 +151,9 @@ def parse_number(text):
     t = str(text).strip()
     t = re.sub(r"^(US\$|USD|CNY|RMB|JPY|\$|¥|€|£|￥)\s*", "", t)
     t = re.sub(r"\s*(USD|CNY|RMB|JPY|yuan|yen|円|元)$", "", t)
+    cents = re.search(r"\s*(¢|cents?)$", t)                       # '51¢', '10.017 cents' (US cents, 28 Oct): /100
+    if cents:
+        t = t[:cents.start()]
     t = t.replace(",", "").replace(" ", "").replace(" ", "").replace(" ", "")
     if t.endswith("%"):
         t = t[:-1]
@@ -164,6 +167,8 @@ def parse_number(text):
     decs = len(m.group(2) or m.group(3) or "")
     exp = int(m.group(4) or 0)
     mult = {"k": 3, "K": 3, "M": 6, "B": 9, "bn": 9}.get(m.group(5), 0)
+    if cents:
+        mult -= 2
     return d.scaleb(exp + mult), Decimal(1).scaleb(exp + mult - decs)
 
 
@@ -1102,13 +1107,13 @@ def label_to_ladder(value, configs):
     """'lowest effort setting' → the lowest level when the model's configurations make it unique."""
     t = (value or "").casefold()
     lv = [c for c in LEVELS if c in configs]
-    if re.search(r"\b(lowest|least|minimum)\b", t):
+    if re.search(r"\b(lowest|least|minimum)\b|最低|最小", t):       # CJK 最低/最小 (lowest), 最大/最高 (highest): 28 Oct
         if not lv:
             return None, "no level in the model's configurations"
         if "nothink" in configs:
             return None, "ambiguous: thinking off or the lowest level"
         return lv[0], ""
-    if re.search(r"\b(highest|maximum|most)\b", t):
+    if re.search(r"\b(highest|maximum|most)\b|最大|最高", t):
         return (lv[-1], "") if lv else (None, "no level in the model's configurations")
     return None, "label names no configuration"
 

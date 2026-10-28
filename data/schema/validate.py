@@ -1048,7 +1048,12 @@ def table_rows(table, path, file=None, cache={}):
     key = (stamp(p), table["id"], table["row_key"])
     if key not in cache:
         if fmt == "json":
-            cache[key] = json_rows(table, p)
+            try:                                         # a capture in another format (HTML) is not readable as the
+                cache[key] = json_rows(table, p)         # table: None, as for an unknown format (28 Oct)
+            except (ValueError, UnicodeDecodeError):
+                if file is None:
+                    raise
+                cache[key] = None
         else:
             with open(p, encoding="utf-8", newline="") as f:
                 rows = list(csv.DictReader(f))

@@ -2367,7 +2367,9 @@
     "'effort':'none'",
     "(thinking=False)",
     "Non-Think",
-    "none (label)"
+    "none (label)",
+    "no reasoning",
+    "Reasoning:disabled"
    ],
    "x-terms": {
     "reasoning_effort: none": {
@@ -2480,6 +2482,18 @@
      "regex": "^\\s*none\\s*$",
      "rows": 0,
      "note": "a reasoning-effort legend or column whose value is 'none' (OpenAI charts: reasoning effort none = no reasoning; coordinator 26 Oct)"
+    },
+    "no reasoning": {
+     "kind": "label",
+     "regex": "\\bno[ -]reasoning\\b",
+     "rows": 0,
+     "note": "a row label 'GPT 5.4 (no reasoning)' (arxiv-2604.18934; coordinator 28 Oct)"
+    },
+    "Reasoning:disabled": {
+     "kind": "label",
+     "regex": "\\breasoning\\s*[:=]\\s*disabled\\b",
+     "rows": 0,
+     "note": "a row label 'Claude Sonnet-4.5 (Reasoning:disabled)' (arxiv-2601.13206; coordinator 28 Oct)"
     }
    }
   },
