@@ -10424,6 +10424,9 @@
   },
   "attractorbench-geminicli": {
    "label": "AttractorBench v2.0.0 NLSpec (T1/T2/T3+judge), gemini-cli harness, best run per model"
+  },
+  "secbenchpro-targets": {
+   "label": "SEC-bench Pro, per target (Table II of arXiv 2605.26548)"
   }
  },
  "setups": {
@@ -79907,9 +79910,18 @@
    "metric": "strict-pass@1%",
    "headline": {
     "metric": "strict-pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.02642",
+      "captured": "2026-10-28",
+      "where": "Section 5.1: the paper ranks its configurations by Strict-Pass@1 and names the best one",
+      "quote": "the best-performing configuration, Codex GPT-5.5 XHigh, solves 24/50 tasks (48%), followed by Codex GPT-5.5 Medium at 21/50 (42%)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.02642/evidence/arxiv-2608.02642.txt",
+      "sha256": "94e8d8953a2c178b71e7cf431c5b02cf712d90866e4b74b7ff38e07564cb8ac6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100279,9 +100291,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.00280",
+      "captured": "2026-10-28",
+      "where": "Section 4.2 and Figure 4: the paper reports one score per model, the pass rate",
+      "quote": "Figure 4 shows the average performance (pass rate) on different task types.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.00280/evidence/arxiv-2608.00280.txt",
+      "sha256": "0cd0f954ca0eedba2149adf7c129cef26867b7f53d14405ebe2aa091b3407450"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -110775,9 +110796,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.26548",
+      "captured": "2026-10-28",
+      "where": "Section III-E, Metrics: the paper designates per-instance success as its headline metric",
+      "quote": "image grading as the headline metric.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.26548/evidence/arxiv-2605.26548.txt",
+      "sha256": "773cad3066129f93d7ad800710d0bf92b364d26cf002ce92beb312ed1c86e754"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -140603,6 +140633,546 @@
    "legacy_groups": [],
    "label": "AttractorBench v2.0.0 NLSpec (T1/T2/T3+judge), gemini-cli harness, best run per model",
    "note": "new setup (28 Oct): the LEADERBOARD row of gemini-cli (not in raw-data.csv); headline ranked-by score"
+  },
+  "effmine-T1a": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T1a (T1-mechanical; matrix row of bench/RESULTS.md §2)",
+   "subset": "T1a",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T1a",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T1b": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T1b (T1-mechanical; matrix row of bench/RESULTS.md §2)",
+   "subset": "T1b",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T1b",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T1c": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T1c (T1-mechanical; matrix row of bench/RESULTS.md §2)",
+   "subset": "T1c",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T1c",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T2a": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T2a (T2-simple-transform; matrix row of bench/RESULTS.md §2)",
+   "subset": "T2a",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T2a",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T2b": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T2b (T2-simple-transform; matrix row of bench/RESULTS.md §2)",
+   "subset": "T2b",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T2b",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T2c": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T2c (T2-simple-transform; matrix row of bench/RESULTS.md §2)",
+   "subset": "T2c",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T2c",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T3a": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T3a (T3-moderate-reasoning; matrix row of bench/RESULTS.md §2)",
+   "subset": "T3a",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T3a",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T3b": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T3b (T3-moderate-reasoning; matrix row of bench/RESULTS.md §2)",
+   "subset": "T3b",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T3b",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T3c": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T3c (T3-moderate-reasoning; matrix row of bench/RESULTS.md §2)",
+   "subset": "T3c",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T3c",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T4a": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T4a (T4-hard-reasoning; matrix row of bench/RESULTS.md §2)",
+   "subset": "T4a",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T4a",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T4b": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T4b (T4-hard-reasoning; matrix row of bench/RESULTS.md §2)",
+   "subset": "T4b",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T4b",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "effmine-T4c": {
+   "family": "effmine",
+   "benchmark": "effortmining pilot, task T4c (T4-hard-reasoning; matrix row of bench/RESULTS.md §2)",
+   "subset": "T4c",
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/nagisanzenin/effortmining/blob/main/bench/RESULTS.md",
+      "captured": "2026-10-28",
+      "where": "bench/RESULTS.md §2 (matrix: pass rate and median output tokens per task and tier; the only score printed)",
+      "quote": "pass rate and median output tokens per (task, tier)",
+      "file": "/work/.salvo14/mig/convert-github-effortmining/evidence/RESULTS.md",
+      "sha256": "29609618e306d4648c8ab74de351ca8231c16c6bc88479f317f91ed891752145"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "easy",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "effortmining pilot, task T4c",
+   "note": "per-task matrix row (3 reps per cell: the source prints n=9 per class and tier, 3 tasks per class)"
+  },
+  "secbenchpro-v8": {
+   "family": "secbenchpro-targets",
+   "benchmark": "SEC-bench Pro, V8 target: per-instance success (Table II)",
+   "subset": "V8",
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.26548",
+      "captured": "2026-10-28",
+      "where": "Section III-E, Metrics (applies to the V8 rows of Table II)",
+      "quote": "image grading as the headline metric.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.26548/evidence/arxiv-2605.26548.txt",
+      "sha256": "773cad3066129f93d7ad800710d0bf92b364d26cf002ce92beb312ed1c86e754"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SEC-bench Pro, V8 target (103 instances): per-instance success",
+   "note": "per-target rows of Table II (arXiv 2605.26548 v2); headline: designated (per-instance success); the overall rate is not converted here (it is a sum over the three targets)"
+  },
+  "secbenchpro-spidermonkey": {
+   "family": "secbenchpro-targets",
+   "benchmark": "SEC-bench Pro, SpiderMonkey target: per-instance success (Table II)",
+   "subset": "SpiderMonkey",
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.26548",
+      "captured": "2026-10-28",
+      "where": "Section III-E, Metrics (applies to the SpiderMonkey rows of Table II)",
+      "quote": "image grading as the headline metric.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.26548/evidence/arxiv-2605.26548.txt",
+      "sha256": "773cad3066129f93d7ad800710d0bf92b364d26cf002ce92beb312ed1c86e754"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SEC-bench Pro, SpiderMonkey target (104 instances): per-instance success",
+   "note": "per-target rows of Table II (arXiv 2605.26548 v2); headline: designated (per-instance success); the overall rate is not converted here (it is a sum over the three targets)"
+  },
+  "secbenchpro-linux": {
+   "family": "secbenchpro-targets",
+   "benchmark": "SEC-bench Pro, Linux target: per-instance success (Table II)",
+   "subset": "Linux",
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.26548",
+      "captured": "2026-10-28",
+      "where": "Section III-E, Metrics (applies to the Linux rows of Table II)",
+      "quote": "image grading as the headline metric.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.26548/evidence/arxiv-2605.26548.txt",
+      "sha256": "773cad3066129f93d7ad800710d0bf92b364d26cf002ce92beb312ed1c86e754"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SEC-bench Pro, Linux target (137 instances): per-instance success",
+   "note": "per-target rows of Table II (arXiv 2605.26548 v2); headline: designated (per-instance success); the overall rate is not converted here (it is a sum over the three targets)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
