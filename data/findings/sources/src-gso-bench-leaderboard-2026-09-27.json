@@ -1,0 +1,933 @@
+{
+ "id": "src-gso-bench-leaderboard-2026-09-27",
+ "publisher": "gso-bench",
+ "urls": [
+  "https://gso-bench.github.io/",
+  "https://gso-bench.github.io/assets/leaderboard.json"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://gso-bench.github.io/assets/leaderboard.json",
+   "captured": "2026-10-28T08:14:11Z",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "note": "assets/leaderboard.json (metadata.last_updated 2026-09-27) saved by salvo gt/t6 (src/gso/leaderboard.json)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://gso-bench.github.io/assets/leaderboard.json",
+   "captured": "2026-10-28T08:14:11Z",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard-s22.json",
+   "note": "the same file saved by salvo s22/k2 (src/gso_leaderboard.json), byte-identical to G1"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json": "ea360f34a526d772ea3877d2b80ba4f4eebefc484e82b0abdd27ff9fe70b3b55",
+  "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard-s22.json": "ea360f34a526d772ea3877d2b80ba4f4eebefc484e82b0abdd27ff9fe70b3b55",
+  "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.html": "0f67d495059eb63e8941270d0686425e502416c37f9bd4c864639a1e7c20c156",
+  "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.txt": "67edc4302dc419276e7d9878ccf720a27f0324266fb84c5e66ad83c9649af002",
+  "/work/.salvo14/mig/convert-gso-bench/evidence/script.js": "74edaf8b1593273e41f65a4af9e3c937824ca04bd3c6d555dcf6cca724916763"
+ },
+ "harvested_at": "2026-10-28T08:14:11Z",
+ "published": {
+  "value": "2026-09-27",
+  "where": "leaderboard.json metadata.last_updated",
+  "quote": "2026-09-27: Improved elicitation",
+  "file": "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.txt",
+   "from": "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the leaderboard page, one block per line"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.txt",
+   "where": "page, Scaffold note",
+   "quote": "All models are run with the OpenHands scaffold unless otherwise specified.",
+   "term": "openhands"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "metric-definition",
+   "value": "Opt@1: Estimator of fraction of tasks where a single attempt achieves ≥95% human speedup and passes correctness tests.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.txt",
+   "where": "page, Opt@1 note under the leaderboard",
+   "quote": "Opt@1: Estimator of fraction of tasks where a single attempt achieves ≥95% human speedup and passes correctness tests."
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "note",
+   "value": "The \"Hack-Adjusted\" column shows scores after this penalty.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.txt",
+   "where": "page, changelog 2025-11-03",
+   "quote": "The \"Hack-Adjusted\" column shows scores after this penalty."
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "note",
+   "value": "102 tasks · 10 codebases · 5 languages",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/gso_index.txt",
+   "where": "page header",
+   "quote": "102 tasks · 10 codebases · 5 languages"
+  },
+  {
+   "id": "F5",
+   "about": "Claude Opus 4.8|xhigh|0",
+   "says": "score",
+   "value": "47.06",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[0].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F6",
+   "about": "Claude Opus 4.8|xhigh|0",
+   "says": "model-name",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[0].name"
+  },
+  {
+   "id": "F7",
+   "about": "Claude Opus 4.8|xhigh|0",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[0].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F8",
+   "about": "Claude Opus 4.8|xhigh|0",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[0].reasoning_effort"
+  },
+  {
+   "id": "F9",
+   "about": "Claude Sonnet 5|xhigh|1",
+   "says": "score",
+   "value": "37.25",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[1].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Claude Sonnet 5|xhigh|1",
+   "says": "model-name",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[1].name"
+  },
+  {
+   "id": "F11",
+   "about": "Claude Sonnet 5|xhigh|1",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[1].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F12",
+   "about": "Claude Sonnet 5|xhigh|1",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[1].reasoning_effort"
+  },
+  {
+   "id": "F13",
+   "about": "Claude Opus 4.7|high|2",
+   "says": "score",
+   "value": "44.12",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[2].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F14",
+   "about": "Claude Opus 4.7|high|2",
+   "says": "model-name",
+   "value": "Claude Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[2].name"
+  },
+  {
+   "id": "F15",
+   "about": "Claude Opus 4.7|high|2",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[2].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F16",
+   "about": "Claude Opus 4.7|high|2",
+   "says": "effort-setting",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[2].reasoning_effort"
+  },
+  {
+   "id": "F17",
+   "about": "Claude Opus 4.6|high|3",
+   "says": "score",
+   "value": "41.18",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[3].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F18",
+   "about": "Claude Opus 4.6|high|3",
+   "says": "model-name",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[3].name"
+  },
+  {
+   "id": "F19",
+   "about": "Claude Opus 4.6|high|3",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[3].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F20",
+   "about": "Claude Opus 4.6|high|3",
+   "says": "effort-setting",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[3].reasoning_effort"
+  },
+  {
+   "id": "F21",
+   "about": "GPT 5.5|xhigh|4",
+   "says": "score",
+   "value": "40.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[4].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F22",
+   "about": "GPT 5.5|xhigh|4",
+   "says": "model-name",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[4].name"
+  },
+  {
+   "id": "F23",
+   "about": "GPT 5.5|xhigh|4",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[4].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F24",
+   "about": "GPT 5.5|xhigh|4",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[4].reasoning_effort"
+  },
+  {
+   "id": "F25",
+   "about": "GPT 5.4|xhigh|5",
+   "says": "score",
+   "value": "31.37",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[5].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F26",
+   "about": "GPT 5.4|xhigh|5",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[5].name"
+  },
+  {
+   "id": "F27",
+   "about": "GPT 5.4|xhigh|5",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[5].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F28",
+   "about": "GPT 5.4|xhigh|5",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[5].reasoning_effort"
+  },
+  {
+   "id": "F29",
+   "about": "GPT 5.4|high|6",
+   "says": "score",
+   "value": "25.49",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[6].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F30",
+   "about": "GPT 5.4|high|6",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[6].name"
+  },
+  {
+   "id": "F31",
+   "about": "GPT 5.4|high|6",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[6].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F32",
+   "about": "GPT 5.4|high|6",
+   "says": "effort-setting",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[6].reasoning_effort"
+  },
+  {
+   "id": "F33",
+   "about": "Gemini 3.1 Pro|None|7",
+   "says": "score",
+   "value": "22.55",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[7].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F34",
+   "about": "Gemini 3.1 Pro|None|7",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[7].name"
+  },
+  {
+   "id": "F35",
+   "about": "Gemini 3.1 Pro|None|7",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[7].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F36",
+   "about": "Claude Opus 4.6|None|8",
+   "says": "score",
+   "value": "33.33",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[8].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "about": "Claude Opus 4.6|None|8",
+   "says": "model-name",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[8].name"
+  },
+  {
+   "id": "F38",
+   "about": "Claude Opus 4.6|None|8",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[8].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F39",
+   "about": "Gemini 3 Flash|None|9",
+   "says": "score",
+   "value": "9.8",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[9].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "about": "Gemini 3 Flash|None|9",
+   "says": "model-name",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[9].name"
+  },
+  {
+   "id": "F41",
+   "about": "Gemini 3 Flash|None|9",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[9].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F42",
+   "about": "GPT 5.2|high|10",
+   "says": "score",
+   "value": "27.45",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[10].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "about": "GPT 5.2|high|10",
+   "says": "model-name",
+   "value": "GPT 5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[10].name"
+  },
+  {
+   "id": "F44",
+   "about": "GPT 5.2|high|10",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[10].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F45",
+   "about": "GPT 5.2|high|10",
+   "says": "effort-setting",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[10].reasoning_effort"
+  },
+  {
+   "id": "F46",
+   "about": "GPT 5.1|high|11",
+   "says": "score",
+   "value": "13.73",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[11].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "about": "GPT 5.1|high|11",
+   "says": "model-name",
+   "value": "GPT 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[11].name"
+  },
+  {
+   "id": "F48",
+   "about": "GPT 5.1|high|11",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[11].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F49",
+   "about": "GPT 5.1|high|11",
+   "says": "effort-setting",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[11].reasoning_effort"
+  },
+  {
+   "id": "F50",
+   "about": "Claude Opus 4.5|None|12",
+   "says": "score",
+   "value": "26.47",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[12].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "about": "Claude Opus 4.5|None|12",
+   "says": "model-name",
+   "value": "Claude Opus 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[12].name"
+  },
+  {
+   "id": "F52",
+   "about": "Claude Opus 4.5|None|12",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[12].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F53",
+   "about": "Gemini 3 Pro|None|13",
+   "says": "score",
+   "value": "18.63",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[13].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F54",
+   "about": "Gemini 3 Pro|None|13",
+   "says": "model-name",
+   "value": "Gemini 3 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[13].name"
+  },
+  {
+   "id": "F55",
+   "about": "Gemini 3 Pro|None|13",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[13].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F56",
+   "about": "Claude Sonnet 4.5|None|15",
+   "says": "score",
+   "value": "14.71",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[15].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F57",
+   "about": "Claude Sonnet 4.5|None|15",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[15].name"
+  },
+  {
+   "id": "F58",
+   "about": "Claude Sonnet 4.5|None|15",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[15].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F59",
+   "about": "Claude Fable 5.1|xhigh|30",
+   "says": "score",
+   "value": "88.24",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[30].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F60",
+   "about": "Claude Fable 5.1|xhigh|30",
+   "says": "model-name",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[30].name"
+  },
+  {
+   "id": "F61",
+   "about": "Claude Fable 5.1|xhigh|30",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[30].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F62",
+   "about": "Claude Fable 5.1|xhigh|30",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[30].reasoning_effort"
+  },
+  {
+   "id": "F63",
+   "about": "GPT-6 Astra|xhigh|31",
+   "says": "score",
+   "value": "79.41",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[31].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F64",
+   "about": "GPT-6 Astra|xhigh|31",
+   "says": "model-name",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[31].name"
+  },
+  {
+   "id": "F65",
+   "about": "GPT-6 Astra|xhigh|31",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[31].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F66",
+   "about": "GPT-6 Astra|xhigh|31",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[31].reasoning_effort"
+  },
+  {
+   "id": "F67",
+   "about": "Claude Fable 5|xhigh|32",
+   "says": "score",
+   "value": "78.43",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[32].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F68",
+   "about": "Claude Fable 5|xhigh|32",
+   "says": "model-name",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[32].name"
+  },
+  {
+   "id": "F69",
+   "about": "Claude Fable 5|xhigh|32",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[32].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F70",
+   "about": "Claude Fable 5|xhigh|32",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[32].reasoning_effort"
+  },
+  {
+   "id": "F71",
+   "about": "GPT-5.6 Sol|xhigh|33",
+   "says": "score",
+   "value": "76.47",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[33].score",
+   "term": "opt@1%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F72",
+   "about": "GPT-5.6 Sol|xhigh|33",
+   "says": "model-name",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[33].name"
+  },
+  {
+   "id": "F73",
+   "about": "GPT-5.6 Sol|xhigh|33",
+   "says": "harness",
+   "value": "OpenHands",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[33].scaffold",
+   "term": "openhands"
+  },
+  {
+   "id": "F74",
+   "about": "GPT-5.6 Sol|xhigh|33",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-gso-bench/evidence/leaderboard.json",
+   "where": "$.models[33].reasoning_effort"
+  }
+ ]
+}
