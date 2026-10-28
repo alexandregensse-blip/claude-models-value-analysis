@@ -1,0 +1,158 @@
+{
+ "id": "src-arxiv-2610.02710-swr-v1-2026-10-02",
+ "publisher": "arxiv-2610.02710",
+ "urls": [
+  "https://arxiv.org/abs/2610.02710",
+  "https://arxiv.org/pdf/2610.02710v1",
+  "https://arxiv.org/html/2610.02710v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2610.02710v1",
+   "captured": "2026-10-28T00:00:00Z",
+   "note": "HTML version (html-v1.html, text in html-v1.txt) and PDF (paper-v1.pdf) fetched by the converter on 28 Oct 2026"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.02710",
+   "captured": "2026-10-20T00:00:00Z",
+   "note": "abstract page saved on 20 Oct 2026 (abs_2610.02710.html); the abstract carries no table"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/abs_2610.02710.html": "9a5da21f76c754bfe4705e07cc1772597636fe62ed950c34c2e79919949d985c",
+  "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.html": "03b16d5401e01e5e5999320c3402572a17f329a83c80c9f1d7e71b0a2df9fcf3",
+  "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt": "731ac74ba2093f688d230481d700c5208274358c131529ed22d06623f405db08",
+  "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/paper-v1.pdf": "084f823b7b54e3f9c37445170dca7b0d5a8f919d2dcd50fdd178bf57f5c0a78b",
+  "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/table10.csv": "74da33585524f7005fc2db7e3e7a1971c4ab902a27eaac8b6a34d2e593e0a51f"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": {
+  "value": "2026-10-02",
+  "where": "arXiv abstract page: submission date (v1)",
+  "quote": "Submitted on 2 Oct 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/abs_2610.02710.html"
+ },
+ "salvo": "salvo14/mig C2 wave (28 Oct)",
+ "agent": "converter (Haiku 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.html",
+   "tool": "HTML text extraction by the converter (tags stripped; table rows on lines); Table 10 transcribed to table10.csv from the same HTML and checked cell by cell"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/table10.csv",
+   "where": "Table 10 (SWR100 per-model results): header row Model, Records, Scored, Pass, Turns, Tokens (M)",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Model": "model-name",
+    "Pass": {
+     "says": "score",
+     "term": "pass-of-100",
+     "scale": "raw"
+    }
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "strict hidden success",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Section 4.1 (Experimental Setup), evaluation paragraph",
+   "quote": "The primary metric is the strict hidden success defined in Section 3.3, which requires a valid program, complete agreement on the hidden inputs, and satisfaction of the anti-shortcut checks."
+  },
+  {
+   "id": "F2",
+   "says": "headline-metric",
+   "about": null,
+   "value": "strict hidden success",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Section 4.1 (Experimental Setup), evaluation paragraph: the primary metric",
+   "quote": "The primary metric is the strict hidden success defined in Section 3.3, which requires a valid program, complete agreement on the hidden inputs, and satisfaction of the anti-shortcut checks."
+  },
+  {
+   "id": "F3",
+   "says": "items",
+   "about": null,
+   "value": "100 scheduled tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Table 10 caption",
+   "quote": "Pass@1 uses all 100 scheduled tasks for each model."
+  },
+  {
+   "id": "F4",
+   "says": "items",
+   "about": null,
+   "value": "100 SWR100 tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Section 4.4 (Agent Performance), eight-model comparison paragraph",
+   "quote": "Eight API-served models are evaluated on the same 100 SWR100 tasks under one interaction budget."
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "temperature 0.2, top-pp 0.95",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Appendix, SFT implementation paragraph (beginning 'We initialize Qwen3.8-27B'), last sentence",
+   "quote": "The SWR100 API runs use temperature 0.2, top-pp 0.95, at most 8,192 output tokens per call, at most 500 agent turns, and a three-hour task limit."
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "ten for GPT-5.6 Sol",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Appendix H (SWR100 Interaction and Statistical Diagnostics), paragraph after Table 10",
+   "quote": "A few runs have an execution record and no final score, ten for GPT-5.6 Sol and one each for Grok 4.6 and DeepSeek-V4-Pro."
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "remain in the Pass@1 denominator",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Appendix H, paragraph after Table 10",
+   "quote": "They remain in the Pass@1 denominator, so an absent score cannot raise the reported rate."
+  },
+  {
+   "id": "F8",
+   "says": "items",
+   "about": null,
+   "value": "Eight API-served models",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.02710/evidence/html-v1.txt",
+   "where": "Section 4.1 (Experimental Setup), evaluation paragraph",
+   "quote": "Eight API-served models are evaluated separately on SWR100, with at most 500 turns and three hours per task."
+  }
+ ]
+}

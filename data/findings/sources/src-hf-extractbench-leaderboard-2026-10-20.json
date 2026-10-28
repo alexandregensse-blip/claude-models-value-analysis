@@ -1,0 +1,754 @@
+{
+ "id": "src-hf-extractbench-leaderboard-2026-10-20",
+ "publisher": "hf-extractbench",
+ "urls": [
+  "https://huggingface.co/api/datasets/llamaindex/ExtractBench/leaderboard",
+  "https://huggingface.co/datasets/llamaindex/ExtractBench",
+  "https://huggingface.co/datasets/llamaindex/ExtractBench/raw/main/README.md"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://huggingface.co/api/datasets/llamaindex/ExtractBench/leaderboard",
+   "captured": "2026-10-20T00:00:00Z",
+   "note": "leaderboard JSON saved on 20 Oct 2026 (leaderboard-2026-10-20.json)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://huggingface.co/api/datasets/llamaindex/ExtractBench/leaderboard",
+   "captured": "2026-10-28T00:00:00Z",
+   "note": "leaderboard JSON and README fetched by the converter on 28 Oct 2026; the eleven values and modelIds equal those of G1 (the bytes differ)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json": "198f3f0e20bff2fa89e40975f03c56ca4dffae9f479c6f019c083eb5000d5897",
+  "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-fresh.json": "d45839f8464a184ddebd6bd295ac2f605147adee9eb7334d6dcbffbe3d96c1af",
+  "/work/.salvo14/mig/convert-hf-extractbench/evidence/readme-fresh.md": "201d67dd1d83332a169ae7395c38ce17b5b9150747f4aac1f270a941281a5000"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (28 Oct)",
+ "agent": "converter (Haiku 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "scored with unified value F1 on every document",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/readme-fresh.md",
+   "where": "README (fresh copy, 28 Oct 2026), Evaluation section, paragraph 1",
+   "quote": "scored with unified value F1 on every document"
+  },
+  {
+   "id": "F2",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Value F1 in [0, 1]",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/readme-fresh.md",
+   "where": "README, section on the reward (line 297)",
+   "quote": "The reward is Value F1 in [0, 1]"
+  },
+  {
+   "id": "F3",
+   "says": "score",
+   "about": "FINAL-Bench/Darwin-180B-RSI-R3",
+   "value": "90.29",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 1 (value field)",
+   "quote": "\"value\":90.29,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F4",
+   "says": "model-api-id",
+   "about": "FINAL-Bench/Darwin-180B-RSI-R3",
+   "value": "FINAL-Bench/Darwin-180B-RSI-R3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 1 (modelId field)",
+   "quote": "\"modelId\":\"FINAL-Bench/Darwin-180B-RSI-R3\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F5",
+   "says": "harness",
+   "about": "FINAL-Bench/Darwin-180B-RSI-R3",
+   "value": "Pipeline name: darwin_180b_rsi_r3_bf16_vllm_extract_oneshot_structured_output_file_nothink",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 1 (notes: pipeline name)",
+   "quote": "Pipeline name: darwin_180b_rsi_r3_bf16_vllm_extract_oneshot_structured_output_file_nothink"
+  },
+  {
+   "id": "F6",
+   "says": "route",
+   "about": "FINAL-Bench/Darwin-180B-RSI-R3",
+   "value": "vLLM",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 1 (notes)",
+   "quote": "on vLLM",
+   "term": "vllm"
+  },
+  {
+   "id": "F7",
+   "says": "thinking-off",
+   "about": "FINAL-Bench/Darwin-180B-RSI-R3",
+   "value": "thinking disabled",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 1 (notes)",
+   "quote": "thinking disabled with chat_template_kwargs enable_thinking=false"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": "FINAL-Bench/Darwin-180B-RSI-R3",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 1 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "Qwen/Qwen3.8-Flash-Next",
+   "value": "89.88",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 2 (value field)",
+   "quote": "\"value\":89.88,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F10",
+   "says": "model-api-id",
+   "about": "Qwen/Qwen3.8-Flash-Next",
+   "value": "Qwen/Qwen3.8-Flash-Next",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 2 (modelId field)",
+   "quote": "\"modelId\":\"Qwen/Qwen3.8-Flash-Next\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F11",
+   "says": "harness",
+   "about": "Qwen/Qwen3.8-Flash-Next",
+   "value": "Pipeline name: qwen3_8_flash_next_fp8_vllm_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 2 (notes: pipeline name)",
+   "quote": "Pipeline name: qwen3_8_flash_next_fp8_vllm_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F12",
+   "says": "route",
+   "about": "Qwen/Qwen3.8-Flash-Next",
+   "value": "vllm",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 2 (notes)",
+   "quote": "Pipeline name: qwen3_8_flash_next_fp8_vllm_extract_oneshot_structured_output_file",
+   "term": "vllm"
+  },
+  {
+   "id": "F13",
+   "says": "note",
+   "about": "Qwen/Qwen3.8-Flash-Next",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 2 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Qwen/Qwen3.8-27B",
+   "value": "89.75",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 3 (value field)",
+   "quote": "\"value\":89.75,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F15",
+   "says": "model-api-id",
+   "about": "Qwen/Qwen3.8-27B",
+   "value": "Qwen/Qwen3.8-27B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 3 (modelId field)",
+   "quote": "\"modelId\":\"Qwen/Qwen3.8-27B\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F16",
+   "says": "harness",
+   "about": "Qwen/Qwen3.8-27B",
+   "value": "Pipeline name: qwen3_8_27b_fp8_vllm_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 3 (notes: pipeline name)",
+   "quote": "Pipeline name: qwen3_8_27b_fp8_vllm_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F17",
+   "says": "route",
+   "about": "Qwen/Qwen3.8-27B",
+   "value": "vllm",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 3 (notes)",
+   "quote": "Pipeline name: qwen3_8_27b_fp8_vllm_extract_oneshot_structured_output_file",
+   "term": "vllm"
+  },
+  {
+   "id": "F18",
+   "says": "note",
+   "about": "Qwen/Qwen3.8-27B",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 3 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "Qwen/Qwen3.6-35B-A3B",
+   "value": "88.11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 4 (value field)",
+   "quote": "\"value\":88.11,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F20",
+   "says": "model-api-id",
+   "about": "Qwen/Qwen3.6-35B-A3B",
+   "value": "Qwen/Qwen3.6-35B-A3B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 4 (modelId field)",
+   "quote": "\"modelId\":\"Qwen/Qwen3.6-35B-A3B\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F21",
+   "says": "harness",
+   "about": "Qwen/Qwen3.6-35B-A3B",
+   "value": "Pipeline name: qwen3_6_35b_a3b_fp8_vllm_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 4 (notes: pipeline name)",
+   "quote": "Pipeline name: qwen3_6_35b_a3b_fp8_vllm_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F22",
+   "says": "route",
+   "about": "Qwen/Qwen3.6-35B-A3B",
+   "value": "vLLM",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 4 (notes)",
+   "quote": "on vLLM",
+   "term": "vllm"
+  },
+  {
+   "id": "F23",
+   "says": "note",
+   "about": "Qwen/Qwen3.6-35B-A3B",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 4 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "value": "87.11",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 5 (value field)",
+   "quote": "\"value\":87.11,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F25",
+   "says": "model-api-id",
+   "about": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "value": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 5 (modelId field)",
+   "quote": "\"modelId\":\"deepseek-ai/DeepSeek-V4.1-Flash\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F26",
+   "says": "harness",
+   "about": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "value": "Pipeline name: deepseek_v4_1_flash_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 5 (notes: pipeline name)",
+   "quote": "Pipeline name: deepseek_v4_1_flash_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F27",
+   "says": "route",
+   "about": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "value": "DeepSeek API",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 5 (notes)",
+   "quote": "served via the DeepSeek API",
+   "term": "maker-api"
+  },
+  {
+   "id": "F28",
+   "says": "thinking-off",
+   "about": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "value": "thinking disabled",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 5 (notes)",
+   "quote": "served via the DeepSeek API, thinking disabled"
+  },
+  {
+   "id": "F29",
+   "says": "note",
+   "about": "deepseek-ai/DeepSeek-V4.1-Flash",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 5 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "moonshotai/Kimi-K3",
+   "value": "83.17",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 6 (value field)",
+   "quote": "\"value\":83.17,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "model-api-id",
+   "about": "moonshotai/Kimi-K3",
+   "value": "moonshotai/Kimi-K3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 6 (modelId field)",
+   "quote": "\"modelId\":\"moonshotai/Kimi-K3\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F32",
+   "says": "harness",
+   "about": "moonshotai/Kimi-K3",
+   "value": "Pipeline name: kimi_k3_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 6 (notes: pipeline name)",
+   "quote": "Pipeline name: kimi_k3_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F33",
+   "says": "route",
+   "about": "moonshotai/Kimi-K3",
+   "value": "Fireworks hosted API",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 6 (notes)",
+   "quote": "served via Fireworks hosted API",
+   "term": "fireworks"
+  },
+  {
+   "id": "F34",
+   "says": "note",
+   "about": "moonshotai/Kimi-K3",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 6 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "zai-org/GLM-5.3-Flash",
+   "value": "80.75",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 7 (value field)",
+   "quote": "\"value\":80.75,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "says": "model-api-id",
+   "about": "zai-org/GLM-5.3-Flash",
+   "value": "zai-org/GLM-5.3-Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 7 (modelId field)",
+   "quote": "\"modelId\":\"zai-org/GLM-5.3-Flash\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F37",
+   "says": "harness",
+   "about": "zai-org/GLM-5.3-Flash",
+   "value": "Pipeline name: glm_5_3_flash_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 7 (notes: pipeline name)",
+   "quote": "Pipeline name: glm_5_3_flash_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F38",
+   "says": "note",
+   "about": "zai-org/GLM-5.3-Flash",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 7 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "datalab-to/lift",
+   "value": "78.43",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 8 (value field)",
+   "quote": "\"value\":78.43,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "says": "model-api-id",
+   "about": "datalab-to/lift",
+   "value": "datalab-to/lift",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 8 (modelId field)",
+   "quote": "\"modelId\":\"datalab-to/lift\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F41",
+   "says": "harness",
+   "about": "datalab-to/lift",
+   "value": "Pipeline name: lift_extract",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 8 (notes: pipeline name)",
+   "quote": "Pipeline name: lift_extract"
+  },
+  {
+   "id": "F42",
+   "says": "note",
+   "about": "datalab-to/lift",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 8 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "numind/NuExtract-2.0-8B",
+   "value": "49.42",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 9 (value field)",
+   "quote": "\"value\":49.42,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F44",
+   "says": "model-api-id",
+   "about": "numind/NuExtract-2.0-8B",
+   "value": "numind/NuExtract-2.0-8B",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 9 (modelId field)",
+   "quote": "\"modelId\":\"numind/NuExtract-2.0-8B\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F45",
+   "says": "harness",
+   "about": "numind/NuExtract-2.0-8B",
+   "value": "Pipeline name: nuextract_2_8b_vllm_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 9 (notes: pipeline name)",
+   "quote": "Pipeline name: nuextract_2_8b_vllm_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F46",
+   "says": "route",
+   "about": "numind/NuExtract-2.0-8B",
+   "value": "vllm",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 9 (notes)",
+   "quote": "Pipeline name: nuextract_2_8b_vllm_extract_oneshot_structured_output_file",
+   "term": "vllm"
+  },
+  {
+   "id": "F47",
+   "says": "note",
+   "about": "numind/NuExtract-2.0-8B",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 9 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "openbmb/MiniCPM-V-4_5",
+   "value": "45.85",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 10 (value field)",
+   "quote": "\"value\":45.85,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "says": "model-api-id",
+   "about": "openbmb/MiniCPM-V-4_5",
+   "value": "openbmb/MiniCPM-V-4_5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 10 (modelId field)",
+   "quote": "\"modelId\":\"openbmb/MiniCPM-V-4_5\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F50",
+   "says": "harness",
+   "about": "openbmb/MiniCPM-V-4_5",
+   "value": "Pipeline name: minicpm_v_4_5_vllm_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 10 (notes: pipeline name)",
+   "quote": "Pipeline name: minicpm_v_4_5_vllm_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F51",
+   "says": "route",
+   "about": "openbmb/MiniCPM-V-4_5",
+   "value": "vllm",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 10 (notes)",
+   "quote": "Pipeline name: minicpm_v_4_5_vllm_extract_oneshot_structured_output_file",
+   "term": "vllm"
+  },
+  {
+   "id": "F52",
+   "says": "note",
+   "about": "openbmb/MiniCPM-V-4_5",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 10 (verified field)",
+   "quote": "\"verified\":false"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "zai-org/GLM-4.6V-Flash",
+   "value": "45.19",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 11 (value field)",
+   "quote": "\"value\":45.19,",
+   "term": "extraction-score-0-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F54",
+   "says": "model-api-id",
+   "about": "zai-org/GLM-4.6V-Flash",
+   "value": "zai-org/GLM-4.6V-Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 11 (modelId field)",
+   "quote": "\"modelId\":\"zai-org/GLM-4.6V-Flash\"",
+   "namespace": "huggingface"
+  },
+  {
+   "id": "F55",
+   "says": "harness",
+   "about": "zai-org/GLM-4.6V-Flash",
+   "value": "Pipeline name: glm_4_6v_flash_vllm_extract_oneshot_structured_output_file",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 11 (notes: pipeline name)",
+   "quote": "Pipeline name: glm_4_6v_flash_vllm_extract_oneshot_structured_output_file"
+  },
+  {
+   "id": "F56",
+   "says": "route",
+   "about": "zai-org/GLM-4.6V-Flash",
+   "value": "vllm",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 11 (notes)",
+   "quote": "Pipeline name: glm_4_6v_flash_vllm_extract_oneshot_structured_output_file",
+   "term": "vllm"
+  },
+  {
+   "id": "F57",
+   "says": "note",
+   "about": "zai-org/GLM-4.6V-Flash",
+   "value": "false",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-hf-extractbench/evidence/leaderboard-2026-10-20.json",
+   "where": "leaderboard entry rank 11 (verified field)",
+   "quote": "\"verified\":false"
+  }
+ ]
+}
