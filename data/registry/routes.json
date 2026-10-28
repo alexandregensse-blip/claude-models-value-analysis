@@ -10682,8 +10682,8 @@
      "default": [
       {
        "configuration": "nothink",
-       "from": "2026-03-02",
-       "to": "2026-07-01",
+       "from": "2026-02-05",
+       "to": "2026-10-23",
        "from_basis": "earliest-capture",
        "to_basis": "last-capture",
        "evidence": [
@@ -10710,6 +10710,30 @@
          "sha256": "7b0749364ebeca48e57b55f97e6ee7df10b0613e6963a4ff59a83dd954bdf7d1",
          "where": "git log -S '] = \"default\"' on terminus_2.py: the option was \"default\" in 3960cf6c (16 Nov 2025 13:29 PST) and became None in 7548bdef (17 Nov 2025 20:46 PST)",
          "quote": "7548bdef 2025-11-17T20:46:27-08:00 Fix reasoning effort."
+        },
+        {
+         "url": "https://web.archive.org/web/20260205175525/https://platform.claude.com/docs/en/build-with-claude/adaptive-thinking",
+         "captured": "2026-02-05T17:55:25Z",
+         "file": "/work/.salvo14/mig/reg10/ev/ant/adaptive-20260205175525.txt",
+         "sha256": "1ec0371f1ee99a94c1253653470beec2324cb91816f429c72d52b8f8a346c7b9",
+         "where": "Adaptive thinking page, release-day capture (reg10)",
+         "quote": "How to use adaptive thinking Set thinking.type to \"adaptive\" in your API request"
+        },
+        {
+         "url": "https://web.archive.org/web/20260207154331/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+         "captured": "2026-02-07T15:43:31Z",
+         "file": "/work/.salvo14/mig/reg10/ev/ant/ext-20260207154331.txt",
+         "sha256": "5184040661e95f44ad2aa744e054f8bacedbd4656ab770a9e9e5ae15f699c43f",
+         "where": "Extended thinking page, earliest capture after release (reg10)",
+         "quote": "To turn on extended thinking, add a thinking object, with the type parameter set to enabled"
+        },
+        {
+         "url": "https://web.archive.org/web/20260207154331/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+         "captured": "2026-02-07T15:43:31Z",
+         "file": "/work/.salvo14/mig/reg10/ev/ant/ext-20260207154331.txt",
+         "sha256": "5184040661e95f44ad2aa744e054f8bacedbd4656ab770a9e9e5ae15f699c43f",
+         "where": "Extended thinking page, earliest capture after release (reg10)",
+         "quote": "For Claude Opus 4.6, we recommend using type: \"adaptive\" instead"
         },
         {
          "url": "https://web.archive.org/web/20260302011113/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
@@ -10746,40 +10770,22 @@
          "where": "extended thinking guide: Supported models table and how thinking is turned on (last capture with the sentence)",
          "quote": "To turn on extended thinking, add a thinking object with type set to enabled and a budget_tokens value.",
          "note": "the maker's documented default for opus-4.6 (models.json default record), which a call with no level sent gets"
-        }
-       ],
-       "via": "maker-api"
-      },
-      {
-       "configuration": "nothink",
-       "from": "2026-09-28",
-       "to": "2026-10-23",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "evidence": [
-        {
-         "url": "https://github.com/harbor-framework/harbor/blob/bfc6c005/src/harbor/agents/terminus_2/terminus_2.py",
-         "captured": "2026-10-23",
-         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor_terminus_2.py.txt",
-         "sha256": "34ab46005280c50dd63fc075a3fdbb224421d88751bff6f514d23f5e4b2eaf35",
-         "where": "src/harbor/agents/terminus_2/terminus_2.py L375 (HEAD bfc6c005, 23 Oct 2026), docstring of the reasoning_effort argument",
-         "quote": "reasoning_effort: Qualitative or quantitative measure of effort (default: None)"
         },
         {
-         "url": "https://github.com/harbor-framework/harbor/blob/bfc6c005/src/harbor/llms/lite_llm.py",
-         "captured": "2026-10-23",
-         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor_lite_llm.py.txt",
-         "sha256": "bc39378dcd31ec7e386bc34948901fb6884b00281e861e421bc6dceb60c07d49",
-         "where": "src/harbor/llms/lite_llm.py L71-72 (HEAD): both options default to None; the thinking budget is sent only when max_thinking_tokens is set (L356-368), the effort only when not None (L729) and as a None argument it is dropped by LiteLLM (drop_params)",
-         "quote": "reasoning_effort: str | None = None,"
+         "url": "https://web.archive.org/web/20260723060433/https://platform.claude.com/docs/en/build-with-claude/thinking",
+         "captured": "2026-07-23T06:04:33Z",
+         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/thinking/20260723060433.txt",
+         "sha256": "d78b5e44499b6471e19206cf0ae0f7f899545e7b5f85a24cc9a9de7ebe7f74e0",
+         "where": "Thinking page (capture inside the 1 Jul-28 Sep window, reg10)",
+         "quote": "On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thinking is off until you set thinking: {type: \"adaptive\"}"
         },
         {
-         "url": "https://github.com/harbor-framework/harbor/commits/main",
-         "captured": "2026-10-23",
-         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor-dating.txt",
-         "sha256": "7b0749364ebeca48e57b55f97e6ee7df10b0613e6963a4ff59a83dd954bdf7d1",
-         "where": "git log -S '] = \"default\"' on terminus_2.py: the option was \"default\" in 3960cf6c (16 Nov 2025 13:29 PST) and became None in 7548bdef (17 Nov 2025 20:46 PST)",
-         "quote": "7548bdef 2025-11-17T20:46:27-08:00 Fix reasoning effort."
+         "url": "https://web.archive.org/web/20260927101357/https://platform.claude.com/docs/en/build-with-claude/thinking",
+         "captured": "2026-09-27T10:13:57Z",
+         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/thinking/20260927101357.txt",
+         "sha256": "97eb3f087a69a79ce971f5c96dfc1b17858f1a8922120d76f34f05473038608c",
+         "where": "Thinking page (capture inside the 1 Jul-28 Sep window, reg10)",
+         "quote": "On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thinking is off until you set thinking: {type: \"adaptive\"}"
         },
         {
          "url": "https://web.archive.org/web/20260928185248/https://platform.claude.com/docs/en/build-with-claude/thinking",
@@ -10925,68 +10931,7 @@
      "default": [
       {
        "configuration": "nothink",
-       "from": "2026-06-01",
-       "to": "2026-07-01",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "evidence": [
-        {
-         "url": "https://github.com/harbor-framework/harbor/blob/bfc6c005/src/harbor/agents/terminus_2/terminus_2.py",
-         "captured": "2026-10-23",
-         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor_terminus_2.py.txt",
-         "sha256": "34ab46005280c50dd63fc075a3fdbb224421d88751bff6f514d23f5e4b2eaf35",
-         "where": "src/harbor/agents/terminus_2/terminus_2.py L375 (HEAD bfc6c005, 23 Oct 2026), docstring of the reasoning_effort argument",
-         "quote": "reasoning_effort: Qualitative or quantitative measure of effort (default: None)"
-        },
-        {
-         "url": "https://github.com/harbor-framework/harbor/blob/bfc6c005/src/harbor/llms/lite_llm.py",
-         "captured": "2026-10-23",
-         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor_lite_llm.py.txt",
-         "sha256": "bc39378dcd31ec7e386bc34948901fb6884b00281e861e421bc6dceb60c07d49",
-         "where": "src/harbor/llms/lite_llm.py L71-72 (HEAD): both options default to None; the thinking budget is sent only when max_thinking_tokens is set (L356-368), the effort only when not None (L729) and as a None argument it is dropped by LiteLLM (drop_params)",
-         "quote": "reasoning_effort: str | None = None,"
-        },
-        {
-         "url": "https://github.com/harbor-framework/harbor/commits/main",
-         "captured": "2026-10-23",
-         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor-dating.txt",
-         "sha256": "7b0749364ebeca48e57b55f97e6ee7df10b0613e6963a4ff59a83dd954bdf7d1",
-         "where": "git log -S '] = \"default\"' on terminus_2.py: the option was \"default\" in 3960cf6c (16 Nov 2025 13:29 PST) and became None in 7548bdef (17 Nov 2025 20:46 PST)",
-         "quote": "7548bdef 2025-11-17T20:46:27-08:00 Fix reasoning effort."
-        },
-        {
-         "url": "https://web.archive.org/web/20260601084125/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
-         "captured": "2026-06-01T08:41:25Z",
-         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/ext-monthly/20260601084125.txt",
-         "sha256": "6df19f58ef18e65a2377c745caf876a553c7ecaaf379573175173e63bad1ec26",
-         "where": "extended thinking guide: Opus 4.8 and 4.7 turn thinking on with type adaptive",
-         "quote": "For Claude Opus 4.8 and Claude Opus 4.7, set thinking: {type: \"adaptive\"} to enable adaptive thinking",
-         "note": "the maker's documented default for opus-4.8 (models.json default record), which a call with no level sent gets"
-        },
-        {
-         "url": "https://web.archive.org/web/20260701071941/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
-         "captured": "2026-07-01T07:19:41Z",
-         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/ext-monthly/20260701071941.txt",
-         "sha256": "c2ea8b3c2b3220d800ad9f116e273dcceb044744ae3cfb14c30fd32e319f3c31",
-         "where": "extended thinking guide: Supported models table (adaptive thinking with effort, where Mythos Preview reads 'on by default')",
-         "quote": "Claude Opus 4.8\nNot supported (400 error)\nAdaptive thinking with effort",
-         "note": "the maker's documented default for opus-4.8 (models.json default record), which a call with no level sent gets"
-        },
-        {
-         "url": "https://web.archive.org/web/20260701071941/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
-         "captured": "2026-07-01T07:19:41Z",
-         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/ext-monthly/20260701071941.txt",
-         "sha256": "c2ea8b3c2b3220d800ad9f116e273dcceb044744ae3cfb14c30fd32e319f3c31",
-         "where": "extended thinking guide: how thinking is turned on",
-         "quote": "To turn on extended thinking, add a thinking object with type set to enabled and a budget_tokens value.",
-         "note": "the maker's documented default for opus-4.8 (models.json default record), which a call with no level sent gets"
-        }
-       ],
-       "via": "maker-api"
-      },
-      {
-       "configuration": "nothink",
-       "from": "2026-09-28",
+       "from": "2026-05-28",
        "to": "2026-10-23",
        "from_basis": "earliest-capture",
        "to_basis": "last-capture",
@@ -11014,6 +10959,57 @@
          "sha256": "7b0749364ebeca48e57b55f97e6ee7df10b0613e6963a4ff59a83dd954bdf7d1",
          "where": "git log -S '] = \"default\"' on terminus_2.py: the option was \"default\" in 3960cf6c (16 Nov 2025 13:29 PST) and became None in 7548bdef (17 Nov 2025 20:46 PST)",
          "quote": "7548bdef 2025-11-17T20:46:27-08:00 Fix reasoning effort."
+        },
+        {
+         "url": "https://web.archive.org/web/20260528181816/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+         "captured": "2026-05-28T18:18:16Z",
+         "file": "/work/.salvo14/mig/reg10/ev/ant/ext-20260528181816.txt",
+         "sha256": "0471df1872c550f5a0b798caad59e9d052c2c0f0a976ae15baeb56900272b345",
+         "where": "Extended thinking page, release-day capture (reg10)",
+         "quote": "For Claude Opus 4.8 and Claude Opus 4.7, set thinking: {type: \"adaptive\"} to enable adaptive thinking"
+        },
+        {
+         "url": "https://web.archive.org/web/20260601084125/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+         "captured": "2026-06-01T08:41:25Z",
+         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/ext-monthly/20260601084125.txt",
+         "sha256": "6df19f58ef18e65a2377c745caf876a553c7ecaaf379573175173e63bad1ec26",
+         "where": "extended thinking guide: Opus 4.8 and 4.7 turn thinking on with type adaptive",
+         "quote": "For Claude Opus 4.8 and Claude Opus 4.7, set thinking: {type: \"adaptive\"} to enable adaptive thinking",
+         "note": "the maker's documented default for opus-4.8 (models.json default record), which a call with no level sent gets"
+        },
+        {
+         "url": "https://web.archive.org/web/20260701071941/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+         "captured": "2026-07-01T07:19:41Z",
+         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/ext-monthly/20260701071941.txt",
+         "sha256": "c2ea8b3c2b3220d800ad9f116e273dcceb044744ae3cfb14c30fd32e319f3c31",
+         "where": "extended thinking guide: Supported models table (adaptive thinking with effort, where Mythos Preview reads 'on by default')",
+         "quote": "Claude Opus 4.8\nNot supported (400 error)\nAdaptive thinking with effort",
+         "note": "the maker's documented default for opus-4.8 (models.json default record), which a call with no level sent gets"
+        },
+        {
+         "url": "https://web.archive.org/web/20260701071941/https://platform.claude.com/docs/en/build-with-claude/extended-thinking",
+         "captured": "2026-07-01T07:19:41Z",
+         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/ext-monthly/20260701071941.txt",
+         "sha256": "c2ea8b3c2b3220d800ad9f116e273dcceb044744ae3cfb14c30fd32e319f3c31",
+         "where": "extended thinking guide: how thinking is turned on",
+         "quote": "To turn on extended thinking, add a thinking object with type set to enabled and a budget_tokens value.",
+         "note": "the maker's documented default for opus-4.8 (models.json default record), which a call with no level sent gets"
+        },
+        {
+         "url": "https://web.archive.org/web/20260723060433/https://platform.claude.com/docs/en/build-with-claude/thinking",
+         "captured": "2026-07-23T06:04:33Z",
+         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/thinking/20260723060433.txt",
+         "sha256": "d78b5e44499b6471e19206cf0ae0f7f899545e7b5f85a24cc9a9de7ebe7f74e0",
+         "where": "Thinking page (capture inside the 1 Jul-28 Sep window, reg10)",
+         "quote": "On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thinking is off until you set thinking: {type: \"adaptive\"}"
+        },
+        {
+         "url": "https://web.archive.org/web/20260927101357/https://platform.claude.com/docs/en/build-with-claude/thinking",
+         "captured": "2026-09-27T10:13:57Z",
+         "file": "/work/.salvo14/mig/models-anthropic/evidence/wb/thinking/20260927101357.txt",
+         "sha256": "97eb3f087a69a79ce971f5c96dfc1b17858f1a8922120d76f34f05473038608c",
+         "where": "Thinking page (capture inside the 1 Jul-28 Sep window, reg10)",
+         "quote": "On Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6, thinking is off until you set thinking: {type: \"adaptive\"}"
         },
         {
          "url": "https://web.archive.org/web/20260928185248/https://platform.claude.com/docs/en/build-with-claude/thinking",
