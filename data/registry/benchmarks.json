@@ -10301,6 +10301,21 @@
   },
   "programbench-board-resolved": {
    "label": "ProgramBench board (Meta/Stanford/Harvard), mini-SWE-agent, Resolved %"
+  },
+  "evg-f1-baserm": {
+   "label": "Evergreen claim verification F1: base_rm"
+  },
+  "evg-f1-rag": {
+   "label": "Evergreen claim verification F1: rag_agent"
+  },
+  "evg-f1-rlm": {
+   "label": "Evergreen claim verification F1: rlm (root LLM temperature 1, sub-LLM 0)"
+  },
+  "evg-f1-unopt": {
+   "label": "Evergreen claim verification F1: evg_unopt"
+  },
+  "evg-f1-opt": {
+   "label": "Evergreen claim verification F1: evg_opt"
   }
  },
  "setups": {
@@ -120765,9 +120780,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.16909",
+      "captured": "2026-10-19",
+      "where": "Table 2 caption: models are sorted by the overall score (Avg.)",
+      "quote": "Models are sorted by overall",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.16909/evidence/arxiv-2605.16909.txt",
+      "sha256": "c1a4abbf9779783e76b6a7365196ab56c15c56a09c3cbcee345d0e6c087bea4c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -135301,6 +135325,186 @@
    "legacy_groups": [],
    "label": "Nuxt agent evals (nuxt.com/evals), success rate",
    "note": "NEW setup (wave C2, 28 Oct): the page nuxt.com/evals designates and ranks by Success Rate; the held setup nuxt-evals (avgPassRate%) is not the page's headline metric."
+  },
+  "evg-f1-baserm": {
+   "family": "evg-f1-baserm",
+   "benchmark": "Evergreen claim verification (32 claims, 3 trials), F1 score (ungrounded claims positive): base_rm",
+   "subset": null,
+   "harness": "Cortex",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "F1%",
+   "headline": {
+    "metric": "F1%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2604.26180",
+      "captured": "2026-10-19",
+      "where": "Figure 1 caption and abstract: the paper's cost-quality figures and claims use F1 ('F1 vs. mean cost per claim'); accuracy is reported as a secondary metric",
+      "quote": "Figure 1: F1 vs. mean cost per claim (log scale)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.26180/evidence/arxiv-2604.26180.txt",
+      "sha256": "389b40ef2ad2e74f913d726b2400568f9ab27d4b736ddfbb84520167545fd45d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Evergreen F1, base_rm",
+   "note": "the paper's designated quality metric (F1, Table 4 column F1 Score); the held setup of the same name holds Accuracy (secondary): its headline stays pending, its measures go out as not the headline"
+  },
+  "evg-f1-rag": {
+   "family": "evg-f1-rag",
+   "benchmark": "Evergreen claim verification (32 claims, 3 trials), F1 score (ungrounded claims positive): rag_agent",
+   "subset": null,
+   "harness": "Cortex",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "F1%",
+   "headline": {
+    "metric": "F1%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2604.26180",
+      "captured": "2026-10-19",
+      "where": "Figure 1 caption and abstract: the paper's cost-quality figures and claims use F1 ('F1 vs. mean cost per claim'); accuracy is reported as a secondary metric",
+      "quote": "Figure 1: F1 vs. mean cost per claim (log scale)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.26180/evidence/arxiv-2604.26180.txt",
+      "sha256": "389b40ef2ad2e74f913d726b2400568f9ab27d4b736ddfbb84520167545fd45d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Evergreen F1, rag_agent",
+   "note": "the paper's designated quality metric (F1, Table 4 column F1 Score); the held setup of the same name holds Accuracy (secondary): its headline stays pending, its measures go out as not the headline"
+  },
+  "evg-f1-rlm": {
+   "family": "evg-f1-rlm",
+   "benchmark": "Evergreen claim verification (32 claims, 3 trials), F1 score (ungrounded claims positive): rlm (root LLM temperature 1, sub-LLM 0)",
+   "subset": null,
+   "harness": "Cortex",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "F1%",
+   "headline": {
+    "metric": "F1%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2604.26180",
+      "captured": "2026-10-19",
+      "where": "Figure 1 caption and abstract: the paper's cost-quality figures and claims use F1 ('F1 vs. mean cost per claim'); accuracy is reported as a secondary metric",
+      "quote": "Figure 1: F1 vs. mean cost per claim (log scale)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.26180/evidence/arxiv-2604.26180.txt",
+      "sha256": "389b40ef2ad2e74f913d726b2400568f9ab27d4b736ddfbb84520167545fd45d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Evergreen F1, rlm (root LLM temperature 1, sub-LLM 0)",
+   "note": "the paper's designated quality metric (F1, Table 4 column F1 Score); the held setup of the same name holds Accuracy (secondary): its headline stays pending, its measures go out as not the headline"
+  },
+  "evg-f1-unopt": {
+   "family": "evg-f1-unopt",
+   "benchmark": "Evergreen claim verification (32 claims, 3 trials), F1 score (ungrounded claims positive): evg_unopt",
+   "subset": null,
+   "harness": "Cortex",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "F1%",
+   "headline": {
+    "metric": "F1%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2604.26180",
+      "captured": "2026-10-19",
+      "where": "Figure 1 caption and abstract: the paper's cost-quality figures and claims use F1 ('F1 vs. mean cost per claim'); accuracy is reported as a secondary metric",
+      "quote": "Figure 1: F1 vs. mean cost per claim (log scale)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.26180/evidence/arxiv-2604.26180.txt",
+      "sha256": "389b40ef2ad2e74f913d726b2400568f9ab27d4b736ddfbb84520167545fd45d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Evergreen F1, evg_unopt",
+   "note": "the paper's designated quality metric (F1, Table 4 column F1 Score); the held setup of the same name holds Accuracy (secondary): its headline stays pending, its measures go out as not the headline"
+  },
+  "evg-f1-opt": {
+   "family": "evg-f1-opt",
+   "benchmark": "Evergreen claim verification (32 claims, 3 trials), F1 score (ungrounded claims positive): evg_opt",
+   "subset": null,
+   "harness": "Cortex",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "F1%",
+   "headline": {
+    "metric": "F1%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2604.26180",
+      "captured": "2026-10-19",
+      "where": "Figure 1 caption and abstract: the paper's cost-quality figures and claims use F1 ('F1 vs. mean cost per claim'); accuracy is reported as a secondary metric",
+      "quote": "Figure 1: F1 vs. mean cost per claim (log scale)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.26180/evidence/arxiv-2604.26180.txt",
+      "sha256": "389b40ef2ad2e74f913d726b2400568f9ab27d4b736ddfbb84520167545fd45d"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Evergreen F1, evg_opt",
+   "note": "the paper's designated quality metric (F1, Table 4 column F1 Score); the held setup of the same name holds Accuracy (secondary): its headline stays pending, its measures go out as not the headline"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
