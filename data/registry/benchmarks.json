@@ -27686,10 +27686,19 @@
    "judge_panel": null,
    "metric": "detect%",
    "headline": {
-    "metric": "detect%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "detect-strict%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/anthropics/claude-code/issues/83510",
+      "captured": "2026-10-19",
+      "file": "/work/.salvo14/mig/convert-github-cc-83510/evidence/cc83510.txt",
+      "sha256": "45bc7eb0cc3a82454884719a5f7cc4e671efac5520f8e5083585006d9d720813",
+      "where": "'Metric definitions' and the paragraph after it: the issue names the strict metric its primary one",
+      "quote": "the strict metric is the primary one because it is stricter"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -41428,9 +41437,18 @@
    "metric": "score/10",
    "headline": {
     "metric": "score/10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/diamondcrusher42/forge-benchmark/blob/main/wiki/Results-History.md",
+      "captured": "2026-10-28",
+      "where": "Results-History, Phase 2 results table: one score column ('Score', printed as 10/10) besides effort, tokens and time",
+      "quote": "| Model | Effort | Score | Tokens | Time |",
+      "file": "/work/.salvo14/mig/convert-github-forge-benchmark/evidence/Results-History-main.md",
+      "sha256": "2b0defde794c0a77defc30fe59810554fa15d23b3a8d95c4b8125690b3eb29b1"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -99966,9 +99984,18 @@
    "metric": "binary%",
    "headline": {
     "metric": "binary%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.18805",
+      "captured": "2026-10-19",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.18805/evidence/a2609.18805.txt",
+      "sha256": "8c8b07a4642a51e68494ee37219f274df9e31849eb8686d4b23f58f33c2e2e7d",
+      "where": "Section 3.2.1: the models are presented in the order of their mean binary score (GPT-6 Astra first, Claude Opus 5 next, GPT-5.6 Sol next); Table 9 lists the same order by binary overall",
+      "quote": "GPT-6 Astra achieves the highest mean binary score at 84.3%,"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -106217,8 +106244,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2607.12161v1",
+      "captured": "2026-10-19",
+      "where": "Table 12 (p. 15): the matrix gives the base cost per run and paired billed-cost changes only; no quality score is printed per cell",
+      "quote": "Table 12: Model × effort matrix: paired billed-cost change vs. baseline",
+      "file": "/work/.salvo14/mig/convert-arxiv-2607.12161/evidence/p.txt",
+      "sha256": "2941557478d07918bcfee7f02dd7342bdd9093e570f2635639dccedc25cffcb6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -137758,6 +137795,42 @@
     "wildclaw"
    ],
    "note": "the page's split (not the overall successRate, which the page computes from these splits)"
+  },
+  "bullshitbench-v1-strict": {
+   "family": "bullshitbench-v1",
+   "benchmark": "BullshitBench v1 (data/latest, n=55), strict detection: all three judges mark the bullshit identified (consensus 2)",
+   "subset": null,
+   "harness": "raw-api",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "detect-strict%",
+   "headline": {
+    "metric": "detect-strict%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/anthropics/claude-code/issues/83510",
+      "captured": "2026-10-19",
+      "file": "/work/.salvo14/mig/convert-github-cc-83510/evidence/cc83510.txt",
+      "sha256": "45bc7eb0cc3a82454884719a5f7cc4e671efac5520f8e5083585006d9d720813",
+      "where": "'Metric definitions' and the paragraph after it: the issue names the strict metric its primary one",
+      "quote": "the strict metric is the primary one because it is stricter"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "BullshitBench v1, strict detection (github-cc-83510)",
+   "note": "new setup (28 Oct, C2): the issue's designated metric is its strict detection, printed per model; the held setup bullshitbench-v1 holds detect% and keeps the legacy rows"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
