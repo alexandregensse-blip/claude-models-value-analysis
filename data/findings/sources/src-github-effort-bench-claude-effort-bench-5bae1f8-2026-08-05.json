@@ -1,0 +1,530 @@
+{
+ "id": "src-github-effort-bench-claude-effort-bench-5bae1f8-2026-08-05",
+ "publisher": "github-effort-bench",
+ "urls": [
+  "https://github.com/yinrong/claude-effort-bench/tree/5bae1f8f1724b9cfbe8e60f7a936c87bf2f08d32",
+  "https://github.com/yinrong/claude-effort-bench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/yinrong/claude-effort-bench/5bae1f8f1724b9cfbe8e60f7a936c87bf2f08d32/",
+   "captured": "2026-10-28T00:00:00Z",
+   "note": "README.md, results/runs.jsonl, bench/run.py at commit 5bae1f8 (2026-08-05), fetched raw on 28 Oct 2026; README.md is byte-identical to the copy saved earlier (g6/src/eb/R.md)"
+  }
+ ],
+ "commit": "5bae1f8f1724b9cfbe8e60f7a936c87bf2f08d32",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md": "39443646dd23bf48aef940b5c70e359c72557deff3ea4253f88c2e6f4b25b5fa",
+  "/work/.salvo14/mig/convert-github-effort-bench/evidence/bench/run.py": "9ecc93304d5f94f161cf4986c1cee746d75487a76e3d3c93095b8120ea8140f2",
+  "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl": "1d9fd3f01f47f2bdc8004ad93badc314724e6896f7309b6d8308e76ef5db93dc"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": {
+  "value": "2026-08-05",
+  "where": "commit 5bae1f8 committer date",
+  "quote": "2026-08-05T12:48:12Z"
+ },
+ "salvo": "salvo14/mig C2 wave (28 Oct)",
+ "agent": "converter (Haiku 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "level": "written",
+   "says": "unit",
+   "value": "Mean $/task",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, column 'Mean $/task' (and the ranking table)",
+   "quote": "Mean $/task",
+   "term": "USD per task"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "level": "written",
+   "says": "currency",
+   "value": "$",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, column 'Mean $/task'",
+   "quote": "Mean $/task",
+   "term": "USD"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "level": "written",
+   "says": "cost-basis",
+   "value": "total_cost_usd",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "How to read the table: Mean $/task",
+   "quote": "What the CLI reported (`total_cost_usd`), cache reads included.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "level": "written",
+   "says": "cost-method",
+   "value": "total_cost_usd",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "How to read the table: Mean $/task",
+   "quote": "What the CLI reported (`total_cost_usd`), cache reads included.",
+   "term": "cli-total"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "level": "written",
+   "says": "metric-definition",
+   "value": "Mean of `score / max_score` over every task and repeat.",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "How to read the table: Quality %",
+   "quote": "Mean of `score / max_score` over every task and repeat."
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "level": "written",
+   "says": "evaluated-by",
+   "value": "Deterministic verifiers",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "How to read the table: Quality %",
+   "quote": "Deterministic verifiers; no model-as-judge anywhere."
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "level": "written",
+   "says": "headline-metric",
+   "value": "Quality first",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Ranking section, the italic note under the heading",
+   "quote": "_Quality first; where two rows are within 5 points, the faster one ranks higher._"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "level": "written",
+   "says": "note",
+   "value": "90 runs over 3 task(s)",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Pick by what you are optimising for: the note under the list",
+   "quote": "_90 runs over 3 task(s) (t1_bug_hunt, t2_wide_migration, t3_spec_feature); up to 15 runs behind each model × effort row (tasks × repeats)."
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "level": "written",
+   "says": "note",
+   "value": "Effort is recorded as requested, not as applied",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "What this does not tell you",
+   "quote": "Effort is recorded as requested, not as applied."
+  },
+  {
+   "id": "F10",
+   "about": null,
+   "level": "written",
+   "says": "harness",
+   "value": "[\"claude\", \"-p\", prompt, \"--model\", model,",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/bench/run.py",
+   "where": "run_cell: the claude -p command",
+   "quote": "[\"claude\", \"-p\", prompt, \"--model\", model,",
+   "term": "claude-code"
+  },
+  {
+   "id": "F11",
+   "about": "claude-opus-5 @ medium",
+   "level": "written",
+   "says": "score",
+   "value": "64.9",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-opus-5 | medium, column 'Quality %'",
+   "quote": "| claude-opus-5 | medium | 15 | 64.9 | 91.7 | 46.7 | 46.7 | 106 | 0.172 | 11 | 40.1 | 377 |",
+   "term": "verifier%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "about": "claude-opus-5 @ medium",
+   "level": "written",
+   "says": "cost",
+   "value": "0.172",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-opus-5 | medium, column 'Mean $/task'",
+   "quote": "| claude-opus-5 | medium | 15 | 64.9 | 91.7 | 46.7 | 46.7 | 106 | 0.172 | 11 | 40.1 | 377 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F13",
+   "about": "claude-opus-5 @ medium",
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 1: $.models_used[0] (and $.model)",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F14",
+   "about": "claude-opus-5 @ medium",
+   "level": "written",
+   "says": "effort-setting",
+   "value": "medium",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 1: $.effort (requested; see the note)"
+  },
+  {
+   "id": "F15",
+   "about": "claude-opus-5 @ medium",
+   "level": "written",
+   "says": "version",
+   "value": "2.1.206",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 1: $.cli_version"
+  },
+  {
+   "id": "F16",
+   "about": "claude-opus-5 @ high",
+   "level": "written",
+   "says": "score",
+   "value": "59.1",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-opus-5 | high, column 'Quality %'",
+   "quote": "| claude-opus-5 | high | 15 | 59.1 | 81.0 | 33.3 | 53.3 | 90 | 0.151 | 9 | 34.5 | 391 |",
+   "term": "verifier%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "about": "claude-opus-5 @ high",
+   "level": "written",
+   "says": "cost",
+   "value": "0.151",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-opus-5 | high, column 'Mean $/task'",
+   "quote": "| claude-opus-5 | high | 15 | 59.1 | 81.0 | 33.3 | 53.3 | 90 | 0.151 | 9 | 34.5 | 391 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F18",
+   "about": "claude-opus-5 @ high",
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 6: $.models_used[0] (and $.model)",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F19",
+   "about": "claude-opus-5 @ high",
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 6: $.effort (requested; see the note)"
+  },
+  {
+   "id": "F20",
+   "about": "claude-opus-5 @ high",
+   "level": "written",
+   "says": "version",
+   "value": "2.1.206",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 6: $.cli_version"
+  },
+  {
+   "id": "F21",
+   "about": "claude-opus-5 @ xhigh",
+   "level": "written",
+   "says": "score",
+   "value": "63.3",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-opus-5 | xhigh, column 'Quality %'",
+   "quote": "| claude-opus-5 | xhigh | 15 | 63.3 | 79.0 | 40.0 | 33.3 | 117 | 0.207 | 13 | 34.8 | 307 |",
+   "term": "verifier%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "about": "claude-opus-5 @ xhigh",
+   "level": "written",
+   "says": "cost",
+   "value": "0.207",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-opus-5 | xhigh, column 'Mean $/task'",
+   "quote": "| claude-opus-5 | xhigh | 15 | 63.3 | 79.0 | 40.0 | 33.3 | 117 | 0.207 | 13 | 34.8 | 307 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F23",
+   "about": "claude-opus-5 @ xhigh",
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 11: $.models_used[0] (and $.model)",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F24",
+   "about": "claude-opus-5 @ xhigh",
+   "level": "written",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 11: $.effort (requested; see the note)"
+  },
+  {
+   "id": "F25",
+   "about": "claude-opus-5 @ xhigh",
+   "level": "written",
+   "says": "version",
+   "value": "2.1.206",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 11: $.cli_version"
+  },
+  {
+   "id": "F26",
+   "about": "claude-sonnet-5 @ medium",
+   "level": "written",
+   "says": "score",
+   "value": "78.0",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-sonnet-5 | medium, column 'Quality %'",
+   "quote": "| claude-sonnet-5 | medium | 15 | 78.0 | 83.8 | 60.0 | 13.3 | 110 | 0.113 | 11 | 46.7 | 691 |",
+   "term": "verifier%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "about": "claude-sonnet-5 @ medium",
+   "level": "written",
+   "says": "cost",
+   "value": "0.113",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-sonnet-5 | medium, column 'Mean $/task'",
+   "quote": "| claude-sonnet-5 | medium | 15 | 78.0 | 83.8 | 60.0 | 13.3 | 110 | 0.113 | 11 | 46.7 | 691 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F28",
+   "about": "claude-sonnet-5 @ medium",
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 16: $.models_used[0] (and $.model)",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F29",
+   "about": "claude-sonnet-5 @ medium",
+   "level": "written",
+   "says": "effort-setting",
+   "value": "medium",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 16: $.effort (requested; see the note)"
+  },
+  {
+   "id": "F30",
+   "about": "claude-sonnet-5 @ medium",
+   "level": "written",
+   "says": "version",
+   "value": "2.1.206",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 16: $.cli_version"
+  },
+  {
+   "id": "F31",
+   "about": "claude-sonnet-5 @ high",
+   "level": "written",
+   "says": "score",
+   "value": "76.0",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-sonnet-5 | high, column 'Quality %'",
+   "quote": "| claude-sonnet-5 | high | 15 | 76.0 | 81.8 | 53.3 | 26.7 | 104 | 0.099 | 11 | 48.3 | 764 |",
+   "term": "verifier%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "about": "claude-sonnet-5 @ high",
+   "level": "written",
+   "says": "cost",
+   "value": "0.099",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-sonnet-5 | high, column 'Mean $/task'",
+   "quote": "| claude-sonnet-5 | high | 15 | 76.0 | 81.8 | 53.3 | 26.7 | 104 | 0.099 | 11 | 48.3 | 764 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F33",
+   "about": "claude-sonnet-5 @ high",
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 21: $.models_used[0] (and $.model)",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F34",
+   "about": "claude-sonnet-5 @ high",
+   "level": "written",
+   "says": "effort-setting",
+   "value": "high",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 21: $.effort (requested; see the note)"
+  },
+  {
+   "id": "F35",
+   "about": "claude-sonnet-5 @ high",
+   "level": "written",
+   "says": "version",
+   "value": "2.1.206",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 21: $.cli_version"
+  },
+  {
+   "id": "F36",
+   "about": "claude-sonnet-5 @ xhigh",
+   "level": "written",
+   "says": "score",
+   "value": "76.7",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-sonnet-5 | xhigh, column 'Quality %'",
+   "quote": "| claude-sonnet-5 | xhigh | 15 | 76.7 | 82.5 | 53.3 | 20.0 | 112 | 0.129 | 13 | 37.2 | 596 |",
+   "term": "verifier%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F37",
+   "about": "claude-sonnet-5 @ xhigh",
+   "level": "written",
+   "says": "cost",
+   "value": "0.129",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/README.md",
+   "where": "Full matrix, row claude-sonnet-5 | xhigh, column 'Mean $/task'",
+   "quote": "| claude-sonnet-5 | xhigh | 15 | 76.7 | 82.5 | 53.3 | 20.0 | 112 | 0.129 | 13 | 37.2 | 596 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F38",
+   "about": "claude-sonnet-5 @ xhigh",
+   "level": "written",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 26: $.models_used[0] (and $.model)",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F39",
+   "about": "claude-sonnet-5 @ xhigh",
+   "level": "written",
+   "says": "effort-setting",
+   "value": "xhigh",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 26: $.effort (requested; see the note)"
+  },
+  {
+   "id": "F40",
+   "about": "claude-sonnet-5 @ xhigh",
+   "level": "written",
+   "says": "version",
+   "value": "2.1.206",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-github-effort-bench/evidence/results/runs.jsonl",
+   "where": "line 26: $.cli_version"
+  }
+ ]
+}
