@@ -1186,7 +1186,7 @@
    }
   },
   "metric": {
-   "description": "Score metrics: every distinct non-empty `score_metric` of /work/.wt-px/raw-data.csv (22 Oct 2026), x-rows = its row count. A setup's `metric` and `headline.metric`, a score fact's or score column's `term`, are terms of this list: DATA-PIPELINE §5.2 step 5 compares them as terms. lqm.bound/kind read the spelling (a '%' means a 0-100 scale). `none` (added 23 Oct 2026): a cost-only setup, whose rows carry no score (its metric and headline are `none`; no score fact can be on it).",
+   "description": "Score metrics: every distinct non-empty `score_metric` of /work/.wt-px/raw-data.csv (22 Oct 2026), x-rows = its row count. A setup's `metric` and `headline.metric`, a score fact's or score column's `term`, are terms of this list: DATA-PIPELINE §5.2 step 5 compares them as terms. lqm.bound/kind read the spelling (a '%' means a 0-100 scale). `none` (added 23 Oct 2026): a cost-only setup, whose rows carry no score (its metric and headline are `none`; no score fact can be on it). Added 28 Oct 2026 (x-rows 0, printed metrics of sources whose legacy rows held our transform): micro-Brier, median-bits, KL-nats (lower is better: the setup's direction says so), score-of-8 (a score out of 8), turns-to-beat-Brock (lower), F2′.",
    "enum": [
     "%PASSED",
     "22-benchmark average (%)",
@@ -1611,7 +1611,13 @@
     "within-length-of-4",
     "within20%",
     "xp-x1e5",
-    "none"
+    "none",
+    "micro-Brier",
+    "median-bits",
+    "KL-nats",
+    "score-of-8",
+    "turns-to-beat-Brock",
+    "F2′"
    ],
    "x-rows": {
     "%PASSED": 11,
@@ -2036,7 +2042,13 @@
     "wins-vs-deepseek-of-4": 3,
     "within-length-of-4": 5,
     "within20%": 7,
-    "xp-x1e5": 88
+    "xp-x1e5": 88,
+    "micro-Brier": 0,
+    "median-bits": 0,
+    "KL-nats": 0,
+    "score-of-8": 0,
+    "turns-to-beat-Brock": 0,
+    "F2′": 0
    }
   },
   "score_scale": {
