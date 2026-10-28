@@ -1,0 +1,303 @@
+{
+ "id": "src-github-threadkeeper-2026-10-12",
+ "publisher": "github-threadkeeper",
+ "urls": [
+  "https://github.com/neko-legends/threadkeeper"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "fbc0b8b9ffbf9b4e3559e42e89c5791dfe72230a",
+   "captured": "2026-10-12T07:35:35Z",
+   "url": "https://github.com/neko-legends/threadkeeper/blob/fbc0b8b9ffbf9b4e3559e42e89c5791dfe72230a/results/leaderboard.csv",
+   "note": "HEAD of the clone saved by salvo rb2 (git log -1, committer date 2026-10-12T00:35:35-07:00); results/leaderboard.csv, leaderboard.md and README.md of the clone are byte-identical to the working tree files copied here (evidence/leaderboard.csv sha256 d2b643df...)"
+  },
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://github.com/neko-legends/threadkeeper",
+   "captured": "2026-10-19T17:40:31Z",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard.csv",
+   "note": "results/leaderboard.csv of the clone saved by salvo rb2 (file mtime), same as the salvo g4 copy src/threadkeeper-lb.csv"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard.csv": "d2b643df9360b14267b458c97b8bb34b77df8f949574a1b98d19f0591398e7ce",
+  "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard.md": "34e964d443a474f9405ecb9e6297d58abee54e6e335f6e1a887f6ca8e632e0d4",
+  "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md": "4ad7cab02935614a623f45ad71f15d717c0e8302336f7aa122bbb40beed6d0b3",
+  "/work/.salvo14/mig/convert-github-threadkeeper/evidence/CORRECTIONS.md": "458dc1fd74676e382d25e18a75e8885ba2aade10dca8df93deba83356dceca9b",
+  "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv": "a6ae1da795733cc453732bf8285197c48ff9f98dcfb9a609d7b07b7f3a0aed1c"
+ },
+ "harvested_at": "2026-10-19T17:40:31Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-threadkeeper (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved clone of the repository (HEAD fbc0b8b) and its results/leaderboard.csv",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "from": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard.csv",
+   "tool": "derived by convert.py: the 15 SCORED rows of corpus 128k of leaderboard.csv with the same columns, plus id (model__effort__corpus), effort_setting (the effort_flag when it is a reasoning_effort=... parameter), effort_flag_level (the level argument of a CLI flag --effort / --thinking) and effort_default_note (the effort_flag text when the flag was omitted)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "where": "derived table of the 128k-corpus SCORED rows of results/leaderboard.csv",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "model": "note",
+    "effort": "note",
+    "corpus": "note",
+    "transport": "note",
+    "resolved_model_id": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "tool_version": "note",
+    "effort_flag": "note",
+    "resolved_on": "run-date",
+    "judge_model": "judge",
+    "judge_resolved_id": "note",
+    "judge_ok": "note",
+    "status": "note",
+    "failed_reason": "note",
+    "composite": {
+     "says": "score",
+     "term": "composite",
+     "scale": "raw",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "composite_v1": "note",
+    "facts_found": "note",
+    "facts_total": "note",
+    "facts_net_pct": "note",
+    "stale_facts": "note",
+    "decoy_hits": "note",
+    "threads_judge_preserved": "note",
+    "threads_judge_partial": "note",
+    "threads_judge_lost": "note",
+    "threads_mech_preserved": "note",
+    "threads_mech_partial": "note",
+    "threads_mech_lost": "note",
+    "threads_source": "note",
+    "invention_mech": "note",
+    "invention_checked": "note",
+    "invention_mech_per100": "note",
+    "invention_judge": "note",
+    "latency_s": "note",
+    "prompt_tokens": "tokens-in",
+    "completion_tokens": "tokens-out",
+    "reasoning_tokens": "tokens-reasoning",
+    "cost_usd": "note",
+    "finish_reason": "note",
+    "effort_setting": "effort-setting",
+    "effort_flag_level": "effort-label",
+    "effort_default_note": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "headline-metric",
+   "about": null,
+   "value": "composite",
+   "level": "written",
+   "form": "prose",
+   "where": "leaderboard.md, line defining the board score: \"composite (v2)\"",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard.md",
+   "quote": "**composite** (v2): `composite = 100*(0.45*facts_score + 0.30*threads_score + 0.25*invention_score); facts_score=facts.net; threads_score=threads.score (judge, else mechanical); invention_score=1/(1+mechanical_inventions/3)`"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "Caveat: the `claude` and `pi` CLI arms got the chat pasted into one message with tools off; the HTTP arms got it as real chat turns, so those groups are not a like-for-like comparison.",
+   "level": "written",
+   "form": "prose",
+   "where": "README, section Overall score, caveat",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md",
+   "quote": "Caveat: the `claude` and `pi` CLI arms got the chat pasted into one message with tools off; the HTTP arms got it as real chat turns, so those groups are not a like-for-like comparison."
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "Judge for the 128k board: `venice/gemini-3-8-flash`.",
+   "level": "written",
+   "form": "prose",
+   "where": "README, section Model versions",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md",
+   "quote": "Judge for the 128k board: `venice/gemini-3-8-flash`."
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "**What was actually true.** That arm was graded by `openai/gpt-6-astra`, and Astra is also a competitor on this board. We then re-graded all 11 arms with **one neutral judge**, `venice/gemini-3-8-flash`, from a family that is not graded anywhere on the board. Under that judge, Opus at max has **0 flagged inventions**. Its composite moves from 83.9 to 85.8, which is no longer last.",
+   "level": "written",
+   "form": "prose",
+   "where": "CORRECTIONS.md, Correction 1: the judge bias; the 128k board uses one neutral judge for every arm",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/CORRECTIONS.md",
+   "quote": "**What was actually true.** That arm was graded by `openai/gpt-6-astra`, and Astra is also a competitor on this board. We then re-graded all 11 arms with **one neutral judge**, `venice/gemini-3-8-flash`, from a family that is not graded anywhere on the board. Under that judge, Opus at max has **0 flagged inventions**. Its composite moves from 83.9 to 85.8, which is no longer last."
+  },
+  {
+   "id": "F5",
+   "says": "route",
+   "about": null,
+   "value": "Venice HTTP",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, section Model versions, row kimi-k3 / deepseek-v4-1-flash / z-ai-glm-5-3-flash",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md",
+   "quote": "| `kimi-k3`, `deepseek-v4-1-flash`, `z-ai-glm-5-3-flash` | same string (the provider did not echo another id) | Venice HTTP | 2026-10-11 |",
+   "term": "venice"
+  },
+  {
+   "id": "F6",
+   "says": "no-effort-sent",
+   "about": "kimi-k3__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row kimi-k3__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  },
+  {
+   "id": "F7",
+   "says": "no-effort-sent",
+   "about": "deepseek-v4-1-flash__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row deepseek-v4-1-flash__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  },
+  {
+   "id": "F8",
+   "says": "no-effort-sent",
+   "about": "DeepSeek-V4.1-Flash-TF__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row DeepSeek-V4.1-Flash-TF__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": null,
+   "value": "| `DeepSeek-V4.1-Flash-TF` | same | on-prem tensorfold server (not Venice) | 2026-10-11 |",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, section Model versions: the TF row is served on an on-prem tensorfold server, not Venice",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md",
+   "quote": "| `DeepSeek-V4.1-Flash-TF` | same | on-prem tensorfold server (not Venice) | 2026-10-11 |"
+  },
+  {
+   "id": "F10",
+   "says": "no-effort-sent",
+   "about": "opus__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row opus__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  },
+  {
+   "id": "F11",
+   "says": "harness",
+   "about": null,
+   "value": "`claude` CLI 2.1.289",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, section Model versions, row of opus",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md",
+   "quote": "| `opus` | `claude-opus-5-5` | `claude` CLI 2.1.289 | 2026-10-11 |",
+   "term": "claude-code"
+  },
+  {
+   "id": "F12",
+   "says": "no-effort-sent",
+   "about": "z-ai-glm-5-3-flash__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row z-ai-glm-5-3-flash__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  },
+  {
+   "id": "F13",
+   "says": "no-effort-sent",
+   "about": "venice-qwen-3-8-flash__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row venice-qwen-3-8-flash__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  },
+  {
+   "id": "F14",
+   "says": "harness",
+   "about": null,
+   "value": "`pi` CLI 0.99.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, section Model versions, row of the pi arms",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md",
+   "quote": "| `venice/qwen-3-8-flash`, `openai/gpt-6-astra`, `venice/grok-4-7` | same (`pi` does not echo a resolved id; the provider/id is the pin) | `pi` CLI 0.99.1 | 2026-10-11 |",
+   "term": "pi"
+  },
+  {
+   "id": "F15",
+   "says": "no-effort-sent",
+   "about": "sonnet__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row sonnet__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  },
+  {
+   "id": "F16",
+   "says": "harness",
+   "about": null,
+   "value": "`claude` CLI 2.1.289",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, section Model versions, row of sonnet",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/README.md",
+   "quote": "| `sonnet` | `claude-sonnet-5-5` | `claude` CLI 2.1.289 | 2026-10-11 |",
+   "term": "claude-code"
+  },
+  {
+   "id": "F17",
+   "says": "no-effort-sent",
+   "about": "openai-gpt-6-astra__default__128k",
+   "value": "(none: flag omitted, provider default)",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row openai-gpt-6-astra__default__128k, column effort_default_note (leaderboard.csv effort_flag)",
+   "file": "/work/.salvo14/mig/convert-github-threadkeeper/evidence/leaderboard-128k.csv",
+   "quote": "(none: flag omitted, provider default)"
+  }
+ ]
+}

@@ -1,0 +1,597 @@
+{
+ "id": "src-github-rtx4090-local-vs-cloud-2026-10-15",
+ "publisher": "github-rtx4090-local-vs-cloud",
+ "urls": [
+  "https://github.com/Howard159357/rtx4090-local-vs-cloud-coding-benchmark"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://github.com/Howard159357/rtx4090-local-vs-cloud-coding-benchmark",
+   "captured": "2026-10-28T09:08:35Z",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "note": "README.md of the repository saved by salvo s23/b4 (file mtime); the legacy rows name it \"README of 15 Oct 2026\""
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md": "ec057f4624eff862852bf05d2f8b67abab9d43fd9605cdbcdfdf1526bda017ae"
+ },
+ "harvested_at": "2026-10-28T09:08:35Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-rtx4090-local-vs-cloud (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the README saved by salvo s23/b4",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "aggregation",
+   "about": null,
+   "value": "| Repeats | 3 runs per setup, temperature 0.6, seeds 11 / 22 / 33 (cloud: 3 runs, temperature not settable) |",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Setup table, row Repeats",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| Repeats | 3 runs per setup, temperature 0.6, seeds 11 / 22 / 33 (cloud: 3 runs, temperature not settable) |"
+  },
+  {
+   "id": "F2",
+   "says": "thinking-off",
+   "about": null,
+   "value": "off for every local run",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Setup table, row Reasoning",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| Reasoning | off for every local run (Strata: `reasoning_effort: none`); cloud at the stated effort level |"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "| Test designer | Claude Opus 5.5, in Claude Code |",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Setup table, row Test designer (the designer is a Claude model; the README discloses the bias under limits)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| Test designer | Claude Opus 5.5, in Claude Code |"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "- Not an API price study. Cloud models ran through subscription CLIs (Claude Code, Codex), with no API fees.",
+   "level": "written",
+   "form": "prose",
+   "where": "section What This Is Not: cloud rows ran through subscription CLIs, no API fees (no cost reported)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "- Not an API price study. Cloud models ran through subscription CLIs (Claude Code, Codex), with no API fees."
+  },
+  {
+   "id": "F5",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code CLI",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Setup table, row Cloud harness (Claude models: the Claude Code CLI; our pairing by maker, the README names both CLIs for the six cloud settings)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| Cloud harness | Claude Code CLI and Codex CLI, built-in shell / web / plugins disabled, empty working folder |",
+   "term": "claude-code"
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": null,
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Setup table, row Cloud harness (GPT models: the Codex CLI; our pairing by maker, the README names both CLIs for the six cloud settings)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| Cloud harness | Claude Code CLI and Codex CLI, built-in shell / web / plugins disabled, empty working folder |",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F7",
+   "says": "route",
+   "about": null,
+   "value": "llama.cpp `llama-server`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Setup table, row Local engines; the row of the setup names the engine (… · llama.cpp)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| Local engines | llama.cpp `llama-server` b10929 (Sept 12) and b11609 (Oct 14); Strata v0.1.44.1 built from source |",
+   "term": "llama-cpp"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "Claude Sonnet 5.5 · medium | **98.8 ± 0.8**",
+   "value": "98.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Claude Sonnet 5.5 · medium, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Sonnet 5.5 · medium | **98.8 ± 0.8** | – | – |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "Claude Sonnet 5.5 · medium | **98.8 ± 0.8**",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Sonnet 5.5 · medium | **98.8 ± 0.8** | – | – |"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": "Claude Sonnet 5.5 · medium | **98.8 ± 0.8**",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup (… · medium)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Sonnet 5.5 · medium | **98.8 ± 0.8** | – | – |"
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "Claude Haiku 5.5 · medium | 96.8 ± 0.9",
+   "value": "96.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Claude Haiku 5.5 · medium, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Haiku 5.5 · medium | 96.8 ± 0.9 | – | – |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5 · medium | 96.8 ± 0.9",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Haiku 5.5 · medium | 96.8 ± 0.9 | – | – |"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": "Claude Haiku 5.5 · medium | 96.8 ± 0.9",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup (… · medium)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Haiku 5.5 · medium | 96.8 ± 0.9 | – | – |"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Claude Haiku 5.5 · xhigh | 94.5 ± 4.7",
+   "value": "94.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Claude Haiku 5.5 · xhigh, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Haiku 5.5 · xhigh | 94.5 ± 4.7 | – | – |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5 · xhigh | 94.5 ± 4.7",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Haiku 5.5 · xhigh | 94.5 ± 4.7 | – | – |"
+  },
+  {
+   "id": "F16",
+   "says": "effort-label",
+   "about": "Claude Haiku 5.5 · xhigh | 94.5 ± 4.7",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup (… · xhigh)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | Claude Haiku 5.5 · xhigh | 94.5 ± 4.7 | – | – |"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "GPT-6.1 Sol · medium | 97.7 ± 0.2",
+   "value": "97.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row GPT-6.1 Sol · medium, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6.1 Sol · medium | 97.7 ± 0.2 | – | – |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "says": "model-name",
+   "about": "GPT-6.1 Sol · medium | 97.7 ± 0.2",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6.1 Sol · medium | 97.7 ± 0.2 | – | – |"
+  },
+  {
+   "id": "F19",
+   "says": "effort-label",
+   "about": "GPT-6.1 Sol · medium | 97.7 ± 0.2",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup (… · medium)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6.1 Sol · medium | 97.7 ± 0.2 | – | – |"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "GPT-6 Luna · xhigh | 96.3 ± 0.3",
+   "value": "96.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row GPT-6 Luna · xhigh, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6 Luna · xhigh | 96.3 ± 0.3 | – | – |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "GPT-6 Luna · xhigh | 96.3 ± 0.3",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6 Luna · xhigh | 96.3 ± 0.3 | – | – |"
+  },
+  {
+   "id": "F22",
+   "says": "effort-label",
+   "about": "GPT-6 Luna · xhigh | 96.3 ± 0.3",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup (… · xhigh)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6 Luna · xhigh | 96.3 ± 0.3 | – | – |"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GPT-6 Luna · medium | 92.8 ± 0.5",
+   "value": "92.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row GPT-6 Luna · medium, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6 Luna · medium | 92.8 ± 0.5 | – | – |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": "GPT-6 Luna · medium | 92.8 ± 0.5",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6 Luna · medium | 92.8 ± 0.5 | – | – |"
+  },
+  {
+   "id": "F25",
+   "says": "effort-label",
+   "about": "GPT-6 Luna · medium | 92.8 ± 0.5",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup (… · medium)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| ☁ | GPT-6 Luna · medium | 92.8 ± 0.5 | – | – |"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "**Qwen3.8-Flash-Next · Strata** (43-47 GB in RAM) | **92.5 ± 2.9**",
+   "value": "92.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Qwen3.8-Flash-Next, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 1 | **Qwen3.8-Flash-Next · Strata** (43-47 GB in RAM) | **92.5 ± 2.9** | 170 | 128K default, 256K tested |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "**Qwen3.8-Flash-Next · Strata** (43-47 GB in RAM) | **92.5 ± 2.9**",
+   "value": "Qwen3.8-Flash-Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 1 | **Qwen3.8-Flash-Next · Strata** (43-47 GB in RAM) | **92.5 ± 2.9** | 170 | 128K default, 256K tested |"
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "Qwen3.8-Flash-Next · llama.cpp (56 GB in RAM) | 88.1 ± 4.4",
+   "value": "88.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Qwen3.8-Flash-Next, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 3 | Qwen3.8-Flash-Next · llama.cpp (56 GB in RAM) | 88.1 ± 4.4 | 27 (41 with MTP, b11609) | 64K tested |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F29",
+   "says": "model-name",
+   "about": "Qwen3.8-Flash-Next · llama.cpp (56 GB in RAM) | 88.1 ± 4.4",
+   "value": "Qwen3.8-Flash-Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 3 | Qwen3.8-Flash-Next · llama.cpp (56 GB in RAM) | 88.1 ± 4.4 | 27 (41 with MTP, b11609) | 64K tested |"
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "Qwen3.6-27B (+ MTP) | 85.1 ± 5.8",
+   "value": "85.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Qwen3.6-27B, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 4 | Qwen3.6-27B (+ MTP) | 85.1 ± 5.8 | 43 (119) | 188K (132K) |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F31",
+   "says": "model-name",
+   "about": "Qwen3.6-27B (+ MTP) | 85.1 ± 5.8",
+   "value": "Qwen3.6-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 4 | Qwen3.6-27B (+ MTP) | 85.1 ± 5.8 | 43 (119) | 188K (132K) |"
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B | 82.9 ± 2.5",
+   "value": "82.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Qwen3.6-35B-A3B, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 6 | Qwen3.6-35B-A3B | 82.9 ± 2.5 | 162 | 256K |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F33",
+   "says": "model-name",
+   "about": "Qwen3.6-35B-A3B | 82.9 ± 2.5",
+   "value": "Qwen3.6-35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 6 | Qwen3.6-35B-A3B | 82.9 ± 2.5 | 162 | 256K |"
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "Qwen3.8-27B (+ MTP) | 77.5 ± 1.0",
+   "value": "77.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Qwen3.8-27B, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 9 | Qwen3.8-27B (+ MTP) | 77.5 ± 1.0 | 49 (153) | 256K (168K) |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F35",
+   "says": "model-name",
+   "about": "Qwen3.8-27B (+ MTP) | 77.5 ± 1.0",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 9 | Qwen3.8-27B (+ MTP) | 77.5 ± 1.0 | 49 (153) | 256K (168K) |"
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "Qwen3-Coder-Next 80B (partial CPU) | 75.5 ± 3.3",
+   "value": "75.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Qwen3-Coder-Next, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 10 | Qwen3-Coder-Next 80B (partial CPU) | 75.5 ± 3.3 | 49 | 64K tested |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F37",
+   "says": "model-name",
+   "about": "Qwen3-Coder-Next 80B (partial CPU) | 75.5 ± 3.3",
+   "value": "Qwen3-Coder-Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 10 | Qwen3-Coder-Next 80B (partial CPU) | 75.5 ± 3.3 | 49 | 64K tested |"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "Qwen3-Coder-30B-A3B | 70.4 ± 5.3",
+   "value": "70.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row Qwen3-Coder-30B-A3B, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 11 | Qwen3-Coder-30B-A3B | 70.4 ± 5.3 | 115 | 136K |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F39",
+   "says": "model-name",
+   "about": "Qwen3-Coder-30B-A3B | 70.4 ± 5.3",
+   "value": "Qwen3-Coder-30B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 11 | Qwen3-Coder-30B-A3B | 70.4 ± 5.3 | 115 | 136K |"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "gpt-oss-20b | 70.2 ± 8.6",
+   "value": "70.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row gpt-oss-20b, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 12 | gpt-oss-20b | 70.2 ± 8.6 | 171 | 128K |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "model-name",
+   "about": "gpt-oss-20b | 70.2 ± 8.6",
+   "value": "gpt-oss-20b",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 12 | gpt-oss-20b | 70.2 ± 8.6 | 171 | 128K |"
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "GLM-4.7-Flash | 53.7 ± 2.6",
+   "value": "53.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, row GLM-4.7-Flash, column Score (3 runs)",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 16 | GLM-4.7-Flash | 53.7 ± 2.6 | 103 | 198K |",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F43",
+   "says": "model-name",
+   "about": "GLM-4.7-Flash | 53.7 ± 2.6",
+   "value": "GLM-4.7-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results / Overall table, column Setup",
+   "file": "/work/.salvo14/mig/convert-github-rtx4090-local-vs-cloud/evidence/README.md",
+   "quote": "| 16 | GLM-4.7-Flash | 53.7 ± 2.6 | 103 | 198K |"
+  }
+ ]
+}
