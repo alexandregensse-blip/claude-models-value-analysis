@@ -1,0 +1,255 @@
+{
+ "id": "src-supabase.com-evals-2026-10-01",
+ "publisher": "supabase.com",
+ "urls": [
+  "https://supabase.com/evals",
+  "https://github.com/supabase/evals"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://supabase.com/evals",
+   "captured": "2026-10-01T02:44:15Z",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "note": "evals page, saved by salvo s18/a2 (file mtime); shows the Benchmark (with skills) table; a live fetch on 28 Oct has the same size (36.7K)"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://github.com/supabase/evals/blob/main/apps/web/src/data/eval-results.json",
+   "captured": "2026-10-01T02:45:43Z",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/eval-results.json",
+   "note": "eval-results.json (828 run records), saved by salvo s18/a2; byte-identical copies saved 18 Oct (s24/c3) and 19 Oct (g/g7)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html": "6c7febcb08581e5782f30a0a314aab610db622fb132fc5973bb305341ec14766",
+  "/work/.salvo14/mig/convert-supabase.com/evidence/eval-results.json": "35265aa58327147f5e0ccbcad22b1f6201dc1ed3afb5195de47cb16a268814b5",
+  "/work/.salvo14/mig/convert-supabase.com/evidence/presets.ts": "9967ffdf5b0a9e319db8ccace82b9d4989f8ed35874f61e9b4eabf9f61ca4365",
+  "/work/.salvo14/mig/convert-supabase.com/evidence/experiment-tally.json": "1b82a7c819a7a6cde446401cddf8d48d995132165e22ca728219bb4bc897752c"
+ },
+ "harvested_at": "2026-10-01T02:44:15Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave",
+ "agent": "converter (Sonnet 5.5), from the saved page, data file and preset",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/experiment-tally.json",
+   "from": "/work/.salvo14/mig/convert-supabase.com/evidence/eval-results.json",
+   "tool": "convert.py: one row per experiment of eval-results.json: the fields of experimentDisplay copied verbatim, passed_runs = number of the 69 records of the experiment with passed = true (our count), counts = \"k of 69\"; the without-skills counts are not printed by the page"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/experiment-tally.json",
+   "where": "$.rows",
+   "format": "json",
+   "row_key": "experiment",
+   "columns": {
+    "experiment": "note",
+    "suite": "note",
+    "agent": "note",
+    "modelProvider": "note",
+    "modelId": {
+     "says": "model-api-id",
+     "namespace": "prefix"
+    },
+    "reasoningEffort": "effort-setting",
+    "passed_runs": "note",
+    "runs": "note",
+    "counts": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "counts",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Whether an agent run satisfied every check in its eval, recorded per run.",
+   "level": "written",
+   "form": "code",
+   "where": "page structured data (JSON-LD variableMeasured \"passed\")",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "Whether an agent run satisfied every check in its eval, recorded per run."
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "claudeCodeAgent",
+   "level": "written",
+   "form": "code",
+   "where": "experiments/presets.ts: the preset builds the agent with claudeCodeAgent (page label names the agent)",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/presets.ts",
+   "quote": "claudeCodeAgent({",
+   "term": "claude-code"
+  },
+  {
+   "id": "F3",
+   "says": "harness",
+   "about": null,
+   "value": "codexAgent",
+   "level": "written",
+   "form": "code",
+   "where": "experiments/presets.ts: the preset builds the agent with codexAgent (page label names the agent)",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/presets.ts",
+   "quote": "codexAgent({",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F4",
+   "says": "harness",
+   "about": null,
+   "value": "grokAgent",
+   "level": "written",
+   "form": "code",
+   "where": "experiments/presets.ts: the preset builds the agent with grokAgent (page label names the agent)",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/presets.ts",
+   "quote": "grokAgent({"
+  },
+  {
+   "id": "F5",
+   "says": "harness",
+   "about": null,
+   "value": "opencodeAgent",
+   "level": "written",
+   "form": "code",
+   "where": "experiments/presets.ts: the preset builds the agent with opencodeAgent (page label names the agent)",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/presets.ts",
+   "quote": "opencodeAgent({",
+   "term": "opencode"
+  },
+  {
+   "id": "F6",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "model: 'moonshotai/kimi-k3',",
+   "level": "written",
+   "form": "code",
+   "where": "experiments/presets.ts, opencodeKimiK3: the agent is built with a model only, no reasoningEffort (the other presets pass it)",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/presets.ts",
+   "quote": "model: 'moonshotai/kimi-k3',"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "Without skills",
+   "level": "written",
+   "form": "label",
+   "where": "page toggle \"Benchmark\" / \"Without skills\"",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "Without skills"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "claude-code-opus-5.5",
+   "value": "62 of 69",
+   "level": "written",
+   "form": "table-cell",
+   "where": "page table (Benchmark), row \"Claude Code / Opus 5.5 (high)\", column Total, tooltip of the cell",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "62 of 69 runs passed",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "claude-code-sonnet-5",
+   "value": "55 of 69",
+   "level": "written",
+   "form": "table-cell",
+   "where": "page table (Benchmark), row \"Claude Code / Sonnet 5 (high)\", column Total, tooltip of the cell",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "55 of 69 runs passed",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "codex-gpt-6-luna",
+   "value": "52 of 69",
+   "level": "written",
+   "form": "table-cell",
+   "where": "page table (Benchmark), row \"Codex / GPT-6 luna (medium)\", column Total, tooltip of the cell",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "52 of 69 runs passed",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "codex-gpt-6-sol",
+   "value": "54 of 69",
+   "level": "written",
+   "form": "table-cell",
+   "where": "page table (Benchmark), row \"Codex / GPT-6 sol (medium)\", column Total, tooltip of the cell",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "54 of 69 runs passed",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "grok-4.7",
+   "value": "62 of 69",
+   "level": "written",
+   "form": "table-cell",
+   "where": "page table (Benchmark), row \"Grok Build / Grok 4.7 (high)\", column Total, tooltip of the cell",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "62 of 69 runs passed",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "opencode-kimi-k3",
+   "value": "60 of 69",
+   "level": "written",
+   "form": "table-cell",
+   "where": "page table (Benchmark), row \"OpenCode / Kimi K3\", column Total, tooltip of the cell",
+   "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+   "quote": "60 of 69 runs passed",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  }
+ ]
+}

@@ -1,0 +1,937 @@
+{
+ "id": "src-driftproofhq-report-014-2026-10-07",
+ "publisher": "driftproofhq",
+ "urls": [
+  "https://driftproofhq.com/reports/014/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://driftproofhq.com/reports/014/",
+   "captured": "2026-10-08T07:59:24Z",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "note": "Report 014 page, saved by salvo s21/g5 (8 Oct 2026, file mtime of the original)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html": "eda40d8ec8bfd8c82bc3b2de52290e3ab9fd7f76f9473bb5a55ccfc0d75ea21f",
+  "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt": "430b6535bec3fd19a8f8e4cadb0a22b14ff4d53218f9187addb0e52fc1029db2",
+  "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014-means.json": "cce29be0914ebee8825ddc6fd90df6fd7b16d0d3f687295300cfe2d253450a30"
+ },
+ "harvested_at": "2026-10-08T07:59:24Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave",
+ "agent": "converter (Sonnet 5.5), from the saved page",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "from": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "tool": "convert (python re/html.unescape): visible text of the page, tags removed, scripts and styles dropped, whitespace collapsed; quotes matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014-means.json",
+   "from": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "tool": "convert.py: per task, model and arm (baseline = without the skill, with_skill) the arithmetic mean of the three per-run arm means printed in the page table (exact decimal arithmetic, 6 decimals). The page prints per-run means only; the mean over the three runs is ours"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014-means.json",
+   "where": "$.means",
+   "format": "json",
+   "row_key": "id",
+   "columns": {
+    "id": "note",
+    "task": "note",
+    "model": "note",
+    "mode": "note",
+    "runs": "note",
+    "mean": {
+     "says": "score",
+     "term": "score-0-1",
+     "scale": "raw",
+     "precision": {
+      "model": "exact"
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "judge",
+   "about": null,
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "where": "Limits: \"Every answer was scored by claude-opus-5 as the grader\"",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Every answer was scored by claude-opus-5 as the grader"
+  },
+  {
+   "id": "F2",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "No model was given an effort or thinking setting.",
+   "level": "written",
+   "form": "prose",
+   "where": "Setup of the runs",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "No model was given an effort or thinking setting."
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "Claude Code applied its own per-turn effort in every call of Claude Haiku 5.5 and no call of Claude Haiku 4.5.",
+   "level": "written",
+   "form": "prose",
+   "where": "Setup of the runs (the two Haiku arms differ in more than the model)",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Code applied its own per-turn effort in every call of Claude Haiku 5.5 and no call of Claude Haiku 4.5."
+  },
+  {
+   "id": "F4",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code 2.1.284",
+   "level": "written",
+   "form": "prose",
+   "where": "Evidence and files, What departs from Report 013",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Every call of the two Claude Haiku arms ran on Claude Code 2.1.284",
+   "term": "claude-code"
+  },
+  {
+   "id": "F5",
+   "says": "run-date",
+   "about": null,
+   "value": "7 Oct 2026",
+   "level": "written",
+   "form": "prose",
+   "where": "Setup of the runs",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "The first run began on 7 Oct 2026 at 20:17 UTC."
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "Each arm drew between 3 and 10 answers in a run, and the grader scored every answer three times. That is few answers.",
+   "level": "written",
+   "form": "prose",
+   "where": "Limits",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Each arm drew between 3 and 10 answers in a run, and the grader scored every answer three times. That is few answers."
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "Each skill was tested on one task only.",
+   "level": "written",
+   "form": "prose",
+   "where": "Limits",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Each skill was tested on one task only."
+  },
+  {
+   "id": "F8",
+   "says": "metric-definition",
+   "about": null,
+   "value": "the judge scores each draw against the case’s rubric on a continuous 0 to 1 scale",
+   "level": "written",
+   "form": "prose",
+   "where": "Method: the judge scores each draw",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "the judge scores each draw against the case’s rubric on a continuous 0 to 1 scale"
+  },
+  {
+   "id": "F9",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 5.5|baseline",
+   "value": "0.820833",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 5.5 / run 1, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.820833\" data-src=\"docs/reports/014/evidence/run-1/code-review-and-quality-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F10",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 5.5|baseline",
+   "value": "0.8125",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 5.5 / run 2, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.8125\" data-src=\"docs/reports/014/evidence/run-2/code-review-and-quality-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F11",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 5.5|baseline",
+   "value": "0.823334",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 5.5 / run 3, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.823334\" data-src=\"docs/reports/014/evidence/run-3/code-review-and-quality-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F12",
+   "says": "model-name",
+   "about": "code-review-and-quality|Claude Haiku 5.5|baseline",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of code-review-and-quality / Claude Haiku 5.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 5.5"
+  },
+  {
+   "id": "F13",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 4.5|baseline",
+   "value": "0.338889",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 4.5 / run 1, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.338889\" data-src=\"docs/reports/014/evidence/run-1/code-review-and-quality-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F14",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 4.5|baseline",
+   "value": "0.540476",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 4.5 / run 2, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.540476\" data-src=\"docs/reports/014/evidence/run-2/code-review-and-quality-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F15",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 4.5|baseline",
+   "value": "0.546667",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 4.5 / run 3, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.546667\" data-src=\"docs/reports/014/evidence/run-3/code-review-and-quality-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": "code-review-and-quality|Claude Haiku 4.5|baseline",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of code-review-and-quality / Claude Haiku 4.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 4.5"
+  },
+  {
+   "id": "F17",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 5.5|with_skill",
+   "value": "0.891111",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 5.5 / run 1, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.891111\" data-src=\"docs/reports/014/evidence/run-1/code-review-and-quality-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F18",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 5.5|with_skill",
+   "value": "0.860833",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 5.5 / run 2, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.860833\" data-src=\"docs/reports/014/evidence/run-2/code-review-and-quality-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F19",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 5.5|with_skill",
+   "value": "0.77",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 5.5 / run 3, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.77\" data-src=\"docs/reports/014/evidence/run-3/code-review-and-quality-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": "code-review-and-quality|Claude Haiku 5.5|with_skill",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of code-review-and-quality / Claude Haiku 5.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 5.5"
+  },
+  {
+   "id": "F21",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 4.5|with_skill",
+   "value": "0.6775",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 4.5 / run 1, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.6775\" data-src=\"docs/reports/014/evidence/run-1/code-review-and-quality-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F22",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 4.5|with_skill",
+   "value": "0.628333",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 4.5 / run 2, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.628333\" data-src=\"docs/reports/014/evidence/run-2/code-review-and-quality-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F23",
+   "says": "run-score",
+   "about": "code-review-and-quality|Claude Haiku 4.5|with_skill",
+   "value": "0.565834",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row code-review-and-quality / Claude Haiku 4.5 / run 3, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.565834\" data-src=\"docs/reports/014/evidence/run-3/code-review-and-quality-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": "code-review-and-quality|Claude Haiku 4.5|with_skill",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of code-review-and-quality / Claude Haiku 4.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 4.5"
+  },
+  {
+   "id": "F25",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|baseline",
+   "value": "0.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 5.5 / run 1, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.3\" data-src=\"docs/reports/014/evidence/run-1/git-workflow-and-versioning-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F26",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|baseline",
+   "value": "0.848889",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 5.5 / run 2, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.848889\" data-src=\"docs/reports/014/evidence/run-2/git-workflow-and-versioning-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F27",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|baseline",
+   "value": "0.612857",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 5.5 / run 3, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.612857\" data-src=\"docs/reports/014/evidence/run-3/git-workflow-and-versioning-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F28",
+   "says": "model-name",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|baseline",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of git-workflow-and-versioning / Claude Haiku 5.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 5.5"
+  },
+  {
+   "id": "F29",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|baseline",
+   "value": "0.834445",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 4.5 / run 1, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.834445\" data-src=\"docs/reports/014/evidence/run-1/git-workflow-and-versioning-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F30",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|baseline",
+   "value": "0.837778",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 4.5 / run 2, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.837778\" data-src=\"docs/reports/014/evidence/run-2/git-workflow-and-versioning-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F31",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|baseline",
+   "value": "0.838889",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 4.5 / run 3, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.838889\" data-src=\"docs/reports/014/evidence/run-3/git-workflow-and-versioning-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F32",
+   "says": "model-name",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|baseline",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of git-workflow-and-versioning / Claude Haiku 4.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 4.5"
+  },
+  {
+   "id": "F33",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|with_skill",
+   "value": "0.848889",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 5.5 / run 1, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.848889\" data-src=\"docs/reports/014/evidence/run-1/git-workflow-and-versioning-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F34",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|with_skill",
+   "value": "0.838889",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 5.5 / run 2, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.838889\" data-src=\"docs/reports/014/evidence/run-2/git-workflow-and-versioning-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F35",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|with_skill",
+   "value": "0.847778",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 5.5 / run 3, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.847778\" data-src=\"docs/reports/014/evidence/run-3/git-workflow-and-versioning-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F36",
+   "says": "model-name",
+   "about": "git-workflow-and-versioning|Claude Haiku 5.5|with_skill",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of git-workflow-and-versioning / Claude Haiku 5.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 5.5"
+  },
+  {
+   "id": "F37",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|with_skill",
+   "value": "0.832222",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 4.5 / run 1, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.832222\" data-src=\"docs/reports/014/evidence/run-1/git-workflow-and-versioning-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F38",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|with_skill",
+   "value": "0.827778",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 4.5 / run 2, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.827778\" data-src=\"docs/reports/014/evidence/run-2/git-workflow-and-versioning-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F39",
+   "says": "run-score",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|with_skill",
+   "value": "0.813333",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row git-workflow-and-versioning / Claude Haiku 4.5 / run 3, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.813333\" data-src=\"docs/reports/014/evidence/run-3/git-workflow-and-versioning-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F40",
+   "says": "model-name",
+   "about": "git-workflow-and-versioning|Claude Haiku 4.5|with_skill",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of git-workflow-and-versioning / Claude Haiku 4.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 4.5"
+  },
+  {
+   "id": "F41",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|baseline",
+   "value": "0.561111",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 5.5 / run 1, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.561111\" data-src=\"docs/reports/014/evidence/run-1/documentation-and-adrs-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F42",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|baseline",
+   "value": "0.588889",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 5.5 / run 2, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.588889\" data-src=\"docs/reports/014/evidence/run-2/documentation-and-adrs-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F43",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|baseline",
+   "value": "0.483333",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 5.5 / run 3, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.483333\" data-src=\"docs/reports/014/evidence/run-3/documentation-and-adrs-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|baseline",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of documentation-and-adrs / Claude Haiku 5.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 5.5"
+  },
+  {
+   "id": "F45",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|baseline",
+   "value": "0.625556",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 4.5 / run 1, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.625556\" data-src=\"docs/reports/014/evidence/run-1/documentation-and-adrs-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F46",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|baseline",
+   "value": "0.579167",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 4.5 / run 2, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.579167\" data-src=\"docs/reports/014/evidence/run-2/documentation-and-adrs-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F47",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|baseline",
+   "value": "0.605238",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 4.5 / run 3, column without the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.605238\" data-src=\"docs/reports/014/evidence/run-3/documentation-and-adrs-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=baseline].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F48",
+   "says": "model-name",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|baseline",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of documentation-and-adrs / Claude Haiku 4.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 4.5"
+  },
+  {
+   "id": "F49",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|with_skill",
+   "value": "0.596667",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 5.5 / run 1, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.596667\" data-src=\"docs/reports/014/evidence/run-1/documentation-and-adrs-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F50",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|with_skill",
+   "value": "0.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 5.5 / run 2, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.5\" data-src=\"docs/reports/014/evidence/run-2/documentation-and-adrs-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F51",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|with_skill",
+   "value": "0.542",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 5.5 / run 3, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.542\" data-src=\"docs/reports/014/evidence/run-3/documentation-and-adrs-claude-haiku-5-5-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F52",
+   "says": "model-name",
+   "about": "documentation-and-adrs|Claude Haiku 5.5|with_skill",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of documentation-and-adrs / Claude Haiku 5.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 5.5"
+  },
+  {
+   "id": "F53",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|with_skill",
+   "value": "0.763333",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 4.5 / run 1, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.763333\" data-src=\"docs/reports/014/evidence/run-1/documentation-and-adrs-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-1",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F54",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|with_skill",
+   "value": "0.772",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 4.5 / run 2, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.772\" data-src=\"docs/reports/014/evidence/run-2/documentation-and-adrs-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-2",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F55",
+   "says": "run-score",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|with_skill",
+   "value": "0.739444",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", row documentation-and-adrs / Claude Haiku 4.5 / run 3, column with the skill: average",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.html",
+   "quote": "<data value=\"0.739444\" data-src=\"docs/reports/014/evidence/run-3/documentation-and-adrs-claude-haiku-4-5-20251001-2026-10-07.json\" data-at=\"results.cases[mode=with_skill].generation.mean\"",
+   "term": "score-0-1",
+   "scale": "raw",
+   "run": "run-3",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F56",
+   "says": "model-name",
+   "about": "documentation-and-adrs|Claude Haiku 4.5|with_skill",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "table \"What do the runs show?\", model column of documentation-and-adrs / Claude Haiku 4.5",
+   "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+   "quote": "Claude Haiku 4.5"
+  }
+ ]
+}

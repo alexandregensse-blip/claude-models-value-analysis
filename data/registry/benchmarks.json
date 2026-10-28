@@ -109140,9 +109140,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://mattersec-labs.github.io/seclens/",
+      "captured": "2026-10-19",
+      "where": "const ROLE_DESC / the leaderboard table: models are ranked by the leaderboard field (lbRanks sorts by m.leaderboard)",
+      "quote": "[...MODELS].sort((a,b)=>b.leaderboard-a.leaderboard).forEach((m,i)=>{lbRanks[m.id]=i+1;});",
+      "file": "/work/.salvo14/mig/convert-mattersec-labs.github.io/evidence/seclens.html",
+      "sha256": "86500d3bcec58693551548f71049556deb22f57c31e79cc2e6b573817f93e05b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -114088,9 +114097,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://supabase.com/evals",
+      "captured": "2026-10-01",
+      "where": "page structured data and the table: one pass rate per agent/model (Total) and per journey stage; the page designates no other metric",
+      "quote": "Whether an agent run satisfied every check in its eval, recorded per run.",
+      "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+      "sha256": "6c7febcb08581e5782f30a0a314aab610db622fb132fc5973bb305341ec14766"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -114117,9 +114135,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://supabase.com/evals",
+      "captured": "2026-10-01",
+      "where": "page structured data and the table: one pass rate per agent/model (Total) and per journey stage; the page designates no other metric",
+      "quote": "Whether an agent run satisfied every check in its eval, recorded per run.",
+      "file": "/work/.salvo14/mig/convert-supabase.com/evidence/supabase-evals.html",
+      "sha256": "6c7febcb08581e5782f30a0a314aab610db622fb132fc5973bb305341ec14766"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
