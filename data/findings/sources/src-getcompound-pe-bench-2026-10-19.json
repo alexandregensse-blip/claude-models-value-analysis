@@ -1,0 +1,1376 @@
+{
+ "id": "src-getcompound-pe-bench-2026-10-19",
+ "publisher": "getcompound",
+ "urls": [
+  "https://getcompound.ai/blog/introducing-pe-bench",
+  "https://raw.githubusercontent.com/GetCompoundAI/pe-bench/main/docs/running-agents.md"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://getcompound.ai/blog/introducing-pe-bench",
+   "captured": "2026-10-28T00:00:00Z",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "note": "saved copy of the post (dated 19 Oct 2026 in its byline); the capture date of the saved copy is not recorded, the file is dated 28 Oct 2026"
+  },
+  {
+   "id": "G2",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/GetCompoundAI/pe-bench/main/docs/running-agents.md",
+   "captured": "2026-10-28T00:00:00Z",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "note": "publisher's docs/running-agents.md in GetCompoundAI/pe-bench (fetched 28 Oct 2026, raw file); the post names it as the place the settings are written"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html": "d0c8e9c14178e6b2936d5e995f56e3a651582113feadab1247999f10092d2e49",
+  "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md": "ad8e2d8200e38c7b4bf8f538fb3e211b99a2e44188cafa0b7a62c182595010cc",
+  "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.txt": "d5e0ad45a68c664b8381e69ac65749208ce495eca61fb1d89609f87465a7a5bc"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (28 Oct)",
+ "agent": "converter (Haiku 5.5), from the saved copies",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.txt",
+   "from": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "tool": "python html.parser: visible text, script/style/svg removed, one block per line (C2 28 Oct, convert-getcompound/convert.py)"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "unit",
+   "about": null,
+   "value": "Model cost per task (log scale)",
+   "level": "written",
+   "form": "label",
+   "where": "chart axis title of the 'Overall Performance vs. Cost Comparison' chart",
+   "quote": "Model cost per task (log scale)",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "USD per task"
+  },
+  {
+   "id": "F2",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "label",
+   "where": "chart label of the cost points (aria-label, e.g. 'Claude Opus 5.5: 78%, $6.79')",
+   "quote": "Claude Opus 5.5: 78%, $6.79",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "USD"
+  },
+  {
+   "id": "F3",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Overall score on the private rooms",
+   "level": "written",
+   "form": "prose",
+   "where": "caption of the chart 'Overall Performance vs. Cost Comparison'",
+   "quote": "Overall score on the private rooms.",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.txt"
+  },
+  {
+   "id": "F4",
+   "says": "aggregation",
+   "about": null,
+   "value": "overall score on the private rooms",
+   "level": "written",
+   "form": "prose",
+   "where": "caption of the chart 'Overall Performance vs. Cost Comparison'",
+   "quote": "Overall score on the private rooms.",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.txt"
+  },
+  {
+   "id": "F5",
+   "says": "metric-definition",
+   "about": null,
+   "value": "A task’s score is the share of its points the deliverable passes",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How we grade'",
+   "quote": "A task’s score is the share of its points the deliverable passes.",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.txt"
+  },
+  {
+   "id": "F6",
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Claude Opus 5.5: 78.1%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "78.1",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Claude Opus 5.5: 78.1%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F8",
+   "says": "cost",
+   "about": "Claude Opus 5.5",
+   "value": "6.79",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Claude Opus 5.5: 78%, $6.79",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F9",
+   "says": "harness",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Claude Code",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "claude-code"
+  },
+  {
+   "id": "F10",
+   "says": "version",
+   "about": "Claude Opus 5.5",
+   "value": "2.1.289",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "Claude Code 2.1.289, the CLI bundled in",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F11",
+   "says": "no-effort-sent",
+   "about": "Claude Opus 5.5",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; no effort or thinking setting was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F12",
+   "says": "model-api-id",
+   "about": "Claude Opus 5.5",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`claude-opus-5-5`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F13",
+   "says": "cost-method",
+   "about": "Claude Opus 5.5",
+   "value": "The cost Claude Code itself reports for the session",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Claude Code item",
+   "quote": "The cost Claude Code itself reports for the session",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "cli-total"
+  },
+  {
+   "id": "F14",
+   "says": "cost-basis",
+   "about": "Claude Opus 5.5",
+   "value": "Anthropic's list prices",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Claude Code item",
+   "quote": "at Anthropic's list prices",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "Claude Fable 5.1",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Claude Fable 5.1: 73.5%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Claude Fable 5.1",
+   "value": "73.5",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Claude Fable 5.1: 73.5%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "cost",
+   "about": "Claude Fable 5.1",
+   "value": "13.25",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Claude Fable 5.1: 74%, $13.25",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F18",
+   "says": "harness",
+   "about": "Claude Fable 5.1",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Claude Code",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "claude-code"
+  },
+  {
+   "id": "F19",
+   "says": "version",
+   "about": "Claude Fable 5.1",
+   "value": "2.1.289",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "Claude Code 2.1.289, the CLI bundled in",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F20",
+   "says": "no-effort-sent",
+   "about": "Claude Fable 5.1",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; no effort or thinking setting was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F21",
+   "says": "model-api-id",
+   "about": "Claude Fable 5.1",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`claude-fable-5-1`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F22",
+   "says": "cost-method",
+   "about": "Claude Fable 5.1",
+   "value": "The cost Claude Code itself reports for the session",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Claude Code item",
+   "quote": "The cost Claude Code itself reports for the session",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "cli-total"
+  },
+  {
+   "id": "F23",
+   "says": "cost-basis",
+   "about": "Claude Fable 5.1",
+   "value": "Anthropic's list prices",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Claude Code item",
+   "quote": "at Anthropic's list prices",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": "GPT-6 Astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "GPT-6 Astra: 70.1%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "70.1",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "GPT-6 Astra: 70.1%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "says": "cost",
+   "about": "GPT-6 Astra",
+   "value": "3.35",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "GPT-6 Astra: 70%, $3.35",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F27",
+   "says": "harness",
+   "about": "GPT-6 Astra",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Codex CLI",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F28",
+   "says": "version",
+   "about": "GPT-6 Astra",
+   "value": "0.159.2",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "`@openai/codex@0.159.2`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F29",
+   "says": "no-effort-sent",
+   "about": "GPT-6 Astra",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; no `model_reasoning_effort` was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F30",
+   "says": "model-api-id",
+   "about": "GPT-6 Astra",
+   "value": "gpt-6-astra",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`gpt-6-astra`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F31",
+   "says": "cost-method",
+   "about": "GPT-6 Astra",
+   "value": "times that model's public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "the tokens each CLI reported for each model call, times that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F32",
+   "says": "cost-basis",
+   "about": "GPT-6 Astra",
+   "value": "public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F33",
+   "says": "note",
+   "about": "GPT-6 Astra",
+   "value": "so its cost is a lower bound",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Codex item",
+   "quote": "so its cost is a lower bound",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "GPT-6.1 Sol",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "GPT-6.1 Sol: 65.2%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "65.2",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "GPT-6.1 Sol: 65.2%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": "GPT-6.1 Sol",
+   "value": "0.45",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "GPT-6.1 Sol: 65%, $0.45",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "says": "harness",
+   "about": "GPT-6.1 Sol",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Codex CLI",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F38",
+   "says": "version",
+   "about": "GPT-6.1 Sol",
+   "value": "0.159.2",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "`@openai/codex@0.159.2`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F39",
+   "says": "no-effort-sent",
+   "about": "GPT-6.1 Sol",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; no `model_reasoning_effort` was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F40",
+   "says": "model-api-id",
+   "about": "GPT-6.1 Sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`gpt-6.1-sol`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F41",
+   "says": "cost-method",
+   "about": "GPT-6.1 Sol",
+   "value": "times that model's public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "the tokens each CLI reported for each model call, times that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F42",
+   "says": "cost-basis",
+   "about": "GPT-6.1 Sol",
+   "value": "public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F43",
+   "says": "note",
+   "about": "GPT-6.1 Sol",
+   "value": "so its cost is a lower bound",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Codex item",
+   "quote": "so its cost is a lower bound",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Claude Haiku 5.5: 56.8%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Claude Haiku 5.5",
+   "value": "56.8",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Claude Haiku 5.5: 56.8%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": "Claude Haiku 5.5",
+   "value": "1.16",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Claude Haiku 5.5: 57%, $1.16",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "harness",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Claude Code",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "claude-code"
+  },
+  {
+   "id": "F48",
+   "says": "version",
+   "about": "Claude Haiku 5.5",
+   "value": "2.1.289",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "Claude Code 2.1.289, the CLI bundled in",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F49",
+   "says": "no-effort-sent",
+   "about": "Claude Haiku 5.5",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; no effort or thinking setting was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F50",
+   "says": "model-api-id",
+   "about": "Claude Haiku 5.5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`claude-haiku-5-5`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F51",
+   "says": "cost-method",
+   "about": "Claude Haiku 5.5",
+   "value": "The cost Claude Code itself reports for the session",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Claude Code item",
+   "quote": "The cost Claude Code itself reports for the session",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "cli-total"
+  },
+  {
+   "id": "F52",
+   "says": "cost-basis",
+   "about": "Claude Haiku 5.5",
+   "value": "Anthropic's list prices",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Claude Code item",
+   "quote": "at Anthropic's list prices",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F53",
+   "says": "model-name",
+   "about": "GPT-6 Luna",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "GPT-6 Luna: 28.7%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "GPT-6 Luna",
+   "value": "28.7",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "GPT-6 Luna: 28.7%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F55",
+   "says": "cost",
+   "about": "GPT-6 Luna",
+   "value": "0.015",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "GPT-6 Luna: 29%, $0.015",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F56",
+   "says": "harness",
+   "about": "GPT-6 Luna",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Codex CLI",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F57",
+   "says": "version",
+   "about": "GPT-6 Luna",
+   "value": "0.159.2",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "`@openai/codex@0.159.2`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F58",
+   "says": "no-effort-sent",
+   "about": "GPT-6 Luna",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; no `model_reasoning_effort` was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F59",
+   "says": "model-api-id",
+   "about": "GPT-6 Luna",
+   "value": "gpt-6-luna",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`gpt-6-luna`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F60",
+   "says": "cost-method",
+   "about": "GPT-6 Luna",
+   "value": "times that model's public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "the tokens each CLI reported for each model call, times that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F61",
+   "says": "cost-basis",
+   "about": "GPT-6 Luna",
+   "value": "public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F62",
+   "says": "note",
+   "about": "GPT-6 Luna",
+   "value": "so its cost is a lower bound",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', Codex item",
+   "quote": "so its cost is a lower bound",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F63",
+   "says": "model-name",
+   "about": "Gemini 3.8 Flash",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Gemini 3.8 Flash: 58.3%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "Gemini 3.8 Flash",
+   "value": "58.3",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Gemini 3.8 Flash: 58.3%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F65",
+   "says": "cost",
+   "about": "Gemini 3.8 Flash",
+   "value": "1.63",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Gemini 3.8 Flash: 58%, $1.63",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F66",
+   "says": "harness",
+   "about": "Gemini 3.8 Flash",
+   "value": "Gemini CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Gemini CLI",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "gemini-cli"
+  },
+  {
+   "id": "F67",
+   "says": "version",
+   "about": "Gemini 3.8 Flash",
+   "value": "0.64.0",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "`@google/gemini-cli@0.64.0`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F68",
+   "says": "effort-setting",
+   "about": "Gemini 3.8 Flash",
+   "value": "MEDIUM",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Reasoning effort' row of the Gemini CLI section",
+   "quote": "`thinkingLevel: MEDIUM`, set through a model alias in `settings.json`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F69",
+   "says": "model-api-id",
+   "about": "Gemini 3.8 Flash",
+   "value": "gemini-3.8-flash",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`gemini-3.8-flash`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F70",
+   "says": "cost-method",
+   "about": "Gemini 3.8 Flash",
+   "value": "times that model's public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "the tokens each CLI reported for each model call, times that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F71",
+   "says": "cost-basis",
+   "about": "Gemini 3.8 Flash",
+   "value": "public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F72",
+   "says": "model-name",
+   "about": "Gemini 4 Argon",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Gemini 4 Argon: 48.9%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F73",
+   "says": "score",
+   "about": "Gemini 4 Argon",
+   "value": "48.9",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Gemini 4 Argon: 48.9%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "says": "cost",
+   "about": "Gemini 4 Argon",
+   "value": "4.28",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Gemini 4 Argon: 49%, $4.28",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F75",
+   "says": "harness",
+   "about": "Gemini 4 Argon",
+   "value": "Gemini CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Gemini CLI",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "gemini-cli"
+  },
+  {
+   "id": "F76",
+   "says": "version",
+   "about": "Gemini 4 Argon",
+   "value": "0.64.0",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "`@google/gemini-cli@0.64.0`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F77",
+   "says": "effort-setting",
+   "about": "Gemini 4 Argon",
+   "value": "MEDIUM",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Reasoning effort' row of the Gemini CLI section",
+   "quote": "`thinkingLevel: MEDIUM`, set through a model alias in `settings.json`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F78",
+   "says": "model-api-id",
+   "about": "Gemini 4 Argon",
+   "value": "gemini-4-argon",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`gemini-4-argon`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F79",
+   "says": "cost-method",
+   "about": "Gemini 4 Argon",
+   "value": "times that model's public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "the tokens each CLI reported for each model call, times that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F80",
+   "says": "cost-basis",
+   "about": "Gemini 4 Argon",
+   "value": "public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F81",
+   "says": "model-name",
+   "about": "Muse Wonder 1.0",
+   "value": "Muse Wonder 1.0",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Muse Wonder 1.0: 64.7%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F82",
+   "says": "score",
+   "about": "Muse Wonder 1.0",
+   "value": "64.7",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Muse Wonder 1.0: 64.7%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F83",
+   "says": "cost",
+   "about": "Muse Wonder 1.0",
+   "value": "3.40",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Muse Wonder 1.0: 65%, $3.40",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F84",
+   "says": "harness",
+   "about": "Muse Wonder 1.0",
+   "value": "Muse CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Muse CLI",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F85",
+   "says": "version",
+   "about": "Muse Wonder 1.0",
+   "value": "1.4.7-R6101.1",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "Muse CLI `1.4.7-R6101.1`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F86",
+   "says": "no-effort-sent",
+   "about": "Muse Wonder 1.0",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; none was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F87",
+   "says": "model-api-id",
+   "about": "Muse Wonder 1.0",
+   "value": "muse-wonder-1.0",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`muse-wonder-1.0`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F88",
+   "says": "cost-method",
+   "about": "Muse Wonder 1.0",
+   "value": "times that model's public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "the tokens each CLI reported for each model call, times that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F89",
+   "says": "cost-basis",
+   "about": "Muse Wonder 1.0",
+   "value": "public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F90",
+   "says": "model-name",
+   "about": "Muse Spark 1.3",
+   "value": "Muse Spark 1.3",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Muse Spark 1.3: 55.3%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F91",
+   "says": "score",
+   "about": "Muse Spark 1.3",
+   "value": "55.3",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Muse Spark 1.3: 55.3%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F92",
+   "says": "cost",
+   "about": "Muse Spark 1.3",
+   "value": "1.66",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Muse Spark 1.3: 55%, $1.66",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F93",
+   "says": "harness",
+   "about": "Muse Spark 1.3",
+   "value": "Muse CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Muse CLI",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F94",
+   "says": "version",
+   "about": "Muse Spark 1.3",
+   "value": "1.4.7-R6101.1",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Setting' row CLI of the section",
+   "quote": "Muse CLI `1.4.7-R6101.1`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F95",
+   "says": "no-effort-sent",
+   "about": "Muse Spark 1.3",
+   "value": "default",
+   "level": "written",
+   "form": "prose",
+   "where": "table 'Reasoning effort' row of the section",
+   "quote": "The CLI's default for each model; none was passed",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md"
+  },
+  {
+   "id": "F96",
+   "says": "model-api-id",
+   "about": "Muse Spark 1.3",
+   "value": "muse-spark-1.3",
+   "level": "written",
+   "form": "code",
+   "where": "table 'Models' row of the section",
+   "quote": "`muse-spark-1.3`",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F97",
+   "says": "cost-method",
+   "about": "Muse Spark 1.3",
+   "value": "times that model's public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "the tokens each CLI reported for each model call, times that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F98",
+   "says": "cost-basis",
+   "about": "Muse Spark 1.3",
+   "value": "public list price",
+   "level": "written",
+   "form": "prose",
+   "where": "section 'How cost was computed', first paragraph",
+   "quote": "that model's public list price",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F99",
+   "says": "model-name",
+   "about": "Compound standard",
+   "value": "Compound standard",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Compound standard: 80.5%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F100",
+   "says": "score",
+   "about": "Compound standard",
+   "value": "80.5",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Compound standard: 80.5%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F101",
+   "says": "cost",
+   "about": "Compound standard",
+   "value": "4.46",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Compound standard: 81%, $4.46",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F102",
+   "says": "harness",
+   "about": "Compound standard",
+   "value": "Compound",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Compound",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "compound"
+  },
+  {
+   "id": "F103",
+   "says": "model-name",
+   "about": "Compound quick",
+   "value": "Compound quick",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point)",
+   "quote": "Compound quick: 72.0%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html"
+  },
+  {
+   "id": "F104",
+   "says": "score",
+   "about": "Compound quick",
+   "value": "72.0",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point), one decimal as printed",
+   "quote": "Compound quick: 72.0%",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "term": "PE Bench overall score % (private rooms)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F105",
+   "says": "cost",
+   "about": "Compound quick",
+   "value": "1.67",
+   "level": "written",
+   "form": "label",
+   "where": "chart label (aria-label of the point): cost per task, $ as printed",
+   "quote": "Compound quick: 72%, $1.67",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/compound-pe.html",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F106",
+   "says": "harness",
+   "about": "Compound quick",
+   "value": "Compound",
+   "level": "written",
+   "form": "prose",
+   "where": "section heading (the harness of these rows; its rows line is named in 'where' of the model fact)",
+   "quote": "## Compound",
+   "file": "/work/.salvo14/mig/convert-getcompound/evidence/running-agents.md",
+   "term": "compound"
+  }
+ ]
+}
