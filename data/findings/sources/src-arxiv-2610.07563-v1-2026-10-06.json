@@ -18,7 +18,8 @@
  "commit": null,
  "sha256": {
   "/work/.salvo14/mig/convert-arxiv-2610.07563/evidence/arxiv-2610.07563.html": "83d602d134429613cd0cabe80f1cf346b684faecca0c973c5fd4c6c9a7ec1d88",
-  "/work/.salvo14/mig/convert-arxiv-2610.07563/evidence/arxiv-2610.07563.txt": "ec4644b03bbb1bd2d56cd5b4177bee86511f669def6e63338e2f5c07cff10d32"
+  "/work/.salvo14/mig/convert-arxiv-2610.07563/evidence/arxiv-2610.07563.txt": "ec4644b03bbb1bd2d56cd5b4177bee86511f669def6e63338e2f5c07cff10d32",
+  "/work/.salvo14/mig/head-arxiv-2610.07563-v1/evidence/householdbench-table-main.csv": "8f7ab4abd276b7d27ac187d6749742dacb1f7da55ab8999f7af705502e578fb9"
  },
  "harvested_at": "2026-10-15T15:42:46Z",
  "published": {
@@ -37,7 +38,37 @@
    "tool": "c2lib-g/htmltxt2.py (bs4): visible text of the arXiv HTML page, one block per line, every table row on one line with cells joined by ' | '; quotes matched after NFKC, whitespace and case normalisation"
   }
  ],
- "tables": [],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/head-arxiv-2610.07563-v1/evidence/householdbench-table-main.csv",
+   "where": "householdbench-table-main.csv: the main results table (Rank, model, average rank within each topic, Average rank, RelMAE, Macro-F1, TV), as printed in the paper text",
+   "format": "csv",
+   "row_key": "model",
+   "columns": {
+    "Average rank": {
+     "says": "score",
+     "term": "average rank",
+     "scale": "raw"
+    },
+    "Average rank SE": "note",
+    "rank": "note",
+    "Consumption": "note",
+    "Housing": "note",
+    "Income": "note",
+    "Labor": "note",
+    "Macroeconomic": "note",
+    "RelMAE": "note",
+    "Macro-F1": "note",
+    "TV": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ],
  "facts": [
   {
    "id": "F1",

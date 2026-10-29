@@ -10673,6 +10673,45 @@
   },
   "qcd-nnakapa-t2": {
    "label": "QCD-nnakapa, T2 pass rate (quality judgement: the weakest task)"
+  },
+  "scheme-sabotage-success": {
+   "label": "SCHEME (arXiv 2605.29178) sabotage success, per trajectory"
+  },
+  "wc26-brier": {
+   "label": "WC2026 forecast Brier score (all 104 matches)"
+  },
+  "arxiv-2610.07563-householdbench-avg-rank": {
+   "label": "HouseholdBench average rank"
+  },
+  "rubric-expert-share-lost": {
+   "label": "Rubric transfer: share of passing expert criteria lost (RubricRAG degradation, Table A.5)"
+  },
+  "programgym-claudecode-resolved": {
+   "label": "ProgramGym paper (arXiv 2610.13395), ProgramBench, scaffold Claude Code, resolved %"
+  },
+  "programgym-programagent-resolved": {
+   "label": "ProgramGym paper (arXiv 2610.13395), ProgramBench, scaffold Program-Agent, resolved %"
+  },
+  "programgym-mini-swe-agent-resolved": {
+   "label": "ProgramGym flagship rows (mini-SWE-agent), resolved % (restated from Yang et al. 2026b)"
+  },
+  "rotabench-final-iou": {
+   "label": "RoTA-Bench Final IoU"
+  },
+  "epoch-ext-geobench-acw-country": {
+   "label": "Epoch external geobench, ACW Country %"
+  },
+  "oabriefcont-final": {
+   "label": "OpenAgents briefing-model factorial (control), final acceptance"
+  },
+  "oabrieftrea-final": {
+   "label": "OpenAgents briefing-model factorial (treatment), final acceptance"
+  },
+  "surfevolver-pass": {
+   "label": "Surface Evolver bench, pass rate"
+  },
+  "clerkbench-ch6": {
+   "label": "ClerkBench-CH6 board (Zenodo 23048151)"
   }
  },
  "setups": {
@@ -15608,9 +15647,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.14065",
+      "captured": "2026-10-28",
+      "where": "Abstract, Conclusions: the repair result the paper gives (repaired bugs of the 211 AtCoder bugs; Table 9 is ordered by no metric)",
+      "quote": "Conclusions: Over 50% of moderately complex bugs can be repaired by low-cost LLM-based",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.14065/evidence/2608.14065.txt",
+      "sha256": "a20527917f2d181b8460964fcfd08506134c1c78536782debbd51e479b75b44c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -15789,9 +15837,27 @@
    "metric": "pass%@1(502)",
    "headline": {
     "metric": "pass%@1(502)",
-    "basis": "decision",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/SJTUjinmao/ArkEval/blob/main/README.md",
+      "captured": "2026-08-23T10:58:05Z",
+      "file": "/work/.salvo14/mig/convert-arkeval-sjtu/evidence/README-1eb45ac.md",
+      "sha256": "fb85a79a6e3d2383ea966a5aeec62696a11f95aff3eabc4aea56aa38dc4ddc2d",
+      "where": "README, top notice (IMPORTANT block): Compile@1 measures build validity, Pass@1 the real repair",
+      "quote": "`Pass@1` 由行为级复现测试自动判定"
+     },
+     {
+      "url": "https://github.com/SJTUjinmao/ArkEval/blob/main/README.md",
+      "captured": "2026-08-23T10:58:05Z",
+      "file": "/work/.salvo14/mig/convert-arkeval-sjtu/evidence/README-1eb45ac.md",
+      "sha256": "fb85a79a6e3d2383ea966a5aeec62696a11f95aff3eabc4aea56aa38dc4ddc2d",
+      "where": "README, feature list, first bullet (行为正确性优先)",
+      "quote": "行为正确性优先"
+     }
+    ],
     "decision": null,
-    "level": "not-established:assumed"
+    "level": "written"
    },
    "bounds": [
     0,
@@ -15990,9 +16056,26 @@
    "metric": "pass@1 mean of 5 passes %",
    "headline": {
     "metric": "pass@1 mean of 5 passes %",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2608.26480v2",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption: the LCB-100 metric is pass@1 (five passes, 128k cap)",
+      "quote": "pass@1 on LCB-100 at a 128k cap, reasoning on",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.26480/text/2608.26480v2.txt",
+      "sha256": "e18bc0d54b90b50de19331c02d25ad1d1d096dd95c0ab4198d75d3c2f2d2a107"
+     },
+     {
+      "url": "https://arxiv.org/abs/2608.26480v2",
+      "captured": "2026-10-20",
+      "where": "Section 3.1: LCB-100 solutions are graded by LiveCodeBench's own hidden-test evaluator (the benchmark's standard grader and metric)",
+      "quote": "Solutions are graded by LiveCodeBench’s own hidden-test evaluator,",
+      "file": "/work/.salvo14/mig/convert-arxiv-2608.26480/text/2608.26480v2.txt",
+      "sha256": "e18bc0d54b90b50de19331c02d25ad1d1d096dd95c0ab4198d75d3c2f2d2a107"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -20083,10 +20166,19 @@
    "judge_panel": null,
    "metric": "macro-F1%",
    "headline": {
-    "metric": "macro-F1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "average rank",
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.07563",
+      "captured": "2026-10-27",
+      "where": "Section 4 (metrics): the unified score is the average rank across all 32 tasks, lower is better; the main table lists the models in that rank order",
+      "quote": "we report the average rank across all 32 tasks",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.07563/evidence/arxiv-2610.07563.txt",
+      "sha256": "ec4644b03bbb1bd2d56cd5b4177bee86511f669def6e63338e2f5c07cff10d32"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -22194,9 +22286,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.19051",
+      "captured": "2026-10-28",
+      "where": "Abstract, the paper result on accuracy (\"Accuracy fails in both directions, approving harmful language-model deployments in Hanabi\"); the held column is the Table 2 Hanabi acc. (first value, all teammates)",
+      "quote": "Accuracy fails in both directions",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.19051/evidence/abs.html",
+      "sha256": "ce376c7205dfbcd355a54e646769afb8bb59c9f99ce57525478f876013fe071f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -22223,9 +22324,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.19051",
+      "captured": "2026-10-28",
+      "where": "Abstract, the paper result on accuracy (\"Accuracy fails in both directions ... rejecting beneficial ones in task assignment\"); the held rows are the task-assignment accuracies",
+      "quote": "Accuracy fails in both directions",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.19051/evidence/abs.html",
+      "sha256": "ce376c7205dfbcd355a54e646769afb8bb59c9f99ce57525478f876013fe071f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -23469,9 +23579,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://bird-bench.github.io/",
+      "captured": "2026-10-15",
+      "where": "first table heading of the leaderboard page (Execution Accuracy (EX), Test (%) column held); BIRD is known and its standard metric is execution accuracy (rule 1)",
+      "quote": "Leaderboard - Execution Accuracy (EX)",
+      "file": "/work/.salvo14/mig/convert-bird-bench.github.io/evidence/bird-page-text.txt",
+      "sha256": "d1d5df0cef2ae342bc8b7735d40b724567a9a8ceb3b927a9c2dad2c863325188"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -30578,10 +30697,19 @@
    "judge_panel": null,
    "metric": "pass%",
    "headline": {
-    "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "ClerkBench-CH6",
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://zenodo.org/records/23048151",
+      "captured": "2026-10-27",
+      "where": "Table 2 (founding-family board): the board ranks configurations by ClerkBench-CH6; the abstract calls the consistency horizon the headline",
+      "quote": "Table 2 ranks configurations by ClerkBench-CH6",
+      "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+      "sha256": "a895c05a2c64d2ea5fcd17a3370131cb0f224ca63e3df43241e25c6e5a970175"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -30607,10 +30735,19 @@
    "judge_panel": null,
    "metric": "pass%",
    "headline": {
-    "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "ClerkBench-CH6",
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://zenodo.org/records/23048151",
+      "captured": "2026-10-27",
+      "where": "Table 2 (founding-family board): the board ranks configurations by ClerkBench-CH6; the abstract calls the consistency horizon the headline",
+      "quote": "Table 2 ranks configurations by ClerkBench-CH6",
+      "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+      "sha256": "a895c05a2c64d2ea5fcd17a3370131cb0f224ca63e3df43241e25c6e5a970175"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -31677,9 +31814,18 @@
    "metric": "recall%",
    "headline": {
     "metric": "recall%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://coderabbit.ai/blog/fable-5-1-model-review",
+      "captured": "2026-10-19",
+      "where": "section What we tested and Our read: the post states its result in recall (Our results favor Low. High took longer and found fewer known-issue points overall); the Review result table opens with the Recall row",
+      "quote": "High took longer and found fewer known-issue points overall",
+      "file": "/work/.salvo14/mig/convert-coderabbit/evidence/fable-5-1.html",
+      "sha256": "53b5b97750eb9845dfabadd423eeea9973794c2e03d62f5ffa51e15ad16562e6"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -31735,9 +31881,26 @@
    "metric": "recall%",
    "headline": {
     "metric": "recall%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://coderabbit.ai/blog/sonnet-5-5-model-review",
+      "captured": "2026-10-19",
+      "where": "TL;DR, first paragraph: the result the post gives is the known issues caught (share of the 13 Signal cases, the 'Known issues caught' column); the title says the same ('More catches than Sonnet 5')",
+      "quote": "caught <strong>6 of 13 issues</strong> through actionable comments",
+      "file": "/work/.salvo14/mig/convert-coderabbit/evidence/sonnet-5-5.html",
+      "sha256": "7d6722f5afb3e00c2bff19f41676c2588bf7e7b0d42903df200c06a17ddc2d97"
+     },
+     {
+      "url": "https://coderabbit.ai/blog/sonnet-5-5-model-review",
+      "captured": "2026-10-19",
+      "where": "page title (headline of the post)",
+      "quote": "Claude Sonnet 5.5 for code review: More catches than Sonnet 5, in half the time",
+      "file": "/work/.salvo14/mig/convert-coderabbit/evidence/sonnet-5-5.html",
+      "sha256": "7d6722f5afb3e00c2bff19f41676c2588bf7e7b0d42903df200c06a17ddc2d97"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -31764,8 +31927,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://coderabbit.ai/blog/sonnet-5-5-model-review",
+      "captured": "2026-10-19",
+      "where": "'What a review actually costs' table 'Claude model calls at list price': the setup prints cost only (no score), the OSS August column included",
+      "quote": "Claude model calls at list price",
+      "file": "/work/.salvo14/mig/convert-coderabbit/evidence/sonnet-5-5.html",
+      "sha256": "7d6722f5afb3e00c2bff19f41676c2588bf7e7b0d42903df200c06a17ddc2d97"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -32124,10 +32297,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "effect-step VM",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract (and section 3.4 Scores: 'Effect-step VM, our main score'; section 3.4 also: all-call VM is not the main score)",
+      "quote": "The main score is effect-step value match (VM)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -32153,10 +32335,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "effect-step VM",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract (and section 3.4 Scores: 'Effect-step VM, our main score'; section 3.4 also: all-call VM is not the main score)",
+      "quote": "The main score is effect-step value match (VM)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -32182,10 +32373,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "effect-step VM",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract (and section 3.4 Scores: 'Effect-step VM, our main score'; section 3.4 also: all-call VM is not the main score)",
+      "quote": "The main score is effect-step value match (VM)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -32211,10 +32411,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "effect-step VM",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.36647",
+      "captured": "2026-10-20",
+      "where": "Abstract (and section 3.4 Scores: 'Effect-step VM, our main score'; section 3.4 also: all-call VM is not the main score)",
+      "quote": "The main score is effect-step value match (VM)",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.36647/evidence/t.txt",
+      "sha256": "7024ce4e3bfc82c562eb396caaac7ece37a97f5b9ecf50152c090d2cd3cf1641"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -33642,9 +33851,18 @@
    "metric": "bugs-caught%",
    "headline": {
     "metric": "bugs-caught%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.anthropic.com/claude-opus-5-5",
+      "captured": "2026-10-28",
+      "where": "Opus 5.5 launch page, Deloitte Consulting LLP testimonial (Quote): one score per model, 'caught 72% of known bugs in our code reviews' (Opus 5.5, lowest effort) and Opus 5's 56% at high effort",
+      "quote": "caught 72% of known bugs in our code reviews",
+      "file": "/work/.salvo14/mig/convert-anthropic-partner-deloitte/evidence/launch.html",
+      "sha256": "82209dcb9f7ad6da1063b0429653e21d161ae6395ac255e2e2786b35607c5c0e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -34741,9 +34959,19 @@
    "metric": "pct-deadlock-lower-better",
    "headline": {
     "metric": "pct-deadlock-lower-better",
-    "basis": "decision",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2602.13255v2",
+      "captured": "2026-10-20",
+      "file": "/work/.salvo14/mig/convert-dpbench-2602.13255/evidence/2602.13255.txt",
+      "sha256": "e32207a19ae1384484e40fb2f4d935666f8ffc3e2aaced254bcee2aea48b9942",
+      "where": "Section 1 (page 2, 'What the paper shows')",
+      "quote": "Sequential coordination, where one philosopher acts at a time, is solved by four of six"
+     }
+    ],
     "decision": null,
-    "level": "not-established:assumed"
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -34767,9 +34995,19 @@
    "metric": "pct-deadlock-lower-better",
    "headline": {
     "metric": "pct-deadlock-lower-better",
-    "basis": "decision",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2602.13255v2",
+      "captured": "2026-10-20",
+      "file": "/work/.salvo14/mig/convert-dpbench-2602.13255/evidence/2602.13255.txt",
+      "sha256": "e32207a19ae1384484e40fb2f4d935666f8ffc3e2aaced254bcee2aea48b9942",
+      "where": "Abstract (page 1, lines 34-35)",
+      "quote": "deadlock ranges from 25.0% (95% Wilson CI [11.2, 46.9]) for GPT-"
+     }
+    ],
     "decision": null,
-    "level": "not-established:assumed"
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -39698,15 +39936,24 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://evals.futuresearch.ai/#btf3",
+      "captured": "2026-10-29",
+      "where": "BTF-3 leaderboard page (FutureSearch), raw HTML saved by curl: the pooled score is the average across all questions; the page states All scores are on the Brier scale; lower is better",
+      "quote": "The pooled score averages across all questions",
+      "file": "/work/.salvo14/mig/head-epoch.ai/evidence/futuresearch-btf3.html",
+      "sha256": "760bfab07b34b4b5bf0d5ed2487bee6e2106434ea7074f8ef37274a4804a8f7a"
+     }
+    ]
    },
    "bounds": [
     0,
     100
    ],
-   "direction": "higher",
+   "direction": "lower",
    "task_type": "mixed",
    "complexity": "mid",
    "kind": "runs",
@@ -39715,7 +39962,7 @@
     "epoch-ext-btf3"
    ],
    "label": "Epoch external btf3 (no held group; every in-window couple of the CSV)",
-   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source Direction lower (29 Oct): FutureSearch's page says 'All scores are on the Brier scale; lower is better' (head-epoch.ai/evidence/futuresearch-btf3.html)."
   },
   "epoch-ext-deepresearchbench": {
    "family": "epoch-ext-deepresearchbench",
@@ -39802,10 +40049,19 @@
    "judge_panel": null,
    "metric": "ACW Avg Score",
    "headline": {
-    "metric": "ACW Avg Score",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "ACW Country %",
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://epoch.ai/data/benchmark_data.zip",
+      "captured": "2026-10-18",
+      "where": "benchmark_metadata.csv, row GeoBench: score_column ACW Country % (the hub's designated score column)",
+      "quote": "GeoBench,True,geobench_external.csv,ACW Country %",
+      "file": "/work/.salvo14/mig/convert-epoch.ai/snap/1018/benchmark_metadata.csv",
+      "sha256": "f227d481009ddc34ee529645d8ba124aaac2630724686c40e8e9115a0245c766"
+     }
+    ]
    },
    "bounds": null,
    "direction": "higher",
@@ -44610,9 +44866,18 @@
    "metric": "pct-grader-pass",
    "headline": {
     "metric": "pct-grader-pass",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/Anandb71/ghw-cursor-model-benchmark",
+      "captured": "2026-10-28",
+      "where": "README, intro paragraph 1 (the grading standard): the independent 22-case grader is the one the three implementations are graded by, the column 'Independent grader (22)' of the Results table; the own tests are each model's self-written suite",
+      "quote": "To grade fairly, every implementation was also run against the same independent 22-case grader",
+      "file": "/work/.salvo14/mig/convert-ghw-cursor-anandb71/evidence/readme-main.md",
+      "sha256": "aec06aea8000687f0fdcb6dba0d7181dfffe06a67736cad4441e37ed630e051c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -55788,9 +56053,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.32459",
+      "captured": "2026-10-20",
+      "where": "Table 6 (ProgramBench, full 200 instances): one score per model and harness row; the only performance score the paper reports for ProgramBench",
+      "quote": "ClaudeCode 52.33 (+9.45%) 52.76 (+7.62%)",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2609.32459.txt",
+      "sha256": "63db35236901465e482ec7ea5979f3a9e43d10dc4932f11d6afb4ade20b71397"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -55817,9 +56091,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.32459",
+      "captured": "2026-10-20",
+      "where": "Table 6 (ProgramBench, full 200 instances): one score per model and harness row; the only performance score the paper reports for ProgramBench",
+      "quote": "mini-SWE-agent 42.88 45.14",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2609.32459.txt",
+      "sha256": "63db35236901465e482ec7ea5979f3a9e43d10dc4932f11d6afb4ade20b71397"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -55846,9 +56129,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.32459",
+      "captured": "2026-10-20",
+      "where": "Table 6 (ProgramBench, full 200 instances): one score per model and harness row; the only performance score the paper reports for ProgramBench",
+      "quote": "NanoHarness50.25 (+7.37%) 51.35 (+6.21%)",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2609.32459.txt",
+      "sha256": "63db35236901465e482ec7ea5979f3a9e43d10dc4932f11d6afb4ade20b71397"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -55875,9 +56167,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2609.32459",
+      "captured": "2026-10-20",
+      "where": "Table 6 (ProgramBench, full 200 instances): one score per model and harness row; the only performance score the paper reports for ProgramBench",
+      "quote": "OpenCode 51.68 (+8.80%) 52.48 (+7.34%)",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2609.32459.txt",
+      "sha256": "63db35236901465e482ec7ea5979f3a9e43d10dc4932f11d6afb4ade20b71397"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -72003,9 +72304,18 @@
    "metric": "fresh answer fits % (judged, semantic-hit subset)",
    "headline": {
     "metric": "fresh answer fits % (judged, semantic-hit subset)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://dev.to/hotkv-ltd/hotkv-cut-claude-token-use-by-70-in-our-banking77-benchmark-2j1f",
+      "captured": "2026-10-21",
+      "where": "'At the default threshold' (Answer quality): the table's 'Fresh answer fits' column, and the 'In short' paragraph's quality sentence; the title's 70% is a cost result",
+      "quote": "a cached answer fit the exact question 5.8 to 10.7 percentage points less often than a fresh answer from the same model",
+      "file": "/work/.salvo14/mig/convert-hotkv/evidence/hotkv_devto_4874743.md",
+      "sha256": "8e33fcb46f24553eb8467ca0d5ac6d8dd13f5830da04e6251ed19f8c0af3d324"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73006,9 +73316,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.00416",
+      "captured": "2026-10-28",
+      "where": "Table 2 (baseline prompt, 559 puzzles, mean of three runs): the table's only score column is 'Puzzle acc. (%)', one value per model; no other score is reported for the puzzles",
+      "quote": "Puzzle acc. (%)",
+      "file": "/work/.salvo14/mig/convert-imec-2610.00416/evidence/arxiv-2610.00416.txt",
+      "sha256": "16938ea7718d3e93f0c2039a0eac9700df8eb1c69fcb628f12d2db01fa7b187c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -73826,10 +74145,28 @@
    "judge_panel": null,
    "metric": "coverage%",
    "headline": {
-    "metric": "coverage%",
-    "basis": "decision",
+    "metric": "「高」の検出率",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://qiita.com/m_izumo/items/6a69b18b966f8efa9dff",
+      "captured": "2026-10-28",
+      "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+      "sha256": "634a594cc5ef668f349284b47097e256a16876b91437606e6e0efc1777e1951f",
+      "where": "Intro (paragraph 3: the conclusions)",
+      "quote": "件数の差は小さく、重い不具合で差が出た"
+     },
+     {
+      "url": "https://qiita.com/m_izumo/items/6a69b18b966f8efa9dff",
+      "captured": "2026-10-28",
+      "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+      "sha256": "634a594cc5ef668f349284b47097e256a16876b91437606e6e0efc1777e1951f",
+      "where": "Closing summary (まとめ), first paragraph",
+      "quote": "件数の差は小さいものの、重い不具合を見つける割合がはっきり違います"
+     }
+    ],
     "decision": null,
-    "level": "not-established:assumed"
+    "level": "written"
    },
    "bounds": [
     0,
@@ -76242,9 +76579,18 @@
    "metric": "correct-returns-strict%",
    "headline": {
     "metric": "correct-returns-strict%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.02792",
+      "captured": "2026-10-27",
+      "where": "Section 4.3 Main results (text on Table 1): the paper reads Table 1 by strict return-level accuracy, the first of its four columns (Correct returns (strict)); the abstract's 66% and 100% form-level figures are that column. No metric is designated; the four columns are not ranked",
+      "quote": "LAW&ORDER increases strict return-level accuracy from only",
+      "file": "/work/.salvo14/mig/convert-arxiv-lawandorder/evidence/arxiv-2610.02792.txt",
+      "sha256": "0dde61725d5f2027abc4c0916ad42676c1e957eedab5c872145b81f8f03dfd82"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -76271,9 +76617,18 @@
    "metric": "correct-returns-strict%",
    "headline": {
     "metric": "correct-returns-strict%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.02792",
+      "captured": "2026-10-27",
+      "where": "Section 4.3 Main results (text on Table 1): the paper reads Table 1 by strict return-level accuracy, the first of its four columns (Correct returns (strict)); the abstract's 66% and 100% form-level figures are that column. No metric is designated; the four columns are not ranked",
+      "quote": "LAW&ORDER increases strict return-level accuracy from only",
+      "file": "/work/.salvo14/mig/convert-arxiv-lawandorder/evidence/arxiv-2610.02792.txt",
+      "sha256": "0dde61725d5f2027abc4c0916ad42676c1e957eedab5c872145b81f8f03dfd82"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -76300,9 +76655,18 @@
    "metric": "correct-returns-strict%",
    "headline": {
     "metric": "correct-returns-strict%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.02792",
+      "captured": "2026-10-27",
+      "where": "Section 4.3 Main results (text on Table 1): the paper reads Table 1 by strict return-level accuracy, the first of its four columns (Correct returns (strict)); the abstract's 66% and 100% form-level figures are that column. No metric is designated; the four columns are not ranked",
+      "quote": "LAW&ORDER increases strict return-level accuracy from only",
+      "file": "/work/.salvo14/mig/convert-arxiv-lawandorder/evidence/arxiv-2610.02792.txt",
+      "sha256": "0dde61725d5f2027abc4c0916ad42676c1e957eedab5c872145b81f8f03dfd82"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -76329,9 +76693,18 @@
    "metric": "correct-returns-strict%",
    "headline": {
     "metric": "correct-returns-strict%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.02792",
+      "captured": "2026-10-27",
+      "where": "Section 4.3 Main results (text on Table 1): the paper reads Table 1 by strict return-level accuracy, the first of its four columns (Correct returns (strict)); the abstract's 66% and 100% form-level figures are that column. No metric is designated; the four columns are not ranked",
+      "quote": "LAW&ORDER increases strict return-level accuracy from only",
+      "file": "/work/.salvo14/mig/convert-arxiv-lawandorder/evidence/arxiv-2610.02792.txt",
+      "sha256": "0dde61725d5f2027abc4c0916ad42676c1e957eedab5c872145b81f8f03dfd82"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -76358,9 +76731,18 @@
    "metric": "correct-returns-strict%",
    "headline": {
     "metric": "correct-returns-strict%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2610.02792",
+      "captured": "2026-10-27",
+      "where": "Section 4.3 Main results (text on Table 1): the paper reads Table 1 by strict return-level accuracy, the first of its four columns (Correct returns (strict)); the abstract's 66% and 100% form-level figures are that column. No metric is designated; the four columns are not ranked",
+      "quote": "LAW&ORDER increases strict return-level accuracy from only",
+      "file": "/work/.salvo14/mig/convert-arxiv-lawandorder/evidence/arxiv-2610.02792.txt",
+      "sha256": "0dde61725d5f2027abc4c0916ad42676c1e957eedab5c872145b81f8f03dfd82"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -92629,10 +93011,19 @@
    "judge_panel": null,
    "metric": "gate-pass%(3tasks-n30)",
    "headline": {
-    "metric": "gate-pass%(3tasks-n30)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-20-opus48-qcd",
+      "captured": "2026-10-19",
+      "where": "article, 結果のアウトライン: the quality is classified by the T2 pass rate alone (T1 and T3 pass 10/10 in every trial)",
+      "quote": "品質は、このタスク 2の通過率で次の 3 段階に分けて評価することにしました",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+      "sha256": "02b81ff5e94e075b85ad406f3f0b2c9c2e5d3b5350eb0bc85fefa3b93d32446a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -93257,10 +93648,19 @@
    "judge_panel": null,
    "metric": "pass%-first-attempt",
    "headline": {
-    "metric": "pass%-first-attempt",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%-final",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/OpenAgentsInc/openagents/blob/43a68711/docs/audits/2026-10-03-independent-efficiency/briefing-model-factorial/README.md",
+      "captured": "2026-10-28",
+      "where": "README, opening result (bold sentence): the final acceptance of the arms is 4/4; the arm table prints final acceptance 4/4 in all four arms",
+      "quote": "Sonnet without a brief costs 47.1% less than Opus on this task, with 4/4",
+      "file": "/work/.salvo14/mig/convert-github-openagents/evidence/factorial-README.md",
+      "sha256": "4057a39b7ab24d0cc19da527509e3b014f5502aa196822364f2144d0aca2fcfc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -93286,10 +93686,19 @@
    "judge_panel": null,
    "metric": "pass%-first-attempt",
    "headline": {
-    "metric": "pass%-first-attempt",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%-final",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/OpenAgentsInc/openagents/blob/43a68711/docs/audits/2026-10-03-independent-efficiency/briefing-model-factorial/README.md",
+      "captured": "2026-10-28",
+      "where": "README, opening result (bold sentence): the final acceptance of the arms is 4/4; the arm table prints final acceptance 4/4 in all four arms",
+      "quote": "Sonnet without a brief costs 47.1% less than Opus on this task, with 4/4",
+      "file": "/work/.salvo14/mig/convert-github-openagents/evidence/factorial-README.md",
+      "sha256": "4057a39b7ab24d0cc19da527509e3b014f5502aa196822364f2144d0aca2fcfc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100985,9 +101394,18 @@
    "metric": "PACE score mean (0-100)",
    "headline": {
     "metric": "PACE score mean (0-100)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.26394v1",
+      "captured": "2026-10-21",
+      "where": "Table 2 (main table, unified minimal scaffold block): rows in descending order of the Score (mean ± SE) column, GPT-5.6-Sol 78.08 first, Qwen3.8-27B 12.25 last; the native block (GPT-5.6-Sol (Codex) 76.78, Qwen3.7-Max (QwenCode) 65.69) is ranked the same way. Rule 2 (ranked-by): the board's column that the table is ordered by is the functional score; the complete-delivery success is the second printed column",
+      "quote": "Table 2: Functional score (mean ± SE) and complete-delivery success over 43 cases.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.26394/evidence/arxiv-2610.26394.txt",
+      "sha256": "bc67a7399784c4edbce5b5128211c82c18586f466d462d7b9c37603b9bd8959f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -101011,9 +101429,18 @@
    "metric": "PACE score mean (0-100)",
    "headline": {
     "metric": "PACE score mean (0-100)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.26394v1",
+      "captured": "2026-10-21",
+      "where": "Table 2 (main table, unified minimal scaffold block): rows in descending order of the Score (mean ± SE) column, GPT-5.6-Sol 78.08 first, Qwen3.8-27B 12.25 last; the native block (GPT-5.6-Sol (Codex) 76.78, Qwen3.7-Max (QwenCode) 65.69) is ranked the same way. Rule 2 (ranked-by): the board's column that the table is ordered by is the functional score; the complete-delivery success is the second printed column",
+      "quote": "Table 2: Functional score (mean ± SE) and complete-delivery success over 43 cases.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.26394/evidence/arxiv-2610.26394.txt",
+      "sha256": "bc67a7399784c4edbce5b5128211c82c18586f466d462d7b9c37603b9bd8959f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -101037,9 +101464,19 @@
    "metric": "Overall(judge)",
    "headline": {
     "metric": "Overall(judge)",
-    "basis": "decision",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/ChiChuRita/Palia/blob/main/agent/bench/results.md",
+      "captured": "2026-07-06T11:27:10Z",
+      "file": "/work/.salvo14/mig/convert-github-palia-bench/evidence/results-b46fdc27.md",
+      "sha256": "8162f576e5eb82f796b9a8ad86d3240477860a8c90ed125438a02e62d68a702b",
+      "where": "results.md, LLM candidates table, header row: the 'Overall' column, the source's own summary score of the judged columns",
+      "quote": "Safety | Overall |"
+     }
+    ],
     "decision": null,
-    "level": "not-established:assumed"
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -102525,10 +102962,27 @@
    "judge_panel": null,
    "metric": "tests-passed-pct",
    "headline": {
-    "metric": "tests-passed-pct",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "resolved%",
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.03546",
+      "captured": "2026-10-20",
+      "where": "Table 2 caption (ProgramBench paper): the benchmark's primary metric",
+      "quote": "% Resolved is the primary metric",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.03546/evidence/arxiv-2605.03546.txt",
+      "sha256": "49134f93a6b05ead9e760c1ca1968e869185e2d5fd3d96c6d6c9669280b72556"
+     },
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -102551,10 +103005,27 @@
    "judge_panel": null,
    "metric": "tests-passed-pct",
    "headline": {
-    "metric": "tests-passed-pct",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "resolved%",
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.03546",
+      "captured": "2026-10-20",
+      "where": "Table 2 caption (ProgramBench paper): the benchmark's primary metric",
+      "quote": "% Resolved is the primary metric",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.03546/evidence/arxiv-2605.03546.txt",
+      "sha256": "49134f93a6b05ead9e760c1ca1968e869185e2d5fd3d96c6d6c9669280b72556"
+     },
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -104316,9 +104787,18 @@
    "metric": "F1x100",
    "headline": {
     "metric": "F1x100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/ProjectSidewalk/RampNet/pull/123",
+      "captured": "2026-08-18",
+      "where": "docs/model_comparison.md, 'Claude on Vertex (#122)' / 'First results: annapolis': the text reads the four legs by F1 ('Effort is an operating-point dial, never a quality lever'; 'F1 ranks it below low'); the table prints P, R, F1 and tp/fp/fn",
+      "quote": "Effort is an operating-point dial, never a quality lever",
+      "file": "/work/.salvo14/mig/convert-github-rampnet/evidence/pr123-2bdcbd34/docs__model_comparison.md",
+      "sha256": "901c805eaafe0fa77e89701bc42e02c219347207449bded220b4bff686521d2a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -104344,9 +104824,27 @@
    "metric": "F1x100",
    "headline": {
     "metric": "F1x100",
-    "basis": "decision",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/ProjectSidewalk/RampNet/blob/22c94280d7dc70bfd943629e6723b930294bd955/docs/claude_legs_122.md",
+      "captured": "2026-09-26T14:14:13Z",
+      "file": "/work/.salvo14/mig/convert-github-rampnet/evidence/c22c9428/docs__claude_legs_122.md",
+      "sha256": "adeb798bb8fe790f40d64bff46102fb9446dcbfb4aaa1cc1c7e02a0bb642dff3",
+      "where": "Annapolis results, 'Claude Fable on annapolis (#156)' section: the Fable table is ordered by F1 and the text ranks by F1 (the caveat list)",
+      "quote": "RampNet still leads by **0.228** (0.839 vs 0.611)"
+     },
+     {
+      "url": "https://github.com/ProjectSidewalk/RampNet/blob/22c94280d7dc70bfd943629e6723b930294bd955/docs/claude_legs_122.md",
+      "captured": "2026-09-26T14:14:13Z",
+      "file": "/work/.salvo14/mig/convert-github-rampnet/evidence/c22c9428/docs__claude_legs_122.md",
+      "sha256": "adeb798bb8fe790f40d64bff46102fb9446dcbfb4aaa1cc1c7e02a0bb642dff3",
+      "where": "'First results: annapolis' section, caveat bullet 1 (claude-opus-5 at high)",
+      "quote": "F1 ranks it below `low`"
+     }
+    ],
     "decision": null,
-    "level": "not-established:assumed"
+    "level": "written"
    },
    "bounds": [
     0,
@@ -104512,9 +105010,18 @@
    "metric": "files-found-of-48",
    "headline": {
     "metric": "files-found-of-48",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.reddit.com/r/ClaudeAI/comments/1x1nsaz/i_tested_haiku_55_sonnet_55_and_opus_55_as/",
+      "captured": "2026-10-28",
+      "where": "post text, code search section: the one score per model (files found of 48), for Opus, Sonnet and Haiku",
+      "quote": "Files found, out of the 48 the feature really changed: Opus 45, Sonnet 44, Haiku 44",
+      "file": "/work/.salvo14/mig/convert-reddit-emarkosov/evidence/selftext.txt",
+      "sha256": "bc212c12df360e708da478148546a845bbb5a49a159c17028fb92d7bcc6e613c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -104541,8 +105048,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://www.reddit.com/r/ClaudeAI/comments/1x1nsaz/i_tested_haiku_55_sonnet_55_and_opus_55_as/",
+      "captured": "2026-10-28",
+      "where": "post text, web section: the cost line for the 5 web tasks (cost-only setup, no score in the setup's rows)",
+      "quote": "Cost for all 5 web tasks: Opus $3.93, Sonnet $1.59, Haiku $0.12",
+      "file": "/work/.salvo14/mig/convert-reddit-emarkosov/evidence/selftext.txt",
+      "sha256": "bc212c12df360e708da478148546a845bbb5a49a159c17028fb92d7bcc6e613c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -105996,9 +106513,18 @@
    "metric": "reqcov%",
    "headline": {
     "metric": "reqcov%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/adrianco/retort/commit/c089653d8d6bcaeb19f5422f7b58dd676f14ab21",
+      "captured": "2026-10-21",
+      "where": "experiment-75-opus55-alllang/brazil/retort.db, one row per run (table T10, row 3, the typescript run): the score column is requirement_coverage (the only score per run; cost_usd and run_cost are costs); the setup prints one score per entry, so the headline is that score (only-metric). The repo's own report (src/retort/reporting/optimal.py, not in this source's captures) names a derived pass proportion for its headline recommendations; that is not printed per run and is not this setup's metric, so it is not used here",
+      "quote": "cost_usd,requirement_coverage,run_cost",
+      "file": "/work/.salvo14/mig/convert-github-retort/evidence/experiment-75-opus55-alllang__brazil.csv",
+      "sha256": "a1f524430742cbe021d9d7042a0876c14ea83be34f402db5e7f9d8245ba16cc1"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -108231,10 +108757,19 @@
    "judge_panel": null,
    "metric": "success%",
    "headline": {
-    "metric": "success%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "Final IoU",
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.17665",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption: task alignment performance on 100 test tasks, sorted by Final IoU",
+      "quote": "sorted by Final IoU",
+      "file": "/work/.salvo14/gt/t6/src/html/2610.17665.html",
+      "sha256": "1dd1119d172344d909821a6194bf140ad2527c28c6ff0d16b1004db8cc10ac68"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -108971,10 +109506,19 @@
    "judge_panel": null,
    "metric": "score-of-1",
    "headline": {
-    "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "share of passing C* lost",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.10809",
+      "captured": "2026-10-19",
+      "where": "Section 4.3 text, sentence citing Appendix Table A.5 (RubricRAG's degradation, the table with the expert score, the foreign-rubric score, their difference and the share of passing C* lost): the paper's result for the table is the share lost (37% for Grok 4.20, 10% for larger models, about 20% for smaller)",
+      "quote": "We find decreases capped at 37% of expert criteria",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.10809/evidence/p.txt",
+      "sha256": "f81dcf55797a3aef22d91ce1cd9c526d702d99eddfd667dc7d03afd784d2344f"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -110154,9 +110698,26 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://scbench.ai/leaderboard",
+      "captured": "2026-10-19",
+      "where": "Metric Definitions of the board; the table's 'Strict Solve' column carries the same tooltip ('Checkpoint, and all prior checkpoints, are solved'), so Strict Solve = CKPT Solved",
+      "quote": "CKPT Solved — Checkpoint, and all prior checkpoints, are solved",
+      "file": "/work/.salvo14/mig/convert-scbench.ai/evidence/scbench-leaderboard.txt",
+      "sha256": "836259e856e15d3186ba3ddc415d9cf051f276fefe1a2e5ffe182d0ceec5b61a"
+     },
+     {
+      "url": "https://scbench.ai/leaderboard",
+      "captured": "2026-10-19",
+      "where": "board header: the version shown per model is the best by % Checkpoints; the chart's default axis is CKPT Solved (selected option)",
+      "quote": "Showing best version by % Checkpoints",
+      "file": "/work/.salvo14/mig/convert-scbench.ai/evidence/scbench-leaderboard.txt",
+      "sha256": "836259e856e15d3186ba3ddc415d9cf051f276fefe1a2e5ffe182d0ceec5b61a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -110738,10 +111299,19 @@
    "judge_panel": null,
    "metric": "pass%",
    "headline": {
-    "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "sabotage success%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.29178",
+      "captured": "2026-10-28",
+      "where": "section 3 (Results), definition of the reported metric: 'We report sabotage success', the per-trajectory rate at which the main task and the side task jointly pass",
+      "quote": "We report sabotage success",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.29178/evidence/2605.29178.txt",
+      "sha256": "0f5f14624b49b7d5b3220646cfd7af2841ca9b19456958c7746fddfb4b32bea0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -115907,9 +116477,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.14966",
+      "captured": "2026-10-20",
+      "where": "Table 1 (main results, section 3.2): the rows run from Grok 4.6 down to GPT-5.6 Sol in the order of the Overall column; the text ranks the models by it ('Grok leads overall')",
+      "quote": "Grok leads overall with 86.0%",
+      "file": "/work/.salvo14/gt/t1/ptxt/2610.14966.txt",
+      "sha256": "9cb822a4a6b38be739a5d9b4f275b3ff6113cc76328b6eb1574afe85522d8549"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -119139,10 +119718,19 @@
    "judge_panel": null,
    "metric": "mean-score%",
    "headline": {
-    "metric": "mean-score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/yhenon/surface-evolver-llm-eval",
+      "captured": "2026-10-09",
+      "where": "docs/data aggregates.json, by_model: the board's rows are in descending pass_rate, ties by mean_score (first row: claude-fable-5 (high), pass 0.875, mean 0.95)",
+      "quote": "\"key\": \"claude-fable-5 (high)\"",
+      "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/aggregates.json",
+      "sha256": "04fa2274fa1f67bdd53981091edd6e157d3bb52d62e5eee8c09e0c6f75232f8c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -120676,9 +121264,18 @@
    "metric": "pass@1-%",
    "headline": {
     "metric": "pass@1-%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://cdn.openai.com/pdf/2a7d98b1-57e5-4147-8d0e-683894d782ae/5p1_codex_max_card_03.pdf",
+      "captured": "2026-10-28",
+      "where": "section 5.1.3.3 MLE-bench-30 (p.21), outcome variable: the card's one metric for this benchmark (Figure 12)",
+      "quote": "bronze pass@1 or pass@n: in what % of competitions a model can",
+      "file": "/work/.salvo14/mig/convert-openai-system-card/text/card.pypdf.txt",
+      "sha256": "1a42074260ded4ce9cfcf1d3069027fcc1bb7671fb93f6ea44316c67060f6a71"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -120705,9 +121302,18 @@
    "metric": "pass@1-%",
    "headline": {
     "metric": "pass@1-%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://cdn.openai.com/pdf/2a7d98b1-57e5-4147-8d0e-683894d782ae/5p1_codex_max_card_03.pdf",
+      "captured": "2026-10-28",
+      "where": "section 5.1.3.2 PaperBench-10 (p.20): the card's one metric for this benchmark (Figure 9)",
+      "quote": "We report pass@1 performance with Extra High reasoning effort",
+      "file": "/work/.salvo14/mig/convert-openai-system-card/text/card.pypdf.txt",
+      "sha256": "1a42074260ded4ce9cfcf1d3069027fcc1bb7671fb93f6ea44316c67060f6a71"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -120734,9 +121340,18 @@
    "metric": "pass@1-%",
    "headline": {
     "metric": "pass@1-%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://cdn.openai.com/pdf/2a7d98b1-57e5-4147-8d0e-683894d782ae/5p1_codex_max_card_03.pdf",
+      "captured": "2026-10-28",
+      "where": "section 5.1.3.1 SWE-Lancer (p.19): the card's one metric for this benchmark (Figure 8, axis 'pass@1, avg of 3')",
+      "quote": "We report pass@1 performance on the IC SWE Diamond set.",
+      "file": "/work/.salvo14/mig/convert-openai-system-card/text/card.pypdf.txt",
+      "sha256": "1a42074260ded4ce9cfcf1d3069027fcc1bb7671fb93f6ea44316c67060f6a71"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -129135,9 +129750,18 @@
    "metric": "Avg. (%)",
    "headline": {
     "metric": "Avg. (%)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.26342",
+      "captured": "2026-10-21",
+      "where": "Section 4.2 Main Results, sentence on the average across the five tasks (the Avg. column of Table 3, the mean of its five benchmark scores); the paper reports this average as the result of the table",
+      "quote": "The average across the five tasks is 22.7% for the initial target agent systems and ranges from 31.1% to 38.3% across the six research-agent configurations, with Kimi-K3 highest",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.26342/text/visible.txt",
+      "sha256": "7b60abb1e5a4b6d07ae8bf4f3e7527e9a4f927a01fc36c35eaae515f82685b3b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -130016,10 +130640,19 @@
    "judge_panel": null,
    "metric": "score-of-1",
    "headline": {
-    "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "Brier score",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.17765",
+      "captured": "2026-10-19",
+      "where": "Abstract: the reference evaluation's result on forecast quality (accuracy 'hides' the rest; none beats the market's Brier score)",
+      "quote": "none beats the market’s Brier score, yet they",
+      "file": "/work/.salvo14/mig/convert-arxiv-2607.17765/evidence/arxiv-2607.17765.txt",
+      "sha256": "76f9c74aaba7bdaa575768fd8ebe31f2307ec5a06101fdd7bfb7a952698f28e3"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -143413,10 +144046,27 @@
    "judge_panel": null,
    "metric": "tests-passed-pct",
    "headline": {
-    "metric": "tests-passed-pct",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "resolved%",
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.03546",
+      "captured": "2026-10-20",
+      "where": "Table 2 caption (ProgramBench paper): the benchmark's primary metric",
+      "quote": "% Resolved is the primary metric",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.03546/evidence/arxiv-2605.03546.txt",
+      "sha256": "49134f93a6b05ead9e760c1ca1968e869185e2d5fd3d96c6d6c9669280b72556"
+     },
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -143657,9 +144307,18 @@
    "metric": "val_bpb(lower-better)",
    "headline": {
     "metric": "val_bpb(lower-better)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/yiheinchai/token-marxing/blob/3c895b32c89a7e9c0edb1c87e1603f8a50254251/results/REPORT.md",
+      "captured": "2026-10-28",
+      "where": "README.md, results paragraph: the one metric the runs are reported in (best val_bpb per run, mean over runs in REPORT.md); no other score",
+      "quote": "best val_bpb, lower is better, baseline ≈ 3.48",
+      "file": "/work/.salvo14/mig/convert-token-marxing/evidence/README.md",
+      "sha256": "f901b8fd89d45ba49def381372371043e57aecb0b138ae4e981dbc549220a810"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "lower",
@@ -146445,6 +147104,573 @@
    "legacy_groups": [],
    "label": "nnakapa #35 Copilot T2",
    "note": "new setup (29 Oct, headline round): the article's quality metric is the T2 pass rate (T2 is the weakest task in every row below 100%); printed per row in the summary table and the per-task table (gate/10). The held gate-pass setup carries this headline too; its measures go out as not the headline."
+  },
+  "scheme-sabotage-success": {
+   "family": "scheme-sabotage-success",
+   "benchmark": "SCHEME (arXiv 2605.29178) sabotage success, per trajectory (main and side task jointly pass)",
+   "subset": null,
+   "harness": "SCHEME harness (paper)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "sabotage success%",
+   "headline": {
+    "metric": "sabotage success%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.29178",
+      "captured": "2026-10-28",
+      "where": "section 3 (Results), definition of the reported metric: 'We report sabotage success', the per-trajectory rate at which the main task and the side task jointly pass",
+      "quote": "We report sabotage success",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.29178/evidence/2605.29178.txt",
+      "sha256": "0f5f14624b49b7d5b3220646cfd7af2841ca9b19456958c7746fddfb4b32bea0"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SCHEME (arXiv 2605.29178) sabotage success, per trajectory",
+   "note": "new setup of the 29 Oct headline round: the designated metric of arXiv 2605.29178, printed per model in section 3.1"
+  },
+  "wc26-brier": {
+   "family": "wc26-brier",
+   "benchmark": "WC2026 forecast Brier (all 104 matches)",
+   "subset": null,
+   "harness": "WC2026-consumer-app",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "Brier score",
+   "headline": {
+    "metric": "Brier score",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2607.17765",
+      "captured": "2026-10-19",
+      "where": "Abstract: the reference evaluation's result on forecast quality (accuracy 'hides' the rest; none beats the market's Brier score)",
+      "quote": "none beats the market’s Brier score, yet they",
+      "file": "/work/.salvo14/mig/convert-arxiv-2607.17765/evidence/arxiv-2607.17765.txt",
+      "sha256": "76f9c74aaba7bdaa575768fd8ebe31f2307ec5a06101fdd7bfb7a952698f28e3"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    2
+   ],
+   "direction": "lower",
+   "task_type": "mixed",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "WC2026 forecast Brier score (all 104 matches)",
+   "note": "new setup (29 Oct): Table 2 column Brier (multiclass, lower is better) of the four agents; the setup's headline is the Brier score"
+  },
+  "arxiv-2610.07563-householdbench-avg-rank": {
+   "family": "arxiv-2610.07563-householdbench-avg-rank",
+   "benchmark": "HouseholdBench: household-economics prediction, average rank over the 32 tasks (lower is better)",
+   "subset": null,
+   "harness": "HouseholdBench-prediction-API",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "average rank",
+   "headline": {
+    "metric": "average rank",
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.07563",
+      "captured": "2026-10-27",
+      "where": "Section 4 (metrics): the unified score is the average rank across all 32 tasks, lower is better; the main table lists the models in that rank order",
+      "quote": "we report the average rank across all 32 tasks",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.07563/evidence/arxiv-2610.07563.txt",
+      "sha256": "ec4644b03bbb1bd2d56cd5b4177bee86511f669def6e63338e2f5c07cff10d32"
+     }
+    ]
+   },
+   "bounds": null,
+   "direction": "lower",
+   "task_type": "reasoning-math",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "HouseholdBench: average rank over the 32 tasks",
+   "note": "headline: ranked-by (the main table ranks by average rank). Held macro-F1 setup keeps macro-F1% as its metric. Note: the Table 3 caption says 'five topics'; the method says 'all 32 tasks' (the rank reading uses the method)."
+  },
+  "rubric-expert-share-lost": {
+   "family": "rubric-expert-share-lost",
+   "benchmark": "Rubric transfer: share of passing expert criteria lost after RubricRAG degradation (Table A.5)",
+   "subset": null,
+   "harness": "RubricTransfer-RubricRAG-degradation",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "share of passing C* lost",
+   "headline": {
+    "metric": "share of passing C* lost",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.10809",
+      "captured": "2026-10-19",
+      "where": "Section 4.3 text, sentence citing Appendix Table A.5 (RubricRAG's degradation, the table with the expert score, the foreign-rubric score, their difference and the share of passing C* lost): the paper's result for the table is the share lost (37% for Grok 4.20, 10% for larger models, about 20% for smaller)",
+      "quote": "We find decreases capped at 37% of expert criteria",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.10809/evidence/p.txt",
+      "sha256": "f81dcf55797a3aef22d91ce1cd9c526d702d99eddfd667dc7d03afd784d2344f"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "writing",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Rubric transfer: share of passing expert criteria lost after RubricRAG degradation (Table A.5)",
+   "note": "new setup (29 Oct headline round): the paper's Table A.5 prints four metrics per response model; the text gives the share lost as the result, so it is the headline here and the held expert-score setup takes it as headline too (its measures go out as not the headline). Four response models, as the held setup."
+  },
+  "programgym-claudecode-resolved": {
+   "family": "programgym-claudecode-resolved",
+   "benchmark": "ProgramGym paper (arXiv 2610.13395), ProgramBench, scaffold Claude Code, resolved %",
+   "subset": null,
+   "harness": "claudecode",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "resolved%",
+   "headline": {
+    "metric": "resolved%",
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.03546",
+      "captured": "2026-10-20",
+      "where": "Table 2 caption (ProgramBench paper): the benchmark's primary metric",
+      "quote": "% Resolved is the primary metric",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.03546/evidence/arxiv-2605.03546.txt",
+      "sha256": "49134f93a6b05ead9e760c1ca1968e869185e2d5fd3d96c6d6c9669280b72556"
+     },
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProgramGym paper (arXiv 2610.13395), ProgramBench, scaffold Claude Code, resolved %",
+   "note": "new setup (29 Oct): Resolved column of the Claude Code rows of Table 2"
+  },
+  "programgym-programagent-resolved": {
+   "family": "programgym-programagent-resolved",
+   "benchmark": "ProgramGym paper (arXiv 2610.13395), ProgramBench, scaffold Program-Agent, resolved %",
+   "subset": null,
+   "harness": "program-agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "resolved%",
+   "headline": {
+    "metric": "resolved%",
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.03546",
+      "captured": "2026-10-20",
+      "where": "Table 2 caption (ProgramBench paper): the benchmark's primary metric",
+      "quote": "% Resolved is the primary metric",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.03546/evidence/arxiv-2605.03546.txt",
+      "sha256": "49134f93a6b05ead9e760c1ca1968e869185e2d5fd3d96c6d6c9669280b72556"
+     },
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProgramGym paper (arXiv 2610.13395), ProgramBench, scaffold Program-Agent, resolved %",
+   "note": "new setup (29 Oct): Resolved column of the Program-Agent rows of Table 2"
+  },
+  "programgym-mini-swe-agent-resolved": {
+   "family": "programgym-mini-swe-agent-resolved",
+   "benchmark": "ProgramGym flagship rows (mini-SWE-agent), resolved % (restated from Yang et al. 2026b)",
+   "subset": null,
+   "harness": "mini-SWE-agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "resolved%",
+   "headline": {
+    "metric": "resolved%",
+    "basis": "standard",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.03546",
+      "captured": "2026-10-20",
+      "where": "Table 2 caption (ProgramBench paper): the benchmark's primary metric",
+      "quote": "% Resolved is the primary metric",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.03546/evidence/arxiv-2605.03546.txt",
+      "sha256": "49134f93a6b05ead9e760c1ca1968e869185e2d5fd3d96c6d6c9669280b72556"
+     },
+     {
+      "url": "https://programbench.com",
+      "captured": "2026-10-20",
+      "where": "FAQ 'How is the leaderboard sorted? What's the primary metric?'",
+      "quote": "The primary metric that should be reported for ProgramBench are fully resolved instances.",
+      "file": "/work/.salvo14/mig/convert-programbench/evidence/index.txt",
+      "sha256": "2768973e5036787331ee31a5c19b4eaacbad77fe2bf1f8e6e7deebfe59126d75"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ProgramGym flagship rows (mini-SWE-agent), resolved % (restated from Yang et al. 2026b)",
+   "note": "new setup (29 Oct): Resolved column of the flagship rows of Table 2 (restated from Yang et al. 2026b)"
+  },
+  "rotabench-final-iou": {
+   "family": "rotabench-final-iou",
+   "benchmark": "RoTA-Bench (interactive 3D projection alignment, 100 tasks): Final IoU, the column Table 1 is sorted by",
+   "subset": null,
+   "harness": "own-agent-loop",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "Final IoU",
+   "headline": {
+    "metric": "Final IoU",
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.17665",
+      "captured": "2026-10-20",
+      "where": "Table 1 caption: task alignment performance on 100 test tasks, sorted by Final IoU",
+      "quote": "sorted by Final IoU",
+      "file": "/work/.salvo14/gt/t6/src/html/2610.17665.html",
+      "sha256": "1dd1119d172344d909821a6194bf140ad2527c28c6ff0d16b1004db8cc10ac68"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    1
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "RoTA-Bench: Final IoU (Table 1 sort column)",
+   "note": "headline: ranked-by (Table 1 caption: sorted by Final IoU). Held rotabench-main keeps success% as its metric."
+  },
+  "epoch-ext-geobench-acw-country": {
+   "family": "epoch-ext-geobench-acw-country",
+   "benchmark": "Epoch external geobench, ACW Country % (the hub's designated score column; every in-window couple of the CSV)",
+   "subset": null,
+   "harness": "Epoch-external",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "ACW Country %",
+   "headline": {
+    "metric": "ACW Country %",
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://epoch.ai/data/benchmark_data.zip",
+      "captured": "2026-10-18",
+      "where": "benchmark_metadata.csv, row GeoBench: score_column ACW Country % (the hub's designated score column)",
+      "quote": "GeoBench,True,geobench_external.csv,ACW Country %",
+      "file": "/work/.salvo14/mig/convert-epoch.ai/snap/1018/benchmark_metadata.csv",
+      "sha256": "f227d481009ddc34ee529645d8ba124aaac2630724686c40e8e9115a0245c766"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Epoch external geobench, ACW Country %",
+   "note": "headline: designated (benchmark_metadata.csv score_column). Held epoch-ext-geobench keeps ACW Avg Score as its metric."
+  },
+  "oabriefcont-final": {
+   "family": "oabriefcont-final",
+   "benchmark": "OpenAgents briefing-model factorial (control)",
+   "subset": null,
+   "harness": "coder-connect-agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%-final",
+   "headline": {
+    "metric": "pass%-final",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/OpenAgentsInc/openagents/blob/43a68711/docs/audits/2026-10-03-independent-efficiency/briefing-model-factorial/README.md",
+      "captured": "2026-10-28",
+      "where": "README, opening result (bold sentence): the final acceptance of the arms is 4/4; the arm table prints final acceptance 4/4 in all four arms",
+      "quote": "Sonnet without a brief costs 47.1% less than Opus on this task, with 4/4",
+      "file": "/work/.salvo14/mig/convert-github-openagents/evidence/factorial-README.md",
+      "sha256": "4057a39b7ab24d0cc19da527509e3b014f5502aa196822364f2144d0aca2fcfc"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "OpenAgents briefing-model factorial (control), final acceptance",
+   "note": "headline judgment (README result: 'with 4/4 accepted patches'); final acceptance printed per arm in the arm table; the first-attempt setup is out as not-headline"
+  },
+  "oabrieftrea-final": {
+   "family": "oabrieftrea-final",
+   "benchmark": "OpenAgents briefing-model factorial (treatment)",
+   "subset": null,
+   "harness": "coder-connect-agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%-final",
+   "headline": {
+    "metric": "pass%-final",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://github.com/OpenAgentsInc/openagents/blob/43a68711/docs/audits/2026-10-03-independent-efficiency/briefing-model-factorial/README.md",
+      "captured": "2026-10-28",
+      "where": "README, opening result (bold sentence): the final acceptance of the arms is 4/4; the arm table prints final acceptance 4/4 in all four arms",
+      "quote": "Sonnet without a brief costs 47.1% less than Opus on this task, with 4/4",
+      "file": "/work/.salvo14/mig/convert-github-openagents/evidence/factorial-README.md",
+      "sha256": "4057a39b7ab24d0cc19da527509e3b014f5502aa196822364f2144d0aca2fcfc"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "OpenAgents briefing-model factorial (treatment), final acceptance",
+   "note": "headline judgment (README result: 'with 4/4 accepted patches'); final acceptance printed per arm in the arm table; the first-attempt setup is out as not-headline"
+  },
+  "surfevolver-pass": {
+   "family": "surfevolver-pass",
+   "benchmark": "Surface Evolver bench",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/yhenon/surface-evolver-llm-eval",
+      "captured": "2026-10-09",
+      "where": "docs/data aggregates.json, by_model: the board's rows are in descending pass_rate, ties by mean_score (first row: claude-fable-5 (high), pass 0.875, mean 0.95)",
+      "quote": "\"key\": \"claude-fable-5 (high)\"",
+      "file": "/work/.salvo14/mig/convert-yhenon-surface-evolver/evidence/aggregates.json",
+      "sha256": "04fa2274fa1f67bdd53981091edd6e157d3bb52d62e5eee8c09e0c6f75232f8c"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Surface Evolver bench, pass rate",
+   "note": "headline ranked-by: the board sorts its rows by pass rate (aggregates.json by_model); the mean score stays on setup surfevolver (out as not-headline); passed of 16 runs per model"
+  },
+  "izumo-review-high-detection": {
+   "family": "izumo-review-subagents",
+   "benchmark": "m_izumo Opus 5.5 review sub-agents on a personal project (15 sections): detection rate of 高 (high-severity) defects",
+   "subset": null,
+   "harness": "ClaudeCode-subagent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "「高」の検出率",
+   "headline": {
+    "metric": "「高」の検出率",
+    "basis": "judgment",
+    "evidence": [
+     {
+      "url": "https://qiita.com/m_izumo/items/6a69b18b966f8efa9dff",
+      "captured": "2026-10-28",
+      "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+      "sha256": "634a594cc5ef668f349284b47097e256a16876b91437606e6e0efc1777e1951f",
+      "where": "Intro (paragraph 3: the conclusions)",
+      "quote": "件数の差は小さく、重い不具合で差が出た"
+     },
+     {
+      "url": "https://qiita.com/m_izumo/items/6a69b18b966f8efa9dff",
+      "captured": "2026-10-28",
+      "file": "/work/.salvo14/mig/convert-qiita-m_izumo/evidence/izumo.txt",
+      "sha256": "634a594cc5ef668f349284b47097e256a16876b91437606e6e0efc1777e1951f",
+      "where": "Closing summary (まとめ), first paragraph",
+      "quote": "件数の差は小さいものの、重い不具合を見つける割合がはっきり違います"
+     }
+    ],
+    "decision": null,
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "m_izumo Opus 5.5 review sub-agents: detection rate of 高 (high-severity) defects (15 sections)",
+   "note": "headline: judgment (29 Oct rule 3): the article's result (intro and summary); the 高 rates are printed in the table 'high と xhigh（1 本あたり）'"
+  },
+  "nnakapa-o47o48-t2": {
+   "family": "qcd-nnakapa-t2",
+   "benchmark": "QCD-nnakapa, T2 (parameterized query, injection trap): pass rate of 10 runs",
+   "subset": null,
+   "harness": "ClaudeCode",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-20-opus48-qcd",
+      "captured": "2026-10-19",
+      "where": "article, 結果のアウトライン: the quality is classified by the T2 pass rate alone (T1 and T3 pass 10/10 in every trial)",
+      "quote": "品質は、このタスク 2の通過率で次の 3 段階に分けて評価することにしました",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-20-opus48-qcd.txt",
+      "sha256": "02b81ff5e94e075b85ad406f3f0b2c9c2e5d3b5350eb0bc85fefa3b93d32446a"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "nnakapa QCD #20 T2",
+   "note": "new setup (29 Oct, headline round): the article's quality metric is the T2 pass rate (T2 is the task that separates the patterns; T1 and T3 are 10/10 in every trial). Values: the T2 cell of the derived gate table, k of 10 runs."
+  },
+  "clerkbench-ch6": {
+   "family": "clerkbench-ch6",
+   "benchmark": "ClerkBench board (Zenodo 23048151): ClerkBench-CH6, the geometric mean over the two founding families of the consistency horizon",
+   "subset": null,
+   "harness": "no-tools, byte-exact grading",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "ClerkBench-CH6",
+   "headline": {
+    "metric": "ClerkBench-CH6",
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://zenodo.org/records/23048151",
+      "captured": "2026-10-27",
+      "where": "Table 2 (founding-family board): the board ranks configurations by ClerkBench-CH6; the abstract calls the consistency horizon the headline",
+      "quote": "Table 2 ranks configurations by ClerkBench-CH6",
+      "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+      "sha256": "a895c05a2c64d2ea5fcd17a3370131cb0f224ca63e3df43241e25c6e5a970175"
+     }
+    ]
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ClerkBench-CH6 board (Zenodo 23048151): consistency horizon, geometric mean over the founding families",
+   "note": "headline: ranked-by (Table 2 ranks by ClerkBench-CH6). 7 censored configurations (printed ≥/≤ values) are not numbers and are not measures."
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
