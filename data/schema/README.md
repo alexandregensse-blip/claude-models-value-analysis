@@ -227,3 +227,6 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
 - Rule `metric-mean` for a computed score: the mean of an entry's same-scale metrics, when the source designates no
   headline and the benchmark is not known (order: the benchmark's standard metric, the board's sort column, judgment,
   then this mean).
+- Interval end basis `successor-release` (names): a newer snapshot was released under or beside the name and no page
+  says whether the name moved; the name is established up to that release. The build date-checks a name that matches
+  one key when every interval of it ends (stated, or successor-release): a run outside them is not placed (qwen3.8-max).

@@ -776,6 +776,13 @@ def resolve_model(M):
                 keys_by_fact.append((f.ref, None, f"alias {f.value!r} serves {keys}: the run interval places it on "
                                                   f"{ok or 'none'}"))
                 continue
+        if len(keys) == 1:                               # one key, but the name stopped serving it (a stated end, or
+            ends = [iv for k, n in matches for iv in n["serves"]]  # a successor build: 29 Oct): the run must lie in
+            if ends and all(iv.get("to") is not None and iv.get("to_basis") in ("stated", "successor-release")
+                            for iv in ends) and not any(covers(iv, run_interval(M, keys[0])) for iv in ends):
+                keys_by_fact.append((f.ref, None, f"{f.value!r} served {keys[0]} only until "
+                                                  f"{max(iv['to'] for iv in ends)}: the run interval is not inside"))
+                continue
         if not keys:
             keys_by_fact.append((f.ref, None, f"{f.value!r} resolves to no key"))
             continue

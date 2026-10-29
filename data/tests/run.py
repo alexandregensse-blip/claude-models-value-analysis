@@ -1487,6 +1487,23 @@ def ext_metric_mean():
         eq(r.q(m1), want, f"stated {stated}, mean of 80 and 60")
 
 
+@test
+def ext_single_key_name_with_an_end():
+    # a name on one key that stopped serving it (a successor snapshot, undocumented move: qwen3.8-max, 29 Oct): a run
+    # inside its interval resolves, one after it does not; a name ending at its last capture is not date-checked
+    sc = base()
+    n1 = name("q-max", "2026-01-01", "2026-06-30"); n1["serves"][0]["to_basis"] = "successor-release"
+    n2 = name("q-other", "2026-01-01", "2026-06-30"); n2["serves"][0]["to_basis"] = "last-capture"
+    sc.model("aq", released="2026-01-01", names=[n1, n2])
+    s = sc.source("a", published="2026-10-01")
+    m1 = sc.m(s, model="q-max", effort=[LOW], run_date=[("run-date", "2026-05-01")])
+    m2 = sc.m(s, model="q-max", effort=[LOW], run_date=[("run-date", "2026-08-01")])
+    m3 = sc.m(s, model="q-other", effort=[LOW], run_date=[("run-date", "2026-08-01")])
+    sc.m(s, model="ma", effort=[LOW])
+    r = sc.run()
+    eq((r.model(m1), r.q(m2), r.model(m3)), ("aq", "out:model-not-established", "aq"), "dated single-key name")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)
