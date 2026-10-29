@@ -12,6 +12,10 @@ TITLE       = "Claude models compared: cost vs quality at every effort level"
 SITE_NAME   = "Claude cost vs quality"   # site name suggested to Google (JSON-LD WebSite) instead of the bare domain
 DESCRIPTION = ("What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives "
                "the best quality for the price. Open data, CC BY 4.0.")
+# The public data file is the build's data.csv (data/build/data.csv: every measure, today's columns plus its status on
+# each axis). The served root files are a whitelist on the server, which data.csv is not in: the page links the file
+# on the repository's main branch (raw-data.csv, still served at the root, is the frozen legacy input of 21 Oct).
+DATA_URL    = REPO_URL.replace("https://github.com/", "https://raw.githubusercontent.com/") + "/main/data/build/data.csv"
 SITE_HOST   = SITE_URL.split("://", 1)[1].rstrip("/")   # shown in the share image and its alt text
 # Both belong to this site: a fork sets them to "" (no tag, no key file) or to its own values.
 BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster Tools ownership (msvalidate.01); keep it

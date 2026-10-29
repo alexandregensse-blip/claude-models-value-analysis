@@ -72,16 +72,31 @@ def fused_grids():
     return grids["cost"], grids["quality"], curve, cache["diagnostics"], mcse
 
 
-def monotonicity_report(cg, qg):
+def thinking_switch(root=ROOT):
+    """The model keys whose thinking is a switch apart from the effort level: their maker has x-terms.thinking
+    'switch' in data/schema/vocab.json (Anthropic: thinking: {type: disabled | adaptive} beside output_config.effort),
+    the maker read from data/registry/models.json."""
+    with open(os.path.join(root, "data", "schema", "vocab.json"), encoding="utf-8") as f:
+        makers = json.load(f)["$defs"]["maker"]["x-terms"]
+    with open(os.path.join(root, "data", "registry", "models.json"), encoding="utf-8") as f:
+        models = json.load(f)["models"]
+    return {k for k, m in models.items() if makers.get(m.get("maker"), {}).get("thinking") == "switch"}
+
+
+def monotonicity_report(cg, qg, switch=None):
     """Effort is a ladder: within a model, a higher rung should neither cost nor score less than the one below.
-    The rungs are `nothink` (thinking off), then `minimal`, `low` … `max`; `think` (the one "on" position of an on/off
-    model, which has no level) is compared with `nothink` only. `solo` has no rung. An inversion is reported at build
+    The rungs are `minimal`, `low` … `max`, with `nothink` (thinking off) as the rung below them where thinking off is
+    the bottom of one ladder (OpenAI's reasoning_effort none); where thinking is a switch apart from the effort
+    (`switch`, by default thinking_switch(): the Anthropic models, whose thinking off combines with any effort), `nothink`
+    is not a rung and is compared with `think` only, so thinking off above `low` is not an inversion. `think` (the
+    one "on" position of an on/off model, which has no level) is compared with `nothink` only on every model. `solo` has no rung. An inversion is reported at build
     time, never corrected: inside the interval it is left as the data give it (a documented exception: Sonnet 4.6 falls
     after `high`, which the Sonnet 5 card itself prints)."""
-    ladder = ["nothink"] + LEVELS
+    switch = thinking_switch() if switch is None else switch
     out = []
     for grid, name in ((cg, "cost"), (qg, "quality")):
         for m, es in grid.items():
+            ladder = LEVELS if m in switch else ["nothink"] + LEVELS
             for ORD in (ladder, ["nothink", "think"]):
                 seq = [(e, es[e][0]) for e in ORD if e in es]
                 for (a, va), (b, vb) in zip(seq, seq[1:]):

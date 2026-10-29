@@ -5,6 +5,9 @@ import csv, os, sys
 from config import ROOT
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import DISPLAY_ORDER, GROUP_DISPLAY, GROUP_MERGE
+import build_lqm
+
+DATA = os.path.join(build_lqm.BUILD, "data.csv")      # the build's public data file (data/build.py)
 
 
 def model_label(m):
@@ -17,16 +20,21 @@ SHOWN = set(DISPLAY_ORDER)            # the site's models: the data file may hol
 
 def groups_data():
     """§3 linking graph, DATA-DRIVEN. Nodes = the (model, effort) couples each source group actually measured,
-    derived from raw-data.csv.
+    derived from the build's data.csv: the rows the fit reads (in on either axis).
     Only the editorial metadata per group — display label, edge type (sweep/xmodel/xgen), verified config note —
-    lives in the catalogue (data/catalog/groups.json). Some sources publish several sub-benchmarks (AIReiter) → MERGE folds them into one node-set
-    so corroboration counts the source once."""
+    lives in the catalogue (data/catalog/groups.json), keyed by today's group names: a fit group reaches it through the
+    build's group map (fit group → base group, data/build/group-map.json). Some sources publish several sub-benchmarks
+    (AIReiter) → MERGE folds them into one node-set so corroboration counts the source once."""
     GMETA, MERGE = GROUP_DISPLAY, GROUP_MERGE          # editorial metadata: data/catalog/groups.json
-    rows = [r for r in csv.DictReader(open(os.path.join(ROOT, "raw-data.csv")))
-            if r["group"] and not r["group"].startswith("#")]
+    base = build_lqm.base_groups(build_lqm.read_maps(build_lqm.BUILD)[0])
+    statuses = ("status_quality", "status_cost")
+    rows = [r for r in csv.DictReader(open(DATA, encoding="utf-8"))
+            if r["group"] and not r["group"].startswith("#")
+            and any((r[k] or "").startswith(("in", "legacy:in")) for k in statuses)]
     order, buckets = [], {}
     for r in rows:
-        gk = MERGE.get(r["group"], r["group"])
+        b = base.get(r["group"], r["group"])
+        gk = MERGE.get(b, b)
         if gk not in buckets: buckets[gk] = []; order.append(gk)
         buckets[gk].append(r)
     def pick_url(rs, src):

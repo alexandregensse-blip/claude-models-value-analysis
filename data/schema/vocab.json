@@ -2717,7 +2717,7 @@
    }
   },
   "maker": {
-   "description": "Makers (models.json maker, publishers.json maker). Ids = lqm.MAKER_PUBLISHER's publisher spellings; x-terms.org = the spelling lqm.is_home matches in flags; x-terms.lqm_provider = lqm.provider(). `other` = any maker outside lqm's eight (lqm.provider gives it 'other'); it is never a publisher's maker (no home effect). Add a maker here before it gets its own scales in lqm.",
+   "description": "Makers (models.json maker, publishers.json maker). Ids = lqm.MAKER_PUBLISHER's publisher spellings; x-terms.org = the spelling lqm.is_home matches in flags; x-terms.lqm_provider = lqm.provider(). `other` = any maker outside lqm's eight (lqm.provider gives it 'other'); it is never a publisher's maker (no home effect). Add a maker here before it gets its own scales in lqm. x-terms.thinking = 'switch': the maker's thinking is a switch apart from the effort level (thinking off is a setting of its own, compared with thinking on only); absent: thinking off is the bottom of one ladder (OpenAI reasoning_effort none, below the levels) — read by the site's effort-ladder report (site/grids.py).",
    "enum": [
     "other",
     "anthropic",
@@ -2741,7 +2741,9 @@
      "display_prefixes": [
       "Anthropic",
       "Claude"
-     ]
+     ],
+     "thinking": "switch",
+     "thinking_note": "Thinking is a parameter of its own (thinking: {type: disabled | adaptive | enabled}), apart from the effort (output_config.effort): thinking off is a setting beside the levels, not the rung below low (models.json: opus-4.6 and opus-4.8 list 'Thinking off' beside 'Adaptive thinking'; opus-4.8 runs with thinking off unless thinking: adaptive is sent, at its default effort high). The maintainer's decision, 29 Oct 2026: the site's ladder report compares nothink with think only on these models."
     },
     "openai": {
      "org": "OpenAI",

@@ -4,7 +4,7 @@ import datetime, hashlib, html as htmlmod, json, os, re
 
 import duels
 
-from config import HERE, ROOT, SITE_URL, REPO_URL, TITLE, SITE_NAME, DESCRIPTION, SITE_HOST, BING_SITE_VERIFICATION, INDEXNOW_KEY
+from config import HERE, ROOT, SITE_URL, REPO_URL, DATA_URL, TITLE, SITE_NAME, DESCRIPTION, SITE_HOST, BING_SITE_VERIFICATION, INDEXNOW_KEY
 
 
 DATE_FILE = os.path.join(HERE, "content-date.json")   # {fingerprint, date} of the last content change (committed)
@@ -56,7 +56,7 @@ def head_tags(date, counts):
         "keywords": ["Claude", "Claude models", "LLM cost", "effort level", "Fable", "Opus", "Sonnet", "Haiku",
                      "benchmark", "Pareto frontier"],
         "variableMeasured": ["Cost per task, as a multiple of the cheapest couple", "Expected score on the benchmark panel (%)"],
-        "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": SITE_URL + "raw-data.csv"}],
+        "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": DATA_URL}],
     }
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": SITE_NAME, "url": SITE_URL}
     ld = json.dumps([website, dataset], ensure_ascii=False, indent=1).replace("</", "<\\/")
@@ -107,7 +107,7 @@ Costs are multiples of the cheapest couple's; quality is the expected score on t
 
 ## Data
 
-- [raw-data.csv]({SITE_URL}raw-data.csv): every measured row (source, model, effort, task, harness, cost, tokens, score, reference), CC BY 4.0.
+- [data.csv]({DATA_URL}): every measure (source, model, effort, task, harness, cost, tokens, score, reference) and its status in the fit on each axis, CC BY 4.0.
 
 ## Optional
 

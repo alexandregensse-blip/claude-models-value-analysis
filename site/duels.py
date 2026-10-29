@@ -6,7 +6,7 @@ quasi-standard errors, puts it ahead with probability REACH or more; otherwise t
 uncertainty. The rules of this page: docs/DISPLAY-METHODOLOGY.md § 15."""
 import html as htmlmod, json, math, os, re, sys
 
-from config import ROOT, SITE_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER, LEVELS, CAP, EFF
+from config import ROOT, SITE_URL, DATA_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER, LEVELS, CAP, EFF
 from grids import panel_score
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import MODELS, DISPLAY_ORDER
@@ -322,7 +322,7 @@ def build(CG, QG, PANEL):
   <div class="foot">
     <p><b>Alexandre Gensse</b> · <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis" target="_blank" rel="noopener">github.com/alexandregensse-blip</a> · <a href="{SITE_URL}">{esc(HOME_TITLE)}</a></p>
     <p class="faint" style="margin-top:8px">All figures are <b>indicative and for informational purposes only</b> — derived from public third-party measurements, not an official benchmark, and not affiliated with or endorsed by Anthropic. Verify before relying on any value.</p>
-    <p class="faint" style="margin-top:8px">Data and text under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a> · code under <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis/blob/main/LICENSE">MIT</a> · <a href="raw-data.csv">download the data (CSV)</a></p>
+    <p class="faint" style="margin-top:8px">Data and text under <a href="https://creativecommons.org/licenses/by/4.0/" rel="license">CC BY 4.0</a> · code under <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis/blob/main/LICENSE">MIT</a> · <a href="{DATA_URL}">download the data (CSV)</a></p>
   </div>
 </div>"""
     return body, summary

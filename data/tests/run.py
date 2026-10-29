@@ -1599,6 +1599,65 @@ def lqm_guard_configuration_not_in_efforts():
     eq((r.q(a_lo), r.q(b_lo)), ("in", "in"), "the low rows stand")
 
 
+# ================================================================ the fit reads the build (29 Oct 2026)
+@test
+def fit_reads_build_tables():
+    """model/fit.py's reading of a build: lqm.load on the axis' table with the group-keyed maps resolved through
+    group-map.json and group-setups.json (build_lqm.fit_maps, load_table). The composite is a fit group named per
+    publisher ('comp@puby'), which the catalog's maps do not know: through the maps its row is dropped as the build
+    said (out:composite); without them (negative control) lqm.load keeps it."""
+    import json, tempfile
+    sys.path[:0] = [os.path.join(DATA, "..", "model"), DATA]
+    import lqm, build_lqm
+    sc = base()
+    sc.setup("c1", family="f1")
+    sc.setup("c2", family="f2")
+    sc.setup("comp", family="fc", composite={"components": ["c1", "c2"], "formula": {"weights": {"c1": 1, "c2": 1}},
+                                             "linear": True, "evidence": EV})
+    s, t = sc.source("a"), sc.source("b", publisher="puby")
+    k1 = sc.m(s, setup="comp", model="ma", effort=[LOW], score="60%")
+    sc.m(s, setup="comp", model="mb", effort=[LOW], score="65%")
+    sc.m(t, setup="comp", model="ma", effort=[LOW], score="62%")
+    sc.m(t, setup="comp", model="mb", effort=[LOW], score="70%")
+    sc.m(s, setup="c1", model="ma", effort=[LOW], score="50%")
+    sc.m(s, setup="c1", model="mb", effort=[LOW], score="80%")
+    keep = tempfile.mkdtemp(prefix="fitread-")
+    try:
+        r = sc.run(lqm=True, keep=keep)
+        eq(r.q(k1), "out:composite", "the build: the composite row is out")
+        gm, gs = build_lqm.read_maps(keep)
+        eq(gm.get("comp@pubx"), "comp", "fit group → base group")
+        eq(gs["groups"].get("comp@pubx"), "comp", "fit group → setup")
+        eq(gs["setups"]["comp"]["components"], ["c1", "c2"], "the setup's components")
+        models = r.rep["build"]["fit_models"]
+        g, _, _ = build_lqm.load_table(lqm, "quality", models, keep)
+        rows = lambda G: sorted((k, x["couple"]) for k, v in G.items() for x in v["rows"])
+        eq(("comp@pubx", "ma@low") in rows(g), False, "through the maps: dropped")
+        g0, _, _ = lqm.load(build_lqm.table("quality", keep), models, field="score")
+        eq(("comp@pubx", "ma@low") in rows(g0), True, "negative control, without the maps: kept")
+        eq(lqm.COMPOSITES.get("comp@pubx"), None, "the catalog maps restored after the block")
+    finally:
+        shutil.rmtree(keep, ignore_errors=True)
+
+
+@test
+def site_ladder_switch():
+    """The site's effort-ladder report: on a model whose maker's thinking is a switch (vocab maker x-terms.thinking,
+    Anthropic) thinking off above low is not an inversion, and thinking off is compared with thinking on; on another
+    maker's model (OpenAI: reasoning_effort none) it is the rung below low. Negative control: with no switch model,
+    the Anthropic model's nothink > low is flagged."""
+    sys.path.insert(0, os.path.join(DATA, "..", "site"))
+    import grids
+    sw = grids.thinking_switch()
+    eq(("opus-4.8" in sw, "haiku-4.5" in sw, "gpt-5.5" in sw), (True, True, False), "switch from the registry")
+    cg = {"opus-4.8": {"nothink": [1.0, .1], "low": [0.5, .1], "high": [2.0, .1]},
+          "gpt-5.5": {"nothink": [1.0, .1], "low": [0.5, .1]}, "haiku-4.5": {"nothink": [1.0, .1], "think": [0.8, .1]}}
+    eq(grids.monotonicity_report(cg, {}), ["cost: gpt-5.5 nothink(1.0) > low(0.5)",
+                                           "cost: haiku-4.5 nothink(1.0) > think(0.8)"], "switch models")
+    eq("cost: opus-4.8 nothink(1.0) > low(0.5)" in grids.monotonicity_report(cg, {}, switch=set()), True,
+       "negative control: the full ladder")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

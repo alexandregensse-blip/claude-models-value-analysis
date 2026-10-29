@@ -4,7 +4,7 @@ CSS, HTML body and client script, and writes index.html and the root files at th
 Run: python3 site/build.py (Python standard library and Node.js only; the fit itself is model/fit.py)."""
 import json, math, os, re, sys
 
-from config import HERE, OUT, REPO_URL, ROOT, EFFORT_ORDER, CAP
+from config import HERE, OUT, REPO_URL, DATA_URL, ROOT, EFFORT_ORDER, CAP
 from grids import fused_grids, monotonicity_report
 from render import inject, prerender
 from seo import content_date, content_fingerprint, head_tags, write_root_files
@@ -37,7 +37,7 @@ def main():
     app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
     app  = app.replace("__PANEL__", json.dumps(PANEL, separators=(",",":")))
     app  = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",",":")))
-    body = body.replace("__REPO__", REPO_URL)
+    body = body.replace("__REPO__", REPO_URL).replace("__DATA_URL__", DATA_URL)
     body = body.replace("__NCOSTROWS__", str(DIAG["cost"]["rows"])).replace("__NSCOREROWS__", str(DIAG["quality"]["rows"]))
     span = math.exp(max(c[0] for v in CG.values() for c in v.values()) - min(c[0] for v in CG.values() for c in v.values()))
     ntrend = sum(len(CG[m]) for m in duels.CURRENT if m in CG)   # couples of the latest model of each family: the price trend
