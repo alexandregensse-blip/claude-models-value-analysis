@@ -10640,6 +10640,39 @@
   },
   "aaomni-index": {
    "label": "AA Omniscience Index (points)"
+  },
+  "arxiv-2610.05348-nq-abst": {
+   "label": "Index-hole testbed, NQ: abstention on unanswerable questions (vanilla tool)"
+  },
+  "arxiv-2610.05348-hotpotqa-abst": {
+   "label": "Index-hole testbed, HotpotQA: abstention on unanswerable questions (vanilla tool)"
+  },
+  "arxiv-2610.06668-tier2reject": {
+   "label": "Tier-2 flawed-twin rejection (unwarned, of 30), Claude Code CLI no tools"
+  },
+  "apexharm-asr": {
+   "label": "APEX-Harm attack success rate under attack (Categories 4-6, average)"
+  },
+  "caloriebench-mae": {
+   "label": "CalorieBench, calorie MAE (kcal, lower is better)"
+  },
+  "llmreg-product-pass-2026-10-03": {
+   "label": "llm-regression product suite 2026-10-03 (strict pass %)"
+  },
+  "llmreg-product-pass-2026-10-04": {
+   "label": "llm-regression product suite 2026-10-04 (strict pass %)"
+  },
+  "llmreg-product-pass-2026-10-05": {
+   "label": "llm-regression product suite 2026-10-05 (strict pass %)"
+  },
+  "llmreg-product-pass-2026-10-06": {
+   "label": "llm-regression product suite 2026-10-06 (strict pass %)"
+  },
+  "llmreg-product-pass-2026-10-07": {
+   "label": "llm-regression product suite 2026-10-07 (strict pass %)"
+  },
+  "qcd-nnakapa-t2": {
+   "label": "QCD-nnakapa, T2 pass rate (quality judgement: the weakest task)"
   }
  },
  "setups": {
@@ -15528,10 +15561,27 @@
    "judge_panel": null,
    "metric": "score-of-1",
    "headline": {
-    "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.13623v1",
+      "captured": "2026-10-28",
+      "where": "Abstract, results sentence",
+      "quote": "Opus 5 and Sonnet 5 have the lowest overall attack success rates (8% and 20%)",
+      "file": "/work/.salvo14/mig/convert-apexharm-2610.13623/evidence/v1.txt",
+      "sha256": "752a3244c978825b9efe83e4e30261f13576898fd3b2704841765fe4796c4b10"
+     },
+     {
+      "url": "https://arxiv.org/html/2610.13623v1",
+      "captured": "2026-10-28",
+      "where": "Section 4.2 Main Results and Analysis, 'Quantitative results' (lower ASR = more robust; the paper's main safety result)",
+      "quote": "Opus 5 and Sonnet 5 are the most robust overall, with average ASRs of 8% and 20%, respectively.",
+      "file": "/work/.salvo14/mig/convert-apexharm-2610.13623/evidence/v1.txt",
+      "sha256": "752a3244c978825b9efe83e4e30261f13576898fd3b2704841765fe4796c4b10"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -16045,9 +16095,18 @@
    "metric": "F1",
    "headline": {
     "metric": "F1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.13463v2",
+      "captured": "2026-09-30",
+      "where": "Section 4.1 text on Table 4 (TRAIL comparison, Weighted F1 and cost): the paper's TRAIL result is the Weighted F1 (rule 3; the abstract gives the same metric as the TRAIL example)",
+      "quote": "With Opus-4.8, Continual Search increases Weighted F1 from 0.430 under self-consistency to 0.543.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.13463/evidence/arxiv-2609.13463v2.txt",
+      "sha256": "e5929d2366dac4bc63fc5a819660f9497b2977b68d8b336f5f9e8927bad8d7be"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -19646,10 +19705,27 @@
    "judge_panel": null,
    "metric": "answerable-EM%",
    "headline": {
-    "metric": "answerable-EM%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "abstain%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "abstract, result sentence: abstention on unanswerable questions (the index-hole testbed, Table 1 Abst. columns) is the result the paper gives",
+      "quote": "raises abstention on unanswerable questions from 23% to 97% on average",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     },
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "paper title: the frozen agents' reaction to a refusing retrieval tool (the abstention on the hole set)",
+      "quote": "Search Engines Never Say No",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -19675,10 +19751,27 @@
    "judge_panel": null,
    "metric": "answerable-EM%",
    "headline": {
-    "metric": "answerable-EM%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "abstain%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "abstract, result sentence: abstention on unanswerable questions (the index-hole testbed, Table 1 Abst. columns) is the result the paper gives",
+      "quote": "raises abstention on unanswerable questions from 23% to 97% on average",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     },
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "paper title: the frozen agents' reaction to a refusing retrieval tool (the abstention on the hole set)",
+      "quote": "Search Engines Never Say No",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -19847,10 +19940,19 @@
    "judge_panel": null,
    "metric": "solved-of-25",
    "headline": {
-    "metric": "solved-of-25",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "detect%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.06668",
+      "captured": "2026-10-28",
+      "where": "title and abstract: the result is the flawed problem not rejected (rule 3, judgment); the unwarned rejection column of Supplementary Table 3",
+      "quote": "Across three recent models, 12 of 90 replies failed to reject a flawed problem.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.06668/evidence/paper.txt",
+      "sha256": "806dc12d81f42a23984ead2dfe2ab3e89aecc84545e464ee82d509c988e29441"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -19877,8 +19979,18 @@
    "metric": "none",
    "headline": {
     "metric": "none",
-    "basis": "decision",
-    "decision": null
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.06824v2",
+      "captured": "2026-10-19",
+      "where": "Figure 6 caption (page 31), right panel (the same chart against total API cost)",
+      "quote": "Right: the same against total API and",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.06824/evidence/2610.06824.txt",
+      "sha256": "345a11db8b98796bb891b8206a8fd874862d55cb07699e07218eba8efbaf86e5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -19936,10 +20048,19 @@
    "judge_panel": null,
    "metric": "performance-multiplier",
    "headline": {
-    "metric": "performance-multiplier",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "compute-multiplier",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.06824v2",
+      "captured": "2026-10-19",
+      "where": "Table 2 caption (page 31): the main results are 'sorted by compute multiplier'",
+      "quote": "sorted by compute multiplier",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.06824/evidence/2610.06824.txt",
+      "sha256": "345a11db8b98796bb891b8206a8fd874862d55cb07699e07218eba8efbaf86e5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -21872,9 +21993,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.18122",
+      "captured": "2026-10-28",
+      "where": "abstract; basis: judgment, rule 3 (no designation, no board; the abstract gives accuracy as the result). Table 3 prints Acc (original prompts, percent) per judge for the alignment set and the fact-related set; the setups hold those columns",
+      "quote": "rewriting the better answer in such a tone lowers the accuracy of a typical TDM from 99% to 42%",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.18122/evidence/abs.html",
+      "sha256": "fae2d6fb7936921e48ec0a0de2ec6476d28ff2aba667269c4e334dda4423bfa3"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -21901,9 +22031,18 @@
    "metric": "acc%",
    "headline": {
     "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.18122",
+      "captured": "2026-10-28",
+      "where": "abstract; basis: judgment, rule 3 (no designation, no board; the abstract gives accuracy as the result). Table 3 prints Acc (original prompts, percent) per judge for the alignment set and the fact-related set; the setups hold those columns",
+      "quote": "rewriting the better answer in such a tone lowers the accuracy of a typical TDM from 99% to 42%",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.18122/evidence/abs.html",
+      "sha256": "fae2d6fb7936921e48ec0a0de2ec6476d28ff2aba667269c4e334dda4423bfa3"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -28998,10 +29137,19 @@
    "judge_panel": null,
    "metric": "within20%",
    "headline": {
-    "metric": "within20%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "mae-lower-better",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/mmiddlezong/calorie-bench/tree/66e4316d050fb086655f5d44cbda93f6dd55e55a/results/v1",
+      "captured": "2026-10-19",
+      "where": "leaderboard heading (cal-lb.md, line 1): 'Ranked by mean absolute calorie error (lower is better)'; the Calorie MAE, kcal column is the first metric column",
+      "quote": "Ranked by mean absolute calorie error (lower is better).",
+      "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.md",
+      "sha256": "1f567e64429bf67673b4bdc8cd9adfe2f2f490778fd306a33203486fcd31c68b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -29174,9 +29322,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/anthropics/claude-cookbooks",
+      "captured": "2026-10-01",
+      "where": "cell 58 output (summary table of the runs, one row per configuration): the quality column is mean pass, the only quality column of the table (the others are trials, requests, $ per task, $ per 10k tasks, vs baseline); the text (cell 12) names pass rate as the quality bar",
+      "quote": "config | trials (pass/n) | mean pass | requests | $ / task | $ / 10k tasks | vs baseline",
+      "file": "/work/.salvo14/mig/convert-anthropic-cookbook/evidence/cookbook-extract.txt",
+      "sha256": "33ad147900065983da4e8b5affb34e7bd523ae4c79165a2aa9a8f7fb4394334a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -33514,9 +33671,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://note.com/dende2023/n/n38cab6fe80a6",
+      "captured": "2026-10-19",
+      "where": "article lead (rule 3, judgment: the result the text gives first): 'Sonnet 5.5はlowでも15件のテストをすべて通り'; results table column テスト (15/15 in every setting)",
+      "quote": "Sonnet 5.5はlowでも15件のテストをすべて通り",
+      "file": "/work/.salvo14/g/g5/src/note.com_dende2023_n_n38cab6fe80a6.txt",
+      "sha256": "b2edd0f01302840466987630fe377f09a1179611425207aaf64de7b0931c1a87"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -33686,10 +33852,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "score% (Overall)",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.18727v3",
+      "captured": "2026-10-05",
+      "where": "section 3.2 defines overall success as exact match (the paper's success criterion); the abstract names the strict problem-level accuracy first (rule 3, judgment)",
+      "quote": "we define overall success on a problem as exact match over the scored challenges applicable to that problem",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.18727/evidence/arxiv-2605.18727v3.txt",
+      "sha256": "6f95b5a3965c3bae8dc58703070ee076026fc4693bb2befdaef466bdc1678719"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -33716,9 +33891,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2604.03121",
+      "captured": "2026-10-20",
+      "where": "Section 3.4 text after Table 1 (Module I): the result the text gives for Module I is the accuracy, MA 94.2 (rule 3 judgment; the original paper designates no headline)",
+      "quote": "As shown in Table 1, Kimi K2.5 achieves the highest accuracy on Module I, indicating strong factual DFIR knowledge. (94.2% MA).",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.03121/evidence/arxiv-2604.03121.txt",
+      "sha256": "1a7a3557349ca906ba28301110c63ecfd1665791b64295a6eedc37395f959fcd"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -33745,9 +33929,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2604.03121",
+      "captured": "2026-10-20",
+      "where": "Table 1, Module II (CTF) CI column: the rows run in descending order of this column (62.7, 47.3, 44.7, 34.0, 26.7), the table's ranking order (rule 2)",
+      "quote": "GPT-5.2-pro | 93.0 | 89.9 | 62.7 | 92.2 | 416 | 31%",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.03121/evidence/arxiv-2604.03121.txt",
+      "sha256": "1a7a3557349ca906ba28301110c63ecfd1665791b64295a6eedc37395f959fcd"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -34600,9 +34793,18 @@
    "metric": "score-0-1",
    "headline": {
     "metric": "score-0-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://driftproofhq.com/reports/014/",
+      "captured": "2026-10-08",
+      "where": "saved page text, line 68: the per-task average score of each model without the skill and with it (the means of table T1)",
+      "quote": "What did each model score, without the skill and with it?",
+      "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+      "sha256": "430b6535bec3fd19a8f8e4cadb0a22b14ff4d53218f9187addb0e52fc1029db2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -34626,9 +34828,18 @@
    "metric": "score-0-1",
    "headline": {
     "metric": "score-0-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://driftproofhq.com/reports/014/",
+      "captured": "2026-10-08",
+      "where": "saved page text, line 68: the per-task average score of each model without the skill and with it (the means of table T1)",
+      "quote": "What did each model score, without the skill and with it?",
+      "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+      "sha256": "430b6535bec3fd19a8f8e4cadb0a22b14ff4d53218f9187addb0e52fc1029db2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -34652,9 +34863,18 @@
    "metric": "score-0-1",
    "headline": {
     "metric": "score-0-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://driftproofhq.com/reports/014/",
+      "captured": "2026-10-08",
+      "where": "saved page text, line 68: the per-task average score of each model without the skill and with it (the means of table T1)",
+      "quote": "What did each model score, without the skill and with it?",
+      "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+      "sha256": "430b6535bec3fd19a8f8e4cadb0a22b14ff4d53218f9187addb0e52fc1029db2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -34678,9 +34898,18 @@
    "metric": "score-0-1",
    "headline": {
     "metric": "score-0-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://driftproofhq.com/reports/014/",
+      "captured": "2026-10-08",
+      "where": "saved page text, line 68: the per-task average score of each model without the skill and with it (the means of table T1)",
+      "quote": "What did each model score, without the skill and with it?",
+      "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+      "sha256": "430b6535bec3fd19a8f8e4cadb0a22b14ff4d53218f9187addb0e52fc1029db2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -34704,9 +34933,18 @@
    "metric": "score-0-1",
    "headline": {
     "metric": "score-0-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://driftproofhq.com/reports/014/",
+      "captured": "2026-10-08",
+      "where": "saved page text, line 68: the per-task average score of each model without the skill and with it (the means of table T1)",
+      "quote": "What did each model score, without the skill and with it?",
+      "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+      "sha256": "430b6535bec3fd19a8f8e4cadb0a22b14ff4d53218f9187addb0e52fc1029db2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -34730,9 +34968,18 @@
    "metric": "score-0-1",
    "headline": {
     "metric": "score-0-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://driftproofhq.com/reports/014/",
+      "captured": "2026-10-08",
+      "where": "saved page text, line 68: the per-task average score of each model without the skill and with it (the means of table T1)",
+      "quote": "What did each model score, without the skill and with it?",
+      "file": "/work/.salvo14/mig/convert-driftproofhq/evidence/driftproof014.txt",
+      "sha256": "430b6535bec3fd19a8f8e4cadb0a22b14ff4d53218f9187addb0e52fc1029db2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -44636,9 +44883,18 @@
    "metric": "score",
    "headline": {
     "metric": "score",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/nedcut/gm-bench/blob/1cdf5ef/web/src/app/Method.tsx",
+      "captured": "2026-10-18",
+      "where": "Method page, How rows are compared (web/src/app/Method.tsx at 1cdf5ef): the standings are sorted by score; the 2.0 rows are on the same board",
+      "quote": "The standings are sorted by score for reading, not ranked.",
+      "file": "/work/.salvo14/mig/convert-github-gmbench/evidence/Method-1cdf5ef.tsx",
+      "sha256": "b0dd4b83594daecb7eee29dc73e69871644b5a2545562aa0b9052ed4c75c3547"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -45078,9 +45334,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.16170",
+      "captured": "2026-10-20",
+      "where": "Table 3 (Closed-loop accuracy by question position, E1): caption 'means match overall model accuracy'; rows in descending Mean (E1) order within each block (Gemini 3.8 Flash 68.9 first, DeepSeek-VL2-Small 29.6 last)",
+      "quote": "means match overall model accuracy",
+      "file": "/work/.salvo14/mig/convert-grip-2610.16170/evidence/2610.16170.txt",
+      "sha256": "53687fb93bbc2e18d474b91f49ca4a2881cad676fa1a3aefcd6fe6349b6b905d"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -55638,10 +55903,19 @@
    "judge_panel": null,
    "metric": "F1x100",
    "headline": {
-    "metric": "F1x100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "F2′",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://github.com/dsifry/harnesseval/blob/8f634b68/REPORT.md",
+      "captured": "2026-10-19",
+      "where": "section 2.6 (F2′ definition): 'The primary score is F2′'; section 3.1 headline table is the F2′ matrix; the abstract's ranking sentence names the F2′ point estimates",
+      "quote": "The primary score is **F2′ = (5T + αA) / (4D + T + αA + H)**",
+      "file": "/work/.salvo14/mig/convert-github-harnesseval/evidence/REPORT.md",
+      "sha256": "beb6b6838f84dcdb26355b7296d82ee766da27a1e142e37646355e90320ef10c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -69221,9 +69495,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/api/datasets/agents-last-exam/agents-last-exam/leaderboard",
+      "captured": "2026-10-28",
+      "where": "Agents' Last Exam official leaderboard export: its only score column (value, pct-tasks-passed) and the board's note on the unit",
+      "quote": "values are percentages (0-100); equal-task aggregation; unattempted tasks contribute zero; pass threshold score>=0.999",
+      "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+      "sha256": "86b7e393c407eaa702adfd03a319cbb7ee4654c63d99a7de4f01d20765dbbc50"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -69288,8 +69571,17 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote MathVision, BabyVision, and CharXiv (RQ): both settings where available; the standard (no-tool) setting is the headline, with-CI is a tool-augmented setting",
+      "quote": "cells report “Without CI” and “With CI” separately",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-27B.md",
+      "sha256": "57e4bdb258ee1a7d2635c5174ebd4e56abe392505cdb5f8bbb356b0dc4293641"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -69317,8 +69609,17 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote MathVision, BabyVision, and CharXiv (RQ): both settings where available; the standard (no-tool) setting is the headline, with-CI is a tool-augmented setting",
+      "quote": "cells report “Without CI” and “With CI” separately",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-27B.md",
+      "sha256": "57e4bdb258ee1a7d2635c5174ebd4e56abe392505cdb5f8bbb356b0dc4293641"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -69346,9 +69647,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, ClawEval-MM footnote 1: scores are reported as 'Pass@3 / average score'; the average score is the benchmark score",
+      "quote": "the average score is the mean benchmark score across the three trials",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-27B.md",
+      "sha256": "57e4bdb258ee1a7d2635c5174ebd4e56abe392505cdb5f8bbb356b0dc4293641"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -69679,8 +69989,17 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote MathVision, BabyVision, and CharXiv (RQ): both settings where available; the standard (no-tool) setting is the headline, with-CI is a tool-augmented setting",
+      "quote": "cells report “Without CI” and “With CI” separately",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-27B.md",
+      "sha256": "57e4bdb258ee1a7d2635c5174ebd4e56abe392505cdb5f8bbb356b0dc4293641"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -70126,9 +70445,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/api/datasets/agents-last-exam/agents-last-exam/leaderboard",
+      "captured": "2026-10-28",
+      "where": "Agents' Last Exam official leaderboard export: its only score column (value, pct-tasks-passed) and the board's note on the unit",
+      "quote": "values are percentages (0-100); equal-task aggregation; unattempted tasks contribute zero; pass threshold score>=0.999",
+      "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+      "sha256": "86b7e393c407eaa702adfd03a319cbb7ee4654c63d99a7de4f01d20765dbbc50"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -70458,9 +70786,18 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "metric": "accuracy%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 5: MathVision, CharXiv (RQ) scores reported as 'without CI / with CI'; the no-tool setting is the headline",
+      "quote": "scores are reported as \"without CI / with CI\"",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -70488,8 +70825,17 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 3: OSWorld 2.0 scores are reported as 'binary / partial'; binary = the full task reward (task success)",
+      "quote": "The binary score is the percentage of tasks that receive the full task reward",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -75147,9 +75493,18 @@
    "metric": "solved-of-55",
    "headline": {
     "metric": "solved-of-55",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://krauq.ai/benchmarks/scan-2026/",
+      "captured": "2026-10-15",
+      "where": "results page, embedded report data: findings list, first item (key Accuracy, the page's lead finding); the page's count view 'Correct answers by model' counts flags solved; the speed and cost findings are frontiers over accuracy (rule 3: the text gives the solved count as THE result)",
+      "quote": "3 settings solved all 55 flags",
+      "file": "/work/.salvo14/mig/convert-krauq.ai/evidence/krauq_report_data.json",
+      "sha256": "fc339d982ff275eb3391acefeb1a84e9aa9b7b398c6ff409b62458b8d8e90e44"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -77552,9 +77907,18 @@
    "metric": "win%",
    "headline": {
     "metric": "win%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/maxim-saplin/llm_chess/tree/main/_logs/rand_vs_llm",
+      "captured": "2026-10-19",
+      "where": "T1 (rand_vs_llm_matches.csv, one row per match file): the one score column per match is wins_of_games (black wins of total games); black_wins, white_wins and draws are its tallies. The README's Primary sort (Elo, Win/Loss) belongs to the Elo board, whose rows this setup does not hold",
+      "quote": "wins_of_games",
+      "file": "/work/.salvo14/mig/convert-llm_chess/evidence/rand_vs_llm_matches.csv",
+      "sha256": "f1b8688c645004ec614ca5aee54c79ffb9a2a0752d36d4f52f2b0704ebb97cad"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -77683,9 +78047,18 @@
    "metric": "pct-pass",
    "headline": {
     "metric": "pct-pass",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -77708,10 +78081,19 @@
    "judge_panel": null,
    "metric": "score-of-10",
    "headline": {
-    "metric": "score-of-10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -77737,10 +78119,19 @@
    "judge_panel": null,
    "metric": "score-of-10",
    "headline": {
-    "metric": "score-of-10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -77766,10 +78157,19 @@
    "judge_panel": null,
    "metric": "score-of-10",
    "headline": {
-    "metric": "score-of-10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -77795,10 +78195,19 @@
    "judge_panel": null,
    "metric": "score-of-10",
    "headline": {
-    "metric": "score-of-10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -77824,10 +78233,19 @@
    "judge_panel": null,
    "metric": "score-of-10",
    "headline": {
-    "metric": "score-of-10",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -80690,9 +81108,26 @@
    "metric": "errors-found-of-24",
    "headline": {
     "metric": "errors-found-of-24",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://bsky.app/profile/medicrab.com/post/3mxttrj5yjk2r",
+      "captured": "2026-10-19",
+      "where": "thread.post.embed.images[0].alt (chart alt text): the groups and the order of the rows follow the errors-found column (mean over 2-3 runs, of 24), top group first, descending; the clinical and false-alarm columns are not in that order",
+      "quote": "Top group: Claude Opus 5.5 20.3, Claude Fable 5.1 20.0, GPT-6 Astra 19.3, GPT-6.1 Sol 19.3, Gemini 4 Argon (new; web app, high thinking) 19.0, Grok 4.7 18.0. Middle group: Claude Sonnet 5.5 15.7, Claude Haiku 5.5 14.3. Lower group: DeepSeek V4.1 Flash 10.7, GPT-6 Luna 6.3.",
+      "file": "/work/.salvo14/g/g7/src/misc/medicrab.json",
+      "sha256": "a853241d4a99f3180fb12bf3821dc46efb26da7d152e40bd1f405697bf440ef8"
+     },
+     {
+      "url": "https://bsky.app/profile/medicrab.com/post/3mxttrj5yjk2r",
+      "captured": "2026-10-19",
+      "where": "thread.post.record.text (the post opening the thread): the result the post gives, errors found of 24",
+      "quote": "With high thinking, Gemini 4 Argon found 19 of 24.",
+      "file": "/work/.salvo14/g/g7/src/misc/medicrab.json",
+      "sha256": "a853241d4a99f3180fb12bf3821dc46efb26da7d152e40bd1f405697bf440ef8"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -90297,9 +90732,26 @@
    "metric": "score-of-1",
    "headline": {
     "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.27590",
+      "captured": "2026-10-20",
+      "where": "page title (the paper's title): the result is the override: recoverable context does not always override the local prior",
+      "quote": "Does Not Always Override Local Lexical Priors",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.27590/evidence/arxiv-2609.27590.html",
+      "sha256": "6c80c0581338e208fd4639c22cdbee0b89cfe89aacad8a5ab5e7921d51a49e86"
+     },
+     {
+      "url": "https://arxiv.org/html/2609.27590",
+      "captured": "2026-10-20",
+      "where": "abstract, result sentence: prior-conflict override (OR, Table 3 column OR(C), the held score) is the result the paper gives; the English subset's override span",
+      "quote": "prior-conflict override spans 0.806–1.000",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.27590/evidence/arxiv-2609.27590.html",
+      "sha256": "6c80c0581338e208fd4639c22cdbee0b89cfe89aacad8a5ab5e7921d51a49e86"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -90326,9 +90778,26 @@
    "metric": "score-of-1",
    "headline": {
     "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2609.27590",
+      "captured": "2026-10-20",
+      "where": "page title (the paper's title): the result is the override: recoverable context does not always override the local prior",
+      "quote": "Does Not Always Override Local Lexical Priors",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.27590/evidence/arxiv-2609.27590.html",
+      "sha256": "6c80c0581338e208fd4639c22cdbee0b89cfe89aacad8a5ab5e7921d51a49e86"
+     },
+     {
+      "url": "https://arxiv.org/html/2609.27590",
+      "captured": "2026-10-20",
+      "where": "abstract: the Chinese subset (Table 3 Chinese OR(C) column) shows the same override gaps, reported separately, not pooled",
+      "quote": "A separately reported 10-family Chinese subset shows similar",
+      "file": "/work/.salvo14/mig/convert-arxiv-2609.27590/evidence/arxiv-2609.27590.html",
+      "sha256": "6c80c0581338e208fd4639c22cdbee0b89cfe89aacad8a5ab5e7921d51a49e86"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -91979,10 +92448,19 @@
    "judge_panel": null,
    "metric": "runs-of-15",
    "headline": {
-    "metric": "runs-of-15",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "physics-pass-of-9",
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://zenodo.org/records/23067522",
+      "captured": "2026-10-05",
+      "where": "section 3 Scoring and introduction: the number, not the run, decides the solved problem (the designated metric is the physics count; the gate is a precondition)",
+      "quote": "the number, not a reader’s impression, decides whether the script",
+      "file": "/work/.salvo14/mig/convert-zenodo-neutron-shielding/evidence/neutron_shielding.txt",
+      "sha256": "b803f52bdfe743f8286a672b12677da0c8bd0cfe285596052c8149fd14140bd4"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -92009,9 +92487,18 @@
    "metric": "physics-pass-of-9",
    "headline": {
     "metric": "physics-pass-of-9",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://zenodo.org/records/23067522",
+      "captured": "2026-10-05",
+      "where": "abstract (rule 3): the result is the physics-correct count on L2-L4; the paragraph of section 5.2 compares it with runs",
+      "quote": "Opus 5.5 converts four of them into physically correct answers and Astra",
+      "file": "/work/.salvo14/mig/convert-zenodo-neutron-shielding/evidence/neutron_shielding.txt",
+      "sha256": "b803f52bdfe743f8286a672b12677da0c8bd0cfe285596052c8149fd14140bd4"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -92172,9 +92659,18 @@
    "metric": "gate-pass%(3tasks-n30)",
    "headline": {
     "metric": "gate-pass%(3tasks-n30)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-37-fable51-opus5-qcd",
+      "captured": "2026-10-19",
+      "where": "abstract, finding 1 ('3つの発見'): the quality gate is the first result (rule 3, judgment)",
+      "quote": "品質ゲートを全通過し",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-37-fable51-opus5-qcd.txt",
+      "sha256": "182ee65bbaf70b55b000c9014dea36a8b3246b1b4ea5a63c2d94e624069aa3cd"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -92229,10 +92725,27 @@
    "judge_panel": null,
    "metric": "gate-pass%(3tasks-n30)",
    "headline": {
-    "metric": "gate-pass%(3tasks-n30)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-34-opus5-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "article, quality section: the author organises the quality (the quality gate) by the T2 pass rate alone (T1 and T3 are 10/10 in all 8 patterns)",
+      "quote": "そこで T2 の通過率だけを",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+      "sha256": "c9060e9d5e95dee47cf28eb53baf553167f8c7618244e2441897711f7152e049"
+     },
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-34-opus5-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "summary table note: the quality is judged on the weakest of the three tasks; T2 is that task in every row below 100%",
+      "quote": "品質の判定は、3 タスクのうち最も通過率が低いタスクで行っています",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+      "sha256": "c9060e9d5e95dee47cf28eb53baf553167f8c7618244e2441897711f7152e049"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -92258,10 +92771,27 @@
    "judge_panel": null,
    "metric": "gate-pass%(3tasks-n30)",
    "headline": {
-    "metric": "gate-pass%(3tasks-n30)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "article, quality section: the author organises the quality (the quality gate) by the T2 pass rate alone (T1 and T3 are 10/10 in all 8 patterns)",
+      "quote": "そこで T2 の通過率だけを",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     },
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "summary table note: the quality is judged on the weakest of the three tasks; T2 is that task in every row below 100%",
+      "quote": "品質の判定は、3 タスクのうち最も通過率が低いタスクで行っています",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -92287,10 +92817,27 @@
    "judge_panel": null,
    "metric": "gate-pass%(3tasks-n30)",
    "headline": {
-    "metric": "gate-pass%(3tasks-n30)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "article, quality section: the author organises the quality (the quality gate) by the T2 pass rate alone (T1 and T3 are 10/10 in all 8 patterns)",
+      "quote": "そこで T2 の通過率だけを",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     },
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "summary table note: the quality is judged on the weakest of the three tasks; T2 is that task in every row below 100%",
+      "quote": "品質の判定は、3 タスクのうち最も通過率が低いタスクで行っています",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -92317,9 +92864,18 @@
    "metric": "gate-pass%(3tasks-n30)",
    "headline": {
     "metric": "gate-pass%(3tasks-n30)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-36-copilot-gemini37-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "article section まとめ (summary), the quality result; basis: judgment, rule 3 (no designation, no board; the article gives the quality-gate pass as its quality result; per-task gate/10 cells in the per-task table, pooled over the three tasks by the converter)",
+      "quote": "品質ゲートを安定して通過したのは Gemini 3.7 Flash × high と Sonnet 5 × xhigh でした",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-36-copilot-gemini37-sonnet5-qcd.txt",
+      "sha256": "0771be3f663ffe3ab1a671b97cae4cde16b895970604d21c21729e3a58c8d666"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98682,9 +99238,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/quisbaum-prog/occam/blob/244c2fc502209167116c9b72dbb0d95a4e0d6df9/README.md",
+      "captured": "2026-09-28",
+      "where": "README 'Results at a glance', results table header: the tests passed (of 18) per setup",
+      "quote": "Tests passed (of 18)",
+      "file": "/work/.salvo14/mig/convert-github-occam/evidence/README.md",
+      "sha256": "3f2dced2ea7dbb0bfc2d7328d1c5884a4190d8ef589f713abd6730e1a26da469"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98740,9 +99305,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/quisbaum-prog/occam/blob/244c2fc502209167116c9b72dbb0d95a4e0d6df9/README.md",
+      "captured": "2026-09-28",
+      "where": "README 'Results at a glance', results table header: the tests passed (of 18) per setup",
+      "quote": "Tests passed (of 18)",
+      "file": "/work/.salvo14/mig/convert-github-occam/evidence/README.md",
+      "sha256": "3f2dced2ea7dbb0bfc2d7328d1c5884a4190d8ef589f713abd6730e1a26da469"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -98769,9 +99343,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/quisbaum-prog/occam/blob/244c2fc502209167116c9b72dbb0d95a4e0d6df9/README.md",
+      "captured": "2026-09-28",
+      "where": "README 'Results at a glance', results table header: the tests passed (of 18) per setup",
+      "quote": "Tests passed (of 18)",
+      "file": "/work/.salvo14/mig/convert-github-occam/evidence/README.md",
+      "sha256": "3f2dced2ea7dbb0bfc2d7328d1c5884a4190d8ef589f713abd6730e1a26da469"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100911,9 +101494,18 @@
    "metric": "edit-precision%",
    "headline": {
     "metric": "edit-precision%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2604.17338",
+      "captured": "2026-10-28",
+      "where": "Abstract: the two novel metrics; the abstract's headline result is precision (frontier models 'exhibit precision below 45%')",
+      "quote": "We define two novel metrics, edit-level precision and bug-level recall",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.17338/evidence/v1.txt",
+      "sha256": "c2efde2fc95c96bbe548ffff55c652e908ebc18bfc67a2ce6abf99e8913a8728"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -100940,9 +101532,18 @@
    "metric": "edit-precision%",
    "headline": {
     "metric": "edit-precision%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2604.17338",
+      "captured": "2026-10-28",
+      "where": "Abstract: the two novel metrics; the abstract's headline result is precision (frontier models 'exhibit precision below 45%')",
+      "quote": "We define two novel metrics, edit-level precision and bug-level recall",
+      "file": "/work/.salvo14/mig/convert-arxiv-2604.17338/evidence/v1.txt",
+      "sha256": "c2efde2fc95c96bbe548ffff55c652e908ebc18bfc67a2ce6abf99e8913a8728"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -104868,9 +105469,18 @@
    "metric": "score-of-1",
    "headline": {
     "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.08197",
+      "captured": "2026-10-20",
+      "where": "abstract (sentence on held-out replay); Table 1 caption: 'HeldoutWorld denotes HeldoutWorldExact, the unconditioned mean exact held-out world replay rate' (the setup's score column, third score column of its row); section 6.1 names HeldoutWorldExact with TrainExact and HeldoutExact",
+      "quote": "held-out replay drops sharply when order or root structure",
+      "file": "/work/.salvo14/mig/convert-replayscm-2605.08197/src/2605.08197.txt",
+      "sha256": "de1fc56e0f460305e9efa61ffc5fe6b3a34a8382a1c76e1f80e0b20a05799eab"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -104897,9 +105507,18 @@
    "metric": "score-of-1",
    "headline": {
     "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.08197",
+      "captured": "2026-10-20",
+      "where": "abstract (sentence on held-out replay); Table 1 caption: 'HeldoutWorld denotes HeldoutWorldExact, the unconditioned mean exact held-out world replay rate' (the setup's score column, third score column of its row); section 6.1 names HeldoutWorldExact with TrainExact and HeldoutExact",
+      "quote": "held-out replay drops sharply when order or root structure",
+      "file": "/work/.salvo14/mig/convert-replayscm-2605.08197/src/2605.08197.txt",
+      "sha256": "de1fc56e0f460305e9efa61ffc5fe6b3a34a8382a1c76e1f80e0b20a05799eab"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -104926,9 +105545,18 @@
    "metric": "score-of-1",
    "headline": {
     "metric": "score-of-1",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2605.08197",
+      "captured": "2026-10-20",
+      "where": "abstract (sentence on held-out replay); Table 1 caption: 'HeldoutWorld denotes HeldoutWorldExact, the unconditioned mean exact held-out world replay rate' (the setup's score column, third score column of its row); section 6.1 names HeldoutWorldExact with TrainExact and HeldoutExact",
+      "quote": "held-out replay drops sharply when order or root structure",
+      "file": "/work/.salvo14/mig/convert-replayscm-2605.08197/src/2605.08197.txt",
+      "sha256": "de1fc56e0f460305e9efa61ffc5fe6b3a34a8382a1c76e1f80e0b20a05799eab"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -115422,9 +116050,18 @@
    "metric": "solved-of-196",
    "headline": {
     "metric": "solved-of-196",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/humanlayer/advanced-context-engineering-for-coding-agents/blob/main/benchmarking-new-models-on-slop-code-bench.md",
+      "captured": "2026-10-19",
+      "where": "Overview, first paragraphs: the writeup's designated metric (strict pass rate, the strict passes of 196 checkpoints)",
+      "quote": "the one we focus on is **strict pass rate**",
+      "file": "/work/.salvo14/mig/convert-humanlayer-scb-2026-10/evidence/slopcode.md",
+      "sha256": "909e29122f5b98f069cad26ce67cdb8b187ea6c74cec3267e4f8270413bba1aa"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -115890,9 +116527,18 @@
    "metric": "Mean IoU all targets (%)",
    "headline": {
     "metric": "Mean IoU all targets (%)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.26659v1",
+      "captured": "2026-10-21",
+      "where": "Abstract (rule 3, judgment: the result the abstract gives): 'the strongest evaluated model, Claude Opus 5.5, achieves a mean overlap of 41.71%' = Table 3, All targets, Mean IoU (Opus 5.5 xhigh 41.71)",
+      "quote": "the strongest evaluated model, Claude Opus 5.5, achieves a mean overlap of 41.71%",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.26659/evidence/2610.26659.txt",
+      "sha256": "0fafa5f0bed561f773e73ac519bb4d2e86d314fcdb6d0b81265e7574dbc9dc39"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -116130,9 +116776,18 @@
    "metric": "score",
    "headline": {
     "metric": "score",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2606.10394",
+      "captured": "2026-10-19",
+      "where": "section 4 results text leads with the average score; Table 2 caption: 'Score is the average valid run task score' (rule 3, judgment)",
+      "quote": "with the highest average score of 77.1",
+      "file": "/work/.salvo14/mig/convert-arxiv-2606.10394/evidence/arxiv-2606.10394.txt",
+      "sha256": "706dc3ad90dbc198beff77dbebfac194914091330c635a8b5b47016bc74cfc1c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -120184,9 +120839,18 @@
    "metric": "correct-boards-of-120",
    "headline": {
     "metric": "correct-boards-of-120",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://www.tafla.is/benchmark/2026-10-08",
+      "captured": "2026-10-19",
+      "where": "Method section: the definition of correctness, boards first, replies second (rule 3; the page's narrative counts board misses)",
+      "quote": "A board is correct when the expected value is on it within the task's tolerance; a reply is correct when the expected value appears as a numeral in the walkthrough.",
+      "file": "/work/.salvo14/rb/rb3/src/tafla_jina.txt",
+      "sha256": "e4e3f7740aaa9317b80b35271b7941f2f0d0209070cb7798665faf6bac4494d3"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -138270,10 +138934,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "Score",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/api/datasets/agents-last-exam/agents-last-exam/leaderboard",
+      "captured": "2026-10-28",
+      "where": "Agents' Last Exam official leaderboard export: its only score column (value, pct-tasks-passed) and the board's note on the unit",
+      "quote": "values are percentages (0-100); equal-task aggregation; unattempted tasks contribute zero; pass threshold score>=0.999",
+      "file": "/work/.salvo14/mig/convert-hf-ale-official/evidence/leaderboard.json",
+      "sha256": "86b7e393c407eaa702adfd03a319cbb7ee4654c63d99a7de4f01d20765dbbc50"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -138297,10 +138970,19 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "pass@3",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 1: scores are reported as 'pass@3 / average score'; the average score is the mean score across the three trials",
+      "quote": "the average score is the mean score across the three trials",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -138325,9 +139007,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 1: scores are reported as 'pass@3 / average score'; the average score is the mean score across the three trials",
+      "quote": "the average score is the mean score across the three trials",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -138423,9 +139114,18 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "metric": "partial%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 3: OSWorld 2.0 scores are reported as 'binary / partial'; binary = the full task reward (task success)",
+      "quote": "The binary score is the percentage of tasks that receive the full task reward",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -138559,8 +139259,17 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 5: MathVision, CharXiv (RQ) scores reported as 'without CI / with CI'; the no-tool setting is the headline",
+      "quote": "scores are reported as \"without CI / with CI\"",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -138586,8 +139295,17 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 5: MathVision, CharXiv (RQ) scores reported as 'without CI / with CI'; the no-tool setting is the headline",
+      "quote": "scores are reported as \"without CI / with CI\"",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -138612,9 +139330,18 @@
    "judge_panel": null,
    "metric": "score%",
    "headline": {
-    "metric": "score%",
-    "basis": "decision",
-    "decision": null,
+    "metric": "accuracy%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/Qwen/Qwen3.8-Flash-Next/raw/main/README.md",
+      "captured": "2026-10-19",
+      "where": "README, footnote 5: MathVision, CharXiv (RQ) scores reported as 'without CI / with CI'; the no-tool setting is the headline",
+      "quote": "scores are reported as \"without CI / with CI\"",
+      "file": "/work/.salvo14/gs/s5/src/Qwen3.8-Flash-Next.md",
+      "sha256": "35ca37ccc366f1ba478dab33841a2c0c18ce53fd62f291ca05341f7728b225b2"
+     }
+    ],
     "level": "not-established:assumed"
    },
    "bounds": [
@@ -141128,9 +141855,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2608.25939",
+      "captured": "2026-10-20",
+      "where": "Introduction, Figure 1 caption and text: the gap is shown on test pass rate ('XREPOTEST: Pass Rate' against standalone McEval pass rate); the abstract names 'test pass rate and coverage' as the standard metrics",
+      "quote": "Figure 1 illustrates this discrepancy",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2608.25939.txt",
+      "sha256": "368444f93e4efbb4a4795f980a1302a27d02ef13bc6a2286ac39ce50e5732a6c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141155,9 +141891,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2608.25939",
+      "captured": "2026-10-20",
+      "where": "Introduction, Figure 1 caption and text: the gap is shown on test pass rate ('XREPOTEST: Pass Rate' against standalone McEval pass rate); the abstract names 'test pass rate and coverage' as the standard metrics",
+      "quote": "Figure 1 illustrates this discrepancy",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2608.25939.txt",
+      "sha256": "368444f93e4efbb4a4795f980a1302a27d02ef13bc6a2286ac39ce50e5732a6c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141182,9 +141927,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2608.25939",
+      "captured": "2026-10-20",
+      "where": "Introduction, Figure 1 caption and text: the gap is shown on test pass rate ('XREPOTEST: Pass Rate' against standalone McEval pass rate); the abstract names 'test pass rate and coverage' as the standard metrics",
+      "quote": "Figure 1 illustrates this discrepancy",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2608.25939.txt",
+      "sha256": "368444f93e4efbb4a4795f980a1302a27d02ef13bc6a2286ac39ce50e5732a6c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141209,9 +141963,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2608.25939",
+      "captured": "2026-10-20",
+      "where": "Introduction, Figure 1 caption and text: the gap is shown on test pass rate ('XREPOTEST: Pass Rate' against standalone McEval pass rate); the abstract names 'test pass rate and coverage' as the standard metrics",
+      "quote": "Figure 1 illustrates this discrepancy",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2608.25939.txt",
+      "sha256": "368444f93e4efbb4a4795f980a1302a27d02ef13bc6a2286ac39ce50e5732a6c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141236,9 +141999,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/pdf/2608.25939",
+      "captured": "2026-10-20",
+      "where": "Introduction, Figure 1 caption and text: the gap is shown on test pass rate ('XREPOTEST: Pass Rate' against standalone McEval pass rate); the abstract names 'test pass rate and coverage' as the standard metrics",
+      "quote": "Figure 1 illustrates this discrepancy",
+      "file": "/work/.salvo14/gt/t3/src/pdf/2608.25939.txt",
+      "sha256": "368444f93e4efbb4a4795f980a1302a27d02ef13bc6a2286ac39ce50e5732a6c"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141263,9 +142035,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/discoverphysics-fable-ara",
+      "captured": "2026-10-20",
+      "where": "README of discoverphysics-fable-ara, lead paragraph (the card names the verdict count as the official result, 'Official verdicts: N/11 PASS'); scoreboard PASS line is the same count",
+      "quote": "Official verdicts:",
+      "file": "/work/.salvo14/gt/t4/src/ana/discoverphysics-fable-ara.md",
+      "sha256": "92bfff8b5ade8d8b500ed1d9fc5c39f52ab6a2d623b8dc05cd3f8096c623f4ab"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141290,9 +142071,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/discoverphysics-gpt5.6-sol-ara",
+      "captured": "2026-10-20",
+      "where": "README of discoverphysics-gpt5.6-sol-ara, lead paragraph (the card names the verdict count as the official result, 'Official verdicts: N/11 PASS'); scoreboard PASS line is the same count",
+      "quote": "Official verdicts:",
+      "file": "/work/.salvo14/gt/t4/src/ana/discoverphysics-gpt5.6-sol-ara.md",
+      "sha256": "8d1db59496bfc0c7045057b33a7c27396b943f61062fddd0052631b42297f9dc"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141317,9 +142107,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/discoverphysics-grok4.5-ara",
+      "captured": "2026-10-20",
+      "where": "README of discoverphysics-grok4.5-ara, lead paragraph (the card names the verdict count as the official result, 'Official verdicts: N/11 PASS'); scoreboard PASS line is the same count",
+      "quote": "Official verdicts:",
+      "file": "/work/.salvo14/gt/t4/src/ana/discoverphysics-grok4.5-ara.md",
+      "sha256": "4b0f75e5824693ebd9e6d8e47b2e81d661f2d8dde3b026839a73b9270e5032df"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141344,9 +142143,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/discoverphysics-kimi-k2.7-ara",
+      "captured": "2026-10-20",
+      "where": "README of discoverphysics-kimi-k2.7-ara, lead paragraph (the card names the verdict count as the official result, 'Official verdicts: N/11 PASS'); scoreboard PASS line is the same count",
+      "quote": "Official verdicts:",
+      "file": "/work/.salvo14/gt/t4/src/ana/discoverphysics-kimi-k2.7-ara.md",
+      "sha256": "036812ad68a2aa2150dd7f47c400945d64aa6777d23498e053fd6e1caf2abd17"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -141371,9 +142179,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/datasets/AgentNativeResearchLab/discoverphysics-gemini3.1-pro-ara",
+      "captured": "2026-10-20",
+      "where": "README of discoverphysics-gemini3.1-pro-ara, lead paragraph (the card names the verdict count as the official result, 'Official verdicts: N/11 PASS'); scoreboard PASS line is the same count",
+      "quote": "Official verdicts:",
+      "file": "/work/.salvo14/gt/t4/src/ana/discoverphysics-gemini3.1-pro-ara.md",
+      "sha256": "7348d7720dbfb1e2898d4e64fc452a9235ef2f0764b3b21ecf970d38157c808b"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -145091,6 +145908,543 @@
    "legacy_groups": [],
    "label": "AA Omniscience Index",
    "note": "new setup of the 29 Oct headline round: the index column of the AA-Omniscience model pages (points, can be negative)"
+  },
+  "dexholdem-overall": {
+   "family": "dexholdem",
+   "benchmark": "DexHoldem (2605.18727v2) — 36 agentic perception problems, Overall (strict exact match), avg of 3 runs",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score% (Overall)",
+   "headline": {
+    "metric": "score% (Overall)",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2605.18727v3",
+      "captured": "2026-10-05",
+      "where": "section 3.2 defines overall success as exact match (the paper's success criterion); the abstract names the strict problem-level accuracy first (rule 3, judgment)",
+      "quote": "we define overall success on a problem as exact match over the scored challenges applicable to that problem",
+      "file": "/work/.salvo14/mig/convert-arxiv-2605.18727/evidence/arxiv-2605.18727v3.txt",
+      "sha256": "6f95b5a3965c3bae8dc58703070ee076026fc4693bb2befdaef466bdc1678719"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "DexHoldem (2605.18727v2) — 36 agentic perception problems, Overall (strict exact match), avg of 3 runs",
+   "note": "new setup (29 Oct): the Overall column of Table 2 (the paper's defined success); the held dexholdem setup holds the Avg column"
+  },
+  "arxiv-2610.05348-nq-abst": {
+   "family": "arxiv-2610.05348-nq-abst",
+   "benchmark": "Index-hole testbed, NQ (vanilla retrieval tool): abstention on unanswerable questions",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "abstain%",
+   "headline": {
+    "metric": "abstain%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "abstract, result sentence: abstention on unanswerable questions (the index-hole testbed, Table 1 Abst. columns) is the result the paper gives",
+      "quote": "raises abstention on unanswerable questions from 23% to 97% on average",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     },
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "paper title: the frozen agents' reaction to a refusing retrieval tool (the abstention on the hole set)",
+      "quote": "Search Engines Never Say No",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Index-hole NQ: abstention (vanilla tool)",
+   "note": "new setup (29 Oct, headline round): the paper designates abstention on unanswerable questions as the result; printed per model in Table 1 (Abst.) and Table 4. The held answerable cover-EM setup carries this headline too; its measures go out as not the headline."
+  },
+  "arxiv-2610.05348-hotpotqa-abst": {
+   "family": "arxiv-2610.05348-hotpotqa-abst",
+   "benchmark": "Index-hole testbed, HotpotQA (vanilla retrieval tool): abstention on unanswerable questions",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "abstain%",
+   "headline": {
+    "metric": "abstain%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "abstract, result sentence: abstention on unanswerable questions (the index-hole testbed, Table 1 Abst. columns) is the result the paper gives",
+      "quote": "raises abstention on unanswerable questions from 23% to 97% on average",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     },
+     {
+      "url": "https://arxiv.org/abs/2610.05348",
+      "captured": "2026-10-19",
+      "where": "paper title: the frozen agents' reaction to a refusing retrieval tool (the abstention on the hole set)",
+      "quote": "Search Engines Never Say No",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.05348/evidence/arxiv-2610.05348.txt",
+      "sha256": "f4ee6b7f83792b858f4463d83b61d03043dcd154415e4d5b08b0c8c25f907ee1"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Index-hole HotpotQA: abstention (vanilla tool)",
+   "note": "new setup (29 Oct, headline round): the paper designates abstention on unanswerable questions as the result; printed per model in Table 1 (Abst.) and Table 4. The held answerable cover-EM setup carries this headline too; its measures go out as not the headline."
+  },
+  "arxiv-2610.06668-tier2reject": {
+   "family": "arxiv-2610.06668-tier2reject",
+   "benchmark": "Tier-2 flawed-twin rejection (unwarned, of 30), Claude Code CLI no tools",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "detect%",
+   "headline": {
+    "metric": "detect%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/abs/2610.06668",
+      "captured": "2026-10-28",
+      "where": "title and abstract: the result is the flawed problem not rejected (rule 3, judgment); the unwarned rejection column of Supplementary Table 3",
+      "quote": "Across three recent models, 12 of 90 replies failed to reject a flawed problem.",
+      "file": "/work/.salvo14/mig/convert-arxiv-2610.06668/evidence/paper.txt",
+      "sha256": "806dc12d81f42a23984ead2dfe2ab3e89aecc84545e464ee82d509c988e29441"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Tier-2 flawed-twin rejection (unwarned, of 30), Claude Code CLI no tools",
+   "note": "new setup (29 Oct): unwarned rejection of the flawed twins (Supplementary Table 3, of 30); 'detect%' is the nearest vocab term (no rejected-of-N term). The held tier2solve setup holds the solve items."
+  },
+  "apexharm-asr": {
+   "family": "apexharm-asr",
+   "benchmark": "APEX-Harm attack success rate under attack (Categories 4-6, average)",
+   "subset": null,
+   "harness": "APEX-Agents MCP harness",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "ASR%",
+   "headline": {
+    "metric": "ASR%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://arxiv.org/html/2610.13623v1",
+      "captured": "2026-10-28",
+      "where": "Abstract, results sentence",
+      "quote": "Opus 5 and Sonnet 5 have the lowest overall attack success rates (8% and 20%)",
+      "file": "/work/.salvo14/mig/convert-apexharm-2610.13623/evidence/v1.txt",
+      "sha256": "752a3244c978825b9efe83e4e30261f13576898fd3b2704841765fe4796c4b10"
+     },
+     {
+      "url": "https://arxiv.org/html/2610.13623v1",
+      "captured": "2026-10-28",
+      "where": "Section 4.2 Main Results and Analysis, 'Quantitative results' (lower ASR = more robust; the paper's main safety result)",
+      "quote": "Opus 5 and Sonnet 5 are the most robust overall, with average ASRs of 8% and 20%, respectively.",
+      "file": "/work/.salvo14/mig/convert-apexharm-2610.13623/evidence/v1.txt",
+      "sha256": "752a3244c978825b9efe83e4e30261f13576898fd3b2704841765fe4796c4b10"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "lower",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "APEX-Harm attack success rate under attack (Categories 4-6, average)",
+   "note": "attack success rate (ASR) of the 12 models, Table 4 average column; the source's headline (abstract and main results), rule 3 of the 29 Oct round; the held mean task score (apexharm-score) stays out as not-headline"
+  },
+  "caloriebench-mae": {
+   "family": "caloriebench-mae",
+   "benchmark": "CalorieBench, calorie MAE (kcal, lower is better)",
+   "subset": null,
+   "harness": "Anthropic API single-shot",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "mae-lower-better",
+   "headline": {
+    "metric": "mae-lower-better",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://github.com/mmiddlezong/calorie-bench/tree/66e4316d050fb086655f5d44cbda93f6dd55e55a/results/v1",
+      "captured": "2026-10-19",
+      "where": "leaderboard heading (cal-lb.md, line 1): 'Ranked by mean absolute calorie error (lower is better)'; the Calorie MAE, kcal column is the first metric column",
+      "quote": "Ranked by mean absolute calorie error (lower is better).",
+      "file": "/work/.salvo14/mig/convert-github-caloriebench/evidence/cal-lb.md",
+      "sha256": "1f567e64429bf67673b4bdc8cd9adfe2f2f490778fd306a33203486fcd31c68b"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    null
+   ],
+   "direction": "lower",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "CalorieBench, calorie MAE (kcal, lower is better)",
+   "note": "new setup (29 Oct headline round): the board's ranked metric, Calorie MAE in kcal (cal-lb.json calories.mae_kcal, the same 7 runs as caloriebench)"
+  },
+  "llmreg-product-pass-2026-10-03": {
+   "headline": {
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
+   },
+   "family": "llmreg-product-pass-2026-10-03",
+   "benchmark": "llm-regression product suite 2026-10-03 (strict pass %)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pct-pass",
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "llm-regression product suite 2026-10-03 (strict pass %)",
+   "note": "strict pass % of the product suite run (passed of graded attempts, the source's pass_rate); the quality /10 setup of the same day stays out as not-headline"
+  },
+  "llmreg-product-pass-2026-10-04": {
+   "headline": {
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
+   },
+   "family": "llmreg-product-pass-2026-10-04",
+   "benchmark": "llm-regression product suite 2026-10-04 (strict pass %)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pct-pass",
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "llm-regression product suite 2026-10-04 (strict pass %)",
+   "note": "strict pass % of the product suite run (passed of graded attempts, the source's pass_rate); the quality /10 setup of the same day stays out as not-headline"
+  },
+  "llmreg-product-pass-2026-10-05": {
+   "headline": {
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
+   },
+   "family": "llmreg-product-pass-2026-10-05",
+   "benchmark": "llm-regression product suite 2026-10-05 (strict pass %)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pct-pass",
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "llm-regression product suite 2026-10-05 (strict pass %)",
+   "note": "strict pass % of the product suite run (passed of graded attempts, the source's pass_rate); the quality /10 setup of the same day stays out as not-headline"
+  },
+  "llmreg-product-pass-2026-10-06": {
+   "headline": {
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
+   },
+   "family": "llmreg-product-pass-2026-10-06",
+   "benchmark": "llm-regression product suite 2026-10-06 (strict pass %)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pct-pass",
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "llm-regression product suite 2026-10-06 (strict pass %)",
+   "note": "strict pass % of the product suite run (passed of graded attempts, the source's pass_rate); the quality /10 setup of the same day stays out as not-headline"
+  },
+  "llmreg-product-pass-2026-10-07": {
+   "headline": {
+    "metric": "pct-pass",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://raw.githubusercontent.com/nikoamoretti/llm-regression/main/README.md",
+      "captured": "2026-10-28",
+      "where": "README, section 'Quality and clarity scores': strict pass says whether the hidden tests pass; scores are never blended into strict pass rates",
+      "quote": "Strict pass says whether the hidden tests pass.",
+      "file": "/work/.salvo14/mig/convert-nikoamoretti-llm-regression/src/README.md",
+      "sha256": "5e850f2a418fc8237a9f96722b5d4ffa161426d598f290a850b9712cfc3c6c18"
+     }
+    ],
+    "level": "written"
+   },
+   "family": "llmreg-product-pass-2026-10-07",
+   "benchmark": "llm-regression product suite 2026-10-07 (strict pass %)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pct-pass",
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "llm-regression product suite 2026-10-07 (strict pass %)",
+   "note": "strict pass % of the product suite run (passed of graded attempts, the source's pass_rate); the quality /10 setup of the same day stays out as not-headline"
+  },
+  "nnakapa-o5s5-t2": {
+   "family": "qcd-nnakapa-t2",
+   "benchmark": "QCD-nnakapa, T2 (parameterized query, injection trap): pass rate of 10 runs",
+   "subset": null,
+   "harness": "ClaudeCode",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-34-opus5-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "article, quality section: the author organises the quality (the quality gate) by the T2 pass rate alone (T1 and T3 are 10/10 in all 8 patterns)",
+      "quote": "そこで T2 の通過率だけを",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+      "sha256": "c9060e9d5e95dee47cf28eb53baf553167f8c7618244e2441897711f7152e049"
+     },
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-34-opus5-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "summary table note: the quality is judged on the weakest of the three tasks; T2 is that task in every row below 100%",
+      "quote": "品質の判定は、3 タスクのうち最も通過率が低いタスクで行っています",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-34-opus5-sonnet5-qcd.txt",
+      "sha256": "c9060e9d5e95dee47cf28eb53baf553167f8c7618244e2441897711f7152e049"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "nnakapa QCD #34 T2",
+   "note": "new setup (29 Oct, headline round): the article's quality metric is the T2 pass rate (T2 is the weakest task in every row below 100%); printed per row in the summary table and the per-task table (gate/10). The held gate-pass setup carries this headline too; its measures go out as not the headline."
+  },
+  "nnakapa-s5cc-t2": {
+   "family": "qcd-nnakapa-t2",
+   "benchmark": "QCD-nnakapa, T2 (parameterized query, injection trap): pass rate of 10 runs",
+   "subset": null,
+   "harness": "ClaudeCode-1Mctx",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "article, quality section: the author organises the quality (the quality gate) by the T2 pass rate alone (T1 and T3 are 10/10 in all 8 patterns)",
+      "quote": "そこで T2 の通過率だけを",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     },
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "summary table note: the quality is judged on the weakest of the three tasks; T2 is that task in every row below 100%",
+      "quote": "品質の判定は、3 タスクのうち最も通過率が低いタスクで行っています",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "nnakapa QCD #35 CC T2",
+   "note": "new setup (29 Oct, headline round): the article's quality metric is the T2 pass rate (T2 is the weakest task in every row below 100%); printed per row in the summary table and the per-task table (gate/10). The held gate-pass setup carries this headline too; its measures go out as not the headline."
+  },
+  "nnakapa-s5cop-t2": {
+   "family": "qcd-nnakapa-t2",
+   "benchmark": "QCD-nnakapa, T2 (parameterized query, injection trap): pass rate of 10 runs",
+   "subset": null,
+   "harness": "CopilotCLI",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass%",
+   "headline": {
+    "metric": "pass%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "article, quality section: the author organises the quality (the quality gate) by the T2 pass rate alone (T1 and T3 are 10/10 in all 8 patterns)",
+      "quote": "そこで T2 の通過率だけを",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     },
+     {
+      "url": "https://zenn.dev/nnakapa/articles/lab-35-claude-copilot-sonnet5-qcd",
+      "captured": "2026-10-19",
+      "where": "summary table note: the quality is judged on the weakest of the three tasks; T2 is that task in every row below 100%",
+      "quote": "品質の判定は、3 タスクのうち最も通過率が低いタスクで行っています",
+      "file": "/work/.salvo14/mig/convert-zenn-nnakapa/evidence/zenn-lab-35-claude-copilot-sonnet5-qcd.txt",
+      "sha256": "b761b086657e95cf8750d2e879c9457d1f96b9c62ddc413971fd018b8cd8f46c"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "nnakapa #35 Copilot T2",
+   "note": "new setup (29 Oct, headline round): the article's quality metric is the T2 pass rate (T2 is the weakest task in every row below 100%); printed per row in the summary table and the per-task table (gate/10). The held gate-pass setup carries this headline too; its measures go out as not the headline."
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
