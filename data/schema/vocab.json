@@ -123,7 +123,7 @@
      ]
     },
     "price-table": {
-     "description": "The prices the source applied (per class, with their date when stated).",
+     "description": "The prices the source applied (per class, with their date when stated). `term` (optional): a price-tables.json id (a pinned table, reproduced), or a price class (vocab price_class): then `value` is that class's price per million tokens in the cost's currency, the agent's reading (`written` beside it), and the build reads it as the source's own price vector when no registered price covers the price date (rule cost-stated-prices, 29 Oct).",
      "slots": [
       "spend"
      ]
@@ -2977,7 +2977,9 @@
     "chart-effort-order",
     "thinking-on-default-level",
     "run-before-shutdown",
-    "complement-of-percent"
+    "complement-of-percent",
+    "default-bridged-gap",
+    "cost-stated-prices"
    ],
    "x-terms": {
     "alias-by-date": {
@@ -3111,6 +3113,14 @@
     "cost-price-band": {
      "kind": "deduction",
      "note": "an unrepriced cost whose price changed in some classes only over its price date: the middle of the band, the band as uncertainty (the maintainer, 29 Oct)"
+    },
+    "default-bridged-gap": {
+     "kind": "deduction",
+     "note": "two default records of one model and one setting giving the same configuration before and after a span without captures cover the span, unless another record of the setting states another configuration in it or a name of the model starts or ends in it; the span carries the basis `bridged` and the measures it decides the flag default-bridged (the maintainer, 29 Oct)"
+    },
+    "cost-stated-prices": {
+     "kind": "deduction",
+     "note": "a cost whose price date no registered price covers, when the source states the class prices it applied (price-table facts whose term is a price class): those prices are its price vector, re-priced to the registered base price as a registered vector would be; flag cost-stated-prices (the maintainer, 29 Oct)"
     }
    }
   },

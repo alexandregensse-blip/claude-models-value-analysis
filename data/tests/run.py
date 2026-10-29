@@ -459,6 +459,40 @@ def cfg7_default():
 
 
 @test
+def cfg7_default_bridged_gap():
+    # rule A (the maintainer, 29 Oct): the same default before and after a span without captures covers the span
+    # (qwen3.6-plus: think on the Chinese page to 21 May, on the English page from 19 Oct)
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    rec = lambda frm, to, c, **kw: dict(iv(frm, to, **win), configuration=c, **kw)     # noqa: E731
+    two = ("nothink", "think")
+    sc.model("qa", configs=two, default=[rec("2026-01-01", "2026-03-31", "think"), rec("2026-07-01", "2026-12-31", "think")])
+    sc.model("qb", configs=two, default=[rec("2026-01-01", "2026-03-31", "think"), rec("2026-07-01", "2026-12-31", "nothink")])
+    sc.model("qc", configs=two, default=[rec("2026-01-01", "2026-03-31", "think"), rec("2026-05-01", "2026-05-10", "nothink"),
+                                         rec("2026-07-01", "2026-12-31", "think")])
+    sc.model("qd", configs=two, names=[name("qd", "2026-01-01"), name("qd-latest", "2026-05-01")],
+             default=[rec("2026-01-01", "2026-03-31", "think"), rec("2026-07-01", "2026-12-31", "think")])
+    sc.model("qe", configs=two, default=[rec("2026-01-01", "2026-03-31", "think", setting="thinking"),
+                                         rec("2026-07-01", "2026-12-31", "think")])
+    s = sc.source("a", published="2026-12-31")
+    nes = [("no-effort-sent", "default")]
+    on = lambda k, d: sc.m(s, model=k, effort=nes, run_date=[("run-date", d)])          # noqa: E731
+    m1, m2, m3 = on("qa", "2026-05-15"), on("qa", "2026-02-15"), on("qb", "2026-05-15")
+    m4, m5, m6 = on("qc", "2026-06-15"), on("qd", "2026-06-15"), on("qe", "2026-05-15")
+    m7 = sc.m(s, model="qa", effort=nes, run_date=[("run-start", "2026-03-15"), ("run-end", "2026-05-01")])
+    r = sc.run()
+    eq((r.cfg(m1), "default-bridged" in r[m1]["flags"], "default-bridged-gap" in r[m1]["rules_used"]),
+       ("think", True, True), "think on both sides: the gap is covered, flagged")
+    eq(r[m1]["fields"]["default_bridged"], [{"from": "2026-03-31", "to": "2026-07-01", "basis": "bridged"}], "the span")
+    eq((r.cfg(m2), "default-bridged" in r[m2]["flags"]), ("think", False), "inside a record: no bridge used")
+    eq(r.cfg(m7), "think", "a run from a record into the gap")
+    # negative controls: another configuration after the gap, another record inside it, a name starting inside it, a
+    # record of another setting on one side
+    eq([r.cfg(m) for m in (m3, m4, m5, m6)], ["default"] * 4, "no bridge")
+    eq(r.q(m3), "out:effort-not-established", "out as before")
+
+
+@test
 def cfg8_unstated():
     sc = base()
     s = sc.source("a")
@@ -748,6 +782,59 @@ def cost_per_model_subset_and_single():
     eq((r.c(m1), "cost-price-band" in r[m1]["flags"]), ("in", True),
        "non-uniform change over [release, publication]: in, with the price band as uncertainty (29 Oct)")
     eq(float(r.rows("fit-cost.csv", model="ma", effort="low")[0]["cost_prec"]) > 0, True, "band widens the sd")
+
+
+@test
+def cost_stated_prices():
+    # rule B (the maintainer, 29 Oct): no registered price covers the price date, the source states the prices it
+    # applied (vals.ai's Input / Output Cost column) → re-priced from them to the registered base price
+    def scenario(stated, register_from="2026-08-01"):
+        sc = base()
+        for k in ("ma", "mb"):
+            sc.prices["prices"].append(price(k, register_from, "2026-10-01", {"input": 1, "output": 5, "cache-read": 0.1}))
+        s = sc.source("a", published="2026-06-01")
+        ms = []
+        for k, cost, cls in (("ma", "1.0", stated[0]), ("mb", "3.0", stated[1])):
+            # a date in a class price's quote is not its price date (a date is a price-table fact of its own, as mb's)
+            more = {"spend": [("price-table", v, {"term": c, "written": f"${v}", "about": f"{k}-{len(ms) + 1}",
+                                                  "quote": f"{k}, as of 2026-09-01: ${v}"}) for c, v in cls]}
+            if k == "mb":
+                more["spend"].append(("price-table", "prices of 2026-05-01", {"about": None}))
+            ms.append(sc.m(s, model=k, effort=[LOW], cost=cost, more=more))
+        return sc, ms
+    sc, (m1, m2) = scenario(([("input", "1"), ("output", "5")], [("input", "2"), ("output", "10")]))
+    r = sc.run()
+    b1, b2 = r[m1]["fields"]["cost"]["base"], r[m2]["fields"]["cost"]["base"]
+    eq((r.c(m1), r.c(m2)), ("in", "in"), "re-priced from the stated prices")
+    eq((b1["rule"], b1["value"], b2["value"]), ("cost-uniform-factor", 1.0, 1.5), "equal prices: × 1; doubled: × 0.5")
+    eq(("cost-stated-prices" in r[m1]["flags"], "cost-stated-prices" in r[m1]["rules_used"]), (True, True), "flagged")
+    eq(r[m2]["fields"]["cost"]["stated_prices"], {"classes": {"input": 2.0, "output": 10.0}, "used": True}, "reported")
+    # negative controls: nothing stated → out as before; two input prices → not used; a registered price over the
+    # price date → the registered vector, the stated one unused; no base price → out
+    sc, (m1, m2) = scenario(([], []))
+    r = sc.run()
+    eq((r.c(m1), "cost-stated-prices" in r[m1]["flags"]), ("out:cost-not-comparable", False), "nothing stated")
+    sc, (m1, m2) = scenario(([("input", "1"), ("input", "2"), ("output", "5")], [("input", "2"), ("output", "10")]))
+    r = sc.run()
+    eq((r.c(m1), r[m1]["fields"]["cost"]["stated_prices"]["why"]), ("out:cost-not-comparable", "two stated input prices"),
+       "contradictory stated prices")
+    sc, (m1, m2) = scenario(([("input", "2"), ("output", "10")], [("input", "2"), ("output", "10")]),
+                            register_from="2026-01-01")
+    r = sc.run()
+    eq((r[m1]["fields"]["cost"]["base"]["rule"], r[m1]["fields"]["cost"]["stated_prices"]["used"],
+        "cost-stated-prices" in r[m1]["flags"]), ("cost-publisher-figure", False, False), "registered prices decide")
+    sc, (m1, m2) = scenario(([("input", "1"), ("output", "5")], [("input", "2"), ("output", "10")]))
+    sc.prices["prices"] = [p for p in sc.prices["prices"] if p["model"] != "ma"]
+    r = sc.run()
+    eq(r.c(m1), "out:cost-not-comparable", "no registered base price: not re-priced")
+    # validate.py: a stated class price is a number (the agent's reading), and a term is a table or a price class
+    sc, (m1, m2) = scenario(([("input", "$1 / $5")], [("input", "2"), ("output", "10")]))
+    sc.sources[m1.split("#")[0]]["facts"].append(dict(id="F99", says="price-table", about=None, value="x", term="inputs",
+                                                      level="written", form="data-file", where="w", file="saved.txt"))
+    r = sc.run()
+    eq((r.c(m1), r.q(m1)), ("out:no-proof", "in"), "a stated price written as the source's notation: the cost refused")
+    errs = " ".join(e[1] if isinstance(e, (list, tuple)) else str(e) for e in r.rep["validation"]["errors"])
+    eq(("is a number per million tokens" in errs, "nor a price class" in errs), (True, True), "validate.py says why")
 
 
 @test

@@ -15,7 +15,7 @@ python3 data/build.py ... --fit-models catalog                      # the fit's 
 python3 data/build.py ... --no-lqm                                  # skip the lqm.load step
 python3 data/build_lqm.py data/build/                               # the lqm.load step alone
 python3 data/legacy.py raw-data.csv OUT/findings --registry OUT/registry   # raw-data.csv → legacy findings
-python3 data/tests/run.py [name-filter]                             # the tests (127, about four seconds)
+python3 data/tests/run.py [name-filter]                             # the tests (129, about four seconds)
 python3 data/tests/acceptance.py [raw-data.csv] [--registry data/registry]   # the legacy acceptance test (≈ 20 s; default: the repository's raw-data.csv)
 python3 data/schema/validate.py [--verbose]                          # per-file summary; registry warnings apart
 python3 data/convert/precheck.py SOURCE_ID                           # names and route heads against the registry
@@ -489,7 +489,7 @@ group, so a1 is `out:single-couple`. What the test is about still holds: the ref
 
 ## Tests
 
-`python3 data/tests/run.py` runs 127 fixtures (counts below as of 23 Oct; `fit_reads_build_tables` and `site_ladder_switch` added 29 Oct): 55 in run.py (the build's, the merge's `ext_*`, and the registry fix's
+`python3 data/tests/run.py` runs 129 fixtures (counts below as of 23 Oct; `fit_reads_build_tables` and `site_ladder_switch` added 29 Oct, `cfg7_default_bridged_gap` and `cost_stated_prices` later that day): 55 in run.py (the build's, the merge's `ext_*`, and the registry fix's
 `ext_split_default_thinking_and_effort` and `ext_harness_per_provider`; `ext_between_tools_in_fit` replaces the
 not-fitted test), the review's 26, and 15 for the pilot fixes and the registry review (data/tests/pilot_tests.py). Between them they cover:
 - every reason code;
@@ -538,3 +538,46 @@ data/precision.py still names it (it wrote the precision columns; the facts' pre
 classes only (Sonnet 5.5's cache read halved on 7 Oct) is no longer out: at the latest vector its cost lies between
 raw × the smallest and raw × the largest per-class ratio; the row keeps the middle, its sd grows by the band's uniform
 sd, flag and rule `cost-price-band`. Vectors of different tiering stay out.
+
+## Added on 29 Oct, later
+
+**A default bridged over a gap without captures (rule A, the maintainer, 29 Oct).** A model's documented default
+covers only its records' intervals, so a run between two records fell on `no documented default of <key> covering the
+run`. When two default records of the same model and the same `setting` give the same configuration on both sides of
+a span no record covers, the span is covered too (`ctx.bridged_defaults`: the records of one setting walked in order of
+their start, consecutive ones of one configuration merged), only if:
+- the two records give the same configuration (another configuration between them ends the chain; validate.py already
+  refuses defaults of one setting that overlap, so no other record can state another configuration inside the span);
+- no name of the model (`names`, any route) starts or ends inside the span (a name that changed meaning across it →
+  no bridge);
+- the records are of one setting (`thinking`, `effort` or the whole call: never across settings) and of one model key.
+
+A bridged record is used only where no record of its setting covers the run, so every run a record covered keeps its
+outcome. The span carries the basis `bridged` (`fields.default_bridged`: `[{from, to, basis: bridged}]`), the measure
+the rule `default-bridged-gap` and the flag `default-bridged` (in the fit tables' confound column). Bridged spans in
+the registry of 29 Oct: qwen3.6-plus (think, 21 May → 19 Oct), qwen3.5-plus (think, 8 Jun → 19 Oct), qwen3.5-flash
+(think, 14 Jun → 19 Oct), sonnet-4.5 (nothink, 1 Apr → 28 Sep), opus-4.5 (thinking off, 1 Apr → 1 Jul → 28 Sep) and
+opus-4.7 (thinking off, 1 Jul → 28 Sep); sonnet-3.7's span (25 Feb → 23 May 2025) is not bridged, its OpenRouter id
+starts inside it (3 Mar 2025). In the build of 29 Oct it decides 9 measures (2 come into the quality fit, 1 into the cost fit); the 27 vals.ai qwen3.6-plus runs stay out: their run interval starts at the release (2 Apr), before the first record (18 Apr), which no bridge covers. Test `cfg7_default_bridged_gap` (and its negative controls: another configuration after
+the gap, another record inside it, a name starting inside it, a record of another setting on one side).
+
+**A cost priced by the source's own stated prices (rule B, the maintainer, 29 Oct: "if the source gives the price,
+where is the problem?").** A `price-table` fact (or a table column `says: price-table`) whose `term` is a price class
+(vocab `price_class`: input, output, cache-read…) states the price the source applied to that class: `value` is the
+price per million tokens in the cost's currency, the agent's reading, with `written` the printed text (validate.py:
+a number, and a term that is a price class or a price-tables.json id). The build reads them as the cost's own price
+vector (`stated_prices`; two different prices for one class → not used, `fields.cost.stated_prices.why`). When no
+registered price covers the cost's price date (`prices over the price date not registered`) and a base price is
+registered, the stated vector stands for the prices over the price date and the cost is re-priced to the base price
+by the usual steps (the publisher's figure, the delta on its tokens, a uniform factor over the classes both state;
+equal prices → factor 1); rule and flag `cost-stated-prices`, `fields.cost.stated_prices.used`. A registered price
+over the price date still decides (the stated vector is then reported, unused), so no cost re-priced before changes. A
+class price is never a price date (a date stays its own `price-table` fact), and a class term is not a pinned table
+(`cost-reproduction`). A Flex / batch tier cost is not priced this way. Test `cost_stated_prices` (negative controls:
+nothing stated, two input prices, a registered price over the price date, no base price, a price written in the source's
+notation).
+
+vals.ai: each board's `Input / Output Cost` (older layout: `Cost In / Out`) cell became two such facts (input, output),
+quoted with the row's visible text up to the cell, cited by every cost measure of the row: 4,112 facts in 51 sources, 2,056 of vals.ai's 2,091 cost measures (24 rows not on the page, 11 models on several rows of one board, left without). In the build of 29 Oct the rule prices 404 costs, 278 of them come into the fit (245 by a uniform factor, 33 at equal prices; the others are single couples or composites), among them 25 of vals.ai's 26 qwen3.8-27b costs; lqm.load cost 922 groups / 8,680 rows (before 923 / 8,403). Over the price dates the registry covers, the stated vector equals the registered one for 712 costs and differs for 65 (Gemini 3.8 Flash and Gemini 4 Argon shown at their list price during a promotion, DeepSeek V4 Flash 0731, GPT-5.6 Sol): there the registered price decides. A cost stated
+this way prices input and output only; a run's cache reads (vals.ai's token totals carry them, outside the measure's
+usage slot) are taken at the ratio of those two classes.

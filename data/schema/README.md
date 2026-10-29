@@ -238,3 +238,14 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
   leaves it out, and the build's in-fit terms must be lqm.EFFORTS (test `configurations_vocab_is_lqm_efforts`);
   build_lqm.py gives `out:effort-not-established` to a fit-table row lqm.load filters for its configuration, should
   the two lists part (test `lqm_guard_configuration_not_in_efforts`). Pending the maintainer's yes, as the method change.
+
+## Added on 29 Oct, later
+- Fact type `price-table` with a `term` that is a price class (vocab `price_class`): the price the source states it
+  applied to that class, `value` = per million tokens in the cost's currency (the agent's reading; `written` = the
+  printed text, '$0.5'), one fact per class. validate.py: the value is a number; a `price-table` term (fact or column)
+  is a price-tables.json id or a price class. The build reads the facts as the cost's own price vector when no
+  registered price covers its price date (rule `cost-stated-prices`, data/BUILD.md); a date stays a `price-table`
+  fact of its own. vals.ai boards: the `Input / Output Cost` / `Cost In / Out` cells (input, output).
+- Rule ids `default-bridged-gap` (a default identical on both sides of a span without captures covers it; the span's
+  basis `bridged` is computed by the build, never written in models.json) and `cost-stated-prices` (vocab `rule_id`,
+  registry rules.json); flags `default-bridged` and `cost-stated-prices` on the measures they decide.

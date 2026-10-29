@@ -434,6 +434,32 @@
    "date": "2026-10-21",
    "decided_by": "the maintainer",
    "ref": "docs/DATA-PIPELINE.md §4 prices.json"
+  },
+  {
+   "id": "default-bridged-gap",
+   "kind": "deduction",
+   "statement": "A model's documented default identical on both sides of a span without captures covers the span: only between two default records of the same model and setting giving the same configuration, when no other record of that setting states another configuration inside the span and no name of the model (any route) starts or ends inside it. The span's basis is `bridged`; the measures it decides carry the flag default-bridged.",
+   "inputs": [
+    "models.json default",
+    "models.json names"
+   ],
+   "output": "configuration (step 7)",
+   "date": "2026-10-29",
+   "decided_by": "the maintainer (29 Oct: qwen3.6-plus, think before 21 May and after 19 Oct)",
+   "ref": "data/BUILD.md, Added on 29 Oct, later"
+  },
+  {
+   "id": "cost-stated-prices",
+   "kind": "deduction",
+   "statement": "A cost whose price date no registered price covers is re-priced from the class prices the source states it applied (price-table facts whose term is a price class) to the registered base price, as a registered price vector would be (the publisher's figure, the delta on its tokens, a uniform factor); equal prices give factor 1. It needs a registered base price.",
+   "inputs": [
+    "price-table facts (term: a price class)",
+    "prices.json base price"
+   ],
+   "output": "cost at the base price",
+   "date": "2026-10-29",
+   "decided_by": "the maintainer (29 Oct: 'if the source gives the price, where is the problem?')",
+   "ref": "data/BUILD.md, Added on 29 Oct, later"
   }
  ]
 }
