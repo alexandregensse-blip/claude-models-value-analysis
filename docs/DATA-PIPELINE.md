@@ -22,9 +22,11 @@ data/registry/vocab.json                 closed vocabularies: fact types, units 
                                          anomalies, routes, effort ids, reason codes
 data/registry/flag-map.json              migration only: confound flag → fact/level, versioned, tested on every row
 data/decisions.json                      the maintainer's per-measure decisions
-build/fit-quality.csv, build/fit-cost.csv   computed: the rows each axis' fit reads (today's raw-data.csv columns)
-build/group-map.json                     computed: fit group → base group (for families, composites, publishers)
-build/status-report.json                 computed: every measure, its status per axis, its reason, the diff to the last build
+data/build/fit-quality.csv, fit-cost.csv computed, committed: the rows each axis' fit reads (raw-data.csv's columns)
+data/build/group-map.json                computed, committed: fit group → base group (for families, composites, publishers)
+data/build/group-setups.json             computed, committed: fit group → setup, with its family and composite components
+data/build/data.csv                      computed, committed: every measure and its status per axis (the public data file)
+data/build/status-report.json            computed, not committed: every measure, its status per axis, its reason, the diff
 ```
 
 Saved pages, dumps and clones stay outside git in the salvo folders, which are kept; git keeps their URLs, Wayback
@@ -287,8 +289,14 @@ The build writes **one table per axis** in today's `raw-data.csv` columns, holdi
 - `group-map.json`: fit group → base group, for the group-keyed catalog maps (families, composites, group display);
   the source-keyed maps (publishers, unit aliases) are keyed by the publisher id in the `source` column.
 
-Code changes for the tables (no change of method): `fit.py` reads one path per axis; `catalog` resolves a group
-through `group-map.json`. `lqm.load`'s per-row outcome is recovered by comparing its input with the rows it keeps
+Code changes for the tables (no change of method) — **made 29 Oct** (data/BUILD.md, "The fit reads the build"):
+`fit.py` reads one path per axis (`data/build/fit-quality.csv`, `fit-cost.csv`, both in its INPUTS); the group-keyed
+catalog maps (composites, families) resolve a fit group through `group-map.json` and `group-setups.json` with the
+build's own code (`build_lqm.fit_maps`, `load_table`), also used by precheck.py and validation/*.py; precheck.py and
+site/sources.py read `data/build/data.csv` (its rows in the fit; sources.py through the group map), and the CSV
+download links it. `fit.py --dry` builds the inputs without sampling: quality 1,608 groups / 17,705 rows, cost 923 /
+8,403. `raw-data.csv` stays as the frozen legacy input (legacy.py, the acceptance test, mapping.py); no fit has read
+the tables yet (the maintainer's yes, §8.5). `lqm.load`'s per-row outcome is recovered by comparing its input with the rows it keeps
 (group, couple, value): a row dropped by its composites rule → `out:composite`, by its republication rule →
 `out:republished`, written into the status report. **Method change** (configurations per model, planned 22 Oct, made 29 Oct), with its
 before/after: `lqm.EFFORTS` → the configurations in the fit (`nothink`, `minimal`, `low` … `max`, `think`, `solo`);

@@ -7,19 +7,19 @@ legacy rows of today's raw-data.csv a pass-through path (§8). It runs over the 
 ## Run
 
 ```
-python3 data/build.py                                    # data/registry + data/findings + data/decisions.json → build/
+python3 data/build.py --fit-models catalog               # data/registry + data/findings + data/decisions.json → data/build/
 python3 data/build.py --registry data/findings/examples/registry --findings data/findings/examples --out build/
 python3 data/build.py ... --previous build-old/status-report.json   # adds the status diff (per measure and per source)
 python3 data/build.py ... --cost-method-unstated out                # the setting below
 python3 data/build.py ... --fit-models catalog                      # the fit's model list (default: models.json keys)
 python3 data/build.py ... --no-lqm                                  # skip the lqm.load step
-python3 data/build_lqm.py build/                                    # the lqm.load step alone
+python3 data/build_lqm.py data/build/                               # the lqm.load step alone
 python3 data/legacy.py raw-data.csv OUT/findings --registry OUT/registry   # raw-data.csv → legacy findings
-python3 data/tests/run.py [name-filter]                             # the tests (96, about two seconds)
-python3 data/tests/acceptance.py [raw-data.csv] [--registry data/registry]   # the legacy acceptance test (≈ 20 s)
+python3 data/tests/run.py [name-filter]                             # the tests (127, about four seconds)
+python3 data/tests/acceptance.py [raw-data.csv] [--registry data/registry]   # the legacy acceptance test (≈ 20 s; default: the repository's raw-data.csv)
 python3 data/schema/validate.py [--verbose]                          # per-file summary; registry warnings apart
 python3 data/convert/precheck.py SOURCE_ID                           # names and route heads against the registry
-python3 data/convert/gaps.py build/status-report.json [--registry R --findings F]   # registry gaps per source
+python3 data/convert/gaps.py data/build/status-report.json [--registry R --findings F]   # registry gaps per source
 python3 data/convert/reproduce.py --tables … --table … --csv …       # per-row cost reproduction (pinned table)
 ```
 
@@ -46,6 +46,10 @@ The build runs in five steps:
    - otherwise `out:saturated`, or `out:single-couple` / `out:cost-single-couple`.
 
    A legacy row's status takes the `legacy:` prefix (`legacy:out:composite`, …).
+
+   The catalogue's group-keyed maps reach the fit groups through `build_lqm.fit_maps` (group-map.json and
+   group-setups.json); model/fit.py, model/precheck.py and model/validation read the tables through the same code
+   (`build_lqm.load_table`), so the fit drops the rows this step reports dropped (test `fit_reads_build_tables`).
 
 ## Legacy path (migration, §8.1)
 
@@ -103,14 +107,19 @@ data/convert/mapping.py builds the mapping that gives each measure its `legacy_r
 `source`, it lists the rows whose status, value or group changed, plus the rows added and removed. Rows are matched by
 (base group, model, effort), whatever their measure ids, and each change comes with the new reasons.
 
-## Outputs (`build/`)
+## Outputs (`data/build/`, the default `--out`)
+
+The build of the repository's data (`--fit-models catalog`, with the lqm step) is committed in `data/build/`: the fit
+reads its tables (model/fit.py), the site its `data.csv` and group map. `status-report.json` (≈ 150 MB) is not
+committed (`.gitignore`): rebuild it to read a measure's reasons (about 10 minutes with `--check-files`, 4 GB).
 
 | File | Content |
 |---|---|
 | `fit-quality.csv` | Rows `in` on quality, in today's `raw-data.csv` columns: legacy rows verbatim, then findings rows. `source` is the publisher id. `cost_usd` holds the raw cost of the same execution, which the republication check reads. |
 | `fit-cost.csv` | Rows `in` on cost. The group is the quality group, with `~c<n>` added when the group has several cost subsets. The cost is at the base price; `score` is the score of the same execution. |
 | `group-map.json` | Each fit group → its base group: the setup's first `legacy_groups` entry, else the setup id; a legacy row's group maps to itself. |
-| `data.csv` | Every measure, including composite residuals and legacy rows: the fit columns plus `status_quality` and `status_cost`. |
+| `group-setups.json` | `groups`: each fit group of a converted measure → its setup (legacy rows have none); `setups`: each such setup's benchmark family and composite components (benchmarks.json). With `group-map.json`, what `build_lqm.fit_maps` needs to give the fit groups the catalogue's composites and families, so the fit reads the build without the status report. |
+| `data.csv` | Every measure, including composite residuals and legacy rows: the fit columns plus `status_quality` and `status_cost`. The public data file (the site's CSV download links it on GitHub); precheck.py and site/sources.py read its rows in the fit. |
 | `status-report.json` | Per measure: status and reason detail per axis, every computed field with its level, the facts and rules used, the flags, the row summary, the fit rows and the lqm outcome. Also the counts per reason, the stale decisions, the validation warnings and errors, and the diff against `--previous`. |
 
 The numbers in the fit tables follow today's formats:
@@ -480,7 +489,7 @@ group, so a1 is `out:single-couple`. What the test is about still holds: the ref
 
 ## Tests
 
-`python3 data/tests/run.py` runs 96 fixtures: 55 in run.py (the build's, the merge's `ext_*`, and the registry fix's
+`python3 data/tests/run.py` runs 127 fixtures (counts below as of 23 Oct; `fit_reads_build_tables` and `site_ladder_switch` added 29 Oct): 55 in run.py (the build's, the merge's `ext_*`, and the registry fix's
 `ext_split_default_thinking_and_effort` and `ext_harness_per_provider`; `ext_between_tools_in_fit` replaces the
 not-fitted test), the review's 26, and 15 for the pilot fixes and the registry review (data/tests/pilot_tests.py). Between them they cover:
 - every reason code;
@@ -506,6 +515,18 @@ caught. The other one
 validate.py's quote rule, refuse an undocumented convention anyway. `data/tests/acceptance.py` is the legacy
 acceptance test. As a negative control, it
 reports a dropped row, two swapped rows and a changed digit.
+
+**The fit reads the build (29 Oct).** The final data set is in the repository: data/findings holds the converted
+sources and the legacy files of the 10 sources kept as legacy (not convertible or held: arxiv-2607.15524,
+arxiv-2609.34913, codesota-openrouter, github-ai-arena, github-costrouter, github-effort-pick, note-tank_ai,
+tokenvalue-2609.33970, youtube-aiseikatsu, youtube-ichbinfabian; 73 measures); the registry has the setup and publisher
+`legacy` (the build no longer supplies them); `raw-data.csv` at the root is the frozen legacy input those files and
+the converted measures' `legacy_ref` point to (v2026.10.21 repriced, sha256 489b5d48…). `validate.py --check-files`:
+1,928 files, 0 errors. The build (`--fit-models catalog`, lqm step) gives lqm.load quality 1,608 groups / 17,705 rows
+and cost 923 / 8,403, as the reviewed after-build (/work/.salvo14/mig/final/after; its tables differ only by the 10
+`between-tools` rows, out since 5096cac). What still reads `raw-data.csv`: data/legacy.py and data/tests/acceptance.py
+(the legacy path, IDENTICAL), data/convert/mapping.py (a conversion's legacy_ref) and validate.py --legacy-coverage;
+data/precision.py, which rewrote its precision columns, is retired with it (the facts' precision model replaces it).
 
 ## Not implemented yet
 

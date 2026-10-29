@@ -11,14 +11,26 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 | `lqm_ext.stan` | an experiment of 19–20 Oct (makers' offsets not summing to zero; it did not converge) |
 | `precheck.py` | the checks run before a fit (bounds, twin metrics, discordant twins, memory) |
 | `peek.py` | a provisional R̂ from the draws on disk while a fit runs |
-| `fit.py` | fits both axes and writes `fit-cache.json` |
+| `fit.py` | fits both axes and writes `fit-cache.json`; `--dry` builds its inputs and prints them, without sampling |
 | `fit-cache.json` | **the model's only product**, read by the site |
 | `validation/` | the checks reported in docs/METHODOLOGY.md (see its README) |
 | `requirements-fit.txt` | the pinned fitting environment (the root README, "Refit", installs it in `.stan/`) |
 
+## Input
+
+The build's products (`python3 data/build.py --fit-models catalog`, see `data/BUILD.md`): `data/build/fit-quality.csv`
+for the quality axis and `data/build/fit-cost.csv` for the cost axis, the rows `in` on that axis in the columns of the
+former `raw-data.csv`. `lqm.load` reads each through `data/build_lqm.py`'s `load_table`, which resolves the catalogue's
+group-keyed maps (`COMPOSITES`, `FAMILY_OF`) for the build's fit groups through `group-map.json` (fit group → base
+group) and `group-setups.json` (fit group → setup, with its family and composite components) — the code the build's
+own lqm step uses. `precheck.py` checks the rows of `data/build/data.csv` in the fit and loads the tables the same way;
+`validation/` reads the tables. On the build of 29 Oct (migrated data): quality 1,608 groups, 17,705 rows, 334 couples;
+cost 923 groups, 8,403 rows, 271 couples (`fit.py --dry`). `raw-data.csv` is no longer read by the model.
+
 ## Run
 
 ```bash
+.stan/venv/bin/python model/fit.py --dry     # inputs, fingerprint, groups and rows per axis; no checks, no sampling
 .stan/venv/bin/python model/fit.py
 ```
 
@@ -34,7 +46,8 @@ converged fit is kept as it is (`--all` refits both).
 
 ## The contract with the site: `fit-cache.json`
 
-- `inputs` — the files the fit depends on (data file, catalogue, `lqm.py`, the Stan model in use, `fit.py`), and `fingerprint`
+- `inputs` — the files the fit depends on (the two fit tables and the two group maps of `data/build/`, the catalogue,
+  `data/build_lqm.py`, `lqm.py`, the Stan model in use, `fit.py`), and `fingerprint`
   — SHA-256 over their paths and contents, in order. The site recomputes it and refuses a stale cache.
 - `quality`, `cost` — per couple `[centre, half, publishers, [new_lo, new_hi], mcse]`, on the log scale and
   reference-free: `centre` is the posterior median of the read-out, `half` its quasi-standard error (16–84 %),

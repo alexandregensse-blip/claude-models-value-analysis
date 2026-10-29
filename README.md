@@ -55,13 +55,14 @@ Four parts, each with its own scope; they talk only through the files named in t
 
 | Part | Scope | Contents | Hands over |
 |---|---|---|---|
-| **data** — collection | what was measured and how to read it | `raw-data.csv` (at the root, because it is served), `data/catalog/` (models, benchmark families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it) — see [`data/README.md`](data/README.md) | the data file and the catalogue |
+| **data** — collection | what was measured and how to read it | `data/findings/` (sources and measures), `data/registry/` (models, routes, benchmarks, publishers, prices, rules), `data/build.py` (the decision tree; its products in `data/build/`: one fit table per axis, the group map, the public data file `data.csv`), `data/catalog/` (model order, families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it); `raw-data.csv` at the root is the frozen legacy input of 21 Oct (data/legacy.py, the acceptance test) — see [`data/README.md`](data/README.md), [`data/BUILD.md`](data/BUILD.md) | `data/build/` and the catalogue |
 | **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm_ext2.stan` (the model; `lqm.stan` without the makers' terms, until v2026.10.20), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
 | **site** — presentation | from the fit's results to the page | `site/build.py` and its modules (`config`, `grids`, `sources`, `seo`, `render`), `site/{app.js, body.html, style.css, prerender.js}`, `site/assets/` (favicon, share image) — see [`site/README.md`](site/README.md) | the served files at the root |
 | **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
 
 Served files, generated at the root by the site: `index.html`, `claude-models-head-to-head.html` (every pair of models compared, effort by effort), `robots.txt`, `sitemap.xml`, `llms.txt`,
-`favicon.svg`, `favicon.png`, `og-image.png`, the IndexNow key file, and the data file `raw-data.csv`. Licences:
+`favicon.svg`, `favicon.png`, `og-image.png`, the IndexNow key file; `raw-data.csv` is still served (the legacy file of 21 Oct), the
+page links the build's `data/build/data.csv` on GitHub. Licences:
 `LICENSE` (MIT, code), `LICENSE-DATA` (CC BY 4.0, data and report text).
 
 ## Versions
@@ -106,13 +107,26 @@ No dependencies beyond the Python 3 standard library and Node.js (any recent ver
 
 ### Refit
 
-Needed only when the data, `model/lqm.py`, `model/lqm_ext2.stan` or `data/catalog/` change (the build says so). It needs a
-C++17 compiler and `make`, then:
+Needed only when the fit's inputs change: the build's tables (`data/build/`), `model/lqm.py`, `model/lqm_ext2.stan`,
+`data/build_lqm.py` or `data/catalog/` (the site build says so). The data first: the build turns the findings and the
+registry into one table per axis (Python standard library, about 10 minutes and 4 GB with the saved copies re-hashed;
+`--no-check-files` skips that):
+
+```bash
+python3 data/build.py --fit-models catalog   # → data/build/: fit-quality.csv, fit-cost.csv, group-map.json,
+                                             #   group-setups.json, data.csv (committed); status-report.json (not)
+```
+
+The fit reads `data/build/fit-quality.csv` for quality and `fit-cost.csv` for cost, the catalogue's group-keyed maps
+(composites, families) resolved through `group-map.json` and `group-setups.json` (`data/build_lqm.py`, `fit_maps`).
+It needs a C++17 compiler and `make`, then:
 
 ```bash
 uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r model/requirements-fit.txt
 .stan/venv/bin/python -c "import cmdstanpy; cmdstanpy.install_cmdstan(dir='.stan', version='2.40.0')"
 .stan/venv/bin/python -c "import bridgestan.download as d; d.get_bridgestan_src()" && mv ~/.bridgestan/bridgestan-2.9.0 .stan/
+.stan/venv/bin/python model/fit.py --dry          # the inputs: fingerprint, groups and rows per axis; no sampling
+.stan/venv/bin/python model/precheck.py           # the data checks and the memory estimate (--smoke: a 3-minute fit)
 .stan/venv/bin/python model/fit.py      # → model/fit-cache.json, then python3 site/build.py
 ```
 

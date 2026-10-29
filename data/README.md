@@ -2,9 +2,15 @@
 
 **Scope:** what was measured, and how to read it. A source pass touches only this part (and `docs/PASSES.md`).
 
-## The data file: `raw-data.csv` (at the repository root)
+**Since 29 Oct 2026 the fit reads the build** (`python3 data/build.py --fit-models catalog`, see `BUILD.md` and
+`docs/DATA-PIPELINE.md`): the findings (`data/findings/`) and the registry (`data/registry/`) give one table per axis in
+`data/build/` (`fit-quality.csv`, `fit-cost.csv`, in the columns below), the group map, and the public data file
+`data/build/data.csv` (the same columns plus `status_quality`, `status_cost`). `raw-data.csv` is the frozen legacy
+input of 21 Oct (data/legacy.py, data/tests/acceptance.py); it is no longer edited.
 
-It lives at the root because it is published with the page (`/raw-data.csv`). One row per measurement:
+## The data file: `raw-data.csv` (at the repository root; legacy) and the build's tables
+
+Their columns, one row per measurement:
 
 | Column | Content |
 |---|---|
@@ -51,6 +57,6 @@ What the data file needs to be read correctly, as data (read by `catalog.py`, us
 
 ## Adding a source
 
-Add its rows to `raw-data.csv` under a new `group`; if it runs a known benchmark, add the group to its family; if it
-is a composite, list its components; give it a label in `groups.json`. Then refit (model/README.md): the site refuses
-to build while the fit is stale.
+Convert it into `data/findings/` (sources and measures, `data/convert/`), register what it needs in `data/registry/`,
+give its groups a label in `groups.json`, then rebuild (`python3 data/build.py --fit-models catalog`) and refit
+(model/README.md): the site refuses to build while the fit is stale.
