@@ -17,4 +17,13 @@ SITE_HOST   = SITE_URL.split("://", 1)[1].rstrip("/")   # shown in the share ima
 BING_SITE_VERIFICATION = "F362761CB53AA11BE0A561143021D184"   # Bing Webmaster Tools ownership (msvalidate.01); keep it
 INDEXNOW_KEY = "b3573dbc1da690e66e9ef05b081b7abe"   # public by design: served as /<key>.txt, proves ownership to IndexNow (Bing…)
 
-EFFORT_ORDER = ["low", "medium", "high", "xhigh", "max", "solo"]
+# The configurations of a model, in the order the page lists them: thinking off, then the levels from the lowest up,
+# then 'think' (the one "on" position of an on/off model, which has no level) and 'solo' (no setting at all). The model
+# puts no order between them; the page uses this one to read a model's ladder (docs/DISPLAY-METHODOLOGY.md § 3).
+EFFORT_ORDER = ["nothink", "minimal", "low", "medium", "high", "xhigh", "max", "think", "solo"]
+LEVELS = ["minimal", "low", "medium", "high", "xhigh", "max"]       # the rungs of a ladder; 'nothink' is the rung below
+# How a configuration is written: CAP as a label (a column head, a tooltip), EFF inside a sentence. '' = no setting.
+CAP = {"nothink": "Thinking off", "minimal": "Minimal", "low": "Low", "medium": "Medium", "high": "High",
+       "xhigh": "xHigh", "max": "Max", "think": "Thinking on", "solo": ""}
+EFF = {"nothink": "thinking off", "minimal": "minimal", "low": "low", "medium": "medium", "high": "high",
+       "xhigh": "xHigh", "max": "max", "think": "thinking on", "solo": "its only setting"}

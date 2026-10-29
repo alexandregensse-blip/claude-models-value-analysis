@@ -3,7 +3,7 @@ matches its inputs and converged, and hands the page its reference-free values (
 cost from the cheapest couple and reads quality as an expected panel score)."""
 import hashlib, json, math, os, sys
 
-from config import ROOT, EFFORT_ORDER
+from config import ROOT, EFFORT_ORDER, LEVELS
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import DISPLAY_ORDER   # the site shows the Claude models; the fit may hold others (the global fit)
 
@@ -74,14 +74,16 @@ def fused_grids():
 
 def monotonicity_report(cg, qg):
     """Effort is a ladder: within a model, a higher rung should neither cost nor score less than the one below.
-    An inversion is reported at build time, never corrected: inside the interval it is left as the data give it
-    (a documented exception: Sonnet 4.6 falls after `high`, which the Sonnet 5 card itself prints)."""
-    ORD = ["low", "medium", "high", "xhigh", "max"]
+    The rungs are `nothink` (thinking off), then `minimal`, `low` … `max`; `think` (the one "on" position of an on/off
+    model, which has no level) is compared with `nothink` only. `solo` has no rung. An inversion is reported at build
+    time, never corrected: inside the interval it is left as the data give it (a documented exception: Sonnet 4.6 falls
+    after `high`, which the Sonnet 5 card itself prints)."""
+    ladder = ["nothink"] + LEVELS
     out = []
     for grid, name in ((cg, "cost"), (qg, "quality")):
         for m, es in grid.items():
-            seq = [(e, es[e][0]) for e in ORD if e in es]
-            for (a, va), (b, vb) in zip(seq, seq[1:]):
-                if vb < va: out.append(f"{name}: {m} {a}({va}) > {b}({vb})")
+            for ORD in (ladder, ["nothink", "think"]):
+                seq = [(e, es[e][0]) for e in ORD if e in es]
+                for (a, va), (b, vb) in zip(seq, seq[1:]):
+                    if vb < va: out.append(f"{name}: {m} {a}({va}) > {b}({vb})")
     return out
-

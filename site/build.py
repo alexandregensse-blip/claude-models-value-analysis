@@ -4,7 +4,7 @@ CSS, HTML body and client script, and writes index.html and the root files at th
 Run: python3 site/build.py (Python standard library and Node.js only; the fit itself is model/fit.py)."""
 import json, math, os, re, sys
 
-from config import HERE, OUT, REPO_URL, ROOT
+from config import HERE, OUT, REPO_URL, ROOT, EFFORT_ORDER, CAP
 from grids import fused_grids, monotonicity_report
 from render import inject, prerender
 from seo import content_date, content_fingerprint, head_tags, write_root_files
@@ -12,6 +12,12 @@ from sources import groups_data
 import duels
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import DISPLAY_ORDER, MODELS
+
+def effort_columns(CG):
+    """The effort columns of the two matrices: the five levels `low` … `max` always, `nothink` and `minimal` before them
+    and `think` after them when a model shown has that configuration (`solo` is a merged cell across all of them)."""
+    base = ("low", "medium", "high", "xhigh", "max")
+    return [e for e in EFFORT_ORDER if e != "solo" and (e in base or any(e in es for es in CG.values()))]
 
 def main():
     CG, QG, PANEL, DIAG, MCSE = fused_grids()
@@ -23,6 +29,10 @@ def main():
     app  = app.replace("__MODELS__", json.dumps({m: dict(label=MODELS[m]["label"], c=MODELS[m]["colour"],
                        **({"tag": True} if MODELS[m].get("flag_task_size") else {})) for m in DISPLAY_ORDER},
                        separators=(",",":"), ensure_ascii=False))
+    cols = effort_columns(CG)                                      # the matrices' columns: low … max, and the others present
+    app  = app.replace("__EFFORT_ORDER__", json.dumps(EFFORT_ORDER)).replace("__EFFORT_COLS__", json.dumps(cols))
+    app  = app.replace("__CAPE__", json.dumps(CAP, separators=(",",":")))
+    body = body.replace("__EFFORT_HEAD__", "".join(f"<th>{CAP[e].lower() if e in ('nothink', 'think') else e}</th>" for e in cols))
     app  = app.replace("__COSTGRID__", json.dumps(CG, separators=(",",":")))
     app  = app.replace("__QUALGRID__", json.dumps(QG, separators=(",",":")))
     app  = app.replace("__PANEL__", json.dumps(PANEL, separators=(",",":")))

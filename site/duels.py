@@ -6,7 +6,7 @@ quasi-standard errors, puts it ahead with probability REACH or more; otherwise t
 uncertainty. The rules of this page: docs/DISPLAY-METHODOLOGY.md § 15."""
 import html as htmlmod, json, math, os, re, sys
 
-from config import ROOT, SITE_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER
+from config import ROOT, SITE_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER, CAP, EFF
 from grids import panel_score
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import MODELS, DISPLAY_ORDER
@@ -21,8 +21,8 @@ CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-5.5"]           # the l
 SUCCESSION = [("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
 REACH = 0.84
 LEGACY = ["opus-4.7", "sonnet-4.6", "opus-4.8"]                                 # hidden on the main page (site/app.js)
-CAP = {"low": "Low", "medium": "Medium", "high": "High", "xhigh": "xHigh", "max": "Max", "solo": ""}   # as app.js capE
-EFF = {"low": "low", "medium": "medium", "high": "high", "xhigh": "xHigh", "max": "max", "solo": "its only setting"}
+# CAP and EFF (a label, and the wording inside a sentence) are site/config.py's, as app.js capE; AT is "model at <setting>"
+AT = lambda e, solo="": {"solo": solo, "nothink": " with thinking off", "think": " with thinking on"}.get(e, f" at {EFF[e]}")
 
 Phi = lambda z: 0.5 * (1 + math.erf(z / math.sqrt(2)))
 esc = lambda s: htmlmod.escape(s, quote=True)
@@ -56,7 +56,7 @@ def build(CG, QG, PANEL):
     def cheaper(p, q):                                                   # P(p costs less than q)
         return Phi((q["x"] - p["x"]) / math.hypot(p["hx"], q["hx"]))
     L = lambda m: MODELS[m]["label"]
-    name = lambda p: f"{L(p['m'])} at {EFF[p['e']]}" if p["e"] != "solo" else L(p["m"])
+    name = lambda p: f"{L(p['m'])}{AT(p['e'])}"
 
     def match(p, other):
         """The cheapest couple of model `other` that p does not out-score at REACH: it matches p's quality within the
@@ -222,16 +222,16 @@ def build(CG, QG, PANEL):
         """The same quality for less, as plain text (the lede), or None."""
         for f in d["facts"]:
             if f["kind"] == "match" and f["ratio"] < 1 and f["m"]["m"] != f["best"]["m"]:
-                return (f'{L(f["m"]["m"])} at {EFF[f["m"]["e"]]} gives the same quality as {L(f["best"]["m"])} at '
-                        f'{EFF[f["best"]["e"]]} for {fmt_ratio(1 / f["ratio"])} less per task')
+                return (f'{L(f["m"]["m"])}{AT(f["m"]["e"], " at its only setting")} gives the same quality as {L(f["best"]["m"])}'
+                        f'{AT(f["best"]["e"], " at its only setting")} for {fmt_ratio(1 / f["ratio"])} less per task')
         return None
 
     def same(d):
         """The same quality for less, said first when a cheaper setting of one model matches the other's best."""
         for f in d["facts"]:
             if f["kind"] == "match" and f["ratio"] < 1 and f["m"]["m"] != f["best"]["m"]:
-                return (f'<p class="duel-same"><b style="color:color-mix(in srgb,var({MODELS[f["m"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["m"]["m"]))} at {CAP[f["m"]["e"]] or "its only setting"}</b> '
-                        f'gives the same quality as <b style="color:color-mix(in srgb,var({MODELS[f["best"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["best"]["m"]))} at {CAP[f["best"]["e"]] or "its only setting"}</b> '
+                return (f'<p class="duel-same"><b style="color:color-mix(in srgb,var({MODELS[f["m"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["m"]["m"]))}{esc(AT(f["m"]["e"], " at its only setting"))}</b> '
+                        f'gives the same quality as <b style="color:color-mix(in srgb,var({MODELS[f["best"]["m"]]["colour"]}) 78%,var(--ink))">{esc(L(f["best"]["m"]))}{esc(AT(f["best"]["e"], " at its only setting"))}</b> '
                         f'for <b>{fmt_ratio(1 / f["ratio"])} less</b> per task.</p>')
         return ""
 

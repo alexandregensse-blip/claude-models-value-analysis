@@ -1,4 +1,13 @@
 const MODELS = __MODELS__;   // data/catalog/models.json: label, colour variable, task-size flag, in legend order
+// The configurations of a model, in the page's order (site/config.py): thinking off, minimal, low … max, thinking on, solo.
+// Each is its own couple for the fit; the order only draws a model's curve and lays out the matrices. EFFORT_COLS = the
+// matrices' columns (low … max always; thinking off, minimal, thinking on when a model shown has them); CAPE = the labels.
+const EFFORT_ORDER=__EFFORT_ORDER__, EFFORT_COLS=__EFFORT_COLS__, CAPE=__CAPE__;
+const effRank=e=>EFFORT_ORDER.indexOf(e);
+const capE=e=>e==="solo"?"solo":(CAPE[e]||e);                    // as a label: Low, xHigh, Thinking off
+const tagE=e=>e==="nothink"?"no think":e==="think"?"think":e;      // as a label on a chart point
+const atE=e=>e==="solo"?"":e==="nothink"?" with thinking off":e==="think"?" with thinking on":` at ${e==="xhigh"?"xHigh":e} effort`;   // in a sentence
+const TOP_FIRST=["max","xhigh","high","medium","low","minimal","think","nothink","solo"];   // the top effort of a model
 const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8"];              // older models: hidden unless the reader turns them on
 const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-5.5"];  // the latest model of each family: the price trend's couples
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -136,7 +145,6 @@ function drawOvals(s,pts,X,Y,mL,iw,mT,ih,cid){ const defs=el("defs"), cp=el("cli
 function hoverTip(s,ells,pts,X,Y,mL,iw){ const DEF=0.15,HOV=0.78;
   const tip=el("g",{"pointer-events":"none",opacity:0}), trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
   const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
-  const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse());
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU; o.el.setAttribute("opacity",((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
     let best=null,bd=49; pts.forEach(p=>{ const d2=(P.x-X(p.c))**2+(P.y-Y(p.t))**2; if(d2<bd){bd=d2;best=p;} });
@@ -228,17 +236,17 @@ function drawB(){
   if(showBands) drawTierBandLabels(s,Y,mL,iw,mT,ih);                     // tier names over the grid
   axisTitle(s,mL+iw/2,H-30,...AXIS_C);
   axisTitle(s,13,mT+ih/2,...AXIS_Q,`rotate(-90 13 ${mT+ih/2})`);
-  const EO=["low","medium","high","xhigh","max"], byM={};
+  const byM={};
   pts.forEach(p=>{(byM[p.m]=byM[p.m]||[]).push(p);});
   const ells=showOvals?drawOvals(s,pts,X,Y,mL,iw,mT,ih,"clipB"):[];      // optional asymmetric uncertainty ovals, behind
   const segs=[];                                                          // curves + points on top, collect line segments for label repulsion
-  for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e));
+  for(const m in byM){ const col=cvar(MODELS[m].c), mp=byM[m].slice().sort((a,b)=>effRank(a.e)-effRank(b.e));
     s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.t)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));
     mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar('--panel'),"stroke-width":1.4})));
     for(let i=0;i<mp.length-1;i++) segs.push([X(mp[i].c),Y(mp[i].t),X(mp[i+1].c),Y(mp[i+1].t)]); }
   const ppix=pts.map(p=>({x:X(p.c),y:Y(p.t)})), labs=[];                  // effort labels + model-name labels, force-directed together
-  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.t),lx:X(p.c),ly:Y(p.t)-9,t:p.e,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:p.e.length*5.4+4,h:11,fs:8.5,mdl:false}));
-  for(const m in byM){ const mp=byM[m].slice().sort((a,b)=>EO.indexOf(a.e)-EO.indexOf(b.e)), last=mp[mp.length-1], w=MODELS[m].label.length*7+6;
+  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.t),lx:X(p.c),ly:Y(p.t)-9,t:tagE(p.e),col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:tagE(p.e).length*5.4+4,h:11,fs:8.5,mdl:false}));
+  for(const m in byM){ const mp=byM[m].slice().sort((a,b)=>effRank(a.e)-effRank(b.e)), last=mp[mp.length-1], w=MODELS[m].label.length*7+6;
     labs.push({ax:X(last.c),ay:Y(last.t),lx:X(last.c)+16+w/2,ly:Y(last.t)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }
   placeLabels(s,labs,ppix,segs,W,mL,mT,ih);
   hoverTip(s,ells,pts,X,Y,mL,iw);
@@ -251,7 +259,6 @@ function drawB(){
 // ---- Dedicated Pareto chart: cost × quality scatter, dominated points faded, frontier joined ----
 // Same shared machinery as the §1 landscape: θ axis, faint interval ovals (hover to reveal), point tooltip,
 // force-directed labels. Full body width.
-const capE=e=>e==="solo"?"solo":e==="xhigh"?"xHigh":e.charAt(0).toUpperCase()+e.slice(1);
 function drawPareto(){
   const s=document.getElementById("chartP"); if(!s) return; s.innerHTML="";
   const W=1100,H=619,mL=66,mR=64,mT=20,mB=68, iw=W-mL-mR, ih=H-mT-mB;   // extra bottom margin so the axis title clears the ticks
@@ -426,16 +433,16 @@ function drawMatrix(){
   const tb=document.querySelector("#matrix-tbl tbody"); tb.innerHTML="";
   const xs=Object.values(COSTGRID).flatMap(es=>Object.values(es).map(v=>v[0])), x0=Math.min(...xs), cmax=Math.exp(Math.max(...xs)-x0);
   const cell=v=>{ const c=Math.exp(v[0]-x0); return [c, `${fmtC(c*Math.exp(-v[1]))}–${fmtC(c*Math.exp(v[1]))}`]; };
-  const topS=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?score(qg[e][0]):0; };
+  const topS=m=>{ const qg=QUALGRID[m]||{}, e=TOP_FIRST.find(k=>qg[k]); return e?score(qg[e][0]):0; };
   const dark=document.documentElement.getAttribute('data-theme')==='dark'||(window.matchMedia('(prefers-color-scheme:dark)').matches&&document.documentElement.getAttribute('data-theme')!=='light');
   const heat=c=>{ const t=cmax>1?Math.log(c)/Math.log(cmax):0, al=dark?(0.10+t*0.42):(0.07+t*0.40);
     return `background:color-mix(in srgb, var(--opus48) ${Math.round(al*100)}%, transparent)`; };
   for(const m of Object.keys(COSTGRID).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], cg=COSTGRID[m], tr=document.createElement("tr");
     let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${md.tag?' <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span>':''}</td>`;
-    if(cg.solo){ const c=cell(cg.solo);   // Haiku 4.5 = single operating point → one merged cell across the 5 effort columns
-      row+=`<td colspan="5"><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>merged · ${c[1]}</small></div></td>`;
+    if(cg.solo){ const c=cell(cg.solo);   // Haiku 4.5 = single operating point → one merged cell across the effort columns
+      row+=`<td colspan="${EFFORT_COLS.length}"><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>merged · ${c[1]}</small></div></td>`;
     } else {
-      ["low","medium","high","xhigh","max"].forEach(e=>{ const c=cg[e]?cell(cg[e]):null;
+      EFFORT_COLS.forEach(e=>{ const c=cg[e]?cell(cg[e]):null;
         row+= c? `<td><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>${c[1]}</small></div></td>`
                : `<td class="na">—</td>`; });
     }
@@ -450,7 +457,7 @@ function drawValueMatrix(){
   const tb=document.querySelector("#value-tbl tbody"); if(!tb) return; tb.innerHTML="";
   const rows=couples(), tr=fitTrend(rows), by={};
   rows.forEach(p=>{ (by[p.m]=by[p.m]||{})[p.e]=p; });
-  const topS=m=>{ const qg=QUALGRID[m]||{}, e=["max","xhigh","high","medium","low","solo"].find(k=>qg[k]); return e?score(qg[e][0]):0; };
+  const topS=m=>{ const qg=QUALGRID[m]||{}, e=TOP_FIRST.find(k=>qg[k]); return e?score(qg[e][0]):0; };
   // Colour range from the data: the most favourable couple shown is the deepest green, the least favourable the deepest
   // red, each side scaled on its own (log scale), 100 neutral.
   const rs=rows.map(p=>valueOf(tr,p)), rHi=Math.max(...rs,1e-9), rLo=Math.min(...rs,-1e-9);
@@ -459,8 +466,8 @@ function drawValueMatrix(){
     return `<div class="cell num" style="background:color-mix(in srgb, ${sc} ${al}%, transparent)">${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small></div>`; };
   for(const m of Object.keys(by).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], row=document.createElement("tr");
     let h=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}</td>`;
-    if(by[m].solo) h+=`<td colspan="5">${cell(by[m].solo)}</td>`;
-    else ["low","medium","high","xhigh","max"].forEach(e=>{ h+= by[m][e]? `<td>${cell(by[m][e])}</td>` : `<td class="na">—</td>`; });
+    if(by[m].solo) h+=`<td colspan="${EFFORT_COLS.length}">${cell(by[m].solo)}</td>`;
+    else EFFORT_COLS.forEach(e=>{ h+= by[m][e]? `<td>${cell(by[m][e])}</td>` : `<td class="na">—</td>`; });
     row.innerHTML=h; tb.appendChild(row); } }
 // ---------- LINKING GRAPH ----------
 // nodes = (model,effort) couples ; edges = a source that measured them on the SAME task.
@@ -538,7 +545,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
 function answerData(){
   const {picks,crown}=tierPicks();
   const top=couples().reduce((a,b)=>b.t>a.t?b:a);
-  const nm=p=>`${MODELS[p.m].label}${p.e==="solo"?"":` at ${p.e==="xhigh"?"xHigh":p.e} effort`}`;
+  const nm=p=>`${MODELS[p.m].label}${atE(p.e)}`;
   return {picks,crown,top,nm};
 }
 function fillAnswer(){
