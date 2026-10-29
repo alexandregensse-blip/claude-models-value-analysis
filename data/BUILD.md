@@ -60,7 +60,7 @@ setup `legacy`. Only the two free-text comment lines are skipped. validate.py ch
 
 The build carries a legacy measure **as it is**:
 - its status is today's admission, the filters `lqm.load` applies: `legacy:in`, or `legacy:out:<why>` where why is
-  `comment` (group `#…`), `no-group`, `model-not-in-fit-list`, `effort-not-in-efforts` (today's `lqm.EFFORTS`;
+  `comment` (group `#…`), `no-group`, `model-not-in-fit-list`, `effort-not-in-efforts` (a configuration outside `lqm.EFFORTS`: `between-tools`, an odd label;
   the acceptance test checks the copy) or `no-value`;
 - none of the tree's steps apply: no repricing (the cost is already at today's price, with its `reprice-…` and
   `cost-out:…` flags), no uninformative step, no campaign or same-runs replacement;
@@ -78,10 +78,11 @@ three things:
 - `LEGACY_EFFORTS` equals `lqm.EFFORTS`.
 
 On /work/.wt-px/raw-data.csv (42,296 rows, 769 sources) the result is **identical**:
-- quality: 1,600 groups and 17,028 rows;
-- cost: 831 groups and 9,480 rows.
+- quality: 1,671 groups and 18,934 rows;
+- cost: 861 groups and 10,048 rows
+  (with the configurations-per-model filter: before it, 1,600 groups and 17,028 rows, 831 and 9,480).
 
-The repository's raw-data.csv is identical too.
+The repository's raw-data.csv is identical too (quality 1,574 groups and 17,533 rows; cost 855 and 10,936).
 
 **Against the real registry.** When the findings hold legacy sources (`src-legacy-*`) and the registry lacks the
 placeholder setup `legacy`, its family or the publisher `legacy`, the build supplies them from data/legacy.py's
@@ -420,8 +421,9 @@ marked **(method)** remain method questions for the maintainer.
     - a cost-only measure has a blank quality status, and a measure with no cost has a blank cost status.
 34. A decision `in` overrides every step, including the group step, and its couple counts in its group. A headline
     decision with a `publisher` decides for that publisher's measures.
-35. Rows that `lqm.load` filters out before its rules (effort not in `lqm.EFFORTS`: `nothink`, `minimal`, `think`)
-    are recorded as `lqm_outcome` only, because that method change is pending in lqm.py.
+35. `lqm.EFFORTS` holds every configuration the build writes (`nothink`, `minimal`, `low` … `max`, `think`, `solo`;
+    configurations-per-model method change, 29 Oct). A row `lqm.load` filters out before its rules (a configuration
+    outside it, a model outside the fit's list) is recorded as `lqm_outcome` only; the tree's status stands.
 36. Precision:
     - printed: the step / √12 (the precision's `step`, else the last written digit);
     - chart-pixel: the given `sd`, or blank when none is given;

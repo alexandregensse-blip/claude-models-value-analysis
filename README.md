@@ -16,8 +16,8 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 
 ## What the report shows
 
-1. **Consolidated landscape** — one curve per model, one point per effort, cost (a multiple of the cheapest couple) × quality (the latent scale, labelled in expected panel score). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price trend** over every couple (what a given quality typically costs), and says how many times cheaper or dearer than the trend each couple is. A **tier picker** (with live target/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick (the couple furthest below the trend).
-2. **Normalized matrix** — cost per model × effort as a multiple of the cheapest couple, sorted by expected score, each cell with its interval.
+1. **Consolidated landscape** — one curve per model, one point per configuration (an effort level from *minimal* to *max*, thinking off, thinking on), cost (a multiple of the cheapest couple) × quality (the latent scale, labelled in expected panel score). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price trend** over every couple (what a given quality typically costs), and says how many times cheaper or dearer than the trend each couple is. A **tier picker** (with live target/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick (the couple furthest below the trend).
+2. **Normalized matrix** — cost per model × configuration (effort level, thinking off) as a multiple of the cheapest couple, sorted by expected score, each cell with its interval.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
 4. **Method** — how the numbers and their intervals are built; the full methodology is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
@@ -32,8 +32,8 @@ the report fuses the measurements with a **latent-quality model** (`model/lqm.py
    or an unknown composite — read from the metric's label, never from the benchmark's identity. Every value carries
    its reading precision: the rounding of a printed number, the resolution and own error of a digitised chart.
 3. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
-   matter); every `(model, effort)` couple has one latent quality and one latent cost, atomic — no model × effort
-   separability is assumed. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
+   matter); every `(model, effort)` couple (the effort is the configuration: a level, `nothink` for thinking off, `think` for the on position of an on/off model, `solo` for a model without a setting) has one latent quality and one latent cost, atomic — no model × effort
+   separability is assumed and no order between a model's configurations. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
    or one kind of task from tilting the result, with sizes estimated per model maker; a maker's own charts about its
    own models carry an estimated home effect, left out of every read-out. Student-t noise with estimated tails;
    early-access runs down-weighted by an estimated factor. No couple is a reference inside the fit. The fit takes every

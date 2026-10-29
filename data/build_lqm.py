@@ -8,7 +8,8 @@ it keeps (group, couple, value), and writes it into build/status-report.json and
     in a split part with one couple           → out:single-couple (cost: out:cost-single-couple)
     in a group saturated at a bound           → out:saturated
     filtered before its rules (effort not in lqm.EFFORTS, model not in the list): recorded as lqm_outcome only (the
-    tree's status stands: the configurations-per-model method change is pending in lqm.py).
+    tree's status stands). lqm.EFFORTS holds the configurations the build writes (nothink, minimal, think, solo and the
+    levels, 29 Oct); one outside it ('between-tools', an odd label) stays out.
 
 lqm.py is imported unchanged; its group-keyed catalog maps (COMPOSITES, FAMILY_OF) are resolved through
 build/group-map.json in this process (each fit group inherits its base group's entries; composites defined in
@@ -127,7 +128,7 @@ def outcome(lqm, rep, axis, field, path, groups, republished, comps, models):
         r = {"model": fr["model"], "effort": fr["effort"], field: fr["value"]}
         lo = e.setdefault("lqm_outcome", {})
         if not passes(r):
-            why = "effort not in lqm.EFFORTS (method change pending)" if fr["effort"] not in lqm.EFFORTS else \
+            why = "effort not in lqm.EFFORTS" if fr["effort"] not in lqm.EFFORTS else \
                 "model not in the fit's list" if fr["model"] not in models else "value not usable"
             lo[axis] = f"filtered before lqm's rules: {why}"
             continue

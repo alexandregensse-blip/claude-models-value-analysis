@@ -10,7 +10,7 @@ It lives at the root because it is published with the page (`/raw-data.csv`). On
 |---|---|
 | `group` | the measurement group: one source, one task, one configuration (a leaderboard column, a system-card chart, a paper's table); a `#` prefix comments the row out |
 | `source` | who published the number (a publisher's outlet; outlets of one organisation are merged by `publishers.json`) |
-| `model`, `effort` | the couple; `effort` is read from the source's configuration, `default`/`nothink`/`priceblend` stay out of the fit |
+| `model`, `effort` | the couple; `effort` is the configuration read from the source (`nothink`, `minimal`, `low` … `max`, `think`, `solo`), each its own couple in the fit; `default`/`priceblend` and `between-tools` stay out of it |
 | `task_type`, `complexity` | coding, agentic-tool, computer-use, reasoning-math, writing, or mixed for composites |
 | `harness` | the agent or tool that ran the model (versions of one harness count as one configuration) |
 | `unit`, `cost_usd`, `tokens_in`, `tokens_out`, `cached_pct` | the cost and its unit (per task, per run…) |

@@ -21,7 +21,8 @@ so that readers without JavaScript see the same conclusions.
 - **Monte Carlo stability.** Each value's Monte Carlo error is carried with it; the build reports any value whose
   error exceeds half of its last displayed digit (§ 3; the cheapest couple's error included in every cost multiple).
 - **Build refusals.** The page is not built from a fit that no longer matches its inputs (fingerprint) or that missed
-  the convergence criteria. Effort-ladder inversions (a higher rung costing or scoring less) are printed, not corrected.
+  the convergence criteria. Effort-ladder inversions (a higher rung costing or scoring less) are printed, not corrected; the rungs are *thinking off*,
+  then *minimal* … *max*, and *thinking on* is compared with *thinking off* only.
 
 ## 2. The expected panel score
 
@@ -54,9 +55,10 @@ trend never includes them (§ 8).
 
 ## 5. The matrix
 
-One row per model, one column per effort; each cell is the cost multiple with its interval, coloured on a heat scale
+One row per model, one column per configuration: *low* … *max* always, and *thinking off*, *minimal* (before *low*)
+and *thinking on* (after *max*) when a model shown has them; each cell is the cost multiple with its interval, coloured on a heat scale
 (log cost, from the cheapest to the dearest couple). Rows are ordered by the expected score of the model at its highest
-published effort. A model without effort levels (Haiku 4.5, *solo*) fills a single merged cell; an unpublished couple
+published effort. A model without a setting (*solo*) fills a single merged cell across all the columns; an unpublished couple
 is shown as a dash.
 
 A second matrix gives every couple's **value index** (§ 9) with its 16–84 % range (r ± √(h_x² + λ²·h_θ²)), same rows.
@@ -68,7 +70,8 @@ Its colours follow the data: green above 100, red below, each side scaled to the
 - **Quality axis**: θ, linear above the weakest tier target θ*₁ (§ 10). Below it — couples short of today's level —
   θ is compressed three times: y = θ*₁ + (θ − θ*₁) ⁄ 3. Older and weaker models sit together at the bottom instead of
   stretching the axis; the top is not compressed. Gridlines at round expected scores (§ 3).
-- One line per model through its effort ladder. Optional **ovals** draw each couple's 16–84 % interval, with separate
+- One line per model through its effort ladder, in the order *thinking off*, *minimal*, *low* … *max*, *thinking on*
+  (a point is labelled *no think*, *minimal*, *low* …). Optional **ovals** draw each couple's 16–84 % interval, with separate
   radii on each side; the axes always span the ovals, so turning them on does not rescale the chart.
 - Optional **tier bands** shade the quality range each tier owns: from its target up to the next one; the outer bands
   extend half a gap beyond the first and last targets.

@@ -290,11 +290,11 @@ The build writes **one table per axis** in today's `raw-data.csv` columns, holdi
 Code changes for the tables (no change of method): `fit.py` reads one path per axis; `catalog` resolves a group
 through `group-map.json`. `lqm.load`'s per-row outcome is recovered by comparing its input with the rows it keeps
 (group, couple, value): a row dropped by its composites rule → `out:composite`, by its republication rule →
-`out:republished`, written into the status report. **Method change** (configurations per model, 22 Oct), with its
-before/after: `lqm.EFFORTS` → the configurations in the fit; METHODOLOGY §2 ("a model without an effort setting … solo",
-"nothink … outside the computation") and DISPLAY-METHODOLOGY (effort ladders) rewritten; the site's effort order,
-grids, monotonicity report and duels (`EFFORT_ORDER`, `ORD`, `CAP`, `EFF`) extended to `nothink`, `minimal`, `think`
-(placed below `low`). The build also writes the public data file (every measure, today's columns plus `status_quality` and
+`out:republished`, written into the status report. **Method change** (configurations per model, planned 22 Oct, made 29 Oct), with its
+before/after: `lqm.EFFORTS` → the configurations in the fit (`nothink`, `minimal`, `low` … `max`, `think`, `solo`);
+METHODOLOGY §1–2 and DISPLAY-METHODOLOGY (effort ladders) rewritten; the site's effort order, grids, monotonicity report
+and duels (`EFFORT_ORDER`, `LEVELS`, `CAP`, `EFF` in `site/config.py`, `ORD` in `site/grids.py`, `EFFORT_ORDER`/`capE` in
+`app.js`) extended to `nothink` and `minimal` (below `low`) and `think` (after `max`, compared with `nothink` only). The build also writes the public data file (every measure, today's columns plus `status_quality` and
 `status_cost`), read by precheck.py, validation/*.py, site/sources.py (through the group map) and the CSV download;
 precision.py is replaced by the facts' precision model. **Acceptance test** before any new fact is used: the legacy
 facts alone must give `lqm.load` the same groups, rows and report as v2026.10.21's raw-data.csv. `lqm.load` keeps its composites rule, homogeneity split and republication rule in phase 1, and its

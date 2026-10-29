@@ -1988,7 +1988,7 @@ def couple(M):
 
 
 # ---------------------------------------------------------------- legacy measures (migration, §8.1)
-LEGACY_EFFORTS = {"low", "medium", "high", "xhigh", "max", "solo"}   # lqm.EFFORTS at v2026.10.21 (acceptance checks it)
+LEGACY_EFFORTS = {"nothink", "minimal", "low", "medium", "high", "xhigh", "max", "think", "solo"}   # lqm.EFFORTS (acceptance checks the copy)
 
 
 class LegacyMeasure:

@@ -5,7 +5,7 @@ campaign rule, per cost step, decisions first and the stale hash, and the three 
     python3 data/tests/run.py            # all
     python3 data/tests/run.py cost       # the tests whose name contains 'cost'
 """
-import os, sys, time, traceback
+import os, shutil, sys, time, traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -973,7 +973,7 @@ def examples():
         eq(st(ref), w, ref)
     eq(M[f"{obv}#M1"]["setup"], "obvbench", "setup")
     eq(M[f"{obv}#M1"]["fields"]["score"]["text"], "0.958333", "fraction as written")
-    eq(M[f"{obv}#M5"]["lqm_outcome"]["quality"].startswith("filtered"), True, "nothink: lqm.EFFORTS pending")
+    eq(M[f"{obv}#M5"]["lqm_outcome"]["quality"], "kept", "nothink: a configuration of lqm.EFFORTS, kept by lqm.load")
     hot = "src-hotkv-banking77-semantic-cache-2026-10-12"
     for i in (1, 2):
         eq(st(f"{hot}#M{i}"), ("low", "out:not-headline"), f"HotKV M{i}: lowest → low; headline pending")
@@ -1025,12 +1025,12 @@ def legacy_path():
         st = {e["line"]: (e["status"]["quality"], e["status"]["cost"]) for e in rep["measures"].values()}
         eq(st[3], ("legacy:in", "legacy:in"), "admitted as today, flags and all")
         eq(st[4], ("legacy:in", "legacy:out:no-value"), "no cost")
-        eq(st[5], ("legacy:out:effort-not-in-efforts", "legacy:out:effort-not-in-efforts"), "nothink: today's EFFORTS")
+        eq(st[5], ("legacy:in", "legacy:in"), "nothink: a configuration of lqm.EFFORTS")
         eq(st[6][0], "legacy:out:comment", "a #-ed row")
         eq(st[7][0], "legacy:out:model-not-in-fit-list", "model not in the fit list")
         eq(st[8], ("legacy:in", "legacy:out:no-value"), "solo, 100 % and cost 0: no tree step, no uninformative")
         fq = open(os.path.join(out, "fit-quality.csv")).read().split("\n")
-        eq(fq[1:-1], [rows[0], rows[1], rows[5]], "verbatim lines, in the CSV's order")
+        eq(fq[1:-1], [rows[0], rows[1], rows[2], rows[5]], "verbatim lines, in the CSV's order")
         e4 = next(e for e in rep["measures"].values() if e["line"] == 3)
         eq(e4["tree_would_say"]["configuration"], "low", "informative column")
         eq(e4["kind"], "legacy", "reported as legacy")
@@ -1517,6 +1517,42 @@ def ext_metric_open_and_judgment_basis():
     eq((V.in_vocab(sch, "metric", "Final IoU"), V.in_vocab(sch, "metric", " padded "),
         V.in_vocab(sch, "headline_basis", "judgment"), V.in_vocab(sch, "headline_basis", "guess")),
        (True, False, True, False), "open metric, closed basis")
+
+
+@test
+def lqm_configurations_kept():
+    """lqm.load keeps the configurations the build writes (nothink, minimal, think, solo and the levels) and not an
+    unknown one; negative control: with the filter of before the change (levels and solo only) the same file loses the
+    three new ones, so the test would fail on it."""
+    import csv, tempfile
+    sys.path.insert(0, os.path.join(DATA, "..", "model"))
+    import lqm
+    rows = [("g1", "pubA", "ma", "low", 60.0), ("g1", "pubA", "ma", "nothink", 40.0), ("g1", "pubA", "ma", "high", 70.0),
+            ("g1", "pubA", "mb", "think", 55.0), ("g1", "pubA", "mb", "minimal", 35.0), ("g1", "pubA", "mb", "solo", 50.0),
+            ("g1", "pubA", "mb", "between-tools", 52.0), ("g1", "pubA", "mb", "effort", 53.0)]
+    head = ["group", "source", "model", "effort", "task_type", "complexity", "harness", "unit", "cost_usd", "cost_prec",
+            "tokens_in", "tokens_out", "score", "score_metric", "score_prec", "cached_pct", "confound", "ref"]
+    d = tempfile.mkdtemp(prefix="lqm-cfg-")
+    try:
+        p = os.path.join(d, "fit-quality.csv")
+        with open(p, "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(head)
+            for g, src, m, e, v in rows:
+                w.writerow([g, src, m, e, "coding", "", "h", "per-task", "", "", "", "", v, "pass%", "", "", "", "r"])
+        def kept():
+            groups, _, _ = lqm.load(p, {"ma", "mb"})
+            return sorted(x["couple"] for G in groups.values() for x in G["rows"])
+        want = ["ma@high", "ma@low", "ma@nothink", "mb@minimal", "mb@solo", "mb@think"]
+        eq(kept(), want, "nothink, minimal, think and solo kept; between-tools and an odd label out")
+        new = lqm.EFFORTS
+        lqm.EFFORTS = {"low", "medium", "high", "xhigh", "max", "solo"}          # the filter of before the change
+        try:
+            eq(kept(), ["ma@high", "ma@low", "mb@solo"], "negative control: the old filter drops the three configurations")
+        finally:
+            lqm.EFFORTS = new
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
 
 
 def main():

@@ -7,8 +7,11 @@ the examples in parentheses only illustrate it.
 
 ## 1. Vocabulary
 
-- **Couple** — a model at one effort level (*Opus 5 @high*). A model's couples, from its lowest to its highest
-  effort, form its **effort ladder**. A model without an effort setting is a single couple labelled *solo*.
+- **Couple** — a model in one **configuration** (*Opus 5 @high*): an effort level (*minimal*, *low*, *medium*, *high*,
+  *xhigh*, *max*), thinking off (*nothink*), thinking on for a model that only has the on/off switch (*think*), or *solo*
+  for a model without any setting. A model's couples form its **effort ladder**, read from thinking off, then its levels
+  from the lowest to the highest; *think* and *solo* stand apart from the levels. The fit gives each couple its own latent
+  quality and cost and puts no order between them: the ladder is how the page reads them, not a constraint (§5).
 - **Row** — one published measurement of one couple: a cost, a score, or both.
 - **Group** — the rows one source measured on the same task under the same configuration (a leaderboard column, a
   system-card chart, a paper's table). Only within a group are two couples directly comparable.
@@ -34,9 +37,12 @@ precision** of the cost and of the score (§4).
 - **The same task, the same configuration.** A row belongs to a group only with the other couples its source
   measured on the same task, harness and settings. Raw dollars or scores are never compared across groups.
 - **The effort is read, not assumed.** The effort level comes from the source's own configuration (a flag, a payload
-  field, a documented default). A run whose effort cannot be established is recorded as *default*; a run with
-  thinking disabled as *nothink*; a cost computed from list prices blended over a token mix as *priceblend*. These
-  stay in the data file but outside the computation: they are not a rung of an effort ladder.
+  field, a documented default). A run with thinking disabled is the configuration *nothink*, a run with thinking on of
+  a model that has only that switch is *think*, a run of a model with no setting is *solo*: each is a couple of its
+  own, in the computation, when the model's registry lists it. A run whose effort cannot be established is recorded as
+  *default*, and a cost computed from list prices blended over a token mix as *priceblend*; these stay in the data file
+  but outside the computation. A configuration the fit does not take (*between-tools*, a mode of one model that is
+  recorded but not fitted) stays in the data file too.
 - **Primary sources only.** A number is taken from the publisher's own table, payload, chart or repository. A
   secondary quotation of a number already recorded is not a new measurement.
 - **Measured spend over list price.** The cost is what the run actually spent, including cache reads and writes,
@@ -366,7 +372,8 @@ Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 Se
   3.4 % at the median (both axes); for the worst pairs, neighbouring rungs of one model, √(q_i + q_j) reaches 2.2
   times that spread on costs and 2.0 times on qualities: their difference is known more precisely than two separate
   intervals suggest.
-- **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported. The
+- **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported: the rungs
+  are *nothink*, then *minimal*, *low* … *max*; *think* is compared with *nothink* only, *solo* has no rung. The
   report is printed, not corrected: an inversion inside the interval is left as the data give it.
 
 ## 6. Display

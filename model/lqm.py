@@ -155,7 +155,11 @@ def _other_value(r, field):
 
 
 # ---------------------------------------------------------------- data
-EFFORTS = {"low", "medium", "high", "xhigh", "max", "solo"}           # 'solo': a model without an effort setting
+# The configurations the build writes (data/schema/vocab.json 'configuration'), each its own couple: the model puts no
+# order between them (lqm_ext2.stan). 'nothink': thinking off; 'minimal': the lowest level of a model that has one below
+# 'low'; 'think': the one 'on' position of an on/off model; 'solo': a model without an effort setting. Anything else
+# ('between-tools', a mode of one model recorded but not fitted; an odd label) is not in the fit.
+EFFORTS = {"nothink", "minimal", "low", "medium", "high", "xhigh", "max", "think", "solo"}
 NO_TASK_EFFECT = {"mixed", ""}
 
 
