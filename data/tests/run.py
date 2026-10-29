@@ -1504,6 +1504,19 @@ def ext_single_key_name_with_an_end():
     eq((r.model(m1), r.q(m2), r.model(m3)), ("aq", "out:model-not-established", "aq"), "dated single-key name")
 
 
+@test
+def ext_metric_open_and_judgment_basis():
+    # a metric named as the source prints it is accepted (not only the legacy list); headline bases standard /
+    # judgment / metric-mean exist (the maintainer, 29 Oct)
+    import sys as _s
+    _s.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "schema"))
+    import validate as V
+    sch = V.Schemas(os.path.join(os.path.dirname(__file__), "..", "schema"))
+    eq((V.in_vocab(sch, "metric", "Final IoU"), V.in_vocab(sch, "metric", " padded "),
+        V.in_vocab(sch, "headline_basis", "judgment"), V.in_vocab(sch, "headline_basis", "guess")),
+       (True, False, True, False), "open metric, closed basis")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

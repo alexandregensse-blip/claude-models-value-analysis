@@ -230,3 +230,6 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
 - Interval end basis `successor-release` (names): a newer snapshot was released under or beside the name and no page
   says whether the name moved; the name is established up to that release. The build date-checks a name that matches
   one key when every interval of it ends (stated, or successor-release): a run outside them is not placed (qwen3.8-max).
+- Vocab `metric` is open: a metric the legacy list does not hold is accepted as the source names it (the agents name
+  the metric; no vocab change to read a source). Headline bases `standard` (rule 1), `judgment` (rule 3) and
+  `metric-mean` (rule 4) join designated / ranked-by / only-metric / decision.
