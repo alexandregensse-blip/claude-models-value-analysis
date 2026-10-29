@@ -507,3 +507,8 @@ reports a dropped row, two swapped rows and a changed digit.
 - cost residuals of composites;
 - conversion between currencies (`currency-fixed`);
 - YAML and HTML tables.
+
+**Price band (29 Oct, the maintainer).** An unrepriced cost whose price vectors over its price date differ in some
+classes only (Sonnet 5.5's cache read halved on 7 Oct) is no longer out: at the latest vector its cost lies between
+raw × the smallest and raw × the largest per-class ratio; the row keeps the middle, its sd grows by the band's uniform
+sd, flag and rule `cost-price-band`. Vectors of different tiering stay out.

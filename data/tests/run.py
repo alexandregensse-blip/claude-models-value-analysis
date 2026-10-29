@@ -745,7 +745,9 @@ def cost_per_model_subset_and_single():
     m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0")
     sc.m(s, model="ma", effort=[HIGH], cost="2.0")
     r = sc.run()
-    eq(r.c(m1), "out:cost-not-comparable", "non-uniform change over [release, publication]")
+    eq((r.c(m1), "cost-price-band" in r[m1]["flags"]), ("in", True),
+       "non-uniform change over [release, publication]: in, with the price band as uncertainty (29 Oct)")
+    eq(float(r.rows("fit-cost.csv", model="ma", effort="low")[0]["cost_prec"]) > 0, True, "band widens the sd")
 
 
 @test

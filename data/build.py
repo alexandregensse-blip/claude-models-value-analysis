@@ -1673,6 +1673,32 @@ def uniform_ratio(new, old):
     return rs[0] if max(rs) - min(rs) <= 1e-9 * max(abs(rs[0]), 1) else None
 
 
+def class_ratios(new, old):
+    """The per-class price ratios new/old over the classes both price, or None."""
+    ks = [k for k in new if new.get(k) is not None and old.get(k) is not None]
+    if not ks or any(old[k] == 0 for k in ks):
+        return None
+    return [new[k] / old[k] for k in ks]
+
+
+def price_band(M, ref):
+    """An unrepriced cost whose price vectors differ from ref in some classes only: its cost at ref lies in
+    [raw × min ratio, raw × max ratio] over its own vectors; value = the middle, sd += the band's uniform sd."""
+    C = M.fields["cost"]
+    rs = [r for v in C.get("price_vectors", []) for r in class_ratios(ref, v)]
+    lo, hi = min(rs), max(rs)
+    if hi - lo <= 1e-12:
+        return
+    raw = float(C["number"])
+    a, b = raw * lo, raw * hi
+    sd0 = float(C.get("prec") or 0.0)
+    C["band"] = dict(lo=a, hi=b, ratios=[lo, hi])
+    C["number"] = Decimal(repr((a + b) / 2))
+    C["prec"] = math.sqrt(sd0 * sd0 + ((b - a) / math.sqrt(12)) ** 2)
+    M.flags.append("cost-price-band")
+    M.rule("cost-price-band")
+
+
 def count_rel_rounding(p):
     d, step = p
     return float(step) / float(d) if d else 0.0
@@ -2419,11 +2445,18 @@ def cost(ctx, measures):
                     if v not in vecs:
                         vecs.append(v)
             uniform = ok and vecs and all(uniform_ratio(v, vecs[0]) is not None for v in vecs)
+            # a price change that is not uniform (one class changed, e.g. Sonnet 5.5's cache read on 7 Oct): the true
+            # cost at the latest vector lies between raw/max and raw/min of the per-class ratios; the row keeps the
+            # middle with that band as its uncertainty (the maintainer, 29 Oct: "la marge d'erreur")
+            band = ok and vecs and not uniform and all(tiered(v) == tiered(vecs[-1]) for v in vecs) \
+                and all(class_ratios(v, vecs[-1]) for v in vecs)
             for M in xs:
-                if uniform:
+                if uniform or band:
                     M.cost_subset = (part, f"model:{key}")
                     M.flags.append("cost-unrepriced")
                     M.rule("cost-comparability-rule")
+                    if band:
+                        price_band(M, vecs[-1])
                 else:
                     M.status["cost"] = "out:cost-not-comparable"
                     M.detail["cost"] = ("unrepriced, and the price change over the price date is not uniform"
