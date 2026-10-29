@@ -526,7 +526,7 @@ the converted measures' `legacy_ref` point to (v2026.10.21 repriced, sha256 489b
 and cost 923 / 8,403, as the reviewed after-build (/work/.salvo14/mig/final/after; its tables differ only by the 10
 `between-tools` rows, out since 5096cac). What still reads `raw-data.csv`: data/legacy.py and data/tests/acceptance.py
 (the legacy path, IDENTICAL), data/convert/mapping.py (a conversion's legacy_ref) and validate.py --legacy-coverage;
-data/precision.py, which rewrote its precision columns, is retired with it (the facts' precision model replaces it).
+data/precision.py still names it (it wrote the precision columns; the facts' precision model replaces it, it is not run any more).
 
 ## Not implemented yet
 
