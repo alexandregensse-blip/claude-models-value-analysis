@@ -439,7 +439,7 @@ function drawMatrix(){
     return `background:color-mix(in srgb, var(--opus48) ${Math.round(al*100)}%, transparent)`; };
   for(const m of Object.keys(COSTGRID).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], cg=COSTGRID[m], tr=document.createElement("tr");
     let row=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}${md.tag?' <span class="pill" title="Cost is strongly task-size dependent — a verbose model swings widely between short and long agentic tasks, hence the wide CI.">size-sensitive</span>':''}</td>`;
-    if(cg.solo){ const c=cell(cg.solo);   // Haiku 4.5 = single operating point → one merged cell across the effort columns
+    if(cg.solo){ const c=cell(cg.solo);   // a model without a setting (solo) → one merged cell across the effort columns
       row+=`<td colspan="${EFFORT_COLS.length}"><div class="cell num" style="${heat(c[0])}">${fmtC(c[0])}<small>merged · ${c[1]}</small></div></td>`;
     } else {
       EFFORT_COLS.forEach(e=>{ const c=cg[e]?cell(cg[e]):null;

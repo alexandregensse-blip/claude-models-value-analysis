@@ -6,7 +6,7 @@ quasi-standard errors, puts it ahead with probability REACH or more; otherwise t
 uncertainty. The rules of this page: docs/DISPLAY-METHODOLOGY.md § 15."""
 import html as htmlmod, json, math, os, re, sys
 
-from config import ROOT, SITE_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER, CAP, EFF
+from config import ROOT, SITE_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER, LEVELS, CAP, EFF
 from grids import panel_score
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import MODELS, DISPLAY_ORDER
@@ -90,7 +90,8 @@ def build(CG, QG, PANEL):
             else:
                 gspan = f"between {pts(glo)} and {pts(ghi)}"
             facts.append(dict(kind="same", span=span, lo=lo, hi=hi, glo=glo, ghi=ghi))
-            lines.append(f"At the same effort ({', '.join(EFF[e] for e in common)}), {A} costs {span} what {B} costs "
+            word = "effort" if all(e in LEVELS for e in common) else "setting"     # thinking off / on is not an effort
+            lines.append(f"At the same {word} ({', '.join(EFF[e] for e in common)}), {A} costs {span} what {B} costs "
                          f"and scores {gspan} on the benchmark panel.")
         elif "solo" in (rungs(a) + rungs(b)):
             single = b if rungs(b) == ["solo"] else a
