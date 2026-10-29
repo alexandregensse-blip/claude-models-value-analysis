@@ -10631,6 +10631,15 @@
   },
   "deepu-pi-set2-of8": {
    "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 2: score out of 8 per PR (Technorage post)"
+  },
+  "mercor-apexacct-mean": {
+   "label": "Mercor APEX-Accounting, mean score"
+  },
+  "mercor-apexv1-mean": {
+   "label": "Mercor APEX-v1, mean score"
+  },
+  "aaomni-index": {
+   "label": "AA Omniscience Index (points)"
   }
  },
  "setups": {
@@ -12206,9 +12215,18 @@
    "metric": "weighted-rubric%",
    "headline": {
     "metric": "weighted-rubric%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://artificialanalysis.ai/models",
+      "captured": "2026-10-21",
+      "where": "ext JSON of the model pages (21 Oct): frontierCode is the only score key of the FrontierCode block; one weighted-rubric% per model",
+      "quote": "\"frontierCode\":0.388022666666667",
+      "file": "/work/.salvo14/mig/convert-artificialanalysis/ext/src-artificialanalysis-model-pages-2026-10-21.json",
+      "sha256": "2624d20e79a2973fc65727bce69fb3490db2d065ab85c620ad28fb29600e38a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -12346,9 +12364,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "captured": "2026-09-07",
+      "where": "methodology, Harvey LAB paragraph: two rates are reported and the site designates the criterion pass rate as its default metric (the setup holds the criterion pass rate: harveyLab, equal to harveyLabCriteriaPass in the 30 Jul capture)",
+      "quote": "Criterion pass rate is the default metric shown across the site.",
+      "file": "/work/.salvo14/arb/aa11/evidence/wayback/methodology-20260907.html",
+      "sha256": "c681d77c69064f36b96dd788db591bd234a2a580ea2ac002a1ef06c9454c7d11"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -12707,10 +12734,19 @@
    "judge_panel": null,
    "metric": "acc%",
    "headline": {
-    "metric": "acc%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "omniscience-index",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "captured": "2026-09-07",
+      "where": "methodology, General / AA-Omniscience paragraph: models are scored with the AA-Omniscience Index (points); the setup held the accuracy component",
+      "quote": "Models are scored using the <em>AA-Omniscience Index</em>, which assigns points for correct",
+      "file": "/work/.salvo14/arb/aa11/evidence/wayback/methodology-20260907.html",
+      "sha256": "c681d77c69064f36b96dd788db591bd234a2a580ea2ac002a1ef06c9454c7d11"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -12918,9 +12954,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://artificialanalysis.ai/models",
+      "captured": "2026-10-21",
+      "where": "ext JSON of the model pages (21 Oct): terminalBench40 is the only score key of the Terminal-Bench 4.0 block (the other keys are costs, tokens and time); one pass% per model",
+      "quote": "\"terminalBench40\":0.464646464646465",
+      "file": "/work/.salvo14/mig/convert-artificialanalysis/ext/src-artificialanalysis-model-pages-2026-10-21.json",
+      "sha256": "2624d20e79a2973fc65727bce69fb3490db2d065ab85c620ad28fb29600e38a5"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -12985,9 +13030,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://artificialanalysis.ai/models",
+      "captured": "2026-10-19",
+      "where": "ext JSON of the model pages (19 Oct): terminalBenchScience is the only score key of the Terminal-Bench Science block; one pass% per model",
+      "quote": "\"terminalBenchScience\":0.0571428571428571",
+      "file": "/work/.salvo14/mig/convert-artificialanalysis/ext/src-artificialanalysis-model-pages-2026-10-19.json",
+      "sha256": "8f1af5f9eaaa7c420bfbc0a43bc4406fde0927fe7d7f6431a743e7b082bbe285"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -77800,9 +77854,18 @@
    "metric": "arena-rating",
    "headline": {
     "metric": "arena-rating",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://llm-stats.com/",
+      "captured": "2026-10-15",
+      "where": "llm-stats index payload, category \"agents\": one rating per model (mu, the table's score); the models list is ranked by a conservative score (mu less 3 sigma), no separate score column",
+      "quote": "\"category_id\": \"agents\", \"models\": [",
+      "file": "/work/.salvo14/g/g6/src/llmstats_indexes_20261015.json",
+      "sha256": "125b5de8b6c35cbfa16651a7f857e532582feea0b3bbf7e0b2de295161ce2021"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -77826,9 +77889,18 @@
    "metric": "arena-rating",
    "headline": {
     "metric": "arena-rating",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://llm-stats.com/",
+      "captured": "2026-10-15",
+      "where": "llm-stats index payload, category \"code\": one rating per model (mu, the table's score); the models list is ranked by a conservative score (mu less 3 sigma), no separate score column",
+      "quote": "\"category_id\": \"code\", \"models\": [",
+      "file": "/work/.salvo14/g/g6/src/llmstats_indexes_20261015.json",
+      "sha256": "125b5de8b6c35cbfa16651a7f857e532582feea0b3bbf7e0b2de295161ce2021"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -77852,9 +77924,18 @@
    "metric": "arena-rating",
    "headline": {
     "metric": "arena-rating",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://llm-stats.com/",
+      "captured": "2026-10-15",
+      "where": "llm-stats index payload, category \"general\": one rating per model (mu, the table's score); the models list is ranked by a conservative score (mu less 3 sigma), no separate score column",
+      "quote": "\"category_id\": \"general\", \"models\": [",
+      "file": "/work/.salvo14/g/g6/src/llmstats_indexes_20261015.json",
+      "sha256": "125b5de8b6c35cbfa16651a7f857e532582feea0b3bbf7e0b2de295161ce2021"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -77878,9 +77959,18 @@
    "metric": "arena-rating",
    "headline": {
     "metric": "arena-rating",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://llm-stats.com/",
+      "captured": "2026-10-15",
+      "where": "llm-stats index payload, category \"multimodal\": one rating per model (mu, the table's score); the models list is ranked by a conservative score (mu less 3 sigma), no separate score column",
+      "quote": "\"category_id\": \"multimodal\", \"models\": [",
+      "file": "/work/.salvo14/g/g6/src/llmstats_indexes_20261015.json",
+      "sha256": "125b5de8b6c35cbfa16651a7f857e532582feea0b3bbf7e0b2de295161ce2021"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -77904,9 +77994,18 @@
    "metric": "arena-rating",
    "headline": {
     "metric": "arena-rating",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://llm-stats.com/",
+      "captured": "2026-10-15",
+      "where": "llm-stats index payload, category \"reasoning\": one rating per model (mu, the table's score); the models list is ranked by a conservative score (mu less 3 sigma), no separate score column",
+      "quote": "\"category_id\": \"reasoning\", \"models\": [",
+      "file": "/work/.salvo14/g/g6/src/llmstats_indexes_20261015.json",
+      "sha256": "125b5de8b6c35cbfa16651a7f857e532582feea0b3bbf7e0b2de295161ce2021"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -77930,9 +78029,18 @@
    "metric": "arena-rating",
    "headline": {
     "metric": "arena-rating",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://llm-stats.com/",
+      "captured": "2026-10-15",
+      "where": "llm-stats index payload, category \"tool_calling\": one rating per model (mu, the table's score); the models list is ranked by a conservative score (mu less 3 sigma), no separate score column",
+      "quote": "\"category_id\": \"tool_calling\", \"models\": [",
+      "file": "/work/.salvo14/g/g6/src/llmstats_indexes_20261015.json",
+      "sha256": "125b5de8b6c35cbfa16651a7f857e532582feea0b3bbf7e0b2de295161ce2021"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -77956,9 +78064,18 @@
    "metric": "arena-rating",
    "headline": {
     "metric": "arena-rating",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://llm-stats.com/",
+      "captured": "2026-10-15",
+      "where": "llm-stats index payload, category \"vision\": one rating per model (mu, the table's score); the models list is ranked by a conservative score (mu less 3 sigma), no separate score column",
+      "quote": "\"category_id\": \"vision\", \"models\": [",
+      "file": "/work/.salvo14/g/g6/src/llmstats_indexes_20261015.json",
+      "sha256": "125b5de8b6c35cbfa16651a7f857e532582feea0b3bbf7e0b2de295161ce2021"
+     }
+    ],
+    "level": "written"
    },
    "bounds": null,
    "direction": "higher",
@@ -80913,10 +81030,19 @@
    "judge_panel": null,
    "metric": "pass@1%",
    "headline": {
-    "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "mean-score%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://mercor.com/apex",
+      "captured": "2026-10-21",
+      "where": "APEX-Accounting (benchmarks[1]), 21 Oct payload: availablePasses lists Mean Score first, and the leaderboard rows run in descending Mean Score (37 of 37 rows, no inversion)",
+      "quote": "\"availablePasses\":[{\"label\":\"Mean Score\",\"value\":\"mean-score\"}",
+      "file": "/work/.salvo14/mig/convert-mercor.com/evidence/hn/next_data.json",
+      "sha256": "c846f61570df9a04a8c42292c8be66289ab3f8ed6db08b23601a9f86fc91338a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -80943,9 +81069,18 @@
    "metric": "pass@1%",
    "headline": {
     "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://mercor.com/apex",
+      "captured": "2026-10-20",
+      "where": "APEX-Agents (benchmarks[2]), 20 Oct payload: Pass@1 is the first pass listed and the first chart axis; the top block of the leaderboard runs in descending Pass@1",
+      "quote": "\"availablePasses\":[{\"label\":\"Pass@1\",\"value\":\"pass-1\"},{\"label\":\"Mean Score\",\"value\":\"mean-score\"}]",
+      "file": "/work/.salvo14/mig/convert-mercor.com/evidence/t8/next_data.json",
+      "sha256": "aa5ad2af3647e608507c998c9fad4c7b1c6d5808e77a6af72552e29c803cae53"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -81047,10 +81182,19 @@
    "judge_panel": null,
    "metric": "pass@1%",
    "headline": {
-    "metric": "pass@1%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "mean-score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://mercor.com/apex",
+      "captured": "2026-10-21",
+      "where": "APEX-1 (benchmarks[4]) leaderboard description: the value reported is the mean over 8 responses per task; availablePasses lists Mean Score only",
+      "quote": "We grade them using a Judge LM and report the mean value.",
+      "file": "/work/.salvo14/mig/convert-mercor.com/evidence/hn/next_data.json",
+      "sha256": "c846f61570df9a04a8c42292c8be66289ab3f8ed6db08b23601a9f86fc91338a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -81723,9 +81867,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://mercor.com/apex",
+      "captured": "2026-10-20",
+      "where": "FrontierSWE v2 chart (openSource, 20 Oct): one score per model (with its error); no other metric printed",
+      "quote": "\"model_name\":\"Fable 5.1\",\"score\":37.2",
+      "file": "/work/.salvo14/mig/convert-mercor.com/evidence/t8/next_data.json",
+      "sha256": "aa5ad2af3647e608507c998c9fad4c7b1c6d5808e77a6af72552e29c803cae53"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -81828,9 +81981,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://mercor.com/apex",
+      "captured": "2026-09-30",
+      "where": "Harvey LAB chart (openSource, 30 Sep): one score per model (with its error); no other metric printed",
+      "quote": "\"model_name\":\"Opus 5\",\"score\":17.8",
+      "file": "/work/.salvo14/mig/convert-mercor.com/evidence/s16/next_data.json",
+      "sha256": "0c5d21aa776cb402d7bbf8e235ef637f86022ee7155814b621d191941ede5c0a"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -125398,9 +125560,18 @@
    "metric": "score/100",
    "headline": {
     "metric": "score/100",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://huggingface.co/spaces/DontPlanToEnd/UGI-Leaderboard",
+      "captured": "2026-10-05",
+      "where": "ugi-leaderboard-data.csv, column \"World Model\" (after \"Pop Culture\"): one score per model out of 100 in this setup",
+      "quote": "Pop Culture,World Model",
+      "file": "/work/.salvo14/s19/b2/src/ugi.csv",
+      "sha256": "972442632a086556e113fed1cd0beeff6af07abc91a6e755ab6acbd6c998b5b0"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -144815,6 +144986,111 @@
    "legacy_groups": [],
    "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 2: score out of 8 per PR (Technorage post)",
    "note": "C2 wave 28 Oct: the post's score out of 8 per PR (its only score column); replaces the rubric % of 8 (score / 8 x 100, our division)"
+  },
+  "mercor-apexacct-mean": {
+   "family": "mercor-apexacct-mean",
+   "benchmark": "Mercor APEX-Accounting (mean score)",
+   "subset": null,
+   "harness": "Mercor-APEX-Accounting-loop_agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "mean-score%",
+   "headline": {
+    "metric": "mean-score%",
+    "basis": "ranked-by",
+    "evidence": [
+     {
+      "url": "https://mercor.com/apex",
+      "captured": "2026-10-21",
+      "where": "APEX-Accounting (benchmarks[1]), 21 Oct payload: availablePasses lists Mean Score first, and the leaderboard rows run in descending Mean Score (37 of 37 rows, no inversion)",
+      "quote": "\"availablePasses\":[{\"label\":\"Mean Score\",\"value\":\"mean-score\"}",
+      "file": "/work/.salvo14/mig/convert-mercor.com/evidence/hn/next_data.json",
+      "sha256": "c846f61570df9a04a8c42292c8be66289ab3f8ed6db08b23601a9f86fc91338a"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Mercor APEX-Accounting, mean score",
+   "note": "new setup of the 29 Oct headline round: the Mean Score pass of the APEX-Accounting board (passScores[1], pass mean-score)"
+  },
+  "mercor-apexv1-mean": {
+   "family": "mercor-apexv1-mean",
+   "benchmark": "Mercor APEX-v1 (mean score)",
+   "subset": null,
+   "harness": "Mercor-APEX-v1-singleshot_agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "mean-score%",
+   "headline": {
+    "metric": "mean-score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://mercor.com/apex",
+      "captured": "2026-10-21",
+      "where": "APEX-1 (benchmarks[4]) leaderboard description: the value reported is the mean over 8 responses per task; availablePasses lists Mean Score only",
+      "quote": "We grade them using a Judge LM and report the mean value.",
+      "file": "/work/.salvo14/mig/convert-mercor.com/evidence/hn/next_data.json",
+      "sha256": "c846f61570df9a04a8c42292c8be66289ab3f8ed6db08b23601a9f86fc91338a"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Mercor APEX-v1, mean score",
+   "note": "new setup of the 29 Oct headline round: the Mean Score pass of the APEX-1 board (passScores[1], pass mean-score)"
+  },
+  "aaomni-index": {
+   "family": "aaomni-index",
+   "benchmark": "AA Omniscience Index",
+   "subset": null,
+   "harness": "AA-Omniscience",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "omniscience-index",
+   "headline": {
+    "metric": "omniscience-index",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://artificialanalysis.ai/methodology/intelligence-benchmarking",
+      "captured": "2026-09-07",
+      "where": "methodology, General / AA-Omniscience paragraph: models are scored with the AA-Omniscience Index (points); the setup held the accuracy component",
+      "quote": "Models are scored using the <em>AA-Omniscience Index</em>, which assigns points for correct",
+      "file": "/work/.salvo14/arb/aa11/evidence/wayback/methodology-20260907.html",
+      "sha256": "c681d77c69064f36b96dd788db591bd234a2a580ea2ac002a1ef06c9454c7d11"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "AA Omniscience Index",
+   "note": "new setup of the 29 Oct headline round: the index column of the AA-Omniscience model pages (points, can be negative)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
