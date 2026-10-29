@@ -10619,6 +10619,18 @@
   },
   "arxiv-2610.17016-credit-kl-nats": {
    "label": "ProbabilityBench credit risk: mean KL (nats) at 25 shots, Medium visibility, vs list price"
+  },
+  "deepu-cc-set1-of8": {
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, ClaudeCode (auto mode), set 1: score out of 8 per PR (Technorage post)"
+  },
+  "deepu-cc-set2-of8": {
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, ClaudeCode (auto mode), set 2: score out of 8 per PR (Technorage post)"
+  },
+  "deepu-pi-set1-of8": {
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 1: score out of 8 per PR (Technorage post)"
+  },
+  "deepu-pi-set2-of8": {
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 2: score out of 8 per PR (Technorage post)"
   }
  },
  "setups": {
@@ -38558,9 +38570,18 @@
    "metric": "ECI",
    "headline": {
     "metric": "ECI",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://epoch.ai/data/benchmark_data.zip",
+      "captured": "2026-10-21",
+      "where": "eci_scores.csv (epoch_capabilities_index): one score column, eci (the index itself; the CI columns are notes), one row per model",
+      "quote": "Model,Display name,eci,eci_ci_low,eci_ci_high",
+      "file": "/work/.salvo14/mig/convert-epoch.ai/snap/1021/epoch_capabilities_index/eci_scores.csv",
+      "sha256": "540796e67e6158f290edfb97a2633ca871edf9f1a89c78fc9d06cd20ca33cf64"
+     }
+    ]
    },
    "bounds": null,
    "direction": "higher",
@@ -39341,9 +39362,18 @@
    "metric": "Score",
    "headline": {
     "metric": "Score",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://epoch.ai/data/benchmark_data.zip",
+      "captured": "2026-10-18",
+      "where": "algotune_external.csv (benchmark_data.zip): the one score column Score; Release date, Name and Notes are not metrics",
+      "quote": "Model version,Score,Release date",
+      "file": "/work/.salvo14/mig/convert-epoch.ai/snap/1018/algotune_external.csv",
+      "sha256": "192ad9eb6d9d7a6af4ac3f7afb8042ecd3f58209e094a3e303b570f33a4e805f"
+     }
+    ]
    },
    "bounds": null,
    "direction": "higher",
@@ -39434,9 +39464,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://epoch.ai/data/benchmark_data.zip",
+      "captured": "2026-10-18",
+      "where": "enigma_eval_external.csv (benchmark_data.zip): the one score column Accuracy; Accuracy Standard Error and the CI bounds are not metrics",
+      "quote": "Model version,Accuracy,Accuracy Standard Error",
+      "file": "/work/.salvo14/mig/convert-epoch.ai/snap/1018/enigma_eval_external.csv",
+      "sha256": "4dd784ed5fc2349b1070e63cf2080e4f0f496efcfd388e00135780cfb6aaef27"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -39679,9 +39718,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://epoch.ai/data/benchmark_data.zip",
+      "captured": "2026-10-21",
+      "where": "benchmark_metadata.csv, row 'FrontierMath-2025-02-28-Private', column score_column: the hub's score for the FrontierMath tables (frontiermath.csv; the Tier 4 and Tiers 1-3 v2 rows read the same column). frontiermath_erdos.csv has no metadata row and prints mean_score and Best score (across scorers): the family's designation",
+      "quote": "FrontierMath-2025-02-28-Private,True,frontiermath.csv,Best score (across scorers)",
+      "file": "/work/.salvo14/mig/convert-epoch.ai/snap/1021/benchmark_metadata.csv",
+      "sha256": "979c73b823a2ea9f37d33e495065c7952226f389be012a4c75902567ad4dc2a6"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -39898,9 +39946,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "designated",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://epoch.ai/data/benchmark_data.zip",
+      "captured": "2026-10-15",
+      "where": "benchmark_metadata.csv, row 'HLE', column score_column (the score the hub uses for hle_external.csv: Accuracy; the table also prints Accuracy Standard Error, Calibration Error)",
+      "quote": "HLE,True,hle_external.csv,Accuracy,1.0,0.048,1.0,2025-01-23,",
+      "file": "/work/.salvo14/mig/convert-epoch.ai/snap/1015/benchmark_metadata.csv",
+      "sha256": "f227d481009ddc34ee529645d8ba124aaac2630724686c40e8e9115a0245c766"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -136834,10 +136891,19 @@
    "judge_panel": null,
    "metric": "rubric % of 8 (avg of 2 graders)",
    "headline": {
-    "metric": "rubric % of 8 (avg of 2 graders)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -136863,10 +136929,19 @@
    "judge_panel": null,
    "metric": "rubric % of 8 (avg of 2 graders)",
    "headline": {
-    "metric": "rubric % of 8 (avg of 2 graders)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -137020,10 +137095,19 @@
    "judge_panel": null,
    "metric": "rubric % of 8 (avg of 2 graders)",
    "headline": {
-    "metric": "rubric % of 8 (avg of 2 graders)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -137049,10 +137133,19 @@
    "judge_panel": null,
    "metric": "rubric % of 8 (avg of 2 graders)",
    "headline": {
-    "metric": "rubric % of 8 (avg of 2 graders)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
    },
    "bounds": [
     0,
@@ -143572,9 +143665,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/code-fix-merge-intervals__high__t1.json",
+      "sha256": "cffc3ba3bdabc079605b25717fac78bfe6ae6db44a7028d7fb06360c833428c2"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143599,9 +143701,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/code-lru-cache__high__t1.json",
+      "sha256": "7af308148edf0908b0407d4a5c4653a79b715c4e1cce854094078c0170b86475"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143626,9 +143737,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/code-parse-duration__high__t1.json",
+      "sha256": "7af6698e85fdcb9f59cc08178d95f3806dd066249aa7d10aad51666b04e8b50a"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143653,9 +143773,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/reason-race-order__high__t1.json",
+      "sha256": "607aa7fe87c5fb9d0dd9f4421822b27c95f76194cfd5a5eb8dbe9bc18639e5a4"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143680,9 +143809,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/reason-snail-pole__high__t1.json",
+      "sha256": "aeec0357d1b81cafadc393cfcc407faefd364447e183a0c7deb529864648ee24"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143707,9 +143845,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/reason-trailing-zeros__high__t1.json",
+      "sha256": "2fb1c8689681bb6ce22d8be0822972b76c53fa954bf18ce56725745629831833"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143734,9 +143881,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 83",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/write-container-summary__high__t1.json",
+      "sha256": "5df5294f5def62633b90a645ab470512dec730d44a720201cbe79d176372993b"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143761,9 +143917,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 78",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/write-https-explainer__high__t1.json",
+      "sha256": "a372f872cd5ff81f67b974fa0f8530429ba845e153941b4cbe1a667a5d6726ab"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143788,9 +143953,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 85",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results/raw/write-launch-email__high__t1.json",
+      "sha256": "8cd8f3dc51e514d9365754f4ef725bc1c7f51caa93907ae025dad05493904a55"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143815,9 +143989,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-coin-faces__high__t1.json",
+      "sha256": "e34db3c9a62fb11ed00e7ffdd11145ddea5933346e11cc809972288cd447c9ff"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143842,9 +144025,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-count-multiples__high__t1.json",
+      "sha256": "009709fb566da6f7c3f27197bdda078a578bb6b3029960bcda42a374259b5ae5"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143869,9 +144061,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-lex-topo-order__high__t1.json",
+      "sha256": "eaa002f0bd8150c9453cf7ae2d0f6c28859b9d0d3025643b3ee9ad284ab44540"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143896,9 +144097,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 75",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-locking-tradeoff__high__t1.json",
+      "sha256": "b30df662f723acbeee8b7ae8c923c7b4abf57a8502d957f38bb684b095f8f2e7"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143923,9 +144133,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-parse-csv-line__high__t1.json",
+      "sha256": "ef9124b8895b4259d8e133605bb295d216db81b6d9bc873e43ecc88c9d2c40c7"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143950,9 +144169,18 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 88",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-postmortem-rewrite__high__t1.json",
+      "sha256": "75a1331d9cb7cf0061877483190681d8769c94f94949f3a911c3098e0eb922ec"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -143977,9 +144205,18 @@
    "metric": "accuracy%",
    "headline": {
     "metric": "accuracy%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-puzzle-hunt__high__t1.json",
+      "sha256": "e9f5e5d45c1bf3f8bc9ed557dd38bbcc4814fd683f707c8d13feaa8d0f6caec8"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -144004,9 +144241,18 @@
    "metric": "pass%",
    "headline": {
     "metric": "pass%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-hard/raw/hard-weighted-intervals__high__t1.json",
+      "sha256": "540d062ac15eb99500d0ab1232a2b6bda188e0d4fe3306da377686966939e1c5"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -144031,9 +144277,18 @@
    "metric": "hidden-test%",
    "headline": {
     "metric": "hidden-test%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-delegation/raw/A__deleg-high__t1.json",
+      "sha256": "81e7231448d147e69fcdbeb3d58d26a4a7aba6c25730a48d5be21ff85e07b2f7"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -144058,9 +144313,18 @@
    "metric": "hidden-test%",
    "headline": {
     "metric": "hidden-test%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-delegation/raw/A__mono-high__t1.json",
+      "sha256": "4227c7eec430d0250f29d1894ff7ce819b59d87163bbcc0b228ef96f5a5039d4"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -144085,9 +144349,18 @@
    "metric": "hidden-test%",
    "headline": {
     "metric": "hidden-test%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-delegation/raw/B__deleg-low__t1.json",
+      "sha256": "d2b490df4e6032b4bb04dc133b0526672b24b1a2bd18597a48edaa16f4f8bc11"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -144112,9 +144385,18 @@
    "metric": "hidden-test%",
    "headline": {
     "metric": "hidden-test%",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://github.com/aeon0199/low-or-bust/commit/7cfe3f9faa751841464f0729448da899295bdabc",
+      "captured": "2026-07-11",
+      "where": "$.score: the run's one quality score (cost and tokens are not metrics; per-task setup, one score per run)",
+      "quote": "\"score\": 100",
+      "file": "/work/.salvo14/mig/convert-github-low-or-bust/evidence/results-delegation/raw/B__mono-high__t1.json",
+      "sha256": "f9b8c4da7cdf844ab9b05dd0580034ad65e9f319a3b81f8b57036f7d99ac25bb"
+     }
+    ]
    },
    "bounds": [
     0,
@@ -144389,6 +144671,150 @@
    "legacy_groups": [],
    "label": "ProbabilityBench credit risk: mean KL (nats) at 25 shots, Medium visibility, vs list price",
    "note": "C2 wave 28 Oct: mean KL (nats, lower is better) per model as plotted in Figure 1 (vector; read from the paths, calibrated on the printed ticks); replaces neg-KL-nats (our negation)"
+  },
+  "deepu-cc-set1-of8": {
+   "family": "deepu-cc-set1-of8",
+   "benchmark": "Qwen3.8-Flash-Next vs Claude Opus 5.5, ClaudeCode (auto mode), set 1: score out of 8 per PR (Technorage post)",
+   "subset": null,
+   "harness": "ClaudeCode (auto mode)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-8",
+   "headline": {
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    8
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, ClaudeCode (auto mode), set 1: score out of 8 per PR (Technorage post)",
+   "note": "C2 wave 28 Oct: the post's score out of 8 per PR (its only score column); replaces the rubric % of 8 (score / 8 x 100, our division)"
+  },
+  "deepu-cc-set2-of8": {
+   "family": "deepu-cc-set2-of8",
+   "benchmark": "Qwen3.8-Flash-Next vs Claude Opus 5.5, ClaudeCode (auto mode), set 2: score out of 8 per PR (Technorage post)",
+   "subset": null,
+   "harness": "ClaudeCode (auto mode)",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-8",
+   "headline": {
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    8
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, ClaudeCode (auto mode), set 2: score out of 8 per PR (Technorage post)",
+   "note": "C2 wave 28 Oct: the post's score out of 8 per PR (its only score column); replaces the rubric % of 8 (score / 8 x 100, our division)"
+  },
+  "deepu-pi-set1-of8": {
+   "family": "deepu-pi-set1-of8",
+   "benchmark": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 1: score out of 8 per PR (Technorage post)",
+   "subset": null,
+   "harness": "Pi",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-8",
+   "headline": {
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    8
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 1: score out of 8 per PR (Technorage post)",
+   "note": "C2 wave 28 Oct: the post's score out of 8 per PR (its only score column); replaces the rubric % of 8 (score / 8 x 100, our division)"
+  },
+  "deepu-pi-set2-of8": {
+   "family": "deepu-pi-set2-of8",
+   "benchmark": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 2: score out of 8 per PR (Technorage post)",
+   "subset": null,
+   "harness": "Pi",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score-of-8",
+   "headline": {
+    "metric": "score-of-8",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://deepu.tech/qwen3.8-flash-next-vs-claude-opus-showdown",
+      "captured": "2026-10-21",
+      "where": "The set tables (Set 1, Set 2): one score column per PR, 'Score (of 8)'; the post ranks its arms by it",
+      "quote": "Arm (PR) | Score (of 8) | Time | Cost | Tokens (in / cached / out)",
+      "file": "/work/.salvo14/mig/convert-deepu/evidence/deepu.txt",
+      "sha256": "d9a4cfad4a06c3a09c5f5f2b3fc9d888ad159d834186bccbca33f629aa96de8e"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    8
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Qwen3.8-Flash-Next vs Claude Opus 5.5, Pi, set 2: score out of 8 per PR (Technorage post)",
+   "note": "C2 wave 28 Oct: the post's score out of 8 per PR (its only score column); replaces the rubric % of 8 (score / 8 x 100, our division)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
