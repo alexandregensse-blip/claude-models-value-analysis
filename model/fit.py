@@ -30,7 +30,7 @@ import build_lqm
 lqm.LINE = MODEL_LINE
 
 FIT_CACHE = os.path.join(HERE, "fit-cache.json")
-SEED = 12
+SEED = 13
 STAN = os.path.relpath(lqm.STAN_FILE, ROOT)                          # model/lqm_ext2.stan unless LQM_MODEL says
 # The build's products (python3 data/build.py --fit-models catalog): one table per axis, and the group map through which
 # the group-keyed catalog maps (composites, families) reach the fit groups (data/build_lqm.py, fit_maps)
