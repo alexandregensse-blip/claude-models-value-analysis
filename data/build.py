@@ -540,6 +540,45 @@ class Ctx:
     def configs(self, key, iv):
         return {c["id"]: c for c in self.models[key]["configurations"] if covers(c, iv)}
 
+    def bridged_defaults(self, key):
+        """Rule A (default-bridged-gap, the maintainer, 29 Oct): two default records of one setting giving the same
+        configuration on both sides of a span without captures cover that span, unless another record of the setting
+        states another configuration inside it or a name of the model starts or ends inside it. → the merged records
+        that bridge at least one gap, each listing its gaps (basis `bridged`). Records are walked in order of their
+        start: another configuration stated inside the span is a record between the two, which ends the chain
+        (validate.py refuses defaults of one setting that overlap)."""
+        cache = self.__dict__.setdefault("_bridged", {})
+        if key in cache:
+            return cache[key]
+        recs = self.models[key].get("default", [])
+        bounds = [t for n in self.models[key].get("names", []) for s in n.get("serves", [])
+                  for t in (V.when(s["from"]), V.when(s["to"], True) if s.get("to") is not None else None) if t]
+        out = []
+        for setting in dict.fromkeys(x.get("setting") for x in recs):
+            xs = sorted((x for x in recs if x.get("setting") == setting), key=lambda x: V.when(x["from"]))
+            chain = [xs[0]] if xs else []
+            gaps = []
+            for x in xs[1:] + [None]:
+                a = chain[-1]
+                ok = x is not None and a.get("to") is not None and x["configuration"] == a["configuration"]
+                if ok:
+                    lo, hi = V.when(a["to"], True), V.when(x["from"])
+                    if hi - lo > dt.timedelta(microseconds=1):          # a span no record covers
+                        ok = not any(lo < t < hi for t in bounds)        # no name starts or ends inside it
+                        if ok:
+                            gaps.append({"from": a["to"], "to": x["from"], "basis": "bridged"})
+                if ok:
+                    chain.append(x)
+                    continue
+                if gaps:
+                    first, last = chain[0], max(chain, key=lambda y: V.when(y["to"], True) if y.get("to") else MAX)
+                    out.append(dict(configuration=first["configuration"], setting=setting, **{"from": first["from"]},
+                                    to=last.get("to"), from_basis=first.get("from_basis"), to_basis=last.get("to_basis"),
+                                    bridged=gaps))
+                chain, gaps = ([x] if x is not None else []), []
+        cache[key] = out
+        return out
+
 
 # ---------------------------------------------------------------- the measure
 class Measure:
@@ -1050,6 +1089,8 @@ def maker_defaults(M, key, iv):
     but sends no level. A call that turned thinking on gets the effort default (else the whole-call one); a call that
     sent neither gets the whole-call default, else the thinking default."""
     d = [x for x in M.ctx.models[key].get("default", []) if covers(x, iv)]
+    done = {x.get("setting") for x in d}                 # a bridged span only where no record of its setting covers
+    d += [x for x in M.ctx.bridged_defaults(key) if x["setting"] not in done and covers(x, iv)]
     call = [x for x in d if not x.get("setting")]
     if thinking_requested(M):
         return [x for x in d if x.get("setting") == "effort"] or call
@@ -1067,6 +1108,11 @@ def default_via(M, key, chain, iv, configs):
             if not d:
                 return None, "not-established:absent", f"no documented default of {key} covering the run (→ default)"
             M.rule("api-default-documented")
+            if d[0].get("bridged"):
+                M.rule("default-bridged-gap")
+                if "default-bridged" not in M.flags:
+                    M.flags.append("default-bridged")
+                M.fields["default_bridged"] = d[0]["bridged"]
             return serve(M, key, chain[i:], d[0]["configuration"], iv, configs)
         on = step_filter(ctx, key, chain, i)
         d = [x for x in r.get("models", {}).get(key, {}).get("default", []) if on(x) and covers(x, iv)]
@@ -1302,8 +1348,11 @@ def configuration(M, key):
             if any(o[5].endswith(":default") for o in others) and \
                     not any(o[5].endswith(":default") for o in results if o not in others):
                 M.rules.discard("thinking-on-default-level")   # the default was not used: the level was stated
-                if "level-from-default" in M.flags:
-                    M.flags.remove("level-from-default")
+                M.rules.discard("default-bridged-gap")
+                M.fields.pop("default_bridged", None)
+                for x in ("level-from-default", "default-bridged"):
+                    if x in M.flags:
+                        M.flags.remove(x)
             out.update(value=r[1], level=r[2], step=r[0], detail="thinking on with a level: the level")
             return
         specific = [r for r in est if r[5] in ("name-selects", "thinking-on", "thinking-off")]
@@ -1499,7 +1548,8 @@ def cost_field(M):
         "contradictory" if len(method) > 1 else None)
     out["basis"] = basis[0] if len(basis) == 1 else ("contradictory" if len(basis) > 1 else (
         meth.get(out["method"], {}).get("basis") if out["method"] and out["method"] != "contradictory" else "unknown"))
-    pt = [x for x in M.slot("spend", "price-table") if x.level in ACCEPTED]
+    classes = ctx_vocab_terms(M.ctx, "price_class")
+    pt = [x for x in M.slot("spend", "price-table") if x.level in ACCEPTED and x.term not in classes]
     out["price_table_date"] = None
     for x in pt:
         b = find_date(x.value) or find_date(x.quote)
@@ -1531,7 +1581,9 @@ def reproduce_cost(M, key):
     tokens → accepted as written (coordinator, 23 Oct)."""
     from convert import reproduce as RP
     C = M.fields["cost"]
-    pins = sorted({x.term for x in M.slot("spend", "price-table") if x.level in ACCEPTED and x.term})
+    classes = ctx_vocab_terms(M.ctx, "price_class")
+    pins = sorted({x.term for x in M.slot("spend", "price-table") if x.level in ACCEPTED and x.term
+                   and x.term not in classes})
     if not pins or C.get("number") is None or C.get("level") not in ACCEPTED:
         return
     if C.get("method") not in ("tokens×list", "library-table", "publisher-table"):
@@ -1699,6 +1751,24 @@ def price_band(M, ref):
     M.rule("cost-price-band")
 
 
+def stated_prices(M):
+    """The class prices the source states it applied (rule B, the maintainer, 29 Oct): price-table facts or cells whose
+    term is a price class, value = that class's price per million tokens in the cost's currency (the agent's reading,
+    `written` beside it). → ({class: price}, why): None when nothing is stated or a class is stated twice differently."""
+    classes = ctx_vocab_terms(M.ctx, "price_class")
+    got = {}
+    for x in M.slot("spend", "price-table"):
+        if x.level not in ACCEPTED or x.term not in classes:
+            continue
+        p = parse_number(x.value)
+        if p is None:
+            return None, f"stated {x.term} price {x.value!r} is not a number"
+        if got.get(x.term, float(p[0])) != float(p[0]):
+            return None, f"two stated {x.term} prices"
+        got[x.term] = float(p[0])
+    return (got or None), ""
+
+
 def count_rel_rounding(p):
     d, step = p
     return float(step) / float(d) if d else 0.0
@@ -1773,6 +1843,17 @@ def reprice(M, C, key):
     base = price_vector(bp)
     k_tier = (C.get("tier") or {}).get("factor", 1.0)
     cost, prec = C.get("std_cost", float(C["number"])), (C.get("prec") / k_tier if C.get("prec") is not None else None)
+    stated, why = stated_prices(M)
+    if stated or why:
+        C["stated_prices"] = dict(classes=stated, used=False, **({"why": why} if why else {}))
+    if stated and not tiers and (not covered or not vecs):
+        # no registered price covers the price date, but the source states the prices it applied: they are the price
+        # vector over the price date, re-priced to the base price as a registered one would be (cost-stated-prices)
+        vecs, covered = [stated], True
+        C["price_vectors"], C["price_covered"] = vecs, covered
+        C["stated_prices"]["used"] = True
+        M.rule("cost-stated-prices")
+        M.flags.append("cost-stated-prices")
     if not covered or not vecs:
         C["reprice_detail"] = "prices over the price date not registered"
         return class_ratio(M, C, key, pd_hi)

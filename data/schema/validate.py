@@ -777,6 +777,7 @@ def column_says(spec):
 
 
 # "k of N" in the source's language too: из (ru), von (de), sur (fr), de (es, pt), su / di (it) (27 Oct)
+PRICE_NUMBER = re.compile(r"[0-9]+(?:\.[0-9]+)?")      # a stated class price: the agent's reading (29 Oct)
 COUNTS = re.compile(r"\s*([0-9][0-9,]*)\s*(?:/|of|out of|из|von|sur|de|su|di)\s*([0-9][0-9,]*)\s*", re.I)
 
 
@@ -830,6 +831,9 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                     rep.err(L, f"{t['id']}.{col}: a {says} column needs a term")
                 elif says in closed and not in_vocab(schemas, closed[says]["vocab"], spec["term"]):
                     rep.err(L, f"{t['id']}.{col}: term '{spec['term']}' not in vocab {closed[says]['vocab']}")
+                if says == "price-table" and not isinstance(spec, str) and spec.get("term") is not None \
+                        and spec["term"] not in ptables and spec["term"] not in V["price_class"]["x-terms"]:
+                    rep.err(L, f"{t['id']}.{col}: price-table term '{spec['term']}' is neither a price table nor a price class")
                 if says in ("score", "run-score") and (isinstance(spec, str) or "scale" not in spec):
                     rep.err(L, f"{t['id']}.{col}: a {says} column needs a scale")
                 if says == "model-api-id" and (isinstance(spec, str) or "namespace" not in spec):
@@ -921,7 +925,10 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
         if f["says"] == "price-tier" and f.get("term") == "standard":
             rep.err(F, "a price-tier fact names a tier other than standard")
         if f["says"] == "price-table" and f.get("term") is not None and f["term"] not in ptables:
-            rep.err(F, f"price table '{f['term']}' is not registered in price-tables.json")
+            if f["term"] not in V["price_class"]["x-terms"]:
+                rep.err(F, f"price table '{f['term']}' is not registered in price-tables.json (nor a price class)")
+            elif not PRICE_NUMBER.fullmatch(str(f["value"])):
+                rep.err(F, f"a stated {f['term']} price is a number per million tokens, not {f['value']!r}")
         if f["says"] == "run-score" and not f.get("run"):
             rep.err(F, "a run-score fact names its run (run)")
         if f.get("run") and f["says"] not in ("run-score", "failure", "partial"):
