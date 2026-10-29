@@ -216,3 +216,14 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
 ## Added on 27 Oct
 
 - the source field `decimal_mark` (a decimal comma, data/BUILD.md); counts scores in the source's language (validate.py COUNTS).
+
+## Added on 29 Oct
+- A fact may carry `written`: the value exactly as the source writes it ('12,5 %', '51¢', '最大值'), when `value` is
+  the agent's normalized reading (12.5, 0.51, max). The quote must contain `written`, and a number's significant
+  digits must agree with it (validate.py `digits_agree`). The build takes the reading as is (no decimal-comma re-read).
+  The agents read the values; the code does not learn each source's notation (the maintainer, 29 Oct).
+- Fact type `quantized-build` (slot model): the model ran as a quantized build ('~Q4 quantization', GGUF, an Ollama
+  tag); the build takes the model out (another artefact).
+- Rule `metric-mean` for a computed score: the mean of an entry's same-scale metrics, when the source designates no
+  headline and the benchmark is not known (order: the benchmark's standard metric, the board's sort column, judgment,
+  then this mean).

@@ -48,6 +48,7 @@
     "run-id",
     "version",
     "early-access",
+    "quantized-build",
     "harness",
     "judge",
     "aggregation",
@@ -406,6 +407,12 @@
      "slots": [
       "effort"
      ]
+    },
+    "quantized-build": {
+     "description": "The source states the model ran as a quantized build (\"~Q4 quantization\", a GGUF / AWQ / FP8 file, an Ollama tag): a different artefact from the maker's model. Cited in the model slot, it takes the model out (29 Oct, the maintainer: quantized builds are kept apart).",
+     "slots": [
+      "model"
+     ]
     }
    }
   },
@@ -495,7 +502,8 @@
      "fact_types": [
       "model-name",
       "model-api-id",
-      "mode"
+      "mode",
+      "quantized-build"
      ],
      "list": true
     },
@@ -2949,6 +2957,7 @@
     "base-price-charged-never-applied",
     "cell-difference",
     "cell-sum",
+    "metric-mean",
     "run-date-from-id-convention",
     "cost-tier-factor",
     "cost-reproduction",
@@ -3081,6 +3090,10 @@
     "complement-of-percent": {
      "kind": "deduction",
      "description": "100 − a stated percentage (an error or refusal rate printed, its complement held), exact (26 Oct)"
+    },
+    "metric-mean": {
+     "kind": "deduction",
+     "note": "the mean of an entry's same-scale metrics when the source designates no headline and the benchmark is not known (the maintainer, 29 Oct)"
     }
    }
   },

@@ -284,7 +284,7 @@ class Source:
             x["precision"] = {"model": "printed", "sd": precision_sd(f, p[1]) or 0.0}
             x["derived"] = dict(rule=x.rule, inputs=list(x.inputs), value=num_text(got))
             return None
-        if x.rule not in ("cell-difference", "cell-sum") or len(x.inputs or []) < 2:
+        if x.rule not in ("cell-difference", "cell-sum", "metric-mean") or len(x.inputs or []) < 2:
             return f"computed fact {x.ref}: without its rule and two inputs"
         vals, sds, steps = [], [], []
         for ref in x.inputs or []:
@@ -301,18 +301,19 @@ class Source:
             steps.append(p[1])
             sd = precision_sd(f, p[1])
             sds.append(sd or 0.0)
-        got = vals[0] - sum(vals[1:]) if x.rule == "cell-difference" else sum(vals)
+        n = len(vals) if x.rule == "metric-mean" else 1     # metric-mean: the mean of an entry's same-scale metrics,
+        got = vals[0] - sum(vals[1:]) if x.rule == "cell-difference" else sum(vals) / n  # no headline designated (29 Oct)
         stated = parse_number(x.value)
         if stated is None:
             return f"computed fact {x.ref}: {x.value!r} is not a number"
         # agreement within the roundings: half a unit of each rounded number (a plain integer is an exact count)
         exact = lambda t: re.fullmatch(r"[0-9]+", (t or "").strip().rstrip("%")) is not None  # noqa: E731
         texts = [self.fact(r, seen | {x.ref})[0].value for r in x.inputs]
-        tol = sum(float(st) / 2 for st, t in zip(steps, texts) if not exact(t)) + \
+        tol = sum(float(st) / 2 for st, t in zip(steps, texts) if not exact(t)) / n + \
             (0.0 if exact(x.value) else float(stated[1]) / 2)
         if abs(float(got - stated[0])) > tol + 1e-12:
             return f"computed fact {x.ref}: stated {x.value}, its inputs give {num_text(got)} ({x.rule})"
-        x["precision"] = {"model": "printed", "sd": math.sqrt(sum(v * v for v in sds))}
+        x["precision"] = {"model": "printed", "sd": math.sqrt(sum(v * v for v in sds)) / n}
         x["derived"] = dict(rule=x.rule, inputs=list(x.inputs), value=num_text(got))
         return None
 
@@ -320,7 +321,8 @@ class Source:
         """A source whose numbers use a decimal comma (`decimal_mark: ","`): '12,5' → '12.5', '1.234,5' → '1234.5', '1.234' → '1234'; a
         counts value ('45 из 60') is left as written (27 Oct)."""
         v = x.get("value")
-        if self.doc.get("decimal_mark") == "," and isinstance(v, str) and DECIMAL_COMMA.fullmatch(v.strip()):
+        if self.doc.get("decimal_mark") == "," and isinstance(v, str) and DECIMAL_COMMA.fullmatch(v.strip()) \
+                and not x.get("written"):                # a value the agent normalized is read as is (29 Oct)
             x["value"] = re.sub(r"[.\s\u00a0\u202f]", "", v.strip()).replace(",", ".")
 
     def fact(self, ref, _seen=frozenset()):
@@ -735,7 +737,7 @@ def display_matches(ctx, value):
 
 def resolve_model(M):
     ctx = M.ctx
-    keys_by_fact, ne, selects, modes = [], [], [], []
+    keys_by_fact, ne, selects, modes, quant = [], [], [], [], []
     res = []                                             # per fact: what it resolved to, and why (status report)
     for f in M.slot("model"):
         if f.level not in ACCEPTED:
@@ -744,6 +746,9 @@ def resolve_model(M):
             continue
         if f.says == ["mode"]:
             modes.append(f)
+            continue
+        if "quantized-build" in f.says:                  # a stated quantized build: another artefact (29 Oct)
+            quant.append(f)
             continue
         if "model-api-id" in f.says:
             matches = api_matches(ctx, f.value, f.namespace or "maker-api")[0]
@@ -801,6 +806,12 @@ def resolve_model(M):
         rules = {r for _, k, r in keys_by_fact if k and r}
         out.update(value=key, level="computed" if rules else "written", decided_by=first)
         unresolved = [x for x in res if x["outcome"].startswith("unresolved")]
+        if quant:                                        # the maker's model, run as a quantized build: out
+            out.update(value=None, level="not-established:absent", decided_by=None,
+                       detail=f"a quantized build of {key} ({quant[0].ref}: {quant[0].value!r}): another artefact")
+            M.fields["model"] = out
+            M.selects = selects
+            return None
         if unresolved:                                   # doubt → out (the coordinator, 23 Oct)
             out.update(value=None, level="not-established:absent", decided_by=None,
                        detail="; ".join(f"unresolved model fact {x['value']!r} ({x['fact']}): {x['outcome'][12:]}"

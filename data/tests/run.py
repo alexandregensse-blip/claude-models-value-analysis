@@ -1440,6 +1440,53 @@ def ext_cents_cjk_ladder_nothink_spellings():
     eq((r.cfg(m1), r.cfg(m2), r.cfg(m3) == "nothink"), ("nothink", "nothink", False), "nothink spellings")
 
 
+@test
+def ext_quantized_build_is_out():
+    # 'runs on my laptop at ~Q4 quantization': the maker's model as a quantized build is another artefact (deepu,
+    # the maintainer 29 Oct); the same name without that fact is the model
+    sc = base()
+    s = sc.source("p")
+    m1 = sc.m(s, model="ma", effort=[LOW], score="50%", model_facts=[("quantized-build", "~Q4 quantization", {})])
+    m2 = sc.m(s, model="ma", effort=[HIGH], score="60%")
+    sc.m(s, model="mb", effort=[LOW], score="40%")
+    r = sc.run()
+    eq((r.q(m1), r.q(m2)), ("out:model-not-established", "in"), "quantized out, the model in")
+
+
+@test
+def ext_agent_reading_with_written_text():
+    # the agent writes its reading (12.5) and the text as written ('12,5 %'): the build takes the reading; a reading
+    # whose digits disagree with the text is a fault (29 Oct, the maintainer: the agents read the values)
+    import sys as _s
+    _s.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "schema"))
+    import validate as V
+    eq((V.digits_agree("12.5", "12,5 %"), V.digits_agree("0.51", "51¢"), V.digits_agree("13", "12,5 %")),
+       (True, True, False), "digits")
+    sc = base()
+    s = sc.source("p")
+    sc.sources[s]["decimal_mark"] = ","
+    m1 = sc.m(s, model="ma", effort=[LOW], score="12.5", value_kw={"written": "12,5 %"})
+    m2 = sc.m(s, model="mb", effort=[LOW], score="1.234", value_kw={"written": "1,234"})
+    r = sc.run()
+    eq((r.rows("fit-quality.csv", model="ma")[0]["score"], r.rows("fit-quality.csv", model="mb")[0]["score"]),
+       ("12.5", "1.234"), "the reading, not re-read")
+
+
+@test
+def ext_metric_mean():
+    # no headline designated, benchmark unknown: the mean of the entry's same-scale metrics (the maintainer, 29 Oct)
+    for stated, want in (("70", "in"), ("72", "out:no-proof")):
+        sc = base()
+        s = sc.source("a")
+        fa = sc.fact(s, "score", "80", about="ma-1", term="pass%", scale="percent")
+        fb = sc.fact(s, "score", "60", about="ma-1", term="pass%", scale="percent")
+        m1 = sc.m(s, model="ma", effort=[LOW], score=stated, value_level="computed",
+                  value_kw={"rule": "metric-mean", "inputs": [fa, fb]})
+        sc.m(s, model="mb", effort=[LOW], score="60%")
+        r = sc.run()
+        eq(r.q(m1), want, f"stated {stated}, mean of 80 and 60")
+
+
 def main():
     import review_tests, pilot_tests, gaps2_tests
     TESTS.extend(gaps2_tests.TESTS)

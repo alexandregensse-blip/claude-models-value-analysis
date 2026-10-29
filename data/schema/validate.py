@@ -369,6 +369,14 @@ def file_text(path, cache={}, raw=False):
     return cache[key]
 
 
+def digits_agree(value, written):
+    """A normalized number and the text it was read from have the same significant digits ('12.5' / '12,5 %',
+    '0.51' / '51¢', '7250000' / '7.25M'); a value with no digit (a level, a label reading) is not checked."""
+    sig = lambda t: re.sub(r"[^0-9]", "", str(t)).strip("0")                      # noqa: E731
+    v = sig(value)
+    return not v or v in sig(written)
+
+
 def quote_in_file(quote, path):
     """A quote is in a saved text file: in its visible text, or, for a saved page, in its raw source (data embedded in
     a script, such as a Next.js payload: the pricing pages of 2024)."""
@@ -840,7 +848,12 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
             rep.err(F, f"chart {f['chart']} not defined")
         if forms.get(f["form"], {}).get("quote") and not f.get("quote"):
             rep.err(F, f"a {f['form']} fact needs a quote")
-        if f.get("quote") and norm(f["value"]) not in norm(f["quote"]):
+        if f.get("written"):                             # the agent's reading beside the text as written (29 Oct)
+            if f.get("quote") and norm(f["written"]) not in norm(f["quote"]):
+                rep.err(F, f"the quote does not contain the written text {f['written']!r}")
+            if not digits_agree(f["value"], f["written"]):
+                rep.err(F, f"the value {f['value']!r} does not agree with the digits of {f['written']!r}")
+        elif f.get("quote") and norm(f["value"]) not in norm(f["quote"]):
             rep.err(F, f"the quote does not contain the value {f['value']!r}")
         if f.get("quote") and (f.get("file") or "").lower().endswith(".pdf"):
             rep.err(F, "a quote in a PDF points at its text extraction (extractions), where it can be checked"

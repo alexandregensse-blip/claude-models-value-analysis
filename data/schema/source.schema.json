@@ -258,8 +258,13 @@
      },
      "quote": {
       "type": "string",
-      "description": "Exact text; required for prose, table cells, labels, code and image text, and it must contain the value.",
+      "description": "Exact text; required for prose, table cells, labels, code and image text, and it must contain the value (or, when the fact has `written`, that text).",
       "minLength": 1
+     },
+     "written": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The value exactly as the source writes it ('12,5 %', '51¢', '最大值', 'Reasoning:disabled'), when `value` is the agent's normalized reading (12.5, 0.51, max, nothink): the quote must contain it; a number's digits must agree with it (29 Oct, the maintainer: the agents read the values, the code does not learn each notation)."
      },
      "translation": {
       "type": "string",
@@ -319,10 +324,11 @@
      },
      "rule": {
       "type": "string",
-      "description": "For a computed fact: the rule deriving it (cell-difference: inputs[0] − inputs[1] − …; cell-sum: their sum; chart-effort-order: an effort-order fact 'k/n', inputs[0] the fact stating the chart's points are effort levels; complement-of-percent: 100 − inputs[0], a printed rate whose complement the setup holds).",
+      "description": "For a computed fact: the rule deriving it (cell-difference: inputs[0] − inputs[1] − …; cell-sum: their sum; metric-mean: their mean (an entry's same-scale metrics, no headline designated); chart-effort-order: an effort-order fact 'k/n', inputs[0] the fact stating the chart's points are effort levels; complement-of-percent: 100 − inputs[0], a printed rate whose complement the setup holds).",
       "enum": [
        "cell-difference",
        "cell-sum",
+       "metric-mean",
        "chart-effort-order",
        "complement-of-percent"
       ]
