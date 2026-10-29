@@ -435,10 +435,10 @@ RUNS = os.path.join(STAN_DIR, "runs")                                # each axis
 # draws per draw ranged from 1 % to 15 % across the fits of 30 Sep – 8 Oct (s_τ's posterior tail, which the data
 # shortens: .salvo14/s21/ess), so 3,000 meet the criteria on most data and 12,000 — the 48,000 draws drawn by every fit
 # before 8 Oct — on the worst.
-SAMPLER = {"quality": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, extend=1000,
-                           extend_max=9000),
-           "cost": dict(engine="nutpie", chains=4, warmup=1000, samples=3000, target_accept=0.9, extend=1000,
-                        extend_max=9000),
+SAMPLER = {"quality": dict(engine="nutpie", chains=6, warmup=600, samples=1800, target_accept=0.9, extend=1800,
+                           extend_max=16200),
+           "cost": dict(engine="nutpie", chains=6, warmup=600, samples=1800, target_accept=0.9, extend=1800,
+                        extend_max=16200),
            "restart": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
                            max_treedepth=10, extend=1500, extend_max=4500)}
 # The two axes run one after the other: on this shared 8-core machine the quality axis took 1,241 s beside the cost
