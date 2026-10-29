@@ -439,8 +439,8 @@ SAMPLER = {"quality": dict(engine="nutpie", chains=6, warmup=600, samples=1800, 
                            extend_max=16200),
            "cost": dict(engine="nutpie", chains=6, warmup=600, samples=1800, target_accept=0.9, extend=900,
                         extend_max=16200),
-           "restart": dict(engine="cmdstan", chains=4, warmup=500, warmup_cold=1000, samples=4500, adapt_delta=0.9,
-                           max_treedepth=10, extend=1500, extend_max=4500)}
+           "restart": dict(engine="cmdstan", chains=6, warmup=500, warmup_cold=600, samples=1800, adapt_delta=0.9,
+                           max_treedepth=10, extend=900, extend_max=16200)}
 # The two axes run one after the other: on this shared 8-core machine the quality axis took 1,241 s beside the cost
 # axis and 344 s alone (8 Oct 2026) — the chains of both compete for the same cores, so running them together saves
 # no time and adds their memory.
