@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Phase 1 of docs/DATA-PIPELINE.md §6: lqm.load keeps its composites rule, homogeneity split and republication rule;
-this step recovers its per-row outcome by comparing its input (build/fit-quality.csv, build/fit-cost.csv) with the rows
-it keeps (group, couple, value), and writes it into build/status-report.json and build/data.csv:
+this step recovers its per-row outcome by comparing its input (fit-quality.csv, fit-cost.csv) with the rows
+it keeps (group, couple, value), and writes it into status-report.json and data.csv:
 
     a row dropped by its composites rule      → out:composite
     by its republication rule                 → out:republished
@@ -14,13 +14,14 @@ it keeps (group, couple, value), and writes it into build/status-report.json and
     lqm.EFFORTS holds the configurations the build writes (nothink, minimal, think, solo and the levels, 29 Oct);
     between-tools and an odd label stay out of it.
 
-lqm.py is imported unchanged; its group-keyed catalog maps (COMPOSITES, FAMILY_OF) are resolved through
-build/group-map.json in this process (each fit group inherits its base group's entries; composites defined in
-benchmarks.json are added on their setups). Standard library only (lqm.load needs no numpy).
+lqm.py is imported unchanged; its group-keyed catalog maps (COMPOSITES, FAMILY_OF) are resolved through the build's
+group-map.json and group-setups.json in this process (fit_maps: each fit group inherits its base group's entries; the
+families and composites defined in benchmarks.json are added on their setups). model/fit.py, model/precheck.py and
+model/validation read the fit tables through the same fit_maps. Standard library only (lqm.load needs no numpy).
 
-    python3 data/build_lqm.py build/            # after data/build.py --no-lqm
+    python3 data/build_lqm.py data/build/       # after data/build.py --no-lqm
 """
-import collections, csv, json, os, re, sys
+import collections, contextlib, csv, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
@@ -32,29 +33,76 @@ def base_of(lqm_group):
     return re.sub(r"~\d+$", "", lqm_group)
 
 
-def expanded_maps(lqm, rep, gm):
-    """COMPOSITES and FAMILY_OF keyed by fit groups."""
+def group_setups(measures, gm, benchmarks_path):
+    """What the group-keyed catalog maps need from the registry, for the fit groups of group-map.json: each group's
+    setup (as the report's measures give it: a measure's `group` and `cost_group`; legacy rows have none), and each such
+    setup's benchmark family and composite components (benchmarks.json). The build writes it as group-setups.json, so
+    that the fit resolves the maps from the build's products alone, without the status report."""
     setup_of = {}
-    for e in rep["measures"].values():
+    for e in measures.values():
         for g in (e.get("group"), e.get("cost_group")):
             if g:
                 setup_of[g] = e["setup"]
     bench = {}
-    p = rep["build"].get("benchmarks")
-    if p and os.path.isfile(p):
-        with open(p, encoding="utf-8") as f:
+    if benchmarks_path and os.path.isfile(benchmarks_path):
+        with open(benchmarks_path, encoding="utf-8") as f:
             bench = json.load(f).get("setups", {})
+    groups = {g: setup_of[g] for g in sorted(gm) if g in setup_of}
+    setups = {}
+    for s in sorted(set(groups.values())):
+        b = bench.get(s, {})
+        sc = b.get("composite") or {}
+        setups[s] = dict(family=b.get("family"), components=sorted(
+            {c if isinstance(c, str) else c.get("setup") for c in sc.get("components", [])} - {None}))
+    return dict(groups=groups, setups=setups)
+
+
+def expanded_maps(lqm, gm, gs):
+    """COMPOSITES and FAMILY_OF keyed by fit groups: each fit group inherits its base group's entries (group-map.json),
+    and the family and composite components of its setup (group-setups.json)."""
+    setup_of, setups = gs["groups"], gs["setups"]
     fam = dict(lqm.FAMILY_OF)
     comps = dict(lqm.COMPOSITES)
     for g, b in gm.items():
         s = setup_of.get(g)
-        fam[g] = lqm.FAMILY_OF.get(b) or (bench.get(s, {}).get("family") if s else None)
+        fam[g] = lqm.FAMILY_OF.get(b) or (setups.get(s, {}).get("family") if s else None)
         members = set(lqm.COMPOSITES.get(b, []))
-        sc = (bench.get(s, {}) if s else {}).get("composite") or {}
-        members_setups = {c if isinstance(c, str) else c.get("setup") for c in sc.get("components", [])} - {None}
+        members_setups = set(setups.get(s, {}).get("components", []) if s else [])
         if members or members_setups:
             comps[g] = sorted(h for h, hb in gm.items() if hb in members or setup_of.get(h) in members_setups)
     return comps, fam
+
+
+def read_maps(build_dir):
+    """(group-map.json, group-setups.json) of a build folder."""
+    with open(os.path.join(build_dir, "group-map.json"), encoding="utf-8") as f:
+        gm = json.load(f)
+    with open(os.path.join(build_dir, "group-setups.json"), encoding="utf-8") as f:
+        gs = json.load(f)
+    return gm, gs
+
+
+@contextlib.contextmanager
+def fit_maps(lqm, build_dir):
+    """lqm.COMPOSITES and lqm.FAMILY_OF keyed by the build's fit groups while the block runs (lqm.load reads them),
+    restored after: how data/build_lqm.py, model/fit.py, model/precheck.py and model/validation read the fit tables."""
+    comps, fam = expanded_maps(lqm, *read_maps(build_dir))
+    saved = lqm.COMPOSITES, lqm.FAMILY_OF
+    lqm.COMPOSITES, lqm.FAMILY_OF = comps, fam
+    try:
+        yield comps, fam
+    finally:
+        lqm.COMPOSITES, lqm.FAMILY_OF = saved
+
+
+def base_groups(gm):
+    """data.csv group → base group: a data.csv row carries its quality group name; a cost-only row's fit group adds
+    '~c<n>' to it. A group in no fit table maps to itself."""
+    out = {}
+    for g, b in gm.items():
+        out.setdefault(re.sub(r"~c\d+$", "", g), b)
+    out.update(gm)
+    return out
 
 
 def run(out_dir, models=None):
@@ -64,21 +112,14 @@ def run(out_dir, models=None):
     rp = os.path.join(out_dir, "status-report.json")
     with open(rp, encoding="utf-8") as f:
         rep = json.load(f)
-    with open(os.path.join(out_dir, "group-map.json"), encoding="utf-8") as f:
-        gm = json.load(f)
     models = models or rep["build"]["fit_models"]
-    comps, fam = expanded_maps(lqm, rep, gm)
-    saved = lqm.COMPOSITES, lqm.FAMILY_OF
-    lqm.COMPOSITES, lqm.FAMILY_OF = comps, fam
     rep["lqm"] = {}
-    try:
+    with fit_maps(lqm, out_dir) as (comps, fam):
         for axis, field, name in AXES:
             path = os.path.join(out_dir, name)
             groups, lrep, republished = lqm.load(path, models, field=field)
             outcome(lqm, rep, axis, field, path, groups, republished, comps, models)
             rep["lqm"][axis] = dict(report=dict(lrep), republished=[list(r) for r in republished])
-    finally:
-        lqm.COMPOSITES, lqm.FAMILY_OF = saved
     rep["build"]["lqm"] = "done"
     # cost measures sharing a carrier follow it
     for e in rep["measures"].values():
@@ -168,7 +209,7 @@ def outcome(lqm, rep, axis, field, path, groups, republished, comps, models):
 
 
 def rewrite_data(out_dir, rep):
-    """build/data.csv rows are written in the report's measure order: their status columns follow the report."""
+    """data.csv rows are written in the report's measure order: their status columns follow the report."""
     p = os.path.join(out_dir, "data.csv")
     with open(p, encoding="utf-8", newline="") as f:
         rd = csv.DictReader(f)
@@ -183,5 +224,5 @@ def rewrite_data(out_dir, rep):
 
 
 if __name__ == "__main__":
-    rep = run(sys.argv[1] if len(sys.argv) > 1 else os.path.join(REPO, "build"))
+    rep = run(sys.argv[1] if len(sys.argv) > 1 else os.path.join(REPO, "data", "build"))
     print(f"lqm outcome written: quality {rep['counts']['quality']}; cost {rep['counts']['cost']}")

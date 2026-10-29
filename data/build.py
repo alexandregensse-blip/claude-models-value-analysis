@@ -2,7 +2,7 @@
 """Build of the findings pipeline: the decision tree of docs/DATA-PIPELINE.md §5 over the files of §2–4, and the fit
 tables of §6. Python 3 standard library only. Run from anywhere:
 
-    python3 data/build.py                                   # data/registry + data/findings + data/decisions.json → build/
+    python3 data/build.py --fit-models catalog              # data/registry + data/findings + data/decisions.json → data/build/
     python3 data/build.py --registry data/findings/examples/registry --findings data/findings/examples --out build/
     python3 data/build.py --previous build/status-report.json ...      # adds the status diff to that report
     python3 data/build.py --cost-method-unstated out ...               # the setting (see data/BUILD.md)
@@ -12,8 +12,8 @@ Steps: 1. validate (data/schema/validate.py: schemas + cross-file checks; errors
 the build, errors attributable to a source, fact or measure put the measures concerned out:no-proof); 2. fields of
 every measure (run-date interval, model through `names`, configuration through §5.1's steps and the route chain,
 campaign, value on the setup's scale, cost at the base price); 3. status per axis (decisions first, then the first
-failing step); 4. outputs: build/fit-quality.csv, build/fit-cost.csv, build/group-map.json, build/data.csv,
-build/status-report.json; 5. unless --no-lqm, data/build_lqm.py recovers lqm.load's per-row outcome."""
+failing step); 4. outputs (data/build/ by default): fit-quality.csv, fit-cost.csv, group-map.json, group-setups.json,
+data.csv, status-report.json (the last one not committed: .gitignore); 5. unless --no-lqm, data/build_lqm.py recovers lqm.load's per-row outcome."""
 import argparse, collections, csv, datetime as dt, glob, hashlib, json, math, os, re, sys
 from decimal import Decimal, InvalidOperation
 
@@ -2676,6 +2676,9 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
         if getattr(M, "m", None) is not None and M.m.get("legacy_ref") and not isinstance(M, Residual):
             e["legacy_ref"] = M.m["legacy_ref"]
         rep["measures"][M.ref] = e
+    import build_lqm
+    with open(os.path.join(out_dir, "group-setups.json"), "w", encoding="utf-8") as f:
+        json.dump(build_lqm.group_setups(rep["measures"], gm, rep["build"]["benchmarks"]), f, indent=1, ensure_ascii=False)
     rep["counts"] = counts(rep["measures"])
     if previous:
         rep["diff"] = diff(previous, rep)
@@ -2833,7 +2836,7 @@ def main(argv=None):
     ap.add_argument("--registry", default=os.path.join(REPO, "data", "registry"))
     ap.add_argument("--findings", default=os.path.join(REPO, "data", "findings"))
     ap.add_argument("--decisions", default=os.path.join(REPO, "data", "decisions.json"))
-    ap.add_argument("--out", default=os.path.join(REPO, "build"))
+    ap.add_argument("--out", default=os.path.join(REPO, "data", "build"))
     ap.add_argument("--previous", help="a previous status-report.json: its diff goes into the new report")
     ap.add_argument("--cost-method-unstated", choices=SETTINGS["cost_method_unstated"],
                     default=SETTINGS["cost_method_unstated"][0],
