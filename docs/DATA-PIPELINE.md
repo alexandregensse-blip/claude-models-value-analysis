@@ -104,8 +104,8 @@ evidence}`) and each either served as itself or converted:
   `enable_thinking: false`, `thinking: disabled`, a non-reasoning id…; the spellings are listed in vocab.json),
   `think` (thinking on with no level: the only thinking configuration of an on-off model without levels — DeepSeek
   V3.2 thinking mode, Kimi K2.5, GLM-5, the Qwen 3.5–3.7 hybrids), `think-<budget>` (thinking on with a token budget),
-  `between-tools` (Sonnet 5.5's `thinking: {type: between_tools}`, combined with a level ≤ high: in the fit like every
-  configuration of the model's list; 23 Oct, in the fit since 26 Oct);
+  `between-tools` (Sonnet 5.5's `thinking: {type: between_tools}`, combined with a level ≤ high: recorded, not
+  fitted; 23 Oct, in the fit 26–29 Oct, out with the configurations-per-model change: vocab x-terms `in_fit: false`, not in `lqm.EFFORTS`);
 - `solo` only for a model whose list is `[solo]`: nothing to set (K2.7 Code, a model with thinking always on and no
   level). Examples: Opus 5.5 `[low … max]`; GPT-5.x `[nothink, minimal, low … xhigh]`; Haiku 4.5 `[nothink,
   think-<budget>]`; a hybrid Qwen `[nothink, think]` or `[nothink, low … xhigh]`.
@@ -211,7 +211,7 @@ Two facts giving two configurations (a `-thinking` id with an effort field null)
 unless one is the more specific statement of the same call (the id selects thinking, the null field says no level was
 sent → `think`). **In the fit**: every configuration of the model's list as its own couple (`low … max`, `minimal`,
 `nothink`, `think`, `solo`), **except** `think-<budget>` (recorded, `out:budget-config`: too few and an unusual use,
-the maintainer, 22 Oct). A configuration not in the model's list → `out:effort-not-established`; not established
+the maintainer, 22 Oct) and `between-tools` (recorded, `out:effort-not-established`, 29 Oct). A configuration not in the model's list → `out:effort-not-established`; not established
 (`scalar-*` without a mapping, `budget-converted`, `enabled` without a level, `adaptive`, `default`, `unstated`,
 `req-<label>`, `app-*`, `priceblend`) → `out:effort-not-established`. A tools regime (`nt-*`), a fast mode or an
 application setting is part of the setup, not the configuration.

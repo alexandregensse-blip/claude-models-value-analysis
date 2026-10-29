@@ -2279,7 +2279,7 @@
    }
   },
   "configuration": {
-   "description": "Configuration ids a model can offer (models.json configurations; DATA-PIPELINE §4). think-<n>: thinking on with a budget of n tokens (exact count as written; the build merges budgets within 5 %). In the fit: every id but think-<n> (out:budget-config). In models.json a model whose thinking takes any budget lists the family `think-<budget>` with budget_min / budget_max. between-tools (23 Oct 2026): Sonnet 5.5's thinking: {type: between_tools}; in the fit like every configuration of a model's list (coordinator, 26 Oct 2026). x-terms.in_fit false would keep a term recorded but out of the fit (none does today).",
+   "description": "Configuration ids a model can offer (models.json configurations; DATA-PIPELINE §4). think-<n>: thinking on with a budget of n tokens (exact count as written; the build merges budgets within 5 %). In the fit: every id but think-<n> (out:budget-config) and between-tools (out:effort-not-established). In models.json a model whose thinking takes any budget lists the family `think-<budget>` with budget_min / budget_max. between-tools (23 Oct 2026): Sonnet 5.5's thinking: {type: between_tools}; recorded, not in the fit (x-terms in_fit false, 29 Oct 2026, with lqm.EFFORTS). x-terms.in_fit false keeps a term recorded but out of the fit; the terms in_fit true but think-<n> are lqm.EFFORTS (data/tests/run.py checks both ways).",
    "anyOf": [
     {
      "enum": [
@@ -2337,9 +2337,10 @@
      "kind": "thinking on, no level (on-off models without levels)"
     },
     "between-tools": {
-     "in_fit": true,
+     "in_fit": false,
+     "reason": "out:effort-not-established",
      "kind": "thinking: {type: between_tools} (Anthropic, Claude Sonnet 5.5): up-front thinking off, thinking between tool calls; accepted with effort low, medium or high only",
-     "note": "added 23 Oct 2026 (merge of the registry parts): documented by Anthropic as a thinking setting; it combines with an effort level (low, medium or high). Kept out of the fit at first (in_fit false); in the fit since 26 Oct 2026 (coordinator: a configuration of Sonnet 5.5's list, fitted like every configuration of a model's list). `regex`: how a setting line names it (thinking: {type: \"between_tools\"}).",
+     "note": "added 23 Oct 2026 (merge of the registry parts): documented by Anthropic as a thinking setting; it combines with an effort level (low, medium or high). Kept out of the fit at first (in_fit false); in the fit from 26 Oct 2026 (coordinator: a configuration of Sonnet 5.5's list, fitted like every configuration of a model's list); out again from 29 Oct 2026 (configurations-per-model change: lqm.EFFORTS leaves it out, a modifier of the levels low, medium, high rather than a configuration of its own; the maintainer to confirm). `regex`: how a setting line names it (thinking: {type: \"between_tools\"}).",
      "regex": "between[_-]tools"
     },
     "solo": {
@@ -2663,7 +2664,7 @@
      "description": "a think-<budget> configuration (recorded, not fitted)"
     },
     "out:effort-not-established": {
-     "description": "configuration not established, or not in the model's list"
+     "description": "configuration not established, not in the model's list, or recorded but not fitted (x-terms in_fit false: between-tools)"
     },
     "out:estimate": {
      "description": "value is a source-estimate"

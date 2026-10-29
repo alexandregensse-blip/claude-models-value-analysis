@@ -233,3 +233,8 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
 - Vocab `metric` is open: a metric the legacy list does not hold is accepted as the source names it (the agents name
   the metric; no vocab change to read a source). Headline bases `standard` (rule 1), `judgment` (rule 3) and
   `metric-mean` (rule 4) join designated / ranked-by / only-metric / decision.
+- Configurations per model (lqm.EFFORTS = nothink, minimal, low … max, think, solo): **vocab.json** `between-tools`
+  `in_fit: false` again (`out:effort-not-established`, detail 'a configuration recorded, not fitted'): lqm.EFFORTS
+  leaves it out, and the build's in-fit terms must be lqm.EFFORTS (test `configurations_vocab_is_lqm_efforts`);
+  build_lqm.py gives `out:effort-not-established` to a fit-table row lqm.load filters for its configuration, should
+  the two lists part (test `lqm_guard_configuration_not_in_efforts`). Pending the maintainer's yes, as the method change.

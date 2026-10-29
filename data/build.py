@@ -1953,7 +1953,8 @@ def early_steps(M, axis, field):
         return "out:budget-config", f"{c}: thinking budgets are recorded, not fitted"
     term = ctx_vocab_terms(ctx, "configuration").get(c) or {}
     if term.get("in_fit") is False:                      # a configuration recorded, not fitted (between-tools)
-        return term.get("reason", "out:effort-not-established"), f"{c}: recorded, not in the fit (vocab x-terms)"
+        return term.get("reason", "out:effort-not-established"), (f"{c}: a configuration recorded, not fitted (vocab "
+                                                                  f"x-terms in_fit false; not in lqm.EFFORTS)")
     r = value_step(M, field, axis)
     if r:
         return r, field.get("detail", "") if field else ""

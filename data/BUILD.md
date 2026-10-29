@@ -221,7 +221,8 @@ reads two new things:
   route-wide records `maker` and `models` (`step_filter`). A harness maps a level per provider: Inspect sends max as
   xhigh to OpenRouter, passes levels to Anthropic's 4.6+ models (minimal → low) and turns them into budgets on the
   earlier ones. Route-wide `mapping` is read after the model's own and before its `accepts`.
-- `between-tools` is in the fit (vocab x-terms `in_fit: true`, the coordinator, 26 Oct).
+- `between-tools` was in the fit from 26 Oct (vocab x-terms `in_fit: true`, the coordinator); it is out again from
+  29 Oct (`in_fit: false`, `out:effort-not-established`), as `lqm.EFFORTS` leaves it out (configurations per model).
 - A model's configuration list may be empty: its configurations are not established (grok-4.20-multi-agent).
 
 ## Converter toolkit (`data/convert/`)
@@ -422,8 +423,10 @@ marked **(method)** remain method questions for the maintainer.
 34. A decision `in` overrides every step, including the group step, and its couple counts in its group. A headline
     decision with a `publisher` decides for that publisher's measures.
 35. `lqm.EFFORTS` holds every configuration the build writes (`nothink`, `minimal`, `low` … `max`, `think`, `solo`;
-    configurations-per-model method change, 29 Oct). A row `lqm.load` filters out before its rules (a configuration
-    outside it, a model outside the fit's list) is recorded as `lqm_outcome` only; the tree's status stands.
+    configurations-per-model method change, 29 Oct): the vocab terms `in_fit: true` but `think-<n>`, both ways (a test).
+    A fit-table row `lqm.load` filters out for its configuration gets `out:effort-not-established` (`legacy:out:
+    effort-not-in-efforts` for a legacy row), so that no status says `in` for a row the fit drops; one filtered for
+    another reason (a model outside the fit's list) is recorded as `lqm_outcome` only, the tree's status stands.
 36. Precision:
     - printed: the step / √12 (the precision's `step`, else the last written digit);
     - chart-pixel: the given `sd`, or blank when none is given;

@@ -7,9 +7,12 @@ it keeps (group, couple, value), and writes it into build/status-report.json and
     by its republication rule                 → out:republished
     in a split part with one couple           → out:single-couple (cost: out:cost-single-couple)
     in a group saturated at a bound           → out:saturated
-    filtered before its rules (effort not in lqm.EFFORTS, model not in the list): recorded as lqm_outcome only (the
-    tree's status stands). lqm.EFFORTS holds the configurations the build writes (nothink, minimal, think, solo and the
-    levels, 29 Oct); one outside it ('between-tools', an odd label) stays out.
+    filtered before its rules for its configuration (not in lqm.EFFORTS) → out:effort-not-established, so that the
+    status never says `in` for a row the fit drops (the tree already keeps such a configuration out: vocab x-terms
+    in_fit false; this is the guard should the two lists part);
+    filtered for another reason (model not in the list, value not usable): recorded as lqm_outcome only.
+    lqm.EFFORTS holds the configurations the build writes (nothink, minimal, think, solo and the levels, 29 Oct);
+    between-tools and an odd label stay out of it.
 
 lqm.py is imported unchanged; its group-keyed catalog maps (COMPOSITES, FAMILY_OF) are resolved through
 build/group-map.json in this process (each fit group inherits its base group's entries; composites defined in
@@ -131,6 +134,10 @@ def outcome(lqm, rep, axis, field, path, groups, republished, comps, models):
             why = "effort not in lqm.EFFORTS" if fr["effort"] not in lqm.EFFORTS else \
                 "model not in the fit's list" if fr["model"] not in models else "value not usable"
             lo[axis] = f"filtered before lqm's rules: {why}"
+            st = e["status"][axis] or ""
+            if fr["effort"] not in lqm.EFFORTS and st.startswith(("in", "legacy:in")):
+                e["status"][axis] = "legacy:out:effort-not-in-efforts" if st == "legacy:in" else "out:effort-not-established"
+                e["reason_detail"][axis] = f"lqm.load (phase 1): {fr['effort']} is not in lqm.EFFORTS"
             continue
         k = (fr["group"], c, float(fr["value"]))
         if kept[k] > 0:

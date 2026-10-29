@@ -1168,8 +1168,9 @@ def ext_hugging_face_names_case_insensitive():
 
 
 @test
-def ext_between_tools_in_fit():
-    # between-tools is a configuration of the model's list, fitted like every other (coordinator, 26 Oct 2026)
+def ext_between_tools_out_of_fit():
+    # between-tools is recorded, not fitted (vocab x-terms in_fit false, 29 Oct 2026: lqm.EFFORTS leaves it out); it was
+    # in the fit from 26 Oct (coordinator) while lqm.EFFORTS held only the levels and solo
     sc = base()
     sc.model("ms", configs=("low", "high", "between-tools"))
     s = sc.source("a")
@@ -1177,8 +1178,10 @@ def ext_between_tools_in_fit():
     m2 = sc.m(s, model="ma", effort=[LOW], score="60%")
     r = sc.run()
     eq(r.cfg(m1), "between-tools", "the setting")
-    eq(r.q(m1), "in", "between-tools is in the fit (vocab x-terms in_fit true)")
-    eq(r.q(m2), "in", "its group partner")
+    eq(r.q(m1), "out:effort-not-established", "between-tools is out of the fit, as lqm.load has it")
+    eq("not fitted" in r[m1]["reason_detail"]["quality"], True, "the detail says why")
+    eq(r.rows("fit-quality.csv", effort="between-tools"), [], "not written to the fit table")
+    eq(r.q(m2), "out:single-couple", "its group partner is left alone")
 
 
 @test
@@ -1553,6 +1556,47 @@ def lqm_configurations_kept():
             lqm.EFFORTS = new
     finally:
         shutil.rmtree(d, ignore_errors=True)
+
+
+@test
+def configurations_vocab_is_lqm_efforts():
+    """The build's in-fit configurations (vocab x-terms in_fit true; think-<n> has its own step) are lqm.EFFORTS, both
+    ways, so that the tree never writes a row `in` that lqm.load drops, nor drops one it would keep. Negative control:
+    with between-tools added to lqm.EFFORTS (its state before this check) the comparison fails."""
+    import json
+    sys.path.insert(0, os.path.join(DATA, "..", "model"))
+    import lqm
+    with open(os.path.join(DATA, "schema", "vocab.json"), encoding="utf-8") as f:
+        terms = json.load(f)["$defs"]["configuration"]["x-terms"]
+    tree = {k for k, v in terms.items() if v.get("in_fit") is not False and not k.startswith("think-")}
+    eq(tree, set(lqm.EFFORTS), "vocab in_fit true = lqm.EFFORTS")
+    eq(tree == set(lqm.EFFORTS) | {"between-tools"}, False, "negative control: one list wider than the other fails")
+
+
+@test
+def lqm_guard_configuration_not_in_efforts():
+    """A fit-table row whose configuration lqm.EFFORTS does not hold never keeps the status `in`: build_lqm gives it
+    out:effort-not-established with the reason. Negative control: the same build with lqm.EFFORTS whole keeps it in."""
+    sys.path.insert(0, os.path.join(DATA, "..", "model"))
+    import lqm
+
+    def scenario():
+        sc = base()
+        s = sc.source("a")
+        refs = [sc.m(s, model=m, effort=[e], score=v) for m, e, v in
+                (("ma", LOW, "40%"), ("mb", LOW, "50%"), ("ma", HIGH, "60%"), ("mb", HIGH, "70%"))]
+        return sc.run(lqm=True), refs
+    r, (a_lo, b_lo, a_hi, b_hi) = scenario()
+    eq((r.q(a_hi), r.q(b_hi)), ("in", "in"), "negative control: high in lqm.EFFORTS, in")
+    saved = lqm.EFFORTS
+    lqm.EFFORTS = set(saved) - {"high"}
+    try:
+        r, (a_lo, b_lo, a_hi, b_hi) = scenario()
+    finally:
+        lqm.EFFORTS = saved
+    eq((r.q(a_hi), r.q(b_hi)), ("out:effort-not-established",) * 2, "high filtered by lqm.load: not in")
+    eq(r[a_hi]["reason_detail"]["quality"], "lqm.load (phase 1): high is not in lqm.EFFORTS", "the reason")
+    eq((r.q(a_lo), r.q(b_lo)), ("in", "in"), "the low rows stand")
 
 
 def main():
