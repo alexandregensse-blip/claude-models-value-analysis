@@ -12,7 +12,10 @@ An axis whose model data (the rows it sees, after preparation) and model code ar
 whose cached fit converged, is not refitted: adding a quality-only source does not redo the cost axis. `--all` refits
 both axes regardless. Each axis' draws stay on disk (.stan/runs, lqm.RunStore) until its sampling inputs change: a fit
 stopped part-way (out of memory, container restarted) resumes from them, and a change to the code that reads the draws
-is summarised again without sampling. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
+is summarised again without sampling. Its data are the build's (data/build/, written by python3 data/build.py
+--fit-models catalog): fit-quality.csv for quality, fit-cost.csv for cost, the group-keyed catalog maps resolved through
+group-map.json and group-setups.json as data/build_lqm.py does (fit_maps); `--dry` builds these inputs and prints them
+without the checks or sampling. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
 same runs under two metrics are reported; a 3-minute smoke fit of the quality axis must reach R̂ ≤ 1.5); `--no-smoke`
 skips the smoke fit. The two axes run one after the other (lqm.PARALLEL_AXES)."""
 import hashlib, json, os, sys, time
@@ -22,12 +25,20 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 import lqm
 from catalog import FILES as CATALOG_FILES, MODEL_ORDER, MODEL_LINE
+sys.path.insert(0, os.path.join(ROOT, "data"))
+import build_lqm
 lqm.LINE = MODEL_LINE
 
 FIT_CACHE = os.path.join(HERE, "fit-cache.json")
 SEED = 11
 STAN = os.path.relpath(lqm.STAN_FILE, ROOT)                          # model/lqm_ext2.stan unless LQM_MODEL says
-INPUTS = ["raw-data.csv", *CATALOG_FILES, "model/lqm.py", STAN, "model/fit.py"]
+# The build's products (python3 data/build.py --fit-models catalog): one table per axis, and the group map through which
+# the group-keyed catalog maps (composites, families) reach the fit groups (data/build_lqm.py, fit_maps)
+BUILD = "data/build"
+TABLES = {"quality": f"{BUILD}/fit-quality.csv", "cost": f"{BUILD}/fit-cost.csv"}
+GROUP_MAPS = [f"{BUILD}/group-map.json", f"{BUILD}/group-setups.json"]
+INPUTS = [TABLES["quality"], TABLES["cost"], *GROUP_MAPS, *CATALOG_FILES, "data/build_lqm.py", "model/lqm.py", STAN,
+          "model/fit.py"]
 
 
 def fingerprint(inputs=INPUTS, root=ROOT):
@@ -54,10 +65,15 @@ def axis_fingerprint(data):
 AXES = (("cost", "cost_usd"), ("quality", "score"))
 
 
+def load_axis(axis, field=None):
+    """lqm.load on the axis' fit table, the group-keyed catalog maps resolved through the build's group map."""
+    return build_lqm.load_table(lqm, axis, MODEL_ORDER, os.path.join(ROOT, BUILD))
+
+
 def fit_axis(axis, field, old, refit_all=False):
     """One axis: (values, diagnostics), or the cached ones when its model data and code are unchanged."""
     t = time.time()
-    groups, report, republished = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field=field)
+    groups, report, republished = load_axis(axis, field)
     afp = axis_fingerprint(lqm.stan_data(groups, axis)[0])
     od = old.get("diagnostics", {}).get(axis, {})
     if not refit_all and od.get("data_fingerprint") == afp and od.get("converged") and axis in old:
@@ -118,9 +134,34 @@ def main(refit_all=False, smoke=True):
         sys.exit("!! the fit is incomplete: model/fit-cache.json holds the finished axes only (partial)")
 
 
+def dry():
+    """--dry: builds the fit's inputs as a fit would — the fingerprint of INPUTS, each axis' groups and rows from its
+    table, its prepared data and data fingerprint, and whether the cached fit would be kept — without the checks of
+    precheck.py, without sampling, and without writing the cache."""
+    try:
+        old = json.load(open(FIT_CACHE))
+    except (OSError, ValueError):
+        old = {}
+    print(f"inputs ({len(INPUTS)} files): {', '.join(INPUTS[:4])}, the catalogue, {', '.join(INPUTS[-4:])}")
+    print(f"fingerprint {fingerprint()} (cache: {old.get('fingerprint', 'none')})")
+    for axis, field in AXES:
+        groups, report, republished = load_axis(axis, field)
+        data, _ = lqm.stan_data(groups, axis)
+        afp = axis_fingerprint(data)
+        od = old.get("diagnostics", {}).get(axis, {})
+        couples = {x["couple"] for g in groups.values() for x in g["rows"]}
+        print(f"{axis}: {TABLES[axis]} → {len(groups)} groups, {sum(len(g['rows']) for g in groups.values())} rows, "
+              f"{len(couples)} couples, {len({x['publisher'] for g in groups.values() for x in g['rows']})} publishers; "
+              f"set aside {dict(report)}; {len(republished)} republished series; data fingerprint {afp[:16]}… "
+              + ("(unchanged: the cached fit would be kept)" if od.get("data_fingerprint") == afp and od.get("converged")
+                 else "(changed: this axis would be refitted)"))
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
-    if "--axis" in args:                                             # one axis, in a process of its own (main())
+    if "--dry" in args:
+        dry()
+    elif "--axis" in args:                                             # one axis, in a process of its own (main())
         a = args[args.index("--axis") + 1]; dest = args[args.index("--axis") + 2]
         try:
             old = json.load(open(FIT_CACHE))

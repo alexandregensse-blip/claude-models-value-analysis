@@ -22,13 +22,18 @@
      three minutes; a chain left in another region shows there as R̂ far above 1. Above SMOKE_RHAT the full fit is
      not started.
 
-Run from the repository root:  .stan/venv/bin/python model/precheck.py"""
-import collections, csv, itertools, os, sys
+Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4 and 6 run lqm.load
+on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does.
+
+Run from the repository root:  .stan/venv/bin/python model/precheck.py [--smoke]"""
+import collections, csv, itertools, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path[:0] = [HERE, os.path.join(ROOT, "data")]
-import lqm
+import lqm, build_lqm
+
+DATA = os.path.join(build_lqm.BUILD, "data.csv")             # the build's public data file: every measure, its status
 
 SMOKE_RHAT = 1.5
 DUP_REL = 0.01
@@ -36,9 +41,28 @@ MEMORY_PEAKS = os.path.join(HERE, "memory-peaks.json")
 MEMORY_SHARE = 0.9
 
 
-def rows(path=os.path.join(ROOT, "raw-data.csv")):
-    with open(path, newline="") as f:
-        return [r for r in csv.DictReader(l for l in f if not l.startswith("#")) if not r["group"].startswith("#")]
+def in_fit(r):
+    """A data.csv row the fit reads: `in` on either axis (a legacy row: `legacy:in`)."""
+    return any((r.get(k) or "").startswith(("in", "legacy:in")) for k in ("status_quality", "status_cost"))
+
+
+def rows(path=DATA):
+    """The rows of the build's data.csv that the fit reads (in on either axis): an out measure is not read by the fit,
+    and its errors do not stop it. Groups are data.csv's (the quality group; a cost subset's fit group adds '~c<n>')."""
+    with open(path, newline="", encoding="utf-8") as f:
+        return [r for r in csv.DictReader(l for l in f if not l.startswith("#"))
+                if r["group"] and not r["group"].startswith("#") and in_fit(r)]
+
+
+def data_group(fit_group):
+    """A fit table's group (lqm's split '~2' and the cost subset '~c1' included) → its data.csv group."""
+    return re.sub(r"(~c\d+)?(~\d+)?$", "", fit_group)
+
+
+def load(axis):
+    """lqm.load on the axis' fit table through the build's group map, as model/fit.py reads it."""
+    from catalog import MODEL_ORDER
+    return build_lqm.load_table(lqm, axis, MODEL_ORDER)
 
 
 def label_errors(data):
@@ -60,8 +84,8 @@ def twin_metrics(data):
     costs, whose scores do."""
     from catalog import MODEL_ORDER
     known = set()
-    for field in ("cost_usd", "score"):
-        known |= {frozenset(p[:2]) for p in lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field=field)[2]}
+    for axis in ("cost", "quality"):                                 # the fit tables' republications, on data.csv's groups
+        known |= {frozenset(map(data_group, p[:2])) for p in load(axis)[2]}
     by = collections.defaultdict(lambda: collections.defaultdict(dict))
     for r in data:
         for col in ("cost_usd", "score"):
@@ -126,8 +150,7 @@ def discordant_twins(data, order):
 
 def smoke(seed=11):
     """Short quality fit; returns (R̂ max, worst parameters)."""
-    from catalog import MODEL_ORDER
-    groups, _, _ = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field="score")
+    groups, _, _ = load("quality")
     data, _ = lqm.stan_data(groups, "quality")
     post = lqm.sample_once(data, "quality", dict(lqm.SAMPLER["quality"], warmup=500, samples=500), seed)
     diag, _ = lqm.diagnostics(post)
@@ -145,16 +168,15 @@ def memory_limit():
 def memory_check():
     """(estimated peak in bytes, limit in bytes, detail) of the next fit; None when no peak was measured yet."""
     import json
-    from catalog import MODEL_ORDER
     try:
         peaks = json.load(open(MEMORY_PEAKS))
     except (OSError, ValueError):
         return None
     est = {}
-    for axis, field in (("cost", "cost_usd"), ("quality", "score")):
+    for axis in ("cost", "quality"):
         if axis not in peaks:
             continue
-        groups = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field=field)[0]
+        groups = load(axis)[0]
         n = sum(len(g["rows"]) for g in groups.values())
         st = lqm.SAMPLER[axis]
         draws = st["chains"] * (st["warmup"] + st["samples"])

@@ -4,7 +4,7 @@ findings (data/legacy.py), built (data/build.py --fit-models catalog), must give
 the same groups, the same rows in the same order (every field lqm.load computes), the same report and the same
 republished list, on both axes. Each fit-table row is also checked to be a line of the CSV, byte for byte.
 
-    python3 data/tests/acceptance.py [raw-data.csv]       # default /work/.wt-px/raw-data.csv, else the repository's
+    python3 data/tests/acceptance.py [raw-data.csv]       # default: the repository's raw-data.csv (the frozen legacy input)
     python3 data/tests/acceptance.py CSV --keep DIR        # keep the converted findings and the build in DIR
 Exit 0 when identical; otherwise the differences are listed.
 """
@@ -45,7 +45,7 @@ def compare(axis, a, b, out):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    default = "/work/.wt-px/raw-data.csv" if os.path.isfile("/work/.wt-px/raw-data.csv") else os.path.join(REPO, "raw-data.csv")
+    default = os.path.join(REPO, "raw-data.csv")         # v2026.10.21 repriced (sha256 489b5d48…), = /work/.wt-px's
     ap.add_argument("csv", nargs="?", default=default)
     ap.add_argument("--keep", help="keep the converted findings and the build here")
     ap.add_argument("--registry", help="build against this registry (e.g. data/registry; the build supplies the "

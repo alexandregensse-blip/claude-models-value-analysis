@@ -95,6 +95,22 @@ def fit_maps(lqm, build_dir):
         lqm.COMPOSITES, lqm.FAMILY_OF = saved
 
 
+BUILD = os.path.join(REPO, "data", "build")                 # the committed build (data/build.py's default --out)
+
+
+def table(axis, build_dir=BUILD):
+    """The fit table of an axis ('quality' or 'cost') in a build folder."""
+    return os.path.join(build_dir, {a: n for a, _, n in AXES}[axis])
+
+
+def load_table(lqm, axis, models, build_dir=BUILD, path=None):
+    """lqm.load on an axis' fit table — or on a table derived from it (path: rows removed, synthetic values) — with
+    the group-keyed maps resolved through the build's group map (fit_maps). → lqm.load's (groups, report, republished)."""
+    field = {a: f for a, f, _ in AXES}[axis]
+    with fit_maps(lqm, build_dir):
+        return lqm.load(path or table(axis, build_dir), models, field=field)
+
+
 def base_groups(gm):
     """data.csv group → base group: a data.csv row carries its quality group name; a cost-only row's fit group adds
     '~c<n>' to it. A group in no fit table maps to itself."""

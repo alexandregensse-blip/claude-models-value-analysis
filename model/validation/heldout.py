@@ -7,13 +7,13 @@ consolidation (ratio_baseline.py) times the group's mean ratio level.
 Usage: .stan/venv/bin/python model/validation/heldout.py [WARMUP] [SAMPLES]"""
 import collections, csv, math, os, random, sys
 import numpy as np
-HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, os.path.join(HERE, ".."))
-import lqm, ratio_baseline as RB
+HERE = os.path.dirname(os.path.abspath(__file__)); sys.path[:0] = [os.path.join(HERE, ".."), os.path.join(HERE, "..", "..", "data")]
+import lqm, build_lqm, ratio_baseline as RB
 from catalog import MODEL_ORDER
 WARM, SAMP = (int(x) for x in (sys.argv[1:3] + ["1000", "1000"][len(sys.argv[1:3]):]))
-DATA = os.path.join(lqm.ROOT, "raw-data.csv"); MODELS = list(MODEL_ORDER)
+DATA = build_lqm.table("quality"); MODELS = list(MODEL_ORDER)          # the quality fit table (data/build)
 rows = list(csv.DictReader(open(DATA))); hdr = list(rows[0].keys())
-G0, _, _ = lqm.load(DATA, MODELS)
+G0, _, _ = build_lqm.load_table(lqm, "quality", MODELS)
 eligible = {g for g, G in G0.items() if "~" not in g and not any(h.startswith(g + "~") for h in G0)
             and G["kind"] == "logit" and len({x["couple"] for x in G["rows"]}) >= 4}
 data = [r for r in rows if r["group"] in eligible and r["model"] in MODEL_ORDER and r["effort"] in lqm.EFFORTS
@@ -24,7 +24,7 @@ keys = sorted(cells); random.Random(5).shuffle(keys)
 err, cover = collections.defaultdict(list), []
 for f in range(5):
     hold = set(keys[f::5])
-    tmp = os.path.join(HERE, "heldout_tmp"); os.makedirs(tmp, exist_ok=True); path = os.path.join(tmp, "raw-data.csv")
+    tmp = os.path.join(HERE, "heldout_tmp"); os.makedirs(tmp, exist_ok=True); path = os.path.join(tmp, "fit-quality.csv")
     with open(path, "w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=hdr); w.writeheader()
         for r in rows:
@@ -36,7 +36,7 @@ for f in range(5):
         if (g, c) not in hold and c in Q:
             s = sum(RB.num(x["score"]) for x in rs) / len(rs)
             if s > 0: level[g].append(math.log(s) - math.log(Q[c]))
-    G, _, _ = lqm.load(path, MODELS)
+    G, _, _ = build_lqm.load_table(lqm, "quality", MODELS, path=path)
     # the production sampler: nutpie, restarted on CmdStan from the production fit's last draws if a chain is stuck
     mcmc, maps = lqm.fit(G, "quality", seed=f, save_inits=False, settings=dict(warmup=WARM, samples=SAMP))
     todo = [(g, c) for (g, c) in sorted(hold) if g in G and c in maps["ci"] and c in Q and level[g]]

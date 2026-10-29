@@ -15,10 +15,9 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 def pointwise(axis, thin=None, max_draws=2000):
     import numpy as np
     sys.path[:0] = [os.path.join(ROOT, "model"), os.path.join(ROOT, "data")]
-    import lqm
+    import lqm, build_lqm
     from catalog import MODEL_ORDER
-    field = "score" if axis == "quality" else "cost_usd"
-    groups, _, _ = lqm.load(os.path.join(ROOT, "raw-data.csv"), MODEL_ORDER, field=field)
+    groups, _, _ = build_lqm.load_table(lqm, axis, MODEL_ORDER)     # the axis' fit table, as model/fit.py reads it
     data, maps = lqm.stan_data(groups, axis)
     st = lqm.SAMPLER[axis]
     key = lqm.sampling_key(data, axis, st, 11)
