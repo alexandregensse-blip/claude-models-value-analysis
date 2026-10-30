@@ -249,3 +249,12 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
 - Rule ids `default-bridged-gap` (a default identical on both sides of a span without captures covers it; the span's
   basis `bridged` is computed by the build, never written in models.json) and `cost-stated-prices` (vocab `rule_id`,
   registry rules.json); flags `default-bridged` and `cost-stated-prices` on the measures they decide.
+
+## Added on 30 Oct
+- Rule id `cost-uniform-factor-tiers` (vocab `rule_id`, registry rules.json; the maintainer, 30 Oct) and the flag of
+  the same name on the measures it decides: a cost whose long-context tiers cannot be resolved is re-priced by one
+  factor common to every class and tier of the base vector over every price vector of its price date (data/BUILD.md).
+  No schema change: it reads `classes` and `long_context` of prices.json as before.
+- prices.json: the standard maker-API entries of gpt-5.6-luna and gpt-5.6-terra from 9 Jul carry the long-context
+  tier (over 272K input tokens) that their first evidence's quote shows ('Long context' columns of the 9 Jul page:
+  luna 2 / 0.2 / 9, terra 5 / 0.5 / 22.5 for input / cache read / output); it was missing.

@@ -998,6 +998,54 @@ def cost_long_context():
 
 
 @test
+def cost_uniform_factor_across_tiers():
+    # the maintainer, 30 Oct (GPT-5.6 Luna: 1 / 6 / 0.1 on 9 Jul, "costs 80% less" from 30 Jul, long-context tier the
+    # same × 0.2): tiers that cannot be resolved (no requests or per-call sizes) do not matter when one factor holds on
+    # every class and tier of the base vector → cost × factor, in the part's re-priced subset (no subset of its own)
+    lc = lambda i, o, c: [{"threshold_input_tokens": 272000, "classes": {"input": i, "output": o, "cache-read": c}}]  # noqa
+    new = ({"input": 0.2, "output": 1.2, "cache-read": 0.02}, lc(0.4, 1.8, 0.04))
+
+    def scenario(olds, tokens={"tokens-out": "590000"}):
+        """olds: [(from, to, classes, long_context)] before the base price of 1 Aug, for ma; mb has one price."""
+        sc = base()
+        for frm, to, c, t in olds:
+            sc.prices["prices"].append(price("ma", frm, to, c, **({"long_context": t} if t else {})))
+        sc.prices["prices"].append(price("ma", "2026-08-01", "2026-10-01", new[0], long_context=new[1]))
+        sc.prices["prices"].append(price("mb", "2026-01-01", "2026-10-01", {"input": 1, "output": 5}))
+        s = sc.source("a", published="2026-07-20")
+        m1 = sc.m(s, model="ma", effort=[LOW], cost="24", tokens=tokens)
+        m2 = sc.m(s, model="ma", effort=[HIGH], cost="48", tokens=tokens)
+        m3 = sc.m(s, model="mb", effort=[LOW], cost="3.0")
+        return sc, (m1, m2, m3)
+    sc, (m1, m2, m3) = scenario([("2026-01-01", "2026-07-31", {"input": 1, "output": 6, "cache-read": 0.1},
+                                  lc(2, 9, 0.2))])
+    r = sc.run()
+    b = r[m1]["fields"]["cost"]["base"]
+    eq((b["rule"], round(b["value"], 9)), ("cost-uniform-factor-tiers", 4.8), "24 × 0.2, the tiers unresolved")
+    eq(round(b["prec"] / r[m1]["fields"]["cost"]["prec"], 9), 0.2, "the uncertainty × the factor")
+    eq(("cost-uniform-factor-tiers" in r[m1]["flags"], "cost-unrepriced" in r[m1]["flags"]), (True, False), "flagged")
+    eq((r.c(m1), r.c(m3), r[m1]["cost_group"] == r[m3]["cost_group"]), ("in", "in", True),
+       "one re-priced subset with mb (a group of two models, not one of its own)")
+    eq(r.rows("fit-cost.csv", model="ma", effort="high")[0]["cost_usd"], "9.6", "48 × 0.2 in the table")
+    # negative controls: a non-uniform change (the tier's cache read only); the base tier missing on the old side; two
+    # prices over the price date at different factors (× 0.2 and × 0.1); each keeps today's path (own subset / band)
+    for olds, what in (
+            ([("2026-01-01", "2026-07-31", {"input": 1, "output": 6, "cache-read": 0.1}, lc(2, 9, 0.3))],
+             "non-uniform change"),
+            ([("2026-01-01", "2026-07-31", {"input": 1, "output": 6, "cache-read": 0.1}, None)], "tiers differ"),
+            ([("2026-01-01", "2026-06-30", {"input": 1, "output": 6, "cache-read": 0.1}, lc(2, 9, 0.2)),
+              ("2026-07-01", "2026-07-31", {"input": 2, "output": 12, "cache-read": 0.2}, lc(4, 18, 0.4))],
+             "two factors over the price date")):
+        sc, (m1, m2, m3) = scenario(olds)
+        r = sc.run()
+        c = r[m1]["fields"]["cost"]
+        eq((c["base"], "cost-unrepriced" in r[m1]["flags"], "cost-uniform-factor-tiers" in r[m1]["flags"]),
+           (None, True, False), f"{what}: not re-priced")
+        eq(r[m1]["cost_group"] != r[m3]["cost_group"], True, f"{what}: its own subset")
+        eq("not re-priceable" in c["reprice_detail"], True, f"{what}: why")
+
+
+@test
 def cost_retired_last_list_price():
     sc = base()
     for k in ("ma", "mb"):

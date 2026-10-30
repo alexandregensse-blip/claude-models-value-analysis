@@ -2979,7 +2979,8 @@
     "run-before-shutdown",
     "complement-of-percent",
     "default-bridged-gap",
-    "cost-stated-prices"
+    "cost-stated-prices",
+    "cost-uniform-factor-tiers"
    ],
    "x-terms": {
     "alias-by-date": {
@@ -3121,6 +3122,10 @@
     "cost-stated-prices": {
      "kind": "deduction",
      "note": "a cost whose price date no registered price covers, when the source states the class prices it applied (price-table facts whose term is a price class): those prices are its price vector, re-priced to the registered base price as a registered vector would be; flag cost-stated-prices (the maintainer, 29 Oct)"
+    },
+    "cost-uniform-factor-tiers": {
+     "kind": "deduction",
+     "note": "a cost whose long-context tiers cannot be resolved (requests and per-call sizes not stated), when every price vector over its price date relates to the base vector by one factor on every class and tier of the base vector (the same tiers on both sides): cost × that factor, its uncertainty × the factor, in the part's re-priced subset; flag cost-uniform-factor-tiers (the maintainer, 30 Oct)"
     }
    }
   },

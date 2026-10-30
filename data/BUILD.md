@@ -137,7 +137,7 @@ The fit tables carry these confound flags:
 - `vendor-reported:<Org>` for an `evaluated-by` fact naming the model's maker, else `evaluated-by:<value>`;
 - `prev=<value> (<measure>)` on a row that replaced an earlier one;
 - the build's own flags, which `lqm` ignores: `cost-method-assumed-single`, `cost-unrepriced`,
-  `cost-base-price:<rule>`, `base-last-list-price`, `cap`, `composite-residual-refused:scale`, `stale-decision:<id>`.
+  `cost-uniform-factor-tiers`, `cost-base-price:<rule>`, `base-last-list-price`, `cap`, `composite-residual-refused:scale`, `stale-decision:<id>`.
 
 ## The coordinator's build rules (23 Oct)
 
@@ -581,3 +581,33 @@ vals.ai: each board's `Input / Output Cost` (older layout: `Cost In / Out`) cell
 quoted with the row's visible text up to the cell, cited by every cost measure of the row: 4,112 facts in 51 sources, 2,056 of vals.ai's 2,091 cost measures (24 rows not on the page, 11 models on several rows of one board, left without). In the build of 29 Oct the rule prices 404 costs, 278 of them come into the fit (245 by a uniform factor, 33 at equal prices; the others are single couples or composites), among them 25 of vals.ai's 26 qwen3.8-27b costs; lqm.load cost 922 groups / 8,680 rows (before 923 / 8,403). Over the price dates the registry covers, the stated vector equals the registered one for 712 costs and differs for 65 (Gemini 3.8 Flash and Gemini 4 Argon shown at their list price during a promotion, DeepSeek V4 Flash 0731, GPT-5.6 Sol): there the registered price decides. A cost stated
 this way prices input and output only; a run's cache reads (vals.ai's token totals carry them, outside the measure's
 usage slot) are taken at the ratio of those two classes.
+
+## Added on 30 Oct
+
+**A uniform factor across long-context tiers (the maintainer, 30 Oct).** A cost whose model has long-context tiers
+(on the base vector or on a vector over its price date) was re-priced only once `requests` and per-call sizes told
+which side of the threshold its calls fell; otherwise it stayed unrepriced (`long-context tiers: requests and per-call
+sizes not stated: not re-priceable`) and formed a subset of its own model, so only its own efforts' ratios counted —
+groups of one model, whose offsets mixed badly in the cost fit of 29–30 Oct. When every price vector over the price
+date relates to the base vector by one common factor on every class of the base vector, its tiers included
+(`exact_factor`: the same tiers on both sides, every class of the base priced, one ratio throughout), the cost at the
+base price is exactly cost × that factor whatever the token mix and whichever side of a threshold the calls fell: the
+base value is cost × factor, the uncertainty × the factor, rule and flag `cost-uniform-factor-tiers`, and the measure
+joins the re-priced subset of its part. Equal vectors stay `cost-publisher-figure` (× 1); several vectors at different
+factors to the base (a launch price and the cut over one price date; Gemini 3.6 Flash's list price and its promotion)
+and changes in some classes only (Sonnet 5.5's and Grok 4.5's cache read, GPT-5.6 Sol's promotion) are not exact and
+keep the unrepriced path (own subset, `cost-price-band`). A promotion is never the base, as before. Without tiers
+nothing changes: the existing uniform factor (`cost-uniform-factor`) already applied there. Test
+`cost_uniform_factor_across_tiers` (negative controls: a change in the tier's cache read only; the tier missing on the
+old side; two prices over the price date at × 0.2 and × 0.1).
+
+The registry's 9 Jul standard entries of GPT-5.6 Luna and Terra lacked the long-context tier their own evidence quotes
+(the 9 Jul page's 'Long context' columns: luna 2 / 0.2 / 9, terra 5 / 0.5 / 22.5); added, so both changed on 30 Jul by
+× 0.2 and × 0.8 on every class and tier. In the build of 30 Oct the rule re-prices 219 costs (luna 109 at × 0.2, terra
+110 at × 0.8; 212 were in the fit in single-model subsets, 7 single couples), all in 24 re-priced groups with other
+models; the 40 single-model groups of luna and terra they formed are gone (oai56-lifesci: ~c1 luna, ~c2 terra and ~c3
+gpt-5.4 / 5.5 / 5.6-sol are one group). With the tier registered, 286 luna and terra costs whose price date spans the
+30 Jul cut (two vectors, × 1 and × 0.2 or × 0.8 to the base: not exact) pass today's rule for a uniform change over the
+interval and come in as subsets of their own model (before: `out:cost-not-comparable`, the vectors' tiers differed):
+53 such groups. lqm.load cost 936 groups / 8,966 rows / 275 couples (before 922 / 8,680 / 275), single-model cost
+groups 285 (before 272); quality unchanged (1,607 / 17,714 / 334, the same prepared data).

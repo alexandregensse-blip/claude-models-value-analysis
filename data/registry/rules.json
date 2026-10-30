@@ -460,6 +460,21 @@
    "date": "2026-10-29",
    "decided_by": "the maintainer (29 Oct: 'if the source gives the price, where is the problem?')",
    "ref": "data/BUILD.md, Added on 29 Oct, later"
+  },
+  {
+   "id": "cost-uniform-factor-tiers",
+   "kind": "deduction",
+   "statement": "A cost that stays unrepriced only because its long-context tiers cannot be resolved (requests and per-call sizes not stated) is re-priced when every price vector over its price date relates to the base vector by one common factor on every class it can have used (the classes and long-context tiers of the base vector; the tiers the same on both sides): cost × that factor, whatever the token mix. It joins the part's re-priced subset instead of a subset of its own model. Several vectors at different factors, or a change in some classes only, keep the unrepriced path (own subset, cost-price-band).",
+   "inputs": [
+    "cost",
+    "prices.json (classes and long_context)"
+   ],
+   "output": "cost at the base price (computed)",
+   "conditions": "the same factor for every class and tier of the base vector and every price vector over the price date; a promotion is never the base",
+   "precision": "the cost's precision × the factor",
+   "date": "2026-10-30",
+   "decided_by": "the maintainer (30 Oct: GPT-5.6 Luna and Terra on OpenAI's launch page, 80 % and 20 % less from 30 Jul on every class)",
+   "ref": "data/BUILD.md, Added on 30 Oct; docs/DATA-PIPELINE.md §5.3 step 1"
   }
  ]
 }

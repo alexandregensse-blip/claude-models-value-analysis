@@ -258,6 +258,15 @@ components' costs, only on one unit and one run; otherwise the composite's cost 
    the source's own cost once its formula reproduces it from the run's tokens (`cost-delta-on-source`; per-request
    long-context tiers only when `requests` and per-call sizes are known); a uniform factor (`cost-uniform-factor`); the
    class-median ratio (`cost-class-ratio`); otherwise the cost is **unrepriced**, at its own basis.
+   *Uniform factor across tiers (the maintainer, 30 Oct 2026).* When the tiers cannot be resolved (no `requests` or
+   per-call sizes), a cost is still exact if every price vector over its price date relates to the base vector by one
+   common factor on every class it can have used — the classes and long-context tiers of the base vector, the tiers the
+   same on both sides (a promotion is never the base): its base value is cost × factor, its uncertainty × the factor,
+   it joins the re-priced subset of its part (rule and flag `cost-uniform-factor-tiers`) and forms no subset of its
+   own. Several vectors at different factors to the base, or a change in some classes only (Sonnet 5.5's cache read on
+   7 Oct), are not exact and keep the unrepriced path below (own subset, or `cost-price-band`). First case: GPT-5.6
+   Luna and Terra on OpenAI's launch page (1 / 6 / 0.1 and 2.5 / 15 / 0.25 on 9 Jul; "80 % / 20 % less" from 30 Jul on
+   every class and tier: × 0.2, × 0.8).
    `price_date` = the date of the prices the source applied: the run date for a billed spend; the capture date for a
    source that recomputes at its current price (AA); the stated date for a list estimate, else [run lower bound,
    publication].

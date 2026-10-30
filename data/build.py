@@ -1725,6 +1725,22 @@ def uniform_ratio(new, old):
     return rs[0] if max(rs) - min(rs) <= 1e-9 * max(abs(rs[0]), 1) else None
 
 
+def exact_factor(base, vecs):
+    """The one factor k with base = k × v on every class of the base vector, its long-context tiers included (the same
+    tiers on both sides), for every vector v that could have applied over the price date; else None. The cost at the
+    base price is then cost × k whatever the run's token mix and whichever side of a threshold its calls fell (the
+    maintainer, 30 Oct)."""
+    ks = []
+    for v in vecs:
+        if tiered(v) != tiered(base) or not base or any(not v.get(c) for c in base):
+            return None
+        rs = [base[c] / v[c] for c in base]
+        if max(rs) - min(rs) > 1e-9 * max(rs):
+            return None
+        ks.append(rs[0])
+    return ks[0] if ks and max(ks) - min(ks) <= 1e-9 * max(ks) else None
+
+
 def class_ratios(new, old):
     """The per-class price ratios new/old over the classes both price, or None."""
     ks = [k for k in new if new.get(k) is not None and old.get(k) is not None]
@@ -1869,6 +1885,15 @@ def reprice(M, C, key):
         eff_old = [effective_classes(v, tok) for v in vecs]
         why = why or next((w for _, w in eff_old if w), "")
         if why:
+            # the tiers cannot be resolved, but one factor on every class and tier needs no token mix (30 Oct)
+            k = exact_factor(base, vecs)
+            if k is not None:
+                M.rule("cost-uniform-factor-tiers")
+                M.flags.append("cost-uniform-factor-tiers")
+                C["base"] = dict(value=cost * k, prec=prec * k if prec is not None else None,
+                                 rule="cost-uniform-factor-tiers",
+                                 detail=f"factor {k:.6g} on every class and long-context tier ({why})")
+                return
             C["reprice_detail"] = why + ": not re-priceable"
             return
         base, vecs = eff_base, [c for c, _ in eff_old]
