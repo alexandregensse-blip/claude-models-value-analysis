@@ -248,19 +248,35 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
 - **Samplers.** nutpie (Seyboldt et al.) on both axes, whose adaptation of the mass matrix needs fewer steps here:
-  4 chains × (1,000 warm-up + 3,000 draws), target acceptance 0.9. While the criteria are not met, the same chains
-  continue within the sampling process, checked every 1,000 draws on the draws up to the check, up to 9,000 more; the
-  run stops at the first check that meets them and keeps exactly the draws up to it. Before 21 Oct 2026 the quality
-  axis drew new batches of independent chains instead (up to four), and the cost axis was sampled with CmdStan from
-  the previous fit's last draws. On the cost axis of the data of 20–21 Oct, CmdStan reached its step limit on almost
-  every draw (about 1,000 leapfrog steps, 5 divergent transitions, not converged in 2 h); nutpie took about 530 steps
-  per draw, with no divergence, and drew twice the effective draws per second on the slowest parameter. A second
-  batch of random starts left two of its four chains in a remote region (the Student-t's ν at its bound, the effects'
-  scales 10 to 25 times their value elsewhere, no data in particular to blame): continuing the chains that have
-  converged avoids drawing new starts. A chain left in another region (R̂ above 1.05) restarts its axis on CmdStan
-  from the previous fit's last draws, 4 × (500 warm-up + 4,500 draws), continued by slices of 1,500 draws up to 4,500
-  more. A run continues only while at most 0.03 % of its draws diverged. Every limit is counted in draws, not in
-  seconds, and a check reads only the draws up to it, so that a loaded machine does not change the fit.
+  6 chains × (600 warm-up + 1,800 draws), target acceptance 0.9 (since 29 Oct 2026; 4 × (1,000 + 3,000) before).
+  While the criteria are not met, the same chains continue within the sampling process, checked every 900 draws on the
+  draws up to the check, up to 16,200 more; the run stops at the first check that meets them and keeps exactly the
+  draws up to it. Before 21 Oct 2026 the quality axis drew new batches of independent chains instead (up to four), and
+  the cost axis was sampled with CmdStan from the previous fit's last draws. On the cost axis of the data of 20–21 Oct,
+  CmdStan reached its step limit on almost every draw (about 1,000 leapfrog steps, 5 divergent transitions, not
+  converged in 2 h); nutpie took about 530 steps per draw, with no divergence, and drew twice the effective draws per
+  second on the slowest parameter. A second batch of random starts left two of its four chains in a remote region
+  (the Student-t's ν at its bound, the effects' scales 10 to 25 times their value elsewhere, no data in particular to
+  blame): continuing the chains that have converged avoids drawing new starts.
+- **A chain in a far region** (the maintainer's rule of 30 Oct 2026). nutpie cannot be given starting points, and a
+  random start can leave a chain far from the others. When R̂ exceeds 1.05, each chain's median log-density over its
+  last 200 draws is compared with the median of the other chains' medians: a chain more than max(300, 5 × their
+  spread) below is in a far region (the spread is 1.4826 × the median absolute deviation of the other chains'
+  medians, which a second far chain does not widen). Within one region a draw's log-density varies by about √(d/2), d
+  the number of unconstrained parameters (about 55 on the cost axis, 74 on quality); 300 is four to five such
+  deviations. The far chain's draws are dropped and it alone restarts, on CmdStan without warm-up, from the last draw
+  of a good chain with that chain's adapted step size and metric, up to the length of the others; the good chains'
+  draws are kept, and all then continue together. This happens once per run: a chain far again stops the run,
+  unconverged. Without a far chain, an R̂ above 1.05 (slow mixing) continues the chains like any unconverged run.
+  Until 30 Oct an R̂ above 1.05 threw every draw away and sampled the axis again on CmdStan from the previous fit's
+  last draws — a cold start in practice, once the data's dimensions had changed. On 29–30 Oct the cost axis reached
+  R̂ 1.081 at 1,800 draws with its six chains in one region (median log-densities 1,892–1,916; one maker's scale
+  mixing slowly between two modes), was restarted, and ended at R̂ 1.19, bulk ESS 22 and 41 divergent transitions.
+  Checked on the far chains seen (29 Oct: −2,900 against +2,050; −27,300 and +450 against +1,880; quality 29–30 Oct:
+  −69,800 against −5,100: all flagged) and on the runs in one region (none flagged).
+- A run continues only while at most 0.03 % of its draws diverged (a far chain's divergent draws go with it). Every
+  limit is counted in draws, not in seconds, and a check reads only the draws up to it, so that a loaded machine does
+  not change the fit.
 - **Stored draws.** Each axis' draws are written to disk as they are drawn (`.stan/runs`, outside git) and kept until
   that axis' sampling inputs change — the Stan program, the axis' data, the seed, the sampler settings and the code
   that samples. A fit stopped part-way, by the machine's memory limit or a restart, resumes from them: each chain
@@ -299,7 +315,7 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 | §5 publication | measured by ≥ 2 publishers | one publisher's figures cannot be cross-checked |
 | §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
 | §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
-| §5 sampling | 4 chains × (1,000 + 3,000), checked every 1,000 draws up to 12,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 restarts on CmdStan | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
+| §5 sampling | 6 chains × (600 + 1,800), checked every 900 draws up to 18,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 continues the chains, and a chain whose median log-density (last 200 draws) is more than max(300, 5 × the others' spread) below the others' restarts alone from a good chain's last draw (30 Oct 2026) | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
 | §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
 
 ### Software and references

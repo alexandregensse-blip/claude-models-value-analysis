@@ -130,8 +130,8 @@ uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r model/req
 .stan/venv/bin/python model/fit.py      # → model/fit-cache.json, then python3 site/build.py
 ```
 
-The quality axis is sampled with nutpie, the cost axis with CmdStan started from the previous fit's last draws
-(`.stan/inits-cost.json`, written by each fit); about a quarter of an hour per axis on four cores.
+Both axes are sampled with nutpie; a chain left in a far region restarts alone on CmdStan from a good chain's last draw
+(30 Oct 2026; `model/README.md`).
 
 ## Limitations
 

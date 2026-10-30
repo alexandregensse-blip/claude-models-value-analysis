@@ -34,15 +34,16 @@ cost 923 groups, 8,403 rows, 271 couples (`fit.py --dry`). `raw-data.csv` is no 
 .stan/venv/bin/python model/fit.py
 ```
 
-Quality: nutpie, 4 chains × (1,000 + 12,000). Cost: CmdStan, 4 chains × (500 + 4,500), started from the last draws of
-the previous fit (`.stan/inits-cost.json`; 1,000 warm-up iterations without it). The model is compiled with
-`stanc --O1` and `STAN_NO_RANGE_CHECKS`.
+Both axes: nutpie, 6 chains × (600 + 1,800), continued in the sampling process by slices of 900 draws up to 16,200
+more until the criteria hold. The model is compiled with `stanc --O1` and `STAN_NO_RANGE_CHECKS`.
 
-Each axis is checked against the validity criteria as soon as it is sampled, within a budget of 10 minutes per axis:
-a chain left in another region (R̂ > 1.05) restarts the axis on CmdStan from the previous fit's last draws; too few
-effective draws continue the same chains (last state, adapted step size and metric, no new warm-up) until the
-criteria hold or the budget is spent. An axis whose prepared data and model code are unchanged since the cached,
-converged fit is kept as it is (`--all` refits both).
+A run stopped part-way resumes from its stored draws, each chain continued on CmdStan from its last draw with its
+adapted step size and metric. A chain left in a far region (R̂ > 1.05 and its median log-density more than
+max(300, 5 × the others' spread) below the other chains', `lqm.FAR`) loses its draws and restarts alone on CmdStan
+from a good chain's last draw with that chain's adapted state; the good chains are kept (rule of 30 Oct 2026, which
+replaced the restart of the whole axis on CmdStan from the previous fit's draws). Without a far chain an R̂ above 1.05
+continues the chains. An axis whose prepared data and model code are unchanged since the cached, converged fit is
+kept as it is (`--all` refits both).
 
 ## The contract with the site: `fit-cache.json`
 

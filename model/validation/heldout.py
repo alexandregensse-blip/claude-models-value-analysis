@@ -37,7 +37,7 @@ for f in range(5):
             s = sum(RB.num(x["score"]) for x in rs) / len(rs)
             if s > 0: level[g].append(math.log(s) - math.log(Q[c]))
     G, _, _ = build_lqm.load_table(lqm, "quality", MODELS, path=path)
-    # the production sampler: nutpie, restarted on CmdStan from the production fit's last draws if a chain is stuck
+    # the production sampler: nutpie, a chain in a far region restarted on CmdStan from a good chain's last draw
     mcmc, maps = lqm.fit(G, "quality", seed=f, save_inits=False, settings=dict(warmup=WARM, samples=SAMP))
     todo = [(g, c) for (g, c) in sorted(hold) if g in G and c in maps["ci"] and c in Q and level[g]]
     preds = lqm.predict(mcmc, maps, G, [dict(group=g, couple=c, publisher=lqm.PUBLISHER_OF.get(cells[(g, c)][0]["source"],

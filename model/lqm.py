@@ -26,9 +26,9 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
   effect per maker on the rows a maker published about its own models, excluded from every read-out.
 
 Estimation: Hamiltonian Monte Carlo (NUTS) on lqm_ext2.stan — nutpie on both axes, its chains continued in the
-sampling process until the criteria are met; CmdStan (CmdStanPy) from the previous fit's draws when a chain is left in
-a remote region (SAMPLER). The read-out `level` is computed in Stan for every draw; `summarise`
-turns it into a centre and a per-couple interval (quasi-variances).
+sampling process until the criteria are met; CmdStan (CmdStanPy) continues chains from their last draws after a stop,
+and restarts a chain left in a far region from a good chain's last draw (SAMPLER, FAR). The read-out `level` is
+computed in Stan for every draw; `summarise` turns it into a centre and a per-couple interval (quasi-variances).
 """
 import collections, csv, itertools, math, os, re, sys
 
@@ -425,12 +425,17 @@ RUNS = os.path.join(STAN_DIR, "runs")                                # each axis
 # which needs 4× fewer leapfrog steps on quality; on the cost axis of the global data (20 Oct 2026, .salvo14/nut) it
 # took 537 leapfrog steps per draw against CmdStan's ~1,000 (at the depth cap on 99.97 % of draws), no divergence
 # against 5, and drew twice the effective draws per second on the slowest parameter (user's go, 20 Oct). nutpie cannot
-# be given starting points, and a random start can leave a cost chain in a remote region: then the axis restarts on
-# CmdStan NUTS from the previous fit's last draws (RESTART_RHAT, SAMPLER["restart"]).
-# Too few effective draws: the same chains continue by slices of `extend` draws, up to `extend_max` draws per chain
-# beyond the planned ones — on nutpie within the sampling process (the chains run on, checked at every slice and
-# stopped at the first that meets the criteria: no second warm-up, user's request of 21 Oct 2026), on CmdStan from the
-# last state with the adapted step size and metric. Counted in draws, not seconds: the check at a slice reads only the
+# be given starting points, and a random start can leave a chain in a far region (FAR, far_chains): that chain alone
+# restarts, on CmdStan, from the last draw of a good chain with that chain's adapted step size and metric.
+# Unconverged without a far chain (R̂ above RESTART_RHAT included: slow mixing), and too few effective draws: the same
+# chains continue by slices of `extend` draws, up to `extend_max` draws per chain beyond the planned ones — on nutpie
+# within the sampling process (the chains run on, checked at every slice and stopped at the first that meets the
+# criteria: no second warm-up, user's request of 21 Oct 2026), on CmdStan from the last state with the adapted step
+# size and metric. Until 30 Oct 2026 an R̂ above RESTART_RHAT threw every draw away and sampled the axis again on
+# CmdStan from the previous fit's last draws — in practice a cold start once the data's dimensions had changed: on
+# 29–30 Oct the cost axis (R̂ 1.081 at 1,800 draws, its six chains in one region, one maker scale psi_f[qwen] mixing
+# slowly between two modes) ended at R̂ 1.19, ESS 22, 41 divergences after the restart (maintainer's rule, 30 Oct 2026:
+# no cold or random restart, no good draw thrown away). Counted in draws, not seconds: the check at a slice reads only the
 # draws up to it, so a slow or loaded machine does not change the fit. Quality draws 4 × 3,000 at least: the effective
 # draws per draw ranged from 1 % to 15 % across the fits of 30 Sep – 8 Oct (s_τ's posterior tail, which the data
 # shortens: .salvo14/s21/ess), so 3,000 meet the criteria on most data and 12,000 — the 48,000 draws drawn by every fit
@@ -438,15 +443,24 @@ RUNS = os.path.join(STAN_DIR, "runs")                                # each axis
 SAMPLER = {"quality": dict(engine="nutpie", chains=6, warmup=600, samples=1800, target_accept=0.9, extend=900,
                            extend_max=16200),
            "cost": dict(engine="nutpie", chains=6, warmup=600, samples=1800, target_accept=0.9, extend=900,
-                        extend_max=16200),
-           "restart": dict(engine="cmdstan", chains=6, warmup=500, warmup_cold=600, samples=1800, adapt_delta=0.9,
-                           max_treedepth=10, extend=900, extend_max=16200)}
+                        extend_max=16200)}
 # The two axes run one after the other: on this shared 8-core machine the quality axis took 1,241 s beside the cost
 # axis and 344 s alone (8 Oct 2026) — the chains of both compete for the same cores, so running them together saves
 # no time and adds their memory.
 PARALLEL_AXES = False
 DIVERGENT_SHARE = 0.0003              # continuing an unconverged run is allowed up to this share of divergent draws
-RESTART_RHAT = 1.05                  # above this, a chain is in another region: continuing it would not help
+RESTART_RHAT = 1.05                  # above this, the chains are looked at for one in a far region (FAR)
+# A chain in a far region (maintainer's rule, 30 Oct 2026): its median log-density over its last `draws` draws lies
+# below the median of the other chains' medians by more than max(`lp`, `spread` × their spread), the spread being
+# 1.4826 × the median absolute deviation of the other chains' medians (robust: a second far chain among them does not
+# widen it). Within one region a draw's log-density varies by about √(d/2) (d unconstrained dimensions: ≈ 55 on the
+# cost axis' 6,128, ≈ 74 on quality's 10,842) and the chains' medians by far less; 300 is 4–5 of these deviations,
+# beyond what the region's draws reach. The spread term widens the bar when the other chains themselves disagree (modes
+# of different density, visited in turn). Seen: far chains 1,400 to 64,500 below the others (cost 29 Oct seed 11:
+# −2,900 against +2,050; seed 12: −27,300 and +450 against +1,880; quality 29–30 Oct: −69,700 against −5,100); the
+# six cost chains of 29–30 Oct, slow but in one region: medians 1,892–1,916 (the fit's report, .stan/fit-report.log;
+# data/tests/sampler_tests.py checks these cases).
+FAR = dict(draws=200, lp=300, spread=5)
 
 
 def cmdstan():
@@ -501,6 +515,10 @@ class Posterior:
         import numpy as np
         return np.concatenate([np.asarray(x[-1]) for x in self.parts[name]], axis=0)
 
+    def lp(self):
+        """Each chain's log-density per draw (chains, draws), or None when the draws do not carry it."""
+        return self.chains("lp__") if "lp__" in self.parts else None
+
     def in_memory(self):
         import numpy as np
         return Posterior({v: [np.array(x) for x in p] for v, p in self.parts.items()}, dict(self.stats), self.adapted)
@@ -519,9 +537,10 @@ class RunStore:
     inputs are unchanged (sampling_key) is summarised again without sampling.
 
       manifest.json   the key; the variables' shapes; the parts — per part its engine, chains, planned and kept draws
-                      per chain, sampler statistics, each chain's adapted state, the seeds of its segments;
+                      per chain, sampler statistics (in total and per chain), each chain's adapted state, the seeds of
+                      its segments, its directory; a part planned from given starting points (`start`) has no draw yet;
       p<k>/<var>.f64  part k's draws of the variable, float64 laid out (draws, chains, *shape): continuing the chains
-                      appends to the end of the file;
+                      appends to the end of the file; the log-density is the variable lp__;
       seg/            the sampling run in progress (nutpie's store or CmdStan's CSV files) and seg.json, what it is.
     The manifest is written last, atomically. A file longer than the manifest says is cut back before it is written
     to, so committing a segment again after a stop changes nothing."""
@@ -552,10 +571,14 @@ class RunStore:
             json.dump(self.manifest, f)
         os.replace(tmp, os.path.join(self.path, "manifest.json"))
 
+    def dir(self, k):
+        """Part k's directory."""
+        return os.path.join(self.path, self.parts[k].get("dir", f"p{k}"))
+
     def reset(self):
         import shutil
         for k in range(len(self.parts)):
-            shutil.rmtree(os.path.join(self.path, f"p{k}"), ignore_errors=True)
+            shutil.rmtree(self.dir(k), ignore_errors=True)
         self.manifest.update(shapes={}, parts=[])
         self._save()
 
@@ -564,12 +587,51 @@ class RunStore:
         self.parts[k]["planned"] = draws
         self._save()
 
+    def add(self, engine, chains, planned, adapted, start, **record):
+        """A new part with no draw yet: `chains` chains to be sampled from the starting points `start` with the adapted
+        state `adapted`, without warm-up, up to `planned` draws (the far chains' restart, _run)."""
+        self.parts.append(dict(engine=engine, chains=chains, planned=planned, draws=0, seeds=[], adapted=adapted,
+                               start=start, stats=dict(divergences=0, max_treedepth_hits=None if engine == "nutpie" else 0,
+                                                       leapfrog_sum=0.0, chain=_no_chain_stats(engine, chains)),
+                               dir=f"p{len(self.parts)}", **record))
+        self._save()
+
+    def drop(self, k, chains):
+        """Part k without the given chains (indices within the part), their draws discarded: the kept chains' draws are
+        copied into a new directory, the manifest switched to it at once, then the old directory removed — a stop at
+        any point leaves either the part as it was or the part without the chains."""
+        import numpy as np, shutil
+        p = self.parts[k]
+        keep = [c for c in range(p["chains"]) if c not in set(chains)]
+        if not keep or len(keep) == p["chains"]:
+            raise ValueError(f"part {k}: dropping {chains} of {p['chains']} chains")
+        old, new = self.dir(k), os.path.join(self.path, f"p{k}-{len(p.get('dropped', [])) + 1}")
+        shutil.rmtree(new, ignore_errors=True)
+        os.makedirs(new)
+        for v, shape in self.manifest["shapes"].items():
+            src = _f64(os.path.join(old, v + ".f64"), (p["draws"], p["chains"], *shape))
+            with open(os.path.join(new, v + ".f64"), "wb") as f:
+                step = max(1, int(5e7 // max(1, p["chains"] * math.prod(shape) * 8)))     # ≈ 50 MB at a time
+                for d0 in range(0, p["draws"], step):
+                    f.write(np.ascontiguousarray(np.asarray(src[d0:d0 + step])[:, keep]).tobytes())
+        s = p["stats"]
+        ch = {key: None if x is None else [x[c] for c in keep] for key, x in s["chain"].items()}
+        p["stats"] = dict(divergences=sum(ch["divergences"]), leapfrog_sum=sum(ch["leapfrog_sum"]),
+                          max_treedepth_hits=None if ch["max_treedepth_hits"] is None else sum(ch["max_treedepth_hits"]),
+                          chain=ch)
+        if p["adapted"] is not None:
+            p["adapted"] = {key: [x[c] for c in keep] for key, x in p["adapted"].items()}
+        p.setdefault("dropped", []).append(dict(chains=sorted(set(chains)), draws=p["draws"]))
+        p.update(chains=len(keep), dir=os.path.basename(new))
+        self._save()
+        shutil.rmtree(old, ignore_errors=True)
+
     def posterior(self, only=None):
         """The kept draws, memory-mapped; `only` = the index of one part."""
         ks = range(len(self.parts)) if only is None else [only]
         P = [self.parts[k] for k in ks]
-        parts = {v: [_f64(os.path.join(self.path, f"p{k}", v + ".f64"), (self.parts[k]["draws"], self.parts[k]["chains"],
-                                                                      *shape)) for k in ks]
+        parts = {v: [_f64(os.path.join(self.dir(k), v + ".f64"), (self.parts[k]["draws"], self.parts[k]["chains"],
+                                                                *shape)) for k in ks]
                  for v, shape in self.manifest["shapes"].items()}
         add = lambda key: None if all(p["stats"].get(key) is None for p in P) else sum(p["stats"].get(key) or 0 for p in P)
         stats = dict(divergences=add("divergences"), max_treedepth_hits=add("max_treedepth_hits"),
@@ -605,15 +667,16 @@ class RunStore:
             new = k is None
             part = dict(engine=info["engine"], chains=info["chains"], planned=info["draws"], draws=0, seeds=[],
                         stats=dict(divergences=0, max_treedepth_hits=None if info["engine"] == "nutpie" else 0,
-                                   leapfrog_sum=0.0),
-                        adapted=None) if new else self.parts[k]
+                                   leapfrog_sum=0.0, chain=_no_chain_stats(info["engine"], info["chains"])),
+                        adapted=None, dir=f"p{len(self.parts)}") if new else self.parts[k]
             k = len(self.parts) if new else k
             d0 = part["draws"]
-            os.makedirs(os.path.join(self.path, f"p{k}"), exist_ok=True)
+            where = os.path.join(self.path, part["dir"]) if new else self.dir(k)
+            os.makedirs(where, exist_ok=True)
             files = {}
             try:
                 for v, shape in shapes.items():
-                    path = os.path.join(self.path, f"p{k}", v + ".f64")
+                    path = os.path.join(where, v + ".f64")
                     f = open(path, "r+b" if os.path.exists(path) else "w+b")
                     f.truncate(d0 * part["chains"] * math.prod(shape) * 8)
                     f.seek(0, 2)
@@ -632,6 +695,9 @@ class RunStore:
                 for key in ("divergences", "max_treedepth_hits"):
                     part["stats"][key] = None if stats.get(key) is None else (part["stats"].get(key) or 0) + stats[key]
                 part["stats"]["leapfrog_sum"] += stats["leapfrog_sum"]
+                ch = part["stats"]["chain"]                          # per chain: a far chain's draws can be dropped
+                for key, x in stats["chain"].items():
+                    ch[key] = None if x is None else [a + b for a, b in zip(ch[key] or [0] * len(x), x)]
                 part["adapted"] = part["adapted"] or adapted
                 part["seeds"].append(info["seed"])
                 if new:
@@ -641,12 +707,18 @@ class RunStore:
         return n
 
 
+def _no_chain_stats(engine, chains):
+    """A part's sampler statistics per chain before its first draw."""
+    return dict(divergences=[0] * chains, max_treedepth_hits=None if engine == "nutpie" else [0] * chains,
+                leapfrog_sum=[0.0] * chains)
+
+
 def _nutpie_written(g, root, done=False):
     """Draws per chain that every chain of nutpie's store has written for good: all of a finished run; of a run in
     progress or stopped, the chunks written but the last (which a stop may have cut)."""
     post, ss = g["posterior"], g["sample_stats"]
-    arrays = [post[v] for v in post.array_keys()] + [ss["n_steps"], ss["step_size"]]   # always written: zarr skips a
-    # chunk equal to the fill value (`diverging` all False), which then reads as that value
+    arrays = [post[v] for v in post.array_keys()] + [ss["n_steps"], ss["step_size"], ss["logp"]]   # always
+    # written: zarr skips a chunk equal to the fill value (`diverging` all False), which then reads as that value
 
     def kept(a):
         if done:
@@ -679,6 +751,10 @@ class _NutpieDraws(Posterior):
     def shape(self, name):
         a = self.g["posterior"][name]
         return (a.shape[0], self.n, *a.shape[2:])
+
+    def lp(self):
+        import numpy as np
+        return np.asarray(self.g["sample_stats"]["logp"][:, :self.n], dtype=np.float64)
 
     def blocks(self, name, size=256):
         import numpy as np
@@ -722,16 +798,20 @@ def _read_nutpie(seg, info):
     except (KeyError, IndexError):
         pass
     shapes = {v: tuple(post[v].shape[2:]) for v in post.array_keys()}
+    shapes["lp__"] = ()                                              # the log-density, as CmdStan's lp__ (FAR)
 
     def write(files):
         for v, shape in shapes.items():
-            a, size = post[v], max(1, C * math.prod(shape) * 8)
+            a, size = ss["logp"] if v == "lp__" else post[v], max(1, C * math.prod(shape) * 8)
             step = max(1, int(5e7 // size))                          # ≈ 50 MB at a time
             for d0 in range(0, n, step):
                 x = np.asarray(a[:, d0:min(n, d0 + step)], dtype=np.float64)
                 files[v].write(np.ascontiguousarray(np.swapaxes(x, 0, 1)).tobytes())
-        stats = dict(divergences=int(np.asarray(ss["diverging"][:, :n]).sum()), max_treedepth_hits=None,
-                     leapfrog_sum=float(np.asarray(ss["n_steps"][:, :n], dtype=np.float64).sum()))
+        div = np.asarray(ss["diverging"][:, :n]).sum(axis=1)
+        leap = np.asarray(ss["n_steps"][:, :n], dtype=np.float64).sum(axis=1)
+        stats = dict(divergences=int(div.sum()), max_treedepth_hits=None, leapfrog_sum=float(leap.sum()),
+                     chain=dict(divergences=[int(x) for x in div], max_treedepth_hits=None,
+                                leapfrog_sum=[float(x) for x in leap]))
         return n, stats, adapted
     return shapes, write
 
@@ -741,7 +821,8 @@ def _read_cmdstan(seg, info, block=200):
     side, one draw of each at a time, up to the last draw complete in every file; the adapted step size and inverse
     metric come from the files' comments (or from seg.json for a continuation, which adapts nothing)."""
     import glob, numpy as np
-    csvs = sorted(glob.glob(os.path.join(seg, "*.csv")), key=lambda p: int(re.search(r"_(\d+)\.csv$", p).group(1)))
+    chain = lambda p: int(re.search(r"_(\d+)\.csv$", p).group(1)) if re.search(r"_(\d+)\.csv$", p) else 1
+    csvs = sorted(glob.glob(os.path.join(seg, "*.csv")), key=chain)   # one chain: no _<n> (a far chain's restart)
     if len(csvs) != info["chains"]:
         return None
     handles = [open(p) for p in csvs]
@@ -758,7 +839,7 @@ def _read_cmdstan(seg, info, block=200):
     col = {c: i for i, c in enumerate(header)}
     idx = collections.defaultdict(list)
     for i, c in enumerate(header):
-        if not c.endswith("__"):
+        if not c.endswith("__") or c == "lp__":                     # the parameters, and the log-density (FAR)
             name, *ix = c.split(".")
             idx[name].append((tuple(int(x) - 1 for x in ix), i))
     shapes, order = {}, {}
@@ -783,7 +864,8 @@ def _read_cmdstan(seg, info, block=200):
             yield x
 
     def write(files):
-        n, div, hits, leap = 0, 0, 0, 0.0
+        n, C = 0, len(csvs)
+        div, hits, leap = np.zeros(C, int), np.zeros(C, int), np.zeros(C)
         its = [rows(h, notes[c]) for c, h in enumerate(handles)]
         while True:
             buf = []
@@ -797,9 +879,9 @@ def _read_cmdstan(seg, info, block=200):
             X = np.asarray(buf)                                      # (k, chains, columns)
             for v, pos in order.items():
                 files[v].write(np.ascontiguousarray(X[:, :, pos]).reshape(X.shape[0], X.shape[1], *shapes[v]).tobytes())
-            div += int(X[:, :, col["divergent__"]].sum())
-            hits += int((X[:, :, col["treedepth__"]] >= max_depth).sum())
-            leap += float(X[:, :, col["n_leapfrog__"]].sum())
+            div += X[:, :, col["divergent__"]].sum(axis=0).astype(int)
+            hits += (X[:, :, col["treedepth__"]] >= max_depth).sum(axis=0)
+            leap += X[:, :, col["n_leapfrog__"]].sum(axis=0)
             n += X.shape[0]
             if len(buf) < block:
                 break
@@ -817,7 +899,9 @@ def _read_cmdstan(seg, info, block=200):
                 adapted = dict(step_size=step, inv_metric=inv)
             except AttributeError:
                 adapted = None
-        return n, dict(divergences=div, max_treedepth_hits=hits, leapfrog_sum=leap), adapted
+        return n, dict(divergences=int(div.sum()), max_treedepth_hits=int(hits.sum()), leapfrog_sum=float(leap.sum()),
+                       chain=dict(divergences=[int(x) for x in div], max_treedepth_hits=[int(x) for x in hits],
+                                  leapfrog_sum=[float(x) for x in leap])), adapted
     return shapes, write
 
 
@@ -828,11 +912,18 @@ def _last_draws(post):
     last = {v: post.last(v) for v in params}
     chains = post.shape(params[0])[0]
     out = [{v: np.asarray(last[v][c]).tolist() for v in params} for c in range(chains)]
-    for d in out:                                                    # θ must sum to zero to machine precision
-        if "theta" in d:
-            m = sum(d["theta"]) / len(d["theta"])
-            d["theta"] = [t - m for t in d["theta"]]
+    for d in out:                                                    # θ and the makers' sum-to-zero vectors must sum
+        _centre(d)                                                   # to zero within 1e-8 (CSV draws: 6 digits)
     return out
+
+
+def _centre(d):
+    """The sum-to-zero vectors of a starting point re-centred (Stan refuses one whose sum exceeds 1e-8 in size)."""
+    for v in _sum_to_zero_names():
+        if v in d and d[v]:
+            m = sum(d[v]) / len(d[v])
+            d[v] = [t - m for t in d[v]]
+    return d
 
 
 def _save_inits(post, axis):
@@ -850,6 +941,13 @@ def _param_names():
     return {m.group(1) for m in re.finditer(r"\s(\w+);", block)}
 
 
+def _sum_to_zero_names():
+    """The parameters declared sum_to_zero_vector (θ; the makers' zf_tau, zf_psi, zf_omega, zd in lqm_ext2.stan)."""
+    txt = open(STAN_FILE).read()
+    block = txt[txt.index("\nparameters {"):txt.index("\ntransformed parameters {")]
+    return {m.group(1) for m in re.finditer(r"sum_to_zero_vector\[\w+\]\s+(\w+);", block)}
+
+
 def _inits(axis, chains):
     """Warm-start inits if the previous fit's parameters still fit the current data's dimensions, else None."""
     import json
@@ -860,10 +958,25 @@ def _inits(axis, chains):
     if len(inits) < chains:
         return None
     for d in inits:                                                  # CSV draws are rounded (6 significant digits):
-        if "theta" in d:                                             # re-centre θ, which must sum to zero exactly
-            m = sum(d["theta"]) / len(d["theta"])
-            d["theta"] = [t - m for t in d["theta"]]
+        _centre(d)                                                   # re-centre the sum-to-zero vectors
     return inits[:chains]
+
+
+def far_chains(lp):
+    """The chains left in a far region (FAR), from their log-densities lp (chains, draws): each chain's median over its
+    last FAR["draws"] draws against the median and spread of the other chains' medians. The chain of highest median is
+    never far, so at least one chain is good."""
+    import numpy as np
+    if lp is None or len(lp) < 2:
+        return []
+    m = np.nanmedian(np.asarray(lp, dtype=np.float64)[:, -FAR["draws"]:], axis=1)
+    out = []
+    for c in range(len(m)):
+        o = np.delete(m, c)
+        ref = np.median(o)
+        if ref - m[c] > max(FAR["lp"], FAR["spread"] * 1.4826 * np.median(np.abs(o - ref))):
+            out.append(c)
+    return out
 
 
 def sampling_key(data, axis, st, seed):
@@ -873,10 +986,10 @@ def sampling_key(data, axis, st, seed):
     import hashlib, inspect, json
     h = hashlib.sha256()
     h.update(open(STAN_FILE, "rb").read())
-    h.update(json.dumps(dict(axis=axis, data=data, seed=seed, st=st, converged=CONVERGED, restart=RESTART_RHAT),
-                        sort_keys=True, default=lambda a: a.tolist()).encode())
-    for f in (Posterior, _f64, RunStore, _read_nutpie, _read_cmdstan, _last_draws, _inits, fit, _run, _sample,
-              diagnostics, converged):
+    h.update(json.dumps(dict(axis=axis, data=data, seed=seed, st=st, converged=CONVERGED, restart=RESTART_RHAT,
+                             far=FAR), sort_keys=True, default=lambda a: a.tolist()).encode())
+    for f in (Posterior, _f64, RunStore, _read_nutpie, _read_cmdstan, _last_draws, _centre, _inits, fit, _run, _sample,
+              _grow, far_chains, diagnostics, converged):
         h.update(inspect.getsource(f).encode())
     req = os.path.join(HERE, "requirements-fit.txt")
     if os.path.exists(req):
@@ -889,12 +1002,16 @@ def fit(groups, axis="quality", seed=7, settings=None, keep=False, save_inits=Tr
     fit keeps its draws on disk (keep: RUNS/<axis>-<sampling key>) and its last draws as the next warm start
     (save_inits); checks and experiments sample into a temporary store and get their draws in memory.
 
-    The run is checked against the validity criteria (CONVERGED):
-      * a chain left in a remote region (R̂ > RESTART_RHAT) restarts the axis on CmdStan from the previous fit's last
-        draws (the only engine that takes starting points per chain);
-      * otherwise too few effective draws add draws, never throw any away: the SAME chains continue (no new warm-up)
-        by slices of `extend` draws, up to `extend_max` per chain beyond the planned ones — on nutpie in the sampling
-        process itself, on CmdStan from the last state with the adapted step size and metric.
+    The run is checked against the validity criteria (CONVERGED); no good draw is ever thrown away (rule of 30 Oct
+    2026):
+      * a chain left in a far region (R̂ > RESTART_RHAT and far_chains) loses its draws and restarts on CmdStan (the
+        only engine that takes starting points per chain), without warm-up, from the last draw of a good chain with
+        that chain's adapted step size and metric, up to the length of the others; the good chains are kept. Once per
+        run: a chain far again after it stops the run, unconverged;
+      * otherwise (R̂ above RESTART_RHAT included) too few effective draws add draws: the SAME chains continue (no new
+        warm-up) by slices of `extend` draws, up to `extend_max` per chain beyond the planned ones — on nutpie in the
+        sampling process itself, on CmdStan from the last state with the adapted step size and metric — while at most
+        DIVERGENT_SHARE of the draws diverged.
     A run stopped part-way (memory, restart) resumes from its stored draws: each chain continues on CmdStan from its
     last stored draw, with its adapted step size and metric, up to the draws planned."""
     import shutil, tempfile
@@ -926,23 +1043,40 @@ def _run(store, data, axis, st, seed, say):
     t0 = time.time()
     resumed = 0
 
-    def segment(engine, s, draws, part=None, inits=None, adapted=None, grow=False):
-        seg = store.begin(engine=engine, seed=s, chains=st["chains"], draws=draws, part=part, adapted=adapted,
+    def segment(engine, s, draws, part=None, inits=None, adapted=None, grow=False, chains=None):
+        chains = chains or st["chains"]
+        seg = store.begin(engine=engine, seed=s, chains=chains, draws=draws, part=part, adapted=adapted,
                           max_treedepth=st.get("max_treedepth", 10))
-        _sample(data, axis, dict(st, engine=engine), s, seg, inits=inits, adapted=adapted, draws=draws, grow=grow)
+        _sample(data, axis, dict(st, engine=engine, chains=chains), s, seg, inits=inits, adapted=adapted, draws=draws,
+                grow=grow)
         return store.commit()
 
     def complete():
-        """Every part short of its planned draws continues its chains on CmdStan, without warm-up."""
+        """Every part short of its planned draws continues its chains on CmdStan, without warm-up: from their last
+        draws, or from the part's starting points when it has none yet (a far chain's restart)."""
         for k in range(len(store.parts)):
             while store.parts[k]["draws"] < store.parts[k]["planned"]:
                 p = store.parts[k]
                 if p["adapted"] is None:
                     raise RuntimeError(f"part {k} cannot be continued: no adapted state")
-                part = store.posterior(only=k)
+                inits = _last_draws(store.posterior(only=k)) if p["draws"] else p["start"]
                 if not segment("cmdstan", seed + 1000 + 10 * k + len(p["seeds"]), p["planned"] - p["draws"], part=k,
-                               inits=_last_draws(part), adapted=p["adapted"]):
+                               inits=inits, adapted=p["adapted"], chains=p["chains"]):
                     raise RuntimeError(f"part {k}: its continuation wrote no draw")
+
+    def restart(post, far):
+        """The far chains' draws dropped; each far chain restarts on CmdStan from the last draw of a good chain (the
+        good chains in turn) with that chain's adapted step size and metric: a new part, sampled up to the length of
+        the others (rule of 30 Oct 2026: no cold or random start, the good chains' draws kept)."""
+        good = [c for c in range(post.shape("lp__")[0]) if c not in far]
+        src = [good[j % len(good)] for j in range(len(far))]
+        last = _last_draws(post)
+        n = store.parts[0]["draws"]
+        store.drop(0, far)
+        store.add("cmdstan", len(far), n, dict(step_size=[post.adapted["step_size"][g] for g in src],
+                                               inv_metric=[post.adapted["inv_metric"][g] for g in src]),
+                  [last[g] for g in src], far=far, source=src)
+        complete()
 
     if store.pending():                                              # a run stopped part-way: keep what it wrote
         resumed = store.commit()
@@ -953,31 +1087,36 @@ def _run(store, data, axis, st, seed, say):
     if not store.parts:
         segment(st["engine"], seed, st["samples"], grow=st["engine"] == "nutpie")
         complete()
-    restarted = store.parts[0]["engine"] != st["engine"]
-    if restarted:
-        st = dict(SAMPLER["restart"], chains=st["chains"], engine="cmdstan")
     post = store.posterior()
     diag, _ = diagnostics(post)
     say(f"{axis}: {store.parts[0]['engine']} {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
         f"{diag['ess_tail_min']}, divergences {diag['divergences']}")
-    if diag["rhat_max"] > RESTART_RHAT and st["engine"] == "nutpie":
-        st = dict(SAMPLER["restart"], chains=st["chains"], engine="cmdstan")
-        store.reset()
-        segment("cmdstan", seed + 1, st["samples"], inits=_inits(axis, st["chains"]))
-        complete()
-        post = store.posterior()
-        diag, _ = diagnostics(post)
-        say(f"{axis}: restarted on CmdStan {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/"
-            f"{diag['ess_tail_min']}")
-    # a few divergent draws (≤ 0.03 % (user, 20 Oct): 5 of 18,000 on the cost axis of 20 Oct 2026) do not forbid continuing the chains
-    while (not converged(diag) and diag["divergences"] <= DIVERGENT_SHARE * diag["draws"]
-           and diag["rhat_max"] <= RESTART_RHAT):
+    # a few divergent draws (≤ 0.03 % (user, 20 Oct): 5 of 18,000 on the cost axis of 20 Oct 2026) do not forbid
+    # continuing the chains; an R̂ above RESTART_RHAT without a far chain (slow mixing) does not either (30 Oct 2026).
+    # A far chain is looked at first: its divergent draws go with it.
+    while not converged(diag):
+        far = far_chains(post.lp()) if diag["rhat_max"] > RESTART_RHAT else []
+        if far:
+            if len(store.parts) > 1 or post.adapted is None:         # once per run, and only from an adapted state
+                say(f"{axis}: chain(s) {far} in a far region, not restarted "
+                    + ("(a far chain was restarted already)" if len(store.parts) > 1 else "(no adapted state)"))
+                break
+            restart(post, far)
+            post = store.posterior()
+            diag, _ = diagnostics(post)
+            say(f"{axis}: chain(s) {far} in a far region restarted from good chains' last draws {time.time() - t0:.0f} s,"
+                f" R̂ {diag['rhat_max']}, ESS {diag['ess_bulk_min']}/{diag['ess_tail_min']}")
+            continue
+        if diag["divergences"] > DIVERGENT_SHARE * diag["draws"]:
+            break
         p = store.parts[0]                                           # the same chains, continued (a nutpie run
         extra = p["planned"] - st["samples"]                         # continued itself: here only after a stop)
         if post.adapted is None or extra >= st["extend_max"]:
             break
         n = min(st["extend"], st["extend_max"] - extra)
-        store.plan(0, p["planned"] + n)
+        to = p["planned"] + n
+        for k in range(len(store.parts)):                            # every part to the same length
+            store.plan(k, to)
         complete()
         what = f"continued +{n} draws/chain"
         post = store.posterior()
@@ -986,7 +1125,8 @@ def _run(store, data, axis, st, seed, say):
             f"{diag['ess_tail_min']}")
     p = store.parts[0]
     ext = -(-(p["planned"] - st["samples"]) // st["extend"]) if p["planned"] > st["samples"] else 0
-    post.stats.update(extensions=ext, engine=st["engine"], resumed=resumed)
+    post.stats.update(extensions=ext, engine=st["engine"], resumed=resumed,
+                      far_restarted=len(store.parts[1]["far"]) if len(store.parts) > 1 else 0)
     return post
 
 
@@ -1045,7 +1185,9 @@ def _sample(data, axis, st, seed, seg, inits=None, adapted=None, draws=None, gro
 def _grow(run, root, planned, top, extend):
     """A nutpie run in progress (non-blocking) checked at planned, planned + extend, …, top draws per chain: at each,
     once every chain has written it, diagnostics() on the draws up to it; the run stops at the first check that would
-    end _run's loop (converged, too many divergences, a chain in another region). Returns the draws per chain kept."""
+    end _run's continuation (converged, too many divergences) or that _run must act on (a chain in a far region:
+    R̂ > RESTART_RHAT and far_chains). An R̂ above RESTART_RHAT alone runs on (30 Oct 2026). Returns the draws per
+    chain kept."""
     import time, zarr
 
     def finished():
@@ -1071,9 +1213,10 @@ def _grow(run, root, planned, top, extend):
         if k >= top:
             run.wait()
             return top
-        diag, _ = diagnostics(_NutpieDraws(g, k))
+        draws = _NutpieDraws(g, k)
+        diag, _ = diagnostics(draws)
         if (converged(diag) or diag["divergences"] > DIVERGENT_SHARE * diag["draws"]
-                or diag["rhat_max"] > RESTART_RHAT):
+                or (diag["rhat_max"] > RESTART_RHAT and far_chains(draws.lp()))):
             if not finished():
                 run.abort()
             return k
@@ -1236,7 +1379,7 @@ def diagnostics(post):
     import numpy as np, arviz as az
     worst, rh_max, eb_min, et_min = [], 1.0, float("inf"), float("inf")
     for name in post.names:                                          # a block of scalars at a time: bounded memory
-        if math.prod(post.shape(name)) == 0:
+        if name.endswith("__") or math.prod(post.shape(name)) == 0:  # lp__: read by far_chains, not a criterion
             continue
         lv = []
         for s0, x in post.blocks(name):
