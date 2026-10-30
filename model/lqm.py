@@ -23,9 +23,11 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            task type: their mean is confounded with the free offsets of that publisher's (type's) groups.
   Priors:  θ ~ N(0, 10²); s_g, s_τ, ψ, ω, s_σ ~ half-Student-t(3, 0, 2.5); ν ~ Gamma(2, 0.1).
   Makers (lqm_ext2.stan, the published model): the scales s_τ, ψ, ω per model maker around common ones, and a home
-  effect per maker on the rows a maker published about its own models, excluded from every read-out.
+  effect per maker on the rows a maker published about its own models, excluded from every read-out. lqm_ext3.stan,
+  the model fitted since 30 Oct 2026, is the same model written in other coordinates: each maker's block of effects
+  of a family as a realised magnitude and a direction (its header has the change of variables).
 
-Estimation: Hamiltonian Monte Carlo (NUTS) on lqm_ext2.stan — nutpie on both axes, its chains continued in the
+Estimation: Hamiltonian Monte Carlo (NUTS) on lqm_ext3.stan — nutpie on both axes, its chains continued in the
 sampling process until the criteria are met; CmdStan (CmdStanPy) continues chains from their last draws after a stop,
 and restarts a chain left in a far region from a good chain's last draw (SAMPLER, FAR). The read-out `level` is
 computed in Stan for every draw; `summarise` turns it into a centre and a per-couple interval (quasi-variances).
@@ -36,10 +38,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
-STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm_ext2") + ".stan")   # the published model since 21 Oct
-# 2026 (lqm.stan plus per-maker scales and home effects); LQM_MODEL=lqm: the model until then, lqm_ext: an experiment
-EXT = os.path.basename(STAN_FILE) in ("lqm_ext.stan", "lqm_ext2.stan")
-EXT_PRESENT = os.path.basename(STAN_FILE) == "lqm_ext2.stan"           # makers without data are not levels
+STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm_ext3") + ".stan")   # the model fitted since 30 Oct
+# 2026 (the maintainer's decision): lqm_ext2.stan, the published model since 21 Oct 2026 (lqm.stan plus per-maker
+# scales and home effects), reparameterised — each maker's block of effects of one family sampled as its realised
+# magnitude and direction instead of the maker's scale and standard-normal effects: the same model, the same data
+# block, the same names read here. LQM_MODEL=lqm_ext2: that model in lqm_ext2's coordinates; lqm: the model until
+# 21 Oct; lqm_ext: an experiment
+EXT = os.path.basename(STAN_FILE) in ("lqm_ext.stan", "lqm_ext2.stan", "lqm_ext3.stan")
+EXT_PRESENT = os.path.basename(STAN_FILE) in ("lqm_ext2.stan", "lqm_ext3.stan")   # makers without data are not levels
 LINE = {}                                                       # model key -> the model it is a build / mode of
 PROVIDERS = ("anthropic", "openai", "google", "xai", "deepseek", "qwen", "glm", "kimi")
 
@@ -156,7 +162,7 @@ def _other_value(r, field):
 
 # ---------------------------------------------------------------- data
 # The configurations the build writes (data/schema/vocab.json 'configuration'), each its own couple: the model puts no
-# order between them (lqm_ext2.stan). 'nothink': thinking off; 'minimal': the lowest level of a model that has one below
+# order between them (lqm_ext3.stan). 'nothink': thinking off; 'minimal': the lowest level of a model that has one below
 # 'low'; 'think': the one 'on' position of an on/off model; 'solo': a model without an effort setting. Anything else
 # ('between-tools', a mode of one model recorded but not fitted; an odd label) is not in the fit.
 EFFORTS = {"nothink", "minimal", "low", "medium", "high", "xhigh", "max", "think", "solo"}
@@ -982,7 +988,8 @@ def _param_names():
 
 
 def _sum_to_zero_names():
-    """The parameters declared sum_to_zero_vector (θ; the makers' zf_tau, zf_psi, zf_omega, zd in lqm_ext2.stan)."""
+    """The parameters declared sum_to_zero_vector (θ and the makers' zd; in lqm_ext2.stan also zf_tau, zf_psi,
+    zf_omega, which lqm_ext3.stan recovers as transformed parameters)."""
     txt = open(STAN_FILE).read()
     block = txt[txt.index("\nparameters {"):txt.index("\ntransformed parameters {")]
     return {m.group(1) for m in re.finditer(r"sum_to_zero_vector\[\w+\]\s+(\w+);", block)}

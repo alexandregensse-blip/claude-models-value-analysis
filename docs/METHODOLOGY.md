@@ -237,8 +237,9 @@ runs are estimated.
 
 ### Estimation
 
-The model is written in Stan (`model/lqm_ext2.stan`; `model/lqm.stan` is the model without the makers' terms, used
-until v2026.10.20); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
+The model is written in Stan (`model/lqm_ext3.stan` since 30 Oct 2026: `model/lqm_ext2.stan`, the model published
+since v2026.10.21, in the coordinates described under *Makers' scales* below; `model/lqm.stan` is the model without
+the makers' terms, used until v2026.10.20); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
 the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; Betancourt 2017).
 
 - **Writing.** How a model is written changes how fast the sampler explores it, not what it estimates. Each group's
@@ -247,6 +248,28 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   centred and mapped to rows by sparse matrix products, so that Stan's optimiser (`stanc --O1`) keeps every vector in
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
+- **Makers' scales: magnitude and direction** (the maintainer's decision of 30 Oct 2026; the same model, only the
+  sampling geometry changes). Each maker's effects of one family were written as its scale times standard-normal
+  effects, e = s_k · z_k. The data see only the products, so a maker's scale and all its effects moved together
+  along a curved ridge (the scale up, every one of its effects' z down); on the cost axis of 29–30 Oct a maker with
+  few data (Qwen) had a scale ψ at about 0.45 or about 1.0, which the chains took hundreds of draws to cross, and the
+  worst R̂ were on η_τ, τ, ψ. Now, for every maker and every family, whatever the number n_k of its effects (no
+  threshold): z_k = r_k · u_k, with r_k = ‖z_k‖ ~ χ(n_k) and u_k uniform on the sphere. The sampler moves in the
+  realised magnitude A_k = s_k · r_k (on its log scale), which the data inform, in the direction u_k (a free vector
+  y_k ~ N(0, I) divided by its length, the length an auxiliary that nothing depends on) and in r_k, which carries its
+  χ(n_k) density and which the likelihood does not see; s_k = A_k / r_k is recovered. Over the makers, the log scales
+  are the coordinates and the common scale s_0 (their geometric mean) and the offsets ζ_k (summing to zero) are
+  recovered from them, η staying a parameter; the change of variables adds the terms log s_0 (s_0 → log s_0),
+  −(F − 1) log η (ζ = (log s − mean) / η over F makers) and the χ(n_k) density of r_k ((n_k − 1) log r_k − r_k²/2),
+  every other term unchanged. For the publisher × model (ψ) and couple × task-type (ω) effects the block is the
+  maker's effects; for the publisher × couple effects, u = s_τ,k · τ̃_c · z with τ_c = s_τ,k · τ̃_c, the block is
+  every z of the maker's couples, τ̃_c ~ N⁺(0, 1) kept as it was (its ridge with s_τ,k is already straight on the
+  log scale, and splitting z couple by couple would turn the couples with a single publisher, 68 on cost, into a
+  sign). With one effect (n_k = 1) the direction is a sign, changed only where y_k crosses zero; every maker has at
+  least 14 effects of each family on the data of 30 Oct. Checked by evaluating both programs on the data of both
+  axes at random points: their log densities differ by exactly the Jacobian and auxiliary terms (to 10⁻⁹), and the
+  recovered scales, offsets and effects satisfy the old definitions. The formulas, term by term, are in the header
+  of `model/lqm_ext3.stan`.
 - **Samplers.** nutpie (Seyboldt et al.) on both axes, whose adaptation of the mass matrix needs fewer steps here:
   6 chains × (500 warm-up + 1,800 draws), target acceptance 0.9 (warm-up 500 since 30 Oct 2026, 600 from 29 Oct;
   4 × (1,000 + 3,000) before). In the two runs whose warm-up was kept (cost, 29 Oct and 30 Oct), the good chains' step

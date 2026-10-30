@@ -107,7 +107,7 @@ No dependencies beyond the Python 3 standard library and Node.js (any recent ver
 
 ### Refit
 
-Needed only when the fit's inputs change: the build's tables (`data/build/`), `model/lqm.py`, `model/lqm_ext2.stan`,
+Needed only when the fit's inputs change: the build's tables (`data/build/`), `model/lqm.py`, `model/lqm_ext3.stan`,
 `data/build_lqm.py` or `data/catalog/` (the site build says so). The data first: the build turns the findings and the
 registry into one table per axis (Python standard library, about 10 minutes and 4 GB with the saved copies re-hashed;
 `--no-check-files` skips that):

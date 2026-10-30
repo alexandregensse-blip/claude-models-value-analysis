@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fits the latent-quality model (lqm.py, lqm_ext2.stan) on both axes and writes model/fit-cache.json, the model's only
+"""Fits the latent-quality model (lqm.py, lqm_ext3.stan) on both axes and writes model/fit-cache.json, the model's only
 product, which the site reads. Run in the Stan environment:  .stan/venv/bin/python model/fit.py
 
 The cache holds, per couple and axis, reference-free values on the log scale — [centre, quasi-standard error,
@@ -34,7 +34,7 @@ FIT_CACHE = os.path.join(HERE, "fit-cache.json")
 # recorded per axis in fit-cache.json (`seed`, and the axis' diagnostics) and in the run's manifest; a run resumed
 # after a stop, or summarised again from its stored draws, keeps the seed it was started with. The seed is not part of
 # an axis' data fingerprint: a new launch's new seed does not make a converged axis look changed.
-STAN = os.path.relpath(lqm.STAN_FILE, ROOT)                          # model/lqm_ext2.stan unless LQM_MODEL says
+STAN = os.path.relpath(lqm.STAN_FILE, ROOT)                          # model/lqm_ext3.stan unless LQM_MODEL says
 # The build's products (python3 data/build.py --fit-models catalog): one table per axis, and the group map through which
 # the group-keyed catalog maps (composites, families) reach the fit groups (data/build_lqm.py, fit_maps)
 BUILD = "data/build"

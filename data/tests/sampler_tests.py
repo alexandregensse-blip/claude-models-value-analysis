@@ -519,7 +519,8 @@ def far_criterion_on_the_real_cases():
 def restart_inputs_accepted_by_cmdstan():
     """Two things a far chain's restart needs from CmdStan, found on a real short run (30 Oct): a one-chain run's CSV
     file has no _<n> suffix (lqm_ext2-<time>.csv), and a starting point read from CSV draws (6 digits) must have every
-    sum-to-zero vector re-centred, not θ alone (zf_tau, zf_psi, zf_omega, zd: Stan refuses a sum above 1e-8).
+    sum-to-zero vector re-centred, not θ alone (zd, and in lqm_ext2.stan zf_tau, zf_psi, zf_omega: Stan refuses a
+    sum above 1e-8; the makers' zd is a sum-to-zero parameter of lqm_ext2.stan and lqm_ext3.stan alike).
     Negative controls: the code before reads no one-chain file (an error) and re-centres θ alone."""
     need("numpy")
     import numpy as np
@@ -548,11 +549,11 @@ def restart_inputs_accepted_by_cmdstan():
         shutil.rmtree(d, ignore_errors=True)
     z = np.array([[[0.300001, -0.1, -0.2]]])                         # (draws, chains, F): sums to 1e-6
     th = np.array([[[1.000001, -1.0]]])
-    post = L.Posterior({"zf_tau": [z], "theta": [th]}, {})
+    post = L.Posterior({"zd": [z], "theta": [th]}, {})
     for M, want in ((L, True), (B, False)):
         d0 = M._last_draws(post)[0]
-        eq((abs(sum(d0["theta"])) < 1e-12, abs(sum(d0["zf_tau"])) < 1e-12), (True, want),
-           "re-centred" if want else "negative control: the code before leaves zf_tau off zero")
+        eq((abs(sum(d0["theta"])) < 1e-12, abs(sum(d0["zd"])) < 1e-12), (True, want),
+           "re-centred" if want else "negative control: the code before leaves zd off zero")
 
 
 @test

@@ -6,7 +6,8 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 | File | Role |
 |---|---|
 | `lqm.py` | data preparation (groups, scales, composites, republications, effects), the samplers, the read-out |
-| `lqm_ext2.stan` | the model, in Stan (since v2026.10.21; `LQM_MODEL` selects another) |
+| `lqm_ext3.stan` | the model fitted since 30 Oct 2026: `lqm_ext2.stan` reparameterised (below); `LQM_MODEL` selects another |
+| `lqm_ext2.stan` | the model published since v2026.10.21, in its original coordinates (`LQM_MODEL=lqm_ext2`) |
 | `lqm.stan` | the model until v2026.10.20, without the makers' scales and home effects |
 | `lqm_ext.stan` | an experiment of 19–20 Oct (makers' offsets not summing to zero; it did not converge) |
 | `precheck.py` | the checks run before a fit (bounds, twin metrics, discordant twins, memory) |
@@ -15,6 +16,24 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 | `fit-cache.json` | **the model's only product**, read by the site |
 | `validation/` | the checks reported in docs/METHODOLOGY.md (see its README) |
 | `requirements-fit.txt` | the pinned fitting environment (the root README, "Refit", installs it in `.stan/`) |
+
+## The reparameterisation of 30 Oct 2026 (`lqm_ext3.stan`)
+
+The maintainer's decision: the same statistical model as `lqm_ext2.stan` (the same joint density of its parameters,
+the same data block, the same names for everything `lqm.py` and the site read: `theta`, `level`, `tau`, `z1`–`z3`,
+`s_tau_f`, `psi_f`, `omega_f`, `psi2`, `psiC`, `omegaC`, `delta_f`, …), sampled in other coordinates. In
+`lqm_ext2.stan` each maker's effects of a family are its scale times standard-normal effects, and the data see only
+the products: the scale and all the maker's effects move together along a curved ridge, which on the cost axis of
+29–30 Oct left the scale of a maker with few data (Qwen) mixing slowly between two modes. `lqm_ext3.stan` samples,
+for every maker and family (any number of effects, no threshold), the realised magnitude of the maker's block of
+effects (log scale), its direction (a free vector divided by its length) and the norm of the standard-normal block
+(with its χ density); the maker's scale is their ratio, and the common scale and the makers' sum-to-zero offsets are
+recovered from the makers' log scales. Per family: ψ (`la_psi`, `r_psi`, `y2`), ω (`la_omega`, `r_omega`, `y3`), τ
+(`la_tau`, `r_tau`, `y1`: the block is every z1 of the maker's couples, `tau_raw` unchanged). The Jacobian terms
+(log s_0, −(F − 1) log η, the χ density) and the reasons are in the file's header; docs/METHODOLOGY.md §5, Estimation,
+explains it in prose. Checked by evaluating both programs at random points on both axes' data (BridgeStan): the log
+densities differ by exactly the Jacobian and auxiliary terms (residual below 10⁻⁹ over six points per axis). A run
+stores the directions y and the effects z both (2,855 more scalars per draw on cost, 5,320 on quality).
 
 ## Input
 
