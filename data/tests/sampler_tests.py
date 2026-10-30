@@ -403,22 +403,23 @@ def grow_far_every_400_iterations():
     lp[3, 12:] -= 7000
     (stop, far, at), _ = grow(L, lp, warm, every=40)
     eq((stop, far, at), (30, [3], "draw 30 (iteration 40)"), "stopped at the first check every 40 iterations")
-    eq(grow(L, lp, warm)[0][:2], (60, [3]), "every 400 iterations: the first slice is the first check")
+    eq(grow(L, lp, warm, every=400)[0][:2], (60, [3]), "every 400 iterations: the first slice is the first check")
     eq(grow_slices(lp, warm), 60, "negative control: the code of 66c6fbf, at the slice")
 
 
 @test
 def checks_of_a_production_run():
-    """The checks of a production run (warm-up 500, every 400 iterations, slices of 900 from 1,800): warm-up
-    iteration 400, the end of warm-up, draws 300, 700, 1,100, 1,500, the slice at 1,800, 1,900, 2,300, 2,700 (slice)…"""
+    """The checks of a production run (warm-up 500, every 250 iterations, slices of 900 from 1,800): warm-up
+    iteration 250, the end of warm-up, draws 250, 500, 750, …, 1,750, the slice at 1,800, 2,000, 2,250, 2,500, 2,700 (slice)…"""
     L = lqm_now()
     st = L.SAMPLER["cost"]
-    eq((st["warmup"], L.SAMPLER["quality"]["warmup"], L.FAR["every"]), (500, 500, 400), "warm-up 500, every 400")
+    eq((st["warmup"], L.SAMPLER["quality"]["warmup"], L.FAR["every"]), (500, 500, 250), "warm-up 500, every 250")
     c = L._checks(st["warmup"], st["samples"], st["samples"] + st["extend_max"], st["extend"])
-    eq(c[:10], [(-100, "warm-up"), (1, "end of warm-up"), (300, "far"), (700, "far"), (1100, "far"), (1500, "far"),
-                (1800, "slice"), (1900, "far"), (2300, "far"), (2700, "slice")], "the first checks")
+    eq(c[:14], [(-250, "warm-up"), (1, "end of warm-up"), (250, "far"), (500, "far"), (750, "far"), (1000, "far"),
+                 (1250, "far"), (1500, "far"), (1750, "far"), (1800, "slice"), (2000, "far"), (2250, "far"), (2500, "far"),
+                 (2700, "slice")], "the first checks")
     eq(c[-1], (18000, "slice"), "the last")
-    eq([d for d in (300, 700, 1800, 1900) if L._is_mark(500, d)], [300, 700, 1900], "CmdStan's checks: the same grid")
+    eq([d for d in (250, 300, 500, 1800, 2000) if L._is_mark(500, d)], [250, 500, 2000], "CmdStan's checks: the same grid")
 
 
 # The real cases: each chain's log-density as the fit's report (.stan/fit-report.log) logged it every 2–3 minutes,
@@ -568,7 +569,7 @@ def far_at_the_end_of_warmup_restarted_then():
 @test
 def no_far_chain_nothing_changes():
     """With the six chains in one region the run is drawn exactly as by the code of 66c6fbf: the same segments, the
-    same draws (the checks every 400 iterations find nothing and cut nothing)."""
+    same draws (the checks every 250 iterations find nothing and cut nothing)."""
     need("numpy")
     import numpy as np
     L = lqm_now()

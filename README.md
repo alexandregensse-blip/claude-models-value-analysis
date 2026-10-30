@@ -131,7 +131,7 @@ uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r model/req
 ```
 
 Both axes are sampled with nutpie (6 chains × (500 + 1,800)), each fit with a seed of its own; a chain left in a far
-region — looked at every 400 iterations, warm-up included — restarts alone on CmdStan from a good chain's last draw
+region — looked at every 250 iterations, warm-up included — restarts alone on CmdStan from a good chain's last draw
 (30 Oct 2026; `model/README.md`).
 
 ## Limitations

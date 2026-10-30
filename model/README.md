@@ -44,7 +44,7 @@ A run stopped part-way resumes from its stored draws, each chain continued on Cm
 adapted step size and metric. A chain left in a far region (its median log-density more than max(300, 5 × the others'
 spread) below the other chains', `lqm.FAR`) loses its draws and restarts alone on CmdStan from a good chain's last
 draw with that chain's adapted state; the good chains are kept (rule of 30 Oct 2026, which replaced the restart of the
-whole axis on CmdStan from the previous fit's draws). The chains are looked at whatever R̂ — every 400 iterations
+whole axis on CmdStan from the previous fit's draws). The chains are looked at whatever R̂ — every 250 iterations
 (warm-up iteration 400, draws 300, 700, …), at the end of warm-up (its last 100 iterations) and at every slice
 (`lqm._checks`; 30 Oct 2026, before only at a slice and when R̂ > 1.05); a chain far within warm-up is reported and
 restarted at the end of warm-up if still far there (no clean restart before nutpie's adaptation ends). Without a far

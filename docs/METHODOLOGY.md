@@ -272,8 +272,8 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   of a good chain with that chain's adapted step size and metric, up to the length of the others; the good chains'
   draws are kept, and all then continue together. This happens once per run: a chain far again stops the run,
   unconverged. Without a far chain, an R̂ above 1.05 (slow mixing) continues the chains like any unconverged run.
-  The chains are looked at whatever R̂, every 400 iterations (warm-up and draws counted together: warm-up iteration
-  400, then draws 300, 700, 1,100, …), at the end of warm-up and at every check of the criteria (1,800 draws, 2,700, …),
+  The chains are looked at whatever R̂, every 250 iterations (warm-up and draws counted together: warm-up iteration
+  250, then draws 250, 500, 750, …), at the end of warm-up and at every check of the criteria (1,800 draws, 2,700, …),
   on nutpie as on CmdStan's continuations (rule of 30 Oct 2026; until then only at the checks of the criteria, and only
   when R̂ exceeded 1.05). On 30 Oct (cost axis) one chain sat at −4,600 against +1,800 to +2,000 for the others from
   warm-up iteration 150 on, at the step limit on every iteration: it would have run an hour before the check at 1,800
@@ -334,7 +334,7 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 | §5 publication | measured by ≥ 2 publishers | one publisher's figures cannot be cross-checked |
 | §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
 | §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
-| §5 sampling | 6 chains × (500 + 1,800), checked every 900 draws up to 18,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 continues the chains, and a chain whose median log-density (last 200 draws; in warm-up its last 100 iterations) is more than max(300, 5 × the others' spread) below the others' restarts alone from a good chain's last draw, looked at every 400 iterations, at the end of warm-up and at every check, whatever R̂ (30 Oct 2026); a seed drawn per fit and recorded | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
+| §5 sampling | 6 chains × (500 + 1,800), checked every 900 draws up to 18,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 continues the chains, and a chain whose median log-density (last 200 draws; in warm-up its last 100 iterations) is more than max(300, 5 × the others' spread) below the others' restarts alone from a good chain's last draw, looked at every 250 iterations, at the end of warm-up and at every check, whatever R̂ (30 Oct 2026); a seed drawn per fit and recorded | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
 | §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
 
 ### Software and references

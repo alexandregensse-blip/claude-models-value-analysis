@@ -468,14 +468,15 @@ DIVERGENT_SHARE = 0.0003              # continuing an unconverged run is allowed
 # Oct, slow but in one region: medians 1,892–1,916 (the fit's report, .stan/fit-report.log; data/tests/sampler_tests.py
 # checks these cases). Checked every `every` iterations from the start of warm-up (30 Oct 2026): in the warm-up of
 # 30 Oct the criterion on the last 100 iterations flags chain 5 alone from iteration 67 on (29 Oct seed 12: its chains
-# 4 and 5 from 80 on), and good chains too before (the first iterations' transient): the first check, at 400, is past it.
+# 4 and 5 from 80 on), and good chains too before (the first iterations' transient): the first check, at 250 (the maintainer, 30 Oct: every
+# 250 iterations, two checks within the warm-up of 500), is past it.
 # Within warm-up nothing clean can be done before the adaptation ends: nutpie runs the chains in one process and can
 # neither stop one chain nor start one from a given point with a given step size and metric (init_mean is one point
 # for every chain, jittered), and CmdStan's warm-up re-estimates the metric by its own windows (over the 100 remaining
 # iterations, from one chain's 75 draws in 6,128 dimensions) — while stopping nutpie then would cut the good chains'
 # adaptation too. A chain far at a warm-up check is reported; it is restarted at the end of warm-up (the first draw,
 # every chain's adaptation final) if it is still far there.
-FAR = dict(draws=200, warmup=100, every=400, lp=300, spread=5)
+FAR = dict(draws=200, warmup=100, every=250, lp=300, spread=5)
 
 
 def cmdstan():
