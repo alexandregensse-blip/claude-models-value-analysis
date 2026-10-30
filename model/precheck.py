@@ -216,7 +216,7 @@ def main(run_smoke=False):
     if run_smoke:
         rhat, worst = smoke()
         print(f"smoke fit (quality, 4 × 500 + 500): R̂ max {rhat} · worst {worst[:4]}")
-        if rhat > SMOKE_RHAT:
+        if rhat is None or rhat > SMOKE_RHAT:            # None: R̂ undefined (too few draws)
             print(f"!! a chain is in another region (R̂ > {SMOKE_RHAT}): the full fit is not started")
             return 1
     return 0

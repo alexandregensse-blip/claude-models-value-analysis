@@ -47,7 +47,11 @@ draw with that chain's adapted state; the good chains are kept (rule of 30 Oct 2
 whole axis on CmdStan from the previous fit's draws). The chains are looked at whatever R̂ — every 250 iterations
 (warm-up iteration 400, draws 300, 700, …), at the end of warm-up (its last 100 iterations) and at every slice
 (`lqm._checks`; 30 Oct 2026, before only at a slice and when R̂ > 1.05); a chain far within warm-up is reported and
-restarted at the end of warm-up if still far there (no clean restart before nutpie's adaptation ends). Without a far
+restarted at the end of warm-up if still far there (no clean restart before nutpie's adaptation ends). No verdict on
+fewer than 100 draws of each chain's own (`FAR["least"]`, 30 Oct 2026: the check right after a restart at the end of
+warm-up, on one draw per chain, had flagged a good chain and stopped the run); after the restart all the chains go on
+together on CmdStan to the planned draws. A run that ends unconverged says why (`stopped` in the diagnostics), and
+R̂ undefined on too few draws reads `null`, its ESS 0. Without a far
 chain an R̂ above 1.05 continues the chains. An axis whose prepared data and model code are unchanged since the cached, converged fit is
 kept as it is (`--all` refits both).
 

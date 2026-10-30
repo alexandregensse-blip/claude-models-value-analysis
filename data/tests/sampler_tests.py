@@ -17,6 +17,8 @@ MODEL = os.path.join(HERE, "..", "..", "model")
 ROOT = os.path.join(HERE, "..", "..")
 BEFORE = "52be157"                                                  # the last commit with the restart rule
 SLICES = "66c6fbf"                                                  # far chains looked at only at a slice, R̂ > 1.05
+ONE_DRAW = "7482996"             # a far verdict on one draw per chain after a restart; diagnostics crash on one draw
+LEAST = 5                        # FAR["least"] in the stubs' short runs (production: 100)
 
 TESTS = []
 
@@ -75,9 +77,10 @@ class Stub:
     """The sampler and diagnostics of one scenario, patched into a module L (lqm now or before). regions = each chain's
     log-density level in the first run; div = draws marked divergent per chain of the first run."""
 
-    def __init__(self, L, regions, div=None, stop_far=None, jump=None):
+    def __init__(self, L, regions, div=None, stop_far=None, jump=None, lp_first=None):
         import numpy as np
         self.L, self.regions, self.div, self.calls, self.resets = L, regions, div or {}, [], 0
+        self.lp_first = lp_first or {}       # call number → {chain: the log-density of its first draw}
         self.stop_far = stop_far             # the first run stops at its first draw on these far chains (as _grow
         self.jump = jump or {}               # does at the end of warm-up); jump: call number → {chain: new level}
         self.rng = np.random.default_rng(1)
@@ -106,6 +109,7 @@ class Stub:
                  [d["nu"] for d in inits] if inits else list(self.rng.normal(1900, 50, C)))   # cold: anywhere near
         for c, v in self.jump.get(len(self.calls), {}).items():
             level[c] = v
+        first_lp = self.lp_first.get(len(self.calls), {})
         self.calls.append(dict(engine=st["engine"], chains=C, draws=n, inits=inits, adapted=adapted, seed=seed))
         if first and self.stop_far:
             info = json.load(open(os.path.join(seg, "seg.json")))
@@ -122,7 +126,8 @@ class Stub:
                 for i in range(n):
                     dv = int(first and i < self.div.get(c, 0))
                     t = th[0] + self.rng.normal(0, 0.1)
-                    f.write(f"{level[c] + self.rng.normal(0, 30)},0.9,0.1,5,31,{dv},0,{t},{-t},{level[c]}\n")
+                    lp = first_lp[c] if i == 0 and c in first_lp else level[c] + self.rng.normal(0, 30)
+                    f.write(f"{lp},0.9,0.1,5,31,{dv},0,{t},{-t},{level[c]}\n")
 
     def diagnostics(self, post):
         import numpy as np
@@ -141,10 +146,17 @@ def run(L, regions, div=None, **kw):
     """_run of module L on a scenario, in a temporary store: (posterior in memory, stub, store manifest)."""
     stub = Stub(L, regions, div, **kw)
     store = L.RunStore(tempfile.mkdtemp(prefix="lqm-stub-"))
+    far = getattr(L, "FAR", {})                                      # 52be157 has none
+    saved = dict(far)
+    stub.said = []
     try:
-        post = L._run(store, {}, "cost", dict(ST), 7, lambda *a: None)
+        if "least" in far:
+            far["least"] = LEAST
+        post = L._run(store, {}, "cost", dict(ST), 7, stub.said.append)
         return post.in_memory(), stub, json.loads(json.dumps(store.manifest))
     finally:
+        far.clear()
+        far.update(saved)
         stub.restore()
         shutil.rmtree(store.path, ignore_errors=True)
 
@@ -308,7 +320,7 @@ def grow(L, lp, warm=None, wu=10, every=None, far=None):
     said = []
     d = nutpie_store(lp, warm=warm)
     try:
-        L.FAR.update(dict(far or {}, **({"every": every} if every else {})))
+        L.FAR.update(dict(far or {}, least=LEAST, **({"every": every} if every else {})))
         return L._grow(Finished(), d, wu, 60, 180, 30, said.append), said
     finally:
         L.FAR.clear()
@@ -740,6 +752,96 @@ def far_criterion_on_the_warmup_of_30_oct():
         eq({tuple(L.far_chains(lp[:, max(0, i - 100):i])) for i in range(first, n + 1)}, {tuple(want)}, root)
         if root == TODAY:
             eq(L.far_chains(lp[:, :64]) != [4], True, "negative control: the first iterations flag good chains too")
+
+
+# The fit of 30 Oct 2026 14:57–15:10 (.stan/fit-prod.log, store .stan/runs/cost-8c4130a43f050029): chain 4 far at
+# warm-up iteration 250 and at the end of warm-up, restarted from chain 0's last draw; each chain's one draw after the
+# restart (chains 0–3 and 5 of the first run, then the restarted chain: lp__ at chain 0's point), as stored.
+LP_14_57 = [2068.84218755, 1984.97788353, 2050.87489373, 1930.66183226, 1714.1020961, 2068.8422]
+REGIONS_14_57 = [1900, 1905, 1895, 1910, -4600, 1898]
+
+
+@test
+def restart_then_continued_not_judged_on_one_draw():
+    """The sequence of 30 Oct 14:57: chain 4 far at the end of warm-up, the run stopped at its first draw, chain 4
+    restarted on CmdStan from chain 0's last draw; the six chains' one draw each are those of the real store, on which
+    the far criterion flags good chain 5 (index 4 once chain 4 is dropped: 1,714 against the others' 2,051). No verdict
+    on fewer than FAR["least"] draws of each chain's own: the five good chains (nutpie's adapted state) and the
+    restarted one go on together on CmdStan from their last draws to the planned 60, then by slices to the criteria,
+    and the run says why it ended. Negative control: the code of 7482996 judges the one draw, finds chain 4 far, and
+    stops the run at one draw per chain."""
+    need("numpy")
+    import numpy as np
+    L = lqm_now()
+    lp = np.asarray(LP_14_57)[:, None]
+    eq((L.far_chains(lp), L._far(lp)), ([4], []), "the stored draw: far by the criterion, no verdict on one draw")
+    eq(L._far(np.repeat(lp, 99, axis=1)), [], "nor on 99 draws (FAR['least'] 100)")
+    eq(L._far(np.repeat(lp, 100, axis=1)), [4], "a verdict from 100 draws on")
+    first = {**dict(enumerate(LP_14_57[:4])), 4: -4600.0, 5: LP_14_57[4]}       # the first run's draw, chain 4 far
+    kw = dict(stop_far=[4], lp_first={0: first, 1: {0: LP_14_57[5]}})
+    post, stub, man = run(L, REGIONS_14_57, **kw)
+    eq(np.allclose(post.lp()[:, 0], LP_14_57), True, "the six first draws as in the store of 14:57")
+    eq([(c["engine"], c["chains"], c["draws"], c["adapted"] is not None) for c in stub.calls],
+       [("nutpie", 6, 1, False), ("cmdstan", 1, 1, True), ("cmdstan", 5, 59, True), ("cmdstan", 1, 59, True),
+        ("cmdstan", 5, 30, True), ("cmdstan", 1, 30, True), ("cmdstan", 5, 30, True), ("cmdstan", 1, 30, True)],
+       "restarted at the first draw, then all six on CmdStan to 60, then by slices of 30")
+    eq(stub.calls[2]["adapted"]["step_size"], [0.1, 0.11, 0.12, 0.13, 0.15], "the good chains with their own state")
+    eq([round(d["nu"]) for d in stub.calls[2]["inits"]], [1900, 1905, 1895, 1910, 1898], "from their last draws")
+    eq(([p["draws"] for p in man["parts"]], man["parts"][1]["far"], man["parts"][1]["source"]), ([SLOW, SLOW], [4], [0]),
+       "120 draws per chain, chain 4 restarted from chain 0")
+    eq((post.stats["far_restarted"], post.stats["stopped"]), (1, "criteria met"), "converged, and says so")
+    eq(any("not restarted" in m for m in stub.said), False, "no far verdict after the restart")
+    B = lqm_before(ONE_DRAW)
+    if B is None:
+        raise AssertionError("SKIP negative control: git cannot show the code of " + ONE_DRAW)
+    post0, stub0, man0 = run(B, REGIONS_14_57, **kw)
+    eq(([p["draws"] for p in man0["parts"]], len(stub0.calls)), ([1, 1], 2),
+       "negative control: the code of 7482996 stops the run at one draw per chain")
+    eq([m.split(": ", 1)[1] for m in stub0.said if "not restarted" in m],
+       ["chain(s) [4] in a far region, not restarted (a far chain was restarted already)"],
+       "negative control: on good chain 5, as in the log of 14:57")
+
+
+@test
+def far_again_after_a_restart_stops_with_its_reason():
+    """After a restart a chain far again at a check (good chain 1 leaves for −9,000 in the parts' first continuation)
+    stops the run, unconverged (once per run), and the run records why: post.stats["stopped"]."""
+    need("numpy")
+    L = lqm_now()
+    post, stub, man = run(L, FAR5, stop_far=[2], jump={2: {1: -9000}})
+    eq([p["draws"] for p in man["parts"]], [60, 60], "stopped at the planned 60")
+    eq(post.stats["stopped"], "chain(s) [1] in a far region at draw 60, not restarted (a far chain was restarted "
+       "already)", "the reason")
+
+
+@test
+def diagnostics_of_a_run_stopped_at_one_draw():
+    """The real diagnostics (ArviZ) on six chains of one draw each: R̂ undefined (None), ESS 0, not converged — no
+    crash; the same with every draw alike. Negative control: the code of 7482996 raises 'cannot convert float NaN to
+    integer', as the fit of 14:57 did."""
+    need("numpy", "arviz")
+    import numpy as np
+    L = lqm_now()
+    rng = np.random.default_rng(5)
+    mk = lambda M, x: M.Posterior({"level": [x], "theta": [rng.normal(size=(1, 6, 4))],
+                                   "lp__": [np.asarray(LP_14_57)[None, :]]},
+                                  dict(divergences=0, max_treedepth_hits=None, leapfrog_mean=1023.0))
+    import warnings
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        for x in (rng.normal(size=(1, 6, 3)), np.ones((1, 6, 3))):
+            diag, mcse = L.diagnostics(mk(L, x))
+            eq((diag["rhat_max"], diag["ess_bulk_min"], diag["ess_tail_min"], diag["rhat_max_level"],
+                diag["ess_bulk_min_level"], L.converged(diag)), (None, 0, 0, None, 0, False), "undefined, unconverged")
+            eq((len(mcse), json.loads(json.dumps(diag))["draws"]), (3, 6), "one MCSE per level; JSON-safe")
+        B = lqm_before(ONE_DRAW)
+        if B is None:
+            raise AssertionError("SKIP negative control: git cannot show the code of " + ONE_DRAW)
+        try:
+            B.diagnostics(mk(B, rng.normal(size=(1, 6, 3))))
+            raise AssertionError("negative control: the code of 7482996 did not crash")
+        except ValueError as e:
+            eq(str(e), "cannot convert float NaN to integer", "negative control")
 
 
 if __name__ == "__main__":

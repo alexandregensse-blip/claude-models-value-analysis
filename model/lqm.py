@@ -476,7 +476,17 @@ DIVERGENT_SHARE = 0.0003              # continuing an unconverged run is allowed
 # iterations, from one chain's 75 draws in 6,128 dimensions) — while stopping nutpie then would cut the good chains'
 # adaptation too. A chain far at a warm-up check is reported; it is restarted at the end of warm-up (the first draw,
 # every chain's adaptation final) if it is still far there.
-FAR = dict(draws=200, warmup=100, every=250, lp=300, spread=5)
+# A verdict reads at least `least` draws (or warm-up iterations) of every chain, each chain's own (30 Oct 2026): fewer,
+# no verdict. A single draw's log-density varies by about √(d/2) (≈ 55 on the cost axis) and the chains' single draws
+# by more: in the fit of 30 Oct 14:57 the five good chains' first draws after warm-up spread over 1,714–2,069, and the
+# check made right after the far chain's restart, on that one draw per chain, flagged the good chain at 1,714 (2,051
+# the others' median, 337 below it > 300), which stopped the run at one draw (.stan/runs/cost-8c4130a43f050029). A
+# restarted chain is a part of its own (RunStore.add): its draws, from the restart on, are all its own, as long as the
+# others' after the drop, so every check after a restart reads only draws drawn since it by the restarted chain. Its
+# log-density is CmdStan's lp__, the good chains' nutpie's logp: on one scale (both up to the same constant, with the
+# Jacobian): the restarted chain's first draw, at its source chain's last point, has lp__ 2068.8422 and nutpie's
+# logp there 2068.84218755.
+FAR = dict(draws=200, warmup=100, every=250, lp=300, spread=5, least=100)
 
 
 def cmdstan():
@@ -1009,6 +1019,14 @@ def far_chains(lp):
     return out
 
 
+def _far(lp):
+    """far_chains once every chain has FAR["least"] draws (or warm-up iterations) of its own in lp; before, no verdict
+    ([])."""
+    if lp is None or len(lp) < 2 or lp.shape[1] < FAR["least"]:
+        return []
+    return far_chains(lp)
+
+
 def _is_mark(warmup, n):
     """Whether n draws per chain end a far check (FAR["every"] iterations, warm-up and draws counted together)."""
     return n > 0 and (warmup + n) % FAR["every"] == 0
@@ -1057,7 +1075,7 @@ def sampling_key(data, axis, st):
                         sort_keys=True, default=lambda a: a.tolist()).encode())
     for f in (Posterior, _f64, RunStore, _chunks_kept, _nutpie_written, _nutpie_warmup_written, _read_nutpie,
               _read_cmdstan, _last_draws, _centre, _inits, fit, _run, _sample, _grow, _checks, _is_mark, far_chains,
-              diagnostics, converged):
+              _far, diagnostics, converged):
         h.update(inspect.getsource(f).encode())
     req = os.path.join(HERE, "requirements-fit.txt")
     if os.path.exists(req):
@@ -1155,7 +1173,7 @@ def _run(store, data, axis, st, seed, say):
             n = {p["draws"] for p in store.parts}
             if (len(n) == 1 and _is_mark(st["warmup"], min(n))
                     and any(p["draws"] < p["planned"] for p in store.parts)
-                    and far_chains(store.posterior().lp())):
+                    and _far(store.posterior().lp())):
                 return
 
     def restart(post, far):
@@ -1187,14 +1205,18 @@ def _run(store, data, axis, st, seed, say):
     # A far chain is looked at first, whatever R̂ (30 Oct 2026): its divergent draws go with it. A few divergent draws
     # (≤ 0.03 % (user, 20 Oct): 5 of 18,000 on the cost axis of 20 Oct 2026) do not forbid continuing the chains, nor
     # does a high R̂ without a far chain (slow mixing). A run stopped early by a far chain draws its planned draws first.
+    # Right after a restart the chains have one draw each (a far chain found at the end of warm-up): no verdict on it
+    # (_far: FAR["least"]); the parts go on together on CmdStan, from one far check to the next, to the planned draws.
+    stopped = None                                                   # why the sampling ended
     while True:
         post = store.posterior()
         p = store.parts[0]
-        far = p.get("far_seen") if len(store.parts) == 1 and p.get("far_seen") else far_chains(post.lp())
+        far = p.get("far_seen") if len(store.parts) == 1 and p.get("far_seen") else _far(post.lp())
         if far:
             if len(store.parts) > 1 or post.adapted is None:         # once per run, and only from an adapted state
-                say(f"{axis}: chain(s) {far} in a far region, not restarted "
-                    + ("(a far chain was restarted already)" if len(store.parts) > 1 else "(no adapted state)"))
+                stopped = (f"chain(s) {far} in a far region at draw {p['draws']}, not restarted "
+                           + ("(a far chain was restarted already)" if len(store.parts) > 1 else "(no adapted state)"))
+                say(f"{axis}: {stopped}: the run stops, unconverged")
                 for k in range(len(store.parts)):
                     store.plan(k, store.parts[k]["draws"])
                 break
@@ -1208,8 +1230,11 @@ def _run(store, data, axis, st, seed, say):
             say(f"{axis}: {p['draws']} draws/chain {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS "
                 f"{diag['ess_bulk_min']}/{diag['ess_tail_min']}, divergences {diag['divergences']}")
             if converged(diag) or diag["divergences"] > DIVERGENT_SHARE * diag["draws"]:
+                stopped = "criteria met" if converged(diag) else "too many divergent draws to continue"
                 break
         if post.adapted is None or extra >= st["extend_max"]:
+            stopped = "no adapted state to continue from" if post.adapted is None else \
+                f"{st['extend_max']} draws per chain beyond the planned ones, unconverged"
             break
         # the same chains, continued (a nutpie run continued itself: here only after a stop) to the next slice — a run
         # stopped by a far chain between slices (or before the planned draws) goes on to the slice it stopped short of
@@ -1219,7 +1244,7 @@ def _run(store, data, axis, st, seed, say):
         complete()
     p = store.parts[0]
     ext = -(-(p["draws"] - st["samples"]) // st["extend"]) if p["draws"] > st["samples"] else 0
-    post.stats.update(extensions=ext, engine=st["engine"], resumed=resumed, seed=seed,
+    post.stats.update(extensions=ext, engine=st["engine"], resumed=resumed, seed=seed, stopped=stopped,
                       far_restarted=len(store.parts[1]["far"]) if len(store.parts) > 1 else 0,
                       far_at=store.parts[1].get("at") if len(store.parts) > 1 else None)
     return post
@@ -1316,16 +1341,16 @@ def _grow(run, root, warmup, planned, top, extend, say=None):
         if kind in ("warm-up", "end of warm-up") and not warm:       # a store without its warm-up
             continue
         if kind == "warm-up":
-            far = far_chains(warm_lp(g, warmup + d))
+            far = _far(warm_lp(g, warmup + d))
             if far:
                 say(f"chain(s) {far} in a far region at warm-up iteration {warmup + d}: restarted at the end of warm-up "
                     "if still far there")
             continue
         if kind == "end of warm-up":
-            far, at = far_chains(warm_lp(g, warmup)), f"end of warm-up (its last {FAR['warmup']} iterations)"
+            far, at = _far(warm_lp(g, warmup)), f"end of warm-up (its last {FAR['warmup']} iterations)"
         else:
             draws = _NutpieDraws(g, d)
-            far, at = far_chains(draws.lp()), f"draw {d} (iteration {warmup + d})"
+            far, at = _far(draws.lp()), f"draw {d} (iteration {warmup + d})"
             if not far and kind == "slice":
                 if d >= top:
                     run.wait()
@@ -1493,6 +1518,11 @@ def panel_curve(post, data, lo, hi, n=41):
             for t in np.linspace(lo, hi, n)]
 
 
+def _num(x, digits):
+    """x rounded, or None when it is not finite (R̂ of a run stopped after a few draws): JSON has no NaN or infinity."""
+    return round(x, digits) if math.isfinite(x) else None
+
+
 def diagnostics(post):
     """Rank-normalised split R̂, bulk and tail ESS (Vehtari et al. 2021, as computed by ArviZ) over every scalar of
     every variable; Monte Carlo error of each `level`; sampler statistics."""
@@ -1509,18 +1539,24 @@ def diagnostics(post):
             dt = az.from_dict({"posterior": {"x": x[:, :, keep]}})
             rh = np.atleast_1d(az.rhat(dt)["x"].values); eb = np.atleast_1d(az.ess(dt, method="bulk")["x"].values)
             et = np.atleast_1d(az.ess(dt, method="tail")["x"].values)
+            rh = np.where(np.isfinite(rh), rh, np.inf)               # too few draws (a run stopped early): R̂ and ESS
+            eb, et = (np.where(np.isfinite(z), z, 0.0) for z in (eb, et))   # undefined, read as unconverged
             rh_max, eb_min = max(rh_max, float(rh.max())), min(eb_min, float(eb.min()))
             et_min = min(et_min, float(et.min()))
             worst = sorted(worst + [(float(r), f"{name}[{s0 + keep[k] + 1}]") for k, r in enumerate(rh)], reverse=True)[:5]
             if name == "level":
                 lv.append((rh, eb, np.atleast_1d(az.mcse(dt, method="median")["x"].values)))
-        if name == "level":
+        if name == "level" and not lv:                               # every draw alike (a single draw)
+            mcse_level = np.full(math.prod(post.shape(name)[2:]), np.nan)
+            level = dict(rhat_max_level=None, ess_bulk_min_level=0, mcse_max_level=None)
+        elif name == "level":
             rh, eb, mcse_level = (np.concatenate(z) for z in zip(*lv))
-            level = dict(rhat_max_level=round(float(rh.max()), 4), ess_bulk_min_level=int(eb.min()),
-                         mcse_max_level=round(float(mcse_level.max()), 5))
+            level = dict(rhat_max_level=_num(float(rh.max()), 4), ess_bulk_min_level=int(eb.min()),
+                         mcse_max_level=_num(float(np.max(mcse_level, initial=-np.inf)), 5))
     worst = [n for _, n in worst]
     C, n = post.shape("level")[:2]
-    return dict(rhat_max=round(rh_max, 4), ess_bulk_min=int(eb_min), ess_tail_min=int(et_min), **level,
+    eb_min, et_min = (0 if not math.isfinite(x) else x for x in (eb_min, et_min))   # no scalar read at all
+    return dict(rhat_max=_num(rh_max, 4), ess_bulk_min=int(eb_min), ess_tail_min=int(et_min), **level,
                 worst_rhat=worst, draws=int(C * n), **post.stats), mcse_level
 
 
@@ -1531,8 +1567,9 @@ CONVERGED = dict(rhat=1.01, ess=400)
 
 
 def converged(diag):
-    return (diag["rhat_max"] <= CONVERGED["rhat"] and diag["ess_bulk_min"] >= CONVERGED["ess"]
-            and diag["ess_tail_min"] >= CONVERGED["ess"] and diag["divergences"] == 0)
+    return (diag["rhat_max"] is not None and diag["rhat_max"] <= CONVERGED["rhat"]    # None: too few draws to tell
+            and diag["ess_bulk_min"] >= CONVERGED["ess"] and diag["ess_tail_min"] >= CONVERGED["ess"]
+            and diag["divergences"] == 0)
 
 
 def predict(post, maps, groups, rows, thin=4, seed=0):

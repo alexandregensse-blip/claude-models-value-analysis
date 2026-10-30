@@ -283,7 +283,13 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   CmdStan's warm-up would re-estimate the metric by its own windows (from one chain's 75 iterations in 6,128 dimensions
   over the last 100 iterations of warm-up), and stopping nutpie then would cut the good chains' adaptation too. A chain
   still far at the end of warm-up (on its last 100 iterations) is restarted there, from a good chain's first draw with
-  its final step size and metric, and the run then draws its planned 1,800 draws on CmdStan.
+  its final step size and metric, and the run then draws its planned 1,800 draws on CmdStan. A check needs at least
+  100 draws (or warm-up iterations) of each chain's own; before, it gives no verdict. In the fit of 30 Oct 14:57 the
+  check made right after such a restart read one draw per chain, on which the good chains spread over 1,714–2,069: it
+  flagged the good chain at 1,714 (337 below the others' 2,051) and stopped the run at one draw. A restarted chain's
+  draws are all its own (CmdStan's lp__, on the same scale as nutpie's log-density: 2,068.8422 against 2,068.84219 at
+  one point). A run that ends unconverged records why, and an R̂ that too few draws leave undefined is reported as
+  such (null, ESS 0), never as a number.
   Until 30 Oct an R̂ above 1.05 threw every draw away and sampled the axis again on CmdStan from the previous fit's
   last draws — a cold start in practice, once the data's dimensions had changed. On 29–30 Oct the cost axis reached
   R̂ 1.081 at 1,800 draws with its six chains in one region (median log-densities 1,892–1,916; one maker's scale
