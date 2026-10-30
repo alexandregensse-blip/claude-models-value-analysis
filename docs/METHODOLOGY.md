@@ -248,7 +248,11 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
 - **Samplers.** nutpie (Seyboldt et al.) on both axes, whose adaptation of the mass matrix needs fewer steps here:
-  6 chains × (600 warm-up + 1,800 draws), target acceptance 0.9 (since 29 Oct 2026; 4 × (1,000 + 3,000) before).
+  6 chains × (500 warm-up + 1,800 draws), target acceptance 0.9 (warm-up 500 since 30 Oct 2026, 600 from 29 Oct;
+  4 × (1,000 + 3,000) before). In the two runs whose warm-up was kept (cost, 29 Oct and 30 Oct), the good chains' step
+  size settled at 0.013–0.016 by iteration 50 and their trajectories at 1,023 leapfrog steps (tree depth 10) from
+  iteration 50 on, the share of iterations that hit the depth limit falling from about 70 % to 30–50 % as the metric
+  improved; what these do not show is the metric's quality, which shows in the draws' effective sample size per draw.
   While the criteria are not met, the same chains continue within the sampling process, checked every 900 draws on the
   draws up to the check, up to 16,200 more; the run stops at the first check that meets them and keeps exactly the
   draws up to it. Before 21 Oct 2026 the quality axis drew new batches of independent chains instead (up to four), and
@@ -258,16 +262,28 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   second on the slowest parameter. A second batch of random starts left two of its four chains in a remote region
   (the Student-t's ν at its bound, the effects' scales 10 to 25 times their value elsewhere, no data in particular to
   blame): continuing the chains that have converged avoids drawing new starts.
-- **A chain in a far region** (the maintainer's rule of 30 Oct 2026). nutpie cannot be given starting points, and a
-  random start can leave a chain far from the others. When R̂ exceeds 1.05, each chain's median log-density over its
-  last 200 draws is compared with the median of the other chains' medians: a chain more than max(300, 5 × their
-  spread) below is in a far region (the spread is 1.4826 × the median absolute deviation of the other chains'
+- **A chain in a far region** (the maintainer's rules of 30 Oct 2026). nutpie cannot be given starting points, and a
+  random start can leave a chain far from the others. Each chain's median log-density over its last 200 draws (in
+  warm-up, its last 100 iterations) is compared with the median of the other chains' medians: a chain more than
+  max(300, 5 × their spread) below is in a far region (the spread is 1.4826 × the median absolute deviation of the other chains'
   medians, which a second far chain does not widen). Within one region a draw's log-density varies by about √(d/2), d
   the number of unconstrained parameters (about 55 on the cost axis, 74 on quality); 300 is four to five such
   deviations. The far chain's draws are dropped and it alone restarts, on CmdStan without warm-up, from the last draw
   of a good chain with that chain's adapted step size and metric, up to the length of the others; the good chains'
   draws are kept, and all then continue together. This happens once per run: a chain far again stops the run,
   unconverged. Without a far chain, an R̂ above 1.05 (slow mixing) continues the chains like any unconverged run.
+  The chains are looked at whatever R̂, every 400 iterations (warm-up and draws counted together: warm-up iteration
+  400, then draws 300, 700, 1,100, …), at the end of warm-up and at every check of the criteria (1,800 draws, 2,700, …),
+  on nutpie as on CmdStan's continuations (rule of 30 Oct 2026; until then only at the checks of the criteria, and only
+  when R̂ exceeded 1.05). On 30 Oct (cost axis) one chain sat at −4,600 against +1,800 to +2,000 for the others from
+  warm-up iteration 150 on, at the step limit on every iteration: it would have run an hour before the check at 1,800
+  draws; the criterion flags it alone from iteration 67 on, and flags good chains too in the first iterations, which
+  the first check, at 400, is past. Within warm-up a far chain is reported but not yet restarted: nutpie runs the
+  chains in one process and can neither stop one nor start one from a given point with a given step size and metric,
+  CmdStan's warm-up would re-estimate the metric by its own windows (from one chain's 75 iterations in 6,128 dimensions
+  over the last 100 iterations of warm-up), and stopping nutpie then would cut the good chains' adaptation too. A chain
+  still far at the end of warm-up (on its last 100 iterations) is restarted there, from a good chain's first draw with
+  its final step size and metric, and the run then draws its planned 1,800 draws on CmdStan.
   Until 30 Oct an R̂ above 1.05 threw every draw away and sampled the axis again on CmdStan from the previous fit's
   last draws — a cold start in practice, once the data's dimensions had changed. On 29–30 Oct the cost axis reached
   R̂ 1.081 at 1,800 draws with its six chains in one region (median log-densities 1,892–1,916; one maker's scale
@@ -278,8 +294,11 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   limit is counted in draws, not in seconds, and a check reads only the draws up to it, so that a loaded machine does
   not change the fit.
 - **Stored draws.** Each axis' draws are written to disk as they are drawn (`.stan/runs`, outside git) and kept until
-  that axis' sampling inputs change — the Stan program, the axis' data, the seed, the sampler settings and the code
-  that samples. A fit stopped part-way, by the machine's memory limit or a restart, resumes from them: each chain
+  that axis' sampling inputs change — the Stan program, the axis' data, the sampler settings and the code that
+  samples. Each fit draws its own random seed (the maintainer's rule of 30 Oct 2026; a fixed seed before), printed,
+  kept in the run's manifest and written per axis in `model/fit-cache.json`: a run resumed or summarised again from its
+  stored draws keeps the seed it was started with, and the seed is not one of the inputs whose change makes an axis
+  stale, so that a new launch does not refit a converged axis. A fit stopped part-way, by the machine's memory limit or a restart, resumes from them: each chain
   continues from its last stored draw with its adapted step size and metric, on CmdStan, as a continuation does. An
   axis whose sampling inputs are unchanged is summarised again from its stored draws without sampling; an axis whose
   data and model are unchanged is not refitted. The draws are read from disk block by block, so that summarising
@@ -315,7 +334,7 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 | §5 publication | measured by ≥ 2 publishers | one publisher's figures cannot be cross-checked |
 | §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
 | §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
-| §5 sampling | 6 chains × (600 + 1,800), checked every 900 draws up to 18,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 continues the chains, and a chain whose median log-density (last 200 draws) is more than max(300, 5 × the others' spread) below the others' restarts alone from a good chain's last draw (30 Oct 2026) | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
+| §5 sampling | 6 chains × (500 + 1,800), checked every 900 draws up to 18,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 continues the chains, and a chain whose median log-density (last 200 draws; in warm-up its last 100 iterations) is more than max(300, 5 × the others' spread) below the others' restarts alone from a good chain's last draw, looked at every 400 iterations, at the end of warm-up and at every check, whatever R̂ (30 Oct 2026); a seed drawn per fit and recorded | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
 | §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
 
 ### Software and references
