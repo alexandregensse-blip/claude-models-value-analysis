@@ -271,7 +271,8 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   recovered scales, offsets and effects satisfy the old definitions. The formulas, term by term, are in the header
   of `model/lqm_ext3.stan`.
 - **Samplers.** nutpie (Seyboldt et al.) on both axes, whose adaptation of the mass matrix needs fewer steps here:
-  6 chains × (500 warm-up + 1,800 draws), target acceptance 0.9 (warm-up 500 since 30 Oct 2026, 600 from 29 Oct;
+  6 chains × (500 warm-up + 1,800 draws), target acceptance 0.95 (0.9 before 2 Nov 2026, when lqm_ext3's
+  divergences passed the allowed share on both axes; warm-up 500 since 30 Oct 2026, 600 from 29 Oct;
   4 × (1,000 + 3,000) before). In the two runs whose warm-up was kept (cost, 29 Oct and 30 Oct), the good chains' step
   size settled at 0.013–0.016 by iteration 50 and their trajectories at 1,023 leapfrog steps (tree depth 10) from
   iteration 50 on, the share of iterations that hit the depth limit falling from about 70 % to 30–50 % as the metric

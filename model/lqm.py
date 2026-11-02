@@ -452,10 +452,13 @@ RUNS = os.path.join(STAN_DIR, "runs")                                # each axis
 # Warm-up 500 (maintainer, 30 Oct 2026; 600 from 29 Oct, 1,000 before): in the two nutpie stores with warm-up
 # statistics (cost, 29 Oct seed 12 and 30 Oct seed 13) the good chains' step size settles at 0.013–0.016 by iteration
 # 50 and their trajectories at 1,023 leapfrog steps (depth 10) from iteration 50 on; the metric's quality shows only in
-# the draws' effective sample size per draw.
-SAMPLER = {"quality": dict(engine="nutpie", chains=6, warmup=500, samples=1800, target_accept=0.9, extend=900,
+# the draws' effective sample size per draw. Target acceptance 0.95 (maintainer, 2 Nov 2026; 0.9 before): under
+# lqm_ext3 the fit of 30 Oct mixed faster (cost R̂ 1.07 at 1,800 draws, 1.15 under lqm_ext2; quality 1.009 in 1 h) but
+# diverged more (cost 63, 60 of them in two chains; quality 23), past DIVERGENT_SHARE on both axes — a smaller step,
+# chosen by the adaptation itself, is the standard remedy, with no threshold on the data.
+SAMPLER = {"quality": dict(engine="nutpie", chains=6, warmup=500, samples=1800, target_accept=0.95, extend=900,
                            extend_max=16200),
-           "cost": dict(engine="nutpie", chains=6, warmup=500, samples=1800, target_accept=0.9, extend=900,
+           "cost": dict(engine="nutpie", chains=6, warmup=500, samples=1800, target_accept=0.95, extend=900,
                         extend_max=16200)}
 # The two axes run one after the other: on this shared 8-core machine the quality axis took 1,241 s beside the cost
 # axis and 344 s alone (8 Oct 2026) — the chains of both compete for the same cores, so running them together saves
