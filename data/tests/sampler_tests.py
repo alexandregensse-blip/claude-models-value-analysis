@@ -520,8 +520,10 @@ def restart_inputs_accepted_by_cmdstan():
     """Two things a far chain's restart needs from CmdStan, found on a real short run (30 Oct): a one-chain run's CSV
     file has no _<n> suffix (lqm_ext2-<time>.csv), and a starting point read from CSV draws (6 digits) must have every
     sum-to-zero vector re-centred, not θ alone (zd, and in lqm_ext2.stan zf_tau, zf_psi, zf_omega: Stan refuses a
-    sum above 1e-8; the makers' zd is a sum-to-zero parameter of lqm_ext2.stan and lqm_ext3.stan alike).
-    Negative controls: the code before reads no one-chain file (an error) and re-centres θ alone."""
+    sum above 1e-8; the makers' zd is a sum-to-zero parameter of lqm_ext2.stan and lqm_ext3.stan alike, checked here
+    under lqm_ext3.stan; lqm_ext4.stan, 2 Nov 2026, has θ alone, and a warm start saved under lqm_ext3 keeps only the
+    parameters lqm_ext4 has). Negative controls: the code before reads no one-chain file (an error) and re-centres θ
+    alone."""
     need("numpy")
     import numpy as np
     L = lqm_now()
@@ -550,10 +552,33 @@ def restart_inputs_accepted_by_cmdstan():
     z = np.array([[[0.300001, -0.1, -0.2]]])                         # (draws, chains, F): sums to 1e-6
     th = np.array([[[1.000001, -1.0]]])
     post = L.Posterior({"zd": [z], "theta": [th]}, {})
-    for M, want in ((L, True), (B, False)):
-        d0 = M._last_draws(post)[0]
-        eq((abs(sum(d0["theta"])) < 1e-12, abs(sum(d0["zd"])) < 1e-12), (True, want),
-           "re-centred" if want else "negative control: the code before leaves zd off zero")
+    ext3 = os.path.join(MODEL, "lqm_ext3.stan")
+    saved = L.STAN_FILE, B.STAN_FILE
+    try:
+        L.STAN_FILE = B.STAN_FILE = ext3                               # the model whose zd is a sum-to-zero vector
+        for M, want in ((L, True), (B, False)):
+            d0 = M._last_draws(post)[0]
+            eq((abs(sum(d0["theta"])) < 1e-12, abs(sum(d0["zd"])) < 1e-12), (True, want),
+               "re-centred" if want else "negative control: the code before leaves zd off zero")
+    finally:
+        L.STAN_FILE, B.STAN_FILE = saved
+    # lqm_ext4: a warm start saved under lqm_ext3 (eta_tau, delta0, tau_delta, zd) gives lqm_ext4 only its own
+    # parameters, θ re-centred; negative control: the code before passes the stale names on
+    L.STAN_FILE = os.path.join(MODEL, "lqm_ext4.stan")
+    d = tempfile.mkdtemp(prefix="lqm-inits-")
+    saved_inits = L.INITS, B.INITS
+    try:
+        old = dict(theta=[1.000001, -1.0], eta_tau=0.3, delta0=0.1, tau_delta=0.5, zd=[0.1, -0.1], la_psi=[0.2, 0.4])
+        json.dump(dict(inits=[old]), open(os.path.join(d, "inits-cost.json"), "w"))
+        L.INITS = B.INITS = os.path.join(d, "inits-{axis}.json")
+        got = L._inits("cost", 1)[0]
+        eq((sorted(got), abs(sum(got["theta"])) < 1e-12), (["la_psi", "theta"], True), "lqm_ext4 warm start")
+        B.STAN_FILE = L.STAN_FILE
+        eq("eta_tau" in B._inits("cost", 1)[0], True, "negative control: the code before keeps lqm_ext3's eta_tau")
+    finally:
+        L.STAN_FILE, B.STAN_FILE = saved
+        L.INITS, B.INITS = saved_inits
+        shutil.rmtree(d, ignore_errors=True)
 
 
 @test

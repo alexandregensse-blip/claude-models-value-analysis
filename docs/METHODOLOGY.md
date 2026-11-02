@@ -172,22 +172,28 @@ transformation of §4:
 | u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²), τ_c ~ N⁺(0, s_{τ,k}²) pooled over the maker's couples |
 | w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels and by its line (its builds, previews and modes) | N(0, ψ_k²) |
 | v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω_k²) |
-| s_{τ,k}, ψ_k, ω_k | each maker's scales of the three effects | log s_k = log s_0 + η · z_k, z_k ~ N(0, 1) summing to zero over the makers with data |
-| δ_k, H_r | the maker's **home effect**: the shift of the rows a maker published about its own models (H_r = 1; 0 otherwise), excluded from every read-out | δ_k = δ_0 + τ_δ · z_k, z_k summing to zero; δ_0 ~ N(0, 10²) |
+| s_{τ,k}, ψ_k, ω_k | each maker's scales of the three effects, each maker's own | half-Student-t(3, 0, 2.5), independent across the makers with data |
+| δ_k, H_r | the maker's **home effect**: the shift of the rows a maker published about its own models (H_r = 1; 0 otherwise), excluded from every read-out | N(0, 10²), independent across makers |
 | κ_r | the variance multiplier of an early-access run (1 for other runs) | log κ ~ N(0, 1), estimated |
 | ν | the Student-t's degrees of freedom: how heavy the tails of the noise are | Gamma(2, 0.1), estimated |
 
-Every standard deviation (s_g below, the common scales s_0 of s_τ, ψ and ω, their spreads η across makers, τ_δ, s_σ)
-has a weakly informative half-Student-t(3, 0, 2.5) prior; μ_σ is flat.
+Every standard deviation (s_g below, each maker's s_τ, ψ and ω, s_σ) has a weakly informative half-Student-t(3, 0, 2.5)
+prior; μ_σ is flat.
 
 **Makers.** One maker's couples can be more or less consistent across publishers, task types and benchmarks than
 another's, and a maker's own charts can place its models apart from what others measure. Both are estimated rather
-than assumed: each maker's scales are drawn around common ones, and with η → 0 the model is the same for all makers
-(the model until v2026.10.20, `model/lqm.stan`); with τ_δ → 0 the home effect is one shift shared by all makers. On the
-data of 19–20 Oct 2026 the makers' scales differ (η of the three scales 0.60, 0.32, 0.69, every 90 % interval away
-from 0), and every home effect's interval includes 0 (Anthropic +0.40, 90 % interval −0.36 to +1.42 on θ). The two
-models predict held-out rows equally well (PSIS-LOO, § Checks); the encompassing one was chosen by a rule fixed
-before the comparison: it is published unless it fails to converge or predicts clearly worse.
+than assumed, each maker's on its own: its three scales and its home effect have their own priors, independent of
+the other makers' (the maintainer's decision of 2 Nov 2026: each maker's biases are its own, and nothing gives a
+reason to tie them). From v2026.10.21 to 2 Nov 2026 (`model/lqm_ext2.stan`, `model/lqm_ext3.stan`) they were tied:
+each maker's log scale drawn around a common one, log s_k = log s_0 + η · ζ_k with ζ summing to zero over the makers
+and η ~ half-Student-t(3, 0, 2.5) (with η → 0 the model was the same for all makers, the model until v2026.10.20,
+`model/lqm.stan`), and the home effects around a common one, δ_k = δ_0 + τ_δ · ζ_k. That tie made a funnel: in the
+fit of 30 Oct 2026 the spreads η ranged over orders of magnitude (η_τ from 0.002 to 1.3) and the fit diverged past the
+allowed share on both axes. On the data of 19–20 Oct 2026, under the tied model, the makers' scales differed (η of the
+three scales 0.60, 0.32, 0.69, every 90 % interval away from 0), and every home effect's interval included 0
+(Anthropic +0.40, 90 % interval −0.36 to +1.42 on θ). The models with and without the makers' terms predicted
+held-out rows equally well (PSIS-LOO, § Checks); the encompassing one was chosen by a rule fixed before the
+comparison: it is published unless it fails to converge or predicts clearly worse.
 
 **No reference couple.** The θ sum to zero: the origin is the average couple, not a chosen one. The page does not
 divide by a reference couple either: it shows cost as a multiple of the cheapest couple and quality as an expected
@@ -237,9 +243,10 @@ runs are estimated.
 
 ### Estimation
 
-The model is written in Stan (`model/lqm_ext3.stan` since 30 Oct 2026: `model/lqm_ext2.stan`, the model published
-since v2026.10.21, in the coordinates described under *Makers' scales* below; `model/lqm.stan` is the model without
-the makers' terms, used until v2026.10.20); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
+The model is written in Stan (`model/lqm_ext4.stan` since 2 Nov 2026: each maker's scales and home effect its own,
+in the coordinates described under *Makers' scales* below; `model/lqm_ext3.stan`, 30 Oct – 2 Nov 2026, the same
+coordinates with the makers' terms tied; `model/lqm_ext2.stan`, the model published since v2026.10.21, tied, in its
+original coordinates; `model/lqm.stan` is the model without the makers' terms, used until v2026.10.20); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
 the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; Betancourt 2017).
 
 - **Writing.** How a model is written changes how fast the sampler explores it, not what it estimates. Each group's
@@ -248,8 +255,8 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   centred and mapped to rows by sparse matrix products, so that Stan's optimiser (`stanc --O1`) keeps every vector in
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
-- **Makers' scales: magnitude and direction** (the maintainer's decision of 30 Oct 2026; the same model, only the
-  sampling geometry changes). Each maker's effects of one family were written as its scale times standard-normal
+- **Makers' scales: magnitude and direction** (the maintainer's decision of 30 Oct 2026, kept in `lqm_ext4.stan`; the
+  same model, only the sampling geometry changes). Each maker's effects of one family were written as its scale times standard-normal
   effects, e = s_k · z_k. The data see only the products, so a maker's scale and all its effects moved together
   along a curved ridge (the scale up, every one of its effects' z down); on the cost axis of 29–30 Oct a maker with
   few data (Qwen) had a scale ψ at about 0.45 or about 1.0, which the chains took hundreds of draws to cross, and the
@@ -257,19 +264,25 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   threshold): z_k = r_k · u_k, with r_k = ‖z_k‖ ~ χ(n_k) and u_k uniform on the sphere. The sampler moves in the
   realised magnitude A_k = s_k · r_k (on its log scale), which the data inform, in the direction u_k (a free vector
   y_k ~ N(0, I) divided by its length, the length an auxiliary that nothing depends on) and in r_k, which carries its
-  χ(n_k) density and which the likelihood does not see; s_k = A_k / r_k is recovered. Over the makers, the log scales
-  are the coordinates and the common scale s_0 (their geometric mean) and the offsets ζ_k (summing to zero) are
-  recovered from them, η staying a parameter; the change of variables adds the terms log s_0 (s_0 → log s_0),
-  −(F − 1) log η (ζ = (log s − mean) / η over F makers) and the χ(n_k) density of r_k ((n_k − 1) log r_k − r_k²/2),
-  every other term unchanged. For the publisher × model (ψ) and couple × task-type (ω) effects the block is the
+  χ(n_k) density and which the likelihood does not see; s_k = A_k / r_k is recovered. Since 2 Nov 2026
+  (`lqm_ext4.stan`) each s_k has its own half-Student-t(3, 0, 2.5) prior: the change of variables adds, per maker and
+  family, log s_k (s_k → log s_k) and the χ(n_k) density of r_k ((n_k − 1) log r_k − r_k²/2; log r_k by Stan), every
+  other term unchanged; a maker without effects of a family keeps its prior there (it enters only the read-outs that
+  integrate an unknown effect over its distribution). Under `lqm_ext3.stan` the log scales were the coordinates over
+  the makers and the common scale s_0 (their geometric mean) and the offsets ζ_k (summing to zero) were recovered from
+  them, η staying a parameter, with the terms log s_0 and −(F − 1) log η.
+  For the publisher × model (ψ) and couple × task-type (ω) effects the block is the
   maker's effects; for the publisher × couple effects, u = s_τ,k · τ̃_c · z with τ_c = s_τ,k · τ̃_c, the block is
   every z of the maker's couples, τ̃_c ~ N⁺(0, 1) kept as it was (its ridge with s_τ,k is already straight on the
   log scale, and splitting z couple by couple would turn the couples with a single publisher, 68 on cost, into a
   sign). With one effect (n_k = 1) the direction is a sign, changed only where y_k crosses zero; every maker has at
   least 14 effects of each family on the data of 30 Oct. Checked by evaluating both programs on the data of both
   axes at random points: their log densities differ by exactly the Jacobian and auxiliary terms (to 10⁻⁹), and the
-  recovered scales, offsets and effects satisfy the old definitions. The formulas, term by term, are in the header
-  of `model/lqm_ext3.stan`.
+  recovered scales, offsets and effects satisfy the old definitions. `lqm_ext4.stan` was checked the same way against
+  `lqm_ext3.stan` (the log densities differ by exactly the two models' priors on the makers' terms, to 10⁻⁹ on both
+  axes) and by quadrature over (log A_k, log r_k): the density it implies for s_k is the half-Student-t(3, 0, 2.5) to
+  10⁻⁴ (the grid's truncation), whatever n_k. The formulas, term by term, are in the headers of `model/lqm_ext3.stan`
+  and `model/lqm_ext4.stan`.
 - **Samplers.** nutpie (Seyboldt et al.) on both axes, whose adaptation of the mass matrix needs fewer steps here:
   6 chains × (500 warm-up + 1,800 draws), target acceptance 0.95 (0.9 before 2 Nov 2026, when lqm_ext3's
   divergences passed the allowed share on both axes; warm-up 500 since 30 Oct 2026, 600 from 29 Oct;

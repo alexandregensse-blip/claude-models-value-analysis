@@ -22,12 +22,14 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            out (indistinguishable from that row's noise). u and w are centred within their publisher, v within its
            task type: their mean is confounded with the free offsets of that publisher's (type's) groups.
   Priors:  θ ~ N(0, 10²); s_g, s_τ, ψ, ω, s_σ ~ half-Student-t(3, 0, 2.5); ν ~ Gamma(2, 0.1).
-  Makers (lqm_ext2.stan, the published model): the scales s_τ, ψ, ω per model maker around common ones, and a home
-  effect per maker on the rows a maker published about its own models, excluded from every read-out. lqm_ext3.stan,
-  the model fitted since 30 Oct 2026, is the same model written in other coordinates: each maker's block of effects
-  of a family as a realised magnitude and a direction (its header has the change of variables).
+  Makers (lqm_ext4.stan, the model fitted since 2 Nov 2026): the scales s_τ, ψ, ω per model maker and a home effect
+  per maker on the rows a maker published about its own models (excluded from every read-out), each maker's its own:
+  s_τ,k, ψ_k, ω_k ~ half-Student-t(3, 0, 2.5), δ_k ~ N(0, 10²), independent across makers (maintainer, 2 Nov 2026:
+  no reason to tie one maker's biases to another's; the tie of lqm_ext2/lqm_ext3, scales drawn around common ones,
+  made a funnel on their spread η in the fit of 30 Oct). Each maker's block of effects of a family is sampled as a
+  realised magnitude and a direction, as in lqm_ext3.stan (its header has the change of variables).
 
-Estimation: Hamiltonian Monte Carlo (NUTS) on lqm_ext3.stan — nutpie on both axes, its chains continued in the
+Estimation: Hamiltonian Monte Carlo (NUTS) on lqm_ext4.stan — nutpie on both axes, its chains continued in the
 sampling process until the criteria are met; CmdStan (CmdStanPy) continues chains from their last draws after a stop,
 and restarts a chain left in a far region from a good chain's last draw (SAMPLER, FAR). The read-out `level` is
 computed in Stan for every draw; `summarise` turns it into a centre and a per-couple interval (quasi-variances).
@@ -38,14 +40,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, os.path.join(ROOT, "data"))
 from catalog import COMPOSITES, FAMILY_OF, PUBLISHER_OF, UNIT_ALIASES
-STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm_ext3") + ".stan")   # the model fitted since 30 Oct
-# 2026 (the maintainer's decision): lqm_ext2.stan, the published model since 21 Oct 2026 (lqm.stan plus per-maker
-# scales and home effects), reparameterised — each maker's block of effects of one family sampled as its realised
-# magnitude and direction instead of the maker's scale and standard-normal effects: the same model, the same data
-# block, the same names read here. LQM_MODEL=lqm_ext2: that model in lqm_ext2's coordinates; lqm: the model until
-# 21 Oct; lqm_ext: an experiment
-EXT = os.path.basename(STAN_FILE) in ("lqm_ext.stan", "lqm_ext2.stan", "lqm_ext3.stan")
-EXT_PRESENT = os.path.basename(STAN_FILE) in ("lqm_ext2.stan", "lqm_ext3.stan")   # makers without data are not levels
+STAN_FILE = os.path.join(HERE, os.environ.get("LQM_MODEL", "lqm_ext4") + ".stan")   # the model fitted since 2 Nov
+# 2026 (the maintainer's decision): lqm_ext3.stan with each maker's scales and home effect its own (independent priors,
+# no common scale, spread or mean) — the same data block, the same names read here. LQM_MODEL=lqm_ext3: the model of
+# 30 Oct – 2 Nov (lqm_ext2.stan, the published model since 21 Oct 2026, reparameterised: each maker's block of effects
+# of one family sampled as its realised magnitude and direction); lqm_ext2: that model in its original coordinates;
+# lqm: the model until 21 Oct; lqm_ext: an experiment
+EXT = os.path.basename(STAN_FILE) in ("lqm_ext.stan", "lqm_ext2.stan", "lqm_ext3.stan", "lqm_ext4.stan")
+EXT_PRESENT = os.path.basename(STAN_FILE) in ("lqm_ext2.stan", "lqm_ext3.stan", "lqm_ext4.stan")   # makers without
+#                                                                 data are not levels
 LINE = {}                                                       # model key -> the model it is a build / mode of
 PROVIDERS = ("anthropic", "openai", "google", "xai", "deepseek", "qwen", "glm", "kimi")
 
@@ -991,8 +994,8 @@ def _param_names():
 
 
 def _sum_to_zero_names():
-    """The parameters declared sum_to_zero_vector (θ and the makers' zd; in lqm_ext2.stan also zf_tau, zf_psi,
-    zf_omega, which lqm_ext3.stan recovers as transformed parameters)."""
+    """The parameters declared sum_to_zero_vector (θ; in lqm_ext2.stan and lqm_ext3.stan also the makers' zd, and in
+    lqm_ext2.stan zf_tau, zf_psi, zf_omega; lqm_ext4.stan has θ alone)."""
     txt = open(STAN_FILE).read()
     block = txt[txt.index("\nparameters {"):txt.index("\ntransformed parameters {")]
     return {m.group(1) for m in re.finditer(r"sum_to_zero_vector\[\w+\]\s+(\w+);", block)}
@@ -1007,7 +1010,10 @@ def _inits(axis, chains):
         return None
     if len(inits) < chains:
         return None
-    for d in inits:                                                  # CSV draws are rounded (6 significant digits):
+    names = _param_names()                                           # a warm start saved under another model
+    inits = [{v: x for v, x in d.items() if v in names} for d in inits]   # (lqm_ext3's eta_*, delta0, zd): only the
+    for d in inits:                                                  # parameters this model has (the rest drawn at
+                                                                     # random); CSV draws are rounded (6 digits):
         _centre(d)                                                   # re-centre the sum-to-zero vectors
     return inits[:chains]
 

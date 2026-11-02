@@ -6,7 +6,8 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 | File | Role |
 |---|---|
 | `lqm.py` | data preparation (groups, scales, composites, republications, effects), the samplers, the read-out |
-| `lqm_ext3.stan` | the model fitted since 30 Oct 2026: `lqm_ext2.stan` reparameterised (below); `LQM_MODEL` selects another |
+| `lqm_ext4.stan` | the model fitted since 2 Nov 2026: each maker's scales and home effect its own (below), in `lqm_ext3.stan`'s coordinates; `LQM_MODEL` selects another |
+| `lqm_ext3.stan` | the model of 30 Oct – 2 Nov 2026: `lqm_ext2.stan` reparameterised (below) (`LQM_MODEL=lqm_ext3`) |
 | `lqm_ext2.stan` | the model published since v2026.10.21, in its original coordinates (`LQM_MODEL=lqm_ext2`) |
 | `lqm.stan` | the model until v2026.10.20, without the makers' scales and home effects |
 | `lqm_ext.stan` | an experiment of 19–20 Oct (makers' offsets not summing to zero; it did not converge) |
@@ -16,6 +17,26 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 | `fit-cache.json` | **the model's only product**, read by the site |
 | `validation/` | the checks reported in docs/METHODOLOGY.md (see its README) |
 | `requirements-fit.txt` | the pinned fitting environment (the root README, "Refit", installs it in `.stan/`) |
+
+## Each maker's own biases, 2 Nov 2026 (`lqm_ext4.stan`)
+
+The maintainer's decision: each maker's biases are its own, with no reason to tie them across makers. Under
+`lqm_ext2.stan` and `lqm_ext3.stan` each maker's three effect scales were drawn around common ones (log s_k =
+log s_0 + η · ζ_k, ζ summing to zero) and its home effect around a common one (δ_k = δ_0 + τ_δ · zd_k); the tie made a
+funnel on η (fit of 30 Oct: η_τ from 0.002 to 1.3, and divergences past the allowed share on both axes).
+`lqm_ext4.stan` drops s_0, η, ζ, δ_0, τ_δ and zd (`s_tau0`, `psi0`, `omega0`, `eta_*`, `zf_*`, `delta0`,
+`tau_delta`, `zd`): every maker's `s_tau_f`, `psi_f`, `omega_f` ~ half-Student-t(3, 0, 2.5) and `delta_f` ~ N(0, 10²),
+independently (the priors the common terms had). `delta_f` is now a parameter; every other name is unchanged, and so
+is everything else (θ, offsets, gains, noise, ν, κ, `tau_raw`, the read-outs, the data block). The magnitude and
+direction coordinates below are kept: the Jacobian per maker and family is log s_k (s_k → log s_k) plus the χ(n_k)
+density of r_k, and a maker without effects of a family keeps its prior there; the header has it term by term.
+Checked with BridgeStan on both axes' data, six random points each: log density and gradient finite; moving a
+maker's r_k with its magnitude fixed changes the log density by exactly the formula (to 10⁻¹⁰); against
+`lqm_ext3.stan` at the matching points, the log densities differ by exactly the two models' priors on the makers'
+terms (a constant to 2 · 10⁻¹⁰ on cost, 6 · 10⁻¹⁰ on quality); and, by quadrature over (log A_k, log r_k) on a
+one-maker program with the same lines, the implied density of s_k is the half-Student-t(3, 0, 2.5) to 7 · 10⁻⁵ (the
+grid's truncation) for n_k = 1, 14 and 539 (without the log s_k term it is off by a factor up to 6.7). A warm start
+saved under another model (`.stan/inits-*.json`) gives the sampler only the parameters this model has.
 
 ## The reparameterisation of 30 Oct 2026 (`lqm_ext3.stan`)
 

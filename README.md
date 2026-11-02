@@ -56,7 +56,7 @@ Four parts, each with its own scope; they talk only through the files named in t
 | Part | Scope | Contents | Hands over |
 |---|---|---|---|
 | **data** — collection | what was measured and how to read it | `data/findings/` (sources and measures), `data/registry/` (models, routes, benchmarks, publishers, prices, rules), `data/build.py` (the decision tree; its products in `data/build/`: one fit table per axis, the group map, the public data file `data.csv`), `data/catalog/` (model order, families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it); `raw-data.csv` at the root is the frozen legacy input of 21 Oct (data/legacy.py, the acceptance test) — see [`data/README.md`](data/README.md), [`data/BUILD.md`](data/BUILD.md) | `data/build/` and the catalogue |
-| **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm_ext2.stan` (the model; `lqm.stan` without the makers' terms, until v2026.10.20), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
+| **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm_ext4.stan` (the model since 2 Nov 2026, each maker's biases its own; `lqm_ext2.stan`/`lqm_ext3.stan` with the makers' terms tied, until then; `lqm.stan` without the makers' terms, until v2026.10.20), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
 | **site** — presentation | from the fit's results to the page | `site/build.py` and its modules (`config`, `grids`, `sources`, `seo`, `render`), `site/{app.js, body.html, style.css, prerender.js}`, `site/assets/` (favicon, share image) — see [`site/README.md`](site/README.md) | the served files at the root |
 | **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
 
@@ -107,7 +107,7 @@ No dependencies beyond the Python 3 standard library and Node.js (any recent ver
 
 ### Refit
 
-Needed only when the fit's inputs change: the build's tables (`data/build/`), `model/lqm.py`, `model/lqm_ext3.stan`,
+Needed only when the fit's inputs change: the build's tables (`data/build/`), `model/lqm.py`, `model/lqm_ext4.stan`,
 `data/build_lqm.py` or `data/catalog/` (the site build says so). The data first: the build turns the findings and the
 registry into one table per axis (Python standard library, about 10 minutes and 4 GB with the saved copies re-hashed;
 `--no-check-files` skips that):
