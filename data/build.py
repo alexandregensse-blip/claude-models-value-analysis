@@ -25,6 +25,11 @@ sys.path.insert(0, HERE)
 
 SETTINGS = {"cost_method_unstated": ("single-per-table", "out")}       # first value = default
 LEVELS = ("minimal", "low", "medium", "high", "xhigh", "max")
+# what a router's catalogue lists: the effort levels and thinking off (OpenRouter's supported_efforts « none »); the
+# order a nearest-supported mapping walks puts thinking off below the lowest level (the maintainer, 3 Nov 2026: the
+# listing decides thinking off / on as well, and an unlisted « none » follows the route's rule, ties ambiguous)
+LISTABLE = ("nothink",) + LEVELS
+THINKING = ("nothink", "think")
 ACCEPTED = ("written", "read", "computed")
 NOT_ESTABLISHED = {"budget-converted", "enabled", "adaptive", "default", "unstated", "priceblend", "ambiguous", "auto",
                    "dynamic"}
@@ -1053,15 +1058,16 @@ def serve(M, key, chain, req, iv, configs):
             # (the maintainer, 3 Nov 2026, later; rule router-listed-levels). A run the listing covers in part is
             # read both ways and kept only if both agree.
             mk = [c["id"] for c in ctx.models[key].get("configurations", []) if covers(c, iv) and c["id"] not in acc]
-            listed = [a for a in e.get("accepts", []) if on(a) and a["configuration"] in LEVELS
+            listed = [a for a in e.get("accepts", []) if on(a) and a["configuration"] in LISTABLE
                       and overlaps(a, iv[0], iv[1]) and catalogue_listed(a)]
             regimes = []
             for piece in listing_pieces(listed, iv):        # spans of the run over which the listing is constant
                 lv = sorted({a["configuration"] for a in listed if covers(a, piece)} - set(acc))
                 if any(overlaps(a, piece[0], piece[1]) for a in listed):
-                    # the listing decides the levels; thinking off / on (not levels) keep the maker's (3 Nov morning)
-                    rg = ("listed " + "/".join(c for c in LEVELS if c in acc + lv),
-                          acc + lv + [c for c in mk if c not in LEVELS])
+                    # the listing decides the levels and thinking off / on too (the maintainer, 3 Nov 2026, later:
+                    # « none » listed or not; rule router-listed-thinking): the maker's count only for what is neither
+                    rg = ("listed " + "/".join(c for c in LISTABLE if c in acc + lv),
+                          acc + lv + [c for c in mk if c not in LEVELS and c not in THINKING])
                 else:
                     rg = ("maker", acc + mk)
                 if rg not in regimes:
@@ -1084,6 +1090,8 @@ def serve(M, key, chain, req, iv, configs):
             return res
         if any(h.startswith("listed") for h, _ in outs):
             M.rule("router-listed-levels")
+            if cur in THINKING:
+                M.rule("router-listed-thinking")
         if any(h == "maker" for h, _ in outs) and cur in mk:
             M.rule("router-maker-levels")
         cur = res[0]
@@ -1134,11 +1142,13 @@ def accept_or_map(M, key, step, r, cls, on, iv, cur, acc):
     if rule == "budget":
         return None, "not-established:absent", f"{step}: budget-converted"
     if rule == "nearest-supported":
+        # thinking off asked for and not accepted: the nearest level, thinking off being the lowest step of the order
+        # (OpenRouter's « none »: the maintainer, 3 Nov 2026); a level asked for is mapped among the levels only
         lv = [a for a in acc if a in LEVELS]
-        if cur not in LEVELS or not lv:
+        if cur not in LISTABLE or not lv:
             return None, "not-established:absent", f"{step}: nearest-supported without accepted levels"
-        i = LEVELS.index(cur)
-        dist = sorted((abs(LEVELS.index(a) - i), a) for a in lv)
+        i = LISTABLE.index(cur)
+        dist = sorted((abs(LISTABLE.index(a) - i), a) for a in lv)
         if len(dist) > 1 and dist[0][0] == dist[1][0]:
             return None, "not-established:ambiguous", f"{step}: {cur} ties between {dist[0][1]} and {dist[1][1]}"
         return dist[0][1], "ok", ""

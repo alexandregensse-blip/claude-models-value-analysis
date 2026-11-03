@@ -590,7 +590,7 @@ def router_listed_levels():
     m5 = sc.m(s, model="tie", effort=[("effort-setting", "medium")], route=[("ORK", None)])        # listed low / high
     m6 = sc.m(s, model="gl", effort=[("thinking-off", "off")], route=[("ORK", None)], run_date=rd("2026-05-01"))
     r = sc.run()
-    eq(r.cfg(m6), "nothink", "thinking off is not a level: the maker's (accepts_maker) still counts under a listing")
+    eq(r.cfg(m6), "high", "thinking off not listed (no « none »): the nearest listed level (3 Nov 2026, later)")
     eq((r.cfg(m1), "router-listed-levels" in r[m1]["rules_used"], "router-maker-levels" in r[m1]["rules_used"]),
        ("xhigh", True, False), "the listing decides: max not listed → nearest listed, xhigh")
     eq((r.cfg(m2), "router-maker-levels" in r[m2]["rules_used"]), ("max", True),
@@ -601,6 +601,121 @@ def router_listed_levels():
     eq((r.cfg(m4), r.cfg(m4b)), ("high", "high"), "a level listed and the maker's: the same either way")
     eq(r[m5]["fields"]["configuration"]["detail"], "ork: medium ties between high and low",
        "negative: a level the model has at the maker but not listed falls to the tie rule, not the maker's level")
+
+
+@test
+def router_listed_thinking():
+    # the maintainer, 3 Nov 2026, later (decision 1): OpenRouter's listing decides thinking off / on as well: nothink
+    # is accepted only where supported_efforts lists « none »; before, nothink follows the route's rule (nearest
+    # supported, thinking off the lowest step); an unknown route leaves the line out when the candidates disagree
+    # (gpt-5.5-like: none listed from 15 Oct)
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda frm="2026-01-01", to="2026-12-31", **kw: dict(iv(frm, to, **win), **kw)     # noqa: E731
+    sc.model("gt", configs=("nothink", "low", "medium", "high", "xhigh", "think"))
+    se = lambda q: [{"url": "u", "captured": "2026-06-27", "file": "f", "where": "w", "quote": q}]  # noqa: E731
+    q1, q2 = '"supported_efforts":["xhigh","high","medium","low"]', '"supported_efforts":["xhigh","high","medium","low","none"]'
+    acc = [span("2026-06-27", "2026-10-14", configuration=c, evidence=se(q1)) for c in ("xhigh", "high", "medium", "low")]
+    acc += [span("2026-10-15", "2026-12-31", configuration=c, evidence=se(q2))
+            for c in ("xhigh", "high", "medium", "low", "nothink")]
+    sc.route("ork", "router", spellings=["ORK"], models={"gt": {"ids": [span(name="or/gt")], "accepts": acc}},
+             level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    sc.routes["ork"]["accepts_maker"] = [span(decision="the maintainer, 3 Nov 2026")]
+    s = sc.source("a", published="2026-12-31")
+    off, on = [("thinking-off", "off")], [("thinking-on", "on")]
+    rd = lambda d: [("run-date", d)]                                # noqa: E731
+    m1 = sc.m(s, model="gt", effort=off, route=[("ORK", None)], run_date=rd("2026-10-20"))     # « none » listed
+    m2 = sc.m(s, model="gt", effort=off, route=[("ORK", None)], run_date=rd("2026-08-01"))     # listed, no « none »
+    m3 = sc.m(s, model="gt", effort=off, route=[("ORK", None)], run_date=rd("2026-03-01"))     # nothing listed yet
+    m4 = sc.m(s, model="gt", effort=off, run_date=rd("2026-08-01"))                            # route unknown
+    m5 = sc.m(s, model="gt", effort=off, run_date=rd("2026-10-20"))                            # route unknown, listed
+    m6 = sc.m(s, model="gt", effort=on, route=[("ORK", None)], run_date=rd("2026-08-01"))      # thinking on, levels listed
+    r = sc.run()
+    eq((r.cfg(m1), "router-listed-thinking" in r[m1]["rules_used"]), ("nothink", True), "« none » listed: nothink")
+    eq((r.cfg(m2), "router-listed-thinking" in r[m2]["rules_used"]), ("low", True),
+       "negative: « none » not listed: thinking off goes to the nearest listed level, low")
+    eq((r.cfg(m3), "router-maker-levels" in r[m3]["rules_used"]), ("nothink", True),
+       "nothing listed at the run date: the maker's thinking off")
+    eq(r[m4]["fields"]["configuration"]["detail"],
+       "candidate routes disagree: candidate maker-api → nothink; candidate ork → low",
+       "negative: route unknown, the candidates disagree: out")
+    eq(r.cfg(m5), "nothink", "route unknown, « none » listed: the candidates agree")
+    eq(r.q(m6), "out:effort-not-established", "thinking on names no listed level: not established")
+
+
+@test
+def registry_openrouter_listing_copied():
+    # the maintainer, 3 Nov 2026 (decision 2): supported_efforts copied from every saved /api/v1/models capture,
+    # first to last capture of each run of identical lists (none → nothink)
+    om = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["openrouter"]["models"]
+    lst = lambda k, c: sorted((a["from"], a["to"]) for a in om[k].get("accepts", []) if a["configuration"] == c and   # noqa: E731
+                              any("supported_efforts" in (x.get("quote") or "") for x in a["evidence"]))
+    eq(lst("deepseek-v4-flash-vision-exp", "low"), [("2026-08-21", "2026-10-14"), ("2026-10-15", "2026-10-29")],
+       "a level every capture lists (low), copied to the last capture, cut where the list changes")
+    eq(lst("kimi-k3", "max"), [("2026-07-17", "2026-07-18"), ("2026-07-20", "2026-10-14"), ("2026-10-15", "2026-10-29")],
+       "kimi-k3 max: one record per run of identical lists")
+    eq(lst("glm-5.2", "nothink"), [("2026-10-15", "2026-10-29")], "negative: glm-5.2 lists « none » only from 15 Oct")
+    eq(lst("gpt-5.5", "nothink"), [("2026-06-27", "2026-10-29")], "gpt-5.5 lists « none » from the first listing")
+    eq(lst("gpt-5.1-codex", "high"), [("2026-06-27", "2026-07-22")],
+       "negative: listed to 29 Oct, cut at the model's shutdown (its configurations end 22 Jul)")
+    for k, e in om.items():
+        for a in e.get("accepts", []):
+            if any("supported_efforts" in (x.get("quote") or "") for x in a["evidence"]):
+                eq((a["to_basis"] in ("last-capture", "stated"), all(x.get("sha256") and x.get("file") for x in a["evidence"])),
+                   (True, True), f"{k} {a['configuration']}: a listing ends at a capture (or the model's end), with its file")
+
+
+@test
+def harness_without_entry_no_presumption():
+    # the maintainer, 3 Nov 2026 (decision 3): Claude Code with a model it has no entry for: what it sends by default
+    # comes from its own saved docs only, never the maker's default (Sonnet 4.5, Haiku 4.5, Opus 4.5: nothing usable)
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    lv = ("nothink", "low", "high")
+    sc.model("cd", configs=lv, default=[span(configuration="high")])
+    sc.model("cn", configs=lv, default=[span(configuration="high")])
+    sc.route("hcc", "harness", spellings=["HCC"], models={"cd": {"accepts": [span(configuration=c) for c in lv],
+                                                                  "default": [span(configuration="low")]}},
+             level_mapping=[span(rule="identity")])
+    sc.routes["hcc"]["calls_route"] = dict(route="maker-api", rule="harness-calls-route", date="2026-11-03",
+                                           decided_by="the maintainer")
+    s = sc.source("a")
+    nes = [("no-effort-sent", "default")]
+    m1 = sc.m(s, model="cd", effort=nes, route=[("HCC", None)])
+    m2 = sc.m(s, model="cn", effort=nes, route=[("HCC", None)])
+    r = sc.run()
+    eq(r.cfg(m1), "low", "the harness's documented default")
+    eq((r.q(m2), r[m2]["fields"]["configuration"]["detail"]),
+       ("out:effort-not-established", "hcc: no documented default for cn covering the run (→ default)"),
+       "negative: no entry, the maker's default high is not taken")
+    R = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["claude-code"]
+    eq(sorted(k for k in ("opus-4.5", "sonnet-4.5", "haiku-4.5") if k in R["models"]), [],
+       "Claude Code: no default recorded for the 4.5 models (only Opus 4.5 thinking on, budget undocumented)")
+
+
+@test
+def findings_harness_points_4_5():
+    # the maintainer, 3 Nov 2026 (points 4, 5): harness facts copied from quotes already extracted that describe the
+    # run; a mention in passing gives nothing
+    def slots(sid, mid):
+        F = {x["id"]: x for x in json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json")))["facts"]}
+        m = [x for x in json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json")))["measures"]
+             if x["id"] == mid][0]
+        return [(F[i].get("term"), F[i]["quote"]) for i in m["facts"].get("harness") or [] if i in F]
+    eq(slots("src-arxiv-2607.02436-pdf-2026-10-27", "M13"),
+       [("claude-code", "claude_qwen_3.6_high_with_playwright Claude Code Qwen 3.6 High Playwright No 37 $41.41 1.617 3")],
+       "point 4: the Qwen row's own harness cell, not the sentence on the Claude models")
+    eq([[t for t, _ in slots("src-arxiv-2610.12569-v1-2026-10-08", m)] for m in ("M1", "M3", "M8")],
+       [["codex-cli"], ["mini-swe-agent"], ["claude-code"]], "point 5: the run's own harness")
+    eq(slots("src-arxiv-2610.04432-v3-2026-10-09", "M4"), [("opencode", "Seven model configurations use OpenCode 1.18.29")],
+       "point 5: the seven OpenCode configurations")
+    eq([t for t, _ in slots("src-vals.ai-multi-agent-vibe-code-bench-2026-10-09", "M1")], ["claude-code"],
+       "point 5: Opus via Claude Code")
+    eq([slots(s, m) for s, m in (("src-github-rtx4090-local-vs-cloud-2026-10-15", "M8"),
+                                 ("src-openrouter-gpqa-diamond-2026-10-18", "M108"),
+                                 ("src-vals.ai-multi-agent-vibe-code-bench-2026-10-09", "M5"))], [[], [], []],
+       "negative: the test designer's Claude Code, a model named terminus, GPT-6 Sol's runs: no harness")
 
 
 @test

@@ -511,6 +511,22 @@
    "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
   },
   {
+   "id": "router-listed-thinking",
+   "kind": "standing",
+   "statement": "The router's catalogue listing (router-listed-levels) decides thinking off and on as well as the levels: thinking off is accepted only where the listing names it (OpenRouter's supported_efforts « none »); where the listing does not, thinking off asked for follows the router's level_mapping (nearest supported, thinking off being the lowest step of the order, a tie → ambiguous), and thinking on without a level, which the listing never names, is not established. The maker's thinking off / on count only where the catalogue lists nothing for the model at that date.",
+   "inputs": [
+    "route",
+    "effort-setting / effort-label",
+    "routes.json accepts (levels and nothink from supported_efforts), level_mapping",
+    "models.json configurations"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "as router-listed-levels; the configuration asked for is nothink or think",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: gpt-5.5 nothink; OpenRouter lists « none » for most models only from 15 Oct 2026)",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
    "id": "harness-calls-route",
    "kind": "standing",
    "statement": "A harness that hands every call to one route (Claude Code → the Anthropic API, maker-api) closes the chain with that route when the measure names no other route: no other candidate route is weighed.",

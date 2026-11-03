@@ -5,6 +5,37 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## OpenRouter's listing for thinking off, its captures copied, Claude Code's own defaults (3 Nov 2026, evening)
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. OpenRouter's listing decides thinking off / on as well (rule `router-listed-thinking`): nothink only where
+   /api/v1/models lists « none »; otherwise thinking off follows the route's rule (nearest supported, thinking off the
+   lowest step, a tie ambiguous); a route not named leaves the line out when the candidates disagree. Most models list
+   « none » only from 15 Oct 2026; gpt-5.5 from 27 Jun (its first listing), so its nothink lines do not move.
+2. Registry pass: `supported_efforts` copied mechanically from the 196 saved, dated /api/v1/models captures into the
+   openrouter entry (one record per listed value and run of identical lists, first to last capture; « none » →
+   nothink; clipped to the model's configuration dates). The early ends seen (DeepSeek V4 previews, codex models,
+   gemini-3.5 / 3.7-flash) are the models' shutdowns in models.json. 446 → 515 listing records, 37 model keys.
+3. Claude Code without an entry for a model: its own saved docs only. Opus 4.5: thinking on by default from 2.0.67
+   (11 Dec 2025), no budget documented → no configuration, nothing recorded; Sonnet 4.5, Haiku 4.5: nothing. Out.
+4. Claude Code with another route stated: 112 measures checked on their quotes; the route is established for the run
+   (komodor, Bedrock, OpenRouter, LM Studio, llama-server, AI Gateway). Fixed: arxiv-2607.02436 M13/M14, whose harness
+   cited the sentence on the Claude runs (now their own table row). In doubt, unchanged: komodor M7 (Sonnet 5 baseline).
+5. Harnesses cited only in setup / other / spend: 22 of 69 measures get a harness fact copying a quote about their
+   run (arxiv-2610.12569 11, arxiv-2610.04432 7, vals multi-agent 4); 47 give nothing (mentions in passing, a model
+   name, a harness already in the slot).
+
+**Effect** (`--fit-models catalog`, against 1fd65f4; attribution by a build with decision 1 off): fit-quality rows
+17,781 → 17,630 (lqm.load kept 16,775 → 16,632): 25 in, 176 out, 24 with another configuration. Decision 1: +25
+(sonnet-5 high 9, opus-4.7 high 9 — Artificial Analysis rows whose facts gave nothink and high, the contradiction no
+longer seen once nothink is not established; kimi-k3 low 7), −174 nothink rows (qwen3.8-27b 31, opus-4.8 20,
+deepseek-v4.1-flash 20, glm-5.2 18, sonnet-5 17, haiku-5.5 16 …), 24 nothink → low (haiku-5.5 4, deepseek 12,
+qwen3.8-27b 7) or high (glm-5.2 1). Decision 2: −2 (qwen3.8-max low: OpenRouter lists minimal). Decisions 3–5: no fit
+row moves. Fit-cost rows 9,123 → 9,071 (kept 8,610 → 8,562): +7 −59, 7 changed, all decision 1. Couples gone: quality
+deepseek-v4-flash-0731, qwen3.8-27b, sonnet-5 nothink; cost also deepseek-v4-pro-0813, deepseek-v4.1-flash, glm-5.2
+nothink. Still out against the build of before 2 Nov: 1,475 quality and 574 cost measures (1fd65f4: 1,317 and 517),
+1,032 / 365 of them a route not named with the maker's API and OpenRouter disagreeing.
+
 ## OpenRouter's own level list, its defaults, Claude Code, harnesses beside a route (3 Nov 2026, later)
 
 **Decisions (the maintainer, 3 Nov 2026):**

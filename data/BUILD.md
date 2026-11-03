@@ -673,8 +673,9 @@ The maintainer's decisions of 3 Nov 2026 (after « OpenRouter accepte les mêmes
    "Can be high", is not the catalogue listing), they are what OpenRouter accepts: a level it does not list falls to its `level_mapping` (nearest
    supported, a tie → `ambiguous`). The maker's levels (`accepts_maker`, rule `router-maker-levels`) count only where
    /models lists no level of the model at the run date (before `supported_efforts` appears in the catalogue, 27 Jun 2026,
-   or for a model it never lists). Thinking off / on (`nothink`, `think`) are not levels: the maker's still count beside a
-   listing (not decided by the maintainer; the narrow reading of « niveaux »). The run interval is cut at every bound of the model's level records inside it
+   or for a model it never lists). Thinking off / on (`nothink`, `think`) kept the maker's beside a listing in this
+   first reading; the maintainer decided otherwise later the same day (see "Added on 3 Nov 2026, later": the listing
+   decides them too, rule `router-listed-thinking`). The run interval is cut at every bound of the model's level records inside it
    (`listing_pieces`); each piece is read with its listing, or with the maker's levels where nothing is listed, and the
    step's result is kept only if every piece gives the same (else `not-established:absent`, detail "openrouter: the
    levels it accepts for K change over the run (…)"). Example: glm-5.2 at max, listed xhigh / high / none: max → xhigh
@@ -711,3 +712,71 @@ the repricing to the base price stays at the maker's tariff (OpenRouter charges 
 Tests: `router_listed_levels`, `router_default_bridged_gap`, `harness_calls_route`, `harness_beside_stated_route`,
 `registry_openrouter_budget_models` (each with its negative controls); `router_maker_levels` now gives its Opus-5.5-like
 model no listed level (with one listed, decision 4 applies).
+
+## Added on 3 Nov 2026, later
+
+The maintainer's decisions of 3 Nov 2026, after the pass above:
+
+1. **OpenRouter's listing decides thinking off / on too** (rule `router-listed-thinking`). Thinking off (`nothink`) is
+   accepted only where /api/v1/models lists « none » for the model at the run date; where the listing exists without
+   it, thinking off follows the route's rule (`level_mapping`, nearest supported, thinking off being the lowest step of
+   the order `LISTABLE` = nothink, minimal … max; a tie → `ambiguous`), and the maker's thinking off / on count only
+   where nothing is listed (`serve`: the listed regime keeps of the maker's configurations only those that are neither
+   levels nor thinking off / on; `accept_or_map`: a thinking off asked for is mapped among the accepted levels, a level
+   asked for still among the levels only). A route not named leaves the line out when the candidates disagree (maker
+   API → nothink, OpenRouter → low). Thinking on without a level (`think`), which a listing never names, is not
+   established under a listing (not decided by the maintainer; no measure concerned). Example: haiku-5.5 thinking off
+   through OpenRouter on 13–14 Oct 2026 (listed low … max, « none » only from 15 Oct): → low.
+   The maintainer's example, gpt-5.5, lists « none » from the first capture carrying `supported_efforts` (27 Jun 2026),
+   so its nothink lines do not move; most other models list « none » only from 15 Oct 2026 (DeepSeek V4, GLM-5.2, Kimi
+   K3, Gemini 3 Flash, Claude 4.6 – 5, Haiku 5.5, Qwen3.8-27B …).
+2. **Registry pass: OpenRouter's `supported_efforts` copied mechanically** from every saved, dated /api/v1/models
+   capture (196 captures, 2025-05-03 – 2026-10-29: wb-all, routes/evidence/openrouter, arb/apidefault/evidence/or,
+   bd/b3/src/orwb, gaps-openrouter/wb-models, reg10/ev/live29; undated copies left out). Per model key and id at the
+   capture date: runs of captures giving the same list; one level `accepts` record per listed value (« none » →
+   nothink) from the first to the last capture of the run (`earliest-capture` / `last-capture`), evidence = the first
+   and the last capture (file, sha256, `where` data[id=…].reasoning, quote the raw `"reasoning":{…}`); a start stated
+   from OpenRouter's `created` date is kept when the run starts at that record's own first capture. Records are clipped
+   to the model's own configuration dates (validate.py refuses a level the model has not then; `to_basis` stated, as
+   before): the early ends the maintainer saw (DeepSeek V4 previews xhigh to 10 Aug / 19 Jul, gpt-5.1-codex and the
+   codex models to 22 Jul, gemini-3.5-flash and 3.7-flash to 7 Oct) are the models' shutdowns in models.json, not
+   captures left uncopied; past them the captures still list the levels (to 29 Oct). Listing records 446 → 515 over 37
+   model keys; a value the model never has is copied too (warning "accepts …, not in the model's configurations"
+   183 → 215; e.g. qwen3.8-max minimal, which OpenRouter lists).
+3. **Claude Code with a model it has no entry for**: what Claude Code sends by default comes from its own saved docs
+   only, never the maker's default. Saved docs: CHANGELOG 2.0.67 (npm 11 Dec 2025) « Thinking mode is now enabled by
+   default for Opus 4.5 », without a budget (MAX_THINKING_TOKENS's default is in no saved capture) or an effort
+   (model-config lists effort from Opus 4.6); nothing for Sonnet 4.5 or Haiku 4.5. A budget unknown names no
+   configuration of Opus 4.5, so no default is recorded (note in routes.json claude-code); their lines stay out.
+4. **Claude Code with another route stated** (komodor, Bedrock, Fireworks…): checked on the extracted quotes, the rule
+   unchanged (a route the slot names makes the chain). 237 measures of 17 sources name Claude Code and a route (125 the
+   maker's API, 112 another route); the quotes establish the route for the run in komodor (« Same agent (SREGym's stock Claude Code, CLI
+   2.1.302) … on every Kimi K3 provider » with the row's provider), arxiv-2605.26548 (Bedrock), arxiv-2608.02670,
+   arxiv-2609.04298, arxiv-2610.10513, bughuntbench, kernelbench, runebench, mazebench (OpenRouter), rtl-bench
+   (llama-server), vercel-eve (AI Gateway). One conversion error fixed: arxiv-2607.02436 M13/M14 (Qwen in LM Studio)
+   cited as harness F1 « Claude Code CLI ran Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6 », a sentence on
+   the Claude runs; their harness is now a fact copying their own table row (« claude_qwen_3.6_high_with_playwright
+   Claude Code Qwen 3.6 High … »). In doubt, not changed: komodor M7 (Sonnet 5 · Bedrock baseline), whose harness
+   quote speaks of the Kimi K3 providers.
+5. **Harnesses cited only in setup / other / spend slots** (69 measures of 9 sources): a quote that describes the run
+   gives the harness by the usual path (a harness fact copying it): arxiv-2610.12569 (M1 Codex CLI « GPT-5.5 with
+   Codex CLI », M8 Claude Code « Claude Opus 4.8 with Claude Code », nine mini-swe-agent « All these models are paired
+   with mini-swe-agent »), arxiv-2610.04432 M3–M9 (F2 « Seven model configurations use OpenCode 1.18.29 », the two
+   others named in the same sentence), vals multi-agent M1–M4 (« opus’s costs are the list-price totals claude code
+   reports »): 22 measures. Nothing for the 47 others: mentions in passing (rtx4090's test designer, bughuntbench's notes
+   on other rows, runebench's cost script), a model name read as a harness (openrouter gpqa / tau2 « terminus »), or a
+   harness already in the slot (arxiv-2610.11123).
+
+Effect (`--fit-models catalog`, against 1fd65f4; attribution by a build with decision 1 off): fit-quality rows 17,781
+→ 17,630 (lqm.load kept 16,775 → 16,632): 25 in, 176 out, 24 in both with another configuration — decision 1: 25 in
+(sonnet-5 high 9 and opus-4.7 high 9 from Artificial Analysis, whose effort facts gave nothink and high: the nothink
+reading is no longer established through OpenRouter, so the contradiction is no longer seen; kimi-k3 low 7, thinking
+off → low), 174 out (nothink: qwen3.8-27b 31, opus-4.8 20, deepseek-v4.1-flash 20, glm-5.2 18, sonnet-5 17, haiku-5.5
+16, deepseek-v4-pro-0813 14, opus-5 12, sonnet-4.6 8 …), 24 nothink → low / high; decision 2: 2 out (qwen3.8-max low:
+OpenRouter lists minimal, which the model has not); decisions 3–5: none. Fit-cost rows 9,123 → 9,071 (kept 8,610 →
+8,562): 7 in, 59 out, 7 changed, all decision 1. Couples gone: quality deepseek-v4-flash-0731, qwen3.8-27b, sonnet-5
+nothink; cost deepseek-v4-pro-0813, deepseek-v4.1-flash, glm-5.2, qwen3.8-27b, sonnet-5 nothink.
+
+Tests: `router_listed_thinking`, `registry_openrouter_listing_copied`, `harness_without_entry_no_presumption`,
+`findings_harness_points_4_5` (each with a negative control that fails when its decision is switched off);
+`router_listed_levels` now expects thinking off unlisted → the nearest listed level.
