@@ -199,12 +199,14 @@ configurations" are those of models.json at the run date:
    rule); a label naming a converted level (GLM-5.2 `low`) goes to step 6;
 5. an `effort-label` in other words → `label-to-ladder` when the model's configurations make it unique;
 6. a requested or converted configuration → the route chain applied in order **harness → router / reseller / host →
-   maker**, each step dated (identity where documented); no router, reseller or host named (nothing, or only a harness)
-   → the maker's API is presumed, flag `route-presumed-maker-api` (the maintainer, 26 Oct; a name prefix that names a
-   route counts as naming it); a route named but not resolvable → every candidate route (each route of routes.json that
-   served the model at the run date, the maker's API always included) is evaluated and the
-   configuration is accepted only if all agree, else `not-established:absent`; a router budget → `budget-converted`;
-   a tie → `ambiguous`;
+   maker**, each step dated (identity where documented); the route is **unknown** when the source names no router,
+   reseller or host (nothing, or only a harness), or names one the registry cannot resolve: the maker's API is never
+   presumed (the maintainer, 2 Nov 2026: « En aucun cas on suppose l'API si on n'a pas l'info. »; it replaces the
+   presumption `route-presumed-maker-api` of 26 Oct). Every candidate route (each route of routes.json that served the
+   model at the run date, the maker's API always included) is evaluated, after the harness when one is named, and the
+   configuration is accepted only if all agree, else `not-established:absent` (rule `route-unknown-candidates`). A name
+   prefix that names a route, or a harness, counts only as a fact of the measure's `route` slot; a router budget →
+   `budget-converted`; a tie → `ambiguous`;
 7. `no-effort-sent` → `api-default-documented`: on the maker's API or a reseller, the maker's documented default (Haiku
    4.5: thinking off → `nothink`); through a router or host (route known), its own documented default for that model
    (the maintainer, 22 Oct); else `default`;
@@ -360,9 +362,15 @@ Decided by the maintainer during the reviews:
 - **Closed harnesses** (26 Oct): the level label a closed harness shows (Cursor 371 fit rows, Antigravity 65, Grok CLI 31,
   Copilot 27, Amp 18, Kiro 15) is the level sent, as LMArena's labels, flagged; strict doubt (out, LMArena with them)
   was not retained. Rule `closed-harness-label`, route field `label_as_level`.
-- **Route not named** (26 Oct): a source that names no router, reseller or host (≈ 90 % of today's fit rows) is
-  presumed to have run through the maker's API, flagged `route-presumed-maker-api`; the strict reading (every candidate
-  route must agree, OpenRouter included) was not retained. Rule `route-presumed-maker-api`.
+- **Route not named** (2 Nov, replaces the decision of 26 Oct): « En aucun cas on suppose l'API si on n'a pas l'info. »
+  The route is written "API" only when the source says so, "unknown" otherwise. An unknown route (nothing named, only a
+  harness, or a name the registry cannot resolve) takes the strict path: every candidate route that served the model at
+  the run date, the maker's API included, must agree (rule `route-unknown-candidates`); with a harness named, the
+  harness applies first and the rest of the chain is unknown. The presumption of 26 Oct (a source naming no router,
+  reseller or host ran through the maker's API, flag and rule `route-presumed-maker-api`: 15,234 of 18,717 quality and
+  7,351 of 9,496 cost rows of the fit tables, 25,167 measures of 596 sources) is withdrawn. Harnesses and routes the converters had already cited for the run (a
+  harness-slot fact, a name prefix, a sentence about the run) were put in the measures' `route` slots on 2 Nov, from
+  the extracted citations only (PASSES.md).
 - **Effort charts** (26 Oct): a chart whose caption, title, legend or text says its points are effort levels
   ('reasoning-effort scaling'): the k-th of a series' n points in increasing cost (or tokens) order is the model's k-th
   level when the model has n levels (fact `effort-order` 'k/n', rule `chart-effort-order`, flag

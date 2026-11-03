@@ -313,14 +313,14 @@
    "ref": "docs/DATA-PIPELINE.md §4, §5.1 step 6"
   },
   {
-   "id": "route-presumed-maker-api",
+   "id": "route-unknown-candidates",
    "kind": "standing",
-   "statement": "A source that names no router, reseller or host (no route at all, or only a harness) is presumed to have run through the maker's API, flagged route-presumed-maker-api; a router is weighed only when the source names it (or a name prefix names it). A route the source names but the registry cannot resolve stays unknown: every candidate route must agree.",
+   "statement": "A route the source does not name is unknown, never presumed to be the maker's API: no route at all, only a harness (the harness applies first, the rest of the chain is unknown), or a named route the registry cannot resolve. Every candidate route (each route of routes.json that served the model at the run date, the maker's API included) is evaluated; the configuration is accepted only if all agree, else not-established:absent. It replaces route-presumed-maker-api (26 Oct).",
    "inputs": [
     "route"
    ],
    "output": "route chain (computed)",
-   "date": "2026-10-26",
+   "date": "2026-11-02",
    "decided_by": "the maintainer",
    "ref": "docs/DATA-PIPELINE.md §5.1 step 6"
   },

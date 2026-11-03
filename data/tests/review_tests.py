@@ -366,7 +366,7 @@ def mode_route_unknown():
     m2 = sc.m(s, model="gp", effort=[HIGH], mode="pro")
     r = sc.run()
     eq(r.model(m1), None, "route named but unresolved, a router that cannot separate Pro is a candidate → not established")
-    eq(r.model(m2), "gp-pro", "no route named: maker-api presumed, the mode selects the Pro key")
+    eq(r.model(m2), None, "no route named: unknown (2 Nov), OpenRouter served gp and cannot separate Pro → not established")
 
 # 17. run-start after publication (contradictory run date) - the run-date field's level
 @test

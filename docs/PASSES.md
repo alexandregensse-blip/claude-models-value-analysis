@@ -5,6 +5,30 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Route not named = unknown (2 Nov 2026)
+
+**Decision (the maintainer, 2 Nov):** « En aucun cas on suppose l'API si on n'a pas l'info. » A route is written "API"
+only when the source says so, "unknown" otherwise. It replaces the presumption `route-presumed-maker-api` (26 Oct,
+commit f958e43): every unknown route now takes the strict path (all candidate routes that served the model at the run
+date, the maker's API included, must agree; rule `route-unknown-candidates`); a harness named applies first.
+
+**Harnesses and routes already cited, put in the `route` slots** (no source reopened; extracted citations only):
+2,127 measures of 160 sources — 1,950 from a harness-slot fact naming one route (its `term` set on 130 facts),
+196 from a model-api-id whose prefix names the route (testcabinet: "the id the harness was given (openrouter/…)"),
+183 from a sentence about the run (124 new facts quoting it: Claude Code in the Haiku 5.5 card, bito.ai, Qwen blog,
+tokensave; Terminus 2 / Mini-SWE-agent in vals.ai rows; OpenRouter in arXiv 2601.13206 and LeanZero; Vertex AI…).
+Not applied (doubt): mentions of two harnesses ("Claude Code and mini-SWE-agent"), the Coder agent of arXiv
+2610.06824, "internal version of the Antigravity harness", vals.ai's board prefixes (the converter's note: not a route
+statement), model names containing Codex/Terminus, price sources ("prices from OpenRouter"), judges. routes.json:
+spelling `claude -p` for Claude Code (findings: tilth F7, qiita-phyblas F6) and 25 versioned harness cells.
+
+**Effect** (`--fit-models catalog`): fit-quality rows 18,717 → 10,322, lqm.load kept 17,714 → 9,879; fit-cost rows
+9,496 → 5,543, kept 8,966 → 5,252. Almost every exit is "candidate routes disagree: maker-api → <level>; openrouter →
+not established": OpenRouter's registry entry, for most models, has no accepted levels covering the run
+(nearest-supported without accepted levels) or converts Anthropic levels to a budget. 32 quality and 31 cost couples
+leave the fit table; no Claude couple except sonnet-4.6 max (quality). qiita-suwanobu now runs through Claude Code
+(its default high on the API candidate, a budget on OpenRouter): out, no longer nothink.
+
 ## The global fit (19–21 Oct 2026)
 
 **Method change** (v2026.10.21). The fit now takes every couple of eight model makers measured in the data —

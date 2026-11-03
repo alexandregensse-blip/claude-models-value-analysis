@@ -431,7 +431,10 @@ def cfg6_route_chain():
     r = sc2.run()
     eq(r.q(m1), "out:effort-not-established", "a route named but unresolved: maker-api says high, orz says medium")
     eq(r.cfg(m2), "high", "only the maker's API serves mb")
-    eq((r.cfg(m3), "route-presumed-maker-api" in r[m3]["flags"]), ("high", True), "no route named: maker-api presumed")
+    eq(r.q(m3), "out:effort-not-established",
+       "no route named: unknown, never the maker's API presumed (2 Nov); maker-api says high, orz says medium → out")
+    eq(r[m3]["fields"]["configuration"]["detail"].startswith("candidate routes disagree"), True,
+       "the detail names the disagreeing candidates")
 
 
 @test
@@ -455,7 +458,42 @@ def cfg7_default():
     eq(r.cfg(m2), "default", "default not covering the run")
     eq(r.q(m2), "out:effort-not-established", "default not covering the run")
     eq(r.cfg(m3), "high", "the router's own documented default")
-    eq(r.cfg(m4), "medium", "no route named: the maker's default (maker-api presumed)")
+    eq(r.q(m4), "out:effort-not-established", "no route named: unknown (2 Nov), maker-api medium and orr high disagree")
+
+
+@test
+def route_unknown_never_presumed():
+    # the maintainer, 2 Nov 2026: « En aucun cas on suppose l'API si on n'a pas l'info. » A route not named (nothing, or
+    # only a harness) is unknown: every candidate route that served the model at the run date is weighed, the maker's
+    # API included, and the configuration is accepted only if all agree (it replaces route-presumed-maker-api, 26 Oct)
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    sc.route("orz", "router", spellings=["ORZ"], models={"ma": {"accepts": [span(configuration="high")]}})
+    sc.route("hx", "harness", spellings=["HX"], level_mapping=[span(rule="identity")])
+    sc.route("hy", "harness", spellings=["HY"])                                   # documents nothing
+    sc.route("hz", "harness", spellings=["HZ"])
+    sc.routes["hz"]["mapping"] = [span(requested="high", served="low")]
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[HIGH])                                       # maker-api high, orz high
+    m2 = sc.m(s, model="ma", effort=[HIGH], route=[("HX", None)])                 # harness, then the unknown rest
+    m3 = sc.m(s, model="ma", effort=[MED])                                        # orz documents nothing for medium
+    m4 = sc.m(s, model="ma", effort=[HIGH], route=[("HY", None)])                 # an undocumented harness step
+    m5 = sc.m(s, model="mb", effort=[HIGH], route=[("HZ", None)])                 # positive control: hz applies
+    m6 = sc.m(s, model="mb", effort=[HIGH], more={"other": [("note", "compared with HZ", {})]})   # a mention only
+    m7 = sc.m(s, model="mb", effort=[HIGH], route=[("Maker API", "maker-api")])   # the API named: stated
+    r = sc.run()
+    eq(r.cfg(m1), "high", "no route named: every candidate (maker-api, orz) gives high → accepted")
+    eq("route-unknown-candidates" in r[m1]["rules_used"], True, "rule route-unknown-candidates recorded")
+    eq(r.cfg(m2), "high", "only a harness named: hx applies first, then maker-api and orz agree")
+    eq(r.q(m3), "out:effort-not-established", "negative: maker-api gives medium, orz documents nothing → out")
+    eq(r[m3]["fields"]["configuration"]["detail"].startswith("candidate routes disagree"), True, "disagreement named")
+    eq(r.q(m4), "out:effort-not-established", "negative: an undocumented harness step stays strict")
+    eq(r.cfg(m5), "low", "a harness in the route slot applies (hz maps high → low)")
+    eq(r.cfg(m6), "high", "negative: a harness mentioned in another slot gives no route (hz not applied)")
+    eq((r.cfg(m7), "route-unknown-candidates" in r[m7]["rules_used"]), ("high", False), "the API named: stated chain")
+    eq(sorted(m for m in r.rep["measures"] if "route-presumed-maker-api" in (r[m].get("flags") or [])), [],
+       "the flag route-presumed-maker-api is gone")
 
 
 @test
@@ -586,8 +624,8 @@ def run_date_early_access():
     m2 = sc.m(s, model="mn", effort=[LOW])                 # published 2026-06-01, before the release
     r = sc.run()
     eq(r.q(m1), "in", "early access in")
-    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], "EAP-run; route-presumed-maker-api", "early-access fact → EAP-run")
-    eq(r.rows("fit-quality.csv", model="mn")[0]["confound"], "EAP-run; route-presumed-maker-api", "upper bound before the release")
+    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], "EAP-run", "early-access fact → EAP-run")
+    eq(r.rows("fit-quality.csv", model="mn")[0]["confound"], "EAP-run", "upper bound before the release")
 
 
 # ================================================================ campaigns
@@ -605,7 +643,7 @@ def campaign_continuation():
     eq(r.q(a1), "out:superseded", "replaced within its campaign")
     eq(r.q(a2), "in", "the later value")
     eq(r.q(b2), "in", "the later value")
-    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], f"route-presumed-maker-api; prev=50% ({a1})", "prev recorded")
+    eq(r.rows("fit-quality.csv", model="ma")[0]["confound"], f"prev=50% ({a1})", "prev recorded")
 
 
 @test

@@ -965,15 +965,12 @@ def chains(M, key):
         # a closed harness whose label is the level sent (the maintainer's rule closed-harness-label, 26 Oct): the call
         # reaches the maker's API, so no other candidate route is weighed
         return [(close(harness + ["maker-api"]), "closed harness: label as level")]
-    unresolved = any(route_of_fact(ctx, f) is None for f in M.slot("route"))
-    if not unresolved:
-        # the source names no router, reseller or host (nothing at all, or only a harness): the run is presumed to
-        # have gone through the maker's API, flagged (the maintainer's rule route-presumed-maker-api, 26 Oct); a route
-        # the source names but the registry cannot resolve stays unknown and weighs every candidate
-        M.rule("route-presumed-maker-api")
-        if "route-presumed-maker-api" not in M.flags:
-            M.flags.append("route-presumed-maker-api")
-        return [(close(harness + ["maker-api"]), "presumed maker-api")]
+    # the route is unknown: nothing named, only a harness, or a named route the registry cannot resolve. Every
+    # candidate route is weighed (each route that served the model at the run date, the maker's API included) and
+    # what the chain gives is accepted only if all agree (over_chains). The maker's API is never presumed (the
+    # maintainer, 2 Nov 2026: « En aucun cas on suppose l'API si on n'a pas l'info. »; it replaces the rule
+    # route-presumed-maker-api of 26 Oct). A harness named applies first, then the unknown rest of the chain.
+    M.rule("route-unknown-candidates")
     cands = [r for r in ctx.routes if ctx.routes[r]["class"] not in ("harness", "maker-api")
              and route_serves_model(ctx, r, key, iv)]
     out = [(close(harness + ["maker-api"]), "candidate maker-api")]

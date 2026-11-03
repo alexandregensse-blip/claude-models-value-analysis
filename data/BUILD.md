@@ -303,8 +303,23 @@ marked **(method)** remain method questions for the maintainer.
      never after a router, a host or self-hosting. A configuration the maker converts is therefore not established
      through a router, and a router without its own documented default gives no default.
    - A reseller uses the maker's defaults, with conversions dated under its own route id.
+   - **(the maintainer, 2 Nov 2026)** « En aucun cas on suppose l'API si on n'a pas l'info. » The route is unknown when
+     the measure's `route` slot names nothing, only a harness, or a name no route resolves; `maker-api` is never
+     presumed. This replaces the rule `route-presumed-maker-api` (26 Oct, commit f958e43), under which a source naming
+     no router, reseller or host was taken to have run through the maker's API (flagged); rule and flag are gone.
    - When the route is unknown, the candidates are `maker-api` plus every route whose entry for the model has a
-     dated record overlapping the run.
+     dated record overlapping the run, each after the harness when one is named (`chains`, rule
+     `route-unknown-candidates`). `over_chains` evaluates the configuration (requested level, label, mode, the maker's
+     or a route's default for `no-effort-sent`) over every candidate and accepts it only if all agree; otherwise
+     `not-established:absent`, detail "candidate routes disagree: …". A closed harness whose label is the level
+     (`closed-harness-label`, 26 Oct) still closes its chain with `maker-api`.
+   - Only the `route` slot builds the chain: a harness in the `harness` slot or a route named in another slot's
+     sentence is not read. On 2 Nov the routes the converters had already cited for the run were added to the
+     `route` slots (a harness-slot fact naming one route, with its `term`; a model-api-id whose prefix names a route;
+     a new fact quoting a sentence about the run), never from a mention in passing.
+   - On the cost axis the chain names the cost part (`maker-api`, a stated chain, or `unknown` when several
+     candidates remain) and the reproduction card (a route-specific card only for a single chain). Re-pricing reads
+     the maker's API prices for every measure, the route stated or not (see the open question in PASSES.md, 2 Nov).
 9. **Undocumented steps (decided: strict; the registry will document each harness).** A non-maker step that documents
    nothing covering the run (no mapping, `accepts` or `level_mapping`) leaves the configuration not established. It is
    not assumed to be identity. This also applies to step 7 through a harness.
