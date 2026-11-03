@@ -318,8 +318,9 @@ marked **(method)** remain method questions for the maintainer.
      no effort (« For models that only support reasoning.max_tokens , the effort level will be set based on the
      percentages above. »). Kept: Sonnet 3.7, Opus 4, Opus 4.1, Sonnet 4, Sonnet 4.5, Haiku 4.5 (Anthropic: « If your
      model supports only extended thinking (Claude Sonnet 4.5 (deprecated), Claude Opus 4.5, Claude Haiku 4.5, and
-     earlier Claude 4 models) … »), and, undecided, Opus 4.5, Opus 4.6 and Sonnet 4.6, which take effort and budget at
-     the maker. Removed: Opus 4.7, Opus 4.8, Opus 5, Opus 5.5, Sonnet 5, Sonnet 5.5, Fable 5, Fable 5.1, Haiku 5.5
+     earlier Claude 4 models) … »), and Opus 4.5 (the maintainer, 3 Nov 2026: /models exposes no effort selection for
+     it). Opus 4.6 and Sonnet 4.6, undecided on 3 Nov morning, were decided later that day (see "Added on 3 Nov
+     2026"). Removed: Opus 4.7, Opus 4.8, Opus 5, Opus 5.5, Sonnet 5, Sonnet 5.5, Fable 5, Fable 5.1, Haiku 5.5
      (Anthropic: « Claude 4.7 and later models do not support it and reject requests that use it, returning a 400
      error. »; OpenRouter: « Claude receives both fields unchanged », « Anthropic’s xhigh and max levels stay
      reasoning efforts »). Their documented `minimal → low` is recorded from 8 Sep 2026 (« Claude accepts low ,
@@ -337,7 +338,12 @@ marked **(method)** remain method questions for the maintainer.
    - Only the `route` slot builds the chain: a harness in the `harness` slot or a route named in another slot's
      sentence is not read. On 2 Nov the routes the converters had already cited for the run were added to the
      `route` slots (a harness-slot fact naming one route, with its `term`; a model-api-id whose prefix names a route;
-     a new fact quoting a sentence about the run), never from a mention in passing.
+     a new fact quoting a sentence about the run), never from a mention in passing. On 3 Nov the same was done for
+     measures whose route was already stated and whose harness slot names another harness (point D, 964 measures).
+   - **(the maintainer, 3 Nov 2026)** A harness with a `calls_route` (Claude Code → `maker-api`) closes the chain with
+     that route when the slot names only harnesses (rule `harness-calls-route`); OpenRouter's own level list decides
+     where it exists (rule `router-listed-levels`); a router's defaults are bridged over gaps between captures as the
+     maker's (`default-bridged-gap`). See "Added on 3 Nov 2026".
    - On the cost axis the chain names the cost part (`maker-api`, a stated chain, or `unknown` when several
      candidates remain) and the reproduction card (a route-specific card only for a single chain). Re-pricing reads
      the maker's API prices for every measure, the route stated or not (see the open question in PASSES.md, 2 Nov).
@@ -647,3 +653,61 @@ gpt-5.4 / 5.5 / 5.6-sol are one group). With the tier registered, 286 luna and t
 interval and come in as subsets of their own model (before: `out:cost-not-comparable`, the vectors' tiers differed):
 53 such groups. lqm.load cost 936 groups / 8,966 rows / 275 couples (before 922 / 8,680 / 275), single-model cost
 groups 285 (before 272); quality unchanged (1,607 / 17,714 / 334, the same prepared data).
+
+## Added on 3 Nov 2026
+
+The maintainer's decisions of 3 Nov 2026 (after « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant
+… », same day):
+
+1. **Opus 4.6 and Sonnet 4.6 through OpenRouter: the effort passes as sent**, as for Claude 4.7 and later. OpenRouter's
+   doc converts only « For models that only support reasoning.max_tokens , the effort level will be set based on the
+   percentages above. », and /api/v1/models lists their levels (« "supported_efforts":["max","high","medium","low"] »
+   from the 27 Jun 2026 capture). Their six `budget-converted` mappings are removed from routes.json; their
+   `minimal → low` is recorded from 8 Sep 2026, as for 4.7+ (« Claude accepts low , medium , high , xhigh , and max
+   ( minimal is sent as low , none is rejected). »).
+2. **Opus 4.5: the conversion is kept** — /models exposes no effort selection for it (« "reasoning":{"mandatory":false} »).
+3. **Gemini 2.5 (Pro, Flash, Flash-Lite): the conversion is kept.**
+4. **OpenRouter's own list of a model's levels decides where it exists** (rule `router-listed-levels`). Where
+   /api/v1/models lists the model's levels at the run date (`supported_efforts`, recorded as level `accepts` records of
+   the model whose evidence quotes `supported_efforts`: `catalogue_listed`; a level read from OpenRouter's docs, such as
+   "Can be high", is not the catalogue listing), they are what OpenRouter accepts: a level it does not list falls to its `level_mapping` (nearest
+   supported, a tie → `ambiguous`). The maker's levels (`accepts_maker`, rule `router-maker-levels`) count only where
+   /models lists no level of the model at the run date (before `supported_efforts` appears in the catalogue, 27 Jun 2026,
+   or for a model it never lists). Thinking off / on (`nothink`, `think`) are not levels: the maker's still count beside a
+   listing (not decided by the maintainer; the narrow reading of « niveaux »). The run interval is cut at every bound of the model's level records inside it
+   (`listing_pieces`); each piece is read with its listing, or with the maker's levels where nothing is listed, and the
+   step's result is kept only if every piece gives the same (else `not-established:absent`, detail "openrouter: the
+   levels it accepts for K change over the run (…)"). Example: glm-5.2 at max, listed xhigh / high / none: max → xhigh
+   (nearest), which the maker serves converted, so through OpenRouter it is not established. The level records that the
+   old budget mapping had kept out of the Claude entries (Opus 4.6, 4.7, 4.8, 5, 5.5, Sonnet 4.6, 5, 5.5, Haiku 5.5,
+   Fable 5) were added from the saved catalogue captures (runs of captures listing the same levels, first and last
+   capture quoted).
+5. **OpenRouter's defaults bridged over a gap between captures** (rule `default-bridged-gap`, as the maker's of 29
+   Oct): `ctx.bridged_route_defaults(route, key)` merges two default records of one setting (and one `via`) giving the
+   same configuration on both sides of a span no record covers, with the same conditions — another configuration
+   between them ends the chain, and a name of the model (models.json) or a route id of the model (routes.json `ids`)
+   starting or ending inside the span forbids the bridge; a bridged record is used only where no record covers the run;
+   flag `default-bridged`, `fields.default_bridged`. Example: opus-4.8 on OpenRouter, nothink 29 May – 21 Jul and from 28
+   Jul: the week between is covered. A default that differs from the maker's (Opus 5.5: high at OpenRouter, medium at
+   Anthropic) stays as recorded.
+6. **Claude Code goes directly to Anthropic** (rule `harness-calls-route`). routes.json gives a harness a
+   `calls_route` (route, rule, date, decided_by, decision): when the route slot names only harnesses and all carry the
+   same `calls_route`, that route closes the chain and no other candidate route is weighed. Claude Code →
+   `maker-api`. No evidence saved in the registry states it (the 27 Mar 2026 model-config capture even names Bedrock,
+   Vertex AI and direct API access as providers): the maintainer's decision of 3 Nov 2026. A route the slot names (a
+   router, reseller, host) still makes the chain.
+7. **A harness cited for the run beside a stated route joins the chain (point D).** Measures whose route slot names a
+   route and whose harness slot names a harness not in the route slot (Terminus-2 + OpenRouter for quesma-baba) got
+   that harness fact added to their route slot, by the path of 2 Nov (a harness-slot fact naming exactly one harness by
+   its term or its value; a table cell only when its value is a spelling of the harness): 964 measures of 23 sources.
+   Not applied (doubt): a quote about other models of the source (arxiv-2607.02436 F1 for its LM Studio Qwen runs), four
+   harnesses without the measure's (arxiv-2605.10912 F2), a harness for some tasks only (arxiv-2609.36777 F6), a
+   harness's tools rather than the harness (arxiv-2609.30123 F1); harnesses cited only in other slots (setup, other,
+   spend) were not read.
+
+Not changed (the maintainer): closed harnesses keep the maker's level for the label shown (`closed-harness-label`);
+the repricing to the base price stays at the maker's tariff (OpenRouter charges the provider's prices).
+
+Tests: `router_listed_levels`, `router_default_bridged_gap`, `harness_calls_route`, `harness_beside_stated_route`,
+`registry_openrouter_budget_models` (each with its negative controls); `router_maker_levels` now gives its Opus-5.5-like
+model no listed level (with one listed, decision 4 applies).

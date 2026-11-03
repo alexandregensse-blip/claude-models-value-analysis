@@ -544,40 +544,62 @@ class Ctx:
         """Rule A (default-bridged-gap, the maintainer, 29 Oct): two default records of one setting giving the same
         configuration on both sides of a span without captures cover that span, unless another record of the setting
         states another configuration inside it or a name of the model starts or ends inside it. → the merged records
-        that bridge at least one gap, each listing its gaps (basis `bridged`). Records are walked in order of their
-        start: another configuration stated inside the span is a record between the two, which ends the chain
-        (validate.py refuses defaults of one setting that overlap)."""
+        that bridge at least one gap, each listing its gaps (basis `bridged`)."""
         cache = self.__dict__.setdefault("_bridged", {})
-        if key in cache:
-            return cache[key]
-        recs = self.models[key].get("default", [])
-        bounds = [t for n in self.models[key].get("names", []) for s in n.get("serves", [])
-                  for t in (V.when(s["from"]), V.when(s["to"], True) if s.get("to") is not None else None) if t]
-        out = []
-        for setting in dict.fromkeys(x.get("setting") for x in recs):
-            xs = sorted((x for x in recs if x.get("setting") == setting), key=lambda x: V.when(x["from"]))
-            chain = [xs[0]] if xs else []
-            gaps = []
-            for x in xs[1:] + [None]:
-                a = chain[-1]
-                ok = x is not None and a.get("to") is not None and x["configuration"] == a["configuration"]
-                if ok:
-                    lo, hi = V.when(a["to"], True), V.when(x["from"])
-                    if hi - lo > dt.timedelta(microseconds=1):          # a span no record covers
-                        ok = not any(lo < t < hi for t in bounds)        # no name starts or ends inside it
-                        if ok:
-                            gaps.append({"from": a["to"], "to": x["from"], "basis": "bridged"})
-                if ok:
-                    chain.append(x)
-                    continue
-                if gaps:
-                    first, last = chain[0], max(chain, key=lambda y: V.when(y["to"], True) if y.get("to") else MAX)
-                    out.append(dict(configuration=first["configuration"], setting=setting, **{"from": first["from"]},
-                                    to=last.get("to"), from_basis=first.get("from_basis"), to_basis=last.get("to_basis"),
-                                    bridged=gaps))
-                chain, gaps = ([x] if x is not None else []), []
-        cache[key] = out
-        return out
+        if key not in cache:
+            cache[key] = bridge(self.models[key].get("default", []), self.name_bounds(key))
+        return cache[key]
+
+    def bridged_route_defaults(self, rid, key):
+        """The same rule on a route's own defaults for a model (the maintainer, 3 Nov 2026: the same bridge as for the
+        makers, OpenRouter's catalogue captures): records of one setting and one `via` merged; besides the model's
+        names, a route id of the model starting or ending inside the span forbids the bridge."""
+        cache = self.__dict__.setdefault("_bridged_r", {})
+        if (rid, key) not in cache:
+            e = self.routes[rid].get("models", {}).get(key, {})
+            bounds = self.name_bounds(key) + [t for x in e.get("ids", []) for t in (
+                V.when(x["from"]), V.when(x["to"], True) if x.get("to") is not None else None) if t]
+            out = []
+            for via in dict.fromkeys(x.get("via") for x in e.get("default", [])):
+                out += [dict(b, via=via) if via else b
+                        for b in bridge([x for x in e.get("default", []) if x.get("via") == via], bounds)]
+            cache[(rid, key)] = out
+        return cache[(rid, key)]
+
+    def name_bounds(self, key):
+        return [t for n in self.models[key].get("names", []) for s in n.get("serves", [])
+                for t in (V.when(s["from"]), V.when(s["to"], True) if s.get("to") is not None else None) if t]
+
+
+def bridge(recs, bounds):
+    """Default records → the merged records bridging at least one span no record covers (rule A, default-bridged-gap).
+    Records are walked in order of their start, per setting: another configuration stated inside the span is a record
+    between the two, which ends the chain (validate.py refuses defaults of one setting that overlap); a bound (a name
+    starting or ending) strictly inside the span forbids the bridge."""
+    out = []
+    for setting in dict.fromkeys(x.get("setting") for x in recs):
+        xs = sorted((x for x in recs if x.get("setting") == setting), key=lambda x: V.when(x["from"]))
+        chain = [xs[0]] if xs else []
+        gaps = []
+        for x in xs[1:] + [None]:
+            a = chain[-1]
+            ok = x is not None and a.get("to") is not None and x["configuration"] == a["configuration"]
+            if ok:
+                lo, hi = V.when(a["to"], True), V.when(x["from"])
+                if hi - lo > dt.timedelta(microseconds=1):          # a span no record covers
+                    ok = not any(lo < t < hi for t in bounds)        # no name starts or ends inside it
+                    if ok:
+                        gaps.append({"from": a["to"], "to": x["from"], "basis": "bridged"})
+            if ok:
+                chain.append(x)
+                continue
+            if gaps:
+                first, last = chain[0], max(chain, key=lambda y: V.when(y["to"], True) if y.get("to") else MAX)
+                out.append(dict(configuration=first["configuration"], setting=setting, **{"from": first["from"]},
+                                to=last.get("to"), from_basis=first.get("from_basis"), to_basis=last.get("to_basis"),
+                                bridged=gaps))
+            chain, gaps = ([x] if x is not None else []), []
+    return out
 
 
 # ---------------------------------------------------------------- the measure
@@ -970,6 +992,12 @@ def chains(M, key):
     # what the chain gives is accepted only if all agree (over_chains). The maker's API is never presumed (the
     # maintainer, 2 Nov 2026: « En aucun cas on suppose l'API si on n'a pas l'info. »; it replaces the rule
     # route-presumed-maker-api of 26 Oct). A harness named applies first, then the unknown rest of the chain.
+    calls = [ctx.routes[r].get("calls_route") for r in harness]
+    if harness and all(calls) and len({c["route"] for c in calls}) == 1:
+        # a harness that hands every call to one route (Claude Code → the Anthropic API: the maintainer, 3 Nov 2026,
+        # rule harness-calls-route): that route closes the chain, no other candidate route is weighed
+        M.rule("harness-calls-route")
+        return [(close(harness + [calls[0]["route"]]), f"harness calls {calls[0]['route']}")]
     M.rule("route-unknown-candidates")
     cands = [r for r in ctx.routes if ctx.routes[r]["class"] not in ("harness", "maker-api")
              and route_serves_model(ctx, r, key, iv)]
@@ -1015,51 +1043,106 @@ def serve(M, key, chain, req, iv, configs):
                 return None, f"not-established:{'ambiguous' if cur == 'ambiguous' else 'absent'}", f"{step}: {cur}"
             continue
         acc = [a["configuration"] for a in e.get("accepts", []) if on(a) and covers(a, iv)]
+        regimes = [("own", acc)]
         if any(on(x) and covers(x, iv) for x in r.get("accepts_maker", [])) and route_serves_model(ctx, step, key, iv):
             # a route serving the model at the run date accepts the maker's API levels of that date and passes them on
             # unchanged, beside its own `accepts`; a model `mapping` (a conversion its documents establish for that
-            # model) is read first (the maintainer, 3 Nov 2026, rule router-maker-levels)
+            # model) is read first (the maintainer, 3 Nov 2026, rule router-maker-levels). Where the route's catalogue
+            # lists the model's levels at the run date (level `accepts`: OpenRouter's supported_efforts), its list
+            # decides and an unlisted level falls to level_mapping; the maker's levels count only where it lists none
+            # (the maintainer, 3 Nov 2026, later; rule router-listed-levels). A run the listing covers in part is
+            # read both ways and kept only if both agree.
             mk = [c["id"] for c in ctx.models[key].get("configurations", []) if covers(c, iv) and c["id"] not in acc]
+            listed = [a for a in e.get("accepts", []) if on(a) and a["configuration"] in LEVELS
+                      and overlaps(a, iv[0], iv[1]) and catalogue_listed(a)]
+            regimes = []
+            for piece in listing_pieces(listed, iv):        # spans of the run over which the listing is constant
+                lv = sorted({a["configuration"] for a in listed if covers(a, piece)} - set(acc))
+                if any(overlaps(a, piece[0], piece[1]) for a in listed):
+                    # the listing decides the levels; thinking off / on (not levels) keep the maker's (3 Nov morning)
+                    rg = ("listed " + "/".join(c for c in LEVELS if c in acc + lv),
+                          acc + lv + [c for c in mk if c not in LEVELS])
+                else:
+                    rg = ("maker", acc + mk)
+                if rg not in regimes:
+                    regimes.append(rg)
             part = [x for x in e.get("mapping", []) if on(x) and map_requested(ctx, x["requested"]) == cur
                     and overlaps(x, iv[0], iv[1])]
-            if cur in mk and part:
+        outs = []
+        for how, a in regimes:
+            if how == "maker" and cur in mk and part:
                 # a conversion documented for this model over part of the run: whether it applied is not known
-                return None, "not-established:absent", f"{step}: {cur} → {part[0]['served']} over part of the run only"
-            if cur in mk:
-                M.rule("router-maker-levels")
-            acc += mk
-        if cur in acc:
-            continue
-        lm = [x for x in r.get("level_mapping", []) if on(x) and covers(x, iv)]
-        if not lm and cls == "harness" and r.get("label_as_level"):
-            M.rule("closed-harness-label")
-            if f"harness-label-as-level:{step}" not in M.flags:
-                M.flags.append(f"harness-label-as-level:{step}")
-            continue
-        if not lm:
-            return None, "not-established:absent", f"{step} documents nothing for {key} @ {cur} at the run date"
-        rule = lm[0]["rule"]
-        M.rule("route-mapping-dated")
-        if rule == "identity":
-            continue
-        if rule == "budget":
-            return None, "not-established:absent", f"{step}: budget-converted"
-        if rule == "nearest-supported":
-            lv = [a for a in acc if a in LEVELS]
-            if cur not in LEVELS or not lv:
-                return None, "not-established:absent", f"{step}: nearest-supported without accepted levels"
-            i = LEVELS.index(cur)
-            dist = sorted((abs(LEVELS.index(a) - i), a) for a in lv)
-            if len(dist) > 1 and dist[0][0] == dist[1][0]:
-                return None, "not-established:ambiguous", f"{step}: {cur} ties between {dist[0][1]} and {dist[1][1]}"
-            cur = dist[0][1]
-            continue
-        return None, "not-established:absent", f"{step}: table mapping without an entry for {cur}"
+                outs.append((how, (None, "not-established:absent",
+                                   f"{step}: {cur} → {part[0]['served']} over part of the run only")))
+            else:
+                outs.append((how, accept_or_map(M, key, step, r, cls, on, iv, cur, a)))
+        if len({o for _, o in outs}) > 1:
+            return None, "not-established:absent", f"{step}: the levels it accepts for {key} change over the run (" + \
+                "; ".join(f"{h} → {o[0] or o[1]}" for h, o in outs) + ")"
+        res = outs[0][1]
+        if res[1] != "ok":
+            return res
+        if any(h.startswith("listed") for h, _ in outs):
+            M.rule("router-listed-levels")
+        if any(h == "maker" for h, _ in outs) and cur in mk:
+            M.rule("router-maker-levels")
+        cur = res[0]
     if not any(ctx.routes[st]["class"] in ("maker-api", "reseller") for st in chain) and \
             configs.get(cur, {}).get("served") == "converted":
         return None, "not-established:absent", (f"{cur}: converted by the maker, and the conversion reaches a run "
                                                 f"only through the maker's API or a reseller")
     return cur, "computed" if cur != req else "written", ""
+
+
+def catalogue_listed(rec):
+    """A level `accepts` record that is the router's catalogue listing (OpenRouter's /api/v1/models
+    `supported_efforts`, quoted in its evidence), not a level read from its docs (the maintainer, 3 Nov 2026:
+    « supported_efforts de /models à la date du run »)."""
+    return any("supported_efforts" in (x.get("quote") or "") for x in rec.get("evidence", []))
+
+
+def listing_pieces(recs, iv):
+    """The run interval cut at every bound of these dated records inside it → sub-intervals (lo, hi, False) over each
+    of which every record either covers the piece or does not touch it. An unclamped early-access start is a piece
+    of its own from MIN."""
+    lo, hi, _ = iv
+    lo = lo or MIN
+    eps = dt.timedelta(microseconds=1)
+    cuts = {V.when(x["from"]) for x in recs if lo < V.when(x["from"]) <= hi}
+    cuts |= {V.when(x["to"], True) + eps for x in recs if x.get("to") is not None and lo <= V.when(x["to"], True) < hi}
+    pts = [lo] + sorted(cuts)
+    return [(a, (pts[i + 1] - eps) if i + 1 < len(pts) else hi, False) for i, a in enumerate(pts)]
+
+
+def accept_or_map(M, key, step, r, cls, on, iv, cur, acc):
+    """One step's accepted configurations `acc` applied to the requested `cur`: accepted as is, or the route's level
+    mapping. → (configuration, "ok", "") or (None, level, detail)."""
+    if cur in acc:
+        return cur, "ok", ""
+    lm = [x for x in r.get("level_mapping", []) if on(x) and covers(x, iv)]
+    if not lm and cls == "harness" and r.get("label_as_level"):
+        M.rule("closed-harness-label")
+        if f"harness-label-as-level:{step}" not in M.flags:
+            M.flags.append(f"harness-label-as-level:{step}")
+        return cur, "ok", ""
+    if not lm:
+        return None, "not-established:absent", f"{step} documents nothing for {key} @ {cur} at the run date"
+    rule = lm[0]["rule"]
+    M.rule("route-mapping-dated")
+    if rule == "identity":
+        return cur, "ok", ""
+    if rule == "budget":
+        return None, "not-established:absent", f"{step}: budget-converted"
+    if rule == "nearest-supported":
+        lv = [a for a in acc if a in LEVELS]
+        if cur not in LEVELS or not lv:
+            return None, "not-established:absent", f"{step}: nearest-supported without accepted levels"
+        i = LEVELS.index(cur)
+        dist = sorted((abs(LEVELS.index(a) - i), a) for a in lv)
+        if len(dist) > 1 and dist[0][0] == dist[1][0]:
+            return None, "not-established:ambiguous", f"{step}: {cur} ties between {dist[0][1]} and {dist[1][1]}"
+        return dist[0][1], "ok", ""
+    return None, "not-established:absent", f"{step}: table mapping without an entry for {cur}"
 
 
 def step_filter(ctx, key, chain, i):
@@ -1126,6 +1209,15 @@ def default_via(M, key, chain, iv, configs):
             return serve(M, key, chain[i:], d[0]["configuration"], iv, configs)
         on = step_filter(ctx, key, chain, i)
         d = [x for x in r.get("models", {}).get(key, {}).get("default", []) if on(x) and covers(x, iv)]
+        if not d:
+            # the route's own default bridged over a span without captures, as the maker's (the maintainer, 3 Nov
+            # 2026: the same rule default-bridged-gap, same conditions; used only where no record covers the run)
+            d = [x for x in ctx.bridged_route_defaults(step, key) if on(x) and covers(x, iv)]
+            if d:
+                M.rule("default-bridged-gap")
+                if "default-bridged" not in M.flags:
+                    M.flags.append("default-bridged")
+                M.fields["default_bridged"] = d[0]["bridged"]
         if d:
             M.rule("api-default-documented")
             return serve(M, key, chain[i + 1:], d[0]["configuration"], iv, configs)

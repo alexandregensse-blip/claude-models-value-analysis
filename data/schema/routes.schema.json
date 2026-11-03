@@ -340,6 +340,38 @@
        "unevaluatedProperties": false
       }
      },
+     "calls_route": {
+      "type": "object",
+      "description": "A harness that hands every call to one route (the maintainer, 3 Nov 2026: Claude Code → the Anthropic API, maker-api): when the measure's route slot names only harnesses that all carry it with the same route, that route closes the chain and no other candidate route is weighed (rule harness-calls-route). A route the slot names (a router, reseller, host, self-hosting) still makes the chain.",
+      "properties": {
+       "route": {
+        "$ref": "common.schema.json#/$defs/route_id",
+        "description": "The route every call goes to."
+       },
+       "rule": {
+        "const": "harness-calls-route"
+       },
+       "date": {
+        "$ref": "common.schema.json#/$defs/date_or_datetime"
+       },
+       "decided_by": {
+        "type": "string",
+        "minLength": 1
+       },
+       "decision": {
+        "type": "string",
+        "description": "The decision in its words, and what evidence there is.",
+        "minLength": 1
+       }
+      },
+      "required": [
+       "route",
+       "rule",
+       "date",
+       "decided_by"
+      ],
+      "additionalProperties": false
+     },
      "label_as_level": {
       "type": "object",
       "description": "A closed harness that shows a level label without documenting what it sends: the maintainer's standing rule `closed-harness-label` (26 Oct 2026) takes the label as the level sent, flagged `harness-label-as-level:<route>`, as LMArena's labels. Applies only where the harness documents nothing for the run (a dated mapping, accepts or level mapping wins); the call then reaches the maker's API.",

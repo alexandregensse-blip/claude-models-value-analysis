@@ -5,7 +5,7 @@ campaign rule, per cost step, decisions first and the stale hash, and the three 
     python3 data/tests/run.py            # all
     python3 data/tests/run.py cost       # the tests whose name contains 'cost'
 """
-import os, shutil, sys, time, traceback
+import json, os, shutil, sys, time, traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -512,7 +512,7 @@ def router_maker_levels():
     sc.model("s46", configs=lv + ("think-<budget>",))              # effort and budget at the maker (as Sonnet 4.6)
     ids = lambda k: [span(name=f"or/{k}")]                          # noqa: E731
     conv = [span(requested=c, served="budget-converted") for c in ("low", "medium", "high", "xhigh", "max")]
-    orm = {"op55": {"ids": ids("op55"), "accepts": [span(configuration="high")]},     # /models lists high only
+    orm = {"op55": {"ids": ids("op55"), "accepts": [span(configuration="nothink")]},  # /models lists no level
            "bud": {"ids": ids("bud"), "accepts": [span(configuration="nothink")], "mapping": conv},
            "gap": {"ids": [dict(iv("2025-01-01", "2025-06-30", **win), name="or/gap")]},
            "s46": {"ids": ids("s46"), "mapping": [dict(iv("2026-03-01", "2026-12-31", **win), requested="high",
@@ -555,6 +555,160 @@ def router_maker_levels():
     sc.routes.pop("orp")
     r = sc.run()
     eq(r.cfg(m1), "max", "route unknown, candidates maker-api and ork agree on max → accepted")
+
+
+@test
+def router_listed_levels():
+    # the maintainer, 3 Nov 2026 (decision 4): where OpenRouter's /models lists a model's levels at the run date, its
+    # list decides what it accepts and an unlisted level falls to its level mapping (nearest supported, tie →
+    # ambiguous); the maker's levels (accepts_maker) count only where it lists none (glm-5.2 max, listed xhigh / high)
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda frm="2026-01-01", to="2026-12-31", **kw: dict(iv(frm, to, **win), **kw)     # noqa: E731
+    sc.model("gl", configs=("nothink", "high", "xhigh", "max"))
+    sc.model("tie", configs=("low", "medium", "high"))
+    ids = lambda k: [span(name=f"or/{k}")]                          # noqa: E731
+    se = [{"url": "u", "captured": "2026-03-01", "file": "f", "where": "w", "quote": '"supported_efforts":["xhigh","high"]'}]
+    doc = [{"url": "u", "captured": "2026-03-01", "file": "f", "where": "w", "quote": "Can be high"}]
+    orm = {"gl": {"ids": ids("gl"), "accepts": [span("2026-03-01", configuration="xhigh", evidence=se),
+                                                span("2026-03-01", configuration="high", evidence=se),
+                                                span("2026-01-01", "2026-02-28", configuration="high", evidence=doc)]},
+           "tie": {"ids": ids("tie"), "accepts": [span(configuration="low", evidence=se), span(configuration="high", evidence=se)]}}
+    sc.route("ork", "router", spellings=["ORK"], models=orm,
+             level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    sc.routes["ork"]["accepts_maker"] = [span(decision="the maintainer, 3 Nov 2026")]
+    s = sc.source("a")
+    mx = ("effort-setting", "max")
+    rd = lambda d: [("run-date", d)]                                # noqa: E731
+    m1 = sc.m(s, model="gl", effort=[mx], route=[("ORK", None)], run_date=rd("2026-05-01"))      # listed: xhigh/high
+    m2 = sc.m(s, model="gl", effort=[mx], route=[("ORK", None)], run_date=rd("2026-02-01"))      # nothing listed yet
+    m3 = sc.m(s, model="gl", effort=[mx], route=[("ORK", None)],
+              run_date=[("run-start", "2026-02-01"), ("run-end", "2026-05-01")])               # the listing starts inside
+    m4 = sc.m(s, model="gl", effort=[("effort-setting", "high")], route=[("ORK", None)], run_date=rd("2026-02-15"))
+    m4b = sc.m(s, model="gl", effort=[("effort-setting", "high")], route=[("ORK", None)],
+               run_date=[("run-start", "2026-02-01"), ("run-end", "2026-05-01")])
+    m5 = sc.m(s, model="tie", effort=[("effort-setting", "medium")], route=[("ORK", None)])        # listed low / high
+    m6 = sc.m(s, model="gl", effort=[("thinking-off", "off")], route=[("ORK", None)], run_date=rd("2026-05-01"))
+    r = sc.run()
+    eq(r.cfg(m6), "nothink", "thinking off is not a level: the maker's (accepts_maker) still counts under a listing")
+    eq((r.cfg(m1), "router-listed-levels" in r[m1]["rules_used"], "router-maker-levels" in r[m1]["rules_used"]),
+       ("xhigh", True, False), "the listing decides: max not listed → nearest listed, xhigh")
+    eq((r.cfg(m2), "router-maker-levels" in r[m2]["rules_used"]), ("max", True),
+       "nothing listed at the run (a level read from the docs is no catalogue listing): the maker's max")
+    eq(r.q(m3), "out:effort-not-established", "negative: listed over part of the run only, the two readings disagree")
+    eq(r[m3]["fields"]["configuration"]["detail"],
+       "ork: the levels it accepts for gl change over the run (maker → max; listed high/xhigh → xhigh)", "both readings named")
+    eq((r.cfg(m4), r.cfg(m4b)), ("high", "high"), "a level listed and the maker's: the same either way")
+    eq(r[m5]["fields"]["configuration"]["detail"], "ork: medium ties between high and low",
+       "negative: a level the model has at the maker but not listed falls to the tie rule, not the maker's level")
+
+
+@test
+def router_default_bridged_gap():
+    # the maintainer, 3 Nov 2026 (decision 5): a route's own default identical on both sides of a span without
+    # captures covers it, as the maker's (rule default-bridged-gap, same conditions): opus-4.8 on OpenRouter, nothink
+    # 29 May – 21 Jul and from 28 Jul
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda frm, to, **kw: dict(iv(frm, to, **win), **kw)     # noqa: E731
+    two = ("nothink", "high")
+    for k in ("ra", "rb", "rc", "rd"):
+        sc.model(k, configs=two)
+    d2 = lambda c2: [span("2026-01-01", "2026-03-31", configuration="nothink"),                   # noqa: E731
+                     span("2026-07-01", "2026-12-31", configuration=c2)]
+    orm = {"ra": {"ids": [span("2026-01-01", "2026-12-31", name="or/ra")], "default": d2("nothink")},
+           "rb": {"ids": [span("2026-01-01", "2026-12-31", name="or/rb")], "default": d2("high")},
+           "rc": {"ids": [span("2026-01-01", "2026-03-31", name="or/rc"), span("2026-05-01", "2026-12-31", name="or/rc2")],
+                  "default": d2("nothink")},
+           "rd": {"ids": [span("2026-01-01", "2026-12-31", name="or/rd")],
+                  "default": [span("2026-01-01", "2026-03-31", configuration="nothink"),
+                              span("2026-05-01", "2026-05-10", configuration="high"),
+                              span("2026-07-01", "2026-12-31", configuration="nothink")]}}
+    sc.route("ork", "router", spellings=["ORK"], models=orm)
+    s = sc.source("a", published="2026-12-31")
+    nes = [("no-effort-sent", "default")]
+    on = lambda k, d: sc.m(s, model=k, effort=nes, route=[("ORK", None)], run_date=[("run-date", d)])  # noqa: E731
+    m1, m2, m3, m4, m5 = on("ra", "2026-05-15"), on("ra", "2026-02-15"), on("rb", "2026-05-15"), \
+        on("rc", "2026-06-15"), on("rd", "2026-06-15")
+    r = sc.run()
+    eq((r.cfg(m1), "default-bridged" in r[m1]["flags"], "default-bridged-gap" in r[m1]["rules_used"]),
+       ("nothink", True, True), "the route's nothink on both sides covers the span, flagged")
+    eq(r[m1]["fields"]["default_bridged"], [{"from": "2026-03-31", "to": "2026-07-01", "basis": "bridged"}], "the span")
+    eq((r.cfg(m2), "default-bridged" in r[m2]["flags"]), ("nothink", False), "inside a record: no bridge used")
+    # negative controls: another default after the gap, a route id starting inside it, another record inside it
+    eq([r.cfg(m) for m in (m3, m4, m5)], ["default"] * 3, "no bridge")
+    eq(r[m3]["fields"]["configuration"]["detail"], "ork: no documented default for rb covering the run (→ default)",
+       "out as before")
+
+
+@test
+def harness_calls_route():
+    # the maintainer, 3 Nov 2026 (decision 6): Claude Code goes directly to Anthropic: a harness with calls_route closes
+    # the chain with that route, no other candidate route (qiita-suwanobu)
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    lv = ("low", "medium", "high", "max")
+    sc.model("cm", configs=lv, default=[span(configuration="high")])
+    sc.route("ork", "router", spellings=["ORK"], models={"cm": {"ids": [span(name="or/cm")],
+                                                               "accepts": [span(configuration="medium")]}},
+             level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    hm = {"cm": {"accepts": [span(configuration=c) for c in lv], "default": [span(configuration="max")]}}
+    sc.route("hcc", "harness", spellings=["HCC"], models=hm, level_mapping=[span(rule="identity")])
+    sc.route("hxx", "harness", spellings=["HXX"], models=hm, level_mapping=[span(rule="identity")])
+    sc.routes["hcc"]["calls_route"] = dict(route="maker-api", rule="harness-calls-route", date="2026-11-03",
+                                           decided_by="the maintainer")
+    s = sc.source("a")
+    m1 = sc.m(s, model="cm", effort=[HIGH], route=[("HCC", None)])
+    m2 = sc.m(s, model="cm", effort=[HIGH], route=[("HXX", None)])
+    m3 = sc.m(s, model="cm", effort=[HIGH], route=[("HCC", None), ("ORK", None)])
+    m4 = sc.m(s, model="cm", effort=[("no-effort-sent", "default")], route=[("HCC", None)])
+    r = sc.run()
+    eq((r.cfg(m1), "harness-calls-route" in r[m1]["rules_used"], "route-unknown-candidates" in r[m1]["rules_used"]),
+       ("high", True, False), "harness → maker-api only")
+    eq(r.cfg(m4), "max", "no effort sent: the harness's own default, then the maker's API")
+    eq(r.q(m2), "out:effort-not-established", "negative: a harness without calls_route: candidates disagree")
+    eq(r[m2]["fields"]["configuration"]["detail"],
+       "candidate routes disagree: candidate maker-api → high; candidate ork → medium", "the candidates named")
+    eq(r.cfg(m3), "medium", "negative: a router named in the route slot still makes the chain")
+
+
+@test
+def harness_beside_stated_route():
+    # point D (the maintainer, 3 Nov 2026): a harness cited for the run beside a stated route joins the chain and
+    # applies first (quesma-baba: Terminus-2 through OpenRouter)
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    sc.model("hm", configs=("low", "high"))
+    sc.route("ork", "router", spellings=["ORK"], models={"hm": {"ids": [span(name="or/hm")],
+                                                               "accepts": [span(configuration="high")]}})
+    sc.route("ht2", "harness", spellings=["HT2"], models={})
+    s = sc.source("a")
+    m1 = sc.m(s, model="hm", effort=[HIGH], route=[("ORK", None)])
+    m2 = sc.m(s, model="hm", effort=[HIGH], route=[("ORK", None), ("HT2", None)])
+    r = sc.run()
+    eq(r.cfg(m1), "high", "the router alone")
+    eq(r[m2]["fields"]["configuration"]["detail"], "ht2 documents nothing for hm @ high at the run date",
+       "negative: the harness applies first, and documents nothing")
+
+
+@test
+def registry_openrouter_budget_models():
+    # the maintainer, 3 Nov 2026 (decisions 1–3, 6), on the real registry: OpenRouter's budget conversion removed for
+    # Opus 4.6 and Sonnet 4.6, kept for Opus 4.5 and Gemini 2.5; Claude Code calls the maker's API
+    R = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]
+    om = R["openrouter"]["models"]
+    bud = lambda k: sorted(x["requested"] for x in om[k].get("mapping", []) if x["served"] == "budget-converted")  # noqa: E731
+    eq((bud("opus-4.6"), bud("sonnet-4.6")), ([], []), "4.6: no budget conversion")
+    listed = lambda k: sorted({x["configuration"] for x in om[k].get("accepts", []) if x["configuration"] in   # noqa: E731
+                               ("low", "medium", "high", "xhigh", "max")})
+    eq((listed("opus-4.6"), listed("sonnet-4.6")), (["high", "low", "max", "medium"],) * 2, "4.6: the listed levels")
+    full = ["high", "low", "max", "medium", "minimal", "xhigh"]
+    eq([bud(k) for k in ("opus-4.5", "gemini-2.5-pro", "gemini-2.5-flash", "gemini-2.5-flash-lite")], [full] * 4,
+       "negative: Opus 4.5 and Gemini 2.5 keep the conversion")
+    eq((R["claude-code"]["calls_route"]["route"], R["codex-cli"].get("calls_route")), ("maker-api", None),
+       "Claude Code → maker-api; other harnesses unchanged")
 
 
 @test

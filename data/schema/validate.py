@@ -628,6 +628,10 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
     # routes.json
     makers = set(vocab["$defs"]["maker"].get("enum", []))
     for rid, r in routes.items():
+        cr = r.get("calls_route")
+        if cr and (r.get("class") != "harness" or cr["route"] not in routes or routes[cr["route"]].get("class") == "harness"):
+            # a harness hands its calls to a registered route that is not a harness (the maintainer, 3 Nov 2026)
+            rep.err(f"{lab['routes']} {rid} calls_route", f"'{cr['route']}': a harness's calls go to a registered non-harness route")
         # per-provider records of a harness (registry fix, 26 Oct): via a registered route, a known maker, known keys
         recs = [("level_mapping", x) for x in r.get("level_mapping", [])] + [("mapping", x) for x in r.get("mapping", [])]
         recs += [("accepts_maker", x) for x in r.get("accepts_maker", [])]

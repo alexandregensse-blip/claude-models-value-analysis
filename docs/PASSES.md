@@ -5,6 +5,42 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## OpenRouter's own level list, its defaults, Claude Code, harnesses beside a route (3 Nov 2026, later)
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. Opus 4.6 and Sonnet 4.6 pass their effort through OpenRouter as sent, as Claude 4.7+: OpenRouter's doc converts only
+   « for models that only support reasoning.max_tokens », and /models lists their levels. Their six budget mappings
+   are removed (minimal → low from 8 Sep 2026, as 4.7+).
+2. Opus 4.5 keeps the conversion (/models exposes no effort selection for it). 3. Gemini 2.5 keeps it.
+4. Where OpenRouter's /models lists a model's levels at the run date (`supported_efforts`), its list decides; a level
+   it does not list follows its level mapping (nearest supported, a tie ambiguous). The maker's levels (`accepts_maker`)
+   count only where it lists none (rule `router-listed-levels`). Only level records quoting `supported_efforts` are the
+   listing; a run over which the listing changes is read piece by piece and kept only if all pieces agree; thinking
+   off / on keep the maker's. The listed levels the old budget mapping had kept out of the Claude entries were added
+   from the saved catalogue captures.
+5. OpenRouter's defaults are bridged over gaps between captures as the maker's (`default-bridged-gap`, same
+   conditions, plus a route id starting or ending inside the span). A default unlike the maker's (Opus 5.5 high at
+   OpenRouter, medium at Anthropic) stays.
+6. Claude Code goes directly to Anthropic: routes.json `calls_route` (Claude Code → `maker-api`, rule
+   `harness-calls-route`); no evidence saved in the registry says so, the maintainer's decision.
+7. Point D: a harness cited in the harness slot of a measure whose route was stated joins the chain (964 measures of
+   23 sources; 38 measures of 4 citations not applied, in doubt; harnesses cited only in setup / other / spend slots
+   — 69 measures of 9 sources — not read).
+
+Not changed: closed harnesses (`closed-harness-label`) and repricing at the maker's tariff.
+
+**Effect** (`--fit-models catalog`, against d46a626): fit-quality rows 18,032 → 17,781 (lqm.load kept 17,020 →
+16,775); fit-cost rows 9,336 → 9,123 (kept 8,811 → 8,610). Quality: 77 measures in (Sonnet 4.6 61: high 32, medium
+16, low 9, max 4 — the couple sonnet-4.6 max is back; glm-5.2 high 12, deepseek-v4.1-flash low 1; Claude Code 2;
+bridged default 1),
+328 out (point D 180 — the harness documents nothing for the model and level; listed levels 147: glm-5.2 max 99, kimi-k3
+low / high / max 41, DeepSeek V4 previews max 7). Cost: 22 in, 235 out (point D 122, listed levels 73, Claude Code 25 and
+group effects 15: Claude Code measures now on the maker-api cost part, single couples there). Still out against the
+build of before 2 Nov: 1,317 quality and 517 cost measures (d46a626: 1,093 and 367), mostly route unknown with OpenRouter
+giving no established level or default (809 quality), and harnesses documenting nothing (Claude Code 92, OpenHands 84,
+Terminus-2 21, Inspect 19, Pi 15 quality). qiita-suwanobu: Opus 4.6 and Sonnet 4.6 now at Claude Code's default
+(high); Sonnet 4.5, Haiku 4.5, Opus 4.5 out (Claude Code documents no default for them).
+
 ## OpenRouter passes the maker's levels (3 Nov 2026)
 
 **Decision (the maintainer, 3 Nov):** « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les

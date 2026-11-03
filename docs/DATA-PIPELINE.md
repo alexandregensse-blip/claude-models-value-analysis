@@ -130,7 +130,7 @@ Together, DeepInfra…: open weights served by a third party) · router (OpenRou
 Pi, Claude Code, Codex CLI, IronBee…) · self-hosted (vLLM, SGLang…)`. Per route and model, dated: the configurations it
 accepts, how it maps a level (identity when documented as identity; OpenRouter nearest supported level,
 ties `ambiguous`; a model without an effort parameter → a token budget: `budget-converted`), its documented default.
-On a self-hosted route the maker's defaults and conversions do not apply. A harness maps a level per provider: its records name the next step they apply to (`via`), and route-wide records the maker and models (26 Oct). A router's route-wide `accepts_maker` (dated, with the decision) makes it accept, for a model it serves at the run date, the levels of the maker's API at that date and pass them on unchanged, beside its own `accepts`; a model `mapping` (a conversion its documents establish for that model, such as OpenRouter's effort → budget_tokens for the Claude models that take only a budget) is read first. The maintainer, 3 Nov 2026: « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les transmet tels quels, sauf là où sa doc documente une conversion pour ce modèle. » (rule `router-maker-levels`). A generic sentence covers only the models it can apply to: a budget conversion never applies to a model whose maker API rejects a budget.
+On a self-hosted route the maker's defaults and conversions do not apply. A harness maps a level per provider: its records name the next step they apply to (`via`), and route-wide records the maker and models (26 Oct). A router's route-wide `accepts_maker` (dated, with the decision) makes it accept, for a model it serves at the run date, the levels of the maker's API at that date and pass them on unchanged, beside its own `accepts`; a model `mapping` (a conversion its documents establish for that model, such as OpenRouter's effort → budget_tokens for the Claude models that take only a budget) is read first. The maintainer, 3 Nov 2026: « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les transmet tels quels, sauf là où sa doc documente une conversion pour ce modèle. » (rule `router-maker-levels`). A generic sentence covers only the models it can apply to: a budget conversion never applies to a model whose maker API rejects a budget. Where the router's catalogue lists the model's levels at the run date (OpenRouter's `supported_efforts`, recorded as level `accepts` quoting it), that list decides the levels (thinking off / on keep the maker's) and an unlisted level falls to the router's level mapping (nearest supported, a tie `ambiguous`); `accepts_maker` counts only where it lists none; a run over which the listing changes is read piece by piece and kept only if all pieces agree (the maintainer, 3 Nov 2026, rule `router-listed-levels`). OpenRouter's budget conversion is removed for Opus 4.6 and Sonnet 4.6 (/models lists their levels), kept for Opus 4.5 and Gemini 2.5 (3 Nov 2026). A router's own defaults are bridged over a gap between captures as the maker's (`default-bridged-gap`, same conditions; a route id of the model starting or ending inside the span also forbids it; 3 Nov 2026). A harness's `calls_route` names the route every call of it goes to: Claude Code → `maker-api` (the maintainer, 3 Nov 2026, rule `harness-calls-route`).
 
 **benchmarks.json** — `family` ⊃ `setup` = benchmark × subset × harness (without its version: patch releases are one
 configuration) × tools regime × judge panel × metric. Per setup: headline metric (the source's designated one; if none,
@@ -204,7 +204,8 @@ configurations" are those of models.json at the run date:
    presumed (the maintainer, 2 Nov 2026: « En aucun cas on suppose l'API si on n'a pas l'info. »; it replaces the
    presumption `route-presumed-maker-api` of 26 Oct). Every candidate route (each route of routes.json that served the
    model at the run date, the maker's API always included) is evaluated, after the harness when one is named, and the
-   configuration is accepted only if all agree, else `not-established:absent` (rule `route-unknown-candidates`). A name
+   configuration is accepted only if all agree, else `not-established:absent` (rule `route-unknown-candidates`), except
+   after a harness with a `calls_route` (Claude Code → the maker's API, the maintainer, 3 Nov 2026). A name
    prefix that names a route, or a harness, counts only as a fact of the measure's `route` slot; a router budget →
    `budget-converted`; a tie → `ambiguous`;
 7. `no-effort-sent` → `api-default-documented`: on the maker's API or a reseller, the maker's documented default (Haiku
@@ -370,7 +371,14 @@ Decided by the maintainer during the reviews:
   reseller or host ran through the maker's API, flag and rule `route-presumed-maker-api`: 15,234 of 18,717 quality and
   7,351 of 9,496 cost rows of the fit tables, 25,167 measures of 596 sources) is withdrawn. Harnesses and routes the converters had already cited for the run (a
   harness-slot fact, a name prefix, a sentence about the run) were put in the measures' `route` slots on 2 Nov, from
-  the extracted citations only (PASSES.md).
+  the extracted citations only (PASSES.md). On 3 Nov, likewise, a harness cited in the harness slot of a measure whose
+  route was already stated joined its chain (964 measures; the harness applies first).
+- **OpenRouter and Claude Code** (3 Nov, the maintainer): Opus 4.6 and Sonnet 4.6 pass their effort through OpenRouter
+  as sent (budget conversion kept for Opus 4.5 and Gemini 2.5); where OpenRouter's /models lists a model's levels at
+  the run date its list decides (`router-listed-levels`), the maker's levels counting only where it lists none;
+  OpenRouter's defaults are bridged over gaps between captures as the maker's; Claude Code calls the maker's API
+  (`harness-calls-route`, no other candidate route). Not changed: closed harnesses keep the maker's level for their
+  label; repricing stays at the maker's tariff.
 - **Effort charts** (26 Oct): a chart whose caption, title, legend or text says its points are effort levels
   ('reasoning-effort scaling'): the k-th of a series' n points in increasing cost (or tokens) order is the model's k-th
   level when the model has n levels (fact `effort-order` 'k/n', rule `chart-effort-order`, flag

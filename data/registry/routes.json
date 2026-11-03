@@ -4988,7 +4988,14 @@
      ]
     }
    },
-   "note": "Effort per the model table, default sentences and fallback sentence of code.claude.com/docs/en/model-config, dated by all 202 Wayback captures held (6 Nov 2025 to 26 Oct 2026; earlier captures carry no effort text; the effort section first appears 6 Feb 2026) and by the dates the Claude Code changelog gives (CHANGELOG.md, version dates = npm publish times): Opus 4.7 xhigh 16 Apr 2026 (2.1.111), the 'as of v2.1.117' default sentence 21 Apr 2026, Opus 4.8 default high 28 May 2026 (2.1.154), xhigh -> high on models without xhigh 16 Apr 2026. Intervals = runs of consecutive captures with the same statement. Not recorded because plan-dependent: the defaults of 5 Mar-23 Mar 2026 (Opus 4.6 medium for Max and Team subscribers) and of 9-12 Apr 2026 (Pro and Max medium, other plans high). Unsupported levels fall back to the highest supported level at or below (xhigh -> high on models without xhigh). Thinking off with xhigh/max on Opus 5 is sent as high (changelog 2.1.251, 2026-08-28; not expressed). Models absent from the table have no effort (no entry); the docs state no thinking default for Haiku 4.5 or Sonnet 4.5. Spelling 'claude -p' (2 Nov 2026): the command of Claude Code's headless (print) mode, as findings already extracted say: src-github-tilth-benchmark-v0.5.0-2026-10-19 F7 'Each run invokes `claude -p` (Claude Code headless mode)'; src-qiita-phyblas-3ef5fb322c6d011f5309-2026-10-13 F6 'Claude Codeのヘッドレスモード（claude -p）'. Versioned spellings 'claude_code 2.1.270' / '2.1.280' (and codex / opencode ones under their routes) are the harness cells of the saved tables of src-epoch-archive-weirdml-v3-2026-10-02 and src-testcabinet-snapshot-2026-10-20."
+   "note": "Effort per the model table, default sentences and fallback sentence of code.claude.com/docs/en/model-config, dated by all 202 Wayback captures held (6 Nov 2025 to 26 Oct 2026; earlier captures carry no effort text; the effort section first appears 6 Feb 2026) and by the dates the Claude Code changelog gives (CHANGELOG.md, version dates = npm publish times): Opus 4.7 xhigh 16 Apr 2026 (2.1.111), the 'as of v2.1.117' default sentence 21 Apr 2026, Opus 4.8 default high 28 May 2026 (2.1.154), xhigh -> high on models without xhigh 16 Apr 2026. Intervals = runs of consecutive captures with the same statement. Not recorded because plan-dependent: the defaults of 5 Mar-23 Mar 2026 (Opus 4.6 medium for Max and Team subscribers) and of 9-12 Apr 2026 (Pro and Max medium, other plans high). Unsupported levels fall back to the highest supported level at or below (xhigh -> high on models without xhigh). Thinking off with xhigh/max on Opus 5 is sent as high (changelog 2.1.251, 2026-08-28; not expressed). Models absent from the table have no effort (no entry); the docs state no thinking default for Haiku 4.5 or Sonnet 4.5. Spelling 'claude -p' (2 Nov 2026): the command of Claude Code's headless (print) mode, as findings already extracted say: src-github-tilth-benchmark-v0.5.0-2026-10-19 F7 'Each run invokes `claude -p` (Claude Code headless mode)'; src-qiita-phyblas-3ef5fb322c6d011f5309-2026-10-13 F6 'Claude Codeのヘッドレスモード（claude -p）'. Versioned spellings 'claude_code 2.1.270' / '2.1.280' (and codex / opencode ones under their routes) are the harness cells of the saved tables of src-epoch-archive-weirdml-v3-2026-10-02 and src-testcabinet-snapshot-2026-10-20.",
+   "calls_route": {
+    "route": "maker-api",
+    "rule": "harness-calls-route",
+    "date": "2026-11-03",
+    "decided_by": "the maintainer",
+    "decision": "the maintainer, 3 Nov 2026: Claude Code goes directly to Anthropic — when the harness is Claude Code, the chain is Claude Code → the Anthropic API (maker-api), with no other candidate route. No evidence saved in the registry states it (the 27 Mar 2026 model-config capture names Bedrock, Vertex AI and direct API access as providers): the maintainer's decision."
+   }
   },
   "codex-cli": {
    "class": "harness",
@@ -22733,6 +22740,136 @@
          "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
         }
        ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-fable-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
       }
      ],
      "default": [
@@ -38473,6 +38610,136 @@
          "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
         }
        ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-10-08",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20261008000423/https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-08T00:04:23Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20261008000423.json",
+         "sha256": "573898f065557f3cfa06fd8d51fd31f6baeaa6a74e3d9c9e80ce5a087049e0ff",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-10-08",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20261008000423/https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-08T00:04:23Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20261008000423.json",
+         "sha256": "573898f065557f3cfa06fd8d51fd31f6baeaa6a74e3d9c9e80ce5a087049e0ff",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-10-08",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20261008000423/https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-08T00:04:23Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20261008000423.json",
+         "sha256": "573898f065557f3cfa06fd8d51fd31f6baeaa6a74e3d9c9e80ce5a087049e0ff",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-10-08",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20261008000423/https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-08T00:04:23Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20261008000423.json",
+         "sha256": "573898f065557f3cfa06fd8d51fd31f6baeaa6a74e3d9c9e80ce5a087049e0ff",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-10-08",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20261008000423/https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-08T00:04:23Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20261008000423.json",
+         "sha256": "573898f065557f3cfa06fd8d51fd31f6baeaa6a74e3d9c9e80ce5a087049e0ff",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-haiku-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
       }
      ],
      "default": [
@@ -40685,6 +40952,110 @@
          "quote": "When using the reasoning.max_tokens parameter, that value is used directly with a minimum of 1024 tokens."
         }
        ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supports_max_tokens\":true,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
       }
      ],
      "default": [
@@ -40757,358 +41128,37 @@
      ],
      "mapping": [
       {
-       "from": "2026-02-15",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "high",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_high",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_high (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-15",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "low",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_low",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_low (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-07-03",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "max",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://web.archive.org/web/20260703100916/https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-07-03T10:09:16Z",
-         "file": "/work/.salvo14/mig/gaps2-openrouter-route/docs/20260703100916.txt",
-         "sha256": "f89611867687d3bd01227b671997a76c3099f5b1608d124fbaf062331ceac112",
-         "where": "ratio_max",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_max",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_max (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-15",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "medium",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_medium",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_medium (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-15",
+       "from": "2026-09-08",
        "to": "2026-10-29",
        "from_basis": "earliest-capture",
        "to_basis": "last-capture",
        "requested": "minimal",
-       "served": "budget-converted",
+       "served": "low",
        "evidence": [
         {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
+         "url": "https://web.archive.org/web/20260908164957/https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
+         "captured": "2026-09-08T16:49:57Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-route/docs/20260908164957.txt",
+         "sha256": "9fab2d77e9f16116d5391d1c7361dfe7dbd8099af0df7ddcd0293636f5861312",
+         "where": "Changing Effort Mid-Conversation (first capture of the section)",
+         "quote": "Effort values are translated to the target model’s vocabulary the same way as request-level effort.",
+         "note": "the maintainer, 3 Nov 2026: OpenRouter passes the effort of Opus 4.6 and Sonnet 4.6 as sent, as for Claude 4.7 and later; its doc converts only « for models that only support reasoning.max_tokens », and /models lists their levels"
         },
         {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_minimal",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
+         "url": "https://web.archive.org/web/20260908164957/https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
+         "captured": "2026-09-08T16:49:57Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-route/docs/20260908164957.txt",
+         "sha256": "9fab2d77e9f16116d5391d1c7361dfe7dbd8099af0df7ddcd0293636f5861312",
+         "where": "Changing Effort Mid-Conversation (first capture of the section)",
+         "quote": "Claude accepts low , medium , high , xhigh , and max ( minimal is sent as low , none is rejected)."
         },
         {
          "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
          "captured": "2026-10-29T06:56:47Z",
          "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
          "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_minimal (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-15",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "xhigh",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_xhigh",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_xhigh (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
+         "where": "Changing Effort Mid-Conversation (live capture 29 Oct, reg10)",
+         "quote": "Claude accepts low , medium , high , xhigh , and max ( minimal is sent as low , none is rejected)."
         }
        ]
       }
@@ -41196,6 +41246,136 @@
          "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
          "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
          "where": "data[id=anthropic/claude-opus-4.7].reasoning (live capture 29 Oct, reg10; file: one compact JSON entry per line)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.7].reasoning (last capture of the run)",
          "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
         }
        ]
@@ -41407,6 +41587,136 @@
          "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
         }
        ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-4.8].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
       }
      ],
      "default": [
@@ -41612,6 +41922,136 @@
          "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
          "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
          "where": "data[id=anthropic/claude-opus-5].reasoning (live capture 29 Oct, reg10; file: one compact JSON entry per line)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-07-28",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260728015936/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-28T01:59:36Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260728015936.json",
+         "sha256": "c6fb505d612946fba6fa4014ab7891496a5e247a8fbfe3127f11480ec48bb767",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-07-28",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260728015936/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-28T01:59:36Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260728015936.json",
+         "sha256": "c6fb505d612946fba6fa4014ab7891496a5e247a8fbfe3127f11480ec48bb767",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-07-28",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260728015936/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-28T01:59:36Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260728015936.json",
+         "sha256": "c6fb505d612946fba6fa4014ab7891496a5e247a8fbfe3127f11480ec48bb767",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-07-28",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260728015936/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-28T01:59:36Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260728015936.json",
+         "sha256": "c6fb505d612946fba6fa4014ab7891496a5e247a8fbfe3127f11480ec48bb767",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-07-28",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260728015936/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-28T01:59:36Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260728015936.json",
+         "sha256": "c6fb505d612946fba6fa4014ab7891496a5e247a8fbfe3127f11480ec48bb767",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5].reasoning (last capture of the run)",
          "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
         }
        ]
@@ -41911,6 +42351,136 @@
          "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
          "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
          "where": "data[id=anthropic/claude-opus-5.5].reasoning (live capture 29 Oct, reg10; file: one compact JSON entry per line)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-09-22",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260922174911/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-22T17:49:11Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260922174911.json",
+         "sha256": "d312fd8d0486049a20661a4ff44321ea570914f1f53ffcc362a0aaf38ff1edad",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-09-22",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260922174911/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-22T17:49:11Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260922174911.json",
+         "sha256": "d312fd8d0486049a20661a4ff44321ea570914f1f53ffcc362a0aaf38ff1edad",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-09-22",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260922174911/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-22T17:49:11Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260922174911.json",
+         "sha256": "d312fd8d0486049a20661a4ff44321ea570914f1f53ffcc362a0aaf38ff1edad",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-09-22",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260922174911/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-22T17:49:11Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260922174911.json",
+         "sha256": "d312fd8d0486049a20661a4ff44321ea570914f1f53ffcc362a0aaf38ff1edad",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-09-22",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260922174911/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-22T17:49:11Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260922174911.json",
+         "sha256": "d312fd8d0486049a20661a4ff44321ea570914f1f53ffcc362a0aaf38ff1edad",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-opus-5.5].reasoning (last capture of the run)",
          "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
         }
        ]
@@ -45807,6 +46377,110 @@
          "quote": "When using the reasoning.max_tokens parameter, that value is used directly with a minimum of 1024 tokens."
         }
        ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-06-27",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260627130556/https://openrouter.ai/api/v1/models",
+         "captured": "2026-06-27T13:05:56Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260627130556.json",
+         "sha256": "fbebff7260651fe5b605501fe57887511f7597317d583650074246aed8954d3d",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-4.6].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"medium\"}"
+        }
+       ]
       }
      ],
      "default": [
@@ -45862,358 +46536,37 @@
      ],
      "mapping": [
       {
-       "from": "2026-02-19",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "high",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_high",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_high (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-19",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "low",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_low",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_low (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-07-03",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "max",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://web.archive.org/web/20260703100916/https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-07-03T10:09:16Z",
-         "file": "/work/.salvo14/mig/gaps2-openrouter-route/docs/20260703100916.txt",
-         "sha256": "f89611867687d3bd01227b671997a76c3099f5b1608d124fbaf062331ceac112",
-         "where": "ratio_max",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_max",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_max (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-19",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "medium",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_medium",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_medium (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-19",
+       "from": "2026-09-08",
        "to": "2026-10-29",
        "from_basis": "earliest-capture",
        "to_basis": "last-capture",
        "requested": "minimal",
-       "served": "budget-converted",
+       "served": "low",
        "evidence": [
         {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
+         "url": "https://web.archive.org/web/20260908164957/https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
+         "captured": "2026-09-08T16:49:57Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-route/docs/20260908164957.txt",
+         "sha256": "9fab2d77e9f16116d5391d1c7361dfe7dbd8099af0df7ddcd0293636f5861312",
+         "where": "Changing Effort Mid-Conversation (first capture of the section)",
+         "quote": "Effort values are translated to the target model’s vocabulary the same way as request-level effort.",
+         "note": "the maintainer, 3 Nov 2026: OpenRouter passes the effort of Opus 4.6 and Sonnet 4.6 as sent, as for Claude 4.7 and later; its doc converts only « for models that only support reasoning.max_tokens », and /models lists their levels"
         },
         {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_minimal",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
+         "url": "https://web.archive.org/web/20260908164957/https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
+         "captured": "2026-09-08T16:49:57Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-route/docs/20260908164957.txt",
+         "sha256": "9fab2d77e9f16116d5391d1c7361dfe7dbd8099af0df7ddcd0293636f5861312",
+         "where": "Changing Effort Mid-Conversation (first capture of the section)",
+         "quote": "Claude accepts low , medium , high , xhigh , and max ( minimal is sent as low , none is rejected)."
         },
         {
          "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
          "captured": "2026-10-29T06:56:47Z",
          "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
          "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_minimal (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        }
-       ]
-      },
-      {
-       "from": "2026-02-19",
-       "to": "2026-10-29",
-       "from_basis": "earliest-capture",
-       "to_basis": "last-capture",
-       "requested": "xhigh",
-       "served": "budget-converted",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "anth_budget",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "only_maxtok_pct",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-23T05:20:03Z",
-         "file": "/work/.salvo14/mig/routes/evidence/openrouter/docs_reasoning_live_20261023T052003Z.txt",
-         "sha256": "aa56698674ad887253ff07665354b3d1bda4b5bf5af804e0e5feae09131b29d3",
-         "where": "ratio_xhigh",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "anth_budget (live capture 29 Oct, reg10)",
-         "quote": "When using the reasoning.effort parameter, the budget_tokens are calculated based on the max_tokens value."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "only_maxtok_pct (live capture 29 Oct, reg10)",
-         "quote": "For models that only support reasoning.max_tokens , the effort level will be set based on the percentages above."
-        },
-        {
-         "url": "https://openrouter.ai/docs/guides/best-practices/reasoning-tokens",
-         "captured": "2026-10-29T06:56:47Z",
-         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter.ai_docs_guides_best-practices_reasoning-tokens.txt",
-         "sha256": "e2bf250392e964189184558d134997607bdf2bec1586baef1c88047f3a6b22ca",
-         "where": "ratio_xhigh (live capture 29 Oct, reg10)",
-         "quote": "effort_ratio is 0.95 for max and xhigh effort, 0.8 for high effort, 0.5 for medium effort, 0.2 for low effort, and 0.1 for minimal effort. Important"
+         "where": "Changing Effort Mid-Conversation (live capture 29 Oct, reg10)",
+         "quote": "Claude accepts low , medium , high , xhigh , and max ( minimal is sent as low , none is rejected)."
         }
        ]
       }
@@ -46301,6 +46654,136 @@
          "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
          "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
          "where": "data[id=anthropic/claude-sonnet-5].reasoning (live capture 29 Oct, reg10; file: one compact JSON entry per line)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-07-17",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260717210931/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-17T21:09:31Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260717210931.json",
+         "sha256": "962d7f97788da0099f2603cee611e3b716dc09d439278c21b282990345dd7b81",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-07-17",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260717210931/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-17T21:09:31Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260717210931.json",
+         "sha256": "962d7f97788da0099f2603cee611e3b716dc09d439278c21b282990345dd7b81",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-07-17",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260717210931/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-17T21:09:31Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260717210931.json",
+         "sha256": "962d7f97788da0099f2603cee611e3b716dc09d439278c21b282990345dd7b81",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-07-17",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260717210931/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-17T21:09:31Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260717210931.json",
+         "sha256": "962d7f97788da0099f2603cee611e3b716dc09d439278c21b282990345dd7b81",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-07-17",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260717210931/https://openrouter.ai/api/v1/models",
+         "captured": "2026-07-17T21:09:31Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260717210931.json",
+         "sha256": "962d7f97788da0099f2603cee611e3b716dc09d439278c21b282990345dd7b81",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":false,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"medium\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5].reasoning (last capture of the run)",
          "quote": "\"reasoning\":{\"mandatory\":false,\"default_enabled\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\",\"none\"],\"default_effort\":\"high\"}"
         }
        ]
@@ -46641,6 +47124,136 @@
          "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
          "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
          "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (live capture 29 Oct, reg10; file: one compact JSON entry per line)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "high",
+       "from": "2026-09-29",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260929000400/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-29T00:04:00Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260929000400.json",
+         "sha256": "0f1f8993e0e636a5c46d486b9ce8301035f9074696ec42169c0488fbd327dc32",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "low",
+       "from": "2026-09-29",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260929000400/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-29T00:04:00Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260929000400.json",
+         "sha256": "0f1f8993e0e636a5c46d486b9ce8301035f9074696ec42169c0488fbd327dc32",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "max",
+       "from": "2026-09-29",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260929000400/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-29T00:04:00Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260929000400.json",
+         "sha256": "0f1f8993e0e636a5c46d486b9ce8301035f9074696ec42169c0488fbd327dc32",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "medium",
+       "from": "2026-09-29",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260929000400/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-29T00:04:00Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260929000400.json",
+         "sha256": "0f1f8993e0e636a5c46d486b9ce8301035f9074696ec42169c0488fbd327dc32",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (last capture of the run)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
+        }
+       ]
+      },
+      {
+       "configuration": "xhigh",
+       "from": "2026-09-29",
+       "to": "2026-10-29",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://web.archive.org/web/20260929000400/https://openrouter.ai/api/v1/models",
+         "captured": "2026-09-29T00:04:00Z",
+         "file": "/work/.salvo14/mig/gaps2-openrouter-names/wb-all/models_20260929000400.json",
+         "sha256": "0f1f8993e0e636a5c46d486b9ce8301035f9074696ec42169c0488fbd327dc32",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (first capture of the run of captures listing these levels)",
+         "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}",
+         "note": "the levels /api/v1/models lists (supported_efforts) at these captures: its list decides what the route accepts (the maintainer, 3 Nov 2026, rule router-listed-levels)"
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-10-29T06:56:45Z",
+         "file": "/work/.salvo14/mig/reg10/ev/live29/openrouter-models-entries-20261029.txt",
+         "sha256": "75942f35654d2cbf25a1c83ae8a9c3543e984bbf63483691fbc969203e99af1c",
+         "where": "data[id=anthropic/claude-sonnet-5.5].reasoning (last capture of the run)",
          "quote": "\"reasoning\":{\"mandatory\":true,\"supported_efforts\":[\"max\",\"xhigh\",\"high\",\"medium\",\"low\"],\"default_effort\":\"high\"}"
         }
        ]
@@ -67229,7 +67842,7 @@
      ]
     }
    },
-   "note": "Accepts = the model's supported_efforts from GET /api/v1/models (none = nothink); default = default_effort where default_enabled is true or mandatory; no-reasoning-object models accept nothink; on-off models (no levels) accept nothink and think. Pro/batch/free ids are never matched to the base key. Catalogue captures 17 Jul-23 Oct 2026 (daily Wayback captures not fetched: gaps are not covered). 3 Nov 2026 (the maintainer): OpenRouter accepts the maker API's levels at the run date and passes them on unchanged (route-wide accepts_maker, rule router-maker-levels), besides the levels /api/v1/models lists; a model mapping is a conversion its documents establish for that model. The effort → budget_tokens formula (section \"Reasoning Max Tokens for Anthropic Models\") is kept for the Claude models that take only a budget (Sonnet 3.7, Opus 4, Opus 4.1, Sonnet 4, Sonnet 4.5, Haiku 4.5) and, undecided, for Opus 4.5, Opus 4.6 and Sonnet 4.6 (effort and budget at the maker); it was removed for Opus 4.7 and later, which reject a budget at the maker (extended-thinking page) and which OpenRouter lists with their effort levels.",
+   "note": "Accepts = the model's supported_efforts from GET /api/v1/models (none = nothink); default = default_effort where default_enabled is true or mandatory; no-reasoning-object models accept nothink; on-off models (no levels) accept nothink and think. Pro/batch/free ids are never matched to the base key. Catalogue captures 17 Jul-23 Oct 2026 (daily Wayback captures not fetched: gaps are not covered). 3 Nov 2026 (the maintainer): OpenRouter accepts the maker API's levels at the run date and passes them on unchanged (route-wide accepts_maker, rule router-maker-levels), besides the levels /api/v1/models lists; a model mapping is a conversion its documents establish for that model. The effort → budget_tokens formula (section \"Reasoning Max Tokens for Anthropic Models\") is kept for the Claude models that take only a budget (Sonnet 3.7, Opus 4, Opus 4.1, Sonnet 4, Sonnet 4.5, Haiku 4.5) and, undecided, for Opus 4.5, Opus 4.6 and Sonnet 4.6 (effort and budget at the maker); it was removed for Opus 4.7 and later, which reject a budget at the maker (extended-thinking page) and which OpenRouter lists with their effort levels. 3 Nov 2026 (the maintainer), later: the budget conversion is removed for Opus 4.6 and Sonnet 4.6 too (OpenRouter's doc converts only « for models that only support reasoning.max_tokens », and /models lists their levels); kept for Opus 4.5 (/models exposes no effort selection) and Gemini 2.5. Where /models lists a model's levels (supported_efforts, recorded as level `accepts`) at the run date, its list decides what the route accepts and an unlisted level falls to level_mapping (rule router-listed-levels); accepts_maker applies only where /models lists no level for the model at that date. Listed levels the old budget mapping had kept out of `accepts` were added for the Claude models from the saved catalogue captures.",
    "accepts_maker": [
     {
      "from": "2025-02-26",

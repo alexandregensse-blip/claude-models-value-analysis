@@ -438,10 +438,12 @@
   {
    "id": "default-bridged-gap",
    "kind": "deduction",
-   "statement": "A model's documented default identical on both sides of a span without captures covers the span: only between two default records of the same model and setting giving the same configuration, when no other record of that setting states another configuration inside the span and no name of the model (any route) starts or ends inside it. The span's basis is `bridged`; the measures it decides carry the flag default-bridged.",
+   "statement": "A model's documented default identical on both sides of a span without captures covers the span: only between two default records of the same model and setting giving the same configuration, when no other record of that setting states another configuration inside the span and no name of the model (any route) starts or ends inside it. The span's basis is `bridged`; the measures it decides carry the flag default-bridged. The same rule applies to a route's own defaults for a model (the maintainer, 3 Nov 2026: OpenRouter's catalogue defaults), records of one setting and one via; a route id of the model starting or ending inside the span also forbids the bridge.",
    "inputs": [
     "models.json default",
-    "models.json names"
+    "models.json names",
+    "routes.json models.<key>.default",
+    "routes.json models.<key>.ids"
    ],
    "output": "configuration (step 7)",
    "date": "2026-10-29",
@@ -487,9 +489,39 @@
     "models.json configurations"
    ],
    "output": "configuration (computed)",
-   "conditions": "the accepts_maker record covers the run interval; the route's ids for the model overlap it",
+   "conditions": "the accepts_maker record covers the run interval; the route's ids for the model overlap it; the route's catalogue lists no level of the model over the run (else router-listed-levels; the maintainer, 3 Nov 2026, later)",
    "date": "2026-11-03",
    "decided_by": "the maintainer",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "router-listed-levels",
+   "kind": "standing",
+   "statement": "Where a router's catalogue lists the model's levels at the run date (OpenRouter's supported_efforts in /api/v1/models, recorded as level accepts), its list decides what the router accepts: a level it does not list falls to the router's level_mapping (nearest supported, a tie → ambiguous). The maker's levels (router-maker-levels) count only where the catalogue lists no level of the model at that date. A run the listing covers in part is read both ways and kept only if both agree.",
+   "inputs": [
+    "route",
+    "effort-setting / effort-label",
+    "routes.json accepts (levels), accepts_maker, level_mapping",
+    "models.json configurations"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "the router has a covering accepts_maker record; level accepts records of the model overlap the run",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: glm-5.2 max, which OpenRouter lists as xhigh / high / none)",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "harness-calls-route",
+   "kind": "standing",
+   "statement": "A harness that hands every call to one route (Claude Code → the Anthropic API, maker-api) closes the chain with that route when the measure names no other route: no other candidate route is weighed.",
+   "inputs": [
+    "route (a harness only)",
+    "routes.json calls_route"
+   ],
+   "output": "route chain",
+   "conditions": "every harness named has a calls_route naming the same route; the route slot names no router, reseller, host or self-hosting",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: Claude Code goes directly to Anthropic)",
    "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
   }
  ]
