@@ -303,6 +303,27 @@ marked **(method)** remain method questions for the maintainer.
      never after a router, a host or self-hosting. A configuration the maker converts is therefore not established
      through a router, and a router without its own documented default gives no default.
    - A reseller uses the maker's defaults, with conversions dated under its own route id.
+   - **(the maintainer, 3 Nov 2026)** « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les
+     transmet tels quels, sauf là où sa doc documente une conversion pour ce modèle. » routes.json gives a router a
+     route-wide, dated `accepts_maker` record (with its `decision` and evidence): for a model whose route ids overlap
+     the run, the step's accepted levels are its own `accepts` plus the model's configurations (models.json) covering
+     the run (rule `router-maker-levels`). A model `mapping` is still read first, and a level neither mapped nor
+     accepted falls to `level_mapping` (nearest supported). A maker level that a model `mapping` converts over part
+     of the run only is not established (doubt → out; Sonnet 4.6 runs from its release, 17 Feb, the conversion dated
+     from the 19 Feb capture). OpenRouter's record runs from its first capture describing
+     `reasoning.effort` (26 Feb 2025: « For models that do not support effort-based reasoning, if effort is specified
+     it will be converted ») to the last capture (29 Oct 2026).
+   - OpenRouter's effort → `budget_tokens` formula ("Reasoning Max Tokens for Anthropic Models") had been written as
+     a `budget-converted` mapping of every Claude model; it applies only to the Claude models that take a budget and
+     no effort (« For models that only support reasoning.max_tokens , the effort level will be set based on the
+     percentages above. »). Kept: Sonnet 3.7, Opus 4, Opus 4.1, Sonnet 4, Sonnet 4.5, Haiku 4.5 (Anthropic: « If your
+     model supports only extended thinking (Claude Sonnet 4.5 (deprecated), Claude Opus 4.5, Claude Haiku 4.5, and
+     earlier Claude 4 models) … »), and, undecided, Opus 4.5, Opus 4.6 and Sonnet 4.6, which take effort and budget at
+     the maker. Removed: Opus 4.7, Opus 4.8, Opus 5, Opus 5.5, Sonnet 5, Sonnet 5.5, Fable 5, Fable 5.1, Haiku 5.5
+     (Anthropic: « Claude 4.7 and later models do not support it and reject requests that use it, returning a 400
+     error. »; OpenRouter: « Claude receives both fields unchanged », « Anthropic’s xhigh and max levels stay
+     reasoning efforts »). Their documented `minimal → low` is recorded from 8 Sep 2026 (« Claude accepts low ,
+     medium , high , xhigh , and max ( minimal is sent as low , none is rejected). »).
    - **(the maintainer, 2 Nov 2026)** « En aucun cas on suppose l'API si on n'a pas l'info. » The route is unknown when
      the measure's `route` slot names nothing, only a harness, or a name no route resolves; `maker-api` is never
      presumed. This replaces the rule `route-presumed-maker-api` (26 Oct, commit f958e43), under which a source naming

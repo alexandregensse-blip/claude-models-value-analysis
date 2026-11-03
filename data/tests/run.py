@@ -497,6 +497,67 @@ def route_unknown_never_presumed():
 
 
 @test
+def router_maker_levels():
+    # the maintainer, 3 Nov 2026: « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les transmet
+    # tels quels, sauf là où sa doc documente une conversion pour ce modèle. » A route-wide accepts_maker record adds the
+    # maker's levels at the run date to the route's own accepts; a model mapping (a budget conversion documented for a
+    # model that takes only a budget) is read first and still takes the measure out
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    lv = ("low", "medium", "high", "xhigh", "max")
+    sc.model("op55", configs=lv)                                    # effort only (as Opus 5.5: adaptive, no budget)
+    sc.model("bud", configs=("nothink", "think-<budget>"))          # budget only (as Sonnet 4.5)
+    sc.model("gap", configs=lv)                                     # the route lists it, not over the run
+    sc.model("s46", configs=lv + ("think-<budget>",))              # effort and budget at the maker (as Sonnet 4.6)
+    ids = lambda k: [span(name=f"or/{k}")]                          # noqa: E731
+    conv = [span(requested=c, served="budget-converted") for c in ("low", "medium", "high", "xhigh", "max")]
+    orm = {"op55": {"ids": ids("op55"), "accepts": [span(configuration="high")]},     # /models lists high only
+           "bud": {"ids": ids("bud"), "accepts": [span(configuration="nothink")], "mapping": conv},
+           "gap": {"ids": [dict(iv("2025-01-01", "2025-06-30", **win), name="or/gap")]},
+           "s46": {"ids": ids("s46"), "mapping": [dict(iv("2026-03-01", "2026-12-31", **win), requested="high",
+                                                        served="budget-converted")]}}
+    sc.route("ork", "router", spellings=["ORK"], models=orm,
+             level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    sc.routes["ork"]["accepts_maker"] = [span(decision="the maintainer, 3 Nov 2026")]
+    sc.route("orn", "router", spellings=["ORN"], models={"op55": {"ids": ids("op55")}},     # no accepts_maker
+             level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    sc.route("orp", "router", spellings=["ORP"], models={"op55": {"ids": ids("op55"), "accepts": [span(configuration="high")]}},
+             level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    sc.routes["orp"]["accepts_maker"] = [dict(iv("2025-01-01", "2025-06-30", **win), decision="dated before the run")]
+    s = sc.source("a")
+    mx = ("effort-setting", "max")
+    m1 = sc.m(s, model="op55", effort=[mx], route=[("Unregistered Provider", None)])   # unknown: maker-api, ork, orn
+    m2 = sc.m(s, model="op55", effort=[mx], route=[("ORK", None)])
+    m3 = sc.m(s, model="bud", effort=[HIGH], route=[("ORK", None)])
+    m4 = sc.m(s, model="bud", effort=[HIGH])
+    m5 = sc.m(s, model="op55", effort=[mx], route=[("ORN", None)])
+    m6 = sc.m(s, model="gap", effort=[mx], route=[("ORK", None)])
+    m7 = sc.m(s, model="op55", effort=[mx], route=[("ORP", None)])
+    m8 = sc.m(s, model="s46", effort=[HIGH], route=[("ORK", None)])                       # run 1 Jan – 1 Jun
+    m9 = sc.m(s, model="s46", effort=[HIGH], route=[("ORK", None)], run_date=[("run-date", "2026-04-01")])
+    r = sc.run()
+    eq(r.cfg(m2), "max", "stated OpenRouter-like route: the maker's max passes unchanged (not in its own accepts)")
+    eq("router-maker-levels" in r[m2]["rules_used"], True, "rule router-maker-levels recorded")
+    eq(r.q(m3), "out:effort-not-established", "negative: a budget-only model through the route stays converted")
+    eq(r[m3]["fields"]["configuration"]["detail"], "ork: budget-converted", "the documented conversion is named")
+    eq(r.q(m4), "out:effort-not-established", "negative: route unknown, ork converts the budget model → disagree")
+    eq(r.q(m5), "out:effort-not-established", "negative: a router without accepts_maker keeps its own accepts only")
+    eq(r[m6]["fields"]["configuration"]["detail"], "ork: nearest-supported without accepted levels",
+       "negative: the maker's levels count only while the route serves the model")
+    eq(r.cfg(m7), "high", "negative: accepts_maker not covering the run: the route's own accepts, nearest supported")
+    eq(r[m8]["fields"]["configuration"]["detail"], "ork: high → budget-converted over part of the run only",
+       "negative: a conversion covering part of the run is doubt, not the maker's level")
+    eq(r[m9]["fields"]["configuration"]["detail"], "ork: budget-converted", "the conversion covering the run applies")
+    # the unknown route of m1: maker-api max, ork max, orn and orp disagree
+    eq(r.q(m1), "out:effort-not-established", "orn and orp (no accepts_maker over the run) disagree")
+    sc.routes.pop("orn")
+    sc.routes.pop("orp")
+    r = sc.run()
+    eq(r.cfg(m1), "max", "route unknown, candidates maker-api and ork agree on max → accepted")
+
+
+@test
 def cfg7_default_bridged_gap():
     # rule A (the maintainer, 29 Oct): the same default before and after a span without captures covers the span
     # (qwen3.6-plus: think on the Chinese page to 21 May, on the English page from 19 Oct)

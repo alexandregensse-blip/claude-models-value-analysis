@@ -630,6 +630,7 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
     for rid, r in routes.items():
         # per-provider records of a harness (registry fix, 26 Oct): via a registered route, a known maker, known keys
         recs = [("level_mapping", x) for x in r.get("level_mapping", [])] + [("mapping", x) for x in r.get("mapping", [])]
+        recs += [("accepts_maker", x) for x in r.get("accepts_maker", [])]
         recs += [(f"{k}/{f}", x) for k, rm in r.get("models", {}).items() for f in ("accepts", "mapping", "default")
                  for x in rm.get(f, [])]
         for what, x in recs:

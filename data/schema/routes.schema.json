@@ -101,6 +101,46 @@
        "unevaluatedProperties": false
       }
      },
+     "accepts_maker": {
+      "type": "array",
+      "description": "Route-wide, dated: a route serving the model at the run date accepts the levels of the maker's API at that date (the model's configurations in models.json covering the run) and passes them on unchanged, beside its own `accepts`. A model `mapping` (a conversion the route's documents establish for that model) is read first; a level neither accepted nor mapped falls to `level_mapping`. The maintainer, 3 Nov 2026 (OpenRouter), rule router-maker-levels.",
+      "items": {
+       "type": "object",
+       "description": "One dated record.",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "decision": {
+         "type": "string",
+         "description": "Who decided it, when, in their words.",
+         "minLength": 1
+        },
+        "via": {
+         "$ref": "common.schema.json#/$defs/route_id",
+         "description": "For a harness: the next step this record applies to (the route the harness hands the call to: maker-api, openrouter, bedrock…). Absent: every next step. A harness maps a level per provider (its provider adapter), so its records name the provider (registry fix, 26 Oct 2026)."
+        },
+        "maker": {
+         "$ref": "vocab.json#/$defs/maker",
+         "description": "For a harness: the maker whose models this record applies to (a provider adapter of the harness: Inspect's anthropic provider on the maker's API). Absent: every maker."
+        },
+        "models": {
+         "type": "array",
+         "description": "The model keys this record applies to (absent: every model of `maker`, or every model).",
+         "items": {
+          "$ref": "common.schema.json#/$defs/model_key"
+         },
+         "minItems": 1
+        }
+       },
+       "required": [
+        "decision"
+       ],
+       "unevaluatedProperties": false
+      }
+     },
      "models": {
       "type": "object",
       "description": "Model key → what the route does with it.",

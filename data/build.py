@@ -1015,6 +1015,19 @@ def serve(M, key, chain, req, iv, configs):
                 return None, f"not-established:{'ambiguous' if cur == 'ambiguous' else 'absent'}", f"{step}: {cur}"
             continue
         acc = [a["configuration"] for a in e.get("accepts", []) if on(a) and covers(a, iv)]
+        if any(on(x) and covers(x, iv) for x in r.get("accepts_maker", [])) and route_serves_model(ctx, step, key, iv):
+            # a route serving the model at the run date accepts the maker's API levels of that date and passes them on
+            # unchanged, beside its own `accepts`; a model `mapping` (a conversion its documents establish for that
+            # model) is read first (the maintainer, 3 Nov 2026, rule router-maker-levels)
+            mk = [c["id"] for c in ctx.models[key].get("configurations", []) if covers(c, iv) and c["id"] not in acc]
+            part = [x for x in e.get("mapping", []) if on(x) and map_requested(ctx, x["requested"]) == cur
+                    and overlaps(x, iv[0], iv[1])]
+            if cur in mk and part:
+                # a conversion documented for this model over part of the run: whether it applied is not known
+                return None, "not-established:absent", f"{step}: {cur} → {part[0]['served']} over part of the run only"
+            if cur in mk:
+                M.rule("router-maker-levels")
+            acc += mk
         if cur in acc:
             continue
         lm = [x for x in r.get("level_mapping", []) if on(x) and covers(x, iv)]

@@ -5,6 +5,29 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## OpenRouter passes the maker's levels (3 Nov 2026)
+
+**Decision (the maintainer, 3 Nov):** « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les
+transmet tels quels, sauf là où sa doc documente une conversion pour ce modèle. » routes.json gives OpenRouter a
+route-wide `accepts_maker` record (26 Feb 2025 – 29 Oct 2026; rule `router-maker-levels`): for a model it serves at the
+run date, the maker API's levels at that date are accepted beside the levels `/api/v1/models` lists. A model `mapping`
+is read first; a level the mapping converts over part of the run only is not established (doubt).
+
+**The budget conversion, model by model.** OpenRouter's effort → `budget_tokens` formula ("Reasoning Max Tokens for
+Anthropic Models") had been written for every Claude model, Opus 5.5 included, whose catalogue entry lists max…low.
+Anthropic's extended-thinking page: « Claude 4.7 and later models do not support it and reject requests that use it,
+returning a 400 error. » OpenRouter: « For models that only support reasoning.max_tokens , the effort level will be set
+based on the percentages above. », « Claude receives both fields unchanged », « Anthropic’s xhigh and max levels stay
+reasoning efforts ». Removed for Opus 4.7, 4.8, 5, 5.5, Sonnet 5, 5.5, Fable 5, 5.1, Haiku 5.5 (minimal → low recorded
+from 8 Sep 2026: « Claude accepts low , medium , high , xhigh , and max ( minimal is sent as low , none is
+rejected). »). Kept for the budget-only Sonnet 3.7, Opus 4, 4.1, Sonnet 4, 4.5, Haiku 4.5, and (undecided: effort and
+budget at the maker) Opus 4.5, Opus 4.6, Sonnet 4.6; Gemini 2.5 (same question) unchanged.
+
+**Effect** (`--fit-models catalog`): fit-quality rows 10,322 → 18,032 (before 2 Nov: 18,717), lqm.load kept 9,879 →
+17,020 (17,714); fit-cost rows 5,543 → 9,336 (9,496), kept 5,252 → 8,811 (8,966). Still out against the build of
+before 2 Nov: 1,093 quality and 367 cost measures, mostly OpenRouter defaults (catalogue gaps, or a default unlike the
+maker's: Opus 5.5 high vs medium) and the undecided Sonnet 4.6. Couple gone: sonnet-4.6 max (quality).
+
 ## Route not named = unknown (2 Nov 2026)
 
 **Decision (the maintainer, 2 Nov):** « En aucun cas on suppose l'API si on n'a pas l'info. » A route is written "API"
