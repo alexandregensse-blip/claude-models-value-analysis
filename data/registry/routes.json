@@ -20427,7 +20427,23 @@
     "OpenHands 1.21.0 unified minimal scaffold"
    ],
    "name_prefixes": [],
-   "note": "SDK fields reasoning_effort / extended_thinking_budget (28 Jul 2026), wired through LiteLLM (not read per provider): not established (gaps-harnesses)."
+   "note": "SDK fields reasoning_effort / extended_thinking_budget (28 Jul 2026), wired through LiteLLM (not read per provider): not established (gaps-harnesses).",
+   "passes_through": {
+    "route": "litellm",
+    "rule": "harness-passes-through",
+    "date": "2026-11-03",
+    "decided_by": "the maintainer",
+    "decision": "the maintainer, 3 Nov 2026: LiteLLM is in the chain of every OpenHands source, not only those whose ids start with litellm_proxy/, because the OpenHands SDK calls the providers through the LiteLLM library; LiteLLM documents nothing in the registry, so the strict rule applies (Interpretations 9). Evidence: the SDK's LLM layer cited in this route's note (gaps-harnesses, OpenHands/software-agent-sdk HEAD 60192ed5, 22 Oct 2026).",
+    "evidence": [
+     {
+      "url": "https://github.com/OpenHands/software-agent-sdk/blob/60192ed5/openhands-sdk/openhands/sdk/llm/llm.py",
+      "file": "/work/.salvo14/mig/gaps-harnesses/evidence/openhands-llm.py.txt",
+      "sha256": "2e977d0f0f0a7d650173da7b3efc16efde11bf4e470b72324b6283abe363343e",
+      "where": "openhands/sdk/llm/llm.py, line 84 (import) and line 2529 (the completion call of class LLM)",
+      "quote": "ret = litellm_completion("
+     }
+    ]
+   }
   },
   "cursor-cli": {
    "class": "harness",

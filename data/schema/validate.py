@@ -374,11 +374,14 @@ def digits_agree(value, written):
     '0.51' / '51¢', '7250000' / '7.25M'); a value with no digit (a level, a label reading) is not checked."""
     sig = lambda t: re.sub(r"[^0-9]", "", str(t)).strip("0")                      # noqa: E731
     v = sig(value)
-    if re.fullmatch(r"\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?Z?)?", str(value)):
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d+)?)?Z?)?", str(value)):
         # an ISO date / time read from a date as written ('2026年9月30日', '2026-08-19 22:13 UTC'): its numbers, in
-        # order and contiguous, among the written text's numbers (zero padding and separators aside; 3 Nov 2026)
-        vn, wn = [int(x) for x in re.findall(r"\d+", str(value))], [int(x) for x in re.findall(r"\d+", str(written))]
-        return any(wn[i:i + len(vn)] == vn for i in range(len(wn) - len(vn) + 1))
+        # order and contiguous, among the written text's numbers (zero padding and separators aside; 3 Nov 2026); the
+        # date's numbers and the time's each so, a time written before its date ('14:32:46 (2026-10-11)')
+        wn = [int(x) for x in re.findall(r"\d+", str(written))]
+        has = lambda vn: any(wn[i:i + len(vn)] == vn for i in range(len(wn) - len(vn) + 1))   # noqa: E731
+        d, _, t = str(value).partition("T")
+        return has([int(x) for x in re.findall(r"\d+", d)]) and (not t or has([int(x) for x in re.findall(r"\d+", t)]))
     return not v or v in sig(written)
 
 
@@ -637,6 +640,12 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
         if cr and (r.get("class") != "harness" or cr["route"] not in routes or routes[cr["route"]].get("class") == "harness"):
             # a harness hands its calls to a registered route that is not a harness (the maintainer, 3 Nov 2026)
             rep.err(f"{lab['routes']} {rid} calls_route", f"'{cr['route']}': a harness's calls go to a registered non-harness route")
+        pt = r.get("passes_through")
+        if pt and (r.get("class") != "harness" or pt["route"] not in routes or routes[pt["route"]].get("class") in
+                   ("harness", "maker-api")):
+            # a harness's calls go through a registered library / proxy route (OpenHands → LiteLLM; 3 Nov 2026)
+            rep.err(f"{lab['routes']} {rid} passes_through", f"'{pt['route']}': a harness's calls go through a "
+                                                             f"registered route that is neither a harness nor a maker's API")
         # per-provider records of a harness (registry fix, 26 Oct): via a registered route, a known maker, known keys
         recs = [("level_mapping", x) for x in r.get("level_mapping", [])] + [("mapping", x) for x in r.get("mapping", [])]
         recs += [("accepts_maker", x) for x in r.get("accepts_maker", [])]
@@ -984,6 +993,36 @@ def check_saved(src, path, rep, lines_cache={}):
         p = reach.get(f.get("file")) if f.get("file") else only
         if f.get("quote") and p and p.endswith(TEXT_EXT) and not quote_in_file(f["quote"], p):
             rep.err(f"{L} {f['id']}", f"quote not found in the saved file {os.path.basename(p)}")
+    # the proof of a capture's or the publication's date (dating step 2, 3 Nov 2026): each evidence record's file, its
+    # sha256 and its quote; an error is reported under the capture id or 'published', and the build leaves that date out
+    dated = [(c["id"], c) for c in src.get("captures", [])] + [("published", src.get("published") or {})]
+    for label, rec in dated:
+        for i, e in enumerate(rec.get("evidence") or []):
+            for msg in evidence_faults(e, path):
+                rep.err(f"{L} {label}", f"evidence[{i}]: {msg}")
+
+
+def evidence_faults(e, path):
+    """What fails in one evidence record of a dated source item: no saved file or quote, the file not reachable, its
+    sha256, the quote not in the file."""
+    if not e.get("file") or not e.get("quote") or not e.get("sha256"):
+        return ["evidence without its " + " and ".join(k for k in ("file", "sha256", "quote") if not e.get(k))]
+    f = saved_path(e["file"], path)
+    if not f:
+        return [f"saved file not reachable here: {e['file']}"]
+    if sha256_of(f) != e["sha256"]:
+        return [f"sha256 mismatch: {e['file']}"]
+    if f.endswith(".pdf"):
+        return ["a quote in a PDF points at its text extraction"]
+    if f.endswith(TEXT_EXT):
+        ok = quote_in_file(e["quote"], f)
+    else:                                                # a header dump, an Atom feed, a decompressed capture: text
+        try:
+            with open(f, encoding="utf-8") as fh:
+                ok = norm(e["quote"]) in norm(fh.read())
+        except UnicodeDecodeError:
+            return [f"the quote cannot be checked in {os.path.basename(f)} (not a text file)"]
+    return [] if ok else [f"quote not found in {os.path.basename(f)}"]
 
 
 JSON_PATH_TOKEN = re.compile(r"\.([A-Za-z_$][A-Za-z0-9_$-]*)|\[([0-9]+)\]|\['([^']*)'\]|\[\"([^\"]*)\"\]|(\[\*\]|\.\*)")

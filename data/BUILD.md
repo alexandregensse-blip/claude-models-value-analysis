@@ -894,3 +894,85 @@ Claude: sonnet-5.5 cost rows 197 → 298.
 Tests: `findings_doubtful_dates_run_end`, `openhands_litellm_chain`, `changelog_bound_scope`;
 `cost_per_model_subset_and_single`, `cost_uniform_factor_across_tiers` and `findings_dates_route5` updated (each with a
 negative control that fails when its decision is switched off).
+
+## Added on 3 Nov 2026 (dating step 2)
+
+**Step 2 of the dating of undated sources** (agents on the web, 3 Nov 2026; their instructions:
+web2/CONSIGNE.md of the session's scratchpad). 205 sources of the step-2 list were searched for a date that bounds
+the runs of their values, each proved by an exact quote of a saved file (/work/.salvo14/mig/dates2/ev/, with its
+sha256): 173 dated, 15 in doubt, 17 nothing found (41 batches; reruns r1–r3 replace their sources' results in b05,
+b13, b14, b16, b19, b22). Kinds, by preference: `run-date` (the source writes when the run took place), `published`,
+`updated-label` (a « last updated » label, or the modification date of content identical to ours: an HTTP
+`Last-Modified`, a payload's `generatedAt`), `commit` (the commit that added the values; the first commit holding
+them, else the last one), `first-capture` (the earliest Wayback capture showing the values).
+
+**How they are written** (findings, offline; the writer is dates2/py of the session's scratchpad):
+- a commit → a capture `kind: commit` (its id, its date); a first capture → a capture `kind: wayback` (its URL with
+  the timestamp); either is listed in `value_seen_in` of the measures whose value it carries;
+- a publication, label or modification date → `published` (`where` says which), when it is earlier than the one held;
+- a date per measure → a `run-date` fact (written as the run's date), `run-end` (a date on or after the run: a
+  row's date, a commit for a measure whose upper bound a stated date decides), `run-start` (the start of the run).
+- Every date carries its proof: a capture or `published` an `evidence` record (url, captured, file, sha256, where,
+  quote; schema change: `evidence` on a capture and on `published`), a fact its file (in the sha256 map), where and
+  quote. The writer checks that the file exists, that its sha256 is the agent's and the folder's SHA256SUMS, and that
+  the quote is an exact substring of the file; the agents' quotes that are summaries (« … », joined fragments) are
+  replaced by the line of the file that writes the date or the value. A date with no checkable proof is not written.
+- A date is written only where it tightens the measure's current upper bound (or, for a start, its lower bound):
+  the smallest sure upper bound, the largest sure lower bound.
+- validate.py `--check-files` checks each evidence record (sha256, quote; also in a header dump or an Atom feed); a
+  failure is reported under the capture id or `published` (`S.date_faults`), and the build leaves that date out — not
+  the source (Source.published / Source.capture).
+
+**The maintainer's cases (A-REVOIR.md, 3 Nov 2026), as applied:** vercel/eve PR 3769: the modification date (25 Sep)
+is the bound — our harvest of 24 Sep is tighter, nothing written. GLM-5.2 / GLM-5.3-Flash: only the README's values
+are dated by the README's commit, not the image's (GLM-5.3-Flash: its 24 measures all come from bench_53.png, none
+dated). vb2: the board capture bounds only the values it shows (8 of 64 found on it; not the Epoch CSV rows).
+clbench: the 1 May capture for every measure but Polyphony (none of the 25 is Polyphony). surgehq 15 Oct: one capture
+per board (11), none for sudo-l7. surge-twi: the 14 Sep capture bounds the 8 values of the Qwen page only. hf-ale:
+the commit's date where it is earlier than ours. tuabench: `Last-Modified` of a file of our sha256 → `published`.
+SimpleBench: `dateAdded` per model → `run-end` on 53 measures. Convex `latestRunTime` (run-date) and epoch.ai
+« Started at » (run-start, the lower bound) were already cited per measure by the conversion (cells of the run_date
+slot); the epoch upper bound stays the batch's. llm_chess: the logs' `time_started_formatted` ('2026.10.08_09:08', not
+read by the build) → `run-start` facts, as a local time, on the 47 measures; data.js `min_game_date` was already a
+run-start. The doubts and the « nothing found » are not written, but for clbench, convex and surgehq (above).
+
+**The maintainer's decisions of 3 Nov 2026 applied here:**
+1. **A time written without its time zone** in a run date or a bound is a local time of unknown zone: its upper bound
+   is the end of the day after, its lower bound the start of the day before (lhtb « 2026-08-03T23:01:31 »: upper bound
+   4 Aug). The build reads it so wherever it reads a date (day_bounds: facts, cells, `published`); the dates already
+   written that dropped the time are rewritten with it, the text in `written` (289 values: aibenchy « Tested on:
+   2026-10-07 21:50 » 224, c0ze 5, qiita 3, lhtb 4, published 8 (note.com 5, aireiter, mcpmark, chronobay), llm_chess
+   45 new). `published.value` accepts such a time (schema); validate.py `digits_agree` reads a time written before its
+   date (« 14:32:46 (2026-10-11) »).
+2. **codereviewbench:** the bound is the commit of 12 Oct (b04, 00047f7bf0, 17:44:38Z); the document dated 2 Oct that
+   reports a run of 3 Oct is ignored.
+3. **OpenHands → LiteLLM in routes.json:** `passes_through` on the harness (route `litellm`, rule
+   `harness-passes-through`, the SDK's llm.py « ret = litellm_completion( », gaps-harnesses evidence): the route is a
+   step of every chain the harness is in, right after it; LiteLLM documents nothing, strict.
+
+**Not written:** 46 of the dated results. 28 tighten no bound (AA Wayback pages, cursorbench, mercor t8, scale…); 11
+were already written per measure (convex ×3, epoch ×2, killswitch ×2, pokebench, swebench.com, surfsense, miaai); 4
+commits whose date is in no saved file (rtx4090, simpleenglish, threadkeeper, tilth: the agents read the API without
+saving it); 2 binary proofs whose quote cannot be checked (proofbench zip, superclue 2511 xlsx); toolathlon's « Date »
+column (rows dated before their model's release: Qwen3.5 Plus 2025-12-17, released 2026-02-16) is held. A Wayback
+capture bounds a measure only when the measure's row is in it: where the agent compared a few rows only, the rows not
+found near their label are left out (28: stagehand's Sonnet 5.5, Haiku 5.5, Gemini 4 Argon rows, absent from the 23
+Sep capture; frontierswe's Haiku 5.5; AA 1 and 30 Jul).
+
+**Written:** 131 sources: 253 commit captures (69 sources; tinybird one per model, 178), 42 Wayback captures (32), 25
+`published` (20 labels or modification dates, 5 publications), 164 `run-end` facts (11 sources), 45 `run-start` (1), 6
+`run-date` (1). Measures newly bounded: 2,597 by a commit, 2,049 by a capture, 251 by a fact. designarena 18 and 21 Oct are dated by their
+boards' own `metadata.lastUpdateTime` (not the Security page's date that route5 left out).
+
+**Effect** (`--fit-models catalog`, against 9a0f2d9): fit-quality rows 17,696 → 17,742 (+53, −7; lqm.load kept 16,665
+→ 16,711): kimi-k2.5 think +25 (the Kimi K2.6 README dated by its commit), deepseek-v4-flash-vision-exp max +7 and
+deepseek-v4-flash-0731 max +4 (DeepSeek V4 Flash Vision card), kimi-k2-thinking +3, qwen3.8-max xhigh +2 …; 7 grok-4.1-fast
+think rows change copy (the Gemini 3 Flash card, now dated 17 Dec 2025, is the earlier one). Quality couples 337 → 339
+(deepseek-v4-flash-vision-exp max, sonnet-5 nothink). Fit-cost 9,050 → 9,039 (−11: arcprize 15 Oct gemini-3.5-flash
+and gemini-3.7-flash, its price date now ending at the payload's generatedAt of 13 Oct, which no registered price
+covers; AA 30 Jul grok-4.5); cost couples 268. Claude: sonnet-5 nothink +1 quality row (tinybird), no other Claude
+row moves. Missing prices: 186 (model, currency) pairs, 1,397 cost measures (711 with quality in).
+
+Tests: `local_time_no_zone`, `date_proof_checked`, `openhands_passes_through_litellm`, `findings_dates_step2`;
+`findings_dates_route5` and `findings_doubtful_dates_run_end` updated (each new mechanism with a negative control
+that fails when it is switched off).

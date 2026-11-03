@@ -372,6 +372,41 @@
       ],
       "additionalProperties": false
      },
+     "passes_through": {
+      "type": "object",
+      "description": "A harness whose calls always go through one library or proxy route (the maintainer, 3 Nov 2026: OpenHands → LiteLLM, its SDK calling every provider through the LiteLLM library): that route is a step of every chain the harness is in, right after it (rule harness-passes-through). Unlike calls_route it does not close the chain: the route the measure names, or the candidates, follow it.",
+      "properties": {
+       "route": {
+        "$ref": "common.schema.json#/$defs/route_id",
+        "description": "The route every call goes through."
+       },
+       "rule": {
+        "const": "harness-passes-through"
+       },
+       "date": {
+        "$ref": "common.schema.json#/$defs/date_or_datetime"
+       },
+       "decided_by": {
+        "type": "string",
+        "minLength": 1
+       },
+       "decision": {
+        "type": "string",
+        "minLength": 1
+       },
+       "evidence": {
+        "$ref": "common.schema.json#/$defs/evidence_list"
+       }
+      },
+      "required": [
+       "route",
+       "rule",
+       "date",
+       "decided_by",
+       "evidence"
+      ],
+      "additionalProperties": false
+     },
      "label_as_level": {
       "type": "object",
       "description": "A closed harness that shows a level label without documenting what it sends: the maintainer's standing rule `closed-harness-label` (26 Oct 2026) takes the label as the level sent, flagged `harness-label-as-level:<route>`, as LMArena's labels. Applies only where the harness documents nothing for the run (a dated mapping, accepts or level mapping wins); the call then reaches the maker's API.",

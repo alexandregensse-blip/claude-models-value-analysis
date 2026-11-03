@@ -100,12 +100,23 @@ def overlaps(rec, lo, hi):
     return f <= hi and (lo or MIN) <= t
 
 
+LOCAL_TIME = re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2}(\.\d+)?)?")
+
+
 def day_bounds(s):
-    """A date / datetime string → (start, end) naive UTC; a date covers its whole day. None when not a date."""
+    """A date / datetime string → (start, end) naive UTC; a date covers its whole day. None when not a date.
+    A time written without its time zone (local time, zone unknown: '2026-08-03T23:01:31') is not read as UTC: it lies
+    between the start of the day before and the end of the day after (the maintainer, 3 Nov 2026: « la borne haute est
+    toujours la date + 1 jour », the lower bound the day − 1)."""
     t = V.parse_when(s) if isinstance(s, str) else None
     if t is None:
         return None
-    return (t, t + dt.timedelta(days=1, microseconds=-1)) if len(s) == 10 else (t, t)
+    if len(s) == 10:
+        return t, t + dt.timedelta(days=1, microseconds=-1)
+    if LOCAL_TIME.fullmatch(s.strip()):
+        d = t.replace(hour=0, minute=0, second=0, microsecond=0)
+        return d - dt.timedelta(days=1), d + dt.timedelta(days=2, microseconds=-1)
+    return t, t
 
 
 def find_date(text):
@@ -241,14 +252,23 @@ class Source:
         self.captures = {c["id"]: c for c in doc.get("captures", [])}
         self.faults = []                                  # source-wide validation errors
         self.fact_faults = collections.defaultdict(list)  # fact id → validation errors
+        self.date_faults = collections.defaultdict(list)  # capture id / 'published' → errors of the date's proof
         self._sha_ok = {}
+
+    def published(self):
+        """The publication date as written, None when absent or when its proof fails (dating step 2, 3 Nov 2026)."""
+        return None if self.date_faults.get("published") else (self.doc.get("published") or {}).get("value")
+
+    def capture(self, cid):
+        """A capture, None when absent or when the proof of its date fails (dating step 2, 3 Nov 2026)."""
+        return None if self.date_faults.get(cid) else self.captures.get(cid)
 
     def date(self):
         """When this snapshot appeared: its publication, else its earliest capture, else its harvest."""
-        p = (self.doc.get("published") or {}).get("value")
+        p = self.published()
         if p:
             return V.when(p)
-        caps = [V.when(c["captured"]) for c in self.captures.values()]
+        caps = [V.when(c["captured"]) for c in self.captures.values() if not self.date_faults.get(c["id"])]
         return min(caps) if caps else V.when(self.doc["harvested_at"])
 
     def derive(self, x, seen):
@@ -437,9 +457,11 @@ class Ctx:
             V.check_source(x, p, reg, rep, schemas, self.vocab, a.check_files, all_ids)
             L = V.rel(p)
             for e in rep.errors[n:]:
-                m = re.match(re.escape(L) + r" (F\d+): (.*)$", e)
-                if m:
+                m = re.match(re.escape(L) + r" (F\d+|[WGS]\d+|published): (.*)$", e)
+                if m and m.group(1)[0] == "F":
                     S.fact_faults[m.group(1)].append(m.group(2))
+                elif m:                                  # the proof of a capture's or the publication's date fails:
+                    S.date_faults[m.group(1)].append(m.group(2))   # that date is left out (dating step 2, 3 Nov)
                 else:
                     S.faults.append(e)
         # measures
@@ -673,15 +695,17 @@ def default_upper(M):
     date); the harvest when none is known."""
     S = M.S
     c = []
-    p = (S.doc.get("published") or {}).get("value")
+    p = S.published()
     if p:
         c.append(day_bounds(p)[1])
     for cid in M.m["facts"].get("value_seen_in", []):
-        cap = S.captures.get(cid)
+        cap = S.capture(cid)
         if cap:
             c.append(day_bounds(cap["captured"])[1])
     if S.doc.get("commit"):
-        for cap in S.captures.values():
+        for cap in (S.capture(i) for i in S.captures):
+            if cap is None:
+                continue
             if cap.get("commit") and (cap["commit"].startswith(S.doc["commit"]) or S.doc["commit"].startswith(cap["commit"])):
                 c.append(day_bounds(cap["captured"])[1])
     if not c:
@@ -952,6 +976,11 @@ def route_chain_facts(M):
             unknown = True
         elif r not in known:
             known.append(r)
+    for r in list(known):                                # a harness whose calls always go through a route (OpenHands →
+        pt = ctx.routes[r].get("passes_through")         # LiteLLM: the maintainer, 3 Nov 2026): that route is a step
+        if pt and pt["route"] not in known:              # of the chain, after it (rule harness-passes-through)
+            known.append(pt["route"])
+            M.rule("harness-passes-through")
     if not M.slot("route"):
         unknown = True
     known.sort(key=lambda r: CLASS_RANK.get(ctx.routes[r]["class"], 1))
@@ -1943,13 +1972,13 @@ def reprice(M, C, key):
     C['price_vectors'] (what could have applied) for the comparability step."""
     ctx = M.ctx
     lo, hi, _ = run_interval(M, key)
-    pub = (M.S.doc.get("published") or {}).get("value")
+    pub = M.S.published()
     pub_hi = day_bounds(pub)[1] if pub else hi
     if C["basis"] in ("billed", "router-billed"):
         pd_lo, pd_hi, how = lo, hi, "run date (billed spend)"
     elif C.get("method") == "publisher-table":
-        caps = [day_bounds(M.S.captures[c]["captured"]) for c in M.m["facts"].get("value_seen_in", [])
-                if c in M.S.captures]
+        caps = [day_bounds(M.S.capture(c)["captured"]) for c in M.m["facts"].get("value_seen_in", [])
+                if M.S.capture(c)]
         if caps:
             pd_lo, pd_hi, how = min(c[0] for c in caps), max(c[1] for c in caps), "capture date (recomputed at its price)"
         else:

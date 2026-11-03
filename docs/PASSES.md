@@ -5,6 +5,31 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Dating step 2: the undated sources dated on the web (3 Nov 2026, later)
+
+**Method.** 205 undated sources were given to agents (41 batches, 3 reruns) who searched the web for a date bounding
+their runs — the source's own run date, its publication, a « last updated » label or the modification date of
+content identical to ours, the commit that added the values, the first Wayback capture showing them — each with an
+exact quote of a saved file and its sha256. Result: 173 dated, 15 in doubt, 17 nothing found. Every date was then
+written offline from the saved files only, its proof checked again (file, sha256, exact quote), and only where it
+tightens the measure's current bound. A Wayback capture bounds only the measures whose row it shows.
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. A time written without its time zone is a local time: the upper bound is the day after, the lower bound the day
+   before (lhtb « 2026-08-03T23:01:31 » → 4 Aug); applied to every date, those already written too (289 values).
+2. codereviewbench is bounded by its commit of 12 Oct; the document of 2 Oct reporting a run of 3 Oct is ignored.
+3. LiteLLM is in the chain of every OpenHands source (its SDK calls the providers through the LiteLLM library):
+   routes.json `passes_through`, strict.
+
+**Counts.** 131 sources dated: 253 commit captures, 42 Wayback captures, 25 publications or labels, 215 facts
+(164 run-end, 45 run-start, 6 run-date); 46 dated results not written (28 no tighter, 11 already written per
+measure, 4 commit dates never saved, 2 binary proofs, toolathlon held: rows dated before their model's release).
+
+**Effect** (against 9a0f2d9): fit-quality 17,696 → 17,742 rows (+53 −7; kimi-k2.5 +25, DeepSeek V4 Flash Vision
++11), couples 337 → 339; fit-cost 9,050 → 9,039 (−11, arcprize's gemini-3.5 / 3.7-flash price date now ends on
+13 Oct, uncovered by a registered price), couples 268. Claude: one sonnet-5 nothink quality row more, nothing else.
+Missing prices: 186 (model, currency) pairs, 1,397 cost measures.
+
 ## Bands toward the current price, doubtful dates as upper bounds, OpenHands through LiteLLM (3 Nov 2026, late night)
 
 **Decisions (the maintainer, 3 Nov 2026):**

@@ -258,3 +258,15 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
 - prices.json: the standard maker-API entries of gpt-5.6-luna and gpt-5.6-terra from 9 Jul carry the long-context
   tier (over 272K input tokens) that their first evidence's quote shows ('Long context' columns of the 9 Jul page:
   luna 2 / 0.2 / 9, terra 5 / 0.5 / 22.5 for input / cache read / output); it was missing.
+
+## Added on 3 Nov 2026 (dating step 2)
+- **source.schema.json:** `evidence` (the common evidence format: url, captured, file, sha256, where, quote) on a
+  capture and on `published`, the proof of the date; `published.value` also takes a time written without its zone
+  (`2026-08-03T23:01:31`: a local time, read by the build as [day − 1, day + 1]). validate.py `--check-files` checks
+  each evidence record (sha256, exact quote, also in a header dump or an Atom feed) and reports a failure under the
+  capture id or `published`: the build then leaves that date out (data/BUILD.md).
+- **validate.py:** `digits_agree` also reads a time written before its date (« 14:32:46 (2026-10-11) »).
+- **routes.schema.json:** `passes_through` on a harness (route, rule `harness-passes-through`, date, decided_by,
+  decision, evidence): its calls always go through that route (OpenHands → LiteLLM), a step of every chain it is in.
+  validate.py: the route is registered, neither a harness nor the maker's API. **vocab.json / rules.json:** rule id
+  `harness-passes-through`.

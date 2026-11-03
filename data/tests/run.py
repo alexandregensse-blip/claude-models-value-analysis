@@ -5,7 +5,7 @@ campaign rule, per cost step, decisions first and the stale hash, and the three 
     python3 data/tests/run.py            # all
     python3 data/tests/run.py cost       # the tests whose name contains 'cost'
 """
-import json, os, shutil, sys, time, traceback
+import collections, datetime as dt, glob, hashlib, json, os, re, shutil, sys, tempfile, time, traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -876,9 +876,14 @@ def findings_dates_route5():
         p = src(sid)["published"]
         eq((p["value"], "modification date" in p["where"], p["quote"] in open(p["file"], encoding="utf-8").read()),
            (val, True, True), f"B3 {sid}")
-    eq([src(s)["published"] for s in ("src-designarena-2026-10-18", "src-bird-bench-leaderboard-2026-10-15",
-                                      "src-stagehand.dev-evals-hardbench-2026-10-15")],
-       [None, None, None], "negative: a security page's and a news item's 'updated' dates are not the board's, and a "
+    # dating step 2 (3 Nov 2026) later dated designarena 18 Oct by its boards' own metadata.lastUpdateTime (the
+    # Security page's date stays unused): only a step-2 date with its evidence may stand there
+    eq([(src(s)["published"] or {}).get("evidence") is not None or src(s)["published"] is None
+        for s in ("src-designarena-2026-10-18", "src-bird-bench-leaderboard-2026-10-15",
+                  "src-stagehand.dev-evals-hardbench-2026-10-15")], [True, True, True], "negative (route5 dates):"
+       " the Security page's date and the news item's are not the board's")
+    eq([src(s)["published"] for s in ("src-bird-bench-leaderboard-2026-10-15", "src-stagehand.dev-evals-hardbench-2026-10-15")],
+       [None, None], "negative: a security page's and a news item's 'updated' dates are not the board's, and a "
        "label older than a model the board shows (stagehand 'Updated September 3, 2026', Opus 5.5) is stale: not written")
     S = src("src-github-scorch-bench-2026-10-28")
     F = {x["id"]: x for x in S["facts"]}
@@ -916,14 +921,15 @@ def findings_doubtful_dates_run_end():
     d = dates("src-luminairprime-openwrt-2026-10-20")
     eq((d["M1"], d["M7"]), ([("run-end", "2026-03-28")], [("run-end", "2026-03-30")]),
        "luminair « **Date:** » of the scoring file of each model, alpha / beta")
-    eq(set(map(tuple, dates("src-github-llm-quant-trading-2026-10-28").values())), {(("run-end", "2026-09-30"),)},
-       "llm-quant « 报告完成时间 »: every measure")
-    eq(set(map(tuple, dates("src-github-fable-mode-ff0ab8e-2026-10-28").values())), {(("run-end", "2026-07-07"),)},
-       "fable-mode « Benchmark results — 2026-07-07 »")
+    eq(set(tuple(x for x in v if x[1] == "2026-09-30") for v in dates("src-github-llm-quant-trading-2026-10-28").values()),
+       {(("run-end", "2026-09-30"),)}, "llm-quant « 报告完成时间 »: every measure (beside step 2's commit date)")
+    eq(set(tuple(x for x in v if x[1] == "2026-07-07") for v in dates("src-github-fable-mode-ff0ab8e-2026-10-28").values()),
+       {(("run-end", "2026-07-07"),)}, "fable-mode « Benchmark results — 2026-07-07 » (beside step 2's commit date)")
     d = dates("src-hf-agentnativeresearchlab-lhtb-2026-08-23")
-    eq((d["M1"], d["M5"], d["M9"], d["M13"]), ([("run-end", "2026-08-23")], [("run-end", "2026-08-09")],
-                                               [("run-end", "2026-08-03")], [("run-end", "2026-08-04")]),
-       "lhtb « _generated_ » of each model's scoreboard")
+    eq(([x for x in d["M1"] if x[0] == "run-end"][0], d["M5"][0], d["M9"][0], d["M13"][0]),
+       (("run-end", "2026-08-23T19:01:00"), ("run-end", "2026-08-09T01:42:53"), ("run-end", "2026-08-03T23:01:31"),
+        ("run-end", "2026-08-04T02:38:34")),
+       "lhtb « _generated_ » of each model's scoreboard (a local time: no zone written, 3 Nov 2026)")
     eq(all(v and v[0][0] == "run-end" for s in ("src-hf-agentnativeresearchlab-ale-2026-08-19",
                                                  "src-hf-agentnativeresearchlab-discoverphysics-2026-10-28",
                                                  "src-github-effortmining-pilot-2026-07-06")
@@ -2482,6 +2488,161 @@ def site_ladder_switch():
                                            "cost: haiku-4.5 nothink(1.0) > think(0.8)"], "switch models")
     eq("cost: opus-4.8 nothink(1.0) > low(0.5)" in grids.monotonicity_report(cg, {}, switch=set()), True,
        "negative control: the full ladder")
+
+
+@test
+def local_time_no_zone():
+    # the maintainer, 3 Nov 2026: a time written without its time zone ('2026-08-03T23:01:31', lhtb's scoreboard stamp)
+    # is a local time: the upper bound is the day after, the lower bound the day before
+    import build as B
+    eq(B.day_bounds("2026-08-03T23:01:31"), (dt.datetime(2026, 8, 2), dt.datetime(2026, 8, 4, 23, 59, 59, 999999)),
+       "no zone: [day - 1, day + 1]")
+    eq(B.day_bounds("2026-08-03T23:01:31Z"), (dt.datetime(2026, 8, 3, 23, 1, 31),) * 2, "negative: Z, the instant")
+    eq(B.day_bounds("2026-08-03")[1], dt.datetime(2026, 8, 3, 23, 59, 59, 999999), "negative: a date, its day")
+    sc = base()
+    same_price(sc, "ma", "mb")
+    s = sc.source("a", published="2026-09-01")
+    m1 = sc.m(s, model="ma", effort=[LOW], run_date=[("run-end", "2026-08-03T23:01:31")])
+    m2 = sc.m(s, model="ma", effort=[LOW], run_date=[("run-date", "2026-08-03T23:01")])
+    m3 = sc.m(s, model="ma", effort=[LOW], run_date=[("run-end", "2026-08-03T23:01:31Z")])
+    sc.m(s, model="mb", effort=[LOW])
+    r = sc.run()
+    rd = lambda m: r[m]["fields"]["run_date_detail"]["ma"]           # noqa: E731
+    eq((rd(m1)["hi"], rd(m2)["lo"], rd(m2)["hi"]), ("2026-08-04T23:59:59.999999", "2026-08-02T00:00:00",
+                                                    "2026-08-04T23:59:59.999999"), "run-end and run-date, local time")
+    eq(rd(m3)["hi"], "2026-08-03T23:01:31", "negative: with its zone, the instant")
+    # the repository: every run date or bound whose text writes a time with no zone carries that local time
+    import validate as V
+    f = {x["id"]: x for x in json.load(open(os.path.join(DATA, "findings", "sources",
+                                                          "src-hf-agentnativeresearchlab-lhtb-2026-08-23.json")))["facts"]}
+    eq((f["F30"]["value"], f["F30"]["written"]), ("2026-08-03T23:01:31", "2026-08-03T23:01:31"), "lhtb F30")
+    pat = re.compile(r"(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})(?![\d:.]*\s*(?:Z|UTC|GMT|UT\b|[+-]\d{2}:?\d{2}))")
+    left = []
+    for p in glob.glob(os.path.join(DATA, "findings", "sources", "*.json")):
+        d = json.load(open(p, encoding="utf-8"))
+        for x in [y for y in d.get("facts", []) if y["says"] in ("run-date", "run-start", "run-end")] + \
+                [d["published"]] if d.get("published") else []:
+            if pat.search(x.get("written") or x.get("quote") or "") and len(x["value"]) == 10:
+                left.append((d["id"], x.get("id")))
+    eq(left, [], "no day-only value left for a time written without its zone")
+    eq((V.digits_agree("2026-10-11T14:32:46", "14:32:46 (2026-10-11)"),
+        V.digits_agree("2026-10-11T14:32:47", "14:32:46 (2026-10-11)")), (True, False),
+       "a time written before its date; negative: another second")
+
+
+@test
+def date_proof_checked():
+    # dating step 2 (3 Nov 2026): a capture's or the publication's date carries its proof (evidence: file, sha256,
+    # quote); with the files checked, a date whose proof fails is left out
+    tmp = tempfile.mkdtemp(prefix="dateproof-")
+    try:
+        p = os.path.join(tmp, "commits.json")
+        with open(p, "w", encoding="utf-8") as fh:
+            fh.write('[{"sha": "abcdef1", "commit": {"committer": {"date": "2026-07-01T10:00:00Z"}}}]')
+        good = hashlib.sha256(open(p, "rb").read()).hexdigest()
+        ev = lambda h, q='"date": "2026-07-01T10:00:00Z"': [dict(url="https://example.org/commits", file=p, sha256=h,  # noqa: E731
+                                                                 where="the commit list", quote=q)]
+
+        def hi(cap_ev, pub_ev=None):
+            sc = base()
+            same_price(sc, "ma", "mb")
+            cap = dict(id="G1", kind="commit", url="https://example.org/commit/abcdef1", commit="abcdef1",
+                       captured="2026-07-01T10:00:00Z", evidence=cap_ev)
+            s = sc.source("a", published="2026-09-01", captures=[cap])
+            if pub_ev:
+                sc.sources[s]["published"]["evidence"] = pub_ev
+            m1 = sc.m(s, model="ma", effort=[LOW], value_seen_in=["G1"])
+            sc.m(s, model="mb", effort=[LOW])
+            r = sc.run(check_files=True)
+            return r[m1]["fields"]["run_date_detail"]["ma"]["hi"][:19]
+        q = '"date": "2026-07-01T10:00:00Z"'
+        eq(hi(ev(good, q)), "2026-07-01T10:00:00", "the commit's date, proven, bounds the value")
+        eq(hi(ev("0" * 64, q)), "2026-09-01T23:59:59", "negative: a wrong sha256, the capture's date is left out")
+        eq(hi(ev(good, '"date": "2026-07-02T10:00:00Z"')), "2026-09-01T23:59:59", "negative: a quote not in the file")
+        eq(hi(ev(good, q), pub_ev=ev("0" * 64, q)), "2026-07-01T10:00:00",
+           "a publication whose proof fails is left out (the capture still bounds)")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+@test
+def openhands_passes_through_litellm():
+    # the maintainer, 3 Nov 2026: LiteLLM is in the chain of every OpenHands source (its SDK calls the providers
+    # through the LiteLLM library), not only those whose ids start with litellm_proxy/; LiteLLM documents nothing: strict
+    R = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]
+    pt = R["openhands"]["passes_through"]
+    e = pt["evidence"][0]
+    eq((pt["route"], pt["rule"], e["quote"] in open(e["file"], encoding="utf-8").read(),
+        hashlib.sha256(open(e["file"], "rb").read()).hexdigest() == e["sha256"]),
+       ("litellm", "harness-passes-through", True, True), "routes.json: OpenHands → LiteLLM, its evidence")
+    eq(R["claude-code"].get("passes_through"), None, "negative: Claude Code has none")
+
+    def run(passes):
+        sc = base()
+        win = dict(from_basis="earliest-capture", to_basis="last-capture")
+        span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+        sc.route("hoh", "harness", spellings=["HOH"], models={"ma": {"accepts": [span(configuration=c) for c in ("low", "high")]}},
+                 level_mapping=[span(rule="identity")])
+        sc.route("lpx", "router", spellings=["LPX"])
+        if passes:
+            sc.routes["hoh"]["passes_through"] = dict(route="lpx", rule="harness-passes-through", date="2026-11-03",
+                                                      decided_by="tests", evidence=[dict(url="https://example.org",
+                                                                                         file="x.txt", where="x", quote="y")])
+        s = sc.source("a")
+        m = sc.m(s, model="ma", effort=[HIGH], route=[("HOH", None), ("maker", "maker-api")])
+        r = sc.run()
+        return r.cfg(m), "harness-passes-through" in r[m]["rules_used"], r[m]["fields"]["configuration"]["detail"]
+    eq(run(True), (None, True, "lpx documents nothing for ma @ high at the run date"),
+       "a harness passing its calls through an undocumented proxy: not established")
+    eq(run(False)[:2], ("high", False), "negative: without passes_through, high")
+
+
+@test
+def findings_dates_step2():
+    # dating step 2 (agents on the web, 3 Nov 2026): the dates written carry their proof, and the maintainer's cases
+    # of A-REVOIR.md hold
+    def src(sid):
+        return json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+
+    def ms(sid):
+        return json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json"), encoding="utf-8"))["measures"]
+    n, bad = collections.Counter(), []
+    for p in glob.glob(os.path.join(DATA, "findings", "sources", "*.json")):
+        d = json.load(open(p, encoding="utf-8"))
+        for c in d.get("captures", []) + ([d["published"]] if d.get("published") else []):
+            for e in c.get("evidence") or []:
+                n[c.get("kind", "published")] += 1
+                ok = os.path.isfile(e["file"]) and hashlib.sha256(open(e["file"], "rb").read()).hexdigest() == e["sha256"] \
+                    and e["quote"] in open(e["file"], encoding="utf-8", errors="replace").read()
+                if not ok:
+                    bad.append((d["id"], c.get("id")))
+    eq(bad, [], "every step-2 date: its file, sha256 and exact quote")
+    eq(all(n[k] > 0 for k in ("commit", "wayback", "published")), True, f"captures and publications written: {dict(n)}")
+    cap = lambda sid: [c for c in src(sid).get("captures", []) if c.get("evidence")]   # noqa: E731
+    eq(cap("src-zhipu-glm-5-3-flash-hf-readme-2026-10-19"), [], "GLM-5.3-Flash: values from the image, not dated")
+    s = "src-clbench.com-clb-data-2026-09-30"
+    poly = [m for m in ms(s) if "polyphony" in m["facts"]["value"].casefold()]
+    eq(any(c["id"] in m["facts"].get("value_seen_in", []) for m in poly for c in cap(s)), False,
+       "clbench: Polyphony is not in the 1 May capture")
+    s = "src-surgehq.ai-2026-10-15"
+    T = {t["id"]: os.path.basename(t["file"]) for t in src(s)["tables"]}
+    sudo = [m for m in ms(s) if T[m["facts"]["value"].split("/")[0]].startswith("sudo-l7")]
+    eq((len(cap(s)), any(c["id"] in m["facts"].get("value_seen_in", []) for m in sudo for c in cap(s))), (11, False),
+       "surgehq: a capture per board, none for sudo-l7")
+    c = [x for x in cap("src-github-codereviewbench-files-2026-10-19") if x["kind"] == "commit"]
+    eq([(x["commit"], x["captured"]) for x in c], [("00047f7bf0", "2026-10-12T17:44:38Z")],
+       "codereviewbench: the commit of 12 Oct (the maintainer, 3 Nov 2026)")
+    s = "src-stagehand.dev-evals-hardbench-2026-10-15"
+    w = [c["id"] for c in cap(s) if c["kind"] == "wayback"]
+    seen = {m["id"]: bool(set(w) & set(m["facts"].get("value_seen_in", []))) for m in ms(s)}
+    eq((seen["M1"], seen["M4"]), (True, False), "stagehand: the 23 Sep capture bounds the Opus 5.5 row it shows, not "
+       "Sonnet 5.5's (released 28 Sep, absent from it)")
+    F = {x["id"]: x for x in src("src-toolathlon-leaderboard-2026-10-20")["facts"]}
+    eq([i for i, x in F.items() if "dating step 2" in (x.get("where") or "")], [],
+       "toolathlon's Date column held (rows dated before their model's release)")
+    eq([sid for sid in ("src-github-rtx4090-local-vs-cloud-2026-10-15", "src-github-simpleenglish-2026-10-18",
+                        "src-github-threadkeeper-2026-10-12", "src-github-tilth-benchmark-v0.5.0-2026-10-19") if cap(sid)],
+       [], "negative: a commit date saved in no file is not written")
 
 
 def main():
