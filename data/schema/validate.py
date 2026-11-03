@@ -374,6 +374,11 @@ def digits_agree(value, written):
     '0.51' / '51¢', '7250000' / '7.25M'); a value with no digit (a level, a label reading) is not checked."""
     sig = lambda t: re.sub(r"[^0-9]", "", str(t)).strip("0")                      # noqa: E731
     v = sig(value)
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?Z?)?", str(value)):
+        # an ISO date / time read from a date as written ('2026年9月30日', '2026-08-19 22:13 UTC'): its numbers, in
+        # order and contiguous, among the written text's numbers (zero padding and separators aside; 3 Nov 2026)
+        vn, wn = [int(x) for x in re.findall(r"\d+", str(value))], [int(x) for x in re.findall(r"\d+", str(written))]
+        return any(wn[i:i + len(vn)] == vn for i in range(len(wn) - len(vn) + 1))
     return not v or v in sig(written)
 
 

@@ -5,6 +5,28 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Bands toward the current price, doubtful dates as upper bounds, OpenHands through LiteLLM (3 Nov 2026, late night)
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. A date the source writes that does not say it is the run date (scoring file, report completion, results document,
+   generated scoreboard) is an upper bound only (`run-end`), when it can only be on or after the run; in doubt,
+   nothing. 30 facts on 112 measures (luminair, llm-quant, fable-mode, lhtb, ale, discoverphysics, effortmining,
+   kaybenleroll, miaai); codereviewbench left (its matrix date precedes a run it reports).
+2. Price bands are computed toward the current price, for every model (`cost-current-price-only`): the band's
+   reference is the base price, never the last price seen. GPT-5.6 Sol under its 4 / 20 promotion, base 5 / 30:
+   raw × [1.25, 1.5].
+3. OpenHands goes through LiteLLM (ids `litellm_proxy/…`): a LiteLLM route fact copied from each id on its 130
+   measures; LiteLLM documents nothing, strict.
+4. A changelog bounds « updated on » only when it says it records added models or results: cognition kept,
+   posttrainbench's « Changelog Updated Oct 6 » removed.
+
+**Effect** (`--fit-models catalog`, against f3ab153): fit-quality 17,696 rows unchanged, kept 16,718 → 16,665 (−53
+republished, matched now that the costs are back: sonnet-5.5 20, gpt-5.6-sol 16, luna 10, terra 5, fable-5 1, opus-5.5
+1). Fit-cost 8,307 → 9,050 (+743, decision 2: gpt-5.6-sol 358, luna 166, terra 112, sonnet-5.5 101, gemini-3.6-flash
+6), kept 7,875 → 8,512; couples 337 / 268 unchanged. Decisions 1, 3, 4 move no fit row. Claude: sonnet-5.5 cost rows
+197 → 298. Step-2 list 215 → 208 sources; missing prices that take costs out: 186 (model, currency) pairs, 1,386 cost
+measures (700 with quality in).
+
 ## Contradictions before the route, costs at the current price, board labels as bounds (3 Nov 2026, night)
 
 **Decisions (the maintainer, 3 Nov 2026)** on the points left open by the route pass and by the undated-sources pass:

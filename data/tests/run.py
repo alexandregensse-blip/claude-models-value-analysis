@@ -887,8 +887,113 @@ def findings_dates_route5():
         ("M6", "2026-10-09"), ("M7", "2026-10-09"), ("M8", "2026-10-09"), ("M9", "2026-10-09")], "B4 scorch: every measure")
     eq(len({tuple(m["facts"]["run_date"]) for m in ms("src-github-roboco-language-benchmark-2026-10-18")}), 1,
        "B4 roboco: one run date on all")
-    eq([m["facts"]["run_date"] for m in ms("src-luminairprime-openwrt-2026-10-20")][:2], [[], []],
-       "negative: a scoring file's date (in doubt) is not linked")
+    S = src("src-luminairprime-openwrt-2026-10-20")
+    F = {x["id"]: x for x in S["facts"]}
+    eq({F[m["facts"]["run_date"][0]]["says"] for m in ms("src-luminairprime-openwrt-2026-10-20")}, {"run-end"},
+       "negative: a scoring file's date (in doubt) is not a run date (an upper bound only since route6)")
+
+
+@test
+def findings_doubtful_dates_run_end():
+    # the maintainer, 3 Nov 2026 (route6 decision 1): a date the source writes that does not say it is the run date (a
+    # scoring file's date, a report's completion date, a results document's date, a generated scoreboard) is an upper
+    # bound of the run only (run-end), when it can only be on or after the run; in doubt, nothing
+    def src(sid):
+        return json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+
+    def ms(sid):
+        return json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json"), encoding="utf-8"))["measures"]
+
+    def dates(sid):
+        F = {x["id"]: x for x in src(sid)["facts"]}
+        out = {}
+        for m in ms(sid):
+            fs = [F[i] for i in m["facts"]["run_date"]]
+            for f in fs:
+                eq(f["quote"] in open(f["file"], encoding="utf-8").read(), True, f"{sid} {f['id']}: quote in file")
+            out[m["id"]] = [(f["says"], f["value"]) for f in fs]
+        return out
+    d = dates("src-luminairprime-openwrt-2026-10-20")
+    eq((d["M1"], d["M7"]), ([("run-end", "2026-03-28")], [("run-end", "2026-03-30")]),
+       "luminair « **Date:** » of the scoring file of each model, alpha / beta")
+    eq(set(map(tuple, dates("src-github-llm-quant-trading-2026-10-28").values())), {(("run-end", "2026-09-30"),)},
+       "llm-quant « 报告完成时间 »: every measure")
+    eq(set(map(tuple, dates("src-github-fable-mode-ff0ab8e-2026-10-28").values())), {(("run-end", "2026-07-07"),)},
+       "fable-mode « Benchmark results — 2026-07-07 »")
+    d = dates("src-hf-agentnativeresearchlab-lhtb-2026-08-23")
+    eq((d["M1"], d["M5"], d["M9"], d["M13"]), ([("run-end", "2026-08-23")], [("run-end", "2026-08-09")],
+                                               [("run-end", "2026-08-03")], [("run-end", "2026-08-04")]),
+       "lhtb « _generated_ » of each model's scoreboard")
+    eq(all(v and v[0][0] == "run-end" for s in ("src-hf-agentnativeresearchlab-ale-2026-08-19",
+                                                 "src-hf-agentnativeresearchlab-discoverphysics-2026-10-28",
+                                                 "src-github-effortmining-pilot-2026-07-06")
+           for v in dates(s).values()), True, "ale, discoverphysics, effortmining: run-end on every measure")
+    every = [f for s in ("src-luminairprime-openwrt-2026-10-20", "src-github-llm-quant-trading-2026-10-28",
+                         "src-hf-agentnativeresearchlab-lhtb-2026-08-23") for f in src(s)["facts"]
+             if f["says"] in ("run-date", "run-start")]
+    eq(every, [], "never a run date nor a lower bound")
+    # negative: codereviewbench's « Skill matrix, 2026-10-02 » heads a document that reports a run of 3 Oct (Fable 5.1):
+    # not on or after every run, in doubt: nothing
+    eq([m["id"] for m in ms("src-github-codereviewbench-files-2026-10-19") if not m["facts"]["run_date"]],
+       [f"M{i}" for i in range(1, 17)], "negative: codereviewbench's matrix date not linked")
+    # the build: a run-end bounds the run from above only (the lower bound stays the release)
+    sc = base()
+    same_price(sc, "ma", "mb")
+    s = sc.source("a", published="2026-09-01")
+    m1 = sc.m(s, model="ma", effort=[LOW], run_date=[("run-end", "2026-07-07")])
+    sc.m(s, model="mb", effort=[LOW])
+    r = sc.run()
+    rd = r[m1]["fields"]["run_date_detail"]["ma"]
+    eq((rd["hi"][:10], rd["basis"]["lo"], rd["basis"]["hi"]), ("2026-07-07", "release", "stated"),
+       "run-end: the upper bound only")
+
+
+@test
+def openhands_litellm_chain():
+    # the maintainer, 3 Nov 2026 (route6 decision 3): OpenHands goes through LiteLLM, its ids are litellm_proxy/…: a
+    # route fact LiteLLM, copied from each id's quote, in every measure's route slot; LiteLLM documents nothing → strict
+    sid = "src-openhands-index-2026-10-19"
+    S = json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+    F = {x["id"]: x for x in S["facts"]}
+    ms = json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json"), encoding="utf-8"))["measures"]
+    lit = {m["id"]: [F[i] for i in m["facts"]["route"] if F.get(i, {}).get("term") == "litellm"] for m in ms}
+    eq(sorted(k for k, v in lit.items() if len(v) == 1), sorted(lit), "LiteLLM on every measure's route slot")
+    ids = {F[i]["quote"] for m in ms for i in m["facts"]["model"] if i in F and F[i]["says"] == "model-api-id"}
+    eq(all(v[0]["quote"] in ids and v[0]["quote"].count("litellm_proxy/") == 1
+           and v[0]["quote"] in open(v[0]["file"], encoding="utf-8").read() for v in lit.values()), True,
+       "each copies the quote of a litellm_proxy/ id already extracted")
+    R = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]
+    eq(("litellm_proxy/" in (R["litellm"].get("name_prefixes") or []), "OpenHands" in R["litellm"]["note"]),
+       (False, True), "no name prefix (it would unresolve the model), the note says why")
+    # the strict rule: OpenHands → LiteLLM (nothing documented) → the maker's API
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    sc.route("hoh", "harness", spellings=["HOH"], models={"ma": {"accepts": [span(configuration=c) for c in ("low", "high")]}},
+             level_mapping=[span(rule="identity")])
+    sc.route("lpx", "router", spellings=["LPX"])
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[HIGH], route=[("HOH", None), ("LPX", None), ("maker", "maker-api")])
+    m2 = sc.m(s, model="ma", effort=[HIGH], route=[("HOH", None), ("maker", "maker-api")])
+    r = sc.run()
+    eq(r[m1]["fields"]["configuration"]["detail"], "lpx documents nothing for ma @ high at the run date",
+       "through the undocumented proxy: not established")
+    eq(r.cfg(m2), "high", "negative: without it, high")
+
+
+@test
+def changelog_bound_scope():
+    # the maintainer, 3 Nov 2026 (route6 decision 4): a changelog is an « updated on » bound only when it says itself
+    # that it records additions of models or results (cognition FrontierCode: « Models added to the leaderboard and
+    # changes to how results are reported. »); one that does not say what it covers is no bound
+    def pub(sid):
+        return json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))["published"]
+    p = pub("src-cognition-frontiercode-leaderboard-2026-10-18")
+    eq((p["value"], p["quote"], p["quote"] in open(p["file"], encoding="utf-8").read()),
+       ("2026-10-13", "Models added to the leaderboard and changes to how results are reported.", True),
+       "cognition: the changelog says it records added models: kept")
+    eq(pub("src-posttrainbench-v12-2026-10-20"), None,
+       "negative: posttrainbench's « Changelog Updated Oct 6 » does not say what it records: no bound")
 
 
 @test
@@ -1309,14 +1414,19 @@ def cost_per_model_subset_and_single():
     sc.m(s, model="ma", effort=[HIGH], cost="2.0", price_table=pt)
     m3 = sc.m(s, model="mb", effort=[LOW], cost="1.5", price_table=pt)
     r = sc.run()
-    # every cost of the fit is at the current price (the maintainer, 3 Nov 2026): a cost kept at its old price (the
-    # Sonnet 5.5 launch page's Terminal-Bench 4.0 costs, cache read 0.20 → 0.10 on 7 Oct) goes out, no subset of its own
-    eq((r.c(m1), r[m1]["fields"]["cost"]["base"]), ("out:cost-not-comparable", None),
-       "unrepriced at its old price: out, cost-not-comparable (no subset of its own any more)")
-    eq(r[m1]["reason_detail"]["cost"].endswith("not brought to the current price"), True, "why")
-    eq(("cost-unrepriced" in r[m1]["flags"], "cost-current-price-only" in r[m1]["rules_used"]), (False, True),
-       "not flagged as kept; rule recorded")
-    eq(r.c(m3), "out:cost-not-comparable", "mb the same")
+    # every cost of the fit is at the current price (the maintainer, 3 Nov 2026); its token mix unknown, a cost whose
+    # price changed in some classes only is brought to the CURRENT price by a band (the maintainer, 3 Nov 2026, later:
+    # « les fourchettes de prix se calculent vers le prix courant »): here the cache read halved (0.1 → 0.05), so the
+    # cost at the current price lies in [1.0 × 0.5, 1.0 × 1] (all cache read / no cache read), value the middle
+    c = r[m1]["fields"]["cost"]
+    bd = c.get("band") or {}
+    eq((r.c(m1), c["base"], bd.get("lo"), bd.get("hi"), float(c["number"])), ("in", None, 0.5, 1.0, 0.75),
+       "unrepriced, one class changed: in, banded toward the current price")
+    eq(bd.get("reference"), new, "the band's reference is the current price")
+    eq(("cost-unrepriced" in r[m1]["flags"], "cost-price-band" in r[m1]["flags"],
+        "cost-current-price-only" in r[m1]["rules_used"]), (True, True, True), "flagged; rules recorded")
+    eq(("cost-price-band" in r[m3]["flags"], r.c(m3)), (True, "out:cost-single-couple"),
+       "mb banded the same, alone in its model's subset (one couple)")
     # the price changed (not uniformly) inside its price-date interval
     sc = base()
     two_prices(sc, "ma", old, new, change="2026-04-01")
@@ -1328,20 +1438,34 @@ def cost_per_model_subset_and_single():
        "non-uniform change over [release, publication], the band's reference the current price: in, with the price "
        "band as uncertainty (29 Oct; kept on 3 Nov)")
     eq(float(r.rows("fit-cost.csv", model="ma", effort="low")[0]["cost_prec"]) > 0, True, "band widens the sd")
-    # negative control: a band whose reference is not the current price (the base marked on another vector, as GPT-5.6
-    # Sol's standard price under its promotion): out
+    # GPT-5.6 Sol: the current (base) price 5 / 30 / 0.5, the price charged over the price date the promotion 4 / 20 /
+    # 0.4: the band is [raw × 5/4, raw × 30/20] toward the current price (it was computed toward the promotion, the last
+    # price seen, and the cost went out: 3 Nov 2026)
     sc = base()
-    two_prices(sc, "ma", old, new, change="2026-04-01")
-    for p in sc.prices["prices"]:
-        if p["model"] == "ma" and p["classes"] == old:
-            p["base"] = True
+    cur, promo = {"input": 5, "output": 30, "cache-read": 0.5}, {"input": 4, "output": 20, "cache-read": 0.4}
+    for k in ("ma", "mb"):
+        sc.prices["prices"] += [price(k, "2026-01-01", "2026-08-20", cur),
+                                price(k, "2026-08-21", "2026-10-01", promo, kind="promotion")]
     s = sc.source("a")
-    m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0")
-    sc.m(s, model="ma", effort=[HIGH], cost="2.0")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="2.0", price_table="prices of 2026-09-15")
+    sc.m(s, model="ma", effort=[HIGH], cost="4.0", price_table="prices of 2026-09-15")
     r = sc.run()
-    eq((r.c(m1), r[m1]["reason_detail"]["cost"]),
-       ("out:cost-not-comparable", "unrepriced: a price band whose reference is not the current price"),
-       "negative: a band toward another price than the base: out")
+    c = r[m1]["fields"]["cost"]
+    bd = c.get("band") or {}
+    eq((r.c(m1), bd.get("lo"), bd.get("hi"), bd.get("reference")), ("in", 2.5, 3.0, cur),
+       "the promotion over the price date, toward the current price: [2 × 1.25, 2 × 1.5]")
+    # negative controls: no registered price over the price date (no band can reach the current price): out; long-
+    # context tiers on one side only: out
+    sc = base()
+    for k in ("ma", "mb"):
+        sc.prices["prices"].append(price(k, "2026-08-01", "2026-10-01", cur))
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="2.0", price_table="prices of 2026-06-01")
+    sc.m(s, model="ma", effort=[HIGH], cost="4.0", price_table="prices of 2026-06-01")
+    r = sc.run()
+    eq((r.c(m1), r[m1]["reason_detail"]["cost"].startswith("unrepriced, and no registered price covers its price date"),
+        "cost-price-band" in r[m1]["flags"]), ("out:cost-not-comparable", True, False),
+       "negative: no price over the price date, no band: out")
 
 
 @test
@@ -1587,21 +1711,29 @@ def cost_uniform_factor_across_tiers():
     eq((r.c(m1), r.c(m3), r[m1]["cost_group"] == r[m3]["cost_group"]), ("in", "in", True),
        "one re-priced subset with mb (a group of two models, not one of its own)")
     eq(r.rows("fit-cost.csv", model="ma", effort="high")[0]["cost_usd"], "9.6", "48 × 0.2 in the table")
-    # negative controls: a non-uniform change (the tier's cache read only); the base tier missing on the old side; two
-    # prices over the price date at different factors (× 0.2 and × 0.1); each keeps today's path (own subset / band)
-    for olds, what in (
+    # a non-uniform change (the tier's cache read only) and two prices over the price date at different factors (× 0.2
+    # and × 0.1): no single factor, but every class and tier is priced on both sides → banded toward the current price
+    # (the maintainer, 3 Nov 2026: bands toward the current price); negative control: the base tier missing on the old
+    # side → no band reaches the current price: out
+    for olds, what, band in (
             ([("2026-01-01", "2026-07-31", {"input": 1, "output": 6, "cache-read": 0.1}, lc(2, 9, 0.3))],
-             "non-uniform change"),
-            ([("2026-01-01", "2026-07-31", {"input": 1, "output": 6, "cache-read": 0.1}, None)], "tiers differ"),
+             "non-uniform change", (24 * 0.4 / 3, 24 * 0.2)),
             ([("2026-01-01", "2026-06-30", {"input": 1, "output": 6, "cache-read": 0.1}, lc(2, 9, 0.2)),
               ("2026-07-01", "2026-07-31", {"input": 2, "output": 12, "cache-read": 0.2}, lc(4, 18, 0.4))],
-             "two factors over the price date")):
+             "two factors over the price date", (24 * 0.1, 24 * 0.2)),
+            ([("2026-01-01", "2026-07-31", {"input": 1, "output": 6, "cache-read": 0.1}, None)], "tiers differ", None)):
         sc, (m1, m2, m3) = scenario(olds)
         r = sc.run()
         c = r[m1]["fields"]["cost"]
-        eq((c["base"], r.c(m1), "cost-uniform-factor-tiers" in r[m1]["flags"]),
-           (None, "out:cost-not-comparable", False), f"{what}: not re-priced, out (current price only, 3 Nov 2026)")
+        eq((c["base"], "cost-uniform-factor-tiers" in r[m1]["flags"]), (None, False), f"{what}: no single factor")
         eq("not re-priceable" in c["reprice_detail"], True, f"{what}: why")
+        if band:
+            bd = c.get("band") or {}
+            eq((r.c(m1), round(bd.get("lo", -1), 9), round(bd.get("hi", -1), 9)),
+               ("in", round(band[0], 9), round(band[1], 9)), f"{what}: banded toward the current price")
+        else:
+            eq((r.c(m1), "cost-price-band" in r[m1]["flags"]), ("out:cost-not-comparable", False),
+               f"negative, {what}: no band reaches the current price, out")
 
 
 @test

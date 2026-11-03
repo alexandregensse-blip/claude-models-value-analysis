@@ -364,7 +364,7 @@
   {
    "id": "cost-comparability-rule",
    "kind": "standing",
-   "statement": "In each part of a setup's costs (basis × method × unit × currency × route), the re-priced measures form one subset; an unrepriced cost stays only as a price band whose reference is the base price (cost-price-band, own subset per model); the others are out:cost-not-comparable (every cost of the fit at the current price: cost-current-price-only, the maintainer, 3 Nov 2026; until then a model whose price change over the price-date interval was uniform across classes formed its own subset at its old price).",
+   "statement": "In each part of a setup's costs (basis × method × unit × currency × route), the re-priced measures form one subset; an unrepriced cost stays only as a price band toward the base (current) price (cost-price-band, own subset per model; cost-current-price-only, the maintainer, 3 Nov 2026: every cost of the fit at the current price, the band's reference always the base price); the others are out:cost-not-comparable (until 3 Nov a model whose price change over the price-date interval was uniform across classes formed its own subset at its old price, and a band's reference was the last price seen).",
    "inputs": [
     "cost basis, method, unit, currency, route",
     "prices.json"
@@ -557,7 +557,7 @@
   {
    "id": "cost-current-price-only",
    "kind": "standing",
-   "statement": "A cost that none of the re-pricing rules (publisher figure, delta on the source's tokens, uniform factor, uniform factor across tiers, class ratio) brings to the base price is out:cost-not-comparable. The unrepriced model's own subset (a cost kept at its old price, flagged cost-unrepriced) no longer exists; a price band (cost-price-band) is kept only when its reference vector is the base price itself, the band then being the cost at the current price within its margin.",
+   "statement": "A cost that none of the re-pricing rules (publisher figure, delta on the source's tokens, uniform factor, uniform factor across tiers, class ratio) brings to the base price is brought to it by a price band when every price over its price date is registered and shares the base price's classes and long-context tiers: the band [raw × the smallest, raw × the largest per-class ratio base / old] over its own price vectors (the bounds « mostly input » and « mostly output »), its reference always the base (current) price, never the last price seen (the maintainer, 3 Nov 2026, later: « les fourchettes de prix se calculent vers le prix courant »; GPT-5.6 Sol, base 5 / 30, promotion 4 / 20 over the price date: × [1.25, 1.5]). A cost no band can bring to the current price (no registered price over its price date, or tiers / classes not shared) is out:cost-not-comparable. The unrepriced model's own subset at an old price no longer exists.",
    "inputs": [
     "cost field (price vectors over the price date, base price)",
     "prices.json"
@@ -566,7 +566,7 @@
    "conditions": "a cost not re-priced",
    "date": "2026-11-03",
    "decided_by": "the maintainer (3 Nov 2026: Sonnet 5.5 launch page, Terminal-Bench 4.0 costs at the 28 Sep price; cache read 0.20 → 0.10 on 7 Oct)",
-   "ref": "data/BUILD.md Interpretations 30; Added on 3 Nov 2026 (route5) 7; docs/DATA-PIPELINE.md §5.3 step 2"
+   "ref": "data/BUILD.md Interpretations 30; Added on 3 Nov 2026 (route5) 7, (route6) 2; docs/DATA-PIPELINE.md §5.3 step 2"
   }
  ]
 }

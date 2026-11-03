@@ -1895,17 +1895,20 @@ def class_ratios(new, old):
 
 
 def price_band(M, ref):
-    """An unrepriced cost whose price vectors differ from ref in some classes only: its cost at ref lies in
-    [raw × min ratio, raw × max ratio] over its own vectors; value = the middle, sd += the band's uniform sd."""
+    """An unrepriced cost whose price vectors differ from the current price ref in some classes only: its cost at ref lies
+    in [raw × min ratio, raw × max ratio] of the per-class ratios ref / v over its own vectors v (the bound « mostly
+    input » and the bound « mostly output »); value = the middle, sd += the band's uniform sd. raw is the standard-tier
+    cost when a proven tier factor applies. A band of no width (one ratio) is that factor, applied without a band."""
     C = M.fields["cost"]
     rs = [r for v in C.get("price_vectors", []) for r in class_ratios(ref, v)]
     lo, hi = min(rs), max(rs)
-    if hi - lo <= 1e-12:
+    raw = float(C.get("std_cost", C["number"]))
+    if hi - lo <= 1e-12 * max(abs(hi), 1.0):
+        C["number"] = Decimal(repr(raw * lo))
         return
-    raw = float(C["number"])
     a, b = raw * lo, raw * hi
-    sd0 = float(C.get("prec") or 0.0)
-    C["band"] = dict(lo=a, hi=b, ratios=[lo, hi])
+    sd0 = float(C.get("prec") or 0.0) / (C.get("tier") or {}).get("factor", 1.0)
+    C["band"] = dict(lo=a, hi=b, ratios=[lo, hi], reference=dict(ref))
     C["number"] = Decimal(repr((a + b) / 2))
     C["prec"] = math.sqrt(sd0 * sd0 + ((b - a) / math.sqrt(12)) ** 2)
     M.flags.append("cost-price-band")
@@ -2689,40 +2692,35 @@ def cost(ctx, measures):
             if not M.fields["cost"].get("base"):
                 by_model[M.fields["model"]["value"]].append(M)
         for key, xs in by_model.items():
-            vecs, ok = [], True
-            for M in xs:
-                C = M.fields["cost"]
-                if not C.get("price_covered"):
-                    ok = False
-                for v in C.get("price_vectors", []):
-                    if v not in vecs:
-                        vecs.append(v)
-            uniform = ok and vecs and all(uniform_ratio(v, vecs[0]) is not None for v in vecs)
-            # a price change that is not uniform (one class changed, e.g. Sonnet 5.5's cache read on 7 Oct): the true
-            # cost at the latest vector lies between raw/max and raw/min of the per-class ratios; the row keeps the
-            # middle with that band as its uncertainty (the maintainer, 29 Oct: "la marge d'erreur")
-            band = ok and vecs and not uniform and all(tiered(v) == tiered(vecs[-1]) for v in vecs) \
-                and all(class_ratios(v, vecs[-1]) for v in vecs)
             for M in xs:
                 # every cost of the fit is at the current (base) price (the maintainer, 3 Nov 2026): a cost that cannot be
-                # brought to it goes out; a band kept only when its reference vector is the base price itself (the band
-                # then brings the cost to the current price within its margin, 29 Oct). A uniform subset of its own (a
-                # cost kept at its old price, flagged cost-unrepriced until 3 Nov) no longer exists
-                at_base = band and M.fields["cost"].get("base_vector") == vecs[-1]
-                if at_base:
+                # brought to it goes out (rule cost-current-price-only). A cost whose token mix is unknown but whose
+                # registered prices over its price date are all known is brought to the CURRENT price by a band, its
+                # reference always the base price itself, never the last price seen (the maintainer, 3 Nov 2026: « les
+                # fourchettes de prix se calculent vers le prix courant »): over its own price vectors, the cost at the
+                # current price lies between raw × the smallest and raw × the largest per-class ratio current / old
+                # (bound « mostly input » / « mostly output »); the row keeps the middle with that band as its
+                # uncertainty (29 Oct: "la marge d'erreur"). Each cost is banded on its own vectors (no condition on the
+                # other costs of its model); the banded costs keep their own subset per model (29 Oct).
+                C = M.fields["cost"]
+                vecs, base = C.get("price_vectors") or [], C.get("base_vector")
+                known = bool(C.get("price_covered") and vecs and base)
+                bandable = known and all(tiered(v) == tiered(base) for v in vecs) \
+                    and all(class_ratios(base, v) for v in vecs)
+                if bandable:
                     M.cost_subset = (part, f"model:{key}")
                     M.flags.append("cost-unrepriced")
                     M.rule("cost-comparability-rule")
-                    price_band(M, vecs[-1])
+                    M.rule("cost-current-price-only")
+                    price_band(M, base)
                 else:
                     M.status["cost"] = "out:cost-not-comparable"
-                    M.detail["cost"] = ("unrepriced: a price band whose reference is not the current price"
-                                        if band else "unrepriced: not brought to the current price"
-                                        if uniform else "unrepriced, and the price change over the price date is not uniform"
-                                        if ok and vecs else "unrepriced, and no registered price covers its price date: "
-                                        + M.fields["cost"].get("reprice_detail", ""))
+                    M.detail["cost"] = ("unrepriced: its price vectors and the current price do not share their "
+                                        "long-context tiers or classes, no band reaches the current price"
+                                        if known else "unrepriced, and no registered price covers its price date: "
+                                        + C.get("reprice_detail", ""))
                     M.rule("cost-comparability-rule")
-                    if uniform or band:
+                    if known:
                         M.rule("cost-current-price-only")
     group_step(ctx, carriers, "cost")
     for M in measures:

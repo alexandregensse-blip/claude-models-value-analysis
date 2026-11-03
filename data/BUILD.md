@@ -454,12 +454,16 @@ marked **(method)** remain method questions for the maintainer.
     - otherwise the cost is not re-priceable.
 30. `cost-uniform-factor` requires every candidate vector to be the same uniform multiple of the base. **(decided, the
     maintainer, 3 Nov 2026: every cost of the fit is at the current price, rule `cost-current-price-only`)** A cost
-    that no rule brings to the base price gets `out:cost-not-comparable`; the unrepriced model's own subset (its
-    registered prices uniform multiples of one another, a single vector counting: a cost kept at its old price,
-    flagged `cost-unrepriced`) no longer exists. A price band (`cost-price-band`, 29 Oct) stays only when its reference
-    vector is the base price itself. When no registered price covers the price date, the cost gets
-    `out:cost-not-comparable` (as before). Rule 28 (the publisher's own figure: every price over the price date equals
-    the base) is unchanged; it is the case where nothing needs bringing to the current price.
+    that no rule brings to the base price is brought to it by a price band (`cost-price-band`, 29 Oct) when every
+    price over its price date is registered and shares the base price's classes and long-context tiers: the band is
+    [raw × the smallest, raw × the largest per-class ratio base / old] over the cost's own price vectors (the bounds
+    « mostly input » and « mostly output »), the row keeps the middle, the band's uniform sd added. **The band's
+    reference is always the base (current) price (the maintainer, 3 Nov 2026, later: « les fourchettes de prix se
+    calculent vers le prix courant »)**, never the last price seen, and each cost is banded on its own vectors (no
+    condition on the other costs of its model); the banded costs keep a subset per model. A cost no band can bring
+    to the current price (no registered price over its price date, or tiers / classes not shared) gets
+    `out:cost-not-comparable`; the unrepriced model's own subset at an old price no longer exists. Rule 28 (the
+    publisher's own figure: every price over the price date equals the base) is unchanged.
 31. In the partition, the route key is the single candidate chain, else `unknown`.
 
 **Fit tables and groups**
@@ -845,4 +849,48 @@ sonnet-5.5 298 → 197.
 Tests: `contradiction_before_route`, `thinking_off_without_nothink_at_maker`, `router_listed_level_model_lacks`,
 `claude_code_opus45_budget_note`, `komodor_litellm_chain`, `findings_dates_route5`; `router_listed_thinking` (thinking
 on under a listing), `cost_per_model_subset_and_single` and `cost_uniform_factor_across_tiers` updated (each with a
+negative control that fails when its decision is switched off).
+
+## Added on 3 Nov 2026 (route6)
+
+The maintainer's decisions of 3 Nov 2026 (second set):
+
+1. **A doubtful run date is an upper bound only** (`run-end`, « au plus tard le »), never a run date nor a lower bound:
+   a date the source writes that does not say it is the run date (a scoring file's date, a report's completion date,
+   a results document's date, a generated scoreboard), written only when it can only be on or after the run; in
+   doubt, nothing. Applied (findings, every quote an exact substring of a saved file, the agent's normalised value
+   beside the text as `written` where it differs): luminair (« **Date:** 2026-03-28 / 2026-03-30 » of each model's
+   scoring file, 11 measures), llm-quant (« 报告完成时间：2026年9月30日 », 6), fable-mode (« # Benchmark results —
+   2026-07-07 », 2), lhtb (each scoreboard's « _generated …_ », 16), ale (scoreboard « updated 2026-08-19 22:13 UTC »,
+   4), discoverphysics (each arm's « 正式成绩单 (date) », official score sheet, 8), effortmining (the report's
+   « Generated: » stamp, 60), kaybenleroll (the note's « Date: 2026-09-25. » for the three n=1 max arms, 3), miaai
+   (the two cross-trial summaries' « **Date** », 2): 112 measures, 30 facts. Not applied: codereviewbench (« Skill
+   matrix, 2026-10-02 » heads a document that reports a run of 3 Oct). validate.py compares an ISO date value with
+   the date as written by its numbers in order (« 2026年9月30日 », « 2026-08-19 22:13 UTC »).
+2. **Price bands toward the current price** (rule `cost-current-price-only`, Interpretations 30): the band's
+   reference is the base price, never the last price seen, for every model. Example: GPT-5.6 Sol, base 5 / 30 / 0.5,
+   the promotion 4 / 20 / 0.4 over the price date: the cost at the current price lies in raw × [1.25, 1.5] (it was
+   banded toward the promotion and went out). `price_band` applies to the standard-tier cost when a proven tier factor
+   applies, and a band of no width is that factor.
+3. **OpenHands goes through LiteLLM**: the OpenHands Index ids are `litellm_proxy/<provider>/<model>`; each id's
+   quote is copied as a route fact LiteLLM (term `litellm`) in the route slot of every measure (130), chain
+   OpenHands → LiteLLM → the provider. Not a name prefix: an id under a route prefix resolves against that route's
+   own names, and LiteLLM lists none (the model would no longer resolve). LiteLLM documents nothing: strict.
+4. **A changelog is an « updated on » bound only when it says it records additions of models or results.** Kept:
+   cognition FrontierCode (« Models added to the leaderboard and changes to how results are reported. », last entry
+   13 Oct). Removed: posttrainbench (« Changelog Updated Oct 6 »: the heading does not say what it records). The other
+   changelog dates are not « updated on » labels (an entry dating a given release: llmcost2026 v1.0, the arXiv
+   2609.36647 dataset's 0.1.0) and are left.
+
+Effect (`--fit-models catalog`, against f3ab153): fit-quality rows 17,696 → 17,696, couples 337; lqm.load kept
+16,718 → 16,665 (−53 republished: the costs back in let republication detection match sonnet-5.5 20, gpt-5.6-sol 16,
+gpt-5.6-luna 10, gpt-5.6-terra 5, fable-5 max 1, opus-5.5 medium 1). Fit-cost rows 8,307 → 9,050 (+743, all
+decision 2: gpt-5.6-sol 358, gpt-5.6-luna 166, gpt-5.6-terra 112, sonnet-5.5 101, gemini-3.6-flash 6; 255 of them
+were banded toward the promotion, 488 had one old price only); lqm.load kept 7,875 → 8,512; band rows 117 → 860;
+cost couples 268. Decisions 1, 3, 4 move no fit row (the measures concerned were out on other grounds: the OpenHands
+harness documents nothing; luminair, llm-quant, lhtb … no effort or no model established; 2 status changes only).
+Claude: sonnet-5.5 cost rows 197 → 298.
+
+Tests: `findings_doubtful_dates_run_end`, `openhands_litellm_chain`, `changelog_bound_scope`;
+`cost_per_model_subset_and_single`, `cost_uniform_factor_across_tiers` and `findings_dates_route5` updated (each with a
 negative control that fails when its decision is switched off).
