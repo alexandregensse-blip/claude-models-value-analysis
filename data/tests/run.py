@@ -640,7 +640,13 @@ def router_listed_thinking():
        "candidate routes disagree: candidate maker-api → nothink; candidate ork → low",
        "negative: route unknown, the candidates disagree: out")
     eq(r.cfg(m5), "nothink", "route unknown, « none » listed: the candidates agree")
-    eq(r.q(m6), "out:effort-not-established", "thinking on names no listed level: not established")
+    eq((r.cfg(m6), "router-listed-thinking" in r[m6]["rules_used"]), ("think", True),
+       "thinking on, the listing names at least one level: accepted (the maintainer, 3 Nov 2026, later)")
+    # negative control: a listing naming no level (« none » only) does not accept thinking on
+    sc.routes["ork"]["models"]["gt"]["accepts"] = [span("2026-06-27", "2026-12-31", configuration="nothink",
+                                                        evidence=se('"supported_efforts":["none"]'))]
+    r = sc.run()
+    eq(r.q(m6), "out:effort-not-established", "negative: no level listed, thinking on not established")
 
 
 @test
@@ -716,6 +722,173 @@ def findings_harness_points_4_5():
                                  ("src-openrouter-gpqa-diamond-2026-10-18", "M108"),
                                  ("src-vals.ai-multi-agent-vibe-code-bench-2026-10-09", "M5"))], [[], [], []],
        "negative: the test designer's Claude Code, a model named terminus, GPT-6 Sol's runs: no harness")
+
+
+@test
+def contradiction_before_route():
+    # the maintainer, 3 Nov 2026 (route5 decision 1): a contradiction the source writes is seen on what the facts read,
+    # before the route: Artificial Analysis gives opus-4.7 thinking off and high; thinking off not served through the
+    # route must not leave high alone
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    sc.model("gt", configs=("nothink", "low", "high"))
+    sc.route("orq", "router", spellings=["ORQ"],                    # documents high only, nothing for thinking off
+             models={"gt": {"ids": [span(name="orq/gt")], "accepts": [span(configuration="high")]}})
+    s = sc.source("a")
+    off, on = ("thinking-off", "off"), ("thinking-on", "on")
+    m1 = sc.m(s, model="gt", effort=[off, HIGH], route=[("ORQ", None)])
+    m2 = sc.m(s, model="gt", effort=[on, HIGH], route=[("ORQ", None)])
+    m3 = sc.m(s, model="gt", effort=[HIGH, ("effort-label", "high")], route=[("ORQ", None)])
+    m4 = sc.m(s, model="gt", effort=[off, HIGH])                    # maker's API stated by nothing: route unknown
+    r = sc.run()
+    c = r[m1]["fields"]["configuration"]
+    eq((r.q(m1), c["level"], c["detail"]),
+       ("out:effort-not-established", "not-established:contradictory",
+        f"effort facts read nothink ({r[m1]['fields']['configuration']['facts'][0]}), high "
+        f"({r[m1]['fields']['configuration']['facts'][1]}) (before the route)"),
+       "thinking off and high read: contradictory, although the route serves high only")
+    eq("contradiction-before-route" in r[m1]["rules_used"], True, "rule recorded")
+    eq(r.cfg(m2), "high", "negative: thinking on and a level read: the level (no contradiction)")
+    eq(r.cfg(m3), "high", "negative: two facts reading the same level")
+    eq(r[m4]["fields"]["configuration"]["level"], "not-established:contradictory", "the same with the route unknown")
+
+
+@test
+def thinking_off_without_nothink_at_maker():
+    # the maintainer, 3 Nov 2026 (route5 decision 2): thinking off asked for through OpenRouter on a model that has no
+    # thinking off at its maker (kimi-k3): the line goes out, no nearest level
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    se = [{"url": "u", "captured": "2026-03-01", "file": "f", "where": "w", "quote": '"supported_efforts":["high","low"]'}]
+    sc.model("kk", configs=("low", "high"))                         # as kimi-k3: no thinking off
+    sc.model("kn", configs=("nothink", "low", "high"))              # control: thinking off at the maker
+    orm = {k: {"ids": [span(name=f"or/{k}")], "accepts": [span(configuration=c, evidence=se) for c in ("low", "high")]}
+           for k in ("kk", "kn")}
+    sc.route("ork", "router", spellings=["ORK"], models=orm, level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    sc.routes["ork"]["accepts_maker"] = [span(decision="the maintainer, 3 Nov 2026")]
+    s = sc.source("a")
+    off = [("thinking-off", "off")]
+    m1 = sc.m(s, model="kk", effort=off, route=[("ORK", None)])
+    m2 = sc.m(s, model="kn", effort=off, route=[("ORK", None)])
+    r = sc.run()
+    eq((r.q(m1), r[m1]["fields"]["configuration"]["detail"]),
+       ("out:effort-not-established", "ork: thinking off asked for, kk has no thinking off at its maker"),
+       "kimi-k3-like: out, no nearest level")
+    eq(r.cfg(m2), "low", "negative: a model with thinking off at its maker, « none » not listed: the nearest level")
+
+
+@test
+def router_listed_level_model_lacks():
+    # the maintainer, 3 Nov 2026 (route5 decision 3): a level OpenRouter lists but the maker has not (qwen3.8-max
+    # minimal) stays out; the registry keeps the listing as copied
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    se = [{"url": "u", "captured": "2026-03-01", "file": "f", "where": "w",
+           "quote": '"supported_efforts":["xhigh","high","medium","low","minimal"]'}]
+    lv = ("minimal", "low", "medium", "high", "xhigh")
+    sc.model("qm", configs=("low", "medium", "high", "xhigh"))      # as qwen3.8-max: no minimal
+    sc.model("qn", configs=lv)                                      # control
+    orm = {k: {"ids": [span(name=f"or/{k}")], "accepts": [span(configuration=c, evidence=se) for c in lv]}
+           for k in ("qm", "qn")}
+    sc.route("ork", "router", spellings=["ORK"], models=orm, level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
+    sc.routes["ork"]["accepts_maker"] = [span(decision="the maintainer, 3 Nov 2026")]
+    s = sc.source("a")
+    mn = [("effort-setting", "minimal")]
+    m1 = sc.m(s, model="qm", effort=mn, route=[("ORK", None)])
+    m2 = sc.m(s, model="qn", effort=mn, route=[("ORK", None)])
+    r = sc.run()
+    eq((r.q(m1), r[m1]["fields"]["configuration"]["detail"]),
+       ("out:effort-not-established", "minimal is not one of the model's configurations"), "listed, not the maker's: out")
+    eq(r.cfg(m2), "minimal", "negative: a model with minimal: accepted")
+    om = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["openrouter"]["models"]
+    mo = json.load(open(os.path.join(DATA, "registry", "models.json"), encoding="utf-8"))["models"]["qwen3.8-max"]
+    eq((any(a["configuration"] == "minimal" for a in om["qwen3.8-max"]["accepts"]),
+        any(c["id"] == "minimal" for c in mo["configurations"])), (True, False),
+       "registry: OpenRouter lists minimal for qwen3.8-max, the maker has none (the listing copied as is)")
+
+
+@test
+def claude_code_opus45_budget_note():
+    # the maintainer, 3 Nov 2026 (route5 decision 4): Opus 4.5 under Claude Code: a fixed budget set by
+    # MAX_THINKING_TOKENS, default not saved; a budget is out of the fit → no default recorded, quotes in routes.json
+    R = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["claude-code"]
+    for q in ("Extended thinking is enabled by default because it significantly improves performance",
+              "you can also lower the budget by setting the MAX_THINKING_TOKENS environment variable",
+              "Opus 4.7 and later always use adaptive reasoning"):
+        eq(q in R["note"], True, f"note quotes « {q[:40]}… »")
+    eq("opus-4.5" in R["models"], False, "negative: no Opus 4.5 entry (nothing established beyond the note)")
+
+
+@test
+def komodor_litellm_chain():
+    # the maintainer, 3 Nov 2026 (route5 decision 6): komodor's Sonnet 5 baseline keeps Claude Code, cited from the
+    # README line 4; the chain is Claude Code → LiteLLM → Bedrock; LiteLLM documents nothing → strict
+    sid = "src-komodor-neocloud-sre-benchmark-2026-10-20"
+    S = json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+    F = {x["id"]: x for x in S["facts"]}
+    ms = {m["id"]: m for m in json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json")))["measures"]}
+    h = [F[i] for i in ms["M7"]["facts"]["harness"]]
+    eq([(x["term"], x["where"][:17]) for x in h], [("claude-code", "README.md, line 4")], "M7: Claude Code, README l.4")
+    line4 = open(h[0]["file"], encoding="utf-8").read().split("\n")[3]
+    eq(h[0]["quote"] in line4, True, "the quote is on line 4")
+    eq(sorted(m for m, x in ms.items() if F[x["facts"]["route"][0]].get("term") == "litellm"),
+       sorted(ms), "LiteLLM on every config's route (the METHOD's Model routing row)")
+    lr = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["litellm"]
+    eq([k for k in ("accepts", "mapping", "level_mapping", "default", "accepts_maker") if lr.get(k)] + list(lr.get("models") or {}),
+       [], "LiteLLM: nothing documented on what it passes on")
+    # the strict rule through an undocumented proxy step
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    sc.route("hcc", "harness", spellings=["HCC"], models={"ma": {"accepts": [span(configuration=c) for c in ("low", "high")]}},
+             level_mapping=[span(rule="identity")])
+    sc.route("lpx", "router", spellings=["LPX"])
+    sc.route("brk", "reseller", spellings=["BRK"])
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[HIGH], route=[("LPX", None), ("BRK", None), ("HCC", None)])
+    m2 = sc.m(s, model="ma", effort=[HIGH], route=[("BRK", None), ("HCC", None)])
+    r = sc.run()
+    eq((r.q(m1), r[m1]["fields"]["configuration"]["detail"]),
+       ("out:effort-not-established", "lpx documents nothing for ma @ high at the run date"),
+       "an undocumented proxy on the chain: out (strict)")
+    eq(r.cfg(m2), "high", "negative: without the proxy, Claude Code → the reseller passes high")
+
+
+@test
+def findings_dates_route5():
+    # the maintainer, 3 Nov 2026 (route5 B2-B4): board last-updated labels and modification dates as `published`
+    # (the upper bound, as vals.ai's 'Updated M/D/YYYY'); printed run dates as run-date facts on what they cover
+    def src(sid):
+        return json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+
+    def ms(sid):
+        return json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json"), encoding="utf-8"))["measures"]
+    for sid, val in (("src-sense-bench.com-leaderboard-2026-10-15", "2026-10-13"),
+                     ("src-github-bughuntbench-board-2026-10-19", "2026-10-19")):
+        p = src(sid)["published"]
+        eq((p["value"], "board last-updated label" in p["where"], p["quote"] in open(p["file"], encoding="utf-8").read()),
+           (val, True, True), f"B2 {sid}")
+    for sid, val in (("src-anthropic-sonnet-5-launch-page-2026-10-27", "2026-10-14T05:02:58Z"),
+                     ("src-snowflake-data-eng-bench-2026-10-12", "2026-08-14T17:18:28Z")):
+        p = src(sid)["published"]
+        eq((p["value"], "modification date" in p["where"], p["quote"] in open(p["file"], encoding="utf-8").read()),
+           (val, True, True), f"B3 {sid}")
+    eq([src(s)["published"] for s in ("src-designarena-2026-10-18", "src-bird-bench-leaderboard-2026-10-15",
+                                      "src-stagehand.dev-evals-hardbench-2026-10-15")],
+       [None, None, None], "negative: a security page's and a news item's 'updated' dates are not the board's, and a "
+       "label older than a model the board shows (stagehand 'Updated September 3, 2026', Opus 5.5) is stale: not written")
+    S = src("src-github-scorch-bench-2026-10-28")
+    F = {x["id"]: x for x in S["facts"]}
+    eq(sorted({(m["id"][:2], F[m["facts"]["run_date"][0]]["value"]) for m in ms("src-github-scorch-bench-2026-10-28")}),
+       [("M1", "2026-10-09"), ("M2", "2026-10-09"), ("M3", "2026-10-09"), ("M4", "2026-10-09"), ("M5", "2026-10-09"),
+        ("M6", "2026-10-09"), ("M7", "2026-10-09"), ("M8", "2026-10-09"), ("M9", "2026-10-09")], "B4 scorch: every measure")
+    eq(len({tuple(m["facts"]["run_date"]) for m in ms("src-github-roboco-language-benchmark-2026-10-18")}), 1,
+       "B4 roboco: one run date on all")
+    eq([m["facts"]["run_date"] for m in ms("src-luminairprime-openwrt-2026-10-20")][:2], [[], []],
+       "negative: a scoring file's date (in doubt) is not linked")
 
 
 @test
@@ -1136,10 +1309,14 @@ def cost_per_model_subset_and_single():
     sc.m(s, model="ma", effort=[HIGH], cost="2.0", price_table=pt)
     m3 = sc.m(s, model="mb", effort=[LOW], cost="1.5", price_table=pt)
     r = sc.run()
-    eq(r.c(m1), "in", "unrepriced: its own subset, efforts' ratios hold")
-    eq("cost-unrepriced" in r[m1]["flags"], True, "flagged")
-    eq(r.c(m3), "out:cost-single-couple", "a subset of one couple")
-    eq(r[m1]["cost_group"], "s1~c1", "cost group suffix")
+    # every cost of the fit is at the current price (the maintainer, 3 Nov 2026): a cost kept at its old price (the
+    # Sonnet 5.5 launch page's Terminal-Bench 4.0 costs, cache read 0.20 → 0.10 on 7 Oct) goes out, no subset of its own
+    eq((r.c(m1), r[m1]["fields"]["cost"]["base"]), ("out:cost-not-comparable", None),
+       "unrepriced at its old price: out, cost-not-comparable (no subset of its own any more)")
+    eq(r[m1]["reason_detail"]["cost"].endswith("not brought to the current price"), True, "why")
+    eq(("cost-unrepriced" in r[m1]["flags"], "cost-current-price-only" in r[m1]["rules_used"]), (False, True),
+       "not flagged as kept; rule recorded")
+    eq(r.c(m3), "out:cost-not-comparable", "mb the same")
     # the price changed (not uniformly) inside its price-date interval
     sc = base()
     two_prices(sc, "ma", old, new, change="2026-04-01")
@@ -1148,8 +1325,23 @@ def cost_per_model_subset_and_single():
     sc.m(s, model="ma", effort=[HIGH], cost="2.0")
     r = sc.run()
     eq((r.c(m1), "cost-price-band" in r[m1]["flags"]), ("in", True),
-       "non-uniform change over [release, publication]: in, with the price band as uncertainty (29 Oct)")
+       "non-uniform change over [release, publication], the band's reference the current price: in, with the price "
+       "band as uncertainty (29 Oct; kept on 3 Nov)")
     eq(float(r.rows("fit-cost.csv", model="ma", effort="low")[0]["cost_prec"]) > 0, True, "band widens the sd")
+    # negative control: a band whose reference is not the current price (the base marked on another vector, as GPT-5.6
+    # Sol's standard price under its promotion): out
+    sc = base()
+    two_prices(sc, "ma", old, new, change="2026-04-01")
+    for p in sc.prices["prices"]:
+        if p["model"] == "ma" and p["classes"] == old:
+            p["base"] = True
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0")
+    sc.m(s, model="ma", effort=[HIGH], cost="2.0")
+    r = sc.run()
+    eq((r.c(m1), r[m1]["reason_detail"]["cost"]),
+       ("out:cost-not-comparable", "unrepriced: a price band whose reference is not the current price"),
+       "negative: a band toward another price than the base: out")
 
 
 @test
@@ -1407,9 +1599,8 @@ def cost_uniform_factor_across_tiers():
         sc, (m1, m2, m3) = scenario(olds)
         r = sc.run()
         c = r[m1]["fields"]["cost"]
-        eq((c["base"], "cost-unrepriced" in r[m1]["flags"], "cost-uniform-factor-tiers" in r[m1]["flags"]),
-           (None, True, False), f"{what}: not re-priced")
-        eq(r[m1]["cost_group"] != r[m3]["cost_group"], True, f"{what}: its own subset")
+        eq((c["base"], r.c(m1), "cost-uniform-factor-tiers" in r[m1]["flags"]),
+           (None, "out:cost-not-comparable", False), f"{what}: not re-priced, out (current price only, 3 Nov 2026)")
         eq("not re-priceable" in c["reprice_detail"], True, f"{what}: why")
 
 

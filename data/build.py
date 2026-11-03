@@ -1066,8 +1066,11 @@ def serve(M, key, chain, req, iv, configs):
                 if any(overlaps(a, piece[0], piece[1]) for a in listed):
                     # the listing decides the levels and thinking off / on too (the maintainer, 3 Nov 2026, later:
                     # « none » listed or not; rule router-listed-thinking): the maker's count only for what is neither
+                    # thinking on without a level, which a listing never names, is accepted where the listing names
+                    # at least one level (the maintainer, 3 Nov 2026, later)
+                    th = ["think"] if any(c in LEVELS for c in acc + lv) else []
                     rg = ("listed " + "/".join(c for c in LISTABLE if c in acc + lv),
-                          acc + lv + [c for c in mk if c not in LEVELS and c not in THINKING])
+                          acc + lv + th + [c for c in mk if c not in LEVELS and c not in THINKING])
                 else:
                     rg = ("maker", acc + mk)
                 if rg not in regimes:
@@ -1147,6 +1150,10 @@ def accept_or_map(M, key, step, r, cls, on, iv, cur, acc):
         lv = [a for a in acc if a in LEVELS]
         if cur not in LISTABLE or not lv:
             return None, "not-established:absent", f"{step}: nearest-supported without accepted levels"
+        if cur == "nothink" and "nothink" not in M.ctx.configs(key, iv):
+            # thinking off asked for a model that has none at its maker: no nearest level (the maintainer, 3 Nov 2026:
+            # kimi-k3 through OpenRouter, rule router-listed-thinking)
+            return None, "not-established:absent", f"{step}: thinking off asked for, {key} has no thinking off at its maker"
         i = LISTABLE.index(cur)
         dist = sorted((abs(LISTABLE.index(a) - i), a) for a in lv)
         if len(dist) > 1 and dist[0][0] == dist[1][0]:
@@ -1329,6 +1336,7 @@ def configuration(M, key):
     facts = M.slot("effort")
     accepted = [f for f in facts if f.level in ACCEPTED]
     results = []                                         # (step, config or None, level, detail, fact ref, kind)
+    reqs = {}                                            # index in results → the configuration read, before the route
 
     def via_chain(req, step, ref, kind):
         # the route chain applies to every requested configuration, also one the model does not list (a router's
@@ -1336,6 +1344,7 @@ def configuration(M, key):
         cfg, lv, d = over_chains(M, key, lambda ch: serve(M, key, ch, req, iv, configs))
         if cfg and not in_list(cfg, configs):
             d = (d + "; " if d else "") + f"{cfg} is not one of the model's configurations"
+        reqs[len(results)] = req
         results.append((step if cfg == req or not cfg else 6, cfg, lv, d, ref, kind))
 
     def think_or_default(step, ref, kind):
@@ -1349,6 +1358,7 @@ def configuration(M, key):
             M.rule("thinking-on-default-level")
             if "level-from-default" not in M.flags:
                 M.flags.append("level-from-default")
+        reqs[len(results)] = "think"
         results.append((7, cfg, lv if cfg else "not-established:absent",
                         d or ("" if cfg else "thinking on, no level, no documented default"), ref, kind + ":default"))
 
@@ -1442,47 +1452,70 @@ def configuration(M, key):
         out.update(value=r[1], level=r[2] if r[2] not in ACCEPTED else "not-established:absent", step=r[0],
                    detail=r[3])
         return
-    est.sort(key=lambda r: r[0])
-    listed = [r for r in est if in_list(r[1], configs)]
-    if listed:                                           # a step matches only one of the model's configurations
-        est = listed
-    vals = {r[1] for r in est}
-    if len(vals) > 1:
-        kinds = {r[5] for r in est}
-        lv = [r for r in est if r[1] in LEVELS and r[5] in ("effort-setting", "config-history", "effort-label",
-                                                            "effort-order")]
-        others = [r for r in est if r not in lv]
-        # thinking on and a level: the level is the more specific; also when thinking on alone would have read the
-        # maker's default level (a levels-only model, thinking-on-default-level, 27 Oct)
-        if lv and others and len({r[1] for r in lv}) == 1 and all(
-                (r[1] == "think" and r[5] in ("thinking-on", "name-selects")) or r[5].endswith(":default") for r in others):
-            r = lv[0]
-            if any(o[5].endswith(":default") for o in others) and \
-                    not any(o[5].endswith(":default") for o in results if o not in others):
-                M.rules.discard("thinking-on-default-level")   # the default was not used: the level was stated
-                M.rules.discard("default-bridged-gap")
-                M.fields.pop("default_bridged", None)
-                for x in ("level-from-default", "default-bridged"):
-                    if x in M.flags:
-                        M.flags.remove(x)
-            out.update(value=r[1], level=r[2], step=r[0], detail="thinking on with a level: the level")
-            return
-        specific = [r for r in est if r[5] in ("name-selects", "thinking-on", "thinking-off")]
-        # the id selects thinking, the null field says no level was sent → the more specific statement
-        if kinds <= {"no-effort-sent", "name-selects", "thinking-on", "thinking-off"} and \
-                len({r[1] for r in specific}) == 1 and {r[1] for r in specific} <= {"think", "nothink"}:
-            r = specific[0]
-            out.update(value=r[1], level=r[2], step=r[0], detail="the more specific statement of the same call")
-            return
-        out.update(value=None, level="not-established:contradictory", step=est[0][0],
-                   detail="effort facts give " + ", ".join(f"{r[1]} ({r[4]})" for r in est))
+    # a contradiction the source itself writes is seen on what the facts read, before the route chain: a reading the
+    # route no longer serves does not make the other one win (the maintainer, 3 Nov 2026: Artificial Analysis gives
+    # opus-4.7 thinking off and high; thinking off not served through OpenRouter must not leave high alone)
+    read = [(r[0], reqs[i] if i in reqs else r[1], "written", "", r[4], r[5]) for i, r in enumerate(results)
+            if i in reqs or (r[0] != 7 and r[1] and r[2] in ACCEPTED)]
+    pre = reconcile(read, configs) if read else ("one", None)
+    if pre[0] == "contradictory":
+        rs = pre[1]
+        M.rule("contradiction-before-route")
+        out.update(value=None, level="not-established:contradictory", step=rs[0][0],
+                   detail="effort facts read " + ", ".join(f"{r[1]} ({r[4]})" for r in rs) + " (before the route)")
         return
-    r = est[0]
+    how, r = reconcile(est, configs)
+    if how == "contradictory":
+        out.update(value=None, level="not-established:contradictory", step=r[0][0],
+                   detail="effort facts give " + ", ".join(f"{x[1]} ({x[4]})" for x in r))
+        return
+    if how == "level":
+        r, others = r
+        if any(o[5].endswith(":default") for o in others) and \
+                not any(o[5].endswith(":default") for o in results if o not in others):
+            M.rules.discard("thinking-on-default-level")   # the default was not used: the level was stated
+            M.rules.discard("default-bridged-gap")
+            M.fields.pop("default_bridged", None)
+            for x in ("level-from-default", "default-bridged"):
+                if x in M.flags:
+                    M.flags.remove(x)
+        out.update(value=r[1], level=r[2], step=r[0], detail="thinking on with a level: the level")
+        return
+    if how == "specific":
+        out.update(value=r[1], level=r[2], step=r[0], detail="the more specific statement of the same call")
+        return
     if r[0] == 7 and r[1] == "default":
         out.update(value="default", level="not-established:absent", step=7, detail=r[3])
         return
     out.update(value=r[1], level="computed" if r[0] in (5, 6, 7) or r[2] == "computed" else r[2], step=r[0],
                detail=r[3])
+
+
+def reconcile(est, configs):
+    """The configurations established by the effort facts → ("one", r) / ("level", (r, the others)) (thinking on and a
+    level: the level) / ("specific", r) (the more specific statement of the same call) / ("contradictory", the results sorted)."""
+    est = sorted(est, key=lambda r: r[0])
+    listed = [r for r in est if in_list(r[1], configs)]
+    if listed:                                           # a step matches only one of the model's configurations
+        est = listed
+    vals = {r[1] for r in est}
+    if len(vals) <= 1:
+        return "one", est[0]
+    kinds = {r[5] for r in est}
+    lv = [r for r in est if r[1] in LEVELS and r[5] in ("effort-setting", "config-history", "effort-label",
+                                                        "effort-order")]
+    others = [r for r in est if r not in lv]
+    # thinking on and a level: the level is the more specific; also when thinking on alone would have read the
+    # maker's default level (a levels-only model, thinking-on-default-level, 27 Oct)
+    if lv and others and len({r[1] for r in lv}) == 1 and all(
+            (r[1] == "think" and r[5] in ("thinking-on", "name-selects")) or r[5].endswith(":default") for r in others):
+        return "level", (lv[0], others)
+    specific = [r for r in est if r[5] in ("name-selects", "thinking-on", "thinking-off")]
+    # the id selects thinking, the null field says no level was sent → the more specific statement
+    if kinds <= {"no-effort-sent", "name-selects", "thinking-on", "thinking-off"} and \
+            len({r[1] for r in specific}) == 1 and {r[1] for r in specific} <= {"think", "nothink"}:
+        return "specific", specific[0]
+    return "contradictory", est
 
 
 def budgets_merge(measures):
@@ -1969,6 +2002,7 @@ def reprice(M, C, key):
         M.flags.append("base-last-list-price")
         C["base_price"] = f"last list price ({bp['from']} → {bp['to']}): no maker-API price in force on as_of"
     base = price_vector(bp)
+    C["base_vector"] = dict(base)
     k_tier = (C.get("tier") or {}).get("factor", 1.0)
     cost, prec = C.get("std_cost", float(C["number"])), (C.get("prec") / k_tier if C.get("prec") is not None else None)
     stated, why = stated_prices(M)
@@ -2670,18 +2704,26 @@ def cost(ctx, measures):
             band = ok and vecs and not uniform and all(tiered(v) == tiered(vecs[-1]) for v in vecs) \
                 and all(class_ratios(v, vecs[-1]) for v in vecs)
             for M in xs:
-                if uniform or band:
+                # every cost of the fit is at the current (base) price (the maintainer, 3 Nov 2026): a cost that cannot be
+                # brought to it goes out; a band kept only when its reference vector is the base price itself (the band
+                # then brings the cost to the current price within its margin, 29 Oct). A uniform subset of its own (a
+                # cost kept at its old price, flagged cost-unrepriced until 3 Nov) no longer exists
+                at_base = band and M.fields["cost"].get("base_vector") == vecs[-1]
+                if at_base:
                     M.cost_subset = (part, f"model:{key}")
                     M.flags.append("cost-unrepriced")
                     M.rule("cost-comparability-rule")
-                    if band:
-                        price_band(M, vecs[-1])
+                    price_band(M, vecs[-1])
                 else:
                     M.status["cost"] = "out:cost-not-comparable"
-                    M.detail["cost"] = ("unrepriced, and the price change over the price date is not uniform"
+                    M.detail["cost"] = ("unrepriced: a price band whose reference is not the current price"
+                                        if band else "unrepriced: not brought to the current price"
+                                        if uniform else "unrepriced, and the price change over the price date is not uniform"
                                         if ok and vecs else "unrepriced, and no registered price covers its price date: "
                                         + M.fields["cost"].get("reprice_detail", ""))
                     M.rule("cost-comparability-rule")
+                    if uniform or band:
+                        M.rule("cost-current-price-only")
     group_step(ctx, carriers, "cost")
     for M in measures:
         if M.cost_carrier:

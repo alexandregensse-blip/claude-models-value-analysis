@@ -452,10 +452,14 @@ marked **(method)** remain method questions for the maintainer.
     - every call at or below the lowest threshold → the standard prices;
     - a single request above a threshold → that tier's prices;
     - otherwise the cost is not re-priceable.
-30. `cost-uniform-factor` requires every candidate vector to be the same uniform multiple of the base. An unrepriced
-    model gets its own subset when its registered prices fully cover its price dates and are uniform multiples of one
-    another (a single vector counts). When no registered price covers the price date, the cost gets
-    `out:cost-not-comparable`.
+30. `cost-uniform-factor` requires every candidate vector to be the same uniform multiple of the base. **(decided, the
+    maintainer, 3 Nov 2026: every cost of the fit is at the current price, rule `cost-current-price-only`)** A cost
+    that no rule brings to the base price gets `out:cost-not-comparable`; the unrepriced model's own subset (its
+    registered prices uniform multiples of one another, a single vector counting: a cost kept at its old price,
+    flagged `cost-unrepriced`) no longer exists. A price band (`cost-price-band`, 29 Oct) stays only when its reference
+    vector is the base price itself. When no registered price covers the price date, the cost gets
+    `out:cost-not-comparable` (as before). Rule 28 (the publisher's own figure: every price over the price date equals
+    the base) is unchanged; it is the case where nothing needs bringing to the current price.
 31. In the partition, the route key is the single candidate chain, else `unknown`.
 
 **Fit tables and groups**
@@ -780,3 +784,65 @@ nothink; cost deepseek-v4-pro-0813, deepseek-v4.1-flash, glm-5.2, qwen3.8-27b, s
 Tests: `router_listed_thinking`, `registry_openrouter_listing_copied`, `harness_without_entry_no_presumption`,
 `findings_harness_points_4_5` (each with a negative control that fails when its decision is switched off);
 `router_listed_levels` now expects thinking off unlisted → the nearest listed level.
+
+## Added on 3 Nov 2026 (route5)
+
+The maintainer's decisions of 3 Nov 2026 on the points left open by the two passes above (routes, then dates):
+
+1. **A contradiction the source writes is seen before the route** (rule `contradiction-before-route`). The effort
+   facts are reconciled first on what they read (the configuration each asks for, before any route step), with the
+   same rules as after it (`reconcile`: a level beside thinking on → the level; the more specific statement of the
+   same call; a reading outside the model's configurations counts for nothing beside one inside). Readings that still
+   disagree → `not-established:contradictory`, whatever the route then serves. Example: Artificial Analysis
+   …-21#M1263, opus-4.7, facts nothink (F68) and high: thinking off is not served through OpenRouter, so high used to
+   enter alone; now out. Readings from a default (`no-effort-sent`) are not readings and stay after the route.
+2. **Thinking off asked for a model that has none at its maker** (kimi-k3 through OpenRouter): not established, no
+   nearest level (`accept_or_map`; rule `router-listed-thinking`). Thinking off on a model that has it at its maker,
+   « none » not listed, still goes to the nearest listed level.
+3. **A level the router lists but the maker has not** (qwen3.8-max minimal): the line stays out (« minimal is not one
+   of the model's configurations »); the listing is kept as copied. Frozen by `router_listed_level_model_lacks`.
+4. **Opus 4.5 under Claude Code**: the saved docs (reg10/ev/live29 costs and model-config) say extended thinking is on
+   by default with a fixed budget lowered by MAX_THINKING_TOKENS; its default is in no saved capture; a budget is out
+   of the fit (22 Oct). The quotes are in routes.json claude-code `note`; nothing else is recorded; the lines stay out.
+5. **Thinking on without a level under a router's listing**: accepted (`think`) where the listing names at least one
+   level at the run date; a listing naming no level does not accept it. No measure is concerned today.
+6. **komodor**: M7 (Sonnet 5 · Bedrock baseline) keeps Claude Code, its harness fact now copying the README, line 4
+   (« We took an AI SRE agent running on a closed model (Claude Code on Claude Sonnet 5) »). Every config's route
+   slot gets LiteLLM (fact copied from METHOD.md line 14, « | Model routing | LiteLLM `v1.101.6` sidecar … Claude Code
+   and the judge both call it … »): chain Claude Code → LiteLLM → Bedrock / the host. routes.json gains `litellm`
+   (class router, spellings only; nothing on what it passes on, no name prefix), so the strict rule (Interpretations 9)
+   applies. The 7 measures were already out (M7: no effort fact; M1–M6: Claude Code has no default for kimi-k3).
+7. **Every cost of the fit is at the current price** (rule `cost-current-price-only`, Interpretations 30): a cost no
+   rule brings to the base price → `out:cost-not-comparable`; no subset of its own at an old price any more; a price
+   band stays only when its reference vector is the base price. Example: the Sonnet 5.5 launch page (28 Sep), its
+   Terminal-Bench 4.0 costs at the 0.20 cache-read price (0.10 from 7 Oct).
+8. **Dates** (findings, offline, every quote an exact substring of a saved file):
+   - a board's « last updated » label is written as `published`, as vals.ai's « Updated M/D/YYYY »: the upper bound
+     of the run dates of every value on the page, not a publication date (`where` says so). 11 of the 17 cases;
+     not written: designarena ×2 (the date is the Security page's `lastUpdated` in the payload), bird-bench (a news
+     item's date), and three labels older than the release of a model the board shows (stagehand « Updated September
+     3, 2026 » with Opus 5.5, wildclawbench « Updated 2026-07-20 » with qwen3.8-max, pinchbench « 08/18/2026 » with
+     deepseek-v4.1-flash): such a label is stale, not an upper bound;
+   - a page modified after publication: the modification date (JSON-LD `dateModified`, an « Update » line, Qiita
+     `updated_at`) as `published`, the certain upper bound of the saved content (the schema has one date field; `where`
+     says it is a modification date). 8 sources;
+   - a printed run date: a `run-date` fact on the measures it covers: scorch-bench (« Run on 2026-10-09 », 9 measures,
+     one fact per results file), roboco (« 실험일: 2026-10-18 (KST) », 30). The other printed dates of the list were
+     already run-date facts, or are left (in doubt: a scoring file's date, a report's completion date, a results
+     document's title date, a scoreboard's generation stamp; proposals in the step-2 list);
+   - the date of another page than the values' (Gemini cards …): left empty.
+
+Effect (`--fit-models catalog`, against b0fcfd1): fit-quality rows 17,716 → 17,696 (lqm.load kept 16,723 → 16,718):
+25 out (decision 1: opus-4.7 high 9, sonnet-5 high 9; decision 2: kimi-k3 low 7), 5 in (scorch-bench kimi-k3 max and
+qwen3.6-35b-a3b think, dated by its run date; 3 sonnet-5 high rows of AA 19 Oct no longer superseded by the 21 Oct rows
+now out), no configuration changed; couples 337, Claude 55. Fit-cost rows 9,072 → 8,307 (kept 8,568 → 7,875): 765
+out, 0 in — decision 7: 743 (gpt-5.6-sol 296, gpt-5.6-luna 166, gpt-5.6-terra 112, sonnet-5.5 96 + 5, gemini-3.6-flash
+6 …); 1,183 measures of every status get `out:cost-not-comparable` by it; bands kept at the base price 109 (sonnet-5.5,
+grok-4.5); dates: 15 (a price date ending at the label no longer covered by a registered price: aibenchy, cognition, nextjs; gemini-3.7-flash 9, gemini-3.5-flash 4 …); decision 2:
+7. Cost couples 269 → 268 (gpt-5.2-codex xhigh: nextjs's single row, price date now 16 Oct). Claude cost rows:
+sonnet-5.5 298 → 197.
+
+Tests: `contradiction_before_route`, `thinking_off_without_nothink_at_maker`, `router_listed_level_model_lacks`,
+`claude_code_opus45_budget_note`, `komodor_litellm_chain`, `findings_dates_route5`; `router_listed_thinking` (thinking
+on under a listing), `cost_per_model_subset_and_single` and `cost_uniform_factor_across_tiers` updated (each with a
+negative control that fails when its decision is switched off).

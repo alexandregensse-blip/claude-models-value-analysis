@@ -5,6 +5,33 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Contradictions before the route, costs at the current price, board labels as bounds (3 Nov 2026, night)
+
+**Decisions (the maintainer, 3 Nov 2026)** on the points left open by the route pass and by the undated-sources pass:
+1. A contradiction the source writes is detected on what the facts read, before the route (`contradiction-before-route`):
+   Artificial Analysis opus-4.7 / sonnet-5, facts nothink and high, out (18 fit rows).
+2. Thinking off asked for a model with none at its maker (kimi-k3) through OpenRouter: out, no nearest level (7 rows).
+3. qwen3.8-max minimal (listed by OpenRouter, not the maker's): stays out; a test freezes it.
+4. Opus 4.5 under Claude Code: fixed budget (MAX_THINKING_TOKENS), default not saved, a budget is out of the fit; the
+   quotes are noted in routes.json, nothing else.
+5. Thinking on without a level under a listing: accepted if the listing names at least one level (no measure today).
+6. komodor M7 keeps Claude Code (README line 4); LiteLLM added to every config's route from the METHOD (Claude Code →
+   LiteLLM → Bedrock / host); `litellm` registered with nothing on what it passes on: strict (the 7 rows were out already).
+7. Every cost of the fit is at the current price (`cost-current-price-only`): an unrepriced cost goes out; a price band
+   stays only when its reference is the base price. 743 cost rows out (gpt-5.6-sol 296, luna 166, terra 112,
+   sonnet-5.5 101, gemini-3.6-flash 6); 109 band rows kept (sonnet-5.5, grok-4.5).
+8. Dates, offline: board « last updated » labels written as `published` (an upper bound, as vals.ai's « Updated »): 11
+   of 17 — not designarena ×2 (the Security page's date), bird-bench (a news item), and three labels older than a model
+   the board shows (stagehand, wildclawbench, pinchbench: stale). Modification dates as `published`: 8 sources. Printed
+   run dates as run-date facts: scorch-bench (9 measures) and roboco (30); the rest already had them, or are in doubt
+   (scoring dates, report completion, generation stamps: left, with a proposal). Dates of another page: left empty.
+
+**Effect** (`--fit-models catalog`, against b0fcfd1): fit-quality 17,716 → 17,696 (kept 16,723 → 16,718): −25 (decisions
+1, 2), +5 (scorch-bench 2 dated by its run date; 3 AA sonnet-5 rows no longer superseded); couples 337 unchanged.
+Fit-cost 9,072 → 8,307 (kept 8,568 → 7,875): −765 (decision 7: 743; dates: 15, price dates now uncovered; decision 2:
+7); cost couples 269 → 268 (gpt-5.2-codex xhigh). Claude: opus-4.7 high 52 → 43, sonnet-5 high 140 → 134 (quality);
+sonnet-5.5 cost rows 298 → 197. Step-2 list (sources still without a date or a bound on every measure): 261 → 215.
+
 ## OpenRouter's listing for thinking off, its captures copied, Claude Code's own defaults (3 Nov 2026, evening)
 
 **Decisions (the maintainer, 3 Nov 2026):**

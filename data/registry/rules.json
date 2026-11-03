@@ -364,7 +364,7 @@
   {
    "id": "cost-comparability-rule",
    "kind": "standing",
-   "statement": "In each part of a setup's costs (basis × method × unit × currency × route), the re-priced measures form one subset; each unrepriced model forms its own subset when its price change over the price-date interval is uniform across classes; the others are out:cost-not-comparable.",
+   "statement": "In each part of a setup's costs (basis × method × unit × currency × route), the re-priced measures form one subset; an unrepriced cost stays only as a price band whose reference is the base price (cost-price-band, own subset per model); the others are out:cost-not-comparable (every cost of the fit at the current price: cost-current-price-only, the maintainer, 3 Nov 2026; until then a model whose price change over the price-date interval was uniform across classes formed its own subset at its old price).",
    "inputs": [
     "cost basis, method, unit, currency, route",
     "prices.json"
@@ -513,7 +513,7 @@
   {
    "id": "router-listed-thinking",
    "kind": "standing",
-   "statement": "The router's catalogue listing (router-listed-levels) decides thinking off and on as well as the levels: thinking off is accepted only where the listing names it (OpenRouter's supported_efforts « none »); where the listing does not, thinking off asked for follows the router's level_mapping (nearest supported, thinking off being the lowest step of the order, a tie → ambiguous), and thinking on without a level, which the listing never names, is not established. The maker's thinking off / on count only where the catalogue lists nothing for the model at that date.",
+   "statement": "The router's catalogue listing (router-listed-levels) decides thinking off and on as well as the levels: thinking off is accepted only where the listing names it (OpenRouter's supported_efforts « none »); where the listing does not, thinking off asked for follows the router's level_mapping (nearest supported, thinking off being the lowest step of the order, a tie → ambiguous), thinking off asked for a model that has no thinking off at its maker is not established (no nearest level: kimi-k3, the maintainer, 3 Nov 2026, later); thinking on without a level, which the listing never names, is accepted where the listing names at least one level (the maintainer, 3 Nov 2026, later). The maker's thinking off / on count only where the catalogue lists nothing for the model at that date.",
    "inputs": [
     "route",
     "effort-setting / effort-label",
@@ -539,6 +539,34 @@
    "date": "2026-11-03",
    "decided_by": "the maintainer (3 Nov 2026: Claude Code goes directly to Anthropic)",
    "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "contradiction-before-route",
+   "kind": "standing",
+   "statement": "The effort facts of a measure are reconciled first on what they read (the configuration each asks for, before any route step: a setting, a label, thinking off / on, a budget, the name), with the same rules as after the route (a level beside thinking on → the level; the more specific statement of the same call; a reading outside the model's configurations counts for nothing beside one inside). Readings that still disagree make the configuration not-established:contradictory, whatever the route then serves; a reading the route no longer serves does not leave the other one alone.",
+   "inputs": [
+    "effort facts (effort-setting, effort-label, thinking-on / -off, thinking-budget, effort-order, name)",
+    "models.json configurations"
+   ],
+   "output": "configuration not-established:contradictory",
+   "conditions": "two or more effort readings of one measure",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: Artificial Analysis opus-4.7 / sonnet-5, facts thinking off and high; thinking off no longer served through OpenRouter)",
+   "ref": "data/BUILD.md Added on 3 Nov 2026 (route5) 1; docs/DATA-PIPELINE.md §5.1"
+  },
+  {
+   "id": "cost-current-price-only",
+   "kind": "standing",
+   "statement": "A cost that none of the re-pricing rules (publisher figure, delta on the source's tokens, uniform factor, uniform factor across tiers, class ratio) brings to the base price is out:cost-not-comparable. The unrepriced model's own subset (a cost kept at its old price, flagged cost-unrepriced) no longer exists; a price band (cost-price-band) is kept only when its reference vector is the base price itself, the band then being the cost at the current price within its margin.",
+   "inputs": [
+    "cost field (price vectors over the price date, base price)",
+    "prices.json"
+   ],
+   "output": "out:cost-not-comparable",
+   "conditions": "a cost not re-priced",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: Sonnet 5.5 launch page, Terminal-Bench 4.0 costs at the 28 Sep price; cache read 0.20 → 0.10 on 7 Oct)",
+   "ref": "data/BUILD.md Interpretations 30; Added on 3 Nov 2026 (route5) 7; docs/DATA-PIPELINE.md §5.3 step 2"
   }
  ]
 }
