@@ -2192,12 +2192,20 @@ def total_tokens_split(M, C, key):
     price is cost × k whatever the run's mix of classes and tiers (the split gives it); otherwise the split stands only
     when neither list has a class or tier beyond input and output, since the run's mix over them cannot be excluded —
     unless they cannot apply to the run's calls (rule cost-class-cannot-apply, class_cannot_apply: tried when the
-    split fails with every class, first without the tiers, then without the tiers and the cache). A split that needs
-    the cache left out stays out (doubt, counted apart): the platform resells the maker's API, and nothing it writes
-    excludes a cache of its own. → (done, why)."""
+    split fails with every class, first without the tiers, then without the tiers and the cache). The maintainer's
+    decisions of 4 Nov 2026 on that rule: it applies only to a source that sends each question as one call, with no
+    conversation read back (decision 2: a fact one-call-per-question in the source's findings, its exact quote; the
+    input per call the split gives is an indication, not a proof), and a split that needs the cache left out enters
+    only when the platform bills the maker's cache (decision 1, platform_rebills_cache: its cache class the same
+    multiple of the maker's as its input and output, at the run's date), else it stays out (doubt, counted apart).
+    → (done, why)."""
     if not M.slot("spend", "platform-price"):
         return False, ""
     done, why, res = _split_attempt(M, C, key, frozenset())
+    if not done and not [x for x in M.slot("usage", "one-call-per-question") if x.level in ACCEPTED]:
+        return False, (why + " — rule cost-class-cannot-apply not applied: the source does not establish that each "
+                       "question is one call with no conversation read back (no one-call-per-question fact; the "
+                       "maintainer, 4 Nov 2026, decision 2)")
     tried = []
     for drop in (frozenset({"tier"}), frozenset({"tier", "cache"})):
         if done:
@@ -2206,10 +2214,14 @@ def total_tokens_split(M, C, key):
         if why2 is None:                                 # nothing to leave out on either list
             continue
         if done2 and "cache" in drop:
-            C["total_split_cache_doubt"] = dict(res2["record"], value=res2["value"], prec=res2["prec"])
-            return False, (f"doubt (cache-reseller): without the classes that cannot apply ({', '.join(res2['flags'])}) "
-                           f"the split gives {res2['value']:.6g} {res2['cur']}, but the platform resells the maker's API "
-                           f"and nothing it writes excludes a cache of its own; with every class: {why}")
+            ok, how = platform_rebills_cache(M, C, key, res2)
+            res2["record"]["cache_rebilled"] = how
+            if not ok:
+                C["total_split_cache_doubt"] = dict(res2["record"], value=res2["value"], prec=res2["prec"])
+                return False, (f"doubt (cache-reseller): without the classes that cannot apply "
+                               f"({', '.join(res2['flags'])}) the split gives {res2['value']:.6g} {res2['cur']}, but "
+                               f"it is not established that the platform bills the maker's cache: {how}; with every "
+                               f"class: {why}")
         if done2:
             done, res = True, res2
         elif why2 != why and why2 not in tried:
@@ -2218,6 +2230,50 @@ def total_tokens_split(M, C, key):
         return False, why + "".join(f" — {w}" for w in tried)
     _split_write(M, C, res)
     return True, ""
+
+
+def platform_rebills_cache(M, C, key, res):
+    """Decision 1 of the maintainer (4 Nov 2026) on rule cost-class-cannot-apply: the doubt « the reseller's own
+    cache » is lifted when the platform bills the maker's cache — its cache class the same multiple k of the maker's
+    list as its input and output classes, for this model, at the run's date. Read here: the platform's vectors over
+    the price date with the cache kept (platform_over without the tiers only: decisions A and I with the cache classes
+    compared, so the platform's cache price at the run's date is known) and the maker's registered list over the same
+    span (one vector); on every class both lists name (input, output, cache-read at least; the tiers left out) the
+    platform's price is k × the maker's, one k. Classes one list names and the other does not are written down, not
+    compared. → (ok, how)."""
+    ctx, cur = M.ctx, res["cur"]
+    cfg = (M.fields.get("configuration") or {}).get("value")
+    pd = C.get("price_date") or {}
+    lo, hi = V.when(pd["lo"]), V.when(pd["hi"])
+    tier = frozenset({"tier"})
+    vecs, why = platform_over(M, key, cur, cfg, lo, hi, tier)
+    if why:
+        return False, f"the platform's cache price at the run's date is not known ({why})"
+    ms, _ = prices_over(ctx, key, lo, hi, "maker-api", cur, cfg)
+    mk = []
+    for v in ms:
+        v = project(v, tier)
+        if v not in mk:
+            mk.append(v)
+    if len(mk) != 1:
+        return False, f"the maker's list over the price date is not one vector ({len(mk)})"
+    m = mk[0]
+    notes = []
+    for v in vecs:
+        common = sorted(c for c in v if c in m)
+        if not {"input", "output", "cache-read"} <= set(common):
+            return False, (f"the platform's list or the maker's does not price cache-read with input and output "
+                           f"(platform: {', '.join(sorted(v))}; maker: {', '.join(sorted(m))})")
+        if any(not m[c] for c in common):
+            return False, "a maker's price of 0 on a class both lists name"
+        rs = {c: v[c] / m[c] for c in common}
+        if max(rs.values()) - min(rs.values()) > 1e-9 * max(rs.values()):
+            return False, ("the platform's classes are not one multiple of the maker's: "
+                           + ", ".join(f"{c} {v[c]:g} / {m[c]:g} = {r:.6g}" for c, r in rs.items()))
+        only = sorted(set(v) ^ set(m))
+        notes.append(f"{', '.join(common)} all {rs['input']:.6g} × the maker's"
+                     + (f" (named on one list only, not compared: {', '.join(only)})" if only else ""))
+    return True, "; ".join(dict.fromkeys(notes))
 
 
 def _split_attempt(M, C, key, drop):

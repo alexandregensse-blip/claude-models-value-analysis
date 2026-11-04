@@ -491,6 +491,13 @@ Decided by the maintainer during the reviews:
   `cache_minimums`, each with its quote; null or absent → not excluded). The platform resells the maker's API and
   nothing it writes excludes a cache of its own: a split that needs the cache left out stays out (doubt
   « cache-reseller », its value kept apart in the report); one that needs the tiers only enters (data/BUILD.md).
+  The maintainer's decisions of 4 Nov 2026, later, on that rule: (1) the doubt is lifted when the platform bills the
+  maker's cache — its cache class the same multiple of the maker's list as its input and output, for the model and at
+  the run's date (A and I with the cache kept); (2) the rule, tiers and cache, applies only to a source that states
+  that each question is one call with no conversation read back (fact `one-call-per-question`, its exact quote: the
+  protocol, the evaluation code or the README); the input per call from the split is an indication, not a proof;
+  (3) the tier left out below its threshold is accepted, under (2). chinese-llm-benchmark does not state it (its
+  total and 通用能力 average TAU, BFCL-V3 « 多轮 » and Terminal-Bench agent runs): the rule does not apply to it.
 - **Dates (the maintainer, 4 Nov 2026, the points left by the dating step 2).** 1. toolathlon's « Date » column is not
   written (its meaning is unknown). 2. Terminal-Bench submission dates before a model's release are kept (early
   access). 3. SimpleBench `dateAdded` before the release: kept. 4. designarena: each board's own `lastUpdateTime` is

@@ -31,6 +31,7 @@
     "cached-share",
     "requests",
     "tokens-in-per-request",
+    "one-call-per-question",
     "model-name",
     "model-api-id",
     "route",
@@ -210,6 +211,12 @@
     },
     "tokens-in-per-request": {
      "description": "Input tokens of each request of the run, or the largest of them (per-call size): with `requests`, it decides whether a long-context price tier applies (DATA-PIPELINE §5.3 step 1).",
+     "slots": [
+      "usage"
+     ]
+    },
+    "one-call-per-question": {
+     "description": "The source states that each question of the run is sent as one API call, with no conversation read back (not a multi-turn agent, whose returned input — questions, past reasoning, tool results — grows and is cached): `value` the words that say it, `quote` the exact protocol, evaluation-code or README text around them, for the questions this entry covers. Rule cost-class-cannot-apply applies only with it (the maintainer, 4 Nov 2026, decision 2); the input per call computed from the costs is an indication, not a proof.",
      "slots": [
       "usage"
      ]
@@ -563,6 +570,7 @@
       "cached-share",
       "requests",
       "tokens-in-per-request",
+      "one-call-per-question",
       "unit"
      ],
      "list": true

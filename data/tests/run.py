@@ -3075,7 +3075,7 @@ def findings_4nov_later():
 
 def _split_scenario(plat=None, maker=None, costs=None, caps=(("W1", "wayback", "2026-05-15"), ("S1", "fetch", "2026-07-01")),
                     published="2026-06-01", maker_cur=("USD",), changes=None, extra_plat=None, platform_facts=True,
-                    partial=(), cache_min=None, maker_lc=None):
+                    partial=(), cache_min=None, maker_lc=None, one_call=True):
     """The total-tokens split (the maintainer, 4 Nov 2026): a CNY board that gives each model's cost per 1,000 calls
     and its total tokens per call, run on its own platform; the platform's list (dated captures) and the maker's."""
     sc = base()
@@ -3114,8 +3114,12 @@ def _split_scenario(plat=None, maker=None, costs=None, caps=(("W1", "wayback", "
                 for term, v in pv.get(k, {}).items():
                     sp.append(("platform-price", v, {"term": term, "capture": c, "form": "table-cell",
                                                      "quote": f"|{v}元|"}))
+        more = {"spend": sp} if sp else {}
+        if one_call:                                     # decision 2 (4 Nov 2026): the source says one call per question
+            more["usage"] = [("one-call-per-question", "a single API call", {"form": "prose",
+                                                               "quote": "each question is sent as a single API call"})]
         ms.append(sc.m(s, model=k, effort=[LOW], cost=cost, currency="CNY", unit="per-1k-calls-CNY",
-                       tokens={"tokens-total": tot}, more={"spend": sp} if sp else None))
+                       tokens={"tokens-total": tot}, more=more or None))
     return sc.run(), ms
 
 
@@ -3255,10 +3259,12 @@ def cost_class_cannot_apply():
     r, (m1, _) = _split_scenario(plat=pl, maker=mk, cache_min={"ma": 512})
     C = r[m1]["fields"]["cost"]
     eq((r.c(m1), "refused: doubt (cache-reseller)" in r[m1]["reason_detail"]["cost"],
+        "not one multiple of the maker's" in r[m1]["reason_detail"]["cost"],
         round(C["total_split_cache_doubt"]["value"], 9), C["total_split_cache_doubt"]["cannot_apply"]),
-       ("out:cost-not-comparable", True, 4.2, ["cache<512"]),
-       "200 input tokens per call < 512: the cache cannot apply at the maker, the split gives 4.2, but the platform "
-       "resells and nothing excludes its own cache: doubt, out, counted apart")
+       ("out:cost-not-comparable", True, True, 4.2, ["cache<512"]),
+       "200 input tokens per call < 512: the cache cannot apply at the maker, the split gives 4.2, but the platform's "
+       "cache-write (2 × input) is not the maker's (1.25 ×) times 7: the platform's cache is not the maker's, doubt, "
+       "out, counted apart (decision 1, negative)")
     r, (m1, _) = _split_scenario(plat=pl, maker=mk, cache_min={"ma": 200})
     eq((r.c(m1), "not below the maker's minimum cacheable 200" in r[m1]["reason_detail"]["cost"]),
        ("out:cost-not-comparable", True), "negative: input per call (200, up to 200.5 with the rounding) not below 200")
@@ -3271,6 +3277,54 @@ def cost_class_cannot_apply():
     r, (m1, _) = _split_scenario(plat=pl, maker=mk, cache_min={"ma": 512}, changes=ch)
     eq((r.c(m1), "changes between the release" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True),
        "negative: the maker's input price changes before the first capture: A stops")
+
+
+@test
+def cost_class_cannot_apply_decisions():
+    # the maintainer's decisions of 4 Nov 2026 on rule cost-class-cannot-apply. 1: a platform whose cache class is the
+    # same multiple of the maker's as its input and output (7 ×) bills the maker's cache: when the maker establishes
+    # that the cache cannot apply to calls of this size, the split enters there too. 2: the rule applies only to a
+    # source that states one call per question (fact one-call-per-question, its quote)
+    # the maker's cache-write is a 30-minute one, the platform names a 5-minute one (as for OpenAI's gpt-6 on
+    # nonelinear.com): the lists do not share their classes, so the split needs the cache left out
+    mk = {"ma": {"input": 1, "output": 5, "cache-read": 0.1, "cache-write-30m": 1.25}, "mb": {"input": 2, "output": 10}}
+    pl = {"ma": {"input": "7.00", "output": "35.00", "cache-read": "0.7", "cache-write-5m/input": "1.25"},
+          "mb": {"input": "14.00", "output": "70.00"}}
+
+    def run(**kw):
+        a = dict(plat=pl, maker=mk, cache_min={"ma": 512})
+        a.update(kw)
+        return _split_scenario(**a)
+    r, (m1, _) = run()
+    C = r[m1]["fields"]["cost"]
+    eq((r.c(m1), round(C["base"]["value"], 9), C["total_split"]["cannot_apply"], C["total_split"]["cache_rebilled"]),
+       ("in", 4.2, ["cache<512"], "cache-read, input, output all 7 × the maker's (named on one list only, not "
+                                  "compared: cache-write-30m, cache-write-5m)"),
+       "1: the platform's cache-read 7 × the maker's, like input and output; 200 tokens per call < 512 → the cache "
+       "cannot apply at the maker, nor at the platform that bills it: in, 29.4 / 7")
+    r, (m1, _) = run(plat=dict(pl, ma=dict(pl["ma"], **{"cache-read": "1.4"})))
+    eq((r.c(m1), "refused: doubt (cache-reseller)" in r[m1]["reason_detail"]["cost"],
+        "not one multiple of the maker's" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True, True),
+       "negative 1: the platform's cache-read 14 × the maker's, its input and output 7 × → its cache is not the "
+       "maker's billed on: doubt, out")
+    r, (m1, _) = run(changes=[("ma", "2026-03-01", {"input": 1, "output": 5, "cache-read": 0.05, "cache-write-30m": 1.25})])
+    eq((r.c(m1), "cache price at the run's date is not known" in r[m1]["reason_detail"]["cost"]),
+       ("out:cost-not-comparable", True),
+       "negative 1: the maker's cache-read changes before the first capture: the platform's cache at the run's date "
+       "is not known (A stops with the cache kept) → doubt, out")
+    lc = {"ma": [{"threshold_input_tokens": 200000, "classes": {"input": 2, "output": 10, "cache-read": 0.2}}]}
+    r, (m1, _) = run(maker=mk, one_call=False)
+    eq((r.c(m1), "does not establish that each question is one call" in r[m1]["reason_detail"]["cost"],
+        "total_split_cache_doubt" in r[m1]["fields"]["cost"]), ("out:cost-not-comparable", True, False),
+       "negative 2: no one-call-per-question fact → the rule does not apply (cache)")
+    tier = {"ma": [("S1", "lc>200000:input", "14.00"), ("S1", "lc>200000:output", "70.00")]}
+    r, (m1, _) = _split_scenario(maker_lc=lc, extra_plat=tier)
+    eq(r.c(m1), "in", "2: the fact written, a tier on S1 only, 200 tokens per call → in (decision 3)")
+    r, (m1, _) = _split_scenario(maker_lc=lc, extra_plat=tier, one_call=False)
+    eq((r.c(m1), "does not establish that each question is one call" in r[m1]["reason_detail"]["cost"]),
+       ("out:cost-not-comparable", True), "negative 2: no one-call-per-question fact → the rule does not apply (tier)")
+    r, (m1, m2) = _split_scenario(one_call=False)
+    eq((r.c(m1), r.c(m2)), ("in", "in"), "a split that needs no class left out does not need the fact")
 
 
 @test

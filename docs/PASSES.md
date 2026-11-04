@@ -5,7 +5,31 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
-## The « × 7 » checked in time, and the classes that cannot apply (4 Nov 2026, latest)
+## The reseller's cache and one call per question (4 Nov 2026, latest)
+
+**Method.** No fit, no agent; web only for the board's repository (gh) and nonelinear.com. The maintainer's three
+decisions of 4 Nov 2026 on rule `cost-class-cannot-apply`: (1) the doubt « the reseller's own cache » is lifted when
+the platform bills the maker's cache — nonelinear.com's cache class the same multiple of the maker's list as its input
+and output (× 7), checked for each model at the run's date; (2) the rule applies only to a source that states, in its
+own words (protocol, evaluation code, README), that each question is one call with no conversation read back — not a
+multi-turn agent, whose input grows and is cached; the input per call the split gives (about 300 tokens, one exam
+question) is an indication, not a proof; (3) the long-context tier left out below its threshold: accepted. A method
+change: before main, the maintainer's yes.
+
+**Search for (2).** jeinlee1991/chinese-llm-benchmark at main and at d44b57e: README, CHANGELOG, 每周最新模型.md,
+LMArena+AA.md, the 高考 data README, the nine tables' leaderboard pages (a chart and the table only), the tree (no
+evaluation code, eval/评测数据.xlsx), GitHub code search; nonelinear.com's badcase page (one prompt and the models'
+responses per item: an indication). No text says one call per question. The README says the reverse for the total and
+通用能力: they average « agent与工具调用 » (« 计算TAU和BFCL-V3的平均分 », BFCL-V3 « 首创多轮、多步函数调用场景 ») and coding
+(Terminal-Bench, « 用于评估智能体… »). No fact written; the rule does not apply to this source.
+
+**Result** (S/clb3/AVANT-APRES.txt): fit-cost 9,420 → 9,411: the 9 gpt-5.4 `high` costs entered at ec6dae3 by
+the tier left out leave (0 entered); cost couples 276, Claude cost couples 55, unchanged; fit-quality unchanged. The 27
+costs of the reseller doubt stay out, now for (2). (1) is coded and tested; read with (2) switched off, it would let
+in gpt-6-luna 6, gpt-6-sol 6 and gpt-6.1-sol 7 (their cache-read 7 × OpenAI's like input and output) and refuse
+sonnet-5.5 8 (the platform's cache price before the maker's change of 7 Oct is not captured).
+
+## The « × 7 » checked in time, and the classes that cannot apply (4 Nov 2026, later)
 
 **Method.** No fit, no agent; web only for the board's repository (gh) and the makers' prompt-caching pages
 (Anthropic, OpenAI, xAI) and nonelinear.com. The maintainer's two points on the total-tokens split (4 Nov 2026): « il

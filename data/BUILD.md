@@ -1333,7 +1333,9 @@ class fails, first without the long-context tiers, then without the tiers and th
 - **The platform's own cache.** The platform resells the maker's API and nothing it writes excludes a cache of its own
   (its catalogue prices « 缓存命中 » for every model). A split that needs the cache left out therefore stays out —
   doubt, counted apart: `out:cost-not-comparable`, its detail « doubt (cache-reseller): … the split gives <value> … »
-  and the value it would take in `fields.cost.total_split_cache_doubt`. A split that needs the tiers only enters.
+  and the value it would take in `fields.cost.total_split_cache_doubt`. A split that needs the tiers only enters. (Changed by the maintainer's decisions
+  of 4 Nov 2026, later, below: the doubt is lifted when the platform bills the maker's cache, and the rule applies
+  only to a source that states one call per question.)
 - The input per call is the mean the split gives (T × 1,000 calls); the rule reads it as every call's size, as
   `effective_classes` reads a stated tokens-in-per-request (one board's questions, of one kind).
 
@@ -1356,3 +1358,61 @@ a null minimum → out; 512 → the doubt (cache-reseller), value 4.2 kept apart
 each date; negative: none at f9af9f5). In `cost_total_tokens_split_conditions`, « a tier on one list only » (200
 input tokens per call) now enters by the tier rule. Mutations: the partial check removed → `cost_split_partial_captures`
 fails; the retries removed → `cost_total_tokens_split_conditions` and `cost_class_cannot_apply` fail.
+
+**The maintainer's decisions on rule `cost-class-cannot-apply`** (4 Nov 2026, later):
+1. **The doubt « the reseller's own cache » is lifted when the platform bills the maker's cache**
+   (`platform_rebills_cache`). nonelinear.com shows for its cache class the same multiple of the maker's list as for
+   input and output (× 7): it passes the maker's bill on, cache included. When the maker establishes
+   (prices.json `cache_minimums`) that the cache cannot apply to calls of this size, the split without the cache then
+   enters at the reseller too. Condition, for the model and at the run's date, else doubt (cache-reseller), out: the
+   platform's vectors over the price date with the cache kept (`platform_over` without the tiers only, so A and I
+   compare the cache classes too and the platform's cache price at the run's date is known), the maker's registered
+   list over the same span one vector, and on every class both lists name — input, output and cache-read at least,
+   the tiers left out — the platform's price k × the maker's, one k. A class one list names and the other does not
+   (nonelinear's « 5 分钟缓存写入 » against OpenAI's 30-minute and 12-hour writes) is written down in
+   `total_split.cache_rebilled`, not compared.
+2. **One call per question.** The rule (its tiers and its cache) applies only to a source that sends each question as
+   one call, with no conversation read back (not a multi-turn agent, whose returned input — questions, past
+   reasoning, tool results — grows and is cached). The source establishes it itself: a fact `one-call-per-question`
+   (new fact type, slot `usage`; `value` the words, `quote` the exact protocol, evaluation-code or README text) in
+   the measure's usage; without it, out, the reason « rule cost-class-cannot-apply not applied: the source does not
+   establish that each question is one call ». The input per call the split gives is an indication, not a proof. A
+   split that needs no class left out does not need the fact.
+3. **The long-context tier left out** (the input per call below its threshold): accepted, under 2.
+
+**chinese-llm-benchmark: one call per question not established.** Searched (gh, 4 Nov 2026) in
+jeinlee1991/chinese-llm-benchmark at main (pushed 27 Oct 2026): README.md, CHANGELOG.md, 每周最新模型.md, LMArena+AA.md,
+opendata/2025高考各省真题/README.md, the leaderboard pages of the nine tables (总分, 通用能力, 专业能力, 推理与数学计算,
+语言与指令遵从, 教育, 金融, 法律与行政公务, 医疗与心理健康: a chart and the table, no text), the tree (no evaluation code;
+eval/评测数据.xlsx only), GitHub code search (« 多轮 », « 单轮 »); and nonelinear.com's badcase page (one « prompt » and
+the models' « response » per item: an indication, not a protocol). No text says each question is one call. The
+README says the opposite for two of the nine tables: « “通用能力”为“推理与数学计算”、“语言与指令遵从”、“agent与工具调用”、
+“coding” 4大领域平均分 », under « 8、agent与工具调用排行榜 » « 计算TAU和BFCL-V3的平均分 », of BFCL-V3 « 首创多轮、多步函数调用场景 »,
+of Terminal-Bench (9.2, coding) « 用于评估智能体和语言模型在容器化环境中执行有价值工作的能力 » — the same text in the README at
+d44b57e (the run's commit) — so the total (总分) and 通用能力 average multi-turn agent runs. So no fact is written
+and the rule does not apply to this source.
+
+**Effect** (`--fit-models catalog`, against ec6dae3; S/clb3/AVANT-APRES.txt of the session's scratchpad): fit-cost rows
+9,420 → 9,411 (−9, 0 entered; lqm.load kept 8,850 → 8,841): gpt-5.4 `high`, its 9 tables, entered at ec6dae3 by the
+tier left out, leave (one call per question not established). Cost couples 276 (unchanged: gpt-5.4 `high` has other
+rows), Claude cost couples 55, Claude rows unchanged; fit-quality unchanged (17,748 rows, 339 couples). The 27 costs
+kept apart at ec6dae3 as the reseller doubt stay out, now for condition 2 (gpt-6-luna 6, gpt-6-sol 6, gpt-6.1-sol 7:
+« classes or tiers beyond input and output … »; sonnet-5.5 8: « the maker's registered price changes between the
+release and the first capture »). Condition 1 on them, read with condition 2 switched off (a build of the session's
+scratchpad, S/clb3/hyp, not kept): gpt-6-luna 6, gpt-6-sol 6, gpt-6.1-sol 7 would enter
+(S1, their only capture: cache-read, input and output all 7 × OpenAI's; the platform's 5-minute write and OpenAI's
+30-minute and 12-hour writes not compared), fit-cost 9,420 → 9,439, couples 276, Claude 55; sonnet-5.5 8 refused (its
+price date 28 Sep – 19 Oct crosses the maker's cache-read change of 7 Oct, 0.20 → 0.10; S1 shows 0.7 = 7 × 0.10, the
+platform's cache price before 7 Oct is not captured: not known at the run's date). The 45 costs of the five models priced with every class (opus-5,
+gpt-5.4-mini, gpt-5.4-nano, grok-4.6, grok-4.7) are unchanged; every other split refusal of the source gains the
+reason « rule cost-class-cannot-apply not applied … ».
+
+Tests: `cost_class_cannot_apply_decisions` (1: the platform's cache-read 7 × the maker's, like input and output, its
+5-minute write against the maker's 30-minute one not compared, 200 tokens per call < 512 → in, 29.4 / 7; negative 1:
+the platform's cache-read 14 × → doubt, out; negative 1: the maker's cache-read changes before the first capture, the
+platform's cache at the run's date not known → doubt, out; 2: a tier on S1 only with the fact → in; negative 2: no
+fact → out, for the tier and for the cache; a split that needs no class left out enters without the fact). The
+scenario `_split_scenario` writes the fact by default (`one_call`). In `cost_class_cannot_apply`, the 512 case is now
+refused by condition 1 (the platform's cache-write 2 × input against the maker's 1.25 ×). Mutations: condition 1
+switched off (always billed) → `cost_class_cannot_apply` and `cost_class_cannot_apply_decisions` fail; condition 2
+switched off → `cost_class_cannot_apply_decisions` fails.
