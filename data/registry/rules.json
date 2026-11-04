@@ -581,6 +581,57 @@
    "date": "2026-11-03",
    "decided_by": "the maintainer (3 Nov 2026: Sonnet 5.5 launch page, Terminal-Bench 4.0 costs at the 28 Sep price; cache read 0.20 → 0.10 on 7 Oct)",
    "ref": "data/BUILD.md Interpretations 30; Added on 3 Nov 2026 (route5) 7, (route6) 2; docs/DATA-PIPELINE.md §5.3 step 2"
+  },
+  {
+   "id": "price-first-capture-from-release",
+   "kind": "standing",
+   "statement": "A run between a model's release and the first capture of its pricing page: the price of that first capture applies from the release (prices.json from_basis release), unless a launch promotion is announced or visible, a price change is documented in between, or a readable capture of a maker's pricing page taken on a later day than the release does not show the model's price. Applied to the (model, currency) pairs whose archive the price salvo of 3–4 Nov 2026 searched; each case read in the agents' notes (PASSES.md).",
+   "inputs": [
+    "prices.json",
+    "models.json released"
+   ],
+   "output": "prices.json from / from_basis",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision A, 4 Nov 2026)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices); docs/DATA-PIPELINE.md §9"
+  },
+  {
+   "id": "price-bracketed-captures",
+   "kind": "standing",
+   "statement": "Two captures showing the same price cover the interval between them (two registry entries of one model, kind, currency and configurations with the same price vector on both sides of a gap are one entry), unless a price change is documented in the interval.",
+   "inputs": [
+    "prices.json"
+   ],
+   "output": "prices.json from / to",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision I, 4 Nov 2026)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices)"
+  },
+  {
+   "id": "price-end-inclusive-unit",
+   "kind": "standing",
+   "statement": "An inclusive end written to the second or the minute covers that whole second or minute (validate.when): a price to …T15:59:59Z followed by one from …T16:00:00Z leaves no gap.",
+   "inputs": [
+    "prices.json to",
+    "dated records"
+   ],
+   "output": "interval coverage",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision J, 4 Nov 2026: a build bug at the minute / second boundary)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices)"
+  },
+  {
+   "id": "cost-currency-conversion",
+   "kind": "standing",
+   "statement": "A cost in yuan of a model whose maker publishes no yuan price is converted to USD only when the source gives its rate or says it starts from the maker's USD prices (its rate, else the ECB reference rate over the run, its spread a band); a source that goes through a reseller or says nothing stays out. On 4 Nov 2026: chinese-llm-benchmark (nonelinear's own platform prices) and llm2014 (OpenRouter / Zenmux relays) stay out; SuperCLUE prices no US model in yuan.",
+   "inputs": [
+    "cost currency",
+    "the source's saved files"
+   ],
+   "output": "out:cost-not-comparable (no base price in the cost's currency)",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision F, 4 Nov 2026)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices)"
   }
  ]
 }

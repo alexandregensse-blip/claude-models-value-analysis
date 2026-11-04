@@ -2613,7 +2613,8 @@ def findings_dates_step2():
             for e in c.get("evidence") or []:
                 n[c.get("kind", "published")] += 1
                 ok = os.path.isfile(e["file"]) and hashlib.sha256(open(e["file"], "rb").read()).hexdigest() == e["sha256"] \
-                    and e["quote"] in open(e["file"], encoding="utf-8", errors="replace").read()
+                    and (e["quote"] in open(e["file"], encoding="utf-8", errors="replace").read()
+                         or (e["quote"] == "sha256 " + e["sha256"] and e["sha256"] in (d.get("sha256") or {}).values()))
                 if not ok:
                     bad.append((d["id"], c.get("id")))
     eq(bad, [], "every step-2 date: its file, sha256 and exact quote")
@@ -2629,7 +2630,7 @@ def findings_dates_step2():
     sudo = [m for m in ms(s) if T[m["facts"]["value"].split("/")[0]].startswith("sudo-l7")]
     eq((len(cap(s)), any(c["id"] in m["facts"].get("value_seen_in", []) for m in sudo for c in cap(s))), (11, False),
        "surgehq: a capture per board, none for sudo-l7")
-    c = [x for x in cap("src-github-codereviewbench-files-2026-10-19") if x["kind"] == "commit"]
+    c = [x for x in cap("src-github-codereviewbench-files-2026-10-19") if x["kind"] == "commit" and "4 Nov 2026" not in (x.get("note") or "")]
     eq([(x["commit"], x["captured"]) for x in c], [("00047f7bf0", "2026-10-12T17:44:38Z")],
        "codereviewbench: the commit of 12 Oct (the maintainer, 3 Nov 2026)")
     s = "src-stagehand.dev-evals-hardbench-2026-10-15"
@@ -2643,6 +2644,141 @@ def findings_dates_step2():
     eq([sid for sid in ("src-github-rtx4090-local-vs-cloud-2026-10-15", "src-github-simpleenglish-2026-10-18",
                         "src-github-threadkeeper-2026-10-12", "src-github-tilth-benchmark-v0.5.0-2026-10-19") if cap(sid)],
        [], "negative: a commit date saved in no file is not written")
+
+
+
+@test
+def price_end_inclusive_second():
+    # J (the maintainer, 4 Nov 2026): a price « to …T15:59:59Z » followed by one « from …T16:00:00Z » leaves no gap
+    # (DeepSeek V4 Pro 0813 on 16 Aug 2026, V3.1 on 5 Sep 2025, GLM-5.3 Flash on 9 Sep 2026); an end written to the
+    # second or the minute covers that whole second or minute
+    def scenario(end):
+        sc = base()
+        for k in ("ma", "mb"):
+            sc.prices["prices"] += [price(k, "2026-01-01", end, {"input": 1, "output": 5}),
+                                    price(k, "2026-08-16T16:00:00Z", "2026-10-01", {"input": 1, "output": 5})]
+            sc.prices["prices"][-1]["from_basis"] = "stated"
+        s = sc.source("a", published="2026-09-01")
+        ms = [sc.m(s, model=k, effort=[LOW], cost=c) for k, c in (("ma", "1.0"), ("mb", "2.0"))]
+        return sc.run(), ms
+    r, (m1, m2) = scenario("2026-08-16T15:59:59Z")
+    eq((r.c(m1), r.c(m2), r[m1]["fields"]["cost"]["price_covered"]), ("in", "in", True),
+       "the second up to 16:00:00 is covered by the price ending at 15:59:59Z")
+    r, (m1, m2) = scenario("2026-08-16T15:59:58Z")
+    eq((r.c(m1), r[m1]["fields"]["cost"]["price_covered"]), ("out:cost-not-comparable", False),
+       "negative: a second really missing (15:59:59 → 16:00) is a gap")
+    import validate as V
+    eq((V.when("2026-08-16T15:59:59Z", True).isoformat(), V.when("2026-08-16T15:59Z", True).isoformat(),
+        V.when("2026-08-16T15:59:59.5Z", True).isoformat(), V.when("2026-08-16", True).isoformat()),
+       ("2026-08-16T15:59:59.999999", "2026-08-16T15:59:59.999999", "2026-08-16T15:59:59.500000", "2026-08-16T23:59:59.999999"),
+       "an inclusive end covers its unit (a fraction of a second is exact)")
+    eq(V.when("2026-08-16T15:59:59Z").isoformat(), "2026-08-16T15:59:59", "a start is the instant written")
+
+
+
+@test
+def evidence_identical_copy():
+    # decision 6 (the maintainer, 4 Nov 2026): a capture identical byte for byte to a copy the source saved is its own
+    # proof (a binary workbook cannot be quoted): its quote is « sha256 <hash> »
+    import validate as V
+    tmp = tempfile.mkdtemp(prefix="samecopy-")
+    try:
+        p = os.path.join(tmp, "wb.xlsx")
+        with open(p, "wb") as fh:
+            fh.write(b"PK\x03\x04\x00\xff\xfe binary workbook")
+        h = hashlib.sha256(open(p, "rb").read()).hexdigest()
+        e = dict(url="https://web.archive.org/web/20260613071732id_/https://example.org/wb.xlsx", file=p, sha256=h,
+                 where="the whole workbook", quote=f"sha256 {h}")
+        eq(V.evidence_faults(e, tmp, {h}), [], "the source saved a copy of this hash: accepted")
+        eq(len(V.evidence_faults(e, tmp, {"0" * 64})), 1, "negative: no saved copy of the source has this hash")
+        eq(len(V.evidence_faults(dict(e, quote="sha256 " + "1" * 64), tmp, {h})), 1, "negative: the quote names another hash")
+        eq(V.evidence_faults(dict(e, quote="any text"), tmp, {h}), [f"the quote cannot be checked in wb.xlsx (not a text file)"],
+           "negative: any other quote of a binary file is not checkable, as before")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+def _reg_prices():
+    P = json.load(open(os.path.join(DATA, "registry", "prices.json"), encoding="utf-8"))["prices"]
+    return lambda model, cur="USD", kind="standard": sorted(   # noqa: E731
+        (p["from"], p["to"], p["from_basis"]) for p in P if p["model"] == model and p["route"] == "maker-api"
+        and p["kind"] == kind and p["currency"] == cur)
+
+
+@test
+def registry_prices_salvo_4nov():
+    # the price salvo of 3–4 Nov 2026 written under the maintainer's decisions A–I of 4 Nov (every proof checked:
+    # file, sha256, exact quote, or the derived text saved beside the raw file)
+    g = _reg_prices()
+    # A: the price of the first capture from the release; not where a launch promotion shows or the page, after the
+    # release, did not show the price
+    eq(g("gemini-3.6-flash")[0][::2], ("2026-07-21", "release"), "A: from the release (first capture 22 Jul)")
+    eq(g("o1")[0][::2], ("2024-12-17", "release"), "A: o1 from its release (first capture 20 Dec, salvo p19)")
+    eq(g("glm-5.3-flash")[0][::2], ("2026-08-29", "earliest-capture"), "negative A: the first capture shows a launch promotion")
+    eq(g("qwen3.8-27b")[0][::2], ("2026-08-31", "earliest-capture"), "negative A: the 11 Aug capture does not name it")
+    eq(g("glm-5.3")[0][::2], ("2026-08-19", "earliest-capture"), "negative A: the 14 Aug capture lists GLM-5.3 without a price row")
+    # I: two captures of the same price cover the interval between them
+    eq([x[:2] for x in g("grok-4")][:1], [("2025-07-12", "2025-11-02")], "I: grok-4 12 Jul → 2 Nov 2025, one entry over 31 Jul")
+    eq(len(g("qwen2.5-7b-instruct")), 2, "negative I: the row left the Singapore table in the gap (not merged)")
+    # C: Pro mode at the base model's standard rate, from the release
+    eq([g(k)[0][0] for k in ("gpt-5.6-sol-pro", "gpt-5.6-luna-pro", "gpt-5.6-terra-pro")], ["2026-07-09"] * 3, "C")
+    # D: a permanent discount is the price charged
+    P = json.load(open(os.path.join(DATA, "registry", "prices.json"), encoding="utf-8"))["prices"]
+    mm = [p for p in P if p["model"] == "minimax-m3" and p["route"] == "maker-api" and p["kind"] == "standard"]
+    eq(sorted((p["currency"], p["classes"]["input"]) for p in mm), [("CNY", 2.1), ("USD", 0.3)], "D: 50% permanent off")
+    # E: no Beijing / Mainland China price; Alibaba's Singapore table is international
+    eq([g(k, "CNY") for k in ("qwen3.8-27b", "qwen3.8-max-0902", "qwen3-max-0123")], [[], [], []], "negative E: Beijing prices")
+    eq(g("qwq-32b-preview"), [], "negative E: Mainland-China-only USD price")
+    eq(g("qwen3-30b-a3b-instruct-2507")[0][0], "2026-01-15", "E: the unlabelled 1 Aug 2025 capture is not used")
+    # G: a free price is never a price; H: a neighbouring id only where models.json names it
+    eq((g("gemini-2.5-pro-exp-03-25"), g("devstral-2512")[0][0]), ([], "2026-01-28"), "negative G: free tier, free launch")
+    eq((g("inkling"), g("inkling-small")), ([], []), "negative H: the sampling-nvfp4 serving variant")
+    eq(g("kimi-k2-instruct"), [("2025-12-17", "2025-12-17", "earliest-capture")], "H: kimi-k2-0711-preview is a name of the key")
+    # B: no price after a retirement whose alias serves another model
+    eq(g("gemini-3.7-flash")[-1][1], "2026-10-07", "negative B: gemini-3.7-flash ends at its routing to 3.8 Flash")
+    eq(max(x[1] for x in g("grok-3")), "2026-05-15T18:59:59Z", "negative B: grok-3 ends at the 15 May redirect")
+    # F: no conversion: the sources pricing US models in yuan go through a reseller (nonelinear, OpenRouter / Zenmux)
+    eq([p["model"] for p in P if p["currency"] == "CNY" and p["model"].startswith(("gpt-", "gemini-", "sonnet-", "opus-",
+                                                                                     "haiku-", "grok-", "o1", "o3", "o4"))],
+       [], "F: no yuan price of a US maker")
+    # every new entry's evidence is reachable and checked
+    new = [p for p in P if "Price salvo 3–4 Nov 2026" in (p.get("note") or "") or "by the price salvo" in (p.get("note") or "")]
+    eq(len(new) > 70, True, "the salvo's entries")
+    for p in new:
+        for e in p["evidence"]:
+            if not e["file"].startswith("/work/.salvo14/mig/prix1/"):
+                continue                                 # the registry's own records (checked by validate.py --check-files)
+            b = open(e["file"], "rb").read()
+            eq(hashlib.sha256(b).hexdigest(), e["sha256"], f"{p['model']} {e['file']}")
+            eq(e["quote"].encode("utf-8") in b, True, f"{p['model']}: an exact quote of {os.path.basename(e['file'])}")
+
+
+@test
+def findings_dates_4nov():
+    # decisions 6 and 7 of the maintainer (4 Nov 2026), from the files already saved
+    def src(sid):
+        return json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+
+    def mea(sid):
+        return json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json"), encoding="utf-8"))["measures"]
+    s = src("src-superclue-general-2511-2026-10-19")
+    w = [c for c in s["captures"] if c["kind"] == "wayback"]
+    eq((len(w), w[0]["captured"], w[0]["evidence"][0]["quote"] == "sha256 " + w[0]["evidence"][0]["sha256"],
+        w[0]["evidence"][0]["sha256"] in s["sha256"].values()), (1, "2026-06-13T07:17:32Z", True, True),
+       "6: the workbook capture identical to our copy")
+    s = src("src-epoch.ai-proofbench-external-2026-10-20")
+    w = [c for c in s["captures"] if c["kind"] == "wayback"]
+    eq((len(w), w[0]["evidence"][0]["file"].endswith("20260929161354/proofbench_external.csv")), (1, True),
+       "6: the CSV extracted from the zip, cited")
+    ms = mea("src-collinear-ai-yc-bench-2026-10-15")
+    g = [c["id"] for c in src("src-collinear-ai-yc-bench-2026-10-15")["captures"] if c.get("commit", "").startswith("feb032b1")]
+    on = [m["facts"]["value"].split("/")[1] for m in ms if g and g[0] in m["facts"]["value_seen_in"]]
+    eq((len(on), any(k.startswith("glm-5.3") for k in on)), (43, False), "7: yc-bench, the 52-model version (not GLM-5.3)")
+    s = src("src-github-codereviewbench-files-2026-10-19")
+    eq(sorted(c["captured"] for c in s["captures"] if c["kind"] == "commit")[:2], ["2026-09-29T17:30:18Z", "2026-09-29T17:42:45Z"],
+       "7: codereviewbench, the commit of each file")
+    eq([c for c in src("src-github-bullshitbench-2026-10-13")["captures"] if "4 Nov" in (c.get("note") or "")], [],
+       "negative 7: bullshitbench per row not written (commit messages only)")
 
 
 def main():

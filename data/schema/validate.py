@@ -243,12 +243,24 @@ def parse_when(s):
         return None
 
 
+END_UNIT = re.compile(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(:\d{2})?(\.\d+)?")
+
+
 def when(s, end=False):
-    """A date / datetime string → naive UTC datetime; a date as `to` means its whole day (bad dates → open bound)."""
+    """A date / datetime string → naive UTC datetime; a date as `to` means its whole day (bad dates → open bound). An
+    inclusive end written to the second or the minute covers that whole second or minute (J, the maintainer, 4 Nov 2026:
+    a price « to 2026-08-16T15:59:59Z » followed by one « from 2026-08-16T16:00:00Z » leaves no gap; before, the end was
+    15:59:59.000000 and the second up to 16:00 was covered by neither)."""
     t = parse_when(s) if s is not None else None
     if t is None:
         return dt.datetime.max if end else dt.datetime.min
-    return t + dt.timedelta(days=1, microseconds=-1) if end and len(s) == 10 else t
+    if end and len(s) == 10:
+        return t + dt.timedelta(days=1, microseconds=-1)
+    if end:
+        m = END_UNIT.match(s.strip())
+        if m and not m.group(2):
+            return t + (dt.timedelta(seconds=1) if m.group(1) else dt.timedelta(minutes=1)) - dt.timedelta(microseconds=1)
+    return t
 
 
 def overlap(a, b):
@@ -998,13 +1010,15 @@ def check_saved(src, path, rep, lines_cache={}):
     dated = [(c["id"], c) for c in src.get("captures", [])] + [("published", src.get("published") or {})]
     for label, rec in dated:
         for i, e in enumerate(rec.get("evidence") or []):
-            for msg in evidence_faults(e, path):
+            for msg in evidence_faults(e, path, set((src.get("sha256") or {}).values())):
                 rep.err(f"{L} {label}", f"evidence[{i}]: {msg}")
 
 
-def evidence_faults(e, path):
+def evidence_faults(e, path, own=frozenset()):
     """What fails in one evidence record of a dated source item: no saved file or quote, the file not reachable, its
-    sha256, the quote not in the file."""
+    sha256, the quote not in the file. A capture identical byte for byte to a copy the source itself saved (its sha256
+    is one of `own`, the source's sha256 map) is its own proof: its quote is « sha256 <its hash> » (decision 6, the
+    maintainer, 4 Nov 2026: a binary workbook cannot be quoted)."""
     if not e.get("file") or not e.get("quote") or not e.get("sha256"):
         return ["evidence without its " + " and ".join(k for k in ("file", "sha256", "quote") if not e.get(k))]
     f = saved_path(e["file"], path)
@@ -1012,6 +1026,10 @@ def evidence_faults(e, path):
         return [f"saved file not reachable here: {e['file']}"]
     if sha256_of(f) != e["sha256"]:
         return [f"sha256 mismatch: {e['file']}"]
+    if e["quote"].startswith("sha256 "):
+        if e["quote"] == f"sha256 {e['sha256']}" and e["sha256"] in own:
+            return []
+        return ["a quote « sha256 … » holds only for a capture identical to a copy the source saved (same sha256)"]
     if f.endswith(".pdf"):
         return ["a quote in a PDF points at its text extraction"]
     if f.endswith(TEXT_EXT):
