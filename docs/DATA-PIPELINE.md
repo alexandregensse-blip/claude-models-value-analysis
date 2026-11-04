@@ -406,6 +406,35 @@ Decided by the maintainer during the reviews:
   listing records are copied from every saved catalogue capture; Claude Code's default for a model it has no entry for
   comes from its own saved docs only (none usable for the 4.5 models); harnesses cited for the run in other slots
   were copied into the harness slot (22 measures), and a harness quote about other runs was replaced (arxiv-2607.02436).
+- **Prices (the maintainer, 4 Nov 2026, after the price salvo of 3–4 Nov).** A: a run between a model's release and
+  the first capture of its pricing page takes that capture's price from the release (`from_basis release`), unless a
+  launch promotion is announced or visible, a price change is documented in between, or a readable capture of a
+  maker's pricing page on a later day than the release does not show the price (then not applied, case listed). B: no
+  price after a retirement whose alias serves another model (deepseek-r1 after 27 May 2025, gemini-3.7-flash after its
+  routing to 3.8 Flash, grok-4 after 15 May 2026): identity in doubt, out. C: OpenAI's Pro mode (gpt-5.6-sol-pro,
+  luna-pro, terra-pro) is billed at the base model's standard rate, as the reasoning guide says. D: a permanent
+  discount shown on the page (MiniMax « 永久五折 » / « Permanent 50% off ») is the standard price. E: a Mainland China /
+  Beijing price does not apply to a source that does not say its region; Alibaba's « Singapore region » table is the
+  international price (a capture whose table carries no region is not used). F: a yuan cost of a model whose maker
+  publishes no yuan price is converted only with the source's rate, or the ECB reference rate when the source says it
+  starts from the maker's USD prices (the rates' spread over the run a band); a source that goes through a reseller or
+  says nothing stays out — chinese-llm-benchmark (nonelinear's own platform prices) and llm2014 (OpenRouter / Zenmux
+  relays) stay out. G: a free price (free tier, trial, free introductory offer) is never a price. H: a neighbouring
+  identity (a quantised serving id, a preview id, an alias) is not priced unless models.json already names it for the
+  key. I: two captures showing the same price cover the interval between them, unless a change is documented in it.
+  J: an inclusive end written to the second or the minute covers that whole unit (`validate.when`; a price « to
+  …T15:59:59Z » then one « from …T16:00:00Z » left one uncovered second: a build bug, fixed). Rules
+  `price-first-capture-from-release`, `price-bracketed-captures`, `price-end-inclusive-unit`,
+  `cost-currency-conversion`.
+- **Dates (the maintainer, 4 Nov 2026, the points left by the dating step 2).** 1. toolathlon's « Date » column is not
+  written (its meaning is unknown). 2. Terminal-Bench submission dates before a model's release are kept (early
+  access). 3. SimpleBench `dateAdded` before the release: kept. 4. designarena: each board's own `lastUpdateTime` is
+  accepted. 5. epoch.ai: a « Started at » does not bound the end; the upper bound stays the batch's. 6. Binary proofs:
+  the CSV / text extracted from a zip is saved with its sha256 and cited; a capture identical byte for byte to our copy
+  is its own proof (its quote « sha256 <hash> », validate.py checks the hash against the source's sha256 map). 7. A
+  per-measure pass from the saved files only: yc-bench (the 52-model data.json of 2 Oct for 43 of its 45 measures),
+  codereviewbench (each file's commit); bullshitbench per row not written (the saved commit list has messages, not
+  file versions).
 - **Effort charts** (26 Oct): a chart whose caption, title, legend or text says its points are effort levels
   ('reasoning-effort scaling'): the k-th of a series' n points in increasing cost (or tokens) order is the model's k-th
   level when the model has n levels (fact `effort-order` 'k/n', rule `chart-effort-order`, flag

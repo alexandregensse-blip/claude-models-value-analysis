@@ -976,3 +976,114 @@ row moves. Missing prices: 186 (model, currency) pairs, 1,397 cost measures (711
 Tests: `local_time_no_zone`, `date_proof_checked`, `openhands_passes_through_litellm`, `findings_dates_step2`;
 `findings_dates_route5` and `findings_doubtful_dates_run_end` updated (each new mechanism with a negative control
 that fails when it is switched off).
+
+## Added on 4 Nov 2026 (prices)
+
+**The price salvo of 3–4 Nov 2026** (agents on the web; their instructions: prix1/CONSIGNE.md of the session's
+scratchpad): for each (model, currency) whose costs were out for want of a price (dates2/prix.tsv, 186 pairs in 28
+lots), the maker's API price in that currency, proved by an exact quote of a saved file (/work/.salvo14/mig/prix1/ev/,
+sha256 in each folder's SHA256SUMS): 97 found, 18 in doubt, 114 nothing found. Written offline by the writer
+prix2/py of the scratchpad (evidence.py, normalize.py, classify.py, apply.py), every proof checked again: the file
+exists, its sha256 is the entry's, the quote is an exact substring of it. 22 quotes are in a text derived from the
+cited file (gzip decoded, tags removed, entities decoded, whitespace collapsed; or every tag replaced by « | »): that
+text is saved beside the raw file (`<raw>.<mode>.txt`, its sha256 appended to the folder's SHA256SUMS) and cited, the
+raw file and its sha256 in the record's `note`; 19 quotes made of fragments joined by « … » are cited fragment by
+fragment, each an exact substring. All 41 verify; no entry was refused for its proof.
+
+**How they are written.** An entry inside a registered entry of the same price is not duplicated (5 confirmed); one
+that joins a registered entry of the same price extends it, its new captures added to the evidence (18); one that
+overlaps a registered entry of another price is refused; the others are new (65). A bound read from a capture lies
+within the cited captures (a bound outside them is moved to them: mistral-nemo starts 29 Jul 2024, its first cited
+capture; deepseek-v4.1-flash CNY ends on its last saved capture, 6 Oct); an off-peak row's last capture is its
+standard row's (one quote holds both). An entry is not written before the model's release (kimi-k3 CNY starts on 17
+Jul, its release, not on the capture of the 16th) nor after the registry's `as_of` (2026-10-29: a capture after it
+ends the entry at `as_of`; step-3.7-flash CNY, first captured on 3 Nov, is not written). `as_of` is not raised: no
+cost needs a price after 29 Oct, and raising it would turn every entry ending at its last capture of 29 Oct into a
+last list price (`base-last-list-price` on most costs).
+
+**The maintainer's decisions of 4 Nov 2026:**
+- **A. A run between the release and the first capture of the pricing page** takes that capture's price from the
+  release (`from_basis release`), unless a launch promotion is announced or visible, a price change is documented in
+  between, or a readable capture of a maker's pricing page, on a later day than the release, does not show the
+  model's price. Applied to the pairs of the salvo's lots, whose archive the agents searched, case by case from their
+  notes (apply.py `A_RULE`): 37 applied (gemini-3.6-flash, gemini-3.5-flash-lite, gemini-3.1-flash-lite, kimi-k2.6,
+  kimi-k2.7-code USD, gpt-5.3-chat-latest, o1, o3, o4-mini, qwen3.8-max-0902, mistral-nemo …), 42 not: (a) a launch
+  promotion or price change (glm-5.3-flash 50% off, mercury-2.5 80% off, devstral-2512 free at launch, qwen2.5-7b
+  free trial, qwen3-vl-235b earlier prices), (b) a later capture without the price (glm-5.3 USD on 14 Aug, qwen3.6-plus,
+  qwen3.7-*, qwen3.8-27b / -max / -2.4t, grok-3, grok-4, kimi-k2.5, gpt-5.1-codex, o3-pro, mistral-small-3.2 …),
+  (c) earlier captures showing the row under no region (decision E: the Alibaba 2025 Qwen3 rows), (d) the archive not
+  searched over the interval (step-3.7-flash, kimi-k2-instruct, glm-5.3 CNY). Rule `price-first-capture-from-release`.
+- **B. After a retirement whose alias serves another model** (deepseek-r1 after 27 May 2025 → R1-0528, gemini-3.7-flash
+  after its routing to 3.8 Flash, grok-4 after 15 May 2026 → grok-4.3): no price, the line stays out. The two
+  entries the agents found there (gemini-3.7-flash and 3.5-flash on 8 Oct 2026) are not written; gemini-2.0-flash ends
+  at its stated shutdown (1 Jun 2026) although its price is still printed afterwards.
+- **C. OpenAI's Pro mode** (gpt-5.6-sol-pro, luna-pro, terra-pro) is billed at the base model's standard rate (the
+  reasoning guide, « bills those tokens at the selected model’s standard token rates »): the three Pro entries start on
+  the release, 9 Jul 2026 (sol-pro from gpt-5.6-sol's capture of that day).
+- **D. A permanent discount** (MiniMax « 永久五折 » / « Permanent 50% off ») is the standard price: minimax-m3 USD
+  0.30 / 1.20 / 0.06 and CNY 2.10 / 8.40 / 0.42 (and their > 512k tier).
+- **E. Region.** A Mainland China / Beijing price is not applied to a source that does not say its region: Alibaba's
+  CNY prices of qwen3-max-0123, qwen3.8-max-0902, qwen3.8-27b and qwq-32b-preview's USD price are not written.
+  Alibaba's « Singapore region » table is the international price; a capture whose single USD table carries no region
+  heading (July – 15 Aug 2025) is not used: four entries start at their first labelled capture.
+- **F. Yuan costs of US makers' models.** Read in the sources' saved files: chinese-llm-benchmark's yuan prices are
+  the catalogue of its own platform (nonelinear.com: « 模型名称标记为绿色，表示可以在本平台直接使用（包括网页和API） »,
+  « 价格单位: 元/百万tokens »), a reseller, no rate stated; llm2014 runs « 优先使用OpenRouter/Zenmux中转 » (relays),
+  no rate; SuperCLUE prices no US model in yuan. So nothing is converted: those costs stay out (no base price in CNY).
+  The ECB rates (frankfurter, 4 Nov 2026) are kept as evidence in /work/.salvo14/mig/prix1/ev/_fx/, unused. Rule
+  `cost-currency-conversion`.
+- **G. A free price is never a price**: gemini-2.5-pro-exp-03-25's free tier and devstral-2512's free launch offer are
+  not written; grok-2-1212's « cachedPromptTokenPrice $n0 » is not a cache-read class.
+- **H. Neighbouring identities** are not priced unless models.json already names them: inkling and inkling-small (the
+  serverless rows are `…:peft:262144:sampling-nvfp4`) are not written; kimi-k2-instruct and kimi-k2-instruct-0905 are
+  (models.json names kimi-k2-0711-preview / kimi-k2-0905-preview as their maker API ids), each on its single capture.
+- **I. Two captures of the same price cover the interval between them** unless a change is documented in it: 9 gaps
+  between registry entries of the same price merged (gpt-5.3-codex 22–26 Oct, grok-3 / grok-3-mini 16 Apr 2025,
+  grok-4 31 Jul 2025, gemini-2.0-flash ×2, qwen3-max-0923, qwen3-vl-32b, gpt-4o-0513 batch); not qwen2.5-7b
+  (its row left the Singapore table inside the gap). The agents' bracketed entries are kept as bracketed (haiku-3
+  13–14 Aug 2024, grok-4.20 29 Apr 2026, grok-2-1212). Rule `price-bracketed-captures`.
+- **J. The minute / second boundary was a bug.** `validate.when(s, end=True)` read « 2026-08-16T15:59:59Z » as
+  15:59:59.000000, so with the next price from 16:00:00Z the second in between was covered by neither and
+  `prices_over` reported the price date not covered (DeepSeek V4 Pro 0813 on 16 Aug 2026, V3.1 on 5 Sep 2025, GLM-5.3
+  Flash on 9 Sep 2026, DeepSeek V4 Pro preview on 26 Apr / 31 May 2026). An inclusive end written to the second or the
+  minute now covers that whole unit (a fraction of a second is exact; a date its whole day, as before). Rule
+  `price-end-inclusive-unit`.
+
+**Dates (the maintainer, 4 Nov 2026: the points left by the dating step 2).**
+1. toolathlon's « Date » column: not written (its meaning is unknown); it was held, it stays so.
+2. Terminal-Bench submission dates before the release (5 rows): kept (early access).
+3. SimpleBench `dateAdded` before the release (3 rows): kept.
+4. designarena: each board's `lastUpdateTime` is accepted (as written on 3 Nov).
+5. epoch.ai: a « Started at » does not bound the end; the upper bound stays the batch's (as written).
+6. Binary proofs: proofbench — the CSV extracted from the Wayback zip of 29 Sep 2026 (the zip whose sha256 the agent
+   recorded; checked equal to the zip's member) is cited, its sha256 added to its folder's SHA256SUMS: a Wayback
+   capture on its 35 measures (the agent's earlier per-measure first captures, 20 Aug, have no recorded sha256: not
+   used). superclue 2511 — the capture of 13 Jun 2026 is byte-identical to our workbook: its evidence quotes
+   « sha256 <hash> », which validate.py accepts only when that hash is the file's and one of the source's own saved
+   copies (`evidence_faults(e, path, own)`): a capture on its 165 measures.
+7. A per-measure pass from the saved files only: yc-bench — the 52-model data.json of commit feb032b1 (2 Oct 2026)
+   holds 43 of its 45 values (not GLM-5.3 Prime / FlashX, published on 8 Oct): a commit capture on those 43;
+   codereviewbench — each value file's commit (match.json: our copy's sha256 equals the file at that commit): 16
+   measures, 3 with no tighter bound; bullshitbench — not written: the saved commit list has messages only, no file
+   versions, so no row is tied to the commit that last changed it (see the report).
+
+**Effect** (`--fit-models catalog`, against a8266a2; each cost attributed to the first decision under which its price
+date is covered with a base price, replayed with build.py's prices_over / base_price over the registry of each stage:
+J, the salvo's entries, C, I, A — prix2/w/compare3.py): fit-quality rows 17,742 → 17,742 (lqm.load kept 16,711 →
+16,708: 3 rows republished, matched by the new costs), couples 339, Claude 56 — no quality row moves. Fit-cost rows
+9,039 → 9,113 (+121, −47; lqm.load kept 8,502 → 8,572), cost couples 268 → 273 (new: gpt-5.3-chat-latest solo,
+gpt-5.3-codex low, qwen3.8-omni-flash low / medium / nothink), Claude cost couples 55 (fable-5 high 94 → 95).
+Costs gained (status in, 120): A 69 (gemini-3.6-flash 22, gemini-3.5-flash-lite 20, gemini-3.1-flash-lite 5,
+kimi-k2.7-code 6, gpt-5.3-chat-latest 4, kimi-k2.6 4, qwen3.8-max-0902 3, qwen3.8-omni-flash 3 …), the salvo's
+prices 35 (gpt-5.3-codex 15; the first CNY prices: kimi-k3 7, glm-5.3 6, glm-5.3-flash 6 of SuperCLUE 2607,
+deepseek-v4.1-flash-1017 1), J 6 (deepseek-v4-pro-0813 on 16 Aug), the proofbench dates 2, indirect 8. Costs lost
+(47): a price date newly covered by two registered vectors, where the source's stated prices (rule B of 29 Oct) used
+to stand in: the registered vectors decide, the band to the current price is wide and the cost forms a single couple
+(J 26: deepseek-v4-pro-0813 21, deepseek-v4-flash-0731 5; A 21: gemini-3.6-flash, vals.ai, its 21 Jul list price and
+the promotion). Price-related `out:cost-not-comparable` 1,703 → 1,367; missing prices (prix2/prix.tsv) 186 pairs /
+1,397 cost measures → 156 / 1,061 (526 with quality in).
+
+Tests: `price_end_inclusive_second`, `evidence_identical_copy`, `registry_prices_salvo_4nov`, `findings_dates_4nov`;
+`findings_dates_step2` reads the « sha256 » quote of decision 6 (each new mechanism with a negative control that fails
+when it is switched off: J off → the cost straddling 16:00 is out; the identical-copy rule off → its evidence is
+refused; the registry of a8266a2 → A, C, I fail; the findings of a8266a2 → the dates fail).
