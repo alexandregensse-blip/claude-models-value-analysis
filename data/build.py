@@ -1945,6 +1945,63 @@ def count_rel_rounding(p):
     return float(step) / float(d) if d else 0.0
 
 
+def maker_api_stated(M, key):
+    """The source establishes that the run went through the maker's API: its single route chain ends at the maker's API
+    and either names it (a route fact) or comes from a harness that hands every call to it (harness-calls-route)."""
+    cand = chains(M, key)
+    if len(cand) != 1 or cand[0][0][-1] != "maker-api":
+        return False
+    known, _ = route_chain_facts(M)
+    return "maker-api" in known or cand[0][1] == "harness calls maker-api"
+
+
+def api_opening(M, key, cur):
+    """The day before which the maker's API did not serve the model on the platform of that currency (models.json
+    `api_opens`, the maintainer, 4 Nov 2026, decision 2), else None."""
+    recs = [r for r in (M.ctx.models.get(key) or {}).get("api_opens", []) if r.get("currency") == cur]
+    return max((V.when(r["after"]) for r in recs), default=None)
+
+
+def price_currency(M, C, key):
+    """(the currency of the maker's price list the cost is re-priced on, why not). The price-ratio method (the
+    maintainer, 4 Nov 2026): the model uses only cost relations inside a group, so the re-pricing needs only the ratio
+    « current price / price at the run's date », which does not depend on the currency. In the cost's currency when the
+    maker prices the model in it; else, when the maker publishes a single list (prices.json `maker_currencies`), that
+    list: for a cost with no currency written, as such; for a cost in another currency, only when the source states it
+    pays the maker's prices times one factor (fact maker-price-multiple naming that list's currency). Several lists and
+    the source not saying which, or the maker's currencies not established: doubt (None, why)."""
+    ctx, cur = M.ctx, C.get("currency")
+    if cur == "contradictory":
+        return None, "contradictory currencies"
+    pubs = {p["currency"] for p in ctx.prices["prices"] if p["model"] == key and p["route"] == "maker-api"
+            and p["kind"] == "standard"}
+    if cur in pubs:
+        return cur, ""
+    if not pubs:
+        return cur, ""                                   # no maker price at all: no base price (as before)
+    maker = (ctx.models.get(key) or {}).get("maker")
+    mc = ((ctx.prices.get("maker_currencies") or {}).get(maker) or {}).get("currencies")
+    stated = sorted({x.term for x in M.slot("spend", "maker-price-multiple") if x.level in ACCEPTED and x.term})
+    if not mc:
+        return cur, (f"cost in {cur or 'no stated currency'}: the currencies {maker} publishes its prices in are not "
+                     f"established (prices.json maker_currencies)")
+    if len(mc) > 1 and not (len(stated) == 1 and stated[0] in mc):
+        return None, (f"{maker} publishes prices in {', '.join(mc)}; the source does not say which list it pays")
+    lst = stated[0] if len(mc) > 1 else mc[0]
+    if lst not in pubs:
+        return cur, f"no {lst} price of {key} registered"
+    if cur is None:
+        M.rule("cost-price-ratio-no-currency")
+    elif stated == [lst]:
+        M.rule("cost-price-ratio-other-currency")
+    else:
+        return None, (f"cost in {cur}, {maker} publishes its prices in {lst} only: the source does not state that it "
+                      f"pays the maker's prices times one factor (fact maker-price-multiple)")
+    M.flags.append(f"cost-price-ratio:{lst}")
+    C["price_currency"] = lst
+    return lst, ""
+
+
 def reprice(M, C, key):
     """§5.3 step 1: the cost at the base price, METHODOLOGY's order. Sets C['base'] (value, prec, rule) or None and
     C['price_vectors'] (what could have applied) for the comparability step."""
@@ -1969,7 +2026,11 @@ def reprice(M, C, key):
         pd_lo, pd_hi, how = lo, pub_hi, "[run lower bound, publication]"
     C["price_date"] = dict(lo=pd_lo.isoformat() if pd_lo else None, hi=pd_hi.isoformat(), how=how)
     C["base"] = None
-    cur = C.get("currency")
+    cost_cur = C.get("currency")
+    cur, why_cur = price_currency(M, C, key)             # the list the price ratio is read on (4 Nov 2026)
+    if why_cur:
+        C["price_currency_detail"] = why_cur
+    same_cur = cur is not None and cur == cost_cur      # the source's own prices and tokens × prices need its currency
     cfg = (M.fields.get("configuration") or {}).get("value")
     bp = base_price(ctx, key, cur, cfg)
     route = "maker-api"
@@ -1977,6 +2038,14 @@ def reprice(M, C, key):
         pd_lo = ctx.released(key)
         C["price_date"]["lo"] = pd_lo.isoformat()
         C["price_date"]["how"] += " (early access: from the release)"
+    opened = api_opening(M, key, cur) if cur else None
+    if opened is not None and pd_lo < opened and maker_api_stated(M, key):
+        # the maker's API did not serve the model before it opened (the maintainer, 4 Nov 2026, decision 2): a run the
+        # source sends through the maker's API lies after the opening; a run on another or an unknown route is not moved
+        pd_lo = opened
+        C["price_date"]["lo"] = pd_lo.isoformat()
+        C["price_date"]["how"] += " (through the maker's API: not before its opening)"
+        M.rule("price-date-after-api-opening")
     if pd_lo > pd_hi:
         pd_lo = pd_hi
     vecs, covered = prices_over(ctx, key, pd_lo, pd_hi, route, cur, cfg) if cur else ([], False)
@@ -2003,7 +2072,7 @@ def reprice(M, C, key):
         C["std_cost"] = float(C["number"]) / factors[0]
         M.rule("cost-tier-factor")
     if bp is None:
-        C["reprice_detail"] = f"no base price for {key} in {cur or 'an unstated currency'}"
+        C["reprice_detail"] = why_cur or f"no base price for {key} in {cur or 'an unstated currency'}"
         return
     if bp.get("_scheduled_list"):
         M.flags.append("base-scheduled-list-price")
@@ -2015,9 +2084,20 @@ def reprice(M, C, key):
     C["base_vector"] = dict(base)
     k_tier = (C.get("tier") or {}).get("factor", 1.0)
     cost, prec = C.get("std_cost", float(C["number"])), (C.get("prec") / k_tier if C.get("prec") is not None else None)
-    stated, why = stated_prices(M)
+    stated, why = stated_prices(M) if same_cur else (None, "")
     if stated or why:
         C["stated_prices"] = dict(classes=stated, used=False, **({"why": why} if why else {}))
+    if stated and covered and len(vecs) > 1:
+        # the source writes the price it used and it is one of the registered prices over its price date: that price
+        # applies, no band (the maintainer, 4 Nov 2026, decision 1; vals.ai legal_bench, deepseek-v4-pro-0813 1.32 / 3.96)
+        hit = [v for v in vecs if all(v.get(k) is not None and abs(v[k] - p) <= 1e-9 * max(1.0, abs(p))
+                                      for k, p in stated.items())]
+        if len(hit) == 1:
+            vecs = hit
+            C["price_vectors"] = vecs
+            C["stated_prices"]["used"] = "registered"
+            M.rule("cost-stated-price-registered")
+            M.flags.append("cost-stated-price-registered")
     if stated and not tiers and (not covered or not vecs):
         # no registered price covers the price date, but the source states the prices it applied: they are the price
         # vector over the price date, re-priced to the base price as a registered one would be (cost-stated-prices)
@@ -2027,7 +2107,7 @@ def reprice(M, C, key):
         M.rule("cost-stated-prices")
         M.flags.append("cost-stated-prices")
     if not covered or not vecs:
-        C["reprice_detail"] = "prices over the price date not registered"
+        C["reprice_detail"] = (why_cur + "; " if why_cur else "") + "prices over the price date not registered"
         return class_ratio(M, C, key, pd_hi)
     # 1. the publisher's own figure at the base price
     if all(v == base for v in vecs):
@@ -2056,7 +2136,7 @@ def reprice(M, C, key):
         C["long_context"] = "tiers resolved from requests and per-call sizes"
     classes = {k: v for k, v in tok.items() if k in base}
     usage_unit_ok = not C.get("usage_unit") or not C.get("unit") or C["usage_unit"] == C["unit"]
-    if len(vecs) == 1 and classes and usage_unit_ok:
+    if len(vecs) == 1 and classes and usage_unit_ok and same_cur:
         old = vecs[0]
         ri = C.get("reasoning_included")                 # True: inside output; False: added to it; None: both tried
         variants = [False] if ri is True or "tokens-reasoning" not in tok else [True] if ri is False else [False, True]

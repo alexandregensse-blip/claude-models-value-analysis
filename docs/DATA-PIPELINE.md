@@ -319,7 +319,10 @@ components' costs, only on one unit and one run; otherwise the composite's cost 
    `out:cost-not-comparable` (until 3 Nov an unrepriced model whose price change over the price-date interval was
    uniform across classes formed its own subset at its old price).
 3. A subset with fewer than 2 couples → `out:cost-single-couple`; `subscription` → `out:cost-basis`.
-4. Promotions and off-peak prices are never the base. A promotion is a price charged over its interval: it is one of
+4. The price list read (the maintainer, 4 Nov 2026): the cost's own currency; else the maker's single list
+   (`maker_currencies`) by the price ratio, for a cost with no currency or, with the source's `maker-price-multiple`
+   fact, in another currency; the cost keeps its currency in its part.
+5. Promotions and off-peak prices are never the base. A promotion is a price charged over its interval: it is one of
    the prices a source may have applied over the price date (`prices_over`), so a window where only a promotion is
    printed is covered (26 Oct).
 
@@ -444,6 +447,27 @@ Decided by the maintainer during the reviews:
   …T15:59:59Z » then one « from …T16:00:00Z » left one uncovered second: a build bug, fixed). Rules
   `price-first-capture-from-release`, `price-bracketed-captures`, `price-end-inclusive-unit`,
   `cost-currency-conversion`.
+- **Prices and dates, later (the maintainer, 4 Nov 2026).** 1. The price the source writes, when it equals one of the
+  registered prices over its price date, applies alone, without a band (`cost-stated-price-registered`). 2. A model
+  whose maker writes that its API is not open yet (GLM-5.3: « The GLM-5.3 API is coming soon. », docs.z.ai, 15 Aug 2026)
+  carries models.json `api_opens`; a cost whose route the source states to be the maker's API has its price date start
+  no earlier than that day (`price-date-after-api-opening`), the first price applying from it (A at the API's opening);
+  another or an unknown route stays out. 3. A capture without the model blocks A only if that page lists the model
+  when it has a price (openai.com/api/pricing never lists o3-pro, gpt-5.1-codex, -mini: A from their release). 4. The
+  q2 prices (step-3.7-flash USD and CNY, kimi-k2-instruct USD) written, then A and I. 5. Alibaba's single USD table with
+  no region heading on www.alibabacloud.com is the international price (it replaces decision E's exclusion of those
+  captures). 6. deepseek-v4.1-flash on 10 Sep: the announcement dates the new price (04:00 UTC), not the model's first
+  serving: out as before. 7. bullshitbench: a run-end per row (the latest `finished_at_utc` of its responses). 8.
+  proofbench: the zip of 20 Aug recorded (sha256), 34 measures dated. 9. livebench G2's URL. 10. arXiv URLs in https.
+- **The price-ratio method (the maintainer, 4 Nov 2026; a method change, before main: his yes).** The fit reads only cost
+  relations inside a group, so a re-pricing needs only « current price / price at the run's date », independent of
+  the currency. When the maker publishes no price in the cost's currency, that ratio (band, tiers, classes) is read on
+  the maker's list in the currency it publishes, if it publishes a single one (prices.json `maker_currencies`, each
+  page checked); the cost keeps its currency and unit, a group never mixes two currencies. A cost in another currency
+  needs the source's statement that it pays the maker's prices times one factor (fact `maker-price-multiple`: a rate,
+  or a relay passing the maker's prices on); a cost with no currency written takes the single list's ratio as such;
+  several lists and the source not saying which, or the maker's currencies not established: doubt, out. Rules
+  `cost-price-ratio-other-currency`, `cost-price-ratio-no-currency` (they replace F's « converted only with a rate »).
 - **Dates (the maintainer, 4 Nov 2026, the points left by the dating step 2).** 1. toolathlon's « Date » column is not
   written (its meaning is unknown). 2. Terminal-Bench submission dates before a model's release are kept (early
   access). 3. SimpleBench `dateAdded` before the release: kept. 4. designarena: each board's own `lastUpdateTime` is

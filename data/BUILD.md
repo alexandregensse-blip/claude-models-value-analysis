@@ -1138,3 +1138,92 @@ build; `date_proof_checked` (the build keeps a date whatever its proof; `evidenc
 refuses a wrong sha256 or quote); `legacy_path` (a legacy row not in its CSV stays `legacy:in`; `check_saved` reports
 it); `findings_dates_step2` and `registry_prices_salvo_4nov` check a proof's file only while it is reachable, its
 trace (url, file, sha256, where, quote) always; `examples` no longer needs the examples' saved copies.
+
+## Added on 4 Nov 2026 (later: the maintainer's decisions 1–10 and the price-ratio method)
+
+The maintainer's decisions of 4 Nov 2026, after the price and date passes above. Every new value, date or price is
+written with its exact quote, its URL and its capture date; each proof was checked once, at the writing (file,
+sha256, exact substring), by the writers prix4/w/{bsb,proofbench,reg}.py of the session's scratchpad.
+
+1. **The price the source writes** (rule `cost-stated-price-registered`). When the source writes the prices it used
+   (rule B's `price-table` facts with a price-class term) and they equal, on every class it states, exactly one of
+   the registered price vectors over its price date, that vector alone applies: no band. Example: vals.ai legal_bench
+   #M19, deepseek-v4-pro-0813, 1.32 / 3.96 (two registered vectors since J). Not equal to any, or equal to several →
+   as before (the band over the registered vectors).
+2. **GLM-5.3 before its API opened** (rule `price-date-after-api-opening`, models.json `api_opens`). The maker wrote that
+   the API was not open yet: docs.z.ai on 15 Aug 2026 « The GLM-5.3 API is coming soon. » (USD platform), docs.bigmodel.cn
+   on 17 Aug « 模型 API 将会尽快上线，敬请期待。 » (CNY platform). A cost whose single route chain is the maker's API,
+   named by the source (or a harness whose `calls_route` is it), has its price date start no earlier than that day;
+   the first captured price applies from that day (decision A at the API's opening: no readable pricing-page capture
+   in between without the price). A run on another or an unknown route is not moved: its days before the opening stay
+   uncovered, out. Qwen3.8-27B: not written — the opening date (17 Aug, newly-released-models) is the China site's,
+   whose prices decision E does not apply, and no international date is saved; no cost moves either way.
+3. **What blocks rule A.** A capture « without the model » blocks A only if that page lists the model when it has a
+   price. Checked case by case on the saved captures: openai.com/api/pricing never lists o3-pro (a calculator menu
+   only), gpt-5.1-codex or gpt-5.1-codex-mini → their first price applies from the release. Still blocking (the same
+   page lists the model with its price later): kimi-k2.5, qwen3-coder-next, qwen3-vl-32b-instruct (the /models page,
+   whose prices also change between Oct and Dec 2025), qwen3.6-plus, qwen3.7-flash / -plus, qwen3.8-2.4t / -27b / -max,
+   grok-3, grok-3-mini, grok-4, grok-2-1212 (x.ai/api lists it at $2.00 in Apr 2025), qwen2.5-72b, qwen3-coder-480b,
+   minimax-m3 CNY, aion-rp-llama-3.1-8b, muse-spark-1.1, mistral-small-3.2, gemma-4. Not decided (listed in the
+   report): qwen3-max-0123, kimi-k2.7-code CNY, reka-edge.
+4. **Prices of q2**: step-3.7-flash USD (8 Jun → 9 Oct 2026, joined by I to the 13 Oct entry; A from the release,
+   29 May) and CNY (16 Jun → 21 Oct, A from 29 May); kimi-k2-instruct USD (kimi-k2-0711-preview, 12 Jul 2025 →
+   30 Mar 2026, joined to the 17 Dec entry; A from the release). glm-5.3 CNY: nothing found (q2).
+5. **Alibaba's single USD table with no region heading** on www.alibabacloud.com is the international price: the
+   captures decision E had left out are used again (qwen3-235b-a22b-instruct-2507 from 24 Jul 2025,
+   qwen3-30b-a3b-instruct-2507 and qwen3-coder-30b-a3b-instruct from 1 Aug, qwen2.5-7b-instruct from 14 Jun 2025 —
+   the same table form, a capture of June), then A where nothing blocks it (the first three from their release).
+6. **deepseek-v4.1-flash on 10 Sep 2026**: not changed. The saved announcement says « V4.1-Flash is now live on the
+   DeepSeek API » and « New pricing takes effect at 04:00 UTC on Sept 10, 2026 »: it dates the new price, not the
+   moment the model was first served (the release is dated « 2026/09/10 » only), so a run of that day may lie before
+   04:00: out, as before.
+7. **bullshitbench, one date per row**: each of the 236 measures gets a `run-end` fact, the latest `finished_at_utc` of
+   its model row's responses in the response parts that data/v2/latest/manifest.json lists for the leaderboard we hold
+   (its sha256 in the manifest); `where` gives the GitHub URL of the file at commit 92793d4 and the line.
+8. **proofbench**: the Wayback zip of 20 Aug 2026 (sha256 18bbff41…) and its extracted CSV recorded in the source's
+   map; a capture W0 on the 34 measures whose row (key and value) it holds.
+9. **livebench** src-livebench-lb2-2026-10-14 G2: url https://livebench.ai/static/js/main.074b2ee8.js (the maintainer's
+   reading of the 20 Oct index.html; that index is no longer on disk).
+10. **arXiv URLs** written as https://arxiv.org/… (4 sources).
+
+**The price-ratio method (a method change, before main: the maintainer's yes).** The model reads only cost relations
+inside a group (its offset o_b is free); re-pricing a cost needs only the ratio « current price / price at the run's
+date », which does not depend on the currency. So (`price_currency`):
+- the cost's own currency when the maker prices the model in it (as before);
+- else, when the maker publishes a single list (prices.json `maker_currencies`: anthropic, google, openai, xai — USD,
+  each pricing page checked for every other currency), that list's ratio, band, tiers and classes; the cost keeps its
+  currency and unit, and its part (basis × method × unit × currency × route) keeps its currency, so a group never mixes
+  two currencies (`~c<n>`):
+  - a cost with **no currency written**: as such (rule `cost-price-ratio-no-currency`);
+  - a cost **in another currency**: only with a fact `maker-price-multiple` (new fact type, spend slot, term the
+    list's currency) quoting the source's statement that it pays the maker's prices times one factor (a rate, or a
+    relay passing the maker's prices on); rule `cost-price-ratio-other-currency`;
+- several lists and the source not saying which, or a maker absent from `maker_currencies` (Alibaba, DeepSeek,
+  Moonshot, Zhipu, …: several currencies, or not checked) → doubt, out;
+- tokens × prices (cost-delta-on-source) and the source's own stated prices are read only in the cost's own currency;
+  flag `cost-price-ratio:<list>`.
+No source of the other-currency costs states such a factor: chinese-llm-benchmark pays its own platform's prices
+(« 模型名称标记为绿色，表示可以在本平台直接使用… »), llm2014 runs « 优先使用OpenRouter/Zenmux中转 » and the registry knows
+nothing of Zenmux (not in routes.json), SuperCLUE's yuan costs here are of Alibaba / StepFun models (makers with yuan
+lists), the USD costs of Tencent models (hy3, hy4-preview) are of a maker whose USD list is not checked. So the 138
+other-currency costs (121 with quality in) stay out, and the method moves the costs with no currency written: 327
+reaching the cost step → 145 in the fit (104 + 21 in, 88 single couple, 20 republished).
+
+**Effect** (`--fit-models catalog`, against 0796bfd; S/prix4/report.txt of the session's scratchpad): fit-quality rows
+17,742 → 17,748 (+6, decision 7: bullshitbench rows whose run end now lies where OpenRouter's levels are known, e.g.
+opus-4.8 nothink run by 29 May 2026; Claude rows opus-4.7, opus-4.8, sonnet-4.6 nothink +1 each; lqm.load kept 16,708 →
+16,709, 5 republished matched by the new costs), quality couples 339, Claude 56. Fit-cost rows 9,114 →
+9,366 (+252, 0 out; lqm.load kept 8,573 → 8,796): the price-ratio method 145 (haiku-5.5 20, opus-5.5 14, opus-5 11,
+fable-5.1 9, gpt-6-astra 8 …: Anthropic's Haiku 5.5 system card, Epoch's archive, OpenAI's GPT-6 Astra launch),
+decision 1 102 (gpt-5.6-luna 26, gpt-5.6-terra 25, deepseek-v4-pro-0813 21, gemini-3.6-flash 21, deepseek-v4-flash-0731
+5: the 47 costs lost on 4 Nov are back), decision 2 5 (glm-5.3: spirebench « Z.ai API » ×3 … arxiv-2610.11539 « native
+hosted APIs »), decision 3 2 (llm_chess gpt-5.1-codex low, gpt-5.1-codex-mini high); decisions 4 and 5: 15 costs from
+not comparable to single couple. Cost couples 274 → 276 (gpt-5.1-codex low, gpt-5.1-codex-mini high), Claude cost
+couples 55 (rows: haiku-5.5, opus-5.5, opus-5, fable-5.x, sonnet-5.5 … +1 to +7 each). Missing prices (prix.tsv):
+159 (model, currency) pairs, 1,047 cost measures (521 with quality in).
+
+Tests: `cost_stated_price_registered`, `cost_price_ratio_currency`, `cost_price_ratio_no_currency`,
+`price_date_after_api_opening`, `registry_prices_4nov_later`, `findings_4nov_later` (each with negative controls;
+switching the mechanism off — `maker_api_stated`, `price_currency`, `stated_prices` — makes its test fail);
+`registry_prices_salvo_4nov` and `findings_dates_4nov` updated; the tests that read saved copies check them only while
+reachable (`in_saved`, `sha_saved`: copies under /work/.salvo14 are being removed).

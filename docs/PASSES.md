@@ -5,6 +5,29 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Prices written by the sources, API openings, prices in another currency (4 Nov 2026, later still)
+
+**Method.** No web, no agent, no fit. The maintainer's decisions 1–10 of 4 Nov 2026 applied from the saved files
+(prix3 q1–q4 of the session's scratchpad; every proof checked at the writing: file, sha256, exact quote), and the
+price-ratio method (a method change: the before / after below, for the maintainer's yes before main).
+
+**Written.** Findings: 236 bullshitbench `run-end` facts (latest `finished_at_utc` per row), a proofbench capture of
+20 Aug 2026 with its zip's sha256 on 34 measures, livebench G2's URL, 5 arXiv URLs. Registry: step-3.7-flash USD and
+CNY, kimi-k2-instruct USD (q2), 4 Alibaba entries back to their unlabelled 2025 captures, A from the release for
+o3-pro, gpt-5.1-codex, gpt-5.1-codex-mini, step-3.7-flash ×2, kimi-k2-instruct and three Qwen 2507 models; GLM-5.3's
+`api_opens` (15 Aug USD, 17 Aug CNY) with its first prices from those days; `maker_currencies` for Anthropic, Google,
+OpenAI, xAI (USD only). Not written: deepseek-v4.1-flash's hour on 10 Sep (the announcement dates the price, not the
+model), qwen3.8-27b's API opening (China site only), three A cases left open (qwen3-max-0123, kimi-k2.7-code CNY,
+reka-edge).
+
+**Effect** (against 0796bfd). Quality rows 17,742 → 17,748 (+6 bullshitbench rows newly dated), couples 339. Cost rows
+9,114 → 9,366 (+252, none lost): costs with no currency re-priced on the maker's single USD list 145 (Haiku 5.5 system
+card, Epoch's archive, GPT-6 Astra launch …), the source's written price equal to a registered one 102 (vals.ai: GPT-5.6
+Luna / Terra, DeepSeek V4 Pro 0813, Gemini 3.6 Flash — the 47 costs lost on 4 Nov back), GLM-5.3 through Z.ai's API after
+its opening 5, gpt-5.1-codex / -mini from their release 2. Cost couples 274 → 276; Claude cost couples 55. The 138 costs
+in a currency their maker does not publish (121 with quality in: chinese-llm-benchmark, llm2014, SuperCLUE, Tencent's in
+USD) stay out: no source states it pays the maker's prices times one factor.
+
 ## The findings self-sufficient, the build a filter (4 Nov 2026, later)
 
 **Principle (the maintainer, 4 Nov 2026).** « Les fichiers findings recensent tout. Ils doivent garder une liste des

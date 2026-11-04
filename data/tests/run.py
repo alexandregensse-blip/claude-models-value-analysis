@@ -32,6 +32,18 @@ def base(as_of="2026-10-01"):
     return sc
 
 
+def in_saved(quote, path):
+    """A quote in its saved copy while the copy is reachable; once the copies are removed (the maintainer, 4 Nov 2026:
+    the findings write every value, the copies may be deleted), only the trace is left to check."""
+    if not os.path.isfile(path):
+        return True
+    return quote in open(path, encoding="utf-8").read()
+
+
+def sha_saved(path, h):
+    return not os.path.isfile(path) or hashlib.sha256(open(path, "rb").read()).hexdigest() == h
+
+
 LOW, HIGH, MED = ("effort-setting", "low"), ("effort-setting", "high"), ("effort-setting", "medium")
 
 
@@ -832,8 +844,9 @@ def komodor_litellm_chain():
     ms = {m["id"]: m for m in json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json")))["measures"]}
     h = [F[i] for i in ms["M7"]["facts"]["harness"]]
     eq([(x["term"], x["where"][:17]) for x in h], [("claude-code", "README.md, line 4")], "M7: Claude Code, README l.4")
-    line4 = open(h[0]["file"], encoding="utf-8").read().split("\n")[3]
-    eq(h[0]["quote"] in line4, True, "the quote is on line 4")
+    if os.path.isfile(h[0]["file"]):                    # while the saved copy is reachable
+        line4 = open(h[0]["file"], encoding="utf-8").read().split("\n")[3]
+        eq(h[0]["quote"] in line4, True, "the quote is on line 4")
     eq(sorted(m for m, x in ms.items() if F[x["facts"]["route"][0]].get("term") == "litellm"),
        sorted(ms), "LiteLLM on every config's route (the METHOD's Model routing row)")
     lr = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["litellm"]
@@ -869,12 +882,12 @@ def findings_dates_route5():
     for sid, val in (("src-sense-bench.com-leaderboard-2026-10-15", "2026-10-13"),
                      ("src-github-bughuntbench-board-2026-10-19", "2026-10-19")):
         p = src(sid)["published"]
-        eq((p["value"], "board last-updated label" in p["where"], p["quote"] in open(p["file"], encoding="utf-8").read()),
+        eq((p["value"], "board last-updated label" in p["where"], in_saved(p["quote"], p["file"])),
            (val, True, True), f"B2 {sid}")
     for sid, val in (("src-anthropic-sonnet-5-launch-page-2026-10-27", "2026-10-14T05:02:58Z"),
                      ("src-snowflake-data-eng-bench-2026-10-12", "2026-08-14T17:18:28Z")):
         p = src(sid)["published"]
-        eq((p["value"], "modification date" in p["where"], p["quote"] in open(p["file"], encoding="utf-8").read()),
+        eq((p["value"], "modification date" in p["where"], in_saved(p["quote"], p["file"])),
            (val, True, True), f"B3 {sid}")
     # dating step 2 (3 Nov 2026) later dated designarena 18 Oct by its boards' own metadata.lastUpdateTime (the
     # Security page's date stays unused): only a step-2 date with its evidence may stand there
@@ -915,7 +928,7 @@ def findings_doubtful_dates_run_end():
         for m in ms(sid):
             fs = [F[i] for i in m["facts"]["run_date"]]
             for f in fs:
-                eq(f["quote"] in open(f["file"], encoding="utf-8").read(), True, f"{sid} {f['id']}: quote in file")
+                eq(in_saved(f["quote"], f["file"]), True, f"{sid} {f['id']}: quote in file")
             out[m["id"]] = [(f["says"], f["value"]) for f in fs]
         return out
     d = dates("src-luminairprime-openwrt-2026-10-20")
@@ -966,7 +979,7 @@ def openhands_litellm_chain():
     eq(sorted(k for k, v in lit.items() if len(v) == 1), sorted(lit), "LiteLLM on every measure's route slot")
     ids = {F[i]["quote"] for m in ms for i in m["facts"]["model"] if i in F and F[i]["says"] == "model-api-id"}
     eq(all(v[0]["quote"] in ids and v[0]["quote"].count("litellm_proxy/") == 1
-           and v[0]["quote"] in open(v[0]["file"], encoding="utf-8").read() for v in lit.values()), True,
+           and in_saved(v[0]["quote"], v[0]["file"]) for v in lit.values()), True,
        "each copies the quote of a litellm_proxy/ id already extracted")
     R = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]
     eq(("litellm_proxy/" in (R["litellm"].get("name_prefixes") or []), "OpenHands" in R["litellm"]["note"]),
@@ -995,7 +1008,7 @@ def changelog_bound_scope():
     def pub(sid):
         return json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))["published"]
     p = pub("src-cognition-frontiercode-leaderboard-2026-10-18")
-    eq((p["value"], p["quote"], p["quote"] in open(p["file"], encoding="utf-8").read()),
+    eq((p["value"], p["quote"], in_saved(p["quote"], p["file"])),
        ("2026-10-13", "Models added to the leaderboard and changes to how results are reported.", True),
        "cognition: the changelog says it records added models: kept")
     eq(pub("src-posttrainbench-v12-2026-10-20"), None,
@@ -2650,8 +2663,8 @@ def openhands_passes_through_litellm():
     R = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]
     pt = R["openhands"]["passes_through"]
     e = pt["evidence"][0]
-    eq((pt["route"], pt["rule"], e["quote"] in open(e["file"], encoding="utf-8").read(),
-        hashlib.sha256(open(e["file"], "rb").read()).hexdigest() == e["sha256"]),
+    eq((pt["route"], pt["rule"], in_saved(e["quote"], e["file"]),
+        sha_saved(e["file"], e["sha256"])),
        ("litellm", "harness-passes-through", True, True), "routes.json: OpenHands → LiteLLM, its evidence")
     eq(R["claude-code"].get("passes_through"), None, "negative: Claude Code has none")
 
@@ -2694,7 +2707,7 @@ def findings_dates_step2():
                 # its saved copy is reachable (the writer's check, 4 Nov 2026: the copies are then removed)
                 ok = all(e.get(k) for k in ("url", "file", "sha256", "where", "quote"))
                 if ok and os.path.isfile(e["file"]):
-                    ok = hashlib.sha256(open(e["file"], "rb").read()).hexdigest() == e["sha256"] \
+                    ok = sha_saved(e["file"], e["sha256"]) \
                         and (e["quote"] in open(e["file"], encoding="utf-8", errors="replace").read()
                              or (e["quote"] == "sha256 " + e["sha256"] and e["sha256"] in (d.get("sha256") or {}).values()))
                 if not ok:
@@ -2799,7 +2812,8 @@ def registry_prices_salvo_4nov():
     eq(g("o1")[0][::2], ("2024-12-17", "release"), "A: o1 from its release (first capture 20 Dec, salvo p19)")
     eq(g("glm-5.3-flash")[0][::2], ("2026-08-29", "earliest-capture"), "negative A: the first capture shows a launch promotion")
     eq(g("qwen3.8-27b")[0][::2], ("2026-08-31", "earliest-capture"), "negative A: the 11 Aug capture does not name it")
-    eq(g("glm-5.3")[0][::2], ("2026-08-19", "earliest-capture"), "negative A: the 14 Aug capture lists GLM-5.3 without a price row")
+    eq(g("glm-5.3")[0][::2], ("2026-08-15", "release"),
+       "A at the API's opening (decision 2, later on 4 Nov): the 14 Aug capture, before the API opened, no longer blocks")
     # I: two captures of the same price cover the interval between them
     eq([x[:2] for x in g("grok-4")][:1], [("2025-07-12", "2025-11-02")], "I: grok-4 12 Jul → 2 Nov 2025, one entry over 31 Jul")
     eq(len(g("qwen2.5-7b-instruct")), 2, "negative I: the row left the Singapore table in the gap (not merged)")
@@ -2817,11 +2831,13 @@ def registry_prices_salvo_4nov():
     # E: no Beijing / Mainland China price; Alibaba's Singapore table is international
     eq([g(k, "CNY") for k in ("qwen3.8-27b", "qwen3.8-max-0902", "qwen3-max-0123")], [[], [], []], "negative E: Beijing prices")
     eq(g("qwq-32b-preview"), [], "negative E: Mainland-China-only USD price")
-    eq(g("qwen3-30b-a3b-instruct-2507")[0][0], "2026-01-15", "E: the unlabelled 1 Aug 2025 capture is not used")
+    eq(g("qwen3-30b-a3b-instruct-2507")[0][::2], ("2025-07-28T07:31:27Z", "release"),
+       "E replaced by decision 5 (later on 4 Nov): the unlabelled 1 Aug 2025 capture is the international price, A from the release")
     # G: a free price is never a price; H: a neighbouring id only where models.json names it
     eq((g("gemini-2.5-pro-exp-03-25"), g("devstral-2512")[0][0]), ([], "2026-01-28"), "negative G: free tier, free launch")
     eq((g("inkling"), g("inkling-small")), ([], []), "negative H: the sampling-nvfp4 serving variant")
-    eq(g("kimi-k2-instruct"), [("2025-12-17", "2025-12-17", "earliest-capture")], "H: kimi-k2-0711-preview is a name of the key")
+    eq(g("kimi-k2-instruct"), [("2025-07-11T00:55:12Z", "2026-03-30", "release")],
+       "H: kimi-k2-0711-preview is a name of the key (extended by q2 and A, later on 4 Nov)")
     # B: no price after a retirement whose alias serves another model
     eq(g("gemini-3.7-flash")[-1][1], "2026-10-07", "negative B: gemini-3.7-flash ends at its routing to 3.8 Flash")
     eq(max(x[1] for x in g("grok-3")), "2026-05-15T18:59:59Z", "negative B: grok-3 ends at the 15 May redirect")
@@ -2859,8 +2875,8 @@ def findings_dates_4nov():
        "6: the workbook capture identical to our copy")
     s = src("src-epoch.ai-proofbench-external-2026-10-20")
     w = [c for c in s["captures"] if c["kind"] == "wayback"]
-    eq((len(w), w[0]["evidence"][0]["file"].endswith("20260929161354/proofbench_external.csv")), (1, True),
-       "6: the CSV extracted from the zip, cited")
+    eq((len(w), w[-1]["evidence"][0]["file"].endswith("20260929161354/proofbench_external.csv")), (2, True),
+       "6: the CSV extracted from the zip, cited (and the 20 Aug zip, decision 8 later on 4 Nov)")
     ms = mea("src-collinear-ai-yc-bench-2026-10-15")
     g = [c["id"] for c in src("src-collinear-ai-yc-bench-2026-10-15")["captures"] if c.get("commit", "").startswith("feb032b1")]
     F = {f["id"]: f for f in src("src-collinear-ai-yc-bench-2026-10-15")["facts"]}
@@ -2870,7 +2886,191 @@ def findings_dates_4nov():
     eq(sorted(c["captured"] for c in s["captures"] if c["kind"] == "commit")[:2], ["2026-09-29T17:30:18Z", "2026-09-29T17:42:45Z"],
        "7: codereviewbench, the commit of each file")
     eq([c for c in src("src-github-bullshitbench-2026-10-13")["captures"] if "4 Nov" in (c.get("note") or "")], [],
-       "negative 7: bullshitbench per row not written (commit messages only)")
+       "7: bullshitbench, no capture per row (commit messages only); its rows dated by their responses (decision 7, later)")
+
+@test
+def cost_stated_price_registered():
+    # decision 1 (the maintainer, 4 Nov 2026): the source writes the price it used and it is one of the registered
+    # prices over its price date → that price applies, no band (vals.ai legal_bench #M19, deepseek-v4-pro-0813 1.32 / 3.96)
+    def scenario(stated):
+        sc = base()
+        for k in ("ma", "mb"):
+            sc.prices["prices"] += [price(k, "2026-01-01", "2026-06-30", {"input": 2, "output": 10}),
+                                    price(k, "2026-07-01", "2026-10-01", {"input": 1, "output": 5})]
+        s = sc.source("a", published="2026-08-01")
+        ms = []
+        for k, cost in (("ma", "4.0"), ("mb", "2.0")):
+            more = {"spend": [("price-table", v, {"term": c, "written": f"${v}", "about": f"{k}-{len(ms) + 1}",
+                                                  "quote": f"{k}: ${v}"}) for c, v in stated]}
+            ms.append(sc.m(s, model=k, effort=[LOW], cost=cost, run_date=[("run-start", "2026-06-01")], more=more))
+        return sc.run(), ms
+    r, (m1, m2) = scenario([("input", "2"), ("output", "10")])
+    C = r[m1]["fields"]["cost"]
+    eq((r.c(m1), r.c(m2)), ("in", "in"), "the stated price is a registered one: re-priced from it")
+    eq((C["base"]["rule"], C["base"]["value"], C.get("band")), ("cost-uniform-factor", 2.0, None), "× 0.5, no band")
+    eq(("cost-stated-price-registered" in r[m1]["flags"], C["stated_prices"]["used"]), (True, "registered"), "flagged")
+    # negative controls: the stated price is none of the registered ones → the band over both, as before; nothing stated
+    r, (m1, m2) = scenario([("input", "3"), ("output", "10")])
+    C = r[m1]["fields"]["cost"]
+    eq((C.get("band") is not None, "cost-stated-price-registered" in r[m1]["flags"]), (True, False), "negative: not registered → band")
+    r, (m1, m2) = scenario([])
+    eq((r[m1]["fields"]["cost"].get("band") is not None, "cost-stated-price-registered" in r[m1]["flags"]), (True, False),
+       "negative: nothing stated → band")
+
+
+def _ratio_scenario(currency="CNY", factor_fact=True, maker_cur=("USD",), publish=("USD",), route=()):
+    sc = base()
+    for k in ("ma", "mb"):
+        for cur in publish:
+            sc.prices["prices"] += [price(k, "2026-01-01", "2026-06-30", {"input": 2, "output": 10}, currency=cur),
+                                    price(k, "2026-07-01", "2026-10-01", {"input": 1, "output": 5}, currency=cur)]
+    if maker_cur is not None:
+        sc.prices["maker_currencies"] = {"anthropic": {"currencies": list(maker_cur), "evidence": EV}}
+    s = sc.source("a", published="2026-05-01")
+    ms = []
+    for k, cost in (("ma", "14.0"), ("mb", "7.0")):
+        more = {"spend": [("maker-price-multiple", "按官方美元价格乘以汇率 7.1 计", {"term": "USD", "about": None,
+                                                                      "quote": "按官方美元价格乘以汇率 7.1 计"})]} if factor_fact else None
+        ms.append(sc.m(s, model=k, effort=[LOW], cost=cost, currency=currency, more=more, route=route))
+    return sc.run(), ms
+
+
+@test
+def cost_price_ratio_currency():
+    # the price-ratio method (the maintainer, 4 Nov 2026): the fit reads cost relations inside a group only, so a cost
+    # needs only « current price / price at its date »: in a currency the maker does not publish, read on the maker's
+    # single list, when the source states it pays the maker's prices times one factor; the cost keeps its currency
+    r, (m1, m2) = _ratio_scenario()
+    C = r[m1]["fields"]["cost"]
+    eq((r.c(m1), r.c(m2)), ("in", "in"), "a CNY cost of a USD-only maker, the source's factor stated")
+    eq((C["base"]["rule"], C["base"]["value"], C["currency"], C["part"][3], C["price_currency"]),
+       ("cost-uniform-factor", 7.0, "CNY", "CNY", "USD"), "× 0.5 (the USD ratio); the cost stays in yuan, its own part")
+    eq(("cost-price-ratio:USD" in r[m1]["flags"], "cost-price-ratio-other-currency" in r[m1]["rules_used"]), (True, True), "flagged")
+    eq({row["group"] for row in r.rows("fit-cost.csv")}, {"s1"}, "one group, in yuan only")
+    # negative controls: no factor stated → out; the maker's currencies not established → out; two lists → out
+    r, (m1, m2) = _ratio_scenario(factor_fact=False)
+    eq((r.c(m1), "maker-price-multiple" in r[m1]["fields"]["cost"]["reprice_detail"]), ("out:cost-not-comparable", True),
+       "negative: the source does not state the factor")
+    r, (m1, m2) = _ratio_scenario(maker_cur=None)
+    eq((r.c(m1), "maker_currencies" in r[m1]["fields"]["cost"]["reprice_detail"]), ("out:cost-not-comparable", True),
+       "negative: the maker's currencies not established")
+    r, (m1, m2) = _ratio_scenario(maker_cur=("USD", "JPY"), factor_fact=False, publish=("USD", "JPY"))
+    eq((r.c(m1), "does not say which list" in r[m1]["fields"]["cost"]["reprice_detail"]), ("out:cost-not-comparable", True),
+       "negative: two lists, the source does not say which")
+
+
+@test
+def cost_price_ratio_no_currency():
+    # a cost with no currency written: the maker's single list gives its ratio (no factor fact needed); several lists → out
+    r, (m1, m2) = _ratio_scenario(currency=None, factor_fact=False)
+    C = r[m1]["fields"]["cost"]
+    eq((r.c(m1), r.c(m2), C["part"][3], C["base"]["value"]), ("in", "in", "?", 7.0), "re-priced on the USD list, part '?'")
+    eq("cost-price-ratio-no-currency" in r[m1]["rules_used"], True, "rule")
+    r, (m1, m2) = _ratio_scenario(currency=None, factor_fact=False, maker_cur=None)
+    eq(r.c(m1), "out:cost-not-comparable", "negative: the maker's currencies not established")
+    r, (m1, m2) = _ratio_scenario(currency=None, factor_fact=False, maker_cur=("USD", "JPY"), publish=("USD", "JPY"))
+    eq(r.c(m1), "out:cost-not-comparable", "negative: two lists")
+    # a cost in the maker's own currency is untouched by the method
+    r, (m1, m2) = _ratio_scenario(currency="USD", factor_fact=False)
+    eq((r.c(m1), "price_currency" in r[m1]["fields"]["cost"], any(f.startswith("cost-price-ratio") for f in r[m1]["flags"])),
+       ("in", False, False), "the cost's own currency: as before")
+
+
+@test
+def price_date_after_api_opening():
+    # decision 2 (the maintainer, 4 Nov 2026): GLM-5.3, « The GLM-5.3 API is coming soon. » on 15 Aug; a run the source
+    # sends through the maker's API lies after the opening (its price from then, A); another or an unknown route: out
+    def scenario(route, opens=True):
+        sc = base()
+        for k in ("ma", "mb"):
+            sc.prices["prices"].append(price(k, "2026-03-01", "2026-10-01", {"input": 1, "output": 5}, from_basis="release"))
+            if opens:
+                sc.models[k]["api_opens"] = [{"currency": "USD", "after": "2026-03-01", "basis": "maker-says-not-open",
+                                              "evidence": EV}]
+        s = sc.source("a", published="2026-06-01")
+        ms = [sc.m(s, model=k, effort=[LOW], cost=c, route=route) for k, c in (("ma", "1.0"), ("mb", "2.0"))]
+        return sc.run(), ms
+    r, (m1, m2) = scenario([("maker API", "maker-api")])
+    eq((r.c(m1), r.c(m2)), ("in", "in"), "through the maker's API: the price date starts at the opening")
+    eq(("price-date-after-api-opening" in r[m1]["rules_used"], r[m1]["fields"]["cost"]["price_date"]["lo"][:10]),
+       (True, "2026-03-01"), "rule, price date")
+    r, (m1, m2) = scenario(())
+    eq((r.c(m1), "price-date-after-api-opening" in r[m1]["rules_used"]), ("out:cost-not-comparable", False),
+       "negative: the route unknown → the days before the opening stay uncovered")
+    r, (m1, m2) = scenario([("maker API", "maker-api")], opens=False)
+    eq(r.c(m1), "out:cost-not-comparable", "negative: no api_opens record → as before")
+
+
+@test
+def registry_prices_4nov_later():
+    # the maintainer's decisions 2–5 of 4 Nov 2026 (later) in the registry; negative control: the registry of 0796bfd
+    g = _reg_prices()
+    want = {("o3-pro", "USD"): ("2025-06-10", "release"), ("gpt-5.1-codex", "USD"): ("2025-11-13", "release"),
+            ("gpt-5.1-codex-mini", "USD"): ("2025-11-13", "release"), ("step-3.7-flash", "USD"): ("2026-05-29", "release"),
+            ("step-3.7-flash", "CNY"): ("2026-05-29", "release"), ("glm-5.3", "USD"): ("2026-08-15", "release"),
+            ("glm-5.3", "CNY"): ("2026-08-17", "release"), ("qwen2.5-7b-instruct", "USD"): ("2025-06-14", "earliest-capture"),
+            ("qwen3-coder-30b-a3b-instruct", "USD"): ("2025-07-31T07:04:55Z", "release")}
+    for (k, cur), w in want.items():
+        eq(g(k, cur)[0][::2], w, f"{k} {cur}")
+    eq([x[:2] for x in g("step-3.7-flash")], [("2026-05-29", "2026-10-29")], "4 + I: one USD entry 29 May → 29 Oct")
+    eq(g("step-3.7-flash", "CNY")[0][1], "2026-10-21", "4: CNY to its last capture")
+    eq([g(k)[0][0] for k in ("kimi-k2.5", "qwen3.8-27b", "grok-3", "grok-2-1212")],
+       ["2026-01-29", "2026-08-31", "2025-04-10", "2025-04-10"], "negative 3: the page lists the model when priced (blocks A)")
+    M = json.load(open(os.path.join(DATA, "registry", "models.json"), encoding="utf-8"))["models"]
+    eq([(r["currency"], r["after"]) for r in M["glm-5.3"]["api_opens"]], [("USD", "2026-08-15"), ("CNY", "2026-08-17")], "2: api_opens")
+    eq("api_opens" in M["qwen3.8-27b"], False, "2: qwen3.8-27b not written (the opening date is the China site's)")
+    P = json.load(open(os.path.join(DATA, "registry", "prices.json"), encoding="utf-8"))
+    eq(sorted(P["maker_currencies"]), ["anthropic", "google", "openai", "xai"], "the makers with one list, checked")
+    for mk, x in P["maker_currencies"].items():
+        e = x["evidence"][0]
+        if os.path.isfile(e["file"]):
+            b = open(e["file"], "rb").read()
+            eq(hashlib.sha256(b).hexdigest(), e["sha256"], mk)
+    old = subprocess_show("0796bfd:data/registry/prices.json")
+    if old is not None:
+        P0 = json.loads(old)["prices"]
+        g0 = lambda k, cur="USD": sorted((p["from"], p["from_basis"]) for p in P0 if p["model"] == k   # noqa: E731
+                                         and p["route"] == "maker-api" and p["kind"] == "standard" and p["currency"] == cur)
+        eq([g0(k, cur)[0] == w for (k, cur), w in want.items() if g0(k, cur)], [False] * len([1 for (k, cur) in want if g0(k, cur)]),
+           "negative: the registry of 0796bfd has none of them")
+
+
+def subprocess_show(spec):
+    import subprocess
+    p = subprocess.run(["git", "-C", DATA, "show", spec], capture_output=True, text=True)
+    return p.stdout if p.returncode == 0 else None
+
+
+@test
+def findings_4nov_later():
+    # decisions 7–10 of the maintainer (4 Nov 2026, later), written in the findings; negative control: 0796bfd
+    def src(sid):
+        return json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+    sid = "src-github-bullshitbench-2026-10-13"
+    s = src(sid)
+    ms = json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json"), encoding="utf-8"))["measures"]
+    F = {f["id"]: f for f in s["facts"]}
+    ends = [[F[x] for x in m["facts"]["run_date"] if F[x]["says"] == "run-end"] for m in ms]
+    eq((len(ms), sorted({len(e) for e in ends})), (236, [1]), "7: one run-end per row")
+    eq(all(f"\"finished_at_utc\":\"{e[0]['value']}\"" in e[0]["quote"] and e[0]["where"].startswith("https://github.com/")
+           and e[0]["file"] in s["sha256"] for e in ends), True, "7: the latest finished_at_utc, quoted, URL at the commit")
+    s = src("src-epoch.ai-proofbench-external-2026-10-20")
+    w0 = [c for c in s["captures"] if c["id"] == "W0"]
+    ms = json.load(open(os.path.join(DATA, "findings", "measures", "src-epoch.ai-proofbench-external-2026-10-20.json")))["measures"]
+    eq((len(w0), len(w0[0]["evidence"]), sum("W0" in m["facts"]["value_seen_in"] for m in ms),
+        s["sha256"].get("/work/.salvo14/mig/dates2/ev/epoch/wb/20260820132734.zip")),
+       (1, 34, 34, "18bbff4108104b02abc8c97597358987cf5f77fec299c72f308638d485dee393"), "8: the 20 Aug zip, its sha256, 34 measures")
+    g2 = [c for c in src("src-livebench-lb2-2026-10-14")["captures"] if c["id"] == "G2"][0]
+    eq(g2.get("url"), "https://livebench.ai/static/js/main.074b2ee8.js", "9: livebench G2")
+    for sid in ("src-arxiv-2610.04976-v1-2026-10-13", "src-arxiv-2610.17768-v1-2026-10-13", "src-arxiv-2610.17016-v1-2026-10-12",
+                "src-arxiv-2609.11987-2026-09-08"):
+        eq(all(u.startswith("https://arxiv.org/") for u in src(sid)["urls"]), True, f"10: {sid}")
+    old = subprocess_show("0796bfd:data/findings/sources/src-arxiv-2610.17016-v1-2026-10-12.json")
+    if old is not None:
+        eq(json.loads(old)["urls"], ["arxiv.org/abs/2610.17016v1"], "negative 10: the URL before")
+    old = subprocess_show("0796bfd:data/findings/measures/src-github-bullshitbench-2026-10-13.json")
+    if old is not None:
+        eq({len(m["facts"]["run_date"]) for m in json.loads(old)["measures"]}, {0}, "negative 7: no run-end before")
 
 
 def main():
