@@ -15,7 +15,7 @@ python3 data/build.py ... --fit-models catalog                      # the fit's 
 python3 data/build.py ... --no-lqm                                  # skip the lqm.load step
 python3 data/build_lqm.py data/build/                               # the lqm.load step alone
 python3 data/legacy.py raw-data.csv OUT/findings --registry OUT/registry   # raw-data.csv → legacy findings
-python3 data/tests/run.py [name-filter]                             # the tests (129, about four seconds)
+python3 data/tests/run.py [name-filter]                             # the tests (177 with .stan/venv/bin/python, about 13 s)
 python3 data/tests/acceptance.py [raw-data.csv] [--registry data/registry]   # the legacy acceptance test (≈ 20 s; default: the repository's raw-data.csv)
 python3 data/schema/validate.py [--verbose]                          # per-file summary; registry warnings apart
 python3 data/convert/precheck.py SOURCE_ID                           # names and route heads against the registry
@@ -25,7 +25,10 @@ python3 data/convert/reproduce.py --tables … --table … --csv …       # per
 
 The build runs in five steps:
 
-1. **Validate.** It runs `validate.py`'s checks, with `--check-files` unless `--no-check-files` is given.
+1. **Validate.** It runs `validate.py`'s checks on the repository's files only: it never reads a saved copy (the
+   maintainer, 4 Nov 2026: the findings write every value, the build is a filter; see « Added on 4 Nov 2026 (the
+   findings self-sufficient) »). `--no-check-files` and `--registry-files-checked` are gone; the checks against the
+   saved copies are `validate.py --check-files`, the writing agent's tool.
    - These stop the build with exit 1 and the reason: an error in the registries (models, routes, benchmarks,
      publishers and prices are required), the vocabulary or the decisions, or a file that fails its schema.
    - A bad argument gives a one-line `error:` and exit 2, never a traceback: a missing `--fit-models` file, a missing
@@ -59,7 +62,7 @@ one legacy source, so the sources can be converted one by one, and each row beco
 setup `legacy`. Only the two free-text comment lines are skipped. validate.py checks that:
 - the form `legacy` and the fact type `legacy-row` go together;
 - the line has the CSV's number of fields;
-- with `--check-files`, it is a line of the hashed CSV;
+- with `validate.py --check-files` (the writer's check, not the build's), it is a line of the hashed CSV;
 - a legacy measure cites its one row and nothing else.
 
 The build carries a legacy measure **as it is**:
@@ -111,7 +114,7 @@ data/convert/mapping.py builds the mapping that gives each measure its `legacy_r
 
 The build of the repository's data (`--fit-models catalog`, with the lqm step) is committed in `data/build/`: the fit
 reads its tables (model/fit.py), the site its `data.csv` and group map. `status-report.json` (≈ 150 MB) is not
-committed (`.gitignore`): rebuild it to read a measure's reasons (about 10 minutes with `--check-files`, 4 GB).
+committed (`.gitignore`): rebuild it to read a measure's reasons (about 11 minutes, 4 GB).
 
 | File | Content |
 |---|---|
@@ -149,8 +152,9 @@ The fit tables carry these confound flags:
     `not-established:contradictory` (`out:contradictory` on the cost axis);
   - no card, a card in another currency, or no tokens → accepted as written;
   - `fields.cost.reproduction` says which case applied.
-- **A converter's loop** (27 Oct). `--registry-files-checked` (build.py and validate.py) skips the saved-copy checks of
-  the registry's evidence only, on an unchanged registry copy; the findings' files are still checked. With one source's
+- **A converter's loop** (27 Oct). `--registry-files-checked` (validate.py; build.py's until 4 Nov 2026, when the build
+  stopped reading saved copies) skips the saved-copy checks of the registry's evidence only, on an unchanged registry
+  copy; the findings' files are still checked. With one source's
   findings (and its legacy rows) a build takes seconds; the full build with every check runs at install.
 - **Thinking on with a stated level** (27 Oct). On a model whose list has levels and no `think`, thinking on plus a
   stated level (setting, label, chart order) gives the level; the maker's default that thinking on alone would read is
@@ -1089,3 +1093,48 @@ Tests: `price_end_inclusive_second`, `evidence_identical_copy`, `registry_prices
 `findings_dates_step2` reads the « sha256 » quote of decision 6 (each new mechanism with a negative control that fails
 when it is switched off: J off → the cost straddling 16:00 is out; the identical-copy rule off → its evidence is
 refused; the registry of a8266a2 → A, C, I fail; the findings of a8266a2 → the dates fail).
+
+## Added on 4 Nov 2026 (the findings self-sufficient)
+
+The maintainer, 4 Nov 2026: « Les fichiers findings recensent tout. Ils doivent garder une liste des URL qui ont
+permis leur construction, et c'est tout. Le build est censé n'être qu'un filtre simple. » So:
+
+- **The build reads only the repository's files** (findings, registries, catalogue, decisions, settings, model/lqm.py)
+  and never a saved copy (/work/.salvo14/…, a capture's or a fact's `file`). The saved copies may be removed; the
+  `sha256` maps, `file` fields and evidence records stay as the trace of what the agent read.
+- **Cells are facts.** A cited table cell is a fact (data/convert/cells.py, run once on 4 Nov 2026 with the files
+  hashed and read a last time: 169,207 facts in 253 sources, none refused): `value` the cell as validate.table_rows
+  read it (stripped; JSON numbers with their digits as written), `quote` « <row key column>: <row key> | <column>:
+  <cell> » (a `$key` table: « <row key> | <column>: <cell> »), `says` the column's type (a list for a several-type
+  column, schema change), `about` the row key, `level` the table's, `form` data-file, `where` « <table where> / row
+  <row> / column <column> », `file`, `table`, `column` and `cell` (the reference `T<n>/<row>/<column>` it replaces; new
+  schema fields), and the column's `term`, `scale`, `namespace`, `precision` (else the table's) and `note`. The
+  measures and the computed facts' inputs cite the new ids. The build reads a cell fact as it read the cell: its
+  value, about, level, where, table, column, term, scale, namespace and precision (not its quote, the trace); a run's
+  id is its row key. A `T<n>/…` reference still cited gets the fault « its value is not written in the findings »
+  (`out:no-proof` on its axis). validate.py checks that a cell fact's table, column and about are its cell's.
+- **Removed from the build** (each was a read of a saved copy): the cell read (`Source.fact`: saved_path, sha256_of,
+  table_rows); validate.py's `--check-files` checks run by the build by default — every saved copy's sha256
+  (check_saved), a quote in its file, a legacy row in its CSV (/work/.wt-px/raw-data.csv), the dates' proofs
+  (evidence_faults; a failing proof used to leave the date out: `date_faults`, gone), a measure's cell in its file, a
+  `model-api-id` cell read in its file for its warning (now read from the fact), a value cell the same in every `value_seen_in` capture, the registry's
+  evidence files (check_evidence_files). `--no-check-files` and `--registry-files-checked` are gone from build.py
+  (acceptance.py and the tests no longer pass them).
+- **Kept as the writer's tool**: `validate.py --check-files` (also `--registry-files-checked`), now checking a cell
+  fact's value against its table instead of looking for its quote in the file. data/convert/precheck.py still reads a
+  saved table for a `T<n>/…` model reference left (none in data/findings).
+
+**Effect** (`--fit-models catalog`, against 0956b5a): fit-quality.csv, fit-cost.csv, data.csv, group-map.json and
+group-setups.json byte-identical; status-report.json identical once each new fact id is mapped back to its cell
+(`facts_used` is sorted by id, so only its order changes); validation 7,096 warnings, 0 errors, unchanged. The
+build of 0956b5a with `--no-check-files` was already identical: the file checks took nothing out. Run under
+data/tests/sealed.py (an audit hook refusing every open / listdir / scandir outside the repository, the `--out`
+folder and Python's own install), the build gives the same outputs and attempts no access.
+
+Tests: `build_reads_no_saved_copy` (a cell scenario whose CSV lies outside the scenario, built sealed; the copy
+removed: same rows; negative control: a build reading the cell in its file again is refused and reported; a cell
+cited but not written: `out:no-proof`); the cell fixtures write their cells as facts and remove the CSV before the
+build; `date_proof_checked` (the build keeps a date whatever its proof; `evidence_faults`, the writer's check, still
+refuses a wrong sha256 or quote); `legacy_path` (a legacy row not in its CSV stays `legacy:in`; `check_saved` reports
+it); `findings_dates_step2` and `registry_prices_salvo_4nov` check a proof's file only while it is reachable, its
+trace (url, file, sha256, where, quote) always; `examples` no longer needs the examples' saved copies.

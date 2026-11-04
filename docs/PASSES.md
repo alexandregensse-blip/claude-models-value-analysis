@@ -5,6 +5,24 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The findings self-sufficient, the build a filter (4 Nov 2026, later)
+
+**Principle (the maintainer, 4 Nov 2026).** « Les fichiers findings recensent tout. Ils doivent garder une liste des
+URL qui ont permis leur construction, et c'est tout. Le build est censé n'être qu'un filtre simple. »
+
+**Method.** No web, no agent, no fit. data/convert/cells.py read the saved data files one last time (sha256 checked
+against each source's map: 0 mismatch, 0 unreachable) and wrote every table cell the measures cite as a fact: 169,207
+facts in 253 sources (+ 55 in the ObviousBench example), each with the cell's value, a quote (« row key: … | column:
+… ») and its cell reference; the measures now cite them. The build no longer reads any saved copy: no cell, no
+sha256, no quote in its file, no legacy row in its CSV, no date proof (a proof that fails no longer removes a date),
+no `value_seen_in` agreement, no registry evidence; `--no-check-files` and `--registry-files-checked` are gone from
+build.py. Those checks stay in `validate.py --check-files`, the writing agent's tool.
+
+**Effect.** None: fit-quality.csv, fit-cost.csv, data.csv, group-map.json and group-setups.json byte-identical to
+0956b5a's build; the status report identical once each new fact id is read as the cell it stands for (validation:
+7,096 warnings, 0 errors, unchanged). The build run under an audit hook refusing every file access outside the
+repository (data/tests/sealed.py) gives the same outputs and attempted none.
+
 ## Prices found on the web, the maintainer's price and date decisions (4 Nov 2026)
 
 **Method.** The 186 (model, currency) pairs whose costs were out for want of a price went to agents (28 lots): the

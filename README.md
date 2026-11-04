@@ -109,8 +109,8 @@ No dependencies beyond the Python 3 standard library and Node.js (any recent ver
 
 Needed only when the fit's inputs change: the build's tables (`data/build/`), `model/lqm.py`, `model/lqm_ext4.stan`,
 `data/build_lqm.py` or `data/catalog/` (the site build says so). The data first: the build turns the findings and the
-registry into one table per axis (Python standard library, about 10 minutes and 4 GB with the saved copies re-hashed;
-`--no-check-files` skips that):
+registry into one table per axis (Python standard library, about 11 minutes and 4 GB; it reads only the repository's
+files, never a saved copy: the findings write every value, 4 Nov 2026):
 
 ```bash
 python3 data/build.py --fit-models catalog   # → data/build/: fit-quality.csv, fit-cost.csv, group-map.json,

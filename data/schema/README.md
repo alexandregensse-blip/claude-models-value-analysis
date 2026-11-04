@@ -53,7 +53,9 @@ Cross-file checks:
 - **Decisions:** stale measure decisions (the hash covers the setup, not `note`/`translation`) are reported, not applied.
 
 `--check-files` also checks sha256 of every reachable saved copy (sources and registry evidence), quotes in text files,
-CSV rows and cells, and that a value reads the same in every capture listed in `value_seen_in`. Model facts are
+CSV rows and cells (a cell written as a fact: its value against its table), a date's proof, and that a value reads the
+same in every capture listed in `value_seen_in`. It is the writing agent's tool: the build never runs it and reads no
+saved copy (the maintainer, 4 Nov 2026). Model facts are
 resolved with the name rule and reported (warning) when they give no key or several. A file that fails its schema
 skips its cross-file checks.
 

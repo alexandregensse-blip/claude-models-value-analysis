@@ -69,7 +69,21 @@ Attributes, never levels: the **precision model** (`printed` step · `chart-pixe
  "tables": [{"id": "T1", "file": "<saved file>", "where": "<JSON path / CSV / table>", "columns": {…}}]}
 ```
 
-A data file is proven by its sha256 and a locator (a `tables` entry stands for its cells). Fact types (vocab.json):
+**The findings are self-sufficient; the build is a filter (the maintainer, 4 Nov 2026).** « Les fichiers findings
+recensent tout. Ils doivent garder une liste des URL qui ont permis leur construction, et c'est tout. Le build est
+censé n'être qu'un filtre simple. » Every value the build uses is written in a findings file, with its exact quote
+(or, for a data-file fact, its locator), the URL and the capture date: `urls` and `captures` (url, captured) list
+what the source was built from, `sha256` and each `file` are the trace of the copies the agent read. The build
+(data/build.py) reads only the repository's files (findings, registries, catalogue, settings) and never a saved copy:
+the saved copies may be removed. What needs a file is checked when it is written, by the agent writing it
+(`validate.py --check-files`, a manual tool, never a condition of the build).
+
+A data file is proven by its sha256 and a locator. A `tables` entry declares a saved table (its columns' fact types);
+a cell a measure cites is written as a fact (data/convert/cells.py): its value as the file writes it, its quote the
+cell and what identifies its row and column copied from the file (« <row key column>: <row key> | <column>: <cell> »),
+`table`, `column` and `cell` (the cell reference `T<n>/<row key>/<column>` it stands for; a run's id is its row
+key), and the column's types (a list when the column states several), term, scale, namespace and precision. A cell
+reference cited without its fact gets no value: the measure is `out:no-proof` on its axis. Fact types (vocab.json):
 `score`, `metric-definition`, `headline-metric`, `cost`, `currency`, `unit` (vocabulary = today's unit list + aliases;
 usage and spend share it), `cost-basis`, `cost-method`, `price-table`, `tokens-in`, `tokens-out`, `tokens-cache-read`,
 `tokens-cache-write-5m`, `tokens-cache-write-1h`, `tokens-reasoning` (+ `reasoning-included-in-out`), `tokens-total` (no class split: usable only through a uniform
@@ -85,9 +99,10 @@ factor, or for ratios within one model), `cached-share`,
 **Dates and their proof (dating step 2, 3 Nov 2026).** A capture (`captures`: Wayback, commit, our fetch) and the
 source's `published` may carry `evidence`, the evidence format of the registries (url, captured, file, sha256, where,
 quote): the saved file that proves the date (a commit's date in the saved commit list, an HTTP `Last-Modified`
-header, a value a Wayback capture shows) and the exact quote. `validate.py --check-files` checks each file's sha256
-and quote; a date whose proof fails is reported under the capture id or `published` and the build leaves that date
-out (the rest of the source stands). A capture bounds only the measures that list it in `value_seen_in`: the
+header, a value a Wayback capture shows) and the exact quote. The proof is checked when the date is written, by the
+agent writing it (`validate.py --check-files`: each file's sha256 and quote); the build does not re-read it, and a
+proof missing or failing no longer removes the date (the maintainer, 4 Nov 2026; until then the build left such a
+date out). The evidence fields stay in the source as the trace. A capture bounds only the measures that list it in `value_seen_in`: the
 measures whose value it shows. A time written without its time zone is kept as written (a local time:
 `2026-08-03T23:01:31`, in a fact's value with the text in `written`, or in `published.value`).
 
@@ -345,6 +360,9 @@ report is written back into the status report. Site fields stay in the site's re
 
 ## 7. Validation
 - Schema: every file against its schema and vocab.json; every key registered; the identity checks of models.json.
+  The build runs these checks on the repository's files only. The checks against saved copies (sha256, a quote in its
+  file, a cell in its table, a legacy row in its CSV, a date's proof, a value the same in every capture listed) are
+  `validate.py --check-files`, run by the agent that writes the findings (4 Nov 2026).
 - Verifier agents re-derive, for every measure `in` or changing status: each number from the saved file, each label and
   fact type (`effort-setting` vs `effort-label` vs `no-effort-sent`), the identities (model names, setup against its
   harness / judge / version / tools / metric facts); a quote must contain its value and the saved file the quote. Each
