@@ -1,8 +1,9 @@
 """A small scenario builder for the build's tests: registries, sources, measures and decisions written to a temporary
 folder, then data/build.py run on it. Every fact is a data-file fact of one saved file (no quote needed) unless a test
-says otherwise; run with --no-check-files (the saved file is a placeholder), except the cell tests, which write a real
-CSV with its sha256."""
-import hashlib, json, os, shutil, sys, tempfile
+says otherwise (the saved file is a placeholder: the build reads no saved file). The cell tests write a real CSV with
+its sha256; the cells it holds are written as facts (data/convert/cells.py, the writing agent's step), then the CSV is
+removed before the build."""
+import contextlib, hashlib, json, os, shutil, sys, tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.dirname(HERE)
@@ -217,16 +218,27 @@ class Sc:
             decs.append(d)
         for fn in self.after_hash:
             fn(self)
+        import copy
+        from convert import cells as CL
         for sid, doc in self.sources.items():
+            ms = {"source": sid, "measures": self.msets[sid]}
+            if sid in self.cells:            # the writing agent's step: the cited cells written as facts (4 Nov 2026)
+                doc, ms = copy.deepcopy(doc), copy.deepcopy(ms)
+                CL.to_facts(doc, ms, os.path.join(fnd, "sources", f"{sid}.json"))
             dump(os.path.join(fnd, "sources", f"{sid}.json"), doc)
             if self.msets[sid]:
-                dump(os.path.join(fnd, "measures", f"{sid}.json"), {"source": sid, "measures": self.msets[sid]})
+                dump(os.path.join(fnd, "measures", f"{sid}.json"), ms)
+        for fname, _, _ in self.cells.values():  # then the saved copies are gone: the build reads the findings only
+            with contextlib.suppress(FileNotFoundError):
+                os.remove(os.path.join(fnd, "sources", fname))
         dec = os.path.join(root, "decisions.json")
         if decs:
             dump(dec, {"decisions": decs})
         return reg, fnd, dec
 
-    def run(self, *extra, lqm=False, check_files=False, keep=None):
+    def run(self, *extra, lqm=False, keep=None, seal=False):
+        """seal: the build runs under data/tests/sealed.py's audit hook, every file access outside the repository and
+        this scenario's folder refused (AssertionError 'sealed: …' listing them)."""
         root = tempfile.mkdtemp(prefix="buildtest-")
         try:
             reg, fnd, dec = self.write(root)
@@ -234,14 +246,19 @@ class Sc:
                 fn(fnd)
             out = os.path.join(root, "build")
             argv = ["--registry", reg, "--findings", fnd, "--decisions", dec, "--out", out, *extra]
-            if not check_files:
-                argv.append("--no-check-files")
             if not lqm:
                 argv.append("--no-lqm")
             import contextlib, io
             buf = io.StringIO()
-            with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
-                code = build.main(argv)
+            from sealed import sealed
+            guard = sealed([root]) if seal else contextlib.nullcontext([])
+            with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf), guard as refused:
+                try:
+                    code = build.main(argv)
+                except PermissionError:
+                    code = None
+            if refused:
+                raise AssertionError(f"sealed: the build read outside the repository: {sorted(set(refused))}")
             if code != 0:
                 raise AssertionError(f"build failed:\n{buf.getvalue()}")
             res = Result(out)

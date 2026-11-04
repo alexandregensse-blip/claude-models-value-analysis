@@ -802,6 +802,11 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
 
 
 # ---------------------------------------------------------------- findings checks
+def fact_says(f):
+    """A fact's types as a list (a cell of a several-type column states several)."""
+    return list(f["says"]) if isinstance(f["says"], list) else [f["says"]]
+
+
 def column_says(spec):
     says = spec if isinstance(spec, str) else spec["says"]
     return [says] if isinstance(says, str) else list(says)
@@ -905,18 +910,27 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
             rep.err(F, "only chart facts are read")
         if f["form"] in ("data-file", "legacy") and not (f.get("table") or f.get("file") or len(saved) == 1):
             rep.err(F, "a data-file fact names its table or file")
-        if f["says"] in closed:
-            if "term" not in f:
-                rep.err(F, f"a {f['says']} fact needs a term (vocab {closed[f['says']]['vocab']})")
-            elif not in_vocab(schemas, closed[f["says"]]["vocab"], f["term"]):
-                rep.err(F, f"term '{f['term']}' not in vocab {closed[f['says']]['vocab']}")
-        if f["says"] in ("score", "run-score") and "scale" not in f:
-            rep.err(F, f"a {f['says']} fact needs its scale (fraction, percent, raw, counts)")
-        if "scale" in f and f["says"] not in ("score", "run-score"):
+        sl = fact_says(f)                                # a cell of a several-type column: several (4 Nov 2026)
+        for says in sl:
+            if says in closed:
+                if "term" not in f:
+                    rep.err(F, f"a {says} fact needs a term (vocab {closed[says]['vocab']})")
+                elif not in_vocab(schemas, closed[says]["vocab"], f["term"]):
+                    rep.err(F, f"term '{f['term']}' not in vocab {closed[says]['vocab']}")
+            if says in ("score", "run-score") and "scale" not in f:
+                rep.err(F, f"a {says} fact needs its scale (fraction, percent, raw, counts)")
+        if f.get("cell"):
+            t, row, col = split_cell(f["cell"])
+            if (t, col, row) != (f.get("table"), f.get("column"), f["about"]) or t not in tables \
+                    or col not in tables[t]["columns"]:
+                rep.err(F, f"a cell fact's table, column and about are those of its cell {f['cell']} (a declared column)")
+        elif f.get("column"):
+            rep.err(F, "column is for a cell fact (cell)")
+        if "scale" in f and not set(sl) & {"score", "run-score"}:
             rep.err(F, "scale is for score facts")
         if f.get("scale") == "counts" and not COUNTS.fullmatch(f["value"]):
             rep.err(F, f"a counts score is written 'k of N', 'k/N' or 'k out of N', not {f['value']!r}")
-        if (f["form"] == "legacy") != (f["says"] == "legacy-row"):
+        if (f["form"] == "legacy") != ("legacy-row" in sl):
             rep.err(F, "a legacy-row fact has the form legacy, and only it")
         elif f["form"] == "legacy":
             leg = src.get("legacy")
@@ -941,7 +955,7 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                         rep.err(F, f"input {ref}: table or column not declared")
                 elif ref not in {x["id"] for x in src.get("facts", [])}:
                     rep.err(F, f"input {ref}: no such fact")
-        if f["says"] == "run-date-convention":
+        if "run-date-convention" in sl:
             pat = f.get("pattern")
             try:
                 ok = pat and "date" in re.compile(pat).groupindex
@@ -953,25 +967,25 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                 rep.err(F, "a run-date convention counts only as the source documents it (prose, code or label, quoted)")
         elif f.get("pattern"):
             rep.err(F, "pattern is for run-date-convention facts")
-        if f["says"] == "price-tier" and f.get("term") == "standard":
+        if "price-tier" in sl and f.get("term") == "standard":
             rep.err(F, "a price-tier fact names a tier other than standard")
-        if f["says"] == "price-table" and f.get("term") is not None and f["term"] not in ptables:
+        if "price-table" in sl and f.get("term") is not None and f["term"] not in ptables:
             if f["term"] not in V["price_class"]["x-terms"]:
                 rep.err(F, f"price table '{f['term']}' is not registered in price-tables.json (nor a price class)")
             elif not PRICE_NUMBER.fullmatch(str(f["value"])):
                 rep.err(F, f"a stated {f['term']} price is a number per million tokens, not {f['value']!r}")
-        if f["says"] == "run-score" and not f.get("run"):
+        if "run-score" in sl and not f.get("run") and not f.get("cell"):   # a cell's run is its row key
             rep.err(F, "a run-score fact names its run (run)")
-        if f.get("run") and f["says"] not in ("run-score", "failure", "partial"):
+        if f.get("run") and not set(sl) & {"run-score", "failure", "partial"}:
             rep.err(F, "run is for run-score, failure and partial facts")
-        if f["says"] == "thinking-budget" and not re.fullmatch(r"[1-9][0-9]*", f.get("term", "")):
+        if "thinking-budget" in sl and not re.fullmatch(r"[1-9][0-9]*", f.get("term", "")):
             rep.err(F, "a thinking-budget fact needs its token count as term (digits)")
-        if f["says"] == "model-api-id":
+        if "model-api-id" in sl:
             if "namespace" not in f:
                 rep.err(F, "a model-api-id fact needs a namespace (a routes.json id, or prefix)")
             elif f["namespace"] != "prefix" and f["namespace"] not in routes:
                 rep.err(F, f"namespace '{f['namespace']}' not registered in routes.json")
-        if f["says"] == "route" and "term" in f and f["term"] not in routes:
+        if "route" in sl and "term" in f and f["term"] not in routes:
             rep.err(F, f"route term '{f['term']}' not registered in routes.json")
     leg = src.get("legacy")
     if leg and leg["file"] not in saved:
@@ -1001,12 +1015,21 @@ def check_saved(src, path, rep, lines_cache={}):
         for f in src.get("facts", []):
             if f["form"] == "legacy" and f["value"] not in lines_cache[stamp(p)]:
                 rep.err(f"{L} {f['id']}", "the legacy row is not a line of its CSV")
+    tables = {t["id"]: t for t in src.get("tables", [])}
     for f in src.get("facts", []):
         p = reach.get(f.get("file")) if f.get("file") else only
+        if f.get("cell") and f.get("table") in tables and p:  # a cell written as a fact: its value is the file's cell
+            t, row, col = split_cell(f["cell"])
+            rows = table_rows(tables[t], path)
+            got = ((rows[1].get(row) or {}).get(col) or "").strip() if rows else None
+            if got != f["value"]:
+                rep.err(f"{L} {f['id']}", f"the cell {f['cell']} reads {got!r} in {os.path.basename(p)}, not {f['value']!r}")
+            continue
         if f.get("quote") and p and p.endswith(TEXT_EXT) and not quote_in_file(f["quote"], p):
             rep.err(f"{L} {f['id']}", f"quote not found in the saved file {os.path.basename(p)}")
     # the proof of a capture's or the publication's date (dating step 2, 3 Nov 2026): each evidence record's file, its
-    # sha256 and its quote; an error is reported under the capture id or 'published', and the build leaves that date out
+    # sha256 and its quote; an error is reported under the capture id or 'published' (the writer's check: the build never
+    # re-reads it and keeps the date, the maintainer, 4 Nov 2026)
     dated = [(c["id"], c) for c in src.get("captures", [])] + [("published", src.get("published") or {})]
     for label, rec in dated:
         for i, e in enumerate(rec.get("evidence") or []):
@@ -1148,6 +1171,11 @@ def table_rows(table, path, file=None, cache={}):
     return cache[key]
 
 
+def cell_of(ref, facts):
+    """The table cell a reference stands for: the reference itself (T<n>/<row>/<column>), or a cell fact's `cell`."""
+    return ref if ref.startswith("T") else (facts.get(ref) or {}).get("cell")
+
+
 def ref_info(ref, facts, tables):
     """(fact types, about, metric term, record) of a cited fact or cell, or None."""
     if ref.startswith("T"):
@@ -1157,7 +1185,7 @@ def ref_info(ref, facts, tables):
             return None
         return column_says(spec), row, (None if isinstance(spec, str) else spec.get("term")), spec
     f = facts.get(ref)
-    return None if f is None else ([f["says"]], f["about"], f.get("term"), f)
+    return None if f is None else (fact_says(f), f["about"], f.get("term"), f)
 
 
 def check_measures(ms, path, sources, reg, rep, vocab, check_files):
@@ -1249,12 +1277,13 @@ def check_measures(ms, path, sources, reg, rep, vocab, check_files):
         for (slot, ref), (says, about, term, rec) in info.items():
             if slot != "runs":
                 continue
-            run_ids.add(split_cell(ref)[1] if ref.startswith("T") else rec.get("run"))
+            run_ids.add(split_cell(cell_of(ref, facts))[1] if cell_of(ref, facts) else rec.get("run"))
             if m["setup"] in setups and term != setups[m["setup"]]["metric"]:
                 rep.err(M, f"runs: {ref} is on metric '{term}', the setup on '{setups[m['setup']]['metric']}'")
         for (slot, ref), (says, about, term, rec) in info.items():
-            run = split_cell(ref)[1] if (slot == "anomalies" and ref.startswith("T") and run_ids) else \
-                (rec.get("run") if not ref.startswith("T") else None)
+            cr = cell_of(ref, facts)
+            run = split_cell(cr)[1] if (slot == "anomalies" and cr and run_ids) else \
+                (rec.get("run") if not cr else None)
             if slot == "anomalies" and run and run not in run_ids:
                 rep.err(M, f"anomalies: {ref} names run {run!r}, not one of the runs cited {sorted(r for r in run_ids if r)}")
         # model facts resolve under the name rule (any date: the run date is the build's)
@@ -1274,15 +1303,15 @@ def check_measures(ms, path, sources, reg, rep, vocab, check_files):
                 keys = resolve_api_id(cell if cell is not None else value, ns, models, routes)
                 if len(keys) != 1:
                     rep.warn(M, f"model {ref} ({cell or value!r}, namespace {ns}) resolves to {sorted(keys) or 'no key'}")
-            elif "model-name" in says and not ref.startswith("T"):
+            elif "model-name" in says and not cell_of(ref, facts):   # a cell's display name: not checked, as before
                 n = norm_display(value, vocab)
                 keys = {k for k, mm in models.items() for nm in mm.get("names", [])
                         if nm["kind"] == "display-name" and norm_display(nm["name"], vocab) == n}
                 if len(keys) != 1:
                     rep.warn(M, f"model {ref} ({value!r}) resolves to {sorted(keys) or 'no key'} under the display-name rule")
         # with the files: a value cell must read the same in every capture said to carry it
-        if check_files and v and v.startswith("T"):
-            t, row, col = split_cell(v)
+        if check_files and v and cell_of(v, facts):
+            t, row, col = split_cell(cell_of(v, facts))
             base = table_rows(tables[t], spath)
             for cid in m["facts"].get("value_seen_in", []):
                 c = captures.get(cid)

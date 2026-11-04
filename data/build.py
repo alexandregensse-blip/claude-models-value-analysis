@@ -252,23 +252,22 @@ class Source:
         self.captures = {c["id"]: c for c in doc.get("captures", [])}
         self.faults = []                                  # source-wide validation errors
         self.fact_faults = collections.defaultdict(list)  # fact id → validation errors
-        self.date_faults = collections.defaultdict(list)  # capture id / 'published' → errors of the date's proof
-        self._sha_ok = {}
 
     def published(self):
-        """The publication date as written, None when absent or when its proof fails (dating step 2, 3 Nov 2026)."""
-        return None if self.date_faults.get("published") else (self.doc.get("published") or {}).get("value")
+        """The publication date as written, None when absent. Its proof (evidence) is checked when it is written, by
+        the agent writing it (validate.py --check-files), never by the build (the maintainer, 4 Nov 2026)."""
+        return (self.doc.get("published") or {}).get("value")
 
     def capture(self, cid):
-        """A capture, None when absent or when the proof of its date fails (dating step 2, 3 Nov 2026)."""
-        return None if self.date_faults.get(cid) else self.captures.get(cid)
+        """A capture, None when absent (its date's proof: as for the publication)."""
+        return self.captures.get(cid)
 
     def date(self):
         """When this snapshot appeared: its publication, else its earliest capture, else its harvest."""
         p = self.published()
         if p:
             return V.when(p)
-        caps = [V.when(c["captured"]) for c in self.captures.values() if not self.date_faults.get(c["id"])]
+        caps = [V.when(c["captured"]) for c in self.captures.values()]
         return min(caps) if caps else V.when(self.doc["harvested_at"])
 
     def derive(self, x, seen):
@@ -351,50 +350,31 @@ class Source:
             x["value"] = re.sub(r"[.\s\u00a0\u202f]", "", v.strip()).replace(",", ".")
 
     def fact(self, ref, _seen=frozenset()):
-        """(Fact, fault or None)."""
-        if not ref.startswith("T"):
-            f = self.facts.get(ref)
-            if f is None:
-                return None, f"fact {ref} not found"
-            x = Fact(f)
-            x["ref"], x["says"] = ref, [f["says"]]
-            self.decimal(x)
-            fault = "; ".join(self.fact_faults.get(ref, [])) or None
-            if f["level"] == "computed" and not fault:
-                fault = self.derive(x, _seen)
-            return x, fault
-        t, row, col = V.split_cell(ref)
-        tb = self.tables.get(t)
-        if not tb or col not in tb["columns"]:
-            return None, f"cell {ref}: table or column not declared"
-        spec = tb["columns"][col]
-        p = V.saved_path(tb["file"], self.path)
-        if not p:
-            return None, f"cell {ref}: saved file not reachable here ({tb['file']})"
-        if p not in self._sha_ok:
-            want = self.doc.get("sha256", {}).get(tb["file"])
-            self._sha_ok[p] = want is not None and V.sha256_of(p) == want
-        if not self._sha_ok[p]:
-            return None, f"cell {ref}: sha256 of {os.path.basename(p)} does not match"
-        rows = V.table_rows(tb, self.path)
-        if rows is None:
-            return None, f"cell {ref}: table format {tb.get('format')} not readable by the build (csv, json)"
-        cols, byrow = rows
-        if row not in byrow or col not in cols:
-            return None, f"cell {ref}: no such row or column in the saved file"
-        cell = (byrow[row].get(col) or "").strip()
-        if not cell:
-            return None, f"cell {ref}: empty"
-        says = V.column_says(spec)
-        x = Fact(ref=ref, says=says, value=cell, about=row, level=tb.get("level", "written"), form="data-file",
-                 where=f"{tb['where']} / row {row} / column {col}", file=tb["file"], table=t, column=col,
-                 precision=(spec.get("precision") if isinstance(spec, dict) else None) or tb.get("precision"))
-        self.decimal(x)
-        if isinstance(spec, dict):
+        """(Fact, fault or None). The build reads only what the findings write: a fact's value, never a saved file
+        (the maintainer, 4 Nov 2026: « Le build est censé n'être qu'un filtre simple »). A table cell is cited through
+        the fact holding its value (data/convert/cells.py); the build reads it as it read the cell: its value, about,
+        level, where, table, column and the column's term, scale, namespace and precision (its quote is the trace)."""
+        if ref.startswith("T"):
+            return None, (f"cell {ref}: its value is not written in the findings (the build reads no saved file; "
+                          f"data/convert/cells.py writes a cell as a fact)")
+        f = self.facts.get(ref)
+        if f is None:
+            return None, f"fact {ref} not found"
+        if f.get("cell"):
+            x = Fact(ref=ref, says=V.fact_says(f), value=f["value"], about=f["about"], level=f["level"],
+                     form=f["form"], where=f["where"], file=f.get("file"), table=f.get("table"),
+                     column=f.get("column"), precision=f.get("precision"), cell=f["cell"])
             for k in ("term", "scale", "namespace"):
-                if k in spec:
-                    x[k] = spec[k]
-        return x, None
+                if k in f:
+                    x[k] = f[k]
+        else:
+            x = Fact(f)
+            x["ref"], x["says"] = ref, V.fact_says(f)
+        self.decimal(x)
+        fault = "; ".join(self.fact_faults.get(ref, [])) or None
+        if f["level"] == "computed" and not fault:
+            fault = self.derive(x, _seen)
+        return x, fault
 
 
 # ---------------------------------------------------------------- context
@@ -428,8 +408,7 @@ class Ctx:
                 reg[k] = x
         self.supplied = self.supply_legacy(reg, a.findings)
         if all(k in reg for k in V.REQUIRED_REGISTRIES):
-            V.check_registries(reg, rep, schemas, self.vocab, paths,
-                                 a.check_files and not getattr(a, "registry_files_checked", False))
+            V.check_registries(reg, rep, schemas, self.vocab, paths, False)   # no saved file read (4 Nov 2026)
         fatal += rep.errors[n0:]
         self.reg, self.paths = reg, paths
         self.models = (reg.get("models") or {}).get("models", {})
@@ -454,14 +433,12 @@ class Ctx:
                 continue
             S = Source(p, x, self)
             self.sources[S.id] = S
-            V.check_source(x, p, reg, rep, schemas, self.vocab, a.check_files, all_ids)
+            V.check_source(x, p, reg, rep, schemas, self.vocab, False, all_ids)   # no saved file read (4 Nov 2026)
             L = V.rel(p)
             for e in rep.errors[n:]:
-                m = re.match(re.escape(L) + r" (F\d+|[WGS]\d+|published): (.*)$", e)
-                if m and m.group(1)[0] == "F":
+                m = re.match(re.escape(L) + r" (F\d+): (.*)$", e)
+                if m:
                     S.fact_faults[m.group(1)].append(m.group(2))
-                elif m:                                  # the proof of a capture's or the publication's date fails:
-                    S.date_faults[m.group(1)].append(m.group(2))   # that date is left out (dating step 2, 3 Nov)
                 else:
                     S.faults.append(e)
         # measures
@@ -475,7 +452,7 @@ class Ctx:
                 continue
             src = self.sources.get(x["source"])
             vsources = {k: (s.path, s.doc) for k, s in self.sources.items()}
-            V.check_measures(x, p, vsources, reg, rep, self.vocab, a.check_files)
+            V.check_measures(x, p, vsources, reg, rep, self.vocab, False)
             L = V.rel(p)
             mf = collections.defaultdict(list)
             for e in rep.errors[n:]:
@@ -672,7 +649,7 @@ class Measure:
             t, _, col = V.split_cell(ref)
             spec = self.S.tables.get(t, {}).get("columns", {}).get(col)
             return spec is not None and "score" in V.column_says(spec)
-        return self.S.facts.get(ref, {}).get("says") == "score"
+        return "score" in V.fact_says(self.S.facts[ref]) if ref in self.S.facts else False
 
     def axis_faults(self, axis):
         """Step 1 reads every fact *used* on the axis: the score's facts do not take the cost out, nor the reverse."""
@@ -746,7 +723,8 @@ def run_interval(M, key):
             continue
         {"run-date": days, "run-start": starts, "run-end": ends}[f.says[0]].append(b)
     if conv:                                             # ids encoding the run date (documented convention)
-        ids = [V.split_cell(M.m["facts"]["value"])[1]] if (M.m["facts"].get("value") or "").startswith("T") else []
+        vc = V.cell_of(M.m["facts"].get("value") or "", M.S.facts)       # a value cell: its row key
+        ids = [V.split_cell(vc)[1]] if vc else []
         ids += [f.value for f in M.slot("aggregation", "run-id") if f.level in ACCEPTED]
         for f in conv:
             for i in ids:
@@ -1641,7 +1619,7 @@ def score_field(M):
 
 def run_id(f):
     """A per-run fact's run: its `run`, or for a table cell its row key."""
-    return f.about if f.ref.startswith("T") else f.run
+    return f.about if f.cell else f.run
 
 
 def mean_of_runs(M, failures):
@@ -1660,7 +1638,7 @@ def mean_of_runs(M, failures):
         steps.append(float(got[1]))
     failed = set()
     for a in failures:
-        rid = a.run if not a.ref.startswith("T") else (a.about if a.about in vals else None)
+        rid = a.run if not a.cell else (a.about if a.about in vals else None)
         if not rid or rid not in vals:
             return f"failure {a.ref} names no run of the mean"
         failed.add(rid)
@@ -3131,12 +3109,7 @@ def main(argv=None):
     ap.add_argument("--fit-models", help="the fit's model list: a file (JSON list or one key per word), or 'catalog' "
                                          "(data/catalog/models.json order); default: every models.json key")
     ap.add_argument("--class-ratios", help="class-ratio table for cost-class-ratio (default <registry>/class-ratios.json)")
-    ap.add_argument("--no-check-files", dest="check_files", action="store_false",
-                    help="skip validate.py's re-hashing of every saved copy (cells read are still hashed)")
     ap.add_argument("--no-lqm", action="store_true", help="skip the lqm.load step (data/build_lqm.py)")
-    ap.add_argument("--registry-files-checked", action="store_true",
-                    help="skip the saved-copy checks of the registry's evidence only (a converter's loop on an unchanged "
-                         "registry copy); the findings' files are still checked")
     a = ap.parse_args(argv)
     try:
         check_args(a)

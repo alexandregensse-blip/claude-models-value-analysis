@@ -87,7 +87,7 @@
        "description": "Saved copy."
       },
       "evidence": {
-       "description": "The proof of the date in the evidence format (url, captured, file, sha256, where, quote), for dates written from dating step 2 (3 Nov 2026): validate.py --check-files checks each file's sha256 and quote, and the build does not use a date whose proof fails.",
+       "description": "The proof of the date in the evidence format (url, captured, file, sha256, where, quote), for dates written from dating step 2 (3 Nov 2026): the agent writing the date checks it (validate.py --check-files: each file's sha256 and quote); the build never re-reads it and keeps the date (the maintainer, 4 Nov 2026).",
        "$ref": "common.schema.json#/$defs/evidence_list"
       }
      },
@@ -158,7 +158,7 @@
       "description": "Free note."
      },
      "evidence": {
-      "description": "The proof of the capture's date when the capture's own file does not carry it (a commit's date in the saved commit list; a Wayback capture: a value its page shows), in the evidence format (url, captured, file, sha256, where, quote). validate.py --check-files checks each file's sha256 and quote; a capture whose proof fails is not used by the build (dating step 2, 3 Nov 2026).",
+      "description": "The proof of the capture's date when the capture's own file does not carry it (a commit's date in the saved commit list; a Wayback capture: a value its page shows), in the evidence format (url, captured, file, sha256, where, quote). The agent writing it checks it (validate.py --check-files: each file's sha256 and quote; dating step 2, 3 Nov 2026); the build never re-reads it and keeps the capture's date (the maintainer, 4 Nov 2026).",
       "$ref": "common.schema.json#/$defs/evidence_list"
      }
     },
@@ -228,8 +228,20 @@
       "pattern": "^F[0-9]+$"
      },
      "says": {
-      "$ref": "vocab.json#/$defs/fact_type",
-      "description": "Fact type (vocab fact_type)."
+      "description": "Fact type (vocab fact_type); for a table cell whose column states several types (an Inspect model string is both a route and an API id), the list of them.",
+      "anyOf": [
+       {
+        "$ref": "vocab.json#/$defs/fact_type"
+       },
+       {
+        "type": "array",
+        "description": "Fact types.",
+        "items": {
+         "$ref": "vocab.json#/$defs/fact_type"
+        },
+        "minItems": 2
+       }
+      ]
      },
      "about": {
       "description": "The source's entry name, verbatim (row label, model string as printed; for a chart point, the series' legend label, the marker going in `where`); null for a source-wide fact. Within a measure, the value and the per-entry facts (spend, usage, judge, anomalies) are about an entry a model fact names.",
@@ -268,6 +280,16 @@
       "type": "string",
       "description": "For a data-file fact standing for a table cell: the table id.",
       "pattern": "^T[0-9]+$"
+     },
+     "column": {
+      "type": "string",
+      "minLength": 1,
+      "description": "For a table cell written as a fact: its column, as the table's `columns` names it."
+     },
+     "cell": {
+      "type": "string",
+      "pattern": "^T[0-9]+/.+/[^/]+$",
+      "description": "For a table cell written as a fact (data/convert/cells.py, 4 Nov 2026): the cell reference T<n>/<row key>/<column> it stands for. Its value is the cell as the saved file writes it, its quote the cell and what identifies its row and column, copied from the file; the build reads the value written here and never the file (the maintainer, 4 Nov 2026). A run's id is its row key, as for a cell."
      },
      "chart": {
       "type": "string",

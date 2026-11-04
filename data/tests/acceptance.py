@@ -73,7 +73,7 @@ def main():
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
             code = build.main(["--registry", reg, "--findings", fnd, "--decisions", os.path.join(root, "none.json"),
-                               "--out", out, "--fit-models", "catalog"] + (["--no-check-files"] if a.registry else []))
+                               "--out", out, "--fit-models", "catalog"])
         print(buf.getvalue().strip()[:600])
         if code != 0:
             print("build failed")

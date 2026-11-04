@@ -104,7 +104,7 @@ def legacy_build_against_real_registry():
         err = io.StringIO()
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(err):
             code = build.main(["--registry", os.path.join(DATA, "registry"), "--findings", fnd, "--decisions",
-                               os.path.join(root, "none.json"), "--out", out, "--no-check-files", "--no-lqm"])
+                               os.path.join(root, "none.json"), "--out", out, "--no-lqm"])
         lines = [l for l in err.getvalue().splitlines()[1:] if l.strip()]
         eq([l for l in lines if not l.startswith(os.path.relpath(os.path.join(DATA, "registry"), build.REPO))], [],
            "no error outside the registry's own files")
@@ -160,7 +160,7 @@ def precision_per_column():
         sc.msets[s].append({"id": f"M{i}", "setup": "s1", "verified": None, "facts": {
             "value": f"T1/{e}/score", "model": [f"T1/{e}/model"], "effort": [f"T1/{e}/eff"],
             "spend": [f"T1/{e}/cost", cur]}})
-    r = sc.run(check_files=True)
+    r = sc.run()
     row = r.rows("fit-quality.csv", model="ma")[0]
     eq(row["score_prec"], "0", "the score column is exact")
     eq(r.rows("fit-cost.csv", model="ma")[0]["cost_prec"], "0.289", "the cost column takes the table's (step 1)")
@@ -246,7 +246,7 @@ def gaps_name_to_register():
         reg, fnd, dec = sc.write(root)
         out = os.path.join(root, "b")
         with contextlib.redirect_stdout(io.StringIO()):
-            build.main(["--registry", reg, "--findings", fnd, "--decisions", dec, "--out", out, "--no-check-files",
+            build.main(["--registry", reg, "--findings", fnd, "--decisions", dec, "--out", out,
                         "--no-lqm"])
         g = gaps.gaps(json.load(open(os.path.join(out, "status-report.json"))))[s]
     finally:
@@ -365,7 +365,7 @@ def toolkit_precheck_and_gaps():
         pc = precheck.precheck(reg, fnd, s)
         out = os.path.join(root, "b")
         with contextlib.redirect_stdout(io.StringIO()):
-            build.main(["--registry", reg, "--findings", fnd, "--decisions", dec, "--out", out, "--no-check-files",
+            build.main(["--registry", reg, "--findings", fnd, "--decisions", dec, "--out", out,
                         "--no-lqm"])
         g = gaps.gaps(json.load(open(os.path.join(out, "status-report.json"))))[s]
     finally:

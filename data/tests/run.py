@@ -9,7 +9,7 @@ import collections, datetime as dt, glob, hashlib, json, os, re, shutil, sys, te
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from fixtures import Sc, iv, name, price, EV, build, DATA  # noqa: E402
+from fixtures import Sc, iv, name, price, EV, build, DATA, V  # noqa: E402
 
 TESTS = []
 
@@ -344,7 +344,7 @@ def cfg3_cells_with_prefix_and_column():
         sc.msets[s].append({"id": f"M{i}", "setup": "s1", "verified": None, "facts": {
             "value": f"T1/{e}/score", "model": [f"T1/{e}/model"], "effort": [f"T1/{e}/reasoning_effort"],
             "route": [f"T1/{e}/model"]}})
-    r = sc.run(check_files=True)
+    r = sc.run()
     eq(r.cfg(f"{s}#M1"), "nothink", "column reasoning_effort, cell none")
     eq(r.model(f"{s}#M1"), "mg", "prefix mk/ names the maker's API")
     eq(r.rows("fit-quality.csv", effort="low")[0]["score"], "62.5", "fraction → percent, exactly")
@@ -1597,18 +1597,86 @@ def json_tables():
             {"id": "e2", "model": "mk/ma", "cfg": {"effort": "high"}, "score": 0.625}]
     sc = base()
     s = json_case(sc, {"meta": {"v": 1}, "results": rows}, "$.results", "id")
-    r = sc.run(check_files=True)
+    r = sc.run()
     eq((r.cfg(f"{s}#M1"), r.q(f"{s}#M1")), ("nothink", "in"), "JSON path $.results")
     eq(r.rows("fit-quality.csv", model="ma")[0]["score"], "62.5", "number kept as written, then × 100")
     sc = base()
     s = json_case(sc, {"data": {"rows": {r_["id"]: r_ for r_ in rows}}}, "$['data'].rows", "$key")
-    r = sc.run(check_files=True)
+    r = sc.run()
     eq((r.cfg(f"{s}#M2"), r.q(f"{s}#M2")), ("high", "in"), "an object of rows, row_key $key")
     sc = base()
     s = json_case(sc, {"results": rows}, "results", "id")
-    r = sc.run(check_files=True)
+    r = sc.run()
     eq(r.q(f"{s}#M1"), "out:no-proof", "a json table's where must be a JSON path")
     eq(any("must be a JSON path" in e for e in r.rep["validation"]["errors"]), True, "reported by validate.py")
+
+
+@test
+def build_reads_no_saved_copy():
+    # the maintainer, 4 Nov 2026: the findings write every value (a cell too, data/convert/cells.py), the build is a
+    # filter over the repository's files and never reads a saved copy; sealed: every access outside refused
+    from convert import cells as CL
+    copies = tempfile.mkdtemp(prefix="copies-")
+    text = "entry,model,reasoning_effort,score\ne1,mk/mg,none,0.50\ne2,mk/mg,low,0.625\n"
+    path = os.path.join(copies, "t.csv")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(text)
+
+    def scenario(convert=True):
+        sc = base()
+        sc.model("mg", configs=("nothink", "low", "medium", "high"))
+        s = sc.source("t")
+        doc = sc.sources[s]
+        doc["sha256"][path] = hashlib.sha256(text.encode()).hexdigest()
+        doc["tables"] = [{"id": "T1", "file": path, "where": "t.csv", "format": "csv", "row_key": "entry",
+                          "columns": {"model": {"says": ["model-api-id", "route"], "namespace": "prefix"},
+                                      "reasoning_effort": "effort-setting",
+                                      "score": {"says": "score", "term": "pass%", "scale": "fraction"}}}]
+        for i, e in enumerate(("e1", "e2"), 1):
+            sc.msets[s].append({"id": f"M{i}", "setup": "s1", "verified": None, "facts": {
+                "value": f"T1/{e}/score", "model": [f"T1/{e}/model"], "effort": [f"T1/{e}/reasoning_effort"],
+                "route": [f"T1/{e}/model"]}})
+        if convert:
+            eq(CL.to_facts(doc, {"measures": sc.msets[s]}, path), (6, {}), "six cells written as facts")
+        return sc, s
+    try:
+        sc, s = scenario()
+        F = {f["cell"]: f for f in sc.sources[s]["facts"] if f.get("cell")}
+        eq((F["T1/e2/score"]["value"], F["T1/e2/score"]["quote"], F["T1/e1/model"]["says"]),
+           ("0.625", "entry: e2 | score: 0.625", ["model-api-id", "route"]), "the value, its quote, the column's types")
+        eq(sc.msets[s][1]["facts"]["value"], F["T1/e2/score"]["id"], "the measure cites the fact")
+        r = sc.run(seal=True)
+        eq((r.cfg(f"{s}#M1"), r.model(f"{s}#M1"), r.q(f"{s}#M2")), ("nothink", "mg", "in"), "sealed: read from the facts")
+        eq(r.rows("fit-quality.csv", effort="low")[0]["score"], "62.5", "the cell's digits")
+        os.remove(path)
+        eq(sc.run().rows("fit-quality.csv", effort="low")[0]["score"], "62.5", "the saved copy removed: the same")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(text)
+        # negative control: a build reading the cell in its saved file again is caught
+        orig = build.Source.fact
+
+        def reads_file(self, ref, _seen=frozenset()):
+            f = self.facts.get(ref) or {}
+            if f.get("cell"):
+                V.table_rows(self.tables[f["table"]], self.path)
+            return orig(self, ref, _seen)
+        build.Source.fact = reads_file
+        try:
+            try:
+                sc.run(seal=True)
+                caught = None
+            except AssertionError as e:
+                caught = str(e)
+        finally:
+            build.Source.fact = orig
+        eq(bool(caught and caught.startswith("sealed:") and path in caught), True,
+           "negative: a cell read in its saved file is refused and reported")
+        # a cell not written as a fact: no proof, the file not read
+        sc, s = scenario(convert=False)
+        r = sc.run(seal=True)
+        eq(r.q(f"{s}#M1"), "out:no-proof", "negative: a cell cited but not written in the findings")
+    finally:
+        shutil.rmtree(copies, ignore_errors=True)
 
 
 @test
@@ -1782,8 +1850,6 @@ def report_counts_and_diff():
 def examples():
     ex = os.path.join(DATA, "findings", "examples")
     obv = "src-github-obviousbench-v0.2-aggregate-2026-10-10"
-    if not os.path.isfile("/work/.salvo14/arb/obv/evidence/summary-222d955.csv"):
-        raise AssertionError("SKIP: the examples' saved copies are not reachable here")
     import contextlib, io, json, shutil, tempfile
     out = tempfile.mkdtemp(prefix="buildex-")
     try:
@@ -1890,8 +1956,12 @@ def legacy_path():
             build.main(["--registry", os.path.join(root, "reg"), "--findings", os.path.join(root, "f"), "--decisions",
                         os.path.join(root, "none.json"), "--out", out + "3", "--fit-models", lst, "--no-lqm"])
         rep3 = json.load(open(os.path.join(out + "3", "status-report.json")))
-        eq(next(e for e in rep3["measures"].values() if e["line"] == 3)["status"]["quality"], "legacy:out:no-proof",
-           "the row is not a line of its CSV")
+        eq(next(e for e in rep3["measures"].values() if e["line"] == 3)["status"]["quality"], "legacy:in",
+           "the build reads no CSV: the legacy row is taken as the findings write it (4 Nov 2026)")
+        vr = V.Report()
+        V.check_saved(doc, os.path.join(sp, fn), vr)
+        eq(any("not a line of its CSV" in e for e in vr.errors), True,
+           "the writer's check (validate.py --check-files) finds the row is not a line of its CSV")
     finally:
         shutil.rmtree(root, ignore_errors=True)
 
@@ -1902,7 +1972,7 @@ def bad_arguments_clean_errors():
     root = tempfile.mkdtemp(prefix="args-")
     ex = os.path.join(DATA, "findings", "examples")
     base_args = [sys.executable, os.path.join(DATA, "build.py"), "--registry", os.path.join(ex, "registry"),
-                 "--findings", ex, "--no-lqm", "--no-check-files"]
+                 "--findings", ex, "--no-lqm"]
     try:
         open(os.path.join(root, "afile"), "w").write("x")
         open(os.path.join(root, "bad.json"), "w").write("{")
@@ -2533,7 +2603,8 @@ def local_time_no_zone():
 @test
 def date_proof_checked():
     # dating step 2 (3 Nov 2026): a capture's or the publication's date carries its proof (evidence: file, sha256,
-    # quote); with the files checked, a date whose proof fails is left out
+    # quote). The maintainer, 4 Nov 2026: the proof is checked when it is written, by the agent writing it
+    # (validate.py --check-files, evidence_faults); the build never re-reads it and keeps the date whatever the file
     tmp = tempfile.mkdtemp(prefix="dateproof-")
     try:
         p = os.path.join(tmp, "commits.json")
@@ -2553,14 +2624,21 @@ def date_proof_checked():
                 sc.sources[s]["published"]["evidence"] = pub_ev
             m1 = sc.m(s, model="ma", effort=[LOW], value_seen_in=["G1"])
             sc.m(s, model="mb", effort=[LOW])
-            r = sc.run(check_files=True)
+            r = sc.run()
             return r[m1]["fields"]["run_date_detail"]["ma"]["hi"][:19]
         q = '"date": "2026-07-01T10:00:00Z"'
-        eq(hi(ev(good, q)), "2026-07-01T10:00:00", "the commit's date, proven, bounds the value")
-        eq(hi(ev("0" * 64, q)), "2026-09-01T23:59:59", "negative: a wrong sha256, the capture's date is left out")
-        eq(hi(ev(good, '"date": "2026-07-02T10:00:00Z"')), "2026-09-01T23:59:59", "negative: a quote not in the file")
-        eq(hi(ev(good, q), pub_ev=ev("0" * 64, q)), "2026-07-01T10:00:00",
-           "a publication whose proof fails is left out (the capture still bounds)")
+        eq(hi(ev(good, q)), "2026-07-01T10:00:00", "the commit's date bounds the value")
+        eq(hi(ev("0" * 64, q)), "2026-07-01T10:00:00", "a wrong sha256: the build keeps the date (checked at writing)")
+        eq(hi(ev(good, '"date": "2026-07-02T10:00:00Z"')), "2026-07-01T10:00:00", "a quote not in the file: kept too")
+        os.remove(p)
+        eq(hi(ev(good, q)), "2026-07-01T10:00:00", "the saved copy gone: the build gives the same date")
+        with open(p, "w", encoding="utf-8") as fh:
+            fh.write('[{"sha": "abcdef1", "commit": {"committer": {"date": "2026-07-01T10:00:00Z"}}}]')
+        e = ev(good, q)[0]
+        eq(V.evidence_faults(e, p), [], "the writer's check (validate.py --check-files): the proof holds")
+        eq(V.evidence_faults(dict(e, sha256="0" * 64), p), [f"sha256 mismatch: {p}"], "negative: a wrong sha256")
+        eq(V.evidence_faults(dict(e, quote='"date": "2026-07-02T10:00:00Z"'), p), ["quote not found in commits.json"],
+           "negative: a quote not in the file")
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -2612,9 +2690,13 @@ def findings_dates_step2():
         for c in d.get("captures", []) + ([d["published"]] if d.get("published") else []):
             for e in c.get("evidence") or []:
                 n[c.get("kind", "published")] += 1
-                ok = os.path.isfile(e["file"]) and hashlib.sha256(open(e["file"], "rb").read()).hexdigest() == e["sha256"] \
-                    and (e["quote"] in open(e["file"], encoding="utf-8", errors="replace").read()
-                         or (e["quote"] == "sha256 " + e["sha256"] and e["sha256"] in (d.get("sha256") or {}).values()))
+                # the trace every proof keeps (url, file, sha256, where, quote); the file itself is checked only while
+                # its saved copy is reachable (the writer's check, 4 Nov 2026: the copies are then removed)
+                ok = all(e.get(k) for k in ("url", "file", "sha256", "where", "quote"))
+                if ok and os.path.isfile(e["file"]):
+                    ok = hashlib.sha256(open(e["file"], "rb").read()).hexdigest() == e["sha256"] \
+                        and (e["quote"] in open(e["file"], encoding="utf-8", errors="replace").read()
+                             or (e["quote"] == "sha256 " + e["sha256"] and e["sha256"] in (d.get("sha256") or {}).values()))
                 if not ok:
                     bad.append((d["id"], c.get("id")))
     eq(bad, [], "every step-2 date: its file, sha256 and exact quote")
@@ -2622,12 +2704,13 @@ def findings_dates_step2():
     cap = lambda sid: [c for c in src(sid).get("captures", []) if c.get("evidence")]   # noqa: E731
     eq(cap("src-zhipu-glm-5-3-flash-hf-readme-2026-10-19"), [], "GLM-5.3-Flash: values from the image, not dated")
     s = "src-clbench.com-clb-data-2026-09-30"
-    poly = [m for m in ms(s) if "polyphony" in m["facts"]["value"].casefold()]
+    cell = lambda sid, r: V.cell_of(r, {f["id"]: f for f in src(sid)["facts"]})   # noqa: E731
+    poly = [m for m in ms(s) if "polyphony" in cell(s, m["facts"]["value"]).casefold()]
     eq(any(c["id"] in m["facts"].get("value_seen_in", []) for m in poly for c in cap(s)), False,
        "clbench: Polyphony is not in the 1 May capture")
     s = "src-surgehq.ai-2026-10-15"
     T = {t["id"]: os.path.basename(t["file"]) for t in src(s)["tables"]}
-    sudo = [m for m in ms(s) if T[m["facts"]["value"].split("/")[0]].startswith("sudo-l7")]
+    sudo = [m for m in ms(s) if T[cell(s, m["facts"]["value"]).split("/")[0]].startswith("sudo-l7")]
     eq((len(cap(s)), any(c["id"] in m["facts"].get("value_seen_in", []) for m in sudo for c in cap(s))), (11, False),
        "surgehq: a capture per board, none for sudo-l7")
     c = [x for x in cap("src-github-codereviewbench-files-2026-10-19") if x["kind"] == "commit" and "4 Nov 2026" not in (x.get("note") or "")]
@@ -2753,6 +2836,9 @@ def registry_prices_salvo_4nov():
         for e in p["evidence"]:
             if not e["file"].startswith("/work/.salvo14/mig/prix1/"):
                 continue                                 # the registry's own records (checked by validate.py --check-files)
+            eq(all(e.get(k) for k in ("url", "sha256", "quote")), True, f"{p['model']}: the proof's trace")
+            if not os.path.isfile(e["file"]):            # the saved copies removed (4 Nov 2026): the trace only
+                continue
             b = open(e["file"], "rb").read()
             eq(hashlib.sha256(b).hexdigest(), e["sha256"], f"{p['model']} {e['file']}")
             eq(e["quote"].encode("utf-8") in b, True, f"{p['model']}: an exact quote of {os.path.basename(e['file'])}")
@@ -2777,7 +2863,8 @@ def findings_dates_4nov():
        "6: the CSV extracted from the zip, cited")
     ms = mea("src-collinear-ai-yc-bench-2026-10-15")
     g = [c["id"] for c in src("src-collinear-ai-yc-bench-2026-10-15")["captures"] if c.get("commit", "").startswith("feb032b1")]
-    on = [m["facts"]["value"].split("/")[1] for m in ms if g and g[0] in m["facts"]["value_seen_in"]]
+    F = {f["id"]: f for f in src("src-collinear-ai-yc-bench-2026-10-15")["facts"]}
+    on = [V.split_cell(V.cell_of(m["facts"]["value"], F))[1] for m in ms if g and g[0] in m["facts"]["value_seen_in"]]
     eq((len(on), any(k.startswith("glm-5.3") for k in on)), (43, False), "7: yc-bench, the 52-model version (not GLM-5.3)")
     s = src("src-github-codereviewbench-files-2026-10-19")
     eq(sorted(c["captured"] for c in s["captures"] if c["kind"] == "commit")[:2], ["2026-09-29T17:30:18Z", "2026-09-29T17:42:45Z"],

@@ -66,7 +66,7 @@ def model_values(findings, sid):
                 out.append((ref, says, cell, ns))
             elif ref in facts:
                 f = facts[ref]
-                out.append((ref, [f["says"]], f["value"], f.get("namespace")))
+                out.append((ref, V.fact_says(f), f["value"], f.get("namespace")))
     return out
 
 
