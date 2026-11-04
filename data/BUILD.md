@@ -1227,3 +1227,74 @@ Tests: `cost_stated_price_registered`, `cost_price_ratio_currency`, `cost_price_
 switching the mechanism off — `maker_api_stated`, `price_currency`, `stated_prices` — makes its test fail);
 `registry_prices_salvo_4nov` and `findings_dates_4nov` updated; the tests that read saved copies check them only while
 reachable (`in_saved`, `sha_saved`: copies under /work/.salvo14 are being removed).
+
+## Added on 4 Nov 2026 (the total-tokens split: a method change, before main: the maintainer's yes)
+
+The maintainer, 4 Nov 2026: a source that gives the run's total cost and its total tokens, but no class split, and
+whose own price list (input and output) at the run's date is known, gives the split by two equations — cost per call
+= t_in × p_in + t_out × p_out and t_in + t_out = T — and the cost at the maker's current price is t_in × P_in + t_out ×
+P_out, in the currency of the maker's list (the price-ratio method: the group absorbs the unit; a group never mixes two
+currencies). The case: chinese-llm-benchmark (« 花费/千次（元） » per 1,000 questions, « 平均消耗token » per question),
+run on its own platform nonelinear.com at that platform's prices (decision F: those costs as such stay out).
+
+**Rule `cost-total-tokens-split`** (`total_tokens_split`, tried in `reprice` when no earlier rule and no band brings
+the cost to the current price, so no cost already in moves):
+- **The platform's prices** are the source's findings: facts `platform-price` (new fact type, spend slot; schema field
+  `capture`), each one price of the platform's list as a dated capture shows it — `term` a price class, a long-context
+  tier `lc><threshold>:<class>`, a cache-write multiple of the input price `<class>/input` (the list writes « 缓存写入价格
+  ÷ 输入价格 », applied to every tier's input price), or `discount` / `off-peak` (its promotion fields); the capture's
+  `captured` dates it.
+- **Over the price date** (the cost's own, as before: [run lower bound, publication] here), the platform's vectors
+  are those the captures show, under the maintainer's decisions A and I of 4 Nov read on the platform's list: from the
+  release to the first capture, the first capture's price (A); between two captures of the same price, that price (I);
+  after the last capture, nothing. A price change of the maker's registered list (in the list's currency) between the
+  release and the first capture, or between two captures, stops A or I there (the platform follows the maker's list,
+  so its price in that span is not known); two captures of different vectors leave the span between them unknown. A
+  `discount` or `off-peak` field on any capture → out (a promotion visible: the price at the run's date is not known).
+- **The list to price on**: the cost's currency when the maker prices the model in it, else the maker's single list
+  (prices.json `maker_currencies`); else doubt, out. The current price is `base_price` in that currency (its flags
+  `base-last-list-price`, `base-scheduled-list-price` carried).
+- **The split** t_out = (cost per call − T × p_in) / (p_out − p_in), computed for every platform vector over the price
+  date; conditions: p_in ≠ p_out; the split inside [0, T] once the source's rounding is taken into account (cost ±
+  half its step, here 0.1 元 / 1,000 calls, T ± half a token) — else out.
+- **Cache classes and long-context tiers.** When every platform vector over the price date is one multiple k of the
+  current list on every class and tier (the same classes and tiers on both), the cost at the current price is cost × k
+  whatever the run's mix over the classes and tiers (the split gives it exactly: t_in × k p_in + t_out × k p_out = k ×
+  cost), its sd the cost's reading sd × k. Otherwise the split stands only when neither list has a class or tier beyond
+  input and output, since the run's mix over them cannot be excluded; then the value is t_in × P_in + t_out × P_out
+  and its sd propagates the cost's reading sd and the tokens' (∂/∂cost = (P_out − P_in) / (p_out − p_in), ∂/∂T = P_in −
+  p_in × that); a single platform vector is then required.
+- **Output**: `fields.cost.total_split` (currency, the current and platform vectors, each split with its rounding
+  range, how), flag `cost-total-tokens-split:<currency>`, `cost-base-price:cost-total-tokens-split`. The row's part
+  takes the list's currency and unit (`part_currency`, `part_unit`: per-1k-calls for USD), so its group never mixes it
+  with the source's yuan; `currency` keeps the source's. The fit-cost row's `unit` is the part's.
+- The build reads no file outside the repository (data/tests/sealed.py); `validate.py` checks a platform-price fact's
+  capture, term and number.
+
+**The platform's prices written** (chinese-llm-benchmark d44b57e, by the writer clb/w/write_platform.py of the
+session's scratchpad; every proof checked at the writing: the file's sha256, the quote an exact substring of the raw
+file, the value read again from the parsed JSON): nonelinear.com's catalogue `/models` (the JSON behind
+static/models.html, whose script names the columns « 缓存命中价格、输入价格、输出价格 » and the info fields: discount,
+step_prices, cache_write_x / cache_write_1h_x, off_peak_discount), two captures — W1, Wayback 20260715070432 (the only
+capture of /models in 2026; its format has no tier, cache-write or discount field), S1, our fetch of 4 Nov 2026
+15:53:49 GMT (a Wayback save was not permitted from here) — 95 facts for the 17 fit models whose costs reach the cost
+step, cited by their 153 measures. The repository's history holds no input price: the board's commerce tables give
+only « 输出价格 », and the README links the catalogue.
+
+**Effect** (`--fit-models catalog`, against 4e6b610; S/clb/AVANT-APRES.txt of the session's scratchpad): fit-cost rows
+9,366 → 9,411 (+45, 0 lost; lqm.load kept 8,796 → 8,841): opus-5, gpt-5.4-mini, gpt-5.4-nano, grok-4.6, grok-4.7, all
+`high`, 9 tables each, each platform list 7 × the maker's on every class and tier (cost × 1/7, in USD, groups
+rele-*~c2); cost couples 276 (unchanged), Claude cost couples 55, Claude rows opus-5 high 148 → 157. kimi-k2.7-code
+(CNY, its list = Moonshot's, × 1) and hy4-preview (outside the fit's list) go to `out:cost-single-couple`. Refused (90):
+gemini-3.8-flash, gemini-4-argon (« 限时5折 » on 4 Nov), gpt-5.3-chat-latest (last capture 15 Jul), gpt-5.4, grok-4.5
+(the two captures differ), sonnet-5.5 (the maker's cache-read change of 7 Oct between the release and the first
+capture), gpt-6-luna / -sol / 6.1-sol (cache-write classes not shared: 30 min / 12 h at the maker, 5 min on the
+platform; 5 splits outside [0, T]), qwen3-max-0123 (Alibaba's list not established). Fit-quality rows unchanged
+(17,748; 54 rows gain the build's flags in `confound`).
+
+Tests: `cost_total_tokens_split` (negative control: the rule switched off in the build → both costs out; no platform
+price → out), `cost_total_tokens_split_conditions` (the split proper and its precision; one negative per condition: a
+cache class, a tier on one list, [0, T] broken and kept within the rounding, p_in = p_out, past the last capture, a
+maker's change between captures (I) and before the first (A), a discount, the maker's currencies not established; a
+cache-write multiple), `findings_platform_prices` (the 95 facts, their proofs while reachable; negative: none at
+4e6b610). With the call to the rule removed from `reprice`, the first two fail.

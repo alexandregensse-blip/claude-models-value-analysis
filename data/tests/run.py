@@ -5,7 +5,7 @@ campaign rule, per cost step, decisions first and the stale hash, and the three 
     python3 data/tests/run.py            # all
     python3 data/tests/run.py cost       # the tests whose name contains 'cost'
 """
-import collections, datetime as dt, glob, hashlib, json, os, re, shutil, sys, tempfile, time, traceback
+import collections, datetime as dt, glob, hashlib, json, math, os, re, shutil, sys, tempfile, time, traceback
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -3071,6 +3071,141 @@ def findings_4nov_later():
     old = subprocess_show("0796bfd:data/findings/measures/src-github-bullshitbench-2026-10-13.json")
     if old is not None:
         eq({len(m["facts"]["run_date"]) for m in json.loads(old)["measures"]}, {0}, "negative 7: no run-end before")
+
+
+def _split_scenario(plat=None, maker=None, costs=None, caps=(("W1", "wayback", "2026-05-15"), ("S1", "fetch", "2026-07-01")),
+                    published="2026-06-01", maker_cur=("USD",), changes=None, extra_plat=None, platform_facts=True):
+    """The total-tokens split (the maintainer, 4 Nov 2026): a CNY board that gives each model's cost per 1,000 calls
+    and its total tokens per call, run on its own platform; the platform's list (dated captures) and the maker's."""
+    sc = base()
+    maker = maker or {"ma": {"input": 1, "output": 5, "cache-read": 0.1}, "mb": {"input": 2, "output": 10, "cache-read": 0.2}}
+    plat = plat or {"ma": {"input": "7.00", "output": "35.00", "cache-read": "0.7"},
+                    "mb": {"input": "14.00", "output": "70.00", "cache-read": "1.4"}}
+    # ma: 200 in + 800 out tokens at 7 / 35 → 29.4 元 per 1,000 calls; mb: 300 + 200 at 14 / 70 → 18.2
+    costs = costs or {"ma": ("29.4", "1000"), "mb": ("18.2", "500")}
+    for k, cl in maker.items():
+        sc.prices["prices"].append(price(k, "2026-01-01", "2026-10-01", cl))
+    for k, frm, cl in (changes or []):                   # a maker's price change: the earlier entry ends the day before
+        e = next(p for p in sc.prices["prices"] if p["model"] == k)
+        e["to"] = (dt.date.fromisoformat(frm) - dt.timedelta(days=1)).isoformat()
+        sc.prices["prices"].append(price(k, frm, "2026-10-01", cl))
+    if maker_cur is not None:
+        sc.prices["maker_currencies"] = {"anthropic": {"currencies": list(maker_cur), "evidence": EV}}
+    s = sc.source("a", published=published, captures=[dict(id=c, kind=kind, url=f"https://example.org/p/{c}",
+                                                             captured=day) for c, kind, day in caps])
+    ms = []
+    for k, (cost, tot) in costs.items():
+        sp = []
+        if platform_facts:
+            for c, _, _ in caps:
+                for term, v in plat[k].items():
+                    sp.append(("platform-price", v, {"term": term, "capture": c, "form": "code", "quote": f"\"{v}\""}))
+            for c, term, v in (extra_plat or {}).get(k, []):
+                sp.append(("platform-price", v, {"term": term, "capture": c, "form": "code", "quote": f"\"{v}\""}))
+        ms.append(sc.m(s, model=k, effort=[LOW], cost=cost, currency="CNY", unit="per-1k-calls-CNY",
+                       tokens={"tokens-total": tot}, more={"spend": sp} if sp else None))
+    return sc.run(), ms
+
+
+@test
+def cost_total_tokens_split():
+    # rule cost-total-tokens-split (the maintainer, 4 Nov 2026): the platform's list 7 × the maker's on every class →
+    # the cost at the maker's current price is cost × 1/7 whatever the mix (the split: ma 200 in / 800 out), in USD
+    r, (m1, m2) = _split_scenario()
+    C = r[m1]["fields"]["cost"]
+    eq((r.c(m1), r.c(m2)), ("in", "in"), "both re-priced on the maker's USD list")
+    eq((C["base"]["rule"], round(C["base"]["value"], 9), C["part"][2], C["part"][3], C["currency"]),
+       ("cost-total-tokens-split", 4.2, "per-1k-calls", "USD", "CNY"), "29.4 / 7 = 4.2 USD per 1,000 calls; its part in USD")
+    eq([round(x) for x in (C["total_split"]["splits"][0]["t_in"], C["total_split"]["splits"][0]["t_out"])], [200, 800],
+       "the split")
+    eq(round(r[m2]["fields"]["cost"]["base"]["value"], 9), 2.6, "mb: 18.2 / 7")
+    eq(round(C["base"]["prec"], 9), round(0.1 / math.sqrt(12) / 7, 9), "the cost's reading precision × 1/7")
+    eq(("cost-total-tokens-split:USD" in r[m1]["flags"], "cost-total-tokens-split" in r[m1]["rules_used"]), (True, True), "flag, rule")
+    eq({(row["model"], row["unit"], row["cost_usd"]) for row in r.rows("fit-cost.csv")},
+       {("ma", "per-1k-calls", "4.2"), ("mb", "per-1k-calls", "2.6")}, "fit-cost rows (the source's digits)")
+    # negative control: the rule switched off → both out (nothing else prices a CNY cost of a USD-only maker)
+    keep = build.total_tokens_split
+    build.total_tokens_split = lambda M, C, key: (False, "")
+    try:
+        r, (m1, m2) = _split_scenario()
+    finally:
+        build.total_tokens_split = keep
+    eq((r.c(m1), r.c(m2)), ("out:cost-not-comparable",) * 2, "negative: the rule switched off")
+    r, (m1, m2) = _split_scenario(platform_facts=False)
+    eq(r.c(m1), "out:cost-not-comparable", "negative: no platform price written")
+
+
+@test
+def cost_total_tokens_split_conditions():
+    # the split itself, when the lists are not one multiple of each other and have only input and output
+    mk = {"ma": {"input": 1, "output": 6}, "mb": {"input": 2, "output": 10}}
+    pl = {"ma": {"input": "7.00", "output": "35.00"}, "mb": {"input": "14.00", "output": "70.00"}}
+    r, (m1, m2) = _split_scenario(plat=pl, maker=mk)
+    C = r[m1]["fields"]["cost"]
+    eq((r.c(m1), round(C["base"]["value"], 9)), ("in", 5.0), "ma: 200 × 1 + 800 × 6 per 1,000 calls = 5.0")
+    d_cost, d_tok = (6 - 1) / (35 - 7), 1e-3 * (1 - 7 * (6 - 1) / (35 - 7))
+    eq(round(C["base"]["prec"], 12), round(math.hypot(d_cost * 0.1 / math.sqrt(12), d_tok * 1 / math.sqrt(12)), 12),
+       "the reading precision of the cost (0.1) and of the tokens (1) propagated")
+    # negative controls, each one condition broken
+    mkc = {"ma": {"input": 1, "output": 6, "cache-read": 0.1}, "mb": {"input": 2, "output": 10, "cache-read": 0.2}}
+    r, (m1, _) = _split_scenario(plat=pl, maker=mkc)
+    eq((r.c(m1), "cannot be excluded" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True),
+       "negative: a cache class on the maker's list, the lists not one multiple → the mix cannot be excluded")
+    mkt = {"ma": {"input": 1, "output": 5, "cache-read": 0.1}, "mb": {"input": 2, "output": 10, "cache-read": 0.2}}
+    r, (m1, _) = _split_scenario(maker=mkt, extra_plat={"ma": [("S1", "lc>200000:input", "14.00")]})
+    eq(r.c(m1), "out:cost-not-comparable", "negative: a long-context tier on one list only")
+    r, (m1, _) = _split_scenario(costs={"ma": ("36.0", "1000"), "mb": ("18.2", "500")})
+    eq((r.c(m1), "outside [0, T]" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True),
+       "negative: 36.0 for 1,000 tokens at 7 / 35 needs more output tokens than the total")
+    r, (m1, _) = _split_scenario(costs={"ma": ("35.0", "1000"), "mb": ("18.2", "500")})
+    eq(r.c(m1), "in", "every token output, within the rounding: in")
+    r, (m1, _) = _split_scenario(plat={"ma": {"input": "7.00", "output": "7.00"}, "mb": pl["mb"]}, maker=mk)
+    eq((r.c(m1), "equal" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True), "negative: p_in = p_out")
+    r, (m1, _) = _split_scenario(published="2026-08-01")
+    eq((r.c(m1), "not known after" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True),
+       "negative: the price date runs past the last capture")
+    r, (m1, m2) = _split_scenario(changes=[("ma", "2026-05-20", {"input": 1, "output": 5, "cache-read": 0.05})])
+    eq((r.c(m1), r.c(m2)), ("out:cost-not-comparable", "out:cost-single-couple"),
+       "negative: the maker's price changes between the two captures (I stops): ma out, mb left alone")
+    r, (m1, m2) = _split_scenario(changes=[("ma", "2026-03-01", {"input": 1, "output": 5, "cache-read": 0.05})])
+    eq(r.c(m1), "out:cost-not-comparable", "negative: the maker's price changes between the release and the first capture (A stops)")
+    r, (m1, _) = _split_scenario(extra_plat={"ma": [("S1", "discount", "5.0")]})
+    eq((r.c(m1), "promotion" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True),
+       "negative: the platform's list shows a discount")
+    r, (m1, _) = _split_scenario(maker_cur=None)
+    eq((r.c(m1), "not established" in r[m1]["reason_detail"]["cost"]), ("out:cost-not-comparable", True),
+       "negative: the maker's currencies not established")
+    r, (m1, _) = _split_scenario(plat={"ma": {"input": "7.00", "output": "35.00", "cache-read": "0.7", "cache-write-5m/input": "1.25"},
+                                       "mb": {"input": "14.00", "output": "70.00", "cache-read": "1.4"}},
+                                 maker={"ma": {"input": 1, "output": 5, "cache-read": 0.1, "cache-write-5m": 1.25},
+                                        "mb": {"input": 2, "output": 10, "cache-read": 0.2}})
+    eq((r.c(m1), r[m1]["fields"]["cost"]["total_split"]["platform"][0]["cache-write-5m"]), ("in", 8.75),
+       "a cache-write multiple of the input price: 1.25 × 7 = 8.75, one multiple of the maker's 1.25")
+
+
+@test
+def findings_platform_prices():
+    # nonelinear.com's list written in chinese-llm-benchmark's findings (4 Nov 2026): every price dated by its capture,
+    # its quote holding the value; negative control: the findings of 4e6b610 have none
+    sid = "src-chinese-llm-benchmark-d44b57e-2026-10-19"
+    s = json.load(open(os.path.join(DATA, "findings", "sources", sid + ".json"), encoding="utf-8"))
+    ms = json.load(open(os.path.join(DATA, "findings", "measures", sid + ".json"), encoding="utf-8"))["measures"]
+    caps = {c["id"]: c for c in s["captures"]}
+    pp = [f for f in s["facts"] if f["says"] == "platform-price"]
+    eq((len(pp), sorted({f["capture"] for f in pp}), caps["W1"]["captured"], caps["S1"]["captured"]),
+       (95, ["S1", "W1"], "2026-07-15T07:04:32Z", "2026-11-04T15:53:49Z"), "95 prices, two captures")
+    eq(all((f.get("written") or f["value"]) in f["quote"] and f["file"] in s["sha256"] and
+           in_saved(f["quote"], f["file"]) and sha_saved(f["file"], s["sha256"][f["file"]]) for f in pp), True, "proofs")
+    got = {(f["about"], f["capture"], f["term"]): f["value"] for f in pp}
+    eq((got[("claude-opus-5(new)", "S1", "input")], got[("claude-opus-5(new)", "S1", "output")],
+        got[("claude-opus-5(new)", "S1", "cache-write-1h/input")], got[("gpt-5.4-mini-high", "W1", "output")],
+        got[("gemini-3.8-flash(new)", "S1", "discount")], ("gpt-5.4-high", "W1", "lc>272000:input") in got),
+       ("35.00", "175.00", "2.0", "31.50", "5.0", False), "a few values")
+    pid = {f["id"] for f in pp}
+    eq(sum(bool(pid & set(m["facts"]["spend"])) for m in ms), 153, "cited by the 17 models' 153 measures")
+    old = subprocess_show(f"4e6b610:data/findings/sources/{sid}.json")
+    if old is not None:
+        eq(sum(f["says"] == "platform-price" for f in json.loads(old)["facts"]), 0, "negative: none before")
 
 
 def main():

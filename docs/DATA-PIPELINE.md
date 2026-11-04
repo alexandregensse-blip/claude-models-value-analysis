@@ -321,7 +321,9 @@ components' costs, only on one unit and one run; otherwise the composite's cost 
 3. A subset with fewer than 2 couples → `out:cost-single-couple`; `subscription` → `out:cost-basis`.
 4. The price list read (the maintainer, 4 Nov 2026): the cost's own currency; else the maker's single list
    (`maker_currencies`) by the price ratio, for a cost with no currency or, with the source's `maker-price-multiple`
-   fact, in another currency; the cost keeps its currency in its part.
+   fact, in another currency; the cost keeps its currency in its part. A cost no rule and no band brings to the current
+   price, with total tokens and the source's own platform prices: the total-tokens split (4 Nov 2026), its part in the
+   maker's list's currency.
 5. Promotions and off-peak prices are never the base. A promotion is a price charged over its interval: it is one of
    the prices a source may have applied over the price date (`prices_over`), so a window where only a promotion is
    printed is covered (26 Oct).
@@ -468,6 +470,17 @@ Decided by the maintainer during the reviews:
   or a relay passing the maker's prices on); a cost with no currency written takes the single list's ratio as such;
   several lists and the source not saying which, or the maker's currencies not established: doubt, out. Rules
   `cost-price-ratio-other-currency`, `cost-price-ratio-no-currency` (they replace F's « converted only with a rate »).
+- **The total-tokens split (the maintainer, 4 Nov 2026; a method change, before main: his yes).** A source that gives a
+  run's total cost and total tokens (no class split) and whose own price list at the run's date is in its findings
+  (facts `platform-price`, each dated by its capture): cost = t_in × p_in + t_out × p_out and t_in + t_out = T give the
+  split, and the cost at the maker's current price is t_in × P_in + t_out × P_out, on the maker's list (the cost's
+  currency when the maker prices the model in it, else its single list), the row's part in that list's currency. The
+  platform's price over the price date: A (release → first capture) and I (between captures of the same price), stopped
+  by a change of the maker's registered price in between; nothing after the last capture; a discount or off-peak field
+  → out. Conditions, else out: p_in ≠ p_out; the split inside [0, T] with the source's rounding; cache classes and
+  long-context tiers — none on either list, or the platform's list one multiple k of the current list on every class
+  and tier (then cost × k, whatever the mix). The reading precision (cost to 0.1 元 / 1,000 calls, tokens to the unit)
+  propagates into the row's sd. Rule `cost-total-tokens-split` (data/BUILD.md, « the total-tokens split »).
 - **Dates (the maintainer, 4 Nov 2026, the points left by the dating step 2).** 1. toolathlon's « Date » column is not
   written (its meaning is unknown). 2. Terminal-Bench submission dates before a model's release are kept (early
   access). 3. SimpleBench `dateAdded` before the release: kept. 4. designarena: each board's own `lastUpdateTime` is

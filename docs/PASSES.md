@@ -5,6 +5,31 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The total-tokens split: chinese-llm-benchmark's costs at the maker's current price (4 Nov 2026, last)
+
+**Method.** No fit, no agent; web only for the board's GitHub repository (gh) and nonelinear.com / Wayback. The
+maintainer's idea (4 Nov 2026): chinese-llm-benchmark gives each model's cost per 1,000 questions (« 花费/千次（元） »)
+and its total tokens per question (« 平均消耗token »), at the prices of its own platform nonelinear.com (decision F:
+out as such). With the platform's input and output prices at the run's date, cost = t_in × p_in + t_out × p_out and
+t_in + t_out = T give the split, and the cost at the maker's current price follows, on the maker's list (rule
+`cost-total-tokens-split`, data/BUILD.md). A method change: before main, the maintainer's yes.
+
+**Search.** The repository (commits API, README, CHANGELOG, 每周最新模型.md, the commerce tables, docs/, eval/) has no input
+price: the commerce tables give « 输出价格 » only and the README links the catalogue
+(« 查看所有模型及价格 »). Wayback holds two captures of the catalogue's JSON (`/models`): 3 Jun 2025 and 15 Jul 2026
+(CDX over the domain: 980 URLs, no other price data); our fetch of 4 Nov 2026 is the second dated list. 95 prices
+written for the 17 fit models whose costs reach the cost step (inputs, outputs, cache reads, long-context tiers,
+cache-write multiples, two discounts), each with its exact quote, its capture and its date.
+
+**Result** (S/clb/AVANT-APRES.txt): +45 costs in the fit (opus-5, gpt-5.4-mini, gpt-5.4-nano, grok-4.6, grok-4.7, `high`,
+9 tables each; all kept by lqm.load), 0 lost; cost couples 276 unchanged, Claude cost couples 55, opus-5 high 148 → 157
+rows. The platform charges 7 × the maker's USD list on every class (and the maker's CNY list for Moonshot), so each
+accepted cost is the source's figure × 1/7, exact whatever the run's mix of cache and tiers; the split's role is the
+check that the tokens and the cost agree (inside [0, T]). The derived input per question repeats across models of one
+tokenizer (law: gpt-5.4 164, -mini 163, -nano 165 tokens), a check the prices and tokens pass. 90 refused, each for a
+named reason (a discount shown, a price date past the last capture, captures that differ, a maker's change before
+the first capture, cache-write classes not shared, splits outside [0, T], Alibaba's list not established).
+
 ## Prices written by the sources, API openings, prices in another currency (4 Nov 2026, later still)
 
 **Method.** No web, no agent, no fit. The maintainer's decisions 1–10 of 4 Nov 2026 applied from the saved files
