@@ -1085,8 +1085,8 @@
     "output": 10,
     "cache-read": 0.125
    },
-   "from": "2025-12-11",
-   "from_basis": "earliest-capture",
+   "from": "2025-11-13",
+   "from_basis": "release",
    "to": "2026-07-22",
    "to_basis": "stated",
    "evidence": [
@@ -1108,7 +1108,7 @@
     }
    ],
    "base": true,
-   "note": "retired (removed 23 Jul 2026): last list price is the base; release 13 Nov 2025 not archived"
+   "note": "retired (removed 23 Jul 2026): last list price is the base; release 13 Nov 2025 not archived | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2025-12-11) applies from the release (2025-11-13): decision 3: openai.com/api/pricing never lists gpt-5.1-codex (captures 13, 30 Nov, 3 Dec 2025: no occurrence); the platform pages of Nov–Dec 2025 are JS shells (q4: nothing earlier found)."
   },
   {
    "model": "gpt-5.1-codex-max",
@@ -1165,8 +1165,8 @@
     "output": 2,
     "cache-read": 0.025
    },
-   "from": "2025-12-11",
-   "from_basis": "earliest-capture",
+   "from": "2025-11-13",
+   "from_basis": "release",
    "to": "2026-07-22",
    "to_basis": "stated",
    "evidence": [
@@ -1188,7 +1188,7 @@
     }
    ],
    "base": true,
-   "note": "retired (removed 23 Jul 2026): last list price is the base; release 13 Nov 2025 not archived"
+   "note": "retired (removed 23 Jul 2026): last list price is the base; release 13 Nov 2025 not archived | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2025-12-11) applies from the release (2025-11-13): decision 3: openai.com/api/pricing never lists gpt-5.1-codex-mini (3 Dec 2025: codex-mini-latest only); platform pricing captures of 3, 7, 9 Dec are JS shells (q4)."
   },
   {
    "model": "gpt-5.2",
@@ -24427,8 +24427,8 @@
     "output": 4.4,
     "cache-read": 0.26
    },
-   "from": "2026-08-19",
-   "from_basis": "earliest-capture",
+   "from": "2026-08-15",
+   "from_basis": "release",
    "to": "2026-08-19",
    "to_basis": "last-capture",
    "evidence": [
@@ -24449,7 +24449,7 @@
      "quote": "GLM-5.3 $1.4 $0.26 Limited-time Free $4.4"
     }
    ],
-   "note": "Earliest capture showing a GLM-5.3 price row; the capture of 14 Aug 2026 has no GLM-5.3 row."
+   "note": "Earliest capture showing a GLM-5.3 price row; the capture of 14 Aug 2026 has no GLM-5.3 row. | Decision A at the API's opening (the maintainer's decision 2, 4 Nov 2026): the API was not open on 2026-08-15 (models.json glm-5.3 api_opens, « The GLM-5.3 API is coming soon. »); the price of the first capture (2026-08-19) applies from that day: no pricing-page capture readable between them shows the API without the price (the 14 Aug 12:53 capture lists GLM-5.3 in the menu without a price row, before the API opened)."
   },
   {
    "model": "deepseek-v4.1-flash-1017",
@@ -29475,8 +29475,8 @@
     "input": 20.0,
     "output": 80.0
    },
-   "from": "2025-12-11",
-   "from_basis": "earliest-capture",
+   "from": "2025-06-10",
+   "from_basis": "release",
    "to": "2026-10-29",
    "to_basis": "last-capture",
    "evidence": [
@@ -29529,7 +29529,7 @@
      "quote": "Status: Deprecated The o-series of models are trained with r"
     }
    ],
-   "note": "Released 10 Jun 2025 (changelog) but the platform pricing page was an empty JS shell until Dec 2025 and openai.com/api/pricing never listed o3-pro: the price starts at the first capture that shows it. No cached-input class."
+   "note": "Released 10 Jun 2025 (changelog) but the platform pricing page was an empty JS shell until Dec 2025 and openai.com/api/pricing never listed o3-pro: the price starts at the first capture that shows it. No cached-input class. | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2025-12-11) applies from the release (2025-06-10): decision 3: openai.com/api/pricing names o3-pro only in a calculator menu (« <option value=\"o3_pro\">o3-pro-2025-06-10</option> », captures 11, 17, 25 Jun and 3 Dec 2025) and never lists its price; the platform pricing captures of Jun–Dec 2025 are empty JS shells (q4: nothing earlier found)."
   },
   {
    "model": "o4-mini",
@@ -35006,11 +35006,19 @@
     "cache-read": null
    },
    "base": true,
-   "from": "2026-01-15",
-   "from_basis": "earliest-capture",
+   "from": "2025-07-28T07:31:27Z",
+   "from_basis": "release",
    "to": "2026-10-10",
    "to_basis": "last-capture",
    "evidence": [
+    {
+     "url": "https://web.archive.org/web/20250801172923/https://www.alibabacloud.com/help/en/model-studio/models",
+     "captured": "2025-08-01",
+     "file": "/work/.salvo14/mig/prix1/ev/qwen3-30b-a3b-instruct-2507/models_page_20250801172923.table-text.txt",
+     "sha256": "f904ee10752d96db1e95d958f911ed649e95c8713e390d1888ad368b1f436b09",
+     "where": "tableau modèles texte open source, premier tableau (section région Singapour, quota gratuit), colonnes Input/Output en USD par million de tokens; texte extrait des <tr>/<td> du HTML sauvegardé (rowspan non développé); entrée 0,2 = cellule fusionnée (rowspan=2) de la ligne thinking-2507, sortie 0,8 sur la ligne instruct",
+     "quote": "qwen3-30b-a3b-thinking-2507 | Thinking-only | 126,976 | 81,920 | $0.2 | $2.4\nqwen3-30b-a3b-instruct-2507 | Non-thinking only | 129,024 | - | $0.8"
+    },
     {
      "url": "https://web.archive.org/web/20260116072901/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
      "captured": "2026-01-16",
@@ -35044,7 +35052,7 @@
      "quote": "qwen3-30b-a3b-thinking-2507 | Thinking only | 126,976 | 81,920 | $0.20 | $2.40\nqwen3-30b-a3b-instruct-2507 | Non-thinking only | 129,024 | - | $0.80"
     }
    ],
-   "note": "International (Singapore) list, USD per MTok; the cache price is not printed on the row (context-cache discount). Whole request billed at its tier where tiers are listed. One mode only (or one price). Last capture showing the row 10 Oct 2026; removed from the pricing page between 10 and 13 Oct 2026 (the page was cleaned of legacy models; no retirement notice found): interval ends at the last capture, last list price is the base. | Extended 2026-01-16..2026-10-10 → 2026-01-15..2026-10-10 by the price salvo of 3–4 Nov 2026 (p13): Prix du tableau Singapour de la page /model-studio/models (l'ancienne page de prix, antérieure à model-pricing). Sortie du modèle le 2025-07-28; première capture avec le modèle 2025-08-01 (07-28..07-31 non couverts). Prix constant 2025-08-01..2026-01-15 sur toutes les captures avec tableaux. Période 2026-10-11..18: modèle absent de model-pricing dès 2026-10-13, aucun prix."
+   "note": "International (Singapore) list, USD per MTok; the cache price is not printed on the row (context-cache discount). Whole request billed at its tier where tiers are listed. One mode only (or one price). Last capture showing the row 10 Oct 2026; removed from the pricing page between 10 and 13 Oct 2026 (the page was cleaned of legacy models; no retirement notice found): interval ends at the last capture, last list price is the base. | Extended 2026-01-16..2026-10-10 → 2026-01-15..2026-10-10 by the price salvo of 3–4 Nov 2026 (p13): Prix du tableau Singapour de la page /model-studio/models (l'ancienne page de prix, antérieure à model-pricing). Sortie du modèle le 2025-07-28; première capture avec le modèle 2025-08-01 (07-28..07-31 non couverts). Prix constant 2025-08-01..2026-01-15 sur toutes les captures avec tableaux. Période 2026-10-11..18: modèle absent de model-pricing dès 2026-10-13, aucun prix. | Decision 5 (the maintainer, 4 Nov 2026): Alibaba's single USD table with no region heading on the international site (www.alibabacloud.com) is the international price: the captures of 2025-08-01 are used again (decision E had left them out); was 2026-01-15. | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2025-08-01) applies from the release (2025-07-28T07:31:27Z): decision 5: no /models capture between the release (28 Jul) and 1 Aug 2025, which shows the row."
   },
   {
    "model": "qwen3-30b-a3b-thinking-2507",
@@ -35582,11 +35590,27 @@
     }
    ],
    "base": true,
-   "from": "2025-10-10",
-   "from_basis": "earliest-capture",
+   "from": "2025-07-31T07:04:55Z",
+   "from_basis": "release",
    "to": "2026-10-10",
    "to_basis": "last-capture",
    "evidence": [
+    {
+     "url": "https://web.archive.org/web/20250801172923/https://www.alibabacloud.com/help/en/model-studio/models",
+     "captured": "2025-08-01",
+     "file": "/work/.salvo14/mig/prix1/ev/qwen3-coder-30b-a3b-instruct/wb_20250801172923_www.alibabacloud.com_help_en_model-studio_models.raw.txt",
+     "sha256": "472d761a678abf563a64e92d8966d91d239d8b8d5c29b2feeaa0b77bd9a5bfb6",
+     "where": "tier table under 'qwen3-coder-30b-a3b-instruct uses tiered pricing'",
+     "quote": "qwen3-coder-30b-a3b-instruct uses tiered pricing based on the number of input tokens in each request."
+    },
+    {
+     "url": "https://web.archive.org/web/20250801172923/https://www.alibabacloud.com/help/en/model-studio/models",
+     "captured": "2025-08-01",
+     "file": "/work/.salvo14/mig/prix1/ev/qwen3-coder-30b-a3b-instruct/wb_20250801172923_www.alibabacloud.com_help_en_model-studio_models.raw.txt",
+     "sha256": "472d761a678abf563a64e92d8966d91d239d8b8d5c29b2feeaa0b77bd9a5bfb6",
+     "where": "first tier input price",
+     "quote": "<p id=\"4f45bd4f639sa\">$0.45</p>"
+    },
     {
      "url": "https://web.archive.org/web/20260116072901/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
      "captured": "2026-01-16",
@@ -35628,7 +35652,7 @@
      "quote": "qwen3-coder-30b-a3b-instruct</p></td><td id=\"36b68e965byn2\" rowspan=\"1\" style=\"vertical-align:middle\" colspan=\"1\"><p id=\"d0ab177df0lv5\">Up to 32K</p></td><td id=\"8c38e08a718m9\" rowspan=\"1\" style=\"vertical-align:middle\" colspan=\"1\"><p id=\"0ba34405fb128\">$0.45</p></td><td id=\"d4d4b868bexlk\" rowspan=\"1\" style=\"vertical-align:middle\" colspan=\"1\"><p id=\"0e010effbe69s\">$2.25</p>"
     }
    ],
-   "note": "International (Singapore) list, USD per MTok; the cache price is not printed on the row (context-cache discount). Whole request billed at its tier where tiers are listed. Tiers by input tokens per request: up to 32K $0.45 / $2.25; 32K-128K $0.75 / $3.75; 128K-200K $1.2 / $6. Last capture showing the row 10 Oct 2026; removed from the pricing page between 10 and 13 Oct 2026 (the page was cleaned of legacy models; no retirement notice found): interval ends at the last capture, last list price is the base. | Extended 2026-01-16..2026-10-10 → 2025-10-10..2026-10-10 by the price salvo of 3–4 Nov 2026 (p24): Alibaba Cloud Model Studio (international, USD), page /help/en/model-studio/models (l'URL model-pricing n'existe qu'à partir du 2026-01-16). Paliers 32K et 128K lus: capture 2025-08-01 (0-32K 0.45/2.25; 32K-128K 0.75/3.75; 128K-200K 1.2/6) ; captures 2025-10-10 et 2026-01-15 montrent 0.45/2.25 premier palier (autres paliers 0.75 en 2026-01-15 vu dans le fichier, 2025-10-10 vu 0.75). Sortie 2025-07-31: le 07-31 lui-même non couvert (première capture 08-01). Captures intermédiaires (12 CDX entre 2025-11 et 2026-01) non toutes vérifiées; 2025-11-28 capture sans le modèle. Un second tableau à 0.21"
+   "note": "International (Singapore) list, USD per MTok; the cache price is not printed on the row (context-cache discount). Whole request billed at its tier where tiers are listed. Tiers by input tokens per request: up to 32K $0.45 / $2.25; 32K-128K $0.75 / $3.75; 128K-200K $1.2 / $6. Last capture showing the row 10 Oct 2026; removed from the pricing page between 10 and 13 Oct 2026 (the page was cleaned of legacy models; no retirement notice found): interval ends at the last capture, last list price is the base. | Extended 2026-01-16..2026-10-10 → 2025-10-10..2026-10-10 by the price salvo of 3–4 Nov 2026 (p24): Alibaba Cloud Model Studio (international, USD), page /help/en/model-studio/models (l'URL model-pricing n'existe qu'à partir du 2026-01-16). Paliers 32K et 128K lus: capture 2025-08-01 (0-32K 0.45/2.25; 32K-128K 0.75/3.75; 128K-200K 1.2/6) ; captures 2025-10-10 et 2026-01-15 montrent 0.45/2.25 premier palier (autres paliers 0.75 en 2026-01-15 vu dans le fichier, 2025-10-10 vu 0.75). Sortie 2025-07-31: le 07-31 lui-même non couvert (première capture 08-01). Captures intermédiaires (12 CDX entre 2025-11 et 2026-01) non toutes vérifiées; 2025-11-28 capture sans le modèle. Un second tableau à 0.21 | Decision 5 (the maintainer, 4 Nov 2026): Alibaba's single USD table with no region heading on the international site (www.alibabacloud.com) is the international price: the captures of 2025-08-01 are used again (decision E had left them out); was 2025-10-10. | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2025-08-01) applies from the release (2025-07-31T07:04:55Z): decision 5: no /models capture between the release (31 Jul) and 1 Aug 2025, which shows the row."
   },
   {
    "model": "qwen3-max-0123",
@@ -36544,41 +36568,6 @@
    "note": "Price salvo 3–4 Nov 2026 (p06): Promotional price (80% off) shown in captures 09-13, 09-14, 09-18, 10-06, 10-18 (all saved except 09-14/09-18/10-06 summaries checked in-session). Promotion ended between 2026-10-18 00:28 UTC and 2026-10-19 22:47 UTC; no end date stated on the page. Not a fixed-time price change documented. Use kind=promotion, not as standard."
   },
   {
-   "model": "step-3.7-flash",
-   "route": "maker-api",
-   "kind": "standard",
-   "currency": "USD",
-   "per": "MTok",
-   "classes": {
-    "input": 0.2,
-    "output": 1.15,
-    "cache-read": 0.04
-   },
-   "from": "2026-10-13",
-   "from_basis": "earliest-capture",
-   "to": "2026-10-29",
-   "to_basis": "last-capture",
-   "evidence": [
-    {
-     "url": "https://web.archive.org/web/20261013053938/https://platform.stepfun.ai/docs/en/guides/pricing/details",
-     "captured": "2026-10-13",
-     "file": "/work/.salvo14/mig/prix1/ev/step-3.7-flash/wb-20261013-en.html.txt",
-     "sha256": "6514b1c3c371dcfe0a376f16a4c17c7deab5ce3d0d80c4693670c3726b011ffd",
-     "where": "Pricing Details, multimodal reasoning models",
-     "quote": "step-3.7-flash | 1M tokens | $0.20 | $0.04 | $1.15 |"
-    },
-    {
-     "url": "https://platform.stepfun.ai/docs/en/guides/pricing/details",
-     "captured": "2026-11-03",
-     "file": "/work/.salvo14/mig/prix1/ev/step-3.7-flash/en-pricing.html.txt",
-     "sha256": "e4b1005107d620a25bc05389212e4c793d3154980d3934d588fcee47cfed6644",
-     "where": "same table (live)",
-     "quote": "step-3.7-flash | 1M tokens | $0.20 | $0.04 | $1.15 |"
-    }
-   ],
-   "note": "Price salvo 3–4 Nov 2026 (p06): StepFun international platform (platform.stepfun.ai), unit 1M tokens, cache hit = $0.04. Wayback capture 2026-05-23 does not list step-3.7-flash (released 05-29). Wayback later became unreachable, so captures between 05-29 and 10-12 could not be fetched/listed (CDX list was empty): period 2026-05-29..2026-10-14 only covered from 10-13. No price-change notice seen. Not 'doute' on identity: same model id. | Captures to 2026-11-03; the entry ends at the registry's as_of (2026-10-29)."
-  },
-  {
    "model": "minimax-m3",
    "route": "maker-api",
    "kind": "standard",
@@ -37152,9 +37141,9 @@
     "output": 2.5,
     "cache-read": 0.15
    },
-   "from": "2025-12-17",
-   "to": "2025-12-17",
-   "from_basis": "earliest-capture",
+   "from": "2025-07-11T00:55:12Z",
+   "to": "2026-03-30",
+   "from_basis": "release",
    "to_basis": "last-capture",
    "evidence": [
     {
@@ -37164,9 +37153,57 @@
      "sha256": "11a4ff5045f4c142f837a9b0f1a6381680d24cc46629aaacaaed473dc5d6c899",
      "where": "bundle de prix, tableau USD",
      "quote": "model_id:\"kimi-k2-0711-preview\",prompt:.6,completion:2.5,caching:.15,unit:\"1M tokens\",context_window:131072}"
+    },
+    {
+     "url": "https://web.archive.org/web/20250712095624/https://platform.moonshot.ai/_next/static/chunks/6912.3c390ffa1392ab01.js",
+     "captured": "2025-07-12",
+     "file": "/work/.salvo14/mig/prix3/ev/kimi-k2-instruct/data-20250712095624-6912.3c390ffa1392ab01.js",
+     "sha256": "71876cd1acc55919363641d40ec3a9f9232037e20f7fecdb188bb5cf702473b6",
+     "where": "chunk de données KimiK2Prices de /docs/pricing/chat",
+     "quote": "model_id:\"kimi-k2-0711-preview\",prompt:.6,completion:2.5,caching:.15,unit:\"1M tokens\",context_window:131072}"
+    },
+    {
+     "url": "https://web.archive.org/web/20250811072221/https://platform.moonshot.ai/_next/static/chunks/pages/_app-e99ddefc8d3e490c.js",
+     "captured": "2025-08-11",
+     "file": "/work/.salvo14/mig/prix3/ev/kimi-k2-instruct/app-20250811072221-e99ddefc8d3e490c.js",
+     "sha256": "6ec883bc5445ee805d83d20de539bce3038684b8b1ceecece1862e01a9aaea68",
+     "where": "bundle _app, tableau USD",
+     "quote": "model_id:\"kimi-k2-0711-preview\",prompt:.6,completion:2.5,caching:.15,unit:\"1M tokens\",context_window:131072}"
+    },
+    {
+     "url": "https://web.archive.org/web/20251106103333/https://platform.moonshot.ai/_next/static/chunks/pages/_app-45135dcc894c6bcf.js",
+     "captured": "2025-11-06",
+     "file": "/work/.salvo14/mig/prix3/ev/kimi-k2-instruct/app-20251106103333-45135dcc894c6bcf.js",
+     "sha256": "13d8a4e978dc17cbf62ae9953f7a6b6ae016cf64bf029243becc14778509d023",
+     "where": "bundle _app",
+     "quote": "model_id:\"kimi-k2-0711-preview\",prompt:.6,completion:2.5,caching:.15,unit:\"1M tokens\",context_window:131072}"
+    },
+    {
+     "url": "https://web.archive.org/web/20251217224321/https://platform.moonshot.ai/_next/static/chunks/pages/_app-27d0a417e2f6267d.js",
+     "captured": "2025-12-17",
+     "file": "/work/.salvo14/mig/prix3/ev/kimi-k2-instruct/app-20251217224321-27d0a417e2f6267d.js",
+     "sha256": "1d161f2968f1d4178354a8cf38aa7e62bbeebca470d1df3f1cac5f044cebb7e8",
+     "where": "bundle _app",
+     "quote": "model_id:\"kimi-k2-0711-preview\",prompt:.6,completion:2.5,caching:.15,unit:\"1M tokens\",context_window:131072}"
+    },
+    {
+     "url": "https://web.archive.org/web/20260214095830/https://platform.moonshot.ai/_next/static/chunks/pages/_app-39682cc007aec10f.js",
+     "captured": "2026-02-14",
+     "file": "/work/.salvo14/mig/prix3/ev/kimi-k2-instruct/app-20260214095830-39682cc007aec10f.js",
+     "sha256": "e66cd1ce58e5d2dac4a06546fe337baee32c0b81ed22ef0b64e41c5c026e5dca",
+     "where": "bundle _app",
+     "quote": "model_id:\"kimi-k2-0711-preview\",prompt:.6,completion:2.5,caching:.15,unit:\"1M tokens\",context_window:131072}"
+    },
+    {
+     "url": "https://web.archive.org/web/20260330194820/https://platform.moonshot.ai/_next/static/chunks/pages/_app-a31dfd54c0979682.js",
+     "captured": "2026-03-30",
+     "file": "/work/.salvo14/mig/prix3/ev/kimi-k2-instruct/app-20260330194820-a31dfd54c0979682.js",
+     "sha256": "8d42b75a9799c3a0932f50a2e2fb72ab378dba8f4df4bed6de12aa697611440f",
+     "where": "bundle _app (1re occurrence = USD ; la 2e, 4/16/1, est la variante CNY)",
+     "quote": "model_id:\"kimi-k2-0711-preview\",prompt:.6,completion:2.5,caching:.15,unit:\"1M tokens\",context_window:131072}"
     }
    ],
-   "note": "Price salvo 3–4 Nov 2026 (p10): the maker's id kimi-k2-0711-preview (prompt .6, completion 2.5, caching .15 per 1M tokens, USD table of the pricing bundle); models.json names kimi-k2-0711-preview as an api-id of kimi-k2-instruct (decision H of 4 Nov 2026: a neighbouring id is priced only when models.json already says it is the same model). A single capture: its own day."
+   "note": "Price salvo 3–4 Nov 2026 (p10): the maker's id kimi-k2-0711-preview (prompt .6, completion 2.5, caching .15 per 1M tokens, USD table of the pricing bundle); models.json names kimi-k2-0711-preview as an api-id of kimi-k2-instruct (decision H of 4 Nov 2026: a neighbouring id is priced only when models.json already says it is the same model). A single capture: its own day. | Extended 2025-12-17..2025-12-17 → 2025-07-12..2026-03-30 by the price salvo of 4 Nov 2026 (prix3 q2, the maintainer's decision 4). | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2025-07-12) applies from the release (2025-07-11T00:55:12Z): q2: no capture of the data chunk on 11 Jul 2025; the first (12 Jul) shows the price; no launch promotion or change documented."
   },
   {
    "model": "kimi-k2-instruct-0905",
@@ -37316,8 +37353,8 @@
     "output": 28,
     "cache-read": 2
    },
-   "from": "2026-09-09",
-   "from_basis": "earliest-capture",
+   "from": "2026-08-17",
+   "from_basis": "release",
    "to": "2026-10-24",
    "to_basis": "last-capture",
    "evidence": [
@@ -37346,7 +37383,7 @@
      "quote": "<td>GLM-5.3</td><td data-numeric=\"true\">1M</td><td data-numeric=\"true\">8</td><td data-numeric=\"true\">28</td><td>限时免费</td><td data-numeric=\"true\">2</td>"
     }
    ],
-   "note": "Price salvo 3–4 Nov 2026 (p12): Seules captures de la page de prix CNY avec le modèle : 09-09, 10-17, 10-24 (CDX docs.bigmodel.cn/cn/guide/start/pricing 20260801-20261103; open.bigmodel.cn/pricing et bigmodel.cn/pricing sont des coques JS sans prix; pages modèle et model-overview sans prix). Période 2026-08-14..09-08 NON couverte (pas de capture avec prix). Pas après retrait ni changement horaire connu; sortie 2026-08-14 (models.json). Aucun palier long contexte vu (1M). Colonnes: 输入单价/输出单价 元/百万 Tokens; 缓存命中 = cache_read; 缓存存储 = 限时免费 (cache storage free, per hour). Page 'docs.bigmodel.cn/cn/guide/start/pricing'."
+   "note": "Price salvo 3–4 Nov 2026 (p12): Seules captures de la page de prix CNY avec le modèle : 09-09, 10-17, 10-24 (CDX docs.bigmodel.cn/cn/guide/start/pricing 20260801-20261103; open.bigmodel.cn/pricing et bigmodel.cn/pricing sont des coques JS sans prix; pages modèle et model-overview sans prix). Période 2026-08-14..09-08 NON couverte (pas de capture avec prix). Pas après retrait ni changement horaire connu; sortie 2026-08-14 (models.json). Aucun palier long contexte vu (1M). Colonnes: 输入单价/输出单价 元/百万 Tokens; 缓存命中 = cache_read; 缓存存储 = 限时免费 (cache storage free, per hour). Page 'docs.bigmodel.cn/cn/guide/start/pricing'. | Decision A at the API's opening (the maintainer's decision 2, 4 Nov 2026): the API was not open on 2026-08-17 (models.json glm-5.3 api_opens, « 模型 API 将会尽快上线，敬请期待。 »); the price of the first capture (2026-09-09) applies from that day: no pricing-page capture readable between them shows the API without the price (open.bigmodel.cn and bigmodel.cn/pricing captures of 19, 26, 31 Aug, 6 and 7 Sep are JS shells without prices; docs.bigmodel.cn pricing first captured 9 Sep)."
   },
   {
    "model": "glm-5.3-flash",
@@ -37436,11 +37473,19 @@
     "input": 0.7,
     "output": 2.8
    },
-   "from": "2025-11-04",
-   "from_basis": "earliest-capture",
+   "from": "2025-07-21T06:46:56Z",
+   "from_basis": "release",
    "to": "2025-11-04",
    "to_basis": "last-capture",
    "evidence": [
+    {
+     "url": "https://web.archive.org/web/20250724002411/https://www.alibabacloud.com/help/en/model-studio/models",
+     "captured": "2025-07-24",
+     "file": "/work/.salvo14/mig/prix1/ev/qwen3-235b-a22b-instruct-2507/models_page_20250724002411.table-text.txt",
+     "sha256": "1238d733ba32e4f3919ad6d47caf94b87dae8e3376b2d52e6d4c57970984c541",
+     "where": "tableau modèles texte open source, premier tableau (section région Singapour, quota gratuit), colonnes Input/Output en USD par million de tokens; texte extrait des <tr>/<td> du HTML sauvegardé (rowspan non développé)",
+     "quote": "qwen3-235b-a22b-instruct-2507 | 131,072 | 129,024 | 32,768 | $0.7 | $2.8 | 1 million tokens Valid for 180 days after activation"
+    },
     {
      "url": "https://web.archive.org/web/20251104223724/https://www.alibabacloud.com/help/en/model-studio/models",
      "captured": "2025-11-04",
@@ -37450,7 +37495,7 @@
      "quote": "qwen3-235b-a22b-instruct-2507 | Non-thinking only | 129,024 | - | $0.7 | $2.8"
     }
    ],
-   "note": "Price salvo 3–4 Nov 2026 (p13): Prix du tableau Singapour de la page /model-studio/models (l'ancienne page de prix, antérieure à model-pricing). Sortie du modèle le 2025-07-21; première capture avec le modèle 2025-07-24 (21-23 juillet non couverts). Le prix passe à 0,23/0,92 entre les captures du 2025-11-04 et du 2025-11-12 (date exacte inconnue). | Decision E (4 Nov 2026): the captures before 2025-08-16 (2025-07-24) show a single USD table without a region heading: not used; the entry starts at the first capture whose table is headed Singapore / International."
+   "note": "Price salvo 3–4 Nov 2026 (p13): Prix du tableau Singapour de la page /model-studio/models (l'ancienne page de prix, antérieure à model-pricing). Sortie du modèle le 2025-07-21; première capture avec le modèle 2025-07-24 (21-23 juillet non couverts). Le prix passe à 0,23/0,92 entre les captures du 2025-11-04 et du 2025-11-12 (date exacte inconnue). | Decision E (4 Nov 2026): the captures before 2025-08-16 (2025-07-24) show a single USD table without a region heading: not used; the entry starts at the first capture whose table is headed Singapore / International. | Decision 5 (the maintainer, 4 Nov 2026): Alibaba's single USD table with no region heading on the international site (www.alibabacloud.com) is the international price: the captures of 2025-07-24 are used again (decision E had left them out); was 2025-11-04. | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2025-07-24) applies from the release (2025-07-21T06:46:56Z): decision 5: the first /models capture after the release (24 Jul 2025) shows the row in the single USD table."
   },
   {
    "model": "qwen3-next-80b-a3b-instruct",
@@ -37530,11 +37575,19 @@
     "input": 0.175,
     "output": 0.7
    },
-   "from": "2025-10-12",
+   "from": "2025-06-14",
    "from_basis": "earliest-capture",
    "to": "2025-10-12",
    "to_basis": "last-capture",
    "evidence": [
+    {
+     "url": "https://web.archive.org/web/20250614205430/https://www.alibabacloud.com/help/en/model-studio/models",
+     "captured": "2025-06-14",
+     "file": "/work/.salvo14/mig/prix1/ev/qwen2.5-7b-instruct/models_page_20250614205430.table-text.txt",
+     "sha256": "e2baab0d41fd170fca580a76c41b584368b5f9ec0188548317666162abac87da",
+     "where": "tableau modèles texte open source, premier tableau (section région Singapour, quota gratuit), colonnes Input/Output en USD par million de tokens; texte extrait des <tr>/<td> du HTML sauvegardé (rowspan non développé)",
+     "quote": "qwen2.5-7b-instruct | $0.175 | $0.7"
+    },
     {
      "url": "https://web.archive.org/web/20251012081259/https://www.alibabacloud.com/help/en/model-studio/models",
      "captured": "2025-10-12",
@@ -37544,7 +37597,7 @@
      "quote": "qwen2.5-7b-instruct | $0.175 | $0.7"
     }
    ],
-   "note": "Price salvo 3–4 Nov 2026 (p13): Prix du tableau Singapour de la page /model-studio/models (l'ancienne page de prix, antérieure à model-pricing). Avant 2025-06-14 (captures 04-09..05-27) la ligne n'affiche que 'Time-limited free trial': aucun prix pour 2024-09-16..2025-06-13. Entre 2025-10-26 et 2025-12-28 le tableau Singapour n'a plus de ligne 7b dans les captures (seul le tableau Pékin 0,072/0,144 reste): période non prouvée. | Decision E (4 Nov 2026): the captures before 2025-08-16 (2025-06-14) show a single USD table without a region heading: not used; the entry starts at the first capture whose table is headed Singapore / International."
+   "note": "Price salvo 3–4 Nov 2026 (p13): Prix du tableau Singapour de la page /model-studio/models (l'ancienne page de prix, antérieure à model-pricing). Avant 2025-06-14 (captures 04-09..05-27) la ligne n'affiche que 'Time-limited free trial': aucun prix pour 2024-09-16..2025-06-13. Entre 2025-10-26 et 2025-12-28 le tableau Singapour n'a plus de ligne 7b dans les captures (seul le tableau Pékin 0,072/0,144 reste): période non prouvée. | Decision E (4 Nov 2026): the captures before 2025-08-16 (2025-06-14) show a single USD table without a region heading: not used; the entry starts at the first capture whose table is headed Singapore / International. | Decision 5 (the maintainer, 4 Nov 2026): Alibaba's single USD table with no region heading on the international site (www.alibabacloud.com) is the international price: the captures of 2025-06-14 are used again (decision E had left them out); was 2025-10-12."
   },
   {
    "model": "qwen3-vl-32b-instruct",
@@ -38999,6 +39052,170 @@
     }
    ],
    "note": "Price salvo 3–4 Nov 2026 (p27): Released 2025-01-30. The page row is 'Mistral Small 25.01' with api id mistral-small-latest (alias, the dated id mistral-small-2501 is not written in the row; identity by name 25.01 = Small 3). Only captures 2025-01-30..2025-02-03 exist (later mistral.ai/technology captures are 301/308 redirects; mistral.ai/pricing first capture 2025-03-21 is a 'Page not found'). From 2025-05-25 the same alias is labelled Small 3.1 (same $0.1/$0.3) then 3.2, i.e. alias served another model after Small 3.1 (March 2025); period 2025-02-04..2026-10-10 not proven for the 2501 model."
+  },
+  {
+   "model": "step-3.7-flash",
+   "route": "maker-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.2,
+    "output": 1.15,
+    "cache-read": 0.04
+   },
+   "from": "2026-05-29",
+   "to": "2026-10-29",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260608230548/https://platform.stepfun.ai/docs/en/guides/pricing/details",
+     "captured": "2026-06-08",
+     "file": "/work/.salvo14/mig/prix3/ev/step-3.7-flash/wb-20260608230548.txt",
+     "sha256": "8ebaf13fc622aec20d3e08ed53fd0ba1917f49fe904d923d83651dc9d8f70516",
+     "where": "tableau Pricing Details (HTML)",
+     "quote": "<td style=\"text-align:left\">step-3.7-flash</td><td style=\"text-align:left\">1M tokens</td><td data-numeric=\"true\" style=\"text-align:left\">$0.20</td><td data-numeric=\"true\" style=\"text-align:left\">$0.04</td><td data-numeric=\"true\" style=\"text-align:left\">$1.15</td>"
+    },
+    {
+     "url": "https://web.archive.org/web/20261009153324/https://platform.stepfun.ai/docs/en/guides/pricing/details.md",
+     "captured": "2026-10-09",
+     "file": "/work/.salvo14/mig/prix3/ev/step-3.7-flash/wb-20261009153324.txt",
+     "sha256": "db8905123734ba07f338035e4d403b2496c74de76468877d2e7554eee44d95ae",
+     "where": "tableau markdown",
+     "quote": "| `step-3.7-flash` | 1M tokens | \\$0.20 | \\$0.04 | \\$1.15 |"
+    },
+    {
+     "url": "https://web.archive.org/web/20261013053938/https://platform.stepfun.ai/docs/en/guides/pricing/details",
+     "captured": "2026-10-13",
+     "file": "/work/.salvo14/mig/prix1/ev/step-3.7-flash/wb-20261013-en.html.txt",
+     "sha256": "6514b1c3c371dcfe0a376f16a4c17c7deab5ce3d0d80c4693670c3726b011ffd",
+     "where": "Pricing Details, multimodal reasoning models",
+     "quote": "step-3.7-flash | 1M tokens | $0.20 | $0.04 | $1.15 |"
+    },
+    {
+     "url": "https://platform.stepfun.ai/docs/en/guides/pricing/details",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/prix1/ev/step-3.7-flash/en-pricing.html.txt",
+     "sha256": "e4b1005107d620a25bc05389212e4c793d3154980d3934d588fcee47cfed6644",
+     "where": "same table (live)",
+     "quote": "step-3.7-flash | 1M tokens | $0.20 | $0.04 | $1.15 |"
+    }
+   ],
+   "note": "Price salvo of 4 Nov 2026 (prix3 q2, the maintainer's decision 4): CDX platform.stepfun.ai/* 2026-05..10 et /docs/en/guides/pricing/details* (captures 0407,0523,0608,0624,0814,0920 x2,1013,1021 + details.md 1009,1014). 0523 (avant sortie) et page modèle 0529 sans prix. 0624, 0814, 0920, 1013 : pages sans tableau lisible dans le texte brut, non utilisées. Seules 06-08 (HTML) et 10-09 (.md) montrent le prix ; 10-13 est déjà au registre. Même prix aux deux extrémités, aucun changement annoncé vu. Trou : 05-29..06-07 sans capture lisible. | Decision I (the maintainer, 4 Nov 2026): the gap 2026-10-09 → 2026-10-13 between two captures showing the same price is covered (q2: « Même prix aux deux extrémités, aucun changement annoncé vu » (captures 0624, 0814, 0920, 1013 without a readable table)); merged with the entry 2026-10-13..2026-10-29. | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2026-06-08) applies from the release (2026-05-29): q2: no readable capture of the pricing page between the release (29 May) and 8 Jun shows the page without the price (0523 before the release; the model page of 0529 is not a pricing page)."
+  },
+  {
+   "model": "step-3.7-flash",
+   "route": "maker-api",
+   "kind": "standard",
+   "currency": "CNY",
+   "per": "MTok",
+   "classes": {
+    "input": 1.35,
+    "output": 8.1,
+    "cache-read": 0.27
+   },
+   "from": "2026-05-29",
+   "to": "2026-10-21",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260616051825/https://platform.stepfun.com/docs/zh/guides/pricing/details.md",
+     "captured": "2026-06-16",
+     "file": "/work/.salvo14/mig/prix3/ev/step-3.7-flash-cny/zh-20260616051825.txt",
+     "sha256": "ecad7ce01961fcd05e67eeeb11bcd1c296bff59ee31a57ebb02c6884efeebcc6",
+     "where": "tableau markdown",
+     "quote": "| `step-3.7-flash` | 1M tokens | 1.35元       | 0.27元      | 8.1元 |"
+    },
+    {
+     "url": "https://web.archive.org/web/20261007060647/https://platform.stepfun.com/docs/zh/guides/pricing/details",
+     "captured": "2026-10-07",
+     "file": "/work/.salvo14/mig/prix3/ev/step-3.7-flash-cny/zh-20261007060647.txt",
+     "sha256": "9b874a7ebdcc1bb7b95c66f4ae54a2f5b10dc6191954e6124c274111b96a7fcd",
+     "where": "tableau HTML",
+     "quote": "<code>step-3.7-flash</code></td><td>1M tokens</td><td data-numeric=\"true\">1.35 元</td><td data-numeric=\"true\">0.27 元</td><td data-numeric=\"true\">8.1 元</td>"
+    },
+    {
+     "url": "https://web.archive.org/web/20261021094354/https://platform.stepfun.com/docs/zh/guides/pricing/details",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prix3/ev/step-3.7-flash-cny/zh-20261021094354.txt",
+     "sha256": "fdf3c37fa0feba07f922760e6bcf43a0d006264fa4d480af485db33dc9c5a385",
+     "where": "tableau HTML, 2 jours après la date demandée",
+     "quote": "<td><code>step-3.7-flash</code></td><td data-numeric=\"true\">1.35</td><td data-numeric=\"true\">0.27</td><td data-numeric=\"true\">8.1</td>"
+    }
+   ],
+   "note": "Price salvo of 4 Nov 2026 (prix3 q2, the maintainer's decision 4): URL trouvée : platform.stepfun.com/docs/zh/guides/pricing/details (la salve 1 n'avait pas essayé /docs/zh/). Captures 200 : 0416,0529,0616,0629,0711,0806,0916,0919,1007,1021 (+details.md 0616). Lues : 0529 (le source mdx contient step-3.7-flash et 1.35元, citation échappée non reprise), 0616, 0916, 1007, 1021 : 1.35/0.27/8.1 partout, donc la période 2026-10-19 15:45 est encadrée (1007 et 1021) avec le même prix. from = 29 mai (capture 04:48 UTC ; sortie du modèle 05-29). Unité 1M tokens, yuan. L'annonce du 12 oct. (step-5-preview-price-adjustment) concerne un autre modèle. | from 2026-05-29 not among the cited captures: 2026-06-16 (its first cited capture). | Decision A (the maintainer, 4 Nov 2026): the price of the first capture (2026-06-16) applies from the release (2026-05-29): q2: the capture of 29 May 04:48 UTC (release day) already holds step-3.7-flash at 1.35元 (« citation échappée non reprise »); first cited capture 16 Jun."
   }
- ]
+ ],
+ "maker_currencies": {
+  "anthropic": {
+   "currencies": [
+    "USD"
+   ],
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/prix1/ev/_p04/platform_claude_com_docs_en_about-claude_pricing.html",
+     "sha256": "5ef0550f3c6f452d0fbc5ff23ab012585518e47a4a8b519c9d58a356ae72eac7",
+     "where": "page header",
+     "quote": "All prices are in USD.",
+     "note": "the whole page checked (gzip decoded): no occurrence of CNY, ¥, RMB, 元, 人民币, €, EUR, JPY, 円 (price salvo p04 / p06, 3 Nov 2026)"
+    }
+   ],
+   "note": "The maker publishes its API prices in USD only (the page checked on 3 Nov 2026). Read by the price-ratio method (the maintainer, 4 Nov 2026): a cost in another currency, or with no currency, takes the ratio of this list."
+  },
+  "google": {
+   "currencies": [
+    "USD"
+   ],
+   "evidence": [
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/pricing",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/prix1/ev/_p04/ai_google_dev_gemini-api_docs_pricing.html",
+     "sha256": "079edf840ce325ee1aac964a04d78f1915d99a07d69de206cd3849185c712673",
+     "where": "every model table header",
+     "quote": "Paid Tier, per 1M tokens in USD",
+     "note": "the whole page checked (gzip decoded): no occurrence of CNY, ¥, RMB, 元, 人民币, €, EUR, JPY, 円 (price salvo p04 / p06, 3 Nov 2026)"
+    }
+   ],
+   "note": "The maker publishes its API prices in USD only (the page checked on 3 Nov 2026). Read by the price-ratio method (the maintainer, 4 Nov 2026): a cost in another currency, or with no currency, takes the ratio of this list."
+  },
+  "openai": {
+   "currencies": [
+    "USD"
+   ],
+   "evidence": [
+    {
+     "url": "https://developers.openai.com/api/docs/pricing",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/prix1/ev/_p04/developers_openai_com_api_docs_pricing.html",
+     "sha256": "27735d557b37e8a2d81e1e608100e27f09d87445736d7c3efe074efd9e9cd61f",
+     "where": "price tables",
+     "quote": "$10.00",
+     "note": "the whole page checked (gzip decoded): no occurrence of CNY, ¥, RMB, 元, 人民币, €, EUR, JPY, 円 (price salvo p04 / p06, 3 Nov 2026)"
+    }
+   ],
+   "note": "The maker publishes its API prices in USD only (the page checked on 3 Nov 2026). Read by the price-ratio method (the maintainer, 4 Nov 2026): a cost in another currency, or with no currency, takes the ratio of this list."
+  },
+  "xai": {
+   "currencies": [
+    "USD"
+   ],
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/prix1/ev/grok/xai-models.html",
+     "sha256": "c1e04db7dda766c13f9f1f793c1e69c2506199a68ff429c311eeb80ee386f967",
+     "where": "model table",
+     "quote": "$2.00",
+     "note": "the whole page checked (gzip decoded): no occurrence of CNY, ¥, RMB, 元, 人民币, €, EUR, JPY, 円 (price salvo p04 / p06, 3 Nov 2026)"
+    }
+   ],
+   "note": "The maker publishes its API prices in USD only (the page checked on 3 Nov 2026). Read by the price-ratio method (the maintainer, 4 Nov 2026): a cost in another currency, or with no currency, takes the ratio of this list."
+  }
+ }
 }

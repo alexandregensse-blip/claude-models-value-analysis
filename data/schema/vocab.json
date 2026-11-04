@@ -18,6 +18,7 @@
     "cost-method",
     "price-table",
     "price-tier",
+    "maker-price-multiple",
     "tokens-in",
     "tokens-out",
     "tokens-cache-read",
@@ -130,6 +131,12 @@
     },
     "price-tier": {
      "description": "The price tier the cost was computed or billed at (`term`: a price kind other than standard, e.g. flex, batch): re-priced to standard by the tier's proven uniform factor (prices.json).",
+     "slots": [
+      "spend"
+     ]
+    },
+    "maker-price-multiple": {
+     "description": "The source pays the maker's list prices times one factor for all its models: an exchange rate it states, or a relay that passes the maker's prices on (the maintainer, 4 Nov 2026, the price-ratio method). `term`: the currency of the maker's list it starts from. A cost in a currency the maker does not publish takes the price ratio of that list only with this fact (rule cost-price-ratio-other-currency).",
      "slots": [
       "spend"
      ]
@@ -426,7 +433,8 @@
     "cost-basis",
     "cost-method",
     "reasoning-included-in-out",
-    "price-tier"
+    "price-tier",
+    "maker-price-multiple"
    ],
    "x-terms": {
     "score": {
@@ -452,6 +460,9 @@
     },
     "price-tier": {
      "vocab": "price_kind"
+    },
+    "maker-price-multiple": {
+     "vocab": "currency"
     }
    }
   },
@@ -558,7 +569,8 @@
       "cost-basis",
       "cost-method",
       "price-table",
-      "price-tier"
+      "price-tier",
+      "maker-price-multiple"
      ],
      "list": true
     },

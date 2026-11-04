@@ -136,6 +136,33 @@
     ],
     "unevaluatedProperties": false
    }
+  },
+  "maker_currencies": {
+   "type": "object",
+   "description": "Maker → the currencies it publishes its API prices in, each checked on its pricing page (the maintainer, 4 Nov 2026, the price-ratio method): when the maker publishes a single list, a cost in another currency (with the source's own statement that it pays the maker's prices times one factor, fact maker-price-multiple) or with no currency takes the price ratio of that list. A maker absent from the map: not established (doubt → out).",
+   "additionalProperties": {
+    "type": "object",
+    "properties": {
+     "currencies": {
+      "type": "array",
+      "items": {
+       "$ref": "vocab.json#/$defs/currency"
+      },
+      "minItems": 1
+     },
+     "evidence": {
+      "$ref": "common.schema.json#/$defs/evidence_list"
+     },
+     "note": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "currencies",
+     "evidence"
+    ],
+    "unevaluatedProperties": false
+   }
   }
  },
  "required": [

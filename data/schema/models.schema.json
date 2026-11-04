@@ -245,6 +245,42 @@
      "note": {
       "type": "string",
       "description": "Free note."
+     },
+     "api_opens": {
+      "type": "array",
+      "description": "When the maker's own API began to serve the model later than its release (the maintainer, 4 Nov 2026, decision 2: GLM-5.3 « The GLM-5.3 API is coming soon. » on 15 Aug 2026): per platform (its currency), the latest day the maker writes that the API is not open yet. A cost whose single route chain is the maker's API has its price date start no earlier than that day (rule price-date-after-api-opening); a run on another or an unknown route is not moved.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "currency": {
+         "$ref": "vocab.json#/$defs/currency",
+         "description": "The platform's currency (the maker's API priced in it)."
+        },
+        "after": {
+         "$ref": "common.schema.json#/$defs/date_or_datetime",
+         "description": "The day (or moment) the maker still writes that the API is not open: no call through the maker's API before it."
+        },
+        "basis": {
+         "enum": [
+          "maker-says-not-open"
+         ],
+         "description": "Why: the maker's own document says the API is not open yet."
+        },
+        "evidence": {
+         "$ref": "common.schema.json#/$defs/evidence_list"
+        },
+        "note": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "currency",
+        "after",
+        "basis",
+        "evidence"
+       ],
+       "unevaluatedProperties": false
+      }
      }
     },
     "required": [
