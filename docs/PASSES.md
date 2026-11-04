@@ -5,6 +5,32 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The « × 7 » checked in time, and the classes that cannot apply (4 Nov 2026, latest)
+
+**Method.** No fit, no agent; web only for the board's repository (gh) and the makers' prompt-caching pages
+(Anthropic, OpenAI, xAI) and nonelinear.com. The maintainer's two points on the total-tokens split (4 Nov 2026): « il
+faut vérifier » the « × 7 » that A carries back to each release; « fais au mieux » for a split when a cache class
+makes it ambiguous. The second is a method change: before main, the maintainer's yes.
+
+**The « × 7 » in time.** The commerce tables (`leaderboard/commerce1-4.md`, « 输出价格 ») at every commit of each file,
+20 Jan – 27 Oct 2026 (114 versions): 259 output prices written as `platform-price` facts dated by their commit, for the
+17 models. The five models the split priced: 89 commit prices, every one 7 × the maker's USD output price in force at
+its date (opus-5 175.0 from 28 Jul, gpt-5.4-mini 31.5 and -nano 8.75 from 18 Mar, grok-4.6 and 4.7 42.0 from 17 Aug /
+26 Sep): their 45 costs stay. The build reads such a capture as partial: a check on the span A or I it falls in,
+never a price alone (data/BUILD.md).
+
+**The classes that cannot apply** (rule `cost-class-cannot-apply`). A long-context tier cannot apply below its
+threshold; the cache cannot apply below the maker's documented minimum cacheable length — Anthropic 512 tokens for
+Opus 5 / Sonnet 5.5 (« Shorter prompts cannot be cached, even if marked with `cache_control` »), OpenAI 1,024 for
+GPT-5.6 and later (« varies by request settings » before: not established), xAI automatic with no minimum (not
+excluded); prices.json `cache_minimums`. The input per call comes from the split itself, at the top of the rounding.
+nonelinear resells the maker's API and nothing it writes excludes a cache of its own, so a split that needs the cache
+left out stays out, counted apart.
+
+**Result** (S/clb2/AVANT-APRES.txt): +9 costs (gpt-5.4 `high`, its tier left out at ≤ 240 input tokens per call), 0
+lost; cost couples 276, Claude cost couples 55, unchanged. 27 costs kept apart as the reseller doubt (gpt-6-luna,
+gpt-6-sol, gpt-6.1-sol, sonnet-5.5: each would be the source's figure × 1/7). Fit-quality unchanged.
+
 ## The total-tokens split: chinese-llm-benchmark's costs at the maker's current price (4 Nov 2026, last)
 
 **Method.** No fit, no agent; web only for the board's GitHub repository (gh) and nonelinear.com / Wayback. The

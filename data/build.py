@@ -2008,8 +2008,10 @@ PLATFORM_TERM = re.compile(r"^(?:lc>(\d+):)?([a-z0-9-]+)(/input)?$")
 
 def platform_vectors(M, key):
     """The source's own platform price list for this entry (facts platform-price, each dated by the capture that shows
-    it): → ([(capture day, {class: price})], [non-price terms seen], why). A class price is `term` = a price class, a
-    long-context tier `lc><threshold>:<class>`; `discount` and `off-peak` are the list's promotion fields."""
+    it): → ([(capture day, {class: price}, capture id)], [non-price terms seen], why). A class price is `term` = a price
+    class, a long-context tier `lc><threshold>:<class>`; `discount` and `off-peak` are the list's promotion fields. A
+    capture that shows input and output is a full one; one that shows only some classes (the board's commerce tables:
+    the output price alone) is a partial one, a check on the full captures' prices at its date (platform_over)."""
     classes = ctx_vocab_terms(M.ctx, "price_class")
     caps, other = {}, []
     for x in M.slot("spend", "platform-price"):
@@ -2035,7 +2037,7 @@ def platform_vectors(M, key):
             return None, other, f"platform price {x.ref}: two {x.term} prices on capture {x.capture}"
         vec[x.term] = float(p[0])
     out = []
-    for (d, _), v in sorted(caps.items(), key=lambda kv: kv[0][0]):
+    for (d, cid), v in sorted(caps.items(), key=lambda kv: kv[0][0]):
         # a class written as a multiple of the input price (`<class>/input`, the list's cache-write multiples) is that
         # multiple of the input price of every tier
         vec = {k: p for k, p in v.items() if not k.endswith("/input")}
@@ -2046,28 +2048,51 @@ def platform_vectors(M, key):
             for ik, ip in list(vec.items()):
                 if ik == "input" or ik.endswith(":input"):
                     vec[ik[:-len("input")] + cls] = mult * ip
-        out.append((d, vec))
+        out.append((d, vec, cid))
     return out, other, ""
 
 
-def platform_over(M, key, cur, cfg, lo, hi):
+def is_cache_class(k):
+    """A cache class (cache-read, cache-write-*), alone or in a long-context tier."""
+    return k.split(":", 1)[-1].startswith("cache-")
+
+
+def project(vec, drop):
+    """A price vector without the classes that cannot apply (class_cannot_apply): drop = {"tier", "cache"}."""
+    return {k: v for k, v in vec.items()
+            if not ("tier" in drop and k.startswith("lc>")) and not ("cache" in drop and is_cache_class(k))}
+
+
+def platform_over(M, key, cur, cfg, lo, hi, drop=frozenset()):
     """The platform's price vectors that could have applied over [lo, hi], or (None, why). The maintainer's decisions
     of 4 Nov 2026 on the maker's lists, read on the platform's list: A — from the model's release to the first capture
     the first capture's price applies; I — two captures of the same price cover the interval between them; after the
     last capture nothing is known. A price change documented in between (the maker's registered price, in the list's
-    currency, changing there) stops A and I: the platform follows the maker's list, so its price there is not known."""
+    currency, changing there) stops A and I: the platform follows the maker's list, so its price there is not known.
+    Partial captures (the board's commerce tables at each commit: the output price alone) check the spans A and I
+    cover: one showing another price than the span's on a class it shows → that span's price is not known (out).
+    `drop`: the classes that cannot apply to the run's calls (rule cost-class-cannot-apply) are left out of every
+    vector compared, the maker's and the platform's."""
     caps, other, why = platform_vectors(M, key)
     if why:
         return None, why
     if other:
         return None, f"the platform's list shows a promotion field ({'; '.join(other)}): its price at the run's date is not known"
-    if not caps:
-        return None, "no platform price written"
+    full = [(d, project(v, drop), c) for d, v, c in caps if "input" in v and "output" in v]
+    part = [(d, project(v, drop), c) for d, v, c in caps if not ("input" in v and "output" in v)]
+    if not full:
+        return None, "no platform price written" if not caps else "the platform's input or output price is not known"
+    caps = [(d, v) for d, v, _ in full]
     rel = M.ctx.released(key)
 
     def changed(a, b):
         vs, _ = prices_over(M.ctx, key, a, b, "maker-api", cur, cfg)
-        return len(vs) > 1
+        ps = []
+        for v in vs:
+            v = project(v, drop)
+            if v not in ps:
+                ps.append(v)
+        return len(ps) > 1
 
     segs, gaps = [], []                                  # (from, to, vector) known; why a span is not
     d0, v0 = caps[0]
@@ -2087,29 +2112,72 @@ def platform_over(M, key, cur, cfg, lo, hi):
                         "of the same price, but the maker's registered price changes between them"))
     note = f" ({'; '.join(gaps)})" if gaps else ""
     end = max(s[1] for s in segs)
-    cur_t, vecs = lo, []
+    cur_t, vecs, used = lo, [], []
     for f, t, v in sorted(segs, key=lambda s: s[0]):
         if t < lo or f > hi:
             continue
         if f > cur_t + dt.timedelta(days=1):              # the captures are dated to the day
             return None, f"platform price not known between {cur_t.date()} and {f.date()}{note}"
         cur_t = max(cur_t, t)
+        used.append((f, t, v))
         if v not in vecs:
             vecs.append(v)
     if lo < rel and caps[0][0] > lo:
         return None, "the price date starts before the release"
     if cur_t + dt.timedelta(days=1) < hi or end + dt.timedelta(days=1) < hi:
         return None, f"platform price not known after {cur_t.date()} (the price date ends {hi.date()}){note}"
+    for d, pv, cid in part:                              # the partial captures inside a span used: the same price
+        for f, t, v in used:
+            if f <= d <= t + dt.timedelta(days=1) and any(k in v and v[k] != p for k, p in pv.items()):
+                k = next(k for k, p in pv.items() if k in v and v[k] != p)
+                return None, (f"capture {cid} ({d.date()}) shows {k} {pv[k]:g}, not the {v[k]:g} of the span "
+                              f"{f.date()} … {t.date()}: the platform's price there is not known")
     return vecs, ""
 
 
 def split_bounds(cost, step, total, tstep, p_in, p_out):
     """The split of a per-question cost (in the list's money, per million tokens) and the total tokens into input and
-    output: t_out = (cost − T × p_in) / (p_out − p_in). → (t_out, t_out low, t_out high) over the source's rounding
-    (cost ± step / 2, T ± tstep / 2)."""
-    vals = [(c - t * p_in) / (p_out - p_in) for c in (cost - step / 2, cost + step / 2)
-            for t in (total - tstep / 2, total + tstep / 2)]
-    return (cost - total * p_in) / (p_out - p_in), min(vals), max(vals)
+    output: t_out = (cost − T × p_in) / (p_out − p_in). → (t_out, t_out low, t_out high, t_in high) over the source's
+    rounding (cost ± step / 2, T ± tstep / 2)."""
+    corners = [(c, t, (c - t * p_in) / (p_out - p_in)) for c in (cost - step / 2, cost + step / 2)
+               for t in (total - tstep / 2, total + tstep / 2)]
+    vals = [x for _, _, x in corners]
+    return (cost - total * p_in) / (p_out - p_in), min(vals), max(vals), max(t - x for _, t, x in corners)
+
+
+def cache_minimum(ctx, key):
+    """(the maker's minimum cacheable prompt length for the model, its record) from prices.json `cache_minimums`, the
+    maker's documentation read once (the maintainer, 4 Nov 2026, rule cost-class-cannot-apply); (None, record or None)
+    when the documentation does not establish one."""
+    maker = (ctx.models.get(key) or {}).get("maker")
+    for r in (ctx.prices.get("cache_minimums") or {}).get(maker, []):
+        if key in r.get("models", []):
+            return r.get("min_prompt_tokens"), r
+    return None, None
+
+
+def class_cannot_apply(ctx, key, drop, t_in_hi, vecs):
+    """Rule cost-class-cannot-apply (the maintainer, 4 Nov 2026, « fais au mieux »): a class that cannot apply to a call
+    of the run's size is left out of the split. `tier`: a long-context tier lc><N> applies to a call of more than N
+    input tokens (the lists' own threshold; the platform: « 输入 token 数落在哪一档，该次调用就按该档单价计费 »), so
+    none when the input per call, from the split with the source's rounding, is below every N. `cache`: the maker's
+    documentation states a minimum cacheable prompt length (prices.json cache_minimums, quoted) and the input per call
+    is below it. → (flags, why not)."""
+    flags = []
+    if "tier" in drop:
+        th = sorted({int(k[3:].split(":")[0]) for v in vecs for k in v if k.startswith("lc>")})
+        if th and t_in_hi >= th[0]:
+            return None, f"input per call up to {t_in_hi:.0f} tokens: the long-context tier above {th[0]} is not excluded"
+        flags += [f"tier>{n}" for n in th]
+    if "cache" in drop:
+        mn, rec = cache_minimum(ctx, key)
+        if mn is None:
+            why = (rec or {}).get("note") or "no minimum cacheable length of the maker's recorded (prices.json cache_minimums)"
+            return None, f"the maker's documentation does not establish that the cache cannot apply: {why}"
+        if t_in_hi >= mn:
+            return None, f"input per call up to {t_in_hi:.0f} tokens, not below the maker's minimum cacheable {mn}"
+        flags.append(f"cache<{mn}")
+    return flags, ""
 
 
 def total_tokens_split(M, C, key):
@@ -2122,19 +2190,48 @@ def total_tokens_split(M, C, key):
     source's rounding is taken into account. Cache classes and long-context tiers: when the platform's list is one
     multiple k of the maker's current list on every class and tier (the same classes on both), the cost at the current
     price is cost × k whatever the run's mix of classes and tiers (the split gives it); otherwise the split stands only
-    when neither list has a class or tier beyond input and output, since the run's mix over them cannot be excluded.
-    → (done, why)."""
-    ctx = M.ctx
+    when neither list has a class or tier beyond input and output, since the run's mix over them cannot be excluded —
+    unless they cannot apply to the run's calls (rule cost-class-cannot-apply, class_cannot_apply: tried when the
+    split fails with every class, first without the tiers, then without the tiers and the cache). A split that needs
+    the cache left out stays out (doubt, counted apart): the platform resells the maker's API, and nothing it writes
+    excludes a cache of its own. → (done, why)."""
     if not M.slot("spend", "platform-price"):
         return False, ""
+    done, why, res = _split_attempt(M, C, key, frozenset())
+    tried = []
+    for drop in (frozenset({"tier"}), frozenset({"tier", "cache"})):
+        if done:
+            break
+        done2, why2, res2 = _split_attempt(M, C, key, drop)
+        if why2 is None:                                 # nothing to leave out on either list
+            continue
+        if done2 and "cache" in drop:
+            C["total_split_cache_doubt"] = dict(res2["record"], value=res2["value"], prec=res2["prec"])
+            return False, (f"doubt (cache-reseller): without the classes that cannot apply ({', '.join(res2['flags'])}) "
+                           f"the split gives {res2['value']:.6g} {res2['cur']}, but the platform resells the maker's API "
+                           f"and nothing it writes excludes a cache of its own; with every class: {why}")
+        if done2:
+            done, res = True, res2
+        elif why2 != why and why2 not in tried:
+            tried.append(why2)
+    if not done:
+        return False, why + "".join(f" — {w}" for w in tried)
+    _split_write(M, C, res)
+    return True, ""
+
+
+def _split_attempt(M, C, key, drop):
+    """One try of the split with the classes in `drop` left out. → (done, why, result); why None (drop non-empty) when
+    neither list has a class to leave out."""
+    ctx = M.ctx
     tok = C.get("tokens") or {}
     if "tokens-total" not in tok or any(k in tok for k in ("input", "output", "cache-read")):
-        return False, "platform prices written, but no total tokens alone"
+        return False, "platform prices written, but no total tokens alone", None
     if C.get("number") is None or not C.get("step") or C.get("unit") in ("", "contradictory"):
-        return False, "platform prices written, but the cost's step or unit is not known"
+        return False, "platform prices written, but the cost's step or unit is not known", None
     m = re.fullmatch(r"per-1k-([a-z]+)(?:-([A-Z]{3}))?", C.get("unit") or "")
     if not m:
-        return False, f"platform prices written, but the unit {C.get('unit')!r} is not per 1,000 calls"
+        return False, f"platform prices written, but the unit {C.get('unit')!r} is not per 1,000 calls", None
     cost_cur = C.get("currency")
     pubs = {p["currency"] for p in ctx.prices["prices"] if p["model"] == key and p["route"] == "maker-api"
             and p["kind"] in ("standard", "promotion")}
@@ -2146,34 +2243,45 @@ def total_tokens_split(M, C, key):
         cur = mc[0]
     else:
         return False, (f"the maker's list to price on is not established ({maker}: "
-                       f"{', '.join(mc) if mc else 'currencies not established'}; cost in {cost_cur})")
+                       f"{', '.join(mc) if mc else 'currencies not established'}; cost in {cost_cur})"), None
     cfg = (M.fields.get("configuration") or {}).get("value")
     bp = base_price(ctx, key, cur, cfg)
     if bp is None:
-        return False, f"no current price for {key} in {cur}"
-    base = price_vector(bp)
+        return False, f"no current price for {key} in {cur}", None
+    base_full = price_vector(bp)
     pd = C.get("price_date") or {}
     if not pd.get("lo") or not pd.get("hi"):
-        return False, "no price date"
+        return False, "no price date", None
     lo, hi = V.when(pd["lo"]), V.when(pd["hi"])
-    vecs, why = platform_over(M, key, cur, cfg, lo, hi)
+    allv = [v for _, v, _ in (platform_vectors(M, key)[0] or [])] + [base_full]
+    if drop:                                             # something to leave out, on either list?
+        newest = "cache" if "cache" in drop else "tier"  # the class this try adds to the previous one's
+        if all(project(v, drop) == project(v, drop - {newest}) for v in allv):
+            return False, None, None
+    vecs, why = platform_over(M, key, cur, cfg, lo, hi, drop)
     if why:
-        return False, why
+        return False, why, None
+    base = project(base_full, drop)
     raw, step = float(C["number"]), float(C["step"])
     T, tstep = float(tok["tokens-total"][0]), float(tok["tokens-total"][1])
     per_q = 1000.0 * 1e-6                                # 1,000 calls × prices per million tokens
     splits = []
     for v in vecs:
         if v.get("input") is None or v.get("output") is None:
-            return False, "the platform's input or output price is not known"
+            return False, "the platform's input or output price is not known", None
         if v["input"] == v["output"]:
-            return False, "the platform's input and output prices are equal: no split"
+            return False, "the platform's input and output prices are equal: no split", None
         # the cost per call in the list's money × 1e6 (prices per million tokens): raw is per 1,000 calls
-        t_out, a, b = split_bounds(raw * 1000.0, step * 1000.0, T, tstep, v["input"], v["output"])
+        t_out, a, b, tin_hi = split_bounds(raw * 1000.0, step * 1000.0, T, tstep, v["input"], v["output"])
         if b < 0 or a > T + tstep / 2:
             return False, (f"the split falls outside [0, T]: t_out {t_out:.0f} of T {T:.0f} "
-                           f"(range {a:.0f} … {b:.0f} with the source's rounding)")
-        splits.append(dict(vector=v, t_out=t_out, t_in=T - t_out, t_out_range=[a, b]))
+                           f"(range {a:.0f} … {b:.0f} with the source's rounding)"), None
+        splits.append(dict(vector=v, t_out=t_out, t_in=T - t_out, t_out_range=[a, b], t_in_hi=min(tin_hi, T + tstep / 2)))
+    flags = []
+    if drop:
+        flags, why = class_cannot_apply(ctx, key, drop, max(s["t_in_hi"] for s in splits), allv)
+        if why:
+            return False, why, None
     ks = []
     for v in vecs:
         if set(v) != set(base) or any(not v[c] for c in base):
@@ -2194,9 +2302,9 @@ def total_tokens_split(M, C, key):
                                                                                if c not in ("input", "output")})
         if extra:
             return False, (f"classes or tiers beyond input and output ({', '.join(extra)}) on the current list or the "
-                           f"platform's, not one multiple of each other: the run's mix over them cannot be excluded")
+                           f"platform's, not one multiple of each other: the run's mix over them cannot be excluded"), None
         if len(vecs) != 1:
-            return False, "several platform prices over the price date: no single split"
+            return False, "several platform prices over the price date: no single split", None
         s = splits[0]
         P_in, P_out, p_in, p_out = base["input"], base["output"], vecs[0]["input"], vecs[0]["output"]
         t_out = min(max(s["t_out"], 0.0), T)
@@ -2205,21 +2313,32 @@ def total_tokens_split(M, C, key):
         d_tok = per_q * (P_in - p_in * d_cost)            # ∂value/∂T
         prec = math.hypot(d_cost * (C.get("prec") or 0.0), d_tok * tstep / math.sqrt(12))
         how = f"t_in {T - t_out:.0f}, t_out {t_out:.0f} of {T:.0f} tokens per call"
-    C["total_split"] = dict(currency=cur, base=dict(base), platform=[dict(v) for v in vecs],
-                            splits=[dict(t_in=round(s["t_in"], 1), t_out=round(s["t_out"], 1),
-                                         t_out_range=[round(x, 1) for x in s["t_out_range"]]) for s in splits],
-                            detail=how)
+    if flags:
+        how += f"; left out, cannot apply: {', '.join(flags)} (input per call ≤ {max(s['t_in_hi'] for s in splits):.0f})"
+    record = dict(currency=cur, base=dict(base), platform=[dict(v) for v in vecs],
+                  splits=[dict(t_in=round(s["t_in"], 1), t_out=round(s["t_out"], 1),
+                               t_out_range=[round(x, 1) for x in s["t_out_range"]], t_in_high=round(s["t_in_hi"], 1))
+                          for s in splits], detail=how, **({"cannot_apply": flags} if flags else {}))
+    return True, "", dict(record=record, value=value, prec=prec, how=how, cur=cur, cost_cur=cost_cur, bp=bp,
+                          unit_kind=m.group(1), flags=flags)
+
+
+def _split_write(M, C, res):
+    cur, bp = res["cur"], res["bp"]
+    C["total_split"] = res["record"]
     C["part_currency"] = cur
-    if cur != cost_cur:
-        C["part_unit"] = f"per-1k-{m.group(1)}" + ("" if cur == "USD" else f"-{cur}")
+    if cur != res["cost_cur"]:
+        C["part_unit"] = f"per-1k-{res['unit_kind']}" + ("" if cur == "USD" else f"-{cur}")
     if bp.get("_scheduled_list"):
         M.flags.append("base-scheduled-list-price")
     if bp.get("_last_list"):
         M.flags.append("base-last-list-price")
     M.rule("cost-total-tokens-split")
     M.flags.append(f"cost-total-tokens-split:{cur}")
-    C["base"] = dict(value=value, prec=prec, rule="cost-total-tokens-split", detail=how)
-    return True, ""
+    if res["flags"]:
+        M.rule("cost-class-cannot-apply")
+        M.flags += [f"cost-class-cannot-apply:{f}" for f in res["flags"]]
+    C["base"] = dict(value=res["value"], prec=res["prec"], rule="cost-total-tokens-split", detail=res["how"])
 
 
 def bandable_cost(C):

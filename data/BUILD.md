@@ -1298,3 +1298,61 @@ cache class, a tier on one list, [0, T] broken and kept within the rounding, p_i
 maker's change between captures (I) and before the first (A), a discount, the maker's currencies not established; a
 cache-write multiple), `findings_platform_prices` (the 95 facts, their proofs while reachable; negative: none at
 4e6b610). With the call to the rule removed from `reprice`, the first two fail.
+
+**The board's own output prices in time: partial captures** (the maintainer, 4 Nov 2026: « il faut vérifier » the
+« × 7 » applied back to each release by A). The board's commerce tables (`leaderboard/commerce1-4.md`, column « 输出价格 »)
+at every commit of each file from 20 Jan to 27 Oct 2026 (114 versions, fetched with `gh api …/contents/…?ref=<sha>`,
+the commit dates from the commits API) are written as `platform-price` facts of term `output` dated by their commit
+(captures G2–G58, kind commit; d44b57e is G1): 259 facts for the 17 models, by the writer clb2/w/write_commerce.py of
+the session's scratchpad (every proof checked at the writing: the file's sha256, the quote an exact substring, the
+value in it). Each such capture shows the output price alone: a **partial capture**. `platform_vectors` keeps it
+apart from the full captures (input and output); `platform_over` builds A and I from the full captures only, and each
+partial capture inside a span A or I uses must show that span's price on every class it shows, else the span's price
+is not known (out: « capture G<n> (<date>) shows output …, not the … of the span … »). A partial capture never prices
+a run alone and never extends a span past the last full capture (no input price). The five models priced by the
+split: every one of their 89 commit prices is 7 × the maker's USD output price in force at the commit (opus-5 175.0
+from 28 Jul; gpt-5.4-mini 31.5 from 18 Mar; gpt-5.4-nano 8.75 from 18 Mar; grok-4.6 42.0 from 17 Aug; grok-4.7 42.0
+from 26 Sep): the 45 costs stay.
+
+**Rule `cost-class-cannot-apply`** (`class_cannot_apply`, inside `total_tokens_split`; the maintainer, 4 Nov 2026:
+« fais au mieux »). A class that cannot apply to calls of the run's size is left out of the split, on both lists and
+in every comparison A and I make (the maker's registered prices included). Tried only when the split with every
+class fails, first without the long-context tiers, then without the tiers and the cache:
+- **Tiers.** A tier `lc><N>` applies to a call of more than N input tokens (the lists' own threshold; the platform
+  writes « 输入 token 数落在哪一档，该次调用就按该档单价计费 »). Left out when the input per call from the split, at the
+  top of the source's rounding (`t_in_high`), is below every N. Flag `cost-class-cannot-apply:tier><N>`.
+- **Cache.** prices.json `cache_minimums` (schema prices.schema.json): by maker and model, the minimum cacheable prompt
+  length the maker's documentation states, with the exact quote (writer clb2/w/write_cache_minimums.py; captures of
+  4 Nov 2026). Anthropic: 512 tokens for Opus 5.5, Opus 5, Sonnet 5.5, Fable 5 / 5.1, Mythos 5, Haiku 5.5 (1,024, 2,048
+  or 4,096 for the older models), « Shorter prompts cannot be cached, even if marked with `cache_control` », « These
+  minimums apply on every platform where each model is available ». OpenAI: « The minimum cacheable prompt length is
+  1,024 tokens for GPT-5.6 and later and varies by request settings for earlier models » (GPT-5.6 / 6 / 6.1: 1,024;
+  gpt-5.3-chat-latest, gpt-5.4, -mini, -nano: null). xAI: « The xAI API performs prompt caching **automatically** », no
+  minimum written (null, every grok). A null or absent minimum: the cache is not excluded (doubt). Left out when
+  `t_in_high` is below the minimum. Flag `cost-class-cannot-apply:cache<<N>`.
+- **The platform's own cache.** The platform resells the maker's API and nothing it writes excludes a cache of its own
+  (its catalogue prices « 缓存命中 » for every model). A split that needs the cache left out therefore stays out —
+  doubt, counted apart: `out:cost-not-comparable`, its detail « doubt (cache-reseller): … the split gives <value> … »
+  and the value it would take in `fields.cost.total_split_cache_doubt`. A split that needs the tiers only enters.
+- The input per call is the mean the split gives (T × 1,000 calls); the rule reads it as every call's size, as
+  `effective_classes` reads a stated tokens-in-per-request (one board's questions, of one kind).
+
+**Effect** (`--fit-models catalog`, against f9af9f5; S/clb2/AVANT-APRES.txt of the session's scratchpad): fit-cost rows
+9,411 → 9,420 (+9, 0 lost; lqm.load kept 8,841 → 8,850): gpt-5.4 `high`, 9 tables (the tier lc>272000 left out, input
+per call ≤ 240 tokens; W1, whose format has no tier field, then equals S1, I holds; cost × 1/7). Cost couples 276
+(unchanged), Claude cost couples 55, Claude rows unchanged; fit-quality rows unchanged (17,748; the 9 rows gain the
+build's flags in `confound`). Kept apart, doubt cache-reseller (27, out): gpt-6-luna 6, gpt-6-sol 6, gpt-6.1-sol 7
+(OpenAI GPT-5.6 and later, < 1,024), sonnet-5.5 8 (Anthropic, < 512; the maker's cache-read change of 7 Oct then no
+longer stops A). Reason changed: grok-4.5 9 (xAI's cache not excluded), sonnet-5.5 1 (input per call up to 690 ≥
+512). The 45 costs of the five models, the 89 commit prices all 7 × the maker's, unchanged.
+
+Tests: `cost_split_partial_captures` (the same output price in A and in I → in; another price inside I, inside A →
+out; a partial capture after the last full one does not extend it; partial captures alone price nothing),
+`cost_class_cannot_apply` (W1 without a tier, S1 with one, 200 input tokens per call → in, flag tier>200000; negative
+control: the rule switched off → out as before; 300,000 input tokens per call → out; the cache: no minimum recorded,
+a null minimum → out; 512 → the doubt (cache-reseller), value 4.2 kept apart; a minimum of 200 against 200.5 tokens
+→ out; a maker's cache-read change before the first capture left out with the cache, an input change still stops A),
+`findings_platform_prices_commerce` (the 259 facts, their proofs; the five models' 89 prices 7 × the maker's at
+each date; negative: none at f9af9f5). In `cost_total_tokens_split_conditions`, « a tier on one list only » (200
+input tokens per call) now enters by the tier rule. Mutations: the partial check removed → `cost_split_partial_captures`
+fails; the retries removed → `cost_total_tokens_split_conditions` and `cost_class_cannot_apply` fail.

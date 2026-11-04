@@ -481,6 +481,16 @@ Decided by the maintainer during the reviews:
   long-context tiers — none on either list, or the platform's list one multiple k of the current list on every class
   and tier (then cost × k, whatever the mix). The reading precision (cost to 0.1 元 / 1,000 calls, tokens to the unit)
   propagates into the row's sd. Rule `cost-total-tokens-split` (data/BUILD.md, « the total-tokens split »).
+- **The total-tokens split, checked in time and without the classes that cannot apply (the maintainer, 4 Nov 2026).**
+  The board's commerce tables at every commit (« 输出价格 », the output price alone) are written as `platform-price`
+  facts dated by their commit: partial captures, each a check on the span A or I it falls in (another price there →
+  that span is not known, out); they never price a run alone. Rule `cost-class-cannot-apply`: when the split fails
+  with every class, a class that cannot apply to calls of the run's size is left out of both lists and of the
+  comparisons A and I make — a long-context tier when the input per call (from the split, with the source's rounding)
+  is below its threshold; the cache when it is below the maker's documented minimum cacheable length (prices.json
+  `cache_minimums`, each with its quote; null or absent → not excluded). The platform resells the maker's API and
+  nothing it writes excludes a cache of its own: a split that needs the cache left out stays out (doubt
+  « cache-reseller », its value kept apart in the report); one that needs the tiers only enters (data/BUILD.md).
 - **Dates (the maintainer, 4 Nov 2026, the points left by the dating step 2).** 1. toolathlon's « Date » column is not
   written (its meaning is unknown). 2. Terminal-Bench submission dates before a model's release are kept (early
   access). 3. SimpleBench `dateAdded` before the release: kept. 4. designarena: each board's own `lastUpdateTime` is
