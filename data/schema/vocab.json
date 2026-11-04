@@ -19,6 +19,7 @@
     "price-table",
     "price-tier",
     "maker-price-multiple",
+    "platform-price",
     "tokens-in",
     "tokens-out",
     "tokens-cache-read",
@@ -137,6 +138,12 @@
     },
     "maker-price-multiple": {
      "description": "The source pays the maker's list prices times one factor for all its models: an exchange rate it states, or a relay that passes the maker's prices on (the maintainer, 4 Nov 2026, the price-ratio method). `term`: the currency of the maker's list it starts from. A cost in a currency the maker does not publish takes the price ratio of that list only with this fact (rule cost-price-ratio-other-currency).",
+     "slots": [
+      "spend"
+     ]
+    },
+    "platform-price": {
+     "description": "One price of the platform the source ran its models on, as that platform's own price list shows it on a dated capture (the maintainer, 4 Nov 2026, rule cost-total-tokens-split): `capture` the capture (captures[].id) showing it, which dates it; `term` a price class (vocab price_class), a long-context tier `lc><threshold input tokens>:<class>`, or `discount` / `off-peak` (the list's promotion fields); `value` the price per million tokens in the cost's currency, as the list writes it (or the agent's reading, `written` beside it). Read only by the total-tokens split, never as the maker's price.",
      "slots": [
       "spend"
      ]
@@ -561,7 +568,7 @@
      "list": true
     },
     "spend": {
-     "description": "The run's cost with its currency, unit, basis, method and price table.",
+     "description": "The run's cost with its currency, unit, basis, method and price table, and the source's own platform prices (platform-price).",
      "fact_types": [
       "cost",
       "currency",
@@ -570,7 +577,8 @@
       "cost-method",
       "price-table",
       "price-tier",
-      "maker-price-multiple"
+      "maker-price-multiple",
+      "platform-price"
      ],
      "list": true
     },

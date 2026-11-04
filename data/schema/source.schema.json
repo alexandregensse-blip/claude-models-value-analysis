@@ -291,6 +291,10 @@
       "pattern": "^T[0-9]+/.+/[^/]+$",
       "description": "For a table cell written as a fact (data/convert/cells.py, 4 Nov 2026): the cell reference T<n>/<row key>/<column> it stands for. Its value is the cell as the saved file writes it, its quote the cell and what identifies its row and column, copied from the file; the build reads the value written here and never the file (the maintainer, 4 Nov 2026). A run's id is its row key, as for a cell."
      },
+     "capture": {
+      "$ref": "common.schema.json#/$defs/capture_id",
+      "description": "For a platform-price fact (required): the capture (captures[].id) whose page shows the price; its `captured` dates the price (the maintainer, 4 Nov 2026, rule cost-total-tokens-split)."
+     },
      "chart": {
       "type": "string",
       "description": "For a chart fact: the chart id.",

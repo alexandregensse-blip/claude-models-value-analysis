@@ -974,6 +974,19 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                 rep.err(F, f"price table '{f['term']}' is not registered in price-tables.json (nor a price class)")
             elif not PRICE_NUMBER.fullmatch(str(f["value"])):
                 rep.err(F, f"a stated {f['term']} price is a number per million tokens, not {f['value']!r}")
+        if "platform-price" in sl:                    # the total-tokens split (the maintainer, 4 Nov 2026)
+            m = re.fullmatch(r"(?:lc>\d+:)?([a-z0-9-]+)(?:/input)?", f.get("term") or "")
+            caps = {c["id"] for c in src.get("captures", [])}
+            if not f.get("capture") or f["capture"] not in caps:
+                rep.err(F, "a platform-price fact names the capture that shows it (capture, a captures[].id)")
+            if not m or (m.group(1) not in V["price_class"]["x-terms"]
+                         and not (f["term"] in ("discount", "off-peak"))):
+                rep.err(F, f"a platform-price term is a price class, lc><threshold>:<class>, discount or off-peak, "
+                           f"not {f.get('term')!r}")
+            elif not PRICE_NUMBER.fullmatch(str(f["value"])):
+                rep.err(F, f"a platform price is a number, not {f['value']!r}")
+        elif f.get("capture"):
+            rep.err(F, "capture is for platform-price facts")
         if "run-score" in sl and not f.get("run") and not f.get("cell"):   # a cell's run is its row key
             rep.err(F, "a run-score fact names its run (run)")
         if f.get("run") and not set(sl) & {"run-score", "failure", "partial"}:
