@@ -39217,5 +39217,344 @@
    ],
    "note": "The maker publishes its API prices in USD only (the page checked on 3 Nov 2026). Read by the price-ratio method (the maintainer, 4 Nov 2026): a cost in another currency, or with no currency, takes the ratio of this list."
   }
+ },
+ "cache_minimums": {
+  "anthropic": [
+   {
+    "models": [
+     "fable-5.1",
+     "opus-5.5",
+     "opus-5",
+     "sonnet-5.5",
+     "fable-5",
+     "mythos-5",
+     "haiku-5.5"
+    ],
+    "min_prompt_tokens": 512,
+    "evidence": [
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations: the minimum cacheable prompt length, by model",
+      "quote": "* 512 tokens for Claude Fable 5.1, [Claude Mythos 5.1](https://platform.claude.com/docs/en/models/mythos-5-1/overview), Claude Opus 5.5, Claude Opus 5, Claude Sonnet 5.5, Claude Fable 5, [Claude Mythos 5](https://platform.claude.com/docs/en/models/mythos-5/overview), and Claude Haiku 5.5"
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "These minimums apply on every platform where each model is available."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens are processed without caching, and no error is returned."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "API support",
+      "quote": "* **Messages API**: Opt in with `cache_control`, at the top level or on blocks.",
+      "note": "the cache applies only when the request asks for it; the minimum binds even then"
+     }
+    ],
+    "note": "Anthropic: a prompt shorter than 512 tokens cannot be cached on this model, on every platform"
+   },
+   {
+    "models": [
+     "opus-4.7"
+    ],
+    "min_prompt_tokens": 2048,
+    "evidence": [
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations: the minimum cacheable prompt length, by model",
+      "quote": "* 2,048 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.7"
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "These minimums apply on every platform where each model is available."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens are processed without caching, and no error is returned."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "API support",
+      "quote": "* **Messages API**: Opt in with `cache_control`, at the top level or on blocks.",
+      "note": "the cache applies only when the request asks for it; the minimum binds even then"
+     }
+    ],
+    "note": "Anthropic: a prompt shorter than 2048 tokens cannot be cached on this model, on every platform"
+   },
+   {
+    "models": [
+     "opus-4.6",
+     "opus-4.5"
+    ],
+    "min_prompt_tokens": 4096,
+    "evidence": [
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations: the minimum cacheable prompt length, by model",
+      "quote": "* 4,096 tokens for Claude Opus 4.6 and Claude Opus 4.5"
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "These minimums apply on every platform where each model is available."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens are processed without caching, and no error is returned."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "API support",
+      "quote": "* **Messages API**: Opt in with `cache_control`, at the top level or on blocks.",
+      "note": "the cache applies only when the request asks for it; the minimum binds even then"
+     }
+    ],
+    "note": "Anthropic: a prompt shorter than 4096 tokens cannot be cached on this model, on every platform"
+   },
+   {
+    "models": [
+     "opus-4.8",
+     "sonnet-5",
+     "sonnet-4.6",
+     "sonnet-4.5"
+    ],
+    "min_prompt_tokens": 1024,
+    "evidence": [
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations: the minimum cacheable prompt length, by model",
+      "quote": "* 1,024 tokens for Claude Opus 4.8, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5"
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "These minimums apply on every platform where each model is available."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens are processed without caching, and no error is returned."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "API support",
+      "quote": "* **Messages API**: Opt in with `cache_control`, at the top level or on blocks.",
+      "note": "the cache applies only when the request asks for it; the minimum binds even then"
+     }
+    ],
+    "note": "Anthropic: a prompt shorter than 1024 tokens cannot be cached on this model, on every platform"
+   },
+   {
+    "models": [
+     "haiku-4.5"
+    ],
+    "min_prompt_tokens": 4096,
+    "evidence": [
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations: the minimum cacheable prompt length, by model",
+      "quote": "* 4,096 tokens for Claude Haiku 4.5"
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "These minimums apply on every platform where each model is available."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "Cache limitations",
+      "quote": "Shorter prompts cannot be cached, even if marked with `cache_control`. Any requests to cache fewer than this number of tokens are processed without caching, and no error is returned."
+     },
+     {
+      "url": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching.md",
+      "captured": "2026-11-04T17:05:00Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/platform.claude.com_docs_en_build-with-claude_prompt-caching.md",
+      "sha256": "aee2de4eb8dbb3102f9164831482d848afc9621ca0a19bbd4f4fd11f46b2d3d1",
+      "where": "API support",
+      "quote": "* **Messages API**: Opt in with `cache_control`, at the top level or on blocks.",
+      "note": "the cache applies only when the request asks for it; the minimum binds even then"
+     }
+    ],
+    "note": "Anthropic: a prompt shorter than 4096 tokens cannot be cached on this model, on every platform"
+   }
+  ],
+  "openai": [
+   {
+    "models": [
+     "gpt-5.6-luna",
+     "gpt-5.6-luna-pro",
+     "gpt-5.6-sol",
+     "gpt-5.6-sol-pro",
+     "gpt-5.6-terra",
+     "gpt-5.6-terra-pro",
+     "gpt-6-astra",
+     "gpt-6-astra-pro",
+     "gpt-6-luna",
+     "gpt-6-luna-pro",
+     "gpt-6-sol",
+     "gpt-6-sol-pro",
+     "gpt-6.1-sol",
+     "gpt-6.1-sol-pro"
+    ],
+    "min_prompt_tokens": 1024,
+    "evidence": [
+     {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "captured": "2026-11-04T17:05:01Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/developers.openai.com_api_docs_guides_prompt-caching.md",
+      "sha256": "8c672dafd6a332d4b9ad7464aefa3ca4f6b0fffa8bf66bb5ee087e1b39152711",
+      "where": "How caching works",
+      "quote": "The minimum cacheable prompt length is 1,024 tokens for GPT-5.6 and later and varies by request settings for earlier models."
+     },
+     {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "captured": "2026-11-04T17:05:01Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/developers.openai.com_api_docs_guides_prompt-caching.md",
+      "sha256": "8c672dafd6a332d4b9ad7464aefa3ca4f6b0fffa8bf66bb5ee087e1b39152711",
+      "where": "Summary of model differences, GPT-5.6 and later",
+      "quote": "| Minimum cacheable prefix   | 1,024 visible input tokens"
+     }
+    ],
+    "note": "OpenAI, GPT-5.6 and later: a prefix shorter than 1,024 visible input tokens cannot be cached"
+   },
+   {
+    "models": [
+     "gpt-5.3-chat-latest",
+     "gpt-5.4",
+     "gpt-5.4-mini",
+     "gpt-5.4-nano"
+    ],
+    "min_prompt_tokens": null,
+    "evidence": [
+     {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "captured": "2026-11-04T17:05:01Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/developers.openai.com_api_docs_guides_prompt-caching.md",
+      "sha256": "8c672dafd6a332d4b9ad7464aefa3ca4f6b0fffa8bf66bb5ee087e1b39152711",
+      "where": "How caching works",
+      "quote": "The minimum cacheable prompt length is 1,024 tokens for GPT-5.6 and later and varies by request settings for earlier models."
+     },
+     {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "captured": "2026-11-04T17:05:01Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/developers.openai.com_api_docs_guides_prompt-caching.md",
+      "sha256": "8c672dafd6a332d4b9ad7464aefa3ca4f6b0fffa8bf66bb5ee087e1b39152711",
+      "where": "Summary of model differences",
+      "quote": "For models before GPT-5.6, the minimum cacheable input length varies with request settings, including tools, images, output schemas, reasoning effort, and verbosity."
+     }
+    ],
+    "note": "OpenAI, models before GPT-5.6: the minimum « varies by request settings » (not established)"
+   }
+  ],
+  "xai": [
+   {
+    "models": [
+     "grok-1",
+     "grok-1.5",
+     "grok-1.5v",
+     "grok-2-0813",
+     "grok-2-1212",
+     "grok-2-mini",
+     "grok-2-vision-1212",
+     "grok-3",
+     "grok-3-mini",
+     "grok-4",
+     "grok-4-fast",
+     "grok-4.1",
+     "grok-4.1-fast",
+     "grok-4.20",
+     "grok-4.20-multi-agent",
+     "grok-4.3",
+     "grok-4.5",
+     "grok-4.6",
+     "grok-4.7",
+     "grok-build-0.1",
+     "grok-code-fast-1"
+    ],
+    "min_prompt_tokens": null,
+    "evidence": [
+     {
+      "url": "https://docs.x.ai/developers/advanced-api-usage/prompt-caching.md",
+      "captured": "2026-11-04T17:06:06Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/docs.x.ai_developers_advanced-api-usage_prompt-caching.md",
+      "sha256": "9b2a2b882b3a9d0c49b7bf3b2bfd1b9feef1cdca31a5ae5f949e733e556fe074",
+      "where": "Prompt Caching",
+      "quote": "The xAI API performs prompt caching **automatically**."
+     },
+     {
+      "url": "https://docs.x.ai/developers/advanced-api-usage/prompt-caching/best-practices.md",
+      "captured": "2026-11-04T17:06:16Z",
+      "file": "/tmp/claude-1000/-work/617ff589-16ec-4b16-aa0f-2054ec98325a/scratchpad/clb2/doc/docs.x.ai_developers_advanced-api-usage_prompt-caching_best-practices.md",
+      "sha256": "2cb8cd861f760d650927324d5e92979e41ea26f1325f004fd8e52b5d5ca2891d",
+      "where": "Supported models",
+      "quote": "Prompt caching is available on all `grok` language models."
+     }
+    ],
+    "note": "xAI: caching is automatic on every grok model and no minimum length is written (not excluded)"
+   }
+  ]
  }
 }

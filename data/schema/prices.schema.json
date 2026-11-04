@@ -163,6 +163,44 @@
     ],
     "unevaluatedProperties": false
    }
+  },
+  "cache_minimums": {
+   "type": "object",
+   "description": "Maker → the minimum cacheable prompt length its documentation states, by model (the maintainer, 4 Nov 2026, rule cost-class-cannot-apply: a cache class is left out of a total-tokens split when the run's input per call is below it). min_prompt_tokens null: the documentation read gives none (automatic caching without a minimum, or « varies »): not established. A model absent: not established (doubt → the cache is not excluded).",
+   "additionalProperties": {
+    "type": "array",
+    "items": {
+     "type": "object",
+     "properties": {
+      "models": {
+       "type": "array",
+       "items": {
+        "type": "string"
+       },
+       "minItems": 1
+      },
+      "min_prompt_tokens": {
+       "type": [
+        "integer",
+        "null"
+       ],
+       "minimum": 1
+      },
+      "evidence": {
+       "$ref": "common.schema.json#/$defs/evidence_list"
+      },
+      "note": {
+       "type": "string"
+      }
+     },
+     "required": [
+      "models",
+      "min_prompt_tokens",
+      "evidence"
+     ],
+     "unevaluatedProperties": false
+    }
+   }
   }
  },
  "required": [
