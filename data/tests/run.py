@@ -2722,6 +2722,11 @@ def registry_prices_salvo_4nov():
     eq(len(g("qwen2.5-7b-instruct")), 2, "negative I: the row left the Singapore table in the gap (not merged)")
     # C: Pro mode at the base model's standard rate, from the release
     eq([g(k)[0][0] for k in ("gpt-5.6-sol-pro", "gpt-5.6-luna-pro", "gpt-5.6-terra-pro")], ["2026-07-09"] * 3, "C")
+    P0 = json.load(open(os.path.join(DATA, "registry", "prices.json"), encoding="utf-8"))["prices"]
+    tier = lambda k: [len(p.get("long_context", [])) for p in P0 if p["model"] == k and p["route"] == "maker-api"   # noqa: E731
+                      and p["kind"] == "standard" and p["from"] == "2026-07-09"]
+    eq([tier(k) for k in ("gpt-5.6-sol-pro", "gpt-5.6-luna-pro", "gpt-5.6-terra-pro")], [[1]] * 3,
+       "C: the base model's long-context tier too")
     # D: a permanent discount is the price charged
     P = json.load(open(os.path.join(DATA, "registry", "prices.json"), encoding="utf-8"))["prices"]
     mm = [p for p in P if p["model"] == "minimax-m3" and p["route"] == "maker-api" and p["kind"] == "standard"]

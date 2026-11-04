@@ -16,7 +16,7 @@ H 2, one first captured after `as_of`), the doubts and « nothing found » not w
 
 **Decisions (the maintainer, 4 Nov 2026):** A. the first capture's price from the release (37 applied, 42 not: a
 launch promotion, a later capture without the price, an unlabelled region, an archive not searched); B. no price after
-a retirement whose alias serves another model; C. Pro mode at the base model's rate (three entries from 9 Jul);
+a retirement whose alias serves another model; C. Pro mode at the base model's rate (three entries from 9 Jul, with the base model's long-context tier);
 D. a permanent discount is the standard price (MiniMax M3); E. no Beijing / Mainland China price for a source without
 a region, Alibaba's Singapore table international (4 entries refused, 4 trimmed to their labelled captures); F. no
 yuan conversion (chinese-llm-benchmark: its platform's own prices; llm2014: OpenRouter / Zenmux relays; SuperCLUE: no
@@ -28,8 +28,8 @@ a capture identical to our workbook (165); 7. yc-bench's 52-model data.json of 2
 commit per file (16); bullshitbench per row not written.
 
 **Effect** (against a8266a2): quality unchanged (17,742 rows, 339 couples, Claude 56; lqm kept −3 republished).
-Fit-cost 9,039 → 9,113 (+121 −47), couples 268 → 273, Claude 55 (fable-5 high +1). Gained: A 69, the new prices 35
-(gpt-5.3-codex 15, the first CNY prices 20), J 6, dates 2, indirect 8; lost 47 (a newly covered price date with two
+Fit-cost 9,039 → 9,114 (+122 −47), couples 268 → 274, Claude 55 (fable-5 high +1). Gained: A 69, the new prices 35
+(gpt-5.3-codex 15, the first CNY prices 20), J 6, dates 2, C 1 (gpt-5.6-terra-pro), indirect 8; lost 47 (a newly covered price date with two
 registered vectors replaces the source's stated prices: deepseek-v4-pro-0813 21, gemini-3.6-flash 21,
 deepseek-v4-flash-0731 5). Missing prices: 156 pairs, 1,061 cost measures (526 with quality in).
 

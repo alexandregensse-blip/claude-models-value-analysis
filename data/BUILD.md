@@ -1019,7 +1019,8 @@ last list price (`base-last-list-price` on most costs).
   at its stated shutdown (1 Jun 2026) although its price is still printed afterwards.
 - **C. OpenAI's Pro mode** (gpt-5.6-sol-pro, luna-pro, terra-pro) is billed at the base model's standard rate (the
   reasoning guide, « bills those tokens at the selected model’s standard token rates »): the three Pro entries start on
-  the release, 9 Jul 2026 (sol-pro from gpt-5.6-sol's capture of that day).
+  the release, 9 Jul 2026 (sol-pro from gpt-5.6-sol's capture of that day), and their entries of 9 Jul take the base
+  model's long-context tier (added to the base entries on 30 Oct, not to the Pro ones).
 - **D. A permanent discount** (MiniMax « 永久五折 » / « Permanent 50% off ») is the standard price: minimax-m3 USD
   0.30 / 1.20 / 0.06 and CNY 2.10 / 8.40 / 0.42 (and their > 512k tier).
 - **E. Region.** A Mainland China / Beijing price is not applied to a source that does not say its region: Alibaba's
@@ -1071,12 +1072,13 @@ last list price (`base-last-list-price` on most costs).
 date is covered with a base price, replayed with build.py's prices_over / base_price over the registry of each stage:
 J, the salvo's entries, C, I, A — prix2/w/compare3.py): fit-quality rows 17,742 → 17,742 (lqm.load kept 16,711 →
 16,708: 3 rows republished, matched by the new costs), couples 339, Claude 56 — no quality row moves. Fit-cost rows
-9,039 → 9,113 (+121, −47; lqm.load kept 8,502 → 8,572), cost couples 268 → 273 (new: gpt-5.3-chat-latest solo,
-gpt-5.3-codex low, qwen3.8-omni-flash low / medium / nothink), Claude cost couples 55 (fable-5 high 94 → 95).
-Costs gained (status in, 120): A 69 (gemini-3.6-flash 22, gemini-3.5-flash-lite 20, gemini-3.1-flash-lite 5,
+9,039 → 9,114 (+122, −47; lqm.load kept 8,502 → 8,573), cost couples 268 → 274 (new: gpt-5.3-chat-latest solo,
+gpt-5.3-codex low, gpt-5.6-terra-pro low, qwen3.8-omni-flash low / medium / nothink), Claude cost couples 55
+(fable-5 high 94 → 95). Costs gained (status in, 121): A 69 (gemini-3.6-flash 22, gemini-3.5-flash-lite 20, gemini-3.1-flash-lite 5,
 kimi-k2.7-code 6, gpt-5.3-chat-latest 4, kimi-k2.6 4, qwen3.8-max-0902 3, qwen3.8-omni-flash 3 …), the salvo's
 prices 35 (gpt-5.3-codex 15; the first CNY prices: kimi-k3 7, glm-5.3 6, glm-5.3-flash 6 of SuperCLUE 2607,
-deepseek-v4.1-flash-1017 1), J 6 (deepseek-v4-pro-0813 on 16 Aug), the proofbench dates 2, indirect 8. Costs lost
+deepseek-v4.1-flash-1017 1), J 6 (deepseek-v4-pro-0813 on 16 Aug), the proofbench dates 2, C's long-context tier 1
+(gpt-5.6-terra-pro, matsonj), indirect 8. Costs lost
 (47): a price date newly covered by two registered vectors, where the source's stated prices (rule B of 29 Oct) used
 to stand in: the registered vectors decide, the band to the current price is wide and the cost forms a single couple
 (J 26: deepseek-v4-pro-0813 21, deepseek-v4-flash-0731 5; A 21: gemini-3.6-flash, vals.ai, its 21 Jul list price and
