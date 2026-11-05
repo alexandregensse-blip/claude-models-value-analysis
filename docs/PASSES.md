@@ -5,6 +5,55 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## Salvo s5, integration 2: the maintainer's decisions of 5 Nov 2026, names, remaining conversions
+
+**Method.** No fit, no web, no agent. Scripts S/s5/integ2/py/ of the session's scratchpad (decisions.py, names.py,
+fixes.py, convert2.py; compare2.py for the before / after). Every new quote checked once, at the writing
+(`validate.py --check-files` on the changed files: 0 error); `validate.py`: 0 error.
+
+**Decisions (the maintainer, 5 Nov 2026; headline decisions D2–D31 in data/decisions.json).**
+1. LiveBench per task: one run does not count 23 times. Only the global average may enter, and only once the site's
+   categories (which define it) are in the findings with their quote. The saved copies of table_2026_01_08.csv hold the
+   tasks only: the 23 task setups stay pending (out:not-headline), with the reason in their note. No row moved.
+2. OckBench: headline accuracy ('Accuracy is still reported separately', README), not the OckScore (D2, D3): 22 rows
+   enter (Opus 4.7/4.8/5, GPT-5.4/5.5, Gemini 3.1 Pro, GLM-5.2, DeepSeek V4 Pro preview).
+3. Context Arena: headline AUC @128k, the same range for every model (D4–D7; overall_score, AUC @1M and the average are
+   not the headline): 3 rows enter (qwen3.8-max low / medium / xhigh).
+4. Names: 130 spellings of the salvo's sources added to models.json as display names (ARC Prize's « … - Provider
+   Adapter » labels, Dubesor's « … Thinking » and local-build labels, HolmesGPT, ChessBench, arXiv 2610.31274,
+   theaggregate…), each with the source's quote as evidence and the interval of the registered name it extends;
+   `selects` null (a level comes from the measure's own effort facts, never from the spelling). 169 measures cite them:
+   59 quality and 41 cost rows enter (ARC 38, Dubesor 13 quality / 3 cost, arXiv 2610.31274 8). Left unattached, with
+   the reason (S/s5/integ2/names-left.json): Epoch's 'Model version' spellings (155; Hugging Face names without their
+   organization, typed as API ids: no namespace for them), LiveBench's and ReactBench's own ids, Context Arena's
+   OpenRouter-like slugs (no saved OpenRouter listing proves them), the aliases that moved (gemini-pro,
+   gemini-1.5-flash, grok-2…), and the names of models the registry does not hold. Android Bench's first row had read
+   the column tooltip into the model name: corrected to 'Claude Sonnet 5.5'.
+5. Aggregators that copy: lmcouncil's 18 cards get headline decisions (D8–D25). The 12 whose linked board is held join
+   that board's family (Epoch's GPQA Diamond, OTIS, MATH L5, FrontierMath 1–3 and 4, SWE-bench Verified, GeoBench;
+   WeirdML; SimpleBench; GSO 12 Jul; METR v1.1, the card's Minutes read as p50-horizon-min; LMArena WebDev); 6 keep
+   their own family (origin not held: Scale's HLE, OpenAI's GDPval, Fiction.liveBench, BALROG, VPCT, Terminal-Bench).
+   Effect: the 4 rows that had passed every earlier step are now out:single-couple; the others stop on the effort.
+   aiagentstore's « Overall » (not LiveBench's figure) and DataLearner (no origin named) stay pending.
+6. RVG-Bench: headline mIoU (D26–D29). Epoch's two SpireClimb tables without a metadata row: 'Best score' (D30, D31). No
+   row moved (models or efforts not established).
+
+**Remaining conversions (saved copies only).** Artificial Analysis kimi-k2-thinking, Wayback 8 Nov 2025 (index v3.0,
+66.98, run cost; the cost method sentence of later captures is absent). PlanBench-V's 8 sub-scores and FinishStrong's
+12 per-set columns (all rows; headline pending: sub-scores of runs whose overall is held). benchmarklist: the three
+vals.ai Cost vs score tables (High, with cost) on their held setups, and the 51 'Benchmark map' values on setups of
+their own (pending: origin not mapped). arXiv 2611.02278 (Tables 1–3) and 2608.30327 (Table 2 reference columns,
+Table 6 rot0), copies moved to /work/.salvo14/mig/s5/ev/integ2/. Not converted: arXiv 2608.15693 (no copy); the 10
+Artificial Analysis pages without their record (each saved copy is the site's empty shell: no model data); METR's
+GPT-5.1-Codex-Max horizon (written '2h42m': a duration conversion the digit check does not admit, and no suite version
+written); DataLLM Lab F131 / F222 unchanged (decided earlier).
+
+**Result** (S/s5/integ2/AVANT-APRES.txt, against 8f07c01; two paths agree): fit-quality rows 17,867 → 17,957,
+fit-cost 9,425 → 9,467; rows kept by lqm 16,806 → 16,896 (quality), 9,044 → 9,086 (cost); couples with a kept row
+339 → 340 (gpt-5.6-luna-pro max) and 276 → 277 (deepseek-v3.2 think). Claude: Opus 4.7 xhigh, Opus 4.8 and Opus 5 low to max
++1 quality each (OckBench); Sonnet 5.5 high / low / medium / xhigh +1 / +1 (ARC « Provider Adapter »);
+Haiku 5.5 max +1 / +1 (ARC).
+
 ## Salvo s5 « manques » (4–5 Nov 2026): 15 lots found, converted, checked, integrated
 
 **Method.** No fit, no web, no agent at the integration. The search (4 Nov, Sonnet agents, one per lot: m1–m6 the

@@ -1416,3 +1416,12 @@ scenario `_split_scenario` writes the fact by default (`one_call`). In `cost_cla
 refused by condition 1 (the platform's cache-write 2 × input against the maker's 1.25 ×). Mutations: condition 1
 switched off (always billed) → `cost_class_cannot_apply` and `cost_class_cannot_apply_decisions` fail; condition 2
 switched off → `cost_class_cannot_apply_decisions` fails.
+
+## Added on 5 Nov 2026 (salvo s5, integration 2)
+
+No rule of the build changed. data/decisions.json now holds the maintainer's first headline decisions (kind headline,
+D2–D31: OckBench, Context Arena, lmcouncil's cards, RVG-Bench, Epoch's two SpireClimb tables), which the setups of
+data/registry point to. A build against data/registry therefore needs data/decisions.json (without a decisions file
+it stops: « headline decision … but no decisions file », as before). Two tests followed: `bad_arguments_clean_errors`
+gives the examples' registry an empty decisions file of its own, and `pilot_legacy_build_against_real_registry` builds
+with data/decisions.json (its measure decision D1 names measures absent there: reported stale, not an error).

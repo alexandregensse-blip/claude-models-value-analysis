@@ -1984,8 +1984,11 @@ def bad_arguments_clean_errors():
     import subprocess, tempfile, shutil
     root = tempfile.mkdtemp(prefix="args-")
     ex = os.path.join(DATA, "findings", "examples")
+    # the examples' own (empty) decisions: data/decisions.json holds headline decisions on setups of data/registry
+    # (5 Nov 2026), which the examples' registry does not register
+    open(os.path.join(root, "decisions.json"), "w").write('{"decisions": []}')
     base_args = [sys.executable, os.path.join(DATA, "build.py"), "--registry", os.path.join(ex, "registry"),
-                 "--findings", ex, "--no-lqm"]
+                 "--findings", ex, "--decisions", os.path.join(root, "decisions.json"), "--no-lqm"]
     try:
         open(os.path.join(root, "afile"), "w").write("x")
         open(os.path.join(root, "bad.json"), "w").write("{")

@@ -103,8 +103,10 @@ def legacy_build_against_real_registry():
         out = os.path.join(root, "b")
         err = io.StringIO()
         with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(err):
+            # data/decisions.json: the registry's headline decisions (5 Nov 2026) live there; its measure decisions
+            # name measures absent here (reported as stale, not errors)
             code = build.main(["--registry", os.path.join(DATA, "registry"), "--findings", fnd, "--decisions",
-                               os.path.join(root, "none.json"), "--out", out, "--no-lqm"])
+                               os.path.join(DATA, "decisions.json"), "--out", out, "--no-lqm"])
         lines = [l for l in err.getvalue().splitlines()[1:] if l.strip()]
         eq([l for l in lines if not l.startswith(os.path.relpath(os.path.join(DATA, "registry"), build.REPO))], [],
            "no error outside the registry's own files")
