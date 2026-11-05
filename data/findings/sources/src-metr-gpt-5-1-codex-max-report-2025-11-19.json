@@ -1,0 +1,179 @@
+{
+ "id": "src-metr-gpt-5-1-codex-max-report-2025-11-19",
+ "publisher": "metr",
+ "urls": [
+  "https://metr.org/evaluations/gpt-5-1-codex-max-report/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://metr.org/evaluations/gpt-5-1-codex-max-report/",
+   "captured": "2026-11-04",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt": "7dba6a081baeb9c5ae16ac7b6b5585073b625625d9d389a853ddd71d59141e73",
+  "/work/.salvo14/mig/s5/ev/n4/metr-gpt-5-1-codex-max-report.html": "6f593743d6959f6e0ffcb0c1d6e8329bdabb1381fec56d863c748c837b46c47e"
+ },
+ "harvested_at": "2026-11-04T19:22:22Z",
+ "published": {
+  "value": "2025-11-19",
+  "where": "page header, 'DATE'",
+  "quote": "DATE November 19, 2025",
+  "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt"
+ },
+ "salvo": "salvo14/mig/s5 n4 (5 nov. 2026). METR report on GPT-5.1-Codex-Max. Effort: aucune mention de 'effort' ni 'xhigh' dans la page : aucun fait d'effort (le lot ne couvre donc aucun couple medium/high/xhigh). Horizon de 50 % dans le texte (about 2h40m) : pas de setup benchmarks.json pour cette version du horizon METR (metr-horizon-v11 est la v1.1) : pas de mesure, a creer par l'integration. Le fait score est en forme h:min (about 2h40m), non converti en minutes.",
+ "agent": "agent de conversion n4 (Haiku 5.5), a partir de out/n4.json (extraction Sonnet, sha256 verifiees)",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "GPT-5.1-Codex-Max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods paragraph (the evaluation details)",
+   "quote": "We evaluated GPT-5.1-Codex-Max using the Responses API"
+  },
+  {
+   "id": "F2",
+   "says": "route",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "Responses API",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods paragraph, after the 80%-horizon sentence",
+   "quote": "We evaluated GPT-5.1-Codex-Max using the Responses API",
+   "note": "route as written; not registered in routes.json"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "which does not expose an “n generations” parameter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods paragraph",
+   "quote": "We evaluated GPT-5.1-Codex-Max using the Responses API, which does not expose an “n generations” parameter. This resulted in the agent scaffold consuming more tokens per action.",
+   "note": "the scaffold consumed more tokens per action because of this"
+  },
+  {
+   "id": "F4",
+   "says": "metric-definition",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "fit a logistic model to find the human time-to-complete at which each AI agent has a 50% (or 80%) chance of success",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods, time-horizon paragraph",
+   "quote": "Then, we fit a logistic model to find the human time-to-complete at which each AI agent has a 50% (or 80%) chance of success.",
+   "note": "50% and 80% horizons are the time-to-complete at which the agent succeeds with that probability"
+  },
+  {
+   "id": "F5",
+   "says": "items",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "170 tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods, time-horizon paragraph",
+   "quote": "We have AI agents attempt all 170 tasks, which gives us a plot of each agent’s success rate depending on the length of the task."
+  },
+  {
+   "id": "F6",
+   "says": "score",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "about 2h40m",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "section 'Assessment of GPT-5.1-Codex-Max', first paragraph",
+   "quote": "The observed 50%-time horizon of GPT-5.1-Codex-Max was about 2h40m (75m - 5h50m 95% CI)",
+   "term": "p50-horizon-min",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "75m - 5h50m 95% CI",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "section 'Assessment of GPT-5.1-Codex-Max', first paragraph",
+   "quote": "The observed 50%-time horizon of GPT-5.1-Codex-Max was about 2h40m (75m - 5h50m 95% CI)",
+   "note": "95% confidence interval of the 50% horizon"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "point estimate 2h42m",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "summary at the top of the page",
+   "quote": "a 50% time-horizon between 75m and 350m (point estimate 2h42m)",
+   "note": "point estimate in the summary; the assessment section gives about 2h40m"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "around 30m (9m - 80m 95% CI)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods paragraph, before the Responses API sentence",
+   "quote": "We find the 80%-time horizon to be around 30m (9m - 80m 95% CI), compared to GPT-5’s 26m.",
+   "note": "80% horizon; 95% confidence interval"
+  },
+  {
+   "id": "F10",
+   "says": "cap",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "32M tokens per task attempt",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods paragraph",
+   "quote": "We accordingly allowed GPT-5.1-Codex-Max a budget of 32M tokens per task attempt – the highest budget we’ve used in our evaluations.",
+   "note": "token budget per task attempt, the highest METR used"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "this effect was modest beyond 5M tokens per task attempt",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "methods paragraph, after the token budget",
+   "quote": "We generally observed GPT-5.1-Codex-Max to make productive use of the token budget, but this effect was modest beyond 5M tokens per task attempt."
+  },
+  {
+   "id": "F12",
+   "says": "metric-definition",
+   "about": "GPT-5.1-Codex-Max",
+   "value": "counting all unfinished runs as failures",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s5/ev/n4/metr-codexmax.txt",
+   "where": "token-budget comparison figure caption",
+   "quote": "Each model has a constant token budget, and the performance at each point is calculated by counting all unfinished runs as failures."
+  }
+ ]
+}

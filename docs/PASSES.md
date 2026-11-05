@@ -5,7 +5,80 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
-## The reseller's cache and one call per question (4 Nov 2026, latest)
+## Salvo s5 « manques » (4–5 Nov 2026): 15 lots found, converted, checked, integrated
+
+**Method.** No fit, no web, no agent at the integration. The search (4 Nov, Sonnet agents, one per lot: m1–m6 the
+couples short of sources, n1–n9 the couples with fewer than 5 rows on an axis; instructions S/s5/CONSIGNE.md of the
+session's scratchpad) saved every page it read in /work/.salvo14/mig/s5/ev/<lot>/ with its sha256; Haiku agents
+converted the finds (S/s5/CONV.md); each finder then checked its lot's conversion (S/s5/conv/<lot>/VERIF.md). The
+integration (scripts S/s5/integ/py/, rerun from the merged conversions by run_all.sh) applied the checks, completed
+every source with all its rows and models, converted the new versions of known boards, and wrote the registry. Every
+quote was checked once, at the writing (`validate.py --check-files` on the new files: 0 error).
+
+**Written.** 93 sources (88 converted by the lots, rebuilt or corrected; 5 new: the 4 Nov snapshots of Epoch's hub,
+ARC Prize, Artificial Analysis's model pages, Context Arena, the 28 Oct run of HolmesGPT), 87 measures files (about
+10,300 measures; the cells of the Epoch and ARC tables written as facts by data/convert/cells.py). Registry: 36
+publishers, 233 setups (metric from the value facts; headline `only-metric` with the value's quote, `designated` from
+Epoch's benchmark_metadata.csv, or a pending decision — see below). No price written: every entry of
+S/s5/conv/n1/prices-proposes.json is already in prices.json with the same classes and dates (its « preuve » items),
+and its « prolongations » end on 4 Nov, after `as_of` (29 Oct), which is not raised.
+
+**Completions** (recenser, pas filtrer). ReactBench: 684 rows (v1.0–v1.2, overall and the write / fix suites, the
+`hasEstimatedUsage` costs as source estimates). Android Bench: both tables (2.0 with level and agent, 1.0). Dubesor's
+benchtable: its 347 models (TOTAL, $/bench of the 20/80 block, `Thinking` as thinking on, local quantized builds as
+`quantized-build`). arXiv 2604.26954: Tables 4–7 (5 models, κ, tokens, cost, March 2026 prices). OckBench: the 56 rows
+of the top-200 CSV (one source; the lots' four copies are the same file). LiveBench table_2026_01_08: both Wayback
+captures (79 and 111 models × 23 tasks; the model ids read as the maker's id they start with plus their written
+suffix). Moritz (gpt-5.2, gpt-5.2-pre-feb, kimi-k2.5), PRISMA (27 rows, route from the Provider column, levels from the
+Notes), HolmesGPT (11 models; and the 28 Oct run), LoopArena (3 settings), FELAB (7 models, cost-only), hsiaoa (9
+rows × 4 conditions), Qwen3.7-Plus blog rows, lmcouncil (18 cards × the 5 rows shown), Nipun Batra (flash/high,
+spiral_order, puzzle tokens), the forum posts, Qubrid (Z.ai's table), arXiv 2609.29933 Table 10, RVG IoU@0.3, RCA
+(cost into its row's spend, one setup per tools configuration, tokens where the row has 8 columns), pinyin (run cost,
+calls, empty answers, local run start and end), DeepSeek's arXiv report (TB 2.1 at b 25 / 100).
+
+**New versions.** `src-epoch.ai-benchmark-data-2026-11-04` (snapshot_of 10-21): every row of the 22 internal tables,
+the ECI and the 6 external tables the earlier snapshots convert (2,454 measures; 57 external tables not converted, as
+before). `src-arcprize-leaderboard-2026-11-04` (v1, v2 generatedAt 28 Oct, v3 2 Nov; every row; the board's prose facts
+carried from 18 Oct). `src-artificialanalysis-model-pages-2026-11-04` (41 of the 51 pages saved by m1, n1, n2, n4, n8;
+the page's own record: Intelligence Index v5.0.1 with cost and output tokens per task where present, each evaluation
+field with its cost per task; 10 pages hold no record of their slug — redirects — listed in the report). A same board's
+rows count once by the rule already in place: one publisher and setup, the later snapshot supersedes within its
+campaign.
+
+**Copies.** aiagentstore (Hex DataBench, OckBench), benchmarklist (ObviousBench, ARC Prize, AutomationBench),
+Qubrid (Artificial Analysis, Z.ai's card), lmcouncil (each board it shows), and DeepSeek's arXiv posting of its V4.1
+report: a `restated-from` fact naming the board and its id here, the measures on the original's setup where one
+exists (lqm counts identical values once), DeepSeek's paper under publisher deepseek and the report's setups. Where the
+copy's figure is not the original's — aiagentstore's « Overall » (Sonnet 4.6 70.4 / 75.5 / 75.3 against LiveBench's
+task mean 70.19 / 75.68 / 75.59) — it has its own setup, headline pending. DataLearner names no origin: own setups,
+pending.
+
+**Context Arena.** Withdrawn on 27 Oct (2a459ae: « contextarena withdrawn (its legacy metric is our own mean; the
+board's AUC needs setups) — its rows stay legacy »). The new copies hold the board's own numbers (the 8-needle
+leaderboard's `overall_score`, 184 rows; the five Qwen summaries' AUC @128k, AUC @1M, average): taken back with those
+only, no bin re-averaged, as `src-contextarena-ai-needles8-2026-11-04`; headlines pending (the copies do not show the
+column the board ranks by).
+
+**Checks not applied.** DataLLM Lab F131 / F222 (tokens-in 588 for Gemini 3.5 Flash and 2.5 Pro): not changed. They are
+cells of the evidence JSON (benchmark-evidence-2026-10-03.json), read mechanically on 4 Nov, not of the article the
+check read; the JSON gives each model its own tokIn, consistent per tokenizer (every Google model 588, every OpenAI
+604). The other checks of the 15 VERIF.md were applied (lists in the integration report).
+
+**Headlines pending (out:not-headline until the maintainer decides).** LiveBench's 23 task setups (one run weighed 23
+times, or a global average not in the file), ReactBench's write / fix suites, OckBench (ranks by OckScore = accuracy −
+10·log(tokens/10000 + 1); accuracy reported apart), Context Arena, aiagentstore « Overall », DataLearner, lmcouncil
+(copies), hsiaoa (a stance, not a score), RVG (mIoU and IoU@0.3), Epoch's two SpireClimb tables without a metadata row,
+the forum figures.
+
+**Result** (S/s5/integ/AVANT-APRES.txt, sealed build, against c5f4f42): fit-quality rows 17,748 → 17,867, fit-cost
+9,411 → 9,425; rows kept by lqm 16,699 → 16,806 (quality), 9,030 → 9,044 (cost); couples in the fit tables 339 → 339
+(quality), 276 → 277 (cost); couples with a row kept 338 → 339 (deepseek-v4.1-flash-1017 nothink) and 274 → 276
+(kimi-k2.5 nothink and think). Claude: sonnet-5.5 +3 quality / +3 cost on each level (ARC 4 Nov), opus-4.7 low +1,
+haiku-5.5 max −1 (an ARC-AGI-3 value replaced by the new snapshot's). Most new rows stay out: model names the registry
+does not know (ReactBench, Dubesor, LiveBench ids, Epoch's new models), levels not written, pending headlines. Tests
+190 passed; the build attempts no access outside the repository (sealed.py).
+
+## The reseller's cache and one call per question (4 Nov 2026)
 
 **Method.** No fit, no agent; web only for the board's repository (gh) and nonelinear.com. The maintainer's three
 decisions of 4 Nov 2026 on rule `cost-class-cannot-apply`: (1) the doubt « the reseller's own cache » is lifted when
