@@ -138,7 +138,9 @@ evidence}`) and each either served as itself or converted:
 `names`: each API id or display name, the model it **serves** over `{from, to}` (the maker's own dates: release,
 redirect, shutdown), and optionally the configuration it selects (`deepseek-chat` → nothink, a `-thinking` id →
 think). Names are matched exactly, except in the Hugging Face namespace (`huggingface`: repository ids such as
-`Qwen/Qwen3.8-27B`), matched case-insensitively (23 Oct). `default` (the configuration a call with no setting gets; when the maker documents the thinking default and the effort default separately, two dated records with `setting: thinking` and `setting: effort`: Anthropic Opus 4.5–4.8 and Sonnet 4.6, a call with no thinking field is thinking off, the effort default high applies with thinking on; 26 Oct), `conversions` (requested → served, per route),
+`Qwen/Qwen3.8-27B`), matched case-insensitively (23 Oct). A `table-id` name (`table`: `<publisher>/<file name>`) is a
+publisher's own id valid in that table only — Epoch's « Model version », LiveBench's ids — each proven by the table's
+row or page that fixes the version (the maintainer, 9 Nov 2026). `default` (the configuration a call with no setting gets; when the maker documents the thinking default and the effort default separately, two dated records with `setting: thinking` and `setting: effort`: Anthropic Opus 4.5–4.8 and Sonnet 4.6, a call with no thinking field is thinking off, the effort default high applies with thinking on; 26 Oct), `conversions` (requested → served, per route),
 `modes` (request parameters that select another key: Pro → `<id>-pro`). Configurations served as themselves start at
 the release (release post, model card or API reference) unless a document dates a later addition, and last until the
 maker states a change or the model's shutdown (a capability is not bounded by the last capture); `default`,
@@ -281,7 +283,10 @@ shared couples, ≥ 2 of them, equality by METHODOLOGY §3's closeness test) lin
    campaign; residuals of an estimated index refused); a non-linear composite is kept whole only for couples with no
    component. (Phase 1: the build computes the residuals; dropping the composite stays in `lqm.load`.)
 9. **Republication**: `restated-from` → counted once (phase 1: `lqm.load`'s rule — the larger group keeps it; phase 2:
-   the original); identical values across groups beyond chance → once (`lqm.load`).
+   the original); identical values across groups beyond chance → once (`lqm.load`). Stated measure by measure (the
+   maintainer, 9 Nov 2026): `restated-from` with a `same-runs-as` fact whose `held` names the measure we hold with the
+   same runs → `out:copy`, on both axes, whatever lqm finds; with `capture` (an older capture of the original showing
+   the copied value) and `held` the board we hold newer → `out:copy-older-snapshot`.
 10. **Group** = setup × publisher × campaign, ≥ 2 accepted couples of models in the fit's model list → `in`; else
    `out:single-couple`.
 
@@ -524,3 +529,9 @@ Decided by the maintainer during the reviews:
   reasoning parameter (Search Arena post of 14 Apr 2025: "By default, we use each provider's standard API settings";
   FastChat's api_provider.py sends none), extended to the 2026 boards: the maker's documented default at the run date.
   chinese-llm-benchmark: the board's own catalogue (nonelinear.com) states each model's default setting.
+- **Integration 3 of salvo s5 (the maintainer, 9 Nov 2026).** Copies are marked measure by measure (`held`,
+  `out:copy`, `out:copy-older-snapshot`; §5.2 step 9); a publisher's own ids get per-table names (`table-id`);
+  METR's time horizon is a quality measure in minutes (« 2h42m » = 162, validate.py checks the hours and minutes);
+  SpireClimb's main table is the composite of its sts1 and sts2 tables (the composite rule applies). Values, names,
+  efforts and routes are read by the agent line by line, never by a script that walks a table; a script only writes
+  the JSON and checks (data/BUILD.md, « Added on 9 Nov 2026 »).

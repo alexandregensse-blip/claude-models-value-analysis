@@ -2617,6 +2617,80 @@ def local_time_no_zone():
 
 
 @test
+def copy_of_held_runs_counted_once():
+    # the maintainer, 9 Nov 2026 (points 1 and 5): a measure that says it republishes a board (restated-from) and whose
+    # same-runs-as fact names the held measure (held) is out:copy on both axes, whatever lqm finds; with the older
+    # capture that shows its value, out:copy-older-snapshot. Negative controls: held naming a measure not in the build,
+    # held without restated-from, restated-from alone: the copy stands as its own measure (a held source that is not in
+    # the findings is a validation error)
+    sc = base()
+    for k in ("mc", "md", "me"):
+        sc.model(k)
+    same_price(sc, "ma", "mb", "mc", "md", "me")
+    o = sc.source("orig")
+    o1 = sc.m(o, model="ma", effort=[LOW], score="50%", cost="1.0")
+    sc.m(o, model="mb", effort=[LOW], score="40%", cost="2.0")
+    a = sc.source("agg", publisher="puby", captures=[{"id": "G1", "kind": "wayback", "captured": "2026-05-01",
+                                                      "url": "https://web.archive.org/web/20260501/https://example.org/orig"}])
+    c1 = sc.m(a, model="ma", effort=[LOW], score="50%", cost="1.0", restated_from="the orig board",
+              same_runs_as="https://example.org/orig")
+    c2 = sc.m(a, model="mb", effort=[LOW], score="40%", restated_from="the orig board", same_runs_as="https://example.org/x")
+    c3 = sc.m(a, model="mc", effort=[LOW], score="30%", same_runs_as="https://example.org/orig")
+    c4 = sc.m(a, model="md", effort=[LOW], score="20%", restated_from="the orig board")
+    c5 = sc.m(a, model="me", effort=[LOW], score="10%", restated_from="the orig board", same_runs_as="https://example.org/orig")
+    held = {c1: o1, c2: o + "#M9", c3: o1, c5: o}
+    for ref, h in held.items():
+        sid, mid = ref.split("#")
+        fid = next(m for m in sc.msets[sid] if m["id"] == mid)["facts"]["same_runs_as"]
+        f = next(x for x in sc.sources[sid]["facts"] if x["id"] == fid)
+        f["held"] = h
+        if ref == c5:
+            f["capture"] = "G1"
+    r = sc.run()
+    eq((r.q(c1), r.c(c1), r.q(c5)), ("out:copy", "out:copy", "out:copy-older-snapshot"), "copies")
+    eq((r.q(o1), r.q(c2), r.q(c3), r.q(c4)), ("in", "in", "in", "in"), "the original and the negative controls")
+    eq("same-runs-as:" + o1 in r[c1]["flags"], True, "flag")
+
+
+@test
+def table_id_name_valid_in_its_table_only():
+    # the maintainer, 9 Nov 2026 (point 2): a publisher's own id attached for one table ('<publisher>/<file name>');
+    # negative controls: the same id in another table of the publisher, and in the same file name of another publisher
+    sc = base()
+    tab = {"name": "Tab-A", "kind": "table-id", "table": "pubx/t1.csv", "selects": None, "route": None,
+           "serves": [iv("2026-01-01", None, from_basis="release", to_basis="open")]}
+    sc.models["ma"]["names"].append(tab)
+    s = sc.source("tab", captures=[])
+    t = sc.source("tab2", publisher="puby")
+    m1 = sc.m(s, model="Tab-A", effort=[LOW], score="50%", namespace="prefix")
+    sc.m(s, model="mb", effort=[LOW], score="40%")
+    m3 = sc.m(s, model="Tab-A", effort=[LOW], score="45%", namespace="prefix", setup="s1")
+    m4 = sc.m(t, model="Tab-A", effort=[LOW], score="45%", namespace="prefix")
+    for ref, fl in ((m1, "t1.csv"), (m3, "t2.csv"), (m4, "t1.csv")):
+        sid, mid = ref.split("#")
+        fid = next(m for m in sc.msets[sid] if m["id"] == mid)["facts"]["model"][0]
+        next(x for x in sc.sources[sid]["facts"] if x["id"] == fid)["file"] = fl
+        sc.sources[sid]["sha256"][fl] = "0" * 64
+    r = sc.run()
+    eq(r.model(m1), "ma", "in its table")
+    eq((r.model(m3), r.model(m4)), (None, None), "negative: another table, another publisher")
+
+
+@test
+def duration_written_in_hours_and_minutes():
+    # METR's « point estimate 2h42m » is written as 162 minutes (the maintainer, 9 Nov 2026): the digit check reads the
+    # hours and minutes; negative controls: another number of minutes, the old digit reading (242), a million '1.2m'
+    import sys as _s
+    _s.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "schema"))
+    import validate as V
+    eq((V.digits_agree("162", "2h42m"), V.digits_agree("160", "about 2h40m"), V.digits_agree("228", "3h 48m"),
+        V.digits_agree("75", "75m"), V.digits_agree("300", "5h")), (True, True, True, True, True), "durations")
+    eq((V.digits_agree("160", "2h42m"), V.digits_agree("242", "2h42m"), V.digits_agree("2", "2h42m"),
+        V.digits_agree("163", "about 2h42m")), (False, False, False, False), "negative: other minutes")
+    eq((V.digits_agree("1200000", "1.2m"), V.digits_agree("12.5", "12,5 %")), (True, True), "the digit rule kept")
+
+
+@test
 def date_proof_checked():
     # dating step 2 (3 Nov 2026): a capture's or the publication's date carries its proof (evidence: file, sha256,
     # quote). The maintainer, 4 Nov 2026: the proof is checked when it is written, by the agent writing it

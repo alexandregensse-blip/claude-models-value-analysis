@@ -272,3 +272,15 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
   decision, evidence): its calls always go through that route (OpenHands → LiteLLM), a step of every chain it is in.
   validate.py: the route is registered, neither a harness nor the maker's API. **vocab.json / rules.json:** rule id
   `harness-passes-through`.
+
+## Added on 9 Nov 2026 (integration 3 of salvo s5)
+
+- **source.schema.json:** a `same-runs-as` fact may carry `held` (`<source id>#<measure id>` or `<source id>`): the
+  measure we hold with the same runs, read by the agent row by row; with `capture` (a captures[].id of this source)
+  the value was found in an older snapshot of the original. validate.py: `held` only on same-runs-as, its source in
+  the findings, its capture one of the source's. The build: `out:copy` / `out:copy-older-snapshot` (data/BUILD.md).
+- **models.schema.json / vocab.json:** name kind `table-id` with `table` (`<publisher>/<file name>`): a publisher's
+  own id valid in that table only. validate.py: a table-id name names its table and only it does, no route, no selects;
+  identity checks per table.
+- **vocab.json:** reason codes `out:copy`, `out:copy-older-snapshot`.
+- **validate.py:** `digits_agree` reads a duration in hours and minutes as its minutes (« 2h42m » = 162).

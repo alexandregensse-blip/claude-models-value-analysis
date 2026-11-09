@@ -797,6 +797,18 @@ def api_matches(ctx, value, ns):
     return out, None, True
 
 
+def table_matches(ctx, S, f):
+    """[(key, name entry)] of the table-id names valid in the fact's table: '<publisher>/<file name>' (the maintainer,
+    9 Nov 2026: a publisher's own ids, Epoch's 'Model version' or LiveBench's model column, are attached for that
+    table only, each proven by the table's row); matched exactly."""
+    fl = f.file or (S.tables.get(f.table) or {}).get("file")
+    if not fl:
+        return []
+    tns = f"{S.publisher}/{os.path.basename(fl)}"
+    return [(k, n) for k, m in ctx.models.items() for n in m.get("names", [])
+            if n["kind"] == "table-id" and n.get("table") == tns and n["name"] == f.value]
+
+
 def display_matches(ctx, value):
     n = V.norm_display(value, ctx.vocab)
     return [(k, nm) for k, m in ctx.models.items() for nm in m.get("names", [])
@@ -824,6 +836,7 @@ def resolve_model(M):
             matches = display_matches(ctx, f.value)
         else:
             continue
+        matches = matches + [x for x in table_matches(ctx, M.S, f) if x not in matches]
         keys = sorted({k for k, _ in matches})
         rule = None
         if len(keys) > 1:                                # an alias: the run must lie in one serves interval
@@ -2923,6 +2936,8 @@ def quality(ctx, measures):
     candidates = [M for M in pending]
     supersede(ctx, candidates, "quality")
     same_runs(ctx, measures, candidates)
+    # 9. republication, stated measure by measure: a copy of runs we hold never counts twice
+    copies(ctx, candidates, "quality")
 
 
 def source_order(M):
@@ -2963,7 +2978,7 @@ def same_runs(ctx, measures, candidates):
     links = []
     for M in measures:
         for f in M.slot("same_runs_as"):
-            if f.level not in ACCEPTED:
+            if f.level not in ACCEPTED or f.held:      # a copy's fact (held): copies(), never a regrade
                 continue
             other = next((S for S in ctx.sources.values() if S.id != M.S.id and
                           (f.value.strip() == S.id or f.value.strip() in S.doc.get("urls", []))), None)
@@ -3018,6 +3033,47 @@ def same_runs(ctx, measures, candidates):
             nc = N.fields.get("cost") or {}
             if nc.get("number") is not None and nc.get("level") in ACCEPTED:
                 M.cost_counted_by = N                    # applied only if N's cost is accepted (cost steps 0–4)
+
+
+def copy_of(M):
+    """(held reference, older-snapshot capture or None) when the measure is a copy of runs we hold: it says it
+    republishes another board (an accepted restated-from fact) and its same-runs-as fact names the held measure (or
+    the held source) carrying the same runs, read by the agent row by row (`held`). With `capture`, the copied value
+    was found in an older capture of the original, and we hold a newer snapshot of it (the maintainer, 9 Nov 2026,
+    points 1 and 5). None when the held source or measure is not in this build: the copy then stands as its own
+    benchmark."""
+    if not any(f.level in ACCEPTED for f in M.slot("restated_from")):
+        return None
+    for f in M.slot("same_runs_as"):
+        if f.level not in ACCEPTED or not f.held:
+            continue
+        sid, _, mid = f.held.partition("#")
+        S = M.ctx.sources.get(sid)
+        if S is None or (mid and (sid, mid) not in M.ctx.mvalid):
+            continue
+        return f.held, f.capture
+    return None
+
+
+def copies(ctx, ms, axis):
+    """§5.2 step 9, stated: a copy of runs we hold (copy_of) is out on its axis — out:copy, or out:copy-older-snapshot
+    when the value is that of an older snapshot of a board we hold newer — whatever lqm's republication rule finds."""
+    for M in ms:
+        c = copy_of(M)
+        if c is None:
+            continue
+        held, cap = c
+        M.rule("copy-same-runs")
+        if f"same-runs-as:{held}" not in M.flags:
+            M.flags.append(f"same-runs-as:{held}")
+        if M.status[axis] is None:
+            if cap:
+                M.status[axis] = "out:copy-older-snapshot"
+                M.detail[axis] = (f"a copy of an older snapshot of the board we hold newer ({held}): the value is in the "
+                                  f"older capture {cap}")
+            else:
+                M.status[axis] = "out:copy"
+                M.detail[axis] = f"a copy of the runs of {held} (restated-from and same-runs-as): counted once, there"
 
 
 def composite_residuals(ctx, measures):
@@ -3149,6 +3205,7 @@ def cost(ctx, measures):
         else:
             pending.append(M)
     supersede(ctx, pending, "cost")
+    copies(ctx, pending, "cost")
     for M in pending:
         N = getattr(M, "cost_counted_by", None)
         if N is not None and M.status["cost"] is None and N in pending and N.status["cost"] is None:

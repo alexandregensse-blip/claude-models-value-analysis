@@ -293,7 +293,12 @@
      },
      "capture": {
       "$ref": "common.schema.json#/$defs/capture_id",
-      "description": "For a platform-price fact (required): the capture (captures[].id) whose page shows the price; its `captured` dates the price (the maintainer, 4 Nov 2026, rule cost-total-tokens-split)."
+      "description": "For a platform-price fact (required): the capture (captures[].id) whose page shows the price; its `captured` dates the price (the maintainer, 4 Nov 2026, rule cost-total-tokens-split). For a same-runs-as fact with `held`: the capture of an older snapshot of the original board that shows the copied value (the maintainer, 9 Nov 2026: a copy of an older snapshot, out:copy-older-snapshot)."
+     },
+     "held": {
+      "type": "string",
+      "pattern": "^src-[^#]+(#M[0-9]+)?$",
+      "description": "For a same-runs-as fact on a measure that also cites a restated-from fact (a copy): the measure we hold with the same runs (<source id>#<measure id>), or the source when the copy is of an older snapshot of a board we hold newer (with `capture`). Read by the agent row by row (same model, effort, metric and value), never matched by a script (the maintainer, 9 Nov 2026). The build sets the copy out:copy (out:copy-older-snapshot with capture) when the held source is in the build."
      },
      "chart": {
       "type": "string",

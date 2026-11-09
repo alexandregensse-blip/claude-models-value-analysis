@@ -1425,3 +1425,37 @@ data/registry point to. A build against data/registry therefore needs data/decis
 it stops: « headline decision … but no decisions file », as before). Two tests followed: `bad_arguments_clean_errors`
 gives the examples' registry an empty decisions file of its own, and `pilot_legacy_build_against_real_registry` builds
 with data/decisions.json (its measure decision D1 names measures absent there: reported stale, not an error).
+
+## Added on 9 Nov 2026 (integration 3 of salvo s5, the maintainer's decisions of 9 Nov)
+
+- **Copies, measure by measure (`copy_of`, `copies`; rule `copy-same-runs`).** A measure that says it republishes
+  another board (an accepted `restated-from` fact) and whose `same-runs-as` fact carries `held` — the measure we hold
+  with the same runs (`<source id>#<measure id>`), read by the agent row by row — is a copy: `out:copy` on both axes,
+  whatever lqm's republication rule finds (its threshold of 3 values no longer matters), flag `same-runs-as:<held>`.
+  With `capture` (a capture of the copying source: an older snapshot of the original that shows the copied value) and
+  `held` naming the source we hold newer, it is `out:copy-older-snapshot`. Step 9 of §5.2, after the campaign step; a
+  status set earlier (model, effort…) stays, the rule is recorded. A `held` naming a measure that is not in the build
+  leaves the copy as its own measure; a held source that is not in the findings is a validation error. Such facts take
+  no part in the document-level `same-runs-as` linking (a regrade, later replaces earlier), which skips them. First
+  use: lmcouncil's cards (54 rows of held runs: Epoch's tables, SimpleBench, METR v1.1, GSO, WeirdML; 5 rows of its
+  Text Arena (Coding) card, Epoch's WebDev copy of 20 Aug 2026, older than our LMArena WebDev of 16 Oct), and
+  benchmarklist's « Benchmark map » (36 of its 51 values; 15 pending). Test `copy_of_held_runs_counted_once` (negative
+  controls: a held measure not in the build, held without restated-from, restated-from alone).
+- **Per-table names (`table_matches`).** models.json names of kind `table-id` carry `table` = `<publisher>/<file
+  name>`: a publisher's own id (Epoch's « Model version », LiveBench's model column) is attached for that table only,
+  matched exactly, for a model fact of a source of that publisher read in a file of that name; each entry's evidence is
+  the table's own row (release date, organisation) or the id's dated maker id. 73 entries: 26 Epoch names over their
+  tables, LiveBench's two `claude-4-1-opus-20250805-*` ids in its two saved tables. validate.py: identity checks compare
+  per table; a table-id name names its table, no route, selects nothing. Test `table_id_name_valid_in_its_table_only`
+  (negative controls: another table of the publisher, the same file name of another publisher).
+- **validate.py `digits_agree`: durations.** A value written as hours and minutes (« 2h42m », « about 2h40m »,
+  « 3h 48m ») is checked as its minutes (162); a duration with hours accepts nothing else; minutes alone (« 75m »,
+  also a million « 1.2m ») keep the digit rule beside it. Check only: the agent writes the minutes. Test
+  `duration_written_in_hours_and_minutes` (negative: 160, 242, 2, 163). First use: METR's GPT-5.1-Codex-Max report,
+  50 % horizon 162 minutes (setup `metr-report-gpt-5-1-codex-max-p50`, suite version not named; no effort written:
+  out, recorded).
+- **SpireClimb.** `epoch-spireclimb` is a linear composite of `epoch-spireclimb-sts1-a20-heart` and
+  `epoch-spireclimb-sts2-a10` (weights 1/1: each spireclimb.csv row's id joins one run of each table, its score their
+  mean, 8 of 8 rows of 4 Nov reproduced); the composite rule applies.
+- **vocab.json:** reason codes `out:copy`, `out:copy-older-snapshot`; name kind `table-id`. **source.schema.json:**
+  fact fields `held` (and `capture` for a same-runs-as fact). **models.schema.json:** name field `table`.

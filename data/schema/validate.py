@@ -394,7 +394,31 @@ def digits_agree(value, written):
         has = lambda vn: any(wn[i:i + len(vn)] == vn for i in range(len(wn) - len(vn) + 1))   # noqa: E731
         d, _, t = str(value).partition("T")
         return has([int(x) for x in re.findall(r"\d+", d)]) and (not t or has([int(x) for x in re.findall(r"\d+", t)]))
+    mins = duration_minutes(written)
+    if mins is not None and re.fullmatch(r"\d+(\.\d+)?", str(value).strip()):
+        # a duration written in hours and minutes ('2h42m', '3h 48m', '5h'), the value its minutes (162): the minutes
+        # must be equal (a check only; the agent writes the minutes; the maintainer, 9 Nov 2026, METR). Minutes alone
+        # ('75m', also a million: '1.2m') keep the digit rule beside it.
+        if abs(float(value) - mins) < 1e-9:
+            return True
+        if re.search(r"\d\s*h", str(written), re.I):
+            return False
     return not v or v in sig(written)
+
+
+DURATION = re.compile(r"(?:(\d+(?:\.\d+)?)\s*h(?:ours?|rs?)?)?\s*(?:(\d+(?:\.\d+)?)\s*m(?:in(?:utes?)?)?)?")
+
+
+def duration_minutes(written):
+    """The minutes of one duration written in hours and/or minutes and nothing else but an 'about' / 'around' /
+    '~' ('2h42m', 'about 2h40m', '3h 48m', '75m', '5h'); None for any other text."""
+    t = re.sub(r"^\s*(?:about|around|approximately|~|≈)\s*", "", str(written).strip(), flags=re.I)
+    if not re.search(r"\d\s*(?:h|m)", t, re.I):
+        return None
+    m = DURATION.fullmatch(t.strip())
+    if not m or not (m.group(1) or m.group(2)):
+        return None
+    return float(m.group(1) or 0) * 60 + float(m.group(2) or 0)
 
 
 def quote_in_file(quote, path):
@@ -630,6 +654,11 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
         for md in m.get("modes", []):
             if md["key"] not in models:
                 rep.err(L, f"mode {md['parameter']} → '{md['key']}' not registered")
+        for nm in m.get("names", []):                    # a per-table name (the maintainer, 9 Nov 2026)
+            if (nm["kind"] == "table-id") != bool(nm.get("table")):
+                rep.err(L, f"name {nm['name']!r}: a table-id name names its table, and only a table-id name does")
+            elif nm.get("table") and (nm.get("route") or nm.get("selects")):
+                rep.err(L, f"name {nm['name']!r}: a table-id name has no route and selects nothing")
     for maker, keys in by_maker.items():
         for i, a in enumerate(keys):
             for b in keys[i + 1:]:
@@ -640,7 +669,7 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
                     for nb in mb.get("names", []):
                         same = norm_display(na["name"], vocab) == norm_display(nb["name"], vocab) if na["kind"] == "display-name" \
                             else same_name(na["name"], nb["name"], na.get("route"), routes)
-                        if same and na["kind"] == nb["kind"] \
+                        if same and na["kind"] == nb["kind"] and na.get("table") == nb.get("table") \
                                 and (na.get("route") or "maker-api") == (nb.get("route") or "maker-api") \
                                 and any(overlap(x, y) for x in na["serves"] for y in nb["serves"]):
                             rep.err(lab["models"], f"identity: {a} and {b} ({maker}) both serve {na['kind']} '{na['name']}' over overlapping intervals")
@@ -985,8 +1014,16 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
                            f"not {f.get('term')!r}")
             elif not PRICE_NUMBER.fullmatch(str(f["value"])):
                 rep.err(F, f"a platform price is a number, not {f['value']!r}")
-        elif f.get("capture"):
-            rep.err(F, "capture is for platform-price facts")
+        elif f.get("capture") and not ("same-runs-as" in sl and f.get("held")):
+            rep.err(F, "capture is for platform-price facts (and same-runs-as facts with held)")
+        if f.get("held"):                             # a copy's same-runs-as fact (the maintainer, 9 Nov 2026)
+            if "same-runs-as" not in sl:
+                rep.err(F, "held is for same-runs-as facts")
+            hsid, _, hmid = f["held"].partition("#")
+            if all_ids is not None and hsid not in all_ids:
+                rep.err(F, f"held names a source that is not in the findings: {hsid}")
+            if f.get("capture") and f["capture"] not in {c["id"] for c in src.get("captures", [])}:
+                rep.err(F, f"capture {f['capture']} is not one of the source's captures")
         if "run-score" in sl and not f.get("run") and not f.get("cell"):   # a cell's run is its row key
             rep.err(F, "a run-score fact names its run (run)")
         if f.get("run") and not set(sl) & {"run-score", "failure", "partial"}:

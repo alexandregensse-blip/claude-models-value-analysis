@@ -2662,6 +2662,8 @@
       "out:superseded",
       "out:composite",
       "out:republished",
+      "out:copy",
+      "out:copy-older-snapshot",
       "out:single-couple",
       "out:cost-not-comparable",
       "out:cost-single-couple",
@@ -2726,6 +2728,12 @@
     },
     "out:republished": {
      "description": "dropped by lqm.load's republication rule"
+    },
+    "out:copy": {
+     "description": "a copy of runs we hold, stated measure by measure (restated-from + a same-runs-as fact naming the held measure): counted once, in the original (the maintainer, 9 Nov 2026)"
+    },
+    "out:copy-older-snapshot": {
+     "description": "a copy of an older snapshot of a board we hold newer: same board, category and metric, its value found in an older capture of the original (same-runs-as with held and capture; the maintainer, 9 Nov 2026)"
     },
     "out:single-couple": {
      "description": "group with fewer than 2 accepted couples of fit models"
@@ -3275,11 +3283,15 @@
    "description": "Kinds of models.json names.",
    "enum": [
     "api-id",
-    "display-name"
+    "display-name",
+    "table-id"
    ],
    "x-terms": {
     "api-id": {},
-    "display-name": {}
+    "display-name": {},
+    "table-id": {
+     "description": "A publisher's own model id in one of its tables (Epoch's 'Model version', LiveBench's model column), valid for that table only (`table`): matched exactly, for a model fact whose source has that publisher and whose file has that name (the maintainer, 9 Nov 2026). Each entry is proven by the table's own row (or page) fixing the version."
+    }
    }
   },
   "interval_from_basis": {
