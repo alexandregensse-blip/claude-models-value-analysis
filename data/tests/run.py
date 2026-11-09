@@ -665,15 +665,16 @@ def router_listed_thinking():
 def registry_openrouter_listing_copied():
     # the maintainer, 3 Nov 2026 (decision 2): supported_efforts copied from every saved /api/v1/models capture,
     # first to last capture of each run of identical lists (none → nothink)
+    # last capture: 9 Nov 2026 since integration 5 (the maintainer, 9 Nov 2026: the catalogue captured again)
     om = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["openrouter"]["models"]
     lst = lambda k, c: sorted((a["from"], a["to"]) for a in om[k].get("accepts", []) if a["configuration"] == c and   # noqa: E731
                               any("supported_efforts" in (x.get("quote") or "") for x in a["evidence"]))
-    eq(lst("deepseek-v4-flash-vision-exp", "low"), [("2026-08-21", "2026-10-14"), ("2026-10-15", "2026-10-29")],
+    eq(lst("deepseek-v4-flash-vision-exp", "low"), [("2026-08-21", "2026-10-14"), ("2026-10-15", "2026-11-09")],
        "a level every capture lists (low), copied to the last capture, cut where the list changes")
-    eq(lst("kimi-k3", "max"), [("2026-07-17", "2026-07-18"), ("2026-07-20", "2026-10-14"), ("2026-10-15", "2026-10-29")],
+    eq(lst("kimi-k3", "max"), [("2026-07-17", "2026-07-18"), ("2026-07-20", "2026-10-14"), ("2026-10-15", "2026-11-09")],
        "kimi-k3 max: one record per run of identical lists")
-    eq(lst("glm-5.2", "nothink"), [("2026-10-15", "2026-10-29")], "negative: glm-5.2 lists « none » only from 15 Oct")
-    eq(lst("gpt-5.5", "nothink"), [("2026-06-27", "2026-10-29")], "gpt-5.5 lists « none » from the first listing")
+    eq(lst("glm-5.2", "nothink"), [("2026-10-15", "2026-11-09")], "negative: glm-5.2 lists « none » only from 15 Oct")
+    eq(lst("gpt-5.5", "nothink"), [("2026-06-27", "2026-11-09")], "gpt-5.5 lists « none » from the first listing")
     eq(lst("gpt-5.1-codex", "high"), [("2026-06-27", "2026-07-22")],
        "negative: listed to 29 Oct, cut at the model's shutdown (its configurations end 22 Jul)")
     for k, e in om.items():

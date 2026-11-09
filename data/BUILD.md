@@ -1474,3 +1474,37 @@ No rule of the build changed.
   no-think cells (Table 1's all-images and Table 12's k=5 runs, value for value): 13 cells, each run counted once.
 - The relecture of the four sources (ARC Prize 4 Nov, dubesor, arXiv 2609.29933, Epoch 4 Nov) corrected findings only;
   its log is the session's S/s5/integ4/RELECTURE.md.
+
+## Added on 9 Nov 2026 (integration 5, the maintainer's decisions of 9 Nov on integration 4's questions)
+
+No rule of the build changed.
+- **Route records prolonged to 9 Nov (decision 1).** As on 29 Oct (4f5220d): the routes.json records ending at the
+  29 Oct capture (`last-capture`) whose 29 Oct quotes are found again in today's copy of the same page (OpenRouter
+  /api/v1/models: in the entry of the same id) are extended to 2026-11-09, one evidence per quote (saved copies:
+  /work/.salvo14/mig/s6/ev/integ5/, SHA256SUMS). Extended 1,170 of 1,253: OpenRouter 946 (/models 906, its docs and
+  route-wide records: `accepts_maker`, `level_mapping`), Claude Code 45, Codex CLI 57, Fireworks 30, Together 5, Groq
+  4, mini-SWE-agent 44, Terminus-2 39. Google's thinking page now redirects to aistudio.google.com (a script shell):
+  its Markdown copy (…/thinking.md.txt → aistudio.google.com/docs/thinking.md) carries the same table rows, quoted as
+  Markdown rows; OpenAI's model pages are read in their Markdown copies (`.md`), whose backticks the 29 Oct quotes keep.
+  Left at 29 Oct (not found again, or changed): 35 OpenRouter records of models gone from the catalogue (hermes-3,
+  laguna, mercury-2, minimax-01 / m2 / m2.1, solar-pro-3 …), llama-3.1-70b-instruct's supported_parameters (changed),
+  24 OpenRouter budget mappings of the Claude models that take only a budget (the sentence now reads « based on the
+  request’s max_output_tokens value ( max_tokens on Chat Completions) »), 21 Claude Code records (the effort table and
+  the default-effort sentence were rewritten for Fable 5.2, released 9 Nov), Terminus-2's gemini-3.1-flash-lite
+  default (the Gemini 3 guide now redirects to another page), and OpenRouter's glm-5.2 xhigh (found again, but clipped
+  to the model's own xhigh configuration, which models.json ends on 29 Oct). OpenRouter's `accepts_maker` record now
+  runs to 9 Nov. models.json and prices.json were not prolonged (not in the decision).
+- **arXiv 2609.29933, Table 1's « Sonnet » (decision 2):** the paper's reader, Claude Sonnet 4.5 (« Our readers are
+  Claude Sonnet 4.5 », fact F5): the table cell, which no name resolves, is taken out of the model slot of the 24 Table 1
+  measures (kept as a fact, with a note); the model is F5 → sonnet-4.5. Table 12's « Sonnet » cells are not touched.
+- **Decision D35 (decision 3):** Epoch's chess_puzzles rows « gemini-3.5-flash_<level> » (15 Oct and 4 Nov snapshots,
+  run 13 Oct): the alias rule gives gemini-3.6-flash, the row gives Gemini 3.5 Flash's release and Epoch's metadata its
+  name, the route is not written and the logs are refused: not settled, out on both axes (6 measures). The other
+  Epoch rows of the alias are either before 8 Oct (gemini-3.5-flash, archive of 1 Oct) or already unresolved (their
+  run interval spans 8 Oct).
+- **WinoGrande, one setup per number of shots (decision 4):** setups epoch-ext-wino-grande-0shot, -1shot, -5shot,
+  -8shot, -16shot (family epoch-ext-wino-grande), each measure's Shots cell cited by a note fact (4 Nov: 103 rows;
+  18 Oct: 3 rows, read in the Wayback copy of 19 Oct). Decision D36: the 42 rows of 4 Nov whose Shots is empty (37) or
+  « few » (5) name no number: out on both axes.
+- The relecture of Epoch 18 Oct (decision 5) corrected findings only (gso Evaluation date, surface-evolver cost and
+  tokens, budgets the Notes state exactly); its log is the session's S/s6/integ5/RELECTURE.md.
