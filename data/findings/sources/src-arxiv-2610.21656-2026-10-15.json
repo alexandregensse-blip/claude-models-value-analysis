@@ -12,12 +12,13 @@
    "url": "https://arxiv.org/abs/2610.21656",
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21656.html",
-   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file"
+   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file | also read by lot k-alibaba in /work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html"
   }
  ],
  "commit": null,
  "sha256": {
-  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21656.html": "e11ae285a7162c270907d432baa37dfb7dd1c9542bbaa21dab23c07e3808a2e2"
+  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21656.html": "e11ae285a7162c270907d432baa37dfb7dd1c9542bbaa21dab23c07e3808a2e2",
+  "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html": "e11ae285a7162c270907d432baa37dfb7dd1c9542bbaa21dab23c07e3808a2e2"
  },
  "harvested_at": "2026-11-09T12:00:00Z",
  "published": {
@@ -27,7 +28,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21656.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-1",
- "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-alibaba: convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -538,6 +539,235 @@
    "written": "81.6%",
    "term": "score%",
    "scale": "percent"
+  },
+  {
+   "id": "F41",
+   "says": "judge",
+   "about": null,
+   "value": "Gemini-3.8-Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "4.1 Experimental Setup",
+   "quote": "The ten models in Table 1 use the same mini-swe-agent harness ( SWE-bench Team, 2025 ) and the rubrics defined above, with a single judging pass over archived reports using Gemini-3.8-Flash as the rubric judge for both Tables 1 and 3 .",
+   "note": "the rubric judge is Gemini-3.8-Flash, a model of another maker (no self-judging for the Qwen rows)"
+  },
+  {
+   "id": "F42",
+   "says": "harness",
+   "about": null,
+   "value": "mini-swe-agent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "4.1 Experimental Setup",
+   "quote": "The ten models in Table 1 use the same mini-swe-agent harness"
+  },
+  {
+   "id": "F43",
+   "says": "model-name",
+   "about": "Qwen-3.8-Max-0902",
+   "value": "Qwen-3.8-Max-0902",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1 (DataWorld-Bench, 100 tasks), row Qwen-3.8-Max-0902",
+   "quote": "Qwen-3.8-Max-0902 82.36 82.36 (17.79) 67.95 \\mathbf{67.95} (22.92) 73.43 ̄ \\underline{73.43} (16.81) 82.7 82.7 (23.5) 289.7 289.7 k (81.9) 125.8 125.8 k (33.0)"
+  },
+  {
+   "id": "F44",
+   "says": "requests",
+   "about": "Qwen-3.8-Max-0902",
+   "value": "82.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Rounds",
+   "quote": "Qwen-3.8-Max-0902 82.36 82.36 (17.79) 67.95 \\mathbf{67.95} (22.92) 73.43 ̄ \\underline{73.43} (16.81) 82.7 82.7 (23.5) 289.7 289.7 k (81.9) 125.8 125.8 k (33.0)",
+   "note": "mean model calls per task; Rounds count model calls; tokens are prompt plus output of the final call (total) or outputs over the run (response)."
+  },
+  {
+   "id": "F45",
+   "says": "tokens-total",
+   "about": "Qwen-3.8-Max-0902",
+   "value": "289700",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Total tokens (k)",
+   "quote": "Qwen-3.8-Max-0902 82.36 82.36 (17.79) 67.95 \\mathbf{67.95} (22.92) 73.43 ̄ \\underline{73.43} (16.81) 82.7 82.7 (23.5) 289.7 289.7 k (81.9) 125.8 125.8 k (33.0)",
+   "note": "thousands of tokens, prompt plus output of the final call (total); Rounds count model calls; tokens are prompt plus output of the final call (total) or outputs over the run (response).",
+   "written": "289.7 289.7 k"
+  },
+  {
+   "id": "F46",
+   "says": "tokens-out",
+   "about": "Qwen-3.8-Max-0902",
+   "value": "125800",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Resp. tokens (k)",
+   "quote": "Qwen-3.8-Max-0902 82.36 82.36 (17.79) 67.95 \\mathbf{67.95} (22.92) 73.43 ̄ \\underline{73.43} (16.81) 82.7 82.7 (23.5) 289.7 289.7 k (81.9) 125.8 125.8 k (33.0)",
+   "note": "thousands of tokens, outputs over the run (response)",
+   "written": "125.8 125.8 k"
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "Qwen-3.8-Max-0902",
+   "value": "82.36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Data computation",
+   "quote": "Qwen-3.8-Max-0902 82.36 82.36 (17.79) 67.95 \\mathbf{67.95} (22.92) 73.43 ̄ \\underline{73.43} (16.81) 82.7 82.7 (23.5) 289.7 289.7 k (81.9) 125.8 125.8 k (33.0)",
+   "term": "rubric-score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "SD (17.79); Table 1: DataWorld-Bench results (normalized rubric scores × 100 \\times 100 , with SD in parentheses)."
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "Qwen-3.8-Max-0902",
+   "value": "67.95",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Insight discovery",
+   "quote": "Qwen-3.8-Max-0902 82.36 82.36 (17.79) 67.95 \\mathbf{67.95} (22.92) 73.43 ̄ \\underline{73.43} (16.81) 82.7 82.7 (23.5) 289.7 289.7 k (81.9) 125.8 125.8 k (33.0)",
+   "term": "rubric-score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "SD (22.92); Table 1: DataWorld-Bench results (normalized rubric scores × 100 \\times 100 , with SD in parentheses)."
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "Qwen-3.8-Max-0902",
+   "value": "73.43",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Avg",
+   "quote": "Qwen-3.8-Max-0902 82.36 82.36 (17.79) 67.95 \\mathbf{67.95} (22.92) 73.43 ̄ \\underline{73.43} (16.81) 82.7 82.7 (23.5) 289.7 289.7 k (81.9) 125.8 125.8 k (33.0)",
+   "term": "rubric-score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "SD (16.81); Table 1: DataWorld-Bench results (normalized rubric scores × 100 \\times 100 , with SD in parentheses)."
+  },
+  {
+   "id": "F50",
+   "says": "model-name",
+   "about": "Qwen-3.8-27B",
+   "value": "Qwen-3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1 (DataWorld-Bench, 100 tasks), row Qwen-3.8-27B",
+   "quote": "Qwen-3.8-27B 66.93 66.93 (25.33) 54.93 54.93 (22.46) 59.64 59.64 (20.16) 55.1 55.1 (18.5) 170.4 170.4 k (39.7) 82.1 82.1 k (20.7)"
+  },
+  {
+   "id": "F51",
+   "says": "requests",
+   "about": "Qwen-3.8-27B",
+   "value": "55.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Rounds",
+   "quote": "Qwen-3.8-27B 66.93 66.93 (25.33) 54.93 54.93 (22.46) 59.64 59.64 (20.16) 55.1 55.1 (18.5) 170.4 170.4 k (39.7) 82.1 82.1 k (20.7)",
+   "note": "mean model calls per task; Rounds count model calls; tokens are prompt plus output of the final call (total) or outputs over the run (response)."
+  },
+  {
+   "id": "F52",
+   "says": "tokens-total",
+   "about": "Qwen-3.8-27B",
+   "value": "170400",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Total tokens (k)",
+   "quote": "Qwen-3.8-27B 66.93 66.93 (25.33) 54.93 54.93 (22.46) 59.64 59.64 (20.16) 55.1 55.1 (18.5) 170.4 170.4 k (39.7) 82.1 82.1 k (20.7)",
+   "note": "thousands of tokens, prompt plus output of the final call (total); Rounds count model calls; tokens are prompt plus output of the final call (total) or outputs over the run (response).",
+   "written": "170.4 170.4 k"
+  },
+  {
+   "id": "F53",
+   "says": "tokens-out",
+   "about": "Qwen-3.8-27B",
+   "value": "82100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Resp. tokens (k)",
+   "quote": "Qwen-3.8-27B 66.93 66.93 (25.33) 54.93 54.93 (22.46) 59.64 59.64 (20.16) 55.1 55.1 (18.5) 170.4 170.4 k (39.7) 82.1 82.1 k (20.7)",
+   "note": "thousands of tokens, outputs over the run (response)",
+   "written": "82.1 82.1 k"
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "Qwen-3.8-27B",
+   "value": "66.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Data computation",
+   "quote": "Qwen-3.8-27B 66.93 66.93 (25.33) 54.93 54.93 (22.46) 59.64 59.64 (20.16) 55.1 55.1 (18.5) 170.4 170.4 k (39.7) 82.1 82.1 k (20.7)",
+   "term": "rubric-score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "SD (25.33); Table 1: DataWorld-Bench results (normalized rubric scores × 100 \\times 100 , with SD in parentheses)."
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "Qwen-3.8-27B",
+   "value": "54.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Insight discovery",
+   "quote": "Qwen-3.8-27B 66.93 66.93 (25.33) 54.93 54.93 (22.46) 59.64 59.64 (20.16) 55.1 55.1 (18.5) 170.4 170.4 k (39.7) 82.1 82.1 k (20.7)",
+   "term": "rubric-score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "SD (22.46); Table 1: DataWorld-Bench results (normalized rubric scores × 100 \\times 100 , with SD in parentheses)."
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "Qwen-3.8-27B",
+   "value": "59.64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.21656.html",
+   "where": "Table 1, column Avg",
+   "quote": "Qwen-3.8-27B 66.93 66.93 (25.33) 54.93 54.93 (22.46) 59.64 59.64 (20.16) 55.1 55.1 (18.5) 170.4 170.4 k (39.7) 82.1 82.1 k (20.7)",
+   "term": "rubric-score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "SD (20.16); Table 1: DataWorld-Bench results (normalized rubric scores × 100 \\times 100 , with SD in parentheses)."
   }
  ]
 }

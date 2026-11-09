@@ -1,0 +1,274 @@
+{
+ "id": "src-arxiv-2610.39227-2026-10-29",
+ "publisher": "arxiv-2610.39227",
+ "urls": [
+  "https://arxiv.org/abs/2610.39227"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html": "929a0df17a846e6ba4a67ad992a36ed25d964ed0474c213b16a3503da95a62cf"
+ },
+ "harvested_at": "2026-11-09T15:18:36Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.39227",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html"
+  }
+ ],
+ "published": {
+  "value": "2026-10-29",
+  "where": "arXiv stamp on the saved copy",
+  "quote": "arXiv:2610.39227v1 [cs.CL] 29 Oct 2026",
+  "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-alibaba. XLaw-JP (arXiv 2610.39227v1), Table 5 (Japanese bar exam multiple-choice section, points out of 175): the base Qwen3.8-27B, FP8 on vLLM, thinking off. Research file: the two \"greedy, closed-book\" cells (2024, 2026). Added from the copy: the \"+ recommended sampling, 8k budget\" row (still the base model alone) and the retrieval / voting rows (rag4, rag5, vote@4), which are SYSTEMS (the base model with the authors' retrieval and majority vote), flagged. The self-distilled rows (E8) and \"ours\" are the authors' fine-tuned model: not converted. The 2025 column is \"–\" (not run) for these rows.",
+ "agent": "convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "3 Setup, Base model",
+   "quote": "Base model. Qwen3.8-27B ( Qwen Team, 2026 ) (Apache 2.0), run in FP8 with vLLM ( Kwon et al., 2023 ) on one 48 GB NVIDIA L40S."
+  },
+  {
+   "id": "F2",
+   "says": "quantized-build",
+   "about": "Qwen3.8-27B",
+   "value": "FP8",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "3 Setup, Base model",
+   "quote": "Base model. Qwen3.8-27B ( Qwen Team, 2026 ) (Apache 2.0), run in FP8 with vLLM ( Kwon et al., 2023 ) on one 48 GB NVIDIA L40S.",
+   "note": "FP8 weights served with vLLM on one 48 GB NVIDIA L40S: a quantized build, not the maker's bf16 weights"
+  },
+  {
+   "id": "F3",
+   "says": "thinking-off",
+   "about": "Qwen3.8-27B",
+   "value": "Thinking mode is off",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "3 Setup",
+   "quote": "Thinking mode is off and we use the model card’s non-thinking sampling (temperature 0.7, top-p 0.8, top-k 20, presence penalty 1.5)",
+   "note": "non-thinking sampling of the model card; the greedy first row of Table 5 is the initial decoding the paper replaced (\"greedy decoding fell into repetition loops on a third of truncated answers\")"
+  },
+  {
+   "id": "F4",
+   "says": "route",
+   "about": "Qwen3.8-27B",
+   "value": "vLLM",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "3 Setup, Base model",
+   "quote": "Base model. Qwen3.8-27B ( Qwen Team, 2026 ) (Apache 2.0), run in FP8 with vLLM ( Kwon et al., 2023 ) on one 48 GB NVIDIA L40S.",
+   "term": "vllm"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "vLLM 0.30, FP8 weights, thinking off; temperature 0.7, top-p 0.8, top-k 20, min-p 0, presence penalty 1.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Appendix (Decoding)",
+   "quote": "Decoding. vLLM 0.30, FP8 weights, thinking off; temperature 0.7, top-p 0.8, top-k 20, min-p 0, presence penalty 1.5; seeds 0–3; 8,192 new tokens for exams, 4,096 for contract review, 8,192 for drafting, 1,024 otherwise.",
+   "note": "decoding of the sampled runs; seeds 0-3; 8,192 new tokens for exams"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "Bar exam multiple-choice section, points out of 175, official scoring.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5 caption",
+   "quote": "Table 5: Bar exam multiple-choice section, points out of 175, official scoring. All Qwen rows share the base model.",
+   "note": "points out of 175; pass marks 93 (2024), 81 (2025), 99 (2026); 2025 was added for the final system and the baselines only (–: not run)."
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row greedy (closed-book, greedy decoding), column 2024",
+   "quote": "Qwen3.8-27B greedy, closed-book 60 – 65",
+   "term": "Japanese bar exam MC 2024, points /175, closed-book, greedy decoding",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "65",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row greedy (closed-book, greedy decoding), column 2026",
+   "quote": "Qwen3.8-27B greedy, closed-book 60 – 65",
+   "term": "Japanese bar exam MC 2026, points /175, closed-book, greedy decoding",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row sampled (closed-book, recommended sampling, 8k budget), column 2024",
+   "quote": "+ recommended sampling, 8k budget 79 – 88",
+   "term": "Japanese bar exam MC 2024, points /175, closed-book, recommended sampling, 8k budget",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row sampled (closed-book, recommended sampling, 8k budget), column 2026",
+   "quote": "+ recommended sampling, 8k budget 79 – 88",
+   "term": "Japanese bar exam MC 2026, points /175, closed-book, recommended sampling, 8k budget",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "104",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row rag4 (with rag4 retrieval), column 2024",
+   "quote": "+ rag4 retrieval 104 – 105",
+   "term": "Japanese bar exam MC 2024, points /175, with rag4 retrieval",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "105",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row rag4 (with rag4 retrieval), column 2026",
+   "quote": "+ rag4 retrieval 104 – 105",
+   "term": "Japanese bar exam MC 2026, points /175, with rag4 retrieval",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "111.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row rag5 (with rag5 retrieval, mean of 4 seeds), column 2024",
+   "quote": "+ rag5 retrieval (mean of 4 seeds) 111.8 – 108.3",
+   "term": "Japanese bar exam MC 2024, points /175, with rag5 retrieval, mean of 4 seeds",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "108.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row rag5 (with rag5 retrieval, mean of 4 seeds), column 2026",
+   "quote": "+ rag5 retrieval (mean of 4 seeds) 111.8 – 108.3",
+   "term": "Japanese bar exam MC 2026, points /175, with rag5 retrieval, mean of 4 seeds",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "123",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row vote4 (with rag5 retrieval and vote@4), column 2024",
+   "quote": "vote@4 123 – 118",
+   "term": "Japanese bar exam MC 2024, points /175, with rag5 retrieval and vote@4",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "118",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.39227.html",
+   "where": "Table 5, row vote4 (with rag5 retrieval and vote@4), column 2026",
+   "quote": "vote@4 123 – 118",
+   "term": "Japanese bar exam MC 2026, points /175, with rag5 retrieval and vote@4",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  }
+ ]
+}

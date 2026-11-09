@@ -1,0 +1,219 @@
+{
+ "id": "src-arxiv-2610.28435-2026-10-20",
+ "publisher": "arxiv-2610.28435",
+ "urls": [
+  "https://arxiv.org/abs/2610.28435"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html": "ca12b3de76519c8738a15ffa3f0d8663292a36050588c23516b8aa33376de41a"
+ },
+ "harvested_at": "2026-11-09T15:18:36Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.28435",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html"
+  }
+ ],
+ "published": {
+  "value": "2026-10-20",
+  "where": "arXiv stamp on the saved copy",
+  "quote": "arXiv:2610.28435v1 [cs.IR] 20 Oct 2026",
+  "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-alibaba. Multimodal Reranking Is a System One Decision (arXiv 2610.28435v1): Qwen3.8-27B \"as released, with thinking disabled\" used as a zero-shot reranker by reading the label logits of ONE forward pass (choice readout) or one yes/no question per candidate: a reranking measure through logits, not free generation. Research file: Table 2 choice hit@1. Added from the copy: the yes/no readout (Table 2), the two other columns of Table 3 and the latency of Table 4. JEV-27B-VL (LoRA adapter + decision head trained by others) is not converted; per-task Tables 7-12 not converted.",
+ "agent": "convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 3, row Qwen3.8-27B, choice (no decision tuning)",
+   "quote": "Qwen3.8-27B, choice (no decision tuning) 76.76 84.79 60.94"
+  },
+  {
+   "id": "F2",
+   "says": "thinking-off",
+   "about": "Qwen3.8-27B",
+   "value": "thinking disabled",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "3.4 (the two ways to obtain the probabilities)",
+   "quote": "Label logits of an untuned VLM Qwen3.8-27B as released, with thinking disabled, read as in Sections 3.2 and 3.3 ; no weight is trained.",
+   "note": "Qwen3.8-27B as released, thinking disabled, no weight trained (\"no decision tuning\")"
+  },
+  {
+   "id": "F3",
+   "says": "route",
+   "about": "Qwen3.8-27B",
+   "value": "vLLM",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Appendix B (Serving)",
+   "quote": "Both 27B models are served by the server in the JEV-27B-VL repository (model revision fee8c1d) on vLLM 0.30.0",
+   "term": "vllm"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "use the unmodified Qwen3.8-27B weights",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Appendix B (Serving)",
+   "quote": "Chat requests for the served name “autotrust/JEV-27B-VL” use the unmodified Qwen3.8-27B weights;",
+   "note": "the 27B baseline is served with the unmodified Qwen3.8-27B weights, through the JEV-27B-VL repository's server (vLLM 0.30.0, one NVIDIA H200 per run); temperature 1, top_p 1, top_k 0 in the requests; max_tokens 1; labels read from the log-probabilities"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "One NVIDIA H200 per run.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Appendix B (Hardware and software)",
+   "quote": "One NVIDIA H200 per run.",
+   "note": "one NVIDIA H200 per run; the 27B models run on vLLM 0.30.0"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "The choice readout asks one question over the 16 candidates, the yes/no readout one question per candidate.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 2 caption",
+   "quote": "The choice readout asks one question over the 16 candidates, the yes/no readout one question per candidate.",
+   "note": "RERANKING by logit readout: the model reorders the top 16 candidates of Qwen3-VL-Embedding-2B; the metric measures the ranking, not free generation"
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "76.76",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 2, row Qwen3.8-27B (no decision tuning), column choice (1 pass)",
+   "quote": "Qwen3.8-27B (no decision tuning) 76.76 69.50 +7.26",
+   "term": "MMEB-V2 image retrieval hit@1, choice readout (1 pass)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "69.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 2, row Qwen3.8-27B (no decision tuning), column yes/no (16 passes)",
+   "quote": "Qwen3.8-27B (no decision tuning) 76.76 69.50 +7.26",
+   "term": "MMEB-V2 image retrieval hit@1, yes/no readout (16 passes)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "84.79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 3, row Qwen3.8-27B choice, column MMEB visdoc nDCG@5",
+   "quote": "Qwen3.8-27B, choice (no decision tuning) 76.76 84.79 60.94",
+   "term": "MMEB-V2 visdoc nDCG@5, choice readout",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "60.94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 3, row Qwen3.8-27B choice, column ViDoRe V3 nDCG@10",
+   "quote": "Qwen3.8-27B, choice (no decision tuning) 76.76 84.79 60.94",
+   "term": "ViDoRe V3 nDCG@10, choice readout",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 4, row Qwen3.8-27B, choice (no decision tuning)",
+   "quote": "Qwen3.8-27B, choice (no decision tuning) 1 28.8k 3.97"
+  },
+  {
+   "id": "F12",
+   "says": "requests",
+   "about": "Qwen3.8-27B",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 4, column model calls",
+   "quote": "Qwen3.8-27B, choice (no decision tuning) 1 28.8k 3.97",
+   "note": "model calls per query (one choice pass)"
+  },
+  {
+   "id": "F13",
+   "says": "tokens-in",
+   "about": "Qwen3.8-27B",
+   "value": "28800",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 4, column input tokens / query",
+   "quote": "Qwen3.8-27B, choice (no decision tuning) 1 28.8k 3.97",
+   "note": "mean input tokens per query over its model calls together",
+   "written": "28.8k"
+  },
+  {
+   "id": "F14",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "3.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.28435.html",
+   "where": "Table 4, row Qwen3.8-27B choice, column seconds / query",
+   "quote": "Qwen3.8-27B, choice (no decision tuning) 1 28.8k 3.97"
+  }
+ ]
+}

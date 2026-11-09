@@ -12,7 +12,7 @@
    "url": "https://arxiv.org/abs/2610.30116",
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.30116.html",
-   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file | also read by lot k-xai in /work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html"
+   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file | also read by lot k-xai in /work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html | also read by lot k-alibaba in /work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html"
   }
  ],
  "commit": null,
@@ -28,7 +28,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.30116.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-1",
- "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-xai: convertisseur k-xai (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-xai: convertisseur k-xai (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-alibaba: convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -196,6 +196,401 @@
    "quote": "Grok-4.6 82.4 12.2 8.6",
    "term": "Hint lift",
    "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "3.2 Evaluation, ranking table, row Qwen3.8-27B",
+   "quote": "Qwen3.8-27B 83.1 25.4 21.2"
+  },
+  {
+   "id": "F15",
+   "says": "effort-label",
+   "about": "Qwen3.8-27B",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Appendix B, Table 4 (evaluated models), columns Designer effort / Solver effort",
+   "quote": "Qwen3.8-27B Qwen Code 0.23.4 xhigh xhigh",
+   "note": "Designer effort xhigh and Solver effort xhigh; \"every model\" is set to its maximum available reasoning effort"
+  },
+  {
+   "id": "F16",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "we configure every model to use its maximum available reasoning effort.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Appendix B",
+   "quote": "we configure every model to use its maximum available reasoning effort.",
+   "note": "all models at their maximum available reasoning effort"
+  },
+  {
+   "id": "F17",
+   "says": "harness",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen Code 0.23.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Appendix B, Table 4, column Agent harness",
+   "quote": "Qwen3.8-27B Qwen Code 0.23.4 xhigh xhigh"
+  },
+  {
+   "id": "F18",
+   "says": "route",
+   "about": "Qwen3.8-27B",
+   "value": "OpenRouter",
+   "level": "not-established:assumed",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Appendix B",
+   "quote": "Claude-Opus-5 and GPT-5.6-Sol are served by their providers; the other seven models are served through OpenRouter, and Gemini CLI reaches it through a LiteLLM 1.101.0 protocol bridge.",
+   "term": "openrouter",
+   "note": "DEDUCED, not written for the model by name: the sentence says Claude-Opus-5 and GPT-5.6-Sol are served by their providers and \"the other seven models\" through OpenRouter; Qwen3.8-27B is one of the nine models of Table 4 and not one of the two named, hence one of the seven"
+  },
+  {
+   "id": "F19",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "Solver Author Solve Difficulty Lift",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "3.2 (Finding 1 table)",
+   "quote": "Solver Author Solve Difficulty Lift",
+   "note": "columns: Solve = solving rate of the model as solver on the others' environments; Difficulty and Lift = how hard the model's authored environments are and how much its hints help (authoring axes); every model is scored on every cell including its own environments"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "83.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "3.2 Finding 1 table, row Qwen3.8-27B, column Solve",
+   "quote": "Qwen3.8-27B 83.1 25.4 21.2",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "25.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "3.2 Finding 1 table, row Qwen3.8-27B, column Difficulty",
+   "quote": "Qwen3.8-27B 83.1 25.4 21.2",
+   "term": "author-difficulty%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "21.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "3.2 Finding 1 table, row Qwen3.8-27B, column Lift",
+   "quote": "Qwen3.8-27B 83.1 25.4 21.2",
+   "term": "author-hint-lift-pts",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7 caption (base Qwen3.8-27B)",
+   "quote": "Table 7: Full downstream results for the base Qwen3.8-27B and for each copy trained on one author’s environments."
+  },
+  {
+   "id": "F24",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "Full downstream results for the base Qwen3.8-27B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7 caption",
+   "quote": "Table 7: Full downstream results for the base Qwen3.8-27B and for each copy trained on one author’s environments.",
+   "note": "row \"Base model\" = the base Qwen3.8-27B before any RL on environments; the other rows are copies RL-trained on one author's environments (LoRA GRPO), the authors' modified models, not converted; reasoning effort of this downstream evaluation not written"
+  },
+  {
+   "id": "F25",
+   "says": "note",
+   "about": "Qwen3.8-27B",
+   "value": "Evaluation metric avg@8 (AIME), pass@1 (EvalPlus), accuracy (others)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 6",
+   "quote": "Evaluation metric avg@8 (AIME), pass@1 (EvalPlus), accuracy (others)",
+   "note": "metrics: avg@8 for AIME, pass@1 for EvalPlus, accuracy for the others"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "70.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column AIME 2025 avg@8 (%)",
+   "quote": "Base model 70.4 75.8 89.4 38.8 93.3 79.4 83.6",
+   "term": "AIME 2025 avg@8 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "75.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column AIME 2026 avg@8 (%)",
+   "quote": "Base model 70.4 75.8 89.4 38.8 93.3 79.4 83.6",
+   "term": "AIME 2026 avg@8 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "89.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column ACEBench-Agent multi-step accuracy (%)",
+   "quote": "Base model 70.4 75.8 89.4 38.8 93.3 79.4 83.6",
+   "term": "ACEBench-Agent multi-step accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "38.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column ACEBench-Agent multi-turn accuracy (%)",
+   "quote": "Base model 70.4 75.8 89.4 38.8 93.3 79.4 83.6",
+   "term": "ACEBench-Agent multi-turn accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "93.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column EvalPlus HumanEval+ pass@1 (%)",
+   "quote": "Base model 70.4 75.8 89.4 38.8 93.3 79.4 83.6",
+   "term": "EvalPlus HumanEval+ pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "79.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column EvalPlus MBPP+ pass@1 (%)",
+   "quote": "Base model 70.4 75.8 89.4 38.8 93.3 79.4 83.6",
+   "term": "EvalPlus MBPP+ pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "83.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column EvalPlus overall pass@1 (%)",
+   "quote": "Base model 70.4 75.8 89.4 38.8 93.3 79.4 83.6",
+   "term": "EvalPlus overall pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "63.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column LiveBench Coding (%)",
+   "quote": "Base model 63.3 57.8 76.6 47.9 56.4 76.7 63.1",
+   "term": "LiveBench Coding (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "57.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column LiveBench Data (%)",
+   "quote": "Base model 63.3 57.8 76.6 47.9 56.4 76.7 63.1",
+   "term": "LiveBench Data (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "76.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column LiveBench Instr. (%)",
+   "quote": "Base model 63.3 57.8 76.6 47.9 56.4 76.7 63.1",
+   "term": "LiveBench Instr. (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "47.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column LiveBench Language (%)",
+   "quote": "Base model 63.3 57.8 76.6 47.9 56.4 76.7 63.1",
+   "term": "LiveBench Language (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "56.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column LiveBench Math (%)",
+   "quote": "Base model 63.3 57.8 76.6 47.9 56.4 76.7 63.1",
+   "term": "LiveBench Math (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "76.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column LiveBench Reasoning (%)",
+   "quote": "Base model 63.3 57.8 76.6 47.9 56.4 76.7 63.1",
+   "term": "LiveBench Reasoning (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "63.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.30116.html",
+   "where": "Table 7, row Base model, column LiveBench Overall (%)",
+   "quote": "Base model 63.3 57.8 76.6 47.9 56.4 76.7 63.1",
+   "term": "LiveBench Overall (%)",
+   "scale": "percent",
    "precision": {
     "model": "printed",
     "step": 0.1

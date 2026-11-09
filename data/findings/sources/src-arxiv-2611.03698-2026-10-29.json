@@ -7,7 +7,8 @@
  "wayback": [],
  "commit": null,
  "sha256": {
-  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html": "053d4b8806ceeb97d6c39a6dbd3085bc2534d5dee3102f6b0d8b4468f330fcd9"
+  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html": "053d4b8806ceeb97d6c39a6dbd3085bc2534d5dee3102f6b0d8b4468f330fcd9",
+  "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html": "053d4b8806ceeb97d6c39a6dbd3085bc2534d5dee3102f6b0d8b4468f330fcd9"
  },
  "harvested_at": "2026-11-09T14:50:27Z",
  "published": {
@@ -17,7 +18,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). RSI-Dojo (training agents for post-training research) on PostTrainBench and PostTrainBench-Lite. OpenAI rows: GPT-5.4 and GPT-5.5 under 'Our Evaluation Results' (Table 1: PostTrainBench Avg and four target models, PostTrainBench-Lite Avg and three target models: 9 cells each), the row GPT-5.5 of 'Official PostTrainBench v1.1 Results' (a RECOPY of the official leaderboard: 5 cells, Lite dashes = not reported), and Table 2 (iteration statistics: tasks with at least one successful run, improved, effective / total iterations with the rate: 3 cells each). Own runs of the authors on a less powerful GPU than the one required by the official benchmark (doubt of comparability kept). All agents use Codex CLI v0.142.4 with the standard AutoTrainess reprompting strategy and skills; reasoning effort medium for GPT-5.4 and GPT-5.5 (written). Route not written.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-alibaba: convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -25,7 +26,8 @@
    "kind": "fetch",
    "url": "https://arxiv.org/abs/2611.03698",
    "captured": "2026-11-09",
-   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html"
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "note": "also read by lot k-alibaba in /work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html"
   }
  ],
  "facts": [
@@ -654,6 +656,369 @@
     "step": 0.01
    },
    "written": "20.69%"
+  },
+  {
+   "id": "F41",
+   "says": "note",
+   "about": null,
+   "value": "Main comparison on PostTrainBench and PostTrainBench-Lite.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1 caption",
+   "quote": "Table 1: Main comparison on PostTrainBench and PostTrainBench-Lite.",
+   "note": "block \"Our Evaluation Results\": the paper's own runs; each column is the score reached by the post-trained small base model named in the column; PostTrainBench-Lite follows the GPT-5.6 System Card setting"
+  },
+  {
+   "id": "F42",
+   "says": "note",
+   "about": null,
+   "value": "We set the reasoning effort to medium for GPT-5.4 and GPT-5.5, and to max for GLM-5.2 and DeepSeek-V4.1-Flash.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "5 (experiment setup)",
+   "quote": "We evaluate GPT-5.5, GPT-5.4, GLM-5.2, and DeepSeek-V4.1-Flash ourselves under the same evaluation setting used for our trained models. We set the reasoning effort to medium for GPT-5.4 and GPT-5.5, and to max for GLM-5.2 and DeepSeek-V4.1-Flash.",
+   "note": "the sentence gives reasoning efforts for GPT-5.4, GPT-5.5, GLM-5.2 and DeepSeek-V4.1-Flash only: no effort is written for the Qwen rows"
+  },
+  {
+   "id": "F43",
+   "says": "harness",
+   "about": null,
+   "value": "Codex CLI v0.142.4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "5 (experiment setup)",
+   "quote": "All agents use Codex CLI v0.142.4 with the standard AutoTrainess reprompting strategy and skills Yu et al. (2026) ."
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "Qwen3.5-9B",
+   "value": "Qwen3.5-9B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, block Our Evaluation Results, row Qwen3.5-9B",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "7.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column ptb-avg",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "6.65",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column ptb-qwen17",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "15.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column ptb-qwen4",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "4.52",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column ptb-smollm3",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "4.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column ptb-gemma3",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "0.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column lite-avg",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "0.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column lite-qwen17",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "1.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column lite-qwen4",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "0.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.5-9B, column lite-smollm3",
+   "quote": "Qwen3.5-9B 7.72 6.65 15.09 4.52 4.60 0.56 0.00 1.67 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F54",
+   "says": "model-name",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "Qwen3.6-35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, block Our Evaluation Results, row Qwen3.6-35B-A3B",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00"
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "13.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column ptb-avg",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "10.15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column ptb-qwen17",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "17.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column ptb-qwen4",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F58",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "11.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column ptb-smollm3",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "12.63",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column ptb-gemma3",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F60",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "5.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column lite-avg",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F61",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "12.87",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column lite-qwen17",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F62",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "4.54",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column lite-qwen4",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F63",
+   "says": "score",
+   "about": "Qwen3.6-35B-A3B",
+   "value": "0.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2611.03698.html",
+   "where": "Table 1, row Qwen3.6-35B-A3B, column lite-smollm3",
+   "quote": "Qwen3.6-35B-A3B 13.08 10.15 17.93 11.60 12.63 5.80 12.87 4.54 0.00",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
   }
  ]
 }

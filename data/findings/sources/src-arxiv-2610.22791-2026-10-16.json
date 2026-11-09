@@ -12,12 +12,13 @@
    "url": "https://arxiv.org/abs/2610.22791",
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.22791.html",
-   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file"
+   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file | also read by lot k-alibaba in /work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html"
   }
  ],
  "commit": null,
  "sha256": {
-  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.22791.html": "6b59b9c00dc4902d9aa83e01842e3e60aea2172ad6a90abeb3ddb501fc1203a9"
+  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.22791.html": "6b59b9c00dc4902d9aa83e01842e3e60aea2172ad6a90abeb3ddb501fc1203a9",
+  "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html": "6b59b9c00dc4902d9aa83e01842e3e60aea2172ad6a90abeb3ddb501fc1203a9"
  },
  "harvested_at": "2026-11-09T12:00:00Z",
  "published": {
@@ -27,7 +28,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.22791.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-2",
- "agent": "convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-alibaba: convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -111,6 +112,132 @@
    "quote": "Gemini 3 Pro mini-SWE-agent – – 69.6",
    "term": "resolve rate (%)",
    "scale": "percent"
+  },
+  {
+   "id": "F8",
+   "says": "model-name",
+   "about": "Qwen3.5-35B-A3B",
+   "value": "Qwen3.5-35B-A3B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "3.1 Experimental Setup (base policy; Table 1 row Base)",
+   "quote": "All experiments use Qwen3.5-35B-A3B ( Qwen Team, 2026 ) as the base policy and mini-SWE-agent ( Yao et al., 2023 ; Yang et al., 2024 ) as the seed harness."
+  },
+  {
+   "id": "F9",
+   "says": "harness",
+   "about": "Qwen3.5-35B-A3B",
+   "value": "mini-SWE-agent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "3.1 Experimental Setup",
+   "quote": "All experiments use Qwen3.5-35B-A3B ( Qwen Team, 2026 ) as the base policy and mini-SWE-agent ( Yao et al., 2023 ; Yang et al., 2024 ) as the seed harness."
+  },
+  {
+   "id": "F10",
+   "says": "route",
+   "about": "Qwen3.5-35B-A3B",
+   "value": "SGLang",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "Appendix A (model serving)",
+   "quote": "Qwen3.5-35B-A3B ( Qwen Team, 2026 ) as the backbone and SGLang ( Zheng et al., 2024 ) for model serving.",
+   "term": "sglang"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": null,
+   "value": "All evaluations use a step limit of 250 and temperature and top- p p of 0.95.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "Appendix B, evaluation configurations",
+   "quote": "All evaluations use a step limit of 250 and temperature and top- p p of 0.95.",
+   "note": "step limit 250; temperature 0.95 and top-p 0.95; failed attempts (sandbox/API errors) rerun; resolve rates over all tasks; mean of three runs"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": null,
+   "value": "Base ✘ ✘",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "Table 1, row Base",
+   "quote": "Base ✘ ✘ 61.0 ± 0.2 61.0{\\scriptstyle\\,\\pm\\,0.2} 54.2 ± 0.3 54.2{\\scriptstyle\\,\\pm\\,0.3} 58.3 ± 1.2 58.3{\\scriptstyle\\,\\pm\\,1.2} 57.8 ± 0.4 57.8{\\scriptstyle\\,\\pm\\,0.4}",
+   "note": "Base = no harness optimisation, no policy optimisation (both ✘): the unmodified model; the other rows of the table are trained or harness-optimised variants (not converted)"
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Qwen3.5-35B-A3B",
+   "value": "61.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "Table 1, row Base, column SWE-Verified",
+   "quote": "Base ✘ ✘ 61.0 ± 0.2 61.0{\\scriptstyle\\,\\pm\\,0.2} 54.2 ± 0.3 54.2{\\scriptstyle\\,\\pm\\,0.3} 58.3 ± 1.2 58.3{\\scriptstyle\\,\\pm\\,1.2} 57.8 ± 0.4 57.8{\\scriptstyle\\,\\pm\\,0.4}",
+   "term": "resolve rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Qwen3.5-35B-A3B",
+   "value": "54.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "Table 1, row Base, column SWE-Multi",
+   "quote": "Base ✘ ✘ 61.0 ± 0.2 61.0{\\scriptstyle\\,\\pm\\,0.2} 54.2 ± 0.3 54.2{\\scriptstyle\\,\\pm\\,0.3} 58.3 ± 1.2 58.3{\\scriptstyle\\,\\pm\\,1.2} 57.8 ± 0.4 57.8{\\scriptstyle\\,\\pm\\,0.4}",
+   "term": "SWE-Bench Multilingual resolve rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "Qwen3.5-35B-A3B",
+   "value": "58.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "Table 1, row Base, column SWE-Pro",
+   "quote": "Base ✘ ✘ 61.0 ± 0.2 61.0{\\scriptstyle\\,\\pm\\,0.2} 54.2 ± 0.3 54.2{\\scriptstyle\\,\\pm\\,0.3} 58.3 ± 1.2 58.3{\\scriptstyle\\,\\pm\\,1.2} 57.8 ± 0.4 57.8{\\scriptstyle\\,\\pm\\,0.4}",
+   "term": "SWE-Bench Pro resolve rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Qwen3.5-35B-A3B",
+   "value": "57.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-alibaba/arxiv-2610.22791.html",
+   "where": "Table 1, row Base, column Avg.",
+   "quote": "Base ✘ ✘ 61.0 ± 0.2 61.0{\\scriptstyle\\,\\pm\\,0.2} 54.2 ± 0.3 54.2{\\scriptstyle\\,\\pm\\,0.3} 58.3 ± 1.2 58.3{\\scriptstyle\\,\\pm\\,1.2} 57.8 ± 0.4 57.8{\\scriptstyle\\,\\pm\\,0.4}",
+   "term": "average resolve rate (%) over three SWE benchmarks",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
   }
  ]
 }
