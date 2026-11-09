@@ -1459,3 +1459,18 @@ with data/decisions.json (its measure decision D1 names measures absent there: r
   mean, 8 of 8 rows of 4 Nov reproduced); the composite rule applies.
 - **vocab.json:** reason codes `out:copy`, `out:copy-older-snapshot`; name kind `table-id`. **source.schema.json:**
   fact fields `held` (and `capture` for a same-runs-as fact). **models.schema.json:** name field `table`.
+
+## Added on 9 Nov 2026 (integration 4 of salvo s5, the maintainer's decisions of 9 Nov, continued)
+
+No rule of the build changed.
+- **Decisions D32–D34** (data/decisions.json, measure decisions, both axes, out): D32, ARC Prize rows that state a
+  thinking budget and a level at once (« Claude Opus 4.6 (120K, Low|Medium|High|Max) », 4 Nov and 15 Oct snapshots, 16
+  measures); D33, ARC's undated « GPT-5.6 Luna (<level>) » rows of arcagi1/2, replaced by the dated pass « GPT-5.6 Luna
+  2026-07-30 (<level>) » of the same payload (10 measures); D34, benchmarklist's Terminal-Bench 2.1 value (two possible
+  origins, pending).
+- **A copy inside one document.** The copy rule (`copy_of`, rule `copy-same-runs`) also covers a table that repeats a
+  run another table of the same paper reports: `held` names the other cell's measure of the same source. First use:
+  arXiv 2609.29933, Table 12's Full column (Table 1's all-images configuration, as the paper says) and Table 10's
+  no-think cells (Table 1's all-images and Table 12's k=5 runs, value for value): 13 cells, each run counted once.
+- The relecture of the four sources (ARC Prize 4 Nov, dubesor, arXiv 2609.29933, Epoch 4 Nov) corrected findings only;
+  its log is the session's S/s5/integ4/RELECTURE.md.
