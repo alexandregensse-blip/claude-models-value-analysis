@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). DoGNAVY-Exploit (LLM vulnerability exploitation). ALL the OpenAI lines are RECOPIES of public results (blocks 'Public frontier results' and 'Other public frontier results'; the original sources are not named in the tables; the dagger marks publicly reported results obtained under their original evaluation settings). Table 1 Cybench Pass@1: GPT-5.5 (39 tasks, 94.1%); Table 2 CVE-Bench Zero-day: GPT-5.6, GPT-5.5, GPT-5.4 Thinking (34 tasks each; 93.1%, 93.1%, 86.3%; One-day is a dash); Table 3 ExploitGym solved of 869: GPT-5.6 Sol + Codex CLI 293, GPT-5.5 + Codex CLI 129, GPT-5.4 + Codex CLI 61. 'GPT-5.6' is written without a variant: identity left open (Luna / Sol / Terra); 'GPT-5.4 Thinking' carries a mode written in its name. SECURITY/capability of exploitation (high = more capable exploitation).",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -403,6 +403,564 @@
     "model": "printed",
     "step": 1
    }
+  },
+  {
+   "id": "F29",
+   "says": "effort-label",
+   "about": null,
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.1 (experimental setup), about both GLM-5.2 and GLM-5.3",
+   "quote": "For both models, we use a temperature of 1.0, top-p of 0.95, a maximum output length of 32,000 tokens, and set the reasoning effort to max."
+  },
+  {
+   "id": "F30",
+   "says": "note",
+   "about": null,
+   "value": "a temperature of 1.0, top-p of 0.95, a maximum output length of 32,000 tokens",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.1",
+   "quote": "For both models, we use a temperature of 1.0, top-p of 0.95, a maximum output length of 32,000 tokens, and set the reasoning effort to max. At each milestone, the route planner maintains up to 3 candidate routes, which are investigated by 3 parallel executors. Each instance is assigned a wall-clock limit of 8 hours.",
+   "note": "also: up to 3 candidate routes, 3 parallel executors, wall-clock limit of 8 hours per instance"
+  },
+  {
+   "id": "F31",
+   "says": "note",
+   "about": null,
+   "value": "485 157 GLM-5.2 + DoGNAVY-Exploit 225 79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3",
+   "quote": "GLM-5.3 + DoGNAVY-Exploit 485 157 GLM-5.2 + DoGNAVY-Exploit 225 79 Public GLM baselines GLM-5.3 + Claude Code 869 130",
+   "note": "DOUBT of comparability: ExploitGym rows are on subsets of 485 and 225 tasks chosen by the authors, not the 869 tasks of the full benchmark (the Claude Code rows)"
+  },
+  {
+   "id": "F32",
+   "says": "note",
+   "about": null,
+   "value": "these public results use evaluation coverage and therefore do not constitute controlled comparisons",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.4",
+   "quote": "Although these public results use evaluation coverage and therefore do not constitute controlled comparisons",
+   "note": "the Public GLM baselines block of Table 3 is copied from public reports (source not named in the table), not run by the authors; effort not written"
+  },
+  {
+   "id": "F33",
+   "says": "note",
+   "about": null,
+   "value": "Each individual agent in our system is instantiated on top of the OpenCode framework",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.1",
+   "quote": "Each individual agent in our system is instantiated on top of the OpenCode framework",
+   "note": "FLAG whole system: DoGNAVY-Exploit is the authors' planner + parallel executors on OpenCode, so the measure is of the system with GLM as backbone, not of the model alone; offensive-security (exploitation) task"
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 1, block header \"GLM-5.2 backbone (ours)\"",
+   "quote": "System / Harness Tasks Pass@1 GLM-5.2 backbone (ours) ReAct 40 82.5%"
+  },
+  {
+   "id": "F35",
+   "says": "harness",
+   "about": null,
+   "value": "ReAct",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.4, Cybench paragraph",
+   "quote": "the benchmark’s default ReAct baseline ( Yao et al., 2022 ) at 82.5% (33/40)"
+  },
+  {
+   "id": "F36",
+   "says": "harness",
+   "about": null,
+   "value": "OpenCode",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 1, row OpenCode",
+   "quote": "OpenCode 40 87.5%"
+  },
+  {
+   "id": "F37",
+   "says": "harness",
+   "about": null,
+   "value": "DoGNAVY-Exploit",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 1, row DoGNAVY-Exploit",
+   "quote": "DoGNAVY-Exploit 40 97.5%"
+  },
+  {
+   "id": "F38",
+   "says": "note",
+   "about": null,
+   "value": "harnesses use the same GLM-5.2 backbone and an eight-hour wall-clock budget per task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.4, Cybench paragraph",
+   "quote": "harnesses use the same GLM-5.2 backbone and an eight-hour wall-clock budget per task",
+   "note": "the three Cybench harnesses share backbone and budget"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "82.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 1 (Cybench Pass@1), row ReAct",
+   "quote": "ReAct 40 82.5%",
+   "term": "Pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "87.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 1 (Cybench Pass@1), row OpenCode",
+   "quote": "OpenCode 40 87.5%",
+   "term": "Pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "97.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 1 (Cybench Pass@1), row DoGNAVY-Exploit",
+   "quote": "DoGNAVY-Exploit 40 97.5%",
+   "term": "Pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "50.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 2 (CVE-Bench Pass@1), row ReAct, column zero-day",
+   "quote": "ReAct 40 50.0% 85.0%",
+   "term": "Pass@1 zero-day (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "85.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 2 (CVE-Bench Pass@1), row ReAct, column one-day",
+   "quote": "ReAct 40 50.0% 85.0%",
+   "term": "Pass@1 one-day (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "65.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 2 (CVE-Bench Pass@1), row OpenCode, column zero-day",
+   "quote": "OpenCode 40 65.0% 87.5%",
+   "term": "Pass@1 zero-day (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "87.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 2 (CVE-Bench Pass@1), row OpenCode, column one-day",
+   "quote": "OpenCode 40 65.0% 87.5%",
+   "term": "Pass@1 one-day (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "97.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 2 (CVE-Bench Pass@1), row DoGNAVY-Exploit, column zero-day",
+   "quote": "DoGNAVY-Exploit 40 97.5% 100.0%",
+   "term": "Pass@1 zero-day (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "100.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 2 (CVE-Bench Pass@1), row DoGNAVY-Exploit, column one-day",
+   "quote": "DoGNAVY-Exploit 40 97.5% 100.0%",
+   "term": "Pass@1 one-day (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "model-name",
+   "about": "GLM-5.3",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, row GLM-5.3 + DoGNAVY-Exploit",
+   "quote": "GLM-5.3 + DoGNAVY-Exploit 485 157"
+  },
+  {
+   "id": "F49",
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, row GLM-5.2 + DoGNAVY-Exploit",
+   "quote": "GLM-5.2 + DoGNAVY-Exploit 225 79"
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "157",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, column Solved",
+   "quote": "GLM-5.3 + DoGNAVY-Exploit 485 157",
+   "term": "tasks solved (count, of 485)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F51",
+   "says": "harness",
+   "about": null,
+   "value": "DoGNAVY-Exploit",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, row label",
+   "quote": "GLM-5.3 + DoGNAVY-Exploit 485 157"
+  },
+  {
+   "id": "F52",
+   "says": "cost",
+   "about": "GLM-5.3",
+   "value": "$20.91",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "DoGNAVY-Exploit with GLM-5.3 obtains 157 successful exploits at $20.91 per case"
+  },
+  {
+   "id": "F53",
+   "says": "currency",
+   "about": "GLM-5.3",
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "DoGNAVY-Exploit with GLM-5.3 obtains 157 successful exploits at $20.91 per case",
+   "term": "USD"
+  },
+  {
+   "id": "F54",
+   "says": "unit",
+   "about": "GLM-5.3",
+   "value": "per case",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "DoGNAVY-Exploit with GLM-5.3 obtains 157 successful exploits at $20.91 per case",
+   "term": "USD per task",
+   "note": "the paper says \"per case\" (one ExploitGym task instance)"
+  },
+  {
+   "id": "F55",
+   "says": "cost-basis",
+   "about": "GLM-5.3",
+   "value": "official API prices",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "DoGNAVY costs are calculated using the official API prices published by the corresponding model providers.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F56",
+   "says": "cost-method",
+   "about": "GLM-5.3",
+   "value": "official API prices",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "DoGNAVY costs are calculated using the official API prices published by the corresponding model providers.",
+   "term": "tokens×list",
+   "note": "price x tokens is the research agent's reading; the sentence does not say tokens"
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, column Solved",
+   "quote": "GLM-5.2 + DoGNAVY-Exploit 225 79",
+   "term": "tasks solved (count, of 225)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F58",
+   "says": "note",
+   "about": null,
+   "value": "18.94 successful exploits per $1,000",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.4",
+   "quote": "the GLM-5.2 configuration costs only $4.80 per case and yields 18.94 successful exploits per $1,000",
+   "note": "GLM-5.2 configuration; Figure 4 itself not read"
+  },
+  {
+   "id": "F59",
+   "says": "harness",
+   "about": null,
+   "value": "DoGNAVY-Exploit",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, row label",
+   "quote": "GLM-5.2 + DoGNAVY-Exploit 225 79"
+  },
+  {
+   "id": "F60",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "$4.80",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "The GLM-5.2 configuration obtains 79 exploits at only $4.80 per case"
+  },
+  {
+   "id": "F61",
+   "says": "currency",
+   "about": "GLM-5.2",
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "The GLM-5.2 configuration obtains 79 exploits at only $4.80 per case",
+   "term": "USD"
+  },
+  {
+   "id": "F62",
+   "says": "unit",
+   "about": "GLM-5.2",
+   "value": "per case",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "The GLM-5.2 configuration obtains 79 exploits at only $4.80 per case",
+   "term": "USD per task",
+   "note": "the paper says \"per case\" (one ExploitGym task instance)"
+  },
+  {
+   "id": "F63",
+   "says": "cost-basis",
+   "about": "GLM-5.2",
+   "value": "official API prices",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "DoGNAVY costs are calculated using the official API prices published by the corresponding model providers.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F64",
+   "says": "cost-method",
+   "about": "GLM-5.2",
+   "value": "official API prices",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "section 4.5",
+   "quote": "DoGNAVY costs are calculated using the official API prices published by the corresponding model providers.",
+   "term": "tokens×list",
+   "note": "price x tokens is the research agent's reading; the sentence does not say tokens"
+  },
+  {
+   "id": "F65",
+   "says": "model-name",
+   "about": "GLM-5.3",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, Public GLM baselines block",
+   "quote": "GLM-5.3 + Claude Code 869 130"
+  },
+  {
+   "id": "F66",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "130",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, Public GLM baselines, column Solved",
+   "quote": "GLM-5.3 + Claude Code 869 130",
+   "term": "tasks solved (count, of 869)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F67",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, row label",
+   "quote": "GLM-5.3 + Claude Code 869 130"
+  },
+  {
+   "id": "F68",
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, Public GLM baselines block",
+   "quote": "GLM-5.2 + Claude Code 869 39"
+  },
+  {
+   "id": "F69",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, Public GLM baselines, column Solved",
+   "quote": "GLM-5.2 + Claude Code 869 39",
+   "term": "tasks solved (count, of 869)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F70",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.04196.html",
+   "where": "Table 3, row label",
+   "quote": "GLM-5.2 + Claude Code 869 39"
   }
  ]
 }

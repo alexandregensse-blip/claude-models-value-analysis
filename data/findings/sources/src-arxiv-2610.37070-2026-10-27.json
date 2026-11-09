@@ -12,12 +12,13 @@
    "url": "https://arxiv.org/abs/2610.37070",
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.37070.html",
-   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file"
+   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file | also read by lot k-zhipu in /work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html"
   }
  ],
  "commit": null,
  "sha256": {
-  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.37070.html": "1f13e2acfcf734caf0e2b8dda62c96f3c6de0703f78a2d45c9d69fed40a05633"
+  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.37070.html": "1f13e2acfcf734caf0e2b8dda62c96f3c6de0703f78a2d45c9d69fed40a05633",
+  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html": "1f13e2acfcf734caf0e2b8dda62c96f3c6de0703f78a2d45c9d69fed40a05633"
  },
  "harvested_at": "2026-11-09T12:00:00Z",
  "published": {
@@ -27,7 +28,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.37070.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-2",
- "agent": "convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -153,6 +154,232 @@
    "quote": "Gemini 3.5 Flash Lite 17 100% 0.529 0.529 0.0 N/A N/A",
    "term": "selection gap delta = F_sel - F_pop (pp)",
    "scale": "raw"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": null,
+   "value": "Headline runs use greedy decoding (temperature = 0 =0 ) and English-only prompts.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Limitations, Decoding and serving deployment",
+   "quote": "Decoding and serving deployment. Headline runs use greedy decoding (temperature = 0 =0 ) and English-only prompts. We have not evaluated stochastic decoding or multilingual prompts. The same model identifier behaved materially differently on two endpoints, so Table 1 reports deployment-specific gaps.",
+   "note": "DOUBT on the deployment: the same model identifier behaved materially differently on two endpoints, so Table 1 reports the serving deployments that answered (Appendix R); the endpoint is not named"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": null,
+   "value": "All language model API calls use publicly available commercial endpoints under standard terms of service",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Appendix, reproducibility",
+   "quote": "All language model API calls use publicly available commercial endpoints under standard terms of service",
+   "note": "route: \"commercial endpoints\", provider not named"
+  },
+  {
+   "id": "F13",
+   "says": "note",
+   "about": null,
+   "value": "we verified non-thinking mode on every row ( reasoning_tokens = 0 =0 )",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Appendix O / ceiling validation",
+   "quote": "At depth 30 (90 gates), we verified non-thinking mode on every row ( reasoning_tokens = 0 =0 ), with no parse failures. Deepseek-v4-flash answered 10/10 correctly (one-sided 95% lower bound 0.741 0.741 ); glm-5.2 answered all 10 calls correctly (bound 0.688 0.688 at the conservative n = 8 n=8 distinct instances).",
+   "note": "DOUBT: non-thinking mode was verified at depth 30 (90 gates) on the circuit control, not stated for the Table 1 arithmetic-DAG runs; no effort / mode written for the Table 1 rows"
+  },
+  {
+   "id": "F14",
+   "says": "note",
+   "about": null,
+   "value": "Table 1: Faithfulness across serving deployments.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1 header",
+   "quote": "Table 1: Faithfulness across serving deployments. All-trace and correctness-conditioned estimates, with ceiling controls shown separately. Model n n Acc. F pop F_{\\mathrm{pop}} F sel F_{\\mathrm{sel}} Δ \\Delta (pp) 95% CI (pp) p p",
+   "note": "columns n, Acc., F_pop (faithfulness over all traces), F_sel (faithfulness over the correctness-selected subset), delta (pp), 95% CI, p; arithmetic DAGs of depth 2-4 (difficulty chosen so that accuracy is intermediate)"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "glm-5.2",
+   "value": "glm-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.2",
+   "quote": "glm-5.2 100 79.0% 0.440 0.456 +1.6 [ − - 3.4, +6.6] 0.540"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "glm-5.2",
+   "value": "79.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.2, column accuracy on arithmetic DAGs",
+   "quote": "glm-5.2 100 79.0% 0.440 0.456 +1.6 [ − - 3.4, +6.6] 0.540",
+   "term": "accuracy on arithmetic DAGs (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "glm-5.2",
+   "value": "0.440",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.2, column faithfulness F_pop",
+   "quote": "glm-5.2 100 79.0% 0.440 0.456 +1.6 [ − - 3.4, +6.6] 0.540",
+   "term": "faithfulness F_pop (all traces)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "glm-5.2",
+   "value": "0.456",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.2, column faithfulness F_sel",
+   "quote": "glm-5.2 100 79.0% 0.440 0.456 +1.6 [ − - 3.4, +6.6] 0.540",
+   "term": "faithfulness F_sel (correctness-selected traces)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "glm-5.2",
+   "value": "+1.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.2, column selection gap delta = F_sel - F_pop",
+   "quote": "glm-5.2 100 79.0% 0.440 0.456 +1.6 [ − - 3.4, +6.6] 0.540",
+   "term": "selection gap delta = F_sel - F_pop (pp)",
+   "scale": "raw"
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": "glm-5.3",
+   "value": "glm-5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.3",
+   "quote": "glm-5.3 1000 51.5% 0.507 0.581 +7.4 [+4.3, +10.4]"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "glm-5.3",
+   "value": "51.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.3, column accuracy on arithmetic DAGs",
+   "quote": "glm-5.3 1000 51.5% 0.507 0.581 +7.4 [+4.3, +10.4]",
+   "term": "accuracy on arithmetic DAGs (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "glm-5.3",
+   "value": "0.507",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.3, column faithfulness F_pop",
+   "quote": "glm-5.3 1000 51.5% 0.507 0.581 +7.4 [+4.3, +10.4]",
+   "term": "faithfulness F_pop (all traces)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "glm-5.3",
+   "value": "0.581",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.3, column faithfulness F_sel",
+   "quote": "glm-5.3 1000 51.5% 0.507 0.581 +7.4 [+4.3, +10.4]",
+   "term": "faithfulness F_sel (correctness-selected traces)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "glm-5.3",
+   "value": "+7.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Table 1, row glm-5.3, column selection gap delta = F_sel - F_pop",
+   "quote": "glm-5.3 1000 51.5% 0.507 0.581 +7.4 [+4.3, +10.4]",
+   "term": "selection gap delta = F_sel - F_pop (pp)",
+   "scale": "raw"
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "GLM-5.3",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Appendix O (Ceiling Validation)",
+   "quote": "On Boolean circuits, the same all-trace protocol with GLM-5.3 ( n = 200 n=200 ) gives 99.5% accuracy"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "99.5%",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.37070.html",
+   "where": "Appendix O (Ceiling Validation), text",
+   "quote": "On Boolean circuits, the same all-trace protocol with GLM-5.3 ( n = 200 n=200 ) gives 99.5% accuracy",
+   "term": "accuracy on Boolean circuits, ceiling control (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
   }
  ]
 }

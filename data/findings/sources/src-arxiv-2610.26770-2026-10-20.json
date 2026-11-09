@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). HarnessPro (recursive harness self-improvement, cost-aware), GPT-5.5 x Codex block: Table 2 (12 methods: Vanilla, Dynamic Cheatsheet, ReasoningBank, Sleep-time Compute, RHO, Balance, RHO+Iteration, HarnessPro Lite/Medium/Heavy; per benchmark P = pass rate %, C = mean cost $ per test task, T = execution time s; mean and standard deviation for HarnessPro) and Table 3 (ablations: P, C, CoP = cost-of-pass, on Terminal-Bench 2 and SWE-Bench Pro) and Table 4 (the token prices used, GPT-5.5 row). Each row is a SYSTEM (GPT-5.5 inside Codex plus a harness method), not the model alone. One measure per pass-rate cell; the cost C($) is the cost of the measure (mean cost per test task, tokens at the Table 4 prices = list-estimate); T(s) and CoP($) and the standard deviations are kept in the measure notes. Default reasoning effort high on all three benchmarks (written); 'RHO + low reasoning effort' fixes effort at low; 'RHO + dynamic routing' selects effort per task (variable). Route not written (Codex harness). The GLM-5.2 x Claude Code block is not OpenAI and not converted.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -3334,6 +3334,849 @@
     "model": "printed",
     "step": 0.01
    }
+  },
+  {
+   "id": "F236",
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, block \"GLM-5.2 × Claude Code\"",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847"
+  },
+  {
+   "id": "F237",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "Claude Code 2.1.231",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 5.1 (setup)",
+   "quote": "We pair GPT-5.5 with Codex 0.147.0 and GLM-5.2 with Claude Code 2.1.231 ."
+  },
+  {
+   "id": "F238",
+   "says": "effort-label",
+   "about": "GLM-5.2",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 (Reasoning effort and mode weights): default for Terminal-Bench 2 and SWE-Bench Pro",
+   "quote": "For GLM-5.2, the default is max on Terminal-Bench 2 and SWE-Bench Pro, but high on ProgramBench, where max tends to induce extensive reasoning and tool use, substantially lengthening execution."
+  },
+  {
+   "id": "F239",
+   "says": "effort-label",
+   "about": "GLM-5.2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2: default for ProgramBench",
+   "quote": "For GLM-5.2, the default is max on Terminal-Bench 2 and SWE-Bench Pro, but high on ProgramBench, where max tends to induce extensive reasoning and tool use, substantially lengthening execution."
+  },
+  {
+   "id": "F240",
+   "says": "currency",
+   "about": "GLM-5.2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "Table 2: Performance and efficiency across three benchmarks. P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F241",
+   "says": "unit",
+   "about": "GLM-5.2",
+   "value": "mean cost ($)",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption (mean cost per test task, section 4.3)",
+   "quote": "Table 2: Performance and efficiency across three benchmarks. P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD per task"
+  },
+  {
+   "id": "F242",
+   "says": "cost-basis",
+   "about": "GLM-5.2",
+   "value": "the public API prices used to convert token usage into execution cost",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A (Token pricing)",
+   "quote": "Table 4 reports the public API prices used to convert token usage into execution cost.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F243",
+   "says": "cost-method",
+   "about": "GLM-5.2",
+   "value": "the public API prices used to convert token usage into execution cost",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A (Token pricing)",
+   "quote": "Table 4 reports the public API prices used to convert token usage into execution cost.",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F244",
+   "says": "price-table",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2 1.40 $/M 0.26 $/M 4.40 $/M",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 4 (uncached input / cached input / output)",
+   "quote": "Table 4: Token prices used to compute execution costs. Model Uncached input Cached input Output GPT-5.5 ( < 272 <272 K context) 5.00 $/M 0.50 $/M 30.00 $/M GLM-5.2 1.40 $/M 0.26 $/M 4.40 $/M",
+   "note": "prices follow the official OpenAI and Z.ai pricing pages (Z.ai prices for GLM-5.2); the route of the calls is not written"
+  },
+  {
+   "id": "F245",
+   "says": "aggregation",
+   "about": "GLM-5.2",
+   "value": "sample standard deviation over three runs on Terminal-Bench 2 and SWE-Bench Pro, and two on ProgramBench",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 5.1 (setup)",
+   "quote": "For HarnessPro , all metrics are given as mean ± \\pm sample standard deviation over three runs on Terminal-Bench 2 and SWE-Bench Pro, and two on ProgramBench.",
+   "note": "for the HarnessPro rows; the Vanilla and RHO rows print no deviation (number of runs not written)"
+  },
+  {
+   "id": "F246",
+   "says": "note",
+   "about": null,
+   "value": "Vanilla",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963",
+   "note": "Vanilla = the original harness (the row closest to the model alone); DOUBT: test sets are partition splits made by the authors (training / validation / test), so scores may not be comparable to official ones"
+  },
+  {
+   "id": "F247",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "Vanilla",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla (harness method evolved on Claude Code)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847"
+  },
+  {
+   "id": "F248",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "74.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row Vanilla, column Terminal-Bench 2 P(%)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "term": "Terminal-Bench 2 pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F249",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "0.92",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row Vanilla, column Terminal-Bench 2 C($)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F250",
+   "says": "note",
+   "about": null,
+   "value": "963",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column Terminal-Bench 2 T(s)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "note": "execution time T = 963 s for Terminal-Bench 2 (mean execution time, seconds)"
+  },
+  {
+   "id": "F251",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "56.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row Vanilla, column SWE-Bench Pro P(%)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "term": "SWE-Bench Pro pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F252",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "1.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row Vanilla, column SWE-Bench Pro C($)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F253",
+   "says": "note",
+   "about": null,
+   "value": "402",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column SWE-Bench Pro T(s)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "note": "execution time T = 402 s for SWE-Bench Pro (mean execution time, seconds)"
+  },
+  {
+   "id": "F254",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "59.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row Vanilla, column ProgramBench P(%)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "term": "ProgramBench pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F255",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "11.34",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row Vanilla, column ProgramBench C($)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F256",
+   "says": "note",
+   "about": null,
+   "value": "3847",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column ProgramBench T(s)",
+   "quote": "GLM-5.2 × \\times Claude Code Vanilla 74.6 0.92 963 56.0 1.17 402 59.7 11.34 3847",
+   "note": "execution time T = 3847 s for ProgramBench (mean execution time, seconds)"
+  },
+  {
+   "id": "F257",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "RHO",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO (harness method evolved on Claude Code)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434"
+  },
+  {
+   "id": "F258",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "78.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row RHO, column Terminal-Bench 2 P(%)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "term": "Terminal-Bench 2 pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F259",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "1.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row RHO, column Terminal-Bench 2 C($)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F260",
+   "says": "note",
+   "about": null,
+   "value": "1318",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column Terminal-Bench 2 T(s)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "note": "execution time T = 1318 s for Terminal-Bench 2 (mean execution time, seconds)"
+  },
+  {
+   "id": "F261",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "75.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row RHO, column SWE-Bench Pro P(%)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "term": "SWE-Bench Pro pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F262",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "2.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row RHO, column SWE-Bench Pro C($)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F263",
+   "says": "note",
+   "about": null,
+   "value": "520",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column SWE-Bench Pro T(s)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "note": "execution time T = 520 s for SWE-Bench Pro (mean execution time, seconds)"
+  },
+  {
+   "id": "F264",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "63.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row RHO, column ProgramBench P(%)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "term": "ProgramBench pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F265",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "17.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row RHO, column ProgramBench C($)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F266",
+   "says": "note",
+   "about": null,
+   "value": "6434",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column ProgramBench T(s)",
+   "quote": "RHO 78.0 1.00 1318 75.0 2.17 520 63.3 17.00 6434",
+   "note": "execution time T = 6434 s for ProgramBench (mean execution time, seconds)"
+  },
+  {
+   "id": "F267",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "HarnessPro-Lite",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite (harness method evolved on Claude Code)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32"
+  },
+  {
+   "id": "F268",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "75.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Lite, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "term": "Terminal-Bench 2 pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F269",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "0.43",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Lite, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F270",
+   "says": "note",
+   "about": null,
+   "value": "665",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column Terminal-Bench 2 T(s)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "note": "execution time T = 665 s for Terminal-Bench 2 (mean execution time, seconds)"
+  },
+  {
+   "id": "F271",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "70.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Lite, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "term": "SWE-Bench Pro pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F272",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "0.70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Lite, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F273",
+   "says": "note",
+   "about": null,
+   "value": "289",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column SWE-Bench Pro T(s)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "note": "execution time T = 289 s for SWE-Bench Pro (mean execution time, seconds)"
+  },
+  {
+   "id": "F274",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "60.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Lite, column ProgramBench P(%)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "term": "ProgramBench pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F275",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "11.10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Lite, column ProgramBench C($)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F276",
+   "says": "note",
+   "about": null,
+   "value": "3907",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column ProgramBench T(s)",
+   "quote": "HarnessPro-Lite 75.1 ± 1.0 \\pm\\,1.0 0.43 ± 0.03 \\pm\\,0.03 665 ± 8 \\pm\\,8 70.7 ± 0.6 \\pm\\,0.6 0.70 ± 0.02 \\pm\\,0.02 289 ± 3 \\pm\\,3 60.1 ± 0.6 \\pm\\,0.6 11.10 ± 0.28 \\pm\\,0.28 3907 ± 32 \\pm\\,32",
+   "note": "execution time T = 3907 s for ProgramBench (mean execution time, seconds)"
+  },
+  {
+   "id": "F277",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "HarnessPro-Medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium (harness method evolved on Claude Code)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132"
+  },
+  {
+   "id": "F278",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Medium, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "term": "Terminal-Bench 2 pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F279",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "0.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Medium, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F280",
+   "says": "note",
+   "about": null,
+   "value": "968",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column Terminal-Bench 2 T(s)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "note": "execution time T = 968 s for Terminal-Bench 2 (mean execution time, seconds)"
+  },
+  {
+   "id": "F281",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "75.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Medium, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "term": "SWE-Bench Pro pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F282",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "0.87",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Medium, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F283",
+   "says": "note",
+   "about": null,
+   "value": "332",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column SWE-Bench Pro T(s)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "note": "execution time T = 332 s for SWE-Bench Pro (mean execution time, seconds)"
+  },
+  {
+   "id": "F284",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "63.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Medium, column ProgramBench P(%)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "term": "ProgramBench pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F285",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "13.74",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Medium, column ProgramBench C($)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F286",
+   "says": "note",
+   "about": null,
+   "value": "5893",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column ProgramBench T(s)",
+   "quote": "HarnessPro-Medium 76.3 ± 0.0 \\pm\\,0.0 0.50 ± 0.01 \\pm\\,0.01 968 ± 17 \\pm\\,17 75.0 ± 1.0 \\pm\\,1.0 0.87 ± 0.01 \\pm\\,0.01 332 ± 10 \\pm\\,10 63.0 ± 0.4 \\pm\\,0.4 13.74 ± 0.16 \\pm\\,0.16 5893 ± 132 \\pm\\,132",
+   "note": "execution time T = 5893 s for ProgramBench (mean execution time, seconds)"
+  },
+  {
+   "id": "F287",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "HarnessPro-Heavy",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy (harness method evolved on Claude Code)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110"
+  },
+  {
+   "id": "F288",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "81.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Heavy, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "term": "Terminal-Bench 2 pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F289",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "0.62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Heavy, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F290",
+   "says": "note",
+   "about": null,
+   "value": "1080",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column Terminal-Bench 2 T(s)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "note": "execution time T = 1080 s for Terminal-Bench 2 (mean execution time, seconds)"
+  },
+  {
+   "id": "F291",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "77.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Heavy, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "term": "SWE-Bench Pro pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F292",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "1.01",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Heavy, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F293",
+   "says": "note",
+   "about": null,
+   "value": "412",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column SWE-Bench Pro T(s)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "note": "execution time T = 412 s for SWE-Bench Pro (mean execution time, seconds)"
+  },
+  {
+   "id": "F294",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "64.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Heavy, column ProgramBench P(%)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "term": "ProgramBench pass rate P (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F295",
+   "says": "cost",
+   "about": "GLM-5.2",
+   "value": "14.95",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, GLM-5.2 x Claude Code block, row HarnessPro-Heavy, column ProgramBench C($)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F296",
+   "says": "note",
+   "about": null,
+   "value": "5925",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column ProgramBench T(s)",
+   "quote": "HarnessPro-Heavy 81.4 ± 1.7 \\pm\\,1.7 0.62 ± 0.02 \\pm\\,0.02 1080 ± 15 \\pm\\,15 77.3 ± 0.6 \\pm\\,0.6 1.01 ± 0.03 \\pm\\,0.03 412 ± 11 \\pm\\,11 64.4 ± 0.8 \\pm\\,0.8 14.95 ± 0.08 \\pm\\,0.08 5925 ± 110 \\pm\\,110",
+   "note": "execution time T = 5925 s for ProgramBench (mean execution time, seconds)"
   }
  ]
 }

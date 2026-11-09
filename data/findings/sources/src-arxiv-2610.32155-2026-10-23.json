@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). KnotScryer (composition risks of agent skills): Table II, the GPT-5.5 column of the exploitation rate (Hermes 82.8, OpenClaw 51.1, OpenCode 96.9, Average 77.0) and the GPT-5.5 row of the cross-agent consistency (All 3 38.2, Exactly 2 57.2, Exactly 1 1.8, None 2.8). SECURITY measure (exploitation rate of violation chains: higher = more vulnerable), not a capability score. The entry is the model inside an agent framework (Hermes v0.16.0, OpenClaw 2026.6.8, OpenCode v1.17.7). Effort and route not written.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -238,6 +238,198 @@
    "where": "Table II cross-agent consistency, row GPT-5.5, column Table II cross-agent consistency, None",
    "quote": "GPT-5.5 38.2 57.2 1.8 2.8",
    "term": "cross-agent consistency (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": "GLM-5.1",
+   "value": "GLM-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, column header",
+   "quote": "TABLE II: Exploitation results and consistency analysis for 612 SCFG-detected violation chains. Exploitation Rate (%) GLM-5.1 Sonnet 4.6 GPT-5.5 Overall Hermes 92.2"
+  },
+  {
+   "id": "F17",
+   "says": "note",
+   "about": null,
+   "value": "TABLE II: Exploitation results and consistency analysis for 612 SCFG-detected violation chains.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II caption",
+   "quote": "TABLE II: Exploitation results and consistency analysis for 612 SCFG-detected violation chains. Exploitation Rate (%) GLM-5.1 Sonnet 4.6 GPT-5.5 Overall",
+   "note": "FLAG safety: the victim LLM follows an attack chain built from clean skills; a HIGH exploitation rate = MORE vulnerable; not a capability score; effort and route not written; each cell = 612 chains executed in one agent framework with that LLM"
+  },
+  {
+   "id": "F18",
+   "says": "harness",
+   "about": "GLM-5.1",
+   "value": "Hermes",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, row Hermes (agent framework)",
+   "quote": "Hermes 92.2 65.0 82.8 80.0"
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "92.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Exploitation Rate (%), row Hermes, column GLM-5.1",
+   "quote": "Hermes 92.2 65.0 82.8 80.0",
+   "term": "SCFG violation-chain exploitation rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F20",
+   "says": "harness",
+   "about": "GLM-5.1",
+   "value": "OpenClaw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, row OpenClaw (agent framework)",
+   "quote": "OpenClaw 71.7 92.3 51.1 71.7"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "71.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Exploitation Rate (%), row OpenClaw, column GLM-5.1",
+   "quote": "OpenClaw 71.7 92.3 51.1 71.7",
+   "term": "SCFG violation-chain exploitation rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "harness",
+   "about": "GLM-5.1",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, row OpenCode (agent framework)",
+   "quote": "OpenCode 93.0 68.0 96.9 86.0"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "93.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Exploitation Rate (%), row OpenCode, column GLM-5.1",
+   "quote": "OpenCode 93.0 68.0 96.9 86.0",
+   "term": "SCFG violation-chain exploitation rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "85.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Exploitation Rate (%), row Average, column GLM-5.1",
+   "quote": "Average 85.6 75.1 77.0 79.2",
+   "term": "SCFG violation-chain exploitation rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "62.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Cross-Agent Consistency (%), row GLM-5.1, column All 3",
+   "quote": "Cross-Agent Consistency (%) All 3 Exactly 2 Exactly 1 None GLM-5.1 62.6 32.2 4.7 0.5",
+   "term": "cross-agent consistency of GLM-5.1: chains exploited in All 3 agent frameworks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "32.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Cross-Agent Consistency (%), row GLM-5.1, column Exactly 2",
+   "quote": "Cross-Agent Consistency (%) All 3 Exactly 2 Exactly 1 None GLM-5.1 62.6 32.2 4.7 0.5",
+   "term": "cross-agent consistency of GLM-5.1: chains exploited in Exactly 2 agent frameworks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Cross-Agent Consistency (%), row GLM-5.1, column Exactly 1",
+   "quote": "Cross-Agent Consistency (%) All 3 Exactly 2 Exactly 1 None GLM-5.1 62.6 32.2 4.7 0.5",
+   "term": "cross-agent consistency of GLM-5.1: chains exploited in Exactly 1 agent frameworks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "0.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.32155.html",
+   "where": "TABLE II, Cross-Agent Consistency (%), row GLM-5.1, column None",
+   "quote": "Cross-Agent Consistency (%) All 3 Exactly 2 Exactly 1 None GLM-5.1 62.6 32.2 4.7 0.5",
+   "term": "cross-agent consistency of GLM-5.1: chains exploited in None agent frameworks (%)",
    "scale": "percent",
    "precision": {
     "model": "printed",

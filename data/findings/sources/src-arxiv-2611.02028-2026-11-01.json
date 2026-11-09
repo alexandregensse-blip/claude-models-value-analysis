@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). KernelCraft formal verification of GPU kernels by agents (Level 1: twelve tasks per target language PTX, CUDA, HIP). GPT-6 Luna column of Table 2: pass rate over the twelve tasks per target language (3 measures) with the mean input and output tokens over the proven tasks (millions) attached as usage of the same measure. The per-task pass/fail/budget strings, per-task token counts (Table 11), tokens per stage (Table 12) and the failure analysis (Table 13) are categorical or counts of runs: kept as notes, not measures. Effort xhigh for the backward and proof agents (Table 10 flags --backward-effort xhigh, --proof-effort xhigh; --other-effort default (xhigh)); spending ceiling 50 USD per verification and a round cap of 16 (Tables 7 and 10); no provider named. A failed run spends to its budget, so the token means cover the proven tasks only.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -375,6 +375,423 @@
    "where": "Table 13 failure analysis, row GPT-6 Luna",
    "quote": "GPT-6 Luna 599 / 815 / 5 4.7% / 4.3% 6 1 / 1 2 / 5",
    "note": "GPT-6 Luna failure analysis inside the verification runs: calls 599 / 815 / 5, share of tokens 4.7% / 4.3%, verdict stops 6, false positives refuted / issued 1 / 1, second opinions refuted 2 / 5 (counts of runs, not a score)"
+  },
+  {
+   "id": "F28",
+   "says": "model-name",
+   "about": "GLM 5.3",
+   "value": "GLM 5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2 header",
+   "quote": "Target Lang. Metric GLM 5.3 GLM 5.3 Flash DeepSeek V4.1 Flash GPT-6 Luna"
+  },
+  {
+   "id": "F29",
+   "says": "model-name",
+   "about": "GLM 5.3 Flash",
+   "value": "GLM 5.3 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2 header",
+   "quote": "Target Lang. Metric GLM 5.3 GLM 5.3 Flash DeepSeek V4.1 Flash GPT-6 Luna"
+  },
+  {
+   "id": "F30",
+   "says": "effort-setting",
+   "about": "GLM 5.3",
+   "value": "default ( max )",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 10, row --proof-effort, column GLM 5.3 (columns: DeepSeek V4.1 Flash | GPT-6 Luna | GLM 5.3 Flash | GLM 5.3 | Opus 5.5)",
+   "quote": "--proof-effort xhigh xhigh default ( max ) default ( max ) xhigh Effort of the two proof agents",
+   "note": "the flag is not passed (\"default\" = flag not passed per the caption); the parenthesis gives the default level, max, for the two proof agents"
+  },
+  {
+   "id": "F31",
+   "says": "effort-setting",
+   "about": "GLM 5.3",
+   "value": "default ( high )",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 10, row --other-effort, column GLM 5.3",
+   "quote": "--other-effort default ( xhigh ) default ( xhigh ) default ( high ) default ( high ) default ( xhigh ) Effort of the statement, review, and diagnosis agents",
+   "note": "statement, review and diagnosis agents: default, written as high"
+  },
+  {
+   "id": "F32",
+   "says": "effort-setting",
+   "about": "GLM 5.3",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 10, row --backward-effort, column GLM 5.3",
+   "quote": "--backward-effort xhigh xhigh default default xhigh Reasoning effort of every verification agent",
+   "note": "reasoning effort of every verification agent: default (no level written)"
+  },
+  {
+   "id": "F33",
+   "says": "effort-setting",
+   "about": "GLM 5.3 Flash",
+   "value": "default ( max )",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 10, row --proof-effort, column GLM 5.3 Flash (columns: DeepSeek V4.1 Flash | GPT-6 Luna | GLM 5.3 Flash | GLM 5.3 | Opus 5.5)",
+   "quote": "--proof-effort xhigh xhigh default ( max ) default ( max ) xhigh Effort of the two proof agents",
+   "note": "the flag is not passed (\"default\" = flag not passed per the caption); the parenthesis gives the default level, max, for the two proof agents"
+  },
+  {
+   "id": "F34",
+   "says": "effort-setting",
+   "about": "GLM 5.3 Flash",
+   "value": "default ( high )",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 10, row --other-effort, column GLM 5.3 Flash",
+   "quote": "--other-effort default ( xhigh ) default ( xhigh ) default ( high ) default ( high ) default ( xhigh ) Effort of the statement, review, and diagnosis agents",
+   "note": "statement, review and diagnosis agents: default, written as high"
+  },
+  {
+   "id": "F35",
+   "says": "effort-setting",
+   "about": "GLM 5.3 Flash",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 10, row --backward-effort, column GLM 5.3 Flash",
+   "quote": "--backward-effort xhigh xhigh default default xhigh Reasoning effort of every verification agent",
+   "note": "reasoning effort of every verification agent: default (no level written)"
+  },
+  {
+   "id": "F36",
+   "says": "note",
+   "about": null,
+   "value": "“default” means the flag is not passed.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 10 caption",
+   "quote": "Table 10: Configuration of the verification runs, per model. Every run passes --verify-only , so the kernel is the registry’s pinned program for its task and language and the generation flags are unused. “default” means the flag is not passed.",
+   "note": "the effort of the verification agents is the maker default (flag not passed); budgets per verification: --max-usd 75 for GLM 5.3 Flash and 100 for GLM 5.3 (spending ceilings, for reference); route not written (flags --model glm-5.3-flash / glm-5.3)"
+  },
+  {
+   "id": "F37",
+   "says": "note",
+   "about": null,
+   "value": "KernelCraft Level 1 results per target language and model: pass rate over the twelve tasks, and mean input and output tokens (millions) over the proven tasks, since a failed run spends to its budget.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2 caption",
+   "quote": "Table 2: KernelCraft Level 1 results per target language and model: pass rate over the twelve tasks, and mean input and output tokens (millions) over the proven tasks, since a failed run spends to its budget.",
+   "note": "formal verification (Lean) of a fixed GPU kernel by an agent pipeline (LARK + a simple ReAct agent); tokens are means over the proven tasks only; pass = a Lean certificate of the kernel"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "GLM 5.3",
+   "value": "83%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, row PTX pass rate, column GLM 5.3",
+   "quote": "PTX pass rate 83% 58% 25% 25% input tokens (M) 314.53 714.60 148.47 445.93 output tokens (M) 8.05 10.54 1.93 3.26",
+   "term": "KernelCraft Level 1 PTX verification pass rate over twelve tasks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F39",
+   "says": "tokens-in",
+   "about": "GLM 5.3",
+   "value": "314.53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, PTX, row input tokens (M), column GLM 5.3: mean over the proven tasks, millions",
+   "quote": "PTX pass rate 83% 58% 25% 25% input tokens (M) 314.53 714.60 148.47 445.93 output tokens (M) 8.05 10.54 1.93 3.26",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F40",
+   "says": "tokens-out",
+   "about": "GLM 5.3",
+   "value": "8.05",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, PTX, row output tokens (M), column GLM 5.3: mean over the proven tasks, millions",
+   "quote": "PTX pass rate 83% 58% 25% 25% input tokens (M) 314.53 714.60 148.47 445.93 output tokens (M) 8.05 10.54 1.93 3.26",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "GLM 5.3 Flash",
+   "value": "58%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, row PTX pass rate, column GLM 5.3 Flash",
+   "quote": "PTX pass rate 83% 58% 25% 25% input tokens (M) 314.53 714.60 148.47 445.93 output tokens (M) 8.05 10.54 1.93 3.26",
+   "term": "KernelCraft Level 1 PTX verification pass rate over twelve tasks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "tokens-in",
+   "about": "GLM 5.3 Flash",
+   "value": "714.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, PTX, row input tokens (M), column GLM 5.3 Flash: mean over the proven tasks, millions",
+   "quote": "PTX pass rate 83% 58% 25% 25% input tokens (M) 314.53 714.60 148.47 445.93 output tokens (M) 8.05 10.54 1.93 3.26",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F43",
+   "says": "tokens-out",
+   "about": "GLM 5.3 Flash",
+   "value": "10.54",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, PTX, row output tokens (M), column GLM 5.3 Flash: mean over the proven tasks, millions",
+   "quote": "PTX pass rate 83% 58% 25% 25% input tokens (M) 314.53 714.60 148.47 445.93 output tokens (M) 8.05 10.54 1.93 3.26",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "GLM 5.3",
+   "value": "75%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, row CUDA pass rate, column GLM 5.3",
+   "quote": "CUDA pass rate 75% 50% 25% 25% input tokens (M) 280.49 626.53 80.45 476.20 output tokens (M) 6.18 9.09 1.12 3.42",
+   "term": "KernelCraft Level 1 CUDA verification pass rate over twelve tasks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F45",
+   "says": "tokens-in",
+   "about": "GLM 5.3",
+   "value": "280.49",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, CUDA, row input tokens (M), column GLM 5.3: mean over the proven tasks, millions",
+   "quote": "CUDA pass rate 75% 50% 25% 25% input tokens (M) 280.49 626.53 80.45 476.20 output tokens (M) 6.18 9.09 1.12 3.42",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F46",
+   "says": "tokens-out",
+   "about": "GLM 5.3",
+   "value": "6.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, CUDA, row output tokens (M), column GLM 5.3: mean over the proven tasks, millions",
+   "quote": "CUDA pass rate 75% 50% 25% 25% input tokens (M) 280.49 626.53 80.45 476.20 output tokens (M) 6.18 9.09 1.12 3.42",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "GLM 5.3 Flash",
+   "value": "50%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, row CUDA pass rate, column GLM 5.3 Flash",
+   "quote": "CUDA pass rate 75% 50% 25% 25% input tokens (M) 280.49 626.53 80.45 476.20 output tokens (M) 6.18 9.09 1.12 3.42",
+   "term": "KernelCraft Level 1 CUDA verification pass rate over twelve tasks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "tokens-in",
+   "about": "GLM 5.3 Flash",
+   "value": "626.53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, CUDA, row input tokens (M), column GLM 5.3 Flash: mean over the proven tasks, millions",
+   "quote": "CUDA pass rate 75% 50% 25% 25% input tokens (M) 280.49 626.53 80.45 476.20 output tokens (M) 6.18 9.09 1.12 3.42",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F49",
+   "says": "tokens-out",
+   "about": "GLM 5.3 Flash",
+   "value": "9.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, CUDA, row output tokens (M), column GLM 5.3 Flash: mean over the proven tasks, millions",
+   "quote": "CUDA pass rate 75% 50% 25% 25% input tokens (M) 280.49 626.53 80.45 476.20 output tokens (M) 6.18 9.09 1.12 3.42",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "GLM 5.3",
+   "value": "83%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, row HIP pass rate, column GLM 5.3",
+   "quote": "HIP pass rate 83% 50% 25% 25% input tokens (M) 312.21 773.96 156.15 289.17 output tokens (M) 7.15 10.59 1.86 1.89",
+   "term": "KernelCraft Level 1 HIP verification pass rate over twelve tasks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F51",
+   "says": "tokens-in",
+   "about": "GLM 5.3",
+   "value": "312.21",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, HIP, row input tokens (M), column GLM 5.3: mean over the proven tasks, millions",
+   "quote": "HIP pass rate 83% 50% 25% 25% input tokens (M) 312.21 773.96 156.15 289.17 output tokens (M) 7.15 10.59 1.86 1.89",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F52",
+   "says": "tokens-out",
+   "about": "GLM 5.3",
+   "value": "7.15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, HIP, row output tokens (M), column GLM 5.3: mean over the proven tasks, millions",
+   "quote": "HIP pass rate 83% 50% 25% 25% input tokens (M) 312.21 773.96 156.15 289.17 output tokens (M) 7.15 10.59 1.86 1.89",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "GLM 5.3 Flash",
+   "value": "50%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, row HIP pass rate, column GLM 5.3 Flash",
+   "quote": "HIP pass rate 83% 50% 25% 25% input tokens (M) 312.21 773.96 156.15 289.17 output tokens (M) 7.15 10.59 1.86 1.89",
+   "term": "KernelCraft Level 1 HIP verification pass rate over twelve tasks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F54",
+   "says": "tokens-in",
+   "about": "GLM 5.3 Flash",
+   "value": "773.96",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, HIP, row input tokens (M), column GLM 5.3 Flash: mean over the proven tasks, millions",
+   "quote": "HIP pass rate 83% 50% 25% 25% input tokens (M) 312.21 773.96 156.15 289.17 output tokens (M) 7.15 10.59 1.86 1.89",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F55",
+   "says": "tokens-out",
+   "about": "GLM 5.3 Flash",
+   "value": "10.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 2, HIP, row output tokens (M), column GLM 5.3 Flash: mean over the proven tasks, millions",
+   "quote": "HIP pass rate 83% 50% 25% 25% input tokens (M) 312.21 773.96 156.15 289.17 output tokens (M) 7.15 10.59 1.86 1.89",
+   "note": "millions of tokens, mean over the proven tasks only"
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "GLM 5.3",
+   "value": "20%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 3, row GLM 5.3, column Total",
+   "quote": "GLM 5.3 pass ✗ ✗ ✓ ✗ ✗ 20% input token (M) (459.60) (512.30) 71.90 (214.10) (611.60) 373.90 output token (M) (9.13) (15.96) 2.70 (4.49) (14.16) 9.29",
+   "term": "KernelCraft Level 2 PTX verification pass rate over five tasks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F57",
+   "says": "tokens-in",
+   "about": "GLM 5.3",
+   "value": "373.90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 3, row GLM 5.3, input token (M), column Total (average over the runs that were not failed / stopped)",
+   "quote": "GLM 5.3 pass ✗ ✗ ✓ ✗ ✗ 20% input token (M) (459.60) (512.30) 71.90 (214.10) (611.60) 373.90 output token (M) (9.13) (15.96) 2.70 (4.49) (14.16) 9.29",
+   "note": "millions of tokens; Total average leaves out the runs in parentheses"
+  },
+  {
+   "id": "F58",
+   "says": "tokens-out",
+   "about": "GLM 5.3",
+   "value": "9.29",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 3, row GLM 5.3, output token (M), column Total",
+   "quote": "GLM 5.3 pass ✗ ✗ ✓ ✗ ✗ 20% input token (M) (459.60) (512.30) 71.90 (214.10) (611.60) 373.90 output token (M) (9.13) (15.96) 2.70 (4.49) (14.16) 9.29",
+   "note": "millions of tokens; Total average leaves out the runs in parentheses"
+  },
+  {
+   "id": "F59",
+   "says": "note",
+   "about": null,
+   "value": "pass ✗ ✗ ✓ ✗ ✗ 20%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.02028.html",
+   "where": "Table 3, row GLM 5.3",
+   "quote": "GLM 5.3 pass ✗ ✗ ✓ ✗ ✗ 20% input token (M)",
+   "note": "per task (FFN, SwiGLU, RoPE, FlashAttn, GQA): only RoPE has a certificate; tokens per task (M) in: (459.60) (512.30) 71.90 (214.10) (611.60), out: (9.13) (15.96) 2.70 (4.49) (14.16), parentheses = failed or stopped at budget"
   }
  ]
 }

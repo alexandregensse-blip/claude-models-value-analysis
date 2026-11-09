@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). Memento (context folding with backtracking for long-document QA; LiteraryQA, NovelHopQA, NovelQA, SagaScale). Table 1 rows of GPT-5.5 High: the Full Context reference (232K context) and the Fold + Backtrack harness of the authors (reference rows, not trained). Cells: LitQA, NHopQA, NovelQA, Saga accuracy and Micro Avg (5 measures per row); Tokens (mean per rollout) as usage and Cost ($, full test set) as spend. DOUBT kept: the dagger rows were 'evaluated on up to 100 random questions per dataset; cost is extrapolated to the full test set' (sample, extrapolated cost). The effort 'High' is written in the row label. Route not written.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -391,6 +391,341 @@
    "where": "Table 1, row GPT-5.5 High, Fold + Backtrack, column Table 1, Micro Avg",
    "quote": "GPT-5.5 High † Reference Fold + Backtrack 10.0 9.0 19.2 16.2 13.1 84K 2,606",
    "term": "accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "effort-label",
+   "about": "GLM-5.3",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Appendix, hyperparameter table: GLM test reasoning effort",
+   "quote": "GLM test temperature / top- p p 1.0 1.0 / 0.95 0.95 GLM test reasoning effort High"
+  },
+  {
+   "id": "F28",
+   "says": "note",
+   "about": null,
+   "value": "Cost is the evaluation cost in USD of running all test rollouts once on an 8 × \\times NVIDIA B200 server at an fair market rate of $64/hr, except for GPT-5.5, for which we report API cost.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "section 4 (Results and Ablations)",
+   "quote": "Cost is the evaluation cost in USD of running all test rollouts once on an 8 × \\times NVIDIA B200 server at an fair market rate of $64/hr, except for GPT-5.5, for which we report API cost.",
+   "note": "FLAG hardware rental: the cost of GLM-5.3 is the rental of an 8 x B200 server at $64 per hour (self-hosted), NOT an API price; cost of the evaluation of the whole test set (4,708 questions) run once"
+  },
+  {
+   "id": "F29",
+   "says": "currency",
+   "about": "GLM-5.3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1 header",
+   "quote": "Accuracy (%) Efficiency Model Category Harness LitQA NHopQA NovelQA Saga Micro Avg Tokens Cost ($)",
+   "term": "USD"
+  },
+  {
+   "id": "F30",
+   "says": "unit",
+   "about": "GLM-5.3",
+   "value": "Cost ($)",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1 header (cost of running all 4,708 test questions once)",
+   "quote": "Accuracy (%) Efficiency Model Category Harness LitQA NHopQA NovelQA Saga Micro Avg Tokens Cost ($)",
+   "term": "USD/full-benchmark-run",
+   "note": "whole test set (n = 4,708) run once"
+  },
+  {
+   "id": "F31",
+   "says": "cost-basis",
+   "about": "GLM-5.3",
+   "value": "fair market rate of $64/hr",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "section 4",
+   "quote": "Cost is the evaluation cost in USD of running all test rollouts once on an 8 × \\times NVIDIA B200 server at an fair market rate of $64/hr, except for GPT-5.5, for which we report API cost.",
+   "term": "list-estimate",
+   "note": "hardware rental rate, not an API price"
+  },
+  {
+   "id": "F32",
+   "says": "cost-method",
+   "about": "GLM-5.3",
+   "value": "fair market rate of $64/hr",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "section 4",
+   "quote": "Cost is the evaluation cost in USD of running all test rollouts once on an 8 × \\times NVIDIA B200 server at an fair market rate of $64/hr, except for GPT-5.5, for which we report API cost.",
+   "term": "unstated"
+  },
+  {
+   "id": "F33",
+   "says": "model-name",
+   "about": "GLM-5.3",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx)",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270"
+  },
+  {
+   "id": "F34",
+   "says": "harness",
+   "about": "GLM-5.3",
+   "value": "Full Context",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, column Harness: Full Context",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270",
+   "note": "Full Context = the whole book in the 1M-token context; Fold + Backtrack = the authors' context-folding agent with confidence-based backtracking (an agent method on top of the model)"
+  },
+  {
+   "id": "F35",
+   "says": "tokens-total",
+   "about": "GLM-5.3",
+   "value": "167K",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx), column Tokens",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270",
+   "note": "mean tokens per test rollout as read by the research agent (\"167K par rollout\"); no input / output split"
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": "GLM-5.3",
+   "value": "1,270",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx), column Cost ($)",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270"
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "76.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx), column LitQA",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270",
+   "term": "Book QA LitQA (n = 1,940) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "75.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx), column NHopQA",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270",
+   "term": "Book QA NHopQA (n = 426) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "71.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx), column NovelQA",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270",
+   "term": "Book QA NovelQA (n = 2,305) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "75.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx), column Saga",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270",
+   "term": "Book QA Saga (n = 37) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "74.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High (1M ctx), column micro average",
+   "quote": "GLM-5.3 High (1M ctx) Reference Full Context 76.6 75.8 71.9 75.7 74.3 167K 1,270",
+   "term": "Book QA micro average (n = 4,708) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "model-name",
+   "about": "GLM-5.3",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448"
+  },
+  {
+   "id": "F43",
+   "says": "harness",
+   "about": "GLM-5.3",
+   "value": "Fold + Backtrack",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, column Harness: Fold + Backtrack",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448",
+   "note": "Full Context = the whole book in the 1M-token context; Fold + Backtrack = the authors' context-folding agent with confidence-based backtracking (an agent method on top of the model)"
+  },
+  {
+   "id": "F44",
+   "says": "tokens-total",
+   "about": "GLM-5.3",
+   "value": "47K",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High, column Tokens",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448",
+   "note": "mean tokens per test rollout as read by the research agent (\"167K par rollout\"); no input / output split"
+  },
+  {
+   "id": "F45",
+   "says": "cost",
+   "about": "GLM-5.3",
+   "value": "448",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High, column Cost ($)",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448"
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "71.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High, column LitQA",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448",
+   "term": "Book QA LitQA (n = 1,940) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "43.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High, column NHopQA",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448",
+   "term": "Book QA NHopQA (n = 426) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "72.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High, column NovelQA",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448",
+   "term": "Book QA NovelQA (n = 2,305) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "91.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High, column Saga",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448",
+   "term": "Book QA Saga (n = 37) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "69.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00244.html",
+   "where": "Table 1, row GLM-5.3 High, column micro average",
+   "quote": "GLM-5.3 High Reference Fold + Backtrack 71.2 43.4 72.1 91.9 69.3 47K 448",
+   "term": "Book QA micro average (n = 4,708) accuracy (%)",
    "scale": "percent",
    "precision": {
     "model": "printed",

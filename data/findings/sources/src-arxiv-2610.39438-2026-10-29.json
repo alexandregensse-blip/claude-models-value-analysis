@@ -2,7 +2,8 @@
  "id": "src-arxiv-2610.39438-2026-10-29",
  "publisher": "arxiv-2610.39438",
  "urls": [
-  "https://arxiv.org/abs/2610.39438"
+  "https://arxiv.org/abs/2610.39438",
+  "https://arxiv.org/abs/2610.39438v1"
  ],
  "wayback": [],
  "commit": null,
@@ -18,7 +19,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). ATLAS-Bench (agentic local search with multi-faceted constraints). Table 3 rows 'GPT-5.6-Luna (Medium)' and 'GPT-6-Luna (XHigh)': 12 columns each (Answer Quality: CSR, CR, Success@k, Recs/q, Factual; Trajectory Quality: Intent, Approp., Evidence, Strategy; Efficiency: Tokens/q, Calls/q, Rounds/q). The effort sits in the row label ('(Medium)', '(XHigh)'). Judge: LLM evaluations call DeepSeek-V4-Pro directly via API (the only route written). Route of the evaluated models not written. Names as written: 'GPT-5.6-Luna' and 'GPT-6-Luna'.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-google-2: convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-google-2: convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -28,6 +29,13 @@
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
    "note": "also read by lot k-google-2 in /work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.39438v1",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html"
   }
  ],
  "facts": [
@@ -679,6 +687,263 @@
    "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
    "term": "trajectory quality score (1-5)",
    "scale": "raw"
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "GLM-5.3",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max)",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64"
+  },
+  {
+   "id": "F48",
+   "says": "effort-label",
+   "about": "GLM-5.3",
+   "value": "Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row label \"GLM-5.3 (Max)\"",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64"
+  },
+  {
+   "id": "F49",
+   "says": "judge",
+   "about": "GLM-5.3",
+   "value": "DeepSeek-V4-Pro",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "section 4.1 (setup), Judge",
+   "quote": "All LLM-based judgments use DeepSeek-V4-Pro ( DeepSeek-AI, 2026 ) .",
+   "note": "\"Other LLM-based evaluations call DeepSeek-V4-Pro directly via API\" (the judge's route, not the evaluated models')"
+  },
+  {
+   "id": "F50",
+   "says": "note",
+   "about": null,
+   "value": "Agents are limited to N = 5 N=5 tool-use rounds.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "section 4.1 (setup)",
+   "quote": "Agents are limited to N = 5 N=5 tool-use rounds.",
+   "note": "run frame: 5 tool-use rounds at most; retrieval Qwen3-Embedding-0.6B (100 candidates) + Qwen3-Reranker-0.6B; two NVIDIA H20 GPUs for local computation; route of the evaluated models not written"
+  },
+  {
+   "id": "F51",
+   "says": "note",
+   "about": null,
+   "value": "Answer Quality Trajectory Quality Efficiency Model CSR CR Success@k Recs/q Factual Intent Approp. Evidence Strategy Tokens/q Calls/q Rounds/q",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3 header",
+   "quote": "Table 3. Overall performance on ATLAS-Bench. The best and second-best values are highlighted, excluding efficiency. Answer Quality Trajectory Quality Efficiency Model CSR CR Success@k Recs/q Factual Intent Approp. Evidence Strategy Tokens/q Calls/q Rounds/q",
+   "note": "column order; the 12th value (3.64) is Rounds/q (the b-zhipu doubt on this column is lifted by the full header)"
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "56.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column CSR",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F53",
+   "says": "tokens-total",
+   "about": "GLM-5.3",
+   "value": "90.8K",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Tokens/q",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "note": "tokens per query, one total (no class split)"
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "75.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column CR",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "85.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Success@k",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "ATLAS-Bench Success@k (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "3.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Recs/q",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "ATLAS-Bench Recs/q",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "83.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Factual accuracy",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "ATLAS-Bench Factual accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F58",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "4.25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Intent",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "trajectory quality score (1-5)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "4.35",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Approp.",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "ATLAS-Bench Approp. (judge score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F60",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "2.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Evidence",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "trajectory quality score (1-5)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F61",
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "4.05",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Strategy",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "term": "trajectory quality score (1-5)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F62",
+   "says": "tokens-total",
+   "about": "GLM-5.3",
+   "value": "90800",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Tokens/q",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64",
+   "written": "90.8K"
+  },
+  {
+   "id": "F63",
+   "says": "note",
+   "about": "GLM-5.3",
+   "value": "7.04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Calls/q",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64"
+  },
+  {
+   "id": "F64",
+   "says": "note",
+   "about": "GLM-5.3",
+   "value": "3.64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "where": "Table 3, row GLM-5.3 (Max), column Rounds/q",
+   "quote": "GLM-5.3 (Max) 56.9 75.1 85.3 3.07 83.67 4.25 4.35 2.61 4.05 90.8K 7.04 3.64"
   }
  ]
 }

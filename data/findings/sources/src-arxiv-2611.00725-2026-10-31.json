@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). EtE: attacks that exploit the trust of coding agents (scene-level attack success rate, ASR %, SECURITY: lower = more robust). The Codex agent with GPT-5.5 ('Codex-GPT-5.5' in Table 2; Table 1 column 'Codex' read as that agent: slight doubt): Table 1 (six attack methods: Benign control, InjecAgent, AgentDojo, EIA, EVA, EtE) and Table 2 (ablation of EtE components: Full EtE and five variants; the decrease in points is kept in the measure notes). The measured entry is a system (Codex agent + GPT-5.5). Codex version 0.162.1 (reference). Effort and route not written.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -277,6 +277,97 @@
    "where": "Table 2, row w/o authority branding, column Codex-GPT-5.5",
    "quote": "w/o authority branding 43.0 ↓ \\downarrow 24.9 29.0 ↓ \\downarrow 56.7",
    "term": "ablation attack success rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "note",
+   "about": null,
+   "value": "Table 1 shows that EtE outperforms all baselines.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html",
+   "where": "section 5.3 (RQ1)",
+   "quote": "Table 1 shows that EtE outperforms all baselines. EtE achieves an average scene-level ASR of 71.4% across the three agents: Codex 85.7% (48/56), ZCode 67.9% (38/56), and QwenCode 60.7% (34/56).",
+   "note": "FLAG safety: EtE is the authors' earn-then-exploit fraud attack; ASR = attack success rate at scene level over 56 scenarios, HIGH = the agent is MORE vulnerable; not a capability score; effort not written"
+  },
+  {
+   "id": "F18",
+   "says": "harness",
+   "about": "GLM-5.3-Flash",
+   "value": "ZCode v3.14.3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html",
+   "where": "section 5.1 (Experimental Setup and Metrics), Agents",
+   "quote": "ZCode v3.14.3 with GLM-5.3-Flash ( Z.ai, 2026b ; Z.ai, 2026a )",
+   "note": "the maker's own agent harness (Z.ai); the route of the calls is not written"
+  },
+  {
+   "id": "F19",
+   "says": "harness",
+   "about": "GLM-5.1",
+   "value": "ZCode",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html",
+   "where": "section 6 (An additional finding)",
+   "quote": "We further evaluate EtE on ZCode-GLM-5.1 and observe a notable result."
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": "GLM-5.3-Flash",
+   "value": "GLM-5.3-Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html",
+   "where": "section 5.1, Agents",
+   "quote": "ZCode v3.14.3 with GLM-5.3-Flash ( Z.ai, 2026b ; Z.ai, 2026a )"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "GLM-5.1",
+   "value": "GLM-5.1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html",
+   "where": "section 6 (An additional finding)",
+   "quote": "We further evaluate EtE on ZCode-GLM-5.1 and observe a notable result."
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "67.9%",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html",
+   "where": "section 5.3 (RQ1), text",
+   "quote": "EtE achieves an average scene-level ASR of 71.4% across the three agents: Codex 85.7% (48/56), ZCode 67.9% (38/56), and QwenCode 60.7% (34/56).",
+   "term": "EtE scene-level attack success rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "25.0%",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.00725.html",
+   "where": "section 6 (An additional finding), text",
+   "quote": "We further evaluate EtE on ZCode-GLM-5.1 and observe a notable result. Its ASR is 25.0%, substantially lower than the 67.9% achieved on the newer GLM-5.3-Flash.",
+   "term": "EtE scene-level attack success rate (%)",
    "scale": "percent",
    "precision": {
     "model": "printed",

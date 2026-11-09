@@ -18,7 +18,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). RSI-Dojo (training agents for post-training research) on PostTrainBench and PostTrainBench-Lite. OpenAI rows: GPT-5.4 and GPT-5.5 under 'Our Evaluation Results' (Table 1: PostTrainBench Avg and four target models, PostTrainBench-Lite Avg and three target models: 9 cells each), the row GPT-5.5 of 'Official PostTrainBench v1.1 Results' (a RECOPY of the official leaderboard: 5 cells, Lite dashes = not reported), and Table 2 (iteration statistics: tasks with at least one successful run, improved, effective / total iterations with the rate: 3 cells each). Own runs of the authors on a less powerful GPU than the one required by the official benchmark (doubt of comparability kept). All agents use Codex CLI v0.142.4 with the standard AutoTrainess reprompting strategy and skills; reasoning effort medium for GPT-5.4 and GPT-5.5 (written). Route not written.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-alibaba: convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-alibaba: convertisseur k-alibaba (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -1019,6 +1019,243 @@
     "model": "printed",
     "step": 0.01
    }
+  },
+  {
+   "id": "F64",
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2 (Our Evaluation Results block)",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81"
+  },
+  {
+   "id": "F65",
+   "says": "effort-label",
+   "about": "GLM-5.2",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "section 5.1 (Main Results)",
+   "quote": "We set the reasoning effort to medium for GPT-5.4 and GPT-5.5, and to max for GLM-5.2 and DeepSeek-V4.1-Flash."
+  },
+  {
+   "id": "F66",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "Codex CLI v0.142.4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "section 4 / 5 (evaluation environment)",
+   "quote": "All agents use Codex CLI v0.142.4 with the standard AutoTrainess reprompting strategy and skills Yu et al. (2026) ."
+  },
+  {
+   "id": "F67",
+   "says": "note",
+   "about": null,
+   "value": "Due to hardware availability, we conducted the experiments on a less powerful GPU than the one required by the official benchmark.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "section 5 (evaluation environment)",
+   "quote": "Our evaluation environment follows the PostTrainBench protocol with several infrastructure-specific adaptations. Due to hardware availability, we conducted the experiments on a less powerful GPU than the one required by the official benchmark.",
+   "note": "DOUBT of comparability with the official PostTrainBench leaderboard; GLM-5.2 was evaluated by the authors themselves (\"We evaluate GPT-5.5, GPT-5.4, GLM-5.2, and DeepSeek-V4.1-Flash ourselves\"); route not written; the agents post-train small base models (Qwen-1.7B, Qwen-4B, SmolLM3-3B, Gemma3-4B)"
+  },
+  {
+   "id": "F68",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "29.52",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench Avg.",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "post-training benchmark score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "26.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench, base model Qwen-1.7B",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "PostTrainBench, base model Qwen-1.7B (score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F70",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "34.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench, base model Qwen-4B",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "PostTrainBench, base model Qwen-4B (score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "31.70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench, base model SmolLM3-3B",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "PostTrainBench, base model SmolLM3-3B (score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F72",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "24.74",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench, base model Gemma3-4B",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "PostTrainBench, base model Gemma3-4B (score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "56.37",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench-Lite Avg.",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "post-training benchmark score (Lite)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F74",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "58.21",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench-Lite, base model Qwen-1.7B",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "PostTrainBench-Lite, base model Qwen-1.7B (score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "42.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench-Lite, base model Qwen-4B",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "PostTrainBench-Lite, base model Qwen-4B (score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F76",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "68.81",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 1, row GLM-5.2, column PostTrainBench-Lite, base model SmolLM3-3B",
+   "quote": "GLM-5.2 29.52 26.69 34.97 31.70 24.74 56.37 58.21 42.08 68.81",
+   "term": "PostTrainBench-Lite, base model SmolLM3-3B (score)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F77",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "28/28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 2, column At Least One Improved",
+   "quote": "GLM-5.2 28/28 26/28 57/140 (40.71%)",
+   "term": "settings with at least one improved iteration (of 28)",
+   "scale": "counts"
+  },
+  {
+   "id": "F78",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "26/28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 2, column Successful Run",
+   "quote": "GLM-5.2 28/28 26/28 57/140 (40.71%)",
+   "term": "settings with at least one successful run (of 28)",
+   "scale": "counts"
+  },
+  {
+   "id": "F79",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "57/140",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.03698.html",
+   "where": "Table 2, column Eff./Total (Rate)",
+   "quote": "GLM-5.2 28/28 26/28 57/140 (40.71%)",
+   "term": "effective iteration rate (%)",
+   "scale": "counts"
   }
  ]
 }

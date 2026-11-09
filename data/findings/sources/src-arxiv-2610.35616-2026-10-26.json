@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). HSE (harness skill evolution) with GPT-5.5 as a cross-model evaluation under the Pi harness (Table 6): resolved rate (%) on SWE-bench Verified and DeepSWE for No Skills (82.6, 67.2) and HSE (85.4, 73.5). The measured entries are systems (the Pi harness with GPT-5.5 and a skill pack), not the model alone. Effort and route not written.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-zhipu: convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -164,6 +164,495 @@
    "where": "Table 6, row GPT-5.5 HSE, column DeepSWE",
    "quote": "GPT-5.5 No Skills 82.6 67.2 HSE 85.4 73.5",
    "term": "resolved rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1 caption",
+   "quote": "Resolved rate (%) of static skill methods on SWE-bench Verified and DeepSWE with GLM-5.2."
+  },
+  {
+   "id": "F12",
+   "says": "route",
+   "about": "GLM-5.2",
+   "value": "two B300 nodes using prefill/decode (P/D) disaggregation",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "section 5 (Model Serving)",
+   "quote": "We serve GLM-5.2 on two B300 nodes using prefill/decode (P/D) disaggregation. The coding-agent harness manages agent interaction, including skill injection, while SGLang handles model inference.",
+   "note": "self-hosted by the authors (no API)"
+  },
+  {
+   "id": "F13",
+   "says": "aggregation",
+   "about": "GLM-5.2",
+   "value": "mean over three runs (Mean@3)",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1 caption",
+   "quote": "Table 1: Resolved rate (%) of static skill methods on SWE-bench Verified and DeepSWE with GLM-5.2. Pi and CC denote the Pi and Claude Code harnesses. Entries report the mean over three runs (Mean@3), with standard deviations shown as subscripts."
+  },
+  {
+   "id": "F14",
+   "says": "note",
+   "about": null,
+   "value": "HSE uses the frozen skill library evolved on SWE-Gym without target-benchmark adaptation.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1 caption",
+   "quote": "HSE uses the frozen skill library evolved on SWE-Gym without target-benchmark adaptation.",
+   "note": "FLAG: HSE is the authors' own skill method; \"No Skills\" is the closest to the model alone; effort not written; the standard deviations printed beside each mean are kept in the quote"
+  },
+  {
+   "id": "F15",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "Pi",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row Pi (Pi / CC = the Pi and Claude Code harnesses)",
+   "quote": "SWE-bench Verified Pi 73.5 ± 1.10 73.5_{\\scriptscriptstyle\\pm\\,1.10} 74.7 ± 0.31 74.7_{\\scriptscriptstyle\\pm\\,0.31} 74.6 ± 0.40 74.6_{\\scriptscriptstyle\\pm\\,0.40} 72.8 ± 1.20 72.8_{\\scriptscriptstyle\\pm\\,1.20} 75.4 ± 0.20 \\mathbf{75.4_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "note": "Pi = the Pi harness; CC = Claude Code (caption)"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "73.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row Pi, column No Skills",
+   "quote": "SWE-bench Verified Pi 73.5 ± 1.10 73.5_{\\scriptscriptstyle\\pm\\,1.10} 74.7 ± 0.31 74.7_{\\scriptscriptstyle\\pm\\,0.31} 74.6 ± 0.40 74.6_{\\scriptscriptstyle\\pm\\,0.40} 72.8 ± 1.20 72.8_{\\scriptscriptstyle\\pm\\,1.20} 75.4 ± 0.20 \\mathbf{75.4_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "No Skills",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, column No Skills (skill method)",
+   "quote": "Benchmark Harness No Skills SWESkillsBench GEPA ReasoningBank HSE"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "74.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row Pi, column SWESkillsBench",
+   "quote": "SWE-bench Verified Pi 73.5 ± 1.10 73.5_{\\scriptscriptstyle\\pm\\,1.10} 74.7 ± 0.31 74.7_{\\scriptscriptstyle\\pm\\,0.31} 74.6 ± 0.40 74.6_{\\scriptscriptstyle\\pm\\,0.40} 72.8 ± 1.20 72.8_{\\scriptscriptstyle\\pm\\,1.20} 75.4 ± 0.20 \\mathbf{75.4_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F19",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "SWESkillsBench",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, column SWESkillsBench (skill method)",
+   "quote": "Benchmark Harness No Skills SWESkillsBench GEPA ReasoningBank HSE"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "74.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row Pi, column GEPA",
+   "quote": "SWE-bench Verified Pi 73.5 ± 1.10 73.5_{\\scriptscriptstyle\\pm\\,1.10} 74.7 ± 0.31 74.7_{\\scriptscriptstyle\\pm\\,0.31} 74.6 ± 0.40 74.6_{\\scriptscriptstyle\\pm\\,0.40} 72.8 ± 1.20 72.8_{\\scriptscriptstyle\\pm\\,1.20} 75.4 ± 0.20 \\mathbf{75.4_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "GEPA",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, column GEPA (skill method)",
+   "quote": "Benchmark Harness No Skills SWESkillsBench GEPA ReasoningBank HSE"
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "72.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row Pi, column ReasoningBank",
+   "quote": "SWE-bench Verified Pi 73.5 ± 1.10 73.5_{\\scriptscriptstyle\\pm\\,1.10} 74.7 ± 0.31 74.7_{\\scriptscriptstyle\\pm\\,0.31} 74.6 ± 0.40 74.6_{\\scriptscriptstyle\\pm\\,0.40} 72.8 ± 1.20 72.8_{\\scriptscriptstyle\\pm\\,1.20} 75.4 ± 0.20 \\mathbf{75.4_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F23",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "ReasoningBank",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, column ReasoningBank (skill method)",
+   "quote": "Benchmark Harness No Skills SWESkillsBench GEPA ReasoningBank HSE"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "75.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row Pi, column HSE",
+   "quote": "SWE-bench Verified Pi 73.5 ± 1.10 73.5_{\\scriptscriptstyle\\pm\\,1.10} 74.7 ± 0.31 74.7_{\\scriptscriptstyle\\pm\\,0.31} 74.6 ± 0.40 74.6_{\\scriptscriptstyle\\pm\\,0.40} 72.8 ± 1.20 72.8_{\\scriptscriptstyle\\pm\\,1.20} 75.4 ± 0.20 \\mathbf{75.4_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F25",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "HSE",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, column HSE (skill method)",
+   "quote": "Benchmark Harness No Skills SWESkillsBench GEPA ReasoningBank HSE"
+  },
+  {
+   "id": "F26",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "CC",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row CC (Pi / CC = the Pi and Claude Code harnesses)",
+   "quote": "CC 76.1 ± 1.30 76.1_{\\scriptscriptstyle\\pm\\,1.30} 79.7 ± 0.42 79.7_{\\scriptscriptstyle\\pm\\,0.42} 78.9 ± 0.50 78.9_{\\scriptscriptstyle\\pm\\,0.50} 76.6 ± 1.40 76.6_{\\scriptscriptstyle\\pm\\,1.40} 80.6 ± 0.20 \\mathbf{80.6_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "note": "Pi = the Pi harness; CC = Claude Code (caption)"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "76.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row CC, column No Skills",
+   "quote": "CC 76.1 ± 1.30 76.1_{\\scriptscriptstyle\\pm\\,1.30} 79.7 ± 0.42 79.7_{\\scriptscriptstyle\\pm\\,0.42} 78.9 ± 0.50 78.9_{\\scriptscriptstyle\\pm\\,0.50} 76.6 ± 1.40 76.6_{\\scriptscriptstyle\\pm\\,1.40} 80.6 ± 0.20 \\mathbf{80.6_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "79.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row CC, column SWESkillsBench",
+   "quote": "CC 76.1 ± 1.30 76.1_{\\scriptscriptstyle\\pm\\,1.30} 79.7 ± 0.42 79.7_{\\scriptscriptstyle\\pm\\,0.42} 78.9 ± 0.50 78.9_{\\scriptscriptstyle\\pm\\,0.50} 76.6 ± 1.40 76.6_{\\scriptscriptstyle\\pm\\,1.40} 80.6 ± 0.20 \\mathbf{80.6_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "78.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row CC, column GEPA",
+   "quote": "CC 76.1 ± 1.30 76.1_{\\scriptscriptstyle\\pm\\,1.30} 79.7 ± 0.42 79.7_{\\scriptscriptstyle\\pm\\,0.42} 78.9 ± 0.50 78.9_{\\scriptscriptstyle\\pm\\,0.50} 76.6 ± 1.40 76.6_{\\scriptscriptstyle\\pm\\,1.40} 80.6 ± 0.20 \\mathbf{80.6_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "76.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row CC, column ReasoningBank",
+   "quote": "CC 76.1 ± 1.30 76.1_{\\scriptscriptstyle\\pm\\,1.30} 79.7 ± 0.42 79.7_{\\scriptscriptstyle\\pm\\,0.42} 78.9 ± 0.50 78.9_{\\scriptscriptstyle\\pm\\,0.50} 76.6 ± 1.40 76.6_{\\scriptscriptstyle\\pm\\,1.40} 80.6 ± 0.20 \\mathbf{80.6_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "80.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, SWE-bench Verified, row CC, column HSE",
+   "quote": "CC 76.1 ± 1.30 76.1_{\\scriptscriptstyle\\pm\\,1.30} 79.7 ± 0.42 79.7_{\\scriptscriptstyle\\pm\\,0.42} 78.9 ± 0.50 78.9_{\\scriptscriptstyle\\pm\\,0.50} 76.6 ± 1.40 76.6_{\\scriptscriptstyle\\pm\\,1.40} 80.6 ± 0.20 \\mathbf{80.6_{\\scriptscriptstyle\\pm\\,0.20}}",
+   "term": "SWE-bench Verified resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "Pi",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row Pi (Pi / CC = the Pi and Claude Code harnesses)",
+   "quote": "DeepSWE Pi 43.1 ± 2.23 43.1_{\\scriptscriptstyle\\pm\\,2.23} 34.5 ± 0.88 34.5_{\\scriptscriptstyle\\pm\\,0.88} 46.6 ± 1.35 46.6_{\\scriptscriptstyle\\pm\\,1.35} 44.0 ± 2.23 44.0_{\\scriptscriptstyle\\pm\\,2.23} 48.7 ± 0.88 \\mathbf{48.7_{\\scriptscriptstyle\\pm\\,0.88}}",
+   "note": "Pi = the Pi harness; CC = Claude Code (caption)"
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "43.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row Pi, column No Skills",
+   "quote": "DeepSWE Pi 43.1 ± 2.23 43.1_{\\scriptscriptstyle\\pm\\,2.23} 34.5 ± 0.88 34.5_{\\scriptscriptstyle\\pm\\,0.88} 46.6 ± 1.35 46.6_{\\scriptscriptstyle\\pm\\,1.35} 44.0 ± 2.23 44.0_{\\scriptscriptstyle\\pm\\,2.23} 48.7 ± 0.88 \\mathbf{48.7_{\\scriptscriptstyle\\pm\\,0.88}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "34.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row Pi, column SWESkillsBench",
+   "quote": "DeepSWE Pi 43.1 ± 2.23 43.1_{\\scriptscriptstyle\\pm\\,2.23} 34.5 ± 0.88 34.5_{\\scriptscriptstyle\\pm\\,0.88} 46.6 ± 1.35 46.6_{\\scriptscriptstyle\\pm\\,1.35} 44.0 ± 2.23 44.0_{\\scriptscriptstyle\\pm\\,2.23} 48.7 ± 0.88 \\mathbf{48.7_{\\scriptscriptstyle\\pm\\,0.88}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "46.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row Pi, column GEPA",
+   "quote": "DeepSWE Pi 43.1 ± 2.23 43.1_{\\scriptscriptstyle\\pm\\,2.23} 34.5 ± 0.88 34.5_{\\scriptscriptstyle\\pm\\,0.88} 46.6 ± 1.35 46.6_{\\scriptscriptstyle\\pm\\,1.35} 44.0 ± 2.23 44.0_{\\scriptscriptstyle\\pm\\,2.23} 48.7 ± 0.88 \\mathbf{48.7_{\\scriptscriptstyle\\pm\\,0.88}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "44.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row Pi, column ReasoningBank",
+   "quote": "DeepSWE Pi 43.1 ± 2.23 43.1_{\\scriptscriptstyle\\pm\\,2.23} 34.5 ± 0.88 34.5_{\\scriptscriptstyle\\pm\\,0.88} 46.6 ± 1.35 46.6_{\\scriptscriptstyle\\pm\\,1.35} 44.0 ± 2.23 44.0_{\\scriptscriptstyle\\pm\\,2.23} 48.7 ± 0.88 \\mathbf{48.7_{\\scriptscriptstyle\\pm\\,0.88}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "48.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row Pi, column HSE",
+   "quote": "DeepSWE Pi 43.1 ± 2.23 43.1_{\\scriptscriptstyle\\pm\\,2.23} 34.5 ± 0.88 34.5_{\\scriptscriptstyle\\pm\\,0.88} 46.6 ± 1.35 46.6_{\\scriptscriptstyle\\pm\\,1.35} 44.0 ± 2.23 44.0_{\\scriptscriptstyle\\pm\\,2.23} 48.7 ± 0.88 \\mathbf{48.7_{\\scriptscriptstyle\\pm\\,0.88}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "harness",
+   "about": "GLM-5.2",
+   "value": "CC",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row CC (Pi / CC = the Pi and Claude Code harnesses)",
+   "quote": "CC 44.8 ± 3.11 44.8_{\\scriptscriptstyle\\pm\\,3.11} 38.6 ± 1.35 38.6_{\\scriptscriptstyle\\pm\\,1.35} 49.0 ± 1.35 49.0_{\\scriptscriptstyle\\pm\\,1.35} 46.0 ± 2.65 46.0_{\\scriptscriptstyle\\pm\\,2.65} 52.5 ± 0.51 \\mathbf{52.5_{\\scriptscriptstyle\\pm\\,0.51}}",
+   "note": "Pi = the Pi harness; CC = Claude Code (caption)"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "44.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row CC, column No Skills",
+   "quote": "CC 44.8 ± 3.11 44.8_{\\scriptscriptstyle\\pm\\,3.11} 38.6 ± 1.35 38.6_{\\scriptscriptstyle\\pm\\,1.35} 49.0 ± 1.35 49.0_{\\scriptscriptstyle\\pm\\,1.35} 46.0 ± 2.65 46.0_{\\scriptscriptstyle\\pm\\,2.65} 52.5 ± 0.51 \\mathbf{52.5_{\\scriptscriptstyle\\pm\\,0.51}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "38.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row CC, column SWESkillsBench",
+   "quote": "CC 44.8 ± 3.11 44.8_{\\scriptscriptstyle\\pm\\,3.11} 38.6 ± 1.35 38.6_{\\scriptscriptstyle\\pm\\,1.35} 49.0 ± 1.35 49.0_{\\scriptscriptstyle\\pm\\,1.35} 46.0 ± 2.65 46.0_{\\scriptscriptstyle\\pm\\,2.65} 52.5 ± 0.51 \\mathbf{52.5_{\\scriptscriptstyle\\pm\\,0.51}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "49.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row CC, column GEPA",
+   "quote": "CC 44.8 ± 3.11 44.8_{\\scriptscriptstyle\\pm\\,3.11} 38.6 ± 1.35 38.6_{\\scriptscriptstyle\\pm\\,1.35} 49.0 ± 1.35 49.0_{\\scriptscriptstyle\\pm\\,1.35} 46.0 ± 2.65 46.0_{\\scriptscriptstyle\\pm\\,2.65} 52.5 ± 0.51 \\mathbf{52.5_{\\scriptscriptstyle\\pm\\,0.51}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "46.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row CC, column ReasoningBank",
+   "quote": "CC 44.8 ± 3.11 44.8_{\\scriptscriptstyle\\pm\\,3.11} 38.6 ± 1.35 38.6_{\\scriptscriptstyle\\pm\\,1.35} 49.0 ± 1.35 49.0_{\\scriptscriptstyle\\pm\\,1.35} 46.0 ± 2.65 46.0_{\\scriptscriptstyle\\pm\\,2.65} 52.5 ± 0.51 \\mathbf{52.5_{\\scriptscriptstyle\\pm\\,0.51}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "52.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.35616.html",
+   "where": "Table 1, DeepSWE, row CC, column HSE",
+   "quote": "CC 44.8 ± 3.11 44.8_{\\scriptscriptstyle\\pm\\,3.11} 38.6 ± 1.35 38.6_{\\scriptscriptstyle\\pm\\,1.35} 49.0 ± 1.35 49.0_{\\scriptscriptstyle\\pm\\,1.35} 46.0 ± 2.65 46.0_{\\scriptscriptstyle\\pm\\,2.65} 52.5 ± 0.51 \\mathbf{52.5_{\\scriptscriptstyle\\pm\\,0.51}}",
+   "term": "DeepSWE resolved rate, Mean@3 (%)",
    "scale": "percent",
    "precision": {
     "model": "printed",

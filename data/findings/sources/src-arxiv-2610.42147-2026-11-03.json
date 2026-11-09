@@ -1,0 +1,279 @@
+{
+ "id": "src-arxiv-2610.42147-2026-11-03",
+ "publisher": "arxiv-2610.42147",
+ "urls": [
+  "https://arxiv.org/abs/2610.42147"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html": "8f1e7ecc037d0a4803a63060b59160256955d49eeebd6593072f32198bb76d9c"
+ },
+ "harvested_at": "2026-11-09T14:49:56Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.42147",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html"
+  }
+ ],
+ "published": {
+  "value": "2026-11-03",
+  "where": "arXiv stamp of the saved HTML (v2; the research file gives v1 as 2026-10-30 from the arXiv API, not in the copy)",
+  "quote": "arXiv:2610.42147v2 [cs.AI] 03 Nov 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-zhipu. Latent Sparse Attention / D-LSA (arXiv 2610.42147v2). GLM-5.3-Flash baseline row of Table 7 (5 values) and the RULER 10M sentence. CORRECTION of the research file: the 66.8 at RULER 10M is, by the sentence, the D-LSA (Flat) value (against 55.8 for D-LSA (Tree)), not the baseline: converted as a modified-attention model, with the 55.8. The D-LSA delta rows of Table 7 (authors' modified models) are not converted.",
+ "agent": "convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "GLM-5.3-Flash",
+   "value": "GLM-5.3-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 7, GLM-5.3-Flash block",
+   "quote": "GLM-5.3-Flash Block Sparse (Flat) 85.4 85.9 97.5 98.0 70.0"
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": "GLM-5.3-Flash",
+   "value": "Block Sparse (Flat)",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 7, row Block Sparse (Flat) of the GLM-5.3-Flash block: the baseline (caption: \"Baseline scores are in bold\")",
+   "quote": "GLM-5.3-Flash Block Sparse (Flat) 85.4 85.9 97.5 98.0 70.0",
+   "note": "the model's own sparse attention = the baseline of the paper (unmodified model, self-hosted)"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "GLM-5.3-Flash with either context parallelism",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "section on inference / setup",
+   "quote": "GLM-5.3-Flash with either context parallelism",
+   "note": "self-hosted by the authors (context parallelism on H200 / B300 GPUs as the research file reads it); no API"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "We sample Qwen-3.8-27B at temperature 1.0 with top-p 0.95, top-k 20, min-p 0 and no presence penalty, and GLM-5.3-Flash at temperature 1.0 with top-p 0.95, as their model cards recommend.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "E.1 Evaluation Setup",
+   "quote": "E.1 Evaluation Setup Table 6 lists the setup of every benchmark. We sample Qwen-3.8-27B at temperature 1.0 with top-p 0.95, top-k 20, min-p 0 and no presence penalty, and GLM-5.3-Flash at temperature 1.0 with top-p 0.95, as their model cards recommend. On RULER, both models decode greedily with reasoning disabled. On every benchmark with reasoning, at most 4.6% of the replies reach the output cap of 163,840 tokens for any model and method.",
+   "note": "run frame: temperature 1.0, top-p 0.95; output cap 163,840 tokens; the reasoning level is not written (reasoning \"on\" in Table 6 for MMLU-Pro, GPQA-Diamond, AIME25, MATH500, LongBench v2; \"off\" for RULER)"
+  },
+  {
+   "id": "F5",
+   "says": "mode",
+   "about": "GLM-5.3-Flash",
+   "value": "on",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 6, column Reasoning",
+   "quote": "MMLU-Pro 2,000 1 on 163,840 Exact match GPQA-Diamond 198 1 on 163,840 Exact match AIME25 30 4 on 163,840 Math-Verify MATH500 100 1 on 163,840 Math-Verify LongBench v2 60 1 on 163,840 Accuracy",
+   "note": "reasoning \"on\" (level not written) for MMLU-Pro, GPQA-Diamond, AIME25, MATH500, LongBench v2"
+  },
+  {
+   "id": "F6",
+   "says": "mode",
+   "about": "GLM-5.3-Flash",
+   "value": "reasoning disabled",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "E.1 Evaluation Setup",
+   "quote": "On RULER, both models decode greedily with reasoning disabled."
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "Table 6: Evaluation setup. Questions, repeats, generation and metric of every benchmark",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 6",
+   "quote": "Table 6: Evaluation setup. Questions, repeats, generation and metric of every benchmark, with RULER questions per task. Questions Repeats Reasoning Max output Metric MMLU-Pro 2,000 1 on 163,840 Exact match GPQA-Diamond 198 1 on 163,840 Exact match AIME25 30 4 on 163,840 Math-Verify MATH500 100 1 on 163,840 Math-Verify LongBench v2 60 1 on 163,840 Accuracy RULER 100 ( ≤ \\leq 1M) / 20 ( > > 1M) 1 off 4,096 String match",
+   "note": "sub-sampled questions: MMLU-Pro 2,000, GPQA-Diamond 198, AIME25 30 x 4 repeats, MATH500 100, LongBench v2 60, RULER 100 per task (<= 1M) / 20 (> 1M): DOUBT of comparability with the full benchmarks"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "85.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 7, GLM-5.3-Flash block, baseline row, column MMLU-Pro",
+   "quote": "GLM-5.3-Flash Block Sparse (Flat) 85.4 85.9 97.5 98.0 70.0",
+   "term": "MMLU-Pro (2,000 questions) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "85.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 7, GLM-5.3-Flash block, baseline row, column GPQA-Diamond",
+   "quote": "GLM-5.3-Flash Block Sparse (Flat) 85.4 85.9 97.5 98.0 70.0",
+   "term": "GPQA-Diamond (198 questions) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "97.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 7, GLM-5.3-Flash block, baseline row, column AIME25",
+   "quote": "GLM-5.3-Flash Block Sparse (Flat) 85.4 85.9 97.5 98.0 70.0",
+   "term": "AIME25 (30 questions x 4 repeats) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "98.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 7, GLM-5.3-Flash block, baseline row, column MATH500",
+   "quote": "GLM-5.3-Flash Block Sparse (Flat) 85.4 85.9 97.5 98.0 70.0",
+   "term": "MATH500 (100 questions) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "70.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Table 7, GLM-5.3-Flash block, baseline row, column LongBench v2",
+   "quote": "GLM-5.3-Flash Block Sparse (Flat) 85.4 85.9 97.5 98.0 70.0",
+   "term": "LongBench v2 (60 questions) accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F13",
+   "says": "note",
+   "about": null,
+   "value": "D-LSA (Tree) follows D-LSA (Flat) on Qwen-3.8-27B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Appendix E (Design comparison)",
+   "quote": "Design comparison. D-LSA (Tree) follows D-LSA (Flat) on Qwen-3.8-27B , but loses accuracy past 1M tokens on GLM-5.3-Flash , at 55.8 against 66.8 on RULER at 10M tokens.",
+   "note": "FLAG modified model: D-LSA is the authors' distilled latent sparse attention applied to GLM-5.3-Flash (not the maker's model); the reading \"55.8 = D-LSA (Tree), 66.8 = D-LSA (Flat)\" is the converter's reading of the sentence (the research file took 66.8 for the baseline); RULER at 10M tokens exceeds the context the maker announces (DOUBT)"
+  },
+  {
+   "id": "F14",
+   "says": "harness",
+   "about": "GLM-5.3-Flash",
+   "value": "D-LSA (Flat)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Appendix E (Design comparison)",
+   "quote": "D-LSA (Tree) follows D-LSA (Flat) on Qwen-3.8-27B , but loses accuracy past 1M tokens on GLM-5.3-Flash , at 55.8 against 66.8 on RULER at 10M tokens."
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "66.8",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Appendix E (Design comparison), text",
+   "quote": "D-LSA (Tree) follows D-LSA (Flat) on Qwen-3.8-27B , but loses accuracy past 1M tokens on GLM-5.3-Flash , at 55.8 against 66.8 on RULER at 10M tokens.",
+   "term": "RULER accuracy at 10M tokens (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": "GLM-5.3-Flash",
+   "value": "GLM-5.3-Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Appendix E (Design comparison)",
+   "quote": "D-LSA (Tree) follows D-LSA (Flat) on Qwen-3.8-27B , but loses accuracy past 1M tokens on GLM-5.3-Flash , at 55.8 against 66.8 on RULER at 10M tokens."
+  },
+  {
+   "id": "F17",
+   "says": "harness",
+   "about": "GLM-5.3-Flash",
+   "value": "D-LSA (Tree)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Appendix E (Design comparison)",
+   "quote": "D-LSA (Tree) follows D-LSA (Flat) on Qwen-3.8-27B , but loses accuracy past 1M tokens on GLM-5.3-Flash , at 55.8 against 66.8 on RULER at 10M tokens."
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "55.8",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.42147.html",
+   "where": "Appendix E (Design comparison), text",
+   "quote": "D-LSA (Tree) follows D-LSA (Flat) on Qwen-3.8-27B , but loses accuracy past 1M tokens on GLM-5.3-Flash , at 55.8 against 66.8 on RULER at 10M tokens.",
+   "term": "RULER accuracy at 10M tokens (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ]
+}
