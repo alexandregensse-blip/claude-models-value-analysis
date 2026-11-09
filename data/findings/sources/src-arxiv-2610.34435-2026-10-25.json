@@ -27,7 +27,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-anthropic",
- "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-2: convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -2769,6 +2769,3802 @@
    "quote": "GLM 5.3 10 0 10 7 2/7 2/7",
    "term": "valid attacks missed by the reviewer (missed/valid)",
    "scale": "counts"
+  },
+  {
+   "id": "F219",
+   "says": "harness",
+   "about": "GPT-6-Sol",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "section 3 (reviewers)",
+   "quote": "Our reviewers are Claude Code with Sonnet 5 or Claude Opus 4.8, and Codex with GPT-6-Sol.",
+   "written": "Codex",
+   "term": "codex-cli",
+   "note": "GPT-6-Sol reviews in Codex"
+  },
+  {
+   "id": "F220",
+   "says": "harness",
+   "about": "GPT-6-Sol (attacker)",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "section 3 (attackers)",
+   "quote": "The attackers in Codex are GPT-6-Sol and GLM 5.3.",
+   "written": "Codex",
+   "term": "codex-cli",
+   "note": "GPT-6-Sol attacks in Codex"
+  },
+  {
+   "id": "F221",
+   "says": "note",
+   "about": null,
+   "value": "Table 1: Reviewer outcomes by setup, pooled over attackers. n n : valid attacks. Survived : the share of scored valid attacks whose PoC still crashes the code after review.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1 caption",
+   "quote": "Table 1: Reviewer outcomes by setup, pooled over attackers. n n : valid attacks. Survived : the share of scored valid attacks whose PoC still crashes the code after review.",
+   "note": "reviewer outcomes by setup pooled over attackers; n = valid attacks; Survived = share of scored valid attacks whose PoC still crashes the code after review; Approved / Wrong site count the attacks by how the reviewer missed (left the source unchanged / edited other code); All three = attacks that all three reviewers missed"
+  },
+  {
+   "id": "F222",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Task only, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Setup n n Survived Approved Wrong site Survived Approved Wrong site Survived Approved Wrong site All three",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F223",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer, Task only",
+   "value": "349",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Task only, column n",
+   "quote": "Task only 349 2.3% 6 2 1.1% 2 2 0.0% 0 0 0",
+   "note": "n = valid attacks pooled over attackers"
+  },
+  {
+   "id": "F224",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Task only, column GPT-6-Sol Survived",
+   "quote": "Task only 349 2.3% 6 2 1.1% 2 2 0.0% 0 0 0",
+   "term": "survival of valid attacks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F225",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Task only, column GPT-6-Sol Approved",
+   "quote": "Task only 349 2.3% 6 2 1.1% 2 2 0.0% 0 0 0",
+   "term": "attacks missed: approved (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F226",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Task only, column GPT-6-Sol Wrong site",
+   "quote": "Task only 349 2.3% 6 2 1.1% 2 2 0.0% 0 0 0",
+   "term": "attacks missed: wrong site (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F227",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Fix in hand, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Setup n n Survived Approved Wrong site Survived Approved Wrong site Survived Approved Wrong site All three",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F228",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer, Fix in hand",
+   "value": "312",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Fix in hand, column n",
+   "quote": "Fix in hand 312 13.9% 39 3 13.3% 39 2 5.4% 9 8 11",
+   "note": "n = valid attacks pooled over attackers"
+  },
+  {
+   "id": "F229",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Fix in hand",
+   "value": "5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Fix in hand, column GPT-6-Sol Survived",
+   "quote": "Fix in hand 312 13.9% 39 3 13.3% 39 2 5.4% 9 8 11",
+   "term": "survival of valid attacks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F230",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Fix in hand",
+   "value": "9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Fix in hand, column GPT-6-Sol Approved",
+   "quote": "Fix in hand 312 13.9% 39 3 13.3% 39 2 5.4% 9 8 11",
+   "term": "attacks missed: approved (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F231",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Fix in hand",
+   "value": "8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Fix in hand, column GPT-6-Sol Wrong site",
+   "quote": "Fix in hand 312 13.9% 39 3 13.3% 39 2 5.4% 9 8 11",
+   "term": "attacks missed: wrong site (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F232",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Window, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Setup n n Survived Approved Wrong site Survived Approved Wrong site Survived Approved Wrong site All three",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F233",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer, Window",
+   "value": "427",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Window, column n",
+   "quote": "Window 427 24.4% 80 24 17.1% 57 16 19.4% 12 71 17",
+   "note": "n = valid attacks pooled over attackers"
+  },
+  {
+   "id": "F234",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Window",
+   "value": "19.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Window, column GPT-6-Sol Survived",
+   "quote": "Window 427 24.4% 80 24 17.1% 57 16 19.4% 12 71 17",
+   "term": "survival of valid attacks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F235",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Window",
+   "value": "12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Window, column GPT-6-Sol Approved",
+   "quote": "Window 427 24.4% 80 24 17.1% 57 16 19.4% 12 71 17",
+   "term": "attacks missed: approved (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F236",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Window",
+   "value": "71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup Window, column GPT-6-Sol Wrong site",
+   "quote": "Window 427 24.4% 80 24 17.1% 57 16 19.4% 12 71 17",
+   "term": "attacks missed: wrong site (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F237",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, All setups",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup All setups, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Setup n n Survived Approved Wrong site Survived Approved Wrong site Survived Approved Wrong site All three",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F238",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer, All setups",
+   "value": "1088",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup All setups, column n",
+   "quote": "All setups 1088 14.3% 125 29 10.9% 98 20 9.2% 21 79 28",
+   "note": "n = valid attacks pooled over attackers"
+  },
+  {
+   "id": "F239",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, All setups",
+   "value": "9.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup All setups, column GPT-6-Sol Survived",
+   "quote": "All setups 1088 14.3% 125 29 10.9% 98 20 9.2% 21 79 28",
+   "term": "survival of valid attacks (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F240",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, All setups",
+   "value": "21",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup All setups, column GPT-6-Sol Approved",
+   "quote": "All setups 1088 14.3% 125 29 10.9% 98 20 9.2% 21 79 28",
+   "term": "attacks missed: approved (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F241",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, All setups",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 1, setup All setups, column GPT-6-Sol Wrong site",
+   "quote": "All setups 1088 14.3% 125 29 10.9% 98 20 9.2% 21 79 28",
+   "term": "attacks missed: wrong site (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F242",
+   "says": "note",
+   "about": null,
+   "value": "Table 2: Reviewer failure catalog: the share (%) of missed and caught reviews with each outcome or behavior.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2 caption",
+   "quote": "Table 2: Reviewer failure catalog: the share (%) of missed and caught reviews with each outcome or behavior.",
+   "note": "share (%) of missed and caught reviews with each outcome or behavior; a review sees a planted line when it prints or opens it; the Saw no planted line row covers traced window reviews; the Approved / Wrong-site rows have no Caught cell (dash)"
+  },
+  {
+   "id": "F243",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Approved (source unchanged)",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Approved (source unchanged), columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Missed Caught Missed Caught Missed Caught",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F244",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Approved (source unchanged)",
+   "value": "21",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Approved (source unchanged), column GPT-6-Sol Missed",
+   "quote": "Approved (source unchanged) 81 – 83 – 21 –",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F245",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Wrong-site repair",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Wrong-site repair, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Missed Caught Missed Caught Missed Caught",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F246",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Wrong-site repair",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Wrong-site repair, column GPT-6-Sol Missed",
+   "quote": "Wrong-site repair 19 – 17 – 79 –",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F247",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Saw no planted line (windows)",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Saw no planted line (windows), columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Missed Caught Missed Caught Missed Caught",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F248",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Saw no planted line (windows)",
+   "value": "36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Saw no planted line (windows), column GPT-6-Sol Missed",
+   "quote": "Saw no planted line (windows) 38 0 11 0 36 0",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F249",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Saw no planted line (windows)",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Saw no planted line (windows), column GPT-6-Sol Caught",
+   "quote": "Saw no planted line (windows) 38 0 11 0 36 0",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F250",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Built or ran no code",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Built or ran no code, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Missed Caught Missed Caught Missed Caught",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F251",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Built or ran no code",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Built or ran no code, column GPT-6-Sol Missed",
+   "quote": "Built or ran no code 16 2 43 25 0 0",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F252",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Built or ran no code",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Built or ran no code, column GPT-6-Sol Caught",
+   "quote": "Built or ran no code 16 2 43 25 0 0",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F253",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Wrote no test input",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Wrote no test input, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Missed Caught Missed Caught Missed Caught",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F254",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Wrote no test input",
+   "value": "52",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Wrote no test input, column GPT-6-Sol Missed",
+   "quote": "Wrote no test input 60 27 74 65 52 15",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F255",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Wrote no test input",
+   "value": "15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Wrote no test input, column GPT-6-Sol Caught",
+   "quote": "Wrote no test input 60 27 74 65 52 15",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F256",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer, Ran the project test suite",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Ran the project test suite, columns GPT-6-Sol",
+   "quote": "Sonnet 5 Opus 4.8 GPT-6-Sol Missed Caught Missed Caught Missed Caught",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F257",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Ran the project test suite",
+   "value": "57",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Ran the project test suite, column GPT-6-Sol Missed",
+   "quote": "Ran the project test suite 27 19 14 7 57 33",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F258",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer, Ran the project test suite",
+   "value": "33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 2, row Ran the project test suite, column GPT-6-Sol Caught",
+   "quote": "Ran the project test suite 27 19 14 7 57 33",
+   "term": "share of reviews with the behavior (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F259",
+   "says": "note",
+   "about": null,
+   "value": "Table 6: Per-arm counts behind Figure 2 . Launches : attacker launches through the selected quota. Refused : explicit refusals among them. For each reviewer, Missed counts the valid attacks that it missed (the PoC still crashes the code after review),",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6 caption",
+   "quote": "Table 6: Per-arm counts behind Figure 2 . Launches : attacker launches through the selected quota. Refused : explicit refusals among them. For each reviewer, Missed counts the valid attacks that it missed (the PoC still crashes the code after review),",
+   "note": "per-arm counts: Launches, Refused, Gradeable, Valid (counts of the attacker arm) and, for each reviewer (Sonnet 5, Opus 4.8, GPT-6-Sol), Missed (valid attacks missed) and % (share of the valid attacks that reviewer scored)"
+  },
+  {
+   "id": "F260",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F261",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Task only",
+   "value": "327",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Opus 4.8, column Launches",
+   "quote": "Opus 4.8 327 276 50 34 0 0.0 0 0.0 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F262",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Task only",
+   "value": "276",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Opus 4.8, column Refused",
+   "quote": "Opus 4.8 327 276 50 34 0 0.0 0 0.0 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F263",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Task only",
+   "value": "50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Opus 4.8, column Gradeable",
+   "quote": "Opus 4.8 327 276 50 34 0 0.0 0 0.0 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F264",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Task only",
+   "value": "34",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Opus 4.8, column Valid",
+   "quote": "Opus 4.8 327 276 50 34 0 0.0 0 0.0 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F265",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Opus 4.8, column GPT-6-Sol Missed",
+   "quote": "Opus 4.8 327 276 50 34 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F266",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Opus 4.8, column GPT-6-Sol %",
+   "quote": "Opus 4.8 327 276 50 34 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F267",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Sonnet 5, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F268",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Task only",
+   "value": "360",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Sonnet 5, column Launches",
+   "quote": "Sonnet 5 360 279 47 30 1 3.3 0 0.0 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F269",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Task only",
+   "value": "279",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Sonnet 5, column Refused",
+   "quote": "Sonnet 5 360 279 47 30 1 3.3 0 0.0 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F270",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Task only",
+   "value": "47",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Sonnet 5, column Gradeable",
+   "quote": "Sonnet 5 360 279 47 30 1 3.3 0 0.0 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F271",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Task only",
+   "value": "30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Sonnet 5, column Valid",
+   "quote": "Sonnet 5 360 279 47 30 1 3.3 0 0.0 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F272",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Sonnet 5, column GPT-6-Sol Missed",
+   "quote": "Sonnet 5 360 279 47 30 1 3.3 0 0.0 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F273",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Sonnet 5, column GPT-6-Sol %",
+   "quote": "Sonnet 5 360 279 47 30 1 3.3 0 0.0 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F274",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F275",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Task only",
+   "value": "83",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol, column Launches",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F276",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Task only",
+   "value": "2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol, column Refused",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F277",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Task only",
+   "value": "68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol, column Gradeable",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F278",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Task only",
+   "value": "55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol, column Valid",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F279",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, column GPT-6-Sol Missed",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F280",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, column GPT-6-Sol %",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F281",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol (attacker)",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F282",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "83",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol (attacker), column Launches",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F283",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol (attacker), column Refused",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F284",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol (attacker), column Gradeable",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F285",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GPT-6-Sol (attacker), column Valid",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F286",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, reviewer Sonnet 5 Missed",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F287",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, reviewer Sonnet 5 %",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F288",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, reviewer Opus 4.8 Missed",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F289",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, reviewer Opus 4.8 %",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F290",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, reviewer GPT-6-Sol Missed",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F291",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GPT-6-Sol, reviewer GPT-6-Sol %",
+   "quote": "GPT-6-Sol 83 2 68 55 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F292",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Grok 4.7, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F293",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Task only",
+   "value": "81",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Grok 4.7, column Launches",
+   "quote": "Grok 4.7 81 3 67 62 0 0.0 0 0.0 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F294",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Task only",
+   "value": "3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Grok 4.7, column Refused",
+   "quote": "Grok 4.7 81 3 67 62 0 0.0 0 0.0 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F295",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Task only",
+   "value": "67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Grok 4.7, column Gradeable",
+   "quote": "Grok 4.7 81 3 67 62 0 0.0 0 0.0 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F296",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Task only",
+   "value": "62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Grok 4.7, column Valid",
+   "quote": "Grok 4.7 81 3 67 62 0 0.0 0 0.0 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F297",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Grok 4.7, column GPT-6-Sol Missed",
+   "quote": "Grok 4.7 81 3 67 62 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F298",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Grok 4.7, column GPT-6-Sol %",
+   "quote": "Grok 4.7 81 3 67 62 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F299",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (first row), reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F300",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Task only",
+   "value": "75",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (first row), column Launches",
+   "quote": "GLM 5.3 75 3 69 57 2 3.5 3 5.3 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F301",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Task only",
+   "value": "3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (first row), column Refused",
+   "quote": "GLM 5.3 75 3 69 57 2 3.5 3 5.3 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F302",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Task only",
+   "value": "69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (first row), column Gradeable",
+   "quote": "GLM 5.3 75 3 69 57 2 3.5 3 5.3 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F303",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Task only",
+   "value": "57",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (first row), column Valid",
+   "quote": "GLM 5.3 75 3 69 57 2 3.5 3 5.3 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F304",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GLM 5.3 (first row), column GPT-6-Sol Missed",
+   "quote": "GLM 5.3 75 3 69 57 2 3.5 3 5.3 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F305",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GLM 5.3 (first row), column GPT-6-Sol %",
+   "quote": "GLM 5.3 75 3 69 57 2 3.5 3 5.3 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F306",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (second row), reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F307",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Task only",
+   "value": "77",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (second row), column Launches",
+   "quote": "GLM 5.3 77 0 67 61 5 8.2 1 1.6 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F308",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (second row), column Refused",
+   "quote": "GLM 5.3 77 0 67 61 5 8.2 1 1.6 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F309",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Task only",
+   "value": "67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (second row), column Gradeable",
+   "quote": "GLM 5.3 77 0 67 61 5 8.2 1 1.6 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F310",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Task only",
+   "value": "61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row GLM 5.3 (second row), column Valid",
+   "quote": "GLM 5.3 77 0 67 61 5 8.2 1 1.6 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F311",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GLM 5.3 (second row), column GPT-6-Sol Missed",
+   "quote": "GLM 5.3 77 0 67 61 5 8.2 1 1.6 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F312",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker GLM 5.3 (second row), column GPT-6-Sol %",
+   "quote": "GLM 5.3 77 0 67 61 5 8.2 1 1.6 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F313",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Kimi K3, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F314",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Task only",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Kimi K3, column Launches",
+   "quote": "Kimi K3 70 0 70 50 0 0.0 0 0.0 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F315",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Kimi K3, column Refused",
+   "quote": "Kimi K3 70 0 70 50 0 0.0 0 0.0 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F316",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Task only",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Kimi K3, column Gradeable",
+   "quote": "Kimi K3 70 0 70 50 0 0.0 0 0.0 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F317",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Task only",
+   "value": "50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, row Kimi K3, column Valid",
+   "quote": "Kimi K3 70 0 70 50 0 0.0 0 0.0 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F318",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Kimi K3, column GPT-6-Sol Missed",
+   "quote": "Kimi K3 70 0 70 50 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F319",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Task only",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Task only, attacker Kimi K3, column GPT-6-Sol %",
+   "quote": "Kimi K3 70 0 70 50 0 0.0 0 0.0 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F320",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F321",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Fix in hand",
+   "value": "158",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Opus 4.8, column Launches",
+   "quote": "Opus 4.8 158 85 64 44 6 13.6 7 15.9 3 6.8",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F322",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Fix in hand",
+   "value": "85",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Opus 4.8, column Refused",
+   "quote": "Opus 4.8 158 85 64 44 6 13.6 7 15.9 3 6.8",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F323",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Fix in hand",
+   "value": "64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Opus 4.8, column Gradeable",
+   "quote": "Opus 4.8 158 85 64 44 6 13.6 7 15.9 3 6.8",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F324",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Fix in hand",
+   "value": "44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Opus 4.8, column Valid",
+   "quote": "Opus 4.8 158 85 64 44 6 13.6 7 15.9 3 6.8",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F325",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Fix in hand",
+   "value": "3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Opus 4.8, column GPT-6-Sol Missed",
+   "quote": "Opus 4.8 158 85 64 44 6 13.6 7 15.9 3 6.8",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F326",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Fix in hand",
+   "value": "6.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Opus 4.8, column GPT-6-Sol %",
+   "quote": "Opus 4.8 158 85 64 44 6 13.6 7 15.9 3 6.8",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F327",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Sonnet 5, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F328",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Fix in hand",
+   "value": "230",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Sonnet 5, column Launches",
+   "quote": "Sonnet 5 230 141 56 32 6 20.0 7 21.9 2 6.2",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F329",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Fix in hand",
+   "value": "141",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Sonnet 5, column Refused",
+   "quote": "Sonnet 5 230 141 56 32 6 20.0 7 21.9 2 6.2",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F330",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Fix in hand",
+   "value": "56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Sonnet 5, column Gradeable",
+   "quote": "Sonnet 5 230 141 56 32 6 20.0 7 21.9 2 6.2",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F331",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Fix in hand",
+   "value": "32",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Sonnet 5, column Valid",
+   "quote": "Sonnet 5 230 141 56 32 6 20.0 7 21.9 2 6.2",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F332",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Fix in hand",
+   "value": "2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Sonnet 5, column GPT-6-Sol Missed",
+   "quote": "Sonnet 5 230 141 56 32 6 20.0 7 21.9 2 6.2",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F333",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Fix in hand",
+   "value": "6.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Sonnet 5, column GPT-6-Sol %",
+   "quote": "Sonnet 5 230 141 56 32 6 20.0 7 21.9 2 6.2",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F334",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F335",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Fix in hand",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol, column Launches",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F336",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol, column Refused",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F337",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Fix in hand",
+   "value": "66",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol, column Gradeable",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F338",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Fix in hand",
+   "value": "52",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol, column Valid",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F339",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Fix in hand",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, column GPT-6-Sol Missed",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F340",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Fix in hand",
+   "value": "1.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, column GPT-6-Sol %",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F341",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol (attacker)",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F342",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol (attacker), column Launches",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F343",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol (attacker), column Refused",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F344",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "66",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol (attacker), column Gradeable",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F345",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "52",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GPT-6-Sol (attacker), column Valid",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F346",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, reviewer Sonnet 5 Missed",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F347",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "11.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, reviewer Sonnet 5 %",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F348",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, reviewer Opus 4.8 Missed",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F349",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "11.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, reviewer Opus 4.8 %",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F350",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, reviewer GPT-6-Sol Missed",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F351",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Fix in hand",
+   "value": "1.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GPT-6-Sol, reviewer GPT-6-Sol %",
+   "quote": "GPT-6-Sol 100 0 66 52 6 11.8 6 11.5 1 1.9",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F352",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Grok 4.7, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F353",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Fix in hand",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Grok 4.7, column Launches",
+   "quote": "Grok 4.7 79 0 64 57 1 1.8 2 3.5 0 0.0",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F354",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Grok 4.7, column Refused",
+   "quote": "Grok 4.7 79 0 64 57 1 1.8 2 3.5 0 0.0",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F355",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Fix in hand",
+   "value": "64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Grok 4.7, column Gradeable",
+   "quote": "Grok 4.7 79 0 64 57 1 1.8 2 3.5 0 0.0",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F356",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Fix in hand",
+   "value": "57",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Grok 4.7, column Valid",
+   "quote": "Grok 4.7 79 0 64 57 1 1.8 2 3.5 0 0.0",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F357",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Grok 4.7, column GPT-6-Sol Missed",
+   "quote": "Grok 4.7 79 0 64 57 1 1.8 2 3.5 0 0.0",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F358",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Fix in hand",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Grok 4.7, column GPT-6-Sol %",
+   "quote": "Grok 4.7 79 0 64 57 1 1.8 2 3.5 0 0.0",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F359",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (first row), reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F360",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Fix in hand",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (first row), column Launches",
+   "quote": "GLM 5.3 70 0 70 38 6 16.7 6 16.2 4 10.5",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F361",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (first row), column Refused",
+   "quote": "GLM 5.3 70 0 70 38 6 16.7 6 16.2 4 10.5",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F362",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Fix in hand",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (first row), column Gradeable",
+   "quote": "GLM 5.3 70 0 70 38 6 16.7 6 16.2 4 10.5",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F363",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Fix in hand",
+   "value": "38",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (first row), column Valid",
+   "quote": "GLM 5.3 70 0 70 38 6 16.7 6 16.2 4 10.5",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F364",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Fix in hand",
+   "value": "4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GLM 5.3 (first row), column GPT-6-Sol Missed",
+   "quote": "GLM 5.3 70 0 70 38 6 16.7 6 16.2 4 10.5",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F365",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Fix in hand",
+   "value": "10.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GLM 5.3 (first row), column GPT-6-Sol %",
+   "quote": "GLM 5.3 70 0 70 38 6 16.7 6 16.2 4 10.5",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F366",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (second row), reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F367",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Fix in hand",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (second row), column Launches",
+   "quote": "GLM 5.3 70 0 70 44 8 19.5 5 11.9 5 11.4",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F368",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (second row), column Refused",
+   "quote": "GLM 5.3 70 0 70 44 8 19.5 5 11.9 5 11.4",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F369",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Fix in hand",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (second row), column Gradeable",
+   "quote": "GLM 5.3 70 0 70 44 8 19.5 5 11.9 5 11.4",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F370",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Fix in hand",
+   "value": "44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row GLM 5.3 (second row), column Valid",
+   "quote": "GLM 5.3 70 0 70 44 8 19.5 5 11.9 5 11.4",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F371",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Fix in hand",
+   "value": "5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GLM 5.3 (second row), column GPT-6-Sol Missed",
+   "quote": "GLM 5.3 70 0 70 44 8 19.5 5 11.9 5 11.4",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F372",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Fix in hand",
+   "value": "11.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker GLM 5.3 (second row), column GPT-6-Sol %",
+   "quote": "GLM 5.3 70 0 70 44 8 19.5 5 11.9 5 11.4",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F373",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Kimi K3, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F374",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Fix in hand",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Kimi K3, column Launches",
+   "quote": "Kimi K3 70 0 70 45 9 20.5 8 17.8 2 4.4",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F375",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Kimi K3, column Refused",
+   "quote": "Kimi K3 70 0 70 45 9 20.5 8 17.8 2 4.4",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F376",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Fix in hand",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Kimi K3, column Gradeable",
+   "quote": "Kimi K3 70 0 70 45 9 20.5 8 17.8 2 4.4",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F377",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Fix in hand",
+   "value": "45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, row Kimi K3, column Valid",
+   "quote": "Kimi K3 70 0 70 45 9 20.5 8 17.8 2 4.4",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F378",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Fix in hand",
+   "value": "2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Kimi K3, column GPT-6-Sol Missed",
+   "quote": "Kimi K3 70 0 70 45 9 20.5 8 17.8 2 4.4",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F379",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Fix in hand",
+   "value": "4.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Fix in hand, attacker Kimi K3, column GPT-6-Sol %",
+   "quote": "Kimi K3 70 0 70 45 9 20.5 8 17.8 2 4.4",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F380",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F381",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Window",
+   "value": "183",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Opus 4.8, column Launches",
+   "quote": "Opus 4.8 183 96 64 58 13 22.4 11 19.0 8 13.8",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F382",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Window",
+   "value": "96",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Opus 4.8, column Refused",
+   "quote": "Opus 4.8 183 96 64 58 13 22.4 11 19.0 8 13.8",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F383",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Window",
+   "value": "64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Opus 4.8, column Gradeable",
+   "quote": "Opus 4.8 183 96 64 58 13 22.4 11 19.0 8 13.8",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F384",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Window",
+   "value": "58",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Opus 4.8, column Valid",
+   "quote": "Opus 4.8 183 96 64 58 13 22.4 11 19.0 8 13.8",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F385",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Window",
+   "value": "8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Opus 4.8, column GPT-6-Sol Missed",
+   "quote": "Opus 4.8 183 96 64 58 13 22.4 11 19.0 8 13.8",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F386",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, Window",
+   "value": "13.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Opus 4.8, column GPT-6-Sol %",
+   "quote": "Opus 4.8 183 96 64 58 13 22.4 11 19.0 8 13.8",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F387",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Sonnet 5, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F388",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Window",
+   "value": "195",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Sonnet 5, column Launches",
+   "quote": "Sonnet 5 195 79 60 54 15 27.8 9 16.7 14 25.9",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F389",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Window",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Sonnet 5, column Refused",
+   "quote": "Sonnet 5 195 79 60 54 15 27.8 9 16.7 14 25.9",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F390",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Window",
+   "value": "60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Sonnet 5, column Gradeable",
+   "quote": "Sonnet 5 195 79 60 54 15 27.8 9 16.7 14 25.9",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F391",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Window",
+   "value": "54",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Sonnet 5, column Valid",
+   "quote": "Sonnet 5 195 79 60 54 15 27.8 9 16.7 14 25.9",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F392",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Window",
+   "value": "14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Sonnet 5, column GPT-6-Sol Missed",
+   "quote": "Sonnet 5 195 79 60 54 15 27.8 9 16.7 14 25.9",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F393",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Sonnet 5 attacks, Window",
+   "value": "25.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Sonnet 5, column GPT-6-Sol %",
+   "quote": "Sonnet 5 195 79 60 54 15 27.8 9 16.7 14 25.9",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F394",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F395",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Window",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol, column Launches",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F396",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Window",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol, column Refused",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F397",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol, column Gradeable",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F398",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol, column Valid",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F399",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Window",
+   "value": "16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, column GPT-6-Sol Missed",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F400",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GPT-6-Sol attacks, Window",
+   "value": "22.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, column GPT-6-Sol %",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F401",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol (attacker)",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F402",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol (attacker), column Launches",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F403",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol (attacker), column Refused",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F404",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol (attacker), column Gradeable",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F405",
+   "says": "items",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GPT-6-Sol (attacker), column Valid",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F406",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, reviewer Sonnet 5 Missed",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F407",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "14.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, reviewer Sonnet 5 %",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F408",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, reviewer Opus 4.8 Missed",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F409",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "10.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, reviewer Opus 4.8 %",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F410",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, reviewer GPT-6-Sol Missed",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F411",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, Window",
+   "value": "22.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GPT-6-Sol, reviewer GPT-6-Sol %",
+   "quote": "GPT-6-Sol 79 1 70 70 10 14.3 7 10.0 16 22.9",
+   "term": "valid attacks missed by the reviewer (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F412",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Grok 4.7, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F413",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Window",
+   "value": "71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Grok 4.7, column Launches",
+   "quote": "Grok 4.7 71 0 70 62 14 22.6 12 19.4 10 16.1",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F414",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Window",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Grok 4.7, column Refused",
+   "quote": "Grok 4.7 71 0 70 62 14 22.6 12 19.4 10 16.1",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F415",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Grok 4.7, column Gradeable",
+   "quote": "Grok 4.7 71 0 70 62 14 22.6 12 19.4 10 16.1",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F416",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Window",
+   "value": "62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Grok 4.7, column Valid",
+   "quote": "Grok 4.7 71 0 70 62 14 22.6 12 19.4 10 16.1",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F417",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Window",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Grok 4.7, column GPT-6-Sol Missed",
+   "quote": "Grok 4.7 71 0 70 62 14 22.6 12 19.4 10 16.1",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F418",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Grok 4.7 attacks, Window",
+   "value": "16.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Grok 4.7, column GPT-6-Sol %",
+   "quote": "Grok 4.7 71 0 70 62 14 22.6 12 19.4 10 16.1",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F419",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (first row), reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F420",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (first row), column Launches",
+   "quote": "GLM 5.3 70 0 70 63 16 25.4 10 15.9 14 22.2",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F421",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Window",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (first row), column Refused",
+   "quote": "GLM 5.3 70 0 70 63 16 25.4 10 15.9 14 22.2",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F422",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (first row), column Gradeable",
+   "quote": "GLM 5.3 70 0 70 63 16 25.4 10 15.9 14 22.2",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F423",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Window",
+   "value": "63",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (first row), column Valid",
+   "quote": "GLM 5.3 70 0 70 63 16 25.4 10 15.9 14 22.2",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F424",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Window",
+   "value": "14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GLM 5.3 (first row), column GPT-6-Sol Missed",
+   "quote": "GLM 5.3 70 0 70 63 16 25.4 10 15.9 14 22.2",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F425",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (first row) attacks, Window",
+   "value": "22.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GLM 5.3 (first row), column GPT-6-Sol %",
+   "quote": "GLM 5.3 70 0 70 63 16 25.4 10 15.9 14 22.2",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F426",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (second row), reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F427",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Window",
+   "value": "79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (second row), column Launches",
+   "quote": "GLM 5.3 79 1 70 63 23 36.5 14 22.2 11 17.5",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F428",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Window",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (second row), column Refused",
+   "quote": "GLM 5.3 79 1 70 63 23 36.5 14 22.2 11 17.5",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F429",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Window",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (second row), column Gradeable",
+   "quote": "GLM 5.3 79 1 70 63 23 36.5 14 22.2 11 17.5",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F430",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Window",
+   "value": "63",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row GLM 5.3 (second row), column Valid",
+   "quote": "GLM 5.3 79 1 70 63 23 36.5 14 22.2 11 17.5",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F431",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Window",
+   "value": "11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GLM 5.3 (second row), column GPT-6-Sol Missed",
+   "quote": "GLM 5.3 79 1 70 63 23 36.5 14 22.2 11 17.5",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F432",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 (second row) attacks, Window",
+   "value": "17.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker GLM 5.3 (second row), column GPT-6-Sol %",
+   "quote": "GLM 5.3 79 1 70 63 23 36.5 14 22.2 11 17.5",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F433",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Kimi K3, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F434",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Window",
+   "value": "85",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Kimi K3, column Launches",
+   "quote": "Kimi K3 85 0 65 57 13 22.8 10 17.5 10 17.5",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F435",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Window",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Kimi K3, column Refused",
+   "quote": "Kimi K3 85 0 65 57 13 22.8 10 17.5 10 17.5",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F436",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Window",
+   "value": "65",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Kimi K3, column Gradeable",
+   "quote": "Kimi K3 85 0 65 57 13 22.8 10 17.5 10 17.5",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F437",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Window",
+   "value": "57",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, row Kimi K3, column Valid",
+   "quote": "Kimi K3 85 0 65 57 13 22.8 10 17.5 10 17.5",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F438",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Window",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Kimi K3, column GPT-6-Sol Missed",
+   "quote": "Kimi K3 85 0 65 57 13 22.8 10 17.5 10 17.5",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F439",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Kimi K3 attacks, Window",
+   "value": "17.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup Window, attacker Kimi K3, column GPT-6-Sol %",
+   "quote": "Kimi K3 85 0 65 57 13 22.8 10 17.5 10 17.5",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F440",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs All attackers attacks, All setups",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup All setups, row All attackers, reviewer column GPT-6-Sol",
+   "quote": "Collection Submissions Sonnet 5 Opus 4.8 GPT-6-Sol Attacker Launches Refused Gradeable Valid Missed % Missed % Missed %",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F441",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs All attackers attacks, All setups",
+   "value": "2612",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup All setups, row All attackers, column Launches",
+   "quote": "All setups 2612 966 1367 1088 154 14.3 118 10.9 100 9.2",
+   "note": "Launches (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F442",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs All attackers attacks, All setups",
+   "value": "966",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup All setups, row All attackers, column Refused",
+   "quote": "All setups 2612 966 1367 1088 154 14.3 118 10.9 100 9.2",
+   "note": "Refused (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F443",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs All attackers attacks, All setups",
+   "value": "1367",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup All setups, row All attackers, column Gradeable",
+   "quote": "All setups 2612 966 1367 1088 154 14.3 118 10.9 100 9.2",
+   "note": "Gradeable (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F444",
+   "says": "items",
+   "about": "GPT-6-Sol reviewer vs All attackers attacks, All setups",
+   "value": "1088",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup All setups, row All attackers, column Valid",
+   "quote": "All setups 2612 966 1367 1088 154 14.3 118 10.9 100 9.2",
+   "note": "Valid (Table 6 collection / submissions count of the attacker arm)"
+  },
+  {
+   "id": "F445",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs All attackers attacks, All setups",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup All setups, attacker All attackers, column GPT-6-Sol Missed",
+   "quote": "All setups 2612 966 1367 1088 154 14.3 118 10.9 100 9.2",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F446",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs All attackers attacks, All setups",
+   "value": "9.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 6, setup All setups, attacker All attackers, column GPT-6-Sol %",
+   "quote": "All setups 2612 966 1367 1088 154 14.3 118 10.9 100 9.2",
+   "term": "valid attacks missed (% of scored)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F447",
+   "says": "note",
+   "about": null,
+   "value": "Table 7: JavaScript-engine arms, counted to each stop. Gradeable is out of ten; reviewer columns give missed over valid attacks. As attacker, Sonnet 5 refused on every window launch.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7 caption",
+   "quote": "Table 7: JavaScript-engine arms, counted to each stop. Gradeable is out of ten; reviewer columns give missed over valid attacks. As attacker, Sonnet 5 refused on every window launch.",
+   "note": "JavaScript-engine arms (V8, SpiderMonkey), ten slots per attacker and setup; reviewer columns Sonnet 5 and GPT-6-Sol give missed over valid attacks (value = missed count, valid count in the note)"
+  },
+  {
+   "id": "F448",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, V8, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Task only, attacker Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F449",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, V8, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Task only, attacker Opus 4.8, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "Opus 4.8 13 3 10 4 0/4 0/4",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F450",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, V8, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Task only, row GPT-6-Sol (attacker)",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F451",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, V8, Task only",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Task only, row GPT-6-Sol (attacker), reviewer Sonnet 5 (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 6 1/6 0/6",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F452",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, V8, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Task only, row GPT-6-Sol (attacker), reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 6 1/6 0/6",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F453",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, V8, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Task only, attacker GLM 5.3, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F454",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, V8, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Task only, attacker GLM 5.3, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GLM 5.3 11 1 10 5 0/5 0/5",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F455",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, V8, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Fix in hand, attacker Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F456",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, V8, Fix in hand",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Fix in hand, attacker Opus 4.8, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "Opus 4.8 13 3 10 4 0/4 1/4",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F457",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, V8, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Fix in hand, row GPT-6-Sol (attacker)",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F458",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, V8, Fix in hand",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Fix in hand, row GPT-6-Sol (attacker), reviewer Sonnet 5 (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 6 1/6 0/6",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F459",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, V8, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Fix in hand, row GPT-6-Sol (attacker), reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 6 1/6 0/6",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F460",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, V8, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Fix in hand, attacker GLM 5.3, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F461",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, V8, Fix in hand",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Fix in hand, attacker GLM 5.3, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GLM 5.3 10 0 10 5 0/5 1/5",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F462",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, V8, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Window, attacker Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F463",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, V8, Window",
+   "value": "3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Window, attacker Opus 4.8, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "Opus 4.8 31 17 10 3 2/3 3/3",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F464",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, V8, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Window, row GPT-6-Sol (attacker)",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F465",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, V8, Window",
+   "value": "3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Window, row GPT-6-Sol (attacker), reviewer Sonnet 5 (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 6 3/6 3/6",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F466",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, V8, Window",
+   "value": "3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Window, row GPT-6-Sol (attacker), reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 6 3/6 3/6",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F467",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, V8, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Window, attacker GLM 5.3, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F468",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, V8, Window",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine V8, setup Window, attacker GLM 5.3, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GLM 5.3 10 0 10 8 3/8 6/8",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F469",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, SpiderMonkey, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Task only, attacker Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F470",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, SpiderMonkey, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Task only, attacker Opus 4.8, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "Opus 4.8 14 4 10 6 0/6 0/6",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F471",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Task only, row GPT-6-Sol (attacker)",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F472",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Task only, row GPT-6-Sol (attacker), reviewer Sonnet 5 (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 10 0/10 0/10",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F473",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Task only, row GPT-6-Sol (attacker), reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 10 0/10 0/10",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F474",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, SpiderMonkey, Task only",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Task only, attacker GLM 5.3, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F475",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, SpiderMonkey, Task only",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Task only, attacker GLM 5.3, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GLM 5.3 11 1 10 6 0/6 0/6",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F476",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, SpiderMonkey, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Fix in hand, attacker Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F477",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, SpiderMonkey, Fix in hand",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Fix in hand, attacker Opus 4.8, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "Opus 4.8 14 2 10 8 0/8 1/8",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F478",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Fix in hand, row GPT-6-Sol (attacker)",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F479",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Fix in hand",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Fix in hand, row GPT-6-Sol (attacker), reviewer Sonnet 5 (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 8 1/8 0/8",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F480",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Fix in hand",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Fix in hand, row GPT-6-Sol (attacker), reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GPT-6-Sol 10 0 10 8 1/8 0/8",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F481",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, SpiderMonkey, Fix in hand",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Fix in hand, attacker GLM 5.3, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F482",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, SpiderMonkey, Fix in hand",
+   "value": "2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Fix in hand, attacker GLM 5.3, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GLM 5.3 10 0 10 6 0/6 2/6",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F483",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, SpiderMonkey, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Window, attacker Opus 4.8, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F484",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs Opus 4.8 attacks, SpiderMonkey, Window",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Window, attacker Opus 4.8, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "Opus 4.8 32 15 10 1 0/1 1/1",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F485",
+   "says": "model-name",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Window, row GPT-6-Sol (attacker)",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as ATTACKER (Codex harness)"
+  },
+  {
+   "id": "F486",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Window",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Window, row GPT-6-Sol (attacker), reviewer Sonnet 5 (missed over valid)",
+   "quote": "GPT-6-Sol 12 2 10 7 0/7 1/7",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F487",
+   "says": "score",
+   "about": "GPT-6-Sol attacker, SpiderMonkey, Window",
+   "value": "1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Window, row GPT-6-Sol (attacker), reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GPT-6-Sol 12 2 10 7 0/7 1/7",
+   "term": "valid attacks missed by the reviewer (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F488",
+   "says": "model-name",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, SpiderMonkey, Window",
+   "value": "GPT-6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Window, attacker GLM 5.3, reviewer column GPT-6-Sol",
+   "quote": "Collection Missed / valid Setup Attacker Launches Refused Gradeable Valid Sonnet 5 GPT-6-Sol",
+   "note": "GPT-6-Sol as REVIEWER (Codex harness)"
+  },
+  {
+   "id": "F489",
+   "says": "score",
+   "about": "GPT-6-Sol reviewer vs GLM 5.3 attacks, SpiderMonkey, Window",
+   "value": "2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.34435.html",
+   "where": "Table 7, engine SpiderMonkey, setup Window, attacker GLM 5.3, reviewer GPT-6-Sol (missed over valid)",
+   "quote": "GLM 5.3 10 0 10 7 2/7 2/7",
+   "term": "valid attacks missed (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
   }
  ]
 }

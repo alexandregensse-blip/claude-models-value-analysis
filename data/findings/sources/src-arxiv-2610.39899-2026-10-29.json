@@ -1,0 +1,915 @@
+{
+ "id": "src-arxiv-2610.39899-2026-10-29",
+ "publisher": "arxiv-2610.39899",
+ "urls": [
+  "https://arxiv.org/abs/2610.39899"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html": "0fc30e6e1e76c8cebf6807c8647c1edd628c3e2f9a7564f116bf414fc823bf5f"
+ },
+ "harvested_at": "2026-11-09T15:16:29Z",
+ "published": {
+  "value": "2026-10-29",
+  "where": "arXiv stamp of the saved HTML (v1)",
+  "quote": "arXiv:2610.39899v1 [cs.SE] 29 Oct 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). ExploreRepair (vulnerability repair with exploration agents). GPT-5.6-Luna column of Table 3 (11 approaches on 169 PatchEval vulnerabilities: RSR with the OFR in parentheses, one measure per number), Table 4 (aggregation methods on PatchEval; the complete ExploreRepair row repeats Table 3 and is kept as a note) and Table 5 (35 VulnLoc+ C/C++ vulnerabilities: RSR only, OFR not measurable). Each row is a SYSTEM measure (GPT-5.6-Luna inside a repair approach; the row 'Codex' is GPT-5.6-Luna in the Codex agent). RSR = Repair Success Rate (patch passes the PoV test and the repository unit tests), OFR = Overfitting Rate (patches that pass the PoV but fail the unit tests), as percentages of the evaluated CVEs; OFR lower is better. GPT-5.6-Luna through OpenRouter; effort not written. The DeepSeek-V4.1-Flash column is not OpenAI and not converted.",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.39899",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "route",
+   "about": "GPT-5.6-Luna",
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "section 5.6 Implementation and Hardware",
+   "quote": "Our experiments use OpenAI GPT-5.6-Luna and DeepSeek-V4.1-Flash through OpenRouter.",
+   "term": "openrouter",
+   "written": "OpenRouter"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "We report Repair Success Rate (RSR) and Overfitting Rate (OFR) as percentages: RSR = S N × 100 , OFR = P − S N × 100 .",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "section 5.5 (metrics)",
+   "quote": "We report Repair Success Rate (RSR) and Overfitting Rate (OFR) as percentages: RSR = S N × 100 , OFR = P − S N × 100 .",
+   "note": "S = successful repairs, P = plausible patches (pass the PoV), N = evaluated CVEs; OFR = share of all evaluated CVEs whose patches pass the PoV but fail the repository unit tests"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "Table 3: Repair outcomes on 169 PatchEval vulnerabilities. Each entry reports Repair Success Rate (RSR) followed by Overfitting Rate (OFR) in parentheses.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 caption",
+   "quote": "Table 3: Repair outcomes on 169 PatchEval vulnerabilities. Each entry reports Repair Success Rate (RSR) followed by Overfitting Rate (OFR) in parentheses.",
+   "note": "repair outcomes on 169 PatchEval vulnerabilities; RSR (higher is better) followed by OFR (lower is better) in parentheses"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "Table 4: Effectiveness of different aggregation methods on PatchEval. Each entry reports Repair Success Rate (RSR) followed by Overfitting Rate (OFR) in parentheses.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4 caption",
+   "quote": "Table 4: Effectiveness of different aggregation methods on PatchEval. Each entry reports Repair Success Rate (RSR) followed by Overfitting Rate (OFR) in parentheses.",
+   "note": "aggregation methods on PatchEval (ablation using the same exploration-agent outputs); RSR then OFR in parentheses"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Table 5: Repair Success Rate (RSR) on 35 VulnLoc+ C/C++ vulnerabilities. OFR cannot be measured because this benchmark has no unit tests. LoopRepair + PoV receives the ground-truth PoV while the other configurations do not.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5 caption",
+   "quote": "Table 5: Repair Success Rate (RSR) on 35 VulnLoc+ C/C++ vulnerabilities. OFR cannot be measured because this benchmark has no unit tests. LoopRepair + PoV receives the ground-truth PoV while the other configurations do not.",
+   "note": "RSR on 35 VulnLoc+ C/C++ vulnerabilities; OFR cannot be measured (no unit tests); LoopRepair + PoV receives the ground-truth PoV, the others do not"
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": "GPT-5.6-Luna + Codex",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "section 5 (baselines)",
+   "quote": "We run Codex with GPT-5.6-Luna and DeepSeek-V4.1-Flash.",
+   "written": "Codex",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + IntentFix (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "GPT-5.6-Luna + IntentFix (PatchEval (169 vulnerabilities))",
+   "value": "4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row IntentFix, column GPT-5.6-Luna RSR",
+   "quote": "IntentFix 4.7% (1.2%) 9.5% (1.2%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "4.7%"
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "GPT-5.6-Luna + IntentFix (PatchEval (169 vulnerabilities))",
+   "value": "1.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row IntentFix, column GPT-5.6-Luna OFR",
+   "quote": "IntentFix 4.7% (1.2%) 9.5% (1.2%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "1.2%"
+  },
+  {
+   "id": "F10",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + EvoRepair (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "GPT-5.6-Luna + EvoRepair (PatchEval (169 vulnerabilities))",
+   "value": "23.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row EvoRepair, column GPT-5.6-Luna RSR",
+   "quote": "EvoRepair 23.7% (3.0%) 46.2% (1.8%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "23.7%"
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "GPT-5.6-Luna + EvoRepair (PatchEval (169 vulnerabilities))",
+   "value": "3.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row EvoRepair, column GPT-5.6-Luna OFR",
+   "quote": "EvoRepair 23.7% (3.0%) 46.2% (1.8%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "3.0%"
+  },
+  {
+   "id": "F13",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + LLM (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "GPT-5.6-Luna + LLM (PatchEval (169 vulnerabilities))",
+   "value": "10.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row LLM, column GPT-5.6-Luna RSR",
+   "quote": "LLM 10.7% (1.2%) 23.7% (2.4%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "10.7%"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "GPT-5.6-Luna + LLM (PatchEval (169 vulnerabilities))",
+   "value": "1.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row LLM, column GPT-5.6-Luna OFR",
+   "quote": "LLM 10.7% (1.2%) 23.7% (2.4%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "1.2%"
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Multi-Agent (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Multi-Agent (PatchEval (169 vulnerabilities))",
+   "value": "30.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Multi-Agent, column GPT-5.6-Luna RSR",
+   "quote": "Multi-Agent 30.2% (1.2%) 55.6% (1.2%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "30.2%"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Multi-Agent (PatchEval (169 vulnerabilities))",
+   "value": "1.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Multi-Agent, column GPT-5.6-Luna OFR",
+   "quote": "Multi-Agent 30.2% (1.2%) 55.6% (1.2%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "1.2%"
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Single Agent (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Single Agent (PatchEval (169 vulnerabilities))",
+   "value": "32.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Single Agent, column GPT-5.6-Luna RSR",
+   "quote": "Single Agent 32.5% (0.6%) 57.4% (0.6%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "32.5%"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Single Agent (PatchEval (169 vulnerabilities))",
+   "value": "0.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Single Agent, column GPT-5.6-Luna OFR",
+   "quote": "Single Agent 32.5% (0.6%) 57.4% (0.6%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.6%"
+  },
+  {
+   "id": "F22",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Codex (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Codex (PatchEval (169 vulnerabilities))",
+   "value": "34.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Codex, column GPT-5.6-Luna RSR",
+   "quote": "Codex 34.3% (0.6%) 43.8% (0.6%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "34.3%"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Codex (PatchEval (169 vulnerabilities))",
+   "value": "0.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Codex, column GPT-5.6-Luna OFR",
+   "quote": "Codex 34.3% (0.6%) 43.8% (0.6%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.6%"
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Structural (Graph) (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Structural (Graph) (PatchEval (169 vulnerabilities))",
+   "value": "36.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Structural (Graph), column GPT-5.6-Luna RSR",
+   "quote": "Structural (Graph) 36.1% (1.2%) 55.6% (0.0%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "36.1%"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Structural (Graph) (PatchEval (169 vulnerabilities))",
+   "value": "1.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Structural (Graph), column GPT-5.6-Luna OFR",
+   "quote": "Structural (Graph) 36.1% (1.2%) 55.6% (0.0%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "1.2%"
+  },
+  {
+   "id": "F28",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Semantic (Intent) (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Semantic (Intent) (PatchEval (169 vulnerabilities))",
+   "value": "29.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Semantic (Intent), column GPT-5.6-Luna RSR",
+   "quote": "Semantic (Intent) 29.6% (0.0%) 59.8% (0.0%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "29.6%"
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Semantic (Intent) (PatchEval (169 vulnerabilities))",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Semantic (Intent), column GPT-5.6-Luna OFR",
+   "quote": "Semantic (Intent) 29.6% (0.0%) 59.8% (0.0%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F31",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Executable (PoV) (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Executable (PoV) (PatchEval (169 vulnerabilities))",
+   "value": "33.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Executable (PoV), column GPT-5.6-Luna RSR",
+   "quote": "Executable (PoV) 33.7% (0.0%) 58.0% (0.6%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "33.7%"
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Executable (PoV) (PatchEval (169 vulnerabilities))",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row Executable (PoV), column GPT-5.6-Luna OFR",
+   "quote": "Executable (PoV) 33.7% (0.0%) 58.0% (0.6%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + 3-in-1 Agent (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "GPT-5.6-Luna + 3-in-1 Agent (PatchEval (169 vulnerabilities))",
+   "value": "30.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row 3-in-1 Agent, column GPT-5.6-Luna RSR",
+   "quote": "3-in-1 Agent 30.8% (1.2%) 53.3% (0.6%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "30.8%"
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "GPT-5.6-Luna + 3-in-1 Agent (PatchEval (169 vulnerabilities))",
+   "value": "1.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row 3-in-1 Agent, column GPT-5.6-Luna OFR",
+   "quote": "3-in-1 Agent 30.8% (1.2%) 53.3% (0.6%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "1.2%"
+  },
+  {
+   "id": "F37",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + ExploreRepair (PatchEval (169 vulnerabilities))",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the repair approach (system = model + approach)"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "GPT-5.6-Luna + ExploreRepair (PatchEval (169 vulnerabilities))",
+   "value": "39.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row ExploreRepair, column GPT-5.6-Luna RSR",
+   "quote": "ExploreRepair 39.6% (0.0%) 71.6% (0.6%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "39.6%"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GPT-5.6-Luna + ExploreRepair (PatchEval (169 vulnerabilities))",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 3, row ExploreRepair, column GPT-5.6-Luna OFR",
+   "quote": "ExploreRepair 39.6% (0.0%) 71.6% (0.6%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F40",
+   "says": "note",
+   "about": null,
+   "value": "ExploreRepair 39.6% (0.0%) 71.6% (0.6%)",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4, row ExploreRepair",
+   "quote": "ExploreRepair 39.6% (0.0%) 71.6% (0.6%)",
+   "note": "the complete ExploreRepair row of Table 4 repeats the Table 3 values (39.6% / 0.0%)"
+  },
+  {
+   "id": "F41",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Lesson Aggregator (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4 header, column GPT-5.6-Luna",
+   "quote": "Configuration GPT-5.6-Luna DeepSeek-V4.1- Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the aggregation configuration"
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Lesson Aggregator (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "39.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4, row Lesson Aggregator, column GPT-5.6-Luna RSR",
+   "quote": "Lesson Aggregator 39.1% (0.6%) 63.9% (0.6%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "39.1%"
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Lesson Aggregator (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "0.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4, row Lesson Aggregator, column GPT-5.6-Luna OFR",
+   "quote": "Lesson Aggregator 39.1% (0.6%) 63.9% (0.6%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.6%"
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Patch Aggregator (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4 header, column GPT-5.6-Luna",
+   "quote": "Configuration GPT-5.6-Luna DeepSeek-V4.1- Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the aggregation configuration"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Patch Aggregator (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "37.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4, row Patch Aggregator, column GPT-5.6-Luna RSR",
+   "quote": "Patch Aggregator 37.3% (0.6%) 69.2% (1.2%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "37.3%"
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Patch Aggregator (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "0.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4, row Patch Aggregator, column GPT-5.6-Luna OFR",
+   "quote": "Patch Aggregator 37.3% (0.6%) 69.2% (1.2%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.6%"
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Direct Lessons + Patches (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4 header, column GPT-5.6-Luna",
+   "quote": "Configuration GPT-5.6-Luna DeepSeek-V4.1- Flash",
+   "note": "the column is headed GPT-5.6-Luna; the row names the aggregation configuration"
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Direct Lessons + Patches (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "37.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4, row Direct Lessons + Patches, column GPT-5.6-Luna RSR",
+   "quote": "Direct Lessons + Patches 37.3% (0.6%) 67.5% (0.6%)",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "37.3%"
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Direct Lessons + Patches (PatchEval (169 vulnerabilities), aggregation ablation)",
+   "value": "0.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 4, row Direct Lessons + Patches, column GPT-5.6-Luna OFR",
+   "quote": "Direct Lessons + Patches 37.3% (0.6%) 67.5% (0.6%)",
+   "term": "Overfitting Rate (OFR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.6%"
+  },
+  {
+   "id": "F50",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + LoopRepair + PoV (VulnLoc+)",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6- Luna DeepSeek-V4",
+   "written": "GPT-5.6- Luna",
+   "note": "the column is headed GPT-5.6- Luna (line-break hyphen); the row names the repair approach"
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "GPT-5.6-Luna + LoopRepair + PoV (VulnLoc+)",
+   "value": "48.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5, row LoopRepair + PoV, column GPT-5.6-Luna RSR",
+   "quote": "LoopRepair + PoV 48.6% 51.4%",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "48.6%"
+  },
+  {
+   "id": "F52",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + LoopRepair (no PoV) (VulnLoc+)",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6- Luna DeepSeek-V4",
+   "written": "GPT-5.6- Luna",
+   "note": "the column is headed GPT-5.6- Luna (line-break hyphen); the row names the repair approach"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "GPT-5.6-Luna + LoopRepair (no PoV) (VulnLoc+)",
+   "value": "31.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5, row LoopRepair (no PoV), column GPT-5.6-Luna RSR",
+   "quote": "LoopRepair (no PoV) 31.4% 45.7%",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "31.4%"
+  },
+  {
+   "id": "F54",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + Single Agent (VulnLoc+)",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6- Luna DeepSeek-V4",
+   "written": "GPT-5.6- Luna",
+   "note": "the column is headed GPT-5.6- Luna (line-break hyphen); the row names the repair approach"
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "GPT-5.6-Luna + Single Agent (VulnLoc+)",
+   "value": "48.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5, row Single Agent, column GPT-5.6-Luna RSR",
+   "quote": "Single Agent 48.6% 57.1%",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "48.6%"
+  },
+  {
+   "id": "F56",
+   "says": "model-name",
+   "about": "GPT-5.6-Luna + ExploreRepair (VulnLoc+)",
+   "value": "GPT-5.6-Luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5 header, column GPT-5.6-Luna",
+   "quote": "Approach GPT-5.6- Luna DeepSeek-V4",
+   "written": "GPT-5.6- Luna",
+   "note": "the column is headed GPT-5.6- Luna (line-break hyphen); the row names the repair approach"
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "GPT-5.6-Luna + ExploreRepair (VulnLoc+)",
+   "value": "51.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html",
+   "where": "Table 5, row ExploreRepair, column GPT-5.6-Luna RSR",
+   "quote": "ExploreRepair 51.4% 62.9%",
+   "term": "Repair Success Rate (RSR) (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "51.4%"
+  }
+ ]
+}

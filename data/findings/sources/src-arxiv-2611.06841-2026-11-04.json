@@ -27,7 +27,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-anthropic",
- "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-1: convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-1: convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-openai-2: convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -1272,6 +1272,450 @@
    "where": "Table 1, row GPT 6 Sol, deployment Qwen3.8 27B INT4, columns @c, TTFT, TPOT",
    "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
    "note": "offered session concurrency c = 2; p90 TTFT 136.48 s; p90 TPOT 49.53 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F96",
+   "says": "effort-label",
+   "about": null,
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "section on setup (agents)",
+   "quote": "All use maximum reasoning effort on Qwen3.5 9B ( 2 × 2\\times L40), Gemma-4-E4B-it (Gemma E4B; 1 × 1\\times L40), and Qwen3.8 27B INT4 ( 2 × 2\\times L40).",
+   "written": "maximum reasoning effort",
+   "note": "DOUBT: the sentence 'All use maximum reasoning effort on Qwen3.5 9B, Gemma-4-E4B-it and Qwen3.8 27B INT4' may refer to the agent runs on each deployment"
+  },
+  {
+   "id": "F97",
+   "says": "harness",
+   "about": null,
+   "value": "Codex (in Harbor)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "section on setup (agents)",
+   "quote": "In Harbor, GPT models use Codex ( OpenAI, 2026a ) , and other models use Claude Code ( Anthropic, 2026a ) .",
+   "term": "codex-cli",
+   "written": "Codex",
+   "note": "the agent harness Harbor runs Codex for the GPT models"
+  },
+  {
+   "id": "F98",
+   "says": "note",
+   "about": null,
+   "value": "time to first token (TTFT) and time per output token (TPOT) within targets",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "introduction / Table 1",
+   "quote": "time to first token (TTFT) and time per output token (TPOT) within targets",
+   "note": "TTFT and TPOT are the p90 latency targets of the serving system the agent built; $/$ = latency-qualified dollars per dollar at the offered concurrency @c"
+  },
+  {
+   "id": "F99",
+   "says": "model-name",
+   "about": "GPT 6 Astra (Gemma E4B)",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Gemma E4B",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83"
+  },
+  {
+   "id": "F100",
+   "says": "score",
+   "about": "GPT 6 Astra (Gemma E4B)",
+   "value": "4.77",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Gemma E4B, column TTFT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F101",
+   "says": "score",
+   "about": "GPT 6 Astra (Gemma E4B)",
+   "value": "94.19",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Gemma E4B, column TPOT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F102",
+   "says": "model-name",
+   "about": "GPT 6 Astra (Qwen3.5 9B)",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.5 9B",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83"
+  },
+  {
+   "id": "F103",
+   "says": "score",
+   "about": "GPT 6 Astra (Qwen3.5 9B)",
+   "value": "15.62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.5 9B, column TTFT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F104",
+   "says": "score",
+   "about": "GPT 6 Astra (Qwen3.5 9B)",
+   "value": "21.94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.5 9B, column TPOT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F105",
+   "says": "model-name",
+   "about": "GPT 6 Astra (Qwen3.8 27B INT4)",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.8 27B INT4",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83"
+  },
+  {
+   "id": "F106",
+   "says": "score",
+   "about": "GPT 6 Astra (Qwen3.8 27B INT4)",
+   "value": "12.96",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.8 27B INT4, column TTFT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F107",
+   "says": "score",
+   "about": "GPT 6 Astra (Qwen3.8 27B INT4)",
+   "value": "42.83",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.8 27B INT4, column TPOT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F108",
+   "says": "model-name",
+   "about": "GPT 6.1 Sol (Gemma E4B)",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Gemma E4B",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31"
+  },
+  {
+   "id": "F109",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Gemma E4B)",
+   "value": "4.43",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Gemma E4B, column TTFT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F110",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Gemma E4B)",
+   "value": "72.45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Gemma E4B, column TPOT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F111",
+   "says": "model-name",
+   "about": "GPT 6.1 Sol (Qwen3.5 9B)",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.5 9B",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31"
+  },
+  {
+   "id": "F112",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Qwen3.5 9B)",
+   "value": "2.71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.5 9B, column TTFT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F113",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Qwen3.5 9B)",
+   "value": "23.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.5 9B, column TPOT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F114",
+   "says": "model-name",
+   "about": "GPT 6.1 Sol (Qwen3.8 27B INT4)",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.8 27B INT4",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31"
+  },
+  {
+   "id": "F115",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Qwen3.8 27B INT4)",
+   "value": "75.66",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.8 27B INT4, column TTFT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F116",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Qwen3.8 27B INT4)",
+   "value": "43.31",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.8 27B INT4, column TPOT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F117",
+   "says": "model-name",
+   "about": "GPT 6 Sol (Gemma E4B)",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Gemma E4B",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53"
+  },
+  {
+   "id": "F118",
+   "says": "score",
+   "about": "GPT 6 Sol (Gemma E4B)",
+   "value": "3.63",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Gemma E4B, column TTFT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F119",
+   "says": "score",
+   "about": "GPT 6 Sol (Gemma E4B)",
+   "value": "110.52",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Gemma E4B, column TPOT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F120",
+   "says": "model-name",
+   "about": "GPT 6 Sol (Qwen3.5 9B)",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.5 9B",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53"
+  },
+  {
+   "id": "F121",
+   "says": "score",
+   "about": "GPT 6 Sol (Qwen3.5 9B)",
+   "value": "13.19",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.5 9B, column TTFT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F122",
+   "says": "score",
+   "about": "GPT 6 Sol (Qwen3.5 9B)",
+   "value": "20.45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.5 9B, column TPOT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F123",
+   "says": "model-name",
+   "about": "GPT 6 Sol (Qwen3.8 27B INT4)",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.8 27B INT4",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53"
+  },
+  {
+   "id": "F124",
+   "says": "score",
+   "about": "GPT 6 Sol (Qwen3.8 27B INT4)",
+   "value": "136.48",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.8 27B INT4, column TTFT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "TTFT p90 (s)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F125",
+   "says": "score",
+   "about": "GPT 6 Sol (Qwen3.8 27B INT4)",
+   "value": "49.53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.8 27B INT4, column TPOT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "TPOT p90 (ms)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
   }
  ]
 }

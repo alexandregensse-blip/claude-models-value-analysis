@@ -1,0 +1,3339 @@
+{
+ "id": "src-arxiv-2610.26770-2026-10-20",
+ "publisher": "arxiv-2610.26770",
+ "urls": [
+  "https://arxiv.org/abs/2610.26770"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html": "d453dcd913b1c2e09c4667df4da263022960d471ece928820a595220d20bd275"
+ },
+ "harvested_at": "2026-11-09T14:49:08Z",
+ "published": {
+  "value": "2026-10-20",
+  "where": "arXiv stamp of the saved HTML (v2)",
+  "quote": "arXiv:2610.26770v2 [cs.LG] 20 Oct 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). HarnessPro (recursive harness self-improvement, cost-aware), GPT-5.5 x Codex block: Table 2 (12 methods: Vanilla, Dynamic Cheatsheet, ReasoningBank, Sleep-time Compute, RHO, Balance, RHO+Iteration, HarnessPro Lite/Medium/Heavy; per benchmark P = pass rate %, C = mean cost $ per test task, T = execution time s; mean and standard deviation for HarnessPro) and Table 3 (ablations: P, C, CoP = cost-of-pass, on Terminal-Bench 2 and SWE-Bench Pro) and Table 4 (the token prices used, GPT-5.5 row). Each row is a SYSTEM (GPT-5.5 inside Codex plus a harness method), not the model alone. One measure per pass-rate cell; the cost C($) is the cost of the measure (mean cost per test task, tokens at the Table 4 prices = list-estimate); T(s) and CoP($) and the standard deviations are kept in the measure notes. Default reasoning effort high on all three benchmarks (written); 'RHO + low reasoning effort' fixes effort at low; 'RHO + dynamic routing' selects effort per task (variable). Route not written (Codex harness). The GLM-5.2 x Claude Code block is not OpenAI and not converted.",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.26770",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "cost-method",
+   "about": null,
+   "value": "using the prices in Table 4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "compute its cost c h ​ ( x ) c_{h}(x) using the prices in Table 4 (Appendix A )",
+   "term": "tokens×list",
+   "note": "cost computed from token counts (uncached input, cached input, output) at the prices of Table 4"
+  },
+  {
+   "id": "F2",
+   "says": "cost-basis",
+   "about": null,
+   "value": "average cost per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "list-estimate",
+   "note": "average cost per test task, from token counts at list prices"
+  },
+  {
+   "id": "F3",
+   "says": "price-table",
+   "about": null,
+   "value": "5.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 4, row GPT-5.5 (<272K context), column Uncached input",
+   "quote": "GPT-5.5 ( < 272 <272 K context) 5.00 $/M 0.50 $/M 30.00 $/M",
+   "term": "input",
+   "written": "5.00 $/M",
+   "note": "price per million tokens used by the paper to compute execution costs (GPT-5.5, context below 272K)"
+  },
+  {
+   "id": "F4",
+   "says": "price-table",
+   "about": null,
+   "value": "0.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 4, row GPT-5.5 (<272K context), column Cached input",
+   "quote": "GPT-5.5 ( < 272 <272 K context) 5.00 $/M 0.50 $/M 30.00 $/M",
+   "term": "cache-read",
+   "written": "0.50 $/M",
+   "note": "price per million tokens used by the paper to compute execution costs (GPT-5.5, context below 272K)"
+  },
+  {
+   "id": "F5",
+   "says": "price-table",
+   "about": null,
+   "value": "30.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 4, row GPT-5.5 (<272K context), column Output",
+   "quote": "GPT-5.5 ( < 272 <272 K context) 5.00 $/M 0.50 $/M 30.00 $/M",
+   "term": "output",
+   "written": "30.00 $/M",
+   "note": "price per million tokens used by the paper to compute execution costs (GPT-5.5, context below 272K)"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "Table 2: Performance and efficiency across three benchmarks. P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s). We report mean and standard deviation for HarnessPro .",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "Table 2: Performance and efficiency across three benchmarks. P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s). We report mean and standard deviation for HarnessPro .",
+   "note": "P = pass rate (%), C = mean cost ($) per test task, T = execution time (s); HarnessPro rows give mean and standard deviation over repeated test runs; on ProgramBench P is the macro-average of the fraction of tests passed per task"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "Table 3: Ablations with GPT-5.5 and Codex. In the RHO variants, + dynamic routing selects reasoning effort from task descriptions, + budget hooks append budget reminders to tool results and + low reasoning effort fixes effort at low.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3 caption",
+   "quote": "Table 3: Ablations with GPT-5.5 and Codex. In the RHO variants, + dynamic routing selects reasoning effort from task descriptions, + budget hooks append budget reminders to tool results and + low reasoning effort fixes effort at low.",
+   "note": "ablations; columns per benchmark: P pass rate (%), C mean cost ($), CoP cost-of-pass ($)"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "We also report Cost-of-Pass (CoP) ( Erol et al., 2026 ) , the total execution cost divided by the number of successful tasks.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 5.5 Ablation Study",
+   "quote": "We also report Cost-of-Pass (CoP) ( Erol et al., 2026 ) , the total execution cost divided by the number of successful tasks.",
+   "note": "CoP = total execution cost divided by the number of successful tasks"
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F10",
+   "says": "harness",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F11",
+   "says": "effort-label",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "69.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column Terminal-Bench 2 P(%)",
+   "quote": "Vanilla 69.5 0.89 260 59.0 1.88 337 60.3 2.65 669",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F13",
+   "says": "cost",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "0.89",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column Terminal-Bench 2 C($)",
+   "quote": "Vanilla 69.5 0.89 260 59.0 1.88 337 60.3 2.65 669",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F14",
+   "says": "currency",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F15",
+   "says": "unit",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "59.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column SWE-Bench Pro P(%)",
+   "quote": "Vanilla 69.5 0.89 260 59.0 1.88 337 60.3 2.65 669",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "cost",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "1.88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column SWE-Bench Pro C($)",
+   "quote": "Vanilla 69.5 0.89 260 59.0 1.88 337 60.3 2.65 669",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "60.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column ProgramBench P(%)",
+   "quote": "Vanilla 69.5 0.89 260 59.0 1.88 337 60.3 2.65 669",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F19",
+   "says": "cost",
+   "about": "Vanilla (GPT-5.5 + Codex) Table 2",
+   "value": "2.65",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Vanilla, column ProgramBench C($)",
+   "quote": "Vanilla 69.5 0.89 260 59.0 1.88 337 60.3 2.65 669",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F21",
+   "says": "harness",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F22",
+   "says": "effort-label",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "72.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Dynamic Cheatsheet, column Terminal-Bench 2 P(%)",
+   "quote": "Dynamic Cheatsheet 72.9 1.06 421 62.0 2.19 335 68.5 3.58 742",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "cost",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "1.06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Dynamic Cheatsheet, column Terminal-Bench 2 C($)",
+   "quote": "Dynamic Cheatsheet 72.9 1.06 421 62.0 2.19 335 68.5 3.58 742",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F25",
+   "says": "currency",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F26",
+   "says": "unit",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "62.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Dynamic Cheatsheet, column SWE-Bench Pro P(%)",
+   "quote": "Dynamic Cheatsheet 72.9 1.06 421 62.0 2.19 335 68.5 3.58 742",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "cost",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "2.19",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Dynamic Cheatsheet, column SWE-Bench Pro C($)",
+   "quote": "Dynamic Cheatsheet 72.9 1.06 421 62.0 2.19 335 68.5 3.58 742",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "68.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Dynamic Cheatsheet, column ProgramBench P(%)",
+   "quote": "Dynamic Cheatsheet 72.9 1.06 421 62.0 2.19 335 68.5 3.58 742",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "cost",
+   "about": "Dynamic Cheatsheet (GPT-5.5 + Codex) Table 2",
+   "value": "3.58",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Dynamic Cheatsheet, column ProgramBench C($)",
+   "quote": "Dynamic Cheatsheet 72.9 1.06 421 62.0 2.19 335 68.5 3.58 742",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "model-name",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F32",
+   "says": "harness",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F33",
+   "says": "effort-label",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "74.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row ReasoningBank, column Terminal-Bench 2 P(%)",
+   "quote": "ReasoningBank 74.6 0.99 369 61.0 2.13 341 62.5 3.06 661",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F35",
+   "says": "cost",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "0.99",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row ReasoningBank, column Terminal-Bench 2 C($)",
+   "quote": "ReasoningBank 74.6 0.99 369 61.0 2.13 341 62.5 3.06 661",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "says": "currency",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F37",
+   "says": "unit",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "61.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row ReasoningBank, column SWE-Bench Pro P(%)",
+   "quote": "ReasoningBank 74.6 0.99 369 61.0 2.13 341 62.5 3.06 661",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F39",
+   "says": "cost",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "2.13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row ReasoningBank, column SWE-Bench Pro C($)",
+   "quote": "ReasoningBank 74.6 0.99 369 61.0 2.13 341 62.5 3.06 661",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "62.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row ReasoningBank, column ProgramBench P(%)",
+   "quote": "ReasoningBank 74.6 0.99 369 61.0 2.13 341 62.5 3.06 661",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "cost",
+   "about": "ReasoningBank (GPT-5.5 + Codex) Table 2",
+   "value": "3.06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row ReasoningBank, column ProgramBench C($)",
+   "quote": "ReasoningBank 74.6 0.99 369 61.0 2.13 341 62.5 3.06 661",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F42",
+   "says": "model-name",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F43",
+   "says": "harness",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F44",
+   "says": "effort-label",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "74.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Sleep-time Compute, column Terminal-Bench 2 P(%)",
+   "quote": "Sleep-time Compute 74.6 1.04 331 62.0 2.26 337 67.7 3.38 637",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "1.04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Sleep-time Compute, column Terminal-Bench 2 C($)",
+   "quote": "Sleep-time Compute 74.6 1.04 331 62.0 2.26 337 67.7 3.38 637",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "currency",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F48",
+   "says": "unit",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "62.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Sleep-time Compute, column SWE-Bench Pro P(%)",
+   "quote": "Sleep-time Compute 74.6 1.04 331 62.0 2.26 337 67.7 3.38 637",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "2.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Sleep-time Compute, column SWE-Bench Pro C($)",
+   "quote": "Sleep-time Compute 74.6 1.04 331 62.0 2.26 337 67.7 3.38 637",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "67.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Sleep-time Compute, column ProgramBench P(%)",
+   "quote": "Sleep-time Compute 74.6 1.04 331 62.0 2.26 337 67.7 3.38 637",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F52",
+   "says": "cost",
+   "about": "Sleep-time Compute (GPT-5.5 + Codex) Table 2",
+   "value": "3.38",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Sleep-time Compute, column ProgramBench C($)",
+   "quote": "Sleep-time Compute 74.6 1.04 331 62.0 2.26 337 67.7 3.38 637",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F53",
+   "says": "model-name",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F54",
+   "says": "harness",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F55",
+   "says": "effort-label",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column Terminal-Bench 2 P(%)",
+   "quote": "RHO 76.3 1.09 354 80.0 2.68 437 68.8 3.59 928",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F57",
+   "says": "cost",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "1.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column Terminal-Bench 2 C($)",
+   "quote": "RHO 76.3 1.09 354 80.0 2.68 437 68.8 3.59 928",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F58",
+   "says": "currency",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F59",
+   "says": "unit",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F60",
+   "says": "score",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "80.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column SWE-Bench Pro P(%)",
+   "quote": "RHO 76.3 1.09 354 80.0 2.68 437 68.8 3.59 928",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F61",
+   "says": "cost",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "2.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column SWE-Bench Pro C($)",
+   "quote": "RHO 76.3 1.09 354 80.0 2.68 437 68.8 3.59 928",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F62",
+   "says": "score",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "68.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column ProgramBench P(%)",
+   "quote": "RHO 76.3 1.09 354 80.0 2.68 437 68.8 3.59 928",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F63",
+   "says": "cost",
+   "about": "RHO (GPT-5.5 + Codex) Table 2",
+   "value": "3.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO, column ProgramBench C($)",
+   "quote": "RHO 76.3 1.09 354 80.0 2.68 437 68.8 3.59 928",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F64",
+   "says": "model-name",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F65",
+   "says": "harness",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F66",
+   "says": "effort-label",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F67",
+   "says": "score",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "74.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Balance, column Terminal-Bench 2 P(%)",
+   "quote": "Balance 74.6 0.79 355 78.0 2.08 399 65.7 3.29 865",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F68",
+   "says": "cost",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "0.79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Balance, column Terminal-Bench 2 C($)",
+   "quote": "Balance 74.6 0.79 355 78.0 2.08 399 65.7 3.29 865",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "says": "currency",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F70",
+   "says": "unit",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "78.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Balance, column SWE-Bench Pro P(%)",
+   "quote": "Balance 74.6 0.79 355 78.0 2.08 399 65.7 3.29 865",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F72",
+   "says": "cost",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "2.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Balance, column SWE-Bench Pro C($)",
+   "quote": "Balance 74.6 0.79 355 78.0 2.08 399 65.7 3.29 865",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "says": "score",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "65.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Balance, column ProgramBench P(%)",
+   "quote": "Balance 74.6 0.79 355 78.0 2.08 399 65.7 3.29 865",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "says": "cost",
+   "about": "Balance (GPT-5.5 + Codex) Table 2",
+   "value": "3.29",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row Balance, column ProgramBench C($)",
+   "quote": "Balance 74.6 0.79 355 78.0 2.08 399 65.7 3.29 865",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F75",
+   "says": "model-name",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F76",
+   "says": "harness",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F77",
+   "says": "effort-label",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F78",
+   "says": "score",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO+Iteration, column Terminal-Bench 2 P(%)",
+   "quote": "RHO+Iteration 76.3 0.82 328 80.0 1.90 375 68.3 3.13 789",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F79",
+   "says": "cost",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "0.82",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO+Iteration, column Terminal-Bench 2 C($)",
+   "quote": "RHO+Iteration 76.3 0.82 328 80.0 1.90 375 68.3 3.13 789",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F80",
+   "says": "currency",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F81",
+   "says": "unit",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F82",
+   "says": "score",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "80.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO+Iteration, column SWE-Bench Pro P(%)",
+   "quote": "RHO+Iteration 76.3 0.82 328 80.0 1.90 375 68.3 3.13 789",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F83",
+   "says": "cost",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "1.90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO+Iteration, column SWE-Bench Pro C($)",
+   "quote": "RHO+Iteration 76.3 0.82 328 80.0 1.90 375 68.3 3.13 789",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F84",
+   "says": "score",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "68.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO+Iteration, column ProgramBench P(%)",
+   "quote": "RHO+Iteration 76.3 0.82 328 80.0 1.90 375 68.3 3.13 789",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F85",
+   "says": "cost",
+   "about": "RHO+Iteration (GPT-5.5 + Codex) Table 2",
+   "value": "3.13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row RHO+Iteration, column ProgramBench C($)",
+   "quote": "RHO+Iteration 76.3 0.82 328 80.0 1.90 375 68.3 3.13 789",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F86",
+   "says": "model-name",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F87",
+   "says": "harness",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F88",
+   "says": "effort-label",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F89",
+   "says": "score",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "72.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Lite 72.9 ± 1.7 \\pm\\,1.7 0.43 ± 0.01 \\pm\\,0.01 230 ± 32 \\pm\\,32 72.3 ± 0.6 \\pm\\,0.6 0.80 ± 0.02 \\pm\\,0.02 203 ± 19 \\pm\\,19 64.3 ± 0.04 \\pm\\,0.04 2.18 ± 0.06 \\pm\\,0.06 985 ± 70 \\pm\\,70",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F90",
+   "says": "cost",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "0.43",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Lite 72.9 ± 1.7 \\pm\\,1.7 0.43 ± 0.01 \\pm\\,0.01 230 ± 32 \\pm\\,32 72.3 ± 0.6 \\pm\\,0.6 0.80 ± 0.02 \\pm\\,0.02 203 ± 19 \\pm\\,19 64.3 ± 0.04 \\pm\\,0.04 2.18 ± 0.06 \\pm\\,0.06 985 ± 70 \\pm\\,70",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.01"
+  },
+  {
+   "id": "F91",
+   "says": "currency",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F92",
+   "says": "unit",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F93",
+   "says": "score",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "72.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Lite 72.9 ± 1.7 \\pm\\,1.7 0.43 ± 0.01 \\pm\\,0.01 230 ± 32 \\pm\\,32 72.3 ± 0.6 \\pm\\,0.6 0.80 ± 0.02 \\pm\\,0.02 203 ± 19 \\pm\\,19 64.3 ± 0.04 \\pm\\,0.04 2.18 ± 0.06 \\pm\\,0.06 985 ± 70 \\pm\\,70",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F94",
+   "says": "cost",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "0.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Lite 72.9 ± 1.7 \\pm\\,1.7 0.43 ± 0.01 \\pm\\,0.01 230 ± 32 \\pm\\,32 72.3 ± 0.6 \\pm\\,0.6 0.80 ± 0.02 \\pm\\,0.02 203 ± 19 \\pm\\,19 64.3 ± 0.04 \\pm\\,0.04 2.18 ± 0.06 \\pm\\,0.06 985 ± 70 \\pm\\,70",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.02"
+  },
+  {
+   "id": "F95",
+   "says": "score",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "64.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column ProgramBench P(%)",
+   "quote": "HarnessPro-Lite 72.9 ± 1.7 \\pm\\,1.7 0.43 ± 0.01 \\pm\\,0.01 230 ± 32 \\pm\\,32 72.3 ± 0.6 \\pm\\,0.6 0.80 ± 0.02 \\pm\\,0.02 203 ± 19 \\pm\\,19 64.3 ± 0.04 \\pm\\,0.04 2.18 ± 0.06 \\pm\\,0.06 985 ± 70 \\pm\\,70",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F96",
+   "says": "cost",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 2",
+   "value": "2.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Lite, column ProgramBench C($)",
+   "quote": "HarnessPro-Lite 72.9 ± 1.7 \\pm\\,1.7 0.43 ± 0.01 \\pm\\,0.01 230 ± 32 \\pm\\,32 72.3 ± 0.6 \\pm\\,0.6 0.80 ± 0.02 \\pm\\,0.02 203 ± 19 \\pm\\,19 64.3 ± 0.04 \\pm\\,0.04 2.18 ± 0.06 \\pm\\,0.06 985 ± 70 \\pm\\,70",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.06"
+  },
+  {
+   "id": "F97",
+   "says": "model-name",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F98",
+   "says": "harness",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F99",
+   "says": "effort-label",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F100",
+   "says": "score",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Medium 76.3 ± 1.7 \\pm\\,1.7 0.56 ± 0.04 \\pm\\,0.04 253 ± 35 \\pm\\,35 79.0 ± 1.0 \\pm\\,1.0 1.26 ± 0.03 \\pm\\,0.03 326 ± 25 \\pm\\,25 67.9 ± 0.47 \\pm\\,0.47 2.90 ± 0.13 \\pm\\,0.13 745 ± 61 \\pm\\,61",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F101",
+   "says": "cost",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "0.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Medium 76.3 ± 1.7 \\pm\\,1.7 0.56 ± 0.04 \\pm\\,0.04 253 ± 35 \\pm\\,35 79.0 ± 1.0 \\pm\\,1.0 1.26 ± 0.03 \\pm\\,0.03 326 ± 25 \\pm\\,25 67.9 ± 0.47 \\pm\\,0.47 2.90 ± 0.13 \\pm\\,0.13 745 ± 61 \\pm\\,61",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.04"
+  },
+  {
+   "id": "F102",
+   "says": "currency",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F103",
+   "says": "unit",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F104",
+   "says": "score",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "79.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Medium 76.3 ± 1.7 \\pm\\,1.7 0.56 ± 0.04 \\pm\\,0.04 253 ± 35 \\pm\\,35 79.0 ± 1.0 \\pm\\,1.0 1.26 ± 0.03 \\pm\\,0.03 326 ± 25 \\pm\\,25 67.9 ± 0.47 \\pm\\,0.47 2.90 ± 0.13 \\pm\\,0.13 745 ± 61 \\pm\\,61",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F105",
+   "says": "cost",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "1.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Medium 76.3 ± 1.7 \\pm\\,1.7 0.56 ± 0.04 \\pm\\,0.04 253 ± 35 \\pm\\,35 79.0 ± 1.0 \\pm\\,1.0 1.26 ± 0.03 \\pm\\,0.03 326 ± 25 \\pm\\,25 67.9 ± 0.47 \\pm\\,0.47 2.90 ± 0.13 \\pm\\,0.13 745 ± 61 \\pm\\,61",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.03"
+  },
+  {
+   "id": "F106",
+   "says": "score",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "67.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column ProgramBench P(%)",
+   "quote": "HarnessPro-Medium 76.3 ± 1.7 \\pm\\,1.7 0.56 ± 0.04 \\pm\\,0.04 253 ± 35 \\pm\\,35 79.0 ± 1.0 \\pm\\,1.0 1.26 ± 0.03 \\pm\\,0.03 326 ± 25 \\pm\\,25 67.9 ± 0.47 \\pm\\,0.47 2.90 ± 0.13 \\pm\\,0.13 745 ± 61 \\pm\\,61",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F107",
+   "says": "cost",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 2",
+   "value": "2.90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Medium, column ProgramBench C($)",
+   "quote": "HarnessPro-Medium 76.3 ± 1.7 \\pm\\,1.7 0.56 ± 0.04 \\pm\\,0.04 253 ± 35 \\pm\\,35 79.0 ± 1.0 \\pm\\,1.0 1.26 ± 0.03 \\pm\\,0.03 326 ± 25 \\pm\\,25 67.9 ± 0.47 \\pm\\,0.47 2.90 ± 0.13 \\pm\\,0.13 745 ± 61 \\pm\\,61",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.13"
+  },
+  {
+   "id": "F108",
+   "says": "model-name",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F109",
+   "says": "harness",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F110",
+   "says": "effort-label",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F111",
+   "says": "score",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "80.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Heavy 80.8 ± 1.0 \\pm\\,1.0 0.72 ± 0.05 \\pm\\,0.05 310 ± 31 \\pm\\,31 80.7 ± 0.6 \\pm\\,0.6 1.97 ± 0.02 \\pm\\,0.02 333 ± 10 \\pm\\,10 69.6 ± 1.03 \\pm\\,1.03 2.95 ± 0.13 \\pm\\,0.13 888 ± 32 \\pm\\,32",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F112",
+   "says": "cost",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "0.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Heavy 80.8 ± 1.0 \\pm\\,1.0 0.72 ± 0.05 \\pm\\,0.05 310 ± 31 \\pm\\,31 80.7 ± 0.6 \\pm\\,0.6 1.97 ± 0.02 \\pm\\,0.02 333 ± 10 \\pm\\,10 69.6 ± 1.03 \\pm\\,1.03 2.95 ± 0.13 \\pm\\,0.13 888 ± 32 \\pm\\,32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.05"
+  },
+  {
+   "id": "F113",
+   "says": "currency",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F114",
+   "says": "unit",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F115",
+   "says": "score",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "80.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Heavy 80.8 ± 1.0 \\pm\\,1.0 0.72 ± 0.05 \\pm\\,0.05 310 ± 31 \\pm\\,31 80.7 ± 0.6 \\pm\\,0.6 1.97 ± 0.02 \\pm\\,0.02 333 ± 10 \\pm\\,10 69.6 ± 1.03 \\pm\\,1.03 2.95 ± 0.13 \\pm\\,0.13 888 ± 32 \\pm\\,32",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F116",
+   "says": "cost",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "1.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Heavy 80.8 ± 1.0 \\pm\\,1.0 0.72 ± 0.05 \\pm\\,0.05 310 ± 31 \\pm\\,31 80.7 ± 0.6 \\pm\\,0.6 1.97 ± 0.02 \\pm\\,0.02 333 ± 10 \\pm\\,10 69.6 ± 1.03 \\pm\\,1.03 2.95 ± 0.13 \\pm\\,0.13 888 ± 32 \\pm\\,32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.02"
+  },
+  {
+   "id": "F117",
+   "says": "score",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "69.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column ProgramBench P(%)",
+   "quote": "HarnessPro-Heavy 80.8 ± 1.0 \\pm\\,1.0 0.72 ± 0.05 \\pm\\,0.05 310 ± 31 \\pm\\,31 80.7 ± 0.6 \\pm\\,0.6 1.97 ± 0.02 \\pm\\,0.02 333 ± 10 \\pm\\,10 69.6 ± 1.03 \\pm\\,1.03 2.95 ± 0.13 \\pm\\,0.13 888 ± 32 \\pm\\,32",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F118",
+   "says": "cost",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 2",
+   "value": "2.95",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2, row HarnessPro-Heavy, column ProgramBench C($)",
+   "quote": "HarnessPro-Heavy 80.8 ± 1.0 \\pm\\,1.0 0.72 ± 0.05 \\pm\\,0.05 310 ± 31 \\pm\\,31 80.7 ± 0.6 \\pm\\,0.6 1.97 ± 0.02 \\pm\\,0.02 333 ± 10 \\pm\\,10 69.6 ± 1.03 \\pm\\,1.03 2.95 ± 0.13 \\pm\\,0.13 888 ± 32 \\pm\\,32",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "note": "standard deviation 0.13"
+  },
+  {
+   "id": "F119",
+   "says": "model-name",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F120",
+   "says": "harness",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F121",
+   "says": "effort-label",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F122",
+   "says": "score",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO, column Terminal-Bench 2 P(%)",
+   "quote": "RHO 76.3 1.09 1.43 80.0 2.68 3.35",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F123",
+   "says": "cost",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "1.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO, column Terminal-Bench 2 C($)",
+   "quote": "RHO 76.3 1.09 1.43 80.0 2.68 3.35",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F124",
+   "says": "currency",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F125",
+   "says": "unit",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F126",
+   "says": "score",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "80.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO, column SWE-Bench Pro P(%)",
+   "quote": "RHO 76.3 1.09 1.43 80.0 2.68 3.35",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F127",
+   "says": "cost",
+   "about": "RHO (GPT-5.5 + Codex) Table 3",
+   "value": "2.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO, column SWE-Bench Pro C($)",
+   "quote": "RHO 76.3 1.09 1.43 80.0 2.68 3.35",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F128",
+   "says": "model-name",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F129",
+   "says": "harness",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F130",
+   "says": "note",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "+ dynamic routing selects reasoning effort from task descriptions",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3 caption",
+   "quote": "+ dynamic routing selects reasoning effort from task descriptions",
+   "note": "effort varies per task (selected from the task description): no single effort label"
+  },
+  {
+   "id": "F131",
+   "says": "score",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + dynamic routing, column Terminal-Bench 2 P(%)",
+   "quote": "RHO + dynamic routing 76.3 0.92 1.21 76.0 2.13 2.80",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F132",
+   "says": "cost",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "0.92",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + dynamic routing, column Terminal-Bench 2 C($)",
+   "quote": "RHO + dynamic routing 76.3 0.92 1.21 76.0 2.13 2.80",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F133",
+   "says": "currency",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F134",
+   "says": "unit",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F135",
+   "says": "score",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "76.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + dynamic routing, column SWE-Bench Pro P(%)",
+   "quote": "RHO + dynamic routing 76.3 0.92 1.21 76.0 2.13 2.80",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F136",
+   "says": "cost",
+   "about": "RHO + dynamic routing (GPT-5.5 + Codex) Table 3",
+   "value": "2.13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + dynamic routing, column SWE-Bench Pro C($)",
+   "quote": "RHO + dynamic routing 76.3 0.92 1.21 76.0 2.13 2.80",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F137",
+   "says": "model-name",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F138",
+   "says": "harness",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F139",
+   "says": "effort-label",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F140",
+   "says": "score",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + budget hooks, column Terminal-Bench 2 P(%)",
+   "quote": "RHO + budget hooks 76.3 0.92 1.21 75.0 1.75 2.33",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F141",
+   "says": "cost",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "0.92",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + budget hooks, column Terminal-Bench 2 C($)",
+   "quote": "RHO + budget hooks 76.3 0.92 1.21 75.0 1.75 2.33",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F142",
+   "says": "currency",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F143",
+   "says": "unit",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F144",
+   "says": "score",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "75.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + budget hooks, column SWE-Bench Pro P(%)",
+   "quote": "RHO + budget hooks 76.3 0.92 1.21 75.0 1.75 2.33",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F145",
+   "says": "cost",
+   "about": "RHO + budget hooks (GPT-5.5 + Codex) Table 3",
+   "value": "1.75",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + budget hooks, column SWE-Bench Pro C($)",
+   "quote": "RHO + budget hooks 76.3 0.92 1.21 75.0 1.75 2.33",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F146",
+   "says": "model-name",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F147",
+   "says": "harness",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F148",
+   "says": "effort-label",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3 caption",
+   "quote": "+ low reasoning effort fixes effort at low.",
+   "written": "low"
+  },
+  {
+   "id": "F149",
+   "says": "score",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "62.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + low reasoning effort, column Terminal-Bench 2 P(%)",
+   "quote": "RHO + low reasoning effort 62.7 0.45 0.72 59.0 1.08 1.83",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F150",
+   "says": "cost",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "0.45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + low reasoning effort, column Terminal-Bench 2 C($)",
+   "quote": "RHO + low reasoning effort 62.7 0.45 0.72 59.0 1.08 1.83",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F151",
+   "says": "currency",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F152",
+   "says": "unit",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F153",
+   "says": "score",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "59.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + low reasoning effort, column SWE-Bench Pro P(%)",
+   "quote": "RHO + low reasoning effort 62.7 0.45 0.72 59.0 1.08 1.83",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F154",
+   "says": "cost",
+   "about": "RHO + low reasoning effort (GPT-5.5 + Codex) Table 3",
+   "value": "1.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row RHO + low reasoning effort, column SWE-Bench Pro C($)",
+   "quote": "RHO + low reasoning effort 62.7 0.45 0.72 59.0 1.08 1.83",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F155",
+   "says": "model-name",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F156",
+   "says": "harness",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F157",
+   "says": "effort-label",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F158",
+   "says": "score",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "72.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Lite, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Lite 72.9 0.43 0.59 72.3 0.80 1.11",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F159",
+   "says": "cost",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "0.43",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Lite, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Lite 72.9 0.43 0.59 72.3 0.80 1.11",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F160",
+   "says": "currency",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F161",
+   "says": "unit",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F162",
+   "says": "score",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "72.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Lite, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Lite 72.9 0.43 0.59 72.3 0.80 1.11",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F163",
+   "says": "cost",
+   "about": "HarnessPro-Lite (GPT-5.5 + Codex) Table 3",
+   "value": "0.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Lite, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Lite 72.9 0.43 0.59 72.3 0.80 1.11",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F164",
+   "says": "model-name",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F165",
+   "says": "harness",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F166",
+   "says": "effort-label",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F167",
+   "says": "score",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "72.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Lite), column Terminal-Bench 2 P(%)",
+   "quote": "w/o planner 72.9 0.41 0.56 70.0 0.98 1.40",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F168",
+   "says": "cost",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "0.41",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Lite), column Terminal-Bench 2 C($)",
+   "quote": "w/o planner 72.9 0.41 0.56 70.0 0.98 1.40",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F169",
+   "says": "currency",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F170",
+   "says": "unit",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F171",
+   "says": "score",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "70.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Lite), column SWE-Bench Pro P(%)",
+   "quote": "w/o planner 72.9 0.41 0.56 70.0 0.98 1.40",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F172",
+   "says": "cost",
+   "about": "w/o planner (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "0.98",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Lite), column SWE-Bench Pro C($)",
+   "quote": "w/o planner 72.9 0.41 0.56 70.0 0.98 1.40",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F173",
+   "says": "model-name",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F174",
+   "says": "harness",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F175",
+   "says": "effort-label",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F176",
+   "says": "score",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "67.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Lite), column Terminal-Bench 2 P(%)",
+   "quote": "w/o test synthesizer 67.8 0.67 0.99 64.0 0.78 1.22",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F177",
+   "says": "cost",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "0.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Lite), column Terminal-Bench 2 C($)",
+   "quote": "w/o test synthesizer 67.8 0.67 0.99 64.0 0.78 1.22",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F178",
+   "says": "currency",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F179",
+   "says": "unit",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F180",
+   "says": "score",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "64.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Lite), column SWE-Bench Pro P(%)",
+   "quote": "w/o test synthesizer 67.8 0.67 0.99 64.0 0.78 1.22",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F181",
+   "says": "cost",
+   "about": "w/o test synthesizer (Lite) (GPT-5.5 + Codex) Table 3",
+   "value": "0.78",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Lite), column SWE-Bench Pro C($)",
+   "quote": "w/o test synthesizer 67.8 0.67 0.99 64.0 0.78 1.22",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F182",
+   "says": "model-name",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F183",
+   "says": "harness",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F184",
+   "says": "effort-label",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F185",
+   "says": "score",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "76.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Medium, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Medium 76.3 0.56 0.73 79.0 1.26 1.59",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F186",
+   "says": "cost",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "0.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Medium, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Medium 76.3 0.56 0.73 79.0 1.26 1.59",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F187",
+   "says": "currency",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F188",
+   "says": "unit",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F189",
+   "says": "score",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "79.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Medium, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Medium 76.3 0.56 0.73 79.0 1.26 1.59",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F190",
+   "says": "cost",
+   "about": "HarnessPro-Medium (GPT-5.5 + Codex) Table 3",
+   "value": "1.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Medium, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Medium 76.3 0.56 0.73 79.0 1.26 1.59",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F191",
+   "says": "model-name",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F192",
+   "says": "harness",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F193",
+   "says": "effort-label",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F194",
+   "says": "score",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "74.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Medium), column Terminal-Bench 2 P(%)",
+   "quote": "w/o planner 74.6 0.61 0.82 73.0 1.42 1.95",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F195",
+   "says": "cost",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "0.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Medium), column Terminal-Bench 2 C($)",
+   "quote": "w/o planner 74.6 0.61 0.82 73.0 1.42 1.95",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F196",
+   "says": "currency",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F197",
+   "says": "unit",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F198",
+   "says": "score",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "73.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Medium), column SWE-Bench Pro P(%)",
+   "quote": "w/o planner 74.6 0.61 0.82 73.0 1.42 1.95",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F199",
+   "says": "cost",
+   "about": "w/o planner (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "1.42",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Medium), column SWE-Bench Pro C($)",
+   "quote": "w/o planner 74.6 0.61 0.82 73.0 1.42 1.95",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F200",
+   "says": "model-name",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F201",
+   "says": "harness",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F202",
+   "says": "effort-label",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F203",
+   "says": "score",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "72.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Medium), column Terminal-Bench 2 P(%)",
+   "quote": "w/o test synthesizer 72.9 0.82 1.12 69.0 1.37 1.99",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F204",
+   "says": "cost",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "0.82",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Medium), column Terminal-Bench 2 C($)",
+   "quote": "w/o test synthesizer 72.9 0.82 1.12 69.0 1.37 1.99",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F205",
+   "says": "currency",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F206",
+   "says": "unit",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F207",
+   "says": "score",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "69.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Medium), column SWE-Bench Pro P(%)",
+   "quote": "w/o test synthesizer 72.9 0.82 1.12 69.0 1.37 1.99",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F208",
+   "says": "cost",
+   "about": "w/o test synthesizer (Medium) (GPT-5.5 + Codex) Table 3",
+   "value": "1.37",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Medium), column SWE-Bench Pro C($)",
+   "quote": "w/o test synthesizer 72.9 0.82 1.12 69.0 1.37 1.99",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F209",
+   "says": "model-name",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F210",
+   "says": "harness",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F211",
+   "says": "effort-label",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F212",
+   "says": "score",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "80.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Heavy, column Terminal-Bench 2 P(%)",
+   "quote": "HarnessPro-Heavy 80.8 0.72 0.89 80.7 1.97 2.44",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F213",
+   "says": "cost",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "0.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Heavy, column Terminal-Bench 2 C($)",
+   "quote": "HarnessPro-Heavy 80.8 0.72 0.89 80.7 1.97 2.44",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F214",
+   "says": "currency",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F215",
+   "says": "unit",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F216",
+   "says": "score",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "80.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Heavy, column SWE-Bench Pro P(%)",
+   "quote": "HarnessPro-Heavy 80.8 0.72 0.89 80.7 1.97 2.44",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F217",
+   "says": "cost",
+   "about": "HarnessPro-Heavy (GPT-5.5 + Codex) Table 3",
+   "value": "1.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row HarnessPro-Heavy, column SWE-Bench Pro C($)",
+   "quote": "HarnessPro-Heavy 80.8 0.72 0.89 80.7 1.97 2.44",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F218",
+   "says": "model-name",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F219",
+   "says": "harness",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F220",
+   "says": "effort-label",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F221",
+   "says": "score",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "79.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Heavy), column Terminal-Bench 2 P(%)",
+   "quote": "w/o planner 79.7 1.04 1.30 79.0 2.12 2.68",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F222",
+   "says": "cost",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "1.04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Heavy), column Terminal-Bench 2 C($)",
+   "quote": "w/o planner 79.7 1.04 1.30 79.0 2.12 2.68",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F223",
+   "says": "currency",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F224",
+   "says": "unit",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F225",
+   "says": "score",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "79.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Heavy), column SWE-Bench Pro P(%)",
+   "quote": "w/o planner 79.7 1.04 1.30 79.0 2.12 2.68",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F226",
+   "says": "cost",
+   "about": "w/o planner (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "2.12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o planner (Heavy), column SWE-Bench Pro C($)",
+   "quote": "w/o planner 79.7 1.04 1.30 79.0 2.12 2.68",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F227",
+   "says": "model-name",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the row names a harness method; the model of the block is GPT-5.5 (block header GPT-5.5 x Codex)"
+  },
+  {
+   "id": "F228",
+   "says": "harness",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "abstract",
+   "quote": "using GPT-5.5 with Codex and GLM-5.2 with Claude Code",
+   "note": "the harness is Codex (version not given in the text read); the evolved harness method of the row (Vanilla, RHO, HarnessPro...) is varied on top of it"
+  },
+  {
+   "id": "F229",
+   "says": "effort-label",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Appendix A.2 Additional Implementation Details",
+   "quote": "The default reasoning effort for GPT-5.5 is high on all three benchmarks.",
+   "written": "high",
+   "note": "default reasoning effort of GPT-5.5, stated for all three benchmarks"
+  },
+  {
+   "id": "F230",
+   "says": "score",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "74.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Heavy), column Terminal-Bench 2 P(%)",
+   "quote": "w/o test synthesizer 74.6 0.88 1.18 72.0 1.62 2.25",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F231",
+   "says": "cost",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "0.88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Heavy), column Terminal-Bench 2 C($)",
+   "quote": "w/o test synthesizer 74.6 0.88 1.18 72.0 1.62 2.25",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F232",
+   "says": "currency",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 2 caption",
+   "quote": "P denotes pass rate (%), while C and T denote mean cost ($) and execution time (s).",
+   "term": "USD"
+  },
+  {
+   "id": "F233",
+   "says": "unit",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "per test task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "section 3 Problem Setting (Cost)",
+   "quote": "We report the average cost per test task as",
+   "term": "USD/task"
+  },
+  {
+   "id": "F234",
+   "says": "score",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "72.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Heavy), column SWE-Bench Pro P(%)",
+   "quote": "w/o test synthesizer 74.6 0.88 1.18 72.0 1.62 2.25",
+   "term": "pass rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F235",
+   "says": "cost",
+   "about": "w/o test synthesizer (Heavy) (GPT-5.5 + Codex) Table 3",
+   "value": "1.62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.26770.html",
+   "where": "Table 3, row w/o test synthesizer (Heavy), column SWE-Bench Pro C($)",
+   "quote": "w/o test synthesizer 74.6 0.88 1.18 72.0 1.62 2.25",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ]
+}

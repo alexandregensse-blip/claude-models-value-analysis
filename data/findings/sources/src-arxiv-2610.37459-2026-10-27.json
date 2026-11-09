@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-1 (b-openai + c-openai). M4Bench: clinical EHR derivation tasks (28 native tasks over MIMIC-IV and eICU), Docker-isolated Codex campaign with GPT 5.4 Mini and GPT 5.5, no-skill versus with-skill. Table 3 'Reward' rows: mean value-column match rate without and with the clinician-reviewed skill (4 measures; the Delta and Improved-tasks columns are kept as notes). CORRECTION of the research file: 'Resolved reasoning effort was medium for every run' belongs to the Claude Code replication (Appendix, Table 29), not to the Codex runs: no effort is written for the GPT rows. Run window: the primary analysis uses runs of release-20260502-codex-v11 and review-rerun-20260504-codex, the follow-up is dated May 6 (HORS FENETRE: before 15 Oct 2026). Route not written. The HTML copy is held in the b-anthropic evidence folder.",
- "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-openai-2: convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -226,6 +226,598 @@
    "precision": {
     "model": "printed",
     "step": 0.001
+   }
+  },
+  {
+   "id": "F16",
+   "says": "harness",
+   "about": null,
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18 caption",
+   "quote": "Table 18: Native-schema Codex skill effect split by task mode.",
+   "written": "Codex",
+   "term": "codex-cli",
+   "note": "Docker-isolated Codex campaign"
+  },
+  {
+   "id": "F17",
+   "says": "note",
+   "about": null,
+   "value": "Resolved reasoning effort was medium for every run.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Appendix (Claude replication, before Table 29)",
+   "quote": "Resolved reasoning effort was medium for every run.",
+   "note": "this sentence belongs to the Claude Code replication (Table 29), NOT to the Codex runs: no reasoning effort is written for the GPT 5.4 Mini and GPT 5.5 rows"
+  },
+  {
+   "id": "F18",
+   "says": "run-date",
+   "about": null,
+   "value": "release-20260502-codex-v11 plus review-rerun-20260504-codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Appendix (retained private evidence)",
+   "quote": "The final Codex analysis uses 760 canonical runs from release-20260502-codex-v11 plus review-rerun-20260504-codex .",
+   "note": "HORS FENETRE: the Codex runs were made in early May 2026 (release 20260502, rerun 20260504), before 15 Oct 2026; the May 6 validity follow-up is later but also before the window"
+  },
+  {
+   "id": "F19",
+   "says": "note",
+   "about": null,
+   "value": "Table 18: Native-schema Codex skill effect split by task mode. Values are task-paired deltas. Final rows average the two Codex models within task before aggregating.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18 caption",
+   "quote": "Table 18: Native-schema Codex skill effect split by task mode. Values are task-paired deltas. Final rows average the two Codex models within task before aggregating.",
+   "note": "task-paired with-skill minus no-skill reward deltas by task mode (standard: 11 tasks, raw: 17 tasks); Mean delta with the count of tasks with a positive delta"
+  },
+  {
+   "id": "F20",
+   "says": "note",
+   "about": null,
+   "value": "Table 20: Native-schema key diagnostics for Codex. The first two rows summarize native no-skill and with-skill cells. Subsequent rows show high-extra-key cells. N counts cells in the first two rows and runs in the others. Key F1 and key precision are means.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20 caption",
+   "quote": "Table 20: Native-schema key diagnostics for Codex. The first two rows summarize native no-skill and with-skill cells. Subsequent rows show high-extra-key cells. N counts cells in the first two rows and runs in the others. Key F1 and key precision are means.",
+   "note": "high-extra-key cells: Key F1 and key precision are means over N runs of the cell; Extra keys counts the extra keys"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "GPT 5.4 Mini (standard tasks)",
+   "value": "GPT 5.4 Mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.4 Mini / standard",
+   "quote": "GPT 5.4 Mini standard 11 0.203 10/11"
+  },
+  {
+   "id": "F22",
+   "says": "items",
+   "about": "GPT 5.4 Mini (standard tasks)",
+   "value": "11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.4 Mini / standard, column Tasks",
+   "quote": "GPT 5.4 Mini standard 11 0.203 10/11",
+   "note": "number of tasks of the mode"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GPT 5.4 Mini (standard tasks)",
+   "value": "0.203",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.4 Mini / standard, column Mean delta",
+   "quote": "GPT 5.4 Mini standard 11 0.203 10/11",
+   "term": "mean reward delta (with skill minus no skill)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": "GPT 5.4 Mini (raw tasks)",
+   "value": "GPT 5.4 Mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.4 Mini / raw",
+   "quote": "GPT 5.4 Mini raw 17 0.136 16/17"
+  },
+  {
+   "id": "F25",
+   "says": "items",
+   "about": "GPT 5.4 Mini (raw tasks)",
+   "value": "17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.4 Mini / raw, column Tasks",
+   "quote": "GPT 5.4 Mini raw 17 0.136 16/17",
+   "note": "number of tasks of the mode"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "GPT 5.4 Mini (raw tasks)",
+   "value": "0.136",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.4 Mini / raw, column Mean delta",
+   "quote": "GPT 5.4 Mini raw 17 0.136 16/17",
+   "term": "mean reward delta (with skill minus no skill)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "GPT 5.5 (standard tasks)",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.5 / standard",
+   "quote": "GPT 5.5 standard 11 0.105 9/11"
+  },
+  {
+   "id": "F28",
+   "says": "items",
+   "about": "GPT 5.5 (standard tasks)",
+   "value": "11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.5 / standard, column Tasks",
+   "quote": "GPT 5.5 standard 11 0.105 9/11",
+   "note": "number of tasks of the mode"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "GPT 5.5 (standard tasks)",
+   "value": "0.105",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.5 / standard, column Mean delta",
+   "quote": "GPT 5.5 standard 11 0.105 9/11",
+   "term": "mean reward delta (with skill minus no skill)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F30",
+   "says": "model-name",
+   "about": "GPT 5.5 (raw tasks)",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.5 / raw",
+   "quote": "GPT 5.5 raw 17 0.112 15/17"
+  },
+  {
+   "id": "F31",
+   "says": "items",
+   "about": "GPT 5.5 (raw tasks)",
+   "value": "17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.5 / raw, column Tasks",
+   "quote": "GPT 5.5 raw 17 0.112 15/17",
+   "note": "number of tasks of the mode"
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "GPT 5.5 (raw tasks)",
+   "value": "0.112",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 18, row GPT 5.5 / raw, column Mean delta",
+   "quote": "GPT 5.5 raw 17 0.112 15/17",
+   "term": "mean reward delta (with skill minus no skill)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F33",
+   "says": "model-name",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini",
+   "value": "GPT 5.4 Mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.4 Mini",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini 5 0.700 0.559 555030"
+  },
+  {
+   "id": "F34",
+   "says": "items",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini",
+   "value": "5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.4 Mini, column N",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini 5 0.700 0.559 555030",
+   "note": "N counts runs for this cell"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini",
+   "value": "0.700",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.4 Mini, column Key F1",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini 5 0.700 0.559 555030",
+   "term": "key F1",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini",
+   "value": "0.559",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.4 Mini, column Key precision",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini 5 0.700 0.559 555030",
+   "term": "key precision",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini",
+   "value": "555030",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.4 Mini, column Extra keys",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.4 Mini 5 0.700 0.559 555030",
+   "term": "extra keys (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "model-name",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.5",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.5",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.5 5 0.717 0.573 525311"
+  },
+  {
+   "id": "F39",
+   "says": "items",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.5",
+   "value": "5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.5, column N",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.5 5 0.717 0.573 525311",
+   "note": "N counts runs for this cell"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.5",
+   "value": "0.717",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.5, column Key F1",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.5 5 0.717 0.573 525311",
+   "term": "key F1",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.5",
+   "value": "0.573",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.5, column Key precision",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.5 5 0.717 0.573 525311",
+   "term": "key precision",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "mimic-ventilation-raw / no-skill / GPT 5.5",
+   "value": "525311",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / no-skill / GPT 5.5, column Extra keys",
+   "quote": "mimic-ventilation-raw / no-skill / GPT 5.5 5 0.717 0.573 525311",
+   "term": "extra keys (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F43",
+   "says": "model-name",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini",
+   "value": "GPT 5.4 Mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.4 Mini",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini 5 0.720 0.583 505933"
+  },
+  {
+   "id": "F44",
+   "says": "items",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini",
+   "value": "5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.4 Mini, column N",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini 5 0.720 0.583 505933",
+   "note": "N counts runs for this cell"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini",
+   "value": "0.720",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.4 Mini, column Key F1",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini 5 0.720 0.583 505933",
+   "term": "key F1",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini",
+   "value": "0.583",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.4 Mini, column Key precision",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini 5 0.720 0.583 505933",
+   "term": "key precision",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini",
+   "value": "505933",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.4 Mini, column Extra keys",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.4 Mini 5 0.720 0.583 505933",
+   "term": "extra keys (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "model-name",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.5",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.5",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.5 5 0.740 0.603 459225"
+  },
+  {
+   "id": "F49",
+   "says": "items",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.5",
+   "value": "5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.5, column N",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.5 5 0.740 0.603 459225",
+   "note": "N counts runs for this cell"
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.5",
+   "value": "0.740",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.5, column Key F1",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.5 5 0.740 0.603 459225",
+   "term": "key F1",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.5",
+   "value": "0.603",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.5, column Key precision",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.5 5 0.740 0.603 459225",
+   "term": "key precision",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "mimic-ventilation-raw / with-skill / GPT 5.5",
+   "value": "459225",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-ventilation-raw / with-skill / GPT 5.5, column Extra keys",
+   "quote": "mimic-ventilation-raw / with-skill / GPT 5.5 5 0.740 0.603 459225",
+   "term": "extra keys (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F53",
+   "says": "model-name",
+   "about": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini",
+   "value": "GPT 5.4 Mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini",
+   "quote": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini 5 0.949 0.910 384994"
+  },
+  {
+   "id": "F54",
+   "says": "items",
+   "about": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini",
+   "value": "5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini, column N",
+   "quote": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini 5 0.949 0.910 384994",
+   "note": "N counts runs for this cell"
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini",
+   "value": "0.949",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini, column Key F1",
+   "quote": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini 5 0.949 0.910 384994",
+   "term": "key F1",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini",
+   "value": "0.910",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini, column Key precision",
+   "quote": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini 5 0.949 0.910 384994",
+   "term": "key precision",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini",
+   "value": "384994",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.37459.html",
+   "where": "Table 20, row mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini, column Extra keys",
+   "quote": "mimic-vasopressor-equivalents-raw / with-skill / GPT 5.4 Mini 5 0.949 0.910 384994",
+   "term": "extra keys (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
    }
   }
  ]

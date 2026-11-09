@@ -17,7 +17,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-1 (b-openai + c-openai). Entity familiarity and data-cleaning repair (identity-column repair F1 on Hospital, Movies and Beers, 21 controlled tables). GPT-6.1-Sol row of Table 7 (Hospital and Movies: conditions O original, F fresh real records, W word-based fictitious names, S syllable-based fictitious names, at construction seed 0) and of Table 11 (Beers: O/F/W/S and repaired cities of 127): 12 F1 values (the research line held the Hospital and Movies values in one row and the Beers row in another); the paired contrasts are kept in the measure notes. GPT-6.1-Sol uses low reasoning effort with sampling parameters left at API defaults; the route is not named ('API defaults').",
- "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-openai-2: convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -315,6 +315,601 @@
     "model": "printed",
     "step": 0.01
    }
+  },
+  {
+   "id": "F20",
+   "says": "effort-label",
+   "about": null,
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "section 7 (experimental setup)",
+   "quote": "GPT-6.1-Sol ( OpenAI, 2026 ) uses low reasoning effort with sampling parameters left at API defaults.",
+   "written": "low",
+   "note": "low reasoning effort; sampling parameters left at API defaults; route not named"
+  },
+  {
+   "id": "F21",
+   "says": "note",
+   "about": null,
+   "value": "Table 8. Detection and repair diverge on surrogate identity columns. Entries give detection F1 / repair F1; detection counts corrupted cells found regardless of the value proposed for that cell.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8 caption",
+   "quote": "Table 8. Detection and repair diverge on surrogate identity columns. Entries give detection F1 / repair F1; detection counts corrupted cells found regardless of the value proposed for that cell.",
+   "note": "detection F1 / repair F1 on surrogate identity columns, Hospital and Movies, conditions O (original), W (word-based fictitious names), S (syllable-based fictitious names); the repair F1 cells repeat Table 7 of k-openai-1 (same values)"
+  },
+  {
+   "id": "F22",
+   "says": "model-name",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": "GPT-6.1",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "note": "GPT-6.1 abbreviates GPT-6.1-Sol (the only OpenAI model of the study)"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".95",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Hospital O, detection F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "detection F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Hospital O, repair F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "repair F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Hospital W, detection F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "detection F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Hospital W, repair F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "repair F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".65",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Hospital S, detection F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "detection F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Hospital S, repair F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "repair F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Movies O, detection F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "detection F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Movies O, repair F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "repair F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Movies W, detection F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "detection F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".05",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Movies W, repair F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "repair F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Movies S, detection F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "detection F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 8)",
+   "value": ".04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 8, row GPT-6.1, column Table 8 Movies S, repair F1",
+   "quote": "GPT-6.1 .95/.94 .71/.71 .65/.62 .17/.12 .11/.05 .09/.04",
+   "term": "repair F1",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F35",
+   "says": "note",
+   "about": null,
+   "value": "Table 9. Repaired cells and chunk wins:losses, excluding ties. Hospital compares W/S on 219 identity errors; Movies compares O/W on 379.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9 caption",
+   "quote": "Table 9. Repaired cells and chunk wins:losses, excluding ties. Hospital compares W/S on 219 identity errors; Movies compares O/W on 379.",
+   "note": "repaired cells (W/S for Hospital, O/W for Movies) and chunk wins:losses excluding ties; Hospital counts descriptive; Movies sign tests with Holm correction"
+  },
+  {
+   "id": "F36",
+   "says": "model-name",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "GPT-6.1",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "note": "GPT-6.1 abbreviates GPT-6.1-Sol (the only OpenAI model of the study)"
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "120",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Hospital repaired cells W",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Hospital repaired cells S",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "19",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Hospital chunk wins W:S",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Hospital chunk losses",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "24",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Movies repaired cells O",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Movies repaired cells W",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Movies chunk wins O:W",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 9)",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 9, row GPT-6.1, column Table 9, Movies chunk losses",
+   "quote": "GPT-6.1 120/100 19:6 24/10 13:6 .334",
+   "term": "repaired cells / chunk wins (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F45",
+   "says": "note",
+   "about": null,
+   "value": "Table 14. Hospital S repairs by recovery category. Unique and Ambig. use the 24-syllable inventory; Generic covers English terms, and Digits covers numeric tokens.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 14 caption",
+   "quote": "Table 14. Hospital S repairs by recovery category. Unique and Ambig. use the 24-syllable inventory; Generic covers English terms, and Digits covers numeric tokens.",
+   "note": "Hospital S repairs by recovery category (Unique, Ambig. from the 24-syllable inventory; Generic English terms; Digits numeric tokens); headers give cell counts, covering 217 of 219 errors"
+  },
+  {
+   "id": "F46",
+   "says": "model-name",
+   "about": "GPT-6.1-Sol (Table 14)",
+   "value": "GPT-6.1-Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 14, row GPT-6.1-Sol",
+   "quote": "GPT-6.1-Sol 74 4 14 6"
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 14)",
+   "value": "74",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 14, row GPT-6.1-Sol, column Table 14, Unique (95)",
+   "quote": "GPT-6.1-Sol 74 4 14 6",
+   "term": "Hospital S repairs by recovery category (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 14)",
+   "value": "4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 14, row GPT-6.1-Sol, column Table 14, Ambig. (11)",
+   "quote": "GPT-6.1-Sol 74 4 14 6",
+   "term": "Hospital S repairs by recovery category (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 14)",
+   "value": "14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 14, row GPT-6.1-Sol, column Table 14, Generic (14)",
+   "quote": "GPT-6.1-Sol 74 4 14 6",
+   "term": "Hospital S repairs by recovery category (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 14)",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 14, row GPT-6.1-Sol, column Table 14, Digits (97)",
+   "quote": "GPT-6.1-Sol 74 4 14 6",
+   "term": "Hospital S repairs by recovery category (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F51",
+   "says": "note",
+   "about": null,
+   "value": "Table 16. Director rewrite counts among known films ( n / N n/N ).",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 16 caption",
+   "quote": "Table 16. Director rewrite counts among known films ( n / N n/N ).",
+   "note": "director rewrite counts among known films (n/N): exact-name targets count edits ... Standard versus Evidence prompt"
+  },
+  {
+   "id": "F52",
+   "says": "model-name",
+   "about": "GPT-6.1-Sol (Table 16)",
+   "value": "GPT-6.1-Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 16, row GPT-6.1-Sol",
+   "quote": "GPT-6.1-Sol 53/57 0/57 7/57 0/57"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 16)",
+   "value": "53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 16, row GPT-6.1-Sol, column Table 16, Exact-name Standard",
+   "quote": "GPT-6.1-Sol 53/57 0/57 7/57 0/57",
+   "term": "director rewrites among known films (count of 57)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 16)",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 16, row GPT-6.1-Sol, column Table 16, Exact-name Evidence",
+   "quote": "GPT-6.1-Sol 53/57 0/57 7/57 0/57",
+   "term": "director rewrites among known films (count of 57)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 16)",
+   "value": "7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 16, row GPT-6.1-Sol, column Table 16, Surrogate Standard",
+   "quote": "GPT-6.1-Sol 53/57 0/57 7/57 0/57",
+   "term": "director rewrites among known films (count of 57)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "GPT-6.1-Sol (Table 16)",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 16, row GPT-6.1-Sol, column Table 16, Surrogate Evidence",
+   "quote": "GPT-6.1-Sol 53/57 0/57 7/57 0/57",
+   "term": "director rewrites among known films (count of 57)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F57",
+   "says": "note",
+   "about": null,
+   "value": "GPT-6.1 .28–.29 .09–.10 .32–.34 .32–.35 .07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2611.08106.html",
+   "where": "Table 12, row GPT-6.1",
+   "quote": "GPT-6.1 .28–.29 .09–.10 .32–.34 .32–.35 .07",
+   "note": "identity-column contrast ranges over three construction seeds (Hospital F-W .28-.29, W-S .09-.10, O-S .32-.34; Movies F-W .32-.35, O-W .07): ranges, kept as a note, not point measures"
   }
  ]
 }

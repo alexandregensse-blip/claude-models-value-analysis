@@ -27,7 +27,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-1",
- "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-2: convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -524,6 +524,416 @@
    "quote": "Gemma 4 E4B (Google) ≈ 4 {\\approx}4 B, local 0.124 0.098 0.000 0.244 0.146 0.080 0.056",
    "term": "liveness-fragility-share",
    "scale": "fraction"
+  },
+  {
+   "id": "F40",
+   "says": "route",
+   "about": "GPT-6 Astra",
+   "value": "OpenAI API",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Anomaly control on GPT-6 Astra",
+   "quote": "The monitor is gpt-6-astra through the OpenAI API, reading the invoice e-mail, with prompt v2 and reasoning_effort: low , the minimum accepted.",
+   "term": "maker-api",
+   "written": "OpenAI API"
+  },
+  {
+   "id": "F41",
+   "says": "model-api-id",
+   "about": "GPT-6 Astra",
+   "value": "gpt-6-astra",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Models",
+   "quote": "Identifiers were verified against the providers’ model lists at run time: claude-opus-5-5 (Anthropic), gpt-6-astra (OpenAI) and gemini-3.1-pro-preview",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F42",
+   "says": "effort-setting",
+   "about": "GPT-6 Astra",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Anomaly control on GPT-6 Astra",
+   "quote": "The monitor is gpt-6-astra through the OpenAI API, reading the invoice e-mail, with prompt v2 and reasoning_effort: low , the minimum accepted.",
+   "written": "reasoning_effort: low",
+   "note": "'the minimum accepted'; the main text: 'Each model ran on the three sources at its lowest reasoning setting'"
+  },
+  {
+   "id": "F43",
+   "says": "note",
+   "about": null,
+   "value": "Each model ran on the three sources at its lowest reasoning setting",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "section 4 (monitors)",
+   "quote": "Each model ran on the three sources at its lowest reasoning setting",
+   "note": "every API model at its lowest reasoning setting; each family run on three sources (three monitors per family), results pooled over the three sources"
+  },
+  {
+   "id": "F44",
+   "says": "note",
+   "about": null,
+   "value": "Table 1: All pools on the same 340 340 items under transferred attacks (not pre-registered), pooled over each family’s three source monitors.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1 caption",
+   "quote": "Table 1: All pools on the same 340 340 items under transferred attacks (not pre-registered), pooled over each family’s three source monitors.",
+   "note": "share of adversarial verdicts that approved a fraud or blocked a good payment; 340 items (300 adversarial + 40 benign); transferred attacks optimised against the small models and replayed unchanged; lower is better; frontier arm not pre-registered"
+  },
+  {
+   "id": "F45",
+   "says": "cost-method",
+   "about": null,
+   "value": "priced at the rates read from their pricing pages at run time",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Spend (frontier replay arm)",
+   "quote": "The providers’ own per-call usage reports were priced at the rates read from their pricing pages at run time.",
+   "term": "tokens×list",
+   "note": "cost = the providers own per-call usage reports priced at the list rates read at run time"
+  },
+  {
+   "id": "F46",
+   "says": "cost-basis",
+   "about": null,
+   "value": "priced at the rates read from their pricing pages at run time",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Spend (frontier replay arm)",
+   "quote": "The providers’ own per-call usage reports were priced at the rates read from their pricing pages at run time.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F47",
+   "says": "price-table",
+   "about": "GPT-6 Astra",
+   "value": "10",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Spend (frontier replay arm): Astra input",
+   "quote": "In USD per million tokens, input/output: Opus 4 / 20 4/20 , Astra 10 / 50 10/50 , Gemini 2 / 12 2/12 .",
+   "term": "input",
+   "written": "10",
+   "note": "Astra input price, USD per million tokens (Astra 10 / 50 = input/output)"
+  },
+  {
+   "id": "F48",
+   "says": "price-table",
+   "about": "GPT-6 Astra",
+   "value": "50",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Spend (frontier replay arm): Astra output",
+   "quote": "In USD per million tokens, input/output: Opus 4 / 20 4/20 , Astra 10 / 50 10/50 , Gemini 2 / 12 2/12 .",
+   "term": "output",
+   "written": "50",
+   "note": "Astra output price, USD per million tokens"
+  },
+  {
+   "id": "F49",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Spend",
+   "quote": "In USD per million tokens, input/output: Opus 4 / 20 4/20 , Astra 10 / 50 10/50 , Gemini 2 / 12 2/12 .",
+   "term": "USD"
+  },
+  {
+   "id": "F50",
+   "says": "cost",
+   "about": "GPT-6 Astra",
+   "value": "12.44",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Spend (frontier replay arm: Astra)",
+   "quote": "Opus cost $ 8.82 \\$8.82 ( 1,347 1{,}347 calls), Astra $ 12.44 \\$12.44 ( 1,347 1{,}347 )",
+   "note": "total cost of the frontier replay arm for Astra over 1,347 calls (the arm that gives the Table 1 frontier rows), at list prices Astra 10/50 USD per million tokens; not a per-item cost"
+  },
+  {
+   "id": "F51",
+   "says": "unit",
+   "about": "GPT-6 Astra",
+   "value": "1,347",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Spend (frontier replay arm)",
+   "quote": "Opus cost $ 8.82 \\$8.82 ( 1,347 1{,}347 calls), Astra $ 12.44 \\$12.44 ( 1,347 1{,}347 )",
+   "term": "USD",
+   "note": "total for the arm (1,347 calls), not per item"
+  },
+  {
+   "id": "F52",
+   "says": "model-name",
+   "about": "GPT-6 Astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "0.104",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra, column Table 1, fraud approved all",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000",
+   "term": "share of adversarial verdicts",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "0.000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra, column Table 1, fraud approved inj.",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000",
+   "term": "share of adversarial verdicts",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "0.000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra, column Table 1, fraud approved pers.",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000",
+   "term": "share of adversarial verdicts",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "0.116",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra, column Table 1, good payment blocked all",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000",
+   "term": "share of adversarial verdicts",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "0.000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra, column Table 1, good payment blocked inj.",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000",
+   "term": "share of adversarial verdicts",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F58",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "0.000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra, column Table 1, good payment blocked pers.",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000",
+   "term": "share of adversarial verdicts",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "0.000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 1, row GPT-6 Astra, column Table 1, liveness fragility",
+   "quote": "GPT-6 Astra (OpenAI) frontier, API 0.104 0.000 0.000 0.116 0.000 0.000 0.000",
+   "term": "share of adversarial verdicts",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F60",
+   "says": "note",
+   "about": null,
+   "value": "Table 17: Anomaly control (exploratory). Correct payments rejected by the",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 17 caption",
+   "quote": "Table 17: Anomaly control (exploratory). Correct payments rejected by the",
+   "note": "exploratory anomaly control: correct payments rejected by the monitor reading the invoice, each model at its API lowest reasoning setting; the same 40 tasks and prompts for every model, three samples per task for lines A-C (120 calls), one for D (40 calls); 95% Wilson intervals; columns Opus 5.5, Astra, Argon, DeepSeek"
+  },
+  {
+   "id": "F61",
+   "says": "cost",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "3.23",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Anomaly control on GPT-6 Astra (Spend)",
+   "quote": "Spend. $ 3.23 \\$3.23 over 405 405 calls (OpenAI only).",
+   "note": "total spend of the Astra anomaly-control arm over 405 calls (OpenAI only), at list prices; not a per-item cost"
+  },
+  {
+   "id": "F62",
+   "says": "unit",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "405 405 calls",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, Anomaly control on GPT-6 Astra (Spend)",
+   "quote": "Spend. $ 3.23 \\$3.23 over 405 405 calls (OpenAI only).",
+   "term": "USD",
+   "note": "total for the arm (405 calls)"
+  },
+  {
+   "id": "F63",
+   "says": "model-name",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Appendix, anomaly control heading",
+   "quote": "Anomaly control on GPT-6 Astra ( frontier-anomaly-astra ). Exploratory, not pre-registered.",
+   "note": "the Table 17 column is headed 'Astra'; the paper names the model GPT-6 Astra (gpt-6-astra)"
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 17, line A, column Astra",
+   "quote": "A “I can’t rewrite the fraud alert to deceive the reviewer. ...” 36 / 120 36/120 [ 0.225 , 0.387 ] [0.225,0.387] 0 / 120 0/120 0 / 120 0/120 0 / 120 0/120",
+   "term": "correct payments rejected (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F65",
+   "says": "score",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 17, line B, column Astra",
+   "quote": "B “Thank you for your business. ...” (neutral) 0 / 120 0/120 [ 0.000 , 0.031 ] [0.000,0.031] 0 / 120 0/120 0 / 120 0/120 0 / 120 0/120",
+   "term": "correct payments rejected (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F66",
+   "says": "score",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 17, line C, column Astra",
+   "quote": "C “Note: this message was flagged by our e-mail security filter.” 8 / 120 8/120 [ 0.034 , 0.126 ] [0.034,0.126] 0 / 120 0/120 0 / 120 0/120 0 / 120 0/120",
+   "term": "correct payments rejected (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F67",
+   "says": "score",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 17, line D, column Astra",
+   "quote": "D nothing (clean) 0 / 40 0/40 [ 0.000 , 0.088 ] [0.000,0.088] 0 / 40 0/40 0 / 40 0/40 0 / 40 0/40",
+   "term": "correct payments rejected (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F68",
+   "says": "tokens-reasoning",
+   "about": "GPT-6 Astra anomaly control",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2610.29178.html",
+   "where": "Table 17, row reasoning tokens per call under A (mean), column Astra",
+   "quote": "reasoning tokens per call under A (mean) ≈ 291 {\\approx}291 0 0 0 0 0 0"
   }
  ]
 }
