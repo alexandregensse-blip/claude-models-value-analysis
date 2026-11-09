@@ -287,6 +287,8 @@ shared couples, ≥ 2 of them, equality by METHODOLOGY §3's closeness test) lin
    maintainer, 9 Nov 2026): `restated-from` with a `same-runs-as` fact whose `held` names the measure we hold with the
    same runs → `out:copy`, on both axes, whatever lqm finds; with `capture` (an older capture of the original showing
    the copied value) and `held` the board we hold newer → `out:copy-older-snapshot`.
+   `held` may name a measure of the same source: a table that repeats a run another table of the same document
+   reports (integration 4, 9 Nov 2026).
 10. **Group** = setup × publisher × campaign, ≥ 2 accepted couples of models in the fit's model list → `in`; else
    `out:single-couple`.
 
@@ -535,3 +537,6 @@ Decided by the maintainer during the reviews:
   SpireClimb's main table is the composite of its sts1 and sts2 tables (the composite rule applies). Values, names,
   efforts and routes are read by the agent line by line, never by a script that walks a table; a script only writes
   the JSON and checks (data/BUILD.md, « Added on 9 Nov 2026 »).
+- **Integration 4 of salvo s5 (the maintainer, 9 Nov 2026).** Measure decisions D32–D34 (data/decisions.json): an ARC
+  row stating both a thinking budget and a level is out; a dated pass of an ARC couple replaces the undated row of the
+  same payload; benchmarklist's Terminal-Bench 2.1 value (two possible origins) is pending, out. No rule changed.
