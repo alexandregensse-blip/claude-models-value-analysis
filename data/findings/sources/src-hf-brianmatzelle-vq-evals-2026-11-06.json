@@ -1,0 +1,480 @@
+{
+ "id": "src-hf-brianmatzelle-vq-evals-2026-11-06",
+ "publisher": "hf-brianmatzelle-vq-evals",
+ "urls": [
+  "https://huggingface.co/datasets/brianmatzelle/deepseek-v4.1-flash-1017-vq-evals"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md": "2bb8048c98207a416483e8836aee03ea9ee7600b4c765bedf5dc7989c2180d94"
+ },
+ "harvested_at": "2026-11-09T14:58:33Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://huggingface.co/datasets/brianmatzelle/deepseek-v4.1-flash-1017-vq-evals",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md"
+  }
+ ],
+ "published": null,
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-deepseek. Hugging Face dataset card by brianmatzelle (run 2026-11-05/06): the Official column (a ~1.6-bit quantized GGUF build of DeepSeek-V4.1-Flash-1017 served locally with ds4-dfm-rs on one NVIDIA DGX Spark) of the capability table (chat mode; research file: 5 rows, 4 more added), of the refusal tables (9 rows) and of the thinking-mode harmful-prompt table (1 row). QUANTIZED BUILD, SELF-HOSTED, SAFETY ROWS: very probably out of the fit (quantized local build, not the API model); recorded only. The UNCENSORED column (another model: an abliterated build) is not converted. Not converted: judge counts, per-category refusals, speed, MMLU subject deltas.",
+ "agent": "convertisseur k-deepseek (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "Official",
+   "value": "Baekpica/DeepSeek-V4.1-Flash-1017-VQ-GGUF",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "card header (Official artifact)",
+   "quote": "- **Official**: [Baekpica/DeepSeek-V4.1-Flash-1017-VQ-GGUF](https://huggingface.co/Baekpica/DeepSeek-V4.1-Flash-1017-VQ-GGUF) at revision `f81ee2e9`, built from `deepseek-ai/DeepSeek-V4.1-Flash-1017`."
+  },
+  {
+   "id": "F2",
+   "says": "quantized-build",
+   "about": "Official",
+   "value": "about 1.6 bits per routed-expert weight",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "card header",
+   "quote": "Both are the `vq8sh14-q4k-mtpnative` recipe (about 1.6 bits per routed-expert weight), served by [ds4-dfm-rs](https://github.com/Baekpica/ds4-dfm-rs) at commit `f6404ddb` with MTP on, on one NVIDIA DGX Spark (GB10, 128 GB)",
+   "note": "FLAG quantized build (~1.6 bit, vq8sh14-q4k-mtpnative GGUF), not the model served by the DeepSeek API; the card itself reads \"roughly a 5-point quant tax\" on MMLU against full-precision numbers"
+  },
+  {
+   "id": "F3",
+   "says": "route",
+   "about": "Official",
+   "value": "ds4-dfm-rs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "card header",
+   "quote": "served by [ds4-dfm-rs](https://github.com/Baekpica/ds4-dfm-rs) at commit `f6404ddb` with MTP on, on one NVIDIA DGX Spark (GB10, 128 GB)",
+   "note": "SELF-HOSTED: ds4-dfm-rs at commit f6404ddb on one NVIDIA DGX Spark (GB10, 128 GB), through dedene's Compose setup; no API"
+  },
+  {
+   "id": "F4",
+   "says": "run-start",
+   "about": "Official",
+   "value": "2026-11-05",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "card header",
+   "quote": "Run 2026-11-05/06.",
+   "note": "\"Run 2026-11-05/06\": the run ends on 2026-11-06 (the id date)",
+   "written": "2026-11-05/06"
+  },
+  {
+   "id": "F5",
+   "says": "thinking-off",
+   "about": "Official",
+   "value": "thinking off",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "card header",
+   "quote": "thinking off except where a row says thinking",
+   "note": "chat mode: temperature 0, top_p 1, seed 0, no system prompt, one request at a time"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "One request at a time, temperature 0, top_p 1, seed 0, no system prompt",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "card header",
+   "quote": "One request at a time, temperature 0, top_p 1, seed 0, no system prompt, thinking off except where a row says thinking. Brackets are Wilson 95% intervals, in percent.",
+   "note": "brackets after the value are Wilson 95% intervals in percent (not converted)"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "the ~1.6-bit official build lands at 81.8 here",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "section Reading it",
+   "quote": "the ~1.6-bit official build lands at 81.8 here, with a different prompt and an 8-token answer budget, so read that as roughly a 5-point quant tax, not a precise one.",
+   "note": "author reading of the quantization loss"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "Refusals, chat mode",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "section Refusals, chat mode",
+   "quote": "## Refusals, chat mode",
+   "note": "FLAG safety / refusal measures (not capability): every reply was labelled COMPLY / PARTIAL / REFUSE by the OFFICIAL BUILD itself at temperature 0 (a self-judge), the keyword classifier is shown as a check; \"Refused\" = the REFUSE share"
+  },
+  {
+   "id": "F9",
+   "says": "judge",
+   "about": "Official",
+   "value": "official build",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "section Refusals, chat mode",
+   "quote": "Every reply (capped at 256 tokens) was labelled COMPLY / PARTIAL / REFUSE by the **official build** at temperature 0, the same judge for both runs."
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": "Official",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table Capability, row thinking on",
+   "quote": "| GSM8K, first 50 of the sample, **thinking on**, effort high | 98.0 (90–100) | 100.0 (93–100) |"
+  },
+  {
+   "id": "F11",
+   "says": "effort-label",
+   "about": "Official",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "section Thinking mode on harmful prompts",
+   "quote": "30 HarmBench prompts (seed 0), thinking on, reasoning_effort high, 3,072-token cap."
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "Official",
+   "value": "81.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"MMLU, 20 per subject (n=1140), zero-shot, bare letter, accuracy\", column Official",
+   "quote": "| MMLU, 20 per subject (n=1140), zero-shot, bare letter, accuracy | 81.8 (80–84) | 79.4 (77–82) |",
+   "term": "MMLU 20 per subject, zero-shot, bare letter (accuracy, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Official",
+   "value": "83.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"MMLU, accuracy over the replies that gave a letter\", column Official",
+   "quote": "| MMLU, accuracy over the replies that gave a letter | 83.8 | 82.5 |",
+   "term": "MMLU over the replies that gave a letter (accuracy, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Official",
+   "value": "97.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"GSM8K, 200 sampled (seed 0), step-by-step, exact match\", column Official",
+   "quote": "| GSM8K, 200 sampled (seed 0), step-by-step, exact match | 97.0 (94–99) | 96.5 (93–98) |",
+   "term": "GSM8K 200 sampled, exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "Official",
+   "value": "90.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"HumanEval, all 164, pass@1\", column Official",
+   "quote": "| HumanEval, all 164, pass@1, tests run in a network-less container | 90.9 (86–94) | 90.9 (86–94) |",
+   "term": "HumanEval pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Official",
+   "value": "79.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"IFEval, all 541, prompt-level strict\", column Official",
+   "quote": "| IFEval, all 541, prompt-level strict | 79.1 (76–82) | 76.5 (73–80) |",
+   "term": "IFEval prompt-level strict (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "Official",
+   "value": "84.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"IFEval, prompt-level loose\", column Official",
+   "quote": "| IFEval, prompt-level loose | 84.7 | 81.5 |",
+   "term": "IFEval prompt-level loose (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "Official",
+   "value": "85.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"IFEval, instruction-level strict\", column Official",
+   "quote": "| IFEval, instruction-level strict | 85.3 | 83.5 |",
+   "term": "IFEval instruction-level strict (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "Official",
+   "value": "89.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"IFEval, instruction-level loose\", column Official",
+   "quote": "| IFEval, instruction-level loose | 89.1 | 86.9 |",
+   "term": "IFEval instruction-level loose (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "Official",
+   "value": "98.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"GSM8K, first 50 of the sample, thinking on, effort high\", column Official",
+   "quote": "| GSM8K, first 50 of the sample, **thinking on**, effort high | 98.0 (90–100) | 100.0 (93–100) |",
+   "term": "GSM8K first 50, thinking on, effort high (exact match, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "Official",
+   "value": "80.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"HarmBench standard, 200 harmful: refused\", column Official",
+   "quote": "| HarmBench standard, 200 harmful: refused | 80.5 | 1.0 |",
+   "term": "HarmBench standard, refused (judge, % of 200; a refusal rate, not a capability)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "Official",
+   "value": "74.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"HarmBench standard, refused (keyword)\", column Official",
+   "quote": "| HarmBench standard, refused (keyword) | 74.5 (68–80) | 0.0 (0–2) |",
+   "term": "HarmBench standard, refused (keyword classifier, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "Official",
+   "value": "77.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"JailbreakBench, 100 harmful: refused\", column Official",
+   "quote": "| JailbreakBench, 100 harmful: refused | 77.0 | 1.0 |",
+   "term": "JailbreakBench harmful, refused (judge, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "Official",
+   "value": "88.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"JailbreakBench, 100 harmful: refused (keyword)\", column Official",
+   "quote": "| JailbreakBench, 100 harmful: refused (keyword) | 88.0 (80–93) | 0.0 (0–4) |",
+   "term": "JailbreakBench harmful, refused (keyword classifier, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "Official",
+   "value": "87.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"XSTest, 200 unsafe: refused\", column Official",
+   "quote": "| XSTest, 200 unsafe: refused | 87.0 | 4.0 |",
+   "term": "XSTest unsafe, refused (judge, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "Official",
+   "value": "80.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"XSTest, 200 unsafe: refused (keyword)\", column Official",
+   "quote": "| XSTest, 200 unsafe: refused (keyword) | 80.0 (74–85) | 4.5 (2–8) |",
+   "term": "XSTest unsafe, refused (keyword classifier, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "Official",
+   "value": "8.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"Over-refusal: XSTest, 250 safe prompts refused\", column Official",
+   "quote": "| **Over-refusal**: XSTest, 250 safe prompts refused | 8.8 | 0.4 |",
+   "term": "XSTest safe prompts refused, over-refusal (judge, %; lower is better)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "Official",
+   "value": "6.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"XSTest safe, refused (keyword)\", column Official",
+   "quote": "| XSTest safe, refused (keyword) | 6.8 (4–11) | 0.0 (0–2) |",
+   "term": "XSTest safe, refused (keyword classifier, %; lower is better)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "Official",
+   "value": "5.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"Over-refusal: JailbreakBench, 100 benign prompts refused\", column Official",
+   "quote": "| Over-refusal: JailbreakBench, 100 benign prompts refused | 5.0 | 0.0 |",
+   "term": "JailbreakBench benign prompts refused, over-refusal (judge, %; lower is better)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "Official",
+   "value": "70.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/web/hf_brianmatzelle_deepseek-v4.1-flash-1017-vq-evals.md",
+   "where": "table, row \"HarmBench 30 prompts, thinking on: refused, judged\", column Official",
+   "quote": "| refused, judged (on the answer, or on the reasoning when there was no answer) | 70.0 | 6.7 |",
+   "term": "HarmBench 30 prompts with thinking on, refused (judge, %)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ]
+}

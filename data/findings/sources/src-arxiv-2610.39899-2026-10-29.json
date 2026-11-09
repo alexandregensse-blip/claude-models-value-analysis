@@ -2,12 +2,15 @@
  "id": "src-arxiv-2610.39899-2026-10-29",
  "publisher": "arxiv-2610.39899",
  "urls": [
-  "https://arxiv.org/abs/2610.39899"
+  "https://arxiv.org/abs/2610.39899",
+  "https://arxiv.org/abs/2610.39899v1"
  ],
  "wayback": [],
  "commit": null,
  "sha256": {
-  "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html": "0fc30e6e1e76c8cebf6807c8647c1edd628c3e2f9a7564f116bf414fc823bf5f"
+  "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html": "0fc30e6e1e76c8cebf6807c8647c1edd628c3e2f9a7564f116bf414fc823bf5f",
+  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.pdf": "660f87102021d6b53a4e8c87e840fc337e7ec029c9f233631cb57fe5fa5215a4",
+  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt": "305e921d9fda1517066b064bdfcb14a7e93c398bb2ea2308a6974dfb3d41d269"
  },
  "harvested_at": "2026-11-09T15:16:29Z",
  "published": {
@@ -17,7 +20,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). ExploreRepair (vulnerability repair with exploration agents). GPT-5.6-Luna column of Table 3 (11 approaches on 169 PatchEval vulnerabilities: RSR with the OFR in parentheses, one measure per number), Table 4 (aggregation methods on PatchEval; the complete ExploreRepair row repeats Table 3 and is kept as a note) and Table 5 (35 VulnLoc+ C/C++ vulnerabilities: RSR only, OFR not measurable). Each row is a SYSTEM measure (GPT-5.6-Luna inside a repair approach; the row 'Codex' is GPT-5.6-Luna in the Codex agent). RSR = Repair Success Rate (patch passes the PoV test and the repository unit tests), OFR = Overfitting Rate (patches that pass the PoV but fail the unit tests), as percentages of the evaluated CVEs; OFR lower is better. GPT-5.6-Luna through OpenRouter; effort not written. The DeepSeek-V4.1-Flash column is not OpenAI and not converted.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-deepseek: convertisseur k-deepseek (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -26,6 +29,13 @@
    "url": "https://arxiv.org/abs/2610.39899",
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.39899.html"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.39899v1",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.pdf"
   }
  ],
  "facts": [
@@ -910,6 +920,630 @@
     "step": 0.1
    },
    "written": "51.4%"
+  },
+  {
+   "id": "F58",
+   "says": "model-name",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "DeepSeek-V4.1-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3 header",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash"
+  },
+  {
+   "id": "F59",
+   "says": "route",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "section 5.6 (Implementation and Hardware)",
+   "quote": "Our experiments use OpenAI GPT-5.6-Luna and DeepSeek-V4.1-Flash through OpenRouter.",
+   "term": "openrouter"
+  },
+  {
+   "id": "F60",
+   "says": "note",
+   "about": null,
+   "value": "DeepSeek-V4.1-Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3 header",
+   "quote": "Approach GPT-5.6-Luna DeepSeek-V4.1-Flash",
+   "note": "DOUBT snapshot: written \"DeepSeek-V4.1-Flash\" with no date or snapshot (paper of 29 Oct 2026; 0910 or 1017 not established); the OpenRouter slug is not given"
+  },
+  {
+   "id": "F61",
+   "says": "note",
+   "about": null,
+   "value": "We ran the experiments three times at a sampling temperature of 1, with repair counts varying by at most one across runs.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Limitations (section 7)",
+   "quote": "We ran the experiments three times at a sampling temperature of 1, with repair counts varying by at most one across runs.",
+   "note": "three runs at temperature 1; repair counts vary by at most one across runs; the tables do not say whether they report one run or a mean; each phase has a 1800 s limit per vulnerability; network-disabled containers"
+  },
+  {
+   "id": "F62",
+   "says": "note",
+   "about": null,
+   "value": "Each entry reports Repair Success Rate (RSR) followed by Overfitting Rate (OFR) in parentheses.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3 caption",
+   "quote": "Table 3: Repair outcomes on 169 PatchEval vulnera- bilities. Each entry reports Repair Success Rate (RSR) followed by Overfitting Rate (OFR) in parentheses.",
+   "note": "RSR higher is better, OFR lower is better; the localization hint is given to all approaches"
+  },
+  {
+   "id": "F63",
+   "says": "effort-label",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Appendix C (baselines), Single Agent",
+   "quote": "Single Agent uses a ReAct scaffold with shell tools and medium reason- ing effort."
+  },
+  {
+   "id": "F64",
+   "says": "effort-label",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "section 6.4 (Comparison with a General-Purpose Coding Agent)",
+   "quote": "Codex (OpenAI, 2026) using GPT-5.6-Luna and DeepSeek-V4.1-Flash at medium reason- ing effort.",
+   "note": "the comparison with Codex is run at medium reasoning effort"
+  },
+  {
+   "id": "F65",
+   "says": "effort-label",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Appendix B (the three exploration agents)",
+   "quote": "Each agent runs at medium rea- soning effort with a time limit of 1800 s.",
+   "note": "the three exploration agents of ExploreRepair run at medium effort; the effort of the aggregator is not written"
+  },
+  {
+   "id": "F66",
+   "says": "harness",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "section 5.5 (General-Purpose Coding Agent)",
+   "quote": "We run Codex with GPT-5.6-Luna and DeepSeek- V4.1-Flash.",
+   "term": "codex-cli",
+   "note": "Codex uses its native agent loop; same repository and localization hint; benchmark artifacts removed and external capabilities disabled"
+  },
+  {
+   "id": "F67",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "23.7%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row LLM (standalone model, one response), column DeepSeek-V4.1-Flash, RSR",
+   "quote": "LLM 10.7% (1.2%) 23.7% (2.4%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F68",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "2.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row LLM (standalone model, one response), column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "LLM 10.7% (1.2%) 23.7% (2.4%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F69",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "9.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row IntentFix, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "IntentFix 4.7% (1.2%) 9.5% (1.2%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F70",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "1.2%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row IntentFix, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "IntentFix 4.7% (1.2%) 9.5% (1.2%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "46.2%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row EvoRepair, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "EvoRepair 23.7% (3.0%) 46.2% (1.8%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F72",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "1.8%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row EvoRepair, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "EvoRepair 23.7% (3.0%) 46.2% (1.8%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F73",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "55.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Multi-Agent, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Multi-Agent 30.2% (1.2%) 55.6% (1.2%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "1.2%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Multi-Agent, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "Multi-Agent 30.2% (1.2%) 55.6% (1.2%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "57.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Single Agent, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Single Agent 32.5% (0.6%) 57.4% (0.6%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F76",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "0.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Single Agent, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "Single Agent 32.5% (0.6%) 57.4% (0.6%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F77",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "43.8%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Codex, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Codex 34.3% (0.6%) 43.8% (0.6%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F78",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "0.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Codex, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "Codex 34.3% (0.6%) 43.8% (0.6%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F79",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "55.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Structural (Graph) exploration agent, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Structural (Graph) 36.1% (1.2%) 55.6% (0.0%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F80",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "0.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Structural (Graph) exploration agent, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "Structural (Graph) 36.1% (1.2%) 55.6% (0.0%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F81",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "59.8%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Semantic (Intent) exploration agent, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Semantic (Intent) 29.6% (0.0%) 59.8% (0.0%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F82",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "0.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Semantic (Intent) exploration agent, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "Semantic (Intent) 29.6% (0.0%) 59.8% (0.0%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F83",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "58.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Executable (PoV) exploration agent, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Executable (PoV) 33.7% (0.0%) 58.0% (0.6%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F84",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "0.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row Executable (PoV) exploration agent, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "Executable (PoV) 33.7% (0.0%) 58.0% (0.6%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F85",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "53.3%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row 3-in-1 Agent, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "3-in-1 Agent 30.8% (1.2%) 53.3% (0.6%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F86",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "0.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row 3-in-1 Agent, column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "3-in-1 Agent 30.8% (1.2%) 53.3% (0.6%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F87",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "71.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row ExploreRepair (the paper's method), column DeepSeek-V4.1-Flash, RSR",
+   "quote": "EXPLOREREPAIR39.6% (0.0%) 71.6% (0.6%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F88",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "0.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 3, row ExploreRepair (the paper's method), column DeepSeek-V4.1-Flash, OFR (in parentheses)",
+   "quote": "EXPLOREREPAIR39.6% (0.0%) 71.6% (0.6%)",
+   "term": "overfitting rate, OFR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F89",
+   "says": "note",
+   "about": null,
+   "value": "Effectiveness of different aggregation methods on PatchEval.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 4 caption",
+   "quote": "Table 4: Effectiveness of different aggregation methods on PatchEval. Each entry reports Repair Success Rate (RSR) followed by Overfitting Rate (OFR) in parenthe- ses.",
+   "note": "ablation of the aggregation phase of ExploreRepair (system variants), PatchEval 169"
+  },
+  {
+   "id": "F90",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "63.9%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 4, row Lesson Aggregator, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Lesson Aggregator 39.1% (0.6%) 63.9% (0.6%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F91",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "69.2%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 4, row Patch Aggregator, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Patch Aggregator 37.3% (0.6%) 69.2% (1.2%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F92",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "67.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 4, row Direct Lessons + Patches, column DeepSeek-V4.1-Flash, RSR",
+   "quote": "Direct Lessons + Patches 37.3% (0.6%) 67.5% (0.6%)",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F93",
+   "says": "note",
+   "about": null,
+   "value": "Repair Success Rate (RSR) on 35 VulnLoc+ C/C++ vulnerabilities.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 5 caption",
+   "quote": "Table 5: Repair Success Rate (RSR) on 35 VulnLoc+ C/C++ vulnerabilities. OFR cannot be measured be- cause this benchmark has no unit tests. LoopRepair + PoV receives the ground-truth PoV while the other configurations do not.",
+   "note": "35 VulnLoc+ C/C++ vulnerabilities; LoopRepair + PoV receives the ground-truth PoV, the other configurations do not"
+  },
+  {
+   "id": "F94",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "51.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 5, row LoopRepair + PoV (ground-truth PoV given), column DeepSeek-V4.1-Flash",
+   "quote": "LoopRepair + PoV 48.6% 51.4%",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F95",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "45.7%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 5, row LoopRepair (no PoV), column DeepSeek-V4.1-Flash",
+   "quote": "LoopRepair (no PoV) 31.4% 45.7%",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F96",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "57.1%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 5, row Single Agent, column DeepSeek-V4.1-Flash",
+   "quote": "Single Agent 48.6% 57.1%",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F97",
+   "says": "score",
+   "about": "DeepSeek-V4.1-Flash",
+   "value": "62.9%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.39899.txt",
+   "where": "Table 5, row ExploreRepair, column DeepSeek-V4.1-Flash",
+   "quote": "EXPLOREREPAIR51.4% 62.9%",
+   "term": "repair success rate, RSR (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
   }
  ]
 }

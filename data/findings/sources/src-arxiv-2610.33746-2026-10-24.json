@@ -2,12 +2,15 @@
  "id": "src-arxiv-2610.33746-2026-10-24",
  "publisher": "arxiv-2610.33746",
  "urls": [
-  "https://arxiv.org/abs/2610.33746"
+  "https://arxiv.org/abs/2610.33746",
+  "https://arxiv.org/abs/2610.33746v1"
  ],
  "wayback": [],
  "commit": null,
  "sha256": {
-  "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.33746.html": "0aae4b4545c00dc7272613bba60974e4ce59ed95c2708a93009534e375e820bc"
+  "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.33746.html": "0aae4b4545c00dc7272613bba60974e4ce59ed95c2708a93009534e375e820bc",
+  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.pdf": "fe6a9b9fce52352996cb0e2872eef812de5b8e72a37cc97aed7095660c46c05a",
+  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt": "73d45c649f693cd78be60d2bf1c64b05d0215767b240fa8ac55aa0f67b7b66ba"
  },
  "harvested_at": "2026-11-09T15:16:33Z",
  "published": {
@@ -17,7 +20,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.33746.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). ProtAgent (tool-powered protein-function reasoning). GPT-5.5, a served frontier API evaluated by the authors ('evaluated by us'): Table 1 (all-episode success on OOD-1000: Enzyme, Domain, GO/IPR, Signal, Disorder, Aggregate), Table 4 (compact PFUA-compatible ROUGE-1 / ROUGE-L recall) and Table C1 (Mol-Instructions: Func., Cat., Dom., Desc., Avg., ROUGE-1/ROUGE-L pairs; the Avg. pair repeats Table 4 and is kept as a note on its measures). Fixed decoding configuration (no level written), same prompt, tools, budget and scorer for all rows evaluated by the authors. Effort and route not written (served API, provider not named).",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-deepseek: convertisseur k-deepseek (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
@@ -26,6 +29,13 @@
    "url": "https://arxiv.org/abs/2610.33746",
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/c-openai/arx/2610.33746.html"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.33746v1",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.pdf"
   }
  ],
  "facts": [
@@ -376,6 +386,381 @@
    "where": "Table C1, row GPT-5.5, column Desc. (ROUGE-L)",
    "quote": "GPT-5.5 65.50/46.01 67.89/52.27 50.36/37.69 61.90/42.65 61.41/44.66",
    "term": "ROUGE-L recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F24",
+   "says": "note",
+   "about": null,
+   "value": "All-episode success (%) on the fixed OOD-1000 protocol (1,000 sequences; 200 per task category).",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1 caption",
+   "quote": "Table 1: All-episode success (%) on the fixed OOD-1000 protocol (1,000 sequences; 200 per task category). Boldface marks the best value in each column. All systems use the same concise protein-function prompt and the same bioinformatics tools. Unanswered episodes count as failures. Each run uses a fixed decoding configuration.",
+   "note": "1,000 sequences, 200 per task category; the same prompt and bioinformatics tools for all systems; unanswered episodes count as failures; a fixed decoding configuration (not described in the passages read); \"do not guarantee identical API outputs across repeated runs\"; route, run date and reasoning effort of the DeepSeek systems are not written"
+  },
+  {
+   "id": "F25",
+   "says": "note",
+   "about": null,
+   "value": "Aggregate all-episode success (%) on OOD- 1000 at varying reference-token annotation-coverage cutoffs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table B6 caption",
+   "quote": "Table B6: Aggregate all-episode success (%) on OOD- 1000 at varying reference-token annotation-coverage cutoffs τ",
+   "note": "Table 1 uses the cutoff tau = 0.50 (Table B6 row 0.50: ProtAgent-8B 61.00, DeepSeek-V3.2-Thinking 41.60); the aggregate is the macro mean over the five task categories"
+  },
+  {
+   "id": "F26",
+   "says": "model-name",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "DeepSeek-V3.2-Thinking 671B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V3.2-Thinking 671B",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60"
+  },
+  {
+   "id": "F27",
+   "says": "thinking-on",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "Thinking",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row name",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60",
+   "note": "the row name carries \"Thinking\" (a thinking variant of V3.2 by its name); no effort level is written"
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "1.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V3.2-Thinking 671B, column Enzyme",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "25.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V3.2-Thinking 671B, column Domain",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "1.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V3.2-Thinking 671B, column GO/IPR",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "99.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V3.2-Thinking 671B, column Signal peptide",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "81.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V3.2-Thinking 671B, column Disorder",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "DeepSeek-V3.2-Thinking 671B",
+   "value": "41.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V3.2-Thinking 671B, column aggregate (macro mean of the five categories)",
+   "quote": "DeepSeek-V3.2-Thinking 671B 1.00 25.50 1.5099.0081.00 41.60",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "DeepSeek-V4-Flash",
+   "value": "DeepSeek-V4-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Flash",
+   "quote": "DeepSeek-V4-Flash 7.00 29.00 42.5099.00 94.5054.40"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "7.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Flash, column Enzyme",
+   "quote": "DeepSeek-V4-Flash 7.00 29.00 42.5099.00 94.5054.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "29.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Flash, column Domain",
+   "quote": "DeepSeek-V4-Flash 7.00 29.00 42.5099.00 94.5054.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "42.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Flash, column GO/IPR",
+   "quote": "DeepSeek-V4-Flash 7.00 29.00 42.5099.00 94.5054.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "99.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Flash, column Signal peptide",
+   "quote": "DeepSeek-V4-Flash 7.00 29.00 42.5099.00 94.5054.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "94.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Flash, column Disorder",
+   "quote": "DeepSeek-V4-Flash 7.00 29.00 42.5099.00 94.5054.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "54.40",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Flash, column aggregate (macro mean of the five categories)",
+   "quote": "DeepSeek-V4-Flash 7.00 29.00 42.5099.00 94.5054.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F41",
+   "says": "model-name",
+   "about": "DeepSeek-V4-Pro",
+   "value": "DeepSeek-V4-Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Pro",
+   "quote": "DeepSeek-V4-Pro 14.50 30.00 27.00 98.50 92.00 52.40"
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "14.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Pro, column Enzyme",
+   "quote": "DeepSeek-V4-Pro 14.50 30.00 27.00 98.50 92.00 52.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "30.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Pro, column Domain",
+   "quote": "DeepSeek-V4-Pro 14.50 30.00 27.00 98.50 92.00 52.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "27.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Pro, column GO/IPR",
+   "quote": "DeepSeek-V4-Pro 14.50 30.00 27.00 98.50 92.00 52.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "98.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Pro, column Signal peptide",
+   "quote": "DeepSeek-V4-Pro 14.50 30.00 27.00 98.50 92.00 52.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "92.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Pro, column Disorder",
+   "quote": "DeepSeek-V4-Pro 14.50 30.00 27.00 98.50 92.00 52.40",
+   "term": "all-episode success (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "52.40",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.33746.txt",
+   "where": "Table 1, row DeepSeek-V4-Pro, column aggregate (macro mean of the five categories)",
+   "quote": "DeepSeek-V4-Pro 14.50 30.00 27.00 98.50 92.00 52.40",
+   "term": "all-episode success (%)",
    "scale": "percent",
    "precision": {
     "model": "printed",

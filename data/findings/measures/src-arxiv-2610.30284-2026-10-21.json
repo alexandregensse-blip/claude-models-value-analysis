@@ -1,0 +1,347 @@
+{
+ "source": "src-arxiv-2610.30284-2026-10-21",
+ "measures": [
+  {
+   "id": "M1",
+   "setup": "arxiv-2610.30284-none",
+   "facts": {
+    "value": "F7",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "baseline; defines the 1.00x cost reference; steps 41.64"
+  },
+  {
+   "id": "M2",
+   "setup": "arxiv-2610.30284-traj-verifier3",
+   "facts": {
+    "value": "F8",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "three complete rollouts, the policy model also serves as the verifier; cost 4.19x the no-verifier baseline; steps not reported; extraction fuses the label and the value (\"Verifier@374.30\" = Verifier@3 | 74.30); research row 1"
+  },
+  {
+   "id": "M3",
+   "setup": "arxiv-2610.30284-oracle3",
+   "facts": {
+    "value": "F9",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "FLAG upper bound, not a realisable result: Oracle@3 selects a successful rollout whenever one exists among three; cost 3.00x; row added from the copy (not in the research file)"
+  },
+  {
+   "id": "M4",
+   "setup": "arxiv-2610.30284-allstep-self",
+   "facts": {
+    "value": "F10",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "three candidate actions at every step, selected by the policy model; cost 3.99x; steps 33.56 (100.00% verified); extraction fuses 3.99 and 33.56 (\"3.9933.56\"); row added from the copy (not in the research file)"
+  },
+  {
+   "id": "M5",
+   "setup": "arxiv-2610.30284-allstep-qwen4b",
+   "facts": {
+    "value": "F11",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "three candidate actions at every step, selected by Qwen3.5-4B; cost 2.03x; steps 37.14 (100.00% verified); row added from the copy (not in the research file)"
+  },
+  {
+   "id": "M6",
+   "setup": "arxiv-2610.30284-sel-untrained",
+   "facts": {
+    "value": "F12",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "base Qwen3.5-4B as verifier; cost 1.17x; steps 41.36 (8.01% verified); common threshold 0.2 for all DeepSeek-V4-Flash experiments; row added from the copy (not in the research file)"
+  },
+  {
+   "id": "M7",
+   "setup": "arxiv-2610.30284-sel-score-only",
+   "facts": {
+    "value": "F13",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "cost 1.11x; steps 41.56 (3.94% verified); row added from the copy (not in the research file)"
+  },
+  {
+   "id": "M8",
+   "setup": "arxiv-2610.30284-sel-joint-rubric",
+   "facts": {
+    "value": "F14",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "cost 1.08x; steps 41.05 (3.54% verified); extraction fuses 1.08 and 41.05 (\"1.0841.05\"); row added from the copy (not in the research file)"
+  },
+  {
+   "id": "M9",
+   "setup": "arxiv-2610.30284-sel-two-stage",
+   "facts": {
+    "value": "F15",
+    "model": [
+     "F1"
+    ],
+    "effort": [
+     "F2"
+    ],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [
+     "F3"
+    ],
+    "mode": [],
+    "aggregation": [],
+    "setup": [],
+    "other": [
+     "F4",
+     "F5",
+     "F6"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "the paper's headline variant: 74.27 at 1.13x total cost (abstract: \"improving resolution from 72.60% to 74.27% at 1.13 × total cost\"); steps 42.15 (3.59% verified); row added from the copy (not in the research file)"
+  }
+ ]
+}
