@@ -1,0 +1,443 @@
+{
+ "id": "src-vals.ai-fabv2-2026-10-29",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://www.vals.ai/benchmarks/fabv2"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html": "6dafbe46c11bd2331f2f9ff6523cda6d269d0d9f4ae013af7e7c3ffcbd7919f8"
+ },
+ "harvested_at": "2026-11-09T15:24:31Z",
+ "published": {
+  "value": "2026-10-29",
+  "where": "board payload metadata, field updated",
+  "quote": "\"updated\":[0,\"2026-10-29\"]",
+  "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-a1",
+ "agent": "convertisseur k-a1 (Sonnet 5.5), lecture ligne par ligne",
+ "snapshot_of": "src-vals.ai-fabv2-2026-10-18",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://www.vals.ai/benchmarks/fabv2",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "note": "salvo s6 (9 Nov 2026): our fetch of the board page, saved as fabv2.html (the payload is read from the saved copy)"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "about": null,
+   "value": "2",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version)",
+   "quote": "\"version\":[0,\"2\"]"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "cost_per_test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload key cost_per_test of every entry of tasks.overall",
+   "quote": "\"cost_per_test\"",
+   "term": "per-test",
+   "note": "the entries also carry avg_*_tokens (per test), turn_metrics, token_tasks_measured / cost_task_count fields: not transcribed by lot k-a1, still in the saved copy"
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "leaderboard table of the page: a cost printed with a $ sign",
+   "quote": "$4.38",
+   "term": "USD"
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "about": null,
+   "value": "accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload key accuracy of every entry; the page ranks the models by it (column \"Accuracy\")",
+   "quote": "\"accuracy\""
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "2026-10-29",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload metadata of the board, field updated",
+   "quote": "\"updated\":[0,\"2026-10-29\"]",
+   "note": "newer snapshot of the same board; the snapshot before is src-vals.ai-fabv2-2026-10-18 (same board; the rows of the earlier snapshot are not repeated here)"
+  },
+  {
+   "id": "F6",
+   "says": "model-api-id",
+   "about": "alibaba/qwen3.8-max",
+   "value": "alibaba/qwen3.8-max",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max (the board's model key)",
+   "quote": "\"alibaba/qwen3.8-max\":[0,{\"accuracy\"",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "alibaba/qwen3.8-max",
+   "value": "Qwen 3.8 Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "leaderboard table, row link to /models/alibaba_qwen3.8-max (display name of alibaba/qwen3.8-max)",
+   "quote": "<a href=\"/models/alibaba_qwen3.8-max\">Qwen 3.8 Max</a>"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "alibaba/qwen3.8-max",
+   "value": "50.593",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / accuracy",
+   "quote": "\"accuracy\":[0,50.593]",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F9",
+   "says": "cost",
+   "about": "alibaba/qwen3.8-max",
+   "value": "1.236977",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / cost_per_test",
+   "quote": "\"cost_per_test\":[0,1.236977]"
+  },
+  {
+   "id": "F10",
+   "says": "note",
+   "about": "alibaba/qwen3.8-max",
+   "value": "1174.928",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / latency",
+   "quote": "\"latency\":[0,1174.928]"
+  },
+  {
+   "id": "F11",
+   "says": "tokens-in",
+   "about": "alibaba/qwen3.8-max",
+   "value": "313950822",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / token_totals.input_tokens (total over the board's tests)",
+   "quote": "\"input_tokens\":[0,313950822]"
+  },
+  {
+   "id": "F12",
+   "says": "tokens-out",
+   "about": "alibaba/qwen3.8-max",
+   "value": "28653788",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / token_totals.output_tokens (total over the board's tests)",
+   "quote": "\"output_tokens\":[0,28653788]"
+  },
+  {
+   "id": "F13",
+   "says": "tokens-reasoning",
+   "about": "alibaba/qwen3.8-max",
+   "value": "23202069",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / token_totals.reasoning_tokens (total over the board's tests)",
+   "quote": "\"reasoning_tokens\":[0,23202069]"
+  },
+  {
+   "id": "F14",
+   "says": "tokens-cache-read",
+   "about": "alibaba/qwen3.8-max",
+   "value": "139669632",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / token_totals.cache_read_tokens (total over the board's tests)",
+   "quote": "\"cache_read_tokens\":[0,139669632]"
+  },
+  {
+   "id": "F15",
+   "says": "note",
+   "about": "alibaba/qwen3.8-max",
+   "value": "0.578",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max / stderr",
+   "quote": "\"stderr\":[0,0.578]"
+  },
+  {
+   "id": "F16",
+   "says": "model-api-id",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "alibaba/qwen3.8-max-internal",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal (the board's model key)",
+   "quote": "\"alibaba/qwen3.8-max-internal\":[0,{\"accuracy\"",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F17",
+   "says": "model-name",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "Qwen 3.8 Max 0902",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "leaderboard table, row link to /models/alibaba_qwen3.8-max-0902 (display name of alibaba/qwen3.8-max-internal)",
+   "quote": "<a href=\"/models/alibaba_qwen3.8-max-0902\">Qwen 3.8 Max 0902</a>"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "57.872",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / accuracy",
+   "quote": "\"accuracy\":[0,57.872]",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F19",
+   "says": "cost",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "3.026128",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / cost_per_test",
+   "quote": "\"cost_per_test\":[0,3.026128]"
+  },
+  {
+   "id": "F20",
+   "says": "note",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "2945.201",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / latency",
+   "quote": "\"latency\":[0,2945.201]"
+  },
+  {
+   "id": "F21",
+   "says": "tokens-in",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "903582795",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / token_totals.input_tokens (total over the board's tests)",
+   "quote": "\"input_tokens\":[0,903582795]"
+  },
+  {
+   "id": "F22",
+   "says": "tokens-out",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "71072472",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / token_totals.output_tokens (total over the board's tests)",
+   "quote": "\"output_tokens\":[0,71072472]"
+  },
+  {
+   "id": "F23",
+   "says": "tokens-reasoning",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "58650223",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / token_totals.reasoning_tokens (total over the board's tests)",
+   "quote": "\"reasoning_tokens\":[0,58650223]"
+  },
+  {
+   "id": "F24",
+   "says": "tokens-cache-read",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "514335275",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / token_totals.cache_read_tokens (total over the board's tests)",
+   "quote": "\"cache_read_tokens\":[0,514335275]"
+  },
+  {
+   "id": "F25",
+   "says": "note",
+   "about": "alibaba/qwen3.8-max-internal",
+   "value": "0.109",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / alibaba/qwen3.8-max-internal / stderr",
+   "quote": "\"stderr\":[0,0.109]"
+  },
+  {
+   "id": "F26",
+   "says": "model-api-id",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "anthropic/claude-haiku-5-5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 (the board's model key)",
+   "quote": "\"anthropic/claude-haiku-5-5\":[0,{\"accuracy\"",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "leaderboard table, row link to /models/anthropic_claude-haiku-5-5 (display name of anthropic/claude-haiku-5-5)",
+   "quote": "<a href=\"/models/anthropic_claude-haiku-5-5\">Claude Haiku 5.5</a>"
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "54.138",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / accuracy",
+   "quote": "\"accuracy\":[0,54.138]",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F29",
+   "says": "cost",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "1.636603",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / cost_per_test",
+   "quote": "\"cost_per_test\":[0,1.636603]"
+  },
+  {
+   "id": "F30",
+   "says": "note",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "1849",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / latency",
+   "quote": "\"latency\":[0,1849]"
+  },
+  {
+   "id": "F31",
+   "says": "tokens-in",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "1125304863",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / token_totals.input_tokens (total over the board's tests)",
+   "quote": "\"input_tokens\":[0,1125304863]"
+  },
+  {
+   "id": "F32",
+   "says": "tokens-out",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "207972605",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / token_totals.output_tokens (total over the board's tests)",
+   "quote": "\"output_tokens\":[0,207972605]"
+  },
+  {
+   "id": "F33",
+   "says": "tokens-reasoning",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "195320438",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / token_totals.reasoning_tokens (total over the board's tests)",
+   "quote": "\"reasoning_tokens\":[0,195320438]"
+  },
+  {
+   "id": "F34",
+   "says": "tokens-cache-read",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "434937131",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / token_totals.cache_read_tokens (total over the board's tests)",
+   "quote": "\"cache_read_tokens\":[0,434937131]"
+  },
+  {
+   "id": "F35",
+   "says": "note",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "690320292",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / token_totals.cache_write_tokens",
+   "quote": "\"cache_write_tokens\":[0,690320292]"
+  },
+  {
+   "id": "F36",
+   "says": "note",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "2.132",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s6/ev/a1/vals/fabv2.html",
+   "where": "payload tasks.overall / anthropic/claude-haiku-5-5 / stderr",
+   "quote": "\"stderr\":[0,2.132]"
+  }
+ ]
+}
