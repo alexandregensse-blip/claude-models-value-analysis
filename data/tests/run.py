@@ -2692,6 +2692,19 @@ def duration_written_in_hours_and_minutes():
 
 
 @test
+def count_written_in_words():
+    # « earned one badge » / « earned four badges » are written as 1 and 4 (integration 6 of salvo s6, 9 Nov 2026): the
+    # digit check reads the number word; negative controls: another number, a word that is no number
+    import sys as _s
+    _s.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "schema"))
+    import validate as V
+    eq((V.digits_agree("1", "one"), V.digits_agree("4", "four"), V.digits_agree("12", "about twelve")),
+       (True, True, True), "number words")
+    eq((V.digits_agree("2", "one"), V.digits_agree("40", "four"), V.digits_agree("1", "once")), (False, False, False),
+       "negative: another number, not a number word")
+
+
+@test
 def date_proof_checked():
     # dating step 2 (3 Nov 2026): a capture's or the publication's date carries its proof (evidence: file, sha256,
     # quote). The maintainer, 4 Nov 2026: the proof is checked when it is written, by the agent writing it

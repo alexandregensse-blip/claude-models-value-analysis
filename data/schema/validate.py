@@ -403,9 +403,17 @@ def digits_agree(value, written):
             return True
         if re.search(r"\d\s*h", str(written), re.I):
             return False
+    w = re.sub(r"^\s*(?:about|around|approximately|~|≈)\s*", "", str(written).strip().lower())
+    if w in NUMBER_WORDS and re.fullmatch(r"\d+(\.0+)?", str(value).strip()):
+        # a count written in words ('earned one badge', 'four badges'), the value its number (1, 4): equal or not
+        # (a check only; integration 6 of salvo s6, 9 Nov 2026, the Anthropic memory post)
+        return float(value) == NUMBER_WORDS[w]
     return not v or v in sig(written)
 
 
+NUMBER_WORDS = {w: i for i, w in enumerate(
+    "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen "
+    "eighteen nineteen twenty".split())}
 DURATION = re.compile(r"(?:(\d+(?:\.\d+)?)\s*h(?:ours?|rs?)?)?\s*(?:(\d+(?:\.\d+)?)\s*m(?:in(?:utes?)?)?)?")
 
 
