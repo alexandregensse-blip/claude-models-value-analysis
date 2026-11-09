@@ -7,7 +7,8 @@
  "wayback": [],
  "commit": null,
  "sha256": {
-  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html": "11612397e3e6b2798d21e99e20916de11215b7f829e497a160dc06781ff795a3"
+  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html": "11612397e3e6b2798d21e99e20916de11215b7f829e497a160dc06781ff795a3",
+  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html": "11612397e3e6b2798d21e99e20916de11215b7f829e497a160dc06781ff795a3"
  },
  "harvested_at": "2026-11-09T14:40:16Z",
  "published": {
@@ -17,7 +18,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-2 (c2-openai). ATLAS-Bench (agentic local search with multi-faceted constraints). Table 3 rows 'GPT-5.6-Luna (Medium)' and 'GPT-6-Luna (XHigh)': 12 columns each (Answer Quality: CSR, CR, Success@k, Recs/q, Factual; Trajectory Quality: Intent, Approp., Evidence, Strategy; Efficiency: Tokens/q, Calls/q, Rounds/q). The effort sits in the row label ('(Medium)', '(XHigh)'). Judge: LLM evaluations call DeepSeek-V4-Pro directly via API (the only route written). Route of the evaluated models not written. Names as written: 'GPT-5.6-Luna' and 'GPT-6-Luna'.",
- "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-google-2: convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne",
  "snapshot_of": null,
  "captures": [
   {
@@ -25,7 +26,8 @@
    "kind": "fetch",
    "url": "https://arxiv.org/abs/2610.39438",
    "captured": "2026-11-09",
-   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html"
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
+   "note": "also read by lot k-google-2 in /work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html"
   }
  ],
  "facts": [
@@ -476,6 +478,207 @@
    "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2610.39438.html",
    "where": "Table 3, row GPT-6-Luna (XHigh), column Table 3, Rounds/q",
    "quote": "GPT-6-Luna (XHigh) 71.5 84.3 67.3 1.25 95.58 4.23 4.16 2.41 3.31 74.8K 5.11 3.21"
+  },
+  {
+   "id": "F31",
+   "says": "model-name",
+   "about": "Gemini-3.8-Flash",
+   "value": "Gemini-3.8-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think)",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48"
+  },
+  {
+   "id": "F32",
+   "says": "effort-label",
+   "about": "Gemini-3.8-Flash",
+   "value": "Hidden Think",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row label",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "note": "label in parentheses after the model name in the table (\"Hidden Think\": hidden reasoning, no level written; the other rows carry labels such as Max, Medium, XHigh, Adaptive)"
+  },
+  {
+   "id": "F33",
+   "says": "judge",
+   "about": null,
+   "value": "DeepSeek-V4-Pro",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "4.2 Experimental Setup (Judge)",
+   "quote": "All LLM-based judgments use DeepSeek-V4-Pro ( DeepSeek-AI, 2026 ) .",
+   "note": "the judge uses the Agent-as-a-Judge protocol (Qoder environment, DeepSeek-V4-Pro backbone) for CSR and CR; other LLM evaluations call DeepSeek-V4-Pro directly via API; the judge columns Intent / Approp. / Evidence / Strategy are scores of the LLM judge (not re-read in detail by the research agent)"
+  },
+  {
+   "id": "F34",
+   "says": "note",
+   "about": null,
+   "value": "N = 5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "4.2 Experimental Setup (Settings)",
+   "quote": "Agents are limited to N = 5 N=5 tool-use rounds.",
+   "note": "all models share ATLASBox's knowledge bases and tools; retrieval Qwen3-Embedding-0.6B + Qwen3-Reranker-0.6B; agents limited to 5 tool-use rounds"
+  },
+  {
+   "id": "F35",
+   "says": "tokens-total",
+   "about": "Gemini-3.8-Flash",
+   "value": "45900",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), column Tokens/q",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "written": "45.9K",
+   "note": "tokens per query (mean, as printed \"45.9K\"), no input/output split"
+  },
+  {
+   "id": "F36",
+   "says": "requests",
+   "about": "Gemini-3.8-Flash",
+   "value": "4.73",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), column Calls/q",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "note": "tool calls per query"
+  },
+  {
+   "id": "F37",
+   "says": "note",
+   "about": "Gemini-3.8-Flash",
+   "value": "2.48",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), column Rounds/q",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "note": "execution rounds per query (limit: 5 rounds); the research agent read this cell at the start of the next rendered line because the HTML cell was split; in the copy the row is contiguous"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "68.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column csr",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "score (%)",
+   "scale": "percent"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "85.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column cr",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "score (%)",
+   "scale": "percent"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "76.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column success-at-k",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "ATLAS-Bench Success@k (%)",
+   "scale": "percent"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "1.88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column recs-per-query",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "ATLAS-Bench Recs/q",
+   "scale": "raw"
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "79.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column factual",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "factual accuracy (%)",
+   "scale": "percent"
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "4.04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column intent",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "trajectory quality score (1-5)",
+   "scale": "raw"
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "4.19",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column approp",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "ATLAS-Bench Approp. (judge score)",
+   "scale": "raw"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "2.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column evidence",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "trajectory quality score (1-5)",
+   "scale": "raw"
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "3.37",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.39438.html",
+   "where": "Table 3 (overall performance on ATLAS-Bench), row Gemini-3.8-Flash (Hidden Think), row Gemini-3.8-Flash, column strategy",
+   "quote": "Gemini-3.8-Flash (Hidden Think) 68.3 85.2 76.2 1.88 79.08 4.04 4.19 2.50 3.37 45.9K 4.73 2.48",
+   "term": "trajectory quality score (1-5)",
+   "scale": "raw"
   }
  ]
 }
