@@ -2692,6 +2692,22 @@ def duration_written_in_hours_and_minutes():
 
 
 @test
+def date_written_with_a_month_name():
+    # « sampled Oct 3, 2026 », « December 2025–January 2026 » (integration 6 of salvo s6, 9 Nov 2026): an ISO date
+    # read from a month name; without a written day, the first or last day of the month; negative controls: another
+    # month, another day, a day in the middle of an unwritten-day month, a text that is not a date
+    import sys as _s
+    _s.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "schema"))
+    import validate as V
+    eq((V.digits_agree("2026-10-03", "Oct 3, 2026"), V.digits_agree("2025-12-01", "December 2025"),
+        V.digits_agree("2026-01-31", "January 2026"), V.digits_agree("2026-10-03", "3 October 2026")),
+       (True, True, True, True), "month names")
+    eq((V.digits_agree("2026-11-03", "Oct 3, 2026"), V.digits_agree("2026-10-04", "Oct 3, 2026"),
+        V.digits_agree("2025-12-15", "December 2025"), V.month_date("Octopus 2026")), (False, False, False, None),
+       "negative: another month or day, a middle day, not a month")
+
+
+@test
 def count_written_in_words():
     # « earned one badge » / « earned four badges » are written as 1 and 4 (integration 6 of salvo s6, 9 Nov 2026): the
     # digit check reads the number word; negative controls: another number, a word that is no number

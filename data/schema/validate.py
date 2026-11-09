@@ -13,7 +13,7 @@ JSON Schema subset implemented: $ref (local and cross-file, JSON pointer), type,
 minimum, maximum, minItems, maxItems, items, properties, required, additionalProperties, propertyNames, allOf, anyOf,
 format (date, date-time, date-or-date-time: parsed strictly), unevaluatedProperties (properties of the schema, its allOf members and $ref targets). Unknown keywords and x-* are
 ignored. Exit code 1 on any error; warnings do not fail."""
-import argparse, collections, csv, datetime as dt, glob, hashlib, html, json, os, re, sys, unicodedata
+import argparse, calendar, collections, csv, datetime as dt, glob, hashlib, html, json, os, re, sys, unicodedata
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(os.path.dirname(HERE))
@@ -386,6 +386,16 @@ def digits_agree(value, written):
     '0.51' / '51¢', '7250000' / '7.25M'); a value with no digit (a level, a label reading) is not checked."""
     sig = lambda t: re.sub(r"[^0-9]", "", str(t)).strip("0")                      # noqa: E731
     v = sig(value)
+    md = month_date(written)
+    if md and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(value)):
+        # a date written with a month name ('Oct 3, 2026', 'December 2025'; integration 6 of salvo s6, 9 Nov 2026):
+        # the year and month equal, the day equal when written, else the first or the last day of the month
+        y, mo, d = (int(x) for x in str(value).split("-"))
+        if (y, mo) != md[:2]:
+            return False
+        if md[2]:
+            return d == md[2]
+        return d == 1 or d == calendar.monthrange(y, mo)[1]
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d+)?)?Z?)?", str(value)):
         # an ISO date / time read from a date as written ('2026年9月30日', '2026-08-19 22:13 UTC'): its numbers, in
         # order and contiguous, among the written text's numbers (zero padding and separators aside; 3 Nov 2026); the
@@ -409,6 +419,28 @@ def digits_agree(value, written):
         # (a check only; integration 6 of salvo s6, 9 Nov 2026, the Anthropic memory post)
         return float(value) == NUMBER_WORDS[w]
     return not v or v in sig(written)
+
+
+MONTHS = {m: i + 1 for i, m in enumerate("january february march april may june july august september october "
+                                          "november december".split())}
+
+
+def month_date(written):
+    """(year, month, day or None) of a date written with a month name and nothing else ('Oct 3, 2026', '3 October
+    2026', 'December 2025', 'sampled' or 'dated' allowed before it); None for any other text."""
+    w = re.sub(r"^\s*(?:sampled|dated|on|in)\s+", "", str(written).strip().lower())
+    m = re.fullmatch(r"([a-z]{3,9})\.?\s+(?:(\d{1,2}),?\s+)?(\d{4})", w) or None
+    if m:
+        mon, day, year = m.group(1), m.group(2), m.group(3)
+    else:
+        m = re.fullmatch(r"(\d{1,2})\s+([a-z]{3,9})\.?\s+(\d{4})", w)
+        if not m:
+            return None
+        day, mon, year = m.group(1), m.group(2), m.group(3)
+    full = [k for k in MONTHS if k.startswith(mon)] if len(mon) >= 3 else []
+    if len(full) != 1:
+        return None
+    return int(year), MONTHS[full[0]], int(day) if day else None
 
 
 NUMBER_WORDS = {w: i for i, w in enumerate(
