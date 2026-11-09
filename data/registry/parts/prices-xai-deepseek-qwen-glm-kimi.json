@@ -1,0 +1,4589 @@
+{
+ "as_of": "2026-10-23",
+ "prices": [
+  {
+   "model": "deepseek-v3.2",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.28,
+    "output": 0.42,
+    "cache-read": 0.028
+   },
+   "from": "2025-12-01",
+   "to": "2026-04-23",
+   "from_basis": "release",
+   "to_basis": "stated",
+   "base": true,
+   "note": "Not sold after the names were routed to V4-Flash on 24 Apr 2026 (changelog 24 Apr). V3.2-Speciale (temporary endpoint, to 15 Dec 2025) not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20251201114852/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2025-12-01T11:48:52Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2025-12-01.txt",
+     "sha256": "c9628b7f7ce04e4dfb7832636a1149c7a60c99385cd5fd4a165db67a5229c49f",
+     "where": "PRICING table, V3.2 non-thinking/thinking column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.028 1M INPUT TOKENS (CACHE MISS) $0.28 1M OUTPUT TOKENS $0.42"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog, 1 Dec 2025 entry (DeepSeek-V3.2)",
+     "quote": "deepseek-chat corresponds to DeepSeek-V3.2"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.22,
+    "output": 0.66,
+    "cache-read": 0.007
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-09-10T03:59:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "factor": 0.5,
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct). Off-peak 01:00-04:00 and 06:00-10:00 UTC peak hours; all other hours off-peak. Mon-Fri clause from ~24 Aug, holiday clause from ~24 Sep (dates not pinned).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Flash-0731 OFF-PEAK column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 $0.022 PEAK $0.014 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 $0.66 PEAK $0.44 $1.32"
+    },
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "footnote: off-peak rates are half of the peak rates",
+     "quote": "Off-peak rates are half of the peak rates."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.15,
+    "output": 0.6,
+    "cache-read": 0.003
+   },
+   "from": "2026-09-10T04:00:00Z",
+   "to": "2026-10-16",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "factor": 0.5,
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260910181632/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-09-10T18:16:32Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-09-10.txt",
+     "sha256": "429a3a04745e1cb915dc2bc2bdf3714d4ec0b646b110fd5e303ed57f400e4e25",
+     "where": "PRICING table, deepseek-flash column OFF-PEAK",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.003 $0.022 PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.15,
+    "output": 0.6,
+    "cache-read": 0.003
+   },
+   "from": "2026-10-17",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "factor": 0.5,
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct).",
+   "evidence": [
+    {
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-live-2026-10-23.txt",
+     "sha256": "713cf82f770e25b5b0c7095666d2c7f5eb684948169393c319fd7694bf931189",
+     "where": "PRICING table, 23 Oct 2026, deepseek-flash column OFF-PEAK",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.003 $0.022 PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.14,
+    "output": 0.28,
+    "cache-read": 0.028
+   },
+   "from": "2026-04-24",
+   "to": "2026-04-26T12:14:59Z",
+   "from_basis": "release",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct). Launch 24 Apr 2026 (changelog). Name deepseek-v4-flash.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "PRICING table, Flash column (V4-Flash)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.028 $0.145 1M INPUT TOKENS (CACHE MISS) $0.14 $1.74 1M OUTPUT TOKENS $0.28 $3.48"
+    },
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "MODEL VERSION row, first column",
+     "quote": "MODEL VERSION DeepSeek-V4-Flash DeepSeek-V4-Pro"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.14,
+    "output": 0.28,
+    "cache-read": 0.0028
+   },
+   "from": "2026-04-26T12:15:00Z",
+   "to": "2026-07-30",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct). Preview retired when the 31 Jul 2026 version (-0731) took the name. Last list price kept as base. Cache 0.0028 from the 26 Apr 12:15 UTC cut.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260514032637/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-14T03:26:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-14.txt",
+     "sha256": "fcb7e2ec1227096531ae04798533a32aaa2827dddfc298c84fb44aea6fb91b91",
+     "where": "PRICING footnote: cache-hit cut",
+     "quote": "For all models, the input cache hit price has been reduced to 1/10 of the launch price. This price adjustment takes effect from 2026/4/26 12:15 UTC."
+    },
+    {
+     "url": "https://web.archive.org/web/20260731073820/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-07-31T07:38:20Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-07-31.txt",
+     "sha256": "43bc6a90673ad9ed41bcbf52bfe0c89a59e5ac3412ef8a980f631169ff125354",
+     "where": "PRICING table at 31 Jul 2026, Flash-0731 column (same price)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 31 Jul 2026: API name moves to the 0731 version",
+     "quote": "The API calling method remains unchanged — simply set the model name to deepseek-v4-flash to use the latest version."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.14,
+    "output": 0.28,
+    "cache-read": 0.0028
+   },
+   "from": "2026-07-31",
+   "to": "2026-08-16T15:59:59Z",
+   "from_basis": "release",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct). Changelog 31 Jul 2026: public beta of V4-Flash API (version 0731).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260731073820/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-07-31T07:38:20Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-07-31.txt",
+     "sha256": "43bc6a90673ad9ed41bcbf52bfe0c89a59e5ac3412ef8a980f631169ff125354",
+     "where": "PRICING table, Flash-0731 column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 31 Jul 2026, DeepSeek-V4-Flash Update",
+     "quote": "DeepSeek-V4-Flash Update"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.44,
+    "output": 1.32,
+    "cache-read": 0.014
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-09-10T03:59:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct). Peak rates are the standard list price (off-peak = half, recorded separately). Retired 10 Sep 2026 (V4-Flash routed to V4.1-Flash). The 10 Sep stop is the 04:00 UTC change (news).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Flash-0731 PEAK column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 $0.022 PEAK $0.014 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 $0.66 PEAK $0.44 $1.32"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 13 Aug 2026: new prices take effect at 16:00 (UTC) on August 16, 2026",
+     "quote": "The new prices will take effect at 16:00 (UTC Time) on August 16, 2026."
+    },
+    {
+     "url": "https://api-docs.deepseek.com/news/news260910",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-news-2026-09-10.txt",
+     "sha256": "83d5214456b8a7506c7361947db9d2d2468bd2ee99308e0e41e68437e895b849",
+     "where": "news 10 Sep 2026: new pricing takes effect 04:00 UTC on Sept 10 (V4.1-Flash; V4-Flash retired)",
+     "quote": "New pricing takes effect at 04:00 UTC on Sept 10, 2026."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.3,
+    "output": 1.2,
+    "cache-read": 0.006
+   },
+   "from": "2026-09-10T04:00:00Z",
+   "to": "2026-10-16",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct). Name deepseek-flash. Replaced by V4.1-Flash-1017 on 17 Oct 2026 (changelog: pricing unchanged). Last list price kept as base.",
+   "evidence": [
+    {
+     "url": "https://api-docs.deepseek.com/news/news260910",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-news-2026-09-10.txt",
+     "sha256": "83d5214456b8a7506c7361947db9d2d2468bd2ee99308e0e41e68437e895b849",
+     "where": "news 10 Sep 2026: new pricing takes effect at 04:00 UTC on Sept 10",
+     "quote": "New pricing takes effect at 04:00 UTC on Sept 10, 2026."
+    },
+    {
+     "url": "https://web.archive.org/web/20260910181632/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-09-10T18:16:32Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-09-10.txt",
+     "sha256": "429a3a04745e1cb915dc2bc2bdf3714d4ec0b646b110fd5e303ed57f400e4e25",
+     "where": "PRICING table, deepseek-flash column PEAK",
+     "quote": "PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.6 $1.98 PEAK $1.2 $3.96"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.3,
+    "output": 1.2,
+    "cache-read": 0.006
+   },
+   "from": "2026-10-17",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "note": "Alias: prices of the model the name serves on these dates (names history: V4-Flash preview to 30 Jul, 0731 to 10 Sep, V4.1-Flash from 10 Sep, 1017 from 17 Oct). Changelog 17 Oct: API calling method and pricing remain unchanged.",
+   "evidence": [
+    {
+     "url": "https://api-docs.deepseek.com/news/news261017",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-news-2026-10-17.txt",
+     "sha256": "fa2bf08c910fa602678ef633980bdbb69c42dfca4605c852134d08ca63fe7488",
+     "where": "news 17 Oct 2026: V4.1-Flash-1017 release",
+     "quote": "DeepSeek-V4.1-Flash-1017 Release 2026/10/17"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-live-2026-10-23.txt",
+     "sha256": "713cf82f770e25b5b0c7095666d2c7f5eb684948169393c319fd7694bf931189",
+     "where": "PRICING table, 23 Oct 2026, deepseek-flash column PEAK",
+     "quote": "PEAK $0.3 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.6 $1.98 PEAK $1.2 $3.96"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash-0731",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.22,
+    "output": 0.66,
+    "cache-read": 0.007
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-09-10T03:59:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "factor": 0.5,
+   "note": "Off-peak 01:00-04:00 and 06:00-10:00 UTC peak hours; all other hours off-peak. Mon-Fri clause from ~24 Aug, holiday clause from ~24 Sep (dates not pinned).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Flash-0731 OFF-PEAK column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 $0.022 PEAK $0.014 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 $0.66 PEAK $0.44 $1.32"
+    },
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "footnote: off-peak rates are half of the peak rates",
+     "quote": "Off-peak rates are half of the peak rates."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash-0731",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.14,
+    "output": 0.28,
+    "cache-read": 0.0028
+   },
+   "from": "2026-07-31",
+   "to": "2026-08-16T15:59:59Z",
+   "from_basis": "release",
+   "to_basis": "stated",
+   "note": "Changelog 31 Jul 2026: public beta of V4-Flash API (version 0731).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260731073820/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-07-31T07:38:20Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-07-31.txt",
+     "sha256": "43bc6a90673ad9ed41bcbf52bfe0c89a59e5ac3412ef8a980f631169ff125354",
+     "where": "PRICING table, Flash-0731 column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 31 Jul 2026, DeepSeek-V4-Flash Update",
+     "quote": "DeepSeek-V4-Flash Update"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash-0731",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.44,
+    "output": 1.32,
+    "cache-read": 0.014
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-09-10T03:59:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "base": true,
+   "note": "Peak rates are the standard list price (off-peak = half, recorded separately). Retired 10 Sep 2026 (V4-Flash routed to V4.1-Flash). The 10 Sep stop is the 04:00 UTC change (news).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Flash-0731 PEAK column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 $0.022 PEAK $0.014 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 $0.66 PEAK $0.44 $1.32"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 13 Aug 2026: new prices take effect at 16:00 (UTC) on August 16, 2026",
+     "quote": "The new prices will take effect at 16:00 (UTC Time) on August 16, 2026."
+    },
+    {
+     "url": "https://api-docs.deepseek.com/news/news260910",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-news-2026-09-10.txt",
+     "sha256": "83d5214456b8a7506c7361947db9d2d2468bd2ee99308e0e41e68437e895b849",
+     "where": "news 10 Sep 2026: new pricing takes effect 04:00 UTC on Sept 10 (V4.1-Flash; V4-Flash retired)",
+     "quote": "New pricing takes effect at 04:00 UTC on Sept 10, 2026."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash-preview",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.14,
+    "output": 0.28,
+    "cache-read": 0.028
+   },
+   "from": "2026-04-24",
+   "to": "2026-04-26T12:14:59Z",
+   "from_basis": "release",
+   "to_basis": "stated",
+   "note": "Launch 24 Apr 2026 (changelog). Name deepseek-v4-flash.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "PRICING table, Flash column (V4-Flash)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.028 $0.145 1M INPUT TOKENS (CACHE MISS) $0.14 $1.74 1M OUTPUT TOKENS $0.28 $3.48"
+    },
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "MODEL VERSION row, first column",
+     "quote": "MODEL VERSION DeepSeek-V4-Flash DeepSeek-V4-Pro"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash-preview",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.14,
+    "output": 0.28,
+    "cache-read": 0.0028
+   },
+   "from": "2026-04-26T12:15:00Z",
+   "to": "2026-07-30",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "base": true,
+   "note": "Preview retired when the 31 Jul 2026 version (-0731) took the name. Last list price kept as base. Cache 0.0028 from the 26 Apr 12:15 UTC cut.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260514032637/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-14T03:26:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-14.txt",
+     "sha256": "fcb7e2ec1227096531ae04798533a32aaa2827dddfc298c84fb44aea6fb91b91",
+     "where": "PRICING footnote: cache-hit cut",
+     "quote": "For all models, the input cache hit price has been reduced to 1/10 of the launch price. This price adjustment takes effect from 2026/4/26 12:15 UTC."
+    },
+    {
+     "url": "https://web.archive.org/web/20260731073820/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-07-31T07:38:20Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-07-31.txt",
+     "sha256": "43bc6a90673ad9ed41bcbf52bfe0c89a59e5ac3412ef8a980f631169ff125354",
+     "where": "PRICING table at 31 Jul 2026, Flash-0731 column (same price)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 31 Jul 2026: API name moves to the 0731 version",
+     "quote": "The API calling method remains unchanged — simply set the model name to deepseek-v4-flash to use the latest version."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash-vision-exp",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.22,
+    "output": 0.66,
+    "cache-read": 0.007
+   },
+   "from": "2026-08-21",
+   "to": "2026-09-10T03:59:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "factor": 0.5,
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260821151358/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-21T15:13:58Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-21.txt",
+     "sha256": "51c1178e272c39ddc857c3b065945b584535787c995faa2f2eae241db6725ee0",
+     "where": "PRICING table, Vision-Exp OFF-PEAK column",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 $0.022 $0.007 PEAK $0.014 $0.044 $0.014"
+    },
+    {
+     "url": "https://web.archive.org/web/20260821151358/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-21T15:13:58Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-21.txt",
+     "sha256": "51c1178e272c39ddc857c3b065945b584535787c995faa2f2eae241db6725ee0",
+     "where": "footnote: off-peak rates are half of the peak rates",
+     "quote": "Off-peak rates are half of the peak rates."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-flash-vision-exp",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.44,
+    "output": 1.32,
+    "cache-read": 0.014
+   },
+   "from": "2026-08-21",
+   "to": "2026-09-10T03:59:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "base": true,
+   "note": "Peak = standard price. Retired 10 Sep 2026: requests served by V4.1-Flash at the Flash price (footnote). Same price as Flash-0731 (peak).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260821151358/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-21T15:13:58Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-21.txt",
+     "sha256": "51c1178e272c39ddc857c3b065945b584535787c995faa2f2eae241db6725ee0",
+     "where": "PRICING table, Vision-Exp column (third)",
+     "quote": "1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 $0.66 $0.22 PEAK $0.44 $1.32 $0.44"
+    },
+    {
+     "url": "https://web.archive.org/web/20260821151358/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-21T15:13:58Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-21.txt",
+     "sha256": "51c1178e272c39ddc857c3b065945b584535787c995faa2f2eae241db6725ee0",
+     "where": "MODEL VERSION row",
+     "quote": "DeepSeek-V4-Flash-Vision-Exp"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 21 Aug 2026, Vision-Exp release",
+     "quote": "DeepSeek-V4-Flash-Vision-Exp Release"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.66,
+    "output": 1.98,
+    "cache-read": 0.022
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-10-23",
+   "from_basis": "stated",
+   "to_basis": "last-capture",
+   "factor": 0.5,
+   "note": "Alias: prices of the model the name serves on these dates (preview to 12 Aug, 0813 from 13 Aug).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Pro column OFF-PEAK",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 $0.022 PEAK $0.014 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 $0.66 PEAK $0.44 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.66 $1.98 PEAK $1.32 $3.96"
+    },
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "footnote: off-peak rates are half of the peak rates",
+     "quote": "Off-peak rates are half of the peak rates."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "route": "deepseek-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.03625
+   },
+   "from": "2026-04-25",
+   "to": "2026-04-26T12:14:59Z",
+   "from_basis": "earliest-capture",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (preview to 12 Aug, 0813 from 13 Aug). Promotion, never base. Cache-read cut to 1/10 at 26 Apr 12:15 UTC (next entry).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260425165822/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-25T16:58:22Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-25.txt",
+     "sha256": "1a6d47f01519be85ba044810cc406c35f871cc1a9dd06d979eaf55f7816e83ff",
+     "where": "PRICING table, Pro column with the limited-time 75% off",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.028 $0.03625 (limited-time 75% off * ) $0.145 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 (limited-time 75% off * ) $1.74 1M OUTPUT TOKENS $0.28 $0.87 (limited-time 75% off * ) $3.48"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "route": "deepseek-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.003625
+   },
+   "from": "2026-04-26T12:15:00Z",
+   "to": "2026-05-31T15:58:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (preview to 12 Aug, 0813 from 13 Aug). Promotion, never base. Ends 31 May 2026 15:59 UTC as the maker states.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260514032637/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-14T03:26:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-14.txt",
+     "sha256": "fcb7e2ec1227096531ae04798533a32aaa2827dddfc298c84fb44aea6fb91b91",
+     "where": "PRICING table, Pro column, 75% off, extended",
+     "quote": "$0.003625 (75% off (3) ) $0.0145 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 (75% off (3) ) $1.74"
+    },
+    {
+     "url": "https://web.archive.org/web/20260514032637/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-14T03:26:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-14.txt",
+     "sha256": "fcb7e2ec1227096531ae04798533a32aaa2827dddfc298c84fb44aea6fb91b91",
+     "where": "footnote 3: promotion extended until 31 May 15:59 UTC",
+     "quote": "The deepseek-v4-pro model is currently offered at a 75% discount, extended until 2026/05/31 15:59 UTC."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.74,
+    "output": 3.48,
+    "cache-read": 0.145
+   },
+   "from": "2026-04-24",
+   "to": "2026-04-24",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "note": "Alias: prices of the model the name serves on these dates (preview to 12 Aug, 0813 from 13 Aug). Launch list price. The promo start is between the 24 Apr 15:25 UTC and the 25 Apr 16:58 UTC captures: 24 Apr 16:00 to 25 Apr not covered.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "PRICING table, Pro column (V4-Pro)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.028 $0.145 1M INPUT TOKENS (CACHE MISS) $0.14 $1.74 1M OUTPUT TOKENS $0.28 $3.48"
+    },
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "MODEL VERSION row, second column",
+     "quote": "MODEL VERSION DeepSeek-V4-Flash DeepSeek-V4-Pro"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.003625
+   },
+   "from": "2026-05-31T15:59:00Z",
+   "to": "2026-08-12",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (preview to 12 Aug, 0813 from 13 Aug). List price from 31 May 2026 15:59 UTC (1/4 of the launch list). Retired 13 Aug 2026 (replaced by V4-Pro-0813 at the same price, changelog 13 Aug).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260527122812/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-27T12:28:12Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-27.txt",
+     "sha256": "f637238eef97715f866d483fffac01ed9eb6329c462838b375fe8cfbce39bba4",
+     "where": "footnote: officially adjusted to 1/4 of the original price after the promotion ends",
+     "quote": "officially adjusted to 1/4 of the original price after the 75% discount promotion ends on 2026/05/31 15:59 UTC"
+    },
+    {
+     "url": "https://web.archive.org/web/20260629173804/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-06-29T17:38:04Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-06-29.txt",
+     "sha256": "e9ed10f75aff6ac4cb12feae469ac94547aaf4ad40dc3bfc7ffb6eea767c1fd6",
+     "where": "PRICING table, Pro column without promotion marks",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.003625
+   },
+   "from": "2026-08-13",
+   "to": "2026-08-16T15:59:59Z",
+   "from_basis": "release",
+   "to_basis": "stated",
+   "note": "Alias: prices of the model the name serves on these dates (preview to 12 Aug, 0813 from 13 Aug). GA 13 Aug 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260813174150/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-13T17:41:50Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-13.txt",
+     "sha256": "87fcf1a39e1de3f9f6e3ab883cea0d4cef152d8e652f11e7da23e339a975e02f",
+     "where": "PRICING table, Pro column (V4-Pro-0813)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 13 Aug 2026, DeepSeek-V4-Pro Update (GA)",
+     "quote": "The GA release of DeepSeek-V4-Pro has been rolled out on the APP, Web, and API."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.32,
+    "output": 3.96,
+    "cache-read": 0.044
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-10-23",
+   "from_basis": "stated",
+   "to_basis": "last-capture",
+   "note": "Alias: prices of the model the name serves on these dates (preview to 12 Aug, 0813 from 13 Aug). Peak rates = standard. The 10 Sep changelog says V4-Pro continues after 14 Sep with billing unchanged; the news of 10 Sep (routing from 14 Sep) is contradicted by the changelog and by the 24 Sep, 3 Oct, 19 Oct and 23 Oct pages showing the V4-Pro column.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Pro column PEAK",
+     "quote": "1M OUTPUT TOKENS OFF-PEAK $0.66 $1.98 PEAK $1.32 $3.96"
+    },
+    {
+     "url": "https://web.archive.org/web/20261003073808/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-03T07:38:08Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-10-03.txt",
+     "sha256": "635399b49b1143ba8163c844c56f23e2cd02ff6618651919930753a69dbfb075",
+     "where": "PRICING table 3 Oct 2026, Pro column PEAK (still priced after the 14 Sep routing date)",
+     "quote": "PEAK $0.3 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.6 $1.98 PEAK $1.2 $3.96"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-live-2026-10-23.txt",
+     "sha256": "713cf82f770e25b5b0c7095666d2c7f5eb684948169393c319fd7694bf931189",
+     "where": "PRICING table, 23 Oct 2026, Pro column PEAK",
+     "quote": "PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro-0813",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.66,
+    "output": 1.98,
+    "cache-read": 0.022
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-10-23",
+   "from_basis": "stated",
+   "to_basis": "last-capture",
+   "factor": 0.5,
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Pro column OFF-PEAK",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.007 $0.022 PEAK $0.014 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.22 $0.66 PEAK $0.44 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.66 $1.98 PEAK $1.32 $3.96"
+    },
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "footnote: off-peak rates are half of the peak rates",
+     "quote": "Off-peak rates are half of the peak rates."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro-0813",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.003625
+   },
+   "from": "2026-08-13",
+   "to": "2026-08-16T15:59:59Z",
+   "from_basis": "release",
+   "to_basis": "stated",
+   "note": "GA 13 Aug 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260813174150/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-13T17:41:50Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-13.txt",
+     "sha256": "87fcf1a39e1de3f9f6e3ab883cea0d4cef152d8e652f11e7da23e339a975e02f",
+     "where": "PRICING table, Pro column (V4-Pro-0813)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/updates",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-updates-live-2026-10-23.txt",
+     "sha256": "865e7934b92e6bdef6c6a90c5c96083887f95a7689f0cd7f0702bf0738a15257",
+     "where": "changelog 13 Aug 2026, DeepSeek-V4-Pro Update (GA)",
+     "quote": "The GA release of DeepSeek-V4-Pro has been rolled out on the APP, Web, and API."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro-0813",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.32,
+    "output": 3.96,
+    "cache-read": 0.044
+   },
+   "from": "2026-08-16T16:00:00Z",
+   "to": "2026-10-23",
+   "from_basis": "stated",
+   "to_basis": "last-capture",
+   "note": "Peak rates = standard. The 10 Sep changelog says V4-Pro continues after 14 Sep with billing unchanged; the news of 10 Sep (routing from 14 Sep) is contradicted by the changelog and by the 24 Sep, 3 Oct, 19 Oct and 23 Oct pages showing the V4-Pro column.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260816171438/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-08-16T17:14:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-08-16.txt",
+     "sha256": "a95b9da80c4b982232e4c95dc986537b5592b7676eda1b7ae253f97fd11cea40",
+     "where": "PRICING table, Pro column PEAK",
+     "quote": "1M OUTPUT TOKENS OFF-PEAK $0.66 $1.98 PEAK $1.32 $3.96"
+    },
+    {
+     "url": "https://web.archive.org/web/20261003073808/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-03T07:38:08Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-10-03.txt",
+     "sha256": "635399b49b1143ba8163c844c56f23e2cd02ff6618651919930753a69dbfb075",
+     "where": "PRICING table 3 Oct 2026, Pro column PEAK (still priced after the 14 Sep routing date)",
+     "quote": "PEAK $0.3 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.6 $1.98 PEAK $1.2 $3.96"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-live-2026-10-23.txt",
+     "sha256": "713cf82f770e25b5b0c7095666d2c7f5eb684948169393c319fd7694bf931189",
+     "where": "PRICING table, 23 Oct 2026, Pro column PEAK",
+     "quote": "PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro-preview",
+   "route": "deepseek-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.03625
+   },
+   "from": "2026-04-25",
+   "to": "2026-04-26T12:14:59Z",
+   "from_basis": "earliest-capture",
+   "to_basis": "stated",
+   "note": "Promotion, never base. Cache-read cut to 1/10 at 26 Apr 12:15 UTC (next entry).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260425165822/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-25T16:58:22Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-25.txt",
+     "sha256": "1a6d47f01519be85ba044810cc406c35f871cc1a9dd06d979eaf55f7816e83ff",
+     "where": "PRICING table, Pro column with the limited-time 75% off",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.028 $0.03625 (limited-time 75% off * ) $0.145 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 (limited-time 75% off * ) $1.74 1M OUTPUT TOKENS $0.28 $0.87 (limited-time 75% off * ) $3.48"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro-preview",
+   "route": "deepseek-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.003625
+   },
+   "from": "2026-04-26T12:15:00Z",
+   "to": "2026-05-31T15:58:59Z",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "note": "Promotion, never base. Ends 31 May 2026 15:59 UTC as the maker states.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260514032637/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-14T03:26:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-14.txt",
+     "sha256": "fcb7e2ec1227096531ae04798533a32aaa2827dddfc298c84fb44aea6fb91b91",
+     "where": "PRICING table, Pro column, 75% off, extended",
+     "quote": "$0.003625 (75% off (3) ) $0.0145 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 (75% off (3) ) $1.74"
+    },
+    {
+     "url": "https://web.archive.org/web/20260514032637/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-14T03:26:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-14.txt",
+     "sha256": "fcb7e2ec1227096531ae04798533a32aaa2827dddfc298c84fb44aea6fb91b91",
+     "where": "footnote 3: promotion extended until 31 May 15:59 UTC",
+     "quote": "The deepseek-v4-pro model is currently offered at a 75% discount, extended until 2026/05/31 15:59 UTC."
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro-preview",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.74,
+    "output": 3.48,
+    "cache-read": 0.145
+   },
+   "from": "2026-04-24",
+   "to": "2026-04-24",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "note": "Launch list price. The promo start is between the 24 Apr 15:25 UTC and the 25 Apr 16:58 UTC captures: 24 Apr 16:00 to 25 Apr not covered.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "PRICING table, Pro column (V4-Pro)",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.028 $0.145 1M INPUT TOKENS (CACHE MISS) $0.14 $1.74 1M OUTPUT TOKENS $0.28 $3.48"
+    },
+    {
+     "url": "https://web.archive.org/web/20260424152549/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-04-24T15:25:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-04-24.txt",
+     "sha256": "7d1b703904a484acf5489e820562bedcab5a499821d48d9232972d46f29389bf",
+     "where": "MODEL VERSION row, second column",
+     "quote": "MODEL VERSION DeepSeek-V4-Flash DeepSeek-V4-Pro"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4-pro-preview",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.435,
+    "output": 0.87,
+    "cache-read": 0.003625
+   },
+   "from": "2026-05-31T15:59:00Z",
+   "to": "2026-08-12",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "base": true,
+   "note": "List price from 31 May 2026 15:59 UTC (1/4 of the launch list). Retired 13 Aug 2026 (replaced by V4-Pro-0813 at the same price, changelog 13 Aug).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260527122812/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-05-27T12:28:12Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-05-27.txt",
+     "sha256": "f637238eef97715f866d483fffac01ed9eb6329c462838b375fe8cfbce39bba4",
+     "where": "footnote: officially adjusted to 1/4 of the original price after the promotion ends",
+     "quote": "officially adjusted to 1/4 of the original price after the 75% discount promotion ends on 2026/05/31 15:59 UTC"
+    },
+    {
+     "url": "https://web.archive.org/web/20260629173804/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-06-29T17:38:04Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-06-29.txt",
+     "sha256": "e9ed10f75aff6ac4cb12feae469ac94547aaf4ad40dc3bfc7ffb6eea767c1fd6",
+     "where": "PRICING table, Pro column without promotion marks",
+     "quote": "1M INPUT TOKENS (CACHE HIT) $0.0028 $0.003625 1M INPUT TOKENS (CACHE MISS) $0.14 $0.435 1M OUTPUT TOKENS $0.28 $0.87"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4.1-flash",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.15,
+    "output": 0.6,
+    "cache-read": 0.003
+   },
+   "from": "2026-09-10T04:00:00Z",
+   "to": "2026-10-16",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "factor": 0.5,
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260910181632/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-09-10T18:16:32Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-09-10.txt",
+     "sha256": "429a3a04745e1cb915dc2bc2bdf3714d4ec0b646b110fd5e303ed57f400e4e25",
+     "where": "PRICING table, deepseek-flash column OFF-PEAK",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.003 $0.022 PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4.1-flash",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.3,
+    "output": 1.2,
+    "cache-read": 0.006
+   },
+   "from": "2026-09-10T04:00:00Z",
+   "to": "2026-10-16",
+   "from_basis": "stated",
+   "to_basis": "stated",
+   "base": true,
+   "note": "Name deepseek-flash. Replaced by V4.1-Flash-1017 on 17 Oct 2026 (changelog: pricing unchanged). Last list price kept as base.",
+   "evidence": [
+    {
+     "url": "https://api-docs.deepseek.com/news/news260910",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-news-2026-09-10.txt",
+     "sha256": "83d5214456b8a7506c7361947db9d2d2468bd2ee99308e0e41e68437e895b849",
+     "where": "news 10 Sep 2026: new pricing takes effect at 04:00 UTC on Sept 10",
+     "quote": "New pricing takes effect at 04:00 UTC on Sept 10, 2026."
+    },
+    {
+     "url": "https://web.archive.org/web/20260910181632/https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-09-10T18:16:32Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-wb-2026-09-10.txt",
+     "sha256": "429a3a04745e1cb915dc2bc2bdf3714d4ec0b646b110fd5e303ed57f400e4e25",
+     "where": "PRICING table, deepseek-flash column PEAK",
+     "quote": "PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.6 $1.98 PEAK $1.2 $3.96"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4.1-flash-1017",
+   "route": "deepseek-api",
+   "kind": "off-peak",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.15,
+    "output": 0.6,
+    "cache-read": 0.003
+   },
+   "from": "2026-10-17",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "factor": 0.5,
+   "evidence": [
+    {
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-live-2026-10-23.txt",
+     "sha256": "713cf82f770e25b5b0c7095666d2c7f5eb684948169393c319fd7694bf931189",
+     "where": "PRICING table, 23 Oct 2026, deepseek-flash column OFF-PEAK",
+     "quote": "1M INPUT TOKENS (CACHE HIT) OFF-PEAK $0.003 $0.022 PEAK $0.006 $0.044 1M INPUT TOKENS (CACHE MISS) OFF-PEAK $0.15 $0.66 PEAK $0.3 $1.32"
+    }
+   ]
+  },
+  {
+   "model": "deepseek-v4.1-flash-1017",
+   "route": "deepseek-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.3,
+    "output": 1.2,
+    "cache-read": 0.006
+   },
+   "from": "2026-10-17",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "note": "Changelog 17 Oct: API calling method and pricing remain unchanged.",
+   "evidence": [
+    {
+     "url": "https://api-docs.deepseek.com/news/news261017",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-news-2026-10-17.txt",
+     "sha256": "fa2bf08c910fa602678ef633980bdbb69c42dfca4605c852134d08ca63fe7488",
+     "where": "news 17 Oct 2026: V4.1-Flash-1017 release",
+     "quote": "DeepSeek-V4.1-Flash-1017 Release 2026/10/17"
+    },
+    {
+     "url": "https://api-docs.deepseek.com/quick_start/pricing",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/deepseek/ds-live-2026-10-23.txt",
+     "sha256": "713cf82f770e25b5b0c7095666d2c7f5eb684948169393c319fd7694bf931189",
+     "where": "PRICING table, 23 Oct 2026, deepseek-flash column PEAK",
+     "quote": "PEAK $0.3 $1.32 1M OUTPUT TOKENS OFF-PEAK $0.6 $1.98 PEAK $1.2 $3.96"
+    }
+   ]
+  },
+  {
+   "model": "glm-4.7",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 2.2,
+    "cache-read": 0.11
+   },
+   "from": "2025-12-23",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Maker page (Z.ai, USD, international). No long-context tier, no reasoning surcharge. Storage listed as \"Limited-time Free\" (not a price). Release 22 Dec 2025.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20251223000946/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2025-12-23T00:09:46Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20251223000946.txt",
+     "sha256": "20b77d7c97575e0891184462a2d211820bb1050913b65007fd7ff0e0423583b9",
+     "where": "pricing table row GLM-4.7, capture 2025-12-23",
+     "quote": "GLM-4.7 $0.6 $0.11 Limited-time Free $2.2"
+    },
+    {
+     "url": "https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20261023064800.txt",
+     "sha256": "b24270ac66c0910d7b7bba78849289ee7eb0653e429bb5cdd01a8228b6209024",
+     "where": "pricing table row GLM-4.7, capture 2026-10-23",
+     "quote": "GLM-4.7 $0.6 $0.11 Limited-time Free $2.2"
+    }
+   ]
+  },
+  {
+   "model": "glm-5",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.0,
+    "output": 3.2,
+    "cache-read": 0.2
+   },
+   "from": "2026-02-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Maker page (Z.ai, USD, international). Storage \"Limited-time Free\" not recorded. Release 12 Feb 2026 per release notes; first capture showing the price 11 Feb 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260211182605/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-02-11T18:26:05Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260211182605.txt",
+     "sha256": "6f245d41a4c816c523b5a57bf027c2e04544b56533cc6d640e8b670361434920",
+     "where": "pricing table row GLM-5, capture 2026-02-11",
+     "quote": "GLM-5 $1 $0.2 Limited-time Free $3.2"
+    },
+    {
+     "url": "https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20261023064800.txt",
+     "sha256": "b24270ac66c0910d7b7bba78849289ee7eb0653e429bb5cdd01a8228b6209024",
+     "where": "pricing table row GLM-5, capture 2026-10-23",
+     "quote": "GLM-5 $1 $0.2 Limited-time Free $3.2"
+    }
+   ]
+  },
+  {
+   "model": "glm-5-turbo",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.2,
+    "output": 4.0,
+    "cache-read": 0.24
+   },
+   "from": "2026-03-28",
+   "to": "2026-08-25",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "base": true,
+   "note": "Not on the maker page after 25 Aug 2026 (no deprecation notice found). Last list price kept as base. First capture 28 Mar 2026 (no maker announcement found).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260328152923/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-03-28T15:29:23Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260328152923.txt",
+     "sha256": "16ba435b7d240ad3c06f8c51626bbcbae6da3eafb9443f649eb34de17d10eb54",
+     "where": "pricing table row GLM-5-Turbo, capture 2026-03-28",
+     "quote": "GLM-5-Turbo $1.2 $0.24 Limited-time Free $4.0"
+    },
+    {
+     "url": "https://web.archive.org/web/20260825032200/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-08-25T03:22:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260825032200.txt",
+     "sha256": "10dce4e7ec4dcdc99db86b9ec3ce37909d053f465a733dad5ebdbdb79e51810f",
+     "where": "pricing table row GLM-5-Turbo, capture 2026-08-25",
+     "quote": "GLM-5-Turbo $1.2 $0.24 Limited-time Free $4.0"
+    }
+   ]
+  },
+  {
+   "model": "glm-5.1",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.4,
+    "output": 4.4,
+    "cache-read": 0.26
+   },
+   "from": "2026-04-07",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Maker page (Z.ai, USD, international). Release 7 Apr 2026 per release notes; first capture showing the price 7 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260407174256/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-04-07T17:42:56Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260407174256.txt",
+     "sha256": "974344cfbb327a718601aca6e83056687fae67fef401e05e280516f1e12cf620",
+     "where": "pricing table row GLM-5.1, capture 2026-04-07",
+     "quote": "GLM-5.1 $1.4 $0.26 Limited-time Free $4.4"
+    },
+    {
+     "url": "https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20261023064800.txt",
+     "sha256": "b24270ac66c0910d7b7bba78849289ee7eb0653e429bb5cdd01a8228b6209024",
+     "where": "pricing table row GLM-5.1, capture 2026-10-23",
+     "quote": "GLM-5.1 $1.4 $0.26 Limited-time Free $4.4"
+    }
+   ]
+  },
+  {
+   "model": "glm-5.2",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.4,
+    "output": 4.4,
+    "cache-read": 0.26
+   },
+   "from": "2026-06-18",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Maker page (Z.ai, USD, international). Release 16 Jun 2026 per release notes; first capture showing the price 18 Jun 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260618172224/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-06-18T17:22:24Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260618172224.txt",
+     "sha256": "39d0b75e55e0d2f099bd464d92f6f90a5d15ec5d4d3d7c1856e8ca8d809a4aee",
+     "where": "pricing table row GLM-5.2, capture 2026-06-18",
+     "quote": "GLM-5.2 $1.4 $0.26 Limited-time Free $4.4"
+    },
+    {
+     "url": "https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20261023064800.txt",
+     "sha256": "b24270ac66c0910d7b7bba78849289ee7eb0653e429bb5cdd01a8228b6209024",
+     "where": "pricing table row GLM-5.2, capture 2026-10-23",
+     "quote": "GLM-5.2 $1.4 $0.26 Limited-time Free $4.4"
+    }
+   ]
+  },
+  {
+   "model": "glm-5.3",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.4,
+    "output": 4.4,
+    "cache-read": 0.26
+   },
+   "from": "2026-08-20",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Maker page (Z.ai, USD, international). First capture showing the price 20 Aug 2026 (launch date in the notes 14-18 Aug; the price is not proven before the capture).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260820074942/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-08-20T07:49:42Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260820074942.txt",
+     "sha256": "a69a1f7acdc7eb0153ec659991a25467b90823df2248a49d86a414b9d90a2109",
+     "where": "pricing table row GLM-5.3, capture 2026-08-20",
+     "quote": "GLM-5.3 $1.4 $0.26 Limited-time Free $4.4"
+    },
+    {
+     "url": "https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20261023064800.txt",
+     "sha256": "b24270ac66c0910d7b7bba78849289ee7eb0653e429bb5cdd01a8228b6209024",
+     "where": "pricing table row GLM-5.3, capture 2026-10-23",
+     "quote": "GLM-5.3 $1.4 $0.26 Limited-time Free $4.4"
+    }
+   ]
+  },
+  {
+   "model": "glm-5.3-flash",
+   "route": "zai-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.075,
+    "output": 0.25,
+    "cache-read": 0.015
+   },
+   "from": "2026-08-29",
+   "to": "2026-09-09T15:59:59Z",
+   "from_basis": "earliest-capture",
+   "to_basis": "stated",
+   "note": "Promotion (\"50% discount\", strikethrough prices are list prices), never base. Ends 24:00 UTC+8 on 9 Sep 2026 (= 16:00 UTC), as the maker states.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260829053115/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-08-29T05:31:15Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260829053115.txt",
+     "sha256": "a86997d207d18d1b4bfc07b022ed36d5bfad13e7808feeefa06b9849ef51fe21",
+     "where": "pricing table row GLM-5.3-Flash, capture 2026-08-29",
+     "quote": "GLM-5.3-Flash $0.15 $0.075 $0.03 $0.015 Limited-time Free $0.50 $0.25"
+    },
+    {
+     "url": "https://web.archive.org/web/20260902070913/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-09-02T07:09:13Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260902070913.txt",
+     "sha256": "3963a8ba0a24f44f43e6a4bf8ef810f51f70fab6edbd80547c9a3b955108cc30",
+     "where": "pricing table row GLM-5.3-Flash, capture 2026-09-02",
+     "quote": "GLM-5.3-Flash $0.15 $0.075 $0.03 $0.015 Limited-time Free $0.50 $0.25"
+    },
+    {
+     "url": "https://web.archive.org/web/20260829053115/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-08-29T05:31:15Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260829053115.txt",
+     "sha256": "a86997d207d18d1b4bfc07b022ed36d5bfad13e7808feeefa06b9849ef51fe21",
+     "where": "promotion notice, 29 Aug 2026 capture (end stated)",
+     "quote": "The promotion ends at 24:00 on September 9, 2026 (UTC+8, Singapore time)."
+    }
+   ]
+  },
+  {
+   "model": "glm-5.3-flash",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.15,
+    "output": 0.5,
+    "cache-read": 0.03
+   },
+   "from": "2026-09-09T16:00:00Z",
+   "to": "2026-10-23",
+   "from_basis": "stated",
+   "to_basis": "last-capture",
+   "note": "List price. Promotion ended 24:00 UTC+8 on 9 Sep 2026 (16:00 UTC); the plain price is first captured 18 Sep 2026, the list resumes from the stated end.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260918170748/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-09-18T17:07:48Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260918170748.txt",
+     "sha256": "599398299d57db24efc0e5a895e7c5a00012c445e94648e38941f26390903469",
+     "where": "pricing table row GLM-5.3-Flash, capture 2026-09-18",
+     "quote": "GLM-5.3-Flash $0.15 $0.03 Limited-time Free $0.50"
+    },
+    {
+     "url": "https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20261023064800.txt",
+     "sha256": "b24270ac66c0910d7b7bba78849289ee7eb0653e429bb5cdd01a8228b6209024",
+     "where": "pricing table row GLM-5.3-Flash, capture 2026-10-23",
+     "quote": "GLM-5.3-Flash $0.15 $0.03 Limited-time Free $0.50"
+    },
+    {
+     "url": "https://web.archive.org/web/20260829053115/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-08-29T05:31:15Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260829053115.txt",
+     "sha256": "a86997d207d18d1b4bfc07b022ed36d5bfad13e7808feeefa06b9849ef51fe21",
+     "where": "promotion notice, 29 Aug 2026 capture (end stated)",
+     "quote": "The promotion ends at 24:00 on September 9, 2026 (UTC+8, Singapore time)."
+    }
+   ]
+  },
+  {
+   "model": "glm-5v-turbo",
+   "route": "zai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.2,
+    "output": 4.0,
+    "cache-read": 0.24
+   },
+   "from": "2026-04-04",
+   "to": "2026-08-25",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "base": true,
+   "note": "Not on the maker page after 25 Aug 2026 (no deprecation notice found). Last list price kept as base. First capture 4 Apr 2026 (no maker announcement found).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260404003417/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-04-04T00:34:17Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260404003417.txt",
+     "sha256": "8dd87279763ee93e5a7062a0f8a2d85c6a944b38f63745a5006b936d0fc04bba",
+     "where": "pricing table row GLM-5V-Turbo, capture 2026-04-04",
+     "quote": "GLM-5V-Turbo $1.2 $0.24 Limited-time Free $4"
+    },
+    {
+     "url": "https://web.archive.org/web/20260825032200/https://docs.z.ai/guides/overview/pricing",
+     "captured": "2026-08-25T03:22:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/glm/glm-20260825032200.txt",
+     "sha256": "10dce4e7ec4dcdc99db86b9ec3ce37909d053f465a733dad5ebdbdb79e51810f",
+     "where": "pricing table row GLM-5V-Turbo, capture 2026-08-25",
+     "quote": "GLM-5V-Turbo $1.2 $0.24 Limited-time Free $4"
+    }
+   ]
+  },
+  {
+   "model": "grok-4.1-fast",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.2,
+    "output": 0.5,
+    "cache-read": 0.05
+   },
+   "from": "2025-12-21",
+   "to": "2026-05-15T18:59:59Z",
+   "from_basis": "earliest-capture",
+   "to_basis": "stated",
+   "base": true,
+   "note": "Retired 15 May 2026 12:00 PT (19:00 UTC, PDT). Last list price kept as base. Slugs then redirect to grok-4.3 and bill at grok-4.3 prices (recorded on grok-4.3). From 2025-12-21 (first capture with prices); 2025-11-22 to 2025-12-20 not proven (no price in capture). Cache 0.05 seen from 2025-12-21.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20251221140954/https://docs.x.ai/developers/models",
+     "captured": "2025-12-21T14:09:54Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-m-2025-12-21.txt",
+     "sha256": "7b84068addf90382aa6be3fad1c30b885476028a92fdd00c784cb7d2518eede7",
+     "where": "models page, grok-4-1-fast-reasoning (USD per 1M = $n value / 10000)",
+     "quote": "\"name\":\"grok-4-1-fast-reasoning\",\"version\":\"1.0\",\"inputModalities\":[1,2],\"outputModalities\":[1],\"promptTextTokenPrice\":\"$n2000\",\"promptImageTokenPrice\":\"$n2000\",\"promptTextTokenPriceLongContext\":\"$n4000\",\"cachedPromptTokenPrice\":\"$n500\",\"completionTextTokenPrice\":\"$n5000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/migration/may-15-retirement",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-may15-2026-10-21.txt",
+     "sha256": "50053ceb77b5b84cd4249544f39273840512cfa841e30c79ea02a705540f962e",
+     "where": "retirement notice",
+     "quote": "Effective May 15, 2026 at 12:00 PM PT"
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": 0.2
+   },
+   "from": "2026-03-10",
+   "to": "2026-04-28",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 4.0,
+      "output": 12.0,
+      "cache-read": 0.4
+     }
+    }
+   ],
+   "note": "Launch 10 Mar 2026. Long-context tier above 200k prompt tokens.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260311154219/https://docs.x.ai/developers/models",
+     "captured": "2026-03-11T15:42:19Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-m-2026-03-11.txt",
+     "sha256": "0c7e17af045180d790294050e5a69d1881e58407519ddedce616a5c09687db43",
+     "where": "models page, grok-4.20-beta-0309-reasoning (launch id of grok-4.20)",
+     "quote": "\"promptTextTokenPrice\":\"$n20000\",\"promptImageTokenPrice\":\"$n20000\",\"promptTextTokenPriceLongContext\":\"$n40000\",\"cachedPromptTokenPrice\":\"$n2000\",\"cachedPromptTokenPriceLongContext\":\"$n4000\",\"completionTextTokenPrice\":\"$n60000\",\"completionTokenPriceLongContext\":\"$n120000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/release-notes",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-rn-2026-10-21.txt",
+     "sha256": "aa9a705c5093544eac9c4e88d2da5e833f1253926c1f651f1f1062aa6fe9a0cc",
+     "where": "release notes, Mar 10",
+     "quote": "Grok 4.20 and Grok 4.20 Multi-agent are live"
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.25,
+    "output": 2.5,
+    "cache-read": 0.2
+   },
+   "from": "2026-04-30",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 2.5,
+      "output": 5.0,
+      "cache-read": 0.4
+     }
+    }
+   ],
+   "note": "Cut 28 Apr 23:53 to 30 Apr 23:29 UTC (window): 29 Apr not covered. Same price as grok-4.3 from 30 Apr.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260430232954/https://docs.x.ai/developers/models/grok-4.3",
+     "captured": "2026-04-30T23:29:54Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-g43-2026-04-30.txt",
+     "sha256": "3d721c90e5a5fe5b2d825e56bec4dd7586a491c25e56e742337c745f9bc45aaf",
+     "where": "grok-4.3 page capture of 30 Apr 2026, grok-4.20-0309-reasoning",
+     "quote": "\"name\":\"grok-4.20-0309-reasoning\",\"version\":\"1.0\",\"inputModalities\":[1,2],\"outputModalities\":[1],\"promptTextTokenPrice\":\"$n12500\",\"promptImageTokenPrice\":\"$n12500\",\"promptTextTokenPriceLongContext\":\"$n25000\",\"cachedPromptTokenPrice\":\"$n2000\",\"cachedPromptTokenPriceLongContext\":\"$n4000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON, 23 Oct 2026, grok-4.20-0309-reasoning (price 12500 = 1.25 USD)",
+     "quote": "\"promptTextTokenPrice\":\"12500\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20-beta",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.25,
+    "output": 2.5,
+    "cache-read": 0.2
+   },
+   "from": "2026-05-06",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "note": "Alias of grok-4.20-0309-reasoning. Release 6 May 2026 per models.json. Its 2.00 era (launch id grok-4.20-beta-0309-reasoning, 10 Mar to 28 Apr) is not recorded: the key starts 6 May.",
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct: alias list of grok-4.20-0309-reasoning includes grok-4.20-beta",
+     "quote": "\"grok-4.20-beta\",\"grok-4.20-beta-0309\",\"grok-4.20-beta-latest\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct, grok-4.20-0309-reasoning price 1.25 USD",
+     "quote": "\"promptTextTokenPrice\":\"12500\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20-multi-agent",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": 0.2
+   },
+   "from": "2026-03-10",
+   "to": "2026-04-28",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 4.0,
+      "output": 12.0,
+      "cache-read": 0.4
+     }
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260311154219/https://docs.x.ai/developers/models",
+     "captured": "2026-03-11T15:42:19Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-m-2026-03-11.txt",
+     "sha256": "0c7e17af045180d790294050e5a69d1881e58407519ddedce616a5c09687db43",
+     "where": "models page, grok-4.20-multi-agent-beta-0309 (launch id)",
+     "quote": "\"promptTextTokenPrice\":\"$n20000\",\"promptImageTokenPrice\":\"$n20000\",\"promptTextTokenPriceLongContext\":\"$n40000\",\"cachedPromptTokenPrice\":\"$n2000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/release-notes",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-rn-2026-10-21.txt",
+     "sha256": "aa9a705c5093544eac9c4e88d2da5e833f1253926c1f651f1f1062aa6fe9a0cc",
+     "where": "release notes, Mar 10",
+     "quote": "Grok 4.20 and Grok 4.20 Multi-agent are live"
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20-multi-agent",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.25,
+    "output": 2.5,
+    "cache-read": 0.2
+   },
+   "from": "2026-04-30",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 2.5,
+      "output": 5.0,
+      "cache-read": 0.4
+     }
+    }
+   ],
+   "note": "Served by grok-4.20-multi-agent-0309 (alias grok-4.20-multi-agent) from the 30 Apr cut.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260430232954/https://docs.x.ai/developers/models/grok-4.3",
+     "captured": "2026-04-30T23:29:54Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-g43-2026-04-30.txt",
+     "sha256": "3d721c90e5a5fe5b2d825e56bec4dd7586a491c25e56e742337c745f9bc45aaf",
+     "where": "grok-4.3 page capture of 30 Apr 2026, grok-4.20-multi-agent-0309 same price as grok-4.3",
+     "quote": "\"name\":\"grok-4.20-multi-agent-0309\",\"version\":\"1.0\",\"inputModalities\":[1,2],\"outputModalities\":[1],\"promptTextTokenPrice\":\"$n12500\",\"promptImageTokenPrice\":\"$n12500\",\"promptTextTokenPriceLongContext\":\"$n25000\",\"cachedPromptTokenPrice\":\"$n2000\",\"cachedPromptTokenPriceLongContext\":\"$n4000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct, grok-4.20-multi-agent-0309 aliases and price",
+     "quote": "\"grok-4.20-multi-agent-beta-latest\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20-multi-agent-beta",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.25,
+    "output": 2.5,
+    "cache-read": 0.2
+   },
+   "from": "2026-06-11",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 2.5,
+      "output": 5.0,
+      "cache-read": 0.4
+     }
+    }
+   ],
+   "note": "Release 11 Jun 2026 per models.json. Alias of grok-4.20-multi-agent-0309; the 2.00 launch id (multi-agent-beta-0309) before that is not recorded for this key.",
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct: alias grok-4.20-multi-agent-beta-latest of grok-4.20-multi-agent-0309",
+     "quote": "\"grok-4.20-multi-agent-beta-latest\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20-multi-agent-exp-beta-0304",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.25,
+    "output": 2.5,
+    "cache-read": 0.2
+   },
+   "from": "2026-06-11",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "note": "Alias of grok-4.20-multi-agent-0309 (live alias list). Release 11 Jun 2026 per models.json. Price = the aliased model.",
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct: alias list of grok-4.20-multi-agent-0309 includes the 0304 experimental id",
+     "quote": "\"grok-4.20-multi-agent-experimental-beta-0304\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.20-non-reasoning-exp-beta-0304",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.25,
+    "output": 2.5,
+    "cache-read": 0.2
+   },
+   "from": "2026-05-06",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "note": "Alias of grok-4.20-0309-non-reasoning (live alias list). Release 6 May 2026 per models.json.",
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct: alias list of grok-4.20-0309-non-reasoning includes the 0304 non-reasoning id",
+     "quote": "\"grok-4.20-experimental-beta-0304-non-reasoning\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.3",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.25,
+    "output": 2.5,
+    "cache-read": 0.2
+   },
+   "from": "2026-04-30",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 2.5,
+      "output": 5.0,
+      "cache-read": 0.4
+     }
+    }
+   ],
+   "note": "models.json gives release 6 May 2026; the 30 Apr capture is kept (earliest proof). Cut to 30 Apr is the first capture; before it not proven.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260430232954/https://docs.x.ai/developers/models/grok-4.3",
+     "captured": "2026-04-30T23:29:54Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-g43-2026-04-30.txt",
+     "sha256": "3d721c90e5a5fe5b2d825e56bec4dd7586a491c25e56e742337c745f9bc45aaf",
+     "where": "grok-4.3 page capture of 30 Apr 2026",
+     "quote": "\"name\":\"grok-4.3\",\"version\":\"1.0\",\"inputModalities\":[1,2],\"outputModalities\":[1],\"promptTextTokenPrice\":\"$n12500\",\"promptImageTokenPrice\":\"$n12500\",\"promptTextTokenPriceLongContext\":\"$n25000\",\"cachedPromptTokenPrice\":\"$n2000\",\"cachedPromptTokenPriceLongContext\":\"$n4000\",\"completionTextTokenPrice\":\"$n25000\",\"completionTokenPriceLongContext\":\"$n50000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct, grok-4.3 price 12500",
+     "quote": "\"promptTextTokenPrice\":\"12500\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.5",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": 0.5
+   },
+   "from": "2026-07-08",
+   "to": "2026-07-18",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 4.0,
+      "output": 12.0,
+      "cache-read": 1.0
+     }
+    }
+   ],
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/release-notes",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-rn-2026-10-21.txt",
+     "sha256": "aa9a705c5093544eac9c4e88d2da5e833f1253926c1f651f1f1062aa6fe9a0cc",
+     "where": "release notes, 8 Jul 2026 launch",
+     "quote": "Priced at $2 / 1M input tokens and $6 / 1M output tokens"
+    },
+    {
+     "url": "https://web.archive.org/web/20260710125453/https://docs.x.ai/developers/models/grok-4.5",
+     "captured": "2026-07-10T12:54:53Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-g45-2026-07-10.txt",
+     "sha256": "894b1dd3a33d2daa37f4e438e19d24f082874ae8f0774f2433acbc3344ae4d3d",
+     "where": "grok-4.5 page capture of 10 Jul 2026, cache 0.50",
+     "quote": "\"name\":\"grok-4.5\",\"version\":\"1.0\",\"inputModalities\":[1,2],\"outputModalities\":[1],\"promptTextTokenPrice\":\"$n20000\",\"promptImageTokenPrice\":\"$n20000\",\"promptTextTokenPriceLongContext\":\"$n40000\",\"cachedPromptTokenPrice\":\"$n5000\",\"cachedPromptTokenPriceLongContext\":\"$n10000\",\"completionTextTokenPrice\":\"$n60000\",\"completionTokenPriceLongContext\":\"$n120000\""
+    },
+    {
+     "url": "https://web.archive.org/web/20260718030541/https://docs.x.ai/developers/models",
+     "captured": "2026-07-18T03:05:41Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-m-2026-07-18.txt",
+     "sha256": "d747bcf40d99b097f45f32240cccab9d1fbe29850b333e996afa6c835517297c",
+     "where": "models page 18 Jul 2026 (last capture with cache 0.50)",
+     "quote": "\"name\":\"grok-4.5\",\"version\":\"1.0\",\"inputModalities\":[1,2],\"outputModalities\":[1],\"promptTextTokenPrice\":\"$n20000\",\"promptImageTokenPrice\":\"$n20000\",\"promptTextTokenPriceLongContext\":\"$n40000\",\"cachedPromptTokenPrice\":\"$n5000\",\"cachedPromptTokenPriceLongContext\":\"$n10000\",\"completionTextTokenPrice\":\"$n60000\",\"completionTokenPriceLongContext\":\"$n120000\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.5",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": 0.3
+   },
+   "from": "2026-07-19",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 4.0,
+      "output": 12.0,
+      "cache-read": 0.6
+     }
+    }
+   ],
+   "note": "Between the 18 Jul 03:05 capture (cache 0.50) and the 19 Jul 17:15 capture (0.30) the change is not located: 19 Jul not covered before its capture.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260719171514/https://docs.x.ai/developers/models",
+     "captured": "2026-07-19T17:15:14Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-m-2026-07-19.txt",
+     "sha256": "9de2cb15f475dde909a28b030735adb9c3decfffdbf16f60af44b5bd3ff8af8a",
+     "where": "models page 19 Jul 2026, cache 0.30",
+     "quote": "\"name\":\"grok-4.5\",\"version\":\"1.0\",\"inputModalities\":[1,2],\"outputModalities\":[1],\"promptTextTokenPrice\":\"$n20000\",\"promptImageTokenPrice\":\"$n20000\",\"promptTextTokenPriceLongContext\":\"$n40000\",\"cachedPromptTokenPrice\":\"$n3000\",\"cachedPromptTokenPriceLongContext\":\"$n6000\",\"completionTextTokenPrice\":\"$n60000\",\"completionTokenPriceLongContext\":\"$n120000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct, grok-4.5 cache 0.30",
+     "quote": "\"cachedPromptTokenPrice\":\"3000\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.6",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": 0.5
+   },
+   "from": "2026-08-12",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 4.0,
+      "output": 12.0,
+      "cache-read": 1.0
+     }
+    }
+   ],
+   "note": "Launch 12 Aug 2026 (release notes). US regional cluster us-central-1 at +10% not recorded (regional, not list).",
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/release-notes",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-rn-2026-10-21.txt",
+     "sha256": "aa9a705c5093544eac9c4e88d2da5e833f1253926c1f651f1f1062aa6fe9a0cc",
+     "where": "release notes, 12 Aug 2026 launch (grok-4.6 section)",
+     "quote": "Pricing is $2 / $0.50 / $6 per 1M tokens (input / cached input / output) below 200k prompt tokens, and $4 / $1 / $12 above"
+    },
+    {
+     "url": "https://web.archive.org/web/20260812154724/https://docs.x.ai/developers/models",
+     "captured": "2026-08-12T15:47:24Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-m-2026-08-12.txt",
+     "sha256": "7a7848b54117316b0bd67c8c731ed9f5804b639aeafb75cc4bf6deaeabf99687",
+     "where": "models page 12 Aug 2026, grok-4.6",
+     "quote": "\"name\":\"grok-4.6\",\"version\":\"1.0\",\"inputModalities\":[\"TEXT\",\"IMAGE\"],\"outputModalities\":[\"TEXT\"],\"promptTextTokenPrice\":\"20000\",\"promptImageTokenPrice\":\"20000\",\"promptTextTokenPriceLongContext\":\"40000\",\"cachedPromptTokenPrice\":\"5000\",\"cachedPromptTokenPriceLongContext\":\"10000\""
+    },
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct, grok-4.6 global cluster",
+     "quote": "\"cachedPromptTokenPrice\":\"5000\",\"cachedPromptTokenPriceLongContext\":\"10000\",\"completionTextTokenPrice\":\"60000\""
+    }
+   ]
+  },
+  {
+   "model": "grok-4.7",
+   "route": "xai-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": 0.5
+   },
+   "from": "2026-09-21",
+   "to": "2026-10-23",
+   "from_basis": "release",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 200000,
+     "classes": {
+      "input": 4.0,
+      "output": 12.0,
+      "cache-read": 1.0
+     }
+    }
+   ],
+   "note": "Launch 21 Sep 2026. US regional cluster at +10% not recorded.",
+   "evidence": [
+    {
+     "url": "https://docs.x.ai/developers/release-notes",
+     "captured": "2026-10-21",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-rn-2026-10-21.txt",
+     "sha256": "aa9a705c5093544eac9c4e88d2da5e833f1253926c1f651f1f1062aa6fe9a0cc",
+     "where": "release notes, 21 Sep 2026 launch",
+     "quote": "Pricing is $2 / $0.50 / $6 per 1M tokens (input / cached input / output) below 200k prompt tokens, and $4 / $1 / $12 above"
+    },
+    {
+     "url": "https://docs.x.ai/developers/models",
+     "captured": "2026-10-23T06:47:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/xai/xai-live-2026-10-23.txt",
+     "sha256": "01d048d2862019609b3d161d06ed41cf1ab0b54086398eaf5b9af0043ab4f280",
+     "where": "live models JSON 23 Oct, grok-4.7 global cluster",
+     "quote": "\"cachedPromptTokenPrice\":\"5000\",\"cachedPromptTokenPriceLongContext\":\"10000\",\"completionTextTokenPrice\":\"60000\""
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-01-29",
+   "to": "2026-04-15",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260129215237/https://platform.moonshot.ai/docs/pricing/chat",
+     "captured": "2026-01-29T21:52:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-app-20260129215237.txt",
+     "sha256": "cc9e82d3f0d41304675118805139fcc638e5218cc2d9a2feca17a990740a07e1",
+     "where": "pricing table row kimi-k2.5, capture 2026-01-29",
+     "quote": "model_id:\"kimi-k2.5\",unit:\"1M tokens\",caching:.1,prompt:.6,completion:3"
+    },
+    {
+     "url": "https://web.archive.org/web/20260415080812/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-04-15T08:08:12Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260415080812.txt",
+     "sha256": "34333b5e9e58d4e5271ec8df0d07231153cd41026a926d800eed230977eceb35",
+     "where": "pricing table row kimi-k2.5, capture 2026-04-15",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-04-21",
+   "to": "2026-04-21",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260421005651/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-04-21T00:56:51Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260421005651.txt",
+     "sha256": "4c5dc12fc2fd6d70cb37c605140e8cb724cc96daba5f01b9f6b30a6c3b00696e",
+     "where": "pricing table row kimi-k2.5, capture 2026-04-21",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-05-01",
+   "to": "2026-05-01",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260501202530/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-05-01T20:25:30Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260501202530.txt",
+     "sha256": "b83e1ef868fc2bbdd55d6645dc541cd9bad80983623b5a3e964abd5811a9aecc",
+     "where": "pricing table row kimi-k2.5, capture 2026-05-01",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-05-15",
+   "to": "2026-05-15",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260515072402/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-05-15T07:24:02Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260515072402.txt",
+     "sha256": "225b45147c28e375329c2e2eb196cde1b5e08da615375802efa3f5ff4447b72a",
+     "where": "pricing table row kimi-k2.5, capture 2026-05-15",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-05-24",
+   "to": "2026-05-24",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260524021358/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-05-24T02:13:58Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260524021358.txt",
+     "sha256": "e80fbf7f94c670a24e89f762a2ffcb36e06e8b752cf5d95954d2eec84685b84b",
+     "where": "pricing table row kimi-k2.5, capture 2026-05-24",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-05-30",
+   "to": "2026-05-30",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260530041649/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-05-30T04:16:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260530041649.txt",
+     "sha256": "42107f1c0855a3742c461d5ae44f548cf3790c834a95cea39fb5b42416928d66",
+     "where": "pricing table row kimi-k2.5, capture 2026-05-30",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-07-01",
+   "to": "2026-07-10",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260701042213/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-07-01T04:22:13Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260701042213.txt",
+     "sha256": "86d5b45ca609b26c9c0a072e8f7e3e1f2eba346a75c034f3b7996b7f51c255ed",
+     "where": "pricing table row kimi-k2.5, capture 2026-07-01",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260710133225/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-07-10T13:32:25Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260710133225.txt",
+     "sha256": "1d67cf1993fa8a428f164c04c1f35be84558b7517e5d9be3db23eaf8e634585d",
+     "where": "pricing table row kimi-k2.5, capture 2026-07-10",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-07-17",
+   "to": "2026-07-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260717074042/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-07-17T07:40:42Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260717074042.txt",
+     "sha256": "f2409289167d016ca25bdf17779ec3c7b095ebcb8faddffd1f06f88a2c0d9b67",
+     "where": "pricing table row kimi-k2.5, capture 2026-07-17",
+     "quote": "kimi-k2.5\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.10\\n }), _jsxs(_Fragment, {\\n children: $0.60\\n }), _jsxs(_Fragment, {\\n children: $3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-07-31",
+   "to": "2026-07-31",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260731165853/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-07-31T16:58:53Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260731165853.txt",
+     "sha256": "f3151325fd32ac3260ebdcd5cc2e8ae66da384736d818e22d174e0ab6f390674",
+     "where": "pricing table row kimi-k2.5, capture 2026-07-31",
+     "quote": "kimi-k2.5 , 1M tokens ,$0.10,$0.60,$3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.5",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-08-19",
+   "to": "2026-08-30",
+   "from_basis": "earliest-capture",
+   "to_basis": "stated",
+   "base": true,
+   "note": "Deprecated: \"kimi-k2.5 was officially discontinued on August 31, 2026\" (models page). Ends the day before. Last list price kept as base. First capture 29 Jan 2026 (app bundle, USD first array).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260819130848/https://platform.kimi.ai/docs/pricing/chat-k25",
+     "captured": "2026-08-19T13:08:48Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k25-20260819130848.txt",
+     "sha256": "8206a056a9ccd3b03386df4019194e7a8e5e166900b9bcb0010952a35b30d450",
+     "where": "pricing table row kimi-k2.5, capture 2026-08-19",
+     "quote": "kimi-k2.5 , 1M tokens ,$0.10,$0.60,$3.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-04-20",
+   "to": "2026-04-21",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260420172022/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-04-20T17:20:22Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260420172022.txt",
+     "sha256": "82116b5690933595a01f9c744727316befb4ed831b226a7120e92c44abb4d586",
+     "where": "pricing table row kimi-k2.6, capture 2026-04-20",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260421005649/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-04-21T00:56:49Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260421005649.txt",
+     "sha256": "02d77ecdfc03ff1a9c11a0d7472ac51d25a74d6f74cf5f315c0342be54e6670e",
+     "where": "pricing table row kimi-k2.6, capture 2026-04-21",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-04-21",
+   "to": "2026-05-01",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260421005651/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-04-21T00:56:51Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260421005651.txt",
+     "sha256": "02d77ecdfc03ff1a9c11a0d7472ac51d25a74d6f74cf5f315c0342be54e6670e",
+     "where": "pricing table row kimi-k2.6, capture 2026-04-21",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260501202528/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-05-01T20:25:28Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260501202528.txt",
+     "sha256": "405f67baec97c119e509a80153a9a0b52253c1f0d3a15673568fe85481a035c1",
+     "where": "pricing table row kimi-k2.6, capture 2026-05-01",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-05-12",
+   "to": "2026-05-12",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260512114334/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-05-12T11:43:34Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260512114334.txt",
+     "sha256": "bd856fbab01f65725a5e10dbe3b5d0dc19725c4629d59d44d888b10e59bcebd0",
+     "where": "pricing table row kimi-k2.6, capture 2026-05-12",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-05-15",
+   "to": "2026-05-15",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260515082638/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-05-15T08:26:38Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260515082638.txt",
+     "sha256": "37a5f8907f817bbc748b02b2a2631e6e1cd0502ac2c65f5c051cfdbf94472cf1",
+     "where": "pricing table row kimi-k2.6, capture 2026-05-15",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-05-24",
+   "to": "2026-05-24",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260524021358/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-05-24T02:13:58Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260524021358.txt",
+     "sha256": "d2bb52de9dccaa64307326c7437834bf1c9f5bb25a9ae38c85c6da0a590f3041",
+     "where": "pricing table row kimi-k2.6, capture 2026-05-24",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-06-11",
+   "to": "2026-06-11",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260611110236/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-06-11T11:02:36Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260611110236.txt",
+     "sha256": "7db454265ab2f965b5a7490893945e56ece9bdf5422ee57687546b8bf2c346da",
+     "where": "pricing table row kimi-k2.6, capture 2026-06-11",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-06-27",
+   "to": "2026-06-27",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260627091252/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-06-27T09:12:52Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260627091252.txt",
+     "sha256": "cb5ebfa8485612d27af8023d695fc957e9e695f10696f5a8dccf939eeff72e19",
+     "where": "pricing table row kimi-k2.6, capture 2026-06-27",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-07-11",
+   "to": "2026-07-11",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091813/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-07-11T09:18:13Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260711091813.txt",
+     "sha256": "4d267215d8bcbc93117bba475566e3d0c2734a9dfe5edc6873cbda257c7c517a",
+     "where": "pricing table row kimi-k2.6, capture 2026-07-11",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-07-17",
+   "to": "2026-07-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260717045828/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-07-17T04:58:28Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260717045828.txt",
+     "sha256": "cd2f89474f15a6f5087c8d16c4975d68774da71e8344e4ce7d037d7529bbfcf8",
+     "where": "pricing table row kimi-k2.6, capture 2026-07-17",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-07-17",
+   "to": "2026-07-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260717074037/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-07-17T07:40:37Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260717074037.txt",
+     "sha256": "4b19b37133fffcc204351540002c7c3667313acff42b2ad6c1db28e2e4cdadf5",
+     "where": "pricing table row kimi-k2.6, capture 2026-07-17",
+     "quote": "kimi-k2.6\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.16\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-07-28",
+   "to": "2026-07-28",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260728083651/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-07-28T08:36:51Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260728083651.txt",
+     "sha256": "65e5a4237bad81360a09b549460c822131b9bee988b4b8cf5bcd7f0d9a6f704e",
+     "where": "pricing table row kimi-k2.6, capture 2026-07-28",
+     "quote": "kimi-k2.6 , 1M tokens ,$0.16,$0.95,$4.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260728083707/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-07-28T08:37:07Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260728083707.txt",
+     "sha256": "65e5a4237bad81360a09b549460c822131b9bee988b4b8cf5bcd7f0d9a6f704e",
+     "where": "pricing table row kimi-k2.6, capture 2026-07-28",
+     "quote": "kimi-k2.6 , 1M tokens ,$0.16,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-08-19",
+   "to": "2026-08-19",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260819114916/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-08-19T11:49:16Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260819114916.txt",
+     "sha256": "173d117a6237e53a6e27f75bf7d87d5aa91fe1b966def1b1292bab52650846a4",
+     "where": "pricing table row kimi-k2.6, capture 2026-08-19",
+     "quote": "kimi-k2.6 , 1M tokens ,$0.16,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-08-28",
+   "to": "2026-08-28",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260828042942/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-08-28T04:29:42Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260828042942.txt",
+     "sha256": "09092697f8d5ad8170cb3ab7245e0fcb89a63dd942845ef49cca449d07bfdd2b",
+     "where": "pricing table row kimi-k2.6, capture 2026-08-28",
+     "quote": "kimi-k2.6 , 1M tokens ,$0.16,$0.95,$4.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260828042947/https://platform.kimi.ai/docs/pricing/chat-k26",
+     "captured": "2026-08-28T04:29:47Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k26-20260828042947.txt",
+     "sha256": "09092697f8d5ad8170cb3ab7245e0fcb89a63dd942845ef49cca449d07bfdd2b",
+     "where": "pricing table row kimi-k2.6, capture 2026-08-28",
+     "quote": "kimi-k2.6 , 1M tokens ,$0.16,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.6",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.16
+   },
+   "from": "2026-09-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). Release 14 Apr 2026 per models.json; first captured price 20 Apr 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260911114646/https://platform.kimi.ai/docs/pricing/chat",
+     "captured": "2026-09-11T11:46:46Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-kc-20260911114646.txt",
+     "sha256": "dbc871705275fe79d84832d8a138bc3ead8252b90a40ec0a21dfd4751fab1e5d",
+     "where": "pricing table row kimi-k2.6, capture 2026-09-11",
+     "quote": "kimi-k2.6 , 1M tokens ,$0.16,$0.95,$4.00"
+    },
+    {
+     "url": "https://platform.kimi.ai/docs/pricing/chat",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-kimi-pricing-live.txt",
+     "sha256": "ab81b4a66096ac166cc798d780c07f8ad7008b7999517c979f0e16da5b1eba16",
+     "where": "pricing table row kimi-k2.6, capture 2026-10-23",
+     "quote": "kimi-k2.6 , 1M tokens ,$0.16,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-06-12",
+   "to": "2026-06-12",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260612232111/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-06-12T23:21:11Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260612232111.txt",
+     "sha256": "a1e5926ad6bdbfd53cc648b9be50e9cf6af07497542bfd577884da81a7c896d7",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-06-12",
+     "quote": "kimi-k2.7-code\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.19\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-06-28",
+   "to": "2026-06-28",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260628102524/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-06-28T10:25:24Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260628102524.txt",
+     "sha256": "456ee44d5b6ca16cab99e846b8eea69e2b77d417e809f1889c7aea10a4179d22",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-06-28",
+     "quote": "kimi-k2.7-code\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.19\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-07-10",
+   "to": "2026-07-10",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260710133446/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-07-10T13:34:46Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260710133446.txt",
+     "sha256": "1d7c0c7c36f657796c3d016959a27db985d23d4572bf09dd4c27177e25d0c00c",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-07-10",
+     "quote": "kimi-k2.7-code\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.19\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-07-11",
+   "to": "2026-07-11",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711092007/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-07-11T09:20:07Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260711092007.txt",
+     "sha256": "e093464bc350ab34e16002b5798206de9657c7424aadcff4a874a0b250059fc0",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-07-11",
+     "quote": "kimi-k2.7-code\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.19\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-07-17",
+   "to": "2026-07-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260717074133/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-07-17T07:41:33Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260717074133.txt",
+     "sha256": "b0b828e5c969654b9f57c0cc74086b19912806c00e8c870b39abefb13052e460",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-07-17",
+     "quote": "kimi-k2.7-code\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.19\\n }), _jsxs(_Fragment, {\\n children: $0.95\\n }), _jsxs(_Fragment, {\\n children: $4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-07-27",
+   "to": "2026-07-27",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260727065717/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-07-27T06:57:17Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260727065717.txt",
+     "sha256": "922535c7ae4f47f833ba1a1f4514af08ba3bfb01f247b9987d3716f6f1d059fc",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-07-27",
+     "quote": "kimi-k2.7-code , 1M tokens ,$0.19,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-07-31",
+   "to": "2026-07-31",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260731165853/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-07-31T16:58:53Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260731165853.txt",
+     "sha256": "2f76689e309719b05dbd6f8a8d2cc452ce971f25daf414c7f71cfaa8fbcd8fe2",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-07-31",
+     "quote": "kimi-k2.7-code , 1M tokens ,$0.19,$0.95,$4.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260731165856/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-07-31T16:58:56Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260731165856.txt",
+     "sha256": "2f76689e309719b05dbd6f8a8d2cc452ce971f25daf414c7f71cfaa8fbcd8fe2",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-07-31",
+     "quote": "kimi-k2.7-code , 1M tokens ,$0.19,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-08-19",
+   "to": "2026-08-19",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260819114811/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-08-19T11:48:11Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260819114811.txt",
+     "sha256": "308e7d057e3d7631eb1a9c390ffcb22de120fc83eb9da6d705ca3ece611387b8",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-08-19",
+     "quote": "kimi-k2.7-code , 1M tokens ,$0.19,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k2.7-code",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.95,
+    "output": 4.0,
+    "cache-read": 0.19
+   },
+   "from": "2026-09-09",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Platform pricing page (Kimi API). First captured price 12 Jun 2026. Highspeed variant not in this key.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260909000447/https://platform.kimi.ai/docs/pricing/chat-k27-code",
+     "captured": "2026-09-09T00:04:47Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k27-code-20260909000447.txt",
+     "sha256": "e7ffd007836ec5f7a02ae5a0474ff79179efa90e85469c2eba4a59ff207cc8b6",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-09-09",
+     "quote": "kimi-k2.7-code , 1M tokens ,$0.19,$0.95,$4.00"
+    },
+    {
+     "url": "https://platform.kimi.ai/docs/pricing/chat",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-kimi-pricing-live.txt",
+     "sha256": "ab81b4a66096ac166cc798d780c07f8ad7008b7999517c979f0e16da5b1eba16",
+     "where": "pricing table row kimi-k2.7-code, capture 2026-10-23",
+     "quote": "kimi-k2.7-code , 1M tokens ,$0.19,$0.95,$4.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": null,
+    "cache-write-1h": null
+   },
+   "from": "2026-07-17",
+   "to": "2026-07-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Early table: cache-hit 0.30, input 3.00, output 15.00; no cache-write line (write cost included in input, per the maker). First captured 17 Jul 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260717032544/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-07-17T03:25:44Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260717032544.txt",
+     "sha256": "7f7b345066c04c6dc9b39e815cea681343eea0b00d1c3f7e20ab8a5105e8d924",
+     "where": "pricing table row kimi-k3, capture 2026-07-17",
+     "quote": "kimi-k3\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.30\\n }), _jsxs(_Fragment, {\\n children: $3.00\\n }), _jsxs(_Fragment, {\\n children: $15.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": null,
+    "cache-write-1h": null
+   },
+   "from": "2026-07-17",
+   "to": "2026-07-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Early table: cache-hit 0.30, input 3.00, output 15.00; no cache-write line (write cost included in input, per the maker). First captured 17 Jul 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260717072409/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-07-17T07:24:09Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260717072409.txt",
+     "sha256": "438e03985da96f9eda614076bebd9fb60e0c3b85253e31d2323321162bb2ed6d",
+     "where": "pricing table row kimi-k3, capture 2026-07-17",
+     "quote": "kimi-k3\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.30\\n }), _jsxs(_Fragment, {\\n children: $3.00\\n }), _jsxs(_Fragment, {\\n children: $15.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": null,
+    "cache-write-1h": null
+   },
+   "from": "2026-07-19",
+   "to": "2026-07-26",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Early table: cache-hit 0.30, input 3.00, output 15.00; no cache-write line (write cost included in input, per the maker). First captured 17 Jul 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260719174704/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-07-19T17:47:04Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260719174704.txt",
+     "sha256": "038bc755f695e79a59c8936d72165b3231007439b433ac378e76df6e0259d65e",
+     "where": "pricing table row kimi-k3, capture 2026-07-19",
+     "quote": "kimi-k3\", \"1M tokens\", _jsxs(_Fragment, {\\n children: $0.30\\n }), _jsxs(_Fragment, {\\n children: $3.00\\n }), _jsxs(_Fragment, {\\n children: $15.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260726092933/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-07-26T09:29:33Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260726092933.txt",
+     "sha256": "0a094be23eacccbb39054cbc80b0d6b3ad2bc74ca286ae85bbd15df0754cd7e2",
+     "where": "pricing table row kimi-k3, capture 2026-07-26",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": null,
+    "cache-write-1h": null
+   },
+   "from": "2026-08-11",
+   "to": "2026-08-19",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Early table: cache-hit 0.30, input 3.00, output 15.00; no cache-write line (write cost included in input, per the maker). First captured 17 Jul 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260811052046/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-08-11T05:20:46Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260811052046.txt",
+     "sha256": "4ff3423155fba172fc890b069304240adf52e015f9c93a3353f271842f4fd671",
+     "where": "pricing table row kimi-k3, capture 2026-08-11",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260819111318/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-08-19T11:13:18Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260819111318.txt",
+     "sha256": "c6b00487a3cbd8358896ec48712748eb85f34cb252867bb7a6ed05ce260ef531",
+     "where": "pricing table row kimi-k3, capture 2026-08-19",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": null,
+    "cache-write-1h": null
+   },
+   "from": "2026-08-20",
+   "to": "2026-08-25",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Early table: cache-hit 0.30, input 3.00, output 15.00; no cache-write line (write cost included in input, per the maker). First captured 17 Jul 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260820123740/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-08-20T12:37:40Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260820123740.txt",
+     "sha256": "c6b00487a3cbd8358896ec48712748eb85f34cb252867bb7a6ed05ce260ef531",
+     "where": "pricing table row kimi-k3, capture 2026-08-20",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260825100619/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-08-25T10:06:19Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260825100619.txt",
+     "sha256": "f78bfca88668ada8574dba152db4dc54274a9239db86506bf0c7f63264d44741",
+     "where": "pricing table row kimi-k3, capture 2026-08-25",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": null,
+    "cache-write-1h": null
+   },
+   "from": "2026-09-09",
+   "to": "2026-09-09",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Early table: cache-hit 0.30, input 3.00, output 15.00; no cache-write line (write cost included in input, per the maker). First captured 17 Jul 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260909000432/https://platform.kimi.ai/docs/pricing/chat-k3",
+     "captured": "2026-09-09T00:04:32Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-chat-k3-20260909000432.txt",
+     "sha256": "68e32358d6853647cd402674e91118ba3e6d571c288a4d79c1be407804dca8fc",
+     "where": "pricing table row kimi-k3, capture 2026-09-09",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": null,
+    "cache-write-1h": null
+   },
+   "from": "2026-09-11",
+   "to": "2026-09-13",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Early table: cache-hit 0.30, input 3.00, output 15.00; no cache-write line (write cost included in input, per the maker). First captured 17 Jul 2026.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260911114646/https://platform.kimi.ai/docs/pricing/chat",
+     "captured": "2026-09-11T11:46:46Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-kc-20260911114646.txt",
+     "sha256": "dbc871705275fe79d84832d8a138bc3ead8252b90a40ec0a21dfd4751fab1e5d",
+     "where": "pricing table row kimi-k3, capture 2026-09-11",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    },
+    {
+     "url": "https://web.archive.org/web/20260913195101/https://platform.kimi.ai/docs/pricing/chat",
+     "captured": "2026-09-13T19:51:01Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-kc-20260913195101.txt",
+     "sha256": "dbc871705275fe79d84832d8a138bc3ead8252b90a40ec0a21dfd4751fab1e5d",
+     "where": "pricing table row kimi-k3, capture 2026-09-13",
+     "quote": "kimi-k3 , 1M tokens ,$0.30,$3.00,$15.00"
+    }
+   ]
+  },
+  {
+   "model": "kimi-k3",
+   "route": "moonshot-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 3.0,
+    "output": 15.0,
+    "cache-read": 0.3,
+    "cache-write-5m": 3.0,
+    "cache-write-1h": 6.0
+   },
+   "from": "2026-09-20",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "From the 20 Sep 2026 capture: cache write itemised (5m 3.00, 1h 6.00) per the maker; input, cache read and output unchanged. Changelog states the total cost of existing requests is unchanged.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260920103132/https://platform.kimi.ai/docs/pricing/chat",
+     "captured": "2026-09-20T10:31:32Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-kc-20260920103132.txt",
+     "sha256": "3497dac73f1fee5441551d58004c9d70913b880e2c4e153211f587f3e08fef88",
+     "where": "pricing table row kimi-k3, capture 2026-09-20",
+     "quote": "kimi-k3 , 1M tokens ,$3.00,$6.00,$0.30,$3.00,$15.00"
+    },
+    {
+     "url": "https://platform.kimi.ai/docs/pricing/chat",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/kimi/kimi-kimi-pricing-live.txt",
+     "sha256": "ab81b4a66096ac166cc798d780c07f8ad7008b7999517c979f0e16da5b1eba16",
+     "where": "pricing table row kimi-k3, capture 2026-10-23",
+     "quote": "kimi-k3 , 1M tokens ,$3.00,$6.00,$0.30,$3.00,$15.00"
+    }
+   ]
+  },
+  {
+   "model": "qwen3-8b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.18,
+    "output": 0.7,
+    "cache-read": null
+   },
+   "from": "2026-01-16",
+   "to": "2026-10-10",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "base": true,
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Thinking-mode output price is 2.1 USD per MTok (non-thinking 0.7): the schema has no per-configuration price, so only the non-thinking output is recorded here. Removed from the pricing page between 10 and 13 Oct 2026 (no retirement notice found).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260116072901/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-01-16T07:29:01Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260116072901.txt",
+     "sha256": "6a086a13d8429ebb44dd2e2b96a424d14a292a4b5077a8b0ed6b637d0e851ce3",
+     "where": "International price table, row qwen3-8b (capture 2026-01-16)",
+     "quote": "qwen3-8b | Thinking and non-thinking | $0.18 | $0.7 | $2.1"
+    },
+    {
+     "url": "https://web.archive.org/web/20261010105005/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-10T10:50:05Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20261010105005.txt",
+     "sha256": "948790f96a03bf570cce3b2e8c4687355839fdc4010705559becbbfd766d3f26",
+     "where": "International price table, row qwen3-8b (capture 2026-10-10)",
+     "quote": "qwen3-8b | International | Non-Thinking and Thinking modes | $0.18 | $0.7 | $2.1"
+    }
+   ]
+  },
+  {
+   "model": "qwen3-coder-next",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.3,
+    "output": 1.5,
+    "cache-read": null
+   },
+   "from": "2026-03-01",
+   "to": "2026-10-10",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "base": true,
+   "long_context": [
+    {
+     "threshold_input_tokens": 32000,
+     "classes": {
+      "input": 0.5,
+      "output": 2.5
+     }
+    },
+    {
+     "threshold_input_tokens": 128000,
+     "classes": {
+      "input": 0.8,
+      "output": 4.0
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Removed from the pricing page between 10 and 13 Oct 2026 (no retirement notice found): interval ends at the last capture.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260301130655/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-03-01T13:06:55Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260301130655.txt",
+     "sha256": "5db8cb1b46fd9c63dd5752674512d57ac633c84f7cf25b171afcef1a04cfcb3c",
+     "where": "International price table, row qwen3-coder-next (capture 2026-03-01)",
+     "quote": "qwen3-coder-next | 0<Token≤32K | $0.3 | $1.5 | 1 million tokens each Validity: 90 days after activating Model Studio | 32K<Token≤128K | $0.5 | $2.5 | 128K<Token≤256K | $0.8 | $4"
+    },
+    {
+     "url": "https://web.archive.org/web/20261010105005/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-10T10:50:05Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20261010105005.txt",
+     "sha256": "948790f96a03bf570cce3b2e8c4687355839fdc4010705559becbbfd766d3f26",
+     "where": "International price table, row qwen3-coder-next (capture 2026-10-10)",
+     "quote": "qwen3-coder-next | International | 0<Token≤32K | $0.3 | $1.5 | 1 million tokens | 32K<Token≤128K | $0.5 | $2.5 | 128K<Token≤256K | $0.8 | $4"
+    }
+   ]
+  },
+  {
+   "model": "qwen3-vl-32b-instruct",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.16,
+    "output": 0.64,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-10",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "base": true,
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Removed from the pricing page between 10 and 13 Oct 2026 (no retirement notice found); International row from 11 Jul 2026 capture. Non-thinking mode only.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3-vl-32b-instruct (capture 2026-07-11)",
+     "quote": "qwen3-vl-32b-instruct | International | Non-Thinking mode only | $0.16 | $0.64"
+    },
+    {
+     "url": "https://web.archive.org/web/20261010105005/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-10T10:50:05Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20261010105005.txt",
+     "sha256": "948790f96a03bf570cce3b2e8c4687355839fdc4010705559becbbfd766d3f26",
+     "where": "International price table, row qwen3-vl-32b-instruct (capture 2026-10-10)",
+     "quote": "qwen3-vl-32b-instruct | International | Non-Thinking mode only | $0.16 | $0.64"
+    }
+   ]
+  },
+  {
+   "model": "qwen3-vl-32b-thinking",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.16,
+    "output": 0.64,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-10",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "base": true,
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Removed from the pricing page between 10 and 13 Oct 2026 (no retirement notice found); International row from 11 Jul 2026 capture. Thinking mode only.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3-vl-32b-thinking (capture 2026-07-11)",
+     "quote": "qwen3-vl-32b-thinking | International | Thinking mode only | $0.16 | $0.64"
+    },
+    {
+     "url": "https://web.archive.org/web/20261010105005/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-10T10:50:05Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20261010105005.txt",
+     "sha256": "948790f96a03bf570cce3b2e8c4687355839fdc4010705559becbbfd766d3f26",
+     "where": "International price table, row qwen3-vl-32b-thinking (capture 2026-10-10)",
+     "quote": "qwen3-vl-32b-thinking | International | Thinking mode only | $0.16 | $0.64"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-122b-a10b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.4,
+    "output": 3.2,
+    "cache-read": null
+   },
+   "from": "2026-03-01",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260301130655/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-03-01T13:06:55Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260301130655.txt",
+     "sha256": "5db8cb1b46fd9c63dd5752674512d57ac633c84f7cf25b171afcef1a04cfcb3c",
+     "where": "International price table, row qwen3.5-122b-a10b (capture 2026-03-01)",
+     "quote": "qwen3.5-122b-a10b | 0<Token≤256K | $0.4 | $3.2"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-122b-a10b (capture 2026-10-23)",
+     "quote": "qwen3.5-122b-a10b International 0<Token≤256K $0.4 $3.2"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-27b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.3,
+    "output": 2.4,
+    "cache-read": null
+   },
+   "from": "2026-03-01",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260301130655/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-03-01T13:06:55Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260301130655.txt",
+     "sha256": "5db8cb1b46fd9c63dd5752674512d57ac633c84f7cf25b171afcef1a04cfcb3c",
+     "where": "International price table, row qwen3.5-27b (capture 2026-03-01)",
+     "quote": "qwen3.5-27b | 0<Token≤256K | $0.3 | $2.4"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-27b (capture 2026-10-23)",
+     "quote": "qwen3.5-27b International 0<Token≤256K $0.3 $2.4"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-35b-a3b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.25,
+    "output": 2.0,
+    "cache-read": null
+   },
+   "from": "2026-03-01",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260301130655/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-03-01T13:06:55Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260301130655.txt",
+     "sha256": "5db8cb1b46fd9c63dd5752674512d57ac633c84f7cf25b171afcef1a04cfcb3c",
+     "where": "International price table, row qwen3.5-35b-a3b (capture 2026-03-01)",
+     "quote": "qwen3.5-35b-a3b | 0<Token≤256K | $0.25 | $2"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-35b-a3b (capture 2026-10-23)",
+     "quote": "qwen3.5-35b-a3b International 0<Token≤256K $0.25 $2"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-397b-a17b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.6,
+    "cache-read": null
+   },
+   "from": "2026-02-17",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260217035016/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-02-17T03:50:16Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260217035016.txt",
+     "sha256": "7b91584ba574aca4bf9e59b6d49f61d40186e7cad44e7f021e2ad4b59a3bb00b",
+     "where": "International price table, row qwen3.5-397b-a17b (capture 2026-02-17)",
+     "quote": "qwen3.5-397b-a17b | 0<Token≤256K | $0.6 | $3.6"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-397b-a17b (capture 2026-10-23)",
+     "quote": "qwen3.5-397b-a17b International 0<Token≤256K $0.6 $3.6"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-flash",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.1,
+    "output": 0.4,
+    "cache-read": null
+   },
+   "from": "2026-03-01",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260301130655/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-03-01T13:06:55Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260301130655.txt",
+     "sha256": "5db8cb1b46fd9c63dd5752674512d57ac633c84f7cf25b171afcef1a04cfcb3c",
+     "where": "International price table, row qwen3.5-flash (capture 2026-03-01)",
+     "quote": "qwen3.5-flash Batch calling 50% off Context cache discount | 0<Token≤1M | $0.1 | $0.4"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-flash (capture 2026-10-23)",
+     "quote": "qwen3.5-flash Currently equivalent to qwen3.5-flash-2026-02-23 50% batch inference discount context caching discount International 0<Token≤1M $0.1 $0.4"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-omni-flash",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.4,
+    "output": 2.2,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.5-omni-flash (capture 2026-07-11)",
+     "quote": "qwen3.5-omni-flash Currently equivalent to qwen3.5-omni-flash-2026-03-15 | International | $0.4 | $3 | $2.2 | $11.9"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-omni-flash (capture 2026-10-23)",
+     "quote": "qwen3.5-omni-flash Currently equivalent to qwen3.5-omni-flash-2026-03-15 International $0.4 $3 $2.2 $11.9"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-omni-plus",
+   "route": "alibaba-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "from": "2026-04-02",
+   "to": "2026-06-13",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "Free preview: \"Model invocation is temporarily free, but tool calling still incurs fees\" (not a price; recorded as a promotion with no classes). Captures 2 Apr to 13 Jun 2026 show the same text; 14 Jun to 10 Jul not covered.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260402181911/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-04-02T18:19:11Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260402181911.txt",
+     "sha256": "44397ec21624dc38349c4687f2227610f02c04a1acc6af14ac5e6e16c1d50f09",
+     "where": "International price table, qwen3.5-omni-plus row (free preview)",
+     "quote": "qwen3.5-omni-plus | In preview. Model invocation is temporarily free, but tool calling still incurs fees."
+    },
+    {
+     "url": "https://web.archive.org/web/20260613033600/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-06-13T03:36:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260613033600.txt",
+     "sha256": "44397ec21624dc38349c4687f2227610f02c04a1acc6af14ac5e6e16c1d50f09",
+     "where": "International price table, qwen3.5-omni-plus row (free preview)",
+     "quote": "qwen3.5-omni-plus | In preview. Model invocation is temporarily free, but tool calling still incurs fees."
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-omni-plus",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 1.4,
+    "output": 8.3,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.5-omni-plus (capture 2026-07-11)",
+     "quote": "qwen3.5-omni-plus Currently equivalent to qwen3.5-omni-plus-2026-03-15 | International | $1.4 | $11 | $8.3 | $44"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-omni-plus (capture 2026-10-23)",
+     "quote": "qwen3.5-omni-plus Currently equivalent to qwen3.5-omni-plus-2026-03-15 International $1.4 $11 $8.3 $44"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-plus",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.4,
+    "output": 2.4,
+    "cache-read": null
+   },
+   "from": "2026-02-17",
+   "to": "2026-02-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 1.2,
+      "output": 7.2
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Above 256K input tokens the whole request is billed at the tier.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260217035016/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-02-17T03:50:16Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260217035016.txt",
+     "sha256": "7b91584ba574aca4bf9e59b6d49f61d40186e7cad44e7f021e2ad4b59a3bb00b",
+     "where": "International price table, row qwen3.5-plus (capture 2026-02-17)",
+     "quote": "qwen3.5-plus | 0<Token≤256K | $0.4 | $2.4 | $2.4 | 1 million tokens each Validity: 90 days after activating Model Studio | 256K<Token≤1M | $1.2 | $7.2"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-plus",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.4,
+    "output": 2.4,
+    "cache-read": null
+   },
+   "from": "2026-03-01",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 0.5,
+      "output": 3.0
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Above 256K input tokens the whole request is billed at the tier.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260301130655/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-03-01T13:06:55Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260301130655.txt",
+     "sha256": "5db8cb1b46fd9c63dd5752674512d57ac633c84f7cf25b171afcef1a04cfcb3c",
+     "where": "International price table, row qwen3.5-plus (capture 2026-03-01)",
+     "quote": "qwen3.5-plus | 0<Token≤256K | $0.4 | $2.4 | $2.4 | 1 million tokens each Validity: 90 days after activating Model Studio | 256K<Token≤1M | $0.5 | $3"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-plus (capture 2026-10-23)",
+     "quote": "qwen3.5-plus Currently equivalent to qwen3.5-plus-2026-02-15 International 0<Token≤256K $0.4 $2.4 $2.4 1 million tokens 256K<Token≤1M $0.5 $3"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-plus-02-15",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.4,
+    "output": 2.4,
+    "cache-read": null
+   },
+   "from": "2026-02-17",
+   "to": "2026-02-17",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 1.2,
+      "output": 7.2
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Snapshot id qwen3.5-plus-2026-02-15.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260217035016/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-02-17T03:50:16Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260217035016.txt",
+     "sha256": "7b91584ba574aca4bf9e59b6d49f61d40186e7cad44e7f021e2ad4b59a3bb00b",
+     "where": "International price table, row qwen3.5-plus-2026-02-15 (capture 2026-02-17)",
+     "quote": "qwen3.5-plus-2026-02-15 | 0<Token≤256K | $0.4 | $2.4 | $2.4 | 256K<Token≤1M | $1.2 | $7.2"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.5-plus-02-15",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.4,
+    "output": 2.4,
+    "cache-read": null
+   },
+   "from": "2026-03-01",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 0.5,
+      "output": 3.0
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Snapshot id qwen3.5-plus-2026-02-15.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260301130655/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-03-01T13:06:55Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260301130655.txt",
+     "sha256": "5db8cb1b46fd9c63dd5752674512d57ac633c84f7cf25b171afcef1a04cfcb3c",
+     "where": "International price table, row qwen3.5-plus-2026-02-15 (capture 2026-03-01)",
+     "quote": "qwen3.5-plus-2026-02-15 | 0<Token≤256K | $0.4 | $2.4 | $2.4 | 256K<Token≤1M | $0.5 | $3"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.5-plus-2026-02-15 (capture 2026-10-23)",
+     "quote": "qwen3.5-plus-2026-02-15 International 0<Token≤256K $0.4 $2.4 $2.4 1 million tokens 256K<Token≤1M $0.5 $3"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.6-27b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.6,
+    "output": 3.6,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.6-27b (capture 2026-07-11)",
+     "quote": "qwen3.6-27b | International | 0<Token≤256K | $0.6 | $3.6"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.6-27b (capture 2026-10-23)",
+     "quote": "qwen3.6-27b International 0<Token≤256K $0.6 $3.6"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.6-35b-a3b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.375,
+    "output": 2.25,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.6-35b-a3b (capture 2026-07-11)",
+     "quote": "qwen3.6-35b-a3b | International | 0<Token≤256K | $0.375 | $2.25"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.6-35b-a3b (capture 2026-10-23)",
+     "quote": "qwen3.6-35b-a3b International 0<Token≤256K $0.375 $2.25"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.6-flash",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.25,
+    "output": 1.5,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 1.0,
+      "output": 4.0
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.6-flash (capture 2026-07-11)",
+     "quote": "qwen3.6-flash Currently equivalent to qwen3.6-flash-2026-04-16 50% batch inference discount context caching discount | International | 0<Token≤256K | $0.25 | $1.5 | 1 million tokens | 256K<Token≤1M | $1 | $4"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.6-flash (capture 2026-10-23)",
+     "quote": "qwen3.6-flash Currently equivalent to qwen3.6-flash-2026-04-16 50% batch inference discount context caching discount International 0<Token≤256K $0.25 $1.5 1 million tokens 256K<Token≤1M $1 $4"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.6-plus",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.5,
+    "output": 3.0,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 2.0,
+      "output": 6.0
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.6-plus (capture 2026-07-11)",
+     "quote": "qwen3.6-plus Currently equivalent to qwen3.6-plus-2026-04-02 | International | 0<Token≤256K | $0.5 | $3 | $3 | 1 million tokens | 256K<Token≤1M | $2 | $6"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.6-plus (capture 2026-10-23)",
+     "quote": "qwen3.6-plus Currently equivalent to qwen3.6-plus-2026-04-02 International 0<Token≤256K $0.5 $3 $3 1 million tokens 256K<Token≤1M $2 $6"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.7-flash",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.03,
+    "output": 0.13,
+    "cache-read": null
+   },
+   "from": "2026-08-31",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 32000,
+     "classes": {
+      "input": 0.1,
+      "output": 0.4
+     }
+    },
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 0.2,
+      "output": 0.8
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260831001007/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-08-31T00:10:07Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260831001007.txt",
+     "sha256": "f439027c965cd59c2a7ac865295e1025230c82225e163f317bbed384a9fd03c3",
+     "where": "International price table, row qwen3.7-flash (capture 2026-08-31)",
+     "quote": "qwen3.7-flash Currently equivalent to qwen3.7-flash-2026-07-15 50% batch inference discount context caching discount | International | 0<Token≤32K | $0.030 | $0.130 | 1 million tokens | 32K<Token≤256K | $0.100 | $0.400 | 256K<Token≤1M | $0.200 | $0.800"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.7-flash (capture 2026-10-23)",
+     "quote": "qwen3.7-flash Currently equivalent to qwen3.7-flash-2026-07-15 50% batch inference discount context caching discount International 0<Token≤32K $0.030 $0.130 1 million tokens 32K<Token≤256K $0.100 $0.400 256K<Token≤1M $0.200 $0.800"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.7-max",
+   "route": "alibaba-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "from": "2026-07-18",
+   "to": "2026-09-01",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "factor": 0.5,
+   "note": "Promotion (label 'Limited-time 50% off'), factor 0.5 on the list price; the amount is not printed on the page. International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260718154131/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-18T15:41:31Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260718154131.txt",
+     "sha256": "63a4c89c0cc8530164324969d9ebac62b88db582113c866e1acb88560ffa0fef",
+     "where": "International price table, row qwen3.7-max (capture 2026-07-18)",
+     "quote": "qwen3.7-max Currently equivalent to qwen3.7-max-2026-05-20 context caching discount | International | Non-Thinking and Thinking modes | 0<Token≤1M | List price $2.5 Limited-time 50% off | List price $7.5"
+    },
+    {
+     "url": "https://web.archive.org/web/20260901064027/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-09-01T06:40:27Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260901064027.txt",
+     "sha256": "f90099907f4528b004989ffdbd23942a8483e010d8e9b359b1321ec799b741dd",
+     "where": "International price table, row qwen3.7-max (capture 2026-09-01)",
+     "quote": "qwen3.7-max Currently equivalent to qwen3.7-max-2026-05-20 context caching discount | International | Non-Thinking and Thinking modes | 0<Token≤1M | List price $2.5 (Limited-time 50% off) | List price $7.5"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.7-max",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.5,
+    "output": 7.5,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.7-max (capture 2026-07-11)",
+     "quote": "qwen3.7-max Currently equivalent to qwen3.7-max-2026-05-20 context caching discount | International | Non-Thinking and Thinking modes | 0<Token≤1M | $2.5 | $7.5"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.7-max (capture 2026-10-23)",
+     "quote": "qwen3.7-max Currently equivalent to qwen3.7-max-2026-05-20 context caching discount International Non-Thinking and Thinking modes 0<Token≤1M $2.5 $7.5"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.7-max-preview",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.5,
+    "output": 7.5,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Thinking mode only.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.7-max-preview (capture 2026-07-11)",
+     "quote": "qwen3.7-max-preview Currently equivalent to qwen3.7-max-2026-05-17 | International | Thinking mode only | 0<Token≤1M | $2.5 | $7.5"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.7-max-preview (capture 2026-10-23)",
+     "quote": "qwen3.7-max-preview Currently equivalent to qwen3.7-max-2026-05-17 International Thinking mode only 0<Token≤1M $2.5 $7.5"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.7-plus",
+   "route": "alibaba-api",
+   "kind": "promotion",
+   "currency": "USD",
+   "per": "MTok",
+   "from": "2026-07-18",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "factor": 0.8,
+   "note": "Promotion (label 'Limited-time 20% off'), factor 0.8 on the list price; the amount is not printed on the page. International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260718154131/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-18T15:41:31Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260718154131.txt",
+     "sha256": "63a4c89c0cc8530164324969d9ebac62b88db582113c866e1acb88560ffa0fef",
+     "where": "International price table, row qwen3.7-plus (capture 2026-07-18)",
+     "quote": "qwen3.7-plus Currently equivalent to qwen3.7-plus-2026-05-26 context caching discount | International | 0<Token≤256K | List price $0.4 Limited-time 20% off | List price $1.6 Limited-time 20% off | List price $1.6 Limited-time 20% off | 1 million tokens | 256K<Token≤1M | List price $1.2 Limited-time 20% off | List price $4.8"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.7-plus (capture 2026-10-23)",
+     "quote": "qwen3.7-plus Currently equivalent to qwen3.7-plus-2026-05-26 context caching discount International 0<Token≤256K List price $0.4 (Limited-time 20% off) List price $1.6 (Limited-time 20% off) List price $1.6 (Limited-time 20% off) 1 million tokens 256K<Token≤1M List price $1.2 (Limited-time 20% off) List price $4.8"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.7-plus",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.4,
+    "output": 1.6,
+    "cache-read": null
+   },
+   "from": "2026-07-11",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "long_context": [
+    {
+     "threshold_input_tokens": 256000,
+     "classes": {
+      "input": 1.2,
+      "output": 4.8
+     }
+    }
+   ],
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. The page shows 'Limited-time 20% off' from 18 Jul 2026 on the list price; recorded as a separate promotion entry.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260711091745/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-07-11T09:17:45Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260711091745.txt",
+     "sha256": "d15723d7dd54b7f7a5bb95d96a47578f929f4361f59bac9de6f5ee762f647697",
+     "where": "International price table, row qwen3.7-plus (capture 2026-07-11)",
+     "quote": "qwen3.7-plus Currently equivalent to qwen3.7-plus-2026-05-26 context caching discount | International | 0<Token≤256K | $0.4 | $1.6 | $1.6 | 1 million tokens | 256K<Token≤1M | $1.2 | $4.8"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.7-plus (capture 2026-10-23)",
+     "quote": "qwen3.7-plus Currently equivalent to qwen3.7-plus-2026-05-26 context caching discount International 0<Token≤256K List price $0.4 (Limited-time 20% off) List price $1.6 (Limited-time 20% off) List price $1.6 (Limited-time 20% off) 1 million tokens 256K<Token≤1M List price $1.2 (Limited-time 20% off) List price $4.8"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.8-2.4t-a95b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": null
+   },
+   "from": "2026-08-31",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260831001007/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-08-31T00:10:07Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260831001007.txt",
+     "sha256": "f439027c965cd59c2a7ac865295e1025230c82225e163f317bbed384a9fd03c3",
+     "where": "International price table, row qwen3.8-2.4t-a95b (capture 2026-08-31)",
+     "quote": "qwen3.8-2.4t-a95b context caching discount | International | Non-Thinking and Thinking modes | 0<Token≤1M | $2 | $6"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.8-2.4t-a95b (capture 2026-10-23)",
+     "quote": "qwen3.8-2.4t-a95b context caching discount International Non-Thinking and Thinking modes 0<Token≤1M $2 $6"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.8-27b",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.5,
+    "output": 3.0,
+    "cache-read": null
+   },
+   "from": "2026-08-31",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260831001007/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-08-31T00:10:07Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260831001007.txt",
+     "sha256": "f439027c965cd59c2a7ac865295e1025230c82225e163f317bbed384a9fd03c3",
+     "where": "International price table, row qwen3.8-27b (capture 2026-08-31)",
+     "quote": "qwen3.8-27b context caching discount | International | Non-Thinking and Thinking modes | 0<Token≤1M | $0.5 | $3"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.8-27b (capture 2026-10-23)",
+     "quote": "qwen3.8-27b context caching discount International Non-Thinking and Thinking modes 0<Token≤1M $0.5 $3"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.8-flash",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.15,
+    "output": 0.47,
+    "cache-read": null
+   },
+   "from": "2026-08-31",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260831001007/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-08-31T00:10:07Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260831001007.txt",
+     "sha256": "f439027c965cd59c2a7ac865295e1025230c82225e163f317bbed384a9fd03c3",
+     "where": "International price table, row qwen3.8-flash (capture 2026-08-31)",
+     "quote": "qwen3.8-flash context caching discount | International | 0<Token≤1M | $0.15 | $0.47"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.8-flash (capture 2026-10-23)",
+     "quote": "qwen3.8-flash context caching discount International 0<Token≤1M $0.15 $0.47"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.8-max",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": null
+   },
+   "from": "2026-08-31",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260831001007/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-08-31T00:10:07Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260831001007.txt",
+     "sha256": "f439027c965cd59c2a7ac865295e1025230c82225e163f317bbed384a9fd03c3",
+     "where": "International price table, row qwen3.8-max (capture 2026-08-31)",
+     "quote": "qwen3.8-max context caching discount | International | Non-Thinking and Thinking modes | 0<Token≤1M | $2 | $6"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.8-max (capture 2026-10-23)",
+     "quote": "qwen3.8-max context caching discount International Non-Thinking and Thinking modes 0<Token≤1M $2 $6"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.8-max-0902",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 6.0,
+    "cache-read": null
+   },
+   "from": "2026-09-09",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded.",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260909192820/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-09-09T19:28:20Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260909192820.txt",
+     "sha256": "79868bfc6483bce6c2537038740d2dada8d31243b475c0cd4d1067988f33aae8",
+     "where": "International price table, row qwen3.8-max-0902 (capture 2026-09-09)",
+     "quote": "qwen3.8-max-0902 context caching discount | International | Non-Thinking and Thinking modes | 0<Token≤1M | $2 | $6"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.8-max-0902 (capture 2026-10-23)",
+     "quote": "qwen3.8-max-0902 context caching discount International Non-Thinking and Thinking modes 0<Token≤1M $2 $6"
+    }
+   ]
+  },
+  {
+   "model": "qwen3.8-omni-flash",
+   "route": "alibaba-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.15,
+    "output": 0.47,
+    "cache-read": 0.016
+   },
+   "from": "2026-09-24",
+   "to": "2026-10-23",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "note": "International (Singapore) list, USD per MTok. Batch and context-cache discounts not recorded. Cache-hit input price printed (0.016).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20260924103509/https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-09-24T10:35:09Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-20260924103509.txt",
+     "sha256": "761a139d83a23f3855aee2d50ef4e8acb9c90444d296b5a6ccd002dbb55d3eea",
+     "where": "International price table, row qwen3.8-omni-flash (capture 2026-09-24)",
+     "quote": "qwen3.8-omni-flash | International | USD 0.15 | USD 0.016 | USD 0.47"
+    },
+    {
+     "url": "https://www.alibabacloud.com/help/en/model-studio/model-pricing",
+     "captured": "2026-10-23T06:48:00Z",
+     "file": "/work/.salvo14/mig/prices-b/evidence/alibaba/qw-live.txt",
+     "sha256": "b8c59278e089e075dfbc1483cf27cb6440c8b84f6d5d8079e7a49754f99fbd9a",
+     "where": "International price table, row qwen3.8-omni-flash (capture 2026-10-23)",
+     "quote": "qwen3.8-omni-flash International USD 0.15 USD 0.016 USD 0.47"
+    }
+   ]
+  }
+ ]
+}
