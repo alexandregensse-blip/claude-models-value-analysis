@@ -1,0 +1,100 @@
+{
+ "id": "src-arxiv-2611.01765-2026-11-01",
+ "publisher": "arxiv-2611.01765",
+ "urls": [
+  "https://arxiv.org/abs/2611.01765"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2611.01765",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html",
+   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file | second capture of an arXiv paper already in the repository (src-arxiv-2611.01765-finishstrong-2026-11-01, capture of 4 Nov 2026 of arXiv v1): every Table 1 row of the research file (Gemini-3.1-Pro and Gemini-3.8-Flash, 12 columns each, plus the ALL IoU) is already held there (also Gemini-2.5-Flash and Gemini-2.5-Pro); this capture adds only the lines absent there: the endpoint diagnosis of Gemini-3.8-Flash (Appendix F)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html": "2de07876ac124c59be5c212ccdb341c69d245285f556fc8b0a58739242ea4d78"
+ },
+ "harvested_at": "2026-11-09T12:00:00Z",
+ "published": {
+  "value": "2026-11-01",
+  "where": "arXiv stamp on the saved copy",
+  "quote": "arXiv:2611.01765v1 [cs.CV] 01 Nov 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-3",
+ "agent": "convertisseur k-google-3 (Sonnet 5.5), lecture ligne par ligne",
+ "snapshot_of": "src-arxiv-2611.01765-finishstrong-2026-11-01",
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "Gemini-3.8-Flash",
+   "value": "Gemini-3.8-Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html",
+   "where": "Appendix F (Pervasive endpoint asymmetry)",
+   "quote": "Specifically, Qwen3.8-Max yields a start/end MAE of 4.42/7.28 seconds, Gemini-3.8-Flash reports 5.32/7.39 seconds, and Qwen3.5-9B shows a similar trend."
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "All models operate under greedy decoding with a visual sampling rate of 2 FPS, processing up to 448 frames (a maximum visual budget of 14,336 tokens).",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html",
+   "where": "5.1 Experimental setup",
+   "quote": "All models operate under greedy decoding with a visual sampling rate of 2 FPS, processing up to 448 frames (a maximum visual budget of 14,336 tokens).",
+   "note": "Table 1 states that baseline results are compiled from the models' technical reports; the Appendix F analysis says \"we analyzed the raw boundary predictions of several representative state-of-the-art models\": the provenance of the Gemini-3.8-Flash predictions is not named (own run or compiled): doubt"
+  },
+  {
+   "id": "F3",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "5.32",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html",
+   "where": "Appendix F (Pervasive endpoint asymmetry), Gemini-3.8-Flash start MAE",
+   "quote": "Specifically, Qwen3.8-Max yields a start/end MAE of 4.42/7.28 seconds, Gemini-3.8-Flash reports 5.32/7.39 seconds, and Qwen3.5-9B shows a similar trend.",
+   "term": "mae-start-s",
+   "scale": "raw",
+   "note": "printed \"5.32/7.39 seconds\" (start/end)"
+  },
+  {
+   "id": "F4",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "7.39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html",
+   "where": "Appendix F, Gemini-3.8-Flash end MAE",
+   "quote": "Specifically, Qwen3.8-Max yields a start/end MAE of 4.42/7.28 seconds, Gemini-3.8-Flash reports 5.32/7.39 seconds, and Qwen3.5-9B shows a similar trend.",
+   "term": "mae-end-s",
+   "scale": "raw",
+   "note": "printed \"5.32/7.39 seconds\" (start/end)"
+  },
+  {
+   "id": "F5",
+   "says": "score",
+   "about": "Gemini-3.8-Flash",
+   "value": "38.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2611.01765.html",
+   "where": "Appendix F, Gemini-3.8-Flash end-error inflation rate (second of the three rates 64.8%, 38.7%, 58.4% for Qwen3.8-Max, Gemini-3.8-Flash, Qwen3.5-9B)",
+   "quote": "Using the macro-level relative increase formulation 100 × ( MAE e − MAE s ) / MAE s 100\\times(\\mathrm{MAE}_{e}-\\mathrm{MAE}_{s})/\\mathrm{MAE}_{s} , these corresponding end-error inflation rates are 64.8%, 38.7%, and 58.4%, respectively.",
+   "written": "38.7%",
+   "term": "end-inflation%",
+   "scale": "percent",
+   "note": "the three rates are listed \"respectively\" for Qwen3.8-Max, Gemini-3.8-Flash, Qwen3.5-9B; the order follows the previous sentence"
+  }
+ ]
+}
