@@ -1,0 +1,260 @@
+{
+ "id": "src-arxiv-2611.06184-2026-11-04",
+ "publisher": "arxiv-2611.06184",
+ "urls": [
+  "https://arxiv.org/abs/2611.06184"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html": "1859d07e345efd0fac982abcedd57187279037e508229826d038f91f82cfc146"
+ },
+ "harvested_at": "2026-11-09T07:38:49Z",
+ "published": {
+  "value": "2026-11-04",
+  "where": "arXiv stamp of the saved HTML (v1)",
+  "quote": "arXiv:2611.06184v1 [cs.RO] 04 Nov 2026",
+  "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-1 (b-openai + c-openai). Can Astra Solve RoboMME without Breaking the Bank? Table 1 row 'Three-tier Astra (ours)': a SYSTEM (GPT-6 Astra planner + pi0.5 VLA + fine-tuned Qwen3-VL-4B monitor), not the model alone. The four suite columns were added from the same row (the research line held the Overall only). No money cost: the paper says it measured no token usage or monetary cost; Astra calls per episode is kept as usage. Appendix C (16 per-task rates of the same system) not converted.",
+ "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2611.06184",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "Three-tier Astra (ours)",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "section 1 (introduction)",
+   "quote": "so we use GPT-6 Astra [ 6 ] as the planner"
+  },
+  {
+   "id": "F2",
+   "says": "effort-label",
+   "about": "GPT-6 Astra",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Appendix B.4 Deployment",
+   "quote": "Astra runs with medium reasoning effort through Codex CLI.",
+   "written": "medium"
+  },
+  {
+   "id": "F3",
+   "says": "effort-label",
+   "about": "GPT-6 Astra",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "section 3 Experiments (setup)",
+   "quote": "Astra uses medium reasoning effort; the VLA, monitor, and simulator share one NVIDIA L40S GPU.",
+   "written": "medium"
+  },
+  {
+   "id": "F4",
+   "says": "harness",
+   "about": "GPT-6 Astra",
+   "value": "Codex CLI",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Appendix B.4 Deployment",
+   "quote": "Astra runs with medium reasoning effort through Codex CLI.",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": "Three-tier Astra (ours)",
+   "value": "GPT-6 Astra (System 2) selects a grounded subtask from stored visual history",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "abstract",
+   "quote": "GPT-6 Astra (System 2) selects a grounded subtask from stored visual history",
+   "note": "the system: a GPT-6 Astra planner + a pi0.5 VLA policy + a fine-tuned Qwen3-VL-4B monitor: the score is the system's, not the model's alone"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "We evaluate on the official RoboMME test set (50 episodes per task) with a 1,300-step budget per episode and report simulator task success.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "section 3 Experiments (setup)",
+   "quote": "We evaluate on the official RoboMME test set (50 episodes per task) with a 1,300-step budget per episode and report simulator task success.",
+   "note": "protocol: 16 tasks x 50 episodes = 800 test episodes; 1,300-step budget"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "In the first run, a bug in our planner–simulator bridge interrupted six of the 800 test episodes. We fixed the bug and reran only those six; the other 794 results are from the first run.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Appendix B.4 Deployment",
+   "quote": "In the first run, a bug in our planner–simulator bridge interrupted six of the 800 test episodes. We fixed the bug and reran only those six; the other 794 results are from the first run.",
+   "note": "six of the 800 episodes were rerun after a bridge bug (794 from the first run)"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "We did not run an always-replan controller or measure token usage and monetary cost.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "section 5 Limitations",
+   "quote": "We did not run an always-replan controller or measure token usage and monetary cost.",
+   "note": "no monetary cost nor token usage measured by the paper"
+  },
+  {
+   "id": "F9",
+   "says": "requests",
+   "about": "Three-tier Astra (ours)",
+   "value": "3.63",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "abstract",
+   "quote": "the system succeeds in 79.13% of episodes with an average of 3.63 Astra calls and 80.84 seconds per episode"
+  },
+  {
+   "id": "F10",
+   "says": "unit",
+   "about": "Three-tier Astra (ours)",
+   "value": "per episode",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "abstract",
+   "quote": "the system succeeds in 79.13% of episodes with an average of 3.63 Astra calls and 80.84 seconds per episode",
+   "term": "per-episode"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": "Three-tier Astra (ours)",
+   "value": "80.84 seconds per episode",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "abstract",
+   "quote": "the system succeeds in 79.13% of episodes with an average of 3.63 Astra calls and 80.84 seconds per episode",
+   "note": "wall-clock time per episode (planning time included); recorded trajectories hold 24.62 action chunks per episode on average: calling Astra before every chunk would need about 24.62 calls (the paper calls the call count a proxy for cost)"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": null,
+   "value": "Method Counting Permanence Reference Imitation Overall",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Table 1 header",
+   "quote": "Method Counting Permanence Reference Imitation Overall",
+   "note": "column order of Table 1: Counting, Permanence, Reference, Imitation, Overall"
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Three-tier Astra (ours)",
+   "value": "69.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Table 1, row Three-tier Astra (ours), column Counting",
+   "quote": "Three-tier Astra (ours) 69.50 94.00 92.00 61.00 79.13",
+   "term": "RoboMME success rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Three-tier Astra (ours)",
+   "value": "94.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Table 1, row Three-tier Astra (ours), column Permanence",
+   "quote": "Three-tier Astra (ours) 69.50 94.00 92.00 61.00 79.13",
+   "term": "RoboMME success rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "Three-tier Astra (ours)",
+   "value": "92.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Table 1, row Three-tier Astra (ours), column Reference",
+   "quote": "Three-tier Astra (ours) 69.50 94.00 92.00 61.00 79.13",
+   "term": "RoboMME success rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Three-tier Astra (ours)",
+   "value": "61.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Table 1, row Three-tier Astra (ours), column Imitation",
+   "quote": "Three-tier Astra (ours) 69.50 94.00 92.00 61.00 79.13",
+   "term": "RoboMME success rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "Three-tier Astra (ours)",
+   "value": "79.13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-openai/2611.06184.html",
+   "where": "Table 1, row Three-tier Astra (ours), column Overall",
+   "quote": "Three-tier Astra (ours) 69.50 94.00 92.00 61.00 79.13",
+   "term": "RoboMME success rate (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ]
+}

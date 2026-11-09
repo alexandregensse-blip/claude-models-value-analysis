@@ -28,7 +28,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-anthropic",
- "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-google-1: convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-google-1: convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-1: convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -3567,6 +3567,981 @@
    "quote": "Planner tokens, no Compressor 11.06M 6.20M 11.18M Planner tokens, Compressor 4.36M 2.44M 4.80M",
    "written": "4.36M",
    "note": "millions of planner tokens with the Compressor (Precise Localization column)"
+  },
+  {
+   "id": "F284",
+   "says": "note",
+   "about": null,
+   "value": "Table 1: Results on GeoGuesser Bench. For the Competition and Synthetic splits of Precise Localization (Section 5.1 ), cells show the mean GeoGuessr score over all entries, with invalid responses scored 0, and the score-equivalent distance in km (Eq. 1 ).",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "caption of Table 1",
+   "quote": "Table 1: Results on GeoGuesser Bench. For the Competition and Synthetic splits of Precise Localization (Section 5.1 ), cells show the mean GeoGuessr score over all entries, with invalid responses scored 0, and the score-equivalent distance in km (Eq. 1 ).",
+   "note": "the +- after a score is not defined in the caption (probably a standard error: not stated); n = 42 Competition and 80 Synthetic entries; every agent has at most 40 tool-calling steps and a final turn"
+  },
+  {
+   "id": "F285",
+   "says": "model-name",
+   "about": "GPT-5.5",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5",
+   "quote": "GPT-5.5 3815.1 ± \\pm 182 | | 403.5 3467.8 ± \\pm 161 | | 545.8 62.50 ± \\pm 3.5 32.50 ± \\pm 3.4"
+  },
+  {
+   "id": "F286",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "3815.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5, column Competition score",
+   "quote": "GPT-5.5 3815.1 ± \\pm 182 | | 403.5 3467.8 ± \\pm 161 | | 545.8 62.50 ± \\pm 3.5 32.50 ± \\pm 3.4",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F287",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "403.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5, column Competition distance (km)",
+   "quote": "GPT-5.5 3815.1 ± \\pm 182 | | 403.5 3467.8 ± \\pm 161 | | 545.8 62.50 ± \\pm 3.5 32.50 ± \\pm 3.4",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F288",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "3467.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5, column Synthetic score",
+   "quote": "GPT-5.5 3815.1 ± \\pm 182 | | 403.5 3467.8 ± \\pm 161 | | 545.8 62.50 ± \\pm 3.5 32.50 ± \\pm 3.4",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F289",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "545.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5, column Synthetic distance (km)",
+   "quote": "GPT-5.5 3815.1 ± \\pm 182 | | 403.5 3467.8 ± \\pm 161 | | 545.8 62.50 ± \\pm 3.5 32.50 ± \\pm 3.4",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F290",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "62.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5, column Place Naming (%)",
+   "quote": "GPT-5.5 3815.1 ± \\pm 182 | | 403.5 3467.8 ± \\pm 161 | | 545.8 62.50 ± \\pm 3.5 32.50 ± \\pm 3.4",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F291",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "32.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5, column Navigation Challenge (%)",
+   "quote": "GPT-5.5 3815.1 ± \\pm 182 | | 403.5 3467.8 ± \\pm 161 | | 545.8 62.50 ± \\pm 3.5 32.50 ± \\pm 3.4",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F292",
+   "says": "model-name",
+   "about": "GPT-5.4 Pro",
+   "value": "GPT-5.4 Pro",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4 Pro",
+   "quote": "GPT-5.4 Pro 2503.8 ± \\pm 244 | | 1031.7 2667.4 ± \\pm 176 | | 937.3 60.00 ± \\pm 3.6 35.00 ± \\pm 3.5"
+  },
+  {
+   "id": "F293",
+   "says": "score",
+   "about": "GPT-5.4 Pro",
+   "value": "2503.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4 Pro, column Competition score",
+   "quote": "GPT-5.4 Pro 2503.8 ± \\pm 244 | | 1031.7 2667.4 ± \\pm 176 | | 937.3 60.00 ± \\pm 3.6 35.00 ± \\pm 3.5",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F294",
+   "says": "score",
+   "about": "GPT-5.4 Pro",
+   "value": "1031.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4 Pro, column Competition distance (km)",
+   "quote": "GPT-5.4 Pro 2503.8 ± \\pm 244 | | 1031.7 2667.4 ± \\pm 176 | | 937.3 60.00 ± \\pm 3.6 35.00 ± \\pm 3.5",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F295",
+   "says": "score",
+   "about": "GPT-5.4 Pro",
+   "value": "2667.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4 Pro, column Synthetic score",
+   "quote": "GPT-5.4 Pro 2503.8 ± \\pm 244 | | 1031.7 2667.4 ± \\pm 176 | | 937.3 60.00 ± \\pm 3.6 35.00 ± \\pm 3.5",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F296",
+   "says": "score",
+   "about": "GPT-5.4 Pro",
+   "value": "937.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4 Pro, column Synthetic distance (km)",
+   "quote": "GPT-5.4 Pro 2503.8 ± \\pm 244 | | 1031.7 2667.4 ± \\pm 176 | | 937.3 60.00 ± \\pm 3.6 35.00 ± \\pm 3.5",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F297",
+   "says": "score",
+   "about": "GPT-5.4 Pro",
+   "value": "60.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4 Pro, column Place Naming (%)",
+   "quote": "GPT-5.4 Pro 2503.8 ± \\pm 244 | | 1031.7 2667.4 ± \\pm 176 | | 937.3 60.00 ± \\pm 3.6 35.00 ± \\pm 3.5",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F298",
+   "says": "score",
+   "about": "GPT-5.4 Pro",
+   "value": "35.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4 Pro, column Navigation Challenge (%)",
+   "quote": "GPT-5.4 Pro 2503.8 ± \\pm 244 | | 1031.7 2667.4 ± \\pm 176 | | 937.3 60.00 ± \\pm 3.6 35.00 ± \\pm 3.5",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F299",
+   "says": "model-name",
+   "about": "GPT-5.4",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4",
+   "quote": "GPT-5.4 3923.1 ± \\pm 122 | | 361.8 4221.1 ± \\pm 85 | | 252.6 50.00 ± \\pm 3.6 12.50 ± \\pm 2.4"
+  },
+  {
+   "id": "F300",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "3923.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4, column Competition score",
+   "quote": "GPT-5.4 3923.1 ± \\pm 122 | | 361.8 4221.1 ± \\pm 85 | | 252.6 50.00 ± \\pm 3.6 12.50 ± \\pm 2.4",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F301",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "361.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4, column Competition distance (km)",
+   "quote": "GPT-5.4 3923.1 ± \\pm 122 | | 361.8 4221.1 ± \\pm 85 | | 252.6 50.00 ± \\pm 3.6 12.50 ± \\pm 2.4",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F302",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "4221.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4, column Synthetic score",
+   "quote": "GPT-5.4 3923.1 ± \\pm 122 | | 361.8 4221.1 ± \\pm 85 | | 252.6 50.00 ± \\pm 3.6 12.50 ± \\pm 2.4",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F303",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "252.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4, column Synthetic distance (km)",
+   "quote": "GPT-5.4 3923.1 ± \\pm 122 | | 361.8 4221.1 ± \\pm 85 | | 252.6 50.00 ± \\pm 3.6 12.50 ± \\pm 2.4",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F304",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "50.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4, column Place Naming (%)",
+   "quote": "GPT-5.4 3923.1 ± \\pm 122 | | 361.8 4221.1 ± \\pm 85 | | 252.6 50.00 ± \\pm 3.6 12.50 ± \\pm 2.4",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F305",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "12.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.4, column Navigation Challenge (%)",
+   "quote": "GPT-5.4 3923.1 ± \\pm 122 | | 361.8 4221.1 ± \\pm 85 | | 252.6 50.00 ± \\pm 3.6 12.50 ± \\pm 2.4",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F306",
+   "says": "model-name",
+   "about": "GPT-5.5 Pro",
+   "value": "GPT-5.5 Pro",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5 Pro",
+   "quote": "GPT-5.5 Pro 1163.4 ± \\pm 211 | | 2175.0 1556.1 ± \\pm 168 | | 1741.2 47.50 ± \\pm 3.6 31.25 ± \\pm 3.4"
+  },
+  {
+   "id": "F307",
+   "says": "score",
+   "about": "GPT-5.5 Pro",
+   "value": "1163.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5 Pro, column Competition score",
+   "quote": "GPT-5.5 Pro 1163.4 ± \\pm 211 | | 2175.0 1556.1 ± \\pm 168 | | 1741.2 47.50 ± \\pm 3.6 31.25 ± \\pm 3.4",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F308",
+   "says": "score",
+   "about": "GPT-5.5 Pro",
+   "value": "2175.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5 Pro, column Competition distance (km)",
+   "quote": "GPT-5.5 Pro 1163.4 ± \\pm 211 | | 2175.0 1556.1 ± \\pm 168 | | 1741.2 47.50 ± \\pm 3.6 31.25 ± \\pm 3.4",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F309",
+   "says": "score",
+   "about": "GPT-5.5 Pro",
+   "value": "1556.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5 Pro, column Synthetic score",
+   "quote": "GPT-5.5 Pro 1163.4 ± \\pm 211 | | 2175.0 1556.1 ± \\pm 168 | | 1741.2 47.50 ± \\pm 3.6 31.25 ± \\pm 3.4",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F310",
+   "says": "score",
+   "about": "GPT-5.5 Pro",
+   "value": "1741.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5 Pro, column Synthetic distance (km)",
+   "quote": "GPT-5.5 Pro 1163.4 ± \\pm 211 | | 2175.0 1556.1 ± \\pm 168 | | 1741.2 47.50 ± \\pm 3.6 31.25 ± \\pm 3.4",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F311",
+   "says": "score",
+   "about": "GPT-5.5 Pro",
+   "value": "47.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5 Pro, column Place Naming (%)",
+   "quote": "GPT-5.5 Pro 1163.4 ± \\pm 211 | | 2175.0 1556.1 ± \\pm 168 | | 1741.2 47.50 ± \\pm 3.6 31.25 ± \\pm 3.4",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F312",
+   "says": "score",
+   "about": "GPT-5.5 Pro",
+   "value": "31.25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.5 Pro, column Navigation Challenge (%)",
+   "quote": "GPT-5.5 Pro 1163.4 ± \\pm 211 | | 2175.0 1556.1 ± \\pm 168 | | 1741.2 47.50 ± \\pm 3.6 31.25 ± \\pm 3.4",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F313",
+   "says": "model-name",
+   "about": "GPT-5.2",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.2",
+   "quote": "GPT-5.2 523.9 ± \\pm 146 | | 3365.1 1243.2 ± \\pm 151 | | 2076.1 33.75 ± \\pm 3.4 17.50 ± \\pm 2.8"
+  },
+  {
+   "id": "F314",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "523.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.2, column Competition score",
+   "quote": "GPT-5.2 523.9 ± \\pm 146 | | 3365.1 1243.2 ± \\pm 151 | | 2076.1 33.75 ± \\pm 3.4 17.50 ± \\pm 2.8",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F315",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "3365.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.2, column Competition distance (km)",
+   "quote": "GPT-5.2 523.9 ± \\pm 146 | | 3365.1 1243.2 ± \\pm 151 | | 2076.1 33.75 ± \\pm 3.4 17.50 ± \\pm 2.8",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F316",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "1243.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.2, column Synthetic score",
+   "quote": "GPT-5.2 523.9 ± \\pm 146 | | 3365.1 1243.2 ± \\pm 151 | | 2076.1 33.75 ± \\pm 3.4 17.50 ± \\pm 2.8",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F317",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "2076.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.2, column Synthetic distance (km)",
+   "quote": "GPT-5.2 523.9 ± \\pm 146 | | 3365.1 1243.2 ± \\pm 151 | | 2076.1 33.75 ± \\pm 3.4 17.50 ± \\pm 2.8",
+   "term": "score-equivalent distance (km)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F318",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "33.75",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.2, column Place Naming (%)",
+   "quote": "GPT-5.2 523.9 ± \\pm 146 | | 3365.1 1243.2 ± \\pm 151 | | 2076.1 33.75 ± \\pm 3.4 17.50 ± \\pm 2.8",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F319",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "17.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 1, row GPT-5.2, column Navigation Challenge (%)",
+   "quote": "GPT-5.2 523.9 ± \\pm 146 | | 3365.1 1243.2 ± \\pm 151 | | 2076.1 33.75 ± \\pm 3.4 17.50 ± \\pm 2.8",
+   "term": "score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F320",
+   "says": "note",
+   "about": null,
+   "value": "Table 3: Ablation results across all conditions. Mean GeoGuessr score (0–5000) per model on the two Precise Localization splits, Competition (C, n = 42 n=42 ) and Synthetic (S, n = 80 n=80 ), with invalid responses assigned zero.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "caption of Table 3",
+   "quote": "Table 3: Ablation results across all conditions. Mean GeoGuessr score (0–5000) per model on the two Precise Localization splits, Competition (C, n = 42 n=42 ) and Synthetic (S, n = 80 n=80 ), with invalid responses assigned zero.",
+   "note": "ablation conditions: 80 Steps (limit raised from 40 to 80, navigation enabled), No Movement (move_* tools removed, 40 steps), Top / Bottom Half (only the named half of each capture, 40 steps), Web Search (search tools added, full images, 40 steps)"
+  },
+  {
+   "id": "F321",
+   "says": "note",
+   "about": "GPT-5.5",
+   "value": "GPT-5.5’s Web Search cell on Synthetic averages 79 entries because one question was not attempted (1809 if it is counted as zero).",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "caption of Table 3",
+   "quote": "GPT-5.5’s Web Search cell on Synthetic averages 79 entries because one question was not attempted (1809 if it is counted as zero).",
+   "note": "the GPT-5.5 Web Search Synthetic cell (1832) averages 79 entries (one question not attempted); 1809 if that question is counted as zero"
+  },
+  {
+   "id": "F322",
+   "says": "note",
+   "about": null,
+   "value": "Model 80 Steps No Movement Top Half Bottom Half Web Search C S C S C S C S C S",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3 header",
+   "quote": "Model 80 Steps No Movement Top Half Bottom Half Web Search C S C S C S C S C S",
+   "note": "column order of Table 3: for each condition (80 Steps, No Movement, Top Half, Bottom Half, Web Search) the Competition (C) then the Synthetic (S) score"
+  },
+  {
+   "id": "F323",
+   "says": "model-name",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832"
+  },
+  {
+   "id": "F324",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "4407",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column 80 Steps C",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F325",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "4391",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column 80 Steps S",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F326",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "4100",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column No Movement C",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F327",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "4178",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column No Movement S",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F328",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "2212",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column Top Half C",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F329",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "2305",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column Top Half S",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F330",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "1403",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column Bottom Half C",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F331",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "1553",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column Bottom Half S",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F332",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "2388",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column Web Search C",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F333",
+   "says": "score",
+   "about": "GPT-5.5 (Table 3)",
+   "value": "1832",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.5, column Web Search S",
+   "quote": "GPT-5.5 4407 4391 4100 4178 2212 2305 1403 1553 2388 1832",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F334",
+   "says": "model-name",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209"
+  },
+  {
+   "id": "F335",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "767",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column 80 Steps C",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F336",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "1295",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column 80 Steps S",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F337",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "572",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column No Movement C",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F338",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "1544",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column No Movement S",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F339",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "604",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column Top Half C",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F340",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "902",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column Top Half S",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F341",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "112",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column Bottom Half C",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F342",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "667",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column Bottom Half S",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F343",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "1696",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column Web Search C",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F344",
+   "says": "score",
+   "about": "GPT-5.2 (Table 3)",
+   "value": "2209",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.02698.html",
+   "where": "Table 3, row GPT-5.2, column Web Search S",
+   "quote": "GPT-5.2 767 1295 572 1544 604 902 112 667 1696 2209",
+   "term": "score",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
   }
  ]
 }

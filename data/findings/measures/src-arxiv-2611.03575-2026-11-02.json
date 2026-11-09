@@ -1,0 +1,188 @@
+{
+ "source": "src-arxiv-2611.03575-2026-11-02",
+ "measures": [
+  {
+   "id": "M4",
+   "setup": "arxiv-2611.03575-veriharm-task-accuracy",
+   "facts": {
+    "value": "F8",
+    "model": [
+     "F7"
+    ],
+    "effort": [],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [],
+    "mode": [],
+    "early_access": [],
+    "aggregation": [],
+    "setup": [],
+    "evaluated_by": [],
+    "other": [
+     "F1",
+     "F2"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "SAFETY benchmark; +- 1.7 is one standard error; held-out agent, one rollout per instance; effort and route not written"
+  },
+  {
+   "id": "M5",
+   "setup": "arxiv-2611.03575-veriharm-harmful-success",
+   "facts": {
+    "value": "F9",
+    "model": [
+     "F7"
+    ],
+    "effort": [],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [],
+    "mode": [],
+    "early_access": [],
+    "aggregation": [],
+    "setup": [],
+    "evaluated_by": [],
+    "other": [
+     "F1",
+     "F2"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "SAFETY benchmark; +- 4.1 is one standard error; held-out agent, one rollout per instance; effort and route not written"
+  },
+  {
+   "id": "M6",
+   "setup": "arxiv-2611.03575-veriharm-safe-success",
+   "facts": {
+    "value": "F10",
+    "model": [
+     "F7"
+    ],
+    "effort": [],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [],
+    "mode": [],
+    "early_access": [],
+    "aggregation": [],
+    "setup": [],
+    "evaluated_by": [],
+    "other": [
+     "F1",
+     "F2"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "SAFETY benchmark; +- 4.1 is one standard error; held-out agent, one rollout per instance; effort and route not written"
+  },
+  {
+   "id": "M7",
+   "setup": "arxiv-2611.03575-veriharm-search-success-gpt55-proposer",
+   "facts": {
+    "value": "F19",
+    "model": [
+     "F11"
+    ],
+    "effort": [],
+    "run_date": [],
+    "usage": [],
+    "spend": [
+     "F15",
+     "F16",
+     "F17"
+    ],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [],
+    "mode": [],
+    "early_access": [],
+    "aggregation": [],
+    "setup": [],
+    "evaluated_by": [],
+    "other": [
+     "F13",
+     "F14",
+     "F18",
+     "F2"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "SECURITY measure: attack-search success against the target agent GPT-5.4-Mini (proposer GPT-5.5, iteration budget 5); the cost is the target-agent rollout cost aggregated over both proposers; effort and route not written | the success rate measures the proposer (attacker) finding a harmful candidate against the target, not a capability of GPT-5.4-Mini (« success rate is the percentage of source tasks that yield a harmful-success candidate within the iteration budget ») | the cost 27.4 $ (Table 9) is « aggregated over both proposers »: it covers M7 and M8"
+  },
+  {
+   "id": "M8",
+   "setup": "arxiv-2611.03575-veriharm-search-success-opus47-proposer",
+   "facts": {
+    "value": "F20",
+    "model": [
+     "F12"
+    ],
+    "effort": [],
+    "run_date": [],
+    "usage": [],
+    "spend": [],
+    "version": null,
+    "judge": null,
+    "anomalies": [],
+    "restated_from": null,
+    "same_runs_as": null,
+    "route": [],
+    "harness": [],
+    "mode": [],
+    "early_access": [],
+    "aggregation": [],
+    "setup": [],
+    "evaluated_by": [],
+    "other": [
+     "F13",
+     "F14",
+     "F18",
+     "F2"
+    ],
+    "value_seen_in": [
+     "S1"
+    ]
+   },
+   "verified": null,
+   "note": "SECURITY measure (added from the copy): attack-search success against GPT-5.4-Mini with proposer Claude-Opus-4-7; effort and route not written | the success rate measures the proposer (attacker) finding a harmful candidate against the target, not a capability of GPT-5.4-Mini (« success rate is the percentage of source tasks that yield a harmful-success candidate within the iteration budget »)"
+  }
+ ]
+}

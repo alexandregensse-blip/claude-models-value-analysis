@@ -27,7 +27,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-1",
- "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-1: convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -2030,6 +2030,892 @@
    "term": "interaction-quality-overall%",
    "scale": "percent",
    "note": "cell as printed: 65.6 [-1pt] (-1.9)"
+  },
+  {
+   "id": "F153",
+   "says": "judge",
+   "about": null,
+   "value": "GPT-5.4 mini and Gemini 3.7 Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Appendix (judge configuration)",
+   "quote": "We use GPT-5.4 mini and Gemini 3.7 Flash as independent judges for every assistant in all three environments.",
+   "note": "the interaction-quality scores are LLM-judged; GPT-5.4 mini (OpenAI) judges every assistant including the GPT ones (same-maker judge: possible bias)"
+  },
+  {
+   "id": "F154",
+   "says": "note",
+   "about": null,
+   "value": "(1) frontier API models: GPT-6 Astra ( OpenAI, 2026a ) , GPT-6.1 Sol ( OpenAI, 2026c ) , Gemini 3.8 Flash ( Google, 2026c ) , and Gemini 4 Argon",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "section 4.1.1 Models",
+   "quote": "(1) frontier API models: GPT-6 Astra ( OpenAI, 2026a ) , GPT-6.1 Sol ( OpenAI, 2026c ) , Gemini 3.8 Flash ( Google, 2026c ) , and Gemini 4 Argon",
+   "note": "class of the assistant: frontier API model; no route, reasoning effort or thinking setting written"
+  },
+  {
+   "id": "F155",
+   "says": "note",
+   "about": null,
+   "value": "Each setting uses three independent rollouts per benchmark scenario.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "section 4.1.1",
+   "quote": "Each setting uses three independent rollouts per benchmark scenario.",
+   "note": "three independent rollouts per scenario; assistants are queried every two simulation ticks in CookSim and VHSim (fixed two-tick delay of Table 2)"
+  },
+  {
+   "id": "F156",
+   "says": "note",
+   "about": null,
+   "value": "CookSim VHSim ScreenSim In-time success Det. recall Interaction quality",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2 header",
+   "quote": "CookSim VHSim ScreenSim In-time success Det. recall Interaction quality",
+   "note": "Table 2: 24 columns = 3 environments x [In-time success, Det. recall, Interaction quality: Fac. grnd., Sit. rel., Act. guid., User intent, Guid. conc., Overall]"
+  },
+  {
+   "id": "F157",
+   "says": "model-name",
+   "about": "GPT-6.1 Sol",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol (Frontier API models)",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5"
+  },
+  {
+   "id": "F158",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "42.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim In-time success",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "in-time-success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F159",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "79.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim Det. recall",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "detection-recall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F160",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "80.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim Interaction quality: Fac. grnd.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-fac-grnd%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F161",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "92.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim Interaction quality: Sit. rel.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-sit-rel%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F162",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "78.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim Interaction quality: Act. guid.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-act-guid%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F163",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "91.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim Interaction quality: User intent",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-user-intent%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F164",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "91.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim Interaction quality: Guid. conc.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-guid-conc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F165",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "75.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column CookSim Interaction quality: Overall",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-overall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F166",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "15.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim In-time success",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "in-time-success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F167",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "60.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim Det. recall",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "detection-recall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F168",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "77.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim Interaction quality: Fac. grnd.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-fac-grnd%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F169",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "92.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim Interaction quality: Sit. rel.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-sit-rel%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F170",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "57.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim Interaction quality: Act. guid.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-act-guid%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F171",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "89.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim Interaction quality: User intent",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-user-intent%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F172",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "92.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim Interaction quality: Guid. conc.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-guid-conc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F173",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "70.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column VHSim Interaction quality: Overall",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-overall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F174",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "87.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim In-time success",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "in-time-success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F175",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim Det. recall",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "detection-recall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F176",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "89.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim Interaction quality: Fac. grnd.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-fac-grnd%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F177",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "96.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim Interaction quality: Sit. rel.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-sit-rel%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F178",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "91.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim Interaction quality: Act. guid.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-act-guid%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F179",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "93.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim Interaction quality: User intent",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-user-intent%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F180",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "97.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim Interaction quality: Guid. conc.",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-guid-conc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F181",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "86.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6.1 Sol, column ScreenSim Interaction quality: Overall",
+   "quote": "GPT-6.1 Sol 42.9 79.9 80.4 92.4 78.1 91.1 91.7 75.8 15.6 60.3 77.8 92.9 57.2 89.1 92.2 70.5 87.4 100.0 89.0 96.6 91.7 93.4 97.3 86.5",
+   "term": "interaction-quality-overall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F182",
+   "says": "model-name",
+   "about": "GPT-6 Astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra (Frontier API models)",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3"
+  },
+  {
+   "id": "F183",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "40.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim In-time success",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "in-time-success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F184",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "80.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim Det. recall",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "detection-recall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F185",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "80.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim Interaction quality: Fac. grnd.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-fac-grnd%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F186",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "92.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim Interaction quality: Sit. rel.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-sit-rel%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F187",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "78.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim Interaction quality: Act. guid.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-act-guid%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F188",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "93.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim Interaction quality: User intent",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-user-intent%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F189",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "90.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim Interaction quality: Guid. conc.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-guid-conc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F190",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "76.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column CookSim Interaction quality: Overall",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-overall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F191",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "10.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim In-time success",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "in-time-success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F192",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "62.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim Det. recall",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "detection-recall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F193",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "77.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim Interaction quality: Fac. grnd.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-fac-grnd%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F194",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "92.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim Interaction quality: Sit. rel.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-sit-rel%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F195",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "59.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim Interaction quality: Act. guid.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-act-guid%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F196",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "90.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim Interaction quality: User intent",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-user-intent%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F197",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "91.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim Interaction quality: Guid. conc.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-guid-conc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F198",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "71.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column VHSim Interaction quality: Overall",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-overall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F199",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "90.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim In-time success",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "in-time-success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F200",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim Det. recall",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "detection-recall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F201",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "89.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim Interaction quality: Fac. grnd.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-fac-grnd%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F202",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "96.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim Interaction quality: Sit. rel.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-sit-rel%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F203",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "91.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim Interaction quality: Act. guid.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-act-guid%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F204",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "91.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim Interaction quality: User intent",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-user-intent%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F205",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "96.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim Interaction quality: Guid. conc.",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-guid-conc%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F206",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "86.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-google/2611.08286.html",
+   "where": "Table 2, row GPT-6 Astra, column ScreenSim Interaction quality: Overall",
+   "quote": "GPT-6 Astra 40.2 80.4 80.5 92.9 78.9 93.6 90.5 76.0 10.7 62.1 77.7 92.8 59.5 90.7 91.4 71.1 90.4 100.0 89.0 96.8 91.0 91.5 96.5 86.3",
+   "term": "interaction-quality-overall%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
   }
  ]
 }

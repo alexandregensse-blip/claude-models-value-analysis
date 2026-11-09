@@ -28,7 +28,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-anthropic",
- "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-google-1: convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-google-1: convertisseur k-google-1 (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-1: convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -1570,6 +1570,371 @@
    "quote": "Gemini 3 Flash 54.5 0.1 43.5 0.5 1.4",
    "term": "response-share%",
    "scale": "percent"
+  },
+  {
+   "id": "F123",
+   "says": "route",
+   "about": null,
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "section 5 Evaluation Setup (Models)",
+   "quote": "We evaluate 10 frontier models accessed through the OpenRouter API",
+   "term": "openrouter",
+   "written": "OpenRouter"
+  },
+  {
+   "id": "F124",
+   "says": "note",
+   "about": null,
+   "value": "We query all 10 models with a temperature of 1.0 to ensure output diversity.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "section 5 (Generation settings)",
+   "quote": "We query all 10 models with a temperature of 1.0 to ensure output diversity.",
+   "note": "temperature 1.0 for all ten models; no reasoning effort or mode written"
+  },
+  {
+   "id": "F125",
+   "says": "judge",
+   "about": null,
+   "value": "GPT-5 mini",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "section 5 (Response judging)",
+   "quote": "We use GPT-5 mini as a judge for misalignment and reasoning",
+   "note": "an OpenAI judge for every model including the GPT rows (same maker; queried with the default temperature 1.0 as a reasoning model)"
+  },
+  {
+   "id": "F126",
+   "says": "note",
+   "about": null,
+   "value": "Each model is evaluated on all 35 scenarios, with 25 responses collected for each scenario, giving 35 × \\times 25 = 875 evaluations per model.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "section 5 (Evaluation methodology)",
+   "quote": "Each model is evaluated on all 35 scenarios, with 25 responses collected for each scenario, giving 35 × \\times 25 = 875 evaluations per model.",
+   "note": "35 scenarios x 25 responses = 875 evaluations per model; 25 responses per ablated condition"
+  },
+  {
+   "id": "F127",
+   "says": "model-name",
+   "about": "GPT-5.5",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.5",
+   "quote": "GPT-5.5 4.2 3.8 2.9 0.0"
+  },
+  {
+   "id": "F128",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "4.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.5, column Threat/Opportunity",
+   "quote": "GPT-5.5 4.2 3.8 2.9 0.0",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F129",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "3.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.5, column Threat/–",
+   "quote": "GPT-5.5 4.2 3.8 2.9 0.0",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F130",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "2.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.5, column –/Opportunity",
+   "quote": "GPT-5.5 4.2 3.8 2.9 0.0",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F131",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.5, column –/–",
+   "quote": "GPT-5.5 4.2 3.8 2.9 0.0",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F132",
+   "says": "model-name",
+   "about": "GPT-5.4",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4",
+   "quote": "GPT-5.4 12.5 2.3 8.9 0.3"
+  },
+  {
+   "id": "F133",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "12.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4, column Threat/Opportunity",
+   "quote": "GPT-5.4 12.5 2.3 8.9 0.3",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F134",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "2.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4, column Threat/–",
+   "quote": "GPT-5.4 12.5 2.3 8.9 0.3",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F135",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "8.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4, column –/Opportunity",
+   "quote": "GPT-5.4 12.5 2.3 8.9 0.3",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F136",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "0.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4, column –/–",
+   "quote": "GPT-5.4 12.5 2.3 8.9 0.3",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F137",
+   "says": "model-name",
+   "about": "GPT-5.4 mini",
+   "value": "GPT-5.4 mini",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 mini",
+   "quote": "GPT-5.4 mini 14.3 2.3 18.1 0.5"
+  },
+  {
+   "id": "F138",
+   "says": "score",
+   "about": "GPT-5.4 mini",
+   "value": "14.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 mini, column Threat/Opportunity",
+   "quote": "GPT-5.4 mini 14.3 2.3 18.1 0.5",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F139",
+   "says": "score",
+   "about": "GPT-5.4 mini",
+   "value": "2.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 mini, column Threat/–",
+   "quote": "GPT-5.4 mini 14.3 2.3 18.1 0.5",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F140",
+   "says": "score",
+   "about": "GPT-5.4 mini",
+   "value": "18.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 mini, column –/Opportunity",
+   "quote": "GPT-5.4 mini 14.3 2.3 18.1 0.5",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F141",
+   "says": "score",
+   "about": "GPT-5.4 mini",
+   "value": "0.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 mini, column –/–",
+   "quote": "GPT-5.4 mini 14.3 2.3 18.1 0.5",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F142",
+   "says": "model-name",
+   "about": "GPT-5.4 nano",
+   "value": "GPT-5.4 nano",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 nano",
+   "quote": "GPT-5.4 nano 18.5 5.0 20.2 0.8"
+  },
+  {
+   "id": "F143",
+   "says": "score",
+   "about": "GPT-5.4 nano",
+   "value": "18.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 nano, column Threat/Opportunity",
+   "quote": "GPT-5.4 nano 18.5 5.0 20.2 0.8",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F144",
+   "says": "score",
+   "about": "GPT-5.4 nano",
+   "value": "5.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 nano, column Threat/–",
+   "quote": "GPT-5.4 nano 18.5 5.0 20.2 0.8",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F145",
+   "says": "score",
+   "about": "GPT-5.4 nano",
+   "value": "20.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 nano, column –/Opportunity",
+   "quote": "GPT-5.4 nano 18.5 5.0 20.2 0.8",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F146",
+   "says": "score",
+   "about": "GPT-5.4 nano",
+   "value": "0.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.24264.html",
+   "where": "Table 2, row GPT-5.4 nano, column –/–",
+   "quote": "GPT-5.4 nano 18.5 5.0 20.2 0.8",
+   "term": "misalignment%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
   }
  ]
 }

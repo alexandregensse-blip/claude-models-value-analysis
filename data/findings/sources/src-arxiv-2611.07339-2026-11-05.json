@@ -1,0 +1,360 @@
+{
+ "id": "src-arxiv-2611.07339-2026-11-05",
+ "publisher": "arxiv-2611.07339",
+ "urls": [
+  "https://arxiv.org/abs/2611.07339"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html": "faa549f87e6a535a80f19d4c24bfa3e922dd6543f7778757003276af19f326b7"
+ },
+ "harvested_at": "2026-11-09T15:19:26Z",
+ "published": {
+  "value": "2026-11-05",
+  "where": "arXiv stamp of the saved HTML (v1)",
+  "quote": "arXiv:2611.07339v1 [cs.DB] 05 Nov 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-1 (b-openai + c-openai). DiagDBench: agentic LLMs on interactive database diagnosis and anomaly remediation (454-sample held-out test set). Table 6, the four columns with GPT-6 Astra beneath the architecture (ReAct, Codex, D-Bot, DBAIOps): PostgreSQL, MySQL and Overall scores (11 measures). The table is flattened in the saved page: column order read from the header (ReAct x5 models, then Codex, D-Bot, DBAIOps with GPT-6 Astra). GPT-6.1 Sol is the JUDGE (kept as the judge fact on every measure; not a measured entry). The scores are those of an agent (scaffold + model), not of the model alone. Effort not written ('retaining the default hyperparameter settings of their underlying LLMs'); route not written; no cost published.",
+ "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2611.07339",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "judge",
+   "about": null,
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "section 7.1 (judge)",
+   "quote": "We use GPT-6.1 Sol ( OpenAI, ) as the judge for both workload semantic-equivalence assessment and diagnostic report evaluation.",
+   "note": "same-maker judge for the GPT-6 Astra agents (possible self-preference); three judgments per workload comparison (majority vote), three scoring rounds per report (median)"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "while retaining the default hyperparameter settings of their underlying LLMs",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "section 7.1.1 Baselines",
+   "quote": "we evaluate eight LLM-based database agents while retaining the default hyperparameter settings of their underlying LLMs",
+   "note": "no effort or sampling setting written: 'default hyperparameter settings of their underlying LLMs' retained (the paper does not say whether a reasoning effort exists or was sent)"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "Each cell reports the mean score over the corresponding samples, using the agent-proposed optimized workload when available and the original anomaly-verified workload otherwise.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "caption of Table 6",
+   "quote": "Each cell reports the mean score over the corresponding samples, using the agent-proposed optimized workload when available and the original anomaly-verified workload otherwise.",
+   "note": "each cell is the mean over the samples; D-Bot Overall covers the 236 PostgreSQL samples only (no MySQL support); overall score S = 0.70 R + 0.30 D (remediation and diagnostic report)"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "DiagDBench ReAct Codex D-Bot DBAIOps GPT-6 Astra GLM-5.3 Flash Kimi K3 DeepSeek-V4.1 Flash Qwen3.8 Max GPT-6 Astra GPT-6 Astra GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6 header",
+   "quote": "DiagDBench ReAct Codex D-Bot DBAIOps GPT-6 Astra GLM-5.3 Flash Kimi K3 DeepSeek-V4.1 Flash Qwen3.8 Max GPT-6 Astra GPT-6 Astra GPT-6 Astra",
+   "note": "column order: ReAct (GPT-6 Astra, GLM-5.3 Flash, Kimi K3, DeepSeek-V4.1 Flash, Qwen3.8 Max), Codex (GPT-6 Astra), D-Bot (GPT-6 Astra), DBAIOps (GPT-6 Astra)"
+  },
+  {
+   "id": "F5",
+   "says": "model-name",
+   "about": "ReAct (GPT-6 Astra)",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6 header, ReAct column (GPT-6 Astra beneath the architecture)",
+   "quote": "DiagDBench ReAct Codex D-Bot DBAIOps GPT-6 Astra GLM-5.3 Flash Kimi K3 DeepSeek-V4.1 Flash Qwen3.8 Max GPT-6 Astra GPT-6 Astra GPT-6 Astra"
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": "ReAct (GPT-6 Astra)",
+   "value": "ReAct",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "section 7.1.1 Baselines (ReAct paragraph)",
+   "quote": "We instantiate five database agents using the ReAct ( Yao et al., 2023 ) framework with GPT-6 Astra",
+   "note": "ReAct framework (Yao et al., 2023), 20 interactions per sample, Bash code actions in the sample container"
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "ReAct (GPT-6 Astra)",
+   "value": "56.81",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row PostgreSQL, ReAct column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "ReAct (GPT-6 Astra)",
+   "value": "55.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row MySQL, ReAct column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "ReAct (GPT-6 Astra)",
+   "value": "56.24",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row Overall, ReAct column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F10",
+   "says": "model-name",
+   "about": "Codex scaffold (GPT-6 Astra)",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6 header, Codex column (GPT-6 Astra beneath the architecture)",
+   "quote": "DiagDBench ReAct Codex D-Bot DBAIOps GPT-6 Astra GLM-5.3 Flash Kimi K3 DeepSeek-V4.1 Flash Qwen3.8 Max GPT-6 Astra GPT-6 Astra GPT-6 Astra"
+  },
+  {
+   "id": "F11",
+   "says": "harness",
+   "about": "Codex scaffold (GPT-6 Astra)",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "section 7.1.1 Baselines (Codex paragraph)",
+   "quote": "We evaluate the Codex ( Bonamy and Choi, 2026 ) scaffold with GPT-6 Astra using its native agent loop and Model Context Protocol (MCP) tools.",
+   "note": "Codex scaffold with its native agent loop and MCP tools, at most 20 database-tool actions per sample; the paper cites the scaffold as Codex (Bonamy and Choi, 2026): not stated to be the OpenAI Codex CLI (no registry term attached)"
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "Codex scaffold (GPT-6 Astra)",
+   "value": "53.62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row PostgreSQL, Codex column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Codex scaffold (GPT-6 Astra)",
+   "value": "51.22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row MySQL, Codex column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Codex scaffold (GPT-6 Astra)",
+   "value": "52.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row Overall, Codex column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "D-Bot (GPT-6 Astra)",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6 header, D-Bot column (GPT-6 Astra beneath the architecture)",
+   "quote": "DiagDBench ReAct Codex D-Bot DBAIOps GPT-6 Astra GLM-5.3 Flash Kimi K3 DeepSeek-V4.1 Flash Qwen3.8 Max GPT-6 Astra GPT-6 Astra GPT-6 Astra"
+  },
+  {
+   "id": "F16",
+   "says": "harness",
+   "about": "D-Bot (GPT-6 Astra)",
+   "value": "D-Bot",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "section 7.1.1 Baselines (D-Bot paragraph)",
+   "quote": "We evaluate D-Bot with GPT-6 Astra for PostgreSQL diagnosis using its native multi-expert workflow",
+   "note": "D-Bot native multi-expert workflow for PostgreSQL diagnosis; a separate LLM-based adapter turns its report into a remediation script"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "D-Bot (GPT-6 Astra)",
+   "value": "20.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row PostgreSQL, D-Bot column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "D-Bot (GPT-6 Astra)",
+   "value": "20.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row Overall, D-Bot column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "DBAIOps (GPT-6 Astra)",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6 header, DBAIOps column (GPT-6 Astra beneath the architecture)",
+   "quote": "DiagDBench ReAct Codex D-Bot DBAIOps GPT-6 Astra GLM-5.3 Flash Kimi K3 DeepSeek-V4.1 Flash Qwen3.8 Max GPT-6 Astra GPT-6 Astra GPT-6 Astra"
+  },
+  {
+   "id": "F20",
+   "says": "harness",
+   "about": "DBAIOps (GPT-6 Astra)",
+   "value": "DBAIOps",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "section 7.1.1 Baselines (DBAIOps paragraph)",
+   "quote": "We evaluate DBAIOps with GPT-6 Astra using its implemented knowledge-based question-answering workflow",
+   "note": "DBAIOps knowledge-based question-answering workflow; a separate LLM call converts its report into a remediation script"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "DBAIOps (GPT-6 Astra)",
+   "value": "23.27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row PostgreSQL, DBAIOps column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "DBAIOps (GPT-6 Astra)",
+   "value": "11.03",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row MySQL, DBAIOps column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "DBAIOps (GPT-6 Astra)",
+   "value": "20.55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-openai/2611.07339.html",
+   "where": "Table 6, row Overall, DBAIOps column",
+   "quote": "PostgreSQL 56.81 41.43 39.40 42.25 43.64 53.62 20.09 23.27 MySQL 55.61 44.58 46.01 43.98 46.31 51.22 – 11.03 Overall 56.24 42.97 42.65 43.10 44.92 52.44 20.09 20.55",
+   "term": "DiagDBench score (0-100)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ]
+}

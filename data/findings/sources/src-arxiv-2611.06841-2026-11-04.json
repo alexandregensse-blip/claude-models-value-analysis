@@ -27,7 +27,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-anthropic",
- "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-1: convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -765,6 +765,513 @@
    "quote": "Claude Opus 5 1.15 @24 3.98 109.12 1.16 @1 5.51 28.09 0.62 @6 33.55 62.97",
    "term": "TPOT p90 (ms)",
    "scale": "raw"
+  },
+  {
+   "id": "F57",
+   "says": "effort-label",
+   "about": null,
+   "value": "maximum",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "section 4.1 Experimental Setup",
+   "quote": "All use maximum reasoning effort on Qwen3.5 9B",
+   "written": "maximum reasoning effort",
+   "note": "written for all the coding-agent models of the paper ('All use maximum reasoning effort')"
+  },
+  {
+   "id": "F58",
+   "says": "harness",
+   "about": "GPT models",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "section 4.1 Experimental Setup",
+   "quote": "In Harbor, GPT models use Codex ( OpenAI, 2026a ) , and other models use Claude Code",
+   "term": "codex-cli",
+   "note": "run inside Harbor"
+  },
+  {
+   "id": "F59",
+   "says": "note",
+   "about": null,
+   "value": "Each agent–deployment pair allows one 8 hours development run and a 1,800-second final replay, with at most one rerun for a clearly anomalous failed outcome.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "section 4.1",
+   "quote": "Each agent–deployment pair allows one 8 hours development run and a 1,800-second final replay, with at most one rerun for a clearly anomalous failed outcome.",
+   "note": "one 8-hour development run per agent-deployment pair, 1,800 s final replay, at most one rerun; the strongest verified final submission of each pair is reported"
+  },
+  {
+   "id": "F60",
+   "says": "note",
+   "about": null,
+   "value": "Table 1 : Serving performance across three deployments. Entries pair latency-qualified dollars per dollar with offered session concurrency c c ; TTFT (s) and TPOT (ms) are p90 latencies.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "caption of Table 1",
+   "quote": "Table 1 : Serving performance across three deployments. Entries pair latency-qualified dollars per dollar with offered session concurrency c c ; TTFT (s) and TPOT (ms) are p90 latencies.",
+   "note": "Table 1: the entry is dollars per dollar ($/$) with the offered concurrency c; TTFT in seconds and TPOT in milliseconds are p90 latencies; deployments: Gemma E4B (1 x L40), Qwen3.5 9B (2 x L40), Qwen3.8 27B INT4 (2 x L40)"
+  },
+  {
+   "id": "F61",
+   "says": "cost-basis",
+   "about": null,
+   "value": "OpenRouter’s advertised standard rates",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "section 10.1 Agent API Costs",
+   "quote": "Table 3 reprices recorded token usage at OpenRouter’s advertised standard rates, retrieved on October 13, 2026.",
+   "term": "list-estimate",
+   "note": "the agents were not run through OpenRouter: only the prices are OpenRouter catalogue rates"
+  },
+  {
+   "id": "F62",
+   "says": "note",
+   "about": null,
+   "value": "We sum uncached input, cache reads, cache writes, and output, including reasoning tokens once.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "section 10.1",
+   "quote": "We sum uncached input, cache reads, cache writes, and output, including reasoning tokens once. Cache writes use the listed 5-minute rate, or the ordinary input rate when no separate write price is listed. GPT prompts remain below the 272K-token pricing threshold. The estimates cover token and cache-operation charges.",
+   "note": "cost accounting: uncached input, cache reads, cache writes (5-minute rate) and output (reasoning once) priced separately; GPT prompts below the 272K-token tier; token and cache charges only"
+  },
+  {
+   "id": "F63",
+   "says": "model-name",
+   "about": "GPT 6 Astra (Gemma E4B)",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83"
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "GPT 6 Astra (Gemma E4B)",
+   "value": "1.75",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Gemma E4B, column $/$",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F65",
+   "says": "note",
+   "about": "GPT 6 Astra (Gemma E4B)",
+   "value": "@32 4.77 94.19",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Gemma E4B, columns @c, TTFT, TPOT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "note": "offered session concurrency c = 32; p90 TTFT 4.77 s; p90 TPOT 94.19 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F66",
+   "says": "cost",
+   "about": "GPT 6 Astra (Gemma E4B)",
+   "value": "119.79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 3, row GPT 6 Astra, column Gemma E4B",
+   "quote": "GPT 6 Astra 110.81 119.79",
+   "note": "agent API cost estimate (development run) in USD at OpenRouter standard rates of 13 Oct 2026"
+  },
+  {
+   "id": "F67",
+   "says": "model-name",
+   "about": "GPT 6 Astra (Qwen3.5 9B)",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83"
+  },
+  {
+   "id": "F68",
+   "says": "score",
+   "about": "GPT 6 Astra (Qwen3.5 9B)",
+   "value": "3.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.5 9B, column $/$",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "says": "note",
+   "about": "GPT 6 Astra (Qwen3.5 9B)",
+   "value": "@12 15.62 21.94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.5 9B, columns @c, TTFT, TPOT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "note": "offered session concurrency c = 12; p90 TTFT 15.62 s; p90 TPOT 21.94 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F70",
+   "says": "cost",
+   "about": "GPT 6 Astra (Qwen3.5 9B)",
+   "value": "110.81",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 3, row GPT 6 Astra, column Qwen 9B",
+   "quote": "GPT 6 Astra 110.81 119.79",
+   "note": "agent API cost estimate (development run) in USD at OpenRouter standard rates of 13 Oct 2026"
+  },
+  {
+   "id": "F71",
+   "says": "model-name",
+   "about": "GPT 6 Astra (Qwen3.8 27B INT4)",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83"
+  },
+  {
+   "id": "F72",
+   "says": "score",
+   "about": "GPT 6 Astra (Qwen3.8 27B INT4)",
+   "value": "1.48",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.8 27B INT4, column $/$",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "says": "note",
+   "about": "GPT 6 Astra (Qwen3.8 27B INT4)",
+   "value": "@4 12.96 42.83",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Astra, deployment Qwen3.8 27B INT4, columns @c, TTFT, TPOT",
+   "quote": "GPT 6 Astra 1.75 @32 4.77 94.19 3.18 @12 15.62 21.94 1.48 @4 12.96 42.83",
+   "note": "offered session concurrency c = 4; p90 TTFT 12.96 s; p90 TPOT 42.83 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F74",
+   "says": "model-name",
+   "about": "GPT 6.1 Sol (Gemma E4B)",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31"
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Gemma E4B)",
+   "value": "1.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Gemma E4B, column $/$",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F76",
+   "says": "note",
+   "about": "GPT 6.1 Sol (Gemma E4B)",
+   "value": "@24 4.43 72.45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Gemma E4B, columns @c, TTFT, TPOT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "note": "offered session concurrency c = 24; p90 TTFT 4.43 s; p90 TPOT 72.45 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F77",
+   "says": "cost",
+   "about": "GPT 6.1 Sol (Gemma E4B)",
+   "value": "13.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 3, row GPT 6.1 Sol, column Gemma E4B",
+   "quote": "GPT 6.1 Sol 13.01 13.67",
+   "note": "agent API cost estimate (development run) in USD at OpenRouter standard rates of 13 Oct 2026"
+  },
+  {
+   "id": "F78",
+   "says": "model-name",
+   "about": "GPT 6.1 Sol (Qwen3.5 9B)",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31"
+  },
+  {
+   "id": "F79",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Qwen3.5 9B)",
+   "value": "2.84",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.5 9B, column $/$",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F80",
+   "says": "note",
+   "about": "GPT 6.1 Sol (Qwen3.5 9B)",
+   "value": "@4 2.71 23.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.5 9B, columns @c, TTFT, TPOT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "note": "offered session concurrency c = 4; p90 TTFT 2.71 s; p90 TPOT 23.67 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F81",
+   "says": "cost",
+   "about": "GPT 6.1 Sol (Qwen3.5 9B)",
+   "value": "13.01",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 3, row GPT 6.1 Sol, column Qwen 9B",
+   "quote": "GPT 6.1 Sol 13.01 13.67",
+   "note": "agent API cost estimate (development run) in USD at OpenRouter standard rates of 13 Oct 2026"
+  },
+  {
+   "id": "F82",
+   "says": "model-name",
+   "about": "GPT 6.1 Sol (Qwen3.8 27B INT4)",
+   "value": "GPT 6.1 Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31"
+  },
+  {
+   "id": "F83",
+   "says": "score",
+   "about": "GPT 6.1 Sol (Qwen3.8 27B INT4)",
+   "value": "0.98",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.8 27B INT4, column $/$",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F84",
+   "says": "note",
+   "about": "GPT 6.1 Sol (Qwen3.8 27B INT4)",
+   "value": "@4 75.66 43.31",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6.1 Sol, deployment Qwen3.8 27B INT4, columns @c, TTFT, TPOT",
+   "quote": "GPT 6.1 Sol 1.59 @24 4.43 72.45 2.84 @4 2.71 23.67 0.98 @4 75.66 43.31",
+   "note": "offered session concurrency c = 4; p90 TTFT 75.66 s; p90 TPOT 43.31 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F85",
+   "says": "model-name",
+   "about": "GPT 6 Sol (Gemma E4B)",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53"
+  },
+  {
+   "id": "F86",
+   "says": "score",
+   "about": "GPT 6 Sol (Gemma E4B)",
+   "value": "0.55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Gemma E4B, column $/$",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F87",
+   "says": "note",
+   "about": "GPT 6 Sol (Gemma E4B)",
+   "value": "@5 3.63 110.52",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Gemma E4B, columns @c, TTFT, TPOT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "note": "offered session concurrency c = 5; p90 TTFT 3.63 s; p90 TPOT 110.52 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F88",
+   "says": "cost",
+   "about": "GPT 6 Sol (Gemma E4B)",
+   "value": "35.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 3, row GPT 6 Sol, column Gemma E4B",
+   "quote": "GPT 6 Sol 50.88 35.93",
+   "note": "agent API cost estimate (development run) in USD at OpenRouter standard rates of 13 Oct 2026"
+  },
+  {
+   "id": "F89",
+   "says": "model-name",
+   "about": "GPT 6 Sol (Qwen3.5 9B)",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53"
+  },
+  {
+   "id": "F90",
+   "says": "score",
+   "about": "GPT 6 Sol (Qwen3.5 9B)",
+   "value": "1.11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.5 9B, column $/$",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F91",
+   "says": "note",
+   "about": "GPT 6 Sol (Qwen3.5 9B)",
+   "value": "@1 13.19 20.45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.5 9B, columns @c, TTFT, TPOT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "note": "offered session concurrency c = 1; p90 TTFT 13.19 s; p90 TPOT 20.45 ms (the entry is the system the agent built)"
+  },
+  {
+   "id": "F92",
+   "says": "cost",
+   "about": "GPT 6 Sol (Qwen3.5 9B)",
+   "value": "50.88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 3, row GPT 6 Sol, column Qwen 9B",
+   "quote": "GPT 6 Sol 50.88 35.93",
+   "note": "agent API cost estimate (development run) in USD at OpenRouter standard rates of 13 Oct 2026"
+  },
+  {
+   "id": "F93",
+   "says": "model-name",
+   "about": "GPT 6 Sol (Qwen3.8 27B INT4)",
+   "value": "GPT 6 Sol",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53"
+  },
+  {
+   "id": "F94",
+   "says": "score",
+   "about": "GPT 6 Sol (Qwen3.8 27B INT4)",
+   "value": "0.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.8 27B INT4, column $/$",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "term": "dollars per dollar ($/$)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F95",
+   "says": "note",
+   "about": "GPT 6 Sol (Qwen3.8 27B INT4)",
+   "value": "@2 136.48 49.53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2611.06841.html",
+   "where": "Table 1, row GPT 6 Sol, deployment Qwen3.8 27B INT4, columns @c, TTFT, TPOT",
+   "quote": "GPT 6 Sol 0.55 @5 3.63 110.52 1.11 @1 13.19 20.45 0.26 @2 136.48 49.53",
+   "note": "offered session concurrency c = 2; p90 TTFT 136.48 s; p90 TPOT 49.53 ms (the entry is the system the agent built)"
   }
  ]
 }

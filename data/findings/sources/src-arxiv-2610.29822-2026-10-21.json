@@ -27,7 +27,7 @@
   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-anthropic",
- "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne",
+ "agent": "convertisseur k-anthropic (Sonnet 5.5), lecture ligne par ligne; merged with lot k-openai-1: convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -1229,6 +1229,534 @@
    "written": "11.1%",
    "term": "reviewer persona (%)",
    "scale": "percent"
+  },
+  {
+   "id": "F95",
+   "says": "judge",
+   "about": null,
+   "value": "gpt-5.6-sol on the Codex scaffold and opus-5 on the Claude Code scaffold",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "section 5.1 Main results",
+   "quote": "The judging and review sides are rotated between gpt-5.6-sol on the Codex scaffold and opus-5 on the Claude Code scaffold.",
+   "note": "the Judge and the Reviewer are two different model families, swapped between tasks (Algorithm 1); GPT-5.6-Sol is both an evaluated agent and a judge/reviewer"
+  },
+  {
+   "id": "F96",
+   "says": "note",
+   "about": null,
+   "value": "Table 14: LDPR with a 95% interval from resampling tasks with replacement.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 14 caption",
+   "quote": "Table 14: LDPR with a 95% interval from resampling tasks with replacement.",
+   "note": "LDPR 95% intervals (Table 14): GPT-6-Astra [0.481, 0.639], GPT-5.6-Sol [0.412, 0.587]"
+  },
+  {
+   "id": "F97",
+   "says": "note",
+   "about": null,
+   "value": "LDPR",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "section 4 Metrics",
+   "quote": "we therefore report the L ength- D iscounted P ass R ate (LDPR), which is counted as LDPR",
+   "note": "LDPR = (K+1-k)/K when all tests pass, else 0 (k = weighted number of turns used; a turn without a code edit counts as half a turn); K = 5 for single-issue tasks and 8 for two-issue tasks"
+  },
+  {
+   "id": "F98",
+   "says": "note",
+   "about": null,
+   "value": "Resolved within k k turns Model 1 2 3 4 5 6 7 8 k k LDPR",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3 header",
+   "quote": "Resolved within k k turns Model 1 2 3 4 5 6 7 8 k k LDPR",
+   "note": "Table 3 columns: resolved within 1..8 turns (%), then the column k-bar (kept as printed: GPT-6-Astra 3.44, GPT-5.6-Sol 3.73; its definition was not read) and LDPR"
+  },
+  {
+   "id": "F99",
+   "says": "unit",
+   "about": null,
+   "value": "Per-task cost",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15 caption",
+   "quote": "Table 15: Per-task cost, separated between the agent and judging.",
+   "term": "CNY-per-task",
+   "note": "agent columns are means (caption); judging costs and edit sizes are medians"
+  },
+  {
+   "id": "F100",
+   "says": "model-name",
+   "about": "GPT-6-Astra",
+   "value": "GPT-6-Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561"
+  },
+  {
+   "id": "F101",
+   "says": "harness",
+   "about": "GPT-6-Astra",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 13 (model and scaffold of each agent)",
+   "quote": "GPT-6-Astra Codex",
+   "term": "codex-cli",
+   "note": "Table 13 lists the model with the scaffold Codex"
+  },
+  {
+   "id": "F102",
+   "says": "cost",
+   "about": "GPT-6-Astra",
+   "value": "264.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, column Cost (agent side, mean per task)",
+   "quote": "GPT-6-Astra 158 13725 264.2 114 61.9 38.8 805 7 723"
+  },
+  {
+   "id": "F103",
+   "says": "requests",
+   "about": "GPT-6-Astra",
+   "value": "158",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, column Requests (agent side)",
+   "quote": "GPT-6-Astra 158 13725 264.2 114 61.9 38.8 805 7 723",
+   "written": "158"
+  },
+  {
+   "id": "F104",
+   "says": "tokens-total",
+   "about": "GPT-6-Astra",
+   "value": "13725000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, column Tokens (thousands, exclude cache reads)",
+   "quote": "GPT-6-Astra 158 13725 264.2 114 61.9 38.8 805 7 723",
+   "written": "13725",
+   "note": "in thousands of tokens, cache reads excluded (caption); no input/output split"
+  },
+  {
+   "id": "F105",
+   "says": "note",
+   "about": "GPT-6-Astra",
+   "value": "114",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, columns Judging side (Requests, Judge, Reviewer, Wall)",
+   "quote": "GPT-6-Astra 158 13725 264.2 114 61.9 38.8 805 7 723",
+   "note": "judging-side telemetry of the row (requests, Judge and Reviewer cost, wall time) is not the agent cost: first figure = judging requests; edit size columns Files / Lines also in the row"
+  },
+  {
+   "id": "F106",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "0.561",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, last column (LDPR)",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "LDPR",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F107",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "12.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 1 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 1 turn (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F108",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "38.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 2 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 2 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F109",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "55.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 3 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 3 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F110",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "70.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 4 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 4 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F111",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "77.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 5 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 5 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F112",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "79.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 6 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 6 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F113",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "80.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 7 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 7 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F114",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "81.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-6-Astra, resolved within 8 turn column",
+   "quote": "GPT-6-Astra 12.5 38.9 55.6 70.8 77.8 79.2 80.6 81.9 3.44 0.561",
+   "term": "resolved within 8 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F115",
+   "says": "score",
+   "about": "GPT-6-Astra",
+   "value": "61.9",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "section 5.2.1 (text, single-turn collection of 42 tasks)",
+   "quote": "GPT-6-Astra at 61.9% and Grok-4.6 at 59.5%",
+   "term": "single-turn resolution (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F116",
+   "says": "model-name",
+   "about": "GPT-5.6-Sol",
+   "value": "GPT-5.6-Sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500"
+  },
+  {
+   "id": "F117",
+   "says": "harness",
+   "about": "GPT-5.6-Sol",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 13 (model and scaffold of each agent)",
+   "quote": "GPT-5.6-Sol Codex",
+   "term": "codex-cli",
+   "note": "Table 13 lists the model with the scaffold Codex"
+  },
+  {
+   "id": "F118",
+   "says": "cost",
+   "about": "GPT-5.6-Sol",
+   "value": "279.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, column Cost (agent side, mean per task)",
+   "quote": "GPT-5.6-Sol 524 54633 279.2 70 36.6 34.8 200 3 221"
+  },
+  {
+   "id": "F119",
+   "says": "requests",
+   "about": "GPT-5.6-Sol",
+   "value": "524",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, column Requests (agent side)",
+   "quote": "GPT-5.6-Sol 524 54633 279.2 70 36.6 34.8 200 3 221",
+   "written": "524"
+  },
+  {
+   "id": "F120",
+   "says": "tokens-total",
+   "about": "GPT-5.6-Sol",
+   "value": "54633000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, column Tokens (thousands, exclude cache reads)",
+   "quote": "GPT-5.6-Sol 524 54633 279.2 70 36.6 34.8 200 3 221",
+   "written": "54633",
+   "note": "in thousands of tokens, cache reads excluded (caption); no input/output split"
+  },
+  {
+   "id": "F121",
+   "says": "note",
+   "about": "GPT-5.6-Sol",
+   "value": "70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 15, columns Judging side (Requests, Judge, Reviewer, Wall)",
+   "quote": "GPT-5.6-Sol 524 54633 279.2 70 36.6 34.8 200 3 221",
+   "note": "judging-side telemetry of the row (requests, Judge and Reviewer cost, wall time) is not the agent cost: first figure = judging requests; edit size columns Files / Lines also in the row"
+  },
+  {
+   "id": "F122",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "0.500",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, last column (LDPR)",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "LDPR",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F123",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "16.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 1 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 1 turn (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F124",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "36.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 2 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 2 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F125",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "47.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 3 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 3 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F126",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "61.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 4 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 4 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F127",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "68.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 5 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 5 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F128",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "69.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 6 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 6 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F129",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "70.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 7 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 7 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F130",
+   "says": "score",
+   "about": "GPT-5.6-Sol",
+   "value": "70.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-anthropic/2610.29822.html",
+   "where": "Table 3, row GPT-5.6-Sol, resolved within 8 turn column",
+   "quote": "GPT-5.6-Sol 16.7 36.1 47.2 61.1 68.1 69.4 70.8 70.8 3.73 0.500",
+   "term": "resolved within 8 turns (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
   }
  ]
 }
