@@ -159,7 +159,7 @@ shows the Claude couples only.
 For every row *r* (group *b*, couple *c* of model *m* by maker *k*, publisher *s*, task type *t*), with *f* the
 transformation of §4:
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t} + δ_k · H_r) + ε_r ,   ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t} + δ_k · H_r) + ε_r ,   ε_r ~ Student-t_ν(0, k_r · (κ_r · h_r² · σ_b² + d_r²))
 
 | Term | Meaning | Prior |
 |---|---|---|
@@ -169,6 +169,7 @@ transformation of §4:
 | σ_b | the group's noise: how far its measurements scatter beyond their reading error | log σ_b ~ N(μ_σ, s_σ²), pooled |
 | h_r | the noise shape of a bounded score (§4); 1 on other scales | fixed by the data |
 | d_r | the value's reading precision (§4), on the model's scale | known |
+| k_r | the number of rows the fit keeps from the same run: one source's k quality measurements of one execution (metrics, sub-scores, slices; the setups of one run_set, same model, configuration and campaign) each count 1/k, the run as one row (rule same-run-weight, the maintainer, 10 Nov 2026; 1 for a row alone in its run) | known |
 | u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²), τ_c ~ N⁺(0, s_{τ,k}²) pooled over the maker's couples |
 | w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels and by its line (its builds, previews and modes) | N(0, ψ_k²) |
 | v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω_k²) |

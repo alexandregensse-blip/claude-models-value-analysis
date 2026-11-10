@@ -35,7 +35,7 @@ NOT_ESTABLISHED = {"budget-converted", "enabled", "adaptive", "default", "unstat
                    "dynamic"}
 FIT_COLUMNS = ["group", "source", "model", "effort", "task_type", "complexity", "harness", "unit", "cost_usd",
                "cost_prec", "tokens_in", "tokens_out", "score", "score_metric", "score_prec", "cached_pct", "confound",
-               "ref"]
+               "ref", "run"]
 DATA_COLUMNS = FIT_COLUMNS + ["status_quality", "status_cost"]
 MIN, MAX = dt.datetime.min, dt.datetime.max
 S12 = math.sqrt(12)
@@ -468,6 +468,7 @@ class Ctx:
         # decisions
         self.decisions = []
         self.stale = []
+        self.run_doubts = []
         if os.path.isfile(a.decisions):
             n = len(rep.errors)
             x = V.load_json(a.decisions, rep)
@@ -2874,6 +2875,7 @@ def build(ctx):
     quality(ctx, measures)
     residuals = composite_residuals(ctx, measures)
     group_step(ctx, measures + residuals, "quality")
+    run_ids(ctx, measures)
     cost(ctx, measures)
     return measures, residuals, legacy
 
@@ -3180,6 +3182,42 @@ def group_step(ctx, ms, axis):
                     "" if M.fields["model"]["value"] in fit else "; model not in the fit's model list")
 
 
+def run_ids(ctx, measures):
+    """§5.2 step 11, rule same-run-weight (the maintainer, 10 Nov 2026): k quality measurements of one run enter
+    together, each with weight 1/k (lqm multiplies the row's variance by k). One run = the measures in on quality of one
+    source, one model@configuration and one campaign whose setups share a run_set (benchmarks.json). A setup held twice
+    there means two runs: the measures are separated by the table row (their model facts); if that does not separate
+    them, they are not grouped (doubt, ctx.run_doubts). The run id goes to the fit table's column `run`; lqm counts k
+    among the rows it keeps."""
+    by = collections.defaultdict(list)
+    for M in measures:
+        M.run = ""
+        rs = M.setup.get("run_set")
+        if rs and (M.status["quality"] or "").startswith("in"):
+            by[(M.S.id, rs, couple(M), M.campaign or "")].append(M)
+    for k, ms in sorted(by.items()):
+        if len(ms) < 2:
+            continue
+        parts = [ms]
+        if len({M.setup_id for M in ms}) < len(ms):
+            rows = collections.defaultdict(list)
+            for M in ms:
+                rows[tuple(sorted(M.m["facts"].get("model") or []))].append(M)
+            parts = list(rows.values())
+            if any(len({M.setup_id for M in p}) < len(p) for p in parts):
+                ctx.run_doubts.append(dict(key=list(k), measures=sorted(M.ref for M in ms),
+                                           why="one setup held twice in the run set and the table row does not separate "
+                                               "them: runs possibly distinct, not grouped"))
+                continue
+        for i, p in enumerate(sorted(parts, key=lambda p: min(M.ref for M in p))):
+            if len(p) < 2:
+                continue
+            rid = "|".join(k) + (f"|row{i + 1}" if len(parts) > 1 else "")
+            for M in p:
+                M.run = rid
+                M.rule("same-run-weight")
+
+
 def cost(ctx, measures):
     """§5.3: one cost measure per set of spend facts (on the headline measure's setup, else the first)."""
     groups = collections.defaultdict(list)
@@ -3402,7 +3440,8 @@ def row_of(ctx, M, names, cnames, axis_cost=False):
                                            "score" in M.value.says else M.setup.get("metric", "")),
                 score_prec=fmt_prec(sf.get("prec")) if score else "",
                 cached_pct=num_text(cached[0]) if cached else "", confound=confound(ctx, M),
-                ref=f"{(S.doc.get('urls') or [''])[0]} ({where})")
+                ref=f"{(S.doc.get('urls') or [''])[0]} ({where})",
+                run="" if axis_cost else getattr(M, "run", ""))
 
 
 def write_csv(path, rows, columns):
@@ -3483,7 +3522,7 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
                           findings=V.rel(ctx.args.findings), decisions=V.rel(ctx.args.decisions),
                           fit_models=ctx.fit_models, benchmarks=os.path.abspath(ctx.paths["benchmarks"]),
                           lqm="pending" if not ctx.args.no_lqm else "skipped"),
-               measures={}, counts={}, stale_decisions=ctx.stale,
+               measures={}, counts={}, stale_decisions=ctx.stale, run_doubts=ctx.run_doubts,
                validation=dict(warnings=ctx.rep.warnings, errors=ctx.rep.errors))
     for L in legacy:
         r = L.row

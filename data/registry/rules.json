@@ -401,6 +401,21 @@
    "ref": "docs/DATA-PIPELINE.md §5.2 step 5; model/README.md; docs/METHODOLOGY.md"
   },
   {
+   "id": "same-run-weight",
+   "kind": "standing",
+   "statement": "When one source gives, for one run (one model, one configuration, one execution), k quality measurements (task scores, rates, errors, each with its direction; metrics, sub-scores, slices or aggregations of the same executions), all of them enter the fit, each with weight 1/k: lqm multiplies the row's noise variance by k, so that together they weigh as one row. One run = the measures of one source, one model, one configuration and one campaign whose setups share a run_set (benchmarks.json); a setup held twice there is separated by the table row (the model facts), and when that does not separate it the measures are not grouped (doubt: runs possibly distinct). k counts the run's rows that lqm keeps (after the composite and republication rules). Counts of calls, tokens, steps, latencies and durations are not quality measurements; behaviour, safety and system quantities stay out; a copy follows the republication rule; a composite whose components are held follows the composite rule first.",
+   "inputs": [
+    "setup run_set",
+    "setup headline basis run-share",
+    "model, configuration, campaign",
+    "model facts"
+   ],
+   "output": "fit-quality.csv column run; lqm k per row (variance × k)",
+   "date": "2026-11-10",
+   "decided_by": "the maintainer",
+   "ref": "data/BUILD.md (integration 10); model/README.md; docs/METHODOLOGY.md §5"
+  },
+  {
    "id": "configurations-per-model",
    "kind": "standing",
    "statement": "Each model has its own list of configurations; every configuration of the list enters the fit as its own couple (low … max, minimal, nothink, think, solo), except think-<budget> (out:budget-config) and the terms vocab.json marks in_fit false (between-tools); solo only for a model whose list is [solo]. A method change: before/after before main.",

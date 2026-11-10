@@ -4,7 +4,7 @@
   1. Label against values (blocking): a score above the bound its metric label states ('playable-of-2' holding 100,
      'score/10' holding 100) is a transcription error; the fit would read the group on the wrong scale.
   2. Same runs under two metrics (warning): two groups of one publisher sharing 3 or more couples, not already
-     recognised as republications, whose costs agree within 1 % on every shared couple (the same runs cost the same
+     recognised as republications nor declared one run's measurements (the build's column `run`, rule same-run-weight), whose costs agree within 1 % on every shared couple (the same runs cost the same
      whatever the metric), or, without costs, whose scores do, are probably one set of runs counted twice; they are
      merged or told apart by hand.
   3. A fraction above 1 (warning): a metric labelled as a fraction (of a peak, of a reference) whose values exceed 1
@@ -87,7 +87,10 @@ def twin_metrics(data):
     for axis in ("cost", "quality"):                                 # the fit tables' republications, on data.csv's groups
         known |= {frozenset(map(data_group, p[:2])) for p in load(axis)[2]}
     by = collections.defaultdict(lambda: collections.defaultdict(dict))
+    run = collections.defaultdict(dict)                              # the build's declared runs (rule same-run-weight)
     for r in data:
+        if r.get("run"):
+            run[(r["source"], r["group"])][f"{r['model']}@{r['effort']}"] = r["run"]
         for col in ("cost_usd", "score"):
             try:
                 by[(r["source"], r["group"])][col][f"{r['model']}@{r['effort']}"] = float(r[col])
@@ -99,6 +102,9 @@ def twin_metrics(data):
         if s1 != s2 or frozenset((g1, g2)) in known:
             continue
         a, b = by[(s1, g1)], by[(s2, g2)]
+        ra, rb = run[(s1, g1)], run[(s2, g2)]
+        if ra and rb and all(ra.get(c) and ra.get(c) == rb.get(c) for c in set(ra) & set(rb)) and set(ra) & set(rb):
+            continue                                                 # one run's two measurements, declared: 1/k each
         cost = set(a["cost_usd"]) & set(b["cost_usd"])
         score = set(a["score"]) & set(b["score"])
         if len(cost) >= 3 and all(gap(a["cost_usd"][c], b["cost_usd"][c]) < DUP_REL for c in cost):

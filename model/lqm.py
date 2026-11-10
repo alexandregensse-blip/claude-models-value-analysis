@@ -2,7 +2,7 @@
 
 For every measured row r (group b, couple c of model m, publisher s, task type t):
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r,      ε_r ~ Student-t_ν(0, k_r · (κ_r · h_r² · σ_b² + d_r²))
 
   f        per metric (METRIC RULES): empirical logit of a bounded score, log of an unbounded positive quantity,
            identity for an interval or unknown scale; log on the cost axis. A score where lower is better (its
@@ -19,6 +19,13 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            carried to the model's scale; known, added to the row's variance.
   h_r      shape of the sampling noise of an empirical logit, 1/(2√(q(1−q))) at the observed proportion q; 1 else.
   κ_r      variance multiplier of an early-access run, log κ ~ N(0, 1); 1 for other runs.
+  k_r      number of the rows the fit keeps from the same run (rule same-run-weight, the maintainer, 10 Nov 2026): one
+           source's k quality measurements of one run (one model, one configuration, one execution: metrics, sub-scores,
+           slices) enter together, the variance of each multiplied by k, so that together they weigh as one row (with
+           Gaussian noise, k rows of variance k·v carry the precision of one row of variance v). The build writes the
+           run id (fit-quality.csv column `run`, from the setups' run_set); 1 for a row alone in its run. The Stan
+           programs are unchanged: stan_data passes √k·h_r and √k·d_r, the scale of the row in the likelihood (the one
+           place where a row's weight enters it).
   u, w, v  publisher × couple (sd τ_c, τ_c ~ N⁺(0, s_τ)), publisher × model (sd ψ), couple × task type (sd ω)
            effects; composites (task type 'mixed') carry no task-type effect. A level carried by a single row is left
            out (indistinguishable from that row's noise). u and w are centred within their publisher, v within its
@@ -221,7 +228,8 @@ def load(path, models, field="score"):
             step=10.0 ** -(len(r[field].strip().split(".")[1]) if "." in r[field] else 0),
             other=_other_value(r, "score" if field == "cost_usd" else "cost_usd"),
             lower=field != "cost_usd" and (metric in LOWER_IS_BETTER or DIRECTION_OF.get(r["group"]) == "lower"),
-            unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "")))
+            unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or ""),
+            run="" if field == "cost_usd" else (r.get("run") or "")))
 
     # --- 1. composites
     for g, spec in COMPOSITES.items():
@@ -286,6 +294,8 @@ def load(path, models, field="score"):
     pairs = {}                                                          # the same two rows, met through either key
     for entries in slots.values():
         for (g1, x1), (g2, x2) in itertools.combinations(entries, 2):
+            if x1["run"] and x1["run"] == x2["run"]:
+                continue                                # one run's several measurements: weighted 1/k, not a copy
             if g1 != g2 and not at_bound(x1):
                 pairs[(id(x1), id(x2))] = (g1, g2, x1, x2)
     matches, shared, single = collections.Counter(), collections.Counter(), collections.Counter()
@@ -353,6 +363,15 @@ def load(path, models, field="score"):
             x["d"] = x["dy"] / sd                                       # reading precision on the same scale
         groups[g] = dict(rows=rows, mu=mu, sd=sd, kind=k, metric=rows[0]["metric"], family=family[g],
                          publisher=rows[0]["publisher"], task=rows[0]["task"], n_steps=n_steps)
+
+    # --- 4. one run, k measurements (rule same-run-weight, the maintainer, 10 Nov 2026): the rows the fit keeps that
+    # share a run id (the build's column `run`) weigh 1/k each: stan_data multiplies their variance by k
+    runs = collections.Counter(x["run"] for G in groups.values() for x in G["rows"] if x["run"])
+    for G in groups.values():
+        for x in G["rows"]:
+            x["k"] = runs[x["run"]] if x["run"] else 1
+    report["row sharing its run (weight 1/k)"] = sum(n for n in runs.values() if n > 1)
+    report["run with several rows"] = sum(1 for n in runs.values() if n > 1)
     return groups, report, sorted(republished)
 
 
@@ -403,7 +422,9 @@ def stan_data(groups, axis):
     data = dict(
         N=len(entries), G=len(names), C=len(couples), cost=int(axis == "cost"),
         grp=[b + 1 for b, _ in entries], cpl=[ci[x["couple"]] + 1 for _, x in entries],
-        z=[x["z"] for _, x in entries], h=[x["h"] for _, x in entries], d=[x["d"] for _, x in entries],
+        # a run's k rows weigh 1/k each: the row's whole variance (κ h² σ² + d²) × k (rule same-run-weight)
+        z=[x["z"] for _, x in entries], h=[x["h"] * math.sqrt(x.get("k", 1)) for _, x in entries],
+        d=[x["d"] * math.sqrt(x.get("k", 1)) for _, x in entries],
         ea=[x["ea"] for _, x in entries],
         L1=len(levels["pub_couple"]), L2=len(levels["pub_model"]), L3=len(levels["couple_task"]),
         k1=[lvl("pub_couple", x["publisher"], x["couple"], x["task"]) for _, x in entries],

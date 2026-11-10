@@ -3010,6 +3010,7 @@
     "cost-price-band",
     "uninformative-scores",
     "score-direction",
+    "same-run-weight",
     "configurations-per-model",
     "cost-method-unstated-single",
     "base-price-retired-last-list",
@@ -3227,6 +3228,9 @@
     "cost-currency-conversion": {
      "kind": "standing",
      "description": "a yuan cost of a model priced only in USD is converted only with the source's rate or the maker's USD prices it says it used; a reseller or silence: out (the maintainer, 4 Nov 2026, decision F)"
+    },
+    "same-run-weight": {
+     "description": "one run's k quality measurements weigh 1/k each (the maintainer, 10 Nov 2026)"
     }
    }
   },
@@ -3504,7 +3508,8 @@
     "only-metric",
     "standard",
     "judgment",
-    "metric-mean"
+    "metric-mean",
+    "run-share"
    ],
    "x-terms": {
     "designated": {
@@ -3527,6 +3532,9 @@
     },
     "metric-mean": {
      "description": "none of the above: the mean of the entry's same-scale metrics (29 Oct rule 4)"
+    },
+    "run-share": {
+     "description": "the source gives several quality measurements of the same runs (metrics, sub-scores, slices or aggregations of one execution): each enters, and a run's k measurements weigh 1/k each, one line together (rule same-run-weight; the maintainer, 10 Nov 2026); the setups of one run share a run_set"
     }
    }
   },

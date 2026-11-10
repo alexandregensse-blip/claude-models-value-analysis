@@ -1555,3 +1555,35 @@ No rule of the build changed.
   standard price, 1 / 5 / 0.05 $ per MTok, 30-minute and 12-hour writes 1.25 / 2.50, above 272K input tokens 2 / 7.5 /
   0.10 / 2.50 / 5.00: the post's release-day price (26 Oct), then the rendered pricing page (Wayback 27 Oct, 28 Oct,
   3 Nov) to the Markdown copy of 10 Nov. Its rows enter the fit by the existing rules.
+
+## Added on 10 Nov 2026 (integration 10: one run, k measurements — a method change, before main: the maintainer's yes)
+
+- **Rule `same-run-weight` (the maintainer, 10 Nov 2026).** When one source gives, for one run (one model, one
+  configuration, one execution), k quality measurements (task scores, rates, errors, each with its direction: metrics,
+  sub-scores, slices or aggregations of the same executions), they all enter the fit, each with weight 1/k: lqm
+  multiplies each row's noise variance by k (model/README.md), so that together they weigh as one row.
+- **One run, in the build** (§5.2 step 11, `run_ids`, after the group step): the measures in on quality of one source,
+  one model@configuration and one campaign whose setups share a `run_set` (benchmarks.json, a new setup field) are one
+  run. A setup held twice there means two runs: they are separated by the table row (the measures' model facts); when
+  the row does not separate them, nothing is grouped (doubt: runs possibly distinct; listed in the status report's
+  `run_doubts`). The run id is written in the new last column `run` of `fit-quality.csv` and `data.csv` (empty on the
+  cost axis, on a legacy row, on a measure alone in its run); lqm counts k among the rows it keeps (after the composite
+  and republication rules) and never takes two rows of one run for a republication of each other. A row without a run id
+  has k = 1. A setup without `run_set` is a run of its own: in doubt the integration did not group (« ne regroupe pas »).
+- **Headline basis `run-share`** (vocab.json): a pending setup (basis decision, no decision) whose only reason was that
+  the source gives several quality measurements of the same runs enters with its own metric (evidence: one of its
+  value cells). Integration 10 read the 937 pending setups whose measures pass steps 0–4 (4,901 measures): 414 →
+  run-share (3,805 measures; 371 with a run set), 523 kept pending with their reason appended to the note (a copy, a
+  behaviour / safety / security quantity, a count of calls, tokens, steps or actions, a latency or another system
+  quantity, a difference between conditions, a headline not proven on a legacy setup, a composite whose components
+  are held, a component left to the maintainer). 101 setups already headline (only-metric, judgment, ranked-by…) of
+  the same runs got the run set too (e.g. arXiv 2611.06135's p1 table: F1, precision, recall, MCC, TP of one detection
+  run). The per-setup list: the session's S/s7/integ10/logs/point1.log; the rules, S/s7/integ10/py/runsets.py.
+- **Not changed:** the non-headline metrics of setups whose headline is designated by the source, ranked by, judged
+  or decided by the maintainer (out:not-headline, « setup metric X, headline Y »: 1,225 measures) stay out — a question
+  for the maintainer; the cost axis (one cost per set of spend facts, as before).
+- **Checks:** precheck's « same runs under two metrics » warning skips two groups whose shared couples carry one run id
+  (declared). Tests: `same_run_weight` (a run of three measurements weighs as one row: variance × 3 on each, precisions
+  summing to one row's; negative control without the column: k = 1 and the identical costs taken for republications)
+  and `same_run_weight_build` (grouping, separation by the row, doubt, no run id for an out measure, another source or
+  a setup without run set).

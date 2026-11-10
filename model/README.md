@@ -75,6 +75,17 @@ any other → −y. A group without a setup (legacy rows) keeps its metric label
 keeps a setup without a known direction out (`out:direction-not-established`). Before 10 Nov 2026 the registry
 direction was not read: the `lower` groups were fitted as if higher were better.
 
+**One run, k measurements** (the maintainer, 10 Nov 2026, rule `same-run-weight`). When one source gives, for one run
+(one model, one configuration, one execution), k quality measurements — metrics, sub-scores, slices or aggregations of
+the same executions, each with its direction — all of them enter, each with weight 1/k: the row's whole noise variance
+is multiplied by k, `k_r · (κ_r h_r² σ_b² + d_r²)`, so that together they weigh as one row (with Gaussian noise, k rows
+of variance k·v carry the precision of one row of variance v). The build writes the run id in `fit-quality.csv`'s
+column `run` (data/BUILD.md: the measures of one source, one model@configuration and one campaign whose setups share a
+`run_set`); `lqm.load` counts k among the rows it keeps (after the composite and republication rules; rows of one run
+are never taken for republications of each other) and `stan_data` passes √k·h_r and √k·d_r, the row's scale in the
+likelihood — the one place where a row's weight enters it. The Stan programs are unchanged. A row without a run id has
+k = 1. Tests `same_run_weight` (with numpy) and `same_run_weight_build`.
+
 ## Run
 
 ```bash

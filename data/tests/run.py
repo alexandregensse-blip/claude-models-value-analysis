@@ -2442,6 +2442,98 @@ def ext_metric_open_and_judgment_basis():
 
 
 @test
+def same_run_weight():
+    """Rule same-run-weight (the maintainer, 10 Nov 2026): one run measured three ways (three metrics of one execution,
+    the build's column `run`) weighs as one row: each of its rows gets k = 3 and stan_data multiplies its variance by
+    3, so the three precisions sum to one row's; its rows are not taken for republications of each other (same cost).
+    Negative controls: the same table without the column has k = 1 and h passed unchanged (the run counts three
+    times) and drops rows as republished (needs numpy for stan_data: .stan/venv/bin/python)."""
+    import csv, tempfile, types
+    sys.path.insert(0, os.path.join(DATA, "..", "model"))
+    import lqm
+    head = ["group", "source", "model", "effort", "task_type", "complexity", "harness", "unit", "cost_usd", "cost_prec",
+            "tokens_in", "tokens_out", "score", "score_metric", "score_prec", "cached_pct", "confound", "ref", "run"]
+    vals = {"ma": (60.0, 0.30, 12.0), "mb": (45.0, 0.40, 9.0), "mc": (30.0, 0.55, 7.0), "md": (52.0, 0.45, 8.0)}
+    d = tempfile.mkdtemp(prefix="lqm-run-")
+    try:
+        def table(with_run):
+            p = os.path.join(d, f"fit-quality-{int(with_run)}.csv")
+            with open(p, "w", newline="") as f:
+                w = csv.writer(f)
+                w.writerow(head if with_run else head[:-1])
+                for m, (s1, s2, cost) in vals.items():
+                    for g, v, met in (("g1", s1, "pass%"), ("g2", s2, "F1"), ("g3", s1 + 5, "acc%")):
+                        run = [f"src|set|{m}@high|"] if with_run else []
+                        w.writerow([g, "pubA", m, "high", "coding", "", "h", "per-task", cost, "", "", "", v, met, "", "",
+                                    "", "r"] + run)
+            return p
+        G1, rep1, _ = lqm.load(table(True), set(vals))
+        G0, rep0, _ = lqm.load(table(False), set(vals))
+        ks = sorted({x["k"] for G in G1.values() for x in G["rows"]})
+        eq((ks, len([x for G in G1.values() for x in G["rows"]]), rep1["republished row"]), ([3], 12, 0),
+           "every row of a three-measurement run has k = 3; all 12 rows kept (none taken for a republication)")
+        eq((sorted({x.get("k", 1) for G in G0.values() for x in G["rows"]}), rep0["republished row"] > 0), ([1], True),
+           "negative control: without the column, k = 1 and identical costs make republications")
+        try:
+            import numpy  # noqa: F401
+        except ImportError:
+            raise AssertionError("SKIP: the variance check needs numpy (run with .stan/venv/bin/python)")
+        sd = lqm.stan_data(G1, "quality")[0]
+        names = sorted(G1)
+        rows = [(g, x) for g in names for x in G1[g]["rows"]]
+        prec = collections.defaultdict(float)
+        for i, (g, x) in enumerate(rows):
+            sig = 1.0                                                      # one σ for every group: the weight alone
+            var1 = (sig * x["h"]) ** 2 + x["d"] ** 2
+            varS = (sig * sd["h"][i]) ** 2 + sd["d"][i] ** 2
+            eq(round(varS / var1, 9), 3.0, f"row {g} {x['couple']}: variance × k")
+            prec[x["couple"]] += 1 / varS * var1                          # in units of one row's precision
+        eq({c: round(v, 9) for c, v in prec.items()}, {f"{m}@high": 1.0 for m in vals},
+           "the run's three rows weigh as one row (precisions sum to 1)")
+        sd0 = lqm.stan_data(G0, "quality")[0]
+        rows0 = [(g, x) for g in sorted(G0) for x in G0[g]["rows"]]
+        eq(all(abs(sd0["h"][i] - x["h"]) < 1e-12 for i, (g, x) in enumerate(rows0)), True,
+           "negative control: without runs, h is passed unchanged (each row counts once: the run three times)")
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+
+
+@test
+def same_run_weight_build():
+    """Rule same-run-weight, the build's grouping (run_ids): one source's model@configuration and campaign over the
+    setups of one run_set is one run; a setup held twice is separated by the table row (model facts); when the row does
+    not separate it, no grouping (doubt). Negative controls: an out measure, another source, a setup without run_set
+    get no run id."""
+    import types
+    import build as B_
+    class Mx:
+        def __init__(self, ref, setup_id, run_set, model, rowfacts, status="in", src="S1", camp=""):
+            self.ref, self.setup_id, self.campaign = ref, setup_id, camp
+            self.setup = {"run_set": run_set} if run_set else {}
+            self.status = {"quality": status}
+            self.S = types.SimpleNamespace(id=src)
+            self.fields = {"model": {"value": model}, "configuration": {"value": "high"}}
+            self.m = {"facts": {"model": rowfacts}}
+            self.rules = set()
+        def rule(self, r):
+            self.rules.add(r)
+    ctx = types.SimpleNamespace(run_doubts=[])
+    ms = [Mx("S1#M1", "a", "R", "ma", ["F1"]), Mx("S1#M2", "b", "R", "ma", ["F1"]), Mx("S1#M3", "c", "R", "ma", ["F1"]),
+          Mx("S1#M4", "a", "R", "mb", ["F2"]), Mx("S1#M5", "a", "R", "mb", ["F3"]), Mx("S1#M6", "b", "R", "mb", ["F2"]),
+          Mx("S1#M7", "b", "R", "mb", ["F3"]),
+          Mx("S1#M8", "a", "R", "mc", ["F4"]), Mx("S1#M9", "a", "R", "mc", ["F4"]), Mx("S1#M10", "b", "R", "mc", ["F4"]),
+          Mx("S1#M11", "a", "R", "md", ["F5"]), Mx("S1#M12", "b", "R", "md", ["F5"], status="out:single-couple"),
+          Mx("S2#M1", "b", "R", "ma", ["F1"], src="S2"), Mx("S1#M13", "x", None, "ma", ["F1"])]
+    B_.run_ids(ctx, ms)
+    run = {M.ref: M.run for M in ms}
+    eq(len({run[r] for r in ("S1#M1", "S1#M2", "S1#M3")}) == 1 and run["S1#M1"] != "", True, "one source, one couple, one run set: one run")
+    eq((run["S1#M4"] == run["S1#M6"] != run["S1#M5"] == run["S1#M7"]), True, "a setup held twice: separated by the table row")
+    eq((run["S1#M8"], run["S1#M9"], run["S1#M10"], len(ctx.run_doubts)), ("", "", "", 1), "not separated by the row: not grouped (doubt)")
+    eq((run["S1#M11"], run["S2#M1"], run["S1#M13"]), ("", "", ""), "an out measure, another source, a setup without run set: no run")
+    eq("same-run-weight" in ms[0].rules, True, "the rule is recorded")
+
+
+@test
 def lqm_configurations_kept():
     """lqm.load keeps the configurations the build writes (nothink, minimal, think, solo and the levels) and not an
     unknown one; negative control: with the filter of before the change (levels and solo only) the same file loses the
@@ -2715,6 +2807,29 @@ def local_time_no_zone():
     eq((V.digits_agree("2026-10-11T14:32:46", "14:32:46 (2026-10-11)"),
         V.digits_agree("2026-10-11T14:32:47", "14:32:46 (2026-10-11)")), (True, False),
        "a time written before its date; negative: another second")
+
+
+@test
+def validator_other_date_forms():
+    """Integration 10 (10 Nov 2026): validate.py checks the run dates written as a day-first date (day above 12), a span
+    of months, a day without its year (the year in the fact's note) and a Turkish month; negative controls: another
+    day, another month, the year missing from the note, an ambiguous day-first date."""
+    pos = [("2026-09-22", "22/09/2026"), ("2026-09-01", "September–October 2026"), ("2026-10-31", "September–October 2026"),
+           ("2026-05-01", "between May and July 2026"), ("2026-07-31", "May–July 2026"), ("2026-09-29", "9月29日"),
+           ("2026-09-29", "29 September"), ("2026-09-23", "September 23"), ("2026-09-18T02:36", "18 September, 02:36 UTC"),
+           ("2026-09-28", "28 Eylül 2026")]
+    neg = [("2026-09-21", "22/09/2026"), ("2026-10-01", "September–October 2026"), ("2026-09-28", "9月29日"),
+           ("2026-09-18T03:36", "18 September, 02:36 UTC"), ("2026-08-28", "28 Eylül 2026"), ("2026-03-04", "04/03/2026"),
+           ("2026-06-30", "May–July 2026")]
+    eq([V.digits_agree(v, w) for v, w in pos], [True] * len(pos), "the forms read")
+    eq([V.digits_agree(v, w) for v, w in neg], [False] * len(neg), "negative: another day / month / time, an ambiguous date")
+    class Rep:
+        def __init__(self): self.errs = []
+        def err(self, where, msg): self.errs.append(msg)
+    r = Rep()
+    V.check_written({"value": "2026-09-29", "written": "9月29日", "note": "year 2026 from the post's date"}, "F", r)
+    V.check_written({"value": "2026-09-29", "written": "9月29日"}, "F", r)
+    eq(len(r.errs), 1, "a day without its year: the note must give the year (negative: no note)")
 
 
 @test
