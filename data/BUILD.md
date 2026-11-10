@@ -1530,3 +1530,8 @@ No rule of the build changed.
   across Sonnet and all three Qwen3.5 sizes on both benchmarks (Table 12) », new fact F436): same role (the reader),
   the study's own runs. As for Table 1 (integration 5), the cell leaves the model slot of the 10 Table 12 Sonnet
   measures (kept as a fact, with a note); the model is F5 → sonnet-4.5.
+- **Decision D37 (decision d): the publisher's own effort hypothesis is out.** Every row where the publisher writes its
+  own assumption of the effort goes out on both axes. Read in every copy of Epoch's CSVs on disk (their Notes column):
+  only Epoch writes one (« Assuming medium reasoning effort », « Assuming medium based on GPT-5 being run at medium. »,
+  « Medium thinking used in other GPT-5 evaluations, assuming the same here. », « Assuming default thinking token
+  budget »…), and of its 21 such rows only geobench o1-2024-12-17_medium (4 Nov snapshot, 2 measures) is converted.
