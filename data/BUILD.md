@@ -1508,3 +1508,25 @@ No rule of the build changed.
   « few » (5) name no number: out on both axes.
 - The relecture of Epoch 18 Oct (decision 5) corrected findings only (gso Evaluation date, surface-evolver cost and
   tokens, budgets the Notes state exactly); its log is the session's S/s6/integ5/RELECTURE.md.
+
+## Added on 10 Nov 2026 (integration 8, the maintainer's decisions of 10 Nov)
+
+No rule of the build changed.
+- **models.json and prices.json prolonged to 10 Nov (decisions a and b).** The method of the route records (integration
+  5): the records ending at the 29 Oct capture (`last-capture`) whose 29 Oct quotes are found again in today's copy of
+  the same page are extended to 2026-11-10, one evidence per quote (saved copies: /work/.salvo14/mig/s6/ev/integ8/,
+  SHA256SUMS). Google's pages (pricing, flex, batch, deprecations, Gemini 3 guide) are now script shells: their
+  Markdoc copies (…/X.md.txt → aistudio.google.com/docs/X.md) are read as text (tags, bullets and rules dropped).
+  A page reworded with the same content (same model, same levels, same price) extends the record with the new quote
+  (decision b), read by hand: 27 price records (Claude Fable 5 / 5.1 rows, OpenAI's gpt-5.3-codex row with two new
+  write columns, Alibaba's « No free quota », Gemini blocks whose copy writes « <= 200k tokens », Inception, StepFun,
+  MiniMax and Meta pages read as live text). models.json: 261 of 262 extended; prices.json: 245 of 257 extended,
+  `as_of` 2026-11-10. Changed content is a new record: 10 OpenRouter prices changed since 29 Oct get records from the
+  9 Nov capture (integration 5) to 10 Nov; the old ones end on 29 Oct. Left at 29 Oct: gemini-3.1-flash-lite's default
+  (the model is no longer in the thinking-level tables) and Claude Haiku 3.5's prices (the row is gone).
+- **arXiv 2609.29933, Table 12's « Sonnet » (decision c).** The text introduces the study's readers (« Our readers are
+  Claude Sonnet 4.5, served through a hosted API, and the open-weight Qwen3.5-{4B, 9B, 27B}, served locally », F5) and
+  runs Table 12 on those same readers (« We sweep the number of retrieved pages k for the ColQwen2.5 image retriever
+  across Sonnet and all three Qwen3.5 sizes on both benchmarks (Table 12) », new fact F436): same role (the reader),
+  the study's own runs. As for Table 1 (integration 5), the cell leaves the model slot of the 10 Table 12 Sonnet
+  measures (kept as a fact, with a note); the model is F5 → sonnet-4.5.
