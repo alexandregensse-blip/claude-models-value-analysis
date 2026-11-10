@@ -403,6 +403,21 @@ def digits_agree(value, written):
         # written one; a range written without its year takes the year from the fact's note (checked beside)
         y, mo, d = (int(x) for x in str(value).split("-"))
         return (mo, d) in mr[1] and (mr[0] is None or y == mr[0])
+    iso = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})(?:T(\d{2}):(\d{2})Z?)?", str(value))
+    other = other_date(written)
+    if iso and other:
+        # integration 10 (10 Nov 2026): a day-first date ('22/09/2026', the day above 12), a span of months
+        # ('September–October 2026', 'between May and July 2026': the first day of the first month or the last day of
+        # the last), a day written without its year ('9月29日', '29 September', 'September 23', '18 September, 02:36
+        # UTC'; the year from the note, checked beside), a Turkish month ('28 Eylül 2026')
+        y, mo, d = int(iso.group(1)), int(iso.group(2)), int(iso.group(3))
+        kind, a = other
+        if kind == "date":
+            return (y, mo, d) == a[:3] and (iso.group(4) is None or a[3] is None or
+                                            (int(iso.group(4)), int(iso.group(5))) == a[3])
+        if kind == "span":
+            return y == a[0] and ((mo, d) == (a[1], 1) or (mo, d) == (a[2], calendar.monthrange(y, a[2])[1]))
+        return (mo, d) == a[:2] and (iso.group(4) is None or a[2] is None or (int(iso.group(4)), int(iso.group(5))) == a[2])
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d+)?)?Z?)?", str(value)):
         # an ISO date / time read from a date as written ('2026年9月30日', '2026-08-19 22:13 UTC'): its numbers, in
         # order and contiguous, among the written text's numbers (zero padding and separators aside; 3 Nov 2026); the
@@ -432,6 +447,44 @@ MONTHS = {m: i + 1 for i, m in enumerate("january february march april may june 
                                           "november december".split())}
 
 
+TR_MONTHS = {"ocak": 1, "şubat": 2, "mart": 3, "nisan": 4, "mayıs": 5, "haziran": 6, "temmuz": 7, "ağustos": 8,
+             "eylül": 9, "ekim": 10, "kasım": 11, "aralık": 12}
+
+
+def _month(name):
+    full = [k for k in MONTHS if k.startswith(name)] if len(name) >= 3 else []
+    return MONTHS[full[0]] if len(full) == 1 else TR_MONTHS.get(name)
+
+
+def other_date(written):
+    """Integration 10 (10 Nov 2026): the date forms digits_agree checks beside month_date and month_range.
+    ('date', (y, m, d, (h, min) or None)) for a day-first date whose day is above 12 ('22/09/2026': not ambiguous) or a
+    Turkish month ('28 Eylül 2026'); ('span', (y, m1, m2)) for a span of months ('September–October 2026', 'between May
+    and July 2026'); ('noyear', (m, d, (h, min) or None)) for a day written without its year ('9月29日', '29 September',
+    'September 23', '18 September, 02:36 UTC'); None otherwise."""
+    w = str(written).strip().lower()
+    m = re.fullmatch(r"(\d{1,2})/(\d{1,2})/(\d{4})", w)
+    if m and int(m.group(1)) > 12 and 1 <= int(m.group(2)) <= 12:
+        return "date", (int(m.group(3)), int(m.group(2)), int(m.group(1)), None)
+    m = re.fullmatch(r"(\d{1,2})\s+(\w+)\s+(\d{4})", w)
+    if m and m.group(2) in TR_MONTHS:
+        return "date", (int(m.group(3)), TR_MONTHS[m.group(2)], int(m.group(1)), None)
+    m = re.fullmatch(r"(?:between\s+)?([a-z]{3,9})\s*(?:–|-|to|and)\s*([a-z]{3,9}),?\s+(\d{4})", w)
+    if m and _month(m.group(1)) and _month(m.group(2)) and _month(m.group(1)) < _month(m.group(2)):
+        return "span", (int(m.group(3)), _month(m.group(1)), _month(m.group(2)))
+    m = re.fullmatch(r"(\d{1,2})月(\d{1,2})日", w)
+    if m:
+        return "noyear", (int(m.group(1)), int(m.group(2)), None)
+    tm = r"(?:,?\s+(\d{1,2}):(\d{2})\s*utc)?"
+    m = re.fullmatch(r"(\d{1,2})\s+([a-z]{3,9})" + tm, w)
+    if m and _month(m.group(2)):
+        return "noyear", (_month(m.group(2)), int(m.group(1)), (int(m.group(3)), int(m.group(4))) if m.group(3) else None)
+    m = re.fullmatch(r"([a-z]{3,9})\s+(\d{1,2})" + tm, w)
+    if m and _month(m.group(1)):
+        return "noyear", (_month(m.group(1)), int(m.group(2)), (int(m.group(3)), int(m.group(4))) if m.group(3) else None)
+    return None
+
+
 def month_date(written):
     """(year, month, day or None) of a date written with a month name and nothing else ('Oct 3, 2026', '3 October
     2026', 'December 2025', 'sampled' or 'dated' allowed before it); None for any other text."""
@@ -459,7 +512,8 @@ def check_written(f, F, rep):
         if not digits_agree(f["value"], f["written"]):
             rep.err(F, f"the value {f['value']!r} does not agree with the digits of {f['written']!r}")
         mr = month_range(f["written"])
-        if mr and mr[0] is None and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(f["value"])) \
+        od = other_date(f["written"])
+        if (mr and mr[0] is None or od and od[0] == "noyear") and re.match(r"\d{4}-\d{2}-\d{2}", str(f["value"])) \
                 and str(f["value"])[:4] not in (f.get("note") or ""):
             rep.err(F, f"a range written without its year ({f['written']!r}): the note says where the year "
                        f"{str(f['value'])[:4]} comes from")
