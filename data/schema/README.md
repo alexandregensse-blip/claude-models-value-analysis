@@ -224,6 +224,10 @@ registry review's must-fix items fixed (/work/.salvo14/mig/registry-fix/report.m
   the agent's normalized reading (12.5, 0.51, max). The quote must contain `written`, and a number's significant
   digits must agree with it (validate.py `digits_agree`). The build takes the reading as is (no decimal-comma re-read).
   The agents read the values; the code does not learn each source's notation (the maintainer, 29 Oct).
+  A run-start / run-end read from a range of days with its month ('22–26 Oct', 'between October 4 and 25, 2026',
+  '10-01–10-11') is one end of the range; a range written without its year takes the year from the fact's `note`,
+  which must give it and say where it comes from (the measured model's release; the maintainer's decision 2,
+  integration 7, 10 Nov 2026; `month_range`, `check_written`).
 - Fact type `quantized-build` (slot model): the model ran as a quantized build ('~Q4 quantization', GGUF, an Ollama
   tag); the build takes the model out (another artefact).
 - Rule `metric-mean` for a computed score: the mean of an entry's same-scale metrics, when the source designates no
