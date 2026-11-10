@@ -396,6 +396,13 @@ def digits_agree(value, written):
         if md[2]:
             return d == md[2]
         return d == 1 or d == calendar.monthrange(y, mo)[1]
+    mr = month_range(written)
+    if mr and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(value)):
+        # a range of days written with its month ('22–26 Oct', '16–24 October', 'between October 4 and 25, 2026',
+        # '10-01–10-11'; integration 7, 10 Nov 2026): the date's month and day are one end of the range, its year the
+        # written one; a range written without its year takes the year from the fact's note (checked beside)
+        y, mo, d = (int(x) for x in str(value).split("-"))
+        return (mo, d) in mr[1] and (mr[0] is None or y == mr[0])
     if re.fullmatch(r"\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2}(\.\d+)?)?Z?)?", str(value)):
         # an ISO date / time read from a date as written ('2026年9月30日', '2026-08-19 22:13 UTC'): its numbers, in
         # order and contiguous, among the written text's numbers (zero padding and separators aside; 3 Nov 2026); the
@@ -441,6 +448,47 @@ def month_date(written):
     if len(full) != 1:
         return None
     return int(year), MONTHS[full[0]], int(day) if day else None
+
+
+def check_written(f, F, rep):
+    """A fact's value against its written text (or its quote): the digits agree, the written text is quoted; a range
+    written without its year has a note giving the year (integration 7, 10 Nov 2026)."""
+    if f.get("written"):                             # the agent's reading beside the text as written (29 Oct)
+        if f.get("quote") and norm(f["written"]) not in norm(f["quote"]):
+            rep.err(F, f"the quote does not contain the written text {f['written']!r}")
+        if not digits_agree(f["value"], f["written"]):
+            rep.err(F, f"the value {f['value']!r} does not agree with the digits of {f['written']!r}")
+        mr = month_range(f["written"])
+        if mr and mr[0] is None and re.fullmatch(r"\d{4}-\d{2}-\d{2}", str(f["value"])) \
+                and str(f["value"])[:4] not in (f.get("note") or ""):
+            rep.err(F, f"a range written without its year ({f['written']!r}): the note says where the year "
+                       f"{str(f['value'])[:4]} comes from")
+    elif f.get("quote") and norm(f["value"]) not in norm(f["quote"]):
+        rep.err(F, f"the quote does not contain the value {f['value']!r}")
+
+
+def month_range(written):
+    """(year or None, [(month, first day), (month, last day)]) of a range of days written with its month and nothing
+    else: '22–26 Oct', '16–24 October', 'Oct 2-3', 'between October 4 and 25, 2026', '10-01–10-11' (month-day); None
+    for any other text."""
+    w = re.sub(r"^\s*(?:between|from)\s+", "", str(written).strip().lower())
+    sep = r"\s*(?:–|-|to|and)\s*"
+    m = re.fullmatch(r"(\d{1,2})" + sep + r"(\d{1,2})\s+([a-z]{3,9})\.?(?:,?\s+(\d{4}))?", w)
+    if m:
+        d1, d2, mon, y = m.group(1), m.group(2), m.group(3), m.group(4)
+    else:
+        m = re.fullmatch(r"([a-z]{3,9})\.?\s+(\d{1,2})" + sep + r"(\d{1,2})(?:,?\s+(\d{4}))?", w)
+        if m:
+            mon, d1, d2, y = m.group(1), m.group(2), m.group(3), m.group(4)
+        else:
+            m = re.fullmatch(r"(\d{2})-(\d{2})\s*[–-]\s*(\d{2})-(\d{2})", w)
+            if not m or not (1 <= int(m.group(1)) <= 12 and 1 <= int(m.group(3)) <= 12):
+                return None
+            return None, [(int(m.group(1)), int(m.group(2))), (int(m.group(3)), int(m.group(4)))]
+    full = [k for k in MONTHS if k.startswith(mon)]
+    if len(full) != 1 or int(d1) > int(d2):
+        return None
+    return (int(y) if y else None), [(MONTHS[full[0]], int(d1)), (MONTHS[full[0]], int(d2))]
 
 
 NUMBER_WORDS = {w: i for i, w in enumerate(
@@ -957,13 +1005,7 @@ def check_source(src, path, reg, rep, schemas, vocab, check_files, all_ids):
             rep.err(F, f"chart {f['chart']} not defined")
         if forms.get(f["form"], {}).get("quote") and not f.get("quote"):
             rep.err(F, f"a {f['form']} fact needs a quote")
-        if f.get("written"):                             # the agent's reading beside the text as written (29 Oct)
-            if f.get("quote") and norm(f["written"]) not in norm(f["quote"]):
-                rep.err(F, f"the quote does not contain the written text {f['written']!r}")
-            if not digits_agree(f["value"], f["written"]):
-                rep.err(F, f"the value {f['value']!r} does not agree with the digits of {f['written']!r}")
-        elif f.get("quote") and norm(f["value"]) not in norm(f["quote"]):
-            rep.err(F, f"the quote does not contain the value {f['value']!r}")
+        check_written(f, F, rep)
         if f.get("quote") and (f.get("file") or "").lower().endswith(".pdf"):
             rep.err(F, "a quote in a PDF points at its text extraction (extractions), where it can be checked"
                        + (f": {extracted[f['file']]}" if f.get("file") in extracted else ""))

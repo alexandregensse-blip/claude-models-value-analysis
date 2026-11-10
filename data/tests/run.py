@@ -2808,6 +2808,43 @@ def date_written_with_a_month_name():
 
 
 @test
+def date_range_written_without_year():
+    # « 22–26 Oct » (ReplayRCA Table 14), « Gemini 4 Argon, 16–24 October », « 10-01–10-11 », « between October 4 and
+    # 25, 2026 » (integration 7, 10 Nov 2026, the maintainer's decision 2): a run-start / run-end is one end of the
+    # range; a range without its year takes it from the fact's note, which must say it. Negative controls: a day
+    # inside the range, another month, another written year, a reversed range, a fact whose note does not give the year
+    import sys as _s
+    _s.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "schema"))
+    import validate as V
+    eq((V.digits_agree("2026-10-22", "22–26 Oct"), V.digits_agree("2026-10-26", "22–26 Oct"),
+        V.digits_agree("2026-10-24", "16–24 October"), V.digits_agree("2026-10-04", "between October 4 and 25, 2026"),
+        V.digits_agree("2026-10-11", "10-01–10-11")), (True,) * 5, "an end of the range")
+    eq((V.digits_agree("2026-10-24", "22–26 Oct"), V.digits_agree("2026-11-22", "22–26 Oct"),
+        V.digits_agree("2025-10-04", "between October 4 and 25, 2026"), V.month_range("26–22 Oct"),
+        V.month_range("13-14 Octopus")), (False, False, False, None, None),
+       "negative: a middle day, another month, another written year, reversed, not a month")
+
+    class Rep:
+        def __init__(self):
+            self.errors = []
+
+        def err(self, where, msg):
+            self.errors.append(msg)
+
+        def warn(self, where, msg):
+            pass
+    fact = lambda note: {"id": "F1", "says": "run-start", "value": "2026-10-22", "written": "22–26 Oct",  # noqa: E731
+                         "quote": "Diagnoser GPT-6.1 Sol 22–26 Oct", "level": "written", "form": "table-cell",
+                         "where": "Table 14", "note": note}
+    msgs = []
+    for note in ("the year 2026: GPT-6.1 Sol was released on 2026-09-29", "the year is the release year"):
+        r = Rep()
+        V.check_written(fact(note), "src F1", r)
+        msgs.append([m for m in r.errors if "without its year" in m])
+    eq((msgs[0], len(msgs[1])), ([], 1), "the note gives the year; negative: it does not")
+
+
+@test
 def count_written_in_words():
     # « earned one badge » / « earned four badges » are written as 1 and 4 (integration 6 of salvo s6, 9 Nov 2026): the
     # digit check reads the number word; negative controls: another number, a word that is no number
