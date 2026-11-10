@@ -403,7 +403,7 @@
   {
    "id": "same-run-weight",
    "kind": "standing",
-   "statement": "When one source gives, for one run (one model, one configuration, one execution), k quality measurements (task scores, rates, errors, each with its direction; metrics, sub-scores, slices or aggregations of the same executions), all of them enter the fit, each with weight 1/k: lqm multiplies the row's noise variance by k, so that together they weigh as one row. One run = the measures of one source, one model, one configuration and one campaign whose setups share a run_set (benchmarks.json); a setup held twice there is separated by the table row (the model facts), and when that does not separate it the measures are not grouped (doubt: runs possibly distinct). k counts the run's rows that lqm keeps (after the composite and republication rules). Counts of calls, tokens, steps, latencies and durations are not quality measurements; behaviour, safety and system quantities stay out; a copy follows the republication rule; a composite whose components are held follows the composite rule first.",
+   "statement": "When one source gives, for one run (one model, one configuration, one execution), k quality measurements (task scores, rates, errors, each with its direction; metrics, sub-scores, slices or aggregations of the same executions), all of them enter the fit, each with weight 1/k: lqm multiplies the row's noise variance by k, so that together they weigh as one row. One run = the measures of one source, one model, one configuration and one campaign whose setups share a run_set (benchmarks.json); a setup held twice there is separated by the table row (the model facts), and when that does not separate it the measures are not grouped (doubt: runs possibly distinct). k counts the run's rows that lqm keeps (after the composite and republication rules). Counts of calls, tokens, steps, latencies and durations are not quality measurements; behaviour, safety and system quantities stay out; a copy follows the republication rule; a composite whose components are held follows the composite rule first. Extended on 10 Nov 2026 (the maintainer, decisions a and b): (a) a metric the source leaves non-headline because it designates or ranks by another metric of the same runs enters too, run-share, weight 1/k (except the maintainer's decisions D3, D5, D6, D7); so does a metric of a table whose headline was only judged; (b) the components of a table without a declared composite enter with its final score, all of one run, each 1/k (the composite rule needs a declared composite).",
    "inputs": [
     "setup run_set",
     "setup headline basis run-share",
@@ -413,7 +413,7 @@
    "output": "fit-quality.csv column run; lqm k per row (variance × k)",
    "date": "2026-11-10",
    "decided_by": "the maintainer",
-   "ref": "data/BUILD.md (integration 10); model/README.md; docs/METHODOLOGY.md §5"
+   "ref": "data/BUILD.md (integration 10); model/README.md; docs/METHODOLOGY.md §5; data/BUILD.md (integration 11)"
   },
   {
    "id": "configurations-per-model",
@@ -660,6 +660,19 @@
    "date": "2026-11-04",
    "decided_by": "the maintainer (decision F, 4 Nov 2026)",
    "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices)"
+  },
+  {
+   "id": "f1-not-components",
+   "kind": "standing",
+   "statement": "When a table gives an F1 and its components precision and recall for the same run, the F1 alone enters the fit; the precision and the recall stay out (headline pending), noted in their setups. Precision or recall reported without an F1 is not concerned.",
+   "inputs": [
+    "setup headline",
+    "the F1 setup of the same table, row and slice"
+   ],
+   "output": "precision / recall setups: headline basis decision, no decision (out:not-headline)",
+   "date": "2026-11-10",
+   "decided_by": "the maintainer",
+   "ref": "data/BUILD.md (integration 11)"
   }
  ]
 }

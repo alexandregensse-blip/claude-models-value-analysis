@@ -1587,3 +1587,32 @@ No rule of the build changed.
   summing to one row's; negative control without the column: k = 1 and the identical costs taken for republications)
   and `same_run_weight_build` (grouping, separation by the row, doubt, no run id for an out measure, another source or
   a setup without run set).
+
+## Added on 10 Nov 2026 (integration 11: the maintainer's decisions a, b, c on the rule same-run-weight)
+
+- **Label errors (point 1).** precheck stopped on four values outside the bound their metric label states. Read from
+  the sources: arXiv 2610.26538's Table 2 « Δ = both photos − baseline, MAE% points » is a difference between two
+  conditions (t2-d-before-c-left pending, as its siblings since integration 10) and its Table 5 « Mean = mean of day %
+  errors » a signed error, closer to zero better (t5-mean-day-error-* pending: no direction); the difference and signed
+  metrics are relabelled without « % » (a label with « % » reads as bounded on 0–100, `lqm.bound`). The Table 4 error
+  decomposition (t4-median-offset, t4-offset-meals) was in the fit as a score: pending. BenchLM's AA-Omniscience Index
+  is signed (« -50.9% »): metric `omniscience-index (points)`, no bounds. Directions contradicted by the metric's own
+  label (« Hallucination Rate », « …-lower-better », « fail-rate-pct-LOWER-IS-BETTER », « frames-lower-better ») set to
+  lower (BenchLM's AA-Omniscience hallucination rows, soc-t1a / soc-t1b, rt-v1.1-audio-proofread, dpbench-*,
+  coleam00-k3-trap-reliability, speedrunbench-pokemon-badge1).
+- **a (the maintainer, 10 Nov 2026).** The metrics that integration 10 left out (« setup metric X, headline Y »: the
+  source designates or ranks by another metric of the same runs) enter with headline basis `run-share`, weight 1/k,
+  in the run set of the setup holding the designated metric in the same source (found by source, couple and metric,
+  the closest setup id; one fixed by hand); except the decisions D3, D5, D6, D7 (OckBench's OckScore, Context Arena's
+  AUC@1M / average / overall_score). A table whose headline was only judged (several metrics, « the first metric is
+  assumed ») is read the same way. Kept out with their reason in the note: copies, behaviour / safety / system
+  quantities, counts, differences (the integration 10 rules). Applied to the setups with measures reaching the
+  headline step; the old headline (basis, metric) is written in the note, its evidence kept.
+- **b.** The components of a table without a declared composite enter with its final score, all of one run, each 1/k:
+  HABIT-Bench (arXiv 2610.24520, four domains and the macro, one run set per memory system), Book QA (arXiv 2611.00244,
+  four datasets and the micro average, both conversions of Table 1, one run set per condition), Claude Battle (S, P and
+  Final), Vals Index 2.2 and its Code Migration component.
+- **c, rule `f1-not-components`.** When a table gives an F1 and its components precision and recall for the same run,
+  the F1 alone enters; precision and recall are pending (out:not-headline), noted (arXiv 2611.06135 p1 / p2 / t5 / t5-rr,
+  2611.00340 s14 / s17, 2611.02826, 2611.02484 t3, 2610.37797, 2610.37459).
+- Lists: the session's S/s7/integ11/logs/point1.log, point2.log; scripts S/s7/integ11/py/.
