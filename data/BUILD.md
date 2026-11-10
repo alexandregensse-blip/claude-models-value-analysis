@@ -1546,3 +1546,12 @@ No rule of the build changed.
   Supplementary Tables S2 (52 rows), S7 (26), S12 (27), S14 (13) and S33 (15): 487 measures, 86 new setups (headline
   pending), the lot's rules (Table 1 cells not repeated: S2 main-set B_u rejected and solved, S12 main-set B_u calls
   without an answer, S14 B_u first runs; run dates from Supplementary Table S1; effort « high » for every model).
+- **GPT-6.1 Terra in the fit's catalogue.** data/catalog/models.json gains gpt-6.1-terra (after gpt-6.1-sol-pro). Its
+  models.json record (key of integration 6) is completed from the copies we hold: the API id gpt-6.1-terra (changelog
+  « Oct 26 », the OpenAI post, the model page), the OpenRouter id openai/gpt-6.1-terra (captures of 9 and 10 Nov), the
+  configurations nothink, low, medium, high, xhigh and max from release (the model page: « `reasoning.effort` supports
+  `none`, `low`, `medium` (default), `high`, `xhigh`, and `max`. »; Markdown copy of 10 Nov) and the default medium from
+  that capture only (no earlier copy of the model page; the Wayback Machine was offline). prices.json: the maker's
+  standard price, 1 / 5 / 0.05 $ per MTok, 30-minute and 12-hour writes 1.25 / 2.50, above 272K input tokens 2 / 7.5 /
+  0.10 / 2.50 / 5.00: the post's release-day price (26 Oct), then the rendered pricing page (Wayback 27 Oct, 28 Oct,
+  3 Nov) to the Markdown copy of 10 Nov. Its rows enter the fit by the existing rules.
