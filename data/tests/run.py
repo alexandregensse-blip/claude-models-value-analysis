@@ -3256,7 +3256,7 @@ def registry_prices_4nov_later():
             ("qwen3-coder-30b-a3b-instruct", "USD"): ("2025-07-31T07:04:55Z", "release")}
     for (k, cur), w in want.items():
         eq(g(k, cur)[0][::2], w, f"{k} {cur}")
-    eq([x[:2] for x in g("step-3.7-flash")], [("2026-05-29", "2026-10-29")], "4 + I: one USD entry 29 May → 29 Oct")
+    eq([x[:2] for x in g("step-3.7-flash")], [("2026-05-29", "2026-11-10")], "4 + I: one USD entry 29 May → 10 Nov (prolonged by integration 8)")
     eq(g("step-3.7-flash", "CNY")[0][1], "2026-10-21", "4: CNY to its last capture")
     eq([g(k)[0][0] for k in ("kimi-k2.5", "qwen3.8-27b", "grok-3", "grok-2-1212")],
        ["2026-01-29", "2026-08-31", "2025-04-10", "2025-04-10"], "negative 3: the page lists the model when priced (blocks A)")
