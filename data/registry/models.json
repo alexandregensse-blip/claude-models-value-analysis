@@ -65240,7 +65240,7 @@
    ],
    "conversions": [],
    "modes": [],
-   "note": "Gemini 2.5 Pro: thinking cannot be disabled (no nothink). Until the guide of 17 Jun 2026 the only control is thinkingBudget (128 to 32768; unset or -1 = dynamic thinking, the default): configurations think (dynamic) and think-<budget> (budget_min 128, budget_max 32768), a budget, not a level. The guide captured 22 Jun 2026 (the capture of 17 Jun 2026 07:49 still has the budget table) replaces it with 'Controlling thinking': gemini-2.5-pro, default thinking On, levels low, medium, high; levels are recorded from 22 Jun 2026. The same default (dynamic thinking = On) runs from the stable release (17 Jun 2025) to the capture of 23 Oct 2026, through the rewording of the page between 17 and 22 Jun 2026. No document says that thinkingBudget stopped being accepted, so think and think-<budget> stay open. Release from the changelog; name open (not deprecated)."
+   "note": "Gemini 2.5 Pro: thinking cannot be disabled (no nothink). Until the guide of 17 Jun 2026 the only control is thinkingBudget (128 to 32768; unset or -1 = dynamic thinking, the default): configurations think (dynamic) and think-<budget> (budget_min 128, budget_max 32768), a budget, not a level. The guide captured 22 Jun 2026 (the capture of 17 Jun 2026 07:49 still has the budget table) replaces it with 'Controlling thinking': gemini-2.5-pro, default thinking On, levels low, medium, high; levels are recorded from 22 Jun 2026. The same default (dynamic thinking = On) runs from the stable release (17 Jun 2025) to the capture of 23 Oct 2026, through the rewording of the page between 17 and 22 Jun 2026. No document says that thinkingBudget stopped being accepted, so think and think-<budget> stay open. Release from the changelog; name open (not deprecated). | integration 10 (10 Nov 2026), the maintainer's point 3: Google's deprecations page announces the end of gemini-2.5-pro on 1 Dec 2026 (fact: https://ai.google.dev/gemini-api/docs/deprecations, Markdown copy https://ai.google.dev/gemini-api/docs/deprecations.md.txt captured 2026-11-10T08:17:51Z, file /work/.salvo14/mig/s6/ev/integ8/raw/ai.google.dev_gemini-api_docs_deprecations.md.txt, sha256 3098242d3b63d24f32f352655e5ecc5d4123731aee63089591c822f33b472047; quotes « Effective December 1, 2026, all API requests to gemini-2.5-pro will automatically route to gemini-3.8-flash and be billed at Gemini 3.8 Flash rates. » and, in the table, « gemini-2.5-pro June 17, 2025 December 1, 2026 gemini-3.8-flash » (Model, Release date, Shutdown date, Recommended replacement)). The page calls the dates the earliest possible shutdown dates. The record is not closed now: it closes at the capture that observes the end (the maintainer, 10 Nov 2026)"
   },
   "gemini-2.5-flash": {
    "label": "Gemini 2.5 Flash",
@@ -65703,7 +65703,7 @@
    ],
    "conversions": [],
    "modes": [],
-   "note": "Gemini 2.5 Flash: thinkingBudget 0 to 24576 until the guide of 17 Jun 2026 (0 disables thinking = nothink; unset or -1 = dynamic thinking, the default = think; any other value = think-<budget>, budget_min 1, budget_max 24576, a budget, not a level). From the guide captured 22 Jun 2026: 'Controlling thinking' lists gemini-2.5-flash, default thinking On, levels low, medium, high (levels recorded from 22 Jun 2026). The same default (dynamic thinking = On) is carried from the stable release (17 Jun 2025) to the capture of 23 Oct 2026 through the rewording of the page between 17 and 22 Jun 2026. No document says that thinkingBudget stopped being accepted, so nothink, think and think-<budget> stay open."
+   "note": "Gemini 2.5 Flash: thinkingBudget 0 to 24576 until the guide of 17 Jun 2026 (0 disables thinking = nothink; unset or -1 = dynamic thinking, the default = think; any other value = think-<budget>, budget_min 1, budget_max 24576, a budget, not a level). From the guide captured 22 Jun 2026: 'Controlling thinking' lists gemini-2.5-flash, default thinking On, levels low, medium, high (levels recorded from 22 Jun 2026). The same default (dynamic thinking = On) is carried from the stable release (17 Jun 2025) to the capture of 23 Oct 2026 through the rewording of the page between 17 and 22 Jun 2026. No document says that thinkingBudget stopped being accepted, so nothink, think and think-<budget> stay open. | integration 10 (10 Nov 2026), the maintainer's point 3: Google's deprecations page announces the end of gemini-2.5-flash on 1 Dec 2026 (fact: https://ai.google.dev/gemini-api/docs/deprecations, Markdown copy https://ai.google.dev/gemini-api/docs/deprecations.md.txt captured 2026-11-10T08:17:51Z, file /work/.salvo14/mig/s6/ev/integ8/raw/ai.google.dev_gemini-api_docs_deprecations.md.txt, sha256 3098242d3b63d24f32f352655e5ecc5d4123731aee63089591c822f33b472047; quotes « Effective December 1, 2026, all API requests to gemini-2.5-flash will automatically route to gemini-3.5-flash-lite and be billed at Gemini 3.5 Flash-Lite rates. » and, in the table, « gemini-2.5-flash June 17, 2025 December 1, 2026 gemini-3.5-flash-lite » (Model, Release date, Shutdown date, Recommended replacement)). The page calls the dates the earliest possible shutdown dates. The record is not closed now: it closes at the capture that observes the end (the maintainer, 10 Nov 2026)"
   },
   "gemini-2.5-flash-lite": {
    "label": "Gemini 2.5 Flash-Lite",
@@ -95128,9 +95128,9 @@
    "default": [
     {
      "configuration": "medium",
-     "from": "2026-11-10",
+     "from": "2026-10-26",
      "to": "2026-11-10",
-     "from_basis": "earliest-capture",
+     "from_basis": "release",
      "to_basis": "last-capture",
      "evidence": [
       {
@@ -95146,7 +95146,7 @@
    ],
    "conversions": [],
    "modes": [],
-   "note": "integration 6 of salvo s6 (9 Nov 2026): key created for the measures of GPT-6.1 Terra (consigne: not in data/catalog/models.json, so not in the fit); configurations not established (the post's chart labels Low … Max are not a maker document of the API levels) | integration 8 (10 Nov 2026): in the fit catalogue (the maintainer, 10 Nov); API id, OpenRouter id, configurations none (nothink), low, medium, high, xhigh, max and the default medium from the model page (Markdown copy of 10 Nov, the maker document of the API levels), the release from the changelog (Oct 26) and the post; prices in prices.json; default: integration 8: the only copy of the model page we hold is that of 10 Nov 2026 (the Wayback Machine was offline); the default is not established before it"
+   "note": "integration 6 of salvo s6 (9 Nov 2026): key created for the measures of GPT-6.1 Terra (consigne: not in data/catalog/models.json, so not in the fit); configurations not established (the post's chart labels Low … Max are not a maker document of the API levels) | integration 8 (10 Nov 2026): in the fit catalogue (the maintainer, 10 Nov); API id, OpenRouter id, configurations none (nothink), low, medium, high, xhigh, max and the default medium from the model page (Markdown copy of 10 Nov, the maker document of the API levels), the release from the changelog (Oct 26) and the post; prices in prices.json; default: integration 8: the only copy of the model page we hold is that of 10 Nov 2026 (the Wayback Machine was offline); the default is not established before it | integration 10 (10 Nov 2026), the maintainer's point 2: the default medium dated from the release (26 Oct 2026), the registry's rule (commit 4a02d21: a configuration is dated from the model's release unless a later change is documented); nothing documents a change between the release and the 10 Nov copy of the model page, which stays the evidence"
   }
  }
 }
