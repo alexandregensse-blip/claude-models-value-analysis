@@ -30458,6 +30458,21 @@
   },
   "zapierab-domain-support": {
    "label": "Zapier AutomationBench, domain Support (best model per domain)"
+  },
+  "valsindex4-codemig": {
+   "label": "Vals Index 2.2, Code Migration component"
+  },
+  "s7t-plotly-dab-analytics": {
+   "label": "Plotly DataAnalyticsBench: Analytics questions"
+  },
+  "s7t-plotly-dab-ambiguous": {
+   "label": "Plotly DataAnalyticsBench: Ambiguous questions"
+  },
+  "s7t-plotly-dab-impossible": {
+   "label": "Plotly DataAnalyticsBench: Impossible requests"
+  },
+  "s7t-plotly-dab-dataquality": {
+   "label": "Plotly DataAnalyticsBench: Data quality"
   }
  },
  "setups": {
@@ -377453,6 +377468,177 @@
    "legacy_groups": [],
    "label": "Zapier AutomationBench, domain Support (best model per domain)",
    "note": "NEW setup (salvo s7, lot k7-boards, 10 Nov 2026): the \"By domain\" block of the leaderboard 1.0.6 page: for each of the six business domains the top model and the best result of a different model (2nd place); each model at its best effort level | added by integration 9 of salvo s7 (10 Nov 2026)"
+  },
+  "valsindex4-codemig": {
+   "family": "valsindex4-codemig",
+   "benchmark": "Vals Index 2.2, Code Migration component",
+   "subset": "50 of 120 CLI tasks + 10 COBOL tasks (weighted 75/25)",
+   "harness": "Vals-Index",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "accuracy%",
+   "headline": {
+    "metric": "accuracy%",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Vals Index 2.2, Code Migration component",
+   "note": "integration 9 of salvo s7 (10 Nov 2026): VERIF k7-boards 4: a component of valsindex4 on a fixed subset of the Code Migration run; headline left to the maintainer (a component, one model written)"
+  },
+  "s7t-plotly-dab-analytics": {
+   "family": "s7t-plotly-dab-analytics",
+   "benchmark": "s7t-plotly-dab-analytics",
+   "subset": null,
+   "harness": "Plotly Studio Embedded agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "solved-of-20",
+   "headline": {
+    "metric": "solved-of-20",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://plotly.com/blog/claude-fable-5-2-plotly-data-analytics-bench/",
+      "captured": "2026-11-10",
+      "where": "table row Analytics questions",
+      "quote": "Analytics questions 20 / 20 20 / 20 20 / 20 20 / 20",
+      "file": "/work/.salvo14/mig/s7/ev/s7-tiers/ext-k7-tiers/plotly.com_blog_claude-fable-5-2-plotly-data-analytics-bench_.visible.txt",
+      "sha256": "89092ce74226f8e2e7f4dc93fedba9fdf69a80324be6f692cf2fdbaffdddb948"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    20
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Plotly DataAnalyticsBench: Analytics questions",
+   "note": "integration 9 of salvo s7 (10 Nov 2026): VERIF k7-tiers loss: the sub-score row « Analytics questions » of the Plotly post table (copied from s7t-plotly-dab-statistics-traps)"
+  },
+  "s7t-plotly-dab-ambiguous": {
+   "family": "s7t-plotly-dab-ambiguous",
+   "benchmark": "s7t-plotly-dab-ambiguous",
+   "subset": null,
+   "harness": "Plotly Studio Embedded agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "solved-of-5",
+   "headline": {
+    "metric": "solved-of-5",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://plotly.com/blog/claude-fable-5-2-plotly-data-analytics-bench/",
+      "captured": "2026-11-10",
+      "where": "table row Ambiguous questions",
+      "quote": "Ambiguous questions 5 / 5 5 / 5 5 / 5 5 / 5",
+      "file": "/work/.salvo14/mig/s7/ev/s7-tiers/ext-k7-tiers/plotly.com_blog_claude-fable-5-2-plotly-data-analytics-bench_.visible.txt",
+      "sha256": "89092ce74226f8e2e7f4dc93fedba9fdf69a80324be6f692cf2fdbaffdddb948"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    5
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Plotly DataAnalyticsBench: Ambiguous questions",
+   "note": "integration 9 of salvo s7 (10 Nov 2026): VERIF k7-tiers loss: the sub-score row « Ambiguous questions » of the Plotly post table (copied from s7t-plotly-dab-statistics-traps)"
+  },
+  "s7t-plotly-dab-impossible": {
+   "family": "s7t-plotly-dab-impossible",
+   "benchmark": "s7t-plotly-dab-impossible",
+   "subset": null,
+   "harness": "Plotly Studio Embedded agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "solved-of-5",
+   "headline": {
+    "metric": "solved-of-5",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://plotly.com/blog/claude-fable-5-2-plotly-data-analytics-bench/",
+      "captured": "2026-11-10",
+      "where": "table row Impossible requests",
+      "quote": "Impossible requests 5 / 5 5 / 5 5 / 5 5 / 5",
+      "file": "/work/.salvo14/mig/s7/ev/s7-tiers/ext-k7-tiers/plotly.com_blog_claude-fable-5-2-plotly-data-analytics-bench_.visible.txt",
+      "sha256": "89092ce74226f8e2e7f4dc93fedba9fdf69a80324be6f692cf2fdbaffdddb948"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    5
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Plotly DataAnalyticsBench: Impossible requests",
+   "note": "integration 9 of salvo s7 (10 Nov 2026): VERIF k7-tiers loss: the sub-score row « Impossible requests » of the Plotly post table (copied from s7t-plotly-dab-statistics-traps)"
+  },
+  "s7t-plotly-dab-dataquality": {
+   "family": "s7t-plotly-dab-dataquality",
+   "benchmark": "s7t-plotly-dab-dataquality",
+   "subset": null,
+   "harness": "Plotly Studio Embedded agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "solved-of-3",
+   "headline": {
+    "metric": "solved-of-3",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://plotly.com/blog/claude-fable-5-2-plotly-data-analytics-bench/",
+      "captured": "2026-11-10",
+      "where": "table row Data quality",
+      "quote": "Data quality 3 / 3 3 / 3 3 / 3 3 / 3",
+      "file": "/work/.salvo14/mig/s7/ev/s7-tiers/ext-k7-tiers/plotly.com_blog_claude-fable-5-2-plotly-data-analytics-bench_.visible.txt",
+      "sha256": "89092ce74226f8e2e7f4dc93fedba9fdf69a80324be6f692cf2fdbaffdddb948"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    3
+   ],
+   "direction": "higher",
+   "task_type": "mixed",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Plotly DataAnalyticsBench: Data quality",
+   "note": "integration 9 of salvo s7 (10 Nov 2026): VERIF k7-tiers loss: the sub-score row « Data quality » of the Plotly post table (copied from s7t-plotly-dab-statistics-traps)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
