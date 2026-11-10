@@ -1,0 +1,1597 @@
+{
+ "id": "src-arxiv-2611.00340-2026-10-30",
+ "publisher": "arxiv-2611.00340",
+ "urls": [
+  "https://arxiv.org/abs/2611.00340v1"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html": "a10e070c93c6e16c5f4f502ee2fa0fbdf22562c878d2440d5559ba5f7b71aa60"
+ },
+ "harvested_at": "2026-11-09T14:36:27Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2611.00340v1",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html"
+  }
+ ],
+ "published": {
+  "value": "2026-10-30",
+  "where": "arXiv stamp of the saved HTML (v1)",
+  "quote": "arXiv:2611.00340v1 [cs.SE] 30 Oct 2026",
+  "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-moonshot. Autoformalization for Ambiguous Inputs (arXiv 2611.00340v1). Every aggregate table of the copy that holds a Kimi K3 or Kimi K2.6 row, b-moonshot and c-moonshot research rows merged: main Table 4 (paired F1 gain of the Kimi review feedback) and supplementary Tables S10, S13, S14, S15, S17, S18 (70 measures). Kimi is only the reviewer at AutoCedar's intent-review step; DeepSeek (deepseek-flash, thinking, low reasoning effort) generates and repairs: the measures are of the SYSTEM, not of Kimi alone. Not converted: the single-question case-study tables S19-S48 (one input each, authors' examples), the coverage counts of S4 (kept as item counts in notes), and tables without a Kimi row.",
+ "agent": "convertisseur k-moonshot (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "Kimi K3",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K3 improves paired F1 by 1.93 points on AMBROSIA and 2.04 on AmbiQT (Table 4 )."
+  },
+  {
+   "id": "F2",
+   "says": "model-name",
+   "about": "Kimi K2.6",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K2.6 gives smaller gains."
+  },
+  {
+   "id": "F3",
+   "says": "harness",
+   "about": null,
+   "value": "AutoCedar",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 3 (SQL adaptation of the workflows)",
+   "quote": "Kimi emulates a human response at AutoCedar’s intent-review step, where the original architecture solicits human feedback",
+   "note": "Kimi acts as the reviewer of the AutoCedar workflow; the workflow is the system measured"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "DeepSeek generates and repairs outputs through the recorded API alias deepseek-flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 4.3 (Implementation and statistical comparisons)",
+   "quote": "DeepSeek generates and repairs outputs through the recorded API alias deepseek-flash . The initial SQL and AmP/LoC/DRIFT request configurations enable thinking with low reasoning effort. Generation, repair, and any native review calls use DeepSeek; only the SQL feedback intervention adds Kimi K3 or Kimi K2.6.",
+   "note": "STRONG DOUBT (research agent): the measure is of the system DeepSeek (deepseek-flash, thinking, low reasoning effort) + AutoCedar + a Kimi reviewer, not of Kimi alone; the thinking and the low reasoning effort written here are DeepSeek's; no effort, route or provider is written for Kimi K3 / Kimi K2.6"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "confirmation models Kimi K3 or Kimi K2.6 supplies feedback",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S2 (recorded settings), row Confirmation",
+   "quote": "confirmation models Kimi K3 or Kimi K2.6 supplies feedback. DeepSeek generates and repairs SQL.",
+   "note": "the settings table records no request parameters (effort, temperature, route) for the Kimi calls"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "The conditions share initial proposals and use no additional reviewer, Kimi K3, or Kimi K2.6.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 3",
+   "quote": "The conditions share initial proposals and use no additional reviewer, Kimi K3, or Kimi K2.6.",
+   "note": "the comparison baseline of every Kimi row is AutoCedar with no additional reviewer"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "Review feedback yields modest paired gains.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "caption of Table 4",
+   "quote": "Table 4: Review feedback yields modest paired gains. Each contrast uses inputs scored with the named reviewer and with no additional reviewer. Differences are percentage points.",
+   "note": "paired differences in percentage points against AutoCedar with no additional reviewer; Pairs = inputs scored with and without the reviewer"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "1.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AMBROSIA, reviewer Kimi K3, column F1 difference",
+   "quote": "AMBROSIA Kimi K3 3,432 + 1.93 +1.93",
+   "term": "paired F1 difference vs no reviewer (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+1.93"
+  },
+  {
+   "id": "F9",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "3,432",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AMBROSIA, column Pairs",
+   "quote": "AMBROSIA Kimi K3 3,432 + 1.93 +1.93",
+   "note": "paired inputs scored with the reviewer and with no additional reviewer"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "1.23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AMBROSIA, reviewer Kimi K2.6, column F1 difference",
+   "quote": "Kimi K2.6 3,432 + 1.23 +1.23",
+   "term": "paired F1 difference vs no reviewer (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+1.23"
+  },
+  {
+   "id": "F11",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "3,432",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AMBROSIA, column Pairs",
+   "quote": "Kimi K2.6 3,432 + 1.23 +1.23",
+   "note": "paired inputs scored with the reviewer and with no additional reviewer"
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "2.04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AmbiQT, reviewer Kimi K3, column F1 difference",
+   "quote": "AmbiQT Kimi K3 2,591 + 2.04 +2.04",
+   "term": "paired F1 difference vs no reviewer (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+2.04"
+  },
+  {
+   "id": "F13",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "2,591",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AmbiQT, column Pairs",
+   "quote": "AmbiQT Kimi K3 2,591 + 2.04 +2.04",
+   "note": "paired inputs scored with the reviewer and with no additional reviewer"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "0.24",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AmbiQT, reviewer Kimi K2.6, column F1 difference",
+   "quote": "Kimi K2.6 2,591 + 0.24 +0.24",
+   "term": "paired F1 difference vs no reviewer (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+0.24"
+  },
+  {
+   "id": "F15",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "2,591",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table 4, AmbiQT, column Pairs",
+   "quote": "Kimi K2.6 2,591 + 0.24 +0.24",
+   "note": "paired inputs scored with the reviewer and with no additional reviewer"
+  },
+  {
+   "id": "F16",
+   "says": "note",
+   "about": null,
+   "value": "AMBROSIA F1 by study and the clear and ambiguous labels supplied by the dataset.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "caption of Table S10",
+   "quote": "Table S10: AMBROSIA F1 by study and the clear and ambiguous labels supplied by the dataset. Difference is ambiguous F1 minus clear F1, in percentage points.",
+   "note": "Difference = ambiguous F1 minus clear F1 in points (more negative = larger drop on ambiguous inputs)"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "55.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S10, row AutoCedar + Kimi K2.6, column Clear F1",
+   "quote": "AutoCedar + Kimi K2.6 2400 55.18 1032 42.57 − 12.61 -12.61",
+   "term": "F1 on clear inputs (%)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "55.18"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "42.57",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S10, row AutoCedar + Kimi K2.6, column Ambiguous F1",
+   "quote": "AutoCedar + Kimi K2.6 2400 55.18 1032 42.57 − 12.61 -12.61",
+   "term": "F1 on ambiguous inputs (%)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "42.57"
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "-12.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S10, row AutoCedar + Kimi K2.6, column Difference",
+   "quote": "AutoCedar + Kimi K2.6 2400 55.18 1032 42.57 − 12.61 -12.61",
+   "term": "ambiguous minus clear F1 (points)",
+   "scale": "raw",
+   "written": "-12.61"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "56.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S10, row AutoCedar + Kimi K3, column Clear F1",
+   "quote": "AutoCedar + Kimi K3 2400 56.07 1032 42.82 − 13.26 -13.26",
+   "term": "F1 on clear inputs (%)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "56.07"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "42.82",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S10, row AutoCedar + Kimi K3, column Ambiguous F1",
+   "quote": "AutoCedar + Kimi K3 2400 56.07 1032 42.82 − 13.26 -13.26",
+   "term": "F1 on ambiguous inputs (%)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "42.82"
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "-13.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S10, row AutoCedar + Kimi K3, column Difference",
+   "quote": "AutoCedar + Kimi K3 2400 56.07 1032 42.82 − 13.26 -13.26",
+   "term": "ambiguous minus clear F1 (points)",
+   "scale": "raw",
+   "written": "-13.26"
+  },
+  {
+   "id": "F23",
+   "says": "note",
+   "about": null,
+   "value": "Expanded AMBROSIA paired F1 changes relative to Direct, in percentage points.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "caption of Table S13",
+   "quote": "Table S13: Expanded AMBROSIA paired F1 changes relative to Direct, in percentage points. Difference is the ambiguous group change minus the clear group change.",
+   "note": "changes relative to the Direct workflow (the raw model); clear group = 2,154 pairs, ambiguous = 933 pairs; Difference = ambiguous group change minus clear group change"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "-3.57",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S13, row AutoCedar + Kimi K2.6, column F1 change, clear group",
+   "quote": "AutoCedar + Kimi K2.6 2154 − 3.57 -3.57 933 + 0.54 +0.54 + 4.11 +4.11",
+   "term": "F1 change vs Direct, clear group (points)",
+   "scale": "raw",
+   "written": "-3.57"
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "0.54",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S13, row AutoCedar + Kimi K2.6, column F1 change, ambiguous group",
+   "quote": "AutoCedar + Kimi K2.6 2154 − 3.57 -3.57 933 + 0.54 +0.54 + 4.11 +4.11",
+   "term": "F1 change vs Direct, ambiguous group (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+0.54"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "4.11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S13, row AutoCedar + Kimi K2.6, column Difference",
+   "quote": "AutoCedar + Kimi K2.6 2154 − 3.57 -3.57 933 + 0.54 +0.54 + 4.11 +4.11",
+   "term": "ambiguous minus clear F1 change vs Direct (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+4.11"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "-2.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S13, row AutoCedar + Kimi K3, column F1 change, clear group",
+   "quote": "AutoCedar + Kimi K3 2154 − 2.69 -2.69 933 + 0.83 +0.83 + 3.53 +3.53",
+   "term": "F1 change vs Direct, clear group (points)",
+   "scale": "raw",
+   "written": "-2.69"
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "0.83",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S13, row AutoCedar + Kimi K3, column F1 change, ambiguous group",
+   "quote": "AutoCedar + Kimi K3 2154 − 2.69 -2.69 933 + 0.83 +0.83 + 3.53 +3.53",
+   "term": "F1 change vs Direct, ambiguous group (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+0.83"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "3.53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S13, row AutoCedar + Kimi K3, column Difference",
+   "quote": "AutoCedar + Kimi K3 2154 − 2.69 -2.69 933 + 0.83 +0.83 + 3.53 +3.53",
+   "term": "ambiguous minus clear F1 change vs Direct (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+3.53"
+  },
+  {
+   "id": "F30",
+   "says": "note",
+   "about": null,
+   "value": "Initial workflow and confirmation results, together with the prior interpretation study in percent.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "caption of Table S14",
+   "quote": "Table S14: Initial workflow and confirmation results, together with the prior interpretation study in percent. These runs are separate from the expanded evaluation.",
+   "note": "the initial confirmation runs (382 AMBROSIA / 305 AmbiQT selected inputs), separate from the expanded evaluation; columns: selected, scored, F1, precision, recall, one found, all found, exact set (percent)"
+  },
+  {
+   "id": "F31",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "381",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, AMBROSIA Kimi K3, column scored",
+   "quote": "AMBROSIA Kimi K3 382 381 50.62 46.09 64.87 75.07 54.33 24.93",
+   "note": "scored inputs (381 of 382 selected)"
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "50.62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K3, column F1",
+   "quote": "AMBROSIA Kimi K3 382 381 50.62 46.09 64.87 75.07 54.33 24.93",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "46.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K3, column precision",
+   "quote": "AMBROSIA Kimi K3 382 381 50.62 46.09 64.87 75.07 54.33 24.93",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "64.87",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K3, column recall",
+   "quote": "AMBROSIA Kimi K3 382 381 50.62 46.09 64.87 75.07 54.33 24.93",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "75.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K3, column one found",
+   "quote": "AMBROSIA Kimi K3 382 381 50.62 46.09 64.87 75.07 54.33 24.93",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "54.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K3, column all found",
+   "quote": "AMBROSIA Kimi K3 382 381 50.62 46.09 64.87 75.07 54.33 24.93",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "24.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K3, column exact set",
+   "quote": "AMBROSIA Kimi K3 382 381 50.62 46.09 64.87 75.07 54.33 24.93",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F38",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "380",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, AMBROSIA Kimi K2.6, column scored",
+   "quote": "AMBROSIA Kimi K2.6 382 380 49.54 44.88 64.47 73.68 55.00 23.42",
+   "note": "scored inputs (380 of 382 selected)"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "49.54",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K2.6, column F1",
+   "quote": "AMBROSIA Kimi K2.6 382 380 49.54 44.88 64.47 73.68 55.00 23.42",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "44.88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K2.6, column precision",
+   "quote": "AMBROSIA Kimi K2.6 382 380 49.54 44.88 64.47 73.68 55.00 23.42",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "64.47",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K2.6, column recall",
+   "quote": "AMBROSIA Kimi K2.6 382 380 49.54 44.88 64.47 73.68 55.00 23.42",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "73.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K2.6, column one found",
+   "quote": "AMBROSIA Kimi K2.6 382 380 49.54 44.88 64.47 73.68 55.00 23.42",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "55.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K2.6, column all found",
+   "quote": "AMBROSIA Kimi K2.6 382 380 49.54 44.88 64.47 73.68 55.00 23.42",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "23.42",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AMBROSIA Kimi K2.6, column exact set",
+   "quote": "AMBROSIA Kimi K2.6 382 380 49.54 44.88 64.47 73.68 55.00 23.42",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F45",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "282",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, AmbiQT Kimi K3, column scored",
+   "quote": "AmbiQT Kimi K3 305 282 52.86 51.21 60.64 72.34 48.94 18.44",
+   "note": "scored inputs (282 of 305 selected)"
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "52.86",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K3, column F1",
+   "quote": "AmbiQT Kimi K3 305 282 52.86 51.21 60.64 72.34 48.94 18.44",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "51.21",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K3, column precision",
+   "quote": "AmbiQT Kimi K3 305 282 52.86 51.21 60.64 72.34 48.94 18.44",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "60.64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K3, column recall",
+   "quote": "AmbiQT Kimi K3 305 282 52.86 51.21 60.64 72.34 48.94 18.44",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "72.34",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K3, column one found",
+   "quote": "AmbiQT Kimi K3 305 282 52.86 51.21 60.64 72.34 48.94 18.44",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "48.94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K3, column all found",
+   "quote": "AmbiQT Kimi K3 305 282 52.86 51.21 60.64 72.34 48.94 18.44",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "18.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K3, column exact set",
+   "quote": "AmbiQT Kimi K3 305 282 52.86 51.21 60.64 72.34 48.94 18.44",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F52",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "281",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, AmbiQT Kimi K2.6, column scored",
+   "quote": "AmbiQT Kimi K2.6 305 281 51.32 48.97 60.32 72.24 48.40 16.37",
+   "note": "scored inputs (281 of 305 selected)"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "51.32",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K2.6, column F1",
+   "quote": "AmbiQT Kimi K2.6 305 281 51.32 48.97 60.32 72.24 48.40 16.37",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "48.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K2.6, column precision",
+   "quote": "AmbiQT Kimi K2.6 305 281 51.32 48.97 60.32 72.24 48.40 16.37",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "60.32",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K2.6, column recall",
+   "quote": "AmbiQT Kimi K2.6 305 281 51.32 48.97 60.32 72.24 48.40 16.37",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "72.24",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K2.6, column one found",
+   "quote": "AmbiQT Kimi K2.6 305 281 51.32 48.97 60.32 72.24 48.40 16.37",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "48.40",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K2.6, column all found",
+   "quote": "AmbiQT Kimi K2.6 305 281 51.32 48.97 60.32 72.24 48.40 16.37",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F58",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "16.37",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S14, confirmation block, row AmbiQT Kimi K2.6, column exact set",
+   "quote": "AmbiQT Kimi K2.6 305 281 51.32 48.97 60.32 72.24 48.40 16.37",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F59",
+   "says": "note",
+   "about": null,
+   "value": "Expanded coverage and answer set recovery in percent.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "caption of Table S15",
+   "quote": "Table S15: Expanded coverage and answer set recovery in percent. Scored counts eligible records with available scores.",
+   "note": "the exact-set column of the AutoCedar + Kimi rows (25.23, 23.95, 20.65, 18.14) repeats the Exact set column of Table S17: same values, cited once (S17)"
+  },
+  {
+   "id": "F60",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "3,432",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, AMBROSIA AutoCedar + Kimi K3, column scored",
+   "quote": "AutoCedar + Kimi K3 3,437 3,432 5 0 76.78 57.69 25.23",
+   "note": "scored records (3,432 of 3,437 selected; ineligible references and other unscored cases complete the denominator)"
+  },
+  {
+   "id": "F61",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "76.78",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K3, AMBROSIA, column one found",
+   "quote": "AutoCedar + Kimi K3 3,437 3,432 5 0 76.78 57.69 25.23",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F62",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "57.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K3, AMBROSIA, column all found",
+   "quote": "AutoCedar + Kimi K3 3,437 3,432 5 0 76.78 57.69 25.23",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F63",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "3,432",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, AMBROSIA AutoCedar + Kimi K2.6, column scored",
+   "quote": "AutoCedar + Kimi K2.6 3,437 3,432 5 0 76.78 58.39 23.95",
+   "note": "scored records (3,432 of 3,437 selected; ineligible references and other unscored cases complete the denominator)"
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "76.78",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K2.6, AMBROSIA, column one found",
+   "quote": "AutoCedar + Kimi K2.6 3,437 3,432 5 0 76.78 58.39 23.95",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F65",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "58.39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K2.6, AMBROSIA, column all found",
+   "quote": "AutoCedar + Kimi K2.6 3,437 3,432 5 0 76.78 58.39 23.95",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F66",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "2,591",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, AmbiQT AutoCedar + Kimi K3, column scored",
+   "quote": "AutoCedar + Kimi K3 2,741 2,591 150 0 76.42 54.26 20.65",
+   "note": "scored records (2,591 of 2,741 selected; ineligible references and other unscored cases complete the denominator)"
+  },
+  {
+   "id": "F67",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "76.42",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K3, AmbiQT, column one found",
+   "quote": "AutoCedar + Kimi K3 2,741 2,591 150 0 76.42 54.26 20.65",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F68",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "54.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K3, AmbiQT, column all found",
+   "quote": "AutoCedar + Kimi K3 2,741 2,591 150 0 76.42 54.26 20.65",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "2,591",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, AmbiQT AutoCedar + Kimi K2.6, column scored",
+   "quote": "AutoCedar + Kimi K2.6 2,741 2,591 150 0 75.96 53.26 18.14",
+   "note": "scored records (2,591 of 2,741 selected; ineligible references and other unscored cases complete the denominator)"
+  },
+  {
+   "id": "F70",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "75.96",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K2.6, AmbiQT, column one found",
+   "quote": "AutoCedar + Kimi K2.6 2,741 2,591 150 0 75.96 53.26 18.14",
+   "term": "one found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "53.26",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S15, row AutoCedar + Kimi K2.6, AmbiQT, column all found",
+   "quote": "AutoCedar + Kimi K2.6 2,741 2,591 150 0 75.96 53.26 18.14",
+   "term": "all found (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F72",
+   "says": "note",
+   "about": null,
+   "value": "Review feedback results in percent.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "caption of Table S17",
+   "quote": "Table S17: Review feedback results in percent. P and R denote precision and recall. Each mean uses the scored inputs for that condition.",
+   "note": "AutoCedar with no additional reviewer is the baseline row (none): not a Kimi row; columns scored, F1, P, R, exact set"
+  },
+  {
+   "id": "F73",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "3,432",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA Kimi K3, column Scored",
+   "quote": "Kimi K3 3,432 52.09 47.91 67.36 25.23",
+   "note": "scored inputs for that condition"
+  },
+  {
+   "id": "F74",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "52.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K3, column F1",
+   "quote": "Kimi K3 3,432 52.09 47.91 67.36 25.23",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "47.91",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K3, column P",
+   "quote": "Kimi K3 3,432 52.09 47.91 67.36 25.23",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F76",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "67.36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K3, column R",
+   "quote": "Kimi K3 3,432 52.09 47.91 67.36 25.23",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F77",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "25.23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K3, column Exact set",
+   "quote": "Kimi K3 3,432 52.09 47.91 67.36 25.23",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F78",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "3,432",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA Kimi K2.6, column Scored",
+   "quote": "Kimi K2.6 3,432 51.39 46.72 67.68 23.95",
+   "note": "scored inputs for that condition"
+  },
+  {
+   "id": "F79",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "51.39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K2.6, column F1",
+   "quote": "Kimi K2.6 3,432 51.39 46.72 67.68 23.95",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F80",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "46.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K2.6, column P",
+   "quote": "Kimi K2.6 3,432 51.39 46.72 67.68 23.95",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F81",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "67.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K2.6, column R",
+   "quote": "Kimi K2.6 3,432 51.39 46.72 67.68 23.95",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F82",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "23.95",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AMBROSIA, reviewer Kimi K2.6, column Exact set",
+   "quote": "Kimi K2.6 3,432 51.39 46.72 67.68 23.95",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F83",
+   "says": "items",
+   "about": "Kimi K3",
+   "value": "2,591",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT Kimi K3, column Scored",
+   "quote": "Kimi K3 2,591 56.49 54.42 65.34 20.65",
+   "note": "scored inputs for that condition"
+  },
+  {
+   "id": "F84",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "56.49",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K3, column F1",
+   "quote": "Kimi K3 2,591 56.49 54.42 65.34 20.65",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F85",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "54.42",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K3, column P",
+   "quote": "Kimi K3 2,591 56.49 54.42 65.34 20.65",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F86",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "65.34",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K3, column R",
+   "quote": "Kimi K3 2,591 56.49 54.42 65.34 20.65",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F87",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "20.65",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K3, column Exact set",
+   "quote": "Kimi K3 2,591 56.49 54.42 65.34 20.65",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F88",
+   "says": "items",
+   "about": "Kimi K2.6",
+   "value": "2,591",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT Kimi K2.6, column Scored",
+   "quote": "Kimi K2.6 2,591 54.69 52.02 64.61 18.14",
+   "note": "scored inputs for that condition"
+  },
+  {
+   "id": "F89",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "54.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K2.6, column F1",
+   "quote": "Kimi K2.6 2,591 54.69 52.02 64.61 18.14",
+   "term": "F1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F90",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "52.02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K2.6, column P",
+   "quote": "Kimi K2.6 2,591 54.69 52.02 64.61 18.14",
+   "term": "precision (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F91",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "64.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K2.6, column R",
+   "quote": "Kimi K2.6 2,591 54.69 52.02 64.61 18.14",
+   "term": "recall (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F92",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "18.14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S17, AmbiQT, reviewer Kimi K2.6, column Exact set",
+   "quote": "Kimi K2.6 2,591 54.69 52.02 64.61 18.14",
+   "term": "exact set (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F93",
+   "says": "note",
+   "about": null,
+   "value": "Direct K3 minus K2.6 paired F1 differences, in percentage points.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "caption of Table S18",
+   "quote": "Table S18: Direct K3 minus K2.6 paired F1 differences, in percentage points. Intervals resample database clusters as described in Section B.7 .",
+   "note": "a difference between two reviewers (K3 minus K2.6), not a score of one model; intervals resample database clusters"
+  },
+  {
+   "id": "F94",
+   "says": "model-name",
+   "about": "Kimi K3 minus K2.6",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K3 improves paired F1 by 1.93 points on AMBROSIA and 2.04 on AmbiQT (Table 4 )."
+  },
+  {
+   "id": "F95",
+   "says": "model-name",
+   "about": "Kimi K3 minus K2.6",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K2.6 gives smaller gains."
+  },
+  {
+   "id": "F96",
+   "says": "score",
+   "about": "Kimi K3 minus K2.6",
+   "value": "0.70",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S18, AMBROSIA, column F1 difference",
+   "quote": "AMBROSIA 3,432 760 + 0.70 +0.70 [ 0.31 , 1.09 ] [0.31,1.09]",
+   "term": "K3 minus K2.6 paired F1 difference (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+0.70"
+  },
+  {
+   "id": "F97",
+   "says": "note",
+   "about": "Kimi K3 minus K2.6",
+   "value": "[0.31,1.09]",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S18, AMBROSIA, column 95% interval",
+   "quote": "AMBROSIA 3,432 760 + 0.70 +0.70 [ 0.31 , 1.09 ] [0.31,1.09]",
+   "note": "95% database-cluster interval; 3,432 pairs, 760 clusters"
+  },
+  {
+   "id": "F98",
+   "says": "score",
+   "about": "Kimi K3 minus K2.6",
+   "value": "1.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S18, AmbiQT, column F1 difference",
+   "quote": "AmbiQT 2,591 20 + 1.80 +1.80 [ 1.25 , 2.46 ] [1.25,2.46]",
+   "term": "K3 minus K2.6 paired F1 difference (points)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "written": "+1.80"
+  },
+  {
+   "id": "F99",
+   "says": "note",
+   "about": "Kimi K3 minus K2.6",
+   "value": "[1.25,2.46]",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "Table S18, AmbiQT, column 95% interval",
+   "quote": "AmbiQT 2,591 20 + 1.80 +1.80 [ 1.25 , 2.46 ] [1.25,2.46]",
+   "note": "95% database-cluster interval; 2,591 pairs, 20 clusters"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K3",
+   "value": "Kimi K3",
+   "level": "not-established:assumed",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K3 improves paired F1 by 1.93 points on AMBROSIA and 2.04 on AmbiQT (Table 4 ).",
+   "note": " | integration 6 of salvo s6 (9 Nov 2026): whole system (harness, agent or connectors around the model), not the bare model",
+   "id": "F100"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K2.6",
+   "value": "Kimi K2.6",
+   "level": "not-established:assumed",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K2.6 gives smaller gains.",
+   "note": " | integration 6 of salvo s6 (9 Nov 2026): whole system (harness, agent or connectors around the model), not the bare model",
+   "id": "F101"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K3 minus K2.6",
+   "value": "Kimi K3",
+   "level": "not-established:assumed",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K3 improves paired F1 by 1.93 points on AMBROSIA and 2.04 on AmbiQT (Table 4 ).",
+   "note": " | integration 6 of salvo s6 (9 Nov 2026): whole system (harness, agent or connectors around the model), not the bare model",
+   "id": "F102"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K3 minus K2.6",
+   "value": "Kimi K2.6",
+   "level": "not-established:assumed",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2611.00340v1.html",
+   "where": "section 5.3 (Different-family LLM review)",
+   "quote": "Kimi K2.6 gives smaller gains.",
+   "note": " | integration 6 of salvo s6 (9 Nov 2026): whole system (harness, agent or connectors around the model), not the bare model",
+   "id": "F103"
+  }
+ ]
+}

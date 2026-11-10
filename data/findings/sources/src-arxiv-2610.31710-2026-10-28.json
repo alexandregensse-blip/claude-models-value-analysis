@@ -2,7 +2,8 @@
  "id": "src-arxiv-2610.31710-2026-10-28",
  "publisher": "arxiv-2610.31710",
  "urls": [
-  "https://arxiv.org/abs/2610.31710"
+  "https://arxiv.org/abs/2610.31710",
+  "https://arxiv.org/abs/2610.31710v2"
  ],
  "wayback": [],
  "commit": null,
@@ -17,13 +18,20 @@
   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-openai-1 (b-openai + c-openai). Compact-Bench: what context compaction costs long-horizon coding agents. The four OpenAI summarizer backbones (GPT-5.6-Luna, GPT-5.6-Sol, GPT-5.6-Terra, GPT-6-Astra) of Table 2 (Task Preservation damage: round 1 and stable, among 22 validated PRE-pass repairs; the research line held round 1 and the Table-4 detail retention) and of Table 4 (Recurring-Detail Retention score; Astra is not in that table). The evaluated model is the SUMMARIZER (compaction role) under the Claude Code prompt with Kimi-K3 as the fixed continuation agent: not a coding-ability score. Damage: lower is better. Models are called through a metered gateway (OpenAI chat-completions or responses endpoint); runs in September-October 2026 (partly before 15 Oct 2026); thinking-style models at default settings. The HTML copy is held in the b-moonshot evidence folder.",
- "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-openai-2: convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-openai-1 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-openai-2: convertisseur k-openai-2 (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-moonshot: convertisseur k-moonshot (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "captures": [
   {
    "id": "S1",
    "kind": "fetch",
    "url": "https://arxiv.org/abs/2610.31710",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.31710v2",
    "captured": "2026-11-09",
    "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html"
   }
@@ -2175,6 +2183,1226 @@
    "where": "Table 6, row pt-7236",
    "quote": "pt-7236 X X X X X X X X X X X X X X",
    "note": "instance pt-7236: X = excluded PRE-failing instance for every backbone (no measure)"
+  },
+  {
+   "id": "F153",
+   "says": "route",
+   "about": "Kimi-K3",
+   "value": "same metered gateway",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Appendix (Models and endpoints)",
+   "quote": "Kimi-K3 and Claude-* models are called through the Anthropic messages endpoint; GPT-* models through the OpenAI chat-completions or responses endpoint, all via the same metered gateway with per-family API keys.",
+   "note": "written: the Anthropic messages endpoint of a metered gateway with per-family API keys (a gateway, not named as the maker API); no registry route term attached. Gateway model identifier kimi-k3"
+  },
+  {
+   "id": "F154",
+   "says": "thinking-off",
+   "about": "Kimi-K3",
+   "value": "thinking disabled",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Appendix (Models and endpoints)",
+   "quote": "Kimi-K3 runs with thinking disabled; thinking-style models run with default settings.",
+   "note": "temperature and other decoding settings are the service defaults, identical across conditions; the gateway offers no seed parameter (seeds are independent server-side samples)"
+  },
+  {
+   "id": "F155",
+   "says": "run-date",
+   "about": "Kimi-K3",
+   "value": "September–October 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Appendix (Models and endpoints)",
+   "quote": "Runs reported here were executed in September–October 2026",
+   "note": "part of the runs before 15 Oct 2026; the research file read the date range as the run period of the whole paper"
+  },
+  {
+   "id": "F156",
+   "says": "model-api-id",
+   "about": "Kimi-K3",
+   "value": "kimi-k3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Appendix (Models and endpoints)",
+   "quote": "gateway model identifiers kimi-k3",
+   "namespace": "prefix",
+   "note": "gateway model identifier"
+  },
+  {
+   "id": "F157",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Compression outputs are capped at 6,144 tokens",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Appendix (Budgets and caching)",
+   "quote": "Compression outputs are capped at 6,144 tokens for Kimi-K3 main runs and 16,384 tokens for cross-backbone and Recurring-Detail Retention runs.",
+   "note": "Kimi-K3 main runs (the prompt comparison, Table 3) use a 6,144-token compression cap; cross-backbone and retention runs (Tables 2, 4, 8, 9) 16,384"
+  },
+  {
+   "id": "F158",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Kimi-K3 continuation agent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "section 4.1 (Evaluation setup)",
+   "quote": "The fourteen-backbone Task Preservation comparison fixes the Claude Code prompt and Kimi-K3 continuation agent; every method receives the same cached Phase-A history and repository snapshot.",
+   "note": "Kimi-K3 is both a summarizer backbone and the continuation agent of every row: the measure covers the summarizer + continuation-agent pair (research agent flag). PRE/POST pass over 22 validated PRE-pass repairs"
+  },
+  {
+   "id": "F159",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "The prompt comparison fixes Kimi-K3 as summarizer",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "section 4.1 (Evaluation setup)",
+   "quote": "The prompt comparison fixes Kimi-K3 as summarizer and varies the five production prompts.",
+   "note": "the prompt comparison (Table 3) is Kimi-K3-only: the five production compaction prompts (Claude Code, Codex, Gemini CLI, opencode, Kimi Code) are the variable"
+  },
+  {
+   "id": "F160",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Per-backbone valid n n is 144–146 of 146 sessions.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "caption of Table 4",
+   "quote": "Table 4: Recurring-Detail Retention score by summarizer backbone (Claude Code prompt). Per-backbone valid n n is 144–146 of 146 sessions.",
+   "note": "API or parse errors are excluded, empty summaries score 0; arrow in the header: higher is better"
+  },
+  {
+   "id": "F161",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "n = 144 − 146",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "caption of Table 8",
+   "quote": "Table 8: Recurring-Detail Retention scores by backbone and prompt (mean per session, n = 144 − 146 n=144-146 per cell).",
+   "note": "mean per session; bold marks the best backbone per prompt"
+  },
+  {
+   "id": "F162",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "unweighted mean per session",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "caption of Table 9",
+   "quote": "Table 9: Recurring-Detail Retention mean score by client and prompt (Kimi-K3; unweighted mean per session). Prompt labels abbreviate Claude Code, Codex, Gemini CLI, opencode, and Kimi Code.",
+   "note": "client = the coding-agent client that produced the session (Kimi Code 73, Claude Code 50, opencode 14, other 9 sessions; fake-kimi, kilocode, fake-cc, hertz also appear as rows); prompt = the production compaction prompt; the 146-session set is split by client, so the cells are sub-sets of the same measure as Table 8 (Kimi-K3 row)"
+  },
+  {
+   "id": "F163",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "both using Kimi-K3 as summarizer",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "caption of Table 3",
+   "quote": "Table 3: Task Preservation POST-pass counts among 22 validated PRE-pass instances and Recurring-Detail Retention mean scores over the separate 146-session set, both using Kimi-K3 as summarizer.",
+   "note": "the Detail retention column of Table 3 repeats the Kimi-K3 row of Table 8 (15.0 / 9.5 / 7.2 / 9.5 / 8.2): same values, cited once (Table 4 and Table 8)"
+  },
+  {
+   "id": "F164",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "POST outcomes on the 22 validated PRE-pass cells",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Figure 2 caption",
+   "quote": "Figure 2: POST outcomes on the 22 validated PRE-pass cells ( R 1 R_{1} ) for the fourteen summarizer backbones. P: POST passes; F: POST fails.",
+   "note": "item-level matrix (22 repairs x 14 backbones; column K3): not converted to measures; the aggregate is Table 2 (Kimi-K3 4 of 22 damaged)"
+  },
+  {
+   "id": "F165",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Table 6: First-round outcome of every Task Preservation cell",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 6 caption",
+   "quote": "Table 6: First-round outcome of every Task Preservation cell under the fourteen backbone summarizers (column headers use short forms: K3 = Kimi-K3,",
+   "note": "item-level matrix (P/D/R/U/X per instance and backbone, column K3): not converted to measures"
+  },
+  {
+   "id": "F166",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Table 7: Per-seed verification of first-round damaged Task Preservation cells.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 7 caption",
+   "quote": "Table 7: Per-seed verification of first-round damaged Task Preservation cells. P: POST passes; D: POST fails with a passing PRE; U: PRE fails (possible only for Kimi-K3, which reruns both conditions)",
+   "note": "item-level per-seed matrix: not converted; Kimi-K3 reruns both PRE and POST conditions"
+  },
+  {
+   "id": "F167",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Table 13: First-round Task Preservation outcomes under the five production compaction prompts with Kimi-K3 as the summarizer.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 13 caption",
+   "quote": "Table 13: First-round Task Preservation outcomes under the five production compaction prompts with Kimi-K3 as the summarizer. Codes: P = POST passes; F = POST fails; X = excluded PRE-failing instance.",
+   "note": "item-level matrix (22 repairs + 2 excluded x 5 prompts): not converted; the aggregate is Table 3"
+  },
+  {
+   "id": "F168",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Table 5: Retained repair evidence in the four stably damaged cells under Kimi-K3 summaries.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 5 caption",
+   "quote": "Table 5: Retained repair evidence in the four stably damaged cells under Kimi-K3 summaries. The target file appears in all four; fractions give retained gold-patch tokens for the pytest cases.",
+   "note": "diagnostic table (pytest-10081 8/12, pytest-7490 10/12, pytest-7571 5/5 gold-patch tokens retained, sphinx-9230 four listed strings): not a score of the model, not converted"
+  },
+  {
+   "id": "F169",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Table 15: Repeated read_file calls",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 15 caption",
+   "quote": "Table 15: Repeated read_file calls targeting files read in Phase A for the four stably damaged cells, Kimi-K3 summarizer.",
+   "note": "diagnostic counts per damaged cell (PRE / POST redo-reads), not a score: not converted; Table 14 is a paired action trace"
+  },
+  {
+   "id": "F170",
+   "says": "model-name",
+   "about": "Kimi-K3",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 2, row Kimi-K3",
+   "quote": "Kimi-K3 18 % 18\\% (4) 18 % 18\\% (4) 7 − 39 7-39"
+  },
+  {
+   "id": "F171",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "7-39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 2, column 95% CI",
+   "quote": "Kimi-K3 18 % 18\\% (4) 18 % 18\\% (4) 7 − 39 7-39",
+   "note": "Wilson 95% interval of the stable damage rate: 7-39 (percent); count (4) of 22 validated PRE-pass cases, round 1 and stable alike"
+  },
+  {
+   "id": "F172",
+   "says": "note",
+   "about": "Kimi-K3",
+   "value": "Task Preservation damage under the Claude Code prompt and Kimi-K3 continuation agent.",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "caption of Table 2",
+   "quote": "Table 2: Task Preservation damage under the Claude Code prompt and Kimi-K3 continuation agent. Entries give the rounded percentage and count among 22 22 validated PRE-pass cases.",
+   "note": "lower is better; stable damage requires POST failure in at least two of three runs"
+  },
+  {
+   "id": "F173",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 2, row Kimi-K3, column Round 1",
+   "quote": "Kimi-K3 18 % 18\\% (4) 18 % 18\\% (4) 7 − 39 7-39",
+   "term": "Task Preservation damage (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "18 %"
+  },
+  {
+   "id": "F174",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 2, row Kimi-K3, column Stable",
+   "quote": "Kimi-K3 18 % 18\\% (4) 18 % 18\\% (4) 7 − 39 7-39",
+   "term": "stable damage (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "18 %"
+  },
+  {
+   "id": "F175",
+   "says": "model-name",
+   "about": "Kimi-K3",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 3 caption",
+   "quote": "Table 3: Task Preservation POST-pass counts among 22 validated PRE-pass instances and Recurring-Detail Retention mean scores over the separate 146-session set, both using Kimi-K3 as summarizer."
+  },
+  {
+   "id": "F176",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "82",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 3, row Claude Code, column POST pass",
+   "quote": "Claude Code 18/22 = 82% 15.0%",
+   "term": "POST pass (% of 22)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "82%"
+  },
+  {
+   "id": "F177",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "73",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 3, row Codex, column POST pass",
+   "quote": "Codex 16/22 = 73% 9.5%",
+   "term": "POST pass (% of 22)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "73%"
+  },
+  {
+   "id": "F178",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "77",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 3, row Gemini CLI, column POST pass",
+   "quote": "Gemini CLI 17/22 = 77% 7.2%",
+   "term": "POST pass (% of 22)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "77%"
+  },
+  {
+   "id": "F179",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "73",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 3, row opencode, column POST pass",
+   "quote": "opencode 16/22 = 73% 9.5%",
+   "term": "POST pass (% of 22)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "73%"
+  },
+  {
+   "id": "F180",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "86",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 3, row Kimi Code, column POST pass",
+   "quote": "Kimi Code 19/22 = 86% 8.2%",
+   "term": "POST pass (% of 22)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "86%"
+  },
+  {
+   "id": "F181",
+   "says": "model-name",
+   "about": "Kimi-K3",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 4, row Kimi-K3",
+   "quote": "Kimi-K3 15.0%"
+  },
+  {
+   "id": "F182",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "15.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 4, row Kimi-K3, column Detail-retention score",
+   "quote": "Backbone Detail-retention score ↑ \\uparrow DeepSeek-Flash 16.0% Kimi-K3 15.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "15.0%"
+  },
+  {
+   "id": "F183",
+   "says": "model-name",
+   "about": "Kimi-K3",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 8, row Kimi-K3",
+   "quote": "Kimi-K3 15.0% 9.5% 7.2% 9.5% 8.2%"
+  },
+  {
+   "id": "F184",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "9.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 8, row Kimi-K3, column Codex",
+   "quote": "Kimi-K3 15.0% 9.5% 7.2% 9.5% 8.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "9.5%"
+  },
+  {
+   "id": "F185",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "7.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 8, row Kimi-K3, column Gemini CLI",
+   "quote": "Kimi-K3 15.0% 9.5% 7.2% 9.5% 8.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "7.2%"
+  },
+  {
+   "id": "F186",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "9.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 8, row Kimi-K3, column opencode",
+   "quote": "Kimi-K3 15.0% 9.5% 7.2% 9.5% 8.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "9.5%"
+  },
+  {
+   "id": "F187",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "8.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 8, row Kimi-K3, column Kimi Code",
+   "quote": "Kimi-K3 15.0% 9.5% 7.2% 9.5% 8.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "8.2%"
+  },
+  {
+   "id": "F188",
+   "says": "model-name",
+   "about": "Kimi-K3",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9 caption",
+   "quote": "Table 9: Recurring-Detail Retention mean score by client and prompt (Kimi-K3; unweighted mean per session)."
+  },
+  {
+   "id": "F189",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "21.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Kimi Code, column Claude Code (prompt)",
+   "quote": "Kimi Code 21.4% 13.2% 10.1% 15.3% 11.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "21.4%"
+  },
+  {
+   "id": "F190",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "13.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Kimi Code, column Codex (prompt)",
+   "quote": "Kimi Code 21.4% 13.2% 10.1% 15.3% 11.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "13.2%"
+  },
+  {
+   "id": "F191",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "10.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Kimi Code, column Gemini CLI (prompt)",
+   "quote": "Kimi Code 21.4% 13.2% 10.1% 15.3% 11.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "10.1%"
+  },
+  {
+   "id": "F192",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "15.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Kimi Code, column opencode (prompt)",
+   "quote": "Kimi Code 21.4% 13.2% 10.1% 15.3% 11.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "15.3%"
+  },
+  {
+   "id": "F193",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "11.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Kimi Code, column Kimi Code (prompt)",
+   "quote": "Kimi Code 21.4% 13.2% 10.1% 15.3% 11.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "11.5%"
+  },
+  {
+   "id": "F194",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "9.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Claude Code, column Claude Code (prompt)",
+   "quote": "Claude Code 9.4% 6.4% 4.5% 3.2% 5.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "9.4%"
+  },
+  {
+   "id": "F195",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "6.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Claude Code, column Codex (prompt)",
+   "quote": "Claude Code 9.4% 6.4% 4.5% 3.2% 5.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "6.4%"
+  },
+  {
+   "id": "F196",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "4.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Claude Code, column Gemini CLI (prompt)",
+   "quote": "Claude Code 9.4% 6.4% 4.5% 3.2% 5.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "4.5%"
+  },
+  {
+   "id": "F197",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Claude Code, column opencode (prompt)",
+   "quote": "Claude Code 9.4% 6.4% 4.5% 3.2% 5.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "3.2%"
+  },
+  {
+   "id": "F198",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row Claude Code, column Kimi Code (prompt)",
+   "quote": "Claude Code 9.4% 6.4% 4.5% 3.2% 5.5%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "5.5%"
+  },
+  {
+   "id": "F199",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "6.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row opencode, column Claude Code (prompt)",
+   "quote": "opencode 6.6% 3.7% 3.8% 4.9% 4.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "6.6%"
+  },
+  {
+   "id": "F200",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "3.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row opencode, column Codex (prompt)",
+   "quote": "opencode 6.6% 3.7% 3.8% 4.9% 4.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "3.7%"
+  },
+  {
+   "id": "F201",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "3.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row opencode, column Gemini CLI (prompt)",
+   "quote": "opencode 6.6% 3.7% 3.8% 4.9% 4.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "3.8%"
+  },
+  {
+   "id": "F202",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "4.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row opencode, column opencode (prompt)",
+   "quote": "opencode 6.6% 3.7% 3.8% 4.9% 4.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "4.9%"
+  },
+  {
+   "id": "F203",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "4.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row opencode, column Kimi Code (prompt)",
+   "quote": "opencode 6.6% 3.7% 3.8% 4.9% 4.2%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "4.2%"
+  },
+  {
+   "id": "F204",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row other, column Claude Code (prompt)",
+   "quote": "other 5.4% 2.3% 0.6% 1.1% 0.9%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "5.4%"
+  },
+  {
+   "id": "F205",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "2.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row other, column Codex (prompt)",
+   "quote": "other 5.4% 2.3% 0.6% 1.1% 0.9%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "2.3%"
+  },
+  {
+   "id": "F206",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row other, column Gemini CLI (prompt)",
+   "quote": "other 5.4% 2.3% 0.6% 1.1% 0.9%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.6%"
+  },
+  {
+   "id": "F207",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "1.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row other, column opencode (prompt)",
+   "quote": "other 5.4% 2.3% 0.6% 1.1% 0.9%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "1.1%"
+  },
+  {
+   "id": "F208",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row other, column Kimi Code (prompt)",
+   "quote": "other 5.4% 2.3% 0.6% 1.1% 0.9%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.9%"
+  },
+  {
+   "id": "F209",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "11.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-kimi, column Claude Code (prompt)",
+   "quote": "fake-kimi 11.8% 7.2% 8.2% 10.6% 6.6%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "11.8%"
+  },
+  {
+   "id": "F210",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "7.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-kimi, column Codex (prompt)",
+   "quote": "fake-kimi 11.8% 7.2% 8.2% 10.6% 6.6%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "7.2%"
+  },
+  {
+   "id": "F211",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "8.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-kimi, column Gemini CLI (prompt)",
+   "quote": "fake-kimi 11.8% 7.2% 8.2% 10.6% 6.6%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "8.2%"
+  },
+  {
+   "id": "F212",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "10.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-kimi, column opencode (prompt)",
+   "quote": "fake-kimi 11.8% 7.2% 8.2% 10.6% 6.6%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "10.6%"
+  },
+  {
+   "id": "F213",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "6.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-kimi, column Kimi Code (prompt)",
+   "quote": "fake-kimi 11.8% 7.2% 8.2% 10.6% 6.6%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "6.6%"
+  },
+  {
+   "id": "F214",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "10.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row kilocode, column Claude Code (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "10.9%"
+  },
+  {
+   "id": "F215",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "15.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row kilocode, column Codex (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "15.2%"
+  },
+  {
+   "id": "F216",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "8.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row kilocode, column Gemini CLI (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "8.7%"
+  },
+  {
+   "id": "F217",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "8.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row kilocode, column opencode (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "8.7%"
+  },
+  {
+   "id": "F218",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "8.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row kilocode, column Kimi Code (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "8.7%"
+  },
+  {
+   "id": "F219",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-cc, column Claude Code (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7% fake-cc 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F220",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-cc, column Codex (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7% fake-cc 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F221",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-cc, column Gemini CLI (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7% fake-cc 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F222",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-cc, column opencode (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7% fake-cc 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F223",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row fake-cc, column Kimi Code (prompt)",
+   "quote": "kilocode 10.9% 15.2% 8.7% 8.7% 8.7% fake-cc 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F224",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row hertz, column Claude Code (prompt)",
+   "quote": "fake-cc 0.0% 0.0% 0.0% 0.0% 0.0% hertz 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F225",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row hertz, column Codex (prompt)",
+   "quote": "fake-cc 0.0% 0.0% 0.0% 0.0% 0.0% hertz 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F226",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row hertz, column Gemini CLI (prompt)",
+   "quote": "fake-cc 0.0% 0.0% 0.0% 0.0% 0.0% hertz 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F227",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row hertz, column opencode (prompt)",
+   "quote": "fake-cc 0.0% 0.0% 0.0% 0.0% 0.0% hertz 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
+  },
+  {
+   "id": "F228",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/b-moonshot/2610.31710v2.html",
+   "where": "Table 9, row hertz, column Kimi Code (prompt)",
+   "quote": "fake-cc 0.0% 0.0% 0.0% 0.0% 0.0% hertz 0.0% 0.0% 0.0% 0.0% 0.0%",
+   "term": "Detail-retention score (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "written": "0.0%"
   }
  ]
 }

@@ -8,7 +8,8 @@
  "commit": null,
  "sha256": {
   "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.21170.pdf": "d0f7e2c555c0cdfdd5156abc07ae96a9f31f06076bceb6a7177107b6c7d17b90",
-  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.21170.txt": "c8a5a666983829e55f18870d6caf389e0a33b7b7300feb8c2336984fedf6898b"
+  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.21170.txt": "c8a5a666983829e55f18870d6caf389e0a33b7b7300feb8c2336984fedf6898b",
+  "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html": "b0401a1ed64e01aa0ecfe68b2ec035037434ceaf2723ad98324dd2329742bdc6"
  },
  "harvested_at": "2026-11-09T14:44:32Z",
  "captures": [
@@ -17,7 +18,8 @@
    "kind": "fetch",
    "url": "https://arxiv.org/abs/2610.21170v1",
    "captured": "2026-11-09",
-   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.21170.pdf"
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.21170.pdf",
+   "note": "also read by lot k-moonshot in /work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html"
   }
  ],
  "published": {
@@ -27,7 +29,7 @@
   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.21170.txt"
  },
  "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-deepseek. MemScope (arXiv 2610.21170v1), Table 2 (GAIA validation and xBench DeepSearch-2505 accuracy), the three DeepSeek V3.2 rows: Flash-Searcher (research file: the GAIA average only), plus its L1/L2/L3/xBench columns and the MemEvolve + and MemScope + rows (15 values in all, 14 added: whole agent systems, not the bare model). The Kimi K2 / Kimi K2.7 Code rows and the frameworks with other models belong to other lots. Not converted: Tables 3-6 and ALFWorld.",
- "agent": "convertisseur k-deepseek (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "agent": "convertisseur k-deepseek (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie; merged with lot k-moonshot: convertisseur k-moonshot (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
  "snapshot_of": null,
  "facts": [
   {
@@ -364,6 +366,483 @@
     "model": "printed",
     "step": 0.01
    }
+  },
+  {
+   "id": "F23",
+   "says": "harness",
+   "about": "Kimi K2.7 Code",
+   "value": "Flash-Searcher",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.1 (Evolution and evaluation)",
+   "quote": "We use Flash-Searcher ( Qin et al., 2025 ) as the Agent Executor for GAIA and xBench, with DeepSeek V3.2 ( DeepSeek-AI, 2025 ) and Kimi K2.7 Code ( Kimi Team, 2025 ) as backbone models.",
+   "note": "Flash-Searcher is the Agent Executor with Kimi K2.7 Code (or DeepSeek V3.2) as backbone; for GAIA tasks with visual inputs it uses GPT-4o (gpt-4o-2024-11-20) for visual inspection; the Table 2 rows are whole agent frameworks (MemEvolve and MemScope add an evolving memory architecture): FLAG whole system, not the bare model"
+  },
+  {
+   "id": "F24",
+   "says": "judge",
+   "about": "Kimi K2.7 Code",
+   "value": "GPT-4o-mini",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.1",
+   "quote": "GAIA and xBench answers are evaluated by GPT-4o-mini ( OpenAI, 2024a )"
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "Kimi K2.7 Code",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.1",
+   "quote": "We use Flash-Searcher ( Qin et al., 2025 ) as the Agent Executor for GAIA and xBench, with DeepSeek V3.2 ( DeepSeek-AI, 2025 ) and Kimi K2.7 Code ( Kimi Team, 2025 ) as backbone models."
+  },
+  {
+   "id": "F26",
+   "says": "model-name",
+   "about": "Kimi K2",
+   "value": "Kimi K2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, Model Family Kimi K2",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00"
+  },
+  {
+   "id": "F27",
+   "says": "note",
+   "about": null,
+   "value": "GAIA validation and xBench DeepSearch-2505 accuracy (%).",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2 caption",
+   "quote": "Table 2: GAIA validation and xBench DeepSearch-2505 accuracy (%).",
+   "note": "pass@1; GAIA Avg. and levels L1, L2, L3, xBench; xBench on the full DeepSearch-2505 set with a 40-step budget and GPT-4o-mini judging; whole agent frameworks with the named backbone; reasoning effort, mode, route and snapshot of the backbone are not written"
+  },
+  {
+   "id": "F28",
+   "says": "harness",
+   "about": "Kimi K2.7 Code",
+   "value": "MemScope",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.2 (main results)",
+   "quote": "with Kimi K2.7 Code, MemScope reaches 78.18% on GAIA and 74% on xBench (Table 2 ).",
+   "note": "FLAG whole system: the MemScope memory-architecture evolution on top of Flash-Searcher"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "78.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemScope + (pass@1), model family Kimi K2.7 Code, column GAIA Avg. accuracy (%)",
+   "quote": "MemScope + (pass@1) Kimi K2.7 Code 78.18 88.68 75.58 65.38 74.00",
+   "term": "GAIA Avg. accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "88.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemScope + (pass@1), model family Kimi K2.7 Code, column GAIA level 1 accuracy (%)",
+   "quote": "MemScope + (pass@1) Kimi K2.7 Code 78.18 88.68 75.58 65.38 74.00",
+   "term": "GAIA level 1 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "75.58",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemScope + (pass@1), model family Kimi K2.7 Code, column GAIA level 2 accuracy (%)",
+   "quote": "MemScope + (pass@1) Kimi K2.7 Code 78.18 88.68 75.58 65.38 74.00",
+   "term": "GAIA level 2 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "65.38",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemScope + (pass@1), model family Kimi K2.7 Code, column GAIA level 3 accuracy (%)",
+   "quote": "MemScope + (pass@1) Kimi K2.7 Code 78.18 88.68 75.58 65.38 74.00",
+   "term": "GAIA level 3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "74.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemScope + (pass@1), model family Kimi K2.7 Code, column xBench DeepSearch-2505 accuracy (%)",
+   "quote": "MemScope + (pass@1) Kimi K2.7 Code 78.18 88.68 75.58 65.38 74.00",
+   "term": "xBench DeepSearch-2505 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "Kimi K2",
+   "value": "Kimi K2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00"
+  },
+  {
+   "id": "F35",
+   "says": "harness",
+   "about": "Kimi K2",
+   "value": "Flash-Searcher",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.1 (the Agent Executor)",
+   "quote": "We use Flash-Searcher ( Qin et al., 2025 ) as the Agent Executor for GAIA and xBench, with DeepSeek V3.2 ( DeepSeek-AI, 2025 ) and Kimi K2.7 Code ( Kimi Team, 2025 ) as backbone models.",
+   "note": "FLAG whole agent framework; Flash-Searcher is the Agent Executor of the study (Kimi K2.7 Code or DeepSeek V3.2 named in the sentence; the Kimi K2 row of Table 2 is a reported baseline row)"
+  },
+  {
+   "id": "F36",
+   "says": "judge",
+   "about": "Kimi K2",
+   "value": "GPT-4o-mini",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.1",
+   "quote": "GAIA and xBench answers are evaluated by GPT-4o-mini ( OpenAI, 2024a )"
+  },
+  {
+   "id": "F37",
+   "says": "note",
+   "about": "Kimi K2",
+   "value": "Kimi K2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00",
+   "note": "ADDED (hors liste du fit): the written name \"Kimi K2\" (not K2 Thinking, not K2.5) is not attached to a registry key; kept under its written name"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "52.12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2, column GAIA Avg. accuracy (%)",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00",
+   "term": "GAIA Avg. accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "58.49",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2, column GAIA level 1 accuracy (%)",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00",
+   "term": "GAIA level 1 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "52.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2, column GAIA level 2 accuracy (%)",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00",
+   "term": "GAIA level 2 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "34.62",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2, column GAIA level 3 accuracy (%)",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00",
+   "term": "GAIA level 3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "66.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2, column xBench DeepSearch-2505 accuracy (%)",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00",
+   "term": "xBench DeepSearch-2505 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "says": "model-name",
+   "about": "Kimi K2",
+   "value": "Kimi K2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve, model family Kimi K2",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00"
+  },
+  {
+   "id": "F44",
+   "says": "note",
+   "about": "Kimi K2",
+   "value": "Kimi K2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve, model family Kimi K2",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00",
+   "note": "ADDED (hors liste du fit): the written name \"Kimi K2\" (not K2 Thinking, not K2.5) is not attached to a registry key; kept under its written name"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "61.21",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve + Flash-Searcher, model family Kimi K2, column GAIA Avg. accuracy (%)",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00",
+   "term": "GAIA Avg. accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "67.92",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve + Flash-Searcher, model family Kimi K2, column GAIA level 1 accuracy (%)",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00",
+   "term": "GAIA level 1 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "63.95",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve + Flash-Searcher, model family Kimi K2, column GAIA level 2 accuracy (%)",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00",
+   "term": "GAIA level 2 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "38.46",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve + Flash-Searcher, model family Kimi K2, column GAIA level 3 accuracy (%)",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00",
+   "term": "GAIA level 3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "Kimi K2",
+   "value": "68.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve + Flash-Searcher, model family Kimi K2, column xBench DeepSearch-2505 accuracy (%)",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00",
+   "term": "xBench DeepSearch-2505 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F50",
+   "says": "note",
+   "about": "Kimi K2.7 Code",
+   "value": "paired xBench outcomes on 70 questions",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 3 caption",
+   "quote": "Table 3: Paired xBench outcomes on 70 questions. C/I denote correct/incorrect; transitions are from the original to the evolved provider.",
+   "note": "columns: C to C, I to C, C to I, I to I; both providers use Flash-Searcher and start with independent empty memory stores that update online from trajectories and post-task correctness feedback, without the judge's reference answer; the evolved provider retains 92.00% of original successes (46 of 50) and recovers 7 failures against 4 regressions"
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.2 (paired xBench comparison)",
+   "quote": "the evolved versus original providers answer 55/70 versus 49/70 correctly with DeepSeek V3.2 and 53/70 versus 50/70 with Kimi K2.7 Code",
+   "term": "xBench correct answers out of 70 (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "50/70"
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.2 (paired xBench comparison)",
+   "quote": "the evolved versus original providers answer 55/70 versus 49/70 correctly with DeepSeek V3.2 and 53/70 versus 50/70 with Kimi K2.7 Code",
+   "term": "xBench correct answers out of 70 (count)",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   },
+   "written": "53/70"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K2.7 Code",
+   "value": "Kimi K2.7 Code",
+   "level": "not-established:assumed",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "section 4.1",
+   "quote": "We use Flash-Searcher ( Qin et al., 2025 ) as the Agent Executor for GAIA and xBench, with DeepSeek V3.2 ( DeepSeek-AI, 2025 ) and Kimi K2.7 Code ( Kimi Team, 2025 ) as backbone models.",
+   "note": " | integration 6 of salvo s6 (9 Nov 2026): whole system (harness, agent or connectors around the model), not the bare model",
+   "id": "F53"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K2",
+   "value": "Kimi K2",
+   "level": "not-established:assumed",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row Flash-Searcher, model family Kimi K2",
+   "quote": "Flash-Searcher (pass@1) Kimi K2 52.12 58.49 52.33 34.62 66.00",
+   "note": " | integration 6 of salvo s6 (9 Nov 2026): whole system (harness, agent or connectors around the model), not the bare model",
+   "id": "F54"
+  },
+  {
+   "says": "model-name",
+   "about": "Kimi K2",
+   "value": "Kimi K2",
+   "level": "not-established:assumed",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-moonshot/2610.21170v1.html",
+   "where": "Table 2, row MemEvolve, model family Kimi K2",
+   "quote": "MemEvolve + (pass@1) Kimi K2 61.21 67.92 63.95 38.46 68.00",
+   "note": " | integration 6 of salvo s6 (9 Nov 2026): whole system (harness, agent or connectors around the model), not the bare model",
+   "id": "F55"
   }
  ],
  "extractions": [
