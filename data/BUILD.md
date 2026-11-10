@@ -1535,3 +1535,14 @@ No rule of the build changed.
   only Epoch writes one (« Assuming medium reasoning effort », « Assuming medium based on GPT-5 being run at medium. »,
   « Medium thinking used in other GPT-5 evaluations, assuming the same here. », « Assuming default thinking token
   budget »…), and of its 21 such rows only geobench o1-2024-12-17_medium (4 Nov snapshot, 2 measures) is converted.
+- **OpenAI complement (lot k-openai-3) and the fit's other models of 2610.38096.** The lot's new facts and measures are
+  appended to the five sources (2611.05340 +711 facts / +472 measures, 2610.38096 +362 / +166, 2611.02028 +290 token
+  facts, 2610.34435 +25 facts, 2611.03575 nothing new; no cell repeated), with its 141 proposed setups (headline
+  pending). The 24 « items » facts of 2610.34435 (the N of Table 7's n/N) are attached to M241-M264. Table 9 of
+  2611.05340: the « result » family t9-rs-* (lot k-openai-2, the OpenAI rows) is merged into t9-res-* (the same rows,
+  lots k-google-1 and k-openai-3; the moved value facts take the res family's term and scale), and t9-rs-fa's direction
+  is corrected to lower (false alarms). The integration converted itself, row by row, the rows of the fit's other
+  models (Opus 5.5, Opus 5, Opus 4.8, Sonnet 5.5, Fable 5.1, Haiku 5.5, Gemini 4 Argon, Gemini 3.8 Flash) of 2610.38096's
+  Supplementary Tables S2 (52 rows), S7 (26), S12 (27), S14 (13) and S33 (15): 487 measures, 86 new setups (headline
+  pending), the lot's rules (Table 1 cells not repeated: S2 main-set B_u rejected and solved, S12 main-set B_u calls
+  without an answer, S14 B_u first runs; run dates from Supplementary Table S1; effort « high » for every model).
