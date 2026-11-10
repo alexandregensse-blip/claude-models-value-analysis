@@ -18063,27 +18063,6 @@
   "arxiv-2611.09017-frontier3dbench-total": {
    "label": "Frontier3DBench (arXiv 2611.09017): Total (overall score, 30/30/40 level weights), 145 tasks (0-100)"
   },
-  "arxiv-2611.09085-romanized-english-only-fails": {
-   "label": "Romanized Indic generation (arXiv 2611.09085): English-only failures (count)"
-  },
-  "arxiv-2611.09085-romanized-grammar": {
-   "label": "Romanized Indic generation (arXiv 2611.09085): Grammar (/2)"
-  },
-  "arxiv-2611.09085-romanized-natural": {
-   "label": "Romanized Indic generation (arXiv 2611.09085): Naturalness/Fluency (/3)"
-  },
-  "arxiv-2611.09085-romanized-register": {
-   "label": "Romanized Indic generation (arXiv 2611.09085): Register (/2)"
-  },
-  "arxiv-2611.09085-romanized-total": {
-   "label": "Romanized Indic generation (arXiv 2611.09085): Total (/12)"
-  },
-  "arxiv-2611.09085-romanized-usability": {
-   "label": "Romanized Indic generation (arXiv 2611.09085): Usability (/3)"
-  },
-  "arxiv-2611.09085-romanized-word": {
-   "label": "Romanized Indic generation (arXiv 2611.09085): Word choice (/2)"
-  },
   "harbor-tb21-codex-pass-at-2": {
    "label": "Terminal-Bench 2.1 (harbor-framework submissions), Codex harness: pass@2"
   },
@@ -58410,24 +58389,15 @@
    "metric": "meal energy MAE% (lower better)",
    "headline": {
     "metric": "meal energy MAE% (lower better)",
-    "basis": "only-metric",
-    "evidence": [
-     {
-      "url": "https://arxiv.org/abs/2610.26538",
-      "captured": "2026-10-21",
-      "file": "/work/.salvo14/hn/news-papers/src/papers/2610.26538.tables.txt",
-      "sha256": "d821aa2f98d5d042b2c25a1276a72eef182b9c84d5447c653cbcc775137ec805",
-      "where": "Table 1 (header row): the MAE% metric of each column; one metric per table cell",
-      "quote": "Model | Before only | Before × c | Subtraction | Both photos | Both photos, valid subset (n) | Δ vs before only | Δ vs before × c | Δ vs before × c, ≥10% left"
-     }
-    ],
-    "level": "written"
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
    },
    "bounds": [
     0,
     100
    ],
-   "direction": "higher",
+   "direction": "lower",
    "task_type": "mixed",
    "complexity": "mid",
    "kind": "runs",
@@ -58436,7 +58406,7 @@
     "energy-before-only"
    ],
    "label": "Meal energy MAE%, before photo only (Table 1, first column)",
-   "note": "headline: not-established:assumed (only metric held: 'meal energy MAE% (lower better)'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'meal energy MAE% (lower better)'); to be proven from the source | integration 6 of salvo s6 (9 Nov 2026): « MAE% (lower better) »: direction lower; headline pending (the fit reads no registry direction)"
   },
   "energy-both-photos": {
    "family": "energy-both-photos",
@@ -58448,24 +58418,15 @@
    "metric": "meal energy MAE% (lower better)",
    "headline": {
     "metric": "meal energy MAE% (lower better)",
-    "basis": "only-metric",
-    "evidence": [
-     {
-      "url": "https://arxiv.org/abs/2610.26538",
-      "captured": "2026-10-21",
-      "file": "/work/.salvo14/hn/news-papers/src/papers/2610.26538.tables.txt",
-      "sha256": "d821aa2f98d5d042b2c25a1276a72eef182b9c84d5447c653cbcc775137ec805",
-      "where": "Table 1 (header row): the MAE% metric of each column; one metric per table cell",
-      "quote": "Model | Before only | Before × c | Subtraction | Both photos | Both photos, valid subset (n) | Δ vs before only | Δ vs before × c | Δ vs before × c, ≥10% left"
-     }
-    ],
-    "level": "written"
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
    },
    "bounds": [
     0,
     100
    ],
-   "direction": "higher",
+   "direction": "lower",
    "task_type": "mixed",
    "complexity": "mid",
    "kind": "runs",
@@ -58474,7 +58435,7 @@
     "energy-both-photos"
    ],
    "label": "Meal energy MAE%, before and after photos (Table 1, Both photos = structured prompt (3))",
-   "note": "headline: not-established:assumed (only metric held: 'meal energy MAE% (lower better)'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'meal energy MAE% (lower better)'); to be proven from the source | integration 6 of salvo s6 (9 Nov 2026): « MAE% (lower better) »: direction lower; headline pending (the fit reads no registry direction)"
   },
   "enigmaforge": {
    "family": "enigmaforge",
@@ -248515,174 +248476,6 @@
    "legacy_groups": [],
    "label": "Frontier3DBench (arXiv 2611.09017): Total (overall score, 30/30/40 level weights), 145 tasks (0-100)",
    "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): Table 3 score of an agent configuration (model + its developer harness); Total weights L1/L2/L3 30/30/40"
-  },
-  "arxiv-2611.09085-romanized-english-only-fails": {
-   "family": "arxiv-2611.09085-romanized-english-only-fails",
-   "benchmark": "Romanized Indic generation (arXiv 2611.09085): English-only failures (count)",
-   "subset": null,
-   "harness": null,
-   "tools_regime": null,
-   "judge_panel": null,
-   "metric": "English-only failures (count)",
-   "headline": {
-    "metric": "English-only failures (count)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
-   },
-   "bounds": null,
-   "direction": "lower",
-   "task_type": "mixed",
-   "complexity": "hard",
-   "kind": "runs",
-   "composite": null,
-   "legacy_groups": [],
-   "label": "Romanized Indic generation (arXiv 2611.09085): English-only failures (count)",
-   "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): native-speaker human evaluation (72 responses) and automatic metrics over 142 responses, three Indic languages; lower is better"
-  },
-  "arxiv-2611.09085-romanized-grammar": {
-   "family": "arxiv-2611.09085-romanized-grammar",
-   "benchmark": "Romanized Indic generation (arXiv 2611.09085): Grammar (/2)",
-   "subset": null,
-   "harness": null,
-   "tools_regime": null,
-   "judge_panel": null,
-   "metric": "Grammar (/2)",
-   "headline": {
-    "metric": "Grammar (/2)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
-   },
-   "bounds": null,
-   "direction": "higher",
-   "task_type": "mixed",
-   "complexity": "hard",
-   "kind": "runs",
-   "composite": null,
-   "legacy_groups": [],
-   "label": "Romanized Indic generation (arXiv 2611.09085): Grammar (/2)",
-   "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): native-speaker human evaluation (72 responses) and automatic metrics over 142 responses, three Indic languages"
-  },
-  "arxiv-2611.09085-romanized-natural": {
-   "family": "arxiv-2611.09085-romanized-natural",
-   "benchmark": "Romanized Indic generation (arXiv 2611.09085): Naturalness/Fluency (/3)",
-   "subset": null,
-   "harness": null,
-   "tools_regime": null,
-   "judge_panel": null,
-   "metric": "Naturalness/Fluency (/3)",
-   "headline": {
-    "metric": "Naturalness/Fluency (/3)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
-   },
-   "bounds": null,
-   "direction": "higher",
-   "task_type": "mixed",
-   "complexity": "hard",
-   "kind": "runs",
-   "composite": null,
-   "legacy_groups": [],
-   "label": "Romanized Indic generation (arXiv 2611.09085): Naturalness/Fluency (/3)",
-   "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): native-speaker human evaluation (72 responses) and automatic metrics over 142 responses, three Indic languages"
-  },
-  "arxiv-2611.09085-romanized-register": {
-   "family": "arxiv-2611.09085-romanized-register",
-   "benchmark": "Romanized Indic generation (arXiv 2611.09085): Register (/2)",
-   "subset": null,
-   "harness": null,
-   "tools_regime": null,
-   "judge_panel": null,
-   "metric": "Register (/2)",
-   "headline": {
-    "metric": "Register (/2)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
-   },
-   "bounds": null,
-   "direction": "higher",
-   "task_type": "mixed",
-   "complexity": "hard",
-   "kind": "runs",
-   "composite": null,
-   "legacy_groups": [],
-   "label": "Romanized Indic generation (arXiv 2611.09085): Register (/2)",
-   "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): native-speaker human evaluation (72 responses) and automatic metrics over 142 responses, three Indic languages"
-  },
-  "arxiv-2611.09085-romanized-total": {
-   "family": "arxiv-2611.09085-romanized-total",
-   "benchmark": "Romanized Indic generation (arXiv 2611.09085): Total (/12)",
-   "subset": null,
-   "harness": null,
-   "tools_regime": null,
-   "judge_panel": null,
-   "metric": "Total (/12)",
-   "headline": {
-    "metric": "Total (/12)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
-   },
-   "bounds": null,
-   "direction": "higher",
-   "task_type": "mixed",
-   "complexity": "hard",
-   "kind": "runs",
-   "composite": null,
-   "legacy_groups": [],
-   "label": "Romanized Indic generation (arXiv 2611.09085): Total (/12)",
-   "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): native-speaker human evaluation (72 responses) and automatic metrics over 142 responses, three Indic languages"
-  },
-  "arxiv-2611.09085-romanized-usability": {
-   "family": "arxiv-2611.09085-romanized-usability",
-   "benchmark": "Romanized Indic generation (arXiv 2611.09085): Usability (/3)",
-   "subset": null,
-   "harness": null,
-   "tools_regime": null,
-   "judge_panel": null,
-   "metric": "Usability (/3)",
-   "headline": {
-    "metric": "Usability (/3)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
-   },
-   "bounds": null,
-   "direction": "higher",
-   "task_type": "mixed",
-   "complexity": "hard",
-   "kind": "runs",
-   "composite": null,
-   "legacy_groups": [],
-   "label": "Romanized Indic generation (arXiv 2611.09085): Usability (/3)",
-   "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): native-speaker human evaluation (72 responses) and automatic metrics over 142 responses, three Indic languages"
-  },
-  "arxiv-2611.09085-romanized-word": {
-   "family": "arxiv-2611.09085-romanized-word",
-   "benchmark": "Romanized Indic generation (arXiv 2611.09085): Word choice (/2)",
-   "subset": null,
-   "harness": null,
-   "tools_regime": null,
-   "judge_panel": null,
-   "metric": "Word choice (/2)",
-   "headline": {
-    "metric": "Word choice (/2)",
-    "basis": "decision",
-    "decision": null,
-    "level": "not-established:assumed"
-   },
-   "bounds": null,
-   "direction": "higher",
-   "task_type": "mixed",
-   "complexity": "hard",
-   "kind": "runs",
-   "composite": null,
-   "legacy_groups": [],
-   "label": "Romanized Indic generation (arXiv 2611.09085): Word choice (/2)",
-   "note": "NEW setup (salvo s6, lot k-openai-1, 9 Nov 2026): headline pending (the converter does not designate a headline): native-speaker human evaluation (72 responses) and automatic metrics over 142 responses, three Indic languages"
   },
   "harbor-tb21-codex-pass-at-2": {
    "family": "harbor-tb21-codex-pass-at-2",
