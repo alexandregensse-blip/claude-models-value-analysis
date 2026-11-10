@@ -274,7 +274,11 @@ shared couples, ≥ 2 of them, equality by METHODOLOGY §3's closeness test) lin
    are written, else `out:failed-run`; `partial` (items missing, not scored) → `out:partial` unless the source scores them as wrong; `cap`
    (a declared cap, scored) is a setup attribute, in; an anomaly `assumed` → `out:anomaly-assumed`; `contradictory` →
    `out:contradictory`.
-5. **Metric** = the setup's headline → else `out:not-headline`.
+5. **Metric** = the setup's headline → else `out:not-headline`; the setup's **direction** `higher` or `lower` → else
+   `out:direction-not-established` (no direction guessed; the maintainer, 10 Nov 2026). A `lower` score is turned so
+   that higher is better where it becomes the fit's quantity, lqm's f(y), in its unit (B − y on a bounded scale before
+   the logit, −log y on a log scale, −y otherwise); the build writes the source's value unchanged in the tables and
+   carries the direction in `group-setups.json` (rule `score-direction`).
 6. **Uninformative**: a score at the floor or the ceiling of its metric for one couple while the others are not → score
    out (`out:uninformative`), its cost kept (METHODOLOGY §2).
 7. **Campaign**: an earlier value replaced within its campaign → `out:superseded` (kept as `prev`).

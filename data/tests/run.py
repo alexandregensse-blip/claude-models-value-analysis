@@ -2560,6 +2560,106 @@ def fit_reads_build_tables():
 
 
 @test
+def direction_turned_at_f():
+    """The maintainer, 10 Nov 2026 (rule score-direction): a group whose setup's direction is 'lower' is turned at f(y)
+    in its unit — B − y before the logit on a bounded scale, −log y on a log scale, −y otherwise — once, even when its
+    metric label also says lower (LOWER_IS_BETTER). Negative control: without the direction the order is the source's."""
+    import tempfile
+    sys.path[:0] = [os.path.join(DATA, "..", "model"), DATA]
+    import lqm
+    d = tempfile.mkdtemp(prefix="direction-")
+    try:
+        path = os.path.join(d, "fit-quality.csv")
+        cols = ["group", "source", "model", "effort", "task_type", "harness", "unit", "cost_usd", "score",
+                "score_metric", "score_prec", "confound"]
+        rows = [("asr", "ASR%", "30", "60"), ("mae", "mae-lower-better", "2", "5"), ("xp", "xp-x1e5", "2", "8"),
+                ("bpb", "val_bpb(lower-better)", "1.1", "1.4")]
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(",".join(cols) + "\n")
+            for g, m, va, vb in rows:
+                for model, v in (("ma", va), ("mb", vb)):
+                    f.write(f"{g},pubx,{model},low,coding,,,,{v},{m},,\n")
+        models = ["ma", "mb"]
+        y = lambda G, g: {x["model"]: x["y"] for x in G[g]["rows"]}                          # noqa: E731
+        saved = lqm.DIRECTION_OF
+        lqm.DIRECTION_OF = {"asr": "lower", "mae": "lower", "xp": "lower", "bpb": "lower"}
+        try:
+            G, _, _ = lqm.load(path, models)
+        finally:
+            lqm.DIRECTION_OF = saved
+        g0, _, _ = lqm.load(path, models)
+        a, a0 = y(G, "asr"), y(g0, "asr")
+        eq(a["ma"] > a["mb"], True, "ASR %: 30 % is better than 60 %")
+        eq((round(a["ma"], 9), round(a["mb"], 9)), (round(-a0["ma"], 9), round(-a0["mb"], 9)),
+           "100 − y before the logit: the logit's mirror image, inside the bounds")
+        eq(G["asr"]["kind"], "logit", "still a bounded score")
+        eq(y(G, "mae")["ma"] > y(G, "mae")["mb"], True, "identity: −y")
+        eq((round(y(G, "xp")["ma"], 9), round(-math.log(2), 9)), (round(y(G, "xp")["ma"], 9),) * 2, "log: −log y")
+        eq(y(G, "bpb"), y(g0, "bpb"), "a label that says lower and a direction lower: turned once")
+        eq(a0["ma"] < a0["mb"], True, "negative control: without the direction, 60 % ranks higher")
+        eq(y(g0, "mae")["ma"] < y(g0, "mae")["mb"], True, "negative control: identity unchanged")
+        eq(lqm.DIRECTION_OF, saved, "the map restored")
+    finally:
+        shutil.rmtree(d, ignore_errors=True)
+
+
+@test
+def direction_through_build():
+    """The build carries each setup's direction into group-setups.json and the fit reads it through fit_maps: a lower
+    setup's 30 % ranks above its 60 %. A setup whose direction is absent or unknown keeps its measures out
+    (out:direction-not-established), on the quality axis only. Negative control: the same setup 'higher' is in, in the
+    source's order."""
+    import argparse, tempfile
+    sys.path[:0] = [os.path.join(DATA, "..", "model"), DATA]
+    import lqm, build_lqm
+
+    def scenario(direction):
+        sc = base()
+        sc.setup("sl", metric="ASR%", direction=direction)
+        same_price(sc, "ma", "mb")
+        s = sc.source("a")
+        return sc, (sc.m(s, setup="sl", model="ma", effort=[LOW], score="30%"),
+                    sc.m(s, setup="sl", model="mb", effort=[LOW], score="60%"))
+    sc, _ = scenario(None)
+    try:
+        sc.run()
+        raise AssertionError("a setup without a direction passed validation")
+    except AssertionError as e:
+        eq("is not a term of vocab 'direction'" in str(e), True, "validation refuses a setup without a direction")
+    for direction in (None, "up"):                       # past validation (the registry altered in the build's context)
+        sc, (m1, m2) = scenario("higher")
+        root = tempfile.mkdtemp(prefix="dirguard-")
+        try:
+            reg, fnd, dec = sc.write(root)
+            a = argparse.Namespace(registry=reg, findings=fnd, decisions=dec, out=os.path.join(root, "out"),
+                                   previous=None, cost_method_unstated=build.SETTINGS["cost_method_unstated"][0],
+                                   fit_models=None, class_ratios=None, no_lqm=True)
+            build.check_args(a)
+            ctx = build.Ctx(a)
+            ctx.setups["sl"]["direction"] = direction
+            measures, _, _ = build.build(ctx)
+            st = {M.ref: (M.status["quality"], M.detail["quality"]) for M in measures}
+            eq(st[m1][0], "out:direction-not-established", f"direction {direction!r}: out")
+            eq(f"direction {direction!r}" in st[m1][1], True, "the reason written")
+        finally:
+            shutil.rmtree(root, ignore_errors=True)
+    for direction in ("lower", "higher"):
+        sc, (m1, m2) = scenario(direction)
+        keep = tempfile.mkdtemp(prefix="dirbuild-")
+        try:
+            r = sc.run(lqm=True, keep=keep)
+            eq((r.q(m1), r.q(m2)), ("in", "in"), f"direction {direction!r}: in")
+            gm, gs = build_lqm.read_maps(keep)
+            eq(gs["setups"]["sl"]["direction"], direction, "group-setups.json carries the direction")
+            G, _, _ = build_lqm.load_table(lqm, "quality", r.rep["build"]["fit_models"], keep)
+            ys = {x["model"]: x["y"] for g in G.values() for x in g["rows"]}
+            eq(ys["ma"] > ys["mb"], direction == "lower", f"{direction}: the order at f(y)")
+            eq(lqm.DIRECTION_OF, {}, "lqm's map restored after the block")
+        finally:
+            shutil.rmtree(keep, ignore_errors=True)
+
+
+@test
 def site_ladder_switch():
     """The site's effort-ladder report: on a model whose maker's thinking is a switch (vocab maker x-terms.thinking,
     Anthropic) thinking off above low is not an inversion, and thinking off is compared with thinking on; on another

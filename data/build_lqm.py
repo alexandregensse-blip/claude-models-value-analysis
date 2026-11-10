@@ -36,24 +36,32 @@ def base_of(lqm_group):
 def group_setups(measures, gm, benchmarks_path):
     """What the group-keyed catalog maps need from the registry, for the fit groups of group-map.json: each group's
     setup (as the report's measures give it: a measure's `group` and `cost_group`; legacy rows have none), and each such
-    setup's benchmark family and composite components (benchmarks.json). The build writes it as group-setups.json, so
-    that the fit resolves the maps from the build's products alone, without the status report."""
-    setup_of = {}
+    setup's benchmark family, composite components and score direction (benchmarks.json `direction`, read by lqm's
+    f(y): DIRECTION_OF). The build writes it as group-setups.json, so that the fit resolves the maps from the build's
+    products alone, without the status report. A fit group whose setups disagree on the direction cannot be turned
+    one way: ValueError (none on 10 Nov 2026)."""
+    setup_of, all_setups = {}, collections.defaultdict(set)
     for e in measures.values():
         for g in (e.get("group"), e.get("cost_group")):
             if g:
                 setup_of[g] = e["setup"]
+                all_setups[g].add(e["setup"])
     bench = {}
     if benchmarks_path and os.path.isfile(benchmarks_path):
         with open(benchmarks_path, encoding="utf-8") as f:
             bench = json.load(f).get("setups", {})
     groups = {g: setup_of[g] for g in sorted(gm) if g in setup_of}
+    for g in groups:
+        dirs = {bench.get(s, {}).get("direction") for s in all_setups[g]}
+        if len(dirs) > 1:
+            raise ValueError(f"fit group {g}: its setups {sorted(all_setups[g])} disagree on the direction")
     setups = {}
     for s in sorted(set(groups.values())):
         b = bench.get(s, {})
         sc = b.get("composite") or {}
         setups[s] = dict(family=b.get("family"), components=sorted(
-            {c if isinstance(c, str) else c.get("setup") for c in sc.get("components", [])} - {None}))
+            {c if isinstance(c, str) else c.get("setup") for c in sc.get("components", [])} - {None}),
+            direction=b.get("direction"))
     return dict(groups=groups, setups=setups)
 
 
@@ -73,6 +81,14 @@ def expanded_maps(lqm, gm, gs):
     return comps, fam
 
 
+def directions(gm, gs):
+    """lqm.DIRECTION_OF keyed by fit groups: each fit group's setup's direction (group-setups.json); a group without a
+    setup (legacy rows) or a direction is left out (lqm then reads the metric label)."""
+    setup_of, setups = gs["groups"], gs["setups"]
+    return {g: setups[setup_of[g]]["direction"] for g in gm
+            if setup_of.get(g) in setups and setups[setup_of[g]].get("direction")}
+
+
 def read_maps(build_dir):
     """(group-map.json, group-setups.json) of a build folder."""
     with open(os.path.join(build_dir, "group-map.json"), encoding="utf-8") as f:
@@ -84,15 +100,17 @@ def read_maps(build_dir):
 
 @contextlib.contextmanager
 def fit_maps(lqm, build_dir):
-    """lqm.COMPOSITES and lqm.FAMILY_OF keyed by the build's fit groups while the block runs (lqm.load reads them),
-    restored after: how data/build_lqm.py, model/fit.py, model/precheck.py and model/validation read the fit tables."""
-    comps, fam = expanded_maps(lqm, *read_maps(build_dir))
-    saved = lqm.COMPOSITES, lqm.FAMILY_OF
-    lqm.COMPOSITES, lqm.FAMILY_OF = comps, fam
+    """lqm.COMPOSITES, lqm.FAMILY_OF and lqm.DIRECTION_OF keyed by the build's fit groups while the block runs
+    (lqm.load reads them), restored after: how data/build_lqm.py, model/fit.py, model/precheck.py and model/validation
+    read the fit tables."""
+    gm, gs = read_maps(build_dir)
+    comps, fam = expanded_maps(lqm, gm, gs)
+    saved = lqm.COMPOSITES, lqm.FAMILY_OF, lqm.DIRECTION_OF
+    lqm.COMPOSITES, lqm.FAMILY_OF, lqm.DIRECTION_OF = comps, fam, directions(gm, gs)
     try:
         yield comps, fam
     finally:
-        lqm.COMPOSITES, lqm.FAMILY_OF = saved
+        lqm.COMPOSITES, lqm.FAMILY_OF, lqm.DIRECTION_OF = saved
 
 
 BUILD = os.path.join(REPO, "data", "build")                 # the committed build (data/build.py's default --out)

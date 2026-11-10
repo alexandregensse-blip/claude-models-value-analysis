@@ -72,11 +72,12 @@ class Sc:
         if level_mapping:
             self.routes[rid]["level_mapping"] = level_mapping
 
-    def setup(self, sid, metric="pass%", bounds=(0, 100), kind="runs", headline=None, family="fam", composite=None):
+    def setup(self, sid, metric="pass%", bounds=(0, 100), kind="runs", headline=None, family="fam", composite=None,
+              direction="higher"):
         self.families.setdefault(family, {"label": family})
         self.setups[sid] = dict(family=family, benchmark=sid, metric=metric,
                                 headline=headline or {"metric": metric, "basis": "designated", "evidence": EV},
-                                bounds=list(bounds) if bounds else None, direction="higher", task_type="coding",
+                                bounds=list(bounds) if bounds else None, direction=direction, task_type="coding",
                                 complexity="mid", kind=kind, composite=composite)
         return sid
 

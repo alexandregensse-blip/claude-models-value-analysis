@@ -2731,7 +2731,13 @@ def early_steps(M, axis, field):
         if hm is None or M.setup.get("metric") != hm:
             return "out:not-headline", (f"setup metric {M.setup.get('metric')!r}, headline "
                                         f"{hm!r}" if hm else "headline pending a decision")
+        if M.setup.get("direction") not in DIRECTIONS:      # lqm's f(y) turns 'lower' (10 Nov 2026): no guess
+            return "out:direction-not-established", (f"setup {M.setup_id}: direction {M.setup.get('direction')!r} is "
+                                                      f"not one of {sorted(DIRECTIONS)}")
     return None, ""
+
+
+DIRECTIONS = ("higher", "lower")                         # a setup's score direction that lqm's f(y) reads
 
 
 def model_events(ctx, key):

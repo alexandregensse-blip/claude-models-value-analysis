@@ -67,6 +67,14 @@ own lqm step uses. `precheck.py` checks the rows of `data/build/data.csv` in the
 `validation/` reads the tables. On the build of 29 Oct (migrated data): quality 1,608 groups, 17,705 rows, 334 couples;
 cost 923 groups, 8,403 rows, 271 couples (`fit.py --dry`). `raw-data.csv` is no longer read by the model.
 
+**Direction** (the maintainer, 10 Nov 2026, rule `score-direction`). The fit tables keep the source's values; a quality
+group whose setup's registry direction is `lower` (group-setups.json → `lqm.DIRECTION_OF`, set by `fit_maps`) is
+turned where the score becomes the fit's quantity, f(y) in `lqm.load`, in its unit's transform: a bounded score y on
+[0, B] → B − y before the empirical logit (apexharm-asr, ASR %: 30 % reads 70 %), an unbounded positive one → −log y,
+any other → −y. A group without a setup (legacy rows) keeps its metric label's rule (`LOWER_IS_BETTER`); the build
+keeps a setup without a known direction out (`out:direction-not-established`). Before 10 Nov 2026 the registry
+direction was not read: the `lower` groups were fitted as if higher were better.
+
 ## Run
 
 ```bash

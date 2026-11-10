@@ -109,15 +109,15 @@ precision** of the cost and of the score (§4).
 
 ## 4. Scales
 
-Each metric is put on a scale where a benchmark can be linear in quality. The rule reads the metric's label, never
-the benchmark's identity:
+Each metric is put on a scale where a benchmark can be linear in quality. The rule reads the metric's label and the
+setup's direction, never the benchmark's identity:
 
 | Metric | Transformation |
 |---|---|
 | bounded score: a percentage, a score out of *N* (or "*k* of *N*"), an F1, a 0–4 grade, a composite published on 0–100 | empirical logit of the proportion: logit(q), q = (p·n + ½)/(n + 1), n the group's number of scoring steps |
 | positive unbounded quantity with a true zero (money earned, points) | log |
 | interval or unknown scale (an Elo rating, a correlation, a composite without a stated range) | none |
-| lower is better (a rank) | sign flipped first |
+| lower is better: the setup's direction in the registry (an attack success rate, an error, a Brier score, a rank; a legacy row: its metric label) | turned first in its unit, so that higher is better: B − y on a bounded scale [0, B] before the logit (an attack success rate of 30 % reads 70 %), −log y on a log scale, −y otherwise; a setup without a known direction is left out (the maintainer, 10 Nov 2026) |
 | a label contradicted by its values (scores beyond the stated bound, like a "score out of 10" reaching 100) | treated as an unknown scale, and reported by the build |
 | cost | log |
 

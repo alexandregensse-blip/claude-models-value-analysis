@@ -388,6 +388,19 @@
    "ref": "docs/METHODOLOGY.md §2; docs/DATA-PIPELINE.md §5.2 step 6"
   },
   {
+   "id": "score-direction",
+   "kind": "standing",
+   "statement": "A score whose setup's direction is lower (lower is better) is turned at f(y) so that higher is better, in its unit's transform: B − y on a bounded scale [0, B] before the empirical logit, −log y on a log scale, −y otherwise (lqm.load, DIRECTION_OF from group-setups.json); a setup whose direction is absent or not higher / lower keeps its measures out (out:direction-not-established); no other direction is guessed. A legacy row (no setup) keeps its metric label's rule (lqm.LOWER_IS_BETTER).",
+   "inputs": [
+    "setup direction",
+    "setup bounds"
+   ],
+   "output": "lqm f(y); status out:direction-not-established (quality)",
+   "date": "2026-11-10",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.2 step 5; model/README.md; docs/METHODOLOGY.md"
+  },
+  {
    "id": "configurations-per-model",
    "kind": "standing",
    "statement": "Each model has its own list of configurations; every configuration of the list enters the fit as its own couple (low … max, minimal, nothink, think, solo), except think-<budget> (out:budget-config) and the terms vocab.json marks in_fit false (between-tools); solo only for a model whose list is [solo]. A method change: before/after before main.",

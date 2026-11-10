@@ -5,7 +5,9 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
     f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t}) + ε_r,      ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
 
   f        per metric (METRIC RULES): empirical logit of a bounded score, log of an unbounded positive quantity,
-           identity for an interval or unknown scale; log on the cost axis.
+           identity for an interval or unknown scale; log on the cost axis. A score where lower is better (its
+           setup's direction, DIRECTION_OF; a legacy row's metric label, LOWER_IS_BETTER) is turned first, in its
+           unit: B − y on a bounded scale [0, B] before the logit, −log y on a log scale, −y otherwise.
   θ_c      latent quality (quality axis) or log cost (cost axis) of the couple. θ sums to zero over the couples:
            no couple is a reference; the page divides by its reference couple afterwards (a display choice).
   o_b      group offset, flat. a_b group gain: quality log(a_b/σ_b) ~ N(0, s_g²) (discrimination, pooled; its zero
@@ -91,6 +93,14 @@ UNIT_BOUNDED = {"F1", "accuracy", "success"}                        # proportion
 HUNDRED_BOUNDED = {"weighted-rubric", "BLEU", "EDM-F1", "pass@1", "pass@3", "AA-idx", "LB-global-avg", "mAP50",
                    "RHAE", "score/579-pct"}                         # scores published on 0–100 without a '%'
 LOWER_IS_BETTER = {"subjective-rank-of-4", "val_bpb(lower-better)", "MSE(lower-better)", "edit-distance(lower-better)"}
+# Direction (the maintainer, 10 Nov 2026): a fit group whose setup's registry direction (benchmarks.json `direction`,
+# carried by the build in group-setups.json) is 'lower' is turned so that higher is better at f(y), the one place the
+# score becomes the fit's quantity, in its unit's own transform: a bounded score y on [0, B] → B − y before the empirical
+# logit (an attack success rate of 30 % reads as 70 %), an unbounded positive one → −log y, any other → −y. Filled by
+# data/build_lqm.py's fit_maps (fit group → 'higher' / 'lower'); a group it does not hold (a legacy row, whose metric
+# label carries its direction: LOWER_IS_BETTER) keeps the label's rule. The build keeps a measure whose setup has no
+# known direction out of the fit (out:direction-not-established).
+DIRECTION_OF = {}
 MAX_STEPS = 100                                                     # finest scoring step assumed: 1 point in 100
 
 
@@ -210,6 +220,7 @@ def load(path, models, field="score"):
             home=int(is_home(PUBLISHER_OF.get(r["source"], r["source"]), r["model"], r["confound"], r["harness"])),
             step=10.0 ** -(len(r[field].strip().split(".")[1]) if "." in r[field] else 0),
             other=_other_value(r, "score" if field == "cost_usd" else "cost_usd"),
+            lower=field != "cost_usd" and (metric in LOWER_IS_BETTER or DIRECTION_OF.get(r["group"]) == "lower"),
             unit=UNIT_ALIASES.get(r["source"], {}).get(r["unit"], r["unit"] or "")))
 
     # --- 1. composites
@@ -316,18 +327,19 @@ def load(path, models, field="score"):
             continue
         n_steps = None
         for x in rows:
-            v = -x["raw"] if x["metric"] in LOWER_IS_BETTER else x["raw"]
+            v = -x["raw"] if x["lower"] else x["raw"]                  # identity: −y (DIRECTION_OF)
             x["h"] = 1.0
             if k == "logit":
                 if n_steps is None:
                     n_steps = scoring_steps([y["raw"] / bound(y["metric"]) for y in rows])
-                q = empirical_q(x["raw"] / bound(x["metric"]), n_steps)
+                p = x["raw"] / bound(x["metric"])
+                q = empirical_q(1 - p if x["lower"] else p, n_steps)     # lower is better: B − y on its bound
                 x["y"] = math.log(q / (1 - q))
                 x["h"] = 0.5 / math.sqrt(q * (1 - q))
                 x["dy"] = x["prec"] / bound(x["metric"]) * n_steps / (n_steps + 1) / (q * (1 - q))   # delta method
             elif k == "log":
-                x["y"] = math.log(v)
-                x["dy"] = x["prec"] / abs(v)
+                x["y"] = -math.log(x["raw"]) if x["lower"] else math.log(x["raw"])   # lower is better: −log y
+                x["dy"] = x["prec"] / abs(x["raw"])
             else:
                 x["y"] = v
                 x["dy"] = x["prec"]
