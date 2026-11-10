@@ -218782,14 +218782,14 @@
     "level": "written"
    },
    "bounds": null,
-   "direction": "higher",
+   "direction": "lower",
    "task_type": "mixed",
    "complexity": "hard",
    "kind": "runs",
    "composite": null,
    "legacy_groups": [],
    "label": "BenchLM's copy of 'AA-Omniscience Hallucination Rate' (benchmark path /benchmarks/omnisciencehallucinationrate)",
-   "note": "NEW setup (salvo s6, lot k-anthropic, 9 Nov 2026): an aggregator's copy of a board it names in its Source column; the headline is pending and the board of origin is not mapped to a held setup (an integration decision attaches a copy to its origin's family)"
+   "note": "NEW setup (salvo s6, lot k-anthropic, 9 Nov 2026): an aggregator's copy of a board it names in its Source column; the headline is pending and the board of origin is not mapped to a held setup (an integration decision attaches a copy to its origin's family) | integration 11 (10 Nov 2026): direction higher -> lower: the row is BenchLM's « AA-Omniscience Hallucination Rate » (a rate of hallucinated answers; fewer is better), it had been read as higher-is-better"
   },
   "benchlm-aa-omniscience-index": {
    "family": "benchlm-aa-omniscience-index",
@@ -218798,9 +218798,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "score%",
+   "metric": "omniscience-index (points)",
    "headline": {
-    "metric": "score%",
+    "metric": "omniscience-index (points)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -218814,10 +218814,7 @@
     ],
     "level": "written"
    },
-   "bounds": [
-    0,
-    100
-   ],
+   "bounds": null,
    "direction": "higher",
    "task_type": "mixed",
    "complexity": "hard",
@@ -218825,7 +218822,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "BenchLM copy: AA-Omniscience Index",
-   "note": "NEW setup (salvo s6, lot k-anthropic, 9 Nov 2026): BenchLM aggregator row \"AA-Omniscience Index\" (section Knowledge); the score is a copy of: Artificial Analysis: omniscience leaderboard"
+   "note": "NEW setup (salvo s6, lot k-anthropic, 9 Nov 2026): BenchLM aggregator row \"AA-Omniscience Index\" (section Knowledge); the score is a copy of: Artificial Analysis: omniscience leaderboard | integration 11 (10 Nov 2026): the index is signed, not a percentage on 0–100: BenchLM writes « | [AA-Omniscience Index](/benchmarks/aaomniscienceindex) | -50.9% | » for Grok 4.1 Fast (src-benchlm-grok-4-1-fast-2026-11-09, F23) and Artificial Analysis writes « Qwen3-Max-Thinking scores -34 on the AA-Omniscience Index » (src-artificialanalysis-article-qwen3-max-thinking-2026-01-29); metric « score% » -> « omniscience-index (points) », bounds [0, 100] -> none (BenchLM's « % » is its display); the value is read as written"
   },
   "benchlm-aa-scicode": {
    "family": "benchlm-aa-scicode",
@@ -247014,14 +247011,14 @@
     0,
     100
    ],
-   "direction": "higher",
+   "direction": "lower",
    "task_type": "mixed",
    "complexity": "hard",
    "kind": "runs",
    "composite": null,
    "legacy_groups": [],
    "label": "BenchLM copy: AA-Omniscience Hallucination Rate",
-   "note": "NEW setup (salvo s6, lot k-google-1, 9 Nov 2026): BenchLM aggregator row \"AA-Omniscience Hallucination Rate\" (section Knowledge); the score is a copy of: Artificial Analysis model benchmarks"
+   "note": "NEW setup (salvo s6, lot k-google-1, 9 Nov 2026): BenchLM aggregator row \"AA-Omniscience Hallucination Rate\" (section Knowledge); the score is a copy of: Artificial Analysis model benchmarks | integration 11 (10 Nov 2026): direction higher -> lower: the row is BenchLM's « AA-Omniscience Hallucination Rate » (a rate of hallucinated answers; fewer is better), it had been read as higher-is-better"
   },
   "benchlm-arc-agi-3": {
    "family": "benchlm-arc-agi-3",
@@ -292265,9 +292262,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "change in meal MAE% (points)",
+   "metric": "change in meal MAE (percentage points)",
    "headline": {
-    "metric": "change in meal MAE% (points)",
+    "metric": "change in meal MAE (percentage points)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292280,7 +292277,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 2, Delta vs before x c (both photos minus baseline): change in MAE% points [95% CI]",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points between conditions, 95% CI in the source (negative = lower error with both photos) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « change in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points between conditions, 95% CI in the source (negative = lower error with both photos) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « change in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model | integration 11 (10 Nov 2026): metric relabelled « change in meal MAE (percentage points) » (was « change in meal MAE% (points) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t2-d-before-c-left": {
    "family": "arxiv-2610.26538-t2-d-before-c-left",
@@ -292289,21 +292286,12 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "change in meal MAE% (points)",
+   "metric": "change in meal MAE (percentage points)",
    "headline": {
-    "metric": "change in meal MAE% (points)",
-    "basis": "only-metric",
-    "level": "written",
-    "evidence": [
-     {
-      "url": "https://arxiv.org/abs/2610.26538",
-      "captured": "2026-11-09",
-      "where": "Table 2 (meal-level MAE% (bias %) by input condition), row Gemini 3.8 Flash, column Delta vs before x c, meals with >=10% of energy left (n = 292) (the source gives this one metric for this benchmark)",
-      "quote": "Gemini 3.8 Flash 21.9 (+7.9) 20.4 18.5 (−8.1) 16.7 (−2.2) 16.7 (802) −5.2 [−7.5, −3.1] −3.7 [−5.2, −2.3] −5.4 [−8.4, −2.8]",
-      "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.26538.html",
-      "sha256": "9e74388fb1c837fa637ebb8379e743a09e57235996d0eef0ba34b0102f9cd98a"
-     }
-    ]
+    "metric": "change in meal MAE (percentage points)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
    },
    "bounds": null,
    "direction": "lower",
@@ -292313,7 +292301,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 2, Delta vs before x c, meals with >=10% of energy left (n = 292): change in MAE% points [95% CI]",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points between conditions, 95% CI in the source (negative = lower error with both photos) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « change in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 9 of salvo s7 (10 Nov 2026): decision 1 of 10 Nov (integration 7's question): pending only for the direction, one measurement of this benchmark in its source: only-metric (direction lower read by the fit)"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points between conditions, 95% CI in the source (negative = lower error with both photos) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « change in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 9 of salvo s7 (10 Nov 2026): decision 1 of 10 Nov (integration 7's question): pending only for the direction, one measurement of this benchmark in its source: only-metric (direction lower read by the fit) | integration 11 (10 Nov 2026): metric relabelled « change in meal MAE (percentage points) » (was « change in meal MAE% (points) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the label no longer reads as bounded | integration 11 (10 Nov 2026): headline withdrawn (was only-metric written), kept pending: a difference between two conditions, not a score of the model (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the rule of integration 10 for its siblings t2-d-before-c / t2-d-before-only; out of the fit"
   },
   "arxiv-2610.26538-t2-d-before-only": {
    "family": "arxiv-2610.26538-t2-d-before-only",
@@ -292322,9 +292310,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "change in meal MAE% (points)",
+   "metric": "change in meal MAE (percentage points)",
    "headline": {
-    "metric": "change in meal MAE% (points)",
+    "metric": "change in meal MAE (percentage points)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292337,7 +292325,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 2, Delta vs before only (both photos minus before only): change in MAE% points [95% CI]",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points between conditions, 95% CI in the source (negative = lower error with both photos) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « change in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points between conditions, 95% CI in the source (negative = lower error with both photos) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « change in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model | integration 11 (10 Nov 2026): metric relabelled « change in meal MAE (percentage points) » (was « change in meal MAE% (points) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t2-subtraction": {
    "family": "arxiv-2610.26538-t2-subtraction",
@@ -292516,9 +292504,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "difference in meal MAE% (points)",
+   "metric": "difference in meal MAE (percentage points)",
    "headline": {
-    "metric": "difference in meal MAE% (points)",
+    "metric": "difference in meal MAE (percentage points)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292531,7 +292519,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 3, Photo effect, simple prompt (3a) - (1): paired difference in MAE% points [95% CI]",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model | integration 11 (10 Nov 2026): metric relabelled « difference in meal MAE (percentage points) » (was « difference in meal MAE% (points) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t3-photo-structured": {
    "family": "arxiv-2610.26538-t3-photo-structured",
@@ -292540,9 +292528,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "difference in meal MAE% (points)",
+   "metric": "difference in meal MAE (percentage points)",
    "headline": {
-    "metric": "difference in meal MAE% (points)",
+    "metric": "difference in meal MAE (percentage points)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292555,7 +292543,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 3, Photo effect, structured prompt (3) - (3b): paired difference in MAE% points [95% CI]",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model | integration 11 (10 Nov 2026): metric relabelled « difference in meal MAE (percentage points) » (was « difference in meal MAE% (points) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t3-prompt-before": {
    "family": "arxiv-2610.26538-t3-prompt-before",
@@ -292564,9 +292552,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "difference in meal MAE% (points)",
+   "metric": "difference in meal MAE (percentage points)",
    "headline": {
-    "metric": "difference in meal MAE% (points)",
+    "metric": "difference in meal MAE (percentage points)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292579,7 +292567,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 3, Prompt effect, before only (3b) - (1): paired difference in MAE% points [95% CI]",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model | integration 11 (10 Nov 2026): metric relabelled « difference in meal MAE (percentage points) » (was « difference in meal MAE% (points) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t3-prompt-both": {
    "family": "arxiv-2610.26538-t3-prompt-both",
@@ -292588,9 +292576,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "difference in meal MAE% (points)",
+   "metric": "difference in meal MAE (percentage points)",
    "headline": {
-    "metric": "difference in meal MAE% (points)",
+    "metric": "difference in meal MAE (percentage points)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292603,7 +292591,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 3, Prompt effect, both photos (3) - (3a): paired difference in MAE% points [95% CI]",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): paired difference in MAE% points (exploratory); 95% CI in the source; negative = lower error | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « difference in meal MAE% (points) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a difference between conditions or a signed bias, not a score of the model | integration 11 (10 Nov 2026): metric relabelled « difference in meal MAE (percentage points) » (was « difference in meal MAE% (points) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 2 of arXiv 2610.26538: « Δ = both photos − baseline, MAE% points [95% CI] »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t4-est-eaten": {
    "family": "arxiv-2610.26538-t4-est-eaten",
@@ -292663,18 +292651,9 @@
    "metric": "median offset (kcal)",
    "headline": {
     "metric": "median offset (kcal)",
-    "basis": "only-metric",
-    "evidence": [
-     {
-      "url": "https://arxiv.org/abs/2610.26538",
-      "captured": "2026-11-09",
-      "where": "Table 4 (decomposition of the before-only error, kcal per meal, 764 meals), row Gemini 3.8 Flash, column Median offset, kcal (the source gives this one metric for this benchmark)",
-      "quote": "Gemini 3.8 Flash −55 +103 +48 111 / 292 140",
-      "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.26538.html",
-      "sha256": "9e74388fb1c837fa637ebb8379e743a09e57235996d0eef0ba34b0102f9cd98a"
-     }
-    ],
-    "level": "written"
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
    },
    "bounds": null,
    "direction": "higher",
@@ -292684,7 +292663,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 4, median offset (kcal) in those meals",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): Offset = |estimate − served| − |estimate − eaten| in the offsetting meals; median in kcal"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): Offset = |estimate − served| − |estimate − eaten| in the offsetting meals; median in kcal | integration 11 (10 Nov 2026): headline withdrawn (was only-metric written), kept pending: a term of an error decomposition, not a score of the model (Table 4 of arXiv 2610.26538: « Decomposition of the before-only error, kcal per meal » … « Offset = |estimate − served| − |estimate − eaten| »); direction not established, as its siblings t4-est-eaten / t4-est-served; out of the fit"
   },
   "arxiv-2610.26538-t4-offset-meals": {
    "family": "arxiv-2610.26538-t4-offset-meals",
@@ -292696,18 +292675,9 @@
    "metric": "meals where the two errors offset (of 292)",
    "headline": {
     "metric": "meals where the two errors offset (of 292)",
-    "basis": "only-metric",
-    "evidence": [
-     {
-      "url": "https://arxiv.org/abs/2610.26538",
-      "captured": "2026-11-09",
-      "where": "Table 4 (decomposition of the before-only error, kcal per meal, 764 meals), row Gemini 3.8 Flash, column Meals with ≥10% left where the two parts offset (the source gives this one metric for this benchmark)",
-      "quote": "Gemini 3.8 Flash −55 +103 +48 111 / 292 140",
-      "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.26538.html",
-      "sha256": "9e74388fb1c837fa637ebb8379e743a09e57235996d0eef0ba34b0102f9cd98a"
-     }
-    ],
-    "level": "written"
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
    },
    "bounds": null,
    "direction": "higher",
@@ -292717,7 +292687,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 4, meals with >=10% left where the two parts offset (of 292)",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): count of meals (of the 292 with at least 10% of energy left) where the served energy was under-estimated and the estimate was closer to the energy eaten than to the energy served"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): count of meals (of the 292 with at least 10% of energy left) where the served energy was under-estimated and the estimate was closer to the energy eaten than to the energy served | integration 11 (10 Nov 2026): headline withdrawn (was only-metric written), kept pending: a term of an error decomposition, not a score of the model (Table 4 of arXiv 2610.26538: « Decomposition of the before-only error, kcal per meal » … « Offset = |estimate − served| − |estimate − eaten| »); direction not established, as its siblings t4-est-eaten / t4-est-served; out of the fit"
   },
   "arxiv-2610.26538-t5-mean-day-error-before-only": {
    "family": "arxiv-2610.26538-t5-mean-day-error-before-only",
@@ -292726,21 +292696,12 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "mean day error (%)",
+   "metric": "mean signed day error (percent)",
    "headline": {
-    "metric": "mean day error (%)",
-    "basis": "only-metric",
-    "level": "written",
-    "evidence": [
-     {
-      "url": "https://arxiv.org/abs/2610.26538",
-      "captured": "2026-11-09",
-      "where": "Table 5 (day-level agreement for energy eaten, 148 days, 101 participants), row Gemini 3.8 Flash, before only, column Mean day error % (the source gives this one metric for this benchmark)",
-      "quote": "Gemini 3.8 Flash, before only +10.6 [+5.8, +16.0] +6.4, +15.0 no −36 to +57 39",
-      "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.26538.html",
-      "sha256": "9e74388fb1c837fa637ebb8379e743a09e57235996d0eef0ba34b0102f9cd98a"
-     }
-    ]
+    "metric": "mean signed day error (percent)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
    },
    "bounds": null,
    "direction": "lower",
@@ -292750,7 +292711,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 5, mean day error % for energy eaten, before only",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): mean of the day % errors (148 days, 101 participants), [95% CI] in the source; closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 9 of salvo s7 (10 Nov 2026): decision 1 of 10 Nov (integration 7's question): pending only for the direction, one measurement of this benchmark in its source: only-metric (direction lower read by the fit)"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): mean of the day % errors (148 days, 101 participants), [95% CI] in the source; closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 9 of salvo s7 (10 Nov 2026): decision 1 of 10 Nov (integration 7's question): pending only for the direction, one measurement of this benchmark in its source: only-metric (direction lower read by the fit) | integration 11 (10 Nov 2026): metric relabelled « mean signed day error (percent) » (was « mean day error (%) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 5 of arXiv 2610.26538: « Mean = mean of day % errors [95% CI]. Equivalence: 90% CI within ±10%. »); the label no longer reads as bounded | integration 11 (10 Nov 2026): headline withdrawn (was only-metric written), kept pending: a signed mean error: closer to zero is better, neither higher nor lower (Table 5 of arXiv 2610.26538: « Mean = mean of day % errors [95% CI]. Equivalence: 90% CI within ±10%. »); direction not established; out of the fit"
   },
   "arxiv-2610.26538-t5-mean-day-error-both-photos": {
    "family": "arxiv-2610.26538-t5-mean-day-error-both-photos",
@@ -292759,21 +292720,12 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "mean day error (%)",
+   "metric": "mean signed day error (percent)",
    "headline": {
-    "metric": "mean day error (%)",
-    "basis": "only-metric",
-    "level": "written",
-    "evidence": [
-     {
-      "url": "https://arxiv.org/abs/2610.26538",
-      "captured": "2026-11-09",
-      "where": "Table 5 (day-level agreement for energy eaten, 148 days, 101 participants), row Gemini 3.8 Flash, both photos, column Mean day error % (the source gives this one metric for this benchmark)",
-      "quote": "Gemini 3.8 Flash, both photos −0.5 [−2.9, +2.0] −2.5, +1.6 yes −28 to +27 57",
-      "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.26538.html",
-      "sha256": "9e74388fb1c837fa637ebb8379e743a09e57235996d0eef0ba34b0102f9cd98a"
-     }
-    ]
+    "metric": "mean signed day error (percent)",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
    },
    "bounds": null,
    "direction": "lower",
@@ -292783,7 +292735,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 5, mean day error % for energy eaten, both photos",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): mean of the day % errors (148 days, 101 participants), [95% CI] in the source; closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 9 of salvo s7 (10 Nov 2026): decision 1 of 10 Nov (integration 7's question): pending only for the direction, one measurement of this benchmark in its source: only-metric (direction lower read by the fit)"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): mean of the day % errors (148 days, 101 participants), [95% CI] in the source; closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 9 of salvo s7 (10 Nov 2026): decision 1 of 10 Nov (integration 7's question): pending only for the direction, one measurement of this benchmark in its source: only-metric (direction lower read by the fit) | integration 11 (10 Nov 2026): metric relabelled « mean signed day error (percent) » (was « mean day error (%) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 5 of arXiv 2610.26538: « Mean = mean of day % errors [95% CI]. Equivalence: 90% CI within ±10%. »); the label no longer reads as bounded | integration 11 (10 Nov 2026): headline withdrawn (was only-metric written), kept pending: a signed mean error: closer to zero is better, neither higher nor lower (Table 5 of arXiv 2610.26538: « Mean = mean of day % errors [95% CI]. Equivalence: 90% CI within ±10%. »); direction not established; out of the fit"
   },
   "arxiv-2610.26538-t5-within-800kj-before-only": {
    "family": "arxiv-2610.26538-t5-within-800kj-before-only",
@@ -292864,9 +292816,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "mean day error (%)",
+   "metric": "mean signed day error (percent)",
    "headline": {
-    "metric": "mean day error (%)",
+    "metric": "mean signed day error (percent)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292879,7 +292831,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 7, day-level mean % error for carbohydrate eaten, both photos",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): day-level mean % error with 95% limits of agreement in parentheses (both photos); closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, behaviour, safety or security quantity, not a capability score"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): day-level mean % error with 95% limits of agreement in parentheses (both photos); closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, behaviour, safety or security quantity, not a capability score | integration 11 (10 Nov 2026): metric relabelled « mean signed day error (percent) » (was « mean day error (%) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 5 of arXiv 2610.26538: « Mean = mean of day % errors [95% CI]. Equivalence: 90% CI within ±10%. »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t7-fat": {
    "family": "arxiv-2610.26538-t7-fat",
@@ -292888,9 +292840,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "mean day error (%)",
+   "metric": "mean signed day error (percent)",
    "headline": {
-    "metric": "mean day error (%)",
+    "metric": "mean signed day error (percent)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292903,7 +292855,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 7, day-level mean % error for fat eaten, both photos",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): day-level mean % error with 95% limits of agreement in parentheses (both photos); closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, behaviour, safety or security quantity, not a capability score"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): day-level mean % error with 95% limits of agreement in parentheses (both photos); closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, behaviour, safety or security quantity, not a capability score | integration 11 (10 Nov 2026): metric relabelled « mean signed day error (percent) » (was « mean day error (%) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 5 of arXiv 2610.26538: « Mean = mean of day % errors [95% CI]. Equivalence: 90% CI within ±10%. »); the label no longer reads as bounded"
   },
   "arxiv-2610.26538-t7-protein": {
    "family": "arxiv-2610.26538-t7-protein",
@@ -292912,9 +292864,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "mean day error (%)",
+   "metric": "mean signed day error (percent)",
    "headline": {
-    "metric": "mean day error (%)",
+    "metric": "mean signed day error (percent)",
     "basis": "decision",
     "decision": null,
     "level": "not-established:assumed"
@@ -292927,7 +292879,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "Energy-intake estimation from meal photos (arXiv 2610.26538): Table 7, day-level mean % error for protein eaten, both photos",
-   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): day-level mean % error with 95% limits of agreement in parentheses (both photos); closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, behaviour, safety or security quantity, not a capability score"
+   "note": "NEW setup (salvo s6, lot k-google-2, 9 Nov 2026): day-level mean % error with 95% limits of agreement in parentheses (both photos); closer to zero is better (signed error, not an ordering) | headline pending (integration 6 of salvo s6 (9 Nov 2026)): lower is better (metric « mean day error (%) »); the fit reads no registry direction (model/lqm.py LOWER_IS_BETTER by metric name): out until a rule exists | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, behaviour, safety or security quantity, not a capability score | integration 11 (10 Nov 2026): metric relabelled « mean signed day error (percent) » (was « mean day error (%) »): a difference of percentages or a signed percent error is not a score on 0–100 (Table 5 of arXiv 2610.26538: « Mean = mean of day % errors [95% CI]. Equivalence: 90% CI within ±10%. »); the label no longer reads as bounded"
   },
   "arxiv-2610.26551-cost-cutting-agency-driver": {
    "family": "arxiv-2610.26551-cost-cutting-agency-driver",
