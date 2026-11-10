@@ -25888,6 +25888,200 @@
    "note": "Classes cache-write-5m,cache-write-1h taken from the next record (first capture 2026-09-02), which shows the same input and output price; the release document states input and output."
   },
   {
+   "model": "fable-5.2",
+   "route": "maker-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 8.0,
+    "output": 40.0,
+    "cache-read": 0.2,
+    "cache-write-5m": 10.0,
+    "cache-write-1h": 16.0
+   },
+   "from": "2026-11-09",
+   "from_basis": "stated",
+   "to": "2026-11-10",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/release-notes/overview",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_release-notes_overview.html.txt",
+     "sha256": "f8358bf7f7abcdcacdb5e9bb7c1e177911589812ffdca62affb01ce5df4a3b73",
+     "where": "API release notes, entry of November 9, 2026",
+     "quote": "They cost $8 USD per MTok of input and $40 USD per MTok of output (Claude Fable 5.1 and Claude Mythos 5.1 cost $10 USD per MTok of input and $50 USD per MTok of output)."
+    },
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_about-claude_pricing.html.txt",
+     "sha256": "69e6ddf8e73485e3c55d31a256fcb6d8111c33acc46b4173758d743345e2bd4c",
+     "where": "pricing page, model pricing table (Fable 5.2 row)",
+     "quote": "Claude Fable 5.2 For demanding reasoning and long-horizon agentic work $8 / MTok $40 / MTok $10 / MTok $16 / MTok $0.20 / MTok"
+    },
+    {
+     "url": "https://platform.claude.com/docs/en/models/fable-5-2/overview",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_models_fable-5-2_overview.html.txt",
+     "sha256": "100f369b10ff0230effc73eccccbfe57d8f965a09f2651beba6816884133d371",
+     "where": "model page, Specifications, Pricing",
+     "quote": "5m cache write $10 / MTok 1h cache write $16 / MTok Cache read $0.20 / MTok"
+    }
+   ],
+   "note": "Standard maker-API price proposed after the Fable 5.1 record; the release notes state input and output, the pricing page and the model page the cache classes (5m write 10, 1h write 16, read 0.20 = 2.5 percent of input). No long-context tier: \"Claude 4.6 and later models (except Claude Haiku 5.5) ... include the full 1M token context window at standard pricing\". Data residency inference_geo \"us\" = 1.1x on all token pricing (not modelled). (salvo s7, k7-anthropic proposal added by integration 9, 10 Nov 2026)"
+  },
+  {
+   "model": "fable-5.2",
+   "route": "maker-api",
+   "kind": "batch",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 4.0,
+    "output": 20.0
+   },
+   "from": "2026-11-09",
+   "from_basis": "stated",
+   "to": "2026-11-10",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_about-claude_pricing.html.txt",
+     "sha256": "69e6ddf8e73485e3c55d31a256fcb6d8111c33acc46b4173758d743345e2bd4c",
+     "where": "pricing page, Batch processing table",
+     "quote": "Claude Fable 5.2 For demanding reasoning and long-horizon agentic work $4 / MTok $20 / MTok"
+    }
+   ],
+   "note": "Batch API price, 50 percent of the standard price (the page states the batch rates) (salvo s7, k7-anthropic proposal added by integration 9, 10 Nov 2026)"
+  },
+  {
+   "model": "fable-5.2",
+   "route": "maker-api",
+   "kind": "fast",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 16.0,
+    "output": 80.0
+   },
+   "from": "2026-11-09",
+   "from_basis": "stated",
+   "to": "2026-11-10",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_about-claude_pricing.html.txt",
+     "sha256": "69e6ddf8e73485e3c55d31a256fcb6d8111c33acc46b4173758d743345e2bd4c",
+     "where": "pricing page, Fast mode pricing table",
+     "quote": "Claude Fable 5.2 $16 USD / MTok $80 USD / MTok"
+    }
+   ],
+   "note": "FAST MODE (premium variant, up to 2.5x faster output): its own price variant, NOT the base; stacks with caching multipliers and data residency; not available with the Batch API (salvo s7, k7-anthropic proposal added by integration 9, 10 Nov 2026)"
+  },
+  {
+   "model": "mythos-5.2",
+   "route": "maker-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 8.0,
+    "output": 40.0,
+    "cache-read": 0.2,
+    "cache-write-5m": 10.0,
+    "cache-write-1h": 16.0
+   },
+   "from": "2026-11-09",
+   "from_basis": "stated",
+   "to": "2026-11-10",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/release-notes/overview",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_release-notes_overview.html.txt",
+     "sha256": "f8358bf7f7abcdcacdb5e9bb7c1e177911589812ffdca62affb01ce5df4a3b73",
+     "where": "API release notes, entry of November 9, 2026",
+     "quote": "They cost $8 USD per MTok of input and $40 USD per MTok of output (Claude Fable 5.1 and Claude Mythos 5.1 cost $10 USD per MTok of input and $50 USD per MTok of output)."
+    },
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_about-claude_pricing.html.txt",
+     "sha256": "69e6ddf8e73485e3c55d31a256fcb6d8111c33acc46b4173758d743345e2bd4c",
+     "where": "pricing page, model pricing table (Mythos 5.2 row of the Additional models)",
+     "quote": "Claude Mythos 5.2  $8 / MTok $40 / MTok $10 / MTok $16 / MTok $0.20 / MTok"
+    },
+    {
+     "url": "https://platform.claude.com/docs/en/models/mythos-5-2/overview",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_models_mythos-5-2_overview.html.txt",
+     "sha256": "e3c8748d47e485caaecf88cb7d89e25974cd41f374fd94325fb5d91eb9e47f4c",
+     "where": "model page, Specifications, Pricing",
+     "quote": "5m cache write $10 / MTok 1h cache write $16 / MTok Cache read $0.20 / MTok"
+    }
+   ],
+   "note": "Standard maker-API price proposed after the Fable 5.1 record; the release notes state input and output, the pricing page and the model page the cache classes (5m write 10, 1h write 16, read 0.20 = 2.5 percent of input). No long-context tier: \"Claude 4.6 and later models (except Claude Haiku 5.5) ... include the full 1M token context window at standard pricing\". Data residency inference_geo \"us\" = 1.1x on all token pricing (not modelled). (salvo s7, k7-anthropic proposal added by integration 9, 10 Nov 2026)"
+  },
+  {
+   "model": "mythos-5.2",
+   "route": "maker-api",
+   "kind": "batch",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 4.0,
+    "output": 20.0
+   },
+   "from": "2026-11-09",
+   "from_basis": "stated",
+   "to": "2026-11-10",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_about-claude_pricing.html.txt",
+     "sha256": "69e6ddf8e73485e3c55d31a256fcb6d8111c33acc46b4173758d743345e2bd4c",
+     "where": "pricing page, Batch processing table, Additional models, Mythos 5.2 row",
+     "quote": "$4 / MTok $20 / MTok Claude Fable 5.1 $5 / MTok $25 / MTok"
+    }
+   ],
+   "note": "Batch API price, 50 percent of the standard price (the page states the batch rates) (salvo s7, k7-anthropic proposal added by integration 9, 10 Nov 2026)"
+  },
+  {
+   "model": "mythos-5.2",
+   "route": "maker-api",
+   "kind": "fast",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 16.0,
+    "output": 80.0
+   },
+   "from": "2026-11-09",
+   "from_basis": "stated",
+   "to": "2026-11-10",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-anthropic/platform.claude.com_docs_en_about-claude_pricing.html.txt",
+     "sha256": "69e6ddf8e73485e3c55d31a256fcb6d8111c33acc46b4173758d743345e2bd4c",
+     "where": "pricing page, Fast mode pricing table",
+     "quote": "Claude Mythos 5.2 $16 USD / MTok $80 USD / MTok"
+    }
+   ],
+   "note": "FAST MODE (premium variant, up to 2.5x faster output): its own price variant, NOT the base; stacks with caching multipliers and data residency; not available with the Batch API (salvo s7, k7-anthropic proposal added by integration 9, 10 Nov 2026)"
+  },
+  {
    "model": "glm-5.2",
    "route": "maker-api",
    "kind": "standard",
