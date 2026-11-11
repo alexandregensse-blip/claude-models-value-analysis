@@ -1677,3 +1677,43 @@ No rule of the build changed; R2 stays blocking. Each pair was read from its fin
   runs. The pair of base groups and its three couples are declared with the proof; precheck reports it (`??`) and does
   not block; another identical couple, or these couples in another pair, block again. Test
   `precheck_declared_coincidence`.
+
+## Added on 11 Nov 2026 (lighter smoke, the pending points, the `??` of precheck)
+
+- **Smoke fit (precheck check 7).** Both axes in turn, quality then cost, 2 chains of 50 warm-up + 150 draws each;
+  R̂ ≤ 2.0 on each (it only checks that the fit sets off in roughly the right direction); the message names the axis
+  that stops the full fit. Test `precheck_smoke_both_axes` (sampling stubbed).
+- **AutomationBench, the same runs costed twice (D53, cost).** Where OpenAI's charts (D46, D47, D49, D52) and Zapier's
+  board 1.0.6 give one couple two costs beyond the rounding of the less precise (the cent): Opus 5 low–xhigh ($1.64 …
+  against $0.75 …), GPT-5.6 Sol low–xhigh ($0.31 … against $0.42 …), GPT-6 Astra at every level (the Astra launch's
+  $1.087119 … against $1.08 …): which price is right is not known, the cost goes out on both sides (13 Zapier
+  measures; OpenAI's were out already, their reasons say so). Where the costs agree to the rounding (Opus 5 max,
+  GPT-5.6 Sol max, GPT-5.6 Luna, GPT-6 Luna, GPT-6 Sol) Zapier's cost stays, counted once.
+- **Decisions of kind run (`declared_runs`, after `run_ids`; decisions.schema.json).** The maintainer joins measures
+  of two sources that the sources establish as one run (weight 1/k on quality, rule same-run-weight; nothing goes
+  out); a stale facts hash joins nothing (reported), a measure already in a run is not re-joined (run doubt). D54:
+  Vals.ai EMB (9) and HLab (4) versions 1 and 1.1, the configurations whose cost is the same to 7 digits (D50, D51;
+  HLab's Sonnet 5.5 max too, $12.45943725 in both, its cost out as single-couple). D57: Artificial Analysis's
+  AA-Briefcase Elo under two setups (aabriefcase, model pages of Oct; aa5-aa-briefcase, leaderboards of Nov), 44
+  configurations within 1 %, one evaluation re-rated. Test `declared_run_decision` (negative controls: one measure
+  out, a stale hash, a measure already in a run).
+- **The `??` of precheck, read one by one.** Labels: KernelBench's peak_fraction is « achieved / peak, clamped to
+  [0, infinity) » (roofline.py): metric `achieved-over-peak (unbounded)` (14 setups, facts' term); lester model arena
+  round 10 counts the 24 tests passed (« 24/24 »): `pass-of-24`. One run under two metrics: scf52-oswp / scf52-osws
+  (partial and strict pass of the same runs, §8.13.3) and arXiv 2604.26954's κ at j = 3 / 5 / 7 (majority votes of the
+  same « j replications at temp = 1 ») share a run_set; D56 keeps the OSWorld cost once (chart B); D55 keeps
+  Chartography's Fable 5.1 cost once, in the Fable 5.1 card (the Fable 5.2 card reprints it); nnakapa's two setups
+  already shared a run_set (precheck now reads it). Configurations under one key, separated: new setups
+  anthropic-cookbook-latency-desk-agent-fast-mode (cell 60), arcagi3-provider-adapter (providerAdapterEvaluation),
+  ibragim-codex (harness Codex), oai55-t-expert-swe-internal (Expert-SWE rows held under CyberGym),
+  tokensave-brickbreaker-cost-first (the first measurement of 9 Oct); nurb's benchmark revision (« nurb/evals@content-
+  revision: a new revision is a new row ») is now the measures' version fact, so each revision is its own campaign.
+  Out, with their reasons: D58 Bug Hunt rows the board supersedes with the mean that contains them; D59 MGATE's GPT-5.5
+  « base » rows (another configuration than its Medium row, ours cannot tell what base ran); D60 UGI's grok-4.20 beta
+  rows; D61 single-row variants (cookbook no caching / prefetch / bigger pages / no commentary, ibragim Oh My Pi,
+  MathArena's DeepSeek Harness rows beside the board's own); D62 OpenAI's GPT-5.5 page printing the same figures in a
+  second table. Declared in precheck (reported « -- declared », not `??`): `DISTINCT_RUNS` (arXiv 2609.29933 k = 10 /
+  k = 20, other inputs; Mintaka's languages, other question sets) and `REPLICATES` (seeds or separate runs of one
+  configuration, with their exact values: seaquest r0–r2, TestCabinet's runs, llm_chess's two runs, Playcode's four
+  default runs of Gemini 3.8 Flash, nurb rows of one revision on two patch releases of Codex). Test
+  `precheck_declared_twins_and_replicates` (negative controls: another value, an undeclared pair).

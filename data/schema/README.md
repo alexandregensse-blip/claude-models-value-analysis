@@ -14,7 +14,7 @@ Schemas for the files of docs/DATA-PIPELINE.md (at 9f3e7ef, 22 Oct 2026), revise
 | `routes.schema.json` | `routes.json`: class, `spellings`, `name_prefixes`, level mapping, per-model ids / accepts / mapping / default |
 | `benchmarks.schema.json` | `benchmarks.json`: families, setups (metric and headline metric as vocabulary terms, bounds, kind, composite) |
 | `publishers.schema.json`, `prices.schema.json`, `rules.schema.json` | publisher → maker; dated prices (+ `base` marker); rules |
-| `decisions.schema.json` | `data/decisions.json`: measure decisions (pinned by `facts_hash`) and setup-level headline decisions |
+| `decisions.schema.json` | `data/decisions.json`: measure decisions (pinned by `facts_hash`), run decisions (measures of two sources joined as one run on quality, weight 1/k) and setup-level headline decisions |
 | `flag-map.schema.json` | `flag-map.json` (migration only): per-source cost method, legacy effort values |
 | `vocab.schema.json`, `vocab.json` | closed vocabularies, each a JSON Schema at `vocab.json#/$defs/<name>` plus `x-terms` records |
 | `validate.py` | schema + cross-file checks (standard library only) |

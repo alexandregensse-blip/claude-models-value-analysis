@@ -2616,7 +2616,7 @@ def class_ratio(M, C, key, pd_hi):
 # ---------------------------------------------------------------- statuses
 def decision_for(ctx, M, axis):
     for d in ctx.decisions:
-        if d.get("kind") == "headline" or M.ref not in d["measures"]:
+        if d.get("kind") in ("headline", "run") or M.ref not in d["measures"]:
             continue
         if d["axis"] not in (axis, "both"):
             continue
@@ -3300,6 +3300,43 @@ def run_ids(ctx, measures):
                 continue
             rid = "|".join(k) + (f"|row{i + 1}" if len(parts) > 1 else "")
             for M in p:
+                M.run = rid
+                M.rule("same-run-weight")
+    declared_runs(ctx, measures)
+
+
+def declared_runs(ctx, measures):
+    """Runs declared by the maintainer (decisions of kind run, 11 Nov 2026): measures of two sources that the rule above
+    cannot join (one source only) but whose sources establish one run — e.g. Vals.ai's board versions 1 and 1.1 under
+    two ids, the same cost to 7 digits, a re-graded score — enter as one run, weight 1/k. Each listed run is joined
+    only when its decision's facts hash still matches and two or more of its measures are in on quality; a measure
+    already in another run is not re-joined (doubt, ctx.run_doubts)."""
+    by_ref = {M.ref: M for M in measures}
+    for d in getattr(ctx, "decisions", []):
+        if d.get("kind") != "run":
+            continue
+        entries = []
+        for mref in d["measures"]:
+            M = by_ref.get(mref)
+            if M is None:
+                entries = None
+                break
+            entries.append(V.facts_hash(M.S.doc, M.m, mref))
+        if entries is None or V.hash_of(entries) != d["facts_hash"]:
+            if d["id"] not in [x["id"] for x in ctx.stale]:
+                ctx.stale.append(dict(id=d["id"], measures=d["measures"], axis=d["axis"],
+                                      why="facts_hash no longer matches"))
+            continue
+        for i, refs in enumerate(d["runs"]):
+            ms = [by_ref[r] for r in refs if (by_ref[r].status["quality"] or "").startswith("in")]
+            if len(ms) < 2:
+                continue
+            if any(M.run for M in ms):
+                ctx.run_doubts.append(dict(key=[d["id"], str(i + 1)], measures=sorted(M.ref for M in ms),
+                                           why="a measure of this declared run is already in another run: not joined"))
+                continue
+            rid = f"decision:{d['id']}|{couple(ms[0])}|run{i + 1}"
+            for M in ms:
                 M.run = rid
                 M.rule("same-run-weight")
 

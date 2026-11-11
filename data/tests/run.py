@@ -2578,6 +2578,73 @@ def same_runs_versions_in_one_source():
 
 
 @test
+def declared_run_decision():
+    """Decisions of kind run (11 Nov 2026: Vals.ai EMB / HLab versions 1 and 1.1, AA-Briefcase's two setups): measures
+    of two sources the sources establish as one run are joined on quality (one run id, weight 1/k). Negative controls:
+    a measure out on quality is not joined (one left: no run), a facts hash that no longer matches joins nothing and is
+    reported stale, a measure already in another run is not re-joined (doubt)."""
+    import types
+    import build as B_
+    V_ = B_.V
+    class Mx:
+        def __init__(self, ref, status="in", run=""):
+            sid, mid = ref.split("#")
+            self.ref, self.run = ref, run
+            self.status = {"quality": status}
+            self.S = types.SimpleNamespace(id=sid, doc={"facts": [{"id": "F1", "says": "score", "value": ref}]})
+            self.m = {"id": mid, "setup": "s", "facts": {"value": "F1"}}
+            self.fields = {"model": {"value": "ma"}, "configuration": {"value": "high"}}
+            self.rules = set()
+        def rule(self, r):
+            self.rules.add(r)
+    def dec(ms, runs, did="D1", bad=False):
+        h = V_.hash_of([V_.facts_hash(M.S.doc, M.m, M.ref) for M in ms])
+        return dict(kind="run", id=did, measures=[M.ref for M in ms], runs=runs, axis="quality",
+                    facts_hash=("0" * 64 if bad else h))
+    a, b, c, d_ = Mx("A#M1"), Mx("B#M1"), Mx("A#M2"), Mx("B#M2", status="out:single-couple")
+    ctx = types.SimpleNamespace(run_doubts=[], stale=[], decisions=[dec([a, b, c, d_], [[a.ref, b.ref], [c.ref, d_.ref]])])
+    B_.declared_runs(ctx, [a, b, c, d_])
+    eq((a.run == b.run != "", c.run, d_.run), (True, "", ""), "a declared pair in on quality: one run; a pair with one out: none")
+    eq("same-run-weight" in a.rules, True, "the rule is recorded")
+    a2, b2 = Mx("A#M1"), Mx("B#M1")
+    ctx = types.SimpleNamespace(run_doubts=[], stale=[], decisions=[dec([a2, b2], [[a2.ref, b2.ref]], bad=True)])
+    B_.declared_runs(ctx, [a2, b2])
+    eq((a2.run, b2.run, [x["id"] for x in ctx.stale]), ("", "", ["D1"]), "negative control: a stale hash joins nothing")
+    a3, b3 = Mx("A#M1", run="other-run"), Mx("B#M1")
+    ctx = types.SimpleNamespace(run_doubts=[], stale=[], decisions=[dec([a3, b3], [[a3.ref, b3.ref]])])
+    B_.declared_runs(ctx, [a3, b3])
+    eq((a3.run, b3.run, len(ctx.run_doubts)), ("other-run", "", 1), "negative control: already in another run: doubt")
+
+
+@test
+def precheck_declared_twins_and_replicates():
+    """precheck checks 2 and 5, declarations of 11 Nov 2026: a pair of groups declared distinct runs, setups sharing a
+    run_set, and replicates declared with their exact values are reported, not flagged. Negative controls: another
+    value in a declared replicate set, or an undeclared pair, are flagged again."""
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    from catalog import MODEL_ORDER
+    row = lambda g, m, e, s, c="": dict(group=g, source="src", model=m, effort=e, score=s, cost_usd=c, harness="",
+                                        score_metric="score%", unit="", run="", status_quality="in", status_cost="in")
+    rs = [row("s7t-wsp-exp5-seaquest", "fable-5.2", "high", v) for v in ("53.546", "35.597", "57.534")]
+    notes = []
+    eq((precheck.discordant_twins(rs, set(MODEL_ORDER), notes), len(notes)), ([], 1), "declared replicates: a note")
+    rs2 = rs[:2] + [row("s7t-wsp-exp5-seaquest", "fable-5.2", "high", "20.0")]
+    eq(len(precheck.discordant_twins(rs2, set(MODEL_ORDER))), 1, "negative control: another value is flagged")
+    k10 = "arxiv-2609.29933-t12-mmlongbench-doc-extractor-mmlb-column-k-10"
+    k20 = "arxiv-2609.29933-t12-mmlongbench-doc-extractor-mmlb-column-k-20"
+    ts = [row(g, m, "nothink", v) for g in (k10, k20) for m, v in (("qwen3.5-4b", "0.53"), ("qwen3.5-9b", "0.56"),
+                                                                   ("qwen3.5-27b", "0.59"))]
+    notes = []
+    eq((precheck.twin_metrics(ts, notes), len(notes)), ([], 1), "declared distinct runs: a note")
+    ts2 = [dict(r, group=r["group"].replace("k-20", "k-5")) for r in ts]
+    eq(len(precheck.twin_metrics(ts2)), 1, "negative control: an undeclared pair is flagged")
+    nn = [row(g, m, e, "", c) for g in ("nnakapa-o47o48", "nnakapa-o47o48-t2")
+          for m, e, c in (("opus-4.8", "low", "0.449"), ("opus-4.8", "high", "0.545"), ("opus-4.7", "xhigh", "0.981"))]
+    eq(precheck.twin_metrics(nn), [], "setups sharing a run_set: one run declared, not flagged")
+
+
+@test
 def precheck_declared_coincidence():
     """precheck R2, a declared coincidence (11 Nov 2026): a pair of base groups declared in COINCIDENCES with its
     identical couples is reported, not blocking; negative controls: one more identical couple, or the same couples in

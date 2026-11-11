@@ -1528,6 +1528,12 @@ def check_decisions(dec, path, sources, measures, reg, rep):
             entries.append(facts_hash(sources[sid][1], m, mref))
         if ok and hash_of(entries) != d["facts_hash"]:
             rep.warn(f"{L} {d['id']}", "facts_hash no longer matches: the decision is reported, not applied")
+        if d.get("kind") == "run":
+            listed = [r for run in d["runs"] for r in run]
+            if set(listed) - set(d["measures"]):
+                rep.err(f"{L} {d['id']}", f"runs name measures not in measures: {sorted(set(listed) - set(d['measures']))}")
+            if len(listed) != len(set(listed)):
+                rep.err(f"{L} {d['id']}", "a measure in two runs")
     heads = {d["id"]: d for d in dec["decisions"] if d.get("kind") == "headline"}
     for sid, s in setups.items():
         h = s["headline"]

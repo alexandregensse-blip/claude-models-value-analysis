@@ -30647,6 +30647,21 @@
   },
   "arxiv-2611.00244-t1-micro-avg-fold-backtrack": {
    "label": "Memento (arXiv 2611.00244) Table 1: Table 1, Micro Avg, method Fold + Backtrack"
+  },
+  "anthropic-cookbook-latency-desk-agent-fast-mode": {
+   "label": "Anthropic cookbook latency_optimization: Acme desk agent, Opus 5.5 fast mode (cell 60)"
+  },
+  "arcagi3-provider-adapter": {
+   "label": "ARC-AGI-3 (Semi-Private), Provider Adapter harness"
+  },
+  "ibragim-codex": {
+   "label": "ibragim.dev · Codex"
+  },
+  "oai55-t-expert-swe-internal": {
+   "label": "Expert-SWE (Internal) (table)"
+  },
+  "tokensave-brickbreaker-cost-first": {
+   "label": "tokensave brick-breaker: first measurement (2026-10-09), one run per level"
   }
  },
  "setups": {
@@ -94753,9 +94768,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -94779,7 +94794,7 @@
     "kernelbench-cc-01"
    ],
    "label": "KernelBench CUDA 01 (Claude Code)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (6 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (6 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-cc-02": {
    "family": "kernelbench-cc-02",
@@ -94788,9 +94803,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -94814,7 +94829,7 @@
     "kernelbench-cc-02"
    ],
    "label": "KernelBench CUDA 02 (Claude Code)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (5 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (5 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-cc-03": {
    "family": "kernelbench-cc-03",
@@ -94823,9 +94838,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -94849,7 +94864,7 @@
     "kernelbench-cc-03"
    ],
    "label": "KernelBench CUDA 03 (Claude Code)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (5 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (5 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-cc-04": {
    "family": "kernelbench-cc-04",
@@ -94858,9 +94873,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -94884,7 +94899,7 @@
     "kernelbench-cc-04"
    ],
    "label": "KernelBench CUDA 04 (Claude Code)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (4 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (4 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-hard-01": {
    "family": "kernelbench-hard-01",
@@ -94893,9 +94908,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -94919,7 +94934,7 @@
     "kernelbench-hard-01"
    ],
    "label": "KernelBench hard 01_fp8_gemm",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (7 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (7 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-hard-02": {
    "family": "kernelbench-hard-02",
@@ -94928,9 +94943,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -94954,7 +94969,7 @@
     "kernelbench-hard-02"
    ],
    "label": "KernelBench hard 02_kda_cutlass",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (4 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (4 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-hard-03": {
    "family": "kernelbench-hard-03",
@@ -94963,9 +94978,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -94989,7 +95004,7 @@
     "kernelbench-hard-03"
    ],
    "label": "KernelBench hard 03_paged_attention",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (5 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (5 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-hard-05": {
    "family": "kernelbench-hard-05",
@@ -94998,9 +95013,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -95024,7 +95039,7 @@
     "kernelbench-hard-05"
    ],
    "label": "KernelBench hard 05_topk_bitonic",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (7 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (7 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-hard-06": {
    "family": "kernelbench-hard-06",
@@ -95033,9 +95048,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -95059,7 +95074,7 @@
     "kernelbench-hard-06"
    ],
    "label": "KernelBench hard 06_sonic_moe_swiglu",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (2 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (2 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-hard-07": {
    "family": "kernelbench-hard-07",
@@ -95068,9 +95083,9 @@
    "harness": null,
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -95094,7 +95109,7 @@
     "kernelbench-hard-07"
    ],
    "label": "KernelBench hard 07_w4a16_gemm",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source; harness mixed in today's rows (7 base values; per-row harness is a measure fact)"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source; harness mixed in today's rows (7 base values; per-row harness is a measure fact) | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-mega-cc": {
    "family": "kernelbench-mega-cc",
@@ -95173,9 +95188,9 @@
    "harness": "OpenRouter-agent",
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -95199,7 +95214,7 @@
     "kernelbench-or-01"
    ],
    "label": "KernelBench CUDA 01 (OpenRouter)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-or-02": {
    "family": "kernelbench-or-02",
@@ -95208,9 +95223,9 @@
    "harness": "OpenRouter-agent",
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -95234,7 +95249,7 @@
     "kernelbench-or-02"
    ],
    "label": "KernelBench CUDA 02 (OpenRouter)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-or-03": {
    "family": "kernelbench-or-03",
@@ -95243,9 +95258,9 @@
    "harness": "OpenRouter-agent",
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -95269,7 +95284,7 @@
     "kernelbench-or-03"
    ],
    "label": "KernelBench CUDA 03 (OpenRouter)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kernelbench-or-04": {
    "family": "kernelbench-or-04",
@@ -95278,9 +95293,9 @@
    "harness": "OpenRouter-agent",
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "peak-fraction",
+   "metric": "achieved-over-peak (unbounded)",
    "headline": {
-    "metric": "peak-fraction",
+    "metric": "achieved-over-peak (unbounded)",
     "basis": "only-metric",
     "evidence": [
      {
@@ -95304,7 +95319,7 @@
     "kernelbench-or-04"
    ],
    "label": "KernelBench CUDA 04 (OpenRouter)",
-   "note": "headline: not-established:assumed (only metric held: 'peak-fraction'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'achieved-over-peak (unbounded)'); to be proven from the source | metric relabelled peak-fraction -> achieved-over-peak (unbounded) (11 Nov 2026, precheck « fraction above 1 »): the board's peak_fraction is « Return achieved / peak, clamped to [0, infinity). » (benchmarks/cuda/src/eval/roofline.py at commit 71f7c3d), not bounded by 1 (02 uses dense-equivalent FLOPs « that a correct sparse kernel never executes », SPEC.md; 04 is « SPS vs `peak_sps` (150M) »)"
   },
   "kikuziro-classifier": {
    "family": "kikuziro-classifier",
@@ -97802,9 +97817,9 @@
    "harness": "model-arena-r10",
    "tools_regime": null,
    "judge_panel": null,
-   "metric": "pass-fraction-24-tests",
+   "metric": "pass-of-24",
    "headline": {
-    "metric": "pass-fraction-24-tests",
+    "metric": "pass-of-24",
     "basis": "only-metric",
     "evidence": [
      {
@@ -97828,7 +97843,7 @@
     "lester-modelarena-r10"
    ],
    "label": "Model arena round 10: taker pass rate over 24 self-designed tests (four-way tie)",
-   "note": "headline: not-established:assumed (only metric held: 'pass-fraction-24-tests'); to be proven from the source"
+   "note": "headline: not-established:assumed (only metric held: 'pass-of-24'); to be proven from the source | metric relabelled pass-fraction-24-tests -> pass-of-24 (11 Nov 2026, precheck « fraction above 1 »): the value is the count of the 24 tests passed (« **24/24** » in the TOTAL column), a score out of 24, not a fraction"
   },
   "lexkairos-overall": {
    "family": "lexkairos-overall",
@@ -168282,7 +168297,8 @@
     "arxiv-2604.26954-kappa-temp1-j3"
    ],
    "label": "arxiv-2604.26954-kappa-temp1-j3",
-   "note": "salvo s5 (5 Nov 2026): first source src-arxiv-2604.26954-2026-04-03"
+   "note": "salvo s5 (5 Nov 2026): first source src-arxiv-2604.26954-2026-04-03 | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): majority votes of j replications at temp = 1 of one model on the same 900 conversations (« We computed this at the criterion level using the j replications at temp = 1 for j = 3, 5, and 7 »): one configuration's replications, one run (weight 1/k)",
+   "run_set": "arxiv-2604.26954:t4-temp1-majority-votes"
   },
   "arxiv-2604.26954-kappa-temp1-j5": {
    "family": "arxiv-2604.26954-kappa-temp1-j5",
@@ -168317,7 +168333,8 @@
     "arxiv-2604.26954-kappa-temp1-j5"
    ],
    "label": "arxiv-2604.26954-kappa-temp1-j5",
-   "note": "salvo s5 (5 Nov 2026): first source src-arxiv-2604.26954-2026-04-03"
+   "note": "salvo s5 (5 Nov 2026): first source src-arxiv-2604.26954-2026-04-03 | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): majority votes of j replications at temp = 1 of one model on the same 900 conversations (« We computed this at the criterion level using the j replications at temp = 1 for j = 3, 5, and 7 »): one configuration's replications, one run (weight 1/k)",
+   "run_set": "arxiv-2604.26954:t4-temp1-majority-votes"
   },
   "arxiv-2604.26954-kappa-temp1-j7": {
    "family": "arxiv-2604.26954-kappa-temp1-j7",
@@ -168352,7 +168369,8 @@
     "arxiv-2604.26954-kappa-temp1-j7"
    ],
    "label": "arxiv-2604.26954-kappa-temp1-j7",
-   "note": "salvo s5 (5 Nov 2026): first source src-arxiv-2604.26954-2026-04-03"
+   "note": "salvo s5 (5 Nov 2026): first source src-arxiv-2604.26954-2026-04-03 | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): majority votes of j replications at temp = 1 of one model on the same 900 conversations (« We computed this at the criterion level using the j replications at temp = 1 for j = 3, 5, and 7 »): one configuration's replications, one run (weight 1/k)",
+   "run_set": "arxiv-2604.26954:t4-temp1-majority-votes"
   },
   "arxiv-2607.26791-secrespond-det": {
    "family": "arxiv-2607.26791-secrespond-det",
@@ -376805,7 +376823,7 @@
    "composite": null,
    "legacy_groups": [],
    "label": "KernelBench CUDA 02 DeepSeek NSA, geomean milliseconds (Claude Code)",
-   "note": "NEW setup (salvo s7, lot k7-boards, 10 Nov 2026): the model page says the cell score of CUDA Native Sparse Attention is the geomean in milliseconds (lower is better), where the other CUDA cells are peak fractions of the roofline; the held setup kernelbench-cc-02 holds the same problem (02_deepseek_nsa) as a peak-fraction | added by integration 9 of salvo s7 (10 Nov 2026)"
+   "note": "NEW setup (salvo s7, lot k7-boards, 10 Nov 2026): the model page says the cell score of CUDA Native Sparse Attention is the geomean in milliseconds (lower is better), where the other CUDA cells are peak fractions of the roofline; the held setup kernelbench-cc-02 holds the same problem (02_deepseek_nsa) as a achieved-over-peak (unbounded) | added by integration 9 of salvo s7 (10 Nov 2026)"
   },
   "llmstats-home-agent": {
    "family": "llmstats-home-agent",
@@ -379513,7 +379531,8 @@
    "composite": null,
    "legacy_groups": [],
    "label": "OSWorld 2.1 offline set (82 tasks), partial score",
-   "note": "NEW setup (salvo s7, lot k7-anthropic, 10 Nov 2026): Fable 5.2 system card, section 8. | added by integration 9 of salvo s7 (10 Nov 2026)"
+   "note": "NEW setup (salvo s7, lot k7-anthropic, 10 Nov 2026): Fable 5.2 system card, section 8. | added by integration 9 of salvo s7 (10 Nov 2026) | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): partial score and strict pass rate of the same runs (§8.13.3 « Claude Opus 5.5 scored 87.2% partial and 53.2% strict pass »; Figures 8.13.3.B / C, one cost per point, the same on both charts)",
+   "run_set": "anthropic-fable-5-2-card:osworld-2.1-offline"
   },
   "scf52-osws": {
    "family": "scs55osws",
@@ -379549,7 +379568,8 @@
    "composite": null,
    "legacy_groups": [],
    "label": "OSWorld 2.1 offline set (82 tasks), strict pass rate",
-   "note": "NEW setup (salvo s7, lot k7-anthropic, 10 Nov 2026): Fable 5.2 system card, section 8. | added by integration 9 of salvo s7 (10 Nov 2026)"
+   "note": "NEW setup (salvo s7, lot k7-anthropic, 10 Nov 2026): Fable 5.2 system card, section 8. | added by integration 9 of salvo s7 (10 Nov 2026) | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): partial score and strict pass rate of the same runs (§8.13.3 « Claude Opus 5.5 scored 87.2% partial and 53.2% strict pass »; Figures 8.13.3.B / C, one cost per point, the same on both charts)",
+   "run_set": "anthropic-fable-5-2-card:osworld-2.1-offline"
   },
   "scf52-pb": {
    "family": "programbench",
@@ -383476,6 +383496,173 @@
    "label": "Memento (arXiv 2611.00244) Table 1: Table 1, Micro Avg, method Fold + Backtrack",
    "note": "integration 9 of salvo s7 (10 Nov 2026): decision 3 of 10 Nov: arxiv-2611.00244-t1-micro-avg split by method (GPT-5.5 High, Fold + Backtrack); the micro-average of the four datasets (a composite): headline left pending | integration 10 (10 Nov 2026), the maintainer's rule « one run, k measures, weight 1/k »: kept pending, a composite of the table: the composite rule | integration 11 (10 Nov 2026), the maintainer's decision: run set arxiv-2611.00244:t1-fold-backtrack (it measures the same runs as the other setups of the set) | integration 11 (10 Nov 2026), the maintainer's decision b: headline run-share (was decision « accuracy (%) » (not-established:assumed)): a component (or the final score) of a table without a declared composite: components and the final score of one run all enter (the composite rule needs a declared composite); it enters with the other measurements of its runs, each weighted 1/k, run set arxiv-2611.00244:t1-fold-backtrack",
    "run_set": "arxiv-2611.00244:t1-fold-backtrack"
+  },
+  "anthropic-cookbook-latency-desk-agent-fast-mode": {
+   "family": "anthropic-cookbook-latency-desk-agent-fast-mode",
+   "benchmark": "Anthropic cookbook latency_optimization: Acme desk agent, Opus 5.5 fast mode (cell 60)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "correct%",
+   "headline": {
+    "metric": "correct%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/anthropics/claude-cookbooks/blob/41ce172f08/latency_optimization/latency_optimization.ipynb",
+      "captured": "2026-11-09",
+      "where": "cell 4 (markdown)",
+      "quote": "A task is correct when every field it records matches the answer key.",
+      "file": "/work/.salvo14/mig/s6/ev/a2/anthropic/lat_latency_optimization.ipynb",
+      "sha256": "d785d1c58ee343e08ca5babe8c698a7cab1e2e4badd2d61ab58a4b0a23c784af"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Anthropic cookbook latency_optimization: Acme desk agent, Opus 5.5 fast mode (cell 60)",
+   "note": "NEW setup (anthropic-cookbook-latency-desk-agent split by configuration) | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): the rows « Opus 5.5 · high / medium / low · fast mode » of cell 60, another serving configuration (fast mode, about twice the price per task: $0.0804 against $0.0399 at high) than the baseline rows of cell 63"
+  },
+  "arcagi3-provider-adapter": {
+   "family": "arcagi3-provider-adapter",
+   "benchmark": "ARC-AGI-3 (Semi-Private), Provider Adapter harness",
+   "subset": null,
+   "harness": "Provider Adapter",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://web.archive.org/web/20261001063341/https://arcprize.org/policy",
+      "captured": "2026-10-01",
+      "where": "policy page, Verification Process: ARC-AGI-3 scores compared in percentage points",
+      "quote": "scores are in good agreement when within ±15 percentage points",
+      "file": "/work/.salvo14/mig/convert-arcprize/live/policy_20261001063341.html",
+      "sha256": "d24ec4913b60d7899bd8d927d0e007a380220a6d5e982433e34eee2c39dd2a31"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ARC-AGI-3 (Semi-Private), Provider Adapter harness",
+   "note": "NEW setup (arcagi3 split by configuration) | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): ARC Prize's providerAdapterEvaluation entries (« The Provider Adapter harness preserves opaque reasoning state between requests and uses compaction for longer conversations, allowing the model to reuse prior work. »), another harness than the standard one (« Evaluation conducted with 'high' reasoning effort using the standard harness. »)"
+  },
+  "ibragim-codex": {
+   "family": "ibragim-codex",
+   "benchmark": "ibragim.dev · Codex",
+   "subset": null,
+   "harness": "Codex",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "pass@1%",
+   "headline": {
+    "metric": "pass@1%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://ibragim.dev/leaderboard/",
+      "captured": "2026-09-30",
+      "where": "the leaderboard table ranks configurations by pass@1 (columns pass@3 and pass-all-3 are reliability variants of the same runs)",
+      "quote": "pass@1",
+      "file": "/work/.salvo14/mig/convert-ibragim-dev/evidence/ibragim-leaderboard-20260928.html",
+      "sha256": "30fca9aa3686974abbe0ed2a35866c8a5fb9112a61d9cb51381bf6bd6f5eaf55"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "ibragim.dev · Codex",
+   "note": "NEW setup (ibragim-pi split by configuration) | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): the leaderboard rows whose harness column is Codex (« id: Codex|GPT-5.6 Sol|medium »), another harness than Pi"
+  },
+  "oai55-t-expert-swe-internal": {
+   "family": "oai55-t-expert-swe-internal",
+   "benchmark": "Expert-SWE (Internal) (table)",
+   "subset": null,
+   "harness": "OpenAI-launch-table;research-environment",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "designated",
+    "evidence": [
+     {
+      "url": "https://web.archive.org/web/20260423180657/https://openai.com/index/introducing-gpt-5-5/",
+      "captured": "2026-04-23",
+      "where": "table 0 row label 'Expert-SWE (Internal)'",
+      "quote": "Expert-SWE (Internal)",
+      "file": "/work/.salvo14/gs/s1/verify/pub/wb-introducing-gpt-5-5-20260423180657.html",
+      "sha256": "65d6e840a6788574dadbc5fd889449a890a94dab1b34f851981192ee4b872533"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Expert-SWE (Internal) (table)",
+   "note": "NEW setup (oai55-t-cybergym split by configuration) | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): OpenAI's GPT-5.5 launch tables, row « Expert-SWE (Internal) »: these measures were held under oai55-t-cybergym"
+  },
+  "tokensave-brickbreaker-cost-first": {
+   "family": "tokensave-brickbreaker-cost-first",
+   "benchmark": "tokensave brick-breaker: first measurement (2026-10-09), one run per level",
+   "subset": null,
+   "harness": "Claude-Code",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "none",
+   "headline": {
+    "metric": "none",
+    "basis": "decision",
+    "decision": null
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "tokensave brick-breaker: first measurement (2026-10-09), one run per level",
+   "note": "NEW setup (tokensave-brickbreaker-cost split by configuration) | integration of 11 Nov 2026 (the maintainer's consigne « résous les ?? du precheck »): tokensave's first measurement (« one run per level on an earlier Claude Code version with default settings », 2026-10-09), another harness version and settings than the runs of 2026-10-23 (« claude -p --model … --effort … », average of 3 runs)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."

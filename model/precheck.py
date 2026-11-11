@@ -6,7 +6,8 @@
   2. Same runs under two metrics (warning): two groups of one publisher sharing 3 or more couples, not already
      recognised as republications nor declared one run's measurements (the build's column `run`, rule same-run-weight), whose costs agree within 1 % on every shared couple (the same runs cost the same
      whatever the metric), or, without costs, whose scores do, are probably one set of runs counted twice; they are
-     merged or told apart by hand.
+     merged or told apart by hand. Setups sharing a run_set (benchmarks.json) are one run declared; a pair the
+     sources establish as distinct runs is declared in DISTINCT_RUNS with its proof and reported as « -- declared ».
   3. A fraction above 1 (warning): a metric labelled as a fraction (of a peak, of a reference) whose values exceed 1
      is not bounded; it is read as is, and the label should say so.
   4. Memory (blocking): the fit's peak memory, estimated from the last measured peak of each axis
@@ -17,7 +18,8 @@
      (harness, metric, unit) whose costs differ by more than DUP_COST_RATIO, or whose scores differ by more than
      DUP_SCORE_SHARE of the scale, are probably two builds or two configurations under one key (20 Oct 2026: ARC
      Prize's dated and undated GPT-5.6 Luna, costs 5× apart, left the cost fit at R̂ 2.0 after an hour). Replicates of
-     one configuration agree; these do not.
+     one configuration agree; these do not. Replicates the source declares (seeds, separate runs of one case) are
+     named in REPLICATES with their exact values and proof, and reported as « -- declared ».
   6. Identical costs in two cost groups (blocking): two groups of the cost fit table (after lqm.load, whose
      republication rule keeps a copy once) sharing COPY_MIN (3) or more couples whose costs are identical (relative gap
      < COPY_REL, 1e-9) are one set of runs whose cost would count twice; the rule that should have recognised them
@@ -95,11 +97,49 @@ def label_errors(data):
     return out
 
 
-def twin_metrics(data):
-    """Pairs of groups of one publisher, 3 or more shared couples, not already recognised as republications, whose
-    costs agree within DUP_REL on every shared couple (the same runs cost the same, whatever the metric), or, without
-    costs, whose scores do."""
+# Pairs of groups the sources establish as distinct runs although their values agree within DUP_REL (the maintainer's
+# consigne of 11 Nov 2026, « résous les ?? du precheck »): the two data.csv groups and the proof. A declared pair is
+# reported, not flagged.
+DISTINCT_RUNS = [
+    dict(groups=("arxiv-2609.29933-t12-mmlongbench-doc-extractor-mmlb-column-k-10",
+                 "arxiv-2609.29933-t12-mmlongbench-doc-extractor-mmlb-column-k-20"),
+         proof="Table 12 « Retrieval-depth sweep with ColQwen2.5 » (« accuracy / mean input tokens »): k = 10 and k = 20 "
+               "retrieved pages are two runs with other inputs — Qwen3.5-27B « 0.594 / 18k | 0.595 / 34k », 4B "
+               "0.528 / 0.530, 9B 0.560 / 0.564 — the accuracy flattening above k = 10, the inputs doubling"),
+] + [dict(groups=(f"arxiv-2610.27043-t2-mintaka-{a}", f"arxiv-2610.27043-t2-mintaka-{b}"),
+          proof="Table 2, one column per Mintaka language (« low 78.8 76.5 77.8 77.2 77.9 77.5 77.0 76.2 78.2 … » for "
+                "Gemini 3.5 Flash): each language is its own translated question set, run apart; Gemini 3.5 Flash's "
+                "accuracy lies within 76-79 % in every language, hence values within 1 %")
+     for a, b in (("de", "es"), ("de", "hi"), ("de", "pt"), ("es", "hi"), ("es", "it"), ("hi", "it"), ("hi", "pt"))]
+
+
+def declared_distinct(g1, g2):
+    return next((d for d in DISTINCT_RUNS if set(d["groups"]) == {g1, g2}), None)
+
+
+def setup_run_sets():
+    """data.csv group → its setup's run_set (data/registry/benchmarks.json): setups sharing a run_set are declared one
+    run's measurements (rule same-run-weight), whether or not their rows are in on quality today."""
+    import json
+    setups = json.load(open(os.path.join(ROOT, "data", "registry", "benchmarks.json"), encoding="utf-8"))["setups"]
+    try:
+        gs = json.load(open(os.path.join(build_lqm.BUILD, "group-setups.json"), encoding="utf-8"))["groups"]
+    except (OSError, ValueError, KeyError):
+        gs = {}
+
+    def of(group):
+        sid = gs.get(group) or re.split(r"[@#]", group)[0]
+        return (setups.get(sid) or {}).get("run_set")
+    return of
+
+
+def twin_metrics(data, notes=None):
+    """Pairs of groups of one publisher, 3 or more shared couples, not already recognised as republications nor
+    declared one run (the build's column `run`, or setups sharing a run_set), whose costs agree within DUP_REL on every
+    shared couple (the same runs cost the same, whatever the metric), or, without costs, whose scores do. A pair
+    declared distinct runs (DISTINCT_RUNS) goes to `notes`."""
     from catalog import MODEL_ORDER
+    run_set = setup_run_sets()
     known = set()
     for axis in ("cost", "quality"):                                 # the fit tables' republications, on data.csv's groups
         known |= {frozenset(map(data_group, p[:2])) for p in load(axis)[2]}
@@ -122,12 +162,21 @@ def twin_metrics(data):
         ra, rb = run[(s1, g1)], run[(s2, g2)]
         if ra and rb and all(ra.get(c) and ra.get(c) == rb.get(c) for c in set(ra) & set(rb)) and set(ra) & set(rb):
             continue                                                 # one run's two measurements, declared: 1/k each
+        if run_set(g1) and run_set(g1) == run_set(g2):
+            continue                                                 # setups declared one run (benchmarks.json run_set)
         cost = set(a["cost_usd"]) & set(b["cost_usd"])
         score = set(a["score"]) & set(b["score"])
+        msg = None
         if len(cost) >= 3 and all(gap(a["cost_usd"][c], b["cost_usd"][c]) < DUP_REL for c in cost):
-            out.append(f"{g1} / {g2} ({s1}): same cost on {len(cost)} shared couples")
+            msg = f"{g1} / {g2} ({s1}): same cost on {len(cost)} shared couples"
         elif len(cost) < 3 and len(score) >= 3 and all(gap(a["score"][c], b["score"][c]) < DUP_REL for c in score):
-            out.append(f"{g1} / {g2} ({s1}): same score on {len(score)} shared couples, no cost to tell them apart")
+            msg = f"{g1} / {g2} ({s1}): same score on {len(score)} shared couples, no cost to tell them apart"
+        if msg:
+            d = declared_distinct(g1, g2)
+            if d is None:
+                out.append(msg)
+            elif notes is not None:
+                notes.append(f"{msg}; declared distinct runs: {d['proof']}")
     return out
 
 
@@ -201,10 +250,63 @@ def identical_costs(groups, notes=None):
 
 DUP_COST_RATIO = 1.5
 DUP_SCORE_SHARE = 0.10
+# Replicates declared by their sources (the maintainer's consigne of 11 Nov 2026, « résous les ?? du precheck »):
+# several runs of one configuration, each a measurement of it, whose spread the check would otherwise read as two
+# configurations under one key. A declaration names the setup (the data.csv group without '@publisher' / '#campaign'),
+# the couple, and the exact (score, cost) pairs of its rows as data.csv writes them: another row, or another value,
+# is flagged again.
+REPLICATES = [
+    dict(setup="s7t-wsp-exp5-seaquest", couple="fable-5.2@high",
+         rows=(("53.546", ""), ("35.597", ""), ("57.534", "")),
+         proof="three seeds of one configuration: results/exp5_high/seaquest/r0, r1 and r2 (score.json, score.mean)"),
+    dict(setup="tc-claude-2_1_205-fathom-v1_0_0-base", couple="haiku-4.5@nothink",
+         rows=(("0", "1.6958095"), ("0", "1.0490046999999998"), ("0", "1.2319570999999996")),
+         proof="three runs of one TestCabinet case (« case: fathom v1.0.0 base none », harness « claude 2.1.205 »), rows "
+               "616d9520…, 7dff2919…, f3b4b11c…, each with its own start time (2026-07-09T02:55, 02:04 …): every run "
+               "records its own tokens and cost (« Every run records cost two ways »)"),
+    dict(setup="tc-claude-2_1_235-pong-v2_1_0-base", couple="haiku-4.5@nothink",
+         rows=(("0", "1.0508769000000002"), ("0", "0.8449548000000004"), ("0", "0.7061620000000002"),
+               ("52", "0.8828445"), ("0", "0.6544832999999999")),
+         proof="five runs of one TestCabinet case (pong v2.1.0 base, harness claude 2.1.235), rows e8f76489…, b871521b…, "
+               "6733b72e…, 5b6f78a5…, 213b1c55…, each its own run"),
+    dict(setup="llm-chess-vs-random", couple="gpt-5.4@low",
+         rows=(("70", ""), ("40", "")),
+         proof="two runs of ten games of one configuration (« gpt-5.4-low__2026-03-08-18-12-13___aggregate_results.json » "
+               "7 of 10, « gpt-5.4-low__2026-04-19-11-06-21 » 4 of 10, reasoning_effort low in both), two log folders"),
+    dict(setup="playcodesvg", couple="gemini-3.8-flash@medium",
+         rows=(("", "0.043"), ("", "0.049"), ("", "0.056"), ("", "0.075")),
+         proof="Playcode's Gemini 3.8 Flash rows « default », « low », « medium », « max » ran the model's default four "
+               "times (« our harness had never wired Gemini's thinking_level, so every launch-sweep Gemini run had been at "
+               "the default »; « measured each model's default repeatedly »), one API call each (« One API call per "
+               "cell »)"),
+    dict(setup="nurb-bit-block", couple="gpt-5.6-terra@medium",
+         rows=(("0.947", "0.675"), ("0.892", "1.6470000000000002")),
+         proof="two rows of one benchmark revision (0.22.2/0.1.0@e8f4e93e23fd) and one configuration, Codex 0.149.0 and "
+               "0.149.1 (a patch release: one configuration, lqm.harness_base)"),
+    dict(setup="nurb-bundle-holder", couple="gpt-5.6-terra@medium",
+         rows=(("0.867", "1.269"), ("0.760", "1.035")),
+         proof="two rows of one benchmark revision (0.22.2/0.1.0@c16e77e91b9a), Codex 0.149.1 and 0.149.0 (patch release)"),
+    dict(setup="nurb-pole-rest", couple="gpt-5.6-terra@medium",
+         rows=(("1.000", "0.675"), ("0.828", "0.747")),
+         proof="two rows of one benchmark revision (0.22.2/0.1.0@de974b4cb0c3), Codex 0.149.1 and 0.149.0 (patch release)"),
+    dict(setup="nurb-leg-cup", couple="gpt-5.6-luna@max",
+         rows=(("1.000", "0.030000000000000002"), ("1.000", "0.066")),
+         proof="two rows of one benchmark revision (0.23.0/0.1.0@6817426c8779), Codex 0.150.0 and 0.149.1 (harness "
+               "versions: one configuration, lqm.harness_base)"),
+]
 
 
-def discordant_twins(data, order):
-    """Pairs of rows of one couple in one group and setup whose values are too far apart to be replicates."""
+def declared_replicates(group, couple, rs):
+    vals = sorted((r["score"], r["cost_usd"]) for r in rs)
+    for d in REPLICATES:
+        if re.split(r"[@#]", group)[0] == d["setup"] and couple == d["couple"] and vals == sorted(d["rows"]):
+            return d
+    return None
+
+
+def discordant_twins(data, order, notes=None):
+    """Pairs of rows of one couple in one group and setup whose values are too far apart to be replicates; declared
+    replicates (REPLICATES) go to `notes`."""
     by = collections.defaultdict(list)
     for r in data:
         if r["model"] in order and r["effort"] in lqm.EFFORTS:
@@ -223,7 +325,12 @@ def discordant_twins(data, order):
             if (max(scores) - min(scores)) / b > DUP_SCORE_SHARE:
                 why.append(f"scores {min(scores):g}..{max(scores):g}")
         if why:
-            out.append(f"{g} {m}@{e} ×{len(rs)}: " + ", ".join(why))
+            msg = f"{g} {m}@{e} ×{len(rs)}: " + ", ".join(why)
+            d = declared_replicates(g, f"{m}@{e}", rs)
+            if d is None:
+                out.append(msg)
+            elif notes is not None:
+                notes.append(f"{msg}; declared replicates: {d['proof']}")
     return out
 
 
@@ -295,7 +402,8 @@ def memory_check():
 
 def main(run_smoke=False):
     data = rows()
-    errors, twins = label_errors(data), twin_metrics(data)
+    declared = []
+    errors, twins = label_errors(data), twin_metrics(data, declared)
     for e in errors:
         print("!! label contradicted by value:", e)
     for t in twins:
@@ -303,8 +411,10 @@ def main(run_smoke=False):
     for f in fraction_above_one(data):
         print("?? fraction above 1:", f)
     from catalog import MODEL_ORDER
-    for t in discordant_twins(data, set(MODEL_ORDER)):
+    for t in discordant_twins(data, set(MODEL_ORDER), declared):
         print("?? one couple twice in a group, discordant (two builds or configurations under one key?):", t)
+    for t in declared:
+        print("-- declared:", t)
     notes = []
     copies = identical_costs(load("cost")[0], notes)
     for c in notes:
