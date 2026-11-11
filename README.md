@@ -126,7 +126,7 @@ uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r model/req
 .stan/venv/bin/python -c "import cmdstanpy; cmdstanpy.install_cmdstan(dir='.stan', version='2.40.0')"
 .stan/venv/bin/python -c "import bridgestan.download as d; d.get_bridgestan_src()" && mv ~/.bridgestan/bridgestan-2.9.0 .stan/
 .stan/venv/bin/python model/fit.py --dry          # the inputs: fingerprint, groups and rows per axis; no sampling
-.stan/venv/bin/python model/precheck.py           # the data checks and the memory estimate (--smoke: a 3-minute fit)
+.stan/venv/bin/python model/precheck.py           # the data checks and the memory estimate (--smoke: a short fit of each axis, 2 chains × (50 + 150))
 .stan/venv/bin/python model/fit.py      # → model/fit-cache.json, then python3 site/build.py
 ```
 

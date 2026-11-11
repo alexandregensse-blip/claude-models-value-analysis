@@ -352,8 +352,9 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   Stan. The fitting environment is pinned in `model/requirements-fit.txt`.
 
 Before a fit, `model/precheck.py` stops a run whose data carry a score beyond its label's bound, reports groups that
-look like the same runs under two metrics and fractions above 1, and runs a three-minute fit of the quality axis that
-must reach R̂ ≤ 1.5 before the full fit starts (a chain trapped in a remote region shows there already).
+look like the same runs under two metrics and fractions above 1, and runs a short fit of each axis, quality then cost (2
+chains of 50 warm-up and 150 draws), that must reach R̂ ≤ 2.0 on both before the full fit starts: it only checks
+that the fit sets off in roughly the right direction (a chain trapped in a remote region shows there already).
 
 A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01, the bulk
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build

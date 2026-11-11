@@ -27,9 +27,11 @@
      d ≈ 3e-15, R̂ 6.8 after 7.7 h). The full fit is not started. A coincidence proven from the sources (runs of two
      different benchmarks, costs rounded to the cent) is declared pair by pair in COINCIDENCES, with the couples it
      covers and its proof; it is then reported, not blocking, as long as the identical couples are exactly those.
-  7. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
-     three minutes; a chain left in another region shows there as R̂ far above 1. Above SMOKE_RHAT the full fit is
-     not started.
+  7. Smoke fit (blocking, model/fit.py --smoke): a short fit of each axis in turn, quality then cost, SMOKE_CHAINS (2)
+     chains of SMOKE_WARMUP (50) warm-up iterations and SMOKE_DRAWS (150) draws (the maintainer, 11 Nov 2026: it only
+     checks that the fit sets off roughly in the right direction; it was 6 × (500 + 500) on quality alone). A chain
+     left in another region shows there as R̂ far above 1. Above SMOKE_RHAT (2.0) on either axis the full fit is not
+     started, and the message names the axis that stopped it.
 
 Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4, 6 and 7 run lqm.load
 on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does.
@@ -44,7 +46,13 @@ import lqm, build_lqm
 
 DATA = os.path.join(build_lqm.BUILD, "data.csv")             # the build's public data file: every measure, its status
 
-SMOKE_RHAT = 1.5
+# The smoke fit (the maintainer, 11 Nov 2026): each axis, 2 chains of 50 warm-up + 150 draws; it only checks that the
+# fit sets off roughly in the right direction, hence a loose threshold, applied to each axis.
+SMOKE_RHAT = 2.0
+SMOKE_CHAINS = 2
+SMOKE_WARMUP = 50
+SMOKE_DRAWS = 150
+SMOKE_AXES = ("quality", "cost")
 DUP_REL = 0.01
 MEMORY_PEAKS = os.path.join(HERE, "memory-peaks.json")
 MEMORY_SHARE = 0.9
@@ -219,13 +227,40 @@ def discordant_twins(data, order):
     return out
 
 
-def smoke(seed=11):
-    """Short quality fit; returns (R̂ max, worst parameters)."""
-    groups, _, _ = load("quality")
-    data, _ = lqm.stan_data(groups, "quality")
-    post = lqm.sample_once(data, "quality", dict(lqm.SAMPLER["quality"], warmup=500, samples=500), seed)
+def smoke(axis, seed=11):
+    """Short fit of one axis (SMOKE_CHAINS chains of SMOKE_WARMUP warm-up + SMOKE_DRAWS draws); returns (R̂ max, worst
+    parameters)."""
+    groups, _, _ = load(axis)
+    data, _ = lqm.stan_data(groups, axis)
+    st = dict(lqm.SAMPLER[axis], chains=SMOKE_CHAINS, warmup=SMOKE_WARMUP, samples=SMOKE_DRAWS)
+    post = lqm.sample_once(data, axis, st, seed)
     diag, _ = lqm.diagnostics(post)
     return diag["rhat_max"], diag["worst_rhat"]
+
+
+def smoke_verdict(results):
+    """results: [(axis, R̂ max)] in the order run → the first axis whose R̂ is undefined (too few draws) or above
+    SMOKE_RHAT, or None when every axis passes."""
+    for axis, rhat in results:
+        if rhat is None or rhat > SMOKE_RHAT:
+            return axis
+    return None
+
+
+def smoke_all(run=smoke, say=print):
+    """The smoke fit of each axis in turn (SMOKE_AXES); → the axis that stops the full fit, or None. An axis over the
+    threshold stops the next one from being sampled."""
+    results = []
+    for axis in SMOKE_AXES:
+        rhat, worst = run(axis)
+        say(f"smoke fit ({axis}, {SMOKE_CHAINS} × ({SMOKE_WARMUP} + {SMOKE_DRAWS})): R̂ max {rhat} · worst {list(worst)[:4]}")
+        results.append((axis, rhat))
+        bad = smoke_verdict(results)
+        if bad is not None:
+            say(f"!! smoke fit, {bad} axis: a chain is in another region (R̂ > {SMOKE_RHAT}, or undefined): the full fit "
+                "is not started")
+            return bad
+    return None
 
 
 def memory_limit():
@@ -290,12 +325,8 @@ def main(run_smoke=False):
             print(f"!! the fit would exceed {MEMORY_SHARE:.0%} of the container's memory: not started "
                   "(raise the limit, or run the axes in turn)")
             return 1
-    if run_smoke:
-        rhat, worst = smoke()
-        print(f"smoke fit (quality, 4 × 500 + 500): R̂ max {rhat} · worst {worst[:4]}")
-        if rhat is None or rhat > SMOKE_RHAT:            # None: R̂ undefined (too few draws)
-            print(f"!! a chain is in another region (R̂ > {SMOKE_RHAT}): the full fit is not started")
-            return 1
+    if run_smoke and smoke_all() is not None:
+        return 1
     return 0
 
 

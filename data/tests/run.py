@@ -2599,6 +2599,24 @@ def precheck_declared_coincidence():
 
 
 @test
+def precheck_smoke_both_axes():
+    """precheck's smoke fit (the maintainer, 11 Nov 2026): both axes in turn, 2 chains of 50 warm-up + 150 draws,
+    R̂ ≤ 2.0 on each; the message names the axis that stops the full fit (sampling replaced by a stub)."""
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    eq((precheck.SMOKE_AXES, precheck.SMOKE_CHAINS, precheck.SMOKE_WARMUP, precheck.SMOKE_DRAWS, precheck.SMOKE_RHAT),
+       (("quality", "cost"), 2, 50, 150, 2.0), "the smoke's settings")
+    for rh, want in (({"quality": 1.3, "cost": 1.9}, None), ({"quality": 2.4, "cost": 1.0}, "quality"),
+                     ({"quality": 1.2, "cost": 2.1}, "cost"), ({"quality": 1.2, "cost": None}, "cost")):
+        ran, said = [], []
+        got = precheck.smoke_all(run=lambda a: (ran.append(a), (rh[a], ["p"]))[1], say=said.append)
+        eq(got, want, f"blocking axis for {rh}")
+        eq(ran, ["quality"] if want == "quality" else ["quality", "cost"], "quality first; a blocked axis stops")
+        if want:
+            assert f"{want} axis" in said[-1], said[-1]
+
+
+@test
 def precheck_identical_costs_block():
     """precheck R2 (the maintainer, 11 Nov 2026): two cost groups of the fit table sharing ≥ 3 couples whose costs are
     identical (relative gap < 1e-9) stop the fit (the frozen cost fit of 10 Nov: ReactBench v1.0 / v1.1, d ≈ 3e-15).

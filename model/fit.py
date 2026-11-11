@@ -16,7 +16,8 @@ is summarised again without sampling. Its data are the build's (data/build/, wri
 --fit-models catalog): fit-quality.csv for quality, fit-cost.csv for cost, the group-keyed catalog maps resolved through
 group-map.json and group-setups.json as data/build_lqm.py does (fit_maps); `--dry` builds these inputs and prints them
 without the checks or sampling. The checks of model/precheck.py run first (a score beyond its label's bound stops the run; the
-same runs under two metrics are reported; a 3-minute smoke fit of the quality axis must reach R̂ ≤ 1.5); `--no-smoke`
+same runs under two metrics are reported; a short smoke fit of each axis, quality then cost, 2 chains ×
+(50 warm-up + 150 draws), must reach R̂ ≤ 2.0 on both, the message naming the axis that stops it); `--no-smoke`
 skips the smoke fit. The two axes run one after the other (lqm.PARALLEL_AXES)."""
 import hashlib, json, os, sys, time
 
@@ -102,7 +103,7 @@ def main(refit_all=False, smoke=True):
     the machine has a core for every chain of both. Each axis is written to the cache as soon as it is done, so a run
     stopped later resumes from it."""
     import precheck, subprocess, tempfile
-    if precheck.main(run_smoke=smoke):                               # data errors, then a 3-minute smoke fit
+    if precheck.main(run_smoke=smoke):                               # data errors, then the smoke fit of both axes
         sys.exit("!! pre-fit checks failed (model/precheck.py): the fit is not started")
     out = dict(inputs=INPUTS, fingerprint=fingerprint(), seed={}, sampler=lqm.SAMPLER, diagnostics={})
     try:
