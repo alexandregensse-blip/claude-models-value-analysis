@@ -4245,8 +4245,9 @@ def billing_step(ctx, chain):
 
 
 def route_price_vs_maker(M, C, key, step):
-    """The route's registered standard prices for the model over the price date (inside the span the route served the
-    model), each read against the maker's list price over the same days: 'same' when every one equals it, 'differs'
+    """The route's registered prices for the model over the price date (inside the span the route served the model;
+    standard and promotion records, a promotion being a price charged), each read against the maker's prices charged
+    over the same days: 'same' when every one equals it, 'differs'
     when one does not (or no maker price covers its days), None when the route has no registered price there. Days of
     the span with no registered route price are not read (a catalogue first captured a day after the route listed
     the model)."""
@@ -4263,10 +4264,14 @@ def route_price_vs_maker(M, C, key, step):
         hi = min(hi, max(V.when(r["to"], True) if r.get("to") is not None else MAX for r in recs))
     cur = C.get("price_list_currency") or C.get("currency")
     cfg = (M.fields.get("configuration") or {}).get("value")
-    own = [p for p in std_entries(ctx, key, step, cur, cfg) if overlaps(p, lo, hi)]
+    def charged(route):                                  # a promotion is a price charged over its interval (as in
+        return std_entries(ctx, key, route, cur, cfg) + [   # prices_over)
+            p for p in ctx.prices["prices"] if p["model"] == key and p["route"] == route and p["kind"] == "promotion"
+            and (cur is None or p["currency"] == cur) and for_config(p, cfg)]
+    own = [p for p in charged(step) if overlaps(p, lo, hi)]
     if not own:
         return None
-    makers = std_entries(ctx, key, "maker-api", cur, cfg)
+    makers = charged("maker-api")
     for p in own:
         f = max(lo or MIN, V.when(p["from"]))
         t = min(hi, V.when(p["to"], True) if p.get("to") is not None else MAX)

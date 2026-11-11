@@ -494,8 +494,9 @@ marked **(method)** remain method questions for the maintainer.
     publisher's own figure: every price over the price date equals the base) is unchanged.
 31. In the partition, the route key is the price applied, not the number of candidate chains nor what the registry
     knows of them **(rule R3, the maintainer, 11 Nov 2026; it was « the single candidate chain, else `unknown` »)**.
-    The route that bills a chain is its first step that is not a harness; its registered standard prices over the
-    price date (inside the span it served the model) are read against the maker's list price over the same days
+    The route that bills a chain is its first step that is not a harness; its registered prices over the price date
+    (inside the span it served the model; standard and promotion records, a promotion being a price charged) are read
+    against the maker's prices charged over the same days
     (input and output in both, the classes both list, the same long-context thresholds; days with no registered route
     price are not read). A stated chain: `maker-api` when it reaches the maker's API or its route's registered prices
     all equal the maker's, else the route's id (its own price, or none registered). The route unknown (several
@@ -1755,3 +1756,43 @@ No rule of the build changed; R2 stays blocking. Each pair was read from its fin
   118,602 / 156,200 and 210,421 / 277,469). A couple whose two measures give token counts of one kind that differ
   beyond the coarser step is now two runs, whatever the costs; ReactBench's re-gradings carry identical counts. Test
   `version_runs_tokens_differ` (negative controls: identical counts, within the step, no common kind).
+
+## Added on 11 Nov 2026 (Fable 5.2 alone in its cost groups: corrections and rules R3–R5)
+
+The cost fit of 11 Nov mixed slowly in one direction: Claude Fable 5.2 was alone in 29 of its 30 cost groups (lqm),
+its level against the other models tied by one PokeBench row (analysis ANA.md of 11 Nov). The maintainer's
+corrections:
+
+- **CursorBench (data).** The Fable 5.2 card's Figure 8.8.A (scf52-cb40, 16 measures) is Cursor's runs (§8.8,
+  « Cursor measured and reported all scores independently »): restated-from F1125 and same-runs-as F1126–F1141, each
+  naming the board measure read row by row (scores equal, costs within 0.03 $): `out:copy`, counted once on the board.
+- **FrontierCode 2.0 (data, D63 / D64).** Cognition's five Fable 5.2 costs are 1.249–1.251 × the card's (Fable 5.1's
+  price 10 / 50 $ applied to the same runs): Cognition's costs out (D63), the card's kept at the current price; the
+  card's five scores out on quality (D64), the same runs' scores counted once on Cognition's board as for the other
+  models of the table.
+- **OpenRouter route for Fable 5.2 (data, held back).** The model page saved on 10 Nov proves OpenRouter served it from
+  2026-11-09T19:49:41Z at 8 / 40 $. Entered with that date, it put 36 Fable 5.2 measures of the boards captured on
+  10 Nov (ARC Prize, CursorBench, Zapier, Epoch, geotoolbox, notesbylex) out on both axes as `effort-not-established`:
+  their run interval starts at the release (9 Nov 00:00), before the route served the model, and OpenRouter's own
+  `accepts_maker` ends on 9 Nov (its last capture), so the route's levels cover no such run and the candidate routes
+  disagree. With R3 the card's groups join without it; the entries are not in the registry.
+- **R3, the route key is the price applied** (item 31; `price_key`, `route_price_vs_maker`). Effect on the data of this
+  build: 6,933 cost measures go from `unknown` to `maker-api`, 1,924 from a harness chain (`claude-code/maker-api`,
+  `inspect-ai/…`, …) to `maker-api`, 104 to a route's id; 29 models keep `unknown` where OpenRouter's registered price
+  differs from the maker's over the price date (GPT-5.6 Sol / Terra / Luna: OpenRouter's 2 / 10 $ of Aug–Sep against
+  OpenAI's 4 / 20 $ promotion; Grok 4.7's 1.6 / 4.8 $ of 23 Sep; DeepSeek, GLM, Kimi, Qwen). Cost groups whose subsets
+  change: 140 joined more models, 87 split, 39 both (model pairs sharing a subset: +2,547, −5,326). The splits are the
+  models whose price is known to differ, which `unknown` used to pool with every multi-route model (AA boards,
+  Vals.ai, connections-oneshot, datallmlab); the joins are mostly harness chains and router-served models meeting the
+  maker-API ones (ObviousBench, Vals.ai index, Terminal-Bench 4.0, IdentityBench).
+- **R4, an unwritten method follows the page** (Settings, `snapshot_root`). It joins the captures of one page that all
+  lack a method (10 groups by R4 alone, 41 with R3). It does not join a capture without a method to an earlier one that
+  writes it (ARC Prize 11-10 against 11-04's « retail pricing », CursorBench, Zapier): those Fable 5.2 groups stay apart.
+- **R5, precheck check 8 (warning).** Nothing is named on this build (Fable 5.2: 18 of its 38 groups shared at high,
+  7 of 26 at low; before, 1 of 30).
+- Fable 5.2 on the cost axis (lqm): 20 of its 40 groups hold another model (before 1 of 30): the card's Bcad, Chart
+  N / T, HLE no tools, OSWorld, AA index, the Vals.ai boards, PokeBench, ironcurtain. Still alone: AA's per-benchmark
+  boards and ARC / Zapier / CursorBench of 10 Nov (method not written in that capture), the card's Draco, HLE with
+  tools and W&R (Opus 5.5 and Fable 5.1 there are lqm republications of the Fable 5.1 card), FrontierCode.
+- Fit tables (lqm): quality 22,174 → 22,153 rows, cost 9,665 → 9,746 rows, 352 / 288 couples unchanged. Tests
+  `cost_route_key_is_price_applied`, `cost_method_unstated_follows_page`, `precheck_isolated_couples`.

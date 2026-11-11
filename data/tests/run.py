@@ -1640,6 +1640,13 @@ def cost_route_key_is_price_applied():
           (("ma", LOW, "1.0"), ("ma", HIGH, "2.0"), ("mb", LOW, "1.5"), ("mb", HIGH, "3.0"))]
     r = sc.run()
     eq(r[ms[0]]["fields"]["cost"]["part"][-1], "maker-api", "the router's price equals the maker's on its own days")
+    # the maker's price over the router's days is a promotion (GPT-5.6 Sol 4 / 20 from 21 Aug, OpenRouter 4 / 20 from
+    # 20 Oct): a promotion is a price charged, the router's equals it
+    promo = sc.prices["prices"][1]
+    sc.prices["prices"][1] = dict(promo, kind="promotion")
+    r = sc.run()
+    eq(r[ms[0]]["fields"]["cost"]["part"][-1], "maker-api", "the router's price equals the maker's promotion")
+    sc.prices["prices"][1] = promo
     sc.prices["prices"][-1]["classes"]["cache-read"] = 0.2
     r = sc.run()
     eq(r[ms[0]]["fields"]["cost"]["part"][-1], "unknown",
