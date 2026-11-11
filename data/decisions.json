@@ -1609,6 +1609,45 @@
    "reason": "OpenAI's GPT-5.5 launch page prints the same figures twice: table 1 repeats table 0's « Expert-SWE (Internal) » row (GPT-5.5 73.1 %, GPT-5.4 68.5 %) and table 6 repeats table 0's « CyberGym » row (81.8 %, 79.0 %): one measurement each, counted once, in table 0 (M78, M79, M107, M108); the repeats go out (precheck « one couple twice in a group » oai55-t-cybergym, where the Expert-SWE rows were also held under CyberGym: moved to setup oai55-t-expert-swe-internal) (the maintainer's consigne of 11 Nov 2026, « résous les ?? du precheck »)",
    "date": "2026-11-11",
    "decided_by": "maintainer"
+  },
+  {
+   "kind": "measure",
+   "id": "D63",
+   "measures": [
+    "src-cognition-frontiercode-2-0-2026-11-09#M1",
+    "src-cognition-frontiercode-2-0-2026-11-09#M2",
+    "src-cognition-frontiercode-2-0-2026-11-09#M3",
+    "src-cognition-frontiercode-2-0-2026-11-09#M4",
+    "src-cognition-frontiercode-2-0-2026-11-09#M5",
+    "src-cognition-frontiercode-2-0-2026-11-09#M6",
+    "src-cognition-frontiercode-2-0-2026-11-09#M7",
+    "src-cognition-frontiercode-2-0-2026-11-09#M8",
+    "src-cognition-frontiercode-2-0-2026-11-09#M9",
+    "src-cognition-frontiercode-2-0-2026-11-09#M10"
+   ],
+   "facts_hash": "b2796f48af6818e25a35f7568ee4d3890f568df6c978de0075b786a0b04b50eb",
+   "axis": "cost",
+   "status": "out",
+   "reason": "Claude Fable 5.2 on FrontierCode 2.0: Cognition's board (data.json, captured 10 Nov 2026) and the Fable 5.2 system card (§8.4, Table 8.4) publish the same runs (the card, F1120: « Each score is a single result from Cognition »), read row by row: scores 0.342 / 34.2, 0.3759 / 37.6, 0.4529 / 45.3, 0.4911 / 49.1, 0.4565 / 45.7 (low, medium, high, xhigh, max). Cognition's costs per rollout 2.623, 3.103, 8.402, 17.734, 55.868 $ are 1.249, 1.251, 1.250, 1.250, 1.250 × the card's 2.10, 2.48, 6.72, 14.19, 44.70 $ (each ratio within the card's rounding to the cent of 1.250 = 10 / 8 = 50 / 40): Cognition priced the runs at Claude Fable 5.1's list price (10 / 50 $ per MTok), the card at Fable 5.2's (8 / 40 $, the current price, release notes of 9 Nov 2026). The cost of these runs counts once, on the card; Cognition's costs go out (the maintainer, 11 Nov 2026: « corrige », ANA.md correction 3)",
+   "date": "2026-11-11",
+   "decided_by": "maintainer"
+  },
+  {
+   "kind": "measure",
+   "id": "D64",
+   "measures": [
+    "src-anthropic-fable-5-2-system-card-2026-11-09#M11",
+    "src-anthropic-fable-5-2-system-card-2026-11-09#M12",
+    "src-anthropic-fable-5-2-system-card-2026-11-09#M13",
+    "src-anthropic-fable-5-2-system-card-2026-11-09#M14",
+    "src-anthropic-fable-5-2-system-card-2026-11-09#M15"
+   ],
+   "facts_hash": "bd171021924f92edfb5351bff7523d8ab739d4c60e736badc003354cbf5da1a6",
+   "axis": "quality",
+   "status": "out",
+   "reason": "The same runs on the quality axis: Claude Fable 5.2's FrontierCode 2.0 scores on the system card (§8.4) are Cognition's (F1120, read row by row: 34.2 / 0.342, 37.6 / 0.3759, 45.3 / 0.4529, 49.1 / 0.4911, 45.7 / 0.4565). The score counts once, on Cognition's board, as for the other models of the same table (F1121–F1124, out:copy); only the cost stays on the card (D63: Cognition priced them at the old price). (11 Nov 2026, ANA.md correction 3)",
+   "date": "2026-11-11",
+   "decided_by": "maintainer"
   }
  ]
 }
