@@ -14,7 +14,8 @@ every measure (run-date interval, model through `names`, configuration through �
 campaign, value on the setup's scale, cost at the base price); 3. status per axis (decisions first, then the first
 failing step); 4. outputs (data/build/ by default): fit-quality.csv, fit-cost.csv, group-map.json, group-setups.json,
 data.csv, status-report.json (the last one not committed: .gitignore); 5. unless --no-lqm, data/build_lqm.py recovers lqm.load's per-row outcome."""
-import argparse, collections, csv, datetime as dt, glob, hashlib, json, math, os, re, sys
+import argparse, collections, contextlib, csv, datetime as dt, functools, glob, hashlib, io, json, math, \
+    multiprocessing, os, pickle, re, shutil, sys, time
 from decimal import Decimal, InvalidOperation
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -377,6 +378,278 @@ class Source:
         return x, fault
 
 
+
+# ---------------------------------------------------------------- stages: cache by hash, workers
+# A stage is a function of one unit (one source file, one measure file) whose result depends only on the unit's own
+# files and on what every unit reads alike (the code, the registries, the vocabulary, the settings, the list of source
+# ids): its key hashes all of them (digest below). A unit whose key is found in the cache is not recomputed; the others
+# run on --jobs worker processes (fork: they read the loaded context, never a file of their own). What links sources
+# together (same-runs-as, R1 version_runs, republications, decisions, the outputs) runs after, on every measure, keyed
+# by every unit's key at once (stage `outputs`). --no-cache recomputes every stage (sealed.py's build).
+CACHE_FORMAT = 3
+CODE_FILES = ("data/*.py", "data/schema/*.py", "data/schema/*.json", "data/convert/*.py", "model/lqm.py",
+              "model/catalog.py")
+STAGE_DIRS = ("check-source", "check-measures", "measure-fields")
+_W = {}                                                  # what the forked workers read: {"ctx", "units"}
+_SHA = {}
+
+
+def digest(*parts):
+    h = hashlib.sha256()
+    for x in parts:
+        h.update(repr(x).encode("utf-8"))
+        h.update(b"\0")
+    return h.hexdigest()
+
+
+def file_sha(path):
+    """The file's sha256 (None when absent), once per process."""
+    path = os.path.abspath(path)
+    if path not in _SHA:
+        try:
+            with open(path, "rb") as f:
+                _SHA[path] = hashlib.sha256(f.read()).hexdigest()
+        except OSError:
+            _SHA[path] = None
+    return _SHA[path]
+
+
+def sha_now(path):
+    try:
+        with open(path, "rb") as f:
+            return hashlib.sha256(f.read()).hexdigest()
+    except OSError:
+        return None
+
+
+def env_digest(ctx):
+    """What every unit reads alike: the build's code, the schemas and vocabulary, each registry file read, the
+    class-ratio table, the settings and the fit's model list, whether legacy sources exist (they add the registry's
+    legacy entries), the folders (they are in the messages), Python's version."""
+    a = ctx.args
+    code = sorted((os.path.relpath(p, REPO), file_sha(p)) for g in CODE_FILES for p in glob.glob(os.path.join(REPO, g)))
+    regs = sorted((k, os.path.abspath(p), file_sha(p)) for k, p in ctx.paths.items())
+    cr = a.class_ratios or os.path.join(a.registry, "class-ratios.json")
+    fm = a.fit_models
+    fm_file = os.path.join(HERE, "catalog", "models.json") if fm == "catalog" else fm
+    return digest(CACHE_FORMAT, sys.version, code, regs, (os.path.abspath(cr), file_sha(cr)), ctx.settings,
+                  (fm, file_sha(fm_file) if fm_file else None), REPO, os.path.abspath(a.registry),
+                  os.path.abspath(a.findings), bool(glob.glob(os.path.join(a.findings, "sources", "src-legacy-*.json"))))
+
+
+@contextlib.contextmanager
+def timed(ctx, step):
+    t0 = time.perf_counter()
+    try:
+        yield
+    finally:
+        ctx.times.append((step, time.perf_counter() - t0))
+
+
+class StageCache:
+    """One pickle per (stage, key) under the cache folder (outside git: .gitignore). An entry holds its own stage and
+    key: one found under a key it does not hold (stale, copied, or written by another format) is refused and
+    recomputed."""
+
+    def __init__(self, folder):
+        self.folder = folder
+        self.hits, self.misses, self.refused = collections.Counter(), collections.Counter(), collections.Counter()
+        self.used = collections.defaultdict(set)
+
+    def path(self, stage, key):
+        return os.path.join(self.folder, stage, key[:2], key + ".pickle")
+
+    def get(self, stage, key):
+        if not self.folder:
+            return False, None
+        self.used[stage].add(key)
+        try:
+            with open(self.path(stage, key), "rb") as f:
+                fmt, st, k, payload = pickle.load(f)
+        except FileNotFoundError:
+            self.misses[stage] += 1
+            return False, None
+        except Exception:
+            self.refused[stage] += 1
+            self.misses[stage] += 1
+            return False, None
+        if (fmt, st, k) != (CACHE_FORMAT, stage, key):
+            self.refused[stage] += 1
+            self.misses[stage] += 1
+            return False, None
+        self.hits[stage] += 1
+        return True, payload
+
+    def put(self, stage, key, payload):
+        if not self.folder:
+            return
+        p = self.path(stage, key)
+        os.makedirs(os.path.dirname(p), exist_ok=True)
+        tmp = f"{p}.{os.getpid()}.tmp"
+        with open(tmp, "wb") as f:
+            pickle.dump((CACHE_FORMAT, stage, key, payload), f, protocol=pickle.HIGHEST_PROTOCOL)
+        os.replace(tmp, p)
+
+    def prune(self):
+        """Entries this build did not use are removed (the cache holds one build's stages)."""
+        if not self.folder:
+            return
+        for stage in STAGE_DIRS:
+            for p in glob.glob(os.path.join(self.folder, stage, "*", "*.pickle")):
+                if os.path.basename(p)[:-7] not in self.used[stage]:
+                    os.remove(p)
+
+
+def _run_unit(i):
+    fn, arg = _W["units"][i]
+    return fn(arg)
+
+
+def run_stage(ctx, stage, fn, units):
+    """[result] of fn(arg) for each (key, arg) of units, in their order: from the cache when its key is there, else
+    computed (on ctx.args.jobs forked workers when there are several units to compute) and stored."""
+    cache = ctx.cache
+    out, todo = [None] * len(units), []
+    for i, (k, arg) in enumerate(units):
+        hit, payload = cache.get(stage, k)
+        if hit:
+            out[i] = payload
+        else:
+            todo.append(i)
+    jobs = max(1, getattr(ctx.args, "jobs", 1) or 1)
+    if jobs > 1 and len(todo) > 1:
+        _W["units"] = [(fn, units[i][1]) for i in todo]
+        _W["ctx"] = ctx
+        try:
+            with multiprocessing.get_context("fork").Pool(min(jobs, len(todo))) as pool:
+                for i, r in zip(todo, pool.imap(_run_unit, range(len(todo)), chunksize=4)):
+                    out[i] = r
+        finally:
+            _W.clear()
+    else:
+        _W["ctx"] = ctx
+        try:
+            for i in todo:
+                out[i] = fn(units[i][1])
+        finally:
+            _W.clear()
+    for i in todo:
+        cache.put(stage, units[i][0], out[i])
+    return out
+
+
+def ids_read(x, all_ids):
+    """The other source ids a source file's checks look up (snapshot_of, a same-runs-as fact's held source), each with
+    whether it is in the findings: what its check reads of the other files (not the whole list: a new source leaves the
+    others' keys as they are)."""
+    ids = [x.get("snapshot_of")] if isinstance(x, dict) and x.get("snapshot_of") else []
+    for f in (x.get("facts") or []) if isinstance(x, dict) else []:
+        if isinstance(f, dict) and isinstance(f.get("held"), str):
+            ids.append(f["held"].partition("#")[0])
+    return sorted((str(i), i in all_ids) for i in set(map(str, ids)))
+
+
+def _check_source(arg):
+    """Stage check-source: one source file's schema and cross-file checks → (valid, errors, warnings)."""
+    ctx = _W["ctx"]
+    p, x, all_ids = arg
+    r = V.Report()
+    ok = ctx.schemas.validate(x, "source.schema.json", V.rel(p), r)
+    if ok:
+        V.check_source(x, p, ctx.reg, r, ctx.schemas, ctx.vocab, False, all_ids)   # no saved file read (4 Nov 2026)
+    return ok, r.errors, r.warnings
+
+
+def _check_measures(arg):
+    """Stage check-measures: one measure file's schema and checks against its source → (valid, errors, warnings)."""
+    ctx = _W["ctx"]
+    p, x = arg
+    r = V.Report()
+    ok = ctx.schemas.validate(x, "measure.schema.json", V.rel(p), r)
+    if ok:
+        V.check_measures(x, p, ctx.vsources, ctx.reg, r, ctx.vocab, False)
+    return ok, r.errors, r.warnings
+
+
+def _walk(root, tag, refs, nodes):
+    """Number every dict and list under root, depth first (the same numbering for the same parsed files)."""
+    stack = [root]
+    while stack:
+        o = stack.pop()
+        if id(o) in refs:
+            continue
+        pid = (tag, len(nodes))
+        refs[id(o)] = pid
+        nodes[pid] = o
+        if isinstance(o, dict):
+            stack.extend(v for v in reversed(list(o.values())) if isinstance(v, (dict, list)))
+        else:
+            stack.extend(v for v in reversed(o) if isinstance(v, (dict, list)))
+
+
+def shared_refs(ctx, S, x):
+    """id → persistent id and persistent id → object, for what a measure's state shares with the context: the context,
+    the sources, the registries and vocabulary, its source's document and its measure file (so that a state read back
+    points at the same objects as one computed here)."""
+    if "_shared" not in ctx.__dict__:
+        refs, nodes = {}, {}
+        _walk(ctx.reg, "reg", refs, nodes)               # numbered first: their numbers never depend on the sources
+        _walk(ctx.vocab, "vocab", refs, nodes)
+        refs[id(ctx)], nodes["ctx"] = "ctx", ctx
+        for sid, T in ctx.sources.items():
+            refs[id(T)], nodes[("S", sid)] = ("S", sid), T
+        ctx._shared = refs, nodes
+    grefs, gnodes = ctx._shared
+    refs, nodes = {}, {}
+    _walk(x, "mf", refs, nodes)
+    if S is not None:
+        _walk(S.doc, "doc", refs, nodes)
+    return grefs, gnodes, refs, nodes
+
+
+class _Pickler(pickle.Pickler):
+    def __init__(self, f, refs):
+        super().__init__(f, protocol=pickle.HIGHEST_PROTOCOL)
+        self.grefs, self.refs = refs
+
+    def persistent_id(self, obj):
+        return self.refs.get(id(obj)) or self.grefs.get(id(obj))
+
+
+class _Unpickler(pickle.Unpickler):
+    def __init__(self, f, nodes):
+        super().__init__(f)
+        self.gnodes, self.nodes = nodes
+
+    def persistent_load(self, pid):
+        return self.gnodes[pid] if pid in self.gnodes else self.nodes[pid]
+
+
+def _measure_fields(arg):
+    """Stage measure-fields: §5.1's fields of one measure file's measures (model, configuration, run date, score,
+    cost and its reproduction, version) → their states, pickled against the shared objects."""
+    ctx = _W["ctx"]
+    x, idx = arg
+    S = ctx.sources.get(x["source"])
+    grefs, _, refs, _ = shared_refs(ctx, S, x)          # numbered as they were read (as load_measures numbers them)
+    ms = [Measure(ctx, S, m, mf) for S, m, mf in (ctx.measures[i] for i in idx) if not m["facts"].get("legacy")]
+    for M in ms:
+        measure_fields(M)
+    f = io.BytesIO()
+    _Pickler(f, (grefs, refs)).dump([M.__dict__ for M in ms])
+    return f.getvalue()
+
+
+def load_measures(ctx, x, blob):
+    S = ctx.sources.get(x["source"])
+    _, gnodes, _, nodes = shared_refs(ctx, S, x)
+    out = []
+    for st in _Unpickler(io.BytesIO(blob), (gnodes, nodes)).load():
+        M = Measure.__new__(Measure)
+        M.__dict__ = st
+        out.append(M)
+    return out
+
 # ---------------------------------------------------------------- context
 class Ctx:
     def __init__(self, args):
@@ -384,7 +657,13 @@ class Ctx:
         self.settings = {"cost_method_unstated": args.cost_method_unstated}
         self.rep, self.schemas = V.Report(), V.Schemas(V.HERE)
         self.vocab = self.schemas.doc("vocab.json")
-        self.load()
+        self.times = []                                  # (step, seconds), printed at the end
+        self.cache = StageCache(getattr(args, "cache_dir", None))
+        with timed(self, "load and check"):
+            self.load()
+
+    def stage(self, name, fn, units):
+        return run_stage(self, name, fn, units)
 
     # -- loading and validation (validate.py's checks, errors routed to what they concern)
     def load(self):
@@ -421,49 +700,89 @@ class Ctx:
         cr = a.class_ratios or os.path.join(a.registry, "class-ratios.json")
         self.class_ratios = read_class_ratios(cr) if os.path.isfile(cr) else {"ratios": []}
 
-        # sources
+        # sources: each file checked on its own (a stage: cached by hash, run on the workers), its messages replayed in
+        # the files' order
+        self.env = env_digest(self)
         self.sources, self.measure_files = {}, []
         files = sorted(glob.glob(os.path.join(a.findings, "sources", "*.json")))
-        loaded = [(p, V.load_json(p, rep)) for p in files]
+        with timed(self, "read sources"):
+            loaded = [(p, V.load_json(p, rep)) for p in files]
         all_ids = {x.get("id") for _, x in loaded if isinstance(x, dict)}
+        self.source_keys = {}
+        units = []
         for p, x in loaded:
-            n = len(rep.errors)
-            if x is None or not schemas.validate(x, "source.schema.json", V.rel(p), rep):
-                fatal += rep.errors[n:]
+            if x is None:
+                continue
+            k = digest("source", self.env, V.rel(p), file_sha(p), ids_read(x, all_ids))
+            self.source_keys[p] = k
+            units.append((k, (p, x, all_ids)))
+        with timed(self, "check sources"):
+            checked = dict(zip((k for k, _ in units), self.stage("check-source", _check_source, units)))
+        for p, x in loaded:
+            if x is None:                                # (its load message is already in rep: not in fatal, as before)
+                continue
+            ok, errs, warns = checked[self.source_keys[p]]
+            rep.errors += errs
+            rep.warnings += warns
+            if not ok:
+                fatal += errs
                 continue
             S = Source(p, x, self)
             self.sources[S.id] = S
-            V.check_source(x, p, reg, rep, schemas, self.vocab, False, all_ids)   # no saved file read (4 Nov 2026)
             L = V.rel(p)
-            for e in rep.errors[n:]:
+            for e in errs:
                 m = re.match(re.escape(L) + r" (F\d+): (.*)$", e)
                 if m:
                     S.fact_faults[m.group(1)].append(m.group(2))
                 else:
                     S.faults.append(e)
-        # measures
+        # measures (a stage per file, as the sources)
         self.measures = []                  # (Source, measure dict, measure-file faults)
+        self.measure_units = []             # (stage key, [indices into self.measures])
         mvalid = {}
-        for p in sorted(glob.glob(os.path.join(a.findings, "measures", "*.json"))):
-            n = len(rep.errors)
-            x = V.load_json(p, rep)
-            if x is None or not schemas.validate(x, "measure.schema.json", V.rel(p), rep):
-                fatal += rep.errors[n:]
+        mfiles = sorted(glob.glob(os.path.join(a.findings, "measures", "*.json")))
+        with timed(self, "read measures"):
+            mloaded = []
+            for p in mfiles:
+                r = V.Report()
+                mloaded.append((p, V.load_json(p, r), r))
+        units, mkeys = [], {}
+        for p, x, _ in mloaded:
+            if x is None:
+                continue
+            S = self.sources.get(x.get("source")) if isinstance(x, dict) else None
+            k = digest("measures", self.env, V.rel(p), file_sha(p), self.source_keys.get(S.path) if S else None)
+            mkeys[p] = k
+            units.append((k, (p, x)))
+        self.vsources = {k: (s.path, s.doc) for k, s in self.sources.items()}
+        with timed(self, "check measures"):
+            checked = dict(zip((k for k, _ in units), self.stage("check-measures", _check_measures, units)))
+        for p, x, r in mloaded:
+            rep.errors += r.errors
+            if x is None:
+                fatal += r.errors
+                continue
+            ok, errs, warns = checked[mkeys[p]]
+            rep.errors += errs
+            rep.warnings += warns
+            if not ok:
+                fatal += r.errors + errs
                 continue
             src = self.sources.get(x["source"])
-            vsources = {k: (s.path, s.doc) for k, s in self.sources.items()}
-            V.check_measures(x, p, vsources, reg, rep, self.vocab, False)
             L = V.rel(p)
             mf = collections.defaultdict(list)
-            for e in rep.errors[n:]:
+            for e in errs:
                 m = re.match(re.escape(L) + r" (M\d+): (.*)$", e)
                 (mf[m.group(1)] if m else mf["*"]).append(m.group(2) if m else e)
             if src is None:
                 fatal.append(f"{L}: source {x['source']} missing or invalid")
                 continue
+            idx = []
             for m in x["measures"]:
+                idx.append(len(self.measures))
                 self.measures.append((src, m, mf.get(m["id"], []) + mf.get("*", [])))
                 mvalid[(src.id, m["id"])] = m
+            self.measure_units.append((mkeys[p], x, idx))
         self.mvalid = mvalid
         # decisions
         self.decisions = []
@@ -2845,10 +3164,222 @@ def tree_would_say(ctx, row):
 
 
 # ---------------------------------------------------------------- the build
+# ---------------------------------------------------------------- blocks: every step after the fields, cut by block
+# Each step after the measure fields is run block by block (a source, a model, a publisher's couple, a group, a family
+# pair, a setup...): a block reads its members (and what its `extra` names), writes only its members, and its key is a
+# sha256 of the step, the build's inputs read alike by every block (genv: code, registries, settings, decisions), the
+# block's id, its members' keys (a measure's key is the sha256 of its state, taken by the last block that wrote it) and
+# its extra. A block
+# whose key is in the cache is not recomputed: its members' states are read back. The blocks of a step are disjoint, so
+# they run in any order and, for the heavy steps, on --jobs forked workers. What a block adds to the build's lists
+# (stale decisions, run doubts, version links) is merged in the order the single loop gave.
+STATE_SKIP = frozenset(("ctx", "S", "m", "setup", "slots", "value", "faults", "_k"))
+THINK = re.compile(r"think-[0-9]+")
+
+
+class BlockStore:
+    """One file per step under <cache>/blocks: {key: blob}; a blob holds its own key (one read under another key is
+    refused and recomputed). Each build rewrites a step's file with the blocks it used."""
+
+    def __init__(self, folder):
+        self.folder = os.path.join(folder, "blocks") if folder else None
+        self.stats = {}                                  # step → [blocks, hits, computed, refused]
+        self.computed = {}                               # step → [(block id, makers of its members)]
+
+    def load(self, step):
+        if not self.folder:
+            return {}
+        try:
+            with open(os.path.join(self.folder, step + ".pickle"), "rb") as f:
+                fmt, st, entries = pickle.load(f)
+        except (OSError, EOFError, pickle.UnpicklingError, ValueError):
+            return {}
+        return entries if (fmt, st) == (CACHE_FORMAT, step) else {}
+
+    def save(self, step, entries):
+        if not self.folder:
+            return
+        os.makedirs(self.folder, exist_ok=True)
+        p = os.path.join(self.folder, step + ".pickle")
+        tmp = f"{p}.{os.getpid()}.tmp"
+        with open(tmp, "wb") as f:
+            pickle.dump((CACHE_FORMAT, step, entries), f, protocol=pickle.HIGHEST_PROTOCOL)
+        os.replace(tmp, p)
+
+
+def register(ctx, objs):
+    """Measures (and their measure dicts) as shared objects: a state read back points at the live measures."""
+    refs, nodes = shared_refs(ctx, None, {})[:2]
+    for M in objs:
+        refs[id(M)], nodes[("M", M.ref)] = ("M", M.ref), M
+        m = getattr(M, "m", None)
+        if m is not None and id(m) not in refs:
+            refs[id(m)], nodes[("m", M.ref)] = ("m", M.ref), m
+
+
+def _state(M):
+    return {k: v for k, v in M.__dict__.items() if k not in STATE_SKIP or (k == "setup" and isinstance(M, Residual))}
+
+
+def state_key(ctx, M):
+    """A measure's key after a block wrote it: the sha256 of its state (what the next steps read of it). A measure a
+    recomputed block leaves as it was keeps its key, so the blocks after it that do not hold the change are not
+    recomputed (a model's block recomputed for a new source leaves the other sources' measures of that model as they
+    were)."""
+    f = io.BytesIO()
+    _Pickler(f, (ctx._shared[0], {})).dump({k: sorted(v, key=repr) if isinstance(v, (set, frozenset)) else v
+                                            for k, v in _state(M).items()})   # a set's order changes between processes
+    return hashlib.sha256(f.getvalue()).hexdigest()
+
+
+def _blob(ctx, key, ms, out):
+    f = io.BytesIO()
+    _Pickler(f, (ctx._shared[0], {})).dump((key, [_state(M) for M in ms], out, [state_key(ctx, M) for M in ms]))
+    return f.getvalue()
+
+
+def _unblob(ctx, blob, key):
+    k, states, out, mkeys = _Unpickler(io.BytesIO(blob), (ctx._shared[1], {})).load()
+    if k != key:
+        raise ValueError("a block read under a key it does not hold")
+    return states, out, mkeys
+
+
+def _run_block(i):
+    _, ms, ex = _W["blocks"][i]
+    return _blob(_W["ctx"], _W["keys"][i], ms if _W["mut"] else [], _W["fn"](ms, ex))
+
+
+def _apply(ms, states, mkeys):
+    for M, s, k in zip(ms, states, mkeys):
+        M.__dict__.update(s)
+        M._k = k
+
+
+def makers_of(ctx, ms):
+    out = set()
+    for M in ms:
+        k = ((getattr(M, "fields", None) or {}).get("model") or {}).get("value")
+        if k in ctx.models:
+            out.add(ctx.models[k].get("maker"))
+    return sorted(map(str, out))
+
+
+def run_blocks(ctx, step, blocks, fn, mutates=True, par=False):
+    """[fn(members, extra)] for blocks [(block id, members, extra)], each from the cache when its key is there."""
+    t0 = time.perf_counter()
+    store = ctx.blocks
+    use = store.folder is not None
+    old = store.load(step) if use else {}
+    new, outs, keys, todo = {}, [None] * len(blocks), [None] * len(blocks), []
+    st = store.stats.setdefault(step, [0, 0, 0, 0])
+    st[0] += len(blocks)
+    for i, (bk, ms, ex) in enumerate(blocks):
+        if use:
+            k = keys[i] = digest(step, ctx.genv, bk, [M._k for M in ms], ex)
+            blob = old.get(k)
+            if blob is not None:
+                try:
+                    states, out, mkeys = _unblob(ctx, blob, k)
+                except Exception:
+                    st[3] += 1
+                else:
+                    if mutates:
+                        _apply(ms, states, mkeys)
+                    outs[i], new[k] = out, blob
+                    st[1] += 1
+                    continue
+        todo.append(i)
+    st[2] += len(todo)
+    store.computed.setdefault(step, []).extend((repr(blocks[i][0]), makers_of(ctx, blocks[i][1])) for i in todo)
+    jobs = max(1, getattr(ctx.args, "jobs", 1) or 1)
+    if par and jobs > 1 and len(todo) > 1:
+        _W.update(blocks=blocks, keys=keys, fn=fn, mut=mutates, ctx=ctx)
+        try:
+            with multiprocessing.get_context("fork").Pool(min(jobs, len(todo))) as pool:
+                for i, blob in zip(todo, pool.imap(_run_block, todo, chunksize=max(1, len(todo) // (jobs * 8)))):
+                    states, outs[i], mkeys = _unblob(ctx, blob, keys[i])
+                    if mutates:
+                        _apply(blocks[i][1], states, mkeys)
+                    if use:
+                        new[keys[i]] = blob
+        finally:
+            _W.clear()
+    else:
+        for i in todo:
+            outs[i] = fn(blocks[i][1], blocks[i][2])
+            if use:
+                new[keys[i]] = _blob(ctx, keys[i], blocks[i][1] if mutates else [], outs[i])
+                if mutates:
+                    for M in blocks[i][1]:
+                        M._k = state_key(ctx, M)
+    if use:
+        store.save(step, new)
+    ctx.block_keys = keys
+    ctx.times.append((step, time.perf_counter() - t0))
+    return outs
+
+
+@contextlib.contextmanager
+def fresh_lists(ctx, *names):
+    """The build's lists a block appends to, empty while it runs: → {name: what the block appended}."""
+    saved = {n: getattr(ctx, n) for n in names}
+    got = {}
+    for n in names:
+        setattr(ctx, n, [])
+    try:
+        yield got
+    finally:
+        for n in names:
+            got[n] = getattr(ctx, n)
+            setattr(ctx, n, saved[n])
+
+
+def merge_stale(ctx, outs):
+    for new in outs:
+        for e in new or []:
+            if e["id"] not in [s["id"] for s in ctx.stale]:
+                ctx.stale.append(e)
+
+
+def grouped(ms, key):
+    out = collections.defaultdict(list)
+    for M in ms:
+        out[key(M)].append(M)
+    return out
+
+
+def components(pairs):
+    """Union-find over hashable nodes: → {node: root}."""
+    parent = {}
+
+    def find(x):
+        while parent.setdefault(x, x) != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+    for a, b in pairs:
+        parent[find(a)] = find(b)
+    return {x: find(x) for x in list(parent)}
+
+
 def build(ctx):
+    if not hasattr(ctx, "blocks"):                        # a context built by hand (tests): no cache
+        ctx.blocks = BlockStore(None)
+        ctx.genv = None
     legacy = sorted((LegacyMeasure(ctx, S, m, mf) for S, m, mf in ctx.measures if m["facts"].get("legacy")),
                     key=lambda L: (L.order, L.ref))
-    measures = [Measure(ctx, S, m, mf) for S, m, mf in ctx.measures if not m["facts"].get("legacy")]
+    # the fields of each measure file's measures: a stage (cached by hash, on the workers)
+    with timed(ctx, "measure fields"):
+        shared_refs(ctx, None, {})                       # the shared objects numbered before the workers start
+        units = [(digest("fields", k), (x, idx)) for k, x, idx in ctx.measure_units]
+        blobs = ctx.stage("measure-fields", _measure_fields, units)
+        measures = []
+        for (k, x, idx), b in zip(ctx.measure_units, blobs):
+            for j, M in enumerate(load_measures(ctx, x, b)):
+                M._k = digest("fields", k, j)
+                measures.append(M)
+    register(ctx, measures)
     # a converted measure's legacy_ref replaces its legacy row (the source migrated, its legacy file kept or not)
     claimed = {(M.m["legacy_ref"]["line"], M.m["legacy_ref"]["row_sha256"]): M.ref for M in measures
                if M.m.get("legacy_ref")}
@@ -2857,28 +3388,169 @@ def build(ctx):
         if by:
             for ax in ("quality", "cost"):
                 L.status[ax], L.detail[ax] = "legacy:out:replaced", f"replaced by {by} (its legacy_ref)"
-    for M in measures:
-        key = resolve_model(M)
-        if key:
-            configuration(M, key)
-            run_interval(M, key)
-        else:
-            M.fields["configuration"] = dict(value=None, level="not-established:absent", detail="model not established")
-        score_field(M)
-        cost_field(M)
-        if key and M.fields.get("cost"):
-            reproduce_cost(M, key)
-        campaign_of(M)
-    budgets_merge(measures)
-    # campaigns inherited along snapshot_of
-    for M in measures:
-        M.campaign = inherited_campaign(M, measures)
-    quality(ctx, measures)
-    residuals = composite_residuals(ctx, measures)
-    group_step(ctx, measures + residuals, "quality")
-    run_ids(ctx, measures)
-    cost(ctx, measures)
+    links_and_statuses(ctx, measures)
+    residuals = ctx.residuals
     return measures, residuals, legacy
+
+
+def links_and_statuses(ctx, measures):
+    B = functools.partial(run_blocks, ctx)
+    pos = {id(M): i for i, M in enumerate(measures)}
+    by_src = grouped(measures, lambda M: M.S.id)        # in the measures' order
+    skeys = {x["source"]: k for k, x, _ in ctx.measure_units}
+    src_blocks = lambda extra=lambda sid, ms: None: [(("source", sid), ms, extra(sid, ms)) for sid, ms in by_src.items()]
+
+    # budgets within 5 % merged: by model
+    think = grouped((M for M in measures if (M.fields.get("model") or {}).get("value") and
+                     THINK.fullmatch((M.fields.get("configuration") or {}).get("value") or "")),
+                    lambda M: M.fields["model"]["value"])
+    B("budgets", [(("model", k), ms, None) for k, ms in think.items()], lambda ms, ex: budgets_merge(ms))
+
+    # campaigns inherited along snapshot_of: by source (the versions of its snapshot chain read)
+    vidx = collections.defaultdict(set)
+    for M in measures:
+        if M.version:
+            vidx[(M.S.id, M.setup_id)].add(M.version)
+    vby = collections.defaultdict(dict)
+    for (sid, su), vs in vidx.items():
+        vby[sid][su] = sorted(vs)
+
+    def chain(sid, ms):
+        out, seen, S = [], set(), ms[0].S
+        while S.doc.get("snapshot_of") and S.doc["snapshot_of"] not in seen:
+            seen.add(S.doc["snapshot_of"])
+            S = ctx.sources.get(S.doc["snapshot_of"])
+            if S is None:
+                break
+            out.append((S.id, sorted(vby.get(S.id, {}).items())))
+        return out
+
+    def campaigns(ms, ex):
+        for M in ms:
+            M.campaign = inherited_campaign(M, vidx)
+    B("campaigns", src_blocks(chain), campaigns)
+
+    # quality, steps 0–5, measure by measure: by source (the decisions naming its measures read with their sources)
+    dec_sids = collections.defaultdict(set)
+    for d in ctx.decisions:
+        if d.get("kind") not in ("headline", "run"):
+            for r in d.get("measures", []):
+                dec_sids[r] |= {x.split("#")[0] for x in d["measures"]}
+    dec_extra = lambda sid, ms: sorted({(s, skeys.get(s)) for M in ms for s in dec_sids.get(M.ref, ())})
+
+    def q_early(ms, ex):
+        with fresh_lists(ctx, "stale") as got:
+            for M in ms:
+                M._cand = quality_early(M)
+        return got["stale"]
+    merge_stale(ctx, B("quality-steps", src_blocks(dec_extra), q_early, par=True))
+    cand = [M for M in measures if M._cand]
+    # 6. uninformative: by group
+    B("uninformative", [(("group",) + gkey_id(g), ms, None) for g, ms in grouped(cand, gkey).items()],
+      lambda ms, ex: uninformative(ms))
+    # 7. campaign: by group and couple
+    B("supersede-quality", [(("group",) + gkey_id(g) + (c,), ms, None)
+                            for (g, c), ms in grouped(cand, lambda M: (gkey(M), couple(M))).items()],
+      lambda ms, ex: supersede(ctx, ms, "quality"))
+    same_runs(ctx, measures, by_src, skeys, B)
+    # 9. republication, stated: by source
+    held_extra = lambda sid, ms: [(f.held, f.held.partition("#")[0] in ctx.sources,
+                                   tuple(f.held.split("#", 1)) in ctx.mvalid if "#" in f.held else None)
+                                  for M in ms for f in M.slot("same_runs_as") if f.held]
+    B("copies-quality", src_blocks(held_extra), lambda ms, ex: copies(ctx, [M for M in ms if M._cand], "quality"))
+    # composite residuals: by publisher and couple
+    inq = [M for M in measures if M.status["quality"] is None]
+    outs = B("residuals", [(("publisher-couple", p, c), ms, None)
+                           for (p, c), ms in grouped(inq, lambda M: (M.publisher, couple(M))).items()],
+             lambda ms, ex: composite_residuals(ctx, ms))
+    residuals = sorted((R for o in outs for R in o), key=lambda R: pos[id(R.base)])
+    register(ctx, residuals)
+    if ctx.blocks.folder:
+        for R in residuals:
+            R._k = digest("residual", R.base._k, R.ref)
+    ctx.residuals = residuals
+    # 10. groups: by group
+    gq = [M for M in measures + residuals if (M.status["quality"] is None or M.status["quality"].startswith(
+        "in:decision")) and M.fields.get("score") is not None]
+    B("groups-quality", [(("group",) + gkey_id(g), ms, None) for g, ms in grouped(gq, gkey).items()],
+      lambda ms, ex: group_step(ctx, ms, "quality"))
+    # 11. runs: by source (its version components read), then the declared runs
+    vcomp = collections.defaultdict(list)
+    for n, lab in ctx.version_comp.items():
+        vcomp[n[0]].append((n, lab))
+
+    def runs(ms, ex):
+        with fresh_lists(ctx, "run_doubts") as got:
+            run_ids(ctx, ms)
+        return got["run_doubts"]
+    outs = B("runs", src_blocks(lambda sid, ms: sorted(vcomp.get(sid, []), key=repr)), runs)
+    order = {sid: i for i, sid in enumerate(by_src)}
+    for sid in sorted(by_src):
+        ctx.run_doubts += outs[order[sid]] or []
+    by_ref = {M.ref: M for M in measures}
+    dm = [by_ref[r] for r in dict.fromkeys(r for d in ctx.decisions if d.get("kind") == "run"
+                                            for r in d["measures"]) if r in by_ref]
+    dm.sort(key=lambda M: pos[id(M)])
+    dsids = sorted({r.split("#")[0] for d in ctx.decisions if d.get("kind") == "run" for r in d["measures"]})
+
+    def declared(ms, ex):
+        with fresh_lists(ctx, "stale", "run_doubts") as got:
+            declared_runs(ctx, ms)
+        return got["stale"], got["run_doubts"]
+    (st, dd), = B("declared-runs", [(("decisions", "run"), dm, [(s, skeys.get(s)) for s in dsids])], declared)
+    merge_stale(ctx, [st])
+    ctx.run_doubts += dd
+    cost_blocked(ctx, measures, by_src, pos, B, src_blocks, dec_extra, held_extra)
+
+
+def gkey_id(g):
+    return tuple(str(x) for x in g)
+
+
+def quality_early(M):
+    """§5.2 steps 0–5 on quality for one measure: → whether it is pending (a candidate of the later steps)."""
+    f = M.fields.get("score")
+    if f is None and M.value is None and M.m["facts"].get("value") and M.axis_faults("quality"):
+        M.status["quality"], M.detail["quality"] = "out:no-proof", "; ".join(M.axis_faults("quality"))
+        return False
+    if f is None:
+        M.status["quality"] = None
+        M.detail["quality"] = "no score (cost-only measure)"
+        return False
+    r, d = early_steps(M, "quality", f)
+    if r:
+        M.status["quality"], M.detail["quality"] = r, d
+        return False
+    return True
+
+
+def uninformative(ms):
+    """6. a score at the floor or the ceiling while the others of its group are not (ms: one group's pending)."""
+    for g, xs in grouped(ms, gkey).items():
+        b = xs[0].setup.get("bounds") or [None, None]
+        at = [M for M in xs if M.fields["score"]["number"] is not None and
+              any(x is not None and Decimal(str(x)) == M.fields["score"]["number"] for x in b)]
+        if at and len(at) < len(xs):
+            for M in at:
+                M.status["quality"] = "out:uninformative"
+                M.detail["quality"] = f"score {num_text(M.fields['score']['number'])} at a bound of {b}; cost kept"
+                M.rule("uninformative-scores")
+
+
+
+def measure_fields(M):
+    """The fields of one measure, from its own facts and the registries alone (no other measure read)."""
+    key = resolve_model(M)
+    if key:
+        configuration(M, key)
+        run_interval(M, key)
+    else:
+        M.fields["configuration"] = dict(value=None, level="not-established:absent", detail="model not established")
+    score_field(M)
+    cost_field(M)
+    if key and M.fields.get("cost"):
+        reproduce_cost(M, key)
+    campaign_of(M)
 
 
 def campaign_of(M):
@@ -2891,7 +3563,8 @@ def version_key(v):
     return [(0, int(p), "") if p.isdigit() else (1, 0, p) for p in re.split(r"[.\-_ ]+|(?<=\d)(?=\D)|(?<=\D)(?=\d)", v) if p]
 
 
-def inherited_campaign(M, measures):
+def inherited_campaign(M, vidx):
+    """vidx: (source id, setup id) → the versions its measures hold."""
     if M.version:
         return M.version
     seen, S = set(), M.S
@@ -2900,8 +3573,7 @@ def inherited_campaign(M, measures):
         prev = M.ctx.sources.get(S.doc["snapshot_of"])
         if prev is None:
             break
-        vs = sorted({x.version for x in measures if x.S is prev and x.setup_id == M.setup_id and x.version},
-                    key=version_key)
+        vs = sorted(vidx.get((prev.id, M.setup_id), ()), key=version_key)
         if vs:
             return vs[-1]
         S = prev
@@ -2910,43 +3582,6 @@ def inherited_campaign(M, measures):
 
 def gkey(M):
     return (M.setup_id, M.publisher, M.campaign)
-
-
-def quality(ctx, measures):
-    pending = []
-    for M in measures:
-        f = M.fields.get("score")
-        if f is None and M.value is None and M.m["facts"].get("value") and M.axis_faults("quality"):
-            M.status["quality"], M.detail["quality"] = "out:no-proof", "; ".join(M.axis_faults("quality"))
-            continue
-        if f is None:
-            M.status["quality"] = None
-            M.detail["quality"] = "no score (cost-only measure)"
-            continue
-        r, d = early_steps(M, "quality", f)
-        if r:
-            M.status["quality"], M.detail["quality"] = r, d
-        else:
-            pending.append(M)
-    # 6. uninformative: a score at the floor or the ceiling while the others are not
-    by_group = collections.defaultdict(list)
-    for M in pending:
-        by_group[gkey(M)].append(M)
-    for g, ms in by_group.items():
-        b = ms[0].setup.get("bounds") or [None, None]
-        at = [M for M in ms if M.fields["score"]["number"] is not None and
-              any(x is not None and Decimal(str(x)) == M.fields["score"]["number"] for x in b)]
-        if at and len(at) < len(ms):
-            for M in at:
-                M.status["quality"] = "out:uninformative"
-                M.detail["quality"] = f"score {num_text(M.fields['score']['number'])} at a bound of {b}; cost kept"
-                M.rule("uninformative-scores")
-    # 7. campaign: an earlier value of a couple replaced within its campaign; same-runs-as
-    candidates = [M for M in pending]
-    supersede(ctx, candidates, "quality")
-    same_runs(ctx, measures, candidates)
-    # 9. republication, stated measure by measure: a copy of runs we hold never counts twice
-    copies(ctx, candidates, "quality")
 
 
 def source_order(M):
@@ -2981,52 +3616,107 @@ def family(ctx, M):
     return M.setup.get("family")
 
 
-def same_runs(ctx, measures, candidates):
+def same_runs(ctx, measures, by_src, skeys, B):
     """same-runs-as, stated (a fact naming the other document) or proven (identical costs on ≥ 2 shared couples, a
-    score differing): the later grading replaces the earlier; the cost counts once."""
-    links = []
-    for M in measures:
+    score differing): the later grading replaces the earlier; the cost counts once. Blocks: the stated links by source
+    (the source each fact names, looked up in the findings), the proven ones by family and pair of sources (the
+    measures of their shared couples), the links applied by set of linked sources, the versions by source."""
+    idx = collections.defaultdict(list)
+    for S in ctx.sources.values():
+        for v in dict.fromkeys([S.id] + [u for u in S.doc.get("urls", []) if isinstance(u, str)]):
+            idx[v].append(S.id)
+
+    def named(M):
+        out = []
         for f in M.slot("same_runs_as"):
             if f.level not in ACCEPTED or f.held:      # a copy's fact (held): copies(), never a regrade
                 continue
-            other = next((S for S in ctx.sources.values() if S.id != M.S.id and
-                          (f.value.strip() == S.id or f.value.strip() in S.doc.get("urls", []))), None)
-            if other and (M.S, other) not in links and (other, M.S) not in links:
-                links.append((M.S, other))
+            o = next((s for s in idx.get(f.value.strip(), []) if s != M.S.id), None)
+            if o:
+                out.append((M.S.id, o))
+        return out
+    outs = B("links-stated", [(("source", sid), ms, [p for M in ms for p in named(M)]) for sid, ms in by_src.items()],
+             lambda ms, ex: [p for M in ms for p in named(M)], mutates=False)
+    links, seen = [], set()
+
+    def link(a, b):
+        if (a, b) not in seen and (b, a) not in seen:
+            seen.add((a, b))
+            links.append((a, b))
+    for o in outs:
+        for a, b in o:
+            link(a, b)
     ok = [M for M in measures if M.fields["model"].get("value") and M.fields.get("cost", {}) and
           M.fields["cost"].get("number") is not None and M.fields["cost"].get("level") in ACCEPTED]
     by_fam = collections.defaultdict(lambda: collections.defaultdict(dict))
     for M in ok:
         if M.fields["configuration"].get("level") in ACCEPTED:
             by_fam[family(ctx, M)][M.S.id][couple(M)] = M
+    blocks = []
     for fam, per in by_fam.items():
         ids = sorted(per)
         for i, a in enumerate(ids):
+            sa = set(per[a])
             for b in ids[i + 1:]:
-                shared = sorted(set(per[a]) & set(per[b]))
+                shared = sorted(sa & set(per[b]))
                 if len(shared) < 2:
                     continue
-                pairs = [(per[a][c], per[b][c]) for c in shared]
-                if not all(x.fields["cost"]["unit"] == y.fields["cost"]["unit"] and
-                           x.fields["cost"]["currency"] == y.fields["cost"]["currency"] and
-                           close(float(x.fields["cost"]["number"]), x.fields["cost"]["prec"],
-                                 float(x.fields["cost"]["step"]), float(y.fields["cost"]["number"]),
-                                 y.fields["cost"]["prec"], float(y.fields["cost"]["step"])) for x, y in pairs):
-                    continue
-                differs = any(x.fields.get("score") and y.fields.get("score") and
-                              x.fields["score"].get("number") is not None and y.fields["score"].get("number") is not None
-                              and not close(float(x.fields["score"]["number"]), x.fields["score"]["prec"],
-                                            float(x.fields["score"]["step"]), float(y.fields["score"]["number"]),
-                                            y.fields["score"]["prec"], float(y.fields["score"]["step"]))
-                              for x, y in pairs)
-                if differs:
-                    Sa, Sb = ctx.sources[a], ctx.sources[b]
-                    if (Sa, Sb) not in links and (Sb, Sa) not in links:
-                        links.append((Sa, Sb))
+                blocks.append((("family-pair", str(fam), a, b), [per[a][c] for c in shared] + [per[b][c] for c in shared],
+                               None))
+    outs = B("links-proven", blocks, lambda ms, ex: proven(ms[:len(ms) // 2], ms[len(ms) // 2:]), mutates=False)
+    for (bk, ms, _), differs in zip(blocks, outs):
+        if differs:
+            link(bk[2], bk[3])
+    comp = components(links)
+    per_comp = collections.defaultdict(list)
+    for a, b in links:
+        per_comp[comp[a]].append((a, b))
+    blocks = []
+    for lk in per_comp.values():
+        sids = sorted({s for p in lk for s in p})
+        ms = measures_in_order(by_src, sids)
+        blocks.append((("sources",) + tuple(sids), ms, lk))
+    B("links-applied", blocks, lambda ms, ex: apply_links(ctx, ms, [(ctx.sources[a], ctx.sources[b]) for a, b in ex]))
+    outs = B("versions", [(("source", sid), ms, None) for sid, ms in by_src.items()],
+             lambda ms, ex: version_runs(ctx, ms))
+    ctx.version_links, ctx.version_comp = [], {}
+    order = {sid: i for i, sid in enumerate(by_src)}
+    for sid in sorted(by_src):
+        vl, vc = outs[order[sid]]
+        ctx.version_links += vl
+        ctx.version_comp.update(vc)
+
+
+def measures_in_order(by_src, sids):
+    """The measures of these sources, in the build's order (sources in the order of their measure files)."""
+    want = set(sids)
+    return [M for sid, ms in by_src.items() if sid in want for M in ms]
+
+
+def proven(xs, ys):
+    """Two sources' measures of their shared couples (xs[i], ys[i] one couple): identical costs on all, a score
+    differing on one → the same runs graded twice."""
+    pairs = list(zip(xs, ys))
+    if not all(x.fields["cost"]["unit"] == y.fields["cost"]["unit"] and
+               x.fields["cost"]["currency"] == y.fields["cost"]["currency"] and
+               close(float(x.fields["cost"]["number"]), x.fields["cost"]["prec"],
+                     float(x.fields["cost"]["step"]), float(y.fields["cost"]["number"]),
+                     y.fields["cost"]["prec"], float(y.fields["cost"]["step"])) for x, y in pairs):
+        return False
+    return any(x.fields.get("score") and y.fields.get("score") and
+               x.fields["score"].get("number") is not None and y.fields["score"].get("number") is not None
+               and not close(float(x.fields["score"]["number"]), x.fields["score"]["prec"],
+                             float(x.fields["score"]["step"]), float(y.fields["score"]["number"]),
+                             y.fields["score"]["prec"], float(y.fields["score"]["step"]))
+               for x, y in pairs)
+
+
+def apply_links(ctx, measures, links):
+    """The links of one set of linked sources, in their order: the later grading replaces the earlier."""
     for S1, S2 in links:
         later, earlier = sorted((S1, S2), key=lambda S: (S.date(), S.doc["harvested_at"], S.id), reverse=True)
         # only a later measure accepted so far replaces (a refused regrade leaves the earlier grading in)
-        lat = {(family(ctx, M), couple(M)): M for M in measures if M.S is later and M in candidates
+        lat = {(family(ctx, M), couple(M)): M for M in measures if M.S is later and M._cand
                and M.status["quality"] is None and M.fields["model"].get("value")
                and M.fields["configuration"].get("value")}
         for M in measures:
@@ -3036,13 +3726,176 @@ def same_runs(ctx, measures, candidates):
             if N is None:
                 continue
             M.rules.add("same-runs-as")
-            if M.status["quality"] is None and M in candidates:
+            if M.status["quality"] is None and M._cand:
                 M.status["quality"] = "out:superseded"
                 M.detail["quality"] = f"same runs as {later.id}: the later grading ({N.ref}) replaces it"
             nc = N.fields.get("cost") or {}
             if nc.get("number") is not None and nc.get("level") in ACCEPTED:
                 M.cost_counted_by = N                    # applied only if N's cost is accepted (cost steps 0–4)
-    version_runs(ctx, measures)
+
+
+def cost_blocked(ctx, measures, by_src, pos, B, src_blocks, dec_extra, held_extra):
+    """§5.3, by blocks: the cost measures and steps 0–4 by source, the campaign by group and couple, the copies by
+    source, the same runs by set of measures linked, the base price by model, the subsets by group and part, the groups
+    by group, the measures sharing a cost measure by source."""
+    def early(ms, ex):
+        with fresh_lists(ctx, "stale") as got:
+            cost_early(ctx, ms)
+        return got["stale"]
+    merge_stale(ctx, B("cost-steps", src_blocks(dec_extra), early, par=True))
+    srank = {sid: i for i, sid in enumerate(by_src)}
+    pending = sorted((M for M in measures if M._cpos is not None), key=lambda M: (srank[M.S.id], M._cpos))
+    B("supersede-cost", [(("group",) + gkey_id(g) + (c,), ms, None)
+                         for (g, c), ms in grouped(pending, lambda M: (gkey(M), couple(M))).items()],
+      lambda ms, ex: supersede(ctx, ms, "cost"))
+    B("copies-cost", [(("source", sid), ms, held_extra(sid, ms))
+                      for sid, ms in grouped(pending, lambda M: M.S.id).items()], lambda ms, ex: copies(ctx, ms, "cost"))
+    edges = [(M.ref, M.cost_counted_by.ref) for M in pending if getattr(M, "cost_counted_by", None) is not None
+             and M.cost_counted_by._cpos is not None]
+    comp = components(edges)
+    groups = grouped((M for M in pending if M.ref in comp), lambda M: comp[M.ref])
+    B("counted-once", [(("measures", min(M.ref for M in ms)), ms, None) for ms in groups.values()], counted_once)
+    live = [M for M in pending if M.status["cost"] is None]
+    B("cost-base-price", [(("model", k), ms, None) for k, ms in grouped(live, lambda M: M.fields["model"]["value"]).items()],
+      lambda ms, ex: [base_price_step(ctx, M) for M in ms] and None, par=True)
+    parts = grouped((M for M in live if M.status["cost"] is None), lambda M: (gkey(M), M.fields["cost"]["part"]))
+    B("cost-subsets", [(("group",) + gkey_id(g) + (repr(p),), ms, None) for (g, p), ms in parts.items()],
+      lambda ms, ex: cost_subsets(ms))
+    carriers = sorted((M for M in measures if M._car is not None), key=lambda M: (srank[M.S.id], M._car))
+    gc = [M for M in carriers if M.status["cost"] is None or M.status["cost"].startswith("in:decision")]
+    B("groups-cost", [(("group",) + gkey_id(g), ms, None) for g, ms in grouped(gc, gkey).items()],
+      lambda ms, ex: group_step(ctx, ms, "cost"))
+    B("cost-carriers", src_blocks(), lambda ms, ex: follow_carriers(ms))
+
+
+def cost_early(ctx, measures):
+    """One cost measure per set of spend facts (on the headline measure's setup, else the first); steps 0–4 on it.
+    Marks M._car (its rank among the cost measures) and M._cpos (its rank among those pending)."""
+    groups = collections.defaultdict(list)
+    for M in measures:
+        M.cost_subset = None
+        M.cost_carrier = None
+        M._car = M._cpos = None
+        C = M.fields.get("cost")
+        if not C and not isinstance(M, Residual) and M.m["facts"].get("spend") and M.axis_faults("cost"):
+            M.status["cost"], M.detail["cost"] = "out:no-proof", "; ".join(M.axis_faults("cost"))
+            continue
+        if not C:
+            M.status["cost"] = None
+            M.detail["cost"] = "no cost"
+            continue
+        groups[(M.S.id, tuple(C["facts"]))].append(M)
+    carriers = []
+    for k, ms in groups.items():
+        head = [M for M in ms if headline_metric(ctx, M)[0] == M.setup.get("metric")]
+        car = (head or ms)[0]
+        car._car = len(carriers)
+        carriers.append(car)
+        for M in ms:
+            if M is not car:
+                M.cost_carrier = car.ref
+    n = 0
+    for M in carriers:
+        r, d = early_steps(M, "cost", M.fields["cost"])
+        if r:
+            M.status["cost"], M.detail["cost"] = r, d
+        else:
+            M._cpos, n = n, n + 1
+
+
+def counted_once(ms, ex):
+    for M in ms:
+        N = getattr(M, "cost_counted_by", None)
+        if N is not None and M.status["cost"] is None and N._cpos is not None and N.status["cost"] is None:
+            M.status["cost"] = "out:superseded"
+            M.detail["cost"] = f"same runs as {N.ref}" + (f" (version {N.campaign} of this source)" if N.S is M.S else
+                                                          "") + ": the cost counts once"
+
+
+def base_price_step(ctx, M):
+    """§5.3 1–2 for one cost measure: its value at the base price and its partition."""
+    C = M.fields["cost"]
+    key = M.fields["model"]["value"]
+    if C["basis"] == "subscription":
+        M.status["cost"], M.detail["cost"] = "out:cost-basis", "subscription: no per-run price"
+        return
+    if C.get("currency") is None:
+        C["currency_note"] = "currency not stated"
+    reprice(M, C, key)
+    if C.get("tier_unproven"):
+        M.status["cost"], M.detail["cost"] = "out:cost-not-comparable", C["tier_unproven"]
+        return
+    method = C.get("method")
+    if not method:
+        if ctx.settings["cost_method_unstated"] == "out":
+            M.status["cost"] = "out:cost-not-comparable"
+            M.detail["cost"] = "no cost-method fact (setting cost_method_unstated = out)"
+            return
+        method = f"unstated[{M.S.id}/{C['scope']}]"
+        M.flags.append("cost-method-assumed-single")
+    cand = [c for c, _ in chains(M, key)]
+    rkey = "/".join(cand[0]) if len(cand) == 1 else "unknown"
+    # a cost the total-tokens split prices on the maker's list keeps that list's currency (a group never mixes two)
+    C["part"] = (C["basis"], method, C.get("part_unit") or C.get("unit") or "",
+                 C.get("part_currency") or C.get("currency") or "?", rkey)
+
+
+def cost_subsets(ms):
+    """§5.3 3: the subsets of one group and part."""
+    part = ms[0].fields["cost"]["part"]
+    rep = [M for M in ms if M.fields["cost"].get("base")]
+    for M in rep:
+        M.cost_subset = (part, "repriced")
+    by_model = collections.defaultdict(list)
+    for M in ms:
+        if not M.fields["cost"].get("base"):
+            by_model[M.fields["model"]["value"]].append(M)
+    for key, xs in by_model.items():
+        for M in xs:
+            # every cost of the fit is at the current (base) price (the maintainer, 3 Nov 2026): a cost that cannot be
+            # brought to it goes out (rule cost-current-price-only). A cost whose token mix is unknown but whose
+            # registered prices over its price date are all known is brought to the CURRENT price by a band, its
+            # reference always the base price itself, never the last price seen (the maintainer, 3 Nov 2026: « les
+            # fourchettes de prix se calculent vers le prix courant »): over its own price vectors, the cost at the
+            # current price lies between raw × the smallest and raw × the largest per-class ratio current / old
+            # (bound « mostly input » / « mostly output »); the row keeps the middle with that band as its
+            # uncertainty (29 Oct: "la marge d'erreur"). Each cost is banded on its own vectors (no condition on the
+            # other costs of its model); the banded costs keep their own subset per model (29 Oct).
+            C = M.fields["cost"]
+            vecs, base = C.get("price_vectors") or [], C.get("base_vector")
+            known = bool(C.get("price_covered") and vecs and base)
+            bandable = known and all(tiered(v) == tiered(base) for v in vecs) \
+                and all(class_ratios(base, v) for v in vecs)
+            if bandable:
+                M.cost_subset = (part, f"model:{key}")
+                M.flags.append("cost-unrepriced")
+                M.rule("cost-comparability-rule")
+                M.rule("cost-current-price-only")
+                price_band(M, base)
+            else:
+                M.status["cost"] = "out:cost-not-comparable"
+                M.detail["cost"] = ("unrepriced: its price vectors and the current price do not share their "
+                                    "long-context tiers or classes, no band reaches the current price"
+                                    if known else "unrepriced, and no registered price covers its price date: "
+                                    + C.get("reprice_detail", ""))
+                if C.get("total_split_detail"):
+                    M.detail["cost"] += f"; total-tokens split refused: {C['total_split_detail']}"
+                M.rule("cost-comparability-rule")
+                if known:
+                    M.rule("cost-current-price-only")
+
+
+def follow_carriers(ms):
+    """The measures sharing a cost measure (one source's) take its status."""
+    by_ref = {}
+    for x in ms:
+        by_ref.setdefault(x.ref, x)
+    for M in ms:
+        if M.cost_carrier:
+            car = by_ref[M.cost_carrier]
+            M.status["cost"] = car.status["cost"]
+            M.detail["cost"] = f"one cost measure with {car.ref} (same spend facts)"
+
 
 
 def run_key(M):
@@ -3076,7 +3929,8 @@ def version_runs(ctx, measures):
     versions is one run: its measures in those versions, in every setup of its run set (benchmarks.json run_set, else
     its family), are one run on quality (run_ids: weight 1/k, not a replacement: the maintainer, 11 Nov 2026, point 3)
     and its cost counts once, in the latest version holding it (cost: out:superseded). A couple whose cost differs is
-    another run and stays apart. → ctx.version_comp: (source, run key, couple, version) → the joined versions' label."""
+    another run and stays apart. Run on one source's measures (a block) → (its version links, its components:
+    (source, run key, couple, version) → the joined versions' label)."""
     ok = [M for M in measures if M.version and M.campaign == M.version and M.fields["model"].get("value")
           and M.fields["configuration"].get("level") in ACCEPTED and M.fields["configuration"].get("value")
           and (M.fields.get("cost") or {}).get("number") is not None
@@ -3097,7 +3951,7 @@ def version_runs(ctx, measures):
         return a.get("number") is not None and b.get("number") is not None and not close(
             float(a["number"]), a["prec"], float(a["step"]), float(b["number"]), b["prec"], float(b["step"]))
 
-    ctx.version_links = []
+    version_links = []
     for (sid, fam), per in sorted(by.items(), key=lambda kv: (kv[0][0], str(kv[0][1]))):
         vs = sorted(per, key=version_key)
         for i, a in enumerate(vs):
@@ -3112,7 +3966,7 @@ def version_runs(ctx, measures):
                         ident.append(c)
                 if len(ident) < 2 or not any(score_differs(per[a][c], per[b][c]) for c in ident):
                     continue
-                ctx.version_links.append(dict(source=sid, family=fam, versions=[a, b], couples=ident,
+                version_links.append(dict(source=sid, family=fam, versions=[a, b], couples=ident,
                                               shared=len(set(per[a]) & set(per[b]))))
                 for c in ident:
                     x, y = per[a][c], per[b][c]
@@ -3120,21 +3974,21 @@ def version_runs(ctx, measures):
     comp = collections.defaultdict(set)
     for node in list(parent):
         comp[find(node)].add(node)
-    ctx.version_comp = {}
+    version_comp = {}
     for nodes in comp.values():
         if len(nodes) < 2:
             continue
         label = "+".join(sorted({n[3] for n in nodes}, key=version_key))
         for n in nodes:
-            ctx.version_comp[n] = label
+            version_comp[n] = label
     # the cost counts once: in each setup, the latest version of the run holding an accepted cost
     held = collections.defaultdict(list)
     for M in measures:
         node = (M.S.id, run_key(M), couple(M), M.campaign) if M.version else None
-        if node in ctx.version_comp:
+        if node in version_comp:
             C = M.fields.get("cost") or {}
             if C.get("number") is not None and C.get("level") in ACCEPTED:
-                held[(M.S.id, run_key(M), couple(M), ctx.version_comp[node], M.setup_id)].append(M)
+                held[(M.S.id, run_key(M), couple(M), version_comp[node], M.setup_id)].append(M)
     for k, ms in held.items():
         ms.sort(key=lambda M: version_key(M.campaign))
         N = ms[-1]
@@ -3142,6 +3996,7 @@ def version_runs(ctx, measures):
             if version_key(M.campaign) < version_key(N.campaign):
                 M.rules.add("same-runs-as")
                 M.cost_counted_by = N
+    return version_links, version_comp
 
 
 def copy_of(M):
@@ -3319,7 +4174,6 @@ def run_ids(ctx, measures):
             for M in p:
                 M.run = rid
                 M.rule("same-run-weight")
-    declared_runs(ctx, measures)
 
 
 def declared_runs(ctx, measures):
@@ -3356,124 +4210,6 @@ def declared_runs(ctx, measures):
             for M in ms:
                 M.run = rid
                 M.rule("same-run-weight")
-
-
-def cost(ctx, measures):
-    """§5.3: one cost measure per set of spend facts (on the headline measure's setup, else the first)."""
-    groups = collections.defaultdict(list)
-    for M in measures:
-        M.cost_subset = None
-        M.cost_carrier = None
-        C = M.fields.get("cost")
-        if not C and not isinstance(M, Residual) and M.m["facts"].get("spend") and M.axis_faults("cost"):
-            M.status["cost"], M.detail["cost"] = "out:no-proof", "; ".join(M.axis_faults("cost"))
-            continue
-        if not C:
-            M.status["cost"] = None
-            M.detail["cost"] = "no cost"
-            continue
-        groups[(M.S.id, tuple(C["facts"]))].append(M)
-    carriers = []
-    for k, ms in groups.items():
-        head = [M for M in ms if headline_metric(ctx, M)[0] == M.setup.get("metric")]
-        car = (head or ms)[0]
-        carriers.append(car)
-        for M in ms:
-            if M is not car:
-                M.cost_carrier = car.ref
-    pending = []
-    for M in carriers:
-        r, d = early_steps(M, "cost", M.fields["cost"])
-        if r:
-            M.status["cost"], M.detail["cost"] = r, d
-        else:
-            pending.append(M)
-    supersede(ctx, pending, "cost")
-    copies(ctx, pending, "cost")
-    for M in pending:
-        N = getattr(M, "cost_counted_by", None)
-        if N is not None and M.status["cost"] is None and N in pending and N.status["cost"] is None:
-            M.status["cost"] = "out:superseded"
-            M.detail["cost"] = f"same runs as {N.ref}" + (f" (version {N.campaign} of this source)" if N.S is M.S else
-                                                          "") + ": the cost counts once"
-    live = [M for M in pending if M.status["cost"] is None]
-    # 1. base-price value; 2. partition; 3. subsets
-    for M in live:
-        C = M.fields["cost"]
-        key = M.fields["model"]["value"]
-        if C["basis"] == "subscription":
-            M.status["cost"], M.detail["cost"] = "out:cost-basis", "subscription: no per-run price"
-            continue
-        if C.get("currency") is None:
-            C["currency_note"] = "currency not stated"
-        reprice(M, C, key)
-        if C.get("tier_unproven"):
-            M.status["cost"], M.detail["cost"] = "out:cost-not-comparable", C["tier_unproven"]
-            continue
-        method = C.get("method")
-        if not method:
-            if ctx.settings["cost_method_unstated"] == "out":
-                M.status["cost"] = "out:cost-not-comparable"
-                M.detail["cost"] = "no cost-method fact (setting cost_method_unstated = out)"
-                continue
-            method = f"unstated[{M.S.id}/{C['scope']}]"
-            M.flags.append("cost-method-assumed-single")
-        cand = [c for c, _ in chains(M, key)]
-        rkey = "/".join(cand[0]) if len(cand) == 1 else "unknown"
-        # a cost the total-tokens split prices on the maker's list keeps that list's currency (a group never mixes two)
-        C["part"] = (C["basis"], method, C.get("part_unit") or C.get("unit") or "",
-                     C.get("part_currency") or C.get("currency") or "?", rkey)
-    parts = collections.defaultdict(list)
-    for M in live:
-        if M.status["cost"] is None:
-            parts[(gkey(M), M.fields["cost"]["part"])].append(M)
-    for (g, part), ms in parts.items():
-        rep = [M for M in ms if M.fields["cost"].get("base")]
-        for M in rep:
-            M.cost_subset = (part, "repriced")
-        by_model = collections.defaultdict(list)
-        for M in ms:
-            if not M.fields["cost"].get("base"):
-                by_model[M.fields["model"]["value"]].append(M)
-        for key, xs in by_model.items():
-            for M in xs:
-                # every cost of the fit is at the current (base) price (the maintainer, 3 Nov 2026): a cost that cannot be
-                # brought to it goes out (rule cost-current-price-only). A cost whose token mix is unknown but whose
-                # registered prices over its price date are all known is brought to the CURRENT price by a band, its
-                # reference always the base price itself, never the last price seen (the maintainer, 3 Nov 2026: « les
-                # fourchettes de prix se calculent vers le prix courant »): over its own price vectors, the cost at the
-                # current price lies between raw × the smallest and raw × the largest per-class ratio current / old
-                # (bound « mostly input » / « mostly output »); the row keeps the middle with that band as its
-                # uncertainty (29 Oct: "la marge d'erreur"). Each cost is banded on its own vectors (no condition on the
-                # other costs of its model); the banded costs keep their own subset per model (29 Oct).
-                C = M.fields["cost"]
-                vecs, base = C.get("price_vectors") or [], C.get("base_vector")
-                known = bool(C.get("price_covered") and vecs and base)
-                bandable = known and all(tiered(v) == tiered(base) for v in vecs) \
-                    and all(class_ratios(base, v) for v in vecs)
-                if bandable:
-                    M.cost_subset = (part, f"model:{key}")
-                    M.flags.append("cost-unrepriced")
-                    M.rule("cost-comparability-rule")
-                    M.rule("cost-current-price-only")
-                    price_band(M, base)
-                else:
-                    M.status["cost"] = "out:cost-not-comparable"
-                    M.detail["cost"] = ("unrepriced: its price vectors and the current price do not share their "
-                                        "long-context tiers or classes, no band reaches the current price"
-                                        if known else "unrepriced, and no registered price covers its price date: "
-                                        + C.get("reprice_detail", ""))
-                    if C.get("total_split_detail"):
-                        M.detail["cost"] += f"; total-tokens split refused: {C['total_split_detail']}"
-                    M.rule("cost-comparability-rule")
-                    if known:
-                        M.rule("cost-current-price-only")
-    group_step(ctx, carriers, "cost")
-    for M in measures:
-        if M.cost_carrier:
-            car = next(x for x in measures if x.ref == M.cost_carrier)
-            M.status["cost"] = car.status["cost"]
-            M.detail["cost"] = f"one cost measure with {car.ref} (same spend facts)"
 
 
 # ---------------------------------------------------------------- outputs
@@ -3623,10 +4359,65 @@ def report_entry(ctx, M, names, cnames):
                 cost_measure=getattr(M, "cost_carrier", None))
 
 
+MEASURES_SLOT = "@@measures@@"
+
+
+def entry_text(ref, e):
+    """One measure's entry as json.dump(rep, indent=1) writes it inside rep['measures'] (no trailing comma)."""
+    lines = json.dumps({ref: e}, indent=1, ensure_ascii=False, default=jsonable).split("\n")[1:-1]
+    return "\n".join(" " + ln for ln in lines)
+
+
+def csv_line(row, columns):
+    f = io.StringIO()
+    csv.writer(f, lineterminator="\n").writerow([row.get(c, "") for c in columns])
+    return f.getvalue()
+
+
 def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
+    """The outputs, by blocks: the group names by setup, the rows and report entries by source, lqm.load on the fit
+    tables (one block: its rules read the whole tables), the report's text and data.csv's lines by source."""
     os.makedirs(out_dir, exist_ok=True)
+    if not hasattr(ctx, "blocks"):
+        ctx.blocks, ctx.genv = BlockStore(None), None
+    B = functools.partial(run_blocks, ctx)
     allm = measures + residuals
-    names, cnames = group_names(ctx, allm)
+    names, cnames = {}, {}
+    for n, c in B("group-names", [(("setup", s), ms, None) for s, ms in grouped(allm, lambda M: M.setup_id).items()],
+                  lambda ms, ex: group_names(ctx, ms), mutates=False):
+        names.update(n)
+        cnames.update(c)
+    by_src = grouped(allm, lambda M: M.S.id)
+
+    def names_extra(sid, ms):
+        return sorted({(gkey_id(gkey(M)), names.get(gkey(M)), repr(getattr(M, "cost_subset", None)),
+                        cnames.get((gkey(M), getattr(M, "cost_subset", None)))) for M in ms})
+
+    def rows(ms, ex):
+        out = []
+        for M in ms:
+            r = row_of(ctx, M, names, cnames)
+            q, c = M.status["quality"], M.status["cost"]
+            rc = row_of(ctx, M, names, cnames, axis_cost=True) if (c or "").startswith("in") else None
+            bg = base_group(ctx, M)
+            fr = {}
+            if q and q.startswith("in"):
+                fr["quality"] = dict(group=r["group"], model=r["model"], effort=r["effort"], value=r["score"])
+            if c and c.startswith("in") and not getattr(M, "cost_carrier", None):
+                fr["cost"] = dict(group=rc["group"], model=rc["model"], effort=rc["effort"], value=rc["cost_usd"])
+            e = report_entry(ctx, M, names, cnames)
+            e["fit_rows"] = fr
+            e["row"] = dict(source=r["source"], group=r["group"], base_group=bg, model=r["model"],
+                            effort=r["effort"], score=r["score"], cost_usd=(rc or r)["cost_usd"])
+            if getattr(M, "m", None) is not None and M.m.get("legacy_ref") and not isinstance(M, Residual):
+                e["legacy_ref"] = M.m["legacy_ref"]
+            out.append((r, rc, bg, e))
+        return out
+    sids = list(by_src)
+    outs = B("rows", [(("source", sid), by_src[sid], names_extra(sid, by_src[sid])) for sid in sids], rows,
+             mutates=False, par=True)
+    row_keys = dict(zip(sids, ctx.block_keys))
+    got = {id(M): x for sid, o in zip(sids, outs) for M, x in zip(by_src[sid], o)}
     fq, fc, data, gm, fit_rows = [], [], [], {}, collections.defaultdict(dict)
     for L in legacy:                                     # first, in the CSV's order (lqm.load's order-dependent rules)
         r = L.row
@@ -3640,23 +4431,16 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
             fit_rows[L.ref]["cost"] = dict(group=r["group"], model=r["model"], effort=r["effort"], value=r["cost_usd"])
         data.append(dict(r, status_quality=L.status["quality"], status_cost=L.status["cost"]))
     for M in allm:
-        r = row_of(ctx, M, names, cnames)
-        q, c = M.status["quality"], M.status["cost"]
-        if q and q.startswith("in"):
+        r, rc, bg, e = got[id(M)]
+        if "quality" in e["fit_rows"]:
             fq.append(r)
-            gm[r["group"]] = base_group(ctx, M)
-            fit_rows[M.ref]["quality"] = dict(group=r["group"], model=r["model"], effort=r["effort"], value=r["score"])
-        if c and c.startswith("in") and not getattr(M, "cost_carrier", None):
-            rc = row_of(ctx, M, names, cnames, axis_cost=True)
+            gm[r["group"]] = bg
+        if "cost" in e["fit_rows"]:
             fc.append(rc)
-            gm[rc["group"]] = base_group(ctx, M)
-            fit_rows[M.ref]["cost"] = dict(group=rc["group"], model=rc["model"], effort=rc["effort"],
-                                           value=rc["cost_usd"])
-        d = dict(r, status_quality=q or "", status_cost=c or "")
-        data.append(d)
+            gm[rc["group"]] = bg
+        data.append(r)
     write_csv(os.path.join(out_dir, "fit-quality.csv"), fq, FIT_COLUMNS)
     write_csv(os.path.join(out_dir, "fit-cost.csv"), fc, FIT_COLUMNS)
-    write_csv(os.path.join(out_dir, "data.csv"), data, DATA_COLUMNS)
     with open(os.path.join(out_dir, "group-map.json"), "w", encoding="utf-8") as f:
         json.dump(dict(sorted(gm.items())), f, indent=1, ensure_ascii=False)
     rep = dict(build=dict(as_of=ctx.prices.get("as_of"), settings=ctx.settings, supplied=ctx.supplied, registry=V.rel(ctx.args.registry),
@@ -3673,24 +4457,47 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
             row=dict(source=r.get("source"), group=r.get("group"), base_group=r.get("group"), model=r.get("model"),
                      effort=r.get("effort"), score=r.get("score"), cost_usd=r.get("cost_usd")))
     for M in allm:
-        e = report_entry(ctx, M, names, cnames)
-        e["fit_rows"] = fit_rows.get(M.ref, {})
-        rq = row_of(ctx, M, names, cnames)
-        rc = row_of(ctx, M, names, cnames, axis_cost=True) if (M.status["cost"] or "").startswith("in") else rq
-        e["row"] = dict(source=rq["source"], group=rq["group"], base_group=base_group(ctx, M), model=rq["model"],
-                        effort=rq["effort"], score=rq["score"], cost_usd=rc["cost_usd"])
-        if getattr(M, "m", None) is not None and M.m.get("legacy_ref") and not isinstance(M, Residual):
-            e["legacy_ref"] = M.m["legacy_ref"]
-        rep["measures"][M.ref] = e
+        rep["measures"][M.ref] = got[id(M)][3]
     import build_lqm
     with open(os.path.join(out_dir, "group-setups.json"), "w", encoding="utf-8") as f:
         json.dump(build_lqm.group_setups(rep["measures"], gm, rep["build"]["benchmarks"]), f, indent=1, ensure_ascii=False)
     rep["counts"] = counts(rep["measures"])
     if previous:
         rep["diff"] = diff(previous, rep)
+    if not ctx.args.no_lqm:
+        lqm = build_lqm.import_lqm()
+        models = rep["build"]["fit_models"]
+        files = ("fit-quality.csv", "fit-cost.csv", "group-map.json", "group-setups.json")
+        res, = B("lqm", [(("fit-tables",), [], [(n, sha_now(os.path.join(out_dir, n))) for n in files] + [models])],
+                 lambda ms, ex: build_lqm.load_all(lqm, out_dir, models), mutates=False)
+        build_lqm.finish(lqm, rep, out_dir, models, res)
+    # the report's text and data.csv's lines: by source (its rows' key and its final statuses)
+    def texts(ms, ex):
+        sid = ex[0]
+        return [(entry_text(M.ref, rep["measures"][M.ref]), csv_line(dict(got[id(M)][0], status_quality=rep[
+            "measures"][M.ref]["status"]["quality"] or "", status_cost=rep["measures"][M.ref]["status"]["cost"] or ""),
+            DATA_COLUMNS)) for M in by_src[sid]]
+    outs = B("texts", [(("source", sid), [], (sid, row_keys[sid], [
+        (rep["measures"][M.ref]["status"], rep["measures"][M.ref]["reason_detail"],
+         rep["measures"][M.ref].get("lqm_outcome")) for M in by_src[sid]])) for sid in sids], texts,
+        mutates=False, par=True)
+    tx = {id(M): t for sid, o in zip(sids, outs) for M, t in zip(by_src[sid], o)}
+    frags = [entry_text(L.ref, rep["measures"][L.ref]) for L in legacy] + [tx[id(M)][0] for M in allm]
+    head = dict(rep, measures=MEASURES_SLOT)
+    text = json.dumps(head, indent=1, ensure_ascii=False, default=jsonable).replace(
+        json.dumps(MEASURES_SLOT), "{\n" + ",\n".join(frags) + "\n }" if frags else "{}", 1)
     with open(os.path.join(out_dir, "status-report.json"), "w", encoding="utf-8") as f:
-        json.dump(rep, f, indent=1, ensure_ascii=False, default=jsonable)
+        f.write(text)
+    with open(os.path.join(out_dir, "data.csv"), "w", encoding="utf-8", newline="") as f:
+        f.write(csv_line({c: c for c in DATA_COLUMNS}, DATA_COLUMNS))
+        for L, d in zip(legacy, data):
+            e = rep["measures"][L.ref]
+            f.write(csv_line(dict(d, status_quality=e["status"]["quality"] or "", status_cost=e["status"]["cost"] or ""),
+                             DATA_COLUMNS))
+        for M in allm:
+            f.write(tx[id(M)][1])
     return rep
+
 
 
 def counts(ms):
@@ -3851,7 +4658,16 @@ def main(argv=None):
                                          "(data/catalog/models.json order); default: every models.json key")
     ap.add_argument("--class-ratios", help="class-ratio table for cost-class-ratio (default <registry>/class-ratios.json)")
     ap.add_argument("--no-lqm", action="store_true", help="skip the lqm.load step (data/build_lqm.py)")
+    ap.add_argument("--jobs", type=int, default=2, help="worker processes for the per-file stages (default 2; 1: none)")
+    ap.add_argument("--cache", help="the stage cache folder (default data/.build-cache when the findings are "
+                                    "data/findings; none otherwise)")
+    ap.add_argument("--no-cache", action="store_true", help="a full build: every stage computed, the cache neither "
+                                                            "read nor written (sealed.py's build)")
     a = ap.parse_args(argv)
+    a.cache_dir = None if a.no_cache else (a.cache or (DEFAULT_CACHE if os.path.abspath(a.findings) == os.path.join(
+        REPO, "data", "findings") else None))
+    t0 = time.perf_counter()
+    _SHA.clear()                                         # the files as they are now (main can run twice in a process)
     try:
         check_args(a)
         ctx = Ctx(a)
@@ -3861,18 +4677,36 @@ def main(argv=None):
     except Fatal as e:
         print("build stopped: validation errors\n" + str(e), file=sys.stderr)
         return 1
+    ctx.genv = digest(ctx.env, os.path.abspath(a.decisions), file_sha(a.decisions) if os.path.isfile(a.decisions)
+                      else None)
+    ctx.blocks = BlockStore(a.cache_dir)
     measures, residuals, legacy = build(ctx)
     rep = outputs(ctx, measures, residuals, legacy, a.out, a.previous)
-    if not a.no_lqm:
-        import build_lqm
-        build_lqm.run(a.out)
-        with open(os.path.join(a.out, "status-report.json"), encoding="utf-8") as f:
-            rep = json.load(f)
     print(f"{len(rep['measures'])} measure(s); quality {rep['counts']['quality']}; cost {rep['counts']['cost']}")
     if rep["stale_decisions"]:
         print("stale decisions (reported, not applied):", ", ".join(d["id"] for d in rep["stale_decisions"]))
+    c, b = ctx.cache, ctx.blocks
+    if c.folder:
+        c.prune()
+        with open(os.path.join(c.folder, "last-build.json"), "w", encoding="utf-8") as f:
+            json.dump(dict(stages={st: [c.hits[st], c.misses[st], c.refused[st]] for st in STAGE_DIRS},
+                           blocks={st: dict(zip(("blocks", "hits", "computed", "refused"), v)) for st, v in b.stats.items()},
+                           computed=b.computed), f, indent=1)
+    done = sum(v[2] for v in b.stats.values())
+    print(f"build: {time.perf_counter() - t0:.1f} s; " + "; ".join(f"{s_} {t:.1f} s" for s_, t in ctx.times)
+          + (f"; cache {c.folder}: " + ", ".join(f"{st} {c.hits[st]} hit(s) {c.misses[st]} computed"
+                                                + (f" {c.refused[st]} refused (stale)" if c.refused[st] else "")
+                                                for st in STAGE_DIRS)
+             + f"; blocks {sum(v[0] for v in b.stats.values())}, computed {done}, refused "
+               f"{sum(v[3] for v in b.stats.values())}" if c.folder else "; no cache")
+          + f"; jobs {a.jobs}", file=sys.stderr)
     return 0
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+DEFAULT_CACHE = os.path.join(REPO, "data", ".build-cache")
+
+
+if __name__ == "__main__":                               # run as the module `build`: the cache's pickles name its
+    sys.path.insert(0, HERE)                             # classes build.X, whether the build runs as a script or is
+    import build as _build                               # imported (tests, sealed.py)
+    sys.exit(_build.main())

@@ -13,6 +13,9 @@ python3 data/build.py ... --previous build-old/status-report.json   # adds the s
 python3 data/build.py ... --cost-method-unstated out                # the setting below
 python3 data/build.py ... --fit-models catalog                      # the fit's model list (default: models.json keys)
 python3 data/build.py ... --no-lqm                                  # skip the lqm.load step
+python3 data/build.py ... --jobs 4                                  # worker processes for the per-file stages (default 2)
+python3 data/build.py ... --no-cache                                # a full build: no stage read from the cache
+python3 data/build.py ... --cache DIR                               # the stage cache folder (default data/.build-cache)
 python3 data/build_lqm.py data/build/                               # the lqm.load step alone
 python3 data/legacy.py raw-data.csv OUT/findings --registry OUT/registry   # raw-data.csv → legacy findings
 python3 data/tests/run.py [name-filter]                             # the tests (177 with .stan/venv/bin/python, about 13 s)
@@ -22,6 +25,27 @@ python3 data/convert/precheck.py SOURCE_ID                           # names and
 python3 data/convert/gaps.py data/build/status-report.json [--registry R --findings F]   # registry gaps per source
 python3 data/convert/reproduce.py --tables … --table … --csv …       # per-row cost reproduction (pinned table)
 ```
+
+**Stages, blocks, cache and workers (11 Nov 2026).** The whole build is cut in units, each with a key (a sha256 of
+everything it reads). Per file: `check-source`, `check-measures`, `measure-fields` (a source's or a measure file's
+checks and fields; a source's key holds its own file and the ids it looks up, a measure file's its file and its
+source's key). After the fields, every step runs block by block: by model (budgets, base price), by source (campaigns,
+steps 0–5 and 0–4, stated same-runs-as, versions R1 `version_runs`, copies, runs, measures sharing a cost measure,
+report rows and text), by group or group × couple (uninformative, campaign supersession, groups, cost subsets), by
+publisher × couple (composite residuals), by family × pair of sources (proven same-runs-as), by set of linked sources
+(same-runs-as applied), by setup (group names), the declared runs (one block), lqm.load (one block: its rules read the
+whole fit tables; model/lqm.py unchanged). A block's key is the step, the build's common inputs (the code `data/*.py`,
+`data/schema/`, `data/convert/*.py`, `model/lqm.py`, `model/catalog.py`, every registry file, the class ratios, the
+settings, the fit's model list, the decisions, the folders, Python's version), the block's id, its members' keys and
+what else it reads (e.g. the sources a decision names, the versions of a snapshot chain); a measure's key after a block
+is the sha256 of its state, so a block recomputed for a new source leaves the other measures' keys as they were and the
+blocks after it that do not hold the change are read from the cache (a new Claude source recomputes no block holding an
+OpenAI measure: test in the commit). A block whose key is in the cache is read back; an entry under a key it does not
+hold is refused and recomputed. The heavy steps run on `--jobs` forked workers (default 2: keep 2 while a fit runs).
+The cache folder (default `data/.build-cache/` when the findings are `data/findings`, none otherwise; outside git) keeps
+the last build's entries. `--no-cache` computes everything and neither reads nor writes the cache; `data/tests/sealed.py`
+always adds it. The outputs are byte for byte those of a full build (test `stage_cache_and_workers`). The time of each
+step is printed on stderr at the end; `<cache>/last-build.json` lists the blocks computed and their measures' makers.
 
 The build runs in five steps:
 

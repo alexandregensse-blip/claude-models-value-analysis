@@ -139,21 +139,40 @@ def base_groups(gm):
     return out
 
 
-def run(out_dir, models=None):
+def import_lqm():
     sys.path.insert(0, os.path.join(REPO, "model"))
     sys.path.insert(0, HERE)
     import lqm
-    rp = os.path.join(out_dir, "status-report.json")
-    with open(rp, encoding="utf-8") as f:
-        rep = json.load(f)
-    models = models or rep["build"]["fit_models"]
+    return lqm
+
+
+def kept_of(groups):
+    """The rows lqm.load keeps: (base group, couple, raw value) → count."""
+    kept = collections.Counter()
+    for g, G in groups.items():
+        for x in G["rows"]:
+            kept[(base_of(g), x["couple"], x["raw"])] += 1
+    return kept
+
+
+def load_all(lqm, out_dir, models):
+    """lqm.load on both fit tables of a build folder → {axis: (kept rows, its report, its republished pairs)}."""
+    res = {}
+    with fit_maps(lqm, out_dir):
+        for axis, field, name in AXES:
+            groups, lrep, republished = lqm.load(os.path.join(out_dir, name), models, field=field)
+            res[axis] = (kept_of(groups), dict(lrep), [list(r) for r in republished])
+    return res
+
+
+def finish(lqm, rep, out_dir, models, res):
+    """lqm.load's outcome (load_all) written into the report: statuses, lqm_outcome, rep['lqm'], the counts."""
     rep["lqm"] = {}
     with fit_maps(lqm, out_dir) as (comps, fam):
         for axis, field, name in AXES:
-            path = os.path.join(out_dir, name)
-            groups, lrep, republished = lqm.load(path, models, field=field)
-            outcome(lqm, rep, axis, field, path, groups, republished, comps, models)
-            rep["lqm"][axis] = dict(report=dict(lrep), republished=[list(r) for r in republished])
+            kept, lrep, republished = res[axis]
+            outcome(lqm, rep, axis, field, os.path.join(out_dir, name), kept, republished, comps, models)
+            rep["lqm"][axis] = dict(report=lrep, republished=republished)
     rep["build"]["lqm"] = "done"
     # cost measures sharing a carrier follow it
     for e in rep["measures"].values():
@@ -161,17 +180,23 @@ def run(out_dir, models=None):
             e["status"]["cost"] = rep["measures"][e["cost_measure"]]["status"]["cost"]
     import build
     rep["counts"] = build.counts(rep["measures"])
+
+
+def run(out_dir, models=None):
+    lqm = import_lqm()
+    rp = os.path.join(out_dir, "status-report.json")
+    with open(rp, encoding="utf-8") as f:
+        rep = json.load(f)
+    models = models or rep["build"]["fit_models"]
+    finish(lqm, rep, out_dir, models, load_all(lqm, out_dir, models))
     with open(rp, "w", encoding="utf-8") as f:
         json.dump(rep, f, indent=1, ensure_ascii=False)
     rewrite_data(out_dir, rep)
     return rep
 
 
-def outcome(lqm, rep, axis, field, path, groups, republished, comps, models):
-    kept = collections.Counter()
-    for g, G in groups.items():
-        for x in G["rows"]:
-            kept[(base_of(g), x["couple"], x["raw"])] += 1
+def outcome(lqm, rep, axis, field, path, kept, republished, comps, models):
+    kept = collections.Counter(kept)
     rows = [r for r in csv.DictReader(open(path, encoding="utf-8")) if r["group"] and not r["group"].startswith("#")]
 
     def passes(r):

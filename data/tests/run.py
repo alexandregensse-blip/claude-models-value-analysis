@@ -1981,6 +1981,87 @@ def legacy_path():
 
 
 @test
+def stage_cache_and_workers():
+    """The stage and block cache (data/build.py --cache) and the workers (--jobs): byte for byte the outputs of a full
+    build (--no-cache, one process), after a change to one source too, where only that file's stages and the blocks its
+    change reaches are recomputed; and the negative controls: a stale entry (the old result copied under the new key),
+    a stale block (another block's result under a key) are refused and recomputed."""
+    import contextlib, io, shutil, tempfile, filecmp
+    ex = os.path.join(DATA, "findings", "examples")
+    obv = "src-github-obviousbench-v0.2-aggregate-2026-10-10"
+    root = tempfile.mkdtemp(prefix="cache-")
+    try:
+        f = os.path.join(root, "f")
+        shutil.copytree(ex, f)
+        open(os.path.join(root, "dec.json"), "w").write('{"decisions": []}')
+        cache = os.path.join(root, "cache")
+
+        def run(out, *extra):
+            err = io.StringIO()
+            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(err):
+                code = build.main(["--registry", os.path.join(f, "registry"), "--findings", f, "--decisions",
+                                   os.path.join(root, "dec.json"), "--out", os.path.join(root, out), *extra])
+            eq(code, 0, f"build {out}")
+            return err.getvalue()
+
+        def same(a, b, what):
+            names = sorted(os.listdir(os.path.join(root, a)))
+            eq(names, sorted(os.listdir(os.path.join(root, b))), f"{what}: files")
+            eq([n for n in names if not filecmp.cmp(os.path.join(root, a, n), os.path.join(root, b, n), shallow=False)],
+               [], f"{what}: files that differ")
+
+        run("full", "--no-cache", "--jobs", "1")
+        log = run("c1", "--cache", cache, "--jobs", "2")
+        same("full", "c1", "cache filled, 2 workers")
+        eq("check-source 0 hit(s) 3 computed" in log and "measure-fields 0 hit(s) 3 computed" in log, True, log)
+        log = run("c2", "--cache", cache)
+        same("full", "c2", "cache read")
+        eq(re.search(r"blocks \d+, computed 0, refused 0", log) is not None, True, log)
+        entries = lambda st: {os.path.basename(p)[:-7]: open(p, "rb").read()  # noqa: E731
+                              for p in glob.glob(os.path.join(cache, st, "*", "*.pickle"))}
+        before = entries("measure-fields")
+        # one source changed (a score): only its stages are recomputed, the outputs equal a full build's
+        sp = os.path.join(f, "sources", obv + ".json")
+        doc = json.load(open(sp))
+        for x in doc["facts"]:
+            if x["id"] == "F13":
+                x["value"] = "0.951389"
+        json.dump(doc, open(sp, "w"), indent=1)
+        run("full2", "--no-cache", "--jobs", "1")
+        log = run("c3", "--cache", cache)
+        same("full2", "c3", "after the change")
+        m = re.search(r"blocks (\d+), computed (\d+), refused 0", log)
+        eq(("check-source 2 hit(s) 1 computed" in log, "measure-fields 2 hit(s) 1 computed" in log,
+            m is not None and 0 < int(m.group(2)) < int(m.group(1))), (True, True, True), log)
+        rq = lambda d: open(os.path.join(root, d, "fit-quality.csv")).read()  # noqa: E731
+        eq(rq("full") != rq("full2"), True, "the change reaches the fit table (the changed row goes out)")
+        # negative control 1: the changed file's old entry (stale) copied under its new key → refused, recomputed
+        after = entries("measure-fields")
+        new_k, old_k = set(after) - set(before), set(before) - set(after)
+        eq((len(new_k), len(old_k)), (1, 1), "one entry replaced (the old one pruned)")
+        new_k, old_k = new_k.pop(), old_k.pop()
+        eq(before[old_k] != after[new_k], True, "the stale entry differs from the fresh one")
+        path = os.path.join(cache, "measure-fields", new_k[:2], new_k + ".pickle")
+        open(path, "wb").write(before[old_k])
+        log = run("c4", "--cache", cache)
+        eq("measure-fields 2 hit(s) 1 computed 1 refused (stale)" in log, True, log)
+        same("full2", "c4", "stale entry refused")
+        import pickle
+        eq(pickle.loads(open(path, "rb").read())[2], new_k, "the refused entry rewritten under its key")
+        # negative control 2: every block of a step under another block's key (stale results) → refused, recomputed
+        bp = os.path.join(cache, "blocks", "rows.pickle")
+        fmt, st, ent = pickle.load(open(bp, "rb"))
+        ks = sorted(ent)
+        eq(len(ks) > 1, True, "several blocks in the step")
+        pickle.dump((fmt, st, {k: ent[ks[(i + 1) % len(ks)]] for i, k in enumerate(ks)}), open(bp, "wb"))
+        log = run("c5", "--cache", cache)
+        eq(f"computed {len(ks)}, refused {len(ks)}" in log, True, log)
+        same("full2", "c5", "stale blocks refused")
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+@test
 def bad_arguments_clean_errors():
     import subprocess, tempfile, shutil
     root = tempfile.mkdtemp(prefix="args-")

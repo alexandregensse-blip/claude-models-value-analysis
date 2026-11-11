@@ -6,6 +6,7 @@ folder given with --allow) and lists the refusals. Standard library only.
 
     python3 data/tests/sealed.py [--allow DIR] -- --fit-models catalog --out /tmp/b   # the build's own arguments
 
+It always builds in full (--no-cache added): every stage computed, none read from the stage cache.
 Exit 0 with no refusal; a refusal makes the open fail (PermissionError) and the run exit 3, listing it.
 In the tests: `with sealed(allowed) as refused: build.main(argv)`; refused lists the paths the build tried.
 """
@@ -67,6 +68,8 @@ def main(argv=None):
         argv = argv[2:]
     if argv and argv[0] == "--":
         argv = argv[1:]
+    if "--no-cache" not in argv:                         # a full build: no stage read from data/.build-cache
+        argv.append("--no-cache")
     out = argv[argv.index("--out") + 1] if "--out" in argv else os.path.join(DATA, "build")
     os.makedirs(out, exist_ok=True)
     sys.path[:0] = [DATA, os.path.join(DATA, "schema")]
