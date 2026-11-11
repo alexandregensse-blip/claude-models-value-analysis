@@ -2534,6 +2534,23 @@ def same_run_weight_build():
 
 
 @test
+def version_runs_tokens_differ():
+    """R1 guard (11 Nov 2026): two versions' measures whose costs are close but whose token counts of one kind differ
+    beyond the coarser step are two runs (nurb's revisions: Grok 4.6 low 156,200 / 118,602 tokens, $0.12 / $0.10).
+    Negative controls: the same counts (ReactBench's re-gradings), counts within the step, or no common kind: no
+    difference."""
+    import build as B_
+    eq(B_.tokens_differ({"tokens": {"tokens-total": ["156200", "1"]}}, {"tokens": {"tokens-total": ["118602", "1"]}}),
+       True, "different token totals: two runs")
+    eq(B_.tokens_differ({"tokens": {"output": ["15720.66", "0.01"]}}, {"tokens": {"output": ["15720.66", "0.01"]}}),
+       False, "negative control: identical counts")
+    eq(B_.tokens_differ({"tokens": {"output": ["15720.66", "0.01"]}}, {"tokens": {"output": ["15720.67", "0.01"]}}),
+       False, "negative control: within the step")
+    eq(B_.tokens_differ({"tokens": {"output": ["100", "1"]}}, {"tokens": {"input": ["900", "1"]}}), False,
+       "negative control: no common kind")
+
+
+@test
 def same_runs_versions_in_one_source():
     """Rule R1 (the maintainer, 11 Nov 2026): the versions of one board inside one source (ReactBench's v1.0 and v1.1
     in one page) that re-grade the same runs — ≥ 2 shared couples with identical costs, a score differing — are linked

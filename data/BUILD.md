@@ -1717,3 +1717,9 @@ No rule of the build changed; R2 stays blocking. Each pair was read from its fin
   configuration, with their exact values: seaquest r0–r2, TestCabinet's runs, llm_chess's two runs, Playcode's four
   default runs of Gemini 3.8 Flash, nurb rows of one revision on two patch releases of Codex). Test
   `precheck_declared_twins_and_replicates` (negative controls: another value, an undeclared pair).
+- **R1 guard, found by the build of this integration** (`tokens_differ`). With nurb's revisions as versions, R1 linked
+  bundle_holder 0.22.2@c16e77e91b9a and 0.23.0@396cc49ef106 for Grok 4.6 low and medium (costs $0.10 / $0.12 and
+  $0.27 / $0.28, close at the cent, a score differing), though each row is its own trials (3 against 6 and 5, tokens
+  118,602 / 156,200 and 210,421 / 277,469). A couple whose two measures give token counts of one kind that differ
+  beyond the coarser step is now two runs, whatever the costs; ReactBench's re-gradings carry identical counts. Test
+  `version_runs_tokens_differ` (negative controls: identical counts, within the step, no common kind).

@@ -3050,11 +3050,28 @@ def run_key(M):
     return M.setup.get("run_set") or "family:" + (M.setup.get("family") or M.setup_id)
 
 
+def tokens_differ(X, Y):
+    """Two cost fields whose sources give the same kind of token count, the counts differing beyond the coarser one's
+    step: two runs, whatever their costs (11 Nov 2026: nurb's benchmark revisions, a new row per revision with its own
+    trials — Grok 4.6 low 156,200 against 118,602 tokens at $0.12 / $0.10, which the cost closeness alone took for one
+    run)."""
+    a, b = X.get("tokens") or {}, Y.get("tokens") or {}
+    for k in set(a) & set(b):
+        try:
+            (va, sa), (vb, sb) = (float(a[k][0]), float(a[k][1] or 0)), (float(b[k][0]), float(b[k][1] or 0))
+        except (TypeError, ValueError, IndexError):
+            continue
+        if abs(va - vb) > max(sa, sb) * (1 + 1e-9) + 1e-9 * max(abs(va), abs(vb)):
+            return True
+    return False
+
+
 def version_runs(ctx, measures):
     """same-runs-as between the versions of one board inside one source (rule R1, the maintainer, 11 Nov 2026): a
     source that embeds several versions of one table (ReactBench's v1.0, v1.1 and v1.2 in one page) can re-grade the
     same runs. Two versions of one source and one benchmark family are versions of one table when ≥ 2 of their shared
-    couples have identical costs (§3's closeness test) and a score differs on one of them, as between two sources.
+    couples have identical costs (§3's closeness test; not when both give token counts that differ, tokens_differ) and
+    a score differs on one of them, as between two sources.
     Couple by couple then — a version can also re-run a configuration — a couple whose cost is identical in the two
     versions is one run: its measures in those versions, in every setup of its run set (benchmarks.json run_set, else
     its family), are one run on quality (run_ids: weight 1/k, not a replacement: the maintainer, 11 Nov 2026, point 3)
@@ -3091,7 +3108,7 @@ def version_runs(ctx, measures):
                     X, Y = x.fields["cost"], y.fields["cost"]
                     if X["unit"] == Y["unit"] and X["currency"] == Y["currency"] and close(
                             float(X["number"]), X["prec"], float(X["step"]), float(Y["number"]), Y["prec"],
-                            float(Y["step"])):
+                            float(Y["step"])) and not tokens_differ(X, Y):
                         ident.append(c)
                 if len(ident) < 2 or not any(score_differs(per[a][c], per[b][c]) for c in ident):
                     continue
