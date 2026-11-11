@@ -469,6 +469,7 @@ class Ctx:
         self.decisions = []
         self.stale = []
         self.run_doubts = []
+        self.version_links, self.version_comp = [], {}
         if os.path.isfile(a.decisions):
             n = len(rep.errors)
             x = V.load_json(a.decisions, rep)
@@ -3041,6 +3042,89 @@ def same_runs(ctx, measures, candidates):
             nc = N.fields.get("cost") or {}
             if nc.get("number") is not None and nc.get("level") in ACCEPTED:
                 M.cost_counted_by = N                    # applied only if N's cost is accepted (cost steps 0–4)
+    version_runs(ctx, measures)
+
+
+def run_key(M):
+    """The run-set key of a measure: its setup's run_set, else its benchmark family (one setup's own run)."""
+    return M.setup.get("run_set") or "family:" + (M.setup.get("family") or M.setup_id)
+
+
+def version_runs(ctx, measures):
+    """same-runs-as between the versions of one board inside one source (rule R1, the maintainer, 11 Nov 2026): a
+    source that embeds several versions of one table (ReactBench's v1.0, v1.1 and v1.2 in one page) can re-grade the
+    same runs. Two versions of one source and one benchmark family are versions of one table when ≥ 2 of their shared
+    couples have identical costs (§3's closeness test) and a score differs on one of them, as between two sources.
+    Couple by couple then — a version can also re-run a configuration — a couple whose cost is identical in the two
+    versions is one run: its measures in those versions, in every setup of its run set (benchmarks.json run_set, else
+    its family), are one run on quality (run_ids: weight 1/k, not a replacement: the maintainer, 11 Nov 2026, point 3)
+    and its cost counts once, in the latest version holding it (cost: out:superseded). A couple whose cost differs is
+    another run and stays apart. → ctx.version_comp: (source, run key, couple, version) → the joined versions' label."""
+    ok = [M for M in measures if M.version and M.campaign == M.version and M.fields["model"].get("value")
+          and M.fields["configuration"].get("level") in ACCEPTED and M.fields["configuration"].get("value")
+          and (M.fields.get("cost") or {}).get("number") is not None
+          and M.fields["cost"].get("level") in ACCEPTED]
+    by = collections.defaultdict(lambda: collections.defaultdict(dict))
+    for M in ok:
+        by[(M.S.id, family(ctx, M))][M.campaign][couple(M)] = M
+    parent = {}
+
+    def find(x):
+        while parent.setdefault(x, x) != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def score_differs(x, y):
+        a, b = x.fields.get("score") or {}, y.fields.get("score") or {}
+        return a.get("number") is not None and b.get("number") is not None and not close(
+            float(a["number"]), a["prec"], float(a["step"]), float(b["number"]), b["prec"], float(b["step"]))
+
+    ctx.version_links = []
+    for (sid, fam), per in sorted(by.items(), key=lambda kv: (kv[0][0], str(kv[0][1]))):
+        vs = sorted(per, key=version_key)
+        for i, a in enumerate(vs):
+            for b in vs[i + 1:]:
+                ident = []
+                for c in sorted(set(per[a]) & set(per[b])):
+                    x, y = per[a][c], per[b][c]
+                    X, Y = x.fields["cost"], y.fields["cost"]
+                    if X["unit"] == Y["unit"] and X["currency"] == Y["currency"] and close(
+                            float(X["number"]), X["prec"], float(X["step"]), float(Y["number"]), Y["prec"],
+                            float(Y["step"])):
+                        ident.append(c)
+                if len(ident) < 2 or not any(score_differs(per[a][c], per[b][c]) for c in ident):
+                    continue
+                ctx.version_links.append(dict(source=sid, family=fam, versions=[a, b], couples=ident,
+                                              shared=len(set(per[a]) & set(per[b]))))
+                for c in ident:
+                    x, y = per[a][c], per[b][c]
+                    parent[find((sid, run_key(x), c, a))] = find((sid, run_key(y), c, b))
+    comp = collections.defaultdict(set)
+    for node in list(parent):
+        comp[find(node)].add(node)
+    ctx.version_comp = {}
+    for nodes in comp.values():
+        if len(nodes) < 2:
+            continue
+        label = "+".join(sorted({n[3] for n in nodes}, key=version_key))
+        for n in nodes:
+            ctx.version_comp[n] = label
+    # the cost counts once: in each setup, the latest version of the run holding an accepted cost
+    held = collections.defaultdict(list)
+    for M in measures:
+        node = (M.S.id, run_key(M), couple(M), M.campaign) if M.version else None
+        if node in ctx.version_comp:
+            C = M.fields.get("cost") or {}
+            if C.get("number") is not None and C.get("level") in ACCEPTED:
+                held[(M.S.id, run_key(M), couple(M), ctx.version_comp[node], M.setup_id)].append(M)
+    for k, ms in held.items():
+        ms.sort(key=lambda M: version_key(M.campaign))
+        N = ms[-1]
+        for M in ms[:-1]:
+            if version_key(M.campaign) < version_key(N.campaign):
+                M.rules.add("same-runs-as")
+                M.cost_counted_by = N
 
 
 def copy_of(M):
@@ -3190,21 +3274,23 @@ def run_ids(ctx, measures):
     them, they are not grouped (doubt, ctx.run_doubts). The run id goes to the fit table's column `run`; lqm counts k
     among the rows it keeps."""
     by = collections.defaultdict(list)
+    vcomp = getattr(ctx, "version_comp", {})
     for M in measures:
         M.run = ""
         rs = M.setup.get("run_set")
-        if rs and (M.status["quality"] or "").startswith("in"):
-            by[(M.S.id, rs, couple(M), M.campaign or "")].append(M)
+        label = vcomp.get((M.S.id, run_key(M), couple(M), M.campaign)) if getattr(M, "version", None) else None
+        if (rs or label) and (M.status["quality"] or "").startswith("in"):
+            by[(M.S.id, rs or run_key(M), couple(M), label or M.campaign or "")].append(M)
     for k, ms in sorted(by.items()):
         if len(ms) < 2:
             continue
         parts = [ms]
-        if len({M.setup_id for M in ms}) < len(ms):
+        if len({(M.setup_id, M.campaign) for M in ms}) < len(ms):
             rows = collections.defaultdict(list)
             for M in ms:
                 rows[tuple(sorted(M.m["facts"].get("model") or []))].append(M)
             parts = list(rows.values())
-            if any(len({M.setup_id for M in p}) < len(p) for p in parts):
+            if any(len({(M.setup_id, M.campaign) for M in p}) < len(p) for p in parts):
                 ctx.run_doubts.append(dict(key=list(k), measures=sorted(M.ref for M in ms),
                                            why="one setup held twice in the run set and the table row does not separate "
                                                "them: runs possibly distinct, not grouped"))
@@ -3254,7 +3340,8 @@ def cost(ctx, measures):
         N = getattr(M, "cost_counted_by", None)
         if N is not None and M.status["cost"] is None and N in pending and N.status["cost"] is None:
             M.status["cost"] = "out:superseded"
-            M.detail["cost"] = f"same runs as {N.ref}: the cost counts once"
+            M.detail["cost"] = f"same runs as {N.ref}" + (f" (version {N.campaign} of this source)" if N.S is M.S else
+                                                          "") + ": the cost counts once"
     live = [M for M in pending if M.status["cost"] is None]
     # 1. base-price value; 2. partition; 3. subsets
     for M in live:
@@ -3522,7 +3609,7 @@ def outputs(ctx, measures, residuals, legacy, out_dir, previous=None):
                           findings=V.rel(ctx.args.findings), decisions=V.rel(ctx.args.decisions),
                           fit_models=ctx.fit_models, benchmarks=os.path.abspath(ctx.paths["benchmarks"]),
                           lqm="pending" if not ctx.args.no_lqm else "skipped"),
-               measures={}, counts={}, stale_decisions=ctx.stale, run_doubts=ctx.run_doubts,
+               measures={}, counts={}, stale_decisions=ctx.stale, run_doubts=ctx.run_doubts, version_links=ctx.version_links,
                validation=dict(warnings=ctx.rep.warnings, errors=ctx.rep.errors))
     for L in legacy:
         r = L.row

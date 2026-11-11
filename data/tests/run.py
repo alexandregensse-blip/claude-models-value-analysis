@@ -2534,6 +2534,71 @@ def same_run_weight_build():
 
 
 @test
+def same_runs_versions_in_one_source():
+    """Rule R1 (the maintainer, 11 Nov 2026): the versions of one board inside one source (ReactBench's v1.0 and v1.1
+    in one page) that re-grade the same runs — ≥ 2 shared couples with identical costs, a score differing — are linked
+    couple by couple: a couple whose cost is identical is one run on quality (one run id over both versions and every
+    setup of its run set, weight 1/k; not superseded) and its cost counts once, in the later version (also for a setup
+    of the run set whose cost the later version re-split). A couple whose cost differs (re-run) stays apart. Negative
+    controls: one identical couple only, or identical scores too (no regrade): nothing linked."""
+    def scenario(v11_mb_cost="2.00", v11_scores=("55%", "66%")):
+        sc = base()
+        sc.model("mc")
+        same_price(sc, "ma", "mb", "mc")
+        sc.setup("s1", family="f1")
+        sc.setup("s2", family="f2")
+        for x in ("s1", "s2"):
+            sc.setups[x]["run_set"] = "R"
+        s = sc.source("board")
+        refs = {}
+        for v, rows in (("1.0", (("s1", "ma", "50%", "1.00"), ("s1", "mb", "60%", "2.00"), ("s1", "mc", "40%", "3.00"),
+                                 ("s2", "ma", "30%", "0.50"), ("s2", "mb", "35%", "0.70"))),
+                        ("1.1", (("s1", "ma", v11_scores[0], "1.00"), ("s1", "mb", v11_scores[1], v11_mb_cost),
+                                 ("s1", "mc", "45%", "3.50"), ("s2", "ma", "31%", "0.60"), ("s2", "mb", "36%", "0.70")))):
+            for st, mo, sco, co in rows:
+                refs[(v, st, mo)] = sc.m(s, setup=st, model=mo, effort=[LOW], score=sco, cost=co, version=v)
+        return sc.run(), refs
+    r, R = scenario()
+    run = lambda k: next(x["run"] for x in r.rows("fit-quality.csv", model=k[2]) if x["group"] == f"{k[1]}#{k[0]}")
+    eq([r.c(R[k]) for k in (("1.0", "s1", "ma"), ("1.0", "s1", "mb"), ("1.0", "s2", "ma"), ("1.0", "s2", "mb"))],
+       ["out:superseded"] * 4, "identical cost: the earlier version's cost counts once (s2's re-split cost too)")
+    eq([r.c(R[k]) for k in (("1.1", "s1", "ma"), ("1.1", "s2", "ma"), ("1.1", "s1", "mc"))],
+       ["in"] * 3, "the later version's cost stays")
+    eq(r.c(R[("1.0", "s1", "mc")]), "out:cost-single-couple",
+       "a re-run couple (mc, 3.00 / 3.50) is not superseded (alone in its group once ma and mb went)")
+    eq({r.q(ref) for ref in R.values()}, {"in"}, "quality: no replacement, every grading enters")
+    ids = {run(k) for k in R if k[2] == "ma"}
+    eq((len(ids), "" in ids), (1, False), "ma's four measurements over both versions and setups: one run")
+    eq((run(("1.0", "s1", "mc")), run(("1.1", "s1", "mc"))), ("", ""), "the re-run couple: two runs, k = 1 each")
+    eq(len(r.rep["version_links"]) >= 1, True, "the link is reported")
+    r0, R0 = scenario(v11_mb_cost="2.50")
+    eq(r0.c(R0[("1.0", "s1", "ma")]), "in", "negative control: one identical couple only, not a re-grading")
+    r1, R1 = scenario(v11_scores=("50%", "60%"))
+    eq(r1.c(R1[("1.0", "s1", "ma")]), "in", "negative control: identical scores too, no regrade")
+
+
+@test
+def precheck_identical_costs_block():
+    """precheck R2 (the maintainer, 11 Nov 2026): two cost groups of the fit table sharing ≥ 3 couples whose costs are
+    identical (relative gap < 1e-9) stop the fit (the frozen cost fit of 10 Nov: ReactBench v1.0 / v1.1, d ≈ 3e-15).
+    Negative controls: 2 identical couples only, or 3 couples a hair apart (1e-6), pass."""
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    row = lambda c, v, d=3e-15: {"couple": c, "raw": v, "d": d}
+    G = lambda *rs: {"rows": list(rs)}
+    a = G(row("ma@high", 4.08203692307692), row("mb@high", 6.796586666666666), row("mc@low", 1.8448753846153851),
+          row("md@low", 0.5))
+    b = G(row("ma@high", 4.08203692307692), row("mb@high", 6.796586666666666), row("mc@low", 1.844875384615385),
+          row("md@low", 0.7))
+    out = precheck.identical_costs({"g#1.0~c4": a, "g#1.1~c5": b})
+    eq((len(out), "3 identical costs of 4" in out[0], "near zero" in out[0]), (1, True, True), "3 identical costs: blocking")
+    two = G(row("ma@high", 4.08203692307692), row("mb@high", 6.796586666666666), row("mc@low", 1.9), row("md@low", 0.7))
+    eq(precheck.identical_costs({"x": a, "y": two}), [], "negative control: 2 identical couples only")
+    near = G(*[row(x["couple"], x["raw"] * (1 + 1e-6)) for x in a["rows"]])
+    eq(precheck.identical_costs({"x": a, "y": near}), [], "negative control: values a hair apart (1e-6) are not copies")
+
+
+@test
 def lqm_configurations_kept():
     """lqm.load keeps the configurations the build writes (nothink, minimal, think, solo and the levels) and not an
     unknown one; negative control: with the filter of before the change (levels and solo only) the same file loses the

@@ -18,11 +18,18 @@
      DUP_SCORE_SHARE of the scale, are probably two builds or two configurations under one key (20 Oct 2026: ARC
      Prize's dated and undated GPT-5.6 Luna, costs 5× apart, left the cost fit at R̂ 2.0 after an hour). Replicates of
      one configuration agree; these do not.
-  6. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
+  6. Identical costs in two cost groups (blocking): two groups of the cost fit table (after lqm.load, whose
+     republication rule keeps a copy once) sharing COPY_MIN (3) or more couples whose costs are identical (relative gap
+     < COPY_REL, 1e-9) are one set of runs whose cost would count twice; the rule that should have recognised them
+     (the build's same-runs-as, lqm's republications) did not. A fortiori with a reading precision near zero (a cost
+     copied to 15 digits): the pair's common effect absorbs the residuals, the groups' σ goes to 0 and the whole cost
+     axis freezes (fit of 10 Nov 2026: ReactBench v1.0 / v1.1, the same runs re-graded, 20 identical costs of 20,
+     d ≈ 3e-15, R̂ 6.8 after 7.7 h). The full fit is not started.
+  7. Smoke fit (blocking, model/fit.py --smoke): a short fit of the quality axis (4 chains × 500 + 500) takes about
      three minutes; a chain left in another region shows there as R̂ far above 1. Above SMOKE_RHAT the full fit is
      not started.
 
-Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4 and 6 run lqm.load
+Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4, 6 and 7 run lqm.load
 on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does.
 
 Run from the repository root:  .stan/venv/bin/python model/precheck.py [--smoke]"""
@@ -126,6 +133,32 @@ def fraction_above_one(data):
     return [f"{g} ({m}): {len(v)} values above 1, up to {max(v):g}" for (g, m), v in sorted(out.items())]
 
 
+COPY_REL = 1e-9
+COPY_MIN = 3
+
+
+def identical_costs(groups):
+    """Pairs of cost groups of the fit table (after lqm.load: republications already kept once) sharing COPY_MIN or
+    more couples whose costs are identical (relative gap < COPY_REL): one set of runs whose cost would count twice. With
+    a reading precision near zero (a cost copied to 15 digits), the pair's common effect absorbs the residuals and the
+    group's scale σ goes to 0: the whole cost axis freezes (fit of 10 Nov 2026, ReactBench v1.0 / v1.1, R̂ 6.8)."""
+    by = {g: {} for g in groups}
+    for g, G in groups.items():
+        for x in G["rows"]:
+            by[g].setdefault(x["couple"], x)
+    out = []
+    for g1, g2 in itertools.combinations(sorted(by), 2):
+        a, b = by[g1], by[g2]
+        same = [c for c in set(a) & set(b)
+                if abs(a[c]["raw"] - b[c]["raw"]) < COPY_REL * max(abs(a[c]["raw"]), abs(b[c]["raw"]))]
+        if len(same) >= COPY_MIN:
+            d = max(max(a[c]["d"], b[c]["d"]) for c in same)
+            out.append(f"{g1} / {g2}: {len(same)} identical costs of {len(set(a) & set(b))} shared couples"
+                       f" (largest reading precision d among them {d:.2g}"
+                       + (", near zero: σ can collapse)" if d < 1e-6 else ")"))
+    return out
+
+
 DUP_COST_RATIO = 1.5
 DUP_SCORE_SHARE = 0.10
 
@@ -205,7 +238,10 @@ def main(run_smoke=False):
     from catalog import MODEL_ORDER
     for t in discordant_twins(data, set(MODEL_ORDER)):
         print("?? one couple twice in a group, discordant (two builds or configurations under one key?):", t)
-    if errors:
+    copies = identical_costs(load("cost")[0])
+    for c in copies:
+        print("!! identical costs in two cost groups, not recognised as copies:", c)
+    if errors or copies:
         return 1
     mc = memory_check()
     if mc is None:

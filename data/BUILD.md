@@ -1616,3 +1616,36 @@ No rule of the build changed.
   the F1 alone enters; precision and recall are pending (out:not-headline), noted (arXiv 2611.06135 p1 / p2 / t5 / t5-rr,
   2611.00340 s14 / s17, 2611.02826, 2611.02484 t3, 2610.37797, 2610.37459).
 - Lists: the session's S/s7/integ11/logs/point1.log, point2.log; scripts S/s7/integ11/py/.
+
+## Added on 11 Nov 2026 (correction of the cost data: ReactBench, the maintainer's consigne of 11 Nov)
+
+The cost fit of 10 Nov froze (R̂ 6.8, step size 5e-4, every chain stuck): two cost groups, reactbench#1.0~c4 and
+#1.1~c5, shared 20 costs of 20 copied to 15 digits (reading precision d ≈ 3e-15); their common effect absorbed the
+residuals and their σ went to 2.6e-9. ReactBench's page embeds three versions of one board (v1.0, v1.1, v1.2: 39
+tasks × 5 trials each, facts F1309/F1310, F5/F6, F2379/F2380) that re-grade the same runs.
+
+- **Data, decisions D39–D41** (data/decisions.json, cost axis, out; the scores stay). D39, 187 measures: a cost
+  identical, value for value, to the cost of the same setup and configuration in a later version (kept: v1.2, else
+  v1.1). D40, 110 measures: the Writing / Fixing costs of v1.0 and v1.1 for a configuration whose overall cost and
+  tokens v1.2 repeats — v1.2 re-split the 39 tasks (write / fix 23 / 16 → 28 / 11), and 23·w + 16·f = 28·w' + 11·f'
+  = 39 × overall was checked for each: the same trials, counted once in v1.2's split. D41, 45 measures: GPT-5.6 Luna,
+  the same runs (identical tokens) costed 5× apart between v1.0 and v1.1, the factor of the two price lists the
+  registry holds for it; the page says nothing of the price used (capture of 4 Nov, live page of 11 Nov): every Luna
+  ReactBench cost out. Not touched: configurations whose cost and tokens differ between versions (re-runs: GPT-5.6
+  Terra and GLM 5.2 in v1.0; Opus 5, Sonnet 5, Gemini 3.5 Flash high / low, Gemini 3.1 Pro low, Inkling Small in v1.2).
+- **R1, same-runs-as between the versions of one source** (`version_runs`, called at the end of `same_runs`). Two
+  versions of one source and one benchmark family are versions of one table when ≥ 2 shared couples have identical
+  costs (§3's closeness test, on the costs as written, before any re-pricing) and a score differs on one of them.
+  Then couple by couple: a couple whose cost is identical in two versions is one run — on quality, its measures in
+  those versions and in every setup of its run set (else its family) share one run id (rule same-run-weight, k over
+  all of them; nothing is superseded: the maintainer, point 3); on cost, each setup's cost counts once, in the latest
+  version of the run holding an accepted cost (`out:superseded`, « same runs as … (version x of this source) »),
+  also for a setup the later version re-split. A couple whose cost differs is another run and stays apart. The
+  links go to the status report's `version_links`. On the data of 1548576 R1 links ReactBench only (its three
+  families, five version pairs); the other sources holding two versions of one family with costs (PokeBench 21 / 22 /
+  rvb4, the qiita dahatake sheets 1.0.88 / 1.0.89) share no identical cost. Test `same_runs_versions_in_one_source`
+  (negative controls: one identical couple; identical scores, no regrade; a re-run couple stays two runs).
+- **R2, precheck check 6 (blocking).** Two groups of the cost fit table (after lqm.load) sharing ≥ 3 couples with
+  identical costs (relative gap < 1e-9) stop the fit (`!!`, exit 1), the reading precision shown (« near zero: σ can
+  collapse » below 1e-6). The smoke fit becomes check 7. Test `precheck_identical_costs_block` (negative controls:
+  2 identical couples; values 1e-6 apart).
