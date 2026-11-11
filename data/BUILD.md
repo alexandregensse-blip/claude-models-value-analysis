@@ -1649,3 +1649,31 @@ tasks × 5 trials each, facts F1309/F1310, F5/F6, F2379/F2380) that re-grade the
   identical costs (relative gap < 1e-9) stop the fit (`!!`, exit 1), the reading precision shown (« near zero: σ can
   collapse » below 1e-6). The smoke fit becomes check 7. Test `precheck_identical_costs_block` (negative controls:
   2 identical couples; values 1e-6 apart).
+
+## Added on 11 Nov 2026 (arbitration of the 12 cost-group pairs blocked by precheck R2)
+
+No rule of the build changed; R2 stays blocking. Each pair was read from its findings (value, quote, URL, date):
+
+- **Copies, cost counted once (decisions D42–D52, data/decisions.json).** D42, both axes: OpenAI's GPT-6.1 Sol post,
+  GDP.pdf, GPT-6.1 Sol and GPT-6 Astra (10 measures) print Artificial Analysis's GDP-PDF runs (Astra's costs with AA's
+  floating-point tail, 1.7948240999999998; 6.1 Sol's AA's rounded to 4 digits); GPT-6 Sol, whose scores differ, is not
+  touched. D43, both axes: arXiv 2611.07461's Table 31 Claude Code baselines (4) print SWE Refactor Bench's Table 3
+  (arXiv 2608.23564), score and cost, all eight numbers. D44, cost: datallmlab's blog of 6 Aug (3) and its evidence
+  JSON of 3 Oct are the same runs (dates, tokens, prices); the later file is kept. D45, cost: the Haiku 5.5 system
+  card's OSWorld strict costs (10, read from pixels) are the launch chart's runs (D1); the launch's written CSV is kept.
+  D46, D47, D49, D52, both axes: OpenAI's AutomationBench charts (GPT-6.1 Sol post 10, GPT-6 Sol and Luna post 5 + 25,
+  GPT-6 Astra launch 10) are
+  Zapier's AutomationBench board 1.0.6 (scores agreeing on every couple to one side's rounding); the board is kept.
+  D48, cost: tokensave's first measurement of 9 Oct (5) is yunany90's Qiita run (same tokens, times, lines). D50 / D51,
+  cost: Vals.ai EMB and HLab, version 1 against version 1.1 (two captures, the later a declared snapshot): 9 and 3
+  configurations with the same cost to 7 digits and a re-graded score; the cost counts once, in v1.1; the re-run
+  configurations stay. Their scores stay: R1 joins the gradings of one source and one family as one run, and these
+  versions are two sources and two families in the registry (emb / valsemb11, valshlab / valshlab-2026-10-21).
+- **Copies, stated in the findings (rule copy-same-runs).** benchmarklist's Grok 4.5 ARC-AGI-2 (M14, M110, M111) and
+  Grok 4.6 CursorBench 3.2 (M32–M34) cite their board (restated-from) and now carry a same-runs-as fact naming the held
+  measure (ARC Prize 4 Nov M471 / M473 / M472; CursorBench 9 Sep M34 / M28 / M44): out:copy.
+- **A declared coincidence (precheck `COINCIDENCES`).** AI Coding Daily (Laravel prompts through Codex CLI) and Column
+  Tax's TaxCalcBench (tax returns) share GPT-6 Luna's costs at the cent ($0.01, $0.03, $0.01): two benchmarks, two
+  runs. The pair of base groups and its three couples are declared with the proof; precheck reports it (`??`) and does
+  not block; another identical couple, or these couples in another pair, block again. Test
+  `precheck_declared_coincidence`.

@@ -2578,6 +2578,27 @@ def same_runs_versions_in_one_source():
 
 
 @test
+def precheck_declared_coincidence():
+    """precheck R2, a declared coincidence (11 Nov 2026): a pair of base groups declared in COINCIDENCES with its
+    identical couples is reported, not blocking; negative controls: one more identical couple, or the same couples in
+    another pair, block again."""
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    row = lambda c, v: {"couple": c, "raw": v, "d": 0.003}
+    G = lambda *rs: {"rows": list(rs)}
+    a = G(row("gpt-6-luna@high", 0.01), row("gpt-6-luna@max", 0.03), row("gpt-6-luna@medium", 0.01), row("x@low", 0.5))
+    b = G(row("gpt-6-luna@high", 0.01), row("gpt-6-luna@max", 0.03), row("gpt-6-luna@medium", 0.01), row("x@low", 0.7))
+    notes = []
+    eq((precheck.identical_costs({"aicodingdaily-main~c4": a, "taxcalc-ty25-notool~c3": b}, notes), len(notes)),
+       ([], 1), "the declared pair and couples: reported, not blocking")
+    b4 = G(*b["rows"][:3], row("x@low", 0.5))
+    eq(len(precheck.identical_costs({"aicodingdaily-main~c4": a, "taxcalc-ty25-notool~c3": b4})), 1,
+       "negative control: a fourth identical couple blocks")
+    eq(len(precheck.identical_costs({"aicodingdaily-main~c4": a, "other-board": b})), 1,
+       "negative control: the same couples in another pair block")
+
+
+@test
 def precheck_identical_costs_block():
     """precheck R2 (the maintainer, 11 Nov 2026): two cost groups of the fit table sharing ≥ 3 couples whose costs are
     identical (relative gap < 1e-9) stop the fit (the frozen cost fit of 10 Nov: ReactBench v1.0 / v1.1, d ≈ 3e-15).
