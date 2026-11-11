@@ -1581,6 +1581,113 @@ def cost_method_unstated_setting():
 
 
 @test
+def cost_route_key_is_price_applied():
+    """Rule R3 (the maintainer, 11 Nov 2026): the route key of a cost subset is the price applied, not the number of
+    candidate routes nor what the registry knows of them. A model a router also serves (two candidates) and a model
+    only the maker's API serves (one candidate) share a subset; before, the first got 'unknown' and the second
+    'maker-api', and a new model no router of the registry lists yet sat alone in its cost groups (Fable 5.2, 29 of
+    30). Negative controls: a candidate router's registered price differs: 'unknown', two subsets; a stated route whose
+    price is not registered keeps its own key."""
+    def scenario(router_price, stated=False):
+        sc = base()
+        same_price(sc, "ma", "mb")
+        win = dict(from_basis="earliest-capture", to_basis="last-capture")
+        span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+        sc.route("orz", "router", spellings=["ORZ"], models={"ma": {
+            "ids": [span(name="orz/ma")], "accepts": [span(configuration=c) for c in ("low", "high")]}})
+        if router_price:
+            sc.prices["prices"].append(price("ma", "2026-01-01", "2026-10-01", router_price, route="orz"))
+        s = sc.source("a")
+        rt = [("ORZ", None)] if stated else ()
+        ms = [sc.m(s, model=k, effort=[e], cost=c, route=rt if k == "ma" else ()) for k, e, c in
+              (("ma", LOW, "1.0"), ("ma", HIGH, "2.0"), ("mb", LOW, "1.5"), ("mb", HIGH, "3.0"))]
+        return sc.run(), ms
+    # the router's catalogue lists fewer cache classes (no 5-minute write): the classes both list are compared
+    r, (a1, a2, b1, b2) = scenario({"input": 1, "output": 5})
+    eq([r[m]["fields"]["cost"]["part"][-1] for m in (a1, b1)], ["maker-api", "maker-api"],
+       "two candidates at the maker's list price, one candidate: one key")
+    eq(("route-unknown-candidates" in r[a1]["rules_used"], r.c(a1), r.c(b1)), (True, "in", "in"),
+       "ma still weighed over its two candidate routes; both in")
+    eq(r[a1]["cost_group"] == r[b1]["cost_group"] == "s1", True, "one cost subset, no ~c<n>")
+    r, (a1, a2, b1, b2) = scenario({"input": 2, "output": 5})
+    eq([r[m]["fields"]["cost"]["part"][-1] for m in (a1, b1)], ["unknown", "maker-api"],
+       "negative control: the router's own price differs → the price applied is unknown")
+    eq(r[a1]["cost_group"] != r[b1]["cost_group"], True, "negative control: two subsets")
+    r, (a1, a2, b1, b2) = scenario(None)
+    eq([r[m]["fields"]["cost"]["part"][-1] for m in (a1, b1)], ["maker-api", "maker-api"],
+       "a candidate router with no registered price is no evidence of another price: one key")
+    r, (a1, a2, b1, b2) = scenario({"input": 1, "output": 5}, stated=True)
+    eq([r[m]["fields"]["cost"]["part"][-1] for m in (a1, b1)], ["maker-api", "maker-api"],
+       "a stated router at the maker's list price: one key")
+    r, (a1, a2, b1, b2) = scenario(None, stated=True)
+    eq([r[m]["fields"]["cost"]["part"][-1] for m in (a1, b1)], ["orz", "maker-api"],
+       "negative control: a stated router whose price is not registered keeps its own key")
+    # the maker's price changed inside the price date and the router's catalogue was first captured after the change
+    # (Sonnet 5.5, cache read 0.20 → 0.10 on 7 Oct; OpenRouter's price from 20 Oct): each router price is read against
+    # the maker's over the same days
+    sc = base()
+    win = dict(from_basis="earliest-capture", to_basis="last-capture")
+    span = lambda **kw: dict(iv("2026-01-01", "2026-12-31", **win), **kw)     # noqa: E731
+    for k in ("ma", "mb"):
+        sc.prices["prices"] += [price(k, "2026-01-01", "2026-04-30", {"input": 1, "output": 5, "cache-read": 0.2}),
+                                price(k, "2026-05-01", "2026-10-01", {"input": 1, "output": 5, "cache-read": 0.1})]
+    sc.prices["prices"].append(price("ma", "2026-05-20", "2026-10-01", {"input": 1, "output": 5, "cache-read": 0.1},
+                                     route="orz"))
+    sc.route("orz", "router", spellings=["ORZ"], models={"ma": {
+        "ids": [span(name="orz/ma")], "accepts": [span(configuration=c) for c in ("low", "high")]}})
+    s = sc.source("a")
+    ms = [sc.m(s, model=k, effort=[e], cost=c) for k, e, c in
+          (("ma", LOW, "1.0"), ("ma", HIGH, "2.0"), ("mb", LOW, "1.5"), ("mb", HIGH, "3.0"))]
+    r = sc.run()
+    eq(r[ms[0]]["fields"]["cost"]["part"][-1], "maker-api", "the router's price equals the maker's on its own days")
+    sc.prices["prices"][-1]["classes"]["cache-read"] = 0.2
+    r = sc.run()
+    eq(r[ms[0]]["fields"]["cost"]["part"][-1], "unknown",
+       "negative control: the router's price is the maker's old one over days the maker's new one applies")
+
+
+@test
+def cost_method_unstated_follows_page():
+    """Rule R4 (the maintainer, 11 Nov 2026): a cost with no cost-method fact counts as one method per page — the root
+    of its source's snapshot_of chain — not per capture: two captures of one board share a subset. Negative control:
+    the same two sources without snapshot_of keep one method each (two subsets)."""
+    def scenario(snap):
+        sc = base()
+        same_price(sc, "ma", "mb")
+        a = sc.source("board", published="2026-06-01")
+        b = sc.source("board", published="2026-07-01", snapshot_of=a if snap else None)
+        ms = [sc.m(a, model="ma", effort=[LOW], cost="1.0"), sc.m(a, model="mb", effort=[LOW], cost="2.0"),
+              sc.m(b, model="ma", effort=[HIGH], cost="3.0"), sc.m(b, model="mb", effort=[HIGH], cost="5.0")]
+        return sc.run(), a, b, ms
+    r, a, b, ms = scenario(True)
+    eq({r[m]["fields"]["cost"]["part"][1] for m in ms}, {f"unstated[{a}/facts]"}, "one unwritten method: the page's")
+    eq(({r.c(m) for m in ms}, len({r[m]["cost_group"] for m in ms})), ({"in"}, 1), "one subset, all in")
+    r, a, b, ms = scenario(False)
+    eq(sorted({r[m]["fields"]["cost"]["part"][1] for m in ms}), sorted([f"unstated[{a}/facts]", f"unstated[{b}/facts]"]),
+       "negative control: no snapshot_of, one method per source")
+    eq(len({r[m]["cost_group"] for m in ms if r[m]["cost_group"]}), 2, "negative control: two subsets")
+
+
+@test
+def precheck_isolated_couples():
+    """precheck R5 (the maintainer, 11 Nov 2026): a couple more than 90 % of whose cost groups hold no other model is
+    named as a warning (Fable 5.2: 29 of 30). Negative controls: 9 of 10 (exactly 90 %) is not named, nor a couple whose
+    groups all hold another model."""
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    row = lambda c: {"couple": c, "model": c.split("@")[0]}     # noqa: E731
+    G = lambda *cs: {"rows": [row(c) for c in cs]}            # noqa: E731
+    gs = {f"alone{i}": G("mx@low", "mx@high") for i in range(10)}
+    gs["shared"] = G("mx@high", "my@high")
+    out = precheck.isolated_couples(gs)
+    eq([o.split(":")[0] for o in out], ["mx@high", "mx@low"], "mx@high 10 of 11, mx@low 10 of 10: named")
+    eq("10 of its 11 cost groups" in out[0] and "(shared: shared)" in out[0], True, "the count and the shared group named")
+    gs = {f"alone{i}": G("mx@high") for i in range(9)}
+    gs["shared"] = G("mx@high", "my@high")
+    eq(precheck.isolated_couples(gs), [], "negative control: 9 of 10 (90 %) is not more than 90 %; my shares all")
+
+
+@test
 def reason_value_not_established():
     sc = base()
     s = sc.source("a")

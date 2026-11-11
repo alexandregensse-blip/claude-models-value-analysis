@@ -199,7 +199,7 @@ The fit tables carry these confound flags:
 
 | Setting | Values | Effect |
 |---|---|---|
-| `cost_method_unstated` (`--cost-method-unstated`) | `single-per-table` (default) · `out` | A cost with no `cost-method` fact. `single-per-table`: each table, chart or prose block of a source counts as one method of its own (`unstated[<source>/<table>]`), never mixed with another source's, and the row is flagged `cost-method-assumed-single`. `out`: the cost gets `out:cost-not-comparable`. **The maintainer has not decided.** |
+| `cost_method_unstated` (`--cost-method-unstated`) | `single-per-table` (default) · `out` | A cost with no `cost-method` fact. `single-per-table`: each table, chart or prose block of a page counts as one method of its own (`unstated[<page>/<table>]`, the page being the root of the source's `snapshot_of` chain: rule R4, the maintainer, 11 Nov 2026; it was the source, i.e. each capture), never mixed with another page's, and the row is flagged `cost-method-assumed-single`. `out`: the cost gets `out:cost-not-comparable`. **The maintainer has not decided.** |
 | `--fit-models` | a file, `catalog`, or omitted | The model list used by step 10 (≥ 2 couples), by the legacy admission, and passed to `lqm.load`. |
 | `class-ratios.json` (`--class-ratios`) | optional registry file | Feeds `cost-class-ratio`. Its shape is checked, but it has no schema yet: `{"ratios": [{"model", "change": <date>, "classes": {cls: {factor, sd}}, "setups": {setup: cls}, "measures": {ref: cls}}]}`. It applies to a cost whose price date ends before `change`. Without the file, the class-ratio step never fires. |
 
@@ -492,7 +492,15 @@ marked **(method)** remain method questions for the maintainer.
     to the current price (no registered price over its price date, or tiers / classes not shared) gets
     `out:cost-not-comparable`; the unrepriced model's own subset at an old price no longer exists. Rule 28 (the
     publisher's own figure: every price over the price date equals the base) is unchanged.
-31. In the partition, the route key is the single candidate chain, else `unknown`.
+31. In the partition, the route key is the price applied, not the number of candidate chains nor what the registry
+    knows of them **(rule R3, the maintainer, 11 Nov 2026; it was « the single candidate chain, else `unknown` »)**.
+    The route that bills a chain is its first step that is not a harness; its registered standard prices over the
+    price date (inside the span it served the model) are read against the maker's list price over the same days
+    (input and output in both, the classes both list, the same long-context thresholds; days with no registered route
+    price are not read). A stated chain: `maker-api` when it reaches the maker's API or its route's registered prices
+    all equal the maker's, else the route's id (its own price, or none registered). The route unknown (several
+    candidates): `unknown` when a candidate route has a registered price that differs from the maker's, else
+    `maker-api` — a candidate route with no registered price is no evidence of another price.
 
 **Fit tables and groups**
 

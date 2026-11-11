@@ -35,7 +35,14 @@
      left in another region shows there as R̂ far above 1. Above SMOKE_RHAT (2.0) on either axis the full fit is not
      started, and the message names the axis that stopped it.
 
-Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4, 6 and 7 run lqm.load
+  8. A couple isolated on the cost axis (warning, rule R5, the maintainer, 11 Nov 2026): a couple of the cost fit
+     table more than ISOLATED_SHARE (90 %) of whose cost groups hold no other model. A group holding one model only
+     gives its effort ladder, not its level against the others: that level then rests on the few groups left, and the
+     fit mixes slowly in that direction (fit of 11 Nov 2026: Claude Fable 5.2 alone in 29 of its 30 cost groups,
+     posterior sd 0.5 in log against 0.03–0.09 for its neighbours, R̂ 1.03 after 6,300 draws). It names the couple; it
+     does not stop the fit.
+
+Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4, 6, 7 and 8 run lqm.load
 on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does.
 
 Run from the repository root:  .stan/venv/bin/python model/precheck.py [--smoke]"""
@@ -248,6 +255,28 @@ def identical_costs(groups, notes=None):
     return out
 
 
+ISOLATED_SHARE = 0.9
+
+
+def isolated_couples(groups, share=ISOLATED_SHARE):
+    """Couples of the cost fit table (lqm.load's groups) more than `share` of whose groups hold no other model (rule
+    R5, the maintainer, 11 Nov 2026: a warning naming the couple, never a block). → ['couple: n of N …'], sorted."""
+    models = {g: {x["model"] for x in G["rows"]} for g, G in groups.items()}
+    by = collections.defaultdict(set)
+    for g, G in groups.items():
+        for x in G["rows"]:
+            by[(x["couple"], x["model"])].add(g)
+    out = []
+    for (c, m), gs in sorted(by.items()):
+        alone = [g for g in gs if models[g] == {m}]
+        if len(alone) > share * len(gs):
+            shared = sorted(gs - set(alone))
+            out.append(f"{c}: {len(alone)} of its {len(gs)} cost groups hold no other model"
+                       + (f" (shared: {', '.join(shared)})" if shared else " (none shared: its level is not tied to "
+                                                                            "the other models)"))
+    return out
+
+
 DUP_COST_RATIO = 1.5
 DUP_SCORE_SHARE = 0.10
 # Replicates declared by their sources (the maintainer's consigne of 11 Nov 2026, « résous les ?? du precheck »):
@@ -416,11 +445,14 @@ def main(run_smoke=False):
     for t in declared:
         print("-- declared:", t)
     notes = []
-    copies = identical_costs(load("cost")[0], notes)
+    cost_groups = load("cost")[0]
+    copies = identical_costs(cost_groups, notes)
     for c in notes:
         print("?? identical costs in two cost groups, a declared coincidence:", c)
     for c in copies:
         print("!! identical costs in two cost groups, not recognised as copies:", c)
+    for c in isolated_couples(cost_groups):
+        print("?? couple isolated on the cost axis (its level against the other models rests on the groups it shares):", c)
     if errors or copies:
         return 1
     mc = memory_check()

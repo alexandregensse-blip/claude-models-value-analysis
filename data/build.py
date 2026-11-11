@@ -2775,6 +2775,7 @@ def reprice_registered(M, C, key):
     C["base"] = None
     cost_cur = C.get("currency")
     cur, why_cur = price_currency(M, C, key)             # the list the price ratio is read on (4 Nov 2026)
+    C["price_list_currency"] = cur                       # read again by the route-price key (price_key, rule R3)
     if why_cur:
         C["price_currency_detail"] = why_cur
     same_cur = cur is not None and cur == cost_cur      # the source's own prices and tokens × prices need its currency
@@ -3756,7 +3757,8 @@ def cost_blocked(ctx, measures, by_src, pos, B, src_blocks, dec_extra, held_extr
     groups = grouped((M for M in pending if M.ref in comp), lambda M: comp[M.ref])
     B("counted-once", [(("measures", min(M.ref for M in ms)), ms, None) for ms in groups.values()], counted_once)
     live = [M for M in pending if M.status["cost"] is None]
-    B("cost-base-price", [(("model", k), ms, None) for k, ms in grouped(live, lambda M: M.fields["model"]["value"]).items()],
+    B("cost-base-price", [(("model", k), ms, sorted({(M.S.id, snapshot_root(M.S).id) for M in ms}))   # rule R4 reads
+                          for k, ms in grouped(live, lambda M: M.fields["model"]["value"]).items()],     # the chain
       lambda ms, ex: [base_price_step(ctx, M) for M in ms] and None, par=True)
     parts = grouped((M for M in live if M.status["cost"] is None), lambda M: (gkey(M), M.fields["cost"]["part"]))
     B("cost-subsets", [(("group",) + gkey_id(g) + (repr(p),), ms, None) for (g, p), ms in parts.items()],
@@ -3831,10 +3833,11 @@ def base_price_step(ctx, M):
             M.status["cost"] = "out:cost-not-comparable"
             M.detail["cost"] = "no cost-method fact (setting cost_method_unstated = out)"
             return
-        method = f"unstated[{M.S.id}/{C['scope']}]"
+        # rule R4 (the maintainer, 11 Nov 2026): an unwritten method follows the page, the root of snapshot_of,
+        # not each capture of it
+        method = f"unstated[{snapshot_root(M.S).id}/{C['scope']}]"
         M.flags.append("cost-method-assumed-single")
-    cand = [c for c, _ in chains(M, key)]
-    rkey = "/".join(cand[0]) if len(cand) == 1 else "unknown"
+    rkey = price_key(M, C, key, chains(M, key))
     # a cost the total-tokens split prices on the maker's list keeps that list's currency (a group never mixes two)
     C["part"] = (C["basis"], method, C.get("part_unit") or C.get("unit") or "",
                  C.get("part_currency") or C.get("currency") or "?", rkey)
@@ -4210,6 +4213,90 @@ def declared_runs(ctx, measures):
             for M in ms:
                 M.run = rid
                 M.rule("same-run-weight")
+
+
+def snapshot_root(S):
+    """The page a capture belongs to: the root of its snapshot_of chain (itself when it is no snapshot; a chain broken
+    by a source absent from this build stops at the last one present)."""
+    seen = {S.id}
+    while S.doc.get("snapshot_of") and S.doc["snapshot_of"] not in seen:
+        prev = S.ctx.sources.get(S.doc["snapshot_of"])
+        if prev is None:
+            break
+        seen.add(prev.id)
+        S = prev
+    return S
+
+
+def same_list_price(a, b):
+    """Two class-price vectors are one price: input and output in both, every class both list equal, the same
+    long-context thresholds (a router's catalogue lists fewer cache classes than the maker: OpenRouter has no 5-minute
+    cache write)."""
+    if not all(k in a and k in b for k in ("input", "output")):
+        return False
+    if {k.split(":")[0] for k in tiered(a)} != {k.split(":")[0] for k in tiered(b)}:
+        return False
+    return all(abs(a[k] - b[k]) <= 1e-9 * max(1.0, abs(a[k])) for k in set(a) & set(b))
+
+
+def billing_step(ctx, chain):
+    """The route that bills a chain: its first step that is not a harness (close() always ends a chain on one)."""
+    return next((r for r in chain if ctx.routes[r]["class"] != "harness"), "maker-api")
+
+
+def route_price_vs_maker(M, C, key, step):
+    """The route's registered standard prices for the model over the price date (inside the span the route served the
+    model), each read against the maker's list price over the same days: 'same' when every one equals it, 'differs'
+    when one does not (or no maker price covers its days), None when the route has no registered price there. Days of
+    the span with no registered route price are not read (a catalogue first captured a day after the route listed
+    the model)."""
+    ctx = M.ctx
+    pd = C.get("price_date") or {}
+    lo, hi = V.parse_when(pd["lo"]) if pd.get("lo") else None, V.parse_when(pd["hi"]) if pd.get("hi") else None
+    if hi is None:
+        return None
+    e = ctx.routes[step].get("models", {}).get(key) or {}
+    recs = [r for r in (e.get("ids") or (e.get("accepts", []) + e.get("mapping", []) + e.get("default", [])))
+            if overlaps(r, lo, hi)]
+    if recs:                                             # the span the route served the model, inside the price date
+        lo = max(lo or MIN, min(V.when(r["from"]) for r in recs))
+        hi = min(hi, max(V.when(r["to"], True) if r.get("to") is not None else MAX for r in recs))
+    cur = C.get("price_list_currency") or C.get("currency")
+    cfg = (M.fields.get("configuration") or {}).get("value")
+    own = [p for p in std_entries(ctx, key, step, cur, cfg) if overlaps(p, lo, hi)]
+    if not own:
+        return None
+    makers = std_entries(ctx, key, "maker-api", cur, cfg)
+    for p in own:
+        f = max(lo or MIN, V.when(p["from"]))
+        t = min(hi, V.when(p["to"], True) if p.get("to") is not None else MAX)
+        mk = [price_vector(q) for q in makers if overlaps(q, f, t)]
+        if not mk or not all(same_list_price(price_vector(p), v) for v in mk):
+            return "differs"
+    return "same"
+
+
+def price_key(M, C, key, chains_):
+    """The route key of a cost subset (rule R3, the maintainer, 11 Nov 2026): the price applied, not the number of
+    candidate routes nor the state of the registry's knowledge of them.
+    - A stated chain (one candidate): 'maker-api' when it reaches the maker's API or when the route that bills it has
+      registered prices all equal to the maker's list price over the same days; else the route's id (its own price, or
+      a price not registered: the source names the route, its price is not known).
+    - The route unknown (several candidates: the maker's API and every route that served the model at the run date):
+      'unknown' when a candidate route has a registered price that differs from the maker's list price over the same
+      days; else 'maker-api'. A candidate route with no registered price is no evidence of another price: one candidate
+      and several candidates are one key, and a model no router of the registry lists yet is no longer set apart from
+      the models it is measured with (Fable 5.2, 11 Nov 2026: 29 of its 30 cost groups held it alone). Before, the key
+      was the single candidate chain, else 'unknown'."""
+    ctx = M.ctx
+    steps = [billing_step(ctx, ch) for ch, _ in chains_]
+    if len(chains_) == 1:
+        st = steps[0]
+        return "maker-api" if ctx.routes[st]["class"] == "maker-api" or route_price_vs_maker(M, C, key, st) == "same" \
+            else st
+    if any(ctx.routes[st]["class"] != "maker-api" and route_price_vs_maker(M, C, key, st) == "differs" for st in steps):
+        return "unknown"
+    return "maker-api"
 
 
 # ---------------------------------------------------------------- outputs
