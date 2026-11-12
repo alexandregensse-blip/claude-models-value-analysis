@@ -43739,6 +43739,156 @@
      "quote": "\"pricing\":{\"prompt\":\"0.00000015\",\"completion\":\"0.0000006\",\"input_cache_read\":\"0.000000003\",\"overrides\":[{\"utc_days\":[\"saturday\",\"sunday\"],\"prompt\":\"0.00000015\",\"completion\":\"0.0000006\",\"input_cache_read\":\"0.000000003\"},{\"utc_days\":[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"],\"utc_start\":0,\"utc_end\":100,\"prompt\":\"0.00000015\",\"completion\":\"0.0000006\",\"input_cache_read\":\"0.000000003\"},{\"utc_days\":[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"],\"utc_start\":100,\"utc_end\":400,\"prompt\":\"0.0000003\",\"completion\":\"0.0000012\",\"input_cache_read\":\"0.000000006\"},{\"utc_days\":[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"],\"utc_start\":400,\"utc_end\":600,\"prompt\":\"0.00000015\",\"completion\":\"0.0000006\",\"input_cache_read\":\"0.000000003\"},{\"utc_days\":[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"],\"utc_start\":600,\"utc_end\":1000,\"prompt\":\"0.0000003\",\"completion\":\"0.0000012\",\"input_cache_read\":\"0.000000006\"},{\"utc_days\":[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"],\"utc_start\":1000,\"utc_end\":0,\"prompt\":\"0.00000015\",\"completion\":\"0.0000006\",\"input_cache_read\":\"0.000000003\"}]}"
     }
    ]
+  },
+  {
+   "model": "gemini-4-carbon",
+   "route": "maker-api",
+   "currency": "USD",
+   "per": "MTok",
+   "kind": "promotion",
+   "classes": {
+    "input": 2,
+    "output": 10,
+    "cache-read": 0.1
+   },
+   "from": "2026-11-10",
+   "from_basis": "stated",
+   "to": "2026-11-12",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/changelog",
+     "captured": "2026-11-12",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/r2text/g-changelog.md.txt.mdtext.txt",
+     "sha256": "056577f675697b2ec96e2b95bbe6706f1a1b67db11297b66c02818de6919d773",
+     "where": "changelog, November 10, 2026 entry (copy of the research agent s8-r2, a Markdoc copy saved as g-changelog.html; file: its text, Markdoc tags, bullets and rules dropped, integ8 mdtotext.py)",
+     "quote": "available at introductory pricing of $2.00 per 1M input tokens and $10.00 per 1M output tokens through November 30, 2026"
+    },
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/pricing.md.txt",
+     "captured": "2026-11-12T13:18:35Z",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/ai.google.dev_gemini-api_docs_pricing.md.txt.mdtext.txt",
+     "sha256": "d930614a712141649c493beb084979149c94f41a0a15814739edd936380de744",
+     "where": "Standard block of Gemini 4 Carbon block (live capture 12 Nov, integ13; the page https://ai.google.dev/gemini-api/docs/pricing is a script shell: its Markdown copy https://ai.google.dev/gemini-api/docs/pricing.md.txt (file: its text, Markdoc tags, bullets and rules dropped, integ8 mdtotext.py))",
+     "quote": "Gemini 4 Carbon is not available on the Free tier. Every token the model processes is counted and billed, including thinking tokens and internal tool system instructions and function declarations when using grounding. Standard Feature Free Tier Paid Tier, per 1M tokens in USD Input price Not available $2.00 through November 30, 2026. $4.00 starting December 1, 2026. Output price (including thinking tokens) Not available $10.00 through November 30, 2026. $20.00 starting December 1, 2026. Context caching price Not available $0.10 through November 30, 2026. $0.20 starting December 1, 2026."
+    }
+   ],
+   "note": "introductory price with a stated end (a promotion: never a base, as gemini-4-argon). Implicit cache only (explicit caching not supported); 4.00 / 20.00 / 0.20 from 1 Dec 2026 (scheduled, not recorded). Output includes thinking tokens.",
+   "list_after": {
+    "from": "2026-12-01",
+    "classes": {
+     "input": 4.0,
+     "output": 20.0,
+     "cache-read": 0.2
+    }
+   }
+  },
+  {
+   "model": "gemini-4-carbon",
+   "route": "maker-api",
+   "currency": "USD",
+   "per": "MTok",
+   "kind": "batch",
+   "classes": {
+    "input": 1.0,
+    "output": 5.0,
+    "cache-read": 0.05
+   },
+   "factor": 0.5,
+   "from": "2026-11-10",
+   "from_basis": "stated",
+   "to": "2026-11-12",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/changelog",
+     "captured": "2026-11-12",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/r2text/g-changelog.md.txt.mdtext.txt",
+     "sha256": "056577f675697b2ec96e2b95bbe6706f1a1b67db11297b66c02818de6919d773",
+     "where": "changelog, November 10, 2026 entry (copy of the research agent s8-r2, a Markdoc copy saved as g-changelog.html; file: its text, Markdoc tags, bullets and rules dropped, integ8 mdtotext.py)",
+     "quote": "available at introductory pricing of $2.00 per 1M input tokens and $10.00 per 1M output tokens through November 30, 2026"
+    },
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/pricing.md.txt",
+     "captured": "2026-11-12T13:18:35Z",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/ai.google.dev_gemini-api_docs_pricing.md.txt.mdtext.txt",
+     "sha256": "d930614a712141649c493beb084979149c94f41a0a15814739edd936380de744",
+     "where": "Standard, Batch and Flex blocks of Gemini 4 Carbon block (live capture 12 Nov, integ13; the page https://ai.google.dev/gemini-api/docs/pricing is a script shell: its Markdown copy https://ai.google.dev/gemini-api/docs/pricing.md.txt (file: its text, Markdoc tags, bullets and rules dropped, integ8 mdtotext.py))",
+     "quote": "Gemini 4 Carbon is not available on the Free tier. Every token the model processes is counted and billed, including thinking tokens and internal tool system instructions and function declarations when using grounding. Standard Feature Free Tier Paid Tier, per 1M tokens in USD Input price Not available $2.00 through November 30, 2026. $4.00 starting December 1, 2026. Output price (including thinking tokens) Not available $10.00 through November 30, 2026. $20.00 starting December 1, 2026. Context caching price Not available $0.10 through November 30, 2026. $0.20 starting December 1, 2026. Implicit caching only (explicit caching is not supported). Grounding with Google Search * Not available 5,000 free search requests per month (shared across all Gemini 3 and newer models), then $14 per 1,000 requests (subject to a daily cap of 1,500 requests per day). Grounding with Google Maps Not available 5,000 requests per month (free, shared across all Gemini 3 and newer models), then $14 / 1,000 search queries. Used to improve our products Not available No A customer-submitted request to Gemini may result in one or more queries to Google Search. You will be charged for each individual search query performed. Batch Feature Free Tier Paid Tier, per 1M tokens in USD Input price Not available $1.00 through November 30, 2026. $2.00 starting December 1, 2026. Output price (including thinking tokens) Not available $5.00 through November 30, 2026. $10.00 starting December 1, 2026. Context caching price Not available $0.05 through November 30, 2026. $0.10 starting December 1, 2026. Implicit caching only (explicit caching is not supported). Used to improve our products Not available No Flex Feature Free Tier Paid Tier, per 1M tokens in USD Input price Not available $1.00 through November 30, 2026. $2.00 starting December 1, 2026. Output price (including thinking tokens) Not available $5.00 through November 30, 2026. $10.00 starting December 1, 2026. Context caching price Not available $0.05 through November 30, 2026. $0.10 starting December 1, 2026. Implicit caching only (explicit caching is not supported). Used to improve our products Not available No"
+    }
+   ],
+   "note": "Batch block of the Carbon card: every printed class is exactly half of the Standard block of the same capture, so factor 0.5 (as gemini-4-argon); the introductory batch price runs through 30 Nov 2026 like the standard one."
+  },
+  {
+   "model": "gemini-4-carbon",
+   "route": "maker-api",
+   "currency": "USD",
+   "per": "MTok",
+   "kind": "flex",
+   "classes": {
+    "input": 1.0,
+    "output": 5.0,
+    "cache-read": 0.05
+   },
+   "factor": 0.5,
+   "from": "2026-11-10",
+   "from_basis": "stated",
+   "to": "2026-11-12",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/changelog",
+     "captured": "2026-11-12",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/r2text/g-changelog.md.txt.mdtext.txt",
+     "sha256": "056577f675697b2ec96e2b95bbe6706f1a1b67db11297b66c02818de6919d773",
+     "where": "changelog, November 10, 2026 entry (copy of the research agent s8-r2, a Markdoc copy saved as g-changelog.html; file: its text, Markdoc tags, bullets and rules dropped, integ8 mdtotext.py)",
+     "quote": "available at introductory pricing of $2.00 per 1M input tokens and $10.00 per 1M output tokens through November 30, 2026"
+    },
+    {
+     "url": "https://ai.google.dev/gemini-api/docs/pricing.md.txt",
+     "captured": "2026-11-12T13:18:35Z",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/ai.google.dev_gemini-api_docs_pricing.md.txt.mdtext.txt",
+     "sha256": "d930614a712141649c493beb084979149c94f41a0a15814739edd936380de744",
+     "where": "Standard, Batch and Flex blocks of Gemini 4 Carbon block (live capture 12 Nov, integ13; the page https://ai.google.dev/gemini-api/docs/pricing is a script shell: its Markdown copy https://ai.google.dev/gemini-api/docs/pricing.md.txt (file: its text, Markdoc tags, bullets and rules dropped, integ8 mdtotext.py))",
+     "quote": "Gemini 4 Carbon is not available on the Free tier. Every token the model processes is counted and billed, including thinking tokens and internal tool system instructions and function declarations when using grounding. Standard Feature Free Tier Paid Tier, per 1M tokens in USD Input price Not available $2.00 through November 30, 2026. $4.00 starting December 1, 2026. Output price (including thinking tokens) Not available $10.00 through November 30, 2026. $20.00 starting December 1, 2026. Context caching price Not available $0.10 through November 30, 2026. $0.20 starting December 1, 2026. Implicit caching only (explicit caching is not supported). Grounding with Google Search * Not available 5,000 free search requests per month (shared across all Gemini 3 and newer models), then $14 per 1,000 requests (subject to a daily cap of 1,500 requests per day). Grounding with Google Maps Not available 5,000 requests per month (free, shared across all Gemini 3 and newer models), then $14 / 1,000 search queries. Used to improve our products Not available No A customer-submitted request to Gemini may result in one or more queries to Google Search. You will be charged for each individual search query performed. Batch Feature Free Tier Paid Tier, per 1M tokens in USD Input price Not available $1.00 through November 30, 2026. $2.00 starting December 1, 2026. Output price (including thinking tokens) Not available $5.00 through November 30, 2026. $10.00 starting December 1, 2026. Context caching price Not available $0.05 through November 30, 2026. $0.10 starting December 1, 2026. Implicit caching only (explicit caching is not supported). Used to improve our products Not available No Flex Feature Free Tier Paid Tier, per 1M tokens in USD Input price Not available $1.00 through November 30, 2026. $2.00 starting December 1, 2026. Output price (including thinking tokens) Not available $5.00 through November 30, 2026. $10.00 starting December 1, 2026. Context caching price Not available $0.05 through November 30, 2026. $0.10 starting December 1, 2026. Implicit caching only (explicit caching is not supported). Used to improve our products Not available No"
+    }
+   ],
+   "note": "Flex block of the Carbon card: every printed class is exactly half of the Standard block of the same capture, so factor 0.5 (as gemini-4-argon)."
+  },
+  {
+   "model": "gemini-4-carbon",
+   "route": "openrouter",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 2.0,
+    "output": 10.0,
+    "cache-read": 0.1
+   },
+   "from": "2026-11-10",
+   "from_basis": "earliest-capture",
+   "to": "2026-11-12",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20261110192520/https://openrouter.ai/api/v1/models",
+     "captured": "2026-11-10T19:25:20Z",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/r2text/or-models-wb-20261110192520-entries.txt",
+     "sha256": "570c290a8ce7d5a6a08ce5f76ec3bc86381feaf654dbfc2ff7d8380dabd5300b",
+     "where": "data[id=google/gemini-4-carbon].pricing, first capture showing the model (the Wayback copy of the research agent s8-r2 is gzip-compressed: file is its entries, one compact JSON entry per line, integ13)",
+     "quote": "\"pricing\":{\"prompt\":\"0.000002\",\"completion\":\"0.00001\",\"image\":\"0.000002\",\"audio\":\"0.000002\",\"input_audio_cache\":\"0.0000001\",\"web_search\":\"0.014\",\"internal_reasoning\":\"0.00001\",\"input_cache_read\":\"0.0000001\",\"input_cache_write\":\"0.0000001875\"}"
+    },
+    {
+     "url": "https://openrouter.ai/api/v1/models",
+     "captured": "2026-11-12T13:19:54Z",
+     "file": "/work/.salvo14/mig/s8/ev/integ13/openrouter-models-entries-20261112.txt",
+     "sha256": "beb811cf37f77f4ac6fa8767662e69d017bede13eb10d08da0199223db912cf7",
+     "where": "data[id=google/gemini-4-carbon].pricing (live capture 12 Nov, integ13; file: one compact JSON entry per line)",
+     "quote": "\"pricing\":{\"prompt\":\"0.000002\",\"completion\":\"0.00001\",\"image\":\"0.000002\",\"audio\":\"0.000002\",\"input_audio_cache\":\"0.0000001\",\"web_search\":\"0.014\",\"internal_reasoning\":\"0.00001\",\"input_cache_read\":\"0.0000001\",\"input_cache_write\":\"0.0000001875\"}"
+    }
+   ],
+   "note": "OpenRouter catalogue price of google/gemini-4-carbon (Wayback capture of 10 Nov 19:25 UTC and live capture of 12 Nov); a router's own price, not the maker's; not mapped: audio=0.000002, image=0.000002, input_audio_cache=0.0000001, input_cache_write=0.0000001875, internal_reasoning=0.00001, web_search=0.014"
   }
  ],
  "maker_currencies": {
