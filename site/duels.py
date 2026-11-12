@@ -9,18 +9,18 @@ import html as htmlmod, json, math, os, re, sys
 from config import ROOT, SITE_URL, DATA_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER, LEVELS, CAP, EFF
 from grids import panel_score
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import MODELS, DISPLAY_ORDER
+from config import MODELS, DISPLAY_ORDER   # the catalogue's, with the site's additions (site/config.py)
 
 FILE  = "claude-models-head-to-head.html"
 URL   = SITE_URL + FILE
 TITLE = "Fable vs Opus vs Sonnet vs Haiku: Claude models head-to-head"
 DESCRIPTION = ("Fable vs Opus vs Sonnet vs Haiku, effort by effort: what each Claude model costs against another, "
                "and the cheapest setting that matches its quality.")
-LEDE_PAIRS = ["fable-5.1|opus-5.5", "opus-5.5|sonnet-5.5"]              # the two findings stated in the lede
-CURRENT = ["fable-5.1", "opus-5.5", "sonnet-5.5", "haiku-5.5"]           # the latest model of each family
-SUCCESSION = [("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
+LEDE_PAIRS = ["fable-5.2|opus-5.5", "opus-5.5|sonnet-5.5"]              # the two findings stated in the lede
+CURRENT = ["fable-5.2", "opus-5.5", "sonnet-5.5", "haiku-5.5"]           # the latest model of each family
+SUCCESSION = [("fable-5.2", "fable-5.1"), ("fable-5.1", "fable-5"), ("opus-5.5", "opus-5"), ("sonnet-5.5", "sonnet-5")]
 REACH = 0.84
-LEGACY = ["opus-4.7", "sonnet-4.6", "opus-4.8"]                                 # hidden on the main page (site/app.js)
+LEGACY = ["opus-4.7", "sonnet-4.6", "opus-4.8", "fable-5"]                                 # hidden on the main page (site/app.js)
 # CAP and EFF (a label, and the wording inside a sentence) are site/config.py's, as app.js capE; AT is "model at <setting>"
 AT = lambda e, solo="": {"solo": solo, "nothink": " with thinking off", "think": " with thinking on"}.get(e, f" at {EFF[e]}")
 

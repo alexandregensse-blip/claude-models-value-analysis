@@ -47,9 +47,9 @@ slightly from the curve at its θ; the page uses the curve, so that a couple's l
 
 ## 4. Older models
 
-The page shows the latest model of each family and the one before it; older ones — Opus 4.8, Opus 4.7, Sonnet 4.6 —
-are hidden by default, and an *Older models* switch shows them (Opus 4.8 joined them on 1 Oct 2026, two generations
-behind Opus 5.5). Hidden models leave the charts, the matrices, the frontier, the tiers and the crown: every
+The page shows the latest model of each family and the one before it; older ones — Fable 5, Opus 4.8, Opus 4.7,
+Sonnet 4.6 — are hidden by default, and an *Older models* switch shows them (Opus 4.8 joined them on 1 Oct 2026, two
+generations behind Opus 5.5; Fable 5 on 12 Nov 2026, two generations behind Fable 5.2). Hidden models leave the charts, the matrices, the frontier, the tiers and the crown: every
 recommendation is computed over the models on screen, and the cheapest couple is the cheapest one on screen. The price
 trend never includes them (§ 8).
 
@@ -86,7 +86,7 @@ day, since it let a couple strictly beaten by another be picked.
 
 ## 8. Price trend
 
-What a given quality costs today, fitted on every couple of the **latest model of each family** (Fable 5.1, Opus 5.5,
+What a given quality costs today, fitted on every couple of the **latest model of each family** (Fable 5.2, Opus 5.5,
 Sonnet 5.5, Haiku 5.5), dominated ones included — the going rate of the models on sale, not their frontier:
 
     ln cost = a + λ·θ
@@ -186,7 +186,7 @@ moves only when its content (text, figures, data) changes.
 ## 15. The head-to-head page
 
 `claude-models-head-to-head.html`, written by `site/duels.py` from the same grids: every pair of the latest model of
-each family (Fable 5.1, Opus 5.5, Sonnet 5.5, Haiku 5.5), and each of them against its predecessor. Costs are
+each family (Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5), and each of them against its predecessor. Costs are
 multiples of the cheapest couple shown on the main page (older models of § 4 left out), scores the expected panel
 score of § 2.
 

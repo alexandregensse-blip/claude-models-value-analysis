@@ -5,7 +5,7 @@ import hashlib, json, math, os, sys
 
 from config import ROOT, EFFORT_ORDER, LEVELS
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import DISPLAY_ORDER   # the site shows the Claude models; the fit may hold others (the global fit)
+from config import DISPLAY_ORDER   # the site shows the Claude models; the fit may hold others (the global fit)
 
 FIT_CACHE = os.path.join(ROOT, "model", "fit-cache.json")
 

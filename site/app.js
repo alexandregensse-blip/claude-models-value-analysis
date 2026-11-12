@@ -8,8 +8,8 @@ const capE=e=>e==="solo"?"solo":(CAPE[e]||e);                    // as a label: 
 const tagE=e=>e==="nothink"?"no think":e==="think"?"think":e;      // as a label on a chart point
 const atE=e=>e==="solo"?"":e==="nothink"?" with thinking off":e==="think"?" with thinking on":` at ${e==="xhigh"?"xHigh":e} effort`;   // in a sentence
 const TOP_FIRST=["max","xhigh","high","medium","low","minimal","think","nothink","solo"];   // the top effort of a model
-const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8"];              // older models: hidden unless the reader turns them on
-const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-5.5"];  // the latest model of each family: the price trend's couples
+const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8","fable-5"];              // older models: hidden unless the reader turns them on
+const CURRENT=["fable-5.2","opus-5.5","sonnet-5.5","haiku-5.5"];  // the latest model of each family: the price trend's couples
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -84,7 +84,7 @@ const tgl=(id,on,label,hint,fn)=>`<button type="button" role="switch" class="tgl
   +`<span class="tgl-track" aria-hidden="true"><span class="tgl-knob"></span></span><span class="tgl-state">${on?"ON":"OFF"}</span>`
   +`<span class="tgl-label">${label}</span>${hint?`<span class="tgl-hint">${hint}</span>`:""}</button>`;
 function renderControls(){
-  const legacy=id=>tgl(id,showLegacy,"Older models","Opus 4.7 · Sonnet 4.6","toggleLegacy");
+  const legacy=id=>tgl(id,showLegacy,"Older models","Fable 5 · Opus 4.8 · Opus 4.7 · Sonnet 4.6","toggleLegacy");
   const b=document.getElementById("ctrlB"), p=document.getElementById("ctrlP");
   const ovals=id=>tgl(id,showOvals,"Uncertainty ovals","","toggleOvals");
   const bands=id=>tgl(id,showBands,"Tier bands","","toggleBands");
@@ -475,7 +475,7 @@ function drawValueMatrix(){
 // (label / type / verified config note).
 const GROUPS = __GROUPS_DATA__;
 const GMODEL = {
- "fable-5.1":{l:"Fable 5.1",c:"--fable51",cur:1},"fable-5":{l:"Fable 5",c:"--fable5",cur:1},
+ "fable-5.2":{l:"Fable 5.2",c:"--fable52",cur:1},"fable-5.1":{l:"Fable 5.1",c:"--fable51",cur:1},"fable-5":{l:"Fable 5",c:"--fable5",cur:1},
  "opus-5.5":{l:"Opus 5.5",c:"--opus55",cur:1},"opus-5":{l:"Opus 5",c:"--opus5",cur:1},"opus-4.8":{l:"Opus 4.8",c:"--opus48",cur:1},
  "opus-4.7":{l:"Opus 4.7",c:"--opus47",cur:1},"sonnet-5.5":{l:"Sonnet 5.5",c:"--sonnet55",cur:1},"sonnet-5":{l:"Sonnet 5",c:"--sonnet5",cur:1},
  "sonnet-4.6":{l:"Sonnet 4.6",c:"--sonnet46",cur:1},"haiku-5.5":{l:"Haiku 5.5",c:"--haiku55",cur:1},"haiku-4.5":{l:"Haiku 4.5",c:"--haiku45",cur:1},

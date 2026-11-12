@@ -9,7 +9,7 @@ the repository root (`index.html`, `claude-models-head-to-head.html`, `robots.tx
 | File | Role |
 |---|---|
 | `build.py` | the generator: `python3 site/build.py` (Python standard library and Node.js only) |
-| `config.py` | where the page is published, its titles, ownership keys, the data file's URL (`DATA_URL`), the configurations' order and labels |
+| `config.py` | where the page is published, its titles, ownership keys, the data file's URL (`DATA_URL`), the configurations' order and labels, the models shown (the catalogue's `display_order` and colours, plus a model added between two fits: `SHOW_BEFORE`, `COLOUR`) |
 | `grids.py` | reads the fit's cache, checks its fingerprint and convergence; the effort-ladder report (thinking off a rung below the levels, or a switch compared with thinking on only: vocab maker `thinking`) |
 | `sources.py` | the sources table from the rows of `data/build/data.csv` in the fit, their groups through `data/build/group-map.json` to `data/catalog/groups.json` |
 | `seo.py` | head tags and JSON-LD, root files, the date of the last content change (`content-date.json`) |

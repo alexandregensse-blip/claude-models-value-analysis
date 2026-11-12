@@ -11,7 +11,7 @@ from seo import content_date, content_fingerprint, head_tags, write_root_files
 from sources import groups_data
 import duels
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import DISPLAY_ORDER, MODELS
+from config import DISPLAY_ORDER, MODELS   # the catalogue's, with the site's additions (site/config.py)
 
 def effort_columns(CG):
     """The effort columns of the two matrices: the five levels `low` … `max` always, `nothink` and `minimal` before them
