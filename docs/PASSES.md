@@ -5,6 +5,23 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit of 12 Nov 2026, and the page's header counts
+
+**Fit.** Data of 8e5e27c (the findings chain), `lqm_ext4.stan`, nutpie on both axes, converged: cost R̂ 1.0083, ESS
+526 / 1,806 at 13,500 draws per chain (13 extensions; the slowest parameter was Anthropic's couple × task-type spread on
+cost, close to zero); quality R̂ 1.0066, ESS 1,048 / 2,128 at 2,700 draws per chain; no divergence. Cost 9,746 rows in
+1,170 groups, quality 22,153 rows in 2,316 groups. Published as v2026.11.12; Fable 5.2 shown afterwards (12 Nov, main
+49db04e), Fable 5 moved to the older models.
+
+**Header counts.** The page's header counts the sources, benchmarks and measurements of the groups that have a shown
+Claude couple in the fit. From v2026.10.21 to v2026.11.12 it went from 574 sources · 1,927 benchmarks · 8,509
+measurements to 332 · 1,545 · 7,100 (334 · 1,556 · 7,353 once Fable 5.2 is shown). Of the 575 source ids of
+v2026.10.21, 288 remain; of the 287 others, 47 no longer exist as sources (the makers' charts, system cards, docs,
+cookbooks and launch posts are now one source per maker: `anthropic`, `openai`, `google`, `xai`, `deepseek`,
+`moonshot`), 226 have all their Claude rows out of the fit (mostly effort not established: 1,024 Claude rows), 12 have
+no Claude row, 2 keep Claude rows under another group. 46 sources entered. The drop comes from the count by publisher and
+from the rule that a row whose effort is not established stays out of the fit.
+
 ## Salvo s5, integration 2: the maintainer's decisions of 5 Nov 2026, names, remaining conversions
 
 **Method.** No fit, no web, no agent. Scripts S/s5/integ2/py/ of the session's scratchpad (decisions.py, names.py,
