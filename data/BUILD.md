@@ -1796,3 +1796,29 @@ corrections:
   tools and W&R (Opus 5.5 and Fable 5.1 there are lqm republications of the Fable 5.1 card), FrontierCode.
 - Fit tables (lqm): quality 22,174 → 22,153 rows, cost 9,665 → 9,746 rows, 352 / 288 couples unchanged. Tests
   `cost_route_key_is_price_applied`, `cost_method_unstated_follows_page`, `precheck_isolated_couples`.
+
+## Added on 12 Nov 2026 (integration 12: salvo s8, the maintainer's decisions of 12 Nov; no code changed)
+
+- **Salvo s8** (lots k8-fable52, k8-conv-1, k8-conv-2; their VERIF files applied): 39 sources, 456 measures. New
+  captures carry snapshot_of (Artificial Analysis model pages, CursorBench, lmcouncil); the 90 rows of the AA model pages
+  of 12 Nov all bring a cost and output tokens per task that no held capture has (their scores equal the leaderboards'
+  of 9 Nov: the later capture supersedes within the campaign); CursorBench's 3 new rows only (89 rows, 86 held).
+  Copies linked row by row (same-runs-as with `held`): aiagentstore ← Hex DataBench (20) and OckBench (5), kingy.ai ←
+  the AA model pages of 15 Oct (index to the rounding; its costs differ, noted), mpgone M21 ← AA 12 Nov, lmcouncil's
+  WeirdML high / max ← Epoch's weirdml_external.
+- **OpenRouter route of Fable 5.2**: the records held back on 11 Nov enter with the model page of 12 Nov as a second
+  proof, valid to that capture (the price to the registry's as_of).
+- **Opus 4.7 without thinking**: retort8 is « default » (effort not established, like retort49); WeirdML « no thinking »
+  (lmcouncil) and Epoch's two 0.764 records are one run, counted once on lmcouncil's side with its effort; tinybird's
+  rows carry a version fact by harness (results committed before 21c77839 of 17 Jun, between it and bb8f8799 of 27 Jul,
+  after): each harness version is its own campaign; 40 rows without a results commit stay apart (no version).
+- **D57** (decision 2): AA-Briefcase keeps its last capture only: the 143 aabriefcase measures (model pages of 15, 19
+  and 21 Oct) go out on quality (kind measure; was kind run, 44 pairs at 1/k).
+- **Decision 3** (a principal chosen by us): 9 headlines kept (the source states the result in that metric, quoted in
+  the setup note); 10 of arXiv 2610.25078 (« the first metric is assumed ») take basis run-share (their run sets were
+  already shared: no weight changes); SCBench left to the maintainer.
+- **Decision 7**: the cookbook's race setup split by its levers (fast mode, prefetch, bigger pages: eight setups);
+  OpenAI's GPT-5.5 page: 38 cells that repeat table 0 or the effort charts linked to the held cell (restated-from +
+  same-runs-as in the same document), the Terminal-Bench 2.0 rows moved from oai55-t-browsecomp to
+  oai55-t-terminal-bench-2-0.
+- Lists and scripts: the session's S/s8/integ12/ (RAPPORT.md, AVANT-APRES.txt, logs/, py/).

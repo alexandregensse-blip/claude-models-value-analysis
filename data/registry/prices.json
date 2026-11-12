@@ -25985,6 +25985,43 @@
    "note": "FAST MODE (premium variant, up to 2.5x faster output): its own price variant, NOT the base; stacks with caching multipliers and data residency; not available with the Batch API (salvo s7, k7-anthropic proposal added by integration 9, 10 Nov 2026)"
   },
   {
+   "model": "fable-5.2",
+   "route": "openrouter",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 8.0,
+    "output": 40.0,
+    "cache-read": 0.2,
+    "cache-write-1h": 16.0
+   },
+   "from": "2026-11-09T19:49:41Z",
+   "to": "2026-11-10",
+   "from_basis": "stated",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://openrouter.ai/anthropic/claude-fable-5.2",
+     "captured": "2026-11-10",
+     "file": "/work/.salvo14/mig/s7/ev/s7-boards/openrouter-fable-5-2.html",
+     "sha256": "6dea75a1a1ebe2d048a07780758ae0ceff88ac616d1caad08c9839dbed36c16e",
+     "where": "model page payload, endpoint pricing (USD per token: prompt 0.000008 = 8 / MTok, completion 0.00004 = 40, input_cache_read 0.0000002 = 0.20, input_cache_write_1h 0.000016 = 16)",
+     "quote": "\\\"pricing\\\":{\\\"prompt\\\":\\\"0.000008\\\",\\\"completion\\\":\\\"0.00004\\\",\\\"input_cache_read\\\":\\\"0.0000002\\\",\\\"input_cache_write\\\":\\\"0.00001\\\",\\\"input_cache_write_1h\\\":\\\"0.000016\\\""
+    },
+    {
+     "url": "https://openrouter.ai/anthropic/claude-fable-5.2",
+     "captured": "2026-11-12",
+     "file": "/work/.salvo14/mig/s8/ev/s8-fable52/openrouter-fable-5-2.html",
+     "sha256": "8d4b0a7c16d77016e4878b04f8b3faef12fce0ba6911503d9d8984ba669c908c",
+     "where": "model page payload, endpoint pricing (USD per token: prompt 0.000008 = 8 / MTok, completion 0.00004 = 40, input_cache_read 0.0000002 = 0.20, input_cache_write_1h 0.000016 = 16) (capture of 12 Nov 2026)",
+     "quote": "\\\"pricing\\\":{\\\"prompt\\\":\\\"0.000008\\\",\\\"completion\\\":\\\"0.00004\\\",\\\"input_cache_read\\\":\\\"0.0000002\\\",\\\"input_cache_write\\\":\\\"0.00001\\\",\\\"input_cache_write_1h\\\":\\\"0.000016\\\"",
+     "note": "integration 12 of salvo s8 (12 Nov 2026): held back on 11 Nov 2026 (S/corr3/held), entered with the model page saved on 12 Nov 2026 (salvo s8, lot k8-fable52, AVANCEMENT #1: slug anthropic/claude-fable-5.2, created_at 2026-11-09T19:49:41.747Z, 4 providers, prices identical to the maker, levels low…max, default high) as a second capture; validity extended to that last capture (the maintainer's consigne of 12 Nov 2026)"
+    }
+   ],
+   "note": "OpenRouter's price for Claude Fable 5.2, identical to the maker's list price (8 / 40 / 0.20 / 16 $ per MTok; release notes of 9 Nov 2026); input_cache_write (0.00001 = 10, the maker's 5-minute write) left out as in the other OpenRouter entries (the window is not named). model page of Claude Fable 5.2 on OpenRouter saved 10 Nov 2026 (salvo s7, source src-openrouter-model-page-claude-fable-5-2-2026-11-10); added 11 Nov 2026 (the maintainer: « corrige », the isolation of Fable 5.2 on the cost axis, ANA.md correction 1) | integration 12 of salvo s8 (12 Nov 2026): held back on 11 Nov 2026 (S/corr3/held), entered with the model page saved on 12 Nov 2026 (salvo s8, lot k8-fable52, AVANCEMENT #1: slug anthropic/claude-fable-5.2, created_at 2026-11-09T19:49:41.747Z, 4 providers, prices identical to the maker, levels low…max, default high) as a second capture; validity extended to that last capture (the maintainer's consigne of 12 Nov 2026) | integration 12 of salvo s8 (12 Nov 2026): captured to 2026-11-12; the entry ends at the registry's as_of (2026-11-10), a price ending at its last capture"
+  },
+  {
    "model": "mythos-5.2",
    "route": "maker-api",
    "kind": "standard",
