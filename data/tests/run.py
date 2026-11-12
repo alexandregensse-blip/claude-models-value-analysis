@@ -509,6 +509,39 @@ def route_unknown_never_presumed():
 
 
 @test
+def candidate_route_served_span():
+    # the maintainer, 12 Nov 2026 (rule candidate-route-served-span): when the route is not written, a candidate route is
+    # evaluated only over the part of the run interval where it serves the model. ARC Prize, Fable 5.2 max: the run lies
+    # between the release (9 Nov 00:00) and the capture (10 Nov); OpenRouter serves the model from 9 Nov 19:49:41 only,
+    # accepting max there: before, it is no possible route, so maker-api (max) and OpenRouter (max) agree
+    sc = base()
+    lv = ("low", "medium", "high", "xhigh", "max")
+    sc.model("f52", configs=lv, released="2026-11-09")
+    late = lambda **kw: dict(iv("2026-11-09T19:49:41Z", "2026-11-12", from_basis="stated",  # noqa: E731
+                                to_basis="last-capture"), **kw)
+    whole = lambda **kw: dict(iv("2026-11-01", "2026-11-12", from_basis="earliest-capture",  # noqa: E731
+                                 to_basis="last-capture"), **kw)
+    sc.route("orl", "router", spellings=["ORL"], models={"f52": {
+        "ids": [late(name="orl/f52")], "accepts": [late(configuration=c) for c in lv]}})
+    sc.route("orw", "router", spellings=["ORW"], models={"f52w": {
+        "ids": [whole(name="orw/f52w")], "mapping": [whole(requested="max", served="high")]}})
+    sc.model("f52w", configs=lv, released="2026-11-09")
+    s = sc.source("arc", published="2026-11-10")
+    mx = ("effort-setting", "max")
+    m1 = sc.m(s, model="f52", effort=[mx], run_date=[("run-end", "2026-11-10")])
+    m2 = sc.m(s, model="f52w", effort=[mx], run_date=[("run-end", "2026-11-10")])
+    m3 = sc.m(s, model="f52", effort=[mx], run_date=[("run-end", "2026-11-09")])
+    r = sc.run()
+    eq(r.cfg(m1), "max", "orl weighed from 19:49 only: maker-api max, orl max → agree")
+    eq("candidate-route-served-span" in r[m1]["rules_used"], True, "rule candidate-route-served-span recorded")
+    eq(r.q(m2), "out:effort-not-established",
+       "negative: a route serving the whole interval with another level (max → high) disagrees with maker-api")
+    eq(r[m2]["fields"]["configuration"]["detail"].startswith("candidate routes disagree"), True, "disagreement named")
+    eq("candidate-route-served-span" in r[m2]["rules_used"], False, "negative: the whole interval, no restriction")
+    eq(r.cfg(m3), "max", "a run ending 9 Nov: orl serves only the evening of 9 Nov, weighed there and agrees")
+
+
+@test
 def router_maker_levels():
     # the maintainer, 3 Nov 2026: « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les transmet
     # tels quels, sauf là où sa doc documente une conversion pour ce modèle. » A route-wide accepts_maker record adds the

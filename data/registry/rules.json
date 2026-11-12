@@ -325,6 +325,20 @@
    "ref": "docs/DATA-PIPELINE.md §5.1 step 6"
   },
   {
+   "id": "candidate-route-served-span",
+   "kind": "standing",
+   "statement": "When the route is not written, a candidate route other than the maker's API is evaluated only over the part of the run interval where it serves the model (its dated records for the model, clipped to the run interval); before or after that part it is no possible route. The maker's API candidate keeps the whole interval (never presumed: it is weighed, not chosen). The configuration is accepted only if every candidate, each on its own part, agrees.",
+   "inputs": [
+    "route",
+    "run date",
+    "routes.json records of the model"
+   ],
+   "output": "route chain evaluation interval (computed)",
+   "date": "2026-11-12",
+   "decided_by": "the maintainer",
+   "ref": "data/BUILD.md §5.1 item 8 (12 Nov 2026)"
+  },
+  {
    "id": "pro-via-router-out",
    "kind": "standing",
    "statement": "A Pro (or other) mode run through a router that cannot separate it from the base model is out: its model is not established.",

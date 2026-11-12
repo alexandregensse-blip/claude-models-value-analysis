@@ -363,6 +363,15 @@ marked **(method)** remain method questions for the maintainer.
      or a route's default for `no-effort-sent`) over every candidate and accepts it only if all agree; otherwise
      `not-established:absent`, detail "candidate routes disagree: …". A closed harness whose label is the level
      (`closed-harness-label`, 26 Oct) still closes its chain with `maker-api`.
+   - **(the maintainer, 12 Nov 2026: « une route candidate n'est évaluée que sur la part de l'intervalle du run où elle
+     sert le modèle »)** Each candidate route other than `maker-api` is evaluated over its own part of the run
+     interval: from the earliest start to the latest end of its dated records for the model that overlap the run
+     (`ids`, else `accepts` / `mapping` / `default`), clipped to the run interval (`route_served_span`,
+     `candidate_interval`; rule `candidate-route-served-span`). Before or after that part it is no possible route. The
+     maker's API candidate keeps the whole interval (weighed, never presumed). Example: ARC Prize's 10 Nov capture,
+     Fable 5.2 max, a run between the release (9 Nov 00:00) and the capture; OpenRouter serves the model from
+     2026-11-09T19:49:41Z and accepts max there: maker-api → max, OpenRouter (from 19:49:41) → max, they agree. A route
+     serving the whole interval with another level still disagrees (test `candidate_route_served_span`).
    - Only the `route` slot builds the chain: a harness in the `harness` slot or a route named in another slot's
      sentence is not read. On 2 Nov the routes the converters had already cited for the run were added to the
      `route` slots (a harness-slot fact naming one route, with its `term`; a model-api-id whose prefix names a route;
@@ -1822,3 +1831,14 @@ corrections:
   same-runs-as in the same document), the Terminal-Bench 2.0 rows moved from oai55-t-browsecomp to
   oai55-t-terminal-bench-2-0.
 - Lists and scripts: the session's S/s8/integ12/ (RAPPORT.md, AVANT-APRES.txt, logs/, py/).
+
+## Added on 12 Nov 2026 (integration 13: the maintainer's decisions 8 to 13 of 12 Nov)
+
+- **Candidate routes over the part they serve** (decision 10; item 8 above, rule `candidate-route-served-span`; method
+  change, before / after of the rule alone in the session's S/s8/integ13/AVANT-APRES-regle.txt): with the route not
+  written, a candidate route is weighed only over the part of the run interval where its dated records serve the model.
+  Effect against fafcfae: 816 quality and 262 cost measures change status, none from an established configuration to
+  not established (rows kept by lqm: quality 22,093 → 22,370, cost 10,007 → 10,047; couples unchanged). Fable 5.2
+  takes back the boards captured on 10 Nov (OpenRouter from 9 Nov 19:49:41); a model released the day before
+  OpenRouter or Fireworks listed it (Opus 4.8 from 29 May, DeepSeek V3.2 on Fireworks from 11 May) no longer loses
+  every run that began before.

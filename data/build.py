@@ -1516,9 +1516,51 @@ def step_filter(ctx, key, chain, i):
     return on
 
 
+def route_served_span(ctx, rid, key, iv):
+    """The part of the run interval iv over which route rid serves the model (its dated records for the model, as
+    route_serves_model reads them): from the earliest start to the latest end of those overlapping iv, clipped to iv.
+    An unclamped early-access start (lo None) stays unclamped only when a record starts at the release."""
+    e = ctx.routes[rid].get("models", {}).get(key) or {}
+    recs = e.get("ids") or (e.get("accepts", []) + e.get("mapping", []) + e.get("default", []))
+    lo, hi, ea = iv
+    ov = [r for r in recs if overlaps(r, lo, hi)]
+    if not ov:
+        return iv
+    f = min(V.when(r["from"]) for r in ov)
+    t = max(V.when(r["to"], True) if r.get("to") is not None else MAX for r in ov)
+    if lo is None:
+        if ea and any(r.get("from_basis") == "release" for r in ov):
+            nlo, nea = None, ea
+        else:
+            nlo, nea = f, False
+    else:
+        nlo, nea = max(lo, f), ea if f <= lo else False
+    return nlo, min(hi, t), nea
+
+
+def candidate_interval(M, key, how):
+    """The interval a candidate chain is evaluated on (rule candidate-route-served-span, the maintainer, 12 Nov 2026:
+    « une route candidate n'est évaluée que sur la part de l'intervalle du run où elle sert le modèle »). When the
+    route is not written, a candidate route other than the maker's API is weighed only over the part of the run
+    interval where its dated records serve the model; before (or after) that part it is no possible route. The
+    maker's API candidate, a stated chain and a harness-closed chain keep the whole run interval."""
+    iv = run_interval(M, key)
+    if not how.startswith("candidate ") or how == "candidate maker-api":
+        return iv
+    return route_served_span(M.ctx, how[len("candidate "):], key, iv)
+
+
 def over_chains(M, key, fn):
-    """Evaluate fn(chain) over the candidate chains; accepted only if all agree."""
-    res = [(how, fn(ch)) for ch, how in chains(M, key)]
+    """Evaluate fn(chain, interval) over the candidate chains, each on its own interval (candidate_interval); accepted
+    only if all agree."""
+    res = []
+    iv = run_interval(M, key)
+    for ch, how in chains(M, key):
+        piv = candidate_interval(M, key, how)
+        if piv != iv:
+            M.rule("candidate-route-served-span")
+            how = f"{how} (serving from {piv[0].isoformat() if piv[0] else 'early access'} to {piv[1].isoformat()})"
+        res.append((how, fn(ch, piv)))
     vals = {r[0] for _, r in res}
     if len(res) == 1:
         return res[0][1]
@@ -1682,7 +1724,7 @@ def configuration(M, key):
     def via_chain(req, step, ref, kind):
         # the route chain applies to every requested configuration, also one the model does not list (a router's
         # nearest supported level); what comes out must be one of the model's configurations to match
-        cfg, lv, d = over_chains(M, key, lambda ch: serve(M, key, ch, req, iv, configs))
+        cfg, lv, d = over_chains(M, key, lambda ch, piv: serve(M, key, ch, req, piv, configs))
         if cfg and not in_list(cfg, configs):
             d = (d + "; " if d else "") + f"{cfg} is not one of the model's configurations"
         reqs[len(results)] = req
@@ -1694,7 +1736,7 @@ def configuration(M, key):
         if "think" in configs or not any(c in configs for c in LEVELS):
             via_chain("think", step, ref, kind)
             return
-        cfg, lv, d = over_chains(M, key, lambda ch: default_via(M, key, ch, iv, configs))
+        cfg, lv, d = over_chains(M, key, lambda ch, piv: default_via(M, key, ch, piv, configs))
         if cfg:
             M.rule("thinking-on-default-level")
             if "level-from-default" not in M.flags:
@@ -1774,7 +1816,7 @@ def configuration(M, key):
                 via_chain(lv[k - 1], 5, f.ref, s)
         elif s == "no-effort-sent":
             M.rule("no-effort-setting")
-            cfg, lv, d = over_chains(M, key, lambda ch: default_via(M, key, ch, iv, configs))
+            cfg, lv, d = over_chains(M, key, lambda ch, piv: default_via(M, key, ch, piv, configs))
             results.append((7, cfg if cfg else "default", lv if cfg else "not-established:absent", d, f.ref, s))
     for ref, sel in M.selects:
         via_chain(sel, 3, ref, "name-selects")
