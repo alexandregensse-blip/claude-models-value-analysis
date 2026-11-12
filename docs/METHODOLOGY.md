@@ -14,7 +14,9 @@ the examples in parentheses only illustrate it.
   quality and cost and puts no order between them: the ladder is how the page reads them, not a constraint (§5).
 - **Row** — one published measurement of one couple: a cost, a score, or both.
 - **Group** — the rows one source measured on the same task under the same configuration (a leaderboard column, a
-  system-card chart, a paper's table). Only within a group are two couples directly comparable.
+  system-card chart, a paper's table). In the build a group is one benchmark setup × one publisher × one campaign (a
+  version of a board), and on the cost axis also one cost subset (§2, today's prices). Only within a group are two
+  couples directly comparable.
 - **Publisher** — whoever produced the numbers. Outlets of one organisation that publish its own measurements (its
   system cards, blog charts and documentation) are one publisher; the list is kept in a table.
 - **Benchmark family** — the groups that run the same benchmark: same task set, same version, same grading,
@@ -27,10 +29,26 @@ the examples in parentheses only illustrate it.
 
 ### What is recorded
 
-One line per measurement: the group, the source, the model, the effort, the task type and complexity, the harness,
-the cost unit (per task, per attempt, per run), the cost in dollars, the input and output tokens, the score and its
-metric, the cache-read share, a free-text **confound** field, the reference (URL, page, file), and the **reading
-precision** of the cost and of the score (§4).
+Since 29 Oct 2026 the fit reads the tables of the **findings chain** (`data/build.py`; `docs/DATA-PIPELINE.md`,
+`data/BUILD.md`). Each source is recorded as **facts**: what it says, as it says it — a value as written, its
+certainty level (written, read off a chart, an estimate of the source's own, not established), its locator, and the
+exact quote it is read from (the table cell and what identifies its row and column, for a data file), with the URL
+and the capture date of the page. Agents write the facts only, reading every value line by line; a measure file says
+which facts form one measurement and on which benchmark setup. A measurement whose facts lack their proof is out
+(`out:no-proof`). What is defined rather than read lives in **registries** (`data/registry/`): the models (the names
+each was served under, its configurations, documented defaults and conversions, each dated), the routes (makers'
+APIs, resellers, routers, hosts, harnesses: what each passes on, dated), the benchmarks (families, setups, versions,
+headline metric, direction, composites), the publishers (and the maker each speaks for), the dated prices, and the
+rules, each dated with who decided it; the maintainer's per-measurement decisions are in one file (`data/decisions.json`),
+evaluated first. The build computes, by a fixed decision tree, each measurement's model, configuration, run date,
+campaign and price, and its status on each axis with its reason; the public data file (`data/build/data.csv`) holds
+every measurement with both statuses. A few rows of the earlier one-line data file (`raw-data.csv`, frozen on
+21 Oct 2026) still pass through unchanged (10 on each axis on 12 Nov 2026).
+
+The fit tables keep one line per measurement: the group, the source, the model, the effort, the task type and
+complexity, the harness, the cost unit (per task, per attempt, per run), the cost in dollars, the input and output
+tokens, the score and its metric, the cache-read share, the flags (**confound** field), the reference (URL, page,
+file), the run (§5, k_r) and the **reading precision** of the cost and of the score (§4).
 
 ### Admission
 
@@ -39,10 +57,21 @@ precision** of the cost and of the score (§4).
 - **The effort is read, not assumed.** The effort level comes from the source's own configuration (a flag, a payload
   field, a documented default). A run with thinking disabled is the configuration *nothink*, a run with thinking on of
   a model that has only that switch is *think*, a run of a model with no setting is *solo*: each is a couple of its
-  own, in the computation, when the model's registry lists it. A run whose effort cannot be established is recorded as
-  *default*, and a cost computed from list prices blended over a token mix as *priceblend*; these stay in the data file
-  but outside the computation. A configuration the fit does not take (*between-tools*, a mode of one model that is
+  own, in the computation, when the model's registry lists it. The configuration requested is followed along the
+  route the run took — harness, then router, reseller or host, then the maker — each step as the registry documents it
+  at the run date. A route the source does not name (no route at all, only a harness, or one the registry cannot
+  resolve) is unknown and never presumed to be the maker's API (the maintainer, 2 Nov 2026): every route that served
+  the model at the run date, the maker's API included, is evaluated, and the configuration is accepted only if all give
+  the same; a harness that hands every call to one route (Claude Code → the maker's API) closes the chain. A run whose
+  effort cannot be established is recorded as *default*, and a cost computed from list prices blended over a token mix
+  as *priceblend*; these stay in the data file but outside the computation. A configuration the fit does not take (*between-tools*, a mode of one model that is
   recorded but not fitted) stays in the data file too.
+- **Every run is dated.** A measurement's run interval comes from the dates its source states (a run date, a start, an
+  end); otherwise its lower bound is the model's release and its upper bound the earliest of the source's publication,
+  the first capture showing the value and the commit. A date that does not say it is the run date bounds the run from
+  above only; a time without its time zone is widened by a day on each side. The model a name served and the configuration
+  a route or a default gave are read over that interval — an interval that straddles a change leaves the field
+  ambiguous, and the measurement out —, and so are the prices that may have applied (below).
 - **Primary sources only.** A number is taken from the publisher's own table, payload, chart or repository. A
   secondary quotation of a number already recorded is not a new measurement.
 - **Measured spend over list price.** The cost is what the run actually spent, including cache reads and writes,
@@ -59,6 +88,13 @@ precision** of the cost and of the score (§4).
   of run — long agent sessions that re-read their context every turn, one-shot `claude -p` calls, plain API calls —
   and the spread of that ratio across those sources is added to the row's reading error (§4), so an estimated cost
   weighs less than a measured one (`data/precision/repricing.json`; flag `cache-cut-2026-10-07` with the old value).
+  Every cost of the fit is at the current price (the maintainer, 3 Nov 2026): a cost none of these brings to it, whose
+  prices over its price date are all registered and share the current price's classes and long-context tiers, is put there by a **price
+  band** — between its value times the smallest and the largest per-class ratio of the current to the old price (a run
+  mostly of input tokens, mostly of output) — at the band's middle, the band's width added to its reading error
+  (uniform, width / √12); a cost no band reaches is left out (`out:cost-not-comparable`). Within one setup, costs of
+  different bases (billed, estimated from tokens at list prices…), methods, units, currencies or routes are never put
+  in one group: each part is its own cost subset.
 - **Charts are digitised and checked** against any number the same document prints in its text, and flagged; the
   resolution of every digitised chart is measured (§4).
 - **Early access.** A run its source dates before the model's public release is flagged (§5: its noise is inflated
@@ -75,9 +111,13 @@ precision** of the cost and of the score (§4).
   source or its maker — an alias that served several models, a default effort not documented for the run's date, a
   mode its source does not document — stays in the data file with its flag, outside the computation, as *default*
   above.
-- **Flag, do not drop.** Doubts (cost basis undocumented, a fallback model served part of the run, an effort inferred
-  from order, a digitised value) are written in the confound field. A source is excluded only when it breaks a rule
-  above.
+- **Doubt keeps a row out, and the row stays recorded.** Every field the decision tree reads (model, configuration,
+  run date, value, setup, price) carries a certainty level; a measurement enters an axis only when each is written by
+  the source, read off its chart, or computed from such facts by a registered rule. An estimate of the source's own, an
+  assumption (an effort inferred from a marker's order alone), a contradiction or an ambiguity keeps it out, with its
+  reason, in the data file. Lesser doubts, resolved by a standing rule (a cost method assumed to be one per table, a closed harness's label
+  taken as the level it sends), are written as flags. A source
+  is excluded only when it breaks a rule above.
 
 ## 3. From rows to groups
 
@@ -88,8 +128,11 @@ precision** of the cost and of the score (§4).
 - **Composites count once.** An index, an average or a total over several benchmarks repeats the measurements of
   its components. The components of each composite are listed from its publisher's documentation (for instance the
   ten benchmarks of the Artificial Analysis Intelligence Index v4.3, or the published formula of the Vals Index). For
-  a couple measured on at least one component, the composite row is left out; a couple measured only on the
-  composite keeps it, and a composite none of whose components is in the data is kept whole.
+  a couple measured on at least one component, the composite row is left out; a linear composite (a published weighted
+  mean) then keeps, for that couple, only its residual for the missing components — (composite − Σ present weight ×
+  component) / Σ missing weight, a measurement of its own; a couple measured only on the composite keeps it, and a
+  composite none of whose components is in the data is kept whole. Components a table gives without a declared
+  composite enter with its final score as one run (§5, k_r).
 - **One execution counts once.** A run printed twice — a system card reprinting the previous card's series, the
   same run drawn on two charts, a leaderboard copying a vendor's table — is one measurement. Two rows are the same
   execution when their values agree within what separates two copies of one number: both reading precisions (§4),
@@ -102,6 +145,15 @@ precision** of the cost and of the score (§4).
   one (a miscopy); when only one axis can tell, on all of them and three at least. The execution's rows are kept
   once, on both axes, in the larger group. A few coincidences among many shared values, or two runs that both reach
   100 %, are not a republication.
+- **Versions of one board.** A board re-scored within one version replaces the earlier value (a new campaign keeps
+  both). Two versions of one board in one source are the same runs re-graded when at least two shared couples have
+  identical costs (the closeness test above, on the costs as written) and a score differs (the maintainer, 11 Nov
+  2026): couple by couple, a couple whose cost is identical is one run — its cost counts once, in the latest version,
+  and its scores in the versions are one run's measurements, each 1/k (§5, k_r); a couple whose cost differs was re-run
+  and stays apart. Before the fit, `model/precheck.py` stops it when two cost groups still share identical costs (to
+  one part in 10⁹) on three couples or more — copies that no rule above recognised, whose common effect would absorb
+  their residuals and freeze the cost axis (fit of 10 Nov 2026, R̂ 6.8) — until the copy is resolved or the
+  coincidence proven from the sources and declared.
 - **Groups without information.** A group with a single couple says nothing about a difference, nor does a group
   whose couples all sit at the same bound (every couple at 100 %). Both stay in the data and the counts, not in the
   fit. A tie away from the bounds (two couples at 79.3 %) is information — the couples are equal — and is kept.
@@ -226,7 +278,8 @@ score can be used without knowing which benchmark produced it.
 
 ### Weighting
 
-No weight is chosen per source or per benchmark; each contribution follows from the model. The fixed constants are
+No weight is chosen per source or per benchmark; each contribution follows from the model. The one weight set by
+rule is k_r: one source's k quality measurements of one run each weigh 1/k (rule same-run-weight, §5 Model). The fixed constants are
 the 100-step limit of §4 and the prior constants above; the tails of the noise and the down-weighting of early-access
 runs are estimated.
 
@@ -351,8 +404,10 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   (`model/fit-cache.json`, with a fingerprint of the data, the model and its settings); building the page does not need
   Stan. The fitting environment is pinned in `model/requirements-fit.txt`.
 
-Before a fit, `model/precheck.py` stops a run whose data carry a score beyond its label's bound, reports groups that
-look like the same runs under two metrics and fractions above 1, and runs a short fit of each axis, quality then cost (2
+Before a fit, `model/precheck.py` stops a run whose data carry a score beyond its label's bound, two cost groups that
+share identical costs (§3, versions of one board), or a memory need too close to the machine's limit; it reports groups
+that look like the same runs under two metrics, fractions above 1, one couple twice in a group with discordant values,
+and couples whose cost groups hold almost no other model; and it runs a short fit of each axis, quality then cost (2
 chains of 50 warm-up and 150 draws), that must reach R̂ ≤ 2.0 on both before the full fit starts: it only checks
 that the fit sets off in roughly the right direction (a chain trapped in a remote region shows there already).
 
@@ -360,9 +415,9 @@ A fit is published only if, on every parameter and read-out, the rank-normalised
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
 refuses one that misses any of them. The Monte Carlo error of every displayed value is stored with
 it, and the build reports any value whose error exceeds half of its last displayed digit: such a figure could change
-by one unit in a refit with another seed. In the current fit: the cost of Fable 5.1, Fable 5 and Opus 5.5 at max
-(about ±0.5 on multiples of 190–300 shown to the unit, against intervals of about ±9 %) and the quality of Opus 4.8
-*solo* (±0.06 point, against an interval of about ±4.6 points); they are shown as they are.
+by one unit in a refit with another seed. In the fit of 12 Nov 2026: the cost of Fable 5.2, Fable 5.1, Fable 5 and
+Opus 5.5 at max (±0.5 to ±1.0 on multiples of 250–380 shown to the unit, against intervals of ±6 % to ±25 %) and the
+quality of Opus 4.7 with thinking off (±0.09 point, against an interval of 62–80 %); they are shown as they are.
 
 ### Fixed values
 
@@ -475,8 +530,9 @@ value of each couple, the four tiers and the crown, the sources table — is des
   under an unrelated group, or one that changed every value beyond a rounding, would count twice.
   Composites are matched to their components from their publisher's documentation; an undocumented composite would
   count its components twice.
-- Costs are what each source measured at the prices of its day; a price change a source did not report is not
-  corrected, and the data file has no measurement date to apply one systematically.
+- Costs are put on the current price from the prices registered over each run's dates; a price the registry does not
+  hold (a discount a source did not report, a private rate) is not corrected, and a run dated only by wide bounds is
+  re-priced over the whole interval, or left out.
 - The other makers' couples are fitted by the same rules, from the groups collected for this report; their figures are
   not published here. A maker's home effect is one shift for all its models and both of its publications' kinds.
 - The cost of the largest models rests heavily on their vendor's system cards; removing that publisher moves some

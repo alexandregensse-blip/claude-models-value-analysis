@@ -59,7 +59,8 @@ One row per model, one column per configuration: *low* … *max* always, and *th
 and *thinking on* (after *max*) when a model shown has them; each cell is the cost multiple with its interval, coloured on a heat scale
 (log cost, from the cheapest to the dearest couple). Rows are ordered by the expected score of the model at its highest
 published effort. A model without a setting (*solo*) fills a single merged cell across all the columns; an unpublished couple
-is shown as a dash.
+is shown as a dash. A model the catalogue flags as size-sensitive (`flag_task_size` in `data/catalog/models.json`: a verbose model,
+whose cost swings widely between short and long agentic tasks) carries a *size-sensitive* tag.
 
 A second matrix gives every couple's **value index** (§ 9) with its 16–84 % range (r ± √(h_x² + λ²·h_θ²)), same rows.
 Its colours follow the data: green above 100, red below, each side scaled to the most extreme index shown (log scale).

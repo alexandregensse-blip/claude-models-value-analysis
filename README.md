@@ -26,23 +26,33 @@ Models covered: **Fable 5.2, Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opu
 Scores from different benchmarks do not share a scale, and raw dollars from different tasks are not comparable, so
 the report fuses the measurements with a **latent-quality model** (`model/lqm.py`). In short:
 
-1. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness,
-   one scale; a group that mixes them is split. An index is left out for a couple whose index components are in the data.
-2. **Each metric on its natural scale.** Logit for a bounded score, log for money, points and cost, as is for an Elo
-   or an unknown composite — read from the metric's label, never from the benchmark's identity. Every value carries
+1. **Every number traced to its source.** Each source is a set of facts — the value, the exact quote or table cell,
+   the URL and capture date — read by agents line by line; registries of models, routes, benchmarks, publishers and
+   dated prices let one build (`data/build.py`, a fixed decision tree) decide each measurement's model, configuration
+   and price. Every run is dated; a route the source does not name is never presumed to be the maker's API; every cost
+   is put on the current price, or left out; at the least doubt a measurement stays out of the fit.
+2. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness,
+   one scale, one version of a board; a group that mixes them is split. An index keeps, for a couple whose index
+   components are in the data, only what its missing components add, or is left out.
+3. **Each metric on its natural scale.** Logit for a bounded score, log for money, points and cost, as is for an Elo
+   or an unknown composite — read from the metric's label, never from the benchmark's identity; a score where lower
+   is better (the benchmark's registry says so) is turned in its unit first. Every value carries
    its reading precision: the rounding of a printed number, the resolution and own error of a digitised chart.
-3. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
+4. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
    matter); every `(model, effort)` couple (the effort is the configuration: a level, `nothink` for thinking off, `think` for the on position of an on/off model, `solo` for a model without a setting) has one latent quality and one latent cost, atomic — no model × effort
    separability is assumed and no order between a model's configurations. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
-   or one kind of task from tilting the result, with sizes estimated per model maker; a maker's own charts about its
-   own models carry an estimated home effect, left out of every read-out. Student-t noise with estimated tails;
+   or one kind of task from tilting the result, with sizes estimated for each model maker on its own (not tied across
+   makers, `model/lqm_ext4.stan`); a maker's own charts about its own models carry an estimated home effect, left out
+   of every read-out. Student-t noise with estimated tails;
    early-access runs down-weighted by an estimated factor. No couple is a reference inside the fit. The fit takes every
    maker's couples measured in the data (OpenAI, Google, xAI, DeepSeek, Qwen, GLM, Kimi beside Claude): they link more
-   groups; the page shows the Claude couples. Fitted in Stan.
-4. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
-   publisher's weight saturates at its own systematic effect. One execution counts once: a run reprinted, drawn on
-   two charts or scored with two metrics is recognised by its values (score and cost agreeing within their precisions).
-5. **Output**: quality = the latent quality θ, shown as the expected score averaged over the benchmark panel; cost =
+   groups; the page shows the Claude couples. Fitted in Stan, sampled by nutpie on both axes.
+5. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
+   publisher's weight saturates at its own systematic effect; one source's k quality measurements of one run weigh
+   1/k each. One execution counts once: a run reprinted, drawn on two charts or scored with two metrics is recognised
+   by its values (score and cost agreeing within their precisions); versions of one board that re-grade the same runs
+   count them once, and two cost groups still sharing identical costs stop the fit.
+6. **Output**: quality = the latent quality θ, shown as the expected score averaged over the benchmark panel; cost =
    cost on a task of typical size, shown as a multiple of the cheapest couple. No couple is a reference; each couple
    carries its own 16–84 % interval. A couple measured by a single publisher is not shown.
 
@@ -143,7 +153,7 @@ region — looked at every 250 iterations, warm-up included — restarts alone o
 - **Which couples a source measures is not random.** The fusion absorbs the level and the type of the tasks each source chose, not a selection on another axis.
 - **Public-data ceiling.** Independent measurements of cost *and* quality on the same task are scarce; an internal run on a representative workload remains the intended final validation.
 
-Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Prices reflect published rates at time of writing.
+Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Costs are put on each model's current published price (`data/registry/prices.json`).
 
 ## Licence and citation
 
