@@ -870,6 +870,135 @@ def diagnostics_of_a_run_stopped_at_one_draw():
             eq(str(e), "cannot convert float NaN to integer", "negative control")
 
 
+PEEK_BEFORE = "8e5e27c"                                             # model/peek.py loading the whole store
+
+
+@test
+def peek_streaming():
+    """model/peek.py (12 Nov 2026): split-R̂ accumulated block by block, one variable, one chain and one block of draws
+    at a time, equal to the R̂ on all the draws at once — on nutpie's zarr store, on the committed parts (two parts:
+    their chains put together) and on CmdStan's CSV files (an incomplete last row left out), with --last; a chunk not
+    yet on disk leaves its draws out, a torn chunk is read again then cut, both said. Negative control: the peek of
+    8e5e27c crashes on the torn chunk."""
+    need("numpy", "zarr")
+    import contextlib, io, numpy as np, zarr
+    sys.path.insert(0, MODEL)
+    import peek
+    rng = np.random.default_rng(5)
+    C, D, K, CH = 4, 200, 5, 16
+    th = rng.normal(size=(C, D, K)); th[3, :, 2] += 3.0              # chain 4 elsewhere on theta[3]
+    th[:, :, 4] = np.cumsum(rng.normal(size=(C, D)), 1)               # a slow-mixing one
+    nu = rng.normal(size=(C, D))
+    lp = rng.normal(-50, 1, size=(C, D))
+
+    def ref(lo=0, hi=D):
+        r = [(peek.rhat(th[:, lo:hi, j]), "theta", j) for j in range(K)] + [(peek.rhat(nu[:, lo:hi]), "nu", 0)]
+        return sorted(r, key=lambda t: -t[0])
+
+    def run(path, *args, block=None):
+        saved = peek.BLOCK, peek.PAUSE
+        peek.BLOCK, peek.PAUSE = block or peek.BLOCK, 0
+        try:
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                res = peek.main([path, "--no-names", *args])
+        finally:
+            peek.BLOCK, peek.PAUSE = saved
+        return res, out.getvalue()
+
+    def same(res, want, what):
+        got = sorted(res["rhat"], key=lambda t: (t[1], t[2]))
+        want = sorted(want, key=lambda t: (t[1], t[2]))
+        eq([(k, j) for _, k, j in got], [(k, j) for _, k, j in want], what + ": the parameters")
+        d = max(abs(a[0] - b[0]) for a, b in zip(got, want))
+        if d > 1e-12:
+            raise AssertionError(f"{what}: R̂ off by {d}")
+    tmp = tempfile.mkdtemp(prefix="peek-")
+    try:
+        # nutpie's store: chunks of 16 draws, blocks of 2 chunks (the block size made small)
+        store = os.path.join(tmp, "run", "seg", "store")
+        g = zarr.open_group(store, mode="w")
+        po, ss = g.create_group("posterior"), g.create_group("sample_stats")
+        po.create_array("theta", shape=(C, D, K), chunks=(1, CH, K), dtype="f8", fill_value=np.nan)[:] = th
+        po.create_array("nu", shape=(C, D), chunks=(1, CH), dtype="f8", fill_value=np.nan)[:] = nu
+        ss.create_array("logp", shape=(C, D), chunks=(1, CH), dtype="f8", fill_value=np.nan)[:] = lp
+        dv = np.zeros((C, D), bool); dv[1, 7] = dv[2, 150] = True
+        ss.create_array("diverging", shape=(C, D), chunks=(1, CH), dtype=bool, fill_value=False)[:] = dv
+        res, out = run(os.path.join(tmp, "run"), block=8 * CH * K * 2)
+        same(res, ref(), "zarr")
+        eq((res["n"], res["divergences"], res["rhat"][0][1:]), (D, 2, ("theta", 2)), "zarr: draws, divergences, worst")
+        if "theta[3] " not in out.split("worst: ")[1].split(";")[0]:
+            raise AssertionError(f"zarr: the worst in Stan's 1-based indexing, got {out!r}")
+        res, _ = run(os.path.join(tmp, "run"), "--last", "120", block=8 * CH * K * 2)
+        same(res, ref(D - 120, D), "zarr --last 120")
+        eq(res["divergences"], 1, "zarr --last 120: the divergences of the window")
+        # a chunk of nu not on disk yet (chain 1, draws 160 on): its draws left out, said
+        g2 = zarr.open_group(os.path.join(tmp, "short", "seg", "store"), mode="w")
+        p2, s2 = g2.create_group("posterior"), g2.create_group("sample_stats")
+        p2.create_array("theta", shape=(C, D, K), chunks=(1, CH, K), dtype="f8", fill_value=np.nan)[:] = th
+        a = p2.create_array("nu", shape=(C, D), chunks=(1, CH), dtype="f8", fill_value=np.nan)
+        a[:, :160] = nu[:, :160]; a[[0, 2, 3], 160:] = nu[[0, 2, 3], 160:]
+        s2.create_array("logp", shape=(C, D), chunks=(1, CH), dtype="f8", fill_value=np.nan)[:] = lp
+        res, out = run(os.path.join(tmp, "short"))
+        same(res, ref(0, 160), "a chunk not on disk")
+        if "not all on disk" not in out:
+            raise AssertionError(f"a chunk not on disk: not said, {out!r}")
+        # a torn chunk (theta, chain 3, chunk 8 = draws 128–143): read again, then the draws cut at 128, said
+        torn = os.path.join(tmp, "run", "seg", "store", "posterior", "theta", "c", "2", "8", "0")
+        open(torn, "wb").write(open(torn, "rb").read()[:20])
+        res, out = run(os.path.join(tmp, "run"))
+        same(res, ref(0, 128), "a torn chunk")
+        if "could not be read" not in out:
+            raise AssertionError(f"a torn chunk: not said, {out!r}")
+        try:
+            src = subprocess.run(["git", "-C", ROOT, "show", f"{PEEK_BEFORE}:model/peek.py"], capture_output=True,
+                                 text=True, check=True).stdout
+        except (OSError, subprocess.CalledProcessError):
+            src = None
+        if src is not None:
+            ns = {"__file__": os.path.join(MODEL, "peek.py"), "__name__": "peek_before"}
+            exec(compile(src, "peek_before.py", "exec"), ns)
+            try:
+                ns["nutpie"](os.path.join(tmp, "run", "seg"))
+                raise AssertionError("negative control: the peek of 8e5e27c read the torn chunk")
+            except AssertionError:
+                raise
+            except Exception:
+                pass
+        # the committed parts: chains 1–3 in p0, chain 4 in p1, laid out (draws, chains, *shape)
+        run_dir = os.path.join(tmp, "parts")
+        parts = []
+        for k, cs in enumerate(([0, 1, 2], [3])):
+            os.makedirs(os.path.join(run_dir, f"p{k}"))
+            for v, x in (("theta", th), ("nu", nu), ("lp__", lp)):
+                np.ascontiguousarray(np.swapaxes(x[cs], 0, 1)).tofile(os.path.join(run_dir, f"p{k}", v + ".f64"))
+            parts.append(dict(engine="nutpie", chains=len(cs), draws=D, dir=f"p{k}", stats=dict(divergences=k + 1)))
+        json.dump(dict(key="x", shapes=dict(theta=[K], nu=[], lp__=[]), parts=parts),
+                  open(os.path.join(run_dir, "manifest.json"), "w"))
+        res, _ = run(run_dir, block=8 * K * 3 * 7)
+        same(res, ref(), "parts")
+        eq(res["divergences"], 3, "parts: the divergences of the manifest")
+        res, _ = run(run_dir, "--last", "101", block=8 * K * 3 * 7)
+        same(res, ref(D - 101, D), "parts --last 101")
+        # CmdStan's CSV files (a continuation in seg/): comments, the header, an incomplete last row
+        seg = os.path.join(tmp, "csv", "seg")
+        os.makedirs(seg)
+        for c in range(C):
+            with open(os.path.join(seg, f"out_{c + 1}.csv"), "w") as f:
+                f.write("# model = lqm\n" + ",".join(["lp__", "accept_stat__", "divergent__"]
+                                                     + [f"theta.{j + 1}" for j in range(K)] + ["nu"]) + "\n")
+                for d in range(D):
+                    f.write(",".join(repr(float(x)) for x in [lp[c, d], 0.9, dv[c, d], *th[c, d], nu[c, d]]) + "\n")
+                f.write("# Elapsed\n" + ("1.0,0.9" if c == 0 else "") + "\n")
+        res, out = run(os.path.join(tmp, "csv"), block=8 * 9 * 13)
+        want = [(r, f"theta.{j + 1}" if k == "theta" else "nu", 0) for r, k, j in ref()]
+        same(res, want, "cmdstan")
+        eq(res["divergences"], 2, "cmdstan: divergences")
+        if "theta[3] " not in out.split("worst: ")[1].split(";")[0]:
+            raise AssertionError(f"cmdstan: the worst as theta[3], got {out!r}")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 if __name__ == "__main__":
     fails = skips = 0
     for t in TESTS:
