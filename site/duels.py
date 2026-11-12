@@ -9,7 +9,7 @@ import html as htmlmod, json, math, os, re, sys
 from config import ROOT, SITE_URL, DATA_URL, SITE_NAME, TITLE as HOME_TITLE, EFFORT_ORDER, LEVELS, CAP, EFF
 from grids import panel_score
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from config import MODELS, DISPLAY_ORDER   # the catalogue's, with the site's additions (site/config.py)
+from catalog import MODELS, DISPLAY_ORDER
 
 FILE  = "claude-models-head-to-head.html"
 URL   = SITE_URL + FILE

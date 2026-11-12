@@ -4,8 +4,7 @@ import csv, os, sys
 
 from config import ROOT
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import GROUP_DISPLAY, GROUP_MERGE
-from config import DISPLAY_ORDER
+from catalog import DISPLAY_ORDER, GROUP_DISPLAY, GROUP_MERGE
 import build_lqm
 
 DATA = os.path.join(build_lqm.BUILD, "data.csv")      # the build's public data file (data/build.py)

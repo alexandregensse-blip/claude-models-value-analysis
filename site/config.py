@@ -1,25 +1,9 @@
-"""Site settings: where it is published, its titles and ownership keys; the models shown and their colours."""
-import os, sys
+"""Site settings: where it is published, its titles and ownership keys."""
+import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT  = os.path.join(ROOT, "index.html")   # the served files are generated at the repository root
-sys.path.insert(0, os.path.join(ROOT, "data"))
-import catalog
-
-# The models the site shows, in legend order (DISPLAY_ORDER), with their label and colour variable (MODELS): the
-# catalogue's (data/catalog/models.json), with the site's own additions below. data/catalog/models.json is one of the
-# fit's inputs (model/fit.py INPUTS, fingerprinted in model/fit-cache.json): editing its display_order or a colour
-# there makes the cached fit stale and the site refuses to build. A model added to the page between two fits goes
-# here — SHOW_BEFORE {model: the shown model it is placed before}, COLOUR {model: its colour variable, site/style.css}
-# — and moves into models.json at the next fit (Fable 5.2, 12 Nov 2026).
-SHOW_BEFORE = {"fable-5.2": "fable-5.1"}
-COLOUR = {"fable-5.2": "--fable52"}
-DISPLAY_ORDER = list(catalog.DISPLAY_ORDER)
-for _m, _b in SHOW_BEFORE.items():
-    if _m not in DISPLAY_ORDER:
-        DISPLAY_ORDER.insert(DISPLAY_ORDER.index(_b), _m)
-MODELS = {m: dict(v, **({"colour": COLOUR[m]} if m in COLOUR else {})) for m, v in catalog.MODELS.items()}
 
 # Publication: every absolute URL derives from SITE_URL (canonical root, trailing slash).
 SITE_URL    = "https://claude-models.agensse.com/"
