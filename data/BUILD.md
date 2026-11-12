@@ -1842,3 +1842,26 @@ corrections:
   takes back the boards captured on 10 Nov (OpenRouter from 9 Nov 19:49:41); a model released the day before
   OpenRouter or Fireworks listed it (Opus 4.8 from 29 May, DeepSeek V3.2 on Fireworks from 11 May) no longer loses
   every run that began before.
+- **Prices and records to 12 Nov** (decision 11, « à faire à chaque intégration sans demander »; method of integration
+  8): the models.json and prices.json records of the fit's models that ended at the 10 Nov capture are extended to
+  2026-11-12 where today's copy of the same page still holds their quote (models.json 189, prices.json 201 + 2 Kimi rows
+  read by hand, the page now writing each row as an array of cells); prices.json `as_of` 2026-11-12. Five OpenRouter
+  prices changed (DeepSeek V4 Flash / V4 Pro previews, GPT-5.6 Sol 4 / 20 → 4.4 / 22 $, Qwen3.5 9B, DeepSeek V4.1 Flash
+  1017 now priced by UTC hour like the maker's: peak as standard, off-peak at half): the old record stops at 10 Nov, a
+  new one starts at the 12 Nov capture. Models outside the fit are not extended (their records end on 10 Nov; the
+  validator warns that some have no maker price in force at the as_of). Copies: /work/.salvo14/mig/s8/ev/integ13/.
+- **D65, AA-Briefcase on the cost axis** (decision 8): the last capture only, as D57 on quality: the cost of 8
+  aabriefcase measures goes out where a later aa5-aa-briefcase capture holds the same run (identical cost).
+- **SCBench « % Checkpoints »** (decision 9): not converted. The saved copy of the board
+  (/work/.salvo14/mig/convert-scbench.ai/) is no longer on disk; the findings hold each row as « GPT 5.5 (High) | Codex |
+  0.124.0 | 14.29 | 28.06 | $1.51 | 0.494 | 0.269 », whose columns the legacy row names Strict Solve, Iso Solve, $/CKPT,
+  erosion, verbosity: no column of the held text is « % Checkpoints ». Left to the maintainer.
+- **dsebastien** (decision 12): its three costs come from Artificial Analysis's model pages of 27–29 Sep (Intelligence
+  Index cost per task); linked same-runs-as to the AA model pages of 15 Oct (the same index runs, the cost re-estimated
+  by AA after the cache-read cut of 7 Oct), as kingy.ai's copy: the copy counts once, in AA's capture.
+- **Gemini 4 Carbon** (decision 13): key gemini-4-carbon (models.json, prices.json, OpenRouter in routes.json; a fit
+  model of data/catalog/models.json, not displayed), each element quoted from the copies of the research agent s8-r2;
+  Epoch's Fable 5.2 page: its Gemini 4 Carbon column converted (9 measures). The rows naming it (CursorBench, Cognition,
+  Zapier, the Fable 5.2 announcement and its copies, llm-stats, Epoch) resolve to the key by name.
+- Lists and scripts: the session's S/s8/integ13/ (RAPPORT.md, AVANT-APRES.txt, AVANT-APRES-regle.txt, py/).
+
