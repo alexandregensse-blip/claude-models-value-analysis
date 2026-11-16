@@ -199,3 +199,54 @@ score of § 2.
   A match near the threshold can flip with a refit.
 - Ratios read as on the main page: "3.5× cheaper", "1.6× dearer". A model flagged size-sensitive (§ 5) keeps its
   note.
+
+## 16. The multi-site draft (models.agensse.com)
+
+A draft, built locally only and not served: `python3 site/multisite.py` writes `out/models/` (gitignored): the
+**global page** (`index.html`) and one page per model maker (`claude/`, `openai/`, `google/`, `xai/`, `deepseek/`,
+`qwen/`, `glm/`, `kimi/`), with `llms.txt`, `robots.txt`, `summary.json` (per page: size, couples shown, counts,
+the full answer, the effort-ladder inversions) and the icons. It reuses the Claude page — `app.js`, `body.html`,
+`style.css`, the pre-render — with the per-site settings of `site/makers.json`, applied as exact replacements that
+stop the build when one no longer applies. `python3 site/build.py` and the files it writes are unchanged.
+
+- **Same rules as §§ 1–14** on every page: publication by two publishers or more, the frontier, the price trend, the
+  value, the tiers and the crown, all computed **among the page's couples on screen**. A couple is shown when it is
+  published on **both** axes (the ones a chart can place); on the Claude page every cost couple has its quality.
+- **Global page**: by default, the **current models of every maker, and the couples of older models that no other
+  model of the same maker strictly beats** — no couple of another model of that maker (its own builds and modes do
+  not count) both costs less and scores more, on the published centres. The frontier, the tiers and the crown are
+  taken among these; *Older models* adds the beaten couples. The price trend is fitted on the current models. One hue
+  per maker, its models in steps of lightness; Claude's model names carry "Claude".
+- **Maker pages**: the maker's models in its own colours (the Claude page keeps the catalogue's), its tiers and
+  crown among its own couples, its price trend on its current models; the maker's older models are hidden by default,
+  as on the Claude page (§ 4).
+- **Families** — one place, `families` in `site/makers.json`: per catalogue key its family, `current` (the latest
+  model of its family: the trend's couples, always shown on the global page) and `hidden` (hidden by default on its
+  maker's page). `python3 site/import_families.py` fills it from the families salvo (`families.tsv` per maker, with
+  the makers' pages as evidence): current = status `current`; an unknown status, or "not a model", is not current;
+  shown on the maker's page = current, or followed by a current key (the latest model and the one before); a line
+  that is not current follows its model. `family_overrides` holds a user decision the files do not carry (Gemini 3.1
+  Pro current beside Gemini 4 Argon). Claude's keys are not there: the Claude maker page follows the Claude page — its
+  models, labels and colours from the catalogue (`display_order`), current = `CURRENT` and hidden = `LEGACY` of
+  `site/duels.py`, and the page's own generation card. A catalogue key with no family entry is shown and not current.
+- **Lines** (the catalogue's `line`: a dated build, a preview, OpenAI's Pro mode): separate couples of one model,
+  each with its own effort ladder. They share the model's colour and its single legend entry; the first is drawn
+  solid, the others dashed or dotted with hollow points, and the legend lists each with its stroke and what it is
+  ("0813 build", "preview", "Pro"; the undated build is "original release", the model beside its Pro mode
+  "standard"). Chart labels, tooltips and table rows give the full name ("DeepSeek V4.1 Flash 1017 build").
+- **Sources table**: the groups that measured at least one couple shown on the page, with those couples; sources
+  are counted by publisher (`data/catalog/publishers.json`). A group without a verified configuration note shows "—".
+  The Claude page at the repository root still lists every Claude couple a group measured, efforts outside the fit
+  included, so its counts are larger.
+- **Price variants** (a promotion, an off-peak rate): the published cost is the list price without promotion
+  (DeepSeek at its peak rate). A variant is the same couple at another price: a hollow diamond at cost × its ratio,
+  joined to the couple by a dotted line and tagged (promo, off-peak); its label in the tooltip; under the couple's
+  cost in the matrix and the frontier table, and its value index in the value matrix. It never enters the frontier,
+  the trend, the tiers or the crown, and a variant whose `until` is past is dropped. Read from the first file of
+  `price_variants` in `site/makers.json` that exists: `site/price_variants.json` (the repricing salvo's file), else
+  `site/price_variants.mock.json`, a mock the draft banner then names.
+- **Draft**: every page carries a banner and a `noindex` tag while `draft` in `site/makers.json` is set (the pages
+  are not published). An empty `draft` removes both and writes the sitemap.
+- **A fit that no longer matches its inputs** stops the build, as on the Claude page. `--stale-fit` builds a local
+  preview from it anyway — the couples and values of the last fit, the sources table from today's data — and says so
+  in the banner; it is never the published build.
