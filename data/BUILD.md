@@ -2005,3 +2005,40 @@ corrections:
   14 Oct, LMArena, AA of 9–10 Nov: 321 quality measures leave). Precheck without smoke: no blocking; `??` listed (Vals CyberBench and
   Terminal-Bench 4 values of GPT-5.6 Sol / GPT-6 Sol: the update texts of an older date against the tables); the `!!` of check 9 list the records
   not re-verifiable (prices 19 models, routes 47, model sheets 6). The sealed build gives identical tables.
+
+## Recheck of 16 Nov 2026 (the 72 items of check 9)
+The maintainer, 16 Nov 2026: « si un prix est pas a jour depuis longtemps, il faut verifier », « 3 jours », then « go agent ». Integration 15 had left 72
+`!!` of check 9 (prices of 19 models, routes of 47, model sheets of 6) with the reason « the page no longer lists them », which had not been read.
+Each of the 72 items was re-read one by one (S/s10/recheck/TABLEAU.md, one line each; pages recaptured on 16 Nov 2026 over HTTPS, copies and
+SHA256SUMS in /work/.salvo14/mig/s10/ev/recheck/; S/s10/recheck/py/ext17.py), not attached by pattern.
+- **Extended to 16 Nov** (same content found again, quote taken from the live page or from its pinned replacement): the Claude Code effort tables
+  (the page now says « Fable models low … max » and « Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5 default to medium, Opus 4.7 xhigh, others high »:
+  every default of the ten Claude models agrees), the harness code (harbor main ec6aeab7, mini-swe-agent 04d809ce still its HEAD, gemini-cli
+  4ed06ed0: the same lines; the dating commits through the GitHub API), the DeepSeek / GLM / Kimi K3 / Qwen / Gemini documentation pages (the
+  page moved: Kimi K3's default is now read on its own quickstart, gemini-3.1-flash-lite's on the thinking page, qwen3.8-27b's on the new
+  wording of the Alibaba reference), the OpenRouter reasoning-tokens page (the sentence of haiku-4.5's budget conversion was reworded), glm-4.7-flash
+  and glm-5.3-flashx (same prices, new markup).
+- **New dated record** (price changed): OpenRouter deepseek-v4-flash-0731 0.04 / 0.08 / 0.016 → 0.06 / 0.18 / 0.015, deepseek-v4.1-flash 0.15 / 0.60 /
+  0.003 → 0.14 / 0.42 / 0.0042, glm-5.2 0.6496 / 2.0416 / 0.12064 → 0.007 / 6.8 / 0.006 (as listed, an unusual ratio), glm-5.3-flash 0.09 / 0.30 / 0.018
+  → 0.0399 / 0.0784 / 0.03, qwen3.8-27b 0.42 / 3.0 / 0.085 → 0.15 / 1.875 / 0.0375: from 16 Nov (the day of the change not known); the old record keeps its end.
+- **Retired, with an end the pages state** (record closed at that date, `to_basis: stated`, the page's sentence cited): the codex-cli records of gpt-5.1,
+  gpt-5.1-codex(-max, -mini), gpt-5.2(-codex), gpt-5.3-codex, gpt-5.4, gpt-5.4-mini end at the commit that removes their entry from
+  codex-rs/models-manager/models.json (all 42 commits of the file since March read: 316cf0e9 20 Apr, b7807380 8 Jul, eb7bd64e 9 Sep, 694d8d45 24 Sep; main
+  95946fa lists 12 slugs, none of them); the Gemini batch and flex records of gemini-3-pro, gemini-3.1-flash-lite-preview, gemini-3.5-flash and
+  gemini-3.7-flash end with the model (changelog: shut down 9 Mar, 25 May; deprecated 8 Oct), like their standard records; the CNY records of
+  deepseek-v4-flash-0731 end 10 Sep 2026 04:00 UTC like the USD ones; the conversions of the two DeepSeek previews end with the preview (30 Jul, 12 Aug).
+- **Retired, no end found** (the fact written in the note of the record or of the model entry, nothing invented; these stay in the `!!` of check 9):
+  glm-5-turbo and glm-5v-turbo (row gone from docs.z.ai pricing; docs.bigmodel.cn still lists the CNY price; OpenRouter 1.2 / 4 / 0.24), qwen3-8b,
+  qwen3-coder-next and qwen3.6-max-preview (not on the Alibaba pricing page, models page, retirement policy), the OpenRouter ids of qwen3-8b,
+  qwen3.8-max, gemini-3-pro, gpt-5.3-chat-latest, grok-4.1-fast (not among the 468 entries of 16 Nov), kimi-k2.6 (its quickstart now serves the Model List:
+  « no longer available to newly registered users … deprecation expected in late December 2026 »), qwen3.6-max-preview's default (not on the live zh page),
+  gemini-3.8-flash on OpenRouter (the live 0.825 / 4.125 is the promotion record of 20 Oct; the standard-kind 0.75 has no stated end).
+- **deepseek-v4.1-flash-1017 on OpenRouter**: the hourly grid (root price + six overrides) read line by line against the live entry: weekends and Mon–Fri
+  0000–0100, 0400–0600, 1000–2400 UTC at 0.15 / 0.6 / 0.003, Mon–Fri 0100–0400 and 0600–1000 UTC at 0.3 / 1.2 / 0.006: the two records agree, no correction.
+- **gpt-5.6-sol** (the maintainer: the base price is the catalogue price, the promotion a variant with its announced end): the list price 5 / 30 / 0.50 (read
+  on the pricing page 9 Jul – 20 Aug) stays in force under the promotion: OpenAI's announcement of 21 Aug states 4 / 20 as a reduction « for the next 3
+  months », « 20% lower input pricing and 33% lower output pricing », and the model page of 16 Nov a promotion « available until November 30, 2026 »;
+  the record is extended with these two quotes. No OpenAI page prints a list price after 30 Nov (the forum thread's table and a report of OpenAI's 3 Nov
+  email are second-hand, not cited); OpenRouter lists only the promotional price.
+- A model entry or a route entry carries the notes (the records of routes and models have no `note` field). `!!` of check 9 left: 15 records (see the
+  report of the recheck, S/s10/recheck/RAPPORT.md).
