@@ -2078,3 +2078,29 @@ against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
   through Figure 2), and the share missed by an unnamed « first reviewer column ». **Unchanged**: 23 setups the salvo s6 had already established (the
   reviewer catch rate, the Table 6 attacker shares of GLM 5.3). **Back to pending**: the 21 established counts (`*-attacker-valid`, Table 7's missed / valid out of
   ten), a count is not a rate of success. Counts: 56 setups enter, 23 stay established, 171 stay pending, 21 go back to pending (271).
+- **Verification conclusions applied, point 4** (the maintainer: « fais au mieux »; the agent's cases with their quotes and copies: S/s10/verif/CONCLUSIONS.md and
+  /work/.salvo14/mig/s10/ev/verif/, the new copies in /work/.salvo14/mig/s10/ev/integ16/), case by case:
+  - **Kimi K2 Thinking Turbo** (LMArena, 5 measures) → `kimi-k2-thinking`: the same model through Moonshot's faster, dearer endpoint (« High-speed version of
+    kimi-k2-thinking »; Artificial Analysis: « two endpoints for K2 Thinking »); names `kimi-k2-thinking-turbo` (api-id) and « Kimi K2 Thinking Turbo » added;
+    the endpoint's own price (a `fast` record 1.15 / 8.00 / 0.15 against the standard 0.60 / 2.50 / 0.15, Moonshot's price table of 1 May 2026, to the series' stop on
+    25 May) is cited. Reserve written: Moonshot never writes « same parameters » for this model.
+  - **DeepSeek-V4.1-Flash-20260910** → `deepseek-v4.1-flash` (Arena posted « DeepSeek-V4.1-Flash … 1620 pts » on 10 Sep, the dated row holds 1620.76, Arena's log adds
+    deepseek-v4.1-flash-max on 10 Sep; reserve: no Arena sentence states the equivalence) and **-20261017** → `deepseek-v4.1-flash-1017` (the suffix is the maker's id,
+    Arena announced it on 18 Oct after the update of 17 Oct, DeepSeek: « has been upgraded to DeepSeek-V4.1-Flash-1017 »), effort max from the « (Max) » of the name.
+  - **GPT-5 Chat** → new key `gpt-5-chat-latest` (not the reasoning GPT-5: its own id and page, price 1.25 / 10, shut down on 23 Jul 2026; solo; reserve: an Arena log
+    sentence of 15 Aug 2025 on « gpt-5-chat » read together with models « configured with the highest reasoning setting »; its price record is the one shown on the retired
+    page of 16 Nov); **GPT-5.2 Chat (20260210)** → `gpt-5.2-chat-latest` (OpenAI moved the slug on 10 Feb, Arena added « gpt-5.2-chat-latest-20260210 » on 21 Feb; the key and the
+    name were already held: nothing to add); **GPT-5.3 Chat** → `gpt-5.3-chat-latest` (the key held; the build is not written: the slug changed build on 16 Mar and Arena's
+    log has no entry for it, so the run dates stay bounded by what the sources say). New sheets cited in the registry.
+  - **New keys**: `olmo-3-32b-think` and `olmo-3.1-32b-think` (distinct weights; solo probable, negative evidence like Trinity; the release dates are the Hugging Face repository
+    creation 2025-11-19 and OpenRouter's « Released Dec 16, 2025 »), `hunyuan-vision-1.5-thinking` (model established, **mode not established**: no configuration written,
+    every measure of the key goes out `out:effort-not-established`), `step-1v-32k` (StepFun's vision model, 15 / 70 yuan on the Wayback capture of 14 Dec 2024; no CNY price
+    record written). No per-token price of Olmo or Hunyuan on the OpenRouter catalogue of 16 Nov (not listed): no cost, which changes nothing for the LMArena rows (quality only).
+    The five keys are added to the catalogue (`data/catalog/models.json`).
+  - **Qwen4 Max** of Artificial Analysis (16 Nov), kingy.ai (16 Nov) and Vals (15 Nov) → `qwen4-max` (AA: context 984k = the 983,616 input limit of qwen4-max, price 1.50 / 4.50 = its
+    list; kingy: run through OpenRouter qwen/qwen4-max; Vals: alibaba/qwen4-max, max output 262,144, xhigh written), the display names « Qwen4 Max » and « Qwen 4 Max » added (Vals dates the
+    release 15 Nov, a day before the Alibaba page); the tracker's « Qwen4-Max Preview » row stays `qwen4-max-preview`. Display names also added for « Qwen3-VL-235B-A22B-Thinking » and
+    « Qwen3.7-Max-Preview » (the keys held: the names were the only gap).
+  - **Left in doubt, out of the fit** (a note on each measure): GPT-5.5 Instant (a moving alias; Arena's 6 and 8 May additions do not tell which build; 6 measures of LMArena, Epoch and
+    llm2014-logic), the two « GPT-5.3-Codex (Codex Harness) » rows of webdev (two runs of unwritten difference), « Qwen4-Max (xHigh) » of LMArena agent and webdev (votes before the general
+    release): none is attached to a key, so none enters.

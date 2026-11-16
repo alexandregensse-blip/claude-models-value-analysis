@@ -46989,6 +46989,84 @@
      "quote": "| gpt-5.6-sol | $8.00 | $40.00 | $0.80 | $10.00 | $20.00 | $16.00 | $60.00 | $1.60 | $20.00 | $40.00 |"
     }
    ]
+  },
+  {
+   "model": "kimi-k2-thinking",
+   "route": "maker-api",
+   "currency": "USD",
+   "per": "MTok",
+   "kind": "fast",
+   "classes": {
+    "input": 1.15,
+    "output": 8.0,
+    "cache-read": 0.15
+   },
+   "from": "2026-05-01",
+   "from_basis": "earliest-capture",
+   "to": "2026-05-24",
+   "to_basis": "stated",
+   "evidence": [
+    {
+     "url": "https://platform.moonshot.ai/docs/pricing/chat",
+     "captured": "2026-05-01T20:26:17Z",
+     "file": "/work/.salvo14/mig/s10/ev/verif/moonshot-pricing-chat-20260501202617.html",
+     "sha256": "e79afd74c545412bb8d0e00fd98bb6cd8e07287646aad84686d0368916a5095a",
+     "where": "Wayback capture of 1 May 2026, price table: row kimi-k2-thinking-turbo (1M tokens context; cache hit 0.15, input 1.15, output 8.00 USD per MTok; the row of kimi-k2-thinking reads 0.15 / 0.60 / 2.50)",
+     "quote": "[\\\"kimi-k2-thinking-turbo\\\", \\\"1M tokens\\\", _jsxs(_Fragment, {\\n        children: [\\\"$\\\", \\\"0.15\\\"]\\n      }), _jsxs(_Fragment, {\\n        children: [\\\"$\\\", \\\"1.15\\\"]\\n      }), _jsxs(_Fragment, {\\n        children: [\\\"$\\\", \\\"8.00\\\""
+    },
+    {
+     "url": "https://platform.moonshot.ai/docs/guide/use-kimi-k2-thinking-model",
+     "captured": "2025-11-06T10:33:36Z",
+     "file": "/work/.salvo14/mig/gaps-keys/ev/kthink_chunk_20251106.js",
+     "sha256": "0ecdf78087b758a180f2dcb169faf417a97948d0b9d1f114967f196bf270272e",
+     "where": "guide: model id kimi-k2-thinking",
+     "quote": "kimi-k2-thinking"
+    },
+    {
+     "url": "https://platform.kimi.ai/docs/models",
+     "captured": "2026-06-07T03:02:36Z",
+     "file": "/work/.salvo14/mig/gaps-keys/ev/kmodels_20260607030236.txt",
+     "sha256": "df54a12c263692d208f381d84b5cc71b40bb47814605cbddeae6a9424b34baf1",
+     "where": "model list: kimi-k2-thinking Deprecated",
+     "quote": "kimi-k2-thinking Deprecated"
+    }
+   ],
+   "note": "integration 16 (16 Nov 2026), the maintainer: « fais au mieux » on the conclusions of the verification agent (S/s10/verif/CONCLUSIONS.md): the price of the faster endpoint kimi-k2-thinking-turbo of the same model (a `fast` record: the standard record 0.60 / 2.50 / 0.15 stays the base); the series was stopped on 25 May 2026 (the end of the standard record)"
+  },
+  {
+   "model": "gpt-5-chat-latest",
+   "route": "maker-api",
+   "currency": "USD",
+   "per": "MTok",
+   "kind": "standard",
+   "classes": {
+    "input": 1.25,
+    "output": 10.0
+   },
+   "base": true,
+   "from": "2025-08-07",
+   "from_basis": "release",
+   "to": "2026-07-22",
+   "to_basis": "stated",
+   "evidence": [
+    {
+     "url": "https://developers.openai.com/api/docs/models/gpt-5-chat-latest",
+     "captured": "2026-11-16",
+     "file": "/work/.salvo14/mig/s10/ev/verif/openai-model-gpt-5-chat-latest.html",
+     "sha256": "4acd982b82f48a8c06dad92cc2a1ad22a7bc2bd3eeadf6d755b998d603b08ce1",
+     "where": "model page: price and shutdown",
+     "quote": "Price $1.25 • $10 Input • Output"
+    },
+    {
+     "url": "https://developers.openai.com/api/docs/deprecations",
+     "captured": "2026-11-16",
+     "file": "/work/.salvo14/mig/s10/ev/verif/openai-deprecations.html",
+     "sha256": "3d8cf4e839e49c05d892fb2348c17a43fa81edd8dbff6a2d6eed26f14ab6762b",
+     "where": "deprecations: gpt-5-chat-latest, shutdown 23 Jul 2026",
+     "quote": "gpt-5-chat-latest gpt-5.6-sol Apr 22, 2026 Jul 23, 2026"
+    }
+   ],
+   "note": "integration 16 (16 Nov 2026), the maintainer: « fais au mieux » on the conclusions of the verification agent (S/s10/verif/CONCLUSIONS.md): the price shown on the retired model page of 16 Nov 2026 (« Price $1.25 • $10 »); no cache price on the page; the price over the model's life was not re-read"
   }
  ],
  "maker_currencies": {
