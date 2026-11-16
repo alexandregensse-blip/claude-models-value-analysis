@@ -2036,9 +2036,16 @@ SHA256SUMS in /work/.salvo14/mig/s10/ev/recheck/; S/s10/recheck/py/ext17.py), no
 - **deepseek-v4.1-flash-1017 on OpenRouter**: the hourly grid (root price + six overrides) read line by line against the live entry: weekends and Mon–Fri
   0000–0100, 0400–0600, 1000–2400 UTC at 0.15 / 0.6 / 0.003, Mon–Fri 0100–0400 and 0600–1000 UTC at 0.3 / 1.2 / 0.006: the two records agree, no correction.
 - **gpt-5.6-sol** (the maintainer: the base price is the catalogue price, the promotion a variant with its announced end): the list price 5 / 30 / 0.50 (read
-  on the pricing page 9 Jul – 20 Aug) stays in force under the promotion: OpenAI's announcement of 21 Aug states 4 / 20 as a reduction « for the next 3
-  months », « 20% lower input pricing and 33% lower output pricing », and the model page of 16 Nov a promotion « available until November 30, 2026 »;
-  the record is extended with these two quotes. No OpenAI page prints a list price after 30 Nov (the forum thread's table and a report of OpenAI's 3 Nov
-  email are second-hand, not cited); OpenRouter lists only the promotional price.
-- A model entry or a route entry carries the notes (the records of routes and models have no `note` field). `!!` of check 9 left: 15 records (see the
-  report of the recheck, S/s10/recheck/RAPPORT.md).
+  on the pricing page 9 Jul – 20 Aug, record `base: true`) is the base; OpenAI's announcement of 21 Aug states 4 / 20 as a reduction of it « for the next 3
+  months », « 20% lower input pricing and 33% lower output pricing », and the model page of 16 Nov a promotion « available until November 30, 2026 »: both
+  quotes are added to the list-price record and the promotion record stays the variant (kind promotion, to 30 Nov, stated). The interval of the list price is
+  not extended: a promotion is the price charged over its dates, and a standard record in force beside it made five AA costs ambiguous (tried, then undone;
+  `prices_over` reads every record that could have applied). No OpenAI page prints a list price after 30 Nov (the forum thread's table and a report of
+  OpenAI's 3 Nov email are second-hand, not cited); OpenRouter lists only the promotional price.
+- A model entry or a route entry carries the notes (the records of routes and models have no `note` field). `!!` of check 9 left: 15 items (27 records),
+  all retired or replaced facts written with their date (the 12 retired without an end, kimi-k2.6 routes and sheet, gemini-3.8-flash on OpenRouter).
+- **Effect (daeb78c's tables → this build; S/s10/recheck/AVANT-APRES.txt)**: rows kept by lqm quality 23,363 → 23,352, cost 10,378 → 10,373; couples
+  361 → 361 and 296 → 295 (gpt-5.2-codex at xhigh leaves the cost couples); the Claude couples are the same 61 / 59; 27 measures change status, all from
+  the codex-cli closures (the default effort of gpt-5.1 to 5.4 in Codex ends where the entry leaves the bundled models.json: a run window crossing that
+  date no longer has an established effort: 12 quality and 8 cost rows leave, 1 comes back) except two costs that the new OpenRouter prices make
+  accepted. validate 0 error, 219 tests, the sealed build gives identical tables.
