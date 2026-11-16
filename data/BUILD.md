@@ -2104,3 +2104,10 @@ against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
   - **Left in doubt, out of the fit** (a note on each measure): GPT-5.5 Instant (a moving alias; Arena's 6 and 8 May additions do not tell which build; 6 measures of LMArena, Epoch and
     llm2014-logic), the two « GPT-5.3-Codex (Codex Harness) » rows of webdev (two runs of unwritten difference), « Qwen4-Max (xHigh) » of LMArena agent and webdev (votes before the general
     release): none is attached to a key, so none enters.
+- **Closures of the codex-cli entries, point 5** (the maintainer, 16 Nov 2026: « 1 ok »): kept as the recheck wrote them (the default effort of gpt-5.1 to 5.4 in the Codex CLI ends where the entry
+  leaves the bundled models.json at its removal commit); nothing to change here.
+- **glm-5.2 on OpenRouter, point 6** (the maintainer: « 2 ok »): the OpenRouter catalogue entry of 16 Nov (0.007 / 6.8 / 0.006, an input / output ratio of about 1,000, a probable error of the page) is
+  a doubt fact: it is **not recorded** as a price (the record `from 2026-11-16` is removed; its quote is kept in the note of the previous record, 0.6496 / 2.0416 / 0.12064 to 2026-09-23), so the
+  costs that depend only on that record leave the fit; the maker's price (Z.ai) is unchanged and stays valid.
+- **Retired items, point 7** (the maintainer: « 3 ok »): the items retired or replaced (15 items of check 9 of the precheck) stay reported every 3 days by the precheck (`!!`, with the
+  proposal « a retired fact is written with its end »); no test silences them and none was added.
