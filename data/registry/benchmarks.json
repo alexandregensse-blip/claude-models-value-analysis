@@ -30803,6 +30803,9 @@
   },
   "oai55-t-terminal-bench-2-0": {
    "label": "Terminal-Bench 2.0 (table)"
+  },
+  "scbench-iso": {
+   "label": "SCBench: Iso Solve"
   }
  },
  "setups": {
@@ -130877,7 +130880,7 @@
    "metric": "score%",
    "headline": {
     "metric": "score%",
-    "basis": "standard",
+    "basis": "run-share",
     "evidence": [
      {
       "url": "https://scbench.ai/leaderboard",
@@ -130894,6 +130897,22 @@
       "quote": "Showing best version by % Checkpoints",
       "file": "/work/.salvo14/mig/convert-scbench.ai/evidence/scbench-leaderboard.txt",
       "sha256": "836259e856e15d3186ba3ddc415d9cf051f276fefe1a2e5ffe182d0ceec5b61a"
+     },
+     {
+      "url": "https://scbench.ai/leaderboard",
+      "captured": "2026-11-16",
+      "where": "board description (page head): the board ranks by the isolated metric; Strict Solve / CKPT Solved is the other checkpoint metric of the same runs (both columns of one table row)",
+      "quote": "ranked by percent of checkpoints solved in isolation",
+      "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.html",
+      "sha256": "fdb68a1cf51de8c16aa4d971bba6af14fc9e563f4252eadd5c8e402d2d7f6c02"
+     },
+     {
+      "url": "https://scbench.ai/leaderboard",
+      "captured": "2026-11-16",
+      "where": "Metric Definitions of the board: the two checkpoint metrics of one run, each defined",
+      "quote": "Isolated Solved — % Passes only the tests for the checkpoint.",
+      "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+      "sha256": "88d037791fbe34d965d164e20f1e2f7f54c299a19829342f6af65d05d7af30a5"
      }
     ],
     "level": "written"
@@ -130911,7 +130930,8 @@
     "scbench"
    ],
    "label": "SCBench",
-   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source; harness mixed in today's rows (4 base values; per-row harness is a measure fact) | integration 12 of salvo s8 (12 Nov 2026): decision 3 of 12 Nov 2026, left for the maintainer: the board picks each model's version « by % Checkpoints » (« Showing best version by % Checkpoints ») while its chart defaults to CKPT Solved, the metric we hold: no metric is clearly the principal, and % Checkpoints is not in the findings (kept as held, k = 1; to convert, then 1/k)"
+   "note": "headline: not-established:assumed (only metric held: 'score%'); to be proven from the source; harness mixed in today's rows (4 base values; per-row harness is a measure fact) | integration 12 of salvo s8 (12 Nov 2026): decision 3 of 12 Nov 2026, left for the maintainer: the board picks each model's version « by % Checkpoints » (« Showing best version by % Checkpoints ») while its chart defaults to CKPT Solved, the metric we hold: no metric is clearly the principal, and % Checkpoints is not in the findings (kept as held, k = 1; to convert, then 1/k) | integration 14 (16 Nov 2026), decision 9 of 12 Nov (convert « % Checkpoints », then the two metrics of a run at 1/k) and decision 3 (no principal metric unless clearly the principal): the board ranks by the isolated metric (« ranked by percent of checkpoints solved in isolation ») while its chart defaults to CKPT Solved: no metric is clearly the principal. Headline basis run-share (was standard: CKPT Solved), run set run:scbench with scbench-iso (Iso Solve): the two metrics of one run enter at weight 1/k each. The « % Checkpoints » of the old header (« Showing best version by % Checkpoints ») is read as the Iso Solve column: the 26 Oct board has no column of that name; its table holds Strict Solve (= CKPT Solved) and Iso Solve (= Isolated Solved), and the page's own sentence ranks by percent of checkpoints solved in isolation",
+   "run_set": "run:scbench"
   },
   "scdbench-base": {
    "family": "scdbench-base",
@@ -385654,6 +385674,51 @@
    "legacy_groups": [],
    "label": "Terminal-Bench 2.0 (table)",
    "note": "NEW setup (integration 12 of salvo s8 (12 Nov 2026)): OpenAI's GPT-5.5 launch tables, row « Terminal-Bench 2.0 » (tables 0 and 1): these measures were held under oai55-t-browsecomp (decision 7 of 12 Nov 2026); headline evidence = the Terminal-Bench 2.0 cell that oai55-t-browsecomp cited"
+  },
+  "scbench-iso": {
+   "family": "scbench-iso",
+   "benchmark": "SCBench, isolated checkpoints (Iso Solve)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "run-share",
+    "evidence": [
+     {
+      "url": "https://scbench.ai/leaderboard",
+      "captured": "2026-11-16",
+      "where": "board description (page head): the board ranks by the isolated metric; Strict Solve / CKPT Solved is the other checkpoint metric of the same runs (both columns of one table row)",
+      "quote": "ranked by percent of checkpoints solved in isolation",
+      "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.html",
+      "sha256": "fdb68a1cf51de8c16aa4d971bba6af14fc9e563f4252eadd5c8e402d2d7f6c02"
+     },
+     {
+      "url": "https://scbench.ai/leaderboard",
+      "captured": "2026-11-16",
+      "where": "Metric Definitions of the board: the two checkpoint metrics of one run, each defined",
+      "quote": "Isolated Solved — % Passes only the tests for the checkpoint.",
+      "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+      "sha256": "88d037791fbe34d965d164e20f1e2f7f54c299a19829342f6af65d05d7af30a5"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "SCBench: Iso Solve",
+   "note": "new setup (integration 14, 16 Nov 2026, decision 9 of 12 Nov): the Iso Solve column of the SCBench board (« Isolated Solved — % Passes only the tests for the checkpoint. »), the second metric of the runs scbench holds under Strict Solve; run set run:scbench, weight 1/k each. Read from the 26 Oct board (source src-scbench.ai-leaderboard-2026-10-26)",
+   "run_set": "run:scbench"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."

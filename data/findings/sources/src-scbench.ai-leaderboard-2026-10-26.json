@@ -1,0 +1,2390 @@
+{
+ "id": "src-scbench.ai-leaderboard-2026-10-26",
+ "publisher": "scbench.ai",
+ "urls": [
+  "https://scbench.ai/leaderboard"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://scbench.ai/leaderboard",
+   "captured": "2026-11-16T05:38:48Z",
+   "note": "integration 14 (16 Nov 2026): the leaderboard page fetched over HTTPS (HTTP 200, 68,574 bytes); the page's footer says « Last updated: October 26, 2026 »; 34 runs listed (« Showing 34 of 34 runs »), of which the 28 of the models of the fit are converted"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt": "88d037791fbe34d965d164e20f1e2f7f54c299a19829342f6af65d05d7af30a5",
+  "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.html": "fdb68a1cf51de8c16aa4d971bba6af14fc9e563f4252eadd5c8e402d2d7f6c02"
+ },
+ "harvested_at": "2026-11-16T05:38:48Z",
+ "published": {
+  "value": "2026-10-26",
+  "where": "page footer",
+  "quote": "* Last updated: October 26, 2026",
+  "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt"
+ },
+ "salvo": "integration 14 (16 Nov 2026), point 3 of the maintainer's consigne (decision 9 of 12 Nov: convert « % Checkpoints », then the two metrics of a run at 1/k)",
+ "agent": "integration agent (Sonnet 5.5): every row read one by one from the saved text; the script only writes the JSON and checks each quote",
+ "snapshot_of": "src-scbench.ai-leaderboard-2026-04-24",
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "from": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.html",
+   "tool": "Python re (integration 14, S/s8/integ14): the page's script blocks dropped, table rows on one line joined by ' | ', tags dropped"
+  }
+ ],
+ "facts": [
+  {
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "Metric Definitions, $/CKPT",
+   "quote": "$/CKPT — Average USD cost per checkpoint",
+   "term": "USD",
+   "id": "F1"
+  },
+  {
+   "about": null,
+   "says": "unit",
+   "value": "per checkpoint",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "Metric Definitions, $/CKPT",
+   "quote": "$/CKPT — Average USD cost per checkpoint",
+   "term": "per-checkpoint",
+   "id": "F2"
+  },
+  {
+   "about": null,
+   "says": "run-end",
+   "value": "October 26, 2026",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "page footer: the leaderboard data as of (every run on the page is at or before it)",
+   "quote": "* Last updated: October 26, 2026",
+   "id": "F3"
+  },
+  {
+   "about": "gpt-5.6-sol|Codex|0.145.0|row1",
+   "says": "score",
+   "value": "14.29",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.6 SOL (XHigh) / Codex / 0.145.0 (row 1 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.6 SOL (XHigh) | Codex | 0.145.0 | 14.29 | 32.14 | $3.84 | 0.658 | 0.376",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F4"
+  },
+  {
+   "about": "gpt-5.6-sol|Codex|0.145.0|row1",
+   "says": "score",
+   "value": "32.14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.6 SOL (XHigh) / Codex / 0.145.0 (row 1 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.6 SOL (XHigh) | Codex | 0.145.0 | 14.29 | 32.14 | $3.84 | 0.658 | 0.376",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F5"
+  },
+  {
+   "about": "gpt-5.6-sol|Codex|0.145.0|row1",
+   "says": "model-name",
+   "value": "GPT 5.6 SOL",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.6 SOL (XHigh) / Codex / 0.145.0 (row 1 of the 28 read), column Model",
+   "quote": "GPT 5.6 SOL (XHigh) | Codex | 0.145.0 | 14.29 | 32.14 | $3.84 | 0.658 | 0.376",
+   "id": "F6"
+  },
+  {
+   "about": "gpt-5.6-sol|Codex|0.145.0|row1",
+   "says": "effort-label",
+   "value": "XHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.6 SOL (XHigh) / Codex / 0.145.0 (row 1 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.6 SOL (XHigh) | Codex | 0.145.0 | 14.29 | 32.14 | $3.84 | 0.658 | 0.376",
+   "id": "F7"
+  },
+  {
+   "about": "gpt-5.6-sol|Codex|0.145.0|row1",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.6 SOL (XHigh) / Codex / 0.145.0 (row 1 of the 28 read), column Harness",
+   "quote": "GPT 5.6 SOL (XHigh) | Codex | 0.145.0 | 14.29 | 32.14 | $3.84 | 0.658 | 0.376",
+   "term": "codex-cli",
+   "id": "F8"
+  },
+  {
+   "about": "gpt-5.6-sol|Codex|0.145.0|row1",
+   "says": "cost",
+   "value": "3.84",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.6 SOL (XHigh) / Codex / 0.145.0 (row 1 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.6 SOL (XHigh) | Codex | 0.145.0 | 14.29 | 32.14 | $3.84 | 0.658 | 0.376",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F9"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.153.3|row2",
+   "says": "score",
+   "value": "16.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (XHigh) / Codex / 0.153.3 (row 2 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 6 Astra (XHigh) | Codex | 0.153.3 | 16.33 | 31.63 | $3.87 | 0.559 | 0.158",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F10"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.153.3|row2",
+   "says": "score",
+   "value": "31.63",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (XHigh) / Codex / 0.153.3 (row 2 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 6 Astra (XHigh) | Codex | 0.153.3 | 16.33 | 31.63 | $3.87 | 0.559 | 0.158",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F11"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.153.3|row2",
+   "says": "model-name",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (XHigh) / Codex / 0.153.3 (row 2 of the 28 read), column Model",
+   "quote": "GPT 6 Astra (XHigh) | Codex | 0.153.3 | 16.33 | 31.63 | $3.87 | 0.559 | 0.158",
+   "id": "F12"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.153.3|row2",
+   "says": "effort-label",
+   "value": "XHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (XHigh) / Codex / 0.153.3 (row 2 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 6 Astra (XHigh) | Codex | 0.153.3 | 16.33 | 31.63 | $3.87 | 0.559 | 0.158",
+   "id": "F13"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.153.3|row2",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (XHigh) / Codex / 0.153.3 (row 2 of the 28 read), column Harness",
+   "quote": "GPT 6 Astra (XHigh) | Codex | 0.153.3 | 16.33 | 31.63 | $3.87 | 0.559 | 0.158",
+   "term": "codex-cli",
+   "id": "F14"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.153.3|row2",
+   "says": "cost",
+   "value": "3.87",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (XHigh) / Codex / 0.153.3 (row 2 of the 28 read), column $/CKPT",
+   "quote": "GPT 6 Astra (XHigh) | Codex | 0.153.3 | 16.33 | 31.63 | $3.87 | 0.559 | 0.158",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F15"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row3",
+   "says": "score",
+   "value": "14.29",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (Medium) / Claude Code / 2.1.280 (row 3 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Opus 5.5 (Medium) | Claude Code | 2.1.280 | 14.29 | 29.59 | $0.99 | 0.700 | 0.347",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F16"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row3",
+   "says": "score",
+   "value": "29.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (Medium) / Claude Code / 2.1.280 (row 3 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Opus 5.5 (Medium) | Claude Code | 2.1.280 | 14.29 | 29.59 | $0.99 | 0.700 | 0.347",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F17"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row3",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (Medium) / Claude Code / 2.1.280 (row 3 of the 28 read), column Model",
+   "quote": "Opus 5.5 (Medium) | Claude Code | 2.1.280 | 14.29 | 29.59 | $0.99 | 0.700 | 0.347",
+   "id": "F18"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row3",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (Medium) / Claude Code / 2.1.280 (row 3 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Opus 5.5 (Medium) | Claude Code | 2.1.280 | 14.29 | 29.59 | $0.99 | 0.700 | 0.347",
+   "id": "F19"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row3",
+   "says": "route",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (Medium) / Claude Code / 2.1.280 (row 3 of the 28 read), column Harness",
+   "quote": "Opus 5.5 (Medium) | Claude Code | 2.1.280 | 14.29 | 29.59 | $0.99 | 0.700 | 0.347",
+   "term": "claude-code",
+   "id": "F20"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row3",
+   "says": "cost",
+   "value": "0.99",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (Medium) / Claude Code / 2.1.280 (row 3 of the 28 read), column $/CKPT",
+   "quote": "Opus 5.5 (Medium) | Claude Code | 2.1.280 | 14.29 | 29.59 | $0.99 | 0.700 | 0.347",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F21"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.159.2|row4",
+   "says": "score",
+   "value": "14.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (Medium) / Codex / 0.159.2 (row 4 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 6 Astra (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $1.33 | 0.701 | 0.229",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F22"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.159.2|row4",
+   "says": "score",
+   "value": "29.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (Medium) / Codex / 0.159.2 (row 4 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 6 Astra (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $1.33 | 0.701 | 0.229",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F23"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.159.2|row4",
+   "says": "model-name",
+   "value": "GPT 6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (Medium) / Codex / 0.159.2 (row 4 of the 28 read), column Model",
+   "quote": "GPT 6 Astra (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $1.33 | 0.701 | 0.229",
+   "id": "F24"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.159.2|row4",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (Medium) / Codex / 0.159.2 (row 4 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 6 Astra (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $1.33 | 0.701 | 0.229",
+   "id": "F25"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.159.2|row4",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (Medium) / Codex / 0.159.2 (row 4 of the 28 read), column Harness",
+   "quote": "GPT 6 Astra (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $1.33 | 0.701 | 0.229",
+   "term": "codex-cli",
+   "id": "F26"
+  },
+  {
+   "about": "gpt-6-astra|Codex|0.159.2|row4",
+   "says": "cost",
+   "value": "1.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 Astra (Medium) / Codex / 0.159.2 (row 4 of the 28 read), column $/CKPT",
+   "quote": "GPT 6 Astra (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $1.33 | 0.701 | 0.229",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F27"
+  },
+  {
+   "about": "gpt-6.1-sol|Codex|0.159.2|row5",
+   "says": "score",
+   "value": "14.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6.1 SOL (Medium) / Codex / 0.159.2 (row 5 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 6.1 SOL (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $0.91 | 0.704 | 0.218",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F28"
+  },
+  {
+   "about": "gpt-6.1-sol|Codex|0.159.2|row5",
+   "says": "score",
+   "value": "29.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6.1 SOL (Medium) / Codex / 0.159.2 (row 5 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 6.1 SOL (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $0.91 | 0.704 | 0.218",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F29"
+  },
+  {
+   "about": "gpt-6.1-sol|Codex|0.159.2|row5",
+   "says": "model-name",
+   "value": "GPT 6.1 SOL",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6.1 SOL (Medium) / Codex / 0.159.2 (row 5 of the 28 read), column Model",
+   "quote": "GPT 6.1 SOL (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $0.91 | 0.704 | 0.218",
+   "id": "F30"
+  },
+  {
+   "about": "gpt-6.1-sol|Codex|0.159.2|row5",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6.1 SOL (Medium) / Codex / 0.159.2 (row 5 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 6.1 SOL (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $0.91 | 0.704 | 0.218",
+   "id": "F31"
+  },
+  {
+   "about": "gpt-6.1-sol|Codex|0.159.2|row5",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6.1 SOL (Medium) / Codex / 0.159.2 (row 5 of the 28 read), column Harness",
+   "quote": "GPT 6.1 SOL (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $0.91 | 0.704 | 0.218",
+   "term": "codex-cli",
+   "id": "F32"
+  },
+  {
+   "about": "gpt-6.1-sol|Codex|0.159.2|row5",
+   "says": "cost",
+   "value": "0.91",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6.1 SOL (Medium) / Codex / 0.159.2 (row 5 of the 28 read), column $/CKPT",
+   "quote": "GPT 6.1 SOL (Medium) | Codex | 0.159.2 | 14.80 | 29.08 | $0.91 | 0.704 | 0.218",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F33"
+  },
+  {
+   "about": "gpt-5.5|Codex|0.124.0|row6",
+   "says": "score",
+   "value": "14.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.5 (High) / Codex / 0.124.0 (row 6 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.5 (High) | Codex | 0.124.0 | 14.80 | 28.06 | $1.51 | 0.494 | 0.319",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F34"
+  },
+  {
+   "about": "gpt-5.5|Codex|0.124.0|row6",
+   "says": "score",
+   "value": "28.06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.5 (High) / Codex / 0.124.0 (row 6 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.5 (High) | Codex | 0.124.0 | 14.80 | 28.06 | $1.51 | 0.494 | 0.319",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F35"
+  },
+  {
+   "about": "gpt-5.5|Codex|0.124.0|row6",
+   "says": "model-name",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.5 (High) / Codex / 0.124.0 (row 6 of the 28 read), column Model",
+   "quote": "GPT 5.5 (High) | Codex | 0.124.0 | 14.80 | 28.06 | $1.51 | 0.494 | 0.319",
+   "id": "F36"
+  },
+  {
+   "about": "gpt-5.5|Codex|0.124.0|row6",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.5 (High) / Codex / 0.124.0 (row 6 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.5 (High) | Codex | 0.124.0 | 14.80 | 28.06 | $1.51 | 0.494 | 0.319",
+   "id": "F37"
+  },
+  {
+   "about": "gpt-5.5|Codex|0.124.0|row6",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.5 (High) / Codex / 0.124.0 (row 6 of the 28 read), column Harness",
+   "quote": "GPT 5.5 (High) | Codex | 0.124.0 | 14.80 | 28.06 | $1.51 | 0.494 | 0.319",
+   "term": "codex-cli",
+   "id": "F38"
+  },
+  {
+   "about": "gpt-5.5|Codex|0.124.0|row6",
+   "says": "cost",
+   "value": "1.51",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.5 (High) / Codex / 0.124.0 (row 6 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.5 (High) | Codex | 0.124.0 | 14.80 | 28.06 | $1.51 | 0.494 | 0.319",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F39"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row7",
+   "says": "score",
+   "value": "13.27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (XHigh) / Codex / 0.155.1 (row 7 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 6 SOL (XHigh) | Codex | 0.155.1 | 13.27 | 28.06 | $2.64 | 0.754 | 0.363",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F40"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row7",
+   "says": "score",
+   "value": "28.06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (XHigh) / Codex / 0.155.1 (row 7 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 6 SOL (XHigh) | Codex | 0.155.1 | 13.27 | 28.06 | $2.64 | 0.754 | 0.363",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F41"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row7",
+   "says": "model-name",
+   "value": "GPT 6 SOL",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (XHigh) / Codex / 0.155.1 (row 7 of the 28 read), column Model",
+   "quote": "GPT 6 SOL (XHigh) | Codex | 0.155.1 | 13.27 | 28.06 | $2.64 | 0.754 | 0.363",
+   "id": "F42"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row7",
+   "says": "effort-label",
+   "value": "XHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (XHigh) / Codex / 0.155.1 (row 7 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 6 SOL (XHigh) | Codex | 0.155.1 | 13.27 | 28.06 | $2.64 | 0.754 | 0.363",
+   "id": "F43"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row7",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (XHigh) / Codex / 0.155.1 (row 7 of the 28 read), column Harness",
+   "quote": "GPT 6 SOL (XHigh) | Codex | 0.155.1 | 13.27 | 28.06 | $2.64 | 0.754 | 0.363",
+   "term": "codex-cli",
+   "id": "F44"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row7",
+   "says": "cost",
+   "value": "2.64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (XHigh) / Codex / 0.155.1 (row 7 of the 28 read), column $/CKPT",
+   "quote": "GPT 6 SOL (XHigh) | Codex | 0.155.1 | 13.27 | 28.06 | $2.64 | 0.754 | 0.363",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F45"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row8",
+   "says": "score",
+   "value": "12.76",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (XHigh) / Claude Code / 2.1.280 (row 8 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Opus 5.5 (XHigh) | Claude Code | 2.1.280 | 12.76 | 27.55 | $4.17 | 0.495 | 0.240",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F46"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row8",
+   "says": "score",
+   "value": "27.55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (XHigh) / Claude Code / 2.1.280 (row 8 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Opus 5.5 (XHigh) | Claude Code | 2.1.280 | 12.76 | 27.55 | $4.17 | 0.495 | 0.240",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F47"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row8",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (XHigh) / Claude Code / 2.1.280 (row 8 of the 28 read), column Model",
+   "quote": "Opus 5.5 (XHigh) | Claude Code | 2.1.280 | 12.76 | 27.55 | $4.17 | 0.495 | 0.240",
+   "id": "F48"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row8",
+   "says": "effort-label",
+   "value": "XHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (XHigh) / Claude Code / 2.1.280 (row 8 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Opus 5.5 (XHigh) | Claude Code | 2.1.280 | 12.76 | 27.55 | $4.17 | 0.495 | 0.240",
+   "id": "F49"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row8",
+   "says": "route",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (XHigh) / Claude Code / 2.1.280 (row 8 of the 28 read), column Harness",
+   "quote": "Opus 5.5 (XHigh) | Claude Code | 2.1.280 | 12.76 | 27.55 | $4.17 | 0.495 | 0.240",
+   "term": "claude-code",
+   "id": "F50"
+  },
+  {
+   "about": "opus-5.5|Claude Code|2.1.280|row8",
+   "says": "cost",
+   "value": "4.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 5.5 (XHigh) / Claude Code / 2.1.280 (row 8 of the 28 read), column $/CKPT",
+   "quote": "Opus 5.5 (XHigh) | Claude Code | 2.1.280 | 12.76 | 27.55 | $4.17 | 0.495 | 0.240",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F51"
+  },
+  {
+   "about": "fable-5.1|Claude Code|2.1.257|row9",
+   "says": "score",
+   "value": "13.27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Fable 5.1 (XHigh) / Claude Code / 2.1.257 (row 9 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Fable 5.1 (XHigh) | Claude Code | 2.1.257 | 13.27 | 27.55 | $7.91 | 0.467 | 0.240",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F52"
+  },
+  {
+   "about": "fable-5.1|Claude Code|2.1.257|row9",
+   "says": "score",
+   "value": "27.55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Fable 5.1 (XHigh) / Claude Code / 2.1.257 (row 9 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Fable 5.1 (XHigh) | Claude Code | 2.1.257 | 13.27 | 27.55 | $7.91 | 0.467 | 0.240",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F53"
+  },
+  {
+   "about": "fable-5.1|Claude Code|2.1.257|row9",
+   "says": "model-name",
+   "value": "Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Fable 5.1 (XHigh) / Claude Code / 2.1.257 (row 9 of the 28 read), column Model",
+   "quote": "Fable 5.1 (XHigh) | Claude Code | 2.1.257 | 13.27 | 27.55 | $7.91 | 0.467 | 0.240",
+   "id": "F54"
+  },
+  {
+   "about": "fable-5.1|Claude Code|2.1.257|row9",
+   "says": "effort-label",
+   "value": "XHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Fable 5.1 (XHigh) / Claude Code / 2.1.257 (row 9 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Fable 5.1 (XHigh) | Claude Code | 2.1.257 | 13.27 | 27.55 | $7.91 | 0.467 | 0.240",
+   "id": "F55"
+  },
+  {
+   "about": "fable-5.1|Claude Code|2.1.257|row9",
+   "says": "route",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Fable 5.1 (XHigh) / Claude Code / 2.1.257 (row 9 of the 28 read), column Harness",
+   "quote": "Fable 5.1 (XHigh) | Claude Code | 2.1.257 | 13.27 | 27.55 | $7.91 | 0.467 | 0.240",
+   "term": "claude-code",
+   "id": "F56"
+  },
+  {
+   "about": "fable-5.1|Claude Code|2.1.257|row9",
+   "says": "cost",
+   "value": "7.91",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Fable 5.1 (XHigh) / Claude Code / 2.1.257 (row 9 of the 28 read), column $/CKPT",
+   "quote": "Fable 5.1 (XHigh) | Claude Code | 2.1.257 | 13.27 | 27.55 | $7.91 | 0.467 | 0.240",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F57"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row10",
+   "says": "score",
+   "value": "11.22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 10 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 26.02 | $0.66 | 0.644 | 0.461",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F58"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row10",
+   "says": "score",
+   "value": "26.02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 10 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 26.02 | $0.66 | 0.644 | 0.461",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F59"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row10",
+   "says": "model-name",
+   "value": "GPT 5.3-Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 10 of the 28 read), column Model",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 26.02 | $0.66 | 0.644 | 0.461",
+   "id": "F60"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row10",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 10 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 26.02 | $0.66 | 0.644 | 0.461",
+   "id": "F61"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row10",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 10 of the 28 read), column Harness",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 26.02 | $0.66 | 0.644 | 0.461",
+   "term": "codex-cli",
+   "id": "F62"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row10",
+   "says": "cost",
+   "value": "0.66",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 10 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 26.02 | $0.66 | 0.644 | 0.461",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F63"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row11",
+   "says": "score",
+   "value": "9.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 11 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.18 | 25.51 | $0.90 | 0.280 | 0.237",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F64"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row11",
+   "says": "score",
+   "value": "25.51",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 11 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.18 | 25.51 | $0.90 | 0.280 | 0.237",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F65"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row11",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 11 of the 28 read), column Model",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.18 | 25.51 | $0.90 | 0.280 | 0.237",
+   "id": "F66"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row11",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 11 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.18 | 25.51 | $0.90 | 0.280 | 0.237",
+   "id": "F67"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row11",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 11 of the 28 read), column Harness",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.18 | 25.51 | $0.90 | 0.280 | 0.237",
+   "term": "codex-cli",
+   "id": "F68"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row11",
+   "says": "cost",
+   "value": "0.90",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 11 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.18 | 25.51 | $0.90 | 0.280 | 0.237",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F69"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row12",
+   "says": "score",
+   "value": "15.31",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (Medium) / Codex / 0.155.1 (row 12 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 6 SOL (Medium) | Codex | 0.155.1 | 15.31 | 25.51 | $1.25 | 0.789 | 0.391",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F70"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row12",
+   "says": "score",
+   "value": "25.51",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (Medium) / Codex / 0.155.1 (row 12 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 6 SOL (Medium) | Codex | 0.155.1 | 15.31 | 25.51 | $1.25 | 0.789 | 0.391",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F71"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row12",
+   "says": "model-name",
+   "value": "GPT 6 SOL",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (Medium) / Codex / 0.155.1 (row 12 of the 28 read), column Model",
+   "quote": "GPT 6 SOL (Medium) | Codex | 0.155.1 | 15.31 | 25.51 | $1.25 | 0.789 | 0.391",
+   "id": "F72"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row12",
+   "says": "effort-label",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (Medium) / Codex / 0.155.1 (row 12 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 6 SOL (Medium) | Codex | 0.155.1 | 15.31 | 25.51 | $1.25 | 0.789 | 0.391",
+   "id": "F73"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row12",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (Medium) / Codex / 0.155.1 (row 12 of the 28 read), column Harness",
+   "quote": "GPT 6 SOL (Medium) | Codex | 0.155.1 | 15.31 | 25.51 | $1.25 | 0.789 | 0.391",
+   "term": "codex-cli",
+   "id": "F74"
+  },
+  {
+   "about": "gpt-6-sol|Codex|0.155.1|row12",
+   "says": "cost",
+   "value": "1.25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 6 SOL (Medium) / Codex / 0.155.1 (row 12 of the 28 read), column $/CKPT",
+   "quote": "GPT 6 SOL (Medium) | Codex | 0.155.1 | 15.31 | 25.51 | $1.25 | 0.789 | 0.391",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F75"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row13",
+   "says": "score",
+   "value": "9.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 13 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.69 | 25.00 | $0.83 | 0.394 | 0.302",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F76"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row13",
+   "says": "score",
+   "value": "25.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 13 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.69 | 25.00 | $0.83 | 0.394 | 0.302",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F77"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row13",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 13 of the 28 read), column Model",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.69 | 25.00 | $0.83 | 0.394 | 0.302",
+   "id": "F78"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row13",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 13 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.69 | 25.00 | $0.83 | 0.394 | 0.302",
+   "id": "F79"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row13",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 13 of the 28 read), column Harness",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.69 | 25.00 | $0.83 | 0.394 | 0.302",
+   "term": "codex-cli",
+   "id": "F80"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row13",
+   "says": "cost",
+   "value": "0.83",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 13 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 9.69 | 25.00 | $0.83 | 0.394 | 0.302",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F81"
+  },
+  {
+   "about": "glm-5.3|OpenCode|1.18.26|row14",
+   "says": "score",
+   "value": "12.24",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.3 (XHigh) / OpenCode / 1.18.26 (row 14 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GLM 5.3 (XHigh) | OpenCode | 1.18.26 | 12.24 | 23.98 | $1.86 | 0.561 | 0.316",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F82"
+  },
+  {
+   "about": "glm-5.3|OpenCode|1.18.26|row14",
+   "says": "score",
+   "value": "23.98",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.3 (XHigh) / OpenCode / 1.18.26 (row 14 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GLM 5.3 (XHigh) | OpenCode | 1.18.26 | 12.24 | 23.98 | $1.86 | 0.561 | 0.316",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F83"
+  },
+  {
+   "about": "glm-5.3|OpenCode|1.18.26|row14",
+   "says": "model-name",
+   "value": "GLM 5.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.3 (XHigh) / OpenCode / 1.18.26 (row 14 of the 28 read), column Model",
+   "quote": "GLM 5.3 (XHigh) | OpenCode | 1.18.26 | 12.24 | 23.98 | $1.86 | 0.561 | 0.316",
+   "id": "F84"
+  },
+  {
+   "about": "glm-5.3|OpenCode|1.18.26|row14",
+   "says": "effort-label",
+   "value": "XHigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.3 (XHigh) / OpenCode / 1.18.26 (row 14 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GLM 5.3 (XHigh) | OpenCode | 1.18.26 | 12.24 | 23.98 | $1.86 | 0.561 | 0.316",
+   "id": "F85"
+  },
+  {
+   "about": "glm-5.3|OpenCode|1.18.26|row14",
+   "says": "route",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.3 (XHigh) / OpenCode / 1.18.26 (row 14 of the 28 read), column Harness",
+   "quote": "GLM 5.3 (XHigh) | OpenCode | 1.18.26 | 12.24 | 23.98 | $1.86 | 0.561 | 0.316",
+   "term": "opencode",
+   "id": "F86"
+  },
+  {
+   "about": "glm-5.3|OpenCode|1.18.26|row14",
+   "says": "cost",
+   "value": "1.86",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.3 (XHigh) / OpenCode / 1.18.26 (row 14 of the 28 read), column $/CKPT",
+   "quote": "GLM 5.3 (XHigh) | OpenCode | 1.18.26 | 12.24 | 23.98 | $1.86 | 0.561 | 0.316",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F87"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row15",
+   "says": "score",
+   "value": "11.22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 15 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 23.47 | $0.73 | 0.423 | 0.310",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F88"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row15",
+   "says": "score",
+   "value": "23.47",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 15 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 23.47 | $0.73 | 0.423 | 0.310",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F89"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row15",
+   "says": "model-name",
+   "value": "GPT 5.3-Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 15 of the 28 read), column Model",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 23.47 | $0.73 | 0.423 | 0.310",
+   "id": "F90"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row15",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 15 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 23.47 | $0.73 | 0.423 | 0.310",
+   "id": "F91"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row15",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 15 of the 28 read), column Harness",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 23.47 | $0.73 | 0.423 | 0.310",
+   "term": "codex-cli",
+   "id": "F92"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row15",
+   "says": "cost",
+   "value": "0.73",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 15 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 11.22 | 23.47 | $0.73 | 0.423 | 0.310",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F93"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row16",
+   "says": "score",
+   "value": "10.71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 16 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 10.71 | 23.47 | $0.72 | 0.509 | 0.327",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F94"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row16",
+   "says": "score",
+   "value": "23.47",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 16 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 10.71 | 23.47 | $0.72 | 0.509 | 0.327",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F95"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row16",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 16 of the 28 read), column Model",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 10.71 | 23.47 | $0.72 | 0.509 | 0.327",
+   "id": "F96"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row16",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 16 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 10.71 | 23.47 | $0.72 | 0.509 | 0.327",
+   "id": "F97"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row16",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 16 of the 28 read), column Harness",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 10.71 | 23.47 | $0.72 | 0.509 | 0.327",
+   "term": "codex-cli",
+   "id": "F98"
+  },
+  {
+   "about": "gpt-5.4|Codex|0.110.0|row16",
+   "says": "cost",
+   "value": "0.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4 (High) / Codex / 0.110.0 (row 16 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.4 (High) | Codex | 0.110.0 | 10.71 | 23.47 | $0.72 | 0.509 | 0.327",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F99"
+  },
+  {
+   "about": "gpt-5.2-codex|Codex|0.93.0|row17",
+   "says": "score",
+   "value": "9.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.2-Codex (High) / Codex / 0.93.0 (row 17 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.2-Codex (High) | Codex | 0.93.0 | 9.69 | 21.94 | $0.85 | 0.729 | 0.497",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F100"
+  },
+  {
+   "about": "gpt-5.2-codex|Codex|0.93.0|row17",
+   "says": "score",
+   "value": "21.94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.2-Codex (High) / Codex / 0.93.0 (row 17 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.2-Codex (High) | Codex | 0.93.0 | 9.69 | 21.94 | $0.85 | 0.729 | 0.497",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F101"
+  },
+  {
+   "about": "gpt-5.2-codex|Codex|0.93.0|row17",
+   "says": "model-name",
+   "value": "GPT 5.2-Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.2-Codex (High) / Codex / 0.93.0 (row 17 of the 28 read), column Model",
+   "quote": "GPT 5.2-Codex (High) | Codex | 0.93.0 | 9.69 | 21.94 | $0.85 | 0.729 | 0.497",
+   "id": "F102"
+  },
+  {
+   "about": "gpt-5.2-codex|Codex|0.93.0|row17",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.2-Codex (High) / Codex / 0.93.0 (row 17 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.2-Codex (High) | Codex | 0.93.0 | 9.69 | 21.94 | $0.85 | 0.729 | 0.497",
+   "id": "F103"
+  },
+  {
+   "about": "gpt-5.2-codex|Codex|0.93.0|row17",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.2-Codex (High) / Codex / 0.93.0 (row 17 of the 28 read), column Harness",
+   "quote": "GPT 5.2-Codex (High) | Codex | 0.93.0 | 9.69 | 21.94 | $0.85 | 0.729 | 0.497",
+   "term": "codex-cli",
+   "id": "F104"
+  },
+  {
+   "about": "gpt-5.2-codex|Codex|0.93.0|row17",
+   "says": "cost",
+   "value": "0.85",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.2-Codex (High) / Codex / 0.93.0 (row 17 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.2-Codex (High) | Codex | 0.93.0 | 9.69 | 21.94 | $0.85 | 0.729 | 0.497",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F105"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row18",
+   "says": "score",
+   "value": "8.16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 18 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 8.16 | 21.43 | $0.68 | 0.548 | 0.404",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F106"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row18",
+   "says": "score",
+   "value": "21.43",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 18 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 8.16 | 21.43 | $0.68 | 0.548 | 0.404",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F107"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row18",
+   "says": "model-name",
+   "value": "GPT 5.3-Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 18 of the 28 read), column Model",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 8.16 | 21.43 | $0.68 | 0.548 | 0.404",
+   "id": "F108"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row18",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 18 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 8.16 | 21.43 | $0.68 | 0.548 | 0.404",
+   "id": "F109"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row18",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 18 of the 28 read), column Harness",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 8.16 | 21.43 | $0.68 | 0.548 | 0.404",
+   "term": "codex-cli",
+   "id": "F110"
+  },
+  {
+   "about": "gpt-5.3-codex|Codex|0.98.0|row18",
+   "says": "cost",
+   "value": "0.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex (High) / Codex / 0.98.0 (row 18 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.3-Codex (High) | Codex | 0.98.0 | 8.16 | 21.43 | $0.68 | 0.548 | 0.404",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F111"
+  },
+  {
+   "about": "opus-4.7|Claude Code|2.1.111|row19",
+   "says": "score",
+   "value": "8.16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 4.7 (High) / Claude Code / 2.1.111 (row 19 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Opus 4.7 (High) | Claude Code | 2.1.111 | 8.16 | 20.92 | $2.17 | 0.760 | 0.481",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F112"
+  },
+  {
+   "about": "opus-4.7|Claude Code|2.1.111|row19",
+   "says": "score",
+   "value": "20.92",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 4.7 (High) / Claude Code / 2.1.111 (row 19 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Opus 4.7 (High) | Claude Code | 2.1.111 | 8.16 | 20.92 | $2.17 | 0.760 | 0.481",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F113"
+  },
+  {
+   "about": "opus-4.7|Claude Code|2.1.111|row19",
+   "says": "model-name",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 4.7 (High) / Claude Code / 2.1.111 (row 19 of the 28 read), column Model",
+   "quote": "Opus 4.7 (High) | Claude Code | 2.1.111 | 8.16 | 20.92 | $2.17 | 0.760 | 0.481",
+   "id": "F114"
+  },
+  {
+   "about": "opus-4.7|Claude Code|2.1.111|row19",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 4.7 (High) / Claude Code / 2.1.111 (row 19 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Opus 4.7 (High) | Claude Code | 2.1.111 | 8.16 | 20.92 | $2.17 | 0.760 | 0.481",
+   "id": "F115"
+  },
+  {
+   "about": "opus-4.7|Claude Code|2.1.111|row19",
+   "says": "route",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 4.7 (High) / Claude Code / 2.1.111 (row 19 of the 28 read), column Harness",
+   "quote": "Opus 4.7 (High) | Claude Code | 2.1.111 | 8.16 | 20.92 | $2.17 | 0.760 | 0.481",
+   "term": "claude-code",
+   "id": "F116"
+  },
+  {
+   "about": "opus-4.7|Claude Code|2.1.111|row19",
+   "says": "cost",
+   "value": "2.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Opus 4.7 (High) / Claude Code / 2.1.111 (row 19 of the 28 read), column $/CKPT",
+   "quote": "Opus 4.7 (High) | Claude Code | 2.1.111 | 8.16 | 20.92 | $2.17 | 0.760 | 0.481",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F117"
+  },
+  {
+   "about": "kimi-k2.6|Kimi CLI|1.37.0|row20",
+   "says": "score",
+   "value": "10.71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.6 (High) / Kimi CLI / 1.37.0 (row 20 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Kimi K2.6 (High) | Kimi CLI | 1.37.0 | 10.71 | 18.88 | $0.74 | 0.765 | 0.511",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F118"
+  },
+  {
+   "about": "kimi-k2.6|Kimi CLI|1.37.0|row20",
+   "says": "score",
+   "value": "18.88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.6 (High) / Kimi CLI / 1.37.0 (row 20 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Kimi K2.6 (High) | Kimi CLI | 1.37.0 | 10.71 | 18.88 | $0.74 | 0.765 | 0.511",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F119"
+  },
+  {
+   "about": "kimi-k2.6|Kimi CLI|1.37.0|row20",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.6 (High) / Kimi CLI / 1.37.0 (row 20 of the 28 read), column Model",
+   "quote": "Kimi K2.6 (High) | Kimi CLI | 1.37.0 | 10.71 | 18.88 | $0.74 | 0.765 | 0.511",
+   "id": "F120"
+  },
+  {
+   "about": "kimi-k2.6|Kimi CLI|1.37.0|row20",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.6 (High) / Kimi CLI / 1.37.0 (row 20 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Kimi K2.6 (High) | Kimi CLI | 1.37.0 | 10.71 | 18.88 | $0.74 | 0.765 | 0.511",
+   "id": "F121"
+  },
+  {
+   "about": "kimi-k2.6|Kimi CLI|1.37.0|row20",
+   "says": "route",
+   "value": "Kimi CLI",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.6 (High) / Kimi CLI / 1.37.0 (row 20 of the 28 read), column Harness",
+   "quote": "Kimi K2.6 (High) | Kimi CLI | 1.37.0 | 10.71 | 18.88 | $0.74 | 0.765 | 0.511",
+   "term": "kimi-code-cli",
+   "id": "F122"
+  },
+  {
+   "about": "kimi-k2.6|Kimi CLI|1.37.0|row20",
+   "says": "cost",
+   "value": "0.74",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.6 (High) / Kimi CLI / 1.37.0 (row 20 of the 28 read), column $/CKPT",
+   "quote": "Kimi K2.6 (High) | Kimi CLI | 1.37.0 | 10.71 | 18.88 | $0.74 | 0.765 | 0.511",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F123"
+  },
+  {
+   "about": "sonnet-4.6|Claude Code|2.1.44|row21",
+   "says": "score",
+   "value": "7.14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Sonnet 4.6 (High) / Claude Code / 2.1.44 (row 21 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Sonnet 4.6 (High) | Claude Code | 2.1.44 | 7.14 | 16.84 | $1.96 | 0.746 | 0.437",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F124"
+  },
+  {
+   "about": "sonnet-4.6|Claude Code|2.1.44|row21",
+   "says": "score",
+   "value": "16.84",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Sonnet 4.6 (High) / Claude Code / 2.1.44 (row 21 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Sonnet 4.6 (High) | Claude Code | 2.1.44 | 7.14 | 16.84 | $1.96 | 0.746 | 0.437",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F125"
+  },
+  {
+   "about": "sonnet-4.6|Claude Code|2.1.44|row21",
+   "says": "model-name",
+   "value": "Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Sonnet 4.6 (High) / Claude Code / 2.1.44 (row 21 of the 28 read), column Model",
+   "quote": "Sonnet 4.6 (High) | Claude Code | 2.1.44 | 7.14 | 16.84 | $1.96 | 0.746 | 0.437",
+   "id": "F126"
+  },
+  {
+   "about": "sonnet-4.6|Claude Code|2.1.44|row21",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Sonnet 4.6 (High) / Claude Code / 2.1.44 (row 21 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Sonnet 4.6 (High) | Claude Code | 2.1.44 | 7.14 | 16.84 | $1.96 | 0.746 | 0.437",
+   "id": "F127"
+  },
+  {
+   "about": "sonnet-4.6|Claude Code|2.1.44|row21",
+   "says": "route",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Sonnet 4.6 (High) / Claude Code / 2.1.44 (row 21 of the 28 read), column Harness",
+   "quote": "Sonnet 4.6 (High) | Claude Code | 2.1.44 | 7.14 | 16.84 | $1.96 | 0.746 | 0.437",
+   "term": "claude-code",
+   "id": "F128"
+  },
+  {
+   "about": "sonnet-4.6|Claude Code|2.1.44|row21",
+   "says": "cost",
+   "value": "1.96",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Sonnet 4.6 (High) / Claude Code / 2.1.44 (row 21 of the 28 read), column $/CKPT",
+   "quote": "Sonnet 4.6 (High) | Claude Code | 2.1.44 | 7.14 | 16.84 | $1.96 | 0.746 | 0.437",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F129"
+  },
+  {
+   "about": "glm-5.1|Claude Code|2.1.44|row22",
+   "says": "score",
+   "value": "9.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / Claude Code / 2.1.44 (row 22 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GLM 5.1 (High) | Claude Code | 2.1.44 | 9.69 | 13.78 | $1.47 | 0.710 | 0.414",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F130"
+  },
+  {
+   "about": "glm-5.1|Claude Code|2.1.44|row22",
+   "says": "score",
+   "value": "13.78",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / Claude Code / 2.1.44 (row 22 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GLM 5.1 (High) | Claude Code | 2.1.44 | 9.69 | 13.78 | $1.47 | 0.710 | 0.414",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F131"
+  },
+  {
+   "about": "glm-5.1|Claude Code|2.1.44|row22",
+   "says": "model-name",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / Claude Code / 2.1.44 (row 22 of the 28 read), column Model",
+   "quote": "GLM 5.1 (High) | Claude Code | 2.1.44 | 9.69 | 13.78 | $1.47 | 0.710 | 0.414",
+   "id": "F132"
+  },
+  {
+   "about": "glm-5.1|Claude Code|2.1.44|row22",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / Claude Code / 2.1.44 (row 22 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GLM 5.1 (High) | Claude Code | 2.1.44 | 9.69 | 13.78 | $1.47 | 0.710 | 0.414",
+   "id": "F133"
+  },
+  {
+   "about": "glm-5.1|Claude Code|2.1.44|row22",
+   "says": "route",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / Claude Code / 2.1.44 (row 22 of the 28 read), column Harness",
+   "quote": "GLM 5.1 (High) | Claude Code | 2.1.44 | 9.69 | 13.78 | $1.47 | 0.710 | 0.414",
+   "term": "claude-code",
+   "id": "F134"
+  },
+  {
+   "about": "glm-5.1|Claude Code|2.1.44|row22",
+   "says": "cost",
+   "value": "1.47",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / Claude Code / 2.1.44 (row 22 of the 28 read), column $/CKPT",
+   "quote": "GLM 5.1 (High) | Claude Code | 2.1.44 | 9.69 | 13.78 | $1.47 | 0.710 | 0.414",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F135"
+  },
+  {
+   "about": "gpt-5.4-mini|Codex|0.110.0|row23",
+   "says": "score",
+   "value": "5.10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4-Mini (High) / Codex / 0.110.0 (row 23 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.4-Mini (High) | Codex | 0.110.0 | 5.10 | 13.78 | $0.45 | 0.656 | 0.418",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F136"
+  },
+  {
+   "about": "gpt-5.4-mini|Codex|0.110.0|row23",
+   "says": "score",
+   "value": "13.78",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4-Mini (High) / Codex / 0.110.0 (row 23 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.4-Mini (High) | Codex | 0.110.0 | 5.10 | 13.78 | $0.45 | 0.656 | 0.418",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F137"
+  },
+  {
+   "about": "gpt-5.4-mini|Codex|0.110.0|row23",
+   "says": "model-name",
+   "value": "GPT 5.4-Mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4-Mini (High) / Codex / 0.110.0 (row 23 of the 28 read), column Model",
+   "quote": "GPT 5.4-Mini (High) | Codex | 0.110.0 | 5.10 | 13.78 | $0.45 | 0.656 | 0.418",
+   "id": "F138"
+  },
+  {
+   "about": "gpt-5.4-mini|Codex|0.110.0|row23",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4-Mini (High) / Codex / 0.110.0 (row 23 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.4-Mini (High) | Codex | 0.110.0 | 5.10 | 13.78 | $0.45 | 0.656 | 0.418",
+   "id": "F139"
+  },
+  {
+   "about": "gpt-5.4-mini|Codex|0.110.0|row23",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4-Mini (High) / Codex / 0.110.0 (row 23 of the 28 read), column Harness",
+   "quote": "GPT 5.4-Mini (High) | Codex | 0.110.0 | 5.10 | 13.78 | $0.45 | 0.656 | 0.418",
+   "term": "codex-cli",
+   "id": "F140"
+  },
+  {
+   "about": "gpt-5.4-mini|Codex|0.110.0|row23",
+   "says": "cost",
+   "value": "0.45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.4-Mini (High) / Codex / 0.110.0 (row 23 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.4-Mini (High) | Codex | 0.110.0 | 5.10 | 13.78 | $0.45 | 0.656 | 0.418",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F141"
+  },
+  {
+   "about": "kimi-k2.5|Kimi CLI|1.37.0|row24",
+   "says": "score",
+   "value": "4.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Kimi CLI / 1.37.0 (row 24 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Kimi K2.5 (High) | Kimi CLI | 1.37.0 | 4.59 | 9.69 | $0.33 | 0.717 | 0.444",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F142"
+  },
+  {
+   "about": "kimi-k2.5|Kimi CLI|1.37.0|row24",
+   "says": "score",
+   "value": "9.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Kimi CLI / 1.37.0 (row 24 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Kimi K2.5 (High) | Kimi CLI | 1.37.0 | 4.59 | 9.69 | $0.33 | 0.717 | 0.444",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F143"
+  },
+  {
+   "about": "kimi-k2.5|Kimi CLI|1.37.0|row24",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Kimi CLI / 1.37.0 (row 24 of the 28 read), column Model",
+   "quote": "Kimi K2.5 (High) | Kimi CLI | 1.37.0 | 4.59 | 9.69 | $0.33 | 0.717 | 0.444",
+   "id": "F144"
+  },
+  {
+   "about": "kimi-k2.5|Kimi CLI|1.37.0|row24",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Kimi CLI / 1.37.0 (row 24 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Kimi K2.5 (High) | Kimi CLI | 1.37.0 | 4.59 | 9.69 | $0.33 | 0.717 | 0.444",
+   "id": "F145"
+  },
+  {
+   "about": "kimi-k2.5|Kimi CLI|1.37.0|row24",
+   "says": "route",
+   "value": "Kimi CLI",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Kimi CLI / 1.37.0 (row 24 of the 28 read), column Harness",
+   "quote": "Kimi K2.5 (High) | Kimi CLI | 1.37.0 | 4.59 | 9.69 | $0.33 | 0.717 | 0.444",
+   "term": "kimi-code-cli",
+   "id": "F146"
+  },
+  {
+   "about": "kimi-k2.5|Kimi CLI|1.37.0|row24",
+   "says": "cost",
+   "value": "0.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Kimi CLI / 1.37.0 (row 24 of the 28 read), column $/CKPT",
+   "quote": "Kimi K2.5 (High) | Kimi CLI | 1.37.0 | 4.59 | 9.69 | $0.33 | 0.717 | 0.444",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F147"
+  },
+  {
+   "about": "kimi-k2.5|OpenCode|1.4.3|row25",
+   "says": "score",
+   "value": "4.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 / OpenCode / 1.4.3 (row 25 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Kimi K2.5 | OpenCode | 1.4.3 | 4.59 | 8.67 | $0.53 | 0.707 | 0.456",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F148"
+  },
+  {
+   "about": "kimi-k2.5|OpenCode|1.4.3|row25",
+   "says": "score",
+   "value": "8.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 / OpenCode / 1.4.3 (row 25 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Kimi K2.5 | OpenCode | 1.4.3 | 4.59 | 8.67 | $0.53 | 0.707 | 0.456",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F149"
+  },
+  {
+   "about": "kimi-k2.5|OpenCode|1.4.3|row25",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 / OpenCode / 1.4.3 (row 25 of the 28 read), column Model",
+   "quote": "Kimi K2.5 | OpenCode | 1.4.3 | 4.59 | 8.67 | $0.53 | 0.707 | 0.456",
+   "id": "F150"
+  },
+  {
+   "about": "kimi-k2.5|OpenCode|1.4.3|row25",
+   "says": "route",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 / OpenCode / 1.4.3 (row 25 of the 28 read), column Harness",
+   "quote": "Kimi K2.5 | OpenCode | 1.4.3 | 4.59 | 8.67 | $0.53 | 0.707 | 0.456",
+   "term": "opencode",
+   "id": "F151"
+  },
+  {
+   "about": "kimi-k2.5|OpenCode|1.4.3|row25",
+   "says": "cost",
+   "value": "0.53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 / OpenCode / 1.4.3 (row 25 of the 28 read), column $/CKPT",
+   "quote": "Kimi K2.5 | OpenCode | 1.4.3 | 4.59 | 8.67 | $0.53 | 0.707 | 0.456",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F152"
+  },
+  {
+   "about": "glm-5.1|OpenCode|1.4.3|row26",
+   "says": "score",
+   "value": "5.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / OpenCode / 1.4.3 (row 26 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GLM 5.1 (High) | OpenCode | 1.4.3 | 5.61 | 8.16 | $0.59 | 0.698 | 0.454",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F153"
+  },
+  {
+   "about": "glm-5.1|OpenCode|1.4.3|row26",
+   "says": "score",
+   "value": "8.16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / OpenCode / 1.4.3 (row 26 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GLM 5.1 (High) | OpenCode | 1.4.3 | 5.61 | 8.16 | $0.59 | 0.698 | 0.454",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F154"
+  },
+  {
+   "about": "glm-5.1|OpenCode|1.4.3|row26",
+   "says": "model-name",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / OpenCode / 1.4.3 (row 26 of the 28 read), column Model",
+   "quote": "GLM 5.1 (High) | OpenCode | 1.4.3 | 5.61 | 8.16 | $0.59 | 0.698 | 0.454",
+   "id": "F155"
+  },
+  {
+   "about": "glm-5.1|OpenCode|1.4.3|row26",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / OpenCode / 1.4.3 (row 26 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GLM 5.1 (High) | OpenCode | 1.4.3 | 5.61 | 8.16 | $0.59 | 0.698 | 0.454",
+   "id": "F156"
+  },
+  {
+   "about": "glm-5.1|OpenCode|1.4.3|row26",
+   "says": "route",
+   "value": "OpenCode",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / OpenCode / 1.4.3 (row 26 of the 28 read), column Harness",
+   "quote": "GLM 5.1 (High) | OpenCode | 1.4.3 | 5.61 | 8.16 | $0.59 | 0.698 | 0.454",
+   "term": "opencode",
+   "id": "F157"
+  },
+  {
+   "about": "glm-5.1|OpenCode|1.4.3|row26",
+   "says": "cost",
+   "value": "0.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GLM 5.1 (High) / OpenCode / 1.4.3 (row 26 of the 28 read), column $/CKPT",
+   "quote": "GLM 5.1 (High) | OpenCode | 1.4.3 | 5.61 | 8.16 | $0.59 | 0.698 | 0.454",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F158"
+  },
+  {
+   "about": "gpt-5.3-codex-spark|Codex|0.100.0|row27",
+   "says": "score",
+   "value": "3.06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex-Spark (High) / Codex / 0.100.0 (row 27 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "GPT 5.3-Codex-Spark (High) | Codex | 0.100.0 | 3.06 | 8.16 | $0.20 | 0.680 | 0.478",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F159"
+  },
+  {
+   "about": "gpt-5.3-codex-spark|Codex|0.100.0|row27",
+   "says": "score",
+   "value": "8.16",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex-Spark (High) / Codex / 0.100.0 (row 27 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "GPT 5.3-Codex-Spark (High) | Codex | 0.100.0 | 3.06 | 8.16 | $0.20 | 0.680 | 0.478",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F160"
+  },
+  {
+   "about": "gpt-5.3-codex-spark|Codex|0.100.0|row27",
+   "says": "model-name",
+   "value": "GPT 5.3-Codex-Spark",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex-Spark (High) / Codex / 0.100.0 (row 27 of the 28 read), column Model",
+   "quote": "GPT 5.3-Codex-Spark (High) | Codex | 0.100.0 | 3.06 | 8.16 | $0.20 | 0.680 | 0.478",
+   "id": "F161"
+  },
+  {
+   "about": "gpt-5.3-codex-spark|Codex|0.100.0|row27",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex-Spark (High) / Codex / 0.100.0 (row 27 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "GPT 5.3-Codex-Spark (High) | Codex | 0.100.0 | 3.06 | 8.16 | $0.20 | 0.680 | 0.478",
+   "id": "F162"
+  },
+  {
+   "about": "gpt-5.3-codex-spark|Codex|0.100.0|row27",
+   "says": "route",
+   "value": "Codex",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex-Spark (High) / Codex / 0.100.0 (row 27 of the 28 read), column Harness",
+   "quote": "GPT 5.3-Codex-Spark (High) | Codex | 0.100.0 | 3.06 | 8.16 | $0.20 | 0.680 | 0.478",
+   "term": "codex-cli",
+   "id": "F163"
+  },
+  {
+   "about": "gpt-5.3-codex-spark|Codex|0.100.0|row27",
+   "says": "cost",
+   "value": "0.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row GPT 5.3-Codex-Spark (High) / Codex / 0.100.0 (row 27 of the 28 read), column $/CKPT",
+   "quote": "GPT 5.3-Codex-Spark (High) | Codex | 0.100.0 | 3.06 | 8.16 | $0.20 | 0.680 | 0.478",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F164"
+  },
+  {
+   "about": "kimi-k2.5|Claude Code|2.1.44|row28",
+   "says": "score",
+   "value": "3.57",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Claude Code / 2.1.44 (row 28 of the 28 read), column Strict Solve (= CKPT Solved: same tooltip « Checkpoint, and all prior checkpoints, are solved »)",
+   "quote": "Kimi K2.5 (High) | Claude Code | 2.1.44 | 3.57 | 7.14 | $1.07 | 0.705 | 0.430",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F165"
+  },
+  {
+   "about": "kimi-k2.5|Claude Code|2.1.44|row28",
+   "says": "score",
+   "value": "7.14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Claude Code / 2.1.44 (row 28 of the 28 read), column Iso Solve (= Isolated Solved, « % Passes only the tests for the checkpoint »; the page's « ranked by percent of checkpoints solved in isolation »)",
+   "quote": "Kimi K2.5 (High) | Claude Code | 2.1.44 | 3.57 | 7.14 | $1.07 | 0.705 | 0.430",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F166"
+  },
+  {
+   "about": "kimi-k2.5|Claude Code|2.1.44|row28",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Claude Code / 2.1.44 (row 28 of the 28 read), column Model",
+   "quote": "Kimi K2.5 (High) | Claude Code | 2.1.44 | 3.57 | 7.14 | $1.07 | 0.705 | 0.430",
+   "id": "F167"
+  },
+  {
+   "about": "kimi-k2.5|Claude Code|2.1.44|row28",
+   "says": "effort-label",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Claude Code / 2.1.44 (row 28 of the 28 read), column Model (parenthesis; Thinking filter levels 'High', 'Medium', 'None', 'XHigh')",
+   "quote": "Kimi K2.5 (High) | Claude Code | 2.1.44 | 3.57 | 7.14 | $1.07 | 0.705 | 0.430",
+   "id": "F168"
+  },
+  {
+   "about": "kimi-k2.5|Claude Code|2.1.44|row28",
+   "says": "route",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Claude Code / 2.1.44 (row 28 of the 28 read), column Harness",
+   "quote": "Kimi K2.5 (High) | Claude Code | 2.1.44 | 3.57 | 7.14 | $1.07 | 0.705 | 0.430",
+   "term": "claude-code",
+   "id": "F169"
+  },
+  {
+   "about": "kimi-k2.5|Claude Code|2.1.44|row28",
+   "says": "cost",
+   "value": "1.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/integ14/scbench-leaderboard-20261116.txt",
+   "where": "leaderboard table, row Kimi K2.5 (High) / Claude Code / 2.1.44 (row 28 of the 28 read), column $/CKPT",
+   "quote": "Kimi K2.5 (High) | Claude Code | 2.1.44 | 3.57 | 7.14 | $1.07 | 0.705 | 0.430",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F170"
+  }
+ ],
+ "tables": []
+}
