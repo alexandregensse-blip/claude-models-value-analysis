@@ -2049,3 +2049,15 @@ SHA256SUMS in /work/.salvo14/mig/s10/ev/recheck/; S/s10/recheck/py/ext17.py), no
   the codex-cli closures (the default effort of gpt-5.1 to 5.4 in Codex ends where the entry leaves the bundled models.json: a run window crossing that
   date no longer has an established effort: 12 quality and 8 cost rows leave, 1 comes back) except two costs that the new OpenRouter prices make
   accepted. validate 0 error, 219 tests, the sealed build gives identical tables.
+
+## Integration 16 (16 Nov 2026): the maintainer's answers to the questions of integration 15 and of the recheck
+
+(« 1 ok 2 ok 3 verifie 4 ok … 6 ok 7 ok ? », « fais au mieux », then « 1 ok 2 ok 3 ok 4 ok. go agent »; no fit, no smoke, no tag; each point in its own commit;
+against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
+
+- **Singularity-Bench and SingularityGate stay two separate benchmarks (point 1)**: identity not proved (Opus 5.5: index 1.25 at max effort in the paper
+  against 19.46 at xhigh on the 80-task board). Checked in the repository on 16 Nov: neither source nor measure file of
+  `src-arxiv-2611.16591-singularity-bench-2026-11-12` / `src-singularitygate-v2-1-2026-11-12` carries a `same-runs-as` fact or a `same_runs_as`
+  slot, no other source holds one naming either of them, `data/decisions.json` names neither, the setups (`arxiv-2611.16591-*` and
+  `singularitygate-v2-1-*`) share no `run_set`, and nothing else links them (no snapshot, no copy, no version link): each is its own group. The notes on the
+  paper's rows already say « not the same runs, so no same-runs-as is written ».
