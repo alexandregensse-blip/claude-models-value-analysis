@@ -2083,7 +2083,8 @@ against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
   - **Kimi K2 Thinking Turbo** (LMArena, 5 measures) → `kimi-k2-thinking`: the same model through Moonshot's faster, dearer endpoint (« High-speed version of
     kimi-k2-thinking »; Artificial Analysis: « two endpoints for K2 Thinking »); names `kimi-k2-thinking-turbo` (api-id) and « Kimi K2 Thinking Turbo » added;
     the endpoint's own price (a `fast` record 1.15 / 8.00 / 0.15 against the standard 0.60 / 2.50 / 0.15, Moonshot's price table of 1 May 2026, to the series' stop on
-    25 May) is cited. Reserve written: Moonshot never writes « same parameters » for this model.
+    25 May) is cited. Reserve written: Moonshot never writes « same parameters » for this model. Moonshot's model list of 16 Nov (« The kimi-k2 series models were officially discontinued on May 25, 2026 », kimi-k2-thinking-turbo listed Deprecated) bounds the run: a
+    `run-end` fact « May 25, 2026 » on each of the 5 measures (without it the build refuses a name whose stated end precedes the run interval).
   - **DeepSeek-V4.1-Flash-20260910** → `deepseek-v4.1-flash` (Arena posted « DeepSeek-V4.1-Flash … 1620 pts » on 10 Sep, the dated row holds 1620.76, Arena's log adds
     deepseek-v4.1-flash-max on 10 Sep; reserve: no Arena sentence states the equivalence) and **-20261017** → `deepseek-v4.1-flash-1017` (the suffix is the maker's id,
     Arena announced it on 18 Oct after the update of 17 Oct, DeepSeek: « has been upgraded to DeepSeek-V4.1-Flash-1017 »), effort max from the « (Max) » of the name.
@@ -2099,11 +2100,11 @@ against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
     The five keys are added to the catalogue (`data/catalog/models.json`).
   - **Qwen4 Max** of Artificial Analysis (16 Nov), kingy.ai (16 Nov) and Vals (15 Nov) → `qwen4-max` (AA: context 984k = the 983,616 input limit of qwen4-max, price 1.50 / 4.50 = its
     list; kingy: run through OpenRouter qwen/qwen4-max; Vals: alibaba/qwen4-max, max output 262,144, xhigh written), the display names « Qwen4 Max » and « Qwen 4 Max » added (Vals dates the
-    release 15 Nov, a day before the Alibaba page); the tracker's « Qwen4-Max Preview » row stays `qwen4-max-preview`. Display names also added for « Qwen3-VL-235B-A22B-Thinking » and
+    release 15 Nov, a day before the Alibaba page); the tracker's « Qwen4-Max Preview » row stays `qwen4-max-preview`. Effort: kingy.ai « default settings » is written as `no-effort-sent` (the maker's default applies), Vals' « We evaluated it at xhigh reasoning effort » (model page) as the effort of its Index row; Artificial Analysis writes none (the row stays out, `out:effort-not-established`). Display names also added for « Qwen3-VL-235B-A22B-Thinking » and
     « Qwen3.7-Max-Preview » (the keys held: the names were the only gap).
   - **Left in doubt, out of the fit** (a note on each measure): GPT-5.5 Instant (a moving alias; Arena's 6 and 8 May additions do not tell which build; 6 measures of LMArena, Epoch and
     llm2014-logic), the two « GPT-5.3-Codex (Codex Harness) » rows of webdev (two runs of unwritten difference), « Qwen4-Max (xHigh) » of LMArena agent and webdev (votes before the general
-    release): none is attached to a key, so none enters.
+    release; the model-name fact is written `not-established:ambiguous`, qwen4-max or qwen4-max-preview): none enters.
 - **Closures of the codex-cli entries, point 5** (the maintainer, 16 Nov 2026: « 1 ok »): kept as the recheck wrote them (the default effort of gpt-5.1 to 5.4 in the Codex CLI ends where the entry
   leaves the bundled models.json at its removal commit); nothing to change here.
 - **glm-5.2 on OpenRouter, point 6** (the maintainer: « 2 ok »): the OpenRouter catalogue entry of 16 Nov (0.007 / 6.8 / 0.006, an input / output ratio of about 1,000, a probable error of the page) is
@@ -2111,3 +2112,25 @@ against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
   costs that depend only on that record leave the fit; the maker's price (Z.ai) is unchanged and stays valid.
 - **Retired items, point 7** (the maintainer: « 3 ok »): the items retired or replaced (15 items of check 9 of the precheck) stay reported every 3 days by the precheck (`!!`, with the
   proposal « a retired fact is written with its end »); no test silences them and none was added.
+- **gpt-5.6-sol and its variants, point 8** (the maintainer, 21 Oct: the base price is the catalogue price without promotion, the promotion is a variant; 16 Nov: « 4 ok »): the base is the list
+  price 5 / 30 / 0.50 USD (OpenAI's pricing page of 9 Jul - 20 Aug; the announcement of 21 Aug states 4 / 20 as a reduction of it « for the next 3 months », « 20% lower input pricing and 33% lower
+  output pricing », and the model page of 16 Nov a promotion « available until November 30, 2026 »), the promotion 4 / 20 / 0.40 to 30 Nov the variant, as for the Gemini in promotion: the promotion record
+  now states `list_after` (from 1 Dec, the same mechanism as `base-scheduled-list-price`), the list record keeps `base: true`. Since the recheck (98a4ccb) every Sol cost was already brought to
+  this catalogue price: **no Sol cost changes in this integration** (before / after by source in AVANT-APRES.txt). Test `cost_base_list_price_during_the_promotion`: a cost dated during the promotion is
+  brought to the catalogue price (× 5 / 4 on a uniform 20 % promotion); negative control: a model without a promotion keeps its cost. **Variants checked**: `gpt-5.6-sol-pro` has the same base
+  (list 5 / 30 / 0.50 marked base) and the same promotion (the pro mode bills the base model's price): its promotion now ends on 30 Nov (stated, with Sol's quotes) instead of its last capture and states the same
+  `list_after`; the batch and flex records of both models are factors of the standard price (not bases), `fast` (8 / 40 from 16 Nov, 10 / 60 before) a priority tier of the same base, and OpenRouter's own
+  prices (4 / 20, 4.4 / 22) router prices: none is a base. `gpt-6-sol`, `gpt-6.1-sol` (2 / 10) and `gpt-5.6-terra` / `-luna` have no promotion of this kind. **The five Artificial Analysis costs** the recheck found ambiguous
+  (`src-artificialanalysis-model-pages-2026-10-19#M472` to `#M476`, GDPval-AA PDF cost per task of GPT-5.6 Sol at max, high, low, medium and xhigh): read one by one on the Wayback copies of the five pages taken on
+  19 Oct 2026 at 19:30 UTC (12 hours after the capture held; /work/.salvo14/mig/s10/ev/integ16/): each page writes « GPT-5.6 Sol (Max) costs $4.00 per 1M input tokens and $20.00 per 1M output tokens » (the same
+  sentence with High, Low, Medium and Xhigh; cache hit 0.40 in the page's data), i.e. the promotional price in force on 19 Oct (21 Aug - 30 Nov): the page states the price it applied, so the cost is priced at
+  the promotion and brought to the catalogue price; the two prices are written as `price-table` facts on each measure (rule B, cost-stated-price-registered), so nothing is ambiguous and none goes out.
+- **Effect (the tables of the recheck, 0d7f5d2 → this build; S/s10/integ16/AVANT-APRES.txt)**: rows kept by lqm quality 23,352 → 23,438 (+86: point 3 CyberDual +72 net, 78 rows in and 6
+  counts back to pending; point 4 names and new keys +18; point 2 −4: the update-text lines of Vals leave the table's group), cost 10,373 → 10,374 (+1, GPT-5 Chat on Dubesor); couples 361 → 365
+  (new: gpt-5-chat-latest, olmo-3-32b-think, olmo-3.1-32b-think, step-1v-32k) and 295 → 296 (gpt-5-chat-latest); the Claude couples are the same 61 / 59; no couple lost. Points 1, 5, 6, 7, 8 change
+  no kept row (point 6: no cost depended only on the removed glm-5.2 record, one row only changes its group number c3 → c4; point 8: the 562 cost rows of gpt-5.6-sol and -pro are identical before and
+  after, the five Artificial Analysis costs stay in). Left out by their own rule: Qwen4 Max of Artificial Analysis (no effort written) and of Vals (xhigh written, but the page dates the release
+  15 Nov and the registry release is 16 Nov: the run interval does not hold it: a doubt, the date of the release of qwen4-max stays to be settled, 15 Nov per the maker's snapshot id
+  qwen4-max-20261115 and Vals, 16 Nov per Alibaba's release log and Artificial Analysis), kingy.ai's alone in its group (`out:single-couple`), Hunyuan Vision 1.5 Thinking (mode not established).
+  validate 0 error, 220 tests, the sealed build gives identical tables. Precheck without smoke: no blocking; 16 `!!` of check 9 (the 15 retired items and glm-5.2, whose OpenRouter price is no
+  longer recorded) and the declared coincidence `??`; the two `??` of Vals (CyberBench, Terminal-Bench 4 of GPT-5.6 Sol) are gone.
