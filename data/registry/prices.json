@@ -2868,7 +2868,15 @@
      }
     }
    ],
-   "note": "PROMOTIONAL price per OpenAI (available at least through 21 Nov 2026); never the base; the standard 5/30 is not shown after 20 Aug; long-context tier 8 / 0.8 / 30 on the 23 Oct page and the captures of 26 Aug to 22 Sep | integration 15 (16 Nov 2026): the page now states the end: « GPT-5.6 Sol’s promotional pricing is available until November 30 »: the end is the announced one"
+   "note": "PROMOTIONAL price per OpenAI (available at least through 21 Nov 2026); never the base; the standard 5/30 is not shown after 20 Aug; long-context tier 8 / 0.8 / 30 on the 23 Oct page and the captures of 26 Aug to 22 Sep | integration 15 (16 Nov 2026): the page now states the end: « GPT-5.6 Sol’s promotional pricing is available until November 30 »: the end is the announced one | integration 16 (16 Nov 2026), the maintainer (21 Oct: base price = catalogue price without promotion, the promotion a variant; 16 Nov: « 4 ok »): list_after added: the list price 5 / 30 / 0.50 (the base record, 9 Jul - 20 Aug) is the base price and applies again from 1 Dec (OpenAI states 4 / 20 as a reduction of it « for the next 3 months » and the promotion « until November 30, 2026 »; no OpenAI page prints a price after that date)",
+   "list_after": {
+    "from": "2026-12-01",
+    "classes": {
+     "input": 5.0,
+     "output": 30.0,
+     "cache-read": 0.5
+    }
+   }
   },
   {
    "model": "gpt-5.6-sol-pro",
@@ -2979,8 +2987,8 @@
    },
    "from": "2026-08-21",
    "from_basis": "stated",
-   "to": "2026-11-16",
-   "to_basis": "last-capture",
+   "to": "2026-11-30",
+   "to_basis": "stated",
    "evidence": [
     {
      "url": "https://developers.openai.com/api/docs/changelog",
@@ -3038,6 +3046,14 @@
      "sha256": "a1d8bbfbb336a18083d576e6df763a31648c08043f5d43b3e0e8dd3704c9a8be",
      "where": "pricing table row gpt-5.6-sol (live capture 16 Nov, integ15)",
      "quote": "| gpt-5.6-sol | $4.00 | $20.00 | $0.40 | $5.00 | $10.00 | $8.00 | $30.00 | $0.80 | $10.00 | $20.00 |"
+    },
+    {
+     "url": "https://developers.openai.com/api/docs/pricing.md",
+     "captured": "2026-11-16T09:52:30Z",
+     "file": "/work/.salvo14/mig/s10/ev/integ15/raw/developers.openai.com_api_docs_pricing.md",
+     "sha256": "a1d8bbfbb336a18083d576e6df763a31648c08043f5d43b3e0e8dd3704c9a8be",
+     "where": "pricing page, note under the tables (live capture 16 Nov, integ15)",
+     "quote": "GPT-5.6 Sol’s promotional pricing is available until November 30, 2026."
     }
    ],
    "long_context": [
@@ -3050,7 +3066,15 @@
      }
     }
    ],
-   "note": "Pro mode of gpt-5.6-sol: the promotional price of the base model (never the base)"
+   "note": "Pro mode of gpt-5.6-sol: the promotional price of the base model (never the base) | integration 16 (16 Nov 2026), the maintainer (21 Oct: base price = catalogue price without promotion, the promotion a variant; 16 Nov: « 4 ok »): the pro mode bills the base model's price, so it carries the base model's promotion and its announced end (30 Nov 2026, quotes of gpt-5.6-sol's record added); the list price after it is the base model's",
+   "list_after": {
+    "from": "2026-12-01",
+    "classes": {
+     "input": 5.0,
+     "output": 30.0,
+     "cache-read": 0.5
+    }
+   }
   },
   {
    "model": "gpt-5.6-terra",

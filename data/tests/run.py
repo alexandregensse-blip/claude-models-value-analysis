@@ -1470,6 +1470,30 @@ def cost_base_list_price_after_the_promotion():
 
 
 @test
+def cost_base_list_price_during_the_promotion():
+    # a promotion with an announced end and a catalogue (list) price that is the base: a cost dated DURING the promotion
+    # is brought to the catalogue price, not to the promotional one (the maintainer, 21 Oct and 16 Nov 2026: the base
+    # price of gpt-5.6-sol is the catalogue price 5 / 30 / 0.50, the promotion 4 / 20 a variant, as for the Gemini).
+    # Here the catalogue record ends before the promotion (the price charged over its dates is the promotion's), is marked
+    # base, and the promotion states the list price after its end (list_after). Negative control: a model with no
+    # promotion is not changed (the cost stays as written, same price).
+    sc = base(as_of="2026-11-01")
+    sc.prices["prices"].append(dict(price("ma", "2026-01-01", "2026-05-31", {"input": 5, "output": 10}), base=True))
+    sc.prices["prices"].append(price("ma", "2026-06-01", "2026-12-01", {"input": 4, "output": 8}, kind="promotion", to_basis="stated",
+                                     list_after={"from": "2026-12-02", "classes": {"input": 5, "output": 10}}))
+    sc.prices["prices"].append(price("mb", "2026-01-01", "2026-11-01", {"input": 5, "output": 10}))
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0", price_table="prices of 2026-07-01")
+    m2 = sc.m(s, model="mb", effort=[LOW], cost="1.0", price_table="prices of 2026-07-01")
+    r = sc.run()
+    b = r[m1]["fields"]["cost"]["base"]
+    eq((b["rule"], round(b["value"], 6)), ("cost-uniform-factor", 1.25), "a cost during the promotion is brought to the catalogue price (× 5 / 4)")
+    eq(r[m1]["fields"]["cost"]["base_vector"]["input"], 5, "the base is the catalogue price")
+    n = r[m2]["fields"]["cost"].get("base")
+    eq(n is None or round(n["value"], 6) == 1.0, True, "negative control: a model without promotion keeps its cost")
+
+
+@test
 def price_without_end_date():
     # a price is valid until a newer dated record replaces it (the maintainer, 16 Nov 2026: « pourquoi tu veux mettre
     # une date max aux prix.... »): a record that ends at a last capture and has no successor is open, the capture date
