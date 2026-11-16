@@ -2209,6 +2209,49 @@ def stage_cache_and_workers():
 
 
 @test
+def stage_cache_fault_change():
+    """A fact changed in a source file so that its quote no longer holds its value (the check's fault, out:no-proof):
+    the build with the cache gives the build without it. The faults are out of a measure's state (STATE_SKIP), so its
+    key after the first blocks did not hold them and the cached later blocks kept the measure in. Negative control: with
+    faults left out of the key (as before 16 Nov 2026), the cached build keeps the measure in and the test fails."""
+    import contextlib, io, shutil, tempfile, filecmp
+    ex = os.path.join(DATA, "findings", "examples")
+    obv = "src-github-obviousbench-v0.2-aggregate-2026-10-10"
+    root = tempfile.mkdtemp(prefix="cachefault-")
+    try:
+        f = os.path.join(root, "f")
+        shutil.copytree(ex, f)
+        open(os.path.join(root, "dec.json"), "w").write('{"decisions": []}')
+        cache = os.path.join(root, "cache")
+
+        def run(out, *extra):
+            with contextlib.redirect_stdout(io.StringIO()), contextlib.redirect_stderr(io.StringIO()):
+                code = build.main(["--registry", os.path.join(f, "registry"), "--findings", f, "--decisions",
+                                   os.path.join(root, "dec.json"), "--out", os.path.join(root, out), *extra])
+            eq(code, 0, f"build {out}")
+
+        def differ(a, b):
+            return [n for n in sorted(os.listdir(os.path.join(root, a)))
+                    if not filecmp.cmp(os.path.join(root, a, n), os.path.join(root, b, n), shallow=False)]
+
+        run("c1", "--cache", cache)                       # the cache holds the unchanged build
+        sp = os.path.join(f, "sources", obv + ".json")
+        doc = json.load(open(sp))
+        for x in doc["facts"]:
+            if x["id"] == "F13":                          # opus-5.5 low's score, cited by obviousbench#M1
+                x["quote"] = "a quote without the value"
+        json.dump(doc, open(sp, "w"), indent=1)
+        run("full", "--no-cache", "--jobs", "1")
+        run("c2", "--cache", cache)
+        rep = lambda d: json.load(open(os.path.join(root, d, "status-report.json")))["measures"][obv + "#M1"]  # noqa: E731
+        eq(rep("full")["status"]["quality"], "out:no-proof", "the full build puts the measure out")
+        eq(rep("c2")["status"]["quality"], "out:no-proof", "the cached build too")
+        eq(differ("full", "c2"), [], "the cached build's files equal the full build's")
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+@test
 def bad_arguments_clean_errors():
     import subprocess, tempfile, shutil
     root = tempfile.mkdtemp(prefix="args-")

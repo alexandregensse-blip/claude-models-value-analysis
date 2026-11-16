@@ -3270,8 +3270,12 @@ def state_key(ctx, M):
     recomputed (a model's block recomputed for a new source leaves the other sources' measures of that model as they
     were)."""
     f = io.BytesIO()
-    _Pickler(f, (ctx._shared[0], {})).dump({k: sorted(v, key=repr) if isinstance(v, (set, frozenset)) else v
-                                            for k, v in _state(M).items()})   # a set's order changes between processes
+    st = {k: sorted(v, key=repr) if isinstance(v, (set, frozenset)) else v
+          for k, v in _state(M).items()}                  # a set's order changes between processes
+    # the checks' faults are out of the state (STATE_SKIP) but step 1 reads them: a fact whose quote no longer holds its
+    # value changed no key, and the cached later blocks kept the measure in (16 Nov 2026, integration 14; seen by integration 13)
+    st["faults"] = getattr(M, "faults", None)
+    _Pickler(f, (ctx._shared[0], {})).dump(st)
     return hashlib.sha256(f.getvalue()).hexdigest()
 
 
