@@ -1991,3 +1991,17 @@ corrections:
 - Evidence of s10-carbon: /work/.salvo14/mig/s10/ev/s10-carbon/SHA256SUMS had 95 wrong paths (93 `epoch-zip/epoch-zip/…`,
   `benchmark_data.zip`, `dm-evalsmeth.html`); the right lines are appended after a comment line (the old lines are kept),
   `sha256sum -c` on them: 95 OK, 0 failed.
+- **Links found by the precheck**: scbench.ai's board is « Current rankings of code generation models on SlopCodeBench »: its rows
+  for GPT 5.5, GPT 5.3-Codex, GPT 5.2-Codex, GPT 5.4-Mini and GPT 5.3-Codex-Spark repeat the runs of the SlopCodeBench paper (arXiv
+  2603.24755 v2: the same $/CKPT, the same iso-solve to the rounding, e.g. GPT 5.5 High 1.51 $ and 28.06 against 28.1): ten board
+  measures linked (restated-from + same-runs-as, the page heading as the quote); four identical costs of the pair `scbench~c1` /
+  `slopcode` had become a blocking « !! » once the rule opened gpt-5.2-codex and gpt-5.3-codex at high. Vals's legal-index copies on
+  the model pages (Carbon, Fable 5.2, DeepSeek V4.1 Flash 1017) are linked to the board (version 1).
+- **Effect (integration 14's tables → this build; S/s10/integ15/AVANT-APRES.txt)**: rows kept by lqm quality 22,414 → 23,363, cost
+  10,163 → 10,381 (the prices rule alone: +22 and +23); couples 355 → 361 quality and 290 → 296 cost (gemini-4-hydrogen at low,
+  medium, high and xhigh, gpt-6.1-terra at nothink, gpt-6-astra-pro at xhigh on quality, gpt-5.2-codex at xhigh on cost); the
+  Claude couples are the same 61 / 59; gemini-4-carbon quality high 11 → 98, low 3 → 24, medium 8 → 28, cost high 2 → 17, low 1 → 7,
+  medium 2 → 8; gpt-6.1-terra max 22 → 69 (quality), 7 → 31 (cost). The new captures replace the older ones of the same boards (LiveBench
+  14 Oct, LMArena, AA of 9–10 Nov: 321 quality measures leave). Precheck without smoke: no blocking; `??` listed (Vals CyberBench and
+  Terminal-Bench 4 values of GPT-5.6 Sol / GPT-6 Sol: the update texts of an older date against the tables); the `!!` of check 9 list the records
+  not re-verifiable (prices 19 models, routes 47, model sheets 6). The sealed build gives identical tables.
